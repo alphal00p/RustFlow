@@ -1,0 +1,10 @@
+symbolica-amflow implements algorithms described by Xiao Liu and Yan-Qing Ma
+in arXiv:2201.11669, and Rui-Jun Huang, Xiao Liu and Yan-Qing Ma in
+arXiv:2607.08477. Algorithmic credit belongs to these authors.
+
+Reference: AMFlow 2.0, commit 26005517a288086c4cb4d1b26d829691bc088485
+https://gitlab.com/multiloop-pku/amflow
+
+Upstream reference fixtures and any translated algorithms are covered by the
+MIT notice in fixtures/amflow-2.0/LICENSE.md. Symbolica is a separate dependency
+with its own license; this project's MIT license does not relicense Symbolica.

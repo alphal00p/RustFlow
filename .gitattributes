@@ -1,0 +1,2 @@
+# Keep the upstream Mathematica fixtures byte-for-byte for source hashes.
+fixtures/amflow-2.0/*.wl -whitespace

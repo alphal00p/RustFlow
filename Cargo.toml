@@ -1,0 +1,27 @@
+[package]
+name = "symbolica-amflow"
+version = "0.1.0"
+edition = "2024"
+rust-version = "1.89"
+description = "Symbolica-native auxiliary mass flow for dimensionally regulated Feynman integrals"
+license = "MIT"
+
+[dependencies]
+symbolica = { version = "=3.0.0", default-features = false, features = ["integer-gmp", "float-mpfr", "bincode", "serde", "tracing_max_level_info"] }
+rustred = { path = "../rustred/crates/rustred-core", default-features = false }
+rug = { version = "1.28", default-features = false, features = ["float", "integer", "rational"] }
+rayon = "1.11"
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+blake3 = "1"
+ahash = "0.8"
+
+[build-dependencies]
+blake3 = "1"
+
+[profile.dev.package."*"]
+opt-level = 2
+
+[profile.release]
+debug = 1

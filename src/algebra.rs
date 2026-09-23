@@ -1,0 +1,176 @@
+#![allow(clippy::needless_range_loop)] // Matrix row/column indexing mirrors the recurrence equations.
+//! Exact linear algebra for indicial equations and rational basis changes.
+use crate::{Error, Result};
+use symbolica::prelude::*;
+
+fn exact_atom_field() -> symbolica::domains::atom::AtomField {
+    symbolica::domains::atom::AtomField {
+        statistical_zero_test: false,
+        cancel_check_on_division: true,
+        custom_normalization: Some(Box::new(|a: AtomView<'_>, out: &mut Atom| {
+            *out = a.together().cancel();
+            true
+        })),
+    }
+}
+
+pub(crate) fn rref(a: Vec<Vec<Atom>>) -> (Vec<Vec<Atom>>, Vec<usize>) {
+    if a.is_empty() || a[0].is_empty() {
+        return (a, vec![]);
+    }
+    let columns = a[0].len();
+    let mut matrix = symbolica::tensors::matrix::Matrix::from_nested_vec(a, exact_atom_field())
+        .expect("internal rectangular matrix");
+    matrix.row_reduce(columns as u32);
+    let rows = matrix
+        .into_vec()
+        .chunks(columns)
+        .map(|r| r.to_vec())
+        .collect::<Vec<_>>();
+    let pivots = rows
+        .iter()
+        .filter_map(|row| row.iter().position(|v| !v.is_zero()))
+        .collect();
+    (rows, pivots)
+}
+
+pub(crate) fn nullspace(a: Vec<Vec<Atom>>) -> Vec<Vec<Atom>> {
+    if a.is_empty() {
+        return Vec::new();
+    }
+    let cols = a[0].len();
+    let (a, pivots) = rref(a);
+    (0..cols)
+        .filter(|j| !pivots.contains(j))
+        .map(|j| {
+            let mut v = vec![Atom::new(); cols];
+            v[j] = Atom::num(1);
+            for (i, &pivot) in pivots.iter().enumerate() {
+                v[pivot] = -a[i][j].clone();
+            }
+            v
+        })
+        .collect()
+}
+
+pub(crate) fn matmul(a: &[Vec<Atom>], b: &[Vec<Atom>]) -> Vec<Vec<Atom>> {
+    (0..a.len())
+        .map(|i| {
+            (0..b[0].len())
+                .map(|j| {
+                    (0..b.len())
+                        .fold(Atom::new(), |v, k| v + &a[i][k] * &b[k][j])
+                        .together()
+                        .cancel()
+                })
+                .collect()
+        })
+        .collect()
+}
+
+pub(crate) fn determinant(mut a: Vec<Vec<Atom>>) -> Atom {
+    let n = a.len();
+    let mut sign = Atom::num(1);
+    let mut previous = Atom::num(1);
+    if n == 0 {
+        return previous;
+    }
+    for k in 0..n - 1 {
+        let Some(row) = (k..n).find(|&i| !a[i][k].is_zero()) else {
+            return Atom::new();
+        };
+        if row != k {
+            a.swap(row, k);
+            sign = -sign;
+        }
+        for i in k + 1..n {
+            for j in k + 1..n {
+                a[i][j] = ((&a[k][k] * &a[i][j] - &a[i][k] * &a[k][j]) / &previous)
+                    .together()
+                    .cancel();
+            }
+        }
+        previous = a[k][k].clone();
+        for row in a.iter_mut().skip(k + 1) {
+            row[k] = Atom::new();
+        }
+    }
+    sign * &a[n - 1][n - 1]
+}
+
+pub(crate) fn inverse(a: &[Vec<Atom>]) -> Result<Vec<Vec<Atom>>> {
+    let n = a.len();
+    if n == 0 || a.iter().any(|r| r.len() != n) {
+        return Err(Error::InvalidInput(
+            "inverse needs a nonempty square matrix".into(),
+        ));
+    }
+    let matrix =
+        symbolica::tensors::matrix::Matrix::from_nested_vec(a.to_vec(), exact_atom_field())
+            .map_err(|e| Error::InvalidInput(e.to_string()))?;
+    let inverse = matrix
+        .inv()
+        .map_err(|e| Error::Numerical(format!("rational matrix inverse: {e}")))?;
+    Ok(inverse.into_vec().chunks(n).map(|r| r.to_vec()).collect())
+}
+
+/// Rational eigenvalues with algebraic multiplicities, computed exactly.
+pub(crate) fn eigenvalues(residue: &[Vec<Atom>]) -> Result<Vec<(Atom, usize)>> {
+    let lambda = symbol!("symbolica_amflow::indicial_lambda");
+    let x = Atom::var(lambda);
+    let mut matrix = residue
+        .iter()
+        .map(|r| r.iter().map(|a| -a.clone()).collect::<Vec<_>>())
+        .collect::<Vec<_>>();
+    for (i, row) in matrix.iter_mut().enumerate() {
+        row[i] = &row[i] + &x;
+    }
+    let characteristic = determinant(matrix).factor();
+    let factors = if let AtomView::Mul(m) = characteristic.as_view() {
+        m.iter().map(|a| a.to_owned()).collect::<Vec<_>>()
+    } else {
+        vec![characteristic]
+    };
+    let mut result = Vec::new();
+    for factor in factors {
+        let (factor, multiplicity) = if let AtomView::Pow(v) = factor.as_view() {
+            let (base, power) = v.get_base_exp();
+            (
+                base.to_owned(),
+                power
+                    .to_string()
+                    .parse::<i64>()
+                    .map_err(|_| Error::Unsupported("noninteger characteristic factor".into()))?,
+            )
+        } else {
+            (factor, 1)
+        };
+        let mut a = Atom::new();
+        let mut b = Atom::new();
+        let mut has_variable = false;
+        for (monomial, c) in factor.coefficient_list::<i32>(std::slice::from_ref(&x)) {
+            if monomial.is_one() {
+                b += c;
+            } else if monomial == x {
+                a += c;
+                has_variable = true;
+            } else {
+                return Err(Error::Unsupported(
+                    "indicial polynomial has non-rational eigenvalues".into(),
+                ));
+            }
+        }
+        if has_variable {
+            if multiplicity <= 0 {
+                return Err(Error::Numerical(
+                    "invalid characteristic multiplicity".into(),
+                ));
+            }
+            result.push(((-b / a).together().cancel(), multiplicity as usize));
+        }
+    }
+    if result.iter().map(|(_, m)| *m).sum::<usize>() != residue.len() {
+        return Err(Error::Numerical("incomplete indicial factorization".into()));
+    }
+    Ok(result)
+}
