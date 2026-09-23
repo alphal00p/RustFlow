@@ -2,6 +2,25 @@ use symbolica::prelude::*;
 use symbolica_amflow::*;
 
 #[test]
+fn scalar_substitution_keeps_general_expression_rules() {
+    use std::collections::BTreeMap;
+    let expression = parse!("1+x^2+y");
+    assert_eq!(
+        family::substitute(&expression, &BTreeMap::new()),
+        expression
+    );
+    let scalar = BTreeMap::from([(parse!("x"), parse!("z+1")), (parse!("y"), Atom::num(3))]);
+    assert!(
+        (family::substitute(&expression, &scalar) - parse!("4+(z+1)^2"))
+            .together()
+            .cancel()
+            .is_zero()
+    );
+    let composite = BTreeMap::from([(parse!("x^2"), Atom::num(7)), (parse!("y"), Atom::num(3))]);
+    assert_eq!(family::substitute(&expression, &composite), Atom::num(11));
+}
+
+#[test]
 fn poles_of_large_integer_region_polynomial_stabilize_with_precision() {
     let denominator = Atom::parse(
         include_str!("../fixtures/regressions/region-pole-degree12.txt"),

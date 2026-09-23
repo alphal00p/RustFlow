@@ -70,7 +70,18 @@ impl KinematicPoint {
 }
 
 pub fn substitute(a: &Atom, rules: &BTreeMap<Atom, Atom>) -> Atom {
+    if rules.is_empty() {
+        return a.clone();
+    }
+    let variables_only = rules
+        .keys()
+        .all(|key| matches!(key.as_view(), AtomView::Var(_)));
     a.replace_map(|view, _, out| {
+        // Native parameter renaming only matches variables. Cloning every
+        // polynomial subtree to look it up cannot produce a match in that case.
+        if variables_only && !matches!(view, AtomView::Var(_)) {
+            return;
+        }
         if let Some(r) = rules.get(&view.to_owned()) {
             **out = r.clone();
         }
