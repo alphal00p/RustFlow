@@ -124,6 +124,7 @@ impl<B: ReductionBackend> CachedBackend<B> {
         );
         let value = serde_json::json!([
             VERSION,
+            env!("PORT_SOURCE_DIGEST"),
             env!("CARGO_PKG_VERSION"),
             "symbolica-3.0.0",
             self.backend.identity(),
