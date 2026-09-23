@@ -143,6 +143,20 @@ impl<'a> RecursiveBoundary<'a> {
                 .evaluate(family, target, epsilon, &self.numerical_options(p))?
         } else {
             let mut options = self.numerical_options(p);
+            // Keep the requested sampling policy in recursive multiloop
+            // families too. At large exceptional samples distinct dimensional
+            // exponent classes can coincide; retain symbolic epsilon there.
+            let sampled = options.sampled_reduction
+                && !options.refine_basis
+                && family.loops.len() > 1
+                && !(1..=4 * family.loops.len()).any(|difference| {
+                    (epsilon * &Rational::from(2 * difference as i64)).is_integer()
+                });
+            let key = if sampled {
+                format!("{key}:epsilon={epsilon}")
+            } else {
+                key
+            };
             // Recursive vacuum families must lose mass scales. Shifting every
             // line of an equal-mass vacuum would reproduce the same problem.
             options.mass_mode = if family.external.is_empty() {
@@ -168,14 +182,26 @@ impl<'a> RecursiveBoundary<'a> {
             let prepared = if let Some(v) = cached {
                 v
             } else {
-                let v = Arc::new(PreparedFlow::new(
-                    family,
-                    std::slice::from_ref(target),
-                    &KinematicPoint::default(),
-                    self.backend,
-                    &options,
-                    self.context,
-                )?);
+                let v = Arc::new(if sampled {
+                    PreparedFlow::new_at_epsilon(
+                        family,
+                        std::slice::from_ref(target),
+                        &KinematicPoint::default(),
+                        self.backend,
+                        &options,
+                        self.context,
+                        epsilon,
+                    )?
+                } else {
+                    PreparedFlow::new(
+                        family,
+                        std::slice::from_ref(target),
+                        &KinematicPoint::default(),
+                        self.backend,
+                        &options,
+                        self.context,
+                    )?
+                });
                 self.memo
                     .lock()
                     .map_err(|_| Error::Numerical("boundary memo poisoned".into()))?

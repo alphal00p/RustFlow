@@ -64,6 +64,9 @@ a test comparing the resulting dimensional sectors with an analytic sunset.
 Enabling basis refinement retains symbolic epsilon before factorization, even
 when sampled reduction is otherwise enabled. Refined `new_at_epsilon` flows
 therefore remain reusable at other epsilon values.
+Recursive multiloop boundary families follow the sampled-reduction option too;
+their memo keys include the exact epsilon sample. Boundary calls at exceptional
+samples where dimensional exponent classes collide retain symbolic epsilon.
 
 Nilpotent normalization first searches small subsets of Jordan-chain
 projectors, then applies exact Moser projector refinement. Large chain counts

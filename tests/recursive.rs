@@ -622,3 +622,74 @@ fn physical_paper_subsector_closes_with_deeper_ibps_and_stable_phase() {
         .unwrap();
     assert!(p.close(&second[0], &expected, 20));
 }
+
+#[test]
+fn recursive_sampled_flows_keep_epsilon_in_memo_keys_and_handle_exceptional_samples() {
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    struct Recording {
+        sampled: AtomicUsize,
+        symbolic: AtomicUsize,
+    }
+    impl ReductionBackend for Recording {
+        fn identity(&self) -> String {
+            "recursive-sampling-test".into()
+        }
+        fn reduce(
+            &self,
+            family: &IntegralFamily,
+            targets: &[Integral],
+            context: &RunContext,
+        ) -> Result<reduction::Reduction> {
+            if family.loops.len() > 1 {
+                self.symbolic.fetch_add(1, Ordering::Relaxed);
+            }
+            RustRedBackend::default().reduce(family, targets, context)
+        }
+        fn reduce_at_epsilon(
+            &self,
+            family: &IntegralFamily,
+            targets: &[Integral],
+            epsilon: &Rational,
+            context: &RunContext,
+        ) -> Result<reduction::Reduction> {
+            if family.loops.len() > 1 {
+                self.sampled.fetch_add(1, Ordering::Relaxed);
+            }
+            RustRedBackend::default().reduce_at_epsilon(family, targets, epsilon, context)
+        }
+    }
+    let backend = Recording {
+        sampled: AtomicUsize::new(0),
+        symbolic: AtomicUsize::new(0),
+    };
+    let options = FlowOptions::default();
+    let context = RunContext::default();
+    let evaluator = recursive::RecursiveBoundary::new(&backend, &options, &context);
+    let mut family = sunset();
+    family.propagators[0].constant = Atom::num(-1);
+    family.propagators[1].constant = Atom::num(-1);
+    let target = Integral(vec![1, 1, 1]);
+    let p = Precision::decimal(60).unwrap();
+    let check = |epsilon: Rational| {
+        let value = evaluator.evaluate(&family, &target, &epsilon, p).unwrap();
+        let e = p.rational(&epsilon);
+        let gamma = p.gamma_real(&e.re).unwrap();
+        let expected = p.div(
+            &p.powi(&gamma, 2),
+            &p.mul(&p.sub(&p.i(1), &e), &p.sub(&p.i(1), &p.scale(&e, 2, 1))),
+        );
+        assert!(p.close(&value, &expected, 20));
+    };
+    check(Rational::from((1, 100)));
+    let first_calls = backend.sampled.load(Ordering::Relaxed);
+    assert!(first_calls > 0);
+    check(Rational::from((1, 101)));
+    assert!(backend.sampled.load(Ordering::Relaxed) > first_calls);
+    let second_calls = backend.sampled.load(Ordering::Relaxed);
+    check(Rational::from((1, 100)));
+    assert_eq!(backend.sampled.load(Ordering::Relaxed), second_calls);
+    assert_eq!(backend.symbolic.load(Ordering::Relaxed), 0);
+    check(Rational::from((3, 4)));
+    assert!(backend.symbolic.load(Ordering::Relaxed) > 0);
+    assert_eq!(backend.sampled.load(Ordering::Relaxed), second_calls);
+}
