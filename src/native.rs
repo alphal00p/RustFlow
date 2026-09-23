@@ -293,6 +293,7 @@ fn solve<const N: usize>(
         None
     };
     let mut last_saved = std::time::Instant::now();
+    let mut completed_expansions = None;
     let search: Result<()> = (|| {
         while !pending.is_empty() {
             if visited.len() + pending.len() > options.max_targets {
@@ -545,14 +546,9 @@ fn solve<const N: usize>(
             } else {
                 let mut expander = Expander::new(&result, context)?;
                 frontier = BTreeSet::new();
-                for target in targets {
-                    frontier.extend(
-                        expander
-                            .expand_filtered(&Integral(target.clone()), active_lines)?
-                            .keys()
-                            .cloned(),
-                    );
-                }
+                let roots = targets.iter().cloned().map(Integral).collect::<Vec<_>>();
+                let filtered = expander.expand_many(&roots, active_lines)?;
+                frontier.extend(filtered.values().flat_map(|terms| terms.keys()).cloned());
                 let unfinished = frontier
                     .iter()
                     .any(|i| line_count(i) == active_lines && unsearched(i));
@@ -564,10 +560,14 @@ fn solve<const N: usize>(
                             .collect();
                     } else {
                         frontier.clear();
-                        for target in targets {
-                            frontier.extend(
-                                expander.expand(&Integral(target.clone()))?.keys().cloned(),
-                            );
+                        let full = if structural.iter().all(|i| line_count(i) >= active_lines) {
+                            filtered
+                        } else {
+                            expander.expand_many(&roots, 0)?
+                        };
+                        frontier.extend(full.values().flat_map(|terms| terms.keys()).cloned());
+                        if frontier.iter().all(|i| !unsearched(i)) {
+                            completed_expansions = Some(full);
                         }
                     }
                 }
@@ -613,12 +613,15 @@ fn solve<const N: usize>(
     result.residuals.retain(|i| !result.rules.contains_key(i));
     result.nonzero_conditions.sort();
     result.nonzero_conditions.dedup();
-    let mut expander = Expander::new(&result, context)?;
     let mut flattened = BTreeMap::new();
     let mut residuals = BTreeSet::new();
-    for target in targets {
-        let integral = Integral(target.clone());
-        let terms = expander.expand(&integral)?;
+    let roots = targets.iter().cloned().map(Integral).collect::<Vec<_>>();
+    let expansions = if let Some(completed) = completed_expansions {
+        completed
+    } else {
+        Expander::new(&result, context)?.expand_many(&roots, 0)?
+    };
+    for (integral, terms) in expansions {
         residuals.extend(terms.keys().cloned());
         if result.rules.contains_key(&integral) {
             flattened.insert(
@@ -771,16 +774,32 @@ impl<'a> Expander<'a> {
         self.coefficients.insert(a.clone(), c.clone());
         Ok(c)
     }
+    #[cfg(test)]
     fn expand(&mut self, integral: &Integral) -> Result<Terms> {
         self.expand_filtered(integral, 0)
     }
+    #[cfg(test)]
     fn expand_filtered(&mut self, integral: &Integral, minimum_lines: usize) -> Result<Terms> {
+        Ok(self
+            .expand_many(std::slice::from_ref(integral), minimum_lines)?
+            .remove(integral)
+            .unwrap_or_default())
+    }
+    fn expand_many(
+        &mut self,
+        integrals: &[Integral],
+        minimum_lines: usize,
+    ) -> Result<BTreeMap<Integral, Terms>> {
         // Accumulate coefficients in dependency order. Expanding every child
         // into its own complete residual map stores a quadratic number of
         // large rational functions on realistic Laporta DAGs. Forward
         // substitution needs only one coefficient per live integral.
         let mut state = BTreeMap::<Integral, u8>::new();
-        let mut stack = vec![(integral.clone(), false)];
+        let mut stack = integrals
+            .iter()
+            .cloned()
+            .map(|i| (i, false))
+            .collect::<Vec<_>>();
         let mut order = Vec::new();
         while let Some((node, finish)) = stack.pop() {
             self.context.cancellation.check()?;
@@ -821,20 +840,33 @@ impl<'a> Expander<'a> {
             .filter(|node| !self.reduction.rules.contains_key(*node))
             .count();
         if terminals <= 128 {
-            return self.expand_backward(integral, &order, &retained);
+            return self.expand_backward(integrals, &order, &retained);
         }
-        self.expand_forward(integral, order, &retained)
+        integrals
+            .iter()
+            .map(|integral| {
+                Ok((
+                    integral.clone(),
+                    self.expand_forward(integral, &order, &retained)?,
+                ))
+            })
+            .collect()
     }
     fn expand_backward(
         &mut self,
-        integral: &Integral,
+        integrals: &[Integral],
         order: &[Integral],
         retained: &BTreeSet<Integral>,
-    ) -> Result<Terms> {
+    ) -> Result<BTreeMap<Integral, Terms>> {
         // With a small terminal basis, reducing each identity before using it
         // in its parents cancels apparent poles locally. Release a child's
         // expansion after its last parent, bounding the live dependency maps.
         let mut uses = ahash::HashMap::<&Integral, usize>::default();
+        for integral in integrals {
+            // A target can also be a dependency of another target. Preserve
+            // its expansion until all requested outputs have been collected.
+            *uses.entry(integral).or_default() += 1;
+        }
         for node in order.iter().filter(|node| retained.contains(*node)) {
             if let Some(terms) = self.reduction.rules.get(node) {
                 for child in terms.keys().filter(|child| retained.contains(*child)) {
@@ -877,12 +909,22 @@ impl<'a> Expander<'a> {
             };
             expanded.insert(node.clone(), value);
         }
-        Ok(expanded.remove(integral).unwrap_or_default())
+        Ok(integrals
+            .iter()
+            .collect::<BTreeSet<_>>()
+            .into_iter()
+            .map(|integral| {
+                (
+                    integral.clone(),
+                    expanded.remove(integral).unwrap_or_default(),
+                )
+            })
+            .collect())
     }
     fn expand_forward(
         &mut self,
         integral: &Integral,
-        order: Vec<Integral>,
+        order: &[Integral],
         retained: &BTreeSet<Integral>,
     ) -> Result<Terms> {
         let mut out = BTreeMap::<Integral, CoefficientSum>::new();
@@ -891,12 +933,12 @@ impl<'a> Expander<'a> {
                 .or_default()
                 .push(self.field.one(), &self.field);
         }
-        for node in order.into_iter().rev() {
+        for node in order.iter().rev() {
             self.context.cancellation.check()?;
-            let Some(terms) = self.reduction.rules.get(&node) else {
+            let Some(terms) = self.reduction.rules.get(node) else {
                 continue;
             };
-            let Some(value) = out.remove(&node) else {
+            let Some(value) = out.remove(node) else {
                 continue;
             };
             let value = value.finish(&self.field);
@@ -939,6 +981,42 @@ mod tests {
     use super::*;
 
     #[test]
+    fn batched_substitution_retains_shared_targets_and_zero_rules() {
+        let i = |n| Integral(vec![n]);
+        let reduction = Reduction {
+            rules: BTreeMap::from([
+                (
+                    i(1),
+                    BTreeMap::from([(i(2), parse!("x")), (i(3), parse!("-x"))]),
+                ),
+                (
+                    i(2),
+                    BTreeMap::from([(i(3), Atom::num(1)), (i(4), parse!("1/(x+1)"))]),
+                ),
+                (i(3), BTreeMap::from([(i(5), parse!("x+1"))])),
+                (i(4), BTreeMap::new()),
+            ]),
+            residuals: vec![i(5)],
+            ..Default::default()
+        };
+        let context = RunContext::default();
+        let targets = vec![i(1), i(2), i(3), i(4), i(5), i(2)];
+        let actual = Expander::new(&reduction, &context)
+            .unwrap()
+            .expand_many(&targets, 0)
+            .unwrap();
+        assert_eq!(actual.len(), 5);
+        for target in targets {
+            let terms = actual[&target]
+                .iter()
+                .map(|(i, c)| (i.clone(), coefficient_atom(c)))
+                .collect();
+            assert_eq!(reduction.expand(&target).unwrap(), terms);
+        }
+        assert!(actual[&i(1)].is_empty());
+    }
+
+    #[test]
     fn substitution_directions_agree_across_a_wide_shared_frontier() {
         let root = Integral(vec![1]);
         let left = Integral(vec![2]);
@@ -966,7 +1044,11 @@ mod tests {
         let context = RunContext::default();
         let mut expander = Expander::new(&reduction, &context).unwrap();
         let forward = expander.expand(&root).unwrap();
-        let backward = expander.expand_backward(&root, &order, &retained).unwrap();
+        let backward = expander
+            .expand_backward(std::slice::from_ref(&root), &order, &retained)
+            .unwrap()
+            .remove(&root)
+            .unwrap();
         assert_eq!(forward.len(), 129);
         for (terminal, coefficient) in forward {
             assert_eq!(coefficient, backward[&terminal]);

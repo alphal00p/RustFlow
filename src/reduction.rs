@@ -413,7 +413,7 @@ fn build_differential_system(
 ) -> Result<ReducedSystem> {
     let mut requested = targets.iter().cloned().collect::<BTreeSet<_>>();
     let mut previous = Vec::new();
-    for _ in 0..max_rounds {
+    for round in 0..max_rounds {
         context.cancellation.check()?;
         let reduction = backend.reduce(
             family,
@@ -430,6 +430,16 @@ fn build_differential_system(
             derivatives.extend(derivative(i)?.into_iter().map(|(i, _)| i));
         }
         let derivatives_covered = derivatives.iter().all(|i| requested.contains(i));
+        context.emit(crate::Progress::DifferentialClosure {
+            round,
+            requested: requested.len(),
+            basis_size: basis.len(),
+            new_derivatives: derivatives
+                .iter()
+                .filter(|i| !requested.contains(*i))
+                .collect::<BTreeSet<_>>()
+                .len(),
+        })?;
         if derivatives_covered && basis == previous {
             let mut matrix = vec![vec![Atom::new(); basis.len()]; basis.len()];
             for (row, i) in basis.iter().enumerate() {

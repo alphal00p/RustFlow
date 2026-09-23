@@ -122,6 +122,12 @@ pub enum Progress {
         searched: usize,
         remaining: usize,
     },
+    DifferentialClosure {
+        round: usize,
+        requested: usize,
+        basis_size: usize,
+        new_derivatives: usize,
+    },
     SectorReduction {
         active_lines: usize,
         integrals: usize,
