@@ -125,32 +125,55 @@ fn solve<const N: usize>(
             .map(|c| substitute(&c.polynomial().to_expression(), &family.reverse)),
     );
     let mut visited = BTreeSet::new();
-    let legacy_key = blake3::hash(
-        format!(
-            "native-factorized-v3:{}:{:?}:{targets:?}:{}:{}:{}",
-            family.family.fingerprint(),
-            family.reverse,
-            options.max_depth,
-            options.include_lorentz,
-            env!("RUSTRED_SOURCE_DIGEST")
+    let legacy_key_for_depth = |depth| {
+        blake3::hash(
+            format!(
+                "native-factorized-v3:{}:{:?}:{targets:?}:{}:{}:{}",
+                family.family.fingerprint(),
+                family.reverse,
+                depth,
+                options.include_lorentz,
+                env!("RUSTRED_SOURCE_DIGEST")
+            )
+            .as_bytes(),
         )
-        .as_bytes(),
-    )
-    .to_hex()
-    .to_string();
-    let stage_key = if options.bubble_subloops {
-        blake3::hash(format!("bubble-subloops-v2:{legacy_key}").as_bytes())
-            .to_hex()
-            .to_string()
-    } else {
-        legacy_key.clone()
+        .to_hex()
+        .to_string()
     };
+    let stage_key_for_depth = |depth| {
+        let legacy_key = legacy_key_for_depth(depth);
+        if options.bubble_subloops {
+            blake3::hash(format!("bubble-subloops-v2:{legacy_key}").as_bytes())
+                .to_hex()
+                .to_string()
+        } else {
+            legacy_key
+        }
+    };
+    let legacy_key = legacy_key_for_depth(options.max_depth);
+    let stage_key = stage_key_for_depth(options.max_depth);
     let mut patterns = BTreeMap::<[bool; N], Option<crate::bubble::Bubble>>::new();
     let mut restart = if let Some(directory) = &options.checkpoints {
         crate::cache::read_native_stage(directory, &stage_key)?
     } else {
         None
     };
+    // Exact identities survive a larger search radius, but a previous search
+    // of a residual is not a search at the new depth. Reuse the raw DAG and
+    // search all surviving leaves again, including formerly visited leaves.
+    if restart.is_none()
+        && let Some(depth) = options.max_depth.checked_sub(1)
+        && let Some(directory) = &options.checkpoints
+        && let Some((old, done, _)) =
+            crate::cache::read_native_stage(directory, &stage_key_for_depth(depth))?
+    {
+        let frontier = structural_frontier(&old, targets, context)?;
+        let done = done
+            .into_iter()
+            .filter(|i| old.rules.contains_key(i))
+            .collect();
+        restart = Some((old, done, frontier.into_iter().collect()));
+    }
     // A legacy partial search can be reused only when none of its searched
     // sectors changes ordering under bubble elimination. In particular, the
     // expensive higher-sector searches need not be repeated on migration.

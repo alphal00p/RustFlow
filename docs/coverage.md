@@ -115,3 +115,10 @@ by default, at round completion, and when cancellation is observed. Configure
 saved visited set; unprocessed targets and new right-hand-side candidates remain
 pending. Resuming a partial round may search a conservative superset before the
 next exact substitution.
+
+Increasing native search depth by one can also resume a shallower checkpoint.
+Exact identities are retained, but every surviving residual is searched again
+at the new depth. This matters even for a derivative-closed system: a redundant
+basis can have spurious indicial modes. The physical paper subsector with lines
+1, 3, 5, and 7 needs depth three in the current backend; depth two is rejected
+by dimensional-sector validation.

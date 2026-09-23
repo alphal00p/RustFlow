@@ -342,6 +342,51 @@ fn interrupted_native_batches_preserve_work_without_accepting_unsearched_targets
 }
 
 #[test]
+fn deeper_native_restart_reuses_identities_but_researches_residuals() {
+    use std::sync::Arc;
+    let directory = std::env::temp_dir().join(format!("amflow-deeper-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&directory);
+    let family = IntegralFamily {
+        name: "deeper_tadpole".into(),
+        loops: vec!["l".into()],
+        external: vec![],
+        external_gram: vec![],
+        propagators: vec![Propagator::quadratic(&[1], &[], Atom::num(1), &[]).unwrap()],
+        physical_propagators: 1,
+        epsilon: symbol!("deeper_eps"),
+        dimension: 4,
+    };
+    let targets = [Integral(vec![2])];
+    let mut backend = RustRedBackend {
+        max_depth: 1,
+        checkpoints: Some(directory.clone()),
+        ..Default::default()
+    };
+    let original = backend
+        .reduce(&family, &targets, &RunContext::default())
+        .unwrap();
+    backend.max_depth = 2;
+    let searches = Arc::new(AtomicUsize::new(0));
+    let counter = searches.clone();
+    let context = RunContext {
+        progress: Some(Arc::new(move |event| {
+            if let Progress::SectorReduction { integrals, .. } = event {
+                counter.fetch_add(integrals, Ordering::Relaxed);
+            }
+        })),
+        ..Default::default()
+    };
+    let deeper = backend.reduce(&family, &targets, &context).unwrap();
+    // I(2)'s exact rule survives; I(1) must be searched again at depth two.
+    assert_eq!(searches.load(Ordering::Relaxed), 1);
+    assert_eq!(
+        deeper.expand(&targets[0]).unwrap(),
+        original.expand(&targets[0]).unwrap()
+    );
+    std::fs::remove_dir_all(directory).unwrap();
+}
+
+#[test]
 fn mass_placement_modes_follow_intrinsic_masses_and_loop_topology() {
     let (mut family, _) = benchmarks::paper_two_loop().unwrap();
     let selected = |family: &IntegralFamily, mode| {

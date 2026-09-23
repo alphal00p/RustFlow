@@ -164,9 +164,10 @@ impl PreparedFlow {
                 })
                 .collect::<Vec<_>>();
             if candidates.len() != 1 {
-                return Err(Error::Unsupported(
-                    "sample does not uniquely identify dimensional indicial sectors".into(),
-                ));
+                return Err(Error::Unsupported(format!(
+                    "sample epsilon={epsilon} does not uniquely identify dimensional indicial sector {value} ({} candidates); a redundant reduction basis may require a deeper IBP search",
+                    candidates.len()
+                )));
             }
             let (base, slope) = &candidates[0];
             column.exponent =
