@@ -852,6 +852,7 @@ name = "symbolica-amflow"
 version = "0.1.0"
 dependencies = [
  "ahash",
+ "bincode",
  "blake3",
  "rayon",
  "rug",

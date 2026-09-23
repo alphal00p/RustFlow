@@ -418,21 +418,47 @@ pub(crate) fn write_system(
 
 #[derive(Serialize, Deserialize)]
 struct NativeStage {
-    reduction: StoredReduction,
     visited: Vec<Vec<i16>>,
     pending: Vec<Vec<i16>>,
+    reduction: StoredReduction,
+}
+// The codec version is independent of the content-key version. Keeping the
+// frontier first permits compact inspection without decoding all Atom data.
+const NATIVE_MAGIC: &[u8] = b"AMFLOW-NATIVE\0\x01";
+
+fn binary_decode<T: serde::de::DeserializeOwned>(bytes: &[u8]) -> Result<T> {
+    let (value, consumed) = bincode::serde::decode_from_slice(bytes, bincode::config::standard())
+        .map_err(|e| Error::Cache(e.to_string()))?;
+    if consumed != bytes.len() {
+        return Err(Error::Cache("trailing binary checkpoint data".into()));
+    }
+    Ok(value)
 }
 type NativeRestart = (Reduction, Vec<Integral>, Vec<Integral>);
 pub(crate) fn read_native_stage(
     directory: &std::path::Path,
     key: &str,
 ) -> Result<Option<NativeRestart>> {
-    let bytes = match std::fs::read(directory.join(format!("native-stage-{key}.json"))) {
-        Ok(b) => b,
-        Err(e) if e.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+    let (bytes, binary) = match std::fs::read(directory.join(format!("native-stage-{key}.bin"))) {
+        Ok(b) => (b, true),
+        Err(e) if e.kind() == std::io::ErrorKind::NotFound => {
+            match std::fs::read(directory.join(format!("native-stage-{key}.json"))) {
+                Ok(b) => (b, false),
+                Err(e) if e.kind() == std::io::ErrorKind::NotFound => return Ok(None),
+                Err(e) => return Err(e.into()),
+            }
+        }
         Err(e) => return Err(e.into()),
     };
-    let entry: Entry = serde_json::from_slice(&bytes).map_err(|e| Error::Cache(e.to_string()))?;
+    let entry: Entry = if binary {
+        binary_decode(
+            bytes
+                .strip_prefix(NATIVE_MAGIC)
+                .ok_or_else(|| Error::Cache("incompatible native checkpoint codec".into()))?,
+        )?
+    } else {
+        serde_json::from_slice(&bytes).map_err(|e| Error::Cache(e.to_string()))?
+    };
     if entry.version != VERSION
         || entry.key != key
         || entry.digest != blake3::hash(&entry.payload).to_hex().as_str()
@@ -441,8 +467,11 @@ pub(crate) fn read_native_stage(
             "incompatible native restart checkpoint".into(),
         ));
     }
-    let stored: NativeStage =
-        serde_json::from_slice(&entry.payload).map_err(|e| Error::Cache(e.to_string()))?;
+    let stored: NativeStage = if binary {
+        binary_decode(&entry.payload)?
+    } else {
+        serde_json::from_slice(&entry.payload).map_err(|e| Error::Cache(e.to_string()))?
+    };
     Ok(Some((
         stored.reduction.decode()?,
         stored.visited.into_iter().map(Integral).collect(),
@@ -456,11 +485,14 @@ pub(crate) fn write_native_stage(
     visited: &[Integral],
     pending: &[Integral],
 ) -> Result<()> {
-    let payload = serde_json::to_vec(&NativeStage {
-        reduction: StoredReduction::encode(reduction)?,
-        visited: visited.iter().map(|i| i.0.clone()).collect(),
-        pending: pending.iter().map(|i| i.0.clone()).collect(),
-    })
+    let payload = bincode::serde::encode_to_vec(
+        &NativeStage {
+            reduction: StoredReduction::encode(reduction)?,
+            visited: visited.iter().map(|i| i.0.clone()).collect(),
+            pending: pending.iter().map(|i| i.0.clone()).collect(),
+        },
+        bincode::config::standard(),
+    )
     .map_err(|e| Error::Cache(e.to_string()))?;
     let entry = Entry {
         version: VERSION,
@@ -479,10 +511,15 @@ pub(crate) fn write_native_stage(
             .write(true)
             .create_new(true)
             .open(&temporary)?;
-        write_entry(&mut file, &entry)?;
+        let mut writer = std::io::BufWriter::new(&mut file);
+        writer.write_all(NATIVE_MAGIC)?;
+        bincode::serde::encode_into_std_write(&entry, &mut writer, bincode::config::standard())
+            .map_err(|e| Error::Cache(e.to_string()))?;
+        writer.flush()?;
+        writer.get_ref().sync_all()?;
         std::fs::rename(
             &temporary,
-            directory.join(format!("native-stage-{key}.json")),
+            directory.join(format!("native-stage-{key}.bin")),
         )?;
         Ok(())
     })();
@@ -490,4 +527,83 @@ pub(crate) fn write_native_stage(
         let _ = std::fs::remove_file(temporary);
     }
     write
+}
+
+#[cfg(test)]
+mod native_tests {
+    use super::*;
+    use std::collections::BTreeMap;
+
+    #[test]
+    fn native_binary_checkpoint_migrates_legacy_and_authenticates_payload() {
+        let directory =
+            std::env::temp_dir().join(format!("amflow-native-codec-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&directory);
+        std::fs::create_dir_all(&directory).unwrap();
+        let key = "codec-roundtrip";
+        let target = Integral(vec![2, 1, -3]);
+        let master = Integral(vec![1, 1, 0]);
+        let reduction = Reduction {
+            rules: BTreeMap::from([(
+                target.clone(),
+                BTreeMap::from([(master.clone(), parse!("(1-codec_eps)/(codec_eta+1)"))]),
+            )]),
+            residuals: vec![master.clone()],
+            nonzero_conditions: vec![parse!("codec_eta+1")],
+        };
+        let stored = NativeStage {
+            visited: vec![target.0.clone()],
+            pending: vec![master.0.clone()],
+            reduction: StoredReduction::encode(&reduction).unwrap(),
+        };
+        let payload = serde_json::to_vec(&stored).unwrap();
+        let legacy = Entry {
+            version: VERSION,
+            key: key.into(),
+            digest: blake3::hash(&payload).to_hex().to_string(),
+            payload,
+        };
+        let legacy_path = directory.join(format!("native-stage-{key}.json"));
+        std::fs::write(&legacy_path, serde_json::to_vec(&legacy).unwrap()).unwrap();
+        let (old, done, pending) = read_native_stage(&directory, key).unwrap().unwrap();
+        assert_eq!(old.rules, reduction.rules);
+        assert_eq!(old.nonzero_conditions, reduction.nonzero_conditions);
+        write_native_stage(&directory, key, &old, &done, &pending).unwrap();
+        let binary_path = directory.join(format!("native-stage-{key}.bin"));
+        assert!(
+            std::fs::metadata(&binary_path).unwrap().len()
+                < std::fs::metadata(&legacy_path).unwrap().len()
+        );
+        let (new, new_done, new_pending) = read_native_stage(&directory, key).unwrap().unwrap();
+        assert_eq!(new.rules, old.rules);
+        assert_eq!(new.residuals, old.residuals);
+        assert_eq!(new.nonzero_conditions, old.nonzero_conditions);
+        assert_eq!(new_done, done);
+        assert_eq!(new_pending, pending);
+        let mut bytes = std::fs::read(&binary_path).unwrap();
+        *bytes.last_mut().unwrap() ^= 1;
+        std::fs::write(&binary_path, &bytes).unwrap();
+        // A corrupt new entry must not silently fall back to the old entry.
+        assert!(matches!(
+            read_native_stage(&directory, key),
+            Err(Error::Cache(_))
+        ));
+        write_native_stage(&directory, key, &old, &done, &pending).unwrap();
+        let mut bytes = std::fs::read(&binary_path).unwrap();
+        bytes.extend_from_slice(b"trailing");
+        std::fs::write(&binary_path, &bytes).unwrap();
+        assert!(matches!(
+            read_native_stage(&directory, key),
+            Err(Error::Cache(_))
+        ));
+        write_native_stage(&directory, key, &old, &done, &pending).unwrap();
+        let mut bytes = std::fs::read(&binary_path).unwrap();
+        bytes[NATIVE_MAGIC.len() - 1] = 2;
+        std::fs::write(&binary_path, &bytes).unwrap();
+        assert!(matches!(
+            read_native_stage(&directory, key),
+            Err(Error::Cache(_))
+        ));
+        std::fs::remove_dir_all(directory).unwrap();
+    }
 }

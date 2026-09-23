@@ -100,3 +100,9 @@ algebra at the cost of repeated seed searches. They retain the same strict
 integral order and final exact substitution. `SectorReduced` progress events
 report seeds, generated rows, exact-trace size, and total/exact milliseconds.
 The acceptance example accepts `--case-batch N` for profiling this tradeoff.
+
+Native search checkpoints use a versioned binary codec with authenticated
+payloads and atomic replacement. Legacy JSON checkpoints remain readable;
+new writes use `.bin` files. An incompatible or corrupt binary checkpoint is
+rejected rather than silently replaced by an older JSON snapshot. Completed
+reduction and differential-system caches retain their JSON containers.
