@@ -57,7 +57,8 @@ optional and would require Mathematica and an upstream-supported reducer.
 
 The native runtime bridge accepts 1 through 12 scalar-product slots. Its default
 adapter search uses depth 2 and at most 4096 concrete integrals; differential
-closure uses at most 12 reduction rounds. Exact rational epsilon specialization
+closure uses at most 12 reduction rounds. RustRed's compact integral indices
+range from -64 through 63, including generated seed indices. Exact rational epsilon specialization
 is enabled by default for high-level multiloop AMF evaluation. It is covered by
 a test comparing the resulting dimensional sectors with an analytic sunset.
 

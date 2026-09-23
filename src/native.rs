@@ -336,8 +336,14 @@ fn solve<const N: usize>(
                         let integral = Integral(powers.to_vec());
                         let coefficient =
                             substitute(&term.coefficient.to_expression(), &family.reverse);
-                        let previous = combination.remove(&integral).unwrap_or_default();
-                        combination.insert(integral, (previous + coefficient).together().cancel());
+                        // Native coefficients are already reduced rational
+                        // polynomials. Replacing their parameter names is
+                        // bijective and needs no second polynomial gcd.
+                        if let Some(previous) = combination.get_mut(&integral) {
+                            *previous = (&*previous + coefficient).together().cancel();
+                        } else {
+                            combination.insert(integral, coefficient);
+                        }
                         if !term.coefficient.denominator.is_constant() {
                             result.nonzero_conditions.push(substitute(
                                 &term.coefficient.denominator.to_expression(),
