@@ -72,7 +72,11 @@ field for shared finite-corner replay. It uses the same native sources, modular
 search and exact replay, and does not enable experimental reconstruction.
 This path emits per-sector reduction progress, completes higher sectors before
 searching lower ones, and removes exactly canceled intermediate contributions
-before the next search round. Set `checkpoints` on
+before the next search round. For large frontiers, `max_exact_frontier` (512 by
+default) instead permits extra dependency searches and postpones coefficient
+substitution. Setting it to zero disables intermediate coefficient pruning;
+final reductions remain exact, and unsearched nonzero contributions are errors.
+Set `checkpoints` on
 the backend to resume unfinished reductions after increasing a target budget;
 the acceptance examples enable this alongside their ordinary reduction cache.
 

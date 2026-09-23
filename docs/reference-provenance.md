@@ -25,3 +25,19 @@ the numeric grammar used in this fixture, preserves the original component
 precision strings, and records the source SHA-256. The acceptance executable
 requires both independent 20-digit stability and comparison at the reference's
 recorded precision.
+
+The non-vacuum sunrise regression uses the same pinned upstream commit:
+
+- `sunrise_input.wl`: `examples/differential_equation_solver/run.wl`.
+- `sunrise_blade_sol1.wl`: `examples/differential_equation_solver/backup/blade_sol1`.
+
+This is a fixed-epsilon check at s=1/2, m²=1 and epsilon=10^-4, with automatic
+Rust boundary construction. The test checks 20 digits and independently raises
+working precision and series order. It does not interpret the fixture's roughly
+100-digit Mathematica precision tags as verified numerical accuracy; its tiny
+imaginary residual is also below the test's absolute zero tolerance.
+
+SHA-256 of these verbatim inputs:
+
+- `sunrise_input.wl`: `83c8a99e77cea83db786390569a3b77ec13652c3eae355fab5e266b65e06e99d`.
+- `sunrise_blade_sol1.wl`: `38059852971815e5136c11ed720d3f0e9c26893e09a9d46675fbd6cb8d6ba6d1`.

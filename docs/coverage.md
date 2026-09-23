@@ -38,8 +38,9 @@ the call; they cannot currently be interrupted from within this adapter.
 ## Numerical checks
 
 The tests cover a physical-region massless bubble and on-shell massless triangle,
-Euclidean massive bubbles,
-single-mass and two-mass two-loop sunsets with automatically generated region
+Euclidean massive bubbles, a non-vacuum single-mass sunrise compared against the
+pinned upstream result with independent precision refinement, independent top
+sectors, single-mass and two-mass two-loop sunsets with automatically generated region
 boundaries, a three-loop single-mass banana vacuum with recursive FT boundaries, factorized
 tadpoles, equivalent momentum routings and denominator permutations, linear
 numerator boundaries, recursive FT sunsets, supplied-boundary analytic ODEs,
@@ -73,3 +74,11 @@ the next RHS frontier, and can checkpoint each completed closure round. A larger
 `max_targets` budget can resume that checkpoint. Finite-depth search can still
 produce expensive intermediate rules; a checkpoint or a completed reduction
 round does not imply that the differential basis has closed.
+
+For large native frontiers, coefficient expansion can cost more than the extra
+IBP searches needed by a conservative dependency traversal. The
+`max_exact_frontier` option controls this tradeoff (512 by default). All reported
+final reductions still undergo exact substitution and a check that every
+surviving residual was searched. Taylor transport checks the differential-equation
+defect at step endpoints and midpoints as well as its final series terms, and
+its truncation tolerance tightens when guard precision increases.

@@ -454,6 +454,7 @@ fn native_factorized_replay_agrees_with_sparse_reduction_and_flow() {
     };
     let factorized = RustRedBackend {
         factorized: true,
+        max_exact_frontier: 0,
         ..Default::default()
     };
     let (deformed, _) = family
@@ -500,4 +501,72 @@ fn native_factorized_replay_agrees_with_sparse_reduction_and_flow() {
         "{} != {expected}",
         value[0]
     );
+}
+
+#[test]
+fn nonvacuum_sunrise_matches_pinned_upstream_and_precision_refinement() {
+    // AMFlow 2.0 examples/differential_equation_solver: s=1/2,
+    // m^2=1, epsilon=10^-4. The original input and its precision annotations
+    // are preserved in fixtures/amflow-2.0/sunrise_{input,blade_sol1}.wl.
+    let gram = vec![vec![Atom::num((1, 2))]];
+    let propagators = [
+        ([1, 0], [0], 1),
+        ([0, 1], [0], 0),
+        ([1, 1], [1], 0),
+        ([1, 0], [-1], 0),
+        ([0, 1], [-1], 0),
+    ]
+    .iter()
+    .map(|(l, e, m)| Propagator::quadratic(l, e, Atom::num(*m), &gram).unwrap())
+    .collect();
+    let family = IntegralFamily {
+        name: "nonvacuum_sunrise".into(),
+        loops: vec!["l1".into(), "l2".into()],
+        external: vec!["p".into()],
+        external_gram: gram,
+        propagators,
+        physical_propagators: 3,
+        epsilon: symbol!("sunrise_eps"),
+        dimension: 4,
+    };
+    let targets = [Integral(vec![1, 1, 1, 0, 0]), Integral(vec![2, 1, 1, 0, 0])];
+    let epsilon = Rational::from((1, 10000));
+    let context = RunContext::default();
+    let options = FlowOptions::default();
+    let backend = RustRedBackend::default();
+    let prepared = PreparedFlow::new_at_epsilon(
+        &family,
+        &targets,
+        &KinematicPoint::default(),
+        &backend,
+        &options,
+        &context,
+        &epsilon,
+    )
+    .unwrap();
+    let boundary = recursive::RecursiveBoundary::new(&backend, &options, &context);
+    let first = prepared
+        .evaluate(&epsilon, &options, &boundary, &context)
+        .unwrap();
+    let refined = FlowOptions {
+        guard_digits: 60,
+        series_order: 112,
+        ..options.clone()
+    };
+    let second = prepared
+        .evaluate(&epsilon, &refined, &boundary, &context)
+        .unwrap();
+    let p = Precision::decimal(80).unwrap();
+    let references = [
+        "5.0007982346841555790321435863400882030491840852200593889e7",
+        "4.9999230841935509579718210700268741734828138784040806673e7",
+    ];
+    for ((a, b), reference) in first.iter().zip(second).zip(references) {
+        assert!(p.close(a, &b, 20), "precision convergence: {a} != {b}");
+        assert!(
+            p.close(&b, &p.parse(reference, "0").unwrap(), 20),
+            "upstream comparison: {b}"
+        );
+        assert!(p.norm(&ComplexFloat::new(p.real(0), b.im.clone())) < p.tolerance(20));
+    }
 }

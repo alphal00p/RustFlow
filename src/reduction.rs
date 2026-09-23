@@ -47,6 +47,10 @@ pub struct RustRedBackend {
     pub max_depth: u32,
     pub max_targets: usize,
     pub include_lorentz: bool,
+    /// Above this frontier size, search a conservative dependency superset
+    /// instead of materializing large temporary coefficients. Zero disables
+    /// intermediate coefficient pruning; final reductions are always exact.
+    pub max_exact_frontier: usize,
     /// Use RustRed's exact factorized rational-polynomial coefficient field.
     /// This does not enable its experimental reconstruction feature.
     pub factorized: bool,
@@ -59,6 +63,7 @@ impl Default for RustRedBackend {
             max_depth: 2,
             max_targets: 4096,
             include_lorentz: false,
+            max_exact_frontier: 512,
             factorized: true,
             checkpoints: None,
         }
@@ -68,12 +73,13 @@ impl Default for RustRedBackend {
 impl ReductionBackend for RustRedBackend {
     fn identity(&self) -> String {
         format!(
-            "rustred-exact:{}:{}:{}:{}:{}",
+            "rustred-exact:{}:{}:{}:{}:{}:{}",
             env!("RUSTRED_SOURCE_DIGEST"),
             self.max_depth,
             self.max_targets,
             self.include_lorentz,
-            self.factorized
+            self.factorized,
+            self.max_exact_frontier
         )
     }
     fn reduce_at_epsilon(

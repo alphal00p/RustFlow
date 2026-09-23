@@ -229,26 +229,59 @@ fn solve<const N: usize>(
         context.emit(Progress::Substitution {
             rules: result.rules.len(),
         })?;
-        let mut expander = Expander::new(&result, context)?;
-        let mut frontier = BTreeSet::new();
-        for target in targets {
-            frontier.extend(
-                expander
-                    .expand_filtered(&Integral(target.clone()), active_lines)?
-                    .keys()
-                    .cloned(),
-            );
-        }
-        let unfinished_current_sector = frontier
+        let structural = structural_frontier(&result, targets, context)?;
+        let unsearched = |i: &Integral| {
+            <[i16; N]>::try_from(i.0.as_slice()).is_ok_and(|v| !visited.contains(&v))
+        };
+        let current_count = structural
             .iter()
-            .any(|i| <[i16; N]>::try_from(i.0.as_slice()).is_ok_and(|v| !visited.contains(&v)));
-        if !unfinished_current_sector {
-            // Only materialize the coefficients of lower-sector integrals
-            // when the current level has closed. Those coefficients otherwise
-            // become large temporary rational functions after every round.
-            frontier.clear();
+            .filter(|i| line_count(i) == active_lines && unsearched(i))
+            .count();
+        let lower_count = structural
+            .iter()
+            .filter(|i| line_count(i) < active_lines && unsearched(i))
+            .count();
+        let mut frontier;
+        if current_count > options.max_exact_frontier {
+            // Extra searches are safe; unsearched leaves are never returned as
+            // masters. Avoid constructing thousands of coefficients of lower
+            // integrals that will subsequently be eliminated anyway.
+            frontier = structural
+                .into_iter()
+                .filter(|i| line_count(i) <= active_lines)
+                .collect::<BTreeSet<_>>();
+        } else if current_count == 0 && lower_count > options.max_exact_frontier {
+            frontier = structural
+                .into_iter()
+                .filter(|i| line_count(i) < active_lines)
+                .collect();
+        } else {
+            let mut expander = Expander::new(&result, context)?;
+            frontier = BTreeSet::new();
             for target in targets {
-                frontier.extend(expander.expand(&Integral(target.clone()))?.keys().cloned());
+                frontier.extend(
+                    expander
+                        .expand_filtered(&Integral(target.clone()), active_lines)?
+                        .keys()
+                        .cloned(),
+                );
+            }
+            let unfinished = frontier
+                .iter()
+                .any(|i| line_count(i) == active_lines && unsearched(i));
+            if !unfinished {
+                if lower_count > options.max_exact_frontier {
+                    frontier = structural
+                        .into_iter()
+                        .filter(|i| line_count(i) < active_lines)
+                        .collect();
+                } else {
+                    frontier.clear();
+                    for target in targets {
+                        frontier
+                            .extend(expander.expand(&Integral(target.clone()))?.keys().cloned());
+                    }
+                }
             }
         }
         pending = frontier
@@ -324,6 +357,38 @@ fn solve<const N: usize>(
         result.expand(&Integral(target.clone()))?;
     }
     Ok(result)
+}
+fn line_count(integral: &Integral) -> usize {
+    integral.0.iter().filter(|&&n| n > 0).count()
+}
+fn structural_frontier(
+    reduction: &Reduction,
+    targets: &[Vec<i16>],
+    context: &RunContext,
+) -> Result<BTreeSet<Integral>> {
+    let mut seen = BTreeSet::new();
+    let mut leaves = BTreeSet::new();
+    let mut stack = targets.iter().cloned().map(Integral).collect::<Vec<_>>();
+    while let Some(node) = stack.pop() {
+        context.cancellation.check()?;
+        if !seen.insert(node.clone()) {
+            continue;
+        }
+        if let Some(terms) = reduction.rules.get(&node) {
+            for child in terms.keys() {
+                if line_count(child) > line_count(&node) {
+                    return Err(Error::Reduction(
+                        "native rewrite increases its sector; descending-sector search is invalid"
+                            .into(),
+                    ));
+                }
+                stack.push(child.clone());
+            }
+        } else {
+            leaves.insert(node);
+        }
+    }
+    Ok(leaves)
 }
 use std::sync::Arc;
 use symbolica::domains::factorized_rational_polynomial::{

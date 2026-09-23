@@ -400,6 +400,42 @@ impl CompiledSystem {
         Ok(output)
     }
 
+    fn residual_is_small(
+        &self,
+        center: &C,
+        step: &C,
+        coefficients: &[Vec<C>],
+        values: &[C],
+        tolerance: &Float,
+    ) -> Result<bool> {
+        let p = self.p;
+        let point = p.add(center, step);
+        for (i, row) in self.matrix.iter().enumerate() {
+            let mut derivative = p.zero();
+            for k in (1..coefficients.len()).rev() {
+                derivative = p.add(
+                    &p.mul(&derivative, step),
+                    &p.scale(&coefficients[k][i], k as i64, 1),
+                );
+            }
+            let mut rhs = p.zero();
+            for (entry, value) in row.iter().zip(values) {
+                rhs = p.add(&rhs, &p.mul(&entry.series(p, &point, 0)?[0], value));
+            }
+            let defect = p.mul(step, &p.sub(&derivative, &rhs));
+            let magnitude = p.norm(&values[i]);
+            let scale = if magnitude > p.real(1) {
+                magnitude
+            } else {
+                p.real(1)
+            };
+            if !p.finite(&defect) || p.norm(&defect) > tolerance.clone() * scale {
+                return Ok(false);
+            }
+        }
+        Ok(true)
+    }
+
     pub fn transport(
         &self,
         boundary: &BoundaryData,
@@ -458,15 +494,40 @@ impl CompiledSystem {
                 let mut accepted = None;
                 for _ in 0..32 {
                     let (v, tail) = evaluate_taylor(p, &coefficients, &step);
-                    let tolerance = p.tolerance(options.digits + 8);
+                    // Regulator fitting and endpoint matching consume guard
+                    // digits too. Increasing arithmetic precision must also
+                    // tighten truncation, even at a fixed expansion order.
+                    let truncation_digits = options
+                        .digits
+                        .saturating_add(8)
+                        .max((options.digits + options.guard_digits).saturating_sub(10));
+                    let available_digits = (u64::from(p.bits) * 1000 / 3322) as u32;
+                    let tolerance =
+                        p.tolerance(truncation_digits.min(available_digits.saturating_sub(3)));
                     let good = v.iter().zip(&tail).all(|(v, t)| {
                         let scale = p.norm(v);
                         let scale = if scale > p.real(1) { scale } else { p.real(1) };
                         p.finite(v) && *t <= tolerance.clone() * scale
                     });
-                    if good {
-                        accepted = Some(v);
-                        break;
+                    if good
+                        && self.residual_is_small(&center, &step, &coefficients, &v, &tolerance)?
+                    {
+                        // Vanishing final Taylor terms do not bound omitted
+                        // terms for sparse systems such as y' = x^20 y.
+                        // Check the differential equation at the step endpoint
+                        // and midpoint as an independent defect test.
+                        let half_step = p.scale(&step, 1, 2);
+                        let (middle, _) = evaluate_taylor(p, &coefficients, &half_step);
+                        if self.residual_is_small(
+                            &center,
+                            &half_step,
+                            &coefficients,
+                            &middle,
+                            &tolerance,
+                        )? {
+                            accepted = Some(v);
+                            break;
+                        }
                     }
                     step = p.scale(&step, 1, 2);
                     diagnostics.rejected_steps += 1;

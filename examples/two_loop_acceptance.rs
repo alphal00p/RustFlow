@@ -15,6 +15,9 @@ fn main() -> Result<()> {
     while let Some(argument) = arguments.next() {
         match argument.as_str() {
             "--max-targets" => native.max_targets = integer_argument(&mut arguments, &argument)?,
+            "--max-exact-frontier" => {
+                native.max_exact_frontier = integer_argument(&mut arguments, &argument)?
+            }
             "--depth" => {
                 native.max_depth = u32::try_from(integer_argument(&mut arguments, &argument)?)
                     .map_err(|_| Error::InvalidInput("depth exceeds u32".into()))?
@@ -26,7 +29,7 @@ fn main() -> Result<()> {
             "--skip-reduction" => options.skip_reduction = true,
             "--help" => {
                 println!(
-                    "two_loop_acceptance [--max-targets N] [--depth N] [--workers N] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain]"
+                    "two_loop_acceptance [--max-targets N] [--max-exact-frontier N] [--depth N] [--workers N] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain]"
                 );
                 return Ok(());
             }

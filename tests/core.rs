@@ -192,3 +192,70 @@ fn scaleless_tadpole_is_removed_by_native_sector_analysis() {
         }
     }
 }
+
+#[test]
+fn precision_refinement_also_tightens_taylor_truncation() {
+    let p = Precision::decimal(80).unwrap();
+    let system = DifferentialSystem {
+        variable: symbol!("guard_x"),
+        matrix: vec![vec![parse!("1/(2*guard_x)")]],
+    }
+    .compile(p, &ahash::HashMap::default())
+    .unwrap();
+    let expected = p.pow(&p.i(2), &p.rational(&Rational::from((1, 2))));
+    let run = |guard_digits| {
+        let options = FlowOptions {
+            digits: 10,
+            guard_digits,
+            series_order: 40,
+            ..Default::default()
+        };
+        let result = system
+            .transport(
+                &BoundaryData {
+                    point: p.i(1),
+                    values: vec![p.i(1)],
+                },
+                &[p.i(2)],
+                &options,
+                &RunContext::default(),
+            )
+            .unwrap();
+        p.norm(&p.sub(&result.values[0], &expected))
+    };
+    let low = run(30);
+    let high = run(60);
+    assert!(high < p.tolerance(55));
+    assert!(high < low * p.tolerance(15));
+}
+
+#[test]
+fn sparse_ode_does_not_mistake_a_zero_taylor_tail_for_convergence() {
+    let p = Precision::decimal(60).unwrap();
+    let system = DifferentialSystem {
+        variable: symbol!("sparse_x"),
+        matrix: vec![vec![parse!("sparse_x^20")]],
+    }
+    .compile(p, &ahash::HashMap::default())
+    .unwrap();
+    let options = FlowOptions {
+        digits: 20,
+        guard_digits: 20,
+        series_order: 16,
+        max_steps: 10000,
+        ..Default::default()
+    };
+    let result = system
+        .transport(
+            &BoundaryData {
+                point: p.zero(),
+                values: vec![p.i(1)],
+            },
+            &[p.i(1)],
+            &options,
+            &RunContext::default(),
+        )
+        .unwrap();
+    assert!(p.close(&result.values[0], &p.exp(&p.scale(&p.i(1), 1, 21)), 20));
+    assert!(result.diagnostics.rejected_steps > 0);
+}
