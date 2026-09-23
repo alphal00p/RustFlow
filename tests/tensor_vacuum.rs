@@ -76,6 +76,72 @@ fn repeated_vector_orbits_preserve_mixed_tensor_contractions() {
             .is_zero()
     );
 }
+
+#[test]
+fn higher_rank_repeated_tensors_use_exact_angular_moments() {
+    let dimension = parse!("D");
+    let mut projector = tensor::TensorProjector::new(dimension.clone());
+    for rank in [10, 16, 32] {
+        let hard = vec![vec![parse!("k2"); rank]; rank];
+        let external = vec![vec![parse!("p2"); rank]; rank];
+        let numerator = (1..rank)
+            .step_by(2)
+            .fold(Atom::num(1), |a, k| a * Atom::num(k as i64));
+        let denominator = (0..rank / 2).fold(Atom::num(1), |a, k| {
+            a * (&dimension + Atom::num(2 * k as i64))
+        });
+        let expected = numerator * parse!("k2*p2").pow((rank / 2) as i64) / denominator;
+        assert!(
+            (projector.project(&hard, &external).unwrap() - expected)
+                .together()
+                .cancel()
+                .is_zero()
+        );
+    }
+    for (u, v, numerator) in [
+        (4, 6, parse!("45*u2^2*v2^3+540*u2*v2^2*uv^2+360*v2*uv^4")),
+        (
+            6,
+            6,
+            parse!("225*u2^3*v2^3+4050*u2^2*v2^2*uv^2+5400*u2*v2*uv^4+720*uv^6"),
+        ),
+    ] {
+        let rank = u + v;
+        let hard = (0..rank)
+            .map(|i| {
+                (0..rank)
+                    .map(|j| {
+                        if (i < u) != (j < u) {
+                            parse!("uv")
+                        } else if i < u {
+                            parse!("u2")
+                        } else {
+                            parse!("v2")
+                        }
+                    })
+                    .collect()
+            })
+            .collect::<Vec<Vec<_>>>();
+        let external = vec![vec![parse!("p2"); rank]; rank];
+        let denominator = (0..rank / 2).fold(Atom::num(1), |a, k| {
+            a * (&dimension + Atom::num(2 * k as i64))
+        });
+        let expected = numerator * parse!("p2").pow((rank / 2) as i64) / denominator;
+        assert!(
+            (projector.project(&hard, &external).unwrap() - expected)
+                .together()
+                .cancel()
+                .is_zero()
+        );
+    }
+    let null = vec![vec![Atom::new(); 16]; 16];
+    assert!(
+        projector
+            .project(&vec![vec![parse!("k2"); 16]; 16], &null)
+            .unwrap()
+            .is_zero()
+    );
+}
 #[test]
 fn analytic_vacuum_scaling_and_mass_derivative() {
     let p = Precision::decimal(70).unwrap();

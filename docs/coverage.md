@@ -15,7 +15,7 @@ remain the mandatory completion gate.
 | Singular endpoints/infinity | `frobenius` | Rational indicial roots; integer shearing, Jordan-chain projector refinement, resonant logarithms |
 | Auxiliary-mass placement | `MassMode`, `IntegralFamily::deform` | Intrinsic-mass groups, propagators, branches, loops, all lines, explicit positions; ordinary quadratic lines |
 | Region enumeration/expansion | `regions` | Ordinary rank-one quadratic propagators; bounded routing budget |
-| Tensor reduction | `tensor` | Exact vacuum projection, rank at most eight |
+| Tensor reduction | `tensor` | Repeated single hard vector: rank 32; other tensors: rank 14 and at most 128 pairing orbits |
 | Massless bubble subloops | `bubble`, native adapter | Tensor rank at most eight, sum of bubble powers at most 32; transfer square must be external or an active denominator |
 | Partial fractions/ISP completion | `integrand` | Affine scalar-product denominators, bounded term budget |
 | Automatic boundary recursion | `recursive` | Depth 32; adaptive boundary order at most 16 in inverse mass; half-power numerator series |
@@ -162,3 +162,6 @@ matrix. General distinct vectors retain the full projection. Analytic rank-eight
 contractions and mixed-vector contractions test the grouping. Frobenius
 recurrences traverse nonzero series-matrix entries without allocating a fresh
 numerical zero for every comparison.
+Single-vector projection uses the exact angular-moment formula with a memoized
+Wick pairing sum, bounded to 100000 states. This extends the boundary tensors
+beyond rank eight without constructing the full labelled-pairing matrix.

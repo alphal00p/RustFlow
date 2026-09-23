@@ -97,4 +97,5 @@ of this value and `--workers N`.
 `--checkpoint-seconds N` sets the periodic save interval (60 by default).
 Increasing it can help when individual checkpoints are several gigabytes;
 cancellation and search completion still force a save. The `paper_subsector`
-diagnostic also accepts `--depth N` and `--max-exact-frontier N`.
+diagnostic also accepts `--depth N`, `--max-targets N`, and
+`--max-exact-frontier N`.

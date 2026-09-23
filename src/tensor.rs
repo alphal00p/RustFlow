@@ -41,11 +41,73 @@ fn cycles(a: &Pairing, b: &Pairing, rank: usize) -> usize {
     (0..rank).filter(|&i| root(&parent, i) == i).count()
 }
 
+fn vector_classes(gram: &[Vec<Atom>]) -> (Vec<usize>, Vec<usize>) {
+    let mut representatives = Vec::<usize>::new();
+    let classes = (0..gram.len())
+        .map(|i| {
+            if let Some(class) = representatives.iter().position(|&j| gram[i] == gram[j]) {
+                class
+            } else {
+                representatives.push(i);
+                representatives.len() - 1
+            }
+        })
+        .collect();
+    (classes, representatives)
+}
+
+// Wick's pairing sum, memoized by multiplicities of equal Gram rows. This
+// avoids materializing (rank-1)!! labelled pairings for a repeated hard vector.
+fn pairing_sum(gram: &[Vec<Atom>]) -> Result<Atom> {
+    let (classes, representatives) = vector_classes(gram);
+    let mut counts = vec![0; representatives.len()];
+    for class in classes {
+        counts[class] += 1;
+    }
+    fn sum(
+        gram: &[Vec<Atom>],
+        representatives: &[usize],
+        counts: &mut [usize],
+        memo: &mut BTreeMap<Vec<usize>, Atom>,
+    ) -> Result<Atom> {
+        if let Some(value) = memo.get(counts) {
+            return Ok(value.clone());
+        }
+        let Some(first) = counts.iter().position(|&n| n != 0) else {
+            return Ok(Atom::num(1));
+        };
+        if memo.len() >= 100_000 {
+            return Err(Error::Limit(
+                "tensor pairing sum exceeds 100000 states".into(),
+            ));
+        }
+        let key = counts.to_vec();
+        counts[first] -= 1;
+        let mut value = Atom::new();
+        for second in 0..counts.len() {
+            let choices = counts[second];
+            if choices == 0 || gram[representatives[first]][representatives[second]].is_zero() {
+                continue;
+            }
+            counts[second] -= 1;
+            value += Atom::num(choices as i64)
+                * &gram[representatives[first]][representatives[second]]
+                * sum(gram, representatives, counts, memo)?;
+            counts[second] += 1;
+        }
+        counts[first] += 1;
+        memo.insert(key, value.clone());
+        Ok(value)
+    }
+    sum(gram, &representatives, &mut counts, &mut BTreeMap::new())
+}
+
 /// Project a product of scalar products (hard_vector[i] . external_vector[i]).
 /// `hard_gram` and `external_gram` give all pairwise scalar products of the
 /// labelled vectors; repeated vectors may appear as repeated Gram rows.
 /// The returned expression is valid inside a rotationally invariant vacuum
-/// integral. Odd rank vanishes. The practical exact-algebra rank cap is eight.
+/// integral. Odd rank vanishes. Repeated single-vector tensors support rank 32;
+/// other tensors support rank 14 with at most 128 pairing orbits.
 #[derive(Clone, Debug)]
 pub struct TensorProjector {
     dimension: Atom,
@@ -78,8 +140,10 @@ impl TensorProjector {
         if rank == 0 {
             return Ok(Atom::num(1));
         }
-        if rank > 8 {
-            return Err(Error::Limit("vacuum tensor rank exceeds eight".into()));
+        if rank > 32 {
+            return Err(Error::Limit(format!(
+                "vacuum tensor rank {rank} exceeds 32"
+            )));
         }
         if (0..rank).any(|i| {
             (0..i).any(|j| {
@@ -90,18 +154,30 @@ impl TensorProjector {
                 "tensor Gram matrices must be symmetric".into(),
             ));
         }
-        let mut classes = Vec::with_capacity(rank);
-        let mut class_count = 0;
-        for i in 0..rank {
-            let class = if let Some(previous) =
-                hard_gram[..i].iter().position(|row| row == &hard_gram[i])
-            {
-                classes[previous]
-            } else {
-                class_count += 1;
-                class_count - 1
-            };
-            classes.push(class);
+        let (classes, representatives) = vector_classes(hard_gram);
+        let class_count = representatives.len();
+        if class_count == 1 {
+            let denominator = (0..rank / 2)
+                .fold(Atom::num(1), |value, k| {
+                    value * (&self.dimension + Atom::num(2 * k as i64))
+                })
+                .together()
+                .cancel();
+            if denominator.is_zero() {
+                return Err(Error::Numerical(
+                    "singular isotropic tensor dimension".into(),
+                ));
+            }
+            return Ok((hard_gram[0][0].clone().pow((rank / 2) as i64)
+                * pairing_sum(external_gram)?
+                / denominator)
+                .together()
+                .cancel());
+        }
+        if rank > 14 {
+            return Err(Error::Limit(format!(
+                "tensor rank {rank} with {class_count} distinct hard vectors exceeds the rank-14 orbit budget"
+            )));
         }
         if !self.inverses.contains_key(&classes) {
             let pairings = pairings(&(0..rank).collect::<Vec<_>>());
@@ -117,6 +193,11 @@ impl TensorProjector {
                     signature[a * class_count + b] += 1;
                 }
                 groups.entry(signature).or_default().push(pairing);
+                if groups.len() > 128 {
+                    return Err(Error::Limit(
+                        "tensor invariant basis exceeds 128 pairing orbits".into(),
+                    ));
+                }
             }
             let orbits = groups.into_values().collect::<PairingOrbits>();
             let gram = orbits
