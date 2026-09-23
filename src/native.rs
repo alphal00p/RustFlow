@@ -4,6 +4,7 @@
 use crate::family::{ConvertedFamily, substitute};
 use crate::reduction::{LinearCombination, Reduction, RustRedBackend};
 use crate::{Error, Integral, IntegralFamily, Progress, Result, RunContext};
+use rayon::prelude::*;
 use rustred::sector::{
     Mask,
     zero::{Analyzer, Decision},
@@ -224,6 +225,16 @@ fn solve<const N: usize>(
         result = restored;
     }
     let mut solvers = BTreeMap::new();
+    let pool = if options.native_workers > 1 {
+        Some(
+            rayon::ThreadPoolBuilder::new()
+                .num_threads(options.native_workers)
+                .build()
+                .map_err(|e| Error::Reduction(format!("native worker pool: {e}")))?,
+        )
+    } else {
+        None
+    };
     let mut last_saved = std::time::Instant::now();
     let search: Result<()> = (|| {
         while !pending.is_empty() {
@@ -335,6 +346,7 @@ fn solve<const N: usize>(
                     .or_default()
                     .push(CoordinateCase::new(target.map(Some)).map_err(native_error)?);
             }
+            let mut jobs = Vec::new();
             for (sector, mut cases) in sectors {
                 if let std::collections::btree_map::Entry::Vacant(entry) = solvers.entry(sector) {
                     entry.insert(
@@ -374,6 +386,14 @@ fn solve<const N: usize>(
                 };
                 cases.sort_by(|a, b| order.compare(&a.integral(), &b.integral()).reverse());
                 for cases in cases.chunks(options.max_sector_batch) {
+                    jobs.push((sector, cases.to_vec()));
+                }
+            }
+            // Bounded waves retain at most native_workers completed batches.
+            // Merge in stable order, preserving deterministic exact rules and
+            // the same restart semantics as the sequential implementation.
+            for wave in jobs.chunks(options.native_workers) {
+                let solve = |(sector, cases): &([bool; N], Vec<CoordinateCase<N>>)| {
                     context.emit(Progress::SectorReduction {
                         active_lines: sector.iter().filter(|&&v| v).count(),
                         integrals: cases.len(),
@@ -381,7 +401,7 @@ fn solve<const N: usize>(
                     })?;
                     // A progress callback may request cancellation itself.
                     context.cancellation.check()?;
-                    let solved = solvers[&sector]
+                    solvers[sector]
                         .solve_numeric_cases(
                             cases.to_vec(),
                             SearchOptions {
@@ -389,7 +409,15 @@ fn solve<const N: usize>(
                                 ..Default::default()
                             },
                         )
-                        .map_err(native_error)?;
+                        .map_err(native_error)
+                };
+                let solutions = if let Some(pool) = &pool {
+                    pool.install(|| wave.par_iter().map(solve).collect::<Vec<_>>())
+                } else {
+                    wave.iter().map(solve).collect::<Vec<_>>()
+                };
+                for ((_, cases), solved) in wave.iter().zip(solutions) {
+                    let solved = solved?;
                     let completed = Progress::SectorReduced {
                         integrals: solved.stats.cases,
                         seeds: solved.stats.seeds,

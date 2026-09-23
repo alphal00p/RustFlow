@@ -125,3 +125,10 @@ at the new depth. This matters even for a derivative-closed system: a redundant
 basis can have spurious indicial modes. The physical paper subsector with lines
 1, 3, 5, and 7 needs depth three in the current backend; depth two is rejected
 by dimensional-sector validation.
+
+`native_workers` enables bounded concurrent native batches (default one,
+maximum 64 per reduction call). Results are merged in the same order as serial
+search, and checkpoints retain only merged work. In-flight work is bounded by
+one wave of batches. Account for both this setting and `FlowOptions::workers`
+when budgeting total CPU and memory; the acceptance example exposes it as
+`--native-workers N`.

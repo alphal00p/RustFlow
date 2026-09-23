@@ -19,6 +19,18 @@ fn main() -> Result<()> {
         backend: RustRedBackend {
             max_depth: depth,
             max_targets,
+            native_workers: std::env::args()
+                .nth(6)
+                .map(|s| s.parse::<usize>())
+                .transpose()
+                .map_err(|e| Error::InvalidInput(e.to_string()))?
+                .unwrap_or(1),
+            max_exact_frontier: std::env::args()
+                .nth(7)
+                .map(|s| s.parse::<usize>())
+                .transpose()
+                .map_err(|e| Error::InvalidInput(e.to_string()))?
+                .unwrap_or(512),
             max_sector_batch: std::env::args()
                 .nth(5)
                 .map(|s| s.parse::<usize>())

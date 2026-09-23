@@ -15,6 +15,9 @@ fn main() -> Result<()> {
     while let Some(argument) = arguments.next() {
         match argument.as_str() {
             "--max-targets" => native.max_targets = integer_argument(&mut arguments, &argument)?,
+            "--native-workers" => {
+                native.native_workers = integer_argument(&mut arguments, &argument)?
+            }
             "--case-batch" => {
                 native.max_sector_batch = integer_argument(&mut arguments, &argument)?
             }
@@ -33,7 +36,7 @@ fn main() -> Result<()> {
             "--skip-reduction" => options.skip_reduction = true,
             "--help" => {
                 println!(
-                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--depth N] [--workers N] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops]"
+                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--depth N] [--workers N] [--native-workers N] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops]"
                 );
                 return Ok(());
             }

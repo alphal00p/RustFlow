@@ -54,6 +54,9 @@ pub struct RustRedBackend {
     /// Maximum number of concrete targets sharing one native exact replay.
     /// Smaller batches trade shared searches for smaller elimination systems.
     pub max_sector_batch: usize,
+    /// Independent native batches run concurrently within each reduction call.
+    /// Total concurrency can reach this times FlowOptions::workers.
+    pub native_workers: usize,
     /// Use RustRed's exact factorized rational-polynomial coefficient field.
     /// This does not enable its experimental reconstruction feature.
     pub factorized: bool,
@@ -74,6 +77,7 @@ impl Default for RustRedBackend {
             include_lorentz: false,
             max_exact_frontier: 512,
             max_sector_batch: usize::MAX,
+            native_workers: 1,
             factorized: true,
             bubble_subloops: true,
             checkpoints: None,
@@ -125,6 +129,11 @@ impl RustRedBackend {
         if self.max_sector_batch == 0 {
             return Err(Error::InvalidInput(
                 "max_sector_batch must be positive".into(),
+            ));
+        }
+        if !(1..=64).contains(&self.native_workers) {
+            return Err(Error::InvalidInput(
+                "native_workers must be in 1..=64".into(),
             ));
         }
         context.emit(Progress::Reduction {

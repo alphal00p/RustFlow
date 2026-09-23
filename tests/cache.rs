@@ -387,6 +387,72 @@ fn deeper_native_restart_reuses_identities_but_researches_residuals() {
 }
 
 #[test]
+fn parallel_native_batches_match_serial_and_resume_after_cancellation() {
+    use std::sync::Arc;
+    let directory = std::env::temp_dir().join(format!("amflow-parallel-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&directory);
+    let family = IntegralFamily {
+        name: "parallel_tadpole_product".into(),
+        loops: vec!["l1".into(), "l2".into()],
+        external: vec![],
+        external_gram: vec![],
+        propagators: vec![
+            Propagator::quadratic(&[1, 0], &[], Atom::num(1), &[]).unwrap(),
+            Propagator::quadratic(&[0, 1], &[], Atom::num(2), &[]).unwrap(),
+            Propagator::quadratic(&[1, 1], &[], Atom::new(), &[]).unwrap(),
+        ],
+        physical_propagators: 2,
+        epsilon: symbol!("parallel_eps"),
+        dimension: 4,
+    };
+    let targets = (1..=3)
+        .flat_map(|a| (1..=3).map(move |b| Integral(vec![a, b, 0])))
+        .collect::<Vec<_>>();
+    let serial = RustRedBackend {
+        max_sector_batch: 1,
+        ..Default::default()
+    };
+    let expected = serial
+        .reduce(&family, &targets, &RunContext::default())
+        .unwrap();
+    let parallel = RustRedBackend {
+        native_workers: 4,
+        checkpoints: Some(directory.clone()),
+        checkpoint_interval: std::time::Duration::from_secs(600),
+        ..serial
+    };
+    let token = CancellationToken::default();
+    let cancel = token.clone();
+    let completed = Arc::new(AtomicUsize::new(0));
+    let context = RunContext {
+        cancellation: token,
+        progress: Some(Arc::new(move |event| {
+            if matches!(event, Progress::SectorReduced { .. })
+                && completed.fetch_add(1, Ordering::Relaxed) == 1
+            {
+                cancel.cancel();
+            }
+        })),
+    };
+    assert!(matches!(
+        parallel.reduce(&family, &targets, &context),
+        Err(Error::Cancelled)
+    ));
+    let resumed = parallel
+        .reduce(&family, &targets, &RunContext::default())
+        .unwrap();
+    for target in &targets {
+        let mut difference = resumed.expand(target).unwrap();
+        for (i, c) in expected.expand(target).unwrap() {
+            let old = difference.remove(&i).unwrap_or_default();
+            difference.insert(i, (old - c).together().cancel());
+        }
+        assert!(difference.values().all(|c| c.is_zero()));
+    }
+    std::fs::remove_dir_all(directory).unwrap();
+}
+
+#[test]
 fn mass_placement_modes_follow_intrinsic_masses_and_loop_topology() {
     let (mut family, _) = benchmarks::paper_two_loop().unwrap();
     let selected = |family: &IntegralFamily, mode| {
