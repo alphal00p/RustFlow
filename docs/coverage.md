@@ -145,3 +145,12 @@ When at most 128 terminal integrals remain, substitution runs from the leaves
 toward the targets so apparent poles can cancel within each identity. Child
 expansions are released after their last parent uses them. Wider frontiers use
 forward accumulation to avoid storing a large residual map at every graph node.
+Small-basis substitution shares dependencies across a batch of targets, and
+completed frontier expansions are reused when producing the final table.
+`DifferentialClosure` events report basis size and remaining derivative targets.
+
+Pole finding normalizes each factor and scales its variable using a power-of-two
+Fujiwara bound before calling Symbolica's root finder. Newton corrections and
+polynomial reconstruction check the returned root set. Regressions include a
+degree-12 factor from the paper's boundary reduction and roots at very large and
+very small scales; unresolved clusters return a numerical error.

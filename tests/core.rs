@@ -1,6 +1,65 @@
 use symbolica::prelude::*;
 use symbolica_amflow::*;
 
+#[test]
+fn poles_of_large_integer_region_polynomial_stabilize_with_precision() {
+    let denominator = Atom::parse(
+        include_str!("../fixtures/regressions/region-pole-degree12.txt"),
+        "pole_regression",
+        Default::default(),
+    )
+    .unwrap();
+    let system = DifferentialSystem {
+        variable: symbol!("pole_regression::eta"),
+        matrix: vec![vec![Atom::num(1) / denominator]],
+    };
+    let low = system
+        .compile(Precision::decimal(60).unwrap(), &Default::default())
+        .unwrap();
+    let p = Precision::decimal(90).unwrap();
+    let high = system.compile(p, &Default::default()).unwrap();
+    assert_eq!(low.poles.len(), 12);
+    assert_eq!(high.poles.len(), 12);
+    for root in &high.poles {
+        assert!(
+            low.poles
+                .iter()
+                .any(|old| p.norm(&p.sub(root, old)) <= p.tolerance(40) * p.norm(root))
+        );
+    }
+}
+
+#[test]
+fn pole_scaling_preserves_very_large_and_very_small_roots() {
+    let p = Precision::decimal(60).unwrap();
+    let x = symbol!("scaled_pole_x");
+    for exponent in [-100, 100] {
+        let radius = Atom::num(10).pow(exponent);
+        let system = DifferentialSystem {
+            variable: x,
+            matrix: vec![vec![
+                Atom::num(1) / (Atom::var(x).pow(2) - Atom::num(2) * radius.pow(2)),
+            ]],
+        };
+        let roots = system.compile(p, &Default::default()).unwrap().poles;
+        assert_eq!(roots.len(), 2);
+        let expected = p.mul(
+            &p.powi(&p.i(10), exponent),
+            &ComplexFloat::new(p.real(2).sqrt(), p.real(0)),
+        );
+        for root in roots {
+            let positive_error = p.norm(&p.sub(&root, &expected));
+            let negative_error = p.norm(&p.add(&root, &expected));
+            let error = if positive_error < negative_error {
+                positive_error
+            } else {
+                negative_error
+            };
+            assert!(error <= p.tolerance(40) * p.norm(&expected));
+        }
+    }
+}
+
 fn tadpole() -> IntegralFamily {
     IntegralFamily {
         name: "tadpole".into(),

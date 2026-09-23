@@ -113,6 +113,93 @@ pub(crate) fn quotient_series(
     Ok(out)
 }
 
+fn polynomial_roots(p: Precision, coefficients: &[C], variable: Symbol) -> Result<Vec<C>> {
+    let degree = coefficients.len() - 1;
+    if degree == 1 {
+        return Ok(vec![p.neg(&p.div(&coefficients[0], &coefficients[1]))]);
+    }
+    // Fujiwara's bound, rounded upward to a power of two. With x = scale*z,
+    // every root lies in the unit disk and the monic coefficients stay bounded.
+    // Symbolica's Aberth solver uses an absolute polynomial residual; passing
+    // raw integer coefficients can make its stopping tolerance unattainable.
+    let leading = &coefficients[degree];
+    let mut exponent = None;
+    for (i, coefficient) in coefficients[..degree].iter().enumerate() {
+        let magnitude = p.norm(&p.div(coefficient, leading));
+        if !magnitude.is_finite() {
+            return Err(Error::Numerical("nonfinite pole polynomial".into()));
+        }
+        if let Some(e) = magnitude.as_raw().get_exp() {
+            let n = (degree - i) as i64;
+            let bound = (i64::from(e) + n - 1).div_euclid(n) + 1;
+            exponent = Some(exponent.map_or(bound, |old: i64| old.max(bound)));
+        }
+    }
+    let scale = p.powi(&p.i(2), exponent.unwrap_or(0));
+    if !p.finite(&scale) || scale == p.zero() {
+        return Err(Error::Numerical(
+            "pole scaling exceeds numerical range".into(),
+        ));
+    }
+    let mut scaled = coefficients
+        .iter()
+        .enumerate()
+        .map(|(i, c)| p.div(&p.div(c, leading), &p.powi(&scale, (degree - i) as i64)))
+        .collect::<Vec<_>>();
+    scaled[degree] = p.i(1);
+    let poly = UnivariatePolynomial::from_coefficients(
+        &FloatField::from_rep(p.zero()),
+        scaled.clone(),
+        Arc::new(PolyVariable::Symbol(variable)),
+    );
+    let roots = poly.roots(1000, &p.tolerance(p.bits / 4)).map_err(|_| {
+        Error::Numerical(format!(
+            "degree-{degree} scaled pole root finding did not converge"
+        ))
+    })?;
+    if roots.len() != degree || roots.iter().any(|root| !p.finite(root)) {
+        return Err(Error::Numerical("incomplete pole root set".into()));
+    }
+    // Verify Newton corrections as well as the polynomial reconstructed from
+    // all roots. A small residual alone is weak near clustered roots.
+    let tolerance = p.tolerance(p.bits / 5);
+    let mut reconstructed = vec![p.i(1)];
+    for (i, root) in roots.iter().enumerate() {
+        let mut value = p.i(1);
+        let mut derivative = p.zero();
+        for coefficient in scaled[..degree].iter().rev() {
+            derivative = p.add(&p.mul(&derivative, root), &value);
+            value = p.add(&p.mul(&value, root), coefficient);
+        }
+        if derivative == p.zero()
+            || p.norm(&p.div(&value, &derivative)) > tolerance
+            || roots[..i]
+                .iter()
+                .any(|other| p.norm(&p.sub(root, other)) <= tolerance)
+        {
+            return Err(Error::Numerical(
+                "unresolved or ill-conditioned pole roots".into(),
+            ));
+        }
+        let mut next = vec![p.zero(); reconstructed.len() + 1];
+        for (j, coefficient) in reconstructed.iter().enumerate() {
+            next[j] = p.sub(&next[j], &p.mul(root, coefficient));
+            next[j + 1] = p.add(&next[j + 1], coefficient);
+        }
+        reconstructed = next;
+    }
+    if reconstructed
+        .iter()
+        .zip(&scaled)
+        .any(|(a, b)| p.norm(&p.sub(a, b)) > tolerance)
+    {
+        return Err(Error::Numerical(
+            "pole roots fail polynomial reconstruction".into(),
+        ));
+    }
+    Ok(roots.iter().map(|root| p.mul(root, &scale)).collect())
+}
+
 impl NumericRational {
     pub(crate) fn series(&self, p: Precision, center: &C, order: usize) -> Result<Vec<C>> {
         quotient_series(
@@ -174,6 +261,7 @@ impl DifferentialSystem {
         self.validate()?;
         let mut matrix = Vec::new();
         let mut poles = Vec::new();
+        let mut seen_factors = ahash::HashSet::default();
         for row in &self.matrix {
             let mut out = Vec::new();
             for a in row {
@@ -209,19 +297,14 @@ impl DifferentialSystem {
                     } else {
                         factor
                     };
+                    if !seen_factors.insert(base.clone()) {
+                        continue;
+                    }
                     let coefficients = polynomial_coefficients(&base, self.variable, p, values)?;
                     if coefficients.len() <= 1 {
                         continue;
                     }
-                    let field = FloatField::from_rep(p.zero());
-                    let poly = UnivariatePolynomial::from_coefficients(
-                        &field,
-                        coefficients,
-                        Arc::new(PolyVariable::Symbol(self.variable)),
-                    );
-                    let roots = poly.roots(1000, &p.tolerance(p.bits / 4)).map_err(|_| {
-                        Error::Numerical("pole root finding did not converge".into())
-                    })?;
+                    let roots = polynomial_roots(p, &coefficients, self.variable)?;
                     for root in roots {
                         if !poles.iter().any(|v| {
                             let a = p.norm(v);
