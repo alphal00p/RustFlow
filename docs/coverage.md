@@ -37,8 +37,8 @@ the call; they cannot currently be interrupted from within this adapter.
 
 ## Numerical checks
 
-The tests cover a physical-region massless bubble and on-shell massless triangle,
-Euclidean massive bubbles, a non-vacuum single-mass sunrise compared against the
+The tests cover physical-region massless and massive bubbles, an on-shell
+massless triangle, Euclidean massive bubbles, a non-vacuum single-mass sunrise compared against the
 pinned upstream result with independent precision refinement, independent top
 sectors, single-mass and two-mass two-loop sunsets with automatically generated region
 boundaries, a three-loop single-mass banana vacuum with recursive FT boundaries, factorized

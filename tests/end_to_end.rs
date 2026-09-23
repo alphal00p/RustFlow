@@ -368,3 +368,48 @@ fn incomparable_top_sectors_keep_their_independent_normalizations() {
         assert!(precision.close(value, &expected, 20));
     }
 }
+
+#[test]
+fn massive_bubble_above_threshold_has_the_physical_discontinuity() {
+    let mut family = bubble();
+    family.external_gram[0][0] = Atom::num(5);
+    family.propagators[0].constant = Atom::num(-1);
+    family.propagators[1].constant = Atom::num(4);
+    let values = solve_integrals(
+        &family,
+        &[Integral(vec![1, 1])],
+        &KinematicPoint::default(),
+        0,
+        &FlowOptions::default(),
+        &RustRedBackend::default(),
+        &RunContext::default(),
+    )
+    .unwrap();
+    let value = &values[0];
+    assert_eq!(value.verified_digits, Some(20));
+    let p = Precision::decimal(70).unwrap();
+    let beta = p.pow(
+        &p.scale(&p.i(1), 1, 5),
+        &p.rational(&Rational::from((1, 2))),
+    );
+    // Gamma(eps) integral_0^1 (1-5*x*(1-x)-i0)^(-eps) dx:
+    // finite part = 2-gamma_E-beta*log((1+beta)/(1-beta))+i*pi*beta.
+    let base = p
+        .parse(
+            "1.4227843350984671393934879099175975689578406640600764011942327651",
+            "0",
+        )
+        .unwrap();
+    let ratio = p.div(&p.add(&p.i(1), &beta), &p.sub(&p.i(1), &beta));
+    let expected = p.add(
+        &p.sub(&base, &p.mul(&beta, &p.log(&ratio))),
+        &p.mul(&beta, &ComplexFloat::new(p.real(0), p.real(1).pi())),
+    );
+    assert!(p.close(&value.coefficients[&-2], &p.zero(), 20));
+    assert!(p.close(&value.coefficients[&-1], &p.i(1), 20));
+    assert!(
+        p.close(&value.coefficients[&0], &expected, 20),
+        "{} != {expected}",
+        value.coefficients[&0]
+    );
+}
