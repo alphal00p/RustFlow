@@ -330,3 +330,41 @@ fn alternative_mass_placements_agree_for_euclidean_bubble() {
         );
     }
 }
+
+#[test]
+fn incomparable_top_sectors_keep_their_independent_normalizations() {
+    let mut family = bubble();
+    family.external_gram[0][0] = Atom::num(-2);
+    family.propagators[0].constant = Atom::num(-1);
+    family.propagators[1].constant = Atom::num(-5);
+    let targets = [Integral(vec![1, 0]), Integral(vec![0, 1])];
+    let options = FlowOptions::default();
+    let context = RunContext::default();
+    let backend = RustRedBackend::default();
+    let epsilon = Rational::from((1, 10));
+    let precision = Precision::decimal(60).unwrap();
+    let prepared = PreparedFlow::new(
+        &family,
+        &targets,
+        &KinematicPoint::default(),
+        &backend,
+        &options,
+        &context,
+    )
+    .unwrap();
+    assert_eq!(prepared.reduced.basis.len(), 2);
+    let boundary = recursive::RecursiveBoundary::new(&backend, &options, &context);
+    let actual = prepared
+        .evaluate(&epsilon, &options, &boundary, &context)
+        .unwrap();
+    for (value, mass_squared) in actual.iter().zip([1, 3]) {
+        let expected = vacuum::tadpole(
+            1,
+            &precision.i(mass_squared),
+            &Rational::from((19, 5)),
+            precision,
+        )
+        .unwrap();
+        assert!(precision.close(value, &expected, 20));
+    }
+}

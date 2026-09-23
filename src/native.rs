@@ -232,7 +232,24 @@ fn solve<const N: usize>(
         let mut expander = Expander::new(&result, context)?;
         let mut frontier = BTreeSet::new();
         for target in targets {
-            frontier.extend(expander.expand(&Integral(target.clone()))?.keys().cloned());
+            frontier.extend(
+                expander
+                    .expand_filtered(&Integral(target.clone()), active_lines)?
+                    .keys()
+                    .cloned(),
+            );
+        }
+        let unfinished_current_sector = frontier
+            .iter()
+            .any(|i| <[i16; N]>::try_from(i.0.as_slice()).is_ok_and(|v| !visited.contains(&v)));
+        if !unfinished_current_sector {
+            // Only materialize the coefficients of lower-sector integrals
+            // when the current level has closed. Those coefficients otherwise
+            // become large temporary rational functions after every round.
+            frontier.clear();
+            for target in targets {
+                frontier.extend(expander.expand(&Integral(target.clone()))?.keys().cloned());
+            }
         }
         pending = frontier
             .iter()
@@ -363,6 +380,9 @@ impl<'a> Expander<'a> {
         Ok(c)
     }
     fn expand(&mut self, integral: &Integral) -> Result<Terms> {
+        self.expand_filtered(integral, 0)
+    }
+    fn expand_filtered(&mut self, integral: &Integral, minimum_lines: usize) -> Result<Terms> {
         // Accumulate coefficients in dependency order. Expanding every child
         // into its own complete residual map stores a quadratic number of
         // large rational functions on realistic Laporta DAGs. Forward
@@ -390,7 +410,24 @@ impl<'a> Expander<'a> {
                 stack.extend(terms.keys().cloned().map(|child| (child, false)));
             }
         }
-        let mut out = Terms::from([(integral.clone(), self.field.one())]);
+        // Retain exactly the dependency paths reaching requested terminal
+        // sectors. This graph test is valid even for a caller's nontriangular
+        // DAG; it does not assume that every rewrite lowers the sector.
+        let mut retained = BTreeSet::new();
+        for node in &order {
+            let keep = if let Some(terms) = self.reduction.rules.get(node) {
+                terms.keys().any(|child| retained.contains(child))
+            } else {
+                node.0.iter().filter(|&&n| n > 0).count() >= minimum_lines
+            };
+            if keep {
+                retained.insert(node.clone());
+            }
+        }
+        let mut out = Terms::new();
+        if retained.contains(integral) {
+            out.insert(integral.clone(), self.field.one());
+        }
         for node in order.into_iter().rev() {
             self.context.cancellation.check()?;
             let Some(terms) = self.reduction.rules.get(&node) else {
@@ -403,6 +440,9 @@ impl<'a> Expander<'a> {
                 continue;
             }
             for (child, coefficient) in terms {
+                if !retained.contains(child) {
+                    continue;
+                }
                 let coefficient = self.coefficient(coefficient)?;
                 let product = self.field.mul(&value, coefficient.as_ref());
                 match out.entry(child.clone()) {
@@ -473,5 +513,45 @@ mod tests {
             Expander::new(&reduction, &context).unwrap().expand(&i(1)),
             Err(Error::IncompleteReduction(_))
         ));
+    }
+    #[test]
+    fn filtered_substitution_preserves_all_paths_to_selected_sectors() {
+        let target = Integral(vec![1, 1]);
+        let low = Integral(vec![1, 0]);
+        let high = Integral(vec![2, 1]);
+        let child = Integral(vec![1, 2]);
+        let reduction = Reduction {
+            rules: BTreeMap::from([
+                (
+                    target.clone(),
+                    BTreeMap::from([
+                        (child.clone(), parse!("x")),
+                        (low.clone(), parse!("1/(1+x^2)")),
+                    ]),
+                ),
+                (
+                    child,
+                    BTreeMap::from([(high.clone(), parse!("1/x")), (low.clone(), parse!("x"))]),
+                ),
+            ]),
+            residuals: vec![low.clone(), high.clone()],
+            ..Default::default()
+        };
+        let context = RunContext::default();
+        let mut expander = Expander::new(&reduction, &context).unwrap();
+        let full = expander.expand(&target).unwrap();
+        let filtered = expander.expand_filtered(&target, 2).unwrap();
+        assert_eq!(filtered.len(), 1);
+        assert_eq!(coefficient_atom(&filtered[&high]), Atom::num(1));
+        assert_eq!(
+            coefficient_atom(&filtered[&high]),
+            coefficient_atom(&full[&high])
+        );
+        assert!(
+            (coefficient_atom(&full[&low]) - parse!("x^2+1/(1+x^2)"))
+                .together()
+                .cancel()
+                .is_zero()
+        );
     }
 }
