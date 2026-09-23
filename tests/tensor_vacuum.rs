@@ -1,13 +1,14 @@
 use symbolica::prelude::*;
 use symbolica_amflow::*;
 #[test]
-fn isotropic_projection_through_rank_six() {
+fn isotropic_projection_through_rank_eight() {
     let d = parse!("D");
     let mut projector = tensor::TensorProjector::new(d.clone());
     for (rank, numerator, denominator) in [
         (2, 1, parse!("D")),
         (4, 3, parse!("D*(D+2)")),
         (6, 15, parse!("D*(D+2)*(D+4)")),
+        (8, 105, parse!("D*(D+2)*(D+4)*(D+6)")),
     ] {
         let hard = vec![vec![parse!("k2"); rank]; rank];
         let external = vec![vec![parse!("p2"); rank]; rank];
@@ -24,6 +25,54 @@ fn isotropic_projection_through_rank_six() {
         projector
             .project(&[vec![parse!("k2")]], &[vec![parse!("p2")]])
             .unwrap()
+            .is_zero()
+    );
+}
+
+#[test]
+fn repeated_vector_orbits_preserve_mixed_tensor_contractions() {
+    let mut projector = tensor::TensorProjector::new(parse!("D"));
+    for labels in [vec![0, 0, 0, 0, 1, 1, 1, 1], vec![0, 1, 0, 1, 0, 1, 0, 1]] {
+        let hard = labels
+            .iter()
+            .map(|&i| {
+                labels
+                    .iter()
+                    .map(|&j| {
+                        if i != j {
+                            parse!("uv")
+                        } else if i == 0 {
+                            parse!("u2")
+                        } else {
+                            parse!("v2")
+                        }
+                    })
+                    .collect()
+            })
+            .collect::<Vec<Vec<_>>>();
+        let external = vec![vec![parse!("p2"); 8]; 8];
+        let expected = parse!("p2^4*(9*u2^2*v2^2+72*u2*v2*uv^2+24*uv^4)/(D*(D+2)*(D+4)*(D+6))");
+        assert!(
+            (projector.project(&hard, &external).unwrap() - expected)
+                .together()
+                .cancel()
+                .is_zero()
+        );
+    }
+    let hard = vec![
+        vec![parse!("u2"), parse!("u2"), parse!("uv"), parse!("uv")],
+        vec![parse!("u2"), parse!("u2"), parse!("uv"), parse!("uv")],
+        vec![parse!("uv"), parse!("uv"), parse!("v2"), parse!("v2")],
+        vec![parse!("uv"), parse!("uv"), parse!("v2"), parse!("v2")],
+    ];
+    let external = [[1, 1, 2, 3], [1, 1, 4, 5], [2, 4, 1, 6], [3, 5, 6, 1]]
+        .map(|row| row.map(Atom::num).to_vec())
+        .to_vec();
+    let expected = parse!("(6*((D+1)*u2*v2-2*uv^2)+22*(D*uv^2-u2*v2))/(D*(D-1)*(D+2))");
+    assert!(
+        (projector.project(&hard, &external).unwrap() - expected)
+            .together()
+            .cancel()
             .is_zero()
     );
 }

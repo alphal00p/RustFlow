@@ -5,6 +5,7 @@ use std::collections::BTreeMap;
 use symbolica::prelude::*;
 
 type Pairing = Vec<(usize, usize)>;
+type PairingOrbits = Vec<Vec<Pairing>>;
 fn pairings(indices: &[usize]) -> Vec<Pairing> {
     if indices.is_empty() {
         return vec![Vec::new()];
@@ -48,7 +49,7 @@ fn cycles(a: &Pairing, b: &Pairing, rank: usize) -> usize {
 #[derive(Clone, Debug)]
 pub struct TensorProjector {
     dimension: Atom,
-    inverses: BTreeMap<usize, (Vec<Pairing>, Vec<Vec<Atom>>)>,
+    inverses: BTreeMap<Vec<usize>, (PairingOrbits, Vec<Vec<Atom>>)>,
 }
 impl TensorProjector {
     pub fn new(dimension: Atom) -> Self {
@@ -80,32 +81,80 @@ impl TensorProjector {
         if rank > 8 {
             return Err(Error::Limit("vacuum tensor rank exceeds eight".into()));
         }
-        if !self.inverses.contains_key(&rank) {
+        if (0..rank).any(|i| {
+            (0..i).any(|j| {
+                hard_gram[i][j] != hard_gram[j][i] || external_gram[i][j] != external_gram[j][i]
+            })
+        }) {
+            return Err(Error::InvalidInput(
+                "tensor Gram matrices must be symmetric".into(),
+            ));
+        }
+        let mut classes = Vec::with_capacity(rank);
+        let mut class_count = 0;
+        for i in 0..rank {
+            let class = if let Some(previous) =
+                hard_gram[..i].iter().position(|row| row == &hard_gram[i])
+            {
+                classes[previous]
+            } else {
+                class_count += 1;
+                class_count - 1
+            };
+            classes.push(class);
+        }
+        if !self.inverses.contains_key(&classes) {
             let pairings = pairings(&(0..rank).collect::<Vec<_>>());
-            let gram = pairings
+            // Permuting identical hard vectors leaves the contraction vector
+            // invariant. Pairings are in the same orbit exactly when they have
+            // the same numbers of edges between vector classes. The inverse
+            // problem therefore closes on this much smaller invariant space.
+            let mut groups = BTreeMap::<Vec<usize>, Vec<Pairing>>::new();
+            for pairing in pairings {
+                let mut signature = vec![0; class_count * class_count];
+                for &(i, j) in &pairing {
+                    let (a, b) = (classes[i].min(classes[j]), classes[i].max(classes[j]));
+                    signature[a * class_count + b] += 1;
+                }
+                groups.entry(signature).or_default().push(pairing);
+            }
+            let orbits = groups.into_values().collect::<PairingOrbits>();
+            let gram = orbits
                 .iter()
                 .map(|a| {
-                    pairings
+                    orbits
                         .iter()
-                        .map(|b| self.dimension.clone().pow(cycles(a, b, rank) as i64))
+                        .map(|b| {
+                            b.iter().fold(Atom::new(), |sum, pairing| {
+                                sum + self
+                                    .dimension
+                                    .clone()
+                                    .pow(cycles(&a[0], pairing, rank) as i64)
+                            })
+                        })
                         .collect()
                 })
                 .collect::<Vec<Vec<_>>>();
-            self.inverses.insert(rank, (pairings, inverse(&gram)?));
+            self.inverses
+                .insert(classes.clone(), (orbits, inverse(&gram)?));
         }
-        let (pairings, inverse) = &self.inverses[&rank];
+        let (orbits, inverse) = &self.inverses[&classes];
         let contract = |gram: &[Vec<Atom>], pairing: &Pairing| {
             pairing
                 .iter()
                 .fold(Atom::num(1), |a, &(i, j)| a * &gram[i][j])
         };
-        let hard = pairings
+        let hard = orbits
             .iter()
-            .map(|pairing| contract(hard_gram, pairing))
+            .map(|orbit| contract(hard_gram, &orbit[0]))
             .collect::<Vec<_>>();
-        let external = pairings
+        let external = orbits
             .iter()
-            .map(|pairing| contract(external_gram, pairing))
+            .map(|orbit| {
+                orbit.iter().fold(Atom::new(), |sum, pairing| {
+                    sum + contract(external_gram, pairing)
+                })
+            })
             .collect::<Vec<_>>();
         let mut result = Atom::new();
         for (i, row) in inverse.iter().enumerate() {

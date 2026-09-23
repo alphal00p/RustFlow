@@ -300,6 +300,22 @@ impl DifferentialSystem {
                 }
             }
         }
+        let zero = p.zero();
+        let sparse = a
+            .iter()
+            .map(|matrix| {
+                matrix
+                    .iter()
+                    .enumerate()
+                    .flat_map(|(i, row)| {
+                        row.iter()
+                            .enumerate()
+                            .filter_map(|(j, value)| (value != &zero).then_some((i, j, value)))
+                            .collect::<Vec<_>>()
+                    })
+                    .collect::<Vec<_>>()
+            })
+            .collect::<Vec<_>>();
         let mut columns = Vec::new();
         for (lambda, multiplicity) in &eigenvalues {
             let mut nilpotent = residue.clone();
@@ -338,7 +354,7 @@ impl DifferentialSystem {
                         })
                         .collect();
                 }
-                while leading.len() > 1 && leading.last().unwrap().iter().all(|v| *v == p.zero()) {
+                while leading.len() > 1 && leading.last().unwrap().iter().all(|v| v == &zero) {
                     leading.pop();
                 }
                 let mut coefficients = vec![leading];
@@ -364,11 +380,9 @@ impl DifferentialSystem {
                     let mut rhs = vec![vec![p.zero(); n]; logs];
                     for j in 1..=k {
                         for (l, previous) in coefficients[k - j].iter().enumerate() {
-                            for (i, row) in a[j].iter().enumerate() {
-                                for (v, c) in row.iter().zip(previous) {
-                                    if *v != p.zero() && *c != p.zero() {
-                                        rhs[l][i] = p.add(&rhs[l][i], &p.mul(v, c));
-                                    }
+                            for &(i, column, value) in &sparse[j] {
+                                if previous[column] != zero {
+                                    rhs[l][i] = p.add(&rhs[l][i], &p.mul(value, &previous[column]));
                                 }
                             }
                         }

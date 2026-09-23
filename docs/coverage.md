@@ -154,3 +154,11 @@ Fujiwara bound before calling Symbolica's root finder. Newton corrections and
 polynomial reconstruction check the returned root set. Regressions include a
 degree-12 factor from the paper's boundary reduction and roots at very large and
 very small scales; unresolved clusters return a numerical error.
+
+Vacuum tensor projection groups pairings under permutations of repeated hard
+vectors. At rank eight, four copies of each of two hard vectors need a
+three-dimensional invariant system instead of the full 105-dimensional pairing
+matrix. General distinct vectors retain the full projection. Analytic rank-eight
+contractions and mixed-vector contractions test the grouping. Frobenius
+recurrences traverse nonzero series-matrix entries without allocating a fresh
+numerical zero for every comparison.

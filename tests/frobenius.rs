@@ -2,6 +2,46 @@ use symbolica::prelude::*;
 use symbolica_amflow::*;
 
 #[test]
+fn sparse_high_rank_logarithmic_recurrence_matches_matrix_exponential() {
+    let n = 9;
+    let x = symbol!("sparse_log_x");
+    let variable = Atom::var(x);
+    let mut matrix = vec![vec![Atom::new(); n]; n];
+    for (i, row) in matrix.iter_mut().enumerate() {
+        row[i] = Atom::num(2) * &variable;
+        if i + 1 < n {
+            row[i + 1] = Atom::num(1) / &variable;
+        }
+    }
+    let p = Precision::decimal(60).unwrap();
+    let basis = DifferentialSystem {
+        variable: x,
+        matrix,
+    }
+    .frobenius(p, &Default::default(), 32)
+    .unwrap();
+    let point = p.rational(&Rational::from((1, 10)));
+    let actual = basis.evaluate(&point, &Default::default()).unwrap();
+    let exponential = p.exp(&p.mul(&point, &point));
+    let logarithm = p.log(&point);
+    for (i, row) in actual.iter().enumerate() {
+        for (j, value) in row.iter().enumerate() {
+            let expected = if j < i {
+                p.zero()
+            } else {
+                let factorial = (1..=j - i).product::<usize>();
+                p.scale(
+                    &p.mul(&exponential, &p.powi(&logarithm, (j - i) as i64)),
+                    1,
+                    factorial as i64,
+                )
+            };
+            assert!(p.close(value, &expected, 40));
+        }
+    }
+}
+
+#[test]
 fn jordan_and_integer_resonance() {
     let p = Precision::decimal(70).unwrap();
     let params = ahash::HashMap::default();
