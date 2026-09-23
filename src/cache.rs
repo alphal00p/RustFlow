@@ -25,6 +25,16 @@ struct Entry {
     digest: String,
     payload: Vec<u8>,
 }
+fn write_entry(file: &mut std::fs::File, entry: &Entry) -> Result<()> {
+    // JSON serialization emits many small writes, especially for atom byte
+    // arrays. Buffer them before touching the filesystem, then explicitly
+    // flush and sync before the caller atomically renames the entry.
+    let mut writer = std::io::BufWriter::new(file);
+    serde_json::to_writer(&mut writer, entry).map_err(|e| Error::Cache(e.to_string()))?;
+    writer.flush()?;
+    writer.get_ref().sync_all()?;
+    Ok(())
+}
 type StoredRule = (Vec<i16>, Vec<(Vec<i16>, Vec<u8>)>);
 
 #[derive(Serialize, Deserialize)]
@@ -197,9 +207,7 @@ impl<B: ReductionBackend> ReductionBackend for CachedBackend<B> {
                 .write(true)
                 .create_new(true)
                 .open(&temporary)?;
-            serde_json::to_writer(&mut file, &entry).map_err(|e| Error::Cache(e.to_string()))?;
-            file.flush()?;
-            file.sync_all()?;
+            write_entry(&mut file, &entry)?;
             std::fs::rename(&temporary, &destination)?;
             Ok(())
         })();
@@ -398,9 +406,7 @@ pub(crate) fn write_system(
             .create_new(true)
             .write(true)
             .open(&temporary)?;
-        serde_json::to_writer(&mut file, &entry).map_err(|e| Error::Cache(e.to_string()))?;
-        file.flush()?;
-        file.sync_all()?;
+        write_entry(&mut file, &entry)?;
         std::fs::rename(&temporary, directory.join(format!("system-{key}.json")))?;
         Ok(())
     })();
@@ -473,9 +479,7 @@ pub(crate) fn write_native_stage(
             .write(true)
             .create_new(true)
             .open(&temporary)?;
-        serde_json::to_writer(&mut file, &entry).map_err(|e| Error::Cache(e.to_string()))?;
-        file.flush()?;
-        file.sync_all()?;
+        write_entry(&mut file, &entry)?;
         std::fs::rename(
             &temporary,
             directory.join(format!("native-stage-{key}.json")),
