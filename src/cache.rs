@@ -49,6 +49,49 @@ fn atom_bytes(a: &Atom) -> Result<Vec<u8>> {
     Ok(bytes)
 }
 
+#[derive(Default)]
+struct AtomDecoder {
+    states: Vec<(Vec<u8>, symbolica::state::StateMap)>,
+}
+impl AtomDecoder {
+    fn decode(&mut self, bytes: &[u8]) -> Result<Atom> {
+        // Atom::export includes a state header for every coefficient. Large
+        // tables repeat a handful of identical headers millions of times.
+        // Import each complete header once; its symbol map remains valid as
+        // Symbolica appends further symbols to the process-wide state.
+        let index = if let Some(index) = self
+            .states
+            .iter()
+            .rposition(|(prefix, _)| bytes.starts_with(prefix))
+        {
+            index
+        } else {
+            let mut source = bytes;
+            let map = State::import(&mut source, None).map_err(|e| Error::Cache(e.to_string()))?;
+            let prefix = bytes[..bytes.len() - source.len()].to_vec();
+            if self.states.len() == 16 {
+                self.states.remove(0);
+            }
+            self.states.push((prefix, map));
+            self.states.len() - 1
+        };
+        let (prefix, map) = &self.states[index];
+        let mut source = &bytes[prefix.len()..];
+        if source.get(..8) != Some(&1_u64.to_le_bytes()) {
+            // Streaming multi-term exports retain Symbolica's general reader.
+            let mut complete = bytes;
+            return Atom::import(&mut complete, None).map_err(|e| Error::Cache(e.to_string()));
+        }
+        source = &source[8..];
+        let atom =
+            Atom::import_with_map(&mut source, map).map_err(|e| Error::Cache(e.to_string()))?;
+        if !source.is_empty() {
+            return Err(Error::Cache("trailing cached Atom data".into()));
+        }
+        Ok(atom)
+    }
+}
+
 impl StoredReduction {
     fn encode(r: &Reduction) -> Result<Self> {
         Ok(Self {
@@ -74,9 +117,8 @@ impl StoredReduction {
         })
     }
     fn decode(self) -> Result<Reduction> {
-        let decode = |bytes: Vec<u8>| {
-            Atom::import(&mut bytes.as_slice(), None).map_err(|e| Error::Cache(e.to_string()))
-        };
+        let mut decoder = AtomDecoder::default();
+        let mut decode = |bytes: Vec<u8>| decoder.decode(&bytes);
         Ok(Reduction {
             rules: self
                 .rules
@@ -533,6 +575,51 @@ pub(crate) fn write_native_stage(
 #[cfg(test)]
 mod native_tests {
     use super::*;
+
+    #[test]
+    fn repeated_atom_headers_preserve_mixed_symbols_and_reject_trailing_data() {
+        let atoms = [
+            parse!("cache_codec::a+1/3"),
+            parse!("cache_codec::f(cache_codec::b)^2"),
+            Atom::num(7),
+        ];
+        let bytes = atoms
+            .iter()
+            .map(atom_bytes)
+            .collect::<Result<Vec<_>>>()
+            .unwrap();
+        let mut decoder = AtomDecoder::default();
+        for _ in 0..16 {
+            for (expected, bytes) in atoms.iter().zip(&bytes) {
+                assert_eq!(&decoder.decode(bytes).unwrap(), expected);
+            }
+        }
+        assert!(decoder.states.len() <= atoms.len());
+        let mut bad = bytes[0].clone();
+        bad.push(0);
+        assert!(matches!(decoder.decode(&bad), Err(Error::Cache(_))));
+        assert!(matches!(
+            decoder.decode(&bytes[0][..bytes[0].len() - 1]),
+            Err(Error::Cache(_))
+        ));
+        let mut bad_header = bytes[0].clone();
+        bad_header[0] ^= 1;
+        assert!(matches!(decoder.decode(&bad_header), Err(Error::Cache(_))));
+    }
+
+    #[test]
+    fn cached_atom_state_keeps_streaming_sum_compatibility() {
+        let a = parse!("cache_stream::a/7");
+        let b = parse!("cache_stream::b^2");
+        let mut symbols = a.as_view().get_all_symbols(true);
+        symbols.extend(b.as_view().get_all_symbols(true));
+        let mut bytes = Vec::new();
+        State::export_partial(&mut bytes, symbols).unwrap();
+        bytes.extend_from_slice(&2_u64.to_le_bytes());
+        a.as_view().write(&mut bytes).unwrap();
+        b.as_view().write(&mut bytes).unwrap();
+        assert_eq!(AtomDecoder::default().decode(&bytes).unwrap(), a + b);
+    }
     use std::collections::BTreeMap;
 
     #[test]
