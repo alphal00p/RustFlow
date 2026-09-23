@@ -60,8 +60,11 @@ pub struct RustRedBackend {
     /// Eliminate eligible massless two-point subloops with exact tensor rules.
     /// Every rule must decrease the same order used by the native IBP solver.
     pub bubble_subloops: bool,
-    /// Optional restart checkpoints between native RHS-closure rounds.
+    /// Optional restart checkpoints for completed native search work.
     pub checkpoints: Option<std::path::PathBuf>,
+    /// Save completed batches at this interval, and on cancellation or round
+    /// completion. Zero saves after every analytic rule or native batch.
+    pub checkpoint_interval: std::time::Duration,
 }
 impl Default for RustRedBackend {
     fn default() -> Self {
@@ -74,6 +77,7 @@ impl Default for RustRedBackend {
             factorized: true,
             bubble_subloops: true,
             checkpoints: None,
+            checkpoint_interval: std::time::Duration::from_secs(60),
         }
     }
 }

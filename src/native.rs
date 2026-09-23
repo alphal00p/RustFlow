@@ -28,6 +28,48 @@ pub(crate) fn reduce(
 fn native_error(error: impl std::fmt::Display) -> Error {
     Error::Reduction(error.to_string())
 }
+fn save_stage<const N: usize>(
+    options: &RustRedBackend,
+    key: &str,
+    reduction: &mut Reduction,
+    visited: &BTreeSet<[i16; N]>,
+    pending: &BTreeSet<[i16; N]>,
+) -> Result<()> {
+    if let Some(directory) = &options.checkpoints {
+        reduction.residuals.sort();
+        reduction.residuals.dedup();
+        reduction.nonzero_conditions.sort();
+        reduction.nonzero_conditions.dedup();
+        crate::cache::write_native_stage(
+            directory,
+            key,
+            reduction,
+            &visited
+                .iter()
+                .map(|i| Integral(i.to_vec()))
+                .collect::<Vec<_>>(),
+            &pending
+                .iter()
+                .map(|i| Integral(i.to_vec()))
+                .collect::<Vec<_>>(),
+        )?;
+    }
+    Ok(())
+}
+fn save_if_due<const N: usize>(
+    options: &RustRedBackend,
+    key: &str,
+    reduction: &mut Reduction,
+    visited: &BTreeSet<[i16; N]>,
+    pending: &BTreeSet<[i16; N]>,
+    last_saved: &mut std::time::Instant,
+) -> Result<()> {
+    if options.checkpoints.is_some() && last_saved.elapsed() >= options.checkpoint_interval {
+        save_stage(options, key, reduction, visited, pending)?;
+        *last_saved = std::time::Instant::now();
+    }
+    Ok(())
+}
 fn solve<const N: usize>(
     family: &ConvertedFamily,
     original: &IntegralFamily,
@@ -159,297 +201,331 @@ fn solve<const N: usize>(
         result = restored;
     }
     let mut solvers = BTreeMap::new();
-    while !pending.is_empty() {
-        if visited.len() + pending.len() > options.max_targets {
-            return Err(Error::Limit(format!(
-                "Laporta RHS closure exceeds max_targets={}",
-                options.max_targets
-            )));
-        }
-        // Finish higher sectors before introducing their descendants into
-        // lower-sector searches. Otherwise direct rules in a higher sector
-        // can keep generating increasingly complicated lower-sector targets
-        // after those lower sectors have already been expanded.
-        let active_lines = pending
-            .iter()
-            .map(|i| i.iter().filter(|&&n| n > 0).count())
-            .max()
-            .unwrap();
-        let selected = pending
-            .iter()
-            .filter(|i| i.iter().filter(|&&n| n > 0).count() == active_lines)
-            .copied()
-            .collect::<Vec<_>>();
-        let mut sectors = BTreeMap::<[bool; N], Vec<CoordinateCase<N>>>::new();
-        for target in selected {
-            pending.remove(&target);
-            visited.insert(target);
-            let sector = target.map(|n| n > 0);
-            if options.bubble_subloops {
-                if let std::collections::btree_map::Entry::Vacant(entry) = patterns.entry(sector) {
-                    entry.insert(crate::bubble::Bubble::find(
-                        original,
-                        &sector,
-                        dimension.clone(),
-                    )?);
+    let mut last_saved = std::time::Instant::now();
+    let search: Result<()> = (|| {
+        while !pending.is_empty() {
+            if visited.len() + pending.len() > options.max_targets {
+                return Err(Error::Limit(format!(
+                    "Laporta RHS closure exceeds max_targets={}",
+                    options.max_targets
+                )));
+            }
+            // Finish higher sectors before introducing their descendants into
+            // lower-sector searches. Otherwise direct rules in a higher sector
+            // can keep generating increasingly complicated lower-sector targets
+            // after those lower sectors have already been expanded.
+            let active_lines = pending
+                .iter()
+                .map(|i| i.iter().filter(|&&n| n > 0).count())
+                .max()
+                .unwrap();
+            let selected = pending
+                .iter()
+                .filter(|i| i.iter().filter(|&&n| n > 0).count() == active_lines)
+                .copied()
+                .collect::<Vec<_>>();
+            let mut sectors = BTreeMap::<[bool; N], Vec<CoordinateCase<N>>>::new();
+            for target in selected {
+                context.cancellation.check()?;
+                let sector = target.map(|n| n > 0);
+                if zero.contains(&sector) {
+                    result
+                        .rules
+                        .insert(Integral(target.to_vec()), BTreeMap::new());
+                    pending.remove(&target);
+                    visited.insert(target);
+                    save_if_due(
+                        options,
+                        &stage_key,
+                        &mut result,
+                        &visited,
+                        &pending,
+                        &mut last_saved,
+                    )?;
+                    continue;
                 }
-                if let Some(pattern) = &patterns[&sector]
-                    && let Some(terms) = pattern.reduce(&Integral(target.to_vec()))?
-                {
-                    let order = rustred::solver::IntegralOrder::new(sector, [false; N])
+                if options.bubble_subloops {
+                    if let std::collections::btree_map::Entry::Vacant(entry) =
+                        patterns.entry(sector)
+                    {
+                        entry.insert(crate::bubble::Bubble::find(
+                            original,
+                            &sector,
+                            dimension.clone(),
+                        )?);
+                    }
+                    if let Some(pattern) = &patterns[&sector]
+                        && let Some(terms) = pattern.reduce(&Integral(target.to_vec()))?
+                    {
+                        let order = rustred::solver::IntegralOrder::new(sector, [false; N])
+                            .with_permutation(
+                                pattern
+                                    .permutation()
+                                    .try_into()
+                                    .expect("bubble permutation arity"),
+                            )
+                            .map_err(native_error)?;
+                        let lhs =
+                            rustred::solver::Integral::numeric(target).map_err(native_error)?;
+                        let decreasing = terms.keys().all(|i| {
+                            let Ok(powers) = <[i16; N]>::try_from(i.0.as_slice()) else {
+                                return false;
+                            };
+                            let Ok(rhs) = rustred::solver::Integral::numeric(powers) else {
+                                return false;
+                            };
+                            order.compare(&lhs, &rhs) == std::cmp::Ordering::Less
+                        });
+                        if decreasing {
+                            for (i, c) in &terms {
+                                let powers: [i16; N] =
+                                    i.0.as_slice().try_into().expect("bubble target arity");
+                                if !visited.contains(&powers) {
+                                    pending.insert(powers);
+                                }
+                                let rational: RationalPolynomial<IntegerRing, u16> = c
+                                    .try_to_rational_polynomial(&Q, &Z, None)
+                                    .map_err(native_error)?;
+                                if !rational.denominator.is_constant() {
+                                    result
+                                        .nonzero_conditions
+                                        .push(rational.denominator.to_expression());
+                                }
+                            }
+                            result.rules.insert(Integral(target.to_vec()), terms);
+                            pending.remove(&target);
+                            visited.insert(target);
+                            save_if_due(
+                                options,
+                                &stage_key,
+                                &mut result,
+                                &visited,
+                                &pending,
+                                &mut last_saved,
+                            )?;
+                            continue;
+                        }
+                    }
+                }
+                sectors
+                    .entry(sector)
+                    .or_default()
+                    .push(CoordinateCase::new(target.map(Some)).map_err(native_error)?);
+            }
+            for (sector, mut cases) in sectors {
+                if let std::collections::btree_map::Entry::Vacant(entry) = solvers.entry(sector) {
+                    entry.insert(
+                        SectorSolver::new(
+                            &sources,
+                            sector,
+                            SectorConfig {
+                                zero_sectors: zero.clone(),
+                                permutation: patterns.get(&sector).and_then(|p| p.as_ref()).map(
+                                    |p| {
+                                        p.permutation()
+                                            .try_into()
+                                            .expect("bubble permutation arity")
+                                    },
+                                ),
+                                numerical_exact_backend: NumericalExactBackend::SparseFactorized,
+                                ..Default::default()
+                            },
+                        )
+                        .map_err(native_error)?,
+                    );
+                }
+                // Group nearby complexities so a very easy target does not
+                // enlarge the exact elimination needed by every difficult target.
+                let order = rustred::solver::IntegralOrder::new(sector, [false; N]);
+                let order = if let Some(pattern) = patterns.get(&sector).and_then(|p| p.as_ref()) {
+                    order
                         .with_permutation(
                             pattern
                                 .permutation()
                                 .try_into()
                                 .expect("bubble permutation arity"),
                         )
+                        .map_err(native_error)?
+                } else {
+                    order
+                };
+                cases.sort_by(|a, b| order.compare(&a.integral(), &b.integral()).reverse());
+                for cases in cases.chunks(options.max_sector_batch) {
+                    context.emit(Progress::SectorReduction {
+                        active_lines: sector.iter().filter(|&&v| v).count(),
+                        integrals: cases.len(),
+                        visited: visited.len(),
+                    })?;
+                    // A progress callback may request cancellation itself.
+                    context.cancellation.check()?;
+                    let solved = solvers[&sector]
+                        .solve_numeric_cases(
+                            cases.to_vec(),
+                            SearchOptions {
+                                max_depth: Some(options.max_depth),
+                                ..Default::default()
+                            },
+                        )
                         .map_err(native_error)?;
-                    let lhs = rustred::solver::Integral::numeric(target).map_err(native_error)?;
-                    let decreasing = terms.keys().all(|i| {
-                        let Ok(powers) = <[i16; N]>::try_from(i.0.as_slice()) else {
-                            return false;
-                        };
-                        let Ok(rhs) = rustred::solver::Integral::numeric(powers) else {
-                            return false;
-                        };
-                        order.compare(&lhs, &rhs) == std::cmp::Ordering::Less
-                    });
-                    if decreasing {
-                        for (i, c) in &terms {
+                    let completed = Progress::SectorReduced {
+                        integrals: solved.stats.cases,
+                        seeds: solved.stats.seeds,
+                        rows: solved.stats.rows,
+                        exact_trace_rows: solved.stats.exact_trace_rows,
+                        elapsed_ms: solved.stats.elapsed.as_millis(),
+                        exact_ms: solved.stats.exact_materialization.as_millis(),
+                    };
+                    result
+                        .residuals
+                        .extend(solved.residuals.into_iter().map(|c| {
+                            Integral(c.integral().powers().iter().map(|p| p.value()).collect())
+                        }));
+                    for rule in solved.rules {
+                        if rule
+                            .target
+                            .powers()
+                            .iter()
+                            .chain(rule.rhs.iter().flat_map(|t| t.integral.powers()))
+                            .any(|p| p.is_symbolic())
+                        {
+                            return Err(Error::Reduction(
+                                "concrete search returned symbolic indices".into(),
+                            ));
+                        }
+                        let target =
+                            Integral(rule.target.powers().iter().map(|p| p.value()).collect());
+                        let mut combination = LinearCombination::new();
+                        for term in rule.rhs {
                             let powers: [i16; N] =
-                                i.0.as_slice().try_into().expect("bubble target arity");
+                                std::array::from_fn(|i| term.integral.powers()[i].value());
                             if !visited.contains(&powers) {
                                 pending.insert(powers);
                             }
-                            let rational: RationalPolynomial<IntegerRing, u16> = c
-                                .try_to_rational_polynomial(&Q, &Z, None)
-                                .map_err(native_error)?;
-                            if !rational.denominator.is_constant() {
-                                result
-                                    .nonzero_conditions
-                                    .push(rational.denominator.to_expression());
+                            let integral = Integral(powers.to_vec());
+                            let coefficient =
+                                substitute(&term.coefficient.to_expression(), &family.reverse);
+                            // Native coefficients are already reduced rational
+                            // polynomials. Replacing their parameter names is
+                            // bijective and needs no second polynomial gcd.
+                            if let Some(previous) = combination.get_mut(&integral) {
+                                *previous = (&*previous + coefficient).together().cancel();
+                            } else {
+                                combination.insert(integral, coefficient);
+                            }
+                            if !term.coefficient.denominator.is_constant() {
+                                result.nonzero_conditions.push(substitute(
+                                    &term.coefficient.denominator.to_expression(),
+                                    &family.reverse,
+                                ));
                             }
                         }
-                        result.rules.insert(Integral(target.to_vec()), terms);
-                        continue;
+                        combination.retain(|_, c| !c.is_zero());
+                        result.rules.insert(target, combination);
                     }
+                    // Only completed searches enter the visited set. A checkpoint
+                    // taken mid-round must leave every other case pending.
+                    for case in cases {
+                        let powers = std::array::from_fn(|i| case.integral().powers()[i].value());
+                        pending.remove(&powers);
+                        visited.insert(powers);
+                    }
+                    context.emit(completed)?;
+                    save_if_due(
+                        options,
+                        &stage_key,
+                        &mut result,
+                        &visited,
+                        &pending,
+                        &mut last_saved,
+                    )?;
                 }
             }
-            sectors
-                .entry(sector)
-                .or_default()
-                .push(CoordinateCase::new(target.map(Some)).map_err(native_error)?);
-        }
-        for (sector, mut cases) in sectors {
-            if zero.contains(&sector) {
-                for case in cases {
-                    result.rules.insert(
-                        Integral(case.integral().powers().iter().map(|p| p.value()).collect()),
-                        BTreeMap::new(),
+            // Back-substitute into the requested targets before searching the
+            // next frontier. Exact cancellations can remove intermediate RHS
+            // integrals; searching those cancelled terms is unnecessary.
+            context.emit(Progress::Substitution {
+                rules: result.rules.len(),
+            })?;
+            let structural = structural_frontier(&result, targets, context)?;
+            let unsearched = |i: &Integral| {
+                <[i16; N]>::try_from(i.0.as_slice()).is_ok_and(|v| !visited.contains(&v))
+            };
+            let current_count = structural
+                .iter()
+                .filter(|i| line_count(i) == active_lines && unsearched(i))
+                .count();
+            let lower_count = structural
+                .iter()
+                .filter(|i| line_count(i) < active_lines && unsearched(i))
+                .count();
+            let mut frontier;
+            if current_count > options.max_exact_frontier {
+                // Extra searches are safe; unsearched leaves are never returned as
+                // masters. Avoid constructing thousands of coefficients of lower
+                // integrals that will subsequently be eliminated anyway.
+                frontier = structural
+                    .into_iter()
+                    .filter(|i| line_count(i) <= active_lines)
+                    .collect::<BTreeSet<_>>();
+            } else if current_count == 0 && lower_count > options.max_exact_frontier {
+                frontier = structural
+                    .into_iter()
+                    .filter(|i| line_count(i) < active_lines)
+                    .collect();
+            } else {
+                let mut expander = Expander::new(&result, context)?;
+                frontier = BTreeSet::new();
+                for target in targets {
+                    frontier.extend(
+                        expander
+                            .expand_filtered(&Integral(target.clone()), active_lines)?
+                            .keys()
+                            .cloned(),
                     );
                 }
-                continue;
-            }
-            if let std::collections::btree_map::Entry::Vacant(entry) = solvers.entry(sector) {
-                entry.insert(
-                    SectorSolver::new(
-                        &sources,
-                        sector,
-                        SectorConfig {
-                            zero_sectors: zero.clone(),
-                            permutation: patterns.get(&sector).and_then(|p| p.as_ref()).map(|p| {
-                                p.permutation()
-                                    .try_into()
-                                    .expect("bubble permutation arity")
-                            }),
-                            numerical_exact_backend: NumericalExactBackend::SparseFactorized,
-                            ..Default::default()
-                        },
-                    )
-                    .map_err(native_error)?,
-                );
-            }
-            // Group nearby complexities so a very easy target does not
-            // enlarge the exact elimination needed by every difficult target.
-            let order = rustred::solver::IntegralOrder::new(sector, [false; N]);
-            let order = if let Some(pattern) = patterns.get(&sector).and_then(|p| p.as_ref()) {
-                order
-                    .with_permutation(
-                        pattern
-                            .permutation()
-                            .try_into()
-                            .expect("bubble permutation arity"),
-                    )
-                    .map_err(native_error)?
-            } else {
-                order
-            };
-            cases.sort_by(|a, b| order.compare(&a.integral(), &b.integral()).reverse());
-            for cases in cases.chunks(options.max_sector_batch) {
-                context.emit(Progress::SectorReduction {
-                    active_lines: sector.iter().filter(|&&v| v).count(),
-                    integrals: cases.len(),
-                    visited: visited.len(),
-                })?;
-                let solved = solvers[&sector]
-                    .solve_numeric_cases(
-                        cases.to_vec(),
-                        SearchOptions {
-                            max_depth: Some(options.max_depth),
-                            ..Default::default()
-                        },
-                    )
-                    .map_err(native_error)?;
-                context.emit(Progress::SectorReduced {
-                    integrals: solved.stats.cases,
-                    seeds: solved.stats.seeds,
-                    rows: solved.stats.rows,
-                    exact_trace_rows: solved.stats.exact_trace_rows,
-                    elapsed_ms: solved.stats.elapsed.as_millis(),
-                    exact_ms: solved.stats.exact_materialization.as_millis(),
-                })?;
-                result.residuals.extend(
-                    solved.residuals.into_iter().map(|c| {
-                        Integral(c.integral().powers().iter().map(|p| p.value()).collect())
-                    }),
-                );
-                for rule in solved.rules {
-                    if rule
-                        .target
-                        .powers()
-                        .iter()
-                        .chain(rule.rhs.iter().flat_map(|t| t.integral.powers()))
-                        .any(|p| p.is_symbolic())
-                    {
-                        return Err(Error::Reduction(
-                            "concrete search returned symbolic indices".into(),
-                        ));
-                    }
-                    let target = Integral(rule.target.powers().iter().map(|p| p.value()).collect());
-                    let mut combination = LinearCombination::new();
-                    for term in rule.rhs {
-                        let powers: [i16; N] =
-                            std::array::from_fn(|i| term.integral.powers()[i].value());
-                        if !visited.contains(&powers) {
-                            pending.insert(powers);
-                        }
-                        let integral = Integral(powers.to_vec());
-                        let coefficient =
-                            substitute(&term.coefficient.to_expression(), &family.reverse);
-                        // Native coefficients are already reduced rational
-                        // polynomials. Replacing their parameter names is
-                        // bijective and needs no second polynomial gcd.
-                        if let Some(previous) = combination.get_mut(&integral) {
-                            *previous = (&*previous + coefficient).together().cancel();
-                        } else {
-                            combination.insert(integral, coefficient);
-                        }
-                        if !term.coefficient.denominator.is_constant() {
-                            result.nonzero_conditions.push(substitute(
-                                &term.coefficient.denominator.to_expression(),
-                                &family.reverse,
-                            ));
+                let unfinished = frontier
+                    .iter()
+                    .any(|i| line_count(i) == active_lines && unsearched(i));
+                if !unfinished {
+                    if lower_count > options.max_exact_frontier {
+                        frontier = structural
+                            .into_iter()
+                            .filter(|i| line_count(i) < active_lines)
+                            .collect();
+                    } else {
+                        frontier.clear();
+                        for target in targets {
+                            frontier.extend(
+                                expander.expand(&Integral(target.clone()))?.keys().cloned(),
+                            );
                         }
                     }
-                    combination.retain(|_, c| !c.is_zero());
-                    result.rules.insert(target, combination);
                 }
             }
-        }
-        // Back-substitute into the requested targets before searching the
-        // next frontier. Exact cancellations can remove intermediate RHS
-        // integrals; searching those cancelled terms is unnecessary.
-        context.emit(Progress::Substitution {
-            rules: result.rules.len(),
-        })?;
-        let structural = structural_frontier(&result, targets, context)?;
-        let unsearched = |i: &Integral| {
-            <[i16; N]>::try_from(i.0.as_slice()).is_ok_and(|v| !visited.contains(&v))
-        };
-        let current_count = structural
-            .iter()
-            .filter(|i| line_count(i) == active_lines && unsearched(i))
-            .count();
-        let lower_count = structural
-            .iter()
-            .filter(|i| line_count(i) < active_lines && unsearched(i))
-            .count();
-        let mut frontier;
-        if current_count > options.max_exact_frontier {
-            // Extra searches are safe; unsearched leaves are never returned as
-            // masters. Avoid constructing thousands of coefficients of lower
-            // integrals that will subsequently be eliminated anyway.
-            frontier = structural
-                .into_iter()
-                .filter(|i| line_count(i) <= active_lines)
-                .collect::<BTreeSet<_>>();
-        } else if current_count == 0 && lower_count > options.max_exact_frontier {
-            frontier = structural
-                .into_iter()
-                .filter(|i| line_count(i) < active_lines)
-                .collect();
-        } else {
-            let mut expander = Expander::new(&result, context)?;
-            frontier = BTreeSet::new();
-            for target in targets {
-                frontier.extend(
-                    expander
-                        .expand_filtered(&Integral(target.clone()), active_lines)?
-                        .keys()
-                        .cloned(),
-                );
-            }
-            let unfinished = frontier
+            pending = frontier
                 .iter()
-                .any(|i| line_count(i) == active_lines && unsearched(i));
-            if !unfinished {
-                if lower_count > options.max_exact_frontier {
-                    frontier = structural
-                        .into_iter()
-                        .filter(|i| line_count(i) < active_lines)
-                        .collect();
-                } else {
-                    frontier.clear();
-                    for target in targets {
-                        frontier
-                            .extend(expander.expand(&Integral(target.clone()))?.keys().cloned());
-                    }
-                }
-            }
+                .map(|i| {
+                    i.0.as_slice()
+                        .try_into()
+                        .map_err(|_| Error::Reduction("native frontier arity".into()))
+                })
+                .collect::<Result<BTreeSet<[i16; N]>>>()?;
+            pending.retain(|i| !visited.contains(i));
+            context.emit(Progress::ReductionFrontier {
+                searched: visited.len(),
+                remaining: pending.len(),
+            })?;
+            result.residuals = frontier.into_iter().collect();
+            save_stage(options, &stage_key, &mut result, &visited, &pending)?;
+            last_saved = std::time::Instant::now();
         }
-        pending = frontier
-            .iter()
-            .map(|i| {
-                i.0.as_slice()
-                    .try_into()
-                    .map_err(|_| Error::Reduction("native frontier arity".into()))
-            })
-            .collect::<Result<BTreeSet<[i16; N]>>>()?;
-        pending.retain(|i| !visited.contains(i));
-        context.emit(Progress::ReductionFrontier {
-            searched: visited.len(),
-            remaining: pending.len(),
-        })?;
-        result.residuals = frontier.into_iter().collect();
-        if let Some(directory) = &options.checkpoints {
-            result.residuals.sort();
-            result.residuals.dedup();
-            result.nonzero_conditions.sort();
-            result.nonzero_conditions.dedup();
-            crate::cache::write_native_stage(
-                directory,
-                &stage_key,
-                &result,
-                &visited
-                    .iter()
-                    .map(|i| Integral(i.to_vec()))
-                    .collect::<Vec<_>>(),
-                &pending
-                    .iter()
-                    .map(|i| Integral(i.to_vec()))
-                    .collect::<Vec<_>>(),
-            )?;
+        Ok(())
+    })();
+    if let Err(error) = search {
+        if !matches!(&error, Error::Io(_) | Error::Cache(_)) {
+            save_stage(options, &stage_key, &mut result, &visited, &pending)?;
         }
+        return Err(error);
     }
     result.residuals.sort();
     result.residuals.dedup();

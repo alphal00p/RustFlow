@@ -270,6 +270,78 @@ fn native_reduction_restarts_after_increasing_the_target_budget() {
 }
 
 #[test]
+fn interrupted_native_batches_preserve_work_without_accepting_unsearched_targets() {
+    use std::sync::Arc;
+    let family = IntegralFamily {
+        name: "interrupted_batch".into(),
+        loops: vec!["l".into()],
+        external: vec![],
+        external_gram: vec![],
+        propagators: vec![Propagator::quadratic(&[1], &[], Atom::num(1), &[]).unwrap()],
+        physical_propagators: 1,
+        epsilon: symbol!("interrupted_eps"),
+        dimension: 4,
+    };
+    let targets = [Integral(vec![2]), Integral(vec![3]), Integral(vec![4])];
+    let expected = RustRedBackend::default()
+        .reduce(&family, &targets, &RunContext::default())
+        .unwrap();
+    for interval in [0, 600] {
+        let directory = std::env::temp_dir().join(format!(
+            "amflow-interrupted-{}-{interval}",
+            std::process::id()
+        ));
+        let _ = std::fs::remove_dir_all(&directory);
+        let backend = RustRedBackend {
+            max_sector_batch: 1,
+            checkpoints: Some(directory.clone()),
+            checkpoint_interval: std::time::Duration::from_secs(interval),
+            ..Default::default()
+        };
+        let token = CancellationToken::default();
+        let cancel = token.clone();
+        let calls = Arc::new(AtomicUsize::new(0));
+        let counter = calls.clone();
+        let context = RunContext {
+            cancellation: token,
+            progress: Some(Arc::new(move |event| {
+                if matches!(event, Progress::SectorReduction { .. })
+                    && counter.fetch_add(1, Ordering::Relaxed) == 1
+                {
+                    cancel.cancel();
+                }
+            })),
+        };
+        assert!(matches!(
+            backend.reduce(&family, &targets, &context),
+            Err(Error::Cancelled)
+        ));
+        let resumed_calls = Arc::new(AtomicUsize::new(0));
+        let counter = resumed_calls.clone();
+        let resumed_context = RunContext {
+            progress: Some(Arc::new(move |event| {
+                if matches!(event, Progress::SectorReduction { .. }) {
+                    counter.fetch_add(1, Ordering::Relaxed);
+                }
+            })),
+            ..Default::default()
+        };
+        let resumed = backend.reduce(&family, &targets, &resumed_context).unwrap();
+        // I(2) completed before cancellation; I(1), I(3), I(4) still need
+        // searches. Marking all originally selected cases visited would skip
+        // I(3)/I(4) and silently mistake them for candidate masters.
+        assert_eq!(resumed_calls.load(Ordering::Relaxed), 3);
+        for target in &targets {
+            assert_eq!(
+                resumed.expand(target).unwrap(),
+                expected.expand(target).unwrap()
+            );
+        }
+        std::fs::remove_dir_all(directory).unwrap();
+    }
+}
+
+#[test]
 fn mass_placement_modes_follow_intrinsic_masses_and_loop_topology() {
     let (mut family, _) = benchmarks::paper_two_loop().unwrap();
     let selected = |family: &IntegralFamily, mode| {

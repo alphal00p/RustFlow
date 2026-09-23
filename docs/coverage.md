@@ -75,7 +75,7 @@ classes. This guards against an observed endpoint-sector ambiguity at D=1.
 
 Native factorized replay is the default coefficient backend. It preserves source
 and denominator nonzero conditions, performs exact substitution before searching
-the next RHS frontier, and can checkpoint each completed closure round. A larger
+the next RHS frontier, and can checkpoint completed work within a search round. A larger
 `max_targets` budget can resume that checkpoint. Finite-depth search can still
 produce expensive intermediate rules; a checkpoint or a completed reduction
 round does not imply that the differential basis has closed.
@@ -109,3 +109,9 @@ payloads and atomic replacement. Legacy JSON checkpoints remain readable;
 new writes use `.bin` files. An incompatible or corrupt binary checkpoint is
 rejected rather than silently replaced by an older JSON snapshot. Completed
 reduction and differential-system caches retain their JSON containers.
+With native checkpoints enabled, completed batches are saved every 60 seconds
+by default, at round completion, and when cancellation is observed. Configure
+`checkpoint_interval` to change this cadence. Only completed searches enter the
+saved visited set; unprocessed targets and new right-hand-side candidates remain
+pending. Resuming a partial round may search a conservative superset before the
+next exact substitution.
