@@ -86,3 +86,10 @@ cancellation at their boundaries; the current RustRed adapter cannot interrupt
 an in-progress native reduction.
 
 See `docs/coverage.md` for the current completion status and explicit limits.
+# Long acceptance runs
+
+The `two_loop_acceptance` example accepts `--cancel-file PATH`. Creating that
+file requests cooperative cancellation and saves completed native search work.
+Remove the file before resuming the same command. `--native-workers N` controls
+concurrent native batches per epsilon sample; budget resources for the product
+of this value and `--workers N`.

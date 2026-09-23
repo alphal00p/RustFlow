@@ -12,8 +12,17 @@ fn main() -> Result<()> {
         ..Default::default()
     };
     let mut arguments = std::env::args().skip(1);
+    let mut cancel_file: Option<std::path::PathBuf> = None;
     while let Some(argument) = arguments.next() {
         match argument.as_str() {
+            "--cancel-file" => {
+                cancel_file = Some(
+                    arguments
+                        .next()
+                        .ok_or_else(|| Error::InvalidInput("missing cancellation file".into()))?
+                        .into(),
+                )
+            }
             "--max-targets" => native.max_targets = integer_argument(&mut arguments, &argument)?,
             "--native-workers" => {
                 native.native_workers = integer_argument(&mut arguments, &argument)?
@@ -36,7 +45,7 @@ fn main() -> Result<()> {
             "--skip-reduction" => options.skip_reduction = true,
             "--help" => {
                 println!(
-                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--depth N] [--workers N] [--native-workers N] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops]"
+                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--depth N] [--workers N] [--native-workers N] [--cancel-file PATH] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops]"
                 );
                 return Ok(());
             }
@@ -56,6 +65,31 @@ fn main() -> Result<()> {
         })),
         ..Default::default()
     };
+    if cancel_file.as_ref().is_some_and(|p| p.exists()) {
+        context.cancellation.cancel();
+    }
+    let (stop_monitor, stopped) = std::sync::mpsc::channel::<()>();
+    let monitor = cancel_file
+        .map(|path| {
+            let token = context.cancellation.clone();
+            std::thread::Builder::new()
+                .name("amflow-cancel".into())
+                .spawn(move || {
+                    loop {
+                        if path.exists() {
+                            token.cancel();
+                            return;
+                        }
+                        if !matches!(
+                            stopped.recv_timeout(std::time::Duration::from_millis(250)),
+                            Err(std::sync::mpsc::RecvTimeoutError::Timeout)
+                        ) {
+                            return;
+                        }
+                    }
+                })
+        })
+        .transpose()?;
     let result = solve_integrals(
         &family,
         &targets,
@@ -64,7 +98,14 @@ fn main() -> Result<()> {
         &options,
         &backend,
         &context,
-    )?;
+    );
+    drop(stop_monitor);
+    if let Some(monitor) = monitor {
+        monitor
+            .join()
+            .map_err(|_| std::io::Error::other("cancellation monitor panicked"))?;
+    }
+    let result = result?;
     benchmarks::validate_paper_two_loop(&targets, &result)?;
     for (target, value) in targets.iter().zip(result) {
         println!("{:?}: {:?}", target.0, value);
