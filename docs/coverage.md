@@ -113,11 +113,13 @@ new writes use `.bin` files. An incompatible or corrupt binary checkpoint is
 rejected rather than silently replaced by an older JSON snapshot. Completed
 reduction and differential-system caches retain their JSON containers.
 With native checkpoints enabled, completed batches are saved every 60 seconds
-by default, at round completion, and when cancellation is observed. Configure
+by default, at search completion, and when cancellation is observed. Configure
 `checkpoint_interval` to change this cadence. Only completed searches enter the
 saved visited set; unprocessed targets and new right-hand-side candidates remain
 pending. Resuming a partial round may search a conservative superset before the
 next exact substitution.
+Short intermediate rounds share that interval; rewriting a large checkpoint
+after every small frontier change can otherwise dominate the actual search.
 
 Increasing native search depth by one can also resume a shallower checkpoint.
 Exact identities are retained, but every surviving residual is searched again

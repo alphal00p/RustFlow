@@ -71,6 +71,63 @@ fn save_if_due<const N: usize>(
     }
     Ok(())
 }
+fn convert_batch<const N: usize>(
+    solved: rustred::solver::NumericResult<N>,
+    family: &ConvertedFamily,
+) -> Result<(Reduction, Progress)> {
+    let mut result = Reduction::default();
+    let completed = Progress::SectorReduced {
+        integrals: solved.stats.cases,
+        seeds: solved.stats.seeds,
+        rows: solved.stats.rows,
+        exact_trace_rows: solved.stats.exact_trace_rows,
+        elapsed_ms: solved.stats.elapsed.as_millis(),
+        exact_ms: solved.stats.exact_materialization.as_millis(),
+    };
+    result.residuals.extend(
+        solved
+            .residuals
+            .into_iter()
+            .map(|c| Integral(c.integral().powers().iter().map(|p| p.value()).collect())),
+    );
+    for rule in solved.rules {
+        if rule
+            .target
+            .powers()
+            .iter()
+            .chain(rule.rhs.iter().flat_map(|t| t.integral.powers()))
+            .any(|p| p.is_symbolic())
+        {
+            return Err(Error::Reduction(
+                "concrete search returned symbolic indices".into(),
+            ));
+        }
+        let target = Integral(rule.target.powers().iter().map(|p| p.value()).collect());
+        let mut combination = LinearCombination::new();
+        for term in rule.rhs {
+            let powers: [i16; N] = std::array::from_fn(|i| term.integral.powers()[i].value());
+            let integral = Integral(powers.to_vec());
+            let coefficient = substitute(&term.coefficient.to_expression(), &family.reverse);
+            // Native coefficients are already reduced rational
+            // polynomials. Replacing their parameter names is
+            // bijective and needs no second polynomial gcd.
+            if let Some(previous) = combination.get_mut(&integral) {
+                *previous = (&*previous + coefficient).together().cancel();
+            } else {
+                combination.insert(integral, coefficient);
+            }
+            if !term.coefficient.denominator.is_constant() {
+                result.nonzero_conditions.push(substitute(
+                    &term.coefficient.denominator.to_expression(),
+                    &family.reverse,
+                ));
+            }
+        }
+        combination.retain(|_, c| !c.is_zero());
+        result.rules.insert(target, combination);
+    }
+    Ok((result, completed))
+}
 fn solve<const N: usize>(
     family: &ConvertedFamily,
     original: &IntegralFamily,
@@ -410,6 +467,7 @@ fn solve<const N: usize>(
                             },
                         )
                         .map_err(native_error)
+                        .and_then(|solved| convert_batch(solved, family))
                 };
                 let solutions = if let Some(pool) = &pool {
                     pool.install(|| wave.par_iter().map(solve).collect::<Vec<_>>())
@@ -418,61 +476,22 @@ fn solve<const N: usize>(
                 };
                 for ((_, cases), solved) in wave.iter().zip(solutions) {
                     let solved = solved?;
-                    let completed = Progress::SectorReduced {
-                        integrals: solved.stats.cases,
-                        seeds: solved.stats.seeds,
-                        rows: solved.stats.rows,
-                        exact_trace_rows: solved.stats.exact_trace_rows,
-                        elapsed_ms: solved.stats.elapsed.as_millis(),
-                        exact_ms: solved.stats.exact_materialization.as_millis(),
-                    };
-                    result
-                        .residuals
-                        .extend(solved.residuals.into_iter().map(|c| {
-                            Integral(c.integral().powers().iter().map(|p| p.value()).collect())
-                        }));
-                    for rule in solved.rules {
-                        if rule
-                            .target
-                            .powers()
-                            .iter()
-                            .chain(rule.rhs.iter().flat_map(|t| t.integral.powers()))
-                            .any(|p| p.is_symbolic())
-                        {
-                            return Err(Error::Reduction(
-                                "concrete search returned symbolic indices".into(),
-                            ));
-                        }
-                        let target =
-                            Integral(rule.target.powers().iter().map(|p| p.value()).collect());
-                        let mut combination = LinearCombination::new();
-                        for term in rule.rhs {
-                            let powers: [i16; N] =
-                                std::array::from_fn(|i| term.integral.powers()[i].value());
+                    let (batch, completed) = solved;
+                    for terms in batch.rules.values() {
+                        for integral in terms.keys() {
+                            let powers: [i16; N] = integral
+                                .0
+                                .as_slice()
+                                .try_into()
+                                .map_err(|_| Error::Reduction("native batch arity".into()))?;
                             if !visited.contains(&powers) {
                                 pending.insert(powers);
                             }
-                            let integral = Integral(powers.to_vec());
-                            let coefficient =
-                                substitute(&term.coefficient.to_expression(), &family.reverse);
-                            // Native coefficients are already reduced rational
-                            // polynomials. Replacing their parameter names is
-                            // bijective and needs no second polynomial gcd.
-                            if let Some(previous) = combination.get_mut(&integral) {
-                                *previous = (&*previous + coefficient).together().cancel();
-                            } else {
-                                combination.insert(integral, coefficient);
-                            }
-                            if !term.coefficient.denominator.is_constant() {
-                                result.nonzero_conditions.push(substitute(
-                                    &term.coefficient.denominator.to_expression(),
-                                    &family.reverse,
-                                ));
-                            }
                         }
-                        combination.retain(|_, c| !c.is_zero());
-                        result.rules.insert(target, combination);
                     }
+                    result.rules.extend(batch.rules);
+                    result.residuals.extend(batch.residuals);
+                    result.nonzero_conditions.extend(batch.nonzero_conditions);
                     // Only completed searches enter the visited set. A checkpoint
                     // taken mid-round must leave every other case pending.
                     for case in cases {
@@ -567,8 +586,19 @@ fn solve<const N: usize>(
                 remaining: pending.len(),
             })?;
             result.residuals = frontier.into_iter().collect();
-            save_stage(options, &stage_key, &mut result, &visited, &pending)?;
-            last_saved = std::time::Instant::now();
+            if pending.is_empty() {
+                save_stage(options, &stage_key, &mut result, &visited, &pending)?;
+                last_saved = std::time::Instant::now();
+            } else {
+                save_if_due(
+                    options,
+                    &stage_key,
+                    &mut result,
+                    &visited,
+                    &pending,
+                    &mut last_saved,
+                )?;
+            }
         }
         Ok(())
     })();

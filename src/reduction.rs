@@ -65,7 +65,7 @@ pub struct RustRedBackend {
     pub bubble_subloops: bool,
     /// Optional restart checkpoints for completed native search work.
     pub checkpoints: Option<std::path::PathBuf>,
-    /// Save completed batches at this interval, and on cancellation or round
+    /// Save completed batches at this interval, and on cancellation or search
     /// completion. Zero saves after every analytic rule or native batch.
     pub checkpoint_interval: std::time::Duration,
 }
