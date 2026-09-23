@@ -51,9 +51,15 @@ pub struct RustRedBackend {
     /// instead of materializing large temporary coefficients. Zero disables
     /// intermediate coefficient pruning; final reductions are always exact.
     pub max_exact_frontier: usize,
+    /// Maximum number of concrete targets sharing one native exact replay.
+    /// Smaller batches trade shared searches for smaller elimination systems.
+    pub max_sector_batch: usize,
     /// Use RustRed's exact factorized rational-polynomial coefficient field.
     /// This does not enable its experimental reconstruction feature.
     pub factorized: bool,
+    /// Eliminate eligible massless two-point subloops with exact tensor rules.
+    /// Every rule must decrease the same order used by the native IBP solver.
+    pub bubble_subloops: bool,
     /// Optional restart checkpoints between native RHS-closure rounds.
     pub checkpoints: Option<std::path::PathBuf>,
 }
@@ -64,7 +70,9 @@ impl Default for RustRedBackend {
             max_targets: 4096,
             include_lorentz: false,
             max_exact_frontier: 512,
+            max_sector_batch: usize::MAX,
             factorized: true,
+            bubble_subloops: true,
             checkpoints: None,
         }
     }
@@ -73,13 +81,15 @@ impl Default for RustRedBackend {
 impl ReductionBackend for RustRedBackend {
     fn identity(&self) -> String {
         format!(
-            "rustred-exact:{}:{}:{}:{}:{}:{}",
+            "rustred-exact:{}:{}:{}:{}:{}:{}:{}:{}",
             env!("RUSTRED_SOURCE_DIGEST"),
             self.max_depth,
             self.max_targets,
             self.include_lorentz,
             self.factorized,
-            self.max_exact_frontier
+            self.max_exact_frontier,
+            self.bubble_subloops,
+            self.max_sector_batch
         )
     }
     fn reduce_at_epsilon(
@@ -108,6 +118,11 @@ impl RustRedBackend {
         epsilon: Option<&Rational>,
         context: &RunContext,
     ) -> Result<Reduction> {
+        if self.max_sector_batch == 0 {
+            return Err(Error::InvalidInput(
+                "max_sector_batch must be positive".into(),
+            ));
+        }
         context.emit(Progress::Reduction {
             integrals: targets.len(),
         })?;
@@ -117,7 +132,22 @@ impl RustRedBackend {
         let converted = family.convert_at_epsilon(epsilon)?;
         let targets = targets.iter().map(|i| i.0.clone()).collect::<Vec<_>>();
         if self.factorized {
-            return crate::native::reduce(&converted, &targets, self, context);
+            let dimension = Atom::num(family.dimension)
+                - Atom::num(2)
+                    * epsilon.map_or_else(|| Atom::var(family.epsilon), |e| Atom::num(e.clone()));
+            let specialized;
+            let original = if let Some(epsilon) = epsilon {
+                specialized = family.at(&crate::KinematicPoint(BTreeMap::from([(
+                    Atom::var(family.epsilon),
+                    Atom::num(epsilon.clone()),
+                )])));
+                &specialized
+            } else {
+                family
+            };
+            return crate::native::reduce(
+                &converted, original, &dimension, &targets, self, context,
+            );
         }
         let result = rustred::solver::bridge::solve_laporta(
             &converted.family,

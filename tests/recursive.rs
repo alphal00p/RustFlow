@@ -455,6 +455,7 @@ fn native_factorized_replay_agrees_with_sparse_reduction_and_flow() {
     let factorized = RustRedBackend {
         factorized: true,
         max_exact_frontier: 0,
+        max_sector_batch: 1,
         ..Default::default()
     };
     let (deformed, _) = family

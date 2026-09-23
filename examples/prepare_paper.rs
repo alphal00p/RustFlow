@@ -19,6 +19,12 @@ fn main() -> Result<()> {
         backend: RustRedBackend {
             max_depth: depth,
             max_targets,
+            max_sector_batch: std::env::args()
+                .nth(5)
+                .map(|s| s.parse::<usize>())
+                .transpose()
+                .map_err(|e| Error::InvalidInput(e.to_string()))?
+                .unwrap_or(usize::MAX),
             factorized: std::env::args().any(|a| a == "factorized"),
             checkpoints: Some(".amflow-cache".into()),
             ..Default::default()

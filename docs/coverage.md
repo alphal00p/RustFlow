@@ -16,6 +16,7 @@ remain the mandatory completion gate.
 | Auxiliary-mass placement | `MassMode`, `IntegralFamily::deform` | Intrinsic-mass groups, propagators, branches, loops, all lines, explicit positions; ordinary quadratic lines |
 | Region enumeration/expansion | `regions` | Ordinary rank-one quadratic propagators; bounded routing budget |
 | Tensor reduction | `tensor` | Exact vacuum projection, rank at most eight |
+| Massless bubble subloops | `bubble`, native adapter | Tensor rank at most eight, sum of bubble powers at most 32; transfer square must be external or an active denominator |
 | Partial fractions/ISP completion | `integrand` | Affine scalar-product denominators, bounded term budget |
 | Automatic boundary recursion | `recursive` | Depth 32; adaptive boundary order at most 16 in inverse mass; half-power numerator series |
 | Feynman trick | `ft` | Recursive parameter DEs, regular rational reference points, Gaussian tensor terminals; Euclidean sectors only |
@@ -82,3 +83,19 @@ final reductions still undergo exact substitution and a check that every
 surviving residual was searched. Taylor transport checks the differential-equation
 defect at step endpoints and midpoints as well as its final series terms, and
 its truncation tolerance tightens when guard precision increases.
+
+The native adapter also reduces eligible massless two-point subloops by exact
+beta-function identities before requesting IBPs. These rational identities use
+the same integral order as the sector solver, and each proposed rule is checked
+to strictly decrease that order. Unsupported routings, complex coefficients,
+exceptional dimensions, and nondecreasing rules fall back to IBPs. Set
+`bubble_subloops: false` to disable this optimization. Checkpoint keys distinguish
+the changed ordering; legacy partial checkpoints are reused only if no already
+searched sector changes ordering.
+
+`max_sector_batch` bounds the number of targets sharing one native exact
+elimination (unbounded by default). Smaller batches can reduce intermediate
+algebra at the cost of repeated seed searches. They retain the same strict
+integral order and final exact substitution. `SectorReduced` progress events
+report seeds, generated rows, exact-trace size, and total/exact milliseconds.
+The acceptance example accepts `--case-batch N` for profiling this tradeoff.

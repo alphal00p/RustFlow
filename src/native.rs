@@ -3,7 +3,7 @@
 //! search and exact replay remain entirely in RustRed.
 use crate::family::{ConvertedFamily, substitute};
 use crate::reduction::{LinearCombination, Reduction, RustRedBackend};
-use crate::{Error, Integral, Progress, Result, RunContext};
+use crate::{Error, Integral, IntegralFamily, Progress, Result, RunContext};
 use rustred::sector::{
     Mask,
     zero::{Analyzer, Decision},
@@ -16,11 +16,13 @@ use symbolica::prelude::*;
 
 pub(crate) fn reduce(
     family: &ConvertedFamily,
+    original: &IntegralFamily,
+    dimension: &Atom,
     targets: &[Vec<i16>],
     options: &RustRedBackend,
     context: &RunContext,
 ) -> Result<Reduction> {
-    macro_rules! dispatch { ($($n:literal),*)=>{match family.family.denominator_count() { $($n=>solve::<$n>(family,targets,options,context),)* n=>Err(Error::Unsupported(format!("native runtime supports 1..=12 denominators; received {n}"))) }}; }
+    macro_rules! dispatch { ($($n:literal),*)=>{match family.family.denominator_count() { $($n=>solve::<$n>(family,original,dimension,targets,options,context),)* n=>Err(Error::Unsupported(format!("native runtime supports 1..=12 denominators; received {n}"))) }}; }
     dispatch!(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
 }
 fn native_error(error: impl std::fmt::Display) -> Error {
@@ -28,6 +30,8 @@ fn native_error(error: impl std::fmt::Display) -> Error {
 }
 fn solve<const N: usize>(
     family: &ConvertedFamily,
+    original: &IntegralFamily,
+    dimension: &Atom,
     targets: &[Vec<i16>],
     options: &RustRedBackend,
     context: &RunContext,
@@ -79,7 +83,7 @@ fn solve<const N: usize>(
             .map(|c| substitute(&c.polynomial().to_expression(), &family.reverse)),
     );
     let mut visited = BTreeSet::new();
-    let stage_key = blake3::hash(
+    let legacy_key = blake3::hash(
         format!(
             "native-factorized-v3:{}:{:?}:{targets:?}:{}:{}:{}",
             family.family.fingerprint(),
@@ -92,10 +96,53 @@ fn solve<const N: usize>(
     )
     .to_hex()
     .to_string();
-    if let Some(directory) = &options.checkpoints
-        && let Some((restored, done, remaining)) =
-            crate::cache::read_native_stage(directory, &stage_key)?
+    let stage_key = if options.bubble_subloops {
+        blake3::hash(format!("bubble-subloops-v2:{legacy_key}").as_bytes())
+            .to_hex()
+            .to_string()
+    } else {
+        legacy_key.clone()
+    };
+    let mut patterns = BTreeMap::<[bool; N], Option<crate::bubble::Bubble>>::new();
+    let mut restart = if let Some(directory) = &options.checkpoints {
+        crate::cache::read_native_stage(directory, &stage_key)?
+    } else {
+        None
+    };
+    // A legacy partial search can be reused only when none of its searched
+    // sectors changes ordering under bubble elimination. In particular, the
+    // expensive higher-sector searches need not be repeated on migration.
+    if restart.is_none()
+        && options.bubble_subloops
+        && let Some(directory) = &options.checkpoints
+        && let Some(old) = crate::cache::read_native_stage(directory, &legacy_key)?
     {
+        let mut compatible = true;
+        for integral in old.0.rules.keys().chain(&old.1) {
+            let sector: [bool; N] = integral
+                .0
+                .iter()
+                .map(|&n| n > 0)
+                .collect::<Vec<_>>()
+                .try_into()
+                .map_err(|_| Error::Cache("checkpoint index arity".into()))?;
+            if let std::collections::btree_map::Entry::Vacant(entry) = patterns.entry(sector) {
+                entry.insert(crate::bubble::Bubble::find(
+                    original,
+                    &sector,
+                    dimension.clone(),
+                )?);
+            }
+            if patterns[&sector].is_some() {
+                compatible = false;
+                break;
+            }
+        }
+        if compatible {
+            restart = Some(old);
+        }
+    }
+    if let Some((restored, done, remaining)) = restart {
         let array = |i: Integral| {
             i.0.as_slice()
                 .try_into()
@@ -137,17 +184,63 @@ fn solve<const N: usize>(
         for target in selected {
             pending.remove(&target);
             visited.insert(target);
+            let sector = target.map(|n| n > 0);
+            if options.bubble_subloops {
+                if let std::collections::btree_map::Entry::Vacant(entry) = patterns.entry(sector) {
+                    entry.insert(crate::bubble::Bubble::find(
+                        original,
+                        &sector,
+                        dimension.clone(),
+                    )?);
+                }
+                if let Some(pattern) = &patterns[&sector]
+                    && let Some(terms) = pattern.reduce(&Integral(target.to_vec()))?
+                {
+                    let order = rustred::solver::IntegralOrder::new(sector, [false; N])
+                        .with_permutation(
+                            pattern
+                                .permutation()
+                                .try_into()
+                                .expect("bubble permutation arity"),
+                        )
+                        .map_err(native_error)?;
+                    let lhs = rustred::solver::Integral::numeric(target).map_err(native_error)?;
+                    let decreasing = terms.keys().all(|i| {
+                        let Ok(powers) = <[i16; N]>::try_from(i.0.as_slice()) else {
+                            return false;
+                        };
+                        let Ok(rhs) = rustred::solver::Integral::numeric(powers) else {
+                            return false;
+                        };
+                        order.compare(&lhs, &rhs) == std::cmp::Ordering::Less
+                    });
+                    if decreasing {
+                        for (i, c) in &terms {
+                            let powers: [i16; N] =
+                                i.0.as_slice().try_into().expect("bubble target arity");
+                            if !visited.contains(&powers) {
+                                pending.insert(powers);
+                            }
+                            let rational: RationalPolynomial<IntegerRing, u16> = c
+                                .try_to_rational_polynomial(&Q, &Z, None)
+                                .map_err(native_error)?;
+                            if !rational.denominator.is_constant() {
+                                result
+                                    .nonzero_conditions
+                                    .push(rational.denominator.to_expression());
+                            }
+                        }
+                        result.rules.insert(Integral(target.to_vec()), terms);
+                        continue;
+                    }
+                }
+            }
             sectors
-                .entry(target.map(|n| n > 0))
+                .entry(sector)
                 .or_default()
                 .push(CoordinateCase::new(target.map(Some)).map_err(native_error)?);
         }
-        for (sector, cases) in sectors {
-            context.emit(Progress::SectorReduction {
-                active_lines: sector.iter().filter(|&&v| v).count(),
-                integrals: cases.len(),
-                visited: visited.len(),
-            })?;
+        for (sector, mut cases) in sectors {
             if zero.contains(&sector) {
                 for case in cases {
                     result.rules.insert(
@@ -164,6 +257,11 @@ fn solve<const N: usize>(
                         sector,
                         SectorConfig {
                             zero_sectors: zero.clone(),
+                            permutation: patterns.get(&sector).and_then(|p| p.as_ref()).map(|p| {
+                                p.permutation()
+                                    .try_into()
+                                    .expect("bubble permutation arity")
+                            }),
                             numerical_exact_backend: NumericalExactBackend::SparseFactorized,
                             ..Default::default()
                         },
@@ -171,56 +269,85 @@ fn solve<const N: usize>(
                     .map_err(native_error)?,
                 );
             }
-            let solved = solvers[&sector]
-                .solve_numeric_cases(
-                    cases,
-                    SearchOptions {
-                        max_depth: Some(options.max_depth),
-                        ..Default::default()
-                    },
-                )
-                .map_err(native_error)?;
-            context.cancellation.check()?;
-            result.residuals.extend(
-                solved
-                    .residuals
-                    .into_iter()
-                    .map(|c| Integral(c.integral().powers().iter().map(|p| p.value()).collect())),
-            );
-            for rule in solved.rules {
-                if rule
-                    .target
-                    .powers()
-                    .iter()
-                    .chain(rule.rhs.iter().flat_map(|t| t.integral.powers()))
-                    .any(|p| p.is_symbolic())
-                {
-                    return Err(Error::Reduction(
-                        "concrete search returned symbolic indices".into(),
-                    ));
-                }
-                let target = Integral(rule.target.powers().iter().map(|p| p.value()).collect());
-                let mut combination = LinearCombination::new();
-                for term in rule.rhs {
-                    let powers: [i16; N] =
-                        std::array::from_fn(|i| term.integral.powers()[i].value());
-                    if !visited.contains(&powers) {
-                        pending.insert(powers);
-                    }
-                    let integral = Integral(powers.to_vec());
-                    let coefficient =
-                        substitute(&term.coefficient.to_expression(), &family.reverse);
-                    let previous = combination.remove(&integral).unwrap_or_default();
-                    combination.insert(integral, (previous + coefficient).together().cancel());
-                    if !term.coefficient.denominator.is_constant() {
-                        result.nonzero_conditions.push(substitute(
-                            &term.coefficient.denominator.to_expression(),
-                            &family.reverse,
+            // Group nearby complexities so a very easy target does not
+            // enlarge the exact elimination needed by every difficult target.
+            let order = rustred::solver::IntegralOrder::new(sector, [false; N]);
+            let order = if let Some(pattern) = patterns.get(&sector).and_then(|p| p.as_ref()) {
+                order
+                    .with_permutation(
+                        pattern
+                            .permutation()
+                            .try_into()
+                            .expect("bubble permutation arity"),
+                    )
+                    .map_err(native_error)?
+            } else {
+                order
+            };
+            cases.sort_by(|a, b| order.compare(&a.integral(), &b.integral()).reverse());
+            for cases in cases.chunks(options.max_sector_batch) {
+                context.emit(Progress::SectorReduction {
+                    active_lines: sector.iter().filter(|&&v| v).count(),
+                    integrals: cases.len(),
+                    visited: visited.len(),
+                })?;
+                let solved = solvers[&sector]
+                    .solve_numeric_cases(
+                        cases.to_vec(),
+                        SearchOptions {
+                            max_depth: Some(options.max_depth),
+                            ..Default::default()
+                        },
+                    )
+                    .map_err(native_error)?;
+                context.emit(Progress::SectorReduced {
+                    integrals: solved.stats.cases,
+                    seeds: solved.stats.seeds,
+                    rows: solved.stats.rows,
+                    exact_trace_rows: solved.stats.exact_trace_rows,
+                    elapsed_ms: solved.stats.elapsed.as_millis(),
+                    exact_ms: solved.stats.exact_materialization.as_millis(),
+                })?;
+                result.residuals.extend(
+                    solved.residuals.into_iter().map(|c| {
+                        Integral(c.integral().powers().iter().map(|p| p.value()).collect())
+                    }),
+                );
+                for rule in solved.rules {
+                    if rule
+                        .target
+                        .powers()
+                        .iter()
+                        .chain(rule.rhs.iter().flat_map(|t| t.integral.powers()))
+                        .any(|p| p.is_symbolic())
+                    {
+                        return Err(Error::Reduction(
+                            "concrete search returned symbolic indices".into(),
                         ));
                     }
+                    let target = Integral(rule.target.powers().iter().map(|p| p.value()).collect());
+                    let mut combination = LinearCombination::new();
+                    for term in rule.rhs {
+                        let powers: [i16; N] =
+                            std::array::from_fn(|i| term.integral.powers()[i].value());
+                        if !visited.contains(&powers) {
+                            pending.insert(powers);
+                        }
+                        let integral = Integral(powers.to_vec());
+                        let coefficient =
+                            substitute(&term.coefficient.to_expression(), &family.reverse);
+                        let previous = combination.remove(&integral).unwrap_or_default();
+                        combination.insert(integral, (previous + coefficient).together().cancel());
+                        if !term.coefficient.denominator.is_constant() {
+                            result.nonzero_conditions.push(substitute(
+                                &term.coefficient.denominator.to_expression(),
+                                &family.reverse,
+                            ));
+                        }
+                    }
+                    combination.retain(|_, c| !c.is_zero());
+                    result.rules.insert(target, combination);
                 }
-                combination.retain(|_, c| !c.is_zero());
-                result.rules.insert(target, combination);
             }
         }
         // Back-substitute into the requested targets before searching the

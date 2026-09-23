@@ -4,6 +4,7 @@ pub use symbolica;
 mod algebra;
 pub mod benchmarks;
 pub mod boundary;
+mod bubble;
 pub mod cache;
 pub mod engine;
 pub mod epsilon;

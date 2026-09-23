@@ -183,6 +183,36 @@ fn automatic_mass_placement_uses_intrinsic_mass() {
 }
 
 #[test]
+fn sampled_subloop_reduction_specializes_kinematics_consistently() {
+    let eps = symbol!("bubble_sample_eps");
+    let gram = vec![vec![Atom::num(-1) + Atom::var(eps)]];
+    let family = IntegralFamily {
+        name: "sampled_bubble".into(),
+        loops: vec!["l".into()],
+        external: vec!["p".into()],
+        propagators: vec![
+            Propagator::quadratic(&[1], &[0], Atom::new(), &gram).unwrap(),
+            Propagator::quadratic(&[1], &[1], Atom::new(), &gram).unwrap(),
+        ],
+        external_gram: gram,
+        physical_propagators: 2,
+        epsilon: eps,
+        dimension: 4,
+    };
+    let target = Integral(vec![2, 1]);
+    let result = RustRedBackend::default()
+        .reduce_at_epsilon(
+            &family,
+            std::slice::from_ref(&target),
+            &Rational::from((1, 100)),
+            &RunContext::default(),
+        )
+        .unwrap();
+    let terms = result.expand(&target).unwrap();
+    assert_eq!(terms[&Integral(vec![1, 1])], Atom::num((98, 99)));
+}
+
+#[test]
 fn native_reduction_restarts_after_increasing_the_target_budget() {
     let directory = std::env::temp_dir().join(format!(
         "symbolica-amflow-native-stage-{}",
@@ -201,6 +231,7 @@ fn native_reduction_restarts_after_increasing_the_target_budget() {
     };
     let backend = RustRedBackend {
         factorized: true,
+        bubble_subloops: false,
         max_targets: 1,
         checkpoints: Some(directory.clone()),
         ..Default::default()
@@ -222,6 +253,7 @@ fn native_reduction_restarts_after_increasing_the_target_budget() {
     };
     let resumed = RustRedBackend {
         max_targets: 16,
+        bubble_subloops: true,
         ..backend
     }
     .reduce(&family, &target, &context)

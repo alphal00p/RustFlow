@@ -125,6 +125,14 @@ pub enum Progress {
         integrals: usize,
         visited: usize,
     },
+    SectorReduced {
+        integrals: usize,
+        seeds: usize,
+        rows: usize,
+        exact_trace_rows: usize,
+        elapsed_ms: u128,
+        exact_ms: u128,
+    },
     Prepared {
         basis_size: usize,
         blocks: Vec<usize>,

@@ -15,6 +15,9 @@ fn main() -> Result<()> {
     while let Some(argument) = arguments.next() {
         match argument.as_str() {
             "--max-targets" => native.max_targets = integer_argument(&mut arguments, &argument)?,
+            "--case-batch" => {
+                native.max_sector_batch = integer_argument(&mut arguments, &argument)?
+            }
             "--max-exact-frontier" => {
                 native.max_exact_frontier = integer_argument(&mut arguments, &argument)?
             }
@@ -25,11 +28,12 @@ fn main() -> Result<()> {
             "--workers" => options.workers = integer_argument(&mut arguments, &argument)?,
             "--factorized" => native.factorized = true,
             "--plain" => native.factorized = false,
+            "--no-bubble-subloops" => native.bubble_subloops = false,
             "--symbolic-epsilon" => options.sampled_reduction = false,
             "--skip-reduction" => options.skip_reduction = true,
             "--help" => {
                 println!(
-                    "two_loop_acceptance [--max-targets N] [--max-exact-frontier N] [--depth N] [--workers N] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain]"
+                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--depth N] [--workers N] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops]"
                 );
                 return Ok(());
             }
