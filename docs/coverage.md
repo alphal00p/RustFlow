@@ -134,3 +134,10 @@ search, and checkpoints retain only merged work. In-flight work is bounded by
 one wave of batches. Account for both this setting and `FlowOptions::workers`
 when budgeting total CPU and memory; the acceptance example exposes it as
 `--native-workers N`.
+
+Large reduction tables reuse Symbolica state headers during serialization and
+reuse imported state maps during loading; entries remain readable in the
+existing format. Conservative frontier traversal borrows graph keys instead
+of allocating a key for every edge. Final exact substitution groups incoming
+rational coefficients in balanced sums to reduce intermediate polynomial
+growth; this changes evaluation order, not the reduction identities.

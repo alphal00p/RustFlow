@@ -656,26 +656,28 @@ fn structural_frontier(
     targets: &[Vec<i16>],
     context: &RunContext,
 ) -> Result<BTreeSet<Integral>> {
-    let mut seen = BTreeSet::new();
+    let mut seen = ahash::HashSet::default();
     let mut leaves = BTreeSet::new();
-    let mut stack = targets.iter().cloned().map(Integral).collect::<Vec<_>>();
+    let roots = targets.iter().cloned().map(Integral).collect::<Vec<_>>();
+    let mut stack = roots.iter().collect::<Vec<_>>();
     while let Some(node) = stack.pop() {
         context.cancellation.check()?;
-        if !seen.insert(node.clone()) {
+        if !seen.insert(node) {
             continue;
         }
-        if let Some(terms) = reduction.rules.get(&node) {
+        if let Some(terms) = reduction.rules.get(node) {
+            let parent_lines = line_count(node);
             for child in terms.keys() {
-                if line_count(child) > line_count(&node) {
+                if line_count(child) > parent_lines {
                     return Err(Error::Reduction(
                         "native rewrite increases its sector; descending-sector search is invalid"
                             .into(),
                     ));
                 }
-                stack.push(child.clone());
+                stack.push(child);
             }
         } else {
-            leaves.insert(node);
+            leaves.insert(node.clone());
         }
     }
     Ok(leaves)
@@ -688,6 +690,41 @@ use symbolica::domains::factorized_rational_polynomial::{
 use symbolica::poly::PolyVariable;
 type Coefficient = FactorizedRationalPolynomial<IntegerRing, u16>;
 type Terms = BTreeMap<Integral, Coefficient>;
+#[derive(Default)]
+struct CoefficientSum {
+    bins: Vec<Option<Coefficient>>,
+}
+impl CoefficientSum {
+    fn push(
+        &mut self,
+        mut value: Coefficient,
+        field: &FactorizedRationalPolynomialField<IntegerRing, u16>,
+    ) {
+        // A binary carry tree adds comparable numbers of contributions. This
+        // avoids repeatedly expanding a large running denominator for each
+        // small contribution, and keeps only logarithmically many partial sums.
+        for bin in &mut self.bins {
+            if value.is_zero() {
+                return;
+            }
+            if let Some(previous) = bin.take() {
+                value = field.add(&previous, &value);
+            } else {
+                *bin = Some(value);
+                return;
+            }
+        }
+        if !value.is_zero() {
+            self.bins.push(Some(value));
+        }
+    }
+    fn finish(self, field: &FactorizedRationalPolynomialField<IntegerRing, u16>) -> Coefficient {
+        self.bins
+            .into_iter()
+            .flatten()
+            .fold(field.zero(), |sum, term| field.add(&sum, &term))
+    }
+}
 struct Expander<'a> {
     reduction: &'a Reduction,
     context: &'a RunContext,
@@ -779,9 +816,11 @@ impl<'a> Expander<'a> {
                 retained.insert(node.clone());
             }
         }
-        let mut out = Terms::new();
+        let mut out = BTreeMap::<Integral, CoefficientSum>::new();
         if retained.contains(integral) {
-            out.insert(integral.clone(), self.field.one());
+            out.entry(integral.clone())
+                .or_default()
+                .push(self.field.one(), &self.field);
         }
         for node in order.into_iter().rev() {
             self.context.cancellation.check()?;
@@ -791,6 +830,7 @@ impl<'a> Expander<'a> {
             let Some(value) = out.remove(&node) else {
                 continue;
             };
+            let value = value.finish(&self.field);
             if value.is_zero() {
                 continue;
             }
@@ -800,22 +840,20 @@ impl<'a> Expander<'a> {
                 }
                 let coefficient = self.coefficient(coefficient)?;
                 let product = self.field.mul(&value, coefficient.as_ref());
-                match out.entry(child.clone()) {
-                    std::collections::btree_map::Entry::Vacant(entry) => {
-                        if !product.is_zero() {
-                            entry.insert(product);
-                        }
-                    }
-                    std::collections::btree_map::Entry::Occupied(mut entry) => {
-                        self.field.add_assign(entry.get_mut(), &product);
-                        if entry.get().is_zero() {
-                            entry.remove();
-                        }
-                    }
+                if !product.is_zero() {
+                    out.entry(child.clone())
+                        .or_default()
+                        .push(product, &self.field);
                 }
             }
         }
-        Ok(out)
+        Ok(out
+            .into_iter()
+            .filter_map(|(integral, terms)| {
+                let coefficient = terms.finish(&self.field);
+                (!coefficient.is_zero()).then_some((integral, coefficient))
+            })
+            .collect())
     }
 }
 fn coefficient_atom(c: &Coefficient) -> Atom {
@@ -830,6 +868,39 @@ fn coefficient_atom(c: &Coefficient) -> Atom {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn many_rational_dependency_paths_cancel_exactly() {
+        let root = Integral(vec![1]);
+        let terminal = Integral(vec![1000]);
+        let mut reduction = Reduction::default();
+        let mut row = BTreeMap::from([(terminal.clone(), Atom::num((7, 3)))]);
+        for k in 1..=32 {
+            let denominator = parse!("native_sum::x") + Atom::num(k);
+            for (offset, sign) in [(1, 1), (33, -1)] {
+                let intermediate = Integral(vec![(offset + k) as i16]);
+                row.insert(intermediate.clone(), Atom::num(sign) / &denominator);
+                reduction.rules.insert(
+                    intermediate,
+                    BTreeMap::from([(terminal.clone(), Atom::num(1))]),
+                );
+            }
+        }
+        reduction.rules.insert(root.clone(), row);
+        reduction.residuals.push(terminal.clone());
+        let context = RunContext::default();
+        let result = Expander::new(&reduction, &context)
+            .unwrap()
+            .expand(&root)
+            .unwrap();
+        assert_eq!(result.len(), 1);
+        assert!(
+            (coefficient_atom(&result[&terminal]) - Atom::num((7, 3)))
+                .together()
+                .cancel()
+                .is_zero()
+        );
+    }
 
     #[test]
     fn forward_substitution_cancels_shared_dependencies_and_rejects_cycles() {

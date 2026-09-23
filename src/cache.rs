@@ -94,6 +94,26 @@ impl AtomDecoder {
 
 impl StoredReduction {
     fn encode(r: &Reduction) -> Result<Self> {
+        // All atoms already exist, so a single state snapshot covers every
+        // symbol and coefficient-variable list they can reference. Retain the
+        // ordinary self-contained Atom format for backward compatibility.
+        let mut symbols = ahash::HashSet::default();
+        for atom in r
+            .rules
+            .values()
+            .flat_map(|terms| terms.values())
+            .chain(&r.nonzero_conditions)
+        {
+            symbols.extend(atom.as_view().get_all_symbols(true));
+        }
+        let mut state = Vec::new();
+        State::export_partial(&mut state, symbols)?;
+        let encode = |atom: &Atom| -> Result<Vec<u8>> {
+            let mut bytes = state.clone();
+            bytes.extend_from_slice(&1_u64.to_le_bytes());
+            atom.as_view().write(&mut bytes)?;
+            Ok(bytes)
+        };
         Ok(Self {
             rules: r
                 .rules
@@ -103,7 +123,7 @@ impl StoredReduction {
                         i.0.clone(),
                         terms
                             .iter()
-                            .map(|(j, c)| Ok((j.0.clone(), atom_bytes(c)?)))
+                            .map(|(j, c)| Ok((j.0.clone(), encode(c)?)))
                             .collect::<Result<_>>()?,
                     ))
                 })
@@ -112,7 +132,7 @@ impl StoredReduction {
             conditions: r
                 .nonzero_conditions
                 .iter()
-                .map(atom_bytes)
+                .map(encode)
                 .collect::<Result<_>>()?,
         })
     }
@@ -575,6 +595,38 @@ pub(crate) fn write_native_stage(
 #[cfg(test)]
 mod native_tests {
     use super::*;
+
+    #[test]
+    fn shared_table_state_remains_compatible_with_symbolicas_atom_reader() {
+        let coefficients = [
+            parse!("table_state::x/(1+table_state::y)"),
+            Atom::num((7, 3)),
+        ];
+        let reduction = Reduction {
+            rules: std::collections::BTreeMap::from([(
+                Integral(vec![1]),
+                coefficients
+                    .iter()
+                    .enumerate()
+                    .map(|(i, c)| (Integral(vec![i as i16 + 2]), c.clone()))
+                    .collect(),
+            )]),
+            nonzero_conditions: vec![parse!("table_state::y")],
+            ..Default::default()
+        };
+        let stored = StoredReduction::encode(&reduction).unwrap();
+        for ((_, bytes), expected) in stored.rules[0].1.iter().zip(&coefficients) {
+            assert_eq!(
+                &Atom::import(&mut bytes.as_slice(), None).unwrap(),
+                expected
+            );
+        }
+        assert_eq!(
+            Atom::import(&mut stored.conditions[0].as_slice(), None).unwrap(),
+            reduction.nonzero_conditions[0]
+        );
+        assert_eq!(stored.decode().unwrap().rules, reduction.rules);
+    }
 
     #[test]
     fn repeated_atom_headers_preserve_mixed_symbols_and_reject_trailing_data() {
