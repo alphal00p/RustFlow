@@ -42,6 +42,124 @@ fn exact_tadpole_reduction_and_derivative() {
 }
 
 #[test]
+fn sampled_preparation_keeps_dimension_symbolic_for_basis_refinement() {
+    let mut family = tadpole();
+    let eps = Atom::var(family.epsilon);
+    // This exact epsilon-dependent mass exposes a genuinely mixed denominator
+    // in the raised tadpole's reduction, making an omitted swap observable.
+    family.propagators[0].constant = -eps.clone();
+    let target = Integral(vec![2]);
+    let options = FlowOptions {
+        refine_basis: true,
+        ..Default::default()
+    };
+    let backend = RustRedBackend::default();
+    let context = RunContext::default();
+    let flow = PreparedFlow::new_at_epsilon(
+        &family,
+        std::slice::from_ref(&target),
+        &KinematicPoint::default(),
+        &backend,
+        &options,
+        &context,
+        &Rational::from((1, 100)),
+    )
+    .unwrap();
+    assert_eq!(flow.basis_refinement.as_ref().unwrap().basis_changes, 1);
+    assert!(flow.basis_refinement.as_ref().unwrap().factorized);
+    assert_eq!(flow.reduced.basis, vec![target.clone()]);
+    assert_eq!(flow.reduced.targets[0][&target], Atom::num(1));
+    let mass = Atom::var(flow.system.variable) + &eps;
+    assert!(
+        (&flow.system.matrix[0][0] + &eps / &mass)
+            .together()
+            .cancel()
+            .is_zero()
+    );
+    assert!(
+        (&flow.reduced.transformations[0].matrix[0][0] - &mass / (Atom::num(1) - &eps))
+            .together()
+            .cancel()
+            .is_zero()
+    );
+    let boundary = recursive::RecursiveBoundary::new(&backend, &options, &context);
+    let p = Precision::decimal(60).unwrap();
+    for epsilon in [Rational::from((1, 100)), Rational::from((1, 200))] {
+        let value = flow
+            .evaluate(&epsilon, &options, &boundary, &context)
+            .unwrap();
+        let e = p.rational(&epsilon);
+        let expected = p.mul(&p.gamma_real(&e.re).unwrap(), &p.pow(&e, &p.neg(&e)));
+        assert!(p.close(&value[0], &expected, 20));
+    }
+}
+
+#[test]
+fn automatic_refinement_takes_precedence_over_sampled_reduction() {
+    struct SymbolicOnly;
+    impl ReductionBackend for SymbolicOnly {
+        fn identity(&self) -> String {
+            "refinement-symbolic-only".into()
+        }
+        fn reduce(
+            &self,
+            family: &IntegralFamily,
+            targets: &[Integral],
+            context: &RunContext,
+        ) -> Result<reduction::Reduction> {
+            RustRedBackend::default().reduce(family, targets, context)
+        }
+        fn reduce_at_epsilon(
+            &self,
+            _: &IntegralFamily,
+            _: &[Integral],
+            _: &Rational,
+            _: &RunContext,
+        ) -> Result<reduction::Reduction> {
+            Err(Error::Reduction(
+                "dimension was specialized before refinement".into(),
+            ))
+        }
+    }
+    let family = IntegralFamily {
+        name: "refined_product".into(),
+        loops: vec!["l1".into(), "l2".into()],
+        external: vec![],
+        external_gram: vec![],
+        propagators: vec![
+            Propagator::quadratic(&[1, 0], &[], Atom::num(1), &[]).unwrap(),
+            Propagator::quadratic(&[0, 1], &[], Atom::num(2), &[]).unwrap(),
+            Propagator {
+                constant: Atom::new(),
+                scalar_products: vec![Atom::new(), Atom::num(1), Atom::new()],
+            },
+        ],
+        physical_propagators: 2,
+        epsilon: symbol!("refined_product_eps"),
+        dimension: 4,
+    };
+    let options = FlowOptions {
+        refine_basis: true,
+        digits: 10,
+        series_order: 48,
+        ..Default::default()
+    };
+    let values = solve_integrals(
+        &family,
+        &[Integral(vec![1, 1, 0])],
+        &KinematicPoint::default(),
+        0,
+        &options,
+        &SymbolicOnly,
+        &RunContext::default(),
+    )
+    .unwrap();
+    assert_eq!(values[0].verified_digits, Some(10));
+    let p = Precision::decimal(50).unwrap();
+    assert!(p.close(&values[0].coefficients[&-2], &p.i(2), 10));
+}
+
+#[test]
 fn taylor_transport_exponential_and_branch() {
     let p = Precision::decimal(70).unwrap();
     let system = DifferentialSystem {

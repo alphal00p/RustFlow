@@ -14,6 +14,8 @@ Keep RustRed at `../rustred`, including `crates/rustred-core`. Its experimental
 reconstruction feature is disabled. The high-level multiloop solver defaults to
 exact rational epsilon specialization before IBP elimination;
 `sampled_reduction: false` selects fully symbolic epsilon reduction. This project does not modify RustRed.
+Basis refinement also retains symbolic epsilon, taking precedence over sampled
+reduction so that dimension-dependent denominator factors can be identified.
 
 ```sh
 nix develop

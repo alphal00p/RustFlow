@@ -108,6 +108,8 @@ impl PreparedFlow {
             epsilon_sample: None,
         })
     }
+    /// Prepare at an exact regulator sample. Dimension-factorizing refinement
+    /// retains symbolic epsilon instead, producing a reusable symbolic flow.
     pub fn new_at_epsilon(
         family: &IntegralFamily,
         targets: &[Integral],
@@ -117,6 +119,9 @@ impl PreparedFlow {
         context: &RunContext,
         epsilon: &Rational,
     ) -> Result<Self> {
+        if options.refine_basis {
+            return Self::new(family, targets, point, backend, options, context);
+        }
         let sampled = crate::reduction::SampledBackend {
             backend,
             epsilon: epsilon.clone(),
@@ -493,7 +498,7 @@ pub fn solve_integrals(
             },
         );
     }
-    if options.sampled_reduction && family.loops.len() > 1 {
+    if options.sampled_reduction && !options.refine_basis && family.loops.len() > 1 {
         let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
         return fit_samples_refined(
             targets.len(),

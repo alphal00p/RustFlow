@@ -44,6 +44,8 @@ pub struct FlowOptions {
     pub recursion: RecursionMode,
     pub mass_mode: MassMode,
     pub prescription: Prescription,
+    /// Factor dimension dependence before numerical specialization. This takes
+    /// precedence over sampled_reduction and retains symbolic epsilon in IBPs.
     pub refine_basis: bool,
     pub skip_reduction: bool,
     pub sampled_reduction: bool,

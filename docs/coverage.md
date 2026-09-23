@@ -61,6 +61,9 @@ closure uses at most 12 reduction rounds. RustRed's compact integral indices
 range from -64 through 63, including generated seed indices. Exact rational epsilon specialization
 is enabled by default for high-level multiloop AMF evaluation. It is covered by
 a test comparing the resulting dimensional sectors with an analytic sunset.
+Enabling basis refinement retains symbolic epsilon before factorization, even
+when sampled reduction is otherwise enabled. Refined `new_at_epsilon` flows
+therefore remain reusable at other epsilon values.
 
 Nilpotent normalization first searches small subsets of Jordan-chain
 projectors, then applies exact Moser projector refinement. Large chain counts
