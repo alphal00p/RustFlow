@@ -23,7 +23,48 @@ struct Entry {
     version: u32,
     key: String,
     digest: String,
+    #[serde(with = "byte_buffer")]
     payload: Vec<u8>,
+}
+
+// Bincode's byte-buffer operation has the same wire representation as Vec<u8>,
+// but copies whole buffers instead of routing every byte through a writer.
+// Keep sequence decoding too, for the existing JSON cache representation.
+mod byte_buffer {
+    use serde::{
+        Deserializer, Serializer,
+        de::{SeqAccess, Visitor},
+    };
+
+    pub fn serialize<S: Serializer>(bytes: &[u8], serializer: S) -> Result<S::Ok, S::Error> {
+        serializer.serialize_bytes(bytes)
+    }
+    pub fn deserialize<'de, D: Deserializer<'de>>(deserializer: D) -> Result<Vec<u8>, D::Error> {
+        struct Bytes;
+        impl<'de> Visitor<'de> for Bytes {
+            type Value = Vec<u8>;
+            fn expecting(&self, formatter: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+                formatter.write_str("a byte buffer or byte sequence")
+            }
+            fn visit_bytes<E: serde::de::Error>(self, bytes: &[u8]) -> Result<Self::Value, E> {
+                Ok(bytes.to_vec())
+            }
+            fn visit_byte_buf<E: serde::de::Error>(self, bytes: Vec<u8>) -> Result<Self::Value, E> {
+                Ok(bytes)
+            }
+            fn visit_seq<A: SeqAccess<'de>>(
+                self,
+                mut sequence: A,
+            ) -> Result<Self::Value, A::Error> {
+                let mut bytes = Vec::new();
+                while let Some(byte) = sequence.next_element()? {
+                    bytes.push(byte);
+                }
+                Ok(bytes)
+            }
+        }
+        deserializer.deserialize_byte_buf(Bytes)
+    }
 }
 fn write_entry(file: &mut std::fs::File, entry: &Entry) -> Result<()> {
     // JSON serialization emits many small writes, especially for atom byte
@@ -595,6 +636,47 @@ pub(crate) fn write_native_stage(
 #[cfg(test)]
 mod native_tests {
     use super::*;
+
+    #[test]
+    fn bulk_payload_codec_preserves_binary_and_json_wire_formats() {
+        #[derive(Serialize, Deserialize)]
+        struct LegacyEntry {
+            version: u32,
+            key: String,
+            digest: String,
+            payload: Vec<u8>,
+        }
+        let old = LegacyEntry {
+            version: VERSION,
+            key: "bulk".into(),
+            digest: "test".into(),
+            payload: (0..=255).cycle().take(65539).collect(),
+        };
+        let entry = Entry {
+            version: old.version,
+            key: old.key.clone(),
+            digest: old.digest.clone(),
+            payload: old.payload.clone(),
+        };
+        let config = bincode::config::standard();
+        let legacy = bincode::serde::encode_to_vec(&old, config).unwrap();
+        let bytes = bincode::serde::encode_to_vec(&entry, config).unwrap();
+        assert_eq!(bytes, legacy);
+        assert_eq!(
+            binary_decode::<Entry>(&legacy).unwrap().payload,
+            old.payload
+        );
+        assert_eq!(
+            binary_decode::<LegacyEntry>(&bytes).unwrap().payload,
+            old.payload
+        );
+        let json = serde_json::to_vec(&entry).unwrap();
+        assert_eq!(json, serde_json::to_vec(&old).unwrap());
+        assert_eq!(
+            serde_json::from_slice::<Entry>(&json).unwrap().payload,
+            old.payload
+        );
+    }
 
     #[test]
     fn shared_table_state_remains_compatible_with_symbolicas_atom_reader() {

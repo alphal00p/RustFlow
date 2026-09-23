@@ -15,6 +15,13 @@ fn main() -> Result<()> {
     let mut cancel_file: Option<std::path::PathBuf> = None;
     while let Some(argument) = arguments.next() {
         match argument.as_str() {
+            "--checkpoint-seconds" => {
+                native.checkpoint_interval = std::time::Duration::from_secs(
+                    u64::try_from(integer_argument(&mut arguments, &argument)?).map_err(|_| {
+                        Error::InvalidInput("checkpoint interval exceeds u64".into())
+                    })?,
+                );
+            }
             "--cancel-file" => {
                 cancel_file = Some(
                     arguments
@@ -45,7 +52,7 @@ fn main() -> Result<()> {
             "--skip-reduction" => options.skip_reduction = true,
             "--help" => {
                 println!(
-                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--depth N] [--workers N] [--native-workers N] [--cancel-file PATH] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops]"
+                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--depth N] [--workers N] [--native-workers N] [--checkpoint-seconds N] [--cancel-file PATH] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops]"
                 );
                 return Ok(());
             }

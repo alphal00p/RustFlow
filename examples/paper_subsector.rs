@@ -16,6 +16,17 @@ fn main() -> Result<()> {
         })
         .transpose()?
         .unwrap_or(2);
+    let max_exact_frontier = args
+        .iter()
+        .position(|s| s == "--max-exact-frontier")
+        .map(|i| {
+            args.get(i + 1)
+                .ok_or_else(|| Error::InvalidInput("missing frontier limit".into()))?
+                .parse::<usize>()
+                .map_err(|e| Error::InvalidInput(e.to_string()))
+        })
+        .transpose()?
+        .unwrap_or(512);
     let powers = std::env::args()
         .nth(1)
         .unwrap_or_else(|| "0,1,1,0,1,0,1,0,0".into())
@@ -33,6 +44,7 @@ fn main() -> Result<()> {
             max_depth: depth,
             max_targets: 32768,
             max_sector_batch: 32,
+            max_exact_frontier,
             checkpoints: Some(".amflow-cache/subsectors".into()),
             ..Default::default()
         },

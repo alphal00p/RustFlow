@@ -86,10 +86,15 @@ cancellation at their boundaries; the current RustRed adapter cannot interrupt
 an in-progress native reduction.
 
 See `docs/coverage.md` for the current completion status and explicit limits.
-# Long acceptance runs
+
+## Long acceptance runs
 
 The `two_loop_acceptance` example accepts `--cancel-file PATH`. Creating that
 file requests cooperative cancellation and saves completed native search work.
 Remove the file before resuming the same command. `--native-workers N` controls
 concurrent native batches per epsilon sample; budget resources for the product
 of this value and `--workers N`.
+`--checkpoint-seconds N` sets the periodic save interval (60 by default).
+Increasing it can help when individual checkpoints are several gigabytes;
+cancellation and search completion still force a save. The `paper_subsector`
+diagnostic also accepts `--depth N` and `--max-exact-frontier N`.
