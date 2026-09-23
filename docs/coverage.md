@@ -141,3 +141,7 @@ existing format. Conservative frontier traversal borrows graph keys instead
 of allocating a key for every edge. Final exact substitution groups incoming
 rational coefficients in balanced sums to reduce intermediate polynomial
 growth; this changes evaluation order, not the reduction identities.
+When at most 128 terminal integrals remain, substitution runs from the leaves
+toward the targets so apparent poles can cancel within each identity. Child
+expansions are released after their last parent uses them. Wider frontiers use
+forward accumulation to avoid storing a large residual map at every graph node.

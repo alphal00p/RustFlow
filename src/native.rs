@@ -816,6 +816,75 @@ impl<'a> Expander<'a> {
                 retained.insert(node.clone());
             }
         }
+        let terminals = retained
+            .iter()
+            .filter(|node| !self.reduction.rules.contains_key(*node))
+            .count();
+        if terminals <= 128 {
+            return self.expand_backward(integral, &order, &retained);
+        }
+        self.expand_forward(integral, order, &retained)
+    }
+    fn expand_backward(
+        &mut self,
+        integral: &Integral,
+        order: &[Integral],
+        retained: &BTreeSet<Integral>,
+    ) -> Result<Terms> {
+        // With a small terminal basis, reducing each identity before using it
+        // in its parents cancels apparent poles locally. Release a child's
+        // expansion after its last parent, bounding the live dependency maps.
+        let mut uses = ahash::HashMap::<&Integral, usize>::default();
+        for node in order.iter().filter(|node| retained.contains(*node)) {
+            if let Some(terms) = self.reduction.rules.get(node) {
+                for child in terms.keys().filter(|child| retained.contains(*child)) {
+                    *uses.entry(child).or_default() += 1;
+                }
+            }
+        }
+        let mut expanded = ahash::HashMap::<Integral, Terms>::default();
+        for node in order.iter().filter(|node| retained.contains(*node)) {
+            self.context.cancellation.check()?;
+            let value = if let Some(terms) = self.reduction.rules.get(node) {
+                let mut sums = BTreeMap::<Integral, CoefficientSum>::new();
+                for (child, coefficient) in terms {
+                    if !retained.contains(child) {
+                        continue;
+                    }
+                    let coefficient = self.coefficient(coefficient)?;
+                    for (terminal, value) in &expanded[child] {
+                        let product = self.field.mul(coefficient.as_ref(), value);
+                        if !product.is_zero() {
+                            sums.entry(terminal.clone())
+                                .or_default()
+                                .push(product, &self.field);
+                        }
+                    }
+                    let remaining = uses.get_mut(child).expect("retained dependency use");
+                    *remaining -= 1;
+                    if *remaining == 0 {
+                        expanded.remove(child);
+                    }
+                }
+                sums.into_iter()
+                    .filter_map(|(terminal, sum)| {
+                        let value = sum.finish(&self.field);
+                        (!value.is_zero()).then_some((terminal, value))
+                    })
+                    .collect()
+            } else {
+                BTreeMap::from([(node.clone(), self.field.one())])
+            };
+            expanded.insert(node.clone(), value);
+        }
+        Ok(expanded.remove(integral).unwrap_or_default())
+    }
+    fn expand_forward(
+        &mut self,
+        integral: &Integral,
+        order: Vec<Integral>,
+        retained: &BTreeSet<Integral>,
+    ) -> Result<Terms> {
         let mut out = BTreeMap::<Integral, CoefficientSum>::new();
         if retained.contains(integral) {
             out.entry(integral.clone())
@@ -868,6 +937,48 @@ fn coefficient_atom(c: &Coefficient) -> Atom {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn substitution_directions_agree_across_a_wide_shared_frontier() {
+        let root = Integral(vec![1]);
+        let left = Integral(vec![2]);
+        let right = Integral(vec![3]);
+        let x = parse!("native_wide::x");
+        let mut reduction = Reduction::default();
+        let mut a = BTreeMap::new();
+        let mut b = BTreeMap::new();
+        let mut order = Vec::new();
+        for k in 10..139 {
+            let terminal = Integral(vec![k]);
+            let denominator = &x + Atom::num(k);
+            a.insert(terminal.clone(), Atom::num(1) / &denominator);
+            b.insert(terminal.clone(), (Atom::num(k) - &x) / denominator);
+            order.push(terminal);
+        }
+        reduction.rules.insert(left.clone(), a);
+        reduction.rules.insert(right.clone(), b);
+        reduction.rules.insert(
+            root.clone(),
+            BTreeMap::from([(left.clone(), x.clone()), (right.clone(), Atom::num(1))]),
+        );
+        order.extend([left, right, root.clone()]);
+        let retained = order.iter().cloned().collect();
+        let context = RunContext::default();
+        let mut expander = Expander::new(&reduction, &context).unwrap();
+        let forward = expander.expand(&root).unwrap();
+        let backward = expander.expand_backward(&root, &order, &retained).unwrap();
+        assert_eq!(forward.len(), 129);
+        for (terminal, coefficient) in forward {
+            assert_eq!(coefficient, backward[&terminal]);
+            let k = terminal.0[0];
+            assert!(
+                (coefficient_atom(&coefficient) - Atom::num(k) / (&x + Atom::num(k)))
+                    .together()
+                    .cancel()
+                    .is_zero()
+            );
+        }
+    }
 
     #[test]
     fn many_rational_dependency_paths_cancel_exactly() {
