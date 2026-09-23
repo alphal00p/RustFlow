@@ -571,3 +571,54 @@ fn nonvacuum_sunrise_matches_pinned_upstream_and_precision_refinement() {
         assert!(p.norm(&ComplexFloat::new(p.real(0), b.im.clone())) < p.tolerance(20));
     }
 }
+
+#[test]
+fn physical_paper_subsector_closes_with_deeper_ibps_and_stable_phase() {
+    // Depth two can leave a redundant direction with a nonphysical indicial
+    // root in this sector. A deeper search removes it before region matching.
+    let (family, _) = benchmarks::paper_two_loop().unwrap();
+    let target = Integral(vec![1, 0, 1, 0, 1, 0, 1, 0, 0]);
+    let backend = RustRedBackend {
+        max_depth: 3,
+        max_targets: 32768,
+        max_sector_batch: 32,
+        ..Default::default()
+    };
+    let epsilon = Rational::from((1, 2700));
+    let options = FlowOptions::default();
+    let context = RunContext::default();
+    let prepared = PreparedFlow::new_at_epsilon(
+        &family,
+        &[target],
+        &KinematicPoint::default(),
+        &backend,
+        &options,
+        &context,
+        &epsilon,
+    )
+    .unwrap();
+    let boundary = recursive::RecursiveBoundary::new(&backend, &options, &context);
+    let first = prepared
+        .evaluate(&epsilon, &options, &boundary, &context)
+        .unwrap();
+    let refined = FlowOptions {
+        guard_digits: 60,
+        series_order: 112,
+        ..options.clone()
+    };
+    let second = prepared
+        .evaluate(&epsilon, &refined, &boundary, &context)
+        .unwrap();
+    let p = Precision::decimal(80).unwrap();
+    assert!(p.close(&first[0], &second[0], 20));
+    assert!(second[0].im > p.real(0));
+    // Regression value from the Rust higher-precision calculation, not an
+    // upstream reference and never used to supply a boundary condition.
+    let expected = p
+        .parse(
+            "3641004.8899918837093934440970600173922862936154440",
+            "8471.9396295136564478613884972476665495673226018302",
+        )
+        .unwrap();
+    assert!(p.close(&second[0], &expected, 20));
+}
