@@ -5,3 +5,8 @@ library for the all-soft boundary family of the first original-paper target,
 at epsilon = 1/2700, with all-line auxiliary-mass placement and RustRed depth 3.
 It exposed the dependence of numerical root convergence on coefficient scale.
 It is not an upstream reference value or solver boundary datum.
+
+A smaller Symbolica-only reproduction using `10^40 * (x^3 - 2)` is in
+[`repros/symbolica-root-scaling`](../../repros/symbolica-root-scaling/README.md).
+It demonstrates the root finder's absolute-residual stopping criterion and
+distinguishes nonconvergence from inaccurate returned root estimates.

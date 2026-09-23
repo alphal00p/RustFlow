@@ -1,0 +1,11 @@
+[package]
+name = "symbolica-root-scaling-mre"
+version = "0.0.0"
+edition = "2024"
+publish = false
+license = "MIT"
+
+[dependencies]
+symbolica = { version = "=3.0.0", default-features = false, features = ["integer-gmp", "float-mpfr"] }
+
+[workspace]
