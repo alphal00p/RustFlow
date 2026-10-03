@@ -229,7 +229,7 @@ impl<B: ReductionBackend> CachedBackend<B> {
             VERSION,
             env!("PORT_SOURCE_DIGEST"),
             env!("CARGO_PKG_VERSION"),
-            "symbolica-3.0.0",
+            env!("DEPENDENCY_SOURCE_DIGEST"),
             self.backend.identity(),
             fingerprint,
             family.physical_propagators,
@@ -349,7 +349,7 @@ pub(crate) fn system_key(
     let value = serde_json::json!([
         VERSION,
         env!("PORT_SOURCE_DIGEST"),
-        "symbolica-3.0.0",
+        env!("DEPENDENCY_SOURCE_DIGEST"),
         backend.identity(),
         format!("{family:?}"),
         targets.iter().map(|i| &i.0).collect::<Vec<_>>(),

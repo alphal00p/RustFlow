@@ -23,6 +23,15 @@ fn hash_tree(path: &Path, root: &Path, hasher: &mut blake3::Hasher) {
     }
 }
 fn main() {
+    let mut dependencies = blake3::Hasher::new();
+    for path in ["Cargo.toml", "Cargo.lock"] {
+        println!("cargo:rerun-if-changed={path}");
+        dependencies.update(&fs::read(path).expect("read dependency fingerprint input"));
+    }
+    println!(
+        "cargo:rustc-env=DEPENDENCY_SOURCE_DIGEST={}",
+        dependencies.finalize()
+    );
     let mut own = blake3::Hasher::new();
     hash_tree(Path::new("src"), Path::new(""), &mut own);
     println!("cargo:rustc-env=PORT_SOURCE_DIGEST={}", own.finalize());

@@ -8,5 +8,5 @@ It is not an upstream reference value or solver boundary datum.
 
 A smaller Symbolica-only reproduction using `10^40 * (x^3 - 2)` is in
 [`repros/symbolica-root-scaling`](../../repros/symbolica-root-scaling/README.md).
-It demonstrates the root finder's absolute-residual stopping criterion and
-distinguishes nonconvergence from inaccurate returned root estimates.
+It retains the historical 3.0.0 output and now checks successful convergence
+with the fixed upstream `main` revision.

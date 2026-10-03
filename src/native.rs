@@ -186,12 +186,13 @@ fn solve<const N: usize>(
     let legacy_key_for_depth = |depth| {
         blake3::hash(
             format!(
-                "native-factorized-v3:{}:{:?}:{targets:?}:{}:{}:{}",
+                "native-factorized-v4:{}:{:?}:{targets:?}:{}:{}:{}:{}",
                 family.family.fingerprint(),
                 family.reverse,
                 depth,
                 options.include_lorentz,
-                env!("RUSTRED_SOURCE_DIGEST")
+                env!("RUSTRED_SOURCE_DIGEST"),
+                env!("DEPENDENCY_SOURCE_DIGEST")
             )
             .as_bytes(),
         )

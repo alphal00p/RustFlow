@@ -1,6 +1,6 @@
 256 bits, 1 * (x^3 - 2), tolerance 1e-50: Ok
-  max |z^3 - 2|, reevaluated at 768 bits: 1.8235e-76
-256 bits, 1e40 * (x^3 - 2), tolerance 1e-50: Err
-  max |z^3 - 2|, reevaluated at 768 bits: 1.8235e-76
+  max |z^3 - 2|, reevaluated at 768 bits: 4.0798e-77
+256 bits, 1e40 * (x^3 - 2), tolerance 1e-50: Ok
+  max |z^3 - 2|, reevaluated at 768 bits: 2.4739e-77
 512 bits, 1e40 * (x^3 - 2), tolerance 1e-50: Ok
-  max |z^3 - 2|, reevaluated at 768 bits: 2.1673e-108
+  max |z^3 - 2|, reevaluated at 768 bits: 1.7951e-154

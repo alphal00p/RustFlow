@@ -24,9 +24,10 @@ fn main() {
             if result.is_ok() { "Ok" } else { "Err" }
         );
 
-        // Err contains the current root estimates. Check their residuals for
-        // the UNscaled polynomial using fresh, higher-precision arithmetic.
-        let roots = result.unwrap_or_else(|estimates| estimates);
+        // The upstream fix must converge even with the scaled coefficients.
+        let roots = result.expect("root scaling regression: expected convergence");
+        assert_eq!(roots.len(), 3);
+        // Check the UNscaled polynomial using higher-precision arithmetic.
         let mut max_residual = Float::with_val(768, 0);
         let two = Complex::new(Float::with_val(768, 2), Float::with_val(768, 0));
         for root in roots {
@@ -40,5 +41,6 @@ fn main() {
             }
         }
         println!("  max |z^3 - 2|, reevaluated at 768 bits: {max_residual:.5e}");
+        assert!(max_residual < Float::parse("1e-48", Some(768)).unwrap());
     }
 }

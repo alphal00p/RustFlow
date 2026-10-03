@@ -154,6 +154,12 @@ Fujiwara bound before calling Symbolica's root finder. Newton corrections and
 polynomial reconstruction check the returned root set. Regressions include a
 degree-12 factor from the paper's boundary reduction and roots at very large and
 very small scales; unresolved clusters return a numerical error.
+The pinned Symbolica `main` revision also checks root corrections and relative
+coefficient backward error, fixing the coefficient-scale-dependent convergence
+report reproduced in `repros/symbolica-root-scaling`. Scaling and root-set
+validation remain in the AMFlow adapter. Cache keys include the manifest and
+lockfile fingerprint, so dependency updates invalidate previous prepared systems,
+reduction tables, and native search checkpoints.
 
 Vacuum tensor projection groups pairings under permutations of repeated hard
 vectors. At rank eight, four copies of each of two hard vectors need a

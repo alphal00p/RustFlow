@@ -1,6 +1,6 @@
 # symbolica-amflow
 
-A native Rust implementation of auxiliary mass flow, using Symbolica 3.0.0 for
+A native Rust implementation of auxiliary mass flow, using Symbolica for
 exact algebra and MPFR arithmetic and the sibling RustRed checkout for IBP
 reduction. Rust 2024; independent MIT-licensed repository.
 
@@ -9,6 +9,12 @@ reduction. Rust 2024; independent MIT-licensed repository.
 calculations do not establish support for arbitrary multiloop families.
 
 ## Build
+
+Requires Rust 1.96 or newer. Symbolica and its companion crates are pinned to
+upstream `main` commit
+[`75f8350094b90254ee71dc2a391fde0d14b0204a`](https://github.com/symbolica-dev/symbolica/commit/75f8350094b90254ee71dc2a391fde0d14b0204a)
+(package version 3.0.1), including the scale-independent root convergence fix.
+The root manifest's Cargo patches make RustRed use that same Symbolica revision.
 
 Keep RustRed at `../rustred`, including `crates/rustred-core`. Its experimental
 reconstruction feature is disabled. The high-level multiloop solver defaults to

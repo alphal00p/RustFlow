@@ -89,8 +89,9 @@ impl Default for RustRedBackend {
 impl ReductionBackend for RustRedBackend {
     fn identity(&self) -> String {
         format!(
-            "rustred-exact:{}:{}:{}:{}:{}:{}:{}:{}",
+            "rustred-exact:{}:{}:{}:{}:{}:{}:{}:{}:{}",
             env!("RUSTRED_SOURCE_DIGEST"),
+            env!("DEPENDENCY_SOURCE_DIGEST"),
             self.max_depth,
             self.max_targets,
             self.include_lorentz,

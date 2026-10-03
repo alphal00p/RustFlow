@@ -2,10 +2,15 @@
 name = "symbolica-root-scaling-mre"
 version = "0.0.0"
 edition = "2024"
+rust-version = "1.96"
 publish = false
 license = "MIT"
 
 [dependencies]
-symbolica = { version = "=3.0.0", default-features = false, features = ["integer-gmp", "float-mpfr"] }
+symbolica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "75f8350094b90254ee71dc2a391fde0d14b0204a", default-features = false, features = ["integer-gmp", "float-mpfr"] }
+
+[patch.crates-io]
+numerica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "75f8350094b90254ee71dc2a391fde0d14b0204a" }
+graphica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "75f8350094b90254ee71dc2a391fde0d14b0204a" }
 
 [workspace]
