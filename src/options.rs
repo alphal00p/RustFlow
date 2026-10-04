@@ -141,6 +141,15 @@ pub enum Progress {
         domain_applied: usize,
         elapsed_ms: u128,
     },
+    SymmetryReduction {
+        candidates: usize,
+        automorphisms: usize,
+        applied: usize,
+        uncovered: usize,
+        transport_failures: usize,
+        search_limited: bool,
+        elapsed_ms: u128,
+    },
     SectorReduced {
         integrals: usize,
         seeds: usize,

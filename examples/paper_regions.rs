@@ -5,12 +5,14 @@ use symbolica_amflow::*;
 
 fn main() -> Result<()> {
     let mut parametric_rules = false;
+    let mut symmetry_rules = false;
     let mut max_exact_frontier = 0;
     let mut max_targets = 32768;
     let mut arguments = std::env::args().skip(1);
     while let Some(argument) = arguments.next() {
         match argument.as_str() {
             "--parametric-rules" => parametric_rules = true,
+            "--symmetry-rules" => symmetry_rules = true,
             "--max-exact-frontier" | "--max-targets" => {
                 let value = arguments
                     .next()
@@ -25,7 +27,7 @@ fn main() -> Result<()> {
             }
             "--help" => {
                 println!(
-                    "paper_regions [--parametric-rules] [--max-exact-frontier N] [--max-targets N]"
+                    "paper_regions [--parametric-rules] [--symmetry-rules] [--max-exact-frontier N] [--max-targets N]"
                 );
                 return Ok(());
             }
@@ -39,6 +41,7 @@ fn main() -> Result<()> {
     };
     let backend = RustRedBackend {
         parametric_rules,
+        symmetry_rules,
         max_depth: 3,
         max_targets,
         max_sector_batch: 32,

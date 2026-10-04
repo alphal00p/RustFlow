@@ -49,11 +49,12 @@ fn main() -> Result<()> {
             "--plain" => native.factorized = false,
             "--no-bubble-subloops" => native.bubble_subloops = false,
             "--parametric-rules" => native.parametric_rules = true,
+            "--symmetry-rules" => native.symmetry_rules = true,
             "--symbolic-epsilon" => options.sampled_reduction = false,
             "--skip-reduction" => options.skip_reduction = true,
             "--help" => {
                 println!(
-                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--depth N] [--workers N] [--native-workers N] [--checkpoint-seconds N] [--cancel-file PATH] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops] [--parametric-rules]"
+                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--depth N] [--workers N] [--native-workers N] [--checkpoint-seconds N] [--cancel-file PATH] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops] [--parametric-rules] [--symmetry-rules]"
                 );
                 return Ok(());
             }

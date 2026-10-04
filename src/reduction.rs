@@ -68,6 +68,9 @@ pub struct RustRedBackend {
     /// checks guards and descent; missing formulas fall back to concrete search.
     /// Opt-in while benchmarked.
     pub parametric_rules: bool,
+    /// Discover bounded routing symmetries and verify their exact numerator
+    /// transport with RustRed. Only strictly descending rules are applied.
+    pub symmetry_rules: bool,
     /// Optional restart checkpoints for completed native search work.
     pub checkpoints: Option<std::path::PathBuf>,
     /// Save completed batches at this interval, and on cancellation or search
@@ -86,6 +89,7 @@ impl Default for RustRedBackend {
             factorized: true,
             bubble_subloops: true,
             parametric_rules: false,
+            symmetry_rules: false,
             checkpoints: None,
             checkpoint_interval: std::time::Duration::from_secs(60),
         }
@@ -94,7 +98,7 @@ impl Default for RustRedBackend {
 
 impl ReductionBackend for RustRedBackend {
     fn identity(&self) -> String {
-        format!(
+        let mut identity = format!(
             "rustred-exact:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}",
             env!("RUSTRED_SOURCE_DIGEST"),
             env!("DEPENDENCY_SOURCE_DIGEST"),
@@ -106,7 +110,11 @@ impl ReductionBackend for RustRedBackend {
             self.bubble_subloops,
             self.max_sector_batch,
             self.parametric_rules
-        )
+        );
+        if self.symmetry_rules {
+            identity.push_str(":symmetry-v1");
+        }
+        identity
     }
     fn reduce_at_epsilon(
         &self,

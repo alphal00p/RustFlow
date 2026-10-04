@@ -54,6 +54,7 @@ fn main() -> Result<()> {
         backend: RustRedBackend {
             max_depth: depth,
             parametric_rules: args.iter().any(|s| s == "--parametric-rules"),
+            symmetry_rules: args.iter().any(|s| s == "--symmetry-rules"),
             max_targets,
             max_sector_batch: 32,
             max_exact_frontier,

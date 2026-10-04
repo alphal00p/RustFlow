@@ -2,6 +2,7 @@
 //! factorized coefficient field. Source derivation, zero certificates, seed
 //! search and exact replay remain entirely in RustRed.
 mod parametric;
+mod symmetry;
 
 use crate::family::{ConvertedFamily, substitute};
 use crate::reduction::{LinearCombination, Reduction, RustRedBackend};
@@ -155,10 +156,20 @@ fn solve<const N: usize>(
     for bits in 0..(1usize << N) {
         context.cancellation.check()?;
         let sector = std::array::from_fn(|i| bits & (1 << i) != 0);
-        if !initial
-            .iter()
-            .any(|parent| sector.iter().zip(parent).all(|(a, b)| !a || *b))
-        {
+        // A verified automorphism may route a target into another physical
+        // sector, so that lane needs zero certificates outside the initial
+        // top sectors too. Positive irreducible numerators remain excluded.
+        let relevant = if options.symmetry_rules {
+            sector
+                .iter()
+                .enumerate()
+                .all(|(axis, &active)| !active || axis < original.physical_propagators)
+        } else {
+            initial
+                .iter()
+                .any(|parent| sector.iter().zip(parent).all(|(a, b)| !a || *b))
+        };
+        if !relevant {
             continue;
         }
         let mask = Mask::try_new(sector).map_err(native_error)?;
@@ -204,12 +215,19 @@ fn solve<const N: usize>(
     };
     let stage_key_for_depth = |depth| {
         let legacy_key = legacy_key_for_depth(depth);
-        if options.bubble_subloops {
+        let key = if options.bubble_subloops {
             blake3::hash(format!("bubble-subloops-v2:{legacy_key}").as_bytes())
                 .to_hex()
                 .to_string()
         } else {
             legacy_key
+        };
+        if options.symmetry_rules {
+            blake3::hash(format!("symmetry-v1:{key}").as_bytes())
+                .to_hex()
+                .to_string()
+        } else {
+            key
         }
     };
     let legacy_key = legacy_key_for_depth(options.max_depth);
@@ -241,6 +259,7 @@ fn solve<const N: usize>(
     // expensive higher-sector searches need not be repeated on migration.
     if restart.is_none()
         && options.bubble_subloops
+        && !options.symmetry_rules
         && let Some(directory) = &options.checkpoints
         && let Some(old) = crate::cache::read_native_stage(directory, &legacy_key)?
     {
@@ -287,6 +306,27 @@ fn solve<const N: usize>(
     }
     let mut solvers = BTreeMap::new();
     let mut parametric_banks = BTreeMap::new();
+    let mut symmetry_bank = if options.symmetry_rules {
+        context.cancellation.check()?;
+        let started = std::time::Instant::now();
+        let bank = symmetry::Bank::discover(
+            &family.family,
+            original.physical_propagators,
+            symmetry::Limits::default(),
+        );
+        context.emit(Progress::SymmetryReduction {
+            candidates: bank.statistics.candidates,
+            automorphisms: bank.statistics.automorphisms,
+            applied: 0,
+            uncovered: 0,
+            transport_failures: 0,
+            search_limited: bank.statistics.search_limited,
+            elapsed_ms: started.elapsed().as_millis(),
+        })?;
+        Some(bank)
+    } else {
+        None
+    };
     let pool = if options.native_workers > 1 {
         Some(
             rayon::ThreadPoolBuilder::new()
@@ -433,6 +473,70 @@ fn solve<const N: usize>(
                         )
                         .map_err(native_error)?,
                     );
+                }
+                if let Some(bank) = &mut symmetry_bank {
+                    let started = std::time::Instant::now();
+                    let before = bank.statistics;
+                    let solver = &solvers[&sector];
+                    let mut uncovered = Vec::new();
+                    for case in cases {
+                        context.cancellation.check()?;
+                        let target = std::array::from_fn(|i| case.integral().powers()[i].value());
+                        let Some(terms) = bank.apply(&family.family, target, solver.ordering())
+                        else {
+                            uncovered.push(case);
+                            continue;
+                        };
+                        let (batch, _) = convert_batch(
+                            rustred::solver::NumericResult {
+                                rules: vec![rustred::solver::RuleCandidate {
+                                    case: case.into(),
+                                    target: rustred::solver::Integral::numeric(target)
+                                        .map_err(native_error)?,
+                                    rhs: terms,
+                                    sources: Vec::new(),
+                                    stats: Default::default(),
+                                }],
+                                residuals: Vec::new(),
+                                stats: Default::default(),
+                            },
+                            family,
+                        )?;
+                        for terms in batch.rules.values() {
+                            for integral in terms.keys() {
+                                let powers: [i16; N] =
+                                    integral.0.as_slice().try_into().map_err(|_| {
+                                        Error::Reduction("symmetry RHS arity".into())
+                                    })?;
+                                if !visited.contains(&powers) {
+                                    pending.insert(powers);
+                                }
+                            }
+                        }
+                        frontier_cache.insert_rules(&mut result, batch.rules);
+                        result.nonzero_conditions.extend(batch.nonzero_conditions);
+                        pending.remove(&target);
+                        visited.insert(target);
+                        save_if_due(
+                            options,
+                            &stage_key,
+                            &mut result,
+                            &visited,
+                            &pending,
+                            &mut last_saved,
+                        )?;
+                    }
+                    context.emit(Progress::SymmetryReduction {
+                        candidates: 0,
+                        automorphisms: 0,
+                        applied: bank.statistics.applied - before.applied,
+                        uncovered: bank.statistics.missed - before.missed,
+                        transport_failures: bank.statistics.transport_failures
+                            - before.transport_failures,
+                        search_limited: bank.statistics.search_limited,
+                        elapsed_ms: started.elapsed().as_millis(),
+                    })?;
+                    cases = uncovered;
                 }
                 if options.parametric_rules {
                     let started = std::time::Instant::now();

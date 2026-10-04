@@ -276,3 +276,75 @@ address that propagation rather than repeatedly increasing the time limit.
 The log is `target/generic-four-line-paper-pilot/first-target.log`. This pilot
 still did not complete reduction, differential preparation, or a numerical
 sample; it does not establish the required four-target, 20-digit acceptance.
+
+## Region continuation with incremental frontiers
+
+A separate boundary-region continuation used validated commit
+`48192235c4617d08970491d3c19a500098cac7c1` (106 release tests and strict Clippy).
+It resumed the previous region checkpoint in an isolated directory on CPU 27,
+with one thread, depth three, `max_targets = 65536`,
+`max_exact_frontier = 100000`, guarded formulas enabled, and a 900-second limit.
+The checkpoint began with 9,924 searched integrals, 1,124 pending four-line
+integrals, and 9,897 rules. This was a warm continuation, not a cold-run or
+matched-work comparison with earlier builds or original AMFlow.
+
+The resumed formulas took about 8.4 seconds. Progress-event intervals recorded
+344.2 seconds for the first exact substitution, then 130.3 and 54.5 seconds for
+the next two updates. Seven subsequent updates each took 0.18–0.69 seconds as
+the pending frontier contracted through 65, 45, 28, 16, four, six, and two.
+The last reported state was `12,161 searched / 2 pending`; substitution of
+12,136 rules then remained unfinished for 357.2 seconds before the timeout.
+Observed memory samples reached 2.89 GiB. No nonzero region coefficient was
+reported, and region validation did not complete.
+
+The last atomic checkpoint, which predates that final substitution, contains
+11,534 searched integrals, 325 pending four-line integrals, and 11,507 rules.
+It is 41,554,364 bytes with SHA-256
+`90ff80176ce29aed61cace7a5d2534e44ef2e99eed62ebb89a0cafd01354e46f`.
+The isolated run directory `target/incremental-frontier-regions-pilot` retains
+`provenance.json`, `result.json`, `events.jsonl`, `substitution-phases.json`,
+and the checkpoint. These observations demonstrate progress in the bounded
+region calculation; they establish neither an end-to-end speedup nor the
+four-target numerical acceptance result.
+
+## Exact zero census and bounded routing prototype
+
+A read-only audit froze the last generic-four-line checkpoint from validated
+commit `917886e777a31638504fd16a78eaf65081808626`: 63,482,899 bytes,
+40,516 searched, ten pending, and 40,487 rules. Its SHA-256 is
+`b3f8615d8967cf670b1823e38ceb386efbe3a8b97fd1ad0cef972553842caa8f`.
+The Rust diagnostic linked that commit's archived library (SHA-256
+`92fa5128680bc0d1065fe4dd005a5e1c3bc73c288e1ba4657080f46b8e0ac4ee`)
+and the unchanged RustRed library. Artifacts and detailed routing proof are
+under `target/three-line-prototype/`; these local diagnostic artifacts are
+not required by the test suite.
+
+The raw dependency DAG has 27,146 leaves. RustRed's exact zero analyzer proves
+535 of the 535 two-line leaves, 13,781 of the 25,421 three-line leaves, and
+28 of the 1,022 four-line leaves scaleless: 14,344 leaves in total. These are
+structural upper bounds; higher raw leaves can already have canceled from the
+exact active frontier. Eager zero identities can avoid propagating their
+coefficients, while the family-domain nonzero conditions remain required.
+
+Of the nonzero three-line leaves, 607 are in sector `(1,3,5)`, where the
+existing exact bubble shortcut applies within its current rank and power
+limits. The five remaining sectors are sunrise families. The present bubble
+shortcut correctly rejects them because the first bubble integration leaves
+a transfer involving the other loop that is not an active propagator.
+
+A separate bounded candidate generator used only branch displacement
+differences, external reflections, and loop translations; no paper-specific
+permutation was supplied. It proposed 36 maps. RustRed's exact momentum-map
+verifier and full physical-root transport compiler retained identity and one
+nontrivial automorphism. The latter preserves the eta shift on propagator 5
+and maps the denominator tuple to
+`(D3,D2,D1,D6,D5,D4,D7,D8,2*D6+D9-2*D4)`.
+Every map condition is a proved nonzero constant. Numerators expand finitely;
+positive affine denominators are excluded.
+
+Strict integral-order checks accept 2,437 of 2,437 sampled `(1,5,7)` targets,
+2,892 of 2,892 `(1,6,7)` targets, and 870 of 2,851 `(2,5,7)` targets. The two
+reverse sectors give no descending rules. These 6,199 identities contain
+15,175 RHS terms, with maximum width 21. Verification and all 22,066 transport
+checks, including identity, took 663 ms in one isolated run. This is a coverage
+measurement, not a production speedup or an end-to-end numerical validation.

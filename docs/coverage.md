@@ -90,6 +90,14 @@ order. Uncovered cases fall back to concrete searches, and all RHS integrals
 still require closure. See the [reduction audit](reduction-search-audit.md) for
 the paper-example search bottleneck and the scope of prototype measurements.
 
+The separate opt-in `symmetry_rules` option proposes bounded loop translations
+and external reflections from rational branch displacements and Gram entries.
+RustRed verifies each map, including masses and the auxiliary mass, before
+compiling finite numerator transport. Only complete, strictly descending rules
+are used; unsupported maps and exhausted discovery/transport limits fall back
+to IBPs. Enabled runs use distinct backend and checkpoint identities.
+`SymmetryReduction` events expose discovery and application counts.
+
 For large native frontiers, coefficient expansion can cost more than the extra
 IBP searches needed by a conservative dependency traversal. The
 `max_exact_frontier` option controls this tradeoff (512 by default). All reported
