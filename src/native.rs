@@ -1,6 +1,8 @@
 //! Runtime orchestration of RustRed's native exact sector solver with a
 //! factorized coefficient field. Source derivation, zero certificates, seed
 //! search and exact replay remain entirely in RustRed.
+mod parametric;
+
 use crate::family::{ConvertedFamily, substitute};
 use crate::reduction::{LinearCombination, Reduction, RustRedBackend};
 use crate::{Error, Integral, IntegralFamily, Progress, Result, RunContext};
@@ -186,13 +188,14 @@ fn solve<const N: usize>(
     let legacy_key_for_depth = |depth| {
         blake3::hash(
             format!(
-                "native-factorized-v4:{}:{:?}:{targets:?}:{}:{}:{}:{}",
+                "native-factorized-v5:{}:{:?}:{targets:?}:{}:{}:{}:{}:{}",
                 family.family.fingerprint(),
                 family.reverse,
                 depth,
                 options.include_lorentz,
                 env!("RUSTRED_SOURCE_DIGEST"),
-                env!("DEPENDENCY_SOURCE_DIGEST")
+                env!("DEPENDENCY_SOURCE_DIGEST"),
+                options.parametric_rules
             )
             .as_bytes(),
         )
@@ -283,6 +286,7 @@ fn solve<const N: usize>(
         result = restored;
     }
     let mut solvers = BTreeMap::new();
+    let mut parametric_banks = BTreeMap::new();
     let pool = if options.native_workers > 1 {
         Some(
             rayon::ThreadPoolBuilder::new()
@@ -427,6 +431,77 @@ fn solve<const N: usize>(
                         )
                         .map_err(native_error)?,
                     );
+                }
+                if options.parametric_rules {
+                    let started = std::time::Instant::now();
+                    let solver = &solvers[&sector];
+                    let bank = parametric_banks
+                        .entry(sector)
+                        .or_insert_with(|| parametric::Bank::new(&sources, solver));
+                    let before = (bank.generated, bank.hits, bank.missed);
+                    let mut uncovered = Vec::new();
+                    for case in cases {
+                        context.cancellation.check()?;
+                        let target = std::array::from_fn(|i| case.integral().powers()[i].value());
+                        let Some(applied) = bank
+                            .try_reduce(target, &sources, solver, options.max_depth)
+                            .map_err(native_error)?
+                        else {
+                            uncovered.push(case);
+                            continue;
+                        };
+                        let (batch, _) = convert_batch(
+                            rustred::solver::NumericResult {
+                                rules: vec![rustred::solver::RuleCandidate {
+                                    case: case.into(),
+                                    target: rustred::solver::Integral::numeric(target)
+                                        .map_err(native_error)?,
+                                    rhs: applied.terms,
+                                    sources: Vec::new(),
+                                    stats: Default::default(),
+                                }],
+                                residuals: Vec::new(),
+                                stats: Default::default(),
+                            },
+                            family,
+                        )?;
+                        for terms in batch.rules.values() {
+                            for integral in terms.keys() {
+                                let powers: [i16; N] =
+                                    integral.0.as_slice().try_into().map_err(|_| {
+                                        Error::Reduction("parametric RHS arity".into())
+                                    })?;
+                                if !visited.contains(&powers) {
+                                    pending.insert(powers);
+                                }
+                            }
+                        }
+                        result.rules.extend(batch.rules);
+                        result.nonzero_conditions.extend(batch.nonzero_conditions);
+                        result.nonzero_conditions.extend(
+                            applied
+                                .conditions
+                                .iter()
+                                .map(|p| substitute(&p.to_expression(), &family.reverse)),
+                        );
+                        pending.remove(&target);
+                        visited.insert(target);
+                        save_if_due(
+                            options,
+                            &stage_key,
+                            &mut result,
+                            &visited,
+                            &pending,
+                            &mut last_saved,
+                        )?;
+                    }
+                    context.emit(Progress::ParametricReduction {
+                        rays: bank.generated - before.0,
+                        applied: bank.hits - before.1,
+                        uncovered: bank.missed - before.2,
+                        elapsed_ms: started.elapsed().as_millis(),
+                    })?;
+                    cases = uncovered;
                 }
                 // Group nearby complexities so a very easy target does not
                 // enlarge the exact elimination needed by every difficult target.

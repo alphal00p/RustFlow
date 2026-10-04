@@ -63,6 +63,10 @@ pub struct RustRedBackend {
     /// Eliminate eligible massless two-point subloops with exact tensor rules.
     /// Every rule must decrease the same order used by the native IBP solver.
     pub bubble_subloops: bool,
+    /// Reuse bounded exact formulas with symbolic positive powers and fixed
+    /// numerators. Every specialization checks guards and descent; missing
+    /// formulas fall back to concrete search. Opt-in while benchmarked.
+    pub parametric_rules: bool,
     /// Optional restart checkpoints for completed native search work.
     pub checkpoints: Option<std::path::PathBuf>,
     /// Save completed batches at this interval, and on cancellation or search
@@ -80,6 +84,7 @@ impl Default for RustRedBackend {
             native_workers: 1,
             factorized: true,
             bubble_subloops: true,
+            parametric_rules: false,
             checkpoints: None,
             checkpoint_interval: std::time::Duration::from_secs(60),
         }
@@ -89,7 +94,7 @@ impl Default for RustRedBackend {
 impl ReductionBackend for RustRedBackend {
     fn identity(&self) -> String {
         format!(
-            "rustred-exact:{}:{}:{}:{}:{}:{}:{}:{}:{}",
+            "rustred-exact:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}",
             env!("RUSTRED_SOURCE_DIGEST"),
             env!("DEPENDENCY_SOURCE_DIGEST"),
             self.max_depth,
@@ -98,7 +103,8 @@ impl ReductionBackend for RustRedBackend {
             self.factorized,
             self.max_exact_frontier,
             self.bubble_subloops,
-            self.max_sector_batch
+            self.max_sector_batch,
+            self.parametric_rules
         )
     }
     fn reduce_at_epsilon(

@@ -133,6 +133,12 @@ pub enum Progress {
         integrals: usize,
         visited: usize,
     },
+    ParametricReduction {
+        rays: usize,
+        applied: usize,
+        uncovered: usize,
+        elapsed_ms: u128,
+    },
     SectorReduced {
         integrals: usize,
         seeds: usize,

@@ -53,6 +53,7 @@ fn main() -> Result<()> {
     let backend = cache::CachedBackend {
         backend: RustRedBackend {
             max_depth: depth,
+            parametric_rules: args.iter().any(|s| s == "--parametric-rules"),
             max_targets,
             max_sector_batch: 32,
             max_exact_frontier,

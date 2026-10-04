@@ -4,12 +4,24 @@ use symbolica::prelude::*;
 use symbolica_amflow::*;
 
 fn main() -> Result<()> {
+    let mut parametric_rules = false;
+    for argument in std::env::args().skip(1) {
+        match argument.as_str() {
+            "--parametric-rules" => parametric_rules = true,
+            "--help" => {
+                println!("paper_regions [--parametric-rules]");
+                return Ok(());
+            }
+            _ => return Err(Error::InvalidInput(format!("unknown option {argument}"))),
+        }
+    }
     let (family, targets) = benchmarks::paper_two_loop()?;
     let options = FlowOptions {
         cache_directory: Some(".amflow-cache/regions".into()),
         ..Default::default()
     };
     let backend = RustRedBackend {
+        parametric_rules,
         max_depth: 3,
         max_targets: 32768,
         max_sector_batch: 32,

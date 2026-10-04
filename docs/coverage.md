@@ -83,6 +83,13 @@ the next RHS frontier, and can checkpoint completed work within a search round. 
 produce expensive intermediate rules; a checkpoint or a completed reduction
 round does not imply that the differential basis has closed.
 
+The opt-in `parametric_rules` backend option reuses guarded formulas with symbolic
+positive powers and fixed numerator indices. Each specialization checks its
+domain, preserves nonzero conditions, and must decrease the native integral
+order. Uncovered cases fall back to concrete searches, and all RHS integrals
+still require closure. See the [reduction audit](reduction-search-audit.md) for
+the paper-example search bottleneck and the scope of prototype measurements.
+
 For large native frontiers, coefficient expansion can cost more than the extra
 IBP searches needed by a conservative dependency traversal. The
 `max_exact_frontier` option controls this tradeoff (512 by default). All reported
@@ -154,6 +161,10 @@ Fujiwara bound before calling Symbolica's root finder. Newton corrections and
 polynomial reconstruction check the returned root set. Regressions include a
 degree-12 factor from the paper's boundary reduction and roots at very large and
 very small scales; unresolved clusters return a numerical error.
+Ordinary Taylor propagation clears denominators exactly per matrix row and
+recurs over finite polynomial coefficients, omitting structural zeros. Tests
+compare these coefficients against the independent rational-series recurrence
+at complex centers. Tail and differential-equation defect checks are unchanged.
 The pinned Symbolica `main` revision also checks root corrections and relative
 coefficient backward error, fixing the coefficient-scale-dependent convergence
 report reproduced in `repros/symbolica-root-scaling`. Scaling and root-set
