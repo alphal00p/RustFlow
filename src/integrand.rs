@@ -277,7 +277,9 @@ pub struct FactorizedTerm {
 }
 
 /// Integrate out mixed hard/soft tensor structure and split the resulting
-/// scalar integrands into vacuum and soft families.
+/// scalar integrands into vacuum and soft families. Equivalent integral products
+/// are combined exactly before applying `budget` to the number of output terms.
+/// The same budget bounds each partial-fraction decomposition.
 pub fn factor_region(
     expression: &Atom,
     coordinates: &[Atom],
@@ -411,18 +413,21 @@ pub fn factor_region(
         };
         pieces.push((vars, template));
     }
-    let mut out = Vec::new();
-    for (m, c) in projected.expand().coefficient_list::<i32>(coordinates) {
+    // Keep the larger polynomial intact while collecting monomials in the
+    // smaller coordinate space. Expanding both sides first repeats denominator
+    // conversion and misses cancellations in denominator coordinates. All-hard
+    // and all-soft regions each need only one conversion of the full polynomial.
+    let split_side = usize::from(pieces[0].0.len() > pieces[1].0.len());
+    let mut combined = BTreeMap::<Vec<Vec<(Vec<Atom>, i64)>>, FactorizedTerm>::new();
+    for (monomial, polynomial) in projected
+        .expand()
+        .coefficient_list::<i32>(&pieces[split_side].0)
+    {
         let mut expressions = [denominator_h.clone(), denominator_s.clone()];
-        for (j, n) in powers(&m, coordinates)?.into_iter().enumerate() {
-            if n == 0 {
-                continue;
-            }
-            let side = usize::from(!is_hard(labels[j].0));
-            expressions[side] *= coordinates[j].clone().pow(n as i64);
-        }
+        expressions[split_side] *= monomial;
+        expressions[1 - split_side] *= polynomial;
         let mut products = vec![FactorizedTerm {
-            coefficient: c,
+            coefficient: Atom::num(1),
             factors: vec![],
         }];
         for (side, (vars, template)) in pieces.iter().enumerate() {
@@ -446,12 +451,48 @@ pub fn factor_region(
             }
             products = next;
         }
-        out.extend(products);
-        if out.len() > budget {
-            return Err(Error::Limit(
-                "factorized boundary term budget exhausted".into(),
-            ));
+        for product in products {
+            // All families on a side use the same loop/external coordinates.
+            // Ignore unused completion slots and denominator ordering so that
+            // partial fractions with different active sets share an exact key.
+            let key = product
+                .factors
+                .iter()
+                .map(|factor| {
+                    let mut powers = BTreeMap::<Vec<Atom>, i64>::new();
+                    for (d, &n) in factor.family.propagators.iter().zip(&factor.integral.0) {
+                        if n != 0 {
+                            let shape = std::iter::once(d.constant.clone())
+                                .chain(d.scalar_products.iter().cloned())
+                                .collect();
+                            *powers.entry(shape).or_default() += i64::from(n);
+                        }
+                    }
+                    powers.into_iter().filter(|(_, n)| *n != 0).collect()
+                })
+                .collect();
+            match combined.entry(key) {
+                std::collections::btree_map::Entry::Occupied(mut entry) => {
+                    entry.get_mut().coefficient += product.coefficient;
+                }
+                std::collections::btree_map::Entry::Vacant(entry) => {
+                    entry.insert(product);
+                }
+            }
         }
+    }
+    let out = combined
+        .into_values()
+        .filter_map(|mut term| {
+            term.coefficient = term.coefficient.together().cancel();
+            (!term.coefficient.is_zero()).then_some(term)
+        })
+        .collect::<Vec<_>>();
+    if out.len() > budget {
+        return Err(Error::Limit(format!(
+            "factorized boundary term budget exhausted: {} distinct terms exceed {budget}",
+            out.len()
+        )));
     }
     Ok(out)
 }

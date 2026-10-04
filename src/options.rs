@@ -141,6 +141,12 @@ pub enum Progress {
         elapsed_ms: u128,
         exact_ms: u128,
     },
+    BoundaryPlan {
+        basis_size: usize,
+        region_series: usize,
+        coefficients: usize,
+        max_half_order: usize,
+    },
     Prepared {
         basis_size: usize,
         blocks: Vec<usize>,

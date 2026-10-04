@@ -345,42 +345,48 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
         let regions = crate::regions::enumerate_regions(family, 10000)?;
         let parameters =
             ahash::HashMap::from_iter([(Atom::var(family.epsilon), p.rational(epsilon))]);
-        let build = |extra: usize| -> Result<Vec<Vec<RegionBoundary>>> {
-            let mut data = vec![Vec::new(); basis.len()];
-            for (i, integral) in basis.iter().enumerate() {
-                for region in &regions {
-                    self.context.cancellation.check()?;
-                    let leading =
-                        crate::regions::expand_region(family, integral, &shifted, region, 0)?;
-                    let exponent = -leading.eta_power;
-                    // Each fundamental solution must contribute its first nonzero
-                    // coefficient in this component to the boundary constraint matrix.
-                    let mut half_order = 2 * extra as i64;
-                    for column in &solutions.columns {
-                        if let Ok(offset) = (Atom::num(2) * (&column.exponent - &exponent))
-                            .together()
-                            .cancel()
-                            .to_string()
-                            .parse::<i64>()
-                            && let Some(k) = column
-                                .coefficients
-                                .iter()
-                                .position(|logs| logs.iter().any(|row| row[i] != p.zero()))
-                        {
-                            half_order = half_order.max(offset + 2 * k as i64 + 2 * extra as i64);
-                        }
-                    }
-                    if half_order > 32 {
-                        return Err(Error::Limit(
-                            "required boundary expansion exceeds order 16".into(),
-                        ));
-                    }
+        let powers = basis
+            .iter()
+            .map(|integral| {
+                regions
+                    .iter()
+                    .map(|region| {
+                        crate::regions::expand_region(family, integral, &shifted, region, 0)
+                            .map(|leading| -leading.eta_power)
+                    })
+                    .collect::<Result<Vec<_>>>()
+            })
+            .collect::<Result<Vec<_>>>()?;
+        let orders = solutions.region_orders(&powers, 32)?;
+        self.context.emit(Progress::BoundaryPlan {
+            basis_size: basis.len(),
+            region_series: orders
+                .iter()
+                .flatten()
+                .filter(|order| order.is_some())
+                .count(),
+            coefficients: orders
+                .iter()
+                .flatten()
+                .flatten()
+                .map(|order| order + 1)
+                .sum(),
+            max_half_order: orders
+                .iter()
+                .flatten()
+                .flatten()
+                .copied()
+                .max()
+                .unwrap_or(0),
+        })?;
+        let mut data = vec![Vec::new(); basis.len()];
+        for (i, integral) in basis.iter().enumerate() {
+            for (r, region) in regions.iter().enumerate() {
+                self.context.cancellation.check()?;
+                let mut coefficients = [Vec::new(), Vec::new()];
+                if let Some(half_order) = orders[i][r] {
                     let expansion = crate::regions::expand_region(
-                        family,
-                        integral,
-                        &shifted,
-                        region,
-                        half_order as usize,
+                        family, integral, &shifted, region, half_order,
                     )?;
                     let determinant = p.eval(&expansion.jacobian_determinant, &parameters)?;
                     let jacobian = p.pow(
@@ -389,7 +395,6 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
                             &(Rational::from(family.dimension) - epsilon * &Rational::from(2)),
                         ),
                     );
-                    let mut coefficients = [Vec::new(), Vec::new()];
                     for (k, expression) in expansion.coefficients.iter().enumerate() {
                         let factors = crate::integrand::factor_region(
                             expression,
@@ -400,8 +405,7 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
                         )?;
                         let mut value = p.zero();
                         for term in factors {
-                            // Check all factors before recursively evaluating any: a
-                            // scaleless factor annihilates the entire tensor term.
+                            // A scaleless factor annihilates the whole product.
                             if term
                                 .factors
                                 .iter()
@@ -422,27 +426,20 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
                         }
                         coefficients[k % 2].push(p.mul(&value, &jacobian));
                     }
-                    for (parity, coefficients) in coefficients.into_iter().enumerate() {
-                        if !coefficients.is_empty() {
-                            data[i].push(RegionBoundary {
-                                exponent: (&exponent + Atom::num((parity as i64, 2)))
-                                    .together()
-                                    .cancel(),
-                                coefficients,
-                            });
-                        }
-                    }
+                }
+                // Retain uncomputed regions (and parity classes) with empty
+                // coefficient arrays. Matching must treat them as unknown,
+                // rather than silently assuming their contributions vanish.
+                for (parity, coefficients) in coefficients.into_iter().enumerate() {
+                    data[i].push(RegionBoundary {
+                        exponent: (&powers[i][r] + Atom::num((parity as i64, 2)))
+                            .together()
+                            .cancel(),
+                        coefficients,
+                    });
                 }
             }
-            Ok(data)
-        };
-        for extra in 0..=16 {
-            let data = build(extra)?;
-            match solutions.match_regions(&data) {
-                Err(Error::IncompleteReduction(_)) if extra < 16 => continue,
-                result => return result,
-            }
         }
-        Err(Error::Limit("boundary matching order exhausted".into()))
+        solutions.match_regions(&data)
     }
 }

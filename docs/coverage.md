@@ -171,3 +171,18 @@ numerical zero for every comparison.
 Single-vector projection uses the exact angular-moment formula with a memoized
 Wick pairing sum, bounded to 100000 states. This extends the boundary tensors
 beyond rank eight without constructing the full labelled-pairing matrix.
+
+Boundary orders are selected by the rank of coefficient constraints in the
+Frobenius solution. The planner requests all overlapping regions at each selected
+power, retains uncomputed regions as unknown, and uses known-zero power and
+logarithm constraints. It avoids expanding every component to the first nonzero
+term of every fundamental solution. `BoundaryPlan` progress events report the
+number of selected region series, coefficient count, and largest half-order.
+Boundary matching still checks every computed coefficient, and numerical
+refinement remains required to establish accuracy.
+
+Factorized boundaries collect exact integral products before applying the term
+budget. A regression from the paper's six-line boundary family at half-order
+eight reduces over 10000 monomial contributions to 75 distinct products.
+This removes a demonstrated boundary-budget failure; it does not establish the
+full four-target numerical acceptance result.
