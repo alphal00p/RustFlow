@@ -1,8 +1,8 @@
 # Comparison with original AMFlow 2.0
 
 A same-host comparison against the original, unmodified C++ differential-equation
-solver is available. It measures preparation and regular continuation with supplied
-boundaries. **There is no measured full automatic-workflow comparison yet.** No
+solver is available. It measures regular continuation and singular matching with
+supplied boundaries. **There is no measured full automatic-workflow comparison yet.** No
 Wolfram runtime is available in this environment, and the mandatory four-target
 two-loop acceptance calculation remains incomplete.
 
@@ -204,3 +204,68 @@ and precision refinement, while upstream `SolveIntegrals` uses its own numerical
 configuration. A future full comparison must report this difference and include
 equivalent correctness checks. Stored upstream answer files contain no timing
 evidence and are not used to manufacture an original runtime.
+
+## Singular matching with an integer resonance
+
+A third matched workload constructs a Frobenius expansion at eta=0 for
+`A = [[1/(1-eta), 0], [1, 1/(eta*(1-eta))]]`, using the exact boundary
+`y(1/2) = (1, 0)`. Its solution is
+`y = (1/[2(1-eta)], eta*log(2*eta)/[2(1-eta)])`. The indicial exponents 0 and 1
+produce a resonant logarithm. Both implementations evaluate the matched series
+at eta=1/10; Rust additionally extracts the physical endpoint `(1/2, 0)`.
+The C++ input uses one rational fraction per matrix entry, as its parser requires.
+
+The Rust driver was linked with `rustc --edition=2024 -O -C debuginfo=1` against
+the archived release library from validated commit
+`917886e777a31638504fd16a78eaf65081808626`. The original executable is unchanged
+from the comparisons above. Both processes were restricted to CPU 24 with one
+thread, requested 201-bit working precision, and nominal series order 80. These are medians of
+five fresh processes after one excluded warmup, alternating implementation order.
+
+| Phase | Rust | Original C++ |
+|---|---:|---:|
+| Total process | 0.014369 s | 1.162599 s |
+| Singular expansion and boundary matching | 0.007174 s | 1.155660 s |
+
+The Rust phase timer includes Frobenius construction and matching. The original
+phase includes translation, indicial reconstruction, recurrence and matching.
+Final series evaluation is excluded from both phase timers. Rust's additional
+physical-limit check is included in its total process time.
+
+All measured repetitions pass the analytic check and comparison against an
+independent 267-bit, order-112 run. Maximum analytic errors at the base setting
+are `2.30e-25` for Rust and `2.19e-31` for the original; at the refined setting they
+are `5.35e-35` and `5.10e-41`. The base Rust endpoint error is `2.07e-25`.
+Truncation at the matching point dominates Rust's rounding error here.
+
+The internal work differs substantially. Original AMFlow's
+[`find_pow_log`](https://gitlab.com/multiloop-pku/amflow/-/blob/26005517a288086c4cb4d1b26d829691bc088485/diffeq_solver/src/mpsolver.cpp#L499)
+uses at least 450 decimal digits for indicial reconstruction under these settings.
+It [rationalizes the indicial polynomial and obtains its roots](https://gitlab.com/multiloop-pku/amflow/-/blob/26005517a288086c4cb4d1b26d829691bc088485/diffeq_solver/src/frobenius.cpp#L24)
+through [an external MPSolve process](https://gitlab.com/multiloop-pku/amflow/-/blob/26005517a288086c4cb4d1b26d829691bc088485/diffeq_solver/include/polyrat.hpp#L375).
+Its singular matcher also [enforces at least 20 extra expansion orders](https://gitlab.com/multiloop-pku/amflow/-/blob/26005517a288086c4cb4d1b26d829691bc088485/diffeq_solver/src/mpsolver.cpp#L786).
+Rust retains exact exponents 0 and 1 in this example and uses the requested
+truncation order. Equal nominal settings therefore give different internal
+precision, expansion work and achieved accuracy. These times characterize this
+small analytic system; they establish no general speedup or full-workflow result.
+The original endpoint is not evaluated in this comparison; Rust's endpoint is
+checked against the analytic limit. Both solvers receive supplied boundary data.
+
+[Raw results and provenance](../reports/performance/2026-10-04-singular-resonance.json)
+retain each phase timer, numerical output, exact input, executable and library
+hash, analytic errors, source references and precision/order checks. The source
+inspection annotations were added after measurement; their digest identifies
+the unannotated harness output. Reproduce using the original build described above:
+
+```sh
+cargo build --locked --release --example benchmark_singular
+python3 scripts/benchmark_singular.py \
+  --rust target/release/examples/benchmark_singular \
+  --upstream target/original-amflow-bench/amflow-26005517a288086c4cb4d1b26d829691bc088485/diffeq_solver/desolver \
+  --upstream-build-info target/original-amflow-bench/build.json \
+  --rust-source-commit "$(git rev-parse HEAD)" \
+  --rust-build-description 'Cargo release profile' \
+  --output target/singular-comparison --cpu 24 --repeats 5
+```
+
+Choose an available CPU on another host. Each output directory must be new.

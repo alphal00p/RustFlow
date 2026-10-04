@@ -2,3 +2,5 @@
 /reference/
 /.amflow-cache/
 /.dev-env
+__pycache__/
+*.py[cod]
