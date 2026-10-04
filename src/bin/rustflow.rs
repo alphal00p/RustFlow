@@ -9,9 +9,9 @@ use std::{
 };
 use symbolica::prelude::*;
 use symbolica_amflow::{
-    algebraic::{AlgebraicKinematicSystem, SquareRoot},
+    algebraic::{AlgebraicKinematicSystem, CanonicalAlgebraicSystem, SquareRoot},
     kinematics::KinematicSystem,
-    physical_transport::PhysicalResult,
+    physical_transport::{BoundaryAttemptOutcome, PhysicalResult},
     transport_cache::*,
     *,
 };
@@ -26,6 +26,7 @@ struct Settings {
     series_order: usize,
     max_steps: usize,
     max_precision_attempts: usize,
+    max_boundary_attempts: usize,
     workers: usize,
     dimension: i64,
     recursion: String,
@@ -45,6 +46,7 @@ impl Default for Settings {
             series_order: f.series_order,
             max_steps: f.max_steps,
             max_precision_attempts: f.max_precision_attempts,
+            max_boundary_attempts: f.max_boundary_attempts,
             workers: f.workers,
             dimension: f.dimension,
             recursion: "amf".into(),
@@ -65,6 +67,7 @@ impl Settings {
             series_order: self.series_order,
             max_steps: self.max_steps,
             max_precision_attempts: self.max_precision_attempts,
+            max_boundary_attempts: self.max_boundary_attempts,
             workers: self.workers,
             dimension: self.dimension,
             recursion: match self.recursion.as_str() {
@@ -299,13 +302,24 @@ struct Seed {
 }
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
+struct CanonicalInput {
+    variables: Vec<String>,
+    letters: Vec<String>,
+    matrices: Vec<Vec<Vec<String>>>,
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
 struct TransportRequest {
     schema_version: u32,
     #[serde(default = "namespace")]
     namespace: String,
     #[serde(default = "epsilon")]
     epsilon: String,
-    derivatives: BTreeMap<String, Vec<Vec<String>>>,
+    #[serde(default)]
+    derivatives: Option<BTreeMap<String, Vec<Vec<String>>>>,
+    #[serde(default)]
+    canonical: Option<CanonicalInput>,
     #[serde(default)]
     roots: BTreeMap<String, String>,
     basis: Vec<String>,
@@ -330,22 +344,19 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
     let options = request.options.options(directory)?;
     let context = request.options.context();
     let ns = &request.namespace;
-    let system = KinematicSystem {
-        epsilon: symbol(&request.epsilon, ns)?,
-        derivatives: request
-            .derivatives
-            .iter()
-            .map(|(name, matrix)| {
-                Ok((
-                    symbol(name, ns)?,
-                    matrix
-                        .iter()
-                        .map(|row| row.iter().map(|a| parse(a, ns)).collect())
-                        .collect::<CliResult<_>>()?,
-                ))
+    if request.derivatives.is_some() == request.canonical.is_some() {
+        return Err("transport requires exactly one of derivatives or canonical".into());
+    }
+    let roots = request
+        .roots
+        .iter()
+        .map(|(name, radicand)| {
+            Ok(SquareRoot {
+                symbol: symbol(name, ns)?,
+                radicand: parse(radicand, ns)?,
             })
-            .collect::<CliResult<_>>()?,
-    };
+        })
+        .collect::<CliResult<Vec<_>>>()?;
     let basis = request
         .basis
         .iter()
@@ -358,6 +369,76 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
         .map(|a| parse(a, ns))
         .collect::<CliResult<Vec<_>>>()?;
     let range = EpsilonRange::new(request.leading_epsilon_power, request.last_epsilon_power)?;
+    if let Some(canonical) = &request.canonical {
+        let system = CanonicalAlgebraicSystem::new(
+            symbol(&request.epsilon, ns)?,
+            &canonical
+                .variables
+                .iter()
+                .map(|s| symbol(s, ns))
+                .collect::<CliResult<Vec<_>>>()?,
+            &canonical
+                .letters
+                .iter()
+                .map(|a| parse(a, ns))
+                .collect::<CliResult<Vec<_>>>()?,
+            &canonical
+                .matrices
+                .iter()
+                .map(|matrix| {
+                    matrix
+                        .iter()
+                        .map(|row| row.iter().map(|a| parse(a, ns)).collect())
+                        .collect()
+                })
+                .collect::<CliResult<Vec<_>>>()?,
+            roots,
+        )?;
+        let flow = RustFlow::with_canonical_conditions(
+            system,
+            &basis,
+            &normalization,
+            options.prescription,
+            &request.branch_domain,
+            &conditions,
+        )?;
+        let mut result = execute_transport(
+            &request,
+            directory,
+            flow.identity(),
+            range,
+            |cache, point, policy| {
+                Ok(flow.evaluate_to(
+                    cache,
+                    &point.restart_coordinates()?,
+                    point.root_germ(),
+                    range,
+                    &options,
+                    &context,
+                    policy,
+                )?)
+            },
+        )?;
+        result["representation"] = "canonical".into();
+        result["identity"] = flow.identity().key().into();
+        return Ok(result);
+    }
+    let derivatives = request.derivatives.as_ref().ok_or("missing derivatives")?;
+    let system = KinematicSystem {
+        epsilon: symbol(&request.epsilon, ns)?,
+        derivatives: derivatives
+            .iter()
+            .map(|(name, matrix)| {
+                Ok((
+                    symbol(name, ns)?,
+                    matrix
+                        .iter()
+                        .map(|row| row.iter().map(|a| parse(a, ns)).collect())
+                        .collect::<CliResult<_>>()?,
+                ))
+            })
+            .collect::<CliResult<_>>()?,
+    };
     if request.roots.is_empty() {
         let flow = RustFlow::with_conditions(
             system,
@@ -384,16 +465,6 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
             },
         )
     } else {
-        let roots = request
-            .roots
-            .iter()
-            .map(|(name, radicand)| {
-                Ok(SquareRoot {
-                    symbol: symbol(name, ns)?,
-                    radicand: parse(radicand, ns)?,
-                })
-            })
-            .collect::<CliResult<Vec<_>>>()?;
         let flow = RustFlow::with_algebraic_conditions(
             AlgebraicKinematicSystem {
                 epsilon: system.epsilon,
@@ -554,6 +625,21 @@ fn execute_transport(
             "coefficients":result.boundary.coefficients.iter().map(|row| row.iter().map(complex_json).collect::<Vec<_>>()).collect::<Vec<_>>(),
             "absolute_errors":result.boundary.accuracy.comparison_errors().iter().map(|row| row.iter().map(|a| a.as_raw().to_string()).collect::<Vec<_>>()).collect::<Vec<_>>()
         });
+        if result.boundary_attempts.len() > 1 {
+            output["boundary_attempts"] = Value::Array(result.boundary_attempts.iter().map(|attempt| {
+                let mut entry = json!({
+                    "starting_point":point_json(&attempt.starting_point)?,
+                    "cost":attempt.cost.as_raw().to_string(),
+                    "source_verified_digits":attempt.source_verified_digits,
+                    "outcome":match &attempt.outcome {
+                        BoundaryAttemptOutcome::Accepted => json!({"status":"accepted"}),
+                        BoundaryAttemptOutcome::AccuracyRejected { message } => json!({"status":"accuracy_rejected","message":message}),
+                    },
+                });
+                if let Some(germ) = germ_json(&attempt.starting_point) {entry["root_germ"] = germ;}
+                Ok(entry)
+            }).collect::<CliResult<Vec<_>>>()?);
+        }
         if let Some(germ) = germ_json(&result.boundary.point) {
             output["root_germ"] = germ;
             output["starting_root_germ"] =

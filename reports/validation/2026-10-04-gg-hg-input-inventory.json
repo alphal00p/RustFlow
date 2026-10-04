@@ -1,0 +1,700 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "status": "inventory_complete_numerical_acceptance_pending",
+  "scope": "Full mixed light-quark QCD-EW gg->Hg application from pinned plugin; inventory and conditioning only, not amplitude evaluation.",
+  "source_commit": "89f64b93d0bdbd8ee90eb85737021189229b034a",
+  "source_url": "https://bitbucket.org/aschweitzer/mg5_higgs_ew_plugin/src/master/",
+  "inventory": {
+    "source_commit": "89f64b93d0bdbd8ee90eb85737021189229b034a",
+    "families": [
+      {
+        "family": "Planar_EW1",
+        "dimension": 48,
+        "nonzero_connection_entries": 465,
+        "letter_count": 36,
+        "letters": [
+          "b",
+          "t",
+          "1 - b",
+          "1 - t",
+          "-1 + t",
+          "s",
+          "1 - s",
+          "-1 + s",
+          "Sqrt[4 - b] + Sqrt[-b]",
+          "(-b)^(3/2) + Sqrt[4 - b]*b",
+          "4 - b",
+          "4",
+          "b - b*s + s^2",
+          "-b + s",
+          "-(Sqrt[4 - b]*Sqrt[-b]) + b - 2*s",
+          "Sqrt[4 - b]*Sqrt[-b] + b - 2*s",
+          "b - b*t + t^2",
+          "-b + t",
+          "-(Sqrt[4 - b]*Sqrt[-b]) + b - 2*t",
+          "Sqrt[4 - b]*Sqrt[-b] + b - 2*t",
+          "1 - b + t",
+          "b - t",
+          "1 - b + s",
+          "b - s",
+          "b - s - t",
+          "-b + s + t",
+          "8",
+          "s^2 + 2*s*t - b*s*t + t^2",
+          "-(Sqrt[4 - b]*Sqrt[-b]*s) + b*s - Sqrt[4 - b]*Sqrt[-b]*t - b*t",
+          "Sqrt[4 - b]*Sqrt[-b]*s + b*s + Sqrt[4 - b]*Sqrt[-b]*t - b*t",
+          "s + t",
+          "-s - t + s*t",
+          "2",
+          "Sqrt[4 - b] - Sqrt[-b]",
+          "Sqrt[4 - b]*Sqrt[-b] - b + 2*t",
+          "Sqrt[4 - b]*Sqrt[-b] - b + 2*s"
+        ],
+        "root_powers": [
+          [
+            "4 - b",
+            "1/2"
+          ],
+          [
+            "-b",
+            "1/2"
+          ],
+          [
+            "-b",
+            "3/2"
+          ]
+        ],
+        "root_bases": [
+          "4 - b",
+          "-b"
+        ],
+        "linear_log_decomposition": true,
+        "constant_exact_coefficient_matrices": true,
+        "constant_remainder_zero": true,
+        "matrix_sha256": "95442e5f5f1823fa205640219b0e1be8a43d260682af63345314d26fd37865a8",
+        "source_boundary": {
+          "file": "/common/dev/amflow/target/diffexp-oracle/mg5-audit/selected-grid-files/Planar_EW1/BClist/BClist_Planar_EW1_p1011194946161727751.txt",
+          "sha256": "09eb9531ee2ba9c9f46742fcddb4e4b3ad3fc04631ba579bc08837a813298b91",
+          "point": [
+            "5180073684/30560539",
+            "-165519417386863605722/1802676037405308611",
+            "13074/5399"
+          ],
+          "shape": [
+            5,
+            48
+          ],
+          "delta": "1.6271224168565797*^-27",
+          "minimum_component_precision": "40.677144046702715",
+          "minimum_component_accuracy": "238.26592935854057"
+        },
+        "precanonical_map": {
+          "sha256": "cf342d475a46ad70b23c57e8d53941bff28dfe5b60fa1ce582343eb6c363234e",
+          "expressions": 241,
+          "heads": [
+            "ff",
+            "MI",
+            "Times",
+            "Plus",
+            "vv",
+            "Power",
+            "Rational"
+          ]
+        },
+        "syntactically_distinct_root_base_count": 2,
+        "normalized_distinct_root_base_count": 2,
+        "normalized_root_bases": [
+          "4 - b",
+          "-b"
+        ],
+        "root_count_note": "Exact polynomial expansion identifies duplicate radicands; count does not claim algebraic independence modulo squares."
+      },
+      {
+        "family": "NP_EW1",
+        "dimension": 61,
+        "nonzero_connection_entries": 713,
+        "letter_count": 75,
+        "letters": [
+          "1 - s",
+          "s",
+          "-b + s + t",
+          "1 - b + s + t",
+          "1 - b",
+          "b",
+          "1 - t",
+          "t",
+          "-b + s",
+          "-b + b*s - s^2",
+          "-(Sqrt[4 - b]*Sqrt[-b]) + b",
+          "Sqrt[4 - b]*Sqrt[-b] + b",
+          "-(Sqrt[4 - b]*Sqrt[-b]) - b + 2*s",
+          "Sqrt[4 - b]*Sqrt[-b] - b + 2*s",
+          "4 - b",
+          "-b + b*s - s^2 + b*t - 2*s*t - t^2",
+          "-s - t",
+          "-(Sqrt[4 - b]*Sqrt[-b]) - b + 2*s + 2*t",
+          "Sqrt[4 - b]*Sqrt[-b] - b + 2*s + 2*t",
+          "-b + b*t - t^2",
+          "-b + t",
+          "-(Sqrt[4 - b]*Sqrt[-b]) - b + 2*t",
+          "Sqrt[4 - b]*Sqrt[-b] - b + 2*t",
+          "1 - b + s",
+          "b^2 - b^2*s + b*s^2 - 2*b*t + b*s*t + t^2",
+          "Sqrt[4 - b]*Sqrt[-b]*b - b^2 + 2*b*s - Sqrt[4 - b]*Sqrt[-b]*t + b*t",
+          "-(Sqrt[4 - b]*Sqrt[-b]*b) - b^2 + 2*b*s + Sqrt[4 - b]*Sqrt[-b]*t + b*t",
+          "-b + b*s - s^2 + t - s*t",
+          "b^2 - 2*b*s + s^2 - b^2*t + b*s*t + b*t^2",
+          "Sqrt[4 - b]*Sqrt[-b]*b - b^2 - Sqrt[4 - b]*Sqrt[-b]*s + b*s + 2*b*t",
+          "-(Sqrt[4 - b]*Sqrt[-b]*b) - b^2 + Sqrt[4 - b]*Sqrt[-b]*s + b*s + 2*b*t",
+          "-b + s + b*t - s*t - t^2",
+          "b - s - t + s*t",
+          "s^2 + 2*s*t - b*s*t + t^2",
+          "-(Sqrt[4 - b]*Sqrt[-b]*s) + b*s - Sqrt[4 - b]*Sqrt[-b]*t - b*t",
+          "Sqrt[4 - b]*Sqrt[-b]*s + b*s + Sqrt[4 - b]*Sqrt[-b]*t - b*t",
+          "-s - t + s*t",
+          "b*s - s^2 + t - s*t",
+          "b^2 - b*s - b*t - Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "b^2 - b*s - b*t + Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "-b^2 + 3*b*s - 2*s^2 + b*t - 2*s*t - Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "-b^2 + 3*b*s - 2*s^2 + b*t - 2*s*t + Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "-b^2 + b*s + 3*b*t - 2*s*t - 2*t^2 - Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "-b^2 + b*s + 3*b*t - 2*s*t - 2*t^2 + Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "-b^2 + b*s + b*t - 2*s*t - Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "-b^2 + b*s + b*t - 2*s*t + Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "4*b^2 - b^3 - 4*b*s + b^2*s - 4*b*t + b^2*t + 4*s*t",
+          "4*b^2 - b^3 - 4*b*s + b^2*s - 4*b*t + b^2*t + 4*s*t + Sqrt[4 - b]*Sqrt[-b]*Sqrt[-b + s + t]*Sqrt[4*b^2 - b^3 - 4*b*s + b^2*s - 4*b*t + b^2*t + 4*s*t]",
+          "4*b^2 - b^3 - 4*b*s + b^2*s - 4*b*t + b^2*t + 4*s*t - Sqrt[4 - b]*Sqrt[-b]*Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "-b + s - Sqrt[-b + s]*Sqrt[4 - b + s]",
+          "-b + s + Sqrt[-b + s]*Sqrt[4 - b + s]",
+          "4*b - b^2 + b*s - Sqrt[4 - b]*Sqrt[-b]*Sqrt[-b + s]*Sqrt[4 - b + s]",
+          "4*b - b^2 + b*s + Sqrt[4 - b]*Sqrt[-b]*Sqrt[-b + s]*Sqrt[4 - b + s]",
+          "4 - b + s",
+          "b*t - Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "b*t + Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "-(b*t) + 2*s*t + 2*t^2 - Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "-(b*t) + 2*s*t + 2*t^2 + Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "b*t - 2*s*t - Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "b*t - 2*s*t + Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "2*b*s - 2*s^2 + b*t - 2*s*t - Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "2*b*s - 2*s^2 + b*t - 2*s*t + Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "4*b*s - 4*s^2 + 4*b*t - b^2*t - 4*s*t",
+          "4*b*s - 4*s^2 + 4*b*t - b^2*t - 4*s*t + Sqrt[4 - b]*Sqrt[-b]*Sqrt[-t]*Sqrt[4*b*s - 4*s^2 + 4*b*t - b^2*t - 4*s*t]",
+          "4*b*s - 4*s^2 + 4*b*t - b^2*t - 4*s*t - Sqrt[4 - b]*Sqrt[-b]*Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "-b + s - Sqrt[-b + s]*Sqrt[4 - b + s] + 2*t",
+          "-b + s + Sqrt[-b + s]*Sqrt[4 - b + s] + 2*t",
+          "4*b^3 - b^4 - 8*b^2*s + 2*b^3*s + 4*b*s^2 - b^2*s^2 - 4*b^2*t + b^3*t + 8*b*s*t - b^2*s*t - 4*s^2*t - b*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "4*b^3 - b^4 - 8*b^2*s + 2*b^3*s + 4*b*s^2 - b^2*s^2 - 4*b^2*t + b^3*t + 8*b*s*t - b^2*s*t - 4*s^2*t + b*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "-4*b^3 + b^4 + 8*b^2*s - 2*b^3*s - 4*b*s^2 + b^2*s^2 + 12*b^2*t - 3*b^3*t - 16*b*s*t + 3*b^2*s*t + 4*s^2*t - 8*b*t^2 + 2*b^2*t^2 + 8*s*t^2 + b*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)] - 2*Sqrt[-b + s]*Sqrt[4 - b + s]*t*Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "-4*b^3 + b^4 + 8*b^2*s - 2*b^3*s - 4*b*s^2 + b^2*s^2 + 12*b^2*t - 3*b^3*t - 16*b*s*t + 3*b^2*s*t + 4*s^2*t - 8*b*t^2 + 2*b^2*t^2 + 8*s*t^2 - b*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)] + 2*Sqrt[-b + s]*Sqrt[4 - b + s]*t*Sqrt[-b + s + t]*Sqrt[4*(b - s)*(b - t) + b^2*(-b + s + t)]",
+          "-4*b^2*s + 8*b*s^2 - 4*s^3 - 4*b^2*t + b^3*t + 8*b*s*t - b^2*s*t - 4*s^2*t - b*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "-4*b^2*s + 8*b*s^2 - 4*s^3 - 4*b^2*t + b^3*t + 8*b*s*t - b^2*s*t - 4*s^2*t + b*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "4*b^2*s - 8*b*s^2 + 4*s^3 + 4*b^2*t - b^3*t - 16*b*s*t + b^2*s*t + 12*s^2*t - 8*b*t^2 + 2*b^2*t^2 + 8*s*t^2 + b*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)] - 2*s*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)] - 2*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-t]*t*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]",
+          "4*b^2*s - 8*b*s^2 + 4*s^3 + 4*b^2*t - b^3*t - 16*b*s*t + b^2*s*t + 12*s^2*t - 8*b*t^2 + 2*b^2*t^2 + 8*s*t^2 - b*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)] + 2*s*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-t]*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)] + 2*Sqrt[-b + s]*Sqrt[4 - b + s]*Sqrt[-t]*t*Sqrt[-(b^2*t) + 4*(b - s)*(s + t)]"
+        ],
+        "root_powers": [
+          [
+            "4 - b",
+            "1/2"
+          ],
+          [
+            "-b",
+            "1/2"
+          ],
+          [
+            "-b + s + t",
+            "1/2"
+          ],
+          [
+            "4*(b - s)*(b - t) + b^2*(-b + s + t)",
+            "1/2"
+          ],
+          [
+            "4*b^2 - b^3 - 4*b*s + b^2*s - 4*b*t + b^2*t + 4*s*t",
+            "1/2"
+          ],
+          [
+            "-b + s",
+            "1/2"
+          ],
+          [
+            "4 - b + s",
+            "1/2"
+          ],
+          [
+            "-t",
+            "1/2"
+          ],
+          [
+            "-(b^2*t) + 4*(b - s)*(s + t)",
+            "1/2"
+          ],
+          [
+            "4*b*s - 4*s^2 + 4*b*t - b^2*t - 4*s*t",
+            "1/2"
+          ]
+        ],
+        "root_bases": [
+          "4 - b",
+          "-b",
+          "-b + s + t",
+          "4*(b - s)*(b - t) + b^2*(-b + s + t)",
+          "4*b^2 - b^3 - 4*b*s + b^2*s - 4*b*t + b^2*t + 4*s*t",
+          "-b + s",
+          "4 - b + s",
+          "-t",
+          "-(b^2*t) + 4*(b - s)*(s + t)",
+          "4*b*s - 4*s^2 + 4*b*t - b^2*t - 4*s*t"
+        ],
+        "linear_log_decomposition": true,
+        "constant_exact_coefficient_matrices": true,
+        "constant_remainder_zero": true,
+        "matrix_sha256": "becb0221008715452488a4b73a64be95ad869dc8fb54657598fe34a1f28921d9",
+        "source_boundary": {
+          "file": "/common/dev/amflow/target/diffexp-oracle/mg5-audit/selected-grid-files/NP_EW1/BClist/BClist_NP_EW1_p1011194946161727751.txt",
+          "sha256": "22b140927743133fc56dc7b0e6c6ab2d3e529d829f5d942556d7357e249d53ea",
+          "point": [
+            "5180073684/30560539",
+            "-165519417386863605722/1802676037405308611",
+            "13074/5399"
+          ],
+          "shape": [
+            5,
+            61
+          ],
+          "delta": "3.5311291098874974*^-28",
+          "minimum_component_precision": "40.376114758773234",
+          "minimum_component_accuracy": "238.58446719512423"
+        },
+        "precanonical_map": {
+          "sha256": "d3550909ac51d687e73e520718f7abbf6787712f47d2ae7f3b111da08ae78299",
+          "expressions": 306,
+          "heads": [
+            "ff",
+            "MI",
+            "Times",
+            "Plus",
+            "vv",
+            "Power",
+            "Rational"
+          ]
+        },
+        "syntactically_distinct_root_base_count": 10,
+        "normalized_distinct_root_base_count": 8,
+        "normalized_root_bases": [
+          "4 - b",
+          "-b",
+          "-b + s + t",
+          "4*b^2 - b^3 - 4*b*s + b^2*s - 4*b*t + b^2*t + 4*s*t",
+          "-b + s",
+          "4 - b + s",
+          "-t",
+          "4*b*s - 4*s^2 + 4*b*t - b^2*t - 4*s*t"
+        ],
+        "root_count_note": "Exact polynomial expansion identifies duplicate radicands; count does not claim algebraic independence modulo squares."
+      }
+    ],
+    "form_factors": {
+      "count": 4,
+      "sha256": "9792a04749d3756d59c8603acc88e851bdc4175bac9941939eb5c5fc594a17f3",
+      "usage": [
+        {
+          "family": "canMIPlanar",
+          "unique_uses": 244,
+          "master_indices": [
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            20,
+            21,
+            22,
+            24,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47
+          ],
+          "epsilon_orders": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "permutations": [
+            "{vv[1], vv[2], vv[3]}",
+            "{-vv[1] - vv[2] + vv[3], vv[2], vv[3]}",
+            "{vv[2], vv[1], vv[3]}",
+            "{vv[1], -vv[1] - vv[2] + vv[3], vv[3]}"
+          ]
+        },
+        {
+          "family": "canMINP",
+          "unique_uses": 449,
+          "master_indices": [
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            13,
+            14,
+            15,
+            16,
+            19,
+            20,
+            21,
+            22,
+            23,
+            24,
+            25,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            33,
+            34,
+            35,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            46,
+            47,
+            48,
+            49,
+            50,
+            51,
+            52,
+            53,
+            54,
+            55,
+            56,
+            57,
+            58,
+            59,
+            60,
+            61
+          ],
+          "epsilon_orders": [
+            1,
+            2,
+            3,
+            4
+          ],
+          "permutations": [
+            "{vv[2], vv[1], vv[3]}",
+            "{-vv[1] - vv[2] + vv[3], vv[2], vv[3]}",
+            "{vv[1], vv[2], vv[3]}"
+          ]
+        }
+      ]
+    }
+  },
+  "precision_conditioning": {
+    "families": [
+      {
+        "family": "Planar_EW1",
+        "normalized_root_bases": [
+          "4 - b",
+          "-b"
+        ],
+        "normalized_distinct_root_base_count": 2,
+        "root_signs_at_selected_point": [
+          "1.5784404519355436191887386553065382478236710501944804593442`30.",
+          "-2.4215595480644563808112613446934617521763289498055195406557`30."
+        ],
+        "number_inexact_components": 182,
+        "number_inexact_nonzero_components": 182,
+        "min_component_precision": "40.677144046702715",
+        "min_component_accuracy": "238.26592935854057",
+        "inherited_delta": "1.6271224168565797*^-27"
+      },
+      {
+        "family": "NP_EW1",
+        "normalized_root_bases": [
+          "4 - b",
+          "-b",
+          "-b + s + t",
+          "4*b^2 - b^3 - 4*b*s + b^2*s - 4*b*t + b^2*t + 4*s*t",
+          "-b + s",
+          "4 - b + s",
+          "-t",
+          "4*b*s - 4*s^2 + 4*b*t - b^2*t - 4*s*t"
+        ],
+        "normalized_distinct_root_base_count": 8,
+        "root_signs_at_selected_point": [
+          "1.5784404519355436191887386553065382478236710501944804593442`30.",
+          "-2.4215595480644563808112613446934617521763289498055195406557`30.",
+          "75.26175366349944272833470824492055366361`30.",
+          "-62541.51738313777618852269927536766166057683`30.",
+          "167.08047979751122211098497300837210427073`30.",
+          "171.08047979751122211098497300837210427073`30.",
+          "91.81872613401177938265026476345155060712`30.",
+          "-51379.0404962734693150155251514065382876653`30."
+        ],
+        "number_inexact_components": 250,
+        "number_inexact_nonzero_components": 250,
+        "min_component_precision": "40.376114758773234",
+        "min_component_accuracy": "238.58446719512423",
+        "inherited_delta": "3.5311291098874974*^-28"
+      }
+    ],
+    "form_factor_term_counts": [
+      40606,
+      43317,
+      35669,
+      66421
+    ],
+    "single_MI_per_additive_term": true,
+    "coefficient_L1_at_selected_dimensionless_point": [
+      "5620.20756229406525316291624887553563106826199919861037118215402394513134792441777`60.",
+      "19650.60873099360680833717724241131644703986218149917434671975480490720545716226599`60.",
+      "14746.23084327405627365420760217887193301525788785141444329242796635802035504503388`60.",
+      "56630.62545271139398614753937246182511976342247543595813450498997563474673253556885`60."
+    ],
+    "conservative_assumed_component_error": "1e-26 at every family/permutation component; actual unavailable permuted source records must be checked before accepting this bound",
+    "resulting_unscaled_ff_error_estimates": [
+      "5.620207562294065253162916248875535631068261999198610371`40.*^-23",
+      "1.9650608730993606808337177242411316447039862181499174346`40.*^-22",
+      "1.4746230843274056273654207602178871933015257887851414444`40.*^-22",
+      "5.6630625452711393986147539372461825119763422475435958134`40.*^-22"
+    ],
+    "mv_equals_one_loop_measure_error_estimates": [
+      "2.25378715242787418842612998725384970311901985118087`40.*^-27",
+      "7.88018752055177462205995644901619841101609360891788`40.*^-27",
+      "5.91345875627071412645914144457616583543450945910105`40.*^-27",
+      "2.270972640504727408696932169394779128831602929146998`40.*^-26"
+    ],
+    "scope": "Conditioning diagnostic only: no form factors or permuted target integrals evaluated. For coefficient magnitudes only, ieps0 is taken to0 at this nonsingular point; this does not define the physical sheet for amplitude values. Coefficient norm uses every raw additive term, so repeated MI cancellations can only improve this conservative bound."
+  },
+  "source_files": [
+    {
+      "path": "/common/dev/mg5_higgs_ew_plugin/ComputationFormFacGGHGEW/mathematicaRoutines/ExpCan4_Reg.wl",
+      "sha256": "d1393bb001caa908a45a815898a1534209d10d99453e2805f8119050d87ece92",
+      "bytes": 24487
+    },
+    {
+      "path": "/common/dev/mg5_higgs_ew_plugin/ComputationFormFacGGHGEW/mathematicaRoutines/expewmi.m",
+      "sha256": "9125389e6a4257a14253a10afc706a030cad40ad5eaa15d64d555e15f396068d",
+      "bytes": 1605
+    },
+    {
+      "path": "/common/dev/mg5_higgs_ew_plugin/ComputationFormFacGGHGEW/mathematicaRoutines/expew.wls",
+      "sha256": "a89859e0d33559f714bc3e5f9cbce3b6b2e542acddcb172d48f9d1fdc0bf0bd2",
+      "bytes": 3903
+    },
+    {
+      "path": "/common/dev/mg5_higgs_ew_plugin/ComputationFormFacGGHGEW/mathematicaRoutines/FFlist.txt",
+      "sha256": "9792a04749d3756d59c8603acc88e851bdc4175bac9941939eb5c5fc594a17f3",
+      "bytes": 3640255
+    },
+    {
+      "path": "/common/dev/mg5_higgs_ew_plugin/UFO_model_gggH/vertices.py",
+      "sha256": "9845f46c4d57e2123999492646e10a49f6a40d4560989be88ff43a75db88722e",
+      "bytes": 32688
+    },
+    {
+      "path": "/common/dev/mg5_higgs_ew_plugin/UFO_model_gggH/lorentz.py",
+      "sha256": "c8469e01e5f041188c0af926d01aed263649760be66826cec78a1cdf6d7b9db6",
+      "bytes": 7349
+    },
+    {
+      "path": "/common/dev/mg5_higgs_ew_plugin/UFO_model_gggH/couplings.py",
+      "sha256": "ddaaff50f57c539ebc72668d3cb1bbb0d7daffeda36e0d8e78f5a4003dd6f292",
+      "bytes": 19479
+    },
+    {
+      "path": "/common/dev/mg5_higgs_ew_plugin/UFO_model_gggH/parameters.py",
+      "sha256": "f99f3682405ed2a69f726e2ea65c6a240b93db5d9bbd60d4fa49249df4a4de86",
+      "bytes": 46149
+    },
+    {
+      "path": "target/diffexp-oracle/mg5-audit/selected-grid-files/Planar_EW1/atilde_Planar_EW1.txt",
+      "sha256": "95442e5f5f1823fa205640219b0e1be8a43d260682af63345314d26fd37865a8",
+      "bytes": 53287
+    },
+    {
+      "path": "target/diffexp-oracle/mg5-audit/selected-grid-files/Planar_EW1/preCan_functions_Planar_EW1.txt",
+      "sha256": "cf342d475a46ad70b23c57e8d53941bff28dfe5b60fa1ce582343eb6c363234e",
+      "bytes": 49280
+    },
+    {
+      "path": "target/diffexp-oracle/mg5-audit/selected-grid-files/Planar_EW1/BClist/BClist_Planar_EW1_p1011194946161727751.txt",
+      "sha256": "09eb9531ee2ba9c9f46742fcddb4e4b3ad3fc04631ba579bc08837a813298b91",
+      "bytes": 91495
+    },
+    {
+      "path": "target/diffexp-oracle/mg5-audit/selected-grid-files/NP_EW1/atilde_NP_EW1.txt",
+      "sha256": "becb0221008715452488a4b73a64be95ad869dc8fb54657598fe34a1f28921d9",
+      "bytes": 94534
+    },
+    {
+      "path": "target/diffexp-oracle/mg5-audit/selected-grid-files/NP_EW1/preCan_functions_NP_EW1.txt",
+      "sha256": "d3550909ac51d687e73e520718f7abbf6787712f47d2ae7f3b111da08ae78299",
+      "bytes": 310969
+    },
+    {
+      "path": "target/diffexp-oracle/mg5-audit/selected-grid-files/NP_EW1/BClist/BClist_NP_EW1_p1011194946161727751.txt",
+      "sha256": "22b140927743133fc56dc7b0e6c6ab2d3e529d829f5d942556d7357e249d53ea",
+      "bytes": 123672
+    }
+  ],
+  "extraction": {
+    "cpu": 31,
+    "workers": 1,
+    "bounded_seconds": [
+      120,
+      90
+    ],
+    "wall_timings": "Not measured; both extraction scripts completed successfully within their caps. No performance claim.",
+    "scripts": {
+      "inventory.wl": {
+        "path": "target/gg-hg-inventory/inventory.wl",
+        "sha256": "2d4455c9f5da90eca32b43f851401da4570b89ee09ccc7d5a47867519fa67001",
+        "bytes": 3303,
+        "source": "$HistoryLength=0;\nbase=\"/common/dev/amflow/target/diffexp-oracle/mg5-audit/selected-grid-files\";\nout=\"/common/dev/amflow/target/gg-hg-inventory\";\nstr[x_]:=ToString[x,InputForm];sha[f_]:=IntegerString[FileHash[f,\"SHA256\"],16,64];\nrecords={};\nDo[\nf=FileNameJoin[{base,fam,\"atilde_\"<>fam<>\".txt\"}];a=Get[f];n=Length[a];\nletters=DeleteDuplicates[Cases[a,Log[z_]:>z,Infinity]];\nlogs=Log/@letters;markers=Table[Unique[\"l\"],Length[letters]];\npolynomial=a/.Thread[logs->markers];\nconstantPart=polynomial/.Thread[markers->0];\nmatrices=Table[Map[Coefficient[#,markers[[k]]]&,polynomial,{2}],{k,Length[markers]}];\nlinearQ=TrueQ[Expand[polynomial-Sum[matrices[[k]] markers[[k]],{k,Length[markers]}]]===ConstantArray[0,{n,n}]];\nconstantQ=FreeQ[matrices,s|t|u|b|_Log];\nroots=DeleteDuplicates[Cases[letters,Power[z_,q_Rational]/;Denominator[q]>1:>{z,q},Infinity]];\nrootbases=DeleteDuplicates[First/@roots];\nnonzero=Count[Flatten[a],Except[0]];\nbcfile=FileNameJoin[{base,fam,\"BClist\",\"BClist_\"<>fam<>\"_p1011194946161727751.txt\"}];bc=Get[bcfile];\nprecfile=FileNameJoin[{base,fam,\"preCan_functions_\"<>fam<>\".txt\"}];pre=Get[precfile];\nrec=<|\"family\"->fam,\"dimension\"->n,\"nonzero_connection_entries\"->nonzero,\"letter_count\"->Length[letters],\"letters\"->(str/@letters),\"root_powers\"->Map[str,roots,{2}],\"syntactically_distinct_root_base_count\"->Length[rootbases],\"root_bases\"->(str/@rootbases),\"linear_log_decomposition\"->linearQ,\"constant_exact_coefficient_matrices\"->constantQ,\"constant_remainder_zero\"->And@@(#===0&/@Flatten[constantPart]),\"matrix_sha256\"->sha[f],\"source_boundary\"-><|\"file\"->bcfile,\"sha256\"->sha[bcfile],\"point\"->(str/@({vv[1],vv[2],vv[3]}/.bc[[1]])),\"shape\"->Dimensions[bc[[2]]],\"delta\"->str[bc[[3]]],\"minimum_component_precision\"->str[Min[Precision/@Flatten[bc[[2]]]]],\"minimum_component_accuracy\"->str[Min[Accuracy/@Flatten[bc[[2]]]]]|>,\"precanonical_map\"-><|\"sha256\"->sha[precfile],\"expressions\"->Length[pre],\"heads\"->(str/@DeleteDuplicates[Cases[pre,z_[___]:>z,Infinity]])|>|>;\nAppendTo[records,rec];\nExport[FileNameJoin[{out,fam<>\"-canonical.json\"}],<|\"family\"->fam,\"dimension\"->n,\"variables\"->{\"s\",\"t\",\"b\"},\"dependent\"->\"u=b-s-t\",\"letters\"->(str/@letters),\"root_bases\"->(str/@rootbases),\"matrices\"->Table[<|\"letter\"->k,\"entries\"->Cases[MapIndexed[If[#1===0,Nothing,{#2[[1]],#2[[2]],str[#1]}]&,matrices[[k]],{2}],{_Integer,_Integer,_String},Infinity]|>,{k,Length[letters]}],\"matrix_sha256\"->sha[f]|>,\"RawJSON\"];\nPrint[fam,\" dimension=\",n,\" letters=\",Length[letters],\" roots=\",Length[rootbases],\" exactconstant=\",constantQ,\" linear=\",linearQ],\n{fam,{\"Planar_EW1\",\"NP_EW1\"}}];\nfffile=\"/common/dev/mg5_higgs_ew_plugin/ComputationFormFacGGHGEW/mathematicaRoutines/FFlist.txt\";ff=Get[fffile];\nffrecords=Table[uses=DeleteDuplicates[Cases[ff,head[i_Integer,e_Integer,c_List]:>{i,e,c},Infinity]];<|\"family\"->ToString[head],\"unique_uses\"->Length[uses],\"master_indices\"->Sort[DeleteDuplicates[uses[[All,1]]]],\"epsilon_orders\"->Sort[DeleteDuplicates[uses[[All,2]]]],\"permutations\"->(str/@DeleteDuplicates[uses[[All,3]]])|>,{head,{canMIPlanar,canMINP}}];\nExport[FileNameJoin[{out,\"inventory.json\"}],<|\"source_commit\"->\"89f64b93d0bdbd8ee90eb85737021189229b034a\",\"families\"->records,\"form_factors\"-><|\"count\"->Length[ff],\"sha256\"->sha[fffile],\"usage\"->ffrecords|>|>,\"RawJSON\"];\nPrint[\"DONE \",ffrecords];Exit[0];\n"
+      },
+      "precision_inventory.wl": {
+        "path": "target/gg-hg-inventory/precision_inventory.wl",
+        "sha256": "e6abe27ce4bc0740fde33620223d11e68ac69bede5659ad261b59a48b262574a",
+        "bytes": 2583,
+        "source": "$HistoryLength=0;\nbase=\"/common/dev/amflow/target/diffexp-oracle/mg5-audit/selected-grid-files\";out=\"/common/dev/amflow/target/gg-hg-inventory\";str[x_]:=ToString[x,InputForm];\nsummary={};\nDo[\na=Get[FileNameJoin[{base,fam,\"atilde_\"<>fam<>\".txt\"}]];roots=DeleteDuplicates[Cases[a,Power[z_,q_Rational]/;Denominator[q]>1:>Expand[z],Infinity]];\nf=FileNameJoin[{base,fam,\"BClist\",\"BClist_\"<>fam<>\"_p1011194946161727751.txt\"}];bc=Get[f];values=Flatten[bc[[2]]];inexact=Select[values,Precision[#]=!=Infinity&];nonzero=Select[inexact,!TrueQ[#==0]&];\nAppendTo[summary,<|\"family\"->fam,\"normalized_root_bases\"->(str/@roots),\"normalized_distinct_root_base_count\"->Length[roots],\"root_signs_at_selected_point\"->(str/@N[roots/.{s->vv[1],t->vv[2],b->vv[3]}/.bc[[1]],30]),\"number_inexact_components\"->Length[inexact],\"number_inexact_nonzero_components\"->Length[nonzero],\"min_component_precision\"->str[Min[Precision/@inexact]],\"min_component_accuracy\"->str[Min[Accuracy/@inexact]],\"inherited_delta\"->str[bc[[3]]]|>],{fam,{\"Planar_EW1\",\"NP_EW1\"}}];\nff=Get[\"/common/dev/mg5_higgs_ew_plugin/ComputationFormFacGGHGEW/mathematicaRoutines/FFlist.txt\"];\npin=Get[FileNameJoin[{base,\"NP_EW1\",\"BClist\",\"BClist_NP_EW1_p1011194946161727751.txt\"}]][[1]];\nterms=If[Head[#]===Plus,List@@#,{#}]&/@Expand[ff];\nlinear=And@@Flatten[Map[Function[z,Length[Cases[z,_canMIPlanar|_canMINP,{0,Infinity}]]==1],terms,{2}]];\ncoefficientL1=Map[Total[Abs[N[#/.{_canMIPlanar->1,_canMINP->1}/.pin/.ieps0->0,60]]&/@#]&,terms];\nIf[!linear || !And@@(NumericQ/@coefficientL1),Print[\"FAIL linear/numeric \",linear];Exit[1]];\nExport[FileNameJoin[{out,\"precision-inventory.json\"}],<|\"families\"->summary,\"form_factor_term_counts\"->(Length/@terms),\"single_MI_per_additive_term\"->linear,\"coefficient_L1_at_selected_dimensionless_point\"->(str/@coefficientL1),\"conservative_assumed_component_error\"->\"1e-26 at every family/permutation component; actual unavailable permuted source records must be checked before accepting this bound\",\"resulting_unscaled_ff_error_estimates\"->(str/@N[10^-26 coefficientL1,40]),\"mv_equals_one_loop_measure_error_estimates\"->(str/@N[10^-26 coefficientL1/(4Pi)^4,40]),\"scope\"->\"Conditioning diagnostic only: no form factors or permuted target integrals evaluated. For coefficient magnitudes only, ieps0 is taken to0 at this nonsingular point; this does not define the physical sheet for amplitude values. Coefficient norm uses every raw additive term, so repeated MI cancellations can only improve this conservative bound.\"|>,\"RawJSON\"];\nPrint[\"DONE roots \",summary,\" ffL1 \",coefficientL1,\" linear \",linear];Exit[0];\n"
+      }
+    },
+    "files": [
+      {
+        "path": "target/gg-hg-inventory/precision-inventory-unexpanded.log",
+        "sha256": "a796eba9c0484ebb3fb4c42f4bc829fdb025176d35d71cc342ccf245a3a25e54",
+        "bytes": 5428
+      },
+      {
+        "path": "target/gg-hg-inventory/NP_EW1-canonical.json",
+        "sha256": "2879cc7ab7be260c0c76e46e813f9e096b4b525672b3dc40257738841db3e53b",
+        "bytes": 125381
+      },
+      {
+        "path": "target/gg-hg-inventory/precision-inventory.log",
+        "sha256": "fc8b5088461e672365c3a235d43015e9a7609eede213c46448eeddb434f39247",
+        "bytes": 1869
+      },
+      {
+        "path": "target/gg-hg-inventory/inventory.log",
+        "sha256": "722c0ee5bbb1d48d8fa918bdeac4b1839c6a292c1f48097e4dab0642e18129e4",
+        "bytes": 1039
+      },
+      {
+        "path": "target/gg-hg-inventory/inventory.json",
+        "sha256": "1aa9a577e12990be35892effa3082869e072f71e548fd386f61f9c09365ce08d",
+        "bytes": 14128
+      },
+      {
+        "path": "target/gg-hg-inventory/precision-inventory-unexpanded.json",
+        "sha256": "7565b3020de49b01fdbe90897823b6827a5233d5678fc22f40cb457c63675fc4",
+        "bytes": 12896
+      },
+      {
+        "path": "target/gg-hg-inventory/Planar_EW1-canonical.json",
+        "sha256": "b270fffce6e2b8354be651c607a336c1fab4c22f9270d33eb15a62187219acf4",
+        "bytes": 79148
+      },
+      {
+        "path": "target/gg-hg-inventory/precision-inventory.json",
+        "sha256": "3371cb012d835d69ad793dd637647374c382814d44775758a4ca1c0fb0c4813f",
+        "bytes": 3322
+      }
+    ],
+    "note": "Initial unexpanded FF norm attempt retained under precision-inventory-unexpanded.*; it failed linear/numeric adequacy and is not evidence. Correct diagnostic fully expands each FF before termwise triangle bound."
+  },
+  "availability": {
+    "plugin_scientific_data": "Full canonical matrices, precanonical maps and boundary grids, four FF formulas and effective UFO tensors/couplings are available.",
+    "plugin_missing_data": "Grid archives contain no physical propagator routing or canonical-to-integral power-list definitions.",
+    "primary_additional_sources": [
+      {
+        "url": "https://arxiv.org/pdf/1810.05138",
+        "role": "Planar9-slot topology Eq2.7, normalization Eq2.6,48 precanonical routings appendixA and canonical transformations; plugin basis mapping unverified."
+      },
+      {
+        "url": "https://arxiv.org/pdf/2007.09813",
+        "role": "Independent two-family9-slot definitions Table1, master list appendixA, canonical/dlog ancillary data and two full helicity amplitudes; different basis, no indexwise map assumed."
+      },
+      {
+        "url": "https://arxiv.org/pdf/2010.09451",
+        "role": "Application physics definition, effective-UFO construction, matrix-element benchmark appendix."
+      }
+    ]
+  },
+  "root_prescription": "Preserve original threshold root flips above each declared invariant threshold; e.g sqrt(-b) is opposite principal at positive physical b. Nonthreshold root conventions must be checked against unchanged original. Eight normalized NP radicands are not claimed algebraically independent modulo squares.",
+  "normalization": {
+    "dimensionless_coordinates": [
+      "s/MV^2",
+      "t/MV^2",
+      "MH^2/MV^2"
+    ],
+    "dependent_invariant": "u=b-s-t",
+    "W_b": "13074/5399",
+    "Z_b": "14631/7775",
+    "form_factor_loop_measure": "-1/(4*pi)^4",
+    "form_factor_mass_rescaling": "MV^-4",
+    "couplings": "Model AllGGGHEWZZCoup/AllGGGHEWWWCoup and four tensor structures applied once after normalized FF assembly; exact values required, never numeric model defaults."
+  },
+  "native_reuse": {
+    "model": "feynkit_model::Model::from_json, shared Arc<Model>; raw UFO import/export belongs to HEPKit feynkit_ufo::UfoLoader outside this native-only crate.",
+    "graphs": "feynkit_generator::ModelProcessExt/Process::generate_diagrams or generate_amplitude; native FeynmanDiagram/LoopMomentumBasis remain owners. Effective UFO is sufficient for tensor contraction but does not derive two-loop numerator reduction.",
+    "squared_amplitude": "feynkit_amplitude::Amplitude::{from_diagrams,squared}, SquaredAmplitude::{sum_spins,sum_colors}; Idenso SymbolicTensor contraction, no custom polarization/color algebra.",
+    "integrals": "CanonicalAlgebraicSystem/RustFlow::new_canonical with explicit root registry/germ and same RustFlowCache; no separate application cache."
+  },
+  "acceptance_order": [
+    "Full48 and61 at one non-grid physical W point from precision-evidenced grid seed, unchanged original oracle then independent native/refinement; compare545 coefficients.",
+    "Four invariant permutations and both W/Z ratios with separately checked seeds, root germs, paths, every coefficient through epsilon4.",
+    "Assemble allfour complex FFs with exact coefficient weights/loop+mass normalization, propagate MI error envelopes termwise and check refinement plus live original at non-grid destinations.",
+    "Feed resulting form factors into native effective-UFO amplitude tensor owner; check Ward identities, crossing/Bose symmetry, helicities or spin/color averaged matrix element against live original/published benchmarks.",
+    "Only after supplied amplitude coverage: establish exact published-to-plugin basis maps and native two-loop graph/numerator/AMF derivation."
+  ],
+  "licensing": "Pinned plugin has no root LICENSE/COPYING/NOTICE and grid archives contain no license. Computational source remains an externally loaded oracle, not copied into the MIT implementation. Durable scientific fixtures contain independently serialized mathematical equations, newly computed numerical outputs and explicit provenance; no original solver code or verbatim paper text is included."
+}

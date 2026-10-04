@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "recorded_utc": "2026-10-04T21:25:32.739302+00:00",
+  "validated_commit": "799b45a6920345cc0ff517d6bf1dc27f000a92c8",
+  "source_hashes_match_validated_commit": true,
+  "scope": "Explicit release-mode production regressions for all13 one-loop planar five-point masters and the13-master connected two-loop ZMZ sector through epsilon order4",
+  "binaries": {
+    "fivepoint_planar": {
+      "source": "target/release/deps/fivepoint_planar-ca03271c90ddaf80",
+      "path": "target/canonical-release/acceptance/fivepoint_planar",
+      "bytes": 587587224,
+      "sha256": "96530f9a22c4637d771b61ca76ba34b0ac2b1abb4eefbc368a06c0fa28aebe11"
+    },
+    "fivepoint_zmz_sector": {
+      "source": "target/release/deps/fivepoint_zmz_sector-00e1e8a987e15800",
+      "path": "target/canonical-release/acceptance/fivepoint_zmz_sector",
+      "bytes": 587671160,
+      "sha256": "5da78ba178821a74265fc8621f8ebfa7f2ccad0289048cf7aa60bdd8ed6584b2"
+    }
+  },
+  "commands": [
+    "timeout --preserve-status 1800s taskset -c 32 target/canonical-release/acceptance/fivepoint_planar --ignored --nocapture --test-threads=1",
+    "timeout --preserve-status 1800s taskset -c 33 target/canonical-release/acceptance/fivepoint_zmz_sector --ignored --nocapture --test-threads=1"
+  ],
+  "cases": {
+    "planar": {
+      "passed": 1,
+      "failed": 0,
+      "harness_seconds": "668.28",
+      "log": "target/rustflow-canonical-fivepoint-planar.log",
+      "log_sha256": "64ddee6360d55a9dee30812cc8c032f38404a0a2a4c2453611f14799c617a9c5",
+      "profiles": [
+        {
+          "working_digits": "40",
+          "order": "48",
+          "symbolic_seconds": "20.514",
+          "compile_seconds": "0.100",
+          "transport_seconds": "68.559",
+          "total_seconds": "89.197",
+          "accepted_steps": "575",
+          "rejected_steps": "306"
+        },
+        {
+          "working_digits": "60",
+          "order": "80",
+          "symbolic_seconds": "20.301",
+          "compile_seconds": "0.096",
+          "transport_seconds": "181.394",
+          "total_seconds": "201.793",
+          "accepted_steps": "575",
+          "rejected_steps": "306"
+        },
+        {
+          "working_digits": "80",
+          "order": "112",
+          "symbolic_seconds": "20.304",
+          "compile_seconds": "0.097",
+          "transport_seconds": "356.877",
+          "total_seconds": "377.280",
+          "accepted_steps": "574",
+          "rejected_steps": "305"
+        }
+      ]
+    },
+    "zmz_sector": {
+      "passed": 1,
+      "failed": 0,
+      "harness_seconds": "291.68",
+      "log": "target/rustflow-canonical-fivepoint-zmz-sector.log",
+      "log_sha256": "ebede4d8bd5c7680c5193f57147d1bdaf83c602c361279cdc7bbe51d1907a2d6",
+      "profiles": [
+        {
+          "working_digits": "40",
+          "order": "48",
+          "symbolic_seconds": "5.545",
+          "compile_seconds": "0.092",
+          "transport_seconds": "75.604",
+          "total_seconds": "81.263",
+          "accepted_steps": "575",
+          "rejected_steps": "306"
+        },
+        {
+          "working_digits": "60",
+          "order": "80",
+          "symbolic_seconds": "5.496",
+          "compile_seconds": "0.092",
+          "transport_seconds": "204.824",
+          "total_seconds": "210.414",
+          "accepted_steps": "575",
+          "rejected_steps": "306"
+        }
+      ]
+    }
+  },
+  "related_reports": [
+    "reports/validation/2026-10-04-canonical-release.json",
+    "reports/diffexp/fivepoint-planar-validation.json",
+    "reports/diffexp/fivepoint-zmz-sector-validation.json"
+  ],
+  "limitations": [
+    "Supplied upstream PH1 boundaries; these regressions do not construct AMF boundaries",
+    "Subset of full DiffExp coverage; ZMZ sector has13 masters, parent has75",
+    "Native assertions compare independent working precision/order and stored original reference evidence; this run does not regenerate original Wolfram outputs",
+    "Wall times are descriptive single runs on shared host CPUs32/33, not a matched performance-parity claim"
+  ]
+}

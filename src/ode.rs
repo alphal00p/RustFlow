@@ -270,6 +270,7 @@ impl DifferentialSystem {
         })
     }
     pub fn validate(&self) -> Result<()> {
+        validate_ode_variable(self.variable)?;
         let n = self.matrix.len();
         if n == 0 || self.matrix.iter().any(|r| r.len() != n) {
             return Err(Error::InvalidInput(
@@ -312,6 +313,15 @@ impl DifferentialSystem {
     }
 }
 
+fn validate_ode_variable(variable: Symbol) -> Result<()> {
+    if variable == crate::family::imaginary_parameter() {
+        return Err(Error::InvalidInput(
+            "the reserved imaginary-unit symbol cannot be an ODE variable".into(),
+        ));
+    }
+    Ok(())
+}
+
 /// Compile possibly rectangular rational rows. Column indices remain sparse in
 /// the cleared polynomial representation, allowing shared epsilon-order rows.
 pub(crate) fn compile_rows(
@@ -320,6 +330,7 @@ pub(crate) fn compile_rows(
     p: Precision,
     values: &ahash::HashMap<Atom, C>,
 ) -> Result<CompiledSystem> {
+    validate_ode_variable(variable)?;
     let mut matrix = Vec::new();
     let mut poles = Vec::new();
     let mut pole_polynomials = Vec::new();
@@ -330,7 +341,7 @@ pub(crate) fn compile_rows(
         let mut exact = Vec::new();
         let mut common_denominator: Option<ExactPolynomial> = None;
         for a in row {
-            let rational: RationalPolynomial<IntegerRing, u16> = a
+            let rational: RationalPolynomial<IntegerRing, u16> = crate::family::encode_complex(a)
                 .try_to_rational_polynomial(&Q, &Z, None)
                 .map_err(|e| Error::InvalidInput(e.to_string()))?;
             let numerator =

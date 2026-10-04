@@ -1,0 +1,111 @@
+{
+  "schema_version": 1,
+  "scope": "Staged shared physical-boundary accuracy fallback; native standalone tests passed; CLI adapter/test and central Cargo gate pending",
+  "base_commit": "e7bfd9fdcfd09a886943d1a0cc3a59e32fd8f333",
+  "cpu_affinity": 27,
+  "test_counts": {
+    "new_fallback": 3,
+    "canonical_cache": 4,
+    "engine": 7,
+    "passed": 14,
+    "failed": 0
+  },
+  "test_harness_seconds": "12.03",
+  "strict_standalone_clippy": "passed",
+  "linked_library": {
+    "path": "target/algebraic-cache-production/current-deps/libsymbolica_amflow.rlib",
+    "sha256": "3d3b1f1d8494cfc91be388ad17e418749684f47127eff345298b8fd0afe62690",
+    "note": "Standalone local source modules include current canonical/cache implementation and extended FlowOptions; library provides common numeric/error types"
+  },
+  "coverage": [
+    "nearby low-evidence source rejected after uncertainty propagation; farther60-digit source reaches20-digit exp(2i)",
+    "selected-source points/costs/outcomes are recorded without f64",
+    "exact repeat uses one accepted attempt and no transport",
+    "attempt budget and exhausted candidate accuracy fail without cache mutation",
+    "cancellation between failed and next selected source leaves bank unchanged",
+    "existing canonical/dense shared-body regressions remain passing"
+  ],
+  "files": {
+    "target/accuracy-fallback/options.rs": {
+      "sha256": "8873eda73c5d51d78920a996451b456f198a6fc70a0e8312ef351a8a9c75624b",
+      "bytes": 5555
+    },
+    "target/accuracy-fallback/transport_cache.rs": {
+      "sha256": "583ba6edc34e80535c09ce4be10311e79bfaec2c3092c0bc2cd501536b5ef71a",
+      "bytes": 74301
+    },
+    "target/accuracy-fallback/physical_transport.rs": {
+      "sha256": "2de340b3ad863354bce50b230a079064a06977cba453dac146a162bd1039df84",
+      "bytes": 25032
+    },
+    "target/accuracy-fallback/tests.rs": {
+      "sha256": "d7fc58b40b6cfb07a1f77061c27a142573c508ac883e64b8c866da4c90724b45",
+      "bytes": 6839
+    },
+    "target/accuracy-fallback/probe.rs": {
+      "sha256": "b802865ac9e5453b26a790a43e957e0e8cb2b9aa3f64391bda53314c71584e9b",
+      "bytes": 574
+    },
+    "target/accuracy-fallback/compile.sh": {
+      "sha256": "e9faef7dfa79a802233b9d9b7f771324311cf7fcbefe29dc02ea7ec08afa2284",
+      "bytes": 971
+    },
+    "target/accuracy-fallback/clippy.sh": {
+      "sha256": "b8b7dd85cd7bdd8be6e25e2d654dfd626ed52bf578ef97b4ed5893a3cf881cdd",
+      "bytes": 999
+    },
+    "target/accuracy-fallback/compile.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "target/accuracy-fallback/clippy.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "target/accuracy-fallback/tests.log": {
+      "sha256": "f1585a3fcb909b7d3329f00cbee9317d935c1e795cf608f0a35f93136c1d2a4d",
+      "bytes": 1617
+    },
+    "target/accuracy-fallback/tests": {
+      "sha256": "3592c068faa71637b300e53660471f3cf84ce6605d7431941fbc793106aa73f1",
+      "bytes": 585384600
+    },
+    "target/accuracy-fallback/build-source/physical_transport.rs": {
+      "sha256": "cff10628efc2c7c7ac14125a08f0c1b105caa278dd8a1c3922197e5701b76e21",
+      "bytes": 25024
+    },
+    "target/accuracy-fallback/rustflow.rs": {
+      "sha256": "fe968dad1981775b6b3623ec6faeca0ff7beff6d6d18b4f4078e4765247e8ef8",
+      "bytes": 23537
+    },
+    "target/accuracy-fallback/combined-cli.patch": {
+      "sha256": "7714abeb502a7eb5226b3d588e5e86dcebdf6ecc0fa5131c217f93ba5cab7f04",
+      "bytes": 7811
+    },
+    "target/accuracy-fallback/integration/cli_fallback.rs": {
+      "sha256": "38f23dcba3181c9403e123ab9f6f64d9f4122fac577954153f8141225db1c6ca",
+      "bytes": 4242
+    },
+    "target/accuracy-fallback/docs/accuracy-fallback.md": {
+      "sha256": "d161dd790b51ba7d11e95ce4c5148f63ec10b93979f6005987006cfc130aec07",
+      "bytes": 2547
+    },
+    "target/accuracy-fallback/docs/cli.md": {
+      "sha256": "33b5dedc9cd73c76523d1d5ded52a11146ee1f69d6c8305c8c0f0d08c499bdb2",
+      "bytes": 10631
+    },
+    "target/accuracy-fallback/docs/cache-selection.md": {
+      "sha256": "17342cede71510c378f5fd9db4efd7699fb922d7f5fd07a055b9d4beefcd8e6e",
+      "bytes": 3758
+    }
+  },
+  "post_validation_changes": [
+    "Documentation-only field comment clarifies that an exact cache hit records an accepted attempt without numerical transport."
+  ],
+  "peer_review": "reduction_audit: no blocking findings in selector, retry classification, transactional insertion or cancellation",
+  "central_schema4_baseline": {
+    "reported_by_parent": "283 release tests plus1doc test, strict Clippy and formatting passed; fallback and canonical CLI not yet included"
+  },
+  "integration_status": "Passed central release tests (295 unit/integration plus one doc), strict all-target Clippy and formatting; dependency snapshot differences recorded in central report",
+  "central_release_report": "reports/validation/2026-10-04-fallback-mpl-release.json"
+}

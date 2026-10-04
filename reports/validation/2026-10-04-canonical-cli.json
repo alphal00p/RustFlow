@@ -1,0 +1,80 @@
+{
+  "schema_version": 1,
+  "scope": "Staged native canonical CLI transport extension; production integration pending",
+  "base_commit": "e7bfd9fdcfd09a886943d1a0cc3a59e32fd8f333",
+  "cpu_affinity": 27,
+  "steering_schema": 1,
+  "binary_cache_schema": 4,
+  "linked_library": {
+    "path": "target/canonical-release/deps/libsymbolica_amflow.rlib",
+    "sha256": "5be94f7cf6d87188b8fc1e64831126a34849e6b14ccfc499bb936981cf369754"
+  },
+  "results": {
+    "strict_standalone_clippy": "passed for staged CLI and new tests",
+    "canonical_cli": {
+      "passed": 3,
+      "failed": 0,
+      "seconds": "0.58"
+    },
+    "existing_algebraic_and_rational_cli": {
+      "passed": 5,
+      "failed": 0,
+      "seconds": "0.84"
+    }
+  },
+  "coverage": [
+    "native canonical identity key and rootful analytic coefficients",
+    "progressive nearest compatible source selection, binary restart and exact hits",
+    "rootless canonical input with equivalent dense values but distinct cache identity",
+    "mutually exclusive canonical/derivatives enforcement, missing germs and nonconstant matrices",
+    "unchanged existing dense rational/algebraic inputs and outputs"
+  ],
+  "files": {
+    "target/cli-canonical/rustflow.rs": {
+      "sha256": "4be78459119730f7ec8769d3b8b4f8cb62e111864174d70a8e0c5f850d9167aa",
+      "bytes": 22439
+    },
+    "target/cli-canonical/integration/cli_canonical.rs": {
+      "sha256": "af396edb86719764985f179422bc9b746619e6ab664c88e72e93702131922c35",
+      "bytes": 6706
+    },
+    "target/cli-canonical/examples/cli/canonical-transport.json": {
+      "sha256": "847417fab0ff4384df52d8da30b9377d29cda0f3fa3d9bbe41cb2e3d30cd35fb",
+      "bytes": 1780
+    },
+    "target/cli-canonical/docs/cli.md": {
+      "sha256": "cf93d387fef73f21cac102155a5da9197fb20dc9d48fe4c9eedf26ffcc03669f",
+      "bytes": 9593
+    },
+    "target/cli-canonical/compile.sh": {
+      "sha256": "38dfe29d192fbb592dbf5627ae32ecd1d376129579cde684f75ccf0681590167",
+      "bytes": 1654
+    },
+    "target/cli-canonical/compile.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "target/cli-canonical/tests.log": {
+      "sha256": "cdaaee04cb80b7f349fe81b95bd2c19a440219db60070b145832a05a93085e77",
+      "bytes": 369
+    },
+    "target/cli-canonical/algebraic-tests.log": {
+      "sha256": "c570a723ae50efb4cb366d2b6ae42b895a21fbf89e334a860f69d4a459b1e188",
+      "bytes": 488
+    },
+    "target/cli-canonical/rustflow": {
+      "sha256": "f24cfa5062b43a1194a50c037658485343f46943e4589aab2d946123db6f50f2",
+      "bytes": 639368448
+    },
+    "target/cli-canonical/tests": {
+      "sha256": "0b51aba11be79438d95bd77c7031ca92a1798e79ee67761713d70a832414a90e",
+      "bytes": 585342464
+    },
+    "target/cli-canonical/algebraic-tests": {
+      "sha256": "06a4a552b2553952ebae7428d92de76eccf152b609179b21c1472784656fc6b8",
+      "bytes": 571751208
+    }
+  },
+  "integration_status": "Passed central release tests (295 unit/integration plus one doc), strict all-target Clippy and formatting; dependency snapshot differences recorded in central report",
+  "central_release_report": "reports/validation/2026-10-04-fallback-mpl-release.json"
+}

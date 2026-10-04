@@ -1,0 +1,39 @@
+{
+  "schema_version": 1,
+  "checked_utc": "2026-10-04T21:36:45.991668+00:00",
+  "remote": "https://github.com/alphal00p/rustred.git",
+  "remote_main": "4e4d3eb4c548e7a2df823117d0869cd5a231d69c",
+  "local_head": "c2d609a7958fbf5b5666e3f464d001c6d255bec9",
+  "tested_backend_identity": "rustred-exact:3e52ec505aae7dae484e83b91a3d6deb791cc83eac7a0b7d4751b4637b344f2b:4b623d6a4133939fe08a70ce047dd63bc3c693586f054ea47547c382dd968bfb:2:4096:false:true:512:true:18446744073709551615:false",
+  "tested_rustred_source_digest": "3e52ec505aae7dae484e83b91a3d6deb791cc83eac7a0b7d4751b4637b344f2b",
+  "tested_library": {
+    "sha256": "f5feba65f3df4ebc4fcaed0e552ca440e6319184e4b9f88b139baafb17323000",
+    "bytes": 336692164
+  },
+  "changed_tracked_core_files_during_gate": {
+    "crates/rustred-core/src/persistence/atoms.rs": {
+      "before": "2685c716bf0fa07e04b4a583c0f6d00b6a18a1e5e359093b21c81bf360647034",
+      "after": "9616a190eaf0cf68ca194ef0c42a5ae1de1964fb46f477cba67af72bcf4701a6"
+    },
+    "crates/rustred-core/src/persistence/atoms/tests.rs": {
+      "before": "2bfd62c44e2fd16a6b219797398ed4db3802ffdab78ba4142c6c6e7fb0a06fcf",
+      "after": "ec98b02b49d9ad42933648f3525b2ea2f7c57e95751a1111b12116e0d6e15d83"
+    },
+    "crates/rustred-core/src/persistence/mod.rs": {
+      "before": "8806a744ed99300b7872e93df2ab0f53c46008dda3e17e50e1168b115c4d8252",
+      "after": "46656e389bfa3a302c04bb22d51df6a0d64ebe595d9025d3e51ad2bbe8c7a7b7"
+    },
+    "crates/rustred-core/src/solver/execution.rs": {
+      "before": "0a1a071f2703029c712f1cc40cff8826d4cf4154ca2ca9f430e433170f255218",
+      "after": "8130df450f9c008820db4d7be9d338d10cd55dc71d10512dd2c592324853ef87"
+    },
+    "crates/rustred-core/src/solver/execution/tests.rs": {
+      "before": "cd5927b20a6c4cb6ff2c6a414d9a4cd1d3dbfd4174c641c4629ebef073965dde",
+      "after": "e8394e7b1d3bec4e85858a2904a71b4b49830acfbaea9b387cb0578c0d4a53d2"
+    }
+  },
+  "tracked_file_snapshot": "target/rustred-fallback-core-snapshot.json",
+  "tracked_file_snapshot_sha256": "9e48e4b9f03b681e17638ad239ec82c5f5c8d2c3db57fca7459b65d6b8cad219",
+  "snapshot_limit": "The preliminary SHA256 map covered tracked core files only. The compiled runtime RUSTRED_SOURCE_DIGEST above includes all core src files, including untracked modules, and Cargo.toml. The tested binary is archived; this report does not claim an archived complete dependency source tree.",
+  "action": "Upstream main is unchanged. Existing concurrent local edits are preserved. Release tests used the archived dependency above; Clippy checked a later local RustRed source state. Next gate will rebuild against current sources. The user-owned 12-slot dispatch was not changed."
+}

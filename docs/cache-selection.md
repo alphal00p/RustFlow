@@ -31,3 +31,8 @@ keys include the local root germ, so opposite sheets at identical coordinates
 remain distinct and exact hits cannot cross sheets. The regular-real admission
 rules, shared precision checks and schema-4 compatibility policy are documented
 in [Registered roots in the physical boundary cache](algebraic-cache.md).
+
+A candidate that passes the initial evidence filter can still fail after its
+uncertainty is propagated. RustFlow now tries compatible alternatives within
+`max_boundary_attempts`, preserving this selector's cost bounds and tie rules.
+See [Accuracy-aware cached boundary selection](accuracy-fallback.md).

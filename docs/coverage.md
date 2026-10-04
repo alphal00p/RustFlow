@@ -82,7 +82,20 @@ coefficient, inherited accuracy, nearby reuse and restart against refined native
 transport and original DiffExp. A [connected two-loop sector](fivepoint-zmz-sector.md)
 adds 13 coupled/dependent masters with a live oracle and independent refinement;
 it does not complete the 75-master parent family. The two longer scientific
-regressions are run separately from this routine gate.
+regressions also [passed on the committed build](../reports/validation/2026-10-04-canonical-fivepoint.json),
+separately from this routine gate (668.28 s one-loop; 291.68 s two-loop sector).
+
+The [cache retry and MPL release gate](../reports/validation/2026-10-04-fallback-mpl-release.json)
+passes 295 unit/integration tests and one documentation test, Clippy and formatting;
+its report distinguishes concurrent RustRed source changes from the tested build.
+[Accuracy-aware source retries](accuracy-fallback.md) try another compatible
+boundary when the nearest source cannot meet accuracy. The CLI accepts canonical
+letters and retry limits, and ordinary ODEs accept exact complex literals.
+All [MPL notebook profiles](diffexp-mpl.md) now pass against original DiffExp and
+independent precision/order refinement, including the weight-20 example.
+The [full Higgs+jet supplied systems](gg-hg-coverage-inventory.md) pass a nearby
+physical-point check of all 545 coefficients across 48 planar and 61 nonplanar
+masters; permutations and full form-factor assembly remain in progress.
 
 The current [prescribed-contour interface](prescribed-contours.md) accepts
 explicit polynomial prescriptions. It does not infer them from a process.
@@ -171,8 +184,9 @@ tadpoles, equivalent momentum routings and denominator permutations, linear
 numerator boundaries, recursive FT sunsets, supplied-boundary analytic ODEs,
 resonant logarithms, successive nilpotent balances, and Laurent fitting. Full
 Laurent accuracy is tested with increased
-precision/order and a second sample grid. Reference fixture digits are never
-used as solver boundary data.
+precision/order and a second sample grid. For these automatic AMF examples, reference fixture digits are never used as
+solver boundary data. DiffExp supplied-system regressions explicitly identify
+their upstream boundary inputs separately from endpoint comparison values.
 
 The test suite requires no Mathematica installation. Upstream regeneration is
 optional and would require Mathematica and an upstream-supported reducer.

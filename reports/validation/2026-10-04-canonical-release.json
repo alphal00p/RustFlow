@@ -63,7 +63,7 @@
     "tests/common/fivepoint.rs": "de65005daea2af2e1bfe5883cb8dec036673bd7af4b6f4478a72bcc28a8b551e"
   },
   "archived_scientific_regressions": {
-    "status": "Running separately at report creation; not included in this passing gate",
+    "status": "Both passed; see reports/validation/2026-10-04-canonical-fivepoint.json",
     "binaries": {
       "fivepoint_planar": {
         "source": "target/release/deps/fivepoint_planar-ca03271c90ddaf80",
@@ -81,7 +81,8 @@
     "commands": [
       "timeout --preserve-status 1800s taskset -c 32 target/canonical-release/acceptance/fivepoint_planar --ignored --nocapture --test-threads=1",
       "timeout --preserve-status 1800s taskset -c 33 target/canonical-release/acceptance/fivepoint_zmz_sector --ignored --nocapture --test-threads=1"
-    ]
+    ],
+    "results_report": "reports/validation/2026-10-04-canonical-fivepoint.json"
   },
   "related_reports": [
     "reports/validation/2026-10-04-canonical-cache.json",

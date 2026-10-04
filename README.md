@@ -86,6 +86,8 @@ supports persistent transport caches across processes.
   this orchestration interface. [`RustFlow::new_algebraic`](docs/algebraic-cache.md)
   uses the same bank with explicit root germs and retains their sheets across
   regular real paths and binary restart.
+  [Accuracy-aware retries](docs/accuracy-fallback.md) try another admissible source
+  when the first cannot meet accuracy, preserving failed-attempt diagnostics.
 - `PreparedPhysicalFamily` derives a common physical differential basis from a
   family and appends independently verified AMF/FT seed values to the same bank.
   Original reduction assumptions and physical chart restrictions remain part of

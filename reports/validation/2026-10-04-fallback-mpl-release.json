@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "status": "passed_with_recorded_dependency_snapshots",
+  "recorded_utc": "2026-10-04T21:36:45.991668+00:00",
+  "base_commit": "799b45a6920345cc0ff517d6bf1dc27f000a92c8",
+  "scope": [
+    "Bounded Accuracy-only retries from compatible cached boundaries with diagnostics and transactional insertion",
+    "Canonical dlog transport CLI, retry settings and diagnostics",
+    "Exact complex literal ODE coefficients and reserved-variable collision rejection",
+    "All remaining numerical MPL notebook profiles with independent native boundaries/refinement and original oracle provenance"
+  ],
+  "checks": {
+    "release_tests": {
+      "command": "CARGO_BUILD_JOBS=8 cargo test --release --locked -p symbolica-amflow -- --test-threads=4",
+      "unit_and_integration_passed": 295,
+      "documentation_passed": 1,
+      "failed": 0,
+      "ignored": 3
+    },
+    "clippy": {
+      "command": "CARGO_BUILD_JOBS=8 cargo clippy --release -p symbolica-amflow --all-targets -- -D warnings",
+      "exit_code": 0,
+      "dependency_warnings": "Eight existing RustRed dead-code warnings"
+    },
+    "format": {
+      "command": "cargo fmt -p symbolica-amflow -- --check",
+      "exit_code": 0
+    },
+    "focused_gate": {
+      "passed": 8,
+      "failed": 0
+    }
+  },
+  "dependency_note": "Upstream main is unchanged. Existing concurrent local edits are preserved. Release tests used the archived dependency above; Clippy checked a later local RustRed source state. Next gate will rebuild against current sources. The user-owned 12-slot dispatch was not changed.",
+  "tested_backend_identity": "rustred-exact:3e52ec505aae7dae484e83b91a3d6deb791cc83eac7a0b7d4751b4637b344f2b:4b623d6a4133939fe08a70ce047dd63bc3c693586f054ea47547c382dd968bfb:2:4096:false:true:512:true:18446744073709551615:false",
+  "logs": {
+    "target/rustflow-fallback-release-tests.log": {
+      "sha256": "eb0a1eba5bddcedc8be30abf6eb79107bb2bf2e5f9f769a043dd471e4b654ae1",
+      "bytes": 37192
+    },
+    "target/rustflow-fallback-release-clippy.log": {
+      "sha256": "4f7b7298efbe70329ed5216fa454b5ed65dd5deb94e43044b43cf8cd8c3e3258",
+      "bytes": 2792
+    },
+    "target/rustflow-fallback-release-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "target/rustflow-fallback-focused-tests.log": {
+      "sha256": "3d22d23bdeb74cab6eea869dc4d8abaae25b1e1c018869b80b80cb7e85ac62fb",
+      "bytes": 4259
+    }
+  },
+  "source_sha256": {
+    "src/options.rs": "8873eda73c5d51d78920a996451b456f198a6fc70a0e8312ef351a8a9c75624b",
+    "src/transport_cache.rs": "583ba6edc34e80535c09ce4be10311e79bfaec2c3092c0bc2cd501536b5ef71a",
+    "src/physical_transport.rs": "2de340b3ad863354bce50b230a079064a06977cba453dac146a162bd1039df84",
+    "src/bin/rustflow.rs": "fe968dad1981775b6b3623ec6faeca0ff7beff6d6d18b4f4078e4765247e8ef8",
+    "src/ode.rs": "545cac9fa69bb9c33f412daf0dfaa84e918f61bd4bd006cbbeeaa413c47cd9e3",
+    "tests/accuracy_fallback.rs": "d7fc58b40b6cfb07a1f77061c27a142573c508ac883e64b8c866da4c90724b45",
+    "tests/cli_canonical.rs": "af396edb86719764985f179422bc9b746619e6ab664c88e72e93702131922c35",
+    "tests/cli_fallback.rs": "38f23dcba3181c9403e123ab9f6f64d9f4122fac577954153f8141225db1c6ca",
+    "tests/complex_ode.rs": "b06f10cf9cf9abc477c5b5f4037ea48d5b17b7527ed70ac8bfbe33fb08d962b1",
+    "tests/mpl_additional.rs": "cc3ff302f18ca55afc9abbecde435f930d4bfaf5a5a40a1164525920d0a93472",
+    "fixtures/diffexp/mpl-additional.json": "d689566e7033bebc33b89b8a5a57efd34b1b1ccd36fa427911477044ef32c6f2",
+    "scripts/diffexp_mpl_additional_oracle.wl": "112f4382d1412d1417ae1138092238c0c319a92a81acca4114c6d0e16445cb6a"
+  },
+  "archived_libraries": {
+    "target/fallback-release/deps/libsymbolica_amflow-6636c90b7720f3f8.rlib": {
+      "sha256": "b2755b1df4495067bfccb5b6a13b9001e485b232d600ba289734a1df508bf071",
+      "bytes": 368839782
+    },
+    "target/fallback-release/deps/librustred-ae696a8b59710d0c.rlib": {
+      "sha256": "f5feba65f3df4ebc4fcaed0e552ca440e6319184e4b9f88b139baafb17323000",
+      "bytes": 336692164
+    },
+    "target/fallback-release/deps/librustred-ae696a8b59710d0c.rmeta": {
+      "sha256": "1cea7fdf803ad0376d418910b311671ca9c2e1b279556765c2d6d5a5bc6a9b28",
+      "bytes": 35754202
+    }
+  },
+  "related_reports": [
+    "reports/dependencies/2026-10-04-rustred-working-tree.json",
+    "reports/validation/2026-10-04-canonical-cli.json",
+    "reports/validation/2026-10-04-accuracy-fallback.json",
+    "reports/diffexp/mpl-additional-validation.json",
+    "reports/validation/2026-10-04-canonical-fivepoint.json",
+    "reports/validation/2026-10-04-gg-hg-full-systems.json"
+  ],
+  "limitations": [
+    "Full AMFlow/DiffExp parity, complete five-point families and full Higgs+jet amplitude acceptance remain incomplete",
+    "The original-paper four-target Laurent acceptance remains prior evidence; not rerun here",
+    "Long five-point regressions passed separately on799b45a; routine execution keeps them opt-in",
+    "MPL timings use different settings/workloads and establish no matched performance parity",
+    "Cache routes remain regular real straight paths with explicit local germs; threshold-crossing orchestration is incomplete",
+    "Inner Taylor rejection-budget misclassification discovered separately is staged for the next milestone; successful results here are unaffected",
+    "Concurrent RustRed local source edits are distinguished from the archived tested binary; no static dependency worktree claim"
+  ]
+}

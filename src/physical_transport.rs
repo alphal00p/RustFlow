@@ -22,12 +22,30 @@ pub struct RustFlow<S = KinematicSystem> {
     identity: BoundaryIdentity,
 }
 
+/// Outcome of an actually attempted compatible cached source.
+#[derive(Clone, Debug)]
+pub enum BoundaryAttemptOutcome {
+    Accepted,
+    AccuracyRejected { message: String },
+}
+
+#[derive(Clone, Debug)]
+pub struct BoundaryAttempt {
+    pub starting_point: CachedPoint,
+    /// The arbitrary-precision cost returned by the caller's policy.
+    pub cost: Float,
+    pub source_verified_digits: u32,
+    pub outcome: BoundaryAttemptOutcome,
+}
+
 pub struct PhysicalResult {
     pub boundary: CachedBoundary,
     pub starting_point: CachedPoint,
     /// None for a compatible cache hit at precisely the requested coordinates.
     pub transport: Option<EpsilonSolution>,
     pub inserted_points: usize,
+    /// Compatible sources tried in selection order, including an exact hit.
+    pub boundary_attempts: Vec<BoundaryAttempt>,
 }
 
 impl RustFlow {
@@ -371,7 +389,6 @@ fn evaluate_physical(
     options.validate()?;
     context.cancellation.check()?;
     let p = Precision::decimal(options.digits + options.guard_digits)?;
-    let destination = target.restart_coordinates()?;
     let query = BoundaryQuery::new(identity, &target, range, options.digits)?;
     // Reduction domains are enforced independently of the caller's sheet
     // policy. Reject unsafe sources before ranking, so another valid source
@@ -382,9 +399,76 @@ fn evaluate_physical(
         digits: options.digits,
         context,
     };
-    let matched=cache.best(&query,&guarded_policy,p)?.ok_or_else(||Error::IncompleteReduction("no compatible cached physical boundary with the requested epsilon range, verified accuracy and regular reduction domain".into()))?;
-    context.cancellation.check()?;
-    let source = matched.boundary.clone();
+    let mut excluded = std::collections::BTreeSet::new();
+    let mut attempts = Vec::new();
+    let mut last_accuracy = None;
+    for _ in 0..options.max_boundary_attempts {
+        context.cancellation.check()?;
+        let Some((index, matched)) = cache.best_excluding(&query, &guarded_policy, p, &excluded)?
+        else {
+            return Err(if let Some(message) = last_accuracy {
+                Error::Accuracy(format!(
+                    "none of {} compatible cached boundaries reached the target accuracy; last attempt: {message}",
+                    attempts.len()
+                ))
+            } else {
+                Error::IncompleteReduction("no compatible cached physical boundary with the requested epsilon range, verified accuracy and regular reduction domain".into())
+            });
+        };
+        let source = matched.boundary.clone();
+        let mut diagnostic = BoundaryAttempt {
+            starting_point: source.point.clone(),
+            cost: matched.cost,
+            source_verified_digits: source.accuracy.verified_digits(),
+            outcome: BoundaryAttemptOutcome::Accepted,
+        };
+        excluded.insert(index);
+        context.cancellation.check()?;
+        match evaluate_from_source(
+            system,
+            identity,
+            cache,
+            target.clone(),
+            source,
+            range,
+            options,
+            context,
+        ) {
+            Ok(mut result) => {
+                attempts.push(diagnostic);
+                result.boundary_attempts = attempts;
+                return Ok(result);
+            }
+            Err(Error::Accuracy(message)) => {
+                diagnostic.outcome = BoundaryAttemptOutcome::AccuracyRejected {
+                    message: message.clone(),
+                };
+                attempts.push(diagnostic);
+                last_accuracy = Some(message);
+            }
+            Err(error) => return Err(error),
+        }
+    }
+    Err(Error::Limit(format!(
+        "physical boundary attempt budget {} exhausted after accuracy failures; last attempt: {}",
+        options.max_boundary_attempts,
+        last_accuracy.unwrap_or_default()
+    )))
+}
+
+#[allow(clippy::too_many_arguments)] // One already selected source and the shared physical transport inputs.
+fn evaluate_from_source(
+    system: Connection<'_>,
+    identity: &BoundaryIdentity,
+    cache: &mut RustFlowCache,
+    target: CachedPoint,
+    source: CachedBoundary,
+    range: EpsilonRange,
+    options: &FlowOptions,
+    context: &RunContext,
+) -> Result<PhysicalResult> {
+    let p = Precision::decimal(options.digits + options.guard_digits)?;
+    let destination = target.restart_coordinates()?;
     let coordinates = source.point.rounded_coordinates_as_exact()?;
     let count = (i64::from(range.last) - i64::from(range.leading) + 1) as usize;
     if source.point.root_germ() == target.root_germ()
@@ -406,6 +490,7 @@ fn evaluate_physical(
             starting_point: source.point,
             transport: None,
             inserted_points: 0,
+            boundary_attempts: Vec::new(),
         });
     }
     let path = KinematicPath::straight_line(
@@ -558,6 +643,7 @@ fn evaluate_physical(
         starting_point: source.point,
         transport: Some(solution),
         inserted_points: inserted,
+        boundary_attempts: Vec::new(),
     })
 }
 

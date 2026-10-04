@@ -1,0 +1,1333 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "All five additional profiles from the pinned DiffExp MPL notebook: trailing zero and complex letters at orders50/75, weight20 at order100. Native boundaries use independent exact constants, including generalized Frobenius logarithms for the trailing zero. No original value is used as a native boundary.",
+  "asserted_absolute_and_nonzero_MPL_relative_digits": 20,
+  "precision_policy": "Original component Precision and absolute Accuracy are preserved separately. Comparison allowances round recorded absolute accuracy downward; these are source uncertainty estimates, not certified intervals. Finite-accuracy zero is checked only with an absolute error. Native accuracy is validated by independent increased working precision and series order. Mantissa length is not an accuracy claim.",
+  "timing_policy": "Single pinnedCPU28 runs on a shared host. Original notebook helper includes shuffle/logarithm extraction and public transport; native directly solves one triangular system. Work/precision/contours differ, so no matched-algorithm speedup ratio. Two-second polling rounds up monitor process-wall times and may miss short-run RSS peaks; internal phase clocks are reported separately.",
+  "original_reported_error_note": "The original pm coefficient is preserved verbatim. Shuffle combinations may give a signed, cancellation-prone estimate; it is not substituted for component Accuracy or treated as a rigorous bound.",
+  "refinement_checks": [
+    {
+      "case": "trailing",
+      "profiles": [
+        "80-50",
+        "100-75"
+      ],
+      "all_basis_max_absolute_difference": "2.95925910042406626928909161816427655909991733805995655350555613909979690500009214335939159846974319549083372180704644493651873866440031303621232592956224399668248334032655652115715E-76",
+      "requested_MPL_relative_difference": "9.63195953262659632182000903469480932749907802233608172976750991790845659449043336293514604901018395497380725956047047768265716535361267779440853505504985404355916763739639170888476E-76",
+      "basis_dimension": 4,
+      "asserted_absolute_and_requested_relative_digits": 20
+    },
+    {
+      "case": "complex",
+      "profiles": [
+        "80-50",
+        "100-75"
+      ],
+      "all_basis_max_absolute_difference": "1.1216677008051765194957826803E-79",
+      "requested_MPL_relative_difference": "2.85576407465961932515222780931809727568977387032560481442796253276866343227601598242571734971830818428174000423365938136687002682405454495087694755649199635241246626510047713720352E-78",
+      "basis_dimension": 5,
+      "asserted_absolute_and_requested_relative_digits": 20
+    },
+    {
+      "case": "weight20",
+      "profiles": [
+        "100-100",
+        "140-140"
+      ],
+      "all_basis_max_absolute_difference": "8.26148190087107991413990327238028321035584085540341723938364749283417070624153345959461763983435641518822445962331450006346948334006324893106976924887640803970891398453251811858914E-96",
+      "requested_MPL_relative_difference": "5.17092588535905175147329961358930326811153919562141153169131312066697114592235916048194627021652116100139294153288916640786724716368310795250059862978248594726164868114137079833714E-85",
+      "basis_dimension": 21,
+      "asserted_absolute_and_requested_relative_digits": 20
+    }
+  ],
+  "profiles": [
+    {
+      "case": "trailing",
+      "order": 50,
+      "absolute_difference": "3.99842206578758139161284034187805637654216907556285769984438813545210749013238012563963034351769440154234912656219126321812142224317731116999038131378059711502607253806526336792852E-25",
+      "relative_difference": "1.30142843952083490089577950418564549759777425871827846824020263397401265944302727456937946219220236442669390093398822217095443758063698594191751440713473247797525168147764242768597E-24",
+      "component_checks": [
+        {
+          "component": "real",
+          "absolute_difference": "3.958106458124883777649303450977429912799704187142892500252074366867251483336474915E-25",
+          "source_recorded_precision": "21.425079664316964",
+          "source_recorded_absolute_accuracy": "23.142890836991867",
+          "upward_rounded_source_uncertainty_estimate": "1E-23",
+          "finite_accuracy_zero": false
+        },
+        {
+          "component": "imaginary",
+          "absolute_difference": "5.6636762118531945292863997817144980894147662909014504220817083901538046720790360E-26",
+          "source_recorded_precision": "22.629513822129635",
+          "source_recorded_absolute_accuracy": "23.142890836991867",
+          "upward_rounded_source_uncertainty_estimate": "1E-23",
+          "finite_accuracy_zero": false
+        }
+      ],
+      "original_result": {
+        "status": "passed",
+        "case": "trailing",
+        "order": 50,
+        "arguments_wolfram": "{1, -10, 0, 4}",
+        "value": {
+          "real_wolfram": "-0.01915088407202967213656076391302927992`21.425079664316964",
+          "imaginary_wolfram": "-0.30663588994834036574634338726466648647`22.629513822129635",
+          "precision_wolfram": "22.479844181716434",
+          "accuracy_wolfram": "22.992375839159877"
+        },
+        "reported_uncertainty_wolfram": "-6.722252402739842*^-24",
+        "wall_seconds_original_wrapper": 0.768252,
+        "settings": {
+          "working_precision": 250,
+          "chop_precision": 225,
+          "expansion_order": 50,
+          "epsilon_order": 0,
+          "division_order": 3,
+          "mobius": true,
+          "pade": false,
+          "parallel": false,
+          "verbosity": 1
+        },
+        "upstream_commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+        "source_sha256": "67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7",
+        "notebook_sha256": "028003cce75bdfb911d3bbf8cfc313bb6cb5454d8ce44722c4eba8bfcaca24ba",
+        "driver_sha256": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+        "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+        "scope": "Original notebook GEvaluate workload, including its shuffle/logarithm extraction and all underlying transports. Native direct triangular-DE timing is different work; no matched algorithm ratio.",
+        "notebook_deviations": [
+          "Verbosity1 preserves logs; original0.",
+          "Pinned local source and target-owned temporary matrix directory; single-process mode."
+        ],
+        "validation_note": "This status validates a finite returned value with >=20 recorded precision; independent native/refinement comparison is a separate pending gate."
+      },
+      "original_runner": {
+        "command": [
+          "taskset",
+          "-c",
+          "28",
+          "/home/ben/.local/bin/bern-wolfram",
+          "-noinit",
+          "-noprompt",
+          "-script",
+          "/common/dev/amflow/target/diffexp-oracle/mpl-additional/original.wl"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 4.003192864824086,
+        "peak_polled_process_tree_rss_bytes": 187772928,
+        "poll_period_seconds": 2,
+        "termination_reason": null,
+        "limits": {
+          "seconds": 600,
+          "rss_bytes": 4294967296
+        },
+        "environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "driver_sha256": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+        "monitor_sha256": "9d8437b3f9d2ba85c99e10d2dc743a834975f70784f20c0b0331932e6232f158"
+      },
+      "original_component_metadata": {
+        "real": {
+          "value_wolfram": "-0.01915088407202967213656076391302927992`21.425079664316964",
+          "precision_wolfram": "21.425079664316964",
+          "accuracy_wolfram": "23.142890836991867",
+          "exact": false
+        },
+        "imaginary": {
+          "value_wolfram": "-0.30663588994834036574634338726466648647`22.629513822129635",
+          "precision_wolfram": "22.629513822129635",
+          "accuracy_wolfram": "23.142890836991867",
+          "exact": false
+        },
+        "raw_sha256": "b20eecb42cadf08be2e6e77581bbe21e01f10195bf11a569faf74b4b2a610c53",
+        "postprocessor_sha256": "c3aaed76e898871084b7db2be8d3b0ccaac0f369c0d8f26094ae4a341e76b570",
+        "note": "Precision and absolute Accuracy are extracted from the saved original result, including finite-accuracy zeros; no numerical transport is rerun."
+      },
+      "original_result_sha256": "96aa564a3297b7aeb470deefd15ea4c2c7c2345ae89873d457c1c54f85e4823d"
+    },
+    {
+      "case": "trailing",
+      "order": 75,
+      "absolute_difference": "6.13964431994820817395051154682107376318460771121099162543737986244938631964691068001761032003706099075824144626796938425426508220414560372019685384572593273560686070393204453587147E-38",
+      "relative_difference": "1.99836525385653074571154404015537887293337803788756405164147919941787305682471106695919364691695658344162450329090545657417746382052703790852989816365957247312188847827273657432355E-37",
+      "component_checks": [
+        {
+          "component": "real",
+          "absolute_difference": "4.85124410666620604043912799704187142892500252074366867251483336474915E-38",
+          "source_recorded_precision": "33.42507966431697",
+          "source_recorded_absolute_accuracy": "35.14289083699187",
+          "upward_rounded_source_uncertainty_estimate": "1E-35",
+          "finite_accuracy_zero": false
+        },
+        {
+          "component": "imaginary",
+          "absolute_difference": "3.7630656376163172272619105852337090985495779182916098461953279209640E-38",
+          "source_recorded_precision": "34.62951382212964",
+          "source_recorded_absolute_accuracy": "35.142890836991874",
+          "upward_rounded_source_uncertainty_estimate": "1E-35",
+          "finite_accuracy_zero": false
+        }
+      ],
+      "original_result": {
+        "status": "passed",
+        "case": "trailing",
+        "order": 75,
+        "arguments_wolfram": "{1, -10, 0, 4}",
+        "value": {
+          "real_wolfram": "-0.0191508840720296721365611597236750923598653238636830373386`33.42507966431697",
+          "imaginary_wolfram": "-0.3066358899483403657463434439014286050395759492401609894176`34.62951382212964",
+          "precision_wolfram": "34.47984418171644",
+          "accuracy_wolfram": "34.99237583915988"
+        },
+        "reported_uncertainty_wolfram": "-6.479702007497518*^-36",
+        "wall_seconds_original_wrapper": 0.926068,
+        "settings": {
+          "working_precision": 250,
+          "chop_precision": 225,
+          "expansion_order": 75,
+          "epsilon_order": 0,
+          "division_order": 3,
+          "mobius": true,
+          "pade": false,
+          "parallel": false,
+          "verbosity": 1
+        },
+        "upstream_commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+        "source_sha256": "67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7",
+        "notebook_sha256": "028003cce75bdfb911d3bbf8cfc313bb6cb5454d8ce44722c4eba8bfcaca24ba",
+        "driver_sha256": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+        "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+        "scope": "Original notebook GEvaluate workload, including its shuffle/logarithm extraction and all underlying transports. Native direct triangular-DE timing is different work; no matched algorithm ratio.",
+        "notebook_deviations": [
+          "Verbosity1 preserves logs; original0.",
+          "Pinned local source and target-owned temporary matrix directory; single-process mode."
+        ],
+        "validation_note": "This status validates a finite returned value with >=20 recorded precision; independent native/refinement comparison is a separate pending gate."
+      },
+      "original_runner": {
+        "command": [
+          "taskset",
+          "-c",
+          "28",
+          "/home/ben/.local/bin/bern-wolfram",
+          "-noinit",
+          "-noprompt",
+          "-script",
+          "/common/dev/amflow/target/diffexp-oracle/mpl-additional/original.wl"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 4.003124664071947,
+        "peak_polled_process_tree_rss_bytes": 187023360,
+        "poll_period_seconds": 2,
+        "termination_reason": null,
+        "limits": {
+          "seconds": 600,
+          "rss_bytes": 4294967296
+        },
+        "environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "driver_sha256": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+        "monitor_sha256": "9d8437b3f9d2ba85c99e10d2dc743a834975f70784f20c0b0331932e6232f158"
+      },
+      "original_component_metadata": {
+        "real": {
+          "value_wolfram": "-0.0191508840720296721365611597236750923598653238636830373386`33.42507966431697",
+          "precision_wolfram": "33.42507966431697",
+          "accuracy_wolfram": "35.14289083699187",
+          "exact": false
+        },
+        "imaginary": {
+          "value_wolfram": "-0.3066358899483403657463434439014286050395759492401609894176`34.62951382212964",
+          "precision_wolfram": "34.62951382212964",
+          "accuracy_wolfram": "35.142890836991874",
+          "exact": false
+        },
+        "raw_sha256": "8c3ba535e835737cdf84ca47450f6a6707a0432e14f4740b54692dce2daca075",
+        "postprocessor_sha256": "c3aaed76e898871084b7db2be8d3b0ccaac0f369c0d8f26094ae4a341e76b570",
+        "note": "Precision and absolute Accuracy are extracted from the saved original result, including finite-accuracy zeros; no numerical transport is rerun."
+      },
+      "original_result_sha256": "2e5642e24b9208bc7b891e7c7a53c4f52ad1f16e3f55006705eb23506ff33af9"
+    },
+    {
+      "case": "complex",
+      "order": 50,
+      "absolute_difference": "8.78104035198616148001236097800908725218778606400977243689214728489744506456100059871607512195097264747698590422592406423500090191883128804624940803218106227660022065799029780196041E-28",
+      "relative_difference": "8.84792309372269777837119026214487239407054680720689092707666014567379326395793008072123578857120674075410255241534489951950085371535054871814595633622491953546010734643972728656555E-23",
+      "component_checks": [
+        {
+          "component": "real",
+          "absolute_difference": "8.7635440600244408784300612487917174184754962366764244182168025971296751418432967444E-28",
+          "source_recorded_precision": "21.148578046193016",
+          "source_recorded_absolute_accuracy": "26.153810364020224",
+          "upward_rounded_source_uncertainty_estimate": "1E-26",
+          "finite_accuracy_zero": false
+        },
+        {
+          "component": "imaginary",
+          "absolute_difference": "5.5404437657970112202963360286946036104059013888755775025306663227327916677442670460E-29",
+          "source_recorded_precision": "20.12472947287597",
+          "source_recorded_absolute_accuracy": "26.153810364020224",
+          "upward_rounded_source_uncertainty_estimate": "1E-26",
+          "finite_accuracy_zero": false
+        }
+      ],
+      "original_result": {
+        "status": "passed",
+        "case": "complex",
+        "order": 50,
+        "arguments_wolfram": "{10, -10 + I, -1/2, -50, 1}",
+        "value": {
+          "real_wolfram": "-9.88024427815072815488865972208034`21.148578046193016*^-6",
+          "imaginary_wolfram": "-9.3523146288726201988520314133492`20.12472947287597*^-7",
+          "precision_wolfram": "21.",
+          "accuracy_wolfram": "26.003295366188233"
+        },
+        "reported_uncertainty_wolfram": "2.445341839071466*^-26",
+        "wall_seconds_original_wrapper": 0.443258,
+        "settings": {
+          "working_precision": 250,
+          "chop_precision": 225,
+          "expansion_order": 50,
+          "epsilon_order": 0,
+          "division_order": 3,
+          "mobius": true,
+          "pade": false,
+          "parallel": false,
+          "verbosity": 1
+        },
+        "upstream_commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+        "source_sha256": "67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7",
+        "notebook_sha256": "028003cce75bdfb911d3bbf8cfc313bb6cb5454d8ce44722c4eba8bfcaca24ba",
+        "driver_sha256": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+        "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+        "scope": "Original notebook GEvaluate workload, including its shuffle/logarithm extraction and all underlying transports. Native direct triangular-DE timing is different work; no matched algorithm ratio.",
+        "notebook_deviations": [
+          "Verbosity1 preserves logs; original0.",
+          "Pinned local source and target-owned temporary matrix directory; single-process mode."
+        ],
+        "validation_note": "This status validates a finite returned value with >=20 recorded precision; independent native/refinement comparison is a separate pending gate."
+      },
+      "original_runner": {
+        "command": [
+          "taskset",
+          "-c",
+          "28",
+          "/home/ben/.local/bin/bern-wolfram",
+          "-noinit",
+          "-noprompt",
+          "-script",
+          "/common/dev/amflow/target/diffexp-oracle/mpl-additional/original.wl"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 4.005340515170246,
+        "peak_polled_process_tree_rss_bytes": 182308864,
+        "poll_period_seconds": 2,
+        "termination_reason": null,
+        "limits": {
+          "seconds": 600,
+          "rss_bytes": 4294967296
+        },
+        "environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "driver_sha256": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+        "monitor_sha256": "9d8437b3f9d2ba85c99e10d2dc743a834975f70784f20c0b0331932e6232f158"
+      },
+      "original_component_metadata": {
+        "real": {
+          "value_wolfram": "-9.88024427815072815488865972208034`21.148578046193016*^-6",
+          "precision_wolfram": "21.148578046193016",
+          "accuracy_wolfram": "26.153810364020224",
+          "exact": false
+        },
+        "imaginary": {
+          "value_wolfram": "-9.3523146288726201988520314133492`20.12472947287597*^-7",
+          "precision_wolfram": "20.12472947287597",
+          "accuracy_wolfram": "26.153810364020224",
+          "exact": false
+        },
+        "raw_sha256": "c65031ed3e8292bfec4a1a68653af749530b68d65c288502aca76cf2c884569e",
+        "postprocessor_sha256": "c3aaed76e898871084b7db2be8d3b0ccaac0f369c0d8f26094ae4a341e76b570",
+        "note": "Precision and absolute Accuracy are extracted from the saved original result, including finite-accuracy zeros; no numerical transport is rerun."
+      },
+      "original_result_sha256": "6604c86d51e3ac1ffcaf2c16cbe1b7abb9b5787b47b72d7b30d951ba10632f9b"
+    },
+    {
+      "case": "complex",
+      "order": 75,
+      "absolute_difference": "2.36821251006506543734272980257716444096531378744572145252949154194055580774271947127018670853216345712666120792343548864241362671734786434485042465730745022204357955700052877702943E-40",
+      "relative_difference": "2.38625052598787004309568212019220915953936120767456133278517668195921802413442674292810691692769363237597270207119752421749051276474068543044148311078294145868692734139671980353865E-35",
+      "component_checks": [
+        {
+          "component": "real",
+          "absolute_difference": "2.3635974172416450817174184754962366764244182168025971296751418432967444E-40",
+          "source_recorded_precision": "33.14857804619302",
+          "source_recorded_absolute_accuracy": "38.15381036402023",
+          "upward_rounded_source_uncertainty_estimate": "1E-38",
+          "finite_accuracy_zero": false
+        },
+        {
+          "component": "imaginary",
+          "absolute_difference": "1.4777598599671867646036104059013888755775025306663227327916677442670460E-41",
+          "source_recorded_precision": "32.12472947287597",
+          "source_recorded_absolute_accuracy": "38.153810364020224",
+          "upward_rounded_source_uncertainty_estimate": "1E-38",
+          "finite_accuracy_zero": false
+        }
+      ],
+      "original_result": {
+        "status": "passed",
+        "case": "complex",
+        "order": 75,
+        "arguments_wolfram": "{10, -10 + I, -1/2, -50, 1}",
+        "value": {
+          "real_wolfram": "-9.880244278150728154889536076486342207728101281960371`33.14857804619302*^-6",
+          "imaginary_wolfram": "-9.352314628872620198852585457725779553346043636884193`32.12472947287597*^-7",
+          "precision_wolfram": "33.",
+          "accuracy_wolfram": "38.00329536618823"
+        },
+        "reported_uncertainty_wolfram": "2.0229156270690168*^-38",
+        "wall_seconds_original_wrapper": 0.510206,
+        "settings": {
+          "working_precision": 250,
+          "chop_precision": 225,
+          "expansion_order": 75,
+          "epsilon_order": 0,
+          "division_order": 3,
+          "mobius": true,
+          "pade": false,
+          "parallel": false,
+          "verbosity": 1
+        },
+        "upstream_commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+        "source_sha256": "67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7",
+        "notebook_sha256": "028003cce75bdfb911d3bbf8cfc313bb6cb5454d8ce44722c4eba8bfcaca24ba",
+        "driver_sha256": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+        "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+        "scope": "Original notebook GEvaluate workload, including its shuffle/logarithm extraction and all underlying transports. Native direct triangular-DE timing is different work; no matched algorithm ratio.",
+        "notebook_deviations": [
+          "Verbosity1 preserves logs; original0.",
+          "Pinned local source and target-owned temporary matrix directory; single-process mode."
+        ],
+        "validation_note": "This status validates a finite returned value with >=20 recorded precision; independent native/refinement comparison is a separate pending gate."
+      },
+      "original_runner": {
+        "command": [
+          "taskset",
+          "-c",
+          "28",
+          "/home/ben/.local/bin/bern-wolfram",
+          "-noinit",
+          "-noprompt",
+          "-script",
+          "/common/dev/amflow/target/diffexp-oracle/mpl-additional/original.wl"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 4.00299270125106,
+        "peak_polled_process_tree_rss_bytes": 185425920,
+        "poll_period_seconds": 2,
+        "termination_reason": null,
+        "limits": {
+          "seconds": 600,
+          "rss_bytes": 4294967296
+        },
+        "environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "driver_sha256": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+        "monitor_sha256": "9d8437b3f9d2ba85c99e10d2dc743a834975f70784f20c0b0331932e6232f158"
+      },
+      "original_component_metadata": {
+        "real": {
+          "value_wolfram": "-9.880244278150728154889536076486342207728101281960371`33.14857804619302*^-6",
+          "precision_wolfram": "33.14857804619302",
+          "accuracy_wolfram": "38.15381036402023",
+          "exact": false
+        },
+        "imaginary": {
+          "value_wolfram": "-9.352314628872620198852585457725779553346043636884193`32.12472947287597*^-7",
+          "precision_wolfram": "32.12472947287597",
+          "accuracy_wolfram": "38.153810364020224",
+          "exact": false
+        },
+        "raw_sha256": "c87a926042f1f15690c54f3f192866dec9709b5379805106c317e0cf1f942a51",
+        "postprocessor_sha256": "c3aaed76e898871084b7db2be8d3b0ccaac0f369c0d8f26094ae4a341e76b570",
+        "note": "Precision and absolute Accuracy are extracted from the saved original result, including finite-accuracy zeros; no numerical transport is rerun."
+      },
+      "original_result_sha256": "0ab6fd351ec24198b2a912a020a42dcf246fa609f48666d58024fc4470566b48"
+    },
+    {
+      "case": "weight20",
+      "order": 100,
+      "absolute_difference": "5.50367193540045739995281091464074057465011787450926457192784247428657465502219548113120908071835642300000000000000000000000000000000000000000000000000000000000000327767310669242359E-57",
+      "relative_difference": "1.07270099484934292680536059505388765157999308706362840528671390957208224040066352610266312259589283758895819218525911649510398716797265537256033959824536515365085246910150813341679E-45",
+      "component_checks": [
+        {
+          "component": "real",
+          "absolute_difference": "5.503671935400457399952810914640740574650117874509264571927842474286574655022195481131209080718356423E-57",
+          "source_recorded_precision": "44.15051499783199",
+          "source_recorded_absolute_accuracy": "55.44034114279244",
+          "upward_rounded_source_uncertainty_estimate": "1E-55",
+          "finite_accuracy_zero": false
+        },
+        {
+          "component": "imaginary",
+          "absolute_difference": "6.006536021821549158127170085575736793711985521162995126653684716333658782571981191601871680372754241685084225956958840350168163040510850048434425E-138",
+          "source_recorded_precision": "0.",
+          "source_recorded_absolute_accuracy": "56.50378064103924",
+          "upward_rounded_source_uncertainty_estimate": "1E-56",
+          "finite_accuracy_zero": true
+        }
+      ],
+      "original_result": {
+        "status": "passed",
+        "case": "weight20",
+        "order": 100,
+        "arguments_wolfram": "{1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21}",
+        "value": {
+          "real_wolfram": "5.13066731719907533179589918813462949766948547007605654980358441382`44.15051499783199*^-12",
+          "imaginary_wolfram": "0``56.50378064103924",
+          "precision_wolfram": "44.14889967624783",
+          "accuracy_wolfram": "55.43872582120828"
+        },
+        "reported_uncertainty_wolfram": "1.5861220406084333*^-55",
+        "wall_seconds_original_wrapper": 33.669108,
+        "settings": {
+          "working_precision": 250,
+          "chop_precision": 225,
+          "expansion_order": 100,
+          "epsilon_order": 0,
+          "division_order": 3,
+          "mobius": true,
+          "pade": false,
+          "parallel": false,
+          "verbosity": 1
+        },
+        "upstream_commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+        "source_sha256": "67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7",
+        "notebook_sha256": "028003cce75bdfb911d3bbf8cfc313bb6cb5454d8ce44722c4eba8bfcaca24ba",
+        "driver_sha256": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+        "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+        "scope": "Original notebook GEvaluate workload, including its shuffle/logarithm extraction and all underlying transports. Native direct triangular-DE timing is different work; no matched algorithm ratio.",
+        "notebook_deviations": [
+          "Verbosity1 preserves logs; original0.",
+          "Pinned local source and target-owned temporary matrix directory; single-process mode."
+        ],
+        "validation_note": "This status validates a finite returned value with >=20 recorded precision; independent native/refinement comparison is a separate pending gate."
+      },
+      "original_runner": {
+        "command": [
+          "taskset",
+          "-c",
+          "28",
+          "/home/ben/.local/bin/bern-wolfram",
+          "-noinit",
+          "-noprompt",
+          "-script",
+          "/common/dev/amflow/target/diffexp-oracle/mpl-additional/original.wl"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 36.01217822916806,
+        "peak_polled_process_tree_rss_bytes": 450056192,
+        "poll_period_seconds": 2,
+        "termination_reason": null,
+        "limits": {
+          "seconds": 1800,
+          "rss_bytes": 4294967296
+        },
+        "environment": {
+          "OMP_NUM_THREADS": "1",
+          "OPENBLAS_NUM_THREADS": "1",
+          "MKL_NUM_THREADS": "1"
+        },
+        "driver_sha256": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+        "monitor_sha256": "9d8437b3f9d2ba85c99e10d2dc743a834975f70784f20c0b0331932e6232f158"
+      },
+      "original_component_metadata": {
+        "real": {
+          "value_wolfram": "5.13066731719907533179589918813462949766948547007605654980358441382`44.15051499783199*^-12",
+          "precision_wolfram": "44.15051499783199",
+          "accuracy_wolfram": "55.44034114279244",
+          "exact": false
+        },
+        "imaginary": {
+          "value_wolfram": "0``56.50378064103924",
+          "precision_wolfram": "0.",
+          "accuracy_wolfram": "56.50378064103924",
+          "exact": false
+        },
+        "raw_sha256": "fd3515f9b2eac3109d277850b085d2f70b0b864adb846291cf8880b78094aedc",
+        "postprocessor_sha256": "c3aaed76e898871084b7db2be8d3b0ccaac0f369c0d8f26094ae4a341e76b570",
+        "note": "Precision and absolute Accuracy are extracted from the saved original result, including finite-accuracy zeros; no numerical transport is rerun."
+      },
+      "original_result_sha256": "230acb5d939c0c301c4aeee9b81266bb0ce8a433beee2954c1a263d76b3f4bd8"
+    }
+  ],
+  "native_results": {
+    "trailing": [
+      {
+        "boundary_frobenius_order": 80,
+        "boundary_note": "Independent exact regularized constants. Trailing-zero case fixes every t^0 log^0 coefficient to0 except the final1 using native generalized Frobenius at0; the log(t) chain is inferred by recurrence. Other cases start from exact finite values at0. No original numerical reference enters any boundary.",
+        "boundary_seconds": 0.034747217,
+        "case": "trailing",
+        "compile_seconds": 0.000677652,
+        "digits": 80,
+        "dimension": 4,
+        "endpoint": 4,
+        "letters": [
+          "1",
+          "-10",
+          "0"
+        ],
+        "order": 50,
+        "rejected_steps": 1245,
+        "requested_absolute_digits": 30,
+        "scope": "Native direct triangular differential system; original trailing-zero notebook uses shuffle reduction into several systems, so timings are different work.",
+        "status": "completed_pending_external_comparison",
+        "steps": 323,
+        "transport_seconds": 0.476418023,
+        "values": [
+          {
+            "imaginary": "-3.06635889948340365746343443901428605001945292863997817144980894147662909014504266842e-1",
+            "real": "-1.91508840720296721365611597236750924083777649303450977429912799704187142895459511139e-2"
+          },
+          {
+            "imaginary": "1.40630529361333697242501598608815220542334685979468545322152167318978163753815565350e-80",
+            "real": "1.00616986788935415217172009870822040834524689357255267787423538687023981950303157838e-1"
+          },
+          {
+            "imaginary": "4.01448284301543987333483523552604052749811248322842462583485289334699623128628630810e-80",
+            "real": "1.38629436111989061883446424291635313615100026872051050824136001898678724393938945293"
+          },
+          {
+            "imaginary": "0",
+            "real": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "wall_seconds": 0.512075203,
+        "waypoints": [
+          {
+            "imaginary": "-5.00000000000000000000000000000000000000000000000000000000000000000000000000000000000e-1",
+            "real": "0"
+          },
+          {
+            "imaginary": "-5.00000000000000000000000000000000000000000000000000000000000000000000000000000000000e-1",
+            "real": "4.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "imaginary": "0",
+            "real": "4.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ]
+      },
+      {
+        "boundary_frobenius_order": 100,
+        "boundary_note": "Independent exact regularized constants. Trailing-zero case fixes every t^0 log^0 coefficient to0 except the final1 using native generalized Frobenius at0; the log(t) chain is inferred by recurrence. Other cases start from exact finite values at0. No original numerical reference enters any boundary.",
+        "boundary_seconds": 0.017391553,
+        "case": "trailing",
+        "compile_seconds": 0.000236111,
+        "digits": 100,
+        "dimension": 4,
+        "endpoint": 4,
+        "letters": [
+          "1",
+          "-10",
+          "0"
+        ],
+        "order": 75,
+        "rejected_steps": 471,
+        "requested_absolute_digits": 30,
+        "scope": "Native direct triangular differential system; original trailing-zero notebook uses shuffle reduction into several systems, so timings are different work.",
+        "status": "completed_pending_external_comparison",
+        "steps": 164,
+        "transport_seconds": 0.338231679,
+        "values": [
+          {
+            "imaginary": "-3.06635889948340365746343443901428605001945292863997817144980894147662909014504220817083901538046720790360e-1",
+            "real": "-1.91508840720296721365611597236750924083777649303450977429912799704187142892500252074366867251483336474915e-2"
+          },
+          {
+            "imaginary": "-2.90032194858267828699286402258085451401736017550205433208763660820945323907016592446487627706006498673837e-101",
+            "real": "1.00616986788935415217172009870822040834524689357255267787423538687023981950303152543350922415304129043900e-1"
+          },
+          {
+            "imaginary": "-8.54539429993919946105949760273137346769487999039947797445528760244060054254179988338995150117272666293712e-101",
+            "real": "1.38629436111989061883446424291635313615100026872051050824136001898678724393938943121172665399283737507537"
+          },
+          {
+            "imaginary": "0",
+            "real": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "wall_seconds": 0.355881363,
+        "waypoints": [
+          {
+            "imaginary": "-5.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-1",
+            "real": "0"
+          },
+          {
+            "imaginary": "-5.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-1",
+            "real": "4.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "imaginary": "0",
+            "real": "4.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ]
+      }
+    ],
+    "complex": [
+      {
+        "boundary_frobenius_order": null,
+        "boundary_note": "Independent exact regularized constants. Trailing-zero case fixes every t^0 log^0 coefficient to0 except the final1 using native generalized Frobenius at0; the log(t) chain is inferred by recurrence. Other cases start from exact finite values at0. No original numerical reference enters any boundary.",
+        "boundary_seconds": 3.836e-05,
+        "case": "complex",
+        "compile_seconds": 0.003031109,
+        "digits": 80,
+        "dimension": 5,
+        "endpoint": 1,
+        "formal_exact_parameters": {
+          "mpl_additional::imaginary_unit": "i"
+        },
+        "letters": [
+          "10",
+          "-10+mpl_additional::{}::imaginary_unit",
+          "-1/2",
+          "-50"
+        ],
+        "order": 50,
+        "rejected_steps": 188,
+        "requested_absolute_digits": 30,
+        "scope": "Native direct triangular differential system; original trailing-zero notebook uses shuffle reduction into several systems, so timings are different work.",
+        "status": "completed_pending_external_comparison",
+        "steps": 51,
+        "transport_seconds": 0.081625205,
+        "values": [
+          {
+            "imaginary": "-9.35231462887262019885258545772577970112202963360286946036104059013888755775027834540e-7",
+            "real": "-9.88024427815072815488953607648634244408784300612487917174184754962366764244184990907e-6"
+          },
+          {
+            "imaginary": "3.02544510097042236921638441426888979890515738027348025451334857189765069510458881854e-5",
+            "real": "3.24180171541930271175723887171775881903629435716083273703024182395288112974463140238e-4"
+          },
+          {
+            "imaginary": "0",
+            "real": "8.95946318207506279172199437926971752898470031116572802672787924593545113614570658005e-3"
+          },
+          {
+            "imaginary": "0",
+            "real": "1.98026272961797130260290668851003931089907275112035410859562790780352716345300029196e-2"
+          },
+          {
+            "imaginary": "0",
+            "real": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "wall_seconds": 0.085049445,
+        "waypoints": [
+          {
+            "imaginary": "0",
+            "real": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ]
+      },
+      {
+        "boundary_frobenius_order": null,
+        "boundary_note": "Independent exact regularized constants. Trailing-zero case fixes every t^0 log^0 coefficient to0 except the final1 using native generalized Frobenius at0; the log(t) chain is inferred by recurrence. Other cases start from exact finite values at0. No original numerical reference enters any boundary.",
+        "boundary_seconds": 2.2e-06,
+        "case": "complex",
+        "compile_seconds": 0.000816922,
+        "digits": 100,
+        "dimension": 5,
+        "endpoint": 1,
+        "formal_exact_parameters": {
+          "mpl_additional::imaginary_unit": "i"
+        },
+        "letters": [
+          "10",
+          "-10+mpl_additional::{}::imaginary_unit",
+          "-1/2",
+          "-50"
+        ],
+        "order": 75,
+        "rejected_steps": 73,
+        "requested_absolute_digits": 30,
+        "scope": "Native direct triangular differential system; original trailing-zero notebook uses shuffle reduction into several systems, so timings are different work.",
+        "status": "completed_pending_external_comparison",
+        "steps": 27,
+        "transport_seconds": 0.05981914,
+        "values": [
+          {
+            "imaginary": "-9.35231462887262019885258545772577970112202963360286946036104059013888755775025306663227327916677442670460e-7",
+            "real": "-9.88024427815072815488953607648634244408784300612487917174184754962366764244182168025971296751418432967444e-6"
+          },
+          {
+            "imaginary": "3.02544510097042236921638441426888979890515738027348025451334857189765069510457042637232850870215482614754e-5",
+            "real": "3.24180171541930271175723887171775881903629435716083273703024182395288112974461099627337606645256032858361e-4"
+          },
+          {
+            "imaginary": "0",
+            "real": "8.95946318207506279172199437926971752898470031116572802672787924593545113614559441327991948234805042173197e-3"
+          },
+          {
+            "imaginary": "0",
+            "real": "1.98026272961797130260290668851003931089907275112035410859562790780352716345300029195795396684571271643842e-2"
+          },
+          {
+            "imaginary": "0",
+            "real": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "wall_seconds": 0.060672032,
+        "waypoints": [
+          {
+            "imaginary": "0",
+            "real": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ]
+      }
+    ],
+    "weight20": [
+      {
+        "boundary_frobenius_order": null,
+        "boundary_note": "Independent exact regularized constants. Trailing-zero case fixes every t^0 log^0 coefficient to0 except the final1 using native generalized Frobenius at0; the log(t) chain is inferred by recurrence. Other cases start from exact finite values at0. No original numerical reference enters any boundary.",
+        "boundary_seconds": 5.33e-06,
+        "case": "weight20",
+        "compile_seconds": 0.004688114,
+        "digits": 100,
+        "dimension": 21,
+        "endpoint": 21,
+        "formal_exact_parameters": {
+          "mpl_additional::imaginary_unit": "i"
+        },
+        "letters": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20"
+        ],
+        "order": 100,
+        "rejected_steps": 710,
+        "requested_absolute_digits": 50,
+        "scope": "Native direct triangular differential system; original trailing-zero notebook uses shuffle reduction into several systems, so timings are different work.",
+        "status": "completed_pending_external_comparison",
+        "steps": 388,
+        "transport_seconds": 5.969789158,
+        "values": [
+          {
+            "imaginary": "-2.39348287940740675259266207021922015954978134873414709694231824655263867196093325249497143292251774599485e-96",
+            "real": "5.13066731719907533179589918813462949766948546457238461440312701386718908535925942534873765700266973543117e-12"
+          },
+          {
+            "imaginary": "-5.37146810965037329521574655679151291318553058483532833757587942988454233379255874035170248809529850763623e-11",
+            "real": "2.94559471366311239714130518010013313289389833141460679735254033466136651233679049146418714556982607504767e-11"
+          },
+          {
+            "imaginary": "-5.54742433626537205692382892899464000795765037403895887408801979993341125803620957654134671496376792733671e-10",
+            "real": "-3.89177631263970125742058112891909576696428530285954694987079157887524488301022192516455479141478986248215e-10"
+          },
+          {
+            "imaginary": "1.37020573583697926917263207356698335813069114649670091080901574244580260737210983809490913857130316442586e-9",
+            "real": "-6.79015864254642768942829080606563628121804334438790809811133242315726121046929122407935247079304462482310e-9"
+          },
+          {
+            "imaginary": "6.43256039011586615840391765843822365482943633791017262360132844144934381294271023150267494651500599693320e-8",
+            "real": "-1.09150320921539139603517365106192284467229028211129996105383659504086030070419845799441575967550300836487e-8"
+          },
+          {
+            "imaginary": "2.65136981828276787250639326236947398561573626159448470359280139970290459661108364452022923672771834420831e-7",
+            "real": "4.98104324522285614138200765124328106246601198474961994280272441948762429568621174865141064178029030502769e-7"
+          },
+          {
+            "imaginary": "-3.22449039274496660753796549942629381079337417170839838511187779296634667084286410530353350862448391700340e-6",
+            "real": "3.08503415923468832044454426873522756181017601762235057804661976117893449210434711027199452084659449638361e-6"
+          },
+          {
+            "imaginary": "-2.68443980485683641822041738467314719948972651578698319737702450353328150920888268744657693049094850114404e-5",
+            "real": "-1.76310644779771352284763684183710446767934427820058406304446597517560476011701337635700371266071267653684e-5"
+          },
+          {
+            "imaginary": "8.21273387016772294470201672543502595929452860882314322408489407942285855562875481112218441910803910102630e-5",
+            "real": "-1.92329943221032197089986089003565560113301564301401690459958904812369933776665200015791616514450802270635e-4"
+          },
+          {
+            "imaginary": "1.17739894608959179699810404348544966171497721002599100237777113604591044902643201921660463019604317947967e-3",
+            "real": "3.33508442317350857724216562555647066989863616312723096622569181012964583330181148944724638042869723682026e-4"
+          },
+          {
+            "imaginary": "-1.26752373209920879946487555770740515575357062150698765255739572904333788428594398583324182215043045298304e-3",
+            "real": "6.25500614940426571163687127123046036240922841718749080274669934026848462617574015570165766967440128441691e-3"
+          },
+          {
+            "imaginary": "-2.89149181534325173377343624533892141420545907880875927650923586554609385562050138936316193943358175596594e-2",
+            "real": "-5.17326922206823009786338425736215386069274078202163097415473874756429502929236620956193595862777008954131e-3"
+          },
+          {
+            "imaginary": "2.45123263131179955949195049152887719087416813037469229511091987720779450702630614094677001983371745853994e-2",
+            "real": "-1.15290800464599472730995492815088470704879191283431670141659833241895136783570696712117925706584787886687e-1"
+          },
+          {
+            "imaginary": "3.87994797556736137107885018900058947302571541163341016565016082492938519196846659169197781860029486128802e-1",
+            "real": "1.20009948443847107263400788006582205451788208417343947367665090643217450581699032750814470244321840362784e-1"
+          },
+          {
+            "imaginary": "-5.14638943304950479954959428390998919893217721462724471714106046785191141537853999404906241077463259074336e-1",
+            "real": "1.06024174280921057029312994142861081748339457676129139205642986323221222509366624287800337685850289624303"
+          },
+          {
+            "imaginary": "-2.20102272405066716720198254541223831968009545098041573182474542508231334897582585100635455459230148245484",
+            "real": "-1.74281492378324318682387884226877330421429827215890222829774639634266166020152168087633083518111113862378"
+          },
+          {
+            "imaginary": "4.34041181177707594804461304551144757202054973710657496111515738247902427009876213169870895353028337239379",
+            "real": "-3.04159465325447414877485651753735190427738050562249154497607513779517232057176000773557969090273237611232"
+          },
+          {
+            "imaginary": "1.79526492554517575353062399445651460037819839128379611652249391177216466403309981359447049877578872937304",
+            "real": "7.31464460970578627857663680549711810327335332598068601721293147876778096760432187481256189836106880055280"
+          },
+          {
+            "imaginary": "-7.23378441241546481249004655026179112760228450812262902870512714974908151005338401244138906466996093340795",
+            "real": "-1.65097332637597177111201773881190031647883140152688555039032882972327822956785504997991815941748940935269"
+          },
+          {
+            "imaginary": "3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211575788561",
+            "real": "-2.99573227355399099343522357614254077567660162298902823015400791046096623164704719584186053208601843145260"
+          },
+          {
+            "imaginary": "0",
+            "real": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "wall_seconds": 5.974607372,
+        "waypoints": [
+          {
+            "imaginary": "-5.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-1",
+            "real": "0"
+          },
+          {
+            "imaginary": "-5.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-1",
+            "real": "21.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "imaginary": "0",
+            "real": "21.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ]
+      },
+      {
+        "boundary_frobenius_order": null,
+        "boundary_note": "Independent exact regularized constants. Trailing-zero case fixes every t^0 log^0 coefficient to0 except the final1 using native generalized Frobenius at0; the log(t) chain is inferred by recurrence. Other cases start from exact finite values at0. No original numerical reference enters any boundary.",
+        "boundary_seconds": 8.88e-06,
+        "case": "weight20",
+        "compile_seconds": 0.004815434,
+        "digits": 140,
+        "dimension": 21,
+        "endpoint": 21,
+        "formal_exact_parameters": {
+          "mpl_additional::imaginary_unit": "i"
+        },
+        "letters": [
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8",
+          "9",
+          "10",
+          "11",
+          "12",
+          "13",
+          "14",
+          "15",
+          "16",
+          "17",
+          "18",
+          "19",
+          "20"
+        ],
+        "order": 140,
+        "rejected_steps": 805,
+        "requested_absolute_digits": 70,
+        "scope": "Native direct triangular differential system; original trailing-zero notebook uses shuffle reduction into several systems, so timings are different work.",
+        "status": "completed_pending_external_comparison",
+        "steps": 420,
+        "transport_seconds": 10.176812162,
+        "values": [
+          {
+            "imaginary": "-6.006536021821549158127170085575736793711985521162995126653684716333658782571981191601871680372754241685084225956958840350168163040510850048434425e-138",
+            "real": "5.130667317199075331795899188134629497669485464572384614403127013867189085359259425349882125490735428072157525713425344977804518868790919281643577e-12"
+          },
+          {
+            "imaginary": "-5.371468109650373295215746556791512913185530584835328337575879429884542333792558740351224814959685013472838159611569463213758207476824949097554067e-11",
+            "real": "2.945594713663112397141305180100133132893898331414606797352540334661366512336790491464499445843637685982232407558839974094546820992945113370641942e-11"
+          },
+          {
+            "imaginary": "-5.547424336265372056923828928994640007957650374038958874088019799933411258036209576541284938944844324068893970906245825383653630851571480892866398e-10",
+            "real": "-3.891776312639701257420581128919095766964285302859546949870791578875244883010221925164499937683779176854030929083247991881650890719575577973343165e-10"
+          },
+          {
+            "imaginary": "1.370205735836979269172632073566983358130691146496700910809015742445802607372109838094913571327886295467425107830372401359814573171278905273991035e-9",
+            "real": "-6.790158642546427689428290806065636281218043344387908098111332423157261210469291224079346977355687663981817035365228231881355821979460483264076684e-9"
+          },
+          {
+            "imaginary": "6.432560390115866158403917658438223654829436337910172623601328441449343812942710231502675069346363679546263446504565094792626946816465925806664867e-8",
+            "real": "-1.091503209215391396035173651061922844672290282111299961053836595040860300704198457994415527829410721647047633271016939444236383976770903602149407e-8"
+          },
+          {
+            "imaginary": "2.651369818282767872506393262369473985615736261594484703592801399702904596611083644520229236727720418328773992035777334646797680554241090806963885e-7",
+            "real": "4.981043245222856141382007651243281062466011984749619942802724419487624295686211748651410641780288063621296108837250107610953645195208607367908621e-7"
+          },
+          {
+            "imaginary": "-3.224490392744966607537965499426293810793374171708398385111877792966346670842864105303533508624483917001407399768708544103044296615972047445004812e-6",
+            "real": "3.085034159234688320444544268735227561810176017622350578046619761178934492104347110271994520846594496378261812755387792129521284482406326464591323e-6"
+          },
+          {
+            "imaginary": "-2.684439804856836418220417384673147199489726515786983197377024503533281509208882687446576930490948501142744452625694654562617178964289979105524925e-5",
+            "real": "-1.763106447797713522847636841837104467679344278200584063044465975175604760117013376357003712660712676537842887710049347053324484481181898432303403e-5"
+          },
+          {
+            "imaginary": "8.212733870167722944702016725435025959294528608823143224084894079422858555628754811122184419108039101024859344456916485030134903064568795822645196e-5",
+            "real": "-1.923299432210321970899860890035655601133015643014016904599589048123699337766652000157916165144508022705766646686528831662009625207245448644938549e-4"
+          },
+          {
+            "imaginary": "1.177398946089591796998104043485449661714977210025991002377771136045910449026432019216604630196043179479066019115792208943352855836889378915471562e-3",
+            "real": "3.335084423173508577242165625556470669898636163127230966225691810129645833301811489447246380428697236824340058438693999979917757885709545493984409e-4"
+          },
+          {
+            "imaginary": "-1.267523732099208799464875557707405155753570621506987652557395729043337884285943985833241822150430452986467264371678944344027879042592508255311816e-3",
+            "real": "6.255006149404265711636871271230460362409228417187490802746699340268484626175740155701657669674401284417538081831725878840056390359282417358532188e-3"
+          },
+          {
+            "imaginary": "-2.891491815343251733773436245338921414205459078808759276509235865546093855620501389363161939433581755966842013539395431641750638195170291553651619e-2",
+            "real": "-5.173269222068230097863384257362153860692740782021630974154738747564295029292366209561935958627770089544669875744094503689078300444742062559778125e-3"
+          },
+          {
+            "imaginary": "2.451232631311799559491950491528877190874168130374692295110919877207794507026306140946770019833717458539821867209144779149345186858082638089925149e-2",
+            "real": "-1.152908004645994727309954928150884707048791912834316701416598332418951367835706967121179257065847878867127760679127571513012542095067284905044497e-1"
+          },
+          {
+            "imaginary": "3.879947975567361371078850189000589473025715411633410165650160824929385191968466591691977818600294861289081138533725273446146506607455571602895916e-1",
+            "real": "1.200099484438471072634007880065822054517882084173439473676650906432174505816990327508144702443218403627102745406806524612720383920254893132180604e-1"
+          },
+          {
+            "imaginary": "-5.146389433049504799549594283909989198932177214627244717141060467851911415378539994049062410774632590739028541572384771383950439833759270253582098e-1",
+            "real": "1.060241742809210570293129941428610817483394576761291392056429863232212225093666242878003376858502896243055037904123569816908333837221741606730091"
+          },
+          {
+            "imaginary": "-2.201022724050667167201982545412238319680095450980415731824745425082313348975825851006354554592301482454299824079765399818838916082095756611921079",
+            "real": "-1.742814923783243186823878842268773304214298272158902228297746396342661660201521680876330835181111138623223270650576778239200199270893171617185494"
+          },
+          {
+            "imaginary": "4.340411811777075948044613045511447572020549737106574961115157382479024270098762131698708953530283372390652798212913735017320166775981324268398060",
+            "real": "-3.041594653254474148774856517537351904277380505622491544976075137795172320571760007735579690902732376110568447462148410112854186642248496908220040"
+          },
+          {
+            "imaginary": "1.795264925545175753530623994456514600378198391283796116522493911772164664033099813594470498775788729344143494625211964592694658097421410217631469",
+            "real": "7.314644609705786278576636805497118103273353325980686017212931478767780967604321874812561898361068800338956765445325675962453610873553328560200264"
+          },
+          {
+            "imaginary": "-7.233784412415464812490046550261791127602284508122629028705127149749081510053384012441389064669960930914874862687829352610969653042196804446289411",
+            "real": "-1.650973326375971771112017738811900316478831401526885550390328829723278229567855049979918159417489424388525551583781383897936338310146267790305879"
+          },
+          {
+            "imaginary": "3.141592653589793238462643383279502884197169399375105820974944592307816406286208998628034825342117067982148086513282306647093844609550582231725328",
+            "real": "-2.995732273553990993435223576142540775676601622989028230154007910460966231647047195841860532086016985883969265062856934367095045700840937313698901"
+          },
+          {
+            "imaginary": "0",
+            "real": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ],
+        "wall_seconds": 10.181703076,
+        "waypoints": [
+          {
+            "imaginary": "-5.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-1",
+            "real": "0"
+          },
+          {
+            "imaginary": "-5.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-1",
+            "real": "21.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          },
+          {
+            "imaginary": "0",
+            "real": "21.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          }
+        ]
+      }
+    ]
+  },
+  "native_runners": {
+    "native-complex-100-75": {
+      "command": [
+        "taskset",
+        "-c",
+        "28",
+        "/common/dev/amflow/target/diffexp-oracle/mpl-additional/native",
+        "complex",
+        "100",
+        "75"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.002633644733578,
+      "peak_polled_process_tree_rss_bytes": 151552,
+      "poll_period_seconds": 2,
+      "termination_reason": null,
+      "limits": {
+        "seconds": 600,
+        "rss_bytes": 4294967296
+      },
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "binary_sha256": "de756fad31a36d62aee710148f11b3243795cac946d6678d4d0dd9fa0d50fd8d",
+      "driver_sha256": "111191ce88519422517dd84c50cb3cf0168bc2769a8ae4d0537c78facb4ccfba",
+      "monitor_sha256": "d41b0337c285628d2279da8eedaa9e95bb5b312ea39b84c66d3a1cb8763a5104"
+    },
+    "native-complex-80-50": {
+      "command": [
+        "taskset",
+        "-c",
+        "28",
+        "/common/dev/amflow/target/diffexp-oracle/mpl-additional/native",
+        "complex",
+        "80",
+        "50"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.0028712758794427,
+      "peak_polled_process_tree_rss_bytes": 278528,
+      "poll_period_seconds": 2,
+      "termination_reason": null,
+      "limits": {
+        "seconds": 600,
+        "rss_bytes": 4294967296
+      },
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "binary_sha256": "de756fad31a36d62aee710148f11b3243795cac946d6678d4d0dd9fa0d50fd8d",
+      "driver_sha256": "111191ce88519422517dd84c50cb3cf0168bc2769a8ae4d0537c78facb4ccfba",
+      "monitor_sha256": "d41b0337c285628d2279da8eedaa9e95bb5b312ea39b84c66d3a1cb8763a5104"
+    },
+    "native-trailing-100-75": {
+      "command": [
+        "taskset",
+        "-c",
+        "28",
+        "/common/dev/amflow/target/diffexp-oracle/mpl-additional/native",
+        "trailing",
+        "100",
+        "75"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.0026575992815197,
+      "peak_polled_process_tree_rss_bytes": 151552,
+      "poll_period_seconds": 2,
+      "termination_reason": null,
+      "limits": {
+        "seconds": 600,
+        "rss_bytes": 4294967296
+      },
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "binary_sha256": "ff44da4140a260869d3f04c6ca594911ed4d353fa62c2db5407572afcfa8be4e",
+      "driver_sha256": "4c3f62e6d9695adc17deae77661d4fafc538b9e20e76982f21d6381438602277",
+      "monitor_sha256": "d41b0337c285628d2279da8eedaa9e95bb5b312ea39b84c66d3a1cb8763a5104"
+    },
+    "native-trailing-80-50": {
+      "command": [
+        "taskset",
+        "-c",
+        "28",
+        "/common/dev/amflow/target/diffexp-oracle/mpl-additional/native",
+        "trailing",
+        "80",
+        "50"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 2.0025881896726787,
+      "peak_polled_process_tree_rss_bytes": 94208,
+      "poll_period_seconds": 2,
+      "termination_reason": null,
+      "limits": {
+        "seconds": 600,
+        "rss_bytes": 4294967296
+      },
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "binary_sha256": "ff44da4140a260869d3f04c6ca594911ed4d353fa62c2db5407572afcfa8be4e",
+      "driver_sha256": "4c3f62e6d9695adc17deae77661d4fafc538b9e20e76982f21d6381438602277",
+      "monitor_sha256": "d41b0337c285628d2279da8eedaa9e95bb5b312ea39b84c66d3a1cb8763a5104"
+    },
+    "native-weight20-100-100": {
+      "command": [
+        "taskset",
+        "-c",
+        "28",
+        "/common/dev/amflow/target/diffexp-oracle/mpl-additional/native",
+        "weight20",
+        "100",
+        "100"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 6.003600658848882,
+      "peak_polled_process_tree_rss_bytes": 7622656,
+      "poll_period_seconds": 2,
+      "termination_reason": null,
+      "limits": {
+        "seconds": 1800,
+        "rss_bytes": 4294967296
+      },
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "binary_sha256": "de756fad31a36d62aee710148f11b3243795cac946d6678d4d0dd9fa0d50fd8d",
+      "driver_sha256": "111191ce88519422517dd84c50cb3cf0168bc2769a8ae4d0537c78facb4ccfba",
+      "monitor_sha256": "d41b0337c285628d2279da8eedaa9e95bb5b312ea39b84c66d3a1cb8763a5104"
+    },
+    "native-weight20-140-140": {
+      "command": [
+        "taskset",
+        "-c",
+        "28",
+        "/common/dev/amflow/target/diffexp-oracle/mpl-additional/native",
+        "weight20",
+        "140",
+        "140"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 12.00521472003311,
+      "peak_polled_process_tree_rss_bytes": 8146944,
+      "poll_period_seconds": 2,
+      "termination_reason": null,
+      "limits": {
+        "seconds": 1800,
+        "rss_bytes": 4294967296
+      },
+      "environment": {
+        "OMP_NUM_THREADS": "1",
+        "OPENBLAS_NUM_THREADS": "1",
+        "MKL_NUM_THREADS": "1",
+        "RAYON_NUM_THREADS": "1"
+      },
+      "binary_sha256": "de756fad31a36d62aee710148f11b3243795cac946d6678d4d0dd9fa0d50fd8d",
+      "driver_sha256": "111191ce88519422517dd84c50cb3cf0168bc2769a8ae4d0537c78facb4ccfba",
+      "monitor_sha256": "d41b0337c285628d2279da8eedaa9e95bb5b312ea39b84c66d3a1cb8763a5104"
+    }
+  },
+  "provenance": {
+    "schema_version": 1,
+    "created_utc": "2026-10-04T21:10:07.107083+00:00",
+    "native_library_note": "Parent-validated immutable current-cache library snapshot, identified exactly by SHA256; native driver only uses rational ordinary/Frobenius interfaces. Compilation and paired profiles pinnedCPU28 sequentially.",
+    "native_library_sha256": "3d3b1f1d8494cfc91be388ad17e418749684f47127eff345298b8fd0afe62690",
+    "compiler_flags": "rustc --edition=2024 -O",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+    "files": {
+      "target/diffexp-oracle/mpl-additional/native.rs": "111191ce88519422517dd84c50cb3cf0168bc2769a8ae4d0537c78facb4ccfba",
+      "target/diffexp-oracle/mpl-additional/original.wl": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+      "target/diffexp-oracle/mpl-additional/run_original.py": "9d8437b3f9d2ba85c99e10d2dc743a834975f70784f20c0b0331932e6232f158",
+      "target/diffexp-oracle/mpl-additional/run_native.py": "d41b0337c285628d2279da8eedaa9e95bb5b312ea39b84c66d3a1cb8763a5104",
+      "target/algebraic-cache-production/current-deps/libsymbolica_amflow.rlib": "3d3b1f1d8494cfc91be388ad17e418749684f47127eff345298b8fd0afe62690",
+      "target/release/deps/libsymbolica-75e897282e2131a2.rlib": "4b2f81de2fad0adf6bb701f7424c6755050d1a56d844aa9098f7d28bac5cbe4d",
+      "target/release/deps/libserde_json-c589b03db684a851.rlib": "8b1b23218585d888c2399c1b8a01ae1c06a537dadd0fbc915f7f0e34951212aa",
+      "/common/dev/diffexp/Examples/MultiplePolylogarithms.nb": "028003cce75bdfb911d3bbf8cfc313bb6cb5454d8ce44722c4eba8bfcaca24ba",
+      "target/diffexp-oracle/mpl-additional/native": "de756fad31a36d62aee710148f11b3243795cac946d6678d4d0dd9fa0d50fd8d"
+    },
+    "precision_note": "Numbers parsed/extracted at recorded precision. Original central coefficient uses Coefficient[result,pm,0]; substitution pm->0 would mix machine uncertainty zero into arbitrary-precision central value, so two failed decoding attempts are preserved but excluded from successful timings.",
+    "complex_driver_revision": "Uses a formal exact imaginary-unit parameter whose value is constructed as MPFR Complex(0,1); immutable ordinary solver rejected literal complex polynomial coefficients. Trailing profile numerical equations are unchanged, their per-run binary/source hashes identify the earlier driver."
+  },
+  "initial_driver_provenance": {
+    "schema_version": 1,
+    "created_utc": "2026-10-04T21:01:19.944197+00:00",
+    "native_library_note": "Parent-validated immutable current-cache library snapshot, identified exactly by SHA256; native driver only uses rational ordinary/Frobenius interfaces. Compilation and paired profiles pinnedCPU28 sequentially.",
+    "native_library_sha256": "3d3b1f1d8494cfc91be388ad17e418749684f47127eff345298b8fd0afe62690",
+    "compiler_flags": "rustc --edition=2024 -O",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+    "files": {
+      "target/diffexp-oracle/mpl-additional/native.rs": "4c3f62e6d9695adc17deae77661d4fafc538b9e20e76982f21d6381438602277",
+      "target/diffexp-oracle/mpl-additional/original.wl": "98ee8b56bb39c2c80460bfe04ef044d0b440c594dad0cf51992e22b68af55456",
+      "target/diffexp-oracle/mpl-additional/run_original.py": "9d8437b3f9d2ba85c99e10d2dc743a834975f70784f20c0b0331932e6232f158",
+      "target/diffexp-oracle/mpl-additional/run_native.py": "d41b0337c285628d2279da8eedaa9e95bb5b312ea39b84c66d3a1cb8763a5104",
+      "target/algebraic-cache-production/current-deps/libsymbolica_amflow.rlib": "3d3b1f1d8494cfc91be388ad17e418749684f47127eff345298b8fd0afe62690",
+      "target/release/deps/libsymbolica-75e897282e2131a2.rlib": "4b2f81de2fad0adf6bb701f7424c6755050d1a56d844aa9098f7d28bac5cbe4d",
+      "target/release/deps/libserde_json-c589b03db684a851.rlib": "8b1b23218585d888c2399c1b8a01ae1c06a537dadd0fbc915f7f0e34951212aa",
+      "/common/dev/diffexp/Examples/MultiplePolylogarithms.nb": "028003cce75bdfb911d3bbf8cfc313bb6cb5454d8ce44722c4eba8bfcaca24ba"
+    },
+    "precision_note": "Numbers parsed/extracted at recorded precision. Original central coefficient uses Coefficient[result,pm,0]; substitution pm->0 would mix machine uncertainty zero into arbitrary-precision central value, so two failed decoding attempts are preserved but excluded from successful timings."
+  },
+  "preserved_exploratory_failures": [
+    "Two original harness-only central-value decodings introduced a machine zero from pm->0; fixed by extracting Coefficient[...,pm,0] without changing the original solver.",
+    "Frozen ordinary native solver rejected literal exact complex polynomial coefficients; the accepted driver supplies exact i through the supported symbolic parameter map. No production code was changed."
+  ],
+  "validation_script_sha256": "1451da7b57437968194fd3669175d8f42e229f57c8abf18eb5ea0a855a0c79a2",
+  "staged_offline_regression": {
+    "status": "passed",
+    "tests": 3,
+    "seconds": 17.58,
+    "test_threads": 1,
+    "cpu": 28,
+    "library_sha256": "3d3b1f1d8494cfc91be388ad17e418749684f47127eff345298b8fd0afe62690",
+    "command": "rustc --test --edition=2024 -O production/tests/mpl_additional.rs -L dependency=target/banana-production/validated-c74011e/deps -L dependency=target/release/deps --extern symbolica_amflow=target/algebraic-cache-production/current-deps/libsymbolica_amflow.rlib --extern symbolica=target/release/deps/libsymbolica-75e897282e2131a2.rlib --extern serde_json=target/release/deps/libserde_json-c589b03db684a851.rlib; taskset -c28 production-test --test-threads=1",
+    "note": "This frozen-library gate uses the supported exact symbolic-i parameter. The integrated production test may separately exercise the later literal-complex fix; original benchmark hashes are unchanged.",
+    "source_sha256": "17180a44cee0d6fb1ccf3be8d2d5977a2f5e6d8984ed3ce1f5c39c263cacd6b8",
+    "log_sha256": "87cde8203beb35fd85cc9e794fe710c84874e1a0c1f238147ba78663ea4340b0",
+    "binary_sha256": "334ba7b5942224eaf16aee4036eeb66b1136568ae6998fa019a1facae9939b7c"
+  },
+  "durable_oracle_syntax": {
+    "status": "passed",
+    "script_sha256": "112f4382d1412d1417ae1138092238c0c319a92a81acca4114c6d0e16445cb6a",
+    "log_sha256": "a5b64ac2f615174ee0e41c528e54371c71158d16053e3a87d964048467a92055",
+    "note": "Configurable durable harness validated by Wolfram SyntaxQ; original numerical measurements use the separately hashed initial absolute-path harness."
+  },
+  "integration_status": "Passed central release tests (295 unit/integration plus one doc), strict all-target Clippy and formatting; dependency snapshot differences recorded in central report",
+  "central_release_report": "reports/validation/2026-10-04-fallback-mpl-release.json",
+  "production_variant": "Exact Complex<Rational> literal in production regression; historical frozen runs used equivalent symbolic imaginary parameter."
+}

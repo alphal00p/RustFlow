@@ -1,0 +1,209 @@
+{
+  "schema_version": 1,
+  "upstream_commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+  "notebook_sha256": "028003cce75bdfb911d3bbf8cfc313bb6cb5454d8ce44722c4eba8bfcaca24ba",
+  "scope": "All five additional profiles from the pinned DiffExp MPL notebook: trailing zero and complex letters at orders50/75, weight20 at order100. Native boundaries use independent exact constants, including generalized Frobenius logarithms for the trailing zero. No original value is used as a native boundary.",
+  "claimed_comparison_digits": 20,
+  "profiles": [
+    {
+      "case": "trailing",
+      "order": 50,
+      "value": {
+        "real": "-0.01915088407202967213656076391302927992",
+        "imaginary": "-0.30663588994834036574634338726466648647"
+      },
+      "component_metadata": {
+        "real": {
+          "value_wolfram": "-0.01915088407202967213656076391302927992`21.425079664316964",
+          "precision_wolfram": "21.425079664316964",
+          "accuracy_wolfram": "23.142890836991867",
+          "exact": false
+        },
+        "imaginary": {
+          "value_wolfram": "-0.30663588994834036574634338726466648647`22.629513822129635",
+          "precision_wolfram": "22.629513822129635",
+          "accuracy_wolfram": "23.142890836991867",
+          "exact": false
+        },
+        "raw_sha256": "b20eecb42cadf08be2e6e77581bbe21e01f10195bf11a569faf74b4b2a610c53",
+        "postprocessor_sha256": "c3aaed76e898871084b7db2be8d3b0ccaac0f369c0d8f26094ae4a341e76b570",
+        "note": "Precision and absolute Accuracy are extracted from the saved original result, including finite-accuracy zeros; no numerical transport is rerun."
+      },
+      "original_wrapper_seconds": 0.768252,
+      "original_settings": {
+        "working_precision": 250,
+        "chop_precision": 225,
+        "expansion_order": 50,
+        "epsilon_order": 0,
+        "division_order": 3,
+        "mobius": true,
+        "pade": false,
+        "parallel": false,
+        "verbosity": 1
+      },
+      "original_result_sha256": "96aa564a3297b7aeb470deefd15ea4c2c7c2345ae89873d457c1c54f85e4823d",
+      "real_absolute_uncertainty_estimate": "1E-23",
+      "imaginary_absolute_uncertainty_estimate": "1E-23"
+    },
+    {
+      "case": "trailing",
+      "order": 75,
+      "value": {
+        "real": "-0.0191508840720296721365611597236750923598653238636830373386",
+        "imaginary": "-0.3066358899483403657463434439014286050395759492401609894176"
+      },
+      "component_metadata": {
+        "real": {
+          "value_wolfram": "-0.0191508840720296721365611597236750923598653238636830373386`33.42507966431697",
+          "precision_wolfram": "33.42507966431697",
+          "accuracy_wolfram": "35.14289083699187",
+          "exact": false
+        },
+        "imaginary": {
+          "value_wolfram": "-0.3066358899483403657463434439014286050395759492401609894176`34.62951382212964",
+          "precision_wolfram": "34.62951382212964",
+          "accuracy_wolfram": "35.142890836991874",
+          "exact": false
+        },
+        "raw_sha256": "8c3ba535e835737cdf84ca47450f6a6707a0432e14f4740b54692dce2daca075",
+        "postprocessor_sha256": "c3aaed76e898871084b7db2be8d3b0ccaac0f369c0d8f26094ae4a341e76b570",
+        "note": "Precision and absolute Accuracy are extracted from the saved original result, including finite-accuracy zeros; no numerical transport is rerun."
+      },
+      "original_wrapper_seconds": 0.926068,
+      "original_settings": {
+        "working_precision": 250,
+        "chop_precision": 225,
+        "expansion_order": 75,
+        "epsilon_order": 0,
+        "division_order": 3,
+        "mobius": true,
+        "pade": false,
+        "parallel": false,
+        "verbosity": 1
+      },
+      "original_result_sha256": "2e5642e24b9208bc7b891e7c7a53c4f52ad1f16e3f55006705eb23506ff33af9",
+      "real_absolute_uncertainty_estimate": "1E-35",
+      "imaginary_absolute_uncertainty_estimate": "1E-35"
+    },
+    {
+      "case": "complex",
+      "order": 50,
+      "value": {
+        "real": "-9.88024427815072815488865972208034e-6",
+        "imaginary": "-9.3523146288726201988520314133492e-7"
+      },
+      "component_metadata": {
+        "real": {
+          "value_wolfram": "-9.88024427815072815488865972208034`21.148578046193016*^-6",
+          "precision_wolfram": "21.148578046193016",
+          "accuracy_wolfram": "26.153810364020224",
+          "exact": false
+        },
+        "imaginary": {
+          "value_wolfram": "-9.3523146288726201988520314133492`20.12472947287597*^-7",
+          "precision_wolfram": "20.12472947287597",
+          "accuracy_wolfram": "26.153810364020224",
+          "exact": false
+        },
+        "raw_sha256": "c65031ed3e8292bfec4a1a68653af749530b68d65c288502aca76cf2c884569e",
+        "postprocessor_sha256": "c3aaed76e898871084b7db2be8d3b0ccaac0f369c0d8f26094ae4a341e76b570",
+        "note": "Precision and absolute Accuracy are extracted from the saved original result, including finite-accuracy zeros; no numerical transport is rerun."
+      },
+      "original_wrapper_seconds": 0.443258,
+      "original_settings": {
+        "working_precision": 250,
+        "chop_precision": 225,
+        "expansion_order": 50,
+        "epsilon_order": 0,
+        "division_order": 3,
+        "mobius": true,
+        "pade": false,
+        "parallel": false,
+        "verbosity": 1
+      },
+      "original_result_sha256": "6604c86d51e3ac1ffcaf2c16cbe1b7abb9b5787b47b72d7b30d951ba10632f9b",
+      "real_absolute_uncertainty_estimate": "1E-26",
+      "imaginary_absolute_uncertainty_estimate": "1E-26"
+    },
+    {
+      "case": "complex",
+      "order": 75,
+      "value": {
+        "real": "-9.880244278150728154889536076486342207728101281960371e-6",
+        "imaginary": "-9.352314628872620198852585457725779553346043636884193e-7"
+      },
+      "component_metadata": {
+        "real": {
+          "value_wolfram": "-9.880244278150728154889536076486342207728101281960371`33.14857804619302*^-6",
+          "precision_wolfram": "33.14857804619302",
+          "accuracy_wolfram": "38.15381036402023",
+          "exact": false
+        },
+        "imaginary": {
+          "value_wolfram": "-9.352314628872620198852585457725779553346043636884193`32.12472947287597*^-7",
+          "precision_wolfram": "32.12472947287597",
+          "accuracy_wolfram": "38.153810364020224",
+          "exact": false
+        },
+        "raw_sha256": "c87a926042f1f15690c54f3f192866dec9709b5379805106c317e0cf1f942a51",
+        "postprocessor_sha256": "c3aaed76e898871084b7db2be8d3b0ccaac0f369c0d8f26094ae4a341e76b570",
+        "note": "Precision and absolute Accuracy are extracted from the saved original result, including finite-accuracy zeros; no numerical transport is rerun."
+      },
+      "original_wrapper_seconds": 0.510206,
+      "original_settings": {
+        "working_precision": 250,
+        "chop_precision": 225,
+        "expansion_order": 75,
+        "epsilon_order": 0,
+        "division_order": 3,
+        "mobius": true,
+        "pade": false,
+        "parallel": false,
+        "verbosity": 1
+      },
+      "original_result_sha256": "0ab6fd351ec24198b2a912a020a42dcf246fa609f48666d58024fc4470566b48",
+      "real_absolute_uncertainty_estimate": "1E-38",
+      "imaginary_absolute_uncertainty_estimate": "1E-38"
+    },
+    {
+      "case": "weight20",
+      "order": 100,
+      "value": {
+        "real": "5.13066731719907533179589918813462949766948547007605654980358441382e-12",
+        "imaginary": "0"
+      },
+      "component_metadata": {
+        "real": {
+          "value_wolfram": "5.13066731719907533179589918813462949766948547007605654980358441382`44.15051499783199*^-12",
+          "precision_wolfram": "44.15051499783199",
+          "accuracy_wolfram": "55.44034114279244",
+          "exact": false
+        },
+        "imaginary": {
+          "value_wolfram": "0``56.50378064103924",
+          "precision_wolfram": "0.",
+          "accuracy_wolfram": "56.50378064103924",
+          "exact": false
+        },
+        "raw_sha256": "fd3515f9b2eac3109d277850b085d2f70b0b864adb846291cf8880b78094aedc",
+        "postprocessor_sha256": "c3aaed76e898871084b7db2be8d3b0ccaac0f369c0d8f26094ae4a341e76b570",
+        "note": "Precision and absolute Accuracy are extracted from the saved original result, including finite-accuracy zeros; no numerical transport is rerun."
+      },
+      "original_wrapper_seconds": 33.669108,
+      "original_settings": {
+        "working_precision": 250,
+        "chop_precision": 225,
+        "expansion_order": 100,
+        "epsilon_order": 0,
+        "division_order": 3,
+        "mobius": true,
+        "pade": false,
+        "parallel": false,
+        "verbosity": 1
+      },
+      "original_result_sha256": "230acb5d939c0c301c4aeee9b81266bb0ce8a433beee2954c1a263d76b3f4bd8",
+      "real_absolute_uncertainty_estimate": "1E-55",
+      "imaginary_absolute_uncertainty_estimate": "1E-56"
+    }
+  ]
+}

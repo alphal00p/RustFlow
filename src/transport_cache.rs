@@ -1373,6 +1373,20 @@ impl RustFlowCache {
         policy: &dyn TransportCost,
         p: Precision,
     ) -> Result<Option<BoundaryMatch<'a>>> {
+        Ok(self
+            .best_excluding(query, policy, p, &Default::default())?
+            .map(|(_, matched)| matched))
+    }
+
+    // Failed physical transports are transactional, so indices remain stable
+    // until a successful attempt inserts its validated result batch.
+    pub(crate) fn best_excluding<'a>(
+        &'a self,
+        query: &BoundaryQuery<'_>,
+        policy: &dyn TransportCost,
+        p: Precision,
+        excluded: &std::collections::BTreeSet<usize>,
+    ) -> Result<Option<(usize, BoundaryMatch<'a>)>> {
         query.range.count()?;
         query.identity.validate_point(query.target)?;
         if query.verified_digits == 0
@@ -1397,6 +1411,9 @@ impl RustFlowCache {
         };
         let mut candidates = Vec::new();
         for (index, boundary) in self.entries.iter().enumerate() {
+            if excluded.contains(&index) {
+                continue;
+            }
             if boundary.identity.key() != query.identity.key()
                 || boundary.point.root_germ() != query.target.root_germ()
                 || !boundary.range.covers(query.range)
@@ -1459,7 +1476,7 @@ impl RustFlowCache {
                 }
             }
         }
-        Ok(best.map(|(_, selected)| selected))
+        Ok(best)
     }
 
     /// Retain accepted Taylor endpoints in physical coordinates. The callback

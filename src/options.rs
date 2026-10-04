@@ -39,6 +39,8 @@ pub struct FlowOptions {
     pub series_order: usize,
     pub max_steps: usize,
     pub max_precision_attempts: usize,
+    /// Maximum compatible source boundaries tried after physical transport accuracy failures.
+    pub max_boundary_attempts: usize,
     pub workers: usize,
     pub dimension: i64,
     pub recursion: RecursionMode,
@@ -59,6 +61,7 @@ impl Default for FlowOptions {
             series_order: 80,
             max_steps: 1000,
             max_precision_attempts: 3,
+            max_boundary_attempts: 8,
             workers: 1,
             dimension: 4,
             recursion: RecursionMode::Amf,
@@ -78,6 +81,7 @@ impl FlowOptions {
             || self.series_order < 8
             || self.max_steps == 0
             || self.max_precision_attempts == 0
+            || self.max_boundary_attempts == 0
         {
             return Err(Error::InvalidInput(
                 "positive digits, workers, limits and series_order >= 8 required".into(),

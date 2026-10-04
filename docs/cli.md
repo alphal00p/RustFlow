@@ -137,3 +137,53 @@ Threshold-crossing contours and complex physical paths require the explicit
 native transport API. See [the algebraic cache documentation](algebraic-cache.md)
 for uncertainty estimates, synchronous native-call limits and schema-4 binary
 compatibility. The steering JSON schema remains version 1.
+
+## Canonical logarithmic input
+
+`canonical` is an alternative to `derivatives`. Exactly one must be present:
+
+```json
+"canonical": {
+  "variables": ["s"],
+  "letters": ["s+r+1"],
+  "matrices": [[["1"]]]
+},
+"roots": {"r": "s"}
+```
+
+This represents `dY = epsilon sum_a M_a dlog(L_a) Y`. Variables and letters
+are ordered; each exact constant matrix has the same square size as the basis.
+The CLI constructs `CanonicalAlgebraicSystem` and passes it to the existing
+native `RustFlow` cache orchestrator. Letters remain separate until the selected
+physical path is substituted. Original letter/radicand holes and additional
+`nonzero_conditions` still constrain the admissible source and path.
+
+Run `rustflow transport examples/cli/canonical-transport.json` for progressive
+transport of `((s+sqrt(s)+1)/3)^epsilon` from `s=1` through `4` and `9`, followed
+by an exact repeat. Omitting `seeds` restarts its binary bank. Root registries
+and germs follow the same rules as dense algebraic input. A canonical system
+without roots uses plain coordinate-map destinations and supplies no germ.
+
+Canonical output adds `representation: "canonical"` and `identity`, the native
+content key of that exact canonical connection and its basis/domain metadata.
+Canonical and dense identities remain distinct even for equivalent equations;
+entries are never silently transferred between them. Existing dense rational
+and algebraic input/output is unchanged. The steering schema remains 1 and the
+same schema-4 binary bank can retain both representations.
+
+## Accuracy-aware source retry
+
+`options.max_boundary_attempts` controls how many compatible cached sources may
+be tried when propagated uncertainty or numerical refinement fails the requested
+accuracy. Its default is 8 and it must be positive. Sources retain the existing
+cost-policy order. Only accuracy failures trigger another source; cancellation,
+invalid inputs, unsupported domains and other numerical errors propagate.
+
+A successful result that needed more than one source includes `boundary_attempts`.
+Each entry records the exact restart coordinates, decimal-string MPFR cost,
+source verified digits and `accepted` or `accuracy_rejected` outcome. Rejected
+outcomes include their accuracy reason, and registered roots include their germ.
+Ordinary single-source results, including exact hits, keep their existing JSON
+fields. Failed attempts do not alter the bank; completed earlier destinations
+remain saved. See [Accuracy-aware cached boundary selection](accuracy-fallback.md)
+for the native diagnostics and failure semantics.
