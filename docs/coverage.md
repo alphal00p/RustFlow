@@ -4,14 +4,19 @@ This is an implementation status document, not a claim that the requested port
 is complete. The original paper's four two-loop targets at s=30, t=-10/3, m²=1
 remain the mandatory completion gate.
 
-The first of those targets, `[1,1,1,1,1,1,1,-3,0]`, now completes automatic
-evaluation at the exact sample ε = 1/2700. Its 38-integral differential system
-closes, nine leading boundary coefficients are generated recursively, and the
-value passes the complex-norm 20-digit stability check when working precision
-increases from 60 to 80 digits and outer series order from 80 to 112. This is a
-single-sample milestone: the four-target Laurent reconstruction and reference
-comparison remain outstanding. The recorded run resumed prior exact reduction
-work and is not a cold performance measurement.
+All four targets now complete automatic evaluation at the exact sample
+ε = 1/2700 with the physical +i0 prescription. Their 27-integral differential
+system closes and seven leading boundary coefficients are generated recursively.
+Each target passes the complex-norm 20-digit stability check when working
+precision increases from 60 to 80 digits and outer series order from 80 to 112.
+The first value also agrees with the earlier 38-integral-basis calculation to
+better than 70 relative digits in the printed values; this comparison does not
+certify extra accuracy or basis independence. The fresh run, with no preloaded
+reduction caches, completed in 368.906 seconds. Full values, observed precision
+changes, timing, and provenance are recorded in the
+[four-target sample report](../reports/validation/2026-10-04-paper-four-samples.json).
+The four-target Laurent reconstruction and upstream coefficient comparison
+remain pending; a single epsilon sample does not satisfy that completion gate.
 
 | Upstream operation | Rust implementation | Present limitation |
 |---|---|---|

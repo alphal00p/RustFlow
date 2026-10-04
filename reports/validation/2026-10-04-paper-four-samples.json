@@ -1,0 +1,251 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-04",
+  "milestone": "All four required paper targets evaluated at one exact epsilon sample with automatic recursive boundaries and independent precision/order stability",
+  "scope": "All four targets at epsilon=1/2700. Laurent reconstruction and upstream coefficient comparison remain pending; this report does not claim completion of the required acceptance.",
+  "source": {
+    "commit": "15471e4bbbc7736f1cce62bfb8ff1bad50821dd1",
+    "executable": "/common/dev/amflow/target/validated-family-bank/two_loop_acceptance",
+    "executable_sha256": "a279c171a4627793edc6a51c21d49b85da0178c246c89d18f8085ff1ae3902d0",
+    "example": "examples/two_loop_acceptance.rs",
+    "validation": "120 release tests including one doc test; cargo fmt check; strict all-target Clippy; release examples build",
+    "dependency_provenance": "Cargo.lock and repository dependency metadata at the recorded source commit; sibling RustRed was not modified."
+  },
+  "input": {
+    "family": "Original AMFlow paper two-loop family",
+    "kinematics": {
+      "s": "30",
+      "t": "-10/3",
+      "m_squared": "1"
+    },
+    "epsilon": "1/2700",
+    "dimension": "4-2*epsilon",
+    "prescription": "+i0",
+    "mass_mode": "Auto, choosing physical propagator 5",
+    "initial_checkpoints": [],
+    "fresh_run_note": "New isolated working directory without preloaded reduction, system, or family-bank caches. Exact identities and prepared subflows generated within the run are reused during derivative closure and numerical refinement."
+  },
+  "configuration": {
+    "cpu": 25,
+    "solver_threads": 1,
+    "workers": 1,
+    "native_workers": 1,
+    "max_depth": 3,
+    "max_targets": 262144,
+    "max_sector_batch": 32,
+    "max_exact_frontier": 512,
+    "max_backward_frontier": 4096,
+    "parametric_rules": true,
+    "symmetry_rules": true,
+    "bubble_subloops": true,
+    "sampled_reduction": true,
+    "basis_refinement": false,
+    "skip_initial_reduction": false,
+    "timeout_seconds": 2700,
+    "requested_stability_digits": 20,
+    "working_decimal_digits": [
+      60,
+      80
+    ],
+    "precision_bits_including_internal_guard": [
+      216,
+      282
+    ],
+    "outer_series_orders": [
+      80,
+      112
+    ],
+    "boundary_precision_policy": "RecursiveBoundary derives working precision and increased series order from the requested Precision; exact prepared subflows are memoized while numerical values are separated by precision.",
+    "command": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "2700s",
+      "taskset",
+      "-c",
+      "25",
+      "/common/dev/amflow/target/validated-family-bank/two_loop_acceptance",
+      "--sample",
+      "1/2700",
+      "--symmetry-rules",
+      "--parametric-rules",
+      "--depth",
+      "3",
+      "--case-batch",
+      "32",
+      "--max-targets",
+      "262144",
+      "--max-exact-frontier",
+      "512",
+      "--max-backward-frontier",
+      "4096",
+      "--workers",
+      "1"
+    ]
+  },
+  "result": {
+    "exit_code": 0,
+    "precision_order_stability_passed": true,
+    "criterion": "Precision::close: norm(first-second) <= 10^-20 * max(1,norm(first)), evaluated at refined precision. This is a complex norm-based check, not separate 20-digit certification of each component.",
+    "values": [
+      {
+        "target": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -3,
+          0
+        ],
+        "re": "292573076428.537034245094700665029177388773721132064496950459330731420424671544105932",
+        "im": "292879261.323751323201373674893948672659100894795149707838453345341528825723424888912",
+        "printed_value": "(292573076428.537034245094700665029177388773721132064496950459330731420424671544105932+292879261.323751323201373674893948672659100894795149707838453345341528825723424888912i)",
+        "absolute_complex_norm_change": "5.767194920440223949701044706186776688689290184165727110219849232012886381975311214428e-43"
+      },
+      {
+        "target": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -2,
+          -1
+        ],
+        "re": "-1545066346458.92336362950377968222050506699896882995306723725346676755105720195171388",
+        "im": "997365.570031154031235096057392914845670014748288692107421120507994139236591781788790",
+        "printed_value": "(-1545066346458.92336362950377968222050506699896882995306723725346676755105720195171388+997365.570031154031235096057392914845670014748288692107421120507994139236591781788790i)",
+        "absolute_complex_norm_change": "2.088829680417113768294713140619914296399888205762745616566148253290248214431467853279e-42"
+      },
+      {
+        "target": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          -2
+        ],
+        "re": "25171956415882.6164652639193621436248657704956321475922975171618796423880061285992937",
+        "im": "-5412842.76041785197332100861730326392249166333652481813358513522172234553348187709011",
+        "printed_value": "(25171956415882.6164652639193621436248657704956321475922975171618796423880061285992937+-5412842.76041785197332100861730326392249166333652481813358513522172234553348187709011i)",
+        "absolute_complex_norm_change": "3.226092487523591090410809056771526468090395486943241071823309676886517285000226031084e-41"
+      },
+      {
+        "target": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -3
+        ],
+        "re": "-612369506162450.263442318594601466178302036946706223492642109500016529985641867443612",
+        "im": "78244219.5225909647278218221653115432326971073645115733249331331545940719037037990914",
+        "printed_value": "(-612369506162450.263442318594601466178302036946706223492642109500016529985641867443612+78244219.5225909647278218221653115432326971073645115733249331331545940719037037990914i)",
+        "absolute_complex_norm_change": "5.748001842196136636080606691571621840990188771890701474521060359637184719918550285154e-40"
+      }
+    ],
+    "precision_change_note": "Recorded changes are differences between two numerical evaluations, not rigorous absolute error bounds. The full printed values are retained without claiming all printed digits are established.",
+    "upstream_reference_comparison_performed": false,
+    "laurent_coefficients_reconstructed": false
+  },
+  "cross_basis_comparison": {
+    "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -3,
+      0
+    ],
+    "earlier_basis_integrals": 38,
+    "all_four_basis_integrals": 27,
+    "independence_note": "Closed systems establish spanning bases; these counts are not certified numbers of independent master integrals.",
+    "earlier_report": "reports/validation/2026-10-04-paper-first-sample.json",
+    "earlier_report_sha256": "6e911521846627c51721e638d0f001566ff9795fda76810fbad51648c2346067",
+    "earlier_log": "target/backward-paper-pilot/first-target.log",
+    "earlier_log_sha256": "61569b44ace8c996ab5432c8a8cfe26a6643528f483218fa35d8fa595ffe5f7f",
+    "earlier_value": "[1, 1, 1, 1, 1, 1, 1, -3, 0] at epsilon=1/2700: (292573076428.537034245094700665029177388773721132064496950459330731420424671508800085+292879261.323751323201373674893948672659100894795149707838453345341528825708929551704i)",
+    "method": "120-digit Python Decimal subtraction/norm directly from the printed arbitrary-precision decimal values; no floating-point conversion. Comparison of printed values only.",
+    "real_difference": "3.5305847E-65",
+    "imaginary_difference": "1.4495337208E-65",
+    "absolute_difference_norm": "3.81656603920466471896912882853555249568485075867623881248514636778020191422960103228909102638492506720079957157602427823E-65",
+    "relative_difference_norm": "1.30448234455335613256683412507779649738524996985009241010200030089774910957770186751217509379175494684182021735429203259E-76",
+    "agrees_to_70_relative_digits_in_printed_values": true,
+    "interpretation": "Agreement is a useful independent reduction/basis cross-check; it does not extend the reported 20-digit accuracy or replace Laurent/reference validation."
+  },
+  "observed_workflow": {
+    "closed_basis_integrals": 27,
+    "basis_independence_certified": false,
+    "top_new_derivatives_after_initial_reduction": 24,
+    "top_block_sizes": [
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      2,
+      2,
+      1,
+      3,
+      1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      3
+    ],
+    "top_selected_boundary_coefficients": 7,
+    "top_max_half_order": 0,
+    "prepared_system_events": 13,
+    "boundary_plan_events": 26,
+    "all_recorded_boundary_plans_max_half_order": 0,
+    "exact_substitution_plans": 144,
+    "forward_substitution_plans": 0,
+    "observed_peak_rss_kib": 1462840,
+    "automatic_path": "Exact target reduction and derivative closure, infinity Frobenius and dimensional sectors, selected region coefficients with recursive boundary-family evaluation, continuation, endpoint Frobenius and target projection; then independent increased precision/order evaluation."
+  },
+  "timing": {
+    "started_utc": "2026-10-04T12:13:05.802740+00:00",
+    "finished_utc": "2026-10-04T12:19:16.051542+00:00",
+    "total_wall_seconds": 368.9055429031141,
+    "initial_reduction_milestone_seconds": 283.7469842811115,
+    "derivative_closure_event_seconds": 312.32443985017017,
+    "prepared_event_seconds": 312.54783379798755,
+    "first_top_boundary_plan_event_seconds": 316.484834541101,
+    "refined_top_boundary_plan_event_seconds": 350.6058793119155,
+    "success_event_seconds": 368.78694122610614,
+    "methodology": "Fresh isolated reduction/cache run; progress-event receipt times and enclosing subprocess wall clock. Other host work was active. No end-to-end speedup comparison is inferred."
+  },
+  "raw_artifacts": {
+    "directory": "/common/dev/amflow/target/all-target-sample-pilot",
+    "provenance": "target/all-target-sample-pilot/provenance.json",
+    "provenance_sha256": "1341d71e376bdd8f4b377c0ba14b368edf436b63a2c80841bc9dbd397bb52ea1",
+    "result": "target/all-target-sample-pilot/result.json",
+    "result_sha256": "cebf3b08ecf2edfce499af26657c4fbd0757ddc4d49c58500bc74e237ebe8f66",
+    "event_log": "target/all-target-sample-pilot/events.jsonl",
+    "event_log_sha256": "c22eda0ac7408d442475faa78e8812ab6c0109051197bb87796547d8f0fe5367",
+    "text_log": "target/all-target-sample-pilot/all-targets.log",
+    "text_log_sha256": "0e597dabfdfd22fc6e3c9c59adf0266db2ffa07d1214cca2df2f3ed5a96dfc70",
+    "cross_basis_comparison": "target/all-target-sample-pilot/first-target-cross-basis-comparison.json",
+    "cross_basis_comparison_sha256": "eef8c77c1c3b26c58d6079aa7f33bc6a1de73f44bb30363a771272ce5de02962"
+  },
+  "acceptance_remaining": "Evaluate the required epsilon grids, reconstruct all four Laurent expansions through epsilon^0, compare every coefficient against upstream data respecting its recorded precision, and pass independent sample/precision/order refinement."
+}
