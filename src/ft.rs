@@ -207,7 +207,12 @@ impl<'a> FtEvaluator<'a> {
             options.refine_basis
         );
         let problem = family.integral_key(integral)?;
-        let value_key = format!("{problem}:{epsilon}:{}:{}", p.bits, options.series_order);
+        // Equal working precision and series order can still request different
+        // Taylor tolerances: digits contributes independently of guard_digits.
+        let value_key = format!(
+            "{problem}:{epsilon}:{}:{}:{}",
+            p.bits, options.series_order, options.digits
+        );
         if let Some(value) = self
             .memo
             .lock()
