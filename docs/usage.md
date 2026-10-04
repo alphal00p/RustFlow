@@ -96,6 +96,22 @@ the complete Laurent reconstruction, additional sample grid, and upstream
 reference comparison; a successful individual sample does not satisfy that
 acceptance test.
 
+The recorded four-target sample used the following settings (about six minutes
+from an empty cache on the recorded host):
+
+```sh
+cargo run --release --example two_loop_acceptance -- \
+  --sample 1/2700 --symmetry-rules --parametric-rules \
+  --depth 3 --case-batch 32 --max-targets 262144 \
+  --max-exact-frontier 512 --max-backward-frontier 4096
+```
+
+The default reduction budget is intended for smaller families. The
+[sample report](../reports/validation/2026-10-04-paper-four-samples.json)
+records the exact executable, input, precision changes, and timings. Keep the
+same reduction settings and omit `--sample 1/2700` to run the complete Laurent
+acceptance calculation. `--workers N` bounds simultaneous epsilon evaluations.
+
 The `two_loop_acceptance` example accepts `--cancel-file PATH`. Creating that
 file requests cooperative cancellation and saves completed native search work.
 Remove the file before resuming the same command. `--native-workers N` controls
