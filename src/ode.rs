@@ -791,11 +791,17 @@ pub(crate) fn transport_series_with_state<S: SeriesSystem>(
                 step = p.scale(&step, 1, 2);
                 diagnostics.rejected_steps += 1;
                 if diagnostics.steps + diagnostics.rejected_steps >= options.max_steps {
-                    break;
+                    return Err(Error::Limit(format!(
+                        "Taylor continuation step budget exhausted ({} accepted, {} rejected) at {center} toward {target}",
+                        diagnostics.steps, diagnostics.rejected_steps,
+                    )));
                 }
             }
             let (next_values, next_state) = accepted.ok_or_else(|| {
-                Error::Accuracy("Taylor tail or local chart did not meet tolerance".into())
+                Error::Accuracy(format!(
+                    "Taylor tail or local chart did not meet tolerance after 32 local rejections ({} accepted, {} rejected overall) at {center} toward {target}",
+                    diagnostics.steps, diagnostics.rejected_steps,
+                ))
             })?;
             values = next_values;
             state = next_state;

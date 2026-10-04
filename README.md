@@ -141,10 +141,12 @@ cancellation, and progress callbacks are available. FT evaluation is restricted 
 
 Arbitrary-precision values remain Symbolica `Complex<Float>` values. MPFR
 operations round at an explicit working precision; working precision is not an
-accuracy guarantee. Verified coefficient accuracy uses
-`|new-old| <= 10^-digits max(|new|, |old|)` for resolved nonzero coefficients.
+accuracy guarantee. Automatic Laurent reconstruction checks coefficient accuracy
+using `|new-old| <= 10^-digits max(|new|, |old|)` for resolved nonzero coefficients.
 Coefficients smaller than `10^-digits` use an absolute tolerance of
-`10^-digits`; relative accuracy is not claimed for numerical zeros.
+`10^-digits`; relative accuracy is not claimed for numerical zeros. The physical
+transport cache uses `error <= 10^-digits max(1, |coefficient|)` and returns component error
+estimates; its reported digits use an absolute criterion below unit magnitude.
 
 ## References
 

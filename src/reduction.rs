@@ -227,9 +227,6 @@ impl RustRedBackend {
     ) -> Result<Reduction> {
         if let Some(cuts) = cuts {
             cuts.validate()?;
-            if !self.factorized {
-                return Err(Error::Unsupported("cut reduction requires the native factorized backend; the ordinary runtime bridge has no cut context".into()));
-            }
         }
         if self.max_sector_batch == 0 {
             return Err(Error::InvalidInput(
@@ -267,13 +264,24 @@ impl RustRedBackend {
                 &converted, original, &dimension, &targets, self, context, cuts,
             );
         }
+        let cut_constraint = if let Some(cuts) = cuts {
+            cuts.native_restrictions()?.cuts().clone()
+        } else {
+            rustred::sector::CutConstraint::none(family.propagators.len())
+                .map_err(|error| Error::InvalidInput(error.to_string()))?
+        };
         let result = rustred::solver::bridge::solve_laporta(
             &converted.family,
+            &cut_constraint,
             &targets,
+            &[],
             rustred::solver::bridge::DynamicSolveOptions {
                 max_depth: self.max_depth,
                 max_targets: self.max_targets,
                 include_lorentz: self.include_lorentz,
+                // Keep the bounded search contract. Stable residual sets are
+                // not a certificate of independent master integrals.
+                until_stable: false,
             },
         )
         .map_err(|e| match e {

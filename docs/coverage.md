@@ -95,7 +95,17 @@ All [MPL notebook profiles](diffexp-mpl.md) now pass against original DiffExp an
 independent precision/order refinement, including the weight-20 example.
 The [full Higgs+jet supplied systems](gg-hg-coverage-inventory.md) pass a nearby
 physical-point check of all 545 coefficients across 48 planar and 61 nonplanar
-masters; permutations and full form-factor assembly remain in progress.
+masters. The [crossed supplied-system check](../reports/validation/2026-10-04-gg-hg-crossed-form-factors.json)
+now covers all 4,360 W/Z coefficients and eight form factors. Propagated
+form-factor bounds support 19–20 relative digits; coherent W/Z matrix-element
+validation and uniform 20-digit form-factor accuracy remain incomplete.
+
+The [updated RustRed bridge gate](../reports/validation/2026-10-04-rustred-bridge-release.json)
+passes 297 unit/integration tests plus one documentation test, strict Clippy and
+formatting. Both reduction backends now receive explicit cut semantics.
+Continuation budget exhaustion reports a typed limit error with rejection
+counters. The report distinguishes the concurrent dependency revisions checked
+by release tests and Clippy.
 
 The current [prescribed-contour interface](prescribed-contours.md) accepts
 explicit polynomial prescriptions. It does not infer them from a process.

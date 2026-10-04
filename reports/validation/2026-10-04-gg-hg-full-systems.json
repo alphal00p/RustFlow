@@ -28,7 +28,8 @@
     ],
     "comparison_threshold": "1e-24 absolute per coefficient",
     "binary_restart_exact_hit": true,
-    "observed_smaller_differences_do_not_raise_reported_accuracy": true
+    "observed_smaller_differences_do_not_raise_reported_accuracy": true,
+    "coefficient_accuracy_metric": "For every coefficient, the estimated absolute complex error is <=10^(-verified_digits)*max(1,abs(coefficient));21 is a scaled absolute/relative metric, not21 significant digits for small nonzero coefficients."
   },
   "exact_start": [
     "5180073684/30560539",

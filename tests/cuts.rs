@@ -85,29 +85,24 @@ fn assert_reduction(reduction: &Reduction, dimension_minus_three: Atom) {
 #[test]
 fn cut_backend_reduces_raised_and_pinched_two_body_integrals_exactly() {
     let family = family(false);
-    let backend = RustRedBackend {
-        max_depth: 3,
-        max_targets: 256,
-        ..Default::default()
-    };
     let context = RunContext::default();
-    let symbolic = backend.reduce_cut(&family, &targets(), &context).unwrap();
-    assert_reduction(
-        &symbolic,
-        Atom::num(1) - Atom::num(2) * Atom::var(family.family().epsilon),
-    );
-    let sampled = backend
-        .reduce_cut_at_epsilon(&family, &targets(), &Rational::from((1, 13)), &context)
-        .unwrap();
-    assert_reduction(&sampled, Atom::num((11, 13)));
-    let unsupported = RustRedBackend {
-        factorized: false,
-        ..backend
-    };
-    assert!(matches!(
-        unsupported.reduce_cut(&family, &targets(), &context),
-        Err(Error::Unsupported(_))
-    ));
+    for factorized in [true, false] {
+        let backend = RustRedBackend {
+            max_depth: 3,
+            max_targets: 256,
+            factorized,
+            ..Default::default()
+        };
+        let symbolic = backend.reduce_cut(&family, &targets(), &context).unwrap();
+        assert_reduction(
+            &symbolic,
+            Atom::num(1) - Atom::num(2) * Atom::var(family.family().epsilon),
+        );
+        let sampled = backend
+            .reduce_cut_at_epsilon(&family, &targets(), &Rational::from((1, 13)), &context)
+            .unwrap();
+        assert_reduction(&sampled, Atom::num((11, 13)));
+    }
 }
 
 #[test]

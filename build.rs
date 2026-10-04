@@ -64,13 +64,20 @@ fn main() {
     hash_tree(Path::new("src"), Path::new(""), &mut own);
     println!("cargo:rustc-env=PORT_SOURCE_DIGEST={}", own.finalize());
     let mut hasher = blake3::Hasher::new();
-    hash_tree(
-        Path::new("../rustred/crates/rustred-core/src"),
-        Path::new("../rustred/crates/rustred-core"),
-        &mut hasher,
-    );
-    println!("cargo:rerun-if-changed=../rustred/crates/rustred-core/Cargo.toml");
-    hasher.update(&fs::read("../rustred/crates/rustred-core/Cargo.toml").unwrap());
+    // The core delegates integral ordering to a sibling crate. Both affect
+    // reduction replay, and workspace settings supply inherited package data.
+    let rustred = Path::new("../rustred");
+    let manifest = rustred.join("Cargo.toml");
+    println!("cargo:rerun-if-changed={}", manifest.display());
+    hasher.update(&fs::read(&manifest).expect("read RustRed workspace manifest"));
+    for name in ["rustred-core", "rustred-order"] {
+        hasher.update(name.as_bytes());
+        let package = rustred.join("crates").join(name);
+        let manifest = package.join("Cargo.toml");
+        println!("cargo:rerun-if-changed={}", manifest.display());
+        hasher.update(&fs::read(&manifest).expect("read RustRed package manifest"));
+        hash_tree(&package.join("src"), &package, &mut hasher);
+    }
     println!(
         "cargo:rustc-env=RUSTRED_SOURCE_DIGEST={}",
         hasher.finalize()

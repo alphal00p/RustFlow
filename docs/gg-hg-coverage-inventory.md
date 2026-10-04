@@ -94,8 +94,35 @@ license does not create a pending approval requirement for these scientific data
 The first complete-system milestone now passes: at the recorded non-grid W
 point, all 545 coefficients of the 48/61 systems through epsilon order four
 agree with the unchanged original solver. Native precision/order refinement and
-binary cache restart also pass, with 21 propagated digits for a 20-digit request.
+binary cache restart also pass, with 21 propagated digits for a 20-digit request under the component criterion
+`error <= 10^-digits * max(1, |coefficient|)`. This is an absolute error
+criterion below unit magnitude, not 21 significant digits for every small
+nonzero coefficient.
 The [validation report](../reports/validation/2026-10-04-gg-hg-full-systems.json)
 retains every native output, source accuracy policy, exact coordinates, root
 germs and hashes. Smaller observed comparison residuals do not increase the
 reported accuracy. Full crossed W/Z form factors remain the next stage.
+
+The complete crossed supplied-system comparison also passes: sixteen W/Z and
+permutation cases cover all 4,360 epsilon coefficients at two precision/order
+settings, with exact cache restarts. All eight form factors and all 4,376
+supplied precanonical diagnostic rows agree with the original mathematical
+expressions. Exact reconstruction checks exclude nonlinear or misidentified
+master terms, and the original full form-factor expressions are evaluated
+independently of the serialized aggregation.
+
+The [crossed validation report](../reports/validation/2026-10-04-gg-hg-crossed-form-factors.json)
+records component-wise propagated errors. These support relative form-factor
+digits W `[20, 19, 20, 19]` and Z `[20, 19, 19, 19]`; uniform 20 significant
+form-factor digits have **not** been established. The largest relative error
+estimate is `9.75e-20`, despite much smaller observed solver differences.
+The original stored `delta` is an inherited sum of dropped-tail estimates,
+not independent evidence that permits increasing the declared 24-digit source
+cap. Stronger boundary evidence is required for that remaining precision gap.
+
+Offline mathematical fixtures and tests are staged under
+`target/gg-hg-offline`; their fresh production-library validation remains a
+separate gate. The next physics check maps both masses to one exact
+`MH²=1` phase-space point and contracts the W/Z contributions using native
+HEPKit tensors. The sixteen cases above use separate W and Z contexts and do
+not yet establish coherent interference.

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-04T22:10:48.454772+00:00",
+  "status": "passed_with_recorded_dependency_snapshots",
+  "base_commit": "8055d5dd91789e0c6b59767ebdb53f7847552051",
+  "scope": [
+    "Explicit native cut mask and empty preferred-master list for updated RustRed Laporta API; bounded until_stable=false contract",
+    "Exact raised/pinched cut reductions through native factorized and sparse backends",
+    "Typed rejection-budget exhaustion and diagnostic counters",
+    "Include rustred-order and workspace configuration in dependency source fingerprints",
+    "Accuracy-metric clarification and complete crossed Higgs+jet supplied-system/form-factor report"
+  ],
+  "checks": {
+    "release_tests": {
+      "command": "CARGO_BUILD_JOBS=8 cargo test --release --locked -p symbolica-amflow -- --test-threads=4",
+      "unit_and_integration_passed": 297,
+      "documentation_passed": 1,
+      "failed": 0,
+      "ignored": 3
+    },
+    "focused_tests": {
+      "passed": 22,
+      "failed": 0
+    },
+    "clippy": {
+      "command": "CARGO_BUILD_JOBS=8 cargo clippy --release --locked -p symbolica-amflow --all-targets -- -D warnings",
+      "exit_code": 0,
+      "dependency_warnings": "Eight existing RustRed dead-code warnings"
+    },
+    "format": {
+      "command": "cargo fmt -p symbolica-amflow -- --check",
+      "exit_code": 0
+    }
+  },
+  "dependency_provenance": {
+    "release_test_snapshot": {
+      "path": "target/rustred-bridge-release/dependency-source.json",
+      "sha256": "1e32a18c9438406f0e2e177a2adb0487ac3797ce137226068a71b5dea11a8013",
+      "git_head": "3d0b08fb483fc3b02a094998433862e6a8b2479e",
+      "consumed_source_files": 1439
+    },
+    "post_clippy_snapshot": {
+      "path": "target/rustred-bridge-release/clippy-dependency-source.json",
+      "sha256": "8cecc3a319b636d8a5fab845947a36e656d7a2c442f6dd107819c4d562592022",
+      "git_head": "a5735e0265e891f8439aee033adfd7cd6382ae9c",
+      "consumed_source_files_including_new_build_script": 1441
+    },
+    "note": "Concurrent RustRed development introduced and committed configurable arity dispatch after the test build. Tests and Clippy therefore checked different recorded dependency states. No claim of an immutable shared checkout across this gate. RustFlow did not modify RustRed or its own12-slot dispatcher. The next scientific-fixture gate will rebuild with the latest RustRed sources.",
+    "remote_main_checked": "a5735e0265e891f8439aee033adfd7cd6382ae9c"
+  },
+  "archived_libraries": {
+    "target/rustred-bridge-release/deps/libsymbolica_amflow-6636c90b7720f3f8.rlib": {
+      "sha256": "533850abb4e0f41196643ee74f47efa1c517f237a90ee27c46ec5c33a40c297d",
+      "bytes": 370097888
+    },
+    "target/rustred-bridge-release/deps/librustred-ae696a8b59710d0c.rlib": {
+      "sha256": "0f81c8a54520b5da1f1f6d996e5b9cd0e8355257b06c1e91d5bab0da3d8d0449",
+      "bytes": 375458202
+    },
+    "target/rustred-bridge-release/deps/librustred-ae696a8b59710d0c.rmeta": {
+      "sha256": "388918b183a9afd2991a586cbe365a14eacb33192d63a164692c9ef616839275",
+      "bytes": 36042760
+    }
+  },
+  "logs": {
+    "target/rustflow-rustred-bridge-focused-tests.log": {
+      "sha256": "94243bca68116f2afab2b61d22cc36098ec2cc9dfcb6397b7adf3215848bd349",
+      "bytes": 4996
+    },
+    "target/rustflow-rustred-bridge-release-tests.log": {
+      "sha256": "8f018b5751e490cb20c16592d4da1d3f23d25fb292f3f5de54a2503f898e4df6",
+      "bytes": 37556
+    },
+    "target/rustflow-rustred-bridge-release-clippy.log": {
+      "sha256": "cfe794646bf398a82501fca9dfe36646cf3cd1c3ddb522ea56ceee97c33c4d20",
+      "bytes": 2792
+    },
+    "target/rustflow-rustred-bridge-release-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  },
+  "source_sha256": {
+    "README.md": "094bd7aa841baa6ea15ed8d1e4bd0ed11f589f824df7229f85602cf9ef822c20",
+    "build.rs": "f23a465212004d3c1be5188339b28efa49d9c93b468d97373f08b1c3d0abf0c5",
+    "src/ode.rs": "60a75f1ffcad71f49cd7de4b8f13156e8584ff207e036ab01a4c31d84d302302",
+    "src/reduction.rs": "1ed0c4e1bb3214001415ff905d56ebda2f00a731e23389ec0a873d4fb8b00e66",
+    "tests/cuts.rs": "1295570164cc01f8d7176eb0cb1f854c14dbc9cc2c99a93308a870f079095462",
+    "tests/continuation_budget.rs": "1660ab09cca9639543533194320b69283586e9567c9fcf6d8fa339e5d26fd1e3"
+  },
+  "related_reports": [
+    "reports/validation/2026-10-04-gg-hg-crossed-form-factors.json"
+  ],
+  "limitations": [
+    "Full AMFlow/DiffExp parity and coherent Higgs+jet matrix-element validation remain incomplete",
+    "Crossed supplied-system FF checks achieve19\u201320 significant relative digits; uniform20-digit FF target remains open",
+    "Long scientific tests remain opt-in; the original-paper AMF Laurent gate is prior evidence, not rerun here",
+    "Broad performance parity has not been established"
+  ]
+}

@@ -6,8 +6,8 @@ original AMFlow paper's four-target 20-digit acceptance passed; see
 cut phase-space integrals, all upstream benchmark families, and measured
 performance at matched achieved accuracy. RustRed is checked for upstream updates
 at validation milestones and newer versions are integrated between builds while
-preserving local work. Both existing
-12-slot dispatchers remain the user's responsibility. Broad coverage, including
+preserving local work. Changes to RustFlow's own
+12-slot dispatcher remain the user's responsibility. Broad coverage, including
 the complete Higgs+jet application, takes priority over general performance
 tuning; performance blockers may be addressed to make a coverage test practical.
 
@@ -146,13 +146,14 @@ requested target coefficients.
 
 ## Scope of the 12-slot limit
 
-`src/native.rs` dispatches `solve::<1>` through `solve::<12>`. RustRed's dynamic
-API independently has the same dispatch range in
-`crates/rustred-core/src/solver/bridge.rs`. This port calls RustRed's const-generic
-solver directly, so its own dispatcher is the active limit here. The generic
-solver and generic rule exports have no additional 12-slot ceiling. Slots count
-physical propagators and irreducible numerators. This distinction corrects an
-earlier overly broad description of a RustRed engine limitation.
+`src/native.rs` still dispatches `solve::<1>` through `solve::<12>` for the
+factorized backend; this user-owned limit is unchanged here. RustRed's newer
+`33fd03ec` API exposes a configurable runtime registry, defaulting to 1–16,
+and checked const-generic bridge entrypoints. Its optional sparse backend can
+use those compiled arities. The generic solver and vector-key rule exports have
+no intrinsic 12-slot ceiling. Slots count physical propagators and irreducible
+numerators. See RustRed's `compiled_runtime_arities()` for the current bridge
+build; this is a compile-time capability, not a runtime setting.
 
 Independent bounds remain: compact native powers are -64 through 63, legacy
 packed ordering has a 34-coordinate ceiling, and artifact loading has separate

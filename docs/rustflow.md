@@ -59,6 +59,12 @@ disk and subdivisions when those bounds are inconclusive. A cache record's
 working precision cannot replace its verified accuracy. Stronger cached accuracy
 requires explicitly passing tighter independent comparisons and input-error
 checks, with a conservative arithmetic ceiling and two-digit margin.
+For physical transport and the point cache, `verified_digits = d` uses
+`error <= 10^-d * max(1, |coefficient|)` for each coefficient. This is an absolute
+criterion below unit magnitude and a relative criterion above it; it does not
+claim `d` significant digits for every small nonzero coefficient. Returned
+component error estimates allow applications to impose relative tolerances on
+projected form factors or amplitudes after their exact normalization.
 The weights retain separate physical-component and epsilon-order scales: a large
 higher-order coefficient cannot inject its absolute uncertainty into an uncoupled
 lower-order coefficient.
