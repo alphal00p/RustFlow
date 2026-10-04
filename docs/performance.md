@@ -3,7 +3,7 @@
 A same-host comparison against the original, unmodified C++ differential-equation
 solver is available. It measures preparation and regular continuation with supplied
 boundaries. **There is no measured full automatic-workflow comparison yet.** No
-Wolfram runtime was found in this environment, and the mandatory four-target
+Wolfram runtime is available in this environment, and the mandatory four-target
 two-loop acceptance calculation remains incomplete.
 
 ## Measured baseline
@@ -59,6 +59,45 @@ thread setting, executable hash, and source provenance. The machine had other
 work running; its initial load averages are recorded. Peak RSS is retained only
 as an OS diagnostic, since Python's forked child can inherit a peak-memory floor.
 
+## Polynomial-recurrence result
+
+The optimization in commit `9f23cfaa31cd81c9c2f0e2b31af9b90683a6a126` clears each
+row's denominators exactly before numerical evaluation. Taylor propagation then
+recurs over sparse polynomial coefficients and their finite degrees. It no
+longer expands every rational matrix entry to order 80 or multiplies all zero
+matrix entries. Pole finding, path limits, adaptive tail checks, and endpoint
+and midpoint differential-equation checks are retained.
+
+The repeated comparison uses validated library commit
+`ce21f7693ae7d642006cb0896efda25eb2d80f20`, with the same original executable,
+driver source, harness, inputs, CPU 24, precision, series order, and five-repeat
+procedure. Original AMFlow was rerun alongside the optimized Rust executable.
+Both comparisons and both independent precision/order refinements still pass
+20 digits.
+
+| Workload | Optimized Rust total | Original total | Optimized Rust transport | Original transport | Rust transport improvement over baseline |
+|---|---:|---:|---:|---:|---:|
+| Analytic logarithmic chain | 0.01783 s | 1.71098 s | 0.010742 s | 0.001903 s | 9.77× |
+| Upstream 12-master system | 0.27302 s | 4.69397 s | 0.160158 s | 0.102376 s | 9.91× |
+
+The accepted and rejected step counts are unchanged from the baseline. The
+12-master before/after result changes are at most `4.72e-57` at 201 bits and
+`5.92e-77` at 267 bits under the same scaled-error metric. The analytic outputs
+are identical at the printed precision. The original solver still propagates
+faster: it uses five steps for the 12-master case, compared with seven in Rust,
+and its error-checking policy differs as described above. These improvements
+refer to Rust's measured transport phase, not to full automatic integral
+evaluation or a claimed general speedup over original AMFlow.
+
+Both Rust library builds use the same Cargo release profile. The baseline
+driver was linked separately using `rustc -O`; the optimized driver was built
+with Cargo's release profile. The reported improvement ratios use timers around
+the library transport call, excluding the driver's preparation and output.
+The after-run data and every before/after comparison are preserved in
+[`2026-10-04-polynomial-recurrence.json`](../reports/performance/2026-10-04-polynomial-recurrence.json),
+which also records the baseline report's digest. This is a two-workload result;
+denominator clearing can increase polynomial degrees in other systems.
+
 ## Build and reproduce
 
 The original solver requires GMP, MPFR, MPC, Boost, yaml-cpp, and MPSolve. The
@@ -107,9 +146,10 @@ series order and performs a dense convolution, including zero matrix entries.
 For 12 components and order 80, this is 466560 complex product-adds per step;
 only 61 of the 144 matrix entries are nonzero. In contrast, the original solver
 clears denominators per block and recurs over the finite polynomial degrees
-(`diffeq_solver/src/mpsolver.cpp`, `regular_expansion`). This identifies a concrete
-optimization target. The different step counts and error checks account for
-additional differences; no single cause is inferred from total timings alone.
+(`diffeq_solver/src/mpsolver.cpp`, `regular_expansion`). This profile motivated
+the row-wise denominator clearing measured above. The different step counts and
+error checks account for additional differences; no single cause is inferred
+from total timings alone.
 
 ## Full automatic workflow
 
