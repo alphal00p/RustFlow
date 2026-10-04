@@ -169,6 +169,13 @@ sets, rule replacements, wide frontiers, and cycles. See the
 [controlled replay measurements](performance.md#incremental-frontier-replay)
 for the measured scope of this optimization.
 
+Before coefficient propagation, the native adapter installs zero identities for
+all reachable leaves whose sectors RustRed has already certified as scaleless.
+This includes lower sectors that have not reached the search queue yet. The
+certificate domain conditions are retained, and full dependency-graph validation
+still runs first. The same pruning applies when final substitution resumes from
+a completed checkpoint; uncertified sectors remain subject to ordinary search.
+
 Pole finding normalizes each factor and scales its variable using a power-of-two
 Fujiwara bound before calling Symbolica's root finder. Newton corrections and
 polynomial reconstruction check the returned root set. Regressions include a

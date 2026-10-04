@@ -600,10 +600,21 @@ fn solve<const N: usize>(
             // Back-substitute into the requested targets before searching the
             // next frontier. Exact cancellations can remove intermediate RHS
             // integrals; searching those cancelled terms is unnecessary.
+            // Validate the full original graph before any zero pruning, so a
+            // cancelled or scaleless branch cannot conceal a cycle.
+            let mut structural = structural_frontier(&result, targets, context)?;
+            prune_zero_leaves(
+                &mut result,
+                &mut frontier_cache,
+                &mut structural,
+                &zero,
+                &mut visited,
+                &mut pending,
+                context,
+            )?;
             context.emit(Progress::Substitution {
                 rules: result.rules.len(),
             })?;
-            let structural = structural_frontier(&result, targets, context)?;
             let unsearched = |i: &Integral| {
                 <[i16; N]>::try_from(i.0.as_slice()).is_ok_and(|v| !visited.contains(&v))
             };
@@ -716,6 +727,18 @@ fn solve<const N: usize>(
     let expansions = if let Some(completed) = completed_expansions {
         completed
     } else {
+        // A completed checkpoint can skip the search loop entirely. Apply the
+        // same certificate-based pruning before its final fresh expansion.
+        let mut structural = structural_frontier(&result, targets, context)?;
+        prune_zero_leaves(
+            &mut result,
+            &mut frontier_cache,
+            &mut structural,
+            &zero,
+            &mut visited,
+            &mut pending,
+            context,
+        )?;
         Expander::new(&result, context)?.expand_many(&roots, 0)?
     };
     for (integral, terms) in expansions {
@@ -793,6 +816,39 @@ fn structural_frontier(
         }
     }
     Ok(leaves)
+}
+
+/// Remove every structural leaf whose sector has an existing Analyzer zero
+/// certificate. Its domain conditions are already retained in the reduction.
+/// Call only after validating the complete original dependency graph.
+fn prune_zero_leaves<const N: usize>(
+    reduction: &mut Reduction,
+    cache: &mut FrontierCache,
+    frontier: &mut BTreeSet<Integral>,
+    zero: &[[bool; N]],
+    visited: &mut BTreeSet<[i16; N]>,
+    pending: &mut BTreeSet<[i16; N]>,
+    context: &RunContext,
+) -> Result<()> {
+    let mut certified = Vec::new();
+    for integral in frontier.iter() {
+        context.cancellation.check()?;
+        let powers: [i16; N] = integral
+            .0
+            .as_slice()
+            .try_into()
+            .map_err(|_| Error::Reduction("native zero frontier arity".into()))?;
+        if zero.contains(&powers.map(|n| n > 0)) {
+            certified.push((integral.clone(), powers));
+        }
+    }
+    for (integral, powers) in certified {
+        cache.insert_rules(reduction, [(integral.clone(), BTreeMap::new())]);
+        visited.insert(powers);
+        pending.remove(&powers);
+        frontier.remove(&integral);
+    }
+    Ok(())
 }
 use std::sync::Arc;
 use symbolica::domains::factorized_rational_polynomial::{
@@ -1223,6 +1279,135 @@ mod tests {
                 );
             }
         }
+    }
+
+    #[test]
+    fn eager_zero_leaves_use_analyzer_certificates_and_preserve_live_coefficients() {
+        let s = parse!("certified_zero::s");
+        let gram = vec![vec![s.clone()]];
+        let family = IntegralFamily {
+            name: "certified_zero_bubble".into(),
+            loops: vec!["l".into()],
+            external: vec!["p".into()],
+            external_gram: gram.clone(),
+            propagators: vec![
+                crate::Propagator::quadratic(&[1], &[0], Atom::new(), &gram).unwrap(),
+                crate::Propagator::quadratic(&[1], &[1], Atom::new(), &gram).unwrap(),
+            ],
+            physical_propagators: 2,
+            epsilon: symbol!("certified_zero::eps"),
+            dimension: 4,
+        };
+        let converted = family.convert().unwrap();
+        let analyzer = Analyzer::try_unrestricted(&converted.family).unwrap();
+        let zero = (0..4)
+            .filter_map(|bits| {
+                let sector = std::array::from_fn::<_, 2, _>(|i| bits & (1 << i) != 0);
+                matches!(
+                    analyzer.analyze(&Mask::try_new(sector).unwrap()).unwrap(),
+                    Decision::ProvedZero(_)
+                )
+                .then_some(sector)
+            })
+            .collect::<Vec<_>>();
+        assert!(zero.contains(&[false, false]));
+        assert!(zero.contains(&[true, false]));
+        assert!(zero.contains(&[false, true]));
+        assert!(!zero.contains(&[true, true]));
+
+        let root = Integral(vec![2, 2]);
+        let zero_root = Integral(vec![2, 1]);
+        let master = Integral(vec![1, 1]);
+        let zero_powers = [[2, 0], [1, -2], [0, 3], [0, 0]];
+        let coefficient = Atom::num(1) / (&s + Atom::num(1));
+        let conditions = analyzer
+            .domain()
+            .conditions()
+            .iter()
+            .map(|condition| {
+                substitute(&condition.polynomial().to_expression(), &converted.reverse)
+            })
+            .chain([&s + Atom::num(1)])
+            .collect::<Vec<_>>();
+        let mut terms = BTreeMap::from([(master.clone(), coefficient.clone())]);
+        for (n, powers) in zero_powers.iter().enumerate() {
+            terms.insert(
+                Integral(powers.to_vec()),
+                (&s + Atom::num(n + 2)) / (&s + Atom::num(n + 3)),
+            );
+        }
+        let mut reduction = Reduction {
+            rules: BTreeMap::from([
+                (root.clone(), terms),
+                (
+                    zero_root.clone(),
+                    BTreeMap::from([(Integral(zero_powers[0].to_vec()), Atom::num(1))]),
+                ),
+            ]),
+            nonzero_conditions: conditions.clone(),
+            ..Default::default()
+        };
+        let roots = [root.clone(), zero_root.clone()];
+        let powers = roots.iter().map(|i| i.0.clone()).collect::<Vec<_>>();
+        let context = RunContext::default();
+        let mut structural = structural_frontier(&reduction, &powers, &context).unwrap();
+        let mut pending = structural
+            .iter()
+            .map(|i| <[i16; 2]>::try_from(i.0.as_slice()).unwrap())
+            .collect();
+        let mut visited = BTreeSet::from([zero_powers[0]]);
+        let mut cache = FrontierCache {
+            targets: Some(
+                Expander::new(&reduction, &context)
+                    .unwrap()
+                    .expand_many(&roots, 0)
+                    .unwrap(),
+            ),
+            ..Default::default()
+        };
+        assert_eq!(structural.len(), 5);
+        prune_zero_leaves(
+            &mut reduction,
+            &mut cache,
+            &mut structural,
+            &zero,
+            &mut visited,
+            &mut pending,
+            &context,
+        )
+        .unwrap();
+        assert_eq!(structural, BTreeSet::from([master.clone()]));
+        assert_eq!(pending, BTreeSet::from([[1, 1]]));
+        assert_eq!(visited, BTreeSet::from(zero_powers));
+        assert_eq!(reduction.nonzero_conditions, conditions);
+        for powers in zero_powers {
+            assert!(reduction.rules[&Integral(powers.to_vec())].is_empty());
+        }
+        assert!(cache.targets.is_some());
+        let mut expander = Expander::new(&reduction, &context).unwrap();
+        let updated = expander
+            .expand_weighted(cache.targets.as_ref().unwrap(), 0)
+            .unwrap();
+        let fresh = expander.expand_many(&roots, 0).unwrap();
+        assert_expansions_equal(&updated, &fresh);
+        assert!(updated[&zero_root].is_empty());
+        assert_eq!(updated[&root].len(), 1);
+        assert!(
+            (coefficient_atom(&updated[&root][&master]) - coefficient)
+                .together()
+                .cancel()
+                .is_zero()
+        );
+        // A certified-zero sector must not hide a malformed cyclic DAG.
+        let zero_integral = Integral(zero_powers[0].to_vec());
+        reduction.rules.insert(
+            zero_integral.clone(),
+            BTreeMap::from([(zero_integral, Atom::num(1))]),
+        );
+        assert!(matches!(
+            structural_frontier(&reduction, &powers, &context),
+            Err(Error::IncompleteReduction(_))
+        ));
     }
 
     #[test]
