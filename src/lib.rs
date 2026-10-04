@@ -2,6 +2,7 @@
 #![doc = include_str!("../docs/usage.md")]
 pub use symbolica;
 mod algebra;
+pub mod algebraic;
 pub mod asymptotic;
 pub mod benchmarks;
 pub mod boundary;
@@ -13,6 +14,7 @@ pub mod engine;
 pub mod epsilon;
 pub mod error;
 pub mod family;
+mod fixed_series;
 pub mod frobenius;
 pub mod ft;
 pub mod gaussian;
@@ -29,6 +31,7 @@ pub mod options;
 pub mod phase_space;
 mod physical_conditions;
 pub mod physical_family;
+pub mod physical_targets;
 pub mod physical_transport;
 pub mod recursive;
 pub mod reduction;
@@ -50,6 +53,7 @@ pub use options::{
     CancellationToken, FlowOptions, MassMode, Prescription, Progress, RecursionMode, RunContext,
 };
 pub use physical_family::PreparedPhysicalFamily;
+pub use physical_targets::ProjectedLaurentExpansion;
 pub use physical_transport::RustFlow;
 pub use reduction::{ReductionBackend, RustRedBackend, TableBackend};
 pub use transport_cache::RustFlowCache;

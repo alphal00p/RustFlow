@@ -1,0 +1,259 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-04T18:55:02.119928+00:00",
+  "status": "passed",
+  "scope": "Synthetic physical-boundary cache benchmark, not integral evaluation or Monte Carlo throughput. One process/one measured run per algorithm; timings are observations rather than statistical performance guarantees.",
+  "source": {
+    "base_validated_commit": "c74011ec1306d86ad0c3eccd339ad48702487813",
+    "implementation": "Standalone staged transport_cache/physical_transport/physical_conditions modules plus archived validated library for unchanged algebra and ODE routines. The example exercises the same RustFlowCache::best implementation with either unknown or ScaledDistance lower bounds.",
+    "library": {
+      "path": "target/cache-selection-audit/libsymbolica_amflow.rlib",
+      "sha256": "fbcd037fa48245102747e4c37b5fc17dc7655af13301390d425610ed3b2042e6",
+      "bytes": 351692312
+    },
+    "compiler": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+    "standalone_build": "bash target/cache-selection-audit/lazy/build-benchmark.sh",
+    "root_cargo_build": false
+  },
+  "settings": {
+    "points": 33000,
+    "coordinates": "s=(index%220+1)/10,t=(index/220+1)/10",
+    "normalization": "1",
+    "guard": "s*t != 0; all stored points positive real",
+    "coefficients": [
+      "1",
+      "0",
+      "0"
+    ],
+    "epsilon_range": [
+      0,
+      2
+    ],
+    "claimed_verified_digits": 80,
+    "accuracy_evidence": "Exact analytic constant solution, no mantissa-derived accuracy.",
+    "working_bits": 315,
+    "query_bits": 216,
+    "requested_digits": 20,
+    "cpu_affinity": [
+      31
+    ],
+    "timeout_seconds": 600,
+    "parallel_workers": 1,
+    "f64_coordinates_or_values": false,
+    "target_nearest": "Last stored point +(1/100,1/100)",
+    "target_exact": "Last stored point",
+    "tie_logic": "Same ScaledDistance MPFR values and exact/refined tie comparator; assertion of identical selected point and cost."
+  },
+  "host": {
+    "system": "Linux",
+    "architecture": "x86_64",
+    "cpu_model": "AMD EPYC 9754 128-Core Processor"
+  },
+  "validation": {
+    "exit_zero": true,
+    "selected_exact_points_equal": true,
+    "selected_mpfr_costs_equal": true,
+    "standalone_regressions": 26,
+    "regression_scope": [
+      "existing boundary compatibility, persistence and accuracy tests",
+      "existing original-matrix and reduction-domain path guards",
+      "finite/nonnegative lower bounds and observed overestimate rejection",
+      "unknown/conservative policies and stable insertion/accuracy ties",
+      "rational-complex separations below working-precision resolution",
+      "cancellation including exact-hit selection"
+    ]
+  },
+  "process_metrics": {
+    "exit_code": 0,
+    "elapsed_ns": 14949872305,
+    "peak_rss_kib": 159744,
+    "cpu_affinity": [
+      31
+    ],
+    "timeout_seconds": 600
+  },
+  "measurements": [
+    {
+      "components": 1,
+      "coordinates": 2,
+      "epsilon_coefficients": 3,
+      "memory": {
+        "high_water_kib": 5456,
+        "resident_kib": 5456
+      },
+      "phase": "start",
+      "points": 33000,
+      "query_bits": 216,
+      "requested_digits": 20,
+      "scope": "synthetic exact analytic Y(s,t,epsilon)=1, not an integral benchmark; no f64 coordinates or values",
+      "working_bits": 315
+    },
+    {
+      "elapsed_ns": 545337620,
+      "entries": 33000,
+      "memory": {
+        "high_water_kib": 76992,
+        "resident_kib": 76992
+      },
+      "phase": "cold_indexed_insert"
+    },
+    {
+      "bytes": 20289497,
+      "elapsed_ns": 896310759,
+      "memory": {
+        "high_water_kib": 159744,
+        "resident_kib": 139848
+      },
+      "phase": "binary_save"
+    },
+    {
+      "elapsed_ns": 721988803,
+      "entries": 33000,
+      "memory": {
+        "high_water_kib": 159744,
+        "resident_kib": 156476
+      },
+      "phase": "binary_load"
+    },
+    {
+      "cost": "2.0000000000000000000000000000000000000000000000000000000000000000e-4",
+      "elapsed_ns": 6047993590,
+      "guard_checks": 33000,
+      "memory": {
+        "high_water_kib": 159744,
+        "resident_kib": 158184
+      },
+      "phase": "baseline_nearest_selection"
+    },
+    {
+      "compatible_candidates": 33000,
+      "cost": "2.0000000000000000000000000000000000000000000000000000000000000000e-4",
+      "elapsed_ns": 357273175,
+      "guard_checks": 1,
+      "memory": {
+        "high_water_kib": 159744,
+        "resident_kib": 158188
+      },
+      "phase": "lazy_nearest_selection"
+    },
+    {
+      "cost": "0",
+      "elapsed_ns": 5909879724,
+      "guard_checks": 33000,
+      "memory": {
+        "high_water_kib": 159744,
+        "resident_kib": 158292
+      },
+      "phase": "baseline_exact_hit_selection"
+    },
+    {
+      "compatible_candidates": 33000,
+      "cost": "0",
+      "elapsed_ns": 346166415,
+      "guard_checks": 1,
+      "memory": {
+        "high_water_kib": 159744,
+        "resident_kib": 158292
+      },
+      "phase": "lazy_exact_hit_selection"
+    },
+    {
+      "memory": {
+        "high_water_kib": 159744,
+        "resident_kib": 158292
+      },
+      "phase": "complete"
+    }
+  ],
+  "files": {
+    "target/cache-selection-audit/lazy/transport_cache.rs": {
+      "sha256": "e25bc4a16a1f7fea4023986c3d1f96507af60f2b930e226463dab2c9d3d55a2a",
+      "bytes": 54191
+    },
+    "target/cache-selection-audit/lazy/physical_transport.rs": {
+      "sha256": "1bd88da7c0d1a3baabb9c1ec888531f9ef635b4f636501d8252d92708b364096",
+      "bytes": 13829
+    },
+    "target/cache-selection-audit/lazy/physical_conditions.rs": {
+      "sha256": "7845ff86acb0e9a8fe8394e79898f34b346a6ea1041dc58b865d3af88ad48e79",
+      "bytes": 12401
+    },
+    "target/cache-selection-audit/lazy/probe_family.rs": {
+      "sha256": "f19db99d4e4d1ba5da034cfeac2a6bd00cfc3d3818f84b7275779ab1ef2dd35b",
+      "bytes": 545
+    },
+    "target/cache-selection-audit/lazy/tests-cache-lower-bounds.rs": {
+      "sha256": "b0505398c12d22550d2ce1ac20dc7ac1716debe76da51e3d5623980a7010a496",
+      "bytes": 10341
+    },
+    "target/cache-selection-audit/lazy/probe.rs": {
+      "sha256": "6ddce8dae41faad28930b2e48214daa8faac7733112e07b812c1586a590e43f0",
+      "bytes": 42220
+    },
+    "target/cache-selection-audit/lazy/build.sh": {
+      "sha256": "c49b5ad0957ec7584a131d74082c2a85e814a07553366e8b6e76d78608d292ea",
+      "bytes": 1248
+    },
+    "target/cache-selection-audit/lazy/build.log": {
+      "sha256": "b1c41cef9ac0e7092ca025703a79a21f0e1c0e85aaae2208a74778a9f56cf6eb",
+      "bytes": 735
+    },
+    "target/cache-selection-audit/lazy/tests.log": {
+      "sha256": "39ebd4c92b6e06baa19b2550525637ca0e7ac2e7f2de0ed69a85ce9a832191a6",
+      "bytes": 2450
+    },
+    "target/cache-selection-audit/lazy/cache_bank_benchmark.rs": {
+      "sha256": "6684a8312f6b87e3ab0d668bfd734438d7259e49c635fab94cb591cad272cd65",
+      "bytes": 7667
+    },
+    "target/cache-selection-audit/lazy/benchmark-probe.rs": {
+      "sha256": "7716afd897fc8c9ec84433c6040e799b9278f2dfab89b81188bcb740a73d2529",
+      "bytes": 6367
+    },
+    "target/cache-selection-audit/lazy/build-benchmark.sh": {
+      "sha256": "d6b6e0397bcaac9b12134613de234fd4020fa8545396a632c135fed3d08ff607",
+      "bytes": 1258
+    },
+    "target/cache-selection-audit/lazy/benchmark-build.log": {
+      "sha256": "2d5ef1e66b8b49ef2017e8c06b6fbd698efe86f9f8a2b153d723f51a65159820",
+      "bytes": 765
+    },
+    "target/cache-selection-audit/lazy/benchmark": {
+      "sha256": "0f0bd6238d1ba4045ad239ee9b7e5ea1ff75ea47523040febe8585b22a4b4ec2",
+      "bytes": 578807992
+    },
+    "target/cache-selection-audit/lazy/run.py": {
+      "sha256": "335561d5be4174853159fa43d825574a2fa411f79a29fde02e1beb669c418768",
+      "bytes": 656
+    },
+    "target/cache-selection-audit/lazy/results.jsonl": {
+      "sha256": "ed468356d15287e8f168341826b881b7a323eb324b5005b7879c3be640bb2039",
+      "bytes": 1544
+    },
+    "target/cache-selection-audit/lazy/run.log": {
+      "sha256": "408bb80e39b9531251ff00062b9f64c0bb571f579c0c8dfe8ab77a7480e47230",
+      "bytes": 394
+    },
+    "target/cache-selection-audit/lazy/process-metrics.json": {
+      "sha256": "8d5cc2325bb8af5a7bc5edf8889fb64e4246c4553ad6afb5a83efdf6daf0a20a",
+      "bytes": 134
+    },
+    "target/cache-selection-audit/lazy/bank-33000/physical-boundaries.bin": {
+      "sha256": "e2486a1a8627fc3672f9ac5a7ff0cdd5b4f40ac69aceb32bd2a9e02b7463e19b",
+      "bytes": 20289497
+    }
+  },
+  "initial_prototype": {
+    "provenance_file": "target/cache-selection-audit/provenance.json",
+    "sha256": "6b0c187ad07cac2e64ac4b7cbae35effc9d8ab0092de1da0875274729283891f",
+    "bytes": 5697,
+    "scope": "Prior same-fixture target-only hand-written ordering probe; superseded by measurements above of the staged library algorithm."
+  },
+  "limitations": [
+    "All seeds follow the exactly known analytic solution Y(s,t,epsilon)=1; claimed 80-digit seed accuracy follows from that identity, never from MPFR mantissa length.",
+    "All points are in one positive-real two-dimensional domain with guard s*t != 0. Other systems, guard geometry, boundary dimensions and cost policies can have different timings.",
+    "Selection still prices all compatible points and sorts known lower bounds. There is no spatial index or fixed nearest-k cutoff.",
+    "A custom lower_bound is a policy contract: evaluated violations are rejected, while skipped routes cannot be audited without defeating pruning. Unknown bounds preserve exhaustive evaluation.",
+    "Peak RSS is process-wide and includes save/load allocator retention; it is not a per-entry minimal memory measurement."
+  ]
+}

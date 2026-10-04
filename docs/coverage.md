@@ -45,8 +45,18 @@ the growing cache. Exact reduction assumptions and original matrix domains are
 retained even when a stationary coordinate cancels a pole from the pullback.
 The [cut/boundary validation report](../reports/validation/2026-10-04-rustflow-cuts-banana.json)
 records 206 passing release tests plus one documentation test, strict Clippy and
-formatting. General mixed real/virtual cut boundaries and algebraic physical
-transport remain outside the current numerical coverage.
+formatting. General mixed real/virtual cut boundaries remain incomplete.
+
+The [branch/target milestone](../reports/validation/2026-10-04-rustflow-branches-targets.json)
+passes 228 release unit/integration tests plus one documentation test, strict
+all-target Clippy and formatting. It adds [regular square-root transport](algebraic.md)
+with winding and per-call sheet tests, uncertainty-aware target projection from
+cached masters, and faster [33,000-point cache selection](cache-selection.md).
+The complete [unequal-mass banana](banana-unequal.md) checks all 75 coefficients
+against original DiffExp, independent routes, increased precision/order, and
+analytic tadpole products. Full five-point and full Higgs+jet amplitude benchmarks,
+algebraic singular endpoints, automatic per-polynomial physical contours and
+algebraic cache reuse remain pending; these tests do not establish full parity.
 
 The original paper's mandatory numerical acceptance gate passes: all four
 two-loop targets at s=30, t=-10/3, m²=1 have automatically generated Laurent

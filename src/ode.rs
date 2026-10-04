@@ -544,13 +544,36 @@ pub struct TaylorSegment {
 }
 
 pub(crate) trait SeriesSystem {
+    type State;
+    type Chart;
+    fn initial_state(&self, boundary: &BoundaryData) -> Result<Self::State>;
     fn precision(&self) -> Precision;
     fn dimension(&self) -> usize;
     fn poles(&self) -> &[C];
-    fn taylor(&self, center: &C, values: &[C], order: usize) -> Result<Vec<Vec<C>>>;
-    fn rhs(&self, point: &C, values: &[C]) -> Result<Vec<C>>;
+    fn local_chart(
+        &self,
+        center: &C,
+        values: &[C],
+        order: usize,
+        state: &Self::State,
+    ) -> Result<(Vec<Vec<C>>, Self::Chart)>;
+    fn rhs(&self, point: &C, values: &[C], chart: &Self::Chart) -> Result<Vec<C>>;
+    fn accepted_state(
+        &self,
+        chart: &Self::Chart,
+        point: &C,
+        tolerance: &Float,
+    ) -> Result<Option<Self::State>>;
 }
 impl SeriesSystem for CompiledSystem {
+    type State = ();
+    type Chart = ();
+    fn initial_state(&self, _: &BoundaryData) -> Result<()> {
+        Ok(())
+    }
+    fn accepted_state(&self, _: &(), _: &C, _: &Float) -> Result<Option<()>> {
+        Ok(Some(()))
+    }
     fn precision(&self) -> Precision {
         self.p
     }
@@ -560,10 +583,16 @@ impl SeriesSystem for CompiledSystem {
     fn poles(&self) -> &[C] {
         &self.poles
     }
-    fn taylor(&self, center: &C, values: &[C], order: usize) -> Result<Vec<Vec<C>>> {
-        self.taylor(center, values, order)
+    fn local_chart(
+        &self,
+        center: &C,
+        values: &[C],
+        order: usize,
+        _: &(),
+    ) -> Result<(Vec<Vec<C>>, ())> {
+        Ok((self.taylor(center, values, order)?, ()))
     }
-    fn rhs(&self, point: &C, values: &[C]) -> Result<Vec<C>> {
+    fn rhs(&self, point: &C, values: &[C], _: &()) -> Result<Vec<C>> {
         self.matrix
             .iter()
             .map(|row| {
@@ -580,8 +609,9 @@ impl SeriesSystem for CompiledSystem {
     }
 }
 
-fn residual_is_small(
-    system: &impl SeriesSystem,
+fn residual_is_small<S: SeriesSystem>(
+    system: &S,
+    chart: &S::Chart,
     center: &C,
     step: &C,
     coefficients: &[Vec<C>],
@@ -590,7 +620,11 @@ fn residual_is_small(
 ) -> Result<bool> {
     let p = system.precision();
     let point = p.add(center, step);
-    let rhs = system.rhs(&point, values)?;
+    let rhs = match system.rhs(&point, values, chart) {
+        Ok(rhs) => rhs,
+        Err(Error::Accuracy(_)) => return Ok(false),
+        Err(error) => return Err(error),
+    };
     for (i, rhs) in rhs.iter().enumerate() {
         let mut derivative = p.zero();
         for k in (1..coefficients.len()).rev() {
@@ -619,8 +653,19 @@ pub(crate) fn transport_series(
     waypoints: &[C],
     options: &FlowOptions,
     context: &RunContext,
-    mut saved: Option<&mut Vec<TaylorSegment>>,
+    saved: Option<&mut Vec<TaylorSegment>>,
 ) -> Result<FlowResult> {
+    Ok(transport_series_with_state(system, boundary, waypoints, options, context, saved)?.0)
+}
+
+pub(crate) fn transport_series_with_state<S: SeriesSystem>(
+    system: &S,
+    boundary: &BoundaryData,
+    waypoints: &[C],
+    options: &FlowOptions,
+    context: &RunContext,
+    mut saved: Option<&mut Vec<TaylorSegment>>,
+) -> Result<(FlowResult, S::State)> {
     options.validate()?;
     let p = system.precision();
     if boundary.values.len() != system.dimension()
@@ -630,6 +675,7 @@ pub(crate) fn transport_series(
     {
         return Err(Error::InvalidInput("invalid boundary or path".into()));
     }
+    let mut state = system.initial_state(boundary)?;
     let mut center = boundary.point.clone();
     let mut values = boundary.values.clone();
     let mut diagnostics = FlowDiagnostics {
@@ -668,7 +714,8 @@ pub(crate) fn transport_series(
                     &p.div(&C::new(safe, p.real(0)), &C::new(distance, p.real(0))),
                 );
             }
-            let coefficients = system.taylor(&center, &values, options.series_order)?;
+            let (coefficients, chart) =
+                system.local_chart(&center, &values, options.series_order, &state)?;
             let mut accepted = None;
             for _ in 0..32 {
                 let (v, tail) = evaluate_taylor(p, &coefficients, &step);
@@ -687,7 +734,16 @@ pub(crate) fn transport_series(
                     let scale = if scale > p.real(1) { scale } else { p.real(1) };
                     p.finite(v) && *t <= tolerance.clone() * scale
                 });
-                if good && residual_is_small(system, &center, &step, &coefficients, &v, &tolerance)?
+                if good
+                    && residual_is_small(
+                        system,
+                        &chart,
+                        &center,
+                        &step,
+                        &coefficients,
+                        &v,
+                        &tolerance,
+                    )?
                 {
                     // Vanishing final Taylor terms do not bound omitted
                     // terms for sparse systems such as y' = x^20 y.
@@ -697,14 +753,24 @@ pub(crate) fn transport_series(
                     let (middle, _) = evaluate_taylor(p, &coefficients, &half_step);
                     if residual_is_small(
                         system,
+                        &chart,
                         &center,
                         &half_step,
                         &coefficients,
                         &middle,
                         &tolerance,
                     )? {
-                        accepted = Some(v);
-                        break;
+                        let next = if step == delta {
+                            target.clone()
+                        } else {
+                            p.add(&center, &step)
+                        };
+                        if let Some(next_state) =
+                            system.accepted_state(&chart, &next, &tolerance)?
+                        {
+                            accepted = Some((v, next_state));
+                            break;
+                        }
                     }
                 }
                 step = p.scale(&step, 1, 2);
@@ -713,8 +779,11 @@ pub(crate) fn transport_series(
                     break;
                 }
             }
-            values = accepted
-                .ok_or_else(|| Error::Accuracy("Taylor tail did not meet tolerance".into()))?;
+            let (next_values, next_state) = accepted.ok_or_else(|| {
+                Error::Accuracy("Taylor tail or local chart did not meet tolerance".into())
+            })?;
+            values = next_values;
+            state = next_state;
             let next = if step == delta {
                 target.clone()
             } else {
@@ -735,11 +804,14 @@ pub(crate) fn transport_series(
             diagnostics.steps += 1;
         }
     }
-    Ok(FlowResult {
-        point: center,
-        values,
-        diagnostics,
-    })
+    Ok((
+        FlowResult {
+            point: center,
+            values,
+            diagnostics,
+        },
+        state,
+    ))
 }
 
 pub(crate) fn plan_path(

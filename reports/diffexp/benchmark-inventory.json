@@ -247,7 +247,7 @@
     {
       "id": "banana-equal-mass-infinity-to32",
       "notebook": "Banana.nb",
-      "status": "not_run_in_this_environment",
+      "status": "completed_original_and_native_all20_coefficients_to20_absolute_digits",
       "dimension": 4,
       "max_coupled_block": 3,
       "epsilon_order": 4,
@@ -285,12 +285,14 @@
         "description": "about1minute",
         "estimated_error": "1e-25",
         "not_a_current_host_measurement": true
-      }
+      },
+      "validation_report": "reports/diffexp/banana-equal-validation.json",
+      "coverage_note": "Saved original Pade data retained; native saved-series at t20 is not part of this acceptance."
     },
     {
       "id": "banana-unequal-notebook-direct",
       "notebook": "Banana.nb",
-      "status": "not_run_in_this_environment",
+      "status": "native_full_endpoint_passed_original_full_route_memory_censored",
       "dimension": 15,
       "max_coupled_block": 11,
       "settings": {
@@ -321,12 +323,14 @@
         "ToPiecewise",
         "B1/B11 epsilon2..4 plots",
         "compare all75 coefficients to alternate contour"
-      ]
+      ],
+      "validation_report": "reports/diffexp/banana-unequal-validation.json",
+      "coverage_note": "Original full route requested saved series and hit16GiB after1599.51s at10/26physicalsegments. Complete original alternate route validates native endpoint; no original completed direct-route timing or saved-series acceptance."
     },
     {
       "id": "banana-unequal-notebook-alternate",
       "notebook": "Banana.nb",
-      "status": "not_run_in_this_environment",
+      "status": "completed_original_and_native_all75_coefficients_to20_absolute_digits",
       "dimension": 15,
       "max_coupled_block": 11,
       "settings": {
@@ -349,7 +353,9 @@
         25,
         26
       ],
-      "comparison": "Maximum difference across all15masters and eps0..4 against direct path."
+      "comparison": "Maximum difference across all15masters and eps0..4 against direct path.",
+      "validation_report": "reports/diffexp/banana-unequal-validation.json",
+      "coverage_note": "Complete analytic equal-infinity initialization, original alternate endpoint, native full/alternate routes and precision/order refinement. Accuracy claim20absolute digits; no matched-speedup claim."
     },
     {
       "id": "fivepoint-nonplanar-accurate",

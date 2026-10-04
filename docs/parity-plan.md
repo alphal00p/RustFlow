@@ -125,6 +125,17 @@ cache, native HEPKit DOT input, AMF-generated physical seeds, and two-body cut
 terminal also have offline release regressions. These milestones do not complete
 the algebraic-kernel, full five-point, full amplitude, or performance gates.
 
+The unequal-mass banana now has a complete 15-master, 75-coefficient production
+regression with independent mass/momentum routes and an original DiffExp oracle;
+see [its measured scope](banana-unequal.md). Standalone [algebraic transport](algebraic.md)
+tracks registered square-root sheets on regular contours, including winding and
+rejected-step tests. Root-sum denominator rationalization, algebraic Frobenius
+endpoints, automatic physical prescriptions and algebraic cache reuse remain.
+The [33,000-boundary cache benchmark](cache-selection.md) measures lazy path
+validation separately from integral evaluation. Exact target projection now
+checks positive epsilon orders and carries cached master uncertainty into the
+requested target coefficients.
+
 ## Scope of the 12-slot limit
 
 `src/native.rs` dispatches `solve::<1>` through `solve::<12>`. RustRed's dynamic

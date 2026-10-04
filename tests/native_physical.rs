@@ -35,7 +35,7 @@ fn native_graph_amf_seed_drives_a_progressively_filled_physical_cache() {
     let backend = RustRedBackend::default();
     let prepared = PreparedPhysicalFamily::new(
         family,
-        &weights.keys().cloned().collect::<Vec<_>>(),
+        &[Integral(vec![1, 1]), Integral(vec![2, 1])],
         &[s],
         &backend,
         &options,
@@ -44,6 +44,15 @@ fn native_graph_amf_seed_drives_a_progressively_filled_physical_cache() {
     )
     .unwrap();
     assert_eq!(prepared.basis(), &[Integral(vec![1, 1])]);
+    assert_eq!(
+        prepared
+            .required_master_range(
+                &BTreeMap::from([(s, Atom::num(-1))]),
+                EpsilonRange::new(-2, 0).unwrap()
+            )
+            .unwrap(),
+        EpsilonRange::new(-2, 0).unwrap()
+    );
     let mut cache = RustFlowCache::default();
     let seed = prepared
         .seed_cache(
@@ -66,6 +75,11 @@ fn native_graph_amf_seed_drives_a_progressively_filled_physical_cache() {
         Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Euler)),
         p.real(0),
     );
+    // Preserve a reserve for the uncertainty amplified by target reduction.
+    let transport_options = FlowOptions {
+        digits: 28,
+        ..options.clone()
+    };
     for destination in [-2, -3, -3] {
         let count = cache.len();
         let result = prepared
@@ -74,7 +88,7 @@ fn native_graph_amf_seed_drives_a_progressively_filled_physical_cache() {
                 &mut cache,
                 &BTreeMap::from([(s, Atom::num(destination))]),
                 seed.range,
-                &options,
+                &transport_options,
                 &context,
                 &policy,
             )
@@ -84,6 +98,21 @@ fn native_graph_amf_seed_drives_a_progressively_filled_physical_cache() {
         assert!(p.close(&result.boundary.coefficients[1][0], &p.i(1), 20));
         let finite = p.sub(&p.sub(&p.i(2), &gamma), &p.log(&p.i(-destination)));
         assert!(p.close(&result.boundary.coefficients[2][0], &finite, 20));
+        let targets = prepared
+            .project_targets(&result.boundary, seed.range, 20)
+            .unwrap();
+        assert!(p.close(&targets[0].coefficients[&0], &finite, 20));
+        // I(2,1) = -(1-2*epsilon)/s I(1,1), including its finite shift.
+        assert!(p.close(
+            &targets[1].coefficients[&-1],
+            &p.scale(&p.i(1), 1, -destination),
+            20
+        ));
+        assert!(p.close(
+            &targets[1].coefficients[&0],
+            &p.scale(&p.sub(&finite, &p.i(2)), 1, -destination),
+            20
+        ));
         if result.transport.is_none() {
             assert_eq!(destination, -3);
             assert_eq!(cache.len(), count);

@@ -99,8 +99,10 @@ impl RustFlow {
             identity: &self.identity,
             policy,
             digits: options.digits,
+            context,
         };
         let matched=cache.best(&query,&guarded_policy,p)?.ok_or_else(||Error::IncompleteReduction("no compatible cached physical boundary with the requested epsilon range, verified accuracy and regular reduction domain".into()))?;
+        context.cancellation.check()?;
         let source = matched.boundary.clone();
         let coordinates = source.point.rounded_coordinates_as_exact()?;
         let count = (i64::from(range.last) - i64::from(range.leading) + 1) as usize;
@@ -336,6 +338,7 @@ struct GuardedCost<'a> {
     identity: &'a BoundaryIdentity,
     policy: &'a dyn TransportCost,
     digits: u32,
+    context: &'a RunContext,
 }
 impl TransportCost for GuardedCost<'_> {
     fn cost(
@@ -344,6 +347,7 @@ impl TransportCost for GuardedCost<'_> {
         target: &CachedPoint,
         p: Precision,
     ) -> Result<Option<Float>> {
+        self.context.cancellation.check()?;
         if !self
             .identity
             .conditions_admit_straight_path(&source.point, target, p, self.digits)?
@@ -352,6 +356,15 @@ impl TransportCost for GuardedCost<'_> {
         }
         self.policy.cost(source, target, p)
     }
+    fn lower_bound(
+        &self,
+        source: &CachedBoundary,
+        target: &CachedPoint,
+        p: Precision,
+    ) -> Result<Option<Float>> {
+        self.context.cancellation.check()?;
+        self.policy.lower_bound(source, target, p)
+    }
     fn compare_tied_costs(
         &self,
         left: &CachedBoundary,
@@ -359,6 +372,7 @@ impl TransportCost for GuardedCost<'_> {
         target: &CachedPoint,
         p: Precision,
     ) -> Result<std::cmp::Ordering> {
+        self.context.cancellation.check()?;
         self.policy.compare_tied_costs(left, right, target, p)
     }
 }

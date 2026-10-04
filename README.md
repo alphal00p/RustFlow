@@ -85,7 +85,12 @@ supports persistent transport caches across processes.
 - `PreparedPhysicalFamily` derives a common physical differential basis from a
   family and appends independently verified AMF/FT seed values to the same bank.
   Original reduction assumptions and physical chart restrictions remain part of
-  cache identity and are checked along candidate paths.
+  cache identity and are checked along candidate paths. Retained exact target
+  reductions determine required master orders and project cached coefficients
+  with propagated uncertainty.
+- [`algebraic::AlgebraicSystem`](docs/algebraic.md) transports supplied systems
+  containing registered square roots on explicit regular contours. Each call
+  tracks its own sheets through accepted steps and contour windings.
 - `hepkit::GraphIntegral` retains a native HEPKit graph and delegates routing,
   contraction, denominator completion and scalar numerator rewriting to its
   Linnet/Spenso interfaces. `solve_integral_combinations` evaluates the resulting
@@ -94,7 +99,9 @@ supports persistent transport caches across processes.
 - `FrobeniusBasis::match_constraints` fixes integration constants from partial
   asymptotic coefficients, including resonant powers and logarithms. The full
   [equal-mass banana regression](docs/banana-equal.md) uses an analytic infinity
-  boundary and checks every coefficient through epsilon power four.
+  boundary and checks every coefficient through epsilon power four. The
+  [unequal-mass regression](docs/banana-unequal.md) checks all 75 coefficients
+  of 15 masters with independent routes and a live original DiffExp reference.
 - `cuts::CutFamily` preserves distributional and positive-energy cut metadata
   through native IBP reduction. The [two-body terminal](docs/cuts.md) uses native
   HEPKit phase-space normalization and dimensional gamma factors.

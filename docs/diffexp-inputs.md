@@ -49,10 +49,10 @@ branch handling before native physical transport. Only scientific data was loade
 for these exports; ancillary helper implementations were not evaluated or copied
 into Rust.
 
-The equal-mass banana's exact matrices and partial infinity boundary are exported
-separately under `target/diffexp-oracle/banana-equal`. Its three coupled masters
-have resonant logarithmic expansions at infinity when epsilon is expanded. The
-boundary derivation uses gamma-function identities and exact differential
-equations; no upstream numerical reference is used as a starting value. This
-export prepares the next infinity-initialization test and is not itself a
-completed banana evaluation.
+The [equal-mass banana](banana-equal.md) now has a complete four-master
+infinity-boundary acceptance test, and the [unequal-mass banana](banana-unequal.md)
+validates all 15 masters through ε⁴ on two native paths against a complete
+original-DiffExp endpoint oracle. Both use analytic gamma-function boundaries;
+no numerical reference seeds the integration. The unequal original full route
+was separately censored by its memory cap, while its alternate route completed.
+These banana results do not imply that the five-point benchmarks above have run.

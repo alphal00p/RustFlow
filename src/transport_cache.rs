@@ -634,6 +634,26 @@ pub trait TransportCost {
         precision: Precision,
     ) -> Result<Option<Float>>;
 
+    /// Optional cheap lower bound on the nonnegative, rounded value returned by
+    /// `cost` at this precision. `None` means unknown, not an excluded route.
+    /// Every returned bound must be finite, nonnegative, and no greater than
+    /// `cost` when that route is accepted. A bound may also describe a route
+    /// that `cost` rejects. Selection can skip `cost` when this bound exceeds
+    /// an accepted cost; it therefore relies on this contract for skipped routes.
+    ///
+    /// Bounds must not depend on evaluation order or mutable policy state.
+    /// Implementations that require cancellation checks while pricing a large
+    /// bank should perform those checks here too. Errors propagate immediately.
+    /// The default preserves exhaustive evaluation for existing policies.
+    fn lower_bound(
+        &self,
+        _source: &CachedBoundary,
+        _target: &CachedPoint,
+        _precision: Precision,
+    ) -> Result<Option<Float>> {
+        Ok(None)
+    }
+
     /// Resolve equal rounded costs, after both routes passed `cost`. The
     /// default prefers an exact coordinate hit; otherwise accuracy breaks the
     /// tie. Distance policies can distinguish costs beyond the initial working
@@ -690,6 +710,25 @@ impl<F> ScaledDistance<F> {
             .collect()
     }
 
+    fn checked_distance(
+        &self,
+        source: &CachedPoint,
+        target: &CachedPoint,
+        p: Precision,
+    ) -> Result<Float> {
+        for scale in self.scales.values() {
+            exact_constant(scale.as_view())?;
+            let scale = p.eval(scale, &Default::default())?;
+            if !p.finite(&scale) || scale.im != p.real(0) || scale.re <= p.real(0) {
+                return Err(Error::InvalidInput(
+                    "coordinate scale must be finite and positive real".into(),
+                ));
+            }
+        }
+        // Cancel common offsets exactly before MPFR evaluation.
+        self.distance(&self.differences(source, target)?, p)
+    }
+
     fn distance(&self, differences: &[Atom], p: Precision) -> Result<Float> {
         let mut sum = p.real(0);
         for difference in differences {
@@ -730,20 +769,18 @@ impl<F: Fn(&CachedBoundary, &CachedPoint) -> Result<bool>> TransportCost for Sca
         if !(self.admissible)(source, target)? {
             return Ok(None);
         }
-        for scale in self.scales.values() {
-            exact_constant(scale.as_view())?;
-            let scale = p.eval(scale, &Default::default())?;
-            if !p.finite(&scale) || scale.im != p.real(0) || scale.re <= p.real(0) {
-                return Err(Error::InvalidInput(
-                    "coordinate scale must be finite and positive real".into(),
-                ));
-            }
-        }
-        // Subtract exact/rounded-rational coordinates before evaluation, so
-        // large common offsets do not erase a small physical separation.
-        Ok(Some(
-            self.distance(&self.differences(&source.point, target)?, p)?,
-        ))
+        Ok(Some(self.checked_distance(&source.point, target, p)?))
+    }
+
+    fn lower_bound(
+        &self,
+        source: &CachedBoundary,
+        target: &CachedPoint,
+        p: Precision,
+    ) -> Result<Option<Float>> {
+        // Exactly the rounded cost that `cost` returns for an admissible route;
+        // no binary64 screening or approximate nearest-neighbour cutoff.
+        Ok(Some(self.checked_distance(&source.point, target, p)?))
     }
 
     fn compare_tied_costs(
@@ -904,8 +941,21 @@ impl RustFlowCache {
                 "target coordinates lack the required precision".into(),
             ));
         }
-        let mut best: Option<BoundaryMatch<'a>> = None;
-        for boundary in &self.entries {
+        if p.bits < 2 {
+            return Err(Error::InvalidInput(
+                "invalid transport cost precision".into(),
+            ));
+        }
+        let validate_cost = |cost: &Float, name: &str| -> Result<()> {
+            if !cost.is_finite() || cost < &p.real(0) {
+                return Err(Error::InvalidInput(format!(
+                    "transport {name} must be finite and nonnegative"
+                )));
+            }
+            Ok(())
+        };
+        let mut candidates = Vec::new();
+        for (index, boundary) in self.entries.iter().enumerate() {
             if boundary.identity.key() != query.identity.key()
                 || !boundary.range.covers(query.range)
                 || boundary.accuracy.verified_digits < query.verified_digits
@@ -914,20 +964,48 @@ impl RustFlowCache {
             {
                 continue;
             }
+            let lower_bound = policy.lower_bound(boundary, query.target, p)?;
+            if let Some(bound) = &lower_bound {
+                validate_cost(bound, "cost lower bound")?;
+            }
+            candidates.push((index, boundary, lower_bound));
+        }
+        // Unknown bounds sort first and are all evaluated. Known bounds sort
+        // stably; original insertion order resolves otherwise identical ties.
+        candidates.sort_by(|left, right| {
+            match (&left.2, &right.2) {
+                (None, None) => std::cmp::Ordering::Equal,
+                (None, Some(_)) => std::cmp::Ordering::Less,
+                (Some(_), None) => std::cmp::Ordering::Greater,
+                (Some(left), Some(right)) => left.partial_cmp(right).unwrap(),
+            }
+            .then_with(|| left.0.cmp(&right.0))
+        });
+        let mut best: Option<(usize, BoundaryMatch<'a>)> = None;
+        for (index, boundary, lower_bound) in candidates {
+            if let (Some(bound), Some((_, old))) = (&lower_bound, &best)
+                && bound > &old.cost
+            {
+                break;
+            }
             if let Some(cost) = policy.cost(boundary, query.target, p)? {
-                if !cost.is_finite() || cost < p.real(0) {
+                validate_cost(&cost, "cost")?;
+                if lower_bound.as_ref().is_some_and(|bound| bound > &cost) {
                     return Err(Error::InvalidInput(
-                        "transport cost must be finite and nonnegative".into(),
+                        "transport cost is smaller than its advertised lower bound".into(),
                     ));
                 }
-                let replace = if let Some(old) = &best {
+                let replace = if let Some((old_index, old)) = &best {
                     if cost == old.cost {
                         let comparison =
                             policy.compare_tied_costs(boundary, old.boundary, query.target, p)?;
                         comparison.is_lt()
                             || (comparison.is_eq()
-                                && boundary.accuracy.verified_digits
-                                    > old.boundary.accuracy.verified_digits)
+                                && (boundary.accuracy.verified_digits
+                                    > old.boundary.accuracy.verified_digits
+                                    || (boundary.accuracy.verified_digits
+                                        == old.boundary.accuracy.verified_digits
+                                        && index < *old_index)))
                     } else {
                         cost < old.cost
                     }
@@ -935,11 +1013,11 @@ impl RustFlowCache {
                     true
                 };
                 if replace {
-                    best = Some(BoundaryMatch { boundary, cost });
+                    best = Some((index, BoundaryMatch { boundary, cost }));
                 }
             }
         }
-        Ok(best)
+        Ok(best.map(|(_, selected)| selected))
     }
 
     /// Retain accepted Taylor endpoints in physical coordinates. The callback

@@ -84,9 +84,10 @@ explicit complex polygonal contours and retains logarithm monodromy. Both use
 the shared AMF Taylor engine and its tail/defect checks. Matrix epsilon poles
 require a basis change; common Laurent leading powers of the solution are allowed.
 
-Square-root branch-aware transport, automatic threshold prescriptions in the
-physical orchestrator, general partial singular boundaries, and the larger
-DiffExp examples remain in the [parity plan](parity-plan.md). The live
+Standalone [square-root branch transport](algebraic.md) now accepts explicit
+regular contours and initial sheets. Automatic threshold prescriptions and
+algebraic cache reuse remain in the [parity plan](parity-plan.md), along with
+the larger five-point and full-amplitude DiffExp examples. The live
 polylogarithm oracle is checked through independent boundary construction, not
 by using its target value as a boundary.
 
@@ -115,3 +116,29 @@ Conditions are interpreted over formal epsilon, using Symbolica polynomial gcd
 and root finding for their common physical zero sets. The binary cache schema
 was incremented to retain these conditions; incompatible older snapshots are
 rejected explicitly.
+
+## Reducing transported masters to requested integrals
+
+`PreparedPhysicalFamily::required_master_range(point, target_range)` determines
+the epsilon orders needed by the retained exact target reductions. For example,
+a coefficient proportional to `1/epsilon²` requires masters through epsilon
+power two to obtain a target's finite coefficient. The common master leading
+power is conservatively `-2*loops`; omitted pole coefficients are not assumed zero.
+This bound requires epsilon-independent propagator coefficients and kinematics;
+families with epsilon-dependent normalizations need a separate pole analysis and
+are rejected by these projection methods.
+
+Transport that master range, then call `project_targets(boundary, target_range,
+digits)`. Coefficients are specialized exactly at the boundary coordinates and
+expanded with Symbolica. Products use native Symbolica series with fixed MPFR
+coefficient arithmetic. Unknown higher master orders produce an error. Target
+maps remain on the prepared family, so requests sharing a master basis can reuse
+the same cached values with different target reductions.
+
+Projection propagates inherited master uncertainties through the exact weights
+and repeats arithmetic with additional working bits. It does not promote input
+accuracy or claim a new epsilon fit. Reserve extra verified digits when seeding
+and transporting masters: cancellations or large reduction coefficients can
+otherwise exhaust the target accuracy. An `Accuracy` error asks for more accurate
+master data. The native bubble regression transports at 28 digits and projects
+the scalar and squared-propagator targets at 20 digits.

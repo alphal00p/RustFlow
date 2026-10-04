@@ -335,6 +335,14 @@ impl CompiledEpsilonSystem {
 }
 
 impl SeriesSystem for CompiledEpsilonSystem {
+    type State = ();
+    type Chart = ();
+    fn initial_state(&self, _: &BoundaryData) -> Result<()> {
+        Ok(())
+    }
+    fn accepted_state(&self, _: &(), _: &C, _: &Float) -> Result<Option<()>> {
+        Ok(Some(()))
+    }
     fn precision(&self) -> Precision {
         self.rows.p
     }
@@ -345,7 +353,13 @@ impl SeriesSystem for CompiledEpsilonSystem {
         self.poles()
     }
 
-    fn taylor(&self, center: &C, values: &[C], order: usize) -> Result<Vec<Vec<C>>> {
+    fn local_chart(
+        &self,
+        center: &C,
+        values: &[C],
+        order: usize,
+        _: &(),
+    ) -> Result<(Vec<Vec<C>>, ())> {
         let p = self.rows.p;
         let n = self.rows.dimension();
         if values.len() != self.dimension() {
@@ -422,10 +436,10 @@ impl SeriesSystem for CompiledEpsilonSystem {
                 }
             }
         }
-        Ok(y)
+        Ok((y, ()))
     }
 
-    fn rhs(&self, point: &C, values: &[C]) -> Result<Vec<C>> {
+    fn rhs(&self, point: &C, values: &[C], _: &()) -> Result<Vec<C>> {
         let p = self.rows.p;
         let n = self.rows.dimension();
         let mut rhs = vec![p.zero(); self.dimension()];
