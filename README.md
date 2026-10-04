@@ -4,9 +4,11 @@ A native Rust implementation of auxiliary mass flow, using Symbolica for
 exact algebra and MPFR arithmetic and the sibling RustRed checkout for IBP
 reduction. Rust 2024; independent MIT-licensed repository.
 
-**Work in progress:** the full AMFlow 2.0 acceptance gate has not passed. See
-[coverage and limits](docs/coverage.md). Successful tadpole, bubble, and vacuum
-calculations do not establish support for arbitrary multiloop families.
+The original paper's four two-loop targets pass the required calculation through
+epsilon power zero: 20-digit stability under independent sample/precision/order
+refinement and agreement with upstream data at its recorded precision. See the
+[acceptance report](reports/validation/2026-10-04-paper-two-loop-acceptance.json)
+and [implemented coverage and limits](docs/coverage.md).
 An executable [performance comparison](docs/performance.md) measures the Rust
 and original AMFlow 2.0 differential-equation solvers on identical inputs.
 
@@ -30,10 +32,15 @@ nix develop
 # Configure SYMBOLICA_LICENSE in your own shell; never commit a license key.
 cargo test --release
 cargo run --release --example massless_bubble
-cargo run --release --example two_loop_acceptance
+cargo run --release --example two_loop_acceptance -- \
+  --symmetry-rules --parametric-rules --depth 3 --case-batch 32 \
+  --max-targets 262144 --max-exact-frontier 512 \
+  --max-backward-frontier 4096 --workers 4
 ```
 
-The last command runs the required four-target calculation and returns an error
+The last command runs the required four-target calculation with the validated
+reduction settings; the default backend budget is intended for smaller families.
+It returns an error
 if any stage is unsupported or a limit is exhausted. It does not substitute
 stored reference values. The fixtures retain upstream precision metadata.
 

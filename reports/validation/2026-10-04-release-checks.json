@@ -1,0 +1,52 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-04T13:24:58.026904+00:00",
+  "source_commit": "aa4e27df7df51085bf8a340e1c24b430efab4c28",
+  "scope": "Final library checks, including the FT numerical memo accuracy fix and three new FT regression/coverage tests.",
+  "checks": [
+    {
+      "command": "cargo test --locked --release -j2",
+      "exit_code": 0,
+      "totals": {
+        "passed": 124,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered_out": 0
+      },
+      "test_groups": 15,
+      "includes_doctests": true
+    },
+    {
+      "command": "cargo clippy --locked -p symbolica-amflow --all-targets -j2 -- -D warnings",
+      "exit_code": 0
+    },
+    {
+      "command": "cargo fmt -p symbolica-amflow -- --check",
+      "exit_code": 0
+    }
+  ],
+  "logs": {
+    "tests": {
+      "path": "target/final-ft-cache-tests.log",
+      "bytes": 15097,
+      "sha256": "c0d76acb23c6232ceac08e89536dd987d6a3eeec23675c64cfc01df3233157a0"
+    },
+    "clippy": {
+      "path": "target/final-ft-cache-clippy.log",
+      "bytes": 2719,
+      "sha256": "9b078b3a264ed5b395e4d112c0e306ef579d3baf5af33f600f688cdf1d9af453"
+    },
+    "fmt": {
+      "path": "target/final-ft-cache-fmt.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "dependency_notes": [
+    "The sibling RustRed checkout retains its pre-existing changes. Eight existing dependency warnings were emitted.",
+    "Symbolica main is pinned to 75f8350094b90254ee71dc2a391fde0d14b0204a."
+  ],
+  "acceptance_note": "The separately archived AMF executable used for full paper acceptance was built at 15471e4bbbc7736f1cce62bfb8ff1bad50821dd1. The subsequent production change is confined to FT numerical memoization; the AMF acceptance implementation is unchanged.",
+  "acceptance_report": "reports/validation/2026-10-04-paper-two-loop-acceptance.json"
+}

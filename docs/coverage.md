@@ -1,22 +1,35 @@
 # Implementation coverage
 
-This is an implementation status document, not a claim that the requested port
-is complete. The original paper's four two-loop targets at s=30, t=-10/3, m²=1
-remain the mandatory completion gate.
+The original paper's mandatory numerical acceptance gate passes: all four
+two-loop targets at s=30, t=-10/3, m²=1 have automatically generated Laurent
+coefficients from ε⁻⁴ through ε⁰ with 20 verified decimal digits and the physical
++i0 prescription. Each coefficient agrees with the pinned upstream reference
+within its recorded component precision. The 27-integral differential system
+closes, with seven leading boundary coefficients generated recursively; closure
+establishes a spanning basis, without certifying independence.
 
-All four targets now complete automatic evaluation at the exact sample
-ε = 1/2700 with the physical +i0 prescription. Their 27-integral differential
-system closes and seven leading boundary coefficients are generated recursively.
-Each target passes the complex-norm 20-digit stability check when working
-precision increases from 60 to 80 digits and outer series order from 80 to 112.
-The first value also agrees with the earlier 38-integral-basis calculation to
-better than 70 relative digits in the printed values; this comparison does not
-certify extra accuracy or basis independence. The fresh run, with no preloaded
-reduction caches, completed in 368.906 seconds. Full values, observed precision
-changes, timing, and provenance are recorded in the
+The final fit uses 31 exact samples ε=j/6200 and is checked against 27 samples
+ε=j/2700. Working precision increases from 60 to 80 decimal digits and outer
+series order from 80 to 96. All four results report one refinement and 20 verified
+digits. Full coefficients, observed fit changes, exact grids, reference precision,
+and source, binary, and log hashes are preserved in the
+[two-loop acceptance report](../reports/validation/2026-10-04-paper-two-loop-acceptance.json).
+The observed changes are consistency estimates, not rigorous error bounds or a
+claim of accuracy beyond 20 digits.
+
+The acceptance run exited successfully after 3553.007 seconds. It started with
+exact preparation cached from the earlier one-sample run and used four additional
+workers to prepare exact systems for the second grid. All numerical boundary
+construction, continuation, and fitting ran in the main four-worker evaluation;
+the helper supplied no numerical values. This timing includes a warm cache and
+concurrent preparation and should not be interpreted as a cold four-worker
+benchmark.
+
+The earlier fresh evaluation of all four targets at ε=1/2700 completed in
+368.906 seconds and passed a separate 60→80-digit, order 80→112 stability check.
+Its first target also agrees with the earlier 38-integral-basis calculation.
+Full sample values and the cross-basis comparison remain in the
 [four-target sample report](../reports/validation/2026-10-04-paper-four-samples.json).
-The four-target Laurent reconstruction and upstream coefficient comparison
-remain pending; a single epsilon sample does not satisfy that completion gate.
 
 | Upstream operation | Rust implementation | Present limitation |
 |---|---|---|
@@ -37,8 +50,8 @@ remain pending; a single epsilon sample does not satisfy that completion gate.
 | Epsilon reconstruction | `epsilon`, `engine` | Conservative -2L pole bound; independent sample/precision refinement |
 | Cache restart | `cache` | Reduction, native RHS-search checkpoints, and prepared AMF/FT systems; numerical memo is in-memory |
 
-Missing for full parity: the full published four-target validation and
-broader multiloop/complex-kinematics coverage. Pole-disk contour planning is
+Broader multiloop and complex-kinematics coverage remains limited; the 316-integral
+three-loop AMFlow 2.0 example is a later performance benchmark. Pole-disk contour planning is
 implemented and tested on both logarithm branches. Exact complex-mass tadpoles
 and a massless bubble with the exact external invariant `s = -2 + i` are tested
 against analytic gamma formulas. The bubble exercises `KinematicPoint`
@@ -70,6 +83,19 @@ used as solver boundary data.
 
 The test suite requires no Mathematica installation. Upstream regeneration is
 optional and would require Mathematica and an upstream-supported reducer.
+
+FT checks include public `solve_integrals` Laurent reconstruction for a Euclidean
+massless bubble, analytic gamma-function comparison, and a fresh evaluator
+restarting from the symbolic system cache with reducer calls disabled. Changing
+cache-relevant options requires a new preparation. Numerical memo keys include
+requested accuracy: tightening the tolerance at unchanged working precision and
+series order triggers fresh continuation, while an identical request reuses the
+value.
+
+The final [release-check report](../reports/validation/2026-10-04-release-checks.json)
+records 124 passing release tests, including doctests, strict all-target Clippy,
+and formatting checks. It distinguishes the archived AMF acceptance source from
+the later FT memoization fix; that fix leaves the AMF implementation unchanged.
 
 ## Runtime limits and exceptional samples
 
@@ -198,8 +224,8 @@ terminal set. Both strategies perform exact algebra and use the same cycle
 checks. The three paper examples expose `--max-backward-frontier N`.
 Nondefault values distinguish complete reduction/system cache identities;
 native partial checkpoints remain reusable because the saved equations and
-integral order are unchanged. These controls establish no numerical acceptance
-result or general speedup.
+integral order are unchanged. Performance depends on the particular reduction
+graph and cancellation pattern.
 Small-basis substitution shares dependencies across a batch of targets, and
 completed frontier expansions are reused when producing the final table.
 `DifferentialClosure` events report basis size and remaining derivative targets.
@@ -262,9 +288,8 @@ refinement remains required to establish accuracy.
 
 Factorized boundaries collect exact integral products before applying the term
 budget. A regression from the paper's six-line boundary family at half-order
-eight reduces over 10000 monomial contributions to 75 distinct products.
-This removes a demonstrated boundary-budget failure; it does not establish the
-full four-target numerical acceptance result.
+eight reduces over 10000 monomial contributions to 75 distinct products,
+removing a demonstrated boundary-budget failure without discarding terms.
 
 `RecursiveBoundary::evaluate_many(family, targets, epsilon, precision)` evaluates
 related boundary powers together. Region construction first collects the factors

@@ -1,8 +1,16 @@
 # Paper-example reduction search audit
 
-The required four-target, 20-digit numerical gate is still incomplete. The
-historical full run stopped during IBP reduction, before numerical propagation.
-This document separates that search bottleneck from the boundary-series work.
+The required four-target, 20-digit numerical gate has passed. All four targets
+were evaluated through epsilon power zero using 27- and 31-point grids at
+60 and 80 working digits, with automatically generated boundaries and agreement
+with upstream data at its recorded precision. The
+[full acceptance report](../reports/validation/2026-10-04-paper-two-loop-acceptance.json)
+preserves the coefficients and provenance. The 27-integral system needs seven
+leading boundary coefficients. Its basis is not claimed to be minimal.
+
+The following audit preserves the earlier reduction bottlenecks and the
+optimizations that resolved them. Historical timeout results describe their
+individual runs, not the status of the completed acceptance calculation.
 
 ## First paper target at one epsilon sample
 
@@ -34,7 +42,7 @@ preserves the full printed value, input and executable hashes, precision
 settings, event times and raw-log provenance. No upstream-reference comparison
 or Laurent reconstruction was performed by this run. The required four-target
 evaluation through `epsilon^0`, reference comparisons and independent sample
-refinement remain incomplete.
+refinement were still incomplete at that milestone.
 
 The family-rule reuse follow-up at commit
 `15471e4bbbc7736f1cce62bfb8ff1bad50821dd1` started from the identical frozen
@@ -47,7 +55,8 @@ reduction were available to the 34-derivative request, while residual leaves
 were searched again. This was one warm run on CPU 26 versus the baseline's CPU
 25, with different background host work; no cold timing or broad speedup ratio
 is claimed. [Follow-up provenance and event intervals](../reports/validation/2026-10-04-paper-family-bank-reuse.json)
-retain those differences. The four-target Laurent acceptance remains incomplete.
+retain those differences. The four-target Laurent acceptance was still pending
+at that milestone.
 
 ## Historical checkpoint census
 
@@ -290,7 +299,8 @@ fixed `rays`; `applied` remains the total count of formula applications.
 Existing v5 checkpoints remain mathematically compatible because their saved
 rules and nonzero conditions use the identical family and integral ordering.
 A performance comparison of the changed strategy must start in a fresh cache
-directory. The four-target numerical acceptance gate remains incomplete.
+directory. The four-target numerical acceptance gate was still pending at this
+stage of the audit.
 
 
 ## Fresh production pilot with generic four-line domains
@@ -433,4 +443,4 @@ Local provenance, events, census and profile metadata remain under
 region coefficients individually; it is separate from the successful first
 sample above, whose closed-system planner selected nine leading boundary
 coefficients. Its timeout does not negate that sample result or establish the
-remaining four-target Laurent acceptance.
+the later four-target Laurent acceptance.

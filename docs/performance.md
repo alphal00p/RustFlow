@@ -3,8 +3,9 @@
 A same-host comparison against the original, unmodified C++ differential-equation
 solver is available. It measures regular continuation and singular matching with
 supplied boundaries. **There is no measured full automatic-workflow comparison yet.** No
-Wolfram runtime is available in this environment, and the mandatory four-target
-two-loop acceptance calculation remains incomplete.
+Wolfram runtime is available in this environment. The Rust four-target two-loop
+acceptance has passed; its numerical validation and execution conditions are
+recorded separately below.
 
 ## Measured baseline
 
@@ -206,6 +207,18 @@ motivates an opt-in threshold increase for this snapshot; wider backward maps
 can cost more memory on other graphs.
 
 ## Full automatic workflow
+
+The Rust calculation of all four paper targets through epsilon power zero passed
+20-digit independent-grid stability and the upstream recorded-precision checks.
+It used 27 samples at 60 working decimal digits/order 80, then 31 samples at
+80 digits/order 96. The recorded elapsed time was 3553.007 seconds. This run
+started with the exact caches from the earlier epsilon=1/2700 calculation, and
+four additional processes prepared exact validation-grid systems alongside the
+four numerical workers. It is therefore an assisted warm run, not a cold
+four-worker benchmark. No numerical answers or reference coefficients entered
+those caches. The [acceptance report](../reports/validation/2026-10-04-paper-two-loop-acceptance.json)
+preserves the cache manifest, assistance details, all coefficients, observed
+refinement errors, and executable/source hashes.
 
 [`scripts/benchmark_full.wl`](../scripts/benchmark_full.wl) is an optional harness
 for a configured Wolfram installation and upstream-supported IBP reducer. It

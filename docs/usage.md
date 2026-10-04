@@ -111,6 +111,12 @@ The default reduction budget is intended for smaller families. The
 records the exact executable, input, precision changes, and timings. Keep the
 same reduction settings and omit `--sample 1/2700` to run the complete Laurent
 acceptance calculation. `--workers N` bounds simultaneous epsilon evaluations.
+The [complete acceptance report](../reports/validation/2026-10-04-paper-two-loop-acceptance.json)
+records the successful 27- and 31-point fits at 60 and 80 working digits, with
+outer orders 80 and 96. All four Laurent expansions pass 20-digit stability and
+the upstream recorded-precision comparison. Its elapsed time includes a warm
+initial cache and additional exact-preparation workers; it is not a cold timing
+for the command above.
 
 The `two_loop_acceptance` example accepts `--cancel-file PATH`. Creating that
 file requests cooperative cancellation and saves completed native search work.
