@@ -178,6 +178,12 @@ impl ReductionBackend for RustRedBackend {
             self.max_sector_batch,
             self.parametric_rules
         );
+        // Runtime bridge capabilities are generated at build time and can
+        // change even when the dependency source tree does not.
+        identity.push_str(&format!(
+            ":bridge-arities={:?}",
+            rustred::compiled_runtime_arities()
+        ));
         if self.symmetry_rules {
             identity.push_str(":symmetry-v1");
         }
@@ -292,7 +298,8 @@ impl RustRedBackend {
                 Error::Limit(e.to_string())
             }
             rustred::solver::SolverError::InvalidInput(ref message)
-                if message.starts_with("the runtime bridge supports") =>
+                if message.starts_with("the runtime bridge supports")
+                    || message.starts_with("runtime bridge was compiled for arities") =>
             {
                 Error::Unsupported(e.to_string())
             }

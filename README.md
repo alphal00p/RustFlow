@@ -33,7 +33,10 @@ reconstruction feature is disabled. The high-level multiloop solver defaults to
 exact rational epsilon specialization before IBP elimination;
 `sampled_reduction: false` selects fully symbolic epsilon reduction. Upstream
 RustRed updates are checked between validation milestones; local work is
-preserved, and changes to its 12-slot dispatcher remain outside this project.
+preserved. Both reduction adapters now use RustRed’s compiled arity registry
+(default 1–16); the factorized path delegates to its native dispatch macro.
+`RUSTRED_RUNTIME_ARITIES` configures that registry at build time. Search and
+representation limits still apply.
 Basis refinement also retains symbolic epsilon, taking precedence over sampled
 reduction so that dimension-dependent denominator factors can be identified.
 

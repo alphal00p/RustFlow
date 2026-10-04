@@ -1,0 +1,72 @@
+{
+  "schema_version": 1,
+  "status": "focused_arity_checks_passed",
+  "recorded_utc": "2026-10-04T23:12:52.061557+00:00",
+  "base_commit": "404a5a92a3f4ca680e5508c06d045db7f8f193fb",
+  "rustred_head": "ad51f20639d50d7f3f0eecae80e8fe1bf99b740f",
+  "upstream_arity_fix": "33fd03ec5ee655d1aec989dad3c37f93c0539478",
+  "scope": [
+    "Delegate native factorized dispatch to RustRed shared compiled registry; default1..16",
+    "Include compiled arities and upstream build script in backend compatibility fingerprint",
+    "Checked host-word sector-enumeration shift",
+    "Exact15-slot five-loop tadpole-product Euler IBP, both backends, symbolic epsilon and epsilon1/13",
+    "Typed Unsupported for the first uncompiled arity through both backends"
+  ],
+  "checks": {
+    "focused": {
+      "command": "taskset -c28 target/release/deps/native_arity-c17bb5b07acd3d1e --nocapture --test-threads=1",
+      "passed": 2,
+      "failed": 0,
+      "wall_test_seconds": 0.21,
+      "binary_sha256": "dbf728f139aa418d8fb0478d0c2fb55e20d5ea8a07cefa6ee63db6e8dc9261b7",
+      "log": "target/prescribed-release/native-arity-milestone.log",
+      "log_sha256": "f553a27de08d0a13fc7100405943881520556f6365954aeec746f95ffa14bcb0"
+    },
+    "format": {
+      "command": "cargo fmt -p symbolica-amflow --check",
+      "exit_code": 0
+    }
+  },
+  "source_sha256": {
+    "src/native.rs": "c2c1db4712b33e394976ff0c03698a0e3f89df5c30e91643fe595f0fb230136d",
+    "src/reduction.rs": "0c407072018cccac3fcfd37069606045f11b31ec05e358fbe6eb3eb1dcadc1c1",
+    "build.rs": "050388506b8929f736ac7ea3bcb84124258359c8bc79403686bb387e73dd76c6",
+    "tests/native_arity.rs": "796675455f35cf89798aa8485b533bbf88c55daed69a8c5bb2f472f674ed8898"
+  },
+  "libraries": [
+    {
+      "source": "target/release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "archive": "target/prescribed-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "bytes": 425988556,
+      "sha256": "c4f9d6788e87798037a23ca0023eaa7dd668ffd8efbf71c28b20777a3768f885"
+    },
+    {
+      "source": "target/release/deps/libsymbolica_amflow-d39e426db931b928.rmeta",
+      "archive": "target/prescribed-release/deps/libsymbolica_amflow-d39e426db931b928.rmeta",
+      "bytes": 3159158,
+      "sha256": "52ca7c0754a3d96bcac7158e6b057e92af030c3d286ba66d7b3a381d7ac363c4"
+    },
+    {
+      "source": "target/release/deps/librustred-d70ca661149f6db6.rlib",
+      "archive": "target/prescribed-release/deps/librustred-d70ca661149f6db6.rlib",
+      "bytes": 406493312,
+      "sha256": "3484fc124051aac01902b4fe018f00bd89a0c2af13b84f31666178f3f292a0a0"
+    },
+    {
+      "source": "target/release/deps/librustred-d70ca661149f6db6.rmeta",
+      "archive": "target/prescribed-release/deps/librustred-d70ca661149f6db6.rmeta",
+      "bytes": 36752833,
+      "sha256": "453484445bee428588feb2efcf54f85b8d1c94fac7af9b6a3b83cfe8c53aac08"
+    }
+  ],
+  "dependency_provenance": {
+    "release_snapshot_sha256": "99a72bc0fb358b1e4a896b6a9e35eca51c578257894b547d7767f4e988bf9181",
+    "concurrent_changes": "Two RustRed cfg(test) source files changed during compilation; consumed runtime sources remained unchanged. Existing worktree preserved."
+  },
+  "scope_note": "The focused executable was built from the broader development tree, which also contains pending prescribed-cache/origin-initialization work. This report does not claim that broader release gate passed: tests/core.rs sparse entire-system continuation exposed an unrelated uncommitted step-proposal regression, recorded in target/rustflow-prescribed-release-tests.log. That change is excluded from this arity milestone. Previous full release gate is reported separately in2026-10-04-rustred-bridge-release.json.",
+  "limitations": [
+    "Finite exact reduction search and integral representation limits remain",
+    "Arity registry is configurable; default16 is not a claim of unrestricted arity or practical exhaustive-sector scaling",
+    "Broad AMFlow/DiffExp and performance parity remain incomplete"
+  ]
+}

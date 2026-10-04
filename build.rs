@@ -76,6 +76,11 @@ fn main() {
         let manifest = package.join("Cargo.toml");
         println!("cargo:rerun-if-changed={}", manifest.display());
         hasher.update(&fs::read(&manifest).expect("read RustRed package manifest"));
+        let build_script = package.join("build.rs");
+        if build_script.exists() {
+            println!("cargo:rerun-if-changed={}", build_script.display());
+            hasher.update(&fs::read(&build_script).expect("read RustRed build script"));
+        }
         hash_tree(&package.join("src"), &package, &mut hasher);
     }
     println!(

@@ -149,7 +149,7 @@ Full sample values and the cross-basis comparison remain in the
 
 | Upstream operation | Rust implementation | Present limitation |
 |---|---|---|
-| Family setup, exact IBP | `family`, `reduction` | RustRed finite exact search; runtime arity 1–12 |
+| Family setup, exact IBP | `family`, `reduction` | RustRed finite exact search; compiled arity registry (default 1–16) |
 | Auxiliary differential equations | `differential_system` | Stable derivative closure required; residuals are not certified independent masters |
 | SkipReduction | `differential_system_skip_initial` | Retains redundant target directions |
 | RefineBasis | `refine` | Bounded D-factorizing swaps, reports if complete |
@@ -216,7 +216,8 @@ the later FT memoization fix; that fix leaves the AMF implementation unchanged.
 
 ## Runtime limits and exceptional samples
 
-The native runtime bridge accepts 1 through 12 scalar-product slots. Its default
+Both native adapters follow RustRed’s compiled arity registry, defaulting to
+1 through 16 scalar-product slots. Its default
 adapter search uses depth 2 and at most 4096 concrete integrals; differential
 closure uses at most 12 reduction rounds. RustRed's compact integral indices
 range from -64 through 63, including generated seed indices. Exact rational epsilon specialization

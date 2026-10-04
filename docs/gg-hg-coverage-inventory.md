@@ -73,7 +73,7 @@ gives its 9-slot topology, normalization, basis transformations and 48
 precanonical routings; the [independent full-amplitude paper](https://arxiv.org/pdf/2007.09813)
 gives planar/nonplanar 9-slot families, master lists and ancillary helicity
 amplitudes. Its basis differs from the plugin's, so indexwise matching would be
-invalid. These families fit within the unchanged 12-slot dispatch. The
+invalid. These nine-slot families fit within RustRed’s compiled arity registry. The
 [application paper](https://arxiv.org/pdf/2010.09451) supplies matrix-element
 benchmarks and describes its effective-UFO construction.
 

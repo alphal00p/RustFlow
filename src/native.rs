@@ -39,8 +39,14 @@ pub(crate) fn reduce(
     } else {
         options
     };
-    macro_rules! dispatch { ($($n:literal),*)=>{match family.family.denominator_count() { $($n=>solve::<$n>(family,original,dimension,targets,options,context,cuts),)* n=>Err(Error::Unsupported(format!("native runtime supports 1..=12 denominators; received {n}"))) }}; }
-    dispatch!(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+    rustred::dispatch_arity!(
+        family.family.denominator_count(),
+        solve(family, original, dimension, targets, options, context, cuts),
+        n => Err(Error::Unsupported(format!(
+            "native runtime was compiled for {:?} scalar-product slots; received {n}",
+            rustred::compiled_runtime_arities()
+        )))
+    )
 }
 fn cut_stage_key(key: String, cuts: Option<&str>) -> String {
     cuts.map_or_else(
@@ -232,8 +238,16 @@ fn solve<const N: usize>(
         Analyzer::try_unrestricted(&family.family)
     }
     .map_err(native_error)?;
+    let sector_count = u32::try_from(N)
+        .ok()
+        .and_then(|bits| 1usize.checked_shl(bits))
+        .ok_or_else(|| {
+            Error::Limit(format!(
+                "native sector enumeration cannot represent {N} scalar-product slots on this host"
+            ))
+        })?;
     let mut zero = Vec::new();
-    for bits in 0..(1usize << N) {
+    for bits in 0..sector_count {
         context.cancellation.check()?;
         let sector = std::array::from_fn(|i| bits & (1 << i) != 0);
         // A verified automorphism may route a target into another physical

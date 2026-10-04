@@ -6,8 +6,8 @@ original AMFlow paper's four-target 20-digit acceptance passed; see
 cut phase-space integrals, all upstream benchmark families, and measured
 performance at matched achieved accuracy. RustRed is checked for upstream updates
 at validation milestones and newer versions are integrated between builds while
-preserving local work. Changes to RustFlow's own
-12-slot dispatcher remain the user's responsibility. Broad coverage, including
+preserving local work. The upstream arity fix is consumed through RustRed’s shared dispatcher; no
+independent arity registry is maintained here. Broad coverage, including
 the complete Higgs+jet application, takes priority over general performance
 tuning; performance blockers may be addressed to make a coverage test practical.
 
@@ -93,7 +93,7 @@ and timing tests, separately from cold boundary construction.
 7. **AMFlow extensions.** Linear propagator regions/terminals and reverse-unitarity
    cut semantics; broaden normalization, boundary recursion and basis refinement
    to the supported upstream surface. Track limitations separately from the
-   user-excluded 12-slot dispatch change.
+   native backend’s search and representation limits.
 8. **Benchmark and performance gate.** Every reference records source, settings,
    input precision, normalization, path, prescription, output precision and
    runtime provenance. Numerical parity precedes timing claims. Compare cold
@@ -144,16 +144,23 @@ validation separately from integral evaluation. Exact target projection now
 checks positive epsilon orders and carries cached master uncertainty into the
 requested target coefficients.
 
-## Scope of the 12-slot limit
+## Runtime arity and independent limits
 
-`src/native.rs` still dispatches `solve::<1>` through `solve::<12>` for the
-factorized backend; this user-owned limit is unchanged here. RustRed's newer
-`33fd03ec` API exposes a configurable runtime registry, defaulting to 1–16,
-and checked const-generic bridge entrypoints. Its optional sparse backend can
-use those compiled arities. The generic solver and vector-key rule exports have
-no intrinsic 12-slot ceiling. Slots count physical propagators and irreducible
-numerators. See RustRed's `compiled_runtime_arities()` for the current bridge
-build; this is a compile-time capability, not a runtime setting.
+Both RustFlow reduction adapters now follow RustRed’s compiled registry. The
+factorized path delegates to `rustred::dispatch_arity!`, retaining its existing
+native solver and every search option. The sparse path calls the checked runtime
+bridge. This consumes RustRed’s upstream `33fd03ec` fix and removes the former
+independent 12-slot dispatch mismatch.
+
+The registry defaults to 1–16 slots. `rustred::compiled_runtime_arities()` reports
+the actual build. Set `RUSTRED_RUNTIME_ARITIES` before building to select another
+finite registry; it is not a runtime option. Cache compatibility includes the
+build script and actual compiled registry. Unsupported entries return a typed
+capability error. Native sector enumeration is still exponential in slot count;
+indices that cannot fit its host-word enumeration return a typed limit error.
+Neither this dispatcher nor the generic solver promises unbounded practical
+reductions. Slots include propagators and irreducible numerators; exported
+vector-key rules do not inherit the old 12-slot restriction.
 
 Independent bounds remain: compact native powers are -64 through 63, legacy
 packed ordering has a 34-coordinate ceiling, and artifact loading has separate
