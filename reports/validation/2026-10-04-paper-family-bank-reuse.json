@@ -1,0 +1,204 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-04",
+  "experiment": "Production family-wide raw IBP rule reuse on the previously completed first-target epsilon sample",
+  "baseline_report": "reports/validation/2026-10-04-paper-first-sample.json",
+  "baseline_report_sha256": "6e911521846627c51721e638d0f001566ff9795fda76810fbad51648c2346067",
+  "baseline_source_commit": "49411f9221f6c3a7fb97e3ae25efd7418ba24280",
+  "source_commit": "15471e4bbbc7736f1cce62bfb8ff1bad50821dd1",
+  "implementation_commit": "992d220b39a21ee3be0ded86d699f4dbf45d312c",
+  "executable": "/common/dev/amflow/target/validated-family-bank/paper_subsector",
+  "executable_sha256": "bbafd534e474e0bd8ad54ac4abe8a2c9836e8eaf7b848f3a5d0a19c56928af7f",
+  "input": {
+    "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -3,
+      0
+    ],
+    "epsilon": "1/2700",
+    "kinematics": {
+      "s": "30",
+      "t": "-10/3",
+      "m_squared": "1"
+    },
+    "frozen_checkpoint": "/common/dev/amflow/target/structural-three-line-paper-pilot/profile-checkpoint.bin",
+    "checkpoint_sha256": "11b7c272f2b5f7ebfaa8d395cbd0975dd2bb5e8fbcea18183ba9a4cadcc02f67",
+    "checkpoint_bytes": 91095321,
+    "checkpoint_counts": {
+      "rules": 78669,
+      "visited": 78707,
+      "pending": 6420
+    },
+    "initial_cache_contents": "Exactly one copied native target checkpoint; no complete reduction/system cache or family bank was seeded. The original frozen source remains immutable; the working copy is subsequently updated by native checkpoint writes."
+  },
+  "configuration": {
+    "arguments": [
+      "1,1,1,1,1,1,1,-3,0",
+      "--parametric-rules",
+      "--depth",
+      "3",
+      "--max-targets",
+      "131072",
+      "--max-exact-frontier",
+      "1024",
+      "--max-backward-frontier",
+      "1024"
+    ],
+    "environment": {
+      "RAYON_NUM_THREADS": "1"
+    },
+    "max_depth": 3,
+    "max_targets": 131072,
+    "max_sector_batch": 32,
+    "max_exact_frontier": 1024,
+    "max_backward_frontier": 1024,
+    "parametric_rules": true,
+    "symmetry_rules": false,
+    "working_decimal_digits": [
+      60,
+      80
+    ],
+    "outer_series_orders": [
+      80,
+      112
+    ],
+    "cpu": 26,
+    "baseline_cpu": 25,
+    "timeout_seconds": 900,
+    "baseline_timeout_seconds": 1800,
+    "other_settings_match_baseline": true
+  },
+  "result": {
+    "status": "complete",
+    "exit_code": 0,
+    "precision_order_stability_passed": true,
+    "requested_stability_digits": 20,
+    "stability_metric": "Precision::close: norm(first-second) <= 10^-20 * max(1,norm(first)), evaluated at refined precision. This is a complex norm-based check, not separate20-digit certification of each component.",
+    "printed_value": "(292573076428.537034245094700665029177388773721132064496950459330731420424671508800085+292879261.323751323201373674893948672659100894795149707838453345341528825708929551704i)",
+    "identical_to_baseline_at_full_printed_precision": true,
+    "printed_value_difference": "0",
+    "difference_note": "Identical finite printed values do not establish additional digits beyond the independently checked precision/order stability.",
+    "closed_basis_dimension": 38,
+    "block_sizes": [
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      3,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      3
+    ],
+    "top_boundary_coefficients": 9,
+    "top_max_half_order": 0,
+    "prepared_system_events": 14,
+    "boundary_plan_events": 28,
+    "upstream_reference_comparison_performed": false,
+    "laurent_acceptance": false
+  },
+  "timing": {
+    "started_utc": "2026-10-04T12:13:09.313605+00:00",
+    "finished_utc": "2026-10-04T12:15:52.723309+00:00",
+    "followup": {
+      "initial_reduction_milestone_seconds": 30.45014385925606,
+      "derivative_closure_event_seconds": 71.4550447310321,
+      "initial_to_closed_basis_seconds": 41.004900871776044,
+      "prepared_event_seconds": 71.65620227809995,
+      "prepared_to_final_value_seconds": 91.11202780809253,
+      "total_wall_seconds": 162.80700398096815
+    },
+    "baseline": {
+      "initial_reduction_milestone_seconds": 28.70669616619125,
+      "derivative_closure_event_seconds": 707.6249052649364,
+      "initial_to_closed_basis_seconds": 678.9182090987451,
+      "prepared_event_seconds": 707.8202528650872,
+      "prepared_to_final_value_seconds": 91.89413208002225,
+      "total_wall_seconds": 799.8688783203252
+    },
+    "methodology": "One warm continuation per version, same frozen initial work and numerical/search settings. Source changed to reusable family equations, extra checkpoint protection and substitution-plan diagnostics. CPU26 replaces CPU25; background host work differs. Event intervals are not isolated kernel timers, and caps differ but neither successful run reached its cap. No cold-run or broad speedup ratio is claimed."
+  },
+  "derivative_substitution_plans": [
+    {
+      "elapsed_seconds": 33.60159718617797,
+      "line": "SubstitutionPlan { roots: 34, retained_nodes: 12, terminals: 4, minimum_lines: 7, backward: true, weighted: false }"
+    },
+    {
+      "elapsed_seconds": 33.77408889634535,
+      "line": "SubstitutionPlan { roots: 4, retained_nodes: 14, terminals: 6, minimum_lines: 7, backward: true, weighted: true }"
+    },
+    {
+      "elapsed_seconds": 33.883640385232866,
+      "line": "SubstitutionPlan { roots: 6, retained_nodes: 7, terminals: 3, minimum_lines: 7, backward: true, weighted: true }"
+    },
+    {
+      "elapsed_seconds": 33.95280027296394,
+      "line": "SubstitutionPlan { roots: 34, retained_nodes: 17657, terminals: 79, minimum_lines: 0, backward: true, weighted: false }"
+    },
+    {
+      "elapsed_seconds": 40.33827490732074,
+      "line": "SubstitutionPlan { roots: 34, retained_nodes: 124, terminals: 5, minimum_lines: 6, backward: true, weighted: false }"
+    },
+    {
+      "elapsed_seconds": 40.41336535103619,
+      "line": "SubstitutionPlan { roots: 34, retained_nodes: 17668, terminals: 77, minimum_lines: 0, backward: true, weighted: false }"
+    },
+    {
+      "elapsed_seconds": 49.57133943308145,
+      "line": "SubstitutionPlan { roots: 34, retained_nodes: 1579, terminals: 46, minimum_lines: 5, backward: true, weighted: false }"
+    },
+    {
+      "elapsed_seconds": 49.87486196914688,
+      "line": "SubstitutionPlan { roots: 19, retained_nodes: 70, terminals: 17, minimum_lines: 5, backward: true, weighted: true }"
+    },
+    {
+      "elapsed_seconds": 49.96948239719495,
+      "line": "SubstitutionPlan { roots: 17, retained_nodes: 35, terminals: 16, minimum_lines: 5, backward: true, weighted: true }"
+    },
+    {
+      "elapsed_seconds": 50.039811928290874,
+      "line": "SubstitutionPlan { roots: 34, retained_nodes: 17678, terminals: 71, minimum_lines: 0, backward: true, weighted: false }"
+    },
+    {
+      "elapsed_seconds": 58.36006463132799,
+      "line": "SubstitutionPlan { roots: 34, retained_nodes: 5309, terminals: 56, minimum_lines: 4, backward: true, weighted: false }"
+    },
+    {
+      "elapsed_seconds": 59.57371219526976,
+      "line": "SubstitutionPlan { roots: 34, retained_nodes: 17679, terminals: 66, minimum_lines: 0, backward: true, weighted: false }"
+    },
+    {
+      "elapsed_seconds": 65.52320548938587,
+      "line": "SubstitutionPlan { roots: 34, retained_nodes: 17679, terminals: 65, minimum_lines: 3, backward: true, weighted: false }"
+    }
+  ],
+  "raw_artifacts": {
+    "directory": "/common/dev/amflow/target/family-bank-paper-pilot",
+    "provenance_sha256": "5863799144591715e66fa5ac5161ff49eaa4c5dd9f89278cb97e1887cd5270fe",
+    "events_sha256": "c989051e0c39cd1435b5d5db39bf34d0fc6bac3413883577640dd82be1410382",
+    "text_log_sha256": "427b7fb1e75ec206c15dce00550831cccebc5ee229f049bde0c85178073c2bf7"
+  },
+  "interpretation": "The successful initial target publishes exact raw identities that the34-derivative request can reuse while searching all surviving residual leaves again. This run closes the same system dimension/block layout and reproduces the earlier one-sample printed value. It remains a prerequisite for four-target Laurent/reference acceptance."
+}

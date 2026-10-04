@@ -36,6 +36,19 @@ or Laurent reconstruction was performed by this run. The required four-target
 evaluation through `epsilon^0`, reference comparisons and independent sample
 refinement remain incomplete.
 
+The family-rule reuse follow-up at commit
+`15471e4bbbc7736f1cce62bfb8ff1bad50821dd1` started from the identical frozen
+checkpoint, with no preseeded family bank or complete system cache. It finished
+in 162.807 seconds and reproduced the entire printed complex value, passing
+the same precision/order stability check. Initial reduction took 30.450 seconds;
+the subsequent derivative-closure interval took 41.005 seconds, and evaluation
+after preparation took 91.112 seconds. Exact raw identities from the initial
+reduction were available to the 34-derivative request, while residual leaves
+were searched again. This was one warm run on CPU 26 versus the baseline's CPU
+25, with different background host work; no cold timing or broad speedup ratio
+is claimed. [Follow-up provenance and event intervals](../reports/validation/2026-10-04-paper-family-bank-reuse.json)
+retain those differences. The four-target Laurent acceptance remains incomplete.
+
 ## Historical checkpoint census
 
 The retained first-epsilon (`epsilon = 1/2700`) depth-three checkpoint
