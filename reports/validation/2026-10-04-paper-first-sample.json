@@ -1,0 +1,166 @@
+{
+  "schema_version": 1,
+  "recorded_date": "2026-10-04",
+  "milestone": "First required paper target evaluated at one exact epsilon sample with automatic boundaries and norm-based precision/order stability",
+  "scope": "One target at epsilon1/2700. Not a Laurent reconstruction, not all four required targets, not an upstream-reference comparison, and not cold-run timing.",
+  "source": {
+    "commit": "49411f9221f6c3a7fb97e3ae25efd7418ba24280",
+    "executable": "/common/dev/amflow/target/validated-backward-limit/paper_subsector",
+    "executable_sha256": "8fddba3b9c4d9049995fcd5f07be8ab227e73654d5ca6be06e5358e365da4dea",
+    "example": "examples/paper_subsector.rs",
+    "dependency_provenance": "Cargo.lock and repository dependency metadata at the recorded source commit; sibling RustRed was not modified for this run."
+  },
+  "input": {
+    "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -3,
+      0
+    ],
+    "family": "Original AMFlow paper two-loop family",
+    "kinematics": {
+      "s": "30",
+      "t": "-10/3",
+      "m_squared": "1"
+    },
+    "epsilon": "1/2700",
+    "dimension": "4-2*epsilon",
+    "prescription": "+i0",
+    "mass_mode": "Auto, choosing physical propagator5",
+    "initial_checkpoint": "target/structural-three-line-paper-pilot/.amflow-cache/subsectors/native-stage-6556b59434f4001a46354103944c1dd1b646c7b04e1c3d6a15b346095298147c.bin",
+    "checkpoint_sha256": "11b7c272f2b5f7ebfaa8d395cbd0975dd2bb5e8fbcea18183ba9a4cadcc02f67",
+    "checkpoint_bytes": 91095321,
+    "checkpoint_counts": {
+      "rules": 78669,
+      "visited": 78707,
+      "pending": 6420
+    },
+    "checkpoint_origin_source": "48192235c4617d08970491d3c19a500098cac7c1",
+    "warm_start_note": "Prior exact IBP search work is reused. The separate derivative reductions and recursive preparations are included in this continuation; preparation before the input checkpoint is excluded."
+  },
+  "configuration": {
+    "cpu": 25,
+    "solver_threads": 1,
+    "max_depth": 3,
+    "max_targets": 131072,
+    "max_sector_batch": 32,
+    "max_exact_frontier": 1024,
+    "max_backward_frontier": 1024,
+    "parametric_rules": true,
+    "symmetry_rules": false,
+    "sampled_reduction": true,
+    "basis_refinement": false,
+    "skip_initial_reduction": false,
+    "timeout_seconds": 1800,
+    "working_decimal_digits": [
+      60,
+      80
+    ],
+    "precision_bits_including_internal_guard": [
+      216,
+      282
+    ],
+    "outer_series_orders": [
+      80,
+      112
+    ],
+    "boundary_precision_policy": "RecursiveBoundary derives precision and increased series order from each requested Precision; exact prepared subflows are memoized while numerical values are separated by precision.",
+    "command": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=10s",
+      "1800s",
+      "taskset",
+      "-c",
+      "25",
+      "/common/dev/amflow/target/validated-backward-limit/paper_subsector",
+      "1,1,1,1,1,1,1,-3,0",
+      "--parametric-rules",
+      "--depth",
+      "3",
+      "--max-targets",
+      "131072",
+      "--max-exact-frontier",
+      "1024",
+      "--max-backward-frontier",
+      "1024"
+    ]
+  },
+  "result": {
+    "re": "292573076428.537034245094700665029177388773721132064496950459330731420424671508800085",
+    "im": "292879261.323751323201373674893948672659100894795149707838453345341528825708929551704",
+    "printed_value": "(292573076428.537034245094700665029177388773721132064496950459330731420424671508800085+292879261.323751323201373674893948672659100894795149707838453345341528825708929551704i)",
+    "exit_code": 0,
+    "requested_stability_digits": 20,
+    "criterion": "Precision::close: norm(first-second) <= 10^-20 * max(1,norm(first)), evaluated at refined precision. This is a complex norm-based check, not separate20-digit certification of each component.",
+    "observed": "The example completed its independent increased precision/order pass and printed the success marker. The first-pass value and numerical difference were not printed, so no error estimate beyond that pass/fail criterion is recorded.",
+    "upstream_reference_comparison_performed": false,
+    "laurent_coefficients_reconstructed": false
+  },
+  "observed_workflow": {
+    "closed_basis_size": 38,
+    "top_new_derivatives_after_initial_reduction": 34,
+    "top_block_sizes": [
+      2,
+      1,
+      2,
+      2,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      2,
+      2,
+      1,
+      3,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      2,
+      2,
+      1,
+      1,
+      3
+    ],
+    "top_selected_boundary_coefficients": 9,
+    "top_max_half_order": 0,
+    "prepared_system_events": 14,
+    "boundary_plan_events": 28,
+    "all_recorded_boundary_plans_max_half_order": 0,
+    "automatic_path": "Native exact derivative closure, infinity Frobenius and dimensional sectors, rank-selected region coefficients, recursively evaluated/batched factors, continuation, endpoint Frobenius and target projection, then increased precision/order evaluation."
+  },
+  "timing": {
+    "started_utc": "2026-10-04T11:48:12.917485+00:00",
+    "finished_utc": "2026-10-04T12:01:33.356079+00:00",
+    "total_wall_seconds": 799.8688783203252,
+    "initial_reduction_milestone_seconds": 28.70669616619125,
+    "derivative_closure_event_seconds": 707.6249052649364,
+    "initial_to_closed_basis_seconds": 678.9182090987451,
+    "prepared_event_seconds": 707.8202528650872,
+    "first_top_boundary_plan_event_seconds": 716.8657156699337,
+    "refined_top_boundary_plan_event_seconds": 768.6387978470884,
+    "prepared_to_first_boundary_plan_seconds": 9.045462804846466,
+    "prepared_to_final_value_seconds": 91.89413208002225,
+    "success_event_seconds": 799.7145038852468,
+    "methodology": "Progress-event receipt times and enclosing subprocess wall clock from the existing runner. Intervals are phase bounds, not separate instrumented kernel timers. Prepared-to-final-value includes both numerical passes, recursive boundaries, transport and endpoint matching. Other host work was active; no speedup comparison is inferred."
+  },
+  "raw_artifacts": {
+    "directory": "/common/dev/amflow/target/backward-paper-pilot",
+    "provenance_sha256": "2265234ef16326d6cb2dabbf457131b7873a60254c4f309bf0b4e98a5daea626",
+    "event_log": "target/backward-paper-pilot/events.jsonl",
+    "event_log_sha256": "8c406ac8a63a1b56b7b2124ce3f46bede3f05062358cda27efa00ce9507c2210",
+    "text_log": "target/backward-paper-pilot/first-target.log",
+    "text_log_sha256": "61569b44ace8c996ab5432c8a8cfe26a6643528f483218fa35d8fa595ffe5f7f"
+  },
+  "acceptance_remaining": "Evaluate all four required targets across the epsilon sample sets, reconstruct coefficients through epsilon^0, compare each coefficient against upstream data respecting recorded precision, and pass independent sample/precision/order refinement."
+}

@@ -4,6 +4,38 @@ The required four-target, 20-digit numerical gate is still incomplete. The
 historical full run stopped during IBP reduction, before numerical propagation.
 This document separates that search bottleneck from the boundary-series work.
 
+## First paper target at one epsilon sample
+
+Validated commit `49411f9221f6c3a7fb97e3ae25efd7418ba24280` completed the target
+`[1,1,1,1,1,1,1,-3,0]` at `epsilon = 1/2700`, with the paper kinematics
+`s = 30`, `t = -10/3`, `m² = 1`, automatically generated boundaries and the
+standard physical prescription. The isolated run reused a saved 78,669-rule
+checkpoint and finished in 799.869 seconds (13.33 minutes) on CPU 25 with one
+thread. This is a warm continuation, not a cold timing or a comparison with
+original AMFlow.
+
+The initial target reduction reached 38 candidates at 28.707 seconds. Another
+678.918 seconds reduced the 34 new derivatives and closed the same basis;
+the prepared system was reported at 707.820 seconds. Its boundary planner
+requested nine leading coefficients, all at half-order zero. Recursive
+preparation and both numerical passes then completed: 91.894 seconds elapsed
+from the prepared-system event to the printed final value. These are progress
+event intervals, not separately instrumented kernel timings. Across both
+passes, 28 boundary plans used only leading coefficients and 14 systems were
+prepared. The expensive diagnostic that expands every original-target region
+is therefore not representative of the boundary work selected for this basis.
+
+The example passed its complex norm-based 20-digit stability check when the
+working decimal setting increased from 60 to 80 and the outer series order
+from 80 to 112. This does not certify 20 digits independently in both complex
+components. The first-pass value and numerical difference were not printed.
+[The validation report](../reports/validation/2026-10-04-paper-first-sample.json)
+preserves the full printed value, input and executable hashes, precision
+settings, event times and raw-log provenance. No upstream-reference comparison
+or Laurent reconstruction was performed by this run. The required four-target
+evaluation through `epsilon^0`, reference comparisons and independent sample
+refinement remain incomplete.
+
 ## Historical checkpoint census
 
 The retained first-epsilon (`epsilon = 1/2700`) depth-three checkpoint
@@ -372,3 +404,20 @@ command, input/output checkpoint provenance, per-event timings, and result.
 This continuation started from more completed work than the preceding run;
 these observations are not a matched-work speed comparison or numerical
 acceptance evidence.
+
+## Backward-limit region diagnostic
+
+A separate diagnostic using validated commit
+`49411f9221f6c3a7fb97e3ae25efd7418ba24280` and both frontier limits set to 1024
+timed out after 900.521 seconds. Its 46,949-rule substitution remained
+unfinished for 810.405 seconds; a 12-second profile confirmed forward
+substitution. Observed peak memory was 4.84 GiB, and no nonzero refined region
+coefficient was reported. The last saved checkpoint predates that substitution
+and contains 35,973 rules, 36,019 visited integrals and 25,683 pending integrals
+(SHA-256 `0880944d4eb8f553b18205cd56348087f32e05c56911b972eb16aae345eeb1c2`).
+Local provenance, events, census and profile metadata remain under
+`target/backward-limit-regions-pilot`. This diagnostic attempts original-target
+region coefficients individually; it is separate from the successful first
+sample above, whose closed-system planner selected nine leading boundary
+coefficients. Its timeout does not negate that sample result or establish the
+remaining four-target Laurent acceptance.
