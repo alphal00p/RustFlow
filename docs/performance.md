@@ -188,6 +188,23 @@ record the local prototype/checkpoint hashes and the controlled rule selection.
 Those large local artifacts are not included in the report; this is diagnostic
 evidence motivating the optimization, not a portable benchmark suite.
 
+## Configurable backward substitution
+
+A frozen paper-target checkpoint retained 544 structural terminal integrals
+after certified scaleless leaves were removed. Raising `max_backward_frontier`
+above its default of 128 lets this graph use backward substitution, simplifying
+each child before substituting it into its parents. In one bounded run, backward
+expansion finished in 24.247 s (27.009 s total, 507 MiB peak RSS); forward
+substitution on the identical graph reached its 600 s limit without completing
+(600.683 s total, 1,590 MiB peak). The forward time is censored, so exact output
+agreement is unavailable and no speedup ratio is claimed. Backward substitution
+produced 125 nonzero terms, including 87 three-line terms still needing searches;
+this is not a completed reduction or numerical acceptance result. Other work
+ran on the host. [The experiment report](../reports/performance/2026-10-04-backward-frontier.json)
+records hashes, conditions, strategy settings and timing provenance. The result
+motivates an opt-in threshold increase for this snapshot; wider backward maps
+can cost more memory on other graphs.
+
 ## Full automatic workflow
 
 [`scripts/benchmark_full.wl`](../scripts/benchmark_full.wl) is an optional harness
