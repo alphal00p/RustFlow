@@ -5,11 +5,28 @@ use symbolica_amflow::*;
 
 fn main() -> Result<()> {
     let mut parametric_rules = false;
-    for argument in std::env::args().skip(1) {
+    let mut max_exact_frontier = 0;
+    let mut max_targets = 32768;
+    let mut arguments = std::env::args().skip(1);
+    while let Some(argument) = arguments.next() {
         match argument.as_str() {
             "--parametric-rules" => parametric_rules = true,
+            "--max-exact-frontier" | "--max-targets" => {
+                let value = arguments
+                    .next()
+                    .ok_or_else(|| Error::InvalidInput(format!("missing value for {argument}")))?
+                    .parse::<usize>()
+                    .map_err(|e| Error::InvalidInput(format!("{argument}: {e}")))?;
+                if argument == "--max-exact-frontier" {
+                    max_exact_frontier = value;
+                } else {
+                    max_targets = value;
+                }
+            }
             "--help" => {
-                println!("paper_regions [--parametric-rules]");
+                println!(
+                    "paper_regions [--parametric-rules] [--max-exact-frontier N] [--max-targets N]"
+                );
                 return Ok(());
             }
             _ => return Err(Error::InvalidInput(format!("unknown option {argument}"))),
@@ -23,9 +40,9 @@ fn main() -> Result<()> {
     let backend = RustRedBackend {
         parametric_rules,
         max_depth: 3,
-        max_targets: 32768,
+        max_targets,
         max_sector_batch: 32,
-        max_exact_frontier: 0,
+        max_exact_frontier,
         checkpoints: Some(".amflow-cache/regions".into()),
         ..Default::default()
     };

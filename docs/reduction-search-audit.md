@@ -120,3 +120,56 @@ report generated rays, applied formulas and uncovered targets. The bank is
 scoped to a reduction's source family, sector and source ordering; it is currently
 an in-memory optimization, while specialized concrete rules use the existing
 restart checkpoints.
+
+## Bounded production pilots with guarded rays
+
+These pilots use the archived optimized library at commit
+`ce21f7693ae7d642006cb0896efda25eb2d80f20`, pinned to Symbolica main
+`75f8350094b90254ee71dc2a391fde0d14b0204a`. They attempt the first paper target
+`[1,1,1,1,1,1,1,-3,0]` at `epsilon = 1/2700`, or construct that family's
+recursive boundary regions. Each invocation runs on one pinned CPU with a
+300-second wall limit. These are diagnostic runs, not numerical acceptance or
+complete AMFlow timing comparisons.
+
+The first-target runs use the archived `paper_subsector` executable, depth
+three, and `--parametric-rules`. The regions runs use the same validated library.
+The forced-pruning regions executable adds only command-line limit controls to
+`paper_regions`; that wrapper was compiled separately against the archived
+library, rather than being part of the archived source commit.
+
+| Pilot | Exact-frontier threshold | Target budget | Outcome |
+| --- | ---: | ---: | --- |
+| First target, structural expansion | 0 | 8,192 | Limit: 4,612 searched + 8,558 pending |
+| First target, small exact threshold | 512 | 8,192 | Limit: 4,362 searched + 8,220 pending |
+| First target, forced exact cancellation | 100,000 | 8,192 | Limit: 8,135 searched + 93 pending |
+| Resume forced cancellation | 100,000 | 16,384 | Five-line work closed; limit: 8,550 searched + 22,943 pending |
+| Resume into four-line work | 100,000 | 65,536 | Wall timeout during substitution; checkpoint: 35,271 searched + 3,407 pending four-line targets |
+| Regions, structural expansion | 0 | 32,768 | Limit: 11,683 searched + 21,156 pending |
+| Regions, forced exact cancellation | 100,000 | 32,768 | Wall timeout during substitution; checkpoint: 7,245 searched + 2,679 pending four-line targets |
+
+The small threshold skips exact pruning once a frontier exceeds 512, so it
+barely affects growth. Forced cancellation closes the active five-line layer
+but then exposes 20,621 four-line, 2,321 three-line, and one two-line target.
+It postpones lower layers and cancels some coefficients; it does not by itself
+solve the breadth of the next layer.
+
+During the 65,536-budget continuation, guarded rays supplied 28,066 reductions
+from 1,704 generated rays, with 13 concrete fallbacks. Ray generation and
+specialization consumed 57.4 seconds in the reported events; concrete fallback
+search took 1.0 second. The timeout occurred while substituting 38,649 accumulated
+rules, after the checkpoint above. The checkpoint is 69,783,278 bytes; a live
+memory observation was about 585 MiB. Thus this run shifted the main cost from
+repeated concrete searches to exact coefficient propagation. The terminal
+checkpoint excludes work completed after the last atomic save.
+
+In the forced-cancellation regions pilot, 653 generated rays supplied 9,897
+reductions, with 27 concrete fallbacks. Reported ray work took 89.0 seconds and
+concrete searches 4.5 seconds. Its final event was substitution of 9,897 rules;
+the last checkpoint is 27,022,535 bytes. A live memory observation near the
+wall limit was about 654 MiB. Neither production pilot completed differential
+preparation, boundary initialization, or a numerical sample.
+
+Logs and checkpoints are retained under the ignored task directories
+`target/parametric-paper-{pilot,exact-pilot,pruned-pilot}` and
+`target/parametric-regions-{pilot,pruned-pilot}`. Restart counts are cumulative;
+per-invocation ray/search times are not summed across different experiments.
