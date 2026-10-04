@@ -2,8 +2,11 @@
 
 A same-host comparison against the original, unmodified C++ differential-equation
 solver is available. It measures regular continuation and singular matching with
-supplied boundaries. **There is no measured full automatic-workflow comparison yet.** No
-Wolfram runtime is available in this environment. The Rust four-target two-loop
+supplied boundaries. **There is no matched full automatic-workflow timing comparison yet.**
+A licensed Wolfram runtime is now available through the Bern server, and
+[live automatic oracle checks](upstream-oracle.md) exercise the original package
+with Kira. Their single-run timings are diagnostic, without matched Rust work or
+repetition. The Rust four-target two-loop
 acceptance has passed; its numerical validation and execution conditions are
 recorded separately below.
 
@@ -227,7 +230,9 @@ paper targets through epsilon power zero at 20 requested digits, one thread,
 and caching disabled. It checks the pinned `AMFlow.m` digest and writes results
 and timing metadata in the current directory. Use a fresh directory for each run.
 
-This harness has **not been executed** here. Its output explicitly marks accuracy
+This full timing harness has **not been executed** here; the separate
+[oracle harness](upstream-oracle.md) has passed small automatic examples. The
+full timing harness's output explicitly marks accuracy
 unverified; results must be compared and independently refined before timing
 claims are made. Rust automatic evaluation already performs additional sample
 and precision refinement, while upstream `SolveIntegrals` uses its own numerical

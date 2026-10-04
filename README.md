@@ -11,6 +11,8 @@ refinement and agreement with upstream data at its recorded precision. See the
 and [implemented coverage and limits](docs/coverage.md).
 An executable [performance comparison](docs/performance.md) measures the Rust
 and original AMFlow 2.0 differential-equation solvers on identical inputs.
+The [Bern Wolfram setup](docs/wolfram-setup.md) also enables live checks against
+the original Mathematica package with Kira and the university license server.
 
 ## Build
 

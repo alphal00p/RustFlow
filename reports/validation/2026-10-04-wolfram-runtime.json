@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "tested_at_utc": "2026-10-04T16:02:26.169120+00:00",
+  "platform": "x86_64-linux",
+  "runtime_version": "15.0.1",
+  "download_page": "https://www.wolfram.com/download-center/",
+  "installer": {
+    "name": "Wolfram_15.0.1_LIN.sh",
+    "bytes": 2644745046,
+    "sha256": "ecde452688f481318dc18dd0fbc8491998becdee88451327c2eea72c4bf7705e"
+  },
+  "nixpkgs_revision": "867dcbc30bafe3c862ef88620f2e7a109d7d3be5",
+  "nix_store_path": "/nix/store/m4xs334vv5qlr31q6ayqr5r2x8lx43bn-mathematica-15.0.1",
+  "nix_nar_hash": "sha256-+hNwb3ej7pB8HFlByAVo1dmu+q54L/YiuKBi90PZnBc=",
+  "license_server": "itplic.itp.unibe.ch",
+  "license_port_tcp": 16286,
+  "network_connection_succeeded": true,
+  "kernel_smoke": {
+    "version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+    "system": "Linux-x86-64",
+    "passwordFile": "/home/ben/.config/symbolica-amflow/mathpass",
+    "arithmetic": 4,
+    "gammaIdentityPassed": true
+  },
+  "wolframscript_smoke": {
+    "expression": "2+2",
+    "stdout": "4\n",
+    "exit_code": 0
+  },
+  "account_login_required": false,
+  "provided_email_used": false,
+  "persistent_commands": [
+    "/home/ben/.local/bin/bern-wolfram",
+    "/home/ben/.local/bin/bern-wolframscript"
+  ],
+  "configuration_file": "/home/ben/.config/symbolica-amflow/mathpass",
+  "runtime_gc_root": "/home/ben/.local/share/symbolica-amflow/wolfram-15.0.1",
+  "wolframscript_gamma_check": {
+    "expression": "N[Gamma[1/3],50]",
+    "stdout": "2.67893853470774763365569294097467764412868937795730110095042824009779328411324`50.\n",
+    "exit_code": 0
+  },
+  "without_rust_development_environment": {
+    "expression": "2+2",
+    "stdout": "4\n",
+    "exit_code": 0
+  },
+  "nix_derivation": "/nix/store/kcdfy3d6vbyssnbk9b8gmyd538pr953v-mathematica-15.0.1.drv",
+  "wrappers": {
+    "/home/ben/.local/bin/bern-wolfram": "2b08468a8c50dda2b442612dcc72d84cd750b10d8c16d1ee3e5b4dbd7376e66b",
+    "/home/ben/.local/bin/bern-wolframscript": "17ac3fc459e3c4217e233b91692aa6df8072a8b67ca03c61fabe724850adfbe7"
+  }
+}

@@ -1,0 +1,588 @@
+{
+  "format_version": 1,
+  "scope": "Live original AMFlow 2.0 automatic sample evaluations against analytic formulas; no matched Rust timing or complete paper-workflow comparison.",
+  "upstream_commit": "26005517a288086c4cb4d1b26d829691bc088485",
+  "source_sha256": {
+    "AMFlow.m": "76feadd3990586dbba22c96f515328fd79b64d6767ed021f2f80c9e4a2b98184",
+    "diffeq_solver/DESolver.m": "0dfa7f91bd8b8d160412dbc3a8c076413e488745bcefe58bc434999d03f76a46",
+    "ibp_interface/Kira/interface.m": "1c4476b32d8757ee18d6689d5b406bc00a2cfb00ad178926233f1768def7faaa"
+  },
+  "modified_upstream_files": [
+    "ibp_interface/Kira/install.m"
+  ],
+  "install_sha256": "f072f832be9f3ba95b9442b4b9bd73bafb1e0b877474d936aad050c3f0ced1ef",
+  "kira_executable": "/nix/store/rlxy7f90ifbzr77a6hvnsc7a13vmzzay-kira-3.1-git-dad964c/bin/kira",
+  "kira_version": "3.1 (Git: dad964cd79a39a9fca728bb2606f59537a95109c); plain; non-MPI; 64 bit weights; without jemalloc; without FireFly",
+  "fermat_executable": "/nix/store/0582y8gjxv1j01phy7i7l3z07ky72bry-fermat-7.9b/bin/fer64",
+  "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+  "desolver": "MMA",
+  "cpu_affinity": [
+    28
+  ],
+  "workers": 1,
+  "license_concurrency": "The parent and one sequential solver kernel may coexist; no parallel worker kernels were launched.",
+  "run_limit_seconds": 600,
+  "returned_decimal_precision": 24,
+  "asserted_digits": 20,
+  "precision_note": "The recorded residuals compare stored numbers to analytic values; claims are capped by the 24-digit returned precision. The first bubble residual was rounded to an inexact zero by significance arithmetic, whose precision is retained in the raw metadata.",
+  "normalization": "Per loop d^D l/(i Pi^(D/2)), D=4-2 eps; no exp(EulerGamma eps) factor.",
+  "cases": [
+    {
+      "case": "bubble",
+      "run_directory": "/common/dev/amflow/target/wolfram-setup/oracle-runs/bubble-sample-20261004T155805Z-3448259",
+      "exit_code": 0,
+      "start_utc": "2026-10-04T15:58:05Z",
+      "end_utc": "2026-10-04T15:58:34Z",
+      "kernel_executable": "/common/dev/amflow/target/wolfram-setup/runtime/bin/WolframKernel",
+      "metadata": {
+        "upstream_commit": "26005517a288086c4cb4d1b26d829691bc088485",
+        "case": "bubble",
+        "mode": "sample",
+        "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+        "reducer": "Kira 3.1 dad964cd79a39a9fca728bb2606f59537a95109c",
+        "desolver": "MMA",
+        "workers": 1,
+        "cache": false,
+        "requested_digits": 24,
+        "asserted_digits": 20,
+        "epsilon_samples_exact": [
+          "1/10"
+        ],
+        "working_decimal_precision": 48,
+        "x_order": 96,
+        "extra_x_order": 50,
+        "leading_epsilon_power": 0,
+        "coefficient_powers": [
+          0
+        ],
+        "coefficients": [
+          "11.66448790193106651611388353145858587084`24."
+        ],
+        "expected": [
+          "11.664487901931066516113883531458584556595825079893408859243794321972671152365399523482755244184126`80."
+        ],
+        "scaled_absolute_errors": [
+          "0``24."
+        ],
+        "solve_wall_seconds": 26.738822,
+        "parent_kernel_cpu_seconds": 0.9033030000000002,
+        "analytic_check_passed": true,
+        "normalization": "d^D l/(i Pi^(D/2)) per loop; no exp(EulerGamma eps) factor",
+        "scope": "Original automatic workflow smoke test against an analytic formula; not a matched Rust timing."
+      },
+      "raw_sha256": {
+        "kernel.log": "b1a302e2dbbd6214309ef789734b24f7bcd836af3be7f9131f7c7907615b3504",
+        "oracle.wl": "017276a75f37f9187f57e8aab97b476d6df3c1c604ff2778232a0d3d3ab9e770",
+        "work/oracle-result.wl": "4092b13d525fc11d912045b4cb053f038d1f5125924307683e53c8837fdf4e29",
+        "work/oracle-comparison.wl": "bc65f2bb2fea1b01a19efddb63ad9f99fee9c96cc5fd4a3922be2a96d3da1009",
+        "work/oracle-metadata.json": "9e37916837d1f62c29408be118da7f62566465cb9e8544f02c6382d6e87b5788"
+      },
+      "propagators": [
+        "l^2",
+        "(l+p)^2"
+      ],
+      "kinematics": {
+        "p^2": "-1"
+      },
+      "target": [
+        1,
+        1
+      ],
+      "epsilon": "1/10",
+      "analytic": "Gamma(eps)*Gamma(1-eps)^2/Gamma(2-2*eps)",
+      "cache_directory": "/common/dev/amflow/target/wolfram-setup/cache/oracle_amflow",
+      "workflow_note": "Automatic IBP, two-master auxiliary-mass differential equation, recursively generated terminal boundary, and ordinary/singular transport.",
+      "kernel_command": [
+        "/common/dev/amflow/target/wolfram-setup/runtime/bin/WolframKernel",
+        "-noinit",
+        "-noprompt",
+        "-script",
+        "/common/dev/amflow/target/wolfram-setup/oracle.wl"
+      ],
+      "invocation_note": "taskset -c 28; timeout --signal=TERM --kill-after=20s 600s; one-thread OMP/OpenBLAS/MKL environment; inherited local license configuration. Harness content is frozen at raw_sha256.oracle.wl."
+    },
+    {
+      "case": "sunset",
+      "run_directory": "/common/dev/amflow/target/wolfram-setup/oracle-runs/sunset-sample-20261004T160153Z-3497550",
+      "exit_code": 0,
+      "start_utc": "2026-10-04T16:01:53Z",
+      "end_utc": "2026-10-04T16:02:05Z",
+      "kernel_executable": "/home/ben/.local/bin/bern-wolfram",
+      "metadata": {
+        "upstream_commit": "26005517a288086c4cb4d1b26d829691bc088485",
+        "case": "sunset",
+        "mode": "sample",
+        "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+        "reducer": "Kira 3.1 dad964cd79a39a9fca728bb2606f59537a95109c",
+        "desolver": "MMA",
+        "workers": 1,
+        "cache": false,
+        "cache_directory": "/common/dev/amflow/target/wolfram-setup/oracle-runs/sunset-sample-20261004T160153Z-3497550/work/cache",
+        "requested_digits": 24,
+        "asserted_digits": 20,
+        "epsilon_samples_exact": [
+          "3/4"
+        ],
+        "working_decimal_precision": 48,
+        "x_order": 96,
+        "extra_x_order": 50,
+        "leading_epsilon_power": 0,
+        "coefficient_powers": [
+          0
+        ],
+        "coefficients": [
+          "-12.01316875744503772554273804647480761346`24."
+        ],
+        "expected": [
+          "-12.01316875744503772554273804647480761346025961069774116032536307951242301212334120297093349221241`80."
+        ],
+        "scaled_absolute_errors": [
+          "2.8277313531257655362307643202890786075124989394236329012`39.15040815154112*^-41"
+        ],
+        "solve_wall_seconds": 9.058479,
+        "parent_kernel_cpu_seconds": 0.3177230000000004,
+        "analytic_check_passed": true,
+        "comparison": "Stored returned numbers padded to 80 digits only for residual computation; no added accuracy is claimed.",
+        "normalization": "d^D l/(i Pi^(D/2)) per loop; no exp(EulerGamma eps) factor",
+        "scope": "Original automatic workflow smoke test against an analytic formula; not a matched Rust timing."
+      },
+      "raw_sha256": {
+        "kernel.log": "e50ae5f88e21281dc7fe3918cd9330f4c1d0c30871497599c1ca7df256f3c042",
+        "oracle.wl": "3480c0fb7a8cbe000db40449afe01786c4a2d04fb2c5a85154ff227ef0c51a7f",
+        "work/oracle-result.wl": "6bd3a08a26f46db608549de274aabb5f1dcc6a609bd04f0169dac1e346b39d67",
+        "work/oracle-comparison.wl": "50f431d6055151ce92f8397efb169c7f44a389cb16704996a331a37a4f0101a2",
+        "work/oracle-metadata.json": "0e396f649f64f375889b7bafd228a65422c197e9451ed8af1530492081a644ed"
+      },
+      "propagators": [
+        "l1^2-1",
+        "l2^2-1",
+        "(l1+l2)^2"
+      ],
+      "kinematics": {},
+      "target": [
+        1,
+        1,
+        1
+      ],
+      "epsilon": "3/4",
+      "analytic": "Gamma(eps)^2/((1-eps)*(1-2*eps))",
+      "workflow_note": "Genuine two-loop topology. Kira reduces target j[1,1,1] to -(1/2) j[1,1,0] at D=5/2; original AMFlow evaluates two tadpole terminal factors. This case does not exercise a coupled sunset DE.",
+      "kernel_command": [
+        "/home/ben/.local/bin/bern-wolfram",
+        "-noinit",
+        "-noprompt",
+        "-script",
+        "/common/dev/amflow/target/wolfram-setup/oracle.wl"
+      ],
+      "invocation_note": "taskset -c 28; timeout --signal=TERM --kill-after=20s 600s; one-thread OMP/OpenBLAS/MKL environment; inherited local license configuration. Harness content is frozen at raw_sha256.oracle.wl."
+    }
+  ],
+  "reusable_harness": {
+    "driver": "scripts/upstream_oracle.wl",
+    "runner": "scripts/upstream_oracle.py",
+    "status": "Sunset sample completed end to end with exit 0 and analytic agreement; later timeout cleanup hardening passed a focused mock without launching Wolfram.",
+    "validation": {
+      "runner_metadata": {
+        "upstream_commit": "26005517a288086c4cb4d1b26d829691bc088485",
+        "upstream_source": "/common/dev/amflow/target/upstream-performance/reproducible-build/amflow-26005517a288086c4cb4d1b26d829691bc088485",
+        "source_sha256": {
+          "AMFlow.m": "76feadd3990586dbba22c96f515328fd79b64d6767ed021f2f80c9e4a2b98184",
+          "diffeq_solver/DESolver.m": "0dfa7f91bd8b8d160412dbc3a8c076413e488745bcefe58bc434999d03f76a46",
+          "ibp_interface/Kira/interface.m": "1c4476b32d8757ee18d6689d5b406bc00a2cfb00ad178926233f1768def7faaa"
+        },
+        "modified_upstream_file": "ibp_interface/Kira/install.m",
+        "install_sha256": "9bb5aa8a3aff14f8ed60e75a430f2c18592fc5b2b52f943ecb12537c80337e17",
+        "driver_sha256": "72167bf07dbddca524a39b28564fbbd0a6430cc34fc9bfc06a0f223b2d613743",
+        "runner_sha256": "caba8f7770484a2679f72b19aae9469ed0e7f984f51a1cdf524163ee256bad07",
+        "kernel_command": [
+          "/home/ben/.local/bin/bern-wolfram",
+          "-noinit",
+          "-noprompt",
+          "-script",
+          "/common/dev/amflow/target/wolfram-setup/reusable-runner-sunset/oracle.wl"
+        ],
+        "kira_executable": "/nix/store/rlxy7f90ifbzr77a6hvnsc7a13vmzzay-kira-3.1-git-dad964c/bin/kira",
+        "kira_version": "Kira version: 3.1 (Git: dad964cd79a39a9fca728bb2606f59537a95109c)\nBuild configuration: plain; non-MPI; 64 bit weights; without jemalloc;\nwithout FireFly",
+        "fermat_executable": "/nix/store/0582y8gjxv1j01phy7i7l3z07ky72bry-fermat-7.9b/bin/fer64",
+        "cpu_affinity": [
+          28
+        ],
+        "workers": 1,
+        "timeout_seconds": 600,
+        "start_utc": "2026-10-04T16:07:57.339827+00:00",
+        "timed_out": false,
+        "exit_code": 0,
+        "end_utc": "2026-10-04T16:08:08.750050+00:00",
+        "wall_seconds": 11.41021328419447,
+        "result_sha256": "736b877089fc0d4e1f8e419275b65d9b1daa9b16157b4c35ef43bb6e4001f338"
+      },
+      "oracle_metadata": {
+        "upstream_commit": "26005517a288086c4cb4d1b26d829691bc088485",
+        "case": "sunset",
+        "mode": "sample",
+        "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+        "reducer": "Kira 3.1 dad964cd79a39a9fca728bb2606f59537a95109c",
+        "desolver": "MMA",
+        "workers": 1,
+        "cache": false,
+        "cache_directory": "/common/dev/amflow/target/wolfram-setup/reusable-runner-sunset/work/cache",
+        "requested_digits": 24,
+        "asserted_digits": 20,
+        "epsilon_samples_exact": [
+          "3/4"
+        ],
+        "working_decimal_precision": 48,
+        "x_order": 96,
+        "extra_x_order": 50,
+        "leading_epsilon_power": 0,
+        "coefficient_powers": [
+          0
+        ],
+        "coefficients": [
+          "-12.01316875744503772554273804647480761346`24."
+        ],
+        "expected": [
+          "-12.01316875744503772554273804647480761346025961069774116032536307951242301212334120297093349221241`80."
+        ],
+        "scaled_absolute_errors": [
+          "2.8277313531257655362307643202890786075124989394236329012`39.15040815154112*^-41"
+        ],
+        "solve_wall_seconds": 9.052154,
+        "parent_kernel_cpu_seconds": 0.3132929999999998,
+        "analytic_check_passed": true,
+        "comparison": "Stored returned numbers padded to 80 digits only for residual computation; no added accuracy is claimed.",
+        "normalization": "d^D l/(i Pi^(D/2)) per loop; no exp(EulerGamma eps) factor",
+        "scope": "Original automatic workflow smoke test against an analytic formula; not a matched Rust timing."
+      },
+      "runner_metadata_sha256": "8a6f22aa34c274e3cd3a944a02593ee8a512c00728666349226926e25e5691af",
+      "executed_runner_archive": "/common/dev/amflow/target/wolfram-setup/reusable-runner-sunset/runner-used.py",
+      "current_runner_sha256": "b23c2372698af79b7b134a39491323c0aca2e3d26807e89d0984fc38c7f7e679",
+      "timeout_mock": {
+        "passed": true,
+        "runner_timeout_exit_code": 124,
+        "timeout_seconds": 1,
+        "term_ignoring_child_stopped": true,
+        "vanished_process_group_tolerated": true,
+        "no_wolfram_process_launched": true
+      }
+    }
+  },
+  "failed_harness_attempts": [
+    {
+      "run_directory": "/common/dev/amflow/target/wolfram-setup/oracle-runs/sunset-sample-20261004T155947Z-3468896",
+      "exit_code": 1,
+      "reason": "DirectoryName returns a trailing separator; harness path guard rejected it before computation. Fixed normalization."
+    },
+    {
+      "run_directory": "/common/dev/amflow/target/wolfram-setup/oracle-runs/sunset-sample-20261004T160049Z-3479569",
+      "exit_code": 1,
+      "reason": "Original automatic evaluation returned the requested target plus a solved master. Harness initially required exact target-list equality; corrected to require all requested targets."
+    }
+  ],
+  "status": "passed",
+  "rust_crosscheck": {
+    "provenance": {
+      "status": "passed",
+      "scope": "Live numerical cross-check against original AMFlow and independent gamma identities; no matched timing claim.",
+      "source_commit": "75bbfe9d4e8dad729047a4e067e787f6c6c801a7",
+      "production_sources_match_validated_commit": "aa4e27d",
+      "source_match_check": "",
+      "cpu": 29,
+      "workers": 1,
+      "environment": {
+        "RAYON_NUM_THREADS": "1"
+      },
+      "source": {
+        "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/samples.rs",
+        "sha256": "9488903b92c1d6465c5edff5b6fe2c6394b5417f69e750e9460993d2b78a6a45"
+      },
+      "executable": {
+        "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/samples",
+        "sha256": "5b597bdcb4d6f3d7cae965fd1e6f314a978571b79b724d4a4ad679a2c55568ef"
+      },
+      "library": {
+        "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/libsymbolica_amflow-a085b8c13b0f6efe.rlib",
+        "sha256": "2eaaac216feae57553e3eb00c85b345662432f08865a6402bb13632491cb0daf"
+      },
+      "library_origin": "/common/dev/amflow/target/release/deps/libsymbolica_amflow-a085b8c13b0f6efe.rlib",
+      "compile": "Standalone rustc --edition=2024 -C opt-level=2; no Cargo rebuild; linked current validated release rlib",
+      "symbolica": [
+        {
+          "name": "symbolica",
+          "version": "3.0.1",
+          "source": "git+https://github.com/symbolica-dev/symbolica.git?rev=75f8350094b90254ee71dc2a391fde0d14b0204a#75f8350094b90254ee71dc2a391fde0d14b0204a",
+          "dependencies": [
+            "ahash",
+            "append-only-vec",
+            "bincode",
+            "bincode-trait-derive",
+            "brotli",
+            "byteorder",
+            "bytes",
+            "data-encoding",
+            "directories",
+            "dyn-clone",
+            "ed25519-compact",
+            "graphica",
+            "inventory",
+            "numerica",
+            "once_cell",
+            "rand",
+            "rayon",
+            "rug",
+            "self_cell",
+            "serde",
+            "smallvec",
+            "smartstring",
+            "tinyjson",
+            "tracing",
+            "tracing-subscriber",
+            "wide 1.7.1"
+          ]
+        }
+      ],
+      "refinement": {
+        "initial_working_digits": 60,
+        "initial_order": 80,
+        "refined_working_digits": 80,
+        "refined_order": 112,
+        "asserted_digits": 20,
+        "automatic_boundaries": true,
+        "fresh_refined_boundary_provider": true,
+        "persistent_cache": false
+      },
+      "sampled_sunset_attempt": {
+        "exit_code": 1,
+        "error": "Unsupported: sample epsilon=3/4 does not uniquely identify dimensional indicial sector -1/4 (4 candidates).",
+        "resolution": "Use symbolic-epsilon preparation, as the existing sunset regression does. No production change.",
+        "artifacts": [
+          {
+            "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/sampled-attempt/samples.rs",
+            "sha256": "a3c2a4a8dca9ce9bf26c048a7d1f3c403ebec3923e4b3c8cb3c0a9aed61e87f0"
+          },
+          {
+            "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/sampled-attempt/samples",
+            "sha256": "12930f7fc818758753d758e5b6c83911241909b186aaeab405679851c56787af"
+          },
+          {
+            "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/sampled-attempt/values.jsonl",
+            "sha256": "b1d5da5882a174528e22f731ad7ab5992e1c37e7091dc5bf7971ed117b597997"
+          },
+          {
+            "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/sampled-attempt/progress.log",
+            "sha256": "2a56b3a398aa2e6ff8a38802400fda700caa32ee53e55610fda51cc4c7db2322"
+          }
+        ]
+      },
+      "started_utc": "2026-10-04T16:06:12.249107+00:00",
+      "exit_code": 0,
+      "finished_utc": "2026-10-04T16:06:12.564016+00:00",
+      "elapsed_seconds": 0.3145115226507187,
+      "outputs": [
+        {
+          "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/values.jsonl",
+          "sha256": "832179a08798ac8c38fb7c3e96ea452f836a6ec31d07826192be0fb435d9583c"
+        },
+        {
+          "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/progress.log",
+          "sha256": "67286fdeaa3a8387e210bc718bf8a78db15e8d2fd6c79d1db31d55c657172cfc"
+        }
+      ]
+    },
+    "comparison": {
+      "schema_version": 1,
+      "status": "passed",
+      "scope": "Two live numerical sample cross-checks with original AMFlow 2.0; not complete ordinary-integral coverage or a matched performance benchmark.",
+      "normalization": "d^D l/(i Pi^(D/2)) per loop; no exp(EulerGamma eps) factor",
+      "rust_provenance": {
+        "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/provenance.json",
+        "sha256": "032a60d32ea7997f4adeb11609da8d7d15b78698fd52e39a9f4592600ef23e77"
+      },
+      "rust_values": {
+        "path": "/common/dev/amflow/target/wolfram-setup/rust-samples/values.jsonl",
+        "sha256": "832179a08798ac8c38fb7c3e96ea452f836a6ec31d07826192be0fb435d9583c"
+      },
+      "production_edits": false,
+      "rustred_modified": false,
+      "cases": [
+        {
+          "case": "bubble",
+          "epsilon_exact": "1/10",
+          "input": {
+            "target": [
+              1,
+              1
+            ],
+            "dimension_exact": "19/5",
+            "family_debug": "IntegralFamily { name: \"live_oracle_bubble\", loops: [\"l\"], external: [\"p\"], external_gram: [[-1]], propagators: [Propagator { constant: 0, scalar_products: [1, 0] }, Propagator { constant: -1, scalar_products: [1, 2] }], physical_propagators: 2, epsilon: symbolica_amflow::eps, dimension: 4 }",
+            "normalization": "d^D l/(i Pi^(D/2)) per loop; no exp(EulerGamma eps) factor",
+            "prescription": "PlusI0"
+          },
+          "rust": {
+            "analytic": {
+              "formula": "Gamma(eps)*Gamma(1-eps)^2/Gamma(2-2*eps)",
+              "value": {
+                "im": "0",
+                "re": "11.6644879019310665161138835314585845565958250798934088592437943219726711523653995234827552441070478606416"
+              },
+              "working_decimal_digits": 100
+            },
+            "asserted_digits": 20,
+            "automatic_boundary_provider": "RecursiveBoundary",
+            "backend_identity": "rustred-exact:14921e325b5a8882ce9f7affd02e87354711f98717a8dc4eba401fe9cc2cef3d:c133eac803d56a8c56b7b1ca6c23ca07af0119f85259f4d80f92469439902f31:2:4096:false:true:512:true:18446744073709551615:false",
+            "basis_size": 3,
+            "case": "bubble",
+            "dimension_exact": "19/5",
+            "elapsed_seconds": 0.186813715,
+            "epsilon_exact": "1/10",
+            "family_debug": "IntegralFamily { name: \"live_oracle_bubble\", loops: [\"l\"], external: [\"p\"], external_gram: [[-1]], propagators: [Propagator { constant: 0, scalar_products: [1, 0] }, Propagator { constant: -1, scalar_products: [1, 2] }], physical_propagators: 2, epsilon: symbolica_amflow::eps, dimension: 4 }",
+            "initial": {
+              "series_order": 80,
+              "value": {
+                "im": "2.3463095358525999829491591048449235590240354357547841764557472237e-59",
+                "re": "11.664487901931066516113883531458584556595825079893408859243879356"
+              },
+              "working_decimal_digits": 60
+            },
+            "normalization": "d^D l/(i Pi^(D/2)) per loop; no exp(EulerGamma eps) factor",
+            "passed": true,
+            "persistent_cache": false,
+            "prescription": "PlusI0",
+            "refined": {
+              "fresh_boundary_provider": true,
+              "series_order": 112,
+              "value": {
+                "im": "3.18367405405873198878718088645333201842411769515707978513421643610457928674821122644e-80",
+                "re": "11.6644879019310665161138835314585845565958250798934088592437943219726711523653996386"
+              },
+              "working_decimal_digits": 80
+            },
+            "refined_analytic_difference_norm": "1.19448538800494445195308352990395083718270990795972063430495344802047355618268691980390825776092231137960e-79",
+            "refined_analytic_relative_difference": "1.02403585827989612491317220333182316007248216047090140062599517469464286685822862807988012172988220690131e-80",
+            "refinement_difference_norm": "8.82117299198362174193100974985461252139024379435911071248526529734576905871885090804622965799026430916584e-59",
+            "refinement_relative_difference": "7.56241771275982769833667995359357119776110321424653298070614779230396304402517995690686597626645456916048e-60",
+            "sampled_reduction": true,
+            "target": [
+              1,
+              1
+            ],
+            "timing_scope": "Numerical cross-check only; not a matched upstream performance benchmark"
+          },
+          "upstream": {
+            "returned_value_wolfram": "11.66448790193106651611388353145858587084`24.",
+            "recorded_precision_digits": "24.",
+            "metadata": {
+              "path": "/common/dev/amflow/target/wolfram-setup/oracle-runs/bubble-sample-20261004T155805Z-3448259/work/oracle-metadata.json",
+              "sha256": "9e37916837d1f62c29408be118da7f62566465cb9e8544f02c6382d6e87b5788"
+            },
+            "raw_result": {
+              "path": "/common/dev/amflow/target/wolfram-setup/oracle-runs/bubble-sample-20261004T155805Z-3448259/work/oracle-result.wl",
+              "sha256": "4092b13d525fc11d912045b4cb053f038d1f5125924307683e53c8837fdf4e29"
+            }
+          },
+          "comparison": {
+            "asserted_digits": 20,
+            "claim_ceiling_digits": 24,
+            "serialized_value_absolute_difference": "1.3142441749201065911407562056780273288476346003614000000000000000000000000000000000000000000003856125321271795E-33",
+            "serialized_value_relative_difference": "1.1267054207347862052223150839935242283243403595197084567334006159469225263501587327775848051408465137933660374E-34",
+            "passes_20_digit_comparison": true,
+            "precision_note": "Residuals compare exported decimal mantissas. They do not imply accuracy beyond upstream recorded precision (24 digits); this cross-check asserts 20 digits only."
+          }
+        },
+        {
+          "case": "sunset",
+          "epsilon_exact": "3/4",
+          "input": {
+            "target": [
+              1,
+              1,
+              1
+            ],
+            "dimension_exact": "5/2",
+            "family_debug": "IntegralFamily { name: \"live_oracle_sunset\", loops: [\"l1\", \"l2\"], external: [], external_gram: [], propagators: [Propagator { constant: -1, scalar_products: [1, 0, 0] }, Propagator { constant: -1, scalar_products: [0, 0, 1] }, Propagator { constant: 0, scalar_products: [1, 2, 1] }], physical_propagators: 3, epsilon: symbolica_amflow::eps, dimension: 4 }",
+            "normalization": "d^D l/(i Pi^(D/2)) per loop; no exp(EulerGamma eps) factor",
+            "prescription": "PlusI0"
+          },
+          "rust": {
+            "analytic": {
+              "formula": "-8*Gamma(3/4)^2",
+              "value": {
+                "im": "0",
+                "re": "-12.0131687574450377255427380464748076134602596106977411603253630795124230121233412029709334918643331373553"
+              },
+              "working_decimal_digits": 100
+            },
+            "asserted_digits": 20,
+            "automatic_boundary_provider": "RecursiveBoundary",
+            "backend_identity": "rustred-exact:14921e325b5a8882ce9f7affd02e87354711f98717a8dc4eba401fe9cc2cef3d:c133eac803d56a8c56b7b1ca6c23ca07af0119f85259f4d80f92469439902f31:2:4096:false:true:512:true:18446744073709551615:false",
+            "basis_size": 2,
+            "case": "sunset",
+            "dimension_exact": "5/2",
+            "elapsed_seconds": 0.117897351,
+            "epsilon_exact": "3/4",
+            "family_debug": "IntegralFamily { name: \"live_oracle_sunset\", loops: [\"l1\", \"l2\"], external: [], external_gram: [], propagators: [Propagator { constant: -1, scalar_products: [1, 0, 0] }, Propagator { constant: -1, scalar_products: [0, 0, 1] }, Propagator { constant: 0, scalar_products: [1, 2, 1] }], physical_propagators: 3, epsilon: symbolica_amflow::eps, dimension: 4 }",
+            "initial": {
+              "series_order": 80,
+              "value": {
+                "im": "-1.3142762679726206013687225326890629984051383085905055235183592467e-55",
+                "re": "-12.013168757445037725542738046474807613460259610697741160434336537"
+              },
+              "working_decimal_digits": 60
+            },
+            "normalization": "d^D l/(i Pi^(D/2)) per loop; no exp(EulerGamma eps) factor",
+            "passed": true,
+            "persistent_cache": false,
+            "prescription": "PlusI0",
+            "refined": {
+              "fresh_boundary_provider": true,
+              "series_order": 112,
+              "value": {
+                "im": "1.12279414749560997514247139646505090611966876264172668861281108934663824145385691439e-76",
+                "re": "-12.0131687574450377255427380464748076134602596106977411603253630795124230121234391064"
+              },
+              "working_decimal_digits": 80
+            },
+            "refined_analytic_difference_norm": "1.48968954714205905669894474368253583285911154868978714171080047281648571136433008240573992605139593482048e-76",
+            "refined_analytic_relative_difference": "1.24004713262588547947756340077110177653994980239801092280005445553131792201514579448075513433268430751117e-77",
+            "refinement_difference_norm": "1.70729129151118300328437101728100001983139939658272776225444543504373428899600631945664734962258554573161e-55",
+            "refinement_relative_difference": "1.42118314158627530549161261213795732740323024676826679077442127851183146394323102547309621232458873791018e-56",
+            "sampled_reduction": false,
+            "target": [
+              1,
+              1,
+              1
+            ],
+            "timing_scope": "Numerical cross-check only; not a matched upstream performance benchmark"
+          },
+          "upstream": {
+            "returned_value_wolfram": "-12.01316875744503772554273804647480761346`24.",
+            "recorded_precision_digits": "24.",
+            "metadata": {
+              "path": "/common/dev/amflow/target/wolfram-setup/oracle-runs/sunset-sample-20261004T160153Z-3497550/work/oracle-metadata.json",
+              "sha256": "0e396f649f64f375889b7bafd228a65422c197e9451ed8af1530492081a644ed"
+            },
+            "raw_result": {
+              "path": "/common/dev/amflow/target/wolfram-setup/oracle-runs/sunset-sample-20261004T160153Z-3497550/work/oracle-result.wl",
+              "sha256": "6bd3a08a26f46db608549de274aabb5f1dcc6a609bd04f0169dac1e346b39d67"
+            }
+          },
+          "comparison": {
+            "asserted_digits": 20,
+            "claim_ceiling_digits": 24,
+            "serialized_value_absolute_difference": "2.5961069774116032536307951242301212343910640000000000000000000000000000002427994509893648885257795878668066518E-40",
+            "serialized_value_relative_difference": "2.1610509515257518275832675708640552468403277799703433014456368195431965062517103706347784017846122896706150670E-41",
+            "passes_20_digit_comparison": true,
+            "precision_note": "Residuals compare exported decimal mantissas. They do not imply accuracy beyond upstream recorded precision (24 digits); this cross-check asserts 20 digits only."
+          }
+        }
+      ],
+      "sunset_preparation_note": "Rust retains symbolic epsilon for the sunset to resolve dimensional indicial sectors at epsilon=3/4. Its sampled-epsilon attempt returned a deliberate ambiguity guard; the attempt and typed error are preserved in Rust provenance. Rust uses its automatic RecursiveBoundary provider. Upstream reduces the undeformed equal-mass sunset target to -1/2 times the product of two tadpoles, so that side exercises IBP and analytic terminal dispatch, not a coupled sunset DE."
+    },
+    "artifact_sha256": {
+      "provenance.json": "032a60d32ea7997f4adeb11609da8d7d15b78698fd52e39a9f4592600ef23e77",
+      "comparison.json": "b91f349dd17a5febdacf0ffebab144d8199aaf4641879629b72b5bff49dc3a93",
+      "values.jsonl": "832179a08798ac8c38fb7c3e96ea452f836a6ec31d07826192be0fb435d9583c",
+      "samples.rs": "9488903b92c1d6465c5edff5b6fe2c6394b5417f69e750e9460993d2b78a6a45"
+    }
+  }
+}
