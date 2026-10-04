@@ -156,6 +156,19 @@ Small-basis substitution shares dependencies across a batch of targets, and
 completed frontier expansions are reused when producing the final table.
 `DifferentialClosure` events report basis size and remaining derivative targets.
 
+Successive native searches at the same sector threshold reuse each target's
+exact weighted frontier, including searched residuals. Appended identities are
+applied to those coefficients; changed existing rules invalidate the cache.
+Entering a lower sector also clears it, and the original targets are expanded
+again to recover discarded lower-sector contributions. The complete dependency
+graph is checked for cycles and sector increases before reuse, including paths
+that previously cancelled. This cache is in memory only and leaves checkpoint
+formats and final closure checks unchanged. Regressions compare incremental and
+fresh expansions across partial rounds, exact cancellations, changed parameter
+sets, rule replacements, wide frontiers, and cycles. See the
+[controlled replay measurements](performance.md#incremental-frontier-replay)
+for the measured scope of this optimization.
+
 Pole finding normalizes each factor and scales its variable using a power-of-two
 Fujiwara bound before calling Symbolica's root finder. Newton corrections and
 polynomial reconstruction check the returned root set. Regressions include a

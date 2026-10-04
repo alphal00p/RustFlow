@@ -151,6 +151,43 @@ the row-wise denominator clearing measured above. The different step counts and
 error checks account for additional differences; no single cause is inferred
 from total timings alone.
 
+## Incremental frontier replay
+
+A separate exact-algebra prototype measured reuse of filtered target coefficients
+between native reduction rounds. It used a frozen paper-example checkpoint with
+40840 rules and 1471 residuals, targeting `[1,1,1,1,1,1,1,-3,0]`. Twelve existing
+rules at one sector threshold were withheld, then restored in three groups of
+four. Each update was evaluated both from the original target and from the
+preceding weighted frontier; every coefficient difference was exactly zero.
+These controlled rounds use real identities but do not reconstruct the original
+search chronology.
+
+| Retained sector threshold | Required initial expansion | Fresh updates, total of three rounds | Cached updates, total of three rounds | Update-time ratio |
+|---|---:|---:|---:|---:|
+| Five active lines | 6.361 s | 19.111 s | 0.6755 s | 28.3× |
+| Four active lines | 86.891 s | 268.651 s | 2.0117 s | 133.5× |
+
+These are single controlled sequences, not repeated-run medians. The standalone
+prototype used `rustc -O`, the pinned Symbolica dependency, exact polynomial
+arithmetic, and one pinned CPU per case (28 and 27, respectively). Other work
+ran concurrently. Timers include constructing the coefficient field and exact
+substitution, but exclude checkpoint loading, searches, full-root structural
+validation, boundary construction, propagation, and epsilon fitting. The initial
+expansion is still required, including after a restart. The ratios therefore
+measure repeated substitution only; they establish no end-to-end speedup over
+Rust's previous workflow or original AMFlow.
+
+The implementation retains searched residual coefficients, invalidates cached
+frontiers when an existing rule changes or the sector threshold decreases, and
+recovers lower-sector contributions from the original roots. Full dependency
+validation also rejects cycles inside previously cancelled branches. Checkpoint
+formats and final exact closure checks are unchanged.
+
+[Replay metadata and individual timings](../reports/performance/2026-10-04-incremental-frontier-replay.json)
+record the local prototype/checkpoint hashes and the controlled rule selection.
+Those large local artifacts are not included in the report; this is diagnostic
+evidence motivating the optimization, not a portable benchmark suite.
+
 ## Full automatic workflow
 
 [`scripts/benchmark_full.wl`](../scripts/benchmark_full.wl) is an optional harness

@@ -299,6 +299,7 @@ fn solve<const N: usize>(
     };
     let mut last_saved = std::time::Instant::now();
     let mut completed_expansions = None;
+    let mut frontier_cache = FrontierCache::default();
     let search: Result<()> = (|| {
         while !pending.is_empty() {
             if visited.len() + pending.len() > options.max_targets {
@@ -316,6 +317,7 @@ fn solve<const N: usize>(
                 .map(|i| i.iter().filter(|&&n| n > 0).count())
                 .max()
                 .unwrap();
+            frontier_cache.enter_sector(active_lines);
             let selected = pending
                 .iter()
                 .filter(|i| i.iter().filter(|&&n| n > 0).count() == active_lines)
@@ -326,9 +328,8 @@ fn solve<const N: usize>(
                 context.cancellation.check()?;
                 let sector = target.map(|n| n > 0);
                 if zero.contains(&sector) {
-                    result
-                        .rules
-                        .insert(Integral(target.to_vec()), BTreeMap::new());
+                    frontier_cache
+                        .insert_rules(&mut result, [(Integral(target.to_vec()), BTreeMap::new())]);
                     pending.remove(&target);
                     visited.insert(target);
                     save_if_due(
@@ -389,7 +390,8 @@ fn solve<const N: usize>(
                                         .push(rational.denominator.to_expression());
                                 }
                             }
-                            result.rules.insert(Integral(target.to_vec()), terms);
+                            frontier_cache
+                                .insert_rules(&mut result, [(Integral(target.to_vec()), terms)]);
                             pending.remove(&target);
                             visited.insert(target);
                             save_if_due(
@@ -482,7 +484,7 @@ fn solve<const N: usize>(
                                 }
                             }
                         }
-                        result.rules.extend(batch.rules);
+                        frontier_cache.insert_rules(&mut result, batch.rules);
                         result.nonzero_conditions.extend(batch.nonzero_conditions);
                         result.nonzero_conditions.extend(
                             applied
@@ -574,7 +576,7 @@ fn solve<const N: usize>(
                             }
                         }
                     }
-                    result.rules.extend(batch.rules);
+                    frontier_cache.insert_rules(&mut result, batch.rules);
                     result.residuals.extend(batch.residuals);
                     result.nonzero_conditions.extend(batch.nonzero_conditions);
                     // Only completed searches enter the visited set. A checkpoint
@@ -631,12 +633,19 @@ fn solve<const N: usize>(
                 let mut expander = Expander::new(&result, context)?;
                 frontier = BTreeSet::new();
                 let roots = targets.iter().cloned().map(Integral).collect::<Vec<_>>();
-                let filtered = expander.expand_many(&roots, active_lines)?;
+                let filtered = if let Some(previous) = &frontier_cache.targets {
+                    expander.expand_weighted(previous, active_lines)?
+                } else {
+                    expander.expand_many(&roots, active_lines)?
+                };
                 frontier.extend(filtered.values().flat_map(|terms| terms.keys()).cloned());
                 let unfinished = frontier
                     .iter()
                     .any(|i| line_count(i) == active_lines && unsearched(i));
                 if !unfinished {
+                    // A filtered cache has discarded lower-sector coefficients.
+                    // Recover those contributions from the original targets.
+                    frontier_cache.targets = None;
                     if lower_count > options.max_exact_frontier {
                         frontier = structural
                             .into_iter()
@@ -654,6 +663,10 @@ fn solve<const N: usize>(
                             completed_expansions = Some(full);
                         }
                     }
+                } else {
+                    // Preserve searched residuals too: their coefficients are
+                    // needed even though they do not drive another search.
+                    frontier_cache.targets = Some(filtered);
                 }
             }
             pending = frontier
@@ -743,15 +756,27 @@ fn structural_frontier(
     targets: &[Vec<i16>],
     context: &RunContext,
 ) -> Result<BTreeSet<Integral>> {
-    let mut seen = ahash::HashSet::default();
+    let mut state = ahash::HashMap::default();
     let mut leaves = BTreeSet::new();
     let roots = targets.iter().cloned().map(Integral).collect::<Vec<_>>();
-    let mut stack = roots.iter().collect::<Vec<_>>();
-    while let Some(node) = stack.pop() {
+    let mut stack = roots.iter().map(|root| (root, false)).collect::<Vec<_>>();
+    while let Some((node, finished)) = stack.pop() {
         context.cancellation.check()?;
-        if !seen.insert(node) {
+        if finished {
+            state.insert(node, 2);
             continue;
         }
+        match state.get(node) {
+            Some(2) => continue,
+            Some(1) => {
+                return Err(Error::IncompleteReduction("cyclic native reduction".into()));
+            }
+            _ => {}
+        }
+        // Validate the complete original DAG even when exact cancellation
+        // removed a branch from a cached weighted frontier.
+        state.insert(node, 1);
+        stack.push((node, true));
         if let Some(terms) = reduction.rules.get(node) {
             let parent_lines = line_count(node);
             for child in terms.keys() {
@@ -761,7 +786,7 @@ fn structural_frontier(
                             .into(),
                     ));
                 }
-                stack.push(child);
+                stack.push((child, false));
             }
         } else {
             leaves.insert(node.clone());
@@ -777,6 +802,43 @@ use symbolica::domains::factorized_rational_polynomial::{
 use symbolica::poly::PolyVariable;
 type Coefficient = FactorizedRationalPolynomial<IntegerRing, u16>;
 type Terms = BTreeMap<Integral, Coefficient>;
+
+/// Exact expansions at one fixed sector threshold. A skipped exact-expansion
+/// round may append rules without invalidating these weighted seeds. Replacing
+/// an already used identity, however, can change the unresolved leaf basis.
+#[derive(Default)]
+struct FrontierCache {
+    minimum_lines: usize,
+    targets: Option<BTreeMap<Integral, Terms>>,
+}
+impl FrontierCache {
+    fn enter_sector(&mut self, minimum_lines: usize) {
+        if self.minimum_lines != minimum_lines {
+            self.targets = None;
+            self.minimum_lines = minimum_lines;
+        }
+    }
+    fn insert_rules(
+        &mut self,
+        reduction: &mut Reduction,
+        rules: impl IntoIterator<Item = (Integral, LinearCombination)>,
+    ) {
+        for (integral, terms) in rules {
+            match reduction.rules.entry(integral) {
+                std::collections::btree_map::Entry::Vacant(entry) => {
+                    entry.insert(terms);
+                }
+                std::collections::btree_map::Entry::Occupied(mut entry) => {
+                    if entry.get() != &terms {
+                        self.targets = None;
+                        entry.insert(terms);
+                    }
+                }
+            }
+        }
+    }
+}
+
 #[derive(Default)]
 struct CoefficientSum {
     bins: Vec<Option<Coefficient>>,
@@ -874,6 +936,33 @@ impl<'a> Expander<'a> {
         integrals: &[Integral],
         minimum_lines: usize,
     ) -> Result<BTreeMap<Integral, Terms>> {
+        let (order, retained) = self.plan(integrals, minimum_lines)?;
+        let terminals = retained
+            .iter()
+            .filter(|node| !self.reduction.rules.contains_key(*node))
+            .count();
+        if terminals <= 128 {
+            return self.expand_backward(integrals, &order, &retained);
+        }
+        integrals
+            .iter()
+            .map(|integral| {
+                Ok((
+                    integral.clone(),
+                    self.expand_forward(
+                        &BTreeMap::from([(integral.clone(), self.field.one())]),
+                        &order,
+                        &retained,
+                    )?,
+                ))
+            })
+            .collect()
+    }
+    fn plan(
+        &self,
+        integrals: &[Integral],
+        minimum_lines: usize,
+    ) -> Result<(Vec<Integral>, BTreeSet<Integral>)> {
         // Accumulate coefficients in dependency order. Expanding every child
         // into its own complete residual map stores a quadratic number of
         // large rational functions on realistic Laporta DAGs. Forward
@@ -919,19 +1008,66 @@ impl<'a> Expander<'a> {
                 retained.insert(node.clone());
             }
         }
+        Ok((order, retained))
+    }
+
+    /// Apply newly available identities to an exact weighted frontier. Native
+    /// structural validation guarantees that a discarded lower sector cannot
+    /// feed back into the selected sectors. Callers reset seeds when the sector
+    /// threshold changes or an existing identity is replaced.
+    fn expand_weighted(
+        &mut self,
+        inputs: &BTreeMap<Integral, Terms>,
+        minimum_lines: usize,
+    ) -> Result<BTreeMap<Integral, Terms>> {
+        let roots = inputs
+            .values()
+            .flat_map(|terms| terms.keys().cloned())
+            .collect::<BTreeSet<_>>()
+            .into_iter()
+            .collect::<Vec<_>>();
+        let (order, retained) = self.plan(&roots, minimum_lines)?;
         let terminals = retained
             .iter()
             .filter(|node| !self.reduction.rules.contains_key(*node))
             .count();
-        if terminals <= 128 {
-            return self.expand_backward(integrals, &order, &retained);
+        if terminals > 128 {
+            return inputs
+                .iter()
+                .map(|(target, seeds)| {
+                    Ok((
+                        target.clone(),
+                        self.expand_forward(seeds, &order, &retained)?,
+                    ))
+                })
+                .collect();
         }
-        integrals
+        let expanded = self.expand_backward(&roots, &order, &retained)?;
+        inputs
             .iter()
-            .map(|integral| {
+            .map(|(target, seeds)| {
+                let mut sums = BTreeMap::<Integral, CoefficientSum>::new();
+                for (seed, coefficient) in seeds {
+                    self.context.cancellation.check()?;
+                    for (terminal, value) in &expanded[seed] {
+                        // Public field arithmetic unifies variable maps if a
+                        // later rule introduces a previously absent parameter.
+                        let product = self.field.mul(coefficient, value);
+                        if !product.is_zero() {
+                            sums.entry(terminal.clone())
+                                .or_default()
+                                .push(product, &self.field);
+                        }
+                    }
+                }
                 Ok((
-                    integral.clone(),
-                    self.expand_forward(integral, &order, &retained)?,
+                    target.clone(),
+                    sums.into_iter()
+                        .filter_map(|(terminal, sum)| {
+                            let value = sum.finish(&self.field);
+                            (!value.is_zero()).then_some((terminal, value))
+                        })
+                        .collect(),
                 ))
             })
             .collect()
@@ -1007,15 +1143,17 @@ impl<'a> Expander<'a> {
     }
     fn expand_forward(
         &mut self,
-        integral: &Integral,
+        seeds: &Terms,
         order: &[Integral],
         retained: &BTreeSet<Integral>,
     ) -> Result<Terms> {
         let mut out = BTreeMap::<Integral, CoefficientSum>::new();
-        if retained.contains(integral) {
-            out.entry(integral.clone())
-                .or_default()
-                .push(self.field.one(), &self.field);
+        for (integral, coefficient) in seeds {
+            if retained.contains(integral) {
+                out.entry(integral.clone())
+                    .or_default()
+                    .push(coefficient.clone(), &self.field);
+            }
         }
         for node in order.iter().rev() {
             self.context.cancellation.check()?;
@@ -1063,6 +1201,304 @@ fn coefficient_atom(c: &Coefficient) -> Atom {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn assert_expansions_equal(
+        left: &BTreeMap<Integral, Terms>,
+        right: &BTreeMap<Integral, Terms>,
+    ) {
+        assert_eq!(
+            left.keys().collect::<Vec<_>>(),
+            right.keys().collect::<Vec<_>>()
+        );
+        for (root, terms) in left {
+            let other = &right[root];
+            assert_eq!(
+                terms.keys().collect::<Vec<_>>(),
+                other.keys().collect::<Vec<_>>()
+            );
+            for (integral, coefficient) in terms {
+                assert!(
+                    (coefficient - &other[integral]).is_zero(),
+                    "different expansion of {root:?} into {integral:?}"
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn incremental_frontiers_match_fresh_expansion_across_partial_rounds() {
+        let i = |n| Integral(vec![n, 1]);
+        let low = Integral(vec![1, 0]);
+        let context = RunContext::default();
+        let roots = vec![i(9), i(8), i(7)];
+        let mut reduction = Reduction {
+            residuals: vec![low.clone()],
+            ..Default::default()
+        };
+        let mut cache = FrontierCache::default();
+        cache.enter_sector(2);
+        cache.insert_rules(
+            &mut reduction,
+            [
+                (
+                    i(9),
+                    BTreeMap::from([
+                        (i(6), parse!("frontier::x")),
+                        (i(5), Atom::num(1)),
+                        (low.clone(), parse!("1/(frontier::x+1)")),
+                    ]),
+                ),
+                (
+                    i(8),
+                    BTreeMap::from([(i(6), Atom::num(1)), (i(5), Atom::num(-1))]),
+                ),
+                (i(7), BTreeMap::new()),
+            ],
+        );
+        cache.targets = Some(
+            Expander::new(&reduction, &context)
+                .unwrap()
+                .expand_many(&roots, 2)
+                .unwrap(),
+        );
+        // A structural-only round may skip exact expansion. Its earlier
+        // frontier must remain valid when several later rules arrive at once.
+        let skipped_round = cache.targets.clone().unwrap();
+        for round in 1..=3 {
+            let added = match round {
+                1 => vec![
+                    (
+                        i(6),
+                        BTreeMap::from([
+                            (i(4), parse!("1/(frontier::x+1)")),
+                            (low.clone(), Atom::num(3)),
+                        ]),
+                    ),
+                    (
+                        i(5),
+                        BTreeMap::from([
+                            (i(4), parse!("-frontier::x/(frontier::x+1)")),
+                            (i(3), parse!("frontier::y")),
+                        ]),
+                    ),
+                ],
+                2 => vec![
+                    (i(3), BTreeMap::new()),
+                    (
+                        i(4),
+                        BTreeMap::from([
+                            (i(2), parse!("frontier::z/(frontier::y+1)")),
+                            (low.clone(), Atom::num(5)),
+                        ]),
+                    ),
+                ],
+                _ => vec![(i(2), BTreeMap::from([(low.clone(), Atom::num(7))]))],
+            };
+            cache.insert_rules(&mut reduction, added);
+            let mut expander = Expander::new(&reduction, &context).unwrap();
+            let fresh = expander.expand_many(&roots, 2).unwrap();
+            let updated = expander
+                .expand_weighted(cache.targets.as_ref().unwrap(), 2)
+                .unwrap();
+            assert_expansions_equal(&updated, &fresh);
+            assert!(updated[&i(7)].is_empty());
+            if round == 1 {
+                // The x-dependent paths cancel, but a searched same-sector
+                // residual still carries its coefficient into later rounds.
+                assert!(!updated[&i(9)].contains_key(&i(4)));
+                assert_eq!(
+                    coefficient_atom(&updated[&i(9)][&i(3)]),
+                    parse!("frontier::y")
+                );
+            }
+            if round == 2 {
+                assert!(updated[&i(9)].is_empty());
+                let skipped = expander.expand_weighted(&skipped_round, 2).unwrap();
+                assert_expansions_equal(&skipped, &fresh);
+            }
+            cache.targets = Some(updated);
+        }
+        assert!(
+            cache
+                .targets
+                .as_ref()
+                .unwrap()
+                .values()
+                .all(|r| r.is_empty())
+        );
+        cache.enter_sector(1);
+        assert!(cache.targets.is_none());
+        // The same original target has nonzero lower-sector coefficients;
+        // entering that sector must recover them from the original roots.
+        let full = Expander::new(&reduction, &context)
+            .unwrap()
+            .expand_many(&roots, 0)
+            .unwrap();
+        assert!(full[&i(9)].contains_key(&low));
+        for root in roots {
+            let independent = reduction.expand(&root).unwrap();
+            assert_eq!(
+                full[&root].keys().collect::<Vec<_>>(),
+                independent.keys().collect::<Vec<_>>()
+            );
+            for (leaf, coefficient) in &full[&root] {
+                assert!(
+                    (coefficient_atom(coefficient) - &independent[leaf])
+                        .together()
+                        .cancel()
+                        .is_zero()
+                );
+            }
+        }
+    }
+
+    #[test]
+    fn frontier_cache_invalidates_replaced_rules_and_sector_changes() {
+        let root = Integral(vec![3, 1]);
+        let leaf = Integral(vec![2, 1]);
+        let context = RunContext::default();
+        let mut reduction = Reduction::default();
+        let mut cache = FrontierCache::default();
+        cache.enter_sector(2);
+        let rule = BTreeMap::from([(leaf.clone(), parse!("frontier_replace::x"))]);
+        cache.insert_rules(&mut reduction, [(root.clone(), rule.clone())]);
+        cache.targets = Some(
+            Expander::new(&reduction, &context)
+                .unwrap()
+                .expand_many(std::slice::from_ref(&root), 2)
+                .unwrap(),
+        );
+        cache.enter_sector(2);
+        cache.insert_rules(&mut reduction, [(root.clone(), rule)]);
+        assert!(cache.targets.is_some());
+        cache.insert_rules(&mut reduction, [(Integral(vec![1, 0]), BTreeMap::new())]);
+        assert!(cache.targets.is_some());
+        cache.insert_rules(
+            &mut reduction,
+            [(
+                root.clone(),
+                BTreeMap::from([(leaf.clone(), parse!("2*frontier_replace::x"))]),
+            )],
+        );
+        assert!(cache.targets.is_none());
+        let fresh = Expander::new(&reduction, &context)
+            .unwrap()
+            .expand_many(std::slice::from_ref(&root), 2)
+            .unwrap();
+        assert_eq!(
+            coefficient_atom(&fresh[&root][&leaf]),
+            parse!("2*frontier_replace::x")
+        );
+        cache.targets = Some(fresh);
+        cache.enter_sector(1);
+        assert!(cache.targets.is_none());
+    }
+
+    #[test]
+    fn structural_validation_rejects_cycles_in_previously_cancelled_branches() {
+        let i = |n| Integral(vec![n, 1]);
+        let roots = [i(6), i(5)];
+        let context = RunContext::default();
+        let mut reduction = Reduction {
+            rules: BTreeMap::from([
+                (i(6), BTreeMap::from([(i(1), Atom::num(1))])),
+                (
+                    i(5),
+                    BTreeMap::from([(i(4), Atom::num(1)), (i(3), Atom::num(-1))]),
+                ),
+                (i(4), BTreeMap::from([(i(2), Atom::num(1))])),
+                (i(3), BTreeMap::from([(i(2), Atom::num(1))])),
+            ]),
+            ..Default::default()
+        };
+        let powers = roots.iter().map(|i| i.0.clone()).collect::<Vec<_>>();
+        assert_eq!(
+            structural_frontier(&reduction, &powers, &context).unwrap(),
+            BTreeSet::from([i(1), i(2)])
+        );
+        let cached = Expander::new(&reduction, &context)
+            .unwrap()
+            .expand_many(&roots, 2)
+            .unwrap();
+        assert!(cached[&i(5)].is_empty());
+        assert!(cached[&i(6)].contains_key(&i(1)));
+        // The surviving weighted seeds cannot see this new cycle. The full
+        // structural validation performed before cache reuse must reject it.
+        reduction
+            .rules
+            .insert(i(2), BTreeMap::from([(i(5), Atom::num(1))]));
+        assert!(matches!(
+            structural_frontier(&reduction, &powers, &context),
+            Err(Error::IncompleteReduction(_))
+        ));
+        assert!(matches!(
+            Expander::new(&reduction, &context)
+                .unwrap()
+                .expand_many(&roots, 2),
+            Err(Error::IncompleteReduction(_))
+        ));
+    }
+
+    #[test]
+    fn weighted_wide_frontiers_cancel_exactly_and_keep_zero_targets() {
+        let i = |n| Integral(vec![n, 1]);
+        let x = parse!("weighted_wide::x");
+        let context = RunContext::default();
+        let mut reduction = Reduction::default();
+        reduction.rules.insert(
+            i(900),
+            BTreeMap::from([(i(800), x.clone()), (i(700), Atom::num(-1))]),
+        );
+        reduction
+            .rules
+            .insert(i(901), BTreeMap::from([(i(800), Atom::num(1))]));
+        reduction.rules.insert(i(902), BTreeMap::new());
+        let roots = [i(900), i(901), i(902)];
+        let seeds = Expander::new(&reduction, &context)
+            .unwrap()
+            .expand_many(&roots, 2)
+            .unwrap();
+        reduction.rules.insert(
+            i(800),
+            (1..=129)
+                .map(|n| (i(n), Atom::num(n) / (&x + Atom::num(n))))
+                .collect(),
+        );
+        reduction.rules.insert(
+            i(700),
+            (1..=129)
+                .map(|n| {
+                    (
+                        i(n),
+                        Atom::num(n) * &x / (&x + Atom::num(n)) - Atom::num(i64::from(n % 2 == 0)),
+                    )
+                })
+                .collect(),
+        );
+        let mut expander = Expander::new(&reduction, &context).unwrap();
+        let weighted = expander.expand_weighted(&seeds, 2).unwrap();
+        let fresh = expander.expand_many(&roots, 2).unwrap();
+        assert_expansions_equal(&weighted, &fresh);
+        assert_eq!(weighted[&i(900)].len(), 64);
+        assert!(
+            weighted[&i(900)]
+                .values()
+                .all(|v| coefficient_atom(v) == Atom::num(1))
+        );
+        assert_eq!(weighted[&i(901)].len(), 129);
+        assert!(weighted[&i(902)].is_empty());
+        // Cached seeds use the same cycle-checked dependency planner as a
+        // fresh expansion, including cycles introduced by subsequent rules.
+        reduction
+            .rules
+            .insert(i(1), BTreeMap::from([(i(900), Atom::num(1))]));
+        assert!(matches!(
+            Expander::new(&reduction, &context)
+                .unwrap()
+                .expand_weighted(&seeds, 2),
+            Err(Error::IncompleteReduction(_))
+        ));
+    }
 
     #[test]
     fn batched_substitution_retains_shared_targets_and_zero_rules() {

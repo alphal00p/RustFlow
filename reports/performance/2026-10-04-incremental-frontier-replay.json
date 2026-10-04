@@ -1,0 +1,134 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "kind": "controlled exact substitution replay; not end-to-end timing",
+  "baseline_expander_source_commit": "c5d2b0ea5576e8e260f9b6c6e2fc849f5ede5147",
+  "symbolica_commit": "75f8350094b90254ee71dc2a391fde0d14b0204a",
+  "compiler": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+  "compiler_options": [
+    "--edition=2024",
+    "-O",
+    "-C",
+    "debuginfo=1"
+  ],
+  "prototype": {
+    "source_local_path": "target/frontier-prototype/bench.rs",
+    "source_sha256": "7952dbbaf7f4c02cab843c5ed750928e81d39c4aa846e1ce1be9dcd6bcc29a01",
+    "executable_local_path": "target/frontier-prototype/bench",
+    "executable_sha256": "55ccd7a997792b58700aff4645d2b5afa9233a7e046bef4e43d86ba63d4c6e5b",
+    "standalone": true,
+    "note": "Local Integral, Reduction, error and noncancelling context types avoid library rebuild races; coefficient arithmetic uses the same Symbolica dependency."
+  },
+  "fixture": {
+    "local_path": "target/sum-prototype/checkpoint.bin",
+    "sha256": "964e61b9f745ebdbae8c919e4286b6e1eb1a51495c1d8aaf75ca05d50ce7a78c",
+    "rules": 40840,
+    "residuals": 1471,
+    "target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      -3,
+      0
+    ],
+    "family": "original-paper physical two-loop family",
+    "note": "Frozen intermediate native checkpoint; neither an upstream timing reference nor a completed reduction."
+  },
+  "method": {
+    "rounds": 3,
+    "new_rules_per_round": 4,
+    "selection": "Withhold twelve reachable same-sector rules with a direct unresolved same-sector child, ordered by descending shortest graph depth and integral index; reintroduce four per round.",
+    "timed_work": "Construct an Expander and perform exact filtered substitution. Fresh runs start from the original target; incremental runs start from the preceding weighted frontier.",
+    "excluded": [
+      "compilation",
+      "checkpoint loading",
+      "IBP search",
+      "full-root structural validation",
+      "boundary construction",
+      "numerical propagation",
+      "Laurent fitting"
+    ],
+    "initial_expansion": "Required by both approaches; not included in update speedup ratios.",
+    "repetitions": "One controlled three-round sequence per sector, not three repeats of identical work; fresh then incremental in each round.",
+    "precision": "Exact integer/rational polynomial arithmetic; no numerical tolerance.",
+    "validation": "Every target/leaf coefficient difference is exactly zero after Symbolica rational arithmetic, including missing-zero cases.",
+    "concurrency": "Each process pinned to one logical CPU; both sector cases and other development work ran concurrently.",
+    "limitations": "These artificial append-only rounds use actual checkpoint rules but do not reproduce chronological native search batches. Results are prototype substitution measurements, not production or AMFlow end-to-end speedups. Reproduction requires the local checkpoint and prototype, which are not included in this report."
+  },
+  "cases": [
+    {
+      "fixture_digest": "2e695bab323dbc5ecd94089a0c5e97baaec4bde4f6d675f1e185c082fad60974",
+      "minimum_lines": 5,
+      "rounds": [
+        {
+          "added_rules": 4,
+          "exact_equality": true,
+          "fresh_ms": 6362.372698,
+          "incremental_ms": 242.184838,
+          "leaves": 22,
+          "round": 0
+        },
+        {
+          "added_rules": 4,
+          "exact_equality": true,
+          "fresh_ms": 6370.335501,
+          "incremental_ms": 210.47574699999998,
+          "leaves": 20,
+          "round": 1
+        },
+        {
+          "added_rules": 4,
+          "exact_equality": true,
+          "fresh_ms": 6377.7995,
+          "incremental_ms": 222.84403799999998,
+          "leaves": 16,
+          "round": 2
+        }
+      ],
+      "cpu": 28,
+      "initial_expansion_ms": 6360.525,
+      "fresh_updates_total_ms": 19110.507699,
+      "incremental_updates_total_ms": 675.504623,
+      "updates_ratio": 28.290713413814785
+    },
+    {
+      "fixture_digest": "2e695bab323dbc5ecd94089a0c5e97baaec4bde4f6d675f1e185c082fad60974",
+      "minimum_lines": 4,
+      "rounds": [
+        {
+          "added_rules": 4,
+          "exact_equality": true,
+          "fresh_ms": 87659.834905,
+          "incremental_ms": 357.527397,
+          "leaves": 1463,
+          "round": 0
+        },
+        {
+          "added_rules": 4,
+          "exact_equality": true,
+          "fresh_ms": 88167.39522100001,
+          "incremental_ms": 930.217715,
+          "leaves": 1470,
+          "round": 1
+        },
+        {
+          "added_rules": 4,
+          "exact_equality": true,
+          "fresh_ms": 92823.483031,
+          "incremental_ms": 723.962079,
+          "leaves": 1471,
+          "round": 2
+        }
+      ],
+      "cpu": 27,
+      "initial_expansion_ms": 86890.756,
+      "fresh_updates_total_ms": 268650.713157,
+      "incremental_updates_total_ms": 2011.707191,
+      "updates_ratio": 133.54364609267833
+    }
+  ]
+}

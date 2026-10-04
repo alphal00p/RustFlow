@@ -246,3 +246,33 @@ Existing v5 checkpoints remain mathematically compatible because their saved
 rules and nonzero conditions use the identical family and integral ordering.
 A performance comparison of the changed strategy must start in a fresh cache
 directory. The four-target numerical acceptance gate remains incomplete.
+
+
+## Fresh production pilot with generic four-line domains
+
+Commit `917886e777a31638504fd16a78eaf65081808626` passed 102 release tests and
+strict Clippy, including the partial-domain/fallback and exact identity
+regressions. A fresh first-target pilot used its archived executable and
+library on CPU 25, `epsilon = 1/2700`, depth three, `max_targets = 65536`,
+`max_exact_frontier = 100000`, and a 600-second wall limit. It did not reuse
+an old reduction checkpoint.
+
+The unchanged higher-sector prefix again completed 8,550 searches and exposed
+22,943 lower targets. The first two four-line frontiers contracted to
+`29,171 searched / 5,977 pending` and `35,148 / 2,888`, compared with the
+fixed-ray strategy's `29,171 / 6,100` and `35,271 / 3,407`. Subsequent pending
+counts were 1,446, 693, 214, 86, 41, 10 and four. The process reached
+`40,526 searched / 4 pending` before the wall limit interrupted substitution
+of 40,501 rules. Its last atomic checkpoint has 40,516 searched, ten pending
+four-line targets, and size 63,482,899 bytes.
+
+Across this run, 20 generic attempts supplied 25,654 reductions. There were
+847 fixed-ray attempts, 37,763 total formula applications, and 114 concrete
+fallbacks. Formula progress events account for 39.07 seconds; live memory
+observations plateaued around 622 MiB. The generic tier reduces generation
+cost and some frontier breadth, but repeated exact propagation from the
+original target still dominates the last rounds. The next optimization should
+address that propagation rather than repeatedly increasing the time limit.
+The log is `target/generic-four-line-paper-pilot/first-target.log`. This pilot
+still did not complete reduction, differential preparation, or a numerical
+sample; it does not establish the required four-target, 20-digit acceptance.
