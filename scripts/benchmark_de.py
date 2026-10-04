@@ -84,6 +84,42 @@ def workloads():
     }
 
 
+def custom_case(path):
+    """Read data only; never evaluate case strings as Python or Wolfram code."""
+    case = json.loads(path.read_text())
+    if not isinstance(case, dict) or not isinstance(case.get("name"), str):
+        raise ValueError("case must be an object with a string name")
+    if not re.fullmatch(r"[A-Za-z0-9_-]+", case["name"]):
+        raise ValueError("case name must contain only letters, digits, underscores or hyphens")
+    matrix = case.get("matrix")
+    if not isinstance(matrix, list) or not matrix:
+        raise ValueError("case matrix must be a nonempty square array")
+    size = len(matrix)
+    if any(not isinstance(row, list) or len(row) != size or
+           any(not isinstance(value, str) or not value.strip() for value in row)
+           for row in matrix):
+        raise ValueError("case matrix must be a square array of nonempty strings")
+    boundary = case.get("boundary")
+    if not isinstance(boundary, list) or len(boundary) != size:
+        raise ValueError("case boundary dimension must match its matrix")
+    for value in [case.get("start"), case.get("end"), *boundary]:
+        if not isinstance(value, list) or len(value) != 2 or any(
+                not isinstance(component, str) or not component.strip() for component in value):
+            raise ValueError("complex values must be pairs of nonempty strings")
+        for component in value:
+            if not re.fullmatch(r"[+-]?(?:\d+(?:\.\d*)?|\.\d+)(?:[eE][+-]?\d+)?", component):
+                raise ValueError("boundary and endpoint components must be finite decimal literals")
+            # Decimal preserves the literal exactly; never convert values through float.
+            if not Decimal(component).is_finite():
+                raise ValueError("nonfinite boundary or endpoint component")
+    epsilon = case.get("epsilon")
+    if not isinstance(epsilon, str) or not re.fullmatch(r"[+-]?\d+(?:/[+-]?\d+)?", epsilon):
+        raise ValueError("case epsilon must be an exact integer or integer fraction")
+    if "/" in epsilon and int(epsilon.split("/", 1)[1]) == 0:
+        raise ValueError("epsilon denominator cannot be zero")
+    return case
+
+
 def wl_value(value):
     real, imag = [s.replace("e", "*^").replace("E", "*^") for s in value]
     return real + ("+" if not imag.startswith(("-", "+")) else "") + imag + "*I"
@@ -174,9 +210,14 @@ def main():
     parser.add_argument("--rust-source-commit", required=True,
                         help="commit from which the Rust library was built")
     parser.add_argument("--digits", type=int, default=20)
+    parser.add_argument("--case", type=Path, action="append",
+                        help="use these supplied-boundary JSON cases instead of the two defaults")
     args = parser.parse_args()
     if args.repeats < 1 or args.digits < 1 or args.digits > 60:
         parser.error("repeats must be positive; digits must be between 1 and 60")
+    cases = [custom_case(path) for path in args.case] if args.case else list(workloads())
+    if len({case["name"] for case in cases}) != len(cases):
+        parser.error("case names must be unique")
     if args.output.exists():
         parser.error("output must be a new directory, to preserve previous measurements")
     args.output.mkdir(parents=True)
@@ -194,7 +235,8 @@ def main():
         "upstream_build": upstream_build,
         "benchmark_source_sha256": digest(ROOT / "examples/benchmark_de.rs"),
         "harness_source_sha256": digest(Path(__file__)),
-        "fixture_sha256": HASHES, "requested_digits": args.digits,
+        "fixture_sha256": ({str(path): digest(path) for path in args.case}
+                           if args.case else HASHES), "requested_digits": args.digits,
         "platform": platform.platform(), "cpu": args.cpu,
         "affinity": sorted(os.sched_getaffinity(0)),
         "cpu_model": next((v.split(":", 1)[1].strip() for v in
@@ -207,7 +249,7 @@ def main():
         "threads": {"NThread": 1, "OMP_NUM_THREADS": 1, "RAYON_NUM_THREADS": 1},
         "cases": [],
     }
-    for case in workloads():
+    for case in cases:
         report = {"name": case["name"], "dimension": len(case["matrix"]), "runs": []}
         vectors = {}
         for phase, precision, order in [("base", args.digits + 40, 80),

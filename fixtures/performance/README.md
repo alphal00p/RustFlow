@@ -22,3 +22,32 @@ The upstream MIT license is preserved in
 [`../amflow-2.0/LICENSE.md`](../amflow-2.0/LICENSE.md); see also the root `NOTICE`.
 `scripts/benchmark_de.py` checks both hashes and parses only lists and numeric
 literals. It never executes Wolfram code.
+
+## Automatically derived 27-integral paper system
+
+`paper27-eta-eps-1-2700.json` contains the exact differential matrix produced by
+Rust's completed four-target sample at `s=30`, `t=-10/3`, `m^2=1`, `epsilon=1/2700`.
+Its source is validated commit `15471e4bbbc7736f1cce62bfb8ff1bad50821dd1`.
+The originating system-cache file has SHA-256
+`e8eac79bb41876f7c7673ac3e96cad75a42a50c7b62f1ecf4fcbe535f49d0fc5`;
+its BLAKE3 payload digest is preserved in the fixture.
+
+[`scripts/export_cached_de.rs`](../../scripts/export_cached_de.rs) verifies the
+cache envelope, imports all matrix entries with Symbolica, requires eta as the
+only symbol, and exports one rational polynomial fraction per entry. Every
+exported entry is parsed again and subtracted from the original using exact
+arithmetic: all 729 differences vanish. The basis ordering and 190 nonzero
+entries are retained. No epsilon fitting or floating-point substitution occurs
+during export; epsilon is already sampled exactly in the cached matrix.
+
+The benchmark supplies synthetic boundary components
+`b_j=(j+1)+((j mod 5)-2)i`, with zero-based `j`. These are not physical integral
+values. It transports from `eta=-512i` to `eta=-256i`. Both 201-bit and 267-bit
+pole computations find eight poles inside `|eta|<64`, giving at least 192 units
+of clearance from the segment to those computed poles. This is a numerical
+pole check, not an interval certificate. The fixture preserves both pole sets.
+
+The compact exported fixture is sufficient to reproduce the matched transport
+comparison without the original 32 MB cache. Its hash, the export command and
+library provenance are recorded in the
+[27-integral performance report](../../reports/performance/2026-10-04-paper27-de.json).

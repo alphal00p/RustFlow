@@ -286,3 +286,53 @@ python3 scripts/benchmark_singular.py \
 ```
 
 Choose an available CPU on another host. Each output directory must be new.
+
+## Automatically derived 27-integral paper system
+
+The matrix from the completed four-target sample at `s=30`, `t=-10/3`, `m^2=1`
+and `epsilon=1/2700` provides a larger matched ordinary-transport workload.
+It has 27 integrals and 190 nonzero entries. Export verifies the cache digest
+and exact rational equality of all 729 matrix entries after reparsing; the
+[fixture provenance](../fixtures/performance/README.md) preserves its basis
+ordering and pole checks. Both implementations receive the same synthetic
+integer complex boundary vector and continue from `eta=-512i` to `eta=-256i`.
+The computed poles at both working precisions lie inside `|eta|<64`.
+
+These measurements use immutable Rust library commit
+`15471e4bbbc7736f1cce62bfb8ff1bad50821dd1`, the original executable above,
+CPU 28, one thread, 201 working bits and order 80. The unchanged Rust driver
+was linked with `rustc --edition=2024 -O -C debuginfo=1`. Medians include five
+fresh processes after one excluded warmup, with alternating implementation order.
+The separate Laurent calculation ran concurrently on CPUs 24–27; host load is
+recorded. Compilation, matrix export and IBP reduction are excluded.
+
+| Measurement | Rust | Original C++ |
+|---|---:|---:|
+| Total process | 0.469874 s | 14.481909 s |
+| Ordinary transport | 0.262298 s | 0.061754 s |
+| Accepted steps | 4 | 1 |
+| Rejected trial steps | 3 | Not reported |
+
+Rust's timed preparation takes 0.053344 s. The original total includes its
+preparation and external MPSolve calls; its transport remains faster. The two
+step-selection and error-checking policies perform different amounts of work.
+No overall speedup ratio is inferred from these short supplied-boundary jobs.
+
+All measured repetitions meet the 20-digit scaled-error requirement against
+independent 267-bit, order-112 runs. Base cross-implementation error is
+`1.45e-21` at most, improving to `3.57e-31` after refinement. Rust's own
+precision/order change is at most `5.53e-59`; the original change is `1.45e-21`.
+This verifies ordinary transport on the same exact system. The synthetic
+boundary is not a physical integral boundary, and the benchmark does not
+validate recursive boundary construction, Laurent coefficients or a full
+automatic-workflow timing comparison.
+
+[Raw results](../reports/performance/2026-10-04-paper27-de.json) include all
+outputs, phase timings, errors, exact inputs and hashes. Reproduce with the
+regular benchmark build above and add
+`--case fixtures/performance/paper27-eta-eps-1-2700.json` to
+`scripts/benchmark_de.py`, choosing a new output directory and an available CPU.
+The custom-case loader accepts exact integer/fraction epsilon values and
+decimal-string boundary/endpoints; it rejects malformed dimensions and
+nonfinite or expression-valued boundary/endpoints without converting through
+binary floating-point values.
