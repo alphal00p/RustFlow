@@ -117,23 +117,29 @@ impl RustFlow {
         let prepared = system.compile(p, &Default::default())?;
         // A second transport from the same cached values checks integration
         // error only. Carry the supplied boundary uncertainty forward too.
-        let mut input_error = p.real(0);
-        for error in source.accuracy.comparison_errors()[..count]
+        // Fix one scale per coefficient for the whole trajectory. A large
+        // higher epsilon coefficient then contributes only through actual
+        // couplings, rather than imposing its absolute error on every order.
+        let weights = source.coefficients[..count]
             .iter()
             .flatten()
+            .map(|value| {
+                let norm = p.norm(value);
+                if norm > p.real(1) { norm } else { p.real(1) }
+            })
+            .collect::<Vec<_>>();
+        let mut input_relative_error = p.real(0);
+        for (error, weight) in source.accuracy.comparison_errors()[..count]
+            .iter()
+            .flatten()
+            .zip(&weights)
         {
-            if *error > input_error {
-                input_error = error.clone();
+            let relative = error.clone() / weight;
+            if relative > input_relative_error {
+                input_relative_error = relative;
             }
         }
-        let mut scale = p.real(1);
-        for value in source.coefficients[..count].iter().flatten() {
-            let n = p.norm(value);
-            if n > scale {
-                scale = n;
-            }
-        }
-        input_error += p.tolerance(source.accuracy.verified_digits()) * scale;
+        input_relative_error += p.tolerance(source.accuracy.verified_digits());
         let evidence_cap = source
             .accuracy
             .verified_digits()
@@ -142,11 +148,17 @@ impl RustFlow {
         let mut accepted = Vec::new();
         for (index, segment) in solution.segments.iter().enumerate() {
             context.cancellation.check()?;
-            amplification *= prepared.error_amplification(&segment.center, &segment.end)?;
+            amplification *=
+                prepared.error_amplification_weighted(&segment.center, &segment.end, &weights)?;
             if let Some(checkpoint) = solution.checkpoints.iter().find(|c| c.segment == index) {
                 let mut checkpoint = checkpoint.clone();
-                for error in checkpoint.comparison_errors.iter_mut().flatten() {
-                    *error += input_error.clone() * &amplification;
+                for (error, weight) in checkpoint
+                    .comparison_errors
+                    .iter_mut()
+                    .flatten()
+                    .zip(&weights)
+                {
+                    *error += weight.clone() * &input_relative_error * &amplification;
                 }
                 if errors_meet(
                     p,
@@ -158,8 +170,13 @@ impl RustFlow {
                 }
             }
         }
-        for error in solution.comparison_errors.iter_mut().flatten() {
-            *error += input_error.clone() * &amplification;
+        for (error, weight) in solution
+            .comparison_errors
+            .iter_mut()
+            .flatten()
+            .zip(&weights)
+        {
+            *error += weight.clone() * &input_relative_error * &amplification;
         }
         if !errors_meet(
             p,

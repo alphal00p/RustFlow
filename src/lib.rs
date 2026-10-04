@@ -31,7 +31,9 @@ pub mod regions;
 pub mod tensor;
 pub mod transport_cache;
 pub mod vacuum;
-pub use engine::{PreparedFlow, evaluate_samples, solve_integrals, solve_prepared};
+pub use engine::{
+    PreparedFlow, evaluate_samples, solve_integral_combinations, solve_integrals, solve_prepared,
+};
 pub use epsilon::{LaurentExpansion, fit_epsilon};
 pub use error::{Error, Result};
 pub use family::{Integral, IntegralFamily, KinematicPoint, Propagator};

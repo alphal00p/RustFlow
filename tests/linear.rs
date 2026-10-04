@@ -253,3 +253,31 @@ fn automatic_hqet_limit_matches_gamma_formula_and_precision_refinement() {
         assert!(p.close(&first.values[0], &second.values[0], 20));
     }
 }
+
+#[test]
+fn public_solve_integrals_dispatches_linear_families_before_laurent_fitting() {
+    let options = FlowOptions {
+        workers: 2,
+        ..Default::default()
+    };
+    let result = solve_integrals(
+        &hqet(),
+        &[Integral(vec![1, 1])],
+        &KinematicPoint::default(),
+        0,
+        &options,
+        &RustRedBackend::default(),
+        &RunContext::default(),
+    )
+    .unwrap();
+    let p = Precision::decimal(80).unwrap();
+    let gamma = ComplexFloat::new(
+        Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Euler)),
+        p.real(0),
+    );
+    let finite = p.sub(&p.add(&gamma, &p.scale(&p.log(&p.i(2)), 2, 1)), &p.i(2));
+    assert_eq!(result[0].verified_digits, Some(20));
+    assert!(p.close(&result[0].coefficients[&-2], &p.zero(), 20));
+    assert!(p.close(&result[0].coefficients[&-1], &p.i(-1), 20));
+    assert!(p.close(&result[0].coefficients[&0], &finite, 20));
+}

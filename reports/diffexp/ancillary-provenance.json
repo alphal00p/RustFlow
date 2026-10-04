@@ -1,0 +1,1472 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-04T17:29:10.042815+00:00",
+  "diffexp_commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+  "scope": "Pinned scientific ancillary inputs and shape-aware metadata; no five-point numerical transport or performance measurement.",
+  "selected_versions": {
+    "nonplanar": "1812.11160v2",
+    "planar": "2005.04195v2"
+  },
+  "planar_notebook_url_discrepancy": "The notebook prints 2005.04195v1 but downloads the unversioned 2005.04195 URL. v2 is its latest version; both versions are retained and compared.",
+  "archives": [
+    {
+      "version": "1812.11160v2",
+      "url": "https://arxiv.org/src/1812.11160v2",
+      "bytes": 237379,
+      "sha256": "3b4fc87a30cb7c26b13ecc290181fcea0c734d23f012e49b8fe599a8188b324d",
+      "members": [
+        {
+          "member": "anc/XB_Atilde.txt",
+          "size": 320090,
+          "sha256": "3d997ab1eae2a6ca1e2489f3e733080b5b20950bc7440555b76230a5d2350c3d"
+        },
+        {
+          "member": "anc/dlogBasisXB.txt",
+          "size": 112318,
+          "sha256": "daf048c1b0b6e6462f12ae8f7c9a9033c8435024d903071c50766b81696a3d36"
+        },
+        {
+          "member": "anc/XB_Boundary_values_X0.txt",
+          "size": 56214,
+          "sha256": "132611651f9c2fc5de983965bf170328ea0a54cef0f8cb4a3f65d87182c34a96"
+        },
+        {
+          "member": "anc/XB_Boundary_values_X1.txt",
+          "size": 68936,
+          "sha256": "7883537af39b181f84266934b9440df3f67a5eb8f67b576388d7aa29524d9b92"
+        },
+        {
+          "member": "anc/README.txt",
+          "size": 1307,
+          "sha256": "af6c457e8a2542abd69d5e9b6cc7788dba452847da42b0c28b381be31f77ec17"
+        }
+      ]
+    },
+    {
+      "version": "2005.04195v1",
+      "url": "https://export.arxiv.org/src/2005.04195v1",
+      "bytes": 4949512,
+      "sha256": "aa1f823bf4753fd502670daa881b47242b9bdd852d0bf52c7ca7aece134f9c34",
+      "members": [
+        {
+          "member": "anc/alphabet.m",
+          "size": 4300,
+          "sha256": "7d685bcd1028b55b974039fe99acd5d1ec0e712af75223212c27040e04038e86"
+        },
+        {
+          "member": "anc/usageExample.m",
+          "size": 7318,
+          "sha256": "055dc778121bd801ee12228382f9fd820f6c59692dc16c66babb0fd56e21925c"
+        },
+        {
+          "member": "anc/mzz/diffEq-mzz.m",
+          "size": 44368,
+          "sha256": "bb768d48123765fce8622709f896ec3cf954c068a53f2fa89b6325cc0f333a1f"
+        },
+        {
+          "member": "anc/mzz/numIntegrals-mzz.m",
+          "size": 417746,
+          "sha256": "e2424eb7cdc0d994d72bc0031bcc938f2ea562b2727ecbfa798655547652c74f"
+        },
+        {
+          "member": "anc/mzz/pureBasis-mzz.m",
+          "size": 6569,
+          "sha256": "6c02af1d489aedb3959642301df6d62256aa7cd9b77885750ede00b7cb56e30d"
+        },
+        {
+          "member": "anc/mzz/input-mzz.m",
+          "size": 499,
+          "sha256": "fd3a6478d48153340f56f9c43e6ebd6ff9a8facf39d3b9ba379a27041fec4c2d"
+        },
+        {
+          "member": "anc/mzz/graphs-mzz.m",
+          "size": 46226,
+          "sha256": "aa55caa7fab17eb07a29e3a741cdc033b256124b1376145a56bd685820a309c0"
+        },
+        {
+          "member": "anc/1loop/numIntegrals-1loop.m",
+          "size": 81757,
+          "sha256": "e772dd2e9402004f40ea72b1bd8ffca5200a2b91f37bd7ed6eb8bd4b8c982642"
+        },
+        {
+          "member": "anc/1loop/graphs-1loop.m",
+          "size": 9788,
+          "sha256": "30af5eb95025490dbe506adf34673cb5c322074101f9ca2f9b82ce1db5f30afb"
+        },
+        {
+          "member": "anc/1loop/input-1loop.m",
+          "size": 424,
+          "sha256": "ed16186fed44f6714e384ee730b1e5381852cc21be26cceb395d80b1800cc6af"
+        },
+        {
+          "member": "anc/1loop/diffEq-1loop.m",
+          "size": 2195,
+          "sha256": "8436b42770cea4de9ed8ff3e95acf1897af180081a3907af672938fbf8605016"
+        },
+        {
+          "member": "anc/1loop/pureBasis-1loop.m",
+          "size": 1033,
+          "sha256": "2e4b4c817ca290e58f60067bffd74c81c0ca3063afba2ca4f375748db07a91d0"
+        },
+        {
+          "member": "anc/zmz/pureBasis-zmz.m",
+          "size": 6174,
+          "sha256": "eba2b9b69e34140c1a0ca213875ddbb074dfed624ff61ec4e64dd8c144c3ff38"
+        },
+        {
+          "member": "anc/zmz/numIntegrals-zmz.m",
+          "size": 421199,
+          "sha256": "abd31762bef73caa217f500422a8b23ccc97ea4e222faeddfba6cd7b5af585c8"
+        },
+        {
+          "member": "anc/zmz/diffEq-zmz.m",
+          "size": 57457,
+          "sha256": "7345c3d1fd8e6b248668a6ce072d90866971e73d4663b07d3b43cd6c98e3f018"
+        },
+        {
+          "member": "anc/zmz/graphs-zmz.m",
+          "size": 43530,
+          "sha256": "0c4d925865b39e8c6e53d2ce1a93674f1e0d14eac797521766b135a29558715a"
+        },
+        {
+          "member": "anc/zmz/input-zmz.m",
+          "size": 500,
+          "sha256": "61e3dc8ad19b2c3ef53123b15acf76bab94af04c05f967709ad6159ec4e842a4"
+        },
+        {
+          "member": "anc/zzz/diffEq-zzz.m",
+          "size": 67109,
+          "sha256": "43f617d7929ee5f6aaef9d808f76ea2248c3961b0677a3632f72f6c83a9a29b1"
+        },
+        {
+          "member": "anc/zzz/numIntegrals-zzz.m",
+          "size": 480872,
+          "sha256": "184dfc6a105164776d1406ae0b5e7e3b9f2447091b02479604613fe065b0df66"
+        },
+        {
+          "member": "anc/zzz/pureBasis-zzz.m",
+          "size": 7426,
+          "sha256": "68368e419471556e319ec6323580d216af730c372e6b5b55611b40e4f2522369"
+        },
+        {
+          "member": "anc/zzz/input-zzz.m",
+          "size": 480,
+          "sha256": "75a04de20422efb595eea6d256e55a625be7ac0e983ef9c94cbf5e74518031b8"
+        },
+        {
+          "member": "anc/zzz/graphs-zzz.m",
+          "size": 52558,
+          "sha256": "46f35e7d4244a7ec816b23d45e0d1910c689d571806e6437d4d8ebe403c819f2"
+        },
+        {
+          "member": "anc/determinants.m",
+          "size": 1707,
+          "sha256": "36edfd1ed7865af2e78002bb4bbc4f54d5a250102612a7407e30136fa02e5273"
+        }
+      ]
+    },
+    {
+      "version": "2005.04195v2",
+      "url": "https://export.arxiv.org/src/2005.04195v2",
+      "bytes": 5129865,
+      "sha256": "38226debcb23bd0fc5d1a4195f9a9af1a53249b3e168cce4e691a888e79978cd",
+      "members": [
+        {
+          "member": "anc/alphabet.m",
+          "size": 4300,
+          "sha256": "7d685bcd1028b55b974039fe99acd5d1ec0e712af75223212c27040e04038e86"
+        },
+        {
+          "member": "anc/usageExample.m",
+          "size": 7318,
+          "sha256": "055dc778121bd801ee12228382f9fd820f6c59692dc16c66babb0fd56e21925c"
+        },
+        {
+          "member": "anc/mzz/diffEq-mzz.m",
+          "size": 44368,
+          "sha256": "bb768d48123765fce8622709f896ec3cf954c068a53f2fa89b6325cc0f333a1f"
+        },
+        {
+          "member": "anc/mzz/numIntegrals-mzz.m",
+          "size": 555651,
+          "sha256": "ef7ab269df49d5d1c722bd28e2b40c16dce7b9d7f574527be03c295b05da93fb"
+        },
+        {
+          "member": "anc/mzz/pureBasis-mzz.m",
+          "size": 6569,
+          "sha256": "6c02af1d489aedb3959642301df6d62256aa7cd9b77885750ede00b7cb56e30d"
+        },
+        {
+          "member": "anc/mzz/input-mzz.m",
+          "size": 499,
+          "sha256": "fd3a6478d48153340f56f9c43e6ebd6ff9a8facf39d3b9ba379a27041fec4c2d"
+        },
+        {
+          "member": "anc/mzz/graphs-mzz.m",
+          "size": 46226,
+          "sha256": "aa55caa7fab17eb07a29e3a741cdc033b256124b1376145a56bd685820a309c0"
+        },
+        {
+          "member": "anc/1loop/numIntegrals-1loop.m",
+          "size": 105816,
+          "sha256": "abe70dac2e86ba207043e573f3553f4dd0225180c20c916a3b9ae18b6a8c08ef"
+        },
+        {
+          "member": "anc/1loop/graphs-1loop.m",
+          "size": 9788,
+          "sha256": "30af5eb95025490dbe506adf34673cb5c322074101f9ca2f9b82ce1db5f30afb"
+        },
+        {
+          "member": "anc/1loop/input-1loop.m",
+          "size": 424,
+          "sha256": "ed16186fed44f6714e384ee730b1e5381852cc21be26cceb395d80b1800cc6af"
+        },
+        {
+          "member": "anc/1loop/diffEq-1loop.m",
+          "size": 2195,
+          "sha256": "8436b42770cea4de9ed8ff3e95acf1897af180081a3907af672938fbf8605016"
+        },
+        {
+          "member": "anc/1loop/pureBasis-1loop.m",
+          "size": 1033,
+          "sha256": "2e4b4c817ca290e58f60067bffd74c81c0ca3063afba2ca4f375748db07a91d0"
+        },
+        {
+          "member": "anc/zmz/pureBasis-zmz.m",
+          "size": 6174,
+          "sha256": "eba2b9b69e34140c1a0ca213875ddbb074dfed624ff61ec4e64dd8c144c3ff38"
+        },
+        {
+          "member": "anc/zmz/numIntegrals-zmz.m",
+          "size": 562018,
+          "sha256": "60bb875e573d5ec8106643b2a43f0ce96bb089024b410bc0768829edb86833eb"
+        },
+        {
+          "member": "anc/zmz/diffEq-zmz.m",
+          "size": 57457,
+          "sha256": "7345c3d1fd8e6b248668a6ce072d90866971e73d4663b07d3b43cd6c98e3f018"
+        },
+        {
+          "member": "anc/zmz/graphs-zmz.m",
+          "size": 43530,
+          "sha256": "0c4d925865b39e8c6e53d2ce1a93674f1e0d14eac797521766b135a29558715a"
+        },
+        {
+          "member": "anc/zmz/input-zmz.m",
+          "size": 500,
+          "sha256": "61e3dc8ad19b2c3ef53123b15acf76bab94af04c05f967709ad6159ec4e842a4"
+        },
+        {
+          "member": "anc/zzz/diffEq-zzz.m",
+          "size": 67109,
+          "sha256": "43f617d7929ee5f6aaef9d808f76ea2248c3961b0677a3632f72f6c83a9a29b1"
+        },
+        {
+          "member": "anc/zzz/numIntegrals-zzz.m",
+          "size": 641346,
+          "sha256": "74688c638e67005838ca3cc8957ccbc4604a5f1a2ef6654e280774080743e244"
+        },
+        {
+          "member": "anc/zzz/pureBasis-zzz.m",
+          "size": 7426,
+          "sha256": "68368e419471556e319ec6323580d216af730c372e6b5b55611b40e4f2522369"
+        },
+        {
+          "member": "anc/zzz/input-zzz.m",
+          "size": 480,
+          "sha256": "75a04de20422efb595eea6d256e55a625be7ac0e983ef9c94cbf5e74518031b8"
+        },
+        {
+          "member": "anc/zzz/graphs-zzz.m",
+          "size": 52558,
+          "sha256": "46f35e7d4244a7ec816b23d45e0d1910c689d571806e6437d4d8ebe403c819f2"
+        },
+        {
+          "member": "anc/determinants.m",
+          "size": 1734,
+          "sha256": "81655e7efd9628aac262ab2ac586e55c77ecb2f4657b88932bf0de2acdf19ca2"
+        }
+      ]
+    }
+  ],
+  "v1_v2_changed_members": [
+    {
+      "member": "anc/1loop/numIntegrals-1loop.m",
+      "v1": {
+        "member": "anc/1loop/numIntegrals-1loop.m",
+        "size": 81757,
+        "sha256": "e772dd2e9402004f40ea72b1bd8ffca5200a2b91f37bd7ed6eb8bd4b8c982642"
+      },
+      "v2": {
+        "member": "anc/1loop/numIntegrals-1loop.m",
+        "size": 105816,
+        "sha256": "abe70dac2e86ba207043e573f3553f4dd0225180c20c916a3b9ae18b6a8c08ef"
+      }
+    },
+    {
+      "member": "anc/determinants.m",
+      "v1": {
+        "member": "anc/determinants.m",
+        "size": 1707,
+        "sha256": "36edfd1ed7865af2e78002bb4bbc4f54d5a250102612a7407e30136fa02e5273"
+      },
+      "v2": {
+        "member": "anc/determinants.m",
+        "size": 1734,
+        "sha256": "81655e7efd9628aac262ab2ac586e55c77ecb2f4657b88932bf0de2acdf19ca2"
+      }
+    },
+    {
+      "member": "anc/mzz/numIntegrals-mzz.m",
+      "v1": {
+        "member": "anc/mzz/numIntegrals-mzz.m",
+        "size": 417746,
+        "sha256": "e2424eb7cdc0d994d72bc0031bcc938f2ea562b2727ecbfa798655547652c74f"
+      },
+      "v2": {
+        "member": "anc/mzz/numIntegrals-mzz.m",
+        "size": 555651,
+        "sha256": "ef7ab269df49d5d1c722bd28e2b40c16dce7b9d7f574527be03c295b05da93fb"
+      }
+    },
+    {
+      "member": "anc/zmz/numIntegrals-zmz.m",
+      "v1": {
+        "member": "anc/zmz/numIntegrals-zmz.m",
+        "size": 421199,
+        "sha256": "abd31762bef73caa217f500422a8b23ccc97ea4e222faeddfba6cd7b5af585c8"
+      },
+      "v2": {
+        "member": "anc/zmz/numIntegrals-zmz.m",
+        "size": 562018,
+        "sha256": "60bb875e573d5ec8106643b2a43f0ce96bb089024b410bc0768829edb86833eb"
+      }
+    },
+    {
+      "member": "anc/zzz/numIntegrals-zzz.m",
+      "v1": {
+        "member": "anc/zzz/numIntegrals-zzz.m",
+        "size": 480872,
+        "sha256": "184dfc6a105164776d1406ae0b5e7e3b9f2447091b02479604613fe065b0df66"
+      },
+      "v2": {
+        "member": "anc/zzz/numIntegrals-zzz.m",
+        "size": 641346,
+        "sha256": "74688c638e67005838ca3cc8957ccbc4604a5f1a2ef6654e280774080743e244"
+      }
+    }
+  ],
+  "matrix_reference_metadata": {
+    "planar": [
+      {
+        "family": "1loop",
+        "matrix_dimensions": [
+          58,
+          13,
+          13
+        ],
+        "nonzero_coefficients": 129,
+        "reference_points": 7,
+        "reference_row_lengths": [
+          [
+            13,
+            13,
+            13,
+            13,
+            13
+          ],
+          [
+            13,
+            13,
+            13,
+            13,
+            13
+          ],
+          [
+            13,
+            13,
+            13,
+            13,
+            13
+          ],
+          [
+            13,
+            13,
+            13,
+            13,
+            13
+          ],
+          [
+            13,
+            13,
+            13,
+            13,
+            13
+          ],
+          [
+            13,
+            13,
+            13,
+            13,
+            13
+          ],
+          [
+            13,
+            13,
+            13,
+            13,
+            13
+          ]
+        ],
+        "coefficient_dimensions": [
+          5,
+          13
+        ],
+        "precision_metadata": [
+          {
+            "source_precision_estimate": "9.711622747040076308858205617641619429`11.987291803479597*^-137",
+            "recorded_precision_range": [
+              "0.",
+              "133.6631399555863"
+            ]
+          },
+          {
+            "source_precision_estimate": "1.0116846928171497770331936935054317647`12.005045178635664*^-136",
+            "recorded_precision_range": [
+              "0.",
+              "133.39259829709047"
+            ]
+          },
+          {
+            "source_precision_estimate": "9.91299630095311248896879694862383995`11.996204943845726*^-137",
+            "recorded_precision_range": [
+              "0.",
+              "133.72397865638197"
+            ]
+          },
+          {
+            "source_precision_estimate": "1.2019157605755983107630817173985777571`12.07987402887359*^-136",
+            "recorded_precision_range": [
+              "0.",
+              "133.19246246205722"
+            ]
+          },
+          {
+            "source_precision_estimate": "1.0069330224757001080372665349645627684`12.003000583481118*^-136",
+            "recorded_precision_range": [
+              "0.",
+              "133.53914630098274"
+            ]
+          },
+          {
+            "source_precision_estimate": "9.727352649435651850342034401013176813`11.987994660610354*^-137",
+            "recorded_precision_range": [
+              "0.",
+              "133.62223980402308"
+            ]
+          },
+          {
+            "source_precision_estimate": "9.279559707087074903247055870874180630354187762847012594394338177279182000598338699809477283781713384982971949288683373011679148593889792058185686508676388606133720904124308381277586188543146726223593502739089164786903343512035861670172362056719576402161106185595028091079388373017076224532092666539097731372668698446156021072891019211070961198879614486449435914654462105175117516913809494385794940069936983160076376046211`403.2328234893492*^-137",
+            "recorded_precision_range": [
+              "0.",
+              "133.39958997471575"
+            ]
+          }
+        ]
+      },
+      {
+        "family": "zmz",
+        "matrix_dimensions": [
+          58,
+          75,
+          75
+        ],
+        "nonzero_coefficients": 3643,
+        "reference_points": 7,
+        "reference_row_lengths": [
+          [
+            75,
+            75,
+            75,
+            75,
+            75
+          ],
+          [
+            75,
+            75,
+            75,
+            75,
+            75
+          ],
+          [
+            75,
+            75,
+            75,
+            75,
+            75
+          ],
+          [
+            75,
+            75,
+            75,
+            75,
+            75
+          ],
+          [
+            75,
+            75,
+            75,
+            75,
+            75
+          ],
+          [
+            75,
+            75,
+            75,
+            75,
+            75
+          ],
+          [
+            75,
+            75,
+            75,
+            75,
+            75
+          ]
+        ],
+        "coefficient_dimensions": [
+          5,
+          75
+        ],
+        "precision_metadata": [
+          {
+            "source_precision_estimate": "1.400180571425706*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.4684183742224"
+            ]
+          },
+          {
+            "source_precision_estimate": "1.5509436541766656*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.34108084711073"
+            ]
+          },
+          {
+            "source_precision_estimate": "1.403307758240887*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.83505843681397"
+            ]
+          },
+          {
+            "source_precision_estimate": "1.4507538228865352*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.12152557501713"
+            ]
+          },
+          {
+            "source_precision_estimate": "1.5672503103615972*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.48625621311143"
+            ]
+          },
+          {
+            "source_precision_estimate": "1.4004490450176495*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.48798193454763"
+            ]
+          },
+          {
+            "source_precision_estimate": "1.37542771044014046235551870877245545915675775894805718327973408056027875453664516976226680541698086312331301735183579018359349546565003465998071937906533902262772498118821292388629273619822842072951499178075438815214641680241828501802328290133460517608308369946448363757370289304364075462024`276.55806679958397*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.2307674387572"
+            ]
+          }
+        ]
+      },
+      {
+        "family": "mzz",
+        "matrix_dimensions": [
+          58,
+          74,
+          74
+        ],
+        "nonzero_coefficients": 2834,
+        "reference_points": 7,
+        "reference_row_lengths": [
+          [
+            74,
+            74,
+            74,
+            74,
+            74
+          ],
+          [
+            74,
+            74,
+            74,
+            74,
+            74
+          ],
+          [
+            74,
+            74,
+            74,
+            74,
+            74
+          ],
+          [
+            74,
+            74,
+            74,
+            74,
+            74
+          ],
+          [
+            74,
+            74,
+            74,
+            74,
+            74
+          ],
+          [
+            74,
+            74,
+            74,
+            74,
+            74
+          ],
+          [
+            13,
+            74,
+            74,
+            74,
+            74
+          ]
+        ],
+        "coefficient_dimensions": [
+          5,
+          74
+        ],
+        "precision_metadata": [
+          {
+            "source_precision_estimate": "2.966140900693602*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.4684183742224"
+            ]
+          },
+          {
+            "source_precision_estimate": "3.046644782458017*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.011129910051"
+            ]
+          },
+          {
+            "source_precision_estimate": "3.039019284788427*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.8804224304077"
+            ]
+          },
+          {
+            "source_precision_estimate": "3.253192502781711*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.011129910051"
+            ]
+          },
+          {
+            "source_precision_estimate": "3.239840210043235*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.48625621311143"
+            ]
+          },
+          {
+            "source_precision_estimate": "3.0011551751414295*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.35010757453784"
+            ]
+          },
+          {
+            "source_precision_estimate": "2.92815655788738382714758806978385939770077716190490509544785229419827313169717284482107180120301099175586520074916550075208700801556061139974040920098772793856820636880060822336443685562202711476537702681763103784891417437002361029560897451171664511868213038837772567609602059548503189182927463258330240562460218219462960096633537500015846760816807545829010599026935643072635174398473299330503234826216721276687584316215213538`401.84508873222387*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.25513458059092"
+            ]
+          }
+        ]
+      },
+      {
+        "family": "zzz",
+        "matrix_dimensions": [
+          58,
+          86,
+          86
+        ],
+        "nonzero_coefficients": 4241,
+        "reference_points": 7,
+        "reference_row_lengths": [
+          [
+            86,
+            86,
+            86,
+            86,
+            86
+          ],
+          [
+            86,
+            86,
+            86,
+            86,
+            86
+          ],
+          [
+            86,
+            86,
+            86,
+            86,
+            86
+          ],
+          [
+            86,
+            86,
+            86,
+            86,
+            86
+          ],
+          [
+            86,
+            86,
+            86,
+            86,
+            86
+          ],
+          [
+            86,
+            86,
+            86,
+            86,
+            86
+          ],
+          [
+            86,
+            86,
+            86,
+            86,
+            86
+          ]
+        ],
+        "coefficient_dimensions": [
+          5,
+          86
+        ],
+        "precision_metadata": [
+          {
+            "source_precision_estimate": "3.9484345043140424*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.43771550331812"
+            ]
+          },
+          {
+            "source_precision_estimate": "4.0722146420815303*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.34108084711073"
+            ]
+          },
+          {
+            "source_precision_estimate": "3.9568546652208104*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.60143168243104"
+            ]
+          },
+          {
+            "source_precision_estimate": "4.08408599551983*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.04370070244246"
+            ]
+          },
+          {
+            "source_precision_estimate": "3.952055411429508*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.0333440688552"
+            ]
+          },
+          {
+            "source_precision_estimate": "3.919828139312886*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.48798193454763"
+            ]
+          },
+          {
+            "source_precision_estimate": "3.912087075891560659280088367330009288199367699960903493582203271778307260715601955367259632056386911838050255494633169464641789569951471060673271544537716752181479202462397716870029677963769876743629062278866644517055322667210162011992129081851776533156853439417687893812864533158055280089833478568930063528471600291706389137163350760922990708430473255468066833095501932342462637415675702163068813604623034`377.8880433522162*^-134",
+            "recorded_precision_range": [
+              "0.",
+              "134.2307674387572"
+            ]
+          }
+        ]
+      }
+    ],
+    "v1_v2_reference_comparison": [
+      {
+        "family": "1loop",
+        "same_point_count": true,
+        "same_exact_points": true,
+        "reference_comparisons_per_point": [
+          {
+            "point_index": 1,
+            "v1_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "v2_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "max_absolute_difference_wolfram": "0``131.99999996898364"
+          },
+          {
+            "point_index": 2,
+            "v1_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "v2_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "max_absolute_difference_wolfram": "6.018*^-137"
+          },
+          {
+            "point_index": 3,
+            "v1_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "v2_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "max_absolute_difference_wolfram": "0``131.99999996898367"
+          },
+          {
+            "point_index": 4,
+            "v1_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "v2_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "max_absolute_difference_wolfram": "0``131.99999968983653"
+          },
+          {
+            "point_index": 5,
+            "v1_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "v2_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "max_absolute_difference_wolfram": "2.233*^-137"
+          },
+          {
+            "point_index": 6,
+            "v1_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "v2_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "max_absolute_difference_wolfram": "5.663*^-138"
+          },
+          {
+            "point_index": 7,
+            "v1_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "v2_row_lengths": [
+              13,
+              13,
+              13,
+              13,
+              13
+            ],
+            "max_absolute_difference_wolfram": "6.5616*^-137"
+          }
+        ]
+      },
+      {
+        "family": "zmz",
+        "same_point_count": true,
+        "same_exact_points": true,
+        "reference_comparisons_per_point": [
+          {
+            "point_index": 1,
+            "v1_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "v2_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "max_absolute_difference_wolfram": "0``131.99996622025134"
+          },
+          {
+            "point_index": 2,
+            "v1_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "v2_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "max_absolute_difference_wolfram": "1.353*^-135"
+          },
+          {
+            "point_index": 3,
+            "v1_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "v2_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "max_absolute_difference_wolfram": "0``131.99999385819197"
+          },
+          {
+            "point_index": 4,
+            "v1_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "v2_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "max_absolute_difference_wolfram": "0``131.99996898369366"
+          },
+          {
+            "point_index": 5,
+            "v1_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "v2_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "max_absolute_difference_wolfram": "1.719*^-135"
+          },
+          {
+            "point_index": 6,
+            "v1_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "v2_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "max_absolute_difference_wolfram": "0``131.9999662202513"
+          },
+          {
+            "point_index": 7,
+            "v1_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "v2_row_lengths": [
+              75,
+              75,
+              75,
+              75,
+              75
+            ],
+            "max_absolute_difference_wolfram": "9.726*^-135"
+          }
+        ]
+      },
+      {
+        "family": "mzz",
+        "same_point_count": true,
+        "same_exact_points": true,
+        "reference_comparisons_per_point": [
+          {
+            "point_index": 1,
+            "v1_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "v2_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "max_absolute_difference_wolfram": "2.263*^-135"
+          },
+          {
+            "point_index": 2,
+            "v1_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "v2_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "max_absolute_difference_wolfram": "0``131.99996898369366"
+          },
+          {
+            "point_index": 3,
+            "v1_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "v2_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "max_absolute_difference_wolfram": "0``131.99996898369366"
+          },
+          {
+            "point_index": 4,
+            "v1_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "v2_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "max_absolute_difference_wolfram": "0``131.99996898369366"
+          },
+          {
+            "point_index": 5,
+            "v1_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "v2_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "max_absolute_difference_wolfram": "0``131.99996898369366"
+          },
+          {
+            "point_index": 6,
+            "v1_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "v2_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "max_absolute_difference_wolfram": "0``131.9996926008705"
+          },
+          {
+            "point_index": 7,
+            "v1_row_lengths": [
+              74,
+              74,
+              74,
+              74,
+              74
+            ],
+            "v2_row_lengths": [
+              13,
+              74,
+              74,
+              74,
+              74
+            ],
+            "max_absolute_difference_wolfram": "not_comparable_different_shapes"
+          }
+        ]
+      },
+      {
+        "family": "zzz",
+        "same_point_count": true,
+        "same_exact_points": true,
+        "reference_comparisons_per_point": [
+          {
+            "point_index": 1,
+            "v1_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "v2_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "max_absolute_difference_wolfram": "1.406*^-135"
+          },
+          {
+            "point_index": 2,
+            "v1_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "v2_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "max_absolute_difference_wolfram": "0``131.9999662202513"
+          },
+          {
+            "point_index": 3,
+            "v1_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "v2_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "max_absolute_difference_wolfram": "1.159*^-135"
+          },
+          {
+            "point_index": 4,
+            "v1_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "v2_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "max_absolute_difference_wolfram": "0``131.99969290752907"
+          },
+          {
+            "point_index": 5,
+            "v1_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "v2_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "max_absolute_difference_wolfram": "3.177*^-135"
+          },
+          {
+            "point_index": 6,
+            "v1_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "v2_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "max_absolute_difference_wolfram": "0``131.99996898369366"
+          },
+          {
+            "point_index": 7,
+            "v1_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "v2_row_lengths": [
+              86,
+              86,
+              86,
+              86,
+              86
+            ],
+            "max_absolute_difference_wolfram": "2.7663*^-134"
+          }
+        ]
+      }
+    ],
+    "nonplanar": {
+      "dimension": [
+        108,
+        108
+      ],
+      "X0_dimensions": [
+        108,
+        5
+      ],
+      "X1_dimensions": [
+        108,
+        5
+      ],
+      "X0_precision_range": [
+        "64.94904768059436",
+        "66.92330214042376"
+      ],
+      "X1_precision_range": [
+        "50.47357670773912",
+        "58.42358518226602"
+      ]
+    },
+    "scope": "Scientific-data extraction and version comparison only; no numerical transport performed."
+  },
+  "known_data_issue": {
+    "version": "2005.04195v2",
+    "family": "mzz",
+    "point_index_one_based": 7,
+    "epsilon_order": 0,
+    "expected_components": 74,
+    "actual_components": 13,
+    "v1_row_lengths": [
+      74,
+      74,
+      74,
+      74,
+      74
+    ],
+    "v2_row_lengths": [
+      13,
+      74,
+      74,
+      74,
+      74
+    ],
+    "policy": "Reject point 7 as a complete v2 boundary; do not fill, truncate or silently substitute a v1 row. Notebook PH1\u2192PH6 and PH1\u2192PH2 workloads are unaffected."
+  },
+  "precision_policy": "Preserve source precision and error estimates, including finite-accuracy zeros. Stored mantissas and working precision are not independent accuracy certificates. Differences marked zero with finite Wolfram accuracy do not imply exact equality.",
+  "notebook_inputs": [
+    {
+      "path": "Examples/5pNonPlanar.nb",
+      "sha256": "3668fb2cb1d950e5c17ef46594bbd4ae7e9fee974859f5c8d368fa2d550b1a4d"
+    },
+    {
+      "path": "Examples/5pPlanar1Mass.nb",
+      "sha256": "2d122ba731d62fe45b69db0cc74372fbb603cd1ee31894fd8414e2e2596a53c8"
+    }
+  ],
+  "generated_target_data": [
+    {
+      "path": "target/diffexp-oracle/ancillary/nonplanar-reference-fixture.json",
+      "sha256": "4a50d328dd528145f4b9a56863c01dfe9ea0194e15937d71a8a954e922114208",
+      "bytes": 660073
+    },
+    {
+      "path": "target/diffexp-oracle/ancillary/planar-1loop-fixture.json",
+      "sha256": "16f29fcbe881073a2d37d473eedd1c6b2d4776b0b7cd7dacc83e25acc709d85a",
+      "bytes": 180980
+    },
+    {
+      "path": "target/diffexp-oracle/ancillary/planar-mzz-fixture.json",
+      "sha256": "3362446ba27cae2496511fb0c8d36fa7dc69df52723bbdba437f8b8cec113a23",
+      "bytes": 1118796
+    },
+    {
+      "path": "target/diffexp-oracle/ancillary/planar-zmz-fixture.json",
+      "sha256": "519eba6bda0efdda38c2f50ce274a48c24587965673e1f573b8d15e88fdce54d",
+      "bytes": 1200103
+    },
+    {
+      "path": "target/diffexp-oracle/ancillary/planar-zzz-fixture.json",
+      "sha256": "0c9fec637abb641f19533db3c26bb8746461518a45d3250904864c757677151c",
+      "bytes": 1377015
+    },
+    {
+      "path": "target/diffexp-oracle/ancillary/planar-alphabet.json",
+      "sha256": "fd4b02741f54c693086e79a9ea13d165e474f502760fbac06aca733d6eac9466",
+      "bytes": 4663
+    }
+  ],
+  "extraction": {
+    "script_sha256": "b9246a9f9119dedd8d6628205d8dcfa4438f80c5a5955041149ca26845e4aa81",
+    "log_sha256": "f6735f0e14d2d3096f35017a469ce23d3a715911df9b2fb590b20a8a0b5e4afd",
+    "wolfram": "15.0.1",
+    "cpu_affinity": [
+      28
+    ],
+    "exit_code": 0,
+    "only_scientific_data_loaded": true,
+    "ancillary_helper_code_not_evaluated": true
+  },
+  "acquisition_failures": "arxiv.org/src for the two planar source archives returned HTTP406; official export.arxiv.org/src succeeded. The first metadata subtraction exposed the malformed mzz point-7 row; the final comparison explicitly records incompatible shapes.",
+  "unversioned_alias_probe": {
+    "status": "downloaded",
+    "url": "https://export.arxiv.org/src/2005.04195",
+    "final_url": "https://export.arxiv.org/src/2005.04195",
+    "bytes": 5129865,
+    "sha256": "38226debcb23bd0fc5d1a4195f9a9af1a53249b3e168cce4e691a888e79978cd",
+    "matches_v2_archive_bytes": true,
+    "retrieved_utc": "2026-10-04T17:28:14.043470+00:00",
+    "original_unversioned_per_file_attempt": "https://arxiv.org/src/2005.04195/anc/1loop/numIntegrals-1loop.m returned HTTP406"
+  }
+}

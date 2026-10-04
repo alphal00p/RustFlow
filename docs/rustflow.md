@@ -46,15 +46,22 @@ condition for a new transport to the actual requested destination. The default
 provided distance policy uses arbitrary-precision scaled coordinate distances
 and requires a caller-supplied path-admissibility check. Applications may provide
 their own `TransportCost` policy, including singularities and expected step count.
+Coordinate differences are formed exactly before numerical distance evaluation,
+so a large common offset cannot erase a short separation. Equal rounded distance
+costs are compared exactly for rational-complex coordinates; algebraic distances
+use consistent higher-precision comparisons before accuracy breaks remaining ties.
 
 Accepted intermediate points are compared at the same coordinates between
 independent precision/order runs. Endpoint accuracy is not automatically assigned
 to every intermediate segment. Boundary uncertainty is propagated with a
-matrix-norm estimate, using lower bounds for rational denominators on each local
+weighted matrix-norm estimate, using lower bounds for rational denominators on each local
 disk and subdivisions when those bounds are inconclusive. A cache record's
 working precision cannot replace its verified accuracy. Stronger cached accuracy
 requires explicitly passing tighter independent comparisons and input-error
 checks, with a conservative arithmetic ceiling and two-digit margin.
+The weights retain separate physical-component and epsilon-order scales: a large
+higher-order coefficient cannot inject its absolute uncertainty into an uncoupled
+lower-order coefficient.
 
 These are consistency/error estimates, not interval-arithmetic proofs. Repeated
 transport from the same uncertain input cannot improve the input's accuracy.
@@ -82,6 +89,13 @@ physical orchestrator, general partial singular boundaries, and the larger
 DiffExp examples remain in the [parity plan](parity-plan.md). The live
 polylogarithm oracle is checked through independent boundary construction, not
 by using its target value as a boundary.
+
+`tests/mg5_pointbank.rs` uses actual boundary data from the nonplanar Higgs+jet
+application grid for its closed first two masters. Both new destinations agree
+with live DiffExp to 20 absolute digits; the second starts from the newly cached
+first point, and a repeated request after binary restart performs no transport.
+This validates the cache on application data without claiming the complete
+61-master system or the complete amplitude.
 
 The HEPKit integration will use its native DOT/graph conventions, Linnet for
 graph manipulation, and Spenso/HEPKit tensor facilities. The ecosystem audit is

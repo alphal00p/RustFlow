@@ -454,6 +454,21 @@ pub fn evaluate_samples(
     })
 }
 
+fn has_linear_propagators(family: &IntegralFamily) -> bool {
+    let quadratic = family.loops.len() * (family.loops.len() + 1) / 2;
+    family
+        .propagators
+        .iter()
+        .take(family.physical_propagators)
+        .any(|d| {
+            d.scalar_products.iter().take(quadratic).all(Atom::is_zero)
+                && d.scalar_products
+                    .iter()
+                    .skip(quadratic)
+                    .any(|a| !a.is_zero())
+        })
+}
+
 pub fn solve_integrals(
     family: &IntegralFamily,
     targets: &[Integral],
@@ -466,6 +481,37 @@ pub fn solve_integrals(
     options.validate()?;
     if targets.is_empty() {
         return Err(Error::InvalidInput("empty target list".into()));
+    }
+    if has_linear_propagators(&family.at(point)) {
+        let prepared = crate::linear::PreparedLinearFlow::new(
+            family, targets, point, backend, options, context,
+        )?;
+        return fit_samples_refined(
+            targets.len(),
+            family.loops.len(),
+            last,
+            options,
+            |samples, refined| {
+                let evaluate = |(index, epsilon): (usize, &Rational)| {
+                    context.emit(Progress::Sample {
+                        index,
+                        total: samples.len(),
+                    })?;
+                    Ok(prepared
+                        .evaluate(epsilon, refined, backend, context)?
+                        .values)
+                };
+                if refined.workers == 1 {
+                    samples.iter().enumerate().map(evaluate).collect()
+                } else {
+                    rayon::ThreadPoolBuilder::new()
+                        .num_threads(refined.workers)
+                        .build()
+                        .map_err(|e| Error::InvalidInput(e.to_string()))?
+                        .install(|| samples.par_iter().enumerate().map(evaluate).collect())
+                }
+            },
+        );
     }
     if options.recursion == RecursionMode::Ft {
         let mut family = family.at(point);
@@ -550,6 +596,164 @@ pub fn solve_prepared(
     )
 }
 
+/// Evaluate a sum of exact integral combinations, potentially from different
+/// denominator completions or partial-fraction families. Coefficients are
+/// applied at each exact nonzero epsilon sample before Laurent fitting. Their
+/// epsilon poles extend the leading-power bound instead of being truncated.
+pub fn solve_integral_combinations(
+    groups: &[(IntegralFamily, crate::reduction::LinearCombination)],
+    point: &KinematicPoint,
+    last: i32,
+    options: &FlowOptions,
+    backend: &dyn ReductionBackend,
+    context: &RunContext,
+) -> Result<LaurentExpansion> {
+    options.validate()?;
+    context.cancellation.check()?;
+    if groups.is_empty() {
+        return Err(Error::InvalidInput("empty integral combination".into()));
+    }
+    enum Preparation {
+        Amf(PreparedFlow),
+        Linear(crate::linear::PreparedLinearFlow),
+        Sampled,
+        Ft,
+    }
+    let mut prepared = Vec::new();
+    let mut leading = 0i32;
+    for (family, terms) in groups {
+        let mut family = family.at(point);
+        family.dimension = options.dimension;
+        family.validate()?;
+        let mut integrals = Vec::new();
+        let mut coefficients = Vec::new();
+        let bound = i32::try_from(family.loops.len())
+            .ok()
+            .and_then(|n| n.checked_mul(-2))
+            .ok_or_else(|| Error::Limit("Laurent pole bound overflow".into()))?;
+        leading = leading.min(bound);
+        for (integral, coefficient) in terms {
+            family.validate_integral(integral)?;
+            let coefficient = point.apply(coefficient).together().cancel();
+            if coefficient.is_zero() {
+                continue;
+            }
+            crate::family::scalar_symbols(coefficient.as_view(), &mut Default::default())?;
+            let encoded = crate::family::encode_complex(&coefficient);
+            let _: RationalPolynomial<IntegerRing, u16> = encoded
+                .try_to_rational_polynomial(&Q, &Z, None)
+                .map_err(|e| {
+                    Error::Unsupported(format!(
+                        "combination weights must be exact rational functions: {e}"
+                    ))
+                })?;
+            let expansion = encoded
+                .series(family.epsilon, 0, 1)
+                .map_err(|e| Error::Unsupported(e.to_string()))?;
+            let valuation = if expansion.is_zero() {
+                0
+            } else {
+                expansion
+                    .get_trailing_exponent()
+                    .to_string()
+                    .parse::<i32>()
+                    .map_err(|_| {
+                        Error::Unsupported(
+                            "noninteger epsilon valuation in combination weight".into(),
+                        )
+                    })?
+                    .min(0)
+            };
+            leading = leading.min(
+                bound
+                    .checked_add(valuation)
+                    .ok_or_else(|| Error::Limit("weighted Laurent bound overflow".into()))?,
+            );
+            integrals.push(integral.clone());
+            coefficients.push(coefficient);
+        }
+        if integrals.is_empty() {
+            continue;
+        }
+        let preparation = if has_linear_propagators(&family) {
+            Preparation::Linear(crate::linear::PreparedLinearFlow::new(
+                &family,
+                &integrals,
+                &KinematicPoint::default(),
+                backend,
+                options,
+                context,
+            )?)
+        } else if options.recursion == RecursionMode::Ft {
+            Preparation::Ft
+        } else if options.sampled_reduction && !options.refine_basis && family.loops.len() > 1 {
+            Preparation::Sampled
+        } else {
+            Preparation::Amf(PreparedFlow::new(
+                &family,
+                &integrals,
+                &KinematicPoint::default(),
+                backend,
+                options,
+                context,
+            )?)
+        };
+        prepared.push((family, integrals, coefficients, preparation));
+    }
+    let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
+    let ft = crate::ft::FtEvaluator::new(backend, context);
+    let mut result = fit_samples_refined_leading(1, leading, last, options, |samples, refined| {
+        let p = Precision::decimal(refined.digits + refined.guard_digits)?;
+        let evaluate = |(index, epsilon): (usize, &Rational)| {
+            context.emit(Progress::Sample {
+                index,
+                total: samples.len(),
+            })?;
+            let mut sum = p.zero();
+            for (family, integrals, coefficients, preparation) in &prepared {
+                let values = match preparation {
+                    Preparation::Amf(flow) => {
+                        flow.evaluate(epsilon, refined, &boundary, context)?
+                    }
+                    Preparation::Linear(flow) => {
+                        flow.evaluate(epsilon, refined, backend, context)?.values
+                    }
+                    Preparation::Sampled => PreparedFlow::new_at_epsilon(
+                        family,
+                        integrals,
+                        &KinematicPoint::default(),
+                        backend,
+                        refined,
+                        context,
+                        epsilon,
+                    )?
+                    .evaluate(epsilon, refined, &boundary, context)?,
+                    Preparation::Ft => integrals
+                        .iter()
+                        .map(|i| ft.evaluate(family, i, epsilon, refined))
+                        .collect::<Result<Vec<_>>>()?,
+                };
+                let parameters =
+                    ahash::HashMap::from_iter([(Atom::var(family.epsilon), p.rational(epsilon))]);
+                for (coefficient, value) in coefficients.iter().zip(values) {
+                    sum = p.add(&sum, &p.mul(&p.eval(coefficient, &parameters)?, &value));
+                }
+            }
+            Ok(vec![sum])
+        };
+        if refined.workers == 1 {
+            samples.iter().enumerate().map(evaluate).collect()
+        } else {
+            rayon::ThreadPoolBuilder::new()
+                .num_threads(refined.workers)
+                .build()
+                .map_err(|e| Error::InvalidInput(e.to_string()))?
+                .install(|| samples.par_iter().enumerate().map(evaluate).collect())
+        }
+    })?;
+    Ok(result.remove(0))
+}
+
 fn fit_samples_refined(
     targets: usize,
     loops: usize,
@@ -557,8 +761,18 @@ fn fit_samples_refined(
     options: &FlowOptions,
     evaluate: impl Fn(&[Rational], &FlowOptions) -> Result<Vec<Vec<ComplexFloat>>>,
 ) -> Result<Vec<LaurentExpansion>> {
-    options.validate()?;
     let leading = -2 * (loops as i32);
+    fit_samples_refined_leading(targets, leading, last, options, evaluate)
+}
+
+fn fit_samples_refined_leading(
+    targets: usize,
+    leading: i32,
+    last: i32,
+    options: &FlowOptions,
+    evaluate: impl Fn(&[Rational], &FlowOptions) -> Result<Vec<Vec<ComplexFloat>>>,
+) -> Result<Vec<LaurentExpansion>> {
+    options.validate()?;
     if last < leading {
         return Err(Error::InvalidInput(
             "last epsilon power precedes leading pole bound".into(),

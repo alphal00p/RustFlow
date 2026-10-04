@@ -553,6 +553,36 @@ pub trait TransportCost {
         target: &CachedPoint,
         precision: Precision,
     ) -> Result<Option<Float>>;
+
+    /// Resolve equal rounded costs, after both routes passed `cost`. The
+    /// default prefers an exact coordinate hit; otherwise accuracy breaks the
+    /// tie. Distance policies can distinguish costs beyond the initial working
+    /// precision without imposing that ordering on unrelated cost policies.
+    fn compare_tied_costs(
+        &self,
+        left: &CachedBoundary,
+        right: &CachedBoundary,
+        target: &CachedPoint,
+        _precision: Precision,
+    ) -> Result<std::cmp::Ordering> {
+        compare_exact_hits(&left.point, &right.point, target)
+    }
+}
+
+fn compare_exact_hits(
+    left: &CachedPoint,
+    right: &CachedPoint,
+    target: &CachedPoint,
+) -> Result<std::cmp::Ordering> {
+    let target = target.restart_coordinates()?;
+    let is_hit = |point: &CachedPoint| -> Result<bool> {
+        let point = point.restart_coordinates()?;
+        Ok(point.keys().eq(target.keys())
+            && point
+                .iter()
+                .all(|(s, value)| (value - &target[s]).together().cancel().is_zero()))
+    };
+    Ok(is_hit(right)?.cmp(&is_hit(left)?))
 }
 
 /// Squared Euclidean distance in scaled kinematic coordinates, computed in MPFR.
@@ -561,6 +591,55 @@ pub struct ScaledDistance<F> {
     pub scales: BTreeMap<Symbol, Atom>,
     pub admissible: F,
 }
+impl<F> ScaledDistance<F> {
+    fn differences(&self, source: &CachedPoint, target: &CachedPoint) -> Result<Vec<Atom>> {
+        let source = source.restart_coordinates()?;
+        let target = target.restart_coordinates()?;
+        if !source.keys().eq(target.keys()) || self.scales.keys().any(|s| !source.contains_key(s)) {
+            return Err(Error::InvalidInput(
+                "distance coordinates/scales do not match".into(),
+            ));
+        }
+        source
+            .into_iter()
+            .map(|(variable, value)| {
+                let scale = self.scales.get(&variable).cloned().unwrap_or(Atom::num(1));
+                exact_constant(scale.as_view())?;
+                Ok(((value - &target[&variable]) / scale).together().cancel())
+            })
+            .collect()
+    }
+
+    fn distance(&self, differences: &[Atom], p: Precision) -> Result<Float> {
+        let mut sum = p.real(0);
+        for difference in differences {
+            let difference = p.eval(difference, &Default::default())?;
+            let term = p
+                .mul(
+                    &difference,
+                    &C::new(difference.re.clone(), -difference.im.clone()),
+                )
+                .re;
+            sum = Float::with_val(p.bits, sum.as_raw() + term.as_raw());
+        }
+        Ok(sum)
+    }
+}
+
+fn rational_squared_distance(differences: &[Atom]) -> Option<Rational> {
+    let mut sum = Rational::from(0);
+    for difference in differences {
+        let AtomView::Num(number) = difference.as_view() else {
+            return None;
+        };
+        let Coefficient::Complex(value) = number.get_coeff_view().to_owned() else {
+            return None;
+        };
+        sum += value.re.clone() * &value.re + value.im.clone() * &value.im;
+    }
+    Some(sum)
+}
+
 impl<F: Fn(&CachedBoundary, &CachedPoint) -> Result<bool>> TransportCost for ScaledDistance<F> {
     fn cost(
         &self,
@@ -571,37 +650,69 @@ impl<F: Fn(&CachedBoundary, &CachedPoint) -> Result<bool>> TransportCost for Sca
         if !(self.admissible)(source, target)? {
             return Ok(None);
         }
-        let source = source.point.evaluate(p)?;
-        let target = target.evaluate(p)?;
-        if !source.keys().eq(target.keys()) || self.scales.keys().any(|s| !source.contains_key(s)) {
-            return Err(Error::InvalidInput(
-                "distance coordinates/scales do not match".into(),
-            ));
+        for scale in self.scales.values() {
+            exact_constant(scale.as_view())?;
+            let scale = p.eval(scale, &Default::default())?;
+            if !p.finite(&scale) || scale.im != p.real(0) || scale.re <= p.real(0) {
+                return Err(Error::InvalidInput(
+                    "coordinate scale must be finite and positive real".into(),
+                ));
+            }
         }
-        let mut sum = p.real(0);
-        for (variable, value) in source {
-            let scale = if let Some(a) = self.scales.get(&variable) {
-                exact_constant(a.as_view())?;
-                let scale = p.eval(a, &Default::default())?;
-                if !p.finite(&scale) || scale.im != p.real(0) || scale.re <= p.real(0) {
-                    return Err(Error::InvalidInput(
-                        "coordinate scale must be finite and positive real".into(),
-                    ));
-                }
-                scale
-            } else {
-                p.i(1)
+        // Subtract exact/rounded-rational coordinates before evaluation, so
+        // large common offsets do not erase a small physical separation.
+        Ok(Some(
+            self.distance(&self.differences(&source.point, target)?, p)?,
+        ))
+    }
+
+    fn compare_tied_costs(
+        &self,
+        left: &CachedBoundary,
+        right: &CachedBoundary,
+        target: &CachedPoint,
+        p: Precision,
+    ) -> Result<std::cmp::Ordering> {
+        use std::cmp::Ordering;
+        let hits = compare_exact_hits(&left.point, &right.point, target)?;
+        if hits != Ordering::Equal {
+            return Ok(hits);
+        }
+        let left = self.differences(&left.point, target)?;
+        let right = self.differences(&right.point, target)?;
+        if let (Some(left), Some(right)) = (
+            rational_squared_distance(&left),
+            rational_squared_distance(&right),
+        ) {
+            return Ok(left.cmp(&right));
+        }
+        // Algebraic distances need numerical comparison. Accept a refined
+        // ordering only if two increased precisions agree; unresolved ties
+        // retain the cache's normal accuracy preference.
+        let mut previous = Ordering::Equal;
+        for factor in [2, 4] {
+            let refined = Precision {
+                bits: p
+                    .bits
+                    .checked_mul(factor)
+                    .ok_or_else(|| Error::Limit("distance comparison precision overflow".into()))?,
             };
-            let difference = p.div(&p.sub(&value, &target[&variable]), &scale);
-            let term = p
-                .mul(
-                    &difference,
-                    &C::new(difference.re.clone(), -difference.im.clone()),
-                )
-                .re;
-            sum = Float::with_val(p.bits, sum.as_raw() + term.as_raw());
+            let left = self.distance(&left, refined)?;
+            let right = self.distance(&right, refined)?;
+            if !left.is_finite() || !right.is_finite() {
+                return Err(Error::InvalidInput(
+                    "nonfinite refined transport distance".into(),
+                ));
+            }
+            let comparison = left.partial_cmp(&right).ok_or_else(|| {
+                Error::InvalidInput("nonfinite refined transport distance".into())
+            })?;
+            if factor == 4 && comparison == previous {
+                return Ok(comparison);
+            }
+            previous = comparison;
         }
-        Ok(Some(sum))
+        Ok(Ordering::Equal)
     }
 }
 
@@ -729,12 +840,21 @@ impl RustFlowCache {
                         "transport cost must be finite and nonnegative".into(),
                     ));
                 }
-                if best.as_ref().is_none_or(|old| {
-                    cost < old.cost
-                        || (cost == old.cost
-                            && boundary.accuracy.verified_digits
-                                > old.boundary.accuracy.verified_digits)
-                }) {
+                let replace = if let Some(old) = &best {
+                    if cost == old.cost {
+                        let comparison =
+                            policy.compare_tied_costs(boundary, old.boundary, query.target, p)?;
+                        comparison.is_lt()
+                            || (comparison.is_eq()
+                                && boundary.accuracy.verified_digits
+                                    > old.boundary.accuracy.verified_digits)
+                    } else {
+                        cost < old.cost
+                    }
+                } else {
+                    true
+                };
+                if replace {
                     best = Some(BoundaryMatch { boundary, cost });
                 }
             }

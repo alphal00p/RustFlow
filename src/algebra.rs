@@ -54,48 +54,34 @@ pub(crate) fn nullspace(a: Vec<Vec<Atom>>) -> Vec<Vec<Atom>> {
 }
 
 pub(crate) fn matmul(a: &[Vec<Atom>], b: &[Vec<Atom>]) -> Vec<Vec<Atom>> {
-    (0..a.len())
-        .map(|i| {
-            (0..b[0].len())
-                .map(|j| {
-                    (0..b.len())
-                        .fold(Atom::new(), |v, k| v + &a[i][k] * &b[k][j])
-                        .together()
-                        .cancel()
-                })
-                .collect()
-        })
+    if a.is_empty() {
+        return Vec::new();
+    }
+    let columns = b[0].len();
+    if columns == 0 {
+        return vec![Vec::new(); a.len()];
+    }
+    let left = symbolica::tensors::matrix::Matrix::from_nested_vec(a.to_vec(), exact_atom_field())
+        .expect("internal rectangular matrix");
+    let right = symbolica::tensors::matrix::Matrix::from_nested_vec(b.to_vec(), exact_atom_field())
+        .expect("internal rectangular matrix");
+    (&left * &right)
+        .into_vec()
+        .chunks(columns)
+        .map(|row| row.iter().map(|a| a.together().cancel()).collect())
         .collect()
 }
 
-pub(crate) fn determinant(mut a: Vec<Vec<Atom>>) -> Atom {
-    let n = a.len();
-    let mut sign = Atom::num(1);
-    let mut previous = Atom::num(1);
-    if n == 0 {
-        return previous;
+pub(crate) fn determinant(a: Vec<Vec<Atom>>) -> Atom {
+    if a.is_empty() {
+        return Atom::num(1);
     }
-    for k in 0..n - 1 {
-        let Some(row) = (k..n).find(|&i| !a[i][k].is_zero()) else {
-            return Atom::new();
-        };
-        if row != k {
-            a.swap(row, k);
-            sign = -sign;
-        }
-        for i in k + 1..n {
-            for j in k + 1..n {
-                a[i][j] = ((&a[k][k] * &a[i][j] - &a[i][k] * &a[k][j]) / &previous)
-                    .together()
-                    .cancel();
-            }
-        }
-        previous = a[k][k].clone();
-        for row in a.iter_mut().skip(k + 1) {
-            row[k] = Atom::new();
-        }
-    }
-    sign * &a[n - 1][n - 1]
+    symbolica::tensors::matrix::Matrix::from_nested_vec(a, exact_atom_field())
+        .expect("internal square matrix")
+        .det()
+        .expect("internal square matrix")
+        .together()
+        .cancel()
 }
 
 pub(crate) fn inverse(a: &[Vec<Atom>]) -> Result<Vec<Vec<Atom>>> {

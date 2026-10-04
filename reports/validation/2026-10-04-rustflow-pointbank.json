@@ -1,0 +1,56 @@
+{
+  "schema_version": 1,
+  "milestone": "RustFlow uncertainty propagation, precise cache selection, actual Higgs+jet grid transport, automatic linear dispatch and weighted graph integrals",
+  "date_utc": "2026-10-04",
+  "base_commit": "418cc8afbc51d95192739db4687bac3470d0b378",
+  "release_tests": {
+    "command": "cargo test --release -p symbolica-amflow",
+    "passed": 163,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 24
+  },
+  "clippy": {
+    "command": "cargo clippy -p symbolica-amflow --all-targets -- -D warnings",
+    "passed": true,
+    "dependency_note": "Existing RustRed dependency dead-code warnings; RustRed unchanged."
+  },
+  "format": {
+    "command": "cargo fmt -p symbolica-amflow --check",
+    "passed": true
+  },
+  "mg5_application_fixture": {
+    "scope": "Closed first two nonplanar masters; not the full 61-master system or amplitude",
+    "requested_absolute_digits": 20,
+    "input_verified_digits": 24,
+    "epsilon_powers": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "checks": [
+      "live pinned DiffExp reference at source s+1 and s+2",
+      "second destination reuses first computed point",
+      "exact repeat without transport",
+      "binary cache restart"
+    ],
+    "reference_precision_policy": "Inherited input errors and 24-digit evidence retained; long mantissas do not imply that accuracy."
+  },
+  "additional_checks": [
+    "weighted error propagation does not transfer an uncoupled large higher-epsilon uncertainty to lower coefficients",
+    "exact coordinate subtraction cancels a 10^100 offset at only 40 working digits",
+    "rational-complex distance ties compared exactly; algebraic ties refined numerically",
+    "HQET solve_integrals Laurent coefficients through finite order at 20 digits",
+    "cross-family cancellation with epsilon-pole weights applied before fitting",
+    "Symbolica Matrix determinant and multiplication regression"
+  ],
+  "prior_acceptance": "Original four-target twenty-digit paper acceptance retained; hour-long full Laurent run not repeated.",
+  "sha256": {
+    "target/rustflow-second-release-tests.log": "eb7fc3728efab71e1b8806a1ad19d65b206223a0b01c4aedaf3e1afc9b571621",
+    "target/rustflow-second-clippy.log": "c002b44d98eecb1e2bcac5f838accfbbf54e0a2204a778e5bde7338b561f23c5",
+    "target/rustflow-second-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "fixtures/mg5-higgs-ew/np-two-master-transport.json": "6e8efe4eeeff92d8daa5e2177f67e32c6d397408d2f349b568e5a99abb2e083d"
+  }
+}

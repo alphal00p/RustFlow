@@ -15,10 +15,21 @@ The pinned live DiffExp polylogarithm example agrees to 30 digits using independ
 constructed boundary series. `linear::PreparedLinearFlow` evaluates supported
 rank-one linear denominators by quadratic deformation and Frobenius projection;
 an HQET example matches its gamma formula to 20 digits under refinement.
-Automatic `solve_integrals` dispatch for this linear wrapper is not yet wired.
+`solve_integrals` now dispatches these linear families automatically, including
+Laurent reconstruction. `solve_integral_combinations` applies exact numerator
+weights across partial-fraction families at each epsilon sample before fitting,
+and includes any additional poles from those weights.
 
-The [milestone validation report](../reports/validation/2026-10-04-rustflow-initial.json)
-records 156 passing release tests, strict all-target Clippy and formatting.
+The actual Higgs+jet application grid supplies a closed two-master nonplanar
+subsystem. Its Rust transport agrees with the pinned live DiffExp oracle to
+20 absolute digits at two destinations, reuses the first destination for the
+second, and survives binary cache restart. The input's 24-digit evidence and
+inherited errors are retained despite its much longer displayed mantissas.
+This is a subsystem acceptance, not a full amplitude calculation.
+
+The [point-bank validation report](../reports/validation/2026-10-04-rustflow-pointbank.json)
+records 163 passing release tests, strict all-target Clippy and formatting,
+including the live-oracle Higgs+jet subsystem and uncertainty regressions.
 The original 20-digit two-loop acceptance is retained as prior evidence; this
 milestone did not repeat its hour-long full Laurent run. Full DiffExp benchmarks,
 general cut boundaries, and full Higgs+jet amplitude evaluation remain incomplete.

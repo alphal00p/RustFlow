@@ -217,17 +217,50 @@ impl CompiledEpsilonSystem {
     /// bound is inconclusive. MPFR rounding and initial error estimates prevent
     /// interpreting this as an interval-arithmetic proof.
     pub fn error_amplification(&self, start: &C, end: &C) -> Result<Float> {
+        self.error_amplification_weighted(start, end, &vec![self.rows.p.real(1); self.dimension()])
+    }
+
+    /// Estimate amplification in the fixed weighted infinity norm
+    /// `max_i |error_i| / weights[i]`. Weights follow the solution's flattened
+    /// order: epsilon offset first, then physical component. They must be
+    /// positive and finite. The bound uses the row sums of `W^-1 A W` for the
+    /// triangular epsilon hierarchy, without constructing its dense matrix.
+    /// The same rounding and initial-evidence qualifications as
+    /// [`Self::error_amplification`] apply.
+    pub fn error_amplification_weighted(
+        &self,
+        start: &C,
+        end: &C,
+        weights: &[Float],
+    ) -> Result<Float> {
         let p = self.rows.p;
+        if weights.len() != self.dimension()
+            || weights.iter().any(|w| !w.is_finite() || *w <= p.real(0))
+            || !start.re.is_finite()
+            || !start.im.is_finite()
+            || !end.re.is_finite()
+            || !end.im.is_finite()
+        {
+            return Err(Error::InvalidInput(
+                "error amplification requires finite endpoints and one positive finite weight per epsilon coefficient".into(),
+            ));
+        }
+        let n = self.rows.dimension();
         let mut intervals = vec![(start.clone(), end.clone(), 0usize)];
         let mut exponent = p.real(0);
         while let Some((start, end, depth)) = intervals.pop() {
             let radius = p.norm(&p.sub(&end, &start));
+            if !radius.is_finite() {
+                return Err(Error::Accuracy(
+                    "error-bound segment length exceeds numerical range".into(),
+                ));
+            }
             if radius == p.real(0) {
                 continue;
             }
             let mut norm = p.real(0);
             let mut valid = true;
-            for row in &self.rows.polynomial_rows {
+            for (i, row) in self.rows.polynomial_rows.iter().enumerate() {
                 let denominator =
                     shift_polynomial(p, &row.denominator, &start, row.denominator.len() - 1);
                 let mut lower = p.norm(&denominator[0]);
@@ -236,22 +269,41 @@ impl CompiledEpsilonSystem {
                     lower -= p.norm(a) * &power;
                     power *= &radius;
                 }
+                if !lower.is_finite() {
+                    return Err(Error::Accuracy(
+                        "error-bound denominator exceeds numerical range".into(),
+                    ));
+                }
                 if lower <= p.real(0) {
                     valid = false;
                     break;
                 }
-                let mut upper = p.real(0);
-                for (_, coefficients) in &row.entries {
+                let mut row_norms = vec![p.real(0); self.count];
+                for (column, coefficients) in &row.entries {
                     let shifted = shift_polynomial(p, coefficients, &start, coefficients.len() - 1);
+                    let mut upper = p.real(0);
                     let mut power = p.real(1);
                     for a in shifted {
                         upper += p.norm(&a) * &power;
                         power *= &radius;
                     }
+                    let bound = upper / &lower;
+                    let shift = column / n;
+                    let j = column % n;
+                    for (order, row_norm) in row_norms.iter_mut().enumerate().skip(shift) {
+                        *row_norm += bound.clone() * &weights[(order - shift) * n + j]
+                            / &weights[order * n + i];
+                    }
                 }
-                let row_norm = upper / lower;
-                if row_norm > norm {
-                    norm = row_norm;
+                for row_norm in row_norms {
+                    if !row_norm.is_finite() {
+                        return Err(Error::Accuracy(
+                            "weighted error-bound matrix norm exceeds numerical range".into(),
+                        ));
+                    }
+                    if row_norm > norm {
+                        norm = row_norm;
+                    }
                 }
             }
             if valid {

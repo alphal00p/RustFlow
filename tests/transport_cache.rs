@@ -134,13 +134,93 @@ fn scaled_distance_distinguishes_coordinates_beyond_binary64_resolution() {
         scales: BTreeMap::from([(s, Atom::num(10))]),
         admissible: |_: &CachedBoundary, _: &CachedPoint| Ok(true),
     };
-    let p = Precision::decimal(140).unwrap();
+    // The common 10^100 offset is cancelled exactly before MPFR evaluation.
+    let p = Precision::decimal(40).unwrap();
     let best = cache.best(&query, &policy, p).unwrap().unwrap();
     assert!(p.close(
         &symbolica_amflow::ComplexFloat::new(best.cost, p.real(0)),
         &p.parse("0.01", "0").unwrap(),
         35
     ));
+}
+
+#[test]
+fn rounded_cost_ties_preserve_nearest_sources_and_exact_hits() {
+    let (s, _, _, identity) = fixture();
+    let p = Precision::decimal(40).unwrap();
+    let gap = Atom::num(10).pow(-80);
+    let mut cache = BoundaryCache::default();
+    // The slightly farther source has stronger evidence and was inserted first.
+    // Both distances to 2 round to 1 at the query's working precision.
+    cache
+        .insert(entry(&identity, s, Atom::num(1) - &gap, 40))
+        .unwrap();
+    cache.insert(entry(&identity, s, Atom::num(1), 21)).unwrap();
+    let policy = ScaledDistance {
+        scales: BTreeMap::new(),
+        admissible: |_: &CachedBoundary, _: &CachedPoint| Ok(true),
+    };
+    let target = CachedPoint::Exact(BTreeMap::from([(s, Atom::num(2))]));
+    let query =
+        BoundaryQuery::new(&identity, &target, EpsilonRange::new(0, 0).unwrap(), 20).unwrap();
+    let selected = cache.best(&query, &policy, p).unwrap().unwrap();
+    assert_eq!(selected.cost, p.real(1));
+    assert_eq!(
+        selected.boundary.point.restart_coordinates().unwrap()[&s],
+        Atom::num(1)
+    );
+
+    // A general cost policy keeps its own cost model while preferring a true
+    // coordinate hit over an equally priced transport, independently of order.
+    struct ConstantCost;
+    impl TransportCost for ConstantCost {
+        fn cost(
+            &self,
+            _: &CachedBoundary,
+            _: &CachedPoint,
+            p: Precision,
+        ) -> symbolica_amflow::Result<Option<Float>> {
+            Ok(Some(p.real(1)))
+        }
+    }
+    let target = CachedPoint::Exact(BTreeMap::from([(s, Atom::num(1))]));
+    let query =
+        BoundaryQuery::new(&identity, &target, EpsilonRange::new(0, 0).unwrap(), 20).unwrap();
+    assert_eq!(
+        cache
+            .best(&query, &ConstantCost, p)
+            .unwrap()
+            .unwrap()
+            .boundary
+            .point
+            .restart_coordinates()
+            .unwrap()[&s],
+        Atom::num(1)
+    );
+
+    // Genuine algebraic distances use consistent higher-precision comparisons.
+    let root = Atom::num(2).pow(Atom::num((1, 2)));
+    let mut algebraic = BoundaryCache::default();
+    algebraic
+        .insert(entry(&identity, s, &root - Atom::num(10).pow(-60), 40))
+        .unwrap();
+    algebraic
+        .insert(entry(&identity, s, root.clone(), 21))
+        .unwrap();
+    let target = CachedPoint::Exact(BTreeMap::from([(s, Atom::num(2))]));
+    let query =
+        BoundaryQuery::new(&identity, &target, EpsilonRange::new(0, 0).unwrap(), 20).unwrap();
+    assert_eq!(
+        algebraic
+            .best(&query, &policy, p)
+            .unwrap()
+            .unwrap()
+            .boundary
+            .point
+            .restart_coordinates()
+            .unwrap()[&s],
+        root
+    );
 }
 
 #[test]
