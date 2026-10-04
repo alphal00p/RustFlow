@@ -68,6 +68,11 @@ fn backward_strategy_changes_complete_cache_identity_but_reuses_native_work() {
         std::fs::read_dir(&native_directory)
             .unwrap()
             .map(|entry| entry.unwrap().file_name())
+            .filter(|name| {
+                !name
+                    .to_string_lossy()
+                    .starts_with("native-stage-family-v1-")
+            })
             .collect::<std::collections::BTreeSet<_>>()
     };
     let original_files = native_files();

@@ -4,6 +4,15 @@ This is an implementation status document, not a claim that the requested port
 is complete. The original paper's four two-loop targets at s=30, t=-10/3, m²=1
 remain the mandatory completion gate.
 
+The first of those targets, `[1,1,1,1,1,1,1,-3,0]`, now completes automatic
+evaluation at the exact sample ε = 1/2700. Its 38-integral differential system
+closes, nine leading boundary coefficients are generated recursively, and the
+value passes the complex-norm 20-digit stability check when working precision
+increases from 60 to 80 digits and outer series order from 80 to 112. This is a
+single-sample milestone: the four-target Laurent reconstruction and reference
+comparison remain outstanding. The recorded run resumed prior exact reduction
+work and is not a cold performance measurement.
+
 | Upstream operation | Rust implementation | Present limitation |
 |---|---|---|
 | Family setup, exact IBP | `family`, `reduction` | RustRed finite exact search; runtime arity 1–12 |
@@ -135,6 +144,18 @@ pending. Resuming a partial round may search a conservative superset before the
 next exact substitution.
 Short intermediate rounds share that interval; rewriting a large checkpoint
 after every small frontier change can otherwise dominate the actual search.
+The first exact substitution at each active-line level also forces a snapshot,
+so a long coefficient replay cannot lose the preceding searches merely because
+they took less than the periodic interval. `SubstitutionPlan` reports the actual
+retained nodes, terminal count, sector threshold, and substitution direction.
+
+Successful native calls also save a family identity bank. A new target batch
+can reuse its reachable raw equations when family, exact epsilon, search depth,
+ordering options, and dependency versions agree. Every surviving residual leaf
+is searched again in that new batch; only equations are reused as completed
+work. Target-specific checkpoints take priority. Banks preserve nonzero
+conditions and use the same authenticated atomic codec. Concurrent writers may
+replace a bank with a smaller valid subset, affecting performance only.
 
 Increasing native search depth by one can also resume a shallower checkpoint.
 Exact identities are retained, but every surviving residual is searched again

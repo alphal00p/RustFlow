@@ -89,6 +89,13 @@ See `docs/coverage.md` for the current completion status and explicit limits.
 
 ## Long acceptance runs
 
+Use `two_loop_acceptance --sample 1/2700` to evaluate all four targets at one
+exact nonzero epsilon, with an independent increase in working precision and
+series order. This mode prints the change for each target. Omit `--sample` for
+the complete Laurent reconstruction, additional sample grid, and upstream
+reference comparison; a successful individual sample does not satisfy that
+acceptance test.
+
 The `two_loop_acceptance` example accepts `--cancel-file PATH`. Creating that
 file requests cooperative cancellation and saves completed native search work.
 Remove the file before resuming the same command. `--native-workers N` controls

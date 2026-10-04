@@ -118,6 +118,16 @@ pub enum Progress {
     Substitution {
         rules: usize,
     },
+    /// The actual dependency graph and selected exact substitution direction.
+    /// Terminal counts include searched residuals as well as unsearched leaves.
+    SubstitutionPlan {
+        roots: usize,
+        retained_nodes: usize,
+        terminals: usize,
+        minimum_lines: usize,
+        backward: bool,
+        weighted: bool,
+    },
     ReductionFrontier {
         searched: usize,
         remaining: usize,

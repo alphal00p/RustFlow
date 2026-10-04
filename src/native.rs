@@ -32,6 +32,55 @@ pub(crate) fn reduce(
 fn native_error(error: impl std::fmt::Display) -> Error {
     Error::Reduction(error.to_string())
 }
+fn family_stage_key(
+    family: &ConvertedFamily,
+    physical_propagators: usize,
+    options: &RustRedBackend,
+) -> String {
+    let digest = blake3::hash(
+        format!(
+            "native-family-v1/native-factorized-v5/bubble-subloops-v2/symmetry-v1:{}:{:?}:{}:{}:{}:{}:{}:{}:{}:{}",
+            family.family.fingerprint(),
+            family.reverse,
+            physical_propagators,
+            options.max_depth,
+            options.include_lorentz,
+            options.bubble_subloops,
+            options.parametric_rules,
+            options.symmetry_rules,
+            env!("RUSTRED_SOURCE_DIGEST"),
+            env!("DEPENDENCY_SOURCE_DIGEST"),
+        )
+        .as_bytes(),
+    );
+    // A recognizable key prefix distinguishes this reusable identity bank
+    // from a target-specific search checkpoint, without changing the codec.
+    format!("family-v1-{digest}")
+}
+
+/// Reuse equations, never a previous call's declaration that a leaf was
+/// searched. All reachable residual leaves must be searched in the new call.
+fn restrict_family_stage(
+    mut reduction: Reduction,
+    targets: &[Vec<i16>],
+    context: &RunContext,
+) -> Result<(Reduction, Vec<Integral>, Vec<Integral>)> {
+    let frontier = structural_frontier(&reduction, targets, context)?;
+    let mut reachable = BTreeSet::new();
+    let mut stack = targets.iter().cloned().map(Integral).collect::<Vec<_>>();
+    while let Some(node) = stack.pop() {
+        context.cancellation.check()?;
+        if reachable.insert(node.clone())
+            && let Some(terms) = reduction.rules.get(&node)
+        {
+            stack.extend(terms.keys().cloned());
+        }
+    }
+    reduction.rules.retain(|lhs, _| reachable.contains(lhs));
+    let done = reduction.rules.keys().cloned().collect();
+    reduction.residuals = frontier.iter().cloned().collect();
+    Ok((reduction, done, frontier.into_iter().collect()))
+}
 fn save_stage<const N: usize>(
     options: &RustRedBackend,
     key: &str,
@@ -232,6 +281,7 @@ fn solve<const N: usize>(
     };
     let legacy_key = legacy_key_for_depth(options.max_depth);
     let stage_key = stage_key_for_depth(options.max_depth);
+    let family_key = family_stage_key(family, original.physical_propagators, options);
     let mut patterns = BTreeMap::<[bool; N], Option<crate::bubble::Bubble>>::new();
     let mut restart = if let Some(directory) = &options.checkpoints {
         crate::cache::read_native_stage(directory, &stage_key)?
@@ -288,7 +338,13 @@ fn solve<const N: usize>(
             restart = Some(old);
         }
     }
-    if let Some((restored, done, remaining)) = restart {
+    if restart.is_none()
+        && let Some(directory) = &options.checkpoints
+        && let Some((bank, _, _)) = crate::cache::read_native_stage(directory, &family_key)?
+    {
+        restart = Some(restrict_family_stage(bank, targets, context)?);
+    }
+    if let Some((mut restored, done, remaining)) = restart {
         let array = |i: Integral| {
             i.0.as_slice()
                 .try_into()
@@ -302,6 +358,9 @@ fn solve<const N: usize>(
             .into_iter()
             .map(array)
             .collect::<Result<BTreeSet<[i16; N]>>>()?;
+        restored
+            .nonzero_conditions
+            .append(&mut result.nonzero_conditions);
         result = restored;
     }
     let mut solvers = BTreeMap::new();
@@ -340,6 +399,7 @@ fn solve<const N: usize>(
     let mut last_saved = std::time::Instant::now();
     let mut completed_expansions = None;
     let mut frontier_cache = FrontierCache::default();
+    let mut saved_before_exact = BTreeSet::new();
     let search: Result<()> = (|| {
         while !pending.is_empty() {
             if visited.len() + pending.len() > options.max_targets {
@@ -745,6 +805,13 @@ fn solve<const N: usize>(
                     .filter(|i| line_count(i) < active_lines)
                     .collect();
             } else {
+                // Fresh derivative searches can reach a long replay before the
+                // periodic save interval. Preserve this exact raw graph once
+                // per active level before starting coefficient arithmetic.
+                if options.checkpoints.is_some() && saved_before_exact.insert(active_lines) {
+                    save_stage(options, &stage_key, &mut result, &visited, &pending)?;
+                    last_saved = std::time::Instant::now();
+                }
                 let mut expander = Expander::new(&result, context)?
                     .with_max_backward_frontier(options.max_backward_frontier);
                 frontier = BTreeSet::new();
@@ -870,6 +937,19 @@ fn solve<const N: usize>(
                 "native reduction left an unsearched target contribution".into(),
             ));
         }
+    }
+    if let Some(directory) = &options.checkpoints {
+        // The final exact check above authenticates this successful call. The
+        // reusable bank stores raw equations; its leaf search history is not
+        // reused. Atomic last-writer replacement by another valid subset is
+        // safe, even when independent samples or requests share a directory.
+        crate::cache::write_native_stage(
+            directory,
+            &family_key,
+            &result,
+            &result.rules.keys().cloned().collect::<Vec<_>>(),
+            &[],
+        )?;
     }
     result.rules = flattened;
     result.residuals = residuals.into_iter().collect();
@@ -1110,6 +1190,14 @@ impl<'a> Expander<'a> {
             .iter()
             .filter(|node| !self.reduction.rules.contains_key(*node))
             .count();
+        self.context.emit(Progress::SubstitutionPlan {
+            roots: integrals.len(),
+            retained_nodes: retained.len(),
+            terminals,
+            minimum_lines,
+            backward: terminals <= self.max_backward_frontier,
+            weighted: false,
+        })?;
         if terminals <= self.max_backward_frontier {
             return self.expand_backward(integrals, &order, &retained);
         }
@@ -1200,6 +1288,14 @@ impl<'a> Expander<'a> {
             .iter()
             .filter(|node| !self.reduction.rules.contains_key(*node))
             .count();
+        self.context.emit(Progress::SubstitutionPlan {
+            roots: roots.len(),
+            retained_nodes: retained.len(),
+            terminals,
+            minimum_lines,
+            backward: terminals <= self.max_backward_frontier,
+            weighted: true,
+        })?;
         if terminals > self.max_backward_frontier {
             return inputs
                 .iter()
@@ -1370,6 +1466,102 @@ fn coefficient_atom(c: &Coefficient) -> Atom {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn family_bank_prunes_unreachable_equations_preserves_guards_and_validates_the_dag() {
+        let i = |n| Integral(vec![n, 0]);
+        let condition = parse!("family_bank_guard::x");
+        let reduction = Reduction {
+            rules: BTreeMap::from([
+                (i(5), BTreeMap::from([(i(4), condition.clone())])),
+                (i(4), BTreeMap::from([(i(1), Atom::num(1))])),
+                (i(6), BTreeMap::new()),
+                (i(8), BTreeMap::from([(i(7), Atom::num(1))])),
+            ]),
+            residuals: vec![i(1), i(7)],
+            nonzero_conditions: vec![condition.clone()],
+        };
+        let context = RunContext::default();
+        let roots = [i(5).0, i(6).0];
+        let (mut retained, done, pending) =
+            restrict_family_stage(reduction, &roots, &context).unwrap();
+        assert_eq!(
+            retained.rules.keys().cloned().collect::<Vec<_>>(),
+            vec![i(4), i(5), i(6)]
+        );
+        assert_eq!(done, vec![i(4), i(5), i(6)]);
+        assert_eq!(pending, vec![i(1)]);
+        assert_eq!(retained.residuals, pending);
+        assert_eq!(retained.nonzero_conditions, vec![condition]);
+        retained
+            .rules
+            .insert(i(1), BTreeMap::from([(i(5), Atom::num(1))]));
+        assert!(matches!(
+            restrict_family_stage(retained.clone(), &roots, &context),
+            Err(Error::IncompleteReduction(_))
+        ));
+        retained
+            .rules
+            .insert(i(1), BTreeMap::from([(Integral(vec![1, 1]), Atom::num(1))]));
+        assert!(matches!(
+            restrict_family_stage(retained, &roots, &context),
+            Err(Error::Reduction(_))
+        ));
+    }
+
+    #[test]
+    fn substitution_plans_report_actual_fresh_and_weighted_graphs() {
+        let i = |n| Integral(vec![n]);
+        let reduction = Reduction {
+            rules: BTreeMap::from([(
+                i(3),
+                BTreeMap::from([(i(1), Atom::num(1)), (i(2), Atom::num(2))]),
+            )]),
+            ..Default::default()
+        };
+        let plans = Arc::new(std::sync::Mutex::new(Vec::new()));
+        let observed = Arc::clone(&plans);
+        let context = RunContext {
+            progress: Some(Arc::new(move |event| {
+                if let Progress::SubstitutionPlan {
+                    roots,
+                    retained_nodes,
+                    terminals,
+                    minimum_lines,
+                    backward,
+                    weighted,
+                } = event
+                {
+                    observed.lock().unwrap().push((
+                        roots,
+                        retained_nodes,
+                        terminals,
+                        minimum_lines,
+                        backward,
+                        weighted,
+                    ));
+                }
+            })),
+            ..Default::default()
+        };
+        for maximum in [0, 2] {
+            let mut expander = Expander::new(&reduction, &context)
+                .unwrap()
+                .with_max_backward_frontier(maximum);
+            let fresh = expander.expand_many(&[i(3)], 1).unwrap();
+            let weighted = expander.expand_weighted(&fresh, 1).unwrap();
+            assert_expansions_equal(&fresh, &weighted);
+        }
+        assert_eq!(
+            *plans.lock().unwrap(),
+            vec![
+                (1, 3, 2, 1, false, false),
+                (2, 2, 2, 1, false, true),
+                (1, 3, 2, 1, true, false),
+                (2, 2, 2, 1, true, true),
+            ]
+        );
+    }
 
     fn assert_expansions_equal(
         left: &BTreeMap<Integral, Terms>,

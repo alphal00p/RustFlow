@@ -58,6 +58,11 @@ fn verified_routing_runs_through_native_reduction_and_isolates_restarts() {
         std::fs::read_dir(&directory)
             .unwrap()
             .map(|entry| entry.unwrap().file_name())
+            .filter(|name| {
+                !name
+                    .to_string_lossy()
+                    .starts_with("native-stage-family-v1-")
+            })
             .collect::<BTreeSet<_>>()
     };
     let before = cached_names();
