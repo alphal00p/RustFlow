@@ -745,7 +745,8 @@ fn solve<const N: usize>(
                     .filter(|i| line_count(i) < active_lines)
                     .collect();
             } else {
-                let mut expander = Expander::new(&result, context)?;
+                let mut expander = Expander::new(&result, context)?
+                    .with_max_backward_frontier(options.max_backward_frontier);
                 frontier = BTreeSet::new();
                 let roots = targets.iter().cloned().map(Integral).collect::<Vec<_>>();
                 let filtered = if let Some(previous) = &frontier_cache.targets {
@@ -843,7 +844,9 @@ fn solve<const N: usize>(
             &mut pending,
             context,
         )?;
-        Expander::new(&result, context)?.expand_many(&roots, 0)?
+        Expander::new(&result, context)?
+            .with_max_backward_frontier(options.max_backward_frontier)
+            .expand_many(&roots, 0)?
     };
     for (integral, terms) in expansions {
         residuals.extend(terms.keys().cloned());
@@ -1040,6 +1043,7 @@ struct Expander<'a> {
     variables: Arc<Vec<PolyVariable>>,
     field: FactorizedRationalPolynomialField<IntegerRing, u16>,
     coefficients: ahash::HashMap<Atom, Arc<Coefficient>>,
+    max_backward_frontier: usize,
 }
 impl<'a> Expander<'a> {
     fn new(reduction: &'a Reduction, context: &'a RunContext) -> Result<Self> {
@@ -1062,7 +1066,12 @@ impl<'a> Expander<'a> {
             field: FactorizedRationalPolynomialField::new(Z, variables.clone()),
             variables,
             coefficients: Default::default(),
+            max_backward_frontier: 128,
         })
+    }
+    fn with_max_backward_frontier(mut self, maximum: usize) -> Self {
+        self.max_backward_frontier = maximum;
+        self
     }
     fn coefficient(&mut self, a: &Atom) -> Result<Arc<Coefficient>> {
         if let Some(c) = self.coefficients.get(a) {
@@ -1101,7 +1110,7 @@ impl<'a> Expander<'a> {
             .iter()
             .filter(|node| !self.reduction.rules.contains_key(*node))
             .count();
-        if terminals <= 128 {
+        if terminals <= self.max_backward_frontier {
             return self.expand_backward(integrals, &order, &retained);
         }
         integrals
@@ -1191,7 +1200,7 @@ impl<'a> Expander<'a> {
             .iter()
             .filter(|node| !self.reduction.rules.contains_key(*node))
             .count();
-        if terminals > 128 {
+        if terminals > self.max_backward_frontier {
             return inputs
                 .iter()
                 .map(|(target, seeds)| {
@@ -1764,29 +1773,44 @@ mod tests {
                 })
                 .collect(),
         );
-        let mut expander = Expander::new(&reduction, &context).unwrap();
-        let weighted = expander.expand_weighted(&seeds, 2).unwrap();
-        let fresh = expander.expand_many(&roots, 2).unwrap();
-        assert_expansions_equal(&weighted, &fresh);
-        assert_eq!(weighted[&i(900)].len(), 64);
-        assert!(
-            weighted[&i(900)]
-                .values()
-                .all(|v| coefficient_atom(v) == Atom::num(1))
-        );
-        assert_eq!(weighted[&i(901)].len(), 129);
-        assert!(weighted[&i(902)].is_empty());
+        let mut reference = None;
+        for maximum in [0, 128, 129] {
+            // The same 129 leaves exercise forced forward, the unchanged
+            // default, and backward substitution at the inclusive boundary.
+            let mut expander = Expander::new(&reduction, &context)
+                .unwrap()
+                .with_max_backward_frontier(maximum);
+            let weighted = expander.expand_weighted(&seeds, 2).unwrap();
+            let fresh = expander.expand_many(&roots, 2).unwrap();
+            assert_expansions_equal(&weighted, &fresh);
+            if let Some(reference) = &reference {
+                assert_expansions_equal(&weighted, reference);
+            } else {
+                reference = Some(weighted.clone());
+            }
+            assert_eq!(weighted[&i(900)].len(), 64);
+            assert!(
+                weighted[&i(900)]
+                    .values()
+                    .all(|v| coefficient_atom(v) == Atom::num(1))
+            );
+            assert_eq!(weighted[&i(901)].len(), 129);
+            assert!(weighted[&i(902)].is_empty());
+        }
         // Cached seeds use the same cycle-checked dependency planner as a
         // fresh expansion, including cycles introduced by subsequent rules.
         reduction
             .rules
             .insert(i(1), BTreeMap::from([(i(900), Atom::num(1))]));
-        assert!(matches!(
-            Expander::new(&reduction, &context)
-                .unwrap()
-                .expand_weighted(&seeds, 2),
-            Err(Error::IncompleteReduction(_))
-        ));
+        for maximum in [0, 129] {
+            assert!(matches!(
+                Expander::new(&reduction, &context)
+                    .unwrap()
+                    .with_max_backward_frontier(maximum)
+                    .expand_weighted(&seeds, 2),
+                Err(Error::IncompleteReduction(_))
+            ));
+        }
     }
 
     #[test]

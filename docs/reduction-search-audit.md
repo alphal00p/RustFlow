@@ -348,3 +348,27 @@ reverse sectors give no descending rules. These 6,199 identities contain
 15,175 RHS terms, with maximum width 21. Verification and all 22,066 transport
 checks, including identity, took 663 ms in one isolated run. This is a coverage
 measurement, not a production speedup or an end-to-end numerical validation.
+
+## Region follow-up with eager zero pruning
+
+Validated commit `3fa494323c466ea8dfad6b8e3fccd6a130b04068` (107 release tests
+and strict Clippy) resumed the latest region checkpoint in another isolated
+directory, with the same CPU 27, one-thread, depth-three, frontier and target
+limits, and a 900-second cap. Its first fresh substitution took 353.4 seconds;
+seven subsequent updates took 0.14–0.75 seconds. It reached
+`12,180 searched / 2 pending`, with 19 additional certified-zero identities
+relative to the corresponding pre-pruning state. The final substitution of
+12,155 rules remained unfinished for 540.1 seconds before timeout. Observed
+memory samples reached 4.02 GiB; no nonzero refined region coefficient was
+reported. Eager zero removal therefore did not complete this boundary-family
+calculation within the tested budget.
+
+The saved checkpoint contains 11,877 searched integrals, 138 pending four-line
+integrals, and 11,850 rules, including six certified-zero two-line and twelve
+certified-zero three-line leaves. Its size is 42,383,036 bytes and SHA-256 is
+`430e2eb0ce2ba429e15fa6addd21b53067eb72f098dd4ac00f46969a1708cde0`.
+The directory `target/eager-zero-regions-pilot` retains the executable hash,
+command, input/output checkpoint provenance, per-event timings, and result.
+This continuation started from more completed work than the preceding run;
+these observations are not a matched-work speed comparison or numerical
+acceptance evidence.

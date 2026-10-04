@@ -40,6 +40,9 @@ fn main() -> Result<()> {
             "--max-exact-frontier" => {
                 native.max_exact_frontier = integer_argument(&mut arguments, &argument)?
             }
+            "--max-backward-frontier" => {
+                native.max_backward_frontier = integer_argument(&mut arguments, &argument)?
+            }
             "--depth" => {
                 native.max_depth = u32::try_from(integer_argument(&mut arguments, &argument)?)
                     .map_err(|_| Error::InvalidInput("depth exceeds u32".into()))?
@@ -54,7 +57,7 @@ fn main() -> Result<()> {
             "--skip-reduction" => options.skip_reduction = true,
             "--help" => {
                 println!(
-                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--depth N] [--workers N] [--native-workers N] [--checkpoint-seconds N] [--cancel-file PATH] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops] [--parametric-rules] [--symmetry-rules]"
+                    "two_loop_acceptance [--max-targets N] [--case-batch N] [--max-exact-frontier N] [--max-backward-frontier N] [--depth N] [--workers N] [--native-workers N] [--checkpoint-seconds N] [--cancel-file PATH] [--symbolic-epsilon] [--skip-reduction] [--factorized | --plain] [--no-bubble-subloops] [--parametric-rules] [--symmetry-rules]"
                 );
                 return Ok(());
             }

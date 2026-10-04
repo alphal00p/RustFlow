@@ -156,10 +156,20 @@ existing format. Conservative frontier traversal borrows graph keys instead
 of allocating a key for every edge. Final exact substitution groups incoming
 rational coefficients in balanced sums to reduce intermediate polynomial
 growth; this changes evaluation order, not the reduction identities.
-When at most 128 terminal integrals remain, substitution runs from the leaves
-toward the targets so apparent poles can cancel within each identity. Child
-expansions are released after their last parent uses them. Wider frontiers use
-forward accumulation to avoid storing a large residual map at every graph node.
+When at most `RustRedBackend::max_backward_frontier` terminal integrals remain
+(128 by default), substitution runs from the leaves toward the targets so
+apparent poles can cancel within each identity. Child expansions are released
+after their last parent uses them. Wider frontiers use forward accumulation
+to avoid storing a large residual map at every graph node. Raising this limit
+may reduce polynomial growth and runtime when local cancellations are strong,
+at the cost of retaining more intermediate coefficient maps. Lowering it can
+reduce memory use; zero selects forward accumulation for every nonempty
+terminal set. Both strategies perform exact algebra and use the same cycle
+checks. The three paper examples expose `--max-backward-frontier N`.
+Nondefault values distinguish complete reduction/system cache identities;
+native partial checkpoints remain reusable because the saved equations and
+integral order are unchanged. These controls establish no numerical acceptance
+result or general speedup.
 Small-basis substitution shares dependencies across a batch of targets, and
 completed frontier expansions are reused when producing the final table.
 `DifferentialClosure` events report basis size and remaining derivative targets.

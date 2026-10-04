@@ -24,6 +24,78 @@ impl ReductionBackend for CountBackend {
 }
 
 #[test]
+fn backward_strategy_changes_complete_cache_identity_but_reuses_native_work() {
+    let directory =
+        std::env::temp_dir().join(format!("amflow-backward-strategy-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&directory);
+    let native_directory = directory.join("native");
+    let complete_directory = directory.join("complete");
+    let family = IntegralFamily {
+        name: "backward_strategy_tadpole".into(),
+        loops: vec!["l".into()],
+        external: vec![],
+        external_gram: vec![],
+        propagators: vec![Propagator::quadratic(&[1], &[], Atom::num(1), &[]).unwrap()],
+        physical_propagators: 1,
+        epsilon: symbol!("backward_strategy_eps"),
+        dimension: 4,
+    };
+    let targets = [Integral(vec![2])];
+    let searches = std::sync::Arc::new(AtomicUsize::new(0));
+    let observed = searches.clone();
+    let context = RunContext {
+        progress: Some(std::sync::Arc::new(move |event| {
+            if let Progress::SectorReduction { integrals, .. } = event {
+                observed.fetch_add(integrals, Ordering::Relaxed);
+            }
+        })),
+        ..Default::default()
+    };
+    let mut backend = cache::CachedBackend {
+        backend: RustRedBackend {
+            checkpoints: Some(native_directory.clone()),
+            ..Default::default()
+        },
+        directory: complete_directory.clone(),
+    };
+    assert_eq!(backend.backend.max_backward_frontier, 128);
+    let default_identity = backend.identity();
+    assert!(!default_identity.contains("backward-frontier"));
+    let original = backend.reduce(&family, &targets, &context).unwrap();
+    let completed_searches = searches.load(Ordering::Relaxed);
+    assert!(completed_searches > 0);
+    let native_files = || {
+        std::fs::read_dir(&native_directory)
+            .unwrap()
+            .map(|entry| entry.unwrap().file_name())
+            .collect::<std::collections::BTreeSet<_>>()
+    };
+    let original_files = native_files();
+    assert_eq!(original_files.len(), 1);
+    for (ordinal, maximum) in [0, 129].into_iter().enumerate() {
+        backend.backend.max_backward_frontier = maximum;
+        assert_eq!(
+            backend.identity(),
+            format!("{default_identity}:backward-frontier-v1={maximum}")
+        );
+        let resumed = backend.reduce(&family, &targets, &context).unwrap();
+        assert_eq!(
+            resumed.expand(&targets[0]).unwrap(),
+            original.expand(&targets[0]).unwrap()
+        );
+        assert_eq!(searches.load(Ordering::Relaxed), completed_searches);
+        assert_eq!(native_files(), original_files);
+        assert_eq!(
+            std::fs::read_dir(&complete_directory).unwrap().count(),
+            ordinal + 2
+        );
+    }
+    backend.backend.max_backward_frontier = 128;
+    assert_eq!(backend.identity(), default_identity);
+    std::fs::remove_dir_all(directory).unwrap();
+}
+
+#[test]
 fn restart_invalidation_and_corruption() {
     let directory = std::env::temp_dir().join(format!(
         "symbolica-amflow-cache-test-{}",

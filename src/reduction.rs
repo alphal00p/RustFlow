@@ -51,6 +51,11 @@ pub struct RustRedBackend {
     /// instead of materializing large temporary coefficients. Zero disables
     /// intermediate coefficient pruning; final reductions are always exact.
     pub max_exact_frontier: usize,
+    /// Use backward substitution when at most this many terminal integrals
+    /// remain. Larger values can expose cancellations earlier but retain more
+    /// intermediate coefficient maps. Zero selects forward substitution for
+    /// every nonempty terminal set. The default is 128.
+    pub max_backward_frontier: usize,
     /// Maximum number of concrete targets sharing one native exact replay.
     /// Smaller batches trade shared searches for smaller elimination systems.
     pub max_sector_batch: usize,
@@ -84,6 +89,7 @@ impl Default for RustRedBackend {
             max_targets: 4096,
             include_lorentz: false,
             max_exact_frontier: 512,
+            max_backward_frontier: 128,
             max_sector_batch: usize::MAX,
             native_workers: 1,
             factorized: true,
@@ -113,6 +119,12 @@ impl ReductionBackend for RustRedBackend {
         );
         if self.symmetry_rules {
             identity.push_str(":symmetry-v1");
+        }
+        if self.max_backward_frontier != 128 {
+            identity.push_str(&format!(
+                ":backward-frontier-v1={}",
+                self.max_backward_frontier
+            ));
         }
         identity
     }

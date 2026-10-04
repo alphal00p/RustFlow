@@ -38,6 +38,17 @@ fn main() -> Result<()> {
         })
         .transpose()?
         .unwrap_or(32768);
+    let max_backward_frontier = args
+        .iter()
+        .position(|s| s == "--max-backward-frontier")
+        .map(|i| {
+            args.get(i + 1)
+                .ok_or_else(|| Error::InvalidInput("missing backward frontier limit".into()))?
+                .parse::<usize>()
+                .map_err(|e| Error::InvalidInput(e.to_string()))
+        })
+        .transpose()?
+        .unwrap_or(RustRedBackend::default().max_backward_frontier);
     let powers = std::env::args()
         .nth(1)
         .unwrap_or_else(|| "0,1,1,0,1,0,1,0,0".into())
@@ -58,6 +69,7 @@ fn main() -> Result<()> {
             max_targets,
             max_sector_batch: 32,
             max_exact_frontier,
+            max_backward_frontier,
             checkpoints: Some(".amflow-cache/subsectors".into()),
             ..Default::default()
         },

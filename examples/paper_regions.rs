@@ -7,27 +7,28 @@ fn main() -> Result<()> {
     let mut parametric_rules = false;
     let mut symmetry_rules = false;
     let mut max_exact_frontier = 0;
+    let mut max_backward_frontier = RustRedBackend::default().max_backward_frontier;
     let mut max_targets = 32768;
     let mut arguments = std::env::args().skip(1);
     while let Some(argument) = arguments.next() {
         match argument.as_str() {
             "--parametric-rules" => parametric_rules = true,
             "--symmetry-rules" => symmetry_rules = true,
-            "--max-exact-frontier" | "--max-targets" => {
+            "--max-exact-frontier" | "--max-backward-frontier" | "--max-targets" => {
                 let value = arguments
                     .next()
                     .ok_or_else(|| Error::InvalidInput(format!("missing value for {argument}")))?
                     .parse::<usize>()
                     .map_err(|e| Error::InvalidInput(format!("{argument}: {e}")))?;
-                if argument == "--max-exact-frontier" {
-                    max_exact_frontier = value;
-                } else {
-                    max_targets = value;
+                match argument.as_str() {
+                    "--max-exact-frontier" => max_exact_frontier = value,
+                    "--max-backward-frontier" => max_backward_frontier = value,
+                    _ => max_targets = value,
                 }
             }
             "--help" => {
                 println!(
-                    "paper_regions [--parametric-rules] [--symmetry-rules] [--max-exact-frontier N] [--max-targets N]"
+                    "paper_regions [--parametric-rules] [--symmetry-rules] [--max-exact-frontier N] [--max-backward-frontier N] [--max-targets N]"
                 );
                 return Ok(());
             }
@@ -46,6 +47,7 @@ fn main() -> Result<()> {
         max_targets,
         max_sector_batch: 32,
         max_exact_frontier,
+        max_backward_frontier,
         checkpoints: Some(".amflow-cache/regions".into()),
         ..Default::default()
     };
