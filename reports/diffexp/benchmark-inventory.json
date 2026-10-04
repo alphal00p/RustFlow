@@ -360,7 +360,7 @@
     {
       "id": "fivepoint-nonplanar-accurate",
       "notebook": "5pNonPlanar.nb",
-      "status": "not_run_in_this_environment",
+      "status": "inputs_pinned_and_exported_transport_not_run",
       "dimension": 108,
       "canonical": true,
       "alphabet_letters": 31,
@@ -411,7 +411,7 @@
     {
       "id": "fivepoint-nonplanar-fast",
       "notebook": "5pNonPlanar.nb",
-      "status": "not_run_in_this_environment",
+      "status": "inputs_pinned_and_exported_transport_not_run",
       "dimension": 108,
       "canonical": true,
       "alphabet_letters": 31,
@@ -459,7 +459,7 @@
     {
       "id": "fivepoint-planar-1loop-ph1-to-ph6",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "not_run_in_this_environment",
+      "status": "completed_live_original_and_native_all65_coefficients_to20_absolute_digits",
       "family": "1loop",
       "dimension": 13,
       "canonical": true,
@@ -484,13 +484,36 @@
       },
       "path": "SamplePoints[[1]]\u2192SamplePoints[[6]], transposing integral data as in notebook.",
       "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
-      "external_dataset": "2005.04195-unversioned",
-      "historical_notebook_transport_seconds": 85.556919
+      "external_dataset": "2005.04195v2",
+      "historical_notebook_transport_seconds": 85.556919,
+      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there.",
+      "validation_report": "reports/diffexp/fivepoint-planar-validation.json",
+      "fixture": "fixtures/diffexp/fivepoint-planar-1loop.json",
+      "native_precision_order_profiles": [
+        [
+          40,
+          48
+        ],
+        [
+          60,
+          80
+        ],
+        [
+          80,
+          112
+        ]
+      ],
+      "coverage_note": "Supplied PH1 boundary, all13 masters through epsilon4, physical branch endpoint checks and independent precision/order refinement. The original notebook run requested15 digits; all65 original values agree with ancillary to6.17e-23. No full-amplitude, automatic-boundary, generic-contour or matched-settings speedup claim.",
+      "production_regression": {
+        "status": "passed",
+        "command": "cargo test --release --locked -p symbolica-amflow --test fivepoint_planar -- --ignored --nocapture",
+        "elapsed_seconds": 630.5
+      }
     },
     {
       "id": "fivepoint-planar-zmz-ph1-to-ph6",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "not_run_in_this_environment",
+      "status": "inputs_pinned_and_exported_transport_not_run",
       "family": "zmz",
       "dimension": 75,
       "canonical": true,
@@ -515,13 +538,14 @@
       },
       "path": "SamplePoints[[1]]\u2192SamplePoints[[6]], transposing integral data as in notebook.",
       "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
-      "external_dataset": "2005.04195-unversioned",
-      "historical_notebook_transport_seconds": 1391.141062
+      "external_dataset": "2005.04195v2",
+      "historical_notebook_transport_seconds": 1391.141062,
+      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there."
     },
     {
       "id": "fivepoint-planar-mzz-ph1-to-ph6",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "not_run_in_this_environment",
+      "status": "inputs_pinned_and_exported_transport_not_run",
       "family": "mzz",
       "dimension": 74,
       "canonical": true,
@@ -546,13 +570,14 @@
       },
       "path": "SamplePoints[[1]]\u2192SamplePoints[[6]], transposing integral data as in notebook.",
       "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
-      "external_dataset": "2005.04195-unversioned",
-      "historical_notebook_transport_seconds": 992.459149
+      "external_dataset": "2005.04195v2",
+      "historical_notebook_transport_seconds": 992.459149,
+      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there."
     },
     {
       "id": "fivepoint-planar-zzz-ph1-to-ph6",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "not_run_in_this_environment",
+      "status": "inputs_pinned_and_exported_transport_not_run",
       "family": "zzz",
       "dimension": 86,
       "canonical": true,
@@ -577,13 +602,14 @@
       },
       "path": "SamplePoints[[1]]\u2192SamplePoints[[6]], transposing integral data as in notebook.",
       "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
-      "external_dataset": "2005.04195-unversioned",
-      "historical_notebook_transport_seconds": 1670.664508
+      "external_dataset": "2005.04195v2",
+      "historical_notebook_transport_seconds": 1670.664508,
+      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there."
     },
     {
       "id": "fivepoint-planar-zzz-ph1-to-ph2-128digits",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "not_run_in_this_environment",
+      "status": "inputs_pinned_and_exported_transport_not_run",
       "family": "zzz",
       "dimension": 86,
       "canonical": true,
@@ -609,8 +635,9 @@
       },
       "path": "SamplePoints[[1]]\u2192SamplePoints[[2]].",
       "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
-      "external_dataset": "2005.04195-unversioned",
-      "historical_notebook_transport_seconds": 7401.394625
+      "external_dataset": "2005.04195v2",
+      "historical_notebook_transport_seconds": 7401.394625,
+      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there."
     }
   ],
   "additional_paper_profiles": [
@@ -705,13 +732,24 @@
         "XB_Boundary_values_X1.txt"
       ],
       "metadata": "https://arxiv.org/src/1812.11160v2/anc/README.txt",
-      "status": "not_in_clone;not_downloaded_by_this_audit",
+      "status": "downloaded_hash_pinned_scientific_data_exported",
       "dimension": 108,
-      "normalization": "eps^4*exp(2*eps*EulerGamma) according to ancillary README"
+      "normalization": "eps^4*exp(2*eps*EulerGamma) according to ancillary README",
+      "archive_sha256": "3b4fc87a30cb7c26b13ecc290181fcea0c734d23f012e49b8fe599a8188b324d",
+      "archive_bytes": 237379,
+      "provenance_report": "reports/diffexp/ancillary-provenance.json",
+      "local_archive": "target/diffexp-oracle/ancillary/1812.11160v2.tar.gz",
+      "member_sha256": {
+        "anc/XB_Atilde.txt": "3d997ab1eae2a6ca1e2489f3e733080b5b20950bc7440555b76230a5d2350c3d",
+        "anc/XB_Boundary_values_X0.txt": "132611651f9c2fc5de983965bf170328ea0a54cef0f8cb4a3f65d87182c34a96",
+        "anc/XB_Boundary_values_X1.txt": "7883537af39b181f84266934b9440df3f67a5eb8f67b576388d7aa29524d9b92"
+      },
+      "download_reproduction": "python scripts/fetch_diffexp_ancillaries.py",
+      "numerical_benchmark_status": "both108-master profiles pending"
     },
     {
-      "id": "2005.04195-unversioned",
-      "url": "https://arxiv.org/src/2005.04195/anc/",
+      "id": "2005.04195v2",
+      "url": "https://export.arxiv.org/src/2005.04195v2",
       "files": [
         "1loop/diffEq-1loop.m",
         "zzz/diffEq-zzz.m",
@@ -724,8 +762,27 @@
         "alphabet.m",
         "determinants.m"
       ],
-      "status": "not_in_clone;not_downloaded_by_this_audit",
-      "version_caveat": "Notebook prints v1 URLs but URLDownload uses unversioned endpoints; current latest arXiv version isv2. Pin actual bytes/version and validate embedded notebook points before benchmark claims."
+      "status": "downloaded_hash_pinned_scientific_data_exported",
+      "version_caveat": "Notebook prints v1 but downloads unversioned data. The recorded unversioned probe matched v2; v1 and v2 archives and differing reference files remain preserved. v2 mzz point7 has only13 of74 epsilon-zero entries; PH1/PH6/PH2 are complete.",
+      "original_notebook_dataset_id": "2005.04195-unversioned",
+      "archive_sha256": "38226debcb23bd0fc5d1a4195f9a9af1a53249b3e168cce4e691a888e79978cd",
+      "archive_bytes": 5129865,
+      "provenance_report": "reports/diffexp/ancillary-provenance.json",
+      "local_archive": "target/diffexp-oracle/ancillary/2005.04195v2.tar.gz",
+      "member_sha256": {
+        "anc/alphabet.m": "7d685bcd1028b55b974039fe99acd5d1ec0e712af75223212c27040e04038e86",
+        "anc/mzz/diffEq-mzz.m": "bb768d48123765fce8622709f896ec3cf954c068a53f2fa89b6325cc0f333a1f",
+        "anc/mzz/numIntegrals-mzz.m": "ef7ab269df49d5d1c722bd28e2b40c16dce7b9d7f574527be03c295b05da93fb",
+        "anc/1loop/numIntegrals-1loop.m": "abe70dac2e86ba207043e573f3553f4dd0225180c20c916a3b9ae18b6a8c08ef",
+        "anc/1loop/diffEq-1loop.m": "8436b42770cea4de9ed8ff3e95acf1897af180081a3907af672938fbf8605016",
+        "anc/zmz/numIntegrals-zmz.m": "60bb875e573d5ec8106643b2a43f0ce96bb089024b410bc0768829edb86833eb",
+        "anc/zmz/diffEq-zmz.m": "7345c3d1fd8e6b248668a6ce072d90866971e73d4663b07d3b43cd6c98e3f018",
+        "anc/zzz/diffEq-zzz.m": "43f617d7929ee5f6aaef9d808f76ea2248c3961b0677a3632f72f6c83a9a29b1",
+        "anc/zzz/numIntegrals-zzz.m": "74688c638e67005838ca3cc8957ccbc4604a5f1a2ef6654e280774080743e244",
+        "anc/determinants.m": "81655e7efd9628aac262ab2ac586e55c77ecb2f4657b88932bf0de2acdf19ca2"
+      },
+      "download_reproduction": "python scripts/fetch_diffexp_ancillaries.py",
+      "numerical_benchmark_status": "1loop PH1-to-PH6 completed; other planar families pending"
     }
   ],
   "preparation_tools": [
@@ -735,10 +792,10 @@
   ],
   "live_smoke": "mpl-101-4/fixture.json",
   "next_steps": [
-    "Load/export all exact matrices and boundary records once external assets are pinned.",
-    "Build matching Rust drivers using the exported boundary normalization and prescriptions.",
-    "Run repeated same-host single-core measurements only after correctness/refinement checks pass; include symbolic setup and transport separately.",
-    "Preserve every upstream reference precision rather than treating working precision as achieved digits."
+    "Run the pending108-master nonplanar and75/74/86-master planar benchmarks with the already pinned scientific inputs and complete supplied boundary metadata.",
+    "Keep the128-digit planar profile separate from the20-digit acceptance milestones and preserve the recorded source precision ceiling.",
+    "Run repeated same-host single-core measurements after correctness/refinement; record symbolic setup, transport, caching and differing work counts separately.",
+    "Preserve upstream reference precision rather than treating working precision or printed mantissas as achieved accuracy."
   ],
   "clone_modified": false
 }

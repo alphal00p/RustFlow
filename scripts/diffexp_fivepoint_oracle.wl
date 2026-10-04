@@ -1,0 +1,43 @@
+(* Independent driver of the unchanged original DiffExp PH1-to-PH6 benchmark. *)
+$HistoryLength=0;
+(* Environment: DIFFEXP_ROOT, DIFFEXP_ANCILLARY, DIFFEXP_OUTPUT. *)
+requiredEnvironment[name_]:=Module[{v=Environment[name]},If[!StringQ[v]||StringLength[v]==0,Print["Missing environment variable: ",name];Exit[2]];ExpandFileName[v]];
+base=requiredEnvironment["DIFFEXP_OUTPUT"];
+root=requiredEnvironment["DIFFEXP_ROOT"];
+ancillary=requiredEnvironment["DIFFEXP_ANCILLARY"];
+If[!DirectoryQ[base],Print["Output directory does not exist: ",base];Exit[2]];
+If[FileExistsQ[FileNameJoin[{base,"result.json"}]]||DirectoryQ[FileNameJoin[{base,"matrices"}]],Print["Output directory already has result or matrices"];Exit[2]];
+fail[m_]:=(Print["ORACLE FAILURE: ",m];Exit[1]);
+sha[f_]:=IntegerString[FileHash[f,"SHA256"],16,64];str[v_]:=ToString[v,InputForm];
+scalar[v_]:=<|"real_wolfram"->str[Re[v]],"imaginary_wolfram"->str[Im[v]],"precision_wolfram"->str[Precision[v]],"accuracy_wolfram"->str[Accuracy[v]]|>;
+writeJSON[path_,data_]:=If[Export[path,data,"RawJSON"]===$Failed,fail["JSON export failed"]];
+hashes=<|"alphabet.m"->"7d685bcd1028b55b974039fe99acd5d1ec0e712af75223212c27040e04038e86","1loop/diffEq-1loop.m"->"8436b42770cea4de9ed8ff3e95acf1897af180081a3907af672938fbf8605016","1loop/numIntegrals-1loop.m"->"abe70dac2e86ba207043e573f3553f4dd0225180c20c916a3b9ae18b6a8c08ef"|>;
+KeyValueMap[If[sha[FileNameJoin[{ancillary,#1}]]=!=#2,fail["Ancillary hash mismatch"]]&,hashes];
+If[sha[FileNameJoin[{root,"DiffExp.m"}]]=!="67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7",fail["Pinned package mismatch"]];
+tr5Exp=Sqrt[(-s12*s15+s12*s23+p1s*s34+s15*s45-s34*s45-s23*s34)^2-4*s23*s34*s45*(p1s-s12-s15+s34)];
+sqrtG3Exp=Sqrt[p1s^2+(s23-s45)^2-2*p1s*(s23+s45)];
+sqrtG3ncExp=Sqrt[(s12+s15)^2-4*p1s*s34];
+alphabet=Get[FileNameJoin[{ancillary,"alphabet.m"}]]/.{tr5->tr5Exp,sqrtG3->sqrtG3Exp,sqrtG3nc->sqrtG3ncExp};
+tensor=Get[FileNameJoin[{ancillary,"1loop","diffEq-1loop.m"}]];
+If[Dimensions[tensor]=!={58,13,13},fail["Canonical tensor dimensions"]];
+matrixDirectory=CreateDirectory[FileNameJoin[{base,"matrices"}]];
+matrixTime=AbsoluteTiming[matrix=(Log/@alphabet).Normal[tensor];Export[FileNameJoin[{matrixDirectory,"d_1.m"}],matrix];][[1]];
+If[Dimensions[matrix]=!={13,13},fail["Matrix dimensions"]];
+points=Get[FileNameJoin[{ancillary,"1loop","numIntegrals-1loop.m"}]];
+start=MapAt[Transpose,points[[1]],2];endpoint=MapAt[Transpose,points[[6]],2];
+If[Dimensions[start[[2]]]=!={13,5}||Dimensions[endpoint[[2]]]=!={13,5},fail["Reference dimensions"]];
+Get[FileNameJoin[{root,"DiffExp.m"}]];
+settings=<|"working_precision"->150,"chop_precision"->100,"order"->40,"accuracy_goal"->15,"epsilon_order"->4,"division_order"->3,"mobius"->False,"pade"->False,"parallel"->False|>;
+CheckAbort[
+ load=AbsoluteTiming[DiffExp`LoadConfiguration[{DiffExp`MatrixDirectory->matrixDirectory,DiffExp`EpsilonOrder->4,WorkingPrecision->150,DiffExp`ChopPrecision->100,DiffExp`ExpansionOrder->40,AccuracyGoal->15,DiffExp`DivisionOrder->3,DiffExp`UseMobius->False,DiffExp`UsePade->False,DiffExp`DeltaPrescriptions->{p1s+I*\[Delta],s12+I*\[Delta],s15+I*\[Delta],s23+I*\[Delta],s34+I*\[Delta],s45+I*\[Delta]},DiffExp`Verbosity->2,"Parallel"->False}]];
+ prepared=AbsoluteTiming[DiffExp`PrepareBoundaryConditions[start[[2]],start[[1]]]];
+ Print["STAGE: PH1 to PH6, all13 masters epsilon0..4"];
+ result=AbsoluteTiming[DiffExp`TransportTo[prepared[[2]],endpoint[[1]]]];
+ values=result[[2,2]];
+ If[Dimensions[values]=!={13,5}||!AllTrue[Flatten[values],NumberQ],fail["Malformed transport result"]];
+ Put[result[[2]],FileNameJoin[{base,"endpoint.wl"}]];
+ difference=Max[Abs[Flatten[values-endpoint[[2]]]]];
+ pass=TrueQ[difference<10^-15];
+ writeJSON[FileNameJoin[{base,"result.json"}],<|"status"->If[pass,"passed","reference_disagreement"],"case"->"planar_one_mass_fivepoint_1loop_PH1_to_PH6","upstream_commit"->"784c8229bf92369a03f011a48e161522c8c54bbd","paper_version"->"2005.04195v2","package_sha256"->sha[FileNameJoin[{root,"DiffExp.m"}]],"driver_sha256"->sha[$InputFileName],"wolfram_version"->$Version,"source_sha256"->hashes,"generated_matrix_sha256"->sha[FileNameJoin[{matrixDirectory,"d_1.m"}]],"settings"->settings,"matrix_construction_seconds"->matrixTime,"configuration_seconds"->load[[1]],"boundary_preparation_seconds"->prepared[[1]],"transport_seconds"->result[[1]],"start"->str[start[[1]]],"endpoint"->str[endpoint[[1]]],"source_boundary_precision_estimate"->str[start[[3]]],"reference_precision_estimate"->str[endpoint[[3]]],"boundary_values"->Map[scalar,start[[2]],{2}],"endpoint_values"->Map[scalar,values,{2}],"reference_values"->Map[scalar,endpoint[[2]],{2}],"reported_errors"->Map[str,result[[2,3]],{2}],"max_absolute_reference_difference"->str[difference],"asserted_absolute_digits"->15,"scope"->"Complete13-master five-point physical transport with supplied ancillary boundary; original notebook accuracy/order settings, not analytic boundary construction or full-amplitude evaluation.","notebook_deviations"->{"External pinned v2 inputs replace mutable download URL; explicit defaults and single-process mode; resource bounds enforced by external monitor."},"reference_precision_note"->"Finite-accuracy zeros and source precision metadata retained. Working precision and printed mantissas are not accuracy guarantees."|>];
+ If[!pass,fail[{"Reference disagreement",difference}]];
+ Print["ORACLE PASS ",str[difference]];Exit[0],fail["DiffExp aborted"]];

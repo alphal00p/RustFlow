@@ -3,9 +3,10 @@
 The [ancillary provenance report](../reports/diffexp/ancillary-provenance.json)
 records archive and member SHA256 hashes, matrix dimensions, reference precision,
 and comparisons between paper versions. The inputs belong to DiffExp commit
-`784c8229bf92369a03f011a48e161522c8c54bbd`'s example notebooks. These files prepare
-the five-point benchmarks; no five-point numerical transport or performance
-measurement is claimed here.
+`784c8229bf92369a03f011a48e161522c8c54bbd`'s example notebooks. The [full 13-master planar one-loop benchmark](fivepoint-planar.md) has
+completed live original and native PH1→PH6 transport through ε⁴, including
+precision/order refinement. The remaining larger five-point benchmarks are
+prepared but have not completed numerical acceptance.
 
 Reproduce the downloads and verify the extracted scientific files with:
 
@@ -55,4 +56,6 @@ validates all 15 masters through ε⁴ on two native paths against a complete
 original-DiffExp endpoint oracle. Both use analytic gamma-function boundaries;
 no numerical reference seeds the integration. The unequal original full route
 was separately censored by its memory cap, while its alternate route completed.
-These banana results do not imply that the five-point benchmarks above have run.
+The separate [planar one-loop five-point result](fivepoint-planar.md) validates
+all 65 coefficients using its supplied ancillary boundary. The 75-, 74-, and
+86-master planar families and the 108-master nonplanar system remain pending.
