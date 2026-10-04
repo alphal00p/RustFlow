@@ -1,0 +1,3 @@
+begin isolate_roots: exponent=100, centered=false, construction=245.91µs
+finished isolate_roots: elapsed=1.694354ms, roots=2
+refining root=0 bits=232 elapsed=1.749294ms

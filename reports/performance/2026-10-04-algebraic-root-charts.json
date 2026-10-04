@@ -1,0 +1,112 @@
+{
+  "schema_version": 1,
+  "purpose": "Controlled root-chart algorithm comparison; this is not an end-to-end five-point speedup claim.",
+  "date_utc": "2026-10-04",
+  "symbolica_commit": "75f8350094b90254ee71dc2a391fde0d14b0204a",
+  "working_decimal_digits": 90,
+  "working_bits": 315,
+  "coefficient_comparison_scaled_digits": 50,
+  "comparison_rule": "abs(new-old) < 10^-50 * max(1,abs(old)) for every retained coefficient, including constant; both algorithms start from the same selected numerical negative root.",
+  "new_algorithm": "Compiled once: diagonal rational system r_i_prime = (R_i_prime/(2 R_i)) r_i; existing CompiledSystem::taylor with finite polynomial denominator recurrence.",
+  "reference_algorithm": "Native Symbolica exact AtomField series of R(x)/R(center), raised to 1/2 by native rpow, then evaluated at fixed MPFR precision and multiplied by the selected root.",
+  "preserved_checks": [
+    "exact-binary-center radicand domain validation",
+    "root identity and center checks",
+    "midpoint and endpoint root truncation and differential defects",
+    "squared-root residual",
+    "shared solution midpoint/endpoint defects and tail checks",
+    "accepted-state-only sheet changes",
+    "native fixed-precision Series kernel multiplication"
+  ],
+  "test_environment": {
+    "affinity_cpu": 30,
+    "test_threads": 1,
+    "wrapper_optimization": "rustc default (unoptimized standalone wrapper)",
+    "dependencies": "existing release-built native Symbolica and library dependencies",
+    "timing_samples_per_chart": 1
+  },
+  "cases": [
+    {
+      "radicand": "x^4+7*x^3-11*x+5",
+      "center_real": "0",
+      "center_imaginary": "0",
+      "order": 80,
+      "new_seconds": "0.000346872",
+      "reference_seconds": "0.099409602"
+    },
+    {
+      "radicand": "(x-1)^3/(x+2)^2",
+      "center_real": "1.000001",
+      "center_imaginary": "0.0000001",
+      "order": 24,
+      "new_seconds": "0.000112791",
+      "reference_seconds": "21.431065453"
+    },
+    {
+      "radicand": "(x-1)^2+1/10^30",
+      "center_real": "1.000000000000001",
+      "center_imaginary": "0.0000000000000001",
+      "order": 20,
+      "new_seconds": "0.000101310",
+      "reference_seconds": "0.468034722"
+    },
+    {
+      "radicand": "(1+i)*(x^2+2)/(x^2+3)",
+      "center_real": "0.123456789123456789123456789",
+      "center_imaginary": "-0.078901234567890123456789",
+      "order": 24,
+      "new_seconds": "0.000146851",
+      "reference_seconds": "43.852217128"
+    }
+  ],
+  "validation": {
+    "all_coefficients_passed": true,
+    "standalone_tests_passed": 15,
+    "standalone_suite_seconds": "69.17",
+    "includes": "ordinary winding and independent precision/order refinement; direct epsilon hierarchy; concurrent opposite sheets; two-root products; rejection nonmutation; sparse-root defects; multivariate dlog and stationary-path domain checks; fixed-series arithmetic guards"
+  },
+  "retained_oracle_source": {
+    "path": "src/algebraic.rs",
+    "module": "root_taylor_comparisons",
+    "function": "rational_root_ode_matches_native_exact_rpow_on_difficult_charts",
+    "full_order_switch": "RUSTFLOW_EXTENDED_ROOT_CHART_CHECK=1",
+    "default_orders": [
+      80,
+      16,
+      16,
+      12
+    ],
+    "full_orders": [
+      80,
+      24,
+      20,
+      24
+    ],
+    "reproduce": "RUSTFLOW_EXTENDED_ROOT_CHART_CHECK=1 cargo test --release --lib rational_root_ode_matches_native_exact_rpow_on_difficult_charts -- --nocapture"
+  },
+  "raw_test_stdout": "\nrunning 15 tests\ntest algebraic::root_taylor_comparisons::rational_root_ode_matches_native_exact_rpow_on_difficult_charts ... case=0 order=80 numeric=346.872\u00b5s exact=99.409602ms\ncase=1 order=24 numeric=112.791\u00b5s exact=21.431065453s\ncase=2 order=20 numeric=101.31\u00b5s exact=468.034722ms\ncase=3 order=24 numeric=146.851\u00b5s exact=43.852217128s\nok\ntest algebraic::tests::rejected_chart_does_not_advance_branch_state ... ok\ntest algebraic::tests::sparse_root_tail_requires_independent_defect_checks ... ok\ntest fixed_series::tests::invalid_precision_and_nonfinite_series_are_errors ... ok\ntest fixed_series::tests::native_series_preserves_fixed_rounding_and_remainders ... ok\ntest integration_tests::direct_epsilon_hierarchy_and_concurrent_sheets ... ok\ntest integration_tests::explicit_radicand_i0_and_invalid_registry_seeds ... ok\ntest integration_tests::ordinary_winding_tracks_sheets_and_refines ... ok\ntest integration_tests::root_powers_normalize_exactly_and_regular_rational_systems_remain_valid ... ok\ntest integration_tests::two_root_product_uses_independent_sheets_and_rational_radicands ... ok\ntest kinematic_tests::algebraic_path_rejects_undeclared_coordinates_and_root_dependent_radicands ... ok\ntest kinematic_tests::algebraic_total_derivative_and_path_pullback_match_exactly ... ok\ntest kinematic_tests::stationary_coordinates_cannot_erase_source_or_root_poles ... ok\ntest ode::recurrence_tests::cleared_recurrence_matches_rational_series_at_complex_centers ... ok\ntest ode::recurrence_tests::polynomial_clearing_reports_degree_overflow ... ok\n\ntest result: ok. 15 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 69.17s\n\n",
+  "prototype_artifacts": {
+    "target/root-chart-recurrence/algebraic.rs": {
+      "sha256": "633b808e8274c8ae33c142f1526c4bb73d17a7385b5104ee52cd321a1e802d7a",
+      "bytes": 47323
+    },
+    "target/root-chart-recurrence/ode.rs": {
+      "sha256": "ba8c2e85c320fd55e8ab27ff6117119c564a19359566f5040e1318e455cf3f4d",
+      "bytes": 36621
+    },
+    "target/root-chart-recurrence/probe.rs": {
+      "sha256": "1aa8ac72e40ccbc5932af9ff340388a82d9c49368155cd65f693464703c35a1a",
+      "bytes": 2124
+    },
+    "target/root-chart-recurrence/tests.log": {
+      "sha256": "dfc5071fa6e49a4129587937d91507ffce9f3b6feb321d523083c81d6eaa69f5",
+      "bytes": 1654
+    }
+  },
+  "limitations": [
+    "Single observations, not repeated timing medians.",
+    "Timing compares local chart construction at specified centers, not complete continuation or cache workloads.",
+    "Scaled coefficient agreement isolates chart construction and does not certify the starting boundary or final integral accuracy.",
+    "Numerical recurrence can be limited by polynomial conditioning; all existing precision/refinement and defect checks remain necessary."
+  ]
+}

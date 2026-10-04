@@ -152,6 +152,7 @@ impl Ring for FixedComplexRing {
 pub type NumericSeries = Series<FixedComplexRing>;
 /// Convert a regular exact Symbolica series after native symbolic rpow/series.
 /// The retained order is not silently extended; unknown coefficients stay unknown.
+#[cfg(test)]
 pub fn evaluate_series(
     exact: &Series<symbolica::domains::atom::AtomField>,
     p: Precision,

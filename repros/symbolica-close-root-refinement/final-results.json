@@ -1,0 +1,32 @@
+[
+  {
+    "case": "n80-bits232",
+    "exponent": 80,
+    "refinement_bits": 232,
+    "limit_seconds": 5,
+    "elapsed_seconds": 0.02131512900814414,
+    "exit_code": 0,
+    "limit_terminated": false,
+    "peak_rss_kib_sampled": 292
+  },
+  {
+    "case": "n100-bits128",
+    "exponent": 100,
+    "refinement_bits": 128,
+    "limit_seconds": 5,
+    "elapsed_seconds": 0.020927967969328165,
+    "exit_code": 0,
+    "limit_terminated": false,
+    "peak_rss_kib_sampled": 224
+  },
+  {
+    "case": "n100-bits232",
+    "exponent": 100,
+    "refinement_bits": 232,
+    "limit_seconds": 20,
+    "elapsed_seconds": 20.0103094750084,
+    "exit_code": -15,
+    "limit_terminated": true,
+    "peak_rss_kib_sampled": 44824
+  }
+]

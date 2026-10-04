@@ -1,3 +1,5 @@
+mod table_graph;
+
 use crate::family::{eta_derivative, substitute};
 use crate::{Error, Integral, IntegralFamily, Progress, Result, RunContext};
 use std::collections::{BTreeMap, BTreeSet};
@@ -366,37 +368,22 @@ impl ReductionBackend for TableBackend {
 }
 
 impl Reduction {
+    /// Expand one target through the current exact table. Reachable cycles and
+    /// undeclared leaves are rejected even when their coefficients later cancel.
     pub fn expand(&self, target: &Integral) -> Result<LinearCombination> {
-        fn visit(
-            r: &Reduction,
-            i: &Integral,
-            active: &mut BTreeSet<Integral>,
-        ) -> Result<LinearCombination> {
-            if !active.insert(i.clone()) {
-                return Err(Error::IncompleteReduction("cyclic reduction table".into()));
-            }
-            let answer = if let Some(terms) = r.rules.get(i) {
-                let mut out = LinearCombination::new();
-                for (j, c) in terms {
-                    for (k, d) in visit(r, j, active)? {
-                        let old = out.remove(&k).unwrap_or_default();
-                        out.insert(k, (old + c * &d).together().cancel());
-                    }
-                }
-                out.retain(|_, v| !v.is_zero());
-                out
-            } else if r.residuals.contains(i) {
-                BTreeMap::from([(i.clone(), Atom::num(1))])
-            } else {
-                return Err(Error::IncompleteReduction(format!(
-                    "uncovered integral {:?}",
-                    i.0
-                )));
-            };
-            active.remove(i);
-            Ok(answer)
-        }
-        visit(self, target, &mut BTreeSet::new())
+        self.expand_many(std::slice::from_ref(target))?
+            .remove(target)
+            .ok_or_else(|| Error::IncompleteReduction("missing expanded target".into()))
+    }
+
+    /// Expand several targets with shared native graph planning and exact
+    /// subexpressions. Duplicate targets share one output. The public mutable
+    /// rule table is observed anew on every call; no stale plan is retained.
+    pub fn expand_many(
+        &self,
+        targets: &[Integral],
+    ) -> Result<BTreeMap<Integral, LinearCombination>> {
+        table_graph::expand_many(self, targets)
     }
 }
 
@@ -518,15 +505,13 @@ pub(crate) fn build_differential_system(
     let mut previous = Vec::new();
     for round in 0..max_rounds {
         context.cancellation.check()?;
-        let reduction = backend.reduce(
-            family,
-            &requested.iter().cloned().collect::<Vec<_>>(),
-            context,
-        )?;
-        let mut basis = BTreeSet::new();
-        for i in &requested {
-            basis.extend(reduction.expand(i)?.into_keys());
-        }
+        let requested_targets = requested.iter().cloned().collect::<Vec<_>>();
+        let reduction = backend.reduce(family, &requested_targets, context)?;
+        let candidates = reduction.expand_many(&requested_targets)?;
+        let basis = candidates
+            .values()
+            .flat_map(|terms| terms.keys().cloned())
+            .collect::<BTreeSet<_>>();
         let basis = basis.into_iter().collect::<Vec<_>>();
         let mut derivatives = Vec::new();
         for i in &basis {
@@ -547,24 +532,22 @@ pub(crate) fn build_differential_system(
             let mut matrix = vec![vec![Atom::new(); basis.len()]; basis.len()];
             for (row, i) in basis.iter().enumerate() {
                 for (j, c) in derivative(i)? {
-                    for (k, d) in reduction.expand(&j)? {
-                        let col = basis.binary_search(&k).map_err(|_| {
+                    let terms = candidates.get(&j).ok_or_else(|| {
+                        Error::IncompleteReduction(
+                            "derivative changed after differential closure planning".into(),
+                        )
+                    })?;
+                    for (k, d) in terms {
+                        let col = basis.binary_search(k).map_err(|_| {
                             Error::IncompleteReduction("derivative introduced new residual".into())
                         })?;
                         matrix[row][col] = (&matrix[row][col] + &c * d).together().cancel();
                     }
                 }
             }
-            let candidates = requested
-                .iter()
-                .map(|i| Ok((i.clone(), reduction.expand(i)?)))
-                .collect::<Result<_>>()?;
             return Ok(ReducedSystem {
                 transformations: vec![],
-                targets: targets
-                    .iter()
-                    .map(|i| reduction.expand(i))
-                    .collect::<Result<_>>()?,
+                targets: targets.iter().map(|i| candidates[i].clone()).collect(),
                 basis,
                 matrix,
                 nonzero_conditions: reduction.nonzero_conditions,
@@ -631,10 +614,7 @@ fn build_retained_system(
             &derivatives.iter().cloned().collect::<Vec<_>>(),
             context,
         )?;
-        let expansions = derivatives
-            .iter()
-            .map(|i| Ok((i.clone(), reduction.expand(i)?)))
-            .collect::<Result<BTreeMap<_, _>>>()?;
+        let expansions = reduction.expand_many(&derivatives.iter().cloned().collect::<Vec<_>>())?;
         let old = basis.len();
         for terms in expansions.values() {
             basis.extend(terms.keys().cloned());
@@ -779,9 +759,7 @@ impl ReductionBackend for ReductionSession<'_> {
             cached.nonzero_conditions.sort();
             cached.nonzero_conditions.dedup();
             // Merged tables must remain acyclic and cover every requested RHS.
-            for target in targets {
-                cached.expand(target)?;
-            }
+            cached.expand_many(targets)?;
             self.families
                 .lock()
                 .map_err(|_| Error::Reduction("reduction session poisoned".into()))?

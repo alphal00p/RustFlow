@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "generated_utc": "2026-10-04T19:43:21.681560+00:00",
+  "base_commit": "31a876393d506b83497a06de9d689292a9c38cf7",
+  "scope": [
+    "Exact multivariate algebraic dlog systems and physical path pullback with stationary-pole preflight",
+    "Root charts reuse the rational differential recurrence, independently compared against exact Symbolica series",
+    "Native sparse Linnet reduction DAG expansion, shared multi-target closure and strict residual validation",
+    "Exact algebraic singularity polynomial metadata",
+    "Preserved standalone Symbolica root-refinement performance MRE"
+  ],
+  "checks": {
+    "release_tests": {
+      "command": "CARGO_BUILD_JOBS=6 cargo test --release --locked -p symbolica-amflow -- --test-threads=4",
+      "unit_and_integration_passed": 239,
+      "documentation_passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    "clippy": {
+      "command": "CARGO_BUILD_JOBS=6 cargo clippy --release -p symbolica-amflow --all-targets -- -D warnings",
+      "exit_code": 0,
+      "dependency_warnings": "Existing RustRed warnings; checkout unchanged"
+    },
+    "format": {
+      "command": "cargo fmt -p symbolica-amflow -- --check",
+      "exit_code": 0
+    }
+  },
+  "logs": {
+    "target/rustflow-algebraic-kinematic-tests.log": {
+      "sha256": "d71880669127bd9b98a9e779b743bddbd930dc28f766ea808a92876cb4faceb4"
+    },
+    "target/rustflow-algebraic-kinematic-clippy.log": {
+      "sha256": "251567eeaaf2cdd8d74a98c9be803045d591b13c9541bd3e8eb12e517f015fbd"
+    },
+    "target/rustflow-algebraic-kinematic-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "source_sha256": {
+    "src/algebraic.rs": "cf46c1a3e1de7198899117f2bd7379ade36a9d434f0bd5016cce1ce5bfc70dc5",
+    "src/ode.rs": "ba8c2e85c320fd55e8ab27ff6117119c564a19359566f5040e1318e455cf3f4d",
+    "src/fixed_series.rs": "a0a0e13c37fc129ed0f6e5e10768343dc1e913d512b7ef5598c4a54981e295db",
+    "src/reduction.rs": "12d4a21b22fad73b314ad9e18153267969989683e97111a2080d54adb488e59a",
+    "src/reduction/table_graph.rs": "e409b2634944ce1d2a1d7865b0a09a7b7bcb1134f7fe1d84e09286cb14efb1bf",
+    "tests/algebraic_kinematic.rs": "8cb95c8031fa3245fe6be7e43685b5076846a411265d455f74516fb137b4449a",
+    "tests/reduction_graphs.rs": "189a074a714eefc6ee6a19cbf7f96beffbed716706a2871fd24bec9f049b2e9a"
+  },
+  "related_reports": [
+    "reports/performance/2026-10-04-algebraic-root-charts.json",
+    "reports/validation/2026-10-04-native-reduction-graphs.json"
+  ],
+  "limitations": [
+    "Full feature and performance parity is incomplete",
+    "Physical contour planning and algebraic cache reuse are still in development",
+    "Full five-point scientific fixture and benchmark validation are being prepared separately",
+    "Root-sum denominators and algebraic singular endpoints remain unsupported",
+    "General cut boundary recursion and full Higgs+jet amplitude remain incomplete",
+    "Original-paper four-target acceptance is prior evidence, not rerun in this milestone",
+    "RustRed and the 12-slot dispatch restriction are unchanged"
+  ]
+}

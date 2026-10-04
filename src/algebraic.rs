@@ -2,15 +2,16 @@
 //!
 //! Roots are independent algebraic generators satisfying r² = R(x). The first
 //! implementation accepts root monomials over rational functions and rejects
-//! sums of roots in denominators. It reuses Symbolica's exact series and fixed-
-//! precision numeric series multiplication. Branch state belongs to each call;
+//! sums of roots in denominators. It reuses the rational differential-system
+//! recurrence and Symbolica's fixed-precision numeric series multiplication. Branch state belongs to each call;
 //! only accepted continuation steps can advance it. Singular endpoints require
 //! a separate Frobenius treatment and are outside this regular-contour API.
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution, EpsilonSystem};
 use crate::family::{encode_complex, imaginary_parameter, scalar_symbols, substitute};
-use crate::fixed_series::{coefficients, evaluate_series, fixed_series};
+use crate::fixed_series::{coefficients, fixed_series};
 use crate::ode::{
-    NumericRational, SeriesSystem, compile_rows, evaluate_taylor, transport_series_with_state,
+    CompiledSystem, NumericRational, SeriesSystem, compile_rows, evaluate_taylor,
+    transport_series_with_state,
 };
 use crate::{
     BoundaryData, ComplexFloat as C, DifferentialSystem, Error, FlowOptions, Precision,
@@ -57,6 +58,284 @@ pub struct AlgebraicSolution {
     pub branches: BranchState,
 }
 
+/// Exact differential matrices in physical invariants, with explicitly declared
+/// square-root generators. Root radicands depend on physical invariants only;
+/// epsilon remains a separate symbol until the exact path is pulled back.
+#[derive(Clone, Debug)]
+pub struct AlgebraicKinematicSystem {
+    pub epsilon: Symbol,
+    pub derivatives: BTreeMap<Symbol, Vec<Vec<Atom>>>,
+    pub roots: Vec<SquareRoot>,
+}
+
+impl AlgebraicKinematicSystem {
+    pub fn validate(&self) -> Result<()> {
+        let Some((&first_variable, first)) = self.derivatives.first_key_value() else {
+            return Err(Error::InvalidInput(
+                "an algebraic kinematic system needs physical derivative matrices".into(),
+            ));
+        };
+        DifferentialSystem {
+            variable: first_variable,
+            matrix: first.clone(),
+        }
+        .validate()?;
+        let n = first.len();
+        if self.epsilon == imaginary_parameter()
+            || self.derivatives.contains_key(&self.epsilon)
+            || self.derivatives.contains_key(&imaginary_parameter())
+        {
+            return Err(Error::InvalidInput(
+                "physical variables must differ from epsilon and the reserved imaginary unit"
+                    .into(),
+            ));
+        }
+        let mut physical = self
+            .derivatives
+            .keys()
+            .map(|&v| Atom::var(v))
+            .collect::<BTreeSet<_>>();
+        physical.insert(Atom::var(imaginary_parameter()));
+        let mut allowed = physical.clone();
+        allowed.insert(Atom::var(self.epsilon));
+        for root in &self.roots {
+            if !allowed.insert(Atom::var(root.symbol)) {
+                return Err(Error::InvalidInput(
+                    "root symbols must be distinct from epsilon and physical variables".into(),
+                ));
+            }
+            rational(&root.radicand, &physical)?;
+            if decoded(&root.radicand).is_zero() {
+                return Err(Error::InvalidInput(
+                    "a square-root radicand is identically zero".into(),
+                ));
+            }
+        }
+        for matrix in self.derivatives.values() {
+            if matrix.len() != n || matrix.iter().any(|row| row.len() != n) {
+                return Err(Error::InvalidInput(
+                    "algebraic kinematic matrices must be square with equal dimensions".into(),
+                ));
+            }
+            for a in matrix.iter().flatten() {
+                rational(a, &allowed)?;
+            }
+        }
+        Ok(())
+    }
+
+    /// Construct dY = epsilon * sum M_letter dlog(letter) Y. Matrices are exact
+    /// constants. Native differentiation includes dr/dv = (dR/dv)/(2r), so
+    /// registered roots are not treated as constants under the chain rule.
+    pub fn canonical_dlog(
+        epsilon: Symbol,
+        variables: &[Symbol],
+        letters: &[Atom],
+        matrices: &[Vec<Vec<Atom>>],
+        roots: Vec<SquareRoot>,
+    ) -> Result<Self> {
+        if variables.is_empty()
+            || variables.iter().copied().collect::<BTreeSet<_>>().len() != variables.len()
+            || letters.is_empty()
+            || letters.len() != matrices.len()
+        {
+            return Err(Error::InvalidInput("canonical algebraic data needs distinct variables and equal nonempty letters/matrices".into()));
+        }
+        let n = matrices[0].len();
+        let mut result = Self {
+            epsilon,
+            derivatives: variables
+                .iter()
+                .map(|&v| (v, vec![vec![Atom::new(); n]; n]))
+                .collect(),
+            roots,
+        };
+        result.validate()?;
+        let constants = BTreeSet::from([Atom::var(imaginary_parameter())]);
+        let mut allowed = variables
+            .iter()
+            .map(|&v| Atom::var(v))
+            .collect::<BTreeSet<_>>();
+        allowed.extend(result.roots.iter().map(|r| Atom::var(r.symbol)));
+        allowed.insert(Atom::var(imaginary_parameter()));
+        let root_atoms = result
+            .roots
+            .iter()
+            .map(|r| Atom::var(r.symbol))
+            .collect::<Vec<_>>();
+        for (letter, matrix) in letters.iter().zip(matrices) {
+            if matrix.len() != n || matrix.iter().any(|row| row.len() != n) {
+                return Err(Error::InvalidInput(
+                    "canonical algebraic matrices must have identical square dimensions".into(),
+                ));
+            }
+            for a in matrix.iter().flatten() {
+                rational(a, &constants)?;
+            }
+            let fraction = rational(letter, &allowed)?;
+            if normalized_polynomial(
+                &fraction.numerator.to_expression(),
+                &root_atoms,
+                &result.roots,
+            )?
+            .is_empty()
+                || normalized_polynomial(
+                    &fraction.denominator.to_expression(),
+                    &root_atoms,
+                    &result.roots,
+                )?
+                .is_empty()
+            {
+                return Err(Error::InvalidInput("an algebraic dlog letter cannot vanish or have zero denominator under its root relations".into()));
+            }
+            for (&variable, output) in &mut result.derivatives {
+                let mut derivative = letter.derivative(variable);
+                for root in &result.roots {
+                    derivative += letter.derivative(root.symbol)
+                        * root.radicand.derivative(variable)
+                        / (Atom::var(root.symbol) * 2);
+                }
+                let dlog = (derivative / letter).together().cancel();
+                for (row, source) in output.iter_mut().zip(matrix) {
+                    for (entry, coefficient) in row.iter_mut().zip(source) {
+                        *entry += Atom::var(epsilon) * coefficient * &dlog;
+                    }
+                }
+            }
+        }
+        for entry in result.derivatives.values_mut().flatten().flatten() {
+            *entry = entry.together().cancel();
+        }
+        result.validate()?;
+        Ok(result)
+    }
+
+    /// Pull the physical system back to one exact rational path and retain
+    /// epsilon coefficients through `order`. Coordinate substitution is
+    /// simultaneous, including in every root definition. Endpoints and sheet
+    /// seeds remain explicit inputs to the compiled regular-contour transport.
+    pub fn pullback(
+        &self,
+        path: &crate::kinematics::KinematicPath,
+        order: usize,
+    ) -> Result<AlgebraicSystem> {
+        self.validate()?;
+        path.validate()?;
+        if path.parameter == self.epsilon
+            || path.parameter == imaginary_parameter()
+            || self.derivatives.contains_key(&path.parameter)
+            || self.roots.iter().any(|r| r.symbol == path.parameter)
+            || !self.derivatives.keys().eq(path.coordinates.keys())
+        {
+            return Err(Error::InvalidInput("algebraic path must specify exactly the physical variables and use a distinct parameter".into()));
+        }
+        let rules = path
+            .coordinates
+            .iter()
+            .map(|(&symbol, value)| (Atom::var(symbol), value.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let original_symbols = self
+            .derivatives
+            .keys()
+            .copied()
+            .chain([self.epsilon, imaginary_parameter()])
+            .chain(self.roots.iter().map(|r| r.symbol))
+            .map(Atom::var)
+            .collect::<BTreeSet<_>>();
+        let restricted_symbols = [path.parameter, self.epsilon, imaginary_parameter()]
+            .into_iter()
+            .chain(self.roots.iter().map(|r| r.symbol))
+            .map(Atom::var)
+            .collect::<BTreeSet<_>>();
+        let path_symbols =
+            BTreeSet::from([Atom::var(path.parameter), Atom::var(imaginary_parameter())]);
+        for coordinate in path.coordinates.values() {
+            rational(coordinate, &path_symbols)?;
+        }
+        // Restrict numerator and denominator separately, before a zero
+        // Jacobian or another term can erase an undefined source entry.
+        let restrict = |expression: &Atom| -> Result<Atom> {
+            let fraction = rational(expression, &original_symbols)?;
+            let denominator = substitute(&fraction.denominator.to_expression(), &rules)
+                .together()
+                .cancel();
+            rational(&denominator, &restricted_symbols)?;
+            if decoded(&denominator).is_zero() {
+                return Err(Error::InvalidInput(
+                    "algebraic path lies identically on a source denominator pole".into(),
+                ));
+            }
+            let numerator = substitute(&fraction.numerator.to_expression(), &rules)
+                .together()
+                .cancel();
+            rational(&numerator, &restricted_symbols)?;
+            let restricted = (numerator / denominator).together().cancel();
+            rational(&restricted, &restricted_symbols)?;
+            Ok(restricted)
+        };
+        let roots = self
+            .roots
+            .iter()
+            .map(|root| {
+                let radicand = restrict(&root.radicand)?;
+                if decoded(&radicand).is_zero() {
+                    return Err(Error::InvalidInput(
+                        "algebraic path lies identically on a root branch locus".into(),
+                    ));
+                }
+                Ok(SquareRoot {
+                    symbol: root.symbol,
+                    radicand,
+                })
+            })
+            .collect::<Result<Vec<_>>>()?;
+        let root_atoms = roots
+            .iter()
+            .map(|r| Atom::var(r.symbol))
+            .collect::<Vec<_>>();
+        let n = self.derivatives.first_key_value().unwrap().1.len();
+        let mut matrix = vec![vec![Atom::new(); n]; n];
+        for (variable, source) in &self.derivatives {
+            let jacobian = path.coordinates[variable].derivative(path.parameter);
+            rational(&jacobian, &path_symbols)?;
+            for (row, source) in matrix.iter_mut().zip(source) {
+                for (entry, coefficient) in row.iter_mut().zip(source) {
+                    let restricted = restrict(coefficient)?;
+                    let fraction = rational(&restricted, &restricted_symbols)?;
+                    let denominator = normalized_polynomial(
+                        &fraction.denominator.to_expression(),
+                        &root_atoms,
+                        &roots,
+                    )?;
+                    if denominator.is_empty() {
+                        return Err(Error::InvalidInput("algebraic path lies identically on a matrix pole under its root relations".into()));
+                    }
+                    if denominator.len() != 1 {
+                        return Err(Error::Unsupported("source matrix has a root-sum denominator requiring algebraic rationalization".into()));
+                    }
+                    *entry += &jacobian * restricted;
+                }
+            }
+        }
+        for entry in matrix.iter_mut().flatten() {
+            *entry = entry.together().cancel();
+        }
+        let result = AlgebraicSystem {
+            system: EpsilonSystem::from_differential_system(
+                &DifferentialSystem {
+                    variable: path.parameter,
+                    matrix,
+                },
+                self.epsilon,
+                order,
+            )?,
+            roots,
+        };
+        result.validate()?;
+        Ok(result)
+    }
+}
+
 #[derive(Clone, Debug)]
 struct RootKernel {
     definition: SquareRoot,
@@ -78,8 +357,10 @@ pub struct CompiledAlgebraicSystem {
     size: usize,
     count: usize,
     roots: Vec<RootKernel>,
+    root_system: Option<CompiledSystem>,
     terms: Vec<KernelTerm>,
     poles: Vec<C>,
+    pole_polynomials: Vec<Atom>,
 }
 
 fn exact_point(p: Precision, value: &C) -> Result<Atom> {
@@ -176,6 +457,11 @@ impl AlgebraicSystem {
 
     pub fn validate(&self) -> Result<()> {
         self.system.validate()?;
+        if self.system.variable == imaginary_parameter() {
+            return Err(Error::InvalidInput(
+                "path parameter collides with the reserved imaginary unit".into(),
+            ));
+        }
         let mut declared = BTreeSet::from([
             Atom::var(self.system.variable),
             Atom::var(imaginary_parameter()),
@@ -278,13 +564,14 @@ impl AlgebraicSystem {
             }
         }
         let term_count = entries.len();
-        for root in &self.roots {
+        let mut root_matrix = vec![vec![Atom::new(); self.roots.len()]; self.roots.len()];
+        for (index, root) in self.roots.iter().enumerate() {
             let r = encode_complex(&root.radicand).together().cancel();
             entries.push(vec![r.clone()]);
             entries.push(vec![Atom::num(1) / &r]); // zeros are branch singularities
-            entries.push(vec![
-                (r.derivative(self.system.variable) / (&r * 2)).cancel(),
-            ]);
+            let logarithmic_derivative = (r.derivative(self.system.variable) / (&r * 2)).cancel();
+            entries.push(vec![logarithmic_derivative.clone()]);
+            root_matrix[index][index] = logarithmic_derivative;
         }
         // A zero differential system with no roots still needs a valid native
         // compilation row, while it retains no artificial coupling terms.
@@ -316,14 +603,26 @@ impl AlgebraicSystem {
                 logarithmic_derivative: compiled.matrix[term_count + 3 * i + 2][0].clone(),
             })
             .collect();
+        let root_system = if root_matrix.is_empty() {
+            None
+        } else {
+            Some(compile_rows(
+                self.system.variable,
+                &root_matrix,
+                p,
+                &Default::default(),
+            )?)
+        };
         Ok(CompiledAlgebraicSystem {
             variable: self.system.variable,
             p,
             size: self.system.matrices[0].len(),
             count: self.system.matrices.len(),
             roots,
+            root_system,
             terms,
             poles: compiled.poles,
+            pole_polynomials: compiled.pole_polynomials,
         })
     }
 }
@@ -332,6 +631,12 @@ impl CompiledAlgebraicSystem {
     /// Includes rational poles and zeros/poles of every registered radicand.
     pub fn singularities(&self) -> &[C] {
         &self.poles
+    }
+    /// Exact denominator factors, including zeros and poles of radicands.
+    /// These retain exact root identities for prescribed-contour planning;
+    /// nearby numerical root estimates are insufficient to identify aliases.
+    pub fn singularity_polynomials(&self) -> &[Atom] {
+        &self.pole_polynomials
     }
     pub fn transport(
         &self,
@@ -564,7 +869,27 @@ impl SeriesSystem for AlgebraicRun<'_> {
                 let chosen = match &self.seeds[&root.definition.symbol] {
                     RootSeed::Principal => principal,
                     RootSeed::Opposite => p.neg(&principal),
-                    RootSeed::Value(hint) => select_sign(p, &principal, hint)?,
+                    RootSeed::Value(hint) => {
+                        if !p.finite(hint) || *hint == p.zero() {
+                            return Err(Error::InvalidInput(
+                                "nonfinite or zero square-root sign hint".into(),
+                            ));
+                        }
+                        let magnitude = p.norm(hint);
+                        if !magnitude.is_finite() || magnitude == p.real(0) {
+                            return Err(Error::InvalidInput(
+                                "invalid square-root sign hint magnitude".into(),
+                            ));
+                        }
+                        let normalized = p.mul(
+                            hint,
+                            &p.div(
+                                &C::new(p.norm(&principal), p.real(0)),
+                                &C::new(magnitude, p.real(0)),
+                            ),
+                        );
+                        select_sign(p, &principal, &normalized)?
+                    }
                     RootSeed::I0(side) => {
                         if value.im != p.real(0) {
                             return Err(Error::InvalidInput(
@@ -601,7 +926,6 @@ impl SeriesSystem for AlgebraicRun<'_> {
             ));
         }
         let center_exact = exact_point(p, center)?;
-        let mut roots = Vec::new();
         for (index, root) in c.roots.iter().enumerate() {
             if state.roots[index].0 != root.definition.symbol {
                 return Err(Error::Numerical("algebraic branch identity changed".into()));
@@ -617,31 +941,34 @@ impl SeriesSystem for AlgebraicRun<'_> {
                     "root chart starts at a branch singularity".into(),
                 ));
             }
-            let exact = (&root.definition.radicand / &at_center)
-                .series(c.variable, &center_exact, order as i64 + 1)
-                .map_err(|e| Error::Numerical(e.to_string()))?
-                .rpow(Rational::from((1, 2)))
-                .map_err(|e| Error::Numerical(e.to_string()))?;
-            if exact.coefficient(Rational::from(0)) != Some(Atom::num(1)) {
-                return Err(Error::Numerical(
-                    "normalized root series does not start at exact one".into(),
-                ));
-            }
-            let numeric = evaluate_series(&exact, p, &Default::default())?;
-            let coefficients = coefficients(&numeric, order + 1)?
-                .into_iter()
-                .map(|v| p.mul(&v, &state.roots[index].1))
-                .collect::<Vec<_>>();
-            roots.push(fixed_series(p, c.variable, &coefficients)?);
+            // Preserve exact-center domain validation independently of the
+            // numeric logarithmic-derivative recurrence.
+            p.eval(&at_center, &Default::default())?;
         }
-        let root_coefficients = (0..=order)
-            .map(|k| {
-                roots
-                    .iter()
-                    .map(|root| root.coefficient(Rational::from(k as i64)).unwrap())
-                    .collect()
+        // A square root satisfies a rational scalar differential equation:
+        // r'=(R'/2R)r. Reuse the already-tested finite-polynomial recurrence;
+        // accepted endpoint sheets still supply its initial values.
+        let root_coefficients = if let Some(system) = &c.root_system {
+            system.taylor(
+                center,
+                &state.roots.iter().map(|r| r.1.clone()).collect::<Vec<_>>(),
+                order,
+            )?
+        } else {
+            vec![Vec::new(); order + 1]
+        };
+        let roots = (0..c.roots.len())
+            .map(|index| {
+                fixed_series(
+                    p,
+                    c.variable,
+                    &root_coefficients
+                        .iter()
+                        .map(|row| row[index].clone())
+                        .collect::<Vec<_>>(),
+                )
             })
-            .collect();
+            .collect::<Result<Vec<_>>>()?;
         let mut kernels = Vec::new();
         for term in &c.terms {
             let mut kernel = fixed_series(
@@ -811,5 +1138,116 @@ mod tests {
                 .unwrap()
                 .is_none()
         );
+    }
+}
+
+#[cfg(test)]
+mod root_taylor_comparisons {
+    use super::*;
+
+    #[test]
+    fn rational_root_ode_matches_native_exact_rpow_on_difficult_charts() {
+        let p = Precision::decimal(90).unwrap();
+        let x = symbol!("root_chart_comparison::x");
+        let r = symbol!("root_chart_comparison::r");
+        let variable = Atom::var(x);
+        let near = &variable - 1;
+        // The longer optional cases reproduce the retained chart comparison
+        // report; ordinary regression runs keep the costly exact oracle short.
+        let extended = std::env::var_os("RUSTFLOW_EXTENDED_ROOT_CHART_CHECK").is_some();
+        let cases = [
+            (
+                variable.clone().pow(4) + variable.clone().pow(3) * 7 - &variable * 11 + 5,
+                p.zero(),
+                80,
+            ),
+            (
+                (near.clone().pow(3) / (variable.clone() + 2).pow(2)).cancel(),
+                p.parse("1.000001", "0.0000001").unwrap(),
+                if extended { 24 } else { 16 },
+            ),
+            (
+                near.pow(2) + (Atom::num(1) / Atom::num(Integer::from(10).pow(30))),
+                p.parse("1.000000000000001", "0.0000000000000001").unwrap(),
+                if extended { 20 } else { 16 },
+            ),
+            (
+                Atom::num(Complex::new(Rational::from(1), Rational::from(1)))
+                    * (variable.clone().pow(2) + 2)
+                    / (variable.pow(2) + 3),
+                p.parse(
+                    "0.123456789123456789123456789",
+                    "-0.078901234567890123456789",
+                )
+                .unwrap(),
+                if extended { 24 } else { 12 },
+            ),
+        ];
+        for (index, (radicand, center, order)) in cases.into_iter().enumerate() {
+            let compiled = AlgebraicSystem::ordinary(
+                DifferentialSystem {
+                    variable: x,
+                    matrix: vec![vec![Atom::num(1) / Atom::var(r)]],
+                },
+                vec![SquareRoot {
+                    symbol: r,
+                    radicand,
+                }],
+            )
+            .compile(p)
+            .unwrap();
+            let seeds = BTreeMap::from([(r, RootSeed::Opposite)]);
+            let run = AlgebraicRun {
+                compiled: &compiled,
+                seeds: &seeds,
+            };
+            let boundary = BoundaryData {
+                point: center.clone(),
+                values: vec![p.i(1)],
+            };
+            let state = run.initial_state(&boundary).unwrap();
+            let started = std::time::Instant::now();
+            let actual = compiled
+                .root_system
+                .as_ref()
+                .unwrap()
+                .taylor(&center, &[state.roots[0].1.clone()], order)
+                .unwrap();
+            let numeric_time = started.elapsed();
+            let center_exact = exact_point(p, &center).unwrap();
+            let definition = &compiled.roots[0].definition.radicand;
+            let at_center = substitute(
+                definition,
+                &BTreeMap::from([(Atom::var(x), center_exact.clone())]),
+            )
+            .together()
+            .cancel();
+            let started = std::time::Instant::now();
+            let exact = (definition / &at_center)
+                .series(x, &center_exact, order as i64 + 1)
+                .unwrap()
+                .rpow(Rational::from((1, 2)))
+                .unwrap();
+            assert_eq!(exact.coefficient(Rational::from(0)), Some(Atom::num(1)));
+            let series =
+                crate::fixed_series::evaluate_series(&exact, p, &Default::default()).unwrap();
+            let expected = coefficients(&series, order + 1).unwrap();
+            let exact_time = started.elapsed();
+            for (k, expected) in expected.iter().enumerate() {
+                let expected = p.mul(expected, &state.roots[0].1);
+                let magnitude = p.norm(&expected);
+                let scale = if magnitude > p.real(1) {
+                    magnitude
+                } else {
+                    p.real(1)
+                };
+                let error = p.norm(&p.sub(&actual[k][0], &expected));
+                assert!(
+                    error < p.tolerance(50) * scale,
+                    "case{index} coefficient{k}: {error}"
+                );
+            }
+            println!("case={index} order={order} numeric={numeric_time:?} exact={exact_time:?}");
+        }
     }
 }

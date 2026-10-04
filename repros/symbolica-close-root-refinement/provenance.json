@@ -1,0 +1,217 @@
+{
+  "schema_version": 1,
+  "status": "bounded_symbolica_only_refinement_reproducer",
+  "recorded_utc": "2026-10-04T19:37:50.169692+00:00",
+  "symbolica_revision": "75f8350094b90254ee71dc2a391fde0d14b0204a",
+  "workspace_base_commit": "31a876393d506b83497a06de9d689292a9c38cf7",
+  "cpu": 31,
+  "native_sources_modified": false,
+  "root_repository_sources_modified": false,
+  "exact_polynomial": "(x-1/2)^2+10^-100",
+  "exact_roots": [
+    "1/2-I*10^-50",
+    "1/2+I*10^-50"
+  ],
+  "observed_slow_stage": "IsolatedRoot::refined, after successful isolation; bounded timeout, no nontermination claim",
+  "diagnostic_results": [
+    {
+      "case": "n20-shifted",
+      "exponent": 20,
+      "centered": false,
+      "limit_seconds": 20,
+      "elapsed_seconds": 0.05115808080881834,
+      "exit_code": 0,
+      "limit_terminated": false,
+      "peak_rss_kib_sampled": 92
+    },
+    {
+      "case": "n40-shifted",
+      "exponent": 40,
+      "centered": false,
+      "limit_seconds": 20,
+      "elapsed_seconds": 0.05097672017291188,
+      "exit_code": 0,
+      "limit_terminated": false,
+      "peak_rss_kib_sampled": 24
+    },
+    {
+      "case": "n100-centered",
+      "exponent": 100,
+      "centered": true,
+      "limit_seconds": 20,
+      "elapsed_seconds": 20.008305152878165,
+      "exit_code": -15,
+      "limit_terminated": true,
+      "peak_rss_kib_sampled": 42172
+    },
+    {
+      "case": "n100-shifted",
+      "exponent": 100,
+      "centered": false,
+      "limit_seconds": 45,
+      "elapsed_seconds": 45.03208118537441,
+      "exit_code": -15,
+      "limit_terminated": true,
+      "peak_rss_kib_sampled": 57788
+    }
+  ],
+  "refinement_results": [
+    {
+      "case": "n100-bits232",
+      "exponent": 100,
+      "refinement_bits": 232,
+      "limit_seconds": 30,
+      "elapsed_seconds": 30.011041541118175,
+      "exit_code": -15,
+      "limit_terminated": true,
+      "peak_rss_kib_sampled": 56356
+    },
+    {
+      "case": "n100-bits128",
+      "exponent": 100,
+      "refinement_bits": 128,
+      "limit_seconds": 5,
+      "elapsed_seconds": 0.02132939826697111,
+      "exit_code": 0,
+      "limit_terminated": false,
+      "peak_rss_kib_sampled": 92
+    },
+    {
+      "case": "n60-bits232",
+      "exponent": 60,
+      "refinement_bits": 232,
+      "limit_seconds": 10,
+      "elapsed_seconds": 0.02140541886910796,
+      "exit_code": 0,
+      "limit_terminated": false,
+      "peak_rss_kib_sampled": 464
+    },
+    {
+      "case": "n80-bits232",
+      "exponent": 80,
+      "refinement_bits": 232,
+      "limit_seconds": 10,
+      "elapsed_seconds": 0.02116793906316161,
+      "exit_code": 0,
+      "limit_terminated": false,
+      "peak_rss_kib_sampled": 104
+    }
+  ],
+  "files": {
+    "target/symbolica-close-root-mre/minimal.rs": {
+      "sha256": "fb672adeea94704f1c47a887e73d9425a4a6c721ab329e306ea42bbfc82ccd46",
+      "bytes": 1988
+    },
+    "target/symbolica-close-root-mre/diagnostic.rs": {
+      "sha256": "122b3abece7c843c3bc284439ac765269e3353ddd74a1dc200df6e9fb7bdadd6",
+      "bytes": 1737
+    },
+    "target/symbolica-close-root-mre/Cargo.toml": {
+      "sha256": "6116341e0acaa286e3f3d080f20a9078c4f440fc11c31562495bfa42c383ac46",
+      "bytes": 653
+    },
+    "target/symbolica-close-root-mre/build-minimal.sh": {
+      "sha256": "ef3f671ef745997cdd8a2581a675797ce13b2cfc96a56667b70791b5ebe760bb",
+      "bytes": 369
+    },
+    "target/symbolica-close-root-mre/minimal": {
+      "sha256": "c2e5190a8e4afcf89184a086bf78f0bd733de977065ee515c6fe86a7e8ec75a2",
+      "bytes": 142652096
+    },
+    "target/symbolica-close-root-mre/diagnostic": {
+      "sha256": "6123a27efa2c7b1721463467ad7f9dc3659593d5ce4b66fb6f7b08d9632cf098",
+      "bytes": 142652272
+    },
+    "target/symbolica-close-root-mre/minimal-results.json": {
+      "sha256": "5eb0f49a2b629d34df5a6b7b8c365fec6597e426c6f2b5d411ac1bad9c3ed4c9",
+      "bytes": 932
+    },
+    "target/symbolica-close-root-mre/refinement-results.json": {
+      "sha256": "d729081fd3dcb76f1c04b3ff663577112c662d2f419f5e96730544a63ae3e4f9",
+      "bytes": 951
+    },
+    "target/symbolica-close-root-mre/perf-centered.txt": {
+      "sha256": "b9d1db035244d37ab8246d08b353baa77d8eb2f12746bee03894bed5f98a7d84",
+      "bytes": 65025
+    },
+    "target/symbolica-close-root-mre/perf-shifted.txt": {
+      "sha256": "f7416c780bb17ca9546f7809f92e876a8b217808040cde09cc0ee5bf6edd2c4e",
+      "bytes": 69561
+    },
+    "target/symbolica-close-root-mre/final-results.json": {
+      "sha256": "8d00fab98fa1683cdea38901eae4b5fa5187ca248bd712b785676a2a87d2a3b7",
+      "bytes": 714
+    },
+    "target/symbolica-close-root-mre/run_final.py": {
+      "sha256": "07bee30657ae0ab3d34c3eac5f73e2a9785dbf768747f4f98f1d32a5ce5ab193",
+      "bytes": 1157
+    },
+    "target/symbolica-close-root-mre/README.md": {
+      "sha256": "ca0bceaee863c151c038ae642d69f939f717aa4b98ddd10c225a4e6974aac9f3",
+      "bytes": 3985
+    },
+    "target/symbolica-close-root-mre/n100-bits128-final.log": {
+      "sha256": "cbb2dbbdfe2ae6de33fbaed0793107fc11fdb6d17500e54cbcd34ef0b1e69472",
+      "bytes": 387
+    },
+    "target/symbolica-close-root-mre/n100-bits232-final.log": {
+      "sha256": "05aadfd45bd4d32ff06702b3229f651a8c3e7d8b38127bb4bc71a0e01e25f703",
+      "bytes": 170
+    },
+    "target/symbolica-close-root-mre/n80-bits232-final.log": {
+      "sha256": "cf089c1f926da79a49455dea2b4e8a7caddd6d1be3656e7604316ea9b37e57f1",
+      "bytes": 390
+    }
+  },
+  "symbolica_rlib": {
+    "path": "target/release/deps/libsymbolica-75e897282e2131a2.rlib",
+    "sha256": "4b2f81de2fad0adf6bb701f7424c6755050d1a56d844aa9098f7d28bac5cbe4d",
+    "bytes": 303300528
+  },
+  "profiler": {
+    "binary": "/nix/store/gyp2si1k1w7jhw8z4xx1bwr2m0pr5445-perf-linux-7.2/bin/perf",
+    "frequency_hz": 99,
+    "call_graph": "dwarf,16384",
+    "duration_seconds": 5,
+    "centered_samples": 367,
+    "shifted_samples": 496,
+    "samples_lost": 0
+  },
+  "limitations": [
+    "final source tested via rustc against existing release rlib; portable Cargo manifest not independently rebuilt",
+    "sampled RSS underestimates peaks and is not meaningful for short controls",
+    "profiles are diagnostic, not end-to-end performance claims"
+  ],
+  "final_results": [
+    {
+      "case": "n80-bits232",
+      "exponent": 80,
+      "refinement_bits": 232,
+      "limit_seconds": 5,
+      "elapsed_seconds": 0.02131512900814414,
+      "exit_code": 0,
+      "limit_terminated": false,
+      "peak_rss_kib_sampled": 292
+    },
+    {
+      "case": "n100-bits128",
+      "exponent": 100,
+      "refinement_bits": 128,
+      "limit_seconds": 5,
+      "elapsed_seconds": 0.020927967969328165,
+      "exit_code": 0,
+      "limit_terminated": false,
+      "peak_rss_kib_sampled": 224
+    },
+    {
+      "case": "n100-bits232",
+      "exponent": 100,
+      "refinement_bits": 232,
+      "limit_seconds": 20,
+      "elapsed_seconds": 20.0103094750084,
+      "exit_code": -15,
+      "limit_terminated": true,
+      "peak_rss_kib_sampled": 44824
+    }
+  ]
+}

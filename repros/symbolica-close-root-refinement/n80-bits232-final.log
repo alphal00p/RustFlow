@@ -1,0 +1,8 @@
+begin isolate_roots: exponent=80, centered=false, construction=1.343994ms
+finished isolate_roots: elapsed=4.958794ms, roots=2
+refining root=0 bits=232 elapsed=5.014414ms
+refined root=0 elapsed=5.301285ms
+classified root=0 location=Complex elapsed=5.358985ms
+refining root=1 bits=232 elapsed=5.427915ms
+refined root=1 elapsed=5.642326ms
+classified root=1 location=Complex elapsed=5.689626ms

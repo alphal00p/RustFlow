@@ -239,6 +239,7 @@ pub struct CompiledSystem {
     pub(crate) p: Precision,
     pub(crate) matrix: Vec<Vec<NumericRational>>,
     pub poles: Vec<C>,
+    pub(crate) pole_polynomials: Vec<Atom>,
     pub(crate) polynomial_rows: Vec<PolynomialRow>,
 }
 
@@ -321,6 +322,7 @@ pub(crate) fn compile_rows(
 ) -> Result<CompiledSystem> {
     let mut matrix = Vec::new();
     let mut poles = Vec::new();
+    let mut pole_polynomials = Vec::new();
     let mut seen_factors = ahash::HashSet::default();
     let mut polynomial_rows = Vec::new();
     for row in rows {
@@ -363,6 +365,7 @@ pub(crate) fn compile_rows(
                 if coefficients.len() <= 1 {
                     continue;
                 }
+                pole_polynomials.push(base);
                 let roots = polynomial_roots(p, &coefficients, variable)?;
                 for root in roots {
                     if !poles.iter().any(|v| {
@@ -419,6 +422,7 @@ pub(crate) fn compile_rows(
         p,
         matrix,
         poles,
+        pole_polynomials,
         polynomial_rows,
     })
 }

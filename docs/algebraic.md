@@ -12,6 +12,19 @@ common Laurent leading power and triangular epsilon recurrence. The compiled
 object is immutable and may be shared among concurrent transports. Every call
 provides its own boundary, contour and initial root seeds.
 
+`AlgebraicKinematicSystem` stores exact derivative matrices in several physical
+invariants together with the same root registry. Its `canonical_dlog` constructor
+uses the exact total derivative, including `dr/dv = (dR/dv)/(2r)`, for each letter.
+The constant letter matrices remain exact. `pullback(&KinematicPath, order)`
+substitutes all physical coordinates simultaneously in the matrices and radicands,
+applies the path Jacobian, and returns an `AlgebraicSystem` through the requested
+epsilon order. The path must specify every physical variable, with a parameter
+distinct from those variables, epsilon, and all root symbols. Source entries
+and root radicands are checked before multiplying by the path Jacobian. A
+stationary coordinate therefore cannot hide a source pole or a path that lies
+identically on a root branch locus; such paths require a separate limiting
+prescription and are rejected.
+
 Integer powers of every registered root are reduced with `r² = R`. This applies
 to numerator and denominator before the denominator is checked. Thus `r⁻¹`
 becomes `r/R`, and `1/(r²+1)` becomes `1/(R+1)`. After normalization the denominator
@@ -26,18 +39,26 @@ choice of contour side in `x`. For example, the sign of `R'(x0)` determines how
 an `x`-contour near a simple real zero approaches the radicand cut. Callers supply
 the complex contour explicitly and are responsible for its physical homotopy.
 `RootSeed::Value` uses a finite nonzero supplied value solely to select one of
-the two signs; its magnitude is recomputed from `R` at working precision. Zero
+the two signs; its magnitude is ignored after a scale-invariant angular sign check and recomputed
+from `R` at working precision. Zero
 or ambiguous hints are errors. This does not restore precision to a boundary.
 
-At each accepted point, the next chart uses exact binary rational coordinates
-for the rounded MPFR center and Symbolica's exact normalized expansion
-`(R(x)/R(center))^(1/2)`. Native `Series` multiplication uses a fixed-precision
-complex coefficient ring; all arithmetic remains MPFR. Root series predict the
-analytic sheet, and an independently evaluated radicand determines its magnitude.
-Both midpoint and endpoint root defects, root truncation, and squared-root
-residuals must pass in addition to the shared solution checks. Rejected trials
-leave branch state unchanged. The returned `BranchState` records the endpoint,
-root identities in declaration order, and values.
+At each accepted point, the next chart checks the radicands at exact binary
+rational coordinates corresponding to the rounded MPFR center. Root coefficients
+then use the existing rational differential-system recurrence for
+`r' = (R'/(2R)) r`, starting from the accepted root values. This avoids constructing
+large exact rational Taylor coefficients at each numerical center. Native
+`Series` multiplication assembles the kernels with fixed-precision complex
+arithmetic. Independent tests compare these root coefficients with Symbolica's
+exact normalized `(R(x)/R(center))^(1/2)` series, including difficult rational
+and complex charts.
+
+Root series predict the analytic sheet, and an independently evaluated radicand
+determines its magnitude. Both midpoint and endpoint root defects, root
+truncation, and squared-root residuals must pass in addition to the shared
+solution checks. Rejected trials leave branch state unchanged. The returned
+`BranchState` records the endpoint, root identities in declaration order, and
+values.
 
 Root zeros and poles join rational matrix poles in the shared step-radius
 constraints. This entrypoint transports between regular points. Algebraic
@@ -53,5 +74,7 @@ Regression tests cover one and two windings of `sqrt(x)` with
 `y'=y/sqrt(x)`, giving `exp(-4)` and `1`, independent precision/order refinement,
 direct epsilon coefficients, simultaneous transports on opposite sheets,
 rejected-step nonmutation, sparse root-series defects, exact power normalization,
-and invalid seed/registry inputs. The implementation is independently derived
+and invalid seed/registry inputs. Multivariate tests compare the exact pullback
+with an independent chain-rule expression and verify its direct epsilon solution
+against the analytic logarithm of a letter ratio. The implementation is independently derived
 from the chain rule and Taylor recurrences; it does not translate DiffExp source.

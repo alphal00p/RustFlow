@@ -1,0 +1,432 @@
+{
+  "schema_version": 1,
+  "generated_utc": "2026-10-04T19:16:02.042025+00:00",
+  "scope": "Native sparse graph ownership for exact caller-table expansion, plus a deliberately unintegrated native-hot-path structural performance experiment.",
+  "integration_status": "Caller-table source integrated; coordinated root Cargo checks pending. No change to native Laporta Expander, search/master authentication, row budgets, either12-slot dispatch limit, or sibling RustRed.",
+  "table_expansion": {
+    "schema_version": 1,
+    "generated_utc": "2026-10-04T19:14:21.866752+00:00",
+    "status": "passed",
+    "scope": "Target-only supplied-reduction table expansion. Production native Laporta Expander, row budgets, both 12-slot dispatch limits and sibling RustRed remain unchanged.",
+    "implementation": "Per-call sparse native Linnet Forest+SCC planner; borrowed integral labels; only reachable cyclic components fail; declared residual authentication precedes exact cancellation; shared subexpression maps released after last parent; flat rows bypass graph construction.",
+    "cpu_affinity": [
+      31
+    ],
+    "tests": {
+      "passed": 7,
+      "failed": 0,
+      "elapsed_seconds_text": "0.61",
+      "cases": [
+        "30000-node chain without recursive call stack",
+        "100-level shared diamond, exact coefficient 2^100",
+        "multiple and duplicate roots",
+        "cycle and missing leaf hidden behind zero coefficient",
+        "unrelated cycle and empty request exclusion",
+        "zero-rule priority over residual declarations",
+        "nontriangular rows and table mutation between calls",
+        "flat exact rational normalization with zero-leaf authentication",
+        "chained tadpole IBPs through PreparedPhysicalFamily differential closure, matching old basis/targets/PDE/guards/cache identity"
+      ]
+    },
+    "baseline_library": {
+      "path": "target/cache-selection-audit/libsymbolica_amflow.rlib",
+      "sha256": "fbcd037fa48245102747e4c37b5fc17dc7655af13301390d425610ed3b2042e6",
+      "bytes": 351692312
+    },
+    "native_library": {
+      "path": "target/release/deps/liblinnet-207fb9ba6bc15b59.rlib",
+      "sha256": "a0ef71d559dd6c86146073937b84fdf7b9776f2cfb4dd7320084ab212a43cdf7",
+      "bytes": 17284470
+    },
+    "files": {
+      "target/reduction-expansion-audit/expansion.rs": {
+        "sha256": "9078dd23827eb68944a3ecde5dd02c39756c04e2c582abb6d1e8cc9251ea357c",
+        "bytes": 6473
+      },
+      "target/reduction-expansion-audit/tests.rs": {
+        "sha256": "70191d69f44d8ddf7ba3fc603c19fe91a78d9599ae401824c596dd3650cd8746",
+        "bytes": 6647
+      },
+      "target/reduction-expansion-audit/tests": {
+        "sha256": "0cc9a619bca3380914d5690547aec96565b0043b8f0e7f80930705f546c77659",
+        "bytes": 580699632
+      },
+      "target/reduction-expansion-audit/build.sh": {
+        "sha256": "aa15ffd814498e726fd8c22a78e5d0c2386e764fdd60d79f3c10a7c6bb2bbd8f",
+        "bytes": 505
+      },
+      "target/reduction-expansion-audit/build.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "target/reduction-expansion-audit/tests.log": {
+        "sha256": "08df808feb12663b71540907d9085e212047cfd2a5b0056a58b35b253d572de6",
+        "bytes": 611
+      },
+      "target/reduction-expansion-audit/reduction.rs": {
+        "sha256": "12d4a21b22fad73b314ad9e18153267969989683e97111a2080d54adb488e59a",
+        "bytes": 27779
+      },
+      "target/reduction-expansion-audit/table_graph.rs": {
+        "sha256": "e409b2634944ce1d2a1d7865b0a09a7b7bcb1134f7fe1d84e09286cb14efb1bf",
+        "bytes": 7606
+      },
+      "target/reduction-expansion-audit/tests-reduction-graphs.rs": {
+        "sha256": "189a074a714eefc6ee6a19cbf7f96beffbed716706a2871fd24bec9f049b2e9a",
+        "bytes": 8895
+      },
+      "target/reduction-expansion-audit/reduction.patch": {
+        "sha256": "c2fec49a2b34d9a42dce221e12511eeddd0cf6b410cdd6a2dbe2f9697b4e0cb1",
+        "bytes": 6246
+      }
+    },
+    "integration_status": "Integrated as src/reduction/table_graph.rs and Reduction::expand_many; method wrapper/closure batching still await coordinated root Cargo validation. Standalone tests ran before integration against archived pre-change Reduction::expand.",
+    "limitations": [
+      "A nontrivial table query currently builds the full sparse dependency graph, including unrelated rows, then restricts to requested roots using native SCC order. This remains a setup cost for huge caller tables.",
+      "Public Reduction fields are mutable, so no graph or expansion survives across calls.",
+      "Existing native Expander stays unchanged because a separately measured whole-graph replacement did not amortize on frequent frontier updates."
+    ]
+  },
+  "native_hot_path_audit": {
+    "schema_version": 1,
+    "generated_utc": "2026-10-04T19:05:03.928719+00:00",
+    "scope": "Read-only structural planning probe over saved genuine paper reduction dependency keys. Coefficient Atoms are not decoded or evaluated, residuals are not certified as masters, and production code is unchanged.",
+    "cpu_affinity": [
+      31
+    ],
+    "dependency_commit": "a33254faf0ac960c0589891ffdd2d8f38d334b05",
+    "checkpoint": {
+      "path": "target/sum-prototype/checkpoint.bin",
+      "sha256": "964e61b9f745ebdbae8c919e4286b6e1eb1a51495c1d8aaf75ca05d50ce7a78c",
+      "bytes": 84717020
+    },
+    "native_library": {
+      "path": "target/release/deps/liblinnet-207fb9ba6bc15b59.rlib",
+      "sha256": "a0ef71d559dd6c86146073937b84fdf7b9776f2cfb4dd7320084ab212a43cdf7",
+      "bytes": 17284470
+    },
+    "default_storage": "Linnet NodeStorageVec (full half-edge bitset per node)",
+    "sparse_storage": "Linnet Forest<Integral, ChildVecStore<()>>, selected by concrete graph type without changing dependency features",
+    "default_measurements": [
+      {
+        "conditions": 23447,
+        "elapsed_ns": 472420054,
+        "key": "6556b59434f4001a46354103944c1dd1b646c7b04e1c3d6a15b346095298147c",
+        "memory": {
+          "peak_kib": 299580,
+          "rss_kib": 299580
+        },
+        "pending": 1442,
+        "phase": "decoded_dependency_keys",
+        "residuals": 1471,
+        "version": 1,
+        "visited": 40869
+      },
+      {
+        "edges": 515549,
+        "elapsed_ns": 212195151,
+        "memory": {
+          "peak_kib": 294912,
+          "rss_kib": 136548
+        },
+        "phase": "old_dfs_plan",
+        "reachable": 74235,
+        "retained": 73296,
+        "rules": 40840
+      },
+      {
+        "components": 74235,
+        "elapsed_ns": 15662129332,
+        "memory": {
+          "peak_kib": 9578808,
+          "rss_kib": 9578808
+        },
+        "nodes": 74235,
+        "phase": "native_graph_and_scc"
+      },
+      {
+        "dependency_order_valid": true,
+        "elapsed_ns": 1515677248,
+        "memory": {
+          "peak_kib": 9579544,
+          "rss_kib": 9579544
+        },
+        "minimum_lines": 0,
+        "old_dfs_elapsed_ns": 201310760,
+        "phase": "native_reused_plan",
+        "reachable": 74235,
+        "retained": 73296,
+        "same_node_and_retained_sets": true
+      },
+      {
+        "dependency_order_valid": true,
+        "elapsed_ns": 1567301841,
+        "memory": {
+          "peak_kib": 9579544,
+          "rss_kib": 9579544
+        },
+        "minimum_lines": 3,
+        "old_dfs_elapsed_ns": 216656563,
+        "phase": "native_reused_plan",
+        "reachable": 74235,
+        "retained": 72400,
+        "same_node_and_retained_sets": true
+      },
+      {
+        "dependency_order_valid": true,
+        "elapsed_ns": 1652855708,
+        "memory": {
+          "peak_kib": 9579544,
+          "rss_kib": 9579544
+        },
+        "minimum_lines": 4,
+        "old_dfs_elapsed_ns": 212411680,
+        "phase": "native_reused_plan",
+        "reachable": 74235,
+        "retained": 27116,
+        "same_node_and_retained_sets": true
+      },
+      {
+        "dependency_order_valid": true,
+        "elapsed_ns": 1779285551,
+        "memory": {
+          "peak_kib": 9579544,
+          "rss_kib": 9579544
+        },
+        "minimum_lines": 5,
+        "old_dfs_elapsed_ns": 213851095,
+        "phase": "native_reused_plan",
+        "reachable": 74235,
+        "retained": 6560,
+        "same_node_and_retained_sets": true
+      },
+      {
+        "dependency_order_valid": true,
+        "elapsed_ns": 1829850632,
+        "memory": {
+          "peak_kib": 9579544,
+          "rss_kib": 9579544
+        },
+        "minimum_lines": 7,
+        "old_dfs_elapsed_ns": 185316895,
+        "phase": "native_reused_plan",
+        "reachable": 74235,
+        "retained": 41,
+        "same_node_and_retained_sets": true
+      }
+    ],
+    "sparse_measurements": [
+      {
+        "conditions": 23447,
+        "elapsed_ns": 549120008,
+        "key": "6556b59434f4001a46354103944c1dd1b646c7b04e1c3d6a15b346095298147c",
+        "memory": {
+          "peak_kib": 299468,
+          "rss_kib": 299468
+        },
+        "pending": 1442,
+        "phase": "decoded_dependency_keys",
+        "residuals": 1471,
+        "version": 1,
+        "visited": 40869
+      },
+      {
+        "edges": 515549,
+        "elapsed_ns": 216421643,
+        "memory": {
+          "peak_kib": 294912,
+          "rss_kib": 136428
+        },
+        "phase": "old_dfs_plan",
+        "reachable": 74235,
+        "retained": 73296,
+        "rules": 40840
+      },
+      {
+        "components": 74235,
+        "elapsed_ns": 1572349294,
+        "graph_construction_ns": 511153972,
+        "memory": {
+          "peak_kib": 294912,
+          "rss_kib": 267816
+        },
+        "nodes": 74235,
+        "phase": "native_graph_and_scc",
+        "scc_ns": 1059882768
+      },
+      {
+        "dependency_order_valid": true,
+        "elapsed_ns": 171669577,
+        "memory": {
+          "peak_kib": 294912,
+          "rss_kib": 268156
+        },
+        "minimum_lines": 0,
+        "old_dfs_elapsed_ns": 204895830,
+        "phase": "native_reused_plan",
+        "reachable": 74235,
+        "retained": 73296,
+        "same_node_and_retained_sets": true
+      },
+      {
+        "dependency_order_valid": true,
+        "elapsed_ns": 166819714,
+        "memory": {
+          "peak_kib": 294912,
+          "rss_kib": 268420
+        },
+        "minimum_lines": 3,
+        "old_dfs_elapsed_ns": 203413116,
+        "phase": "native_reused_plan",
+        "reachable": 74235,
+        "retained": 72400,
+        "same_node_and_retained_sets": true
+      },
+      {
+        "dependency_order_valid": true,
+        "elapsed_ns": 199212564,
+        "memory": {
+          "peak_kib": 294912,
+          "rss_kib": 268420
+        },
+        "minimum_lines": 4,
+        "old_dfs_elapsed_ns": 221014745,
+        "phase": "native_reused_plan",
+        "reachable": 74235,
+        "retained": 27116,
+        "same_node_and_retained_sets": true
+      },
+      {
+        "dependency_order_valid": true,
+        "elapsed_ns": 174084544,
+        "memory": {
+          "peak_kib": 294912,
+          "rss_kib": 268420
+        },
+        "minimum_lines": 5,
+        "old_dfs_elapsed_ns": 218437937,
+        "phase": "native_reused_plan",
+        "reachable": 74235,
+        "retained": 6560,
+        "same_node_and_retained_sets": true
+      },
+      {
+        "dependency_order_valid": true,
+        "elapsed_ns": 173000421,
+        "memory": {
+          "peak_kib": 294912,
+          "rss_kib": 268420
+        },
+        "minimum_lines": 7,
+        "old_dfs_elapsed_ns": 175623508,
+        "phase": "native_reused_plan",
+        "reachable": 74235,
+        "retained": 41,
+        "same_node_and_retained_sets": true
+      }
+    ],
+    "sparse_process": {
+      "exit_code": 0,
+      "elapsed_ns": 5842999164,
+      "peak_rss_kib": 303544,
+      "cpu_affinity": [
+        31
+      ],
+      "timeout_seconds": 180,
+      "rss_cap_bytes": 4294967296,
+      "address_space_cap_bytes": 4294967296,
+      "termination_reason": null
+    },
+    "files": {
+      "target/native-dag-audit/probe.rs": {
+        "sha256": "b8678ad1331af9b712cf696c802f19766ccfc58dfdf980fa53f70f026b293800",
+        "bytes": 9321
+      },
+      "target/native-dag-audit/probe-default.rs": {
+        "sha256": "fd220fac9e8a2bb6f1f1b0b3e8b21bdc934c0c556f1cabe29354bf8e42e9404e",
+        "bytes": 8922
+      },
+      "target/native-dag-audit/probe": {
+        "sha256": "495c4a9cc55a44966cf94c69eeabdf9cd3b4a0fd2cc317b851705309271a1fe0",
+        "bytes": 149032416
+      },
+      "target/native-dag-audit/probe-default": {
+        "sha256": "b0be0a96e72683453d3c5f853127b914ce9d655915a20f06417454426bdfab7a",
+        "bytes": 149028672
+      },
+      "target/native-dag-audit/build.sh": {
+        "sha256": "b64230a73734d1153ebbd8cfdcf2611863e4cf73c70ebe76e394268c2d3f991c",
+        "bytes": 559
+      },
+      "target/native-dag-audit/build.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "target/native-dag-audit/results-default.jsonl": {
+        "sha256": "1466e3403d9bfe6e36217be86a39f9196de945560addd15d32c2493baf7d0b75",
+        "bytes": 1810
+      },
+      "target/native-dag-audit/results-sparse.jsonl": {
+        "sha256": "f2987ac3e0d3b5190df6380b19a00b1f537765559d222d93687ceb9fecef3855",
+        "bytes": 1846
+      },
+      "target/native-dag-audit/run-sparse.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "target/native-dag-audit/run.py": {
+        "sha256": "f574a7c9b1f5dd9e43a2c185b0751ac374c6f77d532edd0168a00421ce2798e9",
+        "bytes": 1401
+      },
+      "target/native-dag-audit/process-metrics-sparse.json": {
+        "sha256": "6b56189576e2ec92f32bf489c0ddbea061cca94077f75180d2b74aca895cc446",
+        "bytes": 235
+      },
+      "target/native-dag-audit/build-tests.sh": {
+        "sha256": "4eb963740237daf6e83d2f0d60954593cb27c590c13100273535b269138c2d0d",
+        "bytes": 566
+      },
+      "target/native-dag-audit/tests-build.log": {
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "bytes": 0
+      },
+      "target/native-dag-audit/tests.log": {
+        "sha256": "8a36a23f3dd9803bcf41fc5585fd50fb779c9cda50fc6b79b18174bebb76ac3f",
+        "bytes": 320
+      },
+      "target/native-dag-audit/tests": {
+        "sha256": "bdd48e1508acb32c876eaf50520454918efd3c967dd5b5e23ffb4c5ca14ad40d",
+        "bytes": 148784888
+      },
+      "target/native-dag-audit/assessment.md": {
+        "sha256": "17b56df6254fb3f793b2199537554696d82d8e46a1d7eb2dd6825097a3003166",
+        "bytes": 2771
+      }
+    },
+    "decision": "Do not replace frequently reconstructed production native planning with this whole-graph/SCC approach: sparse storage has reasonable memory, but setup amortizes only across many repeated queries. Investigate rooted owner traversal/retained graph epochs or first replace recursive table expansion.",
+    "validation": {
+      "tests": 3,
+      "status": "passed",
+      "cases": "512 directed three-node graphs \u00d7 7 nonempty root sets \u00d7 2 thresholds; a 30,000-node chain; zero-rule/isolated-root/cycle/sector cases",
+      "note": "Graph construction includes every query root in this bounded prototype. A reusable production adapter must also handle newly requested roots absent from its cached node set without panicking."
+    }
+  },
+  "integrated_sources": {
+    "src/reduction.rs": {
+      "sha256": "12d4a21b22fad73b314ad9e18153267969989683e97111a2080d54adb488e59a",
+      "bytes": 27779
+    },
+    "src/reduction/table_graph.rs": {
+      "sha256": "e409b2634944ce1d2a1d7865b0a09a7b7bcb1134f7fe1d84e09286cb14efb1bf",
+      "bytes": 7606
+    },
+    "tests/reduction_graphs.rs": {
+      "sha256": "189a074a714eefc6ee6a19cbf7f96beffbed716706a2871fd24bec9f049b2e9a",
+      "bytes": 8895
+    },
+    "docs/native-reduction-graphs.md": {
+      "sha256": "989bc159135d11e61f93efa3c1f0826e0cb8cd57748d447d48dbe271b9dba83a",
+      "bytes": 2912
+    }
+  }
+}

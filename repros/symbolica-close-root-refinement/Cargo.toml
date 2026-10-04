@@ -1,0 +1,18 @@
+[package]
+name = "symbolica-close-root-refinement-mre"
+version = "0.1.0"
+edition = "2024"
+publish = false
+
+[[bin]]
+name = "symbolica-close-root-refinement-mre"
+path = "minimal.rs"
+
+[dependencies]
+symbolica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "75f8350094b90254ee71dc2a391fde0d14b0204a", default-features = false, features = ["integer-gmp", "float-mpfr", "serde"] }
+
+[patch.crates-io]
+numerica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "75f8350094b90254ee71dc2a391fde0d14b0204a" }
+graphica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "75f8350094b90254ee71dc2a391fde0d14b0204a" }
+
+[workspace]
