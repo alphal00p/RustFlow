@@ -1,0 +1,108 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-04T20:19:26.858418+00:00",
+  "status": "standalone numerical checks and centralized integrated Cargo validation passed",
+  "baseline_git_commit": "49a8e12a5861e345e36aabc836aa40d39287d2f5",
+  "scope": "registered-root progressive physical boundary reuse in the existing RustFlowCache and generic RustFlow; real regular straight paths only",
+  "implementation": {
+    "cache_schema": 3,
+    "identity": "exact registered roots, ordered basis, normalization, prescription/domain, exact nonzero guards including generic epsilon leading coefficients",
+    "point_germ": "local principal/opposite sign, preserving Exact/Derived/Numerical coordinate provenance",
+    "shared_code": [
+      "physical orchestration",
+      "epsilon precision/order refinement and checkpoint comparisons",
+      "weighted Gronwall disk subdivision",
+      "transactional insertion and binary cache storage"
+    ],
+    "native_reuse": [
+      "Symbolica AlgebraicQuotient domain norms",
+      "Symbolica rational-polynomial arithmetic",
+      "Symbolica exact real-root intervals and native interval refinement",
+      "existing root/rational Taylor recurrences and fixed-precision native Series"
+    ],
+    "uncertainty": "finite-precision norm estimates plus independent refinement and inherited source error; not directed interval certification",
+    "limitations": [
+      "real rational physical coordinates only",
+      "all radicands real and nonzero on the full path",
+      "unresolved interval overlaps rejected",
+      "formal norm conditions require invertibility on all registered sheets",
+      "caller still owns integral/logarithmic homotopy admissibility",
+      "native exact-algebra calls are synchronous",
+      "schema2 snapshots explicitly incompatible"
+    ]
+  },
+  "tests": {
+    "passed": 19,
+    "failed": 0,
+    "elapsed_seconds": "9.53",
+    "cpu_affinity": [
+      30
+    ],
+    "optimization": "rustc opt-level1; dependency rlibs from previously validated release builds",
+    "new_public_tests": 10,
+    "existing_weighted_tests": 2,
+    "existing_engine_and_native_series_tests": 7,
+    "commands": [
+      "bash target/algebraic-cache/clippy.sh",
+      "bash target/algebraic-cache/compile.sh",
+      "source .dev-env; taskset -c 30 target/algebraic-cache/tests --nocapture"
+    ],
+    "cases": [
+      "progressive s=1 to4 to9 and nearest-source4 selection",
+      "binary restart and verified Derived checkpoints",
+      "opposite germs coexist at the same point and exact hits select correctly",
+      "even-multiplicity branch zero excludes the nearest unsafe source before ranking",
+      "original reduction guard survives physical cache selection",
+      "low verified source accuracy rejects transactionally despite high working precision",
+      "foreign/missing germs, nonreal coordinates and root branch points rejected",
+      "negative radicands preserve the imaginary principal sheet",
+      "real endpoint radicands with complex interior rejected",
+      "root-sum norm and generic-epsilon valuation guards survive exact-hit admission",
+      "weighted algebraic constant-matrix norm agrees with its analytic exponential",
+      "internal parameter names avoid all registered roots"
+    ]
+  },
+  "numerical_examples": {
+    "requested_decimal_digits": 20,
+    "working_digits_initial": 50,
+    "working_digits_refined": 70,
+    "series_order_initial": 64,
+    "series_order_refined": 96,
+    "analytic_source_working_digits": 80,
+    "source_verified_digits": 35,
+    "principal_root": "dY/ds=epsilon*Y/sqrt(s); Y(1)=1; Y(9)=[1,4,8] through epsilon2",
+    "imaginary_root": "r\u00b2=-s on the principal sheet; Y(9)=[1,-4i,-8] through epsilon2",
+    "root_sum": "dY/ds=epsilon*Y/(sqrt(s)+1), Y(4)=1; Y(9)=[1,g,g\u00b2/2], g=2-2log(4/3)",
+    "claim": "20-digit requested accuracy; additional analytic assertions do not promote the cache beyond propagated evidence"
+  },
+  "provenance_note": "Standalone harness uses immutable previously validated common Error/Precision/options plus staged owned modules. Its source/dependency cache fingerprints are explicitly prototype labels. Production src/algebraic.rs additionally contains parent-owned latest public-domain/epsilon-leading/native-exponent corrections; only the new bound/root-state methods were appended during integration.",
+  "sha256": {
+    "target/algebraic-cache/tests5.log": "9b696f5242166e23d5ab527c6c6b22ab71f692d205d75bd119142aca78a40514",
+    "target/algebraic-cache/clippy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "target/algebraic-cache/compile5.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "target/algebraic-cache/compile.sh": "8a6f43a6295831c4827ce716c04ecab5bf1753d7bebe734e9dae731311cbcb48",
+    "target/algebraic-cache/clippy.sh": "4ef02ff086b922371e77d1a1d1ff11ab662c0d53eeecfa2be83ceb8d959853b9",
+    "target/algebraic-cache/tests": "d59b486ef2fff56d87015cca155eb31e580ce73f1efbe20625a8d41e2b13153c",
+    "target/algebraic-cache/probe.rs": "f105f8b944dec32ed4080f78053b5296801a64d2c0287f4a1eb1da63ad525f37",
+    "target/algebraic-cache/cache_tests.rs": "7433a5eff802d3a1c6daf1b71866b3a76c7b9297f39cc75066650ac47c17d54c",
+    "target/algebraic-cache/weighted_tests.rs": "c1b99fbbb0aa51082987e558a6e7db26319d2a8800f04584ee9f8aee2d9835d5",
+    "target/algebraic-cache/algebraic.rs": "b1a7c63ff9b3485b975db391aa94c7973f9ddaf07534c549c4b42aa91385f401",
+    "target/algebraic-cache/physical_conditions.rs": "6e0fbd5cfb9e05b6a093fa9e8c6554ef6307f6f7606d43d4c50b9d4a5e70fefe",
+    "target/algebraic-cache/transport_cache.rs": "999de87aac188a33147e7e86eb2bc0c4922aa88d9676c5fb6c96423bc5cc2683",
+    "target/algebraic-cache/physical_transport.rs": "7ca826a624ff673db75d925d88bb2aa3dbd097d309870198b8c5c40d135ec74c",
+    "target/algebraic-cache/diffexp.rs": "58bee03c34b05f4c458cdb4cb335a354e42120d5f3fe7fd36b3f57ac2f3297e0"
+  },
+  "integrated_source_sha256": {
+    "src/transport_cache.rs": "999de87aac188a33147e7e86eb2bc0c4922aa88d9676c5fb6c96423bc5cc2683",
+    "src/physical_transport.rs": "7ca826a624ff673db75d925d88bb2aa3dbd097d309870198b8c5c40d135ec74c",
+    "src/diffexp.rs": "58bee03c34b05f4c458cdb4cb335a354e42120d5f3fe7fd36b3f57ac2f3297e0",
+    "src/algebraic.rs": "30b43461c9615e0ca1a70cbe1dd90c23724f96bf6147e1bdbc41f06817cff286",
+    "src/physical_conditions.rs": "6e0fbd5cfb9e05b6a093fa9e8c6554ef6307f6f7606d43d4c50b9d4a5e70fefe",
+    "tests/algebraic_cache.rs": "30995345f9e2dc3b92f593418abff333d7bd13e484ee4f1d3d3419cbc2568a83"
+  },
+  "centralized_validation": {
+    "status": "passed",
+    "report": "reports/validation/2026-10-04-algebraic-cache-release.json",
+    "note": "Latest integrated production source and complete Cargo suite are recorded separately from the earlier standalone measurements."
+  }
+}

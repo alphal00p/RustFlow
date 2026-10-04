@@ -129,8 +129,12 @@ The unequal-mass banana now has a complete 15-master, 75-coefficient production
 regression with independent mass/momentum routes and an original DiffExp oracle;
 see [its measured scope](banana-unequal.md). Standalone [algebraic transport](algebraic.md)
 tracks registered square-root sheets on regular contours, including winding and
-rejected-step tests. Root-sum denominator rationalization, algebraic Frobenius
-endpoints, automatic physical prescriptions and algebraic cache reuse remain.
+rejected-step tests. Root-sum denominators use native formal quotient inversion
+and preserve source-domain conditions. [Algebraic cache reuse](algebraic-cache.md)
+now supports regular real straight paths with explicit root germs. The
+[prescribed-contour interface](prescribed-contours.md) constructs detours from
+caller-supplied polynomial prescriptions; automatic inference from an integral,
+algebraic Frobenius endpoints and cached threshold crossings remain incomplete.
 The [33,000-boundary cache benchmark](cache-selection.md) measures lazy path
 validation separately from integral evaluation. Exact target projection now
 checks positive epsilon orders and carries cached master uncertainty into the

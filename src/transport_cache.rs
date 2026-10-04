@@ -4,6 +4,7 @@
 //! precision label is evidence supplied by the caller, never inferred from the
 //! number of MPFR working bits. Path admissibility is required during selection:
 //! distance alone cannot decide which continuation reaches the intended sheet.
+use crate::algebraic::{AlgebraicKinematicSystem, RootSeed, SquareRoot};
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution};
 use crate::kinematics::{KinematicPath, KinematicSystem};
 use crate::{ComplexFloat as C, Error, Precision, Prescription, Result};
@@ -18,8 +19,8 @@ use std::sync::{
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
-const VERSION: u32 = 2;
-const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x02";
+const VERSION: u32 = 3;
+const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x03";
 const FILE: &str = "physical-boundaries.bin";
 static NEXT_FILE: AtomicU64 = AtomicU64::new(0);
 
@@ -64,10 +65,54 @@ pub enum PointKind {
     ContourDetour,
 }
 
+/// A local sign relative to the principal square root at the exact point.
+/// This is discrete sheet information, not a precision claim about a root value.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+pub enum RootSheet {
+    Principal,
+    Opposite,
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct RootGerm {
+    pub sheets: BTreeMap<Symbol, RootSheet>,
+}
+impl RootGerm {
+    pub(crate) fn seeds(&self) -> BTreeMap<Symbol, RootSeed> {
+        self.sheets
+            .iter()
+            .map(|(&s, sheet)| {
+                (
+                    s,
+                    match sheet {
+                        RootSheet::Principal => RootSeed::Principal,
+                        RootSheet::Opposite => RootSeed::Opposite,
+                    },
+                )
+            })
+            .collect()
+    }
+    fn canonical(&self) -> Vec<(String, RootSheet)> {
+        let mut out = self
+            .sheets
+            .iter()
+            .map(|(&s, &sheet)| (Atom::var(s).to_canonical_string(), sheet))
+            .collect::<Vec<_>>();
+        out.sort_by(|a, b| a.0.cmp(&b.0));
+        out
+    }
+}
+
 /// Exact input, an exact path image of a numerical parameter, or independently
 /// rounded numerical coordinates. The origin of a point remains explicit.
 #[derive(Clone, Debug)]
 pub enum CachedPoint {
+    /// A point on the registered algebraic cover. The nested coordinate origin
+    /// stays Exact, Derived, or Numerical; nested root wrappers are rejected.
+    Algebraic {
+        point: Box<CachedPoint>,
+        germ: RootGerm,
+    },
     Exact(BTreeMap<Symbol, Atom>),
     /// Exact coordinate image of an accepted, rounded parameter value. Keeping
     /// the image exact preserves multivariate path constraints on restart.
@@ -109,6 +154,135 @@ fn exact_constant(a: AtomView<'_>) -> Result<()> {
     }
 }
 
+fn exact_real_rational(a: &Atom) -> Result<()> {
+    let reduced = a.together().cancel();
+    if let AtomView::Num(n) = reduced.as_view()
+        && let Coefficient::Complex(c) = n.get_coeff_view().to_owned()
+        && c.im.is_zero()
+    {
+        return Ok(());
+    }
+    Err(Error::Unsupported("algebraic physical cache currently requires exact real rational coordinates and real nonzero radicands".into()))
+}
+
+// Native exact real isolation is enough for regular real paths. An unresolved
+// enclosures are refined through the native real interval API. Unresolved
+// endpoint overlaps are conservatively rejected, never treated as permission.
+fn excludes_unit_interval(
+    polynomial: &MultivariatePolynomial<IntegerRing, u16>,
+    parameter: Symbol,
+) -> Result<bool> {
+    if polynomial.is_constant() {
+        return Ok(!polynomial.is_zero());
+    }
+    if polynomial
+        .variables()
+        .iter()
+        .any(|v| *v != PolyVariable::Symbol(parameter))
+    {
+        return Err(Error::Unsupported(
+            "root path guard is not univariate".into(),
+        ));
+    }
+    let polynomial = polynomial
+        .to_univariate_from_univariate(0)
+        .map_coeff(|c| Rational::from(c.clone()), Q);
+    if polynomial.evaluate(&Rational::from(0)).is_zero()
+        || polynomial.evaluate(&Rational::from(1)).is_zero()
+    {
+        return Ok(false);
+    }
+    for (mut lower, mut upper, _) in polynomial.isolate_real_root_intervals() {
+        let mut separate = false;
+        for attempt in 0..32 {
+            if lower == upper {
+                if (Rational::from(0)..=Rational::from(1)).contains(&lower) {
+                    return Ok(false);
+                }
+                separate = true;
+                break;
+            }
+            if upper <= 0 || lower >= 1 {
+                separate = true;
+                break;
+            }
+            if lower >= 0 && upper <= 1 {
+                return Ok(false);
+            }
+            // The native routine has a relative-width contract; a zero
+            // midpoint is not an admissible denominator for that criterion.
+            // Such an unresolved enclosure is conservatively excluded.
+            if (&lower + &upper).is_zero() {
+                return Ok(false);
+            }
+            (lower, upper) = polynomial.refine_root_interval(
+                (lower, upper),
+                &Rational::from((1i64, 1i64 << (attempt + 2))),
+            );
+        }
+        if !separate {
+            return Ok(false);
+        }
+    }
+    Ok(true)
+}
+
+// Reuse the registered quotient-domain owner. Preserve every original
+// denominator occurrence before cross-term rational cancellation as well.
+fn algebraic_conditions(system: &AlgebraicKinematicSystem) -> Result<Vec<Atom>> {
+    fn denominators(a: AtomView<'_>, out: &mut std::collections::BTreeSet<Atom>) {
+        match a {
+            AtomView::Add(v) => {
+                for a in v.iter() {
+                    denominators(a, out);
+                }
+            }
+            AtomView::Mul(v) => {
+                for a in v.iter() {
+                    denominators(a, out);
+                }
+            }
+            AtomView::Pow(v) => {
+                let (base, exponent) = v.get_base_exp();
+                if let AtomView::Num(n) = exponent
+                    && let Coefficient::Complex(c) = n.get_coeff_view().to_owned()
+                    && c.re < 0
+                {
+                    out.insert(base.to_owned());
+                }
+                denominators(base, out);
+            }
+            _ => {}
+        }
+    }
+    let mut guards = system.nonzero_conditions()?;
+    let mut bases = std::collections::BTreeSet::new();
+    for a in system.derivatives.values().flatten().flatten() {
+        denominators(a.as_view(), &mut bases);
+    }
+    for base in bases {
+        let mut probe = AlgebraicKinematicSystem {
+            epsilon: system.epsilon,
+            derivatives: system
+                .derivatives
+                .keys()
+                .map(|&v| (v, vec![vec![Atom::new()]]))
+                .collect(),
+            roots: system.roots.clone(),
+        };
+        probe.derivatives.first_entry().unwrap().get_mut()[0][0] = Atom::one() / base;
+        guards.extend(probe.nonzero_conditions()?);
+    }
+    let rules = BTreeMap::from([(
+        Atom::var(crate::family::imaginary_parameter()),
+        Atom::num(Complex::new(Rational::from(0), Rational::from(1))),
+    )]);
+    Ok(guards
+        .iter()
+        .map(|a| crate::family::substitute(a, &rules))
+        .collect())
+}
+
 fn exact_metadata(a: AtomView<'_>) -> Result<()> {
     match a {
         AtomView::Num(n) if !matches!(n.get_coeff_view().to_owned(), Coefficient::Complex(_)) => {
@@ -125,8 +299,31 @@ fn exact_metadata(a: AtomView<'_>) -> Result<()> {
 }
 
 impl CachedPoint {
+    pub fn with_root_germ(self, germ: RootGerm) -> Result<Self> {
+        let result = Self::Algebraic {
+            point: Box::new(self),
+            germ,
+        };
+        result.validate()?;
+        Ok(result)
+    }
+    pub fn root_germ(&self) -> Option<&RootGerm> {
+        match self {
+            Self::Algebraic { germ, .. } => Some(germ),
+            _ => None,
+        }
+    }
     pub fn validate(&self) -> Result<()> {
         match self {
+            Self::Algebraic { point, germ } => {
+                if germ.sheets.is_empty() || point.root_germ().is_some() {
+                    return Err(Error::InvalidInput(
+                        "root germ must be nonempty and occur once per point".into(),
+                    ));
+                }
+                point.validate()?;
+            }
+
             Self::Exact(coordinates) | Self::Derived { coordinates, .. } => {
                 if coordinates.is_empty() {
                     return Err(Error::InvalidInput("empty cached point".into()));
@@ -176,6 +373,7 @@ impl CachedPoint {
     pub fn rounded_coordinates_as_exact(&self) -> Result<BTreeMap<Symbol, Atom>> {
         self.validate()?;
         match self {
+            Self::Algebraic { point, .. } => point.rounded_coordinates_as_exact(),
             Self::Exact(coordinates) | Self::Derived { coordinates, .. } => Ok(coordinates.clone()),
             Self::Numerical { coordinates, .. } => Ok(coordinates
                 .iter()
@@ -201,6 +399,7 @@ impl CachedPoint {
     pub fn evaluate(&self, p: Precision) -> Result<BTreeMap<Symbol, C>> {
         self.validate()?;
         match self {
+            Self::Algebraic { point, .. } => point.evaluate(p),
             Self::Exact(coordinates) | Self::Derived { coordinates, .. } => coordinates
                 .iter()
                 .map(|(&v, a)| Ok((v, p.eval(a, &Default::default())?)))
@@ -212,6 +411,7 @@ impl CachedPoint {
     }
     fn coordinate_bits(&self) -> u32 {
         match self {
+            Self::Algebraic { point, .. } => point.coordinate_bits(),
             Self::Exact(_) => u32::MAX,
             Self::Numerical { working_bits, .. } | Self::Derived { working_bits, .. } => {
                 *working_bits
@@ -220,6 +420,9 @@ impl CachedPoint {
     }
     fn key(&self) -> Result<String> {
         match self {
+            Self::Algebraic { point, germ } => {
+                fingerprint(&("algebraic", point.key()?, germ.canonical()))
+            }
             Self::Exact(coordinates) => {
                 let mut pairs = coordinates
                     .iter()
@@ -260,6 +463,7 @@ impl CachedPoint {
 struct IdentityData {
     key: String,
     system: KinematicSystem,
+    roots: Vec<SquareRoot>,
     basis: Vec<Atom>,
     normalization: Atom,
     prescription: Prescription,
@@ -293,7 +497,54 @@ impl BoundaryIdentity {
         domain: &str,
         conditions: &[Atom],
     ) -> Result<Self> {
+        Self::build(
+            system,
+            &[],
+            basis,
+            normalization,
+            prescription,
+            domain,
+            conditions,
+        )
+    }
+
+    pub fn with_algebraic_conditions(
+        system: &AlgebraicKinematicSystem,
+        basis: &[Atom],
+        normalization: &Atom,
+        prescription: Prescription,
+        domain: &str,
+        conditions: &[Atom],
+    ) -> Result<Self> {
         system.validate()?;
+        Self::build(
+            &KinematicSystem {
+                epsilon: system.epsilon,
+                derivatives: system.derivatives.clone(),
+            },
+            &system.roots,
+            basis,
+            normalization,
+            prescription,
+            domain,
+            conditions,
+        )
+    }
+
+    #[allow(clippy::too_many_arguments)] // The existing identity metadata plus its optional exact root registry.
+    fn build(
+        system: &KinematicSystem,
+        roots: &[SquareRoot],
+        basis: &[Atom],
+        normalization: &Atom,
+        prescription: Prescription,
+        domain: &str,
+        conditions: &[Atom],
+    ) -> Result<Self> {
+        if roots.is_empty() {
+            system.validate()?;
+        }
+
         let mut variables = system
             .derivatives
             .keys()
@@ -301,10 +552,32 @@ impl BoundaryIdentity {
             .collect::<std::collections::BTreeSet<_>>();
         variables.insert(system.epsilon);
         let mut candidates = conditions.to_vec();
-        candidates.extend(crate::physical_conditions::matrix_domain_conditions(
-            system,
-        )?);
-        let conditions = crate::physical_conditions::canonical_conditions(&candidates, &variables)?;
+        if roots.is_empty() {
+            candidates.extend(crate::physical_conditions::matrix_domain_conditions(
+                system,
+            )?);
+        } else {
+            candidates.extend(algebraic_conditions(&AlgebraicKinematicSystem {
+                epsilon: system.epsilon,
+                derivatives: system.derivatives.clone(),
+                roots: roots.to_vec(),
+            })?);
+        }
+        let mut conditions =
+            crate::physical_conditions::canonical_conditions(&candidates, &variables)?;
+        if !roots.is_empty() {
+            let leading = conditions
+                .iter()
+                .map(|condition| {
+                    crate::physical_conditions::epsilon_leading_coefficient(
+                        condition,
+                        system.epsilon,
+                    )
+                })
+                .collect::<Result<Vec<_>>>()?;
+            conditions.extend(leading);
+            conditions = crate::physical_conditions::canonical_conditions(&conditions, &variables)?;
+        }
         let n = system.derivatives.values().next().unwrap().len();
         if basis.len() != n || domain.trim().is_empty() || normalization.is_zero() {
             return Err(Error::InvalidInput("boundary identity needs an ordered basis, nonzero normalization, and homotopy domain".into()));
@@ -329,8 +602,18 @@ impl BoundaryIdentity {
             })
             .collect::<Vec<_>>();
         derivatives.sort_by(|a, b| a.0.cmp(&b.0));
+        let root_identity = roots
+            .iter()
+            .map(|r| {
+                (
+                    Atom::var(r.symbol).to_canonical_string(),
+                    r.radicand.to_canonical_string(),
+                )
+            })
+            .collect::<Vec<_>>();
         let key = fingerprint(&(
             VERSION,
+            root_identity,
             env!("DEPENDENCY_SOURCE_DIGEST"),
             env!("PORT_SOURCE_DIGEST"),
             Atom::var(system.epsilon).to_canonical_string(),
@@ -350,6 +633,7 @@ impl BoundaryIdentity {
         Ok(Self(Arc::new(IdentityData {
             key,
             system: system.clone(),
+            roots: roots.to_vec(),
             basis: basis.to_vec(),
             normalization: normalization.clone(),
             prescription,
@@ -379,26 +663,64 @@ impl BoundaryIdentity {
     ) -> Result<bool> {
         self.validate_point(source)?;
         self.validate_point(target)?;
-        if self.0.conditions.is_empty() {
+        if self.0.conditions.is_empty() && self.0.roots.is_empty() {
             return Ok(true);
         }
-        let mut index = 0usize;
-        let parameter = loop {
-            let candidate = symbol!(&format!("symbolica_amflow::guard_path_{index}"));
-            if candidate != self.0.system.epsilon
-                && !self.0.system.derivatives.contains_key(&candidate)
-            {
-                break candidate;
-            }
-            index = index
-                .checked_add(1)
-                .ok_or_else(|| Error::Limit("guard path symbol overflow".into()))?;
-        };
+        let parameter = self.path_parameter("guard_path")?;
         let path = KinematicPath::straight_line(
             parameter,
             &source.rounded_coordinates_as_exact()?,
             &target.rounded_coordinates_as_exact()?,
         )?;
+        if !self.0.roots.is_empty() {
+            if source.root_germ() != target.root_germ() {
+                return Ok(false);
+            }
+            let rules = path
+                .coordinates
+                .iter()
+                .map(|(&s, a)| (Atom::var(s), a.clone()))
+                .collect();
+            for root in &self.0.roots {
+                let radicand = crate::family::substitute(&root.radicand, &rules)
+                    .together()
+                    .cancel();
+                let Ok(rational): Result<RationalPolynomial<IntegerRing, u16>> = radicand
+                    .try_to_rational_polynomial(&Q, &Z, None)
+                    .map_err(|_| {
+                        Error::Unsupported(
+                            "algebraic cache paths require real rational radicands".into(),
+                        )
+                    })
+                else {
+                    return Ok(false);
+                };
+                if !excludes_unit_interval(&rational.numerator, path.parameter)?
+                    || !excludes_unit_interval(&rational.denominator, path.parameter)?
+                {
+                    return Ok(false);
+                }
+                // Unknown constants or imaginary coefficients cannot enter Q.
+                for (_, c) in rational
+                    .numerator
+                    .to_expression()
+                    .coefficient_list::<i32>(&[Atom::var(path.parameter)])
+                {
+                    if exact_real_rational(&c).is_err() {
+                        return Ok(false);
+                    }
+                }
+                for (_, c) in rational
+                    .denominator
+                    .to_expression()
+                    .coefficient_list::<i32>(&[Atom::var(path.parameter)])
+                {
+                    if exact_real_rational(&c).is_err() {
+                        return Ok(false);
+                    }
+                }
+            }
+        }
         crate::physical_conditions::conditions_admit_path(
             &self.0.conditions,
             self.0.system.epsilon,
@@ -408,8 +730,74 @@ impl BoundaryIdentity {
         )
     }
 
+    pub(crate) fn path_parameter(&self, stem: &str) -> Result<Symbol> {
+        let mut index = 0usize;
+        loop {
+            let candidate = symbol!(&format!("symbolica_amflow::{stem}_{index}"));
+            if candidate != self.0.system.epsilon
+                && !self.0.system.derivatives.contains_key(&candidate)
+                && self.0.roots.iter().all(|r| r.symbol != candidate)
+            {
+                return Ok(candidate);
+            }
+            index = index
+                .checked_add(1)
+                .ok_or_else(|| Error::Limit("path symbol overflow".into()))?;
+        }
+    }
+
+    pub fn roots(&self) -> &[SquareRoot] {
+        &self.0.roots
+    }
+
+    fn validate_root_point(&self, point: &CachedPoint) -> Result<()> {
+        if self.0.roots.is_empty() {
+            if point.root_germ().is_some() {
+                return Err(Error::InvalidInput(
+                    "rational system cannot use a registered-root point".into(),
+                ));
+            }
+            return Ok(());
+        }
+        let germ = point.root_germ().ok_or_else(|| {
+            Error::InvalidInput("algebraic boundary requires an explicit root germ".into())
+        })?;
+        if germ.sheets.len() != self.0.roots.len()
+            || self
+                .0
+                .roots
+                .iter()
+                .any(|r| !germ.sheets.contains_key(&r.symbol))
+        {
+            return Err(Error::InvalidInput(
+                "cached root germ does not match the exact registry".into(),
+            ));
+        }
+        let coordinates = point.restart_coordinates()?;
+        for value in coordinates.values() {
+            exact_real_rational(value)?;
+        }
+        let rules = coordinates
+            .into_iter()
+            .map(|(s, a)| (Atom::var(s), a))
+            .collect();
+        for root in &self.0.roots {
+            let value = crate::family::substitute(&root.radicand, &rules)
+                .together()
+                .cancel();
+            exact_real_rational(&value)?;
+            if value.is_zero() {
+                return Err(Error::InvalidInput(
+                    "cached algebraic point is a root branch point".into(),
+                ));
+            }
+        }
+        Ok(())
+    }
+
     pub(crate) fn validate_point(&self, point: &CachedPoint) -> Result<()> {
         point.validate()?;
+        self.validate_root_point(point)?;
         let coordinates = point.rounded_coordinates_as_exact()?;
         if !coordinates.keys().eq(self.0.system.derivatives.keys()) {
             return Err(Error::InvalidInput(
@@ -674,8 +1062,12 @@ fn compare_exact_hits(
     right: &CachedPoint,
     target: &CachedPoint,
 ) -> Result<std::cmp::Ordering> {
+    let target_germ = target.root_germ();
     let target = target.restart_coordinates()?;
     let is_hit = |point: &CachedPoint| -> Result<bool> {
+        if point.root_germ() != target_germ {
+            return Ok(false);
+        }
         let point = point.restart_coordinates()?;
         Ok(point.keys().eq(target.keys())
             && point
@@ -957,6 +1349,7 @@ impl RustFlowCache {
         let mut candidates = Vec::new();
         for (index, boundary) in self.entries.iter().enumerate() {
             if boundary.identity.key() != query.identity.key()
+                || boundary.point.root_germ() != query.target.root_germ()
                 || !boundary.range.covers(query.range)
                 || boundary.accuracy.verified_digits < query.verified_digits
                 || boundary.point.coordinate_bits() < query.minimum_coordinate_bits
@@ -1047,6 +1440,19 @@ impl RustFlowCache {
         identity: &BoundaryIdentity,
         path: &KinematicPath,
         solution: &EpsilonSolution,
+        evidence: impl FnMut(
+            usize,
+            &crate::ode::TaylorSegment,
+        ) -> Result<Option<(PointKind, BoundaryAccuracy)>>,
+    ) -> Result<Vec<CachedBoundary>> {
+        Self::trajectory_boundaries_with_germ(identity, path, solution, None, evidence)
+    }
+
+    pub(crate) fn trajectory_boundaries_with_germ(
+        identity: &BoundaryIdentity,
+        path: &KinematicPath,
+        solution: &EpsilonSolution,
+        germ: Option<&RootGerm>,
         mut evidence: impl FnMut(
             usize,
             &crate::ode::TaylorSegment,
@@ -1105,25 +1511,31 @@ impl RustFlowCache {
                     )
                 })
                 .collect();
+            let point = CachedPoint::Derived {
+                coordinates,
+                working_bits: segment.working_bits,
+                provenance: format!(
+                    "exact image of accepted trajectory endpoint {index}; rounded parameter={}; path={}",
+                    parameter.to_canonical_string(),
+                    path.coordinates
+                        .iter()
+                        .map(|(&s, a)| format!(
+                            "{}={}",
+                            Atom::var(s).to_canonical_string(),
+                            a.to_canonical_string()
+                        ))
+                        .collect::<Vec<_>>()
+                        .join(",")
+                ),
+            };
+            let point = if let Some(germ) = germ {
+                point.with_root_germ(germ.clone())?
+            } else {
+                point
+            };
             let boundary = CachedBoundary {
                 identity: identity.clone(),
-                point: CachedPoint::Derived {
-                    coordinates,
-                    working_bits: segment.working_bits,
-                    provenance: format!(
-                        "exact image of accepted trajectory endpoint {index}; rounded parameter={}; path={}",
-                        parameter.to_canonical_string(),
-                        path.coordinates
-                            .iter()
-                            .map(|(&s, a)| format!(
-                                "{}={}",
-                                Atom::var(s).to_canonical_string(),
-                                a.to_canonical_string()
-                            ))
-                            .collect::<Vec<_>>()
-                            .join(",")
-                    ),
-                },
+                point,
                 kind,
                 range,
                 coefficients: solution.evaluate_segment(index, &segment.end)?,
@@ -1170,6 +1582,7 @@ type StoredMatrix = Vec<Vec<StoredAtom>>;
 #[derive(Serialize, Deserialize)]
 struct StoredIdentity {
     key: String,
+    roots: Vec<(StoredAtom, StoredAtom)>,
     epsilon: Vec<u8>,
     derivatives: Vec<(StoredAtom, StoredMatrix)>,
     basis: Vec<Vec<u8>>,
@@ -1183,6 +1596,11 @@ impl StoredIdentity {
         let d = &identity.0;
         Ok(Self {
             key: d.key.clone(),
+            roots: d
+                .roots
+                .iter()
+                .map(|r| Ok((symbol_bytes(r.symbol)?, atom_bytes(&r.radicand)?)))
+                .collect::<Result<_>>()?,
             epsilon: symbol_bytes(d.system.epsilon)?,
             derivatives: d
                 .system
@@ -1225,8 +1643,19 @@ impl StoredIdentity {
             .iter()
             .map(|a| atom_read(a))
             .collect::<Result<Vec<_>>>()?;
-        let identity = BoundaryIdentity::with_conditions(
+        let roots = self
+            .roots
+            .into_iter()
+            .map(|(symbol, radicand)| {
+                Ok(SquareRoot {
+                    symbol: symbol_read(&symbol)?,
+                    radicand: atom_read(&radicand)?,
+                })
+            })
+            .collect::<Result<Vec<_>>>()?;
+        let identity = BoundaryIdentity::build(
             &system,
+            &roots,
             &basis,
             &atom_read(&self.normalization)?,
             if self.plus_i0 {
@@ -1249,6 +1678,10 @@ impl StoredIdentity {
 }
 #[derive(Serialize, Deserialize)]
 enum StoredPoint {
+    Algebraic {
+        point: Box<StoredPoint>,
+        germ: Vec<(StoredAtom, RootSheet)>,
+    },
     Exact(Vec<(Vec<u8>, Vec<u8>)>),
     Derived {
         coordinates: Vec<(Vec<u8>, Vec<u8>)>,
@@ -1264,6 +1697,14 @@ enum StoredPoint {
 impl StoredPoint {
     fn encode(point: &CachedPoint) -> Result<Self> {
         match point {
+            CachedPoint::Algebraic { point, germ } => Ok(Self::Algebraic {
+                point: Box::new(Self::encode(point)?),
+                germ: germ
+                    .sheets
+                    .iter()
+                    .map(|(&s, &sheet)| Ok((symbol_bytes(s)?, sheet)))
+                    .collect::<Result<_>>()?,
+            }),
             CachedPoint::Exact(c) => Ok(Self::Exact(
                 c.iter()
                     .map(|(&s, a)| Ok((symbol_bytes(s)?, atom_bytes(a)?)))
@@ -1297,6 +1738,12 @@ impl StoredPoint {
     }
     fn decode(self) -> Result<CachedPoint> {
         match self {
+            Self::Algebraic { point, germ } => point.decode()?.with_root_germ(RootGerm {
+                sheets: germ
+                    .into_iter()
+                    .map(|(s, sheet)| Ok((symbol_read(&s)?, sheet)))
+                    .collect::<Result<_>>()?,
+            }),
             Self::Exact(c) => Ok(CachedPoint::Exact(
                 c.into_iter()
                     .map(|(s, a)| Ok((symbol_read(&s)?, atom_read(&a)?)))

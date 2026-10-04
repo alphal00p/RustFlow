@@ -1,0 +1,6 @@
+
+running 6 tests
+test geometry_tests::a_close_complex_pole_is_not_merged_with_a_real_prescribed_zero ... ok
+test geometry_tests::every_complex_root_of_a_declared_polynomial_constrains_its_detour ... ok
+test geometry_tests::shared_exact_factors_merge_across_different_polynomials_without_near_tests ... ok
+test rounding_geometry_test::a_margin_sized_obstacle_cannot_collapse_triangle_waypoints_onto_the_zero ... 

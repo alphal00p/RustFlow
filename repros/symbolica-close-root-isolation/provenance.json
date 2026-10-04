@@ -1,0 +1,73 @@
+{
+  "schema_version": 1,
+  "status": "bounded_symbolica_only_isolation_reproducer",
+  "recorded_utc": "2026-10-04T19:57:34.833688+00:00",
+  "symbolica_revision": "75f8350094b90254ee71dc2a391fde0d14b0204a",
+  "workspace_base_commit": "1383887cb42acb9c56072a76682bb56370cbabe8",
+  "cpu": 31,
+  "result": {
+    "elapsed_seconds": 20.002925920765847,
+    "limit_seconds": 20,
+    "exit_code": -15,
+    "limit_terminated": true,
+    "peak_rss_kib_sampled": 10896
+  },
+  "files": {
+    "target/symbolica-close-root-isolation-mre/minimal.rs": {
+      "sha256": "35da8dfb5ef7bd74a66b4f52bec8679b2e8e5cc6216075452e221eee8a3b092c",
+      "bytes": 988
+    },
+    "target/symbolica-close-root-isolation-mre/Cargo.toml": {
+      "sha256": "3053d97382542ac19b3b7692371639f8f6ead2eb7bd2eaacd3cdfb2a34dbded4",
+      "bytes": 651
+    },
+    "target/symbolica-close-root-isolation-mre/build.sh": {
+      "sha256": "e085613a965234526bbf5206e107759b21b79fa10b39086054c490544647f59a",
+      "bytes": 391
+    },
+    "target/symbolica-close-root-isolation-mre/mre": {
+      "sha256": "b8e3a30fbe171860a14c2cb5f33a046da4608e0cf96e696cfe49c5f0573f39cb",
+      "bytes": 142538312
+    },
+    "target/symbolica-close-root-isolation-mre/run.log": {
+      "sha256": "0fc289426e192ecff30faa327816c21cbe4e9204c6798a5635a924b123a1bcd5",
+      "bytes": 56
+    },
+    "target/symbolica-close-root-isolation-mre/result.json": {
+      "sha256": "2f7e7e2dc89706f800d13492df0a18560094ddc07acec7bc0075a38810ffc9d7",
+      "bytes": 148
+    },
+    "target/symbolica-close-root-isolation-mre/perf-report.txt": {
+      "sha256": "db6961fa92cab6b26e0997555ea3510929958b957c6af19bc8ba4fb4e403d214",
+      "bytes": 44805
+    },
+    "target/symbolica-close-root-isolation-mre/full-contour-bounded.log": {
+      "sha256": "bf6fac85f13e5b8e987447c3d3498d1191e59bcccb97c4157a912429d00b4d3c",
+      "bytes": 411
+    },
+    "target/symbolica-close-root-isolation-mre/README.md": {
+      "sha256": "b3e3eb4b8b0c380a4d1bd14517c5a53d383ddf9b79a03fc3c0e76ddf488d8c2d",
+      "bytes": 2278
+    }
+  },
+  "symbolica_rlib": {
+    "path": "target/release/deps/libsymbolica-75e897282e2131a2.rlib",
+    "sha256": "4b2f81de2fad0adf6bb701f7424c6755050d1a56d844aa9098f7d28bac5cbe4d",
+    "bytes": 303300528
+  },
+  "profile": {
+    "scope": "5-second attached sample during full contour test of same exact quadratic",
+    "frequency_hz": 99,
+    "call_graph": "dwarf,16384",
+    "report_inline": false,
+    "samples": 489,
+    "lost_samples": 0,
+    "observation": "native isolate_square_free_roots_from -> roots_hot_start, MPFR/GMP work"
+  },
+  "limits": [
+    "bounded observations do not prove nontermination",
+    "portable manifest not independently rebuilt",
+    "profile is from full contour case, not standalone minimal process",
+    "sampled RSS is not exact peak memory"
+  ]
+}

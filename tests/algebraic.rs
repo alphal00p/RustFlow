@@ -106,6 +106,7 @@ fn direct_epsilon_hierarchy_and_concurrent_sheets() {
             ],
         },
         roots,
+        nonzero_conditions: Vec::new(),
     };
     let compiled = system.compile(p).unwrap();
     let boundary = EpsilonBoundary {
@@ -298,10 +299,13 @@ fn explicit_radicand_i0_and_invalid_registry_seeds() {
     assert!(invalid.validate().is_err());
     invalid = system.clone();
     invalid.system.matrices[0][0][0] = Atom::num(1) / (Atom::var(r) + 1);
-    assert!(matches!(invalid.compile(p), Err(Error::Unsupported(_))));
+    assert!(invalid.compile(p).is_ok());
     invalid = system.clone();
     invalid.system.matrices[0][0][0] = parse!("sin(algebraic_tests::x)");
     assert!(invalid.compile(p).is_err());
+    invalid = system.clone();
+    invalid.system.matrices[0][0][0] = Atom::var(r).pow((1, 2));
+    assert!(matches!(invalid.validate(), Err(Error::Unsupported(_))));
     assert!(
         compiled
             .transport_ordinary(

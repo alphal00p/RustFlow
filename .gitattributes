@@ -4,3 +4,7 @@ fixtures/amflow-2.0/*.wl -whitespace
 # Preserve byte-identical upstream fixtures and raw profiler output.
 fixtures/performance/*.wl -whitespace
 reports/performance/*-profile.txt -whitespace
+
+# Preserve raw timing/profiler evidence for standalone native-root reproducers.
+repros/symbolica-close-root-isolation/*.log -whitespace
+repros/symbolica-close-root-isolation/perf-report.txt -whitespace

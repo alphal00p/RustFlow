@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "recorded_utc": "2026-10-04T20:37:39.465385+00:00",
+  "base_commit": "49a8e12a5861e345e36aabc836aa40d39287d2f5",
+  "scope": [
+    "Registered-root progressive RustFlowCache with explicit sheets, uncertainty propagation and binary schema3 restart",
+    "Formal native quotient inversion of root-sum denominators, original source-domain and generic epsilon-valuation retention",
+    "Exact polynomial prescriptions and certified native root disks for real-axis continuation detours",
+    "Preserved standalone native Symbolica close-root isolation performance MRE"
+  ],
+  "initial_failure": "An existing persistence test still expected schema2; updated to schema3 and explicit rejection of both schema1 and2. No production change was needed; complete release suite rerun.",
+  "checks": {
+    "release_tests": {
+      "command": "CARGO_BUILD_JOBS=8 cargo test --release --locked -p symbolica-amflow -- --test-threads=4",
+      "unit_and_integration_passed": 264,
+      "documentation_passed": 1,
+      "failed": 0,
+      "ignored": 2
+    },
+    "clippy": {
+      "command": "CARGO_BUILD_JOBS=8 cargo clippy --release -p symbolica-amflow --all-targets -- -D warnings",
+      "exit_code": 0,
+      "dependency_warnings": "Existing RustRed warnings; checkout unchanged"
+    },
+    "format": {
+      "command": "cargo fmt -p symbolica-amflow -- --check",
+      "exit_code": 0
+    }
+  },
+  "logs": {
+    "target/rustflow-algebraic-cache-tests.log": {
+      "sha256": "4e426bf955bd357fc759f7da23a44c9f6a2430e3ad13fd7d7f3afbe6872d04c6"
+    },
+    "target/rustflow-algebraic-cache-clippy.log": {
+      "sha256": "ad121622a67292a2b49053619349eeb85f33dad2e27edd371fe40a4d39077d26"
+    },
+    "target/rustflow-algebraic-cache-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "target/rustflow-algebraic-cache-tests-schema-expectation.log": {
+      "sha256": "00b391a0fb0d2a053bd1e4e1497817988b1271ebcc71d5fac3fc915da33832e8"
+    }
+  },
+  "source_sha256": {
+    "src/algebraic.rs": "30b43461c9615e0ca1a70cbe1dd90c23724f96bf6147e1bdbc41f06817cff286",
+    "src/algebraic/quotient.rs": "543b34a27d485d3c5450c65cff7defbc24106c9560854615ebfb3b0c84f75117",
+    "src/contour.rs": "50f8dc8711daf95ad572879821a1a0b599dbf0fb2dc009a2b6a9fe191a942fb6",
+    "src/diffexp.rs": "58bee03c34b05f4c458cdb4cb335a354e42120d5f3fe7fd36b3f57ac2f3297e0",
+    "src/physical_transport.rs": "7ca826a624ff673db75d925d88bb2aa3dbd097d309870198b8c5c40d135ec74c",
+    "src/physical_conditions.rs": "6e0fbd5cfb9e05b6a093fa9e8c6554ef6307f6f7606d43d4c50b9d4a5e70fefe",
+    "src/transport_cache.rs": "999de87aac188a33147e7e86eb2bc0c4922aa88d9676c5fb6c96423bc5cc2683",
+    "tests/physical_conditions.rs": "e4241c6867a16cf584a7dc79f9577360b0d8fe0124740d4d8ea39bc0683f2a07",
+    "tests/algebraic.rs": "1897f156399853d7e1648f0078bd4f72afc7a6201e068625c767d8c93b86c39e",
+    "tests/algebraic_cache.rs": "30995345f9e2dc3b92f593418abff333d7bd13e484ee4f1d3d3419cbc2568a83",
+    "tests/algebraic_quotients.rs": "f9bf6aeedb48759c150e019524df570334bec13e3b817fe861bf11b1ff3079b6",
+    "tests/prescribed_contours.rs": "896f89fbb665addf59230fd727e5a5d8d6207dd694f4a2c087def275deb5ad3d"
+  },
+  "related_reports": [
+    "reports/validation/2026-10-04-algebraic-cache.json",
+    "reports/validation/2026-10-04-prescribed-contours.json"
+  ],
+  "limitations": [
+    "Full AMFlow/DiffExp feature and performance parity remains incomplete",
+    "Cache orchestration admits regular real straight paths with real nonzero radicands and fixed local germs; caller supplies logarithmic/physical homotopy policy",
+    "Formal quotient norms conservatively reject some sheet-specific removable poles",
+    "Physical polynomial prescriptions are explicit; no automatic inference from a process",
+    "Native root isolation/refinement can exceed practical limits for very close roots; preserved isolated MRE is intentionally excluded from routine test execution",
+    "Full one-loop five-point regression was validated at prior49a8e12; it is ignored in this routine gate and latest multivariate physics-cache measurements are separate",
+    "Original-paper four-target acceptance is prior evidence, not rerun in this milestone",
+    "Full two-loop five-point/full Higgs+jet, algebraic singular endpoints and general cut boundary recursion remain incomplete",
+    "RustRed checkout and 12-slot dispatch remain unchanged"
+  ]
+}

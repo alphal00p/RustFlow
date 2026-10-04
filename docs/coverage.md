@@ -54,9 +54,30 @@ with winding and per-call sheet tests, uncertainty-aware target projection from
 cached masters, and faster [33,000-point cache selection](cache-selection.md).
 The complete [unequal-mass banana](banana-unequal.md) checks all 75 coefficients
 against original DiffExp, independent routes, increased precision/order, and
-analytic tadpole products. Full five-point and full Higgs+jet amplitude benchmarks,
-algebraic singular endpoints, automatic per-polynomial physical contours and
-algebraic cache reuse remain pending; these tests do not establish full parity.
+analytic tadpole products. These tests do not establish full parity.
+
+The [multivariate algebraic milestone](../reports/validation/2026-10-04-algebraic-kinematic.json)
+passes 239 release unit/integration tests plus one documentation test, Clippy and
+formatting. It adds exact physical dlog pullback, faster root charts and shared
+native reduction-graph expansion. The complete
+[13-master planar one-loop five-point benchmark](fivepoint-planar.md) then passes
+all 65 coefficient comparisons against live original DiffExp and ancillary data,
+with three independently evaluated precision/order profiles. Its explicit
+production regression took 630.50 seconds; it is opt-in for routine test runs.
+
+The [algebraic cache and contour release gate](../reports/validation/2026-10-04-algebraic-cache-release.json)
+passes 264 unit/integration tests and one documentation test, with strict Clippy
+and formatting. The full five-point regression and a native root-isolation
+performance reproducer remain explicit opt-in tests.
+
+The current [prescribed-contour interface](prescribed-contours.md) accepts
+explicit polynomial prescriptions. It does not infer them from a process.
+Registered roots now participate in the same [progressive cache](algebraic-cache.md),
+with explicit local sheet choices, inherited uncertainty and binary restart.
+This entrypoint admits regular real straight paths with real, nonzero radicands;
+complex or threshold-crossing cached transport remains pending. Full two-loop
+five-point and full Higgs+jet amplitude benchmarks and algebraic singular
+endpoints also remain incomplete.
 
 The original paper's mandatory numerical acceptance gate passes: all four
 two-loop targets at s=30, t=-10/3, m²=1 have automatically generated Laurent

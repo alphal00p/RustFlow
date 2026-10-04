@@ -246,28 +246,16 @@ impl CompiledEpsilonSystem {
             ));
         }
         let n = self.rows.dimension();
-        let mut intervals = vec![(start.clone(), end.clone(), 0usize)];
-        let mut exponent = p.real(0);
-        while let Some((start, end, depth)) = intervals.pop() {
-            let radius = p.norm(&p.sub(&end, &start));
-            if !radius.is_finite() {
-                return Err(Error::Accuracy(
-                    "error-bound segment length exceeds numerical range".into(),
-                ));
-            }
-            if radius == p.real(0) {
-                continue;
-            }
+        integrate_error_amplification(p, start, end, |start, radius| {
             let mut norm = p.real(0);
-            let mut valid = true;
             for (i, row) in self.rows.polynomial_rows.iter().enumerate() {
                 let denominator =
-                    shift_polynomial(p, &row.denominator, &start, row.denominator.len() - 1);
+                    shift_polynomial(p, &row.denominator, start, row.denominator.len() - 1);
                 let mut lower = p.norm(&denominator[0]);
                 let mut power = radius.clone();
                 for a in denominator.iter().skip(1) {
                     lower -= p.norm(a) * &power;
-                    power *= &radius;
+                    power *= radius;
                 }
                 if !lower.is_finite() {
                     return Err(Error::Accuracy(
@@ -275,17 +263,16 @@ impl CompiledEpsilonSystem {
                     ));
                 }
                 if lower <= p.real(0) {
-                    valid = false;
-                    break;
+                    return Ok(None);
                 }
                 let mut row_norms = vec![p.real(0); self.count];
                 for (column, coefficients) in &row.entries {
-                    let shifted = shift_polynomial(p, coefficients, &start, coefficients.len() - 1);
+                    let shifted = shift_polynomial(p, coefficients, start, coefficients.len() - 1);
                     let mut upper = p.real(0);
                     let mut power = p.real(1);
                     for a in shifted {
                         upper += p.norm(&a) * &power;
-                        power *= &radius;
+                        power *= radius;
                     }
                     let bound = upper / &lower;
                     let shift = column / n;
@@ -306,32 +293,98 @@ impl CompiledEpsilonSystem {
                     }
                 }
             }
-            if valid {
-                exponent += radius * norm;
-            } else {
-                if depth >= 32 {
-                    return Err(Error::Accuracy(
-                        "cannot bound cached boundary error along this path".into(),
-                    ));
-                }
-                let middle = p.scale(&p.add(&start, &end), 1, 2);
-                if middle == start || middle == end {
-                    return Err(Error::Accuracy(
-                        "error-bound subdivision lost to rounding".into(),
-                    ));
-                }
-                intervals.push((middle.clone(), end, depth + 1));
-                intervals.push((start, middle, depth + 1));
-            }
-        }
-        let amplification = p.exp(&C::new(exponent, p.real(0))).re;
-        if !amplification.is_finite() {
+            Ok(Some(norm))
+        })
+    }
+}
+
+/// Common disk-subdivision/Gronwall estimate for rational and registered-root
+/// systems. This uses finite-precision norms, not directed interval arithmetic.
+pub(crate) fn integrate_error_amplification(
+    p: Precision,
+    start: &C,
+    end: &C,
+    mut matrix_norm: impl FnMut(&C, &Float) -> Result<Option<Float>>,
+) -> Result<Float> {
+    let mut intervals = vec![(start.clone(), end.clone(), 0usize)];
+    let mut exponent = p.real(0);
+    while let Some((start, end, depth)) = intervals.pop() {
+        let radius = p.norm(&p.sub(&end, &start));
+        if !radius.is_finite() {
             return Err(Error::Accuracy(
-                "boundary-error amplification exceeds numerical range".into(),
+                "error-bound segment length exceeds numerical range".into(),
             ));
         }
-        Ok(amplification)
+        if radius == p.real(0) {
+            continue;
+        }
+        if let Some(norm) = matrix_norm(&start, &radius)? {
+            if !norm.is_finite() || norm < p.real(0) {
+                return Err(Error::Accuracy(
+                    "error-bound matrix norm exceeds numerical range".into(),
+                ));
+            }
+            exponent += radius * norm;
+        } else {
+            if depth >= 32 {
+                return Err(Error::Accuracy(
+                    "cannot bound cached boundary error along this path".into(),
+                ));
+            }
+            let middle = p.scale(&p.add(&start, &end), 1, 2);
+            if middle == start || middle == end {
+                return Err(Error::Accuracy(
+                    "error-bound subdivision lost to rounding".into(),
+                ));
+            }
+            intervals.push((middle.clone(), end, depth + 1));
+            intervals.push((start, middle, depth + 1));
+        }
     }
+    let amplification = p.exp(&C::new(exponent, p.real(0))).re;
+    if !amplification.is_finite() {
+        return Err(Error::Accuracy(
+            "boundary-error amplification exceeds numerical range".into(),
+        ));
+    }
+    Ok(amplification)
+}
+
+pub(crate) fn rational_disk_bound(
+    p: Precision,
+    value: &crate::ode::NumericRational,
+    center: &C,
+    radius: &Float,
+) -> Result<Option<Float>> {
+    let denominator = shift_polynomial(p, &value.denominator, center, value.denominator.len() - 1);
+    let mut lower = p.norm(&denominator[0]);
+    let mut power = radius.clone();
+    for a in denominator.iter().skip(1) {
+        lower -= p.norm(a) * &power;
+        power *= radius;
+    }
+    if !lower.is_finite() {
+        return Err(Error::Accuracy(
+            "error-bound denominator exceeds numerical range".into(),
+        ));
+    }
+    if lower <= p.real(0) {
+        return Ok(None);
+    }
+    let numerator = shift_polynomial(p, &value.numerator, center, value.numerator.len() - 1);
+    let mut upper = p.real(0);
+    let mut power = p.real(1);
+    for a in numerator {
+        upper += p.norm(&a) * &power;
+        power *= radius;
+    }
+    let bound = upper / lower;
+    if !bound.is_finite() {
+        return Err(Error::Accuracy(
+            "error-bound numerator exceeds numerical range".into(),
+        ));
+    }
+    Ok(Some(bound))
 }
 
 impl SeriesSystem for CompiledEpsilonSystem {
@@ -550,6 +603,28 @@ pub fn transport_epsilon(
     context: &RunContext,
     save_segments: bool,
 ) -> Result<EpsilonSolution> {
+    refine_epsilon_transport(options, context, save_segments, |p, refined| {
+        let compiled = system.compile(p, &Default::default())?;
+        let points = waypoints
+            .iter()
+            .map(|a| p.eval(a, &Default::default()))
+            .collect::<Result<Vec<_>>>()?;
+        compiled.transport(
+            &boundary_provider(p)?,
+            &points,
+            refined,
+            context,
+            save_segments,
+        )
+    })
+}
+
+pub(crate) fn refine_epsilon_transport(
+    options: &FlowOptions,
+    context: &RunContext,
+    save_segments: bool,
+    mut run: impl FnMut(Precision, &FlowOptions) -> Result<EpsilonSolution>,
+) -> Result<EpsilonSolution> {
     options.validate()?;
     let mut previous: Option<EpsilonSolution> = None;
     for attempt in 0..=options.max_precision_attempts {
@@ -565,18 +640,7 @@ pub fn transport_epsilon(
             .ok_or_else(|| Error::Limit("series order overflow".into()))?;
         refined.validate()?;
         let p = Precision::decimal(refined.digits + refined.guard_digits)?;
-        let compiled = system.compile(p, &Default::default())?;
-        let points = waypoints
-            .iter()
-            .map(|a| p.eval(a, &Default::default()))
-            .collect::<Result<Vec<_>>>()?;
-        let mut result = compiled.transport(
-            &boundary_provider(p)?,
-            &points,
-            &refined,
-            context,
-            save_segments,
-        )?;
+        let mut result = run(p, &refined)?;
         if let Some(old) = &previous {
             if old.leading != result.leading {
                 return Err(Error::InvalidInput(

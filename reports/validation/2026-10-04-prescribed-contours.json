@@ -1,0 +1,133 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-04T19:59:50.619915+00:00",
+  "status": "standalone_geometry_and_analytic_transport_passed",
+  "scope": "target-only contour planner using native exact root certificates and existing archived rational transport; no production/dependency edits",
+  "base_commit": "1383887cb42acb9c56072a76682bb56370cbabe8",
+  "cpu": 31,
+  "tests": {
+    "passed": 9,
+    "failed": 0,
+    "ignored": 1,
+    "ignored_reason": "preserved complete margin-collapse polynomial triggers native Symbolica root-isolation performance issue; exact-disk assertion runs separately",
+    "test_runner_seconds": "0.38"
+  },
+  "analytic_system": {
+    "matrix": "1/(2*(x-1/5)) + 1/(4*(x-4/5))",
+    "initial_point": "0",
+    "initial_value": "1",
+    "end_point": "1",
+    "polynomial_prescription": "(x-1/5)*(x-4/5)+i0",
+    "expected_forward": "1+i",
+    "expected_reverse": "1",
+    "measurements": [
+      {
+        "working_digits": 60,
+        "expansion_order": 64,
+        "requested_digits": 24,
+        "value": "(1.0000000000000000000000000000000000000000000000000000000510899144+1.0000000000000000000000000000000000000000000000000000000511102844i)",
+        "analytic_error": "7.2266455081721967473902489042803014490513080865204152460954861459e-56",
+        "reverse_error": "7.7016623278192015288109854161468849416394547201344689802358137825e-56",
+        "forward_steps": 186,
+        "reverse_steps": 186
+      },
+      {
+        "working_digits": 80,
+        "expansion_order": 96,
+        "requested_digits": 36,
+        "value": "(1.00000000000000000000000000000000000000000000000000000000000000000000000000000069716+1.00000000000000000000000000000000000000000000000000000000000000000000000000000199242i)",
+        "analytic_error": "2.110871649630927717126635286049126356435629632788602355446738354384838804013052230126e-78",
+        "reverse_error": "1.115742755424132759974818468872841764796955067113857603062496773854658200397575427366e-78",
+        "forward_steps": 100,
+        "reverse_steps": 100
+      }
+    ],
+    "refinement_difference": "7.226645508172196747390058703763194269045603198329177453364529619248138368226812408016e-56"
+  },
+  "files": {
+    "target/prescribed-contour/contour.rs": {
+      "sha256": "50f8dc8711daf95ad572879821a1a0b599dbf0fb2dc009a2b6a9fe191a942fb6",
+      "bytes": 19161
+    },
+    "target/prescribed-contour/probe.rs": {
+      "sha256": "507fe358deb8cc2b07aa1a81e7f3ec3e01526f0b18ad7777522b5baed4808e27",
+      "bytes": 2591
+    },
+    "target/prescribed-contour/probe_family.rs": {
+      "sha256": "d183bbbfd1c6e1722656137aff2567b898e82b458d372f9737c0af82536f24e2",
+      "bytes": 1418
+    },
+    "target/prescribed-contour/review/geometry_tests.rs": {
+      "sha256": "909410d4e5bd60fcc09cbe5f4a81b0898e5e0e6c69610a8c7dddfb9d351e8c4b",
+      "bytes": 6660
+    },
+    "target/prescribed-contour/review/rounding_geometry_test.rs": {
+      "sha256": "0025ba50654ed75ca01759f17d09b9b14d2842225906cbc288ec9899404e8c2c",
+      "bytes": 1561
+    },
+    "target/prescribed-contour/build.sh": {
+      "sha256": "02faa876f301d267f119a1774e814ece7b38f68ec59e1345b968c8708cdb0434",
+      "bytes": 433
+    },
+    "target/prescribed-contour/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "target/prescribed-contour/tests": {
+      "sha256": "d7c88aeb66cd16a05109a9397f319295568043296b613f61c3c5fd2a0c09aad9",
+      "bytes": 577850392
+    },
+    "target/prescribed-contour/tests-scientific.log": {
+      "sha256": "468b6485db2919f46aa0b8c3cf40867102a53f7bbdcb88389dd20d1040aaf0df",
+      "bytes": 2172
+    },
+    "target/prescribed-contour/README.md": {
+      "sha256": "e31a8ba26a12e7ad15c8d0d836cd146eeaadb358aa4315a3b29cebcf987cd592",
+      "bytes": 5430
+    }
+  },
+  "linked_libraries": {
+    "target/algebraic-engine/deps/libsymbolica_amflow.rlib": {
+      "sha256": "fbcd037fa48245102747e4c37b5fc17dc7655af13301390d425610ed3b2042e6",
+      "bytes": 351692312
+    },
+    "target/release/deps/libsymbolica-75e897282e2131a2.rlib": {
+      "sha256": "4b2f81de2fad0adf6bb701f7424c6755050d1a56d844aa9098f7d28bac5cbe4d",
+      "bytes": 303300528
+    }
+  },
+  "symbolica_revision": "75f8350094b90254ee71dc2a391fde0d14b0204a",
+  "native_isolation_mre_provenance": {
+    "path": "target/symbolica-close-root-isolation-mre/provenance.json",
+    "sha256": "99796d70c1a99c2a61d4ea1e1e92126e83aaa2b60203c0a081c4055747e61b3b",
+    "bytes": 2819
+  },
+  "limits": [
+    "only exact real univariate polynomial prescriptions and real endpoints",
+    "multiple prescribed real zeros unsupported",
+    "conservative disk overlap can return Accuracy",
+    "native isolation/refinement synchronous calls cannot be preempted by cancellation token",
+    "observed extra analytic accuracy is not a general guarantee",
+    "no root Cargo integration build was run by this subagent"
+  ],
+  "integration_status": "central release test, strict Clippy and formatting gate passed; see centralized_validation",
+  "integrated_files": {
+    "src/contour.rs": {
+      "sha256": "50f8dc8711daf95ad572879821a1a0b599dbf0fb2dc009a2b6a9fe191a942fb6",
+      "bytes": 19161
+    },
+    "tests/prescribed_contours.rs": {
+      "sha256": "896f89fbb665addf59230fd727e5a5d8d6207dd694f4a2c087def275deb5ad3d",
+      "bytes": 10278
+    },
+    "docs/prescribed-contours.md": {
+      "sha256": "0907a32892e1cade1b4953a62d8ad08af4d623ff1a705b63f0746d0006ab4cc1",
+      "bytes": 5406
+    }
+  },
+  "centralized_validation": {
+    "status": "passed",
+    "report": "reports/validation/2026-10-04-algebraic-cache-release.json",
+    "note": "Latest integrated production source and complete Cargo suite are recorded separately from the earlier standalone measurements."
+  }
+}

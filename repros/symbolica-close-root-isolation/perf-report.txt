@@ -1,0 +1,419 @@
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 489  of event 'cpu/cycles/Pu'
+# Event count (approx.): 13654094023
+#
+# Children      Self  Command          Shared Object     Symbol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
+# ........  ........  ...............  ................  ........................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+#
+    45.69%    45.69%  rounding_geomet  tests             [.] __gmpn_mul_basecase_zen
+            |          
+             --20.59%--__gmpn_mul_basecase_zen
+
+    14.85%    14.85%  rounding_geomet  tests             [.] __gmpn_sub_n_x86_64
+            |          
+             --12.57%--__gmpn_sub_n_x86_64
+
+    13.35%    13.16%  rounding_geomet  tests             [.] __gmpn_add_n_x86_64
+            |          
+             --10.45%--__gmpn_add_n_x86_64
+
+     9.64%     0.00%  rounding_geomet  tests             [.] __gmpn_mulmod_bnm1
+            |
+            ---__gmpn_mulmod_bnm1
+               |          
+               |--4.87%--__gmpn_mul_fft
+               |          |          
+               |           --4.44%--mpn_mul_fft_internal.isra.0
+               |          
+                --4.77%--__gmpn_mulmod_bnm1
+                          |          
+                          |--2.69%--__gmpn_mulmod_bnm1
+                          |          
+                           --2.08%--__gmpn_mul_fft
+
+     9.44%     0.00%  rounding_geomet  tests             [.] <std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::initialize::<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::get_or_init<<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_roots::{closure#0}>::{closure#0}, !>
+            |
+            ---<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::initialize::<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::get_or_init<<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_roots::{closure#0}>::{closure#0}, !>
+               <std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::initialize<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::get_or_init<<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_roots::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::roots::RootCache>::build_root_multiset::<alloc::vec::Vec<(alloc::sync::Arc<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>, usize)>>
+               <symbolica::poly::univariate::roots::RootCache>::root_snapshots
+               <symbolica::poly::univariate::roots::RootCache>::root_set
+               <std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>
+               <std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --7.50%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+                          |          
+                          |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+                          |          |          
+                          |           --3.15%--mpfr_mul
+                          |                     |          
+                          |                      --2.94%--__gmpn_mul_n
+                          |                                __gmpn_nussbaumer_mul
+                          |                                __gmpn_mulmod_bnm1
+                          |          
+                           --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     9.44%     0.00%  rounding_geomet  tests             [.] <std::sys::sync::once::futex::Once>::call
+            |
+            ---<std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::initialize<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::get_or_init<<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_roots::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::roots::RootCache>::build_root_multiset::<alloc::vec::Vec<(alloc::sync::Arc<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>, usize)>>
+               <symbolica::poly::univariate::roots::RootCache>::root_snapshots
+               <symbolica::poly::univariate::roots::RootCache>::root_set
+               <std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>
+               <std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --7.50%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+                          |          
+                          |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+                          |          |          
+                          |           --3.15%--mpfr_mul
+                          |                     |          
+                          |                      --2.94%--__gmpn_mul_n
+                          |                                __gmpn_nussbaumer_mul
+                          |                                __gmpn_mulmod_bnm1
+                          |          
+                           --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     9.44%     0.00%  rounding_geomet  tests             [.] <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::initialize<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::get_or_init<<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_roots::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+            |
+            ---<std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::initialize<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::get_or_init<<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_roots::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::roots::RootCache>::build_root_multiset::<alloc::vec::Vec<(alloc::sync::Arc<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>, usize)>>
+               <symbolica::poly::univariate::roots::RootCache>::root_snapshots
+               <symbolica::poly::univariate::roots::RootCache>::root_set
+               <std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>
+               <std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --7.50%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+                          |          
+                          |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+                          |          |          
+                          |           --3.15%--mpfr_mul
+                          |                     |          
+                          |                      --2.94%--__gmpn_mul_n
+                          |                                __gmpn_nussbaumer_mul
+                          |                                __gmpn_mulmod_bnm1
+                          |          
+                           --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     9.44%     0.00%  rounding_geomet  tests             [.] <symbolica::poly::univariate::roots::RootCache>::build_root_multiset::<alloc::vec::Vec<(alloc::sync::Arc<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>, usize)>>
+            |
+            ---<symbolica::poly::univariate::roots::RootCache>::build_root_multiset::<alloc::vec::Vec<(alloc::sync::Arc<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>, usize)>>
+               <symbolica::poly::univariate::roots::RootCache>::root_snapshots
+               <symbolica::poly::univariate::roots::RootCache>::root_set
+               <std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>
+               <std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --7.50%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+                          |          
+                          |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+                          |          |          
+                          |           --3.15%--mpfr_mul
+                          |                     |          
+                          |                      --2.94%--__gmpn_mul_n
+                          |                                __gmpn_nussbaumer_mul
+                          |                                __gmpn_mulmod_bnm1
+                          |          
+                           --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     9.44%     0.00%  rounding_geomet  tests             [.] <symbolica::poly::univariate::roots::RootCache>::root_snapshots
+            |
+            ---<symbolica::poly::univariate::roots::RootCache>::root_snapshots
+               <symbolica::poly::univariate::roots::RootCache>::root_set
+               <std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>
+               <std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --7.50%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+                          |          
+                          |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+                          |          |          
+                          |           --3.15%--mpfr_mul
+                          |                     |          
+                          |                      --2.94%--__gmpn_mul_n
+                          |                                __gmpn_nussbaumer_mul
+                          |                                __gmpn_mulmod_bnm1
+                          |          
+                           --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     9.44%     0.00%  rounding_geomet  tests             [.] <symbolica::poly::univariate::roots::RootCache>::root_set
+            |
+            ---<symbolica::poly::univariate::roots::RootCache>::root_set
+               <std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>
+               <std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --7.50%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+                          |          
+                          |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+                          |          |          
+                          |           --3.15%--mpfr_mul
+                          |                     |          
+                          |                      --2.94%--__gmpn_mul_n
+                          |                                __gmpn_nussbaumer_mul
+                          |                                __gmpn_mulmod_bnm1
+                          |          
+                           --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     9.44%     0.00%  rounding_geomet  tests             [.] <std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>
+            |
+            ---<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>
+               <std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --7.50%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+                          |          
+                          |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+                          |          |          
+                          |           --3.15%--mpfr_mul
+                          |                     |          
+                          |                      --2.94%--__gmpn_mul_n
+                          |                                __gmpn_nussbaumer_mul
+                          |                                __gmpn_mulmod_bnm1
+                          |          
+                           --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     9.44%     0.00%  rounding_geomet  tests             [.] <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+            |
+            ---<std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --7.50%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+                          |          
+                          |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+                          |          |          
+                          |           --3.15%--mpfr_mul
+                          |                     |          
+                          |                      --2.94%--__gmpn_mul_n
+                          |                                __gmpn_nussbaumer_mul
+                          |                                __gmpn_mulmod_bnm1
+                          |          
+                           --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     9.44%     0.00%  rounding_geomet  tests             [.] <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+            |
+            ---<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --7.50%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+                          |          
+                          |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+                          |          |          
+                          |           --3.15%--mpfr_mul
+                          |                     |          
+                          |                      --2.94%--__gmpn_mul_n
+                          |                                __gmpn_nussbaumer_mul
+                          |                                __gmpn_mulmod_bnm1
+                          |          
+                           --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     9.44%     0.00%  rounding_geomet  tests             [.] <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+            |
+            ---<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --7.50%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+                          |          
+                          |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+                          |          |          
+                          |           --3.15%--mpfr_mul
+                          |                     |          
+                          |                      --2.94%--__gmpn_mul_n
+                          |                                __gmpn_nussbaumer_mul
+                          |                                __gmpn_mulmod_bnm1
+                          |          
+                           --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     9.43%     0.00%  rounding_geomet  tests             [.] __gmpn_mul_fft
+            |
+            ---__gmpn_mul_fft
+               |          
+                --7.76%--mpn_mul_fft_internal.isra.0
+                          |          
+                          |--2.97%--mpn_fft_fft
+                          |          |          
+                          |           --2.76%--mpn_fft_fft
+                          |                     |          
+                          |                      --2.11%--mpn_fft_fft
+                          |                                mpn_fft_fft
+                          |          
+                           --2.92%--mpn_fft_mul_modF_K
+
+     8.14%     0.00%  rounding_geomet  tests             [.] __gmpn_mul_n
+            |
+            ---__gmpn_mul_n
+               |          
+                --6.91%--__gmpn_nussbaumer_mul
+                          __gmpn_mulmod_bnm1
+                          |          
+                          |--3.53%--__gmpn_mulmod_bnm1
+                          |          
+                           --3.37%--__gmpn_mul_fft
+                                     |          
+                                      --3.16%--mpn_mul_fft_internal.isra.0
+
+     7.95%     0.00%  rounding_geomet  tests             [.] __gmpn_nussbaumer_mul
+            |
+            ---__gmpn_nussbaumer_mul
+               __gmpn_mulmod_bnm1
+               |          
+               |--4.14%--__gmpn_mulmod_bnm1
+               |          |          
+               |           --2.27%--__gmpn_mulmod_bnm1
+               |          
+                --3.81%--__gmpn_mul_fft
+                          |          
+                           --3.59%--mpn_mul_fft_internal.isra.0
+
+     7.76%     0.21%  rounding_geomet  tests             [.] mpn_mul_fft_internal.isra.0
+            |          
+             --7.55%--mpn_mul_fft_internal.isra.0
+                       |          
+                       |--2.97%--mpn_fft_fft
+                       |          |          
+                       |           --2.76%--mpn_fft_fft
+                       |                     |          
+                       |                      --2.11%--mpn_fft_fft
+                       |                                mpn_fft_fft
+                       |          
+                        --2.92%--mpn_fft_mul_modF_K
+
+     7.50%     0.00%  rounding_geomet  tests             [.] <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+            |
+            ---<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+               |          
+               |--4.21%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+               |          |          
+               |           --3.15%--mpfr_mul
+               |                     |          
+               |                      --2.94%--__gmpn_mul_n
+               |                                __gmpn_nussbaumer_mul
+               |                                __gmpn_mulmod_bnm1
+               |          
+                --2.06%--<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+     6.04%     0.21%  rounding_geomet  tests             [.] mpfr_mul
+            |          
+             --5.83%--mpfr_mul
+                       |          
+                       |--3.14%--__gmpn_mul_n
+                       |          __gmpn_nussbaumer_mul
+                       |          __gmpn_mulmod_bnm1
+                       |          
+                        --2.69%--mpfr_mul
+                                  __gmpn_mul
+
+     4.44%     0.00%  rounding_geomet  tests             [.] __gmpn_divrem
+            |
+            ---__gmpn_divrem
+               |          
+                --4.22%--__gmpn_tdiv_qr
+                          |          
+                           --3.60%--mpn_mu_div_qr2
+                                     |          
+                                      --2.52%--__gmpn_preinv_mu_div_qr
+
+     4.22%     0.00%  rounding_geomet  tests             [.] __gmpn_tdiv_qr
+            |
+            ---__gmpn_tdiv_qr
+               |          
+                --3.60%--mpn_mu_div_qr2
+                          |          
+                           --2.52%--__gmpn_preinv_mu_div_qr
+
+     4.21%     0.00%  rounding_geomet  tests             [.] <numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+            |
+            ---<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as core::ops::arith::Div<&numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>::div
+               |          
+                --3.15%--mpfr_mul
+                          |          
+                           --2.94%--__gmpn_mul_n
+                                     __gmpn_nussbaumer_mul
+                                     __gmpn_mulmod_bnm1
+
+     3.60%     0.00%  rounding_geomet  tests             [.] mpn_mu_div_qr2
+            |
+            ---mpn_mu_div_qr2
+               |          
+                --2.52%--__gmpn_preinv_mu_div_qr
+
+     3.55%     2.94%  rounding_geomet  tests             [.] __gmpn_lshiftc_zen
+            |
+            ---__gmpn_lshiftc_zen
+
+     3.09%     0.00%  rounding_geomet  tests             [.] __gmpn_mul
+            |
+            ---__gmpn_mul
+               |          
+                --2.05%--__gmpn_mul_n
+
+     2.97%     1.90%  rounding_geomet  tests             [.] mpn_fft_fft
+     2.92%     0.21%  rounding_geomet  tests             [.] mpn_fft_mul_modF_K
+            |          
+             --2.71%--mpn_fft_mul_modF_K
+
+     2.77%     0.00%  rounding_geomet  tests             [.] mpfr_div
+            |
+            ---mpfr_div
+
+     2.74%     2.74%  rounding_geomet  tests             [.] mpn_fft_mul_2exp_modF
+            |
+            ---<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::initialize::<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::get_or_init<<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_roots::{closure#0}>::{closure#0}, !>
+               <std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::initialize<<std::sync::once_lock::OnceLock<alloc::vec::Vec<symbolica::poly::univariate::roots::RootMultisetEntry>>>::get_or_init<<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_roots::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::roots::RootCache>::build_root_multiset::<alloc::vec::Vec<(alloc::sync::Arc<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>, usize)>>
+               <symbolica::poly::univariate::roots::RootCache>::root_snapshots
+               <symbolica::poly::univariate::roots::RootCache>::root_set
+               <std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>
+               <std::sys::sync::once::futex::Once>::call
+               <std::sync::once::Once>::call_once_force::<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::initialize<<std::sync::once_lock::OnceLock<std::sync::poison::rwlock::RwLock<alloc::vec::Vec<symbolica::poly::univariate::roots::CachedRoot>>>>::get_or_init<<symbolica::poly::univariate::roots::RootCache>::root_set::{closure#0}>::{closure#0}, !>::{closure#0}>::{closure#0}
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::rational::FractionField<numerica::domains::integer::IntegerRing>>>::isolate_square_free_roots
+               <symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::rational::Fraction<numerica::domains::integer::IntegerRing>>>>>::isolate_square_free_roots_from
+               |          
+                --2.09%--<symbolica::poly::univariate::UnivariatePolynomial<numerica::domains::float::field::FloatField<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float>>>>::roots_hot_start
+
+     2.53%     2.31%  rounding_geomet  tests             [.] __gmpn_lshift_zen
+            |          
+             --2.32%--__gmpn_lshift_zen
+
+     2.52%     0.00%  rounding_geomet  tests             [.] __gmpn_preinv_mu_div_qr
+            |
+            ---__gmpn_preinv_mu_div_qr
+
+     2.48%     2.48%  rounding_geomet  tests             [.] __gmpn_toom22_mul
+     2.12%     0.00%  rounding_geomet  tests             [.] mpfr_divhigh_n
+            |
+            ---mpfr_divhigh_n
+
+     2.06%     0.00%  rounding_geomet  tests             [.] <numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+            |
+            ---<numerica::domains::float::complex::Complex<numerica::domains::float::multiprecision::Float> as numerica::domains::float::FloatLike>::inv
+
+
+
+#
+# (Tip: If you have debuginfo enabled, try: perf report -s sym,srcline)
+#

@@ -25,3 +25,9 @@ One standalone CPU31 run of the implemented selection algorithm measured:
 Each selected point and MPFR cost matched exactly. The optimized queries checked one path instead of 33,000; all 33,000 compatible candidates still received cheap distance pricing. Peak process RSS was 159,744 KiB, including storage and allocator retention. These are single-run observations, not a statistical speedup guarantee. Full settings, numerical scope, source/binary hashes and raw measurements are preserved in [the validation report](../reports/validation/2026-10-04-cache-selection.json).
 
 No exact/MPFR spatial index was found in the consumed Symbolica/HEPKit APIs or dependencies. Future indexing should follow measurements and preserve rigorous distance bounds, identity/range filters, route admissibility and the same tie rules. A generic custom transport policy need not assign an exact coordinate hit the cheapest cost.
+
+Registered-root systems use this same selection and binary bank. Their point
+keys include the local root germ, so opposite sheets at identical coordinates
+remain distinct and exact hits cannot cross sheets. The regular-real admission
+rules, shared precision checks and schema-3 compatibility policy are documented
+in [Registered roots in the physical boundary cache](algebraic-cache.md).

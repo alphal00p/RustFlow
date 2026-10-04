@@ -8,6 +8,7 @@ pub mod benchmarks;
 pub mod boundary;
 mod bubble;
 pub mod cache;
+pub mod contour;
 pub mod cuts;
 pub mod diffexp;
 pub mod engine;

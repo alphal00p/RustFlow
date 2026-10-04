@@ -81,7 +81,9 @@ supports persistent transport caches across processes.
   boundaries, transports epsilon coefficients, and adds verified intermediate
   points and the destination to `RustFlowCache`. Binary snapshots can be loaded
   before the next request. Regular straight paths are currently supported by
-  this orchestration interface.
+  this orchestration interface. [`RustFlow::new_algebraic`](docs/algebraic-cache.md)
+  uses the same bank with explicit root germs and retains their sheets across
+  regular real paths and binary restart.
 - `PreparedPhysicalFamily` derives a common physical differential basis from a
   family and appends independently verified AMF/FT seed values to the same bank.
   Original reduction assumptions and physical chart restrictions remain part of
@@ -90,7 +92,13 @@ supports persistent transport caches across processes.
   with propagated uncertainty.
 - [`algebraic::AlgebraicSystem`](docs/algebraic.md) transports supplied systems
   containing registered square roots on explicit regular contours. Each call
-  tracks its own sheets through accepted steps and contour windings.
+  tracks its own sheets through accepted steps and contour windings. Multivariate
+  dlog construction and exact pullback preserve root relations and source domains.
+  The [five-point regression](docs/fivepoint-planar.md) checks all 13 one-loop
+  masters through epsilon power four against original DiffExp.
+- [`contour::PrescribedContour`](docs/prescribed-contours.md) constructs real-axis
+  detours from explicit polynomial prescriptions, retaining exact root identities
+  and certified isolation disks from Symbolica.
 - `hepkit::GraphIntegral` retains a native HEPKit graph and delegates routing,
   contraction, denominator completion and scalar numerator rewriting to its
   Linnet/Spenso interfaces. `solve_integral_combinations` evaluates the resulting

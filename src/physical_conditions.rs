@@ -235,7 +235,7 @@ pub(crate) fn conditions_admit_path(
     Ok(true)
 }
 
-fn epsilon_leading_coefficient(polynomial: &Atom, epsilon: Symbol) -> Result<Atom> {
+pub(crate) fn epsilon_leading_coefficient(polynomial: &Atom, epsilon: Symbol) -> Result<Atom> {
     let variable = Atom::var(epsilon);
     let mut leading: Option<(u32, Atom)> = None;
     for (monomial, coefficient) in polynomial

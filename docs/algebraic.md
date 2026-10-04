@@ -27,10 +27,26 @@ prescription and are rejected.
 
 Integer powers of every registered root are reduced with `r² = R`. This applies
 to numerator and denominator before the denominator is checked. Thus `r⁻¹`
-becomes `r/R`, and `1/(r²+1)` becomes `1/(R+1)`. After normalization the denominator
-may have only one root monomial; sums such as `1/(r+1)` require algebraic
-rationalization and are currently rejected. A denominator which vanishes under
-the root relations is invalid.
+becomes `r/R`, and `1/(r²+1)` becomes `1/(R+1)`. Root sums in denominators are
+inverted with native Symbolica `AlgebraicQuotient` arithmetic over rational
+functions, eliminating one generator at a time while preserving its name and
+sheet. For example, `1/(r+1)` becomes `(r-1)/(R-1)`. Fallible inversion rejects
+nonunits, including dependent-root cases requiring a sheet-specific domain.
+A denominator which vanishes under the root relations is invalid.
+
+`AlgebraicKinematicSystem::nonzero_conditions()` exposes the exact source domain,
+including root norms and radicand numerators/denominators. Pullback retains these
+in `AlgebraicSystem.nonzero_conditions` before Jacobian or matrix cancellation;
+epsilon-dependent conditions retain their first nonzero epsilon coefficient to
+preserve the regular expansion's valuation. Compilation keeps the resulting
+poles in its exact singularity metadata and checks them at starting points and
+subsequent charts. A stationary coordinate and a canceled radicand denominator
+therefore cannot erase an isolated source hole.
+
+These formal norm conditions are conservative: `1/(r+1)` with `r²=x` excludes
+`x=1`, even on the positive sheet where that particular expression is regular.
+Continuation through such sheet-specific removable norm poles is not supported
+by this interface. Supplied rational nonzero conditions receive the same checks.
 
 `RootSeed::Principal` and `Opposite` choose the initial discrete sign.
 `RootSeed::I0(Prescription::PlusI0)` chooses the upper side of a **real radicand**;
@@ -62,13 +78,17 @@ values.
 
 Root zeros and poles join rational matrix poles in the shared step-radius
 constraints. This entrypoint transports between regular points. Algebraic
-Frobenius endpoints, arbitrary algebraic extensions, automatic physical path
-planning, and algebraic `RustFlowCache` reuse are not implemented here. The
+Frobenius endpoints and arbitrary algebraic extensions are not implemented here.
+The separate [physical algebraic cache](algebraic-cache.md) supports progressive
+`RustFlowCache` reuse on regular real paths with explicit root germs. The separate
+[prescribed-contour planner](prescribed-contours.md) constructs detours from
+explicit polynomial prescriptions; it does not infer the physical prescription
+from a scattering process. The
 returned `EpsilonSolution` has no `verified_digits` or independently verified
 checkpoints: compile and transport again at higher precision/order to establish
-accuracy. Algebraic cache reuse additionally needs root-sheet identities and
-root-aware uncertainty bounds; rational cache APIs must not be used to bypass
-those requirements.
+accuracy. The physical cache wrapper performs this refinement and carries
+inherited source uncertainty through root-aware weighted bounds. Explicit contour
+transport must not be relabeled as verified cache evidence without those checks.
 
 Regression tests cover one and two windings of `sqrt(x)` with
 `y'=y/sqrt(x)`, giving `exp(-4)` and `1`, independent precision/order refinement,

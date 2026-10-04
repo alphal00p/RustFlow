@@ -1,0 +1,7 @@
+{
+  "elapsed_seconds": 20.002925920765847,
+  "limit_seconds": 20,
+  "exit_code": -15,
+  "limit_terminated": true,
+  "peak_rss_kib_sampled": 10896
+}
