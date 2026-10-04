@@ -232,7 +232,8 @@
     "first_top_boundary_plan_event_seconds": 316.484834541101,
     "refined_top_boundary_plan_event_seconds": 350.6058793119155,
     "success_event_seconds": 368.78694122610614,
-    "methodology": "Fresh isolated reduction/cache run; progress-event receipt times and enclosing subprocess wall clock. Other host work was active. No end-to-end speedup comparison is inferred."
+    "methodology": "Fresh isolated reduction/cache run; progress-event receipt times and enclosing subprocess wall clock. Other host work was active. No end-to-end speedup comparison is inferred.",
+    "timestamp_note": "The runner records started_utc before hashing the executable. total_wall_seconds starts after that setup, immediately before log setup and subprocess launch; subtracting the UTC timestamps therefore includes extra runner setup time."
   },
   "raw_artifacts": {
     "directory": "/common/dev/amflow/target/all-target-sample-pilot",

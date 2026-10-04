@@ -40,7 +40,11 @@ remain pending; a single epsilon sample does not satisfy that completion gate.
 Missing for full parity: the full published four-target validation and
 broader multiloop/complex-kinematics coverage. Pole-disk contour planning is
 implemented and tested on both logarithm branches. Exact complex-mass tadpoles
-are tested, but this is not general complex-kinematics validation.
+and a massless bubble with the exact external invariant `s = -2 + i` are tested
+against analytic gamma formulas. The bubble exercises `KinematicPoint`
+substitution and sampled IBP reduction, with 20-digit agreement under working
+precision 60→80 digits and series order 80→112. This remains limited coverage
+rather than general multiloop complex-kinematics validation.
 
 A backend search budget must never be interpreted as a proof that a residual is
 a master. The implementation checks repeated reduction and differential closure
