@@ -1,0 +1,135 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "fixture": "fixture.json",
+  "scope": "Closed two-master physical-data transport only; excludes other masters, roots, form-factor assembly and full amplitude acceptance.",
+  "cpu_affinity": [
+    28
+  ],
+  "processes": 1,
+  "wolfram_parallel": false,
+  "environment_threads": {
+    "OMP_NUM_THREADS": 1,
+    "OPENBLAS_NUM_THREADS": 1,
+    "MKL_NUM_THREADS": 1
+  },
+  "command": "timeout --signal=TERM --kill-after=10s 120s taskset -c 28 /home/ben/.local/bin/bern-wolfram -noinit -noprompt -script /common/dev/amflow/target/diffexp-oracle/mg5-np-pointbank/run.wl",
+  "exit_code": 0,
+  "required_result_status": "passed",
+  "asserted_digits": 24,
+  "timing_scope": "Single runs of TransportTo; configuration, package launch and boundary preparation excluded. No throughput or speedup claim.",
+  "run_timings": [
+    {
+      "working_precision": 80,
+      "expansion_order": 80,
+      "checkpoint_seconds": 0.109171,
+      "staged_seconds": 0.093299,
+      "direct_seconds": 0.074285
+    },
+    {
+      "working_precision": 100,
+      "expansion_order": 112,
+      "checkpoint_seconds": 0.152204,
+      "staged_seconds": 0.137431,
+      "direct_seconds": 0.111527
+    }
+  ],
+  "precision_policy": "Original grid error estimate rounded up to 1e-27 per coefficient. Input/output claims capped at 24 digits, regardless of mantissa length or smaller refinement differences.",
+  "exact_point_and_independent_epsilon1_validation": {
+    "status": "passed",
+    "exact_returned_coordinates_checked": true,
+    "epsilon1_independent_increment": "[1,2]*Log[(s1-1)/(s0-1)]",
+    "errors": [
+      {
+        "order": 80,
+        "kind": "checkpoint",
+        "max_absolute_first_epsilon_error": "0``78.97556510241681"
+      },
+      {
+        "order": 80,
+        "kind": "staged",
+        "max_absolute_first_epsilon_error": "0``78.9753307519188"
+      },
+      {
+        "order": 80,
+        "kind": "direct",
+        "max_absolute_first_epsilon_error": "0``78.9753307519188"
+      },
+      {
+        "order": 112,
+        "kind": "checkpoint",
+        "max_absolute_first_epsilon_error": "0``98.9755651024168"
+      },
+      {
+        "order": 112,
+        "kind": "staged",
+        "max_absolute_first_epsilon_error": "0``98.97533075191879"
+      },
+      {
+        "order": 112,
+        "kind": "direct",
+        "max_absolute_first_epsilon_error": "0``98.97533075191879"
+      }
+    ],
+    "asserted_digits": 24
+  },
+  "artifacts": [
+    {
+      "path": "run.wl",
+      "sha256": "eba6542ccdc78bffdc20e860f0d0b1efae0565a8369602b41e9812429260547f"
+    },
+    {
+      "path": "export-fixture.py",
+      "sha256": "c4f66ecba2bdb5939c29c677203ba1467ec1d53155050d9562cd8250d957ac35"
+    },
+    {
+      "path": "raw-result.json",
+      "sha256": "6ed0e0168a4e210f599a87457b7fcd7b3759f34cdfa22a95e79f94240855d8e7"
+    },
+    {
+      "path": "fixture.json",
+      "sha256": "6e8efe4eeeff92d8daa5e2177f67e32c6d397408d2f349b568e5a99abb2e083d"
+    },
+    {
+      "path": "kernel.log",
+      "sha256": "1ad85df9d1ae38d04e92ac4f6dc5e9597a1b3caa36a7e9dc8b03dfa760607a19"
+    },
+    {
+      "path": "validate-results.wl",
+      "sha256": "7cd6a6e9201f807f59cc7b72ffd3b1f8c1f883a685d586f2a020dfb9bdb6247b"
+    },
+    {
+      "path": "endpoint-validation.json",
+      "sha256": "b61e676a8efa600eab5224efc1040dbfc311542a1f2e35d2750f802a792c718e"
+    },
+    {
+      "path": "endpoint-validation.log",
+      "sha256": "13c212631f3f0db6086a425e5c02959583ef53050f1715c0fcdc47971975ba61"
+    },
+    {
+      "path": "checkpoint-order80.wl",
+      "sha256": "5cb9d4bd66bcc5b06e615b083f4a4e394ca1be5deb066848d47458c9f613f15a"
+    },
+    {
+      "path": "checkpoint-order112.wl",
+      "sha256": "9aa219551c7725967a3f7fe2bcfc68126fe7fe06f132b90e3942a9f2c2bcb17b"
+    },
+    {
+      "path": "staged-order80.wl",
+      "sha256": "ac83862ed3b19da63c743a66bd1e6e5e2befefda468e2e104999d572bcfa0137"
+    },
+    {
+      "path": "staged-order112.wl",
+      "sha256": "5a242843203406f332c507fbdb0add261abcc9dac887b198c0a49c9604252cbb"
+    },
+    {
+      "path": "direct-order80.wl",
+      "sha256": "af1dee154e84b3814bcbe75c682350cf10a220962e9dbbfb8aa1188f9765bb92"
+    },
+    {
+      "path": "direct-order112.wl",
+      "sha256": "cdd57258bc7fbf6ef91c6ed9d8279569226ea9e870e8ed643f74848fb01a86ba"
+    }
+  ],
+  "exploratory_failures": "kernel-initial-syntax-failure.log records a pre-calculation Wolfram script syntax error; it is not a solver result. Final status and output assertions were checked in addition to the kernel exit code."
+}

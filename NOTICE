@@ -8,3 +8,12 @@ https://gitlab.com/multiloop-pku/amflow
 Upstream reference fixtures and any translated algorithms are covered by the
 MIT notice in fixtures/amflow-2.0/LICENSE.md. Symbolica is a separate dependency
 with its own license; this project's MIT license does not relicense Symbolica.
+
+The physical-variable series-transport work is independently implemented with
+algorithmic credit to Martijn Hidding, DiffExp, arXiv:2006.05510.
+Reference: DiffExp 1.1, commit 784c8229bf92369a03f011a48e161522c8c54bbd
+https://gitlab.com/hiddingm/diffexp
+DiffExp source is GPL-3.0-or-later and is not copied or translated into this
+MIT implementation. Numerical reference fixtures identify their upstream
+source, settings, recorded precision and validation evidence. This project's
+MIT license does not relicense the upstream package.

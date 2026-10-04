@@ -1,5 +1,28 @@
 # Implementation coverage
 
+The tool is now named RustFlow; the Rust crate remains `symbolica-amflow`.
+The [expanded parity goal](parity-plan.md) includes DiffExp, linear propagators,
+cut phase-space integrals, a growing native boundary cache, and HEPKit integration.
+These are separate from the completed original-paper acceptance below.
+
+The first RustFlow transport milestone adds exact multivariate path pullbacks,
+physical invariant derivatives including Gram variation, direct epsilon-coefficient
+integration, independently checked intermediate checkpoints, and a binary
+`RustFlowCache` passed by mutable reference. The regular physical-path example
+uses 18 steps for its first destination, 1 from a newly cached nearby boundary,
+and 0 for an exact repeated hit. See [the native API](rustflow.md).
+The pinned live DiffExp polylogarithm example agrees to 30 digits using independently
+constructed boundary series. `linear::PreparedLinearFlow` evaluates supported
+rank-one linear denominators by quadratic deformation and Frobenius projection;
+an HQET example matches its gamma formula to 20 digits under refinement.
+Automatic `solve_integrals` dispatch for this linear wrapper is not yet wired.
+
+The [milestone validation report](../reports/validation/2026-10-04-rustflow-initial.json)
+records 156 passing release tests, strict all-target Clippy and formatting.
+The original 20-digit two-loop acceptance is retained as prior evidence; this
+milestone did not repeat its hour-long full Laurent run. Full DiffExp benchmarks,
+general cut boundaries, and full Higgs+jet amplitude evaluation remain incomplete.
+
 The original paper's mandatory numerical acceptance gate passes: all four
 two-loop targets at s=30, t=-10/3, m²=1 have automatically generated Laurent
 coefficients from ε⁻⁴ through ε⁰ with 20 verified decimal digits and the physical

@@ -229,9 +229,9 @@ fn multiply_polynomials(a: &ExactPolynomial, b: &ExactPolynomial) -> Result<Exac
 /// A row of D(x) y'(x) = A(x) y(x), with an exact common denominator
 /// cleared before numerical specialization. Structural zero entries are absent.
 #[derive(Clone, Debug)]
-struct PolynomialRow {
-    denominator: Vec<C>,
-    entries: Vec<(usize, Vec<C>)>,
+pub(crate) struct PolynomialRow {
+    pub(crate) denominator: Vec<C>,
+    pub(crate) entries: Vec<(usize, Vec<C>)>,
 }
 
 #[derive(Clone, Debug)]
@@ -239,7 +239,7 @@ pub struct CompiledSystem {
     pub(crate) p: Precision,
     pub(crate) matrix: Vec<Vec<NumericRational>>,
     pub poles: Vec<C>,
-    polynomial_rows: Vec<PolynomialRow>,
+    pub(crate) polynomial_rows: Vec<PolynomialRow>,
 }
 
 impl DifferentialSystem {
@@ -283,116 +283,7 @@ impl DifferentialSystem {
         values: &ahash::HashMap<Atom, C>,
     ) -> Result<CompiledSystem> {
         self.validate()?;
-        let mut matrix = Vec::new();
-        let mut poles = Vec::new();
-        let mut seen_factors = ahash::HashSet::default();
-        let mut polynomial_rows = Vec::new();
-        for row in &self.matrix {
-            let mut out = Vec::new();
-            let mut exact = Vec::new();
-            let mut common_denominator: Option<ExactPolynomial> = None;
-            for a in row {
-                let rational: RationalPolynomial<IntegerRing, u16> = a
-                    .try_to_rational_polynomial(&Q, &Z, None)
-                    .map_err(|e| Error::InvalidInput(e.to_string()))?;
-                let numerator = polynomial_coefficients(
-                    &rational.numerator.to_expression(),
-                    self.variable,
-                    p,
-                    values,
-                )?;
-                let denominator = polynomial_coefficients(
-                    &rational.denominator.to_expression(),
-                    self.variable,
-                    p,
-                    values,
-                )?;
-                if denominator.iter().all(|v| *v == p.zero()) {
-                    return Err(Error::Numerical(
-                        "identically zero specialized denominator".into(),
-                    ));
-                }
-                let factored = rational.denominator.to_expression().factor();
-                let factors = if let AtomView::Mul(m) = factored.as_view() {
-                    m.iter().map(|v| v.to_owned()).collect::<Vec<_>>()
-                } else {
-                    vec![factored]
-                };
-                for factor in factors {
-                    let base = if let AtomView::Pow(v) = factor.as_view() {
-                        v.get_base_exp().0.to_owned()
-                    } else {
-                        factor
-                    };
-                    if !seen_factors.insert(base.clone()) {
-                        continue;
-                    }
-                    let coefficients = polynomial_coefficients(&base, self.variable, p, values)?;
-                    if coefficients.len() <= 1 {
-                        continue;
-                    }
-                    let roots = polynomial_roots(p, &coefficients, self.variable)?;
-                    for root in roots {
-                        if !poles.iter().any(|v| {
-                            let a = p.norm(v);
-                            let b = p.norm(&root);
-                            let scale = if a < b { a } else { b };
-                            p.norm(&p.sub(v, &root)) <= p.tolerance(p.bits / 5) * scale
-                        }) {
-                            poles.push(root);
-                        }
-                    }
-                }
-                out.push(NumericRational {
-                    numerator,
-                    denominator,
-                });
-                common_denominator = Some(if let Some(previous) = common_denominator {
-                    let quotient = previous
-                        .try_div(&previous.gcd(&rational.denominator))
-                        .ok_or_else(|| {
-                            Error::Numerical("exact denominator LCM division failed".into())
-                        })?;
-                    multiply_polynomials(&quotient, &rational.denominator)?
-                } else {
-                    rational.denominator.clone()
-                });
-                exact.push(rational);
-            }
-            let common_denominator = common_denominator.unwrap();
-            let denominator = polynomial_coefficients(
-                &common_denominator.to_expression(),
-                self.variable,
-                p,
-                values,
-            )?;
-            let mut entries = Vec::new();
-            for (j, rational) in exact.iter().enumerate() {
-                if rational.numerator.is_zero() {
-                    continue;
-                }
-                let multiplier = common_denominator
-                    .try_div(&rational.denominator)
-                    .ok_or_else(|| Error::Numerical("exact denominator clearing failed".into()))?;
-                let cleared = multiply_polynomials(&rational.numerator, &multiplier)?;
-                let coefficients =
-                    polynomial_coefficients(&cleared.to_expression(), self.variable, p, values)?;
-                if coefficients.iter().any(|c| *c != p.zero()) {
-                    entries.push((j, coefficients));
-                }
-            }
-            polynomial_rows.push(PolynomialRow {
-                denominator,
-                entries,
-            });
-            matrix.push(out);
-        }
-        Ok(CompiledSystem {
-            p,
-            matrix,
-            poles,
-            polynomial_rows,
-        })
+        compile_rows(self.variable, &self.matrix, p, values)
     }
     /// Strongly connected blocks in dependency order, independent of input ordering.
     pub fn blocks(&self) -> Result<Vec<Vec<usize>>> {
@@ -430,6 +321,118 @@ impl DifferentialSystem {
         }
         Ok(blocks)
     }
+}
+
+/// Compile possibly rectangular rational rows. Column indices remain sparse in
+/// the cleared polynomial representation, allowing shared epsilon-order rows.
+pub(crate) fn compile_rows(
+    variable: Symbol,
+    rows: &[Vec<Atom>],
+    p: Precision,
+    values: &ahash::HashMap<Atom, C>,
+) -> Result<CompiledSystem> {
+    let mut matrix = Vec::new();
+    let mut poles = Vec::new();
+    let mut seen_factors = ahash::HashSet::default();
+    let mut polynomial_rows = Vec::new();
+    for row in rows {
+        let mut out = Vec::new();
+        let mut exact = Vec::new();
+        let mut common_denominator: Option<ExactPolynomial> = None;
+        for a in row {
+            let rational: RationalPolynomial<IntegerRing, u16> = a
+                .try_to_rational_polynomial(&Q, &Z, None)
+                .map_err(|e| Error::InvalidInput(e.to_string()))?;
+            let numerator =
+                polynomial_coefficients(&rational.numerator.to_expression(), variable, p, values)?;
+            let denominator = polynomial_coefficients(
+                &rational.denominator.to_expression(),
+                variable,
+                p,
+                values,
+            )?;
+            if denominator.iter().all(|v| *v == p.zero()) {
+                return Err(Error::Numerical(
+                    "identically zero specialized denominator".into(),
+                ));
+            }
+            let factored = rational.denominator.to_expression().factor();
+            let factors = if let AtomView::Mul(m) = factored.as_view() {
+                m.iter().map(|v| v.to_owned()).collect::<Vec<_>>()
+            } else {
+                vec![factored]
+            };
+            for factor in factors {
+                let base = if let AtomView::Pow(v) = factor.as_view() {
+                    v.get_base_exp().0.to_owned()
+                } else {
+                    factor
+                };
+                if !seen_factors.insert(base.clone()) {
+                    continue;
+                }
+                let coefficients = polynomial_coefficients(&base, variable, p, values)?;
+                if coefficients.len() <= 1 {
+                    continue;
+                }
+                let roots = polynomial_roots(p, &coefficients, variable)?;
+                for root in roots {
+                    if !poles.iter().any(|v| {
+                        let a = p.norm(v);
+                        let b = p.norm(&root);
+                        let scale = if a < b { a } else { b };
+                        p.norm(&p.sub(v, &root)) <= p.tolerance(p.bits / 5) * scale
+                    }) {
+                        poles.push(root);
+                    }
+                }
+            }
+            out.push(NumericRational {
+                numerator,
+                denominator,
+            });
+            common_denominator = Some(if let Some(previous) = common_denominator {
+                let quotient = previous
+                    .try_div(&previous.gcd(&rational.denominator))
+                    .ok_or_else(|| {
+                        Error::Numerical("exact denominator LCM division failed".into())
+                    })?;
+                multiply_polynomials(&quotient, &rational.denominator)?
+            } else {
+                rational.denominator.clone()
+            });
+            exact.push(rational);
+        }
+        let common_denominator = common_denominator.unwrap();
+        let denominator =
+            polynomial_coefficients(&common_denominator.to_expression(), variable, p, values)?;
+        let mut entries = Vec::new();
+        for (j, rational) in exact.iter().enumerate() {
+            if rational.numerator.is_zero() {
+                continue;
+            }
+            let multiplier = common_denominator
+                .try_div(&rational.denominator)
+                .ok_or_else(|| Error::Numerical("exact denominator clearing failed".into()))?;
+            let cleared = multiply_polynomials(&rational.numerator, &multiplier)?;
+            let coefficients =
+                polynomial_coefficients(&cleared.to_expression(), variable, p, values)?;
+            if coefficients.iter().any(|c| *c != p.zero()) {
+                entries.push((j, coefficients));
+            }
+        }
+        polynomial_rows.push(PolynomialRow {
+            denominator,
+            entries,
+        });
+        matrix.push(out);
+    }
+    Ok(CompiledSystem {
+        p,
+        matrix,
+        poles,
+        polynomial_rows,
+    })
 }
 
 impl CompiledSystem {
@@ -528,111 +531,7 @@ impl CompiledSystem {
     /// for a counterclockwise detour relative to the segment, or -1 for the
     /// opposite side. The choice fixes the continuation homotopy.
     pub fn plan_path(&self, start: &C, end: &C, side: i64) -> Result<Vec<C>> {
-        if ![-1, 1].contains(&side) || !self.p.finite(start) || !self.p.finite(end) {
-            return Err(Error::InvalidInput(
-                "invalid contour endpoints or side".into(),
-            ));
-        }
-        let p = self.p;
-        let mut disks = Vec::new();
-        for (i, pole) in self.poles.iter().enumerate() {
-            let mut radius = p.norm(&p.sub(start, pole));
-            let end_distance = p.norm(&p.sub(end, pole));
-            if end_distance < radius {
-                radius = end_distance;
-            }
-            if radius == p.real(0) {
-                return Err(Error::InvalidInput("contour endpoint is a pole".into()));
-            }
-            for (j, other) in self.poles.iter().enumerate() {
-                if i != j && pole != other {
-                    let distance = p.norm(&p.sub(pole, other));
-                    if distance < radius {
-                        radius = distance;
-                    }
-                }
-            }
-            disks.push((pole, radius / 4));
-        }
-        let mut segments = vec![(start.clone(), end.clone())];
-        let mut output = Vec::new();
-        let mut iterations = 0;
-        while let Some((a, b)) = segments.pop() {
-            iterations += 1;
-            if iterations > 4096 {
-                return Err(Error::Limit(
-                    "contour planning exceeds 4096 subdivisions".into(),
-                ));
-            }
-            let delta = p.sub(&b, &a);
-            let length = p.norm(&delta);
-            if length == p.real(0) {
-                output.push(b);
-                continue;
-            }
-            let obstruction = disks
-                .iter()
-                .filter_map(|(pole, radius)| {
-                    let t = p.div(&p.sub(pole, &a), &delta).re;
-                    if t <= p.real(0) || t >= p.real(1) {
-                        return None;
-                    }
-                    let projection = p.add(&a, &p.mul(&delta, &C::new(t.clone(), p.real(0))));
-                    (p.norm(&p.sub(pole, &projection)) < *radius).then_some((t, *pole, radius))
-                })
-                .min_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
-            if let Some((_, pole, radius)) = obstruction {
-                let normal = p.div(
-                    &p.mul(&delta, &p.complex(0, side)),
-                    &C::new(length, p.real(0)),
-                );
-                let waypoint = p.add(
-                    pole,
-                    &p.mul(&normal, &C::new(radius.clone() * 2, p.real(0))),
-                );
-                segments.push((waypoint.clone(), b));
-                segments.push((a, waypoint));
-            } else {
-                output.push(b);
-            }
-        }
-        Ok(output)
-    }
-
-    fn residual_is_small(
-        &self,
-        center: &C,
-        step: &C,
-        coefficients: &[Vec<C>],
-        values: &[C],
-        tolerance: &Float,
-    ) -> Result<bool> {
-        let p = self.p;
-        let point = p.add(center, step);
-        for (i, row) in self.matrix.iter().enumerate() {
-            let mut derivative = p.zero();
-            for k in (1..coefficients.len()).rev() {
-                derivative = p.add(
-                    &p.mul(&derivative, step),
-                    &p.scale(&coefficients[k][i], k as i64, 1),
-                );
-            }
-            let mut rhs = p.zero();
-            for (entry, value) in row.iter().zip(values) {
-                rhs = p.add(&rhs, &p.mul(&entry.series(p, &point, 0)?[0], value));
-            }
-            let defect = p.mul(step, &p.sub(&derivative, &rhs));
-            let magnitude = p.norm(&values[i]);
-            let scale = if magnitude > p.real(1) {
-                magnitude
-            } else {
-                p.real(1)
-            };
-            if !p.finite(&defect) || p.norm(&defect) > tolerance.clone() * scale {
-                return Ok(false);
-            }
-        }
-        Ok(true)
+        plan_path(self.p, &self.poles, start, end, side)
     }
 
     pub fn transport(
@@ -642,121 +541,301 @@ impl CompiledSystem {
         options: &FlowOptions,
         context: &RunContext,
     ) -> Result<FlowResult> {
-        options.validate()?;
-        let p = self.p;
-        if boundary.values.len() != self.dimension()
-            || !p.finite(&boundary.point)
-            || boundary.values.iter().any(|v| !p.finite(v))
-            || waypoints.iter().any(|v| !p.finite(v))
-        {
-            return Err(Error::InvalidInput("invalid boundary or path".into()));
-        }
-        let mut center = boundary.point.clone();
-        let mut values = boundary.values.clone();
-        let mut diagnostics = FlowDiagnostics {
-            working_bits: p.bits,
-            expansion_order: options.series_order,
-            ..Default::default()
-        };
-        for target in waypoints {
-            while center != *target {
-                context.emit(Progress::Step {
-                    index: diagnostics.steps,
-                })?;
-                if diagnostics.steps + diagnostics.rejected_steps >= options.max_steps {
-                    return Err(Error::Limit(
-                        "Taylor continuation step budget exhausted".into(),
-                    ));
-                }
-                let delta = p.sub(target, &center);
-                let distance = p.norm(&delta);
-                let radius = self
-                    .poles
-                    .iter()
-                    .map(|s| p.norm(&p.sub(&center, s)))
-                    .min_by(|a, b| a.partial_cmp(b).unwrap())
-                    .unwrap_or_else(|| distance.clone() * 2);
-                if radius == p.real(0) {
-                    return Err(Error::Numerical(
-                        "path reached a differential-equation pole".into(),
-                    ));
-                }
-                let mut step = delta.clone();
-                let safe = radius / 3;
-                if distance > safe {
-                    step = p.mul(
-                        &delta,
-                        &p.div(&C::new(safe, p.real(0)), &C::new(distance, p.real(0))),
-                    );
-                }
-                let coefficients = self.taylor(&center, &values, options.series_order)?;
-                let mut accepted = None;
-                for _ in 0..32 {
-                    let (v, tail) = evaluate_taylor(p, &coefficients, &step);
-                    // Regulator fitting and endpoint matching consume guard
-                    // digits too. Increasing arithmetic precision must also
-                    // tighten truncation, even at a fixed expansion order.
-                    let truncation_digits = options
-                        .digits
-                        .saturating_add(8)
-                        .max((options.digits + options.guard_digits).saturating_sub(10));
-                    let available_digits = (u64::from(p.bits) * 1000 / 3322) as u32;
-                    let tolerance =
-                        p.tolerance(truncation_digits.min(available_digits.saturating_sub(3)));
-                    let good = v.iter().zip(&tail).all(|(v, t)| {
-                        let scale = p.norm(v);
-                        let scale = if scale > p.real(1) { scale } else { p.real(1) };
-                        p.finite(v) && *t <= tolerance.clone() * scale
-                    });
-                    if good
-                        && self.residual_is_small(&center, &step, &coefficients, &v, &tolerance)?
-                    {
-                        // Vanishing final Taylor terms do not bound omitted
-                        // terms for sparse systems such as y' = x^20 y.
-                        // Check the differential equation at the step endpoint
-                        // and midpoint as an independent defect test.
-                        let half_step = p.scale(&step, 1, 2);
-                        let (middle, _) = evaluate_taylor(p, &coefficients, &half_step);
-                        if self.residual_is_small(
-                            &center,
-                            &half_step,
-                            &coefficients,
-                            &middle,
-                            &tolerance,
-                        )? {
-                            accepted = Some(v);
-                            break;
-                        }
-                    }
-                    step = p.scale(&step, 1, 2);
-                    diagnostics.rejected_steps += 1;
-                    if diagnostics.steps + diagnostics.rejected_steps >= options.max_steps {
-                        break;
-                    }
-                }
-                values = accepted
-                    .ok_or_else(|| Error::Accuracy("Taylor tail did not meet tolerance".into()))?;
-                let next = if step == delta {
-                    target.clone()
-                } else {
-                    p.add(&center, &step)
-                };
-                if next == center {
-                    return Err(Error::Accuracy("continuation step lost to rounding".into()));
-                }
-                center = next;
-                diagnostics.steps += 1;
-            }
-        }
-        Ok(FlowResult {
-            point: center,
-            values,
-            diagnostics,
-        })
+        transport_series(self, boundary, waypoints, options, context, None)
     }
 }
 
-fn evaluate_taylor(p: Precision, coefficients: &[Vec<C>], h: &C) -> (Vec<C>, Vec<Float>) {
+/// A retained local Taylor polynomial; its validated interval runs from
+/// `center` to `end`. Coefficients are indexed by Taylor power, then component.
+#[derive(Clone, Debug)]
+pub struct TaylorSegment {
+    pub center: C,
+    pub end: C,
+    pub coefficients: Vec<Vec<C>>,
+    pub working_bits: u32,
+}
+
+pub(crate) trait SeriesSystem {
+    fn precision(&self) -> Precision;
+    fn dimension(&self) -> usize;
+    fn poles(&self) -> &[C];
+    fn taylor(&self, center: &C, values: &[C], order: usize) -> Result<Vec<Vec<C>>>;
+    fn rhs(&self, point: &C, values: &[C]) -> Result<Vec<C>>;
+}
+impl SeriesSystem for CompiledSystem {
+    fn precision(&self) -> Precision {
+        self.p
+    }
+    fn dimension(&self) -> usize {
+        self.dimension()
+    }
+    fn poles(&self) -> &[C] {
+        &self.poles
+    }
+    fn taylor(&self, center: &C, values: &[C], order: usize) -> Result<Vec<Vec<C>>> {
+        self.taylor(center, values, order)
+    }
+    fn rhs(&self, point: &C, values: &[C]) -> Result<Vec<C>> {
+        self.matrix
+            .iter()
+            .map(|row| {
+                row.iter()
+                    .zip(values)
+                    .try_fold(self.p.zero(), |sum, (entry, value)| {
+                        Ok(self.p.add(
+                            &sum,
+                            &self.p.mul(&entry.series(self.p, point, 0)?[0], value),
+                        ))
+                    })
+            })
+            .collect()
+    }
+}
+
+fn residual_is_small(
+    system: &impl SeriesSystem,
+    center: &C,
+    step: &C,
+    coefficients: &[Vec<C>],
+    values: &[C],
+    tolerance: &Float,
+) -> Result<bool> {
+    let p = system.precision();
+    let point = p.add(center, step);
+    let rhs = system.rhs(&point, values)?;
+    for (i, rhs) in rhs.iter().enumerate() {
+        let mut derivative = p.zero();
+        for k in (1..coefficients.len()).rev() {
+            derivative = p.add(
+                &p.mul(&derivative, step),
+                &p.scale(&coefficients[k][i], k as i64, 1),
+            );
+        }
+        let defect = p.mul(step, &p.sub(&derivative, rhs));
+        let magnitude = p.norm(&values[i]);
+        let scale = if magnitude > p.real(1) {
+            magnitude
+        } else {
+            p.real(1)
+        };
+        if !p.finite(&defect) || p.norm(&defect) > tolerance.clone() * scale {
+            return Ok(false);
+        }
+    }
+    Ok(true)
+}
+
+pub(crate) fn transport_series(
+    system: &impl SeriesSystem,
+    boundary: &BoundaryData,
+    waypoints: &[C],
+    options: &FlowOptions,
+    context: &RunContext,
+    mut saved: Option<&mut Vec<TaylorSegment>>,
+) -> Result<FlowResult> {
+    options.validate()?;
+    let p = system.precision();
+    if boundary.values.len() != system.dimension()
+        || !p.finite(&boundary.point)
+        || boundary.values.iter().any(|v| !p.finite(v))
+        || waypoints.iter().any(|v| !p.finite(v))
+    {
+        return Err(Error::InvalidInput("invalid boundary or path".into()));
+    }
+    let mut center = boundary.point.clone();
+    let mut values = boundary.values.clone();
+    let mut diagnostics = FlowDiagnostics {
+        working_bits: p.bits,
+        expansion_order: options.series_order,
+        ..Default::default()
+    };
+    for target in waypoints {
+        while center != *target {
+            context.emit(Progress::Step {
+                index: diagnostics.steps,
+            })?;
+            if diagnostics.steps + diagnostics.rejected_steps >= options.max_steps {
+                return Err(Error::Limit(
+                    "Taylor continuation step budget exhausted".into(),
+                ));
+            }
+            let delta = p.sub(target, &center);
+            let distance = p.norm(&delta);
+            let radius = system
+                .poles()
+                .iter()
+                .map(|s| p.norm(&p.sub(&center, s)))
+                .min_by(|a, b| a.partial_cmp(b).unwrap())
+                .unwrap_or_else(|| distance.clone() * 2);
+            if radius == p.real(0) {
+                return Err(Error::Numerical(
+                    "path reached a differential-equation pole".into(),
+                ));
+            }
+            let mut step = delta.clone();
+            let safe = radius / 3;
+            if distance > safe {
+                step = p.mul(
+                    &delta,
+                    &p.div(&C::new(safe, p.real(0)), &C::new(distance, p.real(0))),
+                );
+            }
+            let coefficients = system.taylor(&center, &values, options.series_order)?;
+            let mut accepted = None;
+            for _ in 0..32 {
+                let (v, tail) = evaluate_taylor(p, &coefficients, &step);
+                // Regulator fitting and endpoint matching consume guard
+                // digits too. Increasing arithmetic precision must also
+                // tighten truncation, even at a fixed expansion order.
+                let truncation_digits = options
+                    .digits
+                    .saturating_add(8)
+                    .max((options.digits + options.guard_digits).saturating_sub(10));
+                let available_digits = (u64::from(p.bits) * 1000 / 3322) as u32;
+                let tolerance =
+                    p.tolerance(truncation_digits.min(available_digits.saturating_sub(3)));
+                let good = v.iter().zip(&tail).all(|(v, t)| {
+                    let scale = p.norm(v);
+                    let scale = if scale > p.real(1) { scale } else { p.real(1) };
+                    p.finite(v) && *t <= tolerance.clone() * scale
+                });
+                if good && residual_is_small(system, &center, &step, &coefficients, &v, &tolerance)?
+                {
+                    // Vanishing final Taylor terms do not bound omitted
+                    // terms for sparse systems such as y' = x^20 y.
+                    // Check the differential equation at the step endpoint
+                    // and midpoint as an independent defect test.
+                    let half_step = p.scale(&step, 1, 2);
+                    let (middle, _) = evaluate_taylor(p, &coefficients, &half_step);
+                    if residual_is_small(
+                        system,
+                        &center,
+                        &half_step,
+                        &coefficients,
+                        &middle,
+                        &tolerance,
+                    )? {
+                        accepted = Some(v);
+                        break;
+                    }
+                }
+                step = p.scale(&step, 1, 2);
+                diagnostics.rejected_steps += 1;
+                if diagnostics.steps + diagnostics.rejected_steps >= options.max_steps {
+                    break;
+                }
+            }
+            values = accepted
+                .ok_or_else(|| Error::Accuracy("Taylor tail did not meet tolerance".into()))?;
+            let next = if step == delta {
+                target.clone()
+            } else {
+                p.add(&center, &step)
+            };
+            if next == center {
+                return Err(Error::Accuracy("continuation step lost to rounding".into()));
+            }
+            if let Some(segments) = saved.as_deref_mut() {
+                segments.push(TaylorSegment {
+                    center: center.clone(),
+                    end: next.clone(),
+                    coefficients,
+                    working_bits: p.bits,
+                });
+            }
+            center = next;
+            diagnostics.steps += 1;
+        }
+    }
+    Ok(FlowResult {
+        point: center,
+        values,
+        diagnostics,
+    })
+}
+
+pub(crate) fn plan_path(
+    p: Precision,
+    poles: &[C],
+    start: &C,
+    end: &C,
+    side: i64,
+) -> Result<Vec<C>> {
+    if ![-1, 1].contains(&side) || !p.finite(start) || !p.finite(end) {
+        return Err(Error::InvalidInput(
+            "invalid contour endpoints or side".into(),
+        ));
+    }
+    let mut disks = Vec::new();
+    for (i, pole) in poles.iter().enumerate() {
+        let mut radius = p.norm(&p.sub(start, pole));
+        let end_distance = p.norm(&p.sub(end, pole));
+        if end_distance < radius {
+            radius = end_distance;
+        }
+        if radius == p.real(0) {
+            return Err(Error::InvalidInput("contour endpoint is a pole".into()));
+        }
+        for (j, other) in poles.iter().enumerate() {
+            if i != j && pole != other {
+                let distance = p.norm(&p.sub(pole, other));
+                if distance < radius {
+                    radius = distance;
+                }
+            }
+        }
+        disks.push((pole, radius / 4));
+    }
+    let mut segments = vec![(start.clone(), end.clone())];
+    let mut output = Vec::new();
+    let mut iterations = 0;
+    while let Some((a, b)) = segments.pop() {
+        iterations += 1;
+        if iterations > 4096 {
+            return Err(Error::Limit(
+                "contour planning exceeds 4096 subdivisions".into(),
+            ));
+        }
+        let delta = p.sub(&b, &a);
+        let length = p.norm(&delta);
+        if length == p.real(0) {
+            output.push(b);
+            continue;
+        }
+        let obstruction = disks
+            .iter()
+            .filter_map(|(pole, radius)| {
+                let t = p.div(&p.sub(pole, &a), &delta).re;
+                if t <= p.real(0) || t >= p.real(1) {
+                    return None;
+                }
+                let projection = p.add(&a, &p.mul(&delta, &C::new(t.clone(), p.real(0))));
+                (p.norm(&p.sub(pole, &projection)) < *radius).then_some((t, *pole, radius))
+            })
+            .min_by(|a, b| a.0.partial_cmp(&b.0).unwrap());
+        if let Some((_, pole, radius)) = obstruction {
+            let normal = p.div(
+                &p.mul(&delta, &p.complex(0, side)),
+                &C::new(length, p.real(0)),
+            );
+            let waypoint = p.add(
+                pole,
+                &p.mul(&normal, &C::new(radius.clone() * 2, p.real(0))),
+            );
+            segments.push((waypoint.clone(), b));
+            segments.push((a, waypoint));
+        } else {
+            output.push(b);
+        }
+    }
+    Ok(output)
+}
+
+pub(crate) fn evaluate_taylor(
+    p: Precision,
+    coefficients: &[Vec<C>],
+    h: &C,
+) -> (Vec<C>, Vec<Float>) {
     let n = coefficients[0].len();
     let mut out = vec![p.zero(); n];
     let mut tail = vec![p.real(0); n];

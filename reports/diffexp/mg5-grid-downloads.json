@@ -1,0 +1,16 @@
+[
+  {
+    "name": "NP_EW1_24_B.tar.gz",
+    "status": "verified",
+    "size": 1765015777,
+    "sha256": "c94daa09fa716c05c5349bec463e0cc91f2e76e1d94505595380d081be010f68",
+    "download_seconds": 55.721045969985425
+  },
+  {
+    "name": "Planar_EW1_24_B.tar.gz",
+    "status": "verified",
+    "size": 1273891172,
+    "sha256": "b182f37c0296a75cf07ce558979f2a59430bd2c81c87ff8a3d3c1de4b95b9677",
+    "download_seconds": 52.51890373183414
+  }
+]

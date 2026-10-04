@@ -431,7 +431,7 @@ pub fn parameter_differential_system(
     })
 }
 
-fn build_differential_system(
+pub(crate) fn build_differential_system(
     backend: &dyn ReductionBackend,
     family: &IntegralFamily,
     targets: &[Integral],

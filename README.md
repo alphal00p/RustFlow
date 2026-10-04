@@ -1,8 +1,14 @@
-# symbolica-amflow
+# RustFlow (`symbolica-amflow`)
 
 A native Rust implementation of auxiliary mass flow, using Symbolica for
 exact algebra and MPFR arithmetic and the sibling RustRed checkout for IBP
 reduction. Rust 2024; independent MIT-licensed repository.
+
+RustFlow is being extended with DiffExp-style transport in physical kinematic
+variables and a progressively filled native `RustFlowCache`. The Rust crate
+retains the name `symbolica-amflow`. See the [active parity plan](docs/parity-plan.md)
+and [cache and transport interface](docs/rustflow.md). Full AMFlow/DiffExp parity
+and full amplitude benchmarks are still development goals.
 
 The original paper's four two-loop targets pass the required calculation through
 epsilon power zero: 20-digit stability under independent sample/precision/order
@@ -62,6 +68,11 @@ stored reference values. The fixtures retain upstream precision metadata.
 - `ReductionBackend` has native `RustRedBackend`, explicit `TableBackend`, and
   versioned `cache::CachedBackend` implementations. `FlowOptions::cache_directory`
   also persists prepared AMF and FT differential systems, including recursive children and exact basis-transformation histories.
+- `RustFlow::evaluate_to(&mut cache, ...)` searches compatible physical
+  boundaries, transports epsilon coefficients, and adds verified intermediate
+  points and the destination to `RustFlowCache`. Binary snapshots can be loaded
+  before the next request. Regular straight paths are currently supported by
+  this orchestration interface.
 
 See [library usage](docs/usage.md), the runnable examples, and integration tests
 for complete typed inputs.
@@ -95,6 +106,8 @@ commit `26005517a288086c4cb4d1b26d829691bc088485`.
   computation via auxiliary mass flow](https://arxiv.org/pdf/2201.11669).
 - R.-J. Huang, X. Liu and Y.-Q. Ma,
   [AMFlow 2.0](https://arxiv.org/html/2607.08477v1).
+- M. Hidding, [DiffExp](https://arxiv.org/abs/2006.05510), pinned to
+  `784c8229bf92369a03f011a48e161522c8c54bbd`.
 
 Upstream attribution and license terms are preserved in `NOTICE` and
 `fixtures/amflow-2.0/LICENSE.md`. Symbolica's separate licensing terms apply to

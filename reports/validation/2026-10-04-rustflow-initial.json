@@ -1,0 +1,68 @@
+{
+  "schema_version": 1,
+  "milestone": "RustFlow exact physical paths, direct epsilon transport, progressive boundary cache and linear deformation",
+  "base_commit": "bec54cc06087fd8aa9cafad50b9a1d30b2bce55d",
+  "date_utc": "2026-10-04",
+  "release_tests": {
+    "passed": 156,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 21,
+    "command": "cargo test --release -p symbolica-amflow",
+    "scope_note": "All functional changes tested. Subsequent lint-only edits replace comparisons with Rational::from(0) by comparisons with 0 and name an existing serialized type with aliases; no algorithm or serialization layout changed."
+  },
+  "clippy": {
+    "passed": true,
+    "command": "cargo clippy -p symbolica-amflow --all-targets -- -D warnings",
+    "dependency_note": "Existing RustRed dependency dead-code warnings remain; RustRed was not modified."
+  },
+  "format": {
+    "passed": true,
+    "command": "cargo fmt -p symbolica-amflow --check"
+  },
+  "cache_example": {
+    "first_destination_steps": 18,
+    "nearby_destination_steps": 1,
+    "exact_repeated_destination_steps": 0,
+    "retained_boundaries_after_first": 20,
+    "nearby_verified_digits": 45,
+    "scope": "Analytic supplied scalar system; step counts are not general runtime parity evidence."
+  },
+  "new_oracle_check": {
+    "case": "DiffExp G(1,0,1;4)",
+    "verified_digits": 30,
+    "boundary": "Independent convergent Taylor series at t=1/8, no reference target used"
+  },
+  "linear_check": {
+    "case": "One-loop HQET denominator pair l^2, 2v.l-2 with v^2=1",
+    "epsilon": [
+      "2/3",
+      "1/10"
+    ],
+    "working_decimal_digits": [
+      60,
+      80
+    ],
+    "orders": [
+      80,
+      112
+    ],
+    "asserted_digits": 20,
+    "automatic_solve_integrals_dispatch": false
+  },
+  "not_yet_validated": [
+    "Full DiffExp benchmark suite",
+    "Full mixed QCD-EW Higgs+jet amplitude",
+    "Cut phase-space automatic boundaries",
+    "HEPKit adapter on this dependency pin",
+    "MG5 closed-subsystem fixture in Rust (live upstream run is recorded separately)"
+  ],
+  "sha256": {
+    "target/rustflow-release-tests.log": "3c7c88669105066ecd69b801370c8bf4894abf71dceb3896b3f859cbeab99e70",
+    "target/rustflow-clippy.log": "fe5f687b875e5c6ddd6171c8a996ac4024a5b9527423112bd06d387a037169b1",
+    "target/rustflow-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "target/rustflow-cache-example.log": "e39633eff326bb42992ee4ef50bd2f87cd6df664ab79c001042f3c0f41eebbdd",
+    "fixtures/diffexp/mpl-101-4.json": "34f863346c49d66b5ccc5affebab11eb4ce508ef06d745cb1c1943e1596e6b70",
+    "fixtures/mg5-higgs-ew/np-two-master-transport.json": "6e8efe4eeeff92d8daa5e2177f67e32c6d397408d2f349b568e5a99abb2e083d"
+  }
+}

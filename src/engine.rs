@@ -289,7 +289,7 @@ impl PreparedFlow {
     }
 }
 
-fn ensure_generic_indicial(
+pub(crate) fn ensure_generic_indicial(
     basis: &frobenius::FrobeniusBasis,
     parameters: &ahash::HashMap<Atom, ComplexFloat>,
 ) -> Result<()> {

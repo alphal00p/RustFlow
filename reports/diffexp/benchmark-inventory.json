@@ -1,0 +1,738 @@
+{
+  "format_version": 1,
+  "source_commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+  "package_reported_version": "1.1",
+  "license": "GPL-3.0-or-later",
+  "scope": "Pinned original repository examples and additional explicit numerical profiles in its paper. Historical timings are provenance only, not measurements on this host.",
+  "source_sha256": {
+    "DiffExp.m": "67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7",
+    "Paper/main.tex": "30b64b682ae7f39b5e3549985347286d4aad52e3232dd51fa1ffa6954cde9d39",
+    "Examples/5pNonPlanar.nb": "3668fb2cb1d950e5c17ef46594bbd4ae7e9fee974859f5c8d368fa2d550b1a4d",
+    "Examples/Banana.nb": "171055e1829e98b08d50510a2c626c6242dd8b3233c25dc9a9e3e10e0c3df615",
+    "Examples/5pPlanar1Mass.nb": "2d122ba731d62fe45b69db0cc74372fbb603cd1ee31894fd8414e2e2596a53c8",
+    "Examples/MultiplePolylogarithms.nb": "028003cce75bdfb911d3bbf8cfc313bb6cb5454d8ce44722c4eba8bfcaca24ba"
+  },
+  "notebook_workloads": [
+    {
+      "id": "mpl-g101at4-order50",
+      "notebook": "MultiplePolylogarithms.nb",
+      "status": "live_smoke_passed_with_logged_verbosity1",
+      "letters": [
+        "1",
+        "0",
+        "1"
+      ],
+      "endpoint": "4",
+      "dimension": 4,
+      "boundary": "Finite leading vector [0,0,0,1] at t=0; pass below t=1.",
+      "settings": {
+        "epsilon_order": 0,
+        "working_precision": 250,
+        "chop_precision": 225,
+        "mobius": true,
+        "pade": false,
+        "division_order": 3,
+        "verbosity": 0,
+        "segmentation": "Predivision",
+        "expansion_order": 50
+      },
+      "input_cells": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "fixture": "mpl-101-4/fixture.json"
+    },
+    {
+      "id": "mpl-g101at4-order75",
+      "notebook": "MultiplePolylogarithms.nb",
+      "status": "live_smoke_passed_with_logged_verbosity1",
+      "letters": [
+        "1",
+        "0",
+        "1"
+      ],
+      "endpoint": "4",
+      "dimension": 4,
+      "boundary": "Finite leading vector [0,0,0,1] at t=0; pass below t=1.",
+      "settings": {
+        "epsilon_order": 0,
+        "working_precision": 250,
+        "chop_precision": 225,
+        "mobius": true,
+        "pade": false,
+        "division_order": 3,
+        "verbosity": 0,
+        "segmentation": "Predivision",
+        "expansion_order": 75
+      },
+      "input_cells": [
+        2,
+        3,
+        4,
+        6
+      ],
+      "fixture": "mpl-101-4/fixture.json"
+    },
+    {
+      "id": "mpl-g1m100at4-order50",
+      "notebook": "MultiplePolylogarithms.nb",
+      "status": "not_run_in_this_environment",
+      "letters": [
+        "1",
+        "-10",
+        "0"
+      ],
+      "endpoint": "4",
+      "dimension": 4,
+      "boundary": "Trailing zero is extracted with shuffle identities in GEvaluate; equivalent direct DE needs logarithmic boundary for G(0;t).",
+      "settings": {
+        "epsilon_order": 0,
+        "working_precision": 250,
+        "chop_precision": 225,
+        "mobius": true,
+        "pade": false,
+        "division_order": 3,
+        "verbosity": 0,
+        "segmentation": "Predivision",
+        "expansion_order": 50
+      },
+      "input_cells": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "mpl-g1m100at4-order75",
+      "notebook": "MultiplePolylogarithms.nb",
+      "status": "not_run_in_this_environment",
+      "letters": [
+        "1",
+        "-10",
+        "0"
+      ],
+      "endpoint": "4",
+      "dimension": 4,
+      "boundary": "Trailing zero is extracted with shuffle identities in GEvaluate; equivalent direct DE needs logarithmic boundary for G(0;t).",
+      "settings": {
+        "epsilon_order": 0,
+        "working_precision": 250,
+        "chop_precision": 225,
+        "mobius": true,
+        "pade": false,
+        "division_order": 3,
+        "verbosity": 0,
+        "segmentation": "Predivision",
+        "expansion_order": 75
+      },
+      "input_cells": [
+        2,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "id": "mpl-g10complexat1-order50",
+      "notebook": "MultiplePolylogarithms.nb",
+      "status": "not_run_in_this_environment",
+      "letters": [
+        "10",
+        "-10+I",
+        "-1/2",
+        "-50"
+      ],
+      "endpoint": "1",
+      "dimension": 5,
+      "boundary": "Finite leading vector [0,0,0,0,1]; includes a complex pole.",
+      "settings": {
+        "epsilon_order": 0,
+        "working_precision": 250,
+        "chop_precision": 225,
+        "mobius": true,
+        "pade": false,
+        "division_order": 3,
+        "verbosity": 0,
+        "segmentation": "Predivision",
+        "expansion_order": 50
+      },
+      "input_cells": [
+        2,
+        3,
+        4,
+        5
+      ]
+    },
+    {
+      "id": "mpl-g10complexat1-order75",
+      "notebook": "MultiplePolylogarithms.nb",
+      "status": "not_run_in_this_environment",
+      "letters": [
+        "10",
+        "-10+I",
+        "-1/2",
+        "-50"
+      ],
+      "endpoint": "1",
+      "dimension": 5,
+      "boundary": "Finite leading vector [0,0,0,0,1]; includes a complex pole.",
+      "settings": {
+        "epsilon_order": 0,
+        "working_precision": 250,
+        "chop_precision": 225,
+        "mobius": true,
+        "pade": false,
+        "division_order": 3,
+        "verbosity": 0,
+        "segmentation": "Predivision",
+        "expansion_order": 75
+      },
+      "input_cells": [
+        2,
+        3,
+        4,
+        6
+      ]
+    },
+    {
+      "id": "mpl-weight20-order100",
+      "notebook": "MultiplePolylogarithms.nb",
+      "status": "not_run_in_this_environment",
+      "letters": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14",
+        "15",
+        "16",
+        "17",
+        "18",
+        "19",
+        "20"
+      ],
+      "endpoint": "21",
+      "dimension": 21,
+      "boundary": "Finite leading vector with final1 and other0 at t=0; crosses all20 positive-letter poles.",
+      "settings": {
+        "epsilon_order": 0,
+        "working_precision": 250,
+        "chop_precision": 225,
+        "mobius": true,
+        "pade": false,
+        "division_order": 3,
+        "verbosity": 0,
+        "segmentation": "Predivision",
+        "expansion_order": 100
+      },
+      "input_cells": [
+        2,
+        3,
+        4,
+        7
+      ]
+    },
+    {
+      "id": "banana-equal-mass-infinity-to32",
+      "notebook": "Banana.nb",
+      "status": "not_run_in_this_environment",
+      "dimension": 4,
+      "max_coupled_block": 3,
+      "epsilon_order": 4,
+      "dimension_regulator": "D=2-2eps",
+      "normalization": "Basis-specific epsilon factors and exp(3*EulerGamma*eps); denominators -k^2+m^2.",
+      "boundary": "Two unspecified components and two analytic gamma-function asymptotics at t=-1/x,x\u21920+; notebook cell8.",
+      "path": [
+        "t=-1/x to t=-1",
+        "t=x from-1 to32"
+      ],
+      "settings": {
+        "working_precision": 500,
+        "chop_precision": 250,
+        "expansion_order": 50,
+        "division_order": 3,
+        "mobius": true,
+        "pade": true,
+        "radius_of_convergence": 1,
+        "delta_prescriptions": [
+          "t-16+i*delta"
+        ]
+      },
+      "input_cells": [
+        2,
+        3,
+        8,
+        9
+      ],
+      "saved_segment_checks": [
+        "ToPiecewise",
+        "epsilon3/4 plots on t\u2208[0,32]",
+        "all4masters/eps0..4 at t=20 using Pade"
+      ],
+      "historical_paper_timing": {
+        "description": "about1minute",
+        "estimated_error": "1e-25",
+        "not_a_current_host_measurement": true
+      }
+    },
+    {
+      "id": "banana-unequal-notebook-direct",
+      "notebook": "Banana.nb",
+      "status": "not_run_in_this_environment",
+      "dimension": 15,
+      "max_coupled_block": 11,
+      "settings": {
+        "working_precision": 1000,
+        "chop_precision": 500,
+        "expansion_order": 70,
+        "division_order": 4,
+        "mobius": true,
+        "pade": true,
+        "radius_of_convergence": 10,
+        "epsilon_order": 4
+      },
+      "boundary_preparation": "Equal-mass infinity\u2192p\u00b2=1/2 at division4/order70; duplicate equal-master entries according to cell14.",
+      "path": [
+        "at p\u00b2=1/2: squared masses (1+x,1+x/2,1+x/3,1), x0\u21921",
+        "at squared masses(2,3/2,4/3,1): p\u00b2=x from1/2\u219250"
+      ],
+      "delta_prescription": "(sqrt2+sqrt(3/2)+sqrt(4/3)+1)^2-psq-i*delta",
+      "input_cells": [
+        12,
+        13,
+        14,
+        15,
+        16,
+        18
+      ],
+      "saved_segment_checks": [
+        "ToPiecewise",
+        "B1/B11 epsilon2..4 plots",
+        "compare all75 coefficients to alternate contour"
+      ]
+    },
+    {
+      "id": "banana-unequal-notebook-alternate",
+      "notebook": "Banana.nb",
+      "status": "not_run_in_this_environment",
+      "dimension": 15,
+      "max_coupled_block": 11,
+      "settings": {
+        "working_precision": 1000,
+        "chop_precision": 500,
+        "expansion_order": 70,
+        "division_order": 4,
+        "mobius": true,
+        "pade": true,
+        "radius_of_convergence": 10,
+        "epsilon_order": 4
+      },
+      "boundary_preparation": "Equal-mass infinity\u2192-1\u219250 at division2/order80; duplicate equal-master entries per cell24.",
+      "path": [
+        "at p\u00b2=50: squared masses (1+x,1+x/2,1+x/3,1), x0\u21921"
+      ],
+      "input_cells": [
+        23,
+        24,
+        25,
+        26
+      ],
+      "comparison": "Maximum difference across all15masters and eps0..4 against direct path."
+    },
+    {
+      "id": "fivepoint-nonplanar-accurate",
+      "notebook": "5pNonPlanar.nb",
+      "status": "not_run_in_this_environment",
+      "dimension": 108,
+      "canonical": true,
+      "alphabet_letters": 31,
+      "settings": {
+        "working_precision": 150,
+        "chop_precision": 100,
+        "expansion_order": 80,
+        "accuracy_goal": 30,
+        "mobius": true,
+        "pade": true,
+        "epsilon_order": 4,
+        "division_order": 3,
+        "verbosity": 2,
+        "delta_prescriptions": [
+          "v1+i*delta",
+          "v2+i*delta",
+          "v3+i*delta",
+          "v4+i*delta",
+          "v5+i*delta"
+        ]
+      },
+      "start": {
+        "v1": "3",
+        "v2": "-1",
+        "v3": "1",
+        "v4": "1",
+        "v5": "-1"
+      },
+      "end": {
+        "v1": "4",
+        "v2": "-113/47",
+        "v3": "281/149",
+        "v4": "349/257",
+        "v5": "-863/541"
+      },
+      "reference_recorded_precision": "At least50digits according to DiffExp paper; inspect individual downloaded values before comparison.",
+      "external_dataset": "1812.11160v2",
+      "historical_notebook_transport_seconds": 276.526401,
+      "input_cells": [
+        6,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "id": "fivepoint-nonplanar-fast",
+      "notebook": "5pNonPlanar.nb",
+      "status": "not_run_in_this_environment",
+      "dimension": 108,
+      "canonical": true,
+      "alphabet_letters": 31,
+      "settings": {
+        "working_precision": 150,
+        "chop_precision": 100,
+        "expansion_order": 25,
+        "accuracy_goal": "?",
+        "mobius": true,
+        "pade": true,
+        "epsilon_order": 4,
+        "division_order": 3,
+        "verbosity": 2,
+        "delta_prescriptions": [
+          "v1+i*delta",
+          "v2+i*delta",
+          "v3+i*delta",
+          "v4+i*delta",
+          "v5+i*delta"
+        ]
+      },
+      "start": {
+        "v1": "3",
+        "v2": "-1",
+        "v3": "1",
+        "v4": "1",
+        "v5": "-1"
+      },
+      "end": {
+        "v1": "4",
+        "v2": "-113/47",
+        "v3": "281/149",
+        "v4": "349/257",
+        "v5": "-863/541"
+      },
+      "reference_recorded_precision": "At least50digits according to DiffExp paper; inspect individual downloaded values before comparison.",
+      "external_dataset": "1812.11160v2",
+      "historical_notebook_transport_seconds": 49.765221,
+      "input_cells": [
+        14,
+        15,
+        16
+      ]
+    },
+    {
+      "id": "fivepoint-planar-1loop-ph1-to-ph6",
+      "notebook": "5pPlanar1Mass.nb",
+      "status": "not_run_in_this_environment",
+      "family": "1loop",
+      "dimension": 13,
+      "canonical": true,
+      "alphabet_letters": 58,
+      "settings": {
+        "working_precision": 150,
+        "chop_precision": 100,
+        "expansion_order": 40,
+        "accuracy_goal": 15,
+        "epsilon_order": 4,
+        "division_order": 3,
+        "mobius": false,
+        "pade": false,
+        "delta_prescriptions": [
+          "p1s+i*delta",
+          "s12+i*delta",
+          "s15+i*delta",
+          "s23+i*delta",
+          "s34+i*delta",
+          "s45+i*delta"
+        ]
+      },
+      "path": "SamplePoints[[1]]\u2192SamplePoints[[6]], transposing integral data as in notebook.",
+      "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
+      "external_dataset": "2005.04195-unversioned",
+      "historical_notebook_transport_seconds": 85.556919
+    },
+    {
+      "id": "fivepoint-planar-zmz-ph1-to-ph6",
+      "notebook": "5pPlanar1Mass.nb",
+      "status": "not_run_in_this_environment",
+      "family": "zmz",
+      "dimension": 75,
+      "canonical": true,
+      "alphabet_letters": 58,
+      "settings": {
+        "working_precision": 150,
+        "chop_precision": 100,
+        "expansion_order": 40,
+        "accuracy_goal": 15,
+        "epsilon_order": 4,
+        "division_order": 3,
+        "mobius": false,
+        "pade": false,
+        "delta_prescriptions": [
+          "p1s+i*delta",
+          "s12+i*delta",
+          "s15+i*delta",
+          "s23+i*delta",
+          "s34+i*delta",
+          "s45+i*delta"
+        ]
+      },
+      "path": "SamplePoints[[1]]\u2192SamplePoints[[6]], transposing integral data as in notebook.",
+      "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
+      "external_dataset": "2005.04195-unversioned",
+      "historical_notebook_transport_seconds": 1391.141062
+    },
+    {
+      "id": "fivepoint-planar-mzz-ph1-to-ph6",
+      "notebook": "5pPlanar1Mass.nb",
+      "status": "not_run_in_this_environment",
+      "family": "mzz",
+      "dimension": 74,
+      "canonical": true,
+      "alphabet_letters": 58,
+      "settings": {
+        "working_precision": 150,
+        "chop_precision": 100,
+        "expansion_order": 40,
+        "accuracy_goal": 15,
+        "epsilon_order": 4,
+        "division_order": 3,
+        "mobius": false,
+        "pade": false,
+        "delta_prescriptions": [
+          "p1s+i*delta",
+          "s12+i*delta",
+          "s15+i*delta",
+          "s23+i*delta",
+          "s34+i*delta",
+          "s45+i*delta"
+        ]
+      },
+      "path": "SamplePoints[[1]]\u2192SamplePoints[[6]], transposing integral data as in notebook.",
+      "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
+      "external_dataset": "2005.04195-unversioned",
+      "historical_notebook_transport_seconds": 992.459149
+    },
+    {
+      "id": "fivepoint-planar-zzz-ph1-to-ph6",
+      "notebook": "5pPlanar1Mass.nb",
+      "status": "not_run_in_this_environment",
+      "family": "zzz",
+      "dimension": 86,
+      "canonical": true,
+      "alphabet_letters": 58,
+      "settings": {
+        "working_precision": 150,
+        "chop_precision": 100,
+        "expansion_order": 40,
+        "accuracy_goal": 15,
+        "epsilon_order": 4,
+        "division_order": 3,
+        "mobius": false,
+        "pade": false,
+        "delta_prescriptions": [
+          "p1s+i*delta",
+          "s12+i*delta",
+          "s15+i*delta",
+          "s23+i*delta",
+          "s34+i*delta",
+          "s45+i*delta"
+        ]
+      },
+      "path": "SamplePoints[[1]]\u2192SamplePoints[[6]], transposing integral data as in notebook.",
+      "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
+      "external_dataset": "2005.04195-unversioned",
+      "historical_notebook_transport_seconds": 1670.664508
+    },
+    {
+      "id": "fivepoint-planar-zzz-ph1-to-ph2-128digits",
+      "notebook": "5pPlanar1Mass.nb",
+      "status": "not_run_in_this_environment",
+      "family": "zzz",
+      "dimension": 86,
+      "canonical": true,
+      "alphabet_letters": 58,
+      "settings": {
+        "working_precision": 280,
+        "chop_precision": 230,
+        "expansion_order": 230,
+        "accuracy_goal": 128,
+        "epsilon_order": 4,
+        "division_order": 4,
+        "mobius": false,
+        "pade": false,
+        "delta_prescriptions": [
+          "p1s+i*delta",
+          "s12+i*delta",
+          "s15+i*delta",
+          "s23+i*delta",
+          "s34+i*delta",
+          "s45+i*delta"
+        ],
+        "verbosity": 2
+      },
+      "path": "SamplePoints[[1]]\u2192SamplePoints[[2]].",
+      "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
+      "external_dataset": "2005.04195-unversioned",
+      "historical_notebook_transport_seconds": 7401.394625
+    }
+  ],
+  "additional_paper_profiles": [
+    {
+      "id": "banana-unequal-paper-base",
+      "base_workload": "banana-unequal-notebook-direct",
+      "settings_override": {
+        "chop_precision": 250
+      },
+      "paper_lines": [
+        1079,
+        1087
+      ],
+      "historical_cpu": "Intel i7-4700MQ",
+      "historical_transport": "about1h5min",
+      "reported_error": "1e-22",
+      "alternate_path_difference": "1e-24"
+    },
+    {
+      "id": "banana-unequal-paper-high",
+      "base_workload": "banana-unequal-notebook-direct",
+      "settings_override": {
+        "working_precision": 1400,
+        "chop_precision": 600,
+        "expansion_order": 110
+      },
+      "paper_lines": [
+        1089,
+        1104
+      ],
+      "historical_transport": "under4hours",
+      "reported_error": "1e-58",
+      "alternate_path_difference": "1e-61",
+      "reference": "B11 coefficients eps0..4 at final point;55digits after decimal printed in paper."
+    },
+    {
+      "id": "banana-unequal-paper-short-route",
+      "base_workload": "banana-unequal-notebook-alternate",
+      "paper_lines": [
+        1105
+      ],
+      "historical_runs": [
+        {
+          "time": "23minutes",
+          "reported_error": "1e-70"
+        },
+        {
+          "time": "6minutes",
+          "reported_error": "1e-34"
+        }
+      ],
+      "limitation": "The paper does not fully specify every option/expansion order for both timings; do not claim exact timing reproduction without resolving them."
+    }
+  ],
+  "bundled_matrices": {
+    "inventory": "matrix-inventory.json",
+    "equal": {
+      "files": 5,
+      "shape": [
+        4,
+        4
+      ],
+      "logical_disk_bytes": 589,
+      "wolfram_memory_bytes": 8888
+    },
+    "unequal": {
+      "files": 25,
+      "shape": [
+        15,
+        15
+      ],
+      "logical_disk_bytes": 8251163,
+      "wolfram_memory_bytes": 104991296
+    },
+    "epsilon_nonzero_orders": [
+      0,
+      1
+    ],
+    "epsilon_zero_placeholder_orders": [
+      2,
+      3,
+      4
+    ]
+  },
+  "external_datasets": [
+    {
+      "id": "1812.11160v2",
+      "url": "https://arxiv.org/src/1812.11160v2/anc/",
+      "files": [
+        "XB_Atilde.txt",
+        "XB_Boundary_values_X0.txt",
+        "XB_Boundary_values_X1.txt"
+      ],
+      "metadata": "https://arxiv.org/src/1812.11160v2/anc/README.txt",
+      "status": "not_in_clone;not_downloaded_by_this_audit",
+      "dimension": 108,
+      "normalization": "eps^4*exp(2*eps*EulerGamma) according to ancillary README"
+    },
+    {
+      "id": "2005.04195-unversioned",
+      "url": "https://arxiv.org/src/2005.04195/anc/",
+      "files": [
+        "1loop/diffEq-1loop.m",
+        "zzz/diffEq-zzz.m",
+        "zmz/diffEq-zmz.m",
+        "mzz/diffEq-mzz.m",
+        "1loop/numIntegrals-1loop.m",
+        "zzz/numIntegrals-zzz.m",
+        "zmz/numIntegrals-zmz.m",
+        "mzz/numIntegrals-mzz.m",
+        "alphabet.m",
+        "determinants.m"
+      ],
+      "status": "not_in_clone;not_downloaded_by_this_audit",
+      "version_caveat": "Notebook prints v1 URLs but URLDownload uses unversioned endpoints; current latest arXiv version isv2. Pin actual bytes/version and validate embedded notebook points before benchmark claims."
+    }
+  ],
+  "preparation_tools": [
+    "extract-inputs.wl",
+    "export-data.wl",
+    "build-inventory.py"
+  ],
+  "live_smoke": "mpl-101-4/fixture.json",
+  "next_steps": [
+    "Load/export all exact matrices and boundary records once external assets are pinned.",
+    "Build matching Rust drivers using the exported boundary normalization and prescriptions.",
+    "Run repeated same-host single-core measurements only after correctness/refinement checks pass; include symbolic setup and transport separately.",
+    "Preserve every upstream reference precision rather than treating working precision as achieved digits."
+  ],
+  "clone_modified": false
+}
