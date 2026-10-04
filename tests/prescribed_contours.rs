@@ -264,3 +264,28 @@ mod prescription_validation {
         ));
     }
 }
+
+#[test]
+fn a_coarse_real_obstacle_from_another_polynomial_is_refined_before_detouring() {
+    // Extracted from the PH1-to-PH6 source-domain obstacles: native isolation
+    // gives 357/577 an initial radius 1/4, covering the distinct crossing 5/6.
+    // The exact roots are separated by more than 1/5, so precision is ample.
+    let p = Precision::decimal(50).unwrap();
+    let plan = planner(&["577*x-357"])
+        .plan(p, &[polynomial("x-5/6")], &p.zero(), &p.i(1))
+        .unwrap();
+    assert_eq!(plan.crossings.len(), 2);
+    assert!(p.close(
+        &plan.crossings[0].point,
+        &p.rational(&Rational::from((357, 577))),
+        14
+    ));
+    assert!(p.close(
+        &plan.crossings[1].point,
+        &p.rational(&Rational::from((5, 6))),
+        14
+    ));
+    assert!(plan.waypoints[2].re < plan.waypoints[3].re);
+    assert!(plan.waypoints[1].im > p.real(0));
+    assert!(plan.waypoints[4].im > p.real(0));
+}

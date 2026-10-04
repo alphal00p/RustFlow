@@ -1,5 +1,19 @@
 # Implementation coverage
 
+The current integrated milestone passes 329 release unit/integration tests and
+one doctest, strict all-target Clippy, and formatting. It adds prescribed
+threshold continuation in the growing physical cache and CLI, a sharper
+inherited-error estimate for pure-epsilon systems, and compatible analytic
+singular-origin initialization. Separate production scientific runs pass the
+full 108-master system, all 16 crossed Higgs+jet supplied-system cases, and the
+13-master prescribed cache route. The [integrated report](../reports/validation/2026-10-04-prescribed-integration.json)
+records their distinct source/binary provenance and retained failed attempts.
+The [coherent full Higgs+jet matrix element](gg-hg-matrix-element.md) also matches
+an independent oracle using native HEPKit, with 19 propagated relative digits.
+Full feature parity, a uniform 20-digit amplitude result, general cut recursion,
+and broad performance parity remain open. The chronological milestones below
+retain their original scope and validation counts.
+
 The tool is now named RustFlow; the Rust crate remains `symbolica-amflow`.
 The [expanded parity goal](parity-plan.md) includes DiffExp, linear propagators,
 cut phase-space integrals, a growing native boundary cache, and HEPKit integration.
@@ -74,7 +88,7 @@ The [canonical-system release gate](../reports/validation/2026-10-04-canonical-r
 passes 283 unit/integration tests and one documentation test, strict Clippy and
 formatting. [Canonical dlog systems](canonical-systems.md) now restrict their
 letters to each path before assembling the connection and use the same growing
-[physical cache](canonical-cache.md), with binary schema 4. The CLI accepts
+[physical cache](canonical-cache.md), whose current binary schema is 5. The CLI accepts
 registered roots and explicit germs. Exact polynomial grouping and shared source
 guards preserve removable letter, radicand and coordinate holes. The
 [full 13-master cache experiment](full13-canonical-cache.md) checks every epsilon
@@ -97,8 +111,11 @@ The [full Higgs+jet supplied systems](gg-hg-coverage-inventory.md) pass a nearby
 physical-point check of all 545 coefficients across 48 planar and 61 nonplanar
 masters. The [crossed supplied-system check](../reports/validation/2026-10-04-gg-hg-crossed-form-factors.json)
 now covers all 4,360 W/Z coefficients and eight form factors. Propagated
-form-factor bounds support 19–20 relative digits; coherent W/Z matrix-element
-validation and uniform 20-digit form-factor accuracy remain incomplete.
+form-factor bounds support 19–20 relative digits in those separate W/Z contexts.
+A [common physical-point comparison](../reports/validation/2026-10-04-gg-hg-coherent-form-factors.json)
+now checks both masses at the same exact kinematics; its form-factor bounds support
+18–20 relative digits. Native matrix-element contraction and uniform 20-digit
+form-factor accuracy remain incomplete.
 
 The [updated RustRed bridge gate](../reports/validation/2026-10-04-rustred-bridge-release.json)
 passes 297 unit/integration tests plus one documentation test, strict Clippy and
@@ -111,10 +128,27 @@ The current [prescribed-contour interface](prescribed-contours.md) accepts
 explicit polynomial prescriptions. It does not infer them from a process.
 Registered roots now participate in the same [progressive cache](algebraic-cache.md),
 with explicit local sheet choices, inherited uncertainty and binary restart.
-This entrypoint admits regular real straight paths with real, nonzero radicands;
-complex or threshold-crossing cached transport remains pending. Full two-loop
-five-point and full Higgs+jet amplitude benchmarks and algebraic singular
-endpoints also remain incomplete.
+The separate [prescribed cached transport](prescribed-cache.md) entrypoint accepts
+exact affine paths with polynomial prescriptions and an explicit homotopy-admission
+policy. It retains actual root germs at verified physical checkpoints, excludes
+complex detours from the physical bank, and uses schema 5 for continuation identity.
+For connections with an exactly absent epsilon-zero term, inherited uncertainty
+uses the finite Dyson series of the retained epsilon hierarchy. The [full prescribed-cache trial](../reports/validation/2026-10-04-prescribed-cache.json)
+passes all 65 coefficients of the 13-master five-point system at a 20-digit target
+and retains 427 physical bank entries. This includes independent transport
+refinement and unchanged source-error evidence. General algebraic singular
+endpoints and the full Higgs+jet amplitude remain incomplete.
+
+The [108-master nonplanar benchmark](diffexp-nonplanar108.md) checks all 540
+coefficients against original DiffExp and an independently refined native run.
+Its initializer handles the compatible analytic, log-free sector of a pure-epsilon
+regular singular origin whose registered roots remain nonzero; it does not supply
+a general Puiseux or logarithmic algebraic endpoint solver.
+The original full [74-master MZZ](../reports/diffexp/fivepoint-mzz-original.json)
+and [86-master ZZZ](../reports/diffexp/fivepoint-zzz-original.json) PH1→PH6
+benchmarks also pass all 370 and 430 coefficient checks. Their recorded original
+settings assert 15 digits; these reports do not claim a completed native
+comparison or the separate ZZZ 128-digit profile.
 
 The original paper's mandatory numerical acceptance gate passes: all four
 two-loop targets at s=30, t=-10/3, m²=1 have automatically generated Laurent

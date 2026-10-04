@@ -48,7 +48,8 @@ A canonical cache identity retains the ordered variables, letters and constant
 matrices, root registry, source guards, basis and normalization. Its representation
 is distinct from a dense connection identity: algebraically equivalent inputs
 are not silently assumed to define interchangeable cached boundaries. Binary
-schema 4 stores this representation directly and rejects older snapshots.
+schema 5 stores this representation and optional prescribed continuation directly,
+rejecting older snapshots.
 
 Regressions compare canonical and dense pullbacks exactly, preserve removable
 source and coordinate holes, and check a complex root letter against the

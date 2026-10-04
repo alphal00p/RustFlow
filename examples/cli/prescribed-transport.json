@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "derivatives": {
+    "s": [
+      [
+        "eps/r"
+      ]
+    ]
+  },
+  "basis": [
+    "I"
+  ],
+  "normalization": "1",
+  "branch_domain": "sqrt(s) continued below s=0; explicit endpoint germs",
+  "leading_epsilon_power": 0,
+  "last_epsilon_power": 2,
+  "cache_directory": "../../target/cli-prescribed-cache",
+  "seeds": [
+    {
+      "coordinates": {
+        "s": "1"
+      },
+      "working_digits": 80,
+      "verified_digits": 35,
+      "coefficients": [
+        [
+          {
+            "real": "1",
+            "imaginary": "0"
+          }
+        ],
+        [
+          {
+            "real": "0",
+            "imaginary": "0"
+          }
+        ],
+        [
+          {
+            "real": "0",
+            "imaginary": "0"
+          }
+        ]
+      ],
+      "absolute_errors": [
+        [
+          "1e-60"
+        ],
+        [
+          "1e-60"
+        ],
+        [
+          "1e-60"
+        ]
+      ],
+      "provenance": "Analytic Y(s)=exp(2*eps*(sqrt(s)-1)) on the principal sheet: exact coefficients at s=1, stored at 80 working digits",
+      "root_germ": {
+        "r": "principal"
+      }
+    }
+  ],
+  "destinations": [
+    {
+      "coordinates": {
+        "s": "-1"
+      },
+      "root_germ": {
+        "r": "opposite"
+      }
+    },
+    {
+      "coordinates": {
+        "s": "-4"
+      },
+      "root_germ": {
+        "r": "opposite"
+      }
+    },
+    {
+      "coordinates": {
+        "s": "-4"
+      },
+      "root_germ": {
+        "r": "opposite"
+      }
+    }
+  ],
+  "options": {
+    "digits": 20,
+    "guard_digits": 30,
+    "series_order": 64
+  },
+  "namespace": "rustflow_prescribed_cli",
+  "roots": {
+    "r": "s"
+  },
+  "continuation": {
+    "kind": "prescribed_affine",
+    "domain": "lower physical s half-plane; no additional winding",
+    "prescriptions": [
+      {
+        "polynomial": "s",
+        "side": "-i0"
+      }
+    ],
+    "unprescribed_side": "-i0",
+    "homotopy_admission": "all_planner_routes_in_declared_domain"
+  }
+}

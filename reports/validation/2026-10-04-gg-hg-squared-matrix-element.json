@@ -1,0 +1,1347 @@
+{
+  "MH_squared": "1",
+  "MW_squared": "5399/13074",
+  "MZ_squared": "7775/14631",
+  "alpha": "1/128",
+  "alpha_s": "118/1000",
+  "evaluations": [
+    {
+      "bits": 256,
+      "imaginary": "0",
+      "real": "4.330896620239807810685905609324107407099586592501332217072507265531229985795e-8"
+    },
+    {
+      "bits": 384,
+      "imaginary": "0",
+      "real": "4.330896620239807810685905609324107407099586592501332217072507265531229985795405567426467250200459763661630547134293e-8"
+    }
+  ],
+  "homogeneous_quadratic_term_count": 72,
+  "native_owner_chain": "FeynKit Process -> Amplitude::squared -> sum_spins/sum_colors -> Idenso typed expanded/simplify_algebra -> native SU(3) Casimir formulas -> Kinematics::apply -> Model::expand_couplings and exact model parameter definitions -> Symbolica evaluate_with_prec",
+  "observable": "Pure |A_W+A_Z|^2, incoming two-gluon spin/color average only (IDEN256), final-state sum; no HEFT interference",
+  "oracle_absolute_difference": "1.309709958659250133221707250726553122998579540556742646725020045976366163054713429262651319892700963256751331496977e-40",
+  "oracle_binary128": "4.33089662023980781068590560932409431E-0008",
+  "oracle_relative_difference": "3.024108108557737078338837514226102115436785850304086116962262332898658905699532591444695751438426135016554226382322e-33",
+  "physical_s": "7173070292440521/111284741846000",
+  "physical_t": "-12058167788971/339319588980",
+  "physical_u": "-24192567254732572725551/866477578314137826000",
+  "status": "passed",
+  "uncertainty": {
+    "absolute_total": "1.036965279540889484229816607147212347491680749337440461240057773672673644280375266356913373971924891557682004240003e-27",
+    "arithmetic_reserve": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-65",
+    "formula": "sum_i |df/dx_i| delta_i + 1/2 sum_ij |d2f/dx_i dx_j| delta_i delta_j; exact quadratic dependence certified by native polynomial grouping",
+    "gradients": [
+      {
+        "component_absolute_allowance": "2.289442277848471061721902375812729698034012320130570285353681993131585456961394592319192087592830576707897159726113e-26",
+        "derivative": "1.593299897653764164445986487649711310757239527680446998008688297189266240775277854563460297183394686796283562128116e-3",
+        "parameter": "GGGHEWWW_ForFac1_RE"
+      },
+      {
+        "component_absolute_allowance": "2.289442277848471061721902375812729698034012320130570285353681993131585456961394592319192087592830576707897159726113e-26",
+        "derivative": "-5.696528241664416229193983896809739359457191573011329075722099371636462829790254291868172311572208621467948001554200e-3",
+        "parameter": "GGGHEWWW_ForFac1_IM"
+      },
+      {
+        "component_absolute_allowance": "4.353014092257436734606982563129745702623730028177662551019522298554460677561823240898739112534691675300169662098514e-25",
+        "derivative": "3.357681296448928894122481419971522022795633180622660197359140632429323486016696502748814498686868846290836081560642e-4",
+        "parameter": "GGGHEWWW_ForFac2_RE"
+      },
+      {
+        "component_absolute_allowance": "4.353014092257436734606982563129745702623730028177662551019522298554460677561823240898739112534691675300169662098514e-25",
+        "derivative": "-2.273796455655057738387331225504482468128587190072487961869447687965553069368263574972062141350006277615004590732002e-4",
+        "parameter": "GGGHEWWW_ForFac2_IM"
+      },
+      {
+        "component_absolute_allowance": "4.103171368820387461726714767152197898235956134384709967460066721729586777644628502939486815277608057387479652479069e-26",
+        "derivative": "-6.519350011356155456594679498895836734033337174220328849034288028709962833576895299535029185951737604629488443976322e-4",
+        "parameter": "GGGHEWWW_ForFac3_RE"
+      },
+      {
+        "component_absolute_allowance": "4.103171368820387461726714767152197898235956134384709967460066721729586777644628502939486815277608057387479652479069e-26",
+        "derivative": "6.996174888385301096492797963295703898434371102762501054557245796891677637831253177550562189076995202909818383018748e-4",
+        "parameter": "GGGHEWWW_ForFac3_IM"
+      },
+      {
+        "component_absolute_allowance": "1.909457398070527145335680275763894806017297812830448865386300429018212844725557428564196774501532285010624731919360e-25",
+        "derivative": "-1.798149364006063126012559387266575830518256145020126713128443993621916811452383777924683178626437456061173942508039e-4",
+        "parameter": "GGGHEWWW_ForFac4_RE"
+      },
+      {
+        "component_absolute_allowance": "1.909457398070527145335680275763894806017297812830448865386300429018212844725557428564196774501532285010624731919360e-25",
+        "derivative": "-9.781256404447170300997523155598623801545564397790981166192574851924334617780005780352191769086795512332272487580396e-5",
+        "parameter": "GGGHEWWW_ForFac4_IM"
+      },
+      {
+        "component_absolute_allowance": "3.085061743744845428904247889560447290799134991694023744491235657255181616299932733014962698395583784287716564179076e-26",
+        "derivative": "1.123106425594519296040733801240659504500780922552265882361683954942220847664974131288091540725510073423235159045785e-3",
+        "parameter": "GGGHEWZZ_ForFac1_RE"
+      },
+      {
+        "component_absolute_allowance": "3.085061743744845428904247889560447290799134991694023744491235657255181616299932733014962698395583784287716564179076e-26",
+        "derivative": "-4.015444600991398128827114797090033317748005244082883088738630337104886762708680268070453549742340252649018537025942e-3",
+        "parameter": "GGGHEWZZ_ForFac1_IM"
+      },
+      {
+        "component_absolute_allowance": "5.559710371871399276020709954142272073212153479858167209952831777158960703815473743221350059648969604946179901419886e-25",
+        "derivative": "2.366807055403327129613463747726442717906126030956186628659445977865871961000146321002981987684630327017842548627554e-4",
+        "parameter": "GGGHEWZZ_ForFac2_RE"
+      },
+      {
+        "component_absolute_allowance": "5.559710371871399276020709954142272073212153479858167209952831777158960703815473743221350059648969604946179901419886e-25",
+        "derivative": "-1.602783891218939887030259578308440429060239359646628972694505704910832574922369026950181468748030705520236722896967e-4",
+        "parameter": "GGGHEWZZ_ForFac2_IM"
+      },
+      {
+        "component_absolute_allowance": "9.272156194059254810596316994979123367551441088263202054008446264099794763538697852481209086427290642347790844747404e-26",
+        "derivative": "-4.595446155011872520197022571469795045420441492597412833492737900147905609448538043559293210188076878941813903173089e-4",
+        "parameter": "GGGHEWZZ_ForFac3_RE"
+      },
+      {
+        "component_absolute_allowance": "9.272156194059254810596316994979123367551441088263202054008446264099794763538697852481209086427290642347790844747404e-26",
+        "derivative": "4.931556816955267389185443364942031111265589517789886740907855997489769904001989161292972773192009185643820189730239e-4",
+        "parameter": "GGGHEWZZ_ForFac3_IM"
+      },
+      {
+        "component_absolute_allowance": "2.498774449646958905325750897334242830492284807500043986214120492418334063153604647387250027585561275078712835408388e-25",
+        "derivative": "-1.267503442300956478977900460845287496597109713062884164611535042584657443170824907301029117752861318739427258249290e-4",
+        "parameter": "GGGHEWZZ_ForFac4_RE"
+      },
+      {
+        "component_absolute_allowance": "2.498774449646958905325750897334242830492284807500043986214120492418334063153604647387250027585561275078712835408388e-25",
+        "derivative": "-6.894742122558880631911632462971829880271246431448400479865533647768485458702893641840631602038055792359809857182164e-5",
+        "parameter": "GGGHEWZZ_ForFac4_IM"
+      }
+    ],
+    "linear": "1.036965279540889483963905878650919657846097623700845931752262803349386470015669426304457957974434595330065629260059e-27",
+    "metric": "absolute error, conditional on supplied complex FF absolute allowances; each real/imag component conservatively gets the same complex allowance",
+    "quadratic": "2.659107284962926896355831256365945294877949703232871742647058400524554159974902962276163749799442924006630131852274e-46",
+    "relative_total": "2.394343182182610640507098914400647349954599014676214101631470792730952317541292985415539474387140347664324994171361e-20",
+    "source_scope": "The model/scientific phase-point inputs are exact definitions; supplied FF numerical evidence remains the limiting uncertainty. No 20-digit claim follows from working precision or oracle agreement alone.",
+    "relative_digits_supported_by_estimate": 19,
+    "meets_20_relative_digits": false
+  },
+  "arithmetic_refinement_absolute_difference": "4.05567426467250200459763661630547134293E-84",
+  "provenance": {
+    "scope": "Target-only compatibility probe; shared HEPKit/RustFlow/RustRed and original UFO sources untouched.",
+    "tensor_input_proof": "All original Lorentz strings match the previously validated Python-compatible copy exactly; only 3 native bracket scopes added before original loader parsing.",
+    "cpu": 26,
+    "workers": 1,
+    "numerical_timeout_seconds": 240,
+    "timing_claim": "No performance benchmark or speed comparison is claimed.",
+    "hepkit_head": "a33254faf0ac960c0589891ffdd2d8f38d334b05",
+    "plugin_head": "89f64b93d0bdbd8ee90eb85737021189229b034a",
+    "hashes": {
+      "/common/dev/mg5_higgs_ew_plugin/UFO_model_gggH/lorentz.py": "c8469e01e5f041188c0af926d01aed263649760be66826cec78a1cdf6d7b9db6",
+      "/common/dev/amflow/target/gg-hg-amplitude/legacy-python3/UFO_model_gggH/lorentz.py": "a4f59daad1e8cf8481c5dd24d9a08c76c0e369fe91c7e00b4e42340ce0e43d33",
+      "/common/dev/amflow/target/gg-hg-amplitude/python-compatibility.json": "efebc0051ef3c71032f88965ea5e5c67bd9087bf5fbeda3f7ecf27e872eb2f04",
+      "/common/dev/amflow/target/gg-hg-coherent/amplitude-input.json": "c8d2e3a61b0b1f97a82db89b1a7774531447cc221a5b3a6c43adf00fb247d674",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/result.json": "f83aeff15ff15cb7c516ee242c4b784ae08b79d22d11222a1b2f9c19e4e70a1e",
+      "/common/dev/amflow/target/hepkit-ufo-native/Cargo.toml": "24b6ea5a95c7d175674c87b3b189125031a14e0bb6fd8b9681d11122cf6f41ec",
+      "/common/dev/amflow/target/hepkit-ufo-native/Cargo.lock": "9aae8f41c687740bfbb789f9b5bacacf8c76d801ac143c78fc38ddd0e1f98e0a",
+      "/common/dev/amflow/target/hepkit-ufo-native/src/amplitude.rs": "239c8668487dc057d26065a87d0cd6c108c76b7575824976a8c2299ddf568818",
+      "/common/dev/amflow/target/hepkit-ufo-native/src/evaluate.rs": "d4c00611c4ff6b2652dd841722f0d00433b65305047382010089d7c2f554130c",
+      "/common/dev/amflow/target/hepkit-ufo-native/src/main.rs": "5250a5e04adbee604c89dddb8f567fe55c66104bc3ec1eefc06d1a333b89579e",
+      "/common/dev/amflow/target/hepkit-ufo-native/src/scope.rs": "57ff4c9fb2f42309ec511c06fc419af5b15a6026909b8fc50eda81caeaab193a",
+      "/common/dev/amflow/target/hepkit-ufo-native/src/scope_lorentz.rs": "f5c21cde14b30a1ee4e5ff4996f669a3e27f7846973caeb12ee49114a79aad84",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/prepare-model.py": "f6ee8fc3add7804d5302526cf5356c79a807456797f99a3b9a24eafa48294ce8",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/finalize.py": "d2777ef2012c76bf2bf06514f1257fff28f5d33a09bb2a58e41d094ee20a20c2",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/original-lorentz.json": "d94f8e25b36aed96327f0fe05ae84f05507487996a990c848d2c6ed460b9aaf8",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/scoped-lorentz.json": "b2a086b3e4cc5e95a66401a6690bf802bdcab43bbccecc468f62e1a1e2342693",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/scope-counts.json": "954035e7724dd2721af02cb87be7a1a9c85f43bf8d5408f2e16cc3c391f5e415",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/scope-input-provenance.json": "5d3b12e5969d594e1ac35969c188439e5a5df74759ed074ed69f76220ff497c1",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/native-model.json": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/tests.log": "21b03150de036c5adeaeaa9b989b4c01e508055505004fdd0a467e1d5b3ef8f7",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/export.log": "bea2240858c7321a9eb0eeadec3f6f3611f2e867a6424c5b97df27f60a051297",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/evaluate-bound.log": "0703935883852031b2a3e458cb4983c7a39384effb24211c422b32f4839526f5",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/expanded-amplitude/scalar.atom": "99bfb6294ea65f85a54fe0707b591efc6b9568b778cfbafc709aae3604005bd3",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/me-symbolic.atom": "251ae8aa95838acc5cea20e8bb2d919941dfb6665774b289942ad54ac0ea1a5f",
+      "/common/dev/amflow/target/hepkit-ufo-native/scope/me-values.atom": "2e3870be8ff1afd4bf6a20371b7f9a21eff734b99e442fc46f630ff303d96a92",
+      "/common/dev/amflow/target/hepkit-ufo-native/build/release/scope-lorentz": "05d305fbd3961bc9fa39583bc66a25e8180a4bc57a29670f8d7dea1395137488",
+      "/common/dev/amflow/target/hepkit-ufo-native/build/release/rustflow-ufo-export-probe": "e1dc71bfcad262da56b27ebf8fb2e27205a7f2d8a04af02b426347cfa5c15647",
+      "/common/dev/amflow/target/hepkit-ufo-native/build/release/native-amplitude": "98248341a7c0c186a39f738c2530eb517a6067e69d570684903d3a32fce4a42a",
+      "/common/dev/amflow/target/hepkit-ufo-native/build/release/evaluate-me": "e5b3bad2978f7f14cc299c00d59b6acbf14edf66a826802fe7ba81b4693ab734"
+    },
+    "linked_release_rlibs": {
+      "libadler2-fbc3450724db8e61.rlib": "fe3b9d5615f53f7fedf56307b3f7064f2da2f09a20f3007e83db9942a54e08ed",
+      "libahash-97cb43924dcd28f0.rlib": "0c9b2987843df76f67ced32b592d2284945447c8f88664a6a94cacff5cbcda73",
+      "libahash-dc6f12ea129ed11e.rlib": "e9021ce7d9ab95ca8f3959b279af091c5aebd59857ab9a37bde9f713a00625ba",
+      "libaho_corasick-658d2ae7f18658f9.rlib": "2bd4f972a6709514f14eeb2cf2cee428edf8fafbeb959c97782c4133f58bf31d",
+      "liballoc_no_stdlib-fa3ed7e59b201f77.rlib": "9f9e928efd222801bcba55818b00041248c2707412c47d9ecbe9262dbd16e443",
+      "liballoc_stdlib-8bf7c3559ba56ed6.rlib": "bf7c37620fdcda2c5c8b2e24c7fa7b71cf3b3f5b4d26b094f3dec154e5da5aa3",
+      "libanstream-3fc52d3e87c3e75b.rlib": "5b33a1da3d8761caad438db155bf86d89943edc536cbd263d71de99c78b0b76e",
+      "libanstyle-b369f8e01b6a25e6.rlib": "4ee2876f6f4c52b0f106203b1f759b6ec36368b4ff401b13c0c33543ac68a85c",
+      "libanstyle_parse-13194a8df0494286.rlib": "ad1bbb55d3129262c3d65196b3015d2c86f35b7d4220bfc9cda9b3208c7a1ca1",
+      "libanstyle_query-84090b67e8e637c2.rlib": "b65a298130174cf8d9c927bee32c9de18c5a1230cb705c46f3ef461771e6a201",
+      "libanyhow-f538d9fe4e44ea80.rlib": "c2b18e8ee62ceea4d9c8a7603327f7512475da520a320e1e030c85b8d9f80d6b",
+      "libappend_only_vec-4c6a86e18eb26602.rlib": "0f38a915861834e42847b5cec15ef58ddd125df13057295f8a867b5c20d537b9",
+      "libapprox-d9cf1648a30ce83e.rlib": "83d3e92dbc4a344118ac157bc29c5eeb1c6ba066fcbbc5c1718d82f28b11e0b7",
+      "libarrayvec-518736c700914a7e.rlib": "02488f3f54e431d6436ae38531fe0d43b4299cacfe03390940a4ec3e7724c559",
+      "libautocfg-b29aa6b532941b60.rlib": "4573867a705d1d8415d62a9109b48caadd8e7f992dfe644682b7b04d47dcb6a7",
+      "libaz-64183b072f46754d.rlib": "0715d715074f99094db526e33b9263c1a9a15ca3c7d529f59d74c8df30e78e9f",
+      "libbase64-da050f947f35db81.rlib": "911ee326c5d19accbe612f59a6bb217446609b2492cc575600ed49dc61a2c7a7",
+      "libbincode-24fd4c518f4f51f2.rlib": "7be0b93397ef81b1079505344be0e0d0f75d4016f1c453f39f9a3a25da8236c2",
+      "libbincode-87c35b8770e6ad10.rlib": "ab00f159b16d6a836efd4fad69e9281c4f72542bb600b953d20fbb6550dbc48b",
+      "libbitflags-17816e7a933bd057.rlib": "77b17cccf78d5bc0dc7dfb650a50207d0e5709b9c635972b1fd310d9ce3bf138",
+      "libbitflags-ca0a6856b98c6411.rlib": "e0b293988de52c4deb94c9f7da25225be2a3bca00d09f8edd331edff76f18699",
+      "libbitvec-df666553eadba565.rlib": "bda5ccf19924b2737dfdc13674093d5bfc197b58ef016d94265afec708c19a81",
+      "libblake3-2aa7721f88e547ea.rlib": "93aea2a8dcee39628215ef84c91dbbb15d8ed532db5960e1648fca964c5711a5",
+      "libbrotli-25c4279dd900d8ea.rlib": "80b16c0a3c89617da0c5bf39178562056d1fd0e967261149d6e7f56a521ca80f",
+      "libbrotli_decompressor-4b04c9ee75a72ee0.rlib": "2640cbd0dba27072fcd00b31b87f9110dd0cfefa71da64f11ba459aece67c6dd",
+      "libbytecount-e9efdf8b7afd81e9.rlib": "c0df3051998c096055a1a6477af53f37759b1aa7f460c0565d891da719ba25b0",
+      "libbytemuck-b6943d27d98db70e.rlib": "bbb35eb33d328a052ee21b3dacf02bb6f0a04ca91ce01e6ce96bb0eeede4456f",
+      "libbyteorder-b5e651e2a2f2b9df.rlib": "70644e3594cb6f6c567db55ee9f6727465678fdf482bbbf05ef2b0fa9e21759e",
+      "libbytes-fae1121e7901b54a.rlib": "a2d3ad7dd2f34bd72e30b88bb5657874dc64d6d3213e67ffce90eb55a05b6e06",
+      "libcc-61bd2f4d3e34625f.rlib": "a2542003e55e2ee040f2f58f059363a983343c69b08b1a55e99075c89b1f107b",
+      "libcfg_if-1ba0c17aa534a439.rlib": "183cc64efdd842b263f0522e1b5cc87f0dfbe31436bef0dce29a177281b20443",
+      "libcfg_if-bf9fc8010556e1ad.rlib": "6adfb2f0bf4f85b719f47fa61d08b8e45a0bf20adf5a8d33712e563611210ada",
+      "libcolorchoice-ba062d9c63601696.rlib": "3991421587ec608ecf3007ab6d2d201d08152cf8b2ab386ca05b26404338d268",
+      "libcolored-10f259ca28c49283.rlib": "db0adcae0eacb2d8092a0e1a37c917c17052c0eea8ef75052b6084d698610107",
+      "libcolored-5d6846c79ef23e4f.rlib": "1e436e4635722d9712a8d66e9c5656ac9eb50701bbbf3da5b1ce5b18655d733b",
+      "libconst_random-d3129ab8b5f965f5.rlib": "47ed4324f7073a65e0b7b23011c1c63da65ff19e559b6f8e06d4b8067fb371f9",
+      "libconstant_time_eq-31ff55d32f59e1f6.rlib": "b13af7161b5ab3fe7a9cec5e9455c3d3fe544a533a49b322a38cff7b22612acf",
+      "libconstcat-9e4bf5c4510ee463.rlib": "f55298aa7276bdeadd2923380fa0b9502dc25e9cb0f825eac0f91577586fcff8",
+      "libconvert_case-4b68e5baab00ce30.rlib": "7f5c99bc817500f73c21362af5b4b0fce198838ad308895b08587536bd3e1bee",
+      "libcpufeatures-582fb27cb299c0a3.rlib": "1f767e445061ab32a0d3ca383486748e0c55ccb7431492158d2b4167627a214a",
+      "libcrossbeam_deque-6a95bd83a7ffcd9e.rlib": "81bf25031f68d8bc3f17d323402e4c9c9d7d73efea230bbdfa7641efe267aa6a",
+      "libcrossbeam_epoch-a95bf5dbbba91f9a.rlib": "652cb9c7dae4af6f2c00dd9c8e82d84bafad78e718d5eec4abee5baa74ea2903",
+      "libcrossbeam_utils-31388a968bac8bf2.rlib": "d10e8d26ecb17f960f5e29ed1471c27b885454b37196fdae9572d6be27f9bd08",
+      "libcrunchy-694f2903759d2b52.rlib": "ec052142395916fff3f92ed722f5d58f6dcf0d22e9a00cd748aee6b3bbc4de78",
+      "libdata_encoding-f6b79ba95d95112e.rlib": "fa2a9d2e7e2233aa9d2615fdf92f2ba613a8e462ae114fa1c6d4c797303654b4",
+      "libdirectories-c9790a102274d7a1.rlib": "129a568cd5dbb0eca9aa8cc0b6727c78d867353e7bf71d87c231f5055912a113",
+      "libdirs_sys-f4b37be80b81ab37.rlib": "0d3f99800caab08d68e339a0994a4d5df8ebeab504d78ce4363347e4ad5fbb20",
+      "libdot_parser-a8bc38e24576e7a1.rlib": "c2da1e8284a9f222662d87189ae23c7a9d969e5ccd24aa6de19cf17a9d9c3a5c",
+      "libdyn_clone-cb6145ede517b540.rlib": "d5e218cf8c692e2996015b02f17dcd7c9e2bb0607f62c33e99692f46fbb10755",
+      "libed25519_compact-86b544a9caa349c3.rlib": "c6372303eb32473bcb15333c4bab0d18041ebf0d9dacd7a6d0ba94d75ed7c41c",
+      "libeither-9ae45a52aef4d6c8.rlib": "0f44f031a15780fd03808ce553fe62bfb82369b97230c4db217a358884433e20",
+      "libeither-d91f3943acda037d.rlib": "aaa822a898a102d2f655f9e934528a7246a47bc4af9b4b92edc4f51bec17c793",
+      "libenv_filter-766cdb818dbf6d49.rlib": "b9f5ea650458f2ae3a1d41e4539a6764c886de2b7cab75f1628758b490d6b155",
+      "libenv_logger-53fff5302240de48.rlib": "edc2fefec58834285d0956d796c2e86d3d52875b10d69dd7cf8f908e078ca4f0",
+      "libequivalent-a23ca7ca99bb006a.rlib": "6ce3c305d25c4534dd4a4f325e1e6c663e640a77ca13cc431810962c95c33d86",
+      "libeyre-2cf42128c0d53198.rlib": "162672bc733d14e01a675a2f6211e65173a6544c31750246ffa8e7358920931d",
+      "libfeatures-b3ec67bfe5f421d0.rlib": "3d99b24f4c9e35f244a7071df56ce19afba4b604d3ac948389bd8a12affe9869",
+      "libfeynkit_amplitude-fd4cdc2d5a008fb1.rlib": "50d7e8e5cd19cca81bb51aec34ee1d94ff9a54b945b87b3655b66eeac59177f8",
+      "libfeynkit_generator-2bb915f41811fcdc.rlib": "b7222708eaa8523e64505ed7849d154c4fcd81a8c0b9788f269f2b92587c9389",
+      "libfeynkit_graph-675d7d3aaa1f038a.rlib": "f4c4163ec036427cba0683bad5ac0a8fa845d85186620d8844d3ce97e83639f8",
+      "libfeynkit_kinematics-9d6fa0a2234e7166.rlib": "24da9842c6df4af2d8baed81e4be2eb72709ec4576877086a969806e13f0d274",
+      "libfeynkit_model-a8b516f5e931e1d7.rlib": "fc9822922cc7a37c92d5a825ba69408ec0dca9db4bf0a92fa46b9d2393858126",
+      "libfeynkit_model-fd18b5fba04fc204.rlib": "a6e52ff0f8365295e9e36270efbcb63b45c46e4280fb429798a672f8730ca432",
+      "libfeynkit_ufo-1313ad8ec52a8aa4.rlib": "41d43c7b27bbe4d5e77dae939f6ccf271b987b1e9892df1c0cd1e9c4c2adab70",
+      "libfeynkit_ufo-61bd14556efb3944.rlib": "a759acd5d282058f25a0183334ff0c574fe2c23bf0b187b724ceaf358de27e92",
+      "libfigment-86a18096ca3c0c01.rlib": "a53e01fde99054ce5c1cb3618549b917990266ca553dc38c96ee84e28b19534b",
+      "libfind_msvc_tools-ea0fcf9a78af375b.rlib": "bbe095e61d8dfa92ec0267b027ce4f983edb89629d4b17e800c28a7c9c99857d",
+      "libfnv-6c7413bc7c89a021.rlib": "cde05a679b0babb5d1fbf48627f509158b90481adedb31640bc0ed38d41f5039",
+      "libfunty-113db3f3691c9a33.rlib": "1b4d48757c129c23a7f9d7d21263a7dd38fec6f33e6fd65472fc00d90e81336f",
+      "libgat_lending_iterator-1a64d23e9d93d12b.rlib": "5d3091b4cf8cf665d4c2a77ff6148544df24324ad778fe42090b982381120aae",
+      "libgetrandom-586bf6dfba538d33.rlib": "51aa77262322768503c6c06cd9abf0c6e6590f07134269a03e005e82b0013b55",
+      "libgetrandom-ac4bb39866a0a004.rlib": "733eb5ce4e5d8a519cf6ee4592afb19fbb973dc286c30cc354a8a04a2a633183",
+      "libgetrandom-bf6e3fe28165f8af.rlib": "9505b20ee8127b37f82aa45b279802912a4087177bb661ef3b8145e9893f3182",
+      "libgmp_mpfr_sys-ade99bfd65b6c3a3.rlib": "afa3b9c0a939ee8280b6284a0b27d14eb2d7bb3841dfb3ee4ab6fe15f75260b0",
+      "libgraphica-3cc8974d9a801787.rlib": "a51bbacbfb3331f6d567a85868ecc3d514ea5c85a2957749e2da1647ff0cffdf",
+      "libgraphica-7b7f1cf2d19761dd.rlib": "de7f4972637dc51fcef0c72bae4fed7bbcef75c1df871e43cb7d0958f8577a6f",
+      "libhashbrown-d15136473635721a.rlib": "db1a4ce3ce06c29e2efde5e4371499fa7422ef9abf072e97c695440bc39e25a4",
+      "libheck-2b93fc40042d2031.rlib": "a888395fcfbf66f1d64f24d6b374ebd0c0526d3e7fa8b9fad751fc5a7af394d6",
+      "libheck-e09b3659458191c7.rlib": "237c0f1166ef9bd1ca98ba55b818ccfe253897e1677adf5125ba411cc2b25fac",
+      "libidenso-f042f61bdc027a4d.rlib": "859d7ffd5f3e97ae7f4274c10945a5f768aadbca9b105deabed2cc0b36fc79ee",
+      "libindenter-de6e31babd8f68a0.rlib": "51383db0d6e64ba2832495046a668fbc4eb1b4a41e0f572a43433bfb412efa11",
+      "libindexmap-ea3259ac83955ba2.rlib": "656d579acaf6fce742549d9f74b7e1277fca6459fe30fbbd5ece5afea771ccc0",
+      "libinventory-d271677020efc112.rlib": "3fe47d447f6d1961987687943ebbdfc327850553a21ab0779387b274cbc4ede2",
+      "libis_terminal_polyfill-82f9e17fc61a7527.rlib": "db23fc28110075f254626dc04792f59a2bafcbe1ba1034aca4859e6c4a7da14f",
+      "libitertools-5944f5d5772aec14.rlib": "d9c22bfd0e68fdc2b6860b04b9456df7101035da6627837435fa8763f6829ee7",
+      "libitertools-9caad017f2ae4221.rlib": "624e9b92deb338d079c4bed6d97df6371c99b0dcddecd2a75a2aa5425af39cd6",
+      "libitoa-632091724d7008b9.rlib": "2c7f68e06f346eff61d550b70b02692db03d5d2816c2995d40029e220903a174",
+      "libjiff-a5d729dd465670d4.rlib": "c7aa9ed0c04192b8eeda2dc926a5d5363b32e6689693e27f25c6db536f7e61fe",
+      "libjiff_core-448afa0e2f0d412e.rlib": "c2236b923f91fd11f012a6d47e4d9d9d2ef5239eddef52e696d86f554c62c877",
+      "liblazy_static-c33909604af2b80b.rlib": "ce95130591868f6085b8555f7eebaf51c6b496c83227d2408c77ed4a29a51d09",
+      "liblibc-0aab099c4afd1900.rlib": "c371df0834e386e1fa15b7a968f9639ca412efb0b4559ddfb4679f3dba4eb323",
+      "liblibc-c855e1b77741b367.rlib": "b2781b57cd1e0200e9816c058846afd7ff3bad0a43b314c7a6aeecec459f3b15",
+      "liblibm-80c9f4e96c15ea6f.rlib": "bc851d9f4308e457dad26ecb00775b6a707407a3b8be86eb57a07c8414ddeaeb",
+      "liblinnet-eea48384e821b344.rlib": "08f2d7b5ff5ec10dbe207c71586a1ec2f44c57cd48f0ed7e64b2d200d8073f60",
+      "liblog-ddf1f6dcd05619b6.rlib": "cdc8c046cb445cb47e4dd16a5340dab04f0193b1142ed06683a352cb6d61695a",
+      "libmatchers-6d5a0d2b367ebe9f.rlib": "567467d3863db88a13e25723c196fbb150829249a263ac699ec55d6c725b0009",
+      "libmatchers-700926d8472efb4b.rlib": "072bf63a01c47c23ca6ac473dd2f5fac03c5de186a10197de35feb5ec37497a6",
+      "libmemchr-57eee853a94c2da5.rlib": "bbc19b6be1527eb29439730091aa573cb07eb41eee88e4bf96e889688bedcb48",
+      "libmemchr-9fc072040352ddf3.rlib": "1904530728b6dbbd8cd023507cedac99edeb64f85fb1c6859753d9038aae3102",
+      "libmemchr-cef387a5d49345a8.rlib": "7c02aabb261fd43cc6557002a5c799c30a9ad4cb89c2b8f307f5878919a9f886",
+      "libminiz_oxide-ad9e97e3ebfb2b7d.rlib": "de5ea9355040e0a8998234fa5bf14d018028c5b4891e4ac5dafc05128b50482e",
+      "libnu_ansi_term-bc28a320c19695fe.rlib": "81164207b1bd16c1e03855f214b57beb7bbeee2e9cac7ba435396bff9409853b",
+      "libnum-1cadb43b5409df51.rlib": "09e43b796576254b1546c84259d4b414d4f67ef8d553b282c88334a751090b8b",
+      "libnum_bigint-4498a6e98fe016bb.rlib": "d4fb50a38e633fabb52a9fce68720b9f0868a8546c6ecc9ab172d2925d586e8d",
+      "libnum_complex-adc98782e415ed3e.rlib": "8a8c5aaf93e2a1cbb4aa68e988c2e8c57a40d6de85fe4932a35d635c8336f7c2",
+      "libnum_complex-ed1d3b2d77e70a33.rlib": "cae5e5837caca12f11aea2248decb861a76b4af65aae5505d2200ab11aa13ead",
+      "libnum_integer-e8c236e44b84bfc3.rlib": "44fa718fb58a3471d49eda822f792418efc1601a984a50e35389a78bfe52ee1b",
+      "libnum_iter-e0fa48bea10b21a0.rlib": "74a37ee19c40e62461fb2c7c763218847160adc4812e4903107cce3c973eabc5",
+      "libnum_rational-6db3992d0ac9649a.rlib": "459b429347e792fea47d9e39dbf414286ade4fc64136c9eec7861b6c27beef4a",
+      "libnum_traits-e4789f7cd76c466b.rlib": "2aaf45bf7bfe96df7cd7266d51d8888530fe45efbba2865824d8306a18697d05",
+      "libnumerica-75aba18c5c52c0a1.rlib": "fc91aaa2a2dfb4c0f928a4128c5964701d41392160de67a32aca19d151ff5c6e",
+      "libnumerica-9bb75ff6172113d7.rlib": "dd6e7665afd5201a9680f16b085c68f5bf23ae3ef376b5a6ec6cd2cd0a1aca33",
+      "libonce_cell-7515d2ec4939d901.rlib": "e470d9ffd03dad209ec8d86470c66aeaf1ec17764dfcdfe7ea8360f9fd658a21",
+      "libonce_cell-7850967305706c2f.rlib": "45eaf5425d45bbae35eae7a3dee2f2797bd795d8a3c8d21c9ccb01b59327efaf",
+      "liboption_ext-4cf54128bff30909.rlib": "d28a844c96edda14d6b5656759e42f2e06d1c6cdbc48668c830d9c9fadcb0d90",
+      "libpapergrid-619d0186fb0665bf.rlib": "582c1066b22d10032d00b406aecb4aa15721422aa49fe7d90af184bc319e28d3",
+      "libpest-b8eb736b17fc03cd.rlib": "d132f718bde851e91c3fc742f44f2efca1f67874d8d53be6f8f30e832d8019a0",
+      "libpest-c1fbaad921cd103f.rlib": "3cb1c47bedc7a57ddd966b08c26ebaaf4266f7bee2d9510b7f8c0b8703d24911",
+      "libpest_generator-564cab9750120739.rlib": "5c119c7dc3f2efe51d27e52f0ae259d0e456d58086d48090882d8a17abd55f28",
+      "libpest_meta-860cd9cd0ee2f987.rlib": "6602a0b85bab7bbd38a4ed56c65455f14e3c7836c149012858ca229527a40966",
+      "libpin_project_lite-8f379d386cdc00d1.rlib": "d20e9edf9926009b443b10af497b8571450d1b7bf7d2f7045956ab78617c6e93",
+      "libppv_lite86-3e1135156c3ef49a.rlib": "30a4fc502da92f8726bf6625f36cb9bc66f4ad724c245651c59bfc6476a8bf6c",
+      "libproc_macro2-4fa44d20008568e6.rlib": "9402b8f3a8211962a4bbf412eb93dea2e8c296b7dfda9e782b012b26097977bc",
+      "libproc_macro2_diagnostics-ee17cf2da655ef85.rlib": "04c025970f9c345e8a8edb11df463fd97878224b3f121338dd9da87f0b44d568",
+      "libproc_macro_error-56e4b7423f38e6e9.rlib": "6b2478a197bcc395fc1cacca367be3ccb71ac74da6a308f30fd3c1890deb9cdf",
+      "libpyo3-5edf189668d7364a.rlib": "9889f51368f7818543d9a457137cec75e5fe8c6cbf219e31109a5360c0ef4469",
+      "libpyo3_build_config-172c8f92c6a27794.rlib": "db31a31d538b27ced10b832e8e8a7a9708b33fdeb1bf74146a7d0f83f35721f3",
+      "libpyo3_ffi-4f61f12a37fd1d07.rlib": "70eedb2db56872241dfb5c70d769b91d57315f1a64e1db63f700858e643c48a0",
+      "libpyo3_macros_backend-43016c43147b707b.rlib": "799965f43eaf0b02e3e84de0ca66361c314e7085218576f2de2c7b273b42cc67",
+      "libquote-16381db7f9b82a64.rlib": "c6d40d77fa3558af17b1f249c39fa1d50f8163394664f18d27ac502545354bcd",
+      "libradium-cc315f7a92f6ae78.rlib": "ae02b668b09e94e89bb3baebe990e62f35f608373cf4c12d26adaac45c52e5a0",
+      "librand-81c226fc5949bb9f.rlib": "4f63e348c291fc20ceedae0381f774bd3aacb8f76e3fc6f07aaed5624b632d24",
+      "librand-db61b97f50abe11f.rlib": "d416ece5b048b918521e912a357269b2c5d160c488a7a02f784b6ec04dc97126",
+      "librand_chacha-1570184cbc29eef7.rlib": "3dd6cd13af3a2bfb27390fdf6a61c2a511e6e57469dbc2320bd36ea09140281a",
+      "librand_chacha-c6fbe30b6dc6d26a.rlib": "c4189d7a42198ea95c1f32eeaa845275e43903379ffb0749486e08de954883ca",
+      "librand_core-88037a2989710af6.rlib": "c5423cfc4876475c8f4b7e977d76e1a38d036b0fe7f4d3bb6c4ace37e6613007",
+      "librand_core-a42b1f7a365ac0ff.rlib": "a002461a70d424b73a48c5399b1baf31a6afe3c8b57162aa3aee8b77cc1f2e0a",
+      "librand_xoshiro-8b40dcbd3b4600a8.rlib": "dfa2dca80662b5780f4c94ebd96b30af0a5f044bc4914d96e7592e7bf52a1c36",
+      "librayon-367256c454bb7070.rlib": "c319cee09ccfb3aabd24ab052cc8b4c770701bc696356c0622ad11b69db94134",
+      "librayon-fded4bd8310130bf.rlib": "47e6e114bb45bbe2c7f8ce04a4d29ea38e64d90650c9f1da35fcca8f34484911",
+      "librayon_core-37cbe6f08c28b538.rlib": "310909cefcd1b6d7e954c8a82c0a022d06221df3c1cd16631efd24fbb7e67c5a",
+      "libref_ops-a91cdcce77a3907b.rlib": "01e979f1904ff32408c3a00961db4c4219010d440f718f8f6d092912df96265b",
+      "libregex-14ba359ef4512420.rlib": "712ca51497f7eb15106ea29a04c67ac2a0c8dd9e43d3aad5dcd6a8f25e1c792e",
+      "libregex_automata-8d4c5760565c16a5.rlib": "a8cdaea5365d87d89a4be4235bed1754255548df9e21e7bb863d1fe3f7efa519",
+      "libregex_automata-cfcf4239f7ebe471.rlib": "7ef14f407740f0013e4be0ea41616921a956fb4fd931ed3a9b4070928dd40f93",
+      "libregex_syntax-e484188f54e232b9.rlib": "49c9513cbd5975dece022fd9cfe0e4a51a1d33bc670b9ad730fcfab832ec34d7",
+      "librug-2b8ed57fab766be0.rlib": "2e0ab39c2176b2f25538c694504003d5247790eac6bb2ff0af7d786e117c83c5",
+      "libsafe_arch-b050028b33080e67.rlib": "cc1217e5a8a8f1212178c35079aa7b795cf5c8504ab265fec9917a0823a2f43c",
+      "libsafe_arch-c542ea24a28c7a4f.rlib": "9c62cd9fcf82d56daf8c37dedc244fb70019387f18f3ab044deaaa3bdee74285",
+      "libself_cell-6814a264a62cfa3f.rlib": "ac1278099dddd5da240d6cf8d389cead4b5e0df4ade4e76efb216d5e6d72c79d",
+      "libserde-5c185fe03c59544e.rlib": "827041411178e718ad1ee4df89c63c1dbaf727c84d374fb7361e71160ebe5ae5",
+      "libserde_core-1f230f8e89c93963.rlib": "15f3c24da468785b895c74808149c3f062edac7aa88376de45ca2695c8ee64ba",
+      "libserde_json-664b1ff87f39a61d.rlib": "ab335a2f59133868d203dd6955fb4ee3d2b7bf7aa15467c895f181ea06d457b9",
+      "libserde_json-764c963f555eb7fe.rlib": "bc77e3e6b9cc5f3f6a9aac4cdbf0aa1f038957b2242bce4e121151c990530b71",
+      "libsharded_slab-5a4b77d5e2a8b29b.rlib": "dddbfc26cb04e67d523a9156d5071432fda85d81aafac90b37b7fe3f1168d6fa",
+      "libshlex-2338f8e936e77d01.rlib": "df20b6db2b1301310354ae3e5530849f1f9a957534d437afed628251fbe25563",
+      "libsimba-006ebb2ad1ec3331.rlib": "d8c1379f4ab780897a6fec70e5d1e7cbdd82a19343afed43b13e24e7f0f6cdfb",
+      "libsimba-e0e51406442c483b.rlib": "7f07a85ffbe4dc91055a93b0288310912776b75b0beace4b3ee3ae9b1c30a783",
+      "libsmallvec-ccf4db124545e7cd.rlib": "48e589c54ca5b9de9ba6a96a3c979050ae38820df1c5a9eea2514e6b29edaeaa",
+      "libsmartstring-5f96891ab4462eb6.rlib": "b9900100d65849af185cb85156c4f52cceb510ca3e432dc54f71497dabc89117",
+      "libspenso-ef4cc0441722258f.rlib": "c8732dfb41425bbe19acdd76afa284a9dab07c6731a7cb475c83ffde16641d5b",
+      "libspenso_hep_lib-e39de4ba84c2f1c2.rlib": "492838cdb570ab5c84fdae00de37003ecae9076aa585ab1b778c991364795b1e",
+      "libstatic_assertions-06393c8825b412ce.rlib": "cebf5634e2b9bd81063c0b5804791cae3e2473e598b9f953f61d298334a280f7",
+      "libsymbolica-a1c5ddaeebef3839.rlib": "b8f0d5df5149f6afa8922f372d97f8fdcbee94678ee080e0b1e49902db680e39",
+      "libsymbolica-ee324cbbe8df54d5.rlib": "7fbbc21e7b67df39a799c98a7d0ebf3bb4d302d86a8b837c9b638e8a4be63454",
+      "libsymbolica_utils-57145e71613b347b.rlib": "c34f5d273dc97b7a4f5cede210ad72121978fe4c4c530cc8928942f21c0c4ca5",
+      "libsyn-26aada8387304bcf.rlib": "bb9f3f2a9d80ac0515f7d70ae8fed14e6feb3148e14873e69166bc0496818c70",
+      "libsyn-69096e3947fefa14.rlib": "857212491d9e3b5250e485e3a59f11521e96f6359ece62aa1292c1b470f3cb69",
+      "libsyn-e4357e0cbe07da91.rlib": "08360ce2e8a8f8a77ee54a3afc5578a1364f8e8aea2eab853a00aafd0335fbba",
+      "libtabled-1d4d2363b41574e8.rlib": "7258bb53e20be48e2d1dab9d1effaaf8a28de654991add01c4b9d84236d018c2",
+      "libtap-094daada93ab1961.rlib": "f988ca0aa1c1a141dac8d5875f9a78ac8af4f6fc4478dc60f061a797903ea21f",
+      "libtarget_lexicon-d28e530e8a41b8c6.rlib": "cca05cb88ca67ef1c7768796d6abc14f07a7e12a469b37661ebb359732903209",
+      "libtesting_table-febb08a5ccfd154a.rlib": "86870ce4e70de52a024824bc0bc7d261e1ba3448064db357efdc6b3ed6adf1a6",
+      "libthiserror-d705e7b9e820c802.rlib": "8a6d07354de4166bee1740780b050d5aad0481388bc98d5cdca8f2e60ec7d5eb",
+      "libthread_local-2cdfe49835db61e3.rlib": "9faea0dc78cca2d73918f060c9c18248a7dc736cfbc18092a1687e2b8ea3804e",
+      "libtiny_keccak-4da6b65a53a96090.rlib": "13416cb4bb1d8e0bbc9dc6f64b38e4821f99d1e82cb807a2fcb316b1a7337102",
+      "libtinyjson-b3fa3011b0d07ece.rlib": "85b7a16303c48b5f095233071dd25d70b610daa09b4cfefd1331ff641e4cdede",
+      "libtracing-51862c7e76219222.rlib": "0bdb041528d9f568cfb54cba85f66d2a8d263bf1aac1a2b76117192764373f21",
+      "libtracing-dbe389b9f175a73d.rlib": "0ca6ce3f85bc2acfadf80d50afb48a3b374663cd5818171b98473314f589deb6",
+      "libtracing_core-1385cfad37d5ce11.rlib": "80c4b75623163131ea431586912519d0f2b85d65cfabe2ecae3ea028fdb05ed0",
+      "libtracing_log-fae49fd53a98439f.rlib": "90d970744f48d67b3fad24aa570132aeebc52c20b429a210202865c394fb845d",
+      "libtracing_subscriber-23b25496886c56f8.rlib": "9b44ed598456deb03abae2a3ca0f3021bfbb287671463fbc08807ab32029f31d",
+      "libtracing_subscriber-8b081b4aba24cf36.rlib": "2b18181dc76c1378d87de5a433c861c08f6e8dba623254fee6cc9acb9a62d79e",
+      "libucd_trie-670573d9840712eb.rlib": "97c57d2c3bddc3889d99edf8ae783d4993ee1d04caf581b69d109ed61ed9bed3",
+      "libucd_trie-b0974cbad7bca812.rlib": "3824b368b8a317f1d3aa3daa4b7c0aafe8b0f0ccd573ea89c33f52dd5197297e",
+      "libuncased-083bbbd04bb82e9a.rlib": "ffc284353a2994bc89722cee0c726ebcc55694ec070e3afd7ec0db8f0c92f582",
+      "libunicode_ident-c72ea67bd7aa11d5.rlib": "94079f1e1ce769f8fb2a25de46acdcbb3c71cd2d2c11b088f0a762861b598ef1",
+      "libunicode_width-c5bc11a9a7054cfb.rlib": "619b1255b2faf5628baec6e4065b660cfeda8d6ce8023d6405c703fadc05f35e",
+      "libunty-e1871003dd547255.rlib": "268c2e4209bc82519c9d681238b2cff6a01aef9d1c7be855e2dc1517989abc28",
+      "libunty-f9100cd0823987d1.rlib": "c31cb206bc09ed4f80e439c6be9e28660980b2e90adaf196963970f407f21df6",
+      "libutf8parse-890f0ef0b16e8078.rlib": "0a1dbb3194efdcccb0c98b0c7d9d01b37401a5a7897b3a39294697b4ca404e51",
+      "libvectorize-7d913c01554e112d.rlib": "144bfe6fba323ea8670f29001f1cfac7757578bc0760d877c2e0f19cc945c15a",
+      "libversion_check-b9489498095cdb12.rlib": "22f84bf4bb14c2fb169947bb9992b56bfaf926352d732c787fd245915dc05de6",
+      "libvirtue-830a4dfba41c8482.rlib": "413e33735c377de5c0244fa4524d3e26172f834f14bc1a1c772c54792fe6406e",
+      "libwide-14371259f2f5def2.rlib": "a45c0e8635f35640cbe404b85e373c4631047c61ac8346ca9ca532388855ca29",
+      "libwide-3f8552ac5f8649cd.rlib": "edf21dc70141d97ea953a310414af307fdc48ed8b0cc762e4268737c5c0c6faf",
+      "libwyz-68b529ab75c5b229.rlib": "91392e84f9883e1b6b0eeaeb4f203fbd89ce6e01f007c90786bca3e4e51a1aaa",
+      "libxpct-98e9046f5ecfbe2f.rlib": "1bd9dfaac2b090df07b3fee8906ee8fa2fc836ed199de0d398b1a3a63a223531",
+      "libxprec-2abdfe8ef9622aa4.rlib": "74e338601df8921a0855f3a54750bf6b5af8ec637add6f2e58181f5f84dd1ad3",
+      "libxprec-9eb4990e339695c5.rlib": "0f2e6baffa5967893a452c68f6777fe090f159d67c84f52e06d4c7d741a25f83",
+      "libzerocopy-08f71fc75ab0638c.rlib": "16c6ca111836edd93bb1019992d405e5e7943335f72a9a849967ed1c41da5535",
+      "libzmij-40777120805a3da8.rlib": "1b5af02ae660e2072e132b4e0bb1d10477ab03a74519753282f41f13e9778856"
+    }
+  },
+  "scientific_input": {
+    "physical_coordinates": {
+      "units": "MH_squared=1 exactly; MV_squared=1/b; no rounded PDG mass substitution",
+      "physical_s_t_MH_squared": [
+        "7173070292440521/111284741846000",
+        "-12058167788971/339319588980",
+        "1"
+      ],
+      "W": {
+        "destination_base": [
+          "3985777158237/25535737000",
+          "-2233407629/25953770",
+          "13074/5399"
+        ],
+        "reuse": "Existing W completed endpoint coefficients/form factors"
+      },
+      "Z": {
+        "destination_base": [
+          "104949191448697262751/865238867852650000",
+          "-58807684306811567/879403268106500",
+          "14631/7775"
+        ],
+        "source_base": [
+          "5130094459/42294614",
+          "-2760486785/41279998",
+          "14631/7775"
+        ],
+        "displacements": [
+          "14210126219268721886557/18297471966812420313550000",
+          "4861996175232817/18150882574314891893500",
+          "0"
+        ],
+        "permutations": [
+          {
+            "index": 1,
+            "source": [
+              "5130094459/42294614",
+              "-178302305466616953792/3393635073711688075",
+              "14631/7775"
+            ],
+            "destination": [
+              "104949191448697262751/865238867852650000",
+              "-117987150501330757182512227/2245621057130807199050000",
+              "14631/7775"
+            ]
+          },
+          {
+            "index": 2,
+            "source": [
+              "5130094459/42294614",
+              "-2760486785/41279998",
+              "14631/7775"
+            ],
+            "destination": [
+              "104949191448697262751/865238867852650000",
+              "-58807684306811567/879403268106500",
+              "14631/7775"
+            ]
+          },
+          {
+            "index": 3,
+            "source": [
+              "-178302305466616953792/3393635073711688075",
+              "-2760486785/41279998",
+              "14631/7775"
+            ],
+            "destination": [
+              "-117987150501330757182512227/2245621057130807199050000",
+              "-58807684306811567/879403268106500",
+              "14631/7775"
+            ]
+          },
+          {
+            "index": 4,
+            "source": [
+              "-2760486785/41279998",
+              "5130094459/42294614",
+              "14631/7775"
+            ],
+            "destination": [
+              "-58807684306811567/879403268106500",
+              "104949191448697262751/865238867852650000",
+              "14631/7775"
+            ]
+          }
+        ]
+      },
+      "selection": "Exact rational squared Euclidean nearest complete Z source in intersection of both scientific family indexes."
+    },
+    "normalized_form_factors": [
+      {
+        "mass": "W",
+        "form_factors": [
+          {
+            "index": 1,
+            "value": {
+              "imaginary": "-8.0900707618299849299769409533072264706129887301401735185254011538941044375917712135570736777065489147492048647212611331128463618502618224821684671580156184577264818e-6",
+              "real": "1.9612223861835424418722675155229221041966258925420239622055375065154289390709304128999733562422464898666898473796566194367794064208168997612031904124568580604337671e-6"
+            },
+            "absolute_error_allowance": "2.2894422778484710617219023758127296980340123201305702853536819931315854569613945923191920875928305767078971597261130888225138070911525519357053588958538600877261666e-26"
+          },
+          {
+            "index": 2,
+            "value": {
+              "imaginary": "-3.1963061760396123059510481931197029297023379697900059356496931849990510928080513969714996050788293679035510752607429227954359771011822669236295776743672860633187541e-6",
+              "real": "3.1187728594511600408311203059457110044352703533622238026337345297021652520943231507208016891599468883217396997034099157126546077274419736312212618209164707796204585e-6"
+            },
+            "absolute_error_allowance": "4.3530140922574367346069825631297457026237300281776625510195222985544606775618232408987391125346916753001696620985137181011120232532908393972071889336312263234000659e-25"
+          },
+          {
+            "index": 3,
+            "value": {
+              "imaginary": "3.4879035816900030850331960591365914054213088369453790780947483942781213391875976783735711141642057300780710126185773875563034292896634853457764553548225786933359569e-6",
+              "real": "-2.4251380078288314749457218118479121037330819863464451885489027894660441994731854596611316113173005635655478728230293076667037672525691311021250765152097877203021811e-6"
+            },
+            "absolute_error_allowance": "4.1031713688203874617267147671521978982359561343847099674600667217295867776446285029394868152776080573874796524790687365319894624470261424412548734671996325004454210e-26"
+          },
+          {
+            "index": 4,
+            "value": {
+              "imaginary": "-1.2988012312661704122700040714131281536073919703628291844225982538253169167291357753582787418071975906014495988743670452026900312399923730853374824474677919570349526e-5",
+              "real": "4.7211241526797433551875806262233637881173508797941304094312959738068563130621016513437937881815328629342292060523556715034070763262630737432143254613748640502425497e-6"
+            },
+            "absolute_error_allowance": "1.9094573980705271453356802757638948060172978128304488653863004290182128447255574285641967745015322850106247319193602797553938530752662679457110187024301184619912323e-25"
+          }
+        ]
+      },
+      {
+        "mass": "Z",
+        "form_factors": [
+          {
+            "index": 1,
+            "value": {
+              "imaginary": "-6.4582054391670170571558111288924680691867620811478718372383933936339206570740907017523963316311433367649798079215486453872373059315612549726644275473454360097730194e-6",
+              "real": "1.4958451952761478693102223896958185298425016456056736721010496619135691368165881408387757786951768030099390477562150272148218219071229247386036419927973852389891092e-6"
+            },
+            "absolute_error_allowance": "3.0850617437448454289042478895604472907991349916940237444912356572551816162999327330149626983955837842877165641790760177202838195326091938840114099087668125589542106e-26"
+          },
+          {
+            "index": 2,
+            "value": {
+              "imaginary": "-2.5502420496158466789248852741352776229881903194949406440582817299942139860992333786562696113104281530398652675129286878639137787682612516161457164337042293085962455e-6",
+              "real": "2.6422078939182674991350861057670741861696466680531186964947336184943645499839725932795953139639617343438273560091832056347107014426736089928918007984405489129988313e-6"
+            },
+            "absolute_error_allowance": "5.5597103718713992760207099541422720732121534798581672099528317771589607038154737432213500596489696049461799014198859006611423656892337659624777698076137696487113882e-25"
+          },
+          {
+            "index": 3,
+            "value": {
+              "imaginary": "2.7901495145522628138588447245351920746257635625693721156717444379875274491620692441271097905089584783033533087295313314967033882883885754354992162744455935057541160e-6",
+              "real": "-2.0190173325262138768701608763057010013148260108978484946190055144630243012236460292640912515102633779429019144367290867511644783214402190170209236580530456049419454e-6"
+            },
+            "absolute_error_allowance": "9.2721561940592548105963169949791233675514410882632020540084462640997947635386978524812090864272906423477908447474043250048144018137816077048655852131263861370412818e-26"
+          },
+          {
+            "index": 4,
+            "value": {
+              "imaginary": "-1.0386977695870884449671090777376101956513264893415066734110871619335320533405112032441701174458468396657104633364184441202879963152658432007629367433199453385085558e-5",
+              "real": "3.7513248564004333595535011236847156214349926024667931742302301632161536056475819640771029993898308948497820571952234529108842624767510479037702520551748144301535075e-6"
+            },
+            "absolute_error_allowance": "2.4987744496469589053257508973342428304922848075000439862141204924183340631536046473872500275855612750787128354083877781483922261005890440863712022753194839308751673e-25"
+          }
+        ]
+      }
+    ],
+    "normalization": "Each input F_j already includes -b_V^2/(4*pi)^4 for MH_squared=1. Native UFO overall kappa_V, f^{abc} and Lorentz tensors applied once."
+  },
+  "independent_oracle": {
+    "result": {
+      "status": "native_binary64_and_binary128_oracles_executed_native_HEPKit_comparison_pending",
+      "scope": "Pure |A_W+A_Z|\u00b2 using supplied coherent W/Z form factors and unchanged native generated tensor/color/helicity expressions, not dynamic original plugin evaluation or HEFT interference.",
+      "claimed_accuracy": "No numerical accuracy is inferred from working kind or printed digits. Binary128 is an independent native oracle to be compared to the Rust tensor amplitude; source form-factor uncertainty is separate.",
+      "native_precision": {
+        "binary64": [
+          "2",
+          "53",
+          "15"
+        ],
+        "binary128": [
+          "2",
+          "113",
+          "33"
+        ],
+        "interpretation": "radix, mantissa bits, decimal precision",
+        "model_pi_literal": "3.1415926535897932384626433832795E0_16"
+      },
+      "binary64": {
+        "ARITHMETIC": [
+          "2",
+          "53",
+          "15"
+        ],
+        "SMATRIX": [
+          "4.33089662023982415E-008"
+        ],
+        "HELICITY": [
+          [
+            "1",
+            "7.76241509055058507E-008"
+          ],
+          [
+            "2",
+            "1.21491936262666181E-010"
+          ],
+          [
+            "3",
+            "2.64808870250394489E-009"
+          ],
+          [
+            "4",
+            "6.22420086052401993E-009"
+          ],
+          [
+            "5",
+            "6.22420086052401993E-009"
+          ],
+          [
+            "6",
+            "2.64808870250394489E-009"
+          ],
+          [
+            "7",
+            "1.21491936262666181E-010"
+          ],
+          [
+            "8",
+            "7.76241509055058507E-008"
+          ]
+        ],
+        "MASSES": [
+          "1.00000000000000000E+000",
+          "6.42617315297960845E-001",
+          "7.28975938518713118E-001"
+        ],
+        "MODEL": [
+          "1.21771578477671971E+000",
+          "6.63663015037379012E-001",
+          "4.72119927176034848E-001",
+          "8.81534329656704640E-001"
+        ],
+        "KW": [
+          "0.00000000000000000E+000",
+          "1.69591109691002689E-001"
+        ],
+        "KZ": [
+          "0.00000000000000000E+000",
+          "1.19543637263862010E-001"
+        ],
+        "FF_ZZ_1": [
+          "1.49584519527614786E-006",
+          "-6.45820543916701731E-006"
+        ],
+        "FF_ZZ_2": [
+          "2.64220789391826760E-006",
+          "-2.55024204961584686E-006"
+        ],
+        "FF_ZZ_3": [
+          "-2.01901733252621397E-006",
+          "2.79014951455226296E-006"
+        ],
+        "FF_ZZ_4": [
+          "3.75132485640043349E-006",
+          "-1.03869776958708845E-005"
+        ],
+        "FF_WW_1": [
+          "1.96122238618354236E-006",
+          "-8.09007076182998469E-006"
+        ],
+        "FF_WW_2": [
+          "3.11877285945115983E-006",
+          "-3.19630617603961251E-006"
+        ],
+        "FF_WW_3": [
+          "-2.42513800782883168E-006",
+          "3.48790358169000306E-006"
+        ],
+        "FF_WW_4": [
+          "4.72112415267974303E-006",
+          "-1.29880123126617036E-005"
+        ],
+        "MOMENTUM": [
+          [
+            "1",
+            "4.01425296070977922E+000",
+            "0.00000000000000000E+000",
+            "0.00000000000000000E+000",
+            "4.01425296070977922E+000"
+          ],
+          [
+            "2",
+            "4.01425296070977922E+000",
+            "0.00000000000000000E+000",
+            "0.00000000000000000E+000",
+            "-4.01425296070977922E+000"
+          ],
+          [
+            "3",
+            "3.95197487249587764E+000",
+            "3.92341074581662230E+000",
+            "0.00000000000000000E+000",
+            "-4.74292644313047629E-001"
+          ],
+          [
+            "4",
+            "4.07653104892368123E+000",
+            "-3.92341074581662230E+000",
+            "0.00000000000000000E+000",
+            "4.74292644313047629E-001"
+          ]
+        ]
+      },
+      "binary128": {
+        "ARITHMETIC": [
+          "2",
+          "113",
+          "33"
+        ],
+        "SMATRIX": [
+          "4.33089662023980781068590560932409431E-0008"
+        ],
+        "HELICITY": [
+          [
+            "1",
+            "7.76241509055055542994097633534083620E-0008"
+          ],
+          [
+            "2",
+            "1.21491936262665252266026774452760381E-0010"
+          ],
+          [
+            "3",
+            "2.64808870250393576701968554204063226E-0009"
+          ],
+          [
+            "4",
+            "6.22420086052400089502263651658012663E-0009"
+          ],
+          [
+            "5",
+            "6.22420086052400089502263651658012663E-0009"
+          ],
+          [
+            "6",
+            "2.64808870250393576701968554204063226E-0009"
+          ],
+          [
+            "7",
+            "1.21491936262665252266026774452760381E-0010"
+          ],
+          [
+            "8",
+            "7.76241509055055542994097633534083620E-0008"
+          ]
+        ],
+        "MASSES": [
+          "1.00000000000000000000000000000000000E+0000",
+          "6.42617315297960795493976945142630745E-0001",
+          "7.28975938518713114709995494217037505E-0001"
+        ],
+        "MODEL": [
+          "1.21771578477671973082968354487872361E+0000",
+          "6.63663015037378641685532493755651421E-0001",
+          "4.72119927176035056302569386663362791E-0001",
+          "8.81534329656704495552169793597588972E-0001"
+        ],
+        "KW": [
+          "0.00000000000000000000000000000000000E+0000",
+          "1.69591109691002412198279182724193088E-0001"
+        ],
+        "KZ": [
+          "0.00000000000000000000000000000000000E+0000",
+          "1.19543637263861829552358668693907527E-0001"
+        ],
+        "FF_ZZ_1": [
+          "1.49584519527614786931022238969581862E-0006",
+          "-6.45820543916701705715581112889246779E-0006"
+        ],
+        "FF_ZZ_2": [
+          "2.64220789391826749913508610576707405E-0006",
+          "-2.55024204961584667892488527413527765E-0006"
+        ],
+        "FF_ZZ_3": [
+          "-2.01901733252621387687016087630570090E-0006",
+          "2.79014951455226281385884472453519201E-0006"
+        ],
+        "FF_ZZ_4": [
+          "3.75132485640043335955350112368471547E-0006",
+          "-1.03869776958708844496710907773761025E-0005"
+        ],
+        "FF_WW_1": [
+          "1.96122238618354244187226751552292213E-0006",
+          "-8.09007076182998492997694095330722669E-0006"
+        ],
+        "FF_WW_2": [
+          "3.11877285945116004083112030594571112E-0006",
+          "-3.19630617603961230595104819311970306E-0006"
+        ],
+        "FF_WW_3": [
+          "-2.42513800782883147494572181184791210E-0006",
+          "3.48790358169000308503319605913659151E-0006"
+        ],
+        "FF_WW_4": [
+          "4.72112415267974335518758062622336347E-0006",
+          "-1.29880123126617041227000407141312811E-0005"
+        ],
+        "MOMENTUM": [
+          [
+            "1",
+            "4.01425296070977920490653212564081045E+0000",
+            "0.00000000000000000000000000000000000E+0000",
+            "0.00000000000000000000000000000000000E+0000",
+            "4.01425296070977920490653212564081045E+0000"
+          ],
+          [
+            "2",
+            "4.01425296070977920490653212564081045E+0000",
+            "0.00000000000000000000000000000000000E+0000",
+            "0.00000000000000000000000000000000000E+0000",
+            "-4.01425296070977920490653212564081045E+0000"
+          ],
+          [
+            "3",
+            "3.95197487249587743124639937464747807E+0000",
+            "3.92341074581662219036078645513499970E+0000",
+            "0.00000000000000000000000000000000000E+0000",
+            "-4.74292644313047618868921085420454304E-0001"
+          ],
+          [
+            "4",
+            "4.07653104892368097856666487663414322E+0000",
+            "-3.92341074581662219036078645513499970E+0000",
+            "0.00000000000000000000000000000000000E+0000",
+            "4.74292644313047618868921085420454304E-0001"
+          ]
+        ]
+      },
+      "smatrix_difference": {
+        "absolute": "1.633931409439067590569E-22",
+        "relative": "3.772732421741792858433172652963009413137771751447736087946967007939645375761994876823651136152188191E-15"
+      },
+      "helicity_differences": [
+        {
+          "helicity": 1,
+          "absolute": "2.964005902366465916380E-22",
+          "relative": "3.818406858935756105499513015727643249219049347027099545485210905970825591789335243307747426042388499E-15"
+        },
+        {
+          "helicity": 2,
+          "absolute": "9.28733973225547239619E-25",
+          "relative": "7.644408359890048911097739951176023658302175943879716552161226083428017595188687645176679834183309737E-15"
+        },
+        {
+          "helicity": 3,
+          "absolute": "9.12298031445795936774E-24",
+          "relative": "3.445118853394753374043334962520510341770983880634915049801461276086577378457259200749035169737669959E-15"
+        },
+        {
+          "helicity": 4,
+          "absolute": "1.903497736348341987337E-23",
+          "relative": "3.058220290448806259121663068281543625725926555898317852393172795754492942278763806686533304652082991E-15"
+        },
+        {
+          "helicity": 5,
+          "absolute": "1.903497736348341987337E-23",
+          "relative": "3.058220290448806259121663068281543625725926555898317852393172795754492942278763806686533304652082991E-15"
+        },
+        {
+          "helicity": 6,
+          "absolute": "9.12298031445795936774E-24",
+          "relative": "3.445118853394753374043334962520510341770983880634915049801461276086577378457259200749035169737669959E-15"
+        },
+        {
+          "helicity": 7,
+          "absolute": "9.28733973225547239619E-25",
+          "relative": "7.644408359890048911097739951176023658302175943879716552161226083428017595188687645176679834183309737E-15"
+        },
+        {
+          "helicity": 8,
+          "absolute": "2.964005902366465916380E-22",
+          "relative": "3.818406858935756105499513015727643249219049347027099545485210905970825591789335243307747426042388499E-15"
+        }
+      ],
+      "binary128_helicity_sum_divided_by4_minus_smatrix": "-2.4645E-42",
+      "actual_form_factor_input_rounding": [
+        {
+          "boson": "W",
+          "form_factor": 1,
+          "part": "real",
+          "binary64_hex": "0x1.073b168bcdae2p-19",
+          "binary64_error_in_ulps": "-0.1943299976226915778947140341214621122191410701384174527650247675972363482194196865702953017838893047",
+          "binary128_printed": "0.00000196122238618354244187226751552292213",
+          "binary128_error_vs_supplied_decimal": "2.580337410745797603779446249348457106092906958710002664375775351013331015262034338056322059357918310E-41"
+        },
+        {
+          "boson": "W",
+          "form_factor": 1,
+          "part": "imaginary",
+          "binary64_hex": "-0x1.0f752dbe8c1c6p-17",
+          "binary64_error_in_ulps": "0.1415469527194051787181121466118793748792355439187882731593466505767623033127788574772058311064320971",
+          "binary128_printed": "-0.00000809007076182998492997694095330722669",
+          "binary128_error_vs_supplied_decimal": "-2.193870112698598264814745988461058955624082287864429263222934510852507951352787388668871536381497382E-40"
+        },
+        {
+          "boson": "W",
+          "form_factor": 2,
+          "part": "real",
+          "binary64_hex": "0x1.a298382fd6b70p-19",
+          "binary64_error_in_ulps": "-0.4913326615011456433314574584005764155903946779082433652110083427546660107025074937618563602841133489",
+          "binary128_printed": "0.00000311877285945116004083112030594571112",
+          "binary128_error_vs_supplied_decimal": "1.155647296466377761973662654702978347479056768492791983108400531116782603002965900842873453922725580E-40"
+        },
+        {
+          "boson": "W",
+          "form_factor": 2,
+          "part": "imaginary",
+          "binary64_hex": "-0x1.ad003e73afdfbp-19",
+          "binary64_error_in_ulps": "-0.4873011138206375306162778491016093602107489977527117350315262260870231168849354340619673328104188020",
+          "binary128_printed": "-0.00000319630617603961230595104819311970306",
+          "binary128_error_vs_supplied_decimal": "-1.302976620302099940643503068150009489071919486030285003949211706320964489247392570772045640228988177E-40"
+        },
+        {
+          "boson": "W",
+          "form_factor": 3,
+          "part": "real",
+          "binary64_hex": "-0x1.457f1b8230a25p-19",
+          "binary64_error_in_ulps": "-0.4942145523387069831422916703635085922991927743844318443083928892109699346904178415820145658273751528",
+          "binary128_printed": "-0.00000242513800782883147494572181184791210",
+          "binary128_error_vs_supplied_decimal": "3.733081986346445188548902789466044199473185459661131611317300563565547872823029307666703767252569131E-42"
+        },
+        {
+          "boson": "W",
+          "form_factor": 3,
+          "part": "imaginary",
+          "binary64_hex": "0x1.d423745b66d31p-19",
+          "binary64_error_in_ulps": "-0.06944360372635586107939628401309095625979803882280587786899290704106379229310724915658450264888681034",
+          "binary128_printed": "0.00000348790358169000308503319605913659151",
+          "binary128_error_vs_supplied_decimal": "1.045786911630546209219052516057218786608124023216264288858357942699219289873814226124436965707103365E-40"
+        },
+        {
+          "boson": "W",
+          "form_factor": 4,
+          "part": "real",
+          "binary64_hex": "0x1.3cd44b9bb1d05p-18",
+          "binary64_error_in_ulps": "-0.3808856434782805807455387935950795685443048172342308548888915138999464100276825066394471476697486001",
+          "binary128_printed": "0.00000472112415267974335518758062622336347",
+          "binary128_error_vs_supplied_decimal": "-3.181173508797941304094312959738068563130621016513437937881815328629342292060523556715034070763262631E-40"
+        },
+        {
+          "boson": "W",
+          "form_factor": 4,
+          "part": "imaginary",
+          "binary64_hex": "-0x1.b3ce2d1e72c5fp-17",
+          "binary64_error_in_ulps": "0.3121463568070987385981261938826513702782001145024484259292609125473535627377928637194863727053076873",
+          "binary128_printed": "-0.0000129880123126617041227000407141312811",
+          "binary128_error_vs_supplied_decimal": "4.360739197036282918442259825382531691672913577535827874180719759060144959887436704520269003123999237E-40"
+        },
+        {
+          "boson": "Z",
+          "form_factor": 1,
+          "part": "real",
+          "binary64_hex": "0x1.9189b2f80cb30p-20",
+          "binary64_error_in_ulps": "-0.04660837113660345903108705040406059483497583318036242923923306240216466215812090913634444870688502769",
+          "binary128_printed": "0.00000149584519527614786931022238969581862",
+          "binary128_error_vs_supplied_decimal": "9.015749835439432632789895033808643086318341185916122422130482319699006095224378497278517817809287708E-41"
+        },
+        {
+          "boson": "Z",
+          "form_factor": 1,
+          "part": "imaginary",
+          "binary64_hex": "-0x1.b1671fe65423ep-18",
+          "binary64_error_in_ulps": "-0.3000320122991226211481658180890114869317998752243755345393708530759002796394737457524054922280786734",
+          "binary128_printed": "-0.00000645820543916701705715581112889246779",
+          "binary128_error_vs_supplied_decimal": "2.791867620811478718372383933936339206570740907017523963316311433367649798079215486453872373059315613E-40"
+        },
+        {
+          "boson": "Z",
+          "form_factor": 2,
+          "part": "real",
+          "binary64_hex": "0x1.62a1926b3e2b3p-19",
+          "binary64_error_in_ulps": "0.2330193477729491192562019324601853922038789351427056109797362735957236409577773397947577658575406737",
+          "binary128_printed": "0.00000264220789391826749913508610576707405",
+          "binary128_error_vs_supplied_decimal": "-1.361696466680531186964947336184943645499839725932795953139639617343438273560091832056347107014426736E-40"
+        },
+        {
+          "boson": "Z",
+          "form_factor": 2,
+          "part": "imaginary",
+          "binary64_hex": "-0x1.5649a64c2d603p-19",
+          "binary64_error_in_ulps": "-0.4375897039829632898328391401516621847207190908662847247651749877859765992016745791607785628505786869",
+          "binary128_printed": "-0.00000255024204961584667892488527413527765",
+          "binary128_error_vs_supplied_decimal": "-2.701180968050505935594171827000578601390076662134373038868957184696013473248707131213608622123173875E-41"
+        },
+        {
+          "boson": "Z",
+          "form_factor": 3,
+          "part": "real",
+          "binary64_hex": "-0x1.0efce84535b67p-19",
+          "binary64_error_in_ulps": "-0.2209521950266568289594781288730813602499383661596985354274108916092213928111354339194857274057009804",
+          "binary128_printed": "-0.00000201901733252621387687016087630570090",
+          "binary128_error_vs_supplied_decimal": "1.013148260108978484946190055144630243012236460292640912515102633779429019144367290867511644783214402E-40"
+        },
+        {
+          "boson": "Z",
+          "form_factor": 3,
+          "part": "imaginary",
+          "binary64_hex": "0x1.767ccead05d45p-19",
+          "binary64_error_in_ulps": "0.3398756966685469283132535810462275797942842576356099375088296612435309239469099915872882515590926764",
+          "binary128_printed": "0.00000279014951455226281385884472453519201",
+          "binary128_error_vs_supplied_decimal": "-6.462576356256937211567174443798752744916206924412710979050895847830335330872953133149670338828838858E-41"
+        },
+        {
+          "boson": "Z",
+          "form_factor": 4,
+          "part": "real",
+          "binary64_hex": "0x1.f77e8a64b7204p-19",
+          "binary64_error_in_ulps": "0.3130912102127230254628909097743305209080221806996676821105665180837360042012021442485941753709676640",
+          "binary128_printed": "0.00000375132485640043335955350112368471547",
+          "binary128_error_vs_supplied_decimal": "-1.514349926024667931742302301632161536056475819640771029993898308948497820571952234529108842624767510E-40"
+        },
+        {
+          "boson": "Z",
+          "form_factor": 4,
+          "part": "imaginary",
+          "binary64_hex": "-0x1.5c87758214271p-17",
+          "binary64_error_in_ulps": "-0.004649625498060129139592810166351740549218626677479233679045956402473583549335713780005812413293293281",
+          "binary128_printed": "-0.0000103869776958708844496710907773761025",
+          "binary128_error_vs_supplied_decimal": "-5.434867351065849332658891283806646794665948879675582988255415316033428953666358155587971200368473416E-40"
+        }
+      ],
+      "binary128_mass_deviations": {
+        "MH": "0E-35",
+        "MW": "7.51308071184769517933823227471345317978083889323191986346860652944E-35",
+        "MZ": "9.0304435432007790222653561619411463603141321621269630843755018173E-36"
+      },
+      "scaffold": {
+        "matrix_source": "standalone-313/SubProcesses/P1_gg_gh/matrix.f",
+        "matrix_source_sha256": "b57713eb80196d97475712d491a3d9ec2f6612cf41474859b9aeb9c6744cf7df",
+        "matrix_changes": [
+          "REAL*8\u2192REAL*16 and COMPLEX*16\u2192COMPLEX*32 declarations",
+          "DCONJG/DSQRT\u2192generic CONJG/SQRT for kind-preserving operations",
+          "native mp_coupl_same_name.inc common layout",
+          "native MP_VXXXXX/MP_SXXXXX wavefunctions and native MP-tagged combined ALOHA routine name"
+        ],
+        "unchanged": "Every generated helicity, amplitude, JAMP, color contraction, division and sum expression. Integer-valued D literals remain exactly representable. Unused f2py convenience subroutines retained but not invoked.",
+        "kernel_owner": "ALOHA native QP writer, MP tags, loop-format wavefunctions (4 separately stored momentum components). No tensor-algebra port.",
+        "model_owner": "Native UFO_model_to_mg4(mp=True), MP_LHA initialization followed by direct MP external decimal input and native COUP recomputation.",
+        "driver_changes": [
+          "REAL*16 input/results",
+          "native MP__ external/common names",
+          "35-digit output format"
+        ],
+        "linker_aliases": {
+          "ggghtensstruc1mp_0_": "mp_ggghtensstruc1_0_",
+          "ggghtensstruc2mp_0_": "mp_ggghtensstruc2_0_",
+          "ggghtensstruc3mp_0_": "mp_ggghtensstruc3_0_",
+          "ggghtensstruc4mp_0_": "mp_ggghtensstruc4_0_"
+        },
+        "alias_reason": "Native combined MP routine uses suffix-MP calls, while native QP individual routine writer emits MP_ prefixes. Linker aliases preserve both generated bodies unchanged.",
+        "reader": "Native mg5/models/template_files/fortran/lha_read_mp.f provides DP+MP initializer; highprecision scientific inputs are then read directly into MP external parameters."
+      },
+      "sha256": {
+        "input.json": "cb0cfd9c7873e1251a09448bbec925981ca90b05b0a45b6081ec0438120aa6f5",
+        "provenance.json": "69cf9590fa7a23e3a169ccac24f61ac796d193a681ef7bfed2205a7f5e6fde84",
+        "runner.json": "6c0080755ebe84541186d959e0b0b127b6a9100ebb5c5d616fdb02f58e8bebf2",
+        "generate-quad.py": "be329df0221a3e683d52a94e774db95d0ff629e1dd679384a3779622935d7643",
+        "generate-quad-3.log": "1a358e618c5f7c9f17e852efc6540df6592382144e1feff7b1166eb4c32ecb22",
+        "prepare-quad.py": "3969f3399df682db430aa6b371bcaaf27048a235cc33be77319fd98096812bf5",
+        "quad/precision-adaptation.json": "9880093589205dec1238953e69659e8932742cbbf7031e06a3c1fe31baf426c2",
+        "quad/build-command.json": "21fa7e5ee741c3bcc803b715cb91c19d92b5979eb33bbf21269db3ce47edeefa",
+        "quad/build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "quad/oracle": "f6c140e80a838aa0f56b159480aaa91c71eaaa9bf1f854627e1f479414d40420",
+        "quad/oracle.log": "99d2aed70755a242a08d4f081cca1796cc91a44cea00dbe2c0e01c7766bd9dfd",
+        "quad/oracle.f": "dbfeabe6baa53fea3b55556fe0244204ff89b21204143b50418998b3f35f9c53",
+        "quad/matrix.f": "808d999f6f2fae18731b9d8545a904775fc09838ede782aa96c488613e52bdf0",
+        "quad/DHELAS/MP_gggHTensStruc1_0.f": "7f0371b4a5b060d7e7f8b690ab440257e7f2cf41ae25a663c9ba6c1490caef37",
+        "quad/DHELAS/MP_gggHTensStruc2_0.f": "8d37e05cf33650fc99954b4becac1ab09c0e76d79201bd8b115ce2a16e3307cd",
+        "quad/DHELAS/MP_gggHTensStruc3_0.f": "e9a8cef03fd9ba1bb3a31ec2fa9aaea5cf2e6f56b6ba53455e5a4f3979887648",
+        "quad/DHELAS/MP_gggHTensStruc4_0.f": "5090a8aaef539d585c754156c3d4abdb957371d2de794779e3d2aca5845e5b17",
+        "quad/MODEL/actualize_mp_ext_params.inc": "4108b4fb1f82d348413a9f7f777eb94537061f7ccf339d7d23f30f4f835676ac",
+        "quad/MODEL/alfas.inc": "d5ae9799ae1067a7a5d8a690654408e4626db1f032091eab30286a3dc06c7a1c",
+        "quad/MODEL/alfas_functions.f": "3642867e291a0f19b8f14b3d19226bf415d1970bb1be2807b6d814befb7f3d80",
+        "quad/MODEL/coupl.inc": "0645fca62ed67a677be1df57f21ec4544cd6d95919f41831ad171a7c5db732d2",
+        "quad/MODEL/coupl_write.inc": "743dccbfcbaf5745737865d56f3b65185b2fc469a5c13ce46a53f907f7f963b1",
+        "quad/MODEL/couplings.f": "6d6f0b472fafeb995ae2765226ca223bcc3d08d06390ebb9b2627de5d76495ec",
+        "quad/MODEL/couplings1.f": "950b57d1c9118445910ff120ab5204fb3f11e0a37ae5ee3049d3b922cd9d9d19",
+        "quad/MODEL/couplings2.f": "cc82f8b5d3651844d9afacfb713b253b4474cb6572943b0f30e25d0d5a09fc23",
+        "quad/MODEL/couplings3.f": "bbc9d2b96fb88cd96b62a9712faa9e24cedc93db0a0cfed70499ebdb7b59d345",
+        "quad/MODEL/formats.inc": "1d0c8b3a81b5c4ed3cc50e16edc2d7fa09fa2c2694b9eef3790bff2abc42c3a3",
+        "quad/MODEL/input.inc": "042d74d2cb6d08f255e1a3ed91281750b9723f1336cf3b0a93f1925a2e0e0b66",
+        "quad/MODEL/intparam_definition.inc": "d34cb75378bd08e102b9705140b146e0543494ecc090244fd6e8068c7276dff1",
+        "quad/MODEL/lha_read.f": "fd51c4686981abedbf62153ee537e7dec01a138dd9a560f39303b851f99d6ae0",
+        "quad/MODEL/makeinc.inc": "012186426b7b55548c8bd0770490e3911dd4978404af838a4ad4ed5612d9cdee",
+        "quad/MODEL/model_functions.f": "a9678291451097495295fb6f894f3fd4c162addca0844f82393db59b69bc981e",
+        "quad/MODEL/model_functions.inc": "be48cc65d552043c1569e2144501aa3d1c16e69834f20090aceca8ea818bb58f",
+        "quad/MODEL/mp_coupl.inc": "cc89eeaa68d277598e041018ebbbbb99c9a16d33deb19058e17a8f6415994fd1",
+        "quad/MODEL/mp_coupl_same_name.inc": "80ec38378b4cf15a029d43a4cfef424d2a27b267b7b3cd1cc0accc89b7ef2dec",
+        "quad/MODEL/mp_couplings1.f": "b5ba142a849d7d9f27f06a531172f8316b9ca508db6c3af2554baa4a01c50b22",
+        "quad/MODEL/mp_couplings2.f": "b76916846580fe0592177085fff859bd8432a0dffbe5e8f294469f26db47ff2c",
+        "quad/MODEL/mp_couplings3.f": "c4da4930953afe33cbda92329a7ca5ef587755e19e197538c7e35cd92facac2f",
+        "quad/MODEL/mp_input.inc": "7299c0fd87686096460dd6f7c9a7b6650747a138b49798f87fc20bd84f9e9455",
+        "quad/MODEL/mp_intparam_definition.inc": "f0730643d17139c684b2d0230542a99cff00a36b42250eac287c4a9c495c0ea9",
+        "quad/MODEL/param_read.inc": "b8737fa8bd8f47d3012504428aab2f7b2a8ac48072ca847398db4861ab838e5a",
+        "quad/MODEL/param_write.inc": "862412f5d28a10125d30e5bf112dd9cf62c85edb8f2043346505ef35dee1ee5c",
+        "quad/MODEL/printout.f": "6071ce3fa8024c216f99ce8c3300ba9837d395576eb980b7fff8153b88432e3a",
+        "quad/MODEL/rw_para.f": "89cd2b37366758e956631c23f724c7dc96880f1f6f53329ebcce1f79c0171e12",
+        "quad/MODEL/testprog.f": "7570c7961bd45365561047df5a3bd0c529204fb03f4e3562680d3b90e0042c89",
+        "mg5/aloha/template_files/aloha_functions_loop.f": "6b238e9a02e69ffc7b1f0d82050747419979818f3a4343a95110b021bcbe0a20",
+        "mg5/models/template_files/fortran/lha_read_mp.f": "d9babc0048a2b058ea477a8b278526f71861d7dcbb1753b32c9fb39e37a3739a"
+      }
+    },
+    "generation_provenance": {
+      "plugin": {
+        "root": "/common/dev/mg5_higgs_ew_plugin",
+        "commit": "89f64b93d0bdbd8ee90eb85737021189229b034a",
+        "status": "",
+        "files": {
+          "README.md": "cd3087fd9ccaf97c09d65a88d049e7fe435855c2bf87343ca1778eb014acf261",
+          "output.py": "09098f6aac9b4087041397a0ad8cdabc2d65252378134468d27aa8c8ce816711",
+          "process_information.json": "30e9956f54242e5af923f83b9f6f5cf2b206a384e77f7f2ab69bec8e45f4477a",
+          "Templates/matrix_standalone_v4_mod_hel_sum.inc": "6b4728d567842c0741d9f43bc39125646061c3df3ea4c49a79def19fa650c6b9",
+          "Templates/matrix_standalone_splitOrders_v4_mod_hel_sum.inc": "ed68afd5f7708de15ad029fa7921182d5112853927ea72ced417ec163cc18e3d",
+          "Templates/check_sa_splitOrders.f": "716ba0ff7110ca18ecfeb1d79f3a85cc78aa3e55772516643bbdae37a055a05c",
+          "GridFiller/grid_filler.f": "bb1ee96bfc3097cf12742a6b42ff9dc8232f9a77b487162855c192f32072e340",
+          "ComputationFormFacGGHGEW/fortran_bridge_ggHg_EW.cpp": "a54f19d11566e65735e14d4bcecd53cddb53cc15580c72b7a8396331bce6bb36",
+          "ComputationFormFacGGHGEW/set_coefficient_ggHg_EW.f": "07a673c99ebb51958c090b43b907c5a009d9b4f7626b383ea8758e18904a4b66",
+          "ComputationFormFacGGHGEW/mathematicaRoutines/expew.wls": "a89859e0d33559f714bc3e5f9cbce3b6b2e542acddcb172d48f9d1fdc0bf0bd2",
+          "UFO_model_gggH/lorentz.py": "c8469e01e5f041188c0af926d01aed263649760be66826cec78a1cdf6d7b9db6",
+          "UFO_model_gggH/couplings.py": "ddaaff50f57c539ebc72668d3cb1bbb0d7daffeda36e0d8e78f5a4003dd6f292",
+          "UFO_model_gggH/vertices.py": "9845f46c4d57e2123999492646e10a49f6a40d4560989be88ff43a75db88722e",
+          "UFO_model_gggH/parameters.py": "f99f3682405ed2a69f726e2ea65c6a240b93db5d9bbd60d4fa49249df4a4de86"
+        }
+      },
+      "mg5": {
+        "root": "/common/dev/MG5_aMC_v3_7_0",
+        "version": "version = 3.7.0\ndate = 2026-01-05\n",
+        "git_metadata": false,
+        "installed_local_adaptations": "Existing process_compat_patch import and build templates retained; no claim of pristine release tarball. Native generated physics routines are unchanged.",
+        "files": {
+          "VERSION": "d8521e7ace79d59769027ff095a48d6772801b6d264e47960a804d9d39d8fb5e",
+          "LICENSE": "7e8d6c8410bb2f19a4841a670b2d6d5e3c3b2d7409bce1260b7f5de15a16f378",
+          "bin/mg5_aMC": "13fc2c7a6cabfad0d714e7ebb551226bddce4bb61a9a1a81b3851507d06b1381",
+          "bin/process_compat_patch.py": "88368d888c883fd5893a99569a3f622dfdb230be58e8d27dd5f920710243f9d4",
+          "aloha/aloha_writers.py": "65d2749301350276819a6647b020134258c20fed43c8d6ab349460587d40b27a",
+          "aloha/create_aloha.py": "68b2f2994d8c502f9a233d14aea1769225c495bc088296bed402d7cad87b986c",
+          "aloha/template_files/aloha_functions_loop.f": "6b238e9a02e69ffc7b1f0d82050747419979818f3a4343a95110b021bcbe0a20",
+          "madgraph/iolibs/export_v4.py": "9d786807d3a443c7725952118f848b9a7a1f9a9d742b288323d103c11a8f1928",
+          "madgraph/loop/loop_exporters.py": "1ba46d8dcd2b8a921e690fbf79d7a381d37f041ed10fbba5ea4748d9594bedb2"
+        }
+      },
+      "ufo_compatibility": {
+        "parent_record": {
+          "original_root": "/common/dev/mg5_higgs_ew_plugin/UFO_model_gggH",
+          "private_copy": "target/gg-hg-amplitude/legacy-python3/UFO_model_gggH",
+          "changes": [
+            {
+              "file": "object_library.py",
+              "old": ".iteritems()",
+              "new": ".items()",
+              "count": 1
+            },
+            {
+              "file": "write_param_card.py",
+              "old": "print particles.__file__",
+              "new": "print(particles.__file__)",
+              "count": 1
+            },
+            {
+              "file": "write_param_card.py",
+              "old": "print 'write ./param_card.dat'",
+              "new": "print('write ./param_card.dat')",
+              "count": 1
+            },
+            {
+              "file": "__init__.py",
+              "change": "import function_library explicitly before reading its registered functions"
+            },
+            {
+              "file": "CT_couplings.py",
+              "old": "cmath.sqrt (2)",
+              "new": "cmath.sqrt(2)",
+              "count": 1,
+              "reason": "Normalize function-call whitespace for upstream UFO expression parser; identical Python mathematical expression."
+            },
+            {
+              "file": "lorentz.py",
+              "old": "GHGHG = Lorentz(name='GHGHG',\n                spins=[1, 1, 3],",
+              "new": "GHGHG = Lorentz(name='GHGHG',\n                spins=[-1, -1, 3],",
+              "count": 1,
+              "reason": "Normalize ghost Lorentz signature to native HEPKit spin -1 convention, matching its own standard model fixture. P(3,2) tensor and particle spin/ghost metadata unchanged.",
+              "sha256": "a4f59daad1e8cf8481c5dd24d9a08c76c0e369fe91c7e00b4e42340ce0e43d33"
+            },
+            {
+              "file": "vertices.py",
+              "vertex": "V_1001",
+              "old": "L.SSS1",
+              "new": "L.SSSS1",
+              "count": 1,
+              "reason": "Four-scalar vertex referenced three-scalar metadata. Both tensors are exactly1, and only the slot-count signature changes. Full registry audit found no other mismatch after ghost normalization.",
+              "sha256": "2de935b5e8c7085b8270caca82c119ac3c0016bdfe8aa26e8f638a724ff0827e"
+            }
+          ],
+          "reason": "Legacy Python2 dictionary iteration prevents Python3 UFO import. No tensor, coupling or parameter expression is changed."
+        },
+        "copy": "/common/dev/amflow/target/gg-hg-original-oracle/UFO_model_gggH",
+        "changed_files": {
+          "write_param_card.py": {
+            "original_sha256": "2ea383242778c2e48e1c5c1dd053a81da276ac91d63cee8b4d559a9f70ff3ee9",
+            "copy_sha256": "78487b17312eae3e06e83acc8a59efc77896b39ea12b232165d6cc249e0a8557"
+          },
+          "object_library.py": {
+            "original_sha256": "cd6eeca028ac5bfbf6cea9ee452b97cc141cf7c0728f7aed3af05b6a38de1e00",
+            "copy_sha256": "d984972daff4d49238e55b9635fbe01a134d12f6d7bb5b724b5604afd8dcae28"
+          },
+          "CT_couplings.py": {
+            "original_sha256": "322e7002d7e34c907ae3126d841c1ef25549c0d7b82b827a35ebe327fdfbdfc4",
+            "copy_sha256": "59f54a2c1d7d7c3056ed5ada3d83bea54f8ffb2ba05f279218bc38e572addb1c"
+          },
+          "vertices.py": {
+            "original_sha256": "9845f46c4d57e2123999492646e10a49f6a40d4560989be88ff43a75db88722e",
+            "copy_sha256": "2de935b5e8c7085b8270caca82c119ac3c0016bdfe8aa26e8f638a724ff0827e"
+          },
+          "__init__.py": {
+            "original_sha256": "03710ff823389d3243282518878253ec5feecdd4cc8316eb9d62f6b2b5456698",
+            "copy_sha256": "2b5bbdb48b3df0443bc3b5fe03ddf2cdc82224b34e0556507217c858d84ab562"
+          }
+        },
+        "mg5_additions": [
+          "Restore original ghost spins [1,1,3].",
+          "Explicit import object_library for native MG5 loader."
+        ]
+      },
+      "generated_fortran": {
+        "Source/DHELAS/aloha_functions.f": "660a8a6547e12e19114b086eefbfa09cb543b472ea74a1097e68265ac4491146",
+        "Source/DHELAS/gggHTensStruc1_0.f": "c83f3daea0274b0a1a275159e24ce5f29c13deeaf5bb99232ee5accf7046d447",
+        "Source/DHELAS/gggHTensStruc2_0.f": "30d4015a298c697e978caa0b2eb179dcfe737259e922c5d6a6a608349c9b8417",
+        "Source/DHELAS/gggHTensStruc3_0.f": "52b00621fbfad4f31ca54b884003e107854ab3c16008ee9fbce99687a9df4396",
+        "Source/DHELAS/gggHTensStruc4_0.f": "93a6679fc94fbc8ed849076c7168f619773a029df85324d067bd221172be902e",
+        "Source/MODEL/alfas_functions.f": "3642867e291a0f19b8f14b3d19226bf415d1970bb1be2807b6d814befb7f3d80",
+        "Source/MODEL/couplings.f": "de1a537357985372f92dc58125b540b5a08f8ff4814223d7a0c0f2f2210ca7b8",
+        "Source/MODEL/couplings1.f": "950b57d1c9118445910ff120ab5204fb3f11e0a37ae5ee3049d3b922cd9d9d19",
+        "Source/MODEL/couplings2.f": "cc82f8b5d3651844d9afacfb713b253b4474cb6572943b0f30e25d0d5a09fc23",
+        "Source/MODEL/couplings3.f": "bbc9d2b96fb88cd96b62a9712faa9e24cedc93db0a0cfed70499ebdb7b59d345",
+        "Source/MODEL/lha_read.f": "fd51c4686981abedbf62153ee537e7dec01a138dd9a560f39303b851f99d6ae0",
+        "Source/MODEL/model_functions.f": "25fd51e4e5bb56560ccc5ecb46e98c845b5b99fc5681de0cb1ec3fd69dfb81e5",
+        "Source/MODEL/printout.f": "6071ce3fa8024c216f99ce8c3300ba9837d395576eb980b7fff8153b88432e3a",
+        "Source/MODEL/rw_para.f": "d2599d268b29f3d3795f2ebc61d3a3a9fbcaef87311b432f124cc1dcffa22f3f",
+        "Source/MODEL/testprog.f": "7570c7961bd45365561047df5a3bd0c529204fb03f4e3562680d3b90e0042c89",
+        "SubProcesses/P1_gg_gh/check_sa.f": "8269f403a7746f2b6dcd84e6b90de19065c42cfaaf732ff0403390ad660aa8b4",
+        "SubProcesses/P1_gg_gh/f2py_matrix_wrapper.f": "9226053451ec1b608a78f6fadef6fb3ee1eb8653dd6807263f19813752e977fc",
+        "SubProcesses/P1_gg_gh/matrix.f": "b57713eb80196d97475712d491a3d9ec2f6612cf41474859b9aeb9c6744cf7df",
+        "SubProcesses/check_sa.f": "8269f403a7746f2b6dcd84e6b90de19065c42cfaaf732ff0403390ad660aa8b4"
+      },
+      "artifacts": {
+        "generate-313.mg5": "e65679f4b0b92b68ec8c36cdbcbcfe8ed1c1bbd80cc6723a91d548162a5f659b",
+        "generate-313.log": "5e90b16c34c754bd1ea8beb1244d623149a4fb2b1ade20112eb9f6a8af2c7409",
+        "prepare-input.py": "4478902c26f4a5063cdd4b55556348674eaf673c75d5c214eff0b7f69876ca6c",
+        "input.json": "cb0cfd9c7873e1251a09448bbec925981ca90b05b0a45b6081ec0438120aa6f5",
+        "model-input.dat": "f5f7e117575518601e00c98fc2167ac6afafebf917ce4225450437139acd2a1a",
+        "momenta.dat": "d739f8b14eb9ea5cb286039b1689f28ee060ddb169931f156081008ec9a7c496",
+        "oracle.f": "28b8f8b49e00eaefc9cf01eb688981e61b15f0744e016ebcd9dca18bda506e1e",
+        "oracle": "44c35e9ed97bb6ca07208a238f5245ab3516446958494521ad87838fd8d8f6f1",
+        "oracle.log": "71a4d1c56a5c0faa346f84e27c9949de5a178b3543218577c1de6c440c181ce7",
+        "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "oracle-long-card.log": "75761e3ca61cd11910bb623fdac7478127febaa4bd569e66966f8937c0a6bde5"
+      },
+      "cpu": 32,
+      "precision": "IEEE binary64 ordinary native standalone; no 20-digit ME claim.",
+      "scope": "Pure squared coherent W/Z EW amplitude with supplied independently validated form factors; no HEFT interference and no dynamic original Mathematica bridge."
+    },
+    "quad_scaffold_adaptation": {
+      "matrix_source": "standalone-313/SubProcesses/P1_gg_gh/matrix.f",
+      "matrix_source_sha256": "b57713eb80196d97475712d491a3d9ec2f6612cf41474859b9aeb9c6744cf7df",
+      "matrix_changes": [
+        "REAL*8\u2192REAL*16 and COMPLEX*16\u2192COMPLEX*32 declarations",
+        "DCONJG/DSQRT\u2192generic CONJG/SQRT for kind-preserving operations",
+        "native mp_coupl_same_name.inc common layout",
+        "native MP_VXXXXX/MP_SXXXXX wavefunctions and native MP-tagged combined ALOHA routine name"
+      ],
+      "unchanged": "Every generated helicity, amplitude, JAMP, color contraction, division and sum expression. Integer-valued D literals remain exactly representable. Unused f2py convenience subroutines retained but not invoked.",
+      "kernel_owner": "ALOHA native QP writer, MP tags, loop-format wavefunctions (4 separately stored momentum components). No tensor-algebra port.",
+      "model_owner": "Native UFO_model_to_mg4(mp=True), MP_LHA initialization followed by direct MP external decimal input and native COUP recomputation.",
+      "driver_changes": [
+        "REAL*16 input/results",
+        "native MP__ external/common names",
+        "35-digit output format"
+      ],
+      "linker_aliases": {
+        "ggghtensstruc1mp_0_": "mp_ggghtensstruc1_0_",
+        "ggghtensstruc2mp_0_": "mp_ggghtensstruc2_0_",
+        "ggghtensstruc3mp_0_": "mp_ggghtensstruc3_0_",
+        "ggghtensstruc4mp_0_": "mp_ggghtensstruc4_0_"
+      },
+      "alias_reason": "Native combined MP routine uses suffix-MP calls, while native QP individual routine writer emits MP_ prefixes. Linker aliases preserve both generated bodies unchanged.",
+      "reader": "Native mg5/models/template_files/fortran/lha_read_mp.f provides DP+MP initializer; highprecision scientific inputs are then read directly into MP external parameters."
+    },
+    "quad_build_command": [
+      "/nix/store/mc0wvq2dwqrdp3h3mdn0cfffa0i6znz2-gfortran-wrapper-15.3.0/bin/gfortran",
+      "-O2",
+      "-ffixed-line-length-none",
+      "-I",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL",
+      "-I",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/oracle.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/matrix.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/alfas_functions.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/couplings.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/couplings1.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/couplings2.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/couplings3.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/mg5/models/template_files/fortran/lha_read_mp.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/model_functions.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/mp_couplings1.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/mp_couplings2.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/mp_couplings3.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/printout.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/MODEL/rw_para.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/DHELAS/MP_gggHTensStruc1_0.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/DHELAS/MP_gggHTensStruc2_0.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/DHELAS/MP_gggHTensStruc3_0.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/DHELAS/MP_gggHTensStruc4_0.f",
+      "/common/dev/amflow/target/gg-hg-original-oracle/mg5/aloha/template_files/aloha_functions_loop.f",
+      "-Wl,--defsym,ggghtensstruc1mp_0_=mp_ggghtensstruc1_0_",
+      "-Wl,--defsym,ggghtensstruc2mp_0_=mp_ggghtensstruc2_0_",
+      "-Wl,--defsym,ggghtensstruc3mp_0_=mp_ggghtensstruc3_0_",
+      "-Wl,--defsym,ggghtensstruc4mp_0_=mp_ggghtensstruc4_0_",
+      "-o",
+      "/common/dev/amflow/target/gg-hg-original-oracle/quad/oracle"
+    ],
+    "scaffold_source_hashes": {
+      "target/gg-hg-original-oracle/prepare-input.py": "4478902c26f4a5063cdd4b55556348674eaf673c75d5c214eff0b7f69876ca6c",
+      "target/gg-hg-original-oracle/generate-quad.py": "be329df0221a3e683d52a94e774db95d0ff629e1dd679384a3779622935d7643",
+      "target/gg-hg-original-oracle/prepare-quad.py": "3969f3399df682db430aa6b371bcaaf27048a235cc33be77319fd98096812bf5",
+      "target/gg-hg-original-oracle/oracle.f": "28b8f8b49e00eaefc9cf01eb688981e61b15f0744e016ebcd9dca18bda506e1e",
+      "target/gg-hg-original-oracle/quad/oracle.f": "dbfeabe6baa53fea3b55556fe0244204ff89b21204143b50418998b3f35f9c53",
+      "target/gg-hg-original-oracle/quad/matrix.f": "808d999f6f2fae18731b9d8545a904775fc09838ede782aa96c488613e52bdf0",
+      "target/gg-hg-original-oracle/quad/oracle": "f6c140e80a838aa0f56b159480aaa91c71eaaa9bf1f854627e1f479414d40420",
+      "target/gg-hg-original-oracle/quad/oracle.log": "99d2aed70755a242a08d4f081cca1796cc91a44cea00dbe2c0e01c7766bd9dfd"
+    },
+    "generated_quad_source_hashes": {
+      "target/gg-hg-original-oracle/quad/DHELAS/MP_gggHTensStruc1_0.f": "7f0371b4a5b060d7e7f8b690ab440257e7f2cf41ae25a663c9ba6c1490caef37",
+      "target/gg-hg-original-oracle/quad/DHELAS/MP_gggHTensStruc2_0.f": "8d37e05cf33650fc99954b4becac1ab09c0e76d79201bd8b115ce2a16e3307cd",
+      "target/gg-hg-original-oracle/quad/DHELAS/MP_gggHTensStruc3_0.f": "e9a8cef03fd9ba1bb3a31ec2fa9aaea5cf2e6f56b6ba53455e5a4f3979887648",
+      "target/gg-hg-original-oracle/quad/DHELAS/MP_gggHTensStruc4_0.f": "5090a8aaef539d585c754156c3d4abdb957371d2de794779e3d2aca5845e5b17",
+      "target/gg-hg-original-oracle/quad/MODEL/actualize_mp_ext_params.inc": "4108b4fb1f82d348413a9f7f777eb94537061f7ccf339d7d23f30f4f835676ac",
+      "target/gg-hg-original-oracle/quad/MODEL/alfas.inc": "d5ae9799ae1067a7a5d8a690654408e4626db1f032091eab30286a3dc06c7a1c",
+      "target/gg-hg-original-oracle/quad/MODEL/alfas_functions.f": "3642867e291a0f19b8f14b3d19226bf415d1970bb1be2807b6d814befb7f3d80",
+      "target/gg-hg-original-oracle/quad/MODEL/coupl.inc": "0645fca62ed67a677be1df57f21ec4544cd6d95919f41831ad171a7c5db732d2",
+      "target/gg-hg-original-oracle/quad/MODEL/coupl_write.inc": "743dccbfcbaf5745737865d56f3b65185b2fc469a5c13ce46a53f907f7f963b1",
+      "target/gg-hg-original-oracle/quad/MODEL/couplings.f": "6d6f0b472fafeb995ae2765226ca223bcc3d08d06390ebb9b2627de5d76495ec",
+      "target/gg-hg-original-oracle/quad/MODEL/couplings1.f": "950b57d1c9118445910ff120ab5204fb3f11e0a37ae5ee3049d3b922cd9d9d19",
+      "target/gg-hg-original-oracle/quad/MODEL/couplings2.f": "cc82f8b5d3651844d9afacfb713b253b4474cb6572943b0f30e25d0d5a09fc23",
+      "target/gg-hg-original-oracle/quad/MODEL/couplings3.f": "bbc9d2b96fb88cd96b62a9712faa9e24cedc93db0a0cfed70499ebdb7b59d345",
+      "target/gg-hg-original-oracle/quad/MODEL/formats.inc": "1d0c8b3a81b5c4ed3cc50e16edc2d7fa09fa2c2694b9eef3790bff2abc42c3a3",
+      "target/gg-hg-original-oracle/quad/MODEL/input.inc": "042d74d2cb6d08f255e1a3ed91281750b9723f1336cf3b0a93f1925a2e0e0b66",
+      "target/gg-hg-original-oracle/quad/MODEL/intparam_definition.inc": "d34cb75378bd08e102b9705140b146e0543494ecc090244fd6e8068c7276dff1",
+      "target/gg-hg-original-oracle/quad/MODEL/lha_read.f": "fd51c4686981abedbf62153ee537e7dec01a138dd9a560f39303b851f99d6ae0",
+      "target/gg-hg-original-oracle/quad/MODEL/makeinc.inc": "012186426b7b55548c8bd0770490e3911dd4978404af838a4ad4ed5612d9cdee",
+      "target/gg-hg-original-oracle/quad/MODEL/model_functions.f": "a9678291451097495295fb6f894f3fd4c162addca0844f82393db59b69bc981e",
+      "target/gg-hg-original-oracle/quad/MODEL/model_functions.inc": "be48cc65d552043c1569e2144501aa3d1c16e69834f20090aceca8ea818bb58f",
+      "target/gg-hg-original-oracle/quad/MODEL/mp_coupl.inc": "cc89eeaa68d277598e041018ebbbbb99c9a16d33deb19058e17a8f6415994fd1",
+      "target/gg-hg-original-oracle/quad/MODEL/mp_coupl_same_name.inc": "80ec38378b4cf15a029d43a4cfef424d2a27b267b7b3cd1cc0accc89b7ef2dec",
+      "target/gg-hg-original-oracle/quad/MODEL/mp_couplings1.f": "b5ba142a849d7d9f27f06a531172f8316b9ca508db6c3af2554baa4a01c50b22",
+      "target/gg-hg-original-oracle/quad/MODEL/mp_couplings2.f": "b76916846580fe0592177085fff859bd8432a0dffbe5e8f294469f26db47ff2c",
+      "target/gg-hg-original-oracle/quad/MODEL/mp_couplings3.f": "c4da4930953afe33cbda92329a7ca5ef587755e19e197538c7e35cd92facac2f",
+      "target/gg-hg-original-oracle/quad/MODEL/mp_input.inc": "7299c0fd87686096460dd6f7c9a7b6650747a138b49798f87fc20bd84f9e9455",
+      "target/gg-hg-original-oracle/quad/MODEL/mp_intparam_definition.inc": "f0730643d17139c684b2d0230542a99cff00a36b42250eac287c4a9c495c0ea9",
+      "target/gg-hg-original-oracle/quad/MODEL/param_read.inc": "b8737fa8bd8f47d3012504428aab2f7b2a8ac48072ca847398db4861ab838e5a",
+      "target/gg-hg-original-oracle/quad/MODEL/param_write.inc": "862412f5d28a10125d30e5bf112dd9cf62c85edb8f2043346505ef35dee1ee5c",
+      "target/gg-hg-original-oracle/quad/MODEL/printout.f": "6071ce3fa8024c216f99ce8c3300ba9837d395576eb980b7fff8153b88432e3a",
+      "target/gg-hg-original-oracle/quad/MODEL/rw_para.f": "89cd2b37366758e956631c23f724c7dc96880f1f6f53329ebcce1f79c0171e12",
+      "target/gg-hg-original-oracle/quad/MODEL/testprog.f": "7570c7961bd45365561047df5a3bd0c529204fb03f4e3562680d3b90e0042c89"
+    }
+  },
+  "review": {
+    "native_uncertainty": "Independent read-only peer review found no issue in the exact quadratic derivative/remainder formula, conservative component allowances, or conditional19-digit conclusion. Arithmetic reserve is empirical, not interval-certified.",
+    "oracle_mapping": "Independent review confirmed input order, W/Z FF mapping, native incoming averages and single normalization application."
+  }
+}

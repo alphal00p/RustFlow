@@ -2,8 +2,9 @@
 //!
 //! Every request selects a compatible boundary before forming its path. Accepted
 //! intermediate physical points are independently checked and retained. The
-//! current orchestrator supports regular straight paths; threshold prescriptions
-//! and partial singular boundaries are handled by separate solver interfaces.
+//! ordinary interface supports regular straight paths. An explicitly bound
+//! prescribed interface reuses the same engine for threshold detours; singular
+//! endpoints remain the responsibility of separate boundary solvers.
 use crate::algebraic::{
     AlgebraicKinematicSystem, AlgebraicSystem, CanonicalAlgebraicSystem, CompiledAlgebraicSystem,
 };
@@ -11,11 +12,55 @@ use crate::diffexp::{EpsilonSolution, EpsilonSystem, transport_epsilon};
 use crate::kinematics::{KinematicPath, KinematicSystem};
 use crate::transport_cache::{
     BoundaryAccuracy, BoundaryIdentity, BoundaryQuery, CachedBoundary, CachedPoint, EpsilonRange,
-    PointKind, RootGerm, RustFlowCache, TransportCost,
+    PhysicalContinuation, PointKind, RootGerm, RootSheet, RustFlowCache, TransportCost,
 };
 use crate::{Error, FlowOptions, Precision, Prescription, Result, RunContext};
-use std::collections::BTreeMap;
+use std::{cell::RefCell, collections::BTreeMap, rc::Rc};
 use symbolica::prelude::*;
+
+/// A planner-generated affine physical route. Vertices are exact binary
+/// rational images of the certified rounded contour, shared by all refinements.
+#[derive(Clone, Debug)]
+pub struct PhysicalRoute {
+    pub path: KinematicPath,
+    pub waypoints: Vec<Atom>,
+    pub crossings: Vec<crate::contour::ContourCrossing>,
+}
+
+/// Geometry alone does not establish the integral's global monodromy. The
+/// caller must admit each candidate route into the identity's declared domain.
+pub trait HomotopyAdmission {
+    fn admit(
+        &self,
+        source: &CachedBoundary,
+        destination: &CachedPoint,
+        route: &PhysicalRoute,
+    ) -> Result<bool>;
+}
+impl<F> HomotopyAdmission for F
+where
+    F: Fn(&CachedBoundary, &CachedPoint, &PhysicalRoute) -> Result<bool>,
+{
+    fn admit(
+        &self,
+        source: &CachedBoundary,
+        destination: &CachedPoint,
+        route: &PhysicalRoute,
+    ) -> Result<bool> {
+        self(source, destination, route)
+    }
+}
+
+#[derive(Clone, Copy)]
+enum RouteMode<'a> {
+    Straight,
+    Prescribed(&'a dyn HomotopyAdmission),
+}
+impl RouteMode<'_> {
+    fn is_prescribed(self) -> bool {
+        matches!(self, Self::Prescribed(_))
+    }
+}
 
 pub struct RustFlow<S = KinematicSystem> {
     system: S,
@@ -49,6 +94,33 @@ pub struct PhysicalResult {
 }
 
 impl RustFlow {
+    /// Continue through planner-generated threshold detours. The identity must
+    /// be bound to exact prescriptions and the caller must admit its homotopy.
+    #[allow(clippy::too_many_arguments)]
+    pub fn evaluate_prescribed_to(
+        &self,
+        cache: &mut RustFlowCache,
+        destination: &BTreeMap<Symbol, Atom>,
+        range: EpsilonRange,
+        options: &FlowOptions,
+        context: &RunContext,
+        policy: &dyn TransportCost,
+        admission: &dyn HomotopyAdmission,
+    ) -> Result<PhysicalResult> {
+        let target = CachedPoint::Exact(destination.clone());
+        evaluate_physical(
+            Connection::Rational(&self.system),
+            &self.identity,
+            cache,
+            target,
+            range,
+            options,
+            context,
+            policy,
+            RouteMode::Prescribed(admission),
+        )
+    }
+
     pub fn new(
         system: KinematicSystem,
         basis: &[Atom],
@@ -108,11 +180,21 @@ impl RustFlow {
             options,
             context,
             policy,
+            RouteMode::Straight,
         )
     }
 }
 
 impl<S> RustFlow<S> {
+    /// Bind exact prescriptions into a distinct typed cache identity. A bound
+    /// flow must use `evaluate_prescribed_to` with explicit homotopy admission.
+    pub fn with_prescribed_continuation(
+        mut self,
+        continuation: PhysicalContinuation,
+    ) -> Result<Self> {
+        self.identity = self.identity.with_prescribed_continuation(continuation)?;
+        Ok(self)
+    }
     /// The exact common-basis physical connection.
     pub fn system(&self) -> &S {
         &self.system
@@ -123,6 +205,34 @@ impl<S> RustFlow<S> {
 }
 
 impl RustFlow<AlgebraicKinematicSystem> {
+    /// Continue through planner-generated threshold detours. The identity must
+    /// be bound to exact prescriptions and the caller must admit its homotopy.
+    #[allow(clippy::too_many_arguments)]
+    pub fn evaluate_prescribed_to(
+        &self,
+        cache: &mut RustFlowCache,
+        destination: &BTreeMap<Symbol, Atom>,
+        germ: &RootGerm,
+        range: EpsilonRange,
+        options: &FlowOptions,
+        context: &RunContext,
+        policy: &dyn TransportCost,
+        admission: &dyn HomotopyAdmission,
+    ) -> Result<PhysicalResult> {
+        let target = CachedPoint::Exact(destination.clone()).with_root_germ(germ.clone())?;
+        evaluate_physical(
+            Connection::Algebraic(&self.system),
+            &self.identity,
+            cache,
+            target,
+            range,
+            options,
+            context,
+            policy,
+            RouteMode::Prescribed(admission),
+        )
+    }
+
     pub fn new_algebraic(
         system: AlgebraicKinematicSystem,
         basis: &[Atom],
@@ -186,11 +296,50 @@ impl RustFlow<AlgebraicKinematicSystem> {
             options,
             context,
             policy,
+            RouteMode::Straight,
         )
     }
 }
 
 impl RustFlow<CanonicalAlgebraicSystem> {
+    /// Continue through planner-generated threshold detours. The identity must
+    /// be bound to exact prescriptions and the caller must admit its homotopy.
+    #[allow(clippy::too_many_arguments)]
+    pub fn evaluate_prescribed_to(
+        &self,
+        cache: &mut RustFlowCache,
+        destination: &BTreeMap<Symbol, Atom>,
+        germ: Option<&RootGerm>,
+        range: EpsilonRange,
+        options: &FlowOptions,
+        context: &RunContext,
+        policy: &dyn TransportCost,
+        admission: &dyn HomotopyAdmission,
+    ) -> Result<PhysicalResult> {
+        let target = match (self.system.roots().is_empty(), germ) {
+            (true, None) => CachedPoint::Exact(destination.clone()),
+            (false, Some(germ)) => {
+                CachedPoint::Exact(destination.clone()).with_root_germ(germ.clone())?
+            }
+            _ => {
+                return Err(Error::InvalidInput(
+                    "canonical root germ must be supplied exactly when roots are registered".into(),
+                ));
+            }
+        };
+        evaluate_physical(
+            Connection::Canonical(&self.system),
+            &self.identity,
+            cache,
+            target,
+            range,
+            options,
+            context,
+            policy,
+            RouteMode::Prescribed(admission),
+        )
+    }
+
     pub fn new_canonical(
         system: CanonicalAlgebraicSystem,
         basis: &[Atom],
@@ -259,6 +408,7 @@ impl RustFlow<CanonicalAlgebraicSystem> {
             options,
             context,
             policy,
+            RouteMode::Straight,
         )
     }
 }
@@ -300,54 +450,27 @@ impl PreparedConnection {
     fn transport(
         &self,
         source: &CachedBoundary,
+        target: &CachedPoint,
         range: EpsilonRange,
+        waypoints: &[Atom],
         options: &FlowOptions,
         context: &RunContext,
-    ) -> Result<EpsilonSolution> {
+    ) -> Result<(EpsilonSolution, BTreeMap<usize, RootGerm>)> {
         match self {
-            Self::Rational(system) => transport_epsilon(
-                system,
-                |p| source.as_epsilon_boundary(&Atom::new(), range, p),
-                &[Atom::one()],
-                options,
-                context,
-                true,
+            Self::Rational(system) => Ok((
+                transport_epsilon(
+                    system,
+                    |p| source.as_epsilon_boundary(&Atom::new(), range, p),
+                    waypoints,
+                    options,
+                    context,
+                    true,
+                )?,
+                BTreeMap::new(),
+            )),
+            Self::Algebraic(system) => transport_algebraic_checked(
+                system, source, target, range, waypoints, options, context,
             ),
-            Self::Algebraic(system) => {
-                let seeds = if system.roots.is_empty() {
-                    BTreeMap::new()
-                } else {
-                    source
-                        .point
-                        .root_germ()
-                        .ok_or_else(|| Error::InvalidInput("missing source root germ".into()))?
-                        .seeds()
-                };
-                crate::diffexp::refine_epsilon_transport(options, context, true, |p, refined| {
-                    let compiled = system.compile(p)?;
-                    let result = compiled.transport(
-                        &source.as_epsilon_boundary(&Atom::new(), range, p)?,
-                        &[p.i(1)],
-                        &seeds,
-                        refined,
-                        context,
-                        true,
-                    )?;
-                    let expected = compiled.branch_state_at(&p.i(1), &seeds)?;
-                    if !result
-                        .branches
-                        .roots
-                        .iter()
-                        .zip(&expected.roots)
-                        .all(|((a, x), (b, y))| a == b && p.close(x, y, options.digits + 8))
-                    {
-                        return Err(Error::Accuracy(
-                            "regular physical transport changed its root germ".into(),
-                        ));
-                    }
-                    Ok(result.solution)
-                })
-            }
         }
     }
 }
@@ -362,15 +485,27 @@ impl CompiledConnection {
             Self::Algebraic(c) => c.singularities(),
         }
     }
-    fn error_amplification_weighted(
+    fn singularity_polynomials(&self) -> &[Atom] {
+        match self {
+            Self::Rational(c) => c.singularity_polynomials(),
+            Self::Algebraic(c) => c.singularity_polynomials(),
+        }
+    }
+    fn epsilon_product_limit(&self) -> Option<usize> {
+        match self {
+            Self::Rational(c) => c.epsilon_product_limit(),
+            Self::Algebraic(c) => c.epsilon_product_limit(),
+        }
+    }
+    fn error_norm_integral_weighted(
         &self,
         start: &crate::ComplexFloat,
         end: &crate::ComplexFloat,
         weights: &[Float],
     ) -> Result<Float> {
         match self {
-            Self::Rational(c) => c.error_amplification_weighted(start, end, weights),
-            Self::Algebraic(c) => c.error_amplification_weighted(start, end, weights),
+            Self::Rational(c) => c.error_norm_integral_weighted(start, end, weights),
+            Self::Algebraic(c) => c.error_norm_integral_weighted(start, end, weights),
         }
     }
 }
@@ -385,8 +520,12 @@ fn evaluate_physical(
     options: &FlowOptions,
     context: &RunContext,
     policy: &dyn TransportCost,
+    mode: RouteMode<'_>,
 ) -> Result<PhysicalResult> {
     options.validate()?;
+    if mode.is_prescribed() != identity.physical_continuation().is_some() {
+        return Err(Error::InvalidInput("prescribed identities require evaluate_prescribed_to with explicit homotopy admission; ordinary identities require evaluate_to".into()));
+    }
     context.cancellation.check()?;
     let p = Precision::decimal(options.digits + options.guard_digits)?;
     let query = BoundaryQuery::new(identity, &target, range, options.digits)?;
@@ -398,13 +537,23 @@ fn evaluate_physical(
         policy,
         digits: options.digits,
         context,
+        mode,
+        system,
+        range,
+        planned: RefCell::new(BTreeMap::new()),
     };
     let mut excluded = std::collections::BTreeSet::new();
     let mut attempts = Vec::new();
     let mut last_accuracy = None;
     for _ in 0..options.max_boundary_attempts {
         context.cancellation.check()?;
-        let Some((index, matched)) = cache.best_excluding(&query, &guarded_policy, p, &excluded)?
+        let Some((index, matched)) = cache.best_excluding_with_germ_policy(
+            &query,
+            &guarded_policy,
+            p,
+            &excluded,
+            mode.is_prescribed(),
+        )?
         else {
             return Err(if let Some(message) = last_accuracy {
                 Error::Accuracy(format!(
@@ -433,6 +582,11 @@ fn evaluate_physical(
             range,
             options,
             context,
+            guarded_policy
+                .planned
+                .borrow()
+                .get(&diagnostic.starting_point.key()?)
+                .cloned(),
         ) {
             Ok(mut result) => {
                 attempts.push(diagnostic);
@@ -466,6 +620,7 @@ fn evaluate_from_source(
     range: EpsilonRange,
     options: &FlowOptions,
     context: &RunContext,
+    supplied_route: Option<Rc<PreparedRoute>>,
 ) -> Result<PhysicalResult> {
     let p = Precision::decimal(options.digits + options.guard_digits)?;
     let destination = target.restart_coordinates()?;
@@ -493,27 +648,48 @@ fn evaluate_from_source(
             boundary_attempts: Vec::new(),
         });
     }
-    let path = KinematicPath::straight_line(
-        identity.path_parameter("physical_path_parameter")?,
-        &coordinates,
-        &destination,
+    let route = if let Some(route) = supplied_route {
+        route
+    } else {
+        let path = KinematicPath::straight_line(
+            identity.path_parameter("physical_path_parameter")?,
+            &coordinates,
+            &destination,
+        )?;
+        if !identity.conditions_admit_straight_path(&source.point, &target, p, options.digits)? {
+            return Err(Error::Unsupported(
+                "selected physical path leaves the reduction domain".into(),
+            ));
+        }
+        let system = system.pullback(&path, count - 1)?;
+        let prepared = system.compile(p)?;
+        if prepared.poles().iter().any(|pole| {
+            pole.re >= p.real(0)
+                && pole.re <= p.real(1)
+                && p.norm(&crate::ComplexFloat::new(p.real(0), pole.im.clone()))
+                    <= p.tolerance(options.digits + 8)
+        }) {
+            return Err(Error::Unsupported("selected physical straight path meets a singularity; use explicit prescribed physical transport".into()));
+        }
+        Rc::new(PreparedRoute {
+            physical: PhysicalRoute {
+                path,
+                waypoints: vec![Atom::one()],
+                crossings: Vec::new(),
+            },
+            system,
+        })
+    };
+    let path = &route.physical.path;
+    let system = &route.system;
+    let (mut solution, checkpoint_germs) = system.transport(
+        &source,
+        &target,
+        range,
+        &route.physical.waypoints,
+        options,
+        context,
     )?;
-    if !identity.conditions_admit_straight_path(&source.point, &target, p, options.digits)? {
-        return Err(Error::Unsupported(
-            "selected physical path leaves the reduction domain".into(),
-        ));
-    }
-    let system = system.pullback(&path, count - 1)?;
-    let prepared = system.compile(p)?;
-    if prepared.poles().iter().any(|pole| {
-        pole.re >= p.real(0)
-            && pole.re <= p.real(1)
-            && p.norm(&crate::ComplexFloat::new(p.real(0), pole.im.clone()))
-                <= p.tolerance(options.digits + 8)
-    }) {
-        return Err(Error::Unsupported("selected physical straight path meets a singularity; choose a compatible regular boundary/path or use explicit contour transport".into()));
-    }
-    let mut solution = system.transport(&source, range, options, context)?;
     let p = Precision {
         bits: solution.diagnostics.working_bits,
     };
@@ -547,12 +723,19 @@ fn evaluate_from_source(
         .accuracy
         .verified_digits()
         .min((options.digits + options.guard_digits).saturating_sub(10));
+    let mut integrated_norm = p.real(0);
     let mut amplification = p.real(1);
+    let epsilon_product_limit = prepared.epsilon_product_limit();
     let mut accepted = Vec::new();
     for (index, segment) in solution.segments.iter().enumerate() {
         context.cancellation.check()?;
-        amplification *=
-            prepared.error_amplification_weighted(&segment.center, &segment.end, &weights)?;
+        integrated_norm +=
+            prepared.error_norm_integral_weighted(&segment.center, &segment.end, &weights)?;
+        amplification = crate::diffexp::amplification_from_integral(
+            p,
+            &integrated_norm,
+            epsilon_product_limit,
+        )?;
         if let Some(checkpoint) = solution.checkpoints.iter().find(|c| c.segment == index) {
             let mut checkpoint = checkpoint.clone();
             for (error, weight) in checkpoint
@@ -610,12 +793,15 @@ fn evaluate_from_source(
         )?,
     };
     boundary.validate()?;
-    let mut pending = RustFlowCache::trajectory_boundaries_with_germ(
+    let mut pending = RustFlowCache::trajectory_boundaries_with_germs(
         identity,
-        &path,
+        path,
         &solution,
-        source.point.root_germ(),
-        |index, _| {
+        |index| Ok(checkpoint_germs.get(&index).cloned()),
+        |index, segment| {
+            if segment.end.im != p.real(0) {
+                return Ok(None);
+            }
             let Some(checkpoint) = solution.checkpoints.iter().find(|c| c.segment == index) else {
                 return Ok(None);
             };
@@ -692,6 +878,10 @@ struct GuardedCost<'a> {
     policy: &'a dyn TransportCost,
     digits: u32,
     context: &'a RunContext,
+    mode: RouteMode<'a>,
+    system: Connection<'a>,
+    range: EpsilonRange,
+    planned: RefCell<BTreeMap<String, Rc<PreparedRoute>>>,
 }
 impl TransportCost for GuardedCost<'_> {
     fn cost(
@@ -701,11 +891,47 @@ impl TransportCost for GuardedCost<'_> {
         p: Precision,
     ) -> Result<Option<Float>> {
         self.context.cancellation.check()?;
-        if !self
-            .identity
-            .conditions_admit_straight_path(&source.point, target, p, self.digits)?
-        {
-            return Ok(None);
+        match self.mode {
+            RouteMode::Straight => {
+                if !self.identity.conditions_admit_straight_path(
+                    &source.point,
+                    target,
+                    p,
+                    self.digits,
+                )? {
+                    return Ok(None);
+                }
+            }
+            RouteMode::Prescribed(admission) => {
+                // A constant affine chart has no loop and cannot change sheet.
+                // Reject it before distance zero can outrank a valid source.
+                if source.point.root_germ() != target.root_germ() {
+                    let a = source.point.restart_coordinates()?;
+                    let b = target.restart_coordinates()?;
+                    if a.keys().eq(b.keys())
+                        && a.iter()
+                            .all(|(s, v)| (v - &b[s]).together().cancel().is_zero())
+                    {
+                        return Ok(None);
+                    }
+                }
+                let route = prepare_prescribed_route(
+                    self.system,
+                    self.identity,
+                    source,
+                    target,
+                    self.range,
+                    p,
+                    self.context,
+                )?;
+                if !admission.admit(source, target, &route.physical)? {
+                    return Ok(None);
+                }
+                self.context.cancellation.check()?;
+                self.planned
+                    .borrow_mut()
+                    .insert(source.point.key()?, Rc::new(route));
+            }
         }
         self.policy.cost(source, target, p)
     }
@@ -728,4 +954,205 @@ impl TransportCost for GuardedCost<'_> {
         self.context.cancellation.check()?;
         self.policy.compare_tied_costs(left, right, target, p)
     }
+}
+
+struct PreparedRoute {
+    physical: PhysicalRoute,
+    system: PreparedConnection,
+}
+
+#[allow(clippy::too_many_arguments)]
+fn prepare_prescribed_route(
+    system: Connection<'_>,
+    identity: &BoundaryIdentity,
+    source: &CachedBoundary,
+    target: &CachedPoint,
+    range: EpsilonRange,
+    p: Precision,
+    context: &RunContext,
+) -> Result<PreparedRoute> {
+    identity.validate_point(&source.point)?;
+    identity.validate_point(target)?;
+    let start = source.point.restart_coordinates()?;
+    let finish = target.restart_coordinates()?;
+    for value in start.values().chain(finish.values()) {
+        crate::transport_cache::exact_real_rational(value)?;
+    }
+    let path = KinematicPath::straight_line(
+        identity.path_parameter("prescribed_physical_path")?,
+        &start,
+        &finish,
+    )?;
+    let system = system.pullback(
+        &path,
+        (i64::from(range.last) - i64::from(range.leading)) as usize,
+    )?;
+    let compiled = system.compile(p)?;
+    let mut polynomials = compiled.singularity_polynomials().to_vec();
+    polynomials.extend(identity.prescribed_path_conditions(&path)?);
+    let convention = identity
+        .physical_continuation()
+        .ok_or_else(|| Error::InvalidInput("missing prescribed identity".into()))?;
+    let rules = path
+        .coordinates
+        .iter()
+        .map(|(&s, a)| (Atom::var(s), a.clone()))
+        .collect();
+    let planner = crate::contour::PrescribedContour {
+        variable: path.parameter,
+        prescriptions: convention
+            .prescriptions
+            .iter()
+            .map(|d| crate::contour::PolynomialPrescription {
+                polynomial: crate::family::substitute(&d.polynomial, &rules)
+                    .together()
+                    .cancel(),
+                prescription: d.prescription,
+            })
+            .collect(),
+        unprescribed_side: convention.unprescribed_side,
+    };
+    let contour = planner.plan_with_context(p, &polynomials, &p.zero(), &p.i(1), context)?;
+    let waypoints = contour
+        .waypoints
+        .iter()
+        .map(|x| Atom::num(Complex::new(x.re.to_rational(), x.im.to_rational())))
+        .collect();
+    Ok(PreparedRoute {
+        physical: PhysicalRoute {
+            path,
+            waypoints,
+            crossings: contour.crossings,
+        },
+        system,
+    })
+}
+
+struct BranchTrace {
+    compiled: CompiledAlgebraicSystem,
+    segments: Vec<crate::algebraic::BranchSegment>,
+}
+fn classify_germ(
+    compiled: &CompiledAlgebraicSystem,
+    state: &crate::algebraic::BranchState,
+) -> Result<RootGerm> {
+    let seeds = state
+        .roots
+        .iter()
+        .map(|(s, _)| (*s, crate::algebraic::RootSeed::Principal))
+        .collect();
+    let principal = compiled.branch_state_at(&state.point, &seeds)?;
+    let p = Precision {
+        bits: state.point.re.as_raw().prec(),
+    };
+    if state.roots.len() != principal.roots.len() {
+        return Err(Error::InvalidInput("root registry changed".into()));
+    }
+    let mut sheets = BTreeMap::new();
+    for ((symbol, value), (expected_symbol, positive)) in state.roots.iter().zip(principal.roots) {
+        if *symbol != expected_symbol || !p.finite(value) {
+            return Err(Error::InvalidInput(
+                "invalid transported root identity/value".into(),
+            ));
+        }
+        let scale = p.norm(&positive);
+        let plus = p.norm(&p.sub(value, &positive));
+        let minus = p.norm(&p.add(value, &positive));
+        let sheet = if plus * 4 < scale {
+            RootSheet::Principal
+        } else if minus * 4 < scale {
+            RootSheet::Opposite
+        } else {
+            return Err(Error::Accuracy(
+                "transported root sheet is ambiguous".into(),
+            ));
+        };
+        sheets.insert(*symbol, sheet);
+    }
+    Ok(RootGerm { sheets })
+}
+
+#[allow(clippy::too_many_arguments)]
+fn transport_algebraic_checked(
+    system: &AlgebraicSystem,
+    source: &CachedBoundary,
+    target: &CachedPoint,
+    range: EpsilonRange,
+    waypoints: &[Atom],
+    options: &FlowOptions,
+    context: &RunContext,
+) -> Result<(EpsilonSolution, BTreeMap<usize, RootGerm>)> {
+    let seeds = source
+        .point
+        .root_germ()
+        .map(RootGerm::seeds)
+        .unwrap_or_default();
+    let (solution, trace) = crate::diffexp::refine_epsilon_transport_with_metadata(
+        options,
+        context,
+        true,
+        |p, refined| {
+            let compiled = system.compile(p)?;
+            let points = waypoints
+                .iter()
+                .map(|a| p.eval(a, &Default::default()))
+                .collect::<Result<Vec<_>>>()?;
+            let result = compiled.transport(
+                &source.as_epsilon_boundary(&Atom::new(), range, p)?,
+                &points,
+                &seeds,
+                refined,
+                context,
+                true,
+            )?;
+            if !system.roots.is_empty()
+                && Some(&classify_germ(&compiled, &result.branches)?) != target.root_germ()
+            {
+                return Err(Error::InvalidInput("planned continuation reaches a different root germ than requested; the route is not admitted to that destination sheet".into()));
+            }
+            Ok((
+                result.solution,
+                BranchTrace {
+                    compiled,
+                    segments: result.branch_segments,
+                },
+            ))
+        },
+        |old, old_trace, new, new_trace, index| {
+            let state = &new_trace.segments[index].end;
+            let germ = classify_germ(&new_trace.compiled, state)?;
+            let point = &new.segments[index].end;
+            let mut found = false;
+            for (old_index, segment) in old_trace.segments.iter().enumerate() {
+                if old.evaluate_segment(old_index, point).is_err() {
+                    continue;
+                }
+                let branch = match old_trace.compiled.project_branch_segment(segment, point) {
+                    Ok(branch) => branch,
+                    Err(Error::Accuracy(_)) => return Ok(false),
+                    Err(error) => return Err(error),
+                };
+                let old_germ = match classify_germ(&old_trace.compiled, &branch) {
+                    Ok(germ) => germ,
+                    Err(Error::Accuracy(_)) => return Ok(false),
+                    Err(error) => return Err(error),
+                };
+                if old_germ != germ {
+                    return Ok(false);
+                }
+                found = true;
+            }
+            Ok(found)
+        },
+    )?;
+    let mut germs = BTreeMap::new();
+    if !system.roots.is_empty() {
+        for checkpoint in &solution.checkpoints {
+            germs.insert(
+                checkpoint.segment,
+                classify_germ(&trace.compiled, &trace.segments[checkpoint.segment].end)?,
+            );
+        }
+    }
+    Ok((solution, germs))
 }

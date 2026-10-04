@@ -2,9 +2,13 @@
 
 The pinned application at `mg5_higgs_ew_plugin` commit
 `89f64b93d0bdbd8ee90eb85737021189229b034a` provides enough scientific data to
-validate the complete supplied-system amplitude. The existing production check
-covers only its closed first two nonplanar masters. The following inventory is
-not a claim that the full amplitude has passed.
+validate the complete supplied-system amplitude. Native checks now cover all
+48/61 masters, crossed W/Z form factors, and both masses at one physical point.
+Native HEPKit tensor contraction and the complete coherent W/Z squared matrix
+element now [match an independent MG5/ALOHA oracle](gg-hg-matrix-element.md).
+Existing form-factor source evidence supports 19 relative digits for that
+observable; the uniform 20-digit goal and automatic two-loop graph reduction
+remain incomplete.
 
 | Input | Planar | Nonplanar |
 | --- | ---: | ---: |
@@ -77,10 +81,10 @@ invalid. These nine-slot families fit within RustRed’s compiled arity registry
 [application paper](https://arxiv.org/pdf/2010.09451) supplies matrix-element
 benchmarks and describes its effective-UFO construction.
 
-The next acceptance steps are complete 48/61 transport at a non-grid point,
-all four permutations for W and Z, uncertainty-aware assembly of all four form
-factors, and native tensor/helicity or matrix-element comparison. Each numerical
-stage needs an unchanged original oracle and independent native precision/order
+The supplied 48/61 systems now pass non-grid transport, all four permutations
+for both masses, and uncertainty-aware form-factor assembly. The coherent native matrix element also passes with 19 propagated relative
+digits. Improved boundary evidence is needed for the 20-digit target. Each numerical
+stage retains an unchanged original oracle and independent native precision/order
 refinement. Exact published-to-plugin basis matching and automatic native
 two-loop graph reduction follow supplied-amplitude validation.
 
@@ -101,7 +105,7 @@ nonzero coefficient.
 The [validation report](../reports/validation/2026-10-04-gg-hg-full-systems.json)
 retains every native output, source accuracy policy, exact coordinates, root
 germs and hashes. Smaller observed comparison residuals do not increase the
-reported accuracy. Full crossed W/Z form factors remain the next stage.
+reported accuracy. The crossed checks are described below.
 
 The complete crossed supplied-system comparison also passes: sixteen W/Z and
 permutation cases cover all 4,360 epsilon coefficients at two precision/order
@@ -120,9 +124,16 @@ The original stored `delta` is an inherited sum of dropped-tail estimates,
 not independent evidence that permits increasing the declared 24-digit source
 cap. Stronger boundary evidence is required for that remaining precision gap.
 
-Offline mathematical fixtures and tests are staged under
-`target/gg-hg-offline`; their fresh production-library validation remains a
-separate gate. The next physics check maps both masses to one exact
-`MH²=1` phase-space point and contracts the W/Z contributions using native
-HEPKit tensors. The sixteen cases above use separate W and Z contexts and do
-not yet establish coherent interference.
+Offline mathematical fixtures live in `fixtures/gg-hg`; `tests/gg_hg.rs` includes
+a regular full-planar check and an opt-in full crossed refinement/restart check.
+These tests require no Mathematica.
+
+The [coherent-point report](../reports/validation/2026-10-04-gg-hg-coherent-form-factors.json)
+puts both masses at one exact `MH²=1` physical phase-space point. All Z master
+coefficients pass the original oracle, refinement and restart; W retains its
+previously checked endpoint unchanged. Direct original expressions independently
+check the assembled form factors. Their relative accuracy bounds are W
+`[20, 19, 20, 19]` and Z `[20, 18, 19, 19]`. The normalization includes
+`-b²/(4π)^4`, while couplings and Lorentz/color tensors remain to be applied
+exactly once in native HEPKit. A common point alone does not establish coherent
+interference or a validated squared matrix element.

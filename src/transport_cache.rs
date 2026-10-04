@@ -19,8 +19,8 @@ use std::sync::{
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
-const VERSION: u32 = 4;
-const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x04";
+const VERSION: u32 = 5;
+const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x05";
 const FILE: &str = "physical-boundaries.bin";
 static NEXT_FILE: AtomicU64 = AtomicU64::new(0);
 
@@ -154,7 +154,7 @@ fn exact_constant(a: AtomView<'_>) -> Result<()> {
     }
 }
 
-fn exact_real_rational(a: &Atom) -> Result<()> {
+pub(crate) fn exact_real_rational(a: &Atom) -> Result<()> {
     let reduced = a.together().cancel();
     if let AtomView::Num(n) = reduced.as_view()
         && let Coefficient::Complex(c) = n.get_coeff_view().to_owned()
@@ -367,7 +367,7 @@ impl CachedPoint {
             }
         }
     }
-    fn key(&self) -> Result<String> {
+    pub(crate) fn key(&self) -> Result<String> {
         match self {
             Self::Algebraic { point, germ } => {
                 fingerprint(&("algebraic", point.key()?, germ.canonical()))
@@ -475,6 +475,83 @@ impl IdentitySystem {
     }
 }
 
+/// Exact convention for planner-generated affine physical continuations.
+/// Geometry verifies the specified local sides; a caller must additionally
+/// admit each route into this integral's global branch/homotopy domain.
+#[derive(Clone, Debug)]
+pub struct PhysicalContinuation {
+    pub prescriptions: Vec<crate::contour::PolynomialPrescription>,
+    pub unprescribed_side: Prescription,
+    pub domain: String,
+}
+impl PhysicalContinuation {
+    fn validate(&self, variables: &std::collections::BTreeSet<Symbol>) -> Result<()> {
+        if self.domain.trim().is_empty() {
+            return Err(Error::InvalidInput(
+                "physical continuation needs an explicit homotopy domain".into(),
+            ));
+        }
+        let allowed = variables.iter().copied().map(Atom::var).collect();
+        for declaration in &self.prescriptions {
+            let mut used = std::collections::BTreeSet::new();
+            crate::family::scalar_symbols(declaration.polynomial.as_view(), &mut used)?;
+            if !used.is_subset(&allowed) {
+                return Err(Error::InvalidInput(
+                    "physical prescription contains epsilon, roots, or undeclared variables".into(),
+                ));
+            }
+            let fraction: RationalPolynomial<IntegerRing, u16> = declaration
+                .polynomial
+                .try_to_rational_polynomial(&Q, &Z, None)
+                .map_err(|e| {
+                    Error::Unsupported(format!(
+                        "physical prescription must be an exact real polynomial: {e}"
+                    ))
+                })?;
+            if fraction.numerator.is_zero()
+                || !fraction.denominator.is_constant()
+                || fraction
+                    .numerator
+                    .variables()
+                    .iter()
+                    .any(|v| !matches!(v, PolyVariable::Symbol(s) if variables.contains(s)))
+            {
+                return Err(Error::Unsupported(
+                    "physical prescription must be a nonzero exact real polynomial".into(),
+                ));
+            }
+            // Retain the raw expression's domain: a removable denominator is
+            // not silently reinterpreted as a polynomial declaration.
+            if !crate::physical_conditions::rational_denominator_conditions(
+                std::slice::from_ref(&declaration.polynomial),
+                variables,
+            )?
+            .is_empty()
+            {
+                return Err(Error::Unsupported(
+                    "physical prescription contains an original nonconstant denominator".into(),
+                ));
+            }
+        }
+        Ok(())
+    }
+    fn canonical(&self) -> (String, bool, Vec<(String, bool)>) {
+        (
+            self.domain.clone(),
+            matches!(self.unprescribed_side, Prescription::PlusI0),
+            self.prescriptions
+                .iter()
+                .map(|p| {
+                    (
+                        p.polynomial.to_canonical_string(),
+                        matches!(p.prescription, Prescription::PlusI0),
+                    )
+                })
+                .collect(),
+        )
+    }
+}
+
 #[derive(Clone, Debug)]
 struct IdentityData {
     key: String,
@@ -486,6 +563,7 @@ struct IdentityData {
     prescription: Prescription,
     domain: String,
     conditions: Vec<Atom>,
+    continuation: Option<PhysicalContinuation>,
 }
 
 /// Content identity for the ordered basis and its physical branch. `domain`
@@ -681,7 +759,51 @@ impl BoundaryIdentity {
             prescription,
             domain: domain.into(),
             conditions,
+            continuation: None,
         })))
+    }
+    /// Add an explicit routed representation; an ordinary identity cannot
+    /// alias it even when the user-supplied branch-domain labels are equal.
+    pub fn with_prescribed_continuation(&self, continuation: PhysicalContinuation) -> Result<Self> {
+        if self.0.continuation.is_some() {
+            return Err(Error::InvalidInput(
+                "physical continuation is already bound to this identity".into(),
+            ));
+        }
+        continuation.validate(&self.0.variables)?;
+        let mut data = (*self.0).clone();
+        data.key = fingerprint(&("prescribed-affine-v1", &data.key, continuation.canonical()))?;
+        data.continuation = Some(continuation);
+        Ok(Self(Arc::new(data)))
+    }
+    pub fn physical_continuation(&self) -> Option<&PhysicalContinuation> {
+        self.0.continuation.as_ref()
+    }
+    pub(crate) fn prescribed_path_conditions(&self, path: &KinematicPath) -> Result<Vec<Atom>> {
+        let rules = path
+            .coordinates
+            .iter()
+            .map(|(&s, a)| (Atom::var(s), a.clone()))
+            .collect();
+        self.0
+            .conditions
+            .iter()
+            .map(|condition| {
+                let generic = crate::physical_conditions::epsilon_leading_coefficient(
+                    condition,
+                    self.0.system.epsilon(),
+                )?;
+                let restricted = crate::family::substitute(&generic, &rules)
+                    .together()
+                    .cancel();
+                if restricted.is_zero() {
+                    return Err(Error::Unsupported(
+                        "physical path lies on an original nonzero condition".into(),
+                    ));
+                }
+                Ok(restricted)
+            })
+            .collect()
     }
     pub fn key(&self) -> &str {
         &self.0.key
@@ -894,6 +1016,8 @@ impl BoundaryIdentity {
 
 /// Caller-recorded accuracy evidence. Comparison errors are consistency estimates,
 /// not rigorous error bounds. The provenance must explain how accuracy was obtained.
+/// A verified digit count d uses the mixed coefficient scale
+/// 10^(-d) * max(1, |c|), not d significant digits for arbitrarily small c.
 #[derive(Clone, Debug, Serialize, Deserialize)]
 pub struct BoundaryAccuracy {
     verified_digits: u32,
@@ -1387,6 +1511,16 @@ impl RustFlowCache {
         p: Precision,
         excluded: &std::collections::BTreeSet<usize>,
     ) -> Result<Option<(usize, BoundaryMatch<'a>)>> {
+        self.best_excluding_with_germ_policy(query, policy, p, excluded, false)
+    }
+    pub(crate) fn best_excluding_with_germ_policy<'a>(
+        &'a self,
+        query: &BoundaryQuery<'_>,
+        policy: &dyn TransportCost,
+        p: Precision,
+        excluded: &std::collections::BTreeSet<usize>,
+        allow_sheet_transition: bool,
+    ) -> Result<Option<(usize, BoundaryMatch<'a>)>> {
         query.range.count()?;
         query.identity.validate_point(query.target)?;
         if query.verified_digits == 0
@@ -1415,7 +1549,8 @@ impl RustFlowCache {
                 continue;
             }
             if boundary.identity.key() != query.identity.key()
-                || boundary.point.root_germ() != query.target.root_germ()
+                || (!allow_sheet_transition
+                    && boundary.point.root_germ() != query.target.root_germ())
                 || !boundary.range.covers(query.range)
                 || boundary.accuracy.verified_digits < query.verified_digits
                 || boundary.point.coordinate_bits() < query.minimum_coordinate_bits
@@ -1519,6 +1654,24 @@ impl RustFlowCache {
         path: &KinematicPath,
         solution: &EpsilonSolution,
         germ: Option<&RootGerm>,
+        evidence: impl FnMut(
+            usize,
+            &crate::ode::TaylorSegment,
+        ) -> Result<Option<(PointKind, BoundaryAccuracy)>>,
+    ) -> Result<Vec<CachedBoundary>> {
+        Self::trajectory_boundaries_with_germs(
+            identity,
+            path,
+            solution,
+            |_| Ok(germ.cloned()),
+            evidence,
+        )
+    }
+    pub(crate) fn trajectory_boundaries_with_germs(
+        identity: &BoundaryIdentity,
+        path: &KinematicPath,
+        solution: &EpsilonSolution,
+        mut germ_at: impl FnMut(usize) -> Result<Option<RootGerm>>,
         mut evidence: impl FnMut(
             usize,
             &crate::ode::TaylorSegment,
@@ -1596,8 +1749,8 @@ impl RustFlowCache {
                         .join(",")
                 ),
             };
-            let point = if let Some(germ) = germ {
-                point.with_root_germ(germ.clone())?
+            let point = if let Some(germ) = germ_at(index)? {
+                point.with_root_germ(germ)?
             } else {
                 point
             };
@@ -1659,6 +1812,59 @@ enum StoredSystem {
     },
 }
 #[derive(Serialize, Deserialize)]
+enum StoredContinuation {
+    PrescribedAffineV1 {
+        domain: String,
+        unprescribed_plus: bool,
+        prescriptions: Vec<(StoredAtom, bool)>,
+    },
+}
+impl StoredContinuation {
+    fn encode(value: &PhysicalContinuation) -> Result<Self> {
+        Ok(Self::PrescribedAffineV1 {
+            domain: value.domain.clone(),
+            unprescribed_plus: matches!(value.unprescribed_side, Prescription::PlusI0),
+            prescriptions: value
+                .prescriptions
+                .iter()
+                .map(|p| {
+                    Ok((
+                        atom_bytes(&p.polynomial)?,
+                        matches!(p.prescription, Prescription::PlusI0),
+                    ))
+                })
+                .collect::<Result<_>>()?,
+        })
+    }
+    fn decode(self) -> Result<PhysicalContinuation> {
+        let Self::PrescribedAffineV1 {
+            domain,
+            unprescribed_plus,
+            prescriptions,
+        } = self;
+        let side = |plus| {
+            if plus {
+                Prescription::PlusI0
+            } else {
+                Prescription::MinusI0
+            }
+        };
+        Ok(PhysicalContinuation {
+            domain,
+            unprescribed_side: side(unprescribed_plus),
+            prescriptions: prescriptions
+                .into_iter()
+                .map(|(a, plus)| {
+                    Ok(crate::contour::PolynomialPrescription {
+                        polynomial: atom_read(&a)?,
+                        prescription: side(plus),
+                    })
+                })
+                .collect::<Result<_>>()?,
+        })
+    }
+}
+#[derive(Serialize, Deserialize)]
 struct StoredIdentity {
     key: String,
     roots: Vec<(StoredAtom, StoredAtom)>,
@@ -1669,6 +1875,7 @@ struct StoredIdentity {
     plus_i0: bool,
     domain: String,
     conditions: Vec<StoredAtom>,
+    continuation: Option<StoredContinuation>,
 }
 fn matrix_bytes(matrix: &[Vec<Atom>]) -> Result<StoredMatrix> {
     matrix
@@ -1724,6 +1931,11 @@ impl StoredIdentity {
             plus_i0: matches!(d.prescription, Prescription::PlusI0),
             domain: d.domain.clone(),
             conditions: d.conditions.iter().map(atom_bytes).collect::<Result<_>>()?,
+            continuation: d
+                .continuation
+                .as_ref()
+                .map(StoredContinuation::encode)
+                .transpose()?,
         })
     }
     fn decode(self) -> Result<BoundaryIdentity> {
@@ -1803,6 +2015,11 @@ impl StoredIdentity {
                     &conditions,
                 )?
             }
+        };
+        let identity = if let Some(continuation) = self.continuation {
+            identity.with_prescribed_continuation(continuation.decode()?)?
+        } else {
+            identity
         };
         if identity.key() != self.key {
             return Err(Error::Cache("cached system/basis identity mismatch".into()));

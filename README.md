@@ -8,7 +8,8 @@ RustFlow is being extended with DiffExp-style transport in physical kinematic
 variables and a progressively filled native `RustFlowCache`. The Rust crate
 retains the name `symbolica-amflow`. See the [active parity plan](docs/parity-plan.md)
 and [cache and transport interface](docs/rustflow.md). Full AMFlow/DiffExp parity
-and full amplitude benchmarks are still development goals.
+remains a development goal. The [complete supplied Higgs+jet matrix element](docs/gg-hg-matrix-element.md)
+now has a native HEPKit validation with 19 propagated relative digits.
 
 The original paper's four two-loop targets pass the required calculation through
 epsilon power zero: 20-digit stability under independent sample/precision/order
@@ -52,6 +53,7 @@ cargo test --release
 cargo run --release --example massless_bubble
 cargo run --release --bin rustflow -- graph examples/cli/massless-bubble.json
 cargo run --release --bin rustflow -- transport examples/cli/physical-transport.json
+cargo run --release --bin rustflow -- transport examples/cli/prescribed-transport.json
 cargo run --release --example two_loop_acceptance -- \
   --symmetry-rules --parametric-rules --depth 3 --case-batch 32 \
   --max-targets 262144 --max-exact-frontier 512 \
@@ -85,8 +87,10 @@ supports persistent transport caches across processes.
 - `RustFlow::evaluate_to(&mut cache, ...)` searches compatible physical
   boundaries, transports epsilon coefficients, and adds verified intermediate
   points and the destination to `RustFlowCache`. Binary snapshots can be loaded
-  before the next request. Regular straight paths are currently supported by
-  this orchestration interface. [`RustFlow::new_algebraic`](docs/algebraic-cache.md)
+  before the next request. The ordinary interface uses regular straight paths.
+  [`with_prescribed_continuation` and `evaluate_prescribed_to`](docs/prescribed-cache.md)
+  also support threshold detours with exact local prescriptions, explicit endpoint
+  root germs, and caller admission of the global continuation domain. [`RustFlow::new_algebraic`](docs/algebraic-cache.md)
   uses the same bank with explicit root germs and retains their sheets across
   regular real paths and binary restart.
   [Accuracy-aware retries](docs/accuracy-fallback.md) try another admissible source
@@ -122,6 +126,9 @@ supports persistent transport caches across processes.
   boundary and checks every coefficient through epsilon power four. The
   [unequal-mass regression](docs/banana-unequal.md) checks all 75 coefficients
   of 15 masters with independent routes and a live original DiffExp reference.
+  The [108-master nonplanar system](docs/diffexp-nonplanar108.md) uses
+  `AlgebraicSystem::analytic_origin` for a compatible analytic sector at a singular
+  source and validates all 540 coefficients with independent refinement.
 - `cuts::CutFamily` preserves distributional and positive-energy cut metadata
   through native IBP reduction. The [two-body terminal](docs/cuts.md) uses native
   HEPKit phase-space normalization and dimensional gamma factors.

@@ -1,0 +1,36 @@
+(* Drive unchanged DiffExp on its pinned massless108-master notebook benchmark. *)
+$HistoryLength=0;
+root=Environment["DIFFEXP_CHECKOUT"];
+anc=Environment["DIFFEXP_NP108_ANCILLARY"];
+base=Environment["DIFFEXP_OUTPUT"];profile=Environment["DIFFEXP_PROFILE"];
+fail[m_]:=(Print["ORACLE FAILURE ",m];Exit[1]);
+If[!StringQ[root]||!StringQ[anc]||!DirectoryQ[root]||!DirectoryQ[anc],fail["set DIFFEXP_CHECKOUT and DIFFEXP_NP108_ANCILLARY to the pinned existing input directories"]];
+sha[f_]:=IntegerString[FileHash[f,"SHA256"],16,64];str[x_]:=ToString[x,InputForm];
+scalar[z_]:=<|"real_wolfram"->str[Re[z]],"imaginary_wolfram"->str[Im[z]],"precision_wolfram"->str[Precision[z]],"accuracy_wolfram"->str[Accuracy[z]],"real_precision_wolfram"->str[Precision[Re[z]]],"imaginary_precision_wolfram"->str[Precision[Im[z]]],"real_accuracy_wolfram"->str[Accuracy[Re[z]]],"imaginary_accuracy_wolfram"->str[Accuracy[Im[z]]]|>;
+write[f_,x_]:=If[Export[f,x,"RawJSON"]===$Failed,fail["export"]];
+If[!MemberQ[{"accurate","fast"},profile]||!DirectoryQ[base]||FileExistsQ[FileNameJoin[{base,"result.json"}]],fail["fresh output/profile"]];
+package=FileNameJoin[{root,"DiffExp.m"}];notebook=FileNameJoin[{root,"Examples","5pNonPlanar.nb"}];
+If[sha[package]=!="67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7"||sha[notebook]=!="3668fb2cb1d950e5c17ef46594bbd4ae7e9fee974859f5c8d368fa2d550b1a4d",fail["pinned code hash"]];
+hashes=<|"XB_Atilde.txt"->"3d997ab1eae2a6ca1e2489f3e733080b5b20950bc7440555b76230a5d2350c3d","XB_Boundary_values_X0.txt"->"132611651f9c2fc5de983965bf170328ea0a54cef0f8cb4a3f65d87182c34a96","XB_Boundary_values_X1.txt"->"7883537af39b181f84266934b9440df3f67a5eb8f67b576388d7aa29524d9b92"|>;
+KeyValueMap[If[sha[FileNameJoin[{anc,#1}]]=!=#2,fail["data hash"]]&,hashes];
+boxes=Cases[Get[notebook],Cell[BoxData[b_],"Input",___]:>b,Infinity];If[Length[boxes]=!=17,fail["notebook shape"]];
+Scan[ReleaseHold,Flatten[{ToExpression[boxes[[2]],StandardForm,HoldComplete]}]];
+matrixDir=CreateDirectory[FileNameJoin[{base,"matrices"}]];
+matrixTime=AbsoluteTiming[matrix=Get[FileNameJoin[{anc,"XB_Atilde.txt"}]]/.PentagonAlphabet;Export[FileNameJoin[{matrixDir,"d_1.m"}],matrix];][[1]];
+start=Get[FileNameJoin[{anc,"XB_Boundary_values_X0.txt"}]];reference=Get[FileNameJoin[{anc,"XB_Boundary_values_X1.txt"}]];
+If[Dimensions[matrix]=!={108,108}||Dimensions[start]=!={108,5}||Dimensions[reference]=!={108,5},fail["data dimensions"]];
+x0={v1->3,v2->-1,v3->1,v4->1,v5->-1};x1={v1->4,v2->-113/47,v3->281/149,v4->349/257,v5->-863/541};
+order=If[profile==="accurate",80,25];goal=If[profile==="accurate",30,"?"];checkDigits=If[profile==="accurate",30,14];
+settings=<|"working_precision"->150,"chop_precision"->100,"expansion_order"->order,"accuracy_goal"->goal,"epsilon_order"->4,"division_order"->3,"mobius"->True,"pade"->True,"parallel"->False|>;
+Get[package];
+CheckAbort[
+ load=AbsoluteTiming[DiffExp`LoadConfiguration[{DiffExp`MatrixDirectory->matrixDir,WorkingPrecision->150,DiffExp`ChopPrecision->100,DiffExp`ExpansionOrder->order,AccuracyGoal->goal,DiffExp`EpsilonOrder->4,DiffExp`DivisionOrder->3,DiffExp`UseMobius->True,DiffExp`UsePade->True,DiffExp`DeltaPrescriptions->{v1+I*\[Delta],v2+I*\[Delta],v3+I*\[Delta],v4+I*\[Delta],v5+I*\[Delta]},DiffExp`Verbosity->2,"Parallel"->False}]];
+ prepared=AbsoluteTiming[DiffExp`PrepareBoundaryConditions[start,x0]];
+ Print["STAGE full108 ",profile," X0 to X1"];
+ result=AbsoluteTiming[DiffExp`TransportTo[prepared[[2]],x1]];
+ If[Dimensions[result[[2,2]]]=!={108,5}||!AllTrue[Flatten[result[[2,2]]],NumberQ],fail["nonfinite/shape output"]];
+ If[!TrueQ[And@@Table[(v/.result[[2,1]])==(v/.x1),{v,{v1,v2,v3,v4,v5}}]],fail["endpoint coordinates"]];
+ difference=Max[Abs[Flatten[result[[2,2]]-reference]]];pass=TrueQ[difference<10^-checkDigits];
+ Put[result[[2]],FileNameJoin[{base,"endpoint.wl"}]];
+ write[FileNameJoin[{base,"result.json"}],<|"status"->If[pass,"passed","reference_disagreement"],"profile"->profile,"dimension"->108,"coefficient_count"->540,"epsilon_range"->{0,4},"upstream_commit"->"784c8229bf92369a03f011a48e161522c8c54bbd","paper_version"->"1812.11160v2","package_sha256"->sha[package],"notebook_sha256"->sha[notebook],"source_sha256"->hashes,"driver_sha256"->sha[$InputFileName],"wolfram_version"->$Version,"settings"->settings,"matrix_construction_seconds"->matrixTime,"configuration_seconds"->load[[1]],"boundary_preparation_seconds"->prepared[[1]],"transport_seconds"->result[[1]],"start"->str[x0],"destination"->str[x1],"source_values_by_master"->Map[scalar,start,{2}],"reference_values_by_master"->Map[scalar,reference,{2}],"endpoint_values_by_master"->Map[scalar,result[[2,2]],{2}],"reported_errors"->Map[str,result[[2,3]],{2}],"max_absolute_reference_difference"->str[difference],"asserted_absolute_digits"->checkDigits,"normalization"->"epsilon^4*exp(2*EulerGamma*epsilon)","scope"->"Full108 supplied-boundary singular-origin transport; no native acceptance or automatic boundary construction claim.","fast_profile_note"->"Notebook fixedorder25 has unspecified AccuracyGoal and historically about17digits absolute agreement; fast profile is checked conservatively to14digits, not represented as20digit acceptance.","precision_note"->"All component Precision/Accuracy and exact zeros retained. Input X0 minimum recorded absolute Accuracy64.17digits; X1 reference minimum49.85digits. Printed mantissas and working precision are not certified accuracy."|>];
+ If[!pass,fail[{"reference disagreement",difference}]];Print["ORACLE PASS ",profile," ",str[difference]];Exit[0],fail["aborted"]];

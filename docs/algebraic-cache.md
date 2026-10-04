@@ -47,8 +47,10 @@ rounded path parameter. The caller's existing `TransportCost` admissibility
 contract still controls the integral's physical branch and logarithmic monodromy;
 root signs alone do not determine those. Threshold-crossing contours, changing
 root germs, complex physical paths and sheet-specific removable norm poles are
-outside this cache entrypoint. Explicit algebraic contour transport remains
-available separately.
+outside this cache entrypoint. Use `evaluate_prescribed_to` with a typed physical prescription identity and a
+mandatory homotopy-admission callback for supported threshold detours; see
+[Prescribed physical routes](prescribed-cache.md). Low-level explicit algebraic
+contour transport remains available for other paths.
 
 Rational and algebraic flows share candidate selection, independent
 precision/order refinement, checkpoint comparison, inherited-error propagation,
@@ -60,9 +62,9 @@ interval-arithmetic error certificates. The source's verified accuracy and
 per-coefficient errors limit every new entry; repeating a low-accuracy source at
 higher working precision does not promote its evidence.
 
-Binary cache schema 4 stores the exact root registry, discrete germ and
+Binary cache schema 5 stores the exact root registry, discrete germ and
 explicit dense/canonical connection representation. Loading snapshots from
-schemas 1 through 3 is an explicit incompatibility error. The existing source
+schemas 1 through 4 is an explicit incompatibility error. The existing source
 and dependency fingerprints and payload integrity digest remain enforced;
 older snapshots are never silently reinterpreted as algebraic data. Saving is
 atomic and loading reconstructs the existing insertion index.

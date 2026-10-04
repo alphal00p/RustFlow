@@ -679,7 +679,29 @@ pub(crate) fn transport_series_with_state<S: SeriesSystem>(
     waypoints: &[C],
     options: &FlowOptions,
     context: &RunContext,
+    saved: Option<&mut Vec<TaylorSegment>>,
+) -> Result<(FlowResult, S::State)> {
+    transport_series_observed(
+        system,
+        boundary,
+        waypoints,
+        options,
+        context,
+        saved,
+        |_, _| {},
+    )
+}
+
+/// Metadata follows the exact same acceptance gate as values and state.
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn transport_series_observed<S: SeriesSystem>(
+    system: &S,
+    boundary: &BoundaryData,
+    waypoints: &[C],
+    options: &FlowOptions,
+    context: &RunContext,
     mut saved: Option<&mut Vec<TaylorSegment>>,
+    mut observe: impl FnMut(&S::Chart, &S::State),
 ) -> Result<(FlowResult, S::State)> {
     options.validate()?;
     let p = system.precision();
@@ -699,6 +721,7 @@ pub(crate) fn transport_series_with_state<S: SeriesSystem>(
         ..Default::default()
     };
     for target in waypoints {
+        let mut previous_step: Option<C> = None;
         while center != *target {
             context.emit(Progress::Step {
                 index: diagnostics.steps,
@@ -714,20 +737,32 @@ pub(crate) fn transport_series_with_state<S: SeriesSystem>(
                 .poles()
                 .iter()
                 .map(|s| p.norm(&p.sub(&center, s)))
-                .min_by(|a, b| a.partial_cmp(b).unwrap())
-                .unwrap_or_else(|| distance.clone() * 2);
-            if radius == p.real(0) {
-                return Err(Error::Numerical(
-                    "path reached a differential-equation pole".into(),
-                ));
-            }
+                .min_by(|a, b| a.partial_cmp(b).unwrap());
             let mut step = delta.clone();
-            let safe = radius / 3;
-            if distance > safe {
-                step = p.mul(
-                    &delta,
-                    &p.div(&C::new(safe, p.real(0)), &C::new(distance, p.real(0))),
-                );
+            if let Some(radius) = radius {
+                if radius == p.real(0) {
+                    return Err(Error::Numerical(
+                        "path reached a differential-equation pole".into(),
+                    ));
+                }
+                let safe = radius / 3;
+                if distance > safe {
+                    step = p.mul(
+                        &delta,
+                        &p.div(&C::new(safe, p.real(0)), &C::new(distance, p.real(0))),
+                    );
+                }
+            } else if let Some(previous) = &previous_step {
+                // Entire systems have no pole-based scale. Reuse the last
+                // accepted step instead of repeatedly rejecting the full
+                // remaining interval. Every proposal still passes all checks.
+                let proposal = p.norm(&p.scale(previous, 2, 1));
+                if distance > proposal {
+                    step = p.mul(
+                        &delta,
+                        &p.div(&C::new(proposal, p.real(0)), &C::new(distance, p.real(0))),
+                    );
+                }
             }
             let (coefficients, chart) =
                 system.local_chart(&center, &values, options.series_order, &state)?;
@@ -813,6 +848,7 @@ pub(crate) fn transport_series_with_state<S: SeriesSystem>(
             if next == center {
                 return Err(Error::Accuracy("continuation step lost to rounding".into()));
             }
+            observe(&chart, &state);
             if let Some(segments) = saved.as_deref_mut() {
                 segments.push(TaylorSegment {
                     center: center.clone(),
@@ -821,6 +857,7 @@ pub(crate) fn transport_series_with_state<S: SeriesSystem>(
                     working_bits: p.bits,
                 });
             }
+            previous_step = Some(step);
             center = next;
             diagnostics.steps += 1;
         }

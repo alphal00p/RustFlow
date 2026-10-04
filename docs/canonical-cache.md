@@ -34,8 +34,8 @@ when their differential equations are mathematically equal. Automatic
 cross-representation boundary equivalence is not inferred. One bank may contain
 both representations.
 
-Binary schema 4 stores that representation and reconstructs/validates its exact
-identity on load. Versions 1 through 3 and incompatible source/dependency
+Binary schema 5 stores that representation and reconstructs/validates its exact
+identity on load. Versions 1 through 4 and incompatible source/dependency
 fingerprints are rejected. No numerical value is migrated or assigned stronger
 accuracy during loading. Save/restart, compatible exact hits and accepted
 intermediate insertion use the existing bank implementation.
@@ -45,8 +45,10 @@ radicands and explicit local root germs. The caller's cost policy and branch
 domain must also establish any integral/logarithmic monodromy. Source errors
 and independently compared transport changes remain numerical estimates, not
 interval certificates. A large working precision does not improve the recorded
-source evidence. Explicit complex contours and threshold crossings use the
-separate native transport interface.
+source evidence. Supported threshold crossings use the additive `evaluate_prescribed_to` API
+with an explicit prescription identity and homotopy admission; see
+[Prescribed physical routes](prescribed-cache.md). Other complex contours use
+the separate native transport interface.
 
 Validation covers progressive reuse and binary restart against an analytic
 registered-root dlog solution, independent transport through its exact dense

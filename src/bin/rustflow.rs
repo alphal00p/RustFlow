@@ -10,8 +10,9 @@ use std::{
 use symbolica::prelude::*;
 use symbolica_amflow::{
     algebraic::{AlgebraicKinematicSystem, CanonicalAlgebraicSystem, SquareRoot},
+    contour::PolynomialPrescription,
     kinematics::KinematicSystem,
-    physical_transport::{BoundaryAttemptOutcome, PhysicalResult},
+    physical_transport::{BoundaryAttemptOutcome, PhysicalResult, PhysicalRoute},
     transport_cache::*,
     *,
 };
@@ -308,6 +309,78 @@ struct CanonicalInput {
     matrices: Vec<Vec<Vec<String>>>,
 }
 
+#[derive(Clone, Copy, Deserialize)]
+enum ContinuationSide {
+    #[serde(rename = "+i0")]
+    Plus,
+    #[serde(rename = "-i0")]
+    Minus,
+}
+impl From<ContinuationSide> for Prescription {
+    fn from(side: ContinuationSide) -> Self {
+        match side {
+            ContinuationSide::Plus => Self::PlusI0,
+            ContinuationSide::Minus => Self::MinusI0,
+        }
+    }
+}
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct PolynomialSideInput {
+    polynomial: String,
+    side: ContinuationSide,
+}
+#[derive(Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum AdmissionInput {
+    AllPlannerRoutesInDeclaredDomain,
+}
+#[derive(Deserialize)]
+#[serde(tag = "kind", rename_all = "snake_case", deny_unknown_fields)]
+enum ContinuationInput {
+    PrescribedAffine {
+        domain: String,
+        prescriptions: Vec<PolynomialSideInput>,
+        unprescribed_side: ContinuationSide,
+        homotopy_admission: AdmissionInput,
+    },
+}
+impl ContinuationInput {
+    fn native(&self, namespace: &str) -> CliResult<PhysicalContinuation> {
+        let Self::PrescribedAffine {
+            domain,
+            prescriptions,
+            unprescribed_side,
+            homotopy_admission: AdmissionInput::AllPlannerRoutesInDeclaredDomain,
+        } = self;
+        Ok(PhysicalContinuation {
+            domain: domain.clone(),
+            prescriptions: prescriptions
+                .iter()
+                .map(|p| {
+                    Ok(PolynomialPrescription {
+                        polynomial: parse(&p.polynomial, namespace)?,
+                        prescription: p.side.into(),
+                    })
+                })
+                .collect::<CliResult<_>>()?,
+            unprescribed_side: (*unprescribed_side).into(),
+        })
+    }
+}
+
+// This policy is selected only by the explicit, mandatory declaration above.
+// Local root signs and the contour planner cannot certify global monodromy.
+fn admit_declared_route(_: &CachedBoundary, _: &CachedPoint, _: &PhysicalRoute) -> Result<bool> {
+    Ok(true)
+}
+fn bind_continuation<S>(flow: RustFlow<S>, request: &TransportRequest) -> CliResult<RustFlow<S>> {
+    match &request.continuation {
+        Some(input) => Ok(flow.with_prescribed_continuation(input.native(&request.namespace)?)?),
+        None => Ok(flow),
+    }
+}
+
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
 struct TransportRequest {
@@ -326,6 +399,8 @@ struct TransportRequest {
     #[serde(default = "one")]
     normalization: String,
     branch_domain: String,
+    #[serde(default)]
+    continuation: Option<ContinuationInput>,
     #[serde(default)]
     nonzero_conditions: Vec<String>,
     leading_epsilon_power: i32,
@@ -402,21 +477,35 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
             &request.branch_domain,
             &conditions,
         )?;
+        let flow = bind_continuation(flow, &request)?;
         let mut result = execute_transport(
             &request,
             directory,
             flow.identity(),
             range,
             |cache, point, policy| {
-                Ok(flow.evaluate_to(
-                    cache,
-                    &point.restart_coordinates()?,
-                    point.root_germ(),
-                    range,
-                    &options,
-                    &context,
-                    policy,
-                )?)
+                if request.continuation.is_some() {
+                    Ok(flow.evaluate_prescribed_to(
+                        cache,
+                        &point.restart_coordinates()?,
+                        point.root_germ(),
+                        range,
+                        &options,
+                        &context,
+                        policy,
+                        &admit_declared_route,
+                    )?)
+                } else {
+                    Ok(flow.evaluate_to(
+                        cache,
+                        &point.restart_coordinates()?,
+                        point.root_germ(),
+                        range,
+                        &options,
+                        &context,
+                        policy,
+                    )?)
+                }
             },
         )?;
         result["representation"] = "canonical".into();
@@ -448,20 +537,33 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
             &request.branch_domain,
             &conditions,
         )?;
+        let flow = bind_continuation(flow, &request)?;
         execute_transport(
             &request,
             directory,
             flow.identity(),
             range,
             |cache, point, policy| {
-                Ok(flow.evaluate_to(
-                    cache,
-                    &point.restart_coordinates()?,
-                    range,
-                    &options,
-                    &context,
-                    policy,
-                )?)
+                if request.continuation.is_some() {
+                    Ok(flow.evaluate_prescribed_to(
+                        cache,
+                        &point.restart_coordinates()?,
+                        range,
+                        &options,
+                        &context,
+                        policy,
+                        &admit_declared_route,
+                    )?)
+                } else {
+                    Ok(flow.evaluate_to(
+                        cache,
+                        &point.restart_coordinates()?,
+                        range,
+                        &options,
+                        &context,
+                        policy,
+                    )?)
+                }
             },
         )
     } else {
@@ -477,21 +579,35 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
             &request.branch_domain,
             &conditions,
         )?;
+        let flow = bind_continuation(flow, &request)?;
         execute_transport(
             &request,
             directory,
             flow.identity(),
             range,
             |cache, point, policy| {
-                Ok(flow.evaluate_to(
-                    cache,
-                    &point.restart_coordinates()?,
-                    point.root_germ().ok_or("missing destination root_germ")?,
-                    range,
-                    &options,
-                    &context,
-                    policy,
-                )?)
+                if request.continuation.is_some() {
+                    Ok(flow.evaluate_prescribed_to(
+                        cache,
+                        &point.restart_coordinates()?,
+                        point.root_germ().ok_or("missing destination root_germ")?,
+                        range,
+                        &options,
+                        &context,
+                        policy,
+                        &admit_declared_route,
+                    )?)
+                } else {
+                    Ok(flow.evaluate_to(
+                        cache,
+                        &point.restart_coordinates()?,
+                        point.root_germ().ok_or("missing destination root_germ")?,
+                        range,
+                        &options,
+                        &context,
+                        policy,
+                    )?)
+                }
             },
         )
     }
@@ -648,9 +764,25 @@ fn execute_transport(
         results.push(output);
     }
     cache.save(&cache_directory)?;
-    Ok(
-        json!({"schema_version":1,"operation":"transport","loaded_boundaries":loaded,"retained_boundaries":cache.len(),"results":results}),
-    )
+    let mut output = json!({"schema_version":1,"operation":"transport","loaded_boundaries":loaded,"retained_boundaries":cache.len(),"results":results});
+    if let Some(continuation) = identity.physical_continuation() {
+        let side = |s: Prescription| match s {
+            Prescription::PlusI0 => "+i0",
+            Prescription::MinusI0 => "-i0",
+        };
+        output["identity"] = identity.key().into();
+        output["continuation"] = json!({
+            "kind": "prescribed_affine",
+            "domain": continuation.domain,
+            "prescriptions": continuation.prescriptions.iter().map(|p| json!({
+                "polynomial": p.polynomial.to_canonical_string(),
+                "side": side(p.prescription),
+            })).collect::<Vec<_>>(),
+            "unprescribed_side": side(continuation.unprescribed_side),
+            "homotopy_admission": "all_planner_routes_in_declared_domain",
+        });
+    }
+    Ok(output)
 }
 
 fn run() -> CliResult<()> {

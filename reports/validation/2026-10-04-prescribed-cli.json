@@ -1,0 +1,224 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-04",
+  "status": "passed_standalone_wrapper_validation",
+  "scope": "Additive rustflow transport JSON steering of the existing native prescribed-contour RustFlow/cache API; no duplicate numerical solver or cache.",
+  "source_context": {
+    "head_at_report": "e7748694937281560896deb463a4c7aec2e39054",
+    "production_integration_pending": true,
+    "candidate_library": "Immutable prescribed-release library, including schema-5 cache and finite-Dyson uncertainty propagation. The subsequent entire-kernel no-pole step proposal fix is not present in this archive. These CLI continuation cases have genuine poles. Final integrated Cargo validation remains separate.",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)"
+  },
+  "interface": {
+    "steering_schema": 1,
+    "binary_cache_schema": 5,
+    "optional_field": "continuation",
+    "kind": "prescribed_affine",
+    "mandatory_fields": [
+      "kind",
+      "domain",
+      "prescriptions",
+      "unprescribed_side",
+      "homotopy_admission"
+    ],
+    "sides": [
+      "+i0",
+      "-i0"
+    ],
+    "admission": "all_planner_routes_in_declared_domain",
+    "representations": [
+      "rational derivatives",
+      "dense registered square roots",
+      "canonical dlog with and without roots"
+    ],
+    "identity": "Native typed continuation identity retains exact ordered polynomials, sides, default side and domain. Ordinary identities and legacy output shape are preserved when the declaration is absent."
+  },
+  "validation": {
+    "test_count": 17,
+    "new_prescribed_tests": 6,
+    "existing_cli_tests": 11,
+    "test_names": [
+      "algebraic::algebraic_cli_extension_keeps_legacy_rational_input_and_output",
+      "algebraic::algebraic_cli_never_substitutes_an_opposite_sheet_cache_hit",
+      "algebraic::algebraic_cli_preserves_completed_destinations_if_a_later_path_crosses_a_root",
+      "algebraic::algebraic_cli_progresses_restarts_and_keeps_exact_germs",
+      "algebraic::algebraic_cli_rejects_missing_foreign_and_duplicate_germs",
+      "canonical::canonical_cli_rejects_ambiguous_missing_or_invalid_representations",
+      "canonical::canonical_cli_reports_native_identity_and_restarts_progressive_root_transport",
+      "canonical::rootless_canonical_cli_keeps_distinct_identity_and_equivalent_dense_values",
+      "fallback::cli_boundary_budget_and_accuracy_retry_preserve_existing_binary_bank",
+      "prescribed_and_legacy::cli_reuses_a_growing_binary_bank_across_processes",
+      "prescribed_and_legacy::native_dot_graph_cli_matches_the_massless_bubble",
+      "prescribed_and_legacy::prescribed_cli_rejects_missing_admission_invalid_sides_and_nonphysical_polynomials",
+      "prescribed_and_legacy::prescribed_cli_side_policy_changes_identity_and_cannot_reuse_another_sheet",
+      "prescribed_and_legacy::prescribed_cli_wrong_germ_does_not_mutate_a_completed_bank",
+      "prescribed_and_legacy::prescribed_rational_and_rootless_canonical_cli_keep_native_representations",
+      "prescribed_and_legacy::prescribed_root_cli_crosses_threshold_reuses_and_restarts_without_seeds",
+      "prescribed_and_legacy::prescribed_rootful_canonical_cli_tracks_the_declared_sheet"
+    ],
+    "command": "timeout 600s taskset -c 32 target/prescribed-cli/tests --test-threads=1 --nocapture",
+    "exit_code": 0,
+    "test_runner_elapsed_seconds": "10.39",
+    "strict_standalone_clippy": {
+      "cli_exit": 0,
+      "tests_exit": 0,
+      "warnings": "denied"
+    },
+    "rustfmt_check": {
+      "edition": 2024,
+      "exit_code": 0
+    },
+    "independent_read_only_review": "reduction_audit: no finding in mandatory homotopy admission, all-representation native dispatch, binding-before-cache identity, or output policy reporting"
+  },
+  "analytic_checks": [
+    {
+      "system": "dY/ds = epsilon*Y/sqrt(s), Y(1)=1",
+      "route": "below s=0",
+      "destination": "-1",
+      "root_germ": "opposite",
+      "epsilon_0": "1",
+      "epsilon_1": "-2-2*i",
+      "epsilon_2": "4*i",
+      "checked_digits": 20
+    },
+    {
+      "system": "same scalar root system",
+      "route": "continued from verified -1 source to -4",
+      "destination": "-4",
+      "root_germ": "opposite",
+      "epsilon_0": "1",
+      "epsilon_1": "-2-4*i",
+      "epsilon_2": "-6+8*i",
+      "checked_digits": 20
+    },
+    {
+      "system": "dY = epsilon*dlog(s)*Y, Y(1)=1",
+      "representations": [
+        "rational",
+        "rootless canonical"
+      ],
+      "destination": "-1",
+      "routes": [
+        "below s=0: log(s)=-i*pi",
+        "above s=0: log(s)=+i*pi"
+      ],
+      "checked_digits": 20
+    },
+    {
+      "system": "dY = epsilon*dlog(sqrt(s))*Y, Y(1)=1",
+      "representation": "rootful canonical",
+      "destination": "-1",
+      "route": "below s=0, opposite root germ",
+      "epsilon_1": "-i*pi/2",
+      "checked_digits": 20
+    }
+  ],
+  "behavior_checked": [
+    "progressive boundary reuse and exact repeat hits",
+    "restart of a nonempty binary bank without re-supplying seeds",
+    "complete explicit root germs",
+    "wrong final germ rejects without mutating an existing bank",
+    "changed prescription policy cannot reuse another identity",
+    "missing/invalid admission, invalid sides, nonphysical or nonpolynomial prescriptions and unknown declaration fields reject",
+    "existing rational, algebraic, canonical, fallback and native graph CLI tests still pass"
+  ],
+  "accuracy_metric": "For each checked coefficient c, |computed-reference| <= 10^-20 * max(1, |reference|). This is a mixed absolute/relative coefficient criterion, not a blanket significant-digit claim for tiny coefficients.",
+  "limits": [
+    "Homotopy admission is an explicit caller assertion for every planner-generated candidate route; the CLI does not certify global integral/logarithmic monodromy from endpoint root germs.",
+    "Arbitrary loops and additional windings are outside the affine interface. Use a native selective HomotopyAdmission callback when the global CLI declaration is too broad.",
+    "This wrapper validation does not replace the independent scientific prescribed-cache acceptance or the final integrated release gate.",
+    "Elapsed test time is a regression-run observation, not a performance comparison."
+  ],
+  "artifacts": [
+    {
+      "path": "target/prescribed-cli/production/rustflow.rs",
+      "bytes": 28449,
+      "sha256": "7fb852d6e5bf5942a2ba73888226402c7699d9a5c5b08457d4aee29410513d38"
+    },
+    {
+      "path": "target/prescribed-cli/production/cli.rs",
+      "bytes": 13850,
+      "sha256": "ae654600e128164ce7ddf018df4b1748c9ce4dccd66399077983a97ad6c893f5"
+    },
+    {
+      "path": "target/prescribed-cli/production/cli.md",
+      "bytes": 13509,
+      "sha256": "3376c8173cbccb83d0ec157a75fb28f3d5bd8a1417b7e5aefb69ee371c3bf933"
+    },
+    {
+      "path": "target/prescribed-cli/production/prescribed-transport.json",
+      "bytes": 1998,
+      "sha256": "e2090c496e3195d81e88d696dda1b1c325b9b97f70f5cb75c0073692731a0cb7"
+    },
+    {
+      "path": "target/prescribed-cli/rustflow",
+      "bytes": 701416008,
+      "sha256": "e22b79ee2bd249e2dcf987c4ad0e766a73834a9a3b37874adde1f15db447f204"
+    },
+    {
+      "path": "target/prescribed-cli/tests",
+      "bytes": 639474112,
+      "sha256": "e0a78efbfbb5b9f7fe293c52f69d7c54c5ec8142aef7b4a7f41b4d264f208e3b"
+    },
+    {
+      "path": "target/prescribed-cli/tests.rs",
+      "bytes": 215,
+      "sha256": "bd5b6d9c8c7a04f44499d488b9f7f1cb395caaaf4d535a908acf2b693fd91c27"
+    },
+    {
+      "path": "target/prescribed-cli/tests.log",
+      "bytes": 1728,
+      "sha256": "cc26e5d0d9cf0ce5c6b73e96a4d4fbd1fb542dd5f1e3d3a8db257b8030abf8bc"
+    },
+    {
+      "path": "target/prescribed-cli/build-command.json",
+      "bytes": 1605,
+      "sha256": "c9148e139f28c4823cfbd2db60d762173a2280d33df705964c06c12b96b75cb4"
+    },
+    {
+      "path": "target/prescribed-cli/test-build-command.json",
+      "bytes": 1765,
+      "sha256": "2f21907750d9b01a1d4a0cb40753fc9d4d5c8dba7a636bf8d8741e6c330a728d"
+    },
+    {
+      "path": "target/prescribed-cli/clippy-results.json",
+      "bytes": 3950,
+      "sha256": "1661a7ede5fb33ebe4afee3398b995e21750f7a10d87b991d0ce7aec60a54be8"
+    },
+    {
+      "path": "target/prescribed-cli/cli-clippy.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/prescribed-cli/tests-clippy.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "tests/cli_algebraic.rs",
+      "bytes": 8013,
+      "sha256": "4fb0ec982c79a5d32971f15df535e1d260c8c8f5e34cb01e6242f7b77cb9a9f7"
+    },
+    {
+      "path": "tests/cli_canonical.rs",
+      "bytes": 6706,
+      "sha256": "af396edb86719764985f179422bc9b746619e6ab664c88e72e93702131922c35"
+    },
+    {
+      "path": "tests/cli_fallback.rs",
+      "bytes": 4242,
+      "sha256": "38f23dcba3181c9403e123ab9f6f64d9f4122fac577954153f8141225db1c6ca"
+    },
+    {
+      "path": "target/prescribed-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "bytes": 425988556,
+      "sha256": "c4f9d6788e87798037a23ca0023eaa7dd668ffd8efbf71c28b20777a3768f885"
+    },
+    {
+      "path": "target/prescribed-release/deps/librustred-d70ca661149f6db6.rlib",
+      "bytes": 406493312,
+      "sha256": "3484fc124051aac01902b4fe018f00bd89a0c2af13b84f31666178f3f292a0a0"
+    }
+  ]
+}

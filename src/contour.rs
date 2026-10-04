@@ -379,6 +379,44 @@ impl PrescribedContour {
                     distance = distance.min(separation);
                 }
                 if distance <= margin {
+                    // Separate roots from different exact polynomials may
+                    // initially have overlapping isolation disks. Refine only
+                    // obstructing real certificates, then repeat the unchanged
+                    // exact clearance proof. Complex disks remain conservative
+                    // obstacles; no center matching or root merging is used.
+                    let mut refined = false;
+                    if attempt < 4 {
+                        for (other_index, other) in obstacles.iter_mut().enumerate() {
+                            if other_index == index {
+                                continue;
+                            }
+                            let enclosure = other.root.enclosure();
+                            if distance_to_disk(
+                                &exact_center,
+                                enclosure.center(),
+                                enclosure.radius(),
+                            ) > margin
+                                || enclosure.radius().is_zero()
+                            {
+                                continue;
+                            }
+                            let previous = enclosure.radius().clone();
+                            if matches!(
+                                other.root.classify_location(),
+                                RootLocation::Real | RootLocation::Zero
+                            ) {
+                                narrow_real_root(
+                                    &mut other.root,
+                                    &(&previous / &Rational::from(4)),
+                                    context,
+                                )?;
+                                refined |= other.root.enclosure().radius() < &previous;
+                            }
+                        }
+                    }
+                    if refined {
+                        continue;
+                    }
                     return Err(Error::Accuracy(
                         "contour obstacle disks are unresolved at working precision".into(),
                     ));

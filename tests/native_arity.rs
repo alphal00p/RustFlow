@@ -57,7 +57,11 @@ fn fifteen_slot_five_loop_tadpole_product_obeys_exact_euler_ibp() -> Result<()> 
             max_targets: 1024,
             ..Default::default()
         };
-        let result = backend.reduce(&family, &[raised.clone()], &RunContext::default());
+        let result = backend.reduce(
+            &family,
+            std::slice::from_ref(&raised),
+            &RunContext::default(),
+        );
         if !rustred::compiled_runtime_arities().contains(&15) {
             assert!(matches!(
                 result,
@@ -72,7 +76,7 @@ fn fifteen_slot_five_loop_tadpole_product_obeys_exact_euler_ibp() -> Result<()> 
         assert!(reduction.residuals.contains(&master));
         let sampled = backend.reduce_at_epsilon(
             &family,
-            &[raised.clone()],
+            std::slice::from_ref(&raised),
             &Rational::from((1, 13)),
             &RunContext::default(),
         )?;

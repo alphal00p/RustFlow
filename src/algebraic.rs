@@ -5,14 +5,17 @@
 //! path and kernel cancellation; their norm conditions can conservatively exclude
 //! points regular on a particular sheet. Only accepted continuation steps advance
 //! branch state. Singular endpoints require a separate Frobenius treatment.
+mod analytic_origin;
 mod canonical;
 mod quotient;
+pub use analytic_origin::{AnalyticOriginOptions, AnalyticOriginSeed};
+
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution, EpsilonSystem};
 use crate::family::{encode_complex, imaginary_parameter, scalar_symbols, substitute};
 use crate::fixed_series::{coefficients, fixed_series};
 use crate::ode::{
     CompiledSystem, NumericRational, SeriesSystem, compile_rows, evaluate_taylor,
-    transport_series_with_state,
+    transport_series_observed,
 };
 use crate::{
     BoundaryData, ComplexFloat as C, DifferentialSystem, Error, FlowOptions, Precision,
@@ -60,6 +63,16 @@ pub struct BranchState {
 pub struct AlgebraicSolution {
     pub solution: EpsilonSolution,
     pub branches: BranchState,
+    /// Accepted root charts, aligned with `solution.segments` when saved.
+    /// These are working-precision branch traces, not accuracy certificates.
+    pub branch_segments: Vec<BranchSegment>,
+}
+
+#[derive(Clone, Debug)]
+pub struct BranchSegment {
+    pub end: BranchState,
+    pub(crate) center: C,
+    pub(crate) coefficients: Vec<Vec<C>>,
 }
 
 /// Exact differential matrices in physical invariants, with explicitly declared
@@ -860,13 +873,23 @@ impl CompiledAlgebraicSystem {
             values: boundary.coefficients.iter().flatten().cloned().collect(),
         };
         let mut segments = Vec::new();
-        let (result, branches) = transport_series_with_state(
+        let mut branch_segments = Vec::new();
+        let (result, branches) = transport_series_observed(
             &run,
             &flat,
             waypoints,
             options,
             context,
             save_segments.then_some(&mut segments),
+            |chart, state| {
+                if save_segments {
+                    branch_segments.push(BranchSegment {
+                        end: state.clone(),
+                        center: chart.center.clone(),
+                        coefficients: chart.coefficients.clone(),
+                    });
+                }
+            },
         )?;
         Ok(AlgebraicSolution {
             solution: EpsilonSolution {
@@ -880,6 +903,7 @@ impl CompiledAlgebraicSystem {
                 checkpoints: Vec::new(),
             },
             branches,
+            branch_segments,
         })
     }
     pub fn transport_ordinary(
@@ -1465,10 +1489,64 @@ impl CompiledAlgebraicSystem {
         })
     }
 
-    /// Weighted Gronwall estimate with rational disk bounds and |sqrt(R)| =
+    /// Recover a discrete sheet from an already accepted local root chart.
+    /// The caller must restrict `point` to this chart's traversed segment.
+    pub(crate) fn project_branch_segment(
+        &self,
+        segment: &BranchSegment,
+        point: &C,
+    ) -> Result<BranchState> {
+        self.check_domain(point)?;
+        let values = AlgebraicRun {
+            compiled: self,
+            seeds: &BTreeMap::new(),
+        }
+        .project(
+            &RootChart {
+                center: segment.center.clone(),
+                coefficients: segment.coefficients.clone(),
+            },
+            point,
+        )?;
+        Ok(BranchState {
+            point: point.clone(),
+            roots: self
+                .roots
+                .iter()
+                .zip(values)
+                .map(|(r, v)| (r.definition.symbol, v))
+                .collect(),
+        })
+    }
+
+    /// Weighted uncertainty estimate with rational disk bounds and |sqrt(R)| =
     /// sqrt(|R|). It bounds inherited boundary uncertainty, not arithmetic error;
-    /// independently refined transport checks supply the latter evidence.
+    /// independently refined transport checks supply the latter evidence. An
+    /// exact absence of epsilon0 terms truncates the Dyson bound; any nonzero
+    /// epsilon0 term retains the exponential Gronwall estimate.
     pub fn error_amplification_weighted(
+        &self,
+        start: &C,
+        end: &C,
+        weights: &[Float],
+    ) -> Result<Float> {
+        crate::diffexp::amplification_from_integral(
+            self.p,
+            &self.error_norm_integral_weighted(start, end, weights)?,
+            self.epsilon_product_limit(),
+        )
+    }
+
+    pub(crate) fn epsilon_product_limit(&self) -> Option<usize> {
+        // Terms are removed only by exact algebra during compilation. In
+        // particular, no floating zero test certifies a missing epsilon0 block.
+        self.terms
+            .iter()
+            .all(|term| term.shift > 0)
+            .then_some(self.count)
+    }
+
+    pub(crate) fn error_norm_integral_weighted(
         &self,
         start: &C,
         end: &C,
@@ -1482,7 +1560,7 @@ impl CompiledAlgebraicSystem {
         {
             return Err(Error::InvalidInput("algebraic error amplification requires finite endpoints and positive coefficient weights".into()));
         }
-        crate::diffexp::integrate_error_amplification(p, start, end, |center, radius| {
+        crate::diffexp::integrate_matrix_norm(p, start, end, |center, radius| {
             let mut roots = Vec::new();
             for root in &self.roots {
                 let Some(upper) =

@@ -454,4 +454,7 @@ fn sparse_ode_does_not_mistake_a_zero_taylor_tail_for_convergence() {
         .unwrap();
     assert!(p.close(&result.values[0], &p.exp(&p.scale(&p.i(1), 1, 21)), 20));
     assert!(result.diagnostics.rejected_steps > 0);
+    // Retain useful entire-system step proposals instead of retrying the
+    // complete remaining interval at every center.
+    assert!(result.diagnostics.steps + result.diagnostics.rejected_steps < 5000);
 }

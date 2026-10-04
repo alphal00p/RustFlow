@@ -44,6 +44,8 @@ pub struct EpsilonSolution {
     /// in each segment's flattened coefficient vectors.
     pub segments: Vec<TaylorSegment>,
     /// Set by independent precision/order recomputation, not working precision.
+    /// A value d uses the mixed coefficient scale 10^(-d) * max(1, |c|).
+    /// It does not promise d significant digits for coefficients smaller than one.
     pub verified_digits: Option<u32>,
     pub comparison_errors: Vec<Vec<Float>>,
     /// Independently compared accepted endpoints, suitable for a physical
@@ -63,6 +65,8 @@ pub struct VerifiedCheckpoint {
 pub struct CompiledEpsilonSystem {
     rows: CompiledSystem,
     count: usize,
+    // Established on the exact input, never inferred from rounded coefficients.
+    strictly_positive_epsilon: bool,
 }
 
 impl EpsilonSystem {
@@ -155,6 +159,7 @@ impl EpsilonSystem {
         Ok(CompiledEpsilonSystem {
             rows: compile_rows(self.variable, &rows, p, values)?,
             count: self.matrices.len(),
+            strictly_positive_epsilon: self.matrices[0].iter().flatten().all(Atom::is_zero),
         })
     }
 }
@@ -162,6 +167,10 @@ impl EpsilonSystem {
 impl CompiledEpsilonSystem {
     pub fn poles(&self) -> &[C] {
         &self.rows.poles
+    }
+
+    pub(crate) fn singularity_polynomials(&self) -> &[Atom] {
+        &self.rows.pole_polynomials
     }
 
     pub fn plan_path(&self, start: &C, end: &C, side: i64) -> Result<Vec<C>> {
@@ -212,7 +221,9 @@ impl CompiledEpsilonSystem {
     }
 
     /// A norm-based estimate of amplification of boundary uncertainty along a
-    /// regular segment. Numerators are bounded above on each disk and common
+    /// regular segment. An exact zero epsilon0 block permits a finite Dyson
+    /// bound; otherwise the estimate uses the exponential Gronwall bound.
+    /// Numerators are bounded above on each disk and common
     /// denominators below by the triangle inequality; subdivide if that lower
     /// bound is inconclusive. MPFR rounding and initial error estimates prevent
     /// interpreting this as an interval-arithmetic proof.
@@ -233,6 +244,25 @@ impl CompiledEpsilonSystem {
         end: &C,
         weights: &[Float],
     ) -> Result<Float> {
+        amplification_from_integral(
+            self.rows.p,
+            &self.error_norm_integral_weighted(start, end, weights)?,
+            self.epsilon_product_limit(),
+        )
+    }
+
+    /// Every product of this many connection matrices vanishes exactly.
+    /// Physical blocks may be noncommuting; each factor raises epsilon order.
+    pub(crate) fn epsilon_product_limit(&self) -> Option<usize> {
+        self.strictly_positive_epsilon.then_some(self.count)
+    }
+
+    pub(crate) fn error_norm_integral_weighted(
+        &self,
+        start: &C,
+        end: &C,
+        weights: &[Float],
+    ) -> Result<Float> {
         let p = self.rows.p;
         if weights.len() != self.dimension()
             || weights.iter().any(|w| !w.is_finite() || *w <= p.real(0))
@@ -246,7 +276,7 @@ impl CompiledEpsilonSystem {
             ));
         }
         let n = self.rows.dimension();
-        integrate_error_amplification(p, start, end, |start, radius| {
+        integrate_matrix_norm(p, start, end, |start, radius| {
             let mut norm = p.real(0);
             for (i, row) in self.rows.polynomial_rows.iter().enumerate() {
                 let denominator =
@@ -298,9 +328,9 @@ impl CompiledEpsilonSystem {
     }
 }
 
-/// Common disk-subdivision/Gronwall estimate for rational and registered-root
-/// systems. This uses finite-precision norms, not directed interval arithmetic.
-pub(crate) fn integrate_error_amplification(
+/// Common disk-subdivision estimate of the integrated weighted matrix norm.
+/// This uses finite-precision norms, not directed interval arithmetic.
+pub(crate) fn integrate_matrix_norm(
     p: Precision,
     start: &C,
     end: &C,
@@ -341,7 +371,36 @@ pub(crate) fn integrate_error_amplification(
             intervals.push((start, middle, depth + 1));
         }
     }
-    let amplification = p.exp(&C::new(exponent, p.real(0))).re;
+    Ok(exponent)
+}
+
+/// Bound the time-ordered exponential using its integrated norm. If every
+/// product of N connection matrices vanishes, the Dyson series stops at N-1
+/// even for noncommuting physical blocks. A fixed positive diagonal scaling
+/// preserves this structure. The caller must accumulate the norm over the
+/// whole path, rather than multiply truncated scalar polynomials per segment.
+pub(crate) fn amplification_from_integral(
+    p: Precision,
+    integral: &Float,
+    product_limit: Option<usize>,
+) -> Result<Float> {
+    if !integral.is_finite() || *integral < p.real(0) || product_limit == Some(0) {
+        return Err(Error::Accuracy(
+            "invalid integrated error-growth bound".into(),
+        ));
+    }
+    let amplification = if let Some(count) = product_limit {
+        let mut term = p.real(1);
+        let mut sum = term.clone();
+        for order in 1..count {
+            term *= integral;
+            term /= p.real(order as i64);
+            sum += &term;
+        }
+        sum
+    } else {
+        p.exp(&C::new(integral.clone(), p.real(0))).re
+    };
     if !amplification.is_finite() {
         return Err(Error::Accuracy(
             "boundary-error amplification exceeds numerical range".into(),
@@ -625,8 +684,26 @@ pub(crate) fn refine_epsilon_transport(
     save_segments: bool,
     mut run: impl FnMut(Precision, &FlowOptions) -> Result<EpsilonSolution>,
 ) -> Result<EpsilonSolution> {
+    Ok(refine_epsilon_transport_with_metadata(
+        options,
+        context,
+        save_segments,
+        |p, o| Ok((run(p, o)?, ())),
+        |_, _, _, _, _| Ok(true),
+    )?
+    .0)
+}
+
+/// One refinement engine, with additional independently checked metadata.
+pub(crate) fn refine_epsilon_transport_with_metadata<M>(
+    options: &FlowOptions,
+    context: &RunContext,
+    save_segments: bool,
+    mut run: impl FnMut(Precision, &FlowOptions) -> Result<(EpsilonSolution, M)>,
+    mut compatible: impl FnMut(&EpsilonSolution, &M, &EpsilonSolution, &M, usize) -> Result<bool>,
+) -> Result<(EpsilonSolution, M)> {
     options.validate()?;
-    let mut previous: Option<EpsilonSolution> = None;
+    let mut previous: Option<(EpsilonSolution, M)> = None;
     for attempt in 0..=options.max_precision_attempts {
         context.cancellation.check()?;
         let mut refined = options.clone();
@@ -640,8 +717,8 @@ pub(crate) fn refine_epsilon_transport(
             .ok_or_else(|| Error::Limit("series order overflow".into()))?;
         refined.validate()?;
         let p = Precision::decimal(refined.digits + refined.guard_digits)?;
-        let mut result = run(p, &refined)?;
-        if let Some(old) = &previous {
+        let (mut result, metadata) = run(p, &refined)?;
+        if let Some((old, old_metadata)) = &previous {
             if old.leading != result.leading {
                 return Err(Error::InvalidInput(
                     "boundary provider changed the leading epsilon power".into(),
@@ -668,7 +745,9 @@ pub(crate) fn refine_epsilon_transport(
                 result.verified_digits = Some(options.digits);
                 if save_segments {
                     for (index, segment) in result.segments.iter().enumerate() {
-                        if let Ok(reference) = old.evaluate_path(&segment.end) {
+                        if let Ok(reference) = old.evaluate_path(&segment.end)
+                            && compatible(old, old_metadata, &result, &metadata, index)?
+                        {
                             let values = result.evaluate_segment(index, &segment.end)?;
                             if values
                                 .iter()
@@ -696,12 +775,16 @@ pub(crate) fn refine_epsilon_transport(
                         }
                     }
                 }
-                return Ok(result);
+                return Ok((result, metadata));
             }
         }
-        previous = Some(result);
+        previous = Some((result, metadata));
     }
     Err(Error::Accuracy(
         "epsilon transport did not stabilize under precision/order refinement".into(),
     ))
 }
+
+#[cfg(test)]
+#[path = "diffexp/uncertainty_tests.rs"]
+mod uncertainty_tests;
