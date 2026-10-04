@@ -18,8 +18,8 @@ use std::sync::{
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
-const VERSION: u32 = 1;
-const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x01";
+const VERSION: u32 = 2;
+const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x02";
 const FILE: &str = "physical-boundaries.bin";
 static NEXT_FILE: AtomicU64 = AtomicU64::new(0);
 
@@ -264,6 +264,7 @@ struct IdentityData {
     normalization: Atom,
     prescription: Prescription,
     domain: String,
+    conditions: Vec<Atom>,
 }
 
 /// Content identity for the ordered basis and its physical branch. `domain`
@@ -279,7 +280,31 @@ impl BoundaryIdentity {
         prescription: Prescription,
         domain: &str,
     ) -> Result<Self> {
+        Self::with_conditions(system, basis, normalization, prescription, domain, &[])
+    }
+
+    /// Attach the exact nonzero assumptions used to derive the system. They
+    /// remain part of cache identity even if matrix cancellation removes them.
+    pub fn with_conditions(
+        system: &KinematicSystem,
+        basis: &[Atom],
+        normalization: &Atom,
+        prescription: Prescription,
+        domain: &str,
+        conditions: &[Atom],
+    ) -> Result<Self> {
         system.validate()?;
+        let mut variables = system
+            .derivatives
+            .keys()
+            .copied()
+            .collect::<std::collections::BTreeSet<_>>();
+        variables.insert(system.epsilon);
+        let mut candidates = conditions.to_vec();
+        candidates.extend(crate::physical_conditions::matrix_domain_conditions(
+            system,
+        )?);
+        let conditions = crate::physical_conditions::canonical_conditions(&candidates, &variables)?;
         let n = system.derivatives.values().next().unwrap().len();
         if basis.len() != n || domain.trim().is_empty() || normalization.is_zero() {
             return Err(Error::InvalidInput("boundary identity needs an ordered basis, nonzero normalization, and homotopy domain".into()));
@@ -317,6 +342,10 @@ impl BoundaryIdentity {
             normalization.to_canonical_string(),
             matches!(prescription, Prescription::PlusI0),
             domain,
+            conditions
+                .iter()
+                .map(AtomCore::to_canonical_string)
+                .collect::<Vec<_>>(),
         ))?;
         Ok(Self(Arc::new(IdentityData {
             key,
@@ -325,6 +354,7 @@ impl BoundaryIdentity {
             normalization: normalization.clone(),
             prescription,
             domain: domain.into(),
+            conditions,
         })))
     }
     pub fn key(&self) -> &str {
@@ -334,13 +364,63 @@ impl BoundaryIdentity {
         self.0.basis.len()
     }
 
-    fn validate_point(&self, point: &CachedPoint) -> Result<()> {
+    pub fn nonzero_conditions(&self) -> &[Atom] {
+        &self.0.conditions
+    }
+
+    /// Check reduction assumptions along a complete real straight path. The
+    /// caller still owns its physical branch/homotopy admissibility policy.
+    pub fn conditions_admit_straight_path(
+        &self,
+        source: &CachedPoint,
+        target: &CachedPoint,
+        p: Precision,
+        digits: u32,
+    ) -> Result<bool> {
+        self.validate_point(source)?;
+        self.validate_point(target)?;
+        if self.0.conditions.is_empty() {
+            return Ok(true);
+        }
+        let mut index = 0usize;
+        let parameter = loop {
+            let candidate = symbol!(&format!("symbolica_amflow::guard_path_{index}"));
+            if candidate != self.0.system.epsilon
+                && !self.0.system.derivatives.contains_key(&candidate)
+            {
+                break candidate;
+            }
+            index = index
+                .checked_add(1)
+                .ok_or_else(|| Error::Limit("guard path symbol overflow".into()))?;
+        };
+        let path = KinematicPath::straight_line(
+            parameter,
+            &source.rounded_coordinates_as_exact()?,
+            &target.rounded_coordinates_as_exact()?,
+        )?;
+        crate::physical_conditions::conditions_admit_path(
+            &self.0.conditions,
+            self.0.system.epsilon,
+            &path,
+            p,
+            digits,
+        )
+    }
+
+    pub(crate) fn validate_point(&self, point: &CachedPoint) -> Result<()> {
+        point.validate()?;
         let coordinates = point.rounded_coordinates_as_exact()?;
         if !coordinates.keys().eq(self.0.system.derivatives.keys()) {
             return Err(Error::InvalidInput(
                 "cached point coordinates do not match the system".into(),
             ));
         }
+        crate::physical_conditions::validate_conditions_at(
+            &self.0.conditions,
+            self.0.system.epsilon,
+            &coordinates,
+        )?;
         let rules = coordinates
             .iter()
             .map(|(&v, a)| (Atom::var(v), a.clone()))
@@ -1018,6 +1098,7 @@ struct StoredIdentity {
     normalization: Vec<u8>,
     plus_i0: bool,
     domain: String,
+    conditions: Vec<StoredAtom>,
 }
 impl StoredIdentity {
     fn encode(identity: &BoundaryIdentity) -> Result<Self> {
@@ -1042,6 +1123,7 @@ impl StoredIdentity {
             normalization: atom_bytes(&d.normalization)?,
             plus_i0: matches!(d.prescription, Prescription::PlusI0),
             domain: d.domain.clone(),
+            conditions: d.conditions.iter().map(atom_bytes).collect::<Result<_>>()?,
         })
     }
     fn decode(self) -> Result<BoundaryIdentity> {
@@ -1065,7 +1147,7 @@ impl StoredIdentity {
             .iter()
             .map(|a| atom_read(a))
             .collect::<Result<Vec<_>>>()?;
-        let identity = BoundaryIdentity::new(
+        let identity = BoundaryIdentity::with_conditions(
             &system,
             &basis,
             &atom_read(&self.normalization)?,
@@ -1075,6 +1157,11 @@ impl StoredIdentity {
                 Prescription::MinusI0
             },
             &self.domain,
+            &self
+                .conditions
+                .iter()
+                .map(|a| atom_read(a))
+                .collect::<Result<Vec<_>>>()?,
         )?;
         if identity.key() != self.key {
             return Err(Error::Cache("cached system/basis identity mismatch".into()));

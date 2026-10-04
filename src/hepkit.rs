@@ -5,9 +5,12 @@
 //! denominator basis. This module only translates that basis into RustRed's
 //! scalar-product ordering and records exact linear combinations of integrals.
 
+use crate::cuts::{
+    CutDefinition, CutFamily, CutLine, CutMetadata, LoopPrescription, MomentumRouting,
+};
 use crate::reduction::LinearCombination;
 use crate::{Error, Integral, IntegralFamily, KinematicPoint, Propagator, Result, RunContext};
-use feynkit_graph::{EdgeId, FeynmanDiagram, IntegralFamily as NativeFamily};
+use feynkit_graph::{DiagramEndpoint, EdgeId, FeynmanDiagram, IntegralFamily as NativeFamily};
 use feynkit_kinematics::Kinematics;
 use feynkit_model::Model;
 use idenso::tensor::{AlgebraContraction, AlgebraSettings, SymbolicTensor};
@@ -97,8 +100,8 @@ impl GraphIntegral {
         self
     }
 
-    fn admit_denominators(&self, point: &KinematicPoint) -> Result<()> {
-        if !self.diagram.cuts().is_empty() {
+    fn admit_denominators(&self, point: &KinematicPoint, keep_cut_measure: bool) -> Result<()> {
+        if !keep_cut_measure && !self.diagram.cuts().is_empty() {
             return Err(Error::Unsupported("native graph cuts require the cut-integral workflow; ordinary graph conversion does not remove cut metadata".into()));
         }
         let model = self.diagram.model();
@@ -155,6 +158,121 @@ impl GraphIntegral {
         max_partial_fraction_states: usize,
         context: &RunContext,
     ) -> Result<Vec<(IntegralFamily, LinearCombination)>> {
+        self.integral_groups_impl(
+            point,
+            epsilon,
+            dimension,
+            max_partial_fraction_states,
+            context,
+            false,
+        )
+    }
+
+    /// Convert one selected native physical cut without changing denominator
+    /// identities. Positive-energy momenta point from the native left amplitude
+    /// to the right amplitude. The same native model and routed tensor numerator
+    /// are retained; no model is reloaded or reinterpreted.
+    ///
+    /// All original denominator slots are kept, including inactive uncut slots.
+    /// Dependent denominators currently require a cut-aware partial-fraction
+    /// transformation and are rejected instead of losing their measure metadata.
+    /// Loop prescriptions are explicit, in the native loop-basis order. Exactly
+    /// one cut is selected by index; other cuts in the native inventory are not
+    /// combined with it. `CutFamily::new` checks every oriented routing squared
+    /// against the retained normalized denominator before returning the result.
+    #[allow(clippy::too_many_arguments)] // Native cut selection and measure accompany ordinary conversion inputs.
+    pub fn cut_integral_group(
+        &self,
+        cut_index: usize,
+        point: &KinematicPoint,
+        epsilon: Symbol,
+        dimension: i64,
+        loop_prescriptions: Vec<LoopPrescription>,
+        context: &RunContext,
+    ) -> Result<(CutFamily, LinearCombination)> {
+        let cut =
+            self.diagram.cuts().get(cut_index).ok_or_else(|| {
+                Error::InvalidInput("native physical cut index out of range".into())
+            })?;
+        let mut groups = self.integral_groups_impl(point, epsilon, dimension, 0, context, true)?;
+        if groups.len() != 1 {
+            return Err(Error::Unsupported(
+                "native cut decomposition must preserve one complete denominator family".into(),
+            ));
+        }
+        let (family, terms) = groups.remove(0);
+        let basis = self.diagram.loop_momentum_basis();
+        let mut lines = Vec::with_capacity(cut.cut.len());
+        for half in &cut.cut {
+            let propagator = self
+                .edges
+                .iter()
+                .position(|edge| *edge == half.edge)
+                .ok_or_else(|| {
+                    Error::Unsupported(
+                        "selected native cut is not an integrated physical propagator".into(),
+                    )
+                })?;
+            let signature = basis.edge_signatures.get(&half.edge).ok_or_else(|| {
+                Error::InvalidInput("native cut edge has no momentum signature".into())
+            })?;
+            let (loops, external) = signature.integer_coefficients();
+            if loops.len() != basis.loop_edges.len() || external.len() != basis.external_edges.len()
+            {
+                return Err(Error::InvalidInput(
+                    "native cut momentum signature dimensions".into(),
+                ));
+            }
+            let sign = match half.endpoint {
+                DiagramEndpoint::Source => 1,
+                DiagramEndpoint::Target => -1,
+            };
+            let loops = loops
+                .into_iter()
+                .map(|n| Rational::from(sign * n as i64))
+                .collect();
+            let mut retained_external = Vec::new();
+            for (edge, coefficient) in basis.external_edges.iter().zip(external) {
+                if basis.dependent_externals.contains(edge) {
+                    if coefficient != 0 {
+                        return Err(Error::Unsupported(
+                            "native cut routing retains a dependent external coordinate".into(),
+                        ));
+                    }
+                } else {
+                    retained_external.push(Rational::from(sign * coefficient as i64));
+                }
+            }
+            lines.push(CutLine {
+                propagator,
+                definition: CutDefinition::PositiveEnergy {
+                    momentum: MomentumRouting {
+                        loops,
+                        external: retained_external,
+                    },
+                },
+            });
+        }
+        let family = CutFamily::new(family, CutMetadata::new(lines, loop_prescriptions)?)?;
+        let mut retained = LinearCombination::new();
+        for (integral, coefficient) in terms {
+            if !family.is_cut_zero(&integral)? {
+                retained.insert(integral, coefficient);
+            }
+        }
+        Ok((family, retained))
+    }
+
+    #[allow(clippy::too_many_arguments)] // Shared ordinary/cut conversion avoids a second tensor or routing implementation.
+    fn integral_groups_impl(
+        &self,
+        point: &KinematicPoint,
+        epsilon: Symbol,
+        dimension: i64,
+        max_partial_fraction_states: usize,
+        context: &RunContext,
+        keep_cut_measure: bool,
+    ) -> Result<Vec<(IntegralFamily, LinearCombination)>> {
         context.cancellation.check()?;
         for (key, value) in &point.0 {
             if !matches!(key.as_view(), AtomView::Var(_)) {
@@ -162,7 +280,7 @@ impl GraphIntegral {
             }
             crate::family::scalar_symbols(value.as_view(), &mut Default::default())?;
         }
-        self.admit_denominators(point)?;
+        self.admit_denominators(point, keep_cut_measure)?;
         if point
             .0
             .get(&Atom::var(symbol!("UFO::ZERO")))
@@ -259,34 +377,45 @@ impl GraphIntegral {
             .iter()
             .map(|&n| i32::from(n))
             .collect::<Vec<_>>();
-        let parts = native
-            .partial_fraction(&powers, max_partial_fraction_states)
-            .map_err(|error| match error {
-                feynkit_graph::IntegralFamilyError::PartialFractionLimit(_)
-                | feynkit_graph::IntegralFamilyError::PowerOverflow => {
-                    Error::Limit(error.to_string())
-                }
-                _ => input_error(error),
-            })?;
+        let parts = if keep_cut_measure {
+            if !native.is_independent() {
+                return Err(Error::Unsupported("dependent native cut denominators require a cut-aware partial-fraction transformation".into()));
+            }
+            vec![(Atom::one(), powers)]
+        } else {
+            native
+                .partial_fraction(&powers, max_partial_fraction_states)
+                .map_err(|error| match error {
+                    feynkit_graph::IntegralFamilyError::PartialFractionLimit(_)
+                    | feynkit_graph::IntegralFamilyError::PowerOverflow => {
+                        Error::Limit(error.to_string())
+                    }
+                    _ => input_error(error),
+                })?
+        };
         let mut groups = Vec::new();
         for (index, (factor, powers)) in parts.into_iter().enumerate() {
             context.cancellation.check()?;
             let mut numerator = &numerator * factor;
             for (denominator, &power) in native.denominators().iter().zip(&powers) {
-                if power < 0 {
+                if !keep_cut_measure && power < 0 {
                     numerator *= denominator.clone().pow(-i64::from(power));
                 }
             }
             let physical_powers = powers
                 .iter()
-                .filter(|&&n| n > 0)
+                .filter(|&&n| keep_cut_measure || n > 0)
                 .copied()
                 .collect::<Vec<_>>();
-            let family = native
-                .sector(&powers)
-                .map_err(input_error)?
-                .complete(&[])
-                .map_err(input_error)?;
+            let family = if keep_cut_measure {
+                native.complete(&[]).map_err(input_error)?
+            } else {
+                native
+                    .sector(&powers)
+                    .map_err(input_error)?
+                    .complete(&[])
+                    .map_err(input_error)?
+            };
             let converted =
                 IntegralFamily::from_hepkit(&family, physical_powers.len(), epsilon, dimension)?;
             let labels = (0..family.denominators().len())

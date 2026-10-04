@@ -25,9 +25,32 @@ pub(crate) fn reduce(
     targets: &[Vec<i16>],
     options: &RustRedBackend,
     context: &RunContext,
+    cuts: Option<&crate::cuts::CutFamily>,
 ) -> Result<Reduction> {
-    macro_rules! dispatch { ($($n:literal),*)=>{match family.family.denominator_count() { $($n=>solve::<$n>(family,original,dimension,targets,options,context),)* n=>Err(Error::Unsupported(format!("native runtime supports 1..=12 denominators; received {n}"))) }}; }
+    let cut_options;
+    let options = if cuts.is_some() {
+        cut_options = RustRedBackend {
+            bubble_subloops: false,
+            parametric_rules: false,
+            symmetry_rules: false,
+            ..options.clone()
+        };
+        &cut_options
+    } else {
+        options
+    };
+    macro_rules! dispatch { ($($n:literal),*)=>{match family.family.denominator_count() { $($n=>solve::<$n>(family,original,dimension,targets,options,context,cuts),)* n=>Err(Error::Unsupported(format!("native runtime supports 1..=12 denominators; received {n}"))) }}; }
     dispatch!(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+}
+fn cut_stage_key(key: String, cuts: Option<&str>) -> String {
+    cuts.map_or_else(
+        || key.clone(),
+        |cuts| {
+            blake3::hash(format!("native-cut-v1:{cuts}:{key}").as_bytes())
+                .to_hex()
+                .to_string()
+        },
+    )
 }
 fn native_error(error: impl std::fmt::Display) -> Error {
     Error::Reduction(error.to_string())
@@ -187,6 +210,7 @@ fn solve<const N: usize>(
     targets: &[Vec<i16>],
     options: &RustRedBackend,
     context: &RunContext,
+    cuts: Option<&crate::cuts::CutFamily>,
 ) -> Result<Reduction> {
     let mut pending = targets
         .iter()
@@ -200,7 +224,14 @@ fn solve<const N: usize>(
     let sources =
         SourceSystem::<N>::from_family_with_lorentz(&family.family, options.include_lorentz)
             .map_err(native_error)?;
-    let analyzer = Analyzer::try_unrestricted(&family.family).map_err(native_error)?;
+    let deltas: [bool; N] = std::array::from_fn(|slot| cuts.is_some_and(|c| c.cuts().is_cut(slot)));
+    let cut_key = cuts.map(crate::cuts::CutFamily::fingerprint).transpose()?;
+    let analyzer = if let Some(cuts) = cuts {
+        Analyzer::try_new(&family.family, cuts.native_restrictions()?)
+    } else {
+        Analyzer::try_unrestricted(&family.family)
+    }
+    .map_err(native_error)?;
     let mut zero = Vec::new();
     for bits in 0..(1usize << N) {
         context.cancellation.check()?;
@@ -219,6 +250,16 @@ fn solve<const N: usize>(
                 .any(|parent| sector.iter().zip(parent).all(|(a, b)| !a || *b))
         };
         if !relevant {
+            continue;
+        }
+        // A missing required cut vanishes by the authenticated distributional
+        // definition, independently of the Analyzer's scaleless certificates.
+        if deltas
+            .iter()
+            .zip(sector)
+            .any(|(&cut, active)| cut && !active)
+        {
+            zero.push(sector);
             continue;
         }
         let mask = Mask::try_new(sector).map_err(native_error)?;
@@ -246,7 +287,7 @@ fn solve<const N: usize>(
     );
     let mut visited = BTreeSet::new();
     let legacy_key_for_depth = |depth| {
-        blake3::hash(
+        let raw = blake3::hash(
             format!(
                 "native-factorized-v5:{}:{:?}:{targets:?}:{}:{}:{}:{}:{}",
                 family.family.fingerprint(),
@@ -260,7 +301,8 @@ fn solve<const N: usize>(
             .as_bytes(),
         )
         .to_hex()
-        .to_string()
+        .to_string();
+        cut_stage_key(raw, cut_key.as_deref())
     };
     let stage_key_for_depth = |depth| {
         let legacy_key = legacy_key_for_depth(depth);
@@ -281,7 +323,10 @@ fn solve<const N: usize>(
     };
     let legacy_key = legacy_key_for_depth(options.max_depth);
     let stage_key = stage_key_for_depth(options.max_depth);
-    let family_key = family_stage_key(family, original.physical_propagators, options);
+    let family_key = cut_stage_key(
+        family_stage_key(family, original.physical_propagators, options),
+        cut_key.as_deref(),
+    );
     let mut patterns = BTreeMap::<[bool; N], Option<crate::bubble::Bubble>>::new();
     let mut restart = if let Some(directory) = &options.checkpoints {
         crate::cache::read_native_stage(directory, &stage_key)?
@@ -519,6 +564,7 @@ fn solve<const N: usize>(
                             &sources,
                             sector,
                             SectorConfig {
+                                deltas,
                                 zero_sectors: zero.clone(),
                                 permutation: patterns.get(&sector).and_then(|p| p.as_ref()).map(
                                     |p| {
@@ -679,7 +725,7 @@ fn solve<const N: usize>(
                 }
                 // Group nearby complexities so a very easy target does not
                 // enlarge the exact elimination needed by every difficult target.
-                let order = rustred::solver::IntegralOrder::new(sector, [false; N]);
+                let order = rustred::solver::IntegralOrder::new(sector, deltas);
                 let order = if let Some(pattern) = patterns.get(&sector).and_then(|p| p.as_ref()) {
                     order
                         .with_permutation(
@@ -1005,8 +1051,9 @@ fn structural_frontier(
     Ok(leaves)
 }
 
-/// Remove every structural leaf whose sector has an existing Analyzer zero
-/// certificate. Its domain conditions are already retained in the reduction.
+/// Remove structural leaves with an authenticated zero identity: an Analyzer
+/// scaleless certificate or a nonpositive required cut. Family and certificate
+/// domain conditions are already retained in the reduction.
 /// Call only after validating the complete original dependency graph.
 fn prune_zero_leaves<const N: usize>(
     reduction: &mut Reduction,

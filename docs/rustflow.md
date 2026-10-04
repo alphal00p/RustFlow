@@ -97,8 +97,21 @@ first point, and a repeated request after binary restart performs no transport.
 This validates the cache on application data without claiming the complete
 61-master system or the complete amplitude.
 
-The HEPKit integration will use its native DOT/graph conventions, Linnet for
-graph manipulation, and Spenso/HEPKit tensor facilities. The ecosystem audit is
-part of this work: native graph scalar-product ordering must be mapped explicitly
-to the RustRed coordinate order, and graph symmetry factors must not be applied
-twice.
+The HEPKit integration uses native DOT/model objects, `LoopMomentumBasis` routing,
+Linnet graph algorithms, and Spenso/Idenso/HEPKit tensor facilities. One application
+model is shared by `Arc<Model>`. `GraphIntegral::integral_groups` preserves exact
+symbolic invariants when they are not specialized, so those families can be passed
+to `PreparedPhysicalFamily`. It closes all requested physical derivatives on one
+common basis; `seed_cache` computes verified AMF/FT master boundaries and appends
+them to the caller's existing bank. Additional requested seed digits reserve
+accuracy for later transports. `tests/native_physical.rs` exercises this complete
+native DOT → symbolic family → AMF boundary → growing physical cache route.
+
+Original family coefficients, denominator ordering, Gram matrix and nonzero
+conditions enter physical basis identity. The restrictions are validated even if
+they cancel from the final ODE, including before an exact cache hit. Candidate
+straight paths that cross an excluded chart point are filtered before ranking.
+Conditions are interpreted over formal epsilon, using Symbolica polynomial gcd
+and root finding for their common physical zero sets. The binary cache schema
+was incremented to retain these conditions; incompatible older snapshots are
+rejected explicitly.

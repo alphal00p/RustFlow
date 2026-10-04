@@ -84,3 +84,10 @@ serve different purposes and use separate paths.
 
 The Python API will live in HEPKit; this executable uses only the native Rust
 libraries.
+
+Transport requests may include `nonzero_conditions`, a list of exact expressions
+carried from IBP reduction or a kinematic chart. These restrictions participate
+in cache identity and are checked at stored points and along candidate paths,
+including restrictions that cancel out of the final differential equations.
+Epsilon remains formal: `epsilon*s` excludes `s=0`, while a pure epsilon factor
+does not exclude a physical point. Use the request's actual epsilon symbol.

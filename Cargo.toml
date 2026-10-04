@@ -18,7 +18,7 @@ blake3 = "1"
 ahash = "0.8"
 bincode = { version = "2.0.1", features = ["serde"] }
 
-# Native HEPKit checkout: 8f834d9 + local literal-substitution fix 3f392e22.
+# Native HEPKit checkout and reproducible local fixes: docs/hepkit-integration.md.
 feynkit-graph = { path = "../hepkit/crates/feynkit-graph", default-features = false }
 feynkit-model = { path = "../hepkit/crates/feynkit-model", default-features = false }
 feynkit-kinematics = { path = "../hepkit/crates/feynkit-kinematics", default-features = false }

@@ -82,10 +82,22 @@ supports persistent transport caches across processes.
   points and the destination to `RustFlowCache`. Binary snapshots can be loaded
   before the next request. Regular straight paths are currently supported by
   this orchestration interface.
+- `PreparedPhysicalFamily` derives a common physical differential basis from a
+  family and appends independently verified AMF/FT seed values to the same bank.
+  Original reduction assumptions and physical chart restrictions remain part of
+  cache identity and are checked along candidate paths.
 - `hepkit::GraphIntegral` retains a native HEPKit graph and delegates routing,
   contraction, denominator completion and scalar numerator rewriting to its
   Linnet/Spenso interfaces. `solve_integral_combinations` evaluates the resulting
-  exact weighted integral groups before Laurent fitting.
+  exact weighted integral groups before Laurent fitting. Its cut interface
+  preserves native `DiagramCut` orientation and denominator slots.
+- `FrobeniusBasis::match_constraints` fixes integration constants from partial
+  asymptotic coefficients, including resonant powers and logarithms. The full
+  [equal-mass banana regression](docs/banana-equal.md) uses an analytic infinity
+  boundary and checks every coefficient through epsilon power four.
+- `cuts::CutFamily` preserves distributional and positive-energy cut metadata
+  through native IBP reduction. The [two-body terminal](docs/cuts.md) uses native
+  HEPKit phase-space normalization and dimensional gamma factors.
 
 See [library usage](docs/usage.md), the runnable examples, and integration tests
 for complete typed inputs.

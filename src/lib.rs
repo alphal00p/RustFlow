@@ -2,10 +2,12 @@
 #![doc = include_str!("../docs/usage.md")]
 pub use symbolica;
 mod algebra;
+pub mod asymptotic;
 pub mod benchmarks;
 pub mod boundary;
 mod bubble;
 pub mod cache;
+pub mod cuts;
 pub mod diffexp;
 pub mod engine;
 pub mod epsilon;
@@ -24,6 +26,9 @@ pub mod normalize;
 pub mod numeric;
 pub mod ode;
 pub mod options;
+pub mod phase_space;
+mod physical_conditions;
+pub mod physical_family;
 pub mod physical_transport;
 pub mod recursive;
 pub mod reduction;
@@ -32,6 +37,7 @@ pub mod regions;
 pub mod tensor;
 pub mod transport_cache;
 pub mod vacuum;
+pub use asymptotic::AsymptoticConstraint;
 pub use engine::{
     PreparedFlow, evaluate_samples, solve_integral_combinations, solve_integrals, solve_prepared,
 };
@@ -43,6 +49,7 @@ pub use ode::{BoundaryData, DifferentialSystem, FlowDiagnostics, FlowResult};
 pub use options::{
     CancellationToken, FlowOptions, MassMode, Prescription, Progress, RecursionMode, RunContext,
 };
+pub use physical_family::PreparedPhysicalFamily;
 pub use physical_transport::RustFlow;
 pub use reduction::{ReductionBackend, RustRedBackend, TableBackend};
 pub use transport_cache::RustFlowCache;

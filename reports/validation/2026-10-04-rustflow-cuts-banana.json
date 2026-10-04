@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "milestone": "Native cut inputs, guarded AMF physical seeds, partial infinity boundaries, and equal-mass banana acceptance",
+  "date_utc": "2026-10-04",
+  "base_commit": "586a48f56f5dc57db32cd6f7159c581e0325896f",
+  "release_tests": {
+    "command": "cargo test --release -p symbolica-amflow --lib --tests -j 6",
+    "passed": 206,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 35
+  },
+  "documentation_tests": {
+    "command": "cargo test --release -p symbolica-amflow --doc -j 6",
+    "passed": 1,
+    "failed": 0
+  },
+  "clippy": {
+    "command": "cargo clippy -p symbolica-amflow --all-targets -j 6 -- -D warnings",
+    "passed": true,
+    "dependency_note": "Existing RustRed dead-code warnings; RustRed source and 12-slot dispatch unchanged."
+  },
+  "format": {
+    "command": "cargo fmt -p symbolica-amflow --check",
+    "passed": true
+  },
+  "hepkit_commit": "a33254faf0ac960c0589891ffdd2d8f38d334b05",
+  "source_fingerprints": {
+    "DEPENDENCY_SOURCE_DIGEST": "4b623d6a4133939fe08a70ce047dd63bc3c693586f054ea47547c382dd968bfb",
+    "PORT_SOURCE_DIGEST": "2215c8e8a5dc9eb353b599cb65e92bb8589f345f3d3355342bfc8008f3ec32a4"
+  },
+  "numerical_scope": {
+    "equal_mass_banana": "All four masters, epsilon powers 0 through 4, at t=-1 and 32. Partial analytic infinity constraints, independent 60/80-digit and 80/112-order recomputation, comparison to live pinned DiffExp within 20 absolute digits.",
+    "native_graph_physical_cache": "Native HEPKit DOT/model -> symbolic family -> common derivative basis -> independently verified 36-digit AMF seed -> cache transports s=-1 to -2 and -3 at 20 digits; exact repeated destination uses cache.",
+    "two_body_cuts": "Exact native cut IBPs and oriented native graph input; unequal-mass volume and raised cuts through epsilon power1 at20digits; independent uncut AMF discontinuities at epsilon1/13 and1/17; energy reversal, threshold support, loop Jacobian, numerator cancellation and cut cache identity."
+  },
+  "reuse": [
+    "HEPKit DiagramCut and LoopMomentumBasis own cut momentum orientation and routing",
+    "HEPKit Kinematics::two_body_phase_space owns the D=4 angular measure",
+    "Linnet owns native SCC and union-find; coefficient algebra remains Symbolica",
+    "Existing RustRed cut restrictions and exact IBP solver are used without checkout modifications"
+  ],
+  "cache_checks": [
+    "Nonzero reduction assumptions survive matrix cancellation and participate in version2 binary identity",
+    "Original matrix poles survive stationary-coordinate pullback cancellation",
+    "Matrix 1/(s-epsilon) retains its epsilon-expanded singularity at s=0; a purely formal reduction guard s-epsilon remains generic there",
+    "An unsafe nearer starting point is filtered before choosing a safe farther point",
+    "Input family parameters and normalization are retained even when absent from the derivative matrices"
+  ],
+  "limitations": [
+    "General mixed real/virtual cut boundary recursion remains incomplete",
+    "Square-root branch transport, full five-point and full Higgs+jet amplitude acceptance remain incomplete",
+    "Original hour-long four-target AMFlow paper acceptance retained as prior evidence, not repeated after these changes",
+    "No overall performance parity or matched speedup claimed"
+  ],
+  "sha256": {
+    "target/rustflow-cuts-banana-final-tests.log": "7de0450c266339d78b0dcb22a50f9e0f3153fe3627ae19309841973e7ef1442a",
+    "target/rustflow-cuts-banana-final-clippy.log": "128f071c67cdd18bdf462c66f5fc3aa7c78ead6283a01111fb36b090ed949cab",
+    "target/rustflow-cuts-banana-final-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "target/rustflow-cuts-banana-doc-tests.log": "f0ca4c3ecaa273ac2fb082d42849c0f72cd0b641788c3ff09c703325c6ad28b2",
+    "fixtures/diffexp/banana-equal.json": "341f13cc60bd9f519f13528bf96e16dcf607422d6295b90546d543633b00d8f0",
+    "scripts/patches/hepkit-linnet-strongly-connected.patch": "e36c83b0627fde510af2193c565875ef608bb0d58d9d247a64d6721dbccabfb5"
+  }
+}

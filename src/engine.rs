@@ -765,7 +765,7 @@ fn fit_samples_refined(
     fit_samples_refined_leading(targets, leading, last, options, evaluate)
 }
 
-fn fit_samples_refined_leading(
+pub(crate) fn fit_samples_refined_leading(
     targets: usize,
     leading: i32,
     last: i32,

@@ -266,6 +266,8 @@ struct TransportRequest {
     #[serde(default = "one")]
     normalization: String,
     branch_domain: String,
+    #[serde(default)]
+    nonzero_conditions: Vec<String>,
     leading_epsilon_power: i32,
     last_epsilon_power: i32,
     cache_directory: PathBuf,
@@ -303,12 +305,17 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
         .iter()
         .map(|a| parse(a, ns))
         .collect::<CliResult<Vec<_>>>()?;
-    let flow = RustFlow::new(
+    let flow = RustFlow::with_conditions(
         system,
         &basis,
         &parse(&request.normalization, ns)?,
         options.prescription,
         &request.branch_domain,
+        &request
+            .nonzero_conditions
+            .iter()
+            .map(|a| parse(a, ns))
+            .collect::<CliResult<Vec<_>>>()?,
     )?;
     let range = EpsilonRange::new(request.leading_epsilon_power, request.last_epsilon_power)?;
     let cache_directory = directory.join(request.cache_directory);

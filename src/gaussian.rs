@@ -214,29 +214,26 @@ fn wick(
     let mut sum = Atom::new();
     let n = loops.len();
     for pairs in pairings(&(0..n).collect::<Vec<_>>()) {
-        let mut parents = (0..n).collect::<Vec<_>>();
-        fn root(parents: &[usize], mut i: usize) -> usize {
-            while parents[i] != i {
-                i = parents[i];
-            }
-            i
-        }
+        let mut components = linnet::union_find::UnionFind::new(
+            external
+                .iter()
+                .map(|end| end.iter().copied().collect::<Vec<_>>())
+                .collect(),
+        );
         for &(i, j) in links.iter().chain(&pairs) {
-            let a = root(&parents, i);
-            let b = root(&parents, j);
-            parents[a] = b;
+            components.union(
+                linnet::half_edge::involution::Hedge(i),
+                linnet::half_edge::involution::Hedge(j),
+                |mut left, mut right| {
+                    left.append(&mut right);
+                    left
+                },
+            );
         }
         let mut term = pairs.iter().fold(Atom::num(1), |a, &(i, j)| {
             -a * &inverse[loops[i]][loops[j]] / Atom::num(2)
         });
-        for k in 0..n {
-            if root(&parents, k) != k {
-                continue;
-            }
-            let ends = (0..n)
-                .filter(|&i| root(&parents, i) == k)
-                .filter_map(|i| external[i])
-                .collect::<Vec<_>>();
+        for (_, ends) in components.iter_set_data() {
             match ends.as_slice() {
                 [] => term *= dimension,
                 [a, b] => term *= &gram[*a][*b],

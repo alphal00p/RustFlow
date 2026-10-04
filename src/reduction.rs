@@ -14,6 +14,42 @@ pub struct Reduction {
 
 pub trait ReductionBackend: Send + Sync {
     fn identity(&self) -> String;
+
+    /// Cut support is explicit. An uncut backend must never silently discard
+    /// the integration measure or claim missing-cut sectors as ordinary masters.
+    fn reduce_cut(
+        &self,
+        _family: &crate::cuts::CutFamily,
+        _targets: &[Integral],
+        _context: &RunContext,
+    ) -> Result<Reduction> {
+        Err(Error::Unsupported(
+            "this reduction backend does not support cut families".into(),
+        ))
+    }
+
+    fn reduce_cut_at_epsilon(
+        &self,
+        family: &crate::cuts::CutFamily,
+        targets: &[Integral],
+        epsilon: &Rational,
+        context: &RunContext,
+    ) -> Result<Reduction> {
+        let mut result = self.reduce_cut(family, targets, context)?;
+        let rules = BTreeMap::from([(
+            Atom::var(family.family().epsilon),
+            Atom::num(epsilon.clone()),
+        )]);
+        for terms in result.rules.values_mut() {
+            for coefficient in terms.values_mut() {
+                *coefficient = substitute(coefficient, &rules).together().cancel();
+            }
+        }
+        for condition in &mut result.nonzero_conditions {
+            *condition = substitute(condition, &rules).together().cancel();
+        }
+        Ok(result)
+    }
     fn reduce_at_epsilon(
         &self,
         family: &IntegralFamily,
@@ -103,6 +139,29 @@ impl Default for RustRedBackend {
 }
 
 impl ReductionBackend for RustRedBackend {
+    fn reduce_cut(
+        &self,
+        family: &crate::cuts::CutFamily,
+        targets: &[Integral],
+        context: &RunContext,
+    ) -> Result<Reduction> {
+        self.reduce_native_with_cuts(family.family(), targets, None, context, Some(family))
+    }
+    fn reduce_cut_at_epsilon(
+        &self,
+        family: &crate::cuts::CutFamily,
+        targets: &[Integral],
+        epsilon: &Rational,
+        context: &RunContext,
+    ) -> Result<Reduction> {
+        self.reduce_native_with_cuts(
+            family.family(),
+            targets,
+            Some(epsilon),
+            context,
+            Some(family),
+        )
+    }
     fn identity(&self) -> String {
         let mut identity = format!(
             "rustred-exact:{}:{}:{}:{}:{}:{}:{}:{}:{}:{}",
@@ -154,6 +213,22 @@ impl RustRedBackend {
         epsilon: Option<&Rational>,
         context: &RunContext,
     ) -> Result<Reduction> {
+        self.reduce_native_with_cuts(family, targets, epsilon, context, None)
+    }
+    fn reduce_native_with_cuts(
+        &self,
+        family: &IntegralFamily,
+        targets: &[Integral],
+        epsilon: Option<&Rational>,
+        context: &RunContext,
+        cuts: Option<&crate::cuts::CutFamily>,
+    ) -> Result<Reduction> {
+        if let Some(cuts) = cuts {
+            cuts.validate()?;
+            if !self.factorized {
+                return Err(Error::Unsupported("cut reduction requires the native factorized backend; the ordinary runtime bridge has no cut context".into()));
+            }
+        }
         if self.max_sector_batch == 0 {
             return Err(Error::InvalidInput(
                 "max_sector_batch must be positive".into(),
@@ -187,7 +262,7 @@ impl RustRedBackend {
                 family
             };
             return crate::native::reduce(
-                &converted, original, &dimension, &targets, self, context,
+                &converted, original, &dimension, &targets, self, context, cuts,
             );
         }
         let result = rustred::solver::bridge::solve_laporta(
@@ -602,6 +677,15 @@ pub struct SampledBackend<'a> {
     pub epsilon: Rational,
 }
 impl ReductionBackend for SampledBackend<'_> {
+    fn reduce_cut(
+        &self,
+        family: &crate::cuts::CutFamily,
+        targets: &[Integral],
+        context: &RunContext,
+    ) -> Result<Reduction> {
+        self.backend
+            .reduce_cut_at_epsilon(family, targets, &self.epsilon, context)
+    }
     fn identity(&self) -> String {
         format!("{}:epsilon={}", self.backend.identity(), self.epsilon)
     }
@@ -631,6 +715,26 @@ impl<'a> ReductionSession<'a> {
     }
 }
 impl ReductionBackend for ReductionSession<'_> {
+    // Cut-aware native/checkpoint caches retain their own measure identity.
+    // Do not mix these with this session's existing uncut family rule table.
+    fn reduce_cut(
+        &self,
+        family: &crate::cuts::CutFamily,
+        targets: &[Integral],
+        context: &RunContext,
+    ) -> Result<Reduction> {
+        self.backend.reduce_cut(family, targets, context)
+    }
+    fn reduce_cut_at_epsilon(
+        &self,
+        family: &crate::cuts::CutFamily,
+        targets: &[Integral],
+        epsilon: &Rational,
+        context: &RunContext,
+    ) -> Result<Reduction> {
+        self.backend
+            .reduce_cut_at_epsilon(family, targets, epsilon, context)
+    }
     fn reduce_at_epsilon(
         &self,
         family: &IntegralFamily,

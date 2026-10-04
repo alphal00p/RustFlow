@@ -246,6 +246,37 @@ impl<B: ReductionBackend> CachedBackend<B> {
 }
 
 impl<B: ReductionBackend> ReductionBackend for CachedBackend<B> {
+    fn reduce_cut(
+        &self,
+        family: &crate::cuts::CutFamily,
+        targets: &[Integral],
+        context: &RunContext,
+    ) -> Result<Reduction> {
+        CachedBackend {
+            backend: crate::cuts::CutBackendView {
+                backend: &self.backend,
+                cuts: family.cuts(),
+            },
+            directory: self.directory.clone(),
+        }
+        .reduce(family.family(), targets, context)
+    }
+    fn reduce_cut_at_epsilon(
+        &self,
+        family: &crate::cuts::CutFamily,
+        targets: &[Integral],
+        epsilon: &Rational,
+        context: &RunContext,
+    ) -> Result<Reduction> {
+        CachedBackend {
+            backend: crate::reduction::SampledBackend {
+                backend: &self.backend,
+                epsilon: epsilon.clone(),
+            },
+            directory: self.directory.clone(),
+        }
+        .reduce_cut(family, targets, context)
+    }
     fn reduce_at_epsilon(
         &self,
         family: &IntegralFamily,

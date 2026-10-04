@@ -34,6 +34,20 @@ The original 20-digit two-loop acceptance is retained as prior evidence; this
 milestone did not repeat its hour-long full Laurent run. Full DiffExp benchmarks,
 general cut boundaries, and full Higgs+jet amplitude evaluation remain incomplete.
 
+The native HEPKit milestone introduced the DOT/model CLI and delegated tensor
+projection to HEPKit. The subsequent cut/boundary milestone adds native Linnet
+connectivity and strongly connected components, reverse-unitarity IBP metadata,
+positive-energy two-body phase space, and partial Frobenius coefficient matching.
+The full [equal-mass banana system](banana-equal.md) reaches both reference points
+from its analytic infinity boundary through ε⁴. Native graph families can now
+prepare common physical equations and generate verified AMF seeds directly into
+the growing cache. Exact reduction assumptions and original matrix domains are
+retained even when a stationary coordinate cancels a pole from the pullback.
+The [cut/boundary validation report](../reports/validation/2026-10-04-rustflow-cuts-banana.json)
+records 206 passing release tests plus one documentation test, strict Clippy and
+formatting. General mixed real/virtual cut boundaries and algebraic physical
+transport remain outside the current numerical coverage.
+
 The original paper's mandatory numerical acceptance gate passes: all four
 two-loop targets at s=30, t=-10/3, m²=1 have automatically generated Laurent
 coefficients from ε⁻⁴ through ε⁰ with 20 verified decimal digits and the physical

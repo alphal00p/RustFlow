@@ -288,38 +288,26 @@ impl DifferentialSystem {
     /// Strongly connected blocks in dependency order, independent of input ordering.
     pub fn blocks(&self) -> Result<Vec<Vec<usize>>> {
         self.validate()?;
-        let n = self.matrix.len();
-        let mut reach = vec![vec![false; n]; n];
+        use linnet::half_edge::{
+            HedgeGraph, algorithms::DirectionBasis, builder::HedgeGraphBuilder,
+        };
+        let mut builder = HedgeGraphBuilder::<(), usize>::new();
+        let nodes = (0..self.matrix.len())
+            .map(|i| builder.add_node(i))
+            .collect::<Vec<_>>();
         for (i, row) in self.matrix.iter().enumerate() {
-            for (j, a) in row.iter().enumerate() {
-                reach[i][j] = i == j || !a.is_zero();
-            }
-        }
-        for k in 0..n {
-            for i in 0..n {
-                for j in 0..n {
-                    reach[i][j] |= reach[i][k] && reach[k][j];
+            for (j, coefficient) in row.iter().enumerate() {
+                if i != j && !coefficient.is_zero() {
+                    builder.add_edge(nodes[i], nodes[j], (), true);
                 }
             }
         }
-        let mut remaining = (0..n).collect::<std::collections::BTreeSet<_>>();
-        let mut blocks = Vec::new();
-        while !remaining.is_empty() {
-            let i = *remaining
-                .iter()
-                .find(|&&i| remaining.iter().all(|&j| !reach[i][j] || reach[j][i]))
-                .unwrap();
-            let block = remaining
-                .iter()
-                .copied()
-                .filter(|&j| reach[i][j] && reach[j][i])
-                .collect::<Vec<_>>();
-            for j in &block {
-                remaining.remove(j);
-            }
-            blocks.push(block);
-        }
-        Ok(blocks)
+        let graph: HedgeGraph<(), usize> = builder.build();
+        Ok(graph
+            .strongly_connected_components(DirectionBasis::Underlying)
+            .into_iter()
+            .map(|component| component.into_iter().map(|node| node.0).collect())
+            .collect())
     }
 }
 

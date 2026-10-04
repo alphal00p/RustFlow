@@ -118,6 +118,13 @@ boundary and a contour below `t=1`. Orders 50 and 75 agree to 24 digits; the
 refined result agrees with the notebook to 30 digits. This is not yet the full
 DiffExp benchmark gate or a Rust performance comparison.
 
+The equal-mass banana gate now has a production regression through ε⁴ at both
+`-1` and `32`, with analytic partial infinity data and independent precision/order
+refinement. See [its provenance and measured scope](banana-equal.md). The growing
+cache, native HEPKit DOT input, AMF-generated physical seeds, and two-body cut
+terminal also have offline release regressions. These milestones do not complete
+the algebraic-kernel, full five-point, full amplitude, or performance gates.
+
 ## Scope of the 12-slot limit
 
 `src/native.rs` dispatches `solve::<1>` through `solve::<12>`. RustRed's dynamic

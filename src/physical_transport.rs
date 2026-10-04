@@ -35,9 +35,39 @@ impl RustFlow {
         prescription: Prescription,
         branch_domain: &str,
     ) -> Result<Self> {
-        let identity =
-            BoundaryIdentity::new(&system, basis, normalization, prescription, branch_domain)?;
+        Self::with_conditions(
+            system,
+            basis,
+            normalization,
+            prescription,
+            branch_domain,
+            &[],
+        )
+    }
+
+    /// Preserve all exact assumptions used in deriving the physical system.
+    pub fn with_conditions(
+        system: KinematicSystem,
+        basis: &[Atom],
+        normalization: &Atom,
+        prescription: Prescription,
+        branch_domain: &str,
+        conditions: &[Atom],
+    ) -> Result<Self> {
+        let identity = BoundaryIdentity::with_conditions(
+            &system,
+            basis,
+            normalization,
+            prescription,
+            branch_domain,
+            conditions,
+        )?;
         Ok(Self { system, identity })
+    }
+
+    /// The exact common-basis physical connection.
+    pub fn system(&self) -> &KinematicSystem {
+        &self.system
     }
 
     pub fn identity(&self) -> &BoundaryIdentity {
@@ -62,7 +92,15 @@ impl RustFlow {
         let p = Precision::decimal(options.digits + options.guard_digits)?;
         let target = CachedPoint::Exact(destination.clone());
         let query = BoundaryQuery::new(&self.identity, &target, range, options.digits)?;
-        let matched=cache.best(&query,policy,p)?.ok_or_else(||Error::IncompleteReduction("no compatible cached physical boundary with the requested epsilon range and verified accuracy".into()))?;
+        // Reduction domains are enforced independently of the caller's sheet
+        // policy. Reject unsafe sources before ranking, so another valid source
+        // can be selected rather than failing after a nearest-source choice.
+        let guarded_policy = GuardedCost {
+            identity: &self.identity,
+            policy,
+            digits: options.digits,
+        };
+        let matched=cache.best(&query,&guarded_policy,p)?.ok_or_else(||Error::IncompleteReduction("no compatible cached physical boundary with the requested epsilon range, verified accuracy and regular reduction domain".into()))?;
         let source = matched.boundary.clone();
         let coordinates = source.point.rounded_coordinates_as_exact()?;
         let count = (i64::from(range.last) - i64::from(range.leading) + 1) as usize;
@@ -91,6 +129,16 @@ impl RustFlow {
             &coordinates,
             destination,
         )?;
+        if !self.identity.conditions_admit_straight_path(
+            &source.point,
+            &target,
+            p,
+            options.digits,
+        )? {
+            return Err(Error::Unsupported(
+                "selected physical path leaves the reduction domain".into(),
+            ));
+        }
         let pulled_back = self.system.pullback(&path)?;
         let system =
             EpsilonSystem::from_differential_system(&pulled_back, self.system.epsilon, count - 1)?;
@@ -283,3 +331,34 @@ fn strongest_evidence(
 
 /// Compatibility name for the physical transport engine.
 pub type PhysicalTransport = RustFlow;
+
+struct GuardedCost<'a> {
+    identity: &'a BoundaryIdentity,
+    policy: &'a dyn TransportCost,
+    digits: u32,
+}
+impl TransportCost for GuardedCost<'_> {
+    fn cost(
+        &self,
+        source: &CachedBoundary,
+        target: &CachedPoint,
+        p: Precision,
+    ) -> Result<Option<Float>> {
+        if !self
+            .identity
+            .conditions_admit_straight_path(&source.point, target, p, self.digits)?
+        {
+            return Ok(None);
+        }
+        self.policy.cost(source, target, p)
+    }
+    fn compare_tied_costs(
+        &self,
+        left: &CachedBoundary,
+        right: &CachedBoundary,
+        target: &CachedPoint,
+        p: Precision,
+    ) -> Result<std::cmp::Ordering> {
+        self.policy.compare_tied_costs(left, right, target, p)
+    }
+}
