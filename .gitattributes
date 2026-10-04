@@ -1,2 +1,6 @@
 # Keep the upstream Mathematica fixtures byte-for-byte for source hashes.
 fixtures/amflow-2.0/*.wl -whitespace
+
+# Preserve byte-identical upstream fixtures and raw profiler output.
+fixtures/performance/*.wl -whitespace
+reports/performance/*-profile.txt -whitespace

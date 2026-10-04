@@ -7,6 +7,8 @@ reduction. Rust 2024; independent MIT-licensed repository.
 **Work in progress:** the full AMFlow 2.0 acceptance gate has not passed. See
 [coverage and limits](docs/coverage.md). Successful tadpole, bubble, and vacuum
 calculations do not establish support for arbitrary multiloop families.
+An executable [performance comparison](docs/performance.md) measures the Rust
+and original AMFlow 2.0 differential-equation solvers on identical inputs.
 
 ## Build
 

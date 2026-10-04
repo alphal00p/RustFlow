@@ -1,0 +1,39 @@
+Profile command: perf record -F 499 -g --call-graph dwarf,16384 -- taskset -c 24 benchmark_de upstream_12_master/base/input.json
+Report command: perf report --stdio --no-inline --no-children --call-graph none --percent-limit 1
+Binary SHA-256: d65e585a829e8fe258e048af9313f44600e8b986d8fe9527da7b3f9138c5a392
+
+# To display the perf.data header info, please use --header/--header-only options.
+#
+#
+# Total Lost Samples: 0
+#
+# Samples: 878  of event 'cpu/cycles/Pu'
+# Event count (approx.): 4594164947
+#
+# Overhead  Command       Shared Object     Symbol                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
+# ........  ............  ................  ....................................................................................................................................................................................................................................................................................................................................................................................................................................................................................................
+#
+    24.43%  benchmark_de  benchmark_de      [.] <symbolica_amflow::numeric::Precision>::mul
+     8.46%  benchmark_de  benchmark_de      [.] mpfr_mul
+     7.88%  benchmark_de  benchmark_de      [.] mpfr_init2
+     6.88%  benchmark_de  libc.so.6         [.] cfree@GLIBC_2.2.5
+     5.84%  benchmark_de  libc.so.6         [.] malloc
+     5.08%  benchmark_de  benchmark_de      [.] <symbolica_amflow::ode::CompiledSystem>::transport
+     4.10%  benchmark_de  benchmark_de      [.] __gmp_default_allocate
+     3.96%  benchmark_de  benchmark_de      [.] <symbolica_amflow::numeric::Precision>::neg
+     3.33%  benchmark_de  benchmark_de      [.] symbolica_amflow::ode::quotient_series
+     3.32%  benchmark_de  benchmark_de      [.] __gmpn_lshift_zen
+     2.95%  benchmark_de  benchmark_de      [.] mpfr_sub1sp
+     2.60%  benchmark_de  benchmark_de      [.] mpfr_add
+     2.19%  benchmark_de  benchmark_de      [.] __gmpn_mul
+     2.17%  benchmark_de  benchmark_de      [.] mpfr_add1sp
+     2.07%  benchmark_de  benchmark_de      [.] __gmpn_mul_basecase_zen
+     2.06%  benchmark_de  benchmark_de      [.] mpfr_clear
+     1.88%  benchmark_de  benchmark_de      [.] <rug::float::big::Float>::with_val::<rug::float::big::Float>
+     1.50%  benchmark_de  benchmark_de      [.] symbolica_amflow::ode::shift_polynomial
+     1.37%  benchmark_de  benchmark_de      [.] mpfr_sub
+
+
+#
+# (Tip: To compare hot regions in two workloads use perf record -b -o file ... ; perf diff --stream file1 file2)
+#
