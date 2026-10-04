@@ -1,0 +1,96 @@
+{
+  "schema_version": 1,
+  "scope": "Native registered-root rustflow transport CLI; standalone and integrated production validation passed",
+  "base_commit": "49a8e12a5861e345e36aabc836aa40d39287d2f5",
+  "cpu_affinity": 27,
+  "steering_schema": 1,
+  "binary_cache_schema": 4,
+  "commands": [
+    "bash target/cli-algebraic/compile.sh",
+    "taskset -c 27 target/cli-algebraic/tests --nocapture"
+  ],
+  "results": {
+    "strict_standalone_clippy": "passed for CLI binary and integration test",
+    "algebraic_cli_tests": {
+      "passed": 5,
+      "failed": 0,
+      "test_harness_seconds": "0.89"
+    },
+    "read_only_peer_review": "reduction_audit found no issues",
+    "existing_cli_tests": {
+      "passed": 2,
+      "failed": 0,
+      "log": "target/cli-algebraic/legacy-tests.log"
+    }
+  },
+  "coverage": [
+    "progressive source selection and exact hit",
+    "binary save/restart without seeds",
+    "opposite root-sheet isolation and separate seeded sheets",
+    "missing, foreign and alias-duplicate root germ rejection",
+    "completed-point persistence after later root-crossing rejection",
+    "legacy rational coordinate-map inputs and unchanged output"
+  ],
+  "limits": [
+    "No threshold-crossing or complex physical cache transport beyond existing native algebraic scope",
+    "Root germs are discrete sheet data; branch_domain remains caller assertion for additional integral monodromy",
+    "Same RustFlow and RustFlowCache implementations; no CLI solver or second bank"
+  ],
+  "files": {
+    "target/cli-algebraic/rustflow.rs": {
+      "sha256": "b9cc04810e2dca6a10ec42a3ef92739cb665498c93a0e14c0c8ea94b3702ae91",
+      "bytes": 20249
+    },
+    "target/cli-algebraic/integration/cli_algebraic.rs": {
+      "sha256": "4fb0ec982c79a5d32971f15df535e1d260c8c8f5e34cb01e6242f7b77cb9a9f7",
+      "bytes": 8013
+    },
+    "target/cli-algebraic/examples/cli/algebraic-transport.json": {
+      "sha256": "c4103b7d5336be1ea5269d615635cfcfb5a9db4f7db63340402a491048a29b2e",
+      "bytes": 1701
+    },
+    "target/cli-algebraic/docs/cli.md": {
+      "sha256": "67c5e00c82a07ceee0eebb4313c21702bfcbb7dd5baa486553e8ff1daa023011",
+      "bytes": 8060
+    },
+    "target/cli-algebraic/compile.sh": {
+      "sha256": "bf9ca5be6ee1a95b03d5ee0cd5af0f6817d67e9af63cb969b3075d355ee8dea3",
+      "bytes": 1514
+    },
+    "target/cli-algebraic/compile.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "target/cli-algebraic/tests.log": {
+      "sha256": "1328e87757756882e817c4e3dcc6fa5e893105f6baae2ea4d0131d38dd5061a4",
+      "bytes": 488
+    },
+    "target/cli-algebraic/rustflow": {
+      "sha256": "4b7274b4e771ffcfd6e2efa2c954c8725379986312881dcb712a0ef875da7edd",
+      "bytes": 636568896
+    },
+    "target/cli-algebraic/tests": {
+      "sha256": "250444dd2d00755b129b5d90eb1a609a987b4ef22fc40cca92a18c26cc1fe547",
+      "bytes": 569506352
+    },
+    "target/algebraic-cache-production/current-deps/libsymbolica_amflow.rlib": {
+      "sha256": "3d3b1f1d8494cfc91be388ad17e418749684f47127eff345298b8fd0afe62690",
+      "bytes": 361058536
+    },
+    "target/cli-algebraic/legacy-compile.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "target/cli-algebraic/legacy-tests.log": {
+      "sha256": "9562cc440b26beabeae0e09204f66ef7f484aace9c1b4b6d7adbb8b842c82d87",
+      "bytes": 236
+    },
+    "target/cli-algebraic/legacy-tests": {
+      "sha256": "3d5584af7fc9ad00b9326d99033f5b1d5e33da4d9513134f16b16792f6caff17",
+      "bytes": 569472512
+    }
+  },
+  "integration_status": "Passed complete central release gate: 283 unit/integration tests plus one documentation test, strict all-target Clippy and formatting",
+  "central_release_report": "reports/validation/2026-10-04-canonical-release.json",
+  "standalone_schema_note": "The historical standalone CLI snapshot used schema3; the integrated central gate uses schema4."
+}

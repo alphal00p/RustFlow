@@ -1,0 +1,159 @@
+{
+  "schema_version": 1,
+  "base_commit": "e7bfd9fdcfd09a886943d1a0cc3a59e32fd8f333",
+  "scope": "Canonical same-cache native adapter; standalone and integrated production validation passed",
+  "cpu_affinity": 27,
+  "binary_cache_schema": 4,
+  "test_counts": {
+    "canonical_cache": 4,
+    "canonical_form": 9,
+    "existing_engine": 7,
+    "total_passed": 20,
+    "failed": 0
+  },
+  "test_harness_seconds": "8.59",
+  "strict_standalone_clippy": "passed",
+  "commands": [
+    "bash target/canonical-cache/compile.sh",
+    "taskset -c 27 target/canonical-cache/tests --nocapture",
+    "bash target/canonical-cache/clippy.sh"
+  ],
+  "coverage": [
+    "progressive canonical root transport and exact source selection",
+    "binary mixed-representation restart and compatible exact hit",
+    "independent refined dense connection comparison and analytic dlog coefficients at20 digits",
+    "opposite sheet and missing-germ rejection",
+    "ordered canonical identity separation from dense connection",
+    "rootless canonical same-bank transport",
+    "canceled source guards and insufficient inherited source evidence",
+    "original and removable letter/radicand/path-coordinate holes through canonical API regressions"
+  ],
+  "limits": [
+    "Regular real nonzero-radicand straight paths and explicit local germs; additional monodromy remains caller contract",
+    "No cross-representation equivalence or stronger accuracy inferred from working bits",
+    "Numerical uncertainty estimates are not interval certificates",
+    "No end-to-end performance claim from synthetic adapter tests"
+  ],
+  "files": {
+    "target/canonical-cache/probe.rs": {
+      "sha256": "25a7e303bb9badda6634676cbce89f0b203f91b88ff8c844c06f5af8916fa347",
+      "bytes": 591
+    },
+    "target/canonical-cache/family.rs": {
+      "sha256": "5c86ebb7bdc5894801f8cf34064b3341aa640e4033136ee67c7287c86dd910f8",
+      "bytes": 2658
+    },
+    "target/canonical-cache/physical_conditions.rs": {
+      "sha256": "a522e5151d287664378f2e7ad8b437dd6dc2fa51afbf818a2b342c218526e056",
+      "bytes": 12896
+    },
+    "target/canonical-cache/clippy.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "target/canonical-cache/clippy.sh": {
+      "sha256": "9a905ed8edc1c9938ef6be69707f181fd3489496327e01a427d79457bd841fda",
+      "bytes": 993
+    },
+    "target/canonical-cache/canonical_tests.rs": {
+      "sha256": "20b1a6d2e30e41299364e284548453cf68afa578eb0993ac631a2ab068186b76",
+      "bytes": 13887
+    },
+    "target/canonical-cache/local_tests.rs": {
+      "sha256": "3d42ef0db36648a7eded3298c07a17fab4ff022a5e794f299d9c78e532d50540",
+      "bytes": 10765
+    },
+    "target/canonical-cache/algebraic.rs": {
+      "sha256": "ff8f6113d3b19c845329f6d8f0bbd588f8b49a46445be63d1d2104bfec60e22a",
+      "bytes": 59107
+    },
+    "target/canonical-cache/compile.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "target/canonical-cache/canonical.rs": {
+      "sha256": "591fe277542d77fd898c03dc8976e8fd127db42956a033350caf0b85fd6f343c",
+      "bytes": 12471
+    },
+    "target/canonical-cache/physical_transport.rs.patch": {
+      "sha256": "55c8ac9ba2c849d104077587d481e1bc350b06810f301416a09c77a566c0db86",
+      "bytes": 4664
+    },
+    "target/canonical-cache/tests.log": {
+      "sha256": "a7a98a79041223326f8c2023ac78fb7235f3d991259cbe18c1bca2ab120be349",
+      "bytes": 1323
+    },
+    "target/canonical-cache/tests-final.log": {
+      "sha256": "52d125b23637325c25dcd95c6564707e65f128bc3225a346a9721b25adb9b2d5",
+      "bytes": 2168
+    },
+    "target/canonical-cache/physical_conditions_tests.rs": {
+      "sha256": "9181e81e9cd95f4dd50dc7e1309280503a26bebd279ca75243b26a464514ddb2",
+      "bytes": 10619
+    },
+    "target/canonical-cache/tests.rs": {
+      "sha256": "e10aefa56c594d156e5b897297c1e192d7d60f626933608a7e5325368ea06bc3",
+      "bytes": 10798
+    },
+    "target/canonical-cache/fixed_series.rs": {
+      "sha256": "a0a0e13c37fc129ed0f6e5e10768343dc1e913d512b7ef5598c4a54981e295db",
+      "bytes": 12605
+    },
+    "target/canonical-cache/transport_cache.rs.patch": {
+      "sha256": "2009044a933633ab11bda507f5288ba25fc6122d43d97d39a1038d3f47b5ed6b",
+      "bytes": 18661
+    },
+    "target/canonical-cache/kinematics.rs": {
+      "sha256": "a5df4d1682ccf6e9457ac8a5c0f9ae1dcf51c7089a5e653c215ade7b6809d0fc",
+      "bytes": 10795
+    },
+    "target/canonical-cache/transport_cache.rs": {
+      "sha256": "b108bf30b6660893c63801f914685f288e44e5fa834c0c8e34de6dd3eaaf61f6",
+      "bytes": 73710
+    },
+    "target/canonical-cache/quotient.rs": {
+      "sha256": "543b34a27d485d3c5450c65cff7defbc24106c9560854615ebfb3b0c84f75117",
+      "bytes": 4127
+    },
+    "target/canonical-cache/diffexp.rs": {
+      "sha256": "58bee03c34b05f4c458cdb4cb335a354e42120d5f3fe7fd36b3f57ac2f3297e0",
+      "bytes": 27414
+    },
+    "target/canonical-cache/physical_transport.rs": {
+      "sha256": "7bf4e21eb5abffa2210fac4bfe17edd8982ea896fdc16fc128a5981d3db98412",
+      "bytes": 22049
+    },
+    "target/canonical-cache/compile.sh": {
+      "sha256": "e7e6f025e07cc322208bb7fe0dc62dd7def24cb847f7c4fe98481bd0c1ea4370",
+      "bytes": 965
+    },
+    "target/canonical-cache/ode.rs": {
+      "sha256": "ba8c2e85c320fd55e8ab27ff6117119c564a19359566f5040e1318e455cf3f4d",
+      "bytes": 36621
+    },
+    "target/canonical-cache/tests": {
+      "sha256": "f8c1e8f2fa422ea70451d8f1c8f8ffb344e9c65de3e7c823cbff20d37c7dba46",
+      "bytes": 585376224
+    }
+  },
+  "linked_production_library": {
+    "path": "target/algebraic-cache-production/current-deps/libsymbolica_amflow.rlib",
+    "sha256": "3d3b1f1d8494cfc91be388ad17e418749684f47127eff345298b8fd0afe62690",
+    "note": "Standalone source snapshots override local algebraic/domain/cache/transport modules; numeric/public types from immutable release library"
+  },
+  "peer_reviews": [
+    "reduction_audit: no findings",
+    "upstream_performance: no findings",
+    "parent: identity/dispatch reviewed"
+  ],
+  "source_note": "The numerical harness included the canonical API test before a clone-to-slice Clippy-only cleanup; the final standalone Clippy checked the cleaned version. The central Cargo gate validates integrated production sources.",
+  "integrated_files": {
+    "src/transport_cache.rs": "b108bf30b6660893c63801f914685f288e44e5fa834c0c8e34de6dd3eaaf61f6",
+    "src/physical_transport.rs": "7bf4e21eb5abffa2210fac4bfe17edd8982ea896fdc16fc128a5981d3db98412",
+    "tests/canonical_cache.rs": "e10aefa56c594d156e5b897297c1e192d7d60f626933608a7e5325368ea06bc3",
+    "tests/physical_conditions.rs": "9181e81e9cd95f4dd50dc7e1309280503a26bebd279ca75243b26a464514ddb2",
+    "docs/canonical-cache.md": "fb449230313232626877e503cd9235efa4d9d83973da890c79f9d942ed50c6c3"
+  },
+  "integration_status": "Passed complete central release gate: 283 unit/integration tests plus one documentation test, strict all-target Clippy and formatting",
+  "central_release_report": "reports/validation/2026-10-04-canonical-release.json"
+}

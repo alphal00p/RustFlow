@@ -4,7 +4,9 @@
 //! intermediate physical points are independently checked and retained. The
 //! current orchestrator supports regular straight paths; threshold prescriptions
 //! and partial singular boundaries are handled by separate solver interfaces.
-use crate::algebraic::{AlgebraicKinematicSystem, AlgebraicSystem, CompiledAlgebraicSystem};
+use crate::algebraic::{
+    AlgebraicKinematicSystem, AlgebraicSystem, CanonicalAlgebraicSystem, CompiledAlgebraicSystem,
+};
 use crate::diffexp::{EpsilonSolution, EpsilonSystem, transport_epsilon};
 use crate::kinematics::{KinematicPath, KinematicSystem};
 use crate::transport_cache::{
@@ -170,10 +172,84 @@ impl RustFlow<AlgebraicKinematicSystem> {
     }
 }
 
+impl RustFlow<CanonicalAlgebraicSystem> {
+    pub fn new_canonical(
+        system: CanonicalAlgebraicSystem,
+        basis: &[Atom],
+        normalization: &Atom,
+        prescription: Prescription,
+        branch_domain: &str,
+    ) -> Result<Self> {
+        Self::with_canonical_conditions(
+            system,
+            basis,
+            normalization,
+            prescription,
+            branch_domain,
+            &[],
+        )
+    }
+    /// Keep the canonical form separate until a physical path is selected.
+    pub fn with_canonical_conditions(
+        system: CanonicalAlgebraicSystem,
+        basis: &[Atom],
+        normalization: &Atom,
+        prescription: Prescription,
+        branch_domain: &str,
+        conditions: &[Atom],
+    ) -> Result<Self> {
+        let identity = BoundaryIdentity::with_canonical_conditions(
+            &system,
+            basis,
+            normalization,
+            prescription,
+            branch_domain,
+            conditions,
+        )?;
+        Ok(Self { system, identity })
+    }
+    /// Use an explicit germ when roots are registered, and None otherwise.
+    /// The same real regular path and caller monodromy contract as the dense
+    /// algebraic interface applies; no dense physical matrix is assembled.
+    #[allow(clippy::too_many_arguments)] // Physical transport inputs plus explicit optional root germ.
+    pub fn evaluate_to(
+        &self,
+        cache: &mut RustFlowCache,
+        destination: &BTreeMap<Symbol, Atom>,
+        germ: Option<&RootGerm>,
+        range: EpsilonRange,
+        options: &FlowOptions,
+        context: &RunContext,
+        policy: &dyn TransportCost,
+    ) -> Result<PhysicalResult> {
+        let point = CachedPoint::Exact(destination.clone());
+        let point = match (self.system.roots().is_empty(), germ) {
+            (true, None) => point,
+            (false, Some(germ)) => point.with_root_germ(germ.clone())?,
+            _ => {
+                return Err(Error::InvalidInput(
+                    "canonical root germ must be supplied exactly when roots are registered".into(),
+                ));
+            }
+        };
+        evaluate_physical(
+            Connection::Canonical(&self.system),
+            &self.identity,
+            cache,
+            point,
+            range,
+            options,
+            context,
+            policy,
+        )
+    }
+}
+
 #[derive(Clone, Copy)]
 enum Connection<'a> {
     Rational(&'a KinematicSystem),
     Algebraic(&'a AlgebraicKinematicSystem),
+    Canonical(&'a CanonicalAlgebraicSystem),
 }
 impl Connection<'_> {
     fn pullback(&self, path: &KinematicPath, order: usize) -> Result<PreparedConnection> {
@@ -186,6 +262,7 @@ impl Connection<'_> {
                 )?)
             }
             Self::Algebraic(system) => PreparedConnection::Algebraic(system.pullback(path, order)?),
+            Self::Canonical(system) => PreparedConnection::Algebraic(system.pullback(path, order)?),
         })
     }
 }
@@ -219,11 +296,15 @@ impl PreparedConnection {
                 true,
             ),
             Self::Algebraic(system) => {
-                let seeds = source
-                    .point
-                    .root_germ()
-                    .ok_or_else(|| Error::InvalidInput("missing source root germ".into()))?
-                    .seeds();
+                let seeds = if system.roots.is_empty() {
+                    BTreeMap::new()
+                } else {
+                    source
+                        .point
+                        .root_germ()
+                        .ok_or_else(|| Error::InvalidInput("missing source root germ".into()))?
+                        .seeds()
+                };
                 crate::diffexp::refine_epsilon_transport(options, context, true, |p, refined| {
                     let compiled = system.compile(p)?;
                     let result = compiled.transport(

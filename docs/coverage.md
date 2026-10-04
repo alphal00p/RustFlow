@@ -70,6 +70,20 @@ passes 264 unit/integration tests and one documentation test, with strict Clippy
 and formatting. The full five-point regression and a native root-isolation
 performance reproducer remain explicit opt-in tests.
 
+The [canonical-system release gate](../reports/validation/2026-10-04-canonical-release.json)
+passes 283 unit/integration tests and one documentation test, strict Clippy and
+formatting. [Canonical dlog systems](canonical-systems.md) now restrict their
+letters to each path before assembling the connection and use the same growing
+[physical cache](canonical-cache.md), with binary schema 4. The CLI accepts
+registered roots and explicit germs. Exact polynomial grouping and shared source
+guards preserve removable letter, radicand and coordinate holes. The
+[full 13-master cache experiment](full13-canonical-cache.md) checks every epsilon
+coefficient, inherited accuracy, nearby reuse and restart against refined native
+transport and original DiffExp. A [connected two-loop sector](fivepoint-zmz-sector.md)
+adds 13 coupled/dependent masters with a live oracle and independent refinement;
+it does not complete the 75-master parent family. The two longer scientific
+regressions are run separately from this routine gate.
+
 The current [prescribed-contour interface](prescribed-contours.md) accepts
 explicit polynomial prescriptions. It does not infer them from a process.
 Registered roots now participate in the same [progressive cache](algebraic-cache.md),

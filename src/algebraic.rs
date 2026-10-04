@@ -5,6 +5,7 @@
 //! path and kernel cancellation; their norm conditions can conservatively exclude
 //! points regular on a particular sheet. Only accepted continuation steps advance
 //! branch state. Singular endpoints require a separate Frobenius treatment.
+mod canonical;
 mod quotient;
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution, EpsilonSystem};
 use crate::family::{encode_complex, imaginary_parameter, scalar_symbols, substitute};
@@ -17,6 +18,7 @@ use crate::{
     BoundaryData, ComplexFloat as C, DifferentialSystem, Error, FlowOptions, Precision,
     Prescription, Result, RunContext,
 };
+pub use canonical::CanonicalAlgebraicSystem;
 use std::collections::{BTreeMap, BTreeSet};
 use symbolica::prelude::*;
 
@@ -76,51 +78,22 @@ impl AlgebraicKinematicSystem {
     /// this interface conservatively requires invertibility on every sheet.
     pub fn nonzero_conditions(&self) -> Result<Vec<Atom>> {
         self.validate()?;
-        let root_atoms = self
-            .roots
-            .iter()
-            .map(|r| Atom::var(r.symbol))
-            .collect::<Vec<_>>();
-        let mut allowed = self
-            .derivatives
-            .keys()
-            .copied()
-            .chain([self.epsilon, imaginary_parameter()])
-            .map(Atom::var)
-            .collect::<BTreeSet<_>>();
-        allowed.extend(root_atoms.iter().cloned());
-        let mut conditions = Vec::new();
-        for root in &self.roots {
-            let value = rational(&root.radicand, &allowed)?;
-            conditions.push(value.numerator.to_expression());
-            conditions.push(value.denominator.to_expression());
-        }
-        for value in self.derivatives.values().flatten().flatten() {
-            let fraction = rational(value, &allowed)?;
-            let denominator = normalized_polynomial(
-                &fraction.denominator.to_expression(),
-                &root_atoms,
-                &self.roots,
-            )?;
-            if denominator.is_empty() {
-                return Err(Error::InvalidInput(
-                    "source denominator vanishes under root relations".into(),
-                ));
-            }
-            let inverse = quotient::invert_denominator(
-                &quotient::recompose(&denominator, &self.roots),
-                &self.roots,
-                &allowed,
-            )?;
-            for coefficient in inverse.values() {
-                conditions.push(rational(coefficient, &allowed)?.denominator.to_expression());
-            }
-        }
-        conditions = conditions.into_iter().map(|a| decoded(&a)).collect();
-        conditions.sort();
-        conditions.dedup();
-        conditions.retain(|a| !matches!(a.as_view(), AtomView::Num(_)));
-        Ok(conditions)
+        registered_domain_conditions(
+            &self
+                .derivatives
+                .values()
+                .flatten()
+                .flatten()
+                .cloned()
+                .collect::<Vec<_>>(),
+            &self.roots,
+            &self
+                .derivatives
+                .keys()
+                .copied()
+                .chain([self.epsilon])
+                .collect(),
+        )
     }
 
     pub fn validate(&self) -> Result<()> {
@@ -330,7 +303,10 @@ impl AlgebraicKinematicSystem {
         // Preserve every source domain before the Jacobian or another row
         // cancels it. Regular epsilon transport must also retain the generic
         // epsilon valuation at this physical point.
-        let mut nonzero_conditions = Vec::new();
+        let mut nonzero_conditions = crate::physical_conditions::rational_denominator_conditions(
+            &path.coordinates.values().cloned().collect::<Vec<_>>(),
+            &BTreeSet::from([path.parameter, imaginary_parameter()]),
+        )?;
         for guard in self.nonzero_conditions()? {
             // Select the generic epsilon valuation before physical restriction.
             // Otherwise an exceptional path can silently remove its leading term.
@@ -505,14 +481,16 @@ fn normalized_polynomial(
     roots: &[SquareRoot],
 ) -> Result<BTreeMap<Vec<usize>, Atom>> {
     let mut terms = BTreeMap::<Vec<usize>, Atom>::new();
-    // coefficient_list uses this native polynomial view internally. Keep its
-    // exponent vectors instead of rebuilding monomial Atoms and differentiating
-    // them only to recover the same integers.
-    for term in expression
-        .to_polynomial_in_vars::<i32>(root_atoms)
-        .into_iter()
-    {
-        let mut coefficient = term.coefficient.clone();
+    // Retain native exact rational coefficients. The general AtomField view
+    // performs statistical zero tests on large symbolic coefficients; a native
+    // polynomial-of-polynomials groups the same root powers using exact Q.
+    let polynomial: MultivariatePolynomial<_, i32> = encode_complex(expression)
+        .try_to_polynomial(&Q, root_atoms)
+        .map_err(|e| Error::Unsupported(format!("exact root polynomial required: {e}")))?;
+    let root_indices = (0..root_atoms.len()).collect::<Vec<_>>();
+    let grouped = polynomial.to_polynomial_in(&root_indices);
+    for term in grouped.into_iter() {
+        let mut coefficient = term.coefficient.to_expression();
         let mut odd = Vec::new();
         for (index, &exponent) in term.exponents.iter().enumerate() {
             coefficient *=
@@ -528,6 +506,50 @@ fn normalized_polynomial(
     }
     terms.retain(|_, coefficient| !coefficient.is_zero());
     Ok(terms)
+}
+
+/// Preserve raw denominator occurrences before native rational cancellation.
+/// Named-root inversion then removes root generators from these exact domains.
+fn registered_domain_conditions(
+    expressions: &[Atom],
+    roots: &[SquareRoot],
+    physical: &BTreeSet<Symbol>,
+) -> Result<Vec<Atom>> {
+    let mut variables = physical.clone();
+    variables.insert(imaginary_parameter());
+    let mut conditions = crate::physical_conditions::canonical_conditions(
+        &roots.iter().map(|r| r.radicand.clone()).collect::<Vec<_>>(),
+        &variables,
+    )?;
+    variables.extend(roots.iter().map(|r| r.symbol));
+    let allowed = variables.iter().map(|&s| Atom::var(s)).collect();
+    let root_atoms = roots
+        .iter()
+        .map(|r| Atom::var(r.symbol))
+        .collect::<Vec<_>>();
+    for condition in
+        crate::physical_conditions::rational_denominator_conditions(expressions, &variables)?
+    {
+        let fraction = rational(&condition, &allowed)?;
+        let normalized =
+            normalized_polynomial(&fraction.numerator.to_expression(), &root_atoms, roots)?;
+        if normalized.is_empty() {
+            return Err(Error::InvalidInput(
+                "source denominator vanishes under root relations".into(),
+            ));
+        }
+        for coefficient in
+            quotient::invert_denominator(&quotient::recompose(&normalized, roots), roots, &allowed)?
+                .values()
+        {
+            conditions.push(rational(coefficient, &allowed)?.denominator.to_expression());
+        }
+    }
+    conditions = conditions.into_iter().map(|a| decoded(&a)).collect();
+    conditions.sort();
+    conditions.dedup();
+    conditions.retain(|a| !matches!(a.as_view(), AtomView::Num(_)));
+    Ok(conditions)
 }
 
 impl AlgebraicSystem {
@@ -699,7 +721,20 @@ impl AlgebraicSystem {
             .iter()
             .map(|row| rational(&row[0], &allowed).map(|r| r.denominator.to_expression()))
             .collect::<Result<Vec<_>>>()?;
-        for condition in &self.nonzero_conditions {
+        let mut source_conditions = registered_domain_conditions(
+            &self
+                .system
+                .matrices
+                .iter()
+                .flatten()
+                .flatten()
+                .cloned()
+                .collect::<Vec<_>>(),
+            &self.roots,
+            &BTreeSet::from([self.system.variable]),
+        )?;
+        source_conditions.extend(self.nonzero_conditions.iter().cloned());
+        for condition in &source_conditions {
             let condition = rational(condition, &allowed)?;
             for part in [
                 condition.numerator.to_expression(),

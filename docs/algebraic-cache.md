@@ -60,8 +60,9 @@ interval-arithmetic error certificates. The source's verified accuracy and
 per-coefficient errors limit every new entry; repeating a low-accuracy source at
 higher working precision does not promote its evidence.
 
-Binary cache schema 3 stores the exact root registry and discrete germ. Loading
-a schema-2 snapshot is an explicit incompatibility error. The existing source
+Binary cache schema 4 stores the exact root registry, discrete germ and
+explicit dense/canonical connection representation. Loading snapshots from
+schemas 1 through 3 is an explicit incompatibility error. The existing source
 and dependency fingerprints and payload integrity digest remain enforced;
 older snapshots are never silently reinterpreted as algebraic data. Saving is
 atomic and loading reconstructs the existing insertion index.
@@ -70,3 +71,7 @@ Focused regressions exercise progressive analytic transport, binary restart,
 nearest compatible-source selection, opposite-sheet exact hits, inherited
 accuracy refusal, original and generic-epsilon domain guards, imaginary roots,
 nonreal interior rejection, and the analytically known weighted matrix norm.
+
+Canonical logarithmic forms use the same cache while keeping ordered letters
+and constant matrices separate until a path is selected. See
+[Canonical forms in the physical point cache](canonical-cache.md).

@@ -29,5 +29,5 @@ No exact/MPFR spatial index was found in the consumed Symbolica/HEPKit APIs or d
 Registered-root systems use this same selection and binary bank. Their point
 keys include the local root germ, so opposite sheets at identical coordinates
 remain distinct and exact hits cannot cross sheets. The regular-real admission
-rules, shared precision checks and schema-3 compatibility policy are documented
+rules, shared precision checks and schema-4 compatibility policy are documented
 in [Registered roots in the physical boundary cache](algebraic-cache.md).

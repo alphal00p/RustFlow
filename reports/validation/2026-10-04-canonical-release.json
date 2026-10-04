@@ -1,0 +1,103 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "recorded_utc": "2026-10-04T21:13:20.134091+00:00",
+  "base_commit": "e7bfd9fdcfd09a886943d1a0cc3a59e32fd8f333",
+  "scope": [
+    "Path-first canonical dlog representation and shared progressive RustFlowCache with binary schema4",
+    "Native exact rational-polynomial root grouping and shared original source-domain guards",
+    "Registered-root physical transport CLI, binary restart and explicit germs",
+    "Connected genuine two-loop five-point fixture and shared scientific test helpers"
+  ],
+  "checks": {
+    "release_tests": {
+      "command": "CARGO_BUILD_JOBS=8 cargo test --release --locked -p symbolica-amflow -- --test-threads=4",
+      "unit_and_integration_passed": 283,
+      "documentation_passed": 1,
+      "failed": 0,
+      "ignored": 3
+    },
+    "clippy": {
+      "command": "CARGO_BUILD_JOBS=8 cargo clippy --release -p symbolica-amflow --all-targets -- -D warnings",
+      "exit_code": 0,
+      "dependency_warnings": "Eight existing RustRed dead-code warnings"
+    },
+    "format": {
+      "command": "cargo fmt -p symbolica-amflow -- --check",
+      "exit_code": 0
+    }
+  },
+  "initial_build_issue": "An initial Clippy invocation consumed stale local RustFlow metadata because copied source files retained old modification times. Sources and build.rs were touched, then the complete release tests, Clippy and formatting passed. No source logic change was required; the initial log is preserved. Future source integration uses fresh modification times.",
+  "logs": {
+    "target/rustflow-canonical-release-tests.log": {
+      "sha256": "db1f6ba5d45ea05a115ba704ca2e0c55f9ee3c482c4caded9a82ff78d3ef49a7",
+      "bytes": 35225
+    },
+    "target/rustflow-canonical-release-clippy.log": {
+      "sha256": "5adec6d41e5fd8c66a4d51c96d84cf32b001890e65fd7c4fd15e24e3b60b807c",
+      "bytes": 2721
+    },
+    "target/rustflow-canonical-release-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "target/rustflow-canonical-release-clippy-stale-metadata.log": {
+      "sha256": "e9c972898e43a2d05ef8ec372cdf11cd83b8eb98d14fb2f3827b8aee9859e419",
+      "bytes": 9533
+    }
+  },
+  "source_sha256": {
+    "src/algebraic.rs": "1b6aef0aa70574668ada78d5c4d41d65a27d8ec6f500fbabffd6078c2c463a35",
+    "src/algebraic/canonical.rs": "591fe277542d77fd898c03dc8976e8fd127db42956a033350caf0b85fd6f343c",
+    "src/physical_conditions.rs": "a522e5151d287664378f2e7ad8b437dd6dc2fa51afbf818a2b342c218526e056",
+    "src/physical_transport.rs": "7bf4e21eb5abffa2210fac4bfe17edd8982ea896fdc16fc128a5981d3db98412",
+    "src/transport_cache.rs": "b108bf30b6660893c63801f914685f288e44e5fa834c0c8e34de6dd3eaaf61f6",
+    "src/bin/rustflow.rs": "b9cc04810e2dca6a10ec42a3ef92739cb665498c93a0e14c0c8ea94b3702ae91",
+    "tests/algebraic_quotients.rs": "110720b1496bc822460da095d264e0d9dd8a84f9bea6f145cefed76efb3f408b",
+    "tests/canonical_algebraic.rs": "cefc5aa18a12c63cf513bb95377072f5fc7ec0158df713a9e288c93284031f68",
+    "tests/canonical_cache.rs": "e10aefa56c594d156e5b897297c1e192d7d60f626933608a7e5325368ea06bc3",
+    "tests/cli_algebraic.rs": "4fb0ec982c79a5d32971f15df535e1d260c8c8f5e34cb01e6242f7b77cb9a9f7",
+    "tests/physical_conditions.rs": "9181e81e9cd95f4dd50dc7e1309280503a26bebd279ca75243b26a464514ddb2",
+    "tests/fivepoint_planar.rs": "8f55a0f7eb63b0d1b7e1dad7b497dbff411dc9c54b638b9a71f1d92a6452760d",
+    "tests/fivepoint_zmz_sector.rs": "595b503c5663c33ff331e8cfb379a248dc350c05e82df8a400548f2be16fa51f",
+    "tests/common/fivepoint.rs": "de65005daea2af2e1bfe5883cb8dec036673bd7af4b6f4478a72bcc28a8b551e"
+  },
+  "archived_scientific_regressions": {
+    "status": "Running separately at report creation; not included in this passing gate",
+    "binaries": {
+      "fivepoint_planar": {
+        "source": "target/release/deps/fivepoint_planar-ca03271c90ddaf80",
+        "path": "target/canonical-release/acceptance/fivepoint_planar",
+        "bytes": 587587224,
+        "sha256": "96530f9a22c4637d771b61ca76ba34b0ac2b1abb4eefbc368a06c0fa28aebe11"
+      },
+      "fivepoint_zmz_sector": {
+        "source": "target/release/deps/fivepoint_zmz_sector-00e1e8a987e15800",
+        "path": "target/canonical-release/acceptance/fivepoint_zmz_sector",
+        "bytes": 587671160,
+        "sha256": "5da78ba178821a74265fc8621f8ebfa7f2ccad0289048cf7aa60bdd8ed6584b2"
+      }
+    },
+    "commands": [
+      "timeout --preserve-status 1800s taskset -c 32 target/canonical-release/acceptance/fivepoint_planar --ignored --nocapture --test-threads=1",
+      "timeout --preserve-status 1800s taskset -c 33 target/canonical-release/acceptance/fivepoint_zmz_sector --ignored --nocapture --test-threads=1"
+    ]
+  },
+  "related_reports": [
+    "reports/validation/2026-10-04-canonical-cache.json",
+    "reports/validation/2026-10-04-algebraic-cli.json",
+    "reports/performance/2026-10-04-full13-physical-cache.json",
+    "reports/performance/2026-10-04-full13-canonical-cache.json",
+    "reports/diffexp/fivepoint-zmz-sector-validation.json",
+    "reports/dependencies/2026-10-04-rustred.json"
+  ],
+  "limitations": [
+    "Full AMFlow/DiffExp feature parity and full Higgs+jet amplitude validation remain incomplete",
+    "This gate does not rerun the original-paper hour-long four-target Laurent acceptance",
+    "Scientific cache measurements use supplied upstream boundaries and frozen standalone snapshots; they do not establish automatic AMF boundaries or performance parity",
+    "Cache orchestration currently admits regular real straight paths with explicit local root germs; complex/threshold-crossing cache routes and algebraic singular endpoints remain incomplete",
+    "Formal quotient norms conservatively exclude some sheet-specific removable poles",
+    "Numerical evidence is based on independent refinement and propagated uncertainty, not interval certification",
+    "RustRed consumed core matches fetched upstream; existing local work and user-owned 12-slot dispatch unchanged"
+  ]
+}

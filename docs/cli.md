@@ -9,6 +9,7 @@ standard error.
 ```bash
 cargo run --release --bin rustflow -- graph examples/cli/massless-bubble.json
 cargo run --release --bin rustflow -- transport examples/cli/physical-transport.json
+cargo run --release --bin rustflow -- transport examples/cli/algebraic-transport.json
 ```
 
 ## Native HEPKit graph input
@@ -49,9 +50,10 @@ numerator; it does not build a full scattering amplitude from Feynman rules.
 The transport example supplies `derivatives`, mapping each kinematic variable to
 its exact differential matrix, an ordered `basis`, its `normalization`, and a
 `branch_domain` identifying the common physical sheet of its inputs. Matrices
-must have rational dependence on epsilon and kinematics and be regular in
-epsilon. This command currently follows regular straight paths and rejects
-singularities on the selected path.
+must be regular in epsilon. Without a root registry they have rational dependence
+on epsilon and kinematics. Optional registered square roots use the algebraic
+native API described below. This command follows regular straight paths and
+rejects singularities on the selected path.
 
 `leading_epsilon_power` and `last_epsilon_power` define the common coefficient
 range. Coefficient arrays are epsilon-order-major, then basis-component-major.
@@ -91,3 +93,47 @@ in cache identity and are checked at stored points and along candidate paths,
 including restrictions that cancel out of the final differential equations.
 Epsilon remains formal: `epsilon*s` excludes `s=0`, while a pure epsilon factor
 does not exclude a physical point. Use the request's actual epsilon symbol.
+
+## Registered square roots
+
+An optional `roots` map registers exact radicands by symbol, for example
+`"roots": {"r": "s"}` for `r²=s`. Derivative matrices use the declared symbol,
+such as `"derivatives": {"s": [["eps/r"]]}`; do not put an unregistered `sqrt`
+function into a matrix. Each algebraic seed supplies an explicit `root_germ`,
+and each destination uses the following structured form:
+
+```json
+{
+  "coordinates": {"s": "4"},
+  "root_germ": {"r": "principal"}
+}
+```
+
+The allowed sheet names are `principal` and `opposite`. Every registered root
+must occur exactly once, using the same namespace rules as the matrices. The
+principal root of a negative real radicand is positive imaginary; the opposite
+sheet reverses the sign. These are local discrete sheet choices, not approximate
+root magnitudes or new accuracy evidence. Missing, foreign or multiply named
+root symbols are errors. A rational request without roots cannot supply a germ.
+Existing plain coordinate-map destinations remain unchanged for rational input.
+
+The example transports `Y'=epsilon*Y/sqrt(s)` with `Y(1)=1` to `s=4`, then `9`,
+then `9` again. It checks progressive boundary reuse, and the repeated point is
+an exact cache hit. Remove `seeds` to restart from its binary bank. The first
+three coefficients at `s=9` are `[1,4,8]`. To request the opposite sheet, supply
+an independently justified seed on that sheet; a principal-sheet cache entry
+cannot answer an opposite-sheet request, even at identical coordinates.
+Algebraic result entries include `root_germ` and `starting_root_germ`; rational
+output keeps its existing format.
+
+This steers the existing `RustFlow<AlgebraicKinematicSystem>` and `RustFlowCache`.
+The CLI adds no numerical solver or second bank. Its current cache scope is
+exact real rational coordinates and straight paths whose radicands remain real
+and nonzero. Root-sum denominators use the native registered-root normalization
+and conservative formal norm domain. The global `options.prescription` does not
+choose germs implicitly. `branch_domain` must still describe the intended
+integral/logarithmic branch; local root signs alone do not establish it.
+Threshold-crossing contours and complex physical paths require the explicit
+native transport API. See [the algebraic cache documentation](algebraic-cache.md)
+for uncertainty estimates, synchronous native-call limits and schema-4 binary
+compatibility. The steering JSON schema remains version 1.

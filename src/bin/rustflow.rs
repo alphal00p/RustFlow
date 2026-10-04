@@ -8,7 +8,13 @@ use std::{
     sync::Arc,
 };
 use symbolica::prelude::*;
-use symbolica_amflow::{kinematics::KinematicSystem, transport_cache::*, *};
+use symbolica_amflow::{
+    algebraic::{AlgebraicKinematicSystem, SquareRoot},
+    kinematics::KinematicSystem,
+    physical_transport::PhysicalResult,
+    transport_cache::*,
+    *,
+};
 
 type CliResult<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
@@ -243,10 +249,48 @@ struct DecimalComplex {
     real: String,
     imaginary: String,
 }
+#[derive(Clone, Copy, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum SheetChoice {
+    Principal,
+    Opposite,
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
+struct DetailedDestination {
+    coordinates: BTreeMap<String, String>,
+    #[serde(default)]
+    root_germ: Option<BTreeMap<String, SheetChoice>>,
+}
+
+#[derive(Deserialize)]
+#[serde(untagged)]
+enum Destination {
+    Detailed(DetailedDestination),
+    // Preserve the original rational transport coordinate-map format.
+    Coordinates(BTreeMap<String, String>),
+}
+impl Destination {
+    fn parts(
+        &self,
+    ) -> (
+        &BTreeMap<String, String>,
+        Option<&BTreeMap<String, SheetChoice>>,
+    ) {
+        match self {
+            Self::Detailed(value) => (&value.coordinates, value.root_germ.as_ref()),
+            Self::Coordinates(value) => (value, None),
+        }
+    }
+}
+
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
 struct Seed {
     coordinates: BTreeMap<String, String>,
+    #[serde(default)]
+    root_germ: Option<BTreeMap<String, SheetChoice>>,
     working_digits: u32,
     verified_digits: u32,
     coefficients: Vec<Vec<DecimalComplex>>,
@@ -262,6 +306,8 @@ struct TransportRequest {
     #[serde(default = "epsilon")]
     epsilon: String,
     derivatives: BTreeMap<String, Vec<Vec<String>>>,
+    #[serde(default)]
+    roots: BTreeMap<String, String>,
     basis: Vec<String>,
     #[serde(default = "one")]
     normalization: String,
@@ -273,7 +319,7 @@ struct TransportRequest {
     cache_directory: PathBuf,
     #[serde(default)]
     seeds: Vec<Seed>,
-    destinations: Vec<BTreeMap<String, String>>,
+    destinations: Vec<Destination>,
     #[serde(default)]
     distance_scales: BTreeMap<String, String>,
     #[serde(default)]
@@ -305,28 +351,161 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
         .iter()
         .map(|a| parse(a, ns))
         .collect::<CliResult<Vec<_>>>()?;
-    let flow = RustFlow::with_conditions(
-        system,
-        &basis,
-        &parse(&request.normalization, ns)?,
-        options.prescription,
-        &request.branch_domain,
-        &request
-            .nonzero_conditions
-            .iter()
-            .map(|a| parse(a, ns))
-            .collect::<CliResult<Vec<_>>>()?,
-    )?;
+    let normalization = parse(&request.normalization, ns)?;
+    let conditions = request
+        .nonzero_conditions
+        .iter()
+        .map(|a| parse(a, ns))
+        .collect::<CliResult<Vec<_>>>()?;
     let range = EpsilonRange::new(request.leading_epsilon_power, request.last_epsilon_power)?;
-    let cache_directory = directory.join(request.cache_directory);
+    if request.roots.is_empty() {
+        let flow = RustFlow::with_conditions(
+            system,
+            &basis,
+            &normalization,
+            options.prescription,
+            &request.branch_domain,
+            &conditions,
+        )?;
+        execute_transport(
+            &request,
+            directory,
+            flow.identity(),
+            range,
+            |cache, point, policy| {
+                Ok(flow.evaluate_to(
+                    cache,
+                    &point.restart_coordinates()?,
+                    range,
+                    &options,
+                    &context,
+                    policy,
+                )?)
+            },
+        )
+    } else {
+        let roots = request
+            .roots
+            .iter()
+            .map(|(name, radicand)| {
+                Ok(SquareRoot {
+                    symbol: symbol(name, ns)?,
+                    radicand: parse(radicand, ns)?,
+                })
+            })
+            .collect::<CliResult<Vec<_>>>()?;
+        let flow = RustFlow::with_algebraic_conditions(
+            AlgebraicKinematicSystem {
+                epsilon: system.epsilon,
+                derivatives: system.derivatives,
+                roots,
+            },
+            &basis,
+            &normalization,
+            options.prescription,
+            &request.branch_domain,
+            &conditions,
+        )?;
+        execute_transport(
+            &request,
+            directory,
+            flow.identity(),
+            range,
+            |cache, point, policy| {
+                Ok(flow.evaluate_to(
+                    cache,
+                    &point.restart_coordinates()?,
+                    point.root_germ().ok_or("missing destination root_germ")?,
+                    range,
+                    &options,
+                    &context,
+                    policy,
+                )?)
+            },
+        )
+    }
+}
+
+fn transport_point(
+    values: &BTreeMap<String, String>,
+    choices: Option<&BTreeMap<String, SheetChoice>>,
+    identity: &BoundaryIdentity,
+    namespace: &str,
+) -> CliResult<CachedPoint> {
+    let point = CachedPoint::Exact(coordinates(values, namespace)?);
+    if identity.roots().is_empty() {
+        if choices.is_some() {
+            return Err("root_germ requires a nonempty roots registry".into());
+        }
+        return Ok(point);
+    }
+    let choices =
+        choices.ok_or("each algebraic seed and destination requires an explicit root_germ")?;
+    let mut sheets = BTreeMap::new();
+    for (name, choice) in choices {
+        let root = symbol(name, namespace)?;
+        let sheet = match choice {
+            SheetChoice::Principal => RootSheet::Principal,
+            SheetChoice::Opposite => RootSheet::Opposite,
+        };
+        if sheets.insert(root, sheet).is_some() {
+            return Err(format!("root_germ names the same root twice: {name}").into());
+        }
+    }
+    if sheets.len() != identity.roots().len()
+        || identity
+            .roots()
+            .iter()
+            .any(|r| !sheets.contains_key(&r.symbol))
+    {
+        return Err(
+            "root_germ must name every registered root exactly once and no other symbol".into(),
+        );
+    }
+    Ok(point.with_root_germ(RootGerm { sheets })?)
+}
+
+fn germ_json(point: &CachedPoint) -> Option<Value> {
+    point.root_germ().map(|germ| {
+        json!(
+            germ.sheets
+                .iter()
+                .map(|(&s, sheet)| (
+                    Atom::var(s).to_canonical_string(),
+                    match sheet {
+                        RootSheet::Principal => "principal",
+                        RootSheet::Opposite => "opposite",
+                    },
+                ))
+                .collect::<BTreeMap<_, _>>()
+        )
+    })
+}
+
+// Both native connection kinds share parsing, bank I/O, progressive insertion,
+// policy and result serialization. Numerical transport stays in RustFlow.
+fn execute_transport(
+    request: &TransportRequest,
+    directory: &Path,
+    identity: &BoundaryIdentity,
+    range: EpsilonRange,
+    mut evaluate: impl FnMut(
+        &mut RustFlowCache,
+        &CachedPoint,
+        &dyn TransportCost,
+    ) -> CliResult<PhysicalResult>,
+) -> CliResult<Value> {
+    let ns = &request.namespace;
+    let cache_directory = directory.join(&request.cache_directory);
+
     let mut cache = RustFlowCache::load(&cache_directory)?;
     let loaded = cache.len();
     let mut seeds = Vec::new();
-    for seed in request.seeds {
+    for seed in &request.seeds {
         let p = Precision::decimal(seed.working_digits)?;
         seeds.push(CachedBoundary {
-            identity: flow.identity().clone(),
-            point: CachedPoint::Exact(coordinates(&seed.coordinates, ns)?),
+            identity: identity.clone(),
+            point: transport_point(&seed.coordinates, seed.root_germ.as_ref(), identity, ns)?,
             kind: PointKind::Physical,
             range,
             coefficients: seed
@@ -360,17 +539,12 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
         admissible: |_: &CachedBoundary, _: &CachedPoint| Ok(true),
     };
     let mut results = Vec::new();
-    for destination in request.destinations {
-        let result = flow.evaluate_to(
-            &mut cache,
-            &coordinates(&destination, ns)?,
-            range,
-            &options,
-            &context,
-            &policy,
-        )?;
+    for destination in &request.destinations {
+        let (coordinates, germ) = destination.parts();
+        let point = transport_point(coordinates, germ, identity, ns)?;
+        let result = evaluate(&mut cache, &point, &policy)?;
         cache.save(&cache_directory)?;
-        results.push(json!({
+        let mut output = json!({
             "coordinates":point_json(&result.boundary.point)?,
             "starting_point":point_json(&result.starting_point)?,
             "verified_digits":result.boundary.accuracy.verified_digits(),
@@ -379,7 +553,13 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
             "inserted_points":result.inserted_points,
             "coefficients":result.boundary.coefficients.iter().map(|row| row.iter().map(complex_json).collect::<Vec<_>>()).collect::<Vec<_>>(),
             "absolute_errors":result.boundary.accuracy.comparison_errors().iter().map(|row| row.iter().map(|a| a.as_raw().to_string()).collect::<Vec<_>>()).collect::<Vec<_>>()
-        }));
+        });
+        if let Some(germ) = germ_json(&result.boundary.point) {
+            output["root_germ"] = germ;
+            output["starting_root_germ"] =
+                germ_json(&result.starting_point).ok_or("missing selected source root_germ")?;
+        }
+        results.push(output);
     }
     cache.save(&cache_directory)?;
     Ok(

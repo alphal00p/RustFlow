@@ -4,7 +4,7 @@
 //! precision label is evidence supplied by the caller, never inferred from the
 //! number of MPFR working bits. Path admissibility is required during selection:
 //! distance alone cannot decide which continuation reaches the intended sheet.
-use crate::algebraic::{AlgebraicKinematicSystem, RootSeed, SquareRoot};
+use crate::algebraic::{AlgebraicKinematicSystem, CanonicalAlgebraicSystem, RootSeed, SquareRoot};
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution};
 use crate::kinematics::{KinematicPath, KinematicSystem};
 use crate::{ComplexFloat as C, Error, Precision, Prescription, Result};
@@ -19,8 +19,8 @@ use std::sync::{
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
-const VERSION: u32 = 3;
-const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x03";
+const VERSION: u32 = 4;
+const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x04";
 const FILE: &str = "physical-boundaries.bin";
 static NEXT_FILE: AtomicU64 = AtomicU64::new(0);
 
@@ -227,60 +227,9 @@ fn excludes_unit_interval(
     Ok(true)
 }
 
-// Reuse the registered quotient-domain owner. Preserve every original
-// denominator occurrence before cross-term rational cancellation as well.
+// The registered quotient-domain owner retains raw denominator occurrences.
 fn algebraic_conditions(system: &AlgebraicKinematicSystem) -> Result<Vec<Atom>> {
-    fn denominators(a: AtomView<'_>, out: &mut std::collections::BTreeSet<Atom>) {
-        match a {
-            AtomView::Add(v) => {
-                for a in v.iter() {
-                    denominators(a, out);
-                }
-            }
-            AtomView::Mul(v) => {
-                for a in v.iter() {
-                    denominators(a, out);
-                }
-            }
-            AtomView::Pow(v) => {
-                let (base, exponent) = v.get_base_exp();
-                if let AtomView::Num(n) = exponent
-                    && let Coefficient::Complex(c) = n.get_coeff_view().to_owned()
-                    && c.re < 0
-                {
-                    out.insert(base.to_owned());
-                }
-                denominators(base, out);
-            }
-            _ => {}
-        }
-    }
-    let mut guards = system.nonzero_conditions()?;
-    let mut bases = std::collections::BTreeSet::new();
-    for a in system.derivatives.values().flatten().flatten() {
-        denominators(a.as_view(), &mut bases);
-    }
-    for base in bases {
-        let mut probe = AlgebraicKinematicSystem {
-            epsilon: system.epsilon,
-            derivatives: system
-                .derivatives
-                .keys()
-                .map(|&v| (v, vec![vec![Atom::new()]]))
-                .collect(),
-            roots: system.roots.clone(),
-        };
-        probe.derivatives.first_entry().unwrap().get_mut()[0][0] = Atom::one() / base;
-        guards.extend(probe.nonzero_conditions()?);
-    }
-    let rules = BTreeMap::from([(
-        Atom::var(crate::family::imaginary_parameter()),
-        Atom::num(Complex::new(Rational::from(0), Rational::from(1))),
-    )]);
-    Ok(guards
-        .iter()
-        .map(|a| crate::family::substitute(a, &rules))
-        .collect())
+    system.nonzero_conditions()
 }
 
 fn exact_metadata(a: AtomView<'_>) -> Result<()> {
@@ -460,9 +409,77 @@ impl CachedPoint {
 }
 
 #[derive(Clone, Debug)]
+enum IdentitySystem {
+    Dense(KinematicSystem),
+    Canonical(CanonicalAlgebraicSystem),
+}
+impl IdentitySystem {
+    fn epsilon(&self) -> Symbol {
+        match self {
+            Self::Dense(system) => system.epsilon,
+            Self::Canonical(system) => system.epsilon(),
+        }
+    }
+    fn variables(&self) -> std::collections::BTreeSet<Symbol> {
+        match self {
+            Self::Dense(system) => system.derivatives.keys().copied().collect(),
+            Self::Canonical(system) => system.variables().iter().copied().collect(),
+        }
+    }
+    fn dimension(&self) -> usize {
+        match self {
+            Self::Dense(system) => system.derivatives.values().next().unwrap().len(),
+            Self::Canonical(system) => system.dimension(),
+        }
+    }
+    fn canonical_key(&self) -> Result<String> {
+        let expression = AtomCore::to_canonical_string;
+        Ok(match self {
+            Self::Dense(system) => {
+                let mut derivatives = system
+                    .derivatives
+                    .iter()
+                    .map(|(&s, m)| {
+                        (
+                            Atom::var(s).to_canonical_string(),
+                            m.iter()
+                                .map(|row| row.iter().map(expression).collect::<Vec<_>>())
+                                .collect::<Vec<_>>(),
+                        )
+                    })
+                    .collect::<Vec<_>>();
+                derivatives.sort_by(|a, b| a.0.cmp(&b.0));
+                fingerprint(&("dense", derivatives))?
+            }
+            Self::Canonical(system) => fingerprint(&(
+                "canonical-dlog",
+                system.dimension(),
+                system
+                    .variables()
+                    .iter()
+                    .map(|&v| Atom::var(v).to_canonical_string())
+                    .collect::<Vec<_>>(),
+                system.letters().iter().map(expression).collect::<Vec<_>>(),
+                system
+                    .constant_matrices()
+                    .iter()
+                    .map(|matrix| {
+                        matrix
+                            .iter()
+                            .map(|row| row.iter().map(expression).collect::<Vec<_>>())
+                            .collect::<Vec<_>>()
+                    })
+                    .collect::<Vec<_>>(),
+            ))?,
+        })
+    }
+}
+
+#[derive(Clone, Debug)]
 struct IdentityData {
     key: String,
-    system: KinematicSystem,
+    system: IdentitySystem,
+    variables: std::collections::BTreeSet<Symbol>,
     roots: Vec<SquareRoot>,
     basis: Vec<Atom>,
     normalization: Atom,
@@ -531,7 +548,31 @@ impl BoundaryIdentity {
         )
     }
 
-    #[allow(clippy::too_many_arguments)] // The existing identity metadata plus its optional exact root registry.
+    /// Identity for an unassembled canonical connection. The ordered letters
+    /// and constant matrices are distinct from a dense connection identity.
+    /// Source guards were computed by the canonical constructor and are reused.
+    pub fn with_canonical_conditions(
+        system: &CanonicalAlgebraicSystem,
+        basis: &[Atom],
+        normalization: &Atom,
+        prescription: Prescription,
+        domain: &str,
+        conditions: &[Atom],
+    ) -> Result<Self> {
+        let mut candidates = conditions.to_vec();
+        candidates.extend_from_slice(system.nonzero_conditions());
+        Self::from_parts(
+            IdentitySystem::Canonical(system.clone()),
+            system.roots(),
+            basis,
+            normalization,
+            prescription,
+            domain,
+            &candidates,
+        )
+    }
+
+    #[allow(clippy::too_many_arguments)] // Existing identity metadata plus its optional exact root registry.
     fn build(
         system: &KinematicSystem,
         roots: &[SquareRoot],
@@ -544,13 +585,6 @@ impl BoundaryIdentity {
         if roots.is_empty() {
             system.validate()?;
         }
-
-        let mut variables = system
-            .derivatives
-            .keys()
-            .copied()
-            .collect::<std::collections::BTreeSet<_>>();
-        variables.insert(system.epsilon);
         let mut candidates = conditions.to_vec();
         if roots.is_empty() {
             candidates.extend(crate::physical_conditions::matrix_domain_conditions(
@@ -563,45 +597,52 @@ impl BoundaryIdentity {
                 roots: roots.to_vec(),
             })?);
         }
+        Self::from_parts(
+            IdentitySystem::Dense(system.clone()),
+            roots,
+            basis,
+            normalization,
+            prescription,
+            domain,
+            &candidates,
+        )
+    }
+
+    #[allow(clippy::too_many_arguments)] // Shared metadata for dense and canonical exact representations.
+    fn from_parts(
+        system: IdentitySystem,
+        roots: &[SquareRoot],
+        basis: &[Atom],
+        normalization: &Atom,
+        prescription: Prescription,
+        domain: &str,
+        candidates: &[Atom],
+    ) -> Result<Self> {
+        let physical_variables = system.variables();
+        let mut variables = physical_variables.clone();
+        variables.insert(system.epsilon());
         let mut conditions =
-            crate::physical_conditions::canonical_conditions(&candidates, &variables)?;
+            crate::physical_conditions::canonical_conditions(candidates, &variables)?;
         if !roots.is_empty() {
             let leading = conditions
                 .iter()
                 .map(|condition| {
                     crate::physical_conditions::epsilon_leading_coefficient(
                         condition,
-                        system.epsilon,
+                        system.epsilon(),
                     )
                 })
                 .collect::<Result<Vec<_>>>()?;
             conditions.extend(leading);
             conditions = crate::physical_conditions::canonical_conditions(&conditions, &variables)?;
         }
-        let n = system.derivatives.values().next().unwrap().len();
+        let n = system.dimension();
         if basis.len() != n || domain.trim().is_empty() || normalization.is_zero() {
             return Err(Error::InvalidInput("boundary identity needs an ordered basis, nonzero normalization, and homotopy domain".into()));
         }
         for a in basis.iter().chain(std::iter::once(normalization)) {
             exact_metadata(a.as_view())?;
         }
-        let mut derivatives = system
-            .derivatives
-            .iter()
-            .map(|(&s, m)| {
-                (
-                    Atom::var(s).to_canonical_string(),
-                    m.iter()
-                        .map(|r| {
-                            r.iter()
-                                .map(AtomCore::to_canonical_string)
-                                .collect::<Vec<_>>()
-                        })
-                        .collect::<Vec<_>>(),
-                )
-            })
-            .collect::<Vec<_>>();
-        derivatives.sort_by(|a, b| a.0.cmp(&b.0));
         let root_identity = roots
             .iter()
             .map(|r| {
@@ -616,8 +657,8 @@ impl BoundaryIdentity {
             root_identity,
             env!("DEPENDENCY_SOURCE_DIGEST"),
             env!("PORT_SOURCE_DIGEST"),
-            Atom::var(system.epsilon).to_canonical_string(),
-            derivatives,
+            Atom::var(system.epsilon()).to_canonical_string(),
+            system.canonical_key()?,
             basis
                 .iter()
                 .map(AtomCore::to_canonical_string)
@@ -632,7 +673,8 @@ impl BoundaryIdentity {
         ))?;
         Ok(Self(Arc::new(IdentityData {
             key,
-            system: system.clone(),
+            system,
+            variables: physical_variables,
             roots: roots.to_vec(),
             basis: basis.to_vec(),
             normalization: normalization.clone(),
@@ -723,7 +765,7 @@ impl BoundaryIdentity {
         }
         crate::physical_conditions::conditions_admit_path(
             &self.0.conditions,
-            self.0.system.epsilon,
+            self.0.system.epsilon(),
             &path,
             p,
             digits,
@@ -734,8 +776,8 @@ impl BoundaryIdentity {
         let mut index = 0usize;
         loop {
             let candidate = symbol!(&format!("symbolica_amflow::{stem}_{index}"));
-            if candidate != self.0.system.epsilon
-                && !self.0.system.derivatives.contains_key(&candidate)
+            if candidate != self.0.system.epsilon()
+                && !self.0.variables.contains(&candidate)
                 && self.0.roots.iter().all(|r| r.symbol != candidate)
             {
                 return Ok(candidate);
@@ -799,14 +841,19 @@ impl BoundaryIdentity {
         point.validate()?;
         self.validate_root_point(point)?;
         let coordinates = point.rounded_coordinates_as_exact()?;
-        if !coordinates.keys().eq(self.0.system.derivatives.keys()) {
+        if coordinates
+            .keys()
+            .copied()
+            .collect::<std::collections::BTreeSet<_>>()
+            != self.0.variables
+        {
             return Err(Error::InvalidInput(
                 "cached point coordinates do not match the system".into(),
             ));
         }
         crate::physical_conditions::validate_conditions_at(
             &self.0.conditions,
-            self.0.system.epsilon,
+            self.0.system.epsilon(),
             &coordinates,
         )?;
         let rules = coordinates
@@ -836,8 +883,10 @@ impl BoundaryIdentity {
                 _ => Ok(()),
             }
         }
-        for a in self.0.system.derivatives.values().flatten().flatten() {
-            regular(a.as_view(), &rules)?;
+        if let IdentitySystem::Dense(system) = &self.0.system {
+            for a in system.derivatives.values().flatten().flatten() {
+                regular(a.as_view(), &rules)?;
+            }
         }
         Ok(())
     }
@@ -1459,11 +1508,13 @@ impl RustFlowCache {
         ) -> Result<Option<(PointKind, BoundaryAccuracy)>>,
     ) -> Result<Vec<CachedBoundary>> {
         path.validate()?;
-        if !path
+        if path
             .coordinates
             .keys()
-            .eq(identity.0.system.derivatives.keys())
-            || path.parameter == identity.0.system.epsilon
+            .copied()
+            .collect::<std::collections::BTreeSet<_>>()
+            != identity.0.variables
+            || path.parameter == identity.0.system.epsilon()
         {
             return Err(Error::InvalidInput(
                 "trajectory path does not match boundary identity".into(),
@@ -1580,16 +1631,39 @@ type StoredAtom = Vec<u8>;
 type StoredMatrix = Vec<Vec<StoredAtom>>;
 
 #[derive(Serialize, Deserialize)]
+enum StoredSystem {
+    Dense {
+        derivatives: Vec<(StoredAtom, StoredMatrix)>,
+    },
+    Canonical {
+        variables: Vec<StoredAtom>,
+        letters: Vec<StoredAtom>,
+        matrices: Vec<StoredMatrix>,
+    },
+}
+#[derive(Serialize, Deserialize)]
 struct StoredIdentity {
     key: String,
     roots: Vec<(StoredAtom, StoredAtom)>,
-    epsilon: Vec<u8>,
-    derivatives: Vec<(StoredAtom, StoredMatrix)>,
-    basis: Vec<Vec<u8>>,
-    normalization: Vec<u8>,
+    epsilon: StoredAtom,
+    system: StoredSystem,
+    basis: Vec<StoredAtom>,
+    normalization: StoredAtom,
     plus_i0: bool,
     domain: String,
     conditions: Vec<StoredAtom>,
+}
+fn matrix_bytes(matrix: &[Vec<Atom>]) -> Result<StoredMatrix> {
+    matrix
+        .iter()
+        .map(|r| r.iter().map(atom_bytes).collect())
+        .collect()
+}
+fn matrix_read(matrix: StoredMatrix) -> Result<Vec<Vec<Atom>>> {
+    matrix
+        .into_iter()
+        .map(|r| r.into_iter().map(|a| atom_read(&a)).collect())
+        .collect()
 }
 impl StoredIdentity {
     fn encode(identity: &BoundaryIdentity) -> Result<Self> {
@@ -1601,20 +1675,33 @@ impl StoredIdentity {
                 .iter()
                 .map(|r| Ok((symbol_bytes(r.symbol)?, atom_bytes(&r.radicand)?)))
                 .collect::<Result<_>>()?,
-            epsilon: symbol_bytes(d.system.epsilon)?,
-            derivatives: d
-                .system
-                .derivatives
-                .iter()
-                .map(|(&s, m)| {
-                    Ok((
-                        symbol_bytes(s)?,
-                        m.iter()
-                            .map(|r| r.iter().map(atom_bytes).collect())
-                            .collect::<Result<_>>()?,
-                    ))
-                })
-                .collect::<Result<_>>()?,
+            epsilon: symbol_bytes(d.system.epsilon())?,
+            system: match &d.system {
+                IdentitySystem::Dense(system) => StoredSystem::Dense {
+                    derivatives: system
+                        .derivatives
+                        .iter()
+                        .map(|(&s, m)| Ok((symbol_bytes(s)?, matrix_bytes(m)?)))
+                        .collect::<Result<_>>()?,
+                },
+                IdentitySystem::Canonical(system) => StoredSystem::Canonical {
+                    variables: system
+                        .variables()
+                        .iter()
+                        .map(|&s| symbol_bytes(s))
+                        .collect::<Result<_>>()?,
+                    letters: system
+                        .letters()
+                        .iter()
+                        .map(atom_bytes)
+                        .collect::<Result<_>>()?,
+                    matrices: system
+                        .constant_matrices()
+                        .iter()
+                        .map(|m| matrix_bytes(m))
+                        .collect::<Result<_>>()?,
+                },
+            },
             basis: d.basis.iter().map(atom_bytes).collect::<Result<_>>()?,
             normalization: atom_bytes(&d.normalization)?,
             plus_i0: matches!(d.prescription, Prescription::PlusI0),
@@ -1623,21 +1710,7 @@ impl StoredIdentity {
         })
     }
     fn decode(self) -> Result<BoundaryIdentity> {
-        let system = KinematicSystem {
-            epsilon: symbol_read(&self.epsilon)?,
-            derivatives: self
-                .derivatives
-                .into_iter()
-                .map(|(s, m)| {
-                    Ok((
-                        symbol_read(&s)?,
-                        m.into_iter()
-                            .map(|r| r.into_iter().map(|a| atom_read(&a)).collect())
-                            .collect::<Result<_>>()?,
-                    ))
-                })
-                .collect::<Result<_>>()?,
-        };
+        let epsilon = symbol_read(&self.epsilon)?;
         let basis = self
             .basis
             .iter()
@@ -1653,23 +1726,67 @@ impl StoredIdentity {
                 })
             })
             .collect::<Result<Vec<_>>>()?;
-        let identity = BoundaryIdentity::build(
-            &system,
-            &roots,
-            &basis,
-            &atom_read(&self.normalization)?,
-            if self.plus_i0 {
-                Prescription::PlusI0
-            } else {
-                Prescription::MinusI0
-            },
-            &self.domain,
-            &self
-                .conditions
-                .iter()
-                .map(|a| atom_read(a))
-                .collect::<Result<Vec<_>>>()?,
-        )?;
+        let normalization = atom_read(&self.normalization)?;
+        let prescription = if self.plus_i0 {
+            Prescription::PlusI0
+        } else {
+            Prescription::MinusI0
+        };
+        let conditions = self
+            .conditions
+            .iter()
+            .map(|a| atom_read(a))
+            .collect::<Result<Vec<_>>>()?;
+        let identity = match self.system {
+            StoredSystem::Dense { derivatives } => {
+                let system = KinematicSystem {
+                    epsilon,
+                    derivatives: derivatives
+                        .into_iter()
+                        .map(|(s, m)| Ok((symbol_read(&s)?, matrix_read(m)?)))
+                        .collect::<Result<_>>()?,
+                };
+                BoundaryIdentity::build(
+                    &system,
+                    &roots,
+                    &basis,
+                    &normalization,
+                    prescription,
+                    &self.domain,
+                    &conditions,
+                )?
+            }
+            StoredSystem::Canonical {
+                variables,
+                letters,
+                matrices,
+            } => {
+                let system = CanonicalAlgebraicSystem::new(
+                    epsilon,
+                    &variables
+                        .iter()
+                        .map(|s| symbol_read(s))
+                        .collect::<Result<Vec<_>>>()?,
+                    &letters
+                        .iter()
+                        .map(|a| atom_read(a))
+                        .collect::<Result<Vec<_>>>()?,
+                    &matrices
+                        .into_iter()
+                        .map(matrix_read)
+                        .collect::<Result<Vec<_>>>()?,
+                    roots,
+                )?;
+                BoundaryIdentity::with_canonical_conditions(
+                    &system,
+                    &basis,
+                    &normalization,
+                    prescription,
+                    &self.domain,
+                    &conditions,
+                )?
+            }
+        };
         if identity.key() != self.key {
             return Err(Error::Cache("cached system/basis identity mismatch".into()));
         }

@@ -1,0 +1,16 @@
+{
+  "schema_version": 1,
+  "checked_utc": "2026-10-04T21:00:44.649276+00:00",
+  "remote": "https://github.com/alphal00p/rustred.git",
+  "branch": "main",
+  "local_head": "c2d609a7958fbf5b5666e3f464d001c6d255bec9",
+  "fetched_head": "4e4d3eb4c548e7a2df823117d0869cd5a231d69c",
+  "ahead_behind": [
+    "1",
+    "0"
+  ],
+  "local_core_tree": "5f94567a99fbcda753737fc3bfb87f15661ecbbe",
+  "fetched_core_tree": "5f94567a99fbcda753737fc3bfb87f15661ecbbe",
+  "action": "No source update needed: local main is ahead by one commit and consumed rustred-core matches fetched upstream. Existing local changes preserved.",
+  "policy": "Check upstream at validation milestones; integrate newer versions between builds with regression validation. Preserve local work and do not implement the user-owned 12-slot dispatcher change."
+}

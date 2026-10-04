@@ -4,8 +4,12 @@ This is the active development goal, not a claim of completed parity. The
 original AMFlow paper's four-target 20-digit acceptance passed; see
 [coverage](coverage.md). The expanded goal also includes linear propagators,
 cut phase-space integrals, all upstream benchmark families, and measured
-performance at matched achieved accuracy. The RustRed checkout and both
-existing 12-slot dispatchers remain unchanged at the user's request.
+performance at matched achieved accuracy. RustRed is checked for upstream updates
+at validation milestones and newer versions are integrated between builds while
+preserving local work. Both existing
+12-slot dispatchers remain the user's responsibility. Broad coverage, including
+the complete Higgs+jet application, takes priority over general performance
+tuning; performance blockers may be addressed to make a coverage test practical.
 
 ## Pinned references
 

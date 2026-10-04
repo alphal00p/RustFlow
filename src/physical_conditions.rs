@@ -81,6 +81,19 @@ pub(crate) fn canonical_conditions(
     Ok(result)
 }
 
+/// Retain original rational denominator bases before a path expression is
+/// simplified. Its value may be zero; only denominator domains are constrained.
+pub(crate) fn rational_denominator_conditions(
+    expressions: &[Atom],
+    variables: &BTreeSet<Symbol>,
+) -> Result<Vec<Atom>> {
+    let mut poles = Vec::new();
+    for expression in expressions {
+        rational_expression(expression.as_view(), variables, &mut poles)?;
+    }
+    canonical_conditions(&poles, variables)
+}
+
 pub(crate) fn validate_conditions_at(
     conditions: &[Atom],
     epsilon: Symbol,

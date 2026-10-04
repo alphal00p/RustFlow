@@ -370,3 +370,80 @@ fn public_source_guards_keep_exact_complex_coefficients() -> Result<()> {
     }));
     Ok(())
 }
+
+#[test]
+fn raw_removable_holes_survive_native_rational_cancellation() -> Result<()> {
+    let s = symbol!("raw_domain_holes::s");
+    let r = symbol!("raw_domain_holes::r");
+    let eps = symbol!("raw_domain_holes::eps");
+    let x = symbol!("raw_domain_holes::x");
+    let p = Precision::decimal(60)?;
+    let root = SquareRoot {
+        symbol: r,
+        radicand: Atom::var(s),
+    };
+    // Native rational cancellation gives r+1; the supplied expression still
+    // requires its original denominator r-1 to be nonzero.
+    let entry = (Atom::var(r).pow(2) - 1) / (Atom::var(r) - 1);
+    let system = AlgebraicKinematicSystem {
+        epsilon: eps,
+        derivatives: BTreeMap::from([(s, vec![vec![entry]])]),
+        roots: vec![root],
+    };
+    let source_point = BTreeMap::from([(Atom::var(s), Atom::one())]);
+    assert!(system.nonzero_conditions()?.iter().any(|g| {
+        symbolica_amflow::family::substitute(g, &source_point)
+            .together()
+            .cancel()
+            .is_zero()
+    }));
+    let path = kinematics::KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, Atom::var(x))]),
+    };
+    let compiled = system.pullback(&path, 0)?.compile(p)?;
+    assert!(matches!(
+        compiled.branch_state_at(&p.i(1), &BTreeMap::from([(r, RootSeed::Principal)])),
+        Err(Error::InvalidInput(_))
+    ));
+
+    // A raw radicand denominator must likewise survive R=(s²-1)/(s-1) -> s+1,
+    // including the standalone univariate API and a zero differential matrix.
+    let ordinary = AlgebraicSystem::ordinary(
+        DifferentialSystem {
+            variable: s,
+            matrix: vec![vec![Atom::new()]],
+        },
+        vec![SquareRoot {
+            symbol: r,
+            radicand: (Atom::var(s).pow(2) - 1) / (Atom::var(s) - 1),
+        }],
+    );
+    let compiled = ordinary.compile(p)?;
+    assert!(matches!(
+        compiled.branch_state_at(&p.i(1), &BTreeMap::from([(r, RootSeed::Principal)])),
+        Err(Error::InvalidInput(_))
+    ));
+    assert!(
+        compiled
+            .branch_state_at(&p.i(2), &BTreeMap::from([(r, RootSeed::Principal)]))
+            .is_ok()
+    );
+    // A canceled pole in a coordinate map remains outside its chart even for
+    // a zero connection without roots.
+    let zero = AlgebraicKinematicSystem {
+        epsilon: eps,
+        derivatives: BTreeMap::from([(s, vec![vec![Atom::new()]])]),
+        roots: Vec::new(),
+    };
+    let chart = kinematics::KinematicPath {
+        parameter: x,
+        coordinates: BTreeMap::from([(s, (Atom::var(x).pow(2) - 1) / (Atom::var(x) - 1))]),
+    };
+    let compiled = zero.pullback(&chart, 0)?.compile(p)?;
+    assert!(matches!(
+        compiled.branch_state_at(&p.i(1), &BTreeMap::new()),
+        Err(Error::InvalidInput(_))
+    ));
+    Ok(())
+}

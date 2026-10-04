@@ -31,7 +31,9 @@ The root manifest's Cargo patches make RustRed use that same Symbolica revision.
 Keep RustRed at `../rustred`, including `crates/rustred-core`. Its experimental
 reconstruction feature is disabled. The high-level multiloop solver defaults to
 exact rational epsilon specialization before IBP elimination;
-`sampled_reduction: false` selects fully symbolic epsilon reduction. This project does not modify RustRed.
+`sampled_reduction: false` selects fully symbolic epsilon reduction. Upstream
+RustRed updates are checked between validation milestones; local work is
+preserved, and changes to its 12-slot dispatcher remain outside this project.
 Basis refinement also retains symbolic epsilon, taking precedence over sampled
 reduction so that dimension-dependent denominator factors can be identified.
 
@@ -96,6 +98,11 @@ supports persistent transport caches across processes.
   dlog construction and exact pullback preserve root relations and source domains.
   The [five-point regression](docs/fivepoint-planar.md) checks all 13 one-loop
   masters through epsilon power four against original DiffExp.
+- [`CanonicalAlgebraicSystem`](docs/canonical-systems.md) retains canonical dlog
+  letters until a path is supplied. `RustFlow::new_canonical` reuses those exact
+  data across queries in the same physical boundary cache. The
+  [13-master cache validation](docs/full13-canonical-cache.md) checks nearby reuse
+  and restart against original DiffExp, preserving supplied-boundary accuracy.
 - [`contour::PrescribedContour`](docs/prescribed-contours.md) constructs real-axis
   detours from explicit polynomial prescriptions, retaining exact root identities
   and certified isolation disks from Symbolica.
