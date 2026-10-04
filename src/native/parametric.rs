@@ -1,8 +1,9 @@
-//! Exact specialization of bounded denominator-ray searches.
+//! Exact specialization of bounded index-domain and denominator-ray searches.
 use rustred::algebra::CoefficientPolynomial;
 use rustred::solver::{
-    CoordinateCase, Integral, IntegralOrder, RuleDispatchPolicy, SearchOptions, SectorRule,
-    SectorSolveOptions, SectorSolver, SolverError, SourceSystem, SourceVisitOrder, Term,
+    CoordinateCase, Integral, IntegralOrder, RuleCandidate, RuleDispatchPolicy, SearchOptions,
+    SectorEvent, SectorRule, SectorSolveError, SectorSolveOptions, SectorSolver, SolverError,
+    SourceSystem, SourceVisitOrder, Term,
 };
 use std::collections::BTreeMap;
 use symbolica::domains::rational_polynomial::FromNumeratorAndDenominator;
@@ -17,10 +18,61 @@ pub(super) struct Bank<'a, const N: usize> {
     sources: &'a SourceSystem<N>,
     order: IntegralOrder<N>,
     visit_order: Option<SourceVisitOrder>,
+    generic: Option<Vec<SectorRule<N>>>,
     rays: BTreeMap<[Option<i16>; N], Vec<SectorRule<N>>>,
+    pub domains: usize,
+    pub domain_hits: usize,
     pub generated: usize,
     pub hits: usize,
     pub missed: usize,
+}
+
+fn generic_rules<const N: usize>(
+    solver: &SectorSolver<'_, N>,
+    depth: u32,
+    max_cases: usize,
+) -> Vec<SectorRule<N>> {
+    let mut admitted = Vec::new();
+    let result = solver.solve_domains_with_observer(
+        vec![
+            CoordinateCase::new([None; N])
+                .expect("symbolic coordinates are valid")
+                .into(),
+        ],
+        SectorSolveOptions {
+            symbolic: SearchOptions {
+                max_depth: Some(depth),
+                ..Default::default()
+            },
+            numerical_depth: depth,
+            max_symbolic_cases: Some(max_cases),
+            ..Default::default()
+        },
+        |event| {
+            if let SectorEvent::RuleFound { rule, .. } = event {
+                // RustRed emits this only after exact guards and the complete
+                // exceptional geometry have been admitted. A later budget
+                // stop does not invalidate this equation on its guarded domain.
+                admitted.push(SectorRule {
+                    candidate: RuleCandidate {
+                        case: rule.candidate.case.clone(),
+                        target: rule.candidate.target,
+                        rhs: rule.candidate.rhs.clone(),
+                        sources: rule.candidate.sources.clone(),
+                        stats: rule.candidate.stats,
+                    },
+                    exceptions: rule.exceptions.clone(),
+                    dispatch_policy: rule.dispatch_policy,
+                });
+            }
+        },
+    );
+    match result {
+        Ok(_) | Err(SectorSolveError::CaseBudget { .. }) => admitted,
+        // Other failures do not install a partially searched domain. Neither
+        // successful nor exhausted searches promote finite residuals to rules.
+        Err(_) => Vec::new(),
+    }
 }
 
 fn specialize<const N: usize>(
@@ -179,7 +231,10 @@ impl<'a, const N: usize> Bank<'a, N> {
             sources,
             order: solver.ordering().clone(),
             visit_order: solver.source_visit_order().cloned(),
+            generic: None,
             rays: BTreeMap::new(),
+            domains: 0,
+            domain_hits: 0,
             generated: 0,
             hits: 0,
             missed: 0,
@@ -199,6 +254,23 @@ impl<'a, const N: usize> Bank<'a, N> {
             return Err(SolverError::InvalidInput(
                 "parametric bank source/order mismatch".into(),
             ));
+        }
+        // Four-line paper sectors benefit from shared numerator domains as
+        // well as shorter RHSs. Three-line measurements instead favored fixed
+        // rays, so retain that strategy outside this measured tier.
+        if self.generic.is_none() && solver.ordering().sector().iter().filter(|&&v| v).count() == 4
+        {
+            self.generic = Some(generic_rules(solver, depth, 32));
+            self.domains += 1;
+        }
+        if let Some(rules) = &self.generic {
+            for rule in rules {
+                if let Some(result) = apply(rule, target, sources, solver)? {
+                    self.domain_hits += 1;
+                    self.hits += 1;
+                    return Ok(Some(result));
+                }
+            }
         }
         let ray = std::array::from_fn(|i| (!solver.ordering().sector()[i]).then_some(target[i]));
         if let std::collections::btree_map::Entry::Vacant(entry) = self.rays.entry(ray) {

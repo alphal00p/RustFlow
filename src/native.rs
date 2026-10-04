@@ -438,7 +438,13 @@ fn solve<const N: usize>(
                     let bank = parametric_banks
                         .entry(sector)
                         .or_insert_with(|| parametric::Bank::new(&sources, solver));
-                    let before = (bank.generated, bank.hits, bank.missed);
+                    let before = (
+                        bank.generated,
+                        bank.hits,
+                        bank.missed,
+                        bank.domains,
+                        bank.domain_hits,
+                    );
                     let mut uncovered = Vec::new();
                     for case in cases {
                         context.cancellation.check()?;
@@ -499,6 +505,8 @@ fn solve<const N: usize>(
                         rays: bank.generated - before.0,
                         applied: bank.hits - before.1,
                         uncovered: bank.missed - before.2,
+                        domains: bank.domains - before.3,
+                        domain_applied: bank.domain_hits - before.4,
                         elapsed_ms: started.elapsed().as_millis(),
                     })?;
                     cases = uncovered;

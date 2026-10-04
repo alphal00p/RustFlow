@@ -173,3 +173,76 @@ Logs and checkpoints are retained under the ignored task directories
 `target/parametric-paper-{pilot,exact-pilot,pruned-pilot}` and
 `target/parametric-regions-{pilot,pruned-pilot}`. Restart counts are cumulative;
 per-invocation ray/search times are not summed across different experiments.
+
+
+
+Two subsequent 600-second resumptions still stopped during coefficient
+substitution. The unchanged `ce21f769` first-target executable advanced its
+saved checkpoint to 43,523 searched and 189 pending four-line targets
+(91,710,405 bytes), then stopped at substitution of 43,683 rules. Its progress
+events report 8,437 formula applications and 56.9 seconds of ray work, with no
+concrete fallbacks. The regions resumption used the `c5d2b0e` archive, which
+includes batched boundary evaluation but unchanged native reduction. It saved
+9,924 searched and 1,124 pending four-line targets (37,700,796 bytes), then
+stopped at substitution of 11,021 rules; reported ray work was 70.0 seconds
+for 3,801 formula applications and two concrete fallbacks. Neither reached
+boundary evaluation, so the boundary batching change was not exercised.
+The root's sampled first-target profile attributed approximately 66% of cycles
+to forward expansion, including about 62% in coefficient accumulation. This
+supports addressing exact propagation and repeated substitution before raising
+production time limits again.
+
+## Partial generic domains for four-line sectors
+
+A second isolated probe leaves numerator indices symbolic as well. It limits
+`solve_domains_with_observer` to 32 symbolic cases at depth three and applies
+only `RuleFound` events through the same exact guard and descent checks used
+by the production bank. RustRed emits those events after guard extraction and
+admission of the complete exceptional geometry. A later case-budget error
+therefore leaves useful exact equations on their admitted domains; it does not
+establish coverage of the remaining cases or certify residual masters.
+
+Each four-line measurement below uses 125 synthetic rank-three targets plus
+512 targets sampled across numerator rays in a saved first-paper checkpoint.
+The additional-sector sample checkpoint had 38,678 searched and 2,191 pending
+integrals, size 78,730,330 bytes, SHA-256
+`8f0332753018d94e69bc107717b9203235cb424940bd01e141b0c30c0bb2d319`.
+The first sector used an earlier checkpoint from the same run. The probe was
+compiled at `opt-level=1` and linked the frozen pre-batching root library
+artifact with SHA-256
+`a0b6940f5c2f8ca16efe2f911b399b32406e8cceb992d2260122541a851471c6`.
+These single-run diagnostic times are not full-reduction speedups.
+
+| Sector | Checkpoint targets covered / 512 | Generic generation + application | Fixed-ray generation + application | Fixed rays |
+| --- | ---: | ---: | ---: | ---: |
+| 1, 2, 5, 7 | 504 | 84 ms | 8,054 ms | 179 |
+| 2, 4, 5, 7 | 471 | 69 ms | 8,400 ms | 223 |
+| 2, 3, 5, 7 | 481 | 78 ms | 14,954 ms | 263 |
+| 1, 5, 6, 7 | 452 | 55 ms | 4,249 ms | 164 |
+
+Every generic search emitted 32 admitted rules before exhausting its case
+budget. No guard or specialization errors occurred. For sector `(1,2,5,7)`,
+the generic rules cover 619 of all 637 targets with 5,443 RHS terms, compared
+with 10,345 fixed-ray terms for those same targets. The maximum resulting
+numerator rank falls from six to five. Sector `(2,3,5,7)` covers 596 targets
+with 7,300 terms instead of 18,821 fixed-ray terms for those same targets;
+maximum rank falls from seven to six. The other two sectors also have narrower
+observed RHSs and no increased maximum rank. The fixed bank leaves one target
+uncovered in each of those two sectors, so its coverage is not assumed to be
+complete.
+
+The three-line comparison has the opposite width tradeoff. In sector
+`(2,5,7)`, generic rules cover 259 of 293 synthetic targets but produce 4,169
+terms, versus 1,660 fixed-ray terms on those same targets. Production therefore
+tries a generic domain once per four-line bank and retains fixed-numerator
+rays elsewhere. Generic misses fall through to fixed rays, then concrete
+search. Rules observed before a case-budget stop are retained; other search
+errors discard that generic attempt. All inherited and specialized conditions
+continue into the returned reduction. Finite residuals never enter the bank.
+
+`ParametricReduction` now distinguishes `domains` and `domain_applied` from
+fixed `rays`; `applied` remains the total count of formula applications.
+Existing v5 checkpoints remain mathematically compatible because their saved
+rules and nonzero conditions use the identical family and integral ordering.
+A performance comparison of the changed strategy must start in a fresh cache
+directory. The four-target numerical acceptance gate remains incomplete.

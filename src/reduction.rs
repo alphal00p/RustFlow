@@ -63,9 +63,10 @@ pub struct RustRedBackend {
     /// Eliminate eligible massless two-point subloops with exact tensor rules.
     /// Every rule must decrease the same order used by the native IBP solver.
     pub bubble_subloops: bool,
-    /// Reuse bounded exact formulas with symbolic positive powers and fixed
-    /// numerators. Every specialization checks guards and descent; missing
-    /// formulas fall back to concrete search. Opt-in while benchmarked.
+    /// Reuse bounded exact index formulas, with generic numerator domains for
+    /// four-line sectors and fixed-numerator rays elsewhere. Every specialization
+    /// checks guards and descent; missing formulas fall back to concrete search.
+    /// Opt-in while benchmarked.
     pub parametric_rules: bool,
     /// Optional restart checkpoints for completed native search work.
     pub checkpoints: Option<std::path::PathBuf>,

@@ -137,6 +137,8 @@ pub enum Progress {
         rays: usize,
         applied: usize,
         uncovered: usize,
+        domains: usize,
+        domain_applied: usize,
         elapsed_ms: u128,
     },
     SectorReduced {

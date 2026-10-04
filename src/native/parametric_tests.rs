@@ -221,3 +221,154 @@ fn generated_tadpole_ray_matches_exact_gamma_recurrence() {
     assert_eq!(bank.generated, 1);
     assert_eq!(bank.hits, 11);
 }
+
+#[test]
+fn budget_exhausted_domain_preserves_exact_rules_and_fallbacks() {
+    use crate::ReductionBackend;
+
+    let eta = symbol!("partial_domain_bubble_eta");
+    let family = crate::IntegralFamily {
+        name: "partial_domain_bubble".into(),
+        loops: vec!["l".into()],
+        external: vec!["p".into()],
+        external_gram: vec![vec![Atom::num(-2)]],
+        propagators: vec![
+            crate::Propagator {
+                constant: -Atom::num(1) - Atom::var(eta),
+                scalar_products: vec![Atom::num(1), Atom::new()],
+            },
+            crate::Propagator {
+                constant: -Atom::num(5) - Atom::var(eta),
+                scalar_products: vec![Atom::num(1), Atom::num(2)],
+            },
+        ],
+        physical_propagators: 2,
+        epsilon: symbol!("partial_domain_bubble_eps"),
+        dimension: 4,
+    };
+    let epsilon = Rational::from((1, 10));
+    let converted = family.convert_at_epsilon(Some(&epsilon)).unwrap();
+    let sources = SourceSystem::<2>::from_family_with_lorentz(&converted.family, false).unwrap();
+    let solver = SectorSolver::new(&sources, [true; 2], SectorConfig::default()).unwrap();
+    let bounded = solver.solve_domains(
+        vec![CoordinateCase::new([None; 2]).unwrap().into()],
+        SectorSolveOptions {
+            symbolic: SearchOptions {
+                max_depth: Some(3),
+                ..Default::default()
+            },
+            numerical_depth: 3,
+            max_symbolic_cases: Some(1),
+            ..Default::default()
+        },
+    );
+    assert!(matches!(bounded, Err(SectorSolveError::CaseBudget { .. })));
+    let partial = generic_rules(&solver, 3, 1);
+    assert_eq!(partial.len(), 1);
+    assert!(!partial[0].candidate.sources.is_empty());
+
+    // A one-case budget deliberately leaves exceptional faces uncovered.
+    // Find one covered target and one genuinely reducible excluded target.
+    let mut covered = None;
+    let mut excluded = None;
+    let mut fixed = Bank::new(&sources, &solver);
+    for a in 1..=4 {
+        for b in 1..=4 {
+            let target = [a, b];
+            if apply(&partial[0], target, &sources, &solver)
+                .unwrap()
+                .is_some()
+            {
+                covered.get_or_insert(target);
+            } else if fixed
+                .try_reduce(target, &sources, &solver, 3)
+                .unwrap()
+                .is_some()
+            {
+                excluded.get_or_insert(target);
+            }
+        }
+    }
+    let covered = covered.expect("the admitted rule did not cover a test target");
+    let excluded = excluded.expect("the test did not exercise exceptional-face fallback");
+    let mut bank = Bank::new(&sources, &solver);
+    // Inject the deliberately partial two-line domain to exercise exactly the
+    // same dispatch/fallback path as production's four-line generic tier.
+    bank.generic = Some(partial);
+    let direct = bank
+        .try_reduce(covered, &sources, &solver, 3)
+        .unwrap()
+        .unwrap();
+    assert_eq!((bank.domain_hits, bank.generated), (1, 0));
+    let fallback = bank
+        .try_reduce(excluded, &sources, &solver, 3)
+        .unwrap()
+        .unwrap();
+    assert_eq!((bank.domain_hits, bank.generated), (1, 1));
+    assert!(
+        bank.try_reduce([1, 1], &sources, &solver, 3)
+            .unwrap()
+            .is_none()
+    );
+    assert_eq!(bank.missed, 1);
+    assert!(direct.conditions.iter().any(|p| !p.is_constant()));
+
+    // Independently reduce both identities with the default concrete backend.
+    // Its rules need not have the same RHS or choose the same local equation.
+    let identities = [(covered, direct), (excluded, fallback)];
+    let mut targets = std::collections::BTreeSet::new();
+    for (lhs, applied) in &identities {
+        targets.insert(crate::Integral(lhs.to_vec()));
+        for term in &applied.terms {
+            targets.insert(crate::Integral(
+                term.integral.powers().iter().map(|p| p.value()).collect(),
+            ));
+        }
+    }
+    let reduction = crate::RustRedBackend::default()
+        .reduce_at_epsilon(
+            &family,
+            &targets.into_iter().collect::<Vec<_>>(),
+            &epsilon,
+            &crate::RunContext::default(),
+        )
+        .unwrap();
+    for (lhs, applied) in identities {
+        let mut residual = reduction.expand(&crate::Integral(lhs.to_vec())).unwrap();
+        for term in applied.terms {
+            let coefficient =
+                crate::family::substitute(&term.coefficient.to_expression(), &converted.reverse);
+            let child = crate::Integral(term.integral.powers().iter().map(|p| p.value()).collect());
+            for (master, reduced) in reduction.expand(&child).unwrap() {
+                let old = residual.remove(&master).unwrap_or_default();
+                residual.insert(master, old - &coefficient * reduced);
+            }
+        }
+        assert!(residual.values().all(|c| c.together().cancel().is_zero()));
+    }
+}
+
+#[test]
+fn four_line_domains_are_reused_while_three_line_sectors_keep_rays() {
+    let sources = setup();
+    let four = [true, true, false, false, true, false, true, false, false];
+    let solver = SectorSolver::new(&sources, four, SectorConfig::default()).unwrap();
+    let mut bank = Bank::new(&sources, &solver);
+    for rank in [3, 4] {
+        assert!(
+            bank.try_reduce([2, 2, -rank, 0, 2, 0, 2, 0, 0], &sources, &solver, 3)
+                .unwrap()
+                .is_some()
+        );
+    }
+    assert_eq!((bank.domains, bank.domain_hits, bank.generated), (1, 2, 0));
+
+    let solver = SectorSolver::new(&sources, sector(), SectorConfig::default()).unwrap();
+    let mut bank = Bank::new(&sources, &solver);
+    assert!(
+        bank.try_reduce([-3, 2, 0, 0, 2, 0, 2, 0, 0], &sources, &solver, 3)
+            .unwrap()
+            .is_some()
+    );
+    assert_eq!((bank.domains, bank.domain_hits, bank.generated), (0, 0, 1));
+}
