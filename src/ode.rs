@@ -211,11 +211,35 @@ impl NumericRational {
     }
 }
 
+type ExactPolynomial = MultivariatePolynomial<IntegerRing, u16>;
+
+fn multiply_polynomials(a: &ExactPolynomial, b: &ExactPolynomial) -> Result<ExactPolynomial> {
+    for (i, variable) in a.variables().iter().enumerate() {
+        if let Some(j) = b.variables().iter().position(|v| v == variable)
+            && a.degree(i).checked_add(b.degree(j)).is_none()
+        {
+            return Err(Error::Limit(
+                "cleared differential polynomial degree overflow".into(),
+            ));
+        }
+    }
+    Ok(a * b)
+}
+
+/// A row of D(x) y'(x) = A(x) y(x), with an exact common denominator
+/// cleared before numerical specialization. Structural zero entries are absent.
+#[derive(Clone, Debug)]
+struct PolynomialRow {
+    denominator: Vec<C>,
+    entries: Vec<(usize, Vec<C>)>,
+}
+
 #[derive(Clone, Debug)]
 pub struct CompiledSystem {
     pub(crate) p: Precision,
     pub(crate) matrix: Vec<Vec<NumericRational>>,
     pub poles: Vec<C>,
+    polynomial_rows: Vec<PolynomialRow>,
 }
 
 impl DifferentialSystem {
@@ -262,8 +286,11 @@ impl DifferentialSystem {
         let mut matrix = Vec::new();
         let mut poles = Vec::new();
         let mut seen_factors = ahash::HashSet::default();
+        let mut polynomial_rows = Vec::new();
         for row in &self.matrix {
             let mut out = Vec::new();
+            let mut exact = Vec::new();
+            let mut common_denominator: Option<ExactPolynomial> = None;
             for a in row {
                 let rational: RationalPolynomial<IntegerRing, u16> = a
                     .try_to_rational_polynomial(&Q, &Z, None)
@@ -320,10 +347,52 @@ impl DifferentialSystem {
                     numerator,
                     denominator,
                 });
+                common_denominator = Some(if let Some(previous) = common_denominator {
+                    let quotient = previous
+                        .try_div(&previous.gcd(&rational.denominator))
+                        .ok_or_else(|| {
+                            Error::Numerical("exact denominator LCM division failed".into())
+                        })?;
+                    multiply_polynomials(&quotient, &rational.denominator)?
+                } else {
+                    rational.denominator.clone()
+                });
+                exact.push(rational);
             }
+            let common_denominator = common_denominator.unwrap();
+            let denominator = polynomial_coefficients(
+                &common_denominator.to_expression(),
+                self.variable,
+                p,
+                values,
+            )?;
+            let mut entries = Vec::new();
+            for (j, rational) in exact.iter().enumerate() {
+                if rational.numerator.is_zero() {
+                    continue;
+                }
+                let multiplier = common_denominator
+                    .try_div(&rational.denominator)
+                    .ok_or_else(|| Error::Numerical("exact denominator clearing failed".into()))?;
+                let cleared = multiply_polynomials(&rational.numerator, &multiplier)?;
+                let coefficients =
+                    polynomial_coefficients(&cleared.to_expression(), self.variable, p, values)?;
+                if coefficients.iter().any(|c| *c != p.zero()) {
+                    entries.push((j, coefficients));
+                }
+            }
+            polynomial_rows.push(PolynomialRow {
+                denominator,
+                entries,
+            });
             matrix.push(out);
         }
-        Ok(CompiledSystem { p, matrix, poles })
+        Ok(CompiledSystem {
+            p,
+            matrix,
+            poles,
+            polynomial_rows,
+        })
     }
     /// Strongly connected blocks in dependency order, independent of input ordering.
     pub fn blocks(&self) -> Result<Vec<Vec<usize>>> {
@@ -384,26 +453,73 @@ impl CompiledSystem {
         if values.len() != n {
             return Err(Error::InvalidInput("boundary dimension".into()));
         }
-        let a = self
-            .matrix
+        let zero = p.zero();
+        // Translate only the finite polynomial degrees needed at this order;
+        // no rational matrix entry is expanded into an order-long power series.
+        let rows = self
+            .polynomial_rows
             .iter()
             .map(|row| {
-                row.iter()
-                    .map(|v| v.series(p, center, order - 1))
-                    .collect::<Result<Vec<_>>>()
+                let mut denominator = shift_polynomial(
+                    p,
+                    &row.denominator,
+                    center,
+                    (row.denominator.len() - 1).min(order.saturating_sub(1)),
+                );
+                if denominator[0] == zero {
+                    return Err(Error::Numerical("expansion center is a pole".into()));
+                }
+                let divisor = denominator[0].clone();
+                for c in &mut denominator {
+                    *c = p.div(c, &divisor);
+                }
+                let entries = row
+                    .entries
+                    .iter()
+                    .map(|(j, coefficients)| {
+                        let mut shifted = shift_polynomial(
+                            p,
+                            coefficients,
+                            center,
+                            (coefficients.len() - 1).min(order.saturating_sub(1)),
+                        );
+                        for c in &mut shifted {
+                            *c = p.div(c, &divisor);
+                        }
+                        (*j, shifted)
+                    })
+                    .collect::<Vec<_>>();
+                Ok(PolynomialRow {
+                    denominator,
+                    entries,
+                })
             })
             .collect::<Result<Vec<_>>>()?;
-        let mut y = vec![vec![p.zero(); n]; order + 1];
+        let mut y = vec![vec![zero.clone(); n]; order + 1];
+        // Store y' coefficients as well as y. Then the denominator convolution
+        // does not repeatedly multiply y_k by its integer derivative weight.
+        let mut derivative = vec![vec![zero.clone(); n]; order];
         y[0] = values.to_vec();
+        // With D_0 normalized to one:
+        // y'_{k,i} = sum_{j,l} A_{ij,l} y_{k-l,j}
+        //             - sum_{l>=1} D_{i,l} y'_{k-l,i}.
         for k in 0..order {
-            for (i, row) in a.iter().enumerate() {
-                let mut sum = p.zero();
-                for j in 0..n {
-                    for l in 0..=k {
-                        sum = p.add(&sum, &p.mul(&row[j][l], &y[k - l][j]));
+            for (i, row) in rows.iter().enumerate() {
+                let mut sum = zero.clone();
+                for (j, coefficients) in &row.entries {
+                    for (l, coefficient) in coefficients.iter().enumerate().take(k + 1) {
+                        if *coefficient != zero {
+                            sum = p.add(&sum, &p.mul(coefficient, &y[k - l][*j]));
+                        }
                     }
                 }
-                y[k + 1][i] = p.scale(&sum, 1, (k + 1) as i64);
+                for (l, coefficient) in row.denominator.iter().enumerate().skip(1).take(k) {
+                    if *coefficient != zero {
+                        sum = p.sub(&sum, &p.mul(coefficient, &derivative[k - l][i]));
+                    }
+                }
+                derivative[k][i] = sum;
+                y[k + 1][i] = p.scale(&derivative[k][i], 1, (k + 1) as i64);
             }
         }
         Ok(y)
@@ -658,4 +774,98 @@ fn evaluate_taylor(p: Precision, coefficients: &[Vec<C>], h: &C) -> (Vec<C>, Vec
         power = p.mul(&power, h);
     }
     (out, tail)
+}
+
+#[cfg(test)]
+mod recurrence_tests {
+    use super::*;
+
+    // Independent reference recurrence: first expand each rational matrix entry,
+    // then match coefficients of y' = M y without clearing denominators.
+    fn rational_series_taylor(
+        system: &CompiledSystem,
+        center: &C,
+        values: &[C],
+        order: usize,
+    ) -> Result<Vec<Vec<C>>> {
+        let p = system.p;
+        let matrix = system
+            .matrix
+            .iter()
+            .map(|row| {
+                row.iter()
+                    .map(|entry| entry.series(p, center, order.saturating_sub(1)))
+                    .collect::<Result<Vec<_>>>()
+            })
+            .collect::<Result<Vec<_>>>()?;
+        let mut y = vec![vec![p.zero(); values.len()]; order + 1];
+        y[0] = values.to_vec();
+        for k in 0..order {
+            for (i, row) in matrix.iter().enumerate() {
+                let mut sum = p.zero();
+                for (j, entry) in row.iter().enumerate() {
+                    for (l, a) in entry.iter().enumerate().take(k + 1) {
+                        sum = p.add(&sum, &p.mul(a, &y[k - l][j]));
+                    }
+                }
+                y[k + 1][i] = p.scale(&sum, 1, (k + 1) as i64);
+            }
+        }
+        Ok(y)
+    }
+
+    #[test]
+    fn cleared_recurrence_matches_rational_series_at_complex_centers() {
+        let p = Precision::decimal(80).unwrap();
+        let x = Atom::var(symbol!("recurrence_x"));
+        let epsilon = Atom::var(symbol!("recurrence_eps"));
+        let first = &x - Atom::num(1);
+        let second = &x + Atom::num(2);
+        let system = DifferentialSystem {
+            variable: symbol!("recurrence_x"),
+            matrix: vec![
+                vec![
+                    (x.clone().pow(3) + Atom::num(2)) / first.clone().pow(2),
+                    &epsilon / &second,
+                    Atom::new(),
+                ],
+                vec![Atom::num(1) / (&first * &second), Atom::new(), x.pow(20)],
+                vec![Atom::new(); 3],
+            ],
+        }
+        .compile(
+            p,
+            &ahash::HashMap::from_iter([(epsilon, p.rational(&Rational::from((1, 37))))]),
+        )
+        .unwrap();
+        assert_eq!(system.polynomial_rows[0].denominator.len(), 4);
+        assert_eq!(system.polynomial_rows[0].entries.len(), 2);
+        assert!(system.polynomial_rows[2].entries.is_empty());
+        let values = vec![p.i(2), p.complex(3, 1), p.i(7)];
+        for center in [p.zero(), p.parse("0.375", "0.25").unwrap()] {
+            for order in [0, 1, 12, 32] {
+                let finite = system.taylor(&center, &values, order).unwrap();
+                let reference = rational_series_taylor(&system, &center, &values, order).unwrap();
+                for (a, b) in finite.iter().flatten().zip(reference.iter().flatten()) {
+                    assert!(p.close(a, b, 65), "order {order}: {a} != {b}");
+                }
+                assert!(finite.iter().skip(1).all(|row| row[2] == p.zero()));
+            }
+        }
+        assert!(matches!(
+            system.taylor(&p.i(1), &values, 12),
+            Err(Error::Numerical(_))
+        ));
+    }
+
+    #[test]
+    fn polynomial_clearing_reports_degree_overflow() {
+        let a: RationalPolynomial<IntegerRing, u16> = parse!("overflow_x^40000")
+            .try_to_rational_polynomial(&Q, &Z, None)
+            .unwrap();
+        assert!(matches!(
+            multiply_polynomials(&a.numerator, &a.numerator),
+            Err(Error::Limit(_))
+        ));
+    }
 }
