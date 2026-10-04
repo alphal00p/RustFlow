@@ -2,7 +2,7 @@ use std::{fs, path::Path};
 
 fn hash_tree(path: &Path, root: &Path, hasher: &mut blake3::Hasher) {
     let mut entries = fs::read_dir(path)
-        .expect("read RustRed source tree")
+        .expect("read dependency source tree")
         .map(|e| e.unwrap().path())
         .collect::<Vec<_>>();
     entries.sort();
@@ -18,7 +18,7 @@ fn hash_tree(path: &Path, root: &Path, hasher: &mut blake3::Hasher) {
                     .to_string_lossy()
                     .as_bytes(),
             );
-            hasher.update(&fs::read(&entry).expect("read RustRed source"));
+            hasher.update(&fs::read(&entry).expect("read dependency source"));
         }
     }
 }
@@ -27,6 +27,34 @@ fn main() {
     for path in ["Cargo.toml", "Cargo.lock"] {
         println!("cargo:rerun-if-changed={path}");
         dependencies.update(&fs::read(path).expect("read dependency fingerprint input"));
+    }
+    // Path dependencies carry no source revision in Cargo.lock. Include the
+    // consumed native HEPKit implementation and workspace configuration in
+    // symbolic/numerical cache compatibility, including local fixes.
+    let hepkit = Path::new("../hepkit");
+    let manifest = hepkit.join("Cargo.toml");
+    println!("cargo:rerun-if-changed={}", manifest.display());
+    dependencies.update(&fs::read(&manifest).expect("read HEPKit workspace manifest"));
+    for name in [
+        "feynkit-graph",
+        "feynkit-model",
+        "feynkit-kinematics",
+        "feynkit-tensor",
+        "linnet",
+        "spenso",
+        "idenso",
+        "spenso-macros",
+        "symbolica-utils",
+    ] {
+        dependencies.update(name.as_bytes());
+        let package = hepkit.join("crates").join(name);
+        let manifest = package.join("Cargo.toml");
+        println!("cargo:rerun-if-changed={}", manifest.display());
+        dependencies.update(&fs::read(&manifest).expect("read HEPKit package manifest"));
+        hash_tree(&package.join("src"), &package, &mut dependencies);
+        if name == "feynkit-model" {
+            hash_tree(&package.join("data"), &package, &mut dependencies);
+        }
     }
     println!(
         "cargo:rustc-env=DEPENDENCY_SOURCE_DIGEST={}",

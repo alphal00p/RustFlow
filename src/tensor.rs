@@ -1,46 +1,17 @@
-//! Exact isotropic tensor projection for vacuum boundary numerators.
-use crate::algebra::inverse;
+//! Exact vacuum tensor projection through HEPKit's native Spenso reducer.
 use crate::{Error, Result};
+use feynkit_kinematics::Kinematics;
+use feynkit_tensor::{TensorReducer, TensorReductionError};
 use std::collections::BTreeMap;
 use symbolica::prelude::*;
 
-type Pairing = Vec<(usize, usize)>;
-type PairingOrbits = Vec<Vec<Pairing>>;
-fn pairings(indices: &[usize]) -> Vec<Pairing> {
-    if indices.is_empty() {
-        return vec![Vec::new()];
-    }
-    let first = indices[0];
-    let mut out = Vec::new();
-    for j in 1..indices.len() {
-        let remaining = indices[1..]
-            .iter()
-            .copied()
-            .filter(|&i| i != indices[j])
-            .collect::<Vec<_>>();
-        for mut pairing in pairings(&remaining) {
-            pairing.push((first, indices[j]));
-            out.push(pairing);
-        }
-    }
-    out
-}
-fn cycles(a: &Pairing, b: &Pairing, rank: usize) -> usize {
-    let mut parent = (0..rank).collect::<Vec<_>>();
-    fn root(parent: &[usize], mut i: usize) -> usize {
-        while parent[i] != i {
-            i = parent[i];
-        }
-        i
-    }
-    for &(i, j) in a.iter().chain(b) {
-        let l = root(&parent, i);
-        let r = root(&parent, j);
-        parent[l] = r;
-    }
-    (0..rank).filter(|&i| root(&parent, i) == i).count()
-}
+type ProjectionKey = (Vec<usize>, Vec<usize>);
+// Native coefficient numerator, denominator, and invariant tensor expression.
+type Projection = Vec<(Atom, Atom, Atom)>;
 
+// Equal rows represent indistinguishable vectors for this Gram polynomial.
+// This only translates the public Gram interface to native vector identities;
+// HEPKit owns all contraction orbits, pairings and projector inversion.
 fn vector_classes(gram: &[Vec<Atom>]) -> (Vec<usize>, Vec<usize>) {
     let mut representatives = Vec::<usize>::new();
     let classes = (0..gram.len())
@@ -56,68 +27,33 @@ fn vector_classes(gram: &[Vec<Atom>]) -> (Vec<usize>, Vec<usize>) {
     (classes, representatives)
 }
 
-// Wick's pairing sum, memoized by multiplicities of equal Gram rows. This
-// avoids materializing (rank-1)!! labelled pairings for a repeated hard vector.
-fn pairing_sum(gram: &[Vec<Atom>]) -> Result<Atom> {
-    let (classes, representatives) = vector_classes(gram);
-    let mut counts = vec![0; representatives.len()];
-    for class in classes {
-        counts[class] += 1;
+fn native_error(error: TensorReductionError) -> Error {
+    match error {
+        TensorReductionError::UnsupportedRank { .. }
+        | TensorReductionError::PairingLimit { .. }
+        | TensorReductionError::PairingProductLimit { .. }
+        | TensorReductionError::OutputLimit { .. }
+        | TensorReductionError::MultiplicityOverflow(_)
+        | TensorReductionError::CounterOverflow => Error::Limit(error.to_string()),
+        _ => Error::Unsupported(format!("native tensor projection: {error}")),
     }
-    fn sum(
-        gram: &[Vec<Atom>],
-        representatives: &[usize],
-        counts: &mut [usize],
-        memo: &mut BTreeMap<Vec<usize>, Atom>,
-    ) -> Result<Atom> {
-        if let Some(value) = memo.get(counts) {
-            return Ok(value.clone());
-        }
-        let Some(first) = counts.iter().position(|&n| n != 0) else {
-            return Ok(Atom::num(1));
-        };
-        if memo.len() >= 100_000 {
-            return Err(Error::Limit(
-                "tensor pairing sum exceeds 100000 states".into(),
-            ));
-        }
-        let key = counts.to_vec();
-        counts[first] -= 1;
-        let mut value = Atom::new();
-        for second in 0..counts.len() {
-            let choices = counts[second];
-            if choices == 0 || gram[representatives[first]][representatives[second]].is_zero() {
-                continue;
-            }
-            counts[second] -= 1;
-            value += Atom::num(choices as i64)
-                * &gram[representatives[first]][representatives[second]]
-                * sum(gram, representatives, counts, memo)?;
-            counts[second] += 1;
-        }
-        counts[first] += 1;
-        memo.insert(key, value.clone());
-        Ok(value)
-    }
-    sum(gram, &representatives, &mut counts, &mut BTreeMap::new())
 }
 
-/// Project a product of scalar products (hard_vector[i] . external_vector[i]).
-/// `hard_gram` and `external_gram` give all pairwise scalar products of the
-/// labelled vectors; repeated vectors may appear as repeated Gram rows.
-/// The returned expression is valid inside a rotationally invariant vacuum
-/// integral. Odd rank vanishes. Repeated single-vector tensors support rank 32;
-/// other tensors support rank 14 with at most 128 pairing orbits.
+/// Project a product `(hard_vector[i] . external_vector[i])` inside a
+/// rotationally invariant vacuum integral. Gram rows identify repeated
+/// vectors. Odd rank vanishes. Native HEPKit supports general rank 20 and
+/// fully contracted single-hard-vector tensors through rank 32, with bounded
+/// invariant output. Symbolic dimensions are substituted after projection.
 #[derive(Clone, Debug)]
 pub struct TensorProjector {
     dimension: Atom,
-    inverses: BTreeMap<Vec<usize>, (PairingOrbits, Vec<Vec<Atom>>)>,
+    projections: BTreeMap<ProjectionKey, Projection>,
 }
 impl TensorProjector {
     pub fn new(dimension: Atom) -> Self {
         Self {
             dimension,
-            inverses: BTreeMap::new(),
+            projections: BTreeMap::new(),
         }
     }
     pub fn project(
@@ -134,17 +70,6 @@ impl TensorProjector {
         {
             return Err(Error::InvalidInput("tensor Gram dimensions".into()));
         }
-        if rank % 2 == 1 {
-            return Ok(Atom::new());
-        }
-        if rank == 0 {
-            return Ok(Atom::num(1));
-        }
-        if rank > 32 {
-            return Err(Error::Limit(format!(
-                "vacuum tensor rank {rank} exceeds 32"
-            )));
-        }
         if (0..rank).any(|i| {
             (0..i).any(|j| {
                 hard_gram[i][j] != hard_gram[j][i] || external_gram[i][j] != external_gram[j][i]
@@ -154,13 +79,86 @@ impl TensorProjector {
                 "tensor Gram matrices must be symmetric".into(),
             ));
         }
-        let (classes, representatives) = vector_classes(hard_gram);
-        let class_count = representatives.len();
-        if class_count == 1 {
-            let denominator = (0..rank / 2)
-                .fold(Atom::num(1), |value, k| {
-                    value * (&self.dimension + Atom::num(2 * k as i64))
+        if rank % 2 == 1 {
+            return Ok(Atom::new());
+        }
+        if rank == 0 {
+            return Ok(Atom::one());
+        }
+        if rank > 32 {
+            return Err(Error::Limit(format!(
+                "vacuum tensor rank {rank} exceeds 32"
+            )));
+        }
+        let (hard_classes, hard_representatives) = vector_classes(hard_gram);
+        let (external_classes, external_representatives) = vector_classes(external_gram);
+        let key = (hard_classes, external_classes);
+        let dimension = Atom::var(symbol!("symbolica_amflow::tensor_projection_dimension"));
+        let kinematics = Kinematics::in_dimension(&dimension)
+            .map_err(|error| Error::InvalidInput(error.to_string()))?;
+        let hard_head = spenso::vector_symbol!("symbolica_amflow::tensor_projection_hard");
+        let external_head = spenso::vector_symbol!("symbolica_amflow::tensor_projection_external");
+        let dot = |left: &Atom, right: &Atom| {
+            kinematics
+                .scalar_product(left, right)
+                .map_err(|error| Error::InvalidInput(error.to_string()))
+        };
+        if !self.projections.contains_key(&key) {
+            let numerator =
+                key.0
+                    .iter()
+                    .zip(&key.1)
+                    .try_fold(Atom::one(), |a, (&hard, &external)| {
+                        Ok::<_, Error>(
+                            a * dot(&hard_head.call(hard), &external_head.call(external))?,
+                        )
+                    })?;
+            let reduced = TensorReducer::new(dimension.clone())
+                .with_integrated_head(hard_head)
+                .reduce(numerator.as_view())
+                .map_err(native_error)?;
+            if !reduced.is_fully_contracted() {
+                return Err(Error::Unsupported(
+                    "native vacuum projector retained free indices".into(),
+                ));
+            }
+            let projection = reduced
+                .terms()
+                .iter()
+                .map(|term| {
+                    let coefficient: RationalPolynomial<IntegerRing, u16> = term
+                        .coefficient()
+                        .try_to_rational_polynomial(&Q, &Z, None)
+                        .map_err(|error| {
+                            Error::Unsupported(format!("native projector coefficient: {error}"))
+                        })?;
+                    Ok((
+                        coefficient.numerator.to_expression(),
+                        coefficient.denominator.to_expression(),
+                        term.tensor().clone(),
+                    ))
                 })
+                .collect::<Result<Projection>>()?;
+            self.projections.insert(key.clone(), projection);
+        }
+        let mut gram = BTreeMap::new();
+        for (head, representatives, values) in [
+            (hard_head, &hard_representatives, hard_gram),
+            (external_head, &external_representatives, external_gram),
+        ] {
+            for (i, &left) in representatives.iter().enumerate() {
+                for (j, &right) in representatives.iter().enumerate() {
+                    gram.insert(
+                        dot(&head.call(i), &head.call(j))?,
+                        values[left][right].clone(),
+                    );
+                }
+            }
+        }
+        let dimension = BTreeMap::from([(dimension, self.dimension.clone())]);
+        let mut value = Atom::new();
+        for (numerator, denominator, tensor) in &self.projections[&key] {
+            let denominator = crate::family::substitute(denominator, &dimension)
                 .together()
                 .cancel();
             if denominator.is_zero() {
@@ -168,81 +166,9 @@ impl TensorProjector {
                     "singular isotropic tensor dimension".into(),
                 ));
             }
-            return Ok((hard_gram[0][0].clone().pow((rank / 2) as i64)
-                * pairing_sum(external_gram)?
-                / denominator)
-                .together()
-                .cancel());
+            value += crate::family::substitute(numerator, &dimension) / denominator
+                * crate::family::substitute(tensor, &gram);
         }
-        if rank > 14 {
-            return Err(Error::Limit(format!(
-                "tensor rank {rank} with {class_count} distinct hard vectors exceeds the rank-14 orbit budget"
-            )));
-        }
-        if !self.inverses.contains_key(&classes) {
-            let pairings = pairings(&(0..rank).collect::<Vec<_>>());
-            // Permuting identical hard vectors leaves the contraction vector
-            // invariant. Pairings are in the same orbit exactly when they have
-            // the same numbers of edges between vector classes. The inverse
-            // problem therefore closes on this much smaller invariant space.
-            let mut groups = BTreeMap::<Vec<usize>, Vec<Pairing>>::new();
-            for pairing in pairings {
-                let mut signature = vec![0; class_count * class_count];
-                for &(i, j) in &pairing {
-                    let (a, b) = (classes[i].min(classes[j]), classes[i].max(classes[j]));
-                    signature[a * class_count + b] += 1;
-                }
-                groups.entry(signature).or_default().push(pairing);
-                if groups.len() > 128 {
-                    return Err(Error::Limit(
-                        "tensor invariant basis exceeds 128 pairing orbits".into(),
-                    ));
-                }
-            }
-            let orbits = groups.into_values().collect::<PairingOrbits>();
-            let gram = orbits
-                .iter()
-                .map(|a| {
-                    orbits
-                        .iter()
-                        .map(|b| {
-                            b.iter().fold(Atom::new(), |sum, pairing| {
-                                sum + self
-                                    .dimension
-                                    .clone()
-                                    .pow(cycles(&a[0], pairing, rank) as i64)
-                            })
-                        })
-                        .collect()
-                })
-                .collect::<Vec<Vec<_>>>();
-            self.inverses
-                .insert(classes.clone(), (orbits, inverse(&gram)?));
-        }
-        let (orbits, inverse) = &self.inverses[&classes];
-        let contract = |gram: &[Vec<Atom>], pairing: &Pairing| {
-            pairing
-                .iter()
-                .fold(Atom::num(1), |a, &(i, j)| a * &gram[i][j])
-        };
-        let hard = orbits
-            .iter()
-            .map(|orbit| contract(hard_gram, &orbit[0]))
-            .collect::<Vec<_>>();
-        let external = orbits
-            .iter()
-            .map(|orbit| {
-                orbit.iter().fold(Atom::new(), |sum, pairing| {
-                    sum + contract(external_gram, pairing)
-                })
-            })
-            .collect::<Vec<_>>();
-        let mut result = Atom::new();
-        for (i, row) in inverse.iter().enumerate() {
-            for (j, c) in row.iter().enumerate() {
-                result += c * &hard[j] * &external[i];
-            }
-        }
-        Ok(result.together().cancel())
+        Ok(value.together().cancel())
     }
 }

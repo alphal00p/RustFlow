@@ -35,11 +35,18 @@ exact rational epsilon specialization before IBP elimination;
 Basis refinement also retains symbolic epsilon, taking precedence over sampled
 reduction so that dimension-dependent denominator factors can be identified.
 
+Keep the native HEPKit checkout at `../hepkit` as described in
+[HEPKit integration](docs/hepkit-integration.md). Its graph, kinematics and tensor
+crates use the same pinned Symbolica revision. Python features are disabled.
+Local dependency source content is included in persistent-cache identities.
+
 ```sh
 nix develop
 # Configure SYMBOLICA_LICENSE in your own shell; never commit a license key.
 cargo test --release
 cargo run --release --example massless_bubble
+cargo run --release --bin rustflow -- graph examples/cli/massless-bubble.json
+cargo run --release --bin rustflow -- transport examples/cli/physical-transport.json
 cargo run --release --example two_loop_acceptance -- \
   --symmetry-rules --parametric-rules --depth 3 --case-batch 32 \
   --max-targets 262144 --max-exact-frontier 512 \
@@ -51,6 +58,8 @@ reduction settings; the default backend budget is intended for smaller families.
 It returns an error
 if any stage is unsupported or a limit is exhausted. It does not substitute
 stored reference values. The fixtures retain upstream precision metadata.
+The [CLI steering format](docs/cli.md) accepts native HEPKit DOT/model files and
+supports persistent transport caches across processes.
 
 ## Interface
 
@@ -73,6 +82,10 @@ stored reference values. The fixtures retain upstream precision metadata.
   points and the destination to `RustFlowCache`. Binary snapshots can be loaded
   before the next request. Regular straight paths are currently supported by
   this orchestration interface.
+- `hepkit::GraphIntegral` retains a native HEPKit graph and delegates routing,
+  contraction, denominator completion and scalar numerator rewriting to its
+  Linnet/Spenso interfaces. `solve_integral_combinations` evaluates the resulting
+  exact weighted integral groups before Laurent fitting.
 
 See [library usage](docs/usage.md), the runnable examples, and integration tests
 for complete typed inputs.

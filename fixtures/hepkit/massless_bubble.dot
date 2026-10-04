@@ -1,0 +1,9 @@
+// Native HEPKit compact DOT: massless scalar bubble, momentum P(1).
+digraph massless_bubble {
+    incoming [style=invis];
+    outgoing [style=invis];
+    incoming -> a [id=0, particle="phi"];
+    b -> outgoing [id=1, particle="phi"];
+    a -> b [id=2, particle="phi", lmb_id=0];
+    b -> a [id=3, particle="phi"];
+}

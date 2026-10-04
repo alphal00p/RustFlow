@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "derivatives": { "s": [["eps/s"]] },
+  "basis": ["I"],
+  "normalization": "1",
+  "branch_domain": "positive real s; principal log(s)",
+  "leading_epsilon_power": 0,
+  "last_epsilon_power": 2,
+  "cache_directory": "../../target/cli-physical-cache",
+  "seeds": [{
+    "coordinates": {"s": "1"},
+    "working_digits": 80,
+    "verified_digits": 45,
+    "coefficients": [
+      [{"real": "1", "imaginary": "0"}],
+      [{"real": "0", "imaginary": "0"}],
+      [{"real": "0", "imaginary": "0"}]
+    ],
+    "absolute_errors": [["1e-60"], ["1e-60"], ["1e-60"]],
+    "provenance": "Analytic I(s)=s^eps: exact coefficients at s=1, stored at 80 working digits"
+  }],
+  "destinations": [{"s": "4"}, {"s": "5"}, {"s": "5"}],
+  "options": {"digits": 20}
+}

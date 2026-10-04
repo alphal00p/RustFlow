@@ -14,6 +14,7 @@ pub mod family;
 pub mod frobenius;
 pub mod ft;
 pub mod gaussian;
+pub mod hepkit;
 pub mod integrand;
 pub mod kinematic_derivative;
 pub mod kinematics;

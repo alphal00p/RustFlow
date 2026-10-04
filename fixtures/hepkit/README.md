@@ -1,0 +1,3 @@
+These small scientific inputs specify a massless real scalar with a cubic vertex and its one-loop two-point graph in native HEPKit model JSON and compact DOT. They were written for RustFlow adapter validation, using the public schema at HEPKit commit `8f834d9c62ae06fb327e4ef0b14abffda755b610`. They contain no computational implementation. The two internal edges have native IDs 2 and 3; integral powers are separate run metadata. Canonical external momentum is `gammalooprs::P(1)`.
+
+Model symbolic expressions use the `UFO` namespace. Unqualified graph expression symbols use `feynkit_graph`; native tensor momenta retain explicit `gammalooprs` names. Numerical defaults in model JSON are metadata only and are never used as exact kinematic substitutions by RustFlow.

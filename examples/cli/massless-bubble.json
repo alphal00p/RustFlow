@@ -1,0 +1,14 @@
+{
+  "schema_version": 1,
+  "model": "../../fixtures/hepkit/massless_phi3.json",
+  "diagram": "../../fixtures/hepkit/massless_bubble.dot",
+  "scalar_products": [{
+    "left": "gammalooprs::P(1)",
+    "right": "gammalooprs::P(1)",
+    "value": "s"
+  }],
+  "substitutions": {"s": "-2"},
+  "edge_powers": {"2": 1, "3": 1},
+  "last_epsilon_power": 0,
+  "options": {"digits": 20}
+}

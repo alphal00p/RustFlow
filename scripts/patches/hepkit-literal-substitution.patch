@@ -1,0 +1,23 @@
+diff --git a/crates/feynkit-graph/src/integrals/diagram.rs b/crates/feynkit-graph/src/integrals/diagram.rs
+index 52d4480dd..f64f3aeb3 100644
+--- a/crates/feynkit-graph/src/integrals/diagram.rs
++++ b/crates/feynkit-graph/src/integrals/diagram.rs
+@@ -3,6 +3,7 @@ use std::collections::BTreeMap;
+ use feynkit_kinematics::Kinematics;
+ use spenso::structure::representation::{Minkowski, RepName};
+ use symbolica::atom::{Atom, AtomCore, AtomView};
++use symbolica::id::Pattern;
+ 
+ use super::{IntegralFamily, IntegralFamilyError};
+ use crate::{DiagramError, FeynmanDiagram, symbols};
+@@ -115,7 +116,9 @@ impl FeynmanDiagram {
+             // so propagator construction and model mass conventions stay owned
+             // by denominator_of_in_dimension rather than a second implementation.
+             let original_square = rep.inner_product(&arguments[1], &arguments[1]);
+-            let denominator = arguments[3].replace(original_square).with(square);
++            let denominator = arguments[3]
++                .replace(Pattern::Literal(original_square))
++                .with(Pattern::Literal(square));
+             denominators.insert(edge, denominator);
+         }
+         Ok(IntegralFamily::new(

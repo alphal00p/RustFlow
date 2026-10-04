@@ -1,0 +1,37 @@
+{
+  "schema_version": 1,
+  "milestone": "Native HEPKit graph input, CLI, and tensor projection delegation",
+  "date_utc": "2026-10-04",
+  "base_commit": "056f1077a6f680b4924bc8474143c68d62468cf4",
+  "release_tests": {
+    "command": "cargo test --release -p symbolica-amflow --lib --tests -j 6",
+    "passed": 173,
+    "failed": 0,
+    "ignored": 0,
+    "groups": 26
+  },
+  "clippy": {
+    "command": "cargo clippy -p symbolica-amflow --all-targets -j 6 -- -D warnings",
+    "passed": true,
+    "dependency_note": "Existing RustRed dead-code warnings; RustRed untouched."
+  },
+  "format": {
+    "command": "cargo fmt -p symbolica-amflow --check",
+    "passed": true
+  },
+  "hepkit_commit": "cb1098330687c3def94c8394c5380e1044ec83c5",
+  "checks": [
+    "Native DOT/model JSON parsing and routing, native EdgeId powers and weights",
+    "Exact complex kinematics and two-loop scalar-product coordinate permutation",
+    "Symbolic D-dimensional contraction, literal fixed-dimension traces, and incompatible surviving tensor rejection",
+    "Native TensorReducer mixed-rank-20 projection and unsupported-rank/exceptional-dimension errors",
+    "CLI native graph evaluation at 20 digits",
+    "Progressive CLI cache uses 9, 2, 0 steps across three destinations and survives a process restart"
+  ],
+  "prior_acceptance": "Original four-target twenty-digit paper acceptance retained; full hour-long Laurent acceptance not repeated after tensor delegation.",
+  "sha256": {
+    "target/rustflow-hepkit-final-tests.log": "20ceb113f695697eb86a09054ae8e11a54a48b867b6d6e6d79a8fb8f59c7bb83",
+    "target/rustflow-hepkit-final-clippy.log": "a36e280ef1911ea244b6c50c4977473c9f507e2e06ab35f3de37020eed655588",
+    "target/rustflow-hepkit-final-fmt.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  }
+}
