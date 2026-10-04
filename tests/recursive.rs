@@ -693,3 +693,257 @@ fn recursive_sampled_flows_keep_epsilon_in_memo_keys_and_handle_exceptional_samp
     assert!(backend.symbolic.load(Ordering::Relaxed) > 0);
     assert_eq!(backend.sampled.load(Ordering::Relaxed), second_calls);
 }
+
+#[test]
+fn boundary_batches_share_preparations_and_preserve_mass_choices() {
+    use std::sync::{
+        Arc,
+        atomic::{AtomicUsize, Ordering},
+    };
+    struct CountedBackend {
+        backend: RustRedBackend,
+        calls: AtomicUsize,
+    }
+    impl reduction::ReductionBackend for CountedBackend {
+        fn identity(&self) -> String {
+            self.backend.identity()
+        }
+        fn reduce(
+            &self,
+            family: &IntegralFamily,
+            targets: &[Integral],
+            context: &RunContext,
+        ) -> Result<reduction::Reduction> {
+            self.calls.fetch_add(1, Ordering::Relaxed);
+            self.backend.reduce(family, targets, context)
+        }
+        fn reduce_at_epsilon(
+            &self,
+            family: &IntegralFamily,
+            targets: &[Integral],
+            epsilon: &Rational,
+            context: &RunContext,
+        ) -> Result<reduction::Reduction> {
+            self.calls.fetch_add(1, Ordering::Relaxed);
+            self.backend
+                .reduce_at_epsilon(family, targets, epsilon, context)
+        }
+    }
+    let mut family = sunset();
+    family.propagators[1].constant = Atom::num(-2);
+    family.propagators[2].constant = Atom::num(-1);
+    // Three distinct products of massive tadpoles. The second target must
+    // shift line 1; the other two shift line 0 and can share one preparation.
+    let targets = vec![
+        Integral(vec![1, 1, 0]),
+        Integral(vec![0, 1, 1]),
+        Integral(vec![2, 0, 1]),
+        Integral(vec![1, 1, 0]),
+    ];
+    let epsilon = Rational::from((1, 100));
+    let options = FlowOptions::default();
+    let backend = CountedBackend {
+        backend: RustRedBackend::default(),
+        calls: AtomicUsize::new(0),
+    };
+    let prepared = Arc::new(AtomicUsize::new(0));
+    let counter = prepared.clone();
+    let context = RunContext {
+        progress: Some(Arc::new(move |event| {
+            if matches!(event, Progress::Prepared { .. }) {
+                counter.fetch_add(1, Ordering::Relaxed);
+            }
+        })),
+        ..Default::default()
+    };
+    let provider = recursive::RecursiveBoundary::new(&backend, &options, &context);
+    let p = Precision::decimal(60).unwrap();
+    let batched = provider
+        .evaluate_many(&family, &targets, &epsilon, p)
+        .unwrap();
+    assert_eq!(prepared.load(Ordering::Relaxed), 2);
+    let batch_calls = backend.calls.load(Ordering::Relaxed);
+    assert_eq!(batched[0], batched[3]);
+    let scalar_backend = CountedBackend {
+        backend: RustRedBackend::default(),
+        calls: AtomicUsize::new(0),
+    };
+    let scalar_context = RunContext::default();
+    let scalar = recursive::RecursiveBoundary::new(&scalar_backend, &options, &scalar_context);
+    for (target, value) in targets.iter().zip(&batched) {
+        let separate = scalar.evaluate(&family, target, &epsilon, p).unwrap();
+        assert!(p.close(value, &separate, 30));
+    }
+    assert!(batch_calls < scalar_backend.calls.load(Ordering::Relaxed));
+    let dimension = Rational::from(4) - &epsilon * &Rational::from(2);
+    for (value, (a, ma, b, mb)) in
+        batched
+            .iter()
+            .zip([(1, 3, 1, 2), (1, 2, 1, 1), (2, 3, 1, 1), (1, 3, 1, 2)])
+    {
+        let expected = p.mul(
+            &vacuum::tadpole(a, &p.i(ma), &dimension, p).unwrap(),
+            &vacuum::tadpole(b, &p.i(mb), &dimension, p).unwrap(),
+        );
+        assert!(p.close(value, &expected, 30));
+    }
+    let high = Precision::decimal(80).unwrap();
+    let refined = provider
+        .evaluate_many(&family, &targets, &epsilon, high)
+        .unwrap();
+    for (a, b) in batched.iter().zip(&refined) {
+        assert!(high.close(a, b, 30));
+    }
+    assert_eq!(prepared.load(Ordering::Relaxed), 2);
+    assert_eq!(backend.calls.load(Ordering::Relaxed), batch_calls);
+    // Canonical scalar memo entries remain reusable after a batch, including
+    // equivalent denominator permutations with a differently ordered family.
+    let mut permuted = family.clone();
+    permuted.propagators.swap(0, 1);
+    let value = provider
+        .evaluate(&permuted, &Integral(vec![0, 2, 1]), &epsilon, p)
+        .unwrap();
+    assert_eq!(value, batched[2]);
+    assert_eq!(backend.calls.load(Ordering::Relaxed), batch_calls);
+}
+
+#[test]
+fn connected_boundary_batch_preserves_recursive_siblings_and_refinement() {
+    use std::sync::{
+        Arc,
+        atomic::{AtomicUsize, Ordering},
+    };
+    let mut family = sunset();
+    family.propagators[0].constant = Atom::num(-1);
+    family.propagators[1].constant = Atom::num(-1);
+    let targets = [
+        Integral(vec![1, 1, 1]),
+        Integral(vec![2, 1, 1]),
+        Integral(vec![1, 2, 1]),
+    ];
+    let epsilon = Rational::from((1, 100));
+    let backend = RustRedBackend::default();
+    let options = FlowOptions::default();
+    let preparations = Arc::new(AtomicUsize::new(0));
+    let counter = preparations.clone();
+    let context = RunContext {
+        progress: Some(Arc::new(move |event| {
+            if matches!(event, Progress::Prepared { .. }) {
+                counter.fetch_add(1, Ordering::Relaxed);
+            }
+        })),
+        ..Default::default()
+    };
+    let provider = recursive::RecursiveBoundary::new(&backend, &options, &context);
+    let p = Precision::decimal(60).unwrap();
+    let values = provider
+        .evaluate_many(&family, &targets, &epsilon, p)
+        .unwrap();
+    assert_eq!(preparations.load(Ordering::Relaxed), 1);
+    let scalar_context = RunContext::default();
+    let scalar = recursive::RecursiveBoundary::new(&backend, &options, &scalar_context);
+    for (target, value) in targets.iter().zip(&values) {
+        let separate = scalar.evaluate(&family, target, &epsilon, p).unwrap();
+        assert!(p.close(value, &separate, 20));
+    }
+    // An independent Schwinger-parameter beta integral gives I111. The
+    // simultaneous mass derivative and equal-mass symmetry then give
+    // I211 = I121 = (D-3)/2 * I111, at unit mass squared.
+    let expected = |precision: Precision| {
+        let e = precision.rational(&epsilon);
+        let gamma = precision.gamma_real(&e.re).unwrap();
+        let base = precision.div(
+            &precision.powi(&gamma, 2),
+            &precision.mul(
+                &precision.sub(&precision.i(1), &e),
+                &precision.sub(&precision.i(1), &precision.scale(&e, 2, 1)),
+            ),
+        );
+        let raised = precision.mul(
+            &base,
+            &precision.sub(&precision.rational(&Rational::from((1, 2))), &e),
+        );
+        [base, raised.clone(), raised]
+    };
+    for (value, exact) in values.iter().zip(expected(p)) {
+        assert!(p.close(value, &exact, 20));
+    }
+    // A fresh provider prevents reuse of the original numeric or symbolic
+    // memo, while precision and expansion order both increase.
+    let refined_options = FlowOptions {
+        digits: 30,
+        guard_digits: 50,
+        series_order: 112,
+        ..options
+    };
+    let refined_context = RunContext::default();
+    let refined_provider =
+        recursive::RecursiveBoundary::new(&backend, &refined_options, &refined_context);
+    let high = Precision::decimal(80).unwrap();
+    let refined = refined_provider
+        .evaluate_many(&family, &targets, &epsilon, high)
+        .unwrap();
+    for ((value, refined), exact) in values.iter().zip(&refined).zip(expected(high)) {
+        assert!(high.close(value, refined, 20));
+        assert!(high.close(refined, &exact, 30));
+    }
+}
+
+#[test]
+fn boundary_batches_keep_terminal_providers_scaleless_values_and_duplicates() {
+    use std::sync::atomic::{AtomicUsize, Ordering};
+    struct Terminal(AtomicUsize);
+    impl recursive::TerminalProvider for Terminal {
+        fn evaluate(
+            &self,
+            _: &IntegralFamily,
+            target: &Integral,
+            _: &Rational,
+            p: Precision,
+        ) -> Result<Option<ComplexFloat>> {
+            self.0.fetch_add(1, Ordering::Relaxed);
+            Ok((target.0 == [2]).then(|| p.i(42)))
+        }
+    }
+    let mut family = sunset();
+    family.loops.truncate(1);
+    family.propagators.truncate(1);
+    family.propagators[0].scalar_products = vec![Atom::num(1)];
+    family.physical_propagators = 1;
+    let terminal = Terminal(AtomicUsize::new(0));
+    let options = FlowOptions::default();
+    let backend = RustRedBackend::default();
+    let context = RunContext::default();
+    let provider =
+        recursive::RecursiveBoundary::new(&backend, &options, &context).with_terminal(&terminal);
+    let p = Precision::decimal(60).unwrap();
+    let epsilon = Rational::from((1, 100));
+    let targets = [
+        Integral(vec![1]),
+        Integral(vec![2]),
+        Integral(vec![0]),
+        Integral(vec![2]),
+    ];
+    let values = provider
+        .evaluate_many(&family, &targets, &epsilon, p)
+        .unwrap();
+    assert_eq!(terminal.0.load(Ordering::Relaxed), 3);
+    assert_eq!(values[1], p.i(42));
+    assert_eq!(values[1], values[3]);
+    assert_eq!(values[2], p.zero());
+    let expected = vacuum::tadpole(1, &p.i(3), &Rational::from((199, 50)), p).unwrap();
+    assert!(p.close(&values[0], &expected, 30));
+    assert!(
+        provider
+            .evaluate_many(&family, &[], &epsilon, p)
+            .unwrap()
+            .is_empty()
+    );
+    assert_eq!(
+        provider
+            .evaluate_many(&family, &targets, &epsilon, p)
+            .unwrap(),
+        values
+    );
+    assert_eq!(terminal.0.load(Ordering::Relaxed), 3);
+}

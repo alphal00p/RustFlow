@@ -3,7 +3,7 @@ use crate::boundary::{BoundaryProvider, LeadingBoundary, OneLoopBoundary, Region
 use crate::frobenius::FrobeniusBasis;
 use crate::*;
 use std::{
-    collections::BTreeMap,
+    collections::{BTreeMap, BTreeSet},
     sync::{Arc, Mutex},
 };
 use symbolica::prelude::*;
@@ -33,7 +33,7 @@ pub struct RecursiveBoundary<'a> {
     options: &'a FlowOptions,
     context: &'a RunContext,
     memo: Arc<Mutex<Memo>>,
-    ancestry: Vec<String>,
+    ancestry: Vec<BTreeSet<String>>,
     terminal: Option<&'a dyn TerminalProvider>,
     vacuum_ft: Arc<crate::ft::FtEvaluator<'a>>,
 }
@@ -67,9 +67,9 @@ impl<'a> RecursiveBoundary<'a> {
         options.series_order += extra as usize * 4 / 5;
         options
     }
-    fn child(&self, key: String) -> Self {
+    fn child(&self, keys: BTreeSet<String>) -> Self {
         let mut ancestry = self.ancestry.clone();
-        ancestry.push(key);
+        ancestry.push(keys);
         Self {
             backend: self.backend,
             options: self.options,
@@ -87,105 +87,153 @@ impl<'a> RecursiveBoundary<'a> {
         epsilon: &Rational,
         p: Precision,
     ) -> Result<ComplexFloat> {
+        Ok(self
+            .evaluate_many(family, std::slice::from_ref(target), epsilon, p)?
+            .remove(0))
+    }
+
+    /// Evaluate related boundary integrals with one flow per mass placement.
+    /// Target reductions are projected into the endpoint series before its
+    /// physical limit is selected, including poles in reduction coefficients.
+    pub fn evaluate_many(
+        &self,
+        family: &IntegralFamily,
+        targets: &[Integral],
+        epsilon: &Rational,
+        p: Precision,
+    ) -> Result<Vec<ComplexFloat>> {
         self.context.cancellation.check()?;
-        family.validate_integral(target)?;
-        let key = format!(
-            "{}:{family:?}:{:?}",
-            family.convert()?.family.fingerprint(),
-            target.0
-        );
-        let problem = family.integral_key(target)?;
-        let value_key = format!("{problem}:{epsilon}:{}", p.bits);
-        if let Some(v) = self
-            .memo
-            .lock()
-            .map_err(|_| Error::Numerical("boundary memo poisoned".into()))?
-            .values
-            .get(&value_key)
-        {
-            return Ok(v.clone());
+        if targets.is_empty() {
+            return Ok(vec![]);
         }
-        if self.ancestry.contains(&problem) {
-            return Err(Error::Limit("recursive boundary cycle detected".into()));
+        let family_key = boundary_family_key(family)?;
+        let mut requests = BTreeMap::new();
+        let mut output_keys = Vec::with_capacity(targets.len());
+        for target in targets {
+            family.validate_integral(target)?;
+            let problem = family.integral_key(target)?;
+            let value_key = format!("{problem}:{epsilon}:{}", p.bits);
+            output_keys.push(value_key.clone());
+            requests.insert(target.clone(), (problem, value_key));
         }
-        if self.ancestry.len() >= 32 {
-            return Err(Error::Limit("boundary recursion exceeds 32 levels".into()));
-        }
-        let custom = if let Some(provider) = self.terminal {
-            provider.evaluate(family, target, epsilon, p)?
-        } else {
-            None
-        };
-        let value = if let Some(value) = custom {
-            if !p.finite(&value) {
-                return Err(Error::Numerical(
-                    "nonfinite terminal provider result".into(),
-                ));
+        // None selects all lines in nonvacuum families. Vacuum targets retain
+        // their individual massive-line choice, so different choices never
+        // share an auxiliary deformation accidentally.
+        let mut groups = BTreeMap::<Option<usize>, Vec<(Integral, String, String)>>::new();
+        for (target, (problem, value_key)) in requests {
+            self.context.cancellation.check()?;
+            if self
+                .memo
+                .lock()
+                .map_err(memo_error)?
+                .values
+                .contains_key(&value_key)
+            {
+                continue;
             }
-            value
-        } else if scaleless(family, target)? {
-            p.zero()
-        } else if let Some(value) = vacuum_terminal(family, target, epsilon, p)? {
-            value
-        } else if family.external.is_empty()
-            && family
-                .propagators
-                .iter()
-                .zip(&target.0)
-                .filter(|(d, n)| **n > 0 && !d.constant.is_zero())
-                .count()
-                == 1
-        {
-            // Single-mass vacuum systems are scale invariant under AMF on the
-            // massive line. Finish unrecognized topologies by Euclidean FT,
-            // whose recursion terminates at a Gaussian integral.
-            self.vacuum_ft
-                .evaluate(family, target, epsilon, &self.numerical_options(p))?
-        } else {
+            if self.ancestry.iter().any(|frame| frame.contains(&problem)) {
+                return Err(Error::Limit("recursive boundary cycle detected".into()));
+            }
+            if self.ancestry.len() >= 32 {
+                return Err(Error::Limit("boundary recursion exceeds 32 levels".into()));
+            }
+            let custom = if let Some(provider) = self.terminal {
+                provider.evaluate(family, &target, epsilon, p)?
+            } else {
+                None
+            };
+            let value = if let Some(value) = custom {
+                if !p.finite(&value) {
+                    return Err(Error::Numerical(
+                        "nonfinite terminal provider result".into(),
+                    ));
+                }
+                Some(value)
+            } else if scaleless(family, &target)? {
+                Some(p.zero())
+            } else if let Some(value) = vacuum_terminal(family, &target, epsilon, p)? {
+                Some(value)
+            } else if family.external.is_empty()
+                && family
+                    .propagators
+                    .iter()
+                    .zip(&target.0)
+                    .filter(|(d, n)| **n > 0 && !d.constant.is_zero())
+                    .count()
+                    == 1
+            {
+                Some(self.vacuum_ft.evaluate(
+                    family,
+                    &target,
+                    epsilon,
+                    &self.numerical_options(p),
+                )?)
+            } else {
+                None
+            };
+            if let Some(value) = value {
+                self.memo
+                    .lock()
+                    .map_err(memo_error)?
+                    .values
+                    .insert(value_key, value);
+                continue;
+            }
+            let placement = if family.external.is_empty() {
+                Some(
+                    family
+                        .propagators
+                        .iter()
+                        .zip(&target.0)
+                        .position(|(d, &n)| n > 0 && !d.constant.is_zero())
+                        .or_else(|| target.0.iter().position(|&n| n > 0))
+                        .ok_or_else(|| Error::InvalidInput("empty boundary sector".into()))?,
+                )
+            } else {
+                None
+            };
+            groups
+                .entry(placement)
+                .or_default()
+                .push((target, problem, value_key));
+        }
+        for (placement, requests) in groups {
+            self.context.cancellation.check()?;
             let mut options = self.numerical_options(p);
-            // Keep the requested sampling policy in recursive multiloop
-            // families too. At large exceptional samples distinct dimensional
-            // exponent classes can coincide; retain symbolic epsilon there.
             let sampled = options.sampled_reduction
                 && !options.refine_basis
                 && family.loops.len() > 1
                 && !(1..=4 * family.loops.len()).any(|difference| {
                     (epsilon * &Rational::from(2 * difference as i64)).is_integer()
                 });
-            let key = if sampled {
-                format!("{key}:epsilon={epsilon}")
-            } else {
-                key
-            };
-            // Recursive vacuum families must lose mass scales. Shifting every
-            // line of an equal-mass vacuum would reproduce the same problem.
-            options.mass_mode = if family.external.is_empty() {
-                let selected = family
-                    .propagators
-                    .iter()
-                    .zip(&target.0)
-                    .position(|(d, &n)| n > 0 && !d.constant.is_zero())
-                    .or_else(|| target.0.iter().position(|&n| n > 0))
-                    .ok_or_else(|| Error::InvalidInput("empty boundary sector".into()))?;
-                MassMode::Propagators(vec![selected])
-            } else {
-                MassMode::All
-            };
-            let cached = {
-                self.memo
-                    .lock()
-                    .map_err(|_| Error::Numerical("boundary memo poisoned".into()))?
-                    .flows
-                    .get(&key)
-                    .cloned()
-            };
+            options.mass_mode = placement.map_or(MassMode::All, |i| MassMode::Propagators(vec![i]));
+            let targets = requests
+                .iter()
+                .map(|(target, _, _)| target.clone())
+                .collect::<Vec<_>>();
+            // PreparedFlow stores a reduction for each target. A family-only
+            // cache key would accidentally reuse another target's projection.
+            let mut key = format!(
+                "{family_key}:{placement:?}:{targets:?}:{}:{}",
+                options.skip_reduction, options.refine_basis
+            );
+            if sampled {
+                key.push_str(&format!(":epsilon={epsilon}"));
+            }
+            let cached = self
+                .memo
+                .lock()
+                .map_err(memo_error)?
+                .flows
+                .get(&key)
+                .cloned();
             let prepared = if let Some(v) = cached {
                 v
             } else {
                 let v = Arc::new(if sampled {
                     PreparedFlow::new_at_epsilon(
                         family,
-                        std::slice::from_ref(target),
+                        &targets,
                         &KinematicPoint::default(),
                         self.backend,
                         &options,
@@ -195,7 +243,7 @@ impl<'a> RecursiveBoundary<'a> {
                 } else {
                     PreparedFlow::new(
                         family,
-                        std::slice::from_ref(target),
+                        &targets,
                         &KinematicPoint::default(),
                         self.backend,
                         &options,
@@ -204,25 +252,71 @@ impl<'a> RecursiveBoundary<'a> {
                 });
                 self.memo
                     .lock()
-                    .map_err(|_| Error::Numerical("boundary memo poisoned".into()))?
+                    .map_err(memo_error)?
                     .flows
-                    .insert(key.clone(), v.clone());
+                    .insert(key, v.clone());
                 v
             };
-            let child = self.child(problem);
+            // One ancestry frame per recursive solve, regardless of batch size.
+            let child = self.child(
+                requests
+                    .iter()
+                    .map(|(_, problem, _)| problem.clone())
+                    .collect(),
+            );
             let provider = RecursiveBoundary {
                 options: &options,
                 ..child
             };
-            prepared.evaluate(epsilon, &options, &provider, self.context)?[0].clone()
-        };
-        self.memo
-            .lock()
-            .map_err(|_| Error::Numerical("boundary memo poisoned".into()))?
-            .values
-            .insert(value_key, value.clone());
-        Ok(value)
+            let values = prepared.evaluate(epsilon, &options, &provider, self.context)?;
+            if values.len() != requests.len() {
+                return Err(Error::Numerical("boundary batch result dimension".into()));
+            }
+            let mut memo = self.memo.lock().map_err(memo_error)?;
+            for ((_, _, key), value) in requests.into_iter().zip(values) {
+                memo.values.insert(key, value);
+            }
+        }
+        let memo = self.memo.lock().map_err(memo_error)?;
+        output_keys
+            .iter()
+            .map(|key| {
+                memo.values
+                    .get(key)
+                    .cloned()
+                    .ok_or_else(|| Error::Numerical("missing boundary batch result".into()))
+            })
+            .collect()
     }
+}
+
+fn memo_error<T>(_: std::sync::PoisonError<T>) -> Error {
+    Error::Numerical("boundary memo poisoned".into())
+}
+
+fn boundary_family_key(family: &IntegralFamily) -> Result<String> {
+    Ok(format!(
+        "{}:{family:?}",
+        family.convert()?.family.fingerprint()
+    ))
+}
+
+struct BoundaryRequestFamily {
+    family: IntegralFamily,
+    targets: BTreeSet<Integral>,
+}
+
+struct BoundaryProduct {
+    coefficient: Atom,
+    factors: Vec<String>,
+}
+
+struct PendingBoundaryCoefficient {
+    component: usize,
+    series: usize,
+    order: usize,
+    jacobian: ComplexFloat,
+    products: Vec<BoundaryProduct>,
 }
 
 pub fn scaleless(family: &IntegralFamily, integral: &Integral) -> Result<bool> {
@@ -380,65 +474,115 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
                 .unwrap_or(0),
         })?;
         let mut data = vec![Vec::new(); basis.len()];
+        let mut pending = Vec::new();
+        let mut requests = BTreeMap::<String, BoundaryRequestFamily>::new();
+        let mut zero = BTreeMap::new();
         for (i, integral) in basis.iter().enumerate() {
             for (r, region) in regions.iter().enumerate() {
                 self.context.cancellation.check()?;
-                let mut coefficients = [Vec::new(), Vec::new()];
-                if let Some(half_order) = orders[i][r] {
-                    let expansion = crate::regions::expand_region(
-                        family, integral, &shifted, region, half_order,
-                    )?;
-                    let determinant = p.eval(&expansion.jacobian_determinant, &parameters)?;
-                    let jacobian = p.pow(
-                        &ComplexFloat::new(p.norm(&determinant), p.real(0)),
-                        &p.rational(
-                            &(Rational::from(family.dimension) - epsilon * &Rational::from(2)),
-                        ),
-                    );
-                    for (k, expression) in expansion.coefficients.iter().enumerate() {
-                        let factors = crate::integrand::factor_region(
-                            expression,
-                            &expansion.coordinates,
-                            family,
-                            &region.hard,
-                            10000,
-                        )?;
-                        let mut value = p.zero();
-                        for term in factors {
-                            // A scaleless factor annihilates the whole product.
-                            if term
-                                .factors
-                                .iter()
-                                .map(|f| scaleless(&f.family, &f.integral))
-                                .collect::<Result<Vec<_>>>()?
-                                .contains(&true)
-                            {
-                                continue;
-                            }
-                            let mut v = p.eval(&term.coefficient, &parameters)?;
-                            for factor in term.factors {
-                                v = p.mul(
-                                    &v,
-                                    &self.evaluate(&factor.family, &factor.integral, epsilon, p)?,
-                                );
-                            }
-                            value = p.add(&value, &v);
-                        }
-                        coefficients[k % 2].push(p.mul(&value, &jacobian));
-                    }
-                }
-                // Retain uncomputed regions (and parity classes) with empty
-                // coefficient arrays. Matching must treat them as unknown,
-                // rather than silently assuming their contributions vanish.
-                for (parity, coefficients) in coefficients.into_iter().enumerate() {
+                // Empty arrays retain unknown regions/parity classes. Computed
+                // coefficients are filled only after their factor values exist.
+                for parity in 0..2 {
+                    let count = orders[i][r].map_or(0, |order| (order + 2 - parity) / 2);
                     data[i].push(RegionBoundary {
                         exponent: (&powers[i][r] + Atom::num((parity as i64, 2)))
                             .together()
                             .cancel(),
-                        coefficients,
+                        coefficients: vec![p.zero(); count],
+                    });
+                }
+                let Some(half_order) = orders[i][r] else {
+                    continue;
+                };
+                let expansion =
+                    crate::regions::expand_region(family, integral, &shifted, region, half_order)?;
+                let determinant = p.eval(&expansion.jacobian_determinant, &parameters)?;
+                let jacobian = p.pow(
+                    &ComplexFloat::new(p.norm(&determinant), p.real(0)),
+                    &p.rational(&(Rational::from(family.dimension) - epsilon * &Rational::from(2))),
+                );
+                for (k, expression) in expansion.coefficients.iter().enumerate() {
+                    let factors = crate::integrand::factor_region(
+                        expression,
+                        &expansion.coordinates,
+                        family,
+                        &region.hard,
+                        10000,
+                    )?;
+                    let mut products = Vec::new();
+                    for term in factors {
+                        let mut keys = Vec::new();
+                        let mut vanishes = false;
+                        for factor in &term.factors {
+                            let key = factor.family.integral_key(&factor.integral)?;
+                            let is_zero = if let Some(value) = zero.get(&key) {
+                                *value
+                            } else {
+                                let value = scaleless(&factor.family, &factor.integral)?;
+                                zero.insert(key.clone(), value);
+                                value
+                            };
+                            if is_zero {
+                                vanishes = true;
+                                break;
+                            }
+                            keys.push(key);
+                        }
+                        // Check every factor before requesting any recursive
+                        // values: one scaleless factor annihilates the product.
+                        if vanishes {
+                            continue;
+                        }
+                        for factor in term.factors {
+                            let key = boundary_family_key(&factor.family)?;
+                            requests
+                                .entry(key)
+                                .or_insert_with(|| BoundaryRequestFamily {
+                                    family: factor.family,
+                                    targets: BTreeSet::new(),
+                                })
+                                .targets
+                                .insert(factor.integral);
+                        }
+                        products.push(BoundaryProduct {
+                            coefficient: term.coefficient,
+                            factors: keys,
+                        });
+                    }
+                    pending.push(PendingBoundaryCoefficient {
+                        component: i,
+                        series: 2 * r + k % 2,
+                        order: k / 2,
+                        jacobian: jacobian.clone(),
+                        products,
                     });
                 }
             }
+        }
+        let mut values = BTreeMap::new();
+        for request in requests.into_values() {
+            self.context.cancellation.check()?;
+            let targets = request.targets.into_iter().collect::<Vec<_>>();
+            let evaluated = self.evaluate_many(&request.family, &targets, epsilon, p)?;
+            for (target, value) in targets.iter().zip(evaluated) {
+                values.insert(request.family.integral_key(target)?, value);
+            }
+        }
+        for coefficient in pending {
+            self.context.cancellation.check()?;
+            let mut value = p.zero();
+            for product in coefficient.products {
+                let mut term = p.eval(&product.coefficient, &parameters)?;
+                for key in product.factors {
+                    let factor = values.get(&key).ok_or_else(|| {
+                        Error::Numerical("missing collected boundary factor".into())
+                    })?;
+                    term = p.mul(&term, factor);
+                }
+                value = p.add(&value, &term);
+            }
+            data[coefficient.component][coefficient.series].coefficients[coefficient.order] =
+                p.mul(&value, &coefficient.jacobian);
         }
         solutions.match_regions(&data)
     }

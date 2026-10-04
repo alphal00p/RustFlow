@@ -197,3 +197,32 @@ budget. A regression from the paper's six-line boundary family at half-order
 eight reduces over 10000 monomial contributions to 75 distinct products.
 This removes a demonstrated boundary-budget failure; it does not establish the
 full four-target numerical acceptance result.
+
+`RecursiveBoundary::evaluate_many(family, targets, epsilon, precision)` evaluates
+related boundary powers together. Region construction first collects the factors
+needed by all selected coefficients, removes products with a scaleless factor,
+and deduplicates requests within identical family definitions. Analytic and
+user-supplied terminal values retain priority. Remaining requests share one
+`PreparedFlow` per auxiliary-mass placement; vacuum targets choosing different
+massive lines remain in separate groups. Prepared flows retain the complete
+ordered target set in their cache key. Their target reduction coefficients are
+multiplied into the endpoint Frobenius series before selecting the physical
+limit, so poles in these coefficients are retained.
+
+This follows the grouping in `BoundaryIntegrals` and `ReduceBoundary`, followed
+by recursive evaluation of boundary master lists in `AMFSystemsSetup`, in the
+[pinned upstream AMFlow.m](https://gitlab.com/multiloop-pku/amflow/-/blob/26005517a288086c4cb4d1b26d829691bc088485/AMFlow.m).
+The batching regression checks preparation/backend-call savings for distinct
+powers, differing vacuum mass choices, independent tadpole-product values,
+and stability between 60 and 80 working decimal digits. Other checks cover
+custom terminal providers, scaleless requests, duplicate targets, and reuse of
+canonical numerical memo entries after denominator permutations. A connected
+two-mass sunset batch with powers `111`, `211`, and `121` checks recursive
+siblings against scalar solves and an independent beta-integral identity,
+including a fresh evaluation at higher precision and expansion order.
+
+Batching currently requires identical family definitions; it does not merge
+families through a new momentum-routing or denominator-completion transformation.
+The numerical memo remains per canonical integral, epsilon sample, and precision.
+Recursion limits count nested batches rather than the number of integrals in a
+batch, and encountering an active ancestor integral still returns a cycle error.
