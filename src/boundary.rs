@@ -11,6 +11,23 @@ pub struct LeadingBoundary {
 }
 
 pub trait BoundaryProvider: Send + Sync {
+    /// Match the explicitly prepared deformation. Custom providers which use
+    /// `constants` retain their supplied-boundary contract; automatic providers
+    /// must use this mask rather than reconstructing it from evaluation options.
+    #[allow(clippy::too_many_arguments)]
+    fn constants_with_deformation(
+        &self,
+        family: &IntegralFamily,
+        basis: &[Integral],
+        shifted: &[bool],
+        epsilon: &Rational,
+        p: Precision,
+        solutions: &FrobeniusBasis,
+    ) -> Result<Vec<C>> {
+        validate_deformation_mask(family, shifted)?;
+        self.constants(family, basis, epsilon, p, solutions)
+    }
+
     fn constants(
         &self,
         family: &IntegralFamily,
@@ -36,6 +53,24 @@ pub trait BoundaryProvider: Send + Sync {
 #[derive(Clone, Copy, Debug, Default)]
 pub struct OneLoopBoundary;
 impl BoundaryProvider for OneLoopBoundary {
+    fn constants_with_deformation(
+        &self,
+        family: &IntegralFamily,
+        basis: &[Integral],
+        shifted: &[bool],
+        epsilon: &Rational,
+        p: Precision,
+        solutions: &FrobeniusBasis,
+    ) -> Result<Vec<C>> {
+        validate_deformation_mask(family, shifted)?;
+        if !all_physical_lines_shifted(family, shifted) {
+            return Err(Error::Unsupported(
+                "OneLoopBoundary requires all physical propagators to be shifted; use RecursiveBoundary for partial deformations".into(),
+            ));
+        }
+        self.constants(family, basis, epsilon, p, solutions)
+    }
+
     fn leading(
         &self,
         family: &IntegralFamily,
@@ -98,6 +133,27 @@ impl BoundaryProvider for OneLoopBoundary {
             })
             .collect()
     }
+}
+
+pub(crate) fn validate_deformation_mask(family: &IntegralFamily, shifted: &[bool]) -> Result<()> {
+    if shifted.len() != family.propagators.len()
+        || family.physical_propagators > shifted.len()
+        || !shifted.iter().any(|&shift| shift)
+        || shifted[family.physical_propagators..]
+            .iter()
+            .any(|&shift| shift)
+    {
+        return Err(Error::InvalidInput(
+            "auxiliary deformation must select physical propagators with one mask slot per family propagator".into(),
+        ));
+    }
+    Ok(())
+}
+
+pub(crate) fn all_physical_lines_shifted(family: &IntegralFamily, shifted: &[bool]) -> bool {
+    shifted[..family.physical_propagators]
+        .iter()
+        .all(|&shift| shift)
 }
 
 impl FrobeniusBasis {

@@ -1,0 +1,63 @@
+{
+  "schema": "rustflow-native-common-mass-first-planar-comparison-v1",
+  "status": "passed_component_comparison",
+  "family": "Planar_EW1",
+  "point": {
+    "s": "-1/10",
+    "t": "-1/25",
+    "b": "-1/50"
+  },
+  "epsilon": "1/101",
+  "physical_integral_powers": [
+    0,
+    0,
+    0,
+    2,
+    1,
+    0,
+    2,
+    0,
+    0
+  ],
+  "canonical_component": 1,
+  "native": {
+    "ordinary_real": "524166.0403106024579797781298351203990262374124765877550",
+    "ordinary_imaginary": "-1.812871700491969680015572357584643704789497372899787957e-42",
+    "requested_digits": 20,
+    "guard_digits": 30,
+    "working_decimal_digits": 50,
+    "series_order": 48,
+    "observed_elapsed_seconds": 125.078,
+    "build_profile": "dev with optimized dependencies; not release or parity measurement",
+    "log": "target/common-mass-planar-native-sample.log",
+    "log_sha256": "70bdf792afd063101831848629fe9718ad821edca0c18a226347e0431074a53f",
+    "boundary": "Native recursive auxiliary-mass regions; no numerical reference boundary"
+  },
+  "independent_analytic": {
+    "formula": "exp(2*EulerGamma*eps)*(-b)^(-eps)*Gamma(1+eps)^2*Gamma(1-eps)^2/Gamma(1-2eps)",
+    "derivation": "Massless bubble powers (2,1) times the squared unit-mass tadpole; canonical prefactor -b*eps^2*exp(2*EulerGamma*eps).",
+    "evaluation": "Mathematica arbitrary precision, 80 decimal digits; native printed input converted to exact rational before evaluation",
+    "values": {
+      "epsilon": "1/101",
+      "b": "-1/50",
+      "canonical_from_native_real": "1.039489531946497878956217223880657677776462461779312674026649345861310127200446106395935904002828",
+      "canonical_from_native_imaginary": "-3.5951607134006306415166439296918571949632851323089358891665854545507684077244637035223957299519161423755357e-48",
+      "analytic_canonical": "1.039489531946497878956217223880657677776462461768841411204656124614458854267339775004485039984166",
+      "absolute_difference": "1.10712477003469112576623992922054314418014220144528525028932456115688438205076467120776467714082220800190218e-47",
+      "relative_difference": "1.06506581933686505479114008188303738493609260857810441085082849015736417713864484368348866303195055082313805e-47",
+      "analytic_ordinary": "524166.040310602457979778129835120399026237412471307586030738737734788176343226278397198734710307951242"
+    },
+    "script_sha256": "0884b46f5d21099303254227d3e6cc3ecc7f8b33a093502453dd826731212506"
+  },
+  "truncated_anchor": {
+    "fixture": "fixtures/mg5/planar-regenerated-anchor.json",
+    "sha256": "c575eecd914b04052d4905ac929a227f716009eccc1bb5b72a4d2f9149c38a07",
+    "last_known_epsilon_power": 4,
+    "first_unknown_epsilon_power": 5,
+    "polynomial_value": "1.039489535473169046933514245590104665314141344943638798453323530771963273691224209224",
+    "actual_difference_from_analytic_value": "3.526671167977297021709446987537678883174797387248667406157504419423884434219514960016E-9",
+    "known_coefficient_error_only": "5.506109459706672098648370622750146811431234491996019315392648362132099238906247131354E-47",
+    "remainder_status": "Unknown from stored coefficients alone; this first-component difference is measurable because the independent all-epsilon formula is available."
+  },
+  "scope": "Single native sample and one independently analytic canonical component only. The observed difference is not a 47-digit accuracy certification, whole-vector validation, Laurent fit, or full ggHg acceptance."
+}

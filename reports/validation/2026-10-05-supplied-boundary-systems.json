@@ -1,0 +1,117 @@
+{
+  "status": "supplied_boundary_components_validated_full_higgs_jet_acceptance_pending",
+  "scope": "Exact supplied AMF systems, common-mass conversion, retained domains and cache identity. Not a full empty-cache amplitude acceptance.",
+  "base_revision": "0ed48dfd583b56cb35403dde63bbb57956e2385a",
+  "mathematical_input_correction": {
+    "fixture": "fixtures/gg-hg/plugin-physical-map.json",
+    "schema": "rustflow-gg-hg-plugin-physical-map-v2",
+    "cause": "Exporter matched a radicand inside another radicand; forward and inverse shared the error.",
+    "validation": "Restore original roots in every primary coefficient, then check inverse, rational common-mass connection and differential gauge.",
+    "evidence": "fixtures/gg-hg/root-extraction-audit.json",
+    "old_native_boundaries_accepted": false,
+    "cache_compatibility": "Exported-map contents supplement upstream file hashes; completed ordinary samples include supplied declaration identity."
+  },
+  "native_checks": {
+    "supplied_flow": {
+      "passed": 7,
+      "seconds": "0.61",
+      "log": "target/supplied-domain-tests.log"
+    },
+    "retained_domain_contours": {
+      "passed": 2,
+      "seconds": "0.02",
+      "log": "target/supplied-exclusion-tests.log"
+    },
+    "exact_gg_hg_components": {
+      "passed": 8,
+      "seconds": "8.87",
+      "log": "target/gg-hg-corrected-map-tests.log"
+    },
+    "common_mass_scalar_contract": {
+      "passed": 2,
+      "seconds": "0.43",
+      "log": "target/common-mass-current-tests.log"
+    },
+    "scoped_reductions": {
+      "passed": 9
+    },
+    "normalized_supplied_projection_and_identity": {
+      "passed": 2,
+      "seconds": "5.14"
+    },
+    "sample_checkpoint_identity": {
+      "passed": 1
+    },
+    "comparison_only_anchors": {
+      "passed": 2,
+      "seconds": "1.74",
+      "log": "target/gg-hg-anchor-tests.log",
+      "includes": "Original root germs, coefficient precision and unknown truncated epsilon remainder; native gamma formula checked against independent reference."
+    },
+    "clippy": {
+      "status": "passed",
+      "warnings_denied": true,
+      "seconds": "8.00",
+      "log": "target/supplied-domain-clippy.log"
+    }
+  },
+  "full_exact_connection_certificates": [
+    {
+      "family": "planar",
+      "masters": 48,
+      "rational_nonzero_entries": 407,
+      "retained_conditions": 35,
+      "seconds": "9.93",
+      "log": "target/common-mass-planar-certificate.log"
+    },
+    {
+      "family": "nonplanar",
+      "masters": 61,
+      "rational_nonzero_entries": 812,
+      "retained_conditions": 82,
+      "seconds": "30.81",
+      "log": "target/common-mass-nonplanar-certificate.log"
+    }
+  ],
+  "installed_python": {
+    "passed": 21,
+    "seconds": "115.69",
+    "new_supplied_reduction_and_cache_cases": 14,
+    "existing_numerical_api_cases": 7,
+    "notebook_initialization": "passed",
+    "scope": "Before subsequent retained-eta-domain follow-up; no new Python signatures.",
+    "community_test_commit": "1adee23"
+  },
+  "finite_epsilon_probes": [
+    {
+      "family": "planar",
+      "epsilon": "1/101",
+      "masters_returned": 48,
+      "working_decimal_digits": 50,
+      "series_order": 48,
+      "verified_laurent_digits": null,
+      "seconds": "125.078",
+      "profile": "development, optimized dependencies",
+      "log": "target/common-mass-planar-native-sample.log",
+      "independent_component_comparison": "reports/validation/2026-10-05-common-mass-first-planar.json"
+    },
+    {
+      "family": "nonplanar",
+      "epsilon": "1/101",
+      "working_decimal_digits": 50,
+      "series_order": 48,
+      "status": "cooperatively cancelled during transport after82 steps",
+      "deadline_seconds": 300,
+      "returned_seconds": "300.385",
+      "returned_numerical_values": false,
+      "log": "target/common-mass-nonplanar-native-sample.log"
+    }
+  ],
+  "remaining_acceptance": [
+    "Full native Laurent fits versus independent Euclidean anchors",
+    "Sixteen physical seed configurations without reference numerical inputs",
+    "4360 reference transport coefficients and coherent20-digit observables",
+    "Independent sampling/precision refinement and long interruption/restart",
+    "Matched release cold, resumed and warm timings"
+  ]
+}

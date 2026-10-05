@@ -16,6 +16,8 @@ use symbolica::prelude::*;
 /// symbol namespaces, dimension convention and numerator-slot roles are part of
 /// the scope. Equivalent routings need explicit entries; no unproved symmetry or
 /// parameter renaming is inferred.
+/// Algebraically identical rational coefficient forms share a scope, while
+/// original denominator restrictions remain part of its identity and evidence.
 ///
 /// Admission does not call an IBP solver, require a complete scalar-product
 /// denominator basis, or depend on RustRed's compiled runtime arities. The
@@ -59,19 +61,7 @@ impl ScopedTableBackend {
                 family.name
             )));
         }
-        let mut symbols = BTreeSet::new();
-        for atom in &expressions {
-            crate::family::scalar_symbols(atom.as_view(), &mut symbols)?;
-        }
-        symbols.insert(Atom::var(family.epsilon));
-        symbols.remove(&Atom::var(crate::family::imaginary_parameter()));
-        let variables = symbols
-            .into_iter()
-            .map(|atom| match atom.as_view() {
-                AtomView::Var(v) => v.get_symbol(),
-                _ => unreachable!("scalar_symbols returns only variables"),
-            })
-            .collect::<BTreeSet<_>>();
+        let variables = family_variables(family, &expressions)?;
         let mut coefficients = expressions;
         for (target, terms) in &reduction.rules {
             family.validate_integral(target)?;
@@ -181,10 +171,43 @@ impl ReductionBackend for ScopedTableBackend {
 }
 
 fn scope_key(family: &IntegralFamily) -> Result<String> {
+    let expressions = family_expressions(family)?;
+    let variables = family_variables(family, &expressions)?;
+    // Retain the original domain before normalization can cancel denominators.
+    // Equal rational coefficients with different original poles are distinct
+    // scopes, even if their normalized expressions are identical.
+    let conditions =
+        crate::physical_conditions::rational_denominator_conditions(&expressions, &variables)?;
+    let mut normalized = family.clone();
+    for propagator in &mut normalized.propagators {
+        propagator.constant = propagator.constant.together().cancel();
+        for coefficient in &mut propagator.scalar_products {
+            *coefficient = coefficient.together().cancel();
+        }
+    }
+    for coefficient in normalized.external_gram.iter_mut().flatten() {
+        *coefficient = coefficient.together().cancel();
+    }
     // Reuse the existing exact original-family identity owner. Its metadata
     // includes every ordered coefficient and original symbol namespace, and
     // does not invoke native family admission or a runtime-arity bridge.
-    crate::physical_family::physical_family_fingerprint(family, &BTreeSet::new(), &[])
+    crate::physical_family::physical_family_fingerprint(&normalized, &BTreeSet::new(), &conditions)
+}
+
+fn family_variables(family: &IntegralFamily, expressions: &[Atom]) -> Result<BTreeSet<Symbol>> {
+    let mut symbols = BTreeSet::new();
+    for atom in expressions {
+        crate::family::scalar_symbols(atom.as_view(), &mut symbols)?;
+    }
+    symbols.insert(Atom::var(family.epsilon));
+    symbols.remove(&Atom::var(crate::family::imaginary_parameter()));
+    Ok(symbols
+        .into_iter()
+        .map(|atom| match atom.as_view() {
+            AtomView::Var(v) => v.get_symbol(),
+            _ => unreachable!("scalar_symbols returns only variables"),
+        })
+        .collect())
 }
 
 fn family_expressions(family: &IntegralFamily) -> Result<Vec<Atom>> {

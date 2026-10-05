@@ -6,11 +6,16 @@ use rayon::prelude::*;
 use std::collections::BTreeMap;
 use symbolica::prelude::*;
 
+mod supplied;
+pub use supplied::SuppliedAuxiliarySystem;
+
 pub struct PreparedFlow {
     pub family: IntegralFamily,
     pub reduced: ReducedSystem,
     pub system: DifferentialSystem,
     epsilon_sample: Option<Rational>,
+    deformation_mask: Vec<bool>,
+    supplied: Option<supplied::SuppliedSeal>,
     // Retained independently of caller-mutable evaluation options and checked
     // on every evaluation, including systems loaded from the symbolic cache.
     principal_mass_constraints: Vec<Complex<Rational>>,
@@ -49,6 +54,7 @@ impl PreparedFlow {
             options.prescription,
         )?;
         let eta = symbol!("symbolica_amflow::eta");
+        let (auxiliary, mask) = family.deform(eta, &options.mass_mode)?;
         let cache = options
             .cache_directory
             .as_ref()
@@ -72,10 +78,11 @@ impl PreparedFlow {
                 system,
                 basis_refinement,
                 epsilon_sample: None,
+                deformation_mask: mask,
+                supplied: None,
                 principal_mass_constraints,
             });
         }
-        let (auxiliary, mask) = family.deform(eta, &options.mass_mode)?;
         let session = crate::reduction::ReductionSession::new(backend);
         let backend = &session as &dyn ReductionBackend;
         let mut reduced = if options.skip_reduction {
@@ -116,6 +123,8 @@ impl PreparedFlow {
             system,
             basis_refinement,
             epsilon_sample: None,
+            deformation_mask: mask,
+            supplied: None,
             principal_mass_constraints,
         })
     }
@@ -194,6 +203,7 @@ impl PreparedFlow {
         boundary: &dyn BoundaryProvider,
         context: &RunContext,
     ) -> Result<Vec<ComplexFloat>> {
+        self.validate_supplied_contract(options)?;
         crate::vacuum_peel::validate_principal_mass_constraints(
             &self.principal_mass_constraints,
             options.prescription,
@@ -214,28 +224,65 @@ impl PreparedFlow {
             .checked_add(options.guard_digits)
             .ok_or_else(|| Error::InvalidInput("precision overflow".into()))?;
         let p = Precision::decimal(digits)?;
+        let parameters =
+            ahash::HashMap::from_iter([(Atom::var(self.family.epsilon), p.rational(eps))]);
+        // Preserve original rational denominator domains before cancellation,
+        // then specialize epsilon exactly. Floating substitution can miss an
+        // identically zero eta-dependent condition at a rational sample.
+        let epsilon_rule =
+            BTreeMap::from([(Atom::var(self.family.epsilon), Atom::num(eps.clone()))]);
+        let guards = crate::physical_conditions::canonical_conditions(
+            &self.reduced.nonzero_conditions,
+            &std::collections::BTreeSet::from([
+                self.system.variable,
+                self.family.epsilon,
+                crate::family::imaginary_parameter(),
+            ]),
+        )?
+        .iter()
+        .map(|condition| {
+            let specialized = crate::family::substitute(condition, &epsilon_rule)
+                .together()
+                .cancel();
+            if specialized.is_zero() {
+                return Err(Error::Reduction(format!(
+                    "a reduction nonzero condition vanishes identically at epsilon={eps}"
+                )));
+            }
+            Ok(specialized)
+        })
+        .collect::<Result<Vec<_>>>()?;
         if self.reduced.basis.is_empty() {
             return Ok(vec![p.zero(); self.reduced.targets.len()]);
         }
-        let parameters =
-            ahash::HashMap::from_iter([(Atom::var(self.family.epsilon), p.rational(eps))]);
-        for condition in &self.reduced.nonzero_conditions {
-            if condition.derivative(self.system.variable).is_zero()
-                && p.eval(condition, &parameters)? == p.zero()
-            {
-                return Err(Error::Reduction(format!(
-                    "a reduction nonzero condition vanishes at epsilon={eps}"
-                )));
-            }
-        }
-        let compiled = self.system.compile(p, &parameters)?;
+        let stage = |name: &str| {
+            context.emit(Progress::Stage {
+                name: format!(
+                    "{name} ({} masters, {} loops)",
+                    self.reduced.basis.len(),
+                    self.family.loops.len()
+                ),
+            })
+        };
+        stage("compiling the auxiliary-mass differential equation")?;
+        let mut compiled = self.system.compile(p, &parameters)?;
+        compiled.exclude_polynomials(&guards)?;
+        stage("constructing the expansion at auxiliary-mass infinity")?;
         let mut infinity = self
             .system
             .invert_variable(symbol!("symbolica_amflow::z"))
             .frobenius(p, &parameters, options.series_order)?;
         self.lift_exponents(&mut infinity)?;
         ensure_generic_indicial(&infinity, &parameters)?;
-        let constants = boundary.constants(&self.family, &self.reduced.basis, eps, p, &infinity)?;
+        stage("generating and matching native asymptotic boundary regions")?;
+        let constants = boundary.constants_with_deformation(
+            &self.family,
+            &self.reduced.basis,
+            &self.deformation_mask,
+            eps,
+            p,
+            &infinity,
+        )?;
         let maximum = compiled
             .poles
             .iter()
@@ -264,6 +311,7 @@ impl PreparedFlow {
             .fold(p.real(1), |a, b| if a < b { a } else { b });
         let end = ComplexFloat::new(p.real(0), (minimum / 8) * direction);
         let path = compiled.plan_path(&start, &end, -direction)?;
+        stage("transporting the auxiliary-mass solution")?;
         let transported = compiled.transport(
             &BoundaryData {
                 point: start,
@@ -273,12 +321,14 @@ impl PreparedFlow {
             options,
             context,
         )?;
+        stage("constructing the physical endpoint expansion")?;
         let mut endpoint = self
             .system
             .frobenius(p, &parameters, options.series_order)?;
         self.lift_exponents(&mut endpoint)?;
         ensure_generic_indicial(&endpoint, &parameters)?;
         let constants = endpoint.match_values(&end, &transported.values, &parameters)?;
+        stage("extracting the dimensionally regulated physical limit")?;
         // Reduction coefficients are multiplied into endpoint series before
         // selecting the physical constant; poles in these coefficients matter.
         self.reduced
@@ -668,8 +718,34 @@ pub fn solve_integral_projections_normalized(
     context: &RunContext,
     factors: &crate::ProjectionFactors,
 ) -> Result<Vec<LaurentExpansion>> {
+    solve_integral_projections_with_preparer(
+        groups, point, last, options, backend, context, factors, None,
+    )
+}
+
+/// Preparation is replaceable by a supplied closed connection; projection,
+/// checkpointing, normalization and independent epsilon refinement stay shared.
+pub(crate) type ProjectionPreparer<'a> =
+    dyn Fn(&IntegralFamily, &[Integral], &FlowOptions, &RunContext) -> Result<PreparedFlow> + 'a;
+
+#[allow(clippy::too_many_arguments)]
+pub(crate) fn solve_integral_projections_with_preparer(
+    groups: &[(IntegralFamily, Vec<crate::reduction::LinearCombination>)],
+    point: &KinematicPoint,
+    last: i32,
+    options: &FlowOptions,
+    backend: &dyn ReductionBackend,
+    context: &RunContext,
+    factors: &crate::ProjectionFactors,
+    supplied_preparer: Option<&ProjectionPreparer<'_>>,
+) -> Result<Vec<LaurentExpansion>> {
     options.validate()?;
     context.cancellation.check()?;
+    if supplied_preparer.is_some() && options.recursion != RecursionMode::Amf {
+        return Err(Error::Unsupported(
+            "a supplied auxiliary-mass connection requires AMF recursion".into(),
+        ));
+    }
     let factors = factors.at(point)?;
     let outputs = groups.first().map_or(0, |(_, rows)| rows.len());
     if outputs == 0 || groups.iter().any(|(_, rows)| rows.len() != outputs) {
@@ -686,6 +762,11 @@ pub fn solve_integral_projections_normalized(
     let mut prepared = Vec::new();
     let mut leading = 0i32;
     for (family, rows) in groups {
+        if supplied_preparer.is_some() && family.dimension != options.dimension {
+            return Err(Error::InvalidInput(
+                "supplied projection family dimension differs from evaluation dimension".into(),
+            ));
+        }
         let mut family = family.at(point);
         family.dimension = options.dimension;
         family.validate()?;
@@ -774,7 +855,9 @@ pub fn solve_integral_projections_normalized(
                     .collect::<Vec<_>>()
             })
             .collect::<Vec<_>>();
-        let preparation = if has_linear_propagators(&family) {
+        let preparation = if let Some(prepare) = supplied_preparer {
+            Preparation::Amf(prepare(&family, &integrals, options, context)?)
+        } else if has_linear_propagators(&family) {
             Preparation::Linear(crate::linear::PreparedLinearFlow::new(
                 &family,
                 &integrals,
@@ -797,6 +880,11 @@ pub fn solve_integral_projections_normalized(
                 context,
             )?)
         };
+        if let Preparation::Amf(flow) = &preparation {
+            // The immutable prepared flow is shared by every sample below.
+            // Validate its sealed declaration even when all samples are hits.
+            flow.validate_supplied_contract(options)?;
+        }
         prepared.push((family, integrals, coefficients, preparation));
     }
     let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
@@ -817,6 +905,10 @@ pub fn solve_integral_projections_normalized(
                     epsilon,
                     refined,
                     backend,
+                    match preparation {
+                        Preparation::Amf(flow) => flow.source_identity(),
+                        _ => None,
+                    },
                     || {
                         Ok(match preparation {
                             Preparation::Amf(flow) => {
@@ -996,6 +1088,9 @@ pub(crate) fn fit_samples_refined_leading(
             .into(),
     ))
 }
+
+#[cfg(test)]
+mod projection_tests;
 
 #[cfg(test)]
 mod tests {

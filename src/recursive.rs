@@ -437,8 +437,23 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
         p: Precision,
         solutions: &FrobeniusBasis,
     ) -> Result<Vec<ComplexFloat>> {
+        let (_, shifted) =
+            family.deform(symbol!("symbolica_amflow::eta"), &self.options.mass_mode)?;
+        self.constants_with_deformation(family, basis, &shifted, epsilon, p, solutions)
+    }
+
+    fn constants_with_deformation(
+        &self,
+        family: &IntegralFamily,
+        basis: &[Integral],
+        shifted: &[bool],
+        epsilon: &Rational,
+        p: Precision,
+        solutions: &FrobeniusBasis,
+    ) -> Result<Vec<ComplexFloat>> {
+        crate::boundary::validate_deformation_mask(family, shifted)?;
         if family.loops.len() == 1
-            && matches!(self.options.mass_mode, MassMode::All | MassMode::Auto)
+            && crate::boundary::all_physical_lines_shifted(family, shifted)
             && family
                 .propagators
                 .iter()
@@ -446,8 +461,6 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
         {
             return solutions.match_leading(&self.leading(family, basis, epsilon, p)?);
         }
-        let (_, shifted) =
-            family.deform(symbol!("symbolica_amflow::eta"), &self.options.mass_mode)?;
         let regions = crate::regions::enumerate_regions(family, 10000)?;
         let parameters =
             ahash::HashMap::from_iter([(Atom::var(family.epsilon), p.rational(epsilon))]);
@@ -457,7 +470,7 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
                 regions
                     .iter()
                     .map(|region| {
-                        crate::regions::expand_region(family, integral, &shifted, region, 0)
+                        crate::regions::expand_region(family, integral, shifted, region, 0)
                             .map(|leading| -leading.eta_power)
                     })
                     .collect::<Result<Vec<_>>>()
@@ -507,7 +520,7 @@ impl BoundaryProvider for RecursiveBoundary<'_> {
                     continue;
                 };
                 let expansion =
-                    crate::regions::expand_region(family, integral, &shifted, region, half_order)?;
+                    crate::regions::expand_region(family, integral, shifted, region, half_order)?;
                 let determinant = p.eval(&expansion.jacobian_determinant, &parameters)?;
                 let jacobian = p.pow(
                     &ComplexFloat::new(p.norm(&determinant), p.real(0)),

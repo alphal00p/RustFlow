@@ -232,6 +232,17 @@ fn polynomial_roots(p: Precision, coefficients: &[C], variable: Symbol) -> Resul
     Ok(roots.iter().map(|root| p.mul(root, &scale)).collect())
 }
 
+fn retain_distinct_pole(p: Precision, poles: &mut Vec<C>, root: C) {
+    if !poles.iter().any(|v| {
+        let a = p.norm(v);
+        let b = p.norm(&root);
+        let scale = if a < b { a } else { b };
+        p.norm(&p.sub(v, &root)) <= p.tolerance(p.bits / 5) * scale
+    }) {
+        poles.push(root);
+    }
+}
+
 impl NumericRational {
     pub(crate) fn series(&self, p: Precision, center: &C, order: usize) -> Result<Vec<C>> {
         quotient_series(
@@ -422,14 +433,7 @@ pub(crate) fn compile_rows(
                 pole_polynomials.push(base);
                 let roots = polynomial_roots(p, &coefficients, variable)?;
                 for root in roots {
-                    if !poles.iter().any(|v| {
-                        let a = p.norm(v);
-                        let b = p.norm(&root);
-                        let scale = if a < b { a } else { b };
-                        p.norm(&p.sub(v, &root)) <= p.tolerance(p.bits / 5) * scale
-                    }) {
-                        poles.push(root);
-                    }
+                    retain_distinct_pole(p, &mut poles, root);
                 }
             }
             out.push(NumericRational {
@@ -499,6 +503,34 @@ pub(crate) fn compile_rows(
 }
 
 impl CompiledSystem {
+    /// Retain declared nonzero polynomial domains, even when the differential
+    /// matrix is regular there. Roots restrict contour planning and Taylor
+    /// radii; the exact polynomials survive local-coordinate recompilation.
+    pub(crate) fn exclude_polynomials(&mut self, guards: &[Atom]) -> Result<()> {
+        let guard_rows = guards
+            .iter()
+            .map(|g| {
+                if g.is_zero() {
+                    return Err(Error::InvalidInput(
+                        "continuation chart violates a declared nonzero domain".into(),
+                    ));
+                }
+                Ok(vec![Atom::num(1) / g])
+            })
+            .collect::<Result<Vec<_>>>()?;
+        let exclusions = compile_rows(
+            self.source.variable,
+            &guard_rows,
+            self.p,
+            &self.source.values,
+        )?;
+        for root in exclusions.poles {
+            retain_distinct_pole(self.p, &mut self.poles, root);
+        }
+        self.pole_polynomials.extend(exclusions.pole_polynomials);
+        Ok(())
+    }
+
     /// Recompile the retained exact source in the local coordinate. Original
     /// source domains and the map denominator survive Jacobian cancellation.
     pub(crate) fn in_coordinate(&self, coordinate: &TaylorCoordinate) -> Result<Self> {
@@ -514,22 +546,7 @@ impl CompiledSystem {
                 .cancel()
         }));
         let mut compiled = compile_rows(source.variable, &rows, self.p, &source.values)?;
-        let guard_rows = guards
-            .iter()
-            .map(|g| {
-                if g.is_zero() {
-                    return Err(Error::InvalidInput(
-                        "mapped chart violates original domain".into(),
-                    ));
-                }
-                Ok(vec![Atom::num(1) / g])
-            })
-            .collect::<Result<Vec<_>>>()?;
-        let exclusions = compile_rows(source.variable, &guard_rows, self.p, &source.values)?;
-        compiled.poles.extend(exclusions.poles);
-        compiled
-            .pole_polynomials
-            .extend(exclusions.pole_polynomials);
+        compiled.exclude_polynomials(&guards)?;
         Ok(compiled)
     }
     /// A real radius strictly inside the local convergence disk around an
@@ -1500,3 +1517,7 @@ mod source_tests;
 #[cfg(test)]
 #[path = "ode/endpoint_tests.rs"]
 mod endpoint_tests;
+
+#[cfg(test)]
+#[path = "ode/exclusion_tests.rs"]
+mod exclusion_tests;

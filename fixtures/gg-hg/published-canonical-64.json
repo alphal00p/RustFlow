@@ -1897,6 +1897,7 @@
   ],
   "extraction": {
     "exact_linear_reconstruction": true,
+    "exact_root_reconstruction": true,
     "source_sha256": "cf673b527f1fcd25fc2df9f6c04998d5027b0909cd9d64b32e758d86eabbf39c"
   },
   "provenance": {

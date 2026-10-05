@@ -67,6 +67,81 @@ fn supplied_physical_table_closes_actual_mass_derivative() {
 }
 
 #[test]
+fn algebraically_equal_auxiliary_coefficients_share_scope() {
+    let family = tadpole(Atom::num(2));
+    let eta = symbol!("symbolica_amflow::eta");
+    let (deformed, _) = family.deform(eta, &MassMode::All).unwrap();
+    // HEPKit conversion normalizes rational coefficients. Native auxiliary
+    // deformation produces the same polynomial as an unfactored sum.
+    let mut normalized = deformed.clone();
+    normalized.propagators[0].constant = normalized.propagators[0].constant.together().cancel();
+    assert_ne!(
+        normalized.propagators[0].constant,
+        deformed.propagators[0].constant
+    );
+    let coefficient = (Atom::one() - Atom::var(epsilon())) / (Atom::num(2) + Atom::var(eta));
+    let mut backend =
+        ScopedTableBackend::from_table("normalized", &normalized, rule(coefficient.clone()))
+            .unwrap();
+    let reduced = backend
+        .reduce(&deformed, &[Integral(vec![2])], &RunContext::default())
+        .unwrap();
+    assert!(
+        (&reduced.expand(&Integral(vec![2])).unwrap()[&Integral(vec![1])] - &coefficient)
+            .together()
+            .cancel()
+            .is_zero()
+    );
+    assert_eq!(
+        backend.identity(),
+        ScopedTableBackend::from_table("normalized", &deformed, rule(coefficient.clone()))
+            .unwrap()
+            .identity()
+    );
+    assert!(matches!(
+        backend.insert(&deformed, rule(coefficient)),
+        Err(Error::InvalidInput(_))
+    ));
+}
+
+#[test]
+fn normalized_family_scopes_retain_uncancelled_domain_restrictions() {
+    let guarded = tadpole(atom("(m^2-1)/(m-1)"));
+    let unrestricted = tadpole(atom("m+1"));
+    assert!(
+        (&guarded.propagators[0].constant - &unrestricted.propagators[0].constant)
+            .together()
+            .cancel()
+            .is_zero()
+    );
+    let coefficient = atom("(1-eps)/(m+1)");
+    let backend =
+        ScopedTableBackend::from_table("original_domain", &guarded, rule(coefficient.clone()))
+            .unwrap();
+    let reduced = backend
+        .reduce(&guarded, &[Integral(vec![2])], &RunContext::default())
+        .unwrap();
+    assert!(reduced.nonzero_conditions.iter().any(|condition| {
+        condition
+            .replace(atom("m"))
+            .with(Atom::one())
+            .together()
+            .cancel()
+            .is_zero()
+    }));
+    assert!(matches!(
+        backend.reduce(&unrestricted, &[Integral(vec![2])], &RunContext::default()),
+        Err(Error::IncompleteReduction(_))
+    ));
+    assert_ne!(
+        backend.identity(),
+        ScopedTableBackend::from_table("original_domain", &unrestricted, rule(coefficient))
+            .unwrap()
+            .identity()
+    );
+}
+
+#[test]
 fn supplied_deformed_table_runs_automatic_amf_boundary_and_transport() {
     let family = tadpole(Atom::num(2));
     let options = FlowOptions {

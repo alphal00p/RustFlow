@@ -39,6 +39,7 @@ pub(crate) fn evaluate(
     epsilon: &Rational,
     options: &FlowOptions,
     backend: &dyn crate::ReductionBackend,
+    source_identity: Option<&str>,
     compute: impl FnOnce() -> Result<Vec<ComplexFloat>>,
 ) -> Result<Vec<ComplexFloat>> {
     let Some(directory) = &options.sample_cache_directory else {
@@ -56,6 +57,7 @@ pub(crate) fn evaluate(
         format!("{settings:?}"),
         epsilon.to_string(),
         p.bits,
+        source_identity,
     ]);
     let key =
         blake3::hash(&serde_json::to_vec(&identity).map_err(|e| Error::Cache(e.to_string()))?)
@@ -170,22 +172,40 @@ mod tests {
         let p = Precision::decimal(options.digits + options.guard_digits)?;
         let first = vec![p.rational(&Rational::from((1, 3)))];
         assert_eq!(
-            evaluate(&family, &integrals, &epsilon, &options, &backend, || Ok(
-                first.clone()
-            ))?,
+            evaluate(
+                &family,
+                &integrals,
+                &epsilon,
+                &options,
+                &backend,
+                None,
+                || Ok(first.clone())
+            )?,
             first
         );
         assert_eq!(
-            evaluate(&family, &integrals, &epsilon, &options, &backend, || Err(
-                Error::Cancelled
-            ))?,
+            evaluate(
+                &family,
+                &integrals,
+                &epsilon,
+                &options,
+                &backend,
+                None,
+                || Err(Error::Cancelled)
+            )?,
             first
         );
         options.reuse_samples = false;
         assert!(matches!(
-            evaluate(&family, &integrals, &epsilon, &options, &backend, || Err(
-                Error::Cancelled
-            )),
+            evaluate(
+                &family,
+                &integrals,
+                &epsilon,
+                &options,
+                &backend,
+                None,
+                || Err(Error::Cancelled)
+            ),
             Err(Error::Cancelled)
         ));
         options.reuse_samples = true;
@@ -196,19 +216,76 @@ mod tests {
                 &epsilon,
                 &options,
                 &backend,
+                None,
                 || unreachable!()
             )?,
             first
         );
         options.guard_digits += 10;
         assert!(matches!(
-            evaluate(&family, &integrals, &epsilon, &options, &backend, || Err(
-                Error::Cancelled
-            )),
+            evaluate(
+                &family,
+                &integrals,
+                &epsilon,
+                &options,
+                &backend,
+                None,
+                || Err(Error::Cancelled)
+            ),
             Err(Error::Cancelled)
         ));
         options.guard_digits -= 10;
         let file = std::fs::read_dir(&directory)?.next().unwrap()?.path();
+        // A different supplied connection must never inherit samples from the
+        // same physical family evaluated through another declaration.
+        assert!(matches!(
+            evaluate(
+                &family,
+                &integrals,
+                &epsilon,
+                &options,
+                &backend,
+                Some("connection-a"),
+                || Err(Error::Cancelled)
+            ),
+            Err(Error::Cancelled)
+        ));
+        assert_eq!(
+            evaluate(
+                &family,
+                &integrals,
+                &epsilon,
+                &options,
+                &backend,
+                Some("connection-a"),
+                || Ok(first.clone())
+            )?,
+            first
+        );
+        assert!(matches!(
+            evaluate(
+                &family,
+                &integrals,
+                &epsilon,
+                &options,
+                &backend,
+                Some("connection-b"),
+                || Err(Error::Cancelled)
+            ),
+            Err(Error::Cancelled)
+        ));
+        assert_eq!(
+            evaluate(
+                &family,
+                &integrals,
+                &epsilon,
+                &options,
+                &backend,
+                Some("connection-a"),
+                || unreachable!()
+            )?,
+            first
+        );
         let mut bytes = std::fs::read(&file)?;
         *bytes.last_mut().unwrap() ^= 1;
         std::fs::write(&file, bytes)?;
@@ -219,6 +296,7 @@ mod tests {
                 &epsilon,
                 &options,
                 &backend,
+                None,
                 || unreachable!()
             ),
             Err(Error::Cache(_))

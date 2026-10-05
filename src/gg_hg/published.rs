@@ -247,6 +247,7 @@ struct TermRecord {
 #[derive(Deserialize)]
 struct Extraction {
     exact_linear_reconstruction: bool,
+    exact_root_reconstruction: bool,
     source_sha256: String,
 }
 
@@ -273,6 +274,7 @@ impl PublishedCanonicalBasis {
             || data.integrals.len() != 64
             || data.normalization != "(-mh2)^(2*eps)/Gamma(1+eps)^2"
             || !data.extraction.exact_linear_reconstruction
+            || !data.extraction.exact_root_reconstruction
             || data.extraction.source_sha256 != data.provenance.sha256
         {
             return Err(Error::InvalidInput(

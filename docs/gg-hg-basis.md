@@ -46,13 +46,106 @@ are evaluated separately at every finite epsilon and working precision before
 Laurent fitting. Root sheets are explicit input; the map does not infer a
 continuation path or turn an approximate root into an exact coefficient.
 
-The extraction verified exact reconstruction of every primary replacement
-rule, exact `M M^(-1)=1`, and equality of every published dlog-matrix entry to
+The version-2 extraction verifies exact reconstruction of every primary replacement
+rule **after restoring its original square-root expressions**, exact `M M^(-1)=1`,
+and equality of every published dlog-matrix entry to
 the corresponding plugin entry after `mmH=b`. These are symbolic comparisons,
 not numerical fits or matches of index counts. `verify_inverse()` independently
 checks the inverse using the native Symbolica matrix implementation and exact
 polynomial cancellation. Admitting this certified mathematical input does not
 claim successful numerical seeds.
+
+The initial physical-map export had a root-indexing error: Mathematica's
+unrestricted `FirstPosition` could find a radicand inside another radicand.
+For example, the primary second planar integral contains both `sqrt(-b)` and
+`sqrt(4-b)`; the initial export replaced both by the same generator. Forward
+and inverse matrices shared the error, so an inverse test alone passed. The
+full common-mass differential gauge exposed the surviving roots. Version 2
+restricts lookup to complete list entries with `{1}, Heads -> False`, restores
+all original roots before checking every source expression, and includes an
+independent native regression for that second integral. This supersedes the
+inverse-only map evidence recorded at commit `0ed48df`; no native AMF boundary
+had been accepted using the initial map. The fixture records the superseded
+SHA-256 as `extraction_revision.supersedes_sha256`.
+
+An audit found that the canonical differential systems, generic form factors,
+point-specialized form factors, and older 64-component canonical basis already
+used complete-entry root lookup. The first three also checked original-root
+reconstruction during extraction. A new original-root reconstruction check
+passes for the older 64-component basis without changing any coefficient.
+Physical routing, model, and kinematic-configuration records do not replace
+root generators. Numerical reference records remain comparison data only.
+
+The optional Mathematica extraction scripts are versioned; ordinary native
+tests do not require Mathematica. Each accepts positional paths after `-script`:
+
+```sh
+WolframKernel -script scripts/extract-gg-hg-physical-map.wl \
+  /path/to/2112.07578v1/anc/scalar_integrals \
+  /path/to/plugin-systems fixtures/gg-hg/plugin-physical-map.json /tmp/maps.json
+WolframKernel -script scripts/extract-gg-hg-published-64.wl \
+  /path/to/2007.09813v2/anc/differential_equations/canonical_basis_NP_system.m /tmp/canonical64.json
+WolframKernel -script scripts/extract-gg-hg-form-factors.wl \
+  /path/to/plugin/FFlist.txt \
+  /path/to/2112.07578v1/anc/form_factors_tensor_structures /tmp/form-factors.json
+```
+
+The first script reads `Planar_EW1/atilde_Planar_EW1.txt` and
+`NP_EW1/atilde_NP_EW1.txt` below its plugin-system directory. Its existing-fixture
+argument supplies routing and provenance metadata; every matrix coefficient is
+regenerated from the primary replacement rules. These scripts perform exact
+mathematical extraction and contain no upstream differential solver code.
+
+## Common-mass AMF from the physical connection
+
+`HomogeneousCanonicalBasis` derives an ordinary auxiliary-mass connection
+from a supplied canonical physical connection and its exact physical basis map.
+For the unit-boson-mass ggHg families it shifts both massive propagators,
+sets `z=1+eta`, and pulls the physical coordinates back along `x(eta)=x(0)/z`.
+If the source map is `I=M F`, each ordinary integral acquires its own
+homogeneity factor `z^(L*(D0/2-eps)-sum(powers))`. Differentiating the complete
+map then yields the ordinary rational AMF matrix; the common fractional
+epsilon power cancels from off-diagonal conjugation.
+
+The generic implementation reuses the canonical pullback, Symbolica matrix and
+quotient arithmetic, and physical-domain guards. It requires homogeneous
+quadratic propagators, unit nonzero masses, and massless numerator slots; other
+families use the ordinary reduction route. It checks the inverse, rejects any
+surviving algebraic root, verifies the differential gauge again, and preserves
+nonzero conditions. The first planar master provides an independent check:
+its massless bubble is fixed while its squared massive tadpole scales as
+`z^(-eps)`, giving the exact entry `-eps/(1+eta)` and no couplings.
+
+The full exact tests pass at the independent Euclidean anchors:
+
+| Family | Exact `(s,t,b)` | Dimension | Rational nonzeros | Domain conditions |
+| --- | --- | ---: | ---: | ---: |
+| Planar | `(-1/10,-1/25,-1/50)` | 48 | 407 | 35 |
+| Nonplanar | `(-1/10,-1/5,-1)` | 61 | 812 | 82 |
+
+Run these larger certificates with `cargo test --lib common_mass::tests::complete
+-- --ignored`; the small analytic and invalid-input tests run normally.
+The supplied connection avoids a new large reduction for the parent AMF
+system. Its numerical boundary still comes from native recursive region
+evaluation. Passing these exact tests does not establish that full numerical
+boundary generation has succeeded.
+
+A first native 48-master planar evaluation at `epsilon=1/101` completed using
+recursive region boundaries. Its first component, converted to the canonical
+normalization, differs by `1.11e-47` from the independent all-epsilon product
+of gamma functions for the factorized bubble-times-tadpole integral. The run
+used 50 working digits; this observed difference certifies neither 47-digit
+accuracy nor the other components or Laurent coefficients. The
+[component report](../reports/validation/2026-10-05-common-mass-first-planar.json)
+retains the exact input, normalization, and scope.
+
+The comparison-only loader in `tests/support/gg_hg_anchors.rs` reads the separate
+40-digit Euclidean anchor fixtures, their coefficient allowances and principal
+root germs. It exposes the unknown `O(epsilon^5)` remainder explicitly. At
+`epsilon=1/101`, even the first planar component's degree-four polynomial differs
+from its all-epsilon value by `3.53e-9`, despite coefficient allowances near
+`1e-47`. Finite-epsilon samples must therefore be fitted before making a
+high-accuracy comparison with those stored Laurent coefficients.
 
 ## Exact physical families
 

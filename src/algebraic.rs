@@ -607,7 +607,7 @@ pub(crate) fn normalized_root_entry(
 
 /// Preserve raw denominator occurrences before native rational cancellation.
 /// Named-root inversion then removes root generators from these exact domains.
-fn registered_domain_conditions(
+pub(crate) fn registered_domain_conditions(
     expressions: &[Atom],
     roots: &[SquareRoot],
     physical: &BTreeSet<Symbol>,

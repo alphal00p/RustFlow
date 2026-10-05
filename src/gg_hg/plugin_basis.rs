@@ -41,6 +41,7 @@ pub struct PluginMapEvidence {
     pub published_dlog_sha256: String,
     pub plugin_dlog_sha256: String,
     pub linear_reconstruction: bool,
+    pub exact_root_reconstruction: bool,
     pub right_inverse: bool,
     pub exact_dlog_equality: bool,
 }
@@ -104,12 +105,18 @@ struct TermRecord {
 }
 
 impl PluginBasisMap {
+    /// Include the extracted mathematics as well as its upstream source in
+    /// boundary identities: correcting an exporter must invalidate old seeds.
+    pub(crate) fn input_fingerprint() -> String {
+        blake3::hash(DATA.as_bytes()).to_hex().to_string()
+    }
+
     /// Parse exact mathematical data in the caller's Symbolica namespace.
     /// Names s,t,b,eps and root1..root8 therefore match a system loaded there.
     pub fn load(kind: PluginFamilyKind, namespace: &str) -> Result<Self> {
         let data: Document = serde_json::from_str(DATA)
             .map_err(|e| Error::InvalidInput(format!("plugin physical map: {e}")))?;
-        if data.schema != "rustflow-gg-hg-plugin-physical-map-v1"
+        if data.schema != "rustflow-gg-hg-plugin-physical-map-v2"
             || data.dimension != "4-2*eps"
             || data.physical_propagators != 7
             || data.measure != "exp(2*eps*EulerGamma); mV2=mu2=1"
@@ -128,6 +135,7 @@ impl PluginBasisMap {
             || record.physical_integrals.len() != n
             || record.routing.len() != 9
             || !record.evidence.linear_reconstruction
+            || !record.evidence.exact_root_reconstruction
             || !record.evidence.right_inverse
             || !record.evidence.exact_dlog_equality
         {
@@ -222,19 +230,9 @@ impl PluginBasisMap {
     /// Native Symbolica matrix product and exact polynomial cancellation.
     /// No sampling, floating-point rank test, or root-sign assumption is used.
     pub fn verify_inverse(&self) -> Result<()> {
-        let n = self.kind.dimension();
-        let dense = |rows: &[Vec<CanonicalTerm>]| {
-            let mut matrix = vec![vec![Atom::new(); n]; n];
-            for (i, row) in rows.iter().enumerate() {
-                for term in row {
-                    matrix[i][term.integral] = term.coefficient.clone();
-                }
-            }
-            matrix
-        };
         let product = crate::algebra::matmul(
-            &dense(&self.canonical_to_publication),
-            &dense(&self.publication_to_canonical),
+            &self.dense_matrix(&self.canonical_to_publication),
+            &self.dense_matrix(&self.publication_to_canonical),
         );
         if product.iter().enumerate().any(|(i, row)| {
             row.iter()
@@ -246,6 +244,17 @@ impl PluginBasisMap {
             ));
         }
         Ok(())
+    }
+
+    pub(crate) fn dense_matrix(&self, rows: &[Vec<CanonicalTerm>]) -> Vec<Vec<Atom>> {
+        let n = self.kind.dimension();
+        let mut matrix = vec![vec![Atom::new(); n]; n];
+        for (i, row) in rows.iter().enumerate() {
+            for term in row {
+                matrix[i][term.integral] = term.coefficient.clone();
+            }
+        }
+        matrix
     }
 
     /// Ordinary q²-m² denominators, including the signed source numerator powers.
@@ -356,6 +365,21 @@ mod tests {
                 assert_eq!(map.integrals[0], Integral(vec![0, 0, 0, 2, 1, 0, 2, 0, 0]));
                 let expected = -Atom::var(map.coordinates[2]) * Atom::var(map.epsilon).pow(2);
                 assert!((&row[0].coefficient - expected).expand().is_zero());
+                // The primary J_2 rule contains two DISTINCT roots. An inverse
+                // identity alone cannot detect a shared erroneous root rename.
+                let row = &map.canonical_to_publication[1];
+                assert_eq!(row.len(), 1);
+                assert_eq!(row[0].integral, 10);
+                assert_eq!(map.integrals[1], Integral(vec![0, 0, 0, 2, 1, 1, 2, 0, 0]));
+                let b = Atom::var(map.coordinates[2]);
+                let expected = -Atom::var(map.roots[0].symbol) * Atom::var(map.roots[1].symbol)
+                    / (Atom::var(map.epsilon).pow(2) * b.clone().pow(2) * (Atom::num(4) - b));
+                assert!(
+                    (&row[0].coefficient - expected)
+                        .together()
+                        .cancel()
+                        .is_zero()
+                );
             }
             for i in 0..9 {
                 assert_eq!(f.mass_squared(i)?, Atom::num(i64::from(i == 5 || i == 6)));

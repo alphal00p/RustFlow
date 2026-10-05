@@ -87,6 +87,35 @@ an in-progress native reduction.
 
 See `docs/coverage.md` for the current completion status and explicit limits.
 
+## Supplied auxiliary-mass equations
+
+`PreparedFlow::from_supplied` accepts an `engine::SuppliedAuxiliarySystem` with
+an ordered ordinary-integral basis, its closed differential matrix and target
+maps, nonzero conditions, an explicit propagator deformation mask, and source
+provenance. The family is specialized once with the given exact kinematic
+point; the supplied matrix and maps must already belong to that point. Their
+coefficients must be exact rational functions of the declared auxiliary
+variable and epsilon. The declared dimension must agree with the evaluation
+options.
+
+This interface checks structure and domains, not the mathematical truth of
+caller-supplied IBP identities. Unresolved map leaves are rejected. Automatic
+recursive boundary generation uses the declared deformation throughout, even
+when the evaluation options would otherwise choose another mass placement.
+Target maps are applied before extracting the physical endpoint limit. Retained
+nonzero conditions restrict the continuation path even if they canceled out of
+the differential matrix; a condition annihilated by an exact epsilon sample is
+an error.
+
+Prepared supplied declarations are sealed against later mutation, and completed
+sample cache keys include their matrix, basis, maps, mask, conditions, and source.
+Changed declarations require preparation of a new system. The specialized
+`HiggsJetIntegralSystem` exposes its associated mathematical inputs through the
+read-only `basis_map()`, `canonical_system()`, and `transport()` accessors so its
+boundary identity cannot be detached from those inputs. Its verified boundary
+identity also includes the extracted map contents, independently of upstream
+file provenance.
+
 ## Long acceptance runs
 
 Use `two_loop_acceptance --sample 1/2700` to evaluate all four targets at one

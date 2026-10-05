@@ -1,0 +1,98 @@
+{
+  "schema": "rustflow-gg-hg-root-extraction-audit-v1",
+  "date": "2026-10-05",
+  "physical_map": {
+    "schema": "rustflow-gg-hg-plugin-physical-map-v2",
+    "sha256": "3d6228c35861cc9ab9ec86f3ef4d90323af51780bd5e77af669239f2e30e17f9",
+    "supersedes_sha256": "0dcce201e8748bae14dd61c4a2b64959472b0bb4b7e8dab5c45a88741aefc3e0",
+    "root_reconstruction": true,
+    "inverse_and_primary_dlog": true,
+    "regression": "Second planar physical integral contains the product of distinct sqrt(-b) and sqrt(4-b)."
+  },
+  "unaffected": [
+    {
+      "fixture": "integral-systems.json",
+      "lookup": "FirstPosition level {1}, Heads -> False",
+      "certificate": "SameQ original-root reconstruction for every source letter"
+    },
+    {
+      "fixture": "generic-form-factors.json",
+      "lookup": "FirstPosition level {1}, Heads -> False",
+      "certificate": "Exact reconstruction of original coefficient roots and original primary expressions"
+    },
+    {
+      "fixture": "projections.json",
+      "lookup": "FirstPosition level {1}, Heads -> False",
+      "certificate": "Independent point-specialized root expressions"
+    },
+    {
+      "fixture": "published-canonical-64.json",
+      "lookup": "FirstPosition level {1}, Heads -> False",
+      "certificate": "New exact original-root reconstruction passed; roots, rows and integral lists unchanged"
+    }
+  ],
+  "not_applicable": [
+    "published-physical-families.json",
+    "physical-configurations.json",
+    "native-model.json",
+    "coherent-reference.json"
+  ],
+  "numerical_scope": "No native AMF seed was accepted using the superseded physical map. This data audit does not certify any numerical boundary or performance.",
+  "native_common_mass_certificates": {
+    "precision": "Exact rational/algebraic Symbolica arithmetic; no numerical boundary",
+    "build": "dev profile, dependency optimization 2; these are preparation observations, not numerical evaluation or performance-parity claims",
+    "checks": [
+      "exact inverse",
+      "quotient-ring root cancellation in every ordinary connection entry",
+      "exact differential gauge identity",
+      "retained domain conditions",
+      "independent planar first-master exponent -eps/(1+eta)"
+    ],
+    "cases": [
+      {
+        "family": "Planar_EW1",
+        "point": [
+          "-1/10",
+          "-1/25",
+          "-1/50"
+        ],
+        "dimension": 48,
+        "rational_nonzeros": 407,
+        "nonzero_conditions": 35,
+        "observed_seconds": 9.930589419
+      },
+      {
+        "family": "NP_EW1",
+        "point": [
+          "-1/10",
+          "-1/5",
+          "-1"
+        ],
+        "dimension": 61,
+        "rational_nonzeros": 812,
+        "nonzero_conditions": 82,
+        "observed_seconds": 30.801068085
+      }
+    ]
+  },
+  "durable_regeneration": [
+    {
+      "script": "scripts/extract-gg-hg-physical-map.wl",
+      "script_sha256": "2ab7d72db05510e47ea38884e6266b295c5770b78dcc1e1308115bdf06a97129",
+      "fixture": "fixtures/gg-hg/plugin-physical-map.json",
+      "exact_json_value_equality": true
+    },
+    {
+      "script": "scripts/extract-gg-hg-published-64.wl",
+      "script_sha256": "8faaf1ff266b79f5ec1cca9fb0c2de2407ec410d1a4180bee5422e3e2c99830e",
+      "fixture": "fixtures/gg-hg/published-canonical-64.json",
+      "exact_json_value_equality": true
+    },
+    {
+      "script": "scripts/extract-gg-hg-form-factors.wl",
+      "script_sha256": "c380fbb3837c3e9b4855e1990122c2b34a8dd714cec283a344d75431c8cd2302",
+      "fixture": "fixtures/gg-hg/generic-form-factors.json",
+      "exact_json_value_equality": true
+    }
+  ]
+}
