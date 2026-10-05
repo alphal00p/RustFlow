@@ -6,6 +6,7 @@ use rayon::prelude::*;
 use std::collections::BTreeMap;
 use symbolica::prelude::*;
 
+mod frobenius_cache;
 mod supplied;
 pub use supplied::SuppliedAuxiliarySystem;
 
@@ -13,6 +14,7 @@ pub struct PreparedFlow {
     pub family: IntegralFamily,
     pub reduced: ReducedSystem,
     pub system: DifferentialSystem,
+    frobenius_preparations: std::sync::Arc<frobenius_cache::FrobeniusPreparations>,
     epsilon_sample: Option<Rational>,
     deformation_mask: Vec<bool>,
     supplied: Option<supplied::SuppliedSeal>,
@@ -77,6 +79,7 @@ impl PreparedFlow {
                 reduced,
                 system,
                 basis_refinement,
+                frobenius_preparations: Default::default(),
                 epsilon_sample: None,
                 deformation_mask: mask,
                 supplied: None,
@@ -122,6 +125,7 @@ impl PreparedFlow {
             reduced,
             system,
             basis_refinement,
+            frobenius_preparations: Default::default(),
             epsilon_sample: None,
             deformation_mask: mask,
             supplied: None,
@@ -269,9 +273,9 @@ impl PreparedFlow {
         compiled.exclude_polynomials(&guards)?;
         stage("constructing the expansion at auxiliary-mass infinity")?;
         let mut infinity = self
-            .system
-            .invert_variable(symbol!("symbolica_amflow::z"))
-            .frobenius(p, &parameters, options.series_order)?;
+            .frobenius_preparations
+            .get(&self.system, true, context)?
+            .evaluate(p, &parameters, options.series_order, context)?;
         self.lift_exponents(&mut infinity)?;
         ensure_generic_indicial(&infinity, &parameters)?;
         stage("generating and matching native asymptotic boundary regions")?;
@@ -323,8 +327,9 @@ impl PreparedFlow {
         )?;
         stage("constructing the physical endpoint expansion")?;
         let mut endpoint = self
-            .system
-            .frobenius(p, &parameters, options.series_order)?;
+            .frobenius_preparations
+            .get(&self.system, false, context)?
+            .evaluate(p, &parameters, options.series_order, context)?;
         self.lift_exponents(&mut endpoint)?;
         ensure_generic_indicial(&endpoint, &parameters)?;
         let constants = endpoint.match_values(&end, &transported.values, &parameters)?;
@@ -358,23 +363,15 @@ pub(crate) fn ensure_generic_indicial(
     basis: &frobenius::FrobeniusBasis,
     parameters: &ahash::HashMap<Atom, ComplexFloat>,
 ) -> Result<()> {
-    let p = basis.precision;
-    for (i, a) in basis.columns.iter().enumerate() {
-        for b in &basis.columns[..i] {
-            let difference = (&a.exponent - &b.exponent).together().cancel();
-            if difference.to_string().parse::<i64>().is_ok() {
-                continue;
-            }
-            let value = p.eval(&difference, parameters)?;
-            if let Some(integer) = value.re.as_raw().to_integer()
-                && let Ok(integer) = integer.to_string().parse::<i64>()
-                && p.close(&value, &p.i(integer), p.bits / 5)
-            {
-                return Err(Error::Unsupported("epsilon specialization introduces an additional indicial resonance; choose a generic nonzero sample".into()));
-            }
-        }
-    }
-    Ok(())
+    frobenius::ensure_generic_exponents(
+        &basis
+            .columns
+            .iter()
+            .map(|column| &column.exponent)
+            .collect::<Vec<_>>(),
+        basis.precision,
+        parameters,
+    )
 }
 
 pub(crate) fn project_limit(

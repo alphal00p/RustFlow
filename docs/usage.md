@@ -46,6 +46,28 @@ compile at a `Precision` and parameter map, then call `transport` with supplied
 specified side of real singularities. `frobenius` constructs singular endpoint
 and infinity expansions; `invert_variable` maps infinity to zero.
 
+For several parameter samples or precision refinements, call
+`system.prepare_frobenius(&context)` once, then
+`prepared.evaluate(precision, &parameters, order, &context)`. The immutable
+`frobenius::PreparedFrobenius` retains exact normalization, indicial exponents,
+generalized eigenspaces, and leading logarithmic chains. Each evaluation owns
+its numerical recurrence workspace, so an `Arc` can share the preparation
+between workers. Original denominator restrictions remain visible through
+`nonzero_conditions()`: a singular expansion center is allowed, but parameter
+samples that annihilate an entire restriction or change the indicial resonance
+pattern are rejected. Such nongeneric parameters require a separately prepared,
+exactly specialized system.
+
+`PreparedFlow` lazily shares these exact preparations at zero and infinity
+across its epsilon samples and refinement attempts. Public changes to its exact
+ODE matrix or variable invalidate the cached preparation; supplied declarations
+also retain their existing mutation seal. Cancelled or failed preparation does
+not install an entry and can be retried with a fresh context. Cancellation is
+checked between exact owner operations, matrix rows, eigenspaces, and numerical
+recurrence steps; a single Symbolica matrix operation remains indivisible.
+Progress callbacks may request cancellation but must not reenter the same
+calculation while its exact preparation is in progress.
+
 `ReductionBackend` supports native RustRed and explicit tables. A table must
 cover requested derivatives as well as initial targets. Search residuals are
 candidates in a spanning basis, not certified masters: the port requires stable

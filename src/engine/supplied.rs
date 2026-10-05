@@ -147,6 +147,7 @@ impl PreparedFlow {
             family,
             reduced,
             system,
+            frobenius_preparations: Default::default(),
             epsilon_sample: None,
             deformation_mask: supplied.deformation_mask,
             supplied: None,
