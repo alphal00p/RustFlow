@@ -1,0 +1,821 @@
+{
+  "status": "running",
+  "mode": "cold",
+  "stages": [
+    {
+      "stage": "boundaries",
+      "mode": "cold",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 6467540504060
+    },
+    {
+      "stage": "transport",
+      "mode": "cold",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 400068170794
+    },
+    {
+      "stage": "amplitude",
+      "mode": "cold",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 35956245285
+    },
+    {
+      "stage": "restart",
+      "mode": "reloaded",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 73878067407
+    }
+  ],
+  "runtime_attestation": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "5e8319c74a327e09349d7626d629c77d8a39d625e0503267e5ebfbb0994039cf"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/amflow/target/publication-python-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+      "size_bytes": 393671056,
+      "sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 32019,
+        "sha256": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_support.py",
+        "size_bytes": 20678,
+        "sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25"
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
+        "size_bytes": 11597,
+        "sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/publication-python-venv/bin/python"
+    }
+  },
+  "euclidean_anchor_proof": {
+    "path": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-euclidean20/anchor-acceptance.json",
+    "sha256": "c03530cd10b6c0a7d4a038dbb55ca31609f9c58b65253896e1c9b431fae01587",
+    "checked_coefficients": 545,
+    "minimum_verified_digits": 20,
+    "native_source_identity_matched": true,
+    "installed_extension_matched": true
+  },
+  "scope": "Physical seeds, transport, amplitude and restart; independent Euclidean anchor reports are a separate prerequisite.",
+  "resources": {
+    "sample_worker_budget": 256,
+    "boundary_workers": 4,
+    "effective_boundary_workers": 4,
+    "sample_workers_per_configuration": 64
+  },
+  "inputs": {
+    "model_sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+    "point": [
+      "7173070292440521/111284741846000",
+      "-12058167788971/339319588980",
+      "1"
+    ],
+    "mass_squared": {
+      "W": "5399/13074",
+      "Z": "7775/14631"
+    },
+    "systems": {
+      "planar": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates",
+      "nonplanar": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates"
+    }
+  },
+  "progress": {
+    "stage": "transport",
+    "mode": "warm",
+    "elapsed_ns": 25026566207,
+    "seed_digits": 30,
+    "status": "running transport",
+    "done": false,
+    "recent_events": [
+      "Step { index: 136 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 133 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 144 }",
+      "Step { index: 137 }",
+      "Step { index: 137 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 134 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 145 }",
+      "Step { index: 138 }",
+      "Step { index: 135 }",
+      "Step { index: 138 }",
+      "Saved boundary Z-NP_EW1-3; cache hit: False.",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 139 }",
+      "Step { index: 136 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 140 }",
+      "Step { index: 137 }",
+      "Step { index: 139 }",
+      "Step { index: 141 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 138 }",
+      "Step { index: 142 }",
+      "Step { index: 140 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 139 }",
+      "Step { index: 143 }",
+      "Saved boundary Z-NP_EW1-2; cache hit: False.",
+      "Step { index: 140 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 141 }",
+      "Step { index: 144 }",
+      "Step { index: 141 }",
+      "Step { index: 145 }",
+      "Step { index: 142 }",
+      "Step { index: 142 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 143 }",
+      "Saved boundary Z-NP_EW1-4; cache hit: False.",
+      "Step { index: 143 }",
+      "Step { index: 144 }",
+      "Step { index: 145 }",
+      "Step { index: 144 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 145 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Saved boundary Z-NP_EW1-1; cache hit: False.",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Stage { name: \"generating native Higgs-jet effective diagrams\" }",
+      "Stage { name: \"summing native Higgs-jet spin and color states\" }",
+      "Stage { name: \"contracting native Higgs-jet tensors\" }",
+      "Stage { name: \"preparing kinematics-dependent Higgs-jet scalar kernels\" }",
+      "Stage { name: \"evaluating coherent Higgs-jet observables and propagated errors\" }"
+    ],
+    "numerical_generation": {
+      "schema": 1,
+      "generation": "initial",
+      "archive_directory": null
+    },
+    "completed_sample_files": 1248
+  },
+  "timings": [
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 915546162296,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 920195278551,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 936046572301,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 941082465969,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 853119218272,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 888266198144,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 921517526307,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 936302247741,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2308364935988,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2374144697150,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2314709142675,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2420049656386,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2159926845922,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2226899655371,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2144355145674,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2315946099471,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundaries",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 6467536714065,
+      "outcome": "completed",
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "transport",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 400061631927,
+      "outcome": "completed",
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "amplitude",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 35952618939,
+      "outcome": "completed",
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "restart",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 73874406882,
+      "outcome": "completed",
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    }
+  ],
+  "native_seeds": {
+    "W-Planar_EW1-1": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-Planar_EW1-2": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-Planar_EW1-3": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-Planar_EW1-4": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-1": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-2": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-3": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-4": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-1": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-2": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-3": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-4": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-1": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-2": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-3": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-4": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    }
+  },
+  "reference_inputs": {
+    "transport_coefficients": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/data/gg_hg/coherent-reference.json",
+      "size_bytes": 1445530,
+      "sha256": "dd791b4d0400504ae8bc13e4e4bffa3d35773579a73c49ef4559d8e7985787e3",
+      "schema": "higgs-jet-coherent-reference-v1",
+      "provenance": {
+        "provenance": [
+          {
+            "path": "fixtures/gg-hg/full-systems.json",
+            "sha256": "b643716de4212e8cc3ddcaf4fb5d13eb67f993ac3ae8563c291c16ae284cbb86"
+          },
+          {
+            "path": "target/gg-hg-coherent/native/fixture.json",
+            "sha256": "e1c774ffc8bf811cf3e588f8a5406f677d30d7a9eefbb609fb3ec6cc83f949d6"
+          }
+        ],
+        "purpose": "Comparison only. Not an evaluator input. Values retain original source precision caps and absolute error metadata."
+      }
+    },
+    "amplitude": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/data/gg_hg/amplitude-validation.json",
+      "size_bytes": 6920,
+      "sha256": "868b9fde9448e54b315e96c4ce5a83bcb2501f219cf45a4cf2c147e521fef071",
+      "schema": 1,
+      "provenance": {
+        "scope": "Component-level amplitude validation with archived natively transported form factors; not an automatic-boundary acceptance. Never loaded by production evaluation.",
+        "source_input_sha256": "c8d2e3a61b0b1f97a82db89b1a7774531447cc221a5b3a6c43adf00fb247d674",
+        "references": [
+          "reports/validation/2026-10-04-gg-hg-squared-matrix-element.json",
+          "reports/validation/2026-10-05-gg-hg-heft-interference.json"
+        ],
+        "reference_accuracy": {
+          "scope": "Conditional on archived transported form-factor allowances. The 30-digit component comparison holds those form factors fixed and is not a physical-accuracy claim.",
+          "electroweak_squared": {
+            "input_absolute_error": "1.036965279540889484229816607147212347491680749337440461240057773672673644280375266356913373971924891557682004240003e-27",
+            "rounding_absolute_error": "1e-39",
+            "conditional_relative_digits": 19
+          },
+          "interference": {
+            "input_absolute_error": "1.386179807571189324116816980709306921379782632659449692282195647591677068094016282224644333359816355956402393946359e-25",
+            "rounding_absolute_error": "1e-42",
+            "conditional_relative_digits": 20
+          },
+          "effective_squared": {
+            "input_absolute_error": "1e-65",
+            "rounding_absolute_error": "1e-42",
+            "conditional_relative_digits": 39
+          }
+        },
+        "physical_s_t_MH_squared": [
+          "7173070292440521/111284741846000",
+          "-12058167788971/339319588980",
+          "1"
+        ]
+      }
+    }
+  },
+  "reference_comparison": {
+    "coefficients": 4360,
+    "checked_mixed_digits": 20,
+    "configurations": 16,
+    "labels": [
+      "W-Planar_EW1-1",
+      "W-Planar_EW1-2",
+      "W-Planar_EW1-3",
+      "W-Planar_EW1-4",
+      "W-NP_EW1-1",
+      "W-NP_EW1-2",
+      "W-NP_EW1-3",
+      "W-NP_EW1-4",
+      "Z-Planar_EW1-1",
+      "Z-Planar_EW1-2",
+      "Z-Planar_EW1-3",
+      "Z-Planar_EW1-4",
+      "Z-NP_EW1-1",
+      "Z-NP_EW1-2",
+      "Z-NP_EW1-3",
+      "Z-NP_EW1-4"
+    ],
+    "maximum_scaled_difference": "1.698022952500849738236628302047615989765346418841003077136282391232451E-30",
+    "reference_precision": "Preserved component source caps/precision and endpoint delta in coherent-reference.json",
+    "source_verified_digits_caps": {
+      "W-Planar_EW1-1": 24,
+      "W-Planar_EW1-2": 24,
+      "W-Planar_EW1-3": 24,
+      "W-Planar_EW1-4": 24,
+      "W-NP_EW1-1": 24,
+      "W-NP_EW1-2": 24,
+      "W-NP_EW1-3": 24,
+      "W-NP_EW1-4": 24,
+      "Z-Planar_EW1-1": 24,
+      "Z-Planar_EW1-2": 24,
+      "Z-Planar_EW1-3": 24,
+      "Z-Planar_EW1-4": 24,
+      "Z-NP_EW1-1": 24,
+      "Z-NP_EW1-2": 24,
+      "Z-NP_EW1-3": 24,
+      "Z-NP_EW1-4": 24
+    },
+    "endpoint_deltas": {
+      "W-Planar_EW1-1": "3.2185621170547758*^-27",
+      "W-Planar_EW1-2": "3.2185621162754866*^-27",
+      "W-Planar_EW1-3": "5.862101017252375*^-28",
+      "W-Planar_EW1-4": "2.9585803614123236*^-27",
+      "W-NP_EW1-1": "1.0038884634147344*^-27",
+      "W-NP_EW1-2": "1.0226540982405648*^-27",
+      "W-NP_EW1-3": "3.4128582946147586*^-27",
+      "W-NP_EW1-4": "6.017579083450245*^-28",
+      "Z-Planar_EW1-1": "3.2228950405315133*^-27",
+      "Z-Planar_EW1-2": "3.222895039773394*^-27",
+      "Z-Planar_EW1-3": "8.805569288861356*^-28",
+      "Z-Planar_EW1-4": "3.160825117717002*^-27",
+      "Z-NP_EW1-1": "9.094574622024175*^-28",
+      "Z-NP_EW1-2": "1.230547775126752*^-27",
+      "Z-NP_EW1-3": "2.5882486630334502*^-27",
+      "Z-NP_EW1-4": "8.333965179001432*^-28"
+    }
+  },
+  "observables": {
+    "effective_squared": {
+      "value": "0.00176839492856040838255513143874534782898210399687219844018557709100056424479576777129467967484813",
+      "absolute_error": "1E-50",
+      "relative_digits": 47
+    },
+    "electroweak_squared": {
+      "value": "4.33089662023980781068590560931974942994040642487940681678246676343150671547735405527590887278772E-8",
+      "absolute_error": "1.03038250335993855710408227422359660093600219810505786489517252328230656185468531943948605285945E-33",
+      "relative_digits": 25
+    },
+    "interference": {
+      "value": "0.0000166580193666104352713434174523346881653549846139505767407266481227466537219656222990047036352353",
+      "absolute_error": "1.37731031568813068627392693854412867413205782245975688226357007619111592030516959844478018733861E-31",
+      "relative_digits": 26
+    }
+  },
+  "form_factor_comparison": {
+    "components": 8,
+    "comparison": {
+      "W": [
+        {
+          "index": 1,
+          "value": "(0.00000196122238618354244187226751552453320477653483944165664762606489867484580701741712425368094137382757568024-0.00000809007076182998492997694095330234148133866943165310769334485594416409553447403587203622820578224648532885j)",
+          "absolute_difference": "5.143808442078450051612643023275552187884110976781991328429821398906761E-36",
+          "native_absolute_error": "2.27528209277603247875025375768284356168518336078292158891120522662230124608208346363169386145523768670266E-32",
+          "native_verified_relative_digits": 26,
+          "reference_absolute_error": "2.2894422778484710617219023758127296980340123201305702853536819931315854569613945923191920875928305767078971597261130888225138070911525519357053588958538600877261666e-26"
+        },
+        {
+          "index": 2,
+          "value": "(0.00000311877285945116004083112030594674900485706001164483932878156571651090670099132973664295530763372432348788-0.00000319630617603961230595104819312248865212806294553555074487246517573831538654566396845569812028799489382312j)",
+          "absolute_difference": "2.972825980245488824505888048245316776301542810447482344357979510601411E-36",
+          "native_absolute_error": "4.32748699796940795443390317303891892568491769316301522422915955844076872907388990634627368966813855245E-31",
+          "native_verified_relative_digits": 25,
+          "reference_absolute_error": "4.3530140922574367346069825631297457026237300281776625510195222985544606775618232408987391125346916753001696620985137181011120232532908393972071889336312263234000659e-25"
+        },
+        {
+          "index": 3,
+          "value": "(-0.00000242513800782883147494572181185168174690542507085904020898027354144690394711370563259130718755128803661596+0.00000348790358169000308503319605913086193810123417292375915259352316483533645917462101573685390254951031638916j)",
+          "absolute_difference": "6.858352966900754846893347336765578299018291925862934354012924845750388E-36",
+          "native_absolute_error": "4.0684401506515616624581479861232171951373635073164246826195519899316802525913268479911270533741063221191E-32",
+          "native_verified_relative_digits": 26,
+          "reference_absolute_error": "4.1031713688203874617267147671521978982359561343847099674600667217295867776446285029394868152776080573874796524790687365319894624470261424412548734671996325004454210e-26"
+        },
+        {
+          "index": 4,
+          "value": "(0.00000472112415267974335518758062622869704631978493887290300057398949885466968613004606323718739947691110991501-0.0000129880123126617041227000407141235718309941498734878670586333424059152417906426001988116432173468409265762j)",
+          "absolute_difference": "9.374603750071727379251063167512014895424533215962830333609102245344697E-36",
+          "native_absolute_error": "1.89810694949784264633878246960852812041297904443795600113293193835141600799526620405133879596600376584046E-31",
+          "native_verified_relative_digits": 25,
+          "reference_absolute_error": "1.9094573980705271453356802757638948060172978128304488653863004290182128447255574285641967745015322850106247319193602797553938530752662679457110187024301184619912323e-25"
+        }
+      ],
+      "Z": [
+        {
+          "index": 1,
+          "value": "(0.00000149584519527614786931022238968926179211529654689221343854458649151886873584967011854186995438437154465948-0.00000645820543916701705715581112889532758609497089669671070467787977665902836805593037923365881136232406764956j)",
+          "absolute_difference": "7.1531564062088553721724593462332221604770362926929340453425838524863768E-36",
+          "native_absolute_error": "3.06685625768707197091545716537539602671100446726780276936641127916746566941733725418669325442608342579153E-32",
+          "native_verified_relative_digits": 26,
+          "reference_absolute_error": "3.0850617437448454289042478895604472907991349916940237444912356572551816162999327330149626983955837842877165641790760177202838195326091938840114099087668125589542106e-26"
+        },
+        {
+          "index": 2,
+          "value": "(0.00000264220789391826749913508610578135971711596391361523255519303492374697287981131121376694522202186775874708-0.00000255024204961584667892488527407044226340730845904321189551829785430609143803967039152065774818684782391124j)",
+          "absolute_difference": "6.6390513225915319421042080584150249155857347653263282109092022594295691E-35",
+          "native_absolute_error": "5.52628000480279181193255320621664299946041634535889081597617066843076221912454585304293846240989466202004E-31",
+          "native_verified_relative_digits": 24,
+          "reference_absolute_error": "5.5597103718713992760207099541422720732121534798581672099528317771589607038154737432213500596489696049461799014198859006611423656892337659624777698076137696487113882e-25"
+        },
+        {
+          "index": 3,
+          "value": "(-0.00000201901733252621387687016087627611654726911972288811832524138164372786933730352979287008807465579194204331+0.00000279014951455226281385884472453395821897117977075193707796400548953179089365662565680849449143447189061761j)",
+          "absolute_difference": "2.9610172592520556764469743689316193168496330944804363944860868568739027E-35",
+          "native_absolute_error": "9.1907857565686631523519593821313821891325421708404005796336382220259884918136619923938600041704442524126E-32",
+          "native_verified_relative_digits": 25,
+          "reference_absolute_error": "9.2721561940592548105963169949791233675514410882632020540084462640997947635386978524812090864272906423477908447474043250048144018137816077048655852131263861370412818e-26"
+        },
+        {
+          "index": 4,
+          "value": "(0.00000375132485640043335955350112366438195588328292200095344675857546412211654539943299919304064833260216358864-0.0000103869776958708844496710907773540796162523074370720286269506727461031443094172246986454679111268382409326j)",
+          "absolute_difference": "2.997401249980010051080527111307418190407209257090917745856871486577977E-35",
+          "native_absolute_error": "2.48392110356906448198099890216483978616000250801999162212268694251226232344376667635089751266943595326928E-31",
+          "native_verified_relative_digits": 25,
+          "reference_absolute_error": "2.4987744496469589053257508973342428304922848075000439862141204924183340631536046473872500275855612750787128354083877781483922261005890440863712022753194839308751673e-25"
+        }
+      ]
+    }
+  },
+  "observable_comparison": {
+    "effective_squared": {
+      "absolute_difference": "3.996872198440185577091000564244795767771294679674848127E-45",
+      "reference_absolute_uncertainty": "1.00000000000000000000001E-42",
+      "reference_conditional_relative_digits": 39
+    },
+    "electroweak_squared": {
+      "absolute_difference": "4.344880059593575120593183217533236568493284522645944724091127212283E-38",
+      "reference_absolute_uncertainty": "1.036965279541889484229816607147212347491680749337440461240057773672673644280375266356913373971924892E-27",
+      "reference_conditional_relative_digits": 19
+    },
+    "interference": {
+      "absolute_difference": "8.06288718001538604942325927335187725334627803437770099529636476472E-36",
+      "reference_absolute_uncertainty": "1.386179807571189334116816980709306921379782632659449692282195647591677068094016282224644333359816356E-25",
+      "reference_conditional_relative_digits": 20
+    }
+  },
+  "binary_restart": {
+    "entries": 48,
+    "values_and_evidence_preserved": true,
+    "exact_repeat_without_steps": true
+  }
+}

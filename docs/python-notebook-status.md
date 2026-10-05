@@ -11,7 +11,7 @@ checks still running on the dependency graph intended for publication.
 | Original AMFlow acceptance | All four two-loop paper targets through epsilon zero passed the requested 20-digit comparison and independent sampling/refinement | That completed gate does not establish full upstream feature coverage |
 | Growing boundary cache | Binary persistence, compatible-source selection, intermediate points, source fingerprints and retained uncertainty; completed samples are stored separately | Final-wheel forced recomputation, interruption/resume and nearby-query acceptance are still running |
 | Exact Higgs-plus-jet inputs | Native physical families, certified 48/61 canonical basis maps, exact normalization and kinematics-dependent form-factor projections | No claim of automatic reduction or boundary coverage for every possible multiloop family |
-| Fresh physical boundaries and amplitude | An earlier frozen build completed all 16 native 30-digit configurations from empty numerical caches, all 4,360 transport coefficient comparisons, eight W/Z form factors and three coherent observables | Repeat on the publication wheel, followed by forced 40-digit regeneration and independent stability checks |
+| Fresh physical boundaries and amplitude | The publication wheel completed all 16 native 30-digit configurations from empty numerical caches, all 4,360 transport coefficient comparisons, eight W/Z form factors and three coherent observables | Forced 40-digit regeneration, interruption/resume, independent stability and nearby-point checks remain |
 | Independent Euclidean anchors | Publication wheel passed all 545 comparisons at 20 digits with fresh native boundaries | This prerequisite alone does not certify the physical calculation |
 | Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; initial HTML export passed, and all three native amplitude diagrams rendered as SVG and in the notebook display container | Execute the populated notebook using a copy of the completed native cache, then finish the complete headless acceptance |
 | Packaging | Rust core release suite: 534 passed, 12 opt-in tests ignored; strict Python-feature Clippy and formatting passed. Original native wheel component suite: 206 passed, one inherited C++ export failure. Corrected tensor stubs: seven checks passed | Existing browser tensor evaluation fails on list output; an isolated owner fix passes native NumPy/no-NumPy regression checks, but its browser rerun is pending |
@@ -19,10 +19,12 @@ checks still running on the dependency graph intended for publication.
 The final publication run has now completed
 [all 16 physical starting configurations](../reports/validation/2026-10-05-public-wheel/physical-boundary-validation.json)
 at 30 verified digits, with 1,248 completed finite-epsilon samples. Fresh boundary
-generation took 6,467.54 seconds; physical transport has started. Its runtime,
-dependency pins, model and numerical steering sources remain frozen. The physical
-amplitude and later restart/refinement stages have not yet passed on this wheel;
-earlier build results are not relabeled as its validation.
+generation took 6,467.54 seconds. The
+[cold physical calculation](../reports/validation/2026-10-05-public-wheel/cold-physics-validation.json)
+also passed transport and native amplitude comparison, with the same 25/26/47
+propagated relative-digit estimates as the earlier build. Its runtime, dependency
+pins, model and numerical steering sources remain frozen while the later
+restart/refinement stages continue.
 
 ## Completed cold calculation and precision scope
 
@@ -35,14 +37,14 @@ square, 26 for interference and 47 for the infinite-top HEFT square. Reference
 uncertainties support only 19, 20 and 39 relative digits respectively; the EW
 reference comparison therefore does not independently establish 20 digits.
 
-| Historical stage | Measured wall time |
-|---|---:|
-| All 16 fresh native boundaries | 7,399.44 s |
-| All 16 physical transports | 405.37 s |
-| Native amplitude assembly | 50.75 s |
-| Binary reload and repeated transport | 75.39 s |
-| Warm transport, 16 exact hits and zero ODE steps | 69.44 s |
-| Warm amplitude assembly | 4.06 s |
+| Stage | Historical build | Publication build |
+|---|---:|---:|
+| All 16 fresh native boundaries | 7,399.44 s | 6,467.54 s |
+| All 16 physical transports | 405.37 s | 400.07 s |
+| Native amplitude assembly | 50.75 s | 35.96 s |
+| Binary reload and repeated transport | 75.39 s | Pending complete run |
+| Warm transport, 16 exact hits and zero ODE steps | 69.44 s | Pending complete run |
+| Warm amplitude assembly | 4.06 s | Pending complete run |
 
 These observations used four boundary workers sharing a 256-sample-worker budget
 on a busy cluster. Warm controller timings include persistence after each query;
@@ -65,8 +67,8 @@ The inherited tensor list-output failure has a separate
 pass with and without NumPy on that isolated fix. The live wheel has not been
 changed, and a successful browser rerun is still required.
 
-Next are the final wheel's cold amplitude, forced cancellation/restart and
-40-digit regeneration, populated notebook execution, and copied-cache profiling.
+Next are the final wheel's forced cancellation/restart and 40-digit regeneration,
+populated notebook execution, and copied-cache profiling.
 After those checks, publish the community update with its exact validated pins.
 Broader work remains on general linear/cut recursion, algebraic singular
 endpoints, causal paths, nondiagonal epsilon transformations, advanced Python
