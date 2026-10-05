@@ -19,6 +19,8 @@ epsilon power zero: 20-digit stability under independent sample/precision/order
 refinement and agreement with upstream data at its recorded precision. See the
 [acceptance report](reports/validation/2026-10-04-paper-two-loop-acceptance.json)
 and [implemented coverage and limits](docs/coverage.md).
+The [implementation and benchmark comparison](docs/benchmark-comparison.md)
+lists completed and pending features with RustFlow and reference timings side by side.
 An executable [performance comparison](docs/performance.md) measures the Rust
 and original AMFlow 2.0 differential-equation solvers on identical inputs.
 The [Bern Wolfram setup](docs/wolfram-setup.md) also enables live checks against

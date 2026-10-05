@@ -16,7 +16,7 @@
     {
       "id": "mpl-g101at4-order50",
       "notebook": "MultiplePolylogarithms.nb",
-      "status": "live_smoke_passed_with_logged_verbosity1",
+      "status": "completed_live_original_and_independent_native_boundary_crosscheck",
       "letters": [
         "1",
         "0",
@@ -42,12 +42,16 @@
         4,
         5
       ],
-      "fixture": "mpl-101-4/fixture.json"
+      "fixture": "fixtures/diffexp/mpl-101-4.json",
+      "validation_report": "fixtures/diffexp/mpl-101-4.json",
+      "release_validation_report": "reports/validation/2026-10-04-fallback-mpl-release.json",
+      "native_regression": "tests/diffexp.rs::pinned_diffexp_polylogarithm_oracle_from_independent_boundary_series",
+      "coverage_note": "Original order 50/75 refinement passes 20 absolute digits; order 75 agrees with the recorded notebook at 30 digits. Native checked transport uses an independently convergent boundary series and checks all four coefficients against order 75 at 30 scaled digits. Working precision is not an accuracy guarantee; native elapsed time was not separately recorded."
     },
     {
       "id": "mpl-g101at4-order75",
       "notebook": "MultiplePolylogarithms.nb",
-      "status": "live_smoke_passed_with_logged_verbosity1",
+      "status": "completed_live_original_and_independent_native_boundary_crosscheck",
       "letters": [
         "1",
         "0",
@@ -73,12 +77,16 @@
         4,
         6
       ],
-      "fixture": "mpl-101-4/fixture.json"
+      "fixture": "fixtures/diffexp/mpl-101-4.json",
+      "validation_report": "fixtures/diffexp/mpl-101-4.json",
+      "release_validation_report": "reports/validation/2026-10-04-fallback-mpl-release.json",
+      "native_regression": "tests/diffexp.rs::pinned_diffexp_polylogarithm_oracle_from_independent_boundary_series",
+      "coverage_note": "Original order 50/75 refinement passes 20 absolute digits; order 75 agrees with the recorded notebook at 30 digits. Native checked transport uses an independently convergent boundary series and checks all four coefficients against order 75 at 30 scaled digits. Working precision is not an accuracy guarantee; native elapsed time was not separately recorded."
     },
     {
       "id": "mpl-g1m100at4-order50",
       "notebook": "MultiplePolylogarithms.nb",
-      "status": "not_run_in_this_environment",
+      "status": "completed_live_original_and_native_20digit_refinement_checks",
       "letters": [
         "1",
         "-10",
@@ -103,12 +111,16 @@
         3,
         4,
         5
-      ]
+      ],
+      "validation_report": "reports/diffexp/mpl-additional-validation.json",
+      "release_validation_report": "reports/validation/2026-10-04-fallback-mpl-release.json",
+      "fixture": "fixtures/diffexp/mpl-additional.json",
+      "coverage_note": "The requested MPL passes 20 absolute and 20 relative digits against the live original within recorded component precision/accuracy. All native basis coefficients pass independent precision/order refinement at 20 absolute digits. Finite-accuracy zeros and original uncertainty annotations are retained; no original numerical value seeds the native solution. Native and original precision/order profiles differ."
     },
     {
       "id": "mpl-g1m100at4-order75",
       "notebook": "MultiplePolylogarithms.nb",
-      "status": "not_run_in_this_environment",
+      "status": "completed_live_original_and_native_20digit_refinement_checks",
       "letters": [
         "1",
         "-10",
@@ -133,12 +145,16 @@
         3,
         4,
         6
-      ]
+      ],
+      "validation_report": "reports/diffexp/mpl-additional-validation.json",
+      "release_validation_report": "reports/validation/2026-10-04-fallback-mpl-release.json",
+      "fixture": "fixtures/diffexp/mpl-additional.json",
+      "coverage_note": "The requested MPL passes 20 absolute and 20 relative digits against the live original within recorded component precision/accuracy. All native basis coefficients pass independent precision/order refinement at 20 absolute digits. Finite-accuracy zeros and original uncertainty annotations are retained; no original numerical value seeds the native solution. Native and original precision/order profiles differ."
     },
     {
       "id": "mpl-g10complexat1-order50",
       "notebook": "MultiplePolylogarithms.nb",
-      "status": "not_run_in_this_environment",
+      "status": "completed_live_original_and_native_20digit_refinement_checks",
       "letters": [
         "10",
         "-10+I",
@@ -164,12 +180,17 @@
         3,
         4,
         5
-      ]
+      ],
+      "validation_report": "reports/diffexp/mpl-additional-validation.json",
+      "release_validation_report": "reports/validation/2026-10-04-fallback-mpl-release.json",
+      "fixture": "fixtures/diffexp/mpl-additional.json",
+      "coverage_note": "The requested MPL passes 20 absolute and 20 relative digits against the live original within recorded component precision/accuracy. All native basis coefficients pass independent precision/order refinement at 20 absolute digits. Finite-accuracy zeros and original uncertainty annotations are retained; no original numerical value seeds the native solution. Native and original precision/order profiles differ.",
+      "native_representation_note": "Historical frozen run used an exact symbolic imaginary parameter; the integrated regression exercises the equivalent exact Complex<Rational> literal."
     },
     {
       "id": "mpl-g10complexat1-order75",
       "notebook": "MultiplePolylogarithms.nb",
-      "status": "not_run_in_this_environment",
+      "status": "completed_live_original_and_native_20digit_refinement_checks",
       "letters": [
         "10",
         "-10+I",
@@ -195,12 +216,17 @@
         3,
         4,
         6
-      ]
+      ],
+      "validation_report": "reports/diffexp/mpl-additional-validation.json",
+      "release_validation_report": "reports/validation/2026-10-04-fallback-mpl-release.json",
+      "fixture": "fixtures/diffexp/mpl-additional.json",
+      "coverage_note": "The requested MPL passes 20 absolute and 20 relative digits against the live original within recorded component precision/accuracy. All native basis coefficients pass independent precision/order refinement at 20 absolute digits. Finite-accuracy zeros and original uncertainty annotations are retained; no original numerical value seeds the native solution. Native and original precision/order profiles differ.",
+      "native_representation_note": "Historical frozen run used an exact symbolic imaginary parameter; the integrated regression exercises the equivalent exact Complex<Rational> literal."
     },
     {
       "id": "mpl-weight20-order100",
       "notebook": "MultiplePolylogarithms.nb",
-      "status": "not_run_in_this_environment",
+      "status": "completed_live_original_and_native_20digit_refinement_checks",
       "letters": [
         "1",
         "2",
@@ -242,7 +268,11 @@
         3,
         4,
         7
-      ]
+      ],
+      "validation_report": "reports/diffexp/mpl-additional-validation.json",
+      "release_validation_report": "reports/validation/2026-10-04-fallback-mpl-release.json",
+      "fixture": "fixtures/diffexp/mpl-additional.json",
+      "coverage_note": "The requested MPL passes 20 absolute and 20 relative digits against the live original within recorded component precision/accuracy. All native basis coefficients pass independent precision/order refinement at 20 absolute digits. Finite-accuracy zeros and original uncertainty annotations are retained; no original numerical value seeds the native solution. Native and original precision/order profiles differ."
     },
     {
       "id": "banana-equal-mass-infinity-to32",
@@ -360,7 +390,7 @@
     {
       "id": "fivepoint-nonplanar-accurate",
       "notebook": "5pNonPlanar.nb",
-      "status": "inputs_pinned_and_exported_transport_not_run",
+      "status": "completed_live_original_and_native_all540_coefficients_20_absolute_digits",
       "dimension": 108,
       "canonical": true,
       "alphabet_letters": 31,
@@ -406,12 +436,29 @@
         10,
         11,
         12
-      ]
+      ],
+      "validation_report": "reports/diffexp/nonplanar108-validation.json",
+      "fixture": "fixtures/diffexp/nonplanar108.json",
+      "native_precision_order_profiles": [
+        [
+          40,
+          48
+        ],
+        [
+          60,
+          64
+        ]
+      ],
+      "native_initial_offsets": [
+        "1/128",
+        "1/256"
+      ],
+      "coverage_note": "All108 supplied masters through epsilon4 pass20 absolute digits against the accurate original and independent native precision/order/offset refinement. The native regular-singular initializer proves compatibility of the explicitly selected analytic no-log sector and derives the offset boundary by a convergent local series. This is not automatic IBP/AMF boundary construction or a general Puiseux solver. Original accurate profile separately asserted30 absolute digits."
     },
     {
       "id": "fivepoint-nonplanar-fast",
       "notebook": "5pNonPlanar.nb",
-      "status": "inputs_pinned_and_exported_transport_not_run",
+      "status": "completed_live_original_fast_profile_14_absolute_digits",
       "dimension": 108,
       "canonical": true,
       "alphabet_letters": 31,
@@ -454,7 +501,12 @@
         14,
         15,
         16
-      ]
+      ],
+      "validation_report": "reports/diffexp/nonplanar108-validation.json",
+      "fixture": "fixtures/diffexp/nonplanar108.json",
+      "asserted_original_absolute_digits": 14,
+      "native_20digit_comparison_profile": "fivepoint-nonplanar-accurate",
+      "coverage_note": "The original fast profile completed and asserted14 absolute digits, with maximum ancillary discrepancy about5.07e-18. It is not counted as20-digit original parity. Native all 540-coefficient20-digit acceptance uses the separate accurate original profile and independent native refinement."
     },
     {
       "id": "fivepoint-planar-1loop-ph1-to-ph6",
@@ -513,7 +565,7 @@
     {
       "id": "fivepoint-planar-zmz-ph1-to-ph6",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "inputs_pinned_and_exported_transport_not_run",
+      "status": "original_passed_native_first_endpoint_passed_independent_refinement_running",
       "family": "zmz",
       "dimension": 75,
       "canonical": true,
@@ -540,12 +592,35 @@
       "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
       "external_dataset": "2005.04195v2",
       "historical_notebook_transport_seconds": 1391.141062,
-      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there."
+      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there.",
+      "first_endpoint_report": "reports/diffexp/fivepoint-zmz-first-endpoint.json",
+      "completed_native_refinement_acceptance": false,
+      "native_first_profile": {
+        "working_digits": 60,
+        "series_order": 56,
+        "coefficient_count": 375,
+        "checked_absolute_digits": 20,
+        "max_absolute_ancillary_difference": "5.5570852960294146651274403396861769430572260409145402687687452156434637598961061207397097554832510291956892176425738204165845901119262744454347183023409198972213146317842594693992181924557628149168181E-47",
+        "max_absolute_live_original_difference": "6.5522733376003714181566207077422647407343370305877074991631680376880034963322605248284852899463007162197068334931216472069203235080078190842356758669778193035196536258715997228527620544355065179036133E-25",
+        "cumulative_process_seconds": 9308.382696968969,
+        "time_scope": "Includes original capped predecessor, discarded interrupted work, checkpoint restoration and separately capped continuation."
+      },
+      "native_higher_profile": {
+        "status": "running",
+        "working_digits": 70,
+        "series_order": 64,
+        "start": "fresh original supplied boundary",
+        "maximum_aggregate_attempts": 20000,
+        "wall_limit_seconds": 18000,
+        "rss_limit_bytes": 17179869184,
+        "declared_provenance": "target/zmz-full75-canonical/refinement-provenance.json"
+      },
+      "coverage_note": "All375 first-endpoint comparisons pass20 absolute digits and allthree endpoint root sheets were checked. The higher profile is incomplete, so full75 native refinement acceptance remains pending. Original notebook accuracy settings are unchanged at15 digits. Supplied boundaries only; no automatic construction, arbitrary-error-box propagation or equal-work performance-parity claim."
     },
     {
       "id": "fivepoint-planar-mzz-ph1-to-ph6",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "inputs_pinned_and_exported_transport_not_run",
+      "status": "completed_live_original_and_native_all370_coefficients_20_absolute_digits",
       "family": "mzz",
       "dimension": 74,
       "canonical": true,
@@ -572,12 +647,26 @@
       "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
       "external_dataset": "2005.04195v2",
       "historical_notebook_transport_seconds": 992.459149,
-      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there."
+      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there.",
+      "validation_report": "reports/diffexp/fivepoint-mzz-validation.json",
+      "original_report": "reports/diffexp/fivepoint-mzz-original.json",
+      "fixture": "fixtures/diffexp/fivepoint-mzz-full74.json",
+      "native_precision_order_profiles": [
+        [
+          60,
+          56
+        ],
+        [
+          70,
+          64
+        ]
+      ],
+      "coverage_note": "All74 supplied masters through epsilon4 pass20 absolute digits against ancillary/live-original values and independent native refinement. Original notebook settings still request15 digits; observed agreement supports the stated comparison without changing that target. Low-level transport does not certify an arbitrary input-error box. Frozen-library scientific profiles passed; the ignored current-library full74 regression is a separate future run."
     },
     {
       "id": "fivepoint-planar-zzz-ph1-to-ph6",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "inputs_pinned_and_exported_transport_not_run",
+      "status": "original_passed_native_first_endpoint_passed_independent_refinement_running",
       "family": "zzz",
       "dimension": 86,
       "canonical": true,
@@ -604,7 +693,31 @@
       "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
       "external_dataset": "2005.04195v2",
       "historical_notebook_transport_seconds": 1670.664508,
-      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there."
+      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there.",
+      "first_endpoint_report": "reports/diffexp/fivepoint-zzz-first-endpoint.json",
+      "completed_native_refinement_acceptance": false,
+      "native_first_profile": {
+        "working_digits": 60,
+        "series_order": 56,
+        "coefficient_count": 430,
+        "checked_absolute_digits": 20,
+        "max_absolute_ancillary_difference": "1.5173565891276250228378018139063146287995962384164361161330863549024570348771608953044791811245153019784399353944036977107770724440928011676488101990192114923618432768603321238370555033200816318021626E-46",
+        "max_absolute_live_original_difference": "2.8689976528120022578483942220004425794606755419759639306648740994627120881067389810016814045750015613219156042564555972398143934280828243368279390478613395543195885271730204312609720588301295004253709E-24",
+        "cumulative_process_seconds": 10122.591308015864,
+        "time_scope": "Includes original capped predecessor, discarded interrupted work, checkpoint restoration and separately capped continuation."
+      },
+      "native_higher_profile": {
+        "status": "running",
+        "working_digits": 70,
+        "series_order": 64,
+        "start": "fresh original supplied boundary",
+        "maximum_aggregate_attempts": 20000,
+        "wall_limit_seconds": 18000,
+        "rss_limit_bytes": 17179869184,
+        "declared_provenance": "target/zzz-full86-canonical/refinement-provenance.json"
+      },
+      "coverage_note": "All430 first-endpoint comparisons pass20 absolute digits and allthree endpoint root sheets were checked. The higher profile is incomplete, so full86 native refinement acceptance remains pending. Original notebook accuracy settings are unchanged at15 digits. Supplied boundaries only; no automatic construction, arbitrary-error-box propagation or equal-work performance-parity claim.",
+      "original_report": "reports/diffexp/fivepoint-zzz-original.json"
     },
     {
       "id": "fivepoint-planar-zzz-ph1-to-ph2-128digits",
@@ -745,7 +858,7 @@
         "anc/XB_Boundary_values_X1.txt": "7883537af39b181f84266934b9440df3f67a5eb8f67b576388d7aa29524d9b92"
       },
       "download_reproduction": "python scripts/fetch_diffexp_ancillaries.py",
-      "numerical_benchmark_status": "both108-master profiles pending"
+      "numerical_benchmark_status": "Both original108-master profiles completed: accurate reference plus native all540-coefficient20-digit refinement passed; original fast profile asserts14 digits only."
     },
     {
       "id": "2005.04195v2",
@@ -782,7 +895,7 @@
         "anc/determinants.m": "81655e7efd9628aac262ab2ac586e55c77ecb2f4657b88932bf0de2acdf19ca2"
       },
       "download_reproduction": "python scripts/fetch_diffexp_ancillaries.py",
-      "numerical_benchmark_status": "1loop PH1-to-PH6 completed; other planar families pending"
+      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native1loop and74-master MZZ independent refinement passed; native75/86 first endpoints passed and higher profiles are running. Separate86-master PH1-to-PH2 128-digit profile remains unrun."
     }
   ],
   "preparation_tools": [
@@ -790,12 +903,14 @@
     "export-data.wl",
     "build-inventory.py"
   ],
-  "live_smoke": "mpl-101-4/fixture.json",
+  "live_smoke": "fixtures/diffexp/mpl-101-4.json",
   "next_steps": [
-    "Run the pending108-master nonplanar and75/74/86-master planar benchmarks with the already pinned scientific inputs and complete supplied boundary metadata.",
-    "Keep the128-digit planar profile separate from the20-digit acceptance milestones and preserve the recorded source precision ceiling.",
-    "Run repeated same-host single-core measurements after correctness/refinement; record symbolic setup, transport, caching and differing work counts separately.",
-    "Preserve upstream reference precision rather than treating working precision or printed mantissas as achieved accuracy."
+    "Finish the running independent70-digit/order64 full75/full86 profiles and compare every coefficient before marking their native refinement acceptance complete.",
+    "Keep the unrun128-digit planar PH1-to-PH2 profile separate from20-digit PH1-to-PH6 milestones and preserve recorded source precision ceilings.",
+    "Preserve the original unequal-banana direct-route memory censoring; the passed alternate-route oracle is a distinct profile.",
+    "After correctness/refinement, use repeated same-host single-core measurements with symbolic setup, transport, caching and work counts reported separately.",
+    "Preserve upstream component precision, absolute accuracy and finite-accuracy zeros rather than treating working precision or printed mantissas as achieved accuracy."
   ],
-  "clone_modified": false
+  "clone_modified": false,
+  "validation_status_snapshot_utc": "2026-10-05T02:58:12.561844+00:00"
 }

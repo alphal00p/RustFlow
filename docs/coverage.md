@@ -166,9 +166,12 @@ and 70/64 working-precision/order profiles, with maximum refinement difference
 1.9624e−48. This is supplied-boundary differential transport; its low-level
 refinement estimate does not certify propagation of arbitrary boundary errors.
 The full 75-master ZMZ first native endpoint has passed, with independent higher
-precision/order refinement still running. The full 86-master ZZZ first native
-profile is running; no native completion or separate ZZZ 128-digit profile is
-claimed. The staged MZZ offline regression has not yet been rerun against the
+precision/order refinement still running. The
+[full 86-master ZZZ first native endpoint](../reports/diffexp/fivepoint-zzz-first-endpoint.json)
+now passes all 430 comparisons at 20 absolute digits, after 10122.59 seconds
+including its capped predecessor and resumed work. Its independent higher
+precision/order profile is running; full acceptance and the separate 128-digit
+profile remain pending. The staged MZZ offline regression has not yet been rerun against the
 latest production library.
 
 The original paper's mandatory numerical acceptance gate passes: all four
