@@ -1,0 +1,167 @@
+{
+  "status": "passed",
+  "date_utc": "2026-10-05T00:47:43.831377+00:00",
+  "scope": "Exact real-root enclosure separation from regular contour endpoints, plus unchanged prescribed transport/cache regressions. A separate degree-eight Symbolica isolation slowdown remains; this report is not full nonplanar Higgs-jet physical validation.",
+  "root_revision_before_gate": "92fd9c0aa8b69ca9fc3c16c07fd238d8cadfa784",
+  "rustred_head": "1b49d2f140f91e05e035268bf5f6aa1c98f8aa26",
+  "rustred_core_unchanged_vs_previous_gate": true,
+  "checks": {
+    "passed": 26,
+    "ignored": 2,
+    "failed": 0,
+    "strict_clippy": "release all-targets -D warnings passed",
+    "formatting": "cargo fmt -p symbolica-amflow --check passed",
+    "independent_exact_proof_review": "passed"
+  },
+  "commands": [
+    "cargo test --release --test contour_endpoints --test prescribed_contours --test prescribed_cache --test fivepoint_prescribed_cache --test algebraic_cache",
+    "cargo clippy --release --all-targets -- -D warnings",
+    "cargo fmt -p symbolica-amflow --check"
+  ],
+  "diagnosis": {
+    "scope": "target-only contour geometry diagnosis; no numerical endpoint result",
+    "production_snapshot": "4ff74ea",
+    "baseline_rule": "at most four quarter-radius refinements of an initially unresolved real enclosure",
+    "candidate_rule": "native exact shift plus rational endpoint exclusion certificate; one conditional real refinement; unchanged strict separation proof",
+    "polynomials_origin": "Full NP W canonical pullback and exact source guards; fixture and original failed run preserved under target/np-w-long-continuation",
+    "native_dependency": "target/prescribed-final-gate/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+    "native_dependency_sha256": "04f7125626e9f2252854038e8166cadf6adeac516f912fadce3d5b91a3219033",
+    "runtime_cpu": 26,
+    "files": {
+      "contour-baseline.rs": "6a9ff9a3cba32efb7bebdae9eb4d9324fa11f640cfededed7ee5c58ffdaf1e1b",
+      "baseline-instrumented.rs": "01ecd515621efb24a42a8dcdf583e95ff30732ec8daafe831183979ee65be04b",
+      "baseline.rs": "90a2ba24a8b0315d0bfe9f343df6a2bdaa9cf8c478ed74df50c8ada738c574ea",
+      "diagnose.rs": "7678ee606ee00d74f7bcd2ca058e83cdca0d99947f1aca8f50142020a90bb84d",
+      "polynomials.json": "4002b76122b2462e75fdf8a43213ba94fd54c72947f902a8aedd7f1066a970b3",
+      "family.rs": "98bd895a31b4ac029f0d7d336fc787bf1837b45bc709200573fa8409a25597e0",
+      "contour.rs": "ef6811bcbcd168a627b4544085a2cf4e83fa4329d1856ac5bb855f898730fbdd",
+      "tests.rs": "bcd387b77ceb8bc761e26a77c03e69bca9234583057562343f9813ab1acf4e16",
+      "existing_tests.rs": "2be5069758e396ebbc0039b494ee081fefdd39c8c4ed1ea297d03a0dfd23314e",
+      "separation_tests.rs": "5ec746d8e5fec724a4bb9913b86ae1eb049b317d0d98833d4c35e3f3369853d9"
+    },
+    "baseline_failure": {
+      "polynomial": "3988330731937*x-2553573700",
+      "exact_root": "2553573700/3988330731937",
+      "origin": "s=0 on the exact Euclidean-to-W affine path",
+      "initial_center": "1/2",
+      "initial_radius": "1/2",
+      "exhausted_center": "12094193448757258271/18889465931478580854784",
+      "exhausted_radius": "1/1024",
+      "elapsed_seconds": 0.045279871,
+      "result": "Accuracy: singular root cannot be separated from contour endpoint",
+      "log_sha256": "c44323dab6d69e417fb7ce6932f16a084f94101fb904208feb4de6b963925702"
+    },
+    "focused_tests": {
+      "passed": 12,
+      "failed": 0,
+      "ignored": 1,
+      "ignored_reason": "Existing standalone Symbolica close-complex isolation MRE remains preserved",
+      "log_sha256": "34aca78fedb596f27426130b411617ba7c1712099bacdae058ba70efbe59dfd1"
+    },
+    "full_np_candidate": {
+      "exit": 124,
+      "timeout_seconds": 180,
+      "stage": "Symbolica isolate_roots on a later degree8 polynomial",
+      "integration_performed": false,
+      "profile": "786 cycles samples,0 lost; separate_isolated_roots/refine_root_disk_with_newton and exact GMP arithmetic"
+    },
+    "integration_artifact_hashes": {
+      "production.patch": "a0957c71cf811f903acc3b73d919887cb86cf8eaaf81b08f2c5e956eaa639986",
+      "production-tests.rs": "ea1991c2442608ad2a48df5e140c751e731625b96f607237948bc9621c7d64ef",
+      "contour.rs": "ef6811bcbcd168a627b4544085a2cf4e83fa4329d1856ac5bb855f898730fbdd",
+      "README.md": "234795578713b3dcba5eb6ba6835586854d568d7d990a05078aa18bcaaee1a9c",
+      "baseline.log": "c44323dab6d69e417fb7ce6932f16a084f94101fb904208feb4de6b963925702",
+      "tests.log": "34aca78fedb596f27426130b411617ba7c1712099bacdae058ba70efbe59dfd1",
+      "candidate.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "candidate-traced.log": "a739dc52deb69e6a1035be1d61eee5b63c67bd1f77af93f442131809cf6da614",
+      "candidate-perf-children.txt": "e6e0fb90facb37aa6705454912218b606a4182e69c864a9e87d454ed0732f18e"
+    }
+  },
+  "artifacts": [
+    {
+      "path": "src/contour.rs",
+      "bytes": 22442,
+      "sha256": "ef6811bcbcd168a627b4544085a2cf4e83fa4329d1856ac5bb855f898730fbdd"
+    },
+    {
+      "path": "tests/contour_endpoints.rs",
+      "bytes": 2112,
+      "sha256": "ea1991c2442608ad2a48df5e140c751e731625b96f607237948bc9621c7d64ef"
+    },
+    {
+      "path": "target/contour-production-gate/tests.log",
+      "bytes": 6218,
+      "sha256": "d5a08060a6e77f72aa0bfa60c8fe0ec2ae46741603bcd27061401e648d043258"
+    },
+    {
+      "path": "target/contour-production-gate/clippy.log",
+      "bytes": 2722,
+      "sha256": "7e0c00db4f703afbbeac723d8049a1ca27107cc0dc119a8e988859e6024f75b4"
+    },
+    {
+      "path": "target/contour-production-gate/source.json",
+      "bytes": 5076,
+      "sha256": "10e0541983f37c74bcf09bd637e0e5cfe6119626e65140d5d2dd1532b2c818ce"
+    },
+    {
+      "path": "target/contour-production-gate/rustred-core.json",
+      "bytes": 208086,
+      "sha256": "5489d12d0461f25c517f1f87602638d2edfb0fa3d679fd5a6693638c62721b0e"
+    },
+    {
+      "path": "repros/symbolica-cross-factor-isolation/results.json",
+      "bytes": 844,
+      "sha256": "cec1d5b4770d61eb17627e7f5f635c69ad3e84ee32228ca8d1daf31cab15a4fb"
+    },
+    {
+      "path": "repros/symbolica-cross-factor-isolation/factors.log",
+      "bytes": 808,
+      "sha256": "bd839fe9dec6e6f765787b314821d7d61bcf98ddac34f9bd680fbab82a8a1709"
+    },
+    {
+      "path": "repros/symbolica-cross-factor-isolation/LICENSE",
+      "bytes": 1189,
+      "sha256": "27bb3d0c4243035db731e5146b74389dc4f3ffe2c72c1ef520151dd0b669d5ef"
+    },
+    {
+      "path": "repros/symbolica-cross-factor-isolation/whole.log",
+      "bytes": 1321,
+      "sha256": "531f14bb8360429088e058ad2eb3d07cc5b28288c6a00350959012b9cffb0cff"
+    },
+    {
+      "path": "repros/symbolica-cross-factor-isolation/minimal.rs",
+      "bytes": 1274,
+      "sha256": "f31f3d72345ea3e47f86e0aceb06c1728062344653ec2f6df72aafaea60c76ce"
+    },
+    {
+      "path": "repros/symbolica-cross-factor-isolation/Cargo.toml",
+      "bytes": 668,
+      "sha256": "42533024776f0c8c3296cd12cfc553d83815d25a7feaa1fc0d86df243b0cced2"
+    },
+    {
+      "path": "repros/symbolica-cross-factor-isolation/README.md",
+      "bytes": 2362,
+      "sha256": "019170496d5dc0cd326e20718ce00f0c4b97a2a5d32a68056bf324e1c4afd1a6"
+    },
+    {
+      "path": "repros/symbolica-cross-factor-isolation/polynomial.txt",
+      "bytes": 1194,
+      "sha256": "92bd4134e5d8ab6f1a682e1c9eb7e4a4d90aaa3ae0507bb41d54f8cfaef8a65e"
+    },
+    {
+      "path": "repros/symbolica-cross-factor-isolation/provenance.json",
+      "bytes": 1812,
+      "sha256": "76736f453482ff96ef94ae9c282b9b0e27289c8d2e7609ed6525a2ae82d2e69d"
+    },
+    {
+      "path": "target/release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "bytes": 425546652,
+      "sha256": "ceaffde8c9abe60e839b5ca892048a166459cd1591745cb4615be45ae2991096"
+    },
+    {
+      "path": "target/release/deps/libsymbolica_amflow-d39e426db931b928.rmeta",
+      "bytes": 3182592,
+      "sha256": "7b41dc904ede44cb88c85aea3d54c2709dffb5b43f0137c13fcfd91068cc34ab"
+    }
+  ]
+}

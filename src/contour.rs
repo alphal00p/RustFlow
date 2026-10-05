@@ -99,7 +99,42 @@ fn narrow_real_root(
     Ok(())
 }
 
+// P(endpoint+z) = c0 + sum(c_k z^k). For |z| <= delta <= 1,
+// the nonconstant terms are bounded by delta * sum |c_k| <= |c0|/2.
+// This exact disk contains no zero, so it bounds the required real-root
+// enclosure width without depending on the initial isolation radius.
+fn endpoint_separation(
+    polynomial: &UnivariatePolynomial<RationalField>,
+    endpoint: &Rational,
+    context: &RunContext,
+) -> Result<Rational> {
+    context.cancellation.check()?;
+    let shifted = polynomial.shift_var(endpoint);
+    let coefficients = shifted.coefficients();
+    let constant = coefficients
+        .first()
+        .cloned()
+        .unwrap_or_else(Rational::zero)
+        .abs();
+    if constant.is_zero() {
+        return Err(Error::InvalidInput(
+            "a contour endpoint is a singular zero".into(),
+        ));
+    }
+    let sum = coefficients
+        .iter()
+        .skip(1)
+        .fold(Rational::zero(), |sum, c| sum + c.clone().abs());
+    context.cancellation.check()?;
+    Ok(if sum.is_zero() {
+        Rational::one()
+    } else {
+        Rational::one().min(constant / (Rational::from(2) * sum))
+    })
+}
+
 fn real_crossing(
+    polynomial: &UnivariatePolynomial<RationalField>,
     root: &mut IsolatedRoot,
     lower: &Rational,
     upper: &Rational,
@@ -111,7 +146,7 @@ fn real_crossing(
     ) {
         return Ok(false);
     }
-    for attempt in 0..5 {
+    for attempt in 0..2 {
         let disk = root.enclosure();
         let a = &disk.center().re - disk.radius();
         let b = &disk.center().re + disk.radius();
@@ -121,10 +156,12 @@ fn real_crossing(
         if a > *lower && b < *upper {
             return Ok(true);
         }
-        if attempt == 4 || disk.radius().is_zero() {
+        if attempt == 1 || disk.radius().is_zero() {
             break;
         }
-        let target = disk.radius() / &Rational::from(4);
+        let separation = endpoint_separation(polynomial, lower, context)?
+            .min(endpoint_separation(polynomial, upper, context)?);
+        let target = separation / Rational::from(4);
         narrow_real_root(root, &target, context)?;
     }
     Err(Error::Accuracy(
@@ -307,7 +344,7 @@ impl PrescribedContour {
                 // Isolation already returns certified disks. Complex obstacles
                 // retain these disks; neither rounded center equality nor an
                 // unnecessarily tiny requested radius is used as a certificate.
-                let inside = real_crossing(&mut root, &lower, &upper, context)?;
+                let inside = real_crossing(&polynomial, &mut root, &lower, &upper, context)?;
                 let chosen = if let Some(index) = declaration.filter(|_| inside) {
                     if multiplicity != 1 {
                         return Err(Error::Unsupported("multiple prescribed zeros require a local deformation beyond a simple contour detour".into()));

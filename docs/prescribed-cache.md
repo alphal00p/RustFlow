@@ -20,6 +20,22 @@ The accuracy convention is `error <= 10^(-digits) * max(1, |coefficient|)`. It i
 
 Root geometry reuses Symbolica isolation certificates. When a broad certified-real disk from one polynomial obscures a separate crossing, the planner refines that obstructing certificate a bounded number of times, then repeats the same exact clearance and rounded-triangle checks. Complex obstacles remain conservative. Unresolved separation returns an accuracy error. Native isolation/refinement calls are synchronous; cancellation is checked around them.
 
+For a regular endpoint `e`, endpoint classification uses an exact exclusion disk.
+Symbolica shifts the polynomial to `P(e+z) = c0 + sum(c_k z^k)`; the radius
+`delta = min(1, |c0| / (2 sum_{k>0} |c_k|))` guarantees
+`|P(e+z)| >= |c0|/2` throughout the disk; a nonzero constant uses radius one.
+A real root enclosure that overlaps an
+endpoint is refined to one quarter of this bound before repeating the strict
+inside/outside check. Thus a nearby regular endpoint does not fail merely because
+a fixed number of refinements was exhausted. Exact endpoint zeros still fail.
+The [endpoint regression report](../reports/validation/2026-10-05-contour-endpoints.json)
+records the original linear-threshold failure and its focused checks.
+
+A separate [Symbolica-only root-isolation reproducer](../repros/symbolica-cross-factor-isolation/README.md)
+preserves a bounded slowdown on a degree-eight polynomial from the nonplanar
+Higgs+jet path. It is independent of endpoint classification. Its fast native
+factorization control does not establish successful physical continuation.
+
 For entire differential systems with no pole list, the shared solver initially proposes the full remaining segment, then uses up to twice the last accepted step length. This avoids repeatedly rejecting an oversized proposal at each expansion point. Taylor-tail, midpoint, endpoint and branch checks remain unchanged. Regressions cover the zero connection, exponential and polynomial systems along changing complex directions, and a sparse Taylor series with a misleading zero tail. Step-budget exhaustion remains a limit error, so cache accuracy fallback does not retry it.
 
 For a system whose exact epsilon-zero coefficient matrix vanishes, the flattened

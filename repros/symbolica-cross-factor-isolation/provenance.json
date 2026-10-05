@@ -1,0 +1,45 @@
+{
+  "date_utc": "2026-10-05T00:44:22.298982+00:00",
+  "symbolica_revision": "75f8350094b90254ee71dc2a391fde0d14b0204a",
+  "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+  "cpu_affinity": [
+    26
+  ],
+  "linked_rustflow": false,
+  "portable_manifest_independently_built": false,
+  "symbolica_rlib": {
+    "path": "target/release/deps/libsymbolica-75e897282e2131a2.rlib",
+    "sha256": "4b2f81de2fad0adf6bb701f7424c6755050d1a56d844aa9098f7d28bac5cbe4d"
+  },
+  "recorded_binary": {
+    "path": "target/contour-endpoint-separation/symbolica-isolation/probe",
+    "sha256": "4819fcf1cd52941ac6a69b04349ba8434e1254ca82cadc29f39a853f77249c8a"
+  },
+  "compile_command": [
+    "rustc",
+    "--edition=2024",
+    "-C",
+    "opt-level=1",
+    "target/contour-endpoint-separation/symbolica-isolation/main.rs",
+    "--extern",
+    "symbolica=target/release/deps/libsymbolica-75e897282e2131a2.rlib",
+    "-L",
+    "dependency=target/release/deps"
+  ],
+  "files": {
+    "minimal.rs": "f31f3d72345ea3e47f86e0aceb06c1728062344653ec2f6df72aafaea60c76ce",
+    "polynomial.txt": "92bd4134e5d8ab6f1a682e1c9eb7e4a4d90aaa3ae0507bb41d54f8cfaef8a65e",
+    "whole.log": "531f14bb8360429088e058ad2eb3d07cc5b28288c6a00350959012b9cffb0cff",
+    "factors.log": "bd839fe9dec6e6f765787b314821d7d61bcf98ddac34f9bd680fbab82a8a1709",
+    "results.json": "cec1d5b4770d61eb17627e7f5f635c69ad3e84ee32228ca8d1daf31cab15a4fb",
+    "Cargo.toml": "42533024776f0c8c3296cd12cfc553d83815d25a7feaa1fc0d86df243b0cced2",
+    "README.md": "019170496d5dc0cd326e20718ce00f0c4b97a2a5d32a68056bf324e1c4afd1a6"
+  },
+  "original_full_planner_cap": {
+    "seconds": 180,
+    "exit": 124,
+    "profile_samples": 786,
+    "profile_lost_samples": 0,
+    "local_profile_path": "target/contour-endpoint-separation/candidate-perf.data"
+  }
+}

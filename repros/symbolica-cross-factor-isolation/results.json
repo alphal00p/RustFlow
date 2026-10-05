@@ -1,0 +1,37 @@
+[
+  {
+    "name": "whole",
+    "command": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=5s",
+      "30s",
+      "taskset",
+      "-c",
+      "26",
+      "target/contour-endpoint-separation/symbolica-isolation/probe"
+    ],
+    "cap_seconds": 30,
+    "exit": 124,
+    "elapsed_seconds": 30.004744968842715,
+    "log_sha256": "531f14bb8360429088e058ad2eb3d07cc5b28288c6a00350959012b9cffb0cff"
+  },
+  {
+    "name": "factors",
+    "command": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=5s",
+      "30s",
+      "taskset",
+      "-c",
+      "26",
+      "target/contour-endpoint-separation/symbolica-isolation/probe",
+      "--factors"
+    ],
+    "cap_seconds": 30,
+    "exit": 0,
+    "elapsed_seconds": 0.012896379921585321,
+    "log_sha256": "bd839fe9dec6e6f765787b314821d7d61bcf98ddac34f9bd680fbab82a8a1709"
+  }
+]
