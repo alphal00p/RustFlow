@@ -1,0 +1,496 @@
+{
+  "schema": "higgs-jet-physical-configurations-v1",
+  "physical_point": [
+    "7173070292440521/111284741846000",
+    "-12058167788971/339319588980",
+    "1"
+  ],
+  "mass_squared": {
+    "W": "5399/13074",
+    "Z": "7775/14631"
+  },
+  "provenance": [
+    {
+      "path": "fixtures/gg-hg/full-systems.json",
+      "sha256": "b643716de4212e8cc3ddcaf4fb5d13eb67f993ac3ae8563c291c16ae284cbb86"
+    },
+    {
+      "path": "target/gg-hg-coherent/native/fixture.json",
+      "sha256": "e1c774ffc8bf811cf3e588f8a5406f677d30d7a9eefbb609fb3ec6cc83f949d6"
+    }
+  ],
+  "cases": [
+    {
+      "label": "W-Planar_EW1-1",
+      "mass": "W",
+      "family": "Planar_EW1",
+      "permutation": 1,
+      "dimension": 48,
+      "start": [
+        "7971503245/51071474",
+        "-120961047183696014144/1789089966849483755",
+        "13074/5399"
+      ],
+      "destination": [
+        "3985777158237/25535737000",
+        "-24192567254732572725551/357817993369896751000",
+        "13074/5399"
+      ],
+      "physical_base_start": [
+        "7971503245/51071474",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_destination": [
+        "3985777158237/25535737000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal"
+      ],
+      "matrix_sha256": "95442e5f5f1823fa205640219b0e1be8a43d260682af63345314d26fd37865a8"
+    },
+    {
+      "label": "W-Planar_EW1-2",
+      "mass": "W",
+      "family": "Planar_EW1",
+      "permutation": 2,
+      "dimension": 48,
+      "start": [
+        "7971503245/51071474",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "destination": [
+        "3985777158237/25535737000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_start": [
+        "7971503245/51071474",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_destination": [
+        "3985777158237/25535737000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal"
+      ],
+      "matrix_sha256": "95442e5f5f1823fa205640219b0e1be8a43d260682af63345314d26fd37865a8"
+    },
+    {
+      "label": "W-Planar_EW1-3",
+      "mass": "W",
+      "family": "Planar_EW1",
+      "permutation": 3,
+      "dimension": 48,
+      "start": [
+        "-120961047183696014144/1789089966849483755",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "destination": [
+        "-24192567254732572725551/357817993369896751000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_start": [
+        "7971503245/51071474",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_destination": [
+        "3985777158237/25535737000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal"
+      ],
+      "matrix_sha256": "95442e5f5f1823fa205640219b0e1be8a43d260682af63345314d26fd37865a8"
+    },
+    {
+      "label": "W-Planar_EW1-4",
+      "mass": "W",
+      "family": "Planar_EW1",
+      "permutation": 4,
+      "dimension": 48,
+      "start": [
+        "-2233407629/25953770",
+        "7971503245/51071474",
+        "13074/5399"
+      ],
+      "destination": [
+        "-2233407629/25953770",
+        "3985777158237/25535737000",
+        "13074/5399"
+      ],
+      "physical_base_start": [
+        "7971503245/51071474",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_destination": [
+        "3985777158237/25535737000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal"
+      ],
+      "matrix_sha256": "95442e5f5f1823fa205640219b0e1be8a43d260682af63345314d26fd37865a8"
+    },
+    {
+      "label": "W-NP_EW1-1",
+      "mass": "W",
+      "family": "NP_EW1",
+      "permutation": 1,
+      "dimension": 61,
+      "start": [
+        "7971503245/51071474",
+        "-120961047183696014144/1789089966849483755",
+        "13074/5399"
+      ],
+      "destination": [
+        "3985777158237/25535737000",
+        "-24192567254732572725551/357817993369896751000",
+        "13074/5399"
+      ],
+      "physical_base_start": [
+        "7971503245/51071474",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_destination": [
+        "3985777158237/25535737000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal"
+      ],
+      "matrix_sha256": "becb0221008715452488a4b73a64be95ad869dc8fb54657598fe34a1f28921d9"
+    },
+    {
+      "label": "W-NP_EW1-2",
+      "mass": "W",
+      "family": "NP_EW1",
+      "permutation": 2,
+      "dimension": 61,
+      "start": [
+        "7971503245/51071474",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "destination": [
+        "3985777158237/25535737000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_start": [
+        "7971503245/51071474",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_destination": [
+        "3985777158237/25535737000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal"
+      ],
+      "matrix_sha256": "becb0221008715452488a4b73a64be95ad869dc8fb54657598fe34a1f28921d9"
+    },
+    {
+      "label": "W-NP_EW1-3",
+      "mass": "W",
+      "family": "NP_EW1",
+      "permutation": 3,
+      "dimension": 61,
+      "start": [
+        "-120961047183696014144/1789089966849483755",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "destination": [
+        "-24192567254732572725551/357817993369896751000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_start": [
+        "7971503245/51071474",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_destination": [
+        "3985777158237/25535737000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal",
+        "opposite_principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal"
+      ],
+      "matrix_sha256": "becb0221008715452488a4b73a64be95ad869dc8fb54657598fe34a1f28921d9"
+    },
+    {
+      "label": "W-NP_EW1-4",
+      "mass": "W",
+      "family": "NP_EW1",
+      "permutation": 4,
+      "dimension": 61,
+      "start": [
+        "-2233407629/25953770",
+        "7971503245/51071474",
+        "13074/5399"
+      ],
+      "destination": [
+        "-2233407629/25953770",
+        "3985777158237/25535737000",
+        "13074/5399"
+      ],
+      "physical_base_start": [
+        "7971503245/51071474",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "physical_base_destination": [
+        "3985777158237/25535737000",
+        "-2233407629/25953770",
+        "13074/5399"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "opposite_principal",
+        "principal"
+      ],
+      "matrix_sha256": "becb0221008715452488a4b73a64be95ad869dc8fb54657598fe34a1f28921d9"
+    },
+    {
+      "label": "Z-Planar_EW1-1",
+      "mass": "Z",
+      "family": "Planar_EW1",
+      "permutation": 1,
+      "dimension": 48,
+      "start": [
+        "5130094459/42294614",
+        "-178302305466616953792/3393635073711688075",
+        "14631/7775"
+      ],
+      "destination": [
+        "104949191448697262751/865238867852650000",
+        "-117987150501330757182512227/2245621057130807199050000",
+        "14631/7775"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal"
+      ]
+    },
+    {
+      "label": "Z-Planar_EW1-2",
+      "mass": "Z",
+      "family": "Planar_EW1",
+      "permutation": 2,
+      "dimension": 48,
+      "start": [
+        "5130094459/42294614",
+        "-2760486785/41279998",
+        "14631/7775"
+      ],
+      "destination": [
+        "104949191448697262751/865238867852650000",
+        "-58807684306811567/879403268106500",
+        "14631/7775"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal"
+      ]
+    },
+    {
+      "label": "Z-Planar_EW1-3",
+      "mass": "Z",
+      "family": "Planar_EW1",
+      "permutation": 3,
+      "dimension": 48,
+      "start": [
+        "-178302305466616953792/3393635073711688075",
+        "-2760486785/41279998",
+        "14631/7775"
+      ],
+      "destination": [
+        "-117987150501330757182512227/2245621057130807199050000",
+        "-58807684306811567/879403268106500",
+        "14631/7775"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal"
+      ]
+    },
+    {
+      "label": "Z-Planar_EW1-4",
+      "mass": "Z",
+      "family": "Planar_EW1",
+      "permutation": 4,
+      "dimension": 48,
+      "start": [
+        "-2760486785/41279998",
+        "5130094459/42294614",
+        "14631/7775"
+      ],
+      "destination": [
+        "-58807684306811567/879403268106500",
+        "104949191448697262751/865238867852650000",
+        "14631/7775"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal"
+      ]
+    },
+    {
+      "label": "Z-NP_EW1-1",
+      "mass": "Z",
+      "family": "NP_EW1",
+      "permutation": 1,
+      "dimension": 61,
+      "start": [
+        "5130094459/42294614",
+        "-178302305466616953792/3393635073711688075",
+        "14631/7775"
+      ],
+      "destination": [
+        "104949191448697262751/865238867852650000",
+        "-117987150501330757182512227/2245621057130807199050000",
+        "14631/7775"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal"
+      ]
+    },
+    {
+      "label": "Z-NP_EW1-2",
+      "mass": "Z",
+      "family": "NP_EW1",
+      "permutation": 2,
+      "dimension": 61,
+      "start": [
+        "5130094459/42294614",
+        "-2760486785/41279998",
+        "14631/7775"
+      ],
+      "destination": [
+        "104949191448697262751/865238867852650000",
+        "-58807684306811567/879403268106500",
+        "14631/7775"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal"
+      ]
+    },
+    {
+      "label": "Z-NP_EW1-3",
+      "mass": "Z",
+      "family": "NP_EW1",
+      "permutation": 3,
+      "dimension": 61,
+      "start": [
+        "-178302305466616953792/3393635073711688075",
+        "-2760486785/41279998",
+        "14631/7775"
+      ],
+      "destination": [
+        "-117987150501330757182512227/2245621057130807199050000",
+        "-58807684306811567/879403268106500",
+        "14631/7775"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal",
+        "opposite_principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal"
+      ]
+    },
+    {
+      "label": "Z-NP_EW1-4",
+      "mass": "Z",
+      "family": "NP_EW1",
+      "permutation": 4,
+      "dimension": 61,
+      "start": [
+        "-2760486785/41279998",
+        "5130094459/42294614",
+        "14631/7775"
+      ],
+      "destination": [
+        "-58807684306811567/879403268106500",
+        "104949191448697262751/865238867852650000",
+        "14631/7775"
+      ],
+      "source_root_germs": [
+        "principal",
+        "opposite_principal",
+        "principal",
+        "principal",
+        "principal",
+        "principal",
+        "opposite_principal",
+        "principal"
+      ]
+    }
+  ]
+}

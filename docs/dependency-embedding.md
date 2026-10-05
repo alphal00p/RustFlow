@@ -32,9 +32,17 @@ Rust types when a host also uses Spynso3, Vakint, or the RustRed bridge.
 The borrowing accessors are supplied by
 `scripts/patches/hepkit-python-borrow-access.patch`. They expose references to the
 existing model, diagram and kinematics; no Python objects are serialized or
-reparsed when passed to an evaluator. The isolated validated owner checkout is
-commit `0bf1cd991` on `codex/python-borrow-access`, based on `9d086ce`. The original
-HEPKit checkout remains unchanged.
+reparsed when passed to an evaluator. The borrowing changes are in `0bf1cd991`
+on `codex/python-borrow-access`, based on `9d086ce`. The original HEPKit checkout
+remains unchanged.
+
+The native amplitude additionally uses exact transitive parameter expansion in
+the model owner. Apply `scripts/patches/hepkit-exact-parameters.patch` after the
+owner fixes above. `Model::expand_parameters` keeps external parameters symbolic,
+uses Linnet's dependency ordering, and rejects cyclic definitions. Numerical
+model defaults are not used to evaluate exact loop-integral inputs.
+The complete isolated owner checkout is commit `fc9ee6aa5`; all seven selected
+parameter tests pass, including transitive expansion and cyclic definitions.
 
 Local source overrides require updating the lock once with `cargo metadata` or
 `cargo check`; subsequent checks can use `--locked`. Do not commit machine-local

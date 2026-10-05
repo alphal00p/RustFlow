@@ -8,3 +8,6 @@ reports/performance/*-profile.txt -whitespace
 # Preserve raw timing/profiler evidence for standalone native-root reproducers.
 repros/symbolica-close-root-isolation/*.log -whitespace
 repros/symbolica-close-root-isolation/perf-report.txt -whitespace
+
+# Unified patches use a literal space for empty context lines.
+scripts/patches/*.patch whitespace=-blank-at-eol

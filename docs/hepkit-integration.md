@@ -59,6 +59,34 @@ The adapter assumes one active UFO model, as HEPKit does. Native symbol registra
 
 Reduction nonzero conditions and original matrix denominator/branch restrictions travel with cache identity and persistence. A pure epsilon guard is valid generically; `epsilon*s` excludes `s=0`, while the reduction guard `s-epsilon` does not by itself exclude that point. A matrix denominator `1/(s-epsilon)` separately requires a regular Laurent chart and therefore excludes `s=0`. Exact polynomial gcd and native root analysis filter unsafe straight paths before comparing cached starting points, including poles hidden by stationary path coordinates. Rational-complex guarded paths are supported; conditions requiring unsupported algebraic coefficient fields return a typed error. Physical boundary cache codec version 2 rejects snapshots lacking these restrictions.
 
+## Python interface and current coverage
+
+The optional `python` feature supplies bindings for the community host's existing native Symbolica extension. `python_stubgen` adds the inventory used by that host to generate type stubs. This crate does not build a second Python extension, and these bindings are excluded from browser builds. All new Python classes and exceptions are registered under `symbolica.community.hep.integration`; existing HEPKit and Hyperbolica APIs retain their namespaces. Build/source-identity requirements and the coordinated dependency graph are documented in [dependency-embedding.md](dependency-embedding.md).
+
+```python
+from symbolica.community.hep.integration import (
+    IntegralEvaluator, EvaluationOptions, BoundaryCache, KinematicTransport,
+)
+
+evaluator = IntegralEvaluator(
+    options=EvaluationOptions(digits=20), reduction_batch_size=32,
+)
+```
+
+The evaluator accepts native HEPKit `IntegralFamily`, `FeynmanDiagram` and `Kinematics` objects; `HiggsJetAmplitude` reuses the supplied native `Model` for generation, diagram display and scalar assembly. Inputs and outputs use the shared Symbolica `Expression`, `Float` and `ComplexFloat` classes. Exact kinematic substitutions remain simultaneous, and arbitrary-precision values are never converted through binary64.
+
+`IntegralEvaluator` exposes automatic evaluation, shared linear projections, prescribed nonzero rational epsilon samples and physical-family preparation. `PreparedIntegralFamily` exposes automatic boundary generation, physical transport, basis definitions, reduction conditions and target projection. `ReductionTables` are scoped to native families. `LaurentExpansion.fit` performs a supplied-sample fit, whose evidence is explicitly unverified until independent checks are provided by a higher-level evaluation. Exact and completed-sample caches are configured separately through `EvaluationOptions`; verified physical boundary values belong to `BoundaryCache`.
+
+`BoundaryCache.load`, `save`, `entries` and `extend` preserve native binary entries, identity and provenance. Passing the same cache through successive transports retains intermediate points for subsequent source selection. `extend` merges seed data into an existing growing cache without discarding those points; self-merges are idempotent and source/destination locks are never held together. Transport results expose the selected source, attempted sources, timing, propagated uncertainty and exact cache-hit diagnostics.
+
+The standalone Python `DifferentialSystem` currently exposes rational regular-point continuation with supplied `BoundaryData`, block decomposition and rational basis changes. Its fixed-precision transport reports diagnostics and retains input accuracy/provenance, but does not certify a global output error bound. Native Frobenius initialization, infinity expansions and dimensional endpoint selection are not yet separate Python methods. Generic `KinematicTransport` and prepared-family transport currently expose admitted straight paths with native singularity/branch checks; custom physical route objects are not wrapped.
+
+`evaluate_diagram` covers the ordinary scalar graph workflow. A graph carrying cut metadata raises `UnsupportedInputError`; the Rust `cut_integral_group` workflow has not yet been exposed to Python. This preserves the distinction between a cut measure and an ordinary propagator.
+
+Computation releases the GIL. `ComputationControl.poll()` drains native progress events and `cancel()` requests cooperative cancellation. The Python reducer defaults to batches of 32 targets, configurable with `reduction_batch_size`; cancellation is checked between reducer batches and native algorithm stages. A running HEPKit/Idenso tensor operation finishes before acknowledging cancellation. No Python callback runs while a cache lock is held.
+
+The Higgs-jet scalar kernel delegates exact internal-parameter expansion to native `Model::expand_parameters`, including the owner's dependency ordering and typed cycle detection. The corresponding isolated-owner change is preserved in [hepkit-exact-parameters.patch](../scripts/patches/hepkit-exact-parameters.patch). Model numeric defaults and reference integral boundaries are not inputs to this kernel. Form-factor kinematics and W/Z masses must match the explicit model parameters; the notebook constructs both from one set of exact physical inputs.
+
 ## Remaining numerical specialization
 
 Exact matrix determinant, multiplication and inversion already use Symbolica's matrix facilities. Floating matching and reusable Frobenius block solves still use `numeric.rs` because the current native APIs have different numerical contracts. At Symbolica revision `75f8350`, `numerica/src/tensors/matrix.rs::partial_row_reduce`/`solve` select the first nonzero pivot, whereas these numerical solves require magnitude pivoting. `FloatField` delegates to ordinary `Float` arithmetic, whose `fixed_precision()` is false; ODE recurrences instead round each operation to a chosen working precision. The sparse native row reducer owns exact LU/RREF infrastructure, but does not expose the needed magnitude-pivoted reusable numerical solve. Replacing these routines therefore needs an owner-level field/pivot policy and reusable-factor API, followed by ill-conditioned matching and resonance validation. A generic field adapter alone would not preserve their behavior.

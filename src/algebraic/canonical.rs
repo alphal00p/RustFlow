@@ -234,7 +234,7 @@ impl CanonicalAlgebraicSystem {
             || path.parameter == imaginary_parameter()
             || variables.contains(&path.parameter)
             || self.roots().iter().any(|r| r.symbol == path.parameter)
-            || variables != path.coordinates.keys().copied().collect()
+            || variables != path.coordinates.keys().copied().collect::<BTreeSet<_>>()
         {
             return Err(Error::InvalidInput(
                 "canonical path needs exactly the physical variables and a distinct parameter"

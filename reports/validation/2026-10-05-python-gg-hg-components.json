@@ -1,0 +1,121 @@
+{
+  "status": "component_validation_passed_native_boundary_acceptance_pending",
+  "scope": "Descriptive shared-extension Python API, exact scientific inputs, and native amplitude components. Not a complete empty-cache two-loop acceptance.",
+  "namespace": "symbolica.community.hep.integration",
+  "placement": {
+    "bindings": "src/python",
+    "notebook": "symbolica-community/examples/hep/gg_hg.py"
+  },
+  "checks": {
+    "exact_gg_hg": {
+      "passed": 8,
+      "seconds": "8.94",
+      "log": "target/native-gg-hg-components.log",
+      "includes": "48/61 exact inverse maps, routing and normalization, 16 coherent configurations, 4940 specialized W/Z weight comparisons at70 digits"
+    },
+    "native_amplitude": {
+      "passed": 1,
+      "seconds": "152.98",
+      "log": "target/native-amplitude-owner-regression.log",
+      "includes": "Three30-digit component comparisons, shared model identity, independent HEFT kinematic shape at two additional points"
+    },
+    "batched_normalized_projections": {
+      "passed": 5,
+      "seconds": "11.09",
+      "log": "target/projection-integration-tests.log"
+    },
+    "completed_sample_checkpoint": {
+      "passed": 1,
+      "includes": "Restart, numerical-force bypass, higher-precision separation, cancellation preservation, checksum rejection"
+    },
+    "native_model_parameters": {
+      "passed": 7,
+      "owner_commit": "fc9ee6aa5",
+      "includes": "Exact dependency closure, preservation of external inputs, cycle rejection, concurrent registration"
+    },
+    "native_clippy": {
+      "status": "passed",
+      "warnings_denied": true,
+      "log": "target/native-integration-clippy-final.log"
+    },
+    "python_clippy": {
+      "status": "passed",
+      "warnings_denied": true,
+      "log": "target/python-integration-clippy.log"
+    },
+    "stub_generation": {
+      "status": "passed",
+      "module": "symbolica.community.hep.integration"
+    },
+    "typing": {
+      "status": "passed",
+      "fixtures": 3,
+      "python_annotation_version": "3.10"
+    },
+    "notebook_smoke": {
+      "status": "passed",
+      "scope": "Initialization only: one native model, 48/61 systems, 16 exact configurations, empty numerical cache"
+    },
+    "formatting": {
+      "status": "passed",
+      "includes": [
+        "cargo fmt",
+        "git diff --check",
+        "Python bytecode compilation",
+        "marimo check"
+      ]
+    },
+    "installed_python": {
+      "passed": 31,
+      "seconds": "117.90",
+      "numerical_api_cases": 7,
+      "compatibility_and_layout_cases": 24,
+      "log": "target/python-integration-installed-final.log",
+      "includes": "Native family/diagram and arbitrary-precision interop, exact samples/substitution, typed cancellation, cache merge/self-merge/reload, exact and nearby hits, complete selected-source precision/provenance retention"
+    }
+  },
+  "amplitude_component": {
+    "scope": "Amplitude component validation only; archived form factors are comparison inputs, not production boundaries.",
+    "model_sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+    "native_diagrams": 3,
+    "build": "host development profile; only Symbolica optimized",
+    "kernel_preparation_seconds": "598.9983776081353",
+    "values": {
+      "effective_squared": "0.00176839492856040838255513143874534782898210399687219844018557709100056424479576777129467967484813",
+      "electroweak_squared": "4.33089662023980781068590560932410740709958659250133221707250726553122998579540556742646725020046E-8",
+      "interference": "0.000016658019366610435271343417452342751052535080375657874986887075452675062440750891773877479814185"
+    },
+    "verified_relative_digits": {
+      "effective_squared": 47,
+      "electroweak_squared": 19,
+      "interference": 20
+    },
+    "reference_comparison_relative_digits_passed": 30,
+    "second_point_native_evaluation": "returned successfully",
+    "second_point_shape_check": "not completed: temporary Python harness used decimal_digits instead of decimal_digit_precision; native Rust regression test contains the complete check"
+  },
+  "native_reduction_probes": [
+    {
+      "family": "planar",
+      "max_sector_batch": 32,
+      "deadline_seconds": 60,
+      "returned_seconds": "63.396",
+      "result": "typed cancellation before closure or numerical sample"
+    },
+    {
+      "family": "nonplanar",
+      "max_sector_batch": 16,
+      "deadline_seconds": 60,
+      "returned_seconds": "63.684",
+      "result": "typed cancellation before closure or numerical sample"
+    }
+  ],
+  "remaining_acceptance": [
+    "Fresh native planar/nonplanar boundaries against independent Euclidean anchors",
+    "All16 physical seed configurations without numerical reference seeds",
+    "4360 transported coefficient comparisons from those native seeds",
+    "20-digit propagated coherent observables with independent precision/sample refinement",
+    "Full long interruption/restart, forced recomputation, nearby-source and cold/resumed/warm release timings"
+  ],
+  "reference_policy": "Production family, connection and form-factor fixtures contain exact mathematical data only. Reference numerical data are test/acceptance inputs and never a boundary fallback."
+}

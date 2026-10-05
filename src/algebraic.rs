@@ -1005,7 +1005,7 @@ struct RootChart {
     center: C,
     coefficients: Vec<Vec<C>>,
 }
-fn principal_sqrt(p: Precision, value: &C) -> Result<C> {
+pub(crate) fn principal_sqrt(p: Precision, value: &C) -> Result<C> {
     if !p.finite(value) || *value == p.zero() {
         return Err(Error::Numerical(
             "square-root branch point or nonfinite radicand".into(),

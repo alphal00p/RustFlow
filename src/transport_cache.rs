@@ -1083,6 +1083,14 @@ impl BoundaryAccuracy {
     pub fn working_bits(&self) -> u32 {
         self.working_bits
     }
+    /// Accuracy recorded for the input from which this evidence was obtained.
+    pub fn input_verified_digits(&self) -> u32 {
+        self.input_verified_digits
+    }
+    /// Origin and validation history of the retained numerical evidence.
+    pub fn provenance(&self) -> &str {
+        &self.provenance
+    }
     pub fn comparison_errors(&self) -> &[Vec<Float>] {
         &self.comparison_errors
     }

@@ -1157,6 +1157,7 @@ dependencies = [
  "bincode",
  "bincode-trait-derive",
  "blake3",
+ "linnet",
  "miniz_oxide",
  "serde",
  "serde_json",

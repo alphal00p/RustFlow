@@ -1,0 +1,6644 @@
+{
+  "schema": "rustflow-gg-hg-plugin-physical-map-v1",
+  "paper": {
+    "url": "https://arxiv.org/abs/2112.07578v1",
+    "sha256": "7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6"
+  },
+  "source_archive_url": "https://export.arxiv.org/src/2112.07578v1",
+  "coordinates": {
+    "s12": "s",
+    "s13": "-t",
+    "s23": "s+t-b",
+    "mZ": "1"
+  },
+  "dimension": "4-2*eps",
+  "physical_propagators": 7,
+  "measure": "exp(2*eps*EulerGamma); mV2=mu2=1",
+  "families": [
+    {
+      "family": "Planar_EW1",
+      "dimension": 48,
+      "physical_integrals": [
+        [
+          0,
+          0,
+          0,
+          2,
+          1,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          1,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          2,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          0,
+          2,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          2,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          2,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          -1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          -1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          0,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          0,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          0,
+          0,
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          2,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0
+        ]
+      ],
+      "roots": [
+        {
+          "name": "root1",
+          "radicand": "4-b"
+        },
+        {
+          "name": "root2",
+          "radicand": "-b"
+        }
+      ],
+      "evidence": {
+        "source_sha256": "a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380",
+        "linear_reconstruction": true,
+        "right_inverse": true,
+        "published_dlog_sha256": "040fe8deb989356951247f2f3b09046a52851eeeca3f25876f793305317e5a64",
+        "plugin_dlog_sha256": "95442e5f5f1823fa205640219b0e1be8a43d260682af63345314d26fd37865a8",
+        "exact_dlog_equality": true
+      },
+      "publication_to_canonical": [
+        [
+          {
+            "column": 0,
+            "coefficient": "-(b*eps^2)"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-(eps^2*t)"
+          }
+        ],
+        [
+          {
+            "column": 9,
+            "coefficient": "-2*eps^2"
+          },
+          {
+            "column": 11,
+            "coefficient": "-eps^2+b*eps^2"
+          }
+        ],
+        [
+          {
+            "column": 9,
+            "coefficient": "-(b*eps^2)"
+          }
+        ],
+        [
+          {
+            "column": 12,
+            "coefficient": "2*eps^2"
+          },
+          {
+            "column": 18,
+            "coefficient": "eps^2-eps^2*t"
+          }
+        ],
+        [
+          {
+            "column": 12,
+            "coefficient": "-(eps^2*t)"
+          }
+        ],
+        [
+          {
+            "column": 40,
+            "coefficient": "-(eps^2*s)"
+          }
+        ],
+        [
+          {
+            "column": 42,
+            "coefficient": "-eps^2+eps^3"
+          }
+        ],
+        [
+          {
+            "column": 44,
+            "coefficient": "2*eps^2-eps^2*s"
+          },
+          {
+            "column": 47,
+            "coefficient": "eps^2-eps^2*s"
+          }
+        ],
+        [
+          {
+            "column": 44,
+            "coefficient": "-(eps^2*s)"
+          }
+        ],
+        [
+          {
+            "column": 1,
+            "coefficient": "(-4*b^2*eps^2+b^3*eps^2)/root1^2"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "(-4*b*eps^2*t+b^2*eps^2*t)/root1^2"
+          }
+        ],
+        [
+          {
+            "column": 9,
+            "coefficient": "((-1+b)*eps^2*root1^2)/(2*b)"
+          },
+          {
+            "column": 10,
+            "coefficient": "(-4*b*eps^2+b^2*eps^2)/root1^2"
+          },
+          {
+            "column": 11,
+            "coefficient": "(-(eps^2*root1^2)+b*eps^2*root1^2)/(4*b)"
+          },
+          {
+            "column": 42,
+            "coefficient": "-1/2*((-1+eps)*eps^2*root1^2)/b"
+          }
+        ],
+        [
+          {
+            "column": 41,
+            "coefficient": "(-4*b*eps^2*s+b^2*eps^2*s)/root1^2"
+          }
+        ],
+        [
+          {
+            "column": 43,
+            "coefficient": "b*eps^3-eps^3*s"
+          }
+        ],
+        [
+          {
+            "column": 42,
+            "coefficient": "((-1+eps)*eps^2*root1^2)/(2*(b-2*s))"
+          },
+          {
+            "column": 43,
+            "coefficient": "(-3*eps^3*root1^2*(b-s))/(2*(b-2*s))"
+          },
+          {
+            "column": 44,
+            "coefficient": "-1/2*(eps^2*root1^2*(-1+s))/(b-2*s)"
+          },
+          {
+            "column": 45,
+            "coefficient": "((-4+b)*b*eps^2*(-b+b*s-s^2))/(root1^2*(b-2*s))"
+          },
+          {
+            "column": 47,
+            "coefficient": "-1/4*(eps^2*root1^2*(-1+s))/(b-2*s)"
+          }
+        ],
+        [
+          {
+            "column": 13,
+            "coefficient": "b*eps^3-eps^3*t"
+          }
+        ],
+        [
+          {
+            "column": 12,
+            "coefficient": "-1/2*(eps^2*root1^2*(-1+t))/(b-2*t)"
+          },
+          {
+            "column": 13,
+            "coefficient": "(-3*eps^3*root1^2*(b-t))/(2*(b-2*t))"
+          },
+          {
+            "column": 14,
+            "coefficient": "((-4+b)*b*eps^2*(-b+b*t-t^2))/(root1^2*(b-2*t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "-1/4*(eps^2*root1^2*(-1+t))/(b-2*t)"
+          },
+          {
+            "column": 42,
+            "coefficient": "((-1+eps)*eps^2*root1^2)/(2*(b-2*t))"
+          }
+        ],
+        [
+          {
+            "column": 15,
+            "coefficient": "b*eps^3-eps^3*t"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-((eps^2*(b-t)*t)/(2+b-t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(-2*(2+b)*eps^2)/(2+b-t)"
+          },
+          {
+            "column": 11,
+            "coefficient": "(2*(-1+b)*eps^2)/(2+b-t)"
+          },
+          {
+            "column": 15,
+            "coefficient": "-((eps^3*(-4+b-t)*(b-t))/(2+b-t))"
+          },
+          {
+            "column": 17,
+            "coefficient": "-((eps^2*(-1+b-t)*(b-t))/(2+b-t))"
+          }
+        ],
+        [
+          {
+            "column": 35,
+            "coefficient": "b*eps^3-eps^3*s"
+          }
+        ],
+        [
+          {
+            "column": 9,
+            "coefficient": "(-2*(2+b)*eps^2)/(2+b-s)"
+          },
+          {
+            "column": 11,
+            "coefficient": "(2*(-1+b)*eps^2)/(2+b-s)"
+          },
+          {
+            "column": 35,
+            "coefficient": "-((eps^3*(-4+b-s)*(b-s))/(2+b-s))"
+          },
+          {
+            "column": 36,
+            "coefficient": "-((eps^2*(-1+b-s)*(b-s))/(2+b-s))"
+          },
+          {
+            "column": 40,
+            "coefficient": "(-2*eps^2*s)/(-2-b+s)"
+          }
+        ],
+        [
+          {
+            "column": 1,
+            "coefficient": "(-4*b^3*eps^2+b^4*eps^2)/root1^4"
+          },
+          {
+            "column": 4,
+            "coefficient": "((-4+b)*b^2*eps^2*(-1+2*eps))/root1^4"
+          },
+          {
+            "column": 10,
+            "coefficient": "(4*b^2*eps^2-b^3*eps^2)/root1^4"
+          }
+        ],
+        [
+          {
+            "column": 8,
+            "coefficient": "b*eps^4-eps^4*t"
+          }
+        ],
+        [
+          {
+            "column": 19,
+            "coefficient": "eps^3*s*t"
+          }
+        ],
+        [
+          {
+            "column": 21,
+            "coefficient": "b*eps^4-eps^4*s"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "b*eps^4-eps^4*t"
+          }
+        ],
+        [
+          {
+            "column": 16,
+            "coefficient": "-(b*eps^3)+eps^3*t"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-(((-4*eps^2+b*eps^2)*t)/(2+b-t))"
+          },
+          {
+            "column": 3,
+            "coefficient": "((-4+b)*b^2*eps^2*t)/root1^4"
+          },
+          {
+            "column": 5,
+            "coefficient": "-2*eps^4*t"
+          },
+          {
+            "column": 6,
+            "coefficient": "((-4+b)*b^2*eps^3*(b+t))/(2*root1^4)"
+          },
+          {
+            "column": 7,
+            "coefficient": "-(((-4+b)*b^2*eps^2*t)/root1^4)"
+          },
+          {
+            "column": 9,
+            "coefficient": "(-8*eps^2-2*b*eps^2+b^2*eps^2)/(2+b-t)"
+          },
+          {
+            "column": 10,
+            "coefficient": "((-4+b)*b^2*eps^2)/root1^4"
+          },
+          {
+            "column": 11,
+            "coefficient": "-(((-1+b)*(-4*eps^2+b*eps^2))/(2+b-t))"
+          },
+          {
+            "column": 12,
+            "coefficient": "(-(eps^2*t)+b*eps^2*t-eps^2*t^2)/(b-2*t)"
+          },
+          {
+            "column": 13,
+            "coefficient": "(3*b^2*eps^3-5*b*eps^3*t+eps^3*t^2)/(b-2*t)"
+          },
+          {
+            "column": 14,
+            "coefficient": "-(((-4+b)*b^2*eps^2*(-b+b*t-t^2))/(root1^4*(b-2*t)))"
+          },
+          {
+            "column": 15,
+            "coefficient": "(-2*(-3*b*eps^3+3*b^2*eps^3+2*eps^3*t-5*b*eps^3*t+2*eps^3*t^2))/(2+b-t)"
+          },
+          {
+            "column": 16,
+            "coefficient": "(b*eps^3-eps^3*t)/2"
+          },
+          {
+            "column": 17,
+            "coefficient": "-(((-1+b-t)*(3*b*eps^2-2*eps^2*t))/(2+b-t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(-(eps^2*t)+eps^2*t^2)/(2*(b-2*t))"
+          },
+          {
+            "column": 42,
+            "coefficient": "(b*eps^2-b*eps^3-eps^2*t+eps^3*t)/(b-2*t)"
+          }
+        ],
+        [
+          {
+            "column": 6,
+            "coefficient": "-(((-4+b)*b*eps^3*(b-t))/root1^2)"
+          }
+        ],
+        [
+          {
+            "column": 22,
+            "coefficient": "b*eps^4-eps^4*s"
+          }
+        ],
+        [
+          {
+            "column": 46,
+            "coefficient": "-(b*eps^3*s)+eps^3*s^2"
+          }
+        ],
+        [
+          {
+            "column": 9,
+            "coefficient": "(2*b*eps^2*s)/(2+b-s)"
+          },
+          {
+            "column": 10,
+            "coefficient": "(2*(-4+b)*b^2*eps^2)/root1^4"
+          },
+          {
+            "column": 11,
+            "coefficient": "(-2*(-1+b)*b*eps^2)/(2+b-s)"
+          },
+          {
+            "column": 22,
+            "coefficient": "-2*eps^4*(b+s)"
+          },
+          {
+            "column": 23,
+            "coefficient": "((-4+b)*b^2*eps^3*(b+s))/root1^4"
+          },
+          {
+            "column": 24,
+            "coefficient": "(-2*(-4+b)*b^2*eps^2*s)/root1^4"
+          },
+          {
+            "column": 35,
+            "coefficient": "(-4*(-(b*eps^3)+b^2*eps^3-b*eps^3*s))/(2+b-s)"
+          },
+          {
+            "column": 36,
+            "coefficient": "(-2*b*eps^2*(-1+b-s))/(2+b-s)"
+          },
+          {
+            "column": 40,
+            "coefficient": "(-2*s*(4*eps^2+3*b*eps^2-2*eps^2*s))/(2+b-s)"
+          },
+          {
+            "column": 41,
+            "coefficient": "(2*(-4+b)*b^2*eps^2*s)/root1^4"
+          },
+          {
+            "column": 42,
+            "coefficient": "(b*eps^2-b*eps^3)/(b-2*s)"
+          },
+          {
+            "column": 43,
+            "coefficient": "(5*b^2*eps^3-7*b*eps^3*s)/(b-2*s)"
+          },
+          {
+            "column": 44,
+            "coefficient": "(-(b*eps^2)+b*eps^2*s)/(b-2*s)"
+          },
+          {
+            "column": 45,
+            "coefficient": "(-2*(-4+b)*b^2*eps^2*(-b+b*s-s^2))/(root1^4*(b-2*s))"
+          },
+          {
+            "column": 46,
+            "coefficient": "-(b*eps^3*s)+eps^3*s^2"
+          },
+          {
+            "column": 47,
+            "coefficient": "(-(b*eps^2)+b*eps^2*s)/(2*(b-2*s))"
+          }
+        ],
+        [
+          {
+            "column": 23,
+            "coefficient": "-(((-4+b)*b*eps^3*(b-s))/root1^2)"
+          }
+        ],
+        [
+          {
+            "column": 26,
+            "coefficient": "-(eps^4*s)-eps^4*t"
+          }
+        ],
+        [
+          {
+            "column": 26,
+            "coefficient": "-2*(eps^4*s+eps^4*t)"
+          },
+          {
+            "column": 37,
+            "coefficient": "-(eps^3*s)-eps^3*t+eps^3*s*t"
+          }
+        ],
+        [
+          {
+            "column": 28,
+            "coefficient": "-(eps^3*t)+eps^3*s*t"
+          },
+          {
+            "column": 38,
+            "coefficient": "-(eps^3*t)+eps^3*s*t"
+          }
+        ],
+        [
+          {
+            "column": 28,
+            "coefficient": "eps^3*s*t"
+          }
+        ],
+        [
+          {
+            "column": 31,
+            "coefficient": "-(eps^3*s)+eps^3*s*t"
+          },
+          {
+            "column": 39,
+            "coefficient": "-(eps^3*s)+eps^3*s*t"
+          }
+        ],
+        [
+          {
+            "column": 31,
+            "coefficient": "eps^3*s*t"
+          }
+        ],
+        [
+          {
+            "column": 20,
+            "coefficient": "-(((-4+b)*b*eps^3*s*t)/root1^2)"
+          }
+        ],
+        [
+          {
+            "column": 27,
+            "coefficient": "-(b*eps^4*t)+eps^4*s*t"
+          }
+        ],
+        [
+          {
+            "column": 25,
+            "coefficient": "-(eps^4*t)"
+          },
+          {
+            "column": 26,
+            "coefficient": "eps^4*t"
+          },
+          {
+            "column": 27,
+            "coefficient": "b*eps^4*t"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "((-1+3*b)*eps^2*root1^2*t)/(3*(b-2*s)*(2+b-t))"
+          },
+          {
+            "column": 3,
+            "coefficient": "-(((-4+b)*b^2*eps^2*t)/(root1^2*(b-2*s)))"
+          },
+          {
+            "column": 5,
+            "coefficient": "(eps^4*root1^2*(b+t))/(b-2*s)"
+          },
+          {
+            "column": 6,
+            "coefficient": "-1/2*((-4+b)*b^2*eps^3*(b+t))/(root1^2*(b-2*s))"
+          },
+          {
+            "column": 7,
+            "coefficient": "((-4+b)*b^2*eps^2*t)/(root1^2*(b-2*s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-1/6*(eps^2*root1^2*(-10+b+3*b^2+3*t+3*b*t))/((b-2*s)*(2+b-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-(((-4+b)*b^2*eps^2)/(root1^2*(b-2*s)))"
+          },
+          {
+            "column": 11,
+            "coefficient": "((-1+b)*eps^2*root1^2*(-10+9*b+3*t))/(12*(b-2*s)*(2+b-t))"
+          },
+          {
+            "column": 12,
+            "coefficient": "-1/4*(root1^2*(-3*b*eps^2+2*eps^2*t+2*b*eps^2*t))/((b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 13,
+            "coefficient": "-((root1^2*(2*b^2*eps^3-2*b*eps^3*t-eps^3*t^2))/((b-2*s)*(b-2*t)))"
+          },
+          {
+            "column": 14,
+            "coefficient": "((-4+b)*b^2*eps^2*(-b+b*t-t^2))/(root1^2*(b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "(eps^3*root1^2*(-3*b+2*b^2+t-2*b*t))/((b-2*s)*(2+b-t))"
+          },
+          {
+            "column": 17,
+            "coefficient": "(eps^2*root1^2*(-1+b-t)*(7*b-t))/(6*(b-2*s)*(2+b-t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "-1/8*(root1^2*(-1+t)*(3*b*eps^2-2*eps^2*t))/((b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "-((eps^4*root1^2*(b-s))/(b-2*s))"
+          },
+          {
+            "column": 25,
+            "coefficient": "-((eps^4*root1^2*t)/(b-2*s))"
+          },
+          {
+            "column": 26,
+            "coefficient": "-1/2*(eps^4*root1^2*(3*s+t))/(b-2*s)"
+          },
+          {
+            "column": 27,
+            "coefficient": "(-2*b*eps^4*root1^2*t+eps^4*root1^2*s*t)/(-b+2*s)"
+          },
+          {
+            "column": 28,
+            "coefficient": "(eps^3*root1^2*(-1+3*s)*t)/(6*(b-2*s))"
+          },
+          {
+            "column": 29,
+            "coefficient": "-(((-4+b)*b*eps^3*(-b+b*s-s^2)*t)/(root1^2*(b-2*s)))"
+          },
+          {
+            "column": 37,
+            "coefficient": "-1/4*(eps^3*root1^2*(-s-t+s*t))/(b-2*s)"
+          },
+          {
+            "column": 38,
+            "coefficient": "(eps^3*root1^2*(-1+s)*t)/(6*(b-2*s))"
+          },
+          {
+            "column": 42,
+            "coefficient": "((-1+eps)*root1^2*(11*b*eps^2-16*eps^2*t))/(6*(b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 43,
+            "coefficient": "(eps^3*root1^2*(b-s))/(2*(b-2*s))"
+          },
+          {
+            "column": 44,
+            "coefficient": "(eps^2*root1^2)/(4*(b-2*s))"
+          },
+          {
+            "column": 47,
+            "coefficient": "-1/8*(eps^2*root1^2*(-1+s))/(b-2*s)"
+          }
+        ],
+        [
+          {
+            "column": 32,
+            "coefficient": "-(b*eps^4*s)+eps^4*s*t"
+          }
+        ],
+        [
+          {
+            "column": 26,
+            "coefficient": "eps^4*s"
+          },
+          {
+            "column": 30,
+            "coefficient": "-(eps^4*s)"
+          },
+          {
+            "column": 32,
+            "coefficient": "b*eps^4*s"
+          }
+        ],
+        [
+          {
+            "column": 8,
+            "coefficient": "-((eps^4*root1^2*(b-t))/(b-2*t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-1/6*(eps^2*root1^2*(-10+b+3*b^2+3*s+3*b*s))/((2+b-s)*(b-2*t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-(((-4+b)*b^2*eps^2)/(root1^2*(b-2*t)))"
+          },
+          {
+            "column": 11,
+            "coefficient": "((-1+b)*eps^2*root1^2*(-10+9*b+3*s))/(12*(2+b-s)*(b-2*t))"
+          },
+          {
+            "column": 12,
+            "coefficient": "(eps^2*root1^2)/(4*(b-2*t))"
+          },
+          {
+            "column": 13,
+            "coefficient": "(eps^3*root1^2*(b-t))/(2*(b-2*t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "-1/8*(eps^2*root1^2*(-1+t))/(b-2*t)"
+          },
+          {
+            "column": 22,
+            "coefficient": "(eps^4*root1^2*(b+s))/(b-2*t)"
+          },
+          {
+            "column": 23,
+            "coefficient": "-1/2*((-4+b)*b^2*eps^3*(b+s))/(root1^2*(b-2*t))"
+          },
+          {
+            "column": 24,
+            "coefficient": "((-4+b)*b^2*eps^2*s)/(root1^2*(b-2*t))"
+          },
+          {
+            "column": 26,
+            "coefficient": "-1/2*(eps^4*root1^2*(s+3*t))/(b-2*t)"
+          },
+          {
+            "column": 30,
+            "coefficient": "-((eps^4*root1^2*s)/(b-2*t))"
+          },
+          {
+            "column": 31,
+            "coefficient": "(eps^3*root1^2*s*(-1+3*t))/(6*(b-2*t))"
+          },
+          {
+            "column": 32,
+            "coefficient": "(eps^4*root1^2*s*(2*b-t))/(b-2*t)"
+          },
+          {
+            "column": 33,
+            "coefficient": "-(((-4+b)*b*eps^3*s*(-b+b*t-t^2))/(root1^2*(b-2*t)))"
+          },
+          {
+            "column": 35,
+            "coefficient": "(eps^3*root1^2*(-3*b+2*b^2+s-2*b*s))/((2+b-s)*(b-2*t))"
+          },
+          {
+            "column": 36,
+            "coefficient": "(eps^2*root1^2*(-1+b-s)*(7*b-s))/(6*(2+b-s)*(b-2*t))"
+          },
+          {
+            "column": 37,
+            "coefficient": "-1/4*(eps^3*root1^2*(-s-t+s*t))/(b-2*t)"
+          },
+          {
+            "column": 39,
+            "coefficient": "(eps^3*root1^2*s*(-1+t))/(6*(b-2*t))"
+          },
+          {
+            "column": 40,
+            "coefficient": "((-1+3*b)*eps^2*root1^2*s)/(3*(2+b-s)*(b-2*t))"
+          },
+          {
+            "column": 41,
+            "coefficient": "-(((-4+b)*b^2*eps^2*s)/(root1^2*(b-2*t)))"
+          },
+          {
+            "column": 42,
+            "coefficient": "((-1+eps)*eps^2*root1^2*(11*b-16*s))/(6*(b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 43,
+            "coefficient": "-((eps^3*root1^2*(2*b^2-2*b*s-s^2))/((b-2*s)*(b-2*t)))"
+          },
+          {
+            "column": 44,
+            "coefficient": "-1/4*(eps^2*root1^2*(-3*b+2*s+2*b*s))/((b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 45,
+            "coefficient": "((-4+b)*b^2*eps^2*(-b+b*s-s^2))/(root1^2*(b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 47,
+            "coefficient": "-1/8*(eps^2*root1^2*(3*b-2*s)*(-1+s))/((b-2*s)*(b-2*t))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "((-1+3*b)*eps^2*root1^2*t)/(3*(b-2*s)*(2+b-t))"
+          },
+          {
+            "column": 3,
+            "coefficient": "-(((-4+b)*b^2*eps^2*t)/(root1^2*(b-2*s)))"
+          },
+          {
+            "column": 5,
+            "coefficient": "(eps^4*root1^2*(b+t))/(b-2*s)"
+          },
+          {
+            "column": 6,
+            "coefficient": "-1/2*((-4+b)*b^2*eps^3*(b+t))/(root1^2*(b-2*s))"
+          },
+          {
+            "column": 7,
+            "coefficient": "((-4+b)*b^2*eps^2*t)/(root1^2*(b-2*s))"
+          },
+          {
+            "column": 8,
+            "coefficient": "-((eps^4*root1^2*(b-t))/(b-2*t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-1/3*(eps^2*root1^2*(-20*b-8*b^2+7*b^3+3*b^4+20*s+16*b*s-3*b^2*s-3*b^3*s-6*s^2-9*b*s^2-3*b^2*s^2+20*t+16*b*t-3*b^2*t-3*b^3*t-20*s*t-b*s*t+3*b^2*s*t+3*s^2*t+3*b*s^2*t-6*t^2-9*b*t^2-3*b^2*t^2+3*s*t^2+3*b*s*t^2))/((b-2*s)*(2+b-s)*(b-2*t)*(2+b-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "(-2*(-4+b)*b^2*eps^2*(b-s-t))/(root1^2*(b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 11,
+            "coefficient": "((-1+b)*eps^2*root1^2*(-20*b+8*b^2+9*b^3+20*s-12*b^2*s-6*s^2-3*b*s^2+20*t-12*b^2*t-20*s*t+15*b*s*t+3*s^2*t-6*t^2-3*b*t^2+3*s*t^2))/(6*(b-2*s)*(2+b-s)*(b-2*t)*(2+b-t))"
+          },
+          {
+            "column": 12,
+            "coefficient": "-1/2*(eps^2*root1^2*(-2*b+s+t+b*t))/((b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 13,
+            "coefficient": "-1/2*(eps^3*root1^2*(3*b^2+2*b*s-3*b*t-2*s*t-2*t^2))/((b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 14,
+            "coefficient": "((-4+b)*b^2*eps^2*(-b+b*t-t^2))/(root1^2*(b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "(eps^3*root1^2*(-3*b+2*b^2+t-2*b*t))/((b-2*s)*(2+b-t))"
+          },
+          {
+            "column": 16,
+            "coefficient": "-(b*eps^3)+eps^3*t"
+          },
+          {
+            "column": 17,
+            "coefficient": "(eps^2*root1^2*(-1+b-t)*(7*b-t))/(6*(b-2*s)*(2+b-t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "-1/4*(eps^2*root1^2*(2*b-s-t)*(-1+t))/((b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "-((eps^4*root1^2*(b-s))/(b-2*s))"
+          },
+          {
+            "column": 22,
+            "coefficient": "(eps^4*root1^2*(b+s))/(b-2*t)"
+          },
+          {
+            "column": 23,
+            "coefficient": "-1/2*((-4+b)*b^2*eps^3*(b+s))/(root1^2*(b-2*t))"
+          },
+          {
+            "column": 24,
+            "coefficient": "((-4+b)*b^2*eps^2*s)/(root1^2*(b-2*t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "-((eps^4*root1^2*t)/(b-2*s))"
+          },
+          {
+            "column": 26,
+            "coefficient": "-((eps^4*root1^2*(2*b*s-s^2+2*b*t-6*s*t-t^2))/((b-2*s)*(b-2*t)))"
+          },
+          {
+            "column": 27,
+            "coefficient": "(eps^4*(3*b*root1^2+2*b*s-3*root1^2*s-4*s^2)*t)/(b-2*s)"
+          },
+          {
+            "column": 28,
+            "coefficient": "(eps^3*root1^2*(-1+3*s)*t)/(6*(b-2*s))"
+          },
+          {
+            "column": 29,
+            "coefficient": "-(((-4+b)*b*eps^3*(-b+b*s-s^2)*t)/(root1^2*(b-2*s)))"
+          },
+          {
+            "column": 30,
+            "coefficient": "-((eps^4*root1^2*s)/(b-2*t))"
+          },
+          {
+            "column": 31,
+            "coefficient": "(eps^3*root1^2*s*(-1+3*t))/(6*(b-2*t))"
+          },
+          {
+            "column": 32,
+            "coefficient": "(eps^4*s*(3*b*root1^2+2*b*t-3*root1^2*t-4*t^2))/(b-2*t)"
+          },
+          {
+            "column": 33,
+            "coefficient": "-(((-4+b)*b*eps^3*s*(-b+b*t-t^2))/(root1^2*(b-2*t)))"
+          },
+          {
+            "column": 34,
+            "coefficient": "-(b*eps^4*s*t)"
+          },
+          {
+            "column": 35,
+            "coefficient": "(eps^3*root1^2*(-3*b+2*b^2+s-2*b*s))/((2+b-s)*(b-2*t))"
+          },
+          {
+            "column": 36,
+            "coefficient": "(eps^2*root1^2*(-1+b-s)*(7*b-s))/(6*(2+b-s)*(b-2*t))"
+          },
+          {
+            "column": 37,
+            "coefficient": "-1/2*(eps^3*root1^2*(b-s-t)*(-s-t+s*t))/((b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 38,
+            "coefficient": "(eps^3*root1^2*(-1+s)*t)/(6*(b-2*s))"
+          },
+          {
+            "column": 39,
+            "coefficient": "(eps^3*root1^2*s*(-1+t))/(6*(b-2*t))"
+          },
+          {
+            "column": 40,
+            "coefficient": "((-1+3*b)*eps^2*root1^2*s)/(3*(2+b-s)*(b-2*t))"
+          },
+          {
+            "column": 41,
+            "coefficient": "-(((-4+b)*b^2*eps^2*s)/(root1^2*(b-2*t)))"
+          },
+          {
+            "column": 42,
+            "coefficient": "((-1+eps)*eps^2*root1^2*(11*b-8*s-8*t))/(3*(b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 43,
+            "coefficient": "-1/2*(eps^3*root1^2*(3*b^2-3*b*s-2*s^2+2*b*t-2*s*t))/((b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 44,
+            "coefficient": "-1/2*(eps^2*root1^2*(-2*b+s+b*s+t))/((b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 45,
+            "coefficient": "((-4+b)*b^2*eps^2*(-b+b*s-s^2))/(root1^2*(b-2*s)*(b-2*t))"
+          },
+          {
+            "column": 46,
+            "coefficient": "-(b*eps^3*s)+eps^3*s^2"
+          },
+          {
+            "column": 47,
+            "coefficient": "-1/4*(eps^2*root1^2*(-1+s)*(2*b-s-t))/((b-2*s)*(b-2*t))"
+          }
+        ]
+      ],
+      "canonical_to_publication": [
+        [
+          {
+            "column": 0,
+            "coefficient": "-(1/(b*eps^2))"
+          }
+        ],
+        [
+          {
+            "column": 10,
+            "coefficient": "root1^2/((-4+b)*b^2*eps^2)"
+          }
+        ],
+        [
+          {
+            "column": 1,
+            "coefficient": "-(1/(eps^2*t))"
+          }
+        ],
+        [
+          {
+            "column": 11,
+            "coefficient": "root1^2/((-4+b)*b*eps^2*t)"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-1/4*root1^4/((-4+b)*b^2*eps^2*(-1+2*eps))"
+          },
+          {
+            "column": 3,
+            "coefficient": "root1^4/(2*(-4+b)*b^2*eps^2*(-1+2*eps))"
+          },
+          {
+            "column": 7,
+            "coefficient": "root1^4/(2*(-4+b)*b^2*eps^2*(-1+2*eps))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^2*(-1+2*eps)))"
+          },
+          {
+            "column": 12,
+            "coefficient": "root1^2/((-4+b)*b*eps^2*(-1+2*eps))"
+          },
+          {
+            "column": 22,
+            "coefficient": "root1^4/((-4+b)*b^2*eps^2*(-1+2*eps))"
+          }
+        ],
+        [
+          {
+            "column": 26,
+            "coefficient": "1/(eps^4*(b-t))"
+          }
+        ],
+        [
+          {
+            "column": 29,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^3*(b-t)))"
+          }
+        ],
+        [
+          {
+            "column": 1,
+            "coefficient": "(-2*root1^4)/((-4+b)*b^2*eps^2*t)"
+          },
+          {
+            "column": 2,
+            "coefficient": "-1/4*(root1^4*(5*b-t))/((-4+b)*b^2*eps^2*(b-t)*t)"
+          },
+          {
+            "column": 3,
+            "coefficient": "-1/2*(root1^4*(b+t))/((-4+b)*b^2*eps^2*(b-t)*t)"
+          },
+          {
+            "column": 4,
+            "coefficient": "root1^4/(4*(-4+b)*b^2*eps^2*t)"
+          },
+          {
+            "column": 5,
+            "coefficient": "-1/2*root1^4/((-4+b)*b^2*eps^2*t)"
+          },
+          {
+            "column": 11,
+            "coefficient": "root1^2/((-4+b)*b*eps^2*t)"
+          },
+          {
+            "column": 12,
+            "coefficient": "root1^2/((-4+b)*b*eps^2*t)"
+          },
+          {
+            "column": 16,
+            "coefficient": "(root1^4*(3*b-t))/(2*(-4+b)*b^2*eps^2*(b-t)*t)"
+          },
+          {
+            "column": 17,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^2*t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "-((root1^4*(3*b-2*t))/((-4+b)*b^2*eps^2*(b-t)*t))"
+          },
+          {
+            "column": 19,
+            "coefficient": "(root1^4*(3*b-2*t))/((-4+b)*b^2*eps^2*(b-t)*t)"
+          },
+          {
+            "column": 26,
+            "coefficient": "(-2*root1^4)/((-4+b)*b^2*eps^2*(b-t))"
+          },
+          {
+            "column": 27,
+            "coefficient": "-1/2*root1^4/((-4+b)*b^2*eps^2*t)"
+          },
+          {
+            "column": 28,
+            "coefficient": "-(root1^4/((-4+b)*b^2*eps^2*t))"
+          },
+          {
+            "column": 29,
+            "coefficient": "-1/2*(root1^2*(b+t))/((-4+b)*b*eps^2*(b-t)*t)"
+          }
+        ],
+        [
+          {
+            "column": 23,
+            "coefficient": "1/(eps^4*(b-t))"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "-(1/(b*eps^2))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-1/4*root1^4/((-4+b)*b^2*eps^2)"
+          },
+          {
+            "column": 3,
+            "coefficient": "root1^4/(2*(-4+b)*b^2*eps^2)"
+          },
+          {
+            "column": 7,
+            "coefficient": "root1^4/(2*(-4+b)*b^2*eps^2)"
+          },
+          {
+            "column": 12,
+            "coefficient": "root1^2/((-4+b)*b*eps^2)"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "1/((-1+b)*eps^2)"
+          },
+          {
+            "column": 3,
+            "coefficient": "-2/((-1+b)*b*eps^2)"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "-(1/(eps^2*t))"
+          }
+        ],
+        [
+          {
+            "column": 16,
+            "coefficient": "1/(eps^3*(b-t))"
+          }
+        ],
+        [
+          {
+            "column": 4,
+            "coefficient": "-1/4*root1^4/((-4+b)*b*eps^2*(-b+b*t-t^2))"
+          },
+          {
+            "column": 5,
+            "coefficient": "-1/2*root1^4/((-4+b)*b*eps^2*(-b+b*t-t^2))"
+          },
+          {
+            "column": 7,
+            "coefficient": "-1/2*root1^4/((-4+b)*b*eps^2*(-b+b*t-t^2))"
+          },
+          {
+            "column": 16,
+            "coefficient": "(3*root1^4)/(2*(-4+b)*b*eps^2*(-b+b*t-t^2))"
+          },
+          {
+            "column": 17,
+            "coefficient": "(root1^2*(b-2*t))/((-4+b)*b*eps^2*(-b+b*t-t^2))"
+          }
+        ],
+        [
+          {
+            "column": 18,
+            "coefficient": "1/(eps^3*(b-t))"
+          }
+        ],
+        [
+          {
+            "column": 27,
+            "coefficient": "-(1/(eps^3*(b-t)))"
+          }
+        ],
+        [
+          {
+            "column": 1,
+            "coefficient": "1/(eps^2*(-1+b-t))"
+          },
+          {
+            "column": 2,
+            "coefficient": "2/(eps^2*(-1+b-t)*(b-t))"
+          },
+          {
+            "column": 3,
+            "coefficient": "2/(eps^2*(-1+b-t)*(b-t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(4-b+t)/(eps^2*(-1+b-t)*(b-t))"
+          },
+          {
+            "column": 19,
+            "coefficient": "(-2-b+t)/(eps^2*(-1+b-t)*(b-t))"
+          }
+        ],
+        [
+          {
+            "column": 4,
+            "coefficient": "-(1/(eps^2*(-1+t)))"
+          },
+          {
+            "column": 5,
+            "coefficient": "-2/(eps^2*(-1+t)*t)"
+          }
+        ],
+        [
+          {
+            "column": 24,
+            "coefficient": "1/(eps^3*s*t)"
+          }
+        ],
+        [
+          {
+            "column": 40,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^3*s*t))"
+          }
+        ],
+        [
+          {
+            "column": 25,
+            "coefficient": "1/(eps^4*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 30,
+            "coefficient": "1/(eps^4*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 33,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^3*(b-s)))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-1/4*(root1^4*(5*b-s))/((-4+b)*b^2*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 3,
+            "coefficient": "(root1^4*(b-3*s))/(2*(-4+b)*b^2*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 6,
+            "coefficient": "(root1^4*(3*b-2*s))/((-4+b)*b^2*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 7,
+            "coefficient": "root1^4/(2*(-4+b)*b^2*eps^2*s)"
+          },
+          {
+            "column": 12,
+            "coefficient": "root1^2/((-4+b)*b*eps^2*s)"
+          },
+          {
+            "column": 13,
+            "coefficient": "root1^2/((-4+b)*b*eps^2*s)"
+          },
+          {
+            "column": 14,
+            "coefficient": "root1^4/((-4+b)*b*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 15,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^2*s))"
+          },
+          {
+            "column": 20,
+            "coefficient": "-(root1^4/((-4+b)*b*eps^2*(b-s)*s))"
+          },
+          {
+            "column": 21,
+            "coefficient": "root1^4/((-4+b)*b*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 30,
+            "coefficient": "-((root1^4*(b+s))/((-4+b)*b^2*eps^2*(b-s)*s))"
+          },
+          {
+            "column": 31,
+            "coefficient": "root1^4/(2*(-4+b)*b^2*eps^2*s)"
+          },
+          {
+            "column": 32,
+            "coefficient": "-1/2*root1^4/((-4+b)*b^2*eps^2*s)"
+          },
+          {
+            "column": 33,
+            "coefficient": "-1/2*(root1^2*(b+s))/((-4+b)*b*eps^2*(b-s)*s)"
+          }
+        ],
+        [
+          {
+            "column": 34,
+            "coefficient": "-(1/(eps^4*(s+t)))"
+          },
+          {
+            "column": 41,
+            "coefficient": "-(b/(eps^4*(b-s)*t))"
+          },
+          {
+            "column": 42,
+            "coefficient": "-(1/(eps^4*t))"
+          }
+        ],
+        [
+          {
+            "column": 34,
+            "coefficient": "-(1/(eps^4*(s+t)))"
+          }
+        ],
+        [
+          {
+            "column": 41,
+            "coefficient": "-(1/(eps^4*(b-s)*t))"
+          }
+        ],
+        [
+          {
+            "column": 37,
+            "coefficient": "1/(eps^3*s*t)"
+          }
+        ],
+        [
+          {
+            "column": 1,
+            "coefficient": "(-11*root1^4)/(6*(-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 2,
+            "coefficient": "-1/4*root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 3,
+            "coefficient": "-1/2*root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 4,
+            "coefficient": "(3*root1^4)/(8*(-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 5,
+            "coefficient": "-1/2*root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 7,
+            "coefficient": "(5*root1^4)/(6*(-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 8,
+            "coefficient": "root1^4/(8*(-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 9,
+            "coefficient": "-1/8*root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 14,
+            "coefficient": "root1^4/(2*(-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 16,
+            "coefficient": "root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 18,
+            "coefficient": "(-13*root1^4)/(6*(-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 19,
+            "coefficient": "(11*root1^4)/(6*(-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 25,
+            "coefficient": "-(root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t))"
+          },
+          {
+            "column": 26,
+            "coefficient": "root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 27,
+            "coefficient": "-1/2*root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 28,
+            "coefficient": "-(root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t))"
+          },
+          {
+            "column": 34,
+            "coefficient": "(2*root1^4)/((-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 35,
+            "coefficient": "-1/4*root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 36,
+            "coefficient": "root1^4/(6*(-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 37,
+            "coefficient": "root1^4/(3*(-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 41,
+            "coefficient": "-(root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t))"
+          },
+          {
+            "column": 42,
+            "coefficient": "root1^4/((-4+b)*b*eps^3*(-b+b*s-s^2)*t)"
+          },
+          {
+            "column": 43,
+            "coefficient": "-((root1^2*(b-2*s))/((-4+b)*b*eps^3*(-b+b*s-s^2)*t))"
+          }
+        ],
+        [
+          {
+            "column": 34,
+            "coefficient": "-(1/(eps^4*(s+t)))"
+          },
+          {
+            "column": 44,
+            "coefficient": "-(b/(eps^4*s*(b-t)))"
+          },
+          {
+            "column": 45,
+            "coefficient": "-(1/(eps^4*s))"
+          }
+        ],
+        [
+          {
+            "column": 39,
+            "coefficient": "1/(eps^3*s*t)"
+          }
+        ],
+        [
+          {
+            "column": 44,
+            "coefficient": "-(1/(eps^4*s*(b-t)))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-1/4*root1^4/((-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 3,
+            "coefficient": "root1^4/(2*(-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 4,
+            "coefficient": "root1^4/(8*(-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(2*root1^4)/((-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 7,
+            "coefficient": "(4*root1^4)/(3*(-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 8,
+            "coefficient": "root1^4/(8*(-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-1/8*root1^4/((-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 14,
+            "coefficient": "root1^4/(2*(-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 16,
+            "coefficient": "root1^4/(2*(-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 20,
+            "coefficient": "-1/6*root1^4/((-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 21,
+            "coefficient": "-1/6*root1^4/((-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 23,
+            "coefficient": "-(root1^4/((-4+b)*b*eps^3*s*(-b+b*t-t^2)))"
+          },
+          {
+            "column": 31,
+            "coefficient": "root1^4/(2*(-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 32,
+            "coefficient": "-1/2*root1^4/((-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 34,
+            "coefficient": "(2*root1^4)/((-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 35,
+            "coefficient": "-1/4*root1^4/((-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 38,
+            "coefficient": "root1^4/(6*(-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 39,
+            "coefficient": "root1^4/(3*(-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 44,
+            "coefficient": "-(root1^4/((-4+b)*b*eps^3*s*(-b+b*t-t^2)))"
+          },
+          {
+            "column": 45,
+            "coefficient": "root1^4/((-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 46,
+            "coefficient": "-((root1^2*(b-2*t))/((-4+b)*b*eps^3*s*(-b+b*t-t^2)))"
+          }
+        ],
+        [
+          {
+            "column": 27,
+            "coefficient": "1/(b*eps^4*s*t)"
+          },
+          {
+            "column": 31,
+            "coefficient": "1/(b*eps^4*s*t)"
+          },
+          {
+            "column": 41,
+            "coefficient": "(-root1^2-2*s)/(b*eps^4*(b-s)*s*t)"
+          },
+          {
+            "column": 43,
+            "coefficient": "1/(b*eps^4*s*t)"
+          },
+          {
+            "column": 44,
+            "coefficient": "(-root1^2-2*t)/(b*eps^4*s*(b-t)*t)"
+          },
+          {
+            "column": 46,
+            "coefficient": "1/(b*eps^4*s*t)"
+          },
+          {
+            "column": 47,
+            "coefficient": "-(1/(b*eps^4*s*t))"
+          }
+        ],
+        [
+          {
+            "column": 20,
+            "coefficient": "1/(eps^3*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "2/(eps^2*(-1+b-s)*(b-s))"
+          },
+          {
+            "column": 3,
+            "coefficient": "2/(eps^2*(-1+b-s)*(b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "-2/(eps^2*(-1+b-s)*(b-s))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(4-b+s)/(eps^2*(-1+b-s)*(b-s))"
+          },
+          {
+            "column": 21,
+            "coefficient": "(-2-b+s)/(eps^2*(-1+b-s)*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 34,
+            "coefficient": "-2/(eps^3*(-s-t+s*t))"
+          },
+          {
+            "column": 35,
+            "coefficient": "1/(eps^3*(-s-t+s*t))"
+          }
+        ],
+        [
+          {
+            "column": 36,
+            "coefficient": "1/(eps^3*(-1+s)*t)"
+          },
+          {
+            "column": 37,
+            "coefficient": "-(1/(eps^3*s*t))"
+          }
+        ],
+        [
+          {
+            "column": 38,
+            "coefficient": "1/(eps^3*s*(-1+t))"
+          },
+          {
+            "column": 39,
+            "coefficient": "-(1/(eps^3*s*t))"
+          }
+        ],
+        [
+          {
+            "column": 6,
+            "coefficient": "-(1/(eps^2*s))"
+          }
+        ],
+        [
+          {
+            "column": 13,
+            "coefficient": "root1^2/((-4+b)*b*eps^2*s)"
+          }
+        ],
+        [
+          {
+            "column": 7,
+            "coefficient": "1/((-1+eps)*eps^2)"
+          }
+        ],
+        [
+          {
+            "column": 14,
+            "coefficient": "1/(eps^3*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 9,
+            "coefficient": "-(1/(eps^2*s))"
+          }
+        ],
+        [
+          {
+            "column": 7,
+            "coefficient": "-1/2*root1^4/((-4+b)*b*eps^2*(-b+b*s-s^2))"
+          },
+          {
+            "column": 8,
+            "coefficient": "-1/4*root1^4/((-4+b)*b*eps^2*(-b+b*s-s^2))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-1/4*root1^4/((-4+b)*b*eps^2*(-b+b*s-s^2))"
+          },
+          {
+            "column": 14,
+            "coefficient": "(3*root1^4)/(2*(-4+b)*b*eps^2*(-b+b*s-s^2))"
+          },
+          {
+            "column": 15,
+            "coefficient": "(root1^2*(b-2*s))/((-4+b)*b*eps^2*(-b+b*s-s^2))"
+          }
+        ],
+        [
+          {
+            "column": 31,
+            "coefficient": "1/(eps^3*s*(-b+s))"
+          }
+        ],
+        [
+          {
+            "column": 8,
+            "coefficient": "-(1/(eps^2*(-1+s)))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(-2+s)/(eps^2*(-1+s)*s)"
+          }
+        ]
+      ],
+      "routing": [
+        {
+          "loop": [
+            1,
+            0
+          ],
+          "external": [
+            0,
+            0,
+            0
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            1,
+            -1
+          ],
+          "external": [
+            0,
+            0,
+            0
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            1,
+            0
+          ],
+          "external": [
+            1,
+            0,
+            0
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            1,
+            0
+          ],
+          "external": [
+            1,
+            1,
+            0
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            -1,
+            0
+          ],
+          "external": [
+            0,
+            0,
+            -1
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            0,
+            1
+          ],
+          "external": [
+            1,
+            1,
+            0
+          ],
+          "mass_squared": 1
+        },
+        {
+          "loop": [
+            0,
+            -1
+          ],
+          "external": [
+            0,
+            0,
+            -1
+          ],
+          "mass_squared": 1
+        },
+        {
+          "loop": [
+            1,
+            -1
+          ],
+          "external": [
+            0,
+            0,
+            -1
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            0,
+            1
+          ],
+          "external": [
+            0,
+            1,
+            0
+          ],
+          "mass_squared": 0
+        }
+      ],
+      "source_path": "anc/scalar_integrals/topology_definitions_and_mappings/replRulePlanarMIToCan.m"
+    },
+    {
+      "family": "NP_EW1",
+      "dimension": 61,
+      "physical_integrals": [
+        [
+          0,
+          0,
+          0,
+          2,
+          1,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          2,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          2,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          2,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          2,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          0,
+          2,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          2,
+          0,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          0,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          2,
+          1,
+          0,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          2,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          2,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          0,
+          1,
+          1,
+          2,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          2,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          2,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          2,
+          0,
+          0,
+          1,
+          1,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          1,
+          1,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          1,
+          2,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          1,
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          2,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0
+        ],
+        [
+          -1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          -1,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          0,
+          2,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0
+        ],
+        [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          -1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          2,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -2,
+          0
+        ],
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      ],
+      "roots": [
+        {
+          "name": "root1",
+          "radicand": "4-b"
+        },
+        {
+          "name": "root2",
+          "radicand": "-b"
+        },
+        {
+          "name": "root3",
+          "radicand": "-b+s+t"
+        },
+        {
+          "name": "root4",
+          "radicand": "4*b^2-b^3-4*b*s+b^2*s-4*b*t+b^2*t+4*s*t"
+        },
+        {
+          "name": "root5",
+          "radicand": "-b+s"
+        },
+        {
+          "name": "root6",
+          "radicand": "4-b+s"
+        },
+        {
+          "name": "root7",
+          "radicand": "-t"
+        },
+        {
+          "name": "root8",
+          "radicand": "4*b*s-4*s^2+4*b*t-b^2*t-4*s*t"
+        }
+      ],
+      "evidence": {
+        "source_sha256": "4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd",
+        "linear_reconstruction": true,
+        "right_inverse": true,
+        "published_dlog_sha256": "2f8dcc5d506ce7fd366e71c6b235eceed75521b47385d575c9268497d861ad2d",
+        "plugin_dlog_sha256": "becb0221008715452488a4b73a64be95ad869dc8fb54657598fe34a1f28921d9",
+        "exact_dlog_equality": true
+      },
+      "publication_to_canonical": [
+        [
+          {
+            "column": 0,
+            "coefficient": "-(eps^2*s)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "2*eps^2"
+          },
+          {
+            "column": 1,
+            "coefficient": "-(eps^2*(-1+s))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-eps^2+eps^3"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "eps^2*(b-s-t)"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "-2*eps^2"
+          },
+          {
+            "column": 4,
+            "coefficient": "eps^2*(-1+b-s-t)"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "-(b*eps^2)"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "2*eps^2"
+          },
+          {
+            "column": 6,
+            "coefficient": "-((-1+b)*eps^2)"
+          }
+        ],
+        [
+          {
+            "column": 7,
+            "coefficient": "-(eps^2*t)"
+          }
+        ],
+        [
+          {
+            "column": 7,
+            "coefficient": "2*eps^2"
+          },
+          {
+            "column": 8,
+            "coefficient": "-(eps^2*(-1+t))"
+          }
+        ],
+        [
+          {
+            "column": 9,
+            "coefficient": "-(eps^2*s)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(eps^2*s)/3"
+          },
+          {
+            "column": 10,
+            "coefficient": "eps^3*(b-s)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(-4*b*eps^2+b^2*eps^2+4*b*eps^2*s-b^2*eps^2*s)/(2*root1^2*(b-2*s))"
+          },
+          {
+            "column": 1,
+            "coefficient": "-1/4*((-4+b)*b*eps^2*(-1+s))/(root1^2*(b-2*s))"
+          },
+          {
+            "column": 2,
+            "coefficient": "((-4+b)*b*(-eps^2+eps^3))/(2*root1^2*(b-2*s))"
+          },
+          {
+            "column": 10,
+            "coefficient": "(-3*(-4+b)*b*eps^3*(b-s))/(2*root1^2*(b-2*s))"
+          },
+          {
+            "column": 11,
+            "coefficient": "((-4+b)*b*eps^2*(-b+b*s-s^2))/(root1^2*(b-2*s))"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "-1/3*(eps^2*(b-s-t))"
+          },
+          {
+            "column": 12,
+            "coefficient": "-(eps^3*(s+t))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-1/2*((-4+b)*b*(-eps^2+eps^3))/(root1^2*(b-2*s-2*t))"
+          },
+          {
+            "column": 3,
+            "coefficient": "(4*b*eps^2-5*b^2*eps^2+b^3*eps^2+4*b*eps^2*s-b^2*eps^2*s+4*b*eps^2*t-b^2*eps^2*t)/(2*root1^2*(b-2*s-2*t))"
+          },
+          {
+            "column": 4,
+            "coefficient": "((-4+b)*b*eps^2*(-1+b-s-t))/(4*root1^2*(b-2*s-2*t))"
+          },
+          {
+            "column": 12,
+            "coefficient": "(3*(-4+b)*b*eps^3*(s+t))/(2*root1^2*(b-2*s-2*t))"
+          },
+          {
+            "column": 13,
+            "coefficient": "-(((-4+b)*b*eps^2*(-b+b*s-s^2+b*t-2*s*t-t^2))/(root1^2*(b-2*s-2*t)))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "((-4+b)*(-eps^2+eps^3))/(2*root1^2)"
+          },
+          {
+            "column": 5,
+            "coefficient": "(-4*eps^2+5*b*eps^2-b^2*eps^2)/(2*root1^2)"
+          },
+          {
+            "column": 6,
+            "coefficient": "-1/4*((-4+b)*(-1+b)*eps^2)/root1^2"
+          },
+          {
+            "column": 14,
+            "coefficient": "-(((-4+b)*b*eps^2)/root1^2)"
+          }
+        ],
+        [
+          {
+            "column": 7,
+            "coefficient": "(eps^2*t)/3"
+          },
+          {
+            "column": 15,
+            "coefficient": "eps^3*(b-t)"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "((-4+b)*b*(-eps^2+eps^3))/(2*root1^2*(b-2*t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "(-4*b*eps^2+b^2*eps^2+4*b*eps^2*t-b^2*eps^2*t)/(2*root1^2*(b-2*t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "-1/4*((-4+b)*b*eps^2*(-1+t))/(root1^2*(b-2*t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "(-3*(-4+b)*b*eps^3*(b-t))/(2*root1^2*(b-2*t))"
+          },
+          {
+            "column": 16,
+            "coefficient": "((-4+b)*b*eps^2*(-b+b*t-t^2))/(root1^2*(b-2*t))"
+          }
+        ],
+        [
+          {
+            "column": 17,
+            "coefficient": "-(((-4+b)*b*eps^2*s)/root1^2)"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "((2+b)*eps^2)/(2+b-s)"
+          },
+          {
+            "column": 6,
+            "coefficient": "-(((-1+b)*eps^2)/(2+b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-((eps^2*s)/(2+b-s))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(eps^3*(-1+b-s)*(b-s))/(2+b-s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "(eps^2*(-1+b-s)*(b-s))/(2*(2+b-s))"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "-((eps^2*(2+b+s))/(2+b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "-1/2*((-1+b)*eps^2*(-2+b-s))/(2+b-s)"
+          },
+          {
+            "column": 9,
+            "coefficient": "(2*eps^2*s)/(2+b-s)"
+          },
+          {
+            "column": 18,
+            "coefficient": "-((eps^3*(-4+b-s)*(b-s))/(2+b-s))"
+          },
+          {
+            "column": 19,
+            "coefficient": "-((eps^2*(-1+b-s)*(b-s))/(2+b-s))"
+          }
+        ],
+        [
+          {
+            "column": 20,
+            "coefficient": "eps^4*(b-t)"
+          }
+        ],
+        [
+          {
+            "column": 20,
+            "coefficient": "eps^4*(b-t)"
+          },
+          {
+            "column": 21,
+            "coefficient": "-(eps^3*(-b+b*s-s^2+t-s*t))"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "(-eps^2-b*eps^2)/2"
+          },
+          {
+            "column": 6,
+            "coefficient": "((-1+b)*eps^2)/4"
+          },
+          {
+            "column": 22,
+            "coefficient": "eps^4*(b-s)"
+          }
+        ],
+        [
+          {
+            "column": 23,
+            "coefficient": "eps^4*(b-s)"
+          }
+        ],
+        [
+          {
+            "column": 23,
+            "coefficient": "eps^4*(b-s)"
+          },
+          {
+            "column": 24,
+            "coefficient": "-(eps^3*(-b+s+b*t-s*t-t^2))"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "(-eps^2-b*eps^2)/2"
+          },
+          {
+            "column": 6,
+            "coefficient": "((-1+b)*eps^2)/4"
+          },
+          {
+            "column": 25,
+            "coefficient": "eps^4*(b-t)"
+          }
+        ],
+        [
+          {
+            "column": 26,
+            "coefficient": "eps^4*(b-s-t)"
+          }
+        ],
+        [
+          {
+            "column": 27,
+            "coefficient": "eps^3*(b-s-t+s*t)"
+          }
+        ],
+        [
+          {
+            "column": 28,
+            "coefficient": "eps^4*(b-s-t)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(-17*eps^2-2*eps^2*s)/18"
+          },
+          {
+            "column": 1,
+            "coefficient": "(17*eps^2*(-1+s))/36"
+          },
+          {
+            "column": 5,
+            "coefficient": "(-24*eps^2-14*b*eps^2-b^2*eps^2-10*eps^2*s+b*eps^2*s)/(2*(2+b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(-12*eps^2+17*b*eps^2-5*b^2*eps^2-5*eps^2*s+5*b*eps^2*s)/(2*(2+b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(11*eps^2*s)/(2+b-s)"
+          },
+          {
+            "column": 18,
+            "coefficient": "(-11*eps^3*(-1+b-s)*(b-s))/(2+b-s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "(-11*eps^2*(-1+b-s)*(b-s))/(2*(2+b-s))"
+          },
+          {
+            "column": 29,
+            "coefficient": "eps^4*(b-s)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(-71*b*eps^2+196*eps^2*s-69*b*eps^2*s+84*eps^2*s^2)/(81*(b-2*s))"
+          },
+          {
+            "column": 1,
+            "coefficient": "(eps^2*(71*b-196*s)*(-1+s))/(162*(b-2*s))"
+          },
+          {
+            "column": 2,
+            "coefficient": "(2*(-eps^2+eps^3)*(b-s))/(3*(b-2*s))"
+          },
+          {
+            "column": 5,
+            "coefficient": "(-2*eps^2-b*eps^2-5*eps^2*s-2*b*eps^2*s)/(3*(2+b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(-2*eps^2+3*b*eps^2-b^2*eps^2-5*eps^2*s+5*b*eps^2*s)/(6*(2+b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(2*eps^2*(11+4*b-s)*s)/(9*(2+b-s))"
+          },
+          {
+            "column": 10,
+            "coefficient": "(-2*eps^3*(4*b^2-7*s^2))/(9*(b-2*s))"
+          },
+          {
+            "column": 11,
+            "coefficient": "(2*b*eps^2*(-b+b*s-s^2))/(3*(b-2*s))"
+          },
+          {
+            "column": 14,
+            "coefficient": "(-2*b*eps^2)/3"
+          },
+          {
+            "column": 17,
+            "coefficient": "(-2*b*eps^2*s)/3"
+          },
+          {
+            "column": 18,
+            "coefficient": "(-2*eps^3*(b-3*s)*(-1+b-s))/(3*(2+b-s))"
+          },
+          {
+            "column": 19,
+            "coefficient": "-1/3*(eps^2*(b-3*s)*(-1+b-s))/(2+b-s)"
+          },
+          {
+            "column": 29,
+            "coefficient": "(4*b*eps^4)/3"
+          },
+          {
+            "column": 30,
+            "coefficient": "-(eps^3*(b-s))"
+          },
+          {
+            "column": 31,
+            "coefficient": "-1/3*(b*eps^3*(b+s))"
+          },
+          {
+            "column": 32,
+            "coefficient": "(2*b*eps^2*s)/3"
+          }
+        ],
+        [
+          {
+            "column": 31,
+            "coefficient": "((-4+b)*b*eps^3*(b-s))/root1^2"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(b*eps^2-20*eps^2*s+19*b*eps^2*s-20*eps^2*s^2)/(18*(b-2*s))"
+          },
+          {
+            "column": 1,
+            "coefficient": "-1/36*(eps^2*(b-20*s)*(-1+s))/(b-2*s)"
+          },
+          {
+            "column": 2,
+            "coefficient": "-(((-eps^2+eps^3)*(b-s))/(b-2*s))"
+          },
+          {
+            "column": 5,
+            "coefficient": "(-30*eps^2-15*b*eps^2-11*eps^2*s+2*b*eps^2*s)/(2*(2+b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(-30*eps^2+45*b*eps^2-15*b^2*eps^2-11*eps^2*s+11*b*eps^2*s)/(4*(2+b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-((eps^2*(-11+2*b-s)*s)/(2+b-s))"
+          },
+          {
+            "column": 10,
+            "coefficient": "(eps^3*(2*b^2-2*b*s-s^2))/(b-2*s)"
+          },
+          {
+            "column": 11,
+            "coefficient": "-((b*eps^2*(-b+b*s-s^2))/(b-2*s))"
+          },
+          {
+            "column": 14,
+            "coefficient": "b*eps^2"
+          },
+          {
+            "column": 17,
+            "coefficient": "b*eps^2*s"
+          },
+          {
+            "column": 18,
+            "coefficient": "-((eps^3*(15*b-13*s)*(-1+b-s))/(2+b-s))"
+          },
+          {
+            "column": 19,
+            "coefficient": "-1/2*(eps^2*(15*b-13*s)*(-1+b-s))/(2+b-s)"
+          },
+          {
+            "column": 29,
+            "coefficient": "-2*eps^4*s"
+          },
+          {
+            "column": 30,
+            "coefficient": "(eps^3*(b-s))/2"
+          },
+          {
+            "column": 31,
+            "coefficient": "(b*eps^3*(b+s))/2"
+          },
+          {
+            "column": 32,
+            "coefficient": "-(b*eps^2*s)"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "(eps^2+b*eps^2)/2"
+          },
+          {
+            "column": 6,
+            "coefficient": "-1/4*((-1+b)*eps^2)"
+          },
+          {
+            "column": 33,
+            "coefficient": "-(eps^4*(s+t))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "(-2*(-eps^2+eps^3))/3"
+          },
+          {
+            "column": 5,
+            "coefficient": "(-2*(2*eps^2+b*eps^2))/(3*(2+b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(2*(-eps^2+b*eps^2))/(3*(2+b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(2*eps^2*s)/(3*(2+b-s))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(2*(b*eps^3-eps^3*s))/(2+b-s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "-1/3*(eps^2*(-1+b-s)*(b-s))/(2+b-s)"
+          },
+          {
+            "column": 34,
+            "coefficient": "(eps^3*s*(1-3*b+3*s+3*t))/3"
+          },
+          {
+            "column": 35,
+            "coefficient": "(eps^3*s*(1-b+s+t))/3"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-eps^2+eps^3"
+          },
+          {
+            "column": 5,
+            "coefficient": "(-2*(2*eps^2+b*eps^2))/(2+b-s)"
+          },
+          {
+            "column": 6,
+            "coefficient": "(2*(-eps^2+b*eps^2))/(2+b-s)"
+          },
+          {
+            "column": 9,
+            "coefficient": "(2*eps^2*s)/(2+b-s)"
+          },
+          {
+            "column": 18,
+            "coefficient": "(6*(b*eps^3-eps^3*s))/(2+b-s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "-((eps^2*(-1+b-s)*(b-s))/(2+b-s))"
+          },
+          {
+            "column": 34,
+            "coefficient": "eps^3*s"
+          },
+          {
+            "column": 35,
+            "coefficient": "eps^3*s*(1-b+s+t)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-eps^2-eps^2*s"
+          },
+          {
+            "column": 1,
+            "coefficient": "(eps^2*(-1+s))/2"
+          },
+          {
+            "column": 9,
+            "coefficient": "eps^2*s"
+          },
+          {
+            "column": 36,
+            "coefficient": "eps^4*(b-s)"
+          }
+        ],
+        [
+          {
+            "column": 37,
+            "coefficient": "-(eps^4*(s+t))"
+          }
+        ],
+        [
+          {
+            "column": 38,
+            "coefficient": "eps^3*(-s-t+s*t)"
+          }
+        ],
+        [
+          {
+            "column": 39,
+            "coefficient": "-(eps^4*t)"
+          }
+        ],
+        [
+          {
+            "column": 40,
+            "coefficient": "-(eps^4*t)"
+          }
+        ],
+        [
+          {
+            "column": 41,
+            "coefficient": "-(eps^3*(b*s-s^2+t-s*t))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "(2*(-eps^2+eps^3))/3"
+          },
+          {
+            "column": 5,
+            "coefficient": "(2*(2*eps^2+b*eps^2))/(3*(2+b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(-2*(-eps^2+b*eps^2))/(3*(2+b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(-2*eps^2*s)/(3*(2+b-s))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(-2*(b*eps^3-eps^3*s))/(2+b-s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "(eps^2*(-1+b-s)*(b-s))/(3*(2+b-s))"
+          },
+          {
+            "column": 42,
+            "coefficient": "(eps^3*s*(-1+3*t))/3"
+          },
+          {
+            "column": 43,
+            "coefficient": "(eps^3*s*(-1+t))/3"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "eps^2-eps^3"
+          },
+          {
+            "column": 5,
+            "coefficient": "(2*(2*eps^2+b*eps^2))/(2+b-s)"
+          },
+          {
+            "column": 6,
+            "coefficient": "(-2*(-eps^2+b*eps^2))/(2+b-s)"
+          },
+          {
+            "column": 9,
+            "coefficient": "(-2*eps^2*s)/(2+b-s)"
+          },
+          {
+            "column": 18,
+            "coefficient": "(-6*(b*eps^3-eps^3*s))/(2+b-s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "(eps^2*(-1+b-s)*(b-s))/(2+b-s)"
+          },
+          {
+            "column": 42,
+            "coefficient": "-(eps^3*s)"
+          },
+          {
+            "column": 43,
+            "coefficient": "eps^3*s*(-1+t)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(eps^2*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(8*b*root3*root4)"
+          },
+          {
+            "column": 1,
+            "coefficient": "-1/16*(eps^2*(-1+s)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(b*root3*root4)"
+          },
+          {
+            "column": 7,
+            "coefficient": "-1/8*(eps^2*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(b*root3*root4)"
+          },
+          {
+            "column": 8,
+            "coefficient": "(eps^2*(-1+t)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(16*b*root3*root4)"
+          },
+          {
+            "column": 10,
+            "coefficient": "(eps^3*(b-s)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(4*b*root3*root4)"
+          },
+          {
+            "column": 15,
+            "coefficient": "-1/4*(eps^3*(b-t)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(b*root3*root4)"
+          },
+          {
+            "column": 20,
+            "coefficient": "(-3*eps^4*(b-t)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(4*b*root3*root4)"
+          },
+          {
+            "column": 21,
+            "coefficient": "-1/8*(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t)*(-b+b*s-s^2+t-s*t))/(b*root3*root4)"
+          },
+          {
+            "column": 22,
+            "coefficient": "-1/2*(eps^4*(b-s)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(b*root3*root4)"
+          },
+          {
+            "column": 23,
+            "coefficient": "(4*b^3*eps^4-b^4*eps^4-8*b^2*eps^4*s+2*b^3*eps^4*s+4*b*eps^4*s^2-b^2*eps^4*s^2-20*b^2*eps^4*t+5*b^3*eps^4*t+24*b*eps^4*s*t-5*b^2*eps^4*s*t-4*eps^4*s^2*t+16*b*eps^4*t^2-4*b^2*eps^4*t^2-16*eps^4*s*t^2)/(4*b*root3*root4)"
+          },
+          {
+            "column": 24,
+            "coefficient": "(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t)*(-b+s+b*t-s*t-t^2))/(8*b*root3*root4)"
+          },
+          {
+            "column": 25,
+            "coefficient": "(eps^4*(b-t)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(2*b*root3*root4)"
+          },
+          {
+            "column": 26,
+            "coefficient": "(eps^4*(b-s-t)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(2*b*root3*root4)"
+          },
+          {
+            "column": 28,
+            "coefficient": "-1/2*(eps^4*(b-s-t)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(b*root3*root4)"
+          },
+          {
+            "column": 44,
+            "coefficient": "(eps^4*(b-s-t)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/(b*root3*root4)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-1/8*(eps^2*(b^2-b*s-b*t+2*s*t))/(b*(b-s-t))"
+          },
+          {
+            "column": 1,
+            "coefficient": "(eps^2*(-1+s)*(b^2-b*s-b*t+2*s*t))/(16*b*(b-s-t))"
+          },
+          {
+            "column": 5,
+            "coefficient": "eps^2"
+          },
+          {
+            "column": 6,
+            "coefficient": "-1/2*((-1+b)*eps^2)"
+          },
+          {
+            "column": 7,
+            "coefficient": "-1/8*(eps^2*(b^2-b*s-b*t-2*s*t))/(b*(b-s-t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "(eps^2*(-1+t)*(b^2-b*s-b*t-2*s*t))/(16*b*(b-s-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/4*(eps^3*(b-s)*(b^2-b*s-b*t+2*s*t))/(b*(b-s-t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "(eps^3*s*(b-t)*t)/(2*b*(b-s-t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(3*eps^4*s*(b-t)*t)/(2*b*(b-s-t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "(eps^3*s*t*(-b+b*s-s^2+t-s*t))/(4*b*(b-s-t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "(eps^4*(b-s)*s*t)/(b*(b-s-t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(-2*b^2*eps^4*t+3*b*eps^4*s*t-eps^4*s^2*t+2*b*eps^4*t^2-4*eps^4*s*t^2)/(2*b*(b-s-t))"
+          },
+          {
+            "column": 24,
+            "coefficient": "-1/4*(eps^3*s*t*(-b+s+b*t-s*t-t^2))/(b*(b-s-t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "-((eps^4*s*(b-t)*t)/(b*(b-s-t)))"
+          },
+          {
+            "column": 26,
+            "coefficient": "(b^2*eps^4-b*eps^4*s-b*eps^4*t-eps^4*s*t)/b"
+          },
+          {
+            "column": 28,
+            "coefficient": "(b^2*eps^4-b*eps^4*s-b*eps^4*t+2*eps^4*s*t)/(2*b)"
+          },
+          {
+            "column": 44,
+            "coefficient": "(eps^4*(b*s-2*s*t))/b"
+          },
+          {
+            "column": 45,
+            "coefficient": "-(eps^4*(b-t))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-1/4*((-4+b)*(b^2*eps+12*b^2*eps^2-b*eps*s-12*b*eps^2*s-b*eps*t-12*b*eps^2*t+8*eps^2*s*t))/(b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 1,
+            "coefficient": "((-4+b)*(-1+s)*(b^2*eps+12*b^2*eps^2-b*eps*s-12*b*eps^2*s-b*eps*t-12*b*eps^2*t+8*eps^2*s*t))/(8*b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 5,
+            "coefficient": "(2*(-4+b)*eps^2)/root1^2"
+          },
+          {
+            "column": 6,
+            "coefficient": "-(((-4+b)*(-1+b)*eps^2)/root1^2)"
+          },
+          {
+            "column": 7,
+            "coefficient": "((-4+b)*(b^2*eps+4*b^2*eps^2-b*eps*s-4*b*eps^2*s-b*eps*t-4*b*eps^2*t+8*eps^2*s*t))/(4*b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "-1/8*((-4+b)*(-1+t)*(b^2*eps+4*b^2*eps^2-b*eps*s-4*b*eps^2*s-b*eps*t-4*b*eps^2*t+8*eps^2*s*t))/(b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/2*((-4+b)*(b-s)*(b^2*eps^2+12*b^2*eps^3-b*eps^2*s-12*b*eps^3*s-b*eps^2*t-12*b*eps^3*t+8*eps^3*s*t))/(b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "((-4+b)*(b-t)*(b^2*eps^2+4*b^2*eps^3-b*eps^2*s-4*b*eps^3*s-b*eps^2*t-4*b*eps^3*t+8*eps^3*s*t))/(2*b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(-12*b^3*eps^3+3*b^4*eps^3-112*b^3*eps^4+28*b^4*eps^4+12*b^2*eps^3*s-3*b^3*eps^3*s+112*b^2*eps^4*s-28*b^3*eps^4*s+24*b^2*eps^3*t-6*b^3*eps^3*t+224*b^2*eps^4*t-56*b^3*eps^4*t-12*b*eps^3*s*t+3*b^2*eps^3*s*t-208*b*eps^4*s*t+52*b^2*eps^4*s*t-12*b*eps^3*t^2+3*b^2*eps^3*t^2-112*b*eps^4*t^2+28*b^2*eps^4*t^2+96*eps^4*s*t^2-24*b*eps^4*s*t^2)/(2*b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "-1/4*((-4+b)*(b^3*eps^2+4*b^3*eps^3+4*b^4*eps^3-b^2*eps^2*s-b^3*eps^2*s-4*b^2*eps^3*s-20*b^3*eps^3*s+2*b^2*eps^2*s^2+28*b^2*eps^3*s^2-b*eps^2*s^3-12*b*eps^3*s^3-2*b^2*eps^2*t-8*b^2*eps^3*t-8*b^3*eps^3*t+b*eps^2*s*t+2*b^2*eps^2*s*t+12*b*eps^3*s*t+32*b^2*eps^3*s*t-2*b*eps^2*s^2*t-32*b*eps^3*s^2*t+8*eps^3*s^3*t+b*eps^2*t^2+4*b*eps^3*t^2+4*b^2*eps^3*t^2-b*eps^2*s*t^2-8*eps^3*s*t^2-12*b*eps^3*s*t^2+8*eps^3*s^2*t^2))/(b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "(-4*b^3*eps^3+b^4*eps^3-48*b^3*eps^4+12*b^4*eps^4+8*b^2*eps^3*s-2*b^3*eps^3*s+96*b^2*eps^4*s-24*b^3*eps^4*s-4*b*eps^3*s^2+b^2*eps^3*s^2-48*b*eps^4*s^2+12*b^2*eps^4*s^2+4*b^2*eps^3*t-b^3*eps^3*t+48*b^2*eps^4*t-12*b^3*eps^4*t-4*b*eps^3*s*t+b^2*eps^3*s*t-80*b*eps^4*s*t+20*b^2*eps^4*s*t+32*eps^4*s^2*t-8*b*eps^4*s^2*t)/(b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(-4*b^3*eps^3+b^4*eps^3-48*b^3*eps^4+12*b^4*eps^4+8*b^2*eps^3*s-2*b^3*eps^3*s+96*b^2*eps^4*s-24*b^3*eps^4*s-4*b*eps^3*s^2+b^2*eps^3*s^2-48*b*eps^4*s^2+12*b^2*eps^4*s^2+20*b^2*eps^3*t-5*b^3*eps^3*t+240*b^2*eps^4*t-60*b^3*eps^4*t-20*b*eps^3*s*t+5*b^2*eps^3*s*t-272*b*eps^4*s*t+68*b^2*eps^4*s*t+32*eps^4*s^2*t-8*b*eps^4*s^2*t-16*b*eps^3*t^2+4*b^2*eps^3*t^2-192*b*eps^4*t^2+48*b^2*eps^4*t^2+128*eps^4*s*t^2-32*b*eps^4*s*t^2)/(2*b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 24,
+            "coefficient": "-1/4*((-4+b)*(-(b^3*eps^2)-12*b^3*eps^3+4*b^4*eps^3+2*b^2*eps^2*s+24*b^2*eps^3*s-8*b^3*eps^3*s-b*eps^2*s^2-12*b*eps^3*s^2+4*b^2*eps^3*s^2+b^2*eps^2*t+b^3*eps^2*t+12*b^2*eps^3*t-4*b^3*eps^3*t-b*eps^2*s*t-2*b^2*eps^2*s*t-20*b*eps^3*s*t+b*eps^2*s^2*t+8*eps^3*s^2*t+4*b*eps^3*s^2*t-2*b^2*eps^2*t^2-4*b^2*eps^3*t^2+2*b*eps^2*s*t^2+16*b*eps^3*s*t^2-8*eps^3*s^2*t^2+b*eps^2*t^3+4*b*eps^3*t^3-8*eps^3*s*t^3))/(b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "(4*b^3*eps^3-b^4*eps^3+48*b^3*eps^4-12*b^4*eps^4-4*b^2*eps^3*s+b^3*eps^3*s-48*b^2*eps^4*s+12*b^3*eps^4*s-8*b^2*eps^3*t+2*b^3*eps^3*t-96*b^2*eps^4*t+24*b^3*eps^4*t+4*b*eps^3*s*t-b^2*eps^3*s*t+80*b*eps^4*s*t-20*b^2*eps^4*s*t+4*b*eps^3*t^2-b^2*eps^3*t^2+48*b*eps^4*t^2-12*b^2*eps^4*t^2-32*eps^4*s*t^2+8*b*eps^4*s*t^2)/(b*root1^2*(b-s-t))"
+          },
+          {
+            "column": 26,
+            "coefficient": "(4*b^2*eps^3-b^3*eps^3+48*b^2*eps^4-12*b^3*eps^4-4*b*eps^3*s+b^2*eps^3*s-48*b*eps^4*s+12*b^2*eps^4*s-4*b*eps^3*t+b^2*eps^3*t-48*b*eps^4*t+12*b^2*eps^4*t+32*eps^4*s*t-8*b*eps^4*s*t)/(b*root1^2)"
+          },
+          {
+            "column": 27,
+            "coefficient": "-(((-4+b)*eps^3*(b^2-b*s-b*t+2*s*t))/root1^2)"
+          },
+          {
+            "column": 28,
+            "coefficient": "((-4+b)*(b^2*eps^3+12*b^2*eps^4-b*eps^3*s-12*b*eps^4*s-b*eps^3*t-12*b*eps^4*t+8*eps^4*s*t))/(b*root1^2)"
+          },
+          {
+            "column": 44,
+            "coefficient": "(-2*(-4+b)*(b^2*eps^3+8*b^2*eps^4-b*eps^3*s-12*b*eps^4*s-b*eps^3*t-8*b*eps^4*t+8*eps^4*s*t))/(b*root1^2)"
+          },
+          {
+            "column": 45,
+            "coefficient": "(-8*(-4+b)*eps^4*(b-t))/root1^2"
+          },
+          {
+            "column": 46,
+            "coefficient": "((-4+b)*eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))/root1^2"
+          }
+        ],
+        [
+          {
+            "column": 47,
+            "coefficient": "-((eps^4*(-4+b-s)*(b-s)^2)/(root5*root6))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-eps^2+eps^3"
+          },
+          {
+            "column": 5,
+            "coefficient": "(10*eps^2+5*b*eps^2+3*eps^2*s)/(2*(2+b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(10*eps^2-13*b*eps^2+3*b^2*eps^2+3*eps^2*s-3*b*eps^2*s)/(4*(2+b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(-22*eps^2*s+b*eps^2*s-eps^2*s^2)/(6*(2+b-s))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(3*(-2*b*eps^3+b^2*eps^3+2*eps^3*s-2*b*eps^3*s+eps^3*s^2))/(2+b-s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "(2*eps^2*(-1+b-s)*(b-s))/(2+b-s)"
+          },
+          {
+            "column": 42,
+            "coefficient": "eps^3*s"
+          },
+          {
+            "column": 43,
+            "coefficient": "-(eps^3*s*(-1+t))"
+          },
+          {
+            "column": 48,
+            "coefficient": "-(eps^4*s*(b-t))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "(7*(-eps^2+eps^3))/3"
+          },
+          {
+            "column": 5,
+            "coefficient": "(7*(10*eps^2+5*b*eps^2+3*eps^2*s))/(6*(2+b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(7*(10*eps^2-13*b*eps^2+3*b^2*eps^2+3*eps^2*s-3*b*eps^2*s))/(12*(2+b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(-34*eps^2*s-3*b*eps^2*s+3*eps^2*s^2)/(3*(2+b-s))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(7*(-2*b*eps^3+b^2*eps^3+2*eps^3*s-2*b*eps^3*s+eps^3*s^2))/(2+b-s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "(14*(-(b*eps^2)+b^2*eps^2+eps^2*s-2*b*eps^2*s+eps^2*s^2))/(3*(2+b-s))"
+          },
+          {
+            "column": 37,
+            "coefficient": "-(eps^4*t)"
+          },
+          {
+            "column": 42,
+            "coefficient": "(11*eps^3*s+3*eps^3*s*t)/6"
+          },
+          {
+            "column": 43,
+            "coefficient": "(-11*(-(eps^3*s)+eps^3*s*t))/6"
+          },
+          {
+            "column": 48,
+            "coefficient": "eps^4*s*t"
+          },
+          {
+            "column": 49,
+            "coefficient": "-(eps^4*s)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "((-4+b)*b*(-3*b*eps^2+2*eps^2*s+2*b*eps^2*s)*(-1+t))/(4*root1^2*(b-2*s)*(-b-2*t+b*t))"
+          },
+          {
+            "column": 1,
+            "coefficient": "((-4+b)*b*eps^2*(3*b-2*s)*(-1+s)*(-1+t))/(8*root1^2*(b-2*s)*(-b-2*t+b*t))"
+          },
+          {
+            "column": 2,
+            "coefficient": "-1/6*((-4+b)*b*(-eps^2+eps^3)*(11*b-16*s)*(-1+t))/(root1^2*(b-2*s)*(-b-2*t+b*t))"
+          },
+          {
+            "column": 5,
+            "coefficient": "(-40*b*eps^2+14*b^2*eps^2+11*b^3*eps^2-3*b^4*eps^2+12*b*eps^2*s+9*b^2*eps^2*s-3*b^3*eps^2*s+40*b*eps^2*t-14*b^2*eps^2*t-11*b^3*eps^2*t+3*b^4*eps^2*t-12*b*eps^2*s*t-9*b^2*eps^2*s*t+3*b^3*eps^2*s*t)/(6*root1^2*(2+b-s)*(-b-2*t+b*t))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(-40*b*eps^2+86*b^2*eps^2-55*b^3*eps^2+9*b^4*eps^2+12*b*eps^2*s-15*b^2*eps^2*s+3*b^3*eps^2*s+40*b*eps^2*t-86*b^2*eps^2*t+55*b^3*eps^2*t-9*b^4*eps^2*t-12*b*eps^2*s*t+15*b^2*eps^2*s*t-3*b^3*eps^2*s*t)/(12*root1^2*(2+b-s)*(-b-2*t+b*t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "-1/4*((-4+b)*b*eps^2*(-1+t))/(root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "((-4+b)*b*eps^2*(-1+t)^2)/(8*root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-1/3*((-4+b)*b*(eps^2*s-3*b*eps^2*s-eps^2*s*t+3*b*eps^2*s*t))/(root1^2*(2+b-s)*(-b-2*t+b*t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "((-4+b)*b*eps^3*(2*b^2-2*b*s-s^2)*(-1+t))/(root1^2*(b-2*s)*(-b-2*t+b*t))"
+          },
+          {
+            "column": 11,
+            "coefficient": "-(((-4+b)*b^2*eps^2*(-b+b*s-s^2)*(-1+t))/(root1^2*(b-2*s)*(-b-2*t+b*t)))"
+          },
+          {
+            "column": 14,
+            "coefficient": "((-4+b)*b^2*eps^2*(-1+t))/(root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "-1/2*((-4+b)*b*eps^3*(b-t)*(-1+t))/(root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 17,
+            "coefficient": "((-4+b)*b^2*eps^2*s*(-1+t))/(root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(12*b^2*eps^3-11*b^3*eps^3+2*b^4*eps^3-4*b*eps^3*s+9*b^2*eps^3*s-2*b^3*eps^3*s-12*b^2*eps^3*t+11*b^3*eps^3*t-2*b^4*eps^3*t+4*b*eps^3*s*t-9*b^2*eps^3*s*t+2*b^3*eps^3*s*t)/(root1^2*(2+b-s)*(-b-2*t+b*t))"
+          },
+          {
+            "column": 19,
+            "coefficient": "(28*b^2*eps^2-35*b^3*eps^2+7*b^4*eps^2-4*b*eps^2*s+33*b^2*eps^2*s-8*b^3*eps^2*s-4*b*eps^2*s^2+b^2*eps^2*s^2-28*b^2*eps^2*t+35*b^3*eps^2*t-7*b^4*eps^2*t+4*b*eps^2*s*t-33*b^2*eps^2*s*t+8*b^3*eps^2*s*t+4*b*eps^2*s^2*t-b^2*eps^2*s^2*t)/(6*root1^2*(2+b-s)*(-b-2*t+b*t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "((-4+b)*b*eps^4*(b-t)*(-1+t))/(root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 29,
+            "coefficient": "(-4*b^2*eps^4+b^3*eps^4-4*b*eps^4*s+b^2*eps^4*s+4*b^2*eps^4*t-b^3*eps^4*t+4*b*eps^4*s*t-b^2*eps^4*s*t)/(root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 31,
+            "coefficient": "((-4+b)*b^2*eps^3*(b+s)*(-1+t))/(2*root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 32,
+            "coefficient": "-(((-4+b)*b^2*eps^2*s*(-1+t))/(root1^2*(-b-2*t+b*t)))"
+          },
+          {
+            "column": 37,
+            "coefficient": "((-4+b)*b*eps^4*(-1+t)*(s+3*t))/(2*root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 38,
+            "coefficient": "((-4+b)*b*eps^3*(-1+t)*(-s-t+s*t))/(4*root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 42,
+            "coefficient": "-1/6*((-4+b)*b*(-1+t)*(-(eps^3*s)+3*eps^3*s*t))/(root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 43,
+            "coefficient": "-1/6*((-4+b)*b*eps^3*s*(-1+t)^2)/(root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 48,
+            "coefficient": "-(((-4+b)*b*eps^4*s*t*(1+t))/(root1^2*(-b-2*t+b*t)))"
+          },
+          {
+            "column": 49,
+            "coefficient": "((-4+b)*b*eps^4*s*(-1+t))/(root1^2*(-b-2*t+b*t))"
+          },
+          {
+            "column": 50,
+            "coefficient": "((-4+b)*b*eps^3*s*(-b+b*t-t^2))/(root1^2*(-b-2*t+b*t))"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "(eps^2+b*eps^2-eps^2*s-eps^2*t)/4"
+          },
+          {
+            "column": 4,
+            "coefficient": "-1/8*(eps^2*(-1+b-s-t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-1/6*(eps^2*s)"
+          },
+          {
+            "column": 12,
+            "coefficient": "(eps^3*(s+t))/2"
+          },
+          {
+            "column": 51,
+            "coefficient": "eps^4*s*(s+t)"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "eps^2/2"
+          },
+          {
+            "column": 4,
+            "coefficient": "(eps^2-b*eps^2+eps^2*s+eps^2*t)/4"
+          },
+          {
+            "column": 5,
+            "coefficient": "(2*eps^2+b*eps^2)/(3*(2+b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(eps^2-b*eps^2)/(3*(2+b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(5*eps^2*s+3*b*eps^2*s-3*eps^2*s^2)/(3*(2+b-s))"
+          },
+          {
+            "column": 12,
+            "coefficient": "(eps^3*s+eps^3*t)/8"
+          },
+          {
+            "column": 18,
+            "coefficient": "(-(b*eps^3)+eps^3*s)/(2+b-s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "(eps^2*(-1+b-s)*(b-s))/(6*(2+b-s))"
+          },
+          {
+            "column": 20,
+            "coefficient": "eps^4*(b-t)"
+          },
+          {
+            "column": 33,
+            "coefficient": "eps^4*s"
+          },
+          {
+            "column": 34,
+            "coefficient": "(eps^3*s)/3"
+          },
+          {
+            "column": 35,
+            "coefficient": "(eps^3*s*(1-b+s+t))/3"
+          },
+          {
+            "column": 51,
+            "coefficient": "eps^4*s*t"
+          },
+          {
+            "column": 52,
+            "coefficient": "-(eps^4*s)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "((-4+b)*b*(-3*b*eps^2+2*eps^2*s+2*b*eps^2*s)*(-1+b-s-t))/(4*root1^2*(b-2*s)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 1,
+            "coefficient": "((-4+b)*b*eps^2*(3*b-2*s)*(-1+s)*(-1+b-s-t))/(8*root1^2*(b-2*s)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 2,
+            "coefficient": "-1/12*((-4+b)*b*(-eps^2+eps^3)*(-13*b^2+19*b^3+52*b*s-89*b^2*s-52*s^2+134*b*s^2-64*s^3+38*b*t-63*b^2*t-52*s*t+178*b*s*t-128*s^2*t+44*b*t^2-64*s*t^2))/(root1^2*(b-2*s)*(b-2*s-2*t)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 3,
+            "coefficient": "(8*b^2*eps^2-14*b^3*eps^2+7*b^4*eps^2-b^5*eps^2+12*b^2*eps^2*s-11*b^3*eps^2*s+2*b^4*eps^2*s+4*b^2*eps^2*s^2-b^3*eps^2*s^2+12*b^2*eps^2*t-11*b^3*eps^2*t+2*b^4*eps^2*t+8*b^2*eps^2*s*t-2*b^3*eps^2*s*t+4*b^2*eps^2*t^2-b^3*eps^2*t^2)/(4*root1^2*(b-2*s-2*t)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 4,
+            "coefficient": "-1/4*((-4+b)*b*eps^2*(-1+b-s-t)*(-b+b*s-s^2+b*t-2*s*t-t^2))/(root1^2*(b-2*s-2*t)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 5,
+            "coefficient": "(-40*b*eps^2+54*b^2*eps^2-3*b^3*eps^2-14*b^4*eps^2+3*b^5*eps^2-28*b*eps^2*s+11*b^2*eps^2*s-b^3*eps^2*s+12*b*eps^2*s^2+9*b^2*eps^2*s^2-3*b^3*eps^2*s^2-40*b*eps^2*t+14*b^2*eps^2*t+11*b^3*eps^2*t-3*b^4*eps^2*t+12*b*eps^2*s*t+9*b^2*eps^2*s*t-3*b^3*eps^2*s*t)/(6*root1^2*(2+b-s)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(-40*b*eps^2+126*b^2*eps^2-141*b^3*eps^2+64*b^4*eps^2-9*b^5*eps^2-28*b*eps^2*s+59*b^2*eps^2*s-37*b^3*eps^2*s+6*b^4*eps^2*s+12*b*eps^2*s^2-15*b^2*eps^2*s^2+3*b^3*eps^2*s^2-40*b*eps^2*t+86*b^2*eps^2*t-55*b^3*eps^2*t+9*b^4*eps^2*t+12*b*eps^2*s*t-15*b^2*eps^2*s*t+3*b^3*eps^2*s*t)/(12*root1^2*(2+b-s)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(4*b*eps^2*s-17*b^2*eps^2*s+16*b^3*eps^2*s-3*b^4*eps^2*s+4*b*eps^2*s^2-13*b^2*eps^2*s^2+3*b^3*eps^2*s^2+4*b*eps^2*s*t-13*b^2*eps^2*s*t+3*b^3*eps^2*s*t)/(3*root1^2*(2+b-s)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "((-4+b)*b*eps^3*(2*b^2-2*b*s-s^2)*(-1+b-s-t))/(root1^2*(b-2*s)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 11,
+            "coefficient": "-(((-4+b)*b^2*eps^2*(-b+b*s-s^2)*(-1+b-s-t))/(root1^2*(b-2*s)*(-3*b+b^2+2*s-b*s+2*t-b*t)))"
+          },
+          {
+            "column": 12,
+            "coefficient": "(-44*b^2*eps^3*s+31*b^3*eps^3*s-5*b^4*eps^3*s+40*b*eps^3*s^2-46*b^2*eps^3*s^2+9*b^3*eps^3*s^2+16*b*eps^3*s^3-4*b^2*eps^3*s^3-44*b^2*eps^3*t+31*b^3*eps^3*t-5*b^4*eps^3*t+80*b*eps^3*s*t-92*b^2*eps^3*s*t+18*b^3*eps^3*s*t+48*b*eps^3*s^2*t-12*b^2*eps^3*s^2*t+40*b*eps^3*t^2-46*b^2*eps^3*t^2+9*b^3*eps^3*t^2+48*b*eps^3*s*t^2-12*b^2*eps^3*s*t^2+16*b*eps^3*t^3-4*b^2*eps^3*t^3)/(4*root1^2*(b-2*s-2*t)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 13,
+            "coefficient": "((-4+b)*b*eps^2*(-b+b*s-s^2+b*t-2*s*t-t^2))/(2*root1^2*(b-2*s-2*t))"
+          },
+          {
+            "column": 14,
+            "coefficient": "((-4+b)*b^2*eps^2*(-1+b-s-t))/(root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 17,
+            "coefficient": "((-4+b)*b^2*eps^2*s*(-1+b-s-t))/(root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(12*b^2*eps^3-23*b^3*eps^3+13*b^4*eps^3-2*b^5*eps^3-4*b*eps^3*s+25*b^2*eps^3*s-22*b^3*eps^3*s+4*b^4*eps^3*s-4*b*eps^3*s^2+9*b^2*eps^3*s^2-2*b^3*eps^3*s^2+12*b^2*eps^3*t-11*b^3*eps^3*t+2*b^4*eps^3*t-4*b*eps^3*s*t+9*b^2*eps^3*s*t-2*b^3*eps^3*s*t)/(root1^2*(2+b-s)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 19,
+            "coefficient": "(28*b^2*eps^2-63*b^3*eps^2+42*b^4*eps^2-7*b^5*eps^2-4*b*eps^2*s+65*b^2*eps^2*s-76*b^3*eps^2*s+15*b^4*eps^2*s-8*b*eps^2*s^2+38*b^2*eps^2*s^2-9*b^3*eps^2*s^2-4*b*eps^2*s^3+b^2*eps^2*s^3+28*b^2*eps^2*t-35*b^3*eps^2*t+7*b^4*eps^2*t-4*b*eps^2*s*t+33*b^2*eps^2*s*t-8*b^3*eps^2*s*t-4*b*eps^2*s^2*t+b^2*eps^2*s^2*t)/(6*root1^2*(2+b-s)*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(3*(-4+b)*b*eps^4*(b-t)*(-1+b-s-t))/(2*root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "((-4+b)*b*eps^3*(-1+b-s-t)*(-b+b*s-s^2+t-s*t))/(4*root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 29,
+            "coefficient": "(-4*b^2*eps^4+5*b^3*eps^4-b^4*eps^4-4*b*eps^4*s+b^2*eps^4*s-4*b*eps^4*s^2+b^2*eps^4*s^2-4*b^2*eps^4*t+b^3*eps^4*t-4*b*eps^4*s*t+b^2*eps^4*s*t)/(root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 31,
+            "coefficient": "((-4+b)*b^2*eps^3*(b+s)*(-1+b-s-t))/(2*root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 32,
+            "coefficient": "-(((-4+b)*b^2*eps^2*s*(-1+b-s-t))/(root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t)))"
+          },
+          {
+            "column": 33,
+            "coefficient": "(8*b*eps^4*s-10*b^2*eps^4*s+2*b^3*eps^4*s+8*b*eps^4*s^2-2*b^2*eps^4*s^2+4*b*eps^4*t-5*b^2*eps^4*t+b^3*eps^4*t+12*b*eps^4*s*t-3*b^2*eps^4*s*t+4*b*eps^4*t^2-b^2*eps^4*t^2)/(root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 34,
+            "coefficient": "-1/6*((-4+b)*b*eps^3*s*(-1+3*b-3*s-3*t)*(-1+b-s-t))/(root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 35,
+            "coefficient": "-1/6*((-4+b)*b*eps^3*s*(-1+b-s-t)^2)/(root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 51,
+            "coefficient": "(8*b^2*eps^4*s-2*b^3*eps^4*s-8*b*eps^4*s^2+2*b^2*eps^4*s^2-4*b*eps^4*s*t-3*b^2*eps^4*s*t+b^3*eps^4*s*t+4*b*eps^4*s^2*t-b^2*eps^4*s^2*t+4*b*eps^4*s*t^2-b^2*eps^4*s*t^2)/(root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          },
+          {
+            "column": 52,
+            "coefficient": "-(((-4+b)*b*eps^4*s*(-1+b-s-t))/(root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t)))"
+          },
+          {
+            "column": 53,
+            "coefficient": "((-4+b)*b*eps^3*s*(-b+b*s-s^2+b*t-2*s*t-t^2))/(root1^2*(-3*b+b^2+2*s-b*s+2*t-b*t))"
+          }
+        ],
+        [
+          {
+            "column": 54,
+            "coefficient": "-((eps^4*t*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))/(root7*root8))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-1/8*(eps^2*(s+t))/t"
+          },
+          {
+            "column": 1,
+            "coefficient": "(eps^2*(-1+s)*(s+t))/(16*t)"
+          },
+          {
+            "column": 3,
+            "coefficient": "-1/8*(eps^2*(-s+t))/t"
+          },
+          {
+            "column": 4,
+            "coefficient": "-1/16*(eps^2*(-1+b-s-t)*(s-t))/t"
+          },
+          {
+            "column": 5,
+            "coefficient": "(3*eps^2)/2"
+          },
+          {
+            "column": 6,
+            "coefficient": "(-3*(-eps^2+b*eps^2))/4"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/4*(eps^3*(b-s)*(s+t))/t"
+          },
+          {
+            "column": 12,
+            "coefficient": "-1/4*(eps^3*(-s+t)*(s+t))/t"
+          },
+          {
+            "column": 22,
+            "coefficient": "(eps^4*(b-s)*s)/(2*t)"
+          },
+          {
+            "column": 23,
+            "coefficient": "(-3*b*eps^4*s+3*eps^4*s^2-5*b*eps^4*t+9*eps^4*s*t+4*eps^4*t^2)/(4*t)"
+          },
+          {
+            "column": 24,
+            "coefficient": "(eps^3*(s-t)*(b-s-b*t+s*t+t^2))/(8*t)"
+          },
+          {
+            "column": 33,
+            "coefficient": "-1/2*(eps^4*(s+t)*(s+2*t))/t"
+          },
+          {
+            "column": 37,
+            "coefficient": "(eps^4*(s+t)*(3*s+t))/(4*t)"
+          },
+          {
+            "column": 38,
+            "coefficient": "(eps^3*(s-t)*(-s-t+s*t))/(8*t)"
+          },
+          {
+            "column": 39,
+            "coefficient": "(eps^4*(s+2*t))/2"
+          },
+          {
+            "column": 40,
+            "coefficient": "-1/2*(eps^4*s)"
+          },
+          {
+            "column": 54,
+            "coefficient": "(eps^4*s*(-b+2*s+2*t))/2"
+          },
+          {
+            "column": 55,
+            "coefficient": "-(eps^4*(s+t))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "((-4+b)*eps^2*(s+t))/(4*root1^2*t)"
+          },
+          {
+            "column": 1,
+            "coefficient": "-1/8*((-4+b)*eps^2*(-1+s)*(s+t))/(root1^2*t)"
+          },
+          {
+            "column": 3,
+            "coefficient": "((-4+b)*eps^2*(-s+t))/(4*root1^2*t)"
+          },
+          {
+            "column": 4,
+            "coefficient": "((-4+b)*eps^2*(-1+b-s-t)*(s-t))/(8*root1^2*t)"
+          },
+          {
+            "column": 5,
+            "coefficient": "(4*eps^2-b*eps^2)/(2*root1^2)"
+          },
+          {
+            "column": 6,
+            "coefficient": "((-4+b)*(-eps^2+b*eps^2))/(4*root1^2)"
+          },
+          {
+            "column": 10,
+            "coefficient": "((-4+b)*eps^3*(b-s)*(s+t))/(2*root1^2*t)"
+          },
+          {
+            "column": 12,
+            "coefficient": "((-4+b)*eps^3*(-s+t)*(s+t))/(2*root1^2*t)"
+          },
+          {
+            "column": 22,
+            "coefficient": "-(((-4+b)*eps^4*(b-s)*(s+t))/(root1^2*t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(-12*b*eps^4*s+3*b^2*eps^4*s+12*eps^4*s^2-3*b*eps^4*s^2-12*b*eps^4*t+3*b^2*eps^4*t+28*eps^4*s*t-7*b*eps^4*s*t+16*eps^4*t^2-4*b*eps^4*t^2)/(2*root1^2*t)"
+          },
+          {
+            "column": 24,
+            "coefficient": "-1/4*((-4+b)*eps^3*(-2*b*s+b^2*s+2*s^2-b*s^2-2*b*t+b^2*t+2*s*t-3*b*s*t-b^2*s*t+2*s^2*t+b*s^2*t-4*b*t^2+b^2*t^2+4*s*t^2+2*t^3-b*t^3))/((-2+b)*root1^2*t)"
+          },
+          {
+            "column": 33,
+            "coefficient": "((-4+b)*eps^4*(s+t)^2)/(root1^2*t)"
+          },
+          {
+            "column": 37,
+            "coefficient": "-1/2*((-4+b)*eps^4*(s+t)*(3*s+t))/(root1^2*t)"
+          },
+          {
+            "column": 38,
+            "coefficient": "-1/4*((-4+b)*eps^3*(2*s^2-b*s^2-4*b*s*t+2*s^2*t+b*s^2*t-2*t^2-b*t^2+2*s*t^2+b*s*t^2))/((-2+b)*root1^2*t)"
+          },
+          {
+            "column": 39,
+            "coefficient": "(4*eps^4*s-b*eps^4*s+4*eps^4*t-b*eps^4*t)/root1^2"
+          },
+          {
+            "column": 40,
+            "coefficient": "(-4*eps^4*s+b*eps^4*s-4*eps^4*t+b*eps^4*t)/root1^2"
+          },
+          {
+            "column": 41,
+            "coefficient": "((-4+b)*b*eps^3*(b*s-s^2+t-s*t))/(2*(-2+b)*root1^2)"
+          },
+          {
+            "column": 54,
+            "coefficient": "((-4+b)*(2*b*eps^3*s+4*b*eps^4*s+2*b^2*eps^4*s-2*eps^3*s^2-4*b*eps^4*s^2+b*eps^3*t+2*b^2*eps^4*t-2*eps^3*s*t-4*b*eps^4*s*t))/(2*(-2+b)*root1^2)"
+          },
+          {
+            "column": 55,
+            "coefficient": "(2*(-4+b)*eps^4*(s+t))/root1^2"
+          },
+          {
+            "column": 56,
+            "coefficient": "-1/2*((-4+b)*eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))/((-2+b)*root1^2)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(3*eps^2*(-(b^2*s)+b*s^2+2*b^2*t-b*s*t-2*b*t^2+s*t^2))/(16*b*(b-s-t)*t)"
+          },
+          {
+            "column": 1,
+            "coefficient": "(3*eps^2*(-1+s)*(b^2*s-b*s^2-2*b^2*t+b*s*t+2*b*t^2-s*t^2))/(32*b*(b-s-t)*t)"
+          },
+          {
+            "column": 3,
+            "coefficient": "(3*eps^2*s)/(16*t)"
+          },
+          {
+            "column": 4,
+            "coefficient": "(3*eps^2*s*(1-b+s+t))/(32*t)"
+          },
+          {
+            "column": 7,
+            "coefficient": "(-3*eps^2*s*t)/(16*b*(b-s-t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "(3*eps^2*s*(-1+t)*t)/(32*b*(b-s-t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-(eps^2*s)"
+          },
+          {
+            "column": 10,
+            "coefficient": "(-3*eps^3*(b-s)*(b^2*s-b*s^2-b^2*t+b*t^2-s*t^2))/(8*b*(b-s-t)*t)"
+          },
+          {
+            "column": 12,
+            "coefficient": "(3*(eps^3*s^2+eps^3*s*t))/(8*t)"
+          },
+          {
+            "column": 15,
+            "coefficient": "(3*eps^3*(b-t)*(2*b^2-2*b*s-2*b*t-s*t))/(8*b*(b-s-t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(-9*eps^4*s*(b-t)*t)/(8*b*(b-s-t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "(-3*eps^3*s*t*(-b+b*s-s^2+t-s*t))/(16*b*(b-s-t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "(3*eps^4*(b-s)*(b^2*s-b*s^2-b^2*t+b*t^2-s*t^2))/(4*b*(b-s-t)*t)"
+          },
+          {
+            "column": 23,
+            "coefficient": "(-3*(3*b^3*eps^4*s-6*b^2*eps^4*s^2+3*b*eps^4*s^3-7*b^2*eps^4*s*t+7*b*eps^4*s^2*t+5*b*eps^4*s*t^2-eps^4*s^2*t^2-4*eps^4*s*t^3))/(8*b*(b-s-t)*t)"
+          },
+          {
+            "column": 24,
+            "coefficient": "(-3*eps^3*(-b+s+b*t-s*t-t^2)*(b^2*s-b*s^2-b*s*t-s*t^2))/(16*b*(b-s-t)*t)"
+          },
+          {
+            "column": 25,
+            "coefficient": "(3*eps^4*s*(b-t)*t)/(4*b*(b-s-t))"
+          },
+          {
+            "column": 26,
+            "coefficient": "(3*eps^4*(b^2-b*s-b*t+s*t))/(4*b)"
+          },
+          {
+            "column": 28,
+            "coefficient": "(-3*eps^4*s*t)/(4*b)"
+          },
+          {
+            "column": 33,
+            "coefficient": "(3*(-(eps^4*s^2)+eps^4*t^2))/(4*t)"
+          },
+          {
+            "column": 37,
+            "coefficient": "(-3*(-3*eps^4*s^2-eps^4*s*t+2*eps^4*t^2))/(8*t)"
+          },
+          {
+            "column": 38,
+            "coefficient": "(3*eps^3*(s-2*t)*(-s-t+s*t))/(16*t)"
+          },
+          {
+            "column": 39,
+            "coefficient": "(3*eps^4*s)/4"
+          },
+          {
+            "column": 40,
+            "coefficient": "(-3*eps^4*s)/4"
+          },
+          {
+            "column": 44,
+            "coefficient": "(-3*eps^4*(b*s-s*t))/(2*b)"
+          },
+          {
+            "column": 54,
+            "coefficient": "(-3*eps^4*(b*s-2*s^2-s*t))/4"
+          },
+          {
+            "column": 55,
+            "coefficient": "(-3*eps^4*s)/2"
+          },
+          {
+            "column": 57,
+            "coefficient": "(3*eps^4*s*(-b+s-2*t))/4"
+          },
+          {
+            "column": 58,
+            "coefficient": "(-3*eps^4*s*(-b+s)*t)/4"
+          },
+          {
+            "column": 59,
+            "coefficient": "(3*eps^4*s)/2"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(-9*b^4*eps^2*s+36*b^3*eps^2*s^2-45*b^2*eps^2*s^3+18*b*eps^2*s^4-32*b^4*eps^2*t+113*b^3*eps^2*s*t-68*b^4*eps^2*s*t-139*b^2*eps^2*s^2*t+296*b^3*eps^2*s^2*t+58*b*eps^2*s^3*t-388*b^2*eps^2*s^3*t+160*b*eps^2*s^4*t+32*b^3*eps^2*t^2-66*b^2*eps^2*s*t^2+20*b^3*eps^2*s*t^2+10*b*eps^2*s^2*t^2-84*b^2*eps^2*s^2*t^2+36*eps^2*s^3*t^2+64*b*eps^2*s^3*t^2)/(120*b*(b-2*s)*(b-s)*(b-s-t)*t)"
+          },
+          {
+            "column": 1,
+            "coefficient": "(-9*b^4*eps^2*s+36*b^3*eps^2*s^2+9*b^4*eps^2*s^2-45*b^2*eps^2*s^3-36*b^3*eps^2*s^3+18*b*eps^2*s^4+45*b^2*eps^2*s^4-18*b*eps^2*s^5-32*b^4*eps^2*t+113*b^3*eps^2*s*t+32*b^4*eps^2*s*t-139*b^2*eps^2*s^2*t-113*b^3*eps^2*s^2*t+58*b*eps^2*s^3*t+139*b^2*eps^2*s^3*t-58*b*eps^2*s^4*t+32*b^3*eps^2*t^2-66*b^2*eps^2*s*t^2-32*b^3*eps^2*s*t^2+10*b*eps^2*s^2*t^2+66*b^2*eps^2*s^2*t^2+36*eps^2*s^3*t^2-10*b*eps^2*s^3*t^2-36*eps^2*s^4*t^2)/(240*b*(b-2*s)*(b-s)*(b-s-t)*t)"
+          },
+          {
+            "column": 2,
+            "coefficient": "(-2*b^2*eps^2+2*b^2*eps^3+9*b*eps^2*s-9*b*eps^3*s-7*eps^2*s^2+7*eps^3*s^2-4*b*eps^2*t+4*b*eps^3*t+5*eps^2*s*t-5*eps^3*s*t)/(15*(b-2*s)*(b-s-t))"
+          },
+          {
+            "column": 3,
+            "coefficient": "(-3*b*eps^2*s+3*eps^2*s^2-25*b*eps^2*t+28*eps^2*s*t+9*eps^2*t^2)/(40*t*(-b+s+t))"
+          },
+          {
+            "column": 4,
+            "coefficient": "(3*b*eps^2*s-3*b^2*eps^2*s-3*eps^2*s^2+6*b*eps^2*s^2-3*eps^2*s^3+25*b*eps^2*t-25*b^2*eps^2*t-28*eps^2*s*t+56*b*eps^2*s*t-31*eps^2*s^2*t-9*eps^2*t^2+34*b*eps^2*t^2-37*eps^2*s*t^2-9*eps^2*t^3)/(80*(b-s-t)*t)"
+          },
+          {
+            "column": 5,
+            "coefficient": "(8*b*eps^2+10*b^2*eps^2+3*b^3*eps^2-8*eps^2*s-40*b*eps^2*s+30*eps^2*s^2-3*b*eps^2*s^2-8*eps^2*t-10*b*eps^2*t-3*b^2*eps^2*t+54*eps^2*s*t-3*b*eps^2*s*t)/(30*(2+b-s)*(b-s-t))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(4*b*eps^2+17*b^2*eps^2-21*b^3*eps^2-4*eps^2*s-32*b*eps^2*s+36*b^2*eps^2*s+15*eps^2*s^2-15*b*eps^2*s^2-4*eps^2*t-29*b*eps^2*t+33*b^2*eps^2*t+27*eps^2*s*t-27*b*eps^2*s*t)/(30*(2+b-s)*(b-s-t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "-1/40*(eps^2*(5*b^3-10*b^2*s+5*b*s^2-5*b^2*t+7*b*s*t-6*s^2*t))/(b*(b-s)*(b-s-t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "(eps^2*(-1+t)*(5*b^3-10*b^2*s+5*b*s^2-5*b^2*t+7*b*s*t-6*s^2*t))/(80*b*(b-s)*(b-s-t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(13*b*eps^2*s-3*b^2*eps^2*s-13*eps^2*s^2+3*b*eps^2*s^2-13*eps^2*s*t+9*b*eps^2*s*t-6*eps^2*s^2*t)/(15*(2+b-s)*(b-s-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/20*(eps^3*(3*b^4*s-12*b^3*s^2+15*b^2*s^3-6*b*s^4-16*b^4*t+45*b^3*s*t-35*b^2*s^2*t+6*b*s^3*t+16*b^3*t^2-34*b^2*s*t^2+22*b*s^2*t^2-12*s^3*t^2))/(b*(b-2*s)*(b-s-t)*t)"
+          },
+          {
+            "column": 11,
+            "coefficient": "-1/5*(b*eps^2*(-b+b*s-s^2))/(b-2*s)"
+          },
+          {
+            "column": 12,
+            "coefficient": "(3*eps^3*s^2+8*eps^3*s*t+5*eps^3*t^2)/(20*t)"
+          },
+          {
+            "column": 14,
+            "coefficient": "(b*eps^2)/5"
+          },
+          {
+            "column": 15,
+            "coefficient": "-1/20*(eps^3*(b-t)*(3*b^3-6*b^2*s+3*b*s^2-3*b^2*t+5*b*s*t-6*s^2*t))/(b*(b-s)*(b-s-t))"
+          },
+          {
+            "column": 17,
+            "coefficient": "(b*eps^2*s)/5"
+          },
+          {
+            "column": 18,
+            "coefficient": "(-27*b^2*eps^3-23*b^3*eps^3+56*b*eps^3*s+67*b^2*eps^3*s-29*eps^3*s^2-65*b*eps^3*s^2+21*eps^3*s^3+19*b*eps^3*t+25*b^2*eps^3*t-21*eps^3*s*t-48*b*eps^3*s*t+23*eps^3*s^2*t)/(5*(2+b-s)*(b-s-t))"
+          },
+          {
+            "column": 19,
+            "coefficient": "-1/30*(eps^2*(-1+b-s)*(19*b^2-32*b*s+13*s^2-31*b*t+25*s*t))/((2+b-s)*(b-s-t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "-1/20*(eps^4*(b-t)*(13*b^3-34*b^2*s+21*b*s^2-13*b^2*t+27*b*s*t-18*s^2*t))/(b*(b-s)*(b-s-t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "(eps^3*(-b+b*s-s^2+t-s*t)*(b^3-2*b^2*s+b*s^2-b^2*t-b*s*t+6*s^2*t))/(40*b*(b-s)*(b-s-t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "(eps^4*(3*b^3*s-6*b^2*s^2+3*b*s^3-3*b^3*t+11*b^2*s*t-8*b*s^2*t+3*b^2*t^2-13*b*s*t^2+6*s^2*t^2))/(10*b*(b-s-t)*t)"
+          },
+          {
+            "column": 23,
+            "coefficient": "(3*(-3*b^3*eps^4*s+6*b^2*eps^4*s^2-3*b*eps^4*s^3+7*b^3*eps^4*t-7*b^2*eps^4*s*t-7*b^2*eps^4*t^2-3*b*eps^4*s*t^2+2*eps^4*s^2*t^2+8*eps^4*s*t^3))/(20*b*(b-s-t)*t)"
+          },
+          {
+            "column": 24,
+            "coefficient": "-1/40*(eps^3*(-b+s+b*t-s*t-t^2)*(3*b^3*s-6*b^2*s^2+3*b*s^3-3*b^3*t+3*b^2*s*t+3*b^2*t^2-5*b*s*t^2+6*s^2*t^2))/(b*(b-s)*(b-s-t)*t)"
+          },
+          {
+            "column": 25,
+            "coefficient": "-1/5*(eps^4*(b-t)*(2*b*s-3*s*t))/(b*(b-s-t))"
+          },
+          {
+            "column": 26,
+            "coefficient": "(-3*b^2*eps^4-b*eps^4*s+3*b*eps^4*t+6*eps^4*s*t)/(10*b)"
+          },
+          {
+            "column": 27,
+            "coefficient": "-1/10*(eps^3*(b-s-t+s*t))"
+          },
+          {
+            "column": 28,
+            "coefficient": "(-5*b^2*eps^4+5*b*eps^4*s+b*eps^4*t-6*eps^4*s*t)/(10*b)"
+          },
+          {
+            "column": 29,
+            "coefficient": "(2*(2*b*eps^4-3*eps^4*s))/5"
+          },
+          {
+            "column": 30,
+            "coefficient": "(eps^3*(b-s))/10"
+          },
+          {
+            "column": 31,
+            "coefficient": "(b*eps^3*(b+s))/10"
+          },
+          {
+            "column": 32,
+            "coefficient": "-1/5*(b*eps^2*s)"
+          },
+          {
+            "column": 33,
+            "coefficient": "-1/10*(eps^4*(3*s^2+10*s*t+7*t^2))/t"
+          },
+          {
+            "column": 34,
+            "coefficient": "-1/10*(eps^3*s*(-3-3*b+3*s-t))"
+          },
+          {
+            "column": 35,
+            "coefficient": "(3*eps^3*s*(1-b+s+t))/10"
+          },
+          {
+            "column": 36,
+            "coefficient": "(2*eps^4*(b-s)^2)/(5*(b-s-t))"
+          },
+          {
+            "column": 37,
+            "coefficient": "-1/20*(eps^4*(-9*s^2-4*s*t+5*t^2))/t"
+          },
+          {
+            "column": 38,
+            "coefficient": "(eps^3*(3*s-5*t)*(-s-t+s*t))/(40*t)"
+          },
+          {
+            "column": 39,
+            "coefficient": "(3*eps^4*(s+t))/10"
+          },
+          {
+            "column": 40,
+            "coefficient": "-1/10*(eps^4*(3*b*s-3*s^2+13*b*t-16*s*t-t^2))/(b-s-t)"
+          },
+          {
+            "column": 41,
+            "coefficient": "-1/10*(eps^3*(3*b-3*s+t)*(b*s-s^2+t-s*t))/(b-s-t)"
+          },
+          {
+            "column": 42,
+            "coefficient": "(-5*eps^3*s+3*eps^3*s*t)/30"
+          },
+          {
+            "column": 43,
+            "coefficient": "(-(eps^3*s)+eps^3*s*t)/6"
+          },
+          {
+            "column": 44,
+            "coefficient": "-1/5*(eps^4*(5*b^2*s-7*b*s^2-4*b*s*t+6*s^2*t))/(b*(b-s))"
+          },
+          {
+            "column": 45,
+            "coefficient": "(-2*eps^4*s*(b-t))/(5*(b-s))"
+          },
+          {
+            "column": 47,
+            "coefficient": "(eps^4*(b-s)*s)/5"
+          },
+          {
+            "column": 48,
+            "coefficient": "(2*eps^4*s*t)/5"
+          },
+          {
+            "column": 51,
+            "coefficient": "(2*eps^4*s*(s+t))/5"
+          },
+          {
+            "column": 54,
+            "coefficient": "-1/10*(eps^4*(3*b*s-6*s^2-2*s*t))"
+          },
+          {
+            "column": 55,
+            "coefficient": "(-3*eps^4*s)/5"
+          },
+          {
+            "column": 57,
+            "coefficient": "(2*eps^4*s*(-1-b+2*s))/5"
+          },
+          {
+            "column": 58,
+            "coefficient": "-1/5*(eps^4*s*(-b+s+2*t-b*t+s*t))"
+          },
+          {
+            "column": 59,
+            "coefficient": "(3*eps^4*s)/5"
+          },
+          {
+            "column": 60,
+            "coefficient": "(2*eps^4*s)/5"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-1/8*(eps^2*s*t)/(b*(b-s-t))"
+          },
+          {
+            "column": 1,
+            "coefficient": "(eps^2*(-1+s)*s*t)/(16*b*(b-s-t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "(eps^2*s*t)/(8*b*(b-s-t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "-1/16*(eps^2*s*(-1+t)*t)/(b*(b-s-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/4*(eps^3*(b-s)*s*t)/(b*(b-s-t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "(eps^3*s*(b-t)*t)/(4*b*(b-s-t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(3*eps^4*s*(b-t)*t)/(4*b*(b-s-t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "(eps^3*s*t*(-b+b*s-s^2+t-s*t))/(8*b*(b-s-t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "(eps^4*(b-s)*s*t)/(2*b*(b-s-t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(s*t*(b*eps^4-eps^4*s-4*eps^4*t))/(4*b*(b-s-t))"
+          },
+          {
+            "column": 24,
+            "coefficient": "-1/8*(eps^3*s*t*(-b+s+b*t-s*t-t^2))/(b*(b-s-t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "-1/2*(eps^4*s*(b-t)*t)/(b*(b-s-t))"
+          },
+          {
+            "column": 26,
+            "coefficient": "-1/2*(eps^4*s*t)/b"
+          },
+          {
+            "column": 28,
+            "coefficient": "(eps^4*s*t)/(2*b)"
+          },
+          {
+            "column": 44,
+            "coefficient": "-((eps^4*s*t)/b)"
+          },
+          {
+            "column": 54,
+            "coefficient": "-1/2*(eps^4*s*t)"
+          },
+          {
+            "column": 57,
+            "coefficient": "(eps^4*s*(-b+s+2*t))/2"
+          },
+          {
+            "column": 58,
+            "coefficient": "(eps^4*s*(-b+s)*(-2+t))/2"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-1/4*(eps^2*(-4+b-s)*(b-s)*(b-t))/(b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 1,
+            "coefficient": "(eps^2*(-4+b-s)*(b-s)*(-1+s)*(b-t))/(8*b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "(eps^2*(-4+b-s)*(b-s)*(b-t))/(4*b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "-1/8*(eps^2*(-4+b-s)*(b-s)*(b-t)*(-1+t))/(b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/2*(eps^3*(-4+b-s)*(b-s)^2*(b-t))/(b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "(eps^3*(-4+b-s)*(b-s)*(b-t)^2)/(2*b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(3*eps^4*(-4+b-s)*(b-s)*(b-t)^2)/(2*b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "(eps^3*(-4+b-s)*(b-s)*(b-t)*(-b+b*s-s^2+t-s*t))/(4*b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "(eps^4*(-4+b-s)*(b-s)^2*(b-t))/(b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "((-4+b-s)*(b-s)*(b-t)*(b*eps^4-eps^4*s-4*eps^4*t))/(2*b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 24,
+            "coefficient": "-1/4*(eps^3*(-4+b-s)*(b-s)*(b-t)*(-b+s+b*t-s*t-t^2))/(b*root5*root6*(b-s-t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "-((eps^4*(-4+b-s)*(b-s)*(b-t)^2)/(b*root5*root6*(b-s-t)))"
+          },
+          {
+            "column": 26,
+            "coefficient": "-((eps^4*(-4+b-s)*(b-s)*(b-t))/(b*root5*root6))"
+          },
+          {
+            "column": 28,
+            "coefficient": "(eps^4*(-4+b-s)*(b-s)*(b-t))/(b*root5*root6)"
+          },
+          {
+            "column": 44,
+            "coefficient": "(-2*eps^4*(-4+b-s)*(b-s)*(b-t))/(b*root5*root6)"
+          },
+          {
+            "column": 54,
+            "coefficient": "(eps^4*(-4*b+b^2+4*s-2*b*s+s^2)*t)/(root5*root6)"
+          },
+          {
+            "column": 57,
+            "coefficient": "(eps^4*s*(-b+s)*(4-b+s))/(root5*root6)"
+          },
+          {
+            "column": 58,
+            "coefficient": "-((eps^4*s*(-b+s)*(4-b+s)*t)/(root5*root6))"
+          }
+        ]
+      ],
+      "canonical_to_publication": [
+        [
+          {
+            "column": 0,
+            "coefficient": "-(1/(eps^2*s))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-2/(eps^2*(-1+s)*s)"
+          },
+          {
+            "column": 1,
+            "coefficient": "-(1/(eps^2*(-1+s)))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "1/((-1+eps)*eps^2)"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "1/(eps^2*(b-s-t))"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "2/(eps^2*(-1+b-s-t)*(b-s-t))"
+          },
+          {
+            "column": 4,
+            "coefficient": "1/(eps^2*(-1+b-s-t))"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "-(1/(b*eps^2))"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "-2/((-1+b)*b*eps^2)"
+          },
+          {
+            "column": 6,
+            "coefficient": "-(1/((-1+b)*eps^2))"
+          }
+        ],
+        [
+          {
+            "column": 7,
+            "coefficient": "-(1/(eps^2*t))"
+          }
+        ],
+        [
+          {
+            "column": 7,
+            "coefficient": "-2/(eps^2*(-1+t)*t)"
+          },
+          {
+            "column": 8,
+            "coefficient": "-(1/(eps^2*(-1+t)))"
+          }
+        ],
+        [
+          {
+            "column": 9,
+            "coefficient": "-(1/(eps^2*s))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "1/(3*eps^3*(b-s))"
+          },
+          {
+            "column": 10,
+            "coefficient": "1/(eps^3*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 1,
+            "coefficient": "-1/4*1/(eps^2*(-b+b*s-s^2))"
+          },
+          {
+            "column": 2,
+            "coefficient": "-1/2*1/(eps^2*(-b+b*s-s^2))"
+          },
+          {
+            "column": 10,
+            "coefficient": "3/(2*eps^2*(-b+b*s-s^2))"
+          },
+          {
+            "column": 11,
+            "coefficient": "(root1^2*(b-2*s))/((-4+b)*b*eps^2*(-b+b*s-s^2))"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "-1/3*1/(eps^3*(s+t))"
+          },
+          {
+            "column": 12,
+            "coefficient": "-(1/(eps^3*(s+t)))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-1/2*1/(eps^2*(-b+b*s-s^2+b*t-2*s*t-t^2))"
+          },
+          {
+            "column": 4,
+            "coefficient": "1/(4*eps^2*(-b+b*s-s^2+b*t-2*s*t-t^2))"
+          },
+          {
+            "column": 12,
+            "coefficient": "-3/(2*eps^2*(-b+b*s-s^2+b*t-2*s*t-t^2))"
+          },
+          {
+            "column": 13,
+            "coefficient": "(-(b*root1^2)+2*root1^2*s+2*root1^2*t)/((-4+b)*b*eps^2*(-b+b*s-s^2+b*t-2*s*t-t^2))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "1/(2*b*eps^2)"
+          },
+          {
+            "column": 5,
+            "coefficient": "1/(2*b*eps^2)"
+          },
+          {
+            "column": 6,
+            "coefficient": "1/(4*b*eps^2)"
+          },
+          {
+            "column": 14,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^2))"
+          }
+        ],
+        [
+          {
+            "column": 7,
+            "coefficient": "1/(3*eps^3*(b-t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "1/(eps^3*(b-t))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-1/2*1/(eps^2*(-b+b*t-t^2))"
+          },
+          {
+            "column": 8,
+            "coefficient": "-1/4*1/(eps^2*(-b+b*t-t^2))"
+          },
+          {
+            "column": 15,
+            "coefficient": "3/(2*eps^2*(-b+b*t-t^2))"
+          },
+          {
+            "column": 16,
+            "coefficient": "(root1^2*(b-2*t))/((-4+b)*b*eps^2*(-b+b*t-t^2))"
+          }
+        ],
+        [
+          {
+            "column": 17,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^2*s))"
+          }
+        ],
+        [
+          {
+            "column": 6,
+            "coefficient": "-1/2*1/(eps^3*(b-s))"
+          },
+          {
+            "column": 18,
+            "coefficient": "2/(eps^3*(b-s))"
+          },
+          {
+            "column": 19,
+            "coefficient": "1/(eps^3*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "2/(eps^2*(-1+b-s)*(b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(-3+b-s)/(eps^2*(-1+b-s)*(b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-2/(eps^2*(-1+b-s)*(b-s))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(-2*(-4+b-s))/(eps^2*(-1+b-s)*(b-s))"
+          },
+          {
+            "column": 19,
+            "coefficient": "-2/(eps^2*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 20,
+            "coefficient": "1/(eps^4*(b-t))"
+          }
+        ],
+        [
+          {
+            "column": 20,
+            "coefficient": "1/(eps^3*(-b+b*s-s^2+t-s*t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "-(1/(eps^3*(-b+b*s-s^2+t-s*t)))"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "-1/2*1/(eps^4*(b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "1/(4*eps^4*(b-s))"
+          },
+          {
+            "column": 22,
+            "coefficient": "1/(eps^4*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 23,
+            "coefficient": "1/(eps^4*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 23,
+            "coefficient": "1/(eps^3*(-b+s+b*t-s*t-t^2))"
+          },
+          {
+            "column": 24,
+            "coefficient": "-(1/(eps^3*(-b+s+b*t-s*t-t^2)))"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "-1/2*1/(eps^4*(b-t))"
+          },
+          {
+            "column": 6,
+            "coefficient": "1/(4*eps^4*(b-t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "1/(eps^4*(b-t))"
+          }
+        ],
+        [
+          {
+            "column": 26,
+            "coefficient": "1/(eps^4*(b-s-t))"
+          }
+        ],
+        [
+          {
+            "column": 27,
+            "coefficient": "1/(eps^3*(b-s-t+s*t))"
+          }
+        ],
+        [
+          {
+            "column": 28,
+            "coefficient": "1/(eps^4*(b-s-t))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-1/9*1/(eps^4*(b-s))"
+          },
+          {
+            "column": 1,
+            "coefficient": "17/(36*eps^4*(b-s))"
+          },
+          {
+            "column": 5,
+            "coefficient": "-1/2*1/(eps^4*(b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "-5/(2*eps^4*(b-s))"
+          },
+          {
+            "column": 18,
+            "coefficient": "11/(eps^4*(b-s))"
+          },
+          {
+            "column": 29,
+            "coefficient": "1/(eps^4*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "2/(9*eps^3*(b-s))"
+          },
+          {
+            "column": 1,
+            "coefficient": "17/(54*eps^3*(b-s))"
+          },
+          {
+            "column": 5,
+            "coefficient": "-(1/(eps^3*(b-s)))"
+          },
+          {
+            "column": 6,
+            "coefficient": "-(1/(eps^3*(b-s)))"
+          },
+          {
+            "column": 9,
+            "coefficient": "2/(3*eps^3*(b-s))"
+          },
+          {
+            "column": 10,
+            "coefficient": "2/(3*eps^3*(b-s))"
+          },
+          {
+            "column": 18,
+            "coefficient": "6/(eps^3*(b-s))"
+          },
+          {
+            "column": 29,
+            "coefficient": "2/(eps^3*(b-s))"
+          },
+          {
+            "column": 30,
+            "coefficient": "-3/(2*eps^3*(b-s))"
+          },
+          {
+            "column": 32,
+            "coefficient": "-(1/(eps^3*(b-s)))"
+          }
+        ],
+        [
+          {
+            "column": 31,
+            "coefficient": "root1^2/((-4+b)*b*eps^3*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(-5*(b-3*s))/(18*b*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 1,
+            "coefficient": "(47*b-149*s)/(108*b*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 6,
+            "coefficient": "(7*b+5*s)/(2*b*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 9,
+            "coefficient": "(7*b-4*s)/(3*b*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 10,
+            "coefficient": "(5*b+s)/(6*b*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 11,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^2*s))"
+          },
+          {
+            "column": 14,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^2*s))"
+          },
+          {
+            "column": 17,
+            "coefficient": "-(root1^2/((-4+b)*b*eps^2*s))"
+          },
+          {
+            "column": 18,
+            "coefficient": "(-12*(b+s))/(b*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 29,
+            "coefficient": "(b-3*s)/(b*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 30,
+            "coefficient": "-3/(4*b*eps^2*s)"
+          },
+          {
+            "column": 31,
+            "coefficient": "(root1^2*(b+s))/(2*(-4+b)*b*eps^2*(b-s)*s)"
+          },
+          {
+            "column": 32,
+            "coefficient": "-3/(2*b*eps^2*s)"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "-1/2*1/(eps^4*(s+t))"
+          },
+          {
+            "column": 6,
+            "coefficient": "1/(4*eps^4*(s+t))"
+          },
+          {
+            "column": 33,
+            "coefficient": "-(1/(eps^4*(s+t)))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "1/(eps^3*s*(-b+s+t))"
+          },
+          {
+            "column": 34,
+            "coefficient": "1/(eps^3*s*(-b+s+t))"
+          },
+          {
+            "column": 35,
+            "coefficient": "-1/3*1/(eps^3*s*(-b+s+t))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-(1/(eps^3*s*(-b+s+t)))"
+          },
+          {
+            "column": 6,
+            "coefficient": "1/(eps^3*s*(1-b+s+t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "-2/(eps^3*s*(1-b+s+t))"
+          },
+          {
+            "column": 19,
+            "coefficient": "-2/(eps^3*s*(1-b+s+t))"
+          },
+          {
+            "column": 34,
+            "coefficient": "-(1/(eps^3*s*(-b+s+t)*(1-b+s+t)))"
+          },
+          {
+            "column": 35,
+            "coefficient": "(1-3*b+3*s+3*t)/(3*eps^3*s*(-b+s+t)*(1-b+s+t))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-(1/(eps^4*(b-s)))"
+          },
+          {
+            "column": 1,
+            "coefficient": "1/(2*eps^4*(b-s))"
+          },
+          {
+            "column": 9,
+            "coefficient": "1/(eps^4*(b-s))"
+          },
+          {
+            "column": 36,
+            "coefficient": "1/(eps^4*(b-s))"
+          }
+        ],
+        [
+          {
+            "column": 37,
+            "coefficient": "-(1/(eps^4*(s+t)))"
+          }
+        ],
+        [
+          {
+            "column": 38,
+            "coefficient": "1/(eps^3*(-s-t+s*t))"
+          }
+        ],
+        [
+          {
+            "column": 39,
+            "coefficient": "-(1/(eps^4*t))"
+          }
+        ],
+        [
+          {
+            "column": 40,
+            "coefficient": "-(1/(eps^4*t))"
+          }
+        ],
+        [
+          {
+            "column": 41,
+            "coefficient": "1/(eps^3*(-(b*s)+s^2-t+s*t))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-(1/(eps^3*s*t))"
+          },
+          {
+            "column": 42,
+            "coefficient": "1/(eps^3*s*t)"
+          },
+          {
+            "column": 43,
+            "coefficient": "-1/3*1/(eps^3*s*t)"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "1/(eps^3*s*t)"
+          },
+          {
+            "column": 6,
+            "coefficient": "-(1/(eps^3*s*(-1+t)))"
+          },
+          {
+            "column": 18,
+            "coefficient": "2/(eps^3*s*(-1+t))"
+          },
+          {
+            "column": 19,
+            "coefficient": "2/(eps^3*s*(-1+t))"
+          },
+          {
+            "column": 42,
+            "coefficient": "1/(eps^3*s*(-1+t)*t)"
+          },
+          {
+            "column": 43,
+            "coefficient": "(-1+3*t)/(3*eps^3*s*(-1+t)*t)"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-1/12*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 1,
+            "coefficient": "-1/16*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "1/(12*eps^4*(b-s-t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "1/(16*eps^4*(b-s-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/4*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "1/(4*eps^4*(b-s-t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "7/(8*eps^4*(b-s-t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "-1/8*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "1/(2*eps^4*(b-s-t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(b-s-8*t)/(8*eps^4*(b-s)*(b-s-t))"
+          },
+          {
+            "column": 24,
+            "coefficient": "1/(8*eps^4*(b-s-t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "-1/2*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 26,
+            "coefficient": "-1/2*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 28,
+            "coefficient": "1/(2*eps^4*(b-s-t))"
+          },
+          {
+            "column": 44,
+            "coefficient": "(b*root3*root4)/(eps^4*(b-s-t)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-1/12*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 1,
+            "coefficient": "-1/16*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 6,
+            "coefficient": "1/(2*eps^4*(b-t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "s/(12*eps^4*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "(-b+2*s+t)/(16*eps^4*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/4*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "s/(4*eps^4*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(7*s)/(8*eps^4*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "-1/8*s/(eps^4*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "s/(2*eps^4*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(b*s-s^2-8*b*t+8*t^2)/(8*eps^4*(b-s)*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 24,
+            "coefficient": "s/(8*eps^4*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "-1/2*s/(eps^4*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 26,
+            "coefficient": "(2*b-3*s-2*t)/(2*eps^4*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 28,
+            "coefficient": "1/(2*eps^4*(b-s-t))"
+          },
+          {
+            "column": 44,
+            "coefficient": "(b*root3*root4*s-2*root3*root4*s*t)/(eps^4*(b-t)*(b-s-t)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))"
+          },
+          {
+            "column": 45,
+            "coefficient": "-(1/(eps^4*(b-t)))"
+          }
+        ],
+        [
+          {
+            "column": 6,
+            "coefficient": "3/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "2/(3*eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "2/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(b+b^2-4*b*s+3*s^2-t-b*t+3*s*t)/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t)*(-b+b*s-s^2+t-s*t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "(b-b^2+2*b*s-s^2-t+b*t-s*t)/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t)*(-b+b*s-s^2+t-s*t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "-4/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(b+b^2-s-b*s-4*b*t+3*s*t+3*t^2)/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t)*(-b+s+b*t-s*t-t^2))"
+          },
+          {
+            "column": 24,
+            "coefficient": "(b-b^2-s+b*s+2*b*t-s*t-t^2)/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t)*(-b+s+b*t-s*t-t^2))"
+          },
+          {
+            "column": 25,
+            "coefficient": "4/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))"
+          },
+          {
+            "column": 26,
+            "coefficient": "12/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))"
+          },
+          {
+            "column": 27,
+            "coefficient": "(b^2-b*s-b*t+2*s*t)/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t)*(b-s-t+s*t))"
+          },
+          {
+            "column": 44,
+            "coefficient": "(2*b*(1+8*eps)*root3*root4)/(eps^4*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t)^2)"
+          },
+          {
+            "column": 45,
+            "coefficient": "-8/(eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))"
+          },
+          {
+            "column": 46,
+            "coefficient": "root1^2/((-4+b)*eps^3*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t))"
+          }
+        ],
+        [
+          {
+            "column": 47,
+            "coefficient": "-((root5*root6)/(eps^4*(-4+b-s)*(b-s)^2))"
+          }
+        ],
+        [
+          {
+            "column": 6,
+            "coefficient": "3/(4*eps^4*s*(b-t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-1/6*1/(eps^4*s*(b-t))"
+          },
+          {
+            "column": 19,
+            "coefficient": "-3/(eps^4*s*(b-t))"
+          },
+          {
+            "column": 43,
+            "coefficient": "-(1/(eps^4*s*(b-t)))"
+          },
+          {
+            "column": 48,
+            "coefficient": "-(1/(eps^4*s*(b-t)))"
+          }
+        ],
+        [
+          {
+            "column": 6,
+            "coefficient": "(5*b-2*t)/(4*eps^4*s*(b-t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(6*b-7*t)/(6*eps^4*s*(b-t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "1/(eps^4*s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "(-3*(2*b-t))/(eps^4*s*(b-t))"
+          },
+          {
+            "column": 37,
+            "coefficient": "t/(eps^4*s*(s+t))"
+          },
+          {
+            "column": 42,
+            "coefficient": "1/(2*eps^4*s)"
+          },
+          {
+            "column": 43,
+            "coefficient": "(-2*b+t)/(eps^4*s*(b-t))"
+          },
+          {
+            "column": 48,
+            "coefficient": "-(t/(eps^4*s*(b-t)))"
+          },
+          {
+            "column": 49,
+            "coefficient": "-(1/(eps^4*s))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(-5*(-1+t))/(9*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 1,
+            "coefficient": "(223*(-1+t))/(216*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 2,
+            "coefficient": "(-1+t)/(2*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 6,
+            "coefficient": "-3/(2*eps^3*s*(b-t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "(-1+t)/(6*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 8,
+            "coefficient": "(-1+t)/(8*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 9,
+            "coefficient": "1/(3*eps^3*s*(b-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "(-1+t)/(3*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 15,
+            "coefficient": "(-1+t)/(2*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 19,
+            "coefficient": "6/(eps^3*s*(b-t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "(1-t)/(eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 29,
+            "coefficient": "(2*(-1+t))/(eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 30,
+            "coefficient": "(-3*(-1+t))/(4*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 32,
+            "coefficient": "(-3*(-1+t))/(2*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 37,
+            "coefficient": "(-1+t)/(2*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 38,
+            "coefficient": "(1-t)/(4*eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 43,
+            "coefficient": "2/(eps^3*s*(b-t))"
+          },
+          {
+            "column": 48,
+            "coefficient": "(-2*t)/(eps^3*s*(-b+t)*(b-b*t+t^2))"
+          },
+          {
+            "column": 49,
+            "coefficient": "(-1+t)/(eps^3*s*(-b+b*t-t^2))"
+          },
+          {
+            "column": 50,
+            "coefficient": "(-(b*root1^2)-2*root1^2*t+b*root1^2*t)/((-4+b)*b*eps^3*s*(-b+b*t-t^2))"
+          }
+        ],
+        [
+          {
+            "column": 3,
+            "coefficient": "-1/12*1/(eps^4*s*(s+t))"
+          },
+          {
+            "column": 4,
+            "coefficient": "1/(8*eps^4*s*(s+t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-1/6*1/(eps^4*s*(s+t))"
+          },
+          {
+            "column": 12,
+            "coefficient": "1/(2*eps^4*s*(s+t))"
+          },
+          {
+            "column": 51,
+            "coefficient": "1/(eps^4*s*(s+t))"
+          }
+        ],
+        [
+          {
+            "column": 2,
+            "coefficient": "-1/3*1/(eps^4*s)"
+          },
+          {
+            "column": 3,
+            "coefficient": "(-s-3*t)/(24*eps^4*s*(s+t))"
+          },
+          {
+            "column": 4,
+            "coefficient": "(-2*s-t)/(8*eps^4*s*(s+t))"
+          },
+          {
+            "column": 5,
+            "coefficient": "-1/2*1/(eps^4*(s+t))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(3*s+2*t)/(4*eps^4*s*(s+t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "(-6*s-7*t)/(6*eps^4*s*(s+t))"
+          },
+          {
+            "column": 12,
+            "coefficient": "(-s+3*t)/(8*eps^4*s*(s+t))"
+          },
+          {
+            "column": 18,
+            "coefficient": "-(1/(eps^4*s))"
+          },
+          {
+            "column": 19,
+            "coefficient": "-(1/(eps^4*s))"
+          },
+          {
+            "column": 20,
+            "coefficient": "1/(eps^4*s)"
+          },
+          {
+            "column": 33,
+            "coefficient": "-(1/(eps^4*(s+t)))"
+          },
+          {
+            "column": 35,
+            "coefficient": "1/(3*eps^4*s)"
+          },
+          {
+            "column": 51,
+            "coefficient": "t/(eps^4*s*(s+t))"
+          },
+          {
+            "column": 52,
+            "coefficient": "-(1/(eps^4*s))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(5*(-1+b-s-t))/(9*eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 1,
+            "coefficient": "(-223*(-1+b-s-t))/(216*eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 2,
+            "coefficient": "-1/6*(-1+b-s-t)/(eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 3,
+            "coefficient": "(4*b-9*s+5*b*s-5*s^2-9*t+5*b*t-10*s*t-5*t^2)/(24*eps^3*s*(s+t)*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 4,
+            "coefficient": "(-2*b-s+3*b*s-3*s^2-t+3*b*t-6*s*t-3*t^2)/(8*eps^3*s*(s+t)*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 6,
+            "coefficient": "-1/4*(-1+b-s-t)/(eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 9,
+            "coefficient": "1/(3*eps^3*s*(s+t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/3*(-1+b-s-t)/(eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 12,
+            "coefficient": "(-8*b+3*s+5*b*s-5*s^2+3*t+5*b*t-10*s*t-5*t^2)/(8*eps^3*s*(s+t)*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 13,
+            "coefficient": "(-3*b*root1^2+b^2*root1^2+2*root1^2*s-b*root1^2*s+2*root1^2*t-b*root1^2*t)/(2*(-4+b)*b*eps^3*s*(-b+b*s-s^2+b*t-2*s*t-t^2))"
+          },
+          {
+            "column": 19,
+            "coefficient": "-((1-b+s+t)/(eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2)))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(3*(-1+b-s-t))/(4*eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 21,
+            "coefficient": "-1/4*(-1+b-s-t)/(eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 29,
+            "coefficient": "(-2*(-1+b-s-t))/(eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 30,
+            "coefficient": "(3*(-1+b-s-t))/(4*eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 32,
+            "coefficient": "(3*(-1+b-s-t))/(2*eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 33,
+            "coefficient": "-((-1+b-s-t)/(eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2)))"
+          },
+          {
+            "column": 34,
+            "coefficient": "-1/2*(1-b+s+t)/(eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 35,
+            "coefficient": "-1/3*(-1+b-s-t)/(eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 51,
+            "coefficient": "(2*(-b+s+t))/(eps^3*s*(s+t)*(b-b*s+s^2-b*t+2*s*t+t^2))"
+          },
+          {
+            "column": 52,
+            "coefficient": "-((1-b+s+t)/(eps^3*s*(b-b*s+s^2-b*t+2*s*t+t^2)))"
+          },
+          {
+            "column": 53,
+            "coefficient": "(-3*b*root1^2+b^2*root1^2+2*root1^2*s-b*root1^2*s+2*root1^2*t-b*root1^2*t)/((-4+b)*b*eps^3*s*(-b+b*s-s^2+b*t-2*s*t-t^2))"
+          }
+        ],
+        [
+          {
+            "column": 54,
+            "coefficient": "-((root7*root8)/(eps^4*t*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t)))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-1/12*1/(eps^4*t)"
+          },
+          {
+            "column": 1,
+            "coefficient": "-1/16*1/(eps^4*t)"
+          },
+          {
+            "column": 3,
+            "coefficient": "(-s+t)/(12*eps^4*t*(s+t))"
+          },
+          {
+            "column": 4,
+            "coefficient": "(-s+t)/(16*eps^4*t*(s+t))"
+          },
+          {
+            "column": 5,
+            "coefficient": "1/(2*eps^4*(s+t))"
+          },
+          {
+            "column": 6,
+            "coefficient": "1/(2*eps^4*(s+t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/4*1/(eps^4*t)"
+          },
+          {
+            "column": 12,
+            "coefficient": "(-s+t)/(4*eps^4*t*(s+t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "s/(2*eps^4*t*(s+t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(-7*b*s+7*s^2-9*b*t+17*s*t+8*t^2)/(8*eps^4*(b-s)*t*(s+t))"
+          },
+          {
+            "column": 24,
+            "coefficient": "(s-t)/(8*eps^4*t*(s+t))"
+          },
+          {
+            "column": 33,
+            "coefficient": "(s+2*t)/(2*eps^4*t*(s+t))"
+          },
+          {
+            "column": 37,
+            "coefficient": "(-3*s-t)/(4*eps^4*t*(s+t))"
+          },
+          {
+            "column": 38,
+            "coefficient": "(s-t)/(8*eps^4*t*(s+t))"
+          },
+          {
+            "column": 39,
+            "coefficient": "(-s-2*t)/(2*eps^4*t*(s+t))"
+          },
+          {
+            "column": 40,
+            "coefficient": "s/(2*eps^4*t*(s+t))"
+          },
+          {
+            "column": 54,
+            "coefficient": "-1/2*(root7*root8*s*(-b+2*s+2*t))/(eps^4*t*(s+t)*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))"
+          },
+          {
+            "column": 55,
+            "coefficient": "-(1/(eps^4*(s+t)))"
+          }
+        ],
+        [
+          {
+            "column": 5,
+            "coefficient": "(2*(-2+b))/(eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(3*(-2+b))/(2*eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "(-2*(-2+b))/(eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(-2*b+b^2+2*s+b*s-2*s^2+5*b*t-2*b^2*t-6*s*t+2*b*s*t-4*t^2+2*b*t^2)/(eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t)*(-b+s+b*t-s*t-t^2))"
+          },
+          {
+            "column": 24,
+            "coefficient": "(-2*b+b^2+2*s-3*b*s+2*s^2-b*t+2*s*t)/(eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t)*(-b+s+b*t-s*t-t^2))"
+          },
+          {
+            "column": 33,
+            "coefficient": "(2*(-2+b))/(eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))"
+          },
+          {
+            "column": 38,
+            "coefficient": "(2*b*s-2*s^2+b*t-b*s*t)/(eps^3*(-s-t+s*t)*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))"
+          },
+          {
+            "column": 39,
+            "coefficient": "(-2*(-2+b))/(eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))"
+          },
+          {
+            "column": 40,
+            "coefficient": "(-2*(-2+b))/(eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))"
+          },
+          {
+            "column": 41,
+            "coefficient": "-(b/(eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t)))"
+          },
+          {
+            "column": 54,
+            "coefficient": "(-2*b*root7*root8*s-8*b*eps*root7*root8*s+2*root7*root8*s^2+8*eps*root7*root8*s^2-b*root7*root8*t-2*b^2*eps*root7*root8*t+2*root7*root8*s*t+8*eps*root7*root8*s*t)/(eps^4*t*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t)^2)"
+          },
+          {
+            "column": 55,
+            "coefficient": "(-4*(-2+b))/(eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))"
+          },
+          {
+            "column": 56,
+            "coefficient": "(-2*(-2*root1^2+b*root1^2))/((-4+b)*eps^3*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t))"
+          }
+        ],
+        [
+          {
+            "column": 44,
+            "coefficient": "-((-2*b^2*root3*root4+2*b*root3*root4*s+2*b*root3*root4*t+b^2*root3*root4*t-2*root3*root4*s*t-b*root3*root4*s*t-b*root3*root4*t^2)/(eps^4*s*(-b+s+t)*(4*b^2-b^3-4*b*s+b^2*s-4*b*t+b^2*t+4*s*t)*(b-s-b*t+s*t+t^2)))"
+          },
+          {
+            "column": 54,
+            "coefficient": "-1/2*(root7*root8*(-2*b+2*s+b*t))/(eps^4*s*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t)*(b-s-b*t+s*t+t^2))"
+          },
+          {
+            "column": 59,
+            "coefficient": "t/(eps^4*s*(b-s-b*t+s*t+t^2))"
+          },
+          {
+            "column": 60,
+            "coefficient": "(root5*root6*(-2+t))/(2*eps^4*s*(4-b+s)*(b-s-b*t+s*t+t^2))"
+          }
+        ],
+        [
+          {
+            "column": 44,
+            "coefficient": "(-(b*root3*root4)+2*root3*root4*t)/(eps^4*s*(4*b^2-b^3-4*b*s+b^2*s-4*b*t+b^2*t+4*s*t)*(b-s-b*t+s*t+t^2))"
+          },
+          {
+            "column": 54,
+            "coefficient": "(root7*root8*(b-2*s-2*t))/(2*eps^4*s*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t)*(b-s-b*t+s*t+t^2))"
+          },
+          {
+            "column": 59,
+            "coefficient": "1/(eps^4*s*(b-s-b*t+s*t+t^2))"
+          },
+          {
+            "column": 60,
+            "coefficient": "-1/2*(root5*root6*(b-s-2*t))/(eps^4*(-4+b-s)*(b-s)*s*(-b+s+b*t-s*t-t^2))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "-1/12*(-b+t)/(eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 1,
+            "coefficient": "-1/16*(-2*b+s+2*t)/(eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 3,
+            "coefficient": "1/(6*eps^4*(s+t))"
+          },
+          {
+            "column": 4,
+            "coefficient": "1/(8*eps^4*(s+t))"
+          },
+          {
+            "column": 5,
+            "coefficient": "1/(2*eps^4*(s+t))"
+          },
+          {
+            "column": 6,
+            "coefficient": "1/(2*eps^4*(s+t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "(2*b-3*s-2*t)/(12*eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 8,
+            "coefficient": "1/(16*eps^4*(b-s-t))"
+          },
+          {
+            "column": 9,
+            "coefficient": "-2/(3*eps^4*s)"
+          },
+          {
+            "column": 10,
+            "coefficient": "-1/4*(-b+t)/(eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 12,
+            "coefficient": "1/(2*eps^4*(s+t))"
+          },
+          {
+            "column": 15,
+            "coefficient": "(2*b-3*s-2*t)/(4*eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "7/(8*eps^4*(b-s-t))"
+          },
+          {
+            "column": 21,
+            "coefficient": "-1/8*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 22,
+            "coefficient": "(-s^2-b*t+t^2)/(2*eps^4*s*(s+t)*(-b+s+t))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(-2*b^2+5*b*s-3*s^2+3*b*t-11*s*t-8*t^2)/(8*eps^4*(b-s)*(b-s-t)*(s+t))"
+          },
+          {
+            "column": 24,
+            "coefficient": "(2*b-3*s-3*t)/(8*eps^4*(s+t)*(-b+s+t))"
+          },
+          {
+            "column": 25,
+            "coefficient": "-1/2*1/(eps^4*(b-s-t))"
+          },
+          {
+            "column": 26,
+            "coefficient": "-1/2*(-b+t)/(eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 28,
+            "coefficient": "1/(2*eps^4*(b-s-t))"
+          },
+          {
+            "column": 33,
+            "coefficient": "(2*s+t)/(2*eps^4*s*(s+t))"
+          },
+          {
+            "column": 37,
+            "coefficient": "-1/2*t/(eps^4*s*(s+t))"
+          },
+          {
+            "column": 38,
+            "coefficient": "t/(4*eps^4*s*(s+t))"
+          },
+          {
+            "column": 39,
+            "coefficient": "-1/2*1/(eps^4*(s+t))"
+          },
+          {
+            "column": 40,
+            "coefficient": "-1/2*1/(eps^4*(s+t))"
+          },
+          {
+            "column": 44,
+            "coefficient": "-((-(b^3*root3*root4)+b^2*root3*root4*s-b^2*root3*root4*t+b^3*root3*root4*t+b*root3*root4*s*t-b^2*root3*root4*s*t+2*b*root3*root4*t^2-b^2*root3*root4*t^2-2*root3*root4*s*t^2)/(eps^4*s*(-b+s+t)*(4*b^2-b^3-4*b*s+b^2*s-4*b*t+b^2*t+4*s*t)*(b-s-b*t+s*t+t^2)))"
+          },
+          {
+            "column": 54,
+            "coefficient": "-1/2*(-(b^2*root7*root8*t)-b*root7*root8*s*t+2*root7*root8*s^2*t-2*b*root7*root8*t^2+b^2*root7*root8*t^2+2*root7*root8*s*t^2)/(eps^4*s*(s+t)*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t)*(b-s-b*t+s*t+t^2))"
+          },
+          {
+            "column": 55,
+            "coefficient": "-(1/(eps^4*(s+t)))"
+          },
+          {
+            "column": 57,
+            "coefficient": "2/(3*eps^4*s)"
+          },
+          {
+            "column": 59,
+            "coefficient": "t^2/(eps^4*s*(b-s-b*t+s*t+t^2))"
+          },
+          {
+            "column": 60,
+            "coefficient": "(-(b*root5*root6)+root5*root6*s-2*root5*root6*t+b*root5*root6*t-root5*root6*s*t)/(2*eps^4*(-4+b-s)*s*(-b+s+b*t-s*t-t^2))"
+          }
+        ],
+        [
+          {
+            "column": 0,
+            "coefficient": "(-67*b+55*s)/(72*eps^4*(b-s)*s)"
+          },
+          {
+            "column": 1,
+            "coefficient": "(-131*b^2+244*b*s-113*s^2+59*b*t-41*s*t)/(144*eps^4*s*(-b+s)*(-b+s+t))"
+          },
+          {
+            "column": 2,
+            "coefficient": "1/(2*eps^4*s)"
+          },
+          {
+            "column": 3,
+            "coefficient": "7/(24*eps^4*s)"
+          },
+          {
+            "column": 4,
+            "coefficient": "-1/32*(21*b-21*s-5*t)/(eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 5,
+            "coefficient": "1/(2*eps^4*(b-s))"
+          },
+          {
+            "column": 6,
+            "coefficient": "(5*b^3-9*b^2*s+4*b*s^2-11*b^2*t+17*b*s*t-7*s^2*t+6*b*t^2-5*s*t^2)/(4*eps^4*s*(-b+s)*(b-t)*(-b+s+t))"
+          },
+          {
+            "column": 7,
+            "coefficient": "(9*b-7*s)/(24*eps^4*(b-s)*s)"
+          },
+          {
+            "column": 8,
+            "coefficient": "5/(32*eps^4*s)"
+          },
+          {
+            "column": 9,
+            "coefficient": "(4*b-3*t)/(6*eps^4*s*(b-t))"
+          },
+          {
+            "column": 10,
+            "coefficient": "(-5*b+s)/(8*eps^4*(b-s)*s)"
+          },
+          {
+            "column": 12,
+            "coefficient": "1/(8*eps^4*s)"
+          },
+          {
+            "column": 15,
+            "coefficient": "(9*b-7*s)/(8*eps^4*(b-s)*s)"
+          },
+          {
+            "column": 18,
+            "coefficient": "-9/(eps^4*s)"
+          },
+          {
+            "column": 19,
+            "coefficient": "(9*b^2-9*b*s-14*b*t+6*s*t+5*t^2)/(eps^4*s*(b-t)*(b-s-t))"
+          },
+          {
+            "column": 20,
+            "coefficient": "(25*b-27*s)/(16*eps^4*(b-s)*s)"
+          },
+          {
+            "column": 21,
+            "coefficient": "(b-3*s)/(16*eps^4*(b-s)*s)"
+          },
+          {
+            "column": 22,
+            "coefficient": "-3/(2*eps^4*(b-s))"
+          },
+          {
+            "column": 23,
+            "coefficient": "(-45*b+47*s)/(16*eps^4*(b-s)*s)"
+          },
+          {
+            "column": 24,
+            "coefficient": "(3*b-s)/(16*eps^4*(b-s)*s)"
+          },
+          {
+            "column": 25,
+            "coefficient": "1/(2*eps^4*(b-s))"
+          },
+          {
+            "column": 26,
+            "coefficient": "(3*b)/(2*eps^4*(b-s)*s)"
+          },
+          {
+            "column": 27,
+            "coefficient": "1/(4*eps^4*s)"
+          },
+          {
+            "column": 28,
+            "coefficient": "-1/4*(5*b-s-t)/(eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 29,
+            "coefficient": "-2/(eps^4*s)"
+          },
+          {
+            "column": 32,
+            "coefficient": "-1/2*1/(eps^4*s)"
+          },
+          {
+            "column": 33,
+            "coefficient": "-5/(2*eps^4*s)"
+          },
+          {
+            "column": 34,
+            "coefficient": "-1/4*(3*b-3*s+t)/(eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 35,
+            "coefficient": "-1/3*(-3*b+3*s+2*t)/(eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 36,
+            "coefficient": "-((-b+s)/(eps^4*s*(-b+s+t)))"
+          },
+          {
+            "column": 37,
+            "coefficient": "1/(8*eps^4*s)"
+          },
+          {
+            "column": 38,
+            "coefficient": "-1/16*1/(eps^4*s)"
+          },
+          {
+            "column": 39,
+            "coefficient": "3/(4*eps^4*s)"
+          },
+          {
+            "column": 40,
+            "coefficient": "-1/4*(-13*b+13*s+t)/(eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 41,
+            "coefficient": "-1/4*(-3*b+3*s-t)/(eps^4*s*(-b+s+t))"
+          },
+          {
+            "column": 42,
+            "coefficient": "-1/4*1/(eps^4*s)"
+          },
+          {
+            "column": 43,
+            "coefficient": "(-b+4*t)/(3*eps^4*s*(b-t))"
+          },
+          {
+            "column": 44,
+            "coefficient": "(-2*b^3*root3*root4+4*b^2*root3*root4*s+b^3*root3*root4*s-2*b*root3*root4*s^2-2*b^2*root3*root4*s^2+b*root3*root4*s^3+2*b^2*root3*root4*t+2*b^3*root3*root4*t-4*b*root3*root4*s*t-5*b^2*root3*root4*s*t+2*root3*root4*s^2*t+5*b*root3*root4*s^2*t-2*root3*root4*s^3*t-b^3*root3*root4*t^2+b^2*root3*root4*s*t^2-2*b*root3*root4*t^3+b^2*root3*root4*t^3+2*root3*root4*s*t^3)/(eps^4*(b-s)*s*(b-s-t)*(-4*b^2+b^3+4*b*s-b^2*s+4*b*t-b^2*t-4*s*t)*(-b+s+b*t-s*t-t^2))"
+          },
+          {
+            "column": 45,
+            "coefficient": "-(1/(eps^4*(b-s)))"
+          },
+          {
+            "column": 47,
+            "coefficient": "(root5*root6)/(2*eps^4*(-4+b-s)*(b-s))"
+          },
+          {
+            "column": 48,
+            "coefficient": "-(t/(eps^4*s*(-b+t)))"
+          },
+          {
+            "column": 51,
+            "coefficient": "-(1/(eps^4*s))"
+          },
+          {
+            "column": 54,
+            "coefficient": "-1/2*(-2*b*root7*root8+2*root7*root8*s+2*b*root7*root8*s-2*root7*root8*s^2+2*b*root7*root8*t-b*root7*root8*s*t+2*root7*root8*t^2-b*root7*root8*t^2)/(eps^4*s*(-4*b*s+4*s^2-4*b*t+b^2*t+4*s*t)*(b-s-b*t+s*t+t^2))"
+          },
+          {
+            "column": 57,
+            "coefficient": "-(1/(eps^4*s))"
+          },
+          {
+            "column": 58,
+            "coefficient": "5/(2*eps^4*s)"
+          },
+          {
+            "column": 59,
+            "coefficient": "-1/2*(b-s-4*t-b*t+3*s*t+3*t^2)/(eps^4*s*(b-s-b*t+s*t+t^2))"
+          },
+          {
+            "column": 60,
+            "coefficient": "(-2*b*root5*root6+2*root5*root6*s+2*b*root5*root6*s-2*root5*root6*s^2+2*b*root5*root6*t-2*root5*root6*s*t-b*root5*root6*s*t+root5*root6*s^2*t+2*root5*root6*t^2-b*root5*root6*t^2+root5*root6*s*t^2)/(2*eps^4*(-4+b-s)*(b-s)*s*(-b+s+b*t-s*t-t^2))"
+          }
+        ]
+      ],
+      "routing": [
+        {
+          "loop": [
+            1,
+            0
+          ],
+          "external": [
+            0,
+            0,
+            0
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            1,
+            -1
+          ],
+          "external": [
+            0,
+            0,
+            0
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            1,
+            0
+          ],
+          "external": [
+            1,
+            0,
+            0
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            1,
+            0
+          ],
+          "external": [
+            1,
+            1,
+            0
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            1,
+            -1
+          ],
+          "external": [
+            0,
+            0,
+            -1
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            0,
+            1
+          ],
+          "external": [
+            1,
+            1,
+            0
+          ],
+          "mass_squared": 1
+        },
+        {
+          "loop": [
+            0,
+            -1
+          ],
+          "external": [
+            0,
+            0,
+            -1
+          ],
+          "mass_squared": 1
+        },
+        {
+          "loop": [
+            -1,
+            0
+          ],
+          "external": [
+            0,
+            0,
+            -1
+          ],
+          "mass_squared": 0
+        },
+        {
+          "loop": [
+            0,
+            1
+          ],
+          "external": [
+            0,
+            1,
+            0
+          ],
+          "mass_squared": 0
+        }
+      ],
+      "source_path": "anc/scalar_integrals/topology_definitions_and_mappings/replRuleNonPlanarMIToCan.m"
+    }
+  ],
+  "routing_source": {
+    "path": "anc/scalar_integrals/topology_definitions_and_mappings/Topologies/integralfamilies.yaml",
+    "sha256": "072c8a6eac4526cf47f7b323c2473641301bfbfcdefc8ab2c1b85164d891c33b"
+  }
+}

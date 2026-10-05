@@ -58,3 +58,16 @@ Mathematica installation, the pinned `atilde`, boundary and form-factor files,
 and the independently authored export/check scripts recorded in the report.
 The original code remains outside the MIT implementation. Mathematical input
 data, computed outputs and provenance are retained as scientific fixtures.
+
+`native-model.json` is the native HEPKit scientific model export used for the
+coherent effective-vertex amplitude. Its pinned source, compatibility edits,
+momentum reciprocal scopes, and content hash are in
+`native-model-provenance.json`. The reusable `HiggsJetAmplitude` consumes this
+model through HEPKit and requires explicit exact physical parameters and eight
+numerical W/Z form factors. It never reads the model's floating-point defaults.
+Its four HEFT coefficients are exact functions of the current kinematics.
+
+`amplitude-validation.json` contains archived form factors and independent
+observable comparisons for the amplitude component regression. Production
+evaluation never loads it. This test checks assembly and uncertainty propagation;
+it does not establish fresh automatic boundary generation.

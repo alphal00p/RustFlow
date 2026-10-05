@@ -21,6 +21,7 @@ mod fixed_series;
 pub mod frobenius;
 pub mod ft;
 pub mod gaussian;
+pub mod gg_hg;
 pub mod hepkit;
 mod integer_shearing;
 pub mod integrand;
@@ -38,18 +39,23 @@ mod physical_conditions;
 pub mod physical_family;
 pub mod physical_targets;
 pub mod physical_transport;
+pub mod projections;
+#[cfg(feature = "python")]
+pub mod python;
 pub mod recursive;
 pub mod reduction;
 pub mod refine;
 pub mod regions;
 mod root_path;
+mod sample_checkpoint;
 pub mod tensor;
 pub mod transport_cache;
 pub mod vacuum;
 mod vacuum_peel;
 pub use asymptotic::AsymptoticConstraint;
 pub use engine::{
-    PreparedFlow, evaluate_samples, solve_integral_combinations, solve_integrals, solve_prepared,
+    PreparedFlow, evaluate_samples, solve_integral_combinations, solve_integral_projections,
+    solve_integral_projections_normalized, solve_integrals, solve_prepared,
 };
 pub use epsilon::{LaurentExpansion, fit_epsilon};
 pub use epsilon_flow::EpsilonShearedFlow;
@@ -66,5 +72,6 @@ pub use options::{
 pub use physical_family::PreparedPhysicalFamily;
 pub use physical_targets::ProjectedLaurentExpansion;
 pub use physical_transport::RustFlow;
+pub use projections::{ProjectionFactors, SampleNormalization};
 pub use reduction::{ReductionBackend, RustRedBackend, ScopedTableBackend, TableBackend};
 pub use transport_cache::RustFlowCache;

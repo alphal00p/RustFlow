@@ -118,7 +118,7 @@ impl AtomDecoder {
         };
         let (prefix, map) = &self.states[index];
         let mut source = &bytes[prefix.len()..];
-        if source.get(..8) != Some(&1_u64.to_le_bytes()) {
+        if source.get(..8) != Some(1_u64.to_le_bytes().as_slice()) {
             // Streaming multi-term exports retain Symbolica's general reader.
             let mut complete = bytes;
             return Atom::import(&mut complete, None).map_err(|e| Error::Cache(e.to_string()));

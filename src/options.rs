@@ -69,6 +69,12 @@ pub struct FlowOptions {
     pub skip_reduction: bool,
     pub sampled_reduction: bool,
     pub cache_directory: Option<std::path::PathBuf>,
+    /// Completed finite-epsilon samples, separate from verified boundary data.
+    /// Only automatic integral projections use this checkpoint directory.
+    pub sample_cache_directory: Option<std::path::PathBuf>,
+    /// False forces fresh numerical samples while retaining exact reductions.
+    /// Successfully recomputed samples still replace their checkpoints.
+    pub reuse_samples: bool,
 }
 impl Default for FlowOptions {
     fn default() -> Self {
@@ -90,6 +96,8 @@ impl Default for FlowOptions {
             skip_reduction: false,
             sampled_reduction: true,
             cache_directory: None,
+            sample_cache_directory: None,
+            reuse_samples: true,
         }
     }
 }
@@ -135,6 +143,10 @@ impl CancellationToken {
 
 #[derive(Clone, Debug)]
 pub enum Progress {
+    /// A coarse native-owner operation, useful before a long contraction or preparation.
+    Stage {
+        name: String,
+    },
     Reduction {
         integrals: usize,
     },

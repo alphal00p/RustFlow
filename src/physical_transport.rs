@@ -836,7 +836,10 @@ fn evaluate_from_source(
         accuracy: BoundaryAccuracy::from_solution(
             &solution,
             source.accuracy.verified_digits(),
-            "independently refined physical transport including propagated cached input uncertainty",
+            &format!(
+                "independently refined physical transport including propagated cached input uncertainty; source: {}",
+                source.accuracy.provenance(),
+            ),
         )?,
     };
     boundary.validate()?;
@@ -863,7 +866,10 @@ fn evaluate_from_source(
                 checked,
                 p.bits,
                 checkpoint.comparison_errors.clone(),
-                "independent precision/order check at trajectory endpoint, with propagated cached input uncertainty",
+                &format!(
+                    "independent precision/order check at trajectory endpoint, with propagated cached input uncertainty; source: {}",
+                    source.accuracy.provenance(),
+                ),
             )?;
             Ok(Some((PointKind::Physical, accuracy)))
         },

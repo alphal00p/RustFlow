@@ -623,10 +623,59 @@ pub fn solve_integral_combinations(
     backend: &dyn ReductionBackend,
     context: &RunContext,
 ) -> Result<LaurentExpansion> {
+    let groups = groups
+        .iter()
+        .map(|(family, terms)| (family.clone(), vec![terms.clone()]))
+        .collect::<Vec<_>>();
+    let mut values = solve_integral_projections(&groups, point, last, options, backend, context)?;
+    Ok(values.remove(0))
+}
+
+/// Evaluate several exact linear projections together. Every family contributes
+/// the same number of output rows, which are summed across families. Integral
+/// targets shared by rows are evaluated once per epsilon sample, before any
+/// projection is fitted. Empty rows contribute zero; weights remain exact
+/// rational functions until numerical specialization.
+pub fn solve_integral_projections(
+    groups: &[(IntegralFamily, Vec<crate::reduction::LinearCombination>)],
+    point: &KinematicPoint,
+    last: i32,
+    options: &FlowOptions,
+    backend: &dyn ReductionBackend,
+    context: &RunContext,
+) -> Result<Vec<LaurentExpansion>> {
+    solve_integral_projections_normalized(
+        groups,
+        point,
+        last,
+        options,
+        backend,
+        context,
+        &Default::default(),
+    )
+}
+
+/// Batched projections with explicitly registered algebraic roots and a common
+/// analytic normalization. All factors are evaluated at each finite epsilon,
+/// including during independent higher-precision refinement.
+#[allow(clippy::too_many_arguments)]
+pub fn solve_integral_projections_normalized(
+    groups: &[(IntegralFamily, Vec<crate::reduction::LinearCombination>)],
+    point: &KinematicPoint,
+    last: i32,
+    options: &FlowOptions,
+    backend: &dyn ReductionBackend,
+    context: &RunContext,
+    factors: &crate::ProjectionFactors,
+) -> Result<Vec<LaurentExpansion>> {
     options.validate()?;
     context.cancellation.check()?;
-    if groups.is_empty() {
-        return Err(Error::InvalidInput("empty integral combination".into()));
+    let factors = factors.at(point)?;
+    let outputs = groups.first().map_or(0, |(_, rows)| rows.len());
+    if outputs == 0 || groups.iter().any(|(_, rows)| rows.len() != outputs) {
+        return Err(Error::InvalidInput(
+            "integral projections require equal, nonzero output row counts".into(),
+        ));
     }
     enum Preparation {
         Amf(PreparedFlow),
@@ -636,60 +685,95 @@ pub fn solve_integral_combinations(
     }
     let mut prepared = Vec::new();
     let mut leading = 0i32;
-    for (family, terms) in groups {
+    for (family, rows) in groups {
         let mut family = family.at(point);
         family.dimension = options.dimension;
         family.validate()?;
-        let mut integrals = Vec::new();
-        let mut coefficients = Vec::new();
+        if factors.roots.iter().any(|r| r.symbol == family.epsilon) {
+            return Err(Error::InvalidInput(
+                "projection root cannot be epsilon".into(),
+            ));
+        }
+        let allowed = factors
+            .roots
+            .iter()
+            .map(|r| Atom::var(r.symbol))
+            .chain([
+                Atom::var(family.epsilon),
+                Atom::var(crate::family::imaginary_parameter()),
+            ])
+            .collect::<std::collections::BTreeSet<_>>();
+        let mut targets = std::collections::BTreeSet::new();
+        let mut coefficients = Vec::with_capacity(outputs);
         let bound = i32::try_from(family.loops.len())
             .ok()
             .and_then(|n| n.checked_mul(-2))
             .ok_or_else(|| Error::Limit("Laurent pole bound overflow".into()))?;
         leading = leading.min(bound);
-        for (integral, coefficient) in terms {
-            family.validate_integral(integral)?;
-            let coefficient = point.apply(coefficient).together().cancel();
-            if coefficient.is_zero() {
-                continue;
+        for terms in rows {
+            let mut row = BTreeMap::new();
+            for (integral, coefficient) in terms {
+                family.validate_integral(integral)?;
+                let coefficient = point.apply(coefficient).together().cancel();
+                if coefficient.is_zero() {
+                    continue;
+                }
+                let mut symbols = Default::default();
+                crate::family::scalar_symbols(coefficient.as_view(), &mut symbols)?;
+                if !symbols.is_subset(&allowed) {
+                    return Err(Error::InvalidInput(
+                        "projection coefficient has unsubstituted variables or unregistered roots"
+                            .into(),
+                    ));
+                }
+                let encoded = crate::family::encode_complex(&coefficient);
+                let _: RationalPolynomial<IntegerRing, u16> = encoded
+                    .try_to_rational_polynomial(&Q, &Z, None)
+                    .map_err(|e| {
+                        Error::Unsupported(format!(
+                            "combination weights must be exact rational functions: {e}"
+                        ))
+                    })?;
+                let expansion = encoded
+                    .series(family.epsilon, 0, 1)
+                    .map_err(|e| Error::Unsupported(e.to_string()))?;
+                let valuation = if expansion.is_zero() {
+                    0
+                } else {
+                    expansion
+                        .get_trailing_exponent()
+                        .to_string()
+                        .parse::<i32>()
+                        .map_err(|_| {
+                            Error::Unsupported(
+                                "noninteger epsilon valuation in combination weight".into(),
+                            )
+                        })?
+                        .min(0)
+                };
+                leading = leading.min(
+                    bound
+                        .checked_add(valuation)
+                        .ok_or_else(|| Error::Limit("weighted Laurent bound overflow".into()))?,
+                );
+                targets.insert(integral.clone());
+                row.insert(integral.clone(), coefficient);
             }
-            crate::family::scalar_symbols(coefficient.as_view(), &mut Default::default())?;
-            let encoded = crate::family::encode_complex(&coefficient);
-            let _: RationalPolynomial<IntegerRing, u16> = encoded
-                .try_to_rational_polynomial(&Q, &Z, None)
-                .map_err(|e| {
-                    Error::Unsupported(format!(
-                        "combination weights must be exact rational functions: {e}"
-                    ))
-                })?;
-            let expansion = encoded
-                .series(family.epsilon, 0, 1)
-                .map_err(|e| Error::Unsupported(e.to_string()))?;
-            let valuation = if expansion.is_zero() {
-                0
-            } else {
-                expansion
-                    .get_trailing_exponent()
-                    .to_string()
-                    .parse::<i32>()
-                    .map_err(|_| {
-                        Error::Unsupported(
-                            "noninteger epsilon valuation in combination weight".into(),
-                        )
-                    })?
-                    .min(0)
-            };
-            leading = leading.min(
-                bound
-                    .checked_add(valuation)
-                    .ok_or_else(|| Error::Limit("weighted Laurent bound overflow".into()))?,
-            );
-            integrals.push(integral.clone());
-            coefficients.push(coefficient);
+            coefficients.push(row);
         }
+        let integrals = targets.into_iter().collect::<Vec<_>>();
         if integrals.is_empty() {
             continue;
         }
+        let coefficients = coefficients
+            .into_iter()
+            .map(|row| {
+                integrals
+                    .iter()
+                    .map(|integral| row.get(integral).cloned().unwrap_or_default())
+                    .collect::<Vec<_>>()
+            })
+            .collect::<Vec<_>>();
         let preparation = if has_linear_propagators(&family) {
             Preparation::Linear(crate::linear::PreparedLinearFlow::new(
                 &family,
@@ -717,44 +801,62 @@ pub fn solve_integral_combinations(
     }
     let boundary = crate::recursive::RecursiveBoundary::new(backend, options, context);
     let ft = crate::ft::FtEvaluator::new(backend, context);
-    let mut result = fit_samples_refined_leading(1, leading, last, options, |samples, refined| {
+    fit_samples_refined_leading(outputs, leading, last, options, |samples, refined| {
         let p = Precision::decimal(refined.digits + refined.guard_digits)?;
+        let root_parameters = factors.parameters(p)?;
         let evaluate = |(index, epsilon): (usize, &Rational)| {
             context.emit(Progress::Sample {
                 index,
                 total: samples.len(),
             })?;
-            let mut sum = p.zero();
+            let mut sums = vec![p.zero(); outputs];
             for (family, integrals, coefficients, preparation) in &prepared {
-                let values = match preparation {
-                    Preparation::Amf(flow) => {
-                        flow.evaluate(epsilon, refined, &boundary, context)?
+                let values = crate::sample_checkpoint::evaluate(
+                    family,
+                    integrals,
+                    epsilon,
+                    refined,
+                    backend,
+                    || {
+                        Ok(match preparation {
+                            Preparation::Amf(flow) => {
+                                flow.evaluate(epsilon, refined, &boundary, context)?
+                            }
+                            Preparation::Linear(flow) => {
+                                flow.evaluate(epsilon, refined, backend, context)?.values
+                            }
+                            Preparation::Sampled => PreparedFlow::new_at_epsilon(
+                                family,
+                                integrals,
+                                &KinematicPoint::default(),
+                                backend,
+                                refined,
+                                context,
+                                epsilon,
+                            )?
+                            .evaluate(epsilon, refined, &boundary, context)?,
+                            Preparation::Ft => integrals
+                                .iter()
+                                .map(|i| ft.evaluate(family, i, epsilon, refined))
+                                .collect::<Result<Vec<_>>>()?,
+                        })
+                    },
+                )?;
+                let mut parameters = root_parameters.clone();
+                parameters.insert(Atom::var(family.epsilon), p.rational(epsilon));
+                for (sum, row) in sums.iter_mut().zip(coefficients) {
+                    for (coefficient, value) in row.iter().zip(&values) {
+                        if !coefficient.is_zero() {
+                            *sum = p.add(sum, &p.mul(&p.eval(coefficient, &parameters)?, value));
+                        }
                     }
-                    Preparation::Linear(flow) => {
-                        flow.evaluate(epsilon, refined, backend, context)?.values
-                    }
-                    Preparation::Sampled => PreparedFlow::new_at_epsilon(
-                        family,
-                        integrals,
-                        &KinematicPoint::default(),
-                        backend,
-                        refined,
-                        context,
-                        epsilon,
-                    )?
-                    .evaluate(epsilon, refined, &boundary, context)?,
-                    Preparation::Ft => integrals
-                        .iter()
-                        .map(|i| ft.evaluate(family, i, epsilon, refined))
-                        .collect::<Result<Vec<_>>>()?,
-                };
-                let parameters =
-                    ahash::HashMap::from_iter([(Atom::var(family.epsilon), p.rational(epsilon))]);
-                for (coefficient, value) in coefficients.iter().zip(values) {
-                    sum = p.add(&sum, &p.mul(&p.eval(coefficient, &parameters)?, &value));
                 }
             }
-            Ok(vec![sum])
+            let normalization = factors.evaluate(epsilon, p)?;
+            Ok(sums
+                .iter()
+                .map(|value| p.mul(value, &normalization))
+                .collect())
         };
         if refined.workers == 1 {
             samples.iter().enumerate().map(evaluate).collect()
@@ -765,8 +867,7 @@ pub fn solve_integral_combinations(
                 .map_err(|e| Error::InvalidInput(e.to_string()))?
                 .install(|| samples.par_iter().enumerate().map(evaluate).collect())
         }
-    })?;
-    Ok(result.remove(0))
+    })
 }
 
 fn fit_samples_refined(
