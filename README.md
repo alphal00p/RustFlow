@@ -10,7 +10,9 @@ retains the name `symbolica-amflow`. See the [active parity plan](docs/parity-pl
 and [cache and transport interface](docs/rustflow.md). Full AMFlow/DiffExp parity
 remains a development goal. The [coherent pure W/Z Higgs+jet squared amplitude](docs/gg-hg-matrix-element.md)
 has a native HEPKit validation at one physical point with 19 propagated relative
-digits. The plugin's HEFT–EW interference observable still needs validation.
+digits. At that same point, the infinite-top HEFT–EW interference has a native
+HEPKit validation with 20 propagated relative digits, conditional on the supplied
+form-factor allowances. General automatic amplitude evaluation remains open.
 
 The original paper's four two-loop targets pass the required calculation through
 epsilon power zero: 20-digit stability under independent sample/precision/order

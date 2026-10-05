@@ -1,0 +1,383 @@
+{
+  "status": "passed",
+  "date_utc": "2026-10-05T00:41:45.179265+00:00",
+  "scope": "Fresh optional native production-tool HEFT LO/interference contraction using recorded EW numerical form factors and independent original MG5/ALOHA reference. No form-factor integration or oracle regeneration in this gate.",
+  "root_revision_before_gate": "36e432e8a4d5e3b90d48eb7dc2e17b30ccc2ded9",
+  "hepkit_revision": "a33254faf0ac960c0589891ffdd2d8f38d334b05",
+  "hepkit_source_files_verified_unchanged": 736,
+  "checks": {
+    "release_all_feature_bin_tests": 7,
+    "python_input_tests": 5,
+    "strict_clippy": "--release --all-features --all-targets -- -D warnings",
+    "formatting": "passed",
+    "fresh_exact_heft_input_preparation": "passed",
+    "native_heft_oracle_and_arithmetic_acceptance": "passed",
+    "pure_ew_result_byte_for_byte_unchanged": true,
+    "pure_ew_verified_relative_digits": 19,
+    "heft_interference_conditional_relative_digits": 20,
+    "independent_native_owner_and_uncertainty_reviews": 2
+  },
+  "commands": [
+    "cargo fmt --manifest-path tools/hepkit-amplitude/Cargo.toml --check",
+    "cargo test --manifest-path tools/hepkit-amplitude/Cargo.toml --release --all-features --bins",
+    "cargo clippy --manifest-path tools/hepkit-amplitude/Cargo.toml --release --all-features --all-targets -- -D warnings",
+    "cargo build --manifest-path tools/hepkit-amplitude/Cargo.toml --release --all-features --bins",
+    "python3 -m unittest discover -s tools/hepkit-amplitude/tests -v",
+    "python3 tools/hepkit-amplitude/scripts/prepare_heft.py --source /common/dev/mg5_higgs_ew_plugin/ComputationFormFacHEFT/fortran_bridge_HEFT_ggHg.cpp --coherent-input target/hepkit-reproducible-final/validation/amplitude-input.json --oracle-report reports/validation/2026-10-05-gg-hg-heft-interference.json --output target/heft-production-gate/inputs",
+    "target/hepkit-amplitude-tool/release/evaluate-heft target/hepkit-reproducible-final target/hepkit-reproducible-final/validation/amplitude-input.json target/heft-production-gate/inputs/exact-heft.json target/heft-production-gate/inputs/heft-oracle.json target/heft-production-gate/result",
+    "target/hepkit-amplitude-tool/release/evaluate-me target/heft-production-gate/ew-regression target/hepkit-reproducible-final/validation/amplitude-input.json target/hepkit-reproducible-final/validation/quad-result.json"
+  ],
+  "result": {
+    "exact_heft_inputs": {
+      "MH_squared": "1",
+      "coefficients": [
+        {
+          "index": 1,
+          "value": "1357278355920/12058167788971"
+        },
+        {
+          "index": 2,
+          "value": "445138967384000/7173070292440521"
+        },
+        {
+          "index": 3,
+          "value": "-445138967384000/7173070292440521"
+        },
+        {
+          "index": 4,
+          "value": "75099269600039544211553313920664138880017161680/387574360453336814653703639546154533156416249659"
+        }
+      ],
+      "method": "Closed exact arithmetic AST over the four external scalar assignments; no binary float input or tensor operations",
+      "physical_s": "7173070292440521/111284741846000",
+      "physical_t": "-12058167788971/339319588980",
+      "source": {
+        "path": "/common/dev/mg5_higgs_ew_plugin/ComputationFormFacHEFT/fortran_bridge_HEFT_ggHg.cpp",
+        "sha256": "e2df9f77089477730ca8b00ee591aa926bb6f242f1c7629880ab510357fad8f2"
+      }
+    },
+    "exact_scalar_order_reconstruction": true,
+    "limits": "HEFT LO precision is demonstrated by256/384-bit refinement and113-bit independent original arithmetic. Interference physical accuracy is limited by explicitly propagated supplied EWFF allowances; oracle agreement alone does not establish it.",
+    "native_owner_chain": "Shared Process/Amplitude::squared/state sums/Idenso contraction/Kinematics/Model coupling expansion, then native Symbolica scalar polynomial projection and exact-input MPFR evaluation",
+    "observable_scope": "Infinite-top HEFT LO and2Re(A_HEFT conjugate(A_W+A_Z)); incoming two-gluon spin/color averages and final-state sums; no finite-top QCD claim",
+    "physical_s": "7173070292440521/111284741846000",
+    "physical_t": "-12058167788971/339319588980",
+    "physical_u": "-24192567254732572725551/866477578314137826000",
+    "results": [
+      {
+        "arithmetic_change_l1": "3.605803768481852678692451556671135251155069017206635697207822522120510053592972066650960089313257686393265946504877e-84",
+        "arithmetic_reserve": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-65",
+        "evaluations": [
+          {
+            "bits": 256,
+            "imaginary": "2.5e-87",
+            "real": "4.330896620239807810685905609324107407099586592501332217072507265531229985795e-8"
+          },
+          {
+            "bits": 384,
+            "imaginary": "7.4e-126",
+            "real": "4.330896620239807810685905609324107407099586592501332217072507265531229985795405567426467250200459763661630547134292e-8"
+          }
+        ],
+        "observable": "ew_squared"
+      },
+      {
+        "arithmetic_change_l1": "8.194911682433102037677211860166928838024540293325519540880761101548909038683524058038377729372908387592072064854068e-82",
+        "arithmetic_reserve": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-65",
+        "evaluations": [
+          {
+            "bits": 256,
+            "imaginary": "-2.9e-83",
+            "real": "1.665801936661043527134341745234275105253508037565787498688707545267506244075e-5"
+          },
+          {
+            "bits": 384,
+            "imaginary": "-3e-121",
+            "real": "1.665801936661043527134341745234275105253508037565787498688707545267506244075089177387747981418495256736719034852811e-5"
+          }
+        ],
+        "observable": "heft_ew_interference",
+        "oracle_absolute_difference": "2.635253508037565787498688707545267506244075089177387747981418495256736719034852810945077698083239929876249980971724e-38",
+        "oracle_relative_difference": "1.581972892479465125812620202414984399361209065046981702084400278214321038433611971587182926107780116330146256475205e-33",
+        "oracle_relative_tolerance": "1e-30",
+        "original_binary128": "1.66580193666104352713434174523427247E-0005",
+        "uncertainty": {
+          "absolute_bound": "1.386179807571189324116816980709306921379782632659449692282195647591677068094016282224644333359816355956402393946359e-25",
+          "conditional_verified_relative_digits": 20,
+          "formula": "sum_i (abs(Re gradient_i)+abs(Im gradient_i))*delta_i +1e-65; exact linear polynomial and vanishing Hessian certified",
+          "gradients": [
+            {
+              "component_absolute_allowance": "2.289442277848471061721902375812729698034012320130570285353681993131585456961394592319192087592830576707897159726113e-26",
+              "imaginary": "-5.1e-116",
+              "parameter": "GGGHEWWW_ForFac1_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "2.289442277848471061721902375812729698034012320130570285353681993131585456961394592319192087592830576707897159726113e-26",
+              "imaginary": "0",
+              "parameter": "GGGHEWWW_ForFac1_IM",
+              "real": "-1.200838637629651596673469774821045866316464464745186747801626243162315614466045136920676192154983493716500747267290"
+            },
+            {
+              "component_absolute_allowance": "4.353014092257436734606982563129745702623730028177662551019522298554460677561823240898739112534691675300169662098514e-25",
+              "imaginary": "-3.2e-117",
+              "parameter": "GGGHEWWW_ForFac2_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "4.353014092257436734606982563129745702623730028177662551019522298554460677561823240898739112534691675300169662098514e-25",
+              "imaginary": "0",
+              "parameter": "GGGHEWWW_ForFac2_IM",
+              "real": "-7.676347198445362928349567210235771259611834618113144440759048319778839382230288949734780595082253090253273146376234e-2"
+            },
+            {
+              "component_absolute_allowance": "4.103171368820387461726714767152197898235956134384709967460066721729586777644628502939486815277608057387479652479069e-26",
+              "imaginary": "1.3e-116",
+              "parameter": "GGGHEWWW_ForFac3_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "4.103171368820387461726714767152197898235956134384709967460066721729586777644628502939486815277608057387479652479069e-26",
+              "imaginary": "0",
+              "parameter": "GGGHEWWW_ForFac3_IM",
+              "real": "2.013412143863300427957137796955293938754076545666066890408780217230759868141596182504646895341591240257350848326591e-1"
+            },
+            {
+              "component_absolute_allowance": "1.909457398070527145335680275763894806017297812830448865386300429018212844725557428564196774501532285010624731919360e-25",
+              "imaginary": "1.2e-119",
+              "parameter": "GGGHEWWW_ForFac4_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "1.909457398070527145335680275763894806017297812830448865386300429018212844725557428564196774501532285010624731919360e-25",
+              "imaginary": "0",
+              "parameter": "GGGHEWWW_ForFac4_IM",
+              "real": "2.503377624771730975765617548552497094352001406541956494083848505204130846920799222993761465027337105315372348471273e-4"
+            },
+            {
+              "component_absolute_allowance": "3.085061743744845428904247889560447290799134991694023744491235657255181616299932733014962698395583784287716564179076e-26",
+              "imaginary": "-1e-115",
+              "parameter": "GGGHEWZZ_ForFac1_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "3.085061743744845428904247889560447290799134991694023744491235657255181616299932733014962698395583784287716564179076e-26",
+              "imaginary": "0",
+              "parameter": "GGGHEWZZ_ForFac1_IM",
+              "real": "-8.464631121925208854517889267459126283579032845593654709356828781591933153180009174170078860020403141029584785485179e-1"
+            },
+            {
+              "component_absolute_allowance": "5.559710371871399276020709954142272073212153479858167209952831777158960703815473743221350059648969604946179901419886e-25",
+              "imaginary": "-5e-117",
+              "parameter": "GGGHEWZZ_ForFac2_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "5.559710371871399276020709954142272073212153479858167209952831777158960703815473743221350059648969604946179901419886e-25",
+              "imaginary": "0",
+              "parameter": "GGGHEWZZ_ForFac2_IM",
+              "real": "-5.411005722377795405058912711095610598070649020825518386526846506601585080251801940814709914725088997743117349452552e-2"
+            },
+            {
+              "component_absolute_allowance": "9.272156194059254810596316994979123367551441088263202054008446264099794763538697852481209086427290642347790844747404e-26",
+              "imaginary": "9.5e-117",
+              "parameter": "GGGHEWZZ_ForFac3_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "9.272156194059254810596316994979123367551441088263202054008446264099794763538697852481209086427290642347790844747404e-26",
+              "imaginary": "0",
+              "parameter": "GGGHEWZZ_ForFac3_IM",
+              "real": "1.419240733946435866855004792474309253032544981438823897323116782109998074279292384820289693189854396728228984348863e-1"
+            },
+            {
+              "component_absolute_allowance": "2.498774449646958905325750897334242830492284807500043986214120492418334063153604647387250027585561275078712835408388e-25",
+              "imaginary": "2e-119",
+              "parameter": "GGGHEWZZ_ForFac4_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "2.498774449646958905325750897334242830492284807500043986214120492418334063153604647387250027585561275078712835408388e-25",
+              "imaginary": "0",
+              "parameter": "GGGHEWZZ_ForFac4_IM",
+              "real": "1.764614119545778797613806612390164343401640212044525920904248009007174386057879159884009133349189879662728385890605e-4"
+            }
+          ],
+          "linear_terms": 8,
+          "metric": "absolute error; relative error divides by this observable's magnitude",
+          "relative_bound": "8.321396302069784651135914551590256841862989123795093739415122230337080607341427442078439992460809999446110001454287e-21",
+          "scope": "Conditional on supplied complex EW form-factor allowances. Exact HEFT rational coefficients/model/phase-point inputs remain exact until MPFR evaluation. Each real and imaginary FF component conservatively receives the full complex allowance."
+        }
+      },
+      {
+        "arithmetic_change_l1": "3.373503341833767431791543696406406082467187642357922416024884168034606173110323069520120118543862588500213786697715e-80",
+        "arithmetic_reserve": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-65",
+        "evaluations": [
+          {
+            "bits": 256,
+            "imaginary": "0",
+            "real": "1.768394928560408382555131438745347828982103996872198440185577091000564244796e-3"
+          },
+          {
+            "bits": 384,
+            "imaginary": "0",
+            "real": "1.768394928560408382555131438745347828982103996872198440185577091000564244795767771294679674848125989614005704640320e-3"
+          }
+        ],
+        "observable": "heft_squared",
+        "oracle_absolute_difference": "1.910178960031278015598144229089994357552042322287053203251518740103859942953596796223126003391982692568057731989751e-37",
+        "oracle_relative_difference": "1.080176678399712052545757592716712499552246151813459564054817655048592488514192016085843157848959880625360242017746e-34",
+        "oracle_relative_tolerance": "1e-30",
+        "original_binary128": "1.76839492856040838255513143874534802E-0003"
+      }
+    ],
+    "status": "passed"
+  },
+  "artifacts": [
+    {
+      "path": "tools/hepkit-amplitude/Cargo.toml",
+      "bytes": 1884,
+      "sha256": "758f8278d33b0838c1b52a9ac6ee1f54a6f5ad9bec6717b564f4048932323007"
+    },
+    {
+      "path": "tools/hepkit-amplitude/Cargo.lock",
+      "bytes": 56041,
+      "sha256": "48f0ae8e366d06b5b58486dc339621219a44a98d9946fb916172ee8325980daa"
+    },
+    {
+      "path": "tools/hepkit-amplitude/src/evaluate.rs",
+      "bytes": 9143,
+      "sha256": "febbb09848b4f850648d0dfb1d8dd412e2a9c83f6ab7d58be50a7802a1cf1310"
+    },
+    {
+      "path": "tools/hepkit-amplitude/src/scalar.rs",
+      "bytes": 8445,
+      "sha256": "1a7e6e226487d555369429a943b5879c42ca627421662f9a8fd62b2412b854ce"
+    },
+    {
+      "path": "tools/hepkit-amplitude/src/heft.rs",
+      "bytes": 13013,
+      "sha256": "6190c314db26166abbcaab496c7272e7196cb7cf2b79f39390e2192caafed5da"
+    },
+    {
+      "path": "tools/hepkit-amplitude/scripts/prepare_heft.py",
+      "bytes": 4626,
+      "sha256": "84a842e5844754e5b56651ebfe3868222c533a998aabda1fd1b05377821a500d"
+    },
+    {
+      "path": "tools/hepkit-amplitude/tests/test_prepare_heft.py",
+      "bytes": 3643,
+      "sha256": "1211d8d19f8aea9ddcbd81041f4a8ad67f56f8d26356bf68af76ec8df19d3ab3"
+    },
+    {
+      "path": "reports/validation/2026-10-05-gg-hg-heft-interference.json",
+      "bytes": 37798,
+      "sha256": "e17018fb3a2f215d12d8004d842bbd50c01e42c37e824a3d2c739cde74ccfebb"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/native-model.json",
+      "bytes": 207856,
+      "sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/validation/amplitude-input.json",
+      "bytes": 8396,
+      "sha256": "8a708aa3bfd23bac54354760f8f12580506d5e974cec11684540d4eebff7cfe1"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/validation/quad-result.json",
+      "bytes": 23669,
+      "sha256": "7b5c405f05e86c1bf802f901a0c4fdefea18ae41ef3c99f8960ba5310352e2cb"
+    },
+    {
+      "path": "target/hepkit-amplitude-tool/release/evaluate-heft",
+      "bytes": 44053272,
+      "sha256": "75c3a96f0f4d787ff700860f7288211943434e45beae2a762db9b0c8025b4809"
+    },
+    {
+      "path": "target/hepkit-amplitude-tool/release/evaluate-me",
+      "bytes": 44026200,
+      "sha256": "bf8fc19b41318f40d53ab03bd8027aeb0edd9fa2966c13a1cd2b40fec0fbd5f5"
+    },
+    {
+      "path": "target/heft-production-gate/build.log",
+      "bytes": 164,
+      "sha256": "c4213e0e0661eb71d1726adce967134caeb592e2ec0c5e70fc1f847d59e73b6c"
+    },
+    {
+      "path": "target/heft-production-gate/clippy.log",
+      "bytes": 163,
+      "sha256": "064328af0faf23b400335dec08e22e679eada91874be30c78f8b1891d3214482"
+    },
+    {
+      "path": "target/heft-production-gate/evaluation.log",
+      "bytes": 155,
+      "sha256": "53ef34a5fb451adf470b32644a2628e7e8610924a7fd359afdc06de5fb79f772"
+    },
+    {
+      "path": "target/heft-production-gate/ew-regression/me-result.json",
+      "bytes": 9000,
+      "sha256": "5e0f6cf9929b22542422f7a167da01df6a12e3d2e8d1fac36018480ed484989e"
+    },
+    {
+      "path": "target/heft-production-gate/ew-regression/me-symbolic.atom",
+      "bytes": 159343,
+      "sha256": "251ae8aa95838acc5cea20e8bb2d919941dfb6665774b289942ad54ac0ea1a5f"
+    },
+    {
+      "path": "target/heft-production-gate/ew-regression/me-values.atom",
+      "bytes": 8371,
+      "sha256": "2e3870be8ff1afd4bf6a20371b7f9a21eff734b99e442fc46f630ff303d96a92"
+    },
+    {
+      "path": "target/heft-production-gate/ew-regression/native-model.json",
+      "bytes": 207856,
+      "sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12"
+    },
+    {
+      "path": "target/heft-production-gate/ew-regression.log",
+      "bytes": 811,
+      "sha256": "0703935883852031b2a3e458cb4983c7a39384effb24211c422b32f4839526f5"
+    },
+    {
+      "path": "target/heft-production-gate/fmt.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/heft-production-gate/inputs/exact-heft.json",
+      "bytes": 861,
+      "sha256": "5b74fa67b11b4d9563486eebb004273727dae8d419050133111d80c6a004a84d"
+    },
+    {
+      "path": "target/heft-production-gate/inputs/heft-oracle.json",
+      "bytes": 166,
+      "sha256": "4cca06bc79da7b2f8febbd838ef8f177fd8854f02a946f3b89f1e672368361a3"
+    },
+    {
+      "path": "target/heft-production-gate/inputs/provenance.json",
+      "bytes": 366,
+      "sha256": "2b451dc4b3486b7dfed34cf792b0e7655dc58641373747a041c53909196fcbd5"
+    },
+    {
+      "path": "target/heft-production-gate/prepare.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/heft-production-gate/python.log",
+      "bytes": 807,
+      "sha256": "1edbd1880cd73c1f0953951f3552ca7d3dd150f2181d45de9794bf2246cb5498"
+    },
+    {
+      "path": "target/heft-production-gate/result/heft-result.json",
+      "bytes": 11702,
+      "sha256": "08e199bfb2bb1e23c17840e9a88915f885fec8f5453e855c58ba88dec6d2cfb2"
+    },
+    {
+      "path": "target/heft-production-gate/tests.log",
+      "bytes": 1809,
+      "sha256": "73e5d84e0b73b073a6159af7f60b05c3d0247fce87f55d4d3e2388719762edd4"
+    }
+  ]
+}

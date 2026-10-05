@@ -1,0 +1,701 @@
+{
+  "status": "passed",
+  "date_utc": "2026-10-05",
+  "scope": "One coherent gg\u2192Hg phase point: infinite-top HEFT LO and HEFT\u2013EW interference. This is an additional native HEPKit acceptance, not a finite-top QCD, NLO event-generator, or general physical-region coverage claim.",
+  "observable_definitions": {
+    "heft_squared": "|A_HEFT|\u00b2",
+    "heft_ew_interference": "2 Re[A_HEFT conjugate(A_W+A_Z)]",
+    "averaging": "Incoming two-gluon spin/color average only, IDEN=256; final-state sum. No second average or interference factor2 applied."
+  },
+  "original_processes": {
+    "plugin_commit": "89f64b93d0bdbd8ee90eb85737021189229b034a",
+    "mg5_version": "3.7.0",
+    "heft_squared": "generate g g > g h GGGHEFT^2==2 QCD^2==6 GGHEFT=0 GGHEW=0 GGGHEW=0 @1",
+    "heft_ew_interference": "add process g g > g h GGGHEFT^2==1 GGGHEW^2==1 QCD^2==6 GGHEFT=0 GGHEW=0 @2",
+    "diagram_counts": {
+      "heft_squared": 1,
+      "heft_ew_interference": 3
+    },
+    "owner": "Original generated MG5 split-order SMATRIX selects each observable; original ALOHA provides all tensor/helicity routines. Private Python3 UFO and MP numeric-kind adaptations are recorded; external plugin/UFO sources untouched."
+  },
+  "original": {
+    "binary64": {
+      "heft_squared": "1.76839492856041081E-003",
+      "heft_ew_interference": "1.66580193666104801E-005"
+    },
+    "binary128": {
+      "heft_squared": "1.76839492856040838255513143874534802E-0003",
+      "heft_ew_interference": "1.66580193666104352713434174523427247E-0005"
+    }
+  },
+  "original_logs": {
+    "P1_gg_gh.log": {
+      "sha256": "d45fa9cf920817d36f70911dd8c52f4175a4b90c595ff9bf828ab14ad85250f6",
+      "arithmetic_radix_bits_digits": [
+        2,
+        53,
+        15
+      ]
+    },
+    "P1_gg_gh-quad.log": {
+      "sha256": "959fea4be81e910d288d3e0cfa41d8b9fb087031b4236e631f4971004c2630de",
+      "arithmetic_radix_bits_digits": [
+        2,
+        113,
+        33
+      ]
+    },
+    "P2_gg_gh.log": {
+      "sha256": "23a95e3723908da2d4f29cb457e24490aa212fa2a9d9bdbc1901399d314fdd18",
+      "arithmetic_radix_bits_digits": [
+        2,
+        53,
+        15
+      ]
+    },
+    "P2_gg_gh-quad.log": {
+      "sha256": "947ac4a3f9804604f35c2deba3857b46d198f4349e80e385e317061688051b29",
+      "arithmetic_radix_bits_digits": [
+        2,
+        113,
+        33
+      ]
+    }
+  },
+  "exact_heft_input": {
+    "owner": "External pinned original plugin C++ scalar coefficient bridge; no tensor algebra or rewritten coefficient expressions",
+    "source": "/common/dev/mg5_higgs_ew_plugin/ComputationFormFacHEFT/fortran_bridge_HEFT_ggHg.cpp",
+    "source_sha256": "e2df9f77089477730ca8b00ee591aa926bb6f242f1c7629880ab510357fad8f2",
+    "method": "Extract the four original scalar assignments, validate a closed arithmetic AST, evaluate using exact rational Fractions with exact s,t,MH\u00b2; assert index coverage0..3. Original invariants are supplied from the exact native phase-point definition.",
+    "physical_s": "7173070292440521/111284741846000",
+    "physical_t": "-12058167788971/339319588980",
+    "MH_squared": "1",
+    "coefficients": [
+      {
+        "index": 1,
+        "external_expression": "-4/t",
+        "value": "1357278355920/12058167788971"
+      },
+      {
+        "index": 2,
+        "external_expression": "4/s",
+        "value": "445138967384000/7173070292440521"
+      },
+      {
+        "index": 3,
+        "external_expression": "-4/s",
+        "value": "-445138967384000/7173070292440521"
+      },
+      {
+        "index": 4,
+        "external_expression": "(-4*(pow(s,2) + s*t + pow(t,2) - mmH*(s + t)))/(s*t*(-mmH + s + t))",
+        "value": "75099269600039544211553313920664138880017161680/387574360453336814653703639546154533156416249659"
+      }
+    ]
+  },
+  "scientific_inputs": {
+    "coherent_input_path": "target/gg-hg-coherent/amplitude-input.json",
+    "coherent_input_sha256": "c8d2e3a61b0b1f97a82db89b1a7774531447cc221a5b3a6c43adf00fb247d674",
+    "MH_squared": "1",
+    "MW_squared": "5399/13074",
+    "MZ_squared": "7775/14631",
+    "alpha_s": "118/1000",
+    "alpha": "1/128",
+    "GF": "pi*alpha*MZ\u00b2/(sqrt(2)*MW\u00b2*(MZ\u00b2-MW\u00b2))",
+    "FF_normalization": "Existing coherent W/Z scalar form factors include -MV^(-4)/(4pi)^4 once; native UFO couplings applied once.",
+    "normalization_reference": "reports/validation/2026-10-04-gg-hg-squared-matrix-element.json"
+  },
+  "native": {
+    "exact_heft_inputs": {
+      "MH_squared": "1",
+      "coefficients": [
+        {
+          "index": 1,
+          "value": "1357278355920/12058167788971"
+        },
+        {
+          "index": 2,
+          "value": "445138967384000/7173070292440521"
+        },
+        {
+          "index": 3,
+          "value": "-445138967384000/7173070292440521"
+        },
+        {
+          "index": 4,
+          "value": "75099269600039544211553313920664138880017161680/387574360453336814653703639546154533156416249659"
+        }
+      ],
+      "method": "Closed exact arithmetic AST over the four external scalar assignments; no binary float input or tensor operations",
+      "physical_s": "7173070292440521/111284741846000",
+      "physical_t": "-12058167788971/339319588980",
+      "source": {
+        "path": "/common/dev/mg5_higgs_ew_plugin/ComputationFormFacHEFT/fortran_bridge_HEFT_ggHg.cpp",
+        "sha256": "e2df9f77089477730ca8b00ee591aa926bb6f242f1c7629880ab510357fad8f2"
+      }
+    },
+    "exact_scalar_order_reconstruction": true,
+    "limits": "HEFT LO precision is demonstrated by256/384-bit refinement and113-bit independent original arithmetic. Interference physical accuracy is limited by explicitly propagated supplied EWFF allowances; oracle agreement alone does not establish it.",
+    "native_owner_chain": "Shared Process/Amplitude::squared/state sums/Idenso contraction/Kinematics/Model coupling expansion, then native Symbolica scalar polynomial projection and exact-input MPFR evaluation",
+    "observable_scope": "Infinite-top HEFT LO and2Re(A_HEFT conjugate(A_W+A_Z)); incoming two-gluon spin/color averages and final-state sums; no finite-top QCD claim",
+    "physical_s": "7173070292440521/111284741846000",
+    "physical_t": "-12058167788971/339319588980",
+    "physical_u": "-24192567254732572725551/866477578314137826000",
+    "results": [
+      {
+        "arithmetic_change_l1": "3.605803768481852678692451556671135251155069017206635697207822522120510053592972066650960089313257686393265946504877e-84",
+        "arithmetic_reserve": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-65",
+        "evaluations": [
+          {
+            "bits": 256,
+            "imaginary": "2.5e-87",
+            "real": "4.330896620239807810685905609324107407099586592501332217072507265531229985795e-8"
+          },
+          {
+            "bits": 384,
+            "imaginary": "7.4e-126",
+            "real": "4.330896620239807810685905609324107407099586592501332217072507265531229985795405567426467250200459763661630547134292e-8"
+          }
+        ],
+        "observable": "ew_squared"
+      },
+      {
+        "arithmetic_change_l1": "8.194911682433102037677211860166928838024540293325519540880761101548909038683524058038377729372908387592072064854068e-82",
+        "arithmetic_reserve": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-65",
+        "evaluations": [
+          {
+            "bits": 256,
+            "imaginary": "-2.9e-83",
+            "real": "1.665801936661043527134341745234275105253508037565787498688707545267506244075e-5"
+          },
+          {
+            "bits": 384,
+            "imaginary": "-3e-121",
+            "real": "1.665801936661043527134341745234275105253508037565787498688707545267506244075089177387747981418495256736719034852811e-5"
+          }
+        ],
+        "observable": "heft_ew_interference",
+        "oracle_absolute_difference": "2.635253508037565787498688707545267506244075089177387747981418495256736719034852810945077698083239929876249980971724e-38",
+        "oracle_relative_difference": "1.581972892479465125812620202414984399361209065046981702084400278214321038433611971587182926107780116330146256475205e-33",
+        "oracle_relative_tolerance": "1e-30",
+        "original_binary128": "1.66580193666104352713434174523427247E-0005",
+        "uncertainty": {
+          "absolute_bound": "1.386179807571189324116816980709306921379782632659449692282195647591677068094016282224644333359816355956402393946359e-25",
+          "conditional_verified_relative_digits": 20,
+          "formula": "sum_i (abs(Re gradient_i)+abs(Im gradient_i))*delta_i +1e-65; exact linear polynomial and vanishing Hessian certified",
+          "gradients": [
+            {
+              "component_absolute_allowance": "2.289442277848471061721902375812729698034012320130570285353681993131585456961394592319192087592830576707897159726113e-26",
+              "imaginary": "-5.1e-116",
+              "parameter": "GGGHEWWW_ForFac1_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "2.289442277848471061721902375812729698034012320130570285353681993131585456961394592319192087592830576707897159726113e-26",
+              "imaginary": "0",
+              "parameter": "GGGHEWWW_ForFac1_IM",
+              "real": "-1.200838637629651596673469774821045866316464464745186747801626243162315614466045136920676192154983493716500747267290"
+            },
+            {
+              "component_absolute_allowance": "4.353014092257436734606982563129745702623730028177662551019522298554460677561823240898739112534691675300169662098514e-25",
+              "imaginary": "-3.2e-117",
+              "parameter": "GGGHEWWW_ForFac2_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "4.353014092257436734606982563129745702623730028177662551019522298554460677561823240898739112534691675300169662098514e-25",
+              "imaginary": "0",
+              "parameter": "GGGHEWWW_ForFac2_IM",
+              "real": "-7.676347198445362928349567210235771259611834618113144440759048319778839382230288949734780595082253090253273146376234e-2"
+            },
+            {
+              "component_absolute_allowance": "4.103171368820387461726714767152197898235956134384709967460066721729586777644628502939486815277608057387479652479069e-26",
+              "imaginary": "1.3e-116",
+              "parameter": "GGGHEWWW_ForFac3_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "4.103171368820387461726714767152197898235956134384709967460066721729586777644628502939486815277608057387479652479069e-26",
+              "imaginary": "0",
+              "parameter": "GGGHEWWW_ForFac3_IM",
+              "real": "2.013412143863300427957137796955293938754076545666066890408780217230759868141596182504646895341591240257350848326591e-1"
+            },
+            {
+              "component_absolute_allowance": "1.909457398070527145335680275763894806017297812830448865386300429018212844725557428564196774501532285010624731919360e-25",
+              "imaginary": "1.2e-119",
+              "parameter": "GGGHEWWW_ForFac4_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "1.909457398070527145335680275763894806017297812830448865386300429018212844725557428564196774501532285010624731919360e-25",
+              "imaginary": "0",
+              "parameter": "GGGHEWWW_ForFac4_IM",
+              "real": "2.503377624771730975765617548552497094352001406541956494083848505204130846920799222993761465027337105315372348471273e-4"
+            },
+            {
+              "component_absolute_allowance": "3.085061743744845428904247889560447290799134991694023744491235657255181616299932733014962698395583784287716564179076e-26",
+              "imaginary": "-1e-115",
+              "parameter": "GGGHEWZZ_ForFac1_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "3.085061743744845428904247889560447290799134991694023744491235657255181616299932733014962698395583784287716564179076e-26",
+              "imaginary": "0",
+              "parameter": "GGGHEWZZ_ForFac1_IM",
+              "real": "-8.464631121925208854517889267459126283579032845593654709356828781591933153180009174170078860020403141029584785485179e-1"
+            },
+            {
+              "component_absolute_allowance": "5.559710371871399276020709954142272073212153479858167209952831777158960703815473743221350059648969604946179901419886e-25",
+              "imaginary": "-5e-117",
+              "parameter": "GGGHEWZZ_ForFac2_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "5.559710371871399276020709954142272073212153479858167209952831777158960703815473743221350059648969604946179901419886e-25",
+              "imaginary": "0",
+              "parameter": "GGGHEWZZ_ForFac2_IM",
+              "real": "-5.411005722377795405058912711095610598070649020825518386526846506601585080251801940814709914725088997743117349452552e-2"
+            },
+            {
+              "component_absolute_allowance": "9.272156194059254810596316994979123367551441088263202054008446264099794763538697852481209086427290642347790844747404e-26",
+              "imaginary": "9.5e-117",
+              "parameter": "GGGHEWZZ_ForFac3_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "9.272156194059254810596316994979123367551441088263202054008446264099794763538697852481209086427290642347790844747404e-26",
+              "imaginary": "0",
+              "parameter": "GGGHEWZZ_ForFac3_IM",
+              "real": "1.419240733946435866855004792474309253032544981438823897323116782109998074279292384820289693189854396728228984348863e-1"
+            },
+            {
+              "component_absolute_allowance": "2.498774449646958905325750897334242830492284807500043986214120492418334063153604647387250027585561275078712835408388e-25",
+              "imaginary": "2e-119",
+              "parameter": "GGGHEWZZ_ForFac4_RE",
+              "real": "0"
+            },
+            {
+              "component_absolute_allowance": "2.498774449646958905325750897334242830492284807500043986214120492418334063153604647387250027585561275078712835408388e-25",
+              "imaginary": "0",
+              "parameter": "GGGHEWZZ_ForFac4_IM",
+              "real": "1.764614119545778797613806612390164343401640212044525920904248009007174386057879159884009133349189879662728385890605e-4"
+            }
+          ],
+          "linear_terms": 8,
+          "metric": "absolute error; relative error divides by this observable's magnitude",
+          "relative_bound": "8.321396302069784651135914551590256841862989123795093739415122230337080607341427442078439992460809999446110001454287e-21",
+          "scope": "Conditional on supplied complex EW form-factor allowances. Exact HEFT rational coefficients/model/phase-point inputs remain exact until MPFR evaluation. Each real and imaginary FF component conservatively receives the full complex allowance."
+        }
+      },
+      {
+        "arithmetic_change_l1": "3.373503341833767431791543696406406082467187642357922416024884168034606173110323069520120118543862588500213786697715e-80",
+        "arithmetic_reserve": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-65",
+        "evaluations": [
+          {
+            "bits": 256,
+            "imaginary": "0",
+            "real": "1.768394928560408382555131438745347828982103996872198440185577091000564244796e-3"
+          },
+          {
+            "bits": 384,
+            "imaginary": "0",
+            "real": "1.768394928560408382555131438745347828982103996872198440185577091000564244795767771294679674848125989614005704640320e-3"
+          }
+        ],
+        "observable": "heft_squared",
+        "oracle_absolute_difference": "1.910178960031278015598144229089994357552042322287053203251518740103859942953596796223126003391982692568057731989751e-37",
+        "oracle_relative_difference": "1.080176678399712052545757592716712499552246151813459564054817655048592488514192016085843157848959880625360242017746e-34",
+        "oracle_relative_tolerance": "1e-30",
+        "original_binary128": "1.76839492856040838255513143874534802E-0003"
+      }
+    ],
+    "status": "passed"
+  },
+  "independent_decimal_comparisons": [
+    {
+      "observable": "heft_ew_interference",
+      "native384_real": "1.665801936661043527134341745234275105253508037565787498688707545267506244075089177387747981418495256736719034852811e-5",
+      "native384_imaginary": "-3e-121",
+      "native256_384_serialized_l1_change": "9.207738774798141849525673671903485281097E-82",
+      "original113bit": "1.66580193666104352713434174523427247E-0005",
+      "absolute_difference": "2.635253508037565787498688707545267506244075089177387747981418495256736719034852811E-38",
+      "relative_difference": "1.581972892479465125812620202414984399361209065046981702084400278214321038433611971620153413599736748790638432145635816980222188767108172535118154734659679143910E-33",
+      "arithmetic_acceptance_relative_tolerance": "1e-30",
+      "original_binary64": "1.66580193666104801E-005",
+      "binary64_vs_final_exact_native_relative_difference": "2.691115648022527658413956279857996131304920932293617916148883066658733390568827958532700883711961690545097651265970016230952196033300468386915044822328206375922E-15"
+    },
+    {
+      "observable": "heft_squared",
+      "native384_real": "1.768394928560408382555131438745347828982103996872198440185577091000564244795767771294679674848125989614005704640320e-3",
+      "native384_imaginary": "0",
+      "native256_384_serialized_l1_change": "2.32228705320325151874010385994295359680E-79",
+      "original113bit": "1.76839492856040838255513143874534802E-0003",
+      "absolute_difference": "1.91017896003127801559814422908999435755204232228705320325151874010385994295359680E-37",
+      "relative_difference": "1.080176678399712052545757592716712499552246151813459564054817655048592488514192018221607028017172289924515738021167504486185911331958460628460895776683173273274E-34",
+      "arithmetic_acceptance_relative_tolerance": "1e-30",
+      "original_binary64": "1.76839492856041081E-003",
+      "binary64_vs_final_exact_native_relative_difference": "1.372682554873281021892207678773530589018306561722271340364996554490087616461110668200057107235995281619514903176409891221772630256737009487993061205180036386439E-15"
+    }
+  ],
+  "accuracy": {
+    "interference_conditional_verified_relative_digits": 20,
+    "interference_absolute_allowance": "1.386179807571189324116816980709306921379782632659449692282195647591677068094016282224644333359816355956402393946359e-25",
+    "interference_relative_allowance": "8.321396302069784651135914551590256841862989123795093739415122230337080607341427442078439992460809999446110001454287e-21",
+    "evidence": "Native scalar polynomial is exactly linear in the16 real EW FF components, its Hessian vanishes, and complex gradient L1 norms multiply supplied component allowances; each component receives the full complex FF allowance. Add1e-65 arithmetic reserve, exceeding observed256/384 changes and imaginary residuals.",
+    "conditions": "The EW FF source allowances are empirical upstream numerical evidence, not interval certificates. HEFT/model/phase-point inputs remain exact until MPFR evaluation.",
+    "heft_LO_precision_claim": "Demonstrated256/384-bit native stability and independent113-bit arithmetic agreement at1e-30 relative; no formal interval certificate or broader precision claim.",
+    "pure_EW_squared": "Existing pure |A_W+A_Z|\u00b2 regression remains19 conditional relative digits; this report does not upgrade it."
+  },
+  "exact_certificates": [
+    "Marker-free coefficients and exact reconstruction of native scalar squared amplitude into degrees0,1,2",
+    "Exactly homogeneous linear EW FF dependence and vanishing Hessian for interference",
+    "HEFT LO has zero derivatives in every EW FF component",
+    "Native exact rational HEFT data extracted from pinned external original scalar assignments; all4indices validated"
+  ],
+  "validation": {
+    "shared_preparation_regression": {
+      "name": "ew-acceptance",
+      "command": [
+        "taskset",
+        "-c",
+        "31",
+        "/common/dev/amflow/target/gg-hg-heft-interference/production/evaluate-me",
+        "/common/dev/amflow/target/gg-hg-heft-interference/production/ew-scope",
+        "/common/dev/amflow/target/gg-hg-coherent/amplitude-input.json",
+        "/common/dev/amflow/target/gg-hg-original-oracle/quad/result.json"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 20.869751919992268,
+      "binary_sha256": "05ad984f8b547f96fb48858d691858bfd203c519d83a76fdd98e207e624ee8d7",
+      "log_sha256": "0703935883852031b2a3e458cb4983c7a39384effb24211c422b32f4839526f5"
+    },
+    "shared_preparation_bitwise_regression": "Refactored evaluate-me result JSON is byte-for-byte identical to the previously published optional-tool acceptance output.",
+    "final_generic_input_reproduction": {
+      "command": [
+        "timeout",
+        "--kill-after=10s",
+        "1800s",
+        "taskset",
+        "-c",
+        "33",
+        "/common/dev/amflow/target/gg-hg-heft-interference/production/evaluate-heft",
+        "/common/dev/amflow/target/gg-hg-heft-interference/production/ew-scope",
+        "/common/dev/amflow/target/gg-hg-coherent/amplitude-input.json",
+        "/common/dev/amflow/target/gg-hg-heft-interference/prepared-repro-input/exact-heft.json",
+        "/common/dev/amflow/target/gg-hg-heft-interference/prepared-repro-input/heft-oracle.json",
+        "/common/dev/amflow/target/gg-hg-heft-interference/production/heft-reproduced"
+      ],
+      "exit": 0,
+      "elapsed_seconds": 33.23438070714474,
+      "source_sha256": "6190c314db26166abbcaab496c7272e7196cb7cf2b79f39390e2192caafed5da",
+      "binary_sha256": "2e716b52fbc99b1c5a20ada8e8550b75c1c1dd61027eb483deb41380e03123f7",
+      "log_sha256": "53ef34a5fb451adf470b32644a2628e7e8610924a7fd359afdc06de5fb79f772"
+    },
+    "rust_unit_tests_passed": 4,
+    "python_input_tests_passed": 5,
+    "strict_isolated_clippy": [
+      {
+        "name": "evaluate-me-tests",
+        "command": [
+          "clippy-driver",
+          "--emit=metadata",
+          "--test",
+          "--edition=2024",
+          "-O",
+          "--crate-name",
+          "evaluate_me",
+          "/common/dev/amflow/target/gg-hg-heft-interference/production/src/evaluate.rs",
+          "-L",
+          "dependency=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps",
+          "--extern",
+          "symbolica=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libsymbolica-a1c5ddaeebef3839.rlib",
+          "--extern",
+          "serde_json=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libserde_json-764c963f555eb7fe.rlib",
+          "--extern",
+          "feynkit_model=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libfeynkit_model-a8b516f5e931e1d7.rlib",
+          "--extern",
+          "feynkit_generator=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libfeynkit_generator-2bb915f41811fcdc.rlib",
+          "--extern",
+          "feynkit_amplitude=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libfeynkit_amplitude-fd4cdc2d5a008fb1.rlib",
+          "--extern",
+          "feynkit_kinematics=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libfeynkit_kinematics-9d6fa0a2234e7166.rlib",
+          "--extern",
+          "idenso=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libidenso-f042f61bdc027a4d.rlib",
+          "--extern",
+          "spenso=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libspenso-ef4cc0441722258f.rlib",
+          "-o",
+          "/common/dev/amflow/target/gg-hg-heft-interference/production/evaluate-me-tests-clippy.rmeta",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0
+      },
+      {
+        "name": "evaluate-heft-tests",
+        "command": [
+          "clippy-driver",
+          "--emit=metadata",
+          "--test",
+          "--edition=2024",
+          "-O",
+          "--crate-name",
+          "evaluate_heft",
+          "/common/dev/amflow/target/gg-hg-heft-interference/production/src/heft.rs",
+          "-L",
+          "dependency=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps",
+          "--extern",
+          "symbolica=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libsymbolica-a1c5ddaeebef3839.rlib",
+          "--extern",
+          "serde_json=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libserde_json-764c963f555eb7fe.rlib",
+          "--extern",
+          "feynkit_model=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libfeynkit_model-a8b516f5e931e1d7.rlib",
+          "--extern",
+          "feynkit_generator=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libfeynkit_generator-2bb915f41811fcdc.rlib",
+          "--extern",
+          "feynkit_amplitude=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libfeynkit_amplitude-fd4cdc2d5a008fb1.rlib",
+          "--extern",
+          "feynkit_kinematics=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libfeynkit_kinematics-9d6fa0a2234e7166.rlib",
+          "--extern",
+          "idenso=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libidenso-f042f61bdc027a4d.rlib",
+          "--extern",
+          "spenso=/common/dev/amflow/target/hepkit-amplitude-tool/release/deps/libspenso-ef4cc0441722258f.rlib",
+          "-o",
+          "/common/dev/amflow/target/gg-hg-heft-interference/production/evaluate-heft-tests-clippy.rmeta",
+          "-D",
+          "warnings"
+        ],
+        "exit": 0
+      }
+    ],
+    "fresh_input_preparation": "Prepared-final-input was regenerated from an immutable oracle-source-report.json; exact-heft.json and heft-oracle.json are byte-for-byte identical to the inputs used by the final acceptance run.",
+    "native_refinements_bits": [
+      256,
+      384
+    ],
+    "original_bits": [
+      53,
+      113
+    ],
+    "native_model_sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+    "upstream_original_bridge_SHA256": "e2df9f77089477730ca8b00ee591aa926bb6f242f1c7629880ab510357fad8f2"
+  },
+  "failed_trials": {
+    "generation": "Three preserved output attempts reported missing obsolete compiler path despite process exit0. Final generation.json semantic-success check plus original numerical output establish successful run.",
+    "native_literal_zero": "An initial post-expansion check incorrectly required exact zero from rounded numerical cancellation; observed tiny imaginary residuals are now explicitly retained/reported and required below1e-65 at both working precisions. No physical imaginary component is discarded silently."
+  },
+  "provenance": {
+    "/common/dev/amflow/target/gg-hg-heft-interference/preparation.json": {
+      "sha256": "fd2e903ebd6c957d7b8fc8c6788338f270c0471108fb12882bb38d1ca84988bc",
+      "bytes": 2303
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/generation.json": {
+      "sha256": "6105d4de69616546ad51d142fbadbfd9dc86fc116bbb1d6f060cdc2083fdcc6c",
+      "bytes": 745
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/generation-compiler.json": {
+      "sha256": "ecfe6c3b790b3147954653491e425b04aa46ee2f91581648be19085e225318c5",
+      "bytes": 662
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/generation-path.json": {
+      "sha256": "a16bb807104f60da95ecba07aed53c4a0b44254091a6ec7e507cfe41ad591614",
+      "bytes": 658
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/generation-final.json": {
+      "sha256": "88edabb73dc0da2664765fdc856e1ca68420dd0b8d4cd60ac25eca65a2add2d5",
+      "bytes": 658
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/generate-final.mg5": {
+      "sha256": "b2f92192abb93d0f69117fc4b010609b1a0572b89b3bbd9a97579d78e11d08ca",
+      "bytes": 484
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/heft-bridge.cpp": {
+      "sha256": "69a9953138d07ff3b773b4d017dc87e7a7c7c151ca9f1cd95cc99e21c1ffbd2e",
+      "bytes": 1045
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/heft-bridge-quad.cpp": {
+      "sha256": "0155258cb0a1a7f91ff2dd86f70419141a1e8921ba1434c2d564469d2624796c",
+      "bytes": 1076
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/bridge-driver.cpp": {
+      "sha256": "a2206c884dc07fbb0948d39b56c2b68c6ad020c8670cb126b70c128896c85275",
+      "bytes": 408
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/bridge-driver-quad.cpp": {
+      "sha256": "2b36359e56531344287c985ce85aaefab3f0c1ab6071d5c66fb18ba98cc8425a",
+      "bytes": 500
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/oracle.f": {
+      "sha256": "71ca81740cf3efe7e55e322578f55c7c1d5542d1efc5bdb6fc990f29a661ea28",
+      "bytes": 3090
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/quad/precision-adaptation.json": {
+      "sha256": "d6bc51d98d26428204b07c9f1bcf5951091ab15184bc548823b154184d00c7ee",
+      "bytes": 976
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/quad/build-commands.json": {
+      "sha256": "f348605fb586e2b2efb84c0bbb14038f70ae5c02d13f530d8e75474c1f193b98",
+      "bytes": 4503
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/generate-quad.py": {
+      "sha256": "3e34d2f3b7da5fced1d3bd65be27157dd5a3f2b28198b6b778a9c7f4f2f5e6c9",
+      "bytes": 1146
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/native.rs": {
+      "sha256": "a0b1070d1105cde867e0912cca0d3ffb2af0b047e5f0bcb6902793ce397d2fd1",
+      "bytes": 10770
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/native-build.json": {
+      "sha256": "76ea6093561e5536ffe33f34990154d15bf9441340bc9dfc451aff834fcede00",
+      "bytes": 1656
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/native-exact-run.json": {
+      "sha256": "92477daf955c184a3d61fcc41356690b1bd083cbacd65d1dcd1f4cc6170b3d0c",
+      "bytes": 638
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/native-exact.log": {
+      "sha256": "cea4c279851c8a691afbb6597e412c0f7ee669e38e258733ba7e1caa7dbd5585",
+      "bytes": 1158
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/exact-heft.json": {
+      "sha256": "3e05c613c7448af885b3e64cfb45a3721d7153f8cc5dfe4955e9a009067dd0a6",
+      "bytes": 1327
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/heft-values-exact.dat": {
+      "sha256": "a7bc9d98066fd2e510acf8a9e424dcf3ed412f07cafc0fc124e50bc79c08c90e",
+      "bytes": 193
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/momenta.dat": {
+      "sha256": "d739f8b14eb9ea5cb286039b1689f28ee060ddb169931f156081008ec9a7c496",
+      "bytes": 1545
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/model-input.dat": {
+      "sha256": "f5f7e117575518601e00c98fc2167ac6afafebf917ce4225450437139acd2a1a",
+      "bytes": 2024
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/build-results.json": {
+      "sha256": "eb8f57e1b8f9e6df934dc4eb635cdd5d914c2d5436d921a9fb1336e009d11c3b",
+      "bytes": 3139
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/acceptance-results.json": {
+      "sha256": "399408924aefc453558d672915639b3c6d19916b0374a4bdde6af242e15d5dce",
+      "bytes": 1446
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/heft-output/heft-result.json": {
+      "sha256": "65d5eed0d5b36db425dd1b0adde477b1fcf08ddcdf34feb3b707e1c70f60d342",
+      "bytes": 12170
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/heft-reproduced/heft-result.json": {
+      "sha256": "08e199bfb2bb1e23c17840e9a88915f885fec8f5453e855c58ba88dec6d2cfb2",
+      "bytes": 11702
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/heft-reproduced-run.json": {
+      "sha256": "32aae9c17159dcdc5deaa999fed564f7c5ed1bf98ed2922208fc6183da024e08",
+      "bytes": 921
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/clippy-results.json": {
+      "sha256": "4217619178617931764b5c26122e3dbbbce235be7231ec8f554ae89b6fb2c6a9",
+      "bytes": 3317
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/evaluate-me-tests.log": {
+      "sha256": "6d03441eb62712e5c72a0cb94842720a8153b04e81b0a6fe8ace372e2ae4cc0c",
+      "bytes": 259
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/evaluate-heft-tests.log": {
+      "sha256": "4c4fadf8b217adbc74d6336b687802a5204dd81af741fd5f9d8d05b0ecb9632c",
+      "bytes": 230
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/python-tests.log": {
+      "sha256": "1f11b6e880045ee35de832b81b45d06257342e13b5c79bbf0034379d4ca220b9",
+      "bytes": 103
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/scripts/prepare_heft.py": {
+      "sha256": "84a842e5844754e5b56651ebfe3868222c533a998aabda1fd1b05377821a500d",
+      "bytes": 4626
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/tests/test_prepare_heft.py": {
+      "sha256": "1211d8d19f8aea9ddcbd81041f4a8ad67f56f8d26356bf68af76ec8df19d3ab3",
+      "bytes": 3643
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/README.md": {
+      "sha256": "94d72de84742cd3a2db990a9c422af0c2ac6105f4a441400d7c39127e39a4e49",
+      "bytes": 10198
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/ew-scope/me-result.json": {
+      "sha256": "5e0f6cf9929b22542422f7a167da01df6a12e3d2e8d1fac36018480ed484989e",
+      "bytes": 9000
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/oracle-source-report.json": {
+      "sha256": "e6c6b2376d1ec96a94ae9aa3896c03b2407a02eb868144cbf053da04c07a5b87",
+      "bytes": 37501
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/prepared-final-input/provenance.json": {
+      "sha256": "f1344eb23c6ae6aa8093b52729c844ff56729f71e511e0f4235aa913dfe5157f",
+      "bytes": 366
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/prepared-final-input/exact-heft.json": {
+      "sha256": "5b74fa67b11b4d9563486eebb004273727dae8d419050133111d80c6a004a84d",
+      "bytes": 861
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/prepared-final-input/heft-oracle.json": {
+      "sha256": "4cca06bc79da7b2f8febbd838ef8f177fd8854f02a946f3b89f1e672368361a3",
+      "bytes": 166
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/src/evaluate.rs": {
+      "sha256": "febbb09848b4f850648d0dfb1d8dd412e2a9c83f6ab7d58be50a7802a1cf1310",
+      "bytes": 9143
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/src/heft.rs": {
+      "sha256": "6190c314db26166abbcaab496c7272e7196cb7cf2b79f39390e2192caafed5da",
+      "bytes": 13013
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/src/scalar.rs": {
+      "sha256": "1a7e6e226487d555369429a943b5879c42ca627421662f9a8fd62b2412b854ce",
+      "bytes": 8445
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/native": {
+      "sha256": "ac1acd5af0f42c93988063cd05ae719b7d4e5743be8e281e5848550cd67fe85f",
+      "bytes": 43988712
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/heft-bridge": {
+      "sha256": "bf7cb2a0b4e1c39c40f5368bd6085943eb07d82a1ac81205d0c8076b9811b85b",
+      "bytes": 16792
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/heft-bridge-quad": {
+      "sha256": "182b5ac8bbc5ae87b3537b500fa335da755a71270859c2bcc6d8a77d44bc5a1c",
+      "bytes": 17256
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/quad/P1_gg_gh-oracle": {
+      "sha256": "14b3d06004cbf56f28c64baf610dc95f8dbeb9513d3d9feaf6f377bb547bf92e",
+      "bytes": 236880
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/quad/P2_gg_gh-oracle": {
+      "sha256": "096386b1c6e1c0a08896f85493ad5957e949ea96fe87cae0c713d01a6965906a",
+      "bytes": 236920
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/evaluate-me": {
+      "sha256": "05ad984f8b547f96fb48858d691858bfd203c519d83a76fdd98e207e624ee8d7",
+      "bytes": 44026176
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/production/evaluate-heft": {
+      "sha256": "2e716b52fbc99b1c5a20ada8e8550b75c1c1dd61027eb483deb41380e03123f7",
+      "bytes": 44053280
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/standalone-final/SubProcesses/P1_gg_gh/matrix.f": {
+      "sha256": "54c7d227f156d390cb65f9add1325e67d5a496ff7d2aabea7beae98b4ed8d81c",
+      "bytes": 16735
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/quad/P1_gg_gh-matrix.f": {
+      "sha256": "e96b749929c56f2be5971728bdaa8d2d71661b3837893ddf11758b73768b4ff8",
+      "bytes": 16784
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/standalone-final/SubProcesses/P2_gg_gh/matrix.f": {
+      "sha256": "dee24ce56ac72ecc9387a8b2a8e688f5d94fdc1236b604930e35e5264d2fd86d",
+      "bytes": 17641
+    },
+    "/common/dev/amflow/target/gg-hg-heft-interference/quad/P2_gg_gh-matrix.f": {
+      "sha256": "4d8969a7e7f9fbc92bc7a3ab5ad3941ab0e9f034cdef7e918a3ee84fae155bab",
+      "bytes": 17694
+    }
+  },
+  "reproducibility": "Optional tool production-shaped sources under target/gg-hg-heft-interference/production share the native scalar preparation module with existing evaluate-me. Source hashes identify the frozen standalone evidence; final integrated Cargo checks are separately recorded by the parent task."
+}

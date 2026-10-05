@@ -44,3 +44,7 @@ ufo-import = ["dep:feynkit-ufo", "dep:pyo3"]
 name = "native-ufo-export"
 path = "src/main.rs"
 required-features = ["ufo-import"]
+
+[[bin]]
+name = "evaluate-heft"
+path = "src/heft.rs"

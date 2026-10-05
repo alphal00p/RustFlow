@@ -113,3 +113,39 @@ The recorded source-error estimate supports 19 relative digits for this matrix
 element. Its approximately `3.03e-33` relative agreement with the independent
 binary128 contraction checks the implementation; it does not raise that physical
 accuracy claim. Form-factor uncertainty and arithmetic refinement remain separate.
+
+
+## HEFT LO and HEFT–EW interference
+
+The optional `evaluate-heft` binary reuses `scalar.rs` with `evaluate-me`: native HEPKit generates the amplitude, performs state sums, and delegates tensor contraction to Idenso. Symbolica separates the resulting scalar squared amplitude by an auxiliary HEFT coefficient. Degrees zero, one, and two give the EW square, `2 Re(A_HEFT conjugate(A_W+A_Z))`, and the HEFT square. The exact scalar reconstruction is checked, including absence of hidden marker dependence. No additional factor of two or incoming-state average is applied.
+
+This benchmark uses the plugin's **infinite-top HEFT** LO amplitude. It does not validate finite-top QCD. The exact HEFT scalar inputs are prepared from the externally supplied pinned C++ coefficient bridge; the original UFO's numerical placeholder values are never used. `prepare_heft.py` verifies the external source hash, reads its four scalar assignments with a closed arithmetic AST, and evaluates only exact rational operations at the supplied phase point. It neither imports upstream code nor implements tensor algebra.
+
+After the existing preparation/import steps have produced `$WORK/native-model.json` and the coherent inputs, run from the repository root:
+
+```sh
+python tools/hepkit-amplitude/scripts/prepare_heft.py \
+  --source "$PLUGIN/ComputationFormFacHEFT/fortran_bridge_HEFT_ggHg.cpp" \
+  --coherent-input "$INPUTS/amplitude-input.json" \
+  --oracle-report reports/validation/2026-10-05-gg-hg-heft-interference.json \
+  --output "$HEFT_INPUTS"
+
+cargo run --release --manifest-path tools/hepkit-amplitude/Cargo.toml \
+  --bin evaluate-heft -- \
+  "$WORK" "$INPUTS/amplitude-input.json" \
+  "$HEFT_INPUTS/exact-heft.json" "$HEFT_INPUTS/heft-oracle.json" \
+  "$HEFT_RESULT"
+```
+
+`$HEFT_INPUTS` must be a new directory. All phase coordinates, HEFT rational coefficients, oracle outputs, and EW inputs retain string representations until exact Symbolica/MPFR evaluation. The tool rejects incomplete/duplicate HEFT coefficients, a different phase point, finite-precision HEFT inputs, failed arithmetic refinement, or a failed original comparison. The argument paths are supplied explicitly; no in-repository private model or target-directory artifact is assumed by the tool.
+
+The original selections used for independent reference generation were:
+
+```text
+generate g g > g h GGGHEFT^2==2 QCD^2==6 GGHEFT=0 GGHEW=0 GGGHEW=0 @1
+add process g g > g h GGGHEFT^2==1 GGGHEW^2==1 QCD^2==6 GGHEFT=0 GGHEW=0 @2
+```
+
+The report preserves ordinary binary64 outputs and native MG5/ALOHA MP outputs (113-bit arithmetic). The MP adapter changes numerical kinds, native MP routine names, and common-block layouts while keeping generated color, helicity, amplitude, order-selection, and averaging expressions unchanged. The original scalar HEFT bridge was also rerun with a numerical-kind-only `__float128`/`powq` adaptation. The checked arithmetic comparison uses a conservative `1e-30` relative tolerance.
+
+At the recorded coherent point the interference has a conditional relative allowance of approximately `8.3214e-21`, supporting 20 relative digits. This follows from the exact linear polynomial in 16 real EW form-factor components: the native gradient propagates their supplied complex allowances, and a `1e-65` arithmetic reserve covers the much smaller 256/384-bit change and imaginary cancellation residual. This is empirical input-error propagation, not an interval certificate. The HEFT LO check establishes arithmetic agreement and refinement; it does not derive a precision guarantee merely from working bits. The separate pure EW square still has its previously recorded 19-digit relative bound.

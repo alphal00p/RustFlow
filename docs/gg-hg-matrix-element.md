@@ -48,3 +48,18 @@ The [fresh workspace acceptance](../reports/validation/2026-10-05-native-amplitu
 The oracle uses native generated MG5 3.7.0/ALOHA helicity, color, and tensor expressions, supplied with the same coherent form factors. The binary128 run uses native MP kernels/model functions and explicit precision-kind/scaffold changes, all recorded in the report. Four linker aliases connect two native MP naming conventions without modifying the generated tensor bodies. Direct MP COMMON input avoids a legacy parameter-card string truncation. Its result is `4.33089662023980781068590560932409431e-8`.
 
 This validates one complete supplied-amplitude point. It does not claim automatic generation or reduction of the two-loop master families, automatic AMFlow boundary construction for the full amplitude, or a performance comparison.
+
+## HEFT contribution and interference
+
+At the same exact phase point, the optional native tool now also reproduces the plugin's infinite-top HEFT contribution and its interference with the two-loop W/Z amplitude:
+
+```text
+|A_HEFT|²                 = 1.7683949285604083825551314387453478289821e-3
+2 Re(A_HEFT conj(A_W+A_Z)) = 1.6658019366610435271343417452342751052535e-5
+```
+
+The [HEFT validation report](../reports/validation/2026-10-05-gg-hg-heft-interference.json) records independent original MG5/ALOHA binary128 evaluations, native 256/384-bit refinement, exact scalar coefficients from the plugin's HEFT bridge, and the coupling-order selections. Relative arithmetic differences are approximately `1.08e-34` for the HEFT square and `1.58e-33` for the interference. This is the infinite-top model; finite-top QCD amplitudes have not been validated.
+
+The native HEPKit contraction is shared with the pure EW calculation. Symbolica separates its scalar squared amplitude into the three coupling orders and checks exact reconstruction. The interference is exactly linear in the 16 real EW form-factor components, so native differentiation propagates the supplied allowances without an omitted quadratic remainder. Including the arithmetic reserve gives an absolute allowance of approximately `1.38618e-25`, or `8.32140e-21` relative: **20 conditional relative digits**. The separate pure EW square retains its 19-digit bound.
+
+The [production-tool acceptance](../reports/validation/2026-10-05-heft-tool.json) reruns the argument-based input preparation and native contraction and checks that the refactored pure EW result is byte-for-byte unchanged. These checks use recorded numerical form factors; they do not establish automatic AMFlow initialization of the complete amplitude or full-workflow performance parity.
