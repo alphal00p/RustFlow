@@ -59,3 +59,15 @@ was separately censored by its memory cap, while its alternate route completed.
 The separate [planar one-loop five-point result](fivepoint-planar.md) validates
 all 65 coefficients using its supplied ancillary boundary. The 75-, 74-, and
 86-master planar families and the 108-master nonplanar system remain pending.
+
+## Complete 74-master MZZ family
+
+The full MZZ system from the pinned 2005.04195v2 ancillary data now passes supplied-boundary PH1→PH6 transport through epsilon 4. All 370 coefficients agree at 20 absolute digits between independent 60-digit/order-56 and 70-digit/order-64 native runs. The maximum refinement difference is 1.9624e−48; the higher run differs from the ancillary endpoint by 2.4385e−58 and the live original endpoint by 3.0959e−26. These are observed residuals, not claims of 58 guaranteed digits.
+
+The exact canonical letters and constants are pulled back before materializing physical derivative matrices. Original source-domain conditions and all three root sheets are retained. Both native profiles start independently from the supplied boundary. The fixture records finite-accuracy zeros, component Accuracy/Precision and inherited source-error metadata. This low-level benchmark does not certify propagation of an arbitrary input-error box, generate its own boundary, or evaluate a scattering amplitude.
+
+Original transport took 1147.09 s (working precision 150, initial order 40, goal 15, 137 segments, CPU 28). Native transport took 3524.86 s at 60/56 (1191 accepted, 1533 rejected) and 4541.57 s at 70/64 (1214 accepted, 1591 rejected), on CPU 29. These single-run timings perform different work and establish no performance ratio. The full raw outputs, declarations, caps, precision metadata and hashes are in [the validation report](../reports/diffexp/fivepoint-mzz-validation.json).
+
+The offline regression runs both native profiles with `cargo test --release --test fivepoint_mzz -- --ignored --nocapture` and needs no Mathematica. Its source passes strict Clippy compilation; production-library numerical execution remains pending; the completed evidence uses immutable library SHA `5be94f7cf6d87188b8fc1e64831126a34849e6b14ccfc499bb936981cf369754`.
+
+The shared canonical helper also passes a [current-library full13 check](../reports/validation/2026-10-05-fivepoint-canonical-helper.json): all 65 coefficients agree with both references at 20 absolute digits, and both endpoint root signs match. This checks its aggregate waypoint budget and root-state handoff without claiming a new full74 run.

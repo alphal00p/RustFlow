@@ -146,9 +146,17 @@ regular singular origin whose registered roots remain nonzero; it does not suppl
 a general Puiseux or logarithmic algebraic endpoint solver.
 The original full [74-master MZZ](../reports/diffexp/fivepoint-mzz-original.json)
 and [86-master ZZZ](../reports/diffexp/fivepoint-zzz-original.json) PH1→PH6
-benchmarks also pass all 370 and 430 coefficient checks. Their recorded original
-settings assert 15 digits; these reports do not claim a completed native
-comparison or the separate ZZZ 128-digit profile.
+benchmarks pass all 370 and 430 coefficient checks at their recorded 15-digit
+settings. The [full native MZZ comparison](../reports/diffexp/fivepoint-mzz-validation.json)
+also passes all 370 coefficients at 20 absolute digits using independent 60/56
+and 70/64 working-precision/order profiles, with maximum refinement difference
+1.9624e−48. This is supplied-boundary differential transport; its low-level
+refinement estimate does not certify propagation of arbitrary boundary errors.
+The full 75-master ZMZ first native endpoint has passed, with independent higher
+precision/order refinement still running. The full 86-master ZZZ first native
+profile is running; no native completion or separate ZZZ 128-digit profile is
+claimed. The staged MZZ offline regression has not yet been rerun against the
+latest production library.
 
 The original paper's mandatory numerical acceptance gate passes: all four
 two-loop targets at s=30, t=-10/3, m²=1 have automatically generated Laurent

@@ -378,3 +378,14 @@ Native fixed integration used 60 decimal digits/order 64. The public native call
 Both populated nearby queries select the newly computed first endpoint. Both routes already require just one accepted chart, so this short workload cannot reduce the chart count further through nearby reuse. Exact hits perform no integration. The original's supported `$grid=True` setting is required to register saved endpoints for subsequent selection. A historical source-filename mismatch was rejected before integration, and the initial `$grid=False` cache-hit expectation also failed; both harness setup failures are retained in the report. The native measurements were unchanged.
 
 This characterizes canonical master-integral transport, not complete matrix-element runtime. It uses the generic canonical representation, shared numerical engine and persistent RustFlow cache. Future improvements should reuse preparation, validation and persistence work within those shared APIs, preserving the same checks rather than introducing family-specific solvers. Other scientific jobs ran on separate CPUs, so these three observations are a small characterization rather than a controlled hardware benchmark.
+
+### Why fewer rejected steps did not improve the measured segment
+
+A shared step-growth proposal was tested on one saved, expensive segment of the 75-master ZMZ system, using the identical 375 starting coefficients, root sheets and endpoint at 60 working digits/order 56. Both modes used one frozen instrumented binary based on revision `4ff74ea` on CPU 35, with unchanged pole bounds and numerical acceptance checks. The candidate capped each proposal at twice the previous accepted step.
+
+| Controller | Accepted charts | Rejections | Chart construction | Other transport work | Total transport |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Existing | 239 | 1261 | 661.84 s | 56.19 s | 718.02 s |
+| Growth cap | 252 | 255 | 700.74 s | 30.11 s | 730.85 s |
+
+All 375 endpoint coefficients agreed within 1.25e−48 absolute and the root values were identical. Chart construction accounted for about 92% of the baseline transport time: fewer rejected attempts could not offset the extra charts. This is one run per mode on a shared host, so it establishes neither a statistical slowdown nor a general speed ratio. The candidate was left out of production. The complete scientific state, every coefficient comparison, exact source/binary provenance and timings are preserved in [the controlled-segment report](../reports/performance/pole-step-growth-leg100.json). This supplied-checkpoint experiment is separate from full-path precision refinement.

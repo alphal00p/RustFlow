@@ -1,0 +1,607 @@
+{
+  "generated_utc": "2026-10-05T01:11:55.524569+00:00",
+  "scope": "Verified side-by-side outcomes and available times, read-only snapshot. Null timing means no recorded comparable measurement, not zero. Seconds refer to the explicitly named phase. No general performance parity or speedup asserted.",
+  "rows": [
+    {
+      "case": "AMFlow C++: analytic logarithmic chain",
+      "dimension": 3,
+      "epsilon_range": "fixed epsilon",
+      "result": "20 scaled digits; independent precision/order checks",
+      "native_timing": {
+        "seconds": 0.010742,
+        "scope": "median transport",
+        "process_seconds": 0.01783
+      },
+      "reference_timing": {
+        "seconds": 0.001903,
+        "scope": "median transport",
+        "process_seconds": 1.71098
+      },
+      "settings": "Both201bits/order80;267bits/order112 refinement;5 repeats,CPU24.",
+      "comparability": "Supplied boundaries; equal nominal settings but different steps/checks and MPSolve setup. Not automatic workflow.",
+      "report": "reports/performance/2026-10-04-polynomial-recurrence.json",
+      "representative_component": {
+        "rust": [
+          "5.3133494185775867029115688380821953592233655200324756492884701",
+          "0"
+        ],
+        "upstream": [
+          "5.313349418577586702911568842361817575904698051022294734985010e+00",
+          "+0"
+        ]
+      },
+      "report_anchor": "#/cases/0"
+    },
+    {
+      "case": "AMFlow C++: upstream12-master",
+      "dimension": 12,
+      "epsilon_range": "fixed epsilon",
+      "result": "20 scaled digits; independent precision/order checks",
+      "native_timing": {
+        "seconds": 0.160158,
+        "scope": "median transport",
+        "process_seconds": 0.27302
+      },
+      "reference_timing": {
+        "seconds": 0.102376,
+        "scope": "median transport",
+        "process_seconds": 4.69397
+      },
+      "settings": "Both201bits/order80;267bits/order112 refinement;5 repeats,CPU24.",
+      "comparability": "Supplied boundaries; equal nominal settings but different steps/checks and MPSolve setup. Not automatic workflow.",
+      "report": "reports/performance/2026-10-04-polynomial-recurrence.json",
+      "representative_component": {
+        "rust": [
+          "-19190087305.865390207936016987738839970150874932383107263849928",
+          "-23426582794.227873174496414901138744420549143144491354088009874"
+        ],
+        "upstream": [
+          "-1.919008730586539020793601698773883997015087489796858628125239e+10",
+          "-2.342658279422787317449641490113874442054914307759045266825951e+10"
+        ]
+      },
+      "report_anchor": "#/cases/1"
+    },
+    {
+      "case": "AMFlow C++: resonant singular matching",
+      "dimension": 2,
+      "epsilon_range": "fixed system",
+      "result": "20 digits; analytic and independent refinement; Rust physical endpoint checked",
+      "native_timing": {
+        "seconds": 0.007174,
+        "scope": "median Frobenius construction+matching",
+        "process_seconds": 0.014369
+      },
+      "reference_timing": {
+        "seconds": 1.15566,
+        "scope": "median singular preparation+matching",
+        "process_seconds": 1.162599
+      },
+      "settings": "Nominal201bits/order80\u2192267/order112;5 repeats,CPU24.",
+      "comparability": "Original internally uses\u2265450digits and\u226520extraorders. Supplied boundary; no full-workflow ratio.",
+      "report": "reports/performance/2026-10-04-singular-resonance.json"
+    },
+    {
+      "case": "AMFlow C++: automatically derived paper27 DE",
+      "dimension": 27,
+      "epsilon_range": "epsilon=1/2700",
+      "result": "20 scaled digits; all27 checked with independent refinement",
+      "native_timing": {
+        "seconds": 0.262298431,
+        "scope": "median transport",
+        "process_seconds": 0.469874006
+      },
+      "reference_timing": {
+        "seconds": 0.0617542,
+        "scope": "median transport",
+        "process_seconds": 14.481908942
+      },
+      "settings": "201bits/order80\u2192267/order112;5 repeats,CPU28.",
+      "comparability": "Identical deterministic supplied boundary, matrix and endpoints;4 native versus1 original accepted steps. Ordinary DE only.",
+      "report": "reports/performance/2026-10-04-paper27-de.json",
+      "report_anchor": "#/phase_medians_ns"
+    },
+    {
+      "case": "Automatic massless bubble p\u00b2=\u22121",
+      "dimension": 3,
+      "epsilon_range": "sample1/10",
+      "result": "20 digits vs live original and analytic gamma values",
+      "native_timing": {
+        "seconds": 0.186813715,
+        "scope": "recorded Rust numerical cross-check including refinement"
+      },
+      "reference_timing": {
+        "seconds": 26.738822,
+        "scope": "original SolveIntegrals call"
+      },
+      "settings": "Rust60/80digits,orders80/112; originalWP48/order96+50,requested24;1 worker.",
+      "comparability": "Fresh automatic boundary providers; different bases/work. Sunset reduces to tadpole product in original at this epsilon. No matched speedup.",
+      "report": "reports/validation/2026-10-04-live-upstream-oracles.json",
+      "representative_native": {
+        "fresh_boundary_provider": true,
+        "series_order": 112,
+        "value": {
+          "im": "3.18367405405873198878718088645333201842411769515707978513421643610457928674821122644e-80",
+          "re": "11.6644879019310665161138835314585845565958250798934088592437943219726711523653996386"
+        },
+        "working_decimal_digits": 80
+      },
+      "report_anchor": "#/rust_crosscheck/comparison/cases/0"
+    },
+    {
+      "case": "Automatic vacuum sunset masses[1,1,0]",
+      "dimension": null,
+      "epsilon_range": "sample3/4",
+      "result": "20 digits vs live original and analytic gamma values",
+      "native_timing": {
+        "seconds": 0.117897351,
+        "scope": "recorded Rust numerical cross-check including refinement"
+      },
+      "reference_timing": {
+        "seconds": 9.058479,
+        "scope": "original SolveIntegrals call"
+      },
+      "settings": "Rust60/80digits,orders80/112; originalWP48/order96+50,requested24;1 worker.",
+      "comparability": "Fresh automatic boundary providers; different bases/work. Sunset reduces to tadpole product in original at this epsilon. No matched speedup.",
+      "report": "reports/validation/2026-10-04-live-upstream-oracles.json",
+      "representative_native": {
+        "fresh_boundary_provider": true,
+        "series_order": 112,
+        "value": {
+          "im": "1.12279414749560997514247139646505090611966876264172668861281108934663824145385691439e-76",
+          "re": "-12.0131687574450377255427380464748076134602596106977411603253630795124230121234391064"
+        },
+        "working_decimal_digits": 80
+      },
+      "report_anchor": "#/rust_crosscheck/comparison/cases/1"
+    },
+    {
+      "case": "Required AMFlow paper: all4 two-loop targets",
+      "dimension": 27,
+      "epsilon_range": "\u22124\u20260",
+      "result": "20 verified digits and recorded-precision original coefficient checks",
+      "native_timing": {
+        "seconds": 3553.007,
+        "scope": "full assisted warm Laurent acceptance"
+      },
+      "reference_timing": null,
+      "settings": "Rust60/order80\u219280/order96;27\u219231 fit samples and27validation samples;4 workers+4 exact-preparation helpers.",
+      "comparability": "Exact symbolic cache warm; no reference answers in cache. No live original full-four-target runtime was measured.",
+      "report": "reports/validation/2026-10-04-paper-two-loop-acceptance.json",
+      "representative_component": {
+        "target": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -3,
+          0
+        ],
+        "epsilon_power": 0,
+        "native": {
+          "re": "-24.651563385127802132212751425804383561261342926381671031077825917439754006480995508850",
+          "im": "-56.103774612767809283266698837963725713894435603538857793783770665391466550083764283835",
+          "printed_value": "(-24.651563385127802132212751425804383561261342926381671031077825917439754006480995508850+-56.103774612767809283266698837963725713894435603538857793783770665391466550083764283835i)"
+        },
+        "reference": {
+          "re": "-24.65156338512780213221275142580438356126",
+          "im": "-56.10377461276780928326669883796372571389",
+          "re_precision": "19.755035232196107",
+          "im_precision": "20.112182846244394"
+        }
+      },
+      "report_anchor": "#/expansions"
+    },
+    {
+      "case": "DiffExp equal-mass3-loop banana",
+      "dimension": 4,
+      "epsilon_range": "0\u20264",
+      "result": "20 absolute digits at\u22121 and32; native refinement\u22643.46e\u221258; original difference\u22644.52e\u221246",
+      "native_timing": {
+        "initialization_seconds": 2.486,
+        "infinity_to_minus1_seconds": 0.335,
+        "minus1_to32_seconds": 0.583,
+        "refined_phases_seconds": [
+          4.454,
+          0.477,
+          0.868
+        ]
+      },
+      "reference_timing": {
+        "initialization_seconds": 43.309,
+        "infinity_to_minus1_seconds": 20.805,
+        "minus1_to32_seconds": 33.859,
+        "refined_phases_seconds": [
+          0.281,
+          36.295,
+          77.923
+        ]
+      },
+      "settings": "Native60/order80\u219280/order112; original500/order50\u2192600/order75.",
+      "comparability": "Analytic gamma infinity boundary in both; original refined initialization is warm; different Mobius/Pade/work.",
+      "report": "reports/diffexp/banana-equal-validation.json",
+      "additional_report": "reports/diffexp/banana-equal-original.json"
+    },
+    {
+      "case": "DiffExp unequal-mass3-loop banana",
+      "dimension": 15,
+      "epsilon_range": "0\u20264",
+      "result": "All75:20 absolute digits; native-refinement5.97e\u221258, original difference1.42e\u221234",
+      "native_timing": {
+        "full_low_seconds": 16.780848016,
+        "full_high_seconds": 25.63276621,
+        "alternate_high_seconds": 8.044414622,
+        "scope": "complete native driver including analytic initialization"
+      },
+      "reference_timing": {
+        "completed_alternate_process_seconds": 350.1,
+        "alternate_mass_transport_seconds": 193.315,
+        "direct_route_censored_seconds": 1599.51,
+        "direct_route_reason": "16GiB memory cap, no final endpoint"
+      },
+      "settings": "Native60/80\u219280/112; original equal500/order80,unequal1000/order70.",
+      "comparability": "Analytic infinity boundary; direct/alternate native routes checked. Original complete alternate route only; direct saved-series route censored. No ratio.",
+      "report": "reports/diffexp/banana-unequal-validation.json",
+      "additional_report": "reports/diffexp/banana-unequal-original.json"
+    },
+    {
+      "case": "DiffExp MPL G(1,0,1;4)",
+      "dimension": 4,
+      "epsilon_range": "epsilon0",
+      "result": "20 digits; independently seeded native regression; original order-refinement20/notebook30",
+      "native_timing": null,
+      "reference_timing": {
+        "order50_transport_seconds": 0.284516,
+        "order75_transport_seconds": 0.287871
+      },
+      "settings": "OriginalWP250/orders50,75; native exact convergent-series boundary.",
+      "comparability": "Native test passes but no isolated native timing recorded for this case. Exact/analytic native seed, no reference boundary.",
+      "report": "fixtures/diffexp/mpl-101-4.json",
+      "additional_report": "tests/diffexp.rs"
+    },
+    {
+      "case": "DiffExp trailing-zero MPL G(1,\u221210,0;4)",
+      "dimension": 4,
+      "epsilon_range": "epsilon0",
+      "result": "20 absolute/relative digits; raw difference3.998e\u221225",
+      "native_timing": {
+        "seconds": 0.512075203,
+        "scope": "native boundary+compile+transport",
+        "refined_seconds": 0.355881363
+      },
+      "reference_timing": {
+        "seconds": 0.768252,
+        "scope": "original notebook helper"
+      },
+      "settings": "Native80/order50\u2192100/order75; weight20 native100/100\u2192140/140. OriginalWP250/order50 or100.",
+      "comparability": "Exact/logarithmic native boundaries; original shuffle helper and native triangular systems do different work; component Accuracy preserved.",
+      "report": "reports/diffexp/mpl-additional-validation.json"
+    },
+    {
+      "case": "DiffExp complex-letter MPL G(10,\u221210+i,\u22121/2,\u221250;1)",
+      "dimension": 5,
+      "epsilon_range": "epsilon0",
+      "result": "20 absolute/relative digits; raw difference8.781e\u221228",
+      "native_timing": {
+        "seconds": 0.085049445,
+        "scope": "native boundary+compile+transport",
+        "refined_seconds": 0.060672032
+      },
+      "reference_timing": {
+        "seconds": 0.443258,
+        "scope": "original notebook helper"
+      },
+      "settings": "Native80/order50\u2192100/order75; weight20 native100/100\u2192140/140. OriginalWP250/order50 or100.",
+      "comparability": "Exact/logarithmic native boundaries; original shuffle helper and native triangular systems do different work; component Accuracy preserved.",
+      "report": "reports/diffexp/mpl-additional-validation.json"
+    },
+    {
+      "case": "DiffExp weight20 MPL G(1,\u2026,20;21)",
+      "dimension": 21,
+      "epsilon_range": "epsilon0",
+      "result": "20 absolute/relative digits; raw difference5.504e\u221257",
+      "native_timing": {
+        "seconds": 5.974607372,
+        "scope": "native boundary+compile+transport",
+        "refined_seconds": 10.181703076
+      },
+      "reference_timing": {
+        "seconds": 33.669108,
+        "scope": "original notebook helper"
+      },
+      "settings": "Native80/order50\u2192100/order75; weight20 native100/100\u2192140/140. OriginalWP250/order50 or100.",
+      "comparability": "Exact/logarithmic native boundaries; original shuffle helper and native triangular systems do different work; component Accuracy preserved.",
+      "report": "reports/diffexp/mpl-additional-validation.json"
+    },
+    {
+      "case": "DiffExp planar1loop PH1\u2192PH6",
+      "dimension": 13,
+      "epsilon_range": "0\u20264",
+      "result": "All65:20 absolute digits; low/high1.88e\u221231; original6.17e\u221223",
+      "native_timing": {
+        "low_transport_seconds": 59.553,
+        "low_total_seconds": 79.646,
+        "high60_transport_seconds": 175.43,
+        "high80_transport_seconds": 343.004
+      },
+      "reference_timing": {
+        "seconds": 89.44,
+        "scope": "original transport",
+        "process_seconds": 92.03
+      },
+      "settings": "Native40/48,60/80,80/112; originalWP150/order40/goal15.",
+      "comparability": "Supplied finite-precision boundary; different precision/path/steps. Historical validated frozen run, not current-head speed claim.",
+      "report": "reports/diffexp/fivepoint-planar-validation.json"
+    },
+    {
+      "case": "DiffExp connected ZMZ sector",
+      "dimension": 13,
+      "epsilon_range": "0\u20264",
+      "result": "All65:20 absolute digits; native-refinement3.97e\u221231; original8.51e\u221223",
+      "native_timing": {
+        "low_transport_seconds": 66.157100694,
+        "low_total_seconds": 71.587997297,
+        "high_transport_seconds": 195.977076009,
+        "high_total_seconds": 201.275882186
+      },
+      "reference_timing": {
+        "seconds": 96.989252,
+        "scope": "original transport"
+      },
+      "settings": "Native40/48\u219260/80; originalWP150/order40/goal15.",
+      "comparability": "Genuine coupled two-loop closure[14,15,...] with supplied boundary; not full75 family.",
+      "report": "reports/diffexp/fivepoint-zmz-sector-validation.json"
+    },
+    {
+      "case": "DiffExp full nonplanar108 accurate",
+      "dimension": 108,
+      "epsilon_range": "0\u20264",
+      "result": "All540:20 absolute digits; native-refinement1.37e\u221236; refined-original2.53e\u221257",
+      "native_timing": {
+        "low_transport_seconds": 233.893874337,
+        "low_total_seconds": 292.040184571,
+        "high_transport_seconds": 684.630182999,
+        "high_total_seconds": 750.035364537
+      },
+      "reference_timing": {
+        "seconds": 200.729797,
+        "scope": "accurate original transport",
+        "process_seconds": 206.07262206124142
+      },
+      "settings": "Native40/48 offset1/128\u219260/64 offset1/256; originalWP150/order80/goal30.",
+      "comparability": "Supplied compatible singular-origin boundary; native analytic/log-free initializer. No general Puiseux or arbitrary error-box certificate; different work.",
+      "report": "reports/diffexp/nonplanar108-validation.json"
+    },
+    {
+      "case": "DiffExp full nonplanar108 fast original",
+      "dimension": 108,
+      "epsilon_range": "0\u20264",
+      "result": "Original fast only14digits asserted; not a20digit parity comparison",
+      "native_timing": null,
+      "reference_timing": {
+        "seconds": 44.076309,
+        "scope": "fast original transport",
+        "process_seconds": 50.02121893316507
+      },
+      "settings": "OriginalWP150/order25; accuracy goal unspecified.",
+      "comparability": "Same data, lower accuracy than native20-digit acceptance; no speed comparison.",
+      "report": "reports/diffexp/nonplanar108-validation.json",
+      "report_anchor": "#/original_profiles/1"
+    },
+    {
+      "case": "DiffExp full MZZ74 PH1\u2192PH6",
+      "dimension": 74,
+      "epsilon_range": "0\u20264",
+      "result": "All370:20 absolute digits; refinement1.96e\u221248; refined-original3.10e\u221226",
+      "native_timing": {
+        "low_transport_seconds": 3524.86450244,
+        "low_process_seconds": 3530.9240425708704,
+        "high_transport_seconds": 4541.565847838,
+        "high_process_seconds": 4547.190211202018
+      },
+      "reference_timing": {
+        "seconds": 1147.09,
+        "scope": "original transport"
+      },
+      "settings": "Native60/56\u219270/64; originalWP150/order40/goal15.",
+      "comparability": "Both native profiles fresh supplied boundary; low-level independent refinement, no propagated arbitrary-error-box certificate.",
+      "report": "reports/diffexp/fivepoint-mzz-validation.json",
+      "additional_report": "reports/diffexp/fivepoint-mzz-original.json"
+    },
+    {
+      "case": "DiffExp full ZMZ75 PH1\u2192PH6",
+      "dimension": 75,
+      "epsilon_range": "0\u20264",
+      "result": "First endpoint all375 compares20absolute digits; independent higher profile RUNNING",
+      "native_timing": {
+        "first_profile_cumulative_process_seconds": 9308.382696968969,
+        "first_profile_initial_censored_seconds": 7201.854238844942,
+        "first_profile_resume_seconds": 2106.528526193928,
+        "first_profile_resume_transport_seconds": 2096.8754,
+        "higher_profile_status": "running;18000s declared cap"
+      },
+      "reference_timing": {
+        "seconds": 1847.95,
+        "scope": "original transport"
+      },
+      "settings": "Native60/56 interrupted/resumed, independent70/64 running; originalWP150/order40/goal15.",
+      "comparability": "Supplied boundary; first time includes discarded interrupted work, not a clean cold timing. Full native validation pending high endpoint.",
+      "report": "target/zmz-full75-canonical-resume/continuation-60-56/result.json",
+      "additional_report": "target/zmz-full75-canonical/refinement-provenance.json"
+    },
+    {
+      "case": "DiffExp full ZZZ86 PH1\u2192PH6",
+      "dimension": 86,
+      "epsilon_range": "0\u20264",
+      "result": "Original all430 passes15digits; first native endpoint RUNNING",
+      "native_timing": {
+        "status": "running;7200s declared cap"
+      },
+      "reference_timing": {
+        "seconds": 2453.684,
+        "scope": "original transport",
+        "process_seconds": 2460.709
+      },
+      "settings": "Native60/56; originalWP150/order40/goal15.",
+      "comparability": "Supplied boundary; no completed native comparison or independent refinement yet.",
+      "report": "reports/diffexp/fivepoint-zzz-original.json",
+      "additional_report": "target/zzz-full86-canonical/provenance.json"
+    },
+    {
+      "case": "DiffExp ZZZ86 PH1\u2192PH2 high128digit profile",
+      "dimension": 86,
+      "epsilon_range": "0\u20264",
+      "result": "NOT RUN",
+      "native_timing": null,
+      "reference_timing": null,
+      "settings": "NotebookWP280/order230/goal128.",
+      "comparability": "Separate accuracy/path benchmark, not covered by20digit PH1\u2192PH6 cases. Historical notebook runtime is not a current-host measurement.",
+      "report": "reports/diffexp/benchmark-inventory.json"
+    },
+    {
+      "case": "gg\u2192hg W nearby planar",
+      "dimension": 48,
+      "epsilon_range": "0\u20264",
+      "result": "20absolute digits across3repeats/twoendpoints; source24digits; checked API21/20scaled digits",
+      "native_timing": {
+        "fixed_integration_seconds": 0.975906613,
+        "checked_first_seconds": 4.533396042,
+        "checked_nearby_seconds": 4.530294103,
+        "exact_hit_seconds": 0.001903495
+      },
+      "reference_timing": {
+        "public_first_seconds": 1.059528,
+        "nearby_seconds": 1.09084,
+        "full_driver_hit_seconds": 0.060205
+      },
+      "settings": "Nativefixed60/order64; checkedrefinement282bits/order96; original100digits/adaptiveorder,goal20;3repeatmedians,CPU35.",
+      "comparability": "Identical hashed source/route/germs. Native prepared model+extra refinement/error propagation; original driver reloads matrices and saves. Fixed core is not checked total.",
+      "report": "reports/performance/gg-hg-matched-nearby.json"
+    },
+    {
+      "case": "gg\u2192hg W nearby nonplanar",
+      "dimension": 61,
+      "epsilon_range": "0\u20264",
+      "result": "20absolute digits across3repeats/twoendpoints; source24digits; checked API21/20scaled digits",
+      "native_timing": {
+        "fixed_integration_seconds": 2.04643715,
+        "checked_first_seconds": 11.543275477,
+        "checked_nearby_seconds": 11.577605927,
+        "exact_hit_seconds": 0.017460011
+      },
+      "reference_timing": {
+        "public_first_seconds": 2.375591,
+        "nearby_seconds": 2.350899,
+        "full_driver_hit_seconds": 0.201766
+      },
+      "settings": "Nativefixed60/order64; checkedrefinement282bits/order96; original100digits/adaptiveorder,goal20;3repeatmedians,CPU35.",
+      "comparability": "Identical hashed source/route/germs. Native prepared model+extra refinement/error propagation; original driver reloads matrices and saves. Fixed core is not checked total.",
+      "report": "reports/performance/gg-hg-matched-nearby.json"
+    },
+    {
+      "case": "gg\u2192hg pure coherent EW |AW+AZ|\u00b2",
+      "dimension": null,
+      "epsilon_range": "finite amplitude",
+      "result": "19 relative digits conditional on propagated supplied-FF errors; ~3e\u221233 arithmetic agreement",
+      "native_timing": null,
+      "reference_timing": null,
+      "settings": "Native256/384-bit refinement; generated original MG5/ALOHA113-bit oracle.",
+      "comparability": "Supplied coherent W/Z form factors; timings for equivalent full ME evaluation not recorded. Transport timing must not be relabeled ME time.",
+      "report": "reports/validation/2026-10-04-gg-hg-squared-matrix-element.json",
+      "representative_reference": "4.33089662023980781068590560932409431E-0008",
+      "representative_native": {
+        "bits": 384,
+        "imaginary": "0",
+        "real": "4.330896620239807810685905609324107407099586592501332217072507265531229985795405567426467250200459763661630547134293e-8"
+      }
+    },
+    {
+      "case": "gg\u2192hg HEFT LO |AHEFT|\u00b2",
+      "dimension": null,
+      "epsilon_range": "finite amplitude",
+      "result": "30relative arithmetic check; no suppliedEW uncertainty",
+      "native_timing": "not isolated; final generic-input reproduction33.234s for validation bundle",
+      "reference_timing": null,
+      "settings": "Native256/384-bit refinement; original generated113-bit arithmetic.",
+      "comparability": "Arithmetic/projection acceptance, not matched full amplitude timing; no finite-top QCD claim.",
+      "report": "reports/validation/2026-10-05-gg-hg-heft-interference.json",
+      "representative_component": {
+        "observable": "heft_squared",
+        "native384_real": "1.768394928560408382555131438745347828982103996872198440185577091000564244795767771294679674848125989614005704640320e-3",
+        "native384_imaginary": "0",
+        "native256_384_serialized_l1_change": "2.32228705320325151874010385994295359680E-79",
+        "original113bit": "1.76839492856040838255513143874534802E-0003",
+        "absolute_difference": "1.91017896003127801559814422908999435755204232228705320325151874010385994295359680E-37",
+        "relative_difference": "1.080176678399712052545757592716712499552246151813459564054817655048592488514192018221607028017172289924515738021167504486185911331958460628460895776683173273274E-34",
+        "arithmetic_acceptance_relative_tolerance": "1e-30",
+        "original_binary64": "1.76839492856041081E-003",
+        "binary64_vs_final_exact_native_relative_difference": "1.372682554873281021892207678773530589018306561722271340364996554490087616461110668200057107235995281619514903176409891221772630256737009487993061205180036386439E-15"
+      }
+    },
+    {
+      "case": "gg\u2192hg 2Re(AHEFT conjugate(AW+AZ))",
+      "dimension": null,
+      "epsilon_range": "finite amplitude",
+      "result": "30relative arithmetic check; 20relative conditional digits from propagatedEW input",
+      "native_timing": "not isolated; final generic-input reproduction33.234s for validation bundle",
+      "reference_timing": null,
+      "settings": "Native256/384-bit refinement; original generated113-bit arithmetic.",
+      "comparability": "Arithmetic/projection acceptance, not matched full amplitude timing; no finite-top QCD claim.",
+      "report": "reports/validation/2026-10-05-gg-hg-heft-interference.json",
+      "representative_component": {
+        "observable": "heft_ew_interference",
+        "native384_real": "1.665801936661043527134341745234275105253508037565787498688707545267506244075089177387747981418495256736719034852811e-5",
+        "native384_imaginary": "-3e-121",
+        "native256_384_serialized_l1_change": "9.207738774798141849525673671903485281097E-82",
+        "original113bit": "1.66580193666104352713434174523427247E-0005",
+        "absolute_difference": "2.635253508037565787498688707545267506244075089177387747981418495256736719034852811E-38",
+        "relative_difference": "1.581972892479465125812620202414984399361209065046981702084400278214321038433611971620153413599736748790638432145635816980222188767108172535118154734659679143910E-33",
+        "arithmetic_acceptance_relative_tolerance": "1e-30",
+        "original_binary64": "1.66580193666104801E-005",
+        "binary64_vs_final_exact_native_relative_difference": "2.691115648022527658413956279857996131304920932293617916148883066658733390568827958532700883711961690545097651265970016230952196033300468386915044822328206375922E-15"
+      }
+    }
+  ],
+  "source_sha256": {
+    "fixtures/diffexp/mpl-101-4.json": "34f863346c49d66b5ccc5affebab11eb4ce508ef06d745cb1c1943e1596e6b70",
+    "reports/diffexp/banana-equal-original.json": "0bc4d006e63e5c6c68de7893c3530109273342f05d20d81f0177db9ba81b2528",
+    "reports/diffexp/banana-equal-validation.json": "7bd8734d980cecdca0c7488986e0f5ddeb832065000d0f9108c2e7591785c1b3",
+    "reports/diffexp/banana-unequal-original.json": "ddfeda73fbdaf55b0eaa0b738f51309311492b02b0b611a460851a791b797d0b",
+    "reports/diffexp/banana-unequal-validation.json": "891d583b4fbfed6ca4ad7af52a4af9804e0e6943b8bfd21c43a7a172169ba677",
+    "reports/diffexp/benchmark-inventory.json": "27d0149b7c7399669db0941e768bb53e4a3fd591830ca03d6f43c282880c5998",
+    "reports/diffexp/fivepoint-mzz-original.json": "c4db658312d3d50e7f6443827a9dba535ad1e4372192c6fca2f362bd0fa0c485",
+    "reports/diffexp/fivepoint-mzz-validation.json": "bd567b38d419abda51502cbe5540c1732be4ec919af8c5dba22a8966ba02b8ef",
+    "reports/diffexp/fivepoint-planar-validation.json": "2a0d2fb1f8345c531025f953ad92aad85f3d7c27fed8c493d7fd964ae203996b",
+    "reports/diffexp/fivepoint-zmz-sector-validation.json": "81b183b64340ccc56f400a607a686efdb9170ddf38a42c7db2830cd48674aa85",
+    "reports/diffexp/fivepoint-zzz-original.json": "fa92b227c24186f09b8f764d914203a0ad2d5f40483ca29b0d94f305cd3c2e5b",
+    "reports/diffexp/mpl-additional-validation.json": "8dcc1e186a49c464fb9133024c166d90c5aeb046c9fc87f55ecfd43bcd460b01",
+    "reports/diffexp/nonplanar108-validation.json": "adb66c72851594352ce3f59d1afae5d38222a21d18397f7e2e24a44065029b0b",
+    "reports/performance/2026-10-04-paper27-de.json": "942f0422202324fc9d2c7fcd72b3c87d65486130f187f42dc62fe4fdcc13c233",
+    "reports/performance/2026-10-04-polynomial-recurrence.json": "8c290e7d3e6f7df9858a8392f0d89ea079a1d3032f7f1999aace01450a0f7d76",
+    "reports/performance/2026-10-04-singular-resonance.json": "e946ead218d4fde51b428db3725a8948a81731a2972daecf3a65934a5899f325",
+    "reports/performance/gg-hg-matched-nearby.json": "cc8d0381bd4b527057993d4d4cec32a87edb8bdbba8e95ee376aab78ca277d9e",
+    "reports/validation/2026-10-04-gg-hg-squared-matrix-element.json": "73453c87760e59b20d51cfeb2c12b7773abdc78acee82492560d8e11adf67957",
+    "reports/validation/2026-10-04-live-upstream-oracles.json": "6b97fc88f41639b9b0d79a8b5fe454efa83d5edfe50e53965efcc0c0be2930db",
+    "reports/validation/2026-10-04-paper-two-loop-acceptance.json": "b75a5a13abbf83670f393dea057bbdb0d19e15fd7f2cc7e05fdce380eb6fc668",
+    "reports/validation/2026-10-05-gg-hg-heft-interference.json": "e17018fb3a2f215d12d8004d842bbd50c01e42c37e824a3d2c739cde74ccfebb",
+    "target/zmz-full75-canonical-resume/continuation-60-56/result.json": "42793c5eb5c92bd2a1708f701a596820d9bc88e44c46e58844b0eab0c41935f5",
+    "target/zmz-full75-canonical/refinement-provenance.json": "48cf4e747584a050f59d49899c78e02c3bc02983c54c36638a25fd9136607f19",
+    "target/zzz-full86-canonical/provenance.json": "67615b36330f849d31c34e365aa0b48425adbddc53ca8ea1c811e96e4f208f90",
+    "tests/diffexp.rs": "a892011fcafb59b4c6de3c32f1d7adb9fc1cd83240cf172b3ec2eeba76478402"
+  },
+  "status_notes": [
+    "Required AMFlow four-target20digit Laurent gate passed; full matched original automatic runtime remains absent.",
+    "DiffExp all listed MPL/equal and unequal banana/full13/connected13/full108/full74 numerical acceptance passed at20digits in their documented scope.",
+    "Full75 independent high profile and full86 first profile are running unchanged. Separate ZZZ128digit profile not run.",
+    "High-dimensional supplied-DE results are not claims of automatic IBP/boundary generation for those families.",
+    "Matched GG\u2192hg nearby transport separates fixed core, checked public call and cache hits; full ME/interference arithmetic validated separately.",
+    "Benchmark inventory has stale pending fields; actual validation reports above take precedence."
+  ],
+  "snapshot_utc": "2026-10-05T01:15:09.930875+00:00",
+  "latest_pushed_revision": "c202ed46643d48d8e352681901443b0af53a65da",
+  "implementation_parity": "incomplete",
+  "current_work": "Contour derivative-sign correction and generic single-mass vacuum loop peeling are integrated locally; full production validation is pending. Full75 refinement and full86 transport are running. Full74 result uses its recorded immutable library, not an unrecorded latest-head rerun."
+}

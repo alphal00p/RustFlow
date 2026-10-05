@@ -4,7 +4,9 @@ use std::collections::{BTreeMap, BTreeSet};
 use std::sync::Arc;
 use std::time::Instant;
 use symbolica::prelude::*;
-use symbolica_amflow::algebraic::{AlgebraicKinematicSystem, RootSeed, SquareRoot};
+use symbolica_amflow::algebraic::{
+    AlgebraicKinematicSystem, CanonicalAlgebraicSystem, RootSeed, SquareRoot,
+};
 use symbolica_amflow::{
     ComplexFloat, Error, FlowOptions, Precision, Prescription, Progress, Result, RunContext,
     diffexp, kinematics,
@@ -37,11 +39,34 @@ fn maximum_error(p: Precision, values: &[Vec<ComplexFloat>], reference: &Value) 
     }
     Ok(maximum)
 }
+#[allow(dead_code)] // Individual benchmark modules select one preparation mode.
 pub fn evaluate(
     fixture: &Value,
     root_names: &[&str],
     digits: u32,
     order: usize,
+) -> Result<Vec<Vec<ComplexFloat>>> {
+    evaluate_impl(fixture, root_names, digits, order, false)
+}
+
+/// Path-first canonical preparation and bounded per-waypoint continuation for
+/// the complete large planar families; uses the same public transport engine.
+#[allow(dead_code)] // Individual benchmark modules select one preparation mode.
+pub fn evaluate_canonical(
+    fixture: &Value,
+    root_names: &[&str],
+    digits: u32,
+    order: usize,
+) -> Result<Vec<Vec<ComplexFloat>>> {
+    evaluate_impl(fixture, root_names, digits, order, true)
+}
+
+fn evaluate_impl(
+    fixture: &Value,
+    root_names: &[&str],
+    digits: u32,
+    order: usize,
+    canonical: bool,
 ) -> Result<Vec<Vec<ComplexFloat>>> {
     let width_divisor = 5;
     let dimension = fixture["dimension"].as_u64().unwrap() as usize;
@@ -103,9 +128,13 @@ pub fn evaluate(
     }
     eprintln!("construct canonical physical system, digits={digits},order={order}");
     let symbolic_clock = Instant::now();
-    let system =
-        AlgebraicKinematicSystem::canonical_dlog(epsilon, &variables, &letters, &matrices, roots)?;
-    let pulled = system.pullback(&path, 4)?;
+    let pulled = if canonical {
+        CanonicalAlgebraicSystem::new(epsilon, &variables, &letters, &matrices, roots)?
+            .pullback(&path, 4)?
+    } else {
+        AlgebraicKinematicSystem::canonical_dlog(epsilon, &variables, &letters, &matrices, roots)?
+            .pullback(&path, 4)?
+    };
     let symbolic_seconds = symbolic_clock.elapsed().as_secs_f64();
     eprintln!("symbolic pullback complete in {symbolic_seconds:.3}s");
     let compile_clock = Instant::now();
@@ -207,7 +236,7 @@ pub fn evaluate(
         digits: 20,
         guard_digits: digits - 20,
         series_order: order,
-        max_steps: 5000,
+        max_steps: if canonical { 20000 } else { 5000 },
         ..Default::default()
     };
     let context = RunContext {
@@ -222,7 +251,56 @@ pub fn evaluate(
     };
     eprintln!("transport {} explicit waypoints", waypoints.len());
     let transport_clock = Instant::now();
-    let answer = compiled.transport(&boundary, &waypoints, &seeds, &options, &context, false)?;
+    let answer = if canonical {
+        // Recompute only each accepted root's magnitude at the new exact
+        // numerical center; its signed sheet is carried as a numerical hint.
+        // The attempt limit is aggregate, not renewed per waypoint.
+        let mut current = boundary;
+        let mut current_seeds = seeds;
+        let mut attempts = 0usize;
+        let mut accepted = 0usize;
+        let mut completed = None;
+        for target in &waypoints {
+            let mut local_options = options.clone();
+            local_options.max_steps = options
+                .max_steps
+                .checked_sub(attempts)
+                .filter(|&remaining| remaining > 0)
+                .ok_or_else(|| {
+                    Error::Limit("aggregate planar continuation budget exhausted".into())
+                })?;
+            let answer = compiled.transport(
+                &current,
+                std::slice::from_ref(target),
+                &current_seeds,
+                &local_options,
+                &context,
+                false,
+            )?;
+            accepted += answer.solution.diagnostics.steps;
+            attempts +=
+                answer.solution.diagnostics.steps + answer.solution.diagnostics.rejected_steps;
+            current = diffexp::EpsilonBoundary {
+                point: answer.solution.point.clone(),
+                leading: answer.solution.leading,
+                coefficients: answer.solution.coefficients.clone(),
+            };
+            current_seeds = answer
+                .branches
+                .roots
+                .iter()
+                .map(|(s, value)| (*s, RootSeed::Value(value.clone())))
+                .collect();
+            completed = Some(answer);
+        }
+        let mut answer =
+            completed.ok_or_else(|| Error::InvalidInput("empty planar contour".into()))?;
+        answer.solution.diagnostics.steps = accepted;
+        answer.solution.diagnostics.rejected_steps = attempts - accepted;
+        answer
+    } else {
+        compiled.transport(&boundary, &waypoints, &seeds, &options, &context, false)?
+    };
     let transport_seconds = transport_clock.elapsed().as_secs_f64();
     let source_error = maximum_error(
         p,
