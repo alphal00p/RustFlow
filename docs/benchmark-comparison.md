@@ -36,10 +36,10 @@ value magnitudes must be below `1e-20`.
 
 | Case | RustFlow | Original AMFlow | Numerical result and scope |
 |---|---:|---:|---|
-| [Analytic logarithmic chain](../reports/performance/2026-10-04-polynomial-recurrence.json) | 0.01074 transport; 0.01783 process | 0.001903 transport; 1.71098 process | 20 digits, independent refinement; supplied boundary |
-| [Upstream 12-master DE](../reports/performance/2026-10-04-polynomial-recurrence.json) | 0.16016 transport; 0.27302 process | 0.10238 transport; 4.69397 process | All 12 at 20 digits, independent refinement; supplied boundary |
-| [Paper-derived 27-master DE](../reports/performance/2026-10-04-paper27-de.json) | 0.26230 transport; 0.46987 process | 0.06175 transport; 14.48191 process | All 27 at 20 digits; DE timing, not automatic evaluation |
-| [Resonant singular matching](../reports/performance/2026-10-04-singular-resonance.json) | 0.00717 matching; 0.01437 process | 1.15566 matching; 1.16260 process | 20 digits, analytic/refinement checks; different singular-solver precision requirements |
+| [Analytic logarithmic chain](../reports/performance/2026-10-05-whole-segment-checked.json) | 0.04116 transport; 0.04809 process | 0.001907 transport; 1.72208 process | Current checked release, five-run medians; 20 digits and independent refinement |
+| [Upstream 12-master DE](../reports/performance/2026-10-05-whole-segment-checked.json) | 0.57962 transport; 0.69189 process | 0.10217 transport; 4.71912 process | Current checked release, five-run medians; all 12 at 20 digits and independent refinement |
+| [Paper-derived 27-master DE](../reports/performance/2026-10-05-whole-segment-checked.json) | 4.34252 transport; 4.54451 process | 0.06195 transport; 14.38687 process | Current checked release, five-run medians; all 27 at 20 digits, deterministic test boundary |
+| [Resonant singular matching](../reports/performance/2026-10-05-whole-segment-checked.json) | 0.00734 matching; 0.01435 process | 1.14274 matching; 1.14877 process | Current release, five-run medians; 20 digits, analytic/refinement checks; different internal precision requirements |
 | [Automatic massless bubble](../reports/validation/2026-10-04-live-upstream-oracles.json) | 0.1868 cross-check including refinement | 26.7388 `SolveIntegrals` | 20 digits against the original and analytic gamma formula; different measured work |
 | [Automatic vacuum sunset, mass squares (1,1,0)](../reports/validation/2026-10-04-live-upstream-oracles.json) | 0.1179 cross-check including refinement | 9.0585 `SolveIntegrals` | 20 digits against the original and analytic gamma formula; different measured work |
 | [Automatic connected three-loop single-mass vacuum, two targets at epsilon=1/10](../reports/performance/single-mass-full-workflow.json) | 2.814 process | 175.447 process | Both pass 35 relative digits against 40-digit original data; fresh caches, one worker, different bases/extra-order controls |
@@ -103,7 +103,8 @@ on one supplied 75-master segment reduced native transport from 729.713 to
 20 absolute digits and all root sheets match. This is one pair of measurements;
 the strategy is now an opt-in control. This historical measurement predates
 the new whole-segment residual checks and is not a timing of the corrected
-solver. Fresh comparisons are being run against its frozen release archive.
+solver. The first four AMFlow rows above now measure the corrected release against
+its frozen archive; their extra checks and trial counts are recorded.
 Neither change is included in the full-system timings above.
 
 ## Higgs+jet reuse and matrix elements
