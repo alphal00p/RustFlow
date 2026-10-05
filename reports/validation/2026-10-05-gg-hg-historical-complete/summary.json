@@ -1,0 +1,220 @@
+{
+  "scope": "Completed historical dependency graph full numerical acceptance. This is not the publication dependency graph acceptance.",
+  "captured_at_utc": "2026-10-05T23:38:48.556183+00:00",
+  "source": "/common/dev/amflow/target/gg-hg-notebook-acceptance/release-4c483581-c340-rustred7c-native30/acceptance.json",
+  "snapshot": "/common/dev/amflow/target/gg-hg-basis-work/full16-historical-final-acceptance.json",
+  "snapshot_sha256": "fbf5259ee3c8563a205308b709f6663796aef2d018e482987afd2f16883b24b8",
+  "status": "passed",
+  "root_process_session": 21718,
+  "stages": [
+    {
+      "stage": "boundaries",
+      "mode": "cold",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 7399438811225
+    },
+    {
+      "stage": "transport",
+      "mode": "cold",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 405374899907
+    },
+    {
+      "stage": "amplitude",
+      "mode": "cold",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 50753218699
+    },
+    {
+      "stage": "restart",
+      "mode": "reloaded",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 75394976536
+    },
+    {
+      "stage": "transport",
+      "mode": "warm",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 69437283096
+    },
+    {
+      "stage": "amplitude",
+      "mode": "warm",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 4058374946
+    },
+    {
+      "stage": "boundaries",
+      "mode": "forced_refinement_interrupted",
+      "seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 299422993402,
+      "recompute": true,
+      "outcome": "CalculationCancelled"
+    },
+    {
+      "stage": "boundaries",
+      "mode": "resumed_refinement",
+      "seed_digits": 40,
+      "final_seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 10317125260841
+    },
+    {
+      "stage": "transport",
+      "mode": "forced_refinement",
+      "seed_digits": 40,
+      "final_seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 426264177297,
+      "recompute": true
+    },
+    {
+      "stage": "amplitude",
+      "mode": "forced_refinement",
+      "seed_digits": 40,
+      "final_seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 51644596538,
+      "recompute": true
+    },
+    {
+      "stage": "transport",
+      "mode": "nearby",
+      "seed_digits": 40,
+      "final_seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 374080431430,
+      "nearby": true
+    },
+    {
+      "stage": "amplitude",
+      "mode": "nearby",
+      "seed_digits": 40,
+      "final_seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 4229148508,
+      "recompute": true
+    }
+  ],
+  "refined_boundary_configurations": 16,
+  "completed_sample_files": 2624,
+  "interruption": {
+    "phase": "forced_refinement",
+    "seed_digits": 40,
+    "baseline_sample_files": 1248,
+    "retained_sample_files": 1249,
+    "new_complete_samples": 1,
+    "elapsed_ns": 299422993402,
+    "cancellation_latency_ns": 1367408437,
+    "sample_payloads_preserved": true,
+    "verified_configurations_before_cancel": 0,
+    "sample_payloads_preserved_after_resume": true
+  },
+  "forced_precision_refinement": {
+    "seed_digits": 40,
+    "old_numerical_caches_bypassed": true,
+    "new_precision_samples_resumed": true,
+    "exact_reductions_reusable": true,
+    "checked_mixed_digits": 20,
+    "coefficients_with_consistent_uncertainties": 4360
+  },
+  "nearby": {
+    "point": [
+      "358653570264396973/5564237092300000",
+      "-12058167788971/339319588980",
+      "1"
+    ],
+    "sources": {
+      "W-Planar_EW1-1": "{hep_higgs_jet::t: -24192567254732572725551/357817993369896751000, hep_higgs_jet::s: 3985777158237/25535737000, hep_higgs_jet::b: 13074/5399}",
+      "W-Planar_EW1-2": "{hep_higgs_jet::t: -2233407629/25953770, hep_higgs_jet::s: 3985777158237/25535737000, hep_higgs_jet::b: 13074/5399}",
+      "W-Planar_EW1-3": "{hep_higgs_jet::s: -24192567254732572725551/357817993369896751000, hep_higgs_jet::b: 13074/5399, hep_higgs_jet::t: -2233407629/25953770}",
+      "W-Planar_EW1-4": "{hep_higgs_jet::b: 13074/5399, hep_higgs_jet::t: 3985777158237/25535737000, hep_higgs_jet::s: -2233407629/25953770}",
+      "Z-Planar_EW1-1": "{hep_higgs_jet::b: 14631/7775, hep_higgs_jet::s: 104949191448697262751/865238867852650000, hep_higgs_jet::t: -117987150501330757182512227/2245621057130807199050000}",
+      "Z-Planar_EW1-2": "{hep_higgs_jet::b: 14631/7775, hep_higgs_jet::t: -58807684306811567/879403268106500, hep_higgs_jet::s: 104949191448697262751/865238867852650000}",
+      "Z-Planar_EW1-3": "{hep_higgs_jet::s: -117987150501330757182512227/2245621057130807199050000, hep_higgs_jet::b: 14631/7775, hep_higgs_jet::t: -58807684306811567/879403268106500}",
+      "Z-Planar_EW1-4": "{hep_higgs_jet::t: 104949191448697262751/865238867852650000, hep_higgs_jet::s: -58807684306811567/879403268106500, hep_higgs_jet::b: 14631/7775}",
+      "W-NP_EW1-1": "{hep_higgs_jet::b: 13074/5399, hep_higgs_jet::s: 3985777158237/25535737000, hep_higgs_jet::t: -24192567254732572725551/357817993369896751000}",
+      "W-NP_EW1-2": "{hep_higgs_jet::s: 3985777158237/25535737000, hep_higgs_jet::t: -2233407629/25953770, hep_higgs_jet::b: 13074/5399}",
+      "W-NP_EW1-3": "{hep_higgs_jet::b: 13074/5399, hep_higgs_jet::t: -2233407629/25953770, hep_higgs_jet::s: -24192567254732572725551/357817993369896751000}",
+      "W-NP_EW1-4": "{hep_higgs_jet::s: -2233407629/25953770, hep_higgs_jet::b: 13074/5399, hep_higgs_jet::t: 3985777158237/25535737000}",
+      "Z-NP_EW1-1": "{hep_higgs_jet::s: 104949191448697262751/865238867852650000, hep_higgs_jet::t: -117987150501330757182512227/2245621057130807199050000, hep_higgs_jet::b: 14631/7775}",
+      "Z-NP_EW1-2": "{hep_higgs_jet::t: -58807684306811567/879403268106500, hep_higgs_jet::b: 14631/7775, hep_higgs_jet::s: 104949191448697262751/865238867852650000}",
+      "Z-NP_EW1-3": "{hep_higgs_jet::b: 14631/7775, hep_higgs_jet::t: -58807684306811567/879403268106500, hep_higgs_jet::s: -117987150501330757182512227/2245621057130807199050000}",
+      "Z-NP_EW1-4": "{hep_higgs_jet::s: -58807684306811567/879403268106500, hep_higgs_jet::t: 104949191448697262751/865238867852650000, hep_higgs_jet::b: 14631/7775}"
+    },
+    "inserted_points": 32,
+    "configurations_using_accumulated_points": [
+      "W-Planar_EW1-1",
+      "W-Planar_EW1-2",
+      "W-Planar_EW1-3",
+      "W-Planar_EW1-4",
+      "Z-Planar_EW1-1",
+      "Z-Planar_EW1-2",
+      "Z-Planar_EW1-3",
+      "Z-Planar_EW1-4",
+      "W-NP_EW1-1",
+      "W-NP_EW1-2",
+      "W-NP_EW1-3",
+      "W-NP_EW1-4",
+      "Z-NP_EW1-1",
+      "Z-NP_EW1-2",
+      "Z-NP_EW1-3",
+      "Z-NP_EW1-4"
+    ],
+    "source_provenance_preserved": true
+  },
+  "runtime_attestation_verified_at_completion": true,
+  "concurrency_note": "Shared cluster, four boundary workers sharing 256 sample workers; elapsed observations are not matched reference-code performance comparisons.",
+  "process_exit": {
+    "session": 21718,
+    "exit_code": 0,
+    "observed_by": "root agent, owning tool session21718",
+    "observation": "Authoritative tool completion exit0; no output. Root confirmed by collaboration message after the final report snapshot."
+  },
+  "historical_pins": {
+    "community": "66d571392cf75cef67625b1bb33e771cb0b371d5",
+    "rustflow_core": "4c483581",
+    "symbolica": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustred": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+  },
+  "gate_counts": {
+    "fresh_30_digit_configurations": 16,
+    "initial_completed_samples": 1248,
+    "fresh_40_digit_configurations": 16,
+    "total_completed_samples": 2624,
+    "reference_transport_coefficients": 4360,
+    "precision_stable_transport_coefficients": 4360,
+    "W_Z_form_factors": 8,
+    "coherent_observables": 3,
+    "warm_exact_cache_hits": 16,
+    "warm_ode_steps": 0,
+    "nearby_configurations_reusing_accumulated_points": 16,
+    "nearby_inserted_points": 32,
+    "interrupted_new_completed_samples": 1,
+    "interrupted_sample_payloads_preserved_after_resume": true,
+    "final_runtime_attestation_verified": true
+  },
+  "reference_precision_scope": {
+    "EW_squared_relative_reference_cap": 19,
+    "interference_relative_reference_cap": 20,
+    "HEFT_squared_relative_reference_cap": 39,
+    "transport_checked_mixed_digits": 20,
+    "note": "Independent refinement demonstrates native stability; it does not increase recorded external reference precision."
+  },
+  "preceding_summary_sha256": "e1fa2d86e333f10dc7b1a191ce879c2e4fd2a1a8f99119fdc7e45ea1e00bac63",
+  "committed_snapshot": "acceptance.json",
+  "post_completion_source_and_extension_file_hashes_rechecked": true
+}

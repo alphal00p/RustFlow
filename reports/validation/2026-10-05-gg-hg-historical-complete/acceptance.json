@@ -1,0 +1,1075 @@
+{
+  "status": "passed",
+  "mode": "cold",
+  "stages": [
+    {
+      "stage": "boundaries",
+      "mode": "cold",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 7399438811225
+    },
+    {
+      "stage": "transport",
+      "mode": "cold",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 405374899907
+    },
+    {
+      "stage": "amplitude",
+      "mode": "cold",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 50753218699
+    },
+    {
+      "stage": "restart",
+      "mode": "reloaded",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 75394976536
+    },
+    {
+      "stage": "transport",
+      "mode": "warm",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 69437283096
+    },
+    {
+      "stage": "amplitude",
+      "mode": "warm",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 4058374946
+    },
+    {
+      "stage": "boundaries",
+      "mode": "forced_refinement_interrupted",
+      "seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 299422993402,
+      "recompute": true,
+      "outcome": "CalculationCancelled"
+    },
+    {
+      "stage": "boundaries",
+      "mode": "resumed_refinement",
+      "seed_digits": 40,
+      "final_seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 10317125260841
+    },
+    {
+      "stage": "transport",
+      "mode": "forced_refinement",
+      "seed_digits": 40,
+      "final_seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 426264177297,
+      "recompute": true
+    },
+    {
+      "stage": "amplitude",
+      "mode": "forced_refinement",
+      "seed_digits": 40,
+      "final_seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 51644596538,
+      "recompute": true
+    },
+    {
+      "stage": "transport",
+      "mode": "nearby",
+      "seed_digits": 40,
+      "final_seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 374080431430,
+      "nearby": true
+    },
+    {
+      "stage": "amplitude",
+      "mode": "nearby",
+      "seed_digits": 40,
+      "final_seed_digits": 40,
+      "observable_digits": 20,
+      "elapsed_ns": 4229148508,
+      "recompute": true
+    }
+  ],
+  "runtime_attestation": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "9f3fb219752cd2b3bebc7f6f1baa58000622491dab68cb4aec8824bdb0cef095"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/symbolica-community/loop-integration/python/symbolica/core.abi3.so",
+      "size_bytes": 346164896,
+      "sha256": "79241c85373fe8590c6ba896d2860ee2b4a8f870776a2f0084af16a8710bb614"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 23808,
+        "sha256": "85dbd04343fa1556a04fe0bef5ddfd6acdba2f04b30120d4ade6152df986323b"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_support.py",
+        "size_bytes": 16451,
+        "sha256": "6c4b1030265072ca44e68fe25ecf3419ca54235c3c5d8a6d75890490b73068eb"
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg.py",
+        "size_bytes": 11597,
+        "sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/python-integration-venv/bin/python"
+    }
+  },
+  "scope": "Physical seeds, transport, amplitude and restart; independent Euclidean anchor reports are a separate prerequisite.",
+  "resources": {
+    "sample_worker_budget": 256,
+    "boundary_workers": 4,
+    "effective_boundary_workers": 4,
+    "sample_workers_per_configuration": 64
+  },
+  "inputs": {
+    "model_sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+    "point": [
+      "7173070292440521/111284741846000",
+      "-12058167788971/339319588980",
+      "1"
+    ],
+    "mass_squared": {
+      "W": "5399/13074",
+      "Z": "7775/14631"
+    },
+    "systems": {
+      "planar": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates",
+      "nonplanar": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates"
+    }
+  },
+  "progress": {
+    "stage": "amplitude",
+    "mode": "nearby",
+    "elapsed_ns": 4223211333,
+    "seed_digits": 40,
+    "status": "amplitude: completed",
+    "done": true,
+    "recent_events": [
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 265 }",
+      "Step { index: 256 }",
+      "Step { index: 266 }",
+      "Step { index: 257 }",
+      "Step { index: 267 }",
+      "Step { index: 258 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 268 }",
+      "Step { index: 259 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 260 }",
+      "Saved boundary Z-NP_EW1-3; cache hit: False.",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 261 }",
+      "Step { index: 262 }",
+      "Step { index: 263 }",
+      "Step { index: 264 }",
+      "Step { index: 265 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 266 }",
+      "Step { index: 267 }",
+      "Step { index: 268 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Saved boundary Z-NP_EW1-4; cache hit: False.",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Stage { name: \"generating native Higgs-jet effective diagrams\" }",
+      "Stage { name: \"summing native Higgs-jet spin and color states\" }",
+      "Stage { name: \"contracting native Higgs-jet tensors\" }",
+      "Stage { name: \"preparing kinematics-dependent Higgs-jet scalar kernels\" }",
+      "Stage { name: \"evaluating coherent Higgs-jet observables and propagated errors\" }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Stage { name: \"evaluating coherent Higgs-jet observables and propagated errors\" }"
+    ],
+    "completed_sample_files": 2624
+  },
+  "timings": [
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 750532221444,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 800795482113,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 803959386407,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 816059842391,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 654054404590,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 725122319017,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 740972041060,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 785819791158,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2660288810206,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2758156033792,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2855620385227,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2813792943505,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2691208709843,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2591632169765,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2711142591488,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2992719722826,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundaries",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 7399435071919,
+      "outcome": "completed"
+    },
+    {
+      "stage": "transport",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 405371386552,
+      "outcome": "completed"
+    },
+    {
+      "stage": "amplitude",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 50749930146,
+      "outcome": "completed"
+    },
+    {
+      "stage": "restart",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 75391416071,
+      "outcome": "completed"
+    },
+    {
+      "stage": "transport",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 69432873588,
+      "outcome": "completed"
+    },
+    {
+      "stage": "amplitude",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 4054646550,
+      "outcome": "completed"
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-4",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 299378879679,
+      "outcome": "CalculationCancelled: calculation cancelled",
+      "cache_hit": null
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-2",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 299396634062,
+      "outcome": "CalculationCancelled: calculation cancelled",
+      "cache_hit": null
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-1",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 299402888548,
+      "outcome": "CalculationCancelled: calculation cancelled",
+      "cache_hit": null
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-3",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 299410083918,
+      "outcome": "CalculationCancelled: calculation cancelled",
+      "cache_hit": null
+    },
+    {
+      "stage": "boundaries",
+      "recompute": true,
+      "nearby": false,
+      "elapsed_ns": 299419550748,
+      "outcome": "CalculationCancelled: calculation cancelled"
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-4",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 851817667792,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-3",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 862004131383,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-2",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 891161649854,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-1",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 933583582593,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-2",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 782748252824,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-4",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 834945417810,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-3",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 895636738809,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-1",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 954750679247,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-1",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 4426477041012,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-4",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 4439026222846,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-2",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 4640114045415,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-3",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 4635974021302,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-1",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 3726066792931,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-2",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 3692096225466,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-3",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 3821043204353,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-4",
+      "seed_digits": 40,
+      "sample_workers": 64,
+      "elapsed_ns": 3885967515227,
+      "outcome": "completed",
+      "cache_hit": false
+    },
+    {
+      "stage": "boundaries",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 10317118481053,
+      "outcome": "completed"
+    },
+    {
+      "stage": "transport",
+      "recompute": true,
+      "nearby": false,
+      "elapsed_ns": 426256749887,
+      "outcome": "completed"
+    },
+    {
+      "stage": "amplitude",
+      "recompute": true,
+      "nearby": false,
+      "elapsed_ns": 51638130721,
+      "outcome": "completed"
+    },
+    {
+      "stage": "transport",
+      "recompute": false,
+      "nearby": true,
+      "elapsed_ns": 374074074133,
+      "outcome": "completed"
+    },
+    {
+      "stage": "amplitude",
+      "recompute": true,
+      "nearby": false,
+      "elapsed_ns": 4222903071,
+      "outcome": "completed"
+    }
+  ],
+  "native_seeds": {
+    "W-Planar_EW1-1": {
+      "identity": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-Planar_EW1-2": {
+      "identity": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-Planar_EW1-3": {
+      "identity": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-Planar_EW1-4": {
+      "identity": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-1": {
+      "identity": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-2": {
+      "identity": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-3": {
+      "identity": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-4": {
+      "identity": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-1": {
+      "identity": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-2": {
+      "identity": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-3": {
+      "identity": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-4": {
+      "identity": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-1": {
+      "identity": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-2": {
+      "identity": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-3": {
+      "identity": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-4": {
+      "identity": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    }
+  },
+  "reference_comparison": {
+    "coefficients": 4360,
+    "checked_mixed_digits": 20,
+    "maximum_scaled_difference": "1.698022952500849738236628302047615989765346418841003076022724986017768E-30",
+    "reference_precision": "Preserved component source caps/precision and endpoint delta in coherent-reference.json",
+    "source_verified_digits_caps": {
+      "W-Planar_EW1-1": 24,
+      "W-Planar_EW1-2": 24,
+      "W-Planar_EW1-3": 24,
+      "W-Planar_EW1-4": 24,
+      "W-NP_EW1-1": 24,
+      "W-NP_EW1-2": 24,
+      "W-NP_EW1-3": 24,
+      "W-NP_EW1-4": 24,
+      "Z-Planar_EW1-1": 24,
+      "Z-Planar_EW1-2": 24,
+      "Z-Planar_EW1-3": 24,
+      "Z-Planar_EW1-4": 24,
+      "Z-NP_EW1-1": 24,
+      "Z-NP_EW1-2": 24,
+      "Z-NP_EW1-3": 24,
+      "Z-NP_EW1-4": 24
+    },
+    "endpoint_deltas": {
+      "W-Planar_EW1-1": "3.2185621170547758*^-27",
+      "W-Planar_EW1-2": "3.2185621162754866*^-27",
+      "W-Planar_EW1-3": "5.862101017252375*^-28",
+      "W-Planar_EW1-4": "2.9585803614123236*^-27",
+      "W-NP_EW1-1": "1.0038884634147344*^-27",
+      "W-NP_EW1-2": "1.0226540982405648*^-27",
+      "W-NP_EW1-3": "3.4128582946147586*^-27",
+      "W-NP_EW1-4": "6.017579083450245*^-28",
+      "Z-Planar_EW1-1": "3.2228950405315133*^-27",
+      "Z-Planar_EW1-2": "3.222895039773394*^-27",
+      "Z-Planar_EW1-3": "8.805569288861356*^-28",
+      "Z-Planar_EW1-4": "3.160825117717002*^-27",
+      "Z-NP_EW1-1": "9.094574622024175*^-28",
+      "Z-NP_EW1-2": "1.230547775126752*^-27",
+      "Z-NP_EW1-3": "2.5882486630334502*^-27",
+      "Z-NP_EW1-4": "8.333965179001432*^-28"
+    }
+  },
+  "observables": {
+    "effective_squared": {
+      "value": "0.00176839492856040838255513143874534782898210399687219844018557709100056424479576777129467967484813",
+      "absolute_error": "1E-50",
+      "relative_digits": 47
+    },
+    "electroweak_squared": {
+      "value": "4.33089662023980781068590560931974942994040642487940681678246676343150671547735405404120678036288E-8",
+      "absolute_error": "1.03038250335993855710408227422359660726846059979533911113750299343973552309362935319028309186462E-33",
+      "relative_digits": 25
+    },
+    "interference": {
+      "value": "0.0000166580193666104352713434174523346881653549846139505767407266481227466537219656222934353207728629",
+      "absolute_error": "1.37731031568813068627392693854412868258134780717120329145843258319754208435130911820292715689631E-31",
+      "relative_digits": 26
+    }
+  },
+  "form_factor_comparison": {
+    "components": 8,
+    "comparison": {
+      "W": [
+        {
+          "index": 1,
+          "value": "(0.00000196122238618354244187226751552453320477653483944165664762606489867484580701741712541527934192497688626937-0.00000809007076182998492997694095330234148133866943165310769334485594416409553447403587501375950802672587809345j)",
+          "absolute_difference": "5.143808442078450051612643023275552187884110976781988864544013562732796E-36",
+          "native_absolute_error": "2.27528209277603247875025375768284355031085508472365679436145185492936457279109412158760903775193867308087E-32",
+          "native_verified_relative_digits": 26,
+          "reference_absolute_error": "2.2894422778484710617219023758127296980340123201305702853536819931315854569613945923191920875928305767078971597261130888225138070911525519357053588958538600877261666e-26"
+        },
+        {
+          "index": 2,
+          "value": "(0.00000311877285945116004083112030594674900485706001164483932878156571651090670099132927573446712057767388334926-0.00000319630617603961230595104819312248865212806294553555074487246517573831538654566389963337227220093273423151j)",
+          "absolute_difference": "2.972825980245488824505888048245316776301542810447256921441837333017564E-36",
+          "native_absolute_error": "4.32748699796940795443390317303891889620740901050973397957678323943476519475442187853934413527706586325691E-31",
+          "native_verified_relative_digits": 25,
+          "reference_absolute_error": "4.3530140922574367346069825631297457026237300281776625510195222985544606775618232408987391125346916753001696620985137181011120232532908393972071889336312263234000659e-25"
+        },
+        {
+          "index": 3,
+          "value": "(-0.00000242513800782883147494572181185168174690542507085904020898027354144690394711370564528716149288497979085048+0.00000348790358169000308503319605913086193810123417292375915259352316483533645917462101612592151384294954575425j)",
+          "absolute_difference": "6.858352966900754846893347336765578299018291925862941007168654096324901E-36",
+          "native_absolute_error": "4.06844015065156166245814798612321719220101739236243302054825099612846351792141354529983444926059085385984E-32",
+          "native_verified_relative_digits": 26,
+          "reference_absolute_error": "4.1031713688203874617267147671521978982359561343847099674600667217295867776446285029394868152776080573874796524790687365319894624470261424412548734671996325004454210e-26"
+        },
+        {
+          "index": 4,
+          "value": "(0.00000472112415267974335518758062622869704631978493887290300057398949885466968613004589161821664521123653376192-0.0000129880123126617041227000407141235718309941498734878670586333424059152417906426001754802196365155664800282j)",
+          "absolute_difference": "9.374603750071727379251063167512014895424533215962751886571960706959072E-36",
+          "native_absolute_error": "1.89810694949784264633878246960852810816941559065755094616016854128445071366196621093447529746558130827606E-31",
+          "native_verified_relative_digits": 25,
+          "reference_absolute_error": "1.9094573980705271453356802757638948060172978128304488653863004290182128447255574285641967745015322850106247319193602797553938530752662679457110187024301184619912323e-25"
+        }
+      ],
+      "Z": [
+        {
+          "index": 1,
+          "value": "(0.0000014958451952761478693102223896892617921152965468922134385445864915188687358496701392221222272593481914496-0.0000064582054391670170571558111288953275860949708966967107046778797766590283680559303752719817928283436212148j)",
+          "absolute_difference": "7.1531564062088553721724593462332221604770362926929135056724911489748902E-36",
+          "native_absolute_error": "3.06685625768707197091545716537539607890481314848042852151974506983226838380160100211175790515833968318858E-32",
+          "native_verified_relative_digits": 26,
+          "reference_absolute_error": "3.0850617437448454289042478895604472907991349916940237444912356572551816162999327330149626983955837842877165641790760177202838195326091938840114099087668125589542106e-26"
+        },
+        {
+          "index": 2,
+          "value": "(0.00000264220789391826749913508610578135971711596391361523255519303492374697287981131187841822449100643486749059-0.00000255024204961584667892488527407044226340730845904321189551829785430609143803967033447585143035686623691813j)",
+          "absolute_difference": "6.6390513225915319421042080584150249155857347653263480833522777479408411E-35",
+          "native_absolute_error": "5.52628000480279181193255320621664311954416958329029267758111767593118219484845837196826567438894825899528E-31",
+          "native_verified_relative_digits": 24,
+          "reference_absolute_error": "5.5597103718713992760207099541422720732121534798581672099528317771589607038154737432213500596489696049461799014198859006611423656892337659624777698076137696487113882e-25"
+        },
+        {
+          "index": 3,
+          "value": "(-0.00000201901733252621387687016087627611654726911972288811832524138164372786933730352972738385198115505482429185+0.00000279014951455226281385884472453395821897117977075193707796400548953179089365662567436218052571307917825798j)",
+          "absolute_difference": "2.9610172592520556764469743689316193168496330944804428642755538935032628E-35",
+          "native_absolute_error": "9.19078575656866315235195938213138227480872836320947757120362711998719919756109337974540347702524097705533E-32",
+          "native_verified_relative_digits": 25,
+          "reference_absolute_error": "9.2721561940592548105963169949791233675514410882632020540084462640997947635386978524812090864272906423477908447474043250048144018137816077048655852131263861370412818e-26"
+        },
+        {
+          "index": 4,
+          "value": "(0.00000375132485640043335955350112366438195588328292200095344675857546412211654539943324255019019549922335788823-0.0000103869776958708844496710907773540796162523074370720286269506727461031443094172246829611703907168799800805j)",
+          "absolute_difference": "2.997401249980010051080527111307418190407209257090902389427858882339596E-35",
+          "native_absolute_error": "2.48392110356906448198099890216483983399761617959283512934076732558440479497474298730400879946887896143078E-31",
+          "native_verified_relative_digits": 25,
+          "reference_absolute_error": "2.4987744496469589053257508973342428304922848075000439862141204924183340631536046473872500275855612750787128354083877781483922261005890440863712022753194839308751673e-25"
+        }
+      ]
+    }
+  },
+  "observable_comparison": {
+    "effective_squared": {
+      "absolute_difference": "3.996872198440185577091000564244795767771294679674848127E-45",
+      "reference_absolute_uncertainty": "1.00000000000000000000001E-42",
+      "reference_conditional_relative_digits": 39
+    },
+    "electroweak_squared": {
+      "absolute_difference": "4.344880059593575120593183217533236568493284522645945958793219637117E-38",
+      "reference_absolute_uncertainty": "1.036965279541889484229816607147212347491680749337440461240057773672673644280375266356913373971924892E-27",
+      "reference_conditional_relative_digits": 19
+    },
+    "interference": {
+      "absolute_difference": "8.06288718001538604942325927335187725334627803437770656467922713706E-36",
+      "reference_absolute_uncertainty": "1.386179807571189334116816980709306921379782632659449692282195647591677068094016282224644333359816356E-25",
+      "reference_conditional_relative_digits": 20
+    }
+  },
+  "binary_restart": {
+    "entries": 48,
+    "values_and_evidence_preserved": true,
+    "exact_repeat_without_steps": true
+  },
+  "interruption": {
+    "phase": "forced_refinement",
+    "seed_digits": 40,
+    "baseline_sample_files": 1248,
+    "retained_sample_files": 1249,
+    "new_complete_samples": 1,
+    "elapsed_ns": 299422993402,
+    "cancellation_latency_ns": 1367408437,
+    "sample_payloads_preserved": true,
+    "verified_configurations_before_cancel": 0,
+    "sample_payloads_preserved_after_resume": true
+  },
+  "forced_precision_refinement": {
+    "seed_digits": 40,
+    "old_numerical_caches_bypassed": true,
+    "new_precision_samples_resumed": true,
+    "exact_reductions_reusable": true,
+    "checked_mixed_digits": 20,
+    "coefficients_with_consistent_uncertainties": 4360,
+    "form_factor_comparison": {
+      "components": 8,
+      "comparison": {
+        "W": [
+          {
+            "index": 1,
+            "value": "(0.00000196122238618354244187226751552453320477653483944165664762606489867484580701741664674042394182852400073702-0.00000809007076182998492997694095330234148133866943165310769334485594416410046493317002436600861544136664368058j)",
+            "absolute_difference": "5.143808442078450051612643023275552187879428601794706423715764668611788E-36",
+            "native_absolute_error": "2.27528209277603247878009406059300873882990041835951248464947238603578480602863722140028828032411149066297E-42",
+            "native_verified_relative_digits": 36,
+            "reference_absolute_error": "2.2894422778484710617219023758127296980340123201305702853536819931315854569613945923191920875928305767078971597261130888225138070911525519357053588958538600877261666e-26"
+          },
+          {
+            "index": 2,
+            "value": "(0.00000311877285945116004083112030594674900485706001164483932878156571651090670099132254994942350222838263525075-0.00000319630617603961230595104819312248865212806294553555074487246517573831810944448097494612288501099104054123j)",
+            "absolute_difference": "2.972825980245488824505888048245316776304094335609217114153276690904294E-36",
+            "native_absolute_error": "4.32748699796940795449583767685503938883081534854857062654524434368695155376550176617386911568025113461948E-41",
+            "native_verified_relative_digits": 35,
+            "reference_absolute_error": "4.3530140922574367346069825631297457026237300281776625510195222985544606775618232408987391125346916753001696620985137181011120232532908393972071889336312263234000659e-25"
+          },
+          {
+            "index": 3,
+            "value": "(-0.00000242513800782883147494572181185168174690542507085904020898027354144690394711370170158403559292117375999347+0.00000348790358169000308503319605913086193810123417292375915259352316483533916954558471337301965594335072154928j)",
+            "absolute_difference": "6.858352966900754846893347336765578299016027682253492243202028567097345E-36",
+            "native_absolute_error": "4.06844015065156166251258081575285116683489063568223568562675487852488864511927480400539166189095362915542E-42",
+            "native_verified_relative_digits": 36,
+            "reference_absolute_error": "4.1031713688203874617267147671521978982359561343847099674600667217295867776446285029394868152776080573874796524790687365319894624470261424412548734671996325004454210e-26"
+          },
+          {
+            "index": 4,
+            "value": "(0.00000472112415267974335518758062622869704631978493887290300057398949885466968613004018663754092400007835678331-0.0000129880123126617041227000407141235718309941498734878670586333424059152502761057647319521256671078045815815j)",
+            "absolute_difference": "9.374603750071727379251063167512014895417554743033279385193446748921251E-36",
+            "native_absolute_error": "1.89810694949784264636546620197722001780012117273691683390694174879232807063227835761834116957340744120945E-41",
+            "native_verified_relative_digits": 35,
+            "reference_absolute_error": "1.9094573980705271453356802757638948060172978128304488653863004290182128447255574285641967745015322850106247319193602797553938530752662679457110187024301184619912323e-25"
+          }
+        ],
+        "Z": [
+          {
+            "index": 1,
+            "value": "(0.00000149584519527614786931022238968926179211529654689221343854458649151886873584966949491068118087439957248308-0.0000064582054391670170571558111288953275860949708966967107046778797766590321115302481295297646762375444312412j)",
+            "absolute_difference": "7.1531564062088553721724593462332221604785327688641876214434824152489177E-36",
+            "native_absolute_error": "3.06685625768707197096370754233278119452308278351466187457016571067812602772844257079787882925826816854285E-42",
+            "native_verified_relative_digits": 36,
+            "reference_absolute_error": "3.0850617437448454289042478895604472907991349916940237444912356572551816162999327330149626983955837842877165641790760177202838195326091938840114099087668125589542106e-26"
+          },
+          {
+            "index": 2,
+            "value": "(0.00000264220789391826749913508610578135971711596391361523255519303492374697287981129610864162227763130824235567-0.00000255024204961584667892488527407044226340730845904321189551829785430609332737347550827659074158374880553661j)",
+            "absolute_difference": "6.6390513225915319421042080584150249155855502575843530673760128161556894E-35",
+            "native_absolute_error": "5.52628000480279181206943655364517473485217174450536082465137144028136908195598060390138876820477175333193E-41",
+            "native_verified_relative_digits": 34,
+            "reference_absolute_error": "5.5597103718713992760207099541422720732121534798581672099528317771589607038154737432213500596489696049461799014198859006611423656892337659624777698076137696487113882e-25"
+          },
+          {
+            "index": 3,
+            "value": "(-0.00000201901733252621387687016087627611654726911972288811832524138164372786933730352716560356989446379040161031+0.00000279014951455226281385884472453395821897117977075193707796400548953179291600269569564876106678559760697814j)",
+            "absolute_difference": "2.9610172592520556764469743689316193168496246673662460949408570544635325E-35",
+            "native_absolute_error": "9.19078575656866315262372234543364397264513904244754806155158342592720294759080313368347078794152769998502E-42",
+            "native_verified_relative_digits": 35,
+            "reference_absolute_error": "9.2721561940592548105963169949791233675514410882632020540084462640997947635386978524812090864272906423477908447474043250048144018137816077048655852131263861370412818e-26"
+          },
+          {
+            "index": 4,
+            "value": "(0.00000375132485640043335955350112366438195588328292200095344675857546412211654539942467446328041081944656674569-0.0000103869776958708844496710907773540796162523074370720286269506727461031506597410670628951790523518386225278j)",
+            "absolute_difference": "2.997401249980010051080527111307418190406742689619327225024597192805269E-35",
+            "native_absolute_error": "2.48392110356906448203118345381939899044704366407394704927266490757465495766264612159362967201921481727262E-41",
+            "native_verified_relative_digits": 35,
+            "reference_absolute_error": "2.4987744496469589053257508973342428304922848075000439862141204924183340631536046473872500275855612750787128354083877781483922261005890440863712022753194839308751673e-25"
+          }
+        ]
+      }
+    }
+  },
+  "nearby": {
+    "point": [
+      "358653570264396973/5564237092300000",
+      "-12058167788971/339319588980",
+      "1"
+    ],
+    "sources": {
+      "W-Planar_EW1-1": "{hep_higgs_jet::t: -24192567254732572725551/357817993369896751000, hep_higgs_jet::s: 3985777158237/25535737000, hep_higgs_jet::b: 13074/5399}",
+      "W-Planar_EW1-2": "{hep_higgs_jet::t: -2233407629/25953770, hep_higgs_jet::s: 3985777158237/25535737000, hep_higgs_jet::b: 13074/5399}",
+      "W-Planar_EW1-3": "{hep_higgs_jet::s: -24192567254732572725551/357817993369896751000, hep_higgs_jet::b: 13074/5399, hep_higgs_jet::t: -2233407629/25953770}",
+      "W-Planar_EW1-4": "{hep_higgs_jet::b: 13074/5399, hep_higgs_jet::t: 3985777158237/25535737000, hep_higgs_jet::s: -2233407629/25953770}",
+      "Z-Planar_EW1-1": "{hep_higgs_jet::b: 14631/7775, hep_higgs_jet::s: 104949191448697262751/865238867852650000, hep_higgs_jet::t: -117987150501330757182512227/2245621057130807199050000}",
+      "Z-Planar_EW1-2": "{hep_higgs_jet::b: 14631/7775, hep_higgs_jet::t: -58807684306811567/879403268106500, hep_higgs_jet::s: 104949191448697262751/865238867852650000}",
+      "Z-Planar_EW1-3": "{hep_higgs_jet::s: -117987150501330757182512227/2245621057130807199050000, hep_higgs_jet::b: 14631/7775, hep_higgs_jet::t: -58807684306811567/879403268106500}",
+      "Z-Planar_EW1-4": "{hep_higgs_jet::t: 104949191448697262751/865238867852650000, hep_higgs_jet::s: -58807684306811567/879403268106500, hep_higgs_jet::b: 14631/7775}",
+      "W-NP_EW1-1": "{hep_higgs_jet::b: 13074/5399, hep_higgs_jet::s: 3985777158237/25535737000, hep_higgs_jet::t: -24192567254732572725551/357817993369896751000}",
+      "W-NP_EW1-2": "{hep_higgs_jet::s: 3985777158237/25535737000, hep_higgs_jet::t: -2233407629/25953770, hep_higgs_jet::b: 13074/5399}",
+      "W-NP_EW1-3": "{hep_higgs_jet::b: 13074/5399, hep_higgs_jet::t: -2233407629/25953770, hep_higgs_jet::s: -24192567254732572725551/357817993369896751000}",
+      "W-NP_EW1-4": "{hep_higgs_jet::s: -2233407629/25953770, hep_higgs_jet::b: 13074/5399, hep_higgs_jet::t: 3985777158237/25535737000}",
+      "Z-NP_EW1-1": "{hep_higgs_jet::s: 104949191448697262751/865238867852650000, hep_higgs_jet::t: -117987150501330757182512227/2245621057130807199050000, hep_higgs_jet::b: 14631/7775}",
+      "Z-NP_EW1-2": "{hep_higgs_jet::t: -58807684306811567/879403268106500, hep_higgs_jet::b: 14631/7775, hep_higgs_jet::s: 104949191448697262751/865238867852650000}",
+      "Z-NP_EW1-3": "{hep_higgs_jet::b: 14631/7775, hep_higgs_jet::t: -58807684306811567/879403268106500, hep_higgs_jet::s: -117987150501330757182512227/2245621057130807199050000}",
+      "Z-NP_EW1-4": "{hep_higgs_jet::s: -58807684306811567/879403268106500, hep_higgs_jet::t: 104949191448697262751/865238867852650000, hep_higgs_jet::b: 14631/7775}"
+    },
+    "inserted_points": 32,
+    "configurations_using_accumulated_points": [
+      "W-Planar_EW1-1",
+      "W-Planar_EW1-2",
+      "W-Planar_EW1-3",
+      "W-Planar_EW1-4",
+      "Z-Planar_EW1-1",
+      "Z-Planar_EW1-2",
+      "Z-Planar_EW1-3",
+      "Z-Planar_EW1-4",
+      "W-NP_EW1-1",
+      "W-NP_EW1-2",
+      "W-NP_EW1-3",
+      "W-NP_EW1-4",
+      "Z-NP_EW1-1",
+      "Z-NP_EW1-2",
+      "Z-NP_EW1-3",
+      "Z-NP_EW1-4"
+    ],
+    "source_provenance_preserved": true
+  },
+  "runtime_attestation_verified_at_completion": true
+}

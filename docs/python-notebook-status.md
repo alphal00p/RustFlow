@@ -46,6 +46,19 @@ reference comparison therefore does not independently establish 20 digits.
 | Warm transport, 16 exact hits and zero ODE steps | 69.44 s | 68.43 s |
 | Warm amplitude assembly | 4.06 s | 4.03 s |
 
+The historical build subsequently
+[completed its entire acceptance with exit code zero](../reports/validation/2026-10-05-gg-hg-historical-complete/summary.json).
+All sixteen independent 40-digit boundary fits passed; all 4,360 transported
+coefficients were consistent with the cold run's uncertainty estimates, and
+the refined form factors and observables passed their checks. Resumed boundary
+generation took 10,317.13 seconds after a 299.42-second intentionally interrupted
+stage; refined transport and amplitude took 426.26 and 51.64 seconds. Nearby
+transport reused accumulated physical points for all sixteen configurations,
+inserted 32 points, and took 374.08 seconds, followed by 4.23 seconds for amplitude
+assembly. Completed sample hashes survived the interruption and resume; final
+runtime attestation passed. This is proof for the historical dependency graph;
+the publication wheel's independent full acceptance remains in progress.
+
 These observations used four boundary workers sharing a 256-sample-worker budget
 on a busy cluster. Warm controller timings include persistence after each query;
 they are not isolated cache-lookup timings. The
