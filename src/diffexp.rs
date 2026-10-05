@@ -7,8 +7,8 @@
 //! regular in epsilon at zero. A common Laurent prefactor of the solution is
 //! allowed and is carried explicitly.
 use crate::ode::{
-    CompiledSystem, PolynomialRow, SeriesSystem, TaylorSegment, compile_rows, evaluate_taylor,
-    shift_polynomial, transport_series,
+    CompiledSystem, SeriesSystem, TaylorSegment, compile_rows, evaluate_taylor, shift_polynomial,
+    transport_series,
 };
 use crate::{
     BoundaryData, ComplexFloat as C, DifferentialSystem, Error, FlowDiagnostics, FlowOptions,
@@ -472,83 +472,11 @@ impl SeriesSystem for CompiledEpsilonSystem {
         order: usize,
         _: &(),
     ) -> Result<(Vec<Vec<C>>, ())> {
-        let p = self.rows.p;
-        let n = self.rows.dimension();
-        if values.len() != self.dimension() {
-            return Err(Error::InvalidInput("epsilon boundary dimensions".into()));
-        }
-        let rows = self
-            .rows
-            .polynomial_rows
-            .iter()
-            .map(|row| {
-                let mut denominator = shift_polynomial(
-                    p,
-                    &row.denominator,
-                    center,
-                    (row.denominator.len() - 1).min(order.saturating_sub(1)),
-                );
-                if denominator[0] == p.zero() {
-                    return Err(Error::Numerical("expansion center is a pole".into()));
-                }
-                let divisor = denominator[0].clone();
-                for a in &mut denominator {
-                    *a = p.div(a, &divisor);
-                }
-                let entries = row
-                    .entries
-                    .iter()
-                    .map(|(j, coefficients)| {
-                        let mut coefficients = shift_polynomial(
-                            p,
-                            coefficients,
-                            center,
-                            (coefficients.len() - 1).min(order.saturating_sub(1)),
-                        );
-                        for a in &mut coefficients {
-                            *a = p.div(a, &divisor);
-                        }
-                        (*j, coefficients)
-                    })
-                    .collect();
-                Ok(PolynomialRow {
-                    denominator,
-                    entries,
-                })
-            })
-            .collect::<Result<Vec<_>>>()?;
-        let zero = p.zero();
-        let mut y = vec![vec![zero.clone(); self.dimension()]; order + 1];
-        let mut derivative = vec![vec![zero.clone(); self.dimension()]; order];
-        y[0] = values.to_vec();
-        for k in 0..order {
-            for e in 0..self.count {
-                for (i, row) in rows.iter().enumerate() {
-                    let index = e * n + i;
-                    let mut sum = zero.clone();
-                    for (column, coefficients) in &row.entries {
-                        let epsilon_shift = column / n;
-                        if epsilon_shift > e {
-                            continue;
-                        }
-                        let source = (e - epsilon_shift) * n + column % n;
-                        for (l, a) in coefficients.iter().enumerate().take(k + 1) {
-                            if *a != zero {
-                                sum = p.add(&sum, &p.mul(a, &y[k - l][source]));
-                            }
-                        }
-                    }
-                    for (l, a) in row.denominator.iter().enumerate().skip(1).take(k) {
-                        if *a != zero {
-                            sum = p.sub(&sum, &p.mul(a, &derivative[k - l][index]));
-                        }
-                    }
-                    derivative[k][index] = sum;
-                    y[k + 1][index] = p.scale(&derivative[k][index], 1, (k + 1) as i64);
-                }
-            }
-        }
-        Ok((y, ()))
+        Ok((
+            self.rows
+                .taylor_channels(center, values, order, self.count)?,
+            (),
+        ))
     }
 
     fn rhs(&self, point: &C, values: &[C], _: &()) -> Result<Vec<C>> {

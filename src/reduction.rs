@@ -1,4 +1,6 @@
+mod scoped_tables;
 mod table_graph;
+pub use scoped_tables::ScopedTableBackend;
 
 use crate::family::{eta_derivative, substitute};
 use crate::{Error, Integral, IntegralFamily, Progress, Result, RunContext};
@@ -349,6 +351,9 @@ impl RustRedBackend {
 
 /// Explicit reduction tables. Their algebraic validity is the caller's contract;
 /// recursive substitutions and differential closure are checked by this crate.
+/// This legacy adapter does not bind its table to a family. Prefer
+/// [`ScopedTableBackend`] when a workflow may request deformed or recursive
+/// families; otherwise the caller must enforce that dispatch itself.
 #[derive(Clone, Debug)]
 pub struct TableBackend {
     pub name: String,

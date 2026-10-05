@@ -56,5 +56,5 @@ pub use options::{
 pub use physical_family::PreparedPhysicalFamily;
 pub use physical_targets::ProjectedLaurentExpansion;
 pub use physical_transport::RustFlow;
-pub use reduction::{ReductionBackend, RustRedBackend, TableBackend};
+pub use reduction::{ReductionBackend, RustRedBackend, ScopedTableBackend, TableBackend};
 pub use transport_cache::RustFlowCache;

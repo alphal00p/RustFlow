@@ -454,10 +454,28 @@ impl CompiledSystem {
         self.matrix.len()
     }
     pub(crate) fn taylor(&self, center: &C, values: &[C], order: usize) -> Result<Vec<Vec<C>>> {
+        self.taylor_channels(center, values, order, 1)
+    }
+
+    /// Shared finite-polynomial recurrence for ordinary and epsilon-series
+    /// transport. A column `shift * n + component` couples channel `e` to
+    /// `e - shift`; ordinary transport has one channel and zero shifts.
+    /// Translate each row once and retain the sparse coefficient hierarchy,
+    /// without constructing a dense augmented differential system.
+    pub(crate) fn taylor_channels(
+        &self,
+        center: &C,
+        values: &[C],
+        order: usize,
+        channels: usize,
+    ) -> Result<Vec<Vec<C>>> {
         let p = self.p;
         let n = self.dimension();
-        if values.len() != n {
-            return Err(Error::InvalidInput("boundary dimension".into()));
+        let size = n
+            .checked_mul(channels)
+            .ok_or_else(|| Error::Limit("series channel dimension overflow".into()))?;
+        if channels == 0 || values.len() != size {
+            return Err(Error::InvalidInput("boundary channel dimensions".into()));
         }
         let zero = p.zero();
         // Translate only the finite polynomial degrees needed at this order;
@@ -501,31 +519,37 @@ impl CompiledSystem {
                 })
             })
             .collect::<Result<Vec<_>>>()?;
-        let mut y = vec![vec![zero.clone(); n]; order + 1];
+        let mut y = vec![vec![zero.clone(); size]; order + 1];
         // Store y' coefficients as well as y. Then the denominator convolution
         // does not repeatedly multiply y_k by its integer derivative weight.
-        let mut derivative = vec![vec![zero.clone(); n]; order];
+        let mut derivative = vec![vec![zero.clone(); size]; order];
         y[0] = values.to_vec();
-        // With D_0 normalized to one:
-        // y'_{k,i} = sum_{j,l} A_{ij,l} y_{k-l,j}
-        //             - sum_{l>=1} D_{i,l} y'_{k-l,i}.
+        // With D_0 normalized to one, match each channel of D y' = A y.
         for k in 0..order {
-            for (i, row) in rows.iter().enumerate() {
-                let mut sum = zero.clone();
-                for (j, coefficients) in &row.entries {
-                    for (l, coefficient) in coefficients.iter().enumerate().take(k + 1) {
-                        if *coefficient != zero {
-                            sum = p.add(&sum, &p.mul(coefficient, &y[k - l][*j]));
+            for e in 0..channels {
+                for (i, row) in rows.iter().enumerate() {
+                    let index = e * n + i;
+                    let mut sum = zero.clone();
+                    for (column, coefficients) in &row.entries {
+                        let shift = column / n;
+                        if shift > e {
+                            continue;
+                        }
+                        let source = (e - shift) * n + column % n;
+                        for (l, coefficient) in coefficients.iter().enumerate().take(k + 1) {
+                            if *coefficient != zero {
+                                sum = p.add(&sum, &p.mul(coefficient, &y[k - l][source]));
+                            }
                         }
                     }
-                }
-                for (l, coefficient) in row.denominator.iter().enumerate().skip(1).take(k) {
-                    if *coefficient != zero {
-                        sum = p.sub(&sum, &p.mul(coefficient, &derivative[k - l][i]));
+                    for (l, coefficient) in row.denominator.iter().enumerate().skip(1).take(k) {
+                        if *coefficient != zero {
+                            sum = p.sub(&sum, &p.mul(coefficient, &derivative[k - l][index]));
+                        }
                     }
+                    derivative[k][index] = sum;
+                    y[k + 1][index] = p.scale(&derivative[k][index], 1, (k + 1) as i64);
                 }
-                derivative[k][i] = sum;
-                y[k + 1][i] = p.scale(&derivative[k][i], 1, (k + 1) as i64);
             }
         }
         Ok(y)
@@ -1052,6 +1076,71 @@ mod recurrence_tests {
         assert!(matches!(
             system.taylor(&p.i(1), &values, 12),
             Err(Error::Numerical(_))
+        ));
+    }
+
+    #[test]
+    fn sparse_channels_match_independent_augmented_rational_recurrence() {
+        let p = Precision::decimal(80).unwrap();
+        let x = symbol!("channel_recurrence_x");
+        // Noncommuting, nonzero A_0, A_1 and A_2 prevent a canonical-only
+        // implementation or reversed epsilon indexing from passing this check.
+        let matrices = [
+            vec![
+                vec![parse!("1/(channel_recurrence_x-1)"), Atom::one()],
+                vec![Atom::new(), parse!("channel_recurrence_x")],
+            ],
+            vec![
+                vec![Atom::new(), parse!("1/(channel_recurrence_x+2)^2")],
+                vec![parse!("channel_recurrence_x^3"), Atom::new()],
+            ],
+            vec![
+                vec![
+                    parse!("(channel_recurrence_x+1)/(channel_recurrence_x-1)"),
+                    Atom::new(),
+                ],
+                vec![Atom::one(), Atom::num(2)],
+            ],
+        ];
+        let rows = (0..2)
+            .map(|i| matrices.iter().flat_map(|m| m[i].clone()).collect())
+            .collect::<Vec<Vec<Atom>>>();
+        let compiled = compile_rows(x, &rows, p, &Default::default()).unwrap();
+        let mut lifted = vec![vec![Atom::new(); 6]; 6];
+        for e in 0..3 {
+            for (shift, matrix) in matrices.iter().enumerate().take(e + 1) {
+                for i in 0..2 {
+                    for j in 0..2 {
+                        lifted[e * 2 + i][(e - shift) * 2 + j] = matrix[i][j].clone();
+                    }
+                }
+            }
+        }
+        let reference = DifferentialSystem {
+            variable: x,
+            matrix: lifted,
+        }
+        .compile(p, &Default::default())
+        .unwrap();
+        let values = vec![p.i(2), p.complex(3, 1), p.i(-1), p.i(7), p.zero(), p.i(11)];
+        for center in [p.zero(), p.parse("0.375", "0.25").unwrap()] {
+            for order in [0, 1, 6, 17] {
+                let sparse = compiled
+                    .taylor_channels(&center, &values, order, 3)
+                    .unwrap();
+                let dense = rational_series_taylor(&reference, &center, &values, order).unwrap();
+                for (a, b) in sparse.iter().flatten().zip(dense.iter().flatten()) {
+                    assert!(p.close(a, b, 65), "order {order}: {a} != {b}");
+                }
+            }
+        }
+        assert!(matches!(
+            compiled.taylor_channels(&p.i(1), &values, 6, 3),
+            Err(Error::Numerical(_))
+        ));
+        assert!(matches!(
+            compiled.taylor_channels(&p.zero(), &values, 6, 2),
+            Err(Error::InvalidInput(_))
         ));
     }
 

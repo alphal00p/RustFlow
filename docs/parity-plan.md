@@ -11,6 +11,12 @@ independent arity registry is maintained here. Broad coverage, including
 the complete Higgs+jet application, takes priority over general performance
 tuning; performance blockers may be addressed to make a coverage test practical.
 
+The [unified-flow design and generality audit](unified-flow.md) makes reduced-family
+evaluation the central interface. AMF direct evaluation, AMF-generated physical
+boundaries and DiffExp-style transport share the numerical engine. Supplied
+reductions must cover derivative closure and each deformed/recursive family;
+upstream parity is not established by process-specific benchmark success.
+
 ## Pinned references
 
 | Reference | Revision | Role |
@@ -137,8 +143,9 @@ rejected-step tests. Root-sum denominators use native formal quotient inversion
 and preserve source-domain conditions. [Algebraic cache reuse](algebraic-cache.md)
 now supports regular real straight paths with explicit root germs. The
 [prescribed-contour interface](prescribed-contours.md) constructs detours from
-caller-supplied polynomial prescriptions; automatic inference from an integral,
-algebraic Frobenius endpoints and cached threshold crossings remain incomplete.
+caller-supplied polynomial prescriptions, including admitted cached threshold
+crossings; automatic inference from an integral and general algebraic Frobenius
+endpoints remain incomplete.
 The [33,000-boundary cache benchmark](cache-selection.md) measures lazy path
 validation separately from integral evaluation. Exact target projection now
 checks positive epsilon orders and carries cached master uncertainty into the

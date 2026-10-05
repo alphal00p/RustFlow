@@ -315,7 +315,7 @@ impl PreparedPhysicalFamily {
     }
 }
 
-fn physical_family_fingerprint(
+pub(crate) fn physical_family_fingerprint(
     family: &IntegralFamily,
     variables: &BTreeSet<Symbol>,
     conditions: &[Atom],
