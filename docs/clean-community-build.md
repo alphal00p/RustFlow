@@ -7,6 +7,22 @@ community repository's native Rust/Python build environment and run these
 commands from its root. Python 3.11 or newer is suitable for the setup and
 notebook tools.
 
+The API and notebook are currently on
+[community draft PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19),
+not on the community default branch. To obtain the reviewed snapshot in a new
+directory:
+
+```sh
+git clone --branch codex/loop-integration-publication \
+  https://github.com/symbolica-dev/symbolica-community.git symbolica-community-integration
+cd symbolica-community-integration
+git checkout --detach 8758b93d1e1a6fed2aace41493a91be569f98a98
+```
+
+This snapshot has completed the native cold calculation and populated notebook
+checks. See [current acceptance status](python-notebook-status.md) for the
+remaining refinement and upstream checks; it is not a released package.
+
 Normal builds fetch the required native owners directly from public Git pins.
 They require no sibling checkout, private owner commit, patch application, or
 machine-local Cargo source configuration.
