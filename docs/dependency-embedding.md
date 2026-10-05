@@ -48,7 +48,13 @@ RUSTFLOW_WORKSPACE_MANIFEST = { value = "Cargo.toml", relative = true }
 
 Cargo resolves this path relative to the directory containing `.cargo`. For
 standalone builds the current crate manifest is used automatically. Hosts must
-activate the binding feature in their dependency declaration. The build script
+activate the binding feature in their dependency declaration. If the outer Cargo
+invocation changes host features, forward those flags explicitly; for example,
+a native stub build using `--no-default-features --features python_stubgen` sets
+`RUSTFLOW_WORKSPACE_FEATURES=python_stubgen` and
+`RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES=1`. The build verifies the resolved
+RustFlow feature set against its actual Cargo feature environment and rejects a
+mismatch. This prevents a stub build from fingerprinting the default host graph. The build script
 runs offline, locked Cargo metadata against this manifest and rejects a graph
 that does not contain the actual current crate. Dependencies must already be
 fetched, as with any offline build. Source overrides must be declared in Cargo
@@ -56,11 +62,12 @@ configuration or the manifest, not exclusively in transient `--config` command
 arguments, so the nested metadata invocation sees the same graph.
 
 The fingerprint incorporates the owning workspace manifest and lock, Cargo
-configuration, resolved package identities, and actual Git/path dependency
+configuration (including `$CARGO_HOME/config.toml`), resolved package identities and features, and actual Git/path dependency
 contents, including workspace manifests and model data. Registry package
 checksums come from the owning lock. Build directories and Git administration
 are excluded. Directory change tracking catches added source files as well as
 changes to existing files. Package contents are hashed with relative labels;
+embedded `fixtures/gg-hg` data is included in the owned code identity, and
 source edits invalidate caches even when the package version and Git HEAD are
 unchanged. No fallback to guessed sibling checkouts exists.
 

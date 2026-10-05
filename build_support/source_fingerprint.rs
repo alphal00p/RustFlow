@@ -52,17 +52,7 @@ pub fn resolved_packages<'a>(
     own_manifest: &Path,
 ) -> Vec<&'a serde_json::Value> {
     let packages = metadata["packages"].as_array().expect("Cargo package list");
-    let own_manifest = own_manifest
-        .canonicalize()
-        .expect("canonical crate manifest");
-    let own = packages
-        .iter()
-        .find(|p| {
-            Path::new(p["manifest_path"].as_str().unwrap())
-                .canonicalize()
-                .is_ok_and(|path| path == own_manifest)
-        })
-        .expect("RUSTFLOW_WORKSPACE_MANIFEST does not resolve this RustFlow checkout");
+    let own = own_package(metadata, own_manifest);
     let nodes = metadata["resolve"]["nodes"]
         .as_array()
         .expect("Cargo resolved graph");
@@ -134,4 +124,53 @@ pub fn hash_package(package: &serde_json::Value, hasher: &mut blake3::Hasher) {
             break;
         }
     }
+}
+
+/// Locate this package even when the host uses a dependency alias.
+pub fn own_package<'a>(
+    metadata: &'a serde_json::Value,
+    own_manifest: &Path,
+) -> &'a serde_json::Value {
+    let packages = metadata["packages"].as_array().expect("Cargo package list");
+    let own_manifest = own_manifest
+        .canonicalize()
+        .expect("canonical crate manifest");
+    packages
+        .iter()
+        .find(|p| {
+            Path::new(p["manifest_path"].as_str().unwrap())
+                .canonicalize()
+                .is_ok_and(|path| path == own_manifest)
+        })
+        .expect("RUSTFLOW_WORKSPACE_MANIFEST does not resolve this RustFlow checkout")
+}
+
+pub fn resolved_features<'a>(
+    metadata: &'a serde_json::Value,
+    own_manifest: &Path,
+) -> BTreeSet<&'a str> {
+    let own = own_package(metadata, own_manifest);
+    metadata["resolve"]["nodes"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .find(|node| node["id"] == own["id"])
+        .expect("current package absent from resolved graph")["features"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|f| f.as_str().unwrap())
+        .collect()
+}
+
+pub fn validate_features(
+    metadata: &serde_json::Value,
+    own_manifest: &Path,
+    actual: &BTreeSet<&str>,
+) {
+    assert_eq!(
+        resolved_features(metadata, own_manifest),
+        *actual,
+        "Cargo metadata features differ from this build. Set RUSTFLOW_WORKSPACE_FEATURES and RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES to match the embedding Cargo invocation"
+    );
 }

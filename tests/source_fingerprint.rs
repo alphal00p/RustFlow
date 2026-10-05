@@ -88,3 +88,58 @@ fn source_graph_follows_resolved_dependency_ids_and_rejects_wrong_host() {
             .is_err()
     );
 }
+
+#[test]
+fn mismatched_python_features_fail_instead_of_hashing_the_default_host_graph() {
+    use std::collections::BTreeSet;
+    let own = Scratch::new();
+    let mut package = own.package();
+    package["id"] = json!("own");
+    package["features"] = json!({"default":[],"python":[],"python_stubgen":[]});
+    let mut metadata = json!({"packages":[package], "resolve":{"nodes":[
+        {"id":"own", "dependencies":[], "features":["python"]}
+    ]}});
+    let actual = BTreeSet::from(["python", "python_stubgen"]);
+    assert!(
+        std::panic::catch_unwind(|| source_fingerprint::validate_features(
+            &metadata,
+            &own.0.join("Cargo.toml"),
+            &actual
+        ))
+        .is_err()
+    );
+    metadata["resolve"]["nodes"][0]["features"] = json!(["python", "python_stubgen"]);
+    source_fingerprint::validate_features(&metadata, &own.0.join("Cargo.toml"), &actual);
+}
+
+#[test]
+fn embedded_fixture_and_cargo_home_override_changes_affect_the_digest() {
+    use source_fingerprint::{hash_file, hash_tree};
+    let own = Scratch::new();
+    let fixture = own.0.join("fixtures/gg-hg");
+    fs::create_dir_all(&fixture).unwrap();
+    fs::write(fixture.join("published-test.json"), "{\"value\":1}").unwrap();
+    let home = own.0.join("cargo-home");
+    fs::create_dir_all(&home).unwrap();
+    fs::write(home.join("config.toml"), "[patch.crates-io]\n").unwrap();
+    let digest = || {
+        let mut h = blake3::Hasher::new();
+        hash_tree(&fixture, &own.0, &mut h);
+        hash_file(
+            &home.join("config.toml"),
+            std::path::Path::new("cargo-home/config.toml"),
+            &mut h,
+        );
+        h.finalize()
+    };
+    let initial = digest();
+    fs::write(fixture.join("published-test.json"), "{\"value\":2}").unwrap();
+    let embedded_change = digest();
+    assert_ne!(initial, embedded_change);
+    fs::write(
+        home.join("config.toml"),
+        "[patch.crates-io]\n# different override\n",
+    )
+    .unwrap();
+    assert_ne!(embedded_change, digest());
+}

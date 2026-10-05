@@ -1,11 +1,20 @@
 #[path = "build_support/source_fingerprint.rs"]
 mod source_fingerprint;
 
-use source_fingerprint::{hash_file, hash_package, hash_tree, resolved_packages};
+use source_fingerprint::{
+    hash_file, hash_package, hash_tree, own_package, resolved_packages, validate_features,
+};
 use std::{env, fs, path::PathBuf, process::Command};
 
 fn main() {
-    println!("cargo:rerun-if-env-changed=RUSTFLOW_WORKSPACE_MANIFEST");
+    for variable in [
+        "RUSTFLOW_WORKSPACE_MANIFEST",
+        "RUSTFLOW_WORKSPACE_FEATURES",
+        "RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES",
+        "CARGO_HOME",
+    ] {
+        println!("cargo:rerun-if-env-changed={variable}");
+    }
     let own_root = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
     let own_manifest = own_root.join("Cargo.toml");
     let host_manifest = env::var_os("RUSTFLOW_WORKSPACE_MANIFEST")
@@ -35,6 +44,18 @@ fn main() {
             command.args(["--features", "python"]);
         }
     }
+    if let Ok(features) = env::var("RUSTFLOW_WORKSPACE_FEATURES")
+        && !features.is_empty()
+    {
+        command.args(["--features", &features]);
+    }
+    match env::var("RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES").as_deref() {
+        Ok("1") => {
+            command.arg("--no-default-features");
+        }
+        Ok("0" | "") | Err(_) => {}
+        Ok(_) => panic!("RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES must be 0 or 1"),
+    }
     let output = command.output().expect("run Cargo dependency metadata");
     assert!(
         output.status.success(),
@@ -43,6 +64,20 @@ fn main() {
     );
     let metadata: serde_json::Value =
         serde_json::from_slice(&output.stdout).expect("parse Cargo dependency metadata");
+    let actual_features = own_package(&metadata, &own_manifest)["features"]
+        .as_object()
+        .unwrap()
+        .keys()
+        .filter(|feature| {
+            env::var_os(format!(
+                "CARGO_FEATURE_{}",
+                feature.to_uppercase().replace('-', "_")
+            ))
+            .is_some()
+        })
+        .map(String::as_str)
+        .collect();
+    validate_features(&metadata, &own_manifest, &actual_features);
     let workspace = PathBuf::from(metadata["workspace_root"].as_str().unwrap());
     let mut dependencies = blake3::Hasher::new();
     dependencies.update(b"rustflow-resolved-sources-v2");
@@ -62,6 +97,22 @@ fn main() {
             }
         }
     }
+    let cargo_home = env::var_os("CARGO_HOME")
+        .map(PathBuf::from)
+        .or_else(|| env::var_os("HOME").map(|home| PathBuf::from(home).join(".cargo")));
+    if let Some(home) = cargo_home {
+        for name in ["config.toml", "config"] {
+            let path = home.join(name);
+            if path.is_file() {
+                hash_file(
+                    &path,
+                    &PathBuf::from(format!("cargo-home/{name}")),
+                    &mut dependencies,
+                );
+            }
+        }
+    }
+    dependencies.update(serde_json::to_string(&actual_features).unwrap().as_bytes());
     let mut rustred = blake3::Hasher::new();
     rustred.update(b"rustflow-resolved-rustred-v2");
     for package in resolved_packages(&metadata, &own_manifest) {
@@ -89,6 +140,8 @@ fn main() {
     let mut own = blake3::Hasher::new();
     hash_tree(&own_root.join("src"), &own_root, &mut own);
     hash_tree(&own_root.join("build_support"), &own_root, &mut own);
+    // These files are embedded by the native amplitude module with include_str!.
+    hash_tree(&own_root.join("fixtures/gg-hg"), &own_root, &mut own);
     hash_file(
         &own_root.join("build.rs"),
         std::path::Path::new("build.rs"),
