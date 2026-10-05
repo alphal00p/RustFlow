@@ -522,12 +522,12 @@ mod tests {
             let negative = projector
                 .roots
                 .iter()
-                .filter(|root| rational(&point.apply(&root.radicand)).unwrap() < Rational::from(0))
+                .filter(|root| rational(&point.apply(&root.radicand)).unwrap() < 0)
                 .collect::<Vec<_>>();
             assert!(!negative.is_empty());
             for root in negative {
                 let value = &parameters[&Atom::var(root.symbol)];
-                let lower = rational(&point.apply(&root.i0_slope))? < Rational::from(0);
+                let lower = rational(&point.apply(&root.i0_slope))? < 0;
                 assert_eq!(value.im < p.real(0), lower);
             }
         }

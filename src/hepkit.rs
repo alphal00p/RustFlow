@@ -425,7 +425,9 @@ impl GraphIntegral {
                 .rewrite_numerator(&numerator, &labels)
                 .map_err(input_error)?;
             let mut terms = LinearCombination::new();
-            for (monomial, coefficient) in rewritten.coefficient_list::<i32>(&labels) {
+            for (monomial, coefficient) in
+                crate::coefficient::exact_coefficient_list(&rewritten, &labels)?
+            {
                 let numerator_powers = crate::integrand::powers(&monomial, &labels)?;
                 if numerator_powers.iter().any(|&n| n < 0) {
                     return Err(Error::Unsupported(
@@ -537,7 +539,9 @@ impl IntegralFamily {
                 constant: Atom::new(),
                 scalar_products: vec![Atom::new(); products.len()],
             };
-            for (monomial, coefficient) in denominator.coefficient_list::<i32>(&products) {
+            for (monomial, coefficient) in
+                crate::coefficient::exact_coefficient_list(denominator, &products)?
+            {
                 if monomial.is_one() {
                     propagator.constant += bind(&coefficient);
                 } else if let Some(slot) = products.iter().position(|a| a == &monomial) {

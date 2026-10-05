@@ -65,7 +65,12 @@ pub(crate) fn polynomial_coefficient_terms(
 ) -> Result<Vec<(usize, Atom)>> {
     let x = Atom::var(variable);
     let mut terms = Vec::new();
-    for (monomial, coefficient) in a.coefficient_list::<i32>(std::slice::from_ref(&x)) {
+    for (monomial, coefficient) in
+        crate::coefficient::exact_coefficient_list(a, std::slice::from_ref(&x))?
+    {
+        if coefficient.contains_symbol(variable) {
+            return Err(Error::InvalidInput("non-polynomial coefficient".into()));
+        }
         let degree = if monomial.is_one() {
             0
         } else if monomial == x {
@@ -842,13 +847,18 @@ fn residual_is_small<S: SeriesSystem>(
     coefficients: &[Vec<C>],
     values: &[C],
     tolerance: &Float,
+    location: &str,
+    rejection: &mut String,
 ) -> Result<bool> {
     let p = system.precision();
     let local = coordinate.local_point(p, center, point)?;
     let jacobian = coordinate.jacobian_at(p, center, point)?;
     let rhs = match system.rhs(point, values, chart) {
         Ok(rhs) => rhs,
-        Err(Error::Accuracy(_)) => return Ok(false),
+        Err(Error::Accuracy(message)) => {
+            *rejection = format!("{location} right-hand side: {message}");
+            return Ok(false);
+        }
         Err(error) => return Err(error),
     };
     for (i, rhs) in rhs.iter().enumerate() {
@@ -867,7 +877,16 @@ fn residual_is_small<S: SeriesSystem>(
         } else {
             p.real(1)
         };
-        if !p.finite(&defect) || p.norm(&defect) > tolerance.clone() * scale {
+        if !p.finite(&defect) {
+            *rejection = format!("{location} nonfinite differential defect in component {i}");
+            return Ok(false);
+        }
+        let error = p.norm(&defect);
+        let budget = tolerance.clone() * scale;
+        if error > budget {
+            *rejection = format!(
+                "{location} differential defect in component {i}: error={error}, budget={budget}"
+            );
             return Ok(false);
         }
     }
@@ -921,7 +940,7 @@ struct StepTrial<'a, S: SeriesSystem> {
     conditioning_digits: u32,
 }
 impl<S: SeriesSystem> StepTrial<'_, S> {
-    fn evaluate(&self, step: &C) -> Result<CheckedStep<S::State>> {
+    fn evaluate(&self, step: &C, rejection: &mut String) -> Result<CheckedStep<S::State>> {
         let p = self.system.precision();
         // A supplied endpoint may retain more bits than this compiled system.
         // Use the declared physical point for values, defects and branch state.
@@ -939,28 +958,36 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
         let displacement = p.sub(&next, self.center);
         let local = self.coordinate.local_point(p, self.center, &next)?;
         let (values, tail) = evaluate_taylor(p, self.coefficients, &local);
-        let good = values.iter().zip(&tail).all(|(value, tail)| {
+        for (i, (value, tail)) in values.iter().zip(&tail).enumerate() {
             let magnitude = p.norm(value);
             let scale = if magnitude > p.real(1) {
                 magnitude
             } else {
                 p.real(1)
             };
-            p.finite(value) && *tail <= self.tolerance.clone() * scale
-        });
-        if !good
-            || !residual_is_small(
-                self.system,
-                self.chart,
-                self.coordinate,
-                self.center,
-                &next,
-                &displacement,
-                self.coefficients,
-                &values,
-                self.tolerance,
-            )?
-        {
+            let budget = self.tolerance.clone() * scale;
+            let good = p.finite(value) && *tail <= budget;
+            if !good {
+                *rejection = format!(
+                    "Taylor tail in component {i}: error={tail}, budget={budget}, finite_value={}",
+                    p.finite(value)
+                );
+                return Ok(None);
+            }
+        }
+        if !residual_is_small(
+            self.system,
+            self.chart,
+            self.coordinate,
+            self.center,
+            &next,
+            &displacement,
+            self.coefficients,
+            &values,
+            self.tolerance,
+            "endpoint",
+            rejection,
+        )? {
             return Ok(None);
         }
         // The final retained terms can vanish for sparse systems. Keep the
@@ -979,6 +1006,8 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
             self.coefficients,
             &middle,
             self.tolerance,
+            "midpoint",
+            rejection,
         )? {
             return Ok(None);
         }
@@ -989,25 +1018,32 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
             self.tolerance,
         ) {
             Ok(Some(bounds)) => Some(bounds),
-            Ok(None) => return Ok(None),
-            Err(Error::Accuracy(_)) => return Ok(None),
+            Ok(None) => {
+                *rejection = "whole-segment differential defect bound is unavailable".into();
+                return Ok(None);
+            }
+            Err(Error::Accuracy(message)) => {
+                *rejection = format!("whole-segment differential defect: {message}");
+                return Ok(None);
+            }
             Err(error) => return Err(error),
         };
         if let Some(bounds) = majorant {
             if bounds.len() != values.len() {
                 return Err(Error::InvalidInput("residual bound dimensions".into()));
             }
-            for (bound, value) in bounds.iter().zip(&values) {
+            for (i, (bound, value)) in bounds.iter().zip(&values).enumerate() {
                 let magnitude = p.norm(value);
                 let scale = if magnitude > p.real(1) {
                     magnitude
                 } else {
                     p.real(1)
                 };
-                if !bound.is_finite()
-                    || *bound < p.real(0)
-                    || *bound > self.tolerance.clone() * scale
-                {
+                let budget = self.tolerance.clone() * scale;
+                if !bound.is_finite() || *bound < p.real(0) || *bound > budget {
+                    *rejection = format!(
+                        "whole-segment differential defect in component {i}: bound={bound}, budget={budget}"
+                    );
                     return Ok(None);
                 }
             }
@@ -1015,10 +1051,13 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
         let checked = self
             .conditioning
             .check(p, &local, &values, self.conditioning_digits)?;
-        Ok(self
+        let state = self
             .system
-            .accepted_state(self.chart, &next, self.tolerance)?
-            .map(|state| (next, values, state, checked)))
+            .accepted_state(self.chart, &next, self.tolerance)?;
+        if state.is_none() {
+            *rejection = "local branch or state admission failed".into();
+        }
+        Ok(state.map(|state| (next, values, state, checked)))
     }
 }
 
@@ -1162,6 +1201,8 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
             let bracketed = options.step_size_strategy == StepSizeStrategy::Bracketed;
             let mut accepted = None;
             let mut failed_upper = None;
+            let mut rejection = String::new();
+            let mut first_rejection = None;
             for _ in 0..32 {
                 context.cancellation.check()?;
                 if diagnostics.predicate_evaluations >= options.max_steps {
@@ -1170,10 +1211,11 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                     ));
                 }
                 diagnostics.predicate_evaluations += 1;
-                if let Some(candidate) = trial.evaluate(&step)? {
+                if let Some(candidate) = trial.evaluate(&step, &mut rejection)? {
                     accepted = Some(candidate);
                     break;
                 }
+                first_rejection.get_or_insert_with(|| rejection.clone());
                 if bracketed {
                     failed_upper = Some(step.clone());
                 }
@@ -1189,8 +1231,9 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                 }
             }
             let mut accepted = accepted.ok_or_else(|| Error::Accuracy(format!(
-                "Taylor tail or local chart did not meet tolerance after 32 local rejections ({} accepted, {} rejected, {} predicates overall) at {center} toward {target}",
+                "Taylor tail or local chart did not meet tolerance after 32 local rejections ({} accepted, {} rejected, {} predicates overall) at {center} toward {target}; first rejection: {}; last rejection: {rejection}",
                 diagnostics.steps, diagnostics.rejected_steps, diagnostics.predicate_evaluations,
+                first_rejection.as_deref().unwrap_or("unavailable"),
             )))?;
             if let Some(mut upper) = failed_upper {
                 // This is only a bounded proposal search, not a monotonicity
@@ -1205,7 +1248,7 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                         break;
                     }
                     diagnostics.predicate_evaluations += 1;
-                    if let Some(candidate) = trial.evaluate(&proposal)? {
+                    if let Some(candidate) = trial.evaluate(&proposal, &mut rejection)? {
                         accepted = candidate;
                         step = proposal;
                         diagnostics.superseded_successes += 1;
@@ -1354,6 +1397,62 @@ pub(crate) fn evaluate_taylor(
 #[cfg(test)]
 mod recurrence_tests {
     use super::*;
+
+    #[test]
+    fn large_exact_row_clearing_preserves_the_connection() -> Result<()> {
+        // Each source coefficient fits in double's exponent range, but clearing
+        // the two denominators creates coefficients of order 10^400. Collection
+        // must remain exact regardless of this intermediate normalization.
+        let x = symbol!("large_cleared_row::x");
+        let epsilon = Atom::var(symbol!("large_cleared_row::eps"));
+        let large = Atom::num(Integer::from(10).pow(200));
+        let source = DifferentialSystem {
+            variable: x,
+            matrix: vec![
+                vec![
+                    Atom::Zero,
+                    &large * (&epsilon + Atom::num(1)) / (&large + Atom::var(x)),
+                    &large / (&large + Atom::num(1) + Atom::var(x)),
+                ],
+                vec![Atom::Zero; 3],
+                vec![Atom::Zero; 3],
+            ],
+        };
+        for working in [40, 80] {
+            let p = Precision::decimal(working)?;
+            let system = source.compile(
+                p,
+                &ahash::HashMap::from_iter([(epsilon.clone(), p.scale(&p.i(1), 1, 2))]),
+            )?;
+            assert_eq!(system.polynomial_rows[0].entries.len(), 2);
+            let values = vec![p.zero(), p.i(1), p.i(1)];
+            for center in [p.zero(), p.complex(0, -79_245)] {
+                let actual = system.taylor(&center, &values, 8)?;
+                let expected = rational_series_taylor(&system, &center, &values, 8)?;
+                for (a, b) in actual.iter().flatten().zip(expected.iter().flatten()) {
+                    assert!(p.close(a, b, working - 10), "{a} != {b}");
+                }
+            }
+            let result = system.transport(
+                &BoundaryData {
+                    point: p.zero(),
+                    values,
+                },
+                &[p.i(1)],
+                &FlowOptions {
+                    digits: 20,
+                    guard_digits: working - 20,
+                    series_order: 8,
+                    ..Default::default()
+                },
+                &RunContext::default(),
+            )?;
+            // Integrating each positive rational term from 0 to 1 bounds the
+            // difference from 5/2 by 3/10^200, far below either check tolerance.
+            assert!(p.close(&result.values[0], &p.scale(&p.i(5), 1, 2), working - 10));
+        }
+        Ok(())
+    }
 
     // Independent reference recurrence: first expand each rational matrix entry,
     // then match coefficients of y' = M y without clearing denominators.

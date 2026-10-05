@@ -52,7 +52,7 @@ fn affine(a: &Atom, variables: &[Atom]) -> Result<Propagator> {
         constant: Atom::new(),
         scalar_products: vec![Atom::new(); variables.len()],
     };
-    for (m, c) in a.coefficient_list::<i32>(variables) {
+    for (m, c) in crate::coefficient::exact_coefficient_list(a, variables)? {
         if m.is_one() {
             out.constant += c;
         } else if let Some(j) = variables.iter().position(|v| v == &m) {
@@ -246,7 +246,7 @@ fn partial_fraction(
     let mut family = template.clone();
     family.propagators = propagators;
     family.physical_propagators = physical;
-    for (m, c) in numerator.coefficient_list::<i32>(&d) {
+    for (m, c) in crate::coefficient::exact_coefficient_list(&numerator, &d)? {
         if c.is_zero() {
             continue;
         }
@@ -356,7 +356,7 @@ pub fn factor_region(
         Atom::num(family.dimension) - Atom::num(2) * Atom::var(family.epsilon),
     );
     let mut projected = Atom::new();
-    for (m, c) in numerator.expand().coefficient_list::<i32>(coordinates) {
+    for (m, c) in crate::coefficient::exact_coefficient_list(&numerator.expand(), coordinates)? {
         let mut h = Vec::new();
         let mut s = Vec::new();
         let mut unmixed = c;
@@ -419,9 +419,8 @@ pub fn factor_region(
     // and all-soft regions each need only one conversion of the full polynomial.
     let split_side = usize::from(pieces[0].0.len() > pieces[1].0.len());
     let mut combined = BTreeMap::<Vec<Vec<(Vec<Atom>, i64)>>, FactorizedTerm>::new();
-    for (monomial, polynomial) in projected
-        .expand()
-        .coefficient_list::<i32>(&pieces[split_side].0)
+    for (monomial, polynomial) in
+        crate::coefficient::exact_coefficient_list(&projected.expand(), &pieces[split_side].0)?
     {
         let mut expressions = [denominator_h.clone(), denominator_s.clone()];
         expressions[split_side] *= monomial;

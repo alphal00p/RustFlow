@@ -203,18 +203,17 @@ impl HiggsJetAmplitude {
             .collect();
         let expression = crate::family::substitute(&expression, &replacements).expand();
         let mut expressions = [Atom::Zero, Atom::Zero, Atom::Zero];
-        for term in expression
-            .to_polynomial_in_vars::<i32>(std::slice::from_ref(&marker))
-            .into_iter()
+        for (monomial, coefficient) in
+            crate::coefficient::exact_coefficient_list(&expression, std::slice::from_ref(&marker))?
         {
-            let degree = term.exponents[0];
-            if !(0..=2).contains(&degree) || term.coefficient.contains(marker.as_view()) {
+            let degree = crate::integrand::powers(&monomial, std::slice::from_ref(&marker))?[0];
+            if !(0..=2).contains(&degree) || coefficient.contains(marker.as_view()) {
                 return Err(Error::Unsupported(
                     "native Higgs-jet kernel is not quadratic in the effective coupling marker"
                         .into(),
                 ));
             }
-            expressions[degree as usize] += term.coefficient;
+            expressions[degree as usize] += coefficient;
         }
         let reconstructed =
             &expressions[0] + &marker * &expressions[1] + marker.pow(2) * &expressions[2];
@@ -231,15 +230,15 @@ impl HiggsJetAmplitude {
             })
             .collect::<Vec<_>>();
         for (index, expression) in expressions.iter().enumerate() {
-            for term in expression
-                .to_polynomial_in_vars::<i32>(&variables)
-                .into_iter()
+            for (monomial, coefficient) in
+                crate::coefficient::exact_coefficient_list(expression, &variables)?
             {
-                if term.exponents.iter().any(|e| *e < 0)
-                    || term.exponents.iter().sum::<i32>() != 2 - index as i32
+                let exponents = crate::integrand::powers(&monomial, &variables)?;
+                if exponents.iter().any(|e| *e < 0)
+                    || exponents.iter().map(|&e| i32::from(e)).sum::<i32>() != 2 - index as i32
                     || form_factors
                         .iter()
-                        .any(|v| term.coefficient.get_all_symbols(false).contains(v))
+                        .any(|v| coefficient.get_all_symbols(false).contains(v))
                 {
                     return Err(Error::Unsupported(
                         "native Higgs-jet kernel has unexpected form-factor degree".into(),

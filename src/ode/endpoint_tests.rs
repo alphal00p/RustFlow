@@ -219,7 +219,7 @@ fn mapped_trial_uses_declared_point_for_local_argument_jacobian_and_state() -> R
         conditioning: &conditioning,
         conditioning_digits: 20,
     }
-    .evaluate(&delta)?
+    .evaluate(&delta, &mut String::new())?
     .expect("the exact mapped quadratic must pass the shared predicate");
     assert_eq!(candidate.0, target);
     assert_eq!(

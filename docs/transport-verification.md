@@ -20,6 +20,11 @@ Symbolica owns polynomial shifts, derivatives and products. Source numerator
 and denominator degrees are retained in full, even when they exceed the Taylor
 order. Epsilon hierarchies use the same construction with the appropriate
 coefficient shifts. Cancellation occurs before taking coefficient magnitudes.
+Coefficient collection uses Symbolica's polynomial owners with statistical zero
+testing disabled. This matters when clearing rational rows creates exact
+coefficients beyond the exponent range of a double. The
+[coefficient-extraction reproducer](../tools/mre/symbolica-coefficient-list/README.md)
+records why the convenience expression collector cannot be used here.
 For a proposed step `h`, coefficient triangle inequalities estimate
 `|h| sup_{|z| <= |h|} |R_i(z) / D_i(c+z)|`. If the denominator lower bound is
 inconclusive, the controller rejects the trial and tries a shorter step.
@@ -73,6 +78,11 @@ updates the solution, root state, observer or saved trajectory.
 successful trials replaced by a larger one. Diagnostics distinguish committed
 steps, rejected steps and superseded successes. On a successful continuation,
 these sum to `predicate_evaluations`.
+
+If all 32 local trial steps fail, the accuracy error includes the first and last
+rejection reasons. Tail and differential-defect failures report the component,
+measured error and admission budget; branch and domain failures remain distinct.
+These diagnostics do not relax any acceptance threshold.
 
 Persisted `RustFlowCache` snapshots and boundary identities contain source and
 dependency fingerprints. A build that changes the numerical implementation

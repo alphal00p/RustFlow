@@ -340,7 +340,9 @@ impl Bubble {
             }
         }
         let mut result = LinearCombination::new();
-        for (monomial, c) in numerator.expand().coefficient_list::<i32>(&self.z) {
+        for (monomial, c) in
+            crate::coefficient::exact_coefficient_list(&numerator.expand(), &self.z)?
+        {
             let exponents = powers(&monomial, &self.z)?;
             let a = i64::from(integral.0[first]) - i64::from(exponents[0]);
             let b = i64::from(integral.0[second]);
@@ -370,10 +372,10 @@ impl Bubble {
                 } else {
                     coefficient *= self.q_squared.clone().pow(q_power);
                 }
-                for (monomial, c) in coefficient
-                    .expand()
-                    .coefficient_list::<i32>(&self.denominators)
-                {
+                for (monomial, c) in crate::coefficient::exact_coefficient_list(
+                    &coefficient.expand(),
+                    &self.denominators,
+                )? {
                     let mut target = target.clone();
                     for (n, p) in target
                         .0

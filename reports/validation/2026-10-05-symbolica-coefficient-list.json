@@ -93,5 +93,62 @@
     },
     "verified_digits": null,
     "production_boundary_saved": false
+  },
+  "exact_collection_fix_validation": {
+    "implementation": "RustFlow selects the native Symbolica exact AtomField polynomial conversion and native polynomial grouping/flattening; no Symbolica source patch, independent collection algorithm, or numerical fallback.",
+    "numerical_gate_changed": false,
+    "symbolica_revision": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustflow_artifact": "target/release/deps/libsymbolica_amflow-5e0238f10fd6d0d6.rlib",
+    "artifact_scope": "These diagnostic runs used the exact-collector snapshot before the final exponent preflight guard. Their recorded hashes identify that snapshot; the final guard source was separately rebuilt and validated in 2026-10-05-exact-coefficient-regressions.json.",
+    "requested_digits": 30,
+    "working_digits": 90,
+    "local_target_digits": 80,
+    "series_order": 96,
+    "first_step_replay": {
+      "success": true,
+      "accepted_steps": 1,
+      "seconds": 3.851966,
+      "input": "Previously computed native first-boundary values retained as exact dyadics; no reference values.",
+      "stopping_condition": "Deliberate cancellation after first accepted step.",
+      "verified_digits": null
+    },
+    "full_transport_replay": {
+      "success": false,
+      "error_kind": "Limit",
+      "error": "Taylor continuation step budget exhausted",
+      "accepted_steps": 258,
+      "rejected_steps": 742,
+      "predicates": 1000,
+      "seconds": 876.576288,
+      "last_imaginary_coordinate": "-0.2444755683474832148766236729883095726444519563674957201240171082989973966658116483175262651837",
+      "destination_imaginary_coordinate": "-0.02634747175402852380070383404334135951102055936284497129097981107612520837192072606038155213928",
+      "verified_digits": null
+    },
+    "fresh_native_single_epsilon": {
+      "configuration": "W-NP_EW1-1",
+      "epsilon": "1/3700",
+      "initial_directory_empty": true,
+      "reuse_native_constants": false,
+      "native_first_boundary_count": 61,
+      "all_first_boundary_values_match_previous_native_capture_as_exact_dyadics": true,
+      "success": false,
+      "error_kind": "Cancelled",
+      "stopping_condition": "Preexisting cooperative 900-second diagnostic time limit.",
+      "seconds": 901.382066873,
+      "accepted_steps_before_cancellation": 205,
+      "numerical_failure_reported": false,
+      "verified_digits": null,
+      "production_boundary_saved": false
+    },
+    "interpretation": "The original coefficient-loss defect is removed without relaxing accuracy: both replays now accept ordinary transport steps, and independently recomputed native boundary values agree exactly. The full replay reaches a predicate limit and the fresh diagnostic reaches its time limit. Neither constitutes a completed finite-epsilon evaluation or a validated Laurent fit; an uncapped native production fit is required.",
+    "diagnostic_artifact_sha256": {
+      "target/np-physical-single-epsilon-exact-collection/first-boundary.json": "ea0e1af3ade5a89c5ccff9eb872774a11d11fe03da43bc92e45d27f4431f5993",
+      "target/np-physical-single-epsilon-exact-collection/exact-source.json": "639be54600d167bbba7d899762764772029030aeb48bdf384a1a907aa2c18a61",
+      "target/np-physical-single-epsilon-exact-collection/native-constants.json": "73acd3f500eca9550f439cb8e368280e66b2529f7eb1125b284959122ff46e61",
+      "target/np-physical-single-epsilon-exact-collection/result.json": "9c23e518a9a9aa22d39ad98f2b8ab30211f6eeded7f25a0f994d53fd62281d62",
+      "target/np-physical-replay-exact-collection-full.log": "bc08d52f03d1bef4926027778a04de15cd6aabad650174be36e3cbe7843572b3",
+      "target/np-physical-replay-exact-collection-first.log": "7607d89024ea4dafb1e2b06d4c64cb1e40646b303b53fa6afaadb0e3eaae1109"
+    },
+    "regression_report": "2026-10-05-exact-coefficient-regressions.json"
   }
 }

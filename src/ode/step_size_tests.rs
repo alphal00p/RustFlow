@@ -212,10 +212,14 @@ fn tight_budget_charges_every_trial_and_skips_optional_work() {
 fn mandatory_local_failure_limit_is_unchanged() {
     let mut system = Mock::new();
     system.reject_all = true;
-    assert!(matches!(
-        mock_run(&system, 100, &RunContext::default(), &RefCell::new(vec![])),
-        Err(Error::Accuracy(_))
-    ));
+    let error = mock_run(&system, 100, &RunContext::default(), &RefCell::new(vec![]))
+        .unwrap_err();
+    let Error::Accuracy(message) = error else {
+        panic!("expected a bounded accuracy failure, got {error:?}");
+    };
+    assert!(message.contains("32 local rejections"));
+    assert!(message.contains("first rejection: local branch or state admission failed"));
+    assert!(message.contains("last rejection: local branch or state admission failed"));
     assert_eq!(system.calls.borrow().len(), 32);
 }
 #[test]

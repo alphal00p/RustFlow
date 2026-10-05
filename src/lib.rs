@@ -8,6 +8,7 @@ pub mod benchmarks;
 pub mod boundary;
 mod bubble;
 pub mod cache;
+mod coefficient;
 pub mod common_mass;
 pub mod contour;
 pub mod cuts;

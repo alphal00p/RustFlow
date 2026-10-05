@@ -134,7 +134,9 @@ pub(crate) fn eigenvalues(residue: &[Vec<Atom>]) -> Result<Vec<(Atom, usize)>> {
         let mut a = Atom::new();
         let mut b = Atom::new();
         let mut has_variable = false;
-        for (monomial, c) in factor.coefficient_list::<i32>(std::slice::from_ref(&x)) {
+        for (monomial, c) in
+            crate::coefficient::exact_coefficient_list(&factor, std::slice::from_ref(&x))?
+        {
             if monomial.is_one() {
                 b += c;
             } else if monomial == x {

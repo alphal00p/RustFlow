@@ -125,16 +125,15 @@ fn common_real_zero_polynomial(
 ) -> Result<Atom> {
     let mut gcd: Option<ExactPolynomial> = None;
     let variables = Arc::new(vec![PolyVariable::Symbol(parameter)]);
-    for (_, coefficient) in polynomial
-        .expand()
-        .coefficient_list::<i32>(&[Atom::var(epsilon)])
+    for (_, coefficient) in
+        crate::coefficient::exact_coefficient_list(&polynomial.expand(), &[Atom::var(epsilon)])?
     {
         let mut real = Atom::new();
         let mut imaginary = Atom::new();
-        for (monomial, value) in coefficient
-            .expand()
-            .coefficient_list::<i32>(&[Atom::var(parameter)])
-        {
+        for (monomial, value) in crate::coefficient::exact_coefficient_list(
+            &coefficient.expand(),
+            &[Atom::var(parameter)],
+        )? {
             let AtomView::Num(n) = value.as_view() else {
                 return Err(Error::Unsupported(
                     "guarded physical paths require rational-complex coefficients".into(),
@@ -251,10 +250,10 @@ pub(crate) fn conditions_admit_path(
 pub(crate) fn epsilon_leading_coefficient(polynomial: &Atom, epsilon: Symbol) -> Result<Atom> {
     let variable = Atom::var(epsilon);
     let mut leading: Option<(u32, Atom)> = None;
-    for (monomial, coefficient) in polynomial
-        .expand()
-        .coefficient_list::<i32>(std::slice::from_ref(&variable))
-    {
+    for (monomial, coefficient) in crate::coefficient::exact_coefficient_list(
+        &polynomial.expand(),
+        std::slice::from_ref(&variable),
+    )? {
         if coefficient.is_zero() {
             continue;
         }

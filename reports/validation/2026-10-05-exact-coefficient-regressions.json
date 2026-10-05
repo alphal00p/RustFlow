@@ -1,0 +1,1236 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "scope": "Native release regression validation for exact Symbolica coefficient collection; does not certify all physical gg-hg boundaries or the full notebook.",
+  "symbolica_revision": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+  "rustred_revision": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+  "rustred_update_scope": "Only CODEX_PROGRESS.md changed from b3cecd6; no reducer implementation change.",
+  "native_source_fingerprints": {
+    "dependency_source_digest": "d64faf80cf0bcbd37e679ce9fa81be2f4981e14fafde1a0dd7e8e66f6df66dcb",
+    "rustred_source_digest": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "port_source_digest": "53a84c24c017324559928f47c40501007eb082f99ca1e4448ca318899021e60e"
+  },
+  "library_tests": {
+    "passed": 125,
+    "failed": 0,
+    "ignored": 2,
+    "runtime_seconds": 7.37
+  },
+  "integration_tests": {
+    "target_count": 89,
+    "passed": 397,
+    "failed": 0,
+    "ignored": 10,
+    "wall_seconds": 1331.5565975476056,
+    "successful": true,
+    "concurrent_executables": 4,
+    "threads_per_executable": 2
+  },
+  "total": {
+    "passed": 522,
+    "failed": 0,
+    "ignored": 12
+  },
+  "checks": {
+    "cargo_fmt_check": true,
+    "git_diff_check": true,
+    "release_clippy_lib_tests_deny_warnings": true,
+    "post_clippy_form_factor_tests_passed": 2,
+    "final_native_boundary_example_rebuilt": true
+  },
+  "qualification": "The full library suite preceded a test-only Clippy comparison cleanup. All integration executables and the final native example use the final source; the two affected library tests were rerun. Test concurrency and simultaneous diagnostic jobs preclude controlled performance claims. Ignored tests remain outside this routine run.",
+  "targets": [
+    {
+      "target": "accuracy_fallback",
+      "exit_code": 0,
+      "seconds": 0.10302212694659829,
+      "summaries": [
+        [
+          "ok",
+          "3",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "algebraic",
+      "exit_code": 0,
+      "seconds": 3.087104117963463,
+      "summaries": [
+        [
+          "ok",
+          "5",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "algebraic_cache",
+      "exit_code": 0,
+      "seconds": 0.999641802161932,
+      "summaries": [
+        [
+          "ok",
+          "10",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "algebraic_kinematic",
+      "exit_code": 0,
+      "seconds": 0.08857429213821888,
+      "summaries": [
+        [
+          "ok",
+          "3",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "algebraic_quotients",
+      "exit_code": 0,
+      "seconds": 1.465344243682921,
+      "summaries": [
+        [
+          "ok",
+          "7",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "amf_mass_sheet",
+      "exit_code": 0,
+      "seconds": 33.24801573995501,
+      "summaries": [
+        [
+          "ok",
+          "6",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "analytic_origin",
+      "exit_code": 0,
+      "seconds": 0.12889529578387737,
+      "summaries": [
+        [
+          "ok",
+          "6",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "asymptotic",
+      "exit_code": 0,
+      "seconds": 0.05413901712745428,
+      "summaries": [
+        [
+          "ok",
+          "6",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "banana_equal",
+      "exit_code": 0,
+      "seconds": 31.24259954271838,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "banana_unequal",
+      "exit_code": 0,
+      "seconds": 1329.9963282127865,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "cache",
+      "exit_code": 0,
+      "seconds": 0.10784312197938561,
+      "summaries": [
+        [
+          "ok",
+          "11",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "cache_lower_bounds",
+      "exit_code": 0,
+      "seconds": 0.06780666764825583,
+      "summaries": [
+        [
+          "ok",
+          "7",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "canonical_algebraic",
+      "exit_code": 0,
+      "seconds": 0.29774973494932055,
+      "summaries": [
+        [
+          "ok",
+          "9",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "canonical_cache",
+      "exit_code": 0,
+      "seconds": 1.6157789272256196,
+      "summaries": [
+        [
+          "ok",
+          "4",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "cli",
+      "exit_code": 0,
+      "seconds": 22.747759808320552,
+      "summaries": [
+        [
+          "ok",
+          "8",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "cli_algebraic",
+      "exit_code": 0,
+      "seconds": 1.0750610581599176,
+      "summaries": [
+        [
+          "ok",
+          "5",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "cli_canonical",
+      "exit_code": 0,
+      "seconds": 0.6615210250020027,
+      "summaries": [
+        [
+          "ok",
+          "3",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "cli_epsilon_shearing",
+      "exit_code": 0,
+      "seconds": 6.843156109098345,
+      "summaries": [
+        [
+          "ok",
+          "6",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "cli_fallback",
+      "exit_code": 0,
+      "seconds": 0.08322166604921222,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "combinations",
+      "exit_code": 0,
+      "seconds": 12.064857995137572,
+      "summaries": [
+        [
+          "ok",
+          "5",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "complex_cache",
+      "exit_code": 0,
+      "seconds": 6.9926915019750595,
+      "summaries": [
+        [
+          "ok",
+          "8",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "complex_kinematics",
+      "exit_code": 0,
+      "seconds": 1.0062111471779644,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "complex_ode",
+      "exit_code": 0,
+      "seconds": 0.060488826129585505,
+      "summaries": [
+        [
+          "ok",
+          "2",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "conditioning",
+      "exit_code": 0,
+      "seconds": 0.2625642283819616,
+      "summaries": [
+        [
+          "ok",
+          "10",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "continuation_budget",
+      "exit_code": 0,
+      "seconds": 0.05025774473324418,
+      "summaries": [
+        [
+          "ok",
+          "2",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "continuation_empty_poles",
+      "exit_code": 0,
+      "seconds": 0.6474460433237255,
+      "summaries": [
+        [
+          "ok",
+          "4",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "contour_endpoints",
+      "exit_code": 0,
+      "seconds": 0.05027212481945753,
+      "summaries": [
+        [
+          "ok",
+          "2",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "contour_factorization",
+      "exit_code": 0,
+      "seconds": 0.06478185905143619,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "contour_signs",
+      "exit_code": 0,
+      "seconds": 0.059661624021828175,
+      "summaries": [
+        [
+          "ok",
+          "4",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "core",
+      "exit_code": 0,
+      "seconds": 4.242676429916173,
+      "summaries": [
+        [
+          "ok",
+          "13",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "cuts",
+      "exit_code": 0,
+      "seconds": 0.09621106600388885,
+      "summaries": [
+        [
+          "ok",
+          "3",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "diffexp",
+      "exit_code": 0,
+      "seconds": 2.216113871894777,
+      "summaries": [
+        [
+          "ok",
+          "5",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "end_to_end",
+      "exit_code": 0,
+      "seconds": 27.75153496582061,
+      "summaries": [
+        [
+          "ok",
+          "9",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "epsilon_algebraic",
+      "exit_code": 0,
+      "seconds": 17.09137700498104,
+      "summaries": [
+        [
+          "ok",
+          "7",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "epsilon_cache",
+      "exit_code": 0,
+      "seconds": 0.09732823027297854,
+      "summaries": [
+        [
+          "ok",
+          "3",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "epsilon_physical_family",
+      "exit_code": 0,
+      "seconds": 74.60029645683244,
+      "summaries": [
+        [
+          "ok",
+          "2",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "epsilon_shearing",
+      "exit_code": 0,
+      "seconds": 0.09678856888785958,
+      "summaries": [
+        [
+          "ok",
+          "9",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "fivepoint_mzz",
+      "exit_code": 0,
+      "seconds": 0.013333261013031006,
+      "summaries": [
+        [
+          "ok",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "target": "fivepoint_planar",
+      "exit_code": 0,
+      "seconds": 0.013770601712167263,
+      "summaries": [
+        [
+          "ok",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "target": "fivepoint_prescribed_cache",
+      "exit_code": 0,
+      "seconds": 0.013937742915004492,
+      "summaries": [
+        [
+          "ok",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "target": "fivepoint_zmz",
+      "exit_code": 0,
+      "seconds": 0.013393021654337645,
+      "summaries": [
+        [
+          "ok",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "target": "fivepoint_zmz_sector",
+      "exit_code": 0,
+      "seconds": 0.012943959794938564,
+      "summaries": [
+        [
+          "ok",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "target": "fivepoint_zzz",
+      "exit_code": 0,
+      "seconds": 0.01321024028584361,
+      "summaries": [
+        [
+          "ok",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "target": "frobenius",
+      "exit_code": 0,
+      "seconds": 0.18080809712409973,
+      "summaries": [
+        [
+          "ok",
+          "8",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "ft",
+      "exit_code": 0,
+      "seconds": 7.263020245824009,
+      "summaries": [
+        [
+          "ok",
+          "6",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "gg_hg",
+      "exit_code": 0,
+      "seconds": 9.34672179305926,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "target": "gg_hg_amplitude",
+      "exit_code": 0,
+      "seconds": 49.234505048021674,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "gg_hg_anchors",
+      "exit_code": 0,
+      "seconds": 0.6363807721063495,
+      "summaries": [
+        [
+          "ok",
+          "2",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "hepkit",
+      "exit_code": 0,
+      "seconds": 13.413538272958249,
+      "summaries": [
+        [
+          "ok",
+          "9",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "hepkit_cuts",
+      "exit_code": 0,
+      "seconds": 0.12300247885286808,
+      "summaries": [
+        [
+          "ok",
+          "3",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "integrand",
+      "exit_code": 0,
+      "seconds": 2.115495823789388,
+      "summaries": [
+        [
+          "ok",
+          "4",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "kinematic_derivative",
+      "exit_code": 0,
+      "seconds": 0.08796633128076792,
+      "summaries": [
+        [
+          "ok",
+          "5",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "kinematics",
+      "exit_code": 0,
+      "seconds": 0.05429339688271284,
+      "summaries": [
+        [
+          "ok",
+          "6",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "linear",
+      "exit_code": 0,
+      "seconds": 45.84322132728994,
+      "summaries": [
+        [
+          "ok",
+          "6",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "massless_phase_space",
+      "exit_code": 0,
+      "seconds": 11.074993147980422,
+      "summaries": [
+        [
+          "ok",
+          "8",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "mg5_pointbank",
+      "exit_code": 0,
+      "seconds": 0.4781173150986433,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "mobius",
+      "exit_code": 0,
+      "seconds": 9.02034638542682,
+      "summaries": [
+        [
+          "ok",
+          "8",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "mobius_cache",
+      "exit_code": 0,
+      "seconds": 0.3352967849932611,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "mpl_additional",
+      "exit_code": 0,
+      "seconds": 108.51123081101105,
+      "summaries": [
+        [
+          "ok",
+          "3",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "multimass_physical",
+      "exit_code": 0,
+      "seconds": 39.95632733870298,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "native_arity",
+      "exit_code": 0,
+      "seconds": 0.1643338375724852,
+      "summaries": [
+        [
+          "ok",
+          "2",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "native_family_cache",
+      "exit_code": 0,
+      "seconds": 0.09552538488060236,
+      "summaries": [
+        [
+          "ok",
+          "2",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "native_graphs",
+      "exit_code": 0,
+      "seconds": 0.030810074880719185,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "native_parametric",
+      "exit_code": 0,
+      "seconds": 0.7559698349796236,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "native_physical",
+      "exit_code": 0,
+      "seconds": 75.34788405895233,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "native_symmetry",
+      "exit_code": 0,
+      "seconds": 0.10608980804681778,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "nonplanar108",
+      "exit_code": 0,
+      "seconds": 0.014339064247906208,
+      "summaries": [
+        [
+          "ok",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "target": "phase_space",
+      "exit_code": 0,
+      "seconds": 0.8636322799138725,
+      "summaries": [
+        [
+          "ok",
+          "3",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "physical_conditions",
+      "exit_code": 0,
+      "seconds": 0.0638702679425478,
+      "summaries": [
+        [
+          "ok",
+          "9",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "physical_family",
+      "exit_code": 0,
+      "seconds": 0.06000341475009918,
+      "summaries": [
+        [
+          "ok",
+          "3",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "physical_preparation_options",
+      "exit_code": 0,
+      "seconds": 0.20995254907757044,
+      "summaries": [
+        [
+          "ok",
+          "7",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "physical_targets",
+      "exit_code": 0,
+      "seconds": 0.058226270135492086,
+      "summaries": [
+        [
+          "ok",
+          "5",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "physical_transport",
+      "exit_code": 0,
+      "seconds": 1.1648659007623792,
+      "summaries": [
+        [
+          "ok",
+          "4",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "precision_cache_fallback",
+      "exit_code": 0,
+      "seconds": 0.06529735215008259,
+      "summaries": [
+        [
+          "ok",
+          "4",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "prepared_frobenius",
+      "exit_code": 0,
+      "seconds": 0.36021178402006626,
+      "summaries": [
+        [
+          "ok",
+          "5",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "prescribed_cache",
+      "exit_code": 0,
+      "seconds": 7.367617588955909,
+      "summaries": [
+        [
+          "ok",
+          "6",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "prescribed_contours",
+      "exit_code": 0,
+      "seconds": 3.2510813628323376,
+      "summaries": [
+        [
+          "ok",
+          "8",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "target": "recursive",
+      "exit_code": 0,
+      "seconds": 27.237750679254532,
+      "summaries": [
+        [
+          "ok",
+          "17",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "reduction_graphs",
+      "exit_code": 0,
+      "seconds": 0.2056473665870726,
+      "summaries": [
+        [
+          "ok",
+          "7",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "regions",
+      "exit_code": 0,
+      "seconds": 0.057196796871721745,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "rustflow",
+      "exit_code": 0,
+      "seconds": 0.014889026060700417,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "scoped_reductions",
+      "exit_code": 0,
+      "seconds": 0.13328391266986728,
+      "summaries": [
+        [
+          "ok",
+          "9",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "single_mass",
+      "exit_code": 0,
+      "seconds": 95.73874690616503,
+      "summaries": [
+        [
+          "ok",
+          "4",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "target": "source_fingerprint",
+      "exit_code": 0,
+      "seconds": 0.01060232287272811,
+      "summaries": [
+        [
+          "ok",
+          "5",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "supplied_flow",
+      "exit_code": 0,
+      "seconds": 0.5410444340668619,
+      "summaries": [
+        [
+          "ok",
+          "7",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "symbolica_root_scaling",
+      "exit_code": 0,
+      "seconds": 0.029766151681542397,
+      "summaries": [
+        [
+          "ok",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "tensor_vacuum",
+      "exit_code": 0,
+      "seconds": 0.08840991323813796,
+      "summaries": [
+        [
+          "ok",
+          "4",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "transport_cache",
+      "exit_code": 0,
+      "seconds": 0.0675577586516738,
+      "summaries": [
+        [
+          "ok",
+          "12",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "target": "weighted_uncertainty",
+      "exit_code": 0,
+      "seconds": 0.07338037714362144,
+      "summaries": [
+        [
+          "ok",
+          "2",
+          "0",
+          "0"
+        ]
+      ]
+    }
+  ],
+  "local_log_sha256": {
+    "target/exact-coefficient-native-unit-tests.log": "e15ffb4d0babdf9a2b85c67d6a9a4d7df3ab2b11bfeab824eb07495d17a200b3",
+    "target/exact-coefficient-regressions-summary.json": "fd072bc6c7a83104427085e9b6974a48ec9da468a562bac0b2f102beef115537",
+    "target/exact-coefficient-clippy.log": "18d6c76ad3b2899721e684899f437133afd53a5f3b70cd33b9cf6e202c468646",
+    "target/exact-coefficient-final-form-factor-tests.log": "696a55b6ff30a30c029df2397d9ece08c50b3a49f1e12d8ed6e901f4e2371950",
+    "target/exact-coefficient-final-native-build.log": "59f6fdb45c1cad5a22d0e418ee9be9f738054cd9720a00f6daf3c4146b9e02ae",
+    "target/exact-coefficient-guard-unit-tests.log": "760ac0663ded11906dba81cbb1467c077a95b350e1d70dbd2f4c3e73631114e3",
+    "target/exact-coefficient-guard-clippy.log": "e251d43a26a376559357e2162befab63334fe0e8b2911cb579a67c7e4e145f3f",
+    "target/exact-coefficient-guard-native-build.log": "40f37ad12fe2b6e34ea8651c783ca49d3df495c8d628c93cdc0156bc6ebb0b6d",
+    "target/coefficient-preflight-final-tests.log": "0b2bf9e24209f2099a03d3f70b208fd5f22203575f99a3f00205cc3e52776eb1"
+  },
+  "post_review_exponent_guard": {
+    "reason": "Prevent native u32-to-i32 exponent wrapping and excessive degree growth before polynomial allocation; preserve opaque function and power coefficients.",
+    "owner_reuse": "Native Symbolica expression visitor, integer arithmetic, polynomial grouping and checked rational-power basis conversion. No independent collection or factorization algorithm.",
+    "source_fingerprints": {
+      "dependency_source_digest": "d64faf80cf0bcbd37e679ce9fa81be2f4981e14fafde1a0dd7e8e66f6df66dcb",
+      "rustred_source_digest": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+      "port_source_digest": "774d6de2113e381daf86ac9cb85a38410d1141726776bf591d429234f111453b"
+    },
+    "focused_helper_tests": {
+      "passed": 11,
+      "failed": 0
+    },
+    "full_library_tests": {
+      "passed": 128,
+      "failed": 0,
+      "ignored": 2,
+      "runtime_seconds": 7.45
+    },
+    "strict_release_clippy_lib_tests": true,
+    "native_boundary_example_build_seconds": 220,
+    "format_and_diff_checks": true,
+    "integration_scope": "The 397 integration cases above passed immediately before this input-only degree guard; they were not rerun after the guard. The full library suite and focused overflow/opaque-coefficient tests were rerun on the final source.",
+    "source_sha256": "77837fd43b19bd079eb9ed64398c92bc78f8182c0dad0fd30ad3512af44c3de7"
+  }
+}

@@ -15,7 +15,7 @@ Symbolica 3.0.1, GammaLoop's `feynkit` branch, and RustRed's `main` branch with 
 experimental reconstruction feature disabled. The workspace root owns Cargo's
 patch table; dependency patch tables are ignored by Cargo. The locks select
 Symbolica's official community revision `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`
-and RustRed `b3cecd6ae9b7683ae639204e43fa05685c6a5802`. Run the root-scaling
+and RustRed `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`. Run the root-scaling
 regression when changing the numerical dependency graph:
 
 ```sh
@@ -50,6 +50,20 @@ HEPKit overrides below and let the manifest select the upstream algebra crates.
 A dependency/source change creates a new numerical cache identity. Earlier
 snapshots retain their original provenance and are not silently reused with
 the updated graph.
+
+Large exact coefficients exposed a separate problem in Symbolica's convenience
+coefficient collector. The [standalone reproducer](../tools/mre/symbolica-coefficient-list/README.md)
+shows a nonzero coefficient of order `10^309` being discarded by its statistical
+zero test. RustFlow therefore selects Symbolica's exact expression field and
+native polynomial grouping explicitly. This uses the same official dependency;
+no local Symbolica patch is needed for the workaround.
+
+Before this conversion, the library bounds total polynomial degree at 100,000
+using Symbolica's expression traversal. This also prevents the native converter's
+unsigned-to-signed exponent cast from silently wrapping very large powers.
+Function arguments and opaque power coefficients retain their literal meaning.
+Native conversion can expand polynomial coefficients in unrequested variables;
+the degree bound is not a general bound on the number of multivariate terms.
 
 ## Native owner patches
 

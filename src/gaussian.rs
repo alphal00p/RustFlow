@@ -128,7 +128,9 @@ pub fn terminal(
     let values = ahash::HashMap::from_iter([(Atom::var(family.epsilon), p.rational(epsilon))]);
     let half = Rational::from((family.dimension, 2)) - epsilon;
     let mut answer = p.zero();
-    for (monomial, coefficient) in numerator.expand().coefficient_list::<i32>(&variables) {
+    for (monomial, coefficient) in
+        crate::coefficient::exact_coefficient_list(&numerator.expand(), &variables)?
+    {
         let mut loops = Vec::new();
         let mut links = Vec::new();
         let mut external = Vec::new();
