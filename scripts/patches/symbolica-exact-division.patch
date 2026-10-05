@@ -1,0 +1,76 @@
+diff --git a/src/domains/atom.rs b/src/domains/atom.rs
+index 5e5ade5..0c030bd 100644
+--- a/src/domains/atom.rs
++++ b/src/domains/atom.rs
+@@ -245,7 +245,7 @@ impl Ring for AtomField {
+     }
+ 
+     fn try_inv(&self, a: &Self::Element) -> Option<Self::Element> {
+-        if SelfRing::is_zero(a) {
++        if <Self as Ring>::is_zero(self, a) {
+             None
+         } else {
+             Some(self.inv(a))
+@@ -253,7 +253,7 @@ impl Ring for AtomField {
+     }
+ 
+     fn try_div(&self, a: &Self::Element, b: &Self::Element) -> Option<Self::Element> {
+-        if SelfRing::is_zero(b) {
++        if <Self as Ring>::is_zero(self, b) {
+             None
+         } else {
+             Some(self.div(a, b))
+@@ -362,3 +362,53 @@ impl Derivable for AtomField {
+         }
+     }
+ }
++
++#[cfg(test)]
++mod exact_division_tests {
++    use crate::{prelude::*, tensors::matrix::Matrix};
++
++    fn field() -> AtomField {
++        AtomField {
++            statistical_zero_test: false,
++            cancel_check_on_division: true,
++            custom_normalization: Some(Box::new(|a: AtomView<'_>, out: &mut Atom| {
++                *out = a.together().cancel();
++                true
++            })),
++        }
++    }
++
++    fn nonzero_denominator() -> Atom {
++        parse!("x+(10^40-10^40*y)/10^40")
++    }
++
++    #[test]
++    fn exact_division_and_inverse_honor_configured_zero_test() {
++        let f = field();
++        let denominator = nonzero_denominator();
++        assert!(!f.is_zero(&denominator));
++        for value in [
++            f.try_div(&Atom::num(1), &denominator),
++            f.try_inv(&denominator),
++        ] {
++            let value = value.expect("exact nonzero denominator must remain invertible");
++            assert!(
++                (value * &denominator - Atom::num(1))
++                    .together()
++                    .cancel()
++                    .is_zero()
++            );
++        }
++        assert!(f.try_inv(&Atom::num(0)).is_none());
++        assert!(f.try_div(&Atom::num(1), &Atom::num(0)).is_none());
++    }
++
++    #[test]
++    fn exact_bareiss_preserves_nonzero_unexpanded_pivot() {
++        let denominator = nonzero_denominator();
++        let mut matrix = Matrix::identity(4, field());
++        matrix[(0, 0)] = denominator.clone();
++        let determinant = matrix.det().expect("square matrix");
++        assert!((determinant - denominator).together().cancel().is_zero());
++    }
++}
