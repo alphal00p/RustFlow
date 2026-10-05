@@ -354,3 +354,27 @@ The custom-case loader accepts exact integer/fraction epsilon values and
 decimal-string boundary/endpoints; it rejects malformed dimensions and
 nonfinite or expression-valued boundary/endpoints without converting through
 binary floating-point values.
+
+### Matched nearby W planar/nonplanar characterization
+
+The [recorded comparison](../reports/performance/gg-hg-matched-nearby.json) uses the full 48-master planar and 61-master nonplanar systems, permutation 2, at the same exact W-region source and two nearby destinations. Both implementations requested 20 digits and used the same hashed supplied boundaries and physical root germs. All 3,270 coefficient comparisons, including three repeats and both destinations through epsilon 4, agree within 20 absolute digits. The source evidence remains capped at 24 digits.
+
+Median times in seconds, three sequential repeats on CPU 35 after model/package setup:
+
+| Operation | Planar 48 | Nonplanar 61 |
+|---|---:|---:|
+| Native one fixed integration | 0.976| 2.046|
+| Native checked public first query | 4.533| 11.543|
+| Original public first query | 1.060| 2.376|
+| Native checked nearby reuse | 4.530| 11.578|
+| Original nearby reuse | 1.091| 2.351|
+| Native populated exact hit | 0.00190| 0.01746|
+| Original populated hit, full driver | 0.0602| 0.2018|
+| Original populated hit, inner selection timer | 0.000174| 0.000186|
+| Native binary save/load | 0.222/0.117| 0.784/0.541|
+
+Native fixed integration used 60 decimal digits/order 64. The public native call additionally refined to 282 bits/order 96, propagated inherited source uncertainty and populated the cache; it reported 21 verified digits at the first destination and 20 at the second, using the scaled bound `error ≤ 10^(-d) max(1, |coefficient|)`. The independent native/original comparisons require 20 absolute digits. The original used 100 decimal-digit arithmetic and adaptive order. Its inner cold/reuse timer includes boundary selection, integration and saving. The original public driver reloads its matrices; the native model is already prepared. Thus these columns distinguish core integration cost from checked API cost and do not establish an overall speed ratio. Native exact construction/identity/pullback/compile cost 0.610 s planar and 2.225 s nonplanar before repeated measurements; boundary parsing cost under 0.001 s each. Separate source/endpoint insertion medians were 0.989/0.794 ms planar and 3.193/3.059 ms nonplanar.
+
+Both populated nearby queries select the newly computed first endpoint. Both routes already require just one accepted chart, so this short workload cannot reduce the chart count further through nearby reuse. Exact hits perform no integration. The original's supported `$grid=True` setting is required to register saved endpoints for subsequent selection. A historical source-filename mismatch was rejected before integration, and the initial `$grid=False` cache-hit expectation also failed; both harness setup failures are retained in the report. The native measurements were unchanged.
+
+This characterizes canonical master-integral transport, not complete matrix-element runtime. It uses the generic canonical representation, shared numerical engine and persistent RustFlow cache. Future improvements should reuse preparation, validation and persistence work within those shared APIs, preserving the same checks rather than introducing family-specific solvers. Other scientific jobs ran on separate CPUs, so these three observations are a small characterization rather than a controlled hardware benchmark.
