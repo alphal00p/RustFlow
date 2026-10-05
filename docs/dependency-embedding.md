@@ -29,6 +29,13 @@ upstream, configure Cargo to use the patched owner checkout. Copy
 paths. The template lists all shared HEPKit packages, avoiding duplicate native
 Rust types when a host also uses Spynso3, Vakint, or the RustRed bridge.
 
+The borrowing accessors are supplied by
+`scripts/patches/hepkit-python-borrow-access.patch`. They expose references to the
+existing model, diagram and kinematics; no Python objects are serialized or
+reparsed when passed to an evaluator. The isolated validated owner checkout is
+commit `0bf1cd991` on `codex/python-borrow-access`, based on `9d086ce`. The original
+HEPKit checkout remains unchanged.
+
 Local source overrides require updating the lock once with `cargo metadata` or
 `cargo check`; subsequent checks can use `--locked`. Do not commit machine-local
 configuration or claim an unpatched upstream checkout supplies these owner

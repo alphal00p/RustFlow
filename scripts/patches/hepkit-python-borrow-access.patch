@@ -1,0 +1,53 @@
+diff --git a/crates/feynkit-py/src/graph.rs b/crates/feynkit-py/src/graph.rs
+index 919b63695..2388a5254 100644
+--- a/crates/feynkit-py/src/graph.rs
++++ b/crates/feynkit-py/src/graph.rs
+@@ -1909,6 +1909,12 @@ struct DiagramSelection {
+ }
+ 
+ impl PyFeynmanDiagram {
++    /// Borrow a complete diagram for a native backend; selected subgraphs are rejected.
++    pub fn as_diagram(&self) -> PyResult<&Arc<FeynmanDiagram>> {
++        self.require_complete()?;
++        Ok(&self.inner)
++    }
++
+     pub(crate) fn is_whole_diagram(&self) -> bool {
+         self.selected_region.is_none()
+     }
+diff --git a/crates/feynkit-py/src/kinematics.rs b/crates/feynkit-py/src/kinematics.rs
+index e1fefda70..ec49ae55a 100644
+--- a/crates/feynkit-py/src/kinematics.rs
++++ b/crates/feynkit-py/src/kinematics.rs
+@@ -51,6 +51,13 @@ pub struct PyKinematics {
+     pub(crate) inner: feynkit_kinematics::Kinematics,
+ }
+ 
++impl PyKinematics {
++    /// Borrow the symbolic kinematics for another module in the same native host.
++    pub fn as_kinematics(&self) -> &feynkit_kinematics::Kinematics {
++        &self.inner
++    }
++}
++
+ #[cfg_attr(feature = "python_stubgen", gen_stub_pymethods)]
+ #[cfg_attr(not(feature = "python_stubgen"), pyo3_stub_gen_derive::remove_gen_stub)]
+ #[spenso_macros::track_usage(crate::record_usage)]
+diff --git a/crates/feynkit-py/src/model.rs b/crates/feynkit-py/src/model.rs
+index a9ff904b7..0a549b1f7 100644
+--- a/crates/feynkit-py/src/model.rs
++++ b/crates/feynkit-py/src/model.rs
+@@ -2727,6 +2727,13 @@ pub struct PyModel {
+     pub(crate) inner: Arc<Model>,
+ }
+ 
++impl PyModel {
++    /// Share the model with another module without reparsing or registering it again.
++    pub fn as_model(&self) -> &Arc<Model> {
++        &self.inner
++    }
++}
++
+ impl From<Model> for PyModel {
+     fn from(inner: Model) -> Self {
+         Arc::new(inner).into()

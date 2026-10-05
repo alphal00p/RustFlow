@@ -37,13 +37,14 @@ the original Mathematica package with Kira and the university license server.
 
 ## Build
 
-Requires Rust 1.96 or newer. Symbolica and its companion crates are pinned to
-upstream `main` commit
-[`75f8350094b90254ee71dc2a391fde0d14b0204a`](https://github.com/symbolica-dev/symbolica/commit/75f8350094b90254ee71dc2a391fde0d14b0204a)
-(package version 3.0.1), including the scale-independent root convergence fix.
-The root manifest's Cargo patches make RustRed use that same Symbolica revision.
+Requires Rust 1.96 or newer. The standalone lock pins Symbolica and its companion
+crates to community commit
+[`942bd2c0cd2ef16414d69c176fc9eff7b21c0ab2`](https://github.com/symbolica-dev/symbolica/commit/942bd2c0cd2ef16414d69c176fc9eff7b21c0ab2)
+(package version 3.0.1), retaining the scale-independent root convergence fix.
+The shared Python host uses this same numerical and native type graph; see
+[embedding and source fingerprints](docs/dependency-embedding.md).
 
-Keep RustRed at `../rustred`, including `crates/rustred-core`. Its experimental
+RustRed is a Git dependency, locked to `b3cecd6a`; its experimental
 reconstruction feature is disabled. The high-level multiloop solver defaults to
 exact rational epsilon specialization before IBP elimination;
 `sampled_reduction: false` selects fully symbolic epsilon reduction. Upstream
@@ -55,10 +56,12 @@ representation limits still apply.
 Basis refinement also retains symbolic epsilon, taking precedence over sampled
 reduction so that dimension-dependent denominator factors can be identified.
 
-Keep the native HEPKit checkout at `../hepkit` as described in
-[HEPKit integration](docs/hepkit-integration.md). Its graph, kinematics and tensor
-crates use the same pinned Symbolica revision. Python features are disabled.
-Local dependency source content is included in persistent-cache identities.
+Configure a patched native HEPKit checkout as described in
+[dependency embedding](docs/dependency-embedding.md). The supplied Cargo config
+template keeps all HEPKit graph, kinematics, tensor and Python owners aligned.
+Python features are optional and disabled by default. The bindings are
+registered by the community host under `symbolica.community.hep.integration`.
+Actual dependency source content is included in persistent-cache identities.
 
 ```sh
 nix develop
