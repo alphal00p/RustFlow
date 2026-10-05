@@ -1,0 +1,530 @@
+{
+  "schema": "rustflow-gg-hg-physical-input-preflight-v1",
+  "status": "passed",
+  "date": "2026-10-05",
+  "scope": "Input and exact-basis audit only; no AMF generation, physical transport, numerical reference loading or cache writes.",
+  "cli_binary": "/common/dev/amflow/target/gg-hg-native-acceptance/bin/gg_hg_boundaries-4c483581",
+  "cli_binary_sha256": "6046a94fccf552f2c3dc2534d966cee6173acb0cf5b935179a1a216e2e72aefa",
+  "cli_build": {
+    "dependency_source_digest": "d64faf80cf0bcbd37e679ce9fa81be2f4981e14fafde1a0dd7e8e66f6df66dcb",
+    "profile": "release",
+    "rustflow_source_digest": "774d6de2113e381daf86ac9cb85a38410d1141726776bf591d429234f111453b"
+  },
+  "community_worktree": "/common/dev/symbolica-community/loop-integration",
+  "controller_source": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_support.py",
+  "controller_source_sha256": "6c4b1030265072ca44e68fe25ecf3419ca54235c3c5d8a6d75890490b73068eb",
+  "native_model_sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+  "exact_map_fixture_sha256": "3d6228c35861cc9ab9ec86f3ef4d90323af51780bd5e77af669239f2e30e17f9",
+  "listed_configurations": [
+    "W-Planar_EW1-1",
+    "W-Planar_EW1-2",
+    "W-Planar_EW1-3",
+    "W-Planar_EW1-4",
+    "Z-Planar_EW1-1",
+    "Z-Planar_EW1-2",
+    "Z-Planar_EW1-3",
+    "Z-Planar_EW1-4",
+    "W-NP_EW1-1",
+    "W-NP_EW1-2",
+    "W-NP_EW1-3",
+    "W-NP_EW1-4",
+    "Z-NP_EW1-1",
+    "Z-NP_EW1-2",
+    "Z-NP_EW1-3",
+    "Z-NP_EW1-4"
+  ],
+  "checked_configurations": 16,
+  "checked_canonical_masters": 109,
+  "bases": {
+    "Planar_EW1": {
+      "dimension": 48,
+      "physical_integrals": 48,
+      "projection_rows": 48,
+      "projection_terms": 201,
+      "roots": [
+        "root1",
+        "root2"
+      ],
+      "python_namespace": "hep_higgs_jet",
+      "cli_namespace": "rustflow_gg_hg_boundaries",
+      "canonical_projection_matches_exact_fixture": true,
+      "physical_powers_match_exact_fixture": true,
+      "root_radicands_match_exact_fixture": true,
+      "native_exact_inverse_check_passed": true,
+      "native_exact_inverse_seconds": "0.555804691",
+      "canonical_projection_sha256": "b18b00082d98451206ce0000fd62bf0cc748328dd7d65c7df62f49dc9cdcb99f",
+      "cli_canonical_identity": "b943a0b1a710250af84e151907b60383b206d08b9c473adf1bdb5d6394e22fd2",
+      "python_provenance": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates",
+      "map_evidence": {
+        "source_sha256": "a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380",
+        "linear_reconstruction": true,
+        "exact_root_reconstruction": true,
+        "right_inverse": true,
+        "published_dlog_sha256": "040fe8deb989356951247f2f3b09046a52851eeeca3f25876f793305317e5a64",
+        "plugin_dlog_sha256": "95442e5f5f1823fa205640219b0e1be8a43d260682af63345314d26fd37865a8",
+        "exact_dlog_equality": true
+      }
+    },
+    "NP_EW1": {
+      "dimension": 61,
+      "physical_integrals": 61,
+      "projection_rows": 61,
+      "projection_terms": 453,
+      "roots": [
+        "root1",
+        "root2",
+        "root3",
+        "root4",
+        "root5",
+        "root6",
+        "root7",
+        "root8"
+      ],
+      "python_namespace": "hep_higgs_jet",
+      "cli_namespace": "rustflow_gg_hg_boundaries",
+      "canonical_projection_matches_exact_fixture": true,
+      "physical_powers_match_exact_fixture": true,
+      "root_radicands_match_exact_fixture": true,
+      "native_exact_inverse_check_passed": true,
+      "native_exact_inverse_seconds": "1.630144462",
+      "canonical_projection_sha256": "0154f450a3f22feebac27e5ad4eac8080d4c8f415d56b5b71ebaf0a87f57549d",
+      "cli_canonical_identity": "b45557d43617f73a5bc1a768f9d59088dee07d0ae41e07cd8036bbbb3644bd2a",
+      "python_provenance": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates",
+      "map_evidence": {
+        "source_sha256": "4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd",
+        "linear_reconstruction": true,
+        "exact_root_reconstruction": true,
+        "right_inverse": true,
+        "published_dlog_sha256": "2f8dcc5d506ce7fd366e71c6b235eceed75521b47385d575c9268497d861ad2d",
+        "plugin_dlog_sha256": "becb0221008715452488a4b73a64be95ad869dc8fb54657598fe34a1f28921d9",
+        "exact_dlog_equality": true
+      }
+    }
+  },
+  "cases": [
+    {
+      "label": "W-Planar_EW1-1",
+      "family": "Planar_EW1",
+      "mass": "W",
+      "permutation": 1,
+      "source_coordinates": {
+        "b": "13074/5399",
+        "s": "7971503245/51071474",
+        "t": "-120961047183696014144/1789089966849483755"
+      },
+      "destination_coordinates_from_controller": {
+        "s": "3985777158237/25535737000",
+        "b": "13074/5399",
+        "t": "-24192567254732572725551/357817993369896751000"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b943a0b1a710250af84e151907b60383b206d08b9c473adf1bdb5d6394e22fd2",
+      "cli_descriptor_sha256": "1a7875e49954533b66b8bf23c7efc909620b225421fdd7454d9b59950ab0eb32"
+    },
+    {
+      "label": "W-Planar_EW1-2",
+      "family": "Planar_EW1",
+      "mass": "W",
+      "permutation": 2,
+      "source_coordinates": {
+        "b": "13074/5399",
+        "s": "7971503245/51071474",
+        "t": "-2233407629/25953770"
+      },
+      "destination_coordinates_from_controller": {
+        "b": "13074/5399",
+        "s": "3985777158237/25535737000",
+        "t": "-2233407629/25953770"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b943a0b1a710250af84e151907b60383b206d08b9c473adf1bdb5d6394e22fd2",
+      "cli_descriptor_sha256": "0a9473da9211da935a14c1a27cc4fffa6501cbb175c2614f0855ee8828adc57c"
+    },
+    {
+      "label": "W-Planar_EW1-3",
+      "family": "Planar_EW1",
+      "mass": "W",
+      "permutation": 3,
+      "source_coordinates": {
+        "b": "13074/5399",
+        "s": "-120961047183696014144/1789089966849483755",
+        "t": "-2233407629/25953770"
+      },
+      "destination_coordinates_from_controller": {
+        "s": "-24192567254732572725551/357817993369896751000",
+        "b": "13074/5399",
+        "t": "-2233407629/25953770"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b943a0b1a710250af84e151907b60383b206d08b9c473adf1bdb5d6394e22fd2",
+      "cli_descriptor_sha256": "55b101a7a4a7c97957f9876d2cbde3bc480e56f8c8b6fcf798f9f9e140098ec7"
+    },
+    {
+      "label": "W-Planar_EW1-4",
+      "family": "Planar_EW1",
+      "mass": "W",
+      "permutation": 4,
+      "source_coordinates": {
+        "b": "13074/5399",
+        "s": "-2233407629/25953770",
+        "t": "7971503245/51071474"
+      },
+      "destination_coordinates_from_controller": {
+        "b": "13074/5399",
+        "t": "3985777158237/25535737000",
+        "s": "-2233407629/25953770"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b943a0b1a710250af84e151907b60383b206d08b9c473adf1bdb5d6394e22fd2",
+      "cli_descriptor_sha256": "c0f2e2fe0018f5c124a81f238736e99fd74f8d9a4158b799ec2b2cb7e92847e4"
+    },
+    {
+      "label": "Z-Planar_EW1-1",
+      "family": "Planar_EW1",
+      "mass": "Z",
+      "permutation": 1,
+      "source_coordinates": {
+        "b": "14631/7775",
+        "s": "5130094459/42294614",
+        "t": "-178302305466616953792/3393635073711688075"
+      },
+      "destination_coordinates_from_controller": {
+        "s": "104949191448697262751/865238867852650000",
+        "b": "14631/7775",
+        "t": "-117987150501330757182512227/2245621057130807199050000"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b943a0b1a710250af84e151907b60383b206d08b9c473adf1bdb5d6394e22fd2",
+      "cli_descriptor_sha256": "24fab040087f18331f3589ab83c87ee83397cf8564b31bb2b220ed2695f9f754"
+    },
+    {
+      "label": "Z-Planar_EW1-2",
+      "family": "Planar_EW1",
+      "mass": "Z",
+      "permutation": 2,
+      "source_coordinates": {
+        "b": "14631/7775",
+        "s": "5130094459/42294614",
+        "t": "-2760486785/41279998"
+      },
+      "destination_coordinates_from_controller": {
+        "t": "-58807684306811567/879403268106500",
+        "b": "14631/7775",
+        "s": "104949191448697262751/865238867852650000"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b943a0b1a710250af84e151907b60383b206d08b9c473adf1bdb5d6394e22fd2",
+      "cli_descriptor_sha256": "8e5c5d0fbed3b5c88b45187a8b0a7da6bdae0fa5285c527313415dd0a6655079"
+    },
+    {
+      "label": "Z-Planar_EW1-3",
+      "family": "Planar_EW1",
+      "mass": "Z",
+      "permutation": 3,
+      "source_coordinates": {
+        "b": "14631/7775",
+        "s": "-178302305466616953792/3393635073711688075",
+        "t": "-2760486785/41279998"
+      },
+      "destination_coordinates_from_controller": {
+        "t": "-58807684306811567/879403268106500",
+        "s": "-117987150501330757182512227/2245621057130807199050000",
+        "b": "14631/7775"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b943a0b1a710250af84e151907b60383b206d08b9c473adf1bdb5d6394e22fd2",
+      "cli_descriptor_sha256": "eb982b5c08e7304da00bddd5933319d6906b95693fb8aaacf1ffb5cb443484b1"
+    },
+    {
+      "label": "Z-Planar_EW1-4",
+      "family": "Planar_EW1",
+      "mass": "Z",
+      "permutation": 4,
+      "source_coordinates": {
+        "b": "14631/7775",
+        "s": "-2760486785/41279998",
+        "t": "5130094459/42294614"
+      },
+      "destination_coordinates_from_controller": {
+        "t": "104949191448697262751/865238867852650000",
+        "b": "14631/7775",
+        "s": "-58807684306811567/879403268106500"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b943a0b1a710250af84e151907b60383b206d08b9c473adf1bdb5d6394e22fd2",
+      "cli_descriptor_sha256": "e56e37d0e160d80db020a133083e6d0a97bcf1e5eb3b12417324188fa384d060"
+    },
+    {
+      "label": "W-NP_EW1-1",
+      "family": "NP_EW1",
+      "mass": "W",
+      "permutation": 1,
+      "source_coordinates": {
+        "b": "13074/5399",
+        "s": "7971503245/51071474",
+        "t": "-120961047183696014144/1789089966849483755"
+      },
+      "destination_coordinates_from_controller": {
+        "t": "-24192567254732572725551/357817993369896751000",
+        "s": "3985777158237/25535737000",
+        "b": "13074/5399"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1,
+        "root3": 1,
+        "root4": 1,
+        "root5": 1,
+        "root6": 1,
+        "root7": 1,
+        "root8": 1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b45557d43617f73a5bc1a768f9d59088dee07d0ae41e07cd8036bbbb3644bd2a",
+      "cli_descriptor_sha256": "89f314e26bb71d03fc69030e216d3cf9a254977f564228ea288d3e40f2ec55ba"
+    },
+    {
+      "label": "W-NP_EW1-2",
+      "family": "NP_EW1",
+      "mass": "W",
+      "permutation": 2,
+      "source_coordinates": {
+        "b": "13074/5399",
+        "s": "7971503245/51071474",
+        "t": "-2233407629/25953770"
+      },
+      "destination_coordinates_from_controller": {
+        "b": "13074/5399",
+        "t": "-2233407629/25953770",
+        "s": "3985777158237/25535737000"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1,
+        "root3": 1,
+        "root4": 1,
+        "root5": 1,
+        "root6": 1,
+        "root7": 1,
+        "root8": 1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b45557d43617f73a5bc1a768f9d59088dee07d0ae41e07cd8036bbbb3644bd2a",
+      "cli_descriptor_sha256": "2bad59af2c6cdb79d6daf12ef9502eb512c4efa8d6b9fbb44294c1b5b1b49611"
+    },
+    {
+      "label": "W-NP_EW1-3",
+      "family": "NP_EW1",
+      "mass": "W",
+      "permutation": 3,
+      "source_coordinates": {
+        "b": "13074/5399",
+        "s": "-120961047183696014144/1789089966849483755",
+        "t": "-2233407629/25953770"
+      },
+      "destination_coordinates_from_controller": {
+        "t": "-2233407629/25953770",
+        "s": "-24192567254732572725551/357817993369896751000",
+        "b": "13074/5399"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1,
+        "root3": -1,
+        "root4": 1,
+        "root5": 1,
+        "root6": 1,
+        "root7": 1,
+        "root8": 1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b45557d43617f73a5bc1a768f9d59088dee07d0ae41e07cd8036bbbb3644bd2a",
+      "cli_descriptor_sha256": "ebb4bde536ed91120452b46cbbf951ae294d433188319d7eeaac103af933ecea"
+    },
+    {
+      "label": "W-NP_EW1-4",
+      "family": "NP_EW1",
+      "mass": "W",
+      "permutation": 4,
+      "source_coordinates": {
+        "b": "13074/5399",
+        "s": "-2233407629/25953770",
+        "t": "7971503245/51071474"
+      },
+      "destination_coordinates_from_controller": {
+        "b": "13074/5399",
+        "s": "-2233407629/25953770",
+        "t": "3985777158237/25535737000"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1,
+        "root3": 1,
+        "root4": 1,
+        "root5": 1,
+        "root6": 1,
+        "root7": -1,
+        "root8": 1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b45557d43617f73a5bc1a768f9d59088dee07d0ae41e07cd8036bbbb3644bd2a",
+      "cli_descriptor_sha256": "98e75712cfccfdc9a0d234fb47a0d78c3537c734d16c2000b871779d2f3d077d"
+    },
+    {
+      "label": "Z-NP_EW1-1",
+      "family": "NP_EW1",
+      "mass": "Z",
+      "permutation": 1,
+      "source_coordinates": {
+        "b": "14631/7775",
+        "s": "5130094459/42294614",
+        "t": "-178302305466616953792/3393635073711688075"
+      },
+      "destination_coordinates_from_controller": {
+        "s": "104949191448697262751/865238867852650000",
+        "t": "-117987150501330757182512227/2245621057130807199050000",
+        "b": "14631/7775"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1,
+        "root3": 1,
+        "root4": 1,
+        "root5": 1,
+        "root6": 1,
+        "root7": 1,
+        "root8": 1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b45557d43617f73a5bc1a768f9d59088dee07d0ae41e07cd8036bbbb3644bd2a",
+      "cli_descriptor_sha256": "18bc7990a4d401d2a7df4a86999b71a359b845195fad45287102cdbcb22b67e7"
+    },
+    {
+      "label": "Z-NP_EW1-2",
+      "family": "NP_EW1",
+      "mass": "Z",
+      "permutation": 2,
+      "source_coordinates": {
+        "b": "14631/7775",
+        "s": "5130094459/42294614",
+        "t": "-2760486785/41279998"
+      },
+      "destination_coordinates_from_controller": {
+        "t": "-58807684306811567/879403268106500",
+        "b": "14631/7775",
+        "s": "104949191448697262751/865238867852650000"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1,
+        "root3": 1,
+        "root4": 1,
+        "root5": 1,
+        "root6": 1,
+        "root7": 1,
+        "root8": 1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b45557d43617f73a5bc1a768f9d59088dee07d0ae41e07cd8036bbbb3644bd2a",
+      "cli_descriptor_sha256": "0584b5f31e75eb0941a27ded54bbe7cf6b21e0807176cbb193877b7ffbe775e0"
+    },
+    {
+      "label": "Z-NP_EW1-3",
+      "family": "NP_EW1",
+      "mass": "Z",
+      "permutation": 3,
+      "source_coordinates": {
+        "b": "14631/7775",
+        "s": "-178302305466616953792/3393635073711688075",
+        "t": "-2760486785/41279998"
+      },
+      "destination_coordinates_from_controller": {
+        "b": "14631/7775",
+        "s": "-117987150501330757182512227/2245621057130807199050000",
+        "t": "-58807684306811567/879403268106500"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1,
+        "root3": -1,
+        "root4": 1,
+        "root5": 1,
+        "root6": 1,
+        "root7": 1,
+        "root8": 1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b45557d43617f73a5bc1a768f9d59088dee07d0ae41e07cd8036bbbb3644bd2a",
+      "cli_descriptor_sha256": "a25eca47483ed7959009d130159b7327f4ef64da8b167d410ff9c3619088935d"
+    },
+    {
+      "label": "Z-NP_EW1-4",
+      "family": "NP_EW1",
+      "mass": "Z",
+      "permutation": 4,
+      "source_coordinates": {
+        "b": "14631/7775",
+        "s": "-2760486785/41279998",
+        "t": "5130094459/42294614"
+      },
+      "destination_coordinates_from_controller": {
+        "s": "-58807684306811567/879403268106500",
+        "t": "104949191448697262751/865238867852650000",
+        "b": "14631/7775"
+      },
+      "root_sheets": {
+        "root1": 1,
+        "root2": -1,
+        "root3": 1,
+        "root4": 1,
+        "root5": 1,
+        "root6": 1,
+        "root7": -1,
+        "root8": 1
+      },
+      "source_and_sheets_equal_after_explicit_namespace_comparison": true,
+      "cli_canonical_identity": "b45557d43617f73a5bc1a768f9d59088dee07d0ae41e07cd8036bbbb3644bd2a",
+      "cli_descriptor_sha256": "f63ef20d122ff3dd0852b54d1611697a80d6796d541bf539cb36e513731053f3"
+    }
+  ],
+  "cache_directories_absent_after_all_calls": true,
+  "numerical_generation_calls": 0,
+  "verified_boundary_writes": 0,
+  "numerical_reference_reads": 0,
+  "namespace_note": "CLI and community use distinct Symbolica namespaces and dependency graph identities. Only scalar names are explicitly matched for this exact input comparison; this does not authorize transferring a CLI cache into the community host.",
+  "identity_scope": "Every CLI configuration exposes a valid native canonical identity and certified physical-map source hash. The Python API exposes full exact powers/projections/roots plus primary-source provenance, checked here against the exact mathematical fixture. It does not expose the transport identity before producing a result, so no unsupported host/CLI cache-identity equality is asserted.",
+  "limitations": "Does not certify all16 common-mass pullbacks at their individual points, numerical boundary convergence, full physical transport, amplitude assembly, or all16-source acceptance.",
+  "elapsed_seconds": "7.603308084"
+}

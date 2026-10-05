@@ -1,0 +1,78 @@
+{
+  "schema": "rustflow-full16-initial-monitor-evidence-v1",
+  "date": "2026-10-05",
+  "process_pid": 2555876,
+  "root_tool_session": 21718,
+  "acceptance_report": "target/gg-hg-notebook-acceptance/release-4c483581-c340-rustred7c-native30/acceptance.json",
+  "mode": "cold",
+  "status": "running",
+  "resources": {
+    "sample_worker_budget": 256,
+    "boundary_workers": 4,
+    "effective_boundary_workers": 4,
+    "sample_workers_per_configuration": 64
+  },
+  "runtime_attestation": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "9f3fb219752cd2b3bebc7f6f1baa58000622491dab68cb4aec8824bdb0cef095"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/symbolica-community/loop-integration/python/symbolica/core.abi3.so",
+      "size_bytes": 346164896,
+      "sha256": "79241c85373fe8590c6ba896d2860ee2b4a8f870776a2f0084af16a8710bb614"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 23808,
+        "sha256": "85dbd04343fa1556a04fe0bef5ddfd6acdba2f04b30120d4ade6152df986323b"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_support.py",
+        "size_bytes": 16451,
+        "sha256": "6c4b1030265072ca44e68fe25ecf3419ca54235c3c5d8a6d75890490b73068eb"
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg.py",
+        "size_bytes": 11597,
+        "sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/python-integration-venv/bin/python"
+    }
+  },
+  "inputs": {
+    "model_sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+    "point": [
+      "7173070292440521/111284741846000",
+      "-12058167788971/339319588980",
+      "1"
+    ],
+    "mass_squared": {
+      "W": "5399/13074",
+      "Z": "7775/14631"
+    },
+    "systems": {
+      "planar": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates",
+      "nonplanar": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates"
+    }
+  },
+  "independent_input_preflight": {
+    "path": "target/gg-hg-basis-work/all-physical-inputs-preflight.json",
+    "sha256": "45b89f4af83bde64adb622ccd0e1e1958bd06fb204e3301fd068813bc6815199",
+    "controller_and_model_hashes_match": true,
+    "all16_inputs_passed": true
+  },
+  "empty_directory_evidence": "The acceptance script rejects any nonempty directory unless --resume is passed. This invocation did not pass --resume and entered mode cold. The first monitor snapshots have zero completed samples and no seed/transport boundary files.",
+  "completed_sample_count_at_snapshot": 0,
+  "seed_boundary_file_present": false,
+  "transport_boundary_file_present": false,
+  "active_stage": "boundaries",
+  "stage_elapsed_ns": 100055554117,
+  "monitor_mutations_to_running_bank_or_sources": false,
+  "scope": "Initial attestation and input preflight only; no full16 numerical acceptance claim."
+}

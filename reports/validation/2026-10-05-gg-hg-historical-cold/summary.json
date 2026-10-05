@@ -1,0 +1,238 @@
+{
+  "schema": "rustflow.gg_hg.historical_cold_gate.v1",
+  "recorded_utc": "2026-10-05T20:39:34.410713+00:00",
+  "scope": "Historical frozen Python/native graph: full native physical boundary generation, kinematic transport and gg->hg amplitude at one physical point.",
+  "cold_physics_gate": "passed",
+  "overall_acceptance_status": "still running; this is not a final full-acceptance report",
+  "remaining_full_acceptance": [
+    "Complete all16 independently recomputed40-digit boundaries after intentional cancellation and resume",
+    "Transport/refit stability checks on4360 coefficients and observables",
+    "Nearby-point cache search exercise",
+    "Final runtime attestation and successful runner exit"
+  ],
+  "historical_graph": {
+    "community_commit": "66d571392cf75cef67625b1bb33e771cb0b371d5",
+    "rustflow_numerical_core_commit": "4c483581",
+    "symbolica_commit": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustred_commit": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "scope_limit": "Does not validate the separately merged publication host or upgraded HEPKit owner graph."
+  },
+  "evidence": {
+    "cold_snapshot": "reports/validation/2026-10-05-gg-hg-historical-cold/full16-cold-physics-gate.json",
+    "cold_snapshot_sha256": "453d087838659649b000d108bfed0685d484e9ee2fd99616126b5cd4c121180b",
+    "initial_empty_bank_evidence": "reports/validation/2026-10-05-gg-hg-historical-cold/full16-initial-monitor-evidence.json",
+    "initial_empty_bank_evidence_sha256": "b4982c045f72533e25d5eb3f58721b5a7adf17799c4c1df212ba70b556abb7ca",
+    "exact_all16_input_preflight": "reports/validation/2026-10-05-gg-hg-historical-cold/all-physical-inputs-preflight.json",
+    "exact_all16_input_preflight_sha256": "45b89f4af83bde64adb622ccd0e1e1958bd06fb204e3301fd068813bc6815199",
+    "summary_source_sha256": "c9e5cb32d41d2a4183f8445d8fb9f86cc31ee2475796cc7e96e5c97e7c8839b8"
+  },
+  "runtime_attestation": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "9f3fb219752cd2b3bebc7f6f1baa58000622491dab68cb4aec8824bdb0cef095"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/symbolica-community/loop-integration/python/symbolica/core.abi3.so",
+      "size_bytes": 346164896,
+      "sha256": "79241c85373fe8590c6ba896d2860ee2b4a8f870776a2f0084af16a8710bb614"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 23808,
+        "sha256": "85dbd04343fa1556a04fe0bef5ddfd6acdba2f04b30120d4ade6152df986323b"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_support.py",
+        "size_bytes": 16451,
+        "sha256": "6c4b1030265072ca44e68fe25ecf3419ca54235c3c5d8a6d75890490b73068eb"
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg.py",
+        "size_bytes": 11597,
+        "sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/python-integration-venv/bin/python"
+    }
+  },
+  "inputs": {
+    "model_sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+    "point": [
+      "7173070292440521/111284741846000",
+      "-12058167788971/339319588980",
+      "1"
+    ],
+    "mass_squared": {
+      "W": "5399/13074",
+      "Z": "7775/14631"
+    },
+    "systems": {
+      "planar": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates",
+      "nonplanar": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates"
+    }
+  },
+  "generation": {
+    "physical_sources": 16,
+    "topologies": [
+      "Planar_EW1 (48 masters)",
+      "NP_EW1 (61 masters)"
+    ],
+    "masses": [
+      "W",
+      "Z"
+    ],
+    "crossings_per_mass_and_topology": 4,
+    "minimum_native_verified_seed_digits": 30,
+    "sample_sets_per_source": 2,
+    "complete_native_epsilon_samples": 1248,
+    "reference_seed_fallback": false,
+    "source_identities": {
+      "W-Planar_EW1-1": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "W-Planar_EW1-2": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "W-Planar_EW1-3": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "W-Planar_EW1-4": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "Z-Planar_EW1-1": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "Z-Planar_EW1-2": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "Z-Planar_EW1-3": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "Z-Planar_EW1-4": "0cfe7f6f21853462c6174309515ca194abb6f3699796a1ade96cfe852fbea158",
+      "W-NP_EW1-1": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "W-NP_EW1-2": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "W-NP_EW1-3": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "W-NP_EW1-4": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "Z-NP_EW1-1": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "Z-NP_EW1-2": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "Z-NP_EW1-3": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700",
+      "Z-NP_EW1-4": "e52bb49a370691b8ebcc66a59cf43b2304f908d4481886e2f9759a028f338700"
+    },
+    "shared_provenance": {
+      "planar": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed",
+      "nonplanar": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    }
+  },
+  "coefficient_comparison": {
+    "coefficients": 4360,
+    "checked_mixed_digits": 20,
+    "maximum_scaled_difference": "1.698022952500849738236628302047615989765346418841003076022724986017768E-30",
+    "reference_precision": "Preserved component source caps/precision and endpoint delta in coherent-reference.json",
+    "source_verified_digits_caps": {
+      "W-Planar_EW1-1": 24,
+      "W-Planar_EW1-2": 24,
+      "W-Planar_EW1-3": 24,
+      "W-Planar_EW1-4": 24,
+      "W-NP_EW1-1": 24,
+      "W-NP_EW1-2": 24,
+      "W-NP_EW1-3": 24,
+      "W-NP_EW1-4": 24,
+      "Z-Planar_EW1-1": 24,
+      "Z-Planar_EW1-2": 24,
+      "Z-Planar_EW1-3": 24,
+      "Z-Planar_EW1-4": 24,
+      "Z-NP_EW1-1": 24,
+      "Z-NP_EW1-2": 24,
+      "Z-NP_EW1-3": 24,
+      "Z-NP_EW1-4": 24
+    },
+    "endpoint_deltas": {
+      "W-Planar_EW1-1": "3.2185621170547758*^-27",
+      "W-Planar_EW1-2": "3.2185621162754866*^-27",
+      "W-Planar_EW1-3": "5.862101017252375*^-28",
+      "W-Planar_EW1-4": "2.9585803614123236*^-27",
+      "W-NP_EW1-1": "1.0038884634147344*^-27",
+      "W-NP_EW1-2": "1.0226540982405648*^-27",
+      "W-NP_EW1-3": "3.4128582946147586*^-27",
+      "W-NP_EW1-4": "6.017579083450245*^-28",
+      "Z-Planar_EW1-1": "3.2228950405315133*^-27",
+      "Z-Planar_EW1-2": "3.222895039773394*^-27",
+      "Z-Planar_EW1-3": "8.805569288861356*^-28",
+      "Z-Planar_EW1-4": "3.160825117717002*^-27",
+      "Z-NP_EW1-1": "9.094574622024175*^-28",
+      "Z-NP_EW1-2": "1.230547775126752*^-27",
+      "Z-NP_EW1-3": "2.5882486630334502*^-27",
+      "Z-NP_EW1-4": "8.333965179001432*^-28"
+    }
+  },
+  "form_factor_comparison": {
+    "components": 8,
+    "comparison": "All independent reference comparisons pass within recorded reference plus native absolute errors.",
+    "native_relative_digits": {
+      "W": [
+        26,
+        25,
+        26,
+        25
+      ],
+      "Z": [
+        26,
+        24,
+        25,
+        25
+      ]
+    },
+    "precision_limit": "Retain each component reference uncertainty from the full cold snapshot; small observed differences do not increase reference precision."
+  },
+  "observables": {
+    "effective_squared": {
+      "value": "0.00176839492856040838255513143874534782898210399687219844018557709100056424479576777129467967484813",
+      "absolute_error": "1E-50",
+      "relative_digits": 47,
+      "independent_reference_comparison": {
+        "absolute_difference": "3.996872198440185577091000564244795767771294679674848127E-45",
+        "reference_absolute_uncertainty": "1.00000000000000000000001E-42",
+        "reference_conditional_relative_digits": 39
+      }
+    },
+    "electroweak_squared": {
+      "value": "4.33089662023980781068590560931974942994040642487940681678246676343150671547735405404120678036288E-8",
+      "absolute_error": "1.03038250335993855710408227422359660726846059979533911113750299343973552309362935319028309186462E-33",
+      "relative_digits": 25,
+      "independent_reference_comparison": {
+        "absolute_difference": "4.344880059593575120593183217533236568493284522645945958793219637117E-38",
+        "reference_absolute_uncertainty": "1.036965279541889484229816607147212347491680749337440461240057773672673644280375266356913373971924892E-27",
+        "reference_conditional_relative_digits": 19
+      }
+    },
+    "interference": {
+      "value": "0.0000166580193666104352713434174523346881653549846139505767407266481227466537219656222934353207728629",
+      "absolute_error": "1.37731031568813068627392693854412868258134780717120329145843258319754208435130911820292715689631E-31",
+      "relative_digits": 26,
+      "independent_reference_comparison": {
+        "absolute_difference": "8.06288718001538604942325927335187725334627803437770656467922713706E-36",
+        "reference_absolute_uncertainty": "1.386179807571189334116816980709306921379782632659449692282195647591677068094016282224644333359816356E-25",
+        "reference_conditional_relative_digits": 20
+      }
+    }
+  },
+  "timing": {
+    "stages": [
+      {
+        "stage": "boundaries",
+        "elapsed_ns": 7399438811225,
+        "elapsed_seconds": "7399.438811225"
+      },
+      {
+        "stage": "transport",
+        "elapsed_ns": 405374899907,
+        "elapsed_seconds": "405.374899907"
+      },
+      {
+        "stage": "amplitude",
+        "elapsed_ns": 50753218699,
+        "elapsed_seconds": "50.753218699"
+      }
+    ],
+    "cold_physics_stage_sum_ns": 7855566929831,
+    "resources": {
+      "sample_worker_budget": 256,
+      "boundary_workers": 4,
+      "effective_boundary_workers": 4,
+      "sample_workers_per_configuration": 64
+    },
+    "qualification": "Measured wall time with concurrent cluster work. Stage sum excludes report/comparison overhead; no upstream speed ratio or exclusive-host throughput claim."
+  },
+  "precision_interpretation": "Native seed accuracy is empirically verified by independent epsilon sample sets with increased precision/order. Coefficient comparison checks20 mixed digits and preserves24-digit source caps. EW-squared, interference and HEFT-squared reference conditional caps remain19,20 and39; native propagated estimates are25,26 and47. Full40-digit forced recomputation is still in progress.",
+  "reference_isolation": "Numerical references were opened by the controller only after native source generation, all transports and native amplitude assembly succeeded. Initial verified boundary and numerical sample banks were empty; exact mathematical/model inputs are separate from comparison data."
+}

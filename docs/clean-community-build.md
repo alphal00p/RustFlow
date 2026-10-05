@@ -40,7 +40,7 @@ activated Python environment:
 ```sh
 cargo fetch --locked
 python .github/scripts/check_integration_package.py
-RUSTFLOW_WORKSPACE_FEATURES='' RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES=0 \
+RUSTFLOW_WORKSPACE_FEATURES=pyo3/extension-module RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES=0 \
   maturin develop --release --locked --extras notebook-display
 python -m pytest -q tests/test_loop_integration.py tests/test_loop_integration_reductions.py
 ```
@@ -51,6 +51,9 @@ does not execute a numerical acceptance calculation. Preserve the host's tracked
 `.cargo/config.toml`, which declares `RUSTFLOW_WORKSPACE_MANIFEST` for the build
 fingerprint. A published build should resolve RustFlow from its declared Git
 revision, without a development path override in the checkout or `CARGO_HOME`.
+The feature forwarded above matches the extension-module feature enabled by
+Maturin in `pyproject.toml`, so the cache fingerprint includes the build's
+actual Python linkage features.
 
 The tracked Python stubs can be regenerated from the same dependency graph:
 
