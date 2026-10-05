@@ -4,3 +4,6 @@
 /.dev-env
 __pycache__/
 *.py[cod]
+
+# Machine-local Cargo source overrides; use the tracked example.
+/.cargo/config.toml

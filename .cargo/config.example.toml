@@ -1,0 +1,24 @@
+# Copy to config.toml and select the patched native owner checkout.
+[patch."https://github.com/alphal00p/gammaloop"]
+feynkit-amplitude = { path = "/path/to/patched-hepkit/crates/feynkit-amplitude" }
+feynkit-cff = { path = "/path/to/patched-hepkit/crates/feynkit-cff" }
+feynkit-generator = { path = "/path/to/patched-hepkit/crates/feynkit-generator" }
+feynkit-graph = { path = "/path/to/patched-hepkit/crates/feynkit-graph" }
+feynkit-kinematics = { path = "/path/to/patched-hepkit/crates/feynkit-kinematics" }
+feynkit-model = { path = "/path/to/patched-hepkit/crates/feynkit-model" }
+feynkit-py = { path = "/path/to/patched-hepkit/crates/feynkit-py" }
+feynkit-tensor = { path = "/path/to/patched-hepkit/crates/feynkit-tensor" }
+feynkit-ufo = { path = "/path/to/patched-hepkit/crates/feynkit-ufo" }
+gammaloop-workspace-hack = { path = "/path/to/patched-hepkit/crates/gammaloop-workspace-hack" }
+idenso = { path = "/path/to/patched-hepkit/crates/idenso" }
+kurvst = { path = "/path/to/patched-hepkit/crates/kurvst" }
+linnest = { path = "/path/to/patched-hepkit/crates/linnest" }
+linnet = { path = "/path/to/patched-hepkit/crates/linnet" }
+linnet-py = { path = "/path/to/patched-hepkit/crates/linnet-py" }
+spenso = { path = "/path/to/patched-hepkit/crates/spenso" }
+spenso-hep-lib = { path = "/path/to/patched-hepkit/crates/spenso-hep-lib" }
+spenso-macros = { path = "/path/to/patched-hepkit/crates/spenso-macros" }
+spynso3 = { path = "/path/to/patched-hepkit/crates/spynso3" }
+symbolica-utils = { path = "/path/to/patched-hepkit/crates/symbolica-utils" }
+three-dimensional-reps = { path = "/path/to/patched-hepkit/crates/three-dimensional-reps" }
+vakint = { path = "/path/to/patched-hepkit/crates/vakint" }
