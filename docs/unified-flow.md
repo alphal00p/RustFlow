@@ -77,6 +77,31 @@ evolve the Laurent coefficients, currently requiring an epsilon-regular matrix.
 These are coefficient representations of the same differential-equation method.
 A general fallback for epsilon-singular physical bases remains outstanding.
 
+## Single-mass vacuum recursion
+
+The recursive boundary provider can remove one loop from a single-mass vacuum
+integral by homogeneity and an analytic radial integration. After an exact
+routing makes the massive momentum the first loop momentum, the remaining
+massless problem has one fewer loop and an external momentum with square −1.
+The same boundary provider evaluates that child and memoizes it, including reuse
+between different powers of the massive denominator. The radial gamma factors
+retain the routing determinant and denominator normalization.
+
+This route follows AMFlow's `SingleMass` ending scheme and has no topology or
+loop-count list. Symbolica owns exact matrix and polynomial operations; native
+HEPKit kinematics and family completion own the child scalar products and any
+missing zero-power numerator slots. Its current admission requires nonnegative
+powers, one active positive mass square, and real rational rank-one quadratic
+denominators with positive normalization. Other cases retain the existing
+fallback. Custom terminal providers and certified scaleless sectors take
+precedence.
+
+The [finite-sample comparison](../reports/validation/2026-10-05-single-mass-vacuum-finite-samples.json)
+checks a connected three-loop six-line vacuum and its raised massive power
+against the separate FT route at two epsilon values and two precision/order
+settings. Those checks validate the new recursive formula; a full Laurent fit
+through this public route is a separate acceptance step.
+
 ## Current generality gaps
 
 - Region enumeration, normalization and recursion have explicit search budgets.

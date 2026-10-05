@@ -1,0 +1,201 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "date_utc": "2026-10-05T01:27:08.823353+00:00",
+  "scope": "Native factor/isolate contour planning and cold-cache derivative-side certification. Complete nonplanar geometry is validated independently of numerical physical continuation.",
+  "algorithm": {
+    "owners": [
+      "Symbolica exact rational factorization and root isolation",
+      "native IsolatedRoot defining polynomial, enclosures and refinement",
+      "Symbolica exact remainder, exact shift, and directed RealBall arithmetic"
+    ],
+    "certificate": "If F(alpha)=0 then (Pprime mod F)(alpha)=Pprime(alpha). Rebind only cached variable metadata, shift this exact remainder to the certified disk center real part, and evaluate over [-radius,+radius] with outward rounding. Accept only strictly signed enclosures.",
+    "retained_checks": [
+      "All factors and real/complex roots remain obstacles",
+      "Full original polynomial determines physical side and endpoint tests",
+      "Checked multiplicities preserve repeated-root rejection",
+      "Existing exact clearance, triangle and overlap checks remain mandatory",
+      "No change to the sign refinement or precision budget"
+    ]
+  },
+  "factor_geometry": {
+    "status": "geometry_and_focused_regressions_passed",
+    "scope": "Thin native factor/isolate adapter plus the independently validated exact endpoint-separation fix; no numerical physical endpoint claim",
+    "native_owner": "Symbolica75f8350094b90254ee71dc2a391fde0d14b0204a exact factor(), isolate_roots(), IsolatedRoot identity/refinement",
+    "retained_invariants": [
+      "every factor and every certified real/nonreal root is retained",
+      "original full polynomial owns endpoint tests and derivative sign",
+      "checked factor/root multiplicity products preserve repeated-zero rejection",
+      "all previous exact obstacle, rounded triangle and overlap checks remain mandatory",
+      "complex disks are never merged by numerical proximity"
+    ],
+    "validation": {
+      "existing_and_endpoint_tests_passed": 12,
+      "existing_ignored_native_isolation_mre": 1,
+      "new_degree8_regression_passed": 1,
+      "helper_units_rechecked_in_new_harness": 2,
+      "strict_standalone_clippy": "both harnesses passed",
+      "np_exact_geometry": {
+        "exit": 0,
+        "cap_seconds": 180,
+        "elapsed_seconds": 0.033395261,
+        "crossings": 18,
+        "waypoints": 55,
+        "data": "polynomials.json exact compiled denominator factors/source guards/declarations from the frozen NP pilot",
+        "numeric_integration_performed": false
+      },
+      "degree8_regression_proof": "Exact factor reconstruction; sign-change brackets account for each linear/quadratic/cubic root, positive-coefficient factor has no positive root; exactly three crossings at [1/2000,1/1000], [1/250,1/200], [1/100,11/1000], with original P+i0 sides Minus/Plus/Minus and exact returned entry/exit signs"
+    },
+    "independent_peer_review": "boundary_budget: no global cross-factor separation assumption or lost multiplicity/root/sign; no findings",
+    "baseline_failures_preserved": {
+      "endpoint": "baseline.log and original NP pilot",
+      "native_isolation": "candidate.log180s; symbolica-isolation whole.log30s; standalone factor control returns all8roots"
+    },
+    "source_archive": "target/prescribed-final-gate/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+    "source_archive_sha256": "04f7125626e9f2252854038e8166cadf6adeac516f912fadce3d5b91a3219033",
+    "hashes": {
+      "factor-owner.patch": "841d5a35e298a837b6c9bff2f747e167e2144f1a682b21b2b294927def86585d",
+      "contour-factor.rs": "d19593a699f1309fc9bbb7084cdb6d8672f4766f95575e6260fc8320393d4fc9",
+      "production-factor-tests.rs": "f4c85a4b5419724c68971955665d002ec26e2e6f6a242a46ef2b64397a22f0d7",
+      "candidate-factor.rs": "f476654f339c025e8a0e024e78c84b1606ce0782e8247c01d5e75106cbd9f0cf",
+      "candidate-factor": "954dcda3a4f41ac0aaf2fed5a24a546ff6b6877d49618d74e5f307823fc0a3d0",
+      "candidate-factor.log": "89eebf54b9544f703ee12c45c8bfe1568a3fa35d56231459109824c2eba06fc0",
+      "planned-factor.json": "ea10315fb267aec894052466fb5603f144f7d695206991682c7b3c01890c0c55",
+      "tests-factor.log": "fb74e82efe01a3dbf91780fe118c616eaddb1f0a95c15ced10dd5614c1c51bf2",
+      "tests-factor-clippy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "factor-regression.log": "1e198780299685cc7ac1559f2bd93e64bed0330249c54e9a28f4a67fb3dc4fd9",
+      "factor-regression-clippy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "cold_cache_diagnosis": {
+    "initial_production_gate": "Failed existing every_complex_root_of_a_declared_polynomial_constrains_its_detour; exit101. Standalone tests had warmed the native coefficient-keyed root cache and hidden the coarse-enclosure failure.",
+    "failed_library_sha256": "7ff31ecc3556889560982f15aca8522220696fa7141c81516f6515e0bb7f9d88",
+    "classification": "RustFlow interval-expression dependency/cancellation; separate from the native whole-polynomial isolation slowdown.",
+    "preserved_failure": {
+      "path": "target/factor-production-gate/tests.log",
+      "sha256": "c57d7f287779a2f808a812ed124099a26b8eabe721b1624e74b166bb13b5b054",
+      "bytes": 8127
+    },
+    "focused_regression": {
+      "status": "candidate_verified",
+      "changes": [
+        {
+          "from": "target/contour-centered-sign/production.patch",
+          "apply": "src/contour.rs"
+        },
+        {
+          "from": "target/contour-centered-sign/production-tests.rs",
+          "to": "tests/contour_signs.rs"
+        }
+      ],
+      "validation": {
+        "cold_original_case": "1 passed",
+        "serial": "16 passed,1 intentional native-isolation MRE ignored",
+        "parallel_threads": 8,
+        "parallel": "16 passed,1 intentional native-isolation MRE ignored",
+        "strict_standalone_clippy": "passed",
+        "fourth_cache_label_regression": "Passed with all4 fresh regressions plus2 geometry units in both serial and8-thread fresh processes; strict standaloneClippy passed.",
+        "pre_fix_regressions": "Old production owner fails all3 new fresh-center tests with derivative-sign Accuracy; exit101; two geometry units pass."
+      },
+      "proof": "Native exact Pprime remainder modulo selected root defining polynomial agrees with the original derivative at that root. Cached defining-variable names are rebound without changing coefficients. The remainder is shifted exactly to the current certified real-disk center and evaluated with outward RealBall operations on [-radius,+radius]. Only strictly signed enclosures are accepted. Refinement budget and all geometric checks remain unchanged.",
+      "native_api_audit": {
+        "public": [
+          "IsolatedRoot::defining_polynomial",
+          "UnivariatePolynomial::from_coefficients/get_vars/rem/shift_var",
+          "RealBall::from_rational_bounds/is_strictly_positive/is_strictly_negative"
+        ],
+        "not_callable": [
+          "UnivariatePolynomial::has_positive_real_part_at is pub(crate)",
+          "UnivariatePolynomial::evaluate_complex_ball is pub(crate)"
+        ],
+        "root_cache_key": "PolynomialCache roots/root_multisets keyed by exact coefficient vectors; namespaces do not separate cache entries."
+      },
+      "provenance": {
+        "target/contour-centered-sign/production.patch": "cae7714d51f734dcd623d0edb6063a464c25b7a2424aa20a185998a8e970eb4b",
+        "target/contour-centered-sign/production-tests.rs": "366969e6733db40e39f3056577675bc87d59b0796a1d9b20851a19a44fde15ba",
+        "target/contour-centered-sign/contour.rs": "1f8801c07a7b55a8bffca135b4c42d82c32698e0f80e5c72a9763e5d8fb15cbe",
+        "target/contour-centered-sign/baseline.rs": "d19593a699f1309fc9bbb7084cdb6d8672f4766f95575e6260fc8320393d4fc9",
+        "target/contour-centered-sign/tests": "40bfaa5a5d875aa264e3e36330aee3a4e6f1b2776f85cf368cbaafe1b4e3fa18",
+        "target/contour-centered-sign/cold-original.log": "557edefb0ca4eeab28a0b0e0723f5a0860dfc468dc2c54dc9c5e23909745bfbb",
+        "target/contour-centered-sign/serial.log": "d866902b80bd625e9635b6f2f939f785b16e2235db529d976015f65a428883cf",
+        "target/contour-centered-sign/parallel.log": "f2f661987e8649e242ed16110fb155e4dced448fc798b79c20b8749f21213892",
+        "target/contour-centered-sign/clippy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "target/contour-centered-sign/fresh_tests": "34e9abbc3fce026058fc7684d5476d760800125f5040dd4add2efd5ea9fc6d37",
+        "target/contour-centered-sign/fresh-serial.log": "2d64dae1e488bbf57b7a380e3f86f323fdf149afbcdac87464f87c137e03f545",
+        "target/contour-centered-sign/fresh-parallel.log": "05338d701e5abaecf7d3c0e77652bb766aa9b2edd021f16009f0c323eff9c8e8",
+        "target/contour-centered-sign/clippy-v2.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "target/contour-centered-sign/baseline-tests": "9adf7543a11057721e30f733706330a8b896049587c8a80aa331b65779f9e417",
+        "target/contour-centered-sign/baseline-result.log": "161425e89b8aa12bf1666a69092e56e8b684c60d1e117bd37c518fb50855de69"
+      },
+      "scope": "Contour certificate regression only; no full NP physical numerical result yet. Parent full Cargo gate pending."
+    },
+    "peer_review": "Independent review found no issue with exact remainder identity, namespace relabeling, real projection of the certified complex disk or directed rounding."
+  },
+  "production_archive": {
+    "status": "passed full release unit/integration/doc tests, formatting and strict Clippy",
+    "captured_utc": "2026-10-05T01:25:23.524616+00:00",
+    "source_snapshot_sha256": "54416dd79fe801bff42debe9a6759310af2eecd684f209e21138e1be80790f54",
+    "source_snapshot_matches": true,
+    "files": {
+      "target/boundary-sign-production-gate/deps/libsymbolica_amflow-d39e426db931b928.rlib": {
+        "sha256": "f602e3a25e5bcdc356a6bbfdf36246937cf379692e3ed889ae5a2ddc1623d7fb",
+        "bytes": 423436514
+      },
+      "target/boundary-sign-production-gate/deps/libsymbolica_amflow-d39e426db931b928.rmeta": {
+        "sha256": "d9b73228cf22d125feb3793c04b5977e40e42b69340e52dc1f15b0b0ebbc3087",
+        "bytes": 3205656
+      },
+      "target/boundary-sign-production-gate/deps/librustred-d70ca661149f6db6.rlib": {
+        "sha256": "3484fc124051aac01902b4fe018f00bd89a0c2af13b84f31666178f3f292a0a0",
+        "bytes": 406493312
+      },
+      "target/boundary-sign-production-gate/deps/librustred-d70ca661149f6db6.rmeta": {
+        "sha256": "453484445bee428588feb2efcf54f85b8d1c94fac7af9b6a3b83cfe8c53aac08",
+        "bytes": 36752833
+      }
+    }
+  },
+  "checks": {
+    "tests": {
+      "passed": 353,
+      "failed": 0,
+      "ignored": 7
+    },
+    "doc": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    "formatting": "cargo fmt -p symbolica-amflow --check passed",
+    "clippy": "cargo clippy --release --all-targets -- -D warnings passed;8 preexisting RustRed dependency warnings",
+    "git_diff_check": "passed"
+  },
+  "artifacts": [
+    {
+      "path": "src/contour.rs",
+      "sha256": "1f8801c07a7b55a8bffca135b4c42d82c32698e0f80e5c72a9763e5d8fb15cbe",
+      "bytes": 24687
+    },
+    {
+      "path": "tests/contour_factorization.rs",
+      "sha256": "f4c85a4b5419724c68971955665d002ec26e2e6f6a242a46ef2b64397a22f0d7",
+      "bytes": 5137
+    },
+    {
+      "path": "tests/contour_signs.rs",
+      "sha256": "366969e6733db40e39f3056577675bc87d59b0796a1d9b20851a19a44fde15ba",
+      "bytes": 3474
+    },
+    {
+      "path": "target/boundary-sign-production-gate/source.json",
+      "sha256": "54416dd79fe801bff42debe9a6759310af2eecd684f209e21138e1be80790f54",
+      "bytes": 12078
+    },
+    {
+      "path": "target/boundary-sign-production-gate/rustred-core.json",
+      "sha256": "5489d12d0461f25c517f1f87602638d2edfb0fa3d679fd5a6693638c62721b0e",
+      "bytes": 208086
+    }
+  ],
+  "production_gate": "reports/validation/2026-10-05-boundary-contour-release.json"
+}

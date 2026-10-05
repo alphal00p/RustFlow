@@ -41,6 +41,7 @@ pub mod regions;
 pub mod tensor;
 pub mod transport_cache;
 pub mod vacuum;
+mod vacuum_peel;
 pub use asymptotic::AsymptoticConstraint;
 pub use engine::{
     PreparedFlow, evaluate_samples, solve_integral_combinations, solve_integrals, solve_prepared,

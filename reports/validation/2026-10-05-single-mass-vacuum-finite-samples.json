@@ -1,0 +1,779 @@
+{
+  "schema": 1,
+  "status": "target_only_private_plan_finite_samples_passed",
+  "scope": "Topology-independent SingleMass vacuum loop peeling; no public Laurent acceptance or production integration claimed.",
+  "family": {
+    "loops": [
+      "q",
+      "l",
+      "k"
+    ],
+    "dimension": "4-2*epsilon",
+    "denominators": [
+      "q^2-3",
+      "l^2",
+      "(l-q)^2",
+      "k^2",
+      "(k-q)^2",
+      "(l-k)^2"
+    ],
+    "sample_target": [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1
+    ],
+    "prescription": "+i0",
+    "input_precision": "exact rationals"
+  },
+  "generic_rule": "With h=D/2, B=sum of other powers, a=massive power, l=T(q,k), D_massive=c(q^2-M^2): V=|detT|^D c^(-a) C (-1)^a (M^2)^(L*h-B-a) Gamma(L*h-B) Gamma(B+a-L*h)/(Gamma(h)Gamma(a)); C is the (L-1)-loop massless child at q^2=-1.",
+  "owners": [
+    "existing regions::branch and IntegralFamily::transform_loops",
+    "existing exact Symbolica matrix rank/inverse/determinant",
+    "native HEPKit IntegralFamily/Kinematics/new/complete and existing from_hepkit",
+    "existing RecursiveBoundary/RustRed and shared AMF/FT numerical solvers",
+    "existing Precision MPFR gamma/power operations"
+  ],
+  "exact_and_normalization_tests": {
+    "passed": 6,
+    "log_sha256": "c7f6b058f5af250b44533ae6eb0287aa84e25b2732e4151e4431d63e60e3cd3b",
+    "binary_sha256": "b1e8cd266146d41a810bf615b393601c52ad02eb64224f7384abbdb708ab09fc",
+    "scope": [
+      "exact complete connected six-line to five-line routing",
+      "native child ISP completion with zero powers",
+      "existing single_mass_sunset for four raised-power tuples at D0=4,6",
+      "nonunit routing Jacobian, denominator scalings and permutation",
+      "mass scaling and raised massive index ratio",
+      "conservative admission/fallback domains"
+    ]
+  },
+  "runs": [
+    {
+      "directory": "target/single-mass-peel/peel-60-eps10-v2",
+      "provenance": {
+        "scope": "one exact nonzero epsilon sample; no Laurent acceptance",
+        "mode": "peel",
+        "working_decimal_digits": 60,
+        "series_order": 80,
+        "epsilon": "1/10",
+        "requested_comparison_digits": 20,
+        "started_utc": "2026-10-05T01:01:39.901110+00:00",
+        "repository_head_at_launch": "c202ed46643d48d8e352681901443b0af53a65da",
+        "archive_library_sha256": "ceaffde8c9abe60e839b5ca892048a166459cd1591745cb4615be45ae2991096",
+        "binary_sha256": "1ba8d82466331dc9551e8f5c031a79f8a5cd367a3b1ab9dcb9f7009e3a831862",
+        "source_sha256": {
+          "tests.log": "c7f6b058f5af250b44533ae6eb0287aa84e25b2732e4151e4431d63e60e3cd3b",
+          "algebra-owner.rs": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e",
+          "sample.rs": "7d09557442ba23eefb4e138ee5f63f6b6b66f69dea1f39ecd6df9f022f7c9a75",
+          "regions-owner.rs": "b677126ff7c772b6d4c14439aed7684db8b98141bdb1fac819ebb888fc200724",
+          "owner-snapshot.json": "e22f550b71398e4bbc2495e9eec80247fbca73a7355989331ce921092558fea9",
+          "proposal.md": "836a2f4d63262a51a43314ef1be1a678712766c1f65ae6b42730c016e129ec26",
+          "peel.rs": "cfd8b4eba8f1b18a6f443eeea5d619e5bc81091aec167e2ffcd64a5ae6935414",
+          "tests.rs": "dff02c0b2757464af9c25ec2d3e516804e548defa2b40f858306298dac28b131",
+          "recursive.patch": "134f751209d2c41fc26bf23a1fc33c0ad2617f10fe5cef3e42608a0ce649d5b2",
+          "sample-build-command.json": "23f43dee5d2a93a24b2451baaf9b5445a0dc43a6c2d349118fe60dcb873b124b"
+        },
+        "command": [
+          "taskset",
+          "-c",
+          "33",
+          "/common/dev/amflow/target/single-mass-peel/peel-60-eps10-v2/sample",
+          "peel",
+          "60",
+          "80",
+          "10",
+          "/common/dev/amflow/target/single-mass-peel/peel-60-eps10-v2/cache"
+        ],
+        "working_directory": "/common/dev/amflow/target/single-mass-peel/peel-60-eps10-v2",
+        "cpu": 33,
+        "rayon_threads": 1,
+        "wall_cap_seconds": 1800,
+        "address_space_cap_bytes": 17179869184,
+        "reduction_limits": {
+          "max_depth": 3,
+          "max_targets": 65536,
+          "max_sector_batch": 32,
+          "max_exact_frontier": 512,
+          "max_backward_frontier": 1024,
+          "native_workers": 1
+        },
+        "numerical_limits": {
+          "max_steps": 1000,
+          "max_precision_attempts": 3
+        }
+      },
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_seconds": 4.082719459198415,
+        "finished_utc": "2026-10-05T01:01:47.181029+00:00",
+        "peak_children_rss_kib": 33828,
+        "stdout_sha256": "24012fc1a7551f3fdf88fbe77423c58fd6d79b67e8fece5e3907f5db047ace49",
+        "events_sha256": "dbf1ff2ab28e52f2a79fe33706f382188dc10fea7db0efeb2ab1554f3519e7b3",
+        "provenance_sha256": "b7e447069f48d4ee5576e6a2b1ae83c4db12833de2bcdc1acd308aaf00ec6ba2"
+      },
+      "values": {
+        "child_re": "-9.486272830425789056360268575369401605896852153938419039147794091430",
+        "child_im": "-5.515696898961419714318041909941265834122885959805063395638150010947e-61",
+        "value_re": "27.54749536408018022071994418365693001778220715756601415733886519713",
+        "value_im": "1.601721112916706851426349543830497262570935210443735150478760582053e-60"
+      },
+      "result_sha256": "3050616b3f8429c268fcf932c1586275212c7cd417ab631e9f36dcdbc005a481"
+    },
+    {
+      "directory": "target/single-mass-peel/peel-80-eps10",
+      "provenance": {
+        "scope": "one exact nonzero epsilon sample; no Laurent acceptance",
+        "mode": "peel",
+        "working_decimal_digits": 80,
+        "series_order": 112,
+        "epsilon": "1/10",
+        "requested_comparison_digits": 20,
+        "started_utc": "2026-10-05T01:02:32.016235+00:00",
+        "repository_head_at_launch": "c202ed46643d48d8e352681901443b0af53a65da",
+        "archive_library_sha256": "ceaffde8c9abe60e839b5ca892048a166459cd1591745cb4615be45ae2991096",
+        "binary_sha256": "1ba8d82466331dc9551e8f5c031a79f8a5cd367a3b1ab9dcb9f7009e3a831862",
+        "source_sha256": {
+          "proposal.md": "836a2f4d63262a51a43314ef1be1a678712766c1f65ae6b42730c016e129ec26",
+          "tests.log": "c7f6b058f5af250b44533ae6eb0287aa84e25b2732e4151e4431d63e60e3cd3b",
+          "sample.rs": "7d09557442ba23eefb4e138ee5f63f6b6b66f69dea1f39ecd6df9f022f7c9a75",
+          "owner-snapshot.json": "e22f550b71398e4bbc2495e9eec80247fbca73a7355989331ce921092558fea9",
+          "tests.rs": "dff02c0b2757464af9c25ec2d3e516804e548defa2b40f858306298dac28b131",
+          "recursive.patch": "134f751209d2c41fc26bf23a1fc33c0ad2617f10fe5cef3e42608a0ce649d5b2",
+          "sample-build-command.json": "23f43dee5d2a93a24b2451baaf9b5445a0dc43a6c2d349118fe60dcb873b124b",
+          "regions-owner.rs": "b677126ff7c772b6d4c14439aed7684db8b98141bdb1fac819ebb888fc200724",
+          "peel.rs": "cfd8b4eba8f1b18a6f443eeea5d619e5bc81091aec167e2ffcd64a5ae6935414",
+          "algebra-owner.rs": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e"
+        },
+        "command": [
+          "taskset",
+          "-c",
+          "33",
+          "/common/dev/amflow/target/single-mass-peel/peel-80-eps10/sample",
+          "peel",
+          "80",
+          "112",
+          "10",
+          "/common/dev/amflow/target/single-mass-peel/peel-80-eps10/cache"
+        ],
+        "working_directory": "/common/dev/amflow/target/single-mass-peel/peel-80-eps10",
+        "cpu": 33,
+        "rayon_threads": 1,
+        "wall_cap_seconds": 1800,
+        "address_space_cap_bytes": 17179869184,
+        "reduction_limits": {
+          "max_depth": 3,
+          "max_targets": 65536,
+          "max_sector_batch": 32,
+          "max_exact_frontier": 512,
+          "max_backward_frontier": 1024,
+          "native_workers": 1
+        },
+        "numerical_limits": {
+          "max_steps": 1000,
+          "max_precision_attempts": 3
+        }
+      },
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_seconds": 5.229062233120203,
+        "finished_utc": "2026-10-05T01:02:40.333305+00:00",
+        "peak_children_rss_kib": 43040,
+        "stdout_sha256": "6bbc06ffa151e4cff9dac423daf00f3c55042d7916c9f884d3277d525d86e9b8",
+        "events_sha256": "d803a0803b62615320ecba74c8ae5afaa91cab6dc7d498d2b2b1d63fa9c127dd",
+        "provenance_sha256": "0681717acb3227eeb106be2762486963596ba468ef35c37d29156912b71a0730"
+      },
+      "values": {
+        "child_re": "-9.4862728304257890563602685753694016058968521539384190391477907054225765702267586770718",
+        "child_im": "-4.1217289686178659103696667476112381317459932702542151489115991309046286444600022108017e-81",
+        "value_re": "27.547495364080180220719944183656930017782207157566014157338855364041936618920789941597",
+        "value_im": "1.1969222442224369364136529810195806229076225969042654685854445586256590841157099111734e-80"
+      },
+      "result_sha256": "14f3bb4a39d2294e446ff269b951e77613160f61c0f9e034911e5228ce483164"
+    },
+    {
+      "directory": "target/single-mass-peel/ft-60-eps10",
+      "provenance": {
+        "scope": "one exact nonzero epsilon sample; no Laurent acceptance",
+        "mode": "ft",
+        "working_decimal_digits": 60,
+        "series_order": 80,
+        "epsilon": "1/10",
+        "requested_comparison_digits": 20,
+        "started_utc": "2026-10-05T01:01:57.308154+00:00",
+        "repository_head_at_launch": "c202ed46643d48d8e352681901443b0af53a65da",
+        "archive_library_sha256": "ceaffde8c9abe60e839b5ca892048a166459cd1591745cb4615be45ae2991096",
+        "binary_sha256": "1ba8d82466331dc9551e8f5c031a79f8a5cd367a3b1ab9dcb9f7009e3a831862",
+        "source_sha256": {
+          "proposal.md": "836a2f4d63262a51a43314ef1be1a678712766c1f65ae6b42730c016e129ec26",
+          "algebra-owner.rs": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e",
+          "peel.rs": "cfd8b4eba8f1b18a6f443eeea5d619e5bc81091aec167e2ffcd64a5ae6935414",
+          "regions-owner.rs": "b677126ff7c772b6d4c14439aed7684db8b98141bdb1fac819ebb888fc200724",
+          "tests.rs": "dff02c0b2757464af9c25ec2d3e516804e548defa2b40f858306298dac28b131",
+          "owner-snapshot.json": "e22f550b71398e4bbc2495e9eec80247fbca73a7355989331ce921092558fea9",
+          "sample.rs": "7d09557442ba23eefb4e138ee5f63f6b6b66f69dea1f39ecd6df9f022f7c9a75",
+          "tests.log": "c7f6b058f5af250b44533ae6eb0287aa84e25b2732e4151e4431d63e60e3cd3b",
+          "recursive.patch": "134f751209d2c41fc26bf23a1fc33c0ad2617f10fe5cef3e42608a0ce649d5b2",
+          "sample-build-command.json": "23f43dee5d2a93a24b2451baaf9b5445a0dc43a6c2d349118fe60dcb873b124b"
+        },
+        "command": [
+          "taskset",
+          "-c",
+          "33",
+          "/common/dev/amflow/target/single-mass-peel/ft-60-eps10/sample",
+          "ft",
+          "60",
+          "80",
+          "10",
+          "/common/dev/amflow/target/single-mass-peel/ft-60-eps10/cache"
+        ],
+        "working_directory": "/common/dev/amflow/target/single-mass-peel/ft-60-eps10",
+        "cpu": 33,
+        "rayon_threads": 1,
+        "wall_cap_seconds": 1800,
+        "address_space_cap_bytes": 17179869184,
+        "reduction_limits": {
+          "max_depth": 3,
+          "max_targets": 65536,
+          "max_sector_batch": 32,
+          "max_exact_frontier": 512,
+          "max_backward_frontier": 1024,
+          "native_workers": 1
+        },
+        "numerical_limits": {
+          "max_steps": 1000,
+          "max_precision_attempts": 3
+        }
+      },
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_seconds": 1.3196871969848871,
+        "finished_utc": "2026-10-05T01:02:01.803428+00:00",
+        "peak_children_rss_kib": 15420,
+        "stdout_sha256": "7c33d15e45bcd84c6b08ba46457faa21b621ff4033a51c0c4f54eccb20651d2d",
+        "events_sha256": "284c920a3c7d245105cf6802051c2f98fba96a0bbb1e781974b0c7f155167127",
+        "provenance_sha256": "9f6732b3b856ca84df3e0fc6e66a9bcada5299fb7136aa2aae0004c014aa2513"
+      },
+      "values": {
+        "value_re": "27.54749536408018022071994418365693001778220715756601415731962438017",
+        "value_im": "0"
+      },
+      "result_sha256": "d29206421d75d4fd7d8ec3211683eb94dac8b2fdfa3540ab2a462f0c5ba77988"
+    },
+    {
+      "directory": "target/single-mass-peel/ft-80-eps10",
+      "provenance": {
+        "scope": "one exact nonzero epsilon sample; no Laurent acceptance",
+        "mode": "ft",
+        "working_decimal_digits": 80,
+        "series_order": 112,
+        "epsilon": "1/10",
+        "requested_comparison_digits": 20,
+        "started_utc": "2026-10-05T01:02:40.424660+00:00",
+        "repository_head_at_launch": "c202ed46643d48d8e352681901443b0af53a65da",
+        "archive_library_sha256": "ceaffde8c9abe60e839b5ca892048a166459cd1591745cb4615be45ae2991096",
+        "binary_sha256": "1ba8d82466331dc9551e8f5c031a79f8a5cd367a3b1ab9dcb9f7009e3a831862",
+        "source_sha256": {
+          "peel.rs": "cfd8b4eba8f1b18a6f443eeea5d619e5bc81091aec167e2ffcd64a5ae6935414",
+          "tests.rs": "dff02c0b2757464af9c25ec2d3e516804e548defa2b40f858306298dac28b131",
+          "sample.rs": "7d09557442ba23eefb4e138ee5f63f6b6b66f69dea1f39ecd6df9f022f7c9a75",
+          "tests.log": "c7f6b058f5af250b44533ae6eb0287aa84e25b2732e4151e4431d63e60e3cd3b",
+          "proposal.md": "836a2f4d63262a51a43314ef1be1a678712766c1f65ae6b42730c016e129ec26",
+          "recursive.patch": "134f751209d2c41fc26bf23a1fc33c0ad2617f10fe5cef3e42608a0ce649d5b2",
+          "algebra-owner.rs": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e",
+          "regions-owner.rs": "b677126ff7c772b6d4c14439aed7684db8b98141bdb1fac819ebb888fc200724",
+          "owner-snapshot.json": "e22f550b71398e4bbc2495e9eec80247fbca73a7355989331ce921092558fea9",
+          "sample-build-command.json": "23f43dee5d2a93a24b2451baaf9b5445a0dc43a6c2d349118fe60dcb873b124b"
+        },
+        "command": [
+          "taskset",
+          "-c",
+          "33",
+          "/common/dev/amflow/target/single-mass-peel/ft-80-eps10/sample",
+          "ft",
+          "80",
+          "112",
+          "10",
+          "/common/dev/amflow/target/single-mass-peel/ft-80-eps10/cache"
+        ],
+        "working_directory": "/common/dev/amflow/target/single-mass-peel/ft-80-eps10",
+        "cpu": 33,
+        "rayon_threads": 1,
+        "wall_cap_seconds": 1800,
+        "address_space_cap_bytes": 17179869184,
+        "reduction_limits": {
+          "max_depth": 3,
+          "max_targets": 65536,
+          "max_sector_batch": 32,
+          "max_exact_frontier": 512,
+          "max_backward_frontier": 1024,
+          "native_workers": 1
+        },
+        "numerical_limits": {
+          "max_steps": 1000,
+          "max_precision_attempts": 3
+        }
+      },
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_seconds": 1.4198715551756322,
+        "finished_utc": "2026-10-05T01:02:44.221078+00:00",
+        "peak_children_rss_kib": 695792,
+        "stdout_sha256": "25050ef511dd6eb0295b3f881d76bfa2c7cbe4456ffa90ce7282ac8073ced956",
+        "events_sha256": "8f86fb5a76af1fe4f118c396ad219e57b15f0084a546319e91344c2da24994a9",
+        "provenance_sha256": "9c6229130c829c480758c4513cd5ad430da93ee18ed303f9b183ffbb9eae2009"
+      },
+      "values": {
+        "value_re": "27.547495364080180220719944183656930017782207157566014157338855364041936618792211111692",
+        "value_im": "0"
+      },
+      "result_sha256": "8c6caf838147ef15bf55a2d34c7c9ac20b549385a31b1a887548709a768146dc"
+    },
+    {
+      "directory": "target/single-mass-peel/peel-60-eps11",
+      "provenance": {
+        "scope": "one exact nonzero epsilon sample; no Laurent acceptance",
+        "mode": "peel",
+        "working_decimal_digits": 60,
+        "series_order": 80,
+        "epsilon": "1/11",
+        "requested_comparison_digits": 20,
+        "started_utc": "2026-10-05T01:03:23.124418+00:00",
+        "repository_head_at_launch": "c202ed46643d48d8e352681901443b0af53a65da",
+        "archive_library_sha256": "ceaffde8c9abe60e839b5ca892048a166459cd1591745cb4615be45ae2991096",
+        "binary_sha256": "1ba8d82466331dc9551e8f5c031a79f8a5cd367a3b1ab9dcb9f7009e3a831862",
+        "source_sha256": {
+          "tests.log": "c7f6b058f5af250b44533ae6eb0287aa84e25b2732e4151e4431d63e60e3cd3b",
+          "regions-owner.rs": "b677126ff7c772b6d4c14439aed7684db8b98141bdb1fac819ebb888fc200724",
+          "recursive.patch": "134f751209d2c41fc26bf23a1fc33c0ad2617f10fe5cef3e42608a0ce649d5b2",
+          "sample.rs": "7d09557442ba23eefb4e138ee5f63f6b6b66f69dea1f39ecd6df9f022f7c9a75",
+          "algebra-owner.rs": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e",
+          "owner-snapshot.json": "e22f550b71398e4bbc2495e9eec80247fbca73a7355989331ce921092558fea9",
+          "peel.rs": "cfd8b4eba8f1b18a6f443eeea5d619e5bc81091aec167e2ffcd64a5ae6935414",
+          "proposal.md": "836a2f4d63262a51a43314ef1be1a678712766c1f65ae6b42730c016e129ec26",
+          "tests.rs": "dff02c0b2757464af9c25ec2d3e516804e548defa2b40f858306298dac28b131",
+          "sample-build-command.json": "23f43dee5d2a93a24b2451baaf9b5445a0dc43a6c2d349118fe60dcb873b124b"
+        },
+        "command": [
+          "taskset",
+          "-c",
+          "33",
+          "/common/dev/amflow/target/single-mass-peel/peel-60-eps11/sample",
+          "peel",
+          "60",
+          "80",
+          "11",
+          "/common/dev/amflow/target/single-mass-peel/peel-60-eps11/cache"
+        ],
+        "working_directory": "/common/dev/amflow/target/single-mass-peel/peel-60-eps11",
+        "cpu": 33,
+        "rayon_threads": 1,
+        "wall_cap_seconds": 1800,
+        "address_space_cap_bytes": 17179869184,
+        "reduction_limits": {
+          "max_depth": 3,
+          "max_targets": 65536,
+          "max_sector_batch": 32,
+          "max_exact_frontier": 512,
+          "max_backward_frontier": 1024,
+          "native_workers": 1
+        },
+        "numerical_limits": {
+          "max_steps": 1000,
+          "max_precision_attempts": 3
+        }
+      },
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_seconds": 3.9299772139638662,
+        "finished_utc": "2026-10-05T01:03:30.314005+00:00",
+        "peak_children_rss_kib": 30720,
+        "stdout_sha256": "dd141198fff80cabf47e9a5acfe9247cbc0b7e3e3abc3036e3b77a1fa078eebf",
+        "events_sha256": "bbeb793fd1eb47360151bd94c4d8ea9762725b5a5ea91b17e8cda4be6928b6ec",
+        "provenance_sha256": "e92c236f977106cda24f752bc07463c28054376393cc6652ec85e0277cbc1b18"
+      },
+      "values": {
+        "child_re": "-9.211053466293016449812884009433823571572734514423133690490918155745",
+        "child_im": "1.346023311571486728865943748260462765561366663567860735446464725200e-61",
+        "value_re": "29.40826197515665609230230874433032241301652705803157775588261474740",
+        "value_im": "-4.297467853836357770757070430262053606940491337791795736327667190223e-61"
+      },
+      "result_sha256": "7500fc6ffb23d906861d26a6920a3473c6c61e7483e1c8c5cf53e43d94929a86"
+    },
+    {
+      "directory": "target/single-mass-peel/peel-80-eps11",
+      "provenance": {
+        "scope": "one exact nonzero epsilon sample; no Laurent acceptance",
+        "mode": "peel",
+        "working_decimal_digits": 80,
+        "series_order": 112,
+        "epsilon": "1/11",
+        "requested_comparison_digits": 20,
+        "started_utc": "2026-10-05T01:03:34.754210+00:00",
+        "repository_head_at_launch": "c202ed46643d48d8e352681901443b0af53a65da",
+        "archive_library_sha256": "ceaffde8c9abe60e839b5ca892048a166459cd1591745cb4615be45ae2991096",
+        "binary_sha256": "1ba8d82466331dc9551e8f5c031a79f8a5cd367a3b1ab9dcb9f7009e3a831862",
+        "source_sha256": {
+          "tests.log": "c7f6b058f5af250b44533ae6eb0287aa84e25b2732e4151e4431d63e60e3cd3b",
+          "algebra-owner.rs": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e",
+          "peel.rs": "cfd8b4eba8f1b18a6f443eeea5d619e5bc81091aec167e2ffcd64a5ae6935414",
+          "regions-owner.rs": "b677126ff7c772b6d4c14439aed7684db8b98141bdb1fac819ebb888fc200724",
+          "sample.rs": "7d09557442ba23eefb4e138ee5f63f6b6b66f69dea1f39ecd6df9f022f7c9a75",
+          "owner-snapshot.json": "e22f550b71398e4bbc2495e9eec80247fbca73a7355989331ce921092558fea9",
+          "sample-build-command.json": "23f43dee5d2a93a24b2451baaf9b5445a0dc43a6c2d349118fe60dcb873b124b",
+          "tests.rs": "dff02c0b2757464af9c25ec2d3e516804e548defa2b40f858306298dac28b131",
+          "recursive.patch": "134f751209d2c41fc26bf23a1fc33c0ad2617f10fe5cef3e42608a0ce649d5b2",
+          "proposal.md": "836a2f4d63262a51a43314ef1be1a678712766c1f65ae6b42730c016e129ec26"
+        },
+        "command": [
+          "taskset",
+          "-c",
+          "33",
+          "/common/dev/amflow/target/single-mass-peel/peel-80-eps11/sample",
+          "peel",
+          "80",
+          "112",
+          "11",
+          "/common/dev/amflow/target/single-mass-peel/peel-80-eps11/cache"
+        ],
+        "working_directory": "/common/dev/amflow/target/single-mass-peel/peel-80-eps11",
+        "cpu": 33,
+        "rayon_threads": 1,
+        "wall_cap_seconds": 1800,
+        "address_space_cap_bytes": 17179869184,
+        "reduction_limits": {
+          "max_depth": 3,
+          "max_targets": 65536,
+          "max_sector_batch": 32,
+          "max_exact_frontier": 512,
+          "max_backward_frontier": 1024,
+          "native_workers": 1
+        },
+        "numerical_limits": {
+          "max_steps": 1000,
+          "max_precision_attempts": 3
+        }
+      },
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_seconds": 4.98227054765448,
+        "finished_utc": "2026-10-05T01:03:41.647400+00:00",
+        "peak_children_rss_kib": 39936,
+        "stdout_sha256": "942650ce20aaa3e9eaa0b7f2e0981ce985c5ffe51553aa4d72e8df8dc703df4d",
+        "events_sha256": "3421d5adfe7ed570e428369b0570ff1e1df482d38a8c0e37efc92d64d507695d",
+        "provenance_sha256": "c4ccbd58135416e60bf3cf4680599933ad1c9967d4709c228927a2c349f16ff0"
+      },
+      "values": {
+        "child_re": "-9.2110534662930164498128840094338235715727345144231336904909178971776686008218571466608",
+        "child_im": "6.8768984917120930119499895598732887442924110756532871289931628516822568450361498928183e-81",
+        "value_re": "29.408261975156656092302308744330322413016527058031577755882613922282391685105985143096",
+        "value_im": "-2.1955972046074696472153951284720971831765997524054824478837355251936931004517924123937e-80"
+      },
+      "result_sha256": "84b6beaf896625634033857e9b9990579c60169ff1150f45b1f73bb6311a67f4"
+    },
+    {
+      "directory": "target/single-mass-peel/ft-60-eps11",
+      "provenance": {
+        "scope": "one exact nonzero epsilon sample; no Laurent acceptance",
+        "mode": "ft",
+        "working_decimal_digits": 60,
+        "series_order": 80,
+        "epsilon": "1/11",
+        "requested_comparison_digits": 20,
+        "started_utc": "2026-10-05T01:03:30.424865+00:00",
+        "repository_head_at_launch": "c202ed46643d48d8e352681901443b0af53a65da",
+        "archive_library_sha256": "ceaffde8c9abe60e839b5ca892048a166459cd1591745cb4615be45ae2991096",
+        "binary_sha256": "1ba8d82466331dc9551e8f5c031a79f8a5cd367a3b1ab9dcb9f7009e3a831862",
+        "source_sha256": {
+          "regions-owner.rs": "b677126ff7c772b6d4c14439aed7684db8b98141bdb1fac819ebb888fc200724",
+          "proposal.md": "836a2f4d63262a51a43314ef1be1a678712766c1f65ae6b42730c016e129ec26",
+          "algebra-owner.rs": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e",
+          "owner-snapshot.json": "e22f550b71398e4bbc2495e9eec80247fbca73a7355989331ce921092558fea9",
+          "sample-build-command.json": "23f43dee5d2a93a24b2451baaf9b5445a0dc43a6c2d349118fe60dcb873b124b",
+          "tests.rs": "dff02c0b2757464af9c25ec2d3e516804e548defa2b40f858306298dac28b131",
+          "tests.log": "c7f6b058f5af250b44533ae6eb0287aa84e25b2732e4151e4431d63e60e3cd3b",
+          "sample.rs": "7d09557442ba23eefb4e138ee5f63f6b6b66f69dea1f39ecd6df9f022f7c9a75",
+          "recursive.patch": "134f751209d2c41fc26bf23a1fc33c0ad2617f10fe5cef3e42608a0ce649d5b2",
+          "peel.rs": "cfd8b4eba8f1b18a6f443eeea5d619e5bc81091aec167e2ffcd64a5ae6935414"
+        },
+        "command": [
+          "taskset",
+          "-c",
+          "33",
+          "/common/dev/amflow/target/single-mass-peel/ft-60-eps11/sample",
+          "ft",
+          "60",
+          "80",
+          "11",
+          "/common/dev/amflow/target/single-mass-peel/ft-60-eps11/cache"
+        ],
+        "working_directory": "/common/dev/amflow/target/single-mass-peel/ft-60-eps11",
+        "cpu": 33,
+        "rayon_threads": 1,
+        "wall_cap_seconds": 1800,
+        "address_space_cap_bytes": 17179869184,
+        "reduction_limits": {
+          "max_depth": 3,
+          "max_targets": 65536,
+          "max_sector_batch": 32,
+          "max_exact_frontier": 512,
+          "max_backward_frontier": 1024,
+          "native_workers": 1
+        },
+        "numerical_limits": {
+          "max_steps": 1000,
+          "max_precision_attempts": 3
+        }
+      },
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_seconds": 1.2703348202630877,
+        "finished_utc": "2026-10-05T01:03:34.664013+00:00",
+        "peak_children_rss_kib": 15432,
+        "stdout_sha256": "6f7ffb2a0f25682de7c2558e175011f0490ce610fae35ca58d8a8004ef713447",
+        "events_sha256": "75dc67164055778faafc5b7dddad7d784228755943d3d391e01be676e130539f",
+        "provenance_sha256": "8da54a53748496d3e17c10b7809be4ac48100b04b26e0146abcfc1bdab9577fc"
+      },
+      "values": {
+        "value_re": "29.40826197515665609230230874433032241301652705803157775585094125415",
+        "value_im": "0"
+      },
+      "result_sha256": "7ee2cf616c1fa21b280e8e28f0852cc515a7fc6fa2a8276e82588fc262488e5b"
+    },
+    {
+      "directory": "target/single-mass-peel/ft-80-eps11",
+      "provenance": {
+        "scope": "one exact nonzero epsilon sample; no Laurent acceptance",
+        "mode": "ft",
+        "working_decimal_digits": 80,
+        "series_order": 112,
+        "epsilon": "1/11",
+        "requested_comparison_digits": 20,
+        "started_utc": "2026-10-05T01:03:41.749151+00:00",
+        "repository_head_at_launch": "c202ed46643d48d8e352681901443b0af53a65da",
+        "archive_library_sha256": "ceaffde8c9abe60e839b5ca892048a166459cd1591745cb4615be45ae2991096",
+        "binary_sha256": "1ba8d82466331dc9551e8f5c031a79f8a5cd367a3b1ab9dcb9f7009e3a831862",
+        "source_sha256": {
+          "proposal.md": "836a2f4d63262a51a43314ef1be1a678712766c1f65ae6b42730c016e129ec26",
+          "tests.rs": "dff02c0b2757464af9c25ec2d3e516804e548defa2b40f858306298dac28b131",
+          "owner-snapshot.json": "e22f550b71398e4bbc2495e9eec80247fbca73a7355989331ce921092558fea9",
+          "regions-owner.rs": "b677126ff7c772b6d4c14439aed7684db8b98141bdb1fac819ebb888fc200724",
+          "algebra-owner.rs": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e",
+          "sample-build-command.json": "23f43dee5d2a93a24b2451baaf9b5445a0dc43a6c2d349118fe60dcb873b124b",
+          "tests.log": "c7f6b058f5af250b44533ae6eb0287aa84e25b2732e4151e4431d63e60e3cd3b",
+          "sample.rs": "7d09557442ba23eefb4e138ee5f63f6b6b66f69dea1f39ecd6df9f022f7c9a75",
+          "recursive.patch": "134f751209d2c41fc26bf23a1fc33c0ad2617f10fe5cef3e42608a0ce649d5b2",
+          "peel.rs": "cfd8b4eba8f1b18a6f443eeea5d619e5bc81091aec167e2ffcd64a5ae6935414"
+        },
+        "command": [
+          "taskset",
+          "-c",
+          "33",
+          "/common/dev/amflow/target/single-mass-peel/ft-80-eps11/sample",
+          "ft",
+          "80",
+          "112",
+          "11",
+          "/common/dev/amflow/target/single-mass-peel/ft-80-eps11/cache"
+        ],
+        "working_directory": "/common/dev/amflow/target/single-mass-peel/ft-80-eps11",
+        "cpu": 33,
+        "rayon_threads": 1,
+        "wall_cap_seconds": 1800,
+        "address_space_cap_bytes": 17179869184,
+        "reduction_limits": {
+          "max_depth": 3,
+          "max_targets": 65536,
+          "max_sector_batch": 32,
+          "max_exact_frontier": 512,
+          "max_backward_frontier": 1024,
+          "native_workers": 1
+        },
+        "numerical_limits": {
+          "max_steps": 1000,
+          "max_precision_attempts": 3
+        }
+      },
+      "result": {
+        "returncode": 0,
+        "timed_out": false,
+        "elapsed_seconds": 1.371619754936546,
+        "finished_utc": "2026-10-05T01:03:46.144550+00:00",
+        "peak_children_rss_kib": 692880,
+        "stdout_sha256": "ffc0027b0fe99de755cb15c16d48cf037b817a986dc67622495287d3e89f9d3a",
+        "events_sha256": "adebc876c0287799ba081b378bd77dace40ab3a066ddae3ab4f1ae15816ba92e",
+        "provenance_sha256": "a9567bd44367e37835b8f4feb839066542c76bbdd235da95c9bb0b3c3616c411"
+      },
+      "values": {
+        "value_re": "29.408261975156656092302308744330322413016527058031577755882613922282391684935398902282",
+        "value_im": "0"
+      },
+      "result_sha256": "8f4bb1c1d26147295a26f2065108829528ce8aceddf82f4582bbfe9e0b813c47"
+    }
+  ],
+  "comparisons": [
+    {
+      "epsilon": "1/10",
+      "kind": "distinct_boundary_algorithms",
+      "left": [
+        "peel",
+        60
+      ],
+      "right": [
+        "ft",
+        60
+      ],
+      "absolute_complex_error": "1.924081702666844044231407284067930653062847078429932095801820596280545207582863636861245968846970120706848456223966805542444905657489075886473998198048526043382E-56",
+      "mixed_scaled_error": "6.984597609464339606928116920576711145596102771655057466330649735145946052290239049840561155208965264377332054207597100149801084992220758649853835979605035664340E-58",
+      "target_digits": 20,
+      "passed": true
+    },
+    {
+      "epsilon": "1/10",
+      "kind": "distinct_boundary_algorithms",
+      "left": [
+        "peel",
+        80
+      ],
+      "right": [
+        "ft",
+        80
+      ],
+      "absolute_complex_error": "1.285788299050005570990417990893392153878974921115743517575219036472157665235422656906678625619525847930850678670765851769927197015430274509559162688708735399601E-73",
+      "mixed_scaled_error": "4.667532499983918077445132324227898398734191224940249362514377353049202855470816115180005810892475742161558138277324340720688247344784702162263697157006585097821E-75",
+      "target_digits": 20,
+      "passed": true
+    },
+    {
+      "epsilon": "1/10",
+      "kind": "independent_precision_and_order",
+      "left": [
+        "peel",
+        60
+      ],
+      "right": [
+        "peel",
+        80
+      ],
+      "absolute_complex_error": "9.962686956126374083964845326476376294680025523240117632841051210161354298972503329791366716108142931201027861753625958172087025862192444523673060617022779986053E-60",
+      "mixed_scaled_error": "3.616549099820143094682412040633002946262057112806705885843372861439431056056531543717687867296342138348793331400938870756102680147116013797848468451170402680778E-61",
+      "target_digits": 20,
+      "passed": true
+    },
+    {
+      "epsilon": "1/10",
+      "kind": "independent_precision_and_order",
+      "left": [
+        "ft",
+        60
+      ],
+      "right": [
+        "ft",
+        80
+      ],
+      "absolute_complex_error": "1.9230983871936618792211111692E-56",
+      "mixed_scaled_error": "6.981028081780656490962348940151963647164843546400114436563739439081597884918730012453189991224563205850112344532965844431979143841017274110462949679250352015739E-58",
+      "target_digits": 20,
+      "passed": true
+    },
+    {
+      "epsilon": "1/11",
+      "kind": "distinct_boundary_algorithms",
+      "left": [
+        "peel",
+        60
+      ],
+      "right": [
+        "ft",
+        60
+      ],
+      "absolute_complex_error": "3.167349325291540781563569888260162618676686741003379013396882127224782454649065647488688133016832121733296001024827236309027200782682715251270953884736618472737E-56",
+      "mixed_scaled_error": "1.077027036812728371675377869008825508813371072393113345006145442777857763344172467287861419261743915387350973504566312157208591310877686200979617581951338790877E-57",
+      "target_digits": 20,
+      "passed": true
+    },
+    {
+      "epsilon": "1/11",
+      "kind": "distinct_boundary_algorithms",
+      "left": [
+        "peel",
+        80
+      ],
+      "right": [
+        "ft",
+        80
+      ],
+      "absolute_complex_error": "1.705862408140014129648035729751612403199246287077951781704468861856528933838459367757211079411931149558884718630829081283130631029152572243921745312619438997886E-73",
+      "mixed_scaled_error": "5.800623000370041760437857654915657105388879082786379628331641294272199354172341927228149099816877850695988813243939001202337265041153438680160344887582341918290E-75",
+      "target_digits": 20,
+      "passed": true
+    },
+    {
+      "epsilon": "1/11",
+      "kind": "independent_precision_and_order",
+      "left": [
+        "peel",
+        60
+      ],
+      "right": [
+        "peel",
+        80
+      ],
+      "absolute_complex_error": "9.303232594635369888433644339433106733694190108772262027950919885269908176881968643760573802352003089452444341724243108022582457951133300946453645182885269605334E-61",
+      "mixed_scaled_error": "3.163475829511618770962487269645565595486002735332519927334881282169266228508464354202849769807256572709455633327455117614746134834451307484777845144454508481394E-62",
+      "target_digits": 20,
+      "passed": true
+    },
+    {
+      "epsilon": "1/11",
+      "kind": "independent_precision_and_order",
+      "left": [
+        "ft",
+        60
+      ],
+      "right": [
+        "ft",
+        80
+      ],
+      "absolute_complex_error": "3.1672668132391684935398902282E-56",
+      "mixed_scaled_error": "1.076998979373481539582778347664504665809351016250517314458438501417592210927311488493054875119679527198090540827393115208588340241025612883831724754540265627746E-57",
+      "target_digits": 20,
+      "passed": true
+    }
+  ],
+  "maximum_absolute_complex_discrepancy": "3.167349325291540781563569888260162618676686741003379013396882127224782454649065647488688133016832121733296001024827236309027200782682715251270953884736618472737E-56",
+  "requested_digits_supported_by_comparisons": 20,
+  "limitations": [
+    "Only epsilon=1/10 and1/11 are evaluated; no Laurent fit has been performed.",
+    "Finite samples use the staged plan plus existing public child RecursiveBoundary. The proposed recursive call-site hunk and public-route tests still need production integration/verification.",
+    "Actual parent FT comparisons cover scalar powers111111; raised-power and nonunit-route checks currently use exact homogeneity and the independently existing analytic sunset.",
+    "AMF and FT comparisons share the reduction/algebra/continuation libraries; no independent Mathematica six-line reference is claimed.",
+    "This is a structural termination alternative, not a speedup claim. The existing FT route was faster for this small fixture.",
+    "Only ordinary positive-normalization rational rank-one vacua with one positive squared mass and nonnegative powers are admitted. Existing FT fallback remains for other supported inputs.",
+    "Rusage peak_children_rss_kib includes subprocess-launch high-water behavior and is not presented as an isolated solver memory benchmark.",
+    "Observed discrepancies much smaller than the target do not imply a broader guaranteed precision claim."
+  ],
+  "preserved_non_scientific_launch_failure": {
+    "directory": "target/single-mass-peel/peel-60-eps10",
+    "result": {
+      "returncode": 126,
+      "timed_out": false,
+      "elapsed_seconds": 0.011253835167735815,
+      "finished_utc": "2026-10-05T01:01:09.503692+00:00",
+      "peak_children_rss_kib": 15432,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "events_sha256": "45d4d4395844322390d93e06b45f0301ff8c00c8a4a26314f8b93049976caa80",
+      "provenance_sha256": "e97f1de88466f3c151221370950267945880e122f41018c783c4699909d69806"
+    },
+    "reason": "Initial harness copyfile did not retain executable mode; corrected with copymode before any numerical evaluation."
+  },
+  "proposed_next_acceptance": "Compile and verify actual recursive dispatch/child memo/provider order, then public solve_integrals through epsilon^0 at20 requested digits with independent fit refinement under separately declared finite limits."
+}

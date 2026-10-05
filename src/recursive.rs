@@ -153,6 +153,18 @@ impl<'a> RecursiveBoundary<'a> {
                 Some(p.zero())
             } else if let Some(value) = vacuum_terminal(family, &target, epsilon, p)? {
                 Some(value)
+            } else if let Some(plan) = crate::vacuum_peel::SingleMassPlan::find(family, &target)? {
+                // Homogeneity removes one massive radial integration. The child
+                // has strictly fewer loops and uses this same boundary provider.
+                let child = self.child(BTreeSet::from([problem.clone()]));
+                let value = child.evaluate(&plan.child, &plan.target, epsilon, p)?;
+                let value = p.mul(&plan.prefactor(epsilon, p)?, &value);
+                if !p.finite(&value) {
+                    return Err(Error::Numerical(
+                        "nonfinite single-mass boundary value".into(),
+                    ));
+                }
+                Some(value)
             } else if family.external.is_empty()
                 && family
                     .propagators

@@ -1,0 +1,86 @@
+{
+  "status": "passed",
+  "date_utc": "2026-10-05T01:31:57.517005+00:00",
+  "scope": "Full release gate for native factor/isolate contours, cold-cache side certificates and generic single-mass vacuum recursion. Scientific finite-sample and full Laurent/physical endpoint acceptances remain distinct.",
+  "root_head_before_gate": "c202ed46643d48d8e352681901443b0af53a65da",
+  "checks": {
+    "tests": {
+      "passed": 353,
+      "failed": 0,
+      "ignored": 7
+    },
+    "doc": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    "formatting": "cargo fmt -p symbolica-amflow --check passed",
+    "clippy": "cargo clippy --release --all-targets -- -D warnings passed;8 preexisting RustRed dependency warnings",
+    "git_diff_check": "passed"
+  },
+  "commands": [
+    "cargo test --release --lib --tests",
+    "cargo test --release --doc",
+    "cargo clippy --release --all-targets -- -D warnings",
+    "cargo fmt -p symbolica-amflow --check"
+  ],
+  "source_snapshot_matches": true,
+  "archive": {
+    "status": "passed full release unit/integration/doc tests, formatting and strict Clippy",
+    "captured_utc": "2026-10-05T01:25:23.524616+00:00",
+    "source_snapshot_sha256": "54416dd79fe801bff42debe9a6759310af2eecd684f209e21138e1be80790f54",
+    "source_snapshot_matches": true,
+    "files": {
+      "target/boundary-sign-production-gate/deps/libsymbolica_amflow-d39e426db931b928.rlib": {
+        "sha256": "f602e3a25e5bcdc356a6bbfdf36246937cf379692e3ed889ae5a2ddc1623d7fb",
+        "bytes": 423436514
+      },
+      "target/boundary-sign-production-gate/deps/libsymbolica_amflow-d39e426db931b928.rmeta": {
+        "sha256": "d9b73228cf22d125feb3793c04b5977e40e42b69340e52dc1f15b0b0ebbc3087",
+        "bytes": 3205656
+      },
+      "target/boundary-sign-production-gate/deps/librustred-d70ca661149f6db6.rlib": {
+        "sha256": "3484fc124051aac01902b4fe018f00bd89a0c2af13b84f31666178f3f292a0a0",
+        "bytes": 406493312
+      },
+      "target/boundary-sign-production-gate/deps/librustred-d70ca661149f6db6.rmeta": {
+        "sha256": "453484445bee428588feb2efcf54f85b8d1c94fac7af9b6a3b83cfe8c53aac08",
+        "bytes": 36752833
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "target/boundary-sign-production-gate/tests.log",
+      "sha256": "8bdef98f113e3753737cacd1dd9c5a4a7321bc210a51fc70ac269b49aa27ec9f",
+      "bytes": 45472
+    },
+    {
+      "path": "target/boundary-sign-production-gate/doc.log",
+      "sha256": "2ce33611921487ea92f745a38164c2bce1fde18cd00f26d2a0573834bad349bf",
+      "bytes": 2905
+    },
+    {
+      "path": "target/boundary-sign-production-gate/clippy.log",
+      "sha256": "2cc95fbea3bf670cad0349d6eba7a41a8249e85081b3e839956fc397ff7b9e02",
+      "bytes": 2722
+    },
+    {
+      "path": "target/boundary-sign-production-gate/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target/boundary-sign-production-gate/source.json",
+      "sha256": "54416dd79fe801bff42debe9a6759310af2eecd684f209e21138e1be80790f54",
+      "bytes": 12078
+    },
+    {
+      "path": "target/boundary-sign-production-gate/rustred-core.json",
+      "sha256": "5489d12d0461f25c517f1f87602638d2edfb0fa3d679fd5a6693638c62721b0e",
+      "bytes": 208086
+    }
+  ],
+  "rustred_core_unchanged_vs_snapshot": true,
+  "rustred_head_and_remote_main": "1b49d2f140f91e05e035268bf5f6aa1c98f8aa26"
+}

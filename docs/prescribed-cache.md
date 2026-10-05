@@ -33,8 +33,20 @@ records the original linear-threshold failure and its focused checks.
 
 A separate [Symbolica-only root-isolation reproducer](../repros/symbolica-cross-factor-isolation/README.md)
 preserves a bounded slowdown on a degree-eight polynomial from the nonplanar
-Higgs+jet path. It is independent of endpoint classification. Its fast native
-factorization control does not establish successful physical continuation.
+Higgs+jet path. The planner now asks Symbolica to factor each exact polynomial
+before isolating its roots. Every factor's real and complex root enclosure stays
+an obstacle; the original full polynomial still determines its prescribed side.
+This avoids unnecessary native separation between unrelated factors without
+weakening the subsequent geometry checks. The new regression certifies all
+positive roots and full-polynomial signs of the actual degree-eight example.
+The side certificate evaluates the full derivative modulo the root's native
+defining polynomial, shifted exactly to its enclosure center. Directed interval
+rounding then certifies its sign, including when nearby complex roots make the
+unshifted polynomial badly conditioned. Native cached roots can have a different
+variable label; rebinding that label preserves their exact coefficients.
+The [factorization report](../reports/validation/2026-10-05-contour-factorization.json)
+records the successful complete NP contour geometry. Numerical physical
+continuation remains a separate validation step.
 
 For entire differential systems with no pole list, the shared solver initially proposes the full remaining segment, then uses up to twice the last accepted step length. This avoids repeatedly rejecting an oversized proposal at each expansion point. Taylor-tail, midpoint, endpoint and branch checks remain unchanged. Regressions cover the zero connection, exponential and polynomial systems along changing complex directions, and a sparse Taylor series with a misleading zero tail. Step-budget exhaustion remains a limit error, so cache accuracy fallback does not retry it.
 

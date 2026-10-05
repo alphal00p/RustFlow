@@ -175,16 +175,41 @@ fn certified_derivative_positive(
     p: Precision,
     context: &RunContext,
 ) -> Result<bool> {
-    let derivative = polynomial.derivative();
+    // The root cache identifies polynomials by coefficients, independent of
+    // their variable name. Rebind the exact native defining polynomial before
+    // division, preserving the full original derivative at the selected root.
+    let defining = root.defining_polynomial();
+    if defining.coefficients().iter().any(|c| !c.im.is_zero()) {
+        return Err(Error::Unsupported(
+            "a real prescription requires a rational root-defining polynomial".into(),
+        ));
+    }
+    let defining = UnivariatePolynomial::from_coefficients(
+        &Q,
+        defining
+            .coefficients()
+            .iter()
+            .map(|c| c.re.clone())
+            .collect(),
+        polynomial.get_vars(),
+    );
+    let derivative = polynomial.derivative().rem(&defining);
     let mut bits = p.bits;
     for _ in 0..4 {
         context.cancellation.check()?;
+        // Translate exactly before interval evaluation. Evaluating an expanded
+        // polynomial at a nonzero center can lose the sign through dependency
+        // and cancellation even when the certified root disk is already small.
+        // The full original P' still determines the physical side.
+        let disk = root.enclosure();
+        let offset = RealBall::from_rational_bounds(&(-disk.radius().clone()), disk.radius(), bits);
         let value = derivative
+            .shift_var(&disk.center().re)
             .map_coeff(
                 |c| RealBall::from_rational_bounds(c, c, bits),
                 FloatField::from_rep(RealBall::exact(Float::with_val(bits, 0))),
             )
-            .evaluate(&root.enclosure().to_ball(bits).re);
+            .evaluate(&offset);
         if value.is_strictly_positive() {
             return Ok(true);
         }
@@ -337,7 +362,27 @@ impl PrescribedContour {
             if polynomial.is_constant() {
                 continue;
             }
-            let roots = polynomial.isolate_roots();
+            // Each native irreducible factor owns its certified root identities.
+            // Global separation across unrelated factors is not needed here:
+            // every enclosure remains an obstacle in the unchanged geometry.
+            // Preserve the original polynomial for derivative signs below.
+            let mut roots = Vec::new();
+            for (factor, multiplicity) in polynomial.clone().to_multivariate::<u16>().factor() {
+                context.cancellation.check()?;
+                if factor.is_constant() {
+                    continue;
+                }
+                let factor = factor.to_univariate_from_univariate(0);
+                for (root, root_multiplicity) in factor.isolate_roots() {
+                    roots.push((
+                        root,
+                        multiplicity.checked_mul(root_multiplicity).ok_or_else(|| {
+                            Error::Limit("contour root multiplicity overflow".into())
+                        })?,
+                    ));
+                }
+                context.cancellation.check()?;
+            }
             context.cancellation.check()?;
             for (mut root, multiplicity) in roots {
                 context.cancellation.check()?;

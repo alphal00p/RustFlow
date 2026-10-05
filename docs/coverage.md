@@ -1,10 +1,16 @@
 # Implementation coverage
 
-The current integrated milestone passes 329 release unit/integration tests and
-one doctest, strict all-target Clippy, and formatting. It adds prescribed
-threshold continuation in the growing physical cache and CLI, a sharper
-inherited-error estimate for pure-epsilon systems, and compatible analytic
-singular-origin initialization. Separate production scientific runs pass the
+The current integrated milestone passes 353 release unit/integration tests and
+one doctest, strict all-target Clippy, and formatting. It adds topology-independent
+single-mass vacuum loop peeling and native factor/root contour certificates,
+including cold-cache derivative-side regressions. The
+[release report](../reports/validation/2026-10-05-boundary-contour-release.json)
+records the frozen source and library. Public finite-epsilon tests compare the
+new three-loop boundary route with FT under independent refinement; its full
+Laurent reconstruction and the longer nonplanar physical continuation are
+separate acceptance runs. Earlier milestones added prescribed continuation in
+the growing cache and CLI, sharper inherited-error estimates and compatible
+analytic singular-origin initialization. Separate production scientific runs pass the
 full 108-master system, all 16 crossed Higgs+jet supplied-system cases, and the
 13-master prescribed cache route. The [integrated report](../reports/validation/2026-10-04-prescribed-integration.json)
 records their distinct source/binary provenance and retained failed attempts.
