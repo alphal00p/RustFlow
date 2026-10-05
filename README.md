@@ -62,6 +62,9 @@ template keeps all HEPKit graph, kinematics, tensor and Python owners aligned.
 Python features are optional and disabled by default. The bindings are
 registered by the community host under `symbolica.community.hep.integration`.
 Actual dependency source content is included in persistent-cache identities.
+The [native Higgs+jet boundary runner](docs/gg-hg-native-boundaries.md) exercises
+the same boundary generation and refinement without Python. Its long acceptance
+runs keep completed samples separate from verified boundary values.
 
 ```sh
 nix develop

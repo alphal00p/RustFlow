@@ -1,0 +1,126 @@
+{
+  "status": "component_checks_passed_full_native_higgs_jet_acceptance_pending",
+  "runtime_revision": "6e86afd9bed4cde2d10a466fe7cb0aab4094c78b",
+  "exact_preparation": {
+    "change": "Reuse immutable exact Frobenius normalization, eigenstructure and leading logarithmic chains across numerical samples; evaluate fresh recurrences at each precision and order.",
+    "kernel_stopping_rule": "Stop only once the generalized kernel reaches the full algebraic multiplicity.",
+    "domain_checks": "Preserve uncancelled source domains through inversion, reject nongeneric sampled eigenvalue collisions, and accept exactly nonzero tiny parameters.",
+    "cache_checks": "Concurrent success reuse; cancellation does not publish an incomplete preparation; changed exact source invalidates reuse.",
+    "native_regressions_passed": 29,
+    "strict_clippy": true,
+    "logs": [
+      "target/frobenius-preparation-final.log",
+      "target/frobenius-preparation-clippy.log"
+    ]
+  },
+  "python_validation": {
+    "rustflow_runtime_commit": "6e86afd9bed4cde2d10a466fe7cb0aab4094c78b",
+    "community_commit": "92b76df0251a85b91efdbe09d793b5c740cf0e02",
+    "dependency_resolution": "Existing host shared graph with local RustFlow source override",
+    "native_install": {
+      "success": true,
+      "elapsed_seconds": 147,
+      "log": "python-frobenius-native-build.log"
+    },
+    "installed_tests": {
+      "passed": 21,
+      "elapsed_seconds": 115.41,
+      "files": [
+        "tests/test_loop_integration.py",
+        "tests/test_loop_integration_reductions.py"
+      ],
+      "log": "python-frobenius-installed-tests.log"
+    },
+    "python_clippy": {
+      "success": true,
+      "warnings_denied": true,
+      "elapsed_seconds": 8.12,
+      "log": "python-frobenius-clippy.log"
+    },
+    "notebook_initialization": {
+      "models": 1,
+      "systems": 2,
+      "physical_configurations": 16,
+      "empty_caches": true,
+      "seed_digits": 30,
+      "numerical_boundary_computation_executed": false,
+      "elapsed_seconds": 2.111755046993494,
+      "log": "python-frobenius-notebook-smoke.log"
+    },
+    "python_api_signature_changes": false,
+    "full_native_gg_hg_boundary_acceptance_executed": false
+  },
+  "native_runner": {
+    "example": "examples/gg_hg_boundaries.rs",
+    "documentation": "docs/gg-hg-native-boundaries.md",
+    "build": "release build passed against runtime revision above",
+    "smoke": {
+      "status": "passed",
+      "binary_blake3_scope": "Cargo native dev build; no long numerical fit launched",
+      "cases": [
+        {
+          "family": "pl",
+          "labels": [
+            "W-Planar_EW1-1",
+            "W-Planar_EW1-2",
+            "W-Planar_EW1-3",
+            "W-Planar_EW1-4",
+            "Z-Planar_EW1-1",
+            "Z-Planar_EW1-2",
+            "Z-Planar_EW1-3",
+            "Z-Planar_EW1-4"
+          ],
+          "euclidean_coordinates": {
+            "rustflow_gg_hg_boundaries::{}::b": "-1/50",
+            "rustflow_gg_hg_boundaries::{}::s": "-1/10",
+            "rustflow_gg_hg_boundaries::{}::t": "-1/25"
+          }
+        },
+        {
+          "family": "np",
+          "labels": [
+            "W-NP_EW1-1",
+            "W-NP_EW1-2",
+            "W-NP_EW1-3",
+            "W-NP_EW1-4",
+            "Z-NP_EW1-1",
+            "Z-NP_EW1-2",
+            "Z-NP_EW1-3",
+            "Z-NP_EW1-4"
+          ],
+          "euclidean_coordinates": {
+            "rustflow_gg_hg_boundaries::{}::b": "-1",
+            "rustflow_gg_hg_boundaries::{}::s": "-1/10",
+            "rustflow_gg_hg_boundaries::{}::t": "-1/5"
+          }
+        }
+      ],
+      "pre_cancel_exit": 130,
+      "cancellation_report": "/common/dev/amflow/target/gg-hg-harness-smoke-3jw8ny7l/cancelled/runs/Planar_EW1-euclidean-1791207859998912833-3121620/result.json",
+      "no_reference_loading": true,
+      "no_boundary_or_sample_write": true
+    },
+    "reference_policy": "Read comparison fixtures only after a complete independently refined native Laurent result; no fallback.",
+    "restart_policy": "Completed finite-epsilon vectors are binary checkpoints, separate from the verified boundary bank."
+  },
+  "nonplanar_finite_sample_probe": {
+    "status": "61 ordinary integral values returned",
+    "epsilon": "1/101",
+    "working_decimal_digits": 50,
+    "series_order": 48,
+    "elapsed_seconds": "179.333",
+    "profile": "release",
+    "source_scope": "Development snapshot of the reusable-preparation milestone before the final source-domain follow-ups; diagnostic only.",
+    "verified_laurent_digits": null,
+    "log": "target/common-mass-nonplanar-release-sample.log",
+    "result": "target/common-mass-nonplanar-release-sample.json",
+    "timing_scope": "Unmatched single-sample diagnostic, not a speedup or upstream parity measurement."
+  },
+  "remaining_acceptance": [
+    "Full native Laurent fits versus independent Euclidean anchors",
+    "Sixteen physical starting configurations generated without reference seeds",
+    "4360 reference transport coefficients and coherent20-digit amplitude observables",
+    "Completed independent refinement, forced recomputation and interruption/restart checks",
+    "Separate matched cold, resumed and warm full-workflow timings"
+  ]
+}
