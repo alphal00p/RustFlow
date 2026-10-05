@@ -1,0 +1,54 @@
+{
+  "schema": "rustflow-notebook-native-display-v1",
+  "date_utc": "2026-10-05",
+  "community_commit": "8758b93d1e1a6fed2aace41493a91be569f98a98",
+  "notebook_sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d",
+  "native_diagram_display": {
+    "status": "passed",
+    "scope": "Actual native HiggsJetAmplitude diagram generation, each native SVG and original notebook vstack formatting; no numerical boundary, populated tables, or browser pixel claim",
+    "native_diagrams": 3,
+    "model_sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+    "extension_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf",
+    "preparation_ns": 48390553136,
+    "rendering_ns": 362537898,
+    "html_bytes": 354961,
+    "html_sha256": "193fb46d9d1b7d555dd5f9b6e49673a9526e4399f58b2c57de2e7f685dfbfc4d",
+    "svg_sha256": {
+      "diagram-00.svg": "d2d46c757c790be3310b5990e4be371b0193ce0d5d07354f6e949edf565cdec8",
+      "diagram-01.svg": "bcc8e55fdf24549c8913f126ef051f28b0f90d598cfe8a9c35b0d73bf7990338",
+      "diagram-02.svg": "2c4e68d73732b5169451321c4ad0c3dd94f0bf1167c8be70f1c80fe3417b4175"
+    }
+  },
+  "programmatic_notebook_preflight": {
+    "status": "passed",
+    "scope": "Original notebook app.run with an empty native session override; prepares runner only, no populated-output or physics claim",
+    "elapsed_ns": 854312047,
+    "output_count": 9,
+    "state": "ready",
+    "cache_files": []
+  },
+  "artifact_directories": {
+    "native_diagrams": "/common/dev/amflow/target/publication-native-higgs-diagrams",
+    "empty_session_outputs": "/common/dev/amflow/target/publication-notebook-app-run-preflight"
+  },
+  "executed_display_operations": [
+    "Model.from_json(native-model.json)",
+    "HiggsJetAmplitude(model)",
+    "diagram._repr_svg_() for each amplitude.diagrams entry",
+    "mo.vstack([mo.md(\"## Native HEPKit diagrams\"), *amplitude.diagrams]).text"
+  ],
+  "executed_notebook_operations": [
+    "CalculationSession(native-model.json, empty_directory)",
+    "Original unmodified notebook app.run(defs={\"session\": session})",
+    "Every non-None output _repr_html_(), required amplitude placeholder, no generated cache files"
+  ],
+  "not_done": [
+    "Populated notebook tables from final physical cache",
+    "Browser pixel inspection or button clicks",
+    "Complete physical/refinement acceptance on final wheel"
+  ],
+  "subprocess_exit_codes": {
+    "native_diagrams": 0,
+    "empty_session_preflight": 0
+  }
+}

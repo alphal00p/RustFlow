@@ -56,5 +56,12 @@
     "owner_fix": "Being developed and validated separately; not installed or repinned in either live native calculation."
   },
   "test_harness_update": "Use current Tensor.evaluator(params=...,jit_compile=False) signature and assert native loop-integration namespace remains unavailable in browser. Numerical assertions retained.",
-  "native_runtime_and_steering_attestation": "Rechecked against the live final ggHg acceptance report after the browser run; unchanged."
+  "native_runtime_and_steering_attestation": "Rechecked against the live final ggHg acceptance report after the browser run; unchanged.",
+  "isolated_owner_fix": {
+    "pull_request": "https://github.com/alphal00p/gammaloop/pull/126",
+    "report": "reports/validation/2026-10-05-public-wheel/tensor-sequence-owner-validation.json",
+    "native_no_numpy_and_numpy": "passed",
+    "actual_browser_rerun": "pending",
+    "installed_publication_runtime_changed": false
+  }
 }

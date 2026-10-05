@@ -13,7 +13,7 @@ checks still running on the dependency graph intended for publication.
 | Exact Higgs-plus-jet inputs | Native physical families, certified 48/61 canonical basis maps, exact normalization and kinematics-dependent form-factor projections | No claim of automatic reduction or boundary coverage for every possible multiloop family |
 | Fresh physical boundaries and amplitude | An earlier frozen build completed all 16 native 30-digit configurations from empty numerical caches, all 4,360 transport coefficient comparisons, eight W/Z form factors and three coherent observables | Repeat on the publication wheel, followed by forced 40-digit regeneration and independent stability checks |
 | Independent Euclidean anchors | Publication wheel passed all 545 comparisons at 20 digits with fresh native boundaries | This prerequisite alone does not certify the physical calculation |
-| Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, native diagram display, precision/provenance tables and cache controls; initial HTML export passed | Execute the populated notebook using a copy of the completed native cache, then finish the complete headless acceptance |
+| Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; initial HTML export passed, and all three native amplitude diagrams rendered as SVG and in the notebook display container | Execute the populated notebook using a copy of the completed native cache, then finish the complete headless acceptance |
 | Packaging | Rust core release suite: 534 passed, 12 opt-in tests ignored; strict Python-feature Clippy and formatting passed. Original native wheel component suite: 206 passed, one inherited C++ export failure. Corrected tensor stubs: seven checks passed | Existing browser tensor evaluation fails on list output; an isolated owner fix passes native NumPy/no-NumPy regression checks, but its browser rerun is pending |
 
 The final publication run had completed 12 of 16 physical starting configurations
@@ -57,6 +57,12 @@ community publication remains pending the complete notebook acceptance. The
 notebook's repository-relative destination is `examples/hep/gg_hg.py`; the local
 publication checkout is `/common/dev/symbolica-community/loop-integration-publication`.
 
+The inherited tensor list-output failure has a separate
+[draft owner PR #126](https://github.com/alphal00p/gammaloop/pull/126).
+[Focused native tests](../reports/validation/2026-10-05-public-wheel/tensor-sequence-owner-validation.json)
+pass with and without NumPy on that isolated fix. The live wheel has not been
+changed, and a successful browser rerun is still required.
+
 Next are the final wheel's cold amplitude, forced cancellation/restart and
 40-digit regeneration, populated notebook execution, and copied-cache profiling.
 After those checks, publish the community update with its exact validated pins.
@@ -70,5 +76,6 @@ Evidence for this packaging milestone is in the
 [wheel component report](../reports/validation/2026-10-05-public-wheel/component-validation.json),
 [Euclidean anchors](../reports/validation/2026-10-05-public-wheel/anchor-acceptance.json),
 [initial notebook export](../reports/validation/2026-10-05-public-wheel/notebook-render-validation.json),
+[native diagram display](../reports/validation/2026-10-05-public-wheel/notebook-native-display-validation.json),
 [tensor stubs](../reports/validation/2026-10-05-public-wheel/tensor-stub-package-validation.json)
 and [browser checks](../reports/validation/2026-10-05-public-wheel/browser-validation.json).

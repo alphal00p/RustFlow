@@ -1,0 +1,79 @@
+{
+  "schema": "spynso3-upstream-sequence-fix-validation-v1",
+  "date_utc": "2026-10-05",
+  "worktree": "/common/dev/hepkit-tensor-sequence-upstream",
+  "base": "cac3a329923a6466b6d12955b166c9ba69bbb8c0",
+  "commit": "fe1f3aeaa84580c0b0881917f40dd66a096a7972",
+  "cherry_pick_source": "8df754f25d3a88c50ce9af6e6780050c075f74f8",
+  "author_and_committer": "ValentinHirschi <valentin.hirschi@gmail.com>",
+  "pull_request": {
+    "url": "https://github.com/alphal00p/gammaloop/pull/126",
+    "base_branch": "feynkit",
+    "head": "ValentinHirschi:codex/tensor-evaluator-sequences-upstream",
+    "draft": true,
+    "changed_files": 2,
+    "commit_count": 1,
+    "attached_by_parent": true,
+    "ci_enabled": false
+  },
+  "dependency_scope": {
+    "host": "Standalone native Symbolica+Spynso3 test host; official Symbolica community c340 and local patched Spynso3 plus its native owner dependencies from current feynkit base.",
+    "symbolica": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "python": "3.14.7",
+    "numpy": "2.5.3",
+    "rustflow_included": false,
+    "full_hepkit_host_included": false,
+    "live_native_pins_or_environment_changed": false,
+    "pr125_head_unchanged": "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+  },
+  "validation": {
+    "build": "PASS,1m46s",
+    "installed_evaluator_parity": "PASS,5 tests,0.593s; includes actual Symbolica list and ndarray output in isolated subprocesses, real/complex values, logical layout/metadata, sparse/dense, empty/malformed batches and scalar constants; all preexisting tests retained.",
+    "selected_owner_clippy": "PASS,cargo clippy -p spynso3 --no-deps -- -D warnings,43.71s",
+    "rustfmt": "PASS",
+    "ruff_format_and_lint": "PASS",
+    "diff_check": "PASS",
+    "negative_control": "Original a3d1 wheel failed only new list-output regression; see verification.json and baseline-regression.log.",
+    "pyodide_browser": "Pending; native list mode is not labeled browser validation.",
+    "full_repository_ci": "Not run; draft development CI disabled."
+  },
+  "commands": {
+    "build": "CARGO_TARGET_DIR=/common/dev/amflow/target/tensor-evaluator-sequences/build PYO3_PYTHON=/common/dev/amflow/target/tensor-evaluator-sequences/venv/bin/python cargo build --offline --manifest-path /common/dev/amflow/target/tensor-evaluator-sequences/native-host-upstream/Cargo.toml -j 12",
+    "tests": "PYTHONPATH=/common/dev/amflow/target/tensor-evaluator-sequences/python PYTHONDONTWRITEBYTECODE=1 /common/dev/amflow/target/tensor-evaluator-sequences/venv/bin/python /common/dev/hepkit-tensor-sequence-upstream/crates/spynso3/tests/installed_evaluator_parity.py",
+    "clippy": "CARGO_TARGET_DIR=/common/dev/amflow/target/tensor-evaluator-sequences/build PYO3_PYTHON=/common/dev/amflow/target/tensor-evaluator-sequences/venv/bin/python cargo clippy --locked --offline --manifest-path /common/dev/amflow/target/tensor-evaluator-sequences/native-host-upstream/Cargo.toml -p spynso3 --no-deps -j 12 -- -D warnings"
+  },
+  "artifacts": [
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/upstream-build.log",
+      "sha256": "119b74d5801858f48806e2b5bd330e189a932e3b4113ebd5ac5aa70856b41209"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/upstream-regression.log",
+      "sha256": "c0ac97052f4c8520bf9e3dd7f7489d35b94099c3582c3c3980dd6e1925d54704"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/upstream-clippy.log",
+      "sha256": "05cd61cd70c45a05340a19df14adc85c52408a3b0169946026a5f7e2934ac066"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/build/debug/libcore.so",
+      "sha256": "e3aeace23e88e98c4b9f35b0dcf689ed021f121402e5200baf9b0ff84a75c6f1"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/native-host-upstream/Cargo.toml",
+      "sha256": "9ff605021fcf0b10a9098efe25fb5afea1ed295743fa39317818121c845e8bc8"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/native-host-upstream/Cargo.lock",
+      "sha256": "36f7037164c817e032925f722f23ea46d49e760b39ade9b115c4e853487d80b1"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/upstream-pr-body.md",
+      "sha256": "ac7907d1e3f9656205f8ad151b798059adfb1a7e1446ddf727c7c08fb90aa0d8"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/libcore-a3d1-pylist-fix.so",
+      "sha256": "5dccc6eea121fa2dd7ba7f26ea506458aea12a62640a5a0fcb42f8df63637528"
+    }
+  ]
+}
