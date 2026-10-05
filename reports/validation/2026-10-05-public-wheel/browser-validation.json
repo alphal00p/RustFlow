@@ -1,0 +1,60 @@
+{
+  "status": "browser_build_passed_runtime_defect_in_upstream_owner",
+  "scope": "Actual full community browser wheel compilation, inherited runtime smoke checks, and separate native-loop-integration exclusion check. No numeric ggHg acceptance is claimed here.",
+  "build": {
+    "command": [
+      "bash",
+      "scripts/build_wasm_performance.sh",
+      "/common/dev/amflow/target/publication-wasm-wheels"
+    ],
+    "exit_code_including_original_smoke_test": 1,
+    "compiled_profile": "release-performance",
+    "cargo_reported_compile_duration": "30m50s",
+    "compilation_passed": true,
+    "inputs_unchanged": true,
+    "wheel": {
+      "path": "/common/dev/amflow/target/publication-wasm-wheels/symbolica-3.0.0-cp314-abi3-pyemscripten_2026_0_wasm32.whl",
+      "size_bytes": 40893742,
+      "sha256": "4435a411f24c6ca0ed2fc794552501249570ada68f3287d3c0373efd22606cba"
+    },
+    "log_sha256": "6bb62fa238c0846d4b0b0abff8a845cba9fb56634d60f41a958bba1e78d7f65c"
+  },
+  "toolchain": {
+    "rust": "1.98.0",
+    "pyodide_build": "0.39.0",
+    "pyodide_runtime": "314.0.7",
+    "emscripten": "5.0.3",
+    "node": "24.19.0",
+    "build_job_limit": 4
+  },
+  "native_exclusion_probe": {
+    "status": "passed",
+    "native_loop_integration_absent": true,
+    "existing_hepkit_namespace_preserved": true,
+    "existing_integration_namespace_preserved": true,
+    "shared_kernel_algebra_passed": true,
+    "platform": "emscripten",
+    "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+    "wheel": "/common/dev/amflow/target/publication-wasm-wheels/symbolica-3.0.0-cp314-abi3-pyemscripten_2026_0_wasm32.whl",
+    "wheel_sha256": "4435a411f24c6ca0ed2fc794552501249570ada68f3287d3c0373efd22606cba",
+    "pyodide_runtime": "/common/dev/hyperbolica/target/hepkit-integration/xbuildenv/314.0.7/xbuildenv/pyodide-root/dist"
+  },
+  "runtime_smoke": {
+    "status": "failed",
+    "current_test_source_sha256": "a6ffd5ce42bc3e43b36beb94ee3f1f599e5b61dfb94d26c5eb7477130f1e06d4",
+    "log_sha256": "95b3d838699ff446622f0e51204a15ce8c5b8affc34d80635a3a33c10ab42d39",
+    "passed_before_failure": "Kernel algebra/integration; offline QCD process, 48 two-loop diagrams, cross sections, networks and native Typst rendering.",
+    "failure": "TensorEvaluator.evaluate_complex: AttributeError: 'list' object has no attribute 'tolist'",
+    "scope_of_defect": "Spynso3 expects ndarray.tolist but documented Symbolica sequence output is a Python list; also reproducible on native when NumPy is unavailable.",
+    "not_skipped": true
+  },
+  "upstream_provenance": {
+    "file": "crates/spynso3/src/evaluator.rs",
+    "upstream_revision": "6c707c6b77a437256eb1180da13d4d327b371d13",
+    "pinned_revision": "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+    "identical_git_blob": "4fdf8a2de273eeee08cd68057bce7f6920b62740",
+    "owner_fix": "Being developed and validated separately; not installed or repinned in either live native calculation."
+  },
+  "test_harness_update": "Use current Tensor.evaluator(params=...,jit_compile=False) signature and assert native loop-integration namespace remains unavailable in browser. Numerical assertions retained.",
+  "native_runtime_and_steering_attestation": "Rechecked against the live final ggHg acceptance report after the browser run; unchanged."
+}

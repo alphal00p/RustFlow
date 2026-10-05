@@ -1,0 +1,246 @@
+{
+  "schema": "rustflow-readonly-warm-cache-audit-v1",
+  "date_utc": "2026-10-05",
+  "scope": "Source-level audit of historical exact warm ggHg cache hits; no native calls, benchmarks, installs, cache loads or live-bank writes performed.",
+  "historical_observation": {
+    "warm_transport_seconds": 69.437283096,
+    "configurations": 16,
+    "cache_entries": 48,
+    "all_cache_hits": true,
+    "ode_steps": 0,
+    "restart_stage_seconds": 75.394976536,
+    "qualification": "Measured historical stage wall times include controller persistence. No timings for individual causes are available; this report predicts no speedup."
+  },
+  "source_graph": {
+    "rustflow_numerical_core": "4c483581",
+    "rustflow_checked_head": "5fd37ce50e02463bd65d374cb847acd6c8bd4c30",
+    "community_historical_head": "66d571392cf75cef67625b1bb33e771cb0b371d5",
+    "symbolica": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustred": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "files": [
+      {
+        "path": "/common/dev/amflow/src/physical_transport.rs",
+        "sha256": "7c6c699acb9f6b3b141633d0062501e4e3cc025b5d5e07595b9fea7b77ea64cb",
+        "identical_to_historical_core_4c483581": true
+      },
+      {
+        "path": "/common/dev/amflow/src/transport_cache.rs",
+        "sha256": "77d3215ddc4abd797b07d46ee57d0d1c56cb4a507324f18fda8bd0290db65cde",
+        "identical_to_historical_core_4c483581": true
+      },
+      {
+        "path": "/common/dev/amflow/src/python/types.rs",
+        "sha256": "b1681cdb6ea94835557a29f02a37197f9b104c18acaa6a14e3906540d5437c15",
+        "identical_to_historical_core_4c483581": true
+      },
+      {
+        "path": "/common/dev/amflow/src/python/gg_hg.rs",
+        "sha256": "a06a634673d684b5dff71f503178bd3953908aad9317484a8486439025025a70",
+        "identical_to_historical_core_4c483581": true
+      },
+      {
+        "path": "/common/dev/amflow/src/gg_hg/workflow.rs",
+        "sha256": "cbdbb2991084687207f115e7f202f646c43b94151bfc074f3fafadb28808b406",
+        "identical_to_historical_core_4c483581": true
+      },
+      {
+        "path": "/common/dev/amflow/src/cache.rs",
+        "sha256": "20196933dfb0ab9e379fd8e674d2b371f1de980aaa04b18f0258803e2331028c",
+        "identical_to_historical_core_4c483581": true
+      },
+      {
+        "path": "/common/dev/amflow/fixtures/gg-hg/integral-systems.json",
+        "sha256": "c9db3346312a724abf8cc153ed511eaa9ebd14da68b17655827c4d54cc298c5d",
+        "identical_to_historical_core_4c483581": true
+      }
+    ],
+    "controller": {
+      "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_support.py",
+      "sha256": "6c4b1030265072ca44e68fe25ecf3419ca54235c3c5d8a6d75890490b73068eb"
+    }
+  },
+  "call_path": [
+    {
+      "file": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_support.py",
+      "lines": [
+        45,
+        272,
+        280,
+        289
+      ],
+      "finding": "Session constructs two systems once, then each transport stage performs 16 sequential system.evaluate calls and unconditionally saves the whole cache after every call, including exact hits."
+    },
+    {
+      "file": "/common/dev/amflow/src/python/gg_hg.rs",
+      "lines": [
+        104,
+        246,
+        266
+      ],
+      "finding": "PyHiggsJetIntegralSystem retains Arc<HiggsJetIntegralSystem>; evaluate reuses it and holds the cache mutex through evaluation/result conversion. The per-result native elapsed_nanoseconds excludes the following Python save."
+    },
+    {
+      "file": "/common/dev/amflow/src/physical_transport.rs",
+      "lines": [
+        545,
+        580,
+        654,
+        668,
+        686,
+        710
+      ],
+      "finding": "Native selection runs before the exact-coordinate/germ hit branch. A successful exact hit returns before connection pullback, compile or transport; no dense DE preparation or Frobenius work repeats."
+    },
+    {
+      "file": "/common/dev/amflow/src/transport_cache.rs",
+      "lines": [
+        2176,
+        2181,
+        2199,
+        2210,
+        2234
+      ],
+      "finding": "Every save validates all retained boundaries, encodes identities and coordinates, clones all coefficients/evidence, serializes payload plus envelope, hashes, flushes, fsyncs and atomically renames."
+    },
+    {
+      "file": "/common/dev/amflow/src/transport_cache.rs",
+      "lines": [
+        1795,
+        1900,
+        1913,
+        1943
+      ],
+      "finding": "Each canonical identity encodes every entry of its dense constant matrices, including zero entries, via separate Atom::export calls. Identity deduplication applies within one snapshot only."
+    },
+    {
+      "file": "/home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4/src/atom/representation.rs",
+      "lines": [
+        2101,
+        2103
+      ],
+      "finding": "Each Atom export gathers symbols and invokes native State::export_partial before writing its expression."
+    },
+    {
+      "file": "/home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4/src/state.rs",
+      "lines": [
+        1306,
+        1315
+      ],
+      "finding": "State::export_partial also considers coefficient-variable lists when building the state header."
+    }
+  ],
+  "source_derived_counts": {
+    "qualification": "Loop/data-derived invocation counts, not profiler measurements or measured time attribution. Two identities and 48 entries are from the observed historical warm snapshot.",
+    "per_family_dense_entries": [
+      {
+        "family": "Planar_EW1",
+        "dimension": 48,
+        "letters": 36,
+        "dense_entries": 82944
+      },
+      {
+        "family": "NP_EW1",
+        "dimension": 61,
+        "letters": 75,
+        "dense_entries": 279075
+      }
+    ],
+    "matrix_atom_exports_per_save": 362019,
+    "matrix_atom_exports_for_16_saves": 5792304,
+    "boundary_validations_for_16_saves": 768,
+    "complete_snapshot_writes_and_fsyncs": 16
+  },
+  "secondary_hotspots": [
+    {
+      "file": "/common/dev/amflow/src/transport_cache.rs",
+      "lines": [
+        1462,
+        1545,
+        1567,
+        1601
+      ],
+      "finding": "The native point index is used for insertion/replacement. Selection still scans compatible entries, computes exact differences and MPFR lower bounds, and sorts candidates before recognizing a hit. It prunes full route costs once a zero-cost accepted source is found."
+    },
+    {
+      "file": "/common/dev/amflow/src/physical_transport.rs",
+      "lines": [
+        939,
+        948
+      ],
+      "finding": "GuardedCost performs straight-path admission even for an exact-coordinate candidate, before evaluate_from_source returns the hit."
+    },
+    {
+      "file": "/common/dev/amflow/src/transport_cache.rs",
+      "lines": [
+        846,
+        856,
+        865,
+        871,
+        915,
+        960
+      ],
+      "finding": "Admission validates source and target again, constructs a constant affine path, runs registered-root path checks and reduction-condition checks. Constant roots avoid nontrivial isolation, but exact specialization/conversion still repeats."
+    },
+    {
+      "file": "/common/dev/amflow/src/python/types.rs",
+      "lines": [
+        588,
+        612,
+        660,
+        728
+      ],
+      "finding": "Result construction clones the boundary and arrays; Python coefficient getters clone again when inspected. The warm controller itself does not inspect arrays in its inner transport loop, so do not conflate this with snapshot serialization."
+    },
+    {
+      "file": "/common/dev/amflow/src/transport_cache.rs",
+      "lines": [
+        1980,
+        2029,
+        2246,
+        2276,
+        2287
+      ],
+      "finding": "Restart additionally imports both exact identities, reconstructs and validates them, inserts/validates all entries, then repeats the same 16 evaluate+save loop."
+    }
+  ],
+  "existing_reuse": [
+    {
+      "file": "/common/dev/amflow/src/cache.rs",
+      "lines": [
+        92,
+        138,
+        151,
+        157,
+        183
+      ],
+      "finding": "Reduction cache already reuses a native Symbolica state snapshot when encoding many atoms and an AtomDecoder state map when importing them. Physical cache currently uses one self-contained Atom export/import per matrix entry. Generalize/reuse owner serialization APIs and this existing pattern instead of inventing expression serialization."
+    },
+    {
+      "file": "/common/dev/amflow/src/physical_transport.rs",
+      "lines": [
+        66,
+        392
+      ],
+      "finding": "RustFlow already retains immutable exact canonical system and BoundaryIdentity, and the Python Arc preserves this owner across all configurations. Rebuilding this object is not the warm bottleneck."
+    }
+  ],
+  "future_profiling_plan": [
+    "Wait until the final cold/refined bank is archived. Make a separate copy and record bank digest, executable/extension digest, core/dependency fingerprints and process symbol initialization; never benchmark the live bank.",
+    "Using the matching immutable runtime, separately time initial load, evaluate-only all16 at exact coordinates, save-only the unchanged bank into an isolated output directory, and the original combined controller loop. Reuse exact same identities/root germs/ranges/accuracy.",
+    "Use the existing result.elapsed_nanoseconds per evaluate and perf_counter_ns around save. Confirm all16 hits, zero steps, zero inserted points, identical coefficients/errors/provenance, and untouched input-bank hash before attributing latency.",
+    "If save dominates, profile nested validation vs StoredIdentity::encode/Atom::export vs bincode/hash vs fsync on the copied bank. Count serialized matrix atoms and payload bytes; inspect CPU versus I/O time. Do not attach a profiler to the running acceptance process.",
+    "Only if evaluate-only remains material, instrument cache candidate distances, target/source guard validation and constant-path root checks in an isolated source graph. Preserve cancellation, typed failures and all identity/sheet/accuracy predicates."
+  ],
+  "safe_future_changes_to_consider": [
+    "At controller level skip saves when the known persisted bank is unchanged. A cache hit with zero insertions is insufficient by itself if the destination file has never been written, was removed, or the in-memory bank changed earlier. Perform required initial persistence and track mutations since that successful write.",
+    "An internal mutation generation should change on stronger-evidence replacements as well as new entries; length alone cannot detect changes. Clear dirty state only after successful atomic save, keyed by destination. Keep shared-writer merge/serialization semantics and failure/cancellation durability.",
+    "Reuse native Symbolica state serialization across many atoms or memoize immutable identity encoding per source-compatible snapshot. Any codec migration must preserve source/dependency digest rejection, exact symbols, precision and corruption checks; support or explicitly version old caches.",
+    "A future exact-point index fast path must still enforce source identity, exact coordinate equality, germ, epsilon coverage, accuracy, coordinate precision, kind and caller policy. Do not bypass arbitrary user TransportCost policy or prescribed homotopy admission merely because distance is zero."
+  ],
+  "not_done": [
+    "No changes to frozen controller, cache codec, numerical source or installed runtime.",
+    "No copied-bank profiling has yet been run.",
+    "No measured or promised speedup.",
+    "This audit is independent of the still-running 40-digit full16 acceptance."
+  ]
+}

@@ -270,5 +270,10 @@
     "native_verified_digits": 20,
     "reference_accuracy_cap_digits": 40,
     "native_reference_difference_is_not_an_accuracy_upgrade": true
+  },
+  "followup_validation": {
+    "corrected_tensor_stub_package": "reports/validation/2026-10-05-public-wheel/tensor-stub-package-validation.json",
+    "browser_build_and_exclusion": "reports/validation/2026-10-05-public-wheel/browser-validation.json",
+    "warm_cache_source_audit": "reports/validation/2026-10-05-public-wheel/warm-cache-audit.json"
   }
 }
