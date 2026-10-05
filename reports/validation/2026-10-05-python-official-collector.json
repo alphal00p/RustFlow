@@ -1,0 +1,130 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-05T17:49:20.982947+00:00",
+  "graph": {
+    "rustflow_runtime": "4c48358185ec68de86f6acc6b195a201adbe2bae",
+    "root_head_at_validation": "196e3c919754f1f5d68269d49dc557e15465c1f5",
+    "root_runtime_tree_matches_pinned_core": true,
+    "symbolica_numerica_graphica": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustred": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "hepkit_owner": "fc9ee6aa59eeb7b89ac76c3ceb5efb11bb794b1c"
+  },
+  "community": {
+    "commit": "5296ca4b0d0679b1d5e2f03d9e76abd59da98486",
+    "worktree_clean": true,
+    "commit_author": "ValentinHirschi <valentin.hirschi@gmail.com>",
+    "commit_committer": "ValentinHirschi <valentin.hirschi@gmail.com>",
+    "publication": "local only; no push"
+  },
+  "profile": "release",
+  "checks": {
+    "locked_native_and_stub_metadata": {
+      "passed": true,
+      "one_symbolic_owner_per_graph": true
+    },
+    "stub_generation": {
+      "passed": true,
+      "build_seconds": 905,
+      "tracked_output_unchanged": true
+    },
+    "native_build": {
+      "passed": true,
+      "build_seconds": 438
+    },
+    "strict_python_feature_clippy": {
+      "passed": true,
+      "seconds": 92
+    },
+    "typing": {
+      "passed": true,
+      "fixtures": [
+        "community_layout.py",
+        "integration.py",
+        "loop_integration.py",
+        "scoped_reductions.py"
+      ]
+    },
+    "numerical_scoped": {
+      "passed": 21,
+      "seconds": 37.72
+    },
+    "controller_notebook": {
+      "passed": 27,
+      "deselected": 245,
+      "seconds": 13.31,
+      "actual_marimo_clean_session": true
+    },
+    "existing_api_interoperability": {
+      "passed": 24,
+      "seconds": 1.38
+    },
+    "total_installed_test_cases": 72
+  },
+  "runtime_attestation": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "9f3fb219752cd2b3bebc7f6f1baa58000622491dab68cb4aec8824bdb0cef095"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/symbolica-community/loop-integration/python/symbolica/core.abi3.so",
+      "size_bytes": 346164896,
+      "sha256": "79241c85373fe8590c6ba896d2860ee2b4a8f870776a2f0084af16a8710bb614"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 20566,
+        "sha256": "d3a5f9e104357a5d5c21753f5d27d54521ceafc1ce8c80049b574821df62bea7"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_support.py",
+        "size_bytes": 16451,
+        "sha256": "6c4b1030265072ca44e68fe25ecf3419ca54235c3c5d8a6d75890490b73068eb"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/python-integration-venv/bin/python"
+    }
+  },
+  "logs": {
+    "stub_generation": {
+      "path": "/common/dev/amflow/target/python-4c483581-stubgen.log",
+      "sha256": "f986405c798971046ffbd45e57b62ef33869da04464bf339ea5ceec271cf7581"
+    },
+    "native_build": {
+      "path": "/common/dev/amflow/target/python-4c483581-native-build.log",
+      "sha256": "608ef2a830d9ca3f6aebddb4c0027e465ebe42c51d34e6eeb452f167c325dc1b"
+    },
+    "typing": {
+      "path": "/common/dev/amflow/target/python-4c483581-typing.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    },
+    "clippy": {
+      "path": "/common/dev/amflow/target/python-4c483581-clippy.log",
+      "sha256": "f5c6cf43d1482f2adda2bd3ba3bde2284189e6f5bdee76c8d8926c542599d262"
+    },
+    "numerical_scoped": {
+      "path": "/common/dev/amflow/target/python-4c483581-numerical-tests.log",
+      "sha256": "9b2b381eabaea0fef7395a9e91864943139daf80e793394fe1e3ba41b3200cde"
+    },
+    "controller_notebook": {
+      "path": "/common/dev/amflow/target/python-4c483581-notebook-tests.log",
+      "sha256": "27f91ec58f7934f23ee87efca358ad7e67224683a0ecbb2f7472c6c90d2f108b"
+    },
+    "existing_api_interoperability": {
+      "path": "/common/dev/amflow/target/python-4c483581-interop-tests.log",
+      "sha256": "456b896e120a6450003a717029a629d39e63de315f72f7b972a684624bd9dfe4"
+    }
+  },
+  "full_native_acceptance": "not launched: waiting for independent physical NP30 gate and root decision; API and notebook smoke success is not amplitude acceptance",
+  "numerical_options": {
+    "series_order": 96,
+    "seed_digits": 30,
+    "guard_digits": 60,
+    "boundary_max_steps": 2000,
+    "physical_transport_max_steps": 1000
+  },
+  "shared_cargo_target_released": true
+}
