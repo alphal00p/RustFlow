@@ -37,7 +37,8 @@ fn main() {
         .args(["--filter-platform", &env::var("TARGET").unwrap()]);
     // The standalone invocation must also resolve enabled optional Python crates.
     // In a host, its dependency declaration supplies these features.
-    if host_manifest == own_manifest.canonicalize().unwrap() {
+    let standalone = host_manifest == own_manifest.canonicalize().unwrap();
+    if standalone {
         if env::var_os("CARGO_FEATURE_PYTHON_STUBGEN").is_some() {
             command.args(["--features", "python_stubgen"]);
         } else if env::var_os("CARGO_FEATURE_PYTHON").is_some() {
@@ -49,12 +50,13 @@ fn main() {
     {
         command.args(["--features", &features]);
     }
-    match env::var("RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES").as_deref() {
-        Ok("1") => {
-            command.arg("--no-default-features");
-        }
-        Ok("0" | "") | Err(_) => {}
+    let no_defaults = match env::var("RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES").as_deref() {
+        Ok("1") => true,
+        Ok("0" | "") | Err(_) => false,
         Ok(_) => panic!("RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES must be 0 or 1"),
+    };
+    if no_defaults || (standalone && env::var_os("CARGO_FEATURE_DEFAULT").is_none()) {
+        command.arg("--no-default-features");
     }
     let output = command.output().expect("run Cargo dependency metadata");
     assert!(
