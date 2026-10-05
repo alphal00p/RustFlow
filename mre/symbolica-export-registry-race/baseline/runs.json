@@ -1,0 +1,35 @@
+[
+  {
+    "mode": "control",
+    "command": [
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/export-registry-race",
+      "control",
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/control.bin"
+    ],
+    "exit": 0,
+    "seconds": 0.009878810960799456,
+    "log": "mode=control bytes=51 export=Ok callback=false\nimport=Ok atom=1 trailing=0 equal=true\npost_registration_control=Ok bytes=51 atom=1 trailing=0\n"
+  },
+  {
+    "mode": "finite",
+    "command": [
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/export-registry-race",
+      "finite",
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/finite.bin"
+    ],
+    "exit": 0,
+    "seconds": 0.0052908919751644135,
+    "log": "registered finite state after count at offset 15\nmode=finite bytes=59 export=Ok callback=true\nimport=Err kind=UnexpectedEof message=failed to fill whole buffer\npost_registration_control=Ok bytes=59 atom=1 trailing=0\n"
+  },
+  {
+    "mode": "polynomial",
+    "command": [
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/export-registry-race",
+      "polynomial",
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/polynomial.bin"
+    ],
+    "exit": 0,
+    "seconds": 0.00515968119725585,
+    "log": "registered polynomial state after count at offset 23\nmode=polynomial bytes=64 export=Ok callback=true\nimport=Err kind=InvalidData message=Cannot load legacy atom format. Please export the expression using strings in the older version.\npost_registration_control=Ok bytes=130 atom=1 trailing=0\n"
+  }
+]

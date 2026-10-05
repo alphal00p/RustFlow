@@ -1,0 +1,4 @@
+registered polynomial state after count at offset 23
+mode=polynomial bytes=64 export=Ok callback=true
+import=Err kind=InvalidData message=Cannot load legacy atom format. Please export the expression using strings in the older version.
+post_registration_control=Ok bytes=130 atom=1 trailing=0

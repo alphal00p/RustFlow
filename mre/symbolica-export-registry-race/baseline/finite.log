@@ -1,0 +1,4 @@
+registered finite state after count at offset 15
+mode=finite bytes=59 export=Ok callback=true
+import=Err kind=UnexpectedEof message=failed to fill whole buffer
+post_registration_control=Ok bytes=59 atom=1 trailing=0

@@ -1,0 +1,10 @@
+{
+  "scope": "Corrected portable Cargo lock with Symbolica, Numerica and Graphica all official c340. Baseline source and measured rlib provenance remain in immutable parent bundle. Lock generation only; this portable manifest has not been used for the recorded direct-rustc baseline run.",
+  "command": "cargo generate-lockfile --offline --manifest-path target/mre/symbolica-export-registry-race/standalone-official-family/Cargo.toml",
+  "files": {
+    "Cargo.toml": "0dddb401f27254c1c7c2d286537df72dcc86533f03f1c9811f1c707bc729d18b",
+    "Cargo.lock": "508821e3f4ef92e0f7080ba1645f5c1e5bdc54ca47d68757d9b279e9f8dc05e0",
+    "main.rs": "172cd065727995d9a52087b360045550ba94b93ac73325af2a2d5bdd37b42bad",
+    "lockfile.log": "5c66f23f4a873c0e1aeb7d009496d639e35e8064845f6858f8f5a5b4c60d416c"
+  }
+}

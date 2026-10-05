@@ -1,0 +1,13 @@
+[package]
+name = "symbolica-export-registry-race"
+version = "0.0.0"
+edition = "2024"
+[workspace]
+[[bin]]
+name = "export-registry-race"
+path = "main.rs"
+[dependencies]
+symbolica = { git = "https://github.com/symbolica-dev/symbolica", rev = "c3408e4ba1d3bdd4ea55678fad50e27009be13d4", default-features = false, features = ["integer-gmp", "float-mpfr"] }
+[patch.crates-io]
+numerica = { git = "https://github.com/symbolica-dev/symbolica", rev = "c3408e4ba1d3bdd4ea55678fad50e27009be13d4" }
+graphica = { git = "https://github.com/symbolica-dev/symbolica", rev = "c3408e4ba1d3bdd4ea55678fad50e27009be13d4" }

@@ -1,0 +1,19 @@
+{
+  "scope": "Immutable baseline standalone source/evidence bundle; upstream official c340, no RustFlow dependency.",
+  "files": {
+    "main.rs": "172cd065727995d9a52087b360045550ba94b93ac73325af2a2d5bdd37b42bad",
+    "Cargo.toml": "749b6a63206c89b2f4997e93b0d6917a7f35b6e56d63c52466f0258c25e5b1c3",
+    "Cargo.lock": "959e39c338eda79594095403f4100c3a2b3da681875a59398ca7f60c8de2ffff",
+    "README.md": "1e440eadd8eb40f8703097f37727ed1b23c65d84234d750cb1aa0ae97aa12244",
+    "baseline-verification.json": "1587f74189b6418107bb80fe93757bf5bc43b5950380d4c0871917e770e384dd",
+    "build-command.json": "dc0aa255f5afb457df3f79e652b434f73433993d489b07a2f6cceabaa42f064d",
+    "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "runs.json": "58799327944e9d2f55e890f162e71c75f02455d30c01afd1762c14adc895858f",
+    "control.log": "7f2afc510013f4e06b86cd9f55496c580a47f7d109dbfa023044ae5992f8e000",
+    "finite.log": "9b541594914bae37381a3c2b9ccd6c19e282cee9d51d934ff9fc348d8b209f3b",
+    "polynomial.log": "57a246426d9765a60c35891c69a6f1ac4fad6be504e54246fe93d2b5ba176269",
+    "control.bin": "73cf665e9ca662ffc044496528c33e201b7f7acef071c2a0a8f169fd49d60bed",
+    "finite.bin": "60441aac1978517aab14f20cd2f4792c219a16a4fd99c77e6b1ccad31791fadb",
+    "polynomial.bin": "6b4e4b14fb21c5ea73c1829f84b25e907417a018231640c081d8e00ebb2a1a32"
+  }
+}
