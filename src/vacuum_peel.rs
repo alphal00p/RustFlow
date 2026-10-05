@@ -2,6 +2,7 @@
 use crate::{ComplexFloat as C, Error, Integral, IntegralFamily, Precision, Result};
 use feynkit_graph::IntegralFamily as NativeFamily;
 use feynkit_kinematics::Kinematics;
+use symbolica::domains::float::Complex;
 use symbolica::prelude::*;
 
 #[derive(Clone, Debug)]
@@ -13,21 +14,116 @@ pub(crate) struct SingleMassPlan {
     #[cfg(test)]
     pub transformation: Vec<Vec<Atom>>,
     pub determinant: Rational,
-    pub mass_squared: Rational,
+    pub mass_squared: Complex<Rational>,
     pub massive_scale: Rational,
     pub massive_power: u32,
     pub remaining_power: i64,
     pub parent_loops: usize,
 }
 
-fn rational(a: &Atom) -> Option<Rational> {
+fn gaussian(a: &Atom) -> Option<Complex<Rational>> {
     let AtomView::Num(n) = a.as_view() else {
         return None;
     };
     let symbolica::coefficient::Coefficient::Complex(c) = n.get_coeff_view().to_owned() else {
         return None;
     };
+    Some(c)
+}
+
+fn rational(a: &Atom) -> Option<Rational> {
+    let c = gaussian(a)?;
     c.im.is_zero().then_some(c.re)
+}
+
+/// Exact masses whose automatic imaginary-axis AMF route must retain the
+/// principal radial sheet. This is deliberately limited to the recognized
+/// single-mass vacuum class and a one-line vacuum tadpole with positive real
+/// quadratic normalization; it is not a general complex-mass homotopy proof.
+pub(crate) fn principal_mass_constraints(
+    family: &IntegralFamily,
+    targets: &[Integral],
+) -> Result<Vec<Complex<Rational>>> {
+    let mut masses = Vec::new();
+    if !family.external.is_empty() {
+        return Ok(masses);
+    }
+    for target in targets {
+        // Positive quadratic normalization makes Re(M²)<=0 possible only
+        // when the active line's constant has nonnegative real part. Avoid
+        // constructing a child plan for the usual real/positive-mass inputs.
+        if !family
+            .propagators
+            .iter()
+            .zip(&target.0)
+            .any(|(line, &power)| {
+                power > 0
+                    && gaussian(&line.constant)
+                        .is_some_and(|c| c.re >= Rational::zero() && !c.im.is_zero())
+            })
+        {
+            continue;
+        }
+        let mass = if family.loops.len() == 1 && target.0.iter().all(|&power| power >= 0) {
+            let active = target
+                .0
+                .iter()
+                .enumerate()
+                .filter_map(|(index, &power)| (power > 0).then_some(index))
+                .collect::<Vec<_>>();
+            if let [index] = active.as_slice() {
+                let propagator = &family.propagators[*index];
+                if let Some(scale) = rational(&propagator.scalar_products[0])
+                    && scale > Rational::zero()
+                {
+                    gaussian(
+                        &(-&propagator.constant / Atom::num(scale))
+                            .together()
+                            .cancel(),
+                    )
+                } else {
+                    None
+                }
+            } else {
+                None
+            }
+        } else {
+            SingleMassPlan::find(family, target)?.map(|plan| plan.mass_squared)
+        };
+        if let Some(mass) = mass
+            && mass.re <= Rational::zero()
+            && !mass.im.is_zero()
+            && !masses.contains(&mass)
+        {
+            // A certified scaleless target is identically zero and carries no
+            // mass sheet. Preserve the same native zero-certificate precedence
+            // as recursive boundary evaluation.
+            if crate::recursive::scaleless(family, target)? {
+                continue;
+            }
+            masses.push(mass);
+        }
+    }
+    Ok(masses)
+}
+
+pub(crate) fn validate_principal_mass_constraints(
+    masses: &[Complex<Rational>],
+    prescription: crate::Prescription,
+) -> Result<()> {
+    for mass in masses {
+        let incompatible = match prescription {
+            crate::Prescription::PlusI0 => mass.im > Rational::zero(),
+            crate::Prescription::MinusI0 => mass.im < Rational::zero(),
+        };
+        if incompatible {
+            return Err(Error::Unsupported(format!(
+                "the automatic imaginary-axis AMF route with {prescription:?} is not certified on the principal single-mass sheet for M^2={}; supply a compatible explicit continuation instead",
+                Atom::num(mass.clone())
+            )));
+        }
+    }
+    Ok(())
 }
 
 impl SingleMassPlan {
@@ -45,7 +141,7 @@ impl SingleMassPlan {
             &p.mul(&gamma(&half)?, &gamma(&a)?),
         );
         let mass = p.pow(
-            &p.rational(&self.mass_squared),
+            &p.eval(&Atom::num(self.mass_squared.clone()), &Default::default())?,
             &p.rational(&(&half - &m - &a)),
         );
         let scale = p.powi(
@@ -97,9 +193,8 @@ impl SingleMassPlan {
         let mut branches = Vec::new();
         for &i in &active {
             let d = &family.propagators[i];
-            if std::iter::once(&d.constant)
-                .chain(&d.scalar_products)
-                .any(|a| rational(a).is_none())
+            if gaussian(&d.constant).is_none()
+                || d.scalar_products.iter().any(|a| rational(a).is_none())
             {
                 return Ok(None);
             }
@@ -148,9 +243,17 @@ impl SingleMassPlan {
         let transformed = family.transform_loops(&transformation)?;
         let massive_scale =
             rational(&transformed.propagators[massive_line].scalar_products[0]).unwrap();
-        let mass_squared =
-            -rational(&transformed.propagators[massive_line].constant).unwrap() / &massive_scale;
-        if mass_squared <= Rational::zero() {
+        let mass_squared = gaussian(
+            &(-&transformed.propagators[massive_line].constant / Atom::num(massive_scale.clone()))
+                .together()
+                .cancel(),
+        )
+        .ok_or_else(|| Error::Numerical("non-Gaussian exact single-mass scale".into()))?;
+        // The radial formula continues analytically from positive M² through
+        // the plane cut along the nonpositive real axis. Off that cut the
+        // principal power is unambiguous and the massless child is unchanged.
+        // A value on the cut needs an explicit limiting prescription.
+        if mass_squared.im.is_zero() && mass_squared.re <= Rational::zero() {
             return Ok(None);
         }
 
@@ -335,7 +438,10 @@ mod tests {
         assert_eq!(plan.child.physical_propagators, 5);
         assert_eq!(plan.target, Integral(vec![1; 5]));
         assert_eq!(plan.remaining_power, 5);
-        assert_eq!(plan.mass_squared, Rational::from(3));
+        assert_eq!(
+            plan.mass_squared,
+            symbolica::domains::float::Complex::new(Rational::from(3), Rational::zero())
+        );
         exact(&plan.child.external_gram[0][0], &Atom::num(-1));
         let expected = [
             (0, [1, 0, 0, 0, 0]),
@@ -416,6 +522,46 @@ mod tests {
     }
 
     #[test]
+    fn gaussian_mass_radial_factor_matches_sunset_on_both_sides_of_the_cut() {
+        use symbolica::domains::float::Complex;
+        let p = Precision::decimal(80).unwrap();
+        let eps = Rational::from((1, 10));
+        let tiny = Rational::one() / Rational::from(10).pow(40);
+        for mass in [
+            Complex::new(Rational::from((3, 2)), Rational::from((4, 3))),
+            Complex::new(Rational::from((3, 2)), Rational::from((-4, 3))),
+            Complex::new(Rational::from(-3), tiny.clone()),
+            Complex::new(Rational::from(-3), -tiny),
+        ] {
+            for d0 in [4, 6] {
+                let dimension = Rational::from(d0) - &eps * &Rational::from(2);
+                for powers in [[1, 1, 1], [2, 3, 1]] {
+                    let mut family = sunset(Rational::one());
+                    family.dimension = d0;
+                    family.propagators[0].constant = -Atom::num(mass.clone());
+                    let plan =
+                        SingleMassPlan::find(&family, &Integral(powers.map(|x| x as i16).to_vec()))
+                            .unwrap()
+                            .unwrap();
+                    let mass_value = p
+                        .eval(&Atom::num(mass.clone()), &Default::default())
+                        .unwrap();
+                    let expected =
+                        vacuum::single_mass_sunset(powers, &mass_value, &dimension, p).unwrap();
+                    let value = p.mul(
+                        &plan.prefactor(&eps, p).unwrap(),
+                        &bubble_value(powers[1], powers[2], &dimension, p),
+                    );
+                    assert!(
+                        p.close(&value, &expected, 60),
+                        "{mass:?} {powers:?} D0={d0}"
+                    );
+                }
+            }
+        }
+    }
+
+    #[test]
     fn six_line_mass_scaling_and_raised_massive_index_follow_exact_homogeneity() {
         let p = Precision::decimal(70).unwrap();
         let base = SingleMassPlan::find(&six_line(1), &Integral(vec![1; 6]))
@@ -482,7 +628,7 @@ mod tests {
         assert!(massive.scalar_products[1..].iter().all(Atom::is_zero));
         exact(
             &massive.constant,
-            &Atom::num(-plan.massive_scale.clone() * &plan.mass_squared),
+            &(-Atom::num(plan.massive_scale.clone()) * Atom::num(plan.mass_squared.clone())),
         );
         // Reconstruct every active denominator in native child coordinates. The
         // remaining two are a scaled ordinary bubble after this chosen routing.

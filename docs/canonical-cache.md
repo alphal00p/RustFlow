@@ -40,15 +40,16 @@ fingerprints are rejected. No numerical value is migrated or assigned stronger
 accuracy during loading. Save/restart, compatible exact hits and accepted
 intermediate insertion use the existing bank implementation.
 
-The physical scope is unchanged: regular straight paths with real nonzero
-radicands and explicit local root germs. The caller's cost policy and branch
+The physical scope follows the [registered-root cache](algebraic-cache.md):
+regular affine paths with exact rational-complex coordinates, finite nonzero
+radicands, and certified endpoint root germs. The caller's cost policy and branch
 domain must also establish any integral/logarithmic monodromy. Source errors
 and independently compared transport changes remain numerical estimates, not
 interval certificates. A large working precision does not improve the recorded
 source evidence. Supported threshold crossings use the additive `evaluate_prescribed_to` API
 with an explicit prescription identity and homotopy admission; see
-[Prescribed physical routes](prescribed-cache.md). Other complex contours use
-the separate native transport interface.
+[Prescribed physical routes](prescribed-cache.md). General non-affine complex
+contours use the separate native transport interface.
 
 Validation covers progressive reuse and binary restart against an analytic
 registered-root dlog solution, independent transport through its exact dense

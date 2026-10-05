@@ -1,7 +1,28 @@
 # Implementation coverage
 
-The current integrated milestone passes 362 release unit/integration tests and
-one doctest, strict all-target Clippy, and formatting. Physical-family preparation
+The complex-domain milestone passes 380 release unit/integration tests and one
+doctest, strict all-target Clippy, and formatting. A final six-line correction
+preserves native certified-zero precedence in the new mass-sheet guard; all
+release library units, all six mass-sheet integration tests, the doctest,
+Clippy and formatting pass after that correction. Other integration tests were
+not repeated for this final change. The
+[release report](../reports/validation/2026-10-05-complex-domains-release.json)
+records both source snapshots and the preserved diagnostic failures.
+
+Regular algebraic cache paths now accept exact rational-complex invariants and
+masses, with exact root-sheet transitions and checked progressive restart.
+Single-mass vacuum recursion admits Gaussian mass squares off the real mass cut
+and reuses its massless child across masses and powers. Automatic AMF rejects
+recognized complex-mass contours whose principal sheet is uncertified, before
+reduction/cache lookup and again when evaluation options change. Compatible
+conjugate three-loop cases pass analytic homogeneity and independent refinement
+checks. These additions do not establish arbitrary complex-mass homotopy,
+algebraic singular-endpoint support or feature parity. The
+[comparison tables](benchmark-comparison.md) record current benchmark scope and
+side-by-side reference timings.
+
+The preceding physical-family milestone passes 362 release unit/integration
+tests and one doctest, strict all-target Clippy, and formatting. Physical-family preparation
 now reuses AMF's skipped initial reduction and basis refinement across every
 coordinate, with native Gaussian factorization and preserved reduction domains.
 Automatic seeds reject an unproved epsilon-dependent family pole bound before

@@ -1,0 +1,352 @@
+{
+  "status": "passed_with_explicit_scope_limits",
+  "date_utc": "2026-10-05T03:08:38.803335+00:00",
+  "scope": "Exact rational-complex regular physical-cache paths, registered-root sheet admission, Gaussian single-mass recursive boundaries and conservative automatic-AMF mass-sheet admission.",
+  "checks": {
+    "complete_release_suite_before_zero_precedence_followup": {
+      "passed": 380,
+      "failed": 0,
+      "ignored": 8
+    },
+    "complete_release_suite_doctest": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    "final_followup_release_units_and_six_mass_sheet_integration_tests": {
+      "passed": 79,
+      "failed": 0,
+      "ignored": 0
+    },
+    "final_followup_doctest": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    "formatting": "passed both gates",
+    "strict_clippy": "passed release all-targets -D warnings at both gates; eight preexisting RustRed dependency warnings",
+    "followup_source_delta": [
+      "src/vacuum_peel.rs: six-line call to the existing native scaleless certificate before retaining a mass constraint",
+      "tests/amf_mass_sheet.rs: sixth regression for symbolic and sampled exact-zero evaluation under both prescriptions"
+    ],
+    "suite_scope": "The full suite passed before the final scaleless-precedence correction. That correction was checked by all release library units, all six mass-sheet integration tests, the doctest, all-target Clippy and formatting; other integration tests were not repeated after this six-line correction."
+  },
+  "native_owners": [
+    "Symbolica Q(i) rational polynomials, conjugation, gcd, certified real-root isolation/refinement, exact remainder/shift and RealBall signs",
+    "Symbolica Complex<Rational>, exact mass substitution, MPFR complex powers/gamma and existing native matrix/routing operations",
+    "RustRed existing scaleless Analyzer through recursive::scaleless",
+    "Existing shared Taylor/root-chart transport, precision/order refinement, uncertainty propagation, cache source ranking and binary codec"
+  ],
+  "new_coverage": [
+    "Dense and canonical regular complex invariant/mass paths, including varying two independent complex coordinates",
+    "Odd and even principal-cut intersections, one-sided endpoint conventions, multiple affine windings, exact cancellation and genuine root zeros/poles",
+    "Compatible cache selection, opposite germs, progressive insertion, binary restart and transactional refusal",
+    "Connected six-line three-loop scalar and raised massive powers at exact epsilon=1/10, principal homogeneity and conjugation under 60/80 to 80/112 working-digit/order refinement",
+    "Direct recursive radial continuation near both sides of the negative mass cut with child memoization across masses and powers",
+    "Automatic-route constraints before reduction/cache access and after changed evaluation prescription",
+    "Native certified-zero targets retain precedence over irrelevant mass-sheet constraints"
+  ],
+  "numerical_metric": "New finite-sample analytic comparisons use the existing scaled absolute-relative Precision::close metric at 20 digits. These correctness runs are not new matched upstream performance measurements.",
+  "preserved_failure_and_resolution": {
+    "mass_sheet": "An additional probe on the 375-test frozen library found that upper-left M^2 with PlusI0 followed a different sheet from the principal radial formula. For the six-line three-loop scalar the ratio was exp(6*pi*i*epsilon), checked at epsilon=1/10 with scaled residual 2.4055719876e-57. Raised powers shared the phase, so checking the mass derivative alone would not detect it.",
+    "resolution": "Retain exact mass constraints in PreparedFlow; reject uncertified Re(M^2)<=0, Im(M^2)>0 with PlusI0 and the conjugate MinusI0 case in the recognized class. Do not silently reverse the prescription or substitute a topology-specific terminal result for transport.",
+    "zero_precedence": "Read-only review found a conservative rejection of the certified-zero sector [1,1,0] in [q^2-M^2,l^2,(q-l)^2]. The preserved pre-fix probe has native_scaleless=true and one retained constraint. The final implementation skips that constraint only after the existing native ProvedZero certificate."
+  },
+  "limits": [
+    "Exact Gaussian-rational coordinate admission; general algebraic coordinate constants are not covered",
+    "Regular affine cache paths; general algebraic singular endpoints and automatic physical homotopy inference remain incomplete",
+    "Root germs do not encode unrelated logarithmic monodromy; caller branch-domain and admissibility contracts remain required",
+    "Prescribed real-polynomial i0 planning remains real-only",
+    "The automatic mass guard covers recognized single-mass vacuum plans and one-active-line tadpoles with positive real quadratic normalization, not all multi-mass/linear/cut families",
+    "Exactly nonpositive real mass squares require a separate limiting prescription; the direct radial extension declines that cut",
+    "Native exact isolation calls are synchronous; bounded surrounding refinements fail explicitly when unresolved",
+    "Cache schema remains five, with source/dependency fingerprints and integrity checks still enforced"
+  ],
+  "dependencies": {
+    "symbolica_revision": "75f8350094b90254ee71dc2a391fde0d14b0204a",
+    "rustred_head_and_fetched_main": "986c427f36b280a2c741d52d0401152a1f90e4d6",
+    "consumed_rustred_files_match": true,
+    "sibling_checkouts_edited": false
+  },
+  "baseline_archive": {
+    "status": "passed complete release gate; final scaleless-precedence correction and its checks recorded separately in this report",
+    "captured_utc": "2026-10-05T03:03:45.171776+00:00",
+    "source_snapshot": {
+      "path": "target/complex-domains-guard-gate/source.json",
+      "sha256": "f1857d5ff9bd8a374d2615d2c684c87344b70bb1bd13f6dba4f9c4e5a42ebe9c",
+      "bytes": 13845
+    },
+    "files": [
+      {
+        "path": "target/complex-domains-guard-gate/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+        "sha256": "8fefc886e23e66afa56023d72fe5573e4973bdd3b01a5a9245dfdab8ac4e3072",
+        "bytes": 432856808
+      },
+      {
+        "path": "target/complex-domains-guard-gate/deps/libsymbolica_amflow-d39e426db931b928.rmeta",
+        "sha256": "a3d4f26b1919e1cbba0e6272ba73d80da6f1280d608b5ea7107acf7cf346bb2c",
+        "bytes": 3227324
+      },
+      {
+        "path": "target/complex-domains-guard-gate/deps/librustred-d70ca661149f6db6.rlib",
+        "sha256": "3484fc124051aac01902b4fe018f00bd89a0c2af13b84f31666178f3f292a0a0",
+        "bytes": 406493312
+      },
+      {
+        "path": "target/complex-domains-guard-gate/deps/librustred-d70ca661149f6db6.rmeta",
+        "sha256": "453484445bee428588feb2efcf54f85b8d1c94fac7af9b6a3b83cfe8c53aac08",
+        "bytes": 36752833
+      }
+    ],
+    "source_snapshot_matches": true,
+    "rustred-core_snapshot_matches": true
+  },
+  "final_archive": {
+    "status": "passed final focused follow-up; preceding complete release gate recorded separately",
+    "captured_utc": "2026-10-05T03:08:36.176355+00:00",
+    "source_snapshot_matches": true,
+    "rustred_snapshot_matches": true,
+    "files": [
+      {
+        "path": "target/complex-domains-zero-followup/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+        "sha256": "eafc890384dd4b8a647dcc0dd7ae8efc2d7527b97391986d65bd8951cf841dea",
+        "bytes": 432852894
+      },
+      {
+        "path": "target/complex-domains-zero-followup/deps/libsymbolica_amflow-d39e426db931b928.rmeta",
+        "sha256": "c8c2077ade9a067ff680e94ad877e0f30baf8bd6ac170f4d650f635c7c72de25",
+        "bytes": 3227348
+      },
+      {
+        "path": "target/complex-domains-zero-followup/deps/librustred-d70ca661149f6db6.rlib",
+        "sha256": "3484fc124051aac01902b4fe018f00bd89a0c2af13b84f31666178f3f292a0a0",
+        "bytes": 406493312
+      },
+      {
+        "path": "target/complex-domains-zero-followup/deps/librustred-d70ca661149f6db6.rmeta",
+        "sha256": "453484445bee428588feb2efcf54f85b8d1c94fac7af9b6a3b83cfe8c53aac08",
+        "bytes": 36752833
+      }
+    ]
+  },
+  "final_commands": {
+    "tests": {
+      "command": [
+        "cargo",
+        "test",
+        "--release",
+        "--lib",
+        "--test",
+        "amf_mass_sheet"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 219.48293389193714
+    },
+    "doc": {
+      "command": [
+        "cargo",
+        "test",
+        "--release",
+        "--doc"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 5.775830992963165
+    },
+    "clippy": {
+      "command": [
+        "cargo",
+        "clippy",
+        "--release",
+        "--all-targets",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 8.179984962102026
+    },
+    "fmt": {
+      "command": [
+        "cargo",
+        "fmt",
+        "-p",
+        "symbolica-amflow",
+        "--check"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.7839850420132279
+    }
+  },
+  "artifacts": [
+    {
+      "path": "src/algebraic.rs",
+      "sha256": "08a9fb742270b2deb646de1068ffef0cceaff76c7ec4a3d1a51f01346cb6c933",
+      "bytes": 62138
+    },
+    {
+      "path": "src/engine.rs",
+      "sha256": "569ca9d866efbed1d50c51f8768609573e3031d686c022e57e6ed091c5ba14df",
+      "bytes": 35324
+    },
+    {
+      "path": "src/lib.rs",
+      "sha256": "3326284cf48d931040b4b51e154b528f5b81e89f49f58d0577daf007d6c1145f",
+      "bytes": 1689
+    },
+    {
+      "path": "src/physical_transport.rs",
+      "sha256": "215a0b1006461235ab887b860cfd231dfe83c55d4d3cff5015003145c4ca3ee7",
+      "bytes": 39648
+    },
+    {
+      "path": "src/root_path.rs",
+      "sha256": "0ca261341c9ddb8bf6e2418dec1928254a7f1fa05ef6a49ab97f1381f0f73ade",
+      "bytes": 12475
+    },
+    {
+      "path": "src/transport_cache.rs",
+      "sha256": "4747a064e762ecb1d4049d214ca8214bc101ded72a3110fd4434a407de15b9bf",
+      "bytes": 79908
+    },
+    {
+      "path": "src/vacuum_peel.rs",
+      "sha256": "982ea36fed6fe832eae3b9f16489649c18e09c46fdf60fd91422ddd1746e28c2",
+      "bytes": 27968
+    },
+    {
+      "path": "target/amf-principal-mass-sheet/report.json",
+      "sha256": "8501ae9edc3ce640dc62ef2386443d0143e8a3bacffe8ddac1bd5349bee1d5ac",
+      "bytes": 7698
+    },
+    {
+      "path": "target/amf-principal-mass-sheet/zero-precedence-report.json",
+      "sha256": "01bda57d0e79ba3c76219d16169d175057417c7b4819063bbf1ff5e4797b7246",
+      "bytes": 2761
+    },
+    {
+      "path": "target/complex-cache-prototype/report.json",
+      "sha256": "a3220d77e8d1299b2dd82a44b5464a02d9b986aca70823ecf40ece1b722fc25b",
+      "bytes": 6868
+    },
+    {
+      "path": "target/complex-domains-guard-gate/archive.json",
+      "sha256": "7aede8c65f62756565ea494f7e26574d0a6c3b7ce8491a1d3ef843fd95753e4b",
+      "bytes": 1292
+    },
+    {
+      "path": "target/complex-domains-guard-gate/clippy.log",
+      "sha256": "ebef94e1b16b1825d1848f6b5df8ded145598db099ac37e578cd090e5f879fa2",
+      "bytes": 2721
+    },
+    {
+      "path": "target/complex-domains-guard-gate/commands.json",
+      "sha256": "9cb025a132c62b2527f0e52e8091bf0a6e93b95e97f29885175faa469478dadb",
+      "bytes": 739
+    },
+    {
+      "path": "target/complex-domains-guard-gate/doc.log",
+      "sha256": "f5b1a75d316ecc557b8cfc836c9c7166d2884cc4fd01c1cd868c9d7c45eaf59f",
+      "bytes": 2905
+    },
+    {
+      "path": "target/complex-domains-guard-gate/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target/complex-domains-guard-gate/rustred-core.json",
+      "sha256": "7648cd14f43eec26dbd91c50909a9287c6567504f8e8529ccff6b89992fa9084",
+      "bytes": 208000
+    },
+    {
+      "path": "target/complex-domains-guard-gate/source.json",
+      "sha256": "f1857d5ff9bd8a374d2615d2c684c87344b70bb1bd13f6dba4f9c4e5a42ebe9c",
+      "bytes": 13845
+    },
+    {
+      "path": "target/complex-domains-guard-gate/tests.log",
+      "sha256": "e48cad5b6ff97f85750b3845c8986fde80023d0dc714d27d069d9a905d08a874",
+      "bytes": 48448
+    },
+    {
+      "path": "target/complex-domains-zero-followup/archive.json",
+      "sha256": "26dad4d82c0029fc0bb6b88a33f0c8a0588a285fd8d238bd1f01ee638119f445",
+      "bytes": 1117
+    },
+    {
+      "path": "target/complex-domains-zero-followup/clippy.log",
+      "sha256": "d072105051df5a3ede7d41e32c96dd63f4ac9c148121e0baa27f075002f4c401",
+      "bytes": 2721
+    },
+    {
+      "path": "target/complex-domains-zero-followup/commands.json",
+      "sha256": "f7aa65311bfef9276c01e13a3a1eeb32ee4f0f401cea730f0ff3096377b3744b",
+      "bytes": 762
+    },
+    {
+      "path": "target/complex-domains-zero-followup/doc.log",
+      "sha256": "cf6aca4042cbd9313684e71ee39491c841e29ce70109af17a8eea31050ee9156",
+      "bytes": 2905
+    },
+    {
+      "path": "target/complex-domains-zero-followup/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target/complex-domains-zero-followup/source.json",
+      "sha256": "446e938f423b4a90149d080a95741a4f3ce732f20c18addc2a18c7d8f8d5ed53",
+      "bytes": 13845
+    },
+    {
+      "path": "target/complex-domains-zero-followup/tests.log",
+      "sha256": "3b35a9512c2a646130f6cb9e8942d44bdd1473bdb6e15175663ad75da54fdaab",
+      "bytes": 10385
+    },
+    {
+      "path": "target/complex-mass-gate/report.json",
+      "sha256": "b622cc5f9724b6d33c98401d0da24cae919bb85ecbda53591893ead45ed03d57",
+      "bytes": 2226
+    },
+    {
+      "path": "target/complex-mass-negative-probe/phase.log",
+      "sha256": "00600081fd73032db8a8d354dbf2ce2381c41e3d680cc8578c23ca8dd82c67d5",
+      "bytes": 487
+    },
+    {
+      "path": "target/complex-mass-negative-probe/phase.rs",
+      "sha256": "0a9834597fe958d7007105ad4a82369b168c3009b60c5edbac2e1887f85f2f1c",
+      "bytes": 730
+    },
+    {
+      "path": "target/complex-mass-negative-probe/probe.rs",
+      "sha256": "0a37291ef5fb2d0940949b6104c17c02f93bfa9731c75d507805ed6cc38b5c79",
+      "bytes": 15651
+    },
+    {
+      "path": "target/complex-mass-negative-probe/run.log",
+      "sha256": "f37fbfbe431a334c81bb8205802511ba651e7b36a1c0f32ea070f5eba0836364",
+      "bytes": 956
+    },
+    {
+      "path": "tests/algebraic_cache.rs",
+      "sha256": "bc4c1db34306cd8a5d1864d56e6ee0c6b7570bdf19853b92732425a09624a4b5",
+      "bytes": 16402
+    },
+    {
+      "path": "tests/amf_mass_sheet.rs",
+      "sha256": "e215dd6e5257b56315e7bc49e7803e67c3649e74a23175de66ba49a54071dd0c",
+      "bytes": 12730
+    },
+    {
+      "path": "tests/complex_cache.rs",
+      "sha256": "2ca0bbd737b529e8329de5fdddf26230e8f639fcc842179efbf2cf22fdc5d0ac",
+      "bytes": 18918
+    },
+    {
+      "path": "tests/single_mass.rs",
+      "sha256": "388ed1db6fe35bb13baa9aee00fa3c0e4acabbe9e19e45784063e40ffc2d490a",
+      "bytes": 15650
+    }
+  ]
+}

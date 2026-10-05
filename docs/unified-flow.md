@@ -112,10 +112,28 @@ This route follows AMFlow's `SingleMass` ending scheme and has no topology or
 loop-count list. Symbolica owns exact matrix and polynomial operations; native
 HEPKit kinematics and family completion own the child scalar products and any
 missing zero-power numerator slots. Its current admission requires nonnegative
-powers, one active positive mass square, and real rational rank-one quadratic
-denominators with positive normalization. Other cases retain the existing
+powers, one active exact rational-complex mass square off the nonpositive real
+axis, and real rational rank-one quadratic denominators with positive
+normalization. The principal mass power analytically continues the radial
+formula from positive mass square; the lower-loop massless child is unchanged
+and reused across different masses and massive powers. Values directly on the
+mass cut need a separate limiting prescription and retain the existing fallback.
+Other unsupported cases also retain the existing
 fallback. Custom terminal providers and certified scaleless sectors take
 precedence.
+
+The radial boundary formula and the automatic AMF contour have separate branch
+contracts. For recognized single-mass vacuum targets, including one-line
+tadpoles with positive quadratic normalization, the default imaginary-axis
+contour is rejected when `Re(M²) <= 0` and the nonzero imaginary mass has the
+incompatible sign: positive for `PlusI0`, negative for `MinusI0`. This check runs
+before reduction and symbolic-cache lookup, and is retained and rechecked if
+evaluation options change. Compatible conjugate contours pass principal-power
+and precision-refinement checks. Native certified-zero sectors bypass this
+irrelevant sheet constraint. This is a deliberately scoped guard, not a
+general complex-mass homotopy planner. A pole-free contour alone need not end on
+the requested sheet; direct values on the negative real mass cut also remain a
+separate limiting-prescription problem.
 
 The [finite-sample comparison](../reports/validation/2026-10-05-single-mass-vacuum-finite-samples.json)
 checks a connected three-loop six-line vacuum and its raised massive power
@@ -147,9 +165,10 @@ runs without Mathematica and preserves the independent native fit comparison.
   incomplete; the new algebraic origin initializer covers compatible analytic
   sectors.
 - Standalone continuation accepts complex paths. The reusable algebraic physical
-  cache currently admits exact real rational coordinates with nonzero real
-  radicands and explicit root germs. General complex-mass cache domains, automatic
-  causal-path inference, and degenerate Gram charts require further work.
+  cache accepts exact rational-complex coordinates on regular affine segments,
+  certifying root-sheet transitions with native exact polynomial arithmetic.
+  General algebraic coordinate constants, automatic causal-path inference,
+  degenerate Gram charts and algebraic singular endpoints require further work.
 - General Möbius/Padé transport controls remain unfinished.
 
 Benchmarks test these interfaces; family-specific fixtures do not define the

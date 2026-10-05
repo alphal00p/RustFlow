@@ -270,7 +270,8 @@ fn flow_without_guard() -> Result<RustFlow<AlgebraicKinematicSystem>> {
 }
 
 #[test]
-fn algebraic_cache_rejects_foreign_germs_nonreal_points_and_branch_points() -> Result<()> {
+fn algebraic_cache_rejects_foreign_germs_and_branch_points_but_accepts_complex_points() -> Result<()>
+{
     let s = symbols().0;
     let flow = flow(Atom::var(s), &[])?;
     let mut wrong = boundary(&flow, Atom::one(), RootSheet::Principal, &[1], 35)?;
@@ -287,7 +288,7 @@ fn algebraic_cache_rejects_foreign_germs_nonreal_points_and_branch_points() -> R
         Atom::num(Complex::new(Rational::from(1), Rational::from(1))),
         RootSheet::Principal,
     )?;
-    assert!(matches!(wrong.validate(), Err(Error::Unsupported(_))));
+    wrong.validate()?;
     assert_ne!(
         flow.identity().key(),
         flow_without_guard_squared()?.identity().key()
@@ -374,14 +375,14 @@ fn negative_real_radicand_retains_its_imaginary_physical_sheet() -> Result<()> {
 }
 
 #[test]
-fn real_endpoint_radicands_do_not_admit_a_complex_radicand_inside_the_path() -> Result<()> {
+fn real_endpoint_radicands_admit_a_regular_complex_radicand_inside_the_path() -> Result<()> {
     let s = symbols().0;
     let imaginary = Atom::num(Complex::new(Rational::from(0), Rational::from(1)));
     let flow = flow(
         Atom::one() + imaginary * Atom::var(s) * (Atom::var(s) - 1),
         &[],
     )?;
-    assert!(!flow.identity().conditions_admit_straight_path(
+    assert!(flow.identity().conditions_admit_straight_path(
         &point(Atom::new(), RootSheet::Principal)?,
         &point(Atom::one(), RootSheet::Principal)?,
         Precision::decimal(60)?,

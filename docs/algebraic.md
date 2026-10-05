@@ -59,6 +59,10 @@ the two signs; its magnitude is ignored after a scale-invariant angular sign che
 from `R` at working precision. Zero
 or ambiguous hints are errors. This does not restore precision to a boundary.
 
+Initial principal roots and endpoint germ references substitute the exact binary
+rational coordinate in the exact radicand before converting it to MPFR. This
+preserves exact cancellation and the side of the principal cut even when
+separately rounded polynomial coefficients would choose another side.
 At each accepted point, the next chart checks the radicands at exact binary
 rational coordinates corresponding to the rounded MPFR center. Root coefficients
 then use the existing rational differential-system recurrence for
@@ -80,7 +84,7 @@ Root zeros and poles join rational matrix poles in the shared step-radius
 constraints. This entrypoint transports between regular points. Algebraic
 Frobenius endpoints and arbitrary algebraic extensions are not implemented here.
 The separate [physical algebraic cache](algebraic-cache.md) supports progressive
-`RustFlowCache` reuse on regular real paths with explicit root germs. The separate
+`RustFlowCache` reuse on regular affine complex paths with certified root germs. The separate
 [prescribed-contour planner](prescribed-contours.md) constructs detours from
 explicit polynomial prescriptions; it does not infer the physical prescription
 from a scattering process. The

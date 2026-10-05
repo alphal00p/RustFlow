@@ -11,6 +11,9 @@ pub struct PreparedFlow {
     pub reduced: ReducedSystem,
     pub system: DifferentialSystem,
     epsilon_sample: Option<Rational>,
+    // Retained independently of caller-mutable evaluation options and checked
+    // on every evaluation, including systems loaded from the symbolic cache.
+    principal_mass_constraints: Vec<Complex<Rational>>,
     pub basis_refinement: Option<crate::refine::RefinementReport>,
 }
 
@@ -39,6 +42,12 @@ impl PreparedFlow {
         for target in targets {
             family.validate_integral(target)?;
         }
+        let principal_mass_constraints =
+            crate::vacuum_peel::principal_mass_constraints(&family, targets)?;
+        crate::vacuum_peel::validate_principal_mass_constraints(
+            &principal_mass_constraints,
+            options.prescription,
+        )?;
         let eta = symbol!("symbolica_amflow::eta");
         let cache = options
             .cache_directory
@@ -63,6 +72,7 @@ impl PreparedFlow {
                 system,
                 basis_refinement,
                 epsilon_sample: None,
+                principal_mass_constraints,
             });
         }
         let (auxiliary, mask) = family.deform(eta, &options.mass_mode)?;
@@ -106,6 +116,7 @@ impl PreparedFlow {
             system,
             basis_refinement,
             epsilon_sample: None,
+            principal_mass_constraints,
         })
     }
     /// Prepare at an exact regulator sample. Dimension-factorizing refinement
@@ -183,6 +194,10 @@ impl PreparedFlow {
         boundary: &dyn BoundaryProvider,
         context: &RunContext,
     ) -> Result<Vec<ComplexFloat>> {
+        crate::vacuum_peel::validate_principal_mass_constraints(
+            &self.principal_mass_constraints,
+            options.prescription,
+        )?;
         if self
             .epsilon_sample
             .as_ref()

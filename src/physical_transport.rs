@@ -273,8 +273,8 @@ impl RustFlow<AlgebraicKinematicSystem> {
         )?;
         Ok(Self { system, identity })
     }
-    /// Transport within a regular real domain. Every radicand must remain real
-    /// and nonzero; the requested local root germ is explicit. The caller's
+    /// Transport along a regular affine path with exact rational-complex coordinates.
+    /// Every radicand must remain nonzero; the requested local root germ is explicit. The caller's
     /// admissibility policy additionally controls integral/logarithmic monodromy.
     #[allow(clippy::too_many_arguments)] // Ordinary physical inputs plus the required destination root germ.
     pub fn evaluate_to(
@@ -376,7 +376,7 @@ impl RustFlow<CanonicalAlgebraicSystem> {
         Ok(Self { system, identity })
     }
     /// Use an explicit germ when roots are registered, and None otherwise.
-    /// The same real regular path and caller monodromy contract as the dense
+    /// The same regular affine path and caller monodromy contract as the dense
     /// algebraic interface applies; no dense physical matrix is assembled.
     #[allow(clippy::too_many_arguments)] // Physical transport inputs plus explicit optional root germ.
     pub fn evaluate_to(
@@ -552,7 +552,7 @@ fn evaluate_physical(
             &guarded_policy,
             p,
             &excluded,
-            mode.is_prescribed(),
+            mode.is_prescribed() || !identity.roots().is_empty(),
         )?
         else {
             return Err(if let Some(message) = last_accuracy {
@@ -656,7 +656,13 @@ fn evaluate_from_source(
             &coordinates,
             &destination,
         )?;
-        if !identity.conditions_admit_straight_path(&source.point, &target, p, options.digits)? {
+        if !identity.conditions_admit_straight_path_with_context(
+            &source.point,
+            &target,
+            p,
+            options.digits,
+            context,
+        )? {
             return Err(Error::Unsupported(
                 "selected physical path leaves the reduction domain".into(),
             ));
@@ -893,11 +899,12 @@ impl TransportCost for GuardedCost<'_> {
         self.context.cancellation.check()?;
         match self.mode {
             RouteMode::Straight => {
-                if !self.identity.conditions_admit_straight_path(
+                if !self.identity.conditions_admit_straight_path_with_context(
                     &source.point,
                     target,
                     p,
                     self.digits,
+                    self.context,
                 )? {
                     return Ok(None);
                 }

@@ -162,69 +162,10 @@ pub(crate) fn exact_real_rational(a: &Atom) -> Result<()> {
     {
         return Ok(());
     }
-    Err(Error::Unsupported("algebraic physical cache currently requires exact real rational coordinates and real nonzero radicands".into()))
-}
-
-// Native exact real isolation is enough for regular real paths. An unresolved
-// enclosures are refined through the native real interval API. Unresolved
-// endpoint overlaps are conservatively rejected, never treated as permission.
-fn excludes_unit_interval(
-    polynomial: &MultivariatePolynomial<IntegerRing, u16>,
-    parameter: Symbol,
-) -> Result<bool> {
-    if polynomial.is_constant() {
-        return Ok(!polynomial.is_zero());
-    }
-    if polynomial
-        .variables()
-        .iter()
-        .any(|v| *v != PolyVariable::Symbol(parameter))
-    {
-        return Err(Error::Unsupported(
-            "root path guard is not univariate".into(),
-        ));
-    }
-    let polynomial = polynomial
-        .to_univariate_from_univariate(0)
-        .map_coeff(|c| Rational::from(c.clone()), Q);
-    if polynomial.evaluate(&Rational::from(0)).is_zero()
-        || polynomial.evaluate(&Rational::from(1)).is_zero()
-    {
-        return Ok(false);
-    }
-    for (mut lower, mut upper, _) in polynomial.isolate_real_root_intervals() {
-        let mut separate = false;
-        for attempt in 0..32 {
-            if lower == upper {
-                if (Rational::from(0)..=Rational::from(1)).contains(&lower) {
-                    return Ok(false);
-                }
-                separate = true;
-                break;
-            }
-            if upper <= 0 || lower >= 1 {
-                separate = true;
-                break;
-            }
-            if lower >= 0 && upper <= 1 {
-                return Ok(false);
-            }
-            // The native routine has a relative-width contract; a zero
-            // midpoint is not an admissible denominator for that criterion.
-            // Such an unresolved enclosure is conservatively excluded.
-            if (&lower + &upper).is_zero() {
-                return Ok(false);
-            }
-            (lower, upper) = polynomial.refine_root_interval(
-                (lower, upper),
-                &Rational::from((1i64, 1i64 << (attempt + 2))),
-            );
-        }
-        if !separate {
-            return Ok(false);
-        }
-    }
-    Ok(true)
+    Err(Error::Unsupported(
+        "prescribed real-contour planning requires exact real rational coordinates and radicands"
+            .into(),
+    ))
 }
 
 // The registered quotient-domain owner retains raw denominator occurrences.
@@ -816,7 +757,7 @@ impl BoundaryIdentity {
         &self.0.conditions
     }
 
-    /// Check reduction assumptions along a complete real straight path. The
+    /// Check reduction assumptions and registered-root sheets along an exact affine path. The
     /// caller still owns its physical branch/homotopy admissibility policy.
     pub fn conditions_admit_straight_path(
         &self,
@@ -825,6 +766,24 @@ impl BoundaryIdentity {
         p: Precision,
         digits: u32,
     ) -> Result<bool> {
+        self.conditions_admit_straight_path_with_context(
+            source,
+            target,
+            p,
+            digits,
+            &crate::RunContext::default(),
+        )
+    }
+
+    pub(crate) fn conditions_admit_straight_path_with_context(
+        &self,
+        source: &CachedPoint,
+        target: &CachedPoint,
+        p: Precision,
+        digits: u32,
+        context: &crate::RunContext,
+    ) -> Result<bool> {
+        context.cancellation.check()?;
         self.validate_point(source)?;
         self.validate_point(target)?;
         if self.0.conditions.is_empty() && self.0.roots.is_empty() {
@@ -837,51 +796,22 @@ impl BoundaryIdentity {
             &target.rounded_coordinates_as_exact()?,
         )?;
         if !self.0.roots.is_empty() {
-            if source.root_germ() != target.root_germ() {
-                return Ok(false);
-            }
             let rules = path
                 .coordinates
                 .iter()
                 .map(|(&s, a)| (Atom::var(s), a.clone()))
                 .collect();
+            let source_germ = source.root_germ().unwrap();
+            let target_germ = target.root_germ().unwrap();
             for root in &self.0.roots {
-                let radicand = crate::family::substitute(&root.radicand, &rules)
-                    .together()
-                    .cancel();
-                let Ok(rational): Result<RationalPolynomial<IntegerRing, u16>> = radicand
-                    .try_to_rational_polynomial(&Q, &Z, None)
-                    .map_err(|_| {
-                        Error::Unsupported(
-                            "algebraic cache paths require real rational radicands".into(),
-                        )
-                    })
+                let radicand = crate::family::substitute(&root.radicand, &rules);
+                let Some(flip) =
+                    crate::root_path::principal_flip(&radicand, path.parameter, p, context)?
                 else {
                     return Ok(false);
                 };
-                if !excludes_unit_interval(&rational.numerator, path.parameter)?
-                    || !excludes_unit_interval(&rational.denominator, path.parameter)?
-                {
+                if (source_germ.sheets[&root.symbol] != target_germ.sheets[&root.symbol]) != flip {
                     return Ok(false);
-                }
-                // Unknown constants or imaginary coefficients cannot enter Q.
-                for (_, c) in rational
-                    .numerator
-                    .to_expression()
-                    .coefficient_list::<i32>(&[Atom::var(path.parameter)])
-                {
-                    if exact_real_rational(&c).is_err() {
-                        return Ok(false);
-                    }
-                }
-                for (_, c) in rational
-                    .denominator
-                    .to_expression()
-                    .coefficient_list::<i32>(&[Atom::var(path.parameter)])
-                {
-                    if exact_real_rational(&c).is_err() {
-                        return Ok(false);
-                    }
                 }
             }
         }
@@ -939,7 +869,7 @@ impl BoundaryIdentity {
         }
         let coordinates = point.restart_coordinates()?;
         for value in coordinates.values() {
-            exact_real_rational(value)?;
+            crate::root_path::exact_complex_rational(value)?;
         }
         let rules = coordinates
             .into_iter()
@@ -949,7 +879,7 @@ impl BoundaryIdentity {
             let value = crate::family::substitute(&root.radicand, &rules)
                 .together()
                 .cancel();
-            exact_real_rational(&value)?;
+            crate::root_path::exact_complex_rational(&value)?;
             if value.is_zero() {
                 return Err(Error::InvalidInput(
                     "cached algebraic point is a root branch point".into(),

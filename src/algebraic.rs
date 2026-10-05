@@ -1082,8 +1082,19 @@ impl SeriesSystem for AlgebraicRun<'_> {
             .roots
             .iter()
             .map(|root| {
-                let value = &root.value.series(p, &boundary.point, 0)?[0];
-                let principal = principal_sqrt(p, value)?;
+                // Preserve exact cancellation and the principal-cut side before
+                // converting a registered radicand to the working precision.
+                let exact = substitute(
+                    &root.definition.radicand,
+                    &BTreeMap::from([(
+                        Atom::var(self.compiled.variable),
+                        exact_point(p, &boundary.point)?,
+                    )]),
+                )
+                .together()
+                .cancel();
+                let value = p.eval(&exact, &Default::default())?;
+                let principal = principal_sqrt(p, &value)?;
                 let chosen = match &self.seeds[&root.definition.symbol] {
                     RootSeed::Principal => principal,
                     RootSeed::Opposite => p.neg(&principal),

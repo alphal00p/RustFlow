@@ -143,6 +143,156 @@ fn single_mass_six_line_reuses_lower_loop_child_and_matches_parent_ft_with_refin
 }
 
 #[test]
+fn complex_mass_boundaries_reuse_the_real_child_and_respect_cut_sides() {
+    use symbolica::domains::float::Complex;
+    let original = six_line();
+    let epsilon = Rational::from((1, 10));
+    let targets = [Integral(vec![1; 6]), Integral(vec![2, 1, 1, 1, 1, 1])];
+    let tiny = Rational::one() / Rational::from(10).pow(30);
+    let masses = [
+        Complex::new(Rational::from(3), Rational::from((4, 3))),
+        Complex::new(Rational::from(3), Rational::from((-4, 3))),
+        Complex::new(Rational::from(-3), tiny.clone()),
+        Complex::new(Rational::from(-3), -tiny),
+    ];
+    let mut previous: Option<Vec<Vec<ComplexFloat>>> = None;
+    for (working, order) in [(60, 80), (80, 112)] {
+        let p = Precision::decimal(working).unwrap();
+        let options = FlowOptions {
+            guard_digits: working - 20,
+            series_order: order,
+            ..Default::default()
+        };
+        let backend = CountLoops::new();
+        let context = RunContext::default();
+        let provider = recursive::RecursiveBoundary::new(&backend, &options, &context);
+        let real = provider
+            .evaluate(&original, &targets[0], &epsilon, p)
+            .unwrap();
+        let independent = ft::FtEvaluator::new(&CountLoops::new(), &context)
+            .evaluate(&original, &targets[0], &epsilon, &options)
+            .unwrap();
+        assert!(p.close(&real, &independent, 20));
+        let calls = backend.calls.load(Ordering::Relaxed);
+        assert!(calls > 0);
+        let mut results = Vec::new();
+        for mass in &masses {
+            let mut family = original.clone();
+            family.propagators[0].constant = -Atom::num(mass.clone());
+            let values = provider
+                .evaluate_many(&family, &targets, &epsilon, p)
+                .unwrap();
+            // Homogeneity and the mass derivative are separate exact relations
+            // on the analytically continued parent, including both cut sides.
+            let numeric_mass = p
+                .eval(&Atom::num(mass.clone()), &Default::default())
+                .unwrap();
+            let degree = p.rational(&(-Rational::from(3) * &epsilon));
+            let expected = p.mul(
+                &independent,
+                &p.pow(&p.div(&numeric_mass, &p.i(3)), &degree),
+            );
+            assert!(p.close(&values[0], &expected, 20));
+            assert!(p.close(
+                &values[1],
+                &p.mul(&p.div(&degree, &numeric_mass), &values[0]),
+                20
+            ));
+            assert_eq!(
+                backend.calls.load(Ordering::Relaxed),
+                calls,
+                "changing the mass or its power reuses the same massless child"
+            );
+            results.push(values);
+        }
+        assert_eq!(backend.max_loops.load(Ordering::Relaxed), 2);
+        for pair in results.chunks_exact(2) {
+            for (upper, lower) in pair[0].iter().zip(&pair[1]) {
+                let conjugate = ComplexFloat::new(upper.re.clone(), -upper.im.clone());
+                assert!(p.close(&conjugate, lower, 20));
+            }
+        }
+        assert!(
+            p.norm(&p.sub(&results[2][0], &results[3][0])) > p.real(1),
+            "opposite sides of the mass cut must retain their discontinuity"
+        );
+        if let Some(old) = previous {
+            for (low, high) in old.iter().flatten().zip(results.iter().flatten()) {
+                assert!(p.close(low, high, 20));
+            }
+        }
+        previous = Some(results);
+    }
+}
+
+#[test]
+fn public_complex_mass_amf_matches_homogeneity_and_precision_refinement() {
+    use symbolica::domains::float::Complex;
+    let original = six_line();
+    let epsilon = Rational::from((1, 10));
+    let targets = [Integral(vec![1; 6]), Integral(vec![2, 1, 1, 1, 1, 1])];
+    let mut previous: Option<Vec<Vec<ComplexFloat>>> = None;
+    for (working, order) in [(60, 80), (80, 112)] {
+        let p = Precision::decimal(working).unwrap();
+        let options = FlowOptions {
+            guard_digits: working - 20,
+            series_order: order,
+            ..Default::default()
+        };
+        let context = RunContext::default();
+        let independent = ft::FtEvaluator::new(&CountLoops::new(), &context)
+            .evaluate(&original, &targets[0], &epsilon, &options)
+            .unwrap();
+        let mut results = Vec::new();
+        for imaginary_part in [-4, 4] {
+            let mass = Atom::num(Complex::new(
+                Rational::from(3),
+                Rational::from((imaginary_part, 3)),
+            ));
+            let mut family = original.clone();
+            family.propagators[0].constant = -&mass;
+            let backend = CountLoops::new();
+            let prepared = PreparedFlow::new(
+                &family,
+                &targets,
+                &KinematicPoint::default(),
+                &backend,
+                &options,
+                &context,
+            )
+            .unwrap();
+            let provider = recursive::RecursiveBoundary::new(&backend, &options, &context);
+            let values = evaluate_samples(
+                &prepared,
+                std::slice::from_ref(&epsilon),
+                &options,
+                &provider,
+                &context,
+            )
+            .unwrap()
+            .remove(0);
+            let mass = p.eval(&mass, &Default::default()).unwrap();
+            let degree = p.rational(&(-Rational::from(3) * &epsilon));
+            let expected = p.mul(&independent, &p.pow(&p.div(&mass, &p.i(3)), &degree));
+            assert!(
+                p.close(&values[0], &expected, 20),
+                "{values:?} != {expected}"
+            );
+            assert!(p.close(&values[1], &p.mul(&p.div(&degree, &mass), &expected), 20));
+            assert_eq!(backend.max_loops.load(Ordering::Relaxed), 3);
+            assert!(backend.peeled_children.load(Ordering::Relaxed) > 0);
+            results.push(values);
+        }
+        if let Some(old) = previous {
+            for (low, high) in old.iter().flatten().zip(results.iter().flatten()) {
+                assert!(p.close(low, high, 20));
+            }
+        }
+        previous = Some(results);
+    }
+}
+
+#[test]
 fn single_mass_peeling_preserves_custom_provider_and_scaleless_precedence() {
     struct Supplied;
     impl recursive::TerminalProvider for Supplied {

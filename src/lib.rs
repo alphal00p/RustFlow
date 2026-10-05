@@ -38,6 +38,7 @@ pub mod recursive;
 pub mod reduction;
 pub mod refine;
 pub mod regions;
+mod root_path;
 pub mod tensor;
 pub mod transport_cache;
 pub mod vacuum;

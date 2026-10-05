@@ -28,26 +28,37 @@ cache identity. Entries on opposite root sheets may coexist at identical
 coordinates; exact-coordinate hits and candidate selection require the requested
 germ.
 
-This entrypoint currently accepts exact real rational physical coordinates and
-straight paths on which every registered radicand is real and nonzero. Negative
-real radicands are supported: the principal sheet is the positive imaginary
-root. Native Symbolica real-root intervals and their native refinement check the
-radicand numerator and denominator against the complete parameter interval.
-Unresolved overlaps are rejected conservatively. Native isolation/refinement
-calls are synchronous; cancellation is checked around physical selection and
-transport, but cannot interrupt an individual native exact-algebra call. Real endpoint radicands do not
-permit a complex radicand in the interior. Root, matrix and original reduction
+This entrypoint accepts exact rational-complex physical coordinates and regular
+affine paths. Every registered radicand must remain finite and nonzero along the
+whole segment. For a radicand `R=N/D`, native Symbolica Gaussian polynomial
+arithmetic and real/imaginary polynomial gcds identify its real-parameter zeros
+and poles. Native real-root intervals and refinement check the complete parameter
+interval. Unresolved certificates are rejected conservatively.
+
+A germ can change along a regular segment even though the continued root is
+analytic: the principal square-root convention jumps across the negative real
+axis. RustFlow certifies these intersections using `N*conj(D)`. Odd crossings of
+the negative axis change the endpoint germ; tangencies do not. One-sided endpoint
+signs handle a segment starting or ending on the cut, where the principal root
+is the positive imaginary root. Exact radicand substitution precedes numerical
+seeding and germ classification, preserving the side under cancellation. This
+check runs before source ranking, so a nearby source on an incompatible sheet
+does not prevent reuse of a farther compatible source.
+
+Native isolation/refinement calls are synchronous; cancellation is checked
+around them and during bounded certificate refinement, but cannot interrupt an
+individual native exact-algebra call. Root, matrix and original reduction
 conditions are checked before candidates are ranked. Generic leading epsilon
 coefficients are retained before point substitution, so a special point cannot
 silently change the assumed Laurent structure, including on an exact cache hit.
 
-The local root germ remains constant throughout an admitted real path. Accepted
-intermediate endpoints retain it and store the exact coordinate image of the
-rounded path parameter. The caller's existing `TransportCost` admissibility
+Accepted intermediate endpoints retain their independently checked local root
+germ and the exact coordinate image of the rounded path parameter. The caller's
+existing `TransportCost` admissibility
 contract still controls the integral's physical branch and logarithmic monodromy;
-root signs alone do not determine those. Threshold-crossing contours, changing
-root germs, complex physical paths and sheet-specific removable norm poles are
-outside this cache entrypoint. Use `evaluate_prescribed_to` with a typed physical prescription identity and a
+root signs alone do not determine those. A true radicand zero or pole on the
+segment is rejected. General singular endpoints and sheet-specific removable
+norm poles remain outside this entrypoint. Use `evaluate_prescribed_to` with a typed physical prescription identity and a
 mandatory homotopy-admission callback for supported threshold detours; see
 [Prescribed physical routes](prescribed-cache.md). Low-level explicit algebraic
 contour transport remains available for other paths.
@@ -72,7 +83,10 @@ atomic and loading reconstructs the existing insertion index.
 Focused regressions exercise progressive analytic transport, binary restart,
 nearest compatible-source selection, opposite-sheet exact hits, inherited
 accuracy refusal, original and generic-epsilon domain guards, imaginary roots,
-nonreal interior rejection, and the analytically known weighted matrix norm.
+complex mass transport, principal-cut crossings and tangencies, winding along
+successive affine segments, exact endpoint cancellation, and the analytically
+known weighted matrix norm. These branch tests do not authorize arbitrary
+logarithmic monodromy: their source policies select the intended solution branch.
 
 Canonical logarithmic forms use the same cache while keeping ordered letters
 and constant matrices separate until a path is selected. See

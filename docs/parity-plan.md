@@ -141,7 +141,8 @@ see [its measured scope](banana-unequal.md). Standalone [algebraic transport](al
 tracks registered square-root sheets on regular contours, including winding and
 rejected-step tests. Root-sum denominators use native formal quotient inversion
 and preserve source-domain conditions. [Algebraic cache reuse](algebraic-cache.md)
-now supports regular real straight paths with explicit root germs. The
+now supports regular rational-complex affine paths with explicit root germs and
+exact principal-cut crossing checks. The
 [prescribed-contour interface](prescribed-contours.md) constructs detours from
 caller-supplied polynomial prescriptions, including admitted cached threshold
 crossings; automatic inference from an integral and general algebraic Frobenius
