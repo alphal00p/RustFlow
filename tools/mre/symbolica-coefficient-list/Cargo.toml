@@ -1,0 +1,19 @@
+[package]
+name = "symbolica-coefficient-list-mre"
+version = "0.0.0"
+edition = "2024"
+publish = false
+license = "MIT"
+
+[[bin]]
+name = "symbolica-coefficient-list-mre"
+path = "main.rs"
+
+[dependencies]
+symbolica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "c3408e4ba1d3bdd4ea55678fad50e27009be13d4", default-features = false, features = ["integer-gmp", "float-mpfr"] }
+
+[patch.crates-io]
+numerica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "c3408e4ba1d3bdd4ea55678fad50e27009be13d4" }
+graphica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "c3408e4ba1d3bdd4ea55678fad50e27009be13d4" }
+
+[workspace]

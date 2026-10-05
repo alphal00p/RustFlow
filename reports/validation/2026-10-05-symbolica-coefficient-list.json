@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "scope": "Exact Symbolica coefficient-extraction defect and native physical NP transport diagnosis; no full nonplanar physical fit accuracy claim.",
+  "symbolica": {
+    "repository": "https://github.com/symbolica-dev/symbolica",
+    "branch": "community",
+    "revision": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "local_source_override": false
+  },
+  "reproducer": {
+    "source": "tools/mre/symbolica-coefficient-list/main.rs",
+    "expression": "(10^p + 10^p*epsilon)*x",
+    "exact_input": true,
+    "public_coefficient_list": {
+      "20": {
+        "terms": 1,
+        "exact_reconstruction": true
+      },
+      "300": {
+        "terms": 1,
+        "exact_reconstruction": true
+      },
+      "308": {
+        "terms": 1,
+        "exact_reconstruction": true
+      },
+      "309": {
+        "terms": 0,
+        "exact_reconstruction": false
+      },
+      "400": {
+        "terms": 0,
+        "exact_reconstruction": false
+      }
+    },
+    "cause": "coefficient_list uses an internal AtomField with statistical zero testing; an overflowing f64 sum produces Inconclusive, which the field treats as zero.",
+    "exact_alternative": "Atom::try_to_polynomial with AtomField.statistical_zero_test=false, followed by native to_univariate_polynomial_list",
+    "exact_alternative_passed_powers": [
+      20,
+      300,
+      308,
+      309,
+      400
+    ],
+    "execution": {
+      "method": "direct rustc of the standalone Symbolica-only source linked to the official c3408e4 release artifact",
+      "symbolica_artifact": "target/release/deps/libsymbolica-723d2b3fd7815e44.rlib",
+      "source_checkout": "/home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4",
+      "source_sha256": "4247e4e1623d3fe1493f85de0082d3dbd9945047c8da7c97fb5f69e59f315f18",
+      "output_sha256": "f6ce3aed2781f29b660e27288c726f292c2a9e20b5f2c209753fc8d727e026c0",
+      "report_mode_exit_code": 0,
+      "exact_control_exit_code": 0,
+      "public_collection_assertion_exit_code": 101,
+      "standalone_cargo_lock_generated_offline": true,
+      "standalone_cargo_build_performed": false
+    }
+  },
+  "native_sample": {
+    "configuration": "W-NP_EW1-1",
+    "epsilon": "1/3700",
+    "requested_digits": 30,
+    "working_digits": 90,
+    "series_order": 96,
+    "coordinates": {
+      "s": "7971503245/51071474",
+      "t": "-120961047183696014144/1789089966849483755",
+      "b": "13074/5399"
+    },
+    "boundary_source": "native recursive AMF, without numerical reference inputs",
+    "accepted_steps": 0,
+    "rejected_steps": 32,
+    "first_rejection": {
+      "gate": "Taylor tail",
+      "zero_based_component": 0,
+      "error": "2.6582475208139517736423868196085700986448793491879105427762121662914749959723902911404052005901e-45",
+      "budget": "1e-80"
+    },
+    "last_rejection": {
+      "gate": "endpoint differential defect",
+      "zero_based_component": 59,
+      "error": "3.9708626623943114536859281719359367856088674641578367053428436926000820335696634201084370385796e-2",
+      "budget": "2.354709540948662692579570584653271904919329023221458141524417996449807982266540511853668652583e-78"
+    },
+    "arithmetic_control": "Replaying the same exact dyadic boundary/source at 160 working digits with the unchanged 80-digit local gate preserves the endpoint defect through approximately 86 digits. This is not an arithmetic-precision limitation.",
+    "row_clearing_certificate": "All nonzero row-59 entries pass both exact polynomial cross multiplication and symbolic reconstruction. Common denominator degrees: epsilon 2, eta 10.",
+    "discarded_coefficient": {
+      "zero_based_row": 59,
+      "zero_based_column": 0,
+      "cleared_expression_characters": 7947,
+      "returned_coefficient_count": 0,
+      "direct_numerical_magnitude": "approximately 3e396"
+    },
+    "verified_digits": null,
+    "production_boundary_saved": false
+  }
+}

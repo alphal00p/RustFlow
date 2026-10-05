@@ -1,0 +1,5 @@
+power=20 zero_test=False public_terms=1 public_exact=true exact_field_terms=1 exact_field_exact=true
+power=300 zero_test=False public_terms=1 public_exact=true exact_field_terms=1 exact_field_exact=true
+power=308 zero_test=False public_terms=1 public_exact=true exact_field_terms=1 exact_field_exact=true
+power=309 zero_test=Inconclusive public_terms=0 public_exact=false exact_field_terms=1 exact_field_exact=true
+power=400 zero_test=Inconclusive public_terms=0 public_exact=false exact_field_terms=1 exact_field_exact=true
