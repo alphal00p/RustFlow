@@ -63,8 +63,10 @@ reference timing is not yet available.
 ## Publication and remaining work
 
 RustFlow milestones and validation reports are pushed to its repository. The
-community notebook/API changes are committed on the local publication branch;
-community publication remains pending the complete notebook acceptance. The
+community notebook/API changes and dependency pins are pushed in
+[draft PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19),
+authored by `ValentinHirschi`. Its head is `8758b93d1e1a6fed2aace41493a91be569f98a98`;
+merge and release remain pending the acceptance and upstream issues below. The
 notebook's repository-relative destination is `examples/hep/gg_hg.py`; the local
 publication checkout is `/common/dev/symbolica-community/loop-integration-publication`.
 
@@ -76,9 +78,10 @@ pass with and without NumPy on that isolated fix. Its
 also passes both output types. The live wheel has not been changed; the isolated
 tensor host is not a rerun of the full community browser suite.
 
-Next are the final wheel's forced cancellation/restart and 40-digit regeneration,
-followed by independent stability and nearby-query checks.
-After those checks, publish the community update with its exact validated pins.
+The final wheel's forced cancellation after one fresh 40-digit sample passed;
+regeneration resumed in a fresh session. Next are all sixteen refined sources,
+independent stability and nearby-query checks. Update the draft's acceptance
+evidence after those checks; the live calculation and its sources stay frozen.
 Broader work remains on general linear/cut recursion, algebraic singular
 endpoints, causal paths, nondiagonal epsilon transformations, advanced Python
 solver access, and performance across the reference benchmark suite. Numerical
