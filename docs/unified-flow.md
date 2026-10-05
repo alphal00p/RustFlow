@@ -100,7 +100,13 @@ The [finite-sample comparison](../reports/validation/2026-10-05-single-mass-vacu
 checks a connected three-loop six-line vacuum and its raised massive power
 against the separate FT route at two epsilon values and two precision/order
 settings. Those checks validate the new recursive formula; a full Laurent fit
-through this public route is a separate acceptance step.
+through the public route now also [passes through epsilon zero](../reports/validation/2026-10-05-single-mass-vacuum-laurent.json)
+for both targets at 20 requested digits. It uses 33 samples checked against a
+disjoint 29-sample grid, with higher working precision and series order. A
+separate public FT solve agrees on all 14 coefficients; the largest difference
+is 7.20e−54. This is refinement and cross-method evidence, not an interval proof
+or an independent Mathematica comparison. The recorded AMF and FT times are
+120.115 s and 52.336 s with different precision/order profiles.
 
 ## Current generality gaps
 

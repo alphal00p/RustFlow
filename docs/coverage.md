@@ -6,9 +6,11 @@ single-mass vacuum loop peeling and native factor/root contour certificates,
 including cold-cache derivative-side regressions. The
 [release report](../reports/validation/2026-10-05-boundary-contour-release.json)
 records the frozen source and library. Public finite-epsilon tests compare the
-new three-loop boundary route with FT under independent refinement; its full
-Laurent reconstruction and the longer nonplanar physical continuation are
-separate acceptance runs. Earlier milestones added prescribed continuation in
+new three-loop boundary route with FT under independent refinement. A separate
+[public Laurent acceptance](../reports/validation/2026-10-05-single-mass-vacuum-laurent.json)
+now passes both three-loop targets through epsilon zero at 20 digits, with a
+disjoint sample grid and an independent native FT comparison. The longer
+nonplanar physical continuation remains separate. Earlier milestones added prescribed continuation in
 the growing cache and CLI, sharper inherited-error estimates and compatible
 analytic singular-origin initialization. Separate production scientific runs pass the
 full 108-master system, all 16 crossed Higgs+jet supplied-system cases, and the
