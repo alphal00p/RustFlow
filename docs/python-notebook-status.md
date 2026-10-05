@@ -13,8 +13,8 @@ checks still running on the dependency graph intended for publication.
 | Exact Higgs-plus-jet inputs | Native physical families, certified 48/61 canonical basis maps, exact normalization and kinematics-dependent form-factor projections | No claim of automatic reduction or boundary coverage for every possible multiloop family |
 | Fresh physical boundaries and amplitude | The publication wheel completed all 16 native 30-digit configurations from empty numerical caches, all 4,360 transport coefficient comparisons, eight W/Z form factors and three coherent observables | Forced 40-digit regeneration, interruption/resume, independent stability and nearby-point checks remain |
 | Independent Euclidean anchors | Publication wheel passed all 545 comparisons at 20 digits with fresh native boundaries | This prerequisite alone does not certify the physical calculation |
-| Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; initial HTML export passed, and all three native amplitude diagrams rendered as SVG and in the notebook display container | Execute the populated notebook using a copy of the completed native cache, then finish the complete headless acceptance |
-| Packaging | Rust core release suite: 534 passed, 12 opt-in tests ignored; strict Python-feature Clippy and formatting passed. Original native wheel component suite: 206 passed, one inherited C++ export failure. Corrected tensor stubs: seven checks passed | Existing browser tensor evaluation fails on list output; an isolated owner fix passes native NumPy/no-NumPy regression checks, but its browser rerun is pending |
+| Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; initial HTML export, native SVG display and populated original notebook execution passed using a copied completed native cache | Finish the complete 40-digit headless acceptance; no browser pixel or interactive-click test is claimed |
+| Packaging | Rust core release suite: 534 passed, 12 opt-in tests ignored; strict Python-feature Clippy and formatting passed. Original native wheel component suite: 206 passed, one inherited C++ export failure. Corrected tensor stubs: seven checks passed. Isolated tensor fix passes native and actual Pyodide checks with/without NumPy | Existing full browser wheel still contains the inherited tensor list-output bug; its fix has not been integrated into the frozen host. The whole browser suite has not been rerun with that fix |
 
 The final publication run has now completed
 [all 16 physical starting configurations](../reports/validation/2026-10-05-public-wheel/physical-boundary-validation.json)
@@ -42,16 +42,23 @@ reference comparison therefore does not independently establish 20 digits.
 | All 16 fresh native boundaries | 7,399.44 s | 6,467.54 s |
 | All 16 physical transports | 405.37 s | 400.07 s |
 | Native amplitude assembly | 50.75 s | 35.96 s |
-| Binary reload and repeated transport | 75.39 s | Pending complete run |
-| Warm transport, 16 exact hits and zero ODE steps | 69.44 s | Pending complete run |
-| Warm amplitude assembly | 4.06 s | Pending complete run |
+| Binary reload and repeated transport | 75.39 s | 73.88 s |
+| Warm transport, 16 exact hits and zero ODE steps | 69.44 s | 68.43 s |
+| Warm amplitude assembly | 4.06 s | 4.03 s |
 
 These observations used four boundary workers sharing a 256-sample-worker budget
 on a busy cluster. Warm controller timings include persistence after each query;
 they are not isolated cache-lookup timings. The
 [cache audit](../reports/validation/2026-10-05-public-wheel/warm-cache-audit.json)
-identifies repeated serialization but contains no measured cost attribution or
-speedup. A matched full-application reference timing is not yet available.
+identified repeated serialization. A subsequent
+[copied-bank measurement](../reports/validation/2026-10-05-public-wheel/populated-notebook-validation.json)
+took 0.268 seconds for sixteen exact evaluations without saving, 56.221 seconds
+for sixteen unchanged saves and 55.918 seconds for the original combined
+controller path. Values, errors, provenance and cached evidence agreed, and the
+original archived files stayed unchanged. This one sequence ran before amplitude
+preparation in a fresh process on a busy host; it measures a persistence
+bottleneck but establishes no optimization speedup. A matched full-application
+reference timing is not yet available.
 
 ## Publication and remaining work
 
@@ -64,11 +71,13 @@ publication checkout is `/common/dev/symbolica-community/loop-integration-public
 The inherited tensor list-output failure has a separate
 [draft owner PR #126](https://github.com/alphal00p/gammaloop/pull/126).
 [Focused native tests](../reports/validation/2026-10-05-public-wheel/tensor-sequence-owner-validation.json)
-pass with and without NumPy on that isolated fix. The live wheel has not been
-changed, and a successful browser rerun is still required.
+pass with and without NumPy on that isolated fix. Its
+[actual Pyodide validation](../reports/validation/2026-10-05-public-wheel/tensor-sequence-browser-validation.json)
+also passes both output types. The live wheel has not been changed; the isolated
+tensor host is not a rerun of the full community browser suite.
 
 Next are the final wheel's forced cancellation/restart and 40-digit regeneration,
-populated notebook execution, and copied-cache profiling.
+followed by independent stability and nearby-query checks.
 After those checks, publish the community update with its exact validated pins.
 Broader work remains on general linear/cut recursion, algebraic singular
 endpoints, causal paths, nondiagonal epsilon transformations, advanced Python

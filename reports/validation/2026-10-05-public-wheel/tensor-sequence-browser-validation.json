@@ -1,0 +1,147 @@
+{
+  "schema": "spynso3-sequence-pyodide-validation-v1",
+  "recorded_at_utc": "2026-10-05T23:02:11.283815+00:00",
+  "status": "passed",
+  "pull_request": "https://github.com/alphal00p/gammaloop/pull/126",
+  "owner_commit": "fe1f3aeaa84580c0b0881917f40dd66a096a7972",
+  "upstream_base": "cac3a329923a6466b6d12955b166c9ba69bbb8c0",
+  "symbolica": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+  "runtime": {
+    "status": "passed",
+    "scope": "isolated Symbolica + Spynso3 Pyodide runtime; not full community suite",
+    "python": "3.14.2 (main, Sep 14 2026, 03:03:51) [Clang 23.0.0git (https:/github.com/llvm/llvm-project e5927fecf8a6ce89e1a4eac5b8",
+    "numpy": "2.4.6",
+    "results": [
+      {
+        "mode": "list",
+        "tensor_rows_checked": 6,
+        "empty_batches_checked": 2,
+        "malformed_batches_rejected": 2,
+        "complex_scalar_checked": true,
+        "layout_and_metadata_preserved": true
+      },
+      {
+        "mode": "ndarray",
+        "tensor_rows_checked": 6,
+        "empty_batches_checked": 2,
+        "malformed_batches_rejected": 2,
+        "complex_scalar_checked": true,
+        "layout_and_metadata_preserved": true
+      }
+    ],
+    "pyodide": "314.0.7",
+    "wheel": "symbolica_tensor_sequence_host-0.0.0-cp314-abi3-pyemscripten_2026_0_wasm32.whl",
+    "runtimeDirectory": "/common/dev/hyperbolica/target/hepkit-integration/xbuildenv/314.0.7/xbuildenv/pyodide-root/dist",
+    "ownerCommit": "fe1f3aeaa84580c0b0881917f40dd66a096a7972",
+    "symbolicaCommit": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+  },
+  "scope": {
+    "host": "Standalone Symbolica+Spynso3 wasm host; exact PR126 owner source and official c340, with wasm features and no native features.",
+    "whole_community_browser_suite": false,
+    "rustflow_included": false,
+    "hepkit_full_host_included": false,
+    "live_native_pins_environments_or_banks_modified": false,
+    "build_cache": "Independent copy of target/publication-wasm-build, made with cp -a --reflink=auto; original cache is not a writable hardlink.",
+    "runtime_isolation": "Fresh Node process with a disposable Pyodide virtual filesystem; the second phase explicitly loaded the official Pyodide NumPy package. Pyodide downloaded the previously uncached NumPy wheel from its official CDN and added its normal Node package-cache entry."
+  },
+  "build": {
+    "rust": "1.98.0",
+    "profile": "release-performance, opt3, ThinLTO, one codegen unit",
+    "link_args": [
+      "-sEXPORTED_FUNCTIONS=_PyInit_core",
+      "-Wl,-Bsymbolic",
+      "-O3"
+    ],
+    "wasm_opt_level": "-O0",
+    "reported_compile_seconds": 1038,
+    "command": "bash /common/dev/amflow/target/tensor-evaluator-sequences/build_wasm.sh",
+    "session_exit": 0
+  },
+  "test": {
+    "command": "PYODIDE_DIST_DIR=$(pyodide config get dist_dir) node /common/dev/amflow/target/tensor-evaluator-sequences/test_wasm.mjs /common/dev/amflow/target/tensor-evaluator-sequences/wasm-wheel /common/dev/amflow/target/tensor-evaluator-sequences/wasm-runtime.json",
+    "session_exit": 0,
+    "without_numpy": "Actual module absence asserted before and after list phase; no forced module stub was used in Pyodide.",
+    "with_numpy": "Explicit await pyodide.loadPackage(\"numpy\"), then actual ndarray type asserted.",
+    "coverage": [
+      "Real and complex values",
+      "Permuted dense and sparse tensor logical ordering",
+      "Tensor shape, structure and descriptor arguments",
+      "Empty batches",
+      "Malformed input rejection",
+      "Zero-parameter complex scalar",
+      "Native compile API absent from wasm evaluator"
+    ]
+  },
+  "artifacts": [
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-wheel/symbolica_tensor_sequence_host-0.0.0-cp314-abi3-pyemscripten_2026_0_wasm32.whl",
+      "bytes": 22354291,
+      "sha256": "56a70bae4a8272d4faee728134605ae07d57f87b2149554f2b0970f5b26d955b"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-runtime.json",
+      "bytes": 1093,
+      "sha256": "ce4830a98dd3edb138e0484b4c076e80395a6784dfa37fbfcc7aa837c7e949f4"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-runtime.log",
+      "bytes": 1323,
+      "sha256": "571910a438b83a8106f9405acb736225113bc0a11f085e50371e58cd80a25f56"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-build.log",
+      "bytes": 11217,
+      "sha256": "0abdb7646d0c369516e69823613319c6d837bafba6951182877b30b0b5ff7ea7"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/build_wasm.sh",
+      "bytes": 1422,
+      "sha256": "9e97323764e268aa5f76d01d04654f6b608a28f724b27ce2d9eaf41c732d87cb"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/test_wasm.mjs",
+      "bytes": 4062,
+      "sha256": "e1bc73adb2bf03af3faf1dee2f91b597415b54fee9bf96e6fd6cc71d7fc89f16"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-host/Cargo.toml",
+      "bytes": 1313,
+      "sha256": "ac3f3cc6fa8d79ba2b621fb5196cef9a3f56d6ef9bf304b66f9888f0ce0f1c9a"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-host/Cargo.lock",
+      "bytes": 110998,
+      "sha256": "984e68738b56d4ab3bf1b5cfbc0127c09e115827ea5ec5aa0e8d325c669e3c08"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-host/src/lib.rs",
+      "bytes": 653,
+      "sha256": "22cb404f2c8977e919ab63f63badc1132cd454f47044e7b5d09ff42f4847d39e"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-host/pyproject.toml",
+      "bytes": 277,
+      "sha256": "490a9504adf29c64ecc3dc93de61638c855b6ac0dbc1d6b63e7634bf3187c788"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-wheel/compiler-output/baseline-invocation.json",
+      "bytes": 886,
+      "sha256": "9915ba684de33587e0be4a14adfa12e18336d9b790c085f258eec5839a876b6c"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-wheel/compiler-output/input-0.wasm",
+      "bytes": 70797410,
+      "sha256": "a70544bc71c75f8b03443eace90f4302160c4387af08ac8a8e35b26d1036e13e"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-wheel/compiler-output/invocation.json",
+      "bytes": 1328,
+      "sha256": "8d74422be8a21db1c656a348856a35c2332b4343a4ca12f5c25552b7823a7090"
+    },
+    {
+      "path": "/common/dev/amflow/target/tensor-evaluator-sequences/wasm-wheel/compiler-output/output.wasm",
+      "bytes": 66316700,
+      "sha256": "f1ad2d065761600fb5b65b02fae15c051f7f43aac10239ff423137a50e09f198"
+    }
+  ]
+}

@@ -1,0 +1,105 @@
+{
+  "schema": "rustflow-populated-notebook-copy-v1",
+  "recorded_utc": "2026-10-05T22:57:16.736431+00:00",
+  "scope": "Actual original notebook execution with a prepared native session from a copy of its completed cold bank; no browser pixel or interactive-click claim.",
+  "status": "passed",
+  "archive": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-native30/numerical-history/e62a7b9da894493589d1819a7c5bb97b",
+  "source_banks": {
+    "seeds": {
+      "path": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-native30/numerical-history/e62a7b9da894493589d1819a7c5bb97b/seeds/physical-boundaries.bin",
+      "sha256": "7176f9736d6ba5e169215d3bd60a221b5ad035dde6584fd2ebc1cfba4ae75999",
+      "bytes": 20315832
+    },
+    "transport": {
+      "path": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-native30/numerical-history/e62a7b9da894493589d1819a7c5bb97b/transport/physical-boundaries.bin",
+      "sha256": "4caf679da984bd7b361dc2e778bc112e53a18374f4b7ef4f1d89a4fdf53cb3ea",
+      "bytes": 22908490
+    }
+  },
+  "acceptance_observation_sha256": "d342a018ccf4bb8ed542a1ee5f8109f03f56445141983af60b19da21616401dc",
+  "runtime_attestation": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "5e8319c74a327e09349d7626d629c77d8a39d625e0503267e5ebfbb0994039cf"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/amflow/target/publication-python-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+      "size_bytes": 393671056,
+      "sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 32019,
+        "sha256": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_support.py",
+        "size_bytes": 20678,
+        "sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25"
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
+        "size_bytes": 11597,
+        "sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/publication-python-venv/bin/python"
+    }
+  },
+  "profile": {
+    "construct_and_load": {
+      "elapsed_ns": 2477854522
+    },
+    "sixteen_exact_evaluations_without_save": {
+      "elapsed_ns": 268371831
+    },
+    "sixteen_unchanged_saves": {
+      "elapsed_ns": 56220790913
+    },
+    "original_controller_warm_transport": {
+      "elapsed_ns": 55918315830
+    },
+    "original_controller_amplitude": {
+      "elapsed_ns": 46802217306
+    },
+    "original_notebook_execution": {
+      "elapsed_ns": 221656779
+    }
+  },
+  "notebook": {
+    "output_count": 9,
+    "native_diagram_count": 3,
+    "transport_configurations": 16,
+    "form_factor_count": 8,
+    "observable_digits": {
+      "effective_squared": 47,
+      "electroweak_squared": 25,
+      "interference": 26
+    },
+    "rendered_populated_tables": true,
+    "serialized_output_bytes": 395945
+  },
+  "source_banks_unchanged": true,
+  "executed_script": {
+    "path": "scripts/validate_gg_hg_notebook.py",
+    "sha256": "7f5b6a219009a9c07108173e0b3ba0114e4de87dc32fa8b1ff50637ca06f1fcd",
+    "byte_identical_to_executed_target_helper": true
+  },
+  "process_exit_code": 0,
+  "profiling_scope": "One sequence in a fresh process on a busy cluster, before native amplitude preparation. Sixteen direct exact-hit calls, sixteen unchanged saves and original controller transport were timed separately; coefficients, errors and provenance matched and cached evidence stayed unchanged. The times are observations, not a promised optimization speedup or matched upstream benchmark.",
+  "command": [
+    "python",
+    "scripts/validate_gg_hg_notebook.py",
+    "--notebook",
+    "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
+    "--run-directory",
+    "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-native30",
+    "--output",
+    "/common/dev/amflow/target/publication-populated-notebook-cold-copy",
+    "--profile"
+  ]
+}

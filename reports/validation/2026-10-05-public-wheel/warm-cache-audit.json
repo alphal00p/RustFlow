@@ -242,5 +242,6 @@
     "No copied-bank profiling has yet been run.",
     "No measured or promised speedup.",
     "This audit is independent of the still-running 40-digit full16 acceptance."
-  ]
+  ],
+  "followup_measurement": "reports/validation/2026-10-05-public-wheel/populated-notebook-validation.json"
 }
