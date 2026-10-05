@@ -186,8 +186,14 @@ also passes all 370 coefficients at 20 absolute digits using independent 60/56
 and 70/64 working-precision/order profiles, with maximum refinement difference
 1.9624e−48. This is supplied-boundary differential transport; its low-level
 refinement estimate does not certify propagation of arbitrary boundary errors.
-The full 75-master ZMZ first native endpoint has passed, with independent higher
-precision/order refinement still running. The
+The [full 75-master ZMZ comparison](../reports/diffexp/fivepoint-zmz-validation.json)
+now passes all 375 coefficients at 20 absolute digits, including independent
+60/56 and 70/64 precision/order refinement. The maximum refinement difference
+is 5.5571e−47 and all three endpoint root sheets agree. The first profile took
+9308.38 seconds cumulatively, including capped/discarded work; the independent
+high profile took 12157.19 seconds as a fresh process. These results use the
+immutable scientific library recorded in the report; its new opt-in current-library
+regression has not been rerun. The
 [full 86-master ZZZ first native endpoint](../reports/diffexp/fivepoint-zzz-first-endpoint.json)
 now passes all 430 comparisons at 20 absolute digits, after 10122.59 seconds
 including its capped predecessor and resumed work. Its independent higher

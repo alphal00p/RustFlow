@@ -565,7 +565,7 @@
     {
       "id": "fivepoint-planar-zmz-ph1-to-ph6",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "original_passed_native_first_endpoint_passed_independent_refinement_running",
+      "status": "completed_live_original_and_native_all375_coefficients_20_absolute_digits",
       "family": "zmz",
       "dimension": 75,
       "canonical": true,
@@ -594,7 +594,7 @@
       "historical_notebook_transport_seconds": 1391.141062,
       "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there.",
       "first_endpoint_report": "reports/diffexp/fivepoint-zmz-first-endpoint.json",
-      "completed_native_refinement_acceptance": false,
+      "completed_native_refinement_acceptance": true,
       "native_first_profile": {
         "working_digits": 60,
         "series_order": 56,
@@ -606,16 +606,32 @@
         "time_scope": "Includes original capped predecessor, discarded interrupted work, checkpoint restoration and separately capped continuation."
       },
       "native_higher_profile": {
-        "status": "running",
+        "status": "passed",
         "working_digits": 70,
         "series_order": 64,
         "start": "fresh original supplied boundary",
         "maximum_aggregate_attempts": 20000,
         "wall_limit_seconds": 18000,
         "rss_limit_bytes": 17179869184,
-        "declared_provenance": "target/zmz-full75-canonical/refinement-provenance.json"
+        "declared_provenance": "target/zmz-full75-canonical/refinement-provenance.json",
+        "process_seconds": 12157.188704535365,
+        "transport_seconds": 12148.049127792,
+        "accepted": 2683,
+        "rejected": 8707,
+        "max_absolute_ancillary_difference": "1.94016857282185003299032550710795304649235676664923772111514521466588255462e-57",
+        "max_absolute_original_difference": "6.55227333760037141815662070776971993060516915309239708017993974833117195215e-25",
+        "max_absolute_native_refinement_difference": "5.5570852959109639582669028503638041156884245991557101386876236311106879468587348138576220507248715345275814454040458947681368021592230158174762763238165344184753592412429603701977723546062726829429106E-47"
       },
-      "coverage_note": "All375 first-endpoint comparisons pass20 absolute digits and allthree endpoint root sheets were checked. The higher profile is incomplete, so full75 native refinement acceptance remains pending. Original notebook accuracy settings are unchanged at15 digits. Supplied boundaries only; no automatic construction, arbitrary-error-box propagation or equal-work performance-parity claim."
+      "coverage_note": "All 375 coefficients pass 20 absolute digits against ancillary/live-original values and independent native refinement; all three endpoint sheets agree. Original notebook settings remain at 15 digits. Supplied boundaries only; no automatic construction, arbitrary input-error-box certificate or equal-work performance claim. Scientific runs used the immutable archived library identified in the report; the prepared ignored current-library regression is a separate future run.",
+      "validation_report": "reports/diffexp/fivepoint-zmz-validation.json",
+      "fixture": "fixtures/diffexp/fivepoint-zmz-full75.json",
+      "original_report": "reports/diffexp/fivepoint-zmz-original.json",
+      "production_regression": {
+        "status": "prepared_ignored_source_not_executed_on_current_library",
+        "command": "cargo test --release --locked -p symbolica-amflow --test fivepoint_zmz -- --ignored --nocapture",
+        "fixture": "fixtures/diffexp/fivepoint-zmz-full75.json",
+        "diagnostics_scope": "Generic canonical helper aggregates accepted/rejected counts across all waypoint calls and rejects exhausted remaining budget. The scientific results use archived5be94f7 library; later production changes are not silently included."
+      }
     },
     {
       "id": "fivepoint-planar-mzz-ph1-to-ph6",
@@ -858,7 +874,7 @@
         "anc/XB_Boundary_values_X1.txt": "7883537af39b181f84266934b9440df3f67a5eb8f67b576388d7aa29524d9b92"
       },
       "download_reproduction": "python scripts/fetch_diffexp_ancillaries.py",
-      "numerical_benchmark_status": "Both original108-master profiles completed: accurate reference plus native all540-coefficient20-digit refinement passed; original fast profile asserts14 digits only."
+      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native 1loop, 74-master MZZ and 75-master ZMZ independent refinement passed. Native full86 first endpoint passed; its higher profile is running. Separate 86-master PH1-to-PH2 128-digit profile remains unrun."
     },
     {
       "id": "2005.04195v2",
@@ -895,7 +911,7 @@
         "anc/determinants.m": "81655e7efd9628aac262ab2ac586e55c77ecb2f4657b88932bf0de2acdf19ca2"
       },
       "download_reproduction": "python scripts/fetch_diffexp_ancillaries.py",
-      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native1loop and74-master MZZ independent refinement passed; native75/86 first endpoints passed and higher profiles are running. Separate86-master PH1-to-PH2 128-digit profile remains unrun."
+      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native 1loop, 74-master MZZ and 75-master ZMZ independent refinement passed. Native full86 first endpoint passed; its higher profile is running. Separate 86-master PH1-to-PH2 128-digit profile remains unrun."
     }
   ],
   "preparation_tools": [
@@ -905,12 +921,12 @@
   ],
   "live_smoke": "fixtures/diffexp/mpl-101-4.json",
   "next_steps": [
-    "Finish the running independent70-digit/order64 full75/full86 profiles and compare every coefficient before marking their native refinement acceptance complete.",
+    "Finish the running independent 70-digit/order64 full86 profile and compare every coefficient before marking its native refinement acceptance complete.",
     "Keep the unrun128-digit planar PH1-to-PH2 profile separate from20-digit PH1-to-PH6 milestones and preserve recorded source precision ceilings.",
     "Preserve the original unequal-banana direct-route memory censoring; the passed alternate-route oracle is a distinct profile.",
     "After correctness/refinement, use repeated same-host single-core measurements with symbolic setup, transport, caching and work counts reported separately.",
     "Preserve upstream component precision, absolute accuracy and finite-accuracy zeros rather than treating working precision or printed mantissas as achieved accuracy."
   ],
   "clone_modified": false,
-  "validation_status_snapshot_utc": "2026-10-05T02:58:12.561844+00:00"
+  "validation_status_snapshot_utc": "2026-10-05T03:43:38.504412+00:00"
 }
