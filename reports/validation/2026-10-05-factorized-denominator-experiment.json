@@ -1,8 +1,8 @@
 {
   "schema": "rustflow-factorized-denominator-experiment-v1",
   "date": "2026-10-05",
-  "status": "ordinary solver validation passed; native physical boundary validation pending",
-  "scope": "Isolated unmerged candidate. No Python-host or main-branch runtime change. No physical boundary or amplitude accuracy claim from these replay results.",
+  "status": "Ordinary solver and native physical boundary validation passed; isolated candidate awaiting publication-graph integration.",
+  "scope": "Isolated candidate validated for ordinary ODE replay and fresh W-NP_EW1-1 boundary generation. No main-branch or Python-host runtime change. Full 16-source amplitude acceptance is separate.",
   "source_base": "3b78629a4fc93a4b7c9070536639dc841ef38716",
   "source_branch": "codex/factorized-denominator-bounds",
   "code_audit": {
@@ -53,7 +53,7 @@
         "summary": "target/factorized-denominator-regressions-summary.json"
       }
     },
-    "adoption_status": "Isolated candidate; library, integrations, Clippy and ordinary replay comparisons passed. Fresh native physical NP30 fit remains pending."
+    "adoption_status": "Isolated candidate e674a7c; library, integrations, Clippy, ODE comparisons and fresh native NP30 checks passed. No main-branch or host adoption."
   },
   "native_build": {
     "dependency_source_digest": "d64faf80cf0bcbd37e679ce9fa81be2f4981e14fafde1a0dd7e8e66f6df66dcb",
@@ -258,5 +258,19 @@
     ],
     "log": "/common/dev/amflow/target/factorized-denominator-regressions/banana_unequal.log"
   },
-  "remaining_gate": "Fresh W-NP_EW1-1 native 30-digit boundary from an empty numerical bank, order96/guard60/workers64/max_steps2000, independent samples/refinement and all305 published source-coefficient comparisons."
+  "native_boundary_validation": {
+    "source": {
+      "path": "reports/validation/2026-10-05-native-nonplanar-physical-factorized-source.json",
+      "sha256": "f1d4a129a7a69c1a1e91fb3e98325ddc2917d31ef0b568eb0eed888550c0bbf0"
+    },
+    "reference_comparison": {
+      "path": "reports/validation/2026-10-05-native-nonplanar-physical-factorized-comparison.json",
+      "sha256": "99ee26d2b11939085b223da1429a23787a225502362b2cdf10f4647a29b4c541"
+    },
+    "baseline_comparison": {
+      "path": "reports/validation/2026-10-05-native-nonplanar-physical-factorized-baseline-comparison.json",
+      "sha256": "27a05089f3353fa64abc05835ab9f1cd53374005d3ba7ca4a41b992722733659"
+    }
+  },
+  "remaining_scope": "Final publication dependency-graph integration and its Python/interop acceptance; the full sixteen-source amplitude workflow is validated independently."
 }

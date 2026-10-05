@@ -1,0 +1,34 @@
+{
+  "schema": "rustflow-factorized-native-boundary-comparison-v1",
+  "status": "passed",
+  "label": "W-NP_EW1-1",
+  "checked_coefficients": 305,
+  "comparison_digits": 30,
+  "metric": "Exact rational squared-norm checks against both the sum of recorded errors and 10^-30 mixed-scale tolerance. Source-sensitive cache identities remain distinct.",
+  "maximum_absolute_difference": "5.613011286159609376552020167875818690832695262602350524662472466559377526142083351027513115470927823E-79",
+  "maximum_mixed_difference": "6.901701771391459023079214304490935696150842803011445440291652146198442714352400915096800945143947369E-81",
+  "maximum_ratio_to_combined_errors": "1.616560332212930500573491437447089518537781439072003705585395479260590569378077429807605093657302913E-21",
+  "failures": [],
+  "candidate": {
+    "path": "/common/dev/amflow-factorized-denominator/reports/validation/2026-10-05-native-nonplanar-physical-factorized-source.json",
+    "sha256": "f1d4a129a7a69c1a1e91fb3e98325ddc2917d31ef0b568eb0eed888550c0bbf0",
+    "build": {
+      "dependency_source_digest": "d64faf80cf0bcbd37e679ce9fa81be2f4981e14fafde1a0dd7e8e66f6df66dcb",
+      "profile": "release",
+      "rustflow_source_digest": "20351f066774b396568c8c6c3cfe67aba6df42d1d14352fb453f35ad58399891"
+    },
+    "native_generation_seconds": "1731.489409041"
+  },
+  "baseline": {
+    "path": "target/gg-hg-native-acceptance/np-W1-30-exact-guard/runs/W-NP_EW1-1-1791220647691852240-1890044/result.json",
+    "sha256": "fef5e1838c4df94c82a12e3bb263c90f0b5402be070c96accd2c1e77604e172d",
+    "build": {
+      "dependency_source_digest": "d64faf80cf0bcbd37e679ce9fa81be2f4981e14fafde1a0dd7e8e66f6df66dcb",
+      "profile": "release",
+      "rustflow_source_digest": "774d6de2113e381daf86ac9cb85a38410d1141726776bf591d429234f111453b"
+    },
+    "native_generation_seconds": "2476.471711801"
+  },
+  "native_generation_speedup": "1.430255188896947816823305293177363282954",
+  "timing_scope": "Same requested precision/order/worker settings and exact input, separate empty numerical banks with compatible exact IBP checkpoints. Different concurrent workloads, including the full headless acceptance during the candidate run; not an isolated upstream performance benchmark."
+}

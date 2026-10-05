@@ -1,8 +1,9 @@
 # Factorized denominator disk bounds
 
 This isolated candidate strengthens the local rational ODE defect certificate.
-It has not been adopted in the main implementation or the Python host. Native
-physical boundary validation is still required before adoption.
+It has not been adopted in the main implementation or the Python host. The
+solver and native physical boundary checks described below have passed;
+adoption into the publication dependency graph remains a separate step.
 
 Symbolica factors each exact row denominator over its integer polynomial ring.
 The complete product, including constant content and multiplicities, must
@@ -57,6 +58,30 @@ baseline worktree.
 The candidate passed 137 release library tests (two ignored), including nine
 new regressions, and strict release Clippy for the library and all tests.
 All 397 integration tests across 89 targets also passed (ten ignored), including
-the unequal-banana precision and independent-contour check. A fresh native
-physical nonplanar boundary calculation remains the next gate. Production options and the Python host
-remain unchanged.
+the unequal-banana precision and independent-contour check. Production options
+and the Python host remain unchanged.
+
+## Fresh native physical boundary
+
+The candidate generated `W-NP_EW1-1` from an empty numerical bank at 30 requested
+digits, with 60 guard digits, order 96, 64 epsilon workers, and a 2,000-predicate
+limit. Only three compatible exact IBP checkpoint files were copied; their
+originals remained unchanged. All 78 evaluations across the independent
+37- and 41-point grids completed, and the resulting boundary passed all 305
+published source coefficients at the reference's recorded 24-digit cap.
+The maximum mixed difference from that reference is `2.42e-31`.
+
+Native generation took 1,731.489 seconds, compared with 2,476.472 seconds for
+the baseline at the same settings (observed factor 1.43). The concurrent
+workloads differed. Exact warm reload took 1.821 seconds and produced identical
+values, errors and provenance without evaluating any samples.
+
+The 305 candidate coefficients also passed a separate comparison with the
+validated baseline at 30 mixed-scale digits and within their combined recorded
+errors; the maximum mixed difference was `6.90e-81`. These checks validate one
+complete nonplanar source boundary, not the full sixteen-source amplitude
+workflow. No numerical reference boundary was supplied to the evaluator.
+
+See the [native source report](../reports/validation/2026-10-05-native-nonplanar-physical-factorized-source.json),
+[published-source comparison](../reports/validation/2026-10-05-native-nonplanar-physical-factorized-comparison.json),
+and [baseline comparison](../reports/validation/2026-10-05-native-nonplanar-physical-factorized-baseline-comparison.json).
