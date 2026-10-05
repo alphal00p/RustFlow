@@ -664,9 +664,7 @@ fn evaluate_from_source(
         let mut boundary = source.clone();
         boundary.range = range;
         boundary.coefficients.truncate(count);
-        boundary.accuracy = BoundaryAccuracy::supplied(
-            source.accuracy.verified_digits(),
-            source.accuracy.working_bits(),
+        boundary.accuracy = source.accuracy.reindexed(
             source.accuracy.comparison_errors()[..count].to_vec(),
             "compatible exact-coordinate cache hit",
         )?;

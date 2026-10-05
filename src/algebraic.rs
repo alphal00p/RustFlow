@@ -8,7 +8,9 @@
 mod analytic_origin;
 mod canonical;
 mod quotient;
+mod residual;
 pub use analytic_origin::{AnalyticOriginOptions, AnalyticOriginSeed};
+use residual::AlgebraicResidualChart;
 
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution, EpsilonSystem};
 use crate::family::{encode_complex, imaginary_parameter, scalar_symbols, substitute};
@@ -437,6 +439,7 @@ pub struct CompiledAlgebraicSystem {
     roots: Vec<RootKernel>,
     root_system: Option<CompiledSystem>,
     terms: Vec<KernelTerm>,
+    residual_rows: Vec<crate::ode::PolynomialRow>,
     poles: Vec<C>,
     pole_polynomials: Vec<Atom>,
     domain_guards: Vec<Atom>,
@@ -738,6 +741,34 @@ impl AlgebraicSystem {
                 }
             }
         }
+        // Retain exact row-wise denominator LCMs across all epsilon shifts
+        // and root monomials. Ragged rows avoid a dense augmented matrix.
+        let mut residual_terms = vec![Vec::<usize>::new(); self.system.matrices[0].len()];
+        for (index, (_, row, _, _)) in normalized.iter().enumerate() {
+            residual_terms[*row].push(index);
+        }
+        let residual_entries = residual_terms
+            .iter()
+            .map(|indices| {
+                if indices.is_empty() {
+                    vec![Atom::new()]
+                } else {
+                    indices.iter().map(|&i| entries[i][0].clone()).collect()
+                }
+            })
+            .collect::<Vec<_>>();
+        let mut residual_rows = compile_rows(
+            self.system.variable,
+            &residual_entries,
+            p,
+            &Default::default(),
+        )?
+        .polynomial_rows;
+        for (row, indices) in residual_rows.iter_mut().zip(&residual_terms) {
+            for (column, _) in &mut row.entries {
+                *column = indices[*column];
+            }
+        }
         let term_count = entries.len();
         let mut root_matrix = vec![vec![Atom::new(); self.roots.len()]; self.roots.len()];
         for (index, root) in self.roots.iter().enumerate() {
@@ -828,6 +859,7 @@ impl AlgebraicSystem {
             roots,
             root_system,
             terms,
+            residual_rows,
             poles: compiled.poles,
             pole_polynomials: compiled.pole_polynomials,
             domain_guards,
@@ -959,6 +991,8 @@ struct AlgebraicRun<'a> {
     seeds: &'a BTreeMap<Symbol, RootSeed>,
 }
 struct RootChart {
+    // Projection-only saved branch traces carry no solution residual.
+    residual: Option<AlgebraicResidualChart>,
     center: C,
     coefficients: Vec<Vec<C>>,
 }
@@ -1249,13 +1283,27 @@ impl SeriesSystem for AlgebraicRun<'_> {
                 *value = p.scale(value, 1, k as i64 + 1);
             }
         }
+        let residual = AlgebraicResidualChart::new(c, center, &result, &root_coefficients)?;
         Ok((
             result,
             RootChart {
+                residual: Some(residual),
                 center: center.clone(),
                 coefficients: root_coefficients,
             },
         ))
+    }
+    fn whole_segment_residual(&self, chart: &RootChart, step: &C) -> Result<Option<Vec<Float>>> {
+        chart
+            .residual
+            .as_ref()
+            .ok_or_else(|| {
+                Error::InvalidInput(
+                    "projection-only root chart cannot accept a transport step".into(),
+                )
+            })?
+            .defect_bounds(self.compiled, step)
+            .map(Some)
     }
     fn rhs(&self, point: &C, values: &[C], chart: &RootChart) -> Result<Vec<C>> {
         self.compiled.check_domain(point)?;
@@ -1283,6 +1331,32 @@ impl SeriesSystem for AlgebraicRun<'_> {
         tolerance: &Float,
     ) -> Result<Option<BranchState>> {
         let p = self.compiled.p;
+        let errors = match chart
+            .residual
+            .as_ref()
+            .ok_or_else(|| {
+                Error::InvalidInput(
+                    "projection-only root chart cannot accept a transport step".into(),
+                )
+            })?
+            .root_error_bounds(self.compiled, &p.sub(point, &chart.center))
+        {
+            Ok(errors) => errors,
+            Err(Error::Accuracy(_)) => return Ok(None),
+            Err(error) => return Err(error),
+        };
+        let projected = match self.project(chart, point) {
+            Ok(roots) => roots,
+            Err(Error::Accuracy(_)) => return Ok(None),
+            Err(error) => return Err(error),
+        };
+        if errors
+            .iter()
+            .zip(&projected)
+            .any(|(error, root)| *error > tolerance.clone() * p.norm(root))
+        {
+            return Ok(None);
+        }
         let midpoint = p.scale(&p.add(&chart.center, point), 1, 2);
         if self.roots_accurate(chart, &midpoint, tolerance)?.is_none() {
             return Ok(None);
@@ -1533,6 +1607,7 @@ impl CompiledAlgebraicSystem {
         }
         .project(
             &RootChart {
+                residual: None,
                 center: segment.center.clone(),
                 coefficients: segment.coefficients.clone(),
             },

@@ -448,11 +448,11 @@ pub(crate) fn rational_disk_bound(
 
 impl SeriesSystem for CompiledEpsilonSystem {
     type State = ();
-    type Chart = ();
+    type Chart = crate::ode::residual::RationalResidualChart;
     fn initial_state(&self, _: &BoundaryData) -> Result<()> {
         Ok(())
     }
-    fn accepted_state(&self, _: &(), _: &C, _: &Float) -> Result<Option<()>> {
+    fn accepted_state(&self, _: &Self::Chart, _: &C, _: &Float) -> Result<Option<()>> {
         Ok(Some(()))
     }
     fn precision(&self) -> Precision {
@@ -471,15 +471,24 @@ impl SeriesSystem for CompiledEpsilonSystem {
         values: &[C],
         order: usize,
         _: &(),
-    ) -> Result<(Vec<Vec<C>>, ())> {
-        Ok((
-            self.rows
-                .taylor_channels(center, values, order, self.count)?,
-            (),
-        ))
+    ) -> Result<(Vec<Vec<C>>, Self::Chart)> {
+        let coefficients = self
+            .rows
+            .taylor_channels(center, values, order, self.count)?;
+        let chart = crate::ode::residual::RationalResidualChart::new(
+            self.rows.p,
+            &self.rows.polynomial_rows,
+            center,
+            &coefficients,
+            self.count,
+        )?;
+        Ok((coefficients, chart))
+    }
+    fn whole_segment_residual(&self, chart: &Self::Chart, step: &C) -> Result<Option<Vec<Float>>> {
+        chart.defect_bounds(self.rows.p, step).map(Some)
     }
 
-    fn rhs(&self, point: &C, values: &[C], _: &()) -> Result<Vec<C>> {
+    fn rhs(&self, point: &C, values: &[C], _: &Self::Chart) -> Result<Vec<C>> {
         let p = self.rows.p;
         let n = self.rows.dimension();
         let mut rhs = vec![p.zero(); self.dimension()];

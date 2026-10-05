@@ -91,6 +91,8 @@ fn main() -> Result<()> {
             "transport_ns": transport_ns,
             "steps": result.diagnostics.steps,
             "rejected_steps": result.diagnostics.rejected_steps,
+            "predicate_evaluations": result.diagnostics.predicate_evaluations,
+            "superseded_successes": result.diagnostics.superseded_successes,
         })
     );
     Ok(())

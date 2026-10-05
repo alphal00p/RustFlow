@@ -11,11 +11,11 @@ and the [unified-flow design](unified-flow.md).
 | Part of the plan | Implemented | Still outstanding |
 |---|---|---|
 | Native family and reduction input | HEPKit graphs/kinematics, native tensor owners, exact families, RustRed and scoped table backends, derivative closure, reduction domains | Reducer search/compiled arity limits remain explicit; a target-only table need not cover derivatives or recursive families |
-| Shared numerical engine | Rational Taylor transport, rational Frobenius matching with resonances/logarithms, direct epsilon hierarchies, algebraic root charts | Whole-segment residual validation for a reproduced sparse-polynomial verification gap; general algebraic Puiseux/logarithmic singular endpoints and degenerate Gram charts |
+| Shared numerical engine | Rational Taylor transport, rational Frobenius matching with resonances/logarithms, direct epsilon hierarchies, algebraic root charts, whole-segment Taylor defects | Arithmetic cancellation and accumulated error accounting; general algebraic Puiseux/logarithmic singular endpoints and degenerate Gram charts |
 | Automatic AMF boundaries | Regions, factorization, recursive boundaries, gamma terminals, generic single-mass loop peeling including complex masses off the mass cut; separate unequal-mass two-body and massless N-body cut terminals | General linear/cut recursion and automatic Higgs+jet initialization |
 | AMFlow 2.0 options | Euclidean FT, configurable dimension, skipped initial reduction, basis refinement, symbolic restart | Broader validation/performance; FT physical contours remain outside its supported automatic scope |
 | Physical transport and cache | Progressive binary `RustFlowCache`, compatible-source search, checked intermediate points, inherited errors, supplied/AMF seeds, regular complex paths with explicit root germs | General causal-path inference, arbitrary algebraic coordinate constants and non-affine cached routes |
-| DiffExp controls | Exact multivariate pullback, canonical dlogs, supplied and compatible analytic-origin boundaries, explicit prescribed detours, exact diagonal epsilon rescaling of rational and registered-root systems | General nondiagonal epsilon regularization, Möbius/Padé controls, full singular algebraic boundary matching |
+| DiffExp controls | Exact multivariate pullback, canonical dlogs, supplied and compatible analytic-origin boundaries, explicit prescribed detours, exact diagonal epsilon rescaling of rational and registered-root systems, optional checked bracket proposals | General nondiagonal epsilon regularization, Möbius/Padé controls, full singular algebraic boundary matching |
 | Higgs+jet amplitude | Supplied full master systems, W/Z crossings, native HEPKit contraction, HEFT square/interference | Uniform 20-digit EW square, fresh automatic AMF boundaries, matched full-amplitude timing |
 
 AMF direct evaluation and AMF-generated seeds for physical transport share the
@@ -101,8 +101,10 @@ A [controlled step-selection experiment](../reports/performance/step-bracket-leg
 on one supplied 75-master segment reduced native transport from 729.713 to
 581.216 seconds by using fewer Taylor charts. All 375 coefficients agree within
 20 absolute digits and all root sheets match. This is one pair of measurements;
-the strategy is being prepared as an opt-in control and is not included in the
-full-system timings above.
+the strategy is now an opt-in control. This historical measurement predates
+the new whole-segment residual checks and is not a timing of the corrected
+solver. Fresh comparisons are being run against its frozen release archive.
+Neither change is included in the full-system timings above.
 
 ## Higgs+jet reuse and matrix elements
 

@@ -19,9 +19,12 @@ epsilon power zero: 20-digit stability under independent sample/precision/order
 refinement and agreement with upstream data at its recorded precision. See the
 [acceptance report](reports/validation/2026-10-04-paper-two-loop-acceptance.json)
 and [implemented coverage and limits](docs/coverage.md).
-A [known transport-verification gap](reports/validation/2026-10-05-residual-alias-counterexample.json)
-can produce false verified digits for sparse high-degree polynomial systems;
-a whole-segment residual check is in progress.
+[Whole-segment Taylor checks](docs/transport-verification.md) now address the
+[recorded sparse-polynomial verification failure](reports/validation/2026-10-05-residual-alias-counterexample.json).
+The [release gate](reports/validation/2026-10-05-whole-segment-residual-release.json) passes 440 tests and one doctest.
+A separate [large-cancellation counterexample](reports/validation/2026-10-05-coordinate-roundoff-counterexample.json)
+still produces false verified digits and needs a precision-retry fix. Local
+defect checks and independent refinements are not a general accuracy proof.
 The [implementation and benchmark comparison](docs/benchmark-comparison.md)
 lists completed and pending features with RustFlow and reference timings side by side.
 An executable [performance comparison](docs/performance.md) measures the Rust

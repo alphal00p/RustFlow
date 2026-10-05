@@ -269,6 +269,11 @@ impl AlgebraicSystem {
             return Err(Error::Numerical("nonfinite analytic series".into()));
         }
         let chart = RootChart {
+            residual: Some(AlgebraicResidualChart::roots_only(
+                &compiled,
+                &p.zero(),
+                &root_coefficients,
+            )?),
             center: p.zero(),
             coefficients: root_coefficients,
         };

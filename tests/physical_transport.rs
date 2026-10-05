@@ -186,3 +186,153 @@ fn too_weak_cached_input_is_not_promoted_by_repeating_transport() {
     assert!(matches!(result, Err(Error::Accuracy(_))));
     assert_eq!(cache.len(), 1);
 }
+
+#[test]
+fn bracketed_transport_preserves_verified_cache_reuse_across_strategies() {
+    let (engine, mut cache) = problem();
+    let policy = ScaledDistance {
+        scales: BTreeMap::new(),
+        admissible: |_: &CachedBoundary, _: &CachedPoint| Ok(true),
+    };
+    let range = EpsilonRange::new(0, 4).unwrap();
+    let options = FlowOptions {
+        digits: 20,
+        guard_digits: 20,
+        series_order: 24,
+        max_steps: 3000,
+        step_size_strategy: StepSizeStrategy::Bracketed,
+        ..Default::default()
+    };
+    let destination = BTreeMap::from([(symbol!("s"), Atom::num(16))]);
+    let first = engine
+        .evaluate_to(
+            &mut cache,
+            &destination,
+            range,
+            &options,
+            &RunContext::default(),
+            &policy,
+        )
+        .unwrap();
+    let diagnostics = &first.transport.as_ref().unwrap().diagnostics;
+    assert!(
+        diagnostics.superseded_successes > 0,
+        "strategy reaches refined public transport"
+    );
+    assert_eq!(
+        diagnostics.predicate_evaluations,
+        diagnostics.steps + diagnostics.rejected_steps + diagnostics.superseded_successes
+    );
+    assert!(first.boundary.accuracy.verified_digits() >= 20);
+    let p = Precision {
+        bits: first.boundary.accuracy.working_bits(),
+    };
+    let logarithm = p.log(&p.i(16));
+    let mut factorial = 1;
+    for (k, row) in first.boundary.coefficients.iter().enumerate() {
+        if k > 0 {
+            factorial *= k as i64;
+        }
+        assert!(p.close(
+            &row[0],
+            &p.scale(&p.powi(&logarithm, k as i64), 1, factorial),
+            20
+        ));
+    }
+    let directory = std::env::temp_dir().join(format!(
+        "amflow-step-strategy-restart-{}",
+        std::process::id()
+    ));
+    cache.save(&directory).unwrap();
+    let mut restored = RustFlowCache::load(&directory).unwrap();
+    std::fs::remove_dir_all(directory).unwrap();
+    let halving = FlowOptions {
+        step_size_strategy: StepSizeStrategy::Halving,
+        ..options
+    };
+    let hit = engine
+        .evaluate_to(
+            &mut restored,
+            &destination,
+            range,
+            &halving,
+            &RunContext::default(),
+            &policy,
+        )
+        .unwrap();
+    assert!(hit.transport.is_none());
+    assert_eq!(hit.inserted_points, 0);
+    assert_eq!(hit.boundary.coefficients, first.boundary.coefficients);
+}
+
+#[test]
+fn exact_hit_truncation_preserves_source_accuracy_and_provenance() {
+    let (engine, mut cache) = problem();
+    let mut source = cache.entries()[0].clone();
+    let p = Precision {
+        bits: source.accuracy.working_bits(),
+    };
+    let provenance = "generated source: independent 40/72 Taylor orders, 60/80 working digits";
+    let errors = (0..5)
+        .map(|k| vec![p.real(k + 1) * p.tolerance(40)])
+        .collect::<Vec<_>>();
+    let solution = symbolica_amflow::diffexp::EpsilonSolution {
+        point: p.zero(),
+        leading: 0,
+        coefficients: source.coefficients.clone(),
+        diagnostics: FlowDiagnostics {
+            working_bits: p.bits,
+            ..Default::default()
+        },
+        segments: vec![],
+        checkpoints: vec![],
+        verified_digits: Some(35),
+        comparison_errors: errors.clone(),
+    };
+    source.accuracy = BoundaryAccuracy::from_solution(&solution, 80, provenance).unwrap();
+    let original_evidence = serde_json::to_value(&source.accuracy).unwrap();
+    cache = RustFlowCache::default();
+    cache.insert(source.clone()).unwrap();
+    let policy = ScaledDistance {
+        scales: BTreeMap::new(),
+        admissible: |_: &CachedBoundary, _: &CachedPoint| Ok(true),
+    };
+    let result = engine
+        .evaluate_to(
+            &mut cache,
+            &BTreeMap::from([(symbol!("s"), Atom::num(1))]),
+            EpsilonRange::new(0, 1).unwrap(),
+            &FlowOptions {
+                digits: 20,
+                ..Default::default()
+            },
+            &RunContext::default(),
+            &policy,
+        )
+        .unwrap();
+    assert!(result.transport.is_none());
+    assert_eq!(result.inserted_points, 0);
+    assert_eq!(result.boundary.range, EpsilonRange::new(0, 1).unwrap());
+    assert_eq!(result.boundary.coefficients, source.coefficients[..2]);
+    assert_eq!(result.boundary.accuracy.comparison_errors(), &errors[..2]);
+    assert_eq!(result.boundary.accuracy.verified_digits(), 35);
+    assert_eq!(result.boundary.accuracy.working_bits(), p.bits);
+    let evidence = serde_json::to_value(&result.boundary.accuracy).unwrap();
+    assert_eq!(
+        evidence["input_verified_digits"],
+        original_evidence["input_verified_digits"]
+    );
+    assert_eq!(evidence["input_verified_digits"], 80);
+    assert_eq!(
+        evidence["verified_digits"],
+        original_evidence["verified_digits"]
+    );
+    assert_eq!(
+        evidence["provenance"],
+        format!("compatible exact-coordinate cache hit; source: {provenance}")
+    );
+    assert_eq!(
+        serde_json::to_value(&cache.entries()[0].accuracy).unwrap(),
+        original_evidence
+    );
+}

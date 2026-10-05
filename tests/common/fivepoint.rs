@@ -259,6 +259,8 @@ fn evaluate_impl(
         let mut current_seeds = seeds;
         let mut attempts = 0usize;
         let mut accepted = 0usize;
+        let mut rejected = 0usize;
+        let mut superseded = 0usize;
         let mut completed = None;
         for target in &waypoints {
             let mut local_options = options.clone();
@@ -278,8 +280,9 @@ fn evaluate_impl(
                 false,
             )?;
             accepted += answer.solution.diagnostics.steps;
-            attempts +=
-                answer.solution.diagnostics.steps + answer.solution.diagnostics.rejected_steps;
+            attempts += answer.solution.diagnostics.predicate_evaluations;
+            rejected += answer.solution.diagnostics.rejected_steps;
+            superseded += answer.solution.diagnostics.superseded_successes;
             current = diffexp::EpsilonBoundary {
                 point: answer.solution.point.clone(),
                 leading: answer.solution.leading,
@@ -296,7 +299,9 @@ fn evaluate_impl(
         let mut answer =
             completed.ok_or_else(|| Error::InvalidInput("empty planar contour".into()))?;
         answer.solution.diagnostics.steps = accepted;
-        answer.solution.diagnostics.rejected_steps = attempts - accepted;
+        answer.solution.diagnostics.rejected_steps = rejected;
+        answer.solution.diagnostics.predicate_evaluations = attempts;
+        answer.solution.diagnostics.superseded_successes = superseded;
         answer
     } else {
         compiled.transport(&boundary, &waypoints, &seeds, &options, &context, false)?

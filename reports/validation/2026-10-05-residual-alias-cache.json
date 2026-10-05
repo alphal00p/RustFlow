@@ -1,0 +1,155 @@
+{
+  "schema_version": 1,
+  "status": "obsolete_snapshot_captured_current_loader_regression_staged",
+  "scope": "Intentionally incorrect historical data used only to verify cache compatibility rejection, never as scientific boundary evidence.",
+  "mathematical_counterexample": "reports/validation/2026-10-05-residual-alias-counterexample.json",
+  "fixture": "fixtures/regressions/residual-alias-cache-v5.bin",
+  "fixture_sha256": "71719c6fdbcee0e9716b1ae92c7c088ed72a890bad74695485f200e727784c3d",
+  "fixture_bytes": 1346,
+  "capture": {
+    "exit_code": 0,
+    "wall_seconds": 0.11673853686079383,
+    "cpu": 35,
+    "wall_cap_seconds": 120,
+    "address_space_cap_bytes": 4294967296,
+    "recorded_utc": "2026-10-05T05:07:17.415834+00:00",
+    "library": "target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+    "sha256": {
+      "target/cache-verification-audit/capture.rs": "9c178fcdf07813f3fe3faf3fd0bab1a0d90888dfa3586f79e758cf764df2157a",
+      "target/cache-verification-audit/capture": "1353b9a910c1809cebd620e97e1ff849ab84872c4da28c526ca8876152975ec9",
+      "target/cache-verification-audit/capture.json": "0e804ad1b2097d2480d1f5e1af122a855e9b16753570dcce114dead1a24e8000",
+      "target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib": "e733f9be6deb8146b12628fd4519813a93133b5fa6aae6918b53fe5c02a068b2",
+      "target/cache-verification-audit/e733-alias-snapshot/physical-boundaries.bin": "71719c6fdbcee0e9716b1ae92c7c088ed72a890bad74695485f200e727784c3d"
+    }
+  },
+  "old_output": {
+    "original_reproduction": {
+      "N": 1000,
+      "antiderivative": "(-1/668*residual_alias_mre::{}::x^1002+1/1003*residual_alias_mre::{}::x^1003+1/2002*residual_alias_mre::{}::x^1001)*2012022012",
+      "counterexample": "y'=epsilon*g(x)*y, y(0)=1; epsilon orders zero and one",
+      "exact_derivative_verified_by_symbolica": true,
+      "exact_endpoint_coefficients": [
+        "1",
+        "-999"
+      ],
+      "exact_integral": "-999",
+      "explanation": "All retained Taylor orders below N+1 miss g; endpoint and midpoint g vanish exactly, so all collocation defects and retained tail vanish. Independent order/precision reruns agree on an incorrect answer.",
+      "g": "(-1+residual_alias_mre::{}::x)*(-1/2+residual_alias_mre::{}::x)*2012022012*residual_alias_mre::{}::x^1000",
+      "public_verified_transport": {
+        "checkpoints": 1,
+        "comparison_errors": [
+          [
+            "0"
+          ],
+          [
+            "0"
+          ]
+        ],
+        "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, working_bits: 282, expansion_order: 112 }",
+        "epsilon1": "0",
+        "epsilon1_absolute_error": "999.0000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "verified_digits": 20
+      },
+      "raw_runs": [
+        {
+          "coefficients": [
+            [
+              {
+                "im": "0",
+                "re": "1.0000000000000000000000000000000000000000000000000000000000000000"
+              }
+            ],
+            [
+              {
+                "im": "0",
+                "re": "0"
+              }
+            ]
+          ],
+          "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, working_bits: 216, expansion_order: 16 }",
+          "order": 16,
+          "segments": 1,
+          "verified_digits": null,
+          "working_digits": 60
+        },
+        {
+          "coefficients": [
+            [
+              {
+                "im": "0",
+                "re": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              }
+            ],
+            [
+              {
+                "im": "0",
+                "re": "0"
+              }
+            ]
+          ],
+          "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, working_bits: 282, expansion_order: 48 }",
+          "order": 48,
+          "segments": 1,
+          "verified_digits": null,
+          "working_digits": 80
+        },
+        {
+          "coefficients": [
+            [
+              {
+                "im": "0",
+                "re": "1.0000000000000000000000000000000000000000000000000000000000000000"
+              }
+            ],
+            [
+              {
+                "im": "0",
+                "re": "0"
+              }
+            ]
+          ],
+          "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, working_bits: 216, expansion_order: 80 }",
+          "order": 80,
+          "segments": 1,
+          "verified_digits": null,
+          "working_digits": 60
+        },
+        {
+          "coefficients": [
+            [
+              {
+                "im": "0",
+                "re": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              }
+            ],
+            [
+              {
+                "im": "0",
+                "re": "0"
+              }
+            ]
+          ],
+          "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, working_bits: 282, expansion_order: 112 }",
+          "order": 112,
+          "segments": 1,
+          "verified_digits": null,
+          "working_digits": 80
+        }
+      ]
+    },
+    "same_old_binary_exact_hit_returns_aliased_zero": true,
+    "snapshot_directory": "target/cache-verification-audit/e733-alias-snapshot",
+    "snapshot_identity": "b1b052438e8e8ed153178695bac61a910fd3b9e189ebf46627da5c411b528fa8"
+  },
+  "source": {
+    "path": "target/cache-verification-audit/capture.rs",
+    "sha256": "9c178fcdf07813f3fe3faf3fd0bab1a0d90888dfa3586f79e758cf764df2157a",
+    "text": "use serde_json::json;\nuse symbolica::prelude::*;\nuse symbolica_amflow::{\n    Error, FlowOptions, Precision, Result, RunContext,\n    diffexp::{EpsilonBoundary, EpsilonSystem, transport_epsilon},\n};\nfn atom(s: &str) -> Atom {\n    Atom::parse(s, \"residual_alias_mre\", Default::default()).unwrap()\n}\nfn main() -> Result<()> {\n    let x = match atom(\"x\").as_view() {\n        AtomView::Var(v) => v.get_symbol(),\n        _ => unreachable!(),\n    };\n    let g = atom(\"2*1001*1002*1003*x^1000*(x-1/2)*(x-1)\");\n    let primitive = atom(\"2*1001*1002*1003*(x^1003/1003-3*x^1002/(2*1002)+x^1001/(2*1001))\");\n    let derivative_proof = (&primitive.derivative(x) - &g).expand().is_zero();\n    let exact_integral = primitive.replace(Atom::var(x)).with(1).expand();\n    if !derivative_proof || exact_integral != atom(\"-999\") {\n        return Err(Error::InvalidInput(\"exact proof failed\".into()));\n    }\n    let system = EpsilonSystem {\n        variable: x,\n        matrices: vec![vec![vec![atom(\"0\")]], vec![vec![g.clone()]]],\n    };\n    let bdy = |p: Precision| {\n        Ok(EpsilonBoundary {\n            point: p.zero(),\n            leading: 0,\n            coefficients: vec![vec![p.i(1)], vec![p.zero()]],\n        })\n    };\n    let context = RunContext::default();\n    let mut runs = Vec::new();\n    for (digits, order) in [(60, 16), (80, 48), (60, 80), (80, 112)] {\n        let p = Precision::decimal(digits)?;\n        let options = FlowOptions {\n            digits: 20,\n            guard_digits: digits - 20,\n            series_order: order,\n            max_steps: 100,\n            ..Default::default()\n        };\n        let solution = system.compile(p, &Default::default())?.transport(\n            &bdy(p)?,\n            &[p.i(1)],\n            &options,\n            &context,\n            true,\n        )?;\n        runs.push(json!({\"working_digits\":digits,\"order\":order,\"coefficients\":solution.coefficients.iter().map(|r|r.iter().map(|z|json!({\"re\":z.re.to_string(),\"im\":z.im.to_string()})).collect::<Vec<_>>()).collect::<Vec<_>>(),\"verified_digits\":solution.verified_digits,\"segments\":solution.segments.len(),\"diagnostics\":format!(\"{:?}\",solution.diagnostics)}));\n    }\n    let options = FlowOptions {\n        digits: 20,\n        guard_digits: 40,\n        series_order: 80,\n        max_steps: 100,\n        ..Default::default()\n    };\n    let solution = transport_epsilon(&system, bdy, &[atom(\"1\")], &options, &context, true)?;\n    let p = Precision::decimal(80)?;\n    let error = p.norm(&p.sub(&solution.coefficients[1][0], &p.i(-999)));\n    let record = json!({\"counterexample\":\"y'=epsilon*g(x)*y, y(0)=1; epsilon orders zero and one\", \"g\":g.to_canonical_string(),\"N\":1000,\"antiderivative\":primitive.to_canonical_string(),\"exact_derivative_verified_by_symbolica\":derivative_proof,\"exact_integral\":exact_integral.to_canonical_string(),\"exact_endpoint_coefficients\":[\"1\",\"-999\"],\"raw_runs\":runs,\"public_verified_transport\":{\"verified_digits\":solution.verified_digits,\"epsilon1\":solution.coefficients[1][0].re.to_string(),\"epsilon1_absolute_error\":error.to_string(),\"comparison_errors\":solution.comparison_errors.iter().map(|r|r.iter().map(ToString::to_string).collect::<Vec<_>>()).collect::<Vec<_>>(),\"checkpoints\":solution.checkpoints.len(),\"diagnostics\":format!(\"{:?}\",solution.diagnostics)},\"explanation\":\"All retained Taylor orders below N+1 miss g; endpoint and midpoint g vanish exactly, so all collocation defects and retained tail vanish. Independent order/precision reruns agree on an incorrect answer.\"});\n\n    use std::collections::BTreeMap;\n    use symbolica_amflow::{\n        Prescription, RustFlow, kinematics::KinematicSystem, transport_cache::*,\n    };\n    let epsilon = match atom(\"eps\").as_view() {\n        AtomView::Var(v) => v.get_symbol(),\n        _ => unreachable!(),\n    };\n    let flow = RustFlow::new(\n        KinematicSystem {\n            epsilon,\n            derivatives: BTreeMap::from([(x, vec![vec![Atom::var(epsilon) * g]])]),\n        },\n        &[atom(\"I1\")],\n        &atom(\"1\"),\n        Prescription::PlusI0,\n        \"regular real path0to1\",\n    )?;\n    let source = CachedBoundary {\n        identity: flow.identity().clone(),\n        point: CachedPoint::Exact(BTreeMap::from([(x, atom(\"1\"))])),\n        kind: PointKind::Physical,\n        range: EpsilonRange::new(0, 1)?,\n        coefficients: solution.coefficients.clone(),\n        accuracy: BoundaryAccuracy::from_solution(\n            &solution,\n            80,\n            \"generated by archived e733 public transport_epsilon; known aliased false result retained solely for compatibility regression\",\n        )?,\n    };\n    let mut cache = RustFlowCache::default();\n    cache.insert(source)?;\n    let directory = std::path::Path::new(\"target/cache-verification-audit/e733-alias-snapshot\");\n    cache.save(directory)?;\n    let mut loaded = RustFlowCache::load(directory)?;\n    let policy = ScaledDistance {\n        scales: BTreeMap::new(),\n        admissible: |_: &CachedBoundary, _: &CachedPoint| Ok(true),\n    };\n    let hit = flow.evaluate_to(\n        &mut loaded,\n        &BTreeMap::from([(x, atom(\"1\"))]),\n        EpsilonRange::new(0, 1)?,\n        &options,\n        &context,\n        &policy,\n    )?;\n    assert!(hit.transport.is_none());\n    assert_eq!(hit.boundary.coefficients[1][0], p.zero());\n    println!(\"{}\",serde_json::to_string_pretty(&json!({\"original_reproduction\":record,\"snapshot_directory\":directory,\"same_old_binary_exact_hit_returns_aliased_zero\":true,\"snapshot_identity\":flow.identity().key()})).unwrap());\n\n    if solution.verified_digits != Some(20) || !p.norm(&solution.coefficients[1][0]).is_zero() {\n        return Err(Error::InvalidInput(\n            \"expected old-library failure mode not reproduced\".into(),\n        ));\n    }\n    Ok(())\n}\n"
+  },
+  "current_loader_validation": {
+    "status": "passed",
+    "release_report": "reports/validation/2026-10-05-whole-segment-residual-release.json",
+    "tests": "Actual old snapshot rejected before numerical admission; independent implementation/dependency envelope mismatches rejected; exact-hit provenance preserved."
+  },
+  "existing_compatibility_mutation_regression": "Pristine exact hit succeeds; changing only the envelope implementation or dependency string with unchanged payload/checksum rejects before reuse. Focused archived test passed."
+}

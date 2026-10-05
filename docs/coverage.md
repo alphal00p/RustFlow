@@ -9,14 +9,29 @@ routing determinants and cut-aware reductions. Two- and three-loop finite-epsilo
 values match independent automatic AMF discontinuities; a two-loop Laurent fit
 matches the native three-body measure. General mixed-cut recursion remains open.
 
-A separate [reproduced correctness gap](../reports/validation/2026-10-05-residual-alias-counterexample.json)
-affects generic transport verification: sparse high-degree polynomial forcing can
-vanish at both sampled defect points and lie above both retained Taylor orders.
-The current public interface can then incorrectly report verified digits and a
-verified checkpoint. A whole-segment residual check is being implemented. The
-ordinary release suite does not cover this reproducer yet; independent reference
-comparisons in the benchmark reports establish accuracy only for their recorded
-inputs.
+The [whole-segment verification milestone](../reports/validation/2026-10-05-whole-segment-residual-release.json)
+passes **440 release unit/integration tests**, one doctest, strict all-target
+Clippy and formatting, with nine long scientific tests still opt-in. Ordinary
+rational, epsilon-hierarchy and registered-root charts retain all source
+polynomial degrees when estimating differential defects over a trial disk.
+Both step strategies now return the correct -999 in the
+[previously false verified sparse-polynomial case](../reports/validation/2026-10-05-residual-alias-counterexample.json),
+and the root representation has its own regression. Missing or inconclusive
+majorants reject a trial. The optional bracket strategy charges every tested
+candidate and commits only the selected state. Exact cache hits preserve source
+provenance, and a captured erroneous old snapshot is rejected by source-fingerprint
+compatibility before its values are admitted.
+
+These [local defect checks](transport-verification.md) use finite MPFR arithmetic;
+they do not establish directed interval bounds or accumulated global accuracy.
+A separate [coordinate/coefficient-cancellation failure](../reports/validation/2026-10-05-coordinate-roundoff-counterexample.json)
+is reproduced on the corrected library: two insufficient working precisions
+return zero instead of one and claim 20 verified digits, even when the residual
+of the rounded numerical system vanishes. Source and recurrence roundoff need
+a separate precision-retry mechanism. This is a RustFlow verification gap;
+Symbolica rounds the requested numerical operations correctly. Historical reference
+comparisons establish accuracy for their recorded inputs; they have not all
+been repeated on this new library.
 
 The preceding registered-root epsilon-shearing milestone passes **408 release unit/integration
 tests**, one doctest, strict all-target Clippy and formatting. Nine long scientific

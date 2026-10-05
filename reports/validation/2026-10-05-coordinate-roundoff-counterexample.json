@@ -1,0 +1,429 @@
+{
+  "schema_version": 1,
+  "recorded_utc": "2026-10-05T05:37:10.208867+00:00",
+  "status": "confirmed_open_correctness_gap_after_whole_segment_residual_release_gate",
+  "title": "Coordinate and exact source-coefficient cancellation can falsely pass two-profile transport verification",
+  "scope": "Public diffexp::transport_epsilon and CompiledEpsilonSystem::transport. This probe does not exercise high-level RustFlowCache insertion and does not establish that its input-source uncertainty contract accepts these boundaries.",
+  "tested_library": {
+    "path": "/common/dev/amflow/target/whole-segment-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+    "sha256": "21451b9dafd72706b8fd6f75a0a9f9a680860a8f6ab4cfaf5847a8180c4e1ecf"
+  },
+  "archive_manifest": {
+    "path": "/common/dev/amflow/target/whole-segment-release/archive.json",
+    "sha256": "3649180d2f6eaea5d9a40e66b27e9de07851958738bba41589ca04a31fcc730e"
+  },
+  "release_gate_note": "Parent reported 440 release tests plus one doctest, strict Clippy and formatting passed for the frozen archive. These standalone counterexamples were reproduced afterward.",
+  "caps": {
+    "cpu": 36,
+    "compile_cap_seconds": 60,
+    "run_cap_seconds": 30,
+    "address_space_cap_bytes": 4294967296
+  },
+  "provenance": [
+    {
+      "path": "target/coordinate-roundoff-mre/probe.rs",
+      "sha256": "d481a984feed8f31e1560929f4d99874427a8c43f3d48449e282622420306d32"
+    },
+    {
+      "path": "target/coordinate-roundoff-mre/normalized_probe.rs",
+      "sha256": "48d54be4537ed050ed8b787e8c1ac465621a731a39a15b1d975687e3ccfe9060"
+    },
+    {
+      "path": "target/coordinate-roundoff-mre/replay_against_archive.py",
+      "sha256": "2a2ca9792877b39077b1bf3a3e1ae6450a59905ada59a4bf3cb63ce230079f72"
+    },
+    {
+      "path": "target/coordinate-roundoff-mre/current-whole-segment/plan.json",
+      "sha256": "b4523a2feb23c604f8f0af7d67c97ee61ed423cd005c0dda20be6398dc103b9c"
+    },
+    {
+      "path": "target/coordinate-roundoff-mre/current-whole-segment/results.json",
+      "sha256": "e7dea5066faf185a69869f014476d9fb693ea68456e91dbb7a344cfb31865760"
+    },
+    {
+      "path": "target/coordinate-roundoff-mre/current-whole-segment/probe.output.json",
+      "sha256": "62ad5abd9827f32e854a885c252ceab704d6585757e226f32a3bf3dd89df04c8"
+    },
+    {
+      "path": "target/coordinate-roundoff-mre/current-whole-segment/normalized_probe.output.json",
+      "sha256": "72eb46f5c706aacc66de744a02bdda8a1b82c79bd2bbd84282005eba6075b5b7"
+    },
+    {
+      "path": "target/coordinate-roundoff-mre/output.json",
+      "sha256": "acb38b398bc18e6c30257e1dd822e90f85c188a8d9bad1aacea8dcc424fea1b3"
+    },
+    {
+      "path": "target/coordinate-roundoff-mre/normalized-output.json",
+      "sha256": "5c99515716301f7983fe3ee86e396907c5615b52597bab9279075021ae40ae95"
+    }
+  ],
+  "runs": [
+    {
+      "name": "probe",
+      "build_exit": 0,
+      "build_seconds": 13.050578005146235,
+      "binary_sha256": "706f2d924922318ef5d905ed976d1780f1b6dd1560f6de5e6dd8efb21ba20bcc",
+      "run_exit": 0,
+      "run_seconds": 0.020102669019252062,
+      "output_sha256": "62ad5abd9827f32e854a885c252ceab704d6585757e226f32a3bf3dd89df04c8",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "normalized_probe",
+      "build_exit": 0,
+      "build_seconds": 13.24048826098442,
+      "binary_sha256": "ff0a93b13048d0e743721b4add5ed35441f205c3a4dc7bef3c002f236906d6c5",
+      "run_exit": 0,
+      "run_seconds": 0.03699634922668338,
+      "output_sha256": "72eb46f5c706aacc66de744a02bdda8a1b82c79bd2bbd84282005eba6075b5b7",
+      "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "requested_digits": 20,
+  "refinement_working_digits": [
+    60,
+    80
+  ],
+  "common_observed_failure": {
+    "returned_values": [
+      "0",
+      "1"
+    ],
+    "exact_values": [
+      "1",
+      "1"
+    ],
+    "absolute_error_first_component": "1",
+    "reported_verified_digits": 20,
+    "comparison_errors": [
+      [
+        "0",
+        "0"
+      ]
+    ],
+    "reported_verified_checkpoints": 1,
+    "transport_steps": 1,
+    "predicate_evaluations": 1
+  },
+  "coordinate_case": {
+    "system": "dY/dx=[[0,1],[0,0]] Y",
+    "boundary": "Y(c)=[c,1], c=1e100; c and first component use identical stored Float at every precision",
+    "target": "x=1",
+    "analytic_solution": [
+      "x",
+      "1"
+    ],
+    "failure": "At 60 and 80 decimal working digits, computing step=1-c rounds to -c, so center+step and the first polynomial value are zero. The result records the independently supplied target 1.",
+    "raw_first_component_by_working_digits": {
+      "60": "0",
+      "80": "0",
+      "100": "1",
+      "120": "1"
+    },
+    "exact_differential_residual": "zero, independently checked with Symbolica"
+  },
+  "normalized_cases": {
+    "system": "dY/dt=[[0,1-C],[0,0]] Y",
+    "boundary": "Y(0)=[C,1]",
+    "target": "t=1",
+    "analytic_solution": [
+      "C+(1-C)*t",
+      "1"
+    ],
+    "source_contract": "1-C supplied as exact Atom; both path endpoints are exactly representable",
+    "cases": [
+      {
+        "C": "10^100",
+        "raw_first_component_by_working_digits": {
+          "60": "0",
+          "80": "0",
+          "100": "1",
+          "120": "1"
+        },
+        "boundary_exact_at_working_digits": [
+          80,
+          100,
+          120
+        ],
+        "connection_exact_at_working_digits": [
+          100,
+          120
+        ]
+      },
+      {
+        "C": "2^400",
+        "raw_first_component_by_working_digits": {
+          "60": "0",
+          "80": "0",
+          "100": "0",
+          "120": "1"
+        },
+        "boundary_exact_at_working_digits": [
+          60,
+          80,
+          100,
+          120
+        ],
+        "connection_exact_at_working_digits": [
+          120
+        ],
+        "isolation": "Boundary is exactly representable in every profile, isolating source-coefficient rounding and polynomial cancellation."
+      }
+    ],
+    "failure": "The exact coefficient 1-C rounds to -C, and evaluation gives C-C=0. A coordinate endpoint consistency guard cannot detect this normalized-path failure.",
+    "exact_derivative_and_endpoint": "independently checked with Symbolica"
+  },
+  "interpretation": [
+    "Whole-segment polynomial residual checks address defects of the numerical ODE chart; they do not yet include all errors from converting exact source coefficients, forming coordinates, or evaluating heavily cancelling series.",
+    "Agreement between two finite precisions is not a proof of accuracy when both share the same rounding floor.",
+    "This is a RustFlow verification-policy limitation; the observed MPFR rounding is consistent with the requested working precision. No defect in Symbolica arithmetic is asserted."
+  ],
+  "required_follow_up": [
+    "Track or conservatively estimate source conversion, coordinate, recurrence and evaluation arithmetic error using native Symbolica/Numerica facilities where suitable.",
+    "Reject accuracy evidence that exceeds the output error budget and retry from original input at higher working precision; increasing expansion order alone does not repair these degree-one systems.",
+    "Retain full-domain differential-defect bounds and endpoint/refinement checks; arithmetic evidence is additional, not a substitute."
+  ],
+  "claims_excluded": [
+    "No directed-rounding global solution certificate.",
+    "No performance comparison from the small probe runtimes.",
+    "No assertion about actual physical benchmark outputs being wrong.",
+    "No assertion that high-level persistent cache accepted these probe outputs."
+  ],
+  "prior_library": {
+    "sha256": "e733f9be6deb8146b12628fd4519813a93133b5fa6aae6918b53fe5c02a068b2",
+    "outcome": "Both failures also reproduced; old evidence retained separately."
+  },
+  "replay_command": "source .dev-env && python3 target/coordinate-roundoff-mre/replay_against_archive.py target/whole-segment-release/archive.json target/coordinate-roundoff-mre/new-unique-directory",
+  "raw_outputs": {
+    "coordinate": {
+      "analytic_solution": [
+        "x",
+        "1"
+      ],
+      "boundary_scope": "For each precision, the boundary uses the same stored Float as coordinate and first component, so the exact solution Y1=x holds even if c itself rounded.",
+      "exact_differential_residual_verified_by_symbolica": true,
+      "exact_endpoint": [
+        "1",
+        "1"
+      ],
+      "explanation": "60/80-digit arithmetic rounds target-center to -center. Polynomial evaluation uses rounded step and yields zero, while controller records the separately supplied exact target=1. Two refinements agree on the wrong result before reaching100-digit arithmetic, which recovers1. Whole polynomial differential residual is exactly zero and cannot detect this coordinate/evaluation-roundoff error.",
+      "public_refinement": {
+        "absolute_error_first_component": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "comparison_errors": [
+          [
+            "0",
+            "0"
+          ]
+        ],
+        "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 282, expansion_order: 112 }",
+        "reported_endpoint": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+        "values": [
+          "0",
+          "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "verified_checkpoints": 1,
+        "verified_digits": 20
+      },
+      "raw_profiles": [
+        {
+          "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 216, expansion_order: 80 }",
+          "reported_endpoint": "1.0000000000000000000000000000000000000000000000000000000000000000",
+          "rounded_center_plus_step": "0",
+          "starting_point": "9.9999999999999999999999999999999999999999999999999999999999999999e99",
+          "values": [
+            "0",
+            "1.0000000000000000000000000000000000000000000000000000000000000000"
+          ],
+          "working_bits": 216,
+          "working_digits": 60
+        },
+        {
+          "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 282, expansion_order: 80 }",
+          "reported_endpoint": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "rounded_center_plus_step": "0",
+          "starting_point": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000e100",
+          "values": [
+            "0",
+            "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          ],
+          "working_bits": 282,
+          "working_digits": 80
+        },
+        {
+          "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 349, expansion_order: 80 }",
+          "reported_endpoint": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "rounded_center_plus_step": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "starting_point": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.0000",
+          "values": [
+            "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          ],
+          "working_bits": 349,
+          "working_digits": 100
+        },
+        {
+          "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 415, expansion_order: 80 }",
+          "reported_endpoint": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "rounded_center_plus_step": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "starting_point": "10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000.00000000000000000000000",
+          "values": [
+            "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+          ],
+          "working_bits": 415,
+          "working_digits": 120
+        }
+      ],
+      "system": "Yprime=[[0,1],[0,0]]Y; Y(c)=[c,1]; c=1e100; endpoint x=1"
+    },
+    "normalized": {
+      "cases": [
+        {
+          "C": "10^100",
+          "exact_analytic_solution_first_component": "-9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999*normalized_roundoff_mre::{}::t+10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+          "exact_source_coefficient": "-9999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999",
+          "public_refinement": {
+            "absolute_error_first_component": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "comparison_errors": [
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 282, expansion_order: 112 }",
+            "reported_endpoint": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "values": [
+              "0",
+              "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "verified_checkpoints": 1,
+            "verified_digits": 20
+          },
+          "raw_profiles": [
+            {
+              "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 216, expansion_order: 80 }",
+              "reported_endpoint": "1.0000000000000000000000000000000000000000000000000000000000000000",
+              "stored_boundary_exact": false,
+              "stored_connection_exact": false,
+              "values": [
+                "0",
+                "1.0000000000000000000000000000000000000000000000000000000000000000"
+              ],
+              "working_digits": 60
+            },
+            {
+              "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 282, expansion_order: 80 }",
+              "reported_endpoint": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "stored_boundary_exact": true,
+              "stored_connection_exact": false,
+              "values": [
+                "0",
+                "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              ],
+              "working_digits": 80
+            },
+            {
+              "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 349, expansion_order: 80 }",
+              "reported_endpoint": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "stored_boundary_exact": true,
+              "stored_connection_exact": true,
+              "values": [
+                "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              ],
+              "working_digits": 100
+            },
+            {
+              "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 415, expansion_order: 80 }",
+              "reported_endpoint": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "stored_boundary_exact": true,
+              "stored_connection_exact": true,
+              "values": [
+                "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              ],
+              "working_digits": 120
+            }
+          ],
+          "symbolica_verified_derivative_and_endpoint": true
+        },
+        {
+          "C": "2^400",
+          "exact_analytic_solution_first_component": "-2582249878086908589655919172003011874329705792829223512830659356540647622016841194629645353280137831435903171972747493375*normalized_roundoff_mre::{}::t+2582249878086908589655919172003011874329705792829223512830659356540647622016841194629645353280137831435903171972747493376",
+          "exact_source_coefficient": "-2582249878086908589655919172003011874329705792829223512830659356540647622016841194629645353280137831435903171972747493375",
+          "public_refinement": {
+            "absolute_error_first_component": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "comparison_errors": [
+              [
+                "0",
+                "0"
+              ]
+            ],
+            "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 282, expansion_order: 112 }",
+            "reported_endpoint": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+            "values": [
+              "0",
+              "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            ],
+            "verified_checkpoints": 1,
+            "verified_digits": 20
+          },
+          "raw_profiles": [
+            {
+              "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 216, expansion_order: 80 }",
+              "reported_endpoint": "1.0000000000000000000000000000000000000000000000000000000000000000",
+              "stored_boundary_exact": true,
+              "stored_connection_exact": false,
+              "values": [
+                "0",
+                "1.0000000000000000000000000000000000000000000000000000000000000000"
+              ],
+              "working_digits": 60
+            },
+            {
+              "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 282, expansion_order: 80 }",
+              "reported_endpoint": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "stored_boundary_exact": true,
+              "stored_connection_exact": false,
+              "values": [
+                "0",
+                "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              ],
+              "working_digits": 80
+            },
+            {
+              "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 349, expansion_order: 80 }",
+              "reported_endpoint": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "stored_boundary_exact": true,
+              "stored_connection_exact": false,
+              "values": [
+                "0",
+                "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              ],
+              "working_digits": 100
+            },
+            {
+              "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 415, expansion_order: 80 }",
+              "reported_endpoint": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+              "stored_boundary_exact": true,
+              "stored_connection_exact": true,
+              "values": [
+                "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+                "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+              ],
+              "working_digits": 120
+            }
+          ],
+          "symbolica_verified_derivative_and_endpoint": true
+        }
+      ],
+      "exact_endpoint": [
+        "1",
+        "1"
+      ],
+      "explanation": "At working60/80 digits the exact connection coefficient1-C rounds to-C, and polynomial evaluation cancels C-C to0. Both refinements falsely verify20digits before sufficient working precision resolves1. A center+step endpoint guard cannot detect this normalized-path example; source/evaluation cancellation error and precision retries are required.",
+      "scope": "Physical interval and endpoint are exactly representable at every precision. Source matrix is supplied as an exact Atom. 2^400 boundary is exactly representable at every profile, isolating source coefficient rounding and cancellation.",
+      "system": "Yprime=[[0,1-C],[0,0]]Y; Y(0)=[C,1]; t=0 to1"
+    }
+  }
+}

@@ -26,6 +26,7 @@ struct Settings {
     guard_digits: u32,
     series_order: usize,
     max_steps: usize,
+    step_size_strategy: String,
     max_precision_attempts: usize,
     max_boundary_attempts: usize,
     workers: usize,
@@ -46,6 +47,7 @@ impl Default for Settings {
             guard_digits: f.guard_digits,
             series_order: f.series_order,
             max_steps: f.max_steps,
+            step_size_strategy: "halving".into(),
             max_precision_attempts: f.max_precision_attempts,
             max_boundary_attempts: f.max_boundary_attempts,
             workers: f.workers,
@@ -67,6 +69,11 @@ impl Settings {
             guard_digits: self.guard_digits,
             series_order: self.series_order,
             max_steps: self.max_steps,
+            step_size_strategy: match self.step_size_strategy.as_str() {
+                "halving" => StepSizeStrategy::Halving,
+                "bracketed" => StepSizeStrategy::Bracketed,
+                _ => return Err("step_size_strategy must be halving or bracketed".into()),
+            },
             max_precision_attempts: self.max_precision_attempts,
             max_boundary_attempts: self.max_boundary_attempts,
             workers: self.workers,
@@ -888,6 +895,9 @@ fn execute_transport(
             "verified_digits":result.boundary.accuracy.verified_digits(),
             "working_bits":result.boundary.accuracy.working_bits(),
             "steps":result.transport.as_ref().map_or(0,|t| t.diagnostics.steps),
+            "rejected_steps":result.transport.as_ref().map_or(0,|t| t.diagnostics.rejected_steps),
+            "predicate_evaluations":result.transport.as_ref().map_or(0,|t| t.diagnostics.predicate_evaluations),
+            "superseded_successes":result.transport.as_ref().map_or(0,|t| t.diagnostics.superseded_successes),
             "inserted_points":result.inserted_points,
             "coefficients":result.boundary.coefficients.iter().map(|row| row.iter().map(complex_json).collect::<Vec<_>>()).collect::<Vec<_>>(),
             "absolute_errors":result.boundary.accuracy.comparison_errors().iter().map(|row| row.iter().map(|a| a.as_raw().to_string()).collect::<Vec<_>>()).collect::<Vec<_>>()
@@ -979,5 +989,29 @@ fn main() {
     if let Err(error) = run() {
         eprintln!("RustFlow: {error}");
         std::process::exit(1);
+    }
+}
+
+#[cfg(test)]
+mod step_size_settings_tests {
+    use super::*;
+    #[test]
+    fn step_strategy_is_explicit_and_unknown_values_are_rejected() {
+        let defaults = Settings::default().options(Path::new(".")).unwrap();
+        assert_eq!(defaults.step_size_strategy, StepSizeStrategy::Halving);
+        for (text, expected) in [
+            ("halving", StepSizeStrategy::Halving),
+            ("bracketed", StepSizeStrategy::Bracketed),
+        ] {
+            let settings: Settings =
+                serde_json::from_value(json!({"step_size_strategy":text})).unwrap();
+            assert_eq!(
+                settings.options(Path::new(".")).unwrap().step_size_strategy,
+                expected
+            );
+        }
+        let invalid: Settings =
+            serde_json::from_value(json!({"step_size_strategy":"unchecked"})).unwrap();
+        assert!(invalid.options(Path::new(".")).is_err());
     }
 }

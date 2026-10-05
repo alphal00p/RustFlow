@@ -576,3 +576,122 @@ fn persistent_cache_roundtrips_native_atoms_and_mpfr_and_rejects_corruption() {
     ));
     std::fs::remove_dir_all(directory).unwrap();
 }
+
+#[test]
+fn persistent_implementation_or_dependency_mismatch_rejects_before_exact_hit() {
+    // Mirror only the envelope, leaving the encoded identities, values and
+    // payload checksum unchanged; this isolates compatibility rejection.
+    #[derive(serde::Serialize, serde::Deserialize)]
+    struct Envelope {
+        version: u32,
+        implementation: String,
+        dependencies: String,
+        digest: String,
+        payload: Vec<u8>,
+    }
+    let (s, _, system, identity) = fixture();
+    let flow = symbolica_amflow::RustFlow::new(
+        system,
+        &[parse!("boundary_cache::I(1)")],
+        &Atom::num(1),
+        Prescription::PlusI0,
+        "physical-sheet",
+    )
+    .unwrap();
+    assert_eq!(flow.identity().key(), identity.key());
+    let mut cache = RustFlowCache::default();
+    cache.insert(entry(&identity, s, Atom::num(1), 40)).unwrap();
+    let directory = std::env::temp_dir().join(format!(
+        "amflow-boundary-compatibility-before-hit-{}",
+        std::process::id()
+    ));
+    let _ = std::fs::remove_dir_all(&directory);
+    cache.save(&directory).unwrap();
+    let file = directory.join("physical-boundaries.bin");
+    let pristine = std::fs::read(&file).unwrap();
+    let magic = b"AMFLOW-BOUNDARIES\0\x05";
+    let (envelope, consumed): (Envelope, _) = bincode::serde::decode_from_slice(
+        pristine.strip_prefix(magic).unwrap(),
+        bincode::config::standard(),
+    )
+    .unwrap();
+    assert_eq!(consumed + magic.len(), pristine.len());
+    let policy = ScaledDistance {
+        scales: BTreeMap::new(),
+        admissible: |_: &CachedBoundary, _: &CachedPoint| Ok(true),
+    };
+    let destination = BTreeMap::from([(s, Atom::num(1))]);
+    let mut loaded = RustFlowCache::load(&directory).unwrap();
+    let hit = flow
+        .evaluate_to(
+            &mut loaded,
+            &destination,
+            EpsilonRange::new(0, 1).unwrap(),
+            &FlowOptions::default(),
+            &RunContext::default(),
+            &policy,
+        )
+        .unwrap();
+    assert!(
+        hit.transport.is_none(),
+        "pristine snapshot has an exact hit"
+    );
+    for implementation_mismatch in [true, false] {
+        let changed = Envelope {
+            version: envelope.version,
+            implementation: if implementation_mismatch {
+                format!("obsolete-{}", envelope.implementation)
+            } else {
+                envelope.implementation.clone()
+            },
+            dependencies: if implementation_mismatch {
+                envelope.dependencies.clone()
+            } else {
+                format!("obsolete-{}", envelope.dependencies)
+            },
+            digest: envelope.digest.clone(),
+            payload: envelope.payload.clone(),
+        };
+        let mut bytes = magic.to_vec();
+        bytes.extend(bincode::serde::encode_to_vec(&changed, bincode::config::standard()).unwrap());
+        std::fs::write(&file, bytes).unwrap();
+        let reused = std::cell::Cell::new(false);
+        let result = RustFlowCache::load(&directory).and_then(|mut restored| {
+            reused.set(true);
+            flow.evaluate_to(
+                &mut restored,
+                &destination,
+                EpsilonRange::new(0, 1).unwrap(),
+                &FlowOptions::default(),
+                &RunContext::default(),
+                &policy,
+            )
+        });
+        assert!(matches!(result, Err(Error::Cache(_))));
+        assert!(
+            !reused.get(),
+            "incompatible snapshot reached exact-hit reuse"
+        );
+    }
+    std::fs::remove_dir_all(directory).unwrap();
+}
+
+#[test]
+fn obsolete_residual_alias_snapshot_is_rejected_before_admitting_values() {
+    // This is a real e733 solver-produced bank: its old verified API returned
+    // epsilon1=0 although the exact endpoint is -999. Never import its values.
+    let bytes = include_bytes!("../fixtures/regressions/residual-alias-cache-v5.bin");
+    assert_eq!(bytes.len(), 1346);
+    let directory = std::env::temp_dir().join(format!(
+        "amflow-obsolete-residual-alias-snapshot-{}",
+        std::process::id()
+    ));
+    std::fs::create_dir_all(&directory).unwrap();
+    std::fs::write(directory.join("physical-boundaries.bin"), bytes).unwrap();
+    let result = RustFlowCache::load(&directory);
+    std::fs::remove_dir_all(directory).unwrap();
+    assert!(
+        matches!(result, Err(Error::Cache(_))),
+        "obsolete values were admitted: {result:?}"
+    );
+}

@@ -1,6 +1,12 @@
 //! Rational linear differential systems and arbitrary-precision Taylor transport.
-use crate::{ComplexFloat as C, Error, FlowOptions, Precision, Progress, Result, RunContext};
+use crate::{
+    ComplexFloat as C, Error, FlowOptions, Precision, Progress, Result, RunContext,
+    StepSizeStrategy,
+};
 use std::sync::Arc;
+#[path = "ode/residual.rs"]
+pub(crate) mod residual;
+use residual::RationalResidualChart;
 use symbolica::domains::float::FloatField;
 use symbolica::poly::univariate::UnivariatePolynomial;
 use symbolica::prelude::*;
@@ -19,8 +25,15 @@ pub struct BoundaryData {
 
 #[derive(Clone, Debug, Default)]
 pub struct FlowDiagnostics {
+    /// Committed continuation segments.
     pub steps: usize,
+    /// Trials that failed an acceptance check.
     pub rejected_steps: usize,
+    /// Every evaluated acceptance predicate; the authoritative work count.
+    /// On success this equals steps + rejected_steps + superseded_successes.
+    pub predicate_evaluations: usize,
+    /// Successful trials replaced by a larger successful trial in the same chart.
+    pub superseded_successes: usize,
     pub working_bits: u32,
     pub expansion_order: usize,
 }
@@ -597,6 +610,9 @@ pub(crate) trait SeriesSystem {
         state: &Self::State,
     ) -> Result<(Vec<Vec<C>>, Self::Chart)>;
     fn rhs(&self, point: &C, values: &[C], chart: &Self::Chart) -> Result<Vec<C>>;
+    /// A whole-segment defect estimate is mandatory for every transport owner.
+    /// None means evidence is unavailable and therefore rejects the trial.
+    fn whole_segment_residual(&self, chart: &Self::Chart, step: &C) -> Result<Option<Vec<Float>>>;
     fn accepted_state(
         &self,
         chart: &Self::Chart,
@@ -606,11 +622,11 @@ pub(crate) trait SeriesSystem {
 }
 impl SeriesSystem for CompiledSystem {
     type State = ();
-    type Chart = ();
+    type Chart = RationalResidualChart;
     fn initial_state(&self, _: &BoundaryData) -> Result<()> {
         Ok(())
     }
-    fn accepted_state(&self, _: &(), _: &C, _: &Float) -> Result<Option<()>> {
+    fn accepted_state(&self, _: &RationalResidualChart, _: &C, _: &Float) -> Result<Option<()>> {
         Ok(Some(()))
     }
     fn precision(&self) -> Precision {
@@ -628,10 +644,20 @@ impl SeriesSystem for CompiledSystem {
         values: &[C],
         order: usize,
         _: &(),
-    ) -> Result<(Vec<Vec<C>>, ())> {
-        Ok((self.taylor(center, values, order)?, ()))
+    ) -> Result<(Vec<Vec<C>>, RationalResidualChart)> {
+        let coefficients = self.taylor(center, values, order)?;
+        let chart =
+            RationalResidualChart::new(self.p, &self.polynomial_rows, center, &coefficients, 1)?;
+        Ok((coefficients, chart))
     }
-    fn rhs(&self, point: &C, values: &[C], _: &()) -> Result<Vec<C>> {
+    fn whole_segment_residual(
+        &self,
+        chart: &RationalResidualChart,
+        step: &C,
+    ) -> Result<Option<Vec<Float>>> {
+        chart.defect_bounds(self.p, step).map(Some)
+    }
+    fn rhs(&self, point: &C, values: &[C], _: &RationalResidualChart) -> Result<Vec<C>> {
         self.matrix
             .iter()
             .map(|row| {
@@ -716,6 +742,97 @@ pub(crate) fn transport_series_with_state<S: SeriesSystem>(
     )
 }
 
+type CheckedStep<State> = Option<(Vec<C>, State)>;
+
+/// Read-only checks within one fixed Taylor chart. Only the returned candidate
+/// chosen by the controller may become committed state or a saved segment.
+struct StepTrial<'a, S: SeriesSystem> {
+    system: &'a S,
+    chart: &'a S::Chart,
+    center: &'a C,
+    delta: &'a C,
+    target: &'a C,
+    coefficients: &'a [Vec<C>],
+    tolerance: &'a Float,
+}
+impl<S: SeriesSystem> StepTrial<'_, S> {
+    fn evaluate(&self, step: &C) -> Result<CheckedStep<S::State>> {
+        let p = self.system.precision();
+        let (values, tail) = evaluate_taylor(p, self.coefficients, step);
+        let good = values.iter().zip(&tail).all(|(value, tail)| {
+            let magnitude = p.norm(value);
+            let scale = if magnitude > p.real(1) {
+                magnitude
+            } else {
+                p.real(1)
+            };
+            p.finite(value) && *tail <= self.tolerance.clone() * scale
+        });
+        if !good
+            || !residual_is_small(
+                self.system,
+                self.chart,
+                self.center,
+                step,
+                self.coefficients,
+                &values,
+                self.tolerance,
+            )?
+        {
+            return Ok(None);
+        }
+        // The final retained terms can vanish for sparse systems. Keep the
+        // independent midpoint defect as well as the endpoint defect above.
+        let half = p.scale(step, 1, 2);
+        let (middle, _) = evaluate_taylor(p, self.coefficients, &half);
+        if !residual_is_small(
+            self.system,
+            self.chart,
+            self.center,
+            &half,
+            self.coefficients,
+            &middle,
+            self.tolerance,
+        )? {
+            return Ok(None);
+        }
+        let majorant = match self.system.whole_segment_residual(self.chart, step) {
+            Ok(Some(bounds)) => Some(bounds),
+            Ok(None) => return Ok(None),
+            Err(Error::Accuracy(_)) => return Ok(None),
+            Err(error) => return Err(error),
+        };
+        if let Some(bounds) = majorant {
+            if bounds.len() != values.len() {
+                return Err(Error::InvalidInput("residual bound dimensions".into()));
+            }
+            for (bound, value) in bounds.iter().zip(&values) {
+                let magnitude = p.norm(value);
+                let scale = if magnitude > p.real(1) {
+                    magnitude
+                } else {
+                    p.real(1)
+                };
+                if !bound.is_finite()
+                    || *bound < p.real(0)
+                    || *bound > self.tolerance.clone() * scale
+                {
+                    return Ok(None);
+                }
+            }
+        }
+        let next = if step == self.delta {
+            self.target.clone()
+        } else {
+            p.add(self.center, step)
+        };
+        Ok(self
+            .system
+            .accepted_state(self.chart, &next, self.tolerance)?
+            .map(|state| (values, state)))
+    }
+}
+
 /// Metadata follows the exact same acceptance gate as values and state.
 #[allow(clippy::too_many_arguments)]
 pub(crate) fn transport_series_observed<S: SeriesSystem>(
@@ -728,6 +845,7 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
     mut observe: impl FnMut(&S::Chart, &S::State),
 ) -> Result<(FlowResult, S::State)> {
     options.validate()?;
+    context.cancellation.check()?;
     let p = system.precision();
     if boundary.values.len() != system.dimension()
         || !p.finite(&boundary.point)
@@ -750,7 +868,7 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
             context.emit(Progress::Step {
                 index: diagnostics.steps,
             })?;
-            if diagnostics.steps + diagnostics.rejected_steps >= options.max_steps {
+            if diagnostics.predicate_evaluations >= options.max_steps {
                 return Err(Error::Limit(
                     "Taylor continuation step budget exhausted".into(),
                 ));
@@ -788,80 +906,84 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                     );
                 }
             }
+            context.cancellation.check()?;
             let (coefficients, chart) =
                 system.local_chart(&center, &values, options.series_order, &state)?;
+            // Regulator fitting and endpoint matching consume guard digits too.
+            // Keep the same truncation target under either proposal policy.
+            let truncation_digits = options
+                .digits
+                .saturating_add(8)
+                .max((options.digits + options.guard_digits).saturating_sub(10));
+            let available_digits = (u64::from(p.bits) * 1000 / 3322) as u32;
+            let tolerance = p.tolerance(truncation_digits.min(available_digits.saturating_sub(3)));
+            let trial = StepTrial {
+                system,
+                chart: &chart,
+                center: &center,
+                delta: &delta,
+                target,
+                coefficients: &coefficients,
+                tolerance: &tolerance,
+            };
+            let bracketed = options.step_size_strategy == StepSizeStrategy::Bracketed;
             let mut accepted = None;
+            let mut failed_upper = None;
             for _ in 0..32 {
-                let (v, tail) = evaluate_taylor(p, &coefficients, &step);
-                // Regulator fitting and endpoint matching consume guard
-                // digits too. Increasing arithmetic precision must also
-                // tighten truncation, even at a fixed expansion order.
-                let truncation_digits = options
-                    .digits
-                    .saturating_add(8)
-                    .max((options.digits + options.guard_digits).saturating_sub(10));
-                let available_digits = (u64::from(p.bits) * 1000 / 3322) as u32;
-                let tolerance =
-                    p.tolerance(truncation_digits.min(available_digits.saturating_sub(3)));
-                let good = v.iter().zip(&tail).all(|(v, t)| {
-                    let scale = p.norm(v);
-                    let scale = if scale > p.real(1) { scale } else { p.real(1) };
-                    p.finite(v) && *t <= tolerance.clone() * scale
-                });
-                if good
-                    && residual_is_small(
-                        system,
-                        &chart,
-                        &center,
-                        &step,
-                        &coefficients,
-                        &v,
-                        &tolerance,
-                    )?
-                {
-                    // Vanishing final Taylor terms do not bound omitted
-                    // terms for sparse systems such as y' = x^20 y.
-                    // Check the differential equation at the step endpoint
-                    // and midpoint as an independent defect test.
-                    let half_step = p.scale(&step, 1, 2);
-                    let (middle, _) = evaluate_taylor(p, &coefficients, &half_step);
-                    if residual_is_small(
-                        system,
-                        &chart,
-                        &center,
-                        &half_step,
-                        &coefficients,
-                        &middle,
-                        &tolerance,
-                    )? {
-                        let next = if step == delta {
-                            target.clone()
-                        } else {
-                            p.add(&center, &step)
-                        };
-                        if let Some(next_state) =
-                            system.accepted_state(&chart, &next, &tolerance)?
-                        {
-                            accepted = Some((v, next_state));
-                            break;
-                        }
-                    }
+                context.cancellation.check()?;
+                if diagnostics.predicate_evaluations >= options.max_steps {
+                    return Err(Error::Limit(
+                        "Taylor continuation predicate budget exhausted".into(),
+                    ));
+                }
+                diagnostics.predicate_evaluations += 1;
+                if let Some(candidate) = trial.evaluate(&step)? {
+                    accepted = Some(candidate);
+                    break;
+                }
+                if bracketed {
+                    failed_upper = Some(step.clone());
                 }
                 step = p.scale(&step, 1, 2);
                 diagnostics.rejected_steps += 1;
-                if diagnostics.steps + diagnostics.rejected_steps >= options.max_steps {
+                if diagnostics.predicate_evaluations >= options.max_steps {
                     return Err(Error::Limit(format!(
-                        "Taylor continuation step budget exhausted ({} accepted, {} rejected) at {center} toward {target}",
-                        diagnostics.steps, diagnostics.rejected_steps,
+                        "Taylor continuation step budget exhausted ({} accepted, {} rejected, {} predicates) at {center} toward {target}",
+                        diagnostics.steps,
+                        diagnostics.rejected_steps,
+                        diagnostics.predicate_evaluations,
                     )));
                 }
             }
-            let (next_values, next_state) = accepted.ok_or_else(|| {
-                Error::Accuracy(format!(
-                    "Taylor tail or local chart did not meet tolerance after 32 local rejections ({} accepted, {} rejected overall) at {center} toward {target}",
-                    diagnostics.steps, diagnostics.rejected_steps,
-                ))
-            })?;
+            let mut accepted = accepted.ok_or_else(|| Error::Accuracy(format!(
+                "Taylor tail or local chart did not meet tolerance after 32 local rejections ({} accepted, {} rejected, {} predicates overall) at {center} toward {target}",
+                diagnostics.steps, diagnostics.rejected_steps, diagnostics.predicate_evaluations,
+            )))?;
+            if let Some(mut upper) = failed_upper {
+                // This is only a bounded proposal search, not a monotonicity
+                // assumption. Every selected trial independently passes all checks.
+                for _ in 0..2 {
+                    context.cancellation.check()?;
+                    if diagnostics.predicate_evaluations >= options.max_steps {
+                        break;
+                    }
+                    let proposal = p.scale(&p.add(&step, &upper), 1, 2);
+                    if proposal == step || proposal == upper {
+                        break;
+                    }
+                    diagnostics.predicate_evaluations += 1;
+                    if let Some(candidate) = trial.evaluate(&proposal)? {
+                        accepted = candidate;
+                        step = proposal;
+                        diagnostics.superseded_successes += 1;
+                    } else {
+                        upper = proposal;
+                        diagnostics.rejected_steps += 1;
+                    }
+                }
+            }
+            context.cancellation.check()?;
+            let (next_values, next_state) = accepted;
             values = next_values;
             state = next_state;
             let next = if step == delta {
@@ -1155,3 +1277,11 @@ mod recurrence_tests {
         ));
     }
 }
+
+#[cfg(test)]
+#[path = "ode/step_size_tests.rs"]
+mod step_size_tests;
+
+#[cfg(test)]
+#[path = "ode/residual_tests.rs"]
+mod residual_tests;

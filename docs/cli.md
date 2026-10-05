@@ -298,3 +298,19 @@ coefficients and returned values still describe the original basis; the nested
 epsilon gauge. Raw denominator/norm restrictions and prescribed continuation
 metadata remain enforced on transport and exact cache hits. `canonical` input
 continues to reject explicit shearing rather than silently ignoring the option.
+
+## Taylor step proposals
+
+`options.step_size_strategy` accepts `"halving"` (the default) or `"bracketed"`.
+Both use the same Taylor-tail, midpoint/endpoint defect, domain and branch checks.
+Bracketed transport can test up to two larger steps after a first successful
+halving, reusing that Taylor chart. It is opt-in while broader performance
+coverage is gathered; its measured improvement on one five-point leg is not a
+general speed guarantee.
+
+`options.max_steps` limits all acceptance-predicate evaluations, including
+successful candidates later superseded by a larger successful step. Transport
+output includes `predicate_evaluations`, `steps` (committed segments),
+`rejected_steps`, and `superseded_successes`. An exact cache hit has zero transport
+counts. Cache identity and accuracy requirements are unchanged; either strategy
+can use a mathematically compatible, sufficiently accurate cached boundary.

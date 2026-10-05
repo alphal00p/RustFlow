@@ -32,12 +32,27 @@ pub enum MassMode {
     Propagators(Vec<usize>),
 }
 
+/// Proposal policy for ordinary Taylor continuation. Both policies use the same
+/// tail, differential-defect, domain and branch checks.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum StepSizeStrategy {
+    /// Halve the geometric proposal until every acceptance check passes.
+    #[default]
+    Halving,
+    /// After a successful halving, test up to two larger steps in the same
+    /// Taylor chart. Each extra predicate evaluation consumes the step budget.
+    Bracketed,
+}
+
 #[derive(Debug, Clone)]
 pub struct FlowOptions {
     pub digits: u32,
     pub guard_digits: u32,
     pub series_order: usize,
+    /// Maximum acceptance-predicate evaluations per continuation call.
+    /// Includes committed, rejected and successful superseded trials.
     pub max_steps: usize,
+    pub step_size_strategy: StepSizeStrategy,
     pub max_precision_attempts: usize,
     /// Maximum compatible source boundaries tried after physical transport accuracy failures.
     pub max_boundary_attempts: usize,
@@ -60,6 +75,7 @@ impl Default for FlowOptions {
             guard_digits: 40,
             series_order: 80,
             max_steps: 1000,
+            step_size_strategy: StepSizeStrategy::Halving,
             max_precision_attempts: 3,
             max_boundary_attempts: 8,
             workers: 1,
