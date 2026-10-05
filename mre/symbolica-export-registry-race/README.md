@@ -50,8 +50,12 @@ an independent list traversal. `State::export` has the same count/iterator issue
 Registry growth during the writer callback can therefore add payload entries
 without updating the corresponding counts or dependencies.
 
-The owner fix should capture coherent bounded prefixes of all three append-only
-registries under the existing State lock, then release that lock before invoking
-caller I/O. Holding the lock across `Write` would deadlock valid registration
-callbacks. The binary layout need not change. This inherited defect is separate
-from RustFlow's reuse of native export blobs between calls.
+The owner fix needs coherent bounded prefixes of all three append-only registries
+without holding a lock across caller I/O. Holding the State lock across `Write`
+would deadlock valid registration callbacks; taking that lock at export entry
+also requires care because existing symbol-generator callbacks already hold it.
+Symbols and polynomial lists can refer to each other, so capturing their lengths
+in one fixed order alone does not establish a coherent dependency closure.
+The binary layout need not change. The recorded baseline's suggested locking
+approach is an initial proposal, not a validated fix. This inherited defect is
+separate from RustFlow's reuse of native export blobs between calls.

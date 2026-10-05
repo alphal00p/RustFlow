@@ -73,6 +73,16 @@ preparation in a fresh process on a busy host; it measures a persistence
 bottleneck but establishes no optimization speedup. A matched full-application
 reference timing is not yet available.
 
+A separate [cache-save optimization PR](https://github.com/alphal00p/RustFlow/pull/1)
+reuses native Symbolica exports within each snapshot. Four new release tests,
+forty existing cache integration tests, formatting and strict release Clippy pass.
+A paired profile with the real canonical topology and synthetic numerical values
+measured 6.23–20.47× faster payload serialization with byte-identical output.
+These are isolated serialization results, not a notebook speedup; the publication
+runtime remains unchanged. The review also produced a standalone
+[Symbolica export-race reproducer](../mre/symbolica-export-registry-race/README.md).
+Its owner fix is being reviewed separately and is not part of the tested runtime.
+
 The [interactive notebook check](../reports/validation/2026-10-05-public-wheel/notebook-interactive-validation.json)
 served the unchanged notebook with native Marimo and clicked transport, amplitude,
 binary reload and repeated amplitude controls in Chromium. All completed without
