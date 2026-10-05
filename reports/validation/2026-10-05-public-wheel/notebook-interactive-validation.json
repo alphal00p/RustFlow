@@ -1,0 +1,140 @@
+{
+  "schema": "rustflow-notebook-chromium-evidence-v1",
+  "scope": "Native original Marimo notebook served on loopback; copied completed native cold banks; no WASM runtime or fresh boundary-generation UI claim.",
+  "status": "passed",
+  "community_commit": "8758b93d1e1a6fed2aace41493a91be569f98a98",
+  "runtime_attestation": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "5e8319c74a327e09349d7626d629c77d8a39d625e0503267e5ebfbb0994039cf"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/amflow/target/publication-python-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+      "size_bytes": 393671056,
+      "sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 32019,
+        "sha256": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_support.py",
+        "size_bytes": 20678,
+        "sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25"
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
+        "size_bytes": 11597,
+        "sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/publication-python-venv/bin/python"
+    }
+  },
+  "runtime_attestation_verified_after_checks": true,
+  "source_banks": {
+    "seeds": {
+      "path": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-native30/numerical-history/e62a7b9da894493589d1819a7c5bb97b/seeds/physical-boundaries.bin",
+      "sha256": "7176f9736d6ba5e169215d3bd60a221b5ad035dde6584fd2ebc1cfba4ae75999",
+      "bytes": 20315832
+    },
+    "transport": {
+      "path": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-native30/numerical-history/e62a7b9da894493589d1819a7c5bb97b/transport/physical-boundaries.bin",
+      "sha256": "4caf679da984bd7b361dc2e778bc112e53a18374f4b7ef4f1d89a4fdf53cb3ea",
+      "bytes": 22908490
+    }
+  },
+  "source_banks_unchanged": true,
+  "model_sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+  "model_matches_published_commit": true,
+  "interactive_controls": {
+    "schema": "rustflow-notebook-interactive-v1",
+    "status": "passed",
+    "recorded_utc": "2026-10-05T23:16:14.862Z",
+    "scope": "Original notebook served by native Marimo, actual Chromium clicks on a separate copy of completed native cold banks. No fresh-boundary UI recomputation or browser-WASM claim.",
+    "stages": [
+      {
+        "name": "transport",
+        "label": "2 \u00b7 Load or compute transport",
+        "click_to_visible_completion_ms": 54976.1245
+      },
+      {
+        "name": "amplitude",
+        "label": "3 \u00b7 Load or assemble amplitude",
+        "click_to_visible_completion_ms": 40016.432290000004
+      },
+      {
+        "name": "restart",
+        "label": "Binary reload and exact repeated hit",
+        "click_to_visible_completion_ms": 74712.27208199998
+      },
+      {
+        "name": "amplitude",
+        "label": "3 \u00b7 Load or assemble amplitude",
+        "click_to_visible_completion_ms": 4993.509782000008
+      }
+    ],
+    "page_errors": [],
+    "console_errors": [],
+    "browser_version": "151.0.7922.173",
+    "initial_controls_visible": true,
+    "populated_headings_visible": true
+  },
+  "panel_capture": {
+    "schema": "rustflow-notebook-interactive-v1",
+    "status": "passed",
+    "recorded_utc": "2026-10-05T23:20:00.317Z",
+    "scope": "Original notebook served by native Marimo, actual Chromium clicks on a separate copy of completed native cold banks. No fresh-boundary UI recomputation or browser-WASM claim.",
+    "stages": [
+      {
+        "name": "transport",
+        "label": "2 \u00b7 Load or compute transport",
+        "click_to_visible_completion_ms": 64844.192822
+      },
+      {
+        "name": "amplitude",
+        "label": "3 \u00b7 Load or assemble amplitude",
+        "click_to_visible_completion_ms": 40179.438297
+      }
+    ],
+    "page_errors": [],
+    "console_errors": [],
+    "browser_version": "151.0.7922.173",
+    "initial_controls_visible": true,
+    "populated_headings_visible": true,
+    "svg_elements": 84
+  },
+  "visual_inspection": {
+    "native_diagram_visible": true,
+    "form_factor_table_visible": true,
+    "transport_table_visible": true,
+    "coherent_observable_heading_visible": true,
+    "scope": "Inspected native effective diagram, populated transport table and all eight W/Z form-factor rows. Coherent-observable heading is visible; its numeric table is below the captured viewport. Full numerical observable values were separately checked by populated-notebook and physics acceptance."
+  },
+  "server_command": "python -m marimo run /common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py --host 127.0.0.1 --port 27831 --headless --no-token --session-ttl 30",
+  "server_working_directory": "/common/dev/amflow/target/publication-notebook-chromium",
+  "node": "/nix/store/v6wsd9nyglmwh32yn7w8z11dq9cksg4m-nodejs-24.20.0/bin/node",
+  "playwright": "/nix/store/b7qz830lq2lnhckk3c5fjwxg8v43k228-playwright-core-1.61.1",
+  "browser": "/nix/store/hmigrfb18996cw9wjgbi0k901asl1jsf-chromium-unwrapped-151.0.7922.173/libexec/chromium/chromium",
+  "drivers": {
+    "check.mjs": "4272e792fa3e6c12f79498d3ae6ebf5018b3a59fbadb2e5550bfa35e86e9d8eb",
+    "check-v2.mjs": "4438a84c3eeff9b9487acee9dd09530afa92ae0e84f3c3133e7b47d983200a88"
+  },
+  "timing_scope": "Single observations on a busy cluster; click-to-visible-completion includes five-second UI refresh and cache persistence, not a solver benchmark.",
+  "remaining": "Publication-wheel full 40-digit regeneration, coefficient/amplitude stability, nearby-query gates and process completion remain in progress.",
+  "screenshots": {
+    "notebook-diagrams.png": {
+      "sha256": "522b710dfc6a8c5901f40733048bf01173edde98aca06c6b5b7c6bfdf7498e0c",
+      "bytes": 91884
+    },
+    "notebook-form-factors.png": {
+      "sha256": "3b11d5a1d5ace5e1c2a1b538cce15da3e421efd8862e8027ae4d347126667c86",
+      "bytes": 126383
+    }
+  }
+}

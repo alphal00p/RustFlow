@@ -13,7 +13,7 @@ checks still running on the dependency graph intended for publication.
 | Exact Higgs-plus-jet inputs | Native physical families, certified 48/61 canonical basis maps, exact normalization and kinematics-dependent form-factor projections | No claim of automatic reduction or boundary coverage for every possible multiloop family |
 | Fresh physical boundaries and amplitude | The publication wheel completed all 16 native 30-digit configurations from empty numerical caches, all 4,360 transport coefficient comparisons, eight W/Z form factors and three coherent observables | Forced 40-digit regeneration, interruption/resume, independent stability and nearby-point checks remain |
 | Independent Euclidean anchors | Publication wheel passed all 545 comparisons at 20 digits with fresh native boundaries | This prerequisite alone does not certify the physical calculation |
-| Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; initial HTML export, native SVG display and populated original notebook execution passed using a copied completed native cache | Finish the complete 40-digit headless acceptance; no browser pixel or interactive-click test is claimed |
+| Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; initial HTML export, native SVG display and populated original notebook execution passed using a copied completed native cache. Actual Chromium transport, amplitude and restart clicks passed, with native diagram/form-factor panels inspected | Finish the complete 40-digit headless acceptance; boundary-generation and cancellation controls have native/controller evidence, not browser-click coverage |
 | Packaging | Rust core release suite: 534 passed, 12 opt-in tests ignored; strict Python-feature Clippy and formatting passed. Original native wheel component suite: 206 passed, one inherited C++ export failure. Corrected tensor stubs: seven checks passed. Isolated tensor fix passes native and actual Pyodide checks with/without NumPy | Existing full browser wheel still contains the inherited tensor list-output bug; its fix has not been integrated into the frozen host. The whole browser suite has not been rerun with that fix |
 
 The final publication run has now completed
@@ -59,6 +59,15 @@ original archived files stayed unchanged. This one sequence ran before amplitude
 preparation in a fresh process on a busy host; it measures a persistence
 bottleneck but establishes no optimization speedup. A matched full-application
 reference timing is not yet available.
+
+The [interactive notebook check](../reports/validation/2026-10-05-public-wheel/notebook-interactive-validation.json)
+served the unchanged notebook with native Marimo and clicked transport, amplitude,
+binary reload and repeated amplitude controls in Chromium. All completed without
+browser errors. A separate panel capture confirmed the populated transport and
+eight-row form-factor tables and native diagram display. Both checks used copies
+of the committed cold bank; its originals, runtime and steering sources were
+verified unchanged. Click-to-completion timings include UI refresh and persistence,
+and are not isolated solver measurements.
 
 ## Publication and remaining work
 
