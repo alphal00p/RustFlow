@@ -1,0 +1,262 @@
+{
+  "schema": "rustflow-factorized-denominator-experiment-v1",
+  "date": "2026-10-05",
+  "status": "ordinary solver validation passed; native physical boundary validation pending",
+  "scope": "Isolated unmerged candidate. No Python-host or main-branch runtime change. No physical boundary or amplitude accuracy claim from these replay results.",
+  "source_base": "3b78629a4fc93a4b7c9070536639dc841ef38716",
+  "source_branch": "codex/factorized-denominator-bounds",
+  "code_audit": {
+    "schema": 1,
+    "candidate_worktree": "/common/dev/amflow-factorized-denominator",
+    "base_revision": "3b78629a4fc93a4b7c9070536639dc841ef38716",
+    "patch_sha256": "1c337195969df541e984c1aa254d8e41a2d8ceefb55e79f7135ffc663cc42ab6",
+    "implementation_source_sha256": {
+      "src/ode.rs": "2b26b081ce2303de243db531b12b2f55385295c1cf8918065d3b8d8205b61c63",
+      "src/ode/source.rs": "335f517b6a463029f33cf83161fafcb40159a7a4c03d34270f813607f9be3a2f"
+    },
+    "native_owners": [
+      "Symbolica IntegerRing Factorize::factor, polynomial pow/multiplication and exact reconstruction",
+      "Existing ExactSpecialization Gaussian dyadics",
+      "Native UnivariatePolynomial::shift_var",
+      "Native ComplexBall/RealBall and Float::mul_round/div_round"
+    ],
+    "changed_scope": "Certified factor-product lower bound with retained constants/multiplicities, maximized against existing expanded triangle lower bound. Exact factorization cache is local to compilation. Denominator enclosures/bounds are shared across epsilon channels. Expanded residual numerator and all source, pole, branch, precision and accuracy gates are retained.",
+    "new_regressions": [
+      "Native cache reconstruction and constant/repeated content",
+      "Repeated pole gives positive bound where expanded form is inconclusive",
+      "Expanded bound remains stronger for (1-x)(1+x)",
+      "Two individually inconclusive factors never certify a product",
+      "Complex exact content, parameter specialization and center",
+      "Factors specializing to nonzero constants and zero-source rejection",
+      "Certified empty product of 1 and rejection for other denominators",
+      "Coupled one-row epsilon channels",
+      "Two distinct row denominators across three coupled epsilon channels versus explicit ordinary system"
+    ],
+    "validation": {
+      "release_library_tests": {
+        "passed": 137,
+        "failed": 0,
+        "ignored": 2,
+        "log": "target/factorized-denominator-final-lib-tests.log"
+      },
+      "strict_release_clippy_lib_and_all_tests": {
+        "passed": true,
+        "log": "target/factorized-denominator-clippy.log"
+      },
+      "integration_suite": {
+        "status": "passed",
+        "passed": 397,
+        "failed": 0,
+        "ignored": 10,
+        "targets": 89,
+        "wall_seconds": 1005.770468797069,
+        "summary": "target/factorized-denominator-regressions-summary.json"
+      }
+    },
+    "adoption_status": "Isolated candidate; library, integrations, Clippy and ordinary replay comparisons passed. Fresh native physical NP30 fit remains pending."
+  },
+  "native_build": {
+    "dependency_source_digest": "d64faf80cf0bcbd37e679ce9fa81be2f4981e14fafde1a0dd7e8e66f6df66dcb",
+    "profile": "release",
+    "rustflow_source_digest": "20351f066774b396568c8c6c3cfe67aba6df42d1d14352fb453f35ad58399891"
+  },
+  "artifacts": {
+    "rlib": {
+      "original_path": "/common/dev/amflow/target/release/deps/libsymbolica_amflow-5e0238f10fd6d0d6.rlib",
+      "path": "/common/dev/amflow/target/gg-hg-native-acceptance/bin/libsymbolica_amflow-factorized-denominator.rlib",
+      "sha256": "01ec1db8fbc65c836a667d49dba91f525df2a51b065da503d40d5024f3f3677c"
+    },
+    "runner": {
+      "original_path": "/common/dev/amflow/target/release/examples/gg_hg_boundaries",
+      "path": "/common/dev/amflow/target/gg-hg-native-acceptance/bin/gg_hg_boundaries-factorized-denominator",
+      "sha256": "97ea160ffa5ca06ca88cae061e058ba9044711144392fcfc233bdb076e43301b"
+    }
+  },
+  "ordinary_replay_comparisons": {
+    "candidate": {
+      "schema": "rustflow-factorized-denominator-replay-comparison-v1",
+      "status": "passed",
+      "scope": "61-component ordinary ODE replay from the same captured native dyadic source and boundary; no infinity initialization, endpoint matching, epsilon fit, or propagated physical boundary accuracy claim.",
+      "comparison": {
+        "checked_components": 61,
+        "digits": 50,
+        "metric": "Exact rational comparison |candidate-baseline|^2 <= 10^(-2*digits) * max(1,|baseline|^2)",
+        "maximum_absolute_difference": "7.298051565041982013715011441413545310645966586335013772706404092610252125451403777068848679817089239E-80",
+        "maximum_absolute_component": 45,
+        "maximum_mixed_difference": "6.358199979290013635059590479677969099056705071000221282584375154446092731765750122669401281268053623E-86",
+        "maximum_mixed_component": 25,
+        "matched_mixed_digits": 85
+      },
+      "settings": {
+        "baseline": {
+          "working_digits": 90,
+          "local_target_digits": 80,
+          "series_order": 96,
+          "max_steps": 2000
+        },
+        "candidate": {
+          "working_digits": 90,
+          "local_target_digits": 80,
+          "series_order": 96,
+          "max_steps": 2000
+        }
+      },
+      "timings": {
+        "baseline": {
+          "elapsed_seconds": "911.908401107",
+          "compile_and_capture_setup_seconds": "0.425012",
+          "transport_seconds": "911.483389107",
+          "diagnostics": {
+            "expansion_order": 96,
+            "predicate_evaluations": 1008,
+            "rejected_steps": 745,
+            "steps": 263,
+            "superseded_successes": 0,
+            "working_bits": 315
+          }
+        },
+        "candidate": {
+          "elapsed_seconds": "502.302894810",
+          "compile_and_capture_setup_seconds": "0.407188",
+          "transport_seconds": "501.895706810",
+          "diagnostics": {
+            "expansion_order": 96,
+            "predicate_evaluations": 433,
+            "rejected_steps": 286,
+            "steps": 147,
+            "superseded_successes": 0,
+            "working_bits": 315
+          }
+        }
+      },
+      "transport_speedup": "1.816081262978516450960434546379737342148953856280546413785730625146169697717243559858295971384103181",
+      "timing_scope": "Concurrent replays and other scientific/build jobs; no CPU affinity or isolated matched upstream benchmark. Timing compares the same probe source and compiler options with the library changed and the declared per-run expansion orders.",
+      "input_sha256": {
+        "target/np-physical-single-epsilon-diagnostic/exact-source.json": "639be54600d167bbba7d899762764772029030aeb48bdf384a1a907aa2c18a61",
+        "target/np-physical-single-epsilon-diagnostic/first-boundary.json": "ea0e1af3ade5a89c5ccff9eb872774a11d11fe03da43bc92e45d27f4431f5993",
+        "target/gg-hg-basis-work/physical-np-factorized-replay.rs": "e247f79b55ef0522cc72ad8474f03df96d7ecc204da88c507cd9327d9a37e226"
+      },
+      "builds": {
+        "baseline": {
+          "status": 0,
+          "elapsed_seconds": 12.022427546791732,
+          "source_sha256": "e247f79b55ef0522cc72ad8474f03df96d7ecc204da88c507cd9327d9a37e226",
+          "rlib_sha256": "fb4f92b6e3b973700641fd05587d4c3494f1a74685ab685dd612326f33db49c9",
+          "binary_sha256": "cc9526a9d0016c2d127efae8220d731fa8b4c42af8c4a8a8e626a573a72f4cfa",
+          "result_path": "target/factorized-denominator-baseline-replay.json",
+          "result_sha256": "9912f019949a4de54f7b160d6e83a85cd3974513821466a700dc6faf7085354a"
+        },
+        "candidate": {
+          "status": 0,
+          "elapsed_seconds": 13.169247542973608,
+          "source_sha256": "e247f79b55ef0522cc72ad8474f03df96d7ecc204da88c507cd9327d9a37e226",
+          "rlib_sha256": "01ec1db8fbc65c836a667d49dba91f525df2a51b065da503d40d5024f3f3677c",
+          "binary_sha256": "bdf388938a7c13e5ff7052124f550514b4e1aea8093d3a4d40b5dc2e36a80ce8",
+          "result_path": "target/factorized-denominator-candidate-replay.json",
+          "result_sha256": "fda5aa0be4cb0780d62df1df275a13428029dbfcfb050d7071875f5f2942cebd"
+        }
+      }
+    },
+    "candidate-order160": {
+      "schema": "rustflow-factorized-denominator-replay-comparison-v1",
+      "status": "passed",
+      "scope": "61-component ordinary ODE replay from the same captured native dyadic source and boundary; no infinity initialization, endpoint matching, epsilon fit, or propagated physical boundary accuracy claim.",
+      "comparison": {
+        "checked_components": 61,
+        "digits": 50,
+        "metric": "Exact rational comparison |candidate-baseline|^2 <= 10^(-2*digits) * max(1,|baseline|^2)",
+        "maximum_absolute_difference": "1.312742763605290577573028888810250126015565685313804862315970645332360578040535512027935701586836537E-79",
+        "maximum_absolute_component": 45,
+        "maximum_mixed_difference": "8.508375285092962271987496091902148586992378848131963051687753164876658779304906869515398271291309884E-84",
+        "maximum_mixed_component": 25,
+        "matched_mixed_digits": 83
+      },
+      "settings": {
+        "baseline": {
+          "working_digits": 90,
+          "local_target_digits": 80,
+          "series_order": 96,
+          "max_steps": 2000
+        },
+        "candidate": {
+          "working_digits": 90,
+          "local_target_digits": 80,
+          "series_order": 160,
+          "max_steps": 2000
+        }
+      },
+      "timings": {
+        "baseline": {
+          "elapsed_seconds": "911.908401107",
+          "compile_and_capture_setup_seconds": "0.425012",
+          "transport_seconds": "911.483389107",
+          "diagnostics": {
+            "expansion_order": 96,
+            "predicate_evaluations": 1008,
+            "rejected_steps": 745,
+            "steps": 263,
+            "superseded_successes": 0,
+            "working_bits": 315
+          }
+        },
+        "candidate": {
+          "elapsed_seconds": "386.352841057",
+          "compile_and_capture_setup_seconds": "0.381361",
+          "transport_seconds": "385.971480057",
+          "diagnostics": {
+            "expansion_order": 160,
+            "predicate_evaluations": 133,
+            "rejected_steps": 64,
+            "steps": 69,
+            "superseded_successes": 0,
+            "working_bits": 315
+          }
+        }
+      },
+      "transport_speedup": "2.361530414040935787275439781522976600377805981360242106651160339413896230502336376929629169789983284",
+      "timing_scope": "Concurrent replays and other scientific/build jobs; no CPU affinity or isolated matched upstream benchmark. Timing compares the same probe source and compiler options with the library changed and the declared per-run expansion orders.",
+      "input_sha256": {
+        "target/np-physical-single-epsilon-diagnostic/exact-source.json": "639be54600d167bbba7d899762764772029030aeb48bdf384a1a907aa2c18a61",
+        "target/np-physical-single-epsilon-diagnostic/first-boundary.json": "ea0e1af3ade5a89c5ccff9eb872774a11d11fe03da43bc92e45d27f4431f5993",
+        "target/gg-hg-basis-work/physical-np-factorized-replay.rs": "e247f79b55ef0522cc72ad8474f03df96d7ecc204da88c507cd9327d9a37e226"
+      },
+      "builds": {
+        "baseline": {
+          "status": 0,
+          "elapsed_seconds": 12.022427546791732,
+          "source_sha256": "e247f79b55ef0522cc72ad8474f03df96d7ecc204da88c507cd9327d9a37e226",
+          "rlib_sha256": "fb4f92b6e3b973700641fd05587d4c3494f1a74685ab685dd612326f33db49c9",
+          "binary_sha256": "cc9526a9d0016c2d127efae8220d731fa8b4c42af8c4a8a8e626a573a72f4cfa",
+          "result_path": "target/factorized-denominator-baseline-replay.json",
+          "result_sha256": "9912f019949a4de54f7b160d6e83a85cd3974513821466a700dc6faf7085354a"
+        },
+        "candidate": {
+          "status": 0,
+          "elapsed_seconds": 13.169247542973608,
+          "source_sha256": "e247f79b55ef0522cc72ad8474f03df96d7ecc204da88c507cd9327d9a37e226",
+          "rlib_sha256": "01ec1db8fbc65c836a667d49dba91f525df2a51b065da503d40d5024f3f3677c",
+          "binary_sha256": "bdf388938a7c13e5ff7052124f550514b4e1aea8093d3a4d40b5dc2e36a80ce8",
+          "result_path": "target/factorized-denominator-candidate-order160-replay.json",
+          "result_sha256": "b179c97b1e85ed39b35d9fa4292a18e5ff1571744f7888f1b5a92bfc38b63568"
+        }
+      }
+    }
+  },
+  "integration_summary_sha256": "2032257ec18954e678d81b794b823786f6b53acf02babb7c13d7c0fc57a94112",
+  "long_integration_case": {
+    "target": "banana_unequal",
+    "executable": "/common/dev/amflow/target/release/deps/banana_unequal-d94ad8281a2b94c7",
+    "exit_code": 0,
+    "seconds": 1004.2015506708995,
+    "summaries": [
+      [
+        "ok",
+        "1",
+        "0",
+        "0"
+      ]
+    ],
+    "log": "/common/dev/amflow/target/factorized-denominator-regressions/banana_unequal.log"
+  },
+  "remaining_gate": "Fresh W-NP_EW1-1 native 30-digit boundary from an empty numerical bank, order96/guard60/workers64/max_steps2000, independent samples/refinement and all305 published source-coefficient comparisons."
+}

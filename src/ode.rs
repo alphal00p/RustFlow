@@ -260,6 +260,40 @@ impl NumericRational {
 }
 
 type ExactPolynomial = MultivariatePolynomial<IntegerRing, u16>;
+type DenominatorFactors = Arc<Vec<(ExactPolynomial, usize)>>;
+
+/// Factor each exact denominator once, retaining content and multiplicities.
+/// The pole scan and the directed disk enclosure share this certificate.
+fn denominator_factors(
+    denominator: &ExactPolynomial,
+    cache: &mut ahash::HashMap<ExactPolynomial, DenominatorFactors>,
+) -> Result<DenominatorFactors> {
+    if let Some(factors) = cache.get(denominator) {
+        return Ok(factors.clone());
+    }
+    let factors = denominator.factor();
+    let mut product = denominator.one();
+    for (factor, multiplicity) in &factors {
+        if *multiplicity == 0
+            || factor.variables().iter().enumerate().any(|(i, _)| {
+                usize::from(factor.degree(i))
+                    .checked_mul(*multiplicity)
+                    .is_none_or(|d| d > usize::from(u16::MAX))
+            })
+        {
+            return Err(Error::Limit("denominator factor degree overflow".into()));
+        }
+        product = multiply_polynomials(&product, &factor.pow(*multiplicity))?;
+    }
+    if product != *denominator {
+        return Err(Error::Numerical(
+            "exact denominator factor reconstruction failed".into(),
+        ));
+    }
+    let factors = Arc::new(factors);
+    cache.insert(denominator.clone(), factors.clone());
+    Ok(factors)
+}
 
 fn multiply_polynomials(a: &ExactPolynomial, b: &ExactPolynomial) -> Result<ExactPolynomial> {
     for (i, variable) in a.variables().iter().enumerate() {
@@ -392,6 +426,7 @@ pub(crate) fn compile_rows(
     let mut poles = Vec::new();
     let mut pole_polynomials = Vec::new();
     let mut seen_factors = ahash::HashSet::default();
+    let mut factorizations = ahash::HashMap::default();
     let mut polynomial_rows = Vec::new();
     let mut exact_source_rows = Vec::new();
     let exact_values = source::ExactSpecialization::new(p, values)?;
@@ -416,18 +451,9 @@ pub(crate) fn compile_rows(
                     "identically zero specialized denominator".into(),
                 ));
             }
-            let factored = rational.denominator.to_expression().factor();
-            let factors = if let AtomView::Mul(m) = factored.as_view() {
-                m.iter().map(|v| v.to_owned()).collect::<Vec<_>>()
-            } else {
-                vec![factored]
-            };
-            for factor in factors {
-                let base = if let AtomView::Pow(v) = factor.as_view() {
-                    v.get_base_exp().0.to_owned()
-                } else {
-                    factor
-                };
+            let factors = denominator_factors(&rational.denominator, &mut factorizations)?;
+            for (factor, _) in factors.iter() {
+                let base = factor.to_expression();
                 if !seen_factors.insert(base.clone()) {
                     continue;
                 }
@@ -462,6 +488,24 @@ pub(crate) fn compile_rows(
             polynomial_coefficients(&common_denominator.to_expression(), variable, p, values)?;
         let exact_denominator =
             exact_values.polynomial(&common_denominator.to_expression(), variable)?;
+        let exact_denominator_factors =
+            denominator_factors(&common_denominator, &mut factorizations)?
+                .iter()
+                .map(|(factor, multiplicity)| {
+                    Ok((
+                        exact_values.polynomial(&factor.to_expression(), variable)?,
+                        *multiplicity,
+                    ))
+                })
+                .collect::<Result<Vec<_>>>()?;
+        if exact_denominator_factors
+            .iter()
+            .any(|(factor, _)| factor.iter().all(SingleFloat::is_zero))
+        {
+            return Err(Error::Numerical(
+                "identically zero specialized denominator factor".into(),
+            ));
+        }
         let mut exact_entries = Vec::new();
         let mut entries = Vec::new();
         for (j, rational) in exact.iter().enumerate() {
@@ -488,6 +532,7 @@ pub(crate) fn compile_rows(
         });
         exact_source_rows.push(source::ExactPolynomialRow {
             denominator: exact_denominator,
+            denominator_factors: exact_denominator_factors,
             entries: exact_entries,
         });
         matrix.push(out);
@@ -1397,6 +1442,29 @@ pub(crate) fn evaluate_taylor(
 #[cfg(test)]
 mod recurrence_tests {
     use super::*;
+
+    #[test]
+    fn denominator_factor_cache_retains_native_content_and_multiplicity() {
+        let polynomial: RationalPolynomial<IntegerRing, u16> =
+            parse!("-42*(factor_cache_x-1)^7*(factor_cache_x+2)^3")
+                .try_to_rational_polynomial(&Q, &Z, None)
+                .unwrap();
+        let mut cache = ahash::HashMap::default();
+        let factors = denominator_factors(&polynomial.numerator, &mut cache).unwrap();
+        let again = denominator_factors(&polynomial.numerator, &mut cache).unwrap();
+        assert!(Arc::ptr_eq(&factors, &again));
+        assert_eq!(cache.len(), 1);
+        assert!(factors.iter().any(|(_, multiplicity)| *multiplicity == 7));
+        assert!(factors.iter().any(|(_, multiplicity)| *multiplicity == 3));
+        assert_eq!(
+            factors
+                .iter()
+                .fold(polynomial.numerator.one(), |out, (factor, multiplicity)| {
+                    out * &factor.pow(*multiplicity)
+                }),
+            polynomial.numerator
+        );
+    }
 
     #[test]
     fn large_exact_row_clearing_preserves_the_connection() -> Result<()> {
