@@ -57,7 +57,6 @@ fn main() {
     for ancestor in workspace.ancestors() {
         for name in [".cargo/config.toml", ".cargo/config"] {
             let config = ancestor.join(name);
-            println!("cargo:rerun-if-changed={}", config.display());
             if config.is_file() {
                 hash_file(&config, std::path::Path::new(name), &mut dependencies);
             }
