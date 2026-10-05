@@ -12,6 +12,7 @@ fn main() {
         "RUSTFLOW_WORKSPACE_FEATURES",
         "RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES",
         "CARGO_HOME",
+        "RUSTRED_RUNTIME_ARITIES",
     ] {
         println!("cargo:rerun-if-env-changed={variable}");
     }
@@ -117,6 +118,13 @@ fn main() {
     dependencies.update(serde_json::to_string(&actual_features).unwrap().as_bytes());
     let mut rustred = blake3::Hasher::new();
     rustred.update(b"rustflow-resolved-rustred-v2");
+    // RustRed's existing build-time registry setting affects available backends.
+    let arities = env::var("RUSTRED_RUNTIME_ARITIES").ok();
+    let arities = serde_json::to_vec(&arities).unwrap();
+    dependencies.update(b"RUSTRED_RUNTIME_ARITIES");
+    dependencies.update(&arities);
+    rustred.update(b"RUSTRED_RUNTIME_ARITIES");
+    rustred.update(&arities);
     for package in resolved_packages(&metadata, &own_manifest) {
         hash_package(package, &mut dependencies);
         let node = metadata["resolve"]["nodes"]

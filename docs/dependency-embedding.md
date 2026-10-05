@@ -71,7 +71,8 @@ arguments, so the nested metadata invocation sees the same graph.
 The fingerprint incorporates the owning workspace manifest and lock, Cargo
 configuration (including `$CARGO_HOME/config.toml`), resolved package identities and features, and actual Git/path dependency
 contents, including workspace manifests and model data. Registry package
-checksums come from the owning lock. Build directories and Git administration
+checksums come from the owning lock. The existing `RUSTRED_RUNTIME_ARITIES` build setting is also recorded without
+changing RustRed's solver registry. Build directories and Git administration
 are excluded. Directory change tracking catches added source files as well as
 changes to existing files. Package contents are hashed with relative labels;
 embedded `fixtures/gg-hg` data is included in the owned code identity, and
