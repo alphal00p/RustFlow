@@ -97,7 +97,7 @@ supports persistent transport caches across processes.
   also support threshold detours with exact local prescriptions, explicit endpoint
   root germs, and caller admission of the global continuation domain. [`RustFlow::new_algebraic`](docs/algebraic-cache.md)
   uses the same bank with explicit root germs and retains their sheets across
-  regular real paths and binary restart.
+  regular rational-complex affine paths and binary restart.
   [Accuracy-aware retries](docs/accuracy-fallback.md) try another admissible source
   when the first cannot meet accuracy, preserving failed-attempt diagnostics.
 - `PreparedPhysicalFamily` derives a common physical differential basis from a
@@ -106,6 +106,11 @@ supports persistent transport caches across processes.
   cache identity and are checked along candidate paths. Retained exact target
   reductions determine required master orders and project cached coefficients
   with propagated uncertainty.
+- [`RustFlow::regularize_epsilon`](docs/epsilon-shearing.md) removes epsilon poles
+  when one exact diagonal rescaling works for every physical partial. Its cache
+  adapter preserves basis identity, source orders and errors; the corresponding
+  `PreparedPhysicalFamily::with_epsilon_shearing` builder maps automatic AMF/FT
+  seeds and target reductions through the same transformation.
 - [`algebraic::AlgebraicSystem`](docs/algebraic.md) transports supplied systems
   containing registered square roots on explicit regular contours. Each call
   tracks its own sheets through accepted steps and contour windings. Multivariate

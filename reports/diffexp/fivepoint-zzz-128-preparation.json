@@ -1,0 +1,399 @@
+{
+  "schema_version": 1,
+  "status": "original_running_native_not_launched",
+  "recorded_utc": "2026-10-05T03:50:30.603435+00:00",
+  "acceptance_passed": false,
+  "scope": "Preparation and launch audit of the separate full86-component DiffExp ZZZ PH1-to-PH2 AccuracyGoal128 notebook workload. No completed current128-digit transport result or performance ratio is reported.",
+  "profile": {
+    "accuracy_goal": 128,
+    "working_decimal_digits": 280,
+    "chop_decimal_digits": 230,
+    "expansion_order": 230,
+    "division_order": 4,
+    "epsilon_order": 4,
+    "use_mobius": false,
+    "use_pade": false,
+    "parallel": false,
+    "segmentation_strategy": "Predivision",
+    "integration_strategy": "Default",
+    "physical_i0": "All six independent invariants +i0; named square roots use the original principal/radicand+i0 convention."
+  },
+  "dimension": 86,
+  "epsilon_orders": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "coefficient_count": 430,
+  "input_provenance": {
+    "diffexp_commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+    "ancillary_version": "2005.04195v2",
+    "source_files": {
+      "notebook": {
+        "path": "/common/dev/diffexp/Examples/5pPlanar1Mass.nb",
+        "sha256": "2d122ba731d62fe45b69db0cc74372fbb603cd1ee31894fd8414e2e2596a53c8"
+      },
+      "upstream_package": {
+        "path": "/common/dev/diffexp/DiffExp.m",
+        "sha256": "67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7"
+      },
+      "upstream_paper": {
+        "path": "/common/dev/diffexp/Paper/main.tex",
+        "sha256": "30b64b682ae7f39b5e3549985347286d4aad52e3232dd51fa1ffa6954cde9d39"
+      },
+      "matrix": {
+        "path": "/common/dev/amflow/target/diffexp-oracle/ancillary/2005.04195v2/anc/zzz/diffEq-zzz.m",
+        "sha256": "43f617d7929ee5f6aaef9d808f76ea2248c3961b0677a3632f72f6c83a9a29b1"
+      },
+      "references": {
+        "path": "/common/dev/amflow/target/diffexp-oracle/ancillary/2005.04195v2/anc/zzz/numIntegrals-zzz.m",
+        "sha256": "74688c638e67005838ca3cc8957ccbc4604a5f1a2ef6654e280774080743e244"
+      },
+      "alphabet": {
+        "path": "/common/dev/amflow/target/diffexp-oracle/ancillary/2005.04195v2/anc/alphabet.m",
+        "sha256": "7d685bcd1028b55b974039fe99acd5d1ec0e712af75223212c27040e04038e86"
+      },
+      "metadata": {
+        "path": "/common/dev/amflow/target/zzz-128-profile/metadata.json",
+        "sha256": "2dc0162f7a0db805fb7607af6ab682c225a895b50ab06a7a0b836c1eaad696dc"
+      },
+      "native_input": {
+        "path": "/common/dev/amflow/target/zzz-128-profile/native-input.json",
+        "sha256": "872ff25244d6a43cd390be8acfd7ca8e2c304c6d4f98b297c44376c0a23975d9"
+      }
+    },
+    "notebook_anchors": {
+      "high_precision_configuration_lines": [
+        80316,
+        80344
+      ],
+      "actual_point_selection_lines": [
+        80811,
+        80822
+      ],
+      "transport_call_lines": [
+        80839,
+        80854
+      ],
+      "historical_timing_lines": [
+        113015,
+        113024
+      ],
+      "historical_comparison_lines": [
+        113041,
+        113060
+      ],
+      "paper_claim_line": 1108
+    }
+  },
+  "data_precision": [
+    {
+      "point_index": 1,
+      "exact_coordinates": {
+        "s12": "-22/5",
+        "s15": "249/50",
+        "s23": "241/25",
+        "s34": "-377/100",
+        "s45": "13/50",
+        "p1s": "137/50"
+      },
+      "complex_coefficients": 430,
+      "exact_complex_coefficients": 86,
+      "finite_complex_coefficients": 344,
+      "finite_complex_absolute_accuracy_range": [
+        "132",
+        "132.00000000000003"
+      ],
+      "finite_nonzero_complex_relative_precision_range": [
+        "129.84342959434764",
+        "134.43771550331812"
+      ],
+      "finite_accuracy_zero_complex_coefficients": 66,
+      "finite_real_imag_components": 658,
+      "finite_component_accuracy_range": [
+        "132",
+        "132.150514997832"
+      ],
+      "source_reported_estimate": "3.9484345043140424*^-134",
+      "zero_endpoint_letter_indices": [],
+      "zero_endpoint_radicand_indices": [],
+      "exact_radicand_values": {
+        "tr5": "-817901/3125000",
+        "sqrtG3": "1031/25",
+        "sqrtG3nc": "104139/2500"
+      }
+    },
+    {
+      "point_index": 2,
+      "exact_coordinates": {
+        "s12": "-22/5",
+        "s15": "249/50",
+        "s23": "-91/100",
+        "s34": "-377/100",
+        "s45": "-9/10",
+        "p1s": "137/50"
+      },
+      "complex_coefficients": 430,
+      "exact_complex_coefficients": 86,
+      "finite_complex_coefficients": 344,
+      "finite_complex_absolute_accuracy_range": [
+        "132",
+        "132.00000000000003"
+      ],
+      "finite_nonzero_complex_relative_precision_range": [
+        "130.12785268990743",
+        "134.34108084711073"
+      ],
+      "finite_accuracy_zero_complex_coefficients": 66,
+      "finite_real_imag_components": 657,
+      "finite_component_accuracy_range": [
+        "132",
+        "132.150514997832"
+      ],
+      "source_reported_estimate": "4.0722146420815303*^-134",
+      "zero_endpoint_letter_indices": [],
+      "zero_endpoint_radicand_indices": [],
+      "exact_radicand_values": {
+        "tr5": "-31233139/20000000",
+        "sqrtG3": "34853/2000",
+        "sqrtG3nc": "104139/2500"
+      }
+    }
+  ],
+  "precision_assessment": [
+    "This is an actual128-digit requested-accuracy notebook workload, not128-digit working precision.",
+    "The supplied finite values carry132 absolute Accuracy digits and at least129.8434 nonzero relative Precision digits at PH1. This supports attempting a128-absolute-digit endpoint comparison without padding source evidence.",
+    "The point-level ~4e-134 estimate is not substituted for the larger per-component recorded uncertainty. Finite-accuracy zeros retain their uncertainty rather than becoming exact zeros.",
+    "Source metadata alone does not prove128 absolute digits survive transport: the input error may be amplified. Independent precision/order refinement checks arithmetic and truncation, not source uncertainty. Any inherited-error estimate must be reported separately, and a conservative bound failing128 must not be promoted by observed reference agreement.",
+    "The accepted claim can be430 stored endpoint coefficients agreeing to128 absolute digits with the separately supplied PH2 reference, plus independent numerical refinement. A stronger128-digit error-box certificate requires demonstrated propagation within1e-128."
+  ],
+  "exact_affine_path": {
+    "s12": "-22/5",
+    "s15": "249/50",
+    "s23": "241/25 - (211*x)/20",
+    "s34": "-377/100",
+    "s45": "13/50 - (29*x)/25",
+    "p1s": "137/50"
+  },
+  "radicands_on_path": {
+    "tr5": "(-7*(3738976 - 4050707336*x + 4069277745*x^2))/100000000",
+    "sqrtG3": "(412400 - 1119856*x + 881721*x^2)/10000",
+    "sqrtG3nc": "104139/2500"
+  },
+  "endpoint_scope": "Both endpoints are regular: all58 alphabet letters and all3 radicands are nonzero. Interior threshold and root crossings require continued branches; no singular-endpoint extension is needed for this profile.",
+  "route_scope": "Original TransportTo receives six invariant+i0 declarations and automatically adds +i0 to detected square-root radicands (DiffExp.m:177,727\u2013747). The actual current log explicitly lists all three supplied radicands and assigns them+i0. Proposed native PrescribedContour uses these same declarations with fresh exact path polynomials. Matching declarations does not by itself certify global integral monodromy; all430 endpoint comparisons and branch checks remain mandatory.",
+  "historical_notebook_result": {
+    "segments": 108,
+    "transport_seconds": 7401.394625,
+    "max_absolute_difference_wolfram": "0``132.",
+    "interpretation": "Finite-accuracy zero at absolute Accuracy132, not an exact equality certificate. This is a historical notebook output, not a current measured run."
+  },
+  "original_launch": {
+    "authoritative_tool_session": 41640,
+    "work_directory": "target/zzz-128-profile/runs/original-280-230",
+    "provenance": {
+      "status": "launched",
+      "started_utc": "2026-10-05T03:45:28.434267+00:00",
+      "command": [
+        "taskset",
+        "-c",
+        "32",
+        "/common/dev/amflow/scripts/wolfram_one_thread.py",
+        "-noinit",
+        "-noprompt",
+        "-script",
+        "/common/dev/amflow/target/zzz-128-profile/original.wl"
+      ],
+      "profile": {
+        "working_digits": 280,
+        "series_order": 230,
+        "chop_digits": 230,
+        "division_order": 4,
+        "requested_absolute_digits": 128,
+        "wall_seconds": 14400,
+        "per_process_address_space_bytes": 17179869184,
+        "aggregate_descendant_rss_poll_bytes": 17179869184,
+        "cpu": 32,
+        "workers": 1
+      },
+      "plan_sha256": "29a3ff870f32f7413a2d8e3ae0886e855568c53d4a6841c8c086a930fac52ea2",
+      "input_sha256": "872ff25244d6a43cd390be8acfd7ca8e2c304c6d4f98b297c44376c0a23975d9",
+      "implementation": "original",
+      "driver_sha256": "dc6c381e60fa4b8eac9a2acdd6cb8482ee4ed9de37c134c22203ad34daed3d48",
+      "launcher_sha256": "6551142d15c38061fd17f7d97d67d8386f63fe7cb95989a912260c13f2e9443b",
+      "loader_sha256": "12b870d2278f8c417917a05dff3e7aa18fd888a0ac73633f962b300d24504318",
+      "resource_scope": "Inherited per-process RLIMIT_AS plus0.25-second descendant RSS polling with PID-start-time checks. Polling is not a kernel-enforced aggregate limit and can miss short-lived descendants."
+    },
+    "provenance_sha256": "697acb3cc1516e4c3ba711cf5739dad3b9e2ad3b52cbf9c5275e330a0e549e50",
+    "authorization": {
+      "decision": "Parent authorized original profile only",
+      "recorded_utc": "2026-10-05T03:45:28.332653+00:00",
+      "profile": "original",
+      "command": "python3 target/zzz-128-profile/launch.py original --name original-280-230",
+      "wall_cap_seconds": 14400,
+      "per_process_address_space_bytes": 17179869184,
+      "polled_aggregate_descendant_rss_bytes": 17179869184,
+      "cpu": 32,
+      "one_thread_runtime": true,
+      "plan_sha256": "29a3ff870f32f7413a2d8e3ae0886e855568c53d4a6841c8c086a930fac52ea2",
+      "driver_sha256": "dc6c381e60fa4b8eac9a2acdd6cb8482ee4ed9de37c134c22203ad34daed3d48",
+      "launcher_sha256": "e954f3d1aad66f42524614e9c38dfde64e8e2eddcfe7873efb2127e80ea7d5d6",
+      "native_profiles": "Remain unlaunched pending current-library release archive and generic step-rejection audit",
+      "provenance_scope": "Fixed cap approved before launch; no live extensions. Preserve failed or censored outcomes and independently compare all stored endpoint coefficients after completion."
+    },
+    "authorization_sha256": "6116817af1ed529b8b583ff3978ca33823b7a6b5732f36a1a4233d7350cf0727"
+  },
+  "current_snapshot": {
+    "elapsed_seconds": 302.09793716296554,
+    "polled_descendant_rss_bytes": 4747915264,
+    "completed_segments": 10,
+    "planned_segments": 108,
+    "last_completed_segment": [
+      "10",
+      "108",
+      "32.925273"
+    ],
+    "snapshot_scope": "Read-only progress observation, not completed workflow timing or numerical acceptance."
+  },
+  "native_status": {
+    "state": "not_launched",
+    "reason": "Await current-library release archive and generic step-rejection audit before selecting/authorizing native profiles.",
+    "proposed_profiles": {
+      "native_baseline": {
+        "working_digits": 280,
+        "series_order": 230,
+        "requested_absolute_digits": 128,
+        "max_steps": 30000,
+        "wall_seconds": 14400,
+        "per_process_address_space_bytes": 17179869184,
+        "aggregate_descendant_rss_poll_bytes": 17179869184,
+        "cpu": 32,
+        "workers": 1
+      },
+      "native_refined": {
+        "working_digits": 320,
+        "series_order": 280,
+        "requested_absolute_digits": 128,
+        "max_steps": 30000,
+        "wall_seconds": 14400,
+        "per_process_address_space_bytes": 17179869184,
+        "aggregate_descendant_rss_poll_bytes": 17179869184,
+        "cpu": 32,
+        "workers": 1
+      }
+    },
+    "proposals_are_not_authorized_launches": true,
+    "driver_status": "Target-only public-API source staged; uncompiled."
+  },
+  "limits": {
+    "wall_seconds": 14400,
+    "cpu": 32,
+    "workers": 1,
+    "per_process_address_space_bytes": 17179869184,
+    "aggregate_descendant_rss_poll_bytes": 17179869184,
+    "poll_seconds": 0.25,
+    "scope": "Per-process RLIMIT_AS is inherited; aggregate RSS is polled, not a kernel-enforced descendant cap. Cleanup checks PID start times. Fixed caps are not extended while live."
+  },
+  "independent_validation_plan": {
+    "acceptance": [
+      "All430 complex coefficients finite and present, original dimension86/epsilon0..4 unchanged.",
+      "Maximum complex absolute difference against PH2 below1e-128; preserve each reference Precision/Accuracy and report all differences.",
+      "Native baseline/refined start independently from original PH1 mantissas and recorded source errors; low/high absolute differences below1e-128.",
+      "Explicit endpoint branch values agree with principal prescribed PH2 roots and low/high branches agree; original actual path/poles/segments retained.",
+      "No working-precision-based source evidence increase, no reuse of transported reference values as starting boundaries, and no matched-speed ratio unless workload differences are displayed."
+    ],
+    "original_postprocessor": {
+      "path": "target/zzz-128-profile/finalize_original.py",
+      "sha256": "c488163491040d4086e8d79f88e5485a32304b681eb23b4fbceb0790464f9dbb",
+      "arithmetic": "Decimal400 stored-value comparisons for all430 complex coefficients. No source-precision promotion.",
+      "state": "Prepared, pending final original output."
+    }
+  },
+  "short_checks": {
+    "metadata_extraction": {
+      "command": [
+        "taskset",
+        "-c",
+        "32",
+        "/common/dev/amflow/scripts/wolfram_one_thread.py",
+        "-noinit",
+        "-noprompt",
+        "-script",
+        "/common/dev/amflow/target/zzz-128-profile/extract_metadata.wl"
+      ],
+      "returncode": 0,
+      "wall_seconds": 1.8711169958114624,
+      "wall_cap_seconds": 120,
+      "address_space_per_process_bytes": 17179869184,
+      "cpu": 32,
+      "scope": "Metadata extraction only; no transport",
+      "files": {
+        "extract_metadata.wl": "f74c8ecad4f571e27f3e88c64aac50478dca4a18ba7df13397854bfb0c6b6a0c",
+        "metadata.log": "a2d21f8ea4a7b3705da21941ec8975ea72971fe195521646557a742e5710461b",
+        "metadata.json": "2dc0162f7a0db805fb7607af6ab682c225a895b50ab06a7a0b836c1eaad696dc"
+      }
+    },
+    "original_driver_syntax": "passed:28 held expressions, no transport during syntax check",
+    "python_syntax": "prepare.py,launch.py,finalize_original.py passed py_compile",
+    "extraction_failure": "First short metadata-only script had a Wolfram syntax error and produced no artifact despite exit0; preserved as syntax-failure-metadata.log/json. Corrected runner additionally requires a completion artifact/token. This is unrelated to transport."
+  },
+  "staged_artifacts": {
+    "plan.json": {
+      "path": "target/zzz-128-profile/plan.json",
+      "sha256": "29a3ff870f32f7413a2d8e3ae0886e855568c53d4a6841c8c086a930fac52ea2"
+    },
+    "metadata.json": {
+      "path": "target/zzz-128-profile/metadata.json",
+      "sha256": "2dc0162f7a0db805fb7607af6ab682c225a895b50ab06a7a0b836c1eaad696dc"
+    },
+    "native-input.json": {
+      "path": "target/zzz-128-profile/native-input.json",
+      "sha256": "872ff25244d6a43cd390be8acfd7ca8e2c304c6d4f98b297c44376c0a23975d9"
+    },
+    "original.wl": {
+      "path": "target/zzz-128-profile/original.wl",
+      "sha256": "dc6c381e60fa4b8eac9a2acdd6cb8482ee4ed9de37c134c22203ad34daed3d48"
+    },
+    "native.rs": {
+      "path": "target/zzz-128-profile/native.rs",
+      "sha256": "5d1f2c733444091247a5607f7cd96f96f8000e5447bb41b7b1928ec600f327d9"
+    },
+    "launch.py": {
+      "path": "target/zzz-128-profile/launch.py",
+      "sha256": "e954f3d1aad66f42524614e9c38dfde64e8e2eddcfe7873efb2127e80ea7d5d6"
+    },
+    "finalize_original.py": {
+      "path": "target/zzz-128-profile/finalize_original.py",
+      "sha256": "c488163491040d4086e8d79f88e5485a32304b681eb23b4fbceb0790464f9dbb"
+    },
+    "README.md": {
+      "path": "target/zzz-128-profile/README.md",
+      "sha256": "663424576d8b1c832b78d4382df5add52f4106bcde0cdad116083dee1520ccf4"
+    }
+  },
+  "interpretation": [
+    "The notebook genuinely requests128-digit accuracy at280working digits; this is not a128working-digit-only profile.",
+    "Supplied source/reference metadata supports a128absolute-digit stored-reference comparison attempt, with about4digits of source-accuracy margin. Propagated source uncertainty remains separate from arithmetic refinement.",
+    "Historical notebook timing7401.394625s is not the current run time. No matched speed ratio is established by this preparation record.",
+    "All numerical acceptance and current completed performance timing remain pending."
+  ],
+  "root_prescription_evidence": {
+    "source_path": "/common/dev/diffexp/DiffExp.m",
+    "source_sha256": "67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7",
+    "source_lines": [
+      177,
+      727,
+      747
+    ],
+    "runtime_log": "target/zzz-128-profile/runs/original-280-230/run.log",
+    "runtime_lines": [
+      10,
+      11,
+      12
+    ],
+    "scope": "Observed startup root registration; the live log is not assigned a final immutable hash until completion.",
+    "native_endpoint_expectation": "Exact Symbolica substitution x=1 precedes MPFR evaluation of each radicand, then principal square root is compared with transported signed roots."
+  }
+}

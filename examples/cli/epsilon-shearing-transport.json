@@ -1,0 +1,97 @@
+{
+  "schema_version": 1,
+  "namespace": "rustflow_epsilon_cli",
+  "epsilon_shearing": true,
+  "derivatives": {
+    "s": [
+      [
+        "0",
+        "1/eps"
+      ],
+      [
+        "eps",
+        "0"
+      ]
+    ]
+  },
+  "basis": [
+    "I1",
+    "I2"
+  ],
+  "normalization": "1",
+  "branch_domain": "entire s; declared global original Laurent bound -1",
+  "leading_epsilon_power": -1,
+  "last_epsilon_power": 0,
+  "cache_directory": "../../target/cli-epsilon-shearing-cache",
+  "seeds": [
+    {
+      "coordinates": {
+        "s": "0"
+      },
+      "last_epsilon_power": 1,
+      "working_digits": 100,
+      "verified_digits": 45,
+      "coefficients": [
+        [
+          {
+            "real": "0",
+            "imaginary": "0"
+          },
+          {
+            "real": "0",
+            "imaginary": "0"
+          }
+        ],
+        [
+          {
+            "real": "0",
+            "imaginary": "0"
+          },
+          {
+            "real": "1",
+            "imaginary": "0"
+          }
+        ],
+        [
+          {
+            "real": "0",
+            "imaginary": "0"
+          },
+          {
+            "real": "1",
+            "imaginary": "0"
+          }
+        ]
+      ],
+      "absolute_errors": [
+        [
+          "1e-60",
+          "1e-60"
+        ],
+        [
+          "1e-60",
+          "1e-60"
+        ],
+        [
+          "1e-60",
+          "1e-60"
+        ]
+      ],
+      "provenance": "Exact original boundary I(0)=[0,1+epsilon], with global pole bound -1; source evidence is retained under exact coefficient reindexing"
+    }
+  ],
+  "destinations": [
+    {
+      "s": "1"
+    },
+    {
+      "s": "2"
+    },
+    {
+      "s": "2"
+    }
+  ],
+  "options": {
+    "digits": 20
+  }
+}

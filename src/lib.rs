@@ -13,6 +13,8 @@ pub mod cuts;
 pub mod diffexp;
 pub mod engine;
 pub mod epsilon;
+pub mod epsilon_flow;
+pub mod epsilon_shearing;
 pub mod error;
 pub mod family;
 mod fixed_series;
@@ -20,6 +22,7 @@ pub mod frobenius;
 pub mod ft;
 pub mod gaussian;
 pub mod hepkit;
+mod integer_shearing;
 pub mod integrand;
 pub mod kinematic_derivative;
 pub mod kinematics;
@@ -48,6 +51,8 @@ pub use engine::{
     PreparedFlow, evaluate_samples, solve_integral_combinations, solve_integrals, solve_prepared,
 };
 pub use epsilon::{LaurentExpansion, fit_epsilon};
+pub use epsilon_flow::EpsilonShearedFlow;
+pub use epsilon_shearing::EpsilonShearing;
 pub use error::{Error, Result};
 pub use family::{Integral, IntegralFamily, KinematicPoint, Propagator};
 pub use numeric::{ComplexFloat, Precision};

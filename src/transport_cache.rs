@@ -513,6 +513,37 @@ struct IdentityData {
 #[derive(Clone, Debug)]
 pub struct BoundaryIdentity(Arc<IdentityData>);
 impl BoundaryIdentity {
+    pub(crate) fn epsilon_sheared(
+        &self,
+        system: &KinematicSystem,
+        shearing: &crate::EpsilonShearing,
+    ) -> Result<Self> {
+        if !self.0.roots.is_empty()
+            || self.0.system.epsilon() != shearing.epsilon()
+            || system.epsilon != shearing.epsilon()
+        {
+            return Err(Error::Unsupported(
+                "epsilon shearing requires the same rational physical connection".into(),
+            ));
+        }
+        let labels = shearing.scaled_basis_labels(&self.0.basis)?;
+        let mut conditions = self.0.conditions.clone();
+        conditions.extend_from_slice(shearing.nonzero_conditions());
+        let identity = Self::with_conditions(
+            system,
+            &labels,
+            &self.0.normalization,
+            self.0.prescription,
+            &self.0.domain,
+            &conditions,
+        )?;
+        if let Some(continuation) = &self.0.continuation {
+            identity.with_prescribed_continuation(continuation.clone())
+        } else {
+            Ok(identity)
+        }
+    }
+
     pub fn new(
         system: &KinematicSystem,
         basis: &[Atom],
@@ -957,6 +988,20 @@ pub struct BoundaryAccuracy {
     provenance: String,
 }
 impl BoundaryAccuracy {
+    /// Exact coefficient reindexing preserves both evidence caps and the
+    /// complete prior provenance. Only the matching error array is replaced.
+    pub(crate) fn reindexed(
+        &self,
+        comparison_errors: Vec<Vec<Float>>,
+        description: &str,
+    ) -> Result<Self> {
+        let mut result = self.clone();
+        result.comparison_errors = comparison_errors;
+        result.provenance = format!("{description}; source: {}", self.provenance);
+        result.validate()?;
+        Ok(result)
+    }
+
     /// Record independently established input accuracy (e.g. an analytic value or
     /// upstream reference with precision metadata). This does not certify the claim.
     pub fn supplied(

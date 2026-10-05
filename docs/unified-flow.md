@@ -51,6 +51,16 @@ and propagators for their conservative pole bound. Exact differential preparatio
 can accept epsilon-dependent input, but its pole range needs separate analysis;
 the seed API rejects that case before reducing or mutating the cache.
 
+An optional [diagonal epsilon rescaling](epsilon-shearing.md) now regularizes
+physical matrix poles when one integer-power transformation works for all
+coordinates. The supplied-system and prepared-family interfaces retain explicit
+scaled basis identities, original domain conditions and coefficient errors.
+They request extra source orders before restoring targets; this is separate
+from dimension-factorizing refinement. A genuine equal-mass bubble basis with
+a `1/epsilon` coupling has independently certified native IBPs and passes the
+AMF-seed, physical-cache and target-projection route against a fresh direct AMF
+evaluation. General nondiagonal epsilon regularization remains incomplete.
+
 `PreparedPhysicalFamily` already constructs all requested invariant and mass
 derivatives in a common closed basis. Its `seed_cache` method calls the ordinary
 `solve_integrals` workflow on that basis, retaining the resulting coefficient

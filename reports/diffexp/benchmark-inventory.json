@@ -738,7 +738,7 @@
     {
       "id": "fivepoint-planar-zzz-ph1-to-ph2-128digits",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "inputs_pinned_and_exported_transport_not_run",
+      "status": "original_running_native_unrun_acceptance_pending",
       "family": "zzz",
       "dimension": 86,
       "canonical": true,
@@ -766,7 +766,17 @@
       "reference_recorded_precision": "At least128digits according to DiffExp paper; retain individual input precision.",
       "external_dataset": "2005.04195v2",
       "historical_notebook_transport_seconds": 7401.394625,
-      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there."
+      "input_version_note": "Notebook URLDownload was unversioned; the pinned v2 archive and scientific-file hashes are recorded in reports/diffexp/ancillary-provenance.json. Original v1 comparison and the malformed v2 mzz point7 are preserved there.",
+      "preparation_report": "reports/diffexp/fivepoint-zzz-128-preparation.json",
+      "source_accuracy_note": "86 exact epsilon-zero coefficients and344 finite coefficients at each endpoint; finite complex absolute Accuracy132..132.00000000000003, including finite-accuracy zeros. Source evidence is not promoted by working precision. Reference agreement and propagated source-uncertainty certification are distinct.",
+      "current_original_limits": {
+        "wall_seconds": 14400,
+        "per_process_address_space_bytes": 17179869184,
+        "aggregate_descendant_rss_poll_bytes": 17179869184,
+        "cpu": 32,
+        "workers": 1
+      },
+      "native_status": "not launched"
     }
   ],
   "additional_paper_profiles": [
@@ -874,7 +884,7 @@
         "anc/XB_Boundary_values_X1.txt": "7883537af39b181f84266934b9440df3f67a5eb8f67b576388d7aa29524d9b92"
       },
       "download_reproduction": "python scripts/fetch_diffexp_ancillaries.py",
-      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native 1loop, 74-master MZZ and 75-master ZMZ independent refinement passed. Native full86 first endpoint passed; its higher profile is running. Separate 86-master PH1-to-PH2 128-digit profile remains unrun."
+      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native 1loop, 74-master MZZ and 75-master ZMZ independent refinement passed. Native full86 first endpoint passed; its higher profile is running. Separate 86-master PH1-to-PH2 128-digit original profile is running; native profiles remain unrun."
     },
     {
       "id": "2005.04195v2",
@@ -911,7 +921,7 @@
         "anc/determinants.m": "81655e7efd9628aac262ab2ac586e55c77ecb2f4657b88932bf0de2acdf19ca2"
       },
       "download_reproduction": "python scripts/fetch_diffexp_ancillaries.py",
-      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native 1loop, 74-master MZZ and 75-master ZMZ independent refinement passed. Native full86 first endpoint passed; its higher profile is running. Separate 86-master PH1-to-PH2 128-digit profile remains unrun."
+      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native 1loop, 74-master MZZ and 75-master ZMZ independent refinement passed. Native full86 first endpoint passed; its higher profile is running. Separate 86-master PH1-to-PH2 128-digit original profile is running; native profiles remain unrun."
     }
   ],
   "preparation_tools": [
@@ -922,11 +932,11 @@
   "live_smoke": "fixtures/diffexp/mpl-101-4.json",
   "next_steps": [
     "Finish the running independent 70-digit/order64 full86 profile and compare every coefficient before marking its native refinement acceptance complete.",
-    "Keep the unrun128-digit planar PH1-to-PH2 profile separate from20-digit PH1-to-PH6 milestones and preserve recorded source precision ceilings.",
+    "Keep the separate128-digit planar PH1-to-PH2 original run and unlaunched native profiles separate from20-digit PH1-to-PH6 milestones; preserve recorded source precision ceilings.",
     "Preserve the original unequal-banana direct-route memory censoring; the passed alternate-route oracle is a distinct profile.",
     "After correctness/refinement, use repeated same-host single-core measurements with symbolic setup, transport, caching and work counts reported separately.",
     "Preserve upstream component precision, absolute accuracy and finite-accuracy zeros rather than treating working precision or printed mantissas as achieved accuracy."
   ],
   "clone_modified": false,
-  "validation_status_snapshot_utc": "2026-10-05T03:43:38.504412+00:00"
+  "validation_status_snapshot_utc": "2026-10-05T03:51:31.680230+00:00"
 }

@@ -292,6 +292,9 @@ impl Destination {
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
 struct Seed {
+    /// Supplied original-basis range; defaults to the requested output last order.
+    #[serde(default)]
+    last_epsilon_power: Option<i32>,
     coordinates: BTreeMap<String, String>,
     #[serde(default)]
     root_germ: Option<BTreeMap<String, SheetChoice>>,
@@ -385,6 +388,8 @@ fn bind_continuation<S>(flow: RustFlow<S>, request: &TransportRequest) -> CliRes
 #[serde(deny_unknown_fields)]
 struct TransportRequest {
     schema_version: u32,
+    #[serde(default)]
+    epsilon_shearing: bool,
     #[serde(default = "namespace")]
     namespace: String,
     #[serde(default = "epsilon")]
@@ -421,6 +426,9 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
     let ns = &request.namespace;
     if request.derivatives.is_some() == request.canonical.is_some() {
         return Err("transport requires exactly one of derivatives or canonical".into());
+    }
+    if request.epsilon_shearing && (request.canonical.is_some() || !request.roots.is_empty()) {
+        return Err("epsilon_shearing is supported only for rational derivatives without registered roots; algebraic and canonical inputs are unsupported".into());
     }
     let roots = request
         .roots
@@ -483,6 +491,7 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
             directory,
             flow.identity(),
             range,
+            None,
             |cache, point, policy| {
                 if request.continuation.is_some() {
                     Ok(flow.evaluate_prescribed_to(
@@ -538,11 +547,45 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
             &conditions,
         )?;
         let flow = bind_continuation(flow, &request)?;
+        if request.epsilon_shearing {
+            let sheared = flow.regularize_epsilon(&context)?;
+            let cached_range = sheared.required_range(range)?;
+            return execute_transport(
+                &request,
+                directory,
+                sheared.flow().identity(),
+                range,
+                Some(&sheared),
+                |cache, point, policy| {
+                    if request.continuation.is_some() {
+                        Ok(sheared.flow().evaluate_prescribed_to(
+                            cache,
+                            &point.restart_coordinates()?,
+                            cached_range,
+                            &options,
+                            &context,
+                            policy,
+                            &admit_declared_route,
+                        )?)
+                    } else {
+                        Ok(sheared.flow().evaluate_to(
+                            cache,
+                            &point.restart_coordinates()?,
+                            cached_range,
+                            &options,
+                            &context,
+                            policy,
+                        )?)
+                    }
+                },
+            );
+        }
         execute_transport(
             &request,
             directory,
             flow.identity(),
             range,
+            None,
             |cache, point, policy| {
                 if request.continuation.is_some() {
                     Ok(flow.evaluate_prescribed_to(
@@ -585,6 +628,7 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
             directory,
             flow.identity(),
             range,
+            None,
             |cache, point, policy| {
                 if request.continuation.is_some() {
                     Ok(flow.evaluate_prescribed_to(
@@ -676,6 +720,7 @@ fn execute_transport(
     directory: &Path,
     identity: &BoundaryIdentity,
     range: EpsilonRange,
+    sheared: Option<&EpsilonShearedFlow>,
     mut evaluate: impl FnMut(
         &mut RustFlowCache,
         &CachedPoint,
@@ -688,13 +733,19 @@ fn execute_transport(
     let mut cache = RustFlowCache::load(&cache_directory)?;
     let loaded = cache.len();
     let mut seeds = Vec::new();
+    let source_identity = sheared.map_or(identity, EpsilonShearedFlow::original_identity);
     for seed in &request.seeds {
         let p = Precision::decimal(seed.working_digits)?;
-        seeds.push(CachedBoundary {
-            identity: identity.clone(),
-            point: transport_point(&seed.coordinates, seed.root_germ.as_ref(), identity, ns)?,
+        let source = CachedBoundary {
+            identity: source_identity.clone(),
+            point: transport_point(
+                &seed.coordinates,
+                seed.root_germ.as_ref(),
+                source_identity,
+                ns,
+            )?,
             kind: PointKind::Physical,
-            range,
+            range: EpsilonRange::new(range.leading, seed.last_epsilon_power.unwrap_or(range.last))?,
             coefficients: seed
                 .coefficients
                 .iter()
@@ -716,7 +767,22 @@ fn execute_transport(
                     .collect::<symbolica_amflow::Result<_>>()?,
                 &seed.provenance,
             )?,
-        });
+        };
+        let source = if let Some(adapter) = sheared {
+            let required = adapter.required_range(range)?;
+            if source.range.last < required.last {
+                return Err(format!(
+                    "epsilon shearing requires original seed coefficients through epsilon^{}, but seed.last_epsilon_power is {}",
+                    required.last, source.range.last
+                ).into());
+            }
+            // Preserve the complete declared rectangular source range. Extra
+            // supplied coefficients remain useful for future compatible queries.
+            adapter.to_sheared_boundary(&source, source.range.last)?
+        } else {
+            source
+        };
+        seeds.push(source);
     }
     cache.insert_many(seeds)?;
     let policy = ScaledDistance {
@@ -729,7 +795,12 @@ fn execute_transport(
     for destination in &request.destinations {
         let (coordinates, germ) = destination.parts();
         let point = transport_point(coordinates, germ, identity, ns)?;
-        let result = evaluate(&mut cache, &point, &policy)?;
+        let mut result = evaluate(&mut cache, &point, &policy)?;
+        if let Some(adapter) = sheared {
+            // The bank keeps its authenticated rescaled basis; only the result
+            // is restored. Failure here leaves this destination unsaved.
+            result.boundary = adapter.to_original_boundary(&result.boundary, range)?;
+        }
         cache.save(&cache_directory)?;
         let mut output = json!({
             "coordinates":point_json(&result.boundary.point)?,
@@ -765,12 +836,25 @@ fn execute_transport(
     }
     cache.save(&cache_directory)?;
     let mut output = json!({"schema_version":1,"operation":"transport","loaded_boundaries":loaded,"retained_boundaries":cache.len(),"results":results});
+    let output_identity = sheared.map_or(identity, EpsilonShearedFlow::original_identity);
+    if let Some(adapter) = sheared {
+        let cached_range = adapter.required_range(range)?;
+        output["identity"] = output_identity.key().into();
+        output["epsilon_shearing"] = json!({
+            "weights": adapter.shearing().weights(),
+            "convention": "original_I_i = epsilon^weight_i * cached_J_i",
+            "original_identity": adapter.original_identity().key(),
+            "cached_identity": identity.key(),
+            "original_output_range": {"leading":range.leading,"last":range.last},
+            "requested_cached_range": {"leading":cached_range.leading,"last":cached_range.last},
+        });
+    }
     if let Some(continuation) = identity.physical_continuation() {
         let side = |s: Prescription| match s {
             Prescription::PlusI0 => "+i0",
             Prescription::MinusI0 => "-i0",
         };
-        output["identity"] = identity.key().into();
+        output["identity"] = output_identity.key().into();
         output["continuation"] = json!({
             "kind": "prescribed_affine",
             "domain": continuation.domain,

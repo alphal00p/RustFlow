@@ -50,7 +50,8 @@ numerator; it does not build a full scattering amplitude from Feynman rules.
 The transport example supplies `derivatives`, mapping each kinematic variable to
 its exact differential matrix, an ordered `basis`, its `normalization`, and a
 `branch_domain` identifying the common physical sheet of its inputs. Matrices
-must be regular in epsilon. Without a root registry they have rational dependence
+must be regular in epsilon, or admit the optional exact diagonal epsilon
+shearing described below. Without a root registry they have rational dependence
 on epsilon and kinematics. Optional registered square roots use the algebraic
 native API described below. This command follows regular straight paths and
 rejects singularities on the selected path.
@@ -238,3 +239,52 @@ schema remains 1 and binary banks use schema 5. Only independently checked
 physical endpoints are retained; contour detours are not silently treated as
 physical source points. A rejected germ or route cannot mutate that destination
 in the bank, while previously completed destinations remain saved.
+
+## Diagonal epsilon shearing
+
+For a rational `derivatives` input, `"epsilon_shearing": true` asks the existing
+native adapter to find integer weights with
+`I_i = epsilon^weight_i J_i` such that every physical derivative matrix for J is
+regular in epsilon. Weights have maximum zero. This is one restricted gauge
+class: a negative constraint cycle is a typed failure, not a claim that every
+nondiagonal transformation is impossible. Explicit shearing is rejected for
+registered-root and canonical inputs. Omitting the flag keeps existing behavior.
+
+The top-level `basis`, `leading_epsilon_power`, `last_epsilon_power`, seed values
+and output coefficients continue to refer to the **original I basis**. The leading
+power must be a justified global pole bound along the declared domain, not merely
+the first nonzero coefficient at the source. Epsilon-singular derivatives can
+generate a pole in a component that vanishes at the source.
+
+A seed may specify `last_epsilon_power` separately; it defaults to the requested
+output last order. Its arrays cover every original power from the top-level
+leading bound through this explicit seed last order. To recover original outputs
+through H, the transformed bank needs coefficients through
+`H - min(weight)`. Supply the corresponding extra original source orders. Missing
+high coefficients are rejected, including when the bank already contains a
+compatible endpoint; they are never guessed to be zero. Extra supplied rectangular
+source orders are retained for later compatible queries. The optional seed range
+also works without shearing.
+
+Run `rustflow transport examples/cli/epsilon-shearing-transport.json`. This example
+has `I1'=I2/epsilon`, `I2'=epsilon*I1` and exact initial values
+`I(0)=[0,1+epsilon]`. It declares the global bound -1 and requests original output
+through zero, while supplying source coefficients through +1. The cache basis is
+`J=[epsilon*I1,I2]`, with weights `[-1,0]`. The returned pole and finite coefficients
+of I1 both equal sinh(s), and I2's finite coefficient equals cosh(s).
+
+The binary bank stores the explicitly rescaled identity and ordinary native
+transport results; outputs are restored to the original requested range before
+a destination is saved. JSON `epsilon_shearing` metadata records both identities,
+weights, original output range and requested cache range. The top-level `identity`
+field names the original basis of the returned coefficients; the nested
+`epsilon_shearing.cached_identity` names the binary bank basis. Original
+denominator restrictions, normalization, branch domain, prescribed-contour
+metadata and source uncertainty remain attached.
+Original-basis entries cannot become rescaled entries by relabeling; conversion
+checks identity, range and evidence. Source accuracy caps are unchanged.
+
+A restart uses the same flag, original equations/basis/domain and requested range;
+`seeds` can be omitted when the rescaled bank already covers it. The optional
+`continuation` declaration applies unchanged. No new contour or numerical solver
+is used by this CLI option.

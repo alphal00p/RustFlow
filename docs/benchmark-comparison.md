@@ -15,7 +15,7 @@ and the [unified-flow design](unified-flow.md).
 | Automatic AMF boundaries | Regions, factorization, recursive boundaries, gamma terminals, generic single-mass loop peeling including complex masses off the mass cut | General linear/cut recursion and automatic Higgs+jet initialization |
 | AMFlow 2.0 options | Euclidean FT, configurable dimension, skipped initial reduction, basis refinement, symbolic restart | Broader validation/performance; FT physical contours remain outside its supported automatic scope |
 | Physical transport and cache | Progressive binary `RustFlowCache`, compatible-source search, checked intermediate points, inherited errors, supplied/AMF seeds, regular complex paths with explicit root germs | General causal-path inference, arbitrary algebraic coordinate constants and non-affine cached routes |
-| DiffExp controls | Exact multivariate pullback, canonical dlogs, supplied and compatible analytic-origin boundaries, explicit prescribed detours | General epsilon-singular physical bases, Möbius/Padé controls, full singular algebraic boundary matching |
+| DiffExp controls | Exact multivariate pullback, canonical dlogs, supplied and compatible analytic-origin boundaries, explicit prescribed detours, exact diagonal epsilon rescaling | General nondiagonal epsilon regularization, Möbius/Padé controls, full singular algebraic boundary matching |
 | Higgs+jet amplitude | Supplied full master systems, W/Z crossings, native HEPKit contraction, HEFT square/interference | Uniform 20-digit EW square, fresh automatic AMF boundaries, matched full-amplitude timing |
 
 AMF direct evaluation and AMF-generated seeds for physical transport share the
@@ -83,17 +83,19 @@ timing trials. Most rows have one timing observation per profile.
 | [Connected 13-master ZMZ sector](../reports/diffexp/fivepoint-zmz-sector-validation.json) | 66.16 low / 195.98 high transport | 96.99 transport | All 65 coefficients, 20 absolute digits; a sector of the 75-master system |
 | [Full 108-master nonplanar five-point](../reports/diffexp/nonplanar108-validation.json) | 233.89 low / 684.63 high transport | 200.73 accurate transport | All 540 coefficients, 20 absolute digits; original fast 44.08-second profile only passes 14 digits |
 | [Full 74-master MZZ five-point](../reports/diffexp/fivepoint-mzz-validation.json) | 3524.86 low / 4541.57 high transport | 1147.09 transport | All 370 coefficients, 20 absolute digits, independent refinement |
-| [Full 75-master ZMZ five-point](../reports/diffexp/fivepoint-zmz-first-endpoint.json) | 9308.38 cumulative first endpoint | 1847.95 transport | All 375 first comparisons pass 20 absolute digits; independent high profile pending |
+| [Full 75-master ZMZ five-point](../reports/diffexp/fivepoint-zmz-validation.json) | 9308.38 cumulative low / 12157.19 fresh high process | 1847.95 transport; 1854.56 process | All 375 coefficients, 20 absolute digits, independent refinement |
 | [Full 86-master ZZZ five-point](../reports/diffexp/fivepoint-zzz-first-endpoint.json) | 10122.59 cumulative first endpoint | 2453.68 transport | All 430 first comparisons pass 20 absolute digits; independent high profile pending |
-| ZZZ 86-master, separate 128-digit notebook profile | Not run | Not run on this host | Pending |
+| [ZZZ 86-master, separate 128-digit notebook profile](../reports/diffexp/fivepoint-zzz-128-preparation.json) | Not run | Running; no completed timing | Pending; supplied finite values have about 132 absolute accuracy digits |
 
 The 75- and 86-master cumulative times include capped predecessors, discarded
 work and checkpoint restoration. They are not uninterrupted transport timings.
 The higher profiles start independently from the supplied original boundary.
-Original MZZ/ZZZ notebook runs request 15 digits; their observed reference
+Original MZZ/ZMZ/ZZZ notebook runs request 15 digits; their observed reference
 agreement is sufficient for the stated 20-digit comparisons, but does not change
-their configured accuracy target. Neither large pending refinement is counted as
-a completed acceptance.
+their configured accuracy target. The full 75-master refinement now passes; the full 86-master refinement is
+still pending. These scientific runs use the immutable library revisions named
+in their reports; the prepared current-library full-system regressions remain
+separate, opt-in validations.
 
 ## Higgs+jet reuse and matrix elements
 

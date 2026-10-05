@@ -25,6 +25,7 @@ pub struct PreparedPhysicalFamily {
     transformations: Vec<reduction::BasisTransformation>,
     refinement: Option<refine::RefinementReport>,
     flow: RustFlow,
+    sheared: Option<EpsilonShearedFlow>,
 }
 
 impl PreparedPhysicalFamily {
@@ -212,11 +213,27 @@ impl PreparedPhysicalFamily {
             transformations: closed.transformations,
             refinement,
             flow,
+            sheared: None,
         })
+    }
+    /// Rescale the common integral basis by exact epsilon powers when one
+    /// diagonal transformation regularizes every physical partial. Original
+    /// integral labels/reductions remain available; `flow()` exposes the
+    /// explicitly rescaled cache basis, and seed/projection methods map it.
+    pub fn with_epsilon_shearing(mut self, context: &RunContext) -> Result<Self> {
+        if self.sheared.is_none() {
+            self.sheared = Some(self.flow.regularize_epsilon(context)?);
+        }
+        Ok(self)
+    }
+    pub fn epsilon_shearing(&self) -> Option<&EpsilonShearing> {
+        self.sheared.as_ref().map(EpsilonShearedFlow::shearing)
     }
     pub fn family(&self) -> &IntegralFamily {
         &self.family
     }
+    /// Original integral basis. With epsilon shearing enabled, cached columns
+    /// are epsilon^-weight times these integrals; see `epsilon_shearing()`.
     pub fn basis(&self) -> &[Integral] {
         &self.basis
     }
@@ -234,7 +251,16 @@ impl PreparedPhysicalFamily {
         &self.conditions
     }
     pub fn flow(&self) -> &RustFlow {
-        &self.flow
+        self.sheared
+            .as_ref()
+            .map_or(&self.flow, EpsilonShearedFlow::flow)
+    }
+    pub(crate) fn cache_target_weight(&self, column: usize, weight: &Atom) -> Atom {
+        if let Some(shearing) = self.epsilon_shearing() {
+            weight * Atom::var(self.family.epsilon).pow(i64::from(shearing.weights()[column]))
+        } else {
+            weight.clone()
+        }
     }
 
     /// Compute an automatic AMF or FT boundary and append it to the growing bank.
@@ -260,7 +286,7 @@ impl PreparedPhysicalFamily {
             return Err(Error::InvalidInput("physical seed coordinates, dimension or prescription do not match the prepared family".into()));
         }
         let cached_point = CachedPoint::Exact(point.clone());
-        self.flow.identity().validate_point(&cached_point)?;
+        self.flow().identity().validate_point(&cached_point)?;
         let leading = self.ordinary_master_leading()?;
         let range = EpsilonRange::new(leading, last)?;
         let point = KinematicPoint(
@@ -337,12 +363,19 @@ impl PreparedPhysicalFamily {
             "Automatic {method} master values (including quadratic deformation for linear families when applicable), checked by independent epsilon grids and precision/order refinement"
         );
         let boundary = CachedBoundary {
+            // Automatic AMF/FT always evaluates actual integrals. Only the
+            // exact, checked conversion below assigns a rescaled identity.
             identity: self.flow.identity().clone(),
             point: cached_point,
             kind: PointKind::Physical,
             range,
             coefficients,
             accuracy: BoundaryAccuracy::supplied(verified, bits, errors, &provenance)?,
+        };
+        let boundary = if let Some(sheared) = &self.sheared {
+            sheared.to_sheared_boundary(&boundary, last)?
+        } else {
+            boundary
         };
         cache.insert(boundary.clone())?;
         Ok(boundary)

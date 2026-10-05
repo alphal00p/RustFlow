@@ -1,0 +1,964 @@
+{
+  "schema_version": 1,
+  "status": "passed_with_explicit_scope_limits",
+  "recorded_utc": "2026-10-05T03:54:46.609551+00:00",
+  "scope": "Exact rational diagonal epsilon regularization of all physical partial differential matrices, authenticated boundary reindexing, AMF/FT family seed and target mapping, growing binary physical cache and CLI original-basis outputs.",
+  "checks": {
+    "release_library_and_integration_tests": {
+      "passed": 399,
+      "failed": 0,
+      "ignored": 9,
+      "binaries_or_doctest_batches": 77
+    },
+    "doctests": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "binaries_or_doctest_batches": 1
+    },
+    "strict_release_all_target_clippy": "passed;8preexisting RustRed dependency warnings",
+    "formatting": "passed",
+    "git_diff_check": "passed",
+    "source_and_consumed_rustred_hashes_unchanged_during_validation": true
+  },
+  "commands": [
+    "cargo test --release --lib --tests",
+    "cargo test --release --doc",
+    "cargo clippy --release --all-targets -- -D warnings",
+    "cargo fmt -p symbolica-amflow --check",
+    "git diff --check"
+  ],
+  "new_coverage": [
+    "Nine exact shearing tests: a common transformation over every physical partial, complex rational coefficients, cancellation/domain constraints, negative-cycle rejection, integer/range limits, Laurent order/error reindexing and shared rational Frobenius behavior.",
+    "Three progressive-cache tests: independent analytic hyperbolic transport with a generated Laurent pole, original/transformed identity authentication, exact error/cap preservation, raw/generic conditions, binary restart and prescribed-continuation metadata.",
+    "Two genuine Feynman-family tests: native RustRed exact IBP certification of a bubble plus evanescent tadpole basis, skipped-target preparation, AMF-generated seed, physical mass transport and reduction-weight projection against a fresh independently refined direct AMF solve.",
+    "Four CLI tests: original returned coefficients and identity versus transformed cache identity, continued reuse/restart, missing extra source-order rejection even with a cache hit, unsupported algebraic/canonical declaration rejection, and both prescribed branches."
+  ],
+  "genuine_family": {
+    "propagators": [
+      "k^2-m",
+      "(k+p)^2-m"
+    ],
+    "external_invariant": "p^2=-1",
+    "m_semantics": "mass squared",
+    "original_basis": [
+      [
+        1,
+        1
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "targets": [
+      [
+        1,
+        1
+      ],
+      [
+        3,
+        0
+      ],
+      [
+        2,
+        1
+      ]
+    ],
+    "epsilon_weights": [
+      -1,
+      0
+    ],
+    "convention": "original I_i=epsilon^w_i cached J_i",
+    "source_mass_squared": "1/2",
+    "destination_mass_squared": "2/3",
+    "requested_target_range": [
+      -2,
+      0
+    ],
+    "required_cache_range": [
+      -2,
+      1
+    ],
+    "seed_verified_digits_at_least": 36,
+    "transport_requested_digits": 28,
+    "direct_destination_requested_digits": 28,
+    "checked_target_digits": 20,
+    "metric": "scaled complex error, using existing Precision::close; exact IBP certificate separate from numerical comparison",
+    "source_independence": "Fresh direct destination AMF evaluation uses no transported cache values or benchmark-specific terminal formula."
+  },
+  "native_owners": [
+    "Symbolica Q(i) rational polynomials and degree bounds for exact epsilon valuation",
+    "Existing Symbolica matrix change_basis for physical derivatives; epsilon-only T has zero physical derivative",
+    "One shared Linnet HedgeGraph integer-potential constraint algorithm, reused by rational Frobenius normalization with its derivative term retained",
+    "Existing RustFlow transport, path/root/prescription owners, uncertainty propagation, compatible-source selection and binary persistence",
+    "Existing RustRed exact IBP/family preparation and AMF/FT orchestration"
+  ],
+  "correctness_contracts": [
+    "A single diagonal T must regularize every partial before path selection; path-specific cancellations cannot waive original conditions.",
+    "The original leading Laurent bound must hold along the intended transport, not merely match the first nonzero source coefficient.",
+    "Only proved orders below the declared original leading bound may be zero-filled; omitted positive source coefficients are errors.",
+    "Target weights are multiplied by T identically in required_master_range and project_targets.",
+    "Boundary conversion checks complete original/transformed identities, dimensions, source range and uncertainty. Evidence caps and coefficient errors are reindexed without promotion.",
+    "Top-level CLI identity authenticates returned original coefficients; nested cached_identity names the stored transformed basis.",
+    "Original denominator holes, generic epsilon-leading constraints, normalization, prescription and declared homotopy are retained."
+  ],
+  "limits": [
+    "Rational coefficient connections only; registered-root epsilon shearing is a separate staged extension.",
+    "Diagonal integer-power gauges only; a negative cycle rejects this strategy, not all nondiagonal transformations.",
+    "No automatic finite-epsilon boundary-provider fallback for unregularized physical systems.",
+    "Caller-supplied systems require a justified global Laurent lower bound.",
+    "Checked span limit10000 and1..1024rectangular Laurent coefficients; exhausted limits return typed errors.",
+    "Existing general algebraic singular endpoints, linear/cut recursive-boundary and automatic ggHg initialization gaps remain.",
+    "This is a correctness milestone, not a new upstream performance measurement or full feature-parity claim."
+  ],
+  "independent_reviews": [
+    {
+      "path": "target/epsilon-shearing-final-audit/review.md",
+      "sha256": "dafc62bbd72caf2f8434c6f899c66a24a71bfa86541f48df884a5f8e63c299be",
+      "bytes": 4442
+    },
+    {
+      "path": "target/epsilon-shearing-cli/report.json",
+      "sha256": "94e5df501ee3a9dde831f62b0fb04318d494809f7ad87560e9875a670494e54a",
+      "bytes": 9531
+    }
+  ],
+  "dependencies": {
+    "symbolica_revision": "75f8350094b90254ee71dc2a391fde0d14b0204a",
+    "rustred_head_and_fetched_main": "36682801d0ae5799693e1050f62d99a8e227cef3",
+    "consumed_files": 1441,
+    "consumed_sha256_manifest": "8f6548b2177fdf2c1baa64bab4fb6fd7240c1e85ccb0732b2a508679fb9338e2",
+    "sibling_source_checkouts_modified": false
+  },
+  "source_snapshot": {
+    "precommit_base": "86d3255902465a5fd3122c920077c00d8d514f89",
+    "note": "The precommit base is supplemented by the exact tested source hashes below, including new files; it is not itself the complete feature revision.",
+    "files": [
+      {
+        "path": "Cargo.toml",
+        "sha256": "9d91585b5139ea570781677feb4d107e878e71b09385f6e99521d9fd2e2cbe18",
+        "bytes": 2108
+      },
+      {
+        "path": "Cargo.lock",
+        "sha256": "d6afe48a7fb559f50ffe2538c69f5181a542d470446af680436eb69bfda9aa82",
+        "bytes": 50450
+      },
+      {
+        "path": "build.rs",
+        "sha256": "050388506b8929f736ac7ea3bcb84124258359c8bc79403686bb387e73dd76c6",
+        "bytes": 3721
+      },
+      {
+        "path": "src/algebra.rs",
+        "sha256": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e",
+        "bytes": 5573
+      },
+      {
+        "path": "src/algebraic/analytic_origin.rs",
+        "sha256": "ed61367b71cfa140d637263e8682f7fed372da281a053a2f7dd3215d0b42bf82",
+        "bytes": 13910
+      },
+      {
+        "path": "src/algebraic/canonical.rs",
+        "sha256": "591fe277542d77fd898c03dc8976e8fd127db42956a033350caf0b85fd6f343c",
+        "bytes": 12471
+      },
+      {
+        "path": "src/algebraic/quotient.rs",
+        "sha256": "543b34a27d485d3c5450c65cff7defbc24106c9560854615ebfb3b0c84f75117",
+        "bytes": 4127
+      },
+      {
+        "path": "src/algebraic.rs",
+        "sha256": "08a9fb742270b2deb646de1068ffef0cceaff76c7ec4a3d1a51f01346cb6c933",
+        "bytes": 62138
+      },
+      {
+        "path": "src/asymptotic.rs",
+        "sha256": "1fd4632bf5ef4159b36b45c61b89b9bef49afd0c2ea6f191286160e4833c3a4f",
+        "bytes": 4053
+      },
+      {
+        "path": "src/benchmarks.rs",
+        "sha256": "a3b74d5c9915e86f2992e3c43d8c56c337c6e17ddd9d8640db12777b8b5ee463",
+        "bytes": 5515
+      },
+      {
+        "path": "src/bin/rustflow.rs",
+        "sha256": "9cd1f27ab59c94ccba24cdbc3655304e87cf8e2274b55c6544e86c29055f59a9",
+        "bytes": 32298
+      },
+      {
+        "path": "src/boundary.rs",
+        "sha256": "565440247c8f75a226d667da21bec64b2fa0d5e6fc6e5d3eb04c8bfbfff3c426",
+        "bytes": 28143
+      },
+      {
+        "path": "src/bubble.rs",
+        "sha256": "1bb87aa06ae81c823a013a820873484d85a07962cdac9d4d1772f17e74a2b972",
+        "bytes": 22823
+      },
+      {
+        "path": "src/cache.rs",
+        "sha256": "3118c8b9895de4afb8997f62481d8041f2590c66d55db490bc0977ced2de2bea",
+        "bytes": 30881
+      },
+      {
+        "path": "src/contour.rs",
+        "sha256": "1f8801c07a7b55a8bffca135b4c42d82c32698e0f80e5c72a9763e5d8fb15cbe",
+        "bytes": 24687
+      },
+      {
+        "path": "src/cuts.rs",
+        "sha256": "e0522a9171bbfe0eda2e90c28b53dd1d3d50ef14e5b31ad5bcb2d1249fc4837e",
+        "bytes": 21975
+      },
+      {
+        "path": "src/diffexp/uncertainty_tests.rs",
+        "sha256": "b8f9ae9fdab0cc62e78a68b787170b24dccfb882122abeb6773288416033d6a2",
+        "bytes": 8654
+      },
+      {
+        "path": "src/diffexp.rs",
+        "sha256": "1926d0fa8a2d7e6d7967dbe628a628d6cf7a953f68b571438a8d7daec0fa454e",
+        "bytes": 27454
+      },
+      {
+        "path": "src/engine.rs",
+        "sha256": "569ca9d866efbed1d50c51f8768609573e3031d686c022e57e6ed091c5ba14df",
+        "bytes": 35324
+      },
+      {
+        "path": "src/epsilon.rs",
+        "sha256": "e10f50d16875dad211ae025ed2f05c177e356189428ee4564d9e6d1f5be15112",
+        "bytes": 3502
+      },
+      {
+        "path": "src/epsilon_flow.rs",
+        "sha256": "35f485ee4f9e16646570b3a522a350ae4c4c64b0bb065ca9f4c7058b1078d26f",
+        "bytes": 4408
+      },
+      {
+        "path": "src/epsilon_shearing.rs",
+        "sha256": "8ee906eb90f3de1ddcc01d273cea99436eca8494205223b3be4160b97fb6606c",
+        "bytes": 13296
+      },
+      {
+        "path": "src/error.rs",
+        "sha256": "9da961af3e2d550ee6b2a66564e9f2794f3f073e96d332367d8695acbd76fac3",
+        "bytes": 758
+      },
+      {
+        "path": "src/family.rs",
+        "sha256": "95fd5c3fc7ecb47d54a45489406b987099e4a094a94f6754c997158f88f37226",
+        "bytes": 19707
+      },
+      {
+        "path": "src/fixed_series.rs",
+        "sha256": "a0a0e13c37fc129ed0f6e5e10768343dc1e913d512b7ef5598c4a54981e295db",
+        "bytes": 12605
+      },
+      {
+        "path": "src/frobenius.rs",
+        "sha256": "17f17835d23a1fa604d2e699f4d2c0c24f95fbb99af6f60b182b6912f93f6959",
+        "bytes": 22782
+      },
+      {
+        "path": "src/ft.rs",
+        "sha256": "a20eb685dd418981de83e80cee56312f0f768d78053e63350652dabab5841812",
+        "bytes": 20019
+      },
+      {
+        "path": "src/gaussian.rs",
+        "sha256": "3dc21744a44ae0c986dcb79d26b0125fe217b3cca08eb93ba08d4f0fe2094064",
+        "bytes": 8099
+      },
+      {
+        "path": "src/hepkit.rs",
+        "sha256": "eef435272518d587a3b05017abe4ce9b06b45c69c1a7637b5a33c0426f091843",
+        "bytes": 24997
+      },
+      {
+        "path": "src/integer_shearing.rs",
+        "sha256": "aedbf9a1491afc66e9f77452c26cbacf476486757da7e5d8ab4849012b14de06",
+        "bytes": 4744
+      },
+      {
+        "path": "src/integrand.rs",
+        "sha256": "baa82ef25908f273e3e802dfba5ebef63df1c0150133bf9892f77544f42575a3",
+        "bytes": 17543
+      },
+      {
+        "path": "src/kinematic_derivative.rs",
+        "sha256": "2be373a311b03b8b847c73bb5e88497a2361a0d76c016679c9d8a17216ce324f",
+        "bytes": 11305
+      },
+      {
+        "path": "src/kinematics.rs",
+        "sha256": "a5df4d1682ccf6e9457ac8a5c0f9ae1dcf51c7089a5e653c215ade7b6809d0fc",
+        "bytes": 10795
+      },
+      {
+        "path": "src/lib.rs",
+        "sha256": "fa683eca447fd41dbf902ee02679b7266d09c06454adec7961e05cdd9094146c",
+        "bytes": 1844
+      },
+      {
+        "path": "src/linear.rs",
+        "sha256": "db6a804bc0fe42a608e2ab0baaa6d7fa1f58bb5d53fcb0e5d75b5bcd8bbbd368",
+        "bytes": 15290
+      },
+      {
+        "path": "src/native/parametric.rs",
+        "sha256": "fea11102da91c592e35e10b480d02ba2305c57fd8843401edae90b006bf7e385",
+        "bytes": 11027
+      },
+      {
+        "path": "src/native/parametric_tests.rs",
+        "sha256": "224fa9c425d1beabce6c110f75190c4b2c632a407ec558dd43ddbd7ba814d387",
+        "bytes": 13881
+      },
+      {
+        "path": "src/native/symmetry.rs",
+        "sha256": "3e81ae5492e865aea6add52402848a812d677b0162b7d9d1fa70d069b440efd2",
+        "bytes": 24178
+      },
+      {
+        "path": "src/native.rs",
+        "sha256": "c2c1db4712b33e394976ff0c03698a0e3f89df5c30e91643fe595f0fb230136d",
+        "bytes": 90775
+      },
+      {
+        "path": "src/normalize.rs",
+        "sha256": "7b96ca7e31e1c72de53a410ba601ff8e3e459522331939d5ab0d4cf2446743a7",
+        "bytes": 13505
+      },
+      {
+        "path": "src/numeric.rs",
+        "sha256": "97e8b5f60630b002cf43ee32d90f1bfce4c7abc9ae641095c9aaad23d5336bd6",
+        "bytes": 13186
+      },
+      {
+        "path": "src/ode.rs",
+        "sha256": "94743743483f93211034a84bf32a9a7f976485f1212eab537ee01496d3f757e2",
+        "bytes": 42559
+      },
+      {
+        "path": "src/options.rs",
+        "sha256": "8873eda73c5d51d78920a996451b456f198a6fc70a0e8312ef351a8a9c75624b",
+        "bytes": 5555
+      },
+      {
+        "path": "src/phase_space.rs",
+        "sha256": "c921d7e5d2a34588a61690954bcbe1bc12362865ef616990a2074767efacfba0",
+        "bytes": 14540
+      },
+      {
+        "path": "src/physical_conditions.rs",
+        "sha256": "a522e5151d287664378f2e7ad8b437dd6dc2fa51afbf818a2b342c218526e056",
+        "bytes": 12896
+      },
+      {
+        "path": "src/physical_family.rs",
+        "sha256": "4c0e26104870f91b26afb9e7fa019e141f74985f18d9ba567e9c7ab67a0a240a",
+        "bytes": 17380
+      },
+      {
+        "path": "src/physical_targets.rs",
+        "sha256": "518679de973ea56a44573fd2df4f1b25ad2a3fcf76924425945aac258b28a58b",
+        "bytes": 14196
+      },
+      {
+        "path": "src/physical_transport.rs",
+        "sha256": "4cd7b67d14c976fd499dbd83d4e252ef65257926e0775d505738897befb0e049",
+        "bytes": 40318
+      },
+      {
+        "path": "src/recursive.rs",
+        "sha256": "584586a2c52a6fdf77bca74a7c2e15f40dc40cbda8ca85fdc90fc1bf4e37c536",
+        "bytes": 23302
+      },
+      {
+        "path": "src/reduction/scoped_tables.rs",
+        "sha256": "5555be585c5a17d3efe9fca2c0f5ce5ae7f42baf3f052bb665516aab7429c55a",
+        "bytes": 8867
+      },
+      {
+        "path": "src/reduction/table_graph.rs",
+        "sha256": "e409b2634944ce1d2a1d7865b0a09a7b7bcb1134f7fe1d84e09286cb14efb1bf",
+        "bytes": 7606
+      },
+      {
+        "path": "src/reduction.rs",
+        "sha256": "821bd82d402822a22aafae437ff20dac5f2fcacf97c8b1b1dd5ec02732cde36d",
+        "bytes": 29317
+      },
+      {
+        "path": "src/refine.rs",
+        "sha256": "c84a057862f9a85cca05a1250883fb19b135e3cb4214e45ee66b3819daa1c22c",
+        "bytes": 9562
+      },
+      {
+        "path": "src/regions.rs",
+        "sha256": "80774144c51cf3a72cad25d14c33cfae183fbae666db1178b31ae7163c0369ca",
+        "bytes": 9890
+      },
+      {
+        "path": "src/root_path.rs",
+        "sha256": "0ca261341c9ddb8bf6e2418dec1928254a7f1fa05ef6a49ab97f1381f0f73ade",
+        "bytes": 12475
+      },
+      {
+        "path": "src/tensor.rs",
+        "sha256": "bc27dc820275c76716ca24c677e714f61e5734156dcb94ee95ec6bd8eab4a77b",
+        "bytes": 7134
+      },
+      {
+        "path": "src/transport_cache.rs",
+        "sha256": "84d2e24b7c5001ad06f81497c31f13b5f6f79374a1e2d218fc79816bec4a42c6",
+        "bytes": 81500
+      },
+      {
+        "path": "src/vacuum.rs",
+        "sha256": "b3347458d799616cee718fc52176dfa9ff23ddc85b7769cedee5ae4e77bf3f52",
+        "bytes": 2127
+      },
+      {
+        "path": "src/vacuum_peel.rs",
+        "sha256": "982ea36fed6fe832eae3b9f16489649c18e09c46fdf60fd91422ddd1746e28c2",
+        "bytes": 27968
+      },
+      {
+        "path": "tests/accuracy_fallback.rs",
+        "sha256": "d7fc58b40b6cfb07a1f77061c27a142573c508ac883e64b8c866da4c90724b45",
+        "bytes": 6839
+      },
+      {
+        "path": "tests/algebraic.rs",
+        "sha256": "1897f156399853d7e1648f0078bd4f72afc7a6201e068625c767d8c93b86c39e",
+        "bytes": 12328
+      },
+      {
+        "path": "tests/algebraic_cache.rs",
+        "sha256": "bc4c1db34306cd8a5d1864d56e6ee0c6b7570bdf19853b92732425a09624a4b5",
+        "bytes": 16402
+      },
+      {
+        "path": "tests/algebraic_kinematic.rs",
+        "sha256": "8cb95c8031fa3245fe6be7e43685b5076846a411265d455f74516fb137b4449a",
+        "bytes": 6276
+      },
+      {
+        "path": "tests/algebraic_quotients.rs",
+        "sha256": "110720b1496bc822460da095d264e0d9dd8a84f9bea6f145cefed76efb3f408b",
+        "bytes": 14971
+      },
+      {
+        "path": "tests/amf_mass_sheet.rs",
+        "sha256": "e215dd6e5257b56315e7bc49e7803e67c3649e74a23175de66ba49a54071dd0c",
+        "bytes": 12730
+      },
+      {
+        "path": "tests/analytic_origin.rs",
+        "sha256": "bb307c0b01d4ddd389a011a329372db62ba83d25dc38557edc5fbe2fc14c8251",
+        "bytes": 7361
+      },
+      {
+        "path": "tests/asymptotic.rs",
+        "sha256": "f2941ad50f3da9ae9ba80e743df9962e75eae635930f2bb801c397fbc92f6fd0",
+        "bytes": 6200
+      },
+      {
+        "path": "tests/banana_equal.rs",
+        "sha256": "a789a39765c310c6c4383bef9406c28c32fa2e547d6ff91ff6ec8706701ceeb0",
+        "bytes": 8353
+      },
+      {
+        "path": "tests/banana_unequal.rs",
+        "sha256": "803d499d51e3e36ff86b937a39814926680bbc6a6ec19fd78878c0b6e7f53a2a",
+        "bytes": 6222
+      },
+      {
+        "path": "tests/cache.rs",
+        "sha256": "b72832d2eb3481e29ae4b3425f71d9d8e09a8c46c3d6276d3386d32c2e110056",
+        "bytes": 19617
+      },
+      {
+        "path": "tests/cache_lower_bounds.rs",
+        "sha256": "b0505398c12d22550d2ce1ac20dc7ac1716debe76da51e3d5623980a7010a496",
+        "bytes": 10341
+      },
+      {
+        "path": "tests/canonical_algebraic.rs",
+        "sha256": "cefc5aa18a12c63cf513bb95377072f5fc7ec0158df713a9e288c93284031f68",
+        "bytes": 13964
+      },
+      {
+        "path": "tests/canonical_cache.rs",
+        "sha256": "e10aefa56c594d156e5b897297c1e192d7d60f626933608a7e5325368ea06bc3",
+        "bytes": 10798
+      },
+      {
+        "path": "tests/cli.rs",
+        "sha256": "ae654600e128164ce7ddf018df4b1748c9ce4dccd66399077983a97ad6c893f5",
+        "bytes": 13850
+      },
+      {
+        "path": "tests/cli_algebraic.rs",
+        "sha256": "4fb0ec982c79a5d32971f15df535e1d260c8c8f5e34cb01e6242f7b77cb9a9f7",
+        "bytes": 8013
+      },
+      {
+        "path": "tests/cli_canonical.rs",
+        "sha256": "af396edb86719764985f179422bc9b746619e6ab664c88e72e93702131922c35",
+        "bytes": 6706
+      },
+      {
+        "path": "tests/cli_epsilon_shearing.rs",
+        "sha256": "32f4594fc1cb6e9e3e9f23c4dc8723f421b6088ab4e9660f8bc36fc13774d563",
+        "bytes": 8415
+      },
+      {
+        "path": "tests/cli_fallback.rs",
+        "sha256": "38f23dcba3181c9403e123ab9f6f64d9f4122fac577954153f8141225db1c6ca",
+        "bytes": 4242
+      },
+      {
+        "path": "tests/combinations.rs",
+        "sha256": "a5bb26419b594e24f1ec4428ad2ea7e9fcfa032328d551a0557d1af5172ca788",
+        "bytes": 2839
+      },
+      {
+        "path": "tests/common/banana.rs",
+        "sha256": "b1aaebfc81166d36c4d9f8f02caaa2223165c0379450b979577184a7d4f69100",
+        "bytes": 8266
+      },
+      {
+        "path": "tests/common/fivepoint.rs",
+        "sha256": "642c56ad108779ac04254474434e9bb81f1da43d092d41c5b8ed3823fe809580",
+        "bytes": 13169
+      },
+      {
+        "path": "tests/common/gg_hg.rs",
+        "sha256": "a1490680822ecfa888f4c622e5e74618fb0502347ebfdccdc7dde83eff45d8f8",
+        "bytes": 12361
+      },
+      {
+        "path": "tests/complex_cache.rs",
+        "sha256": "2ca0bbd737b529e8329de5fdddf26230e8f639fcc842179efbf2cf22fdc5d0ac",
+        "bytes": 18918
+      },
+      {
+        "path": "tests/complex_kinematics.rs",
+        "sha256": "b346323d16fd3db7c7a49e2566892ad84255573fd61ea5ae05f3661c3e61f41c",
+        "bytes": 3211
+      },
+      {
+        "path": "tests/complex_ode.rs",
+        "sha256": "b06f10cf9cf9abc477c5b5f4037ea48d5b17b7527ed70ac8bfbe33fb08d962b1",
+        "bytes": 2204
+      },
+      {
+        "path": "tests/continuation_budget.rs",
+        "sha256": "1660ab09cca9639543533194320b69283586e9567c9fcf6d8fa339e5d26fd1e3",
+        "bytes": 1392
+      },
+      {
+        "path": "tests/continuation_empty_poles.rs",
+        "sha256": "60847d0f0d12b41a80e86b76d05bf62b37227956d302a443d14079ee50e4e395",
+        "bytes": 3658
+      },
+      {
+        "path": "tests/contour_endpoints.rs",
+        "sha256": "ea1991c2442608ad2a48df5e140c751e731625b96f607237948bc9621c7d64ef",
+        "bytes": 2112
+      },
+      {
+        "path": "tests/contour_factorization.rs",
+        "sha256": "f4c85a4b5419724c68971955665d002ec26e2e6f6a242a46ef2b64397a22f0d7",
+        "bytes": 5137
+      },
+      {
+        "path": "tests/contour_signs.rs",
+        "sha256": "366969e6733db40e39f3056577675bc87d59b0796a1d9b20851a19a44fde15ba",
+        "bytes": 3474
+      },
+      {
+        "path": "tests/core.rs",
+        "sha256": "879e5887c330febd3296dc015854583bc3ce9f66f2708eef76448484743d1684",
+        "bytes": 14595
+      },
+      {
+        "path": "tests/cuts.rs",
+        "sha256": "1295570164cc01f8d7176eb0cb1f854c14dbc9cc2c99a93308a870f079095462",
+        "bytes": 6931
+      },
+      {
+        "path": "tests/diffexp.rs",
+        "sha256": "a892011fcafb59b4c6de3c32f1d7adb9fc1cd83240cf172b3ec2eeba76478402",
+        "bytes": 10701
+      },
+      {
+        "path": "tests/end_to_end.rs",
+        "sha256": "3d5fb7f4414e114313dd90b475e6599afec97878db8086fb28eefd82f2d2ebda",
+        "bytes": 13082
+      },
+      {
+        "path": "tests/epsilon_cache.rs",
+        "sha256": "d8bb5f7fd68ef48476fcda8ba2898af2ee1c85894a0a9466e4bf45893a3c5e13",
+        "bytes": 8523
+      },
+      {
+        "path": "tests/epsilon_physical_family.rs",
+        "sha256": "eca7dd9dee31b6a7017895b77c65d0ad35c410eb0fc86d9ca7842e760617c023",
+        "bytes": 9635
+      },
+      {
+        "path": "tests/epsilon_shearing.rs",
+        "sha256": "e3a1ddb4f5dcb6e4eebe88609a79d5ac3e88d5aa9b8c2ce6f29bf1bf515614fc",
+        "bytes": 12696
+      },
+      {
+        "path": "tests/fivepoint_mzz.rs",
+        "sha256": "e36ec4a68bfca2dac49aa3b92d90d5e244254f965f1b591db9c976b0286adcc2",
+        "bytes": 1270
+      },
+      {
+        "path": "tests/fivepoint_planar.rs",
+        "sha256": "8f55a0f7eb63b0d1b7e1dad7b497dbff411dc9c54b638b9a71f1d92a6452760d",
+        "bytes": 1452
+      },
+      {
+        "path": "tests/fivepoint_prescribed_cache.rs",
+        "sha256": "da87447424cc9b398ca8bba7073825a63cef4433ab840f9d803a50107a0f106b",
+        "bytes": 9085
+      },
+      {
+        "path": "tests/fivepoint_zmz.rs",
+        "sha256": "44a0e6791dde6a299163b315a69f4ac0dee3c09758b477af5fc3fda82455a3b3",
+        "bytes": 1270
+      },
+      {
+        "path": "tests/fivepoint_zmz_sector.rs",
+        "sha256": "595b503c5663c33ff331e8cfb379a248dc350c05e82df8a400548f2be16fa51f",
+        "bytes": 1317
+      },
+      {
+        "path": "tests/frobenius.rs",
+        "sha256": "22386fe9459823670a3d5acb435b80ae73638f3ac13bf5a8c5a74fdfcc3ef306",
+        "bytes": 10157
+      },
+      {
+        "path": "tests/ft.rs",
+        "sha256": "9c4a7afa0ba9d31ba36be9c7bfa8e3c1197a942735c61da4e7fbe4b31981ecd5",
+        "bytes": 10604
+      },
+      {
+        "path": "tests/gg_hg.rs",
+        "sha256": "218b1782fb43c711eea611064c586d2ba7cae4fc2e18bea8e23e85275f1e0c4f",
+        "bytes": 1362
+      },
+      {
+        "path": "tests/hepkit.rs",
+        "sha256": "be563db1d9187e3b9573c7b03a0e89429b7a61d379986018f7066f29ab6af6e3",
+        "bytes": 14924
+      },
+      {
+        "path": "tests/hepkit_cuts.rs",
+        "sha256": "85ca25cdfd16467329d464abf01486150d667aa7fa9c0caadf2e3ecdd6fa9cd4",
+        "bytes": 7280
+      },
+      {
+        "path": "tests/integrand.rs",
+        "sha256": "9ca6288360707282b748d3c26e522a29c2e2c054b23c0ead4fcf088ac9f31563",
+        "bytes": 5789
+      },
+      {
+        "path": "tests/kinematic_derivative.rs",
+        "sha256": "04b4769edf2027e6e26511ef4edd74146790a61498a2c39b6f4ca7d952ead46e",
+        "bytes": 8975
+      },
+      {
+        "path": "tests/kinematics.rs",
+        "sha256": "e2988a7488ac50eb2b4c31fe8388124feba0ad8f48fb9e18866518bc84ad71c0",
+        "bytes": 8765
+      },
+      {
+        "path": "tests/linear.rs",
+        "sha256": "1302f54801f24493e3949db840e1511158b8a96c61a6924d6fa135ceda3d5605",
+        "bytes": 9998
+      },
+      {
+        "path": "tests/mg5_pointbank.rs",
+        "sha256": "0a197777d89918007360c31922295de3b363bc289a48f20000ad255a160be943",
+        "bytes": 10906
+      },
+      {
+        "path": "tests/mpl_additional.rs",
+        "sha256": "cc3ff302f18ca55afc9abbecde435f930d4bfaf5a5a40a1164525920d0a93472",
+        "bytes": 5923
+      },
+      {
+        "path": "tests/multimass_physical.rs",
+        "sha256": "c0e80f5378b9c1b4449bc91715cea35ebe3d0804fea127e783a96e01a0677f0e",
+        "bytes": 3888
+      },
+      {
+        "path": "tests/native_arity.rs",
+        "sha256": "6f5c06469b5f2a84deb44367259ed31a4c69281e54af76295772285688a61101",
+        "bytes": 4678
+      },
+      {
+        "path": "tests/native_family_cache.rs",
+        "sha256": "e51d5c04ff92f32417b363f64a297562d8c2e92767e6edf1a4f711dc63bd12be",
+        "bytes": 5244
+      },
+      {
+        "path": "tests/native_graphs.rs",
+        "sha256": "6f21e3561fcda3d84f66d228a88a89391c7c36e03b8b19e59256c876f36bd4da",
+        "bytes": 1066
+      },
+      {
+        "path": "tests/native_parametric.rs",
+        "sha256": "2c4bdbadb00da143873996fe41463357f3f9c7bc356b19bc5b4118f0512d27ad",
+        "bytes": 3680
+      },
+      {
+        "path": "tests/native_physical.rs",
+        "sha256": "29f0e7a4695130dd0d143495d35f16c73256cd71d9adbcb0b5bbb2974ba7b356",
+        "bytes": 4259
+      },
+      {
+        "path": "tests/native_symmetry.rs",
+        "sha256": "60cf5d13274aff4ed9c2c5b7534e95c1bfeda481c8b7c9b4018245ead9ba3294",
+        "bytes": 5157
+      },
+      {
+        "path": "tests/nonplanar108.rs",
+        "sha256": "1ce305af1ea2c9b1fd9b719a298b3e710d91c70f3e7c4350712c9c3c58cd9bf5",
+        "bytes": 7566
+      },
+      {
+        "path": "tests/phase_space.rs",
+        "sha256": "30302fe4acb24f5777eb165df9faf958f6dd1f0095d68ceeacf1ba0c6dea0598",
+        "bytes": 8249
+      },
+      {
+        "path": "tests/physical_conditions.rs",
+        "sha256": "fd61c1f6cd773e4c85267a572e6a7b187454eae34172b9c2e0df82cc2b488a66",
+        "bytes": 10622
+      },
+      {
+        "path": "tests/physical_family.rs",
+        "sha256": "48138ed34390b8d309db19fa27053840a84f91f46e4a074fa4d8f7365b42a719",
+        "bytes": 3898
+      },
+      {
+        "path": "tests/physical_preparation_options.rs",
+        "sha256": "aaa79799c9afe77f60d62435cb08662c0ec117ce7492b2f45abc75006f26c14b",
+        "bytes": 13678
+      },
+      {
+        "path": "tests/physical_targets.rs",
+        "sha256": "84558cdd13d2f2240542df10259a9c49d32ba510683437c64a7f793e2e754ef0",
+        "bytes": 7244
+      },
+      {
+        "path": "tests/physical_transport.rs",
+        "sha256": "9bc7ed4158b62d104d298b8a754f5abff9291b2410eb7c0953d3f5195dbc93b7",
+        "bytes": 6047
+      },
+      {
+        "path": "tests/prescribed_cache.rs",
+        "sha256": "789f5df2b8c00f4f4a896a71835b3af6c517157efc0a95ac57ef6566fd83ee53",
+        "bytes": 15637
+      },
+      {
+        "path": "tests/prescribed_contours.rs",
+        "sha256": "d3a68de129691f9ebfde0d1bb6ea8905d9d2db4fa110d12802ba82badc4f0a4c",
+        "bytes": 11209
+      },
+      {
+        "path": "tests/recursive.rs",
+        "sha256": "48bf280ab6fb91e1c8a145c967b6cb506682a12eaaf03b74a6b93eac88f9cf6a",
+        "bytes": 32725
+      },
+      {
+        "path": "tests/reduction_graphs.rs",
+        "sha256": "189a074a714eefc6ee6a19cbf7f96beffbed716706a2871fd24bec9f049b2e9a",
+        "bytes": 8895
+      },
+      {
+        "path": "tests/regions.rs",
+        "sha256": "53b88258a61739adf20d8a0a52fa5d1c92fc5097676278c70552a8af0c72a33c",
+        "bytes": 1870
+      },
+      {
+        "path": "tests/scoped_reductions.rs",
+        "sha256": "c5304514648b649b53fa503b91940dc7f393583104a55eefbdbb17e8ff3f29ce",
+        "bytes": 12287
+      },
+      {
+        "path": "tests/single_mass.rs",
+        "sha256": "388ed1db6fe35bb13baa9aee00fa3c0e4acabbe9e19e45784063e40ffc2d490a",
+        "bytes": 15650
+      },
+      {
+        "path": "tests/tensor_vacuum.rs",
+        "sha256": "e67d430f3a6027af9109aa4abc2fbe10d6160afdf08092c08bd95cd73694e444",
+        "bytes": 6071
+      },
+      {
+        "path": "tests/transport_cache.rs",
+        "sha256": "a637c2ae54afff66d68cce4ed61fee98f82eaf70c3e6da5484864f15c35718dc",
+        "bytes": 21255
+      },
+      {
+        "path": "tests/weighted_uncertainty.rs",
+        "sha256": "9e1c57d3fd54237eb3036f99e21f8c1965182748e2f3ec3eb7651d919b5da0ad",
+        "bytes": 5141
+      },
+      {
+        "path": "examples/benchmark_de.rs",
+        "sha256": "213b4c08d73332b9138e263d34366eb380ebe44b1479fba0986a438a2faa4f9a",
+        "bytes": 3274
+      },
+      {
+        "path": "examples/benchmark_singular.rs",
+        "sha256": "698034cb07064b94138e4614c13297543417cde140c246d5a9a6f4bab8986373",
+        "bytes": 4018
+      },
+      {
+        "path": "examples/cache_bank_benchmark.rs",
+        "sha256": "fc12893dbab4a412e883d690ec3a9a920721b6c910cc8646f490903b2df152de",
+        "bytes": 7676
+      },
+      {
+        "path": "examples/massless_bubble.rs",
+        "sha256": "36681301b39f7f2739bfbc717c3ae90317de36adb168978eb6851ed3ea677751",
+        "bytes": 1178
+      },
+      {
+        "path": "examples/paper_reduction_probe.rs",
+        "sha256": "7c4175bed34fbaacb7d8b3580246ff0dbc630cd8714cce29f7d5a7bd59190864",
+        "bytes": 9780
+      },
+      {
+        "path": "examples/paper_regions.rs",
+        "sha256": "758571c33c6b01b51d455fefcbbae2d9366b07a330a4e1fdc9ba0e9c11333204",
+        "bytes": 5636
+      },
+      {
+        "path": "examples/paper_subsector.rs",
+        "sha256": "2416d6e018da3ae04430b1ddf877d8a3c82fde32e577af91fa6d16eee14dae9e",
+        "bytes": 5030
+      },
+      {
+        "path": "examples/physical_cache.rs",
+        "sha256": "30ad30853240edcebea0255eb92a7df4a162684c31fc3259d74c5842973d9cd9",
+        "bytes": 3902
+      },
+      {
+        "path": "examples/prepare_paper.rs",
+        "sha256": "5d1c0ce026e2ec09a559be857f09e26cbc2a5f6ab919554cbe3e8bbb1897daec",
+        "bytes": 2702
+      },
+      {
+        "path": "examples/single_mass_banana.rs",
+        "sha256": "d1cf844c132b078019bef357c66dfbcdf431897b0456e0d78a3d8f9f46b64979",
+        "bytes": 2073
+      },
+      {
+        "path": "examples/two_loop_acceptance.rs",
+        "sha256": "a9c5c72bc7d4d3ef837bc11375737a1a121eeff9a8e8082f76f98bab948311ff",
+        "bytes": 8708
+      },
+      {
+        "path": "examples/two_mass_sunset.rs",
+        "sha256": "e12e9b3ffc4d9bb3e429ce3d2c527acfec3a23af2294e403449a45d116712801",
+        "bytes": 1366
+      },
+      {
+        "path": "examples/cli/algebraic-transport.json",
+        "sha256": "c4103b7d5336be1ea5269d615635cfcfb5a9db4f7db63340402a491048a29b2e",
+        "bytes": 1701
+      },
+      {
+        "path": "examples/cli/canonical-transport.json",
+        "sha256": "847417fab0ff4384df52d8da30b9377d29cda0f3fa3d9bbe41cb2e3d30cd35fb",
+        "bytes": 1780
+      },
+      {
+        "path": "examples/cli/epsilon-shearing-transport.json",
+        "sha256": "69833f639f51d606ce4c17208d9ec35f06cf416594673f7b22bbb419e89c7a7f",
+        "bytes": 1724
+      },
+      {
+        "path": "examples/cli/massless-bubble.json",
+        "sha256": "a5d36888ea3312a108a196b631b2a6e6eeef1c2e6fcef6378c1dd90d06da6edd",
+        "bytes": 376
+      },
+      {
+        "path": "examples/cli/physical-transport.json",
+        "sha256": "7dc4d79bdc3c8420d94d1be296875c5e532a3f8332153259af52f88d71776a52",
+        "bytes": 770
+      },
+      {
+        "path": "examples/cli/prescribed-transport.json",
+        "sha256": "e2090c496e3195d81e88d696dda1b1c325b9b97f70f5cb75c0073692731a0cb7",
+        "bytes": 1998
+      }
+    ]
+  },
+  "archive_manifest": {
+    "path": "target/epsilon-shearing-release/archive.json",
+    "sha256": "308ad1688a16d3ac7bb84f60d11576b1eafbe0ea8d06a7dff24e6026230d2b3d",
+    "bytes": 334200
+  },
+  "archives": [
+    {
+      "path": "target/epsilon-shearing-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "sha256": "2b32fa9ed9ab769fe19b7a8e8e1f97e09fa26fa8897e17d3c2453dace07b7338",
+      "bytes": 433727700
+    },
+    {
+      "path": "target/epsilon-shearing-release/deps/libsymbolica_amflow-d39e426db931b928.rmeta",
+      "sha256": "8188a02bfb99b6ed7423c1b1147bc707e33105f5626588deb6fe41a1fc923cae",
+      "bytes": 3271600
+    },
+    {
+      "path": "target/epsilon-shearing-release/deps/librustred-d70ca661149f6db6.rlib",
+      "sha256": "3484fc124051aac01902b4fe018f00bd89a0c2af13b84f31666178f3f292a0a0",
+      "bytes": 406493312
+    },
+    {
+      "path": "target/epsilon-shearing-release/deps/librustred-d70ca661149f6db6.rmeta",
+      "sha256": "453484445bee428588feb2efcf54f85b8d1c94fac7af9b6a3b83cfe8c53aac08",
+      "bytes": 36752833
+    }
+  ],
+  "logs": [
+    {
+      "path": "target/epsilon-shearing-release/tests.log",
+      "sha256": "f34ea729d285ca341033ace993278a50f9c9c5fa0c228edb70a3214dacc32d06",
+      "bytes": 51072
+    },
+    {
+      "path": "target/epsilon-shearing-release/doctests.log",
+      "sha256": "c083610958a72c24ec07a7b6411b10cba183cc5c3682480cd49e8f91ea3299b4",
+      "bytes": 2905
+    },
+    {
+      "path": "target/epsilon-shearing-release/clippy.log",
+      "sha256": "d55a00ed5d9caedc8541774a16462768135fad43a3f8c3f5e7ba6e9a539f13a4",
+      "bytes": 2721
+    },
+    {
+      "path": "target/epsilon-shearing-release/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    }
+  ]
+}

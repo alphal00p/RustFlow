@@ -1,5 +1,16 @@
 # Implementation coverage
 
+The epsilon-shearing milestone passes **399 release unit/integration tests**, one
+doctest, strict all-target Clippy and formatting. Nine long scientific tests are
+explicitly opt-in. The [validation report](../reports/validation/2026-10-05-epsilon-shearing-release.json)
+records the exact tested sources and dependency hashes. [Diagonal epsilon
+rescaling](epsilon-shearing.md) now connects supplied rational systems, automatic
+AMF/FT seeds, physical transport, target projection and the CLI through the same
+growing cache. A native-IBP-certified massive bubble basis with an epsilon pole
+matches an independent direct AMF evaluation after transport; original source
+orders, reduction conditions, basis identity and uncertainty remain enforced.
+Registered-root and general nondiagonal epsilon transformations remain incomplete.
+
 The complex-domain milestone passes 380 release unit/integration tests and one
 doctest, strict all-target Clippy, and formatting. A final six-line correction
 preserves native certified-zero precedence in the new mass-sheet guard; all
@@ -197,8 +208,10 @@ regression has not been rerun. The
 [full 86-master ZZZ first native endpoint](../reports/diffexp/fivepoint-zzz-first-endpoint.json)
 now passes all 430 comparisons at 20 absolute digits, after 10122.59 seconds
 including its capped predecessor and resumed work. Its independent higher
-precision/order profile is running; full acceptance and the separate 128-digit
-profile remain pending. The staged MZZ offline regression has not yet been rerun against the
+precision/order profile is running; full acceptance remains pending. The
+[separate 128-digit PH1→PH2 original profile](../reports/diffexp/fivepoint-zzz-128-preparation.json)
+is now running with its recorded notebook settings. Native 128-digit profiles
+remain unrun; finite source data carry about 132 absolute accuracy digits. The staged MZZ offline regression has not yet been rerun against the
 latest production library.
 
 The original paper's mandatory numerical acceptance gate passes: all four

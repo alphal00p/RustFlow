@@ -87,8 +87,20 @@ impl PreparedPhysicalFamily {
             .collect();
         let leading = self.ordinary_master_leading()?;
         let mut last = leading;
-        for weight in self.target_reductions().iter().flat_map(|row| row.values()) {
-            let weight = crate::family::substitute(weight, &substitutions)
+        let columns = self
+            .basis()
+            .iter()
+            .enumerate()
+            .map(|(column, integral)| (integral, column))
+            .collect::<BTreeMap<_, _>>();
+        for (integral, weight) in self.target_reductions().iter().flat_map(|row| row.iter()) {
+            let column = *columns.get(integral).ok_or_else(|| {
+                Error::IncompleteReduction(
+                    "target reduction leaves the physical master basis".into(),
+                )
+            })?;
+            let weight = self.cache_target_weight(column, weight);
+            let weight = crate::family::substitute(&weight, &substitutions)
                 .together()
                 .cancel();
             if let Some(power) = valuation(&weight, self.family().epsilon)? {
@@ -159,7 +171,8 @@ impl PreparedPhysicalFamily {
                         "target reduction leaves the physical master basis".into(),
                     )
                 })?;
-                let weight = crate::family::substitute(weight, &substitutions)
+                let weight = self.cache_target_weight(column, weight);
+                let weight = crate::family::substitute(&weight, &substitutions)
                     .together()
                     .cancel();
                 let Some(leading) = valuation(&weight, self.family().epsilon)? else {

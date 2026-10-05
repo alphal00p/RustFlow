@@ -94,6 +94,19 @@ pub struct PhysicalResult {
 }
 
 impl RustFlow {
+    /// Regularize rational physical matrices with exact diagonal epsilon
+    /// powers. The returned adapter preserves the original identity for
+    /// checked boundary conversion and uses this same transport/cache engine.
+    pub fn regularize_epsilon(&self, context: &RunContext) -> Result<crate::EpsilonShearedFlow> {
+        let (system, shearing) = crate::EpsilonShearing::regularize(&self.system, context)?;
+        let identity = self.identity.epsilon_sheared(&system, &shearing)?;
+        Ok(crate::EpsilonShearedFlow {
+            original_identity: self.identity.clone(),
+            flow: Self { system, identity },
+            shearing,
+        })
+    }
+
     /// Continue through planner-generated threshold detours. The identity must
     /// be bound to exact prescriptions and the caller must admit its homotopy.
     #[allow(clippy::too_many_arguments)]

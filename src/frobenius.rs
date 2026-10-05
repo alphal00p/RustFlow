@@ -41,35 +41,22 @@ impl DifferentialSystem {
     pub fn diagonal_fuchsian_form(&self) -> Result<(Self, Vec<i64>)> {
         self.validate()?;
         let n = self.matrix.len();
-        let mut shifts = vec![0_i64; n];
         let orders = self
             .matrix
             .iter()
-            .map(|r| {
-                r.iter()
-                    .map(|a| valuation(a, self.variable))
+            .map(|row| {
+                row.iter()
+                    .map(|a| {
+                        if a.is_zero() {
+                            Ok(None)
+                        } else {
+                            valuation(a, self.variable).map(Some)
+                        }
+                    })
                     .collect::<Result<Vec<_>>>()
             })
             .collect::<Result<Vec<_>>>()?;
-        for iteration in 0..=n {
-            let mut changed = false;
-            for i in 0..n {
-                for j in 0..n {
-                    if !self.matrix[i][j].is_zero() && shifts[i] > shifts[j] + orders[i][j] + 1 {
-                        shifts[i] = shifts[j] + orders[i][j] + 1;
-                        changed = true;
-                    }
-                }
-            }
-            if !changed {
-                break;
-            }
-            if iteration == n {
-                return Err(Error::Unsupported(
-                    "regularization requires a nondiagonal Fuchsian transformation".into(),
-                ));
-            }
-        }
+        let mut shifts = crate::integer_shearing::integer_potentials(&orders, 1, 10000, None)?;
         let minimum = *shifts.iter().min().unwrap();
         for s in &mut shifts {
             *s -= minimum;
