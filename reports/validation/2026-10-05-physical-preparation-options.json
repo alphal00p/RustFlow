@@ -1,0 +1,189 @@
+{
+  "status": "passed",
+  "date_utc": "2026-10-05T01:53:30.776534+00:00",
+  "scope": "Reuse AMF derivative closure and rational basis refinement for all physical coordinate matrices. Preserve every reduction-round domain condition and reject an unproved automatic seed pole bound.",
+  "implementation": [
+    "Retain target coordinates and reduce independent partial derivatives without canceling their union",
+    "Apply recorded old=T*new changes chronologically to every coordinate with its own derivative term",
+    "Use actual ordered basis for target projection, including unsorted redundant bases",
+    "Deduplicate and retain conditions from every closure round",
+    "Reuse the epsilon-independent pole-bound admission for automatic physical seeds",
+    "Use native Symbolica factorization over Q(i) for mixed dimensional denominators"
+  ],
+  "native_algebra_audit": {
+    "status": "passed",
+    "scope": "Exact native Gaussian denominator-factor classification and an actual complex rational basis swap; no new numerical integral claim.",
+    "native_owner": "Symbolica75f8350 AlgebraicExtension::complex(Q), fallible AtomCore::try_to_rational_polynomial, native denominator.factor and native polynomial degree",
+    "api_probe_cases": 6,
+    "staged_unit_tests": 3,
+    "tests": "Native Gaussian cases, exact transformed complex derivative/target/basis, preexisting real basis-swap regression.",
+    "hashes": {
+      "target/complex-refinement-audit/probe.rs": "cd11e975402e537f008fc0b67587f0a14f1adbdc8a33b55452fbc5aa28e528a9",
+      "target/complex-refinement-audit/probe": "43f652244a31f80e4a40a0e065785a0a03d6d7f22b587c6863c38c31f2b6210d",
+      "target/complex-refinement-audit/probe.log": "472e14f491bb2bdae82d6714cfeccbbae29fd05678293ee4928fd9e23b439efb",
+      "target/complex-refinement-audit/refine.rs": "c84a057862f9a85cca05a1250883fb19b135e3cb4214e45ee66b3819daa1c22c",
+      "target/complex-refinement-audit/production.patch": "11645a0e79d34e6411425e22b3cf13f41fc62716a44d08a651f3c00600229719",
+      "target/complex-refinement-audit/algebra.rs": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e",
+      "target/complex-refinement-audit/family.rs": "98bd895a31b4ac029f0d7d336fc787bf1837b45bc709200573fa8409a25597e0",
+      "target/complex-refinement-audit/tests.rs": "bd04fcf44b89b0640b1b42509c03e571e830cf6da2efe5b4824949f4cdaa5050",
+      "target/complex-refinement-audit/tests": "af93a280593b47c520ce11f7d3173a9875055c929910168379d3e6d5150e780c",
+      "target/complex-refinement-audit/tests.log": "e7dbe396ea0366c0dd37cb48ba25ddaa0166e702a366d8f779ebbf71e62fd3c4",
+      "target/boundary-sign-production-gate/deps/libsymbolica_amflow-d39e426db931b928.rlib": "f602e3a25e5bcdc356a6bbfdf36246937cf379692e3ed889ae5a2ddc1623d7fb",
+      "target/release/deps/libsymbolica-75e897282e2131a2.rlib": "4b2f81de2fad0adf6bb701f7424c6755050d1a56d844aa9098f7d28bac5cbe4d"
+    },
+    "production_integration": "Passed current full release gate, including native Gaussian and physical basis regressions."
+  },
+  "focused_checks": {
+    "passed": 106,
+    "failed": 0,
+    "log": {
+      "path": "target/physical-options-gate/tests-v2.log",
+      "sha256": "b93d223c4935ef98c5190191201b15866901633d61725e4825bf7d257d6858fc",
+      "bytes": 13160
+    },
+    "scope": "Before final seed-pole admission addition; full gate below includes that new regression.",
+    "compile_harness_correction": "Initial regression tried a crate-private point validator and did not compile. Replaced with public RustFlowCache insertion, which directly checks the intended domain admission. No algorithm failure was hidden.",
+    "preserved_failure": {
+      "path": "target/physical-options-gate/compile-failure.log",
+      "sha256": "8c7a4d667b411f492d9f3fb51454ccca00efea016de72ea5c1532b50c2ed68c2",
+      "bytes": 3879
+    }
+  },
+  "independent_review": "No blocking findings in closure, gauge transformation, complex factors or basis ordering. Review identified the existing seed pole-bound gap; final implementation reuses the projection guard and tests rejection before backend/cache mutation.",
+  "checks": {
+    "tests": {
+      "passed": 362,
+      "failed": 0,
+      "ignored": 8
+    },
+    "doc": {
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    "formatting": "passed",
+    "strict_clippy": "passed release all-targets -D warnings;8 preexisting RustRed dependency warnings"
+  },
+  "source_snapshot": {
+    "path": "target/physical-options-full-gate/source.json",
+    "sha256": "6baf4fb115a94d2d2153ac4d92057464c299f59667d91223757e82ea9db3ca0f",
+    "bytes": 12275
+  },
+  "limits": [
+    "Dimension-factorizing candidate row refinement does not assert an epsilon-canonical form for all coordinate connections",
+    "Automatic seed/projection pole bounds require epsilon-independent family kinematics and propagators",
+    "General algebraic singular endpoint, complex-mass cache and full upstream parity remain separate work"
+  ],
+  "artifacts": [
+    {
+      "path": "src/physical_family.rs",
+      "sha256": "b95061cbbbb88a05cdf483f549027552c01a7a0fab521464335098d3924ad134",
+      "bytes": 15790
+    },
+    {
+      "path": "src/physical_targets.rs",
+      "sha256": "bd7a265b4f9d65c706d97a4e5cb4f3f147fafe9be8cbee84ed9f232bfd323076",
+      "bytes": 13630
+    },
+    {
+      "path": "src/reduction.rs",
+      "sha256": "821bd82d402822a22aafae437ff20dac5f2fcacf97c8b1b1dd5ec02732cde36d",
+      "bytes": 29317
+    },
+    {
+      "path": "src/refine.rs",
+      "sha256": "c84a057862f9a85cca05a1250883fb19b135e3cb4214e45ee66b3819daa1c22c",
+      "bytes": 9562
+    },
+    {
+      "path": "tests/physical_preparation_options.rs",
+      "sha256": "aaa79799c9afe77f60d62435cb08662c0ec117ce7492b2f45abc75006f26c14b",
+      "bytes": 13678
+    },
+    {
+      "path": "tests/single_mass.rs",
+      "sha256": "914a6f8973e2901cc2b225e1eb5c1a0c238788bb1a04c6e40d7e150b59a8734f",
+      "bytes": 9449
+    },
+    {
+      "path": "target/physical-options-full-gate/tests.log",
+      "sha256": "b8f9ffeb0b70424d46adff4360352cd1818986129efd6671717276e73b0e8126",
+      "bytes": 46663
+    },
+    {
+      "path": "target/physical-options-full-gate/doc.log",
+      "sha256": "46b57d9b1597d3c14bb6c130a1b5d3d71e65eadac2cdd4244d268f083737a520",
+      "bytes": 2905
+    },
+    {
+      "path": "target/physical-options-full-gate/clippy.log",
+      "sha256": "af84f6cf54fa49a528e29405bf93f7ba050c3e9e3fa9aa697dd60ea7673e6a58",
+      "bytes": 2721
+    },
+    {
+      "path": "target/physical-options-full-gate/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target/physical-options-full-gate/source.json",
+      "sha256": "6baf4fb115a94d2d2153ac4d92057464c299f59667d91223757e82ea9db3ca0f",
+      "bytes": 12275
+    },
+    {
+      "path": "target/physical-options-full-gate/rustred-core.json",
+      "sha256": "5489d12d0461f25c517f1f87602638d2edfb0fa3d679fd5a6693638c62721b0e",
+      "bytes": 208086
+    }
+  ],
+  "archive": {
+    "status": "passed full release gate",
+    "captured_utc": "2026-10-05T02:04:34.167746+00:00",
+    "source_snapshot": {
+      "path": "target/physical-options-full-gate/source.json",
+      "sha256": "6baf4fb115a94d2d2153ac4d92057464c299f59667d91223757e82ea9db3ca0f",
+      "bytes": 12275
+    },
+    "source_snapshot_matches": true,
+    "rustred_snapshot_matches": true,
+    "files": [
+      {
+        "path": "target/physical-options-full-gate/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+        "sha256": "572be2a0e44b0623a8211354d2090c4391605b1a83de685a7994264b3898d356",
+        "bytes": 432238302
+      },
+      {
+        "path": "target/physical-options-full-gate/deps/libsymbolica_amflow-d39e426db931b928.rmeta",
+        "sha256": "f04a67fbbec4c5d907ea13a3c55c3ef04e0a4d8e5b34b08fcd646161a35488e4",
+        "bytes": 3208359
+      },
+      {
+        "path": "target/physical-options-full-gate/deps/librustred-d70ca661149f6db6.rlib",
+        "sha256": "3484fc124051aac01902b4fe018f00bd89a0c2af13b84f31666178f3f292a0a0",
+        "bytes": 406493312
+      },
+      {
+        "path": "target/physical-options-full-gate/deps/librustred-d70ca661149f6db6.rmeta",
+        "sha256": "453484445bee428588feb2efcf54f85b8d1c94fac7af9b6a3b83cfe8c53aac08",
+        "bytes": 36752833
+      }
+    ]
+  },
+  "commands": [
+    "cargo test --release --lib --tests",
+    "cargo test --release --doc",
+    "cargo clippy --release --all-targets -- -D warnings",
+    "cargo fmt -p symbolica-amflow --check"
+  ],
+  "independent_single_mass_laurent_regression": {
+    "log_sha256": "5ee3ad90a4f5157f861ef03dd0f380a39840e9fe64e23ee8e06bf735864fa20f",
+    "source_sha256": "914a6f8973e2901cc2b225e1eb5c1a0c238788bb1a04c6e40d7e150b59a8734f",
+    "binary_sha256": "af2786834c022c11c366a2f2131152d91e7e01697a4f5302daf70c607273c2b2",
+    "cpu": 31,
+    "wall_limit_seconds": 600,
+    "address_space_limit_bytes": 17179869184,
+    "exit_code": 0,
+    "log": "\nrunning 1 test\ntest single_mass_public_laurent_matches_independent_ft_and_mass_derivative ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 167.92s\n\n"
+  },
+  "independent_single_mass_laurent_library": "f602e3a25e5bcdc356a6bbfdf36246937cf379692e3ed889ae5a2ddc1623d7fb; validated preceding contour/boundary library, separate from this release gate"
+}

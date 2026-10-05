@@ -1,4 +1,4 @@
-//! Proposed public-route regressions. Run after integrating recursive.patch.
+//! Single-mass loop peeling and public automatic evaluation regressions.
 use std::sync::atomic::{AtomicUsize, Ordering};
 use symbolica::prelude::*;
 use symbolica_amflow::*;
@@ -29,6 +29,7 @@ struct CountLoops {
     inner: RustRedBackend,
     calls: AtomicUsize,
     max_loops: AtomicUsize,
+    peeled_children: AtomicUsize,
 }
 impl CountLoops {
     fn new() -> Self {
@@ -44,9 +45,14 @@ impl CountLoops {
             },
             calls: AtomicUsize::new(0),
             max_loops: AtomicUsize::new(0),
+            peeled_children: AtomicUsize::new(0),
         }
     }
     fn record(&self, family: &IntegralFamily) {
+        if family.name.ends_with("_single_mass_child") {
+            assert_eq!(family.loops.len(), 2);
+            self.peeled_children.fetch_add(1, Ordering::Relaxed);
+        }
         self.calls.fetch_add(1, Ordering::Relaxed);
         self.max_loops
             .fetch_max(family.loops.len(), Ordering::Relaxed);
@@ -172,4 +178,86 @@ fn single_mass_peeling_preserves_custom_provider_and_scaleless_precedence() {
         .unwrap();
     assert_eq!(value, p.zero());
     assert_eq!(backend.calls.load(Ordering::Relaxed), 0);
+}
+
+#[test]
+#[ignore = "full 20-digit Laurent acceptance; run in release mode with a 600-second external limit"]
+fn single_mass_public_laurent_matches_independent_ft_and_mass_derivative() {
+    let family = six_line();
+    let targets = [Integral(vec![1; 6]), Integral(vec![2, 1, 1, 1, 1, 1])];
+    let stamp = std::time::SystemTime::now()
+        .duration_since(std::time::UNIX_EPOCH)
+        .unwrap()
+        .as_nanos();
+    let directory = std::env::temp_dir().join(format!(
+        "symbolica-amflow-single-mass-laurent-{}-{stamp}",
+        std::process::id()
+    ));
+    std::fs::create_dir(&directory).unwrap();
+    let p = Precision::decimal(100).unwrap();
+    let mut previous: Option<Vec<LaurentExpansion>> = None;
+    for (name, recursion, working, order) in [
+        ("amf", RecursionMode::Amf, 60, 80),
+        ("ft", RecursionMode::Ft, 80, 112),
+    ] {
+        let mut audited = CountLoops::new();
+        audited.inner.max_exact_frontier = 512;
+        audited.inner.native_workers = 1;
+        audited.inner.checkpoints = Some(directory.join(name).join("native"));
+        let backend = cache::CachedBackend {
+            backend: audited,
+            directory: directory.join(name).join("reductions"),
+        };
+        let options = FlowOptions {
+            digits: 20,
+            guard_digits: working - 20,
+            series_order: order,
+            max_steps: 1000,
+            max_precision_attempts: 3,
+            workers: 1,
+            recursion,
+            cache_directory: Some(directory.join(name).join("systems")),
+            ..Default::default()
+        };
+        let result = solve_integrals(
+            &family,
+            &targets,
+            &KinematicPoint::default(),
+            0,
+            &options,
+            &backend,
+            &RunContext::default(),
+        )
+        .unwrap();
+        assert_eq!(result.len(), 2);
+        if name == "amf" {
+            assert!(backend.backend.peeled_children.load(Ordering::Relaxed) > 0);
+        }
+        for fit in &result {
+            assert_eq!(fit.verified_digits, Some(20));
+            assert!(fit.refinements > 0 && fit.validation_samples > 0);
+            assert_eq!(fit.coefficients.len(), 7);
+            assert_eq!(fit.comparison_errors.len(), 7);
+        }
+        for power in -6..=0 {
+            let expected = result[0]
+                .coefficients
+                .get(&(power - 1))
+                .map_or_else(|| p.zero(), |c| p.neg(c));
+            assert!(p.close(&result[1].coefficients[&power], &expected, 20));
+            if power <= -2 {
+                assert!(p.norm(&result[0].coefficients[&power]) < p.tolerance(20));
+            }
+            if power < 0 {
+                assert!(p.norm(&result[1].coefficients[&power]) < p.tolerance(20));
+            }
+            if let Some(old) = &previous {
+                for (a, b) in old.iter().zip(&result) {
+                    assert!(p.close(&a.coefficients[&power], &b.coefficients[&power], 20));
+                }
+            }
+        }
+        previous = Some(result);
+    }
+    std::fs::remove_dir_all(directory).unwrap();
 }

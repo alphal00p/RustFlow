@@ -13,19 +13,38 @@ pub struct RefinementReport {
 }
 
 fn mixed_denominator(a: &Atom, epsilon: Symbol) -> Result<bool> {
-    let rational: RationalPolynomial<IntegerRing, u16> = a
-        .try_to_rational_polynomial(&Q, &Z, None)
+    // Use the native Gaussian coefficient field: i is a constant, not a
+    // second kinematic variable. Keep conversion fallible, unlike the
+    // expression-level factor() convenience fallback.
+    scalar_symbols(a.as_view(), &mut BTreeSet::new())?;
+    let gaussian = symbolica::domains::algebraic::AlgebraicExtension::complex(Q);
+    let rational: RationalPolynomial<
+        symbolica::domains::algebraic::AlgebraicExtension<
+            symbolica::domains::rational::RationalField,
+        >,
+        u16,
+    > = a
+        .try_to_rational_polynomial(&gaussian, &gaussian, None)
         .map_err(|e| Error::InvalidInput(e.to_string()))?;
-    let denominator = rational.denominator.to_expression().factor();
-    let factors = if let AtomView::Mul(m) = denominator.as_view() {
-        m.iter().map(|v| v.to_owned()).collect::<Vec<_>>()
-    } else {
-        vec![denominator]
-    };
-    for factor in factors {
-        let mut symbols = BTreeSet::new();
-        scalar_symbols(factor.as_view(), &mut symbols)?;
-        if symbols.contains(&Atom::var(epsilon)) && symbols.len() > 1 {
+    for (factor, _) in rational.denominator.factor() {
+        let mut has_epsilon = false;
+        let mut has_other = false;
+        // Factor variable maps may retain inactive variables from the source.
+        for (index, variable) in factor.get_vars_ref().iter().enumerate() {
+            if factor.degree(index) == 0 {
+                continue;
+            }
+            match variable {
+                PolyVariable::Symbol(symbol) if *symbol == epsilon => has_epsilon = true,
+                PolyVariable::Symbol(_) => has_other = true,
+                _ => {
+                    return Err(Error::InvalidInput(
+                        "rational scalar factor required".into(),
+                    ));
+                }
+            }
+        }
+        if has_epsilon && has_other {
             return Ok(true);
         }
     }
@@ -176,6 +195,74 @@ mod tests {
         assert_eq!(system.targets[0][&new], Atom::num(1));
         assert!(
             (&system.matrix[0][0] + parse!("1/(eps+x)"))
+                .together()
+                .cancel()
+                .is_zero()
+        );
+    }
+}
+
+#[cfg(test)]
+mod complex_denominator_tests {
+    use super::*;
+
+    #[test]
+    fn native_gaussian_factors_distinguish_epsilon_from_physical_variables() {
+        let epsilon = symbol!("refine_complex::epsilon");
+        let e = Atom::var(epsilon);
+        let s = Atom::var(symbol!("refine_complex::s"));
+        let t = Atom::var(symbol!("refine_complex::t"));
+        let i = Atom::num(Complex::new(Rational::zero(), Rational::one()));
+        for (a, expected) in [
+            (Atom::one() / (&e + &i), false),
+            (Atom::one() / ((&e + &i) * (&s + &i)), false),
+            (Atom::one() / (&e + &s + &i), true),
+            (&i * (&s + &t) / ((&e + &i) * (&s + &t + &i)), false),
+            (&i * (&s + &t) / (&e + &s + &t + &i), true),
+            (Atom::one() / (&e * &e + Atom::one()), false),
+            (Atom::one() / (&e * &e + &s * &s), true),
+            (Atom::one() / (&e * &s), false),
+            (Atom::one() / (&e + &s), true),
+            ((&e + &s + &i) / ((&e + &s + &i) * (&e + &i)), false),
+        ] {
+            assert_eq!(mixed_denominator(&a, epsilon).unwrap(), expected, "{a}");
+        }
+    }
+
+    #[test]
+    fn native_complex_refinement_preserves_exact_changed_derivative() {
+        let epsilon = symbol!("refine_complex_swap::epsilon");
+        let x = symbol!("refine_complex_swap::x");
+        let i = Atom::num(Complex::new(Rational::zero(), Rational::one()));
+        let q = Atom::var(epsilon) + Atom::var(x) + &i;
+        let old = Integral(vec![1]);
+        let new = Integral(vec![2]);
+        let mut system = ReducedSystem {
+            basis: vec![old.clone()],
+            matrix: vec![vec![Atom::Zero]],
+            targets: vec![std::collections::BTreeMap::from([(
+                old.clone(),
+                Atom::one() / &q,
+            )])],
+            nonzero_conditions: vec![],
+            candidates: std::collections::BTreeMap::from([(
+                new.clone(),
+                std::collections::BTreeMap::from([(old, Atom::one() / &q)]),
+            )]),
+            transformations: vec![],
+        };
+        let report = refine_basis(&mut system, x, epsilon, 4).unwrap();
+        assert_eq!(report.basis_changes, 1);
+        assert!(report.factorized);
+        assert_eq!(system.basis, vec![new.clone()]);
+        assert_eq!(system.targets[0][&new], Atom::one());
+        assert!(
+            (&system.transformations[0].matrix[0][0] - &q)
+                .expand()
+                .is_zero()
+        );
+        assert!(
+            (&system.matrix[0][0] + Atom::one() / q)
                 .together()
                 .cancel()
                 .is_zero()

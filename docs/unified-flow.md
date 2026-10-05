@@ -30,6 +30,27 @@ conditions and validates the table through the existing native graph planner.
 The legacy `TableBackend` leaves family dispatch to its caller. The scoped
 adapter adds no RustRed arity restriction to externally supplied tables.
 
+Physical-family preparation also accepts `skip_reduction` and `refine_basis`.
+The former retains requested integrals as differential coordinates and reduces
+their derivatives; dependent coordinates remain valid when the supplied
+boundary satisfies their relations. Independent partial derivatives enter
+closure separately, even when their sum cancels. Both closure modes retain the
+nonzero conditions from every reduction round.
+
+Basis refinement uses the same candidate row swaps as AMF. Each exact basis
+change is applied to every coordinate's connection, including its own derivative
+of the transformation. `basis_transformations()` exposes the ordered changes;
+`basis_refinement()` reports whether the candidate reduction coefficients have
+factorized dimension denominators. This does not assert an epsilon-canonical
+form for every connection matrix. Symbolica factors the exact denominators over
+its native Gaussian field, so the imaginary unit is a coefficient, not an extra
+physical variable. Master order follows the resulting basis and need not be
+lexicographic; target projection uses that actual order.
+Automatic seeding and projection require epsilon-independent family kinematics
+and propagators for their conservative pole bound. Exact differential preparation
+can accept epsilon-dependent input, but its pole range needs separate analysis;
+the seed API rejects that case before reducing or mutating the cache.
+
 `PreparedPhysicalFamily` already constructs all requested invariant and mass
 derivatives in a common closed basis. Its `seed_cache` method calls the ordinary
 `solve_integrals` workflow on that basis, retaining the resulting coefficient
@@ -104,9 +125,17 @@ through the public route now also [passes through epsilon zero](../reports/valid
 for both targets at 20 requested digits. It uses 33 samples checked against a
 disjoint 29-sample grid, with higher working precision and series order. A
 separate public FT solve agrees on all 14 coefficients; the largest difference
-is 7.20e−54. This is refinement and cross-method evidence, not an interval proof
-or an independent Mathematica comparison. The recorded AMF and FT times are
+is 7.20e−54. This is refinement and cross-method evidence, not an interval proof.
+The full Laurent comparison is between the two native routes. The recorded AMF and FT times are
 120.115 s and 52.336 s with different precision/order profiles.
+
+A separate [live original AMFlow check](../reports/validation/2026-10-05-single-mass-vacuum-upstream.json)
+evaluates both targets automatically at exact epsilon `1/10`. Its 40-digit outputs
+pass a 35-digit comparison with the native finite sample, including the raised
+power checked through exact homogeneity. The original run took 175.447 s with
+Kira and Mathematica; that finite-sample time is not directly comparable to the
+native full Laurent timings above. The optional `single_mass` Laurent regression
+runs without Mathematica and preserves the independent native fit comparison.
 
 ## Current generality gaps
 
@@ -121,8 +150,7 @@ or an independent Mathematica comparison. The recorded AMF and FT times are
   cache currently admits exact real rational coordinates with nonzero real
   radicands and explicit root germs. General complex-mass cache domains, automatic
   causal-path inference, and degenerate Gram charts require further work.
-- Physical-family preparation currently excludes skipped initial reduction and
-  basis refinement. General Möbius/Padé transport controls also remain unfinished.
+- General Möbius/Padé transport controls remain unfinished.
 
 Benchmarks test these interfaces; family-specific fixtures do not define the
 solver's mathematical scope. New coverage must exercise the same public route

@@ -22,6 +22,8 @@ pub struct PreparedPhysicalFamily {
     conditions: Vec<Atom>,
     variables: BTreeSet<Symbol>,
     prescription: Prescription,
+    transformations: Vec<reduction::BasisTransformation>,
+    refinement: Option<refine::RefinementReport>,
     flow: RustFlow,
 }
 
@@ -36,9 +38,6 @@ impl PreparedPhysicalFamily {
         context: &RunContext,
     ) -> Result<Self> {
         options.validate()?;
-        if options.skip_reduction || options.refine_basis {
-            return Err(Error::Unsupported("physical family preparation currently requires ordinary target reduction without basis refinement".into()));
-        }
         if targets.is_empty() || variables.is_empty() {
             return Err(Error::InvalidInput(
                 "physical preparation requires targets and variables".into(),
@@ -80,20 +79,22 @@ impl PreparedPhysicalFamily {
         // The shared closure builder sees every derivative target separately.
         // Its summed matrix is unused: each coordinate matrix below is formed
         // from the same returned reductions in the same ordered basis.
-        let mut closed = crate::reduction::build_differential_system(
-            backend,
-            &family,
-            targets,
-            32,
-            context,
-            |integral| {
-                let mut terms = Vec::new();
-                for derivative in derivatives.values() {
-                    terms.extend(derivative.integral(integral)?);
-                }
-                Ok(terms)
-            },
-        )?;
+        let derivative = |integral: &Integral| {
+            let mut terms = Vec::new();
+            for derivative in derivatives.values() {
+                terms.extend(derivative.integral(integral)?);
+            }
+            Ok(terms)
+        };
+        let mut closed = if options.skip_reduction {
+            crate::reduction::build_retained_system(
+                backend, &family, targets, 32, context, derivative,
+            )?
+        } else {
+            crate::reduction::build_differential_system(
+                backend, &family, targets, 32, context, derivative,
+            )?
+        };
         // Native rational reduction represents i as a formal coefficient.
         // Decode it before forming the physical connection and its domain.
         let imaginary = BTreeMap::from([(
@@ -124,7 +125,7 @@ impl PreparedPhysicalFamily {
             ));
         }
         let mut matrices = BTreeMap::new();
-        let mut conditions = closed.nonzero_conditions;
+        let mut derivative_conditions = Vec::new();
         for (&variable, derivative) in &derivatives {
             let mut matrix = vec![vec![Atom::new(); closed.basis.len()]; closed.basis.len()];
             for (row, integral) in closed.basis.iter().enumerate() {
@@ -148,8 +149,35 @@ impl PreparedPhysicalFamily {
                 }
             }
             matrices.insert(variable, matrix);
-            conditions.extend_from_slice(derivative.nonzero_conditions());
+            derivative_conditions.extend_from_slice(derivative.nonzero_conditions());
         }
+        let refinement = if options.refine_basis {
+            let first_variable = *derivatives.keys().next().unwrap();
+            closed.matrix = matrices[&first_variable].clone();
+            let report =
+                crate::refine::refine_basis(&mut closed, first_variable, family.epsilon, 32)?;
+            // A basis change depends on every coordinate. Apply the same
+            // ordered transformations with each coordinate's own derivative.
+            for (&variable, matrix) in &mut matrices {
+                if variable == first_variable {
+                    *matrix = closed.matrix.clone();
+                } else {
+                    for transformation in &closed.transformations {
+                        *matrix = DifferentialSystem {
+                            variable,
+                            matrix: std::mem::take(matrix),
+                        }
+                        .change_basis(&transformation.matrix)?
+                        .matrix;
+                    }
+                }
+            }
+            Some(report)
+        } else {
+            None
+        };
+        let mut conditions = closed.nonzero_conditions;
+        conditions.extend(derivative_conditions);
         let conditions = crate::physical_conditions::canonical_conditions(&conditions, &allowed)?;
         let system = KinematicSystem {
             epsilon: family.epsilon,
@@ -181,6 +209,8 @@ impl PreparedPhysicalFamily {
             conditions,
             variables: derivatives.into_keys().collect(),
             prescription: options.prescription,
+            transformations: closed.transformations,
+            refinement,
             flow,
         })
     }
@@ -189,6 +219,13 @@ impl PreparedPhysicalFamily {
     }
     pub fn basis(&self) -> &[Integral] {
         &self.basis
+    }
+    /// Exact ordered basis changes, with previous = matrix * current.
+    pub fn basis_transformations(&self) -> &[reduction::BasisTransformation] {
+        &self.transformations
+    }
+    pub fn basis_refinement(&self) -> Option<&refine::RefinementReport> {
+        self.refinement.as_ref()
     }
     pub fn target_reductions(&self) -> &[LinearCombination] {
         &self.targets
@@ -224,10 +261,7 @@ impl PreparedPhysicalFamily {
         }
         let cached_point = CachedPoint::Exact(point.clone());
         self.flow.identity().validate_point(&cached_point)?;
-        let leading = i32::try_from(self.family.loops.len())
-            .ok()
-            .and_then(|n| n.checked_mul(-2))
-            .ok_or_else(|| Error::Limit("physical Laurent range overflow".into()))?;
+        let leading = self.ordinary_master_leading()?;
         let range = EpsilonRange::new(leading, last)?;
         let point = KinematicPoint(
             point

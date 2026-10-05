@@ -521,12 +521,19 @@ pub(crate) fn build_differential_system(
     context: &RunContext,
     derivative: impl Fn(&Integral) -> Result<Vec<(Integral, Atom)>>,
 ) -> Result<ReducedSystem> {
+    let mut conditions = BTreeMap::new();
     let mut requested = targets.iter().cloned().collect::<BTreeSet<_>>();
     let mut previous = Vec::new();
     for round in 0..max_rounds {
         context.cancellation.check()?;
         let requested_targets = requested.iter().cloned().collect::<Vec<_>>();
         let reduction = backend.reduce(family, &requested_targets, context)?;
+        conditions.extend(
+            reduction
+                .nonzero_conditions
+                .iter()
+                .map(|a| (a.to_canonical_string(), a.clone())),
+        );
         let candidates = reduction.expand_many(&requested_targets)?;
         let basis = candidates
             .values()
@@ -570,7 +577,7 @@ pub(crate) fn build_differential_system(
                 targets: targets.iter().map(|i| candidates[i].clone()).collect(),
                 basis,
                 matrix,
-                nonzero_conditions: reduction.nonzero_conditions,
+                nonzero_conditions: conditions.into_values().collect(),
                 candidates,
             });
         }
@@ -610,7 +617,7 @@ pub fn parameter_differential_system_skip_initial(
     })
 }
 
-fn build_retained_system(
+pub(crate) fn build_retained_system(
     backend: &dyn ReductionBackend,
     family: &IntegralFamily,
     targets: &[Integral],
@@ -618,6 +625,7 @@ fn build_retained_system(
     context: &RunContext,
     derivative: impl Fn(&Integral) -> Result<Vec<(Integral, Atom)>>,
 ) -> Result<ReducedSystem> {
+    let mut conditions = BTreeMap::new();
     let mut basis = targets.iter().cloned().collect::<BTreeSet<_>>();
     for _ in 0..max_rounds {
         context.cancellation.check()?;
@@ -629,11 +637,21 @@ fn build_retained_system(
             .flatten()
             .map(|(i, _)| i)
             .collect::<BTreeSet<_>>();
-        let reduction = backend.reduce(
-            family,
-            &derivatives.iter().cloned().collect::<Vec<_>>(),
-            context,
-        )?;
+        let reduction = if derivatives.is_empty() {
+            Reduction::default()
+        } else {
+            backend.reduce(
+                family,
+                &derivatives.iter().cloned().collect::<Vec<_>>(),
+                context,
+            )?
+        };
+        conditions.extend(
+            reduction
+                .nonzero_conditions
+                .iter()
+                .map(|a| (a.to_canonical_string(), a.clone())),
+        );
         let expansions = reduction.expand_many(&derivatives.iter().cloned().collect::<Vec<_>>())?;
         let old = basis.len();
         for terms in expansions.values() {
@@ -662,7 +680,7 @@ fn build_retained_system(
                 .iter()
                 .map(|i| BTreeMap::from([(i.clone(), Atom::num(1))]))
                 .collect(),
-            nonzero_conditions: reduction.nonzero_conditions,
+            nonzero_conditions: conditions.into_values().collect(),
             candidates: expansions,
         });
     }

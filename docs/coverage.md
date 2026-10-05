@@ -1,11 +1,16 @@
 # Implementation coverage
 
-The current integrated milestone passes 353 release unit/integration tests and
-one doctest, strict all-target Clippy, and formatting. It adds topology-independent
-single-mass vacuum loop peeling and native factor/root contour certificates,
-including cold-cache derivative-side regressions. The
-[release report](../reports/validation/2026-10-05-boundary-contour-release.json)
-records the frozen source and library. Public finite-epsilon tests compare the
+The current integrated milestone passes 362 release unit/integration tests and
+one doctest, strict all-target Clippy, and formatting. Physical-family preparation
+now reuses AMF's skipped initial reduction and basis refinement across every
+coordinate, with native Gaussian factorization and preserved reduction domains.
+Automatic seeds reject an unproved epsilon-dependent family pole bound before
+backend calls or cache mutation. The
+[release report](../reports/validation/2026-10-05-physical-preparation-options.json)
+records the frozen source and library. The preceding
+[boundary and contour milestone](../reports/validation/2026-10-05-boundary-contour-release.json)
+added topology-independent single-mass vacuum loop peeling and native contour
+certificates, including cold-cache derivative-side regressions. Public finite-epsilon tests compare the
 new three-loop boundary route with FT under independent refinement. A separate
 [public Laurent acceptance](../reports/validation/2026-10-05-single-mass-vacuum-laurent.json)
 now passes both three-loop targets through epsilon zero at 20 digits, with a

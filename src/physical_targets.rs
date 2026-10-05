@@ -49,7 +49,7 @@ fn valuation(coefficient: &Atom, epsilon: Symbol) -> Result<Option<i32>> {
 }
 
 impl PreparedPhysicalFamily {
-    fn ordinary_master_leading(&self) -> Result<i32> {
+    pub(crate) fn ordinary_master_leading(&self) -> Result<i32> {
         let family = self.family();
         let mut symbols = std::collections::BTreeSet::new();
         for coefficient in family.external_gram.iter().flatten().chain(
@@ -144,11 +144,17 @@ impl PreparedPhysicalFamily {
                 .checked_add(64)
                 .ok_or_else(|| Error::Limit("target projection precision overflow".into()))?,
         };
+        let columns = self
+            .basis()
+            .iter()
+            .enumerate()
+            .map(|(column, integral)| (integral, column))
+            .collect::<BTreeMap<_, _>>();
         let mut result = Vec::with_capacity(self.target_reductions().len());
         for target in self.target_reductions() {
             let mut rows = Vec::new();
             for (integral, weight) in target {
-                let column = self.basis().binary_search(integral).map_err(|_| {
+                let column = *columns.get(integral).ok_or_else(|| {
                     Error::IncompleteReduction(
                         "target reduction leaves the physical master basis".into(),
                     )
