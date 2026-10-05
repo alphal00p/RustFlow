@@ -1,0 +1,236 @@
+{
+  "recorded_utc": "2026-10-05T07:18:37.271108+00:00",
+  "status": "CENSORED at configured60s runtime cap; no unequal final endpoint produced; unvalidated current library snapshot",
+  "snapshot": {
+    "captured_utc": "2026-10-05T07:15:02.080364+00:00",
+    "status": "UNVALIDATED SNAPSHOT: current production full gate still running; diagnostic only",
+    "library": "target/banana60-diagnostic/snapshot/libsymbolica_amflow-d39e426db931b928.rlib",
+    "library_sha256": "73bbf71c5dd3abbbd58dbcccf1d8a19399b5eb55755d9fc769bebe2a854a8fc7",
+    "source_library": "target/release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+    "files": {
+      "tests/banana_unequal.rs": "803d499d51e3e36ff86b937a39814926680bbc6a6ec19fd78878c0b6e7f53a2a",
+      "tests/common/banana.rs": "b1aaebfc81166d36c4d9f8f02caaa2223165c0379450b979577184a7d4f69100",
+      "fixtures/diffexp/banana-equal.json": "341f13cc60bd9f519f13528bf96e16dcf607422d6295b90546d543633b00d8f0",
+      "fixtures/diffexp/banana-unequal.json": "f4e1ec7ff6e1f1b0e1b0f251ae7c96db5018a3e39e1a12868e4d69f14116b2a7",
+      "src/ode.rs": "b73c4e7fad6e5718cad706d86152ff2edf6ef2f7e25d0fadc80000cfc79da0a4",
+      "src/ode/conditioning.rs": "bc12392051c0d9a6ee65b0e6fed7430113a8d4e38e9fc6e05378aef87c56bcf1",
+      "src/ode/source.rs": "29f76e2264af98e434decd2b4f8a5c8b41f011e3ca6665487bf027310593249d",
+      "src/ode/residual.rs": "a52fd7ee6a2c1177bcc81b19ed7afc039cd6d6add007ecb24acb3caa1004eb50",
+      "src/diffexp.rs": "a3d9b15a41d59265ab85fb8f1515c99a2ce117fd4ec4a4b49110dde05e11886e",
+      "src/numeric.rs": "72b14645628d92b99fcec5242d19ba29a2a5a9221bb993bb36f7e4b80d6c7dc9",
+      "Cargo.lock": "d6afe48a7fb559f50ffe2538c69f5181a542d470446af680436eb69bfda9aa82"
+    },
+    "cpu": 34,
+    "build_cap_seconds": 180,
+    "runtime_cap_seconds": 60,
+    "memory_cap_bytes": 17179869184,
+    "profile": "exact existing low60/order80 direct unequal banana route only; output/truncation tolerances and options unchanged"
+  },
+  "build": {
+    "exit": 0,
+    "elapsed_seconds": 15.55408375011757,
+    "command": [
+      "taskset",
+      "-c",
+      "34",
+      "rustc",
+      "--edition=2024",
+      "-C",
+      "opt-level=2",
+      "/common/dev/amflow/target/banana60-diagnostic/source/driver.rs",
+      "-o",
+      "/common/dev/amflow/target/banana60-diagnostic/driver",
+      "-L",
+      "dependency=/common/dev/amflow/target/banana60-diagnostic/snapshot",
+      "-L",
+      "dependency=/common/dev/amflow/target/release/deps",
+      "--extern",
+      "symbolica_amflow=/common/dev/amflow/target/banana60-diagnostic/snapshot/libsymbolica_amflow-d39e426db931b928.rlib",
+      "--extern",
+      "symbolica=/common/dev/amflow/target/release/deps/libsymbolica-75e897282e2131a2.rlib",
+      "--extern",
+      "serde_json=/common/dev/amflow/target/release/deps/libserde_json-570390c70cf80f0e.rlib",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/blake3-9252326cebd21167/out",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/blake3-222d768860627915/out",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-d5e4317be2c2f047/out/lib",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+      "--extern",
+      "ahash=/common/dev/amflow/target/release/deps/libahash-83e25d37cc3da50b.rlib"
+    ],
+    "cpu": 34,
+    "cap_seconds": 180,
+    "cap_bytes": 17179869184
+  },
+  "run": {
+    "exit": "censored_wall_cap",
+    "elapsed_seconds": 60.00721037806943,
+    "command": [
+      "/common/dev/amflow/target/banana60-diagnostic/driver"
+    ],
+    "cpu": 34,
+    "cap_seconds": 60,
+    "cap_bytes": 17179869184
+  },
+  "phases": {
+    "equal_boundary": {
+      "events": 2,
+      "last_event": {
+        "elapsed_seconds": 8.070915967,
+        "kind": "done",
+        "phase": "equal_boundary"
+      }
+    },
+    "equal_infinity": {
+      "events": 34,
+      "last_event": {
+        "diagnostics": "FlowDiagnostics { steps: 32, rejected_steps: 31, predicate_evaluations: 63, superseded_successes: 0, working_bits: 216, expansion_order: 80, conditioning_digits: Some(54) }",
+        "elapsed_seconds": 6.370929668,
+        "kind": "transport_done",
+        "phase": "equal_infinity"
+      },
+      "step_start_notifications": 32,
+      "accepted_steps_proven_before_last_trial": 31,
+      "accepted_step_intervals_seconds": {
+        "minimum": 0.10197821200000012,
+        "maximum": 0.10454776999999993,
+        "mean": 0.10364500790322582,
+        "median": 0.10381421800000012
+      },
+      "diagnostics": "FlowDiagnostics { steps: 32, rejected_steps: 31, predicate_evaluations: 63, superseded_successes: 0, working_bits: 216, expansion_order: 80, conditioning_digits: Some(54) }",
+      "transport_seconds": 3.316397322,
+      "counts": {
+        "steps": 32,
+        "rejected_steps": 31,
+        "predicate_evaluations": 63,
+        "superseded_successes": 0
+      }
+    },
+    "equal_physical": {
+      "events": 17,
+      "last_event": {
+        "diagnostics": "FlowDiagnostics { steps: 14, rejected_steps: 0, predicate_evaluations: 14, superseded_successes: 0, working_bits: 216, expansion_order: 80, conditioning_digits: Some(54) }",
+        "elapsed_seconds": 8.060789448,
+        "kind": "transport_done",
+        "phase": "equal_physical"
+      },
+      "step_start_notifications": 14,
+      "accepted_steps_proven_before_last_trial": 13,
+      "accepted_step_intervals_seconds": {
+        "minimum": 0.0948167609999997,
+        "maximum": 0.12368715599999991,
+        "mean": 0.12039235300000001,
+        "median": 0.12271715400000005
+      },
+      "diagnostics": "FlowDiagnostics { steps: 14, rejected_steps: 0, predicate_evaluations: 14, superseded_successes: 0, working_bits: 216, expansion_order: 80, conditioning_digits: Some(54) }",
+      "transport_seconds": 1.6877498139999991,
+      "counts": {
+        "steps": 14,
+        "rejected_steps": 0,
+        "predicate_evaluations": 14,
+        "superseded_successes": 0
+      }
+    },
+    "mass_deformation_half": {
+      "events": 10,
+      "last_event": {
+        "diagnostics": "FlowDiagnostics { steps: 6, rejected_steps: 4, predicate_evaluations: 10, superseded_successes: 0, working_bits: 216, expansion_order: 80, conditioning_digits: Some(54) }",
+        "elapsed_seconds": 32.81991333,
+        "kind": "transport_done",
+        "phase": "mass_deformation_half"
+      },
+      "step_start_notifications": 6,
+      "accepted_steps_proven_before_last_trial": 5,
+      "accepted_step_intervals_seconds": {
+        "minimum": 4.057074046,
+        "maximum": 4.141155174000001,
+        "mean": 4.1128676504,
+        "median": 4.120345484000001
+      },
+      "diagnostics": "FlowDiagnostics { steps: 6, rejected_steps: 4, predicate_evaluations: 10, superseded_successes: 0, working_bits: 216, expansion_order: 80, conditioning_digits: Some(54) }",
+      "transport_seconds": 24.685582115,
+      "counts": {
+        "steps": 6,
+        "rejected_steps": 4,
+        "predicate_evaluations": 10,
+        "superseded_successes": 0
+      }
+    },
+    "physical_psq": {
+      "events": 11,
+      "last_event": {
+        "accepted_steps_before_this_trial": 7,
+        "elapsed_seconds": 57.716350162,
+        "kind": "step_start",
+        "phase": "physical_psq"
+      },
+      "step_start_notifications": 8,
+      "accepted_steps_proven_before_last_trial": 7,
+      "accepted_step_intervals_seconds": {
+        "minimum": 3.0376198310000007,
+        "maximum": 3.6510033160000006,
+        "mean": 3.543432179714285,
+        "median": 3.6215275590000005
+      }
+    },
+    "run": {
+      "events": 1,
+      "last_event": {
+        "elapsed_seconds": 8.15e-05,
+        "kind": "start",
+        "order": 80,
+        "phase": "run",
+        "route": "direct",
+        "snapshot": "unvalidated",
+        "working_digits": 60
+      }
+    }
+  },
+  "conclusions": [
+    "The equal boundary completes in8.07s; equal infinity32accepted/31rejected/63predicates and equal physical14accepted/0rejected/14predicates.",
+    "Unequal mass_deformation_half completes in24.686s with6accepted,4rejected,10predicates. Its compilation takes0.059s, so symbolic compilation is not the dominant observed cost.",
+    "Physical_psq advances regularly:7accepted steps are proven before the eighth starts at57.716s; observed inter-step intervals are3.04\u20133.65s. It is unfinished at60s, so final step/rejection counts and whole-endpoint accuracy are unknown.",
+    "No stuck outer loop is observed. Per-chart/check cost dominates the completed15-master phase; phase logging alone does not split recurrence, exact-source ball residual construction and endpoint conditioning.",
+    "Historical prototype log also records6mass-deformation steps; this supports unchanged accepted-step count for that phase only. Different implementation/host work prevents a controlled speedup or slowdown ratio."
+  ],
+  "static_followup": "Profile exact-source native ComplexBall polynomial residual construction versus central Taylor recurrence and ConditioningChart construction/evaluation. Do not remove mandatory evidence, truncate full source degrees, relax tolerance, or infer full-route runtime from this censored run. Existing new_exact avoids also constructing the legacy MPFR residual.",
+  "historical_context": {
+    "prior_whole_segment_full_test_seconds": 156.96,
+    "scope": "Historical complete low/high/alternate test, not this one low direct capped diagnostic.",
+    "prototype_log": {
+      "path": "target/banana-prototype/unequal-full-60-80.log",
+      "sha256": "6b26af04f3bbc3f6a396ff8258b29805a19a9ed6c35b49afd2a503fea1ca9af2",
+      "mass_deformation_steps": 6,
+      "physical_psq_steps": 49,
+      "comparison_warning": "Older prototype/source; counts are context only."
+    }
+  },
+  "evidence": {
+    "snapshot.json": "eb5f944c4e69a47e0a549d62ff3f982c5439cf065de302a431d46b7d37f42531",
+    "source/driver.rs": "4672e81786ace27d110e35ff22994d2e7ee8e07f00de0530a9ed406f45f1d8de",
+    "source/banana.rs": "6e5a4444d964b015ad9513ff20238762cc008420407c3ab40fdd5e06306d1ab2",
+    "build-command.json": "bc91fe695b377c01c3bf0b97719ffd6fb7d20b326b17de542e892e026be79809",
+    "build.json": "11fd6a04540d980abb512c249cdc552c53aa47348b121fd535089540d3aa096f",
+    "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "run.json": "e69827c7ed43d46e482986d770e569cdc2fa56ab2bfa429160dd61cddf6a1b08",
+    "run.log": "20f392a7948febac86eb3dc307cbbdd7785183811f665f020464acb15515156f",
+    "run.py": "fe9de174fa55db0fcfe8cc5be4f854dd46bb0da4992337427e676401ea84f1bb",
+    "banana.patch": "5a7d7cc29b309201a059a569689f55c02c948649e1c2eaea287cd75ffe23f7d7",
+    "driver.patch": "2f682025a7e52316c45e9dae69b2bfe417483ebfd9691ca48409ad8accf716c3"
+  },
+  "subsequent_release_validation": {
+    "report": "reports/validation/2026-10-05-conditioned-transport-release.json",
+    "sha256": "0fec2c035e66ff0486c2f87d0b9a5d31c82e324d73667fe8328d9fa655224cea",
+    "matching_library_sha256": "73bbf71c5dd3abbbd58dbcccf1d8a19399b5eb55755d9fc769bebe2a854a8fc7",
+    "source_commit": "3f1daea",
+    "note": "The same library later passed the release gate; this capped diagnostic still has no final endpoint and remains censored."
+  },
+  "complete_regression_observation": {
+    "current_seconds": 1309.87,
+    "preceding_checked_release_seconds": 156.96,
+    "scope": "Same unchanged low60/order80 + high80/order112 + independent-contour regression, with analytic/reference checks. Single gate observations, not isolated repeated benchmark medians. New full-source/conditioning checks increase work; current direct profile also takes more steps than a historical prototype, pending controlled predecessor comparison."
+  }
+}

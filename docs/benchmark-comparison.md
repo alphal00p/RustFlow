@@ -36,14 +36,24 @@ value magnitudes must be below `1e-20`.
 
 | Case | RustFlow | Original AMFlow | Numerical result and scope |
 |---|---:|---:|---|
-| [Analytic logarithmic chain](../reports/performance/2026-10-05-whole-segment-checked.json) | 0.04116 transport; 0.04809 process | 0.001907 transport; 1.72208 process | Current checked release, five-run medians; 20 digits and independent refinement |
-| [Upstream 12-master DE](../reports/performance/2026-10-05-whole-segment-checked.json) | 0.57962 transport; 0.69189 process | 0.10217 transport; 4.71912 process | Current checked release, five-run medians; all 12 at 20 digits and independent refinement |
-| [Paper-derived 27-master DE](../reports/performance/2026-10-05-whole-segment-checked.json) | 4.34252 transport; 4.54451 process | 0.06195 transport; 14.38687 process | Current checked release, five-run medians; all 27 at 20 digits, deterministic test boundary |
-| [Resonant singular matching](../reports/performance/2026-10-05-whole-segment-checked.json) | 0.00734 matching; 0.01435 process | 1.14274 matching; 1.14877 process | Current release, five-run medians; 20 digits, analytic/refinement checks; different internal precision requirements |
+| [Analytic logarithmic chain](../reports/performance/2026-10-05-conditioned-transport-checked.json) | 0.08315 transport; 0.09007 process | 0.001903 transport; 1.72620 process | Current checked release, five-run medians; 20 digits and independent refinement |
+| [Upstream 12-master DE](../reports/performance/2026-10-05-conditioned-transport-checked.json) | 5.38297 transport; 5.49649 process | 0.10237 transport; 4.71083 process | Current checked release, five-run medians; all 12 at 20 digits and independent refinement |
+| [Paper-derived 27-master DE](../reports/performance/2026-10-05-conditioned-transport-checked.json) | 32.40346 transport; 32.60942 process | 0.06163 transport; 14.34587 process | Current checked release, five-run medians; all 27 at 20 digits, deterministic test boundary |
+| [Resonant singular matching](../reports/performance/2026-10-05-conditioned-transport-checked.json) | 0.00730 matching; 0.01401 process | 1.13746 matching; 1.14281 process | Current release, five-run medians; 20 digits, analytic/refinement checks; different internal precision requirements |
 | [Automatic massless bubble](../reports/validation/2026-10-04-live-upstream-oracles.json) | 0.1868 cross-check including refinement | 26.7388 `SolveIntegrals` | 20 digits against the original and analytic gamma formula; different measured work |
 | [Automatic vacuum sunset, mass squares (1,1,0)](../reports/validation/2026-10-04-live-upstream-oracles.json) | 0.1179 cross-check including refinement | 9.0585 `SolveIntegrals` | 20 digits against the original and analytic gamma formula; different measured work |
 | [Automatic connected three-loop single-mass vacuum, two targets at epsilon=1/10](../reports/performance/single-mass-full-workflow.json) | 2.814 process | 175.447 process | Both pass 35 relative digits against 40-digit original data; fresh caches, one worker, different bases/extra-order controls |
 | [Required paper example: all four two-loop targets through epsilon zero](../reports/validation/2026-10-04-paper-two-loop-acceptance.json) | 3553.007 complete acceptance | [2428.977 process](../reports/performance/2026-10-05-original-paper-full-workflow.json) | All 20 complex coefficients agree within recorded accuracy at the requested 20 digits; different caches, workers, bases and precision/sample profiles |
+
+The fresh checked release passes all four comparisons and independent
+precision/order refinements at the requested 20 scaled digits. Its ordinary
+transport phases are slower than the original C++ solver. Process time includes
+original pole-finding and MPSolve startup, so the short analytic chain still has
+a smaller native process total despite a slower transport phase. Native accepted
+step counts are 9/16/33 versus original 4/5/1 for the chain/12-master/27-master
+cases. Additional checking and step selection both need optimization. The
+[preceding measured release](../reports/performance/2026-10-05-whole-segment-checked.json)
+remains preserved; its faster ordinary timings do not describe this library.
 
 The first original four-target run failed during Wolfram child-thread
 initialization. An unchanged copied subsystem succeeded after explicitly setting
@@ -74,7 +84,7 @@ timing trials. Most rows have one timing observation per profile.
 | Case | RustFlow | Original DiffExp | Numerical result and scope |
 |---|---:|---:|---|
 | [Equal-mass three-loop banana](../reports/diffexp/banana-equal-validation.json) | 2.486 initialization + 0.335 + 0.583 transport | 43.309 initialization + 20.805 + 33.859 transport | All 20 coefficients at each of two endpoints, 20 absolute digits |
-| [Unequal-mass three-loop banana](../reports/diffexp/banana-unequal-validation.json) | 16.78 low / 25.63 high; 8.04 alternate, in-program totals | 350.10 alternate process; direct run censored at 1599.51 | All 75 coefficients, 20 absolute digits; path/profile differences |
+| [Unequal-mass three-loop banana, current checked release](../reports/performance/2026-10-05-conditioned-banana-low-profile.json) | 497.728 evaluation; 497.911 process, low60/order80 direct route | 350.10 alternate process; direct run censored at 1599.51 | All 75 coefficients, 20 absolute digits; different paths/profiles; fresh current-library run |
 | [MPL G(1,0,1;4)](../fixtures/diffexp/mpl-101-4.json) | Not separately timed | 0.2845 / 0.2879 transport | 20-digit cross-check; original order refinement and notebook comparison |
 | [Trailing-zero MPL](../reports/diffexp/mpl-additional-validation.json) | 0.5121 low / 0.3559 high in-program total | 0.7683 / 0.9261 helper | 20 digits; different precision/order settings |
 | [Complex-letter MPL](../reports/diffexp/mpl-additional-validation.json) | 0.08505 low / 0.06067 high in-program total | 0.4433 / 0.5102 helper | 20 digits; different precision/order settings |
@@ -86,6 +96,21 @@ timing trials. Most rows have one timing observation per profile.
 | [Full 75-master ZMZ five-point](../reports/diffexp/fivepoint-zmz-validation.json) | 9308.38 cumulative low / 12157.19 fresh high process | 1847.95 transport; 1854.56 process | All 375 coefficients, 20 absolute digits, independent refinement |
 | [Full 86-master ZZZ five-point](../reports/diffexp/fivepoint-zzz-validation.json) | 10122.59 cumulative low; 14042.05 fresh high transport (14052.49 in-program total) | 2453.68 transport | All 430 coefficients pass 20 absolute digits, independent refinement and three root sheets; monitoring interruption and unavailable exit status retained |
 | [ZZZ 86-master, separate 128-digit notebook profile](../reports/diffexp/fivepoint-zzz-128-original-failure.json) | [Baseline running](../reports/diffexp/fivepoint-zzz-128-native-launch.json); no endpoint result | Mathematica memory failure after 1811.93 s; 36/108 segments | Acceptance pending; original failed under declared 16 GiB address-space cap, no wall/RSS watchdog censor |
+
+The fresh unequal-banana measurement also compares the preceding checked native
+release with the exact same driver, helper and fixture bytes. Its evaluation took
+55.685 seconds versus 497.728 seconds now; the physical phase increased from
+83 accepted/108 rejected steps to 127/246, while mass deformation retained six
+accepted/four rejected steps. Thus both additional arithmetic and more trials
+contribute to the regression. Each is one run, pinned to a different CPU; this is
+an observed native-revision comparison, not a DiffExp speed ratio. Both match all
+75 original coefficients within `1.419e-34`; the current/predecessor difference is
+`2.427e-59`. The separate complete three-route release regression passed in
+1309.87 seconds versus 156.96 seconds previously. The preserved
+[60-second diagnostic](../reports/performance/2026-10-05-banana-verification-cost-diagnostic.json)
+remains censored and carries no final endpoint. Older 16.78/25.63/8.04-second
+banana profiles remain in the [historical report](../reports/diffexp/banana-unequal-validation.json);
+they do not describe the current checked solver.
 
 The 75- and 86-master cumulative times include capped predecessors, discarded
 work and checkpoint restoration. They are not uninterrupted transport timings.

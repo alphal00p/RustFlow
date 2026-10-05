@@ -42,49 +42,56 @@ preserves that failed trial, both successful outputs, configuration differences,
 source/binary hashes and all timed phases. No reference value was used as a
 native boundary.
 
-## Current release with whole-segment checks
+## Current checked release
 
-Library commit `11b278a` was measured again on 2026-10-05 with the original,
-unmodified AMFlow 2.0 C++ executable. These supplied-boundary cases pass 20-digit
-scaled comparisons, including independent precision/order refinement and all
-five repetitions. They are fixed-input numerical checks, not a general error
-certificate: the separately documented coordinate and coefficient roundoff
-limitations remain open.
+Library commit `3f1daea` was measured on 2026-10-05 against the original,
+unmodified AMFlow 2.0 C++ executable. All four supplied-boundary comparisons
+pass 20 scaled digits, including independent precision/order refinement.
+Ordinary transport includes exact-source directed defect checks and endpoint
+conditioning. These remain local diagnostics rather than a global accuracy proof.
 
 | Workload | Rust process | Original process | Rust transport | Original transport | Accepted steps, Rust / original |
 |---|---:|---:|---:|---:|---:|
-| Analytic 3-component chain | 0.04809 s | 1.72208 s | 0.041161 s | 0.001907 s | 9 / 4 |
-| Upstream 12-master system | 0.69189 s | 4.71912 s | 0.579615 s | 0.102174 s | 9 / 5 |
-| Paper 27-integral system | 4.54451 s | 14.38687 s | 4.342521 s | 0.061946 s | 21 / 1 |
+| Analytic 3-component chain | 0.09007 s | 1.72620 s | 0.083151 s | 0.001903 s | 9 / 4 |
+| Upstream 12-master system | 5.49649 s | 4.71083 s | 5.382974 s | 0.102368 s | 16 / 5 |
+| Paper 27-integral system | 32.60942 s | 14.34587 s | 32.403464 s | 0.061628 s | 33 / 1 |
 
 These are five-run medians after excluded warmups, with alternating fresh
 processes pinned to CPU 35, one worker, requested accuracy 20 digits, working
-precision 201 bits and order 80. Both implementations were also evaluated at
-267 bits and order 112. The largest scaled comparison errors are `8.06e-28`,
-`6.40e-43` and `1.45e-21`, respectively. The metric divides each complex difference
-by `max(1, |left|, |right|)`. Rust uses the default halving strategy and includes
-whole-segment differential-defect checks; it performed 17, 13 and 80 trial predicates,
-respectively, with 8, 4 and 59 rejected trials. The original uses its fixed step
-prescription. This differs from the work performed in the historical timings
-below. The 27-integral boundary is a deterministic test vector, not the physical
-AMFlow boundary.
+precision 201 bits and order 80. Independent refinement uses 267 bits and order
+112. The largest scaled validation errors are `8.06e-28`, `6.40e-43` and
+`1.45e-21`. The metric divides each complex difference by
+`max(1, |left|, |right|)`. Native halving uses 17, 34 and 145 trial predicates,
+including 8, 18 and 112 rejections. The original uses its own fixed step
+prescription. The 27-integral boundary is a deterministic test vector; this row
+does not measure automatic physical boundary construction.
 
-The same release's two-component resonant Frobenius matching took 0.007341 s in
-Rust and 1.142740 s upstream (process totals 0.014347 s and 1.148765 s). All
-analytic, cross-implementation and refinement checks passed, with largest
-scaled error `2.30e-25`. This case does not exercise the Taylor whole-segment
-check. Original singular matching uses at least 450 decimal digits internally
-for indicial reconstruction and its separate `ExtraXOrder=20`; the work differs.
+Two-component resonant Frobenius matching takes 0.007303 s in Rust and 1.137460 s
+upstream, with process totals 0.014015 s and 1.142808 s. All analytic, original
+and refinement checks pass, with maximum scaled error `2.30e-25`. This case
+uses singular matching rather than Taylor transport. Original matching uses at
+least 450 decimal digits internally and its separate `ExtraXOrder=20`, so the
+work differs.
 
-The [complete current report](../reports/performance/2026-10-05-whole-segment-checked.json)
-preserves all outputs, repetitions, phases, counters, compiler settings, hashes,
-source-to-commit verification and the successful rejection of an actual obsolete
-cache snapshot. The first setup attempt failed because the original binary's
-pinned Nix runtime dependency had been removed; the exact store outputs were
-restored and the identical drivers rerun in a new directory. Other host jobs
-and OS page caches were uncontrolled. Original process totals include MPSolve
-startup and pole finding, so lower Rust process totals do not imply faster
-transport or full-workflow parity.
+The [complete report](../reports/performance/2026-10-05-conditioned-transport-checked.json)
+preserves outputs, repetitions, phases, counters, settings, hashes, source-to-
+commit verification and rejection of an obsolete cache snapshot. Other host
+jobs and OS page caches are uncontrolled. Original process totals include
+MPSolve startup and pole finding; transport and complete-process timings
+therefore answer different questions. Current ordinary native phases are slower
+than the original. The [preceding release measurements](../reports/performance/2026-10-05-whole-segment-checked.json)
+remain preserved, including their earlier Nix-runtime setup repair.
+
+A fresh [unequal-banana comparison](../reports/performance/2026-10-05-conditioned-banana-low-profile.json)
+measures the verification-cost regression on the same driver/helper/fixture:
+497.728 seconds of current evaluation versus 55.685 seconds in the preceding
+native release. Both pass all 75 original coefficients at 20 absolute digits.
+Physical transport now uses 127 accepted/246 rejected steps versus 83/108.
+The current three-route integration test also passes, in 1309.87 seconds versus
+156.96 seconds previously. These observations identify additional arithmetic
+and changed step selection as performance work; they are not original-DiffExp
+speed ratios. Original and larger-system comparisons are tabulated in the
+[benchmark summary](benchmark-comparison.md).
 
 ## Measured baseline
 
