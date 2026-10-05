@@ -1805,9 +1805,6 @@ fn atom_read(bytes: &[u8]) -> Result<Atom> {
     }
     Ok(result)
 }
-fn symbol_bytes(s: Symbol) -> Result<Vec<u8>> {
-    atom_bytes(&Atom::var(s))
-}
 fn symbol_read(bytes: &[u8]) -> Result<Symbol> {
     match atom_read(bytes)?.as_view() {
         AtomView::Var(v) => Ok(v.get_symbol()),
@@ -1819,6 +1816,41 @@ fn symbol_read(bytes: &[u8]) -> Result<Symbol> {
 
 type StoredAtom = Vec<u8>;
 type StoredMatrix = Vec<Vec<StoredAtom>>;
+
+trait AtomEncoder {
+    fn atom(&mut self, atom: &Atom) -> Result<StoredAtom>;
+
+    fn symbol(&mut self, symbol: Symbol) -> Result<StoredAtom> {
+        self.atom(&Atom::var(symbol))
+    }
+
+    fn matrix(&mut self, matrix: &[Vec<Atom>]) -> Result<StoredMatrix> {
+        matrix
+            .iter()
+            .map(|row| row.iter().map(|atom| self.atom(atom)).collect())
+            .collect()
+    }
+}
+
+/// Each blob retains Symbolica's complete native export. Repeated expressions
+/// share only the export work, not references in the on-disk representation.
+/// Keep this memo local to one snapshot: native exports also include registered
+/// polynomial/field state, which can grow independently between saves. A blob
+/// exported earlier remains self-contained if that state grows between native
+/// export calls. This does not synchronize registry mutation during an export.
+#[derive(Default)]
+struct SnapshotAtoms(ahash::AHashMap<Atom, StoredAtom>);
+
+impl AtomEncoder for SnapshotAtoms {
+    fn atom(&mut self, atom: &Atom) -> Result<StoredAtom> {
+        if let Some(bytes) = self.0.get(atom) {
+            return Ok(bytes.clone());
+        }
+        let bytes = atom_bytes(atom)?;
+        self.0.insert(atom.clone(), bytes.clone());
+        Ok(bytes)
+    }
+}
 
 #[derive(Serialize, Deserialize)]
 enum StoredSystem {
@@ -1840,7 +1872,7 @@ enum StoredContinuation {
     },
 }
 impl StoredContinuation {
-    fn encode(value: &PhysicalContinuation) -> Result<Self> {
+    fn encode(value: &PhysicalContinuation, atoms: &mut impl AtomEncoder) -> Result<Self> {
         Ok(Self::PrescribedAffineV1 {
             domain: value.domain.clone(),
             unprescribed_plus: matches!(value.unprescribed_side, Prescription::PlusI0),
@@ -1849,7 +1881,7 @@ impl StoredContinuation {
                 .iter()
                 .map(|p| {
                     Ok((
-                        atom_bytes(&p.polynomial)?,
+                        atoms.atom(&p.polynomial)?,
                         matches!(p.prescription, Prescription::PlusI0),
                     ))
                 })
@@ -1897,12 +1929,6 @@ struct StoredIdentity {
     conditions: Vec<StoredAtom>,
     continuation: Option<StoredContinuation>,
 }
-fn matrix_bytes(matrix: &[Vec<Atom>]) -> Result<StoredMatrix> {
-    matrix
-        .iter()
-        .map(|r| r.iter().map(atom_bytes).collect())
-        .collect()
-}
 fn matrix_read(matrix: StoredMatrix) -> Result<Vec<Vec<Atom>>> {
     matrix
         .into_iter()
@@ -1910,51 +1936,59 @@ fn matrix_read(matrix: StoredMatrix) -> Result<Vec<Vec<Atom>>> {
         .collect()
 }
 impl StoredIdentity {
-    fn encode(identity: &BoundaryIdentity) -> Result<Self> {
+    fn encode(identity: &BoundaryIdentity, atoms: &mut impl AtomEncoder) -> Result<Self> {
         let d = &identity.0;
         Ok(Self {
             key: d.key.clone(),
             roots: d
                 .roots
                 .iter()
-                .map(|r| Ok((symbol_bytes(r.symbol)?, atom_bytes(&r.radicand)?)))
+                .map(|r| Ok((atoms.symbol(r.symbol)?, atoms.atom(&r.radicand)?)))
                 .collect::<Result<_>>()?,
-            epsilon: symbol_bytes(d.system.epsilon())?,
+            epsilon: atoms.symbol(d.system.epsilon())?,
             system: match &d.system {
                 IdentitySystem::Dense(system) => StoredSystem::Dense {
                     derivatives: system
                         .derivatives
                         .iter()
-                        .map(|(&s, m)| Ok((symbol_bytes(s)?, matrix_bytes(m)?)))
+                        .map(|(&s, m)| Ok((atoms.symbol(s)?, atoms.matrix(m)?)))
                         .collect::<Result<_>>()?,
                 },
                 IdentitySystem::Canonical(system) => StoredSystem::Canonical {
                     variables: system
                         .variables()
                         .iter()
-                        .map(|&s| symbol_bytes(s))
+                        .map(|&s| atoms.symbol(s))
                         .collect::<Result<_>>()?,
                     letters: system
                         .letters()
                         .iter()
-                        .map(atom_bytes)
+                        .map(|a| atoms.atom(a))
                         .collect::<Result<_>>()?,
                     matrices: system
                         .constant_matrices()
                         .iter()
-                        .map(|m| matrix_bytes(m))
+                        .map(|m| atoms.matrix(m))
                         .collect::<Result<_>>()?,
                 },
             },
-            basis: d.basis.iter().map(atom_bytes).collect::<Result<_>>()?,
-            normalization: atom_bytes(&d.normalization)?,
+            basis: d
+                .basis
+                .iter()
+                .map(|a| atoms.atom(a))
+                .collect::<Result<_>>()?,
+            normalization: atoms.atom(&d.normalization)?,
             plus_i0: matches!(d.prescription, Prescription::PlusI0),
             domain: d.domain.clone(),
-            conditions: d.conditions.iter().map(atom_bytes).collect::<Result<_>>()?,
+            conditions: d
+                .conditions
+                .iter()
+                .map(|a| atoms.atom(a))
+                .collect::<Result<_>>()?,
             continuation: d
                 .continuation
                 .as_ref()
-                .map(StoredContinuation::encode)
+                .map(|value| StoredContinuation::encode(value, atoms))
                 .transpose()?,
         })
     }
@@ -2066,19 +2100,19 @@ enum StoredPoint {
     },
 }
 impl StoredPoint {
-    fn encode(point: &CachedPoint) -> Result<Self> {
+    fn encode(point: &CachedPoint, atoms: &mut impl AtomEncoder) -> Result<Self> {
         match point {
             CachedPoint::Algebraic { point, germ } => Ok(Self::Algebraic {
-                point: Box::new(Self::encode(point)?),
+                point: Box::new(Self::encode(point, atoms)?),
                 germ: germ
                     .sheets
                     .iter()
-                    .map(|(&s, &sheet)| Ok((symbol_bytes(s)?, sheet)))
+                    .map(|(&s, &sheet)| Ok((atoms.symbol(s)?, sheet)))
                     .collect::<Result<_>>()?,
             }),
             CachedPoint::Exact(c) => Ok(Self::Exact(
                 c.iter()
-                    .map(|(&s, a)| Ok((symbol_bytes(s)?, atom_bytes(a)?)))
+                    .map(|(&s, a)| Ok((atoms.symbol(s)?, atoms.atom(a)?)))
                     .collect::<Result<_>>()?,
             )),
             CachedPoint::Derived {
@@ -2088,7 +2122,7 @@ impl StoredPoint {
             } => Ok(Self::Derived {
                 coordinates: coordinates
                     .iter()
-                    .map(|(&s, a)| Ok((symbol_bytes(s)?, atom_bytes(a)?)))
+                    .map(|(&s, a)| Ok((atoms.symbol(s)?, atoms.atom(a)?)))
                     .collect::<Result<_>>()?,
                 working_bits: *working_bits,
                 provenance: provenance.clone(),
@@ -2100,7 +2134,7 @@ impl StoredPoint {
             } => Ok(Self::Numerical {
                 coordinates: coordinates
                     .iter()
-                    .map(|(&s, a)| Ok((symbol_bytes(s)?, a.clone())))
+                    .map(|(&s, a)| Ok((atoms.symbol(s)?, a.clone())))
                     .collect::<Result<_>>()?,
                 working_bits: *working_bits,
                 provenance: provenance.clone(),
@@ -2170,40 +2204,44 @@ struct Envelope {
     payload: Vec<u8>,
 }
 
-impl RustFlowCache {
-    /// Atomically save this snapshot. Concurrent snapshots may replace one another;
-    /// callers sharing a directory should serialize writes or merge before saving.
-    pub fn save(&self, directory: &Path) -> Result<()> {
+impl StoredCache {
+    fn encode(cache: &RustFlowCache, atoms: &mut impl AtomEncoder) -> Result<Self> {
         let mut identities = Vec::new();
         let mut keys = BTreeMap::new();
         let mut boundaries = Vec::new();
-        for boundary in &self.entries {
+        for boundary in &cache.entries {
             boundary.validate()?;
             let identity = if let Some(index) = keys.get(boundary.identity.key()) {
                 *index
             } else {
                 let index = identities.len();
-                identities.push(StoredIdentity::encode(&boundary.identity)?);
+                identities.push(StoredIdentity::encode(&boundary.identity, atoms)?);
                 keys.insert(boundary.identity.key().to_owned(), index);
                 index
             };
             boundaries.push(StoredBoundary {
                 identity,
-                point: StoredPoint::encode(&boundary.point)?,
+                point: StoredPoint::encode(&boundary.point, atoms)?,
                 kind: boundary.kind,
                 range: boundary.range,
                 coefficients: boundary.coefficients.clone(),
                 accuracy: boundary.accuracy.clone(),
             });
         }
-        let payload = bincode::serde::encode_to_vec(
-            &StoredCache {
-                identities,
-                boundaries,
-            },
-            bincode::config::standard(),
-        )
-        .map_err(|e| Error::Cache(e.to_string()))?;
+        Ok(Self {
+            identities,
+            boundaries,
+        })
+    }
+}
+
+impl RustFlowCache {
+    /// Atomically save this snapshot. Concurrent snapshots may replace one another;
+    /// callers sharing a directory should serialize writes or merge before saving.
+    pub fn save(&self, directory: &Path) -> Result<()> {
+        let snapshot = StoredCache::encode(self, &mut SnapshotAtoms::default())?;
+        let payload = bincode::serde::encode_to_vec(&snapshot, bincode::config::standard())
+            .map_err(|e| Error::Cache(e.to_string()))?;
         let envelope = Envelope {
             version: VERSION,
             implementation: env!("PORT_SOURCE_DIGEST").into(),
@@ -2296,3 +2334,7 @@ impl RustFlowCache {
         Ok(cache)
     }
 }
+
+#[cfg(test)]
+#[path = "transport_cache_serialization_tests.rs"]
+mod serialization_tests;
