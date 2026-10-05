@@ -1,7 +1,7 @@
 # RustFlow (`symbolica-amflow`)
 
 A native Rust implementation of auxiliary mass flow, using Symbolica for
-exact algebra and MPFR arithmetic and the sibling RustRed checkout for IBP
+exact algebra and MPFR arithmetic and RustRed for IBP
 reduction. Rust 2024; independent MIT-licensed repository.
 
 RustFlow is being extended with DiffExp-style transport in physical kinematic
@@ -39,12 +39,12 @@ the original Mathematica package with Kira and the university license server.
 
 Requires Rust 1.96 or newer. The standalone lock pins Symbolica and its companion
 crates to community commit
-[`942bd2c0cd2ef16414d69c176fc9eff7b21c0ab2`](https://github.com/symbolica-dev/symbolica/commit/942bd2c0cd2ef16414d69c176fc9eff7b21c0ab2)
-(package version 3.0.1), retaining the scale-independent root convergence fix.
+[`c3408e4ba1d3bdd4ea55678fad50e27009be13d4`](https://github.com/symbolica-dev/symbolica/commit/c3408e4ba1d3bdd4ea55678fad50e27009be13d4)
+(package version 3.0.1), including the root convergence and exact division fixes.
 The shared Python host uses this same numerical and native type graph; see
 [embedding and source fingerprints](docs/dependency-embedding.md).
 
-RustRed is a Git dependency, locked to `b3cecd6a`; its experimental
+RustRed is a Git dependency, locked to `7c1ed037`; its experimental
 reconstruction feature is disabled. The high-level multiloop solver defaults to
 exact rational epsilon specialization before IBP elimination;
 `sampled_reduction: false` selects fully symbolic epsilon reduction. Upstream

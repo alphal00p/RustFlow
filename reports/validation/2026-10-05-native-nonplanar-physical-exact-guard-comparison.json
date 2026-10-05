@@ -1,0 +1,76 @@
+{
+  "schema": "rustflow-native-gg-hg-source-comparison-v1",
+  "status": "passed",
+  "label": "W-NP_EW1-1",
+  "family": "NP_EW1",
+  "normalization": "arXiv:2112.07578v1 canonical F vector; mV^2=1; exp(2*EulerGamma*epsilon) relative to ordinary two-loop integrals; physical +i0 and the recorded individual root germs; no form-factor -1/(mV^2)^2/(4*pi)^4 prefactor",
+  "exact_source_coordinates": {
+    "s": "7971503245/51071474",
+    "t": "-120961047183696014144/1789089966849483755",
+    "b": "13074/5399"
+  },
+  "root_germs": {
+    "root1": "Principal",
+    "root2": "Opposite",
+    "root3": "Principal",
+    "root4": "Principal",
+    "root5": "Principal",
+    "root6": "Principal",
+    "root7": "Principal",
+    "root8": "Principal"
+  },
+  "epsilon_powers": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "checked_coefficients": 305,
+  "requested_mixed_comparison_digits": 24,
+  "native_verified_digits": 30,
+  "reference_verified_digits_cap": 24,
+  "corroborated_mixed_digits": 24,
+  "maximum_absolute_difference": "4.197942844688366579572537080092567104270995771745762831895042481152084868906480096082839178409661476E-29",
+  "maximum_scaled_difference": "2.419958976578615567770234341011524735573053436330098974962736129316431751246793943756894946392539496E-31",
+  "maximum_ratio_to_combined_recorded_errors": "0.004197942844688366579572493769971999755846007354451314476239303862335190955958575851268068625268599268",
+  "failure_count": 0,
+  "failures": [],
+  "metric": "Both |native-reference| <= native_error+reference_error and |native-reference| <= 10^-digits*max(1,|reference|); exact rational squared-norm comparisons",
+  "accuracy_note": "Independent recorded errors cap the comparison; printed mantissas do not certify additional digits. Diagnostics are rounded Decimal values, acceptance inequalities are exact. Coefficient comparison only, no finite-epsilon truncation or tail assertion.",
+  "reference_opened_after_native_success": true,
+  "native_report": {
+    "path": "target/gg-hg-native-acceptance/np-W1-30-exact-guard/runs/W-NP_EW1-1-1791220647691852240-1890044/result.json",
+    "sha256": "fef5e1838c4df94c82a12e3bb263c90f0b5402be070c96accd2c1e77604e172d",
+    "build": {
+      "dependency_source_digest": "d64faf80cf0bcbd37e679ce9fa81be2f4981e14fafde1a0dd7e8e66f6df66dcb",
+      "profile": "release",
+      "rustflow_source_digest": "774d6de2113e381daf86ac9cb85a38410d1141726776bf591d429234f111453b"
+    },
+    "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed",
+    "identity": "b45557d43617f73a5bc1a768f9d59088dee07d0ae41e07cd8036bbbb3644bd2a"
+  },
+  "reference": {
+    "path": "/common/dev/amflow/fixtures/gg-hg/full-systems.json",
+    "sha256": "b643716de4212e8cc3ddcaf4fb5d13eb67f993ac3ae8563c291c16ae284cbb86",
+    "upstream_provenance": {
+      "upstream_commit": "89f64b93d0bdbd8ee90eb85737021189229b034a",
+      "original_result": {
+        "path": "target/gg-hg-full-oracle/full-permutations-001/result.json",
+        "sha256": "b13124cc025cbb80f47d5b8cf5fbb107e86013e7fdb56790f18fa6bceac0cbca"
+      },
+      "equation_export": {
+        "path": "target/gg-hg-native/export.wl",
+        "sha256": "c790e4ae1eba2a2b880250b451e47a74dda7ceab75eab0be7dd178f759971c26"
+      },
+      "root_export_validation": "Exact top-level radicand lookup and SameQ reconstruction of every source letter",
+      "source_accuracy": "Inherited delta rounded upward to decimal envelope, plus1e-80 absolute serialization reserve; verifiedcap24. Exact source numbers retainzero. No mantissa-derived accuracy claim.",
+      "serialization": "100 significant decimal digits using Python Decimal; no binary64 conversion. All inexact nonzero source magnitudes below1e20, so discarded tail<1e-80.",
+      "scope": "Complete supplied canonical systems and scientific projections. No original solver implementation, automatic boundary generation or topology mapping."
+    },
+    "source_sha256": "11069bef3282c3eaa425915b38efdd837219cfbc180f8364b94703e1c7cbde2b",
+    "source_delta": "1.0038884634147344*^-27",
+    "source_error_decimal_exponent": -26,
+    "matrix_sha256": "becb0221008715452488a4b73a64be95ad869dc8fb54657598fe34a1f28921d9"
+  }
+}

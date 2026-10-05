@@ -116,6 +116,32 @@ seconds; identical binary reloads took 0.46 and 1.82 seconds. These runs reused
 exact IBP checkpoints, ran alongside other work, and make no timing comparison
 with upstream. Reference data were loaded only after each native fit succeeded.
 
+The first physical nonplanar W source, `W-NP_EW1-1`, also passes with core
+`4c483581` and official Symbolica `c3408e4`. Its
+[native report](../reports/validation/2026-10-05-native-nonplanar-physical-exact-guard-source.json)
+contains all 61 masters through `epsilon^4`, verified to 30 mixed-scale digits
+using independent 37/41-point grids at 90/110 working digits and orders 96/112.
+The [independent comparison](../reports/validation/2026-10-05-native-nonplanar-physical-exact-guard-comparison.json)
+passes all 305 coefficients at the recorded 24-digit reference cap. The maximum
+absolute difference is `4.20e-29`; this does not increase the reference's accuracy
+claim. Numerical generation began with an empty bank, reused exact IBP
+checkpoints, and loaded no numerical reference data.
+
+| Physical NP run | Native generation or lookup | Runner elapsed |
+|---|---:|---:|
+| Fresh numerical generation, 64 sample workers | 2476.47 s | 2477.83 s |
+| Verified binary cache reload | 0.574 s | 1.846 s |
+
+The [cache validation report](../reports/validation/2026-10-05-native-nonplanar-physical-exact-guard-cache.json)
+records the baseline binary and source fingerprints. Reloading that immutable
+binary produced zero sample events and identical coefficients, absolute errors,
+provenance and canonical identity; external process wall time was 2.020 s.
+All 78 completed samples were retained, and the first 37 checkpoint hashes stayed
+unchanged. Other cluster work ran concurrently, so these timings establish
+neither exclusive-host performance nor a speed ratio against upstream. This
+validates one physical nonplanar source; the full sixteen-source amplitude gate
+remains separate.
+
 To compare a completed physical-source report with the independently recorded
 plugin starting values, run:
 
