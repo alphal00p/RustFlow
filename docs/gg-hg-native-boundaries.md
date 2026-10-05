@@ -94,6 +94,24 @@ its separately checked GPL constants, as explained in
 
 A degree-four anchor polynomial does not bound the unknown `O(epsilon^5)`
 remainder of an individual sample. This runner compares fitted Laurent
-coefficients, avoiding that truncation ambiguity. No 20-digit full-basis
-acceptance claim follows until these long runs and their independent checks
-actually complete.
+coefficients, avoiding that truncation ambiguity. The
+[planar Euclidean run](../reports/validation/2026-10-05-native-planar-boundary.json)
+passes all 240 coefficients with 20 verified digits, including interrupted-sample
+restart and an identical warm binary reload. Nonplanar and full physical-amplitude
+acceptance remain separate gates. See the
+[performance audit](native-boundary-performance-audit.md) for the scope of these
+timings.
+
+To compare a completed physical-source report with the independently recorded
+plugin starting values, run:
+
+```sh
+python3 scripts/compare_gg_hg_native_source.py /path/to/result.json \
+  --output /path/to/source-comparison.json
+```
+
+The comparison opens references only after checking native success, validates
+the exact point, basis and root germs, and checks every coefficient using the
+sum of recorded native and reference error allowances. Its default is 20 digits;
+the reference's 24-digit evidence cap cannot be upgraded by its longer printed
+mantissas. This script does not generate or inject numerical seeds.
