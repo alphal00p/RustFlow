@@ -427,8 +427,8 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
     if request.derivatives.is_some() == request.canonical.is_some() {
         return Err("transport requires exactly one of derivatives or canonical".into());
     }
-    if request.epsilon_shearing && (request.canonical.is_some() || !request.roots.is_empty()) {
-        return Err("epsilon_shearing is supported only for rational derivatives without registered roots; algebraic and canonical inputs are unsupported".into());
+    if request.epsilon_shearing && request.canonical.is_some() {
+        return Err("epsilon_shearing accepts dense rational or registered-root derivatives; canonical inputs are already epsilon regular and are unsupported for explicit shearing".into());
     }
     let roots = request
         .roots
@@ -623,6 +623,43 @@ fn transport(request: TransportRequest, directory: &Path) -> CliResult<Value> {
             &conditions,
         )?;
         let flow = bind_continuation(flow, &request)?;
+        if request.epsilon_shearing {
+            let sheared = flow.regularize_epsilon(&context)?;
+            let cached_range = sheared.required_range(range)?;
+            return execute_transport(
+                &request,
+                directory,
+                sheared.flow().identity(),
+                range,
+                Some(&sheared),
+                |cache, point, policy| {
+                    let germ = point.root_germ().ok_or("missing destination root_germ")?;
+                    if request.continuation.is_some() {
+                        Ok(sheared.flow().evaluate_prescribed_to(
+                            cache,
+                            &point.restart_coordinates()?,
+                            germ,
+                            cached_range,
+                            &options,
+                            &context,
+                            policy,
+                            &admit_declared_route,
+                        )?)
+                    } else {
+                        Ok(sheared.flow().evaluate_to(
+                            cache,
+                            &point.restart_coordinates()?,
+                            germ,
+                            cached_range,
+                            &options,
+                            &context,
+                            policy,
+                        )?)
+                    }
+                },
+            );
+        }
+
         execute_transport(
             &request,
             directory,
@@ -713,6 +750,49 @@ fn germ_json(point: &CachedPoint) -> Option<Value> {
     })
 }
 
+// Type-erased boundary mapping only: all exact shifts and authentication remain
+// in the shared library adapter, while evaluation stays in its typed flow.
+trait CliEpsilonShearing {
+    fn original_identity(&self) -> &BoundaryIdentity;
+    fn shearing(&self) -> &symbolica_amflow::EpsilonShearing;
+    fn required_range(&self, range: EpsilonRange) -> symbolica_amflow::Result<EpsilonRange>;
+    fn to_sheared_boundary(
+        &self,
+        source: &CachedBoundary,
+        last: i32,
+    ) -> symbolica_amflow::Result<CachedBoundary>;
+    fn to_original_boundary(
+        &self,
+        source: &CachedBoundary,
+        range: EpsilonRange,
+    ) -> symbolica_amflow::Result<CachedBoundary>;
+}
+impl<S> CliEpsilonShearing for EpsilonShearedFlow<S> {
+    fn original_identity(&self) -> &BoundaryIdentity {
+        EpsilonShearedFlow::original_identity(self)
+    }
+    fn shearing(&self) -> &symbolica_amflow::EpsilonShearing {
+        EpsilonShearedFlow::shearing(self)
+    }
+    fn required_range(&self, range: EpsilonRange) -> symbolica_amflow::Result<EpsilonRange> {
+        EpsilonShearedFlow::required_range(self, range)
+    }
+    fn to_sheared_boundary(
+        &self,
+        source: &CachedBoundary,
+        last: i32,
+    ) -> symbolica_amflow::Result<CachedBoundary> {
+        EpsilonShearedFlow::to_sheared_boundary(self, source, last)
+    }
+    fn to_original_boundary(
+        &self,
+        source: &CachedBoundary,
+        range: EpsilonRange,
+    ) -> symbolica_amflow::Result<CachedBoundary> {
+        EpsilonShearedFlow::to_original_boundary(self, source, range)
+    }
+}
+
 // Both native connection kinds share parsing, bank I/O, progressive insertion,
 // policy and result serialization. Numerical transport stays in RustFlow.
 fn execute_transport(
@@ -720,7 +800,7 @@ fn execute_transport(
     directory: &Path,
     identity: &BoundaryIdentity,
     range: EpsilonRange,
-    sheared: Option<&EpsilonShearedFlow>,
+    sheared: Option<&dyn CliEpsilonShearing>,
     mut evaluate: impl FnMut(
         &mut RustFlowCache,
         &CachedPoint,
@@ -733,7 +813,7 @@ fn execute_transport(
     let mut cache = RustFlowCache::load(&cache_directory)?;
     let loaded = cache.len();
     let mut seeds = Vec::new();
-    let source_identity = sheared.map_or(identity, EpsilonShearedFlow::original_identity);
+    let source_identity = sheared.map_or(identity, CliEpsilonShearing::original_identity);
     for seed in &request.seeds {
         let p = Precision::decimal(seed.working_digits)?;
         let source = CachedBoundary {
@@ -836,7 +916,7 @@ fn execute_transport(
     }
     cache.save(&cache_directory)?;
     let mut output = json!({"schema_version":1,"operation":"transport","loaded_boundaries":loaded,"retained_boundaries":cache.len(),"results":results});
-    let output_identity = sheared.map_or(identity, EpsilonShearedFlow::original_identity);
+    let output_identity = sheared.map_or(identity, CliEpsilonShearing::original_identity);
     if let Some(adapter) = sheared {
         let cached_range = adapter.required_range(range)?;
         output["identity"] = output_identity.key().into();

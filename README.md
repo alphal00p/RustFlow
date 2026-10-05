@@ -107,7 +107,9 @@ supports persistent transport caches across processes.
   reductions determine required master orders and project cached coefficients
   with propagated uncertainty.
 - [`RustFlow::regularize_epsilon`](docs/epsilon-shearing.md) removes epsilon poles
-  when one exact diagonal rescaling works for every physical partial. Its cache
+  in rational and registered-square-root systems when one exact diagonal
+  rescaling works for every physical partial. Root relations are normalized
+  before epsilon expansion, with excluded denominators and sheets retained. Its cache
   adapter preserves basis identity, source orders and errors; the corresponding
   `PreparedPhysicalFamily::with_epsilon_shearing` builder maps automatic AMF/FT
   seeds and target reductions through the same transformation.

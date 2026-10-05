@@ -1,0 +1,535 @@
+{
+  "schema": 1,
+  "status": "original_native_memory_failure",
+  "case": "Original DiffExp86-master ZZZ PH1 to PH2, epsilon0..4, requested128absolute digits",
+  "plan": {
+    "status": "audited_not_run",
+    "upstream_commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+    "paper_ancillary_version": "2005.04195v2",
+    "source_files": {
+      "notebook": {
+        "path": "/common/dev/diffexp/Examples/5pPlanar1Mass.nb",
+        "sha256": "2d122ba731d62fe45b69db0cc74372fbb603cd1ee31894fd8414e2e2596a53c8"
+      },
+      "upstream_package": {
+        "path": "/common/dev/diffexp/DiffExp.m",
+        "sha256": "67fa23a0be32f747e292debcf3142b0ecef2cf526335b5b31f5ec7dd9cdeace7"
+      },
+      "upstream_paper": {
+        "path": "/common/dev/diffexp/Paper/main.tex",
+        "sha256": "30b64b682ae7f39b5e3549985347286d4aad52e3232dd51fa1ffa6954cde9d39"
+      },
+      "matrix": {
+        "path": "/common/dev/amflow/target/diffexp-oracle/ancillary/2005.04195v2/anc/zzz/diffEq-zzz.m",
+        "sha256": "43f617d7929ee5f6aaef9d808f76ea2248c3961b0677a3632f72f6c83a9a29b1"
+      },
+      "references": {
+        "path": "/common/dev/amflow/target/diffexp-oracle/ancillary/2005.04195v2/anc/zzz/numIntegrals-zzz.m",
+        "sha256": "74688c638e67005838ca3cc8957ccbc4604a5f1a2ef6654e280774080743e244"
+      },
+      "alphabet": {
+        "path": "/common/dev/amflow/target/diffexp-oracle/ancillary/2005.04195v2/anc/alphabet.m",
+        "sha256": "7d685bcd1028b55b974039fe99acd5d1ec0e712af75223212c27040e04038e86"
+      },
+      "metadata": {
+        "path": "/common/dev/amflow/target/zzz-128-profile/metadata.json",
+        "sha256": "2dc0162f7a0db805fb7607af6ab682c225a895b50ab06a7a0b836c1eaad696dc"
+      },
+      "native_input": {
+        "path": "/common/dev/amflow/target/zzz-128-profile/native-input.json",
+        "sha256": "872ff25244d6a43cd390be8acfd7ca8e2c304c6d4f98b297c44376c0a23975d9"
+      }
+    },
+    "notebook_anchors": {
+      "high_precision_configuration_lines": [
+        80316,
+        80344
+      ],
+      "actual_point_selection_lines": [
+        80811,
+        80822
+      ],
+      "transport_call_lines": [
+        80839,
+        80854
+      ],
+      "historical_timing_lines": [
+        113015,
+        113024
+      ],
+      "historical_comparison_lines": [
+        113041,
+        113060
+      ],
+      "paper_claim_line": 1108
+    },
+    "notebook_settings": {
+      "accuracy_goal": 128,
+      "working_decimal_digits": 280,
+      "chop_decimal_digits": 230,
+      "expansion_order": 230,
+      "division_order": 4,
+      "epsilon_order": 4,
+      "use_mobius": false,
+      "use_pade": false,
+      "parallel": false,
+      "segmentation_strategy": "Predivision",
+      "integration_strategy": "Default",
+      "physical_i0": "All six independent invariants +i0; named square roots use the original principal/radicand+i0 convention."
+    },
+    "historical_notebook_result": {
+      "segments": 108,
+      "transport_seconds": 7401.394625,
+      "max_absolute_difference_wolfram": "0``132.",
+      "interpretation": "Finite-accuracy zero at absolute Accuracy132, not an exact equality certificate. This is a historical notebook output, not a current measured run."
+    },
+    "data_precision": [
+      {
+        "point_index": 1,
+        "exact_coordinates": {
+          "s12": "-22/5",
+          "s15": "249/50",
+          "s23": "241/25",
+          "s34": "-377/100",
+          "s45": "13/50",
+          "p1s": "137/50"
+        },
+        "complex_coefficients": 430,
+        "exact_complex_coefficients": 86,
+        "finite_complex_coefficients": 344,
+        "finite_complex_absolute_accuracy_range": [
+          "132",
+          "132.00000000000003"
+        ],
+        "finite_nonzero_complex_relative_precision_range": [
+          "129.84342959434764",
+          "134.43771550331812"
+        ],
+        "finite_accuracy_zero_complex_coefficients": 66,
+        "finite_real_imag_components": 658,
+        "finite_component_accuracy_range": [
+          "132",
+          "132.150514997832"
+        ],
+        "source_reported_estimate": "3.9484345043140424*^-134",
+        "zero_endpoint_letter_indices": [],
+        "zero_endpoint_radicand_indices": [],
+        "exact_radicand_values": {
+          "tr5": "-817901/3125000",
+          "sqrtG3": "1031/25",
+          "sqrtG3nc": "104139/2500"
+        }
+      },
+      {
+        "point_index": 2,
+        "exact_coordinates": {
+          "s12": "-22/5",
+          "s15": "249/50",
+          "s23": "-91/100",
+          "s34": "-377/100",
+          "s45": "-9/10",
+          "p1s": "137/50"
+        },
+        "complex_coefficients": 430,
+        "exact_complex_coefficients": 86,
+        "finite_complex_coefficients": 344,
+        "finite_complex_absolute_accuracy_range": [
+          "132",
+          "132.00000000000003"
+        ],
+        "finite_nonzero_complex_relative_precision_range": [
+          "130.12785268990743",
+          "134.34108084711073"
+        ],
+        "finite_accuracy_zero_complex_coefficients": 66,
+        "finite_real_imag_components": 657,
+        "finite_component_accuracy_range": [
+          "132",
+          "132.150514997832"
+        ],
+        "source_reported_estimate": "4.0722146420815303*^-134",
+        "zero_endpoint_letter_indices": [],
+        "zero_endpoint_radicand_indices": [],
+        "exact_radicand_values": {
+          "tr5": "-31233139/20000000",
+          "sqrtG3": "34853/2000",
+          "sqrtG3nc": "104139/2500"
+        }
+      }
+    ],
+    "exact_affine_path": {
+      "s12": "-22/5",
+      "s15": "249/50",
+      "s23": "241/25 - (211*x)/20",
+      "s34": "-377/100",
+      "s45": "13/50 - (29*x)/25",
+      "p1s": "137/50"
+    },
+    "radicands_on_path": {
+      "tr5": "(-7*(3738976 - 4050707336*x + 4069277745*x^2))/100000000",
+      "sqrtG3": "(412400 - 1119856*x + 881721*x^2)/10000",
+      "sqrtG3nc": "104139/2500"
+    },
+    "endpoint_scope": "Both endpoints are regular: all58 alphabet letters and all3 radicands are nonzero. Interior threshold and root crossings require continued branches; no singular-endpoint extension is needed for this profile.",
+    "input_accuracy_assessment": [
+      "This is an actual128-digit requested-accuracy notebook workload, not128-digit working precision.",
+      "The supplied finite values carry132 absolute Accuracy digits and at least129.8434 nonzero relative Precision digits at PH1. This supports attempting a128-absolute-digit endpoint comparison without padding source evidence.",
+      "The point-level ~4e-134 estimate is not substituted for the larger per-component recorded uncertainty. Finite-accuracy zeros retain their uncertainty rather than becoming exact zeros.",
+      "Source metadata alone does not prove128 absolute digits survive transport: the input error may be amplified. Independent precision/order refinement checks arithmetic and truncation, not source uncertainty. Any inherited-error estimate must be reported separately, and a conservative bound failing128 must not be promoted by observed reference agreement.",
+      "The accepted claim can be430 stored endpoint coefficients agreeing to128 absolute digits with the separately supplied PH2 reference, plus independent numerical refinement. A stronger128-digit error-box certificate requires demonstrated propagation within1e-128."
+    ],
+    "profiles": {
+      "original": {
+        "working_digits": 280,
+        "series_order": 230,
+        "chop_digits": 230,
+        "division_order": 4,
+        "requested_absolute_digits": 128,
+        "wall_seconds": 14400,
+        "per_process_address_space_bytes": 17179869184,
+        "aggregate_descendant_rss_poll_bytes": 17179869184,
+        "cpu": 32,
+        "workers": 1
+      },
+      "native_baseline": {
+        "working_digits": 280,
+        "series_order": 230,
+        "requested_absolute_digits": 128,
+        "max_steps": 30000,
+        "wall_seconds": 14400,
+        "per_process_address_space_bytes": 17179869184,
+        "aggregate_descendant_rss_poll_bytes": 17179869184,
+        "cpu": 32,
+        "workers": 1
+      },
+      "native_refined": {
+        "working_digits": 320,
+        "series_order": 280,
+        "requested_absolute_digits": 128,
+        "max_steps": 30000,
+        "wall_seconds": 14400,
+        "per_process_address_space_bytes": 17179869184,
+        "aggregate_descendant_rss_poll_bytes": 17179869184,
+        "cpu": 32,
+        "workers": 1
+      }
+    },
+    "cap_rationale": "Proposed, not authorized or launched: historical original108-segment profile took7401s. A14400s cap allows under2x that historical time, without extending a running cap. Native high-order cost is not yet measured; each profile has a separate fixed cap and may censor. Only one timed job uses CPU32 at a time.",
+    "acceptance": [
+      "All430 complex coefficients finite and present, original dimension86/epsilon0..4 unchanged.",
+      "Maximum complex absolute difference against PH2 below1e-128; preserve each reference Precision/Accuracy and report all differences.",
+      "Native baseline/refined start independently from original PH1 mantissas and recorded source errors; low/high absolute differences below1e-128.",
+      "Explicit endpoint branch values agree with principal prescribed PH2 roots and low/high branches agree; original actual path/poles/segments retained.",
+      "No working-precision-based source evidence increase, no reuse of transported reference values as starting boundaries, and no matched-speed ratio unless workload differences are displayed."
+    ],
+    "launch_state": "No long transport has been launched. Parent must review provenance and fixed caps first.",
+    "short_extraction": {
+      "command": [
+        "taskset",
+        "-c",
+        "32",
+        "/common/dev/amflow/scripts/wolfram_one_thread.py",
+        "-noinit",
+        "-noprompt",
+        "-script",
+        "/common/dev/amflow/target/zzz-128-profile/extract_metadata.wl"
+      ],
+      "returncode": 0,
+      "wall_seconds": 1.8711169958114624,
+      "wall_cap_seconds": 120,
+      "address_space_per_process_bytes": 17179869184,
+      "cpu": 32,
+      "scope": "Metadata extraction only; no transport",
+      "files": {
+        "extract_metadata.wl": "f74c8ecad4f571e27f3e88c64aac50478dca4a18ba7df13397854bfb0c6b6a0c",
+        "metadata.log": "a2d21f8ea4a7b3705da21941ec8975ea72971fe195521646557a742e5710461b",
+        "metadata.json": "2dc0162f7a0db805fb7607af6ab682c225a895b50ab06a7a0b836c1eaad696dc"
+      }
+    },
+    "staged_extraction_failure": "First short metadata-only script had a Wolfram syntax error and produced no artifact despite exit0; preserved as syntax-failure-metadata.log/json. Corrected runner additionally requires a completion artifact/token. This is unrelated to transport."
+  },
+  "launch_provenance": {
+    "status": "launched",
+    "started_utc": "2026-10-05T03:45:28.434267+00:00",
+    "command": [
+      "taskset",
+      "-c",
+      "32",
+      "/common/dev/amflow/scripts/wolfram_one_thread.py",
+      "-noinit",
+      "-noprompt",
+      "-script",
+      "/common/dev/amflow/target/zzz-128-profile/original.wl"
+    ],
+    "profile": {
+      "working_digits": 280,
+      "series_order": 230,
+      "chop_digits": 230,
+      "division_order": 4,
+      "requested_absolute_digits": 128,
+      "wall_seconds": 14400,
+      "per_process_address_space_bytes": 17179869184,
+      "aggregate_descendant_rss_poll_bytes": 17179869184,
+      "cpu": 32,
+      "workers": 1
+    },
+    "plan_sha256": "29a3ff870f32f7413a2d8e3ae0886e855568c53d4a6841c8c086a930fac52ea2",
+    "input_sha256": "872ff25244d6a43cd390be8acfd7ca8e2c304c6d4f98b297c44376c0a23975d9",
+    "implementation": "original",
+    "driver_sha256": "dc6c381e60fa4b8eac9a2acdd6cb8482ee4ed9de37c134c22203ad34daed3d48",
+    "launcher_sha256": "6551142d15c38061fd17f7d97d67d8386f63fe7cb95989a912260c13f2e9443b",
+    "loader_sha256": "12b870d2278f8c417917a05dff3e7aa18fd888a0ac73633f962b300d24504318",
+    "resource_scope": "Inherited per-process RLIMIT_AS plus0.25-second descendant RSS polling with PID-start-time checks. Polling is not a kernel-enforced aggregate limit and can miss short-lived descendants."
+  },
+  "run": {
+    "status": "incomplete_or_failed",
+    "returncode": 1,
+    "limit_reason": null,
+    "elapsed_seconds": 1811.9316709591076,
+    "peak_polled_descendant_rss_bytes": 16293904384,
+    "finished_utc": "2026-10-05T04:15:40.367487+00:00",
+    "provenance_sha256": "697acb3cc1516e4c3ba711cf5739dad3b9e2ad3b52cbf9c5275e330a0e549e50",
+    "log_sha256": "1505de67fddea2f13160d9a6b7614c02e1003a640ec3752d42b37210ffd83cdd",
+    "descendant_log_sha256": "c14d9f1263e108e360398ac932652efc95910ea595012a83c69f7612ac13e8ac",
+    "scientific_result_sha256": null
+  },
+  "original_result": null,
+  "failure_diagnosis": {
+    "native_memory_failure_message": true,
+    "wall_or_rss_watchdog_fired": false,
+    "scope": "Native kernel allocation failure under the declared inherited per-process address-space cap; no aggregate-RSS or wall censor fired. Exact causal allocator limit is not instrumented."
+  },
+  "independent_decimal_comparisons": [],
+  "comparison": {
+    "checked_complex_coefficients": 0,
+    "max_complex_absolute_difference": null,
+    "requested_absolute_digits": 128,
+    "all_passed": false,
+    "reported_original_error_count": 0,
+    "max_original_reported_error": null,
+    "original_reported_error_scope": "Upstream estimates, not independently certified interval bounds."
+  },
+  "observed_progress": {
+    "completed_segment_records": [
+      [
+        "1",
+        "108",
+        "20.237971"
+      ],
+      [
+        "2",
+        "108",
+        "44.845747"
+      ],
+      [
+        "3",
+        "108",
+        "26.133863"
+      ],
+      [
+        "4",
+        "108",
+        "30.627698"
+      ],
+      [
+        "5",
+        "108",
+        "23.049413"
+      ],
+      [
+        "6",
+        "108",
+        "35.926504"
+      ],
+      [
+        "7",
+        "108",
+        "23.284357"
+      ],
+      [
+        "8",
+        "108",
+        "26.258069"
+      ],
+      [
+        "9",
+        "108",
+        "29.425502"
+      ],
+      [
+        "10",
+        "108",
+        "32.925273"
+      ],
+      [
+        "11",
+        "108",
+        "36.362419"
+      ],
+      [
+        "12",
+        "108",
+        "39.874933"
+      ],
+      [
+        "13",
+        "108",
+        "41.903473"
+      ],
+      [
+        "14",
+        "108",
+        "40.072873"
+      ],
+      [
+        "15",
+        "108",
+        "38.817197"
+      ],
+      [
+        "16",
+        "108",
+        "139.55233"
+      ],
+      [
+        "17",
+        "108",
+        "42.992254"
+      ],
+      [
+        "18",
+        "108",
+        "43.456478"
+      ],
+      [
+        "19",
+        "108",
+        "42.802764"
+      ],
+      [
+        "20",
+        "108",
+        "82.909919"
+      ],
+      [
+        "21",
+        "108",
+        "45.818456"
+      ],
+      [
+        "22",
+        "108",
+        "45.750807"
+      ],
+      [
+        "23",
+        "108",
+        "44.237622"
+      ],
+      [
+        "24",
+        "108",
+        "42.03604"
+      ],
+      [
+        "25",
+        "108",
+        "41.37502"
+      ],
+      [
+        "26",
+        "108",
+        "40.932257"
+      ],
+      [
+        "27",
+        "108",
+        "233.441779"
+      ],
+      [
+        "28",
+        "108",
+        "44.317372"
+      ],
+      [
+        "29",
+        "108",
+        "42.520386"
+      ],
+      [
+        "30",
+        "108",
+        "40.840344"
+      ],
+      [
+        "31",
+        "108",
+        "87.110014"
+      ],
+      [
+        "32",
+        "108",
+        "59.860534"
+      ],
+      [
+        "33",
+        "108",
+        "44.031"
+      ],
+      [
+        "34",
+        "108",
+        "46.126855"
+      ],
+      [
+        "35",
+        "108",
+        "48.35359"
+      ],
+      [
+        "36",
+        "108",
+        "50.069169"
+      ]
+    ],
+    "tail": [
+      "\"DiffExp: \"\"Integrating segment: \"<|p1s -> 2.74, s12 -> -4.4, s15 -> 4.98, s23 -> 6.686898453049626*(1. - 0.06336398107220408*x), s34 -> -3.77, s45 -> -0.06470121274525444 - 0.04658785479929035*x|>\".\"",
+      "\"   \"\"DiffExp: \"\"Preparing differential equations along current line segment.\"",
+      "\"   \"\"DiffExp: \"\"Current line segment covers x \u2208 [\"0.2698743526253723\", \"0.28995532452161815\"].\"",
+      "\"   \"\"DiffExp: \"\"Determining expansion order for given accuracy goal.\"",
+      "\"   \"\"DiffExp: \"\"Expanding differential equations at order: \"236",
+      "\"   \"\"DiffExp: \"\"Error of matrix expansions: \"1.3435752215134178*^-138",
+      "\"   \"\"DiffExp: \"\"Precision reached at order: \"236",
+      "\"   \"\"DiffExp: \"\"Currently at order: \u03f5^\"0\".\"",
+      "\"   \"\"DiffExp: \"\"Currently at order: \u03f5^\"1\".\"",
+      "\"   \"\"DiffExp: \"\"Currently at order: \u03f5^\"2\".\"",
+      "\"   \"\"DiffExp: \"\"Currently at order: \u03f5^\"3\".\"",
+      "\"   \"\"DiffExp: \"\"Currently at order: \u03f5^\"4\".\"",
+      "\"DiffExp: \"\"Evaluating at x = \"0.28995532452161815",
+      "\"DiffExp: \"\"Integrated segment 36 out of 108 in \"50.069169\" seconds.\"",
+      "\"DiffExp: \"\"Current segment error estimate: \"7.973024969000627*^-174",
+      "\"DiffExp: \"\"Total error estimate: \"1.0000002640325263*^-132",
+      "\"DiffExp: \"\"Integrating segment: \"<|p1s -> 2.74, s12 -> -4.4, s15 -> 4.98, s23 -> 6.404426115042434*(1. - 0.11026450025855279*x), s34 -> -3.77, s45 -> -0.095759782611448 - 0.07764642466548391*x|>\".\"",
+      "\"   \"\"DiffExp: \"\"Preparing differential equations along current line segment.\"",
+      "\"   \"\"DiffExp: \"\"Current line segment covers x \u2208 [\"0.28995532452161815\", \"0.3234236110153612\"].\"",
+      "\"   \"\"DiffExp: \"\"Determining expansion order for given accuracy goal.\"",
+      "\"   \"\"DiffExp: \"\"Expanding differential equations at order: \"236",
+      "",
+      "No more memory available.",
+      "Mathematica kernel has shut down.",
+      "Try quitting other applications and then retry."
+    ]
+  },
+  "scope": [
+    "Original supplied-boundary transport only; no native result is used as source data.",
+    "Input/reference values retain their actual finite absolute Accuracy around132; finite-accuracy zeros are not exact zeros.",
+    "Requested128 absolute digits and observed stored-reference agreement are distinct from a128-digit propagated source-error-box certificate. No extra source precision follows from280working digits.",
+    "Historical notebook108segments/7401.394625s is separate from the current process and is not a matched hardware performance baseline.",
+    "Fixed14400s wall cap; inherited16GiB per-process address-space limit plus polled descendantRSS policy. No kernel-enforced aggregate memory guarantee.",
+    "Native baseline/refinement remain separate future runs and must use a frozen current library after review."
+  ],
+  "finalizer": {
+    "path": "/common/dev/amflow/target/zzz-128-profile/finalize_original.py",
+    "sha256": "f9760ca83f2ddcf06892860d76fe3ec00e12dd1de0e2301ab58046f39e635fe1"
+  }
+}

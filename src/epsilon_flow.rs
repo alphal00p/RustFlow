@@ -3,17 +3,17 @@ use crate::diffexp::EpsilonBoundary;
 use crate::transport_cache::{BoundaryIdentity, CachedBoundary, EpsilonRange};
 use crate::{EpsilonShearing, Error, Precision, Result, RustFlow};
 
-/// A rational physical connection regularized by exact diagonal epsilon powers.
+/// A physical connection regularized by exact diagonal epsilon powers.
 /// The original and transformed cache identities remain distinct. Numerical
 /// transport and cache selection use the ordinary shared [`RustFlow`] engine.
-pub struct EpsilonShearedFlow {
+pub struct EpsilonShearedFlow<S = crate::kinematics::KinematicSystem> {
     pub(crate) original_identity: BoundaryIdentity,
-    pub(crate) flow: RustFlow,
+    pub(crate) flow: RustFlow<S>,
     pub(crate) shearing: EpsilonShearing,
 }
 
-impl EpsilonShearedFlow {
-    pub fn flow(&self) -> &RustFlow {
+impl<S> EpsilonShearedFlow<S> {
+    pub fn flow(&self) -> &RustFlow<S> {
         &self.flow
     }
     pub fn shearing(&self) -> &EpsilonShearing {

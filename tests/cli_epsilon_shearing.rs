@@ -173,18 +173,124 @@ fn epsilon_cli_rejects_missing_original_orders_even_when_a_cache_hit_exists() {
 }
 
 #[test]
-fn epsilon_cli_rejects_explicit_algebraic_and_canonical_shearing() {
+fn epsilon_cli_rejects_explicit_canonical_shearing() {
     let tmp = Temporary::new();
-    let mut algebraic = card();
-    algebraic["roots"] = json!({"r":"s"});
-    tmp.reject(&algebraic, "supported only for rational derivatives");
-    assert!(!tmp.0.join("bank").exists());
     let mut canonical = card();
     canonical.as_object_mut().unwrap().remove("derivatives");
     canonical["canonical"] =
         json!({"variables":["s"],"letters":["s"],"matrices":[[["1","0"],["0","1"]]]});
-    tmp.reject(&canonical, "algebraic and canonical inputs are unsupported");
+    tmp.reject(&canonical, "canonical inputs are already epsilon regular");
     assert!(!tmp.0.join("bank").exists());
+}
+
+#[test]
+fn epsilon_cli_registered_roots_restore_outputs_and_restart_without_relabeling_germs() {
+    let tmp = Temporary::new();
+    let mut input = card();
+    input["roots"] = json!({"r":"s"});
+    input["derivatives"] = json!({"s":[["0","1/(2*eps*r)"],["eps/(2*r)","0"]]});
+    input["seeds"][0]["coordinates"] = json!({"s":"1"});
+    input["seeds"][0]["root_germ"] = json!({"r":"principal"});
+    input["destinations"] = json!([
+        {"coordinates":{"s":"4"},"root_germ":{"r":"principal"}},
+        {"coordinates":{"s":"9"},"root_germ":{"r":"principal"}},
+        {"coordinates":{"s":"9"},"root_germ":{"r":"principal"}}
+    ]);
+    let output = tmp.run(&input);
+    assert_eq!(
+        output["identity"],
+        output["epsilon_shearing"]["original_identity"]
+    );
+    assert_ne!(
+        output["identity"],
+        output["epsilon_shearing"]["cached_identity"]
+    );
+    let root = Atom::var(symbol!("rustflow_epsilon_cli::r")).to_canonical_string();
+    let p = Precision::decimal(90).unwrap();
+    for (result, d) in output["results"].as_array().unwrap().iter().zip([1, 2, 2]) {
+        let ep = p.exp(&p.i(d));
+        let em = p.exp(&p.i(-d));
+        let sinh = p.scale(&p.sub(&ep, &em), 1, 2);
+        let cosh = p.scale(&p.add(&ep, &em), 1, 2);
+        assert!(p.close(&number(&result["coefficients"][0][0], p), &sinh, 20));
+        assert!(p.close(&number(&result["coefficients"][1][0], p), &sinh, 20));
+        assert!(p.close(&number(&result["coefficients"][1][1], p), &cosh, 20));
+        assert_eq!(result["root_germ"][&root], "principal");
+    }
+    assert_eq!(output["results"][1]["starting_point"][coordinate()], "4");
+    assert_eq!(output["results"][2]["steps"], 0);
+    input.as_object_mut().unwrap().remove("seeds");
+    let restarted = tmp.run(&input);
+    assert!(
+        restarted["results"]
+            .as_array()
+            .unwrap()
+            .iter()
+            .all(|r| r["steps"] == 0)
+    );
+    let snapshot = fs::read(tmp.0.join("bank/physical-boundaries.bin")).unwrap();
+    input["destinations"] = json!([{"coordinates":{"s":"9"},"root_germ":{"r":"opposite"}}]);
+    tmp.reject(&input, "no compatible cached physical boundary");
+    assert_eq!(
+        fs::read(tmp.0.join("bank/physical-boundaries.bin")).unwrap(),
+        snapshot
+    );
+}
+
+#[test]
+fn epsilon_cli_prescribed_registered_root_keeps_sheet_and_original_output_identity() {
+    let tmp = Temporary::new();
+    let mut input = card();
+    input["roots"] = json!({"r":"s"});
+    input["derivatives"] = json!({"s":[["0","1/(2*eps*r)"],["eps/(2*r)","0"]]});
+    input["seeds"][0]["coordinates"] = json!({"s":"1"});
+    input["seeds"][0]["root_germ"] = json!({"r":"principal"});
+    input["continuation"] = json!({"kind":"prescribed_affine","domain":"declared root detour with no extra winding","prescriptions":[{"polynomial":"s","side":"+i0"}],"unprescribed_side":"+i0","homotopy_admission":"all_planner_routes_in_declared_domain"});
+    input["destinations"] = json!([{"coordinates":{"s":"-1"},"root_germ":{"r":"principal"}}]);
+    let positive = tmp.run(&input);
+    let p = Precision::decimal(90).unwrap();
+    {
+        let (imaginary, output) = ("1", &positive);
+        let delta = p.parse("-1", imaginary).unwrap();
+        let ep = p.exp(&delta);
+        let em = p.exp(&p.neg(&delta));
+        let sinh = p.scale(&p.sub(&ep, &em), 1, 2);
+        let cosh = p.scale(&p.add(&ep, &em), 1, 2);
+        assert!(p.close(
+            &number(&output["results"][0]["coefficients"][0][0], p),
+            &sinh,
+            20
+        ));
+        assert!(p.close(
+            &number(&output["results"][0]["coefficients"][1][1], p),
+            &cosh,
+            20
+        ));
+        assert_eq!(
+            output["identity"],
+            output["epsilon_shearing"]["original_identity"]
+        );
+        assert_ne!(
+            output["identity"],
+            output["epsilon_shearing"]["cached_identity"]
+        );
+    }
+    input.as_object_mut().unwrap().remove("seeds");
+    let restarted = tmp.run(&input);
+    assert_eq!(restarted["results"][0]["steps"], 0);
+    assert_eq!(
+        restarted["results"][0]["coefficients"],
+        positive["results"][0]["coefficients"]
+    );
+    let snapshot = fs::read(tmp.0.join("bank/physical-boundaries.bin")).unwrap();
+    input["continuation"]["prescriptions"][0]["side"] = "-i0".into();
+    input["continuation"]["unprescribed_side"] = "-i0".into();
+    input["destinations"][0]["root_germ"]["r"] = "opposite".into();
+    tmp.reject(&input, "no compatible cached physical boundary");
+    assert_eq!(
+        fs::read(tmp.0.join("bank/physical-boundaries.bin")).unwrap(),
+        snapshot
+    );
 }
 
 #[test]

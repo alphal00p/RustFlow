@@ -52,8 +52,10 @@ can accept epsilon-dependent input, but its pole range needs separate analysis;
 the seed API rejects that case before reducing or mutating the cache.
 
 An optional [diagonal epsilon rescaling](epsilon-shearing.md) now regularizes
-physical matrix poles when one integer-power transformation works for all
-coordinates. The supplied-system and prepared-family interfaces retain explicit
+rational and registered-square-root physical matrix poles when one integer-power
+transformation works for all coordinates. Exact root-quotient normalization
+precedes epsilon valuation and expansion, preserving original norm domains and
+root germs. The supplied-system and prepared-family interfaces retain explicit
 scaled basis identities, original domain conditions and coefficient errors.
 They request extra source orders before restoring targets; this is separate
 from dimension-factorizing refinement. A genuine equal-mass bubble basis with
@@ -104,7 +106,8 @@ epsilon-zero, epsilon-one and epsilon-two matrices at complex expansion centers.
 AMF evaluates exact nonzero rational epsilon samples and reconstructs Laurent
 coefficients after applying target weights. It checks additional samples and
 independent precision/order profiles. Direct physical transport can instead
-evolve the Laurent coefficients, currently requiring an epsilon-regular matrix.
+evolve the Laurent coefficients, requiring an epsilon-regular matrix either
+directly or after the supported common diagonal rescaling.
 These are coefficient representations of the same differential-equation method.
 A general fallback for epsilon-singular physical bases remains outstanding.
 

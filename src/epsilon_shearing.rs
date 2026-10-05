@@ -104,19 +104,7 @@ impl EpsilonShearing {
                 }
             }
         }
-        let weights =
-            crate::integer_shearing::integer_potentials(&orders, 0, 10000, Some(context))?
-                .into_iter()
-                .map(|w| {
-                    i32::try_from(w)
-                        .map_err(|_| Error::Limit("epsilon shearing weight overflow".into()))
-                })
-                .collect::<Result<Vec<_>>>()?;
-        let result = Self {
-            epsilon: system.epsilon,
-            weights,
-            nonzero_conditions: conditions,
-        };
+        let result = Self::from_orders(system.epsilon, &orders, conditions, context)?;
         let transform = result.transformation();
         let mut derivatives = std::collections::BTreeMap::new();
         for (&variable, matrix) in &system.derivatives {
@@ -142,6 +130,126 @@ impl EpsilonShearing {
             },
             result,
         ))
+    }
+
+    fn from_orders(
+        epsilon: Symbol,
+        orders: &[Vec<Option<i64>>],
+        conditions: Vec<Atom>,
+        context: &RunContext,
+    ) -> Result<Self> {
+        let weights = crate::integer_shearing::integer_potentials(orders, 0, 10000, Some(context))?
+            .into_iter()
+            .map(|w| {
+                i32::try_from(w)
+                    .map_err(|_| Error::Limit("epsilon shearing weight overflow".into()))
+            })
+            .collect::<Result<Vec<_>>>()?;
+        Ok(Self {
+            epsilon,
+            weights,
+            nonzero_conditions: conditions,
+        })
+    }
+
+    /// Regularize a formal registered-square-root connection. The root relations
+    /// are normalized before epsilon valuations or series expansion; their
+    /// epsilon-independent radicands and independent named sheets are preserved.
+    /// The returned descriptor retains source domains erased by normalization.
+    pub fn regularize_algebraic(
+        system: &crate::algebraic::AlgebraicKinematicSystem,
+        context: &RunContext,
+    ) -> Result<(crate::algebraic::AlgebraicKinematicSystem, Self)> {
+        system.validate()?;
+        context.cancellation.check()?;
+        let n = system.derivatives.first_key_value().unwrap().1.len();
+        let variables = system
+            .derivatives
+            .keys()
+            .copied()
+            .chain([system.epsilon])
+            .collect::<std::collections::BTreeSet<_>>();
+        let allowed = variables
+            .iter()
+            .copied()
+            .chain([crate::family::imaginary_parameter()])
+            .chain(system.roots.iter().map(|r| r.symbol))
+            .map(Atom::var)
+            .collect();
+        // Capture original holes and formal norm domains before multiplying
+        // numerators or applying the epsilon-only gauge.
+        let mut conditions = system.nonzero_conditions()?;
+        let mut normalized = system.clone();
+        let mut orders = vec![vec![None; n]; n];
+        let mut inverse_coefficients = Vec::new();
+        for matrix in normalized.derivatives.values_mut() {
+            for (i, row) in matrix.iter_mut().enumerate() {
+                context.cancellation.check()?;
+                for (j, entry) in row.iter_mut().enumerate() {
+                    let native =
+                        crate::algebraic::normalized_root_entry(entry, &system.roots, &allowed)?;
+                    for coefficient in native.coefficients() {
+                        if let Some(order) = valuation(&coefficient, system.epsilon)? {
+                            orders[i][j] =
+                                Some(orders[i][j].map_or(order, |old: i64| old.min(order)));
+                        }
+                    }
+                    *entry = native.expression(&system.roots);
+                    inverse_coefficients.extend(native.decoded_inverse_coefficients());
+                }
+            }
+        }
+        conditions.extend(crate::physical_conditions::rational_denominator_conditions(
+            &inverse_coefficients,
+            &variables,
+        )?);
+        conditions = crate::physical_conditions::canonical_conditions(&conditions, &variables)?;
+        let gaussian = AlgebraicExtension::complex(Q);
+        let mut generic = Vec::new();
+        for condition in &conditions {
+            let rational: RationalPolynomial<AlgebraicExtension<RationalField>, u16> = condition
+                .try_to_rational_polynomial(&gaussian, &gaussian, None)
+                .map_err(|e| {
+                    Error::Unsupported(format!("rational root-norm domain required: {e}"))
+                })?;
+            for part in [
+                rational.numerator.to_expression(),
+                rational.denominator.to_expression(),
+            ] {
+                generic.push(crate::physical_conditions::epsilon_leading_coefficient(
+                    &part,
+                    system.epsilon,
+                )?);
+            }
+        }
+        conditions.extend(generic);
+        conditions = crate::physical_conditions::canonical_conditions(&conditions, &variables)?;
+        let result = Self::from_orders(system.epsilon, &orders, conditions, context)?;
+        let transform = result.transformation();
+        for (&variable, matrix) in &mut normalized.derivatives {
+            context.cancellation.check()?;
+            *matrix = DifferentialSystem {
+                variable,
+                matrix: std::mem::take(matrix),
+            }
+            .change_basis(&transform)?
+            .matrix;
+            for entry in matrix.iter_mut().flatten() {
+                let native =
+                    crate::algebraic::normalized_root_entry(entry, &system.roots, &allowed)?;
+                for coefficient in native.coefficients() {
+                    if valuation(&coefficient, system.epsilon)?.is_some_and(|order| order < 0) {
+                        return Err(Error::Numerical(
+                            "algebraic epsilon shearing leaves a negative coefficient valuation"
+                                .into(),
+                        ));
+                    }
+                }
+                *entry = native.expression(&system.roots);
+            }
+        }
+        normalized.validate()?;
+        Ok((normalized, result))
     }
 
     pub fn epsilon(&self) -> Symbol {

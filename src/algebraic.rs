@@ -521,6 +521,84 @@ fn normalized_polynomial(
     Ok(terms)
 }
 
+/// One exact quotient-normalized entry, shared by compilation and epsilon gauges.
+/// Inverse coefficient rows retain norm poles even when the numerator cancels them.
+pub(crate) struct NormalizedRootEntry {
+    pub(crate) terms: BTreeMap<Vec<usize>, Atom>,
+    pub(crate) inverse_coefficients: Vec<Atom>,
+}
+impl NormalizedRootEntry {
+    pub(crate) fn expression(&self, roots: &[SquareRoot]) -> Atom {
+        decoded(&quotient::recompose(&self.terms, roots))
+    }
+    pub(crate) fn coefficients(&self) -> impl Iterator<Item = Atom> + '_ {
+        self.terms.values().map(decoded)
+    }
+    pub(crate) fn decoded_inverse_coefficients(&self) -> impl Iterator<Item = Atom> + '_ {
+        self.inverse_coefficients.iter().map(decoded)
+    }
+}
+
+pub(crate) fn normalized_root_entry(
+    value: &Atom,
+    roots: &[SquareRoot],
+    allowed: &BTreeSet<Atom>,
+) -> Result<NormalizedRootEntry> {
+    let root_atoms = roots
+        .iter()
+        .map(|r| Atom::var(r.symbol))
+        .collect::<Vec<_>>();
+    let fraction = rational(value, allowed)?;
+    let denominator =
+        normalized_polynomial(&fraction.denominator.to_expression(), &root_atoms, roots)?;
+    if denominator.is_empty() {
+        return Err(Error::InvalidInput(
+            "denominator vanishes under the declared square-root relations".into(),
+        ));
+    }
+    if denominator.len() != 1 {
+        let inverse = quotient::invert_denominator(
+            &quotient::recompose(&denominator, roots),
+            roots,
+            allowed,
+        )?;
+        let inverse_coefficients = inverse.values().cloned().collect();
+        let numerator =
+            normalized_polynomial(&fraction.numerator.to_expression(), &root_atoms, roots)?;
+        let product = quotient::recompose(&numerator, roots) * quotient::recompose(&inverse, roots);
+        let terms = normalized_polynomial(&product, &root_atoms, roots)?;
+        return Ok(NormalizedRootEntry {
+            terms,
+            inverse_coefficients,
+        });
+    }
+    let (denominator_roots, denominator_coefficient) = denominator.first_key_value().unwrap();
+    let mut terms = BTreeMap::<Vec<usize>, Atom>::new();
+    for (numerator_roots, numerator_coefficient) in
+        normalized_polynomial(&fraction.numerator.to_expression(), &root_atoms, roots)?
+    {
+        let mut coefficient = numerator_coefficient / denominator_coefficient;
+        let mut odd = Vec::new();
+        for (index, root) in roots.iter().enumerate() {
+            let numerator = numerator_roots.contains(&index);
+            let denominator = denominator_roots.contains(&index);
+            if numerator != denominator {
+                odd.push(index);
+            }
+            if denominator && !numerator {
+                coefficient /= encode_complex(&root.radicand);
+            }
+        }
+        let previous = terms.entry(odd).or_default();
+        *previous = (&*previous + coefficient).together().cancel();
+    }
+    terms.retain(|_, coefficient| !coefficient.is_zero());
+    Ok(NormalizedRootEntry {
+        terms,
+        inverse_coefficients: Vec::new(),
+    })
+}
+
 /// Preserve raw denominator occurrences before native rational cancellation.
 /// Named-root inversion then removes root generators from these exact domains.
 fn registered_domain_conditions(
@@ -646,75 +724,16 @@ impl AlgebraicSystem {
         for (shift, matrix) in self.system.matrices.iter().enumerate() {
             for (row, values) in matrix.iter().enumerate() {
                 for (column, value) in values.iter().enumerate() {
-                    let fraction = rational(value, &allowed)?;
-                    // Normalize even powers before checking the denominator:
-                    // 1/(r²+1) is rational, while 1/(r+1) needs rationalization.
-                    let denominator = normalized_polynomial(
-                        &fraction.denominator.to_expression(),
-                        &root_atoms,
-                        &self.roots,
-                    )?;
-                    if denominator.is_empty() {
-                        return Err(Error::InvalidInput(
-                            "denominator vanishes under the declared square-root relations".into(),
-                        ));
-                    }
-                    if denominator.len() != 1 {
-                        let inverse = quotient::invert_denominator(
-                            &quotient::recompose(&denominator, &self.roots),
-                            &self.roots,
-                            &allowed,
-                        )?;
-                        domain_entries.extend(
-                            inverse
-                                .values()
-                                .map(|coefficient| vec![coefficient.clone()]),
-                        );
-                        let numerator = normalized_polynomial(
-                            &fraction.numerator.to_expression(),
-                            &root_atoms,
-                            &self.roots,
-                        )?;
-                        let product = quotient::recompose(&numerator, &self.roots)
-                            * quotient::recompose(&inverse, &self.roots);
-                        for (roots, coefficient) in
-                            normalized_polynomial(&product, &root_atoms, &self.roots)?
-                        {
-                            if !coefficient.is_zero() {
-                                entries.push(vec![coefficient]);
-                                normalized.push((shift, row, column, roots));
-                            }
-                        }
-                        continue;
-                    }
-                    let (denominator_roots, denominator_coefficient) =
-                        denominator.first_key_value().unwrap();
-                    let mut terms = BTreeMap::<Vec<usize>, Atom>::new();
-                    for (numerator_roots, numerator_coefficient) in normalized_polynomial(
-                        &fraction.numerator.to_expression(),
-                        &root_atoms,
-                        &self.roots,
-                    )? {
-                        let mut coefficient = numerator_coefficient / denominator_coefficient;
-                        let mut odd = Vec::new();
-                        for (index, root) in self.roots.iter().enumerate() {
-                            let numerator = numerator_roots.contains(&index);
-                            let denominator = denominator_roots.contains(&index);
-                            if numerator != denominator {
-                                odd.push(index);
-                            }
-                            if denominator && !numerator {
-                                coefficient /= encode_complex(&root.radicand);
-                            }
-                        }
-                        let previous = terms.entry(odd).or_default();
-                        *previous = (&*previous + coefficient).together().cancel();
-                    }
-                    for (roots, coefficient) in terms {
-                        if !coefficient.is_zero() {
-                            entries.push(vec![coefficient]);
-                            normalized.push((shift, row, column, roots));
-                        }
+                    let normalized_entry = normalized_root_entry(value, &self.roots, &allowed)?;
+                    domain_entries.extend(
+                        normalized_entry
+                            .inverse_coefficients
+                            .into_iter()
+                            .map(|coefficient| vec![coefficient]),
+                    );
+                    for (roots, coefficient) in normalized_entry.terms {
+                        entries.push(vec![coefficient]);
+                        normalized.push((shift, row, column, roots));
                     }
                 }
             }

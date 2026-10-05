@@ -128,9 +128,9 @@ Algebraic result entries include `root_germ` and `starting_root_germ`; rational
 output keeps its existing format.
 
 This steers the existing `RustFlow<AlgebraicKinematicSystem>` and `RustFlowCache`.
-The CLI adds no numerical solver or second bank. Its current cache scope is
-exact real rational coordinates and straight paths whose radicands remain real
-and nonzero. Root-sum denominators use the native registered-root normalization
+The CLI adds no numerical solver or second bank. Its regular cache scope is
+exact rational-complex coordinates and affine paths with certified nonzero,
+finite radicands and compatible endpoint germs. Root-sum denominators use the native registered-root normalization
 and conservative formal norm domain. The global `options.prescription` does not
 choose germs implicitly. `branch_domain` must still describe the intended
 integral/logarithmic branch; local root signs alone do not establish it.
@@ -242,13 +242,13 @@ in the bank, while previously completed destinations remain saved.
 
 ## Diagonal epsilon shearing
 
-For a rational `derivatives` input, `"epsilon_shearing": true` asks the existing
+For a dense `derivatives` input, including registered square roots, `"epsilon_shearing": true` asks the existing
 native adapter to find integer weights with
 `I_i = epsilon^weight_i J_i` such that every physical derivative matrix for J is
 regular in epsilon. Weights have maximum zero. This is one restricted gauge
 class: a negative constraint cycle is a typed failure, not a claim that every
 nondiagonal transformation is impossible. Explicit shearing is rejected for
-registered-root and canonical inputs. Omitting the flag keeps existing behavior.
+canonical inputs, which are already epsilon regular. Omitting the flag keeps existing behavior.
 
 The top-level `basis`, `leading_epsilon_power`, `last_epsilon_power`, seed values
 and output coefficients continue to refer to the **original I basis**. The leading
@@ -288,3 +288,13 @@ A restart uses the same flag, original equations/basis/domain and requested rang
 `seeds` can be omitted when the rescaled bank already covers it. The optional
 `continuation` declaration applies unchanged. No new contour or numerical solver
 is used by this CLI option.
+
+
+Registered-square-root `derivatives` can also set `epsilon_shearing: true`.
+Source and destination `root_germ` declarations remain mandatory. Source
+coefficients and returned values still describe the original basis; the nested
+`epsilon_shearing.cached_identity` names the transformed bank, while the top-level
+`identity` names returned original values. Root sheets are not redefined by the
+epsilon gauge. Raw denominator/norm restrictions and prescribed continuation
+metadata remain enforced on transport and exact cache hits. `canonical` input
+continues to reject explicit shearing rather than silently ignoring the option.

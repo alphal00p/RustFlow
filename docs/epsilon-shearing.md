@@ -1,6 +1,6 @@
 # Epsilon poles in physical differential matrices
 
-`RustFlow::regularize_epsilon` admits rational physical systems whose epsilon
+`RustFlow::regularize_epsilon` admits rational and registered-square-root physical systems whose epsilon
 poles can be removed by a common diagonal rescaling. It reuses the ordinary
 physical transport and progressive cache. This extends the direct coefficient
 recurrence, which requires matrices regular at epsilon zero; it introduces no
@@ -23,8 +23,7 @@ The physical derivative of this epsilon-only transformation is zero. Physical
 Fuchsian normalization still includes its own nonzero derivative term.
 
 A negative constraint cycle means this diagonal class is insufficient. It does
-not prove that a nondiagonal rational change is impossible. Algebraic coefficient
-fields, general epsilon regularization and sampled-epsilon fallback remain
+not prove that a nondiagonal rational change is impossible. General epsilon regularization and sampled-epsilon fallback remain
 separate work. In particular, a supplied equation such as `I' = I/epsilon` has
 an essential epsilon singularity; numerical fit stability alone would not
 establish a Laurent expansion.
@@ -87,3 +86,26 @@ errors. `required_master_range` and `project_targets` both multiply the retained
 target weights by the same exact `T`; epsilon poles in those weights therefore
 request extra cached orders before projection. Basis refinement and skipped
 initial reduction remain independent preparation choices.
+
+
+## Registered square roots
+
+The same adapter also accepts `RustFlow<AlgebraicKinematicSystem>` with exact
+epsilon-independent radicands. The algebraic owner first normalizes every entry
+in its named-root quotient, using the same Symbolica polynomial/quotient routines
+as compilation. Epsilon valuations are then taken from its exact rational
+root-monomial coefficients. The transformed matrices are retained in that
+normalized form before any epsilon expansion: for example, `1/(r^2-s+epsilon)`
+with `r^2=s` is `1/epsilon`, regardless of its original expression syntax.
+
+Raw denominator holes, inverse norm conditions and their generic epsilon-leading
+conditions are preserved before cancellation. The exact ordered root registry
+and every cached `RootGerm` remain unchanged by the epsilon-only scaling. Regular
+complex paths, prescribed contours, homotopy admission, checkpoint verification,
+error propagation and binary restart all use the existing physical-flow owners.
+The generic `EpsilonShearedFlow<S=KinematicSystem>` keeps the rational default API.
+
+This remains the formal independent named-square-root quotient. Nonunit
+root denominators are refused even if a particular sheet might admit them;
+equal radicands do not merge two named generators. Epsilon-dependent radicands,
+general algebraic extensions and nondiagonal epsilon gauges remain unsupported.

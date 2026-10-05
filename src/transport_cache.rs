@@ -544,6 +544,43 @@ impl BoundaryIdentity {
         }
     }
 
+    pub(crate) fn epsilon_sheared_algebraic(
+        &self,
+        system: &AlgebraicKinematicSystem,
+        shearing: &crate::EpsilonShearing,
+    ) -> Result<Self> {
+        if self.0.system.epsilon() != shearing.epsilon()
+            || system.epsilon != shearing.epsilon()
+            || self.0.roots.len() != system.roots.len()
+            || self
+                .0
+                .roots
+                .iter()
+                .zip(&system.roots)
+                .any(|(a, b)| a.symbol != b.symbol || a.radicand != b.radicand)
+        {
+            return Err(Error::InvalidInput(
+                "epsilon shearing must preserve the exact registered-root identity".into(),
+            ));
+        }
+        let labels = shearing.scaled_basis_labels(&self.0.basis)?;
+        let mut conditions = self.0.conditions.clone();
+        conditions.extend_from_slice(shearing.nonzero_conditions());
+        let identity = Self::with_algebraic_conditions(
+            system,
+            &labels,
+            &self.0.normalization,
+            self.0.prescription,
+            &self.0.domain,
+            &conditions,
+        )?;
+        if let Some(continuation) = &self.0.continuation {
+            identity.with_prescribed_continuation(continuation.clone())
+        } else {
+            Ok(identity)
+        }
+    }
+
     pub fn new(
         system: &KinematicSystem,
         basis: &[Atom],

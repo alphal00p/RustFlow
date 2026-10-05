@@ -1,6 +1,18 @@
 # Implementation coverage
 
-The epsilon-shearing milestone passes **399 release unit/integration tests**, one
+The registered-root epsilon-shearing milestone passes **408 release unit/integration
+tests**, one doctest, strict all-target Clippy and formatting. Nine long scientific
+tests remain opt-in. The [release report](../reports/validation/2026-10-05-epsilon-algebraic-release.json)
+records the exact tested sources and immutable compiled library. Rational and
+registered-square-root physical matrices now share the diagonal rescaling adapter,
+progressive cache and CLI. Exact root relations are normalized before epsilon
+valuation and expansion; original norm domains, branch germs and boundary errors
+remain enforced. New tests cover a common transformation across two physical
+variables, complex paths, both root sheets, prescribed threshold continuation and
+binary restart. General nondiagonal epsilon transformations and
+epsilon-dependent radicands remain unsupported.
+
+The preceding rational epsilon-shearing milestone passes **399 release unit/integration tests**, one
 doctest, strict all-target Clippy and formatting. Nine long scientific tests are
 explicitly opt-in. The [validation report](../reports/validation/2026-10-05-epsilon-shearing-release.json)
 records the exact tested sources and dependency hashes. [Diagonal epsilon
@@ -9,7 +21,7 @@ AMF/FT seeds, physical transport, target projection and the CLI through the same
 growing cache. A native-IBP-certified massive bubble basis with an epsilon pole
 matches an independent direct AMF evaluation after transport; original source
 orders, reduction conditions, basis identity and uncertainty remain enforced.
-Registered-root and general nondiagonal epsilon transformations remain incomplete.
+Its registered-root extension is included in the new milestone above.
 
 The complex-domain milestone passes 380 release unit/integration tests and one
 doctest, strict all-target Clippy, and formatting. A final six-line correction
@@ -209,8 +221,10 @@ regression has not been rerun. The
 now passes all 430 comparisons at 20 absolute digits, after 10122.59 seconds
 including its capped predecessor and resumed work. Its independent higher
 precision/order profile is running; full acceptance remains pending. The
-[separate 128-digit PH1→PH2 original profile](../reports/diffexp/fivepoint-zzz-128-preparation.json)
-is now running with its recorded notebook settings. Native 128-digit profiles
+[separate 128-digit PH1→PH2 original profile](../reports/diffexp/fivepoint-zzz-128-original-failure.json)
+ended with a native Mathematica memory failure after 1811.93 seconds and 36 of
+108 segments under its declared 16 GiB per-process address-space cap. Neither
+watchdog fired and no endpoint result was produced. Native 128-digit profiles
 remain unrun; finite source data carry about 132 absolute accuracy digits. The staged MZZ offline regression has not yet been rerun against the
 latest production library.
 

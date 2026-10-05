@@ -218,6 +218,23 @@ impl<S> RustFlow<S> {
 }
 
 impl RustFlow<AlgebraicKinematicSystem> {
+    /// Apply the shared exact epsilon gauge after native root normalization.
+    pub fn regularize_epsilon(
+        &self,
+        context: &RunContext,
+    ) -> Result<crate::EpsilonShearedFlow<AlgebraicKinematicSystem>> {
+        let (system, shearing) =
+            crate::EpsilonShearing::regularize_algebraic(&self.system, context)?;
+        let identity = self
+            .identity
+            .epsilon_sheared_algebraic(&system, &shearing)?;
+        Ok(crate::EpsilonShearedFlow {
+            original_identity: self.identity.clone(),
+            flow: Self { system, identity },
+            shearing,
+        })
+    }
+
     /// Continue through planner-generated threshold detours. The identity must
     /// be bound to exact prescriptions and the caller must admit its homotopy.
     #[allow(clippy::too_many_arguments)]
