@@ -2,13 +2,45 @@
 
 A same-host comparison against the original, unmodified C++ differential-equation
 solver is available. It measures regular continuation and singular matching with
-supplied boundaries. **There is no matched full automatic-workflow timing comparison yet.**
+supplied boundaries. A first complete automatic finite-epsilon comparison also
+covers a connected three-loop single-mass vacuum, with the settings differences
+recorded below. Broad matched automatic-workflow performance remains unmeasured.
 A licensed Wolfram runtime is now available through the Bern server, and
 [live automatic oracle checks](upstream-oracle.md) exercise the original package
-with Kira. Their single-run timings are diagnostic, without matched Rust work or
-repetition. The Rust four-target two-loop
+with Kira. Earlier small oracle checks had no corresponding Rust timing; the
+new vacuum comparison includes both complete workflows without repetitions.
+The Rust four-target two-loop
 acceptance has passed; its numerical validation and execution conditions are
 recorded separately below.
+
+## Automatic single-mass vacuum
+
+Both implementations evaluated `111111` and `211111` for the six denominators
+`[q²−3, l², (l−q)², k², (k−q)², (l−k)²]` at exact epsilon `1/10`, using automatic
+IBP reduction, boundary recursion and transport. Each process began with a fresh
+symbolic cache, one worker, 40 requested digits and 80 configured working digits.
+Both outputs pass a 35-digit relative comparison against the original's recorded
+40-digit precision.
+
+| Workload | RustFlow process | Original AMFlow + Kira process | Result comparison |
+|---|---:|---:|---|
+| Both three-loop targets, epsilon=1/10 | 2.814 s | 175.447 s | Both pass 35 relative digits |
+
+This is one observation per implementation on the same shared host, pinned to
+CPUs 32 and 33 respectively. Both used order 160; original AMFlow also used its
+separate 50-term `ExtraXOrder`, for which RustFlow has no identical control.
+The resulting top bases contained three native and two original integrals.
+Native preparation/reduction took 0.143 s and automatic boundary/transport
+2.627 s. OS page caches and other host activity were uncontrolled. These results
+do not establish a general speedup or replace the larger benchmark timings.
+
+At this exact epsilon, native sampled reduction could not uniquely recover an
+indicial sector and returned `Unsupported`. The successful run retained symbolic
+epsilon during preparation, then evaluated the requested finite sample through
+the public API. The [full report](../reports/performance/single-mass-full-workflow.json)
+preserves that failed trial, both successful outputs, configuration differences,
+source/binary hashes and all timed phases. No reference value was used as a
+native boundary.
 
 ## Measured baseline
 

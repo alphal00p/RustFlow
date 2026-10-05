@@ -1,0 +1,343 @@
+{
+  "schema": 1,
+  "status": "finite_full_workflow_comparison_passed",
+  "scope": "Same connected3-loop six-line family,two targets,epsilon1/10. Native full public preparation and automatic numerical workflow versus original AMFlow+Kira. One observation per implementation, not a broad performance claim.",
+  "family": {
+    "denominators": [
+      "q^2-3",
+      "l^2",
+      "(l-q)^2",
+      "k^2",
+      "(k-q)^2",
+      "(l-k)^2"
+    ],
+    "targets": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "epsilon": "1/10",
+    "D": "4-2*epsilon",
+    "measure": "product d^D l/(i*pi^(D/2))",
+    "prescription": "+i0",
+    "EulerGamma_normalization": false
+  },
+  "native_run": {
+    "directory": "target/single-mass-native-timing/cold-symbolic",
+    "result": {
+      "returncode": 0,
+      "limit_reason": null,
+      "elapsed_seconds": 2.8135892171412706,
+      "peak_rss_bytes_after_exec": 24756224,
+      "finished_utc": "2026-10-05T01:52:05.142173+00:00",
+      "provenance_sha256": "51d482b28c8b17c9c583874b43578369f3845bcf4fff00e772f0d3e54a1ae386",
+      "stdout_sha256": "1ecf38c9957b92fa3c98f25484beea2029e2a0a3e26f1b82c4d4d4161be4a2d9",
+      "events_sha256": "1db812ed6b003820fc7da97fee786619ed9f385fec267b661b9a9ba98eb08680",
+      "declared.json_sha256": "29debd007dfc5990316fd6134593f3acbccb8fb57edb08b72d7113b173e6a79a",
+      "audit.json_sha256": "f7fb9ed6415db01bac7e7b42921ff8cc208b1d573771fef313e0ebd944c034b3",
+      "sample-results.json_sha256": "a82d67640f2cb07ed7cc012efdc4a644f41ffa95d2d57b54b106e29b73964fff"
+    },
+    "provenance": {
+      "mode": "amf",
+      "interface": "public PreparedFlow::new (symbolic epsilon) + evaluate_samples with automatic RecursiveBoundary",
+      "status": "launching",
+      "started_utc": "2026-10-05T01:52:01.106012+00:00",
+      "command": [
+        "taskset",
+        "-c",
+        "32",
+        "/common/dev/amflow/target/single-mass-native-timing/cold-symbolic/sample"
+      ],
+      "cpu": 32,
+      "workers": 1,
+      "rayon_threads": 1,
+      "wall_cap_seconds": 600,
+      "rss_cap_bytes": 17179869184,
+      "address_space_cap_bytes": 17179869184,
+      "binary_sha256": "2133602dc2d8fe195de936ffe8cc8173a307c981e3e9c71f9603ef5f9be50ffd",
+      "files": {
+        "library-source.json": "54416dd79fe801bff42debe9a6759310af2eecd684f209e21138e1be80790f54",
+        "run.py": "e79c663dfd7c9916a922f767ac765e996681d41b0a4af8e802377b75821cc219",
+        "build-command.json": "6148fce857cd30063d739ff5f6bb69e30ebc45d72d2ade457c7ec4f9aab33bc7",
+        "main.rs": "c329ee9e4866b417f23e49178386bf05a98c1434e89d721902c4940ae33dbe2d",
+        "library-archive.json": "9c810666dfe6dae2b0d772e9d2979bb599d6194058eb84e35b45217bf0e97d7e",
+        "build.py": "6de9ca15f8e68275f50e26bee8c7ab69dff0caf06c27a3a4106766409f142fe6"
+      },
+      "working_decimal_digits": 80,
+      "series_order": 160,
+      "extra_series_order": null,
+      "requested_digits": 40,
+      "epsilon": "1/10",
+      "native_refinement_runs": 0,
+      "targets": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "fresh_isolated_cache": true
+    }
+  },
+  "native_output": {
+    "audit": {
+      "backend_calls": 21,
+      "backend_calls_by_loop_count": {
+        "2": 19,
+        "3": 2
+      },
+      "elapsed_seconds": 2.770896746,
+      "exact_backend_epsilon_values": [],
+      "observed_sample_indices": {
+        "1": [
+          0
+        ]
+      },
+      "single_mass_child_families": [
+        {
+          "exact_family": "IntegralFamily { name: \"amflow_boundary_single_mass_child\", loops: [\"k0\", \"k1\"], external: [\"p0\"], external_gram: [[-1]], propagators: [Propagator { constant: -symbolica_amflow::eta, scalar_products: [1, 0, 0, 0, 0] }, Propagator { constant: -symbolica_amflow::eta, scalar_products: [0, 0, 1, 0, 0] }, Propagator { constant: -1-symbolica_amflow::eta, scalar_products: [1, 0, 0, -2, 0] }, Propagator { constant: -1-symbolica_amflow::eta, scalar_products: [0, 0, 1, 0, -2] }, Propagator { constant: 0, scalar_products: [0, 1, 0, 0, 0] }], physical_propagators: 4, epsilon: single_mass_finite_timing::epsilon, dimension: 4 }",
+          "external": 1,
+          "first_targets": [
+            [
+              1,
+              1,
+              1,
+              1,
+              0
+            ]
+          ],
+          "loops": 2,
+          "name": "amflow_boundary_single_mass_child",
+          "physical_propagators": 4,
+          "slots": 5
+        },
+        {
+          "exact_family": "IntegralFamily { name: \"amflow_boundary_single_mass_child\", loops: [\"k0\", \"k1\"], external: [\"p0\"], external_gram: [[-1]], propagators: [Propagator { constant: -symbolica_amflow::eta, scalar_products: [1, 0, 0, 0, 0] }, Propagator { constant: -symbolica_amflow::eta, scalar_products: [0, 0, 1, 0, 0] }, Propagator { constant: -1-symbolica_amflow::eta, scalar_products: [1, 2, 1, -2, -2] }, Propagator { constant: 0, scalar_products: [0, 1, 0, 0, 0] }, Propagator { constant: 0, scalar_products: [0, 0, 0, 1, 0] }], physical_propagators: 3, epsilon: single_mass_finite_timing::epsilon, dimension: 4 }",
+          "external": 1,
+          "first_targets": [
+            [
+              1,
+              1,
+              1,
+              0,
+              0
+            ]
+          ],
+          "loops": 2,
+          "name": "amflow_boundary_single_mass_child",
+          "physical_propagators": 3,
+          "slots": 5
+        }
+      ],
+      "single_mass_route_observed": true
+    },
+    "basis_integrals": 3,
+    "declaration": {
+      "backend_identity": "single-mass-finite-public-audit-v1:rustred-exact:d44e624ef4765683bc48cb22fe054c132f6e7c85e32ae71ae70ddcc80fd4b1f5:4b623d6a4133939fe08a70ce047dd63bc3c693586f054ea47547c382dd968bfb:3:65536:false:true:512:true:32:true:bridge-arities=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]:symmetry-v1:backward-frontier-v1=1024",
+      "epsilon": "1/10",
+      "exact_family": "IntegralFamily { name: \"single_mass_finite_timing_six_line\", loops: [\"q\", \"l\", \"k\"], external: [], external_gram: [], propagators: [Propagator { constant: -3, scalar_products: [1, 0, 0, 0, 0, 0] }, Propagator { constant: 0, scalar_products: [0, 0, 0, 1, 0, 0] }, Propagator { constant: 0, scalar_products: [1, -2, 0, 1, 0, 0] }, Propagator { constant: 0, scalar_products: [0, 0, 0, 0, 0, 1] }, Propagator { constant: 0, scalar_products: [1, 0, -2, 0, 0, 1] }, Propagator { constant: 0, scalar_products: [0, 0, 0, 1, -2, 1] }], physical_propagators: 6, epsilon: single_mass_finite_timing::epsilon, dimension: 4 }",
+      "extra_x_order": null,
+      "extra_x_order_note": "Native has no separate original ExtraXOrder control; original profile used160+50extra.",
+      "interface": "PreparedFlow::new (symbolic epsilon) + evaluate_samples + automatic RecursiveBoundary",
+      "mode": "amf",
+      "normalization": "product d^D l/(i*pi^(D/2)); +i0; no exp(EulerGamma epsilon)",
+      "requested_digits": 40,
+      "series_order": 160,
+      "targets": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "working_decimal_digits": 80
+    },
+    "phase_seconds": {
+      "automatic_boundary_and_transport": 2.626900237,
+      "top_level_preparation_and_reduction": 0.143486018,
+      "workflow_including_initialization": 2.7753920499999998
+    },
+    "status": "public_finite_sample_completed",
+    "values": [
+      {
+        "im": "4.9883001037315536685269501252177873221589910403188237403163099093030401593293417828916e-75",
+        "re": "27.547495364080180220719944183656930017782207157566014157338855364041936618908659767473"
+      },
+      {
+        "im": "-4.9883001037315536685269501252177873221589910403188237403163099093030401593293417828913e-76",
+        "re": "-2.7547495364080180220719944183656930017782207157566014157338855364041936618908659767473"
+      }
+    ],
+    "working_bits": 282
+  },
+  "preserved_native_sampled_preparation_failure": {
+    "directory": "target/single-mass-native-timing/cold",
+    "result": {
+      "returncode": 1,
+      "limit_reason": null,
+      "elapsed_seconds": 0.20428266376256943,
+      "peak_rss_bytes_after_exec": 0,
+      "finished_utc": "2026-10-05T01:50:43.249965+00:00",
+      "provenance_sha256": "49f98168b402561d18e1bb96d74e8730b8fcaf61e9801bbda0c7fdd7def1d487",
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "events_sha256": "0c23e2172ab2952b963cb943c48859e7a09a3125cf6d3cfe5344012cc18c8eb7",
+      "declared.json_sha256": "be225eb237cd146b5acc5ad3c1ecebb4f8ffb162e31419a708caf0f9405ccdcf",
+      "audit.json_sha256": "132a029d965b03d4120d2bc625e23be9358c92c473908b39da3eb202ae03a4c3",
+      "failure.json_sha256": "21e072e2bd24e30e06587e1f6476f6ac82f6c9b341c06bd1d24efbff484159f2"
+    },
+    "provenance": {
+      "mode": "amf",
+      "interface": "public PreparedFlow::new_at_epsilon + evaluate_samples with automatic RecursiveBoundary",
+      "status": "launching",
+      "started_utc": "2026-10-05T01:50:41.756887+00:00",
+      "command": [
+        "taskset",
+        "-c",
+        "32",
+        "/common/dev/amflow/target/single-mass-native-timing/cold/sample"
+      ],
+      "cpu": 32,
+      "workers": 1,
+      "rayon_threads": 1,
+      "wall_cap_seconds": 600,
+      "rss_cap_bytes": 17179869184,
+      "address_space_cap_bytes": 17179869184,
+      "binary_sha256": "1b564dfdc1a2d33e54a5e3987739a1c98f1e305b7757646cbab73828526f6b2c",
+      "files": {
+        "main.rs": "3f2f5622f0f122cbcfa2724861d77a56d0fe9af7834b48c140f02758ebb1381a",
+        "run.py": "f27fafc7e80445e107e2e0260311f6a08e2ffb72080e4c4fa29254f1f4640d80",
+        "build.py": "6de9ca15f8e68275f50e26bee8c7ab69dff0caf06c27a3a4106766409f142fe6",
+        "library-source.json": "54416dd79fe801bff42debe9a6759310af2eecd684f209e21138e1be80790f54",
+        "build-command.json": "6148fce857cd30063d739ff5f6bb69e30ebc45d72d2ade457c7ec4f9aab33bc7",
+        "library-archive.json": "9c810666dfe6dae2b0d772e9d2979bb599d6194058eb84e35b45217bf0e97d7e"
+      },
+      "working_decimal_digits": 80,
+      "series_order": 160,
+      "extra_series_order": null,
+      "requested_digits": 40,
+      "epsilon": "1/10",
+      "native_refinement_runs": 0,
+      "targets": [
+        [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ],
+        [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      ],
+      "fresh_isolated_cache": true
+    },
+    "typed_error": {
+      "message": "unsupported input: sample epsilon=1/10 does not uniquely identify dimensional indicial sector -17/10 (2 candidates); a redundant reduction basis may require a deeper IBP search",
+      "status": "failed",
+      "typed_error": "Unsupported(\"sample epsilon=1/10 does not uniquely identify dimensional indicial sector -17/10 (2 candidates); a redundant reduction basis may require a deeper IBP search\")"
+    }
+  },
+  "original_report": {
+    "path": "reports/validation/2026-10-05-single-mass-vacuum-upstream.json",
+    "staged_path": "target/single-mass-upstream/report.json",
+    "sha256": "1159696f8653b2bccdcafe3cc7106a495dab45e2fdc2600e39e5411d009275d9"
+  },
+  "comparisons": [
+    {
+      "target_index": 0,
+      "native_value": {
+        "im": "4.9883001037315536685269501252177873221589910403188237403163099093030401593293417828916e-75",
+        "re": "27.547495364080180220719944183656930017782207157566014157338855364041936618908659767473"
+      },
+      "original_value": "27.5474953640801802207199441836569300177822071575661228792237`40.",
+      "absolute_complex_error": "1.08721884844635958063381091340232527000000000000000114434816690523441569711378364381038597451826844350606541769967193291714325162741324110269563625806943460939475194241282456783582E-49",
+      "relative_complex_error": "3.94670671172526820243076361497472975822345978743543022900212073339322712798958591396823372123901146694016607474859060520890594709638303143133538283855093156144138013043636786671368E-51",
+      "asserted_relative_digits": 35,
+      "passed": true
+    },
+    {
+      "target_index": 1,
+      "native_value": {
+        "im": "-4.9883001037315536685269501252177873221589910403188237403163099093030401593293417828913e-76",
+        "re": "-2.7547495364080180220719944183656930017782207157566014157338855364041936618908659767473"
+      },
+      "original_value": "-2.7547495364080180220719944183656930017782207157566122879224`40.",
+      "absolute_complex_error": "1.08721885144635958063381091340232527000000000000000114434816374759555011947776152972610293694047671289856342678669279419059133477962622061346570546867139049839340229730722695462206E-50",
+      "relative_complex_error": "3.94670672261555045985794794013394666702973289610642653779638045859113696802431174653880477296872425681326923351291679511759216164243960502931842769221835633627744103815668045170472E-51",
+      "asserted_relative_digits": 35,
+      "passed": true
+    }
+  ],
+  "timing_comparison": {
+    "native_process_seconds": 2.8135892171412706,
+    "original_process_seconds": 175.44714375538751,
+    "original_solve_seconds": 172.519944,
+    "native_phases_seconds": {
+      "automatic_boundary_and_transport": 2.626900237,
+      "top_level_preparation_and_reduction": 0.143486018,
+      "workflow_including_initialization": 2.7753920499999998
+    },
+    "observed_original_over_native_process_ratio": "62.3570572017081664536676273095734223839969233418338496004212995129056619372991112066522368181117160264419889585875265865532228355144688763900567909914089079701534371944217050343784",
+    "native_cpu": 32,
+    "original_cpu": 33,
+    "workers_each": 1,
+    "requested_digits_each": 40,
+    "working_digits_each": 80,
+    "native_order": 160,
+    "original_order": 160,
+    "original_extra_order": 50,
+    "native_extra_order": null,
+    "cache_each": "Fresh isolated symbolic cache; OS filesystem/library page caches uncontrolled."
+  },
+  "limitations": [
+    "Original has a separate50-term ExtraXOrder setting; native has no directly equivalent option. Accuracy agreement is independently checked at35relative digits against40-digit original outputs.",
+    "Native symbolic-epsilon preparation is required at this sample: the first sampled-preparation attempt rejected ambiguous dimensional indicial sectors and is retained separately. Successful process timing excludes that failed0.204s attempt.",
+    "Preparation is included on both sides; native phase split contains full automatic recursive boundaries, reductions and transport, with no manually supplied peel value. Native top basis has3spanning integrals; original has2.",
+    "No additional native higherprecision timing run was added because the independent original comparison passed; existing finite/Laurent refinements remain separate evidence.",
+    "One process on each ofCPU32/33 was used on a shared host. OS page-cache state and other CPUs were uncontrolled; this is a bounded case observation rather than a controlled repeated benchmark.",
+    "Process timing includes executable/kernel initialization and output; original SolveIntegrals timing excludes package startup. The native process linked an alreadycompiled production library, as the original used alreadyinstalledWolfram/Kira/Fermat.",
+    "Both outputs are checked without importing original values as native boundary data.",
+    "The public Laurent accuracy claim remains20digits; the finite sample is independently checked35digits and no inference beyond the original40-digit precision is made."
+  ]
+}

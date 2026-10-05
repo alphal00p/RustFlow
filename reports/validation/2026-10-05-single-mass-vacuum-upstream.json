@@ -1,0 +1,223 @@
+{
+  "schema": 1,
+  "status": "original_amflow_single_mass_finite_sample_passed",
+  "scope": "One exact nonzero epsilon sample for connected three-loop six-line vacuum scalar and raised-mass targets. This independently checks the pinned original automatic SingleMass recursion. Native20-digit full Laurent acceptance is separate.",
+  "family": {
+    "denominators": [
+      "q^2-3",
+      "l^2",
+      "(l-q)^2",
+      "k^2",
+      "(k-q)^2",
+      "(l-k)^2"
+    ],
+    "targets": [
+      [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1
+      ]
+    ],
+    "epsilon": "1/10",
+    "D": "4-2*epsilon",
+    "measure": "product d^D l/(i*pi^(D/2))",
+    "prescription": "+i0",
+    "EulerGamma_normalization": false
+  },
+  "run": {
+    "returncode": 0,
+    "limit_reason": null,
+    "elapsed_seconds": 175.44714375538751,
+    "peak_process_group_rss_bytes": 233897984,
+    "finished_utc": "2026-10-05T01:45:05.384993+00:00",
+    "provenance_sha256": "ff87a35abe4ce0d15f803a4296022bf5ff0987b1b35003dbe57987ec41336003",
+    "kernel_log_sha256": "b70fffda57a59a55d5ccc1026573e86ced88864acde4e593f5c8b81f8dc07e05",
+    "oracle_metadata_sha256": "62fb0bce45bd72e0d6a62c3ebea454f7dc9223e9ba7cf790ba5158c9dc234ea7"
+  },
+  "provenance": {
+    "started_utc": "2026-10-05T01:42:09.920164+00:00",
+    "command": [
+      "taskset",
+      "-c",
+      "33",
+      "/home/ben/.local/bin/bern-wolfram",
+      "-noinit",
+      "-noprompt",
+      "-script",
+      "/common/dev/amflow/target/single-mass-upstream/oracle.wl"
+    ],
+    "upstream_commit": "26005517a288086c4cb4d1b26d829691bc088485",
+    "upstream_source": "/common/dev/amflow/reference",
+    "unchanged_source_hashes": {
+      "AMFlow.m": "76feadd3990586dbba22c96f515328fd79b64d6767ed021f2f80c9e4a2b98184",
+      "diffeq_solver/DESolver.m": "0dfa7f91bd8b8d160412dbc3a8c076413e488745bcefe58bc434999d03f76a46",
+      "ibp_interface/Kira/interface.m": "1c4476b32d8757ee18d6689d5b406bc00a2cfb00ad178926233f1768def7faaa"
+    },
+    "private_configuration": {
+      "path": "/common/dev/amflow/target/single-mass-upstream/upstream/ibp_interface/Kira/install.m",
+      "sha256": "3866f3f76d28317838a94a2db4d4809c5f6a7bf04df2f553272a81eb97692f73"
+    },
+    "kernel_launcher": "/home/ben/.local/bin/bern-wolfram",
+    "kira_version": "Kira version: 3.1 (Git: dad964cd79a39a9fca728bb2606f59537a95109c)\nBuild configuration: plain; non-MPI; 64 bit weights; without jemalloc;\nwithout FireFly",
+    "kira_binary_sha256": "92a2b508088a024f3c59c2fe3a1383dd4ccfee595ecfd3c865ea786efc538c95",
+    "fermat_binary_sha256": "4c4bfdd5f4cd3540c269a696860743af5ec1b37db8bbd26667a253d60b4a1dc7",
+    "files": {
+      "oracle.wl": "b9ef31954653f7e820d570df1b4b921c7b58c5f48430177a05439a76b11e6673",
+      "native-reference.wl": "5f95a5f25dc157d5c35d3e2df712e3f0443d9bc957b2842ee9efa41ceeae3dcb",
+      "run.py": "1f748cc84bc87de2eb63140d36a47e46772388b2549d832a3d1b54b0c345f3c0"
+    },
+    "native_scalar_fixture": {
+      "path": "target/single-mass-peel/peel-80-eps10/stdout.log",
+      "sha256": "6bbc06ffa151e4cff9dac423daf00f3c55042d7916c9f884d3277d525d86e9b8"
+    },
+    "wall_cap_seconds": 600,
+    "address_space_cap_bytes": 17179869184,
+    "process_group_rss_cap_bytes": 17179869184,
+    "cpu": 33,
+    "workers": 1,
+    "profile": {
+      "requested_digits": 40,
+      "working_decimal_digits": 80,
+      "x_order": 160,
+      "extra_x_order": 50,
+      "epsilon": "1/10",
+      "D0": 4,
+      "recursion": "AMF",
+      "ending_schemes": "upstream default ordering",
+      "de_solver": "MMA",
+      "cache": "fresh private"
+    },
+    "normalization": "product d^D l/(i pi^(D/2)); +i0; no e^(EulerGamma epsilon)"
+  },
+  "original_result": {
+    "status": "passed",
+    "requested_digits": 40,
+    "asserted_relative_digits": 35,
+    "exact_epsilon": "1/10",
+    "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+    "config": [
+      "{1/10}",
+      "80",
+      "160",
+      "50",
+      "0"
+    ],
+    "targets": [
+      "j[singlemass, 1, 1, 1, 1, 1, 1]",
+      "j[singlemass, 2, 1, 1, 1, 1, 1]"
+    ],
+    "values": [
+      "27.5474953640801802207199441836569300177822071575661228792237`40.",
+      "-2.7547495364080180220719944183656930017782207157566122879224`40."
+    ],
+    "values_real": [
+      "27.5474953640801802207199441836569300177822071575661228792237`40.",
+      "-2.7547495364080180220719944183656930017782207157566122879224`40."
+    ],
+    "values_imag": [
+      "0",
+      "0"
+    ],
+    "precision_digits": [
+      "40.",
+      "40."
+    ],
+    "accuracy_digits": [
+      "38.55991788134966",
+      "39.55991788134966"
+    ],
+    "absolute_errors": [
+      "1.087218848070514729259155824786762208127998381273792715627771024753`49.596234854086276*^-49",
+      "1.08721884647742281812670354775788181036028657568268816043515223868`49.59623485344993*^-50"
+    ],
+    "relative_errors": [
+      "3.9467067103609160302738424815601039854454822360882129621159375276`49.596234854086276*^-51",
+      "3.9467067045778425055216725807599077676198500495089298082665435561`49.59623485344993*^-51"
+    ],
+    "mass_derivative_error": "1.59309191113245227702888039776771180559110455519261878607`40.46112871820127*^-59",
+    "solve_wall_seconds": 172.519944,
+    "normalization": "d^D l/(i Pi^(D/2)) per loop; D=4-2eps; no exp(EulerGamma eps) factor; +i0",
+    "native_reference_scope": "Existing native80-digit scalar sample; raised reference derived by exact single-mass homogeneity I211111=-eps*I111111 at M^2=3. Native full Laurent route separately checks both targets."
+  },
+  "comparisons_from_serialized_decimal_values": [
+    {
+      "target_index": 0,
+      "native_reference": {
+        "re": "27.547495364080180220719944183656930017782207157566014157338855364041936618920789941597",
+        "im": "1.1969222442224369364136529810195806229076225969042654685854445586256590841157099111734E-80"
+      },
+      "original_stored_value": {
+        "re": "27.5474953640801802207199441836569300177822071575661228792237",
+        "im": "0"
+      },
+      "absolute_complex_difference": "1.08721884844635958063381079210058403000000000000000000000000000658847508375015393005356470004575443451166669303256364324127773142505987401734674428979003949584778956339182610025512E-49",
+      "relative_complex_difference": "3.94670671172526820243076317463799628455833273668632456038740370653057948649006819700396525263884927255392697259343192421599292427504765988855339102776264427821597292610382035470785E-51",
+      "asserted_relative_digits": 35,
+      "passed": true,
+      "native_reference_origin": "Direct native scalar80-digit sample"
+    },
+    {
+      "target_index": 1,
+      "native_reference": {
+        "re": "-2.7547495364080180220719944183656930017782207157566014157338855364041936618920789941597",
+        "im": "-1.1969222442224369364136529810195806229076225969042654685854445586256590841157099111734E-81"
+      },
+      "original_stored_value": {
+        "re": "-2.7547495364080180220719944183656930017782207157566122879224",
+        "im": "0"
+      },
+      "absolute_complex_difference": "1.08721885144635958063381079210058403000000000000000000000000000658847506557035027326824627300812439903108307493138798734609939053403628691975455531065080086302947172725209224769404E-50",
+      "relative_complex_difference": "3.94670672261555045985794749979721319336460584535732086918176085575493485393534139650298731090660552962294456763419336733600559688068687927847412107656160802169796825203741704479069E-51",
+      "asserted_relative_digits": 35,
+      "passed": true,
+      "native_reference_origin": "Exact mass derivative/homogeneity applied to scalar sample; native public Laurent raised target validated separately"
+    }
+  ],
+  "original_single_mass_route": {
+    "globalconfig": {
+      "path": "target/single-mass-upstream/work/cache/singlemass_amflow/2/globalconfig",
+      "sha256": "1f06ad51b5bc81ceac9ddd10446a2283443c9a5e0f9ee6e8ebc738a4b4055442",
+      "wolfram_input_form": "{\"Family\" -> singlemass, \"Loop\" -> {q, l, k}, \"Leg\" -> {}, \n \"Conservation\" -> {}, \"Replacement\" -> {}, \n \"Propagator\" -> {k^2, l^2, (-k + l)^2, -1 + q^2, (-k + q)^2, (-l + q)^2}, \n \"Numeric\" -> {eps -> 1/10}, \"Prescription\" -> {1, 1, 1}}\n"
+    },
+    "preferred": {
+      "path": "target/single-mass-upstream/work/cache/singlemass_amflow/2/preferred",
+      "sha256": "c5faebf26c991f31b251ee04d8e3deee2035c9005795e33c29b1b21e6a6f5b05",
+      "wolfram_input_form": "{{j[singlemass, 0, 1, 1, 1, 1, 0], j[singlemass, 1, 1, 0, 1, 1, 1]}, \n {-((Gamma[3 - 3*eps]*Gamma[-2 + 3*eps])/Gamma[2 - eps]), \n  -((Gamma[2 - 3*eps]*Gamma[-1 + 3*eps])/Gamma[2 - eps])}, \n {j[singlemass, 0, 1, 1, 1, 0], j[singlemass, 1, 1, 0, 1, 1]}, Identity}\n"
+    },
+    "config": {
+      "path": "target/single-mass-upstream/work/cache/singlemass_amflow/2/config",
+      "sha256": "6dd847ecedaa046885593706d0905f8b5ef2add1500927c398ddd7fff0d7b654",
+      "wolfram_input_form": "{\"Family\" -> singlemass, \"Loop\" -> {q, l}, \"Leg\" -> {k}, \n \"Conservation\" -> {}, \"Replacement\" -> {k^2 -> -1}, \n \"Propagator\" -> {-eta + q^2, l^2, l^2 - 2*l*q + q^2, k^2 - 2*k*q + q^2, \n   k^2 - 2*k*l + l^2}, \"Numeric\" -> {}}\n"
+    },
+    "subsystem": {
+      "path": "target/single-mass-upstream/work/cache/singlemass_amflow/2/subsystem",
+      "sha256": "83470459fea97dfcddf79cbc24fd3bad6dd159efd0c73546d2762a1d340132fe",
+      "wolfram_input_form": "{{3}, {6}, {9}}\n"
+    }
+  },
+  "native_laurent_report": {
+    "path": "reports/validation/2026-10-05-single-mass-vacuum-laurent.json",
+    "staged_path": "target/single-mass-laurent/report.json",
+    "sha256": "ae53885e5f4f1f4a32f22256d6a7f8f41bda55fa4c35f898b44f80913db5d617"
+  },
+  "limitations": [
+    "Only one finite epsilon was evaluated by original AMFlow; no original Laurent fit is claimed here.",
+    "Original AMFlow returns40-digit precision metadata. Smaller stored-number differences do not establish more than40 digits; the finite-sample assertion is35digits and the public Laurent claim remains20digits.",
+    "The raised native finite-sample reference uses exact homogeneity at M^2=3, not a second independent native point evaluation; both targets were independently fitted through the native public AMF and FT APIs.",
+    "Original numerical output never supplied a native solver boundary value.",
+    "Original computational source files and Kira adapter match the pinned hashes; only private executable install configuration changed.",
+    "Wall time is recorded with phase/worker/settings and does not support a matched performance comparison.",
+    "The original and native methods implement the same mathematical scheme but use different reducer/DE solver implementations."
+  ]
+}
