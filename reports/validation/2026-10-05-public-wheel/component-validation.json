@@ -1,0 +1,266 @@
+{
+  "scope": "Locally built final db9/c340 wheel using public dependency sources: packaging, installation, native API, generated stubs and notebook/controller checks. Long mathematical acceptance remains separate.",
+  "status": "206 passed; one inherited Symbolica complex-C++ export failure remains",
+  "wheel": {
+    "status": "passed",
+    "wheel": {
+      "path": "/common/dev/amflow/target/publication-wheels-db9-c340/symbolica-3.0.0-cp39-abi3-linux_x86_64.whl",
+      "size_bytes": 146724118,
+      "sha256": "41d18026b02ee755753a846d0a00fe1147934f4b25d137e8557629591da59a80"
+    },
+    "native_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf",
+    "tracked_python_files_byte_equal": 27,
+    "host_commit": "514143641929e821f3a48fd3a819044d59d799c0",
+    "installation": {
+      "status": "passed",
+      "extension_path": "/common/dev/amflow/target/publication-python-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+      "sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf",
+      "evaluator_module": "symbolica.community.hep.integration"
+    }
+  },
+  "compiled_sources": {
+    "metadata_path": "target/publication-native/release/build/symbolica-amflow-da6f89705d0317d8/out/dependency-metadata.json",
+    "metadata_sha256": "ad24153cb725f3e9172f173496b2fb74feb0846ccfb88d973dafac4f42bc80da",
+    "outer_host_features": "default + pyo3/extension-module",
+    "nonroot_path_dependencies": [],
+    "packages": {
+      "symbolica-amflow": {
+        "source": "git+https://github.com/alphal00p/RustFlow?rev=db9cbbafa470b1402d335ad635e608a6b7a03c07#db9cbbafa470b1402d335ad635e608a6b7a03c07",
+        "manifest_path": "/home/ben/.cargo/git/checkouts/rustflow-1d751793f357e4b2/db9cbba/Cargo.toml",
+        "features": [
+          "python"
+        ]
+      },
+      "symbolica": {
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+        "manifest_path": "/home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4/Cargo.toml",
+        "features": [
+          "bincode",
+          "float-mpfr",
+          "integer-gmp",
+          "native_code_generation",
+          "numpy",
+          "pyo3",
+          "pyo3-stub-gen-derive",
+          "python_export",
+          "serde",
+          "tracing_max_level_info"
+        ]
+      },
+      "numerica": {
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+        "manifest_path": "/home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4/lib/numerica/Cargo.toml",
+        "features": [
+          "bincode",
+          "float-mpfr",
+          "integer-gmp",
+          "numpy",
+          "pyo3",
+          "python",
+          "serde"
+        ]
+      },
+      "graphica": {
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+        "manifest_path": "/home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4/lib/graphica/Cargo.toml",
+        "features": []
+      },
+      "feynkit-py": {
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "manifest_path": "/home/ben/.cargo/git/checkouts/gammaloop-7728595a5b8ab3ff/a3d1c8a/crates/feynkit-py/Cargo.toml",
+        "features": [
+          "native",
+          "ufo"
+        ]
+      },
+      "spynso3": {
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "manifest_path": "/home/ben/.cargo/git/checkouts/gammaloop-7728595a5b8ab3ff/a3d1c8a/crates/spynso3/Cargo.toml",
+        "features": [
+          "native"
+        ]
+      },
+      "vakint": {
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=6203c6cbba6ae5e90329ba5081fad55319e678db#6203c6cbba6ae5e90329ba5081fad55319e678db",
+        "manifest_path": "/home/ben/.cargo/git/checkouts/gammaloop-7728595a5b8ab3ff/6203c6c/crates/vakint/Cargo.toml",
+        "features": [
+          "feynkit-ingress",
+          "symbolica_community_module"
+        ]
+      },
+      "rustred": {
+        "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+        "manifest_path": "/home/ben/.cargo/git/checkouts/rustred-971a3b8def498c77/7c1ed03/crates/rustred-core/Cargo.toml",
+        "features": []
+      },
+      "rustred-feynkit": {
+        "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+        "manifest_path": "/home/ben/.cargo/git/checkouts/rustred-971a3b8def498c77/7c1ed03/crates/rustred-feynkit/Cargo.toml",
+        "features": [
+          "campaign-api",
+          "default"
+        ]
+      },
+      "pyo3": {
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "manifest_path": "/home/ben/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/pyo3-0.28.3/Cargo.toml",
+        "features": [
+          "abi3",
+          "abi3-py310",
+          "abi3-py311",
+          "abi3-py312",
+          "abi3-py313",
+          "abi3-py314",
+          "abi3-py39",
+          "anyhow",
+          "default",
+          "extension-module",
+          "eyre",
+          "inventory",
+          "macros",
+          "multiple-pymethods",
+          "num-complex",
+          "py-clone",
+          "pyo3-macros"
+        ]
+      }
+    },
+    "embedded_digests": [
+      "cargo:rustc-env=DEPENDENCY_SOURCE_DIGEST=449621132cbba7ef471ccddf13a4a49664bfabd14a9f5d19b0a7d33388ea7ee5",
+      "cargo:rustc-env=RUSTRED_SOURCE_DIGEST=90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+      "cargo:rustc-env=PORT_SOURCE_DIGEST=17e6f414b8311e19e62761e8ee33548d0016fa34acf6a75c35b8ee9089c4365e"
+    ]
+  },
+  "runtime_attestation": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "5e8319c74a327e09349d7626d629c77d8a39d625e0503267e5ebfbb0994039cf"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/amflow/target/publication-python-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+      "size_bytes": 393671056,
+      "sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 32019,
+        "sha256": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_support.py",
+        "size_bytes": 20678,
+        "sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25"
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
+        "size_bytes": 11597,
+        "sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/publication-python-venv/bin/python"
+    }
+  },
+  "checks": {
+    "native-python": {
+      "tests": 21,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_path": "reports/validation/2026-10-05-public-wheel/publication-final-native-python-tests.xml",
+      "xml_sha256": "fb713d6c676989fee0c992cb4208aa96678d2e5e702a9c73336c2fe7e99af092",
+      "failing_tests": []
+    },
+    "upstream-python": {
+      "tests": 113,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "xml_path": "reports/validation/2026-10-05-public-wheel/publication-final-upstream-python-tests.xml",
+      "xml_sha256": "a5859cb3ced0f08d80544af69374a732462e61241629ca48ab331b57aa0725e3",
+      "failing_tests": [
+        "tests.test_spenso_and_idenso.TestTensorEvaluation::test_tensor_compilation"
+      ]
+    },
+    "controller": {
+      "tests": 67,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_path": "reports/validation/2026-10-05-public-wheel/publication-final-controller-tests.xml",
+      "xml_sha256": "647d8777301f8ec33a8e34425dff925722ffef15033ebd2a3c62f271a6de9633",
+      "failing_tests": []
+    },
+    "stub": {
+      "tests": 6,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "xml_path": "reports/validation/2026-10-05-public-wheel/publication-final-stub-tests.xml",
+      "xml_sha256": "b1604a4e55a60d5fa872ce9aeaac02fd0f0ab5b607e51b19d00f773628864b2a",
+      "failing_tests": []
+    }
+  },
+  "typing": "All five API fixtures and three controller/acceptance sources pass; core stub check passes.",
+  "known_upstream_failure": {
+    "test": "tests/test_spenso_and_idenso.py::TestTensorEvaluation::test_tensor_compilation",
+    "fix_pr": "https://github.com/symbolica-dev/symbolica/pull/51",
+    "reproducer": "tools/mre/symbolica-complex-cpp/reproduce.py",
+    "scope": "The MPFR integration solver and native Higgs-jet amplitude do not use C++ evaluator export. No test was skipped or weakened."
+  },
+  "pending": [
+    "Independent native Euclidean20 anchor run",
+    "Full16 physical run with anchor-report, forced40-digit cancellation/resume, numerical refinement and nearby cache reuse"
+  ],
+  "stub_regeneration": {
+    "scope": "Actual final public db9/Cargo.lock stub generation; installed extension and numerical runtime not modified.",
+    "command": "RUSTFLOW_WORKSPACE_FEATURES=python_stubgen RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES=1 cargo run --release --locked --no-default-features --features python_stubgen --bin stub_gen -- --hepkit-only",
+    "completed_ns": 1791233625309338322,
+    "elapsed_ns": 509223721730,
+    "tracked_python_files": 26,
+    "changed_python_files": {},
+    "cargo_manifest_unchanged": true,
+    "cargo_lock_unchanged": true,
+    "after_sha256": {
+      "python/symbolica/__init__.py": "1fa8e2d52346d4280a99e65c928516055c2133848a8fe7465cc9dcb0a892a610",
+      "python/symbolica/community/__init__.py": "f48a3f77d26c891c80261a80b4bef5e87119e05b70fff22ba7ebd48a62c9a972",
+      "python/symbolica/community/__init__.pyi": "da53a064448b34b28ed82aefdbb3769ef0cb24b69cbf71531e10bc97af7b3075",
+      "python/symbolica/community/hep/__init__.py": "ea5dbaf8f23f8c4ab758e0c245679c77e041f15cbec860de8ce4e0e02319b30d",
+      "python/symbolica/community/hep/__init__.pyi": "4b319c17497e5eaaf3bede5f4f83f5101bf9fc79b551f025f211abb8e2c66cbe",
+      "python/symbolica/community/hep/integration/__init__.py": "6679687531f751cd98ba56697086d198ea747fda1e67368a389178edf3c037cd",
+      "python/symbolica/community/hep/integration/__init__.pyi": "2120a4efb0fa55a43c8aaf02bde51b9a0dfb1e70f89bc416dbf0b753f76a7d46",
+      "python/symbolica/community/hepkit/__init__.py": "9e16a1599d1f10f3da5ebe088635bd1a595e2e49681b9edd1d176e67e252df33",
+      "python/symbolica/community/hepkit/__init__.pyi": "0c1d851417ea167e3c2b602630fbb97f1bb59c00bf8cab6ceb12b7e8a30addb4",
+      "python/symbolica/community/hepkit/ibp/__init__.py": "23a6108031794c9593b3c9f8f76322c48edb9275de78457bded49397d9bb9545",
+      "python/symbolica/community/hepkit/ibp/__init__.pyi": "83ba813e4aa7798e2a7bf4503d4c79490899583fc1a56b7748a305a18f350ce3",
+      "python/symbolica/community/hepkit/integration/__init__.py": "38436d3cf08a3357686791fa0d182e316e124bfa32bef6f92f757e0be66f7d0d",
+      "python/symbolica/community/hepkit/integration/__init__.pyi": "8a67bf78df5f262eb7a2fc1e6628fa0d36cfdceaee8ce2076db97aaa8f0beaaf",
+      "python/symbolica/community/hepkit/oneloop/__init__.py": "8e56fe7cf39b2e4d272f91a4311b2f3e56dab7b0ec8875a6612fb66fd95d2d7c",
+      "python/symbolica/community/hepkit/oneloop/__init__.pyi": "d205186fcf18f46b6b05f2e005ce5b0c4cdb816055ead4ae821b3d1e43c6f9a2",
+      "python/symbolica/community/hepkit/rustred/__init__.py": "1ea05ba73003c9e8047b7033a7b68e60ae4a72d6b3c7a49656784b5676672d93",
+      "python/symbolica/community/hepkit/rustred/__init__.pyi": "2e692cee7283cc8b12bf8c74781c73c5ac56bc9cd87b5cb521a53bee9cb3469e",
+      "python/symbolica/community/hepkit/vakint/__init__.py": "8e74f5ddd324158fe59c4e0ab7adf3be4de1eb9164ee5e3e40ca4881a46d4a1f",
+      "python/symbolica/community/hepkit/vakint/__init__.pyi": "732c5055ba94d63300c6aa27eedc03459ab388714309b299d15b9e0cb598b097",
+      "python/symbolica/community/spenso/__init__.py": "0b8729378cb458101eb7907ab0778f9a2f96f95dcd5a12f91fe0275813ccc2b1",
+      "python/symbolica/community/spenso/__init__.pyi": "0b8729378cb458101eb7907ab0778f9a2f96f95dcd5a12f91fe0275813ccc2b1",
+      "python/symbolica/community/tensor/__init__.py": "6d5a13a7f435a9e05eb571bf0134d6433fa79db0a3b484bcbde6a14b78abe4a6",
+      "python/symbolica/community/tensor/__init__.pyi": "a2f9cf12d6fc3f18b498f228bd118b2a5e7173e5d1d0c439ba5b50af0d9025f4",
+      "python/symbolica/community/vakint/__init__.py": "8258f6eccccd1163cea935262a1dd7b24ad72cfcf44befe44b6912ea60b015ba",
+      "python/symbolica/community/vakint/__init__.pyi": "8258f6eccccd1163cea935262a1dd7b24ad72cfcf44befe44b6912ea60b015ba",
+      "python/symbolica/core.pyi": "ce2165be66e1ae5604e22759412dc5165efcaeadf1910416917cef9e2e9bf7d0"
+    },
+    "log": "/common/dev/amflow/target/publication-final-stub-regeneration.log",
+    "exit_code": 0,
+    "status": "passed_byte_identical",
+    "cargo_reported_build_duration": "8m07s",
+    "followup_tests": "Not rerun: all26tracked Python/stub outputs are byte-identical to the validated wheel files."
+  },
+  "source_commits": {
+    "wheel_host": "514143641929e821f3a48fd3a819044d59d799c0",
+    "steering_host": "73db70123f4a1f9ad947b043fef715fe7fd095b9",
+    "core": "db9cbbafa470b1402d335ad635e608a6b7a03c07"
+  }
+}
