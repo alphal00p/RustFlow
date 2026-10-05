@@ -1,0 +1,107 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "scope": "Runtime launcher, process argument and thread controls only; no new numerical accuracy or timing claim. Original upstream algorithms and generated AMFlow solver scripts are unchanged.",
+  "source_files": {
+    "scripts/wolfram_one_thread.py": "6551142d15c38061fd17f7d97d67d8386f63fe7cb95989a912260c13f2e9443b",
+    "scripts/wolfram_one_thread.wl": "12b870d2278f8c417917a05dff3e7aa18fd888a0ac73633f962b300d24504318",
+    "scripts/test_wolfram_one_thread.py": "c3a80784c48aa5ee32e25cad744a893b653fb8e1d4f6b122bca3553a4a9e03f8",
+    "scripts/upstream_oracle.py": "bc1dbe28bd06fa3fe8134a52c1685e15f59336442df56e301814549c7850430f",
+    "scripts/upstream_oracle.wl": "c7c4c33e976c4d068164c874bedda76c0bee42636649e9a39cc566e47638efa2"
+  },
+  "license_free_checks": {
+    "count": 5,
+    "command": "python3 scripts/test_wolfram_one_thread.py -v",
+    "log_sha256": "311dbdaf793bcec43121917fc01a1acc4e566f06081fdcf1d694e7b97f819a56",
+    "log": "test_child_invocation_replaces_only_its_own_script_environment (__main__.LauncherTests.test_child_invocation_replaces_only_its_own_script_environment) ... ok\ntest_flags_script_arguments_and_exact_filenames_are_preserved (__main__.LauncherTests.test_flags_script_arguments_and_exact_filenames_are_preserved) ... ok\ntest_licensed_launcher_symlink_identity_is_preserved (__main__.LauncherTests.test_licensed_launcher_symlink_identity_is_preserved) ... ok\ntest_missing_script_kernel_and_recursive_wrapper_are_rejected (__main__.LauncherTests.test_missing_script_kernel_and_recursive_wrapper_are_rejected) ... ok\ntest_nonexecutable_kernel_is_rejected_before_exec (__main__.LauncherTests.test_nonexecutable_kernel_is_rejected_before_exec) ... ok\n\n----------------------------------------------------------------------\nRan 5 tests in 0.008s\n\nOK\n"
+  },
+  "licensed_parent_child_smoke": {
+    "returncode": 0,
+    "limit_reason": null,
+    "elapsed_seconds": 3.3221172471530735,
+    "peak_polled_descendant_rss_bytes": 323469312,
+    "finished_utc": "2026-10-05T02:42:41.649785+00:00",
+    "provenance_sha256": "871ed8c44dbea23f5d9c2a47c3f5736183a1dfc3c56c4bae1e463a743533d8e2",
+    "kernel_log_sha256": "154c313c2a8e3ab75251904fb2e59adc55f300a44840ef7aa5f67cd67b7e9c20",
+    "parent": {
+      "passed": true,
+      "wolfram_version": "15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+      "input_file": "/common/dev/amflow/target/wolfram-thread-launcher/smoke/parent.wl",
+      "script_command_line": [
+        "/common/dev/amflow/target/wolfram-thread-launcher/smoke/parent.wl",
+        "parent with spaces",
+        "parent-\u03bb"
+      ],
+      "thread_options": "{\"AbortPause\" -> 2., \"BusyWait\" -> 0.01, \"MathLinkTimeout\" -> 15., \"MKLThreadNumber\" -> 1, \"ParallelThreadNumber\" -> 1, \"RecoveryMode\" -> \"ReQueue\", \"RelaunchFailedKernels\" -> False, \"VectorParallelLengthThresholds\" -> {32768, 8192, 8192, 8192}, \"VectorVendorLengthThresholds\" -> {128, 32, 32}}",
+      "child_process": {
+        "ExitCode": 0,
+        "StandardOutput": "\"RUSTFLOW THREAD CONFIGURATION: \"InputForm[{\"AbortPause\" -> 2., \"BusyWait\" -> 0.01, \"MathLinkTimeout\" -> 15., \"MKLThreadNumber\" -> 1, \"ParallelThreadNumber\" -> 1, \"RecoveryMode\" -> \"ReQueue\", \"RelaunchFailedKernels\" -> False, \"VectorParallelLengthThresholds\" -> {32768, 8192, 8192, 8192}, \"VectorVendorLengthThresholds\" -> {128, 32, 32}}]\n",
+        "StandardError": ""
+      }
+    },
+    "parent_sha256": "ca775d93a74aa43a24848c13525f0dbab0686c10bcd1c817d13bed085f6c0b29",
+    "child": {
+      "passed": true,
+      "input_file": "/common/dev/amflow/target/wolfram-thread-launcher/smoke/child.wl",
+      "script_command_line": [
+        "/common/dev/amflow/target/wolfram-thread-launcher/smoke/child.wl",
+        "child with spaces",
+        "literal$(not-executed)",
+        "\"quoted\"",
+        "\u03bb"
+      ],
+      "thread_options": "{\"AbortPause\" -> 2., \"BusyWait\" -> 0.01, \"MathLinkTimeout\" -> 15., \"MKLThreadNumber\" -> 1, \"ParallelThreadNumber\" -> 1, \"RecoveryMode\" -> \"ReQueue\", \"RelaunchFailedKernels\" -> False, \"VectorParallelLengthThresholds\" -> {32768, 8192, 8192, 8192}, \"VectorVendorLengthThresholds\" -> {128, 32, 32}}"
+    },
+    "child_sha256": "feca1b36c83d63a19112fc492b9a2abab53ddb2e3fe54f606a17362ece817492"
+  },
+  "licensed_smoke_provenance": {
+    "started_utc": "2026-10-05T02:42:38.327223+00:00",
+    "command": [
+      "taskset",
+      "-c",
+      "32",
+      "/common/dev/amflow/target/wolfram-thread-launcher/scripts/wolfram_one_thread.py",
+      "-noinit",
+      "-noprompt",
+      "-script",
+      "/common/dev/amflow/target/wolfram-thread-launcher/smoke/parent.wl",
+      "parent with spaces",
+      "parent-\u03bb"
+    ],
+    "wall_cap_seconds": 60,
+    "per_process_address_space_limit_bytes": 17179869184,
+    "aggregate_rss_policy": "Polled descendants; not a kernel-enforced aggregate cap",
+    "files": {
+      "/common/dev/amflow/target/wolfram-thread-launcher/scripts/wolfram_one_thread.py": "6551142d15c38061fd17f7d97d67d8386f63fe7cb95989a912260c13f2e9443b",
+      "/common/dev/amflow/target/wolfram-thread-launcher/scripts/wolfram_one_thread.wl": "12b870d2278f8c417917a05dff3e7aa18fd888a0ac73633f962b300d24504318",
+      "/common/dev/amflow/target/wolfram-thread-launcher/smoke/parent.wl": "ea489084633ca4e328f6d0570868e4cb24920441516d5aa44152f6c8698f64bc",
+      "/common/dev/amflow/target/wolfram-thread-launcher/smoke/child.wl": "f3738ceea7e3437cd02b96df554a8872fb94b06c6d26add9fc24a3f7dc27ae8a",
+      "/common/dev/amflow/target/wolfram-thread-launcher/smoke/run.py": "fed97ce133e7b4c14d3408eb5a1077ba86eb08596af6bf5a67893d4a877bd39e"
+    }
+  },
+  "historical_thread_configuration_proof": {
+    "settings": {
+      "before": "{\"ParallelOptions\" -> {\"AbortPause\" -> 2., \"BusyWait\" -> 0.01, \"MathLinkTimeout\" -> 15., \"MKLThreadNumber\" -> 1, \"ParallelThreadNumber\" -> 384, \"RecoveryMode\" -> \"ReQueue\", \"RelaunchFailedKernels\" -> False, \"VectorParallelLengthThresholds\" -> {32768, 8192, 8192, 8192}, \"VectorVendorLengthThresholds\" -> {128, 32, 32}}}",
+      "after": "{\"ParallelOptions\" -> {\"AbortPause\" -> 2., \"BusyWait\" -> 0.01, \"MathLinkTimeout\" -> 15., \"MKLThreadNumber\" -> 1, \"ParallelThreadNumber\" -> 1, \"RecoveryMode\" -> \"ReQueue\", \"RelaunchFailedKernels\" -> False, \"VectorParallelLengthThresholds\" -> {32768, 8192, 8192, 8192}, \"VectorVendorLengthThresholds\" -> {128, 32, 32}}}",
+      "processor_count": 1,
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1"
+    },
+    "probe_result": {
+      "returncode": 0,
+      "limit_reason": null,
+      "elapsed_seconds": 17.76375564187765,
+      "kernel_log_sha256": "bc269face635dbf09cd1570cc6f154f2cee9e791614276fcbeba0433426ea47a",
+      "provenance_sha256": "f3367bb0d5cc08668ba240c9862114caa76dfaded72101ec977d2af61464292e",
+      "solution_sha256": "0117663968aad17b08094945cecc12bd0c159df6ba658334d12fd3a763ee5cad"
+    },
+    "prior_failed_report_sha256": "d8fbe01f1989c77f9aba17239850661b0838215ad777af37c4ce5bc3041f4268"
+  },
+  "interpretation": [
+    "The private first paper attempt had ParallelThreadNumber384 despite external environment limits and oneCPU; its solver child failed OpenMP thread allocation.",
+    "The reusable wrapper applies and asserts ParallelThreadNumber1 and MKLThreadNumber1 to each loaded original script, and the upstream oracle explicitly routes AMFlow child launches through it.",
+    "Arguments pass through execv without shell parsing; original $InputFileName and $ScriptCommandLine are preserved, while $CommandLine names the runtime loader.",
+    "The smoke checks parent and child simultaneously and checks exit statuses explicitly. General Wolfram messages or syntax errors are not promoted into stronger exit-status guarantees by the wrapper.",
+    "Earlier timings retain their actual private-launcher provenance; this reusable wrapper is not retroactively attributed to them."
+  ]
+}

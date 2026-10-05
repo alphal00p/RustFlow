@@ -42,11 +42,47 @@ are documented separately in [coverage](coverage.md).
 
 ## Reproduction
 
-Use an already licensed kernel launcher that also configures its child kernels.
+Use an already licensed kernel launcher that also configures licensing for its child kernels.
 On this host the launcher is `/home/ben/.local/bin/bern-wolfram`. AMFlow uses one
 worker, but the parent and a sequential solver kernel may hold licenses at the
 same time. Blade is a separate package; the bundled Kira adapter requires neither
 Blade nor LiteRed. Its derivative helpers are included in the pinned source.
+
+The runner copies `scripts/wolfram_one_thread.py` and its `.wl` loader into the
+fresh output directory. The loader applies and checks Wolfram's
+`ParallelThreadNumber = 1` and `MKLThreadNumber = 1` before loading each original
+script. The oracle configures AMFlow's child launcher to use that same wrapper.
+This changes runtime thread settings only; it leaves the original computational
+files and generated solver scripts intact. Launcher and loader hashes are
+recorded in `runner-metadata.json`, and every kernel logs its effective settings.
+
+These explicit settings matter on this host: a paper-example solver child still
+reported `ParallelThreadNumber = 384` despite one CPU, one AMFlow worker, and
+`OMP_NUM_THREADS = MKL_NUM_THREADS = 1`, then failed to allocate OpenMP threads.
+The same original child script completed after applying the runtime settings.
+Wolfram documents the control in its
+[parallel compilation tutorial](https://reference.wolfram.com/language/Compile/tutorial/Parallel.html.en).
+The wrapper does not install a runtime, alter licenses, impose memory limits,
+or create an additional numerical worker. Numerical and exit-status checks remain
+the responsibility of each oracle; the launcher does not turn every Wolfram
+message or script syntax error into a nonzero exit code.
+
+The wrapper can also launch other optional oracle scripts:
+
+```sh
+RUSTFLOW_WOLFRAM_KERNEL=/path/to/licensed-launcher \
+  python scripts/wolfram_one_thread.py -noinit -noprompt \
+  -script path/to/oracle.wl 'an argument with spaces'
+```
+
+Kernel flags and trailing script arguments are forwarded without shell parsing.
+The original script sees its own `$InputFileName` and `$ScriptCommandLine`;
+`$CommandLine` still identifies the runtime loader. Child kernels use these
+controls only when the caller configures their launcher, as `upstream_oracle.wl`
+does. No historical timing is retroactively attributed to this new wrapper.
+The argument-handling checks run without Wolfram: `python scripts/test_wolfram_one_thread.py`.
+A [licensed parent/child smoke check](../reports/validation/2026-10-05-wolfram-runtime-launcher.json)
+also passed on2026-10-05, including spaces, quotes and Unicode arguments.
 
 The runner verifies the hashes of `AMFlow.m`, `DESolver.m` and the Kira adapter,
 copies the upstream tree into a new output directory, and changes only

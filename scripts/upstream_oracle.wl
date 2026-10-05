@@ -23,6 +23,11 @@ CheckAbort[
   (* Initial FiniteFlow dependency checks only print status. The Kira adapter
      selected immediately below needs neither FiniteFlow nor LiteRed. *)
   Get[FileNameJoin[{root, "AMFlow.m"}]];
+  (* Runtime launcher configuration; generated solver scripts stay unchanged. *)
+  controlledKernel = Environment["AMFLOW_CONTROLLED_KERNEL"];
+  assert[StringQ[controlledKernel] && FileExistsQ[controlledKernel],
+    "Missing one-thread child kernel launcher."];
+  AMFlow`Private`$WolframPath = controlledKernel;
   AMFlow`SetReductionOptions["IBPReducer" -> "Kira"];
   AMFlow`SetAMFOptions["UseCache" -> False, "DESolver" -> "MMA",
     "RecursionMode" -> "AMF", "D0" -> 4,

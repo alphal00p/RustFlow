@@ -3,6 +3,7 @@
 
 No runtime/reducer installation or license configuration is performed. The
 kernel executable must already work, including its spawned child kernels.
+The private runtime wrapper explicitly limits both Wolfram thread pools to one.
 """
 
 import argparse
@@ -94,9 +95,16 @@ def main():
     driver = output / "oracle.wl"
     shutil.copyfile(Path(__file__).with_suffix(".wl"), driver)
     shutil.copyfile(Path(__file__), output / "runner.py")
+    thread_launcher = output / "wolfram_one_thread.py"
+    thread_loader = output / "wolfram_one_thread.wl"
+    for destination in [thread_launcher, thread_loader]:
+        shutil.copyfile(Path(__file__).with_name(destination.name), destination)
+    thread_launcher.chmod(0o755)
     env = dict(os.environ)
     env.update(
         AMFLOW_ROOT=str(upstream),
+        AMFLOW_CONTROLLED_KERNEL=str(thread_launcher),
+        RUSTFLOW_WOLFRAM_KERNEL=str(args.kernel),
         AMFLOW_ORACLE_WORKDIR=str(work),
         AMFLOW_ORACLE_CASE=args.case,
         AMFLOW_ORACLE_MODE=args.mode,
@@ -111,7 +119,7 @@ def main():
         [str(args.kira), "-v"], cwd=output, env=env, text=True,
         capture_output=True, timeout=15, check=True,
     ).stdout
-    command = [str(args.kernel), "-noinit", "-noprompt", "-script", str(driver)]
+    command = [str(thread_launcher), "-noinit", "-noprompt", "-script", str(driver)]
     metadata = {
         "upstream_commit": COMMIT,
         "upstream_source": str(args.upstream.absolute()),
@@ -121,6 +129,14 @@ def main():
         "driver_sha256": sha256(driver),
         "runner_sha256": sha256(Path(__file__)),
         "kernel_command": command,
+        "licensed_kernel_launcher": str(args.kernel),
+        "runtime_thread_controls": {
+            "ParallelThreadNumber": 1,
+            "MKLThreadNumber": 1,
+            "scope": "Parent and AMFlow-generated Wolfram child scripts",
+            "launcher_sha256": sha256(thread_launcher),
+            "loader_sha256": sha256(thread_loader),
+        },
         "kira_executable": str(args.kira),
         "kira_version": version.strip(),
         "fermat_executable": str(args.fermat),
