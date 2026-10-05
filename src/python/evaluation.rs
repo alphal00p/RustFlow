@@ -315,7 +315,7 @@ impl PyIntegralEvaluator {
         max_partial_fraction_states: usize,
         control: Option<&PyComputationControl>,
     ) -> PyResult<PyLaurentExpansion> {
-        let diagram = diagram.as_diagram()?.clone();
+        let diagram = diagram.as_shared_diagram()?.clone();
         let kinematics = kinematics.as_kinematics().clone();
         let point = super::point(point);
         let epsilon = symbol(&epsilon)?;

@@ -2093,7 +2093,7 @@ mod tests {
             .unwrap();
         assert_eq!(actual.len(), 5);
         for target in targets {
-            let terms = actual[&target]
+            let terms: BTreeMap<_, _> = actual[&target]
                 .iter()
                 .map(|(i, c)| (i.clone(), coefficient_atom(c)))
                 .collect();

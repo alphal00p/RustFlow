@@ -1,111 +1,119 @@
 # Building the community extension from published inputs
 
-This setup consumes RustFlow from the community manifest's published Git pin
-and reconstructs the required HEPKit changes from public sources. Activate the
-community repository's native Rust/Python build toolchain; the setup snippets
-use Python 3.11 or newer. Run them from a fresh community integration checkout,
-using a new directory for the build inputs. No particular sibling layout is
-required.
+Use a community checkout whose `Cargo.toml` and `Cargo.lock` contain the public
+integration dependencies below. Those files select the RustFlow revision;
+keep them together when rebuilding or sharing an environment. Activate the
+community repository's native Rust/Python build environment and run these
+commands from its root. Python 3.11 or newer is suitable for the setup and
+notebook tools.
 
-The runtime pin is `4c48358185ec68de86f6acc6b195a201adbe2bae`. The extra RustFlow
-checkout below supplies patch files and the Cargo configuration template; Cargo
-loads the runtime itself from the community host's Git dependency. The locked
-RustRed revision is `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`.
+Normal builds fetch the required native owners directly from public Git pins.
+They require no sibling checkout, private owner commit, patch application, or
+machine-local Cargo source configuration.
 
-```sh
-integration_deps="$PWD/../loop-integration-dependencies"
-mkdir -p "$integration_deps"
-integration_deps=$(cd "$integration_deps" && pwd)
+| Component | Published source selected by the manifest and lock |
+| --- | --- |
+| RustFlow | The community manifest's `symbolica-amflow` Git revision and matching lock entry |
+| HEPKit, Linnet, Spenso, Idenso and native rendering | [ValentinHirschi/gammaloop `a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`](https://github.com/ValentinHirschi/gammaloop/commit/a3d1c8a867ac0e89d8f58f9722cf9a7e83338901) |
+| Vakint | [Separate revision `6203c6cbba6ae5e90329ba5081fad55319e678db`](https://github.com/ValentinHirschi/gammaloop/commit/6203c6cbba6ae5e90329ba5081fad55319e678db), based on upstream `8d6c8f7b14f2438126819328e20a10e6caf9e0b7` |
+| Symbolica, Numerica and Graphica | [Official community revision `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`](https://github.com/symbolica-dev/symbolica/commit/c3408e4ba1d3bdd4ea55678fad50e27009be13d4) |
+| RustRed | [Official main revision `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`](https://github.com/alphal00p/rustred/commit/7c1ed03722b8c05daf60c89ba4ecc79457ed2ada) |
 
-git clone https://github.com/alphal00p/RustFlow "$integration_deps/RustFlow-inputs"
-git -C "$integration_deps/RustFlow-inputs" checkout --detach 4c48358185ec68de86f6acc6b195a201adbe2bae
-git clone https://github.com/alphal00p/gammaloop "$integration_deps/HEPKit"
-git -C "$integration_deps/HEPKit" checkout --detach 9d086cec7971005ec7244b43e8fcea2a403c18ef
+The Cargo package for RustRed's core is `rustred`. Its experimental
+`reconstruction` feature stays disabled. The community bridge retains
+`campaign-api` and uses the same RustRed source as Vakint and RustFlow.
 
-for patch in \
-    hepkit-literal-substitution.patch \
-    hepkit-isotropic-rank32.patch \
-    hepkit-parameter-registration.patch \
-    hepkit-linnet-strongly-connected.patch \
-    hepkit-python-borrow-access.patch \
-    hepkit-exact-parameters.patch
-do
-    patch_file="$integration_deps/RustFlow-inputs/scripts/patches/$patch"
-    git -C "$integration_deps/HEPKit" apply --check "$patch_file" || exit
-    git -C "$integration_deps/HEPKit" apply "$patch_file" || exit
-done
-```
+The native owner revision is based on upstream HEPKit `6c707c6b77a437256eb1180da13d4d327b371d13`.
+The manifests contain the complete 22-package patch table from the original
+GammaLoop source to that public fork revision. The community host also declares
+FeynKit's Python bindings and Spynso3 directly at that revision. Its lean Typst
+library and SVG crates use the same pin. Vakint retains its separate revision;
+its dependency alignment does not replace its implementation with the HEPKit
+checkout's Vakint crate.
 
-Use a separate Cargo configuration for this build. The full patch table keeps
-FeynKit, Linnet, Spenso, Idenso and their companion crates on one native owner.
-The script generates that table from the published template, quoting the chosen
-paths. It creates no RustFlow or Symbolica source override.
+## Native installation
+
+Provide `SYMBOLICA_LICENSE` through your environment when required. Keep license
+material outside the checkout. With `maturin` and `pytest` available in the
+activated Python environment:
 
 ```sh
-export CARGO_HOME="$integration_deps/cargo-home"
-mkdir -p "$CARGO_HOME"
-python3 - "$integration_deps/RustFlow-inputs" "$integration_deps/HEPKit" "$CARGO_HOME/config.toml" <<'PY'
-import json
-import pathlib
-import sys
-import tomllib
-
-inputs, owner, destination = map(pathlib.Path, sys.argv[1:])
-template = tomllib.loads((inputs / ".cargo/config.example.toml").read_text())
-source = "https://github.com/alphal00p/gammaloop"
-lines = [f"[patch.{json.dumps(source)}]"]
-for name, entry in template["patch"][source].items():
-    path = entry["path"].replace("/path/to/patched-hepkit", str(owner.resolve()))
-    lines.append(f"{name} = {{ path = {json.dumps(path)} }}")
-with destination.open("x") as output:
-    output.write("\n".join(lines) + "\n")
-PY
+cargo fetch --locked
+python .github/scripts/check_integration_package.py
+RUSTFLOW_WORKSPACE_FEATURES='' RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES=0 \
+  maturin develop --release --locked --extras notebook-display
+python -m pytest -q tests/test_loop_integration.py tests/test_loop_integration_reductions.py
 ```
 
-The checked-in community lock records the development path entry for RustFlow.
-Resolve once without `--locked` to replace it with the published Git source;
-subsequent operations use the resulting lock. This requires neither a local
-RustFlow runtime override nor access to an unpublished owner commit.
+The package check inspects the active native, stub-generation and browser
+dependency graphs. It checks shared native owners and browser exclusions; it
+does not execute a numerical acceptance calculation. Preserve the host's tracked
+`.cargo/config.toml`, which declares `RUSTFLOW_WORKSPACE_MANIFEST` for the build
+fingerprint. A published build should resolve RustFlow from its declared Git
+revision, without a development path override in the checkout or `CARGO_HOME`.
+
+The tracked Python stubs can be regenerated from the same dependency graph:
 
 ```sh
-cargo metadata --format-version 1 > "$integration_deps/resolved-graph.json"
-cargo metadata --locked --offline --format-version 1 > "$integration_deps/locked-graph.json"
-python3 - "$integration_deps/locked-graph.json" <<'PY'
-import json
-import sys
-
-metadata = json.load(open(sys.argv[1]))
-active = {node["id"] for node in metadata["resolve"]["nodes"]}
-for name, revision in [
-    ("symbolica-amflow", "4c48358185ec68de86f6acc6b195a201adbe2bae"),
-    ("rustred-core", "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"),
-    ("symbolica", "c3408e4ba1d3bdd4ea55678fad50e27009be13d4"),
-    ("numerica", "c3408e4ba1d3bdd4ea55678fad50e27009be13d4"),
-    ("graphica", "c3408e4ba1d3bdd4ea55678fad50e27009be13d4"),
-]:
-    matches = [p for p in metadata["packages"] if p["name"] == name and p["id"] in active]
-    assert len(matches) == 1, (name, "expected one owner")
-    source = matches[0]["source"]
-    assert source and source.endswith("#" + revision), (name, source)
-    print(name, source)
-PY
+RUSTFLOW_WORKSPACE_FEATURES=python_stubgen RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES=1 \
+  cargo run --release --locked --no-default-features --features python_stubgen \
+  --bin stub_gen -- --hepkit-only
 ```
 
-With the community Python environment activated, build with
-`maturin develop --release --locked`, then run the installed integration tests.
-The host's tracked `.cargo/config.toml` already declares
-`RUSTFLOW_WORKSPACE_MANIFEST`; preserve it so the shared extension fingerprints
-the actual resolved graph. Keep the generated Cargo configuration and lock
-with this build environment for later rebuilds and cache restarts.
+These host features matter to the source fingerprint. See
+[dependency embedding](dependency-embedding.md) for custom hosts and optional
+standalone development overrides. Ordinary library builds keep Python disabled.
 
-On 2026-10-05, all six patches above were applied from published RustFlow
-`6e86afd` to a disposable archive of public HEPKit `9d086ce`. All twelve affected
-files matched the validated local owner `fc9ee6aa5` byte for byte. This verifies
-the public patch reconstruction; a full clean-machine native build remains a
-separate validation step. The local audit is recorded in
-`target/published-hepkit-patch-audit.json`.
+## Notebook and acceptance
 
-The HEPKit patch files remain required until those owner changes are available
-upstream. Symbolica uses its official fixed community revision. Source-sensitive
-cache keys include the resolved graph and configuration, so caches from another
-development graph retain separate provenance.
+The notebook is `examples/hep/gg_hg.py` in the community repository. Install
+Marimo in the same Python environment and launch it from that checkout:
+
+```sh
+python -m pip install 'marimo>=0.24.2,<0.25'
+marimo edit examples/hep/gg_hg.py
+```
+
+The `notebook-display` extra above provides the native display widget. Routine
+controller and notebook tests are separate from the long calculation:
+
+```sh
+python -m pytest -q tests/test_hep_gg_hg.py tests/test_hep_gg_hg_anchors.py tests/test_hep_notebooks.py -k gg_hg
+python examples/hep/gg_hg_anchor_acceptance.py --directory /path/to/new/anchor-bank \
+  --workers 4
+python examples/hep/gg_hg_acceptance.py --directory /path/to/new/acceptance-bank \
+  --anchor-report /path/to/new/anchor-bank/anchor-acceptance.json \
+  --workers 4 --boundary-workers 1 --seed-digits 30 --interrupt-after-samples 1
+```
+
+Use a new output directory for each cold run. The anchor runner independently
+generates the planar and nonplanar Euclidean boundaries before opening either
+comparison fixture. Its report checks all 545 coefficients against their
+recorded reference uncertainties. The full runner verifies that the supplied
+anchor report matches the installed extension and steering sources before
+starting the physical calculation. Keep that environment frozen between runs.
+
+The long acceptance checks native
+boundary generation, all 4,360 reference transport coefficients, form factors,
+coherent observables, independent refinement, and cache restart. The optional
+interruption occurs during the later forced refinement stage, preserving a
+complete cold-stage timing. Worker settings are resource choices; they do not
+change the requested accuracy.
+
+Freeze the installed extension and steering sources during a run. The acceptance
+report records their hashes and the native source-sensitive identity. A new
+dependency graph produces a new cache identity, so earlier caches and numerical
+reports keep their original provenance. The commands above describe the required
+validation; availability of public dependencies and successful component tests
+alone do not establish a completed clean-machine build or full native notebook
+acceptance for this graph.
+
+## Historical patch reconstruction
+
+The six `scripts/patches/hepkit-*.patch` files record the earlier owner setup.
+On 2026-10-05 they were applied from RustFlow `6e86afd` to a disposable archive
+of HEPKit `9d086ce`, reproducing twelve files from the then-validated local owner
+`fc9ee6aa5` byte for byte. That historical source audit is recorded in
+`target/published-hepkit-patch-audit.json`. Current builds fetch the public owner
+revision above, which carries the ported fixes and preserves the newer HEPKit
+APIs. The historical patch sequence is not an installation step.

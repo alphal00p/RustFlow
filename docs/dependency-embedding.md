@@ -5,17 +5,25 @@ shared host extension. `python_stubgen` additionally enables stub metadata. This
 crate does not build a second Python extension. PyO3 0.28 and the Symbolica
 `python_export` API are shared with the community host.
 
-For a fresh consumer checkout, follow the complete [published-input setup
-recipe](clean-community-build.md). It gives the ordered HEPKit patch sequence,
-generates the full owner override table and keeps RustFlow on its published
-Git dependency.
+For a fresh consumer checkout, follow the [published-input setup
+recipe](clean-community-build.md). The checked-in manifests and locks fetch the
+native owners directly from public Git pins. They require no local patch
+application or sibling checkout. The community manifest and lock select its
+RustFlow runtime revision.
 
-The public dependency declarations use the host's source identities: released
-Symbolica 3.0.1, GammaLoop's `feynkit` branch, and RustRed's `main` branch with its
-experimental reconstruction feature disabled. The workspace root owns Cargo's
-patch table; dependency patch tables are ignored by Cargo. The locks select
-Symbolica's official community revision `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`
-and RustRed `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`. Run the root-scaling
+The standalone root and community host each own their Cargo patch tables;
+Cargo ignores a dependency's patch table. Both roots map the original GammaLoop
+source to public HEPKit owner `a3d1c8a867ac0e89d8f58f9722cf9a7e83338901` through
+22 native-package entries and use that owner for the lean Typst library and SVG
+crates. The host additionally pins Vakint separately at
+`6203c6cbba6ae5e90329ba5081fad55319e678db`. Keep that separate implementation when
+embedding RustFlow in a host that also exposes Vakint.
+
+The locks select Symbolica, Numerica and Graphica 3.0.1 from the official
+community revision `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`, and RustRed's `main`
+branch at `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`. RustRed's core Cargo package
+is named `rustred`; its experimental `reconstruction` feature is disabled across
+the shared graph. The host bridge retains `campaign-api`. Run the root-scaling
 regression when changing the numerical dependency graph:
 
 ```sh
@@ -44,8 +52,9 @@ fetched, `cargo metadata --locked --offline --format-version 1` checks the graph
 without rebuilding. Exactly one instance of each of these three packages must
 resolve from that upstream revision. The two-line local patch and isolated
 `1fbdb0a` checkout are retained only as diagnostic history; neither is an active
-dependency override. Existing local Cargo configuration should retain the
-HEPKit overrides below and let the manifest select the upstream algebra crates.
+dependency override. Normal builds use the public manifest patch tables and
+checked-in locks. Remove stale development overrides from a publication build;
+otherwise Cargo may select a different source than the declared public pins.
 
 A dependency/source change creates a new numerical cache identity. Earlier
 snapshots retain their original provenance and are not silently reused with
@@ -65,37 +74,56 @@ Function arguments and opaque power coefficients retain their literal meaning.
 Native conversion can expand polynomial coefficients in unrequested variables;
 the degree bound is not a general bound on the number of multivariate terms.
 
-## Native owner patches
+## Public native owners
 
-The native owner fixes documented in [hepkit-integration.md](hepkit-integration.md)
-are still required, including Linnet's strongly connected components. The Python
-integration uses the HEPKit source at `9d086cec7971005ec7244b43e8fcea2a403c18ef`
-with those fixes and native borrowing accessors. These changes belong to HEPKit;
-this crate does not duplicate graph or tensor implementations. Until they are
-upstream, configure Cargo to use the patched owner checkout. Copy
-`.cargo/config.example.toml` to `.cargo/config.toml` and replace the checkout
-paths. The template lists all shared HEPKit packages, avoiding duplicate native
-Rust types when a host also uses Spynso3, Vakint, or the RustRed bridge.
+The required HEPKit extensions live in the public
+[owner revision `a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`](https://github.com/ValentinHirschi/gammaloop/commit/a3d1c8a867ac0e89d8f58f9722cf9a7e83338901),
+based on upstream `6c707c6b77a437256eb1180da13d4d327b371d13`.
+The changes are proposed upstream in [GammaLoop PR #125](https://github.com/alphal00p/gammaloop/pull/125).
+It retains the upstream external-wavefunction, rendering and tensor APIs while
+providing the graph, parameter and tensor fixes documented in
+[hepkit-integration.md](hepkit-integration.md). HEPKit owns these operations;
+RustFlow does not duplicate them.
 
-The borrowing accessors are supplied by
-`scripts/patches/hepkit-python-borrow-access.patch`. They expose references to the
-existing model, diagram and kinematics; no Python objects are serialized or
-reparsed when passed to an evaluator. The borrowing changes are in `0bf1cd991`
-on `codex/python-borrow-access`, based on `9d086ce`. The original HEPKit checkout
-remains unchanged.
+Native borrowing uses `PyIntegralFamily::as_family`,
+`PyKinematics::as_kinematics`, `PyModel::as_model`, and the checked
+`PyFeynmanDiagram::as_shared_diagram`. The latter returns a borrowed
+`Arc<FeynmanDiagram>` so the evaluator can clone the shared owner before
+releasing the GIL. It preserves complete-selection checks and leaves upstream
+`as_diagram() -> PyResult<&FeynmanDiagram>` unchanged. No native model, diagram
+or kinematics is serialized and reparsed at this boundary.
 
-The native amplitude additionally uses exact transitive parameter expansion in
-the model owner. Apply `scripts/patches/hepkit-exact-parameters.patch` after the
-owner fixes above. `Model::expand_parameters` keeps external parameters symbolic,
-uses Linnet's dependency ordering, and rejects cyclic definitions. Numerical
-model defaults are not used to evaluate exact loop-integral inputs.
-The complete isolated owner checkout is commit `fc9ee6aa5`; all seven selected
-parameter tests pass, including transitive expansion and cyclic definitions.
+`Model::expand_parameters` performs exact transitive substitution using
+Linnet's dependency ordering and rejects cyclic definitions. External and
+value-only parameters remain symbolic. Both sides of each substitution are
+literal Symbolica patterns, including names ending in underscores. Numeric
+model defaults are not inputs to exact loop-integral evaluation.
 
-Local source overrides require updating the lock once with `cargo metadata` or
-`cargo check`; subsequent checks can use `--locked`. Do not commit machine-local
-configuration or claim an unpatched upstream checkout supplies these owner
-extensions. No special sibling directory layout is required.
+The host's [Vakint revision `6203c6cbba6ae5e90329ba5081fad55319e678db`](https://github.com/ValentinHirschi/gammaloop/commit/6203c6cbba6ae5e90329ba5081fad55319e678db)
+is based on `8d6c8f7b14f2438126819328e20a10e6caf9e0b7` and aligns its RustRed
+references with the host. Its FeynKit dependencies resolve to the shared owner
+through the host's patch table. Replacing Vakint with the crate from the HEPKit
+owner revision would discard that distinct implementation.
+
+For a custom embedding workspace, carry the complete native-owner and
+crates.io patch tables from this crate's `Cargo.toml` into the owning workspace,
+then verify the resolved graph and lock. A patch to a fork has a different Git
+source identity from the original repository, which Cargo requires; changing
+only a branch or revision under the same Git URL is not a substitute. The
+community host already declares these patches and its direct FeynKit/Spynso3
+pins. Its package check validates native and browser dependency ownership.
+
+`.cargo/config.example.toml` is optional and intended only for standalone
+RustFlow development against a local native-owner checkout. It contains no
+Vakint override and is not part of the public build recipe. Do not copy it over
+the community host's source-fingerprint configuration. Local source overrides
+require a deliberate lock update and a new cache identity; keep machine-local
+paths out of published manifests and locks.
+
+The six historical `scripts/patches/hepkit-*.patch` files retain the earlier
+`9d086ce`/`fc9ee6aa5` reconstruction history. Current public builds fetch the
+ported owner revision directly. Component validation and complete native
+notebook acceptance remain separately recorded results.
 
 ## Source-sensitive cache identity
 

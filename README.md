@@ -56,12 +56,22 @@ representation limits still apply.
 Basis refinement also retains symbolic epsilon, taking precedence over sampled
 reduction so that dimension-dependent denominator factors can be identified.
 
-Configure a patched native HEPKit checkout as described in
-[dependency embedding](docs/dependency-embedding.md). The supplied Cargo config
-template keeps all HEPKit graph, kinematics, tensor and Python owners aligned.
+The manifest fetches the public HEPKit/Linnet/Spenso/Idenso owner at
+[`a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`](https://github.com/ValentinHirschi/gammaloop/commit/a3d1c8a867ac0e89d8f58f9722cf9a7e83338901),
+including its native rendering components. Normal builds need no sibling checkout
+or local patch configuration. The community host keeps Vakint at its separate
+[`6203c6cbba6ae5e90329ba5081fad55319e678db`](https://github.com/ValentinHirschi/gammaloop/commit/6203c6cbba6ae5e90329ba5081fad55319e678db)
+revision and shares the same RustRed and algebra sources. See the
+[published community build recipe](docs/clean-community-build.md) and
+[embedding requirements](docs/dependency-embedding.md); the community manifest
+and lock select its RustFlow runtime revision. The Cargo config example is only
+for optional standalone development against a local native owner.
+
 Python features are optional and disabled by default. The bindings are
 registered by the community host under `symbolica.community.hep.integration`.
 Actual dependency source content is included in persistent-cache identities.
+Public source availability and component checks are separate from a completed
+clean-machine build and full native notebook acceptance for that graph.
 The [native Higgs+jet boundary runner](docs/gg-hg-native-boundaries.md) exercises
 the same boundary generation and refinement without Python. Its long acceptance
 runs keep completed samples separate from verified boundary values.

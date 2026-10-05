@@ -2,17 +2,50 @@
 
 RustFlow accepts HEPKit's model JSON and native compact or serialized DOT directly through `FeynmanDiagram::from_dot`. HEPKit/Linnet own parsing, edge identities, graph validation, routing, denominator construction and partial fractions. Spenso/Idenso own scalar numerator contraction. This crate translates the resulting complete denominator basis into `IntegralFamily` and exact `LinearCombination` values. The application owns one loaded UFO model at a time and shares its `Arc<Model>` with all graph inputs; RustFlow does not maintain a competing model registry. Python bindings are optional modules in this crate, registered by the shared community extension under `symbolica.community.hep.integration`; the library and CLI remain usable without Python. See [dependency-embedding.md](dependency-embedding.md) for the current shared dependency graph and source fingerprint configuration.
 
-Current native/Python dependency setup uses public HEPKit `9d086cec7971005ec7244b43e8fcea2a403c18ef` and the six patches in the [published-input setup recipe](clean-community-build.md). That recipe is the complete installation sequence and does not require a private owner commit.
+Current builds select the public [native owner revision
+`a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`](https://github.com/ValentinHirschi/gammaloop/commit/a3d1c8a867ac0e89d8f58f9722cf9a7e83338901),
+based on upstream HEPKit `6c707c6b77a437256eb1180da13d4d327b371d13`. The standalone
+and community manifests contain the full shared-owner patch tables. The
+[published-input build recipe](clean-community-build.md) uses those pins
+directly, with no private checkout or patch application. Symbolica, Numerica
+and Graphica resolve from official community `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`;
+RustRed resolves from official main `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`.
+The community host preserves its separate Vakint implementation at
+`6203c6cbba6ae5e90329ba5081fad55319e678db`.
+The native owner changes are proposed upstream in
+[GammaLoop PR #125](https://github.com/alphal00p/gammaloop/pull/125).
 
-The original native dependency validation used the sibling checkout `/common/dev/hepkit`, based on upstream [commit 8f834d9c62ae06fb327e4ef0b14abffda755b610](https://github.com/alphal00p/gammaloop/commit/8f834d9c62ae06fb327e4ef0b14abffda755b610). That historical run used Symbolica/Numerica/Graphica revision `75f8350094b90254ee71dc2a391fde0d14b0204a`. FeynKit graph/model/kinematics/tensor are version 0.1.0, Linnet 0.17.0, Spenso 0.6.0 and Idenso 0.3.0. Ordinary Rust builds keep Python features disabled.
+The native owner supplies:
 
-Three local dependency fixes are maintained as reproducible patches under `scripts/patches`:
+- Literal momentum-square substitutions, so scalar and dimension names ending
+  in `_` remain data during graph-family construction.
+- Closed single-vector angular moments through even rank 32. General,
+  external-basis and block projectors retain rank 20; mixed rank 22 and
+  single-vector rank 34 return typed errors.
+- Concurrent model-parameter registration that preserves existing printers,
+  invalid-name errors, and independent LaTeX/Typst labels.
+- Native directed strongly connected components for differential-system blocks.
+- Shared model and diagram borrows for the Python adapter, retaining upstream
+  APIs and complete-diagram selection checks.
+- Exact transitive analytic parameter expansion, with native dependency ordering,
+  literal parameter names and typed cycle errors. Value-only model defaults
+  remain symbolic.
 
-- `hepkit-literal-substitution.patch`, local commit `3f392e22bfd13e4647cf106440dfd22df5607a20`, makes the momentum-square substitution literal. Without this change, a valid scalar or dimension name ending in `_` is interpreted as a wildcard and graph family construction can panic. The isolated same-Symbolica probe reproduced the panic and then passed after the fix.
-- `hepkit-isotropic-rank32.patch`, local commit `3311f81d36ff39d35de22bc8c409bdf462bff8c4`, permits the existing closed native single-vector angular moment through even rank 32. General, external-basis and block projectors retain rank 20. This preserves RustFlow's previously supported single-vector boundary numerators while moving projection to HEPKit. The independent checks include the exact rank-32 angular moment and typed rejection of mixed rank 22 and single-vector rank 34.
-- `hepkit-parameter-registration.patch`, local commit `cb1098330687c3def94c8394c5380e1044ec83c5`, reuses a parameter symbol when a concurrent model import creates it between lookup and registration. This preserves existing user printers and invalid-name errors. An independent 16-thread stress probe reproduced six failures in 1,024 registrations before the fix and zero afterwards; the parallel native-DOT integration tests also pass.
+FeynKit graph/model/kinematics/tensor are version 0.1.0, Linnet 0.17.0,
+Spenso 0.6.0 and Idenso 0.3.0. Ordinary Rust builds keep Python features disabled.
+The owner revision preserves the newer native external-wavefunction and
+rendering APIs. RustFlow's build fingerprint includes the resolved source
+identities, consumed source and manifest contents, and embedded model data.
+Cache identity follows the implementation that was built, rather than only
+package version numbers.
 
-For a fresh checkout, use the current base and full patch sequence linked above, including the native borrowing accessors and exact parameter expansion. RustFlow's build fingerprint includes each consumed path crate's source and manifest, the HEPKit workspace manifest, and the embedded model data. Cache identity therefore follows the actual implementation, including local fixes, rather than only path-package version numbers. No RustRed modification is required.
+The six `scripts/patches/hepkit-*.patch` files preserve the earlier owner setup
+and its isolated regression history. Early runs used HEPKit `9d086ce` with local
+fixes; still earlier native validation used `8f834d9c62ae06fb327e4ef0b14abffda755b610`
+and Symbolica `75f8350094b90254ee71dc2a391fde0d14b0204a`. Those recorded checks
+retain their original source provenance. Current installation uses the public
+owner pin above; historical numerical evidence does not by itself certify a
+new dependency graph's full notebook acceptance.
 
 ## Rust interface and CLI conventions
 
@@ -51,7 +84,7 @@ The fixtures in `fixtures/hepkit` are small model and graph inputs, not copied c
 
 ## Native graph algorithms
 
-Gaussian Wick connectivity now uses Linnet's existing `UnionFind`; only the physical endpoint/Gram interpretation remains in RustFlow. Differential-system blocks are a native `HedgeGraph` whose directed edges are nonzero matrix dependencies. A small owner-level Linnet extension supplies `strongly_connected_components` and its subgraph variant; the reproducible patch is `scripts/patches/hepkit-linnet-strongly-connected.patch` (local HEPKit commit `a33254faf0ac960c0589891ffdd2d8f38d334b05`). It traverses native half-edge incidence directly, includes isolated nodes, respects underlying/superficial direction and returns sink components first with stable node-order ties. RustFlow no longer carries its dense transitive-closure graph algorithm. The standalone native-API probe covers all 512 directed three-node graphs, reversed/undirected/split/dangling edges, a 20,000-node cycle and both supported node-storage implementations; integration tests retain the solver's block order.
+Gaussian Wick connectivity now uses Linnet's existing `UnionFind`; only the physical endpoint/Gram interpretation remains in RustFlow. Differential-system blocks are a native `HedgeGraph` whose directed edges are nonzero matrix dependencies. The pinned public Linnet owner supplies `strongly_connected_components` and its subgraph variant; `scripts/patches/hepkit-linnet-strongly-connected.patch` records its earlier implementation history. It traverses native half-edge incidence directly, includes isolated nodes, respects underlying/superficial direction and returns sink components first with stable node-order ties. RustFlow no longer carries its dense transitive-closure graph algorithm. The standalone native-API probe covers all 512 directed three-node graphs, reversed/undirected/split/dangling edges, a 20,000-node cycle and both supported node-storage implementations; integration tests retain the solver's block order.
 
 The adapter assumes one active UFO model, as HEPKit does. Native symbol registration is process-wide; the concurrency fix permits simultaneous imports of that model and preserves previously registered printers. It does not claim isolation between incompatible UFO models sharing parameter names. Momentum bases continue to come from native `LoopMomentumBasis`; no second graph or routing representation is maintained here.
 
@@ -87,7 +120,7 @@ The standalone Python `DifferentialSystem` currently exposes rational regular-po
 
 Computation releases the GIL. `ComputationControl.poll()` drains native progress events and `cancel()` requests cooperative cancellation. The Python reducer defaults to batches of 32 targets, configurable with `reduction_batch_size`; cancellation is checked between reducer batches and native algorithm stages. A running HEPKit/Idenso tensor operation finishes before acknowledging cancellation. No Python callback runs while a cache lock is held.
 
-The Higgs-jet scalar kernel delegates exact internal-parameter expansion to native `Model::expand_parameters`, including the owner's dependency ordering and typed cycle detection. The corresponding isolated-owner change is preserved in [hepkit-exact-parameters.patch](../scripts/patches/hepkit-exact-parameters.patch). Model numeric defaults and reference integral boundaries are not inputs to this kernel. Form-factor kinematics and W/Z masses must match the explicit model parameters; the notebook constructs both from one set of exact physical inputs.
+The Higgs-jet scalar kernel delegates exact internal-parameter expansion to native `Model::expand_parameters`, including the owner's dependency ordering and typed cycle detection. This API is included in the public owner pin; [hepkit-exact-parameters.patch](../scripts/patches/hepkit-exact-parameters.patch) preserves the earlier isolated-owner change. Model numeric defaults and reference integral boundaries are not inputs to this kernel. Form-factor kinematics and W/Z masses must match the explicit model parameters; the notebook constructs both from one set of exact physical inputs.
 
 ## Remaining numerical specialization
 

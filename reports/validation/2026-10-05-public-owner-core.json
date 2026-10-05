@@ -1,0 +1,1360 @@
+{
+  "schema": "rustflow-public-core-validation-v1",
+  "collected_utc": "2026-10-05T19:58:39.642775+00:00",
+  "scope": "Public-source native core component validation. Final public-graph cold Python Euclidean anchors and complete gg-to-hg acceptance are separate pending scientific gates.",
+  "workspace": "/common/dev/amflow-publication",
+  "head_before_milestone": "0ca7ffb66df03c3258c89c1d1bb2e3b4718118bd",
+  "worktree_status": [
+    "M .cargo/config.example.toml",
+    " M Cargo.lock",
+    " M Cargo.toml",
+    " M README.md",
+    " M docs/clean-community-build.md",
+    " M docs/dependency-embedding.md",
+    " M docs/factorized-denominator-experiment.md",
+    " M docs/hepkit-integration.md",
+    " M src/native.rs",
+    " M src/python/evaluation.rs"
+  ],
+  "source_files": {
+    ".cargo/config.example.toml": {
+      "path": "/common/dev/amflow-publication/.cargo/config.example.toml",
+      "sha256": "7a5b01f2d9aad8330448539462abf4b55d11a8bc04a5dec0b0a731dec13f2c08",
+      "bytes": 2497
+    },
+    "Cargo.lock": {
+      "path": "/common/dev/amflow-publication/Cargo.lock",
+      "sha256": "4c5b7575719b551a186318342392dc24b2d7aec7d1ff0ab02650f5559cc4fa9c",
+      "bytes": 138001
+    },
+    "Cargo.toml": {
+      "path": "/common/dev/amflow-publication/Cargo.toml",
+      "sha256": "9c109c014341e3b3f9cb75293e7114dbfa6fbb6c1cca8924bb64c48292617058",
+      "bytes": 6391
+    },
+    "README.md": {
+      "path": "/common/dev/amflow-publication/README.md",
+      "sha256": "1bd9ecce6d4b728440a9bc015f5f4a0146f488a7e7787a844246b1f1154733a4",
+      "bytes": 15018
+    },
+    "docs/clean-community-build.md": {
+      "path": "/common/dev/amflow-publication/docs/clean-community-build.md",
+      "sha256": "3c80ff3a80826b62616fa62fe33c1fff82873f9d2eb2d56795cbc1210d57ba0d",
+      "bytes": 6671
+    },
+    "docs/dependency-embedding.md": {
+      "path": "/common/dev/amflow-publication/docs/dependency-embedding.md",
+      "sha256": "ebacc4037767dbfa882ebd9a228f17b95a47a6522d5f9b71e76ed7eba73487b0",
+      "bytes": 10035
+    },
+    "docs/factorized-denominator-experiment.md": {
+      "path": "/common/dev/amflow-publication/docs/factorized-denominator-experiment.md",
+      "sha256": "174c2a3df9dc62ab34203a94a9aebd914992e8ac22af843998aad09a2540ed24",
+      "bytes": 5223
+    },
+    "docs/hepkit-integration.md": {
+      "path": "/common/dev/amflow-publication/docs/hepkit-integration.md",
+      "sha256": "6b716771010772a8ac1625da452bd03046b50556d71a9e5d01725dc086d508a0",
+      "bytes": 16618
+    },
+    "src/native.rs": {
+      "path": "/common/dev/amflow-publication/src/native.rs",
+      "sha256": "e13c3ea24e1d603da3b4fcb7b038823ff4741f1dff9319944f22cca0784c74be",
+      "bytes": 90791
+    },
+    "src/ode.rs": {
+      "path": "/common/dev/amflow-publication/src/ode.rs",
+      "sha256": "2b26b081ce2303de243db531b12b2f55385295c1cf8918065d3b8d8205b61c63",
+      "bytes": 63906
+    },
+    "src/ode/source.rs": {
+      "path": "/common/dev/amflow-publication/src/ode/source.rs",
+      "sha256": "335f517b6a463029f33cf83161fafcb40159a7a4c03d34270f813607f9be3a2f",
+      "bytes": 24661
+    },
+    "src/python/evaluation.rs": {
+      "path": "/common/dev/amflow-publication/src/python/evaluation.rs",
+      "sha256": "59aa21bf99920074379def982a71587da7bf5e6ac73fea52b48acc1cbe57dd18",
+      "bytes": 21578
+    }
+  },
+  "source_graphs": [
+    {
+      "metadata": {
+        "path": "/common/dev/amflow/target/release/build/symbolica-amflow-5596bcfe9419bd8d/out/dependency-metadata.json",
+        "sha256": "9e5b213c75af531cc3bfde6bbdfc212b7b9aebd3d9954a05635d8874a5a822ce",
+        "bytes": 1320287
+      },
+      "build_output": {
+        "path": "/common/dev/amflow/target/release/build/symbolica-amflow-5596bcfe9419bd8d/output",
+        "sha256": "5e0d61e5c6e3c36198202a0fd5073816d4cff1f24c415074864e70c827462262",
+        "bytes": 674090
+      },
+      "root_features": [
+        "default"
+      ],
+      "fingerprints": {
+        "DEPENDENCY_SOURCE_DIGEST": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+        "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+        "PORT_SOURCE_DIGEST": "17e6f414b8311e19e62761e8ee33548d0016fa34acf6a75c35b8ee9089c4365e"
+      },
+      "local_nonroot_dependencies": [],
+      "public_dependency_sources": [
+        {
+          "name": "feynkit-amplitude",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-generator",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-graph",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-kinematics",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-model",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-tensor",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "gammaloop-workspace-hack",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "graphica",
+          "version": "3.0.1",
+          "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+        },
+        {
+          "name": "idenso",
+          "version": "0.3.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "linnet",
+          "version": "0.17.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "numerica",
+          "version": "3.0.1",
+          "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+        },
+        {
+          "name": "rustred",
+          "version": "0.1.0",
+          "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+        },
+        {
+          "name": "rustred-order",
+          "version": "0.1.0",
+          "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+        },
+        {
+          "name": "spenso",
+          "version": "0.6.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "spenso-hep-lib",
+          "version": "0.1.7",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "spenso-macros",
+          "version": "0.3.2",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "symbolica",
+          "version": "3.0.1",
+          "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+        },
+        {
+          "name": "symbolica-typst-plugin",
+          "version": "0.1.0",
+          "source": "git+https://github.com/symbolica-dev/symbolica-typst-plugin?rev=57b7455b37c30f4f87353c0073e49f5225e937ab#57b7455b37c30f4f87353c0073e49f5225e937ab"
+        },
+        {
+          "name": "symbolica-utils",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        }
+      ]
+    },
+    {
+      "metadata": {
+        "path": "/common/dev/amflow/target/release/build/symbolica-amflow-ca345e89952a6cdd/out/dependency-metadata.json",
+        "sha256": "bb0a22ee17ae301e4022a63e04445d458ebba5f2cf0601e66b42f875752cd662",
+        "bytes": 2216511
+      },
+      "build_output": {
+        "path": "/common/dev/amflow/target/release/build/symbolica-amflow-ca345e89952a6cdd/output",
+        "sha256": "7f1e49e71c633e2bf5571c77b9a242c7218618bf23dcf488ae347372ddf7bbc3",
+        "bytes": 765969
+      },
+      "root_features": [
+        "default",
+        "python"
+      ],
+      "fingerprints": {
+        "DEPENDENCY_SOURCE_DIGEST": "95b177c82977b84b14c148269038a3e97062debfe7a28e19a42ab029f4514976",
+        "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+        "PORT_SOURCE_DIGEST": "17e6f414b8311e19e62761e8ee33548d0016fa34acf6a75c35b8ee9089c4365e"
+      },
+      "local_nonroot_dependencies": [],
+      "public_dependency_sources": [
+        {
+          "name": "feynkit-amplitude",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-cff",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-generator",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-graph",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-kinematics",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-model",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-py",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "feynkit-tensor",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "gammaloop-workspace-hack",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "graphica",
+          "version": "3.0.1",
+          "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+        },
+        {
+          "name": "idenso",
+          "version": "0.3.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "kurvst",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "linnest",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "linnet",
+          "version": "0.17.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "numerica",
+          "version": "3.0.1",
+          "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+        },
+        {
+          "name": "rustred",
+          "version": "0.1.0",
+          "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+        },
+        {
+          "name": "rustred-order",
+          "version": "0.1.0",
+          "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+        },
+        {
+          "name": "spenso",
+          "version": "0.6.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "spenso-hep-lib",
+          "version": "0.1.7",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "spenso-macros",
+          "version": "0.3.2",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "spynso3",
+          "version": "0.1.2",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "symbolica",
+          "version": "3.0.1",
+          "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+        },
+        {
+          "name": "symbolica-typst-plugin",
+          "version": "0.1.0",
+          "source": "git+https://github.com/symbolica-dev/symbolica-typst-plugin?rev=57b7455b37c30f4f87353c0073e49f5225e937ab#57b7455b37c30f4f87353c0073e49f5225e937ab"
+        },
+        {
+          "name": "symbolica-utils",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "three-dimensional-reps",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "typst-library",
+          "version": "0.15.1",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "typst-renderer",
+          "version": "0.1.0",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        },
+        {
+          "name": "typst-svg",
+          "version": "0.15.1",
+          "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+        }
+      ]
+    }
+  ],
+  "preserved_broad_suite_graph": {
+    "metadata": {
+      "path": "/common/dev/amflow/target/publication-validation-artifacts/default-before-test-annotation/dependency-metadata.json",
+      "sha256": "9e5b213c75af531cc3bfde6bbdfc212b7b9aebd3d9954a05635d8874a5a822ce",
+      "bytes": 1320287
+    },
+    "build_output": {
+      "path": "/common/dev/amflow/target/publication-validation-artifacts/default-before-test-annotation/build-output.txt",
+      "sha256": "110764c7e4acbe1ab5a4f427d511b2b01cc8e59433cde1ebdcef43248446c714",
+      "bytes": 674090
+    },
+    "fingerprints": {
+      "DEPENDENCY_SOURCE_DIGEST": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+      "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+      "PORT_SOURCE_DIGEST": "6e9dcc3a66248afcd8cfc82e5ec00f7aa2d37b79ceb042aea326fc58ca804c90"
+    },
+    "role": "Exact pre-annotation default-feature artifact used by the broad release suite."
+  },
+  "release_suite": {
+    "command": "cargo test --release --locked --lib --tests -- --test-threads=8",
+    "exit_code": 0,
+    "status": "passed",
+    "log": {
+      "path": "/common/dev/amflow/target/publication-core-tests.log",
+      "sha256": "c58180d2db30d427be2857b720ad9e48a27819172986e0bd4851e7166e0cd547",
+      "bytes": 68070
+    },
+    "completed_suites": 90,
+    "totals": {
+      "passed": 534,
+      "failed": 0,
+      "ignored": 12,
+      "measured": 0,
+      "filtered": 0
+    },
+    "sum_completed_suite_runtime_seconds": "1718.97",
+    "elapsed_note": "Suite runtime sum is not end-to-end wall time or compilation time.",
+    "suite_in_progress": null,
+    "suites": [
+      {
+        "target": "unittests src/lib.rs",
+        "status": "ok",
+        "passed": 137,
+        "failed": 0,
+        "ignored": 2,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "7.20"
+      },
+      {
+        "target": "unittests src/bin/rustflow.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.00"
+      },
+      {
+        "target": "tests/accuracy_fallback.rs",
+        "status": "ok",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.08"
+      },
+      {
+        "target": "tests/algebraic.rs",
+        "status": "ok",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "3.10"
+      },
+      {
+        "target": "tests/algebraic_cache.rs",
+        "status": "ok",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.52"
+      },
+      {
+        "target": "tests/algebraic_kinematic.rs",
+        "status": "ok",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.08"
+      },
+      {
+        "target": "tests/algebraic_quotients.rs",
+        "status": "ok",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "1.44"
+      },
+      {
+        "target": "tests/amf_mass_sheet.rs",
+        "status": "ok",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "29.47"
+      },
+      {
+        "target": "tests/analytic_origin.rs",
+        "status": "ok",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.11"
+      },
+      {
+        "target": "tests/asymptotic.rs",
+        "status": "ok",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.03"
+      },
+      {
+        "target": "tests/banana_equal.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "30.66"
+      },
+      {
+        "target": "tests/banana_unequal.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "1024.50"
+      },
+      {
+        "target": "tests/cache.rs",
+        "status": "ok",
+        "passed": 11,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.07"
+      },
+      {
+        "target": "tests/cache_lower_bounds.rs",
+        "status": "ok",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.07"
+      },
+      {
+        "target": "tests/canonical_algebraic.rs",
+        "status": "ok",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.27"
+      },
+      {
+        "target": "tests/canonical_cache.rs",
+        "status": "ok",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "1.77"
+      },
+      {
+        "target": "tests/cli.rs",
+        "status": "ok",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "26.91"
+      },
+      {
+        "target": "tests/cli_algebraic.rs",
+        "status": "ok",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.97"
+      },
+      {
+        "target": "tests/cli_canonical.rs",
+        "status": "ok",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.68"
+      },
+      {
+        "target": "tests/cli_epsilon_shearing.rs",
+        "status": "ok",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "5.75"
+      },
+      {
+        "target": "tests/cli_fallback.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.08"
+      },
+      {
+        "target": "tests/combinations.rs",
+        "status": "ok",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "8.11"
+      },
+      {
+        "target": "tests/complex_cache.rs",
+        "status": "ok",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "6.92"
+      },
+      {
+        "target": "tests/complex_kinematics.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "1.03"
+      },
+      {
+        "target": "tests/complex_ode.rs",
+        "status": "ok",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.04"
+      },
+      {
+        "target": "tests/conditioning.rs",
+        "status": "ok",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.26"
+      },
+      {
+        "target": "tests/continuation_budget.rs",
+        "status": "ok",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.04"
+      },
+      {
+        "target": "tests/continuation_empty_poles.rs",
+        "status": "ok",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.64"
+      },
+      {
+        "target": "tests/contour_endpoints.rs",
+        "status": "ok",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.05"
+      },
+      {
+        "target": "tests/contour_factorization.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.06"
+      },
+      {
+        "target": "tests/contour_signs.rs",
+        "status": "ok",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.06"
+      },
+      {
+        "target": "tests/core.rs",
+        "status": "ok",
+        "passed": 13,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "4.79"
+      },
+      {
+        "target": "tests/cuts.rs",
+        "status": "ok",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.09"
+      },
+      {
+        "target": "tests/diffexp.rs",
+        "status": "ok",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "2.12"
+      },
+      {
+        "target": "tests/end_to_end.rs",
+        "status": "ok",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "26.45"
+      },
+      {
+        "target": "tests/epsilon_algebraic.rs",
+        "status": "ok",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "17.82"
+      },
+      {
+        "target": "tests/epsilon_cache.rs",
+        "status": "ok",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.11"
+      },
+      {
+        "target": "tests/epsilon_physical_family.rs",
+        "status": "ok",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "75.79"
+      },
+      {
+        "target": "tests/epsilon_shearing.rs",
+        "status": "ok",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.07"
+      },
+      {
+        "target": "tests/fivepoint_mzz.rs",
+        "status": "ok",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.00"
+      },
+      {
+        "target": "tests/fivepoint_planar.rs",
+        "status": "ok",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.00"
+      },
+      {
+        "target": "tests/fivepoint_prescribed_cache.rs",
+        "status": "ok",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.00"
+      },
+      {
+        "target": "tests/fivepoint_zmz.rs",
+        "status": "ok",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.00"
+      },
+      {
+        "target": "tests/fivepoint_zmz_sector.rs",
+        "status": "ok",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.00"
+      },
+      {
+        "target": "tests/fivepoint_zzz.rs",
+        "status": "ok",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.00"
+      },
+      {
+        "target": "tests/frobenius.rs",
+        "status": "ok",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.12"
+      },
+      {
+        "target": "tests/ft.rs",
+        "status": "ok",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "7.35"
+      },
+      {
+        "target": "tests/gg_hg.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "10.06"
+      },
+      {
+        "target": "tests/gg_hg_amplitude.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "38.22"
+      },
+      {
+        "target": "tests/gg_hg_anchors.rs",
+        "status": "ok",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.64"
+      },
+      {
+        "target": "tests/hepkit.rs",
+        "status": "ok",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "14.04"
+      },
+      {
+        "target": "tests/hepkit_cuts.rs",
+        "status": "ok",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.16"
+      },
+      {
+        "target": "tests/integrand.rs",
+        "status": "ok",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "2.10"
+      },
+      {
+        "target": "tests/kinematic_derivative.rs",
+        "status": "ok",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.11"
+      },
+      {
+        "target": "tests/kinematics.rs",
+        "status": "ok",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.05"
+      },
+      {
+        "target": "tests/linear.rs",
+        "status": "ok",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "35.73"
+      },
+      {
+        "target": "tests/massless_phase_space.rs",
+        "status": "ok",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "8.66"
+      },
+      {
+        "target": "tests/mg5_pointbank.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.48"
+      },
+      {
+        "target": "tests/mobius.rs",
+        "status": "ok",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "6.32"
+      },
+      {
+        "target": "tests/mobius_cache.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.34"
+      },
+      {
+        "target": "tests/mpl_additional.rs",
+        "status": "ok",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "108.40"
+      },
+      {
+        "target": "tests/multimass_physical.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "39.85"
+      },
+      {
+        "target": "tests/native_arity.rs",
+        "status": "ok",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.18"
+      },
+      {
+        "target": "tests/native_family_cache.rs",
+        "status": "ok",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.12"
+      },
+      {
+        "target": "tests/native_graphs.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.02"
+      },
+      {
+        "target": "tests/native_parametric.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.86"
+      },
+      {
+        "target": "tests/native_physical.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "74.31"
+      },
+      {
+        "target": "tests/native_symmetry.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.13"
+      },
+      {
+        "target": "tests/nonplanar108.rs",
+        "status": "ok",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.00"
+      },
+      {
+        "target": "tests/phase_space.rs",
+        "status": "ok",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.91"
+      },
+      {
+        "target": "tests/physical_conditions.rs",
+        "status": "ok",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.06"
+      },
+      {
+        "target": "tests/physical_family.rs",
+        "status": "ok",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.07"
+      },
+      {
+        "target": "tests/physical_preparation_options.rs",
+        "status": "ok",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.23"
+      },
+      {
+        "target": "tests/physical_targets.rs",
+        "status": "ok",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.05"
+      },
+      {
+        "target": "tests/physical_transport.rs",
+        "status": "ok",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "1.04"
+      },
+      {
+        "target": "tests/precision_cache_fallback.rs",
+        "status": "ok",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.06"
+      },
+      {
+        "target": "tests/prepared_frobenius.rs",
+        "status": "ok",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.35"
+      },
+      {
+        "target": "tests/prescribed_cache.rs",
+        "status": "ok",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "5.22"
+      },
+      {
+        "target": "tests/prescribed_contours.rs",
+        "status": "ok",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "3.40"
+      },
+      {
+        "target": "tests/recursive.rs",
+        "status": "ok",
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "24.99"
+      },
+      {
+        "target": "tests/reduction_graphs.rs",
+        "status": "ok",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.18"
+      },
+      {
+        "target": "tests/regions.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.05"
+      },
+      {
+        "target": "tests/scoped_reductions.rs",
+        "status": "ok",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.14"
+      },
+      {
+        "target": "tests/single_mass.rs",
+        "status": "ok",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 1,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "54.95"
+      },
+      {
+        "target": "tests/source_fingerprint.rs",
+        "status": "ok",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.00"
+      },
+      {
+        "target": "tests/supplied_flow.rs",
+        "status": "ok",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.56"
+      },
+      {
+        "target": "tests/symbolica_root_scaling.rs",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.02"
+      },
+      {
+        "target": "tests/tensor_vacuum.rs",
+        "status": "ok",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.10"
+      },
+      {
+        "target": "tests/transport_cache.rs",
+        "status": "ok",
+        "passed": 12,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.05"
+      },
+      {
+        "target": "tests/weighted_uncertainty.rs",
+        "status": "ok",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "measured": 0,
+        "filtered": 0,
+        "test_runtime_seconds": "0.08"
+      }
+    ]
+  },
+  "strict_clippy": {
+    "command": "cargo clippy --release --locked --all-targets --features python -- -D warnings",
+    "exit_code": 0,
+    "status": "passed",
+    "log": {
+      "path": "/common/dev/amflow/target/publication-core-clippy.log",
+      "sha256": "b85502f62909082fde5bfcf9338683b71aebfd8a0f8219681b6ce550bd53f8c7",
+      "bytes": 809
+    },
+    "cargo_reported_elapsed_seconds": "15.88",
+    "initial_failure": {
+      "exit_code": 101,
+      "log": {
+        "path": "/common/dev/amflow/target/publication-core-clippy-before-test-annotation.log",
+        "sha256": "5e4b24329d6d4be48c64c181b45eb8da82c9c58ddfd87758534c9d227d3b2bc1",
+        "bytes": 13983
+      },
+      "cause": "New upstream rkyv PartialEq implementations made collect() type inference ambiguous in one cfg(test) assertion.",
+      "fix": "Explicit BTreeMap<_, _> test-local annotation in src/native.rs. Production expressions unchanged."
+    }
+  },
+  "format": {
+    "command": "cargo fmt --check",
+    "exit_code": 0,
+    "evidence": "Exit status reported by parent runner after the test-only annotation."
+  },
+  "artifact_difference": "The broad release suite was compiled before the cfg(test)-only BTreeMap annotation. Python-feature Clippy was rerun after it. Compiled fingerprints are therefore recorded separately; neither is silently relabeled as the other.",
+  "review": {
+    "no_local_dependency_requirement": true,
+    "core_local_cargo_override_present": false,
+    "native_owner_reuse": "Shared native diagram Arc accessor; Symbolica factorization, integer polynomial products, existing Gaussian specialization and native directed balls. No new custom graph/tensor owner.",
+    "numeric_changes": "Certified factor-product denominator lower bounds combined by max with original expanded bounds; residual numerator, endpoint/pole/domain/accuracy gates unchanged. No f64 value path introduced.",
+    "focused_owner_regressions": [
+      "tests/gg_hg_amplitude.rs",
+      "tests/hepkit.rs",
+      "tests/tensor_vacuum.rs"
+    ],
+    "historical_evidence": "The 2026-10-05 factorized-denominator replay and NP30 reports retain their original source/dependency fingerprints. They are not numerical acceptance or performance measurements for this public owner graph."
+  },
+  "post_annotation_targeted_test": {
+    "command": "cargo test --release --locked --lib native::tests::batched_substitution_retains_shared_targets_and_zero_rules",
+    "exit_code": 0,
+    "status": "passed",
+    "log": {
+      "path": "/common/dev/amflow/target/publication-core-targeted-test.log",
+      "sha256": "778c74e136c9d7cdfe07670b16a8fff0f89eb00fa3afa51e3ed77c31e2f8c059",
+      "bytes": 1118
+    },
+    "default_feature_fingerprints": {
+      "DEPENDENCY_SOURCE_DIGEST": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+      "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+      "PORT_SOURCE_DIGEST": "17e6f414b8311e19e62761e8ee33548d0016fa34acf6a75c35b8ee9089c4365e"
+    }
+  }
+}

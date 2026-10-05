@@ -1,9 +1,10 @@
 # Factorized denominator disk bounds
 
-This isolated candidate strengthens the local rational ODE defect certificate.
-It has not been adopted in the main implementation or the Python host. The
-solver and native physical boundary checks described below have passed;
-adoption into the publication dependency graph remains a separate step.
+This experiment strengthens the local rational ODE defect certificate. At the
+time of these measurements it ran as an isolated candidate. The implementation
+has since been adopted into the publication branch; the measurements below
+retain their original dependency and source provenance. They do not establish
+full native notebook acceptance for the updated public dependency graph.
 
 Symbolica factors each exact row denominator over its integer polynomial ring.
 The complete product, including constant content and multiplicities, must
