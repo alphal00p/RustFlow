@@ -95,10 +95,15 @@ its separately checked GPL constants, as explained in
 A degree-four anchor polynomial does not bound the unknown `O(epsilon^5)`
 remainder of an individual sample. This runner compares fitted Laurent
 coefficients, avoiding that truncation ambiguity. The
-[planar Euclidean run](../reports/validation/2026-10-05-native-planar-boundary.json)
-passes all 240 coefficients with 20 verified digits, including interrupted-sample
-restart and an identical warm binary reload. Nonplanar and full physical-amplitude
-acceptance remain separate gates. See the
+[planar](../reports/validation/2026-10-05-native-planar-boundary.json) and
+[nonplanar](../reports/validation/2026-10-05-native-nonplanar-boundary.json)
+Euclidean runs pass all 240 and 305 coefficients with 20 verified digits,
+including interrupted-sample restart and identical warm binary reloads. The
+[first physical planar W source](../reports/validation/2026-10-05-native-planar-physical-source.json)
+has 30-digit native refinement and passes its
+[independent comparison](../reports/validation/2026-10-05-native-planar-physical-comparison.json)
+at the reference's recorded 24-digit cap. The complete sixteen-source physical
+amplitude remains a separate gate. See the
 [performance audit](native-boundary-performance-audit.md) for the scope of these
 timings.
 

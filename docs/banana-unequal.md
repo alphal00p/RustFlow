@@ -91,6 +91,16 @@ The solvers use different precision, orders, paths and saved-series work.
 These measurements do not establish a matched speedup or general performance
 parity.
 
+Those `c74011e` timings predate the full-source residual and conditioning
+checks. A [newer validated release observation](../reports/performance/2026-10-05-banana-verification-cost-diagnostic.json)
+records **1309.87 s (21.8 min)** for the complete unchanged regression: both
+full-route precision/order settings, the alternate route, and all comparisons.
+Its [60-digit/order-80 direct-route profile](../reports/performance/2026-10-05-conditioned-banana-low-profile.json)
+alone took **497.73 s**. These are individual observations, not benchmark
+medians; debug builds can take longer. Use the release-mode command below for
+this long numerical regression rather than interpreting the historical fast
+figures as current runtime expectations.
+
 The report also preserves the paper/notebook distinctions: notebook chop
 precision 500 versus the paper's baseline 250, and a conflicting extra
 `(1+3ε)` factor in one plot caption. The test follows the exact supplied

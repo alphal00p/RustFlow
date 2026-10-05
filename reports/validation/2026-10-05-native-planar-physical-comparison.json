@@ -1,0 +1,71 @@
+{
+  "schema": "rustflow-native-gg-hg-source-comparison-v1",
+  "status": "passed",
+  "label": "W-Planar_EW1-1",
+  "family": "Planar_EW1",
+  "normalization": "arXiv:2112.07578v1 canonical F vector; mV^2=1; exp(2*EulerGamma*epsilon) relative to ordinary two-loop integrals; physical +i0 and the recorded individual root germs; no form-factor -1/(mV^2)^2/(4*pi)^4 prefactor",
+  "exact_source_coordinates": {
+    "s": "7971503245/51071474",
+    "t": "-120961047183696014144/1789089966849483755",
+    "b": "13074/5399"
+  },
+  "root_germs": {
+    "root1": "Principal",
+    "root2": "Opposite"
+  },
+  "epsilon_powers": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "checked_coefficients": 240,
+  "requested_mixed_comparison_digits": 24,
+  "native_verified_digits": 30,
+  "reference_verified_digits_cap": 24,
+  "corroborated_mixed_digits": 24,
+  "maximum_absolute_difference": "2.617197036006389628601179866794804423399092508780481462742103379531619508814966186626655590916955104E-29",
+  "maximum_scaled_difference": "2.425043777485653879079629965600859083865886035498792861458115459748635229972646846253803138413938346E-31",
+  "maximum_ratio_to_combined_recorded_errors": "0.002617197036006389628601179837055548873596552849013197557972098960394257964796769887122808840324668661",
+  "failure_count": 0,
+  "failures": [],
+  "metric": "Both |native-reference| <= native_error+reference_error and |native-reference| <= 10^-digits*max(1,|reference|); exact rational squared-norm comparisons",
+  "accuracy_note": "Independent recorded errors cap the comparison; printed mantissas do not certify additional digits. Diagnostics are rounded Decimal values, acceptance inequalities are exact. Coefficient comparison only, no finite-epsilon truncation or tail assertion.",
+  "reference_opened_after_native_success": true,
+  "native_report": {
+    "path": "reports/validation/2026-10-05-native-planar-physical-source.json",
+    "build": {
+      "dependency_source_digest": "3627cd50465236fd8c23c1c08403cf37918ad833eff4fc840ef827cedcb66ffb",
+      "profile": "release",
+      "rustflow_source_digest": "ed2985b59ccc91d410a5f470b0380de82585149071399935a45e91ef32742c32"
+    },
+    "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed",
+    "identity": "c03c2cd3d3f8e6ad998e83c1f5313033e86badf1696c70a566e2e1e310b7e917",
+    "source_report_sha256": "cec9527e0293aef266a16013424e0832b44d8dec82746c5c5dbcc3147bb95923",
+    "sha256": "c4b4782079128e1b5d3457aa864cd22882b919dc52ff4f4a74b1d4d922bf14d7"
+  },
+  "reference": {
+    "path": "fixtures/gg-hg/full-systems.json",
+    "sha256": "b643716de4212e8cc3ddcaf4fb5d13eb67f993ac3ae8563c291c16ae284cbb86",
+    "upstream_provenance": {
+      "upstream_commit": "89f64b93d0bdbd8ee90eb85737021189229b034a",
+      "original_result": {
+        "path": "target/gg-hg-full-oracle/full-permutations-001/result.json",
+        "sha256": "b13124cc025cbb80f47d5b8cf5fbb107e86013e7fdb56790f18fa6bceac0cbca"
+      },
+      "equation_export": {
+        "path": "target/gg-hg-native/export.wl",
+        "sha256": "c790e4ae1eba2a2b880250b451e47a74dda7ceab75eab0be7dd178f759971c26"
+      },
+      "root_export_validation": "Exact top-level radicand lookup and SameQ reconstruction of every source letter",
+      "source_accuracy": "Inherited delta rounded upward to decimal envelope, plus1e-80 absolute serialization reserve; verifiedcap24. Exact source numbers retainzero. No mantissa-derived accuracy claim.",
+      "serialization": "100 significant decimal digits using Python Decimal; no binary64 conversion. All inexact nonzero source magnitudes below1e20, so discarded tail<1e-80.",
+      "scope": "Complete supplied canonical systems and scientific projections. No original solver implementation, automatic boundary generation or topology mapping."
+    },
+    "source_sha256": "51d4b3a86745539bdb2ce83f817b37db83b89b2414db153ea886bd3fcc426b7d",
+    "source_delta": "3.2185621170547758*^-27",
+    "source_error_decimal_exponent": -26,
+    "matrix_sha256": "95442e5f5f1823fa205640219b0e1be8a43d260682af63345314d26fd37865a8"
+  }
+}

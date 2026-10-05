@@ -13,8 +13,14 @@ digits. Reference data were loaded only after native generation. The successful
 byte-identical. This is a resumed timing, not a cold benchmark. A subsequent
 verified-boundary restart took 0.451 seconds and evaluated no epsilon samples.
 
-NP acceptance was still running when this audit was recorded. The sixteen
-physical configurations, 30-digit seeds, transport, and coherent amplitude
+Subsequent [NP acceptance](../reports/validation/2026-10-05-native-nonplanar-boundary.json)
+passed all 305 coefficients with 20 verified digits. Its resumed 16-worker run
+took 1761.449 seconds after a 422.618-second interrupted 4-worker run; four
+completed sample files remained byte-identical. The warm reload took 1.860
+seconds. A [first physical planar source](../reports/validation/2026-10-05-native-planar-physical-source.json)
+passed 30-digit native refinement in 1653.328 seconds with 16 workers, and all
+240 coefficients agree with the independent source at its 24-digit evidence
+cap. The sixteen physical configurations, transport, and coherent amplitude
 remain separate acceptance work; see the
 [native acceptance runner](gg-hg-native-boundaries.md) and
 [coverage inventory](gg-hg-coverage-inventory.md).
