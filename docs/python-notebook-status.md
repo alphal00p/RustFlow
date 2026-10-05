@@ -16,11 +16,13 @@ checks still running on the dependency graph intended for publication.
 | Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; initial HTML export passed, and all three native amplitude diagrams rendered as SVG and in the notebook display container | Execute the populated notebook using a copy of the completed native cache, then finish the complete headless acceptance |
 | Packaging | Rust core release suite: 534 passed, 12 opt-in tests ignored; strict Python-feature Clippy and formatting passed. Original native wheel component suite: 206 passed, one inherited C++ export failure. Corrected tensor stubs: seven checks passed | Existing browser tensor evaluation fails on list output; an isolated owner fix passes native NumPy/no-NumPy regression checks, but its browser rerun is pending |
 
-The final publication run had completed 12 of 16 physical starting configurations
-at this snapshot: all eight planar cases and four W nonplanar cases. The four Z
-nonplanar cases were progressing through independent refinement. Its runtime,
-dependency pins, model and numerical steering sources remain frozen. Earlier
-build results are not relabeled as validation of this wheel.
+The final publication run has now completed
+[all 16 physical starting configurations](../reports/validation/2026-10-05-public-wheel/physical-boundary-validation.json)
+at 30 verified digits, with 1,248 completed finite-epsilon samples. Fresh boundary
+generation took 6,467.54 seconds; physical transport has started. Its runtime,
+dependency pins, model and numerical steering sources remain frozen. The physical
+amplitude and later restart/refinement stages have not yet passed on this wheel;
+earlier build results are not relabeled as its validation.
 
 ## Completed cold calculation and precision scope
 

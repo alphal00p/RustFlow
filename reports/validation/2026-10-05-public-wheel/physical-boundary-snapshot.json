@@ -1,0 +1,530 @@
+{
+  "status": "running",
+  "mode": "cold",
+  "stages": [
+    {
+      "stage": "boundaries",
+      "mode": "cold",
+      "seed_digits": 30,
+      "final_seed_digits": 30,
+      "observable_digits": 20,
+      "elapsed_ns": 6467540504060
+    }
+  ],
+  "runtime_attestation": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "5e8319c74a327e09349d7626d629c77d8a39d625e0503267e5ebfbb0994039cf"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/amflow/target/publication-python-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+      "size_bytes": 393671056,
+      "sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 32019,
+        "sha256": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_support.py",
+        "size_bytes": 20678,
+        "sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25"
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
+        "size_bytes": 11597,
+        "sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/publication-python-venv/bin/python"
+    }
+  },
+  "euclidean_anchor_proof": {
+    "path": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-euclidean20/anchor-acceptance.json",
+    "sha256": "c03530cd10b6c0a7d4a038dbb55ca31609f9c58b65253896e1c9b431fae01587",
+    "checked_coefficients": 545,
+    "minimum_verified_digits": 20,
+    "native_source_identity_matched": true,
+    "installed_extension_matched": true
+  },
+  "scope": "Physical seeds, transport, amplitude and restart; independent Euclidean anchor reports are a separate prerequisite.",
+  "resources": {
+    "sample_worker_budget": 256,
+    "boundary_workers": 4,
+    "effective_boundary_workers": 4,
+    "sample_workers_per_configuration": 64
+  },
+  "inputs": {
+    "model_sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+    "point": [
+      "7173070292440521/111284741846000",
+      "-12058167788971/339319588980",
+      "1"
+    ],
+    "mass_squared": {
+      "W": "5399/13074",
+      "Z": "7775/14631"
+    },
+    "systems": {
+      "planar": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates",
+      "nonplanar": "https://arxiv.org/abs/2112.07578v1; sha256=7026b05b0d8950c052a4642c3985cf03f71b838d57e25913a4f15a81fa823eb6; exact inverse and differential-matrix certificates"
+    }
+  },
+  "progress": {
+    "stage": "transport",
+    "mode": "cold",
+    "elapsed_ns": 80057182044,
+    "seed_digits": 30,
+    "status": "running transport",
+    "done": false,
+    "recent_events": [
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 145 }",
+      "Step { index: 130 }",
+      "Step { index: 144 }",
+      "Step { index: 143 }",
+      "Step { index: 135 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 141 }",
+      "Step { index: 134 }",
+      "Step { index: 144 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 131 }",
+      "Step { index: 145 }",
+      "Step { index: 144 }",
+      "Step { index: 142 }",
+      "Step { index: 135 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 145 }",
+      "Step { index: 136 }",
+      "Step { index: 132 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 145 }",
+      "Step { index: 143 }",
+      "Step { index: 136 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 133 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 144 }",
+      "Step { index: 137 }",
+      "Step { index: 137 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 134 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 145 }",
+      "Step { index: 138 }",
+      "Step { index: 135 }",
+      "Step { index: 138 }",
+      "Saved boundary Z-NP_EW1-3; cache hit: False.",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 139 }",
+      "Step { index: 136 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 140 }",
+      "Step { index: 137 }",
+      "Step { index: 139 }",
+      "Step { index: 141 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 138 }",
+      "Step { index: 142 }",
+      "Step { index: 140 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 139 }",
+      "Step { index: 143 }",
+      "Saved boundary Z-NP_EW1-2; cache hit: False.",
+      "Step { index: 140 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Step { index: 141 }",
+      "Step { index: 144 }",
+      "Step { index: 141 }",
+      "Step { index: 145 }",
+      "Step { index: 142 }",
+      "Step { index: 142 }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 143 }",
+      "Saved boundary Z-NP_EW1-4; cache hit: False.",
+      "Step { index: 143 }",
+      "Step { index: 144 }",
+      "Step { index: 145 }",
+      "Step { index: 144 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Step { index: 145 }",
+      "Stage { name: \"constructing the physical endpoint expansion (61 masters, 2 loops)\" }",
+      "Stage { name: \"evaluating the prepared Frobenius recurrence\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Stage { name: \"extracting the dimensionally regulated physical limit (61 masters, 2 loops)\" }",
+      "Saved boundary Z-NP_EW1-1; cache hit: False.",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }",
+      "Step { index: 0 }"
+    ],
+    "numerical_generation": {
+      "schema": 1,
+      "generation": "initial",
+      "archive_directory": null
+    },
+    "completed_sample_files": 1248
+  },
+  "timings": [
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 915546162296,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 920195278551,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 936046572301,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-Planar_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 941082465969,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 853119218272,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 888266198144,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 921517526307,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-Planar_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 936302247741,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2308364935988,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2374144697150,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2314709142675,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "W-NP_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2420049656386,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-3",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2159926845922,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-2",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2226899655371,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-4",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2144355145674,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundary_configuration",
+      "configuration": "Z-NP_EW1-1",
+      "seed_digits": 30,
+      "sample_workers": 64,
+      "elapsed_ns": 2315946099471,
+      "outcome": "completed",
+      "cache_hit": false,
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    },
+    {
+      "stage": "boundaries",
+      "recompute": false,
+      "nearby": false,
+      "elapsed_ns": 6467536714065,
+      "outcome": "completed",
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      }
+    }
+  ],
+  "native_seeds": {
+    "W-Planar_EW1-1": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-Planar_EW1-2": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-Planar_EW1-3": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-Planar_EW1-4": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-1": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-2": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-3": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-Planar_EW1-4": {
+      "identity": "97f703cad84d4adea3a3a76aa2110cf85db72af29e96be05341fccbfa21e2b84",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; Planar_EW1; certified exact map a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-1": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-2": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-3": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "W-NP_EW1-4": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-1": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-2": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-3": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    },
+    "Z-NP_EW1-4": {
+      "identity": "3b0cada1daac5fc1d9e3930297bd1aed984e01fc273e04efbd656c8be77d8332",
+      "working_bits": 382,
+      "verified_digits": 30,
+      "provenance": "Native automatic auxiliary-mass boundary; NP_EW1; certified exact map 4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; extracted-map 271f6754566d38d4c1ecfe7a61d45222a80b0ab7daa4602e59b8837602971244; independent epsilon samples and precision/order refinement; 2 sample sets; no numerical reference seed"
+    }
+  }
+}
