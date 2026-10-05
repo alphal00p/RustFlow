@@ -5,17 +5,51 @@ shared host extension. `python_stubgen` additionally enables stub metadata. This
 crate does not build a second Python extension. PyO3 0.28 and the Symbolica
 `python_export` API are shared with the community host.
 
+For a fresh consumer checkout, follow the complete [published-input setup
+recipe](clean-community-build.md). It gives the ordered HEPKit patch sequence,
+generates the full owner override table and keeps RustFlow on its published
+Git dependency.
+
 The public dependency declarations use the host's source identities: released
 Symbolica 3.0.1, GammaLoop's `feynkit` branch, and RustRed's `main` branch with its
 experimental reconstruction feature disabled. The workspace root owns Cargo's
-patch table; dependency patch tables are ignored by Cargo. The standalone lock
-pins Symbolica's community revision `942bd2c0cd2ef16414d69c176fc9eff7b21c0ab2`
+patch table; dependency patch tables are ignored by Cargo. The locks select
+Symbolica's official community revision `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`
 and RustRed `b3cecd6ae9b7683ae639204e43fa05685c6a5802`. Run the root-scaling
 regression when changing the numerical dependency graph:
 
 ```sh
 cargo test --locked --test symbolica_root_scaling
 ```
+
+## Shared upstream Symbolica revision
+
+Physical nonplanar boundary preparation exposed an exact-zero-policy bug in
+Symbolica's checked division and inversion. The [minimal reproducer and
+validation](symbolica-exact-division-mre.md) explain the failure. The correction
+is now in official community commit `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`.
+Both build environments use that upstream source, including the earlier
+polynomial root-convergence correction. The owning manifests keep all three
+algebra crates on the same source:
+
+```toml
+[patch.crates-io]
+symbolica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
+numerica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
+graphica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
+```
+
+The checked-in locks select the immutable commit above. Once dependencies are
+fetched, `cargo metadata --locked --offline --format-version 1` checks the graph
+without rebuilding. Exactly one instance of each of these three packages must
+resolve from that upstream revision. The two-line local patch and isolated
+`1fbdb0a` checkout are retained only as diagnostic history; neither is an active
+dependency override. Existing local Cargo configuration should retain the
+HEPKit overrides below and let the manifest select the upstream algebra crates.
+
+A dependency/source change creates a new numerical cache identity. Earlier
+snapshots retain their original provenance and are not silently reused with
+the updated graph.
 
 ## Native owner patches
 

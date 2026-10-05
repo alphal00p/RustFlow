@@ -1,5 +1,14 @@
 # Exact division rejected as statistically inconclusive
 
+The fix is now available on Symbolica's official `community` branch at
+[`c3408e4ba1d3bdd4ea55678fad50e27009be13d4`](https://github.com/symbolica-dev/symbolica/commit/c3408e4ba1d3bdd4ea55678fad50e27009be13d4).
+Use that upstream revision instead of the local owner patch below. The patch
+and failing-version instructions are retained to reproduce the original bug.
+All four modes of the Cargo example pass against that official revision. The
+original nonplanar 4-by-4 matrix also passes its exact equality assertion when
+linked against the same upstream release artifact, returning
+`(lambda - 2*eps)^3 * (lambda - 2*eps + 1/2)`.
+
 The physical nonplanar Higgs–jet boundary calculation exposed a Symbolica
 `AtomField` bug at commit `942bd2c0cd2ef16414d69c176fc9eff7b21c0ab2`.
 `try_div` and `try_inv` call `SelfRing::is_zero` on the denominator, which uses a
@@ -83,7 +92,7 @@ independently with Symbolica alone. With the owner patch it returns exactly
 `(lambda - 2*eps)^3 * (lambda - 2*eps + 1/2)`. No changes to RustFlow's matrix
 algorithm or expression normalization are needed for this correction.
 
-Read-only upstream verification on 2026-10-05 found main at `75f8350094b90254ee71dc2a391fde0d14b0204a`
+Before the fix was published, read-only verification on 2026-10-05 found main at `75f8350094b90254ee71dc2a391fde0d14b0204a`
 and community at `98794d0d7337ba2b08e4c046dde584ad7fc1ce10`. Both contain the
 same division checks and matrix determinant implementation. The two later
 community commits only affect Python NumPy handling and the license-server
@@ -95,5 +104,7 @@ Local diagnostic artifacts are in `target/mre/symbolica-bareiss/`:
 `patched-owner-tests-native.log` records the two owner tests, and
 `patched-original-matrix.log` records the exact nonplanar determinant. The
 original failure is retained in `target/gg-hg-nonplanar-physical-native.log`.
+`official-c340-original-np4.log` and `official-c340-artifact.json` record the
+upstream matrix check and its exact artifact/source identity.
 These small checks establish the owner fix; they do not certify the complete
 nonplanar boundary fit or the final amplitude.

@@ -1,0 +1,157 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "scope": "Official Symbolica update and focused native regressions; full empty-cache Higgs-jet notebook acceptance is a separate gate.",
+  "runtime_source_revision": "6e86afd9bed4cde2d10a466fe7cb0aab4094c78b",
+  "symbolica": {
+    "repository": "https://github.com/symbolica-dev/symbolica",
+    "branch": "community",
+    "revision": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "local_source_override": false,
+    "shared_packages": [
+      "symbolica",
+      "numerica",
+      "graphica"
+    ],
+    "native_and_python_locked_graphs_verified": true
+  },
+  "rustred_revision": "b3cecd6ae9b7683ae639204e43fa05685c6a5802",
+  "release_build": {
+    "exit_code": 0,
+    "elapsed_seconds": "547",
+    "examples": [
+      "gg_hg_boundaries",
+      "symbolica_exact_division"
+    ]
+  },
+  "exact_division_reproducer": {
+    "scalar": "pass",
+    "matrix": "pass",
+    "normalized": "pass",
+    "polynomial": "pass",
+    "original_nonplanar_indicial_matrix": "pass",
+    "original_matrix_exact_determinant": "(lambda-2*eps)^3*(lambda-2*eps+1/2)"
+  },
+  "focused_native_tests": {
+    "command": "cargo test --release --locked --test algebraic_cache --test amf_mass_sheet --test canonical_cache --test frobenius --test gg_hg --test gg_hg_amplitude --test physical_conditions --test physical_targets --test prepared_frobenius --test scoped_reductions --test supplied_flow --test symbolica_root_scaling --test transport_cache",
+    "exit_code": 0,
+    "passed": 78,
+    "failed": 0,
+    "ignored": 1,
+    "log_sha256": "104d2161a1f19161eaa825beaa8fb0808d11fe7902a025c1bdfdeda7d5a41973",
+    "groups": [
+      {
+        "target": "algebraic_cache",
+        "status": "ok",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "0.46"
+      },
+      {
+        "target": "amf_mass_sheet",
+        "status": "ok",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "33.19"
+      },
+      {
+        "target": "canonical_cache",
+        "status": "ok",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "1.58"
+      },
+      {
+        "target": "frobenius",
+        "status": "ok",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "0.09"
+      },
+      {
+        "target": "gg_hg",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 1,
+        "elapsed_seconds": "9.29"
+      },
+      {
+        "target": "gg_hg_amplitude",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "138.43"
+      },
+      {
+        "target": "physical_conditions",
+        "status": "ok",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "0.04"
+      },
+      {
+        "target": "physical_targets",
+        "status": "ok",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "0.04"
+      },
+      {
+        "target": "prepared_frobenius",
+        "status": "ok",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "0.33"
+      },
+      {
+        "target": "scoped_reductions",
+        "status": "ok",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "0.09"
+      },
+      {
+        "target": "supplied_flow",
+        "status": "ok",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "0.56"
+      },
+      {
+        "target": "symbolica_root_scaling",
+        "status": "ok",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "0.02"
+      },
+      {
+        "target": "transport_cache",
+        "status": "ok",
+        "passed": 12,
+        "failed": 0,
+        "ignored": 0,
+        "elapsed_seconds": "0.04"
+      }
+    ]
+  },
+  "format_check": {
+    "command": "cargo fmt --all --check",
+    "exit_code": 0
+  },
+  "limitations": [
+    "The coherent amplitude regression uses supplied reference boundaries; it does not establish the full calculation from empty numerical caches.",
+    "The ignored crossed-system regression is superseded as an acceptance target by the separate complete notebook run, which is not certified by this report."
+  ]
+}

@@ -1,4 +1,6 @@
-# Copy to config.toml and select the patched native owner checkout.
+# Copy to config.toml and select the patched native HEPKit owner checkout.
+# Symbolica/Numerica/Graphica use the manifest's official community source;
+# Cargo.lock selects c3408e4, which includes the exact-division correction.
 [patch."https://github.com/alphal00p/gammaloop"]
 feynkit-amplitude = { path = "/path/to/patched-hepkit/crates/feynkit-amplitude" }
 feynkit-cff = { path = "/path/to/patched-hepkit/crates/feynkit-cff" }
