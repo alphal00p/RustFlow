@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-05",
+  "scope": "Completed ordinary-transport replay of a captured native AMF initial boundary, comparing solution expansion orders. This does not recompute native recursive boundary constants, extract the singular physical limit, reconstruct a Laurent series, or validate refinement/physical-observable accuracy.",
+  "configuration": "W-NP_EW1-1",
+  "epsilon": "1/3700",
+  "source": "Native recursive AMF first-boundary values preserved as exact dyadics; no numerical reference inputs.",
+  "requested_digits": 30,
+  "working_digits": 90,
+  "local_target_digits": 80,
+  "working_bits": 315,
+  "max_predicates": 2000,
+  "symbolica_revision": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+  "local_symbolica_patch": false,
+  "results": [
+    {
+      "series_order": 96,
+      "success": true,
+      "exit_code": 0,
+      "seconds": 899.861172,
+      "first_accepted_chart_seconds": 3.799288,
+      "compile_seconds": 0.374835,
+      "accepted_steps": 263,
+      "rejected_steps": 745,
+      "predicate_evaluations": 1008,
+      "superseded_successes": 0,
+      "conditioning_digits": 78,
+      "log": "target/np-physical-replay-exact-collection-order96-2000.log",
+      "log_sha256": "2463e12f59bfb0f9adbc48863d5d80241370e3fbbd25b499a31f86f76d74dc84"
+    },
+    {
+      "series_order": 160,
+      "success": true,
+      "exit_code": 0,
+      "seconds": 1501.332821,
+      "first_accepted_chart_seconds": 6.000664,
+      "compile_seconds": 0.380646,
+      "accepted_steps": 263,
+      "rejected_steps": 744,
+      "predicate_evaluations": 1007,
+      "superseded_successes": 0,
+      "conditioning_digits": 78,
+      "log": "target/np-physical-replay-exact-collection-order160.log",
+      "log_sha256": "4c5d7936746e2527ee83442361dea12514bf0fa50bfe8dd9236b9b85448ec78a"
+    }
+  ],
+  "order160_over_order96_seconds": 1.6684049359116029,
+  "conclusion": "Both orders commit 263 steps. Order 96 evaluates 1008 predicates in 899.861172 s; order 160 evaluates 1007 in 1501.332821 s. Increasing order costs 1.6684 times as long and saves only one rejected trial. Retain order 96 with a 2000-predicate resource budget for the next full native validation. The original 1000-predicate limit was eight evaluations short of completing this diagnostic.",
+  "accuracy_scope": "conditioning_digits is the checked local arithmetic-conditioning metadata, not a forward-error or Laurent accuracy certificate. Both runs use the same acceptance gate; no native/fit verified digits are claimed.",
+  "verified_digits": null,
+  "production_boundary_saved": false,
+  "timing_caveat": "The two probes overlapped on the same host. No CPU affinity or dedicated-host benchmark was used; these timings choose local configuration and do not establish performance parity.",
+  "artifact_sha256": {
+    "target/gg-hg-basis-work/physical-np-local-replay.rs": "a236184de3f5461e3e8ef1546b482afec234cb928cfc8a86e004ddb16605af36",
+    "target/gg-hg-basis-work/physical-np-local-replay-order160": "d9e0c8a4780cba8ebe8f094e8c3a59ea1c9b4e4eaf407404521f96526b7d47d9",
+    "target/np-physical-single-epsilon-diagnostic/first-boundary.json": "ea0e1af3ade5a89c5ccff9eb872774a11d11fe03da43bc92e45d27f4431f5993",
+    "target/np-physical-single-epsilon-diagnostic/exact-source.json": "639be54600d167bbba7d899762764772029030aeb48bdf384a1a907aa2c18a61"
+  },
+  "source_snapshot": {
+    "basis_commit": "6fc887b",
+    "runtime_state": "Working tree with the exact coefficient collector and post-lint cleanup, before adding the extreme-exponent preflight validation guard.",
+    "compiled_native_rlib_path": "target/release/deps/libsymbolica_amflow-5e0238f10fd6d0d6.rlib",
+    "compiled_native_rlib_timestamp_utc": "2026-10-05T16:41:07.247486644Z",
+    "binary_sha256": "d9e0c8a4780cba8ebe8f094e8c3a59ea1c9b4e4eaf407404521f96526b7d47d9",
+    "final_core_commit": "4c48358185ec68de86f6acc6b195a201adbe2bae",
+    "final_core_distinction": "The final core commit also includes extreme-exponent preflight guards and their tests. These two diagnostic replays did not run that final binary. A fresh native production run against the final core is required for its acceptance evidence."
+  },
+  "exact_input": {
+    "source_file": "target/np-physical-single-epsilon-diagnostic/exact-source.json",
+    "source_sha256": "639be54600d167bbba7d899762764772029030aeb48bdf384a1a907aa2c18a61",
+    "boundary_file": "target/np-physical-single-epsilon-diagnostic/first-boundary.json",
+    "boundary_sha256": "ea0e1af3ade5a89c5ccff9eb872774a11d11fe03da43bc92e45d27f4431f5993",
+    "source_schema": "native-amf-diagnostic-source-v1",
+    "namespace": "rustflow_gg_hg_boundaries",
+    "coordinates": [
+      [
+        "rustflow_gg_hg_boundaries::{}::s",
+        "7971503245/51071474"
+      ],
+      [
+        "rustflow_gg_hg_boundaries::{}::t",
+        "-120961047183696014144/1789089966849483755"
+      ],
+      [
+        "rustflow_gg_hg_boundaries::{}::b",
+        "13074/5399"
+      ]
+    ],
+    "deformation_mask": [
+      false,
+      false,
+      false,
+      false,
+      false,
+      true,
+      true,
+      false,
+      false
+    ],
+    "provenance": "common-mass-v1; temporary one-sample NP diagnostic; physical-map-source=4a65e20f6244405152a8d87290daca63bb3a80aca7f63e024efa54cb9d8dcccd; dlog=2f8dcc5d506ce7fd366e71c6b235eceed75521b47385d575c9268497d861ad2d",
+    "master_count": 61,
+    "initial_point_exact_dyadic": {
+      "imaginary": "-79244.97691791333982530700370819949298575535317212203780409339591018616099260249393539572158256607",
+      "imaginary_bits": 316,
+      "imaginary_dyadic": "-40356217231396353565042517626359291443172551391741418751072596525123888536627153137758367307939/509258994083621521567111422102344540262867098416484062659035112338595324940834176545849344",
+      "real": "0",
+      "real_bits": 315,
+      "real_dyadic": "0"
+    },
+    "destination_exact_dyadic": {
+      "imaginary": "-2.634747175402852380070383404334135951102055936284497129097981107612520837192072606038155213928490e-2",
+      "imaginary_bits": 316,
+      "imaginary_dyadic": "-56277858095897288242395228320544320856127934488837535937204420950678043339932602007921162598023/2135987035920910082395021706169552114602704522356652769947041607822219725780640550022962086936576",
+      "real": "0",
+      "real_bits": 315,
+      "real_dyadic": "0"
+    },
+    "source_epsilon": "1/3700",
+    "epsilon_specialization": "The original 315-bit rounded dyadic specialization of exact 1/3700 is retained unchanged for both runs.",
+    "initial_boundary_source": "Previously computed native RecursiveBoundary constants and native Frobenius initialization. No plugin reference values, reference seeds or fitted oracle values are read.",
+    "all_values_parameters_poles_and_path_retained_as_exact_captured_dyadics": true
+  },
+  "unchanged_settings": {
+    "arithmetic_working_digits": 90,
+    "local_target_digits": 80,
+    "prescribed_path": true,
+    "captured_poles_and_declared_domain_poles": true,
+    "taylor_tail_gate": true,
+    "endpoint_differential_gate": true,
+    "whole_disk_residual_gate": true,
+    "conditioning_gate": true,
+    "local_coordinates": "Identity",
+    "step_size_strategy": "Halving"
+  },
+  "omitted_work": [
+    "Native boundary construction",
+    "Infinity Frobenius preparation",
+    "Physical endpoint Frobenius matching/sector extraction",
+    "Epsilon sampling and Laurent fit",
+    "Reference comparison",
+    "Higher-precision native stability validation"
+  ]
+}

@@ -7,9 +7,10 @@ use Python 3.11 or newer. Run them from a fresh community integration checkout,
 using a new directory for the build inputs. No particular sibling layout is
 required.
 
-The runtime pin is `6e86afd9bed4cde2d10a466fe7cb0aab4094c78b`. The extra RustFlow
+The runtime pin is `4c48358185ec68de86f6acc6b195a201adbe2bae`. The extra RustFlow
 checkout below supplies patch files and the Cargo configuration template; Cargo
-loads the runtime itself from the community host's Git dependency.
+loads the runtime itself from the community host's Git dependency. The locked
+RustRed revision is `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`.
 
 ```sh
 integration_deps="$PWD/../loop-integration-dependencies"
@@ -17,7 +18,7 @@ mkdir -p "$integration_deps"
 integration_deps=$(cd "$integration_deps" && pwd)
 
 git clone https://github.com/alphal00p/RustFlow "$integration_deps/RustFlow-inputs"
-git -C "$integration_deps/RustFlow-inputs" checkout --detach 6e86afd9bed4cde2d10a466fe7cb0aab4094c78b
+git -C "$integration_deps/RustFlow-inputs" checkout --detach 4c48358185ec68de86f6acc6b195a201adbe2bae
 git clone https://github.com/alphal00p/gammaloop "$integration_deps/HEPKit"
 git -C "$integration_deps/HEPKit" checkout --detach 9d086cec7971005ec7244b43e8fcea2a403c18ef
 
@@ -76,7 +77,8 @@ import sys
 metadata = json.load(open(sys.argv[1]))
 active = {node["id"] for node in metadata["resolve"]["nodes"]}
 for name, revision in [
-    ("symbolica-amflow", "6e86afd9bed4cde2d10a466fe7cb0aab4094c78b"),
+    ("symbolica-amflow", "4c48358185ec68de86f6acc6b195a201adbe2bae"),
+    ("rustred-core", "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"),
     ("symbolica", "c3408e4ba1d3bdd4ea55678fad50e27009be13d4"),
     ("numerica", "c3408e4ba1d3bdd4ea55678fad50e27009be13d4"),
     ("graphica", "c3408e4ba1d3bdd4ea55678fad50e27009be13d4"),
