@@ -1,5 +1,10 @@
 # Implementation coverage
 
+The [Python API and notebook status](python-notebook-status.md) records the latest
+packaging milestone and distinguishes the completed historical native gg→hg cold
+calculation from the publication wheel's still-running full acceptance. The
+milestones below retain their original numerical scope and source provenance.
+
 The massless phase-space milestone passes **416 release unit/integration tests**,
 one doctest, strict all-target Clippy and formatting. Nine long scientific tests
 remain opt-in. Its [release report](../reports/validation/2026-10-05-massless-phase-space-release.json)

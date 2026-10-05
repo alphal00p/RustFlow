@@ -23,7 +23,7 @@ upstream parity is not established by process-specific benchmark success.
 |---|---|---|
 | AMFlow 2.0 | `26005517a288086c4cb4d1b26d829691bc088485` | Automatic auxiliary-mass boundaries, AMF/FT recursion, oracle |
 | DiffExp 1.1 | `784c8229bf92369a03f011a48e161522c8c54bbd` | Physical-variable transport, examples, oracle |
-| Symbolica main | `75f8350094b90254ee71dc2a391fde0d14b0204a` | Exact algebra and arbitrary-precision arithmetic |
+| Symbolica community | `c3408e4ba1d3bdd4ea55678fad50e27009be13d4` | Current shared algebra and arbitrary-precision dependency; older benchmark reports retain their measured revisions |
 
 DiffExp is checked out at `/common/dev/diffexp`. Its source is GPL-3.0-or-later;
 the Rust algorithms are implemented independently on this project's existing
@@ -34,7 +34,10 @@ implementation is copied or translated into MIT source. The separate
 The tool is named RustFlow. Its native reusable boundary bank is
 `RustFlowCache`, passed by mutable reference and persisted in binary form.
 The native library remains in this repository along with a HEPKit-compatible
-DOT-input CLI; Python bindings will live in HEPKit. Prefer existing Symbolica,
+DOT-input CLI. Optional PyO3 bindings also live in this crate and register in the
+community host under `symbolica.community.hep.integration`, using descriptive
+Python class names. See the [Python API and notebook status](python-notebook-status.md).
+Prefer existing Symbolica,
 Linnet and Spenso/HEPKit capabilities over independent implementations of graph
 or numerator-tensor operations. The reference checkout under
 `/common/dev/fastsecdec/DO_NOT_PUSH_FOR_REFERENCE_ONLY` is read-only.

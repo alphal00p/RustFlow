@@ -1,5 +1,10 @@
 # Implementation and reference comparisons
 
+For the later Python packaging milestone and fresh native Higgs-plus-jet cold
+calculation, see [Python API and notebook status](python-notebook-status.md).
+The historical measurements below retain their recorded implementation and
+dependency versions; they are not reruns of the publication wheel.
+
 Snapshot: 2026-10-05. RustFlow is not feature-complete, and broad performance
 parity is not established. The interfaces are topology-independent; current
 algorithmic coverage and reduction budgets still restrict supported evaluations.
@@ -12,11 +17,11 @@ and the [unified-flow design](unified-flow.md).
 |---|---|---|
 | Native family and reduction input | HEPKit graphs/kinematics, native tensor owners, exact families, RustRed and scoped table backends, derivative closure, reduction domains | Reducer search/compiled arity limits remain explicit; a target-only table need not cover derivatives or recursive families |
 | Shared numerical engine | Rational Taylor transport, rational Frobenius matching with resonances/logarithms, direct epsilon hierarchies, algebraic root charts, whole-segment defects, exact-source rational enclosures and endpoint precision retries | General accumulated error accounting and difficult non-dyadic conditioning; algebraic Puiseux/logarithmic singular endpoints and degenerate Gram charts |
-| Automatic AMF boundaries | Regions, factorization, recursive boundaries, gamma terminals, generic single-mass loop peeling including complex masses off the mass cut; separate unequal-mass two-body and massless N-body cut terminals | General linear/cut recursion and automatic Higgs+jet initialization |
+| Automatic AMF boundaries | Regions, factorization, recursive boundaries, gamma terminals, generic single-mass loop peeling including complex masses off the mass cut; separate unequal-mass two-body and massless N-body cut terminals; fresh Higgs+jet initialization passed on the historical frozen build | General linear/cut recursion; full Higgs+jet publication-wheel acceptance is still running |
 | AMFlow 2.0 options | Euclidean FT, configurable dimension, skipped initial reduction, basis refinement, symbolic restart | Broader validation/performance; FT physical contours remain outside its supported automatic scope |
 | Physical transport and cache | Progressive binary `RustFlowCache`, compatible-source search, checked intermediate points, inherited errors, supplied/AMF seeds, regular complex paths with explicit root germs | General causal-path inference, arbitrary algebraic coordinate constants and non-affine cached routes |
 | DiffExp controls | Exact multivariate pullback, canonical dlogs, supplied and compatible analytic-origin boundaries, explicit prescribed detours, exact diagonal epsilon rescaling, optional checked bracket proposals and regular Möbius charts | General nondiagonal epsilon regularization, off-center predivision, Padé, full singular algebraic boundary matching |
-| Higgs+jet amplitude | Supplied full master systems, W/Z crossings, native HEPKit contraction, HEFT square/interference | Uniform 20-digit EW square, fresh automatic AMF boundaries, matched full-amplitude timing |
+| Higgs+jet amplitude | W/Z crossings, native HEPKit contraction, HEFT square/interference; historical empty-cache calculation passed all 4,360 coefficient comparisons with native propagated observable estimates above 20 digits | Publication-wheel acceptance, forced 40-digit independent regeneration, populated notebook validation and matched full-amplitude timing; external EW-square reference evidence remains capped at 19 relative digits |
 
 AMF direct evaluation and AMF-generated seeds for physical transport share the
 same continuation owners. No benchmark topology is selected by a hard-coded
