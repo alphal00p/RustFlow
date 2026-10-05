@@ -8,8 +8,9 @@ RustFlow is being extended with DiffExp-style transport in physical kinematic
 variables and a progressively filled native `RustFlowCache`. The Rust crate
 retains the name `symbolica-amflow`. See the [active parity plan](docs/parity-plan.md)
 and [cache and transport interface](docs/rustflow.md). Full AMFlow/DiffExp parity
-remains a development goal. The [complete supplied Higgs+jet matrix element](docs/gg-hg-matrix-element.md)
-now has a native HEPKit validation with 19 propagated relative digits.
+remains a development goal. The [coherent pure W/Z Higgs+jet squared amplitude](docs/gg-hg-matrix-element.md)
+has a native HEPKit validation at one physical point with 19 propagated relative
+digits. The plugin's HEFT–EW interference observable still needs validation.
 
 The original paper's four two-loop targets pass the required calculation through
 epsilon power zero: 20-digit stability under independent sample/precision/order

@@ -1,0 +1,314 @@
+{
+  "status": "passed",
+  "date": "2026-10-05",
+  "scope": "Fresh argument-based optional native validation workspace: pinned external UFO preparation, native scopes/import, HEPKit generation/contraction and exact-input MPFR evaluation of recorded RustFlow form factors against the existing independent MG5/ALOHA QP reference. This gate reproduces contraction, not original form-factor integration or oracle regeneration.",
+  "root_revision_before_gate": "341b3514a84c0d765ea436e305595a23d17faf11",
+  "hepkit_revision": "a33254faf0ac960c0589891ffdd2d8f38d334b05",
+  "hepkit_dirty": "",
+  "checks": {
+    "rust_release_tests": 5,
+    "strict_clippy": "--release --all-features --all-targets -- -D warnings",
+    "fmt": "passed",
+    "helper_tests": 7,
+    "helper_python_versions": [
+      "3.13.12",
+      "3.14.7"
+    ],
+    "particles": 35,
+    "vertices": 141,
+    "effective_diagrams": 2,
+    "oracle_mismatch_rejected": true,
+    "rejected_run_emits_no_success_report": true
+  },
+  "retained_setup_failures": [
+    {
+      "stage": "strict_clippy",
+      "reason": "Needless borrow in native token exponent parsing; fixed and all-feature check passed."
+    },
+    {
+      "stage": "native UFO import",
+      "reason": "Embedded Python did not activate the selected virtualenv site-packages. Explicit Python3.13 venv PYTHONPATH fixed ModuleNotFoundError; README corrected."
+    }
+  ],
+  "result": {
+    "MH_squared": "1",
+    "MW_squared": "5399/13074",
+    "MZ_squared": "7775/14631",
+    "alpha": "1/128",
+    "alpha_s": "118/1000",
+    "arithmetic_refinement_absolute_difference": "4.055674264672502004597636616305471342926204724904961771879037760896114751466105452569585948553029190832649306906297e-84",
+    "evaluations": [
+      {
+        "bits": 256,
+        "imaginary": "0",
+        "real": "4.330896620239807810685905609324107407099586592501332217072507265531229985795e-8"
+      },
+      {
+        "bits": 384,
+        "imaginary": "0",
+        "real": "4.330896620239807810685905609324107407099586592501332217072507265531229985795405567426467250200459763661630547134293e-8"
+      }
+    ],
+    "homogeneous_quadratic_term_count": 72,
+    "native_owner_chain": "FeynKit Process -> Amplitude::squared -> sum_spins/sum_colors -> Idenso typed expanded/simplify_algebra -> native SU(3) Casimir formulas -> Kinematics::apply -> Model::expand_couplings and exact model parameter definitions -> Symbolica evaluate_with_prec",
+    "observable": "Pure |A_W+A_Z|^2, incoming two-gluon spin/color average only (IDEN256), final-state sum; no HEFT interference",
+    "oracle_absolute_difference": "1.309709958659250133221707250726553122998579540556742646725020045976366163054713429262651319892700963256751331496977e-40",
+    "oracle_acceptance_relative_tolerance": "1e-30",
+    "oracle_binary128": "4.33089662023980781068590560932409431E-0008",
+    "oracle_relative_difference": "3.024108108557737078338837514226102115436785850304086116962262332898658905699532591444695751438426135016554226382322e-33",
+    "physical_s": "7173070292440521/111284741846000",
+    "physical_t": "-12058167788971/339319588980",
+    "physical_u": "-24192567254732572725551/866477578314137826000",
+    "status": "passed",
+    "uncertainty": {
+      "absolute_total": "1.036965279540889484229816607147212347491680749337440461240057773672673644280375266356913373971924891557682004240003e-27",
+      "arithmetic_reserve": "1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-65",
+      "formula": "sum_i |df/dx_i| delta_i + 1/2 sum_ij |d2f/dx_i dx_j| delta_i delta_j; exact quadratic dependence certified by native polynomial grouping",
+      "gradients": [
+        {
+          "component_absolute_allowance": "2.289442277848471061721902375812729698034012320130570285353681993131585456961394592319192087592830576707897159726113e-26",
+          "derivative": "1.593299897653764164445986487649711310757239527680446998008688297189266240775277854563460297183394686796283562128116e-3",
+          "parameter": "GGGHEWWW_ForFac1_RE"
+        },
+        {
+          "component_absolute_allowance": "2.289442277848471061721902375812729698034012320130570285353681993131585456961394592319192087592830576707897159726113e-26",
+          "derivative": "-5.696528241664416229193983896809739359457191573011329075722099371636462829790254291868172311572208621467948001554200e-3",
+          "parameter": "GGGHEWWW_ForFac1_IM"
+        },
+        {
+          "component_absolute_allowance": "4.353014092257436734606982563129745702623730028177662551019522298554460677561823240898739112534691675300169662098514e-25",
+          "derivative": "3.357681296448928894122481419971522022795633180622660197359140632429323486016696502748814498686868846290836081560642e-4",
+          "parameter": "GGGHEWWW_ForFac2_RE"
+        },
+        {
+          "component_absolute_allowance": "4.353014092257436734606982563129745702623730028177662551019522298554460677561823240898739112534691675300169662098514e-25",
+          "derivative": "-2.273796455655057738387331225504482468128587190072487961869447687965553069368263574972062141350006277615004590732002e-4",
+          "parameter": "GGGHEWWW_ForFac2_IM"
+        },
+        {
+          "component_absolute_allowance": "4.103171368820387461726714767152197898235956134384709967460066721729586777644628502939486815277608057387479652479069e-26",
+          "derivative": "-6.519350011356155456594679498895836734033337174220328849034288028709962833576895299535029185951737604629488443976322e-4",
+          "parameter": "GGGHEWWW_ForFac3_RE"
+        },
+        {
+          "component_absolute_allowance": "4.103171368820387461726714767152197898235956134384709967460066721729586777644628502939486815277608057387479652479069e-26",
+          "derivative": "6.996174888385301096492797963295703898434371102762501054557245796891677637831253177550562189076995202909818383018748e-4",
+          "parameter": "GGGHEWWW_ForFac3_IM"
+        },
+        {
+          "component_absolute_allowance": "1.909457398070527145335680275763894806017297812830448865386300429018212844725557428564196774501532285010624731919360e-25",
+          "derivative": "-1.798149364006063126012559387266575830518256145020126713128443993621916811452383777924683178626437456061173942508039e-4",
+          "parameter": "GGGHEWWW_ForFac4_RE"
+        },
+        {
+          "component_absolute_allowance": "1.909457398070527145335680275763894806017297812830448865386300429018212844725557428564196774501532285010624731919360e-25",
+          "derivative": "-9.781256404447170300997523155598623801545564397790981166192574851924334617780005780352191769086795512332272487580396e-5",
+          "parameter": "GGGHEWWW_ForFac4_IM"
+        },
+        {
+          "component_absolute_allowance": "3.085061743744845428904247889560447290799134991694023744491235657255181616299932733014962698395583784287716564179076e-26",
+          "derivative": "1.123106425594519296040733801240659504500780922552265882361683954942220847664974131288091540725510073423235159045785e-3",
+          "parameter": "GGGHEWZZ_ForFac1_RE"
+        },
+        {
+          "component_absolute_allowance": "3.085061743744845428904247889560447290799134991694023744491235657255181616299932733014962698395583784287716564179076e-26",
+          "derivative": "-4.015444600991398128827114797090033317748005244082883088738630337104886762708680268070453549742340252649018537025942e-3",
+          "parameter": "GGGHEWZZ_ForFac1_IM"
+        },
+        {
+          "component_absolute_allowance": "5.559710371871399276020709954142272073212153479858167209952831777158960703815473743221350059648969604946179901419886e-25",
+          "derivative": "2.366807055403327129613463747726442717906126030956186628659445977865871961000146321002981987684630327017842548627554e-4",
+          "parameter": "GGGHEWZZ_ForFac2_RE"
+        },
+        {
+          "component_absolute_allowance": "5.559710371871399276020709954142272073212153479858167209952831777158960703815473743221350059648969604946179901419886e-25",
+          "derivative": "-1.602783891218939887030259578308440429060239359646628972694505704910832574922369026950181468748030705520236722896967e-4",
+          "parameter": "GGGHEWZZ_ForFac2_IM"
+        },
+        {
+          "component_absolute_allowance": "9.272156194059254810596316994979123367551441088263202054008446264099794763538697852481209086427290642347790844747404e-26",
+          "derivative": "-4.595446155011872520197022571469795045420441492597412833492737900147905609448538043559293210188076878941813903173089e-4",
+          "parameter": "GGGHEWZZ_ForFac3_RE"
+        },
+        {
+          "component_absolute_allowance": "9.272156194059254810596316994979123367551441088263202054008446264099794763538697852481209086427290642347790844747404e-26",
+          "derivative": "4.931556816955267389185443364942031111265589517789886740907855997489769904001989161292972773192009185643820189730239e-4",
+          "parameter": "GGGHEWZZ_ForFac3_IM"
+        },
+        {
+          "component_absolute_allowance": "2.498774449646958905325750897334242830492284807500043986214120492418334063153604647387250027585561275078712835408388e-25",
+          "derivative": "-1.267503442300956478977900460845287496597109713062884164611535042584657443170824907301029117752861318739427258249290e-4",
+          "parameter": "GGGHEWZZ_ForFac4_RE"
+        },
+        {
+          "component_absolute_allowance": "2.498774449646958905325750897334242830492284807500043986214120492418334063153604647387250027585561275078712835408388e-25",
+          "derivative": "-6.894742122558880631911632462971829880271246431448400479865533647768485458702893641840631602038055792359809857182164e-5",
+          "parameter": "GGGHEWZZ_ForFac4_IM"
+        }
+      ],
+      "linear": "1.036965279540889483963905878650919657846097623700845931752262803349386470015669426304457957974434595330065629260059e-27",
+      "metric": "absolute error, conditional on supplied complex FF absolute allowances; each real/imag component conservatively gets the same complex allowance",
+      "quadratic": "2.659107284962926896355831256365945294877949703232871742647058400524554159974902962276163749799442924006630131852274e-46",
+      "relative_total": "2.394343182182610640507098914400647349954599014676214101631470792730952317541292985415539474387140347664324994171361e-20",
+      "source_scope": "The model/scientific phase-point inputs are exact definitions; supplied FF numerical evidence remains the limiting uncertainty. No 20-digit claim follows from working precision or oracle agreement alone."
+    },
+    "verified_relative_digits": 19
+  },
+  "reference_report": {
+    "path": "reports/validation/2026-10-04-gg-hg-squared-matrix-element.json",
+    "bytes": 91326,
+    "sha256": "73453c87760e59b20d51cfeb2c12b7773abdc78acee82492560d8e11adf67957"
+  },
+  "artifacts": [
+    {
+      "path": "tools/hepkit-amplitude/src/amplitude.rs",
+      "bytes": 3187,
+      "sha256": "21cb37962841b2efb04209da425df43946dc3a33e6a40bd0872d128b02567479"
+    },
+    {
+      "path": "tools/hepkit-amplitude/src/evaluate.rs",
+      "bytes": 16339,
+      "sha256": "4ae311188b36fa3395a487fdb518cb7b5d9ec5d9f3ffa2a8e20b159d1885d8d3"
+    },
+    {
+      "path": "tools/hepkit-amplitude/src/scope_lorentz.rs",
+      "bytes": 1046,
+      "sha256": "0af4731ef0ae9018a4248082651c7d9039fecdc549659b1863bfdcb0c3f084a8"
+    },
+    {
+      "path": "tools/hepkit-amplitude/src/scope.rs",
+      "bytes": 5071,
+      "sha256": "bab42935e3e66a2c9dff35daa099b8b3e410de3b583c678081fe8835bab3e3ba"
+    },
+    {
+      "path": "tools/hepkit-amplitude/src/main.rs",
+      "bytes": 709,
+      "sha256": "e406ddca8fdc32aa2842584db7af37127b8351f283649eb7adb85d7bc9a273ee"
+    },
+    {
+      "path": "tools/hepkit-amplitude/scripts/prepare_ufo.py",
+      "bytes": 15295,
+      "sha256": "71f1c88a14235635fde865517a69d3a5d9925bd697cd54ddfe2eef1da3fd0dd3"
+    },
+    {
+      "path": "tools/hepkit-amplitude/Cargo.toml",
+      "bytes": 1831,
+      "sha256": "02cdd74f51dc3e0b03b24ceed409deaf14261b866e160a8bf1647da2fbc3ec8b"
+    },
+    {
+      "path": "tools/hepkit-amplitude/Cargo.lock",
+      "bytes": 56041,
+      "sha256": "48f0ae8e366d06b5b58486dc339621219a44a98d9946fb916172ee8325980daa"
+    },
+    {
+      "path": "tools/hepkit-amplitude/README.md",
+      "bytes": 6515,
+      "sha256": "6b2ead87f269b14b6a43b44c03110525136da7907efd1871fec3c00c826b2723"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/preparation.json",
+      "bytes": 5625,
+      "sha256": "4227d2920b3948c5840bd98123ab5022bba0482e11c21175e98a35371b63be62"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/scoping-provenance.json",
+      "bytes": 4694,
+      "sha256": "60a3c4dcf8468db4c44388bf89b2d0c6a4a6affedce88014addc5c4ba375b846"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/original-lorentz.json",
+      "bytes": 2771,
+      "sha256": "8934589b415403a15a6f6603d68b9088a29e9fd14e25dcfd78096bdf8ffb4444"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/scoped-lorentz.json",
+      "bytes": 539,
+      "sha256": "b2a086b3e4cc5e95a66401a6690bf802bdcab43bbccecc468f62e1a1e2342693"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/native-model.json",
+      "bytes": 207856,
+      "sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/scope.log",
+      "bytes": 112,
+      "sha256": "1d77307201a887cc52dbed4e5cca436254306f9badb50ee431e3bf2f2bd25f4a"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/import.log",
+      "bytes": 246,
+      "sha256": "9d1286886ebd71b0e0a81c70ebef6d3b2224f62f8cda66617db0fb6f7451d8c7"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/import-corrected.log",
+      "bytes": 3365,
+      "sha256": "c70d6e3afdca9cc956f0216002aec6d0c6681505df0ff2def8aefd16ef78ce35"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/amplitude.log",
+      "bytes": 276,
+      "sha256": "f14a6e8c5fa6d7a68127efef15f6e3ca3e04054a7a03b9d5f9bc83d9f17e69da"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/evaluation.log",
+      "bytes": 811,
+      "sha256": "0703935883852031b2a3e458cb4983c7a39384effb24211c422b32f4839526f5"
+    },
+    {
+      "path": "target/hepkit-reproducible-final/me-result.json",
+      "bytes": 9000,
+      "sha256": "5e0f6cf9929b22542422f7a167da01df6a12e3d2e8d1fac36018480ed484989e"
+    },
+    {
+      "path": "target/hepkit-amplitude-tool-tests.log",
+      "bytes": 7787,
+      "sha256": "eb01e2aebe599f426450e0b5c6a508bb7c75c89be03c0d596fb7aab032592bf3"
+    },
+    {
+      "path": "target/hepkit-amplitude-tool-clippy.log",
+      "bytes": 6142,
+      "sha256": "fe6a19af96e36d12ee4a78d81ca0882bad3aa0baad9900709119d3e897020715"
+    },
+    {
+      "path": "target/hepkit-amplitude-tool-clippy-passed.log",
+      "bytes": 291,
+      "sha256": "d4a89dbbeda9bd9045b4cab39791d9880af1d85da05fa044f19a141167fe0508"
+    },
+    {
+      "path": "target/hepkit-amplitude-tool-final-tests.log",
+      "bytes": 1470,
+      "sha256": "465730192f22aafe0f608716715fd8bc81e32c3512ebc62ebbd7ab587f7838c0"
+    },
+    {
+      "path": "target/hepkit-reproducible-rejection/evaluation.log",
+      "bytes": 476,
+      "sha256": "40bb5ff01d65f8a47e87e95a1c1167e5d2f22792df5f7f13a5d165f8cd7d34b0"
+    },
+    {
+      "path": "target/hepkit-reproducible-helper-report.json",
+      "bytes": 2701,
+      "sha256": "26f8a2b55d396d2537e52e36b1533d8c2db3a7081015ff4682719e49d6df8ea4"
+    },
+    {
+      "path": "target/hepkit-amplitude-tool/release/scope-lorentz",
+      "bytes": 20619128,
+      "sha256": "0ce83fea7b0a9b12e8f31cf4187159c0e7f3e12dec0f686681f575dbfa29ddfb"
+    },
+    {
+      "path": "target/hepkit-amplitude-tool/release/native-ufo-export",
+      "bytes": 21428064,
+      "sha256": "3623f96d1a157376d814cb656617d3aa9939a4f59fb1cfbd7b5fac84dd0e6bab"
+    },
+    {
+      "path": "target/hepkit-amplitude-tool/release/native-amplitude",
+      "bytes": 43203024,
+      "sha256": "c70d80213677a71b3783f793dd38894597f424168cf31190ddc160dad3b3f1cc"
+    },
+    {
+      "path": "target/hepkit-amplitude-tool/release/evaluate-me",
+      "bytes": 44023456,
+      "sha256": "377370bbabf3c9da7700b482ef5bc6342d6741c75afb4b6e8a945501bc5a78aa"
+    }
+  ]
+}

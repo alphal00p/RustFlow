@@ -1,0 +1,46 @@
+[package]
+name = "rustflow-hepkit-amplitude-validation"
+version = "0.0.0"
+edition = "2024"
+autobins = false
+[dependencies]
+symbolica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "75f8350094b90254ee71dc2a391fde0d14b0204a", default-features = false, features = ["integer-gmp", "float-mpfr", "serde", "tracing_max_level_info"] }
+feynkit-model = { path = "../../../hepkit/crates/feynkit-model", default-features = false }
+feynkit-ufo = { path = "../../../hepkit/crates/feynkit-ufo", optional = true }
+serde_json = "1"
+pyo3 = { version = "0.28", features = ["auto-initialize"], optional = true }
+feynkit-generator = { path = "../../../hepkit/crates/feynkit-generator", default-features = false }
+feynkit-amplitude = { path = "../../../hepkit/crates/feynkit-amplitude", default-features = false }
+feynkit-kinematics = { path = "../../../hepkit/crates/feynkit-kinematics", default-features = false }
+idenso = { path = "../../../hepkit/crates/idenso", default-features = false }
+spenso = { path = "../../../hepkit/crates/spenso", default-features = false }
+
+[[bin]]
+name = "evaluate-me"
+path = "src/evaluate.rs"
+
+[[bin]]
+name = "scope-lorentz"
+path = "src/scope_lorentz.rs"
+
+[[bin]]
+name = "native-amplitude"
+path = "src/amplitude.rs"
+
+[patch.crates-io]
+symbolica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "75f8350094b90254ee71dc2a391fde0d14b0204a" }
+numerica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "75f8350094b90254ee71dc2a391fde0d14b0204a" }
+graphica = { git = "https://github.com/symbolica-dev/symbolica.git", rev = "75f8350094b90254ee71dc2a391fde0d14b0204a" }
+[profile.release]
+debug = 0
+
+[workspace]
+
+[features]
+default = []
+ufo-import = ["dep:feynkit-ufo", "dep:pyo3"]
+
+[[bin]]
+name = "native-ufo-export"
+path = "src/main.rs"
+required-features = ["ufo-import"]

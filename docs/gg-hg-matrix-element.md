@@ -39,7 +39,9 @@ The pinned plugin's three Lorentz tensors contain reciprocals of closed indexed 
 
 The private importer preserves the original expression before normalization using Symbolica's `Token` AST. It wraps the three reciprocal momentum products in native `spenso::bracket`. Idenso then validates their scalar interfaces and contracts them to native `spenso::dot`. This adds scope metadata only: all original Lorentz expression strings were checked against the pinned UFO, and the external model and shared HEPKit sources remain unchanged. Generic regressions cover closed denominator contraction, retained free numerator ports, negative powers, nested division, idempotence, unchanged scalar expressions, and continued rejection of an open denominator.
 
-The separately recorded Python 3/metadata compatibility fixes retain the original tensor expressions. The root RustFlow library does not acquire Python or the heavy amplitude-generator dependencies; a dedicated opt-in tools crate is staged for the next integration milestone.
+The separately recorded Python 3/metadata compatibility fixes retain the original tensor expressions. The [optional validation workspace](../tools/hepkit-amplitude/README.md) provides runnable preparation, native import, amplitude generation, and scalar comparison commands. Its dependencies are separate from the root RustFlow library; Python is used only by the optional native UFO importer.
+
+The [fresh workspace acceptance](../reports/validation/2026-10-05-native-amplitude-tool.json) reproduces the scalar result after preparing and importing a new private UFO copy. Its five release tests and strict all-feature Clippy check pass; a deliberately incorrect oracle value is rejected without a success report. This reruns the native contraction using the recorded form factors, not their numerical integration.
 
 ## Independent oracle
 
