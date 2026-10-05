@@ -15,6 +15,7 @@ use residual::AlgebraicResidualChart;
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution, EpsilonSystem};
 use crate::family::{encode_complex, imaginary_parameter, scalar_symbols, substitute};
 use crate::fixed_series::{coefficients, fixed_series};
+use crate::local_coordinates::TaylorCoordinate;
 use crate::ode::{
     CompiledSystem, NumericRational, SeriesSystem, compile_rows, evaluate_taylor,
     transport_series_observed,
@@ -75,6 +76,7 @@ pub struct BranchSegment {
     pub end: BranchState,
     pub(crate) center: C,
     pub(crate) coefficients: Vec<Vec<C>>,
+    pub(crate) coordinate: TaylorCoordinate,
 }
 
 /// Exact differential matrices in physical invariants, with explicitly declared
@@ -432,6 +434,7 @@ struct KernelTerm {
 }
 #[derive(Clone, Debug)]
 pub struct CompiledAlgebraicSystem {
+    source: std::sync::Arc<AlgebraicSystem>,
     variable: Symbol,
     p: Precision,
     size: usize,
@@ -852,6 +855,7 @@ impl AlgebraicSystem {
             )?)
         };
         Ok(CompiledAlgebraicSystem {
+            source: std::sync::Arc::new(self.clone()),
             variable: self.system.variable,
             p,
             size: self.system.matrices[0].len(),
@@ -938,6 +942,7 @@ impl CompiledAlgebraicSystem {
                         end: state.clone(),
                         center: chart.center.clone(),
                         coefficients: chart.coefficients.clone(),
+                        coordinate: chart.coordinate.clone(),
                     });
                 }
             },
@@ -991,6 +996,10 @@ struct AlgebraicRun<'a> {
     seeds: &'a BTreeMap<Symbol, RootSeed>,
 }
 struct RootChart {
+    coordinate: TaylorCoordinate,
+    // Bound local root equations/coefficients in the same chart that produced
+    // the polynomial. Physical projection and RHS retain the original owner.
+    local_system: Option<std::sync::Arc<CompiledAlgebraicSystem>>,
     // Projection-only saved branch traces carry no solution residual.
     residual: Option<AlgebraicResidualChart>,
     center: C,
@@ -1039,7 +1048,7 @@ fn select_sign(p: Precision, principal: &C, hint: &C) -> Result<C> {
 impl AlgebraicRun<'_> {
     fn project(&self, chart: &RootChart, point: &C) -> Result<Vec<C>> {
         let p = self.compiled.p;
-        let step = p.sub(point, &chart.center);
+        let step = chart.coordinate.local_point(p, &chart.center, point)?;
         let (predicted, _) = evaluate_taylor(p, &chart.coefficients, &step);
         self.compiled
             .roots
@@ -1063,7 +1072,7 @@ impl AlgebraicRun<'_> {
         tolerance: &Float,
     ) -> Result<Option<Vec<C>>> {
         let p = self.compiled.p;
-        let step = p.sub(point, &chart.center);
+        let step = chart.coordinate.local_point(p, &chart.center, point)?;
         let (predicted, tails) = evaluate_taylor(p, &chart.coefficients, &step);
         let roots = match self.project(chart, point) {
             Ok(r) => r,
@@ -1090,7 +1099,11 @@ impl AlgebraicRun<'_> {
                     .series(p, point, 0)?[0],
                 root,
             );
-            let defect = p.mul(&step, &p.sub(&derivative, &rhs));
+            let derivative = p.div(
+                &derivative,
+                &chart.coordinate.jacobian_at(p, &chart.center, point)?,
+            );
+            let defect = p.mul(&p.sub(point, &chart.center), &p.sub(&derivative, &rhs));
             let radicand = &self.compiled.roots[i].value.series(p, point, 0)?[0];
             let square_residual = p.sub(&p.mul(root, root), radicand);
             if !p.finite(&defect)
@@ -1287,11 +1300,102 @@ impl SeriesSystem for AlgebraicRun<'_> {
         Ok((
             result,
             RootChart {
+                coordinate: TaylorCoordinate::Identity,
+                local_system: None,
                 residual: Some(residual),
                 center: center.clone(),
                 coefficients: root_coefficients,
             },
         ))
+    }
+    fn mapped_chart(
+        &self,
+        coordinate: &TaylorCoordinate,
+        center: &C,
+        values: &[C],
+        order: usize,
+        state: &BranchState,
+    ) -> Result<crate::ode::MappedTaylorChart<RootChart>> {
+        self.compiled.check_domain(center)?;
+        if state.point != *center {
+            return Err(Error::Numerical(
+                "mapped branch state and physical center differ".into(),
+            ));
+        }
+        let source = &self.compiled.source;
+        let variable = source.system.variable;
+        let expression = coordinate.expression(variable)?;
+        let jacobian = expression.derivative(variable).together().cancel();
+        let replacements = BTreeMap::from([(Atom::var(variable), expression)]);
+        // Source-domain extraction happens before substituting a chart or
+        // canceling its Jacobian, using the same registered-root domain owner.
+        let raw = source
+            .system
+            .matrices
+            .iter()
+            .flatten()
+            .flatten()
+            .cloned()
+            .collect::<Vec<_>>();
+        let guards =
+            registered_domain_conditions(&raw, &source.roots, &BTreeSet::from([variable]))?;
+        let mut nonzero_conditions = guards
+            .iter()
+            .chain(&source.nonzero_conditions)
+            .map(|g| substitute(g, &replacements).together().cancel())
+            .collect::<Vec<_>>();
+        nonzero_conditions.push(coordinate.denominator(variable));
+        let mapped = AlgebraicSystem {
+            system: EpsilonSystem {
+                variable,
+                matrices: source
+                    .system
+                    .matrices
+                    .iter()
+                    .map(|matrix| {
+                        matrix
+                            .iter()
+                            .map(|row| {
+                                row.iter()
+                                    .map(|a| {
+                                        (&jacobian * substitute(a, &replacements))
+                                            .together()
+                                            .cancel()
+                                    })
+                                    .collect()
+                            })
+                            .collect()
+                    })
+                    .collect(),
+            },
+            roots: source
+                .roots
+                .iter()
+                .map(|r| SquareRoot {
+                    symbol: r.symbol,
+                    radicand: substitute(&r.radicand, &replacements).together().cancel(),
+                })
+                .collect(),
+            nonzero_conditions,
+        }
+        .compile(self.compiled.p)?;
+        let local_state = BranchState {
+            point: self.compiled.p.zero(),
+            roots: state.roots.clone(),
+        };
+        let local_run = AlgebraicRun {
+            compiled: &mapped,
+            seeds: self.seeds,
+        };
+        // Never call initial_state here: the accepted physical signed roots
+        // are the initial values of the local logarithmic-derivative system.
+        let (coefficients, mut chart) =
+            local_run.local_chart(&self.compiled.p.zero(), values, order, &local_state)?;
+        chart.center = center.clone();
+        chart.coordinate = coordinate.clone();
+        let poles = mapped.poles.clone();
+        chart.local_system = Some(std::sync::Arc::new(mapped));
+        Ok((coefficients, chart, poles))
     }
     fn whole_segment_residual(&self, chart: &RootChart, step: &C) -> Result<Option<Vec<Float>>> {
         chart
@@ -1302,7 +1406,7 @@ impl SeriesSystem for AlgebraicRun<'_> {
                     "projection-only root chart cannot accept a transport step".into(),
                 )
             })?
-            .defect_bounds(self.compiled, step)
+            .defect_bounds(chart.local_system.as_deref().unwrap_or(self.compiled), step)
             .map(Some)
     }
     fn rhs(&self, point: &C, values: &[C], chart: &RootChart) -> Result<Vec<C>> {
@@ -1339,8 +1443,10 @@ impl SeriesSystem for AlgebraicRun<'_> {
                     "projection-only root chart cannot accept a transport step".into(),
                 )
             })?
-            .root_error_bounds(self.compiled, &p.sub(point, &chart.center))
-        {
+            .root_error_bounds(
+                chart.local_system.as_deref().unwrap_or(self.compiled),
+                &chart.coordinate.local_point(p, &chart.center, point)?,
+            ) {
             Ok(errors) => errors,
             Err(Error::Accuracy(_)) => return Ok(None),
             Err(error) => return Err(error),
@@ -1357,7 +1463,7 @@ impl SeriesSystem for AlgebraicRun<'_> {
         {
             return Ok(None);
         }
-        let midpoint = p.scale(&p.add(&chart.center, point), 1, 2);
+        let midpoint = p.coordinate_midpoint(&chart.center, point)?;
         if self.roots_accurate(chart, &midpoint, tolerance)?.is_none() {
             return Ok(None);
         }
@@ -1607,6 +1713,8 @@ impl CompiledAlgebraicSystem {
         }
         .project(
             &RootChart {
+                coordinate: segment.coordinate.clone(),
+                local_system: None,
                 residual: None,
                 center: segment.center.clone(),
                 coefficients: segment.coefficients.clone(),

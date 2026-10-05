@@ -49,6 +49,8 @@ pub struct FlowOptions {
     pub digits: u32,
     pub guard_digits: u32,
     pub series_order: usize,
+    /// Regular boundary-centered Taylor coordinates; physical paths remain unchanged.
+    pub local_coordinate: crate::local_coordinates::LocalCoordinate,
     /// Maximum acceptance-predicate evaluations per continuation call.
     /// Includes committed, rejected and successful superseded trials.
     pub max_steps: usize,
@@ -74,6 +76,7 @@ impl Default for FlowOptions {
             digits: 20,
             guard_digits: 40,
             series_order: 80,
+            local_coordinate: crate::local_coordinates::LocalCoordinate::Identity,
             max_steps: 1000,
             step_size_strategy: StepSizeStrategy::Halving,
             max_precision_attempts: 3,

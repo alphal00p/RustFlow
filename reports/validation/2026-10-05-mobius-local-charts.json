@@ -1,0 +1,216 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-05T05:25:34.010331+00:00",
+  "scope": "Target-only regular boundary-centered Mobius local-coordinate implementation; integration and complete production gate pending",
+  "source_head": "2f05e08dd948e963ed8795163641354303cec221",
+  "baseline": {
+    "description": "Current combined optional bracket controller, mandatory rational/root whole-segment residual and cached-evidence fix; production remained unchanged by this subagent",
+    "hashes": {
+      "diffexp.rs": "3684e427f236c1cb3a9e5c6116b98e3057aec221b7cfe045d350172470216bfd",
+      "ode.rs": "bbb90c6d7a2078a548dbf69829d09831adcf8307baf54949a1144f3cdb392d6a",
+      "options.rs": "a3f83c3fa34c262c2deecfee5cacdffbea850901794d2da8a26f4746ba61689a",
+      "algebraic.rs": "0069001cbe943fae16ce858d473cb0a94a5a92cd10a3c528a06d0d071044bbc6",
+      "algebraic/canonical.rs": "591fe277542d77fd898c03dc8976e8fd127db42956a033350caf0b85fd6f343c",
+      "algebraic/quotient.rs": "543b34a27d485d3c5450c65cff7defbc24106c9560854615ebfb3b0c84f75117",
+      "algebraic/analytic_origin.rs": "bbccc06377abe81dd97c68ec5c7010c2f9abd8c9160c593c78cc43c24b65afb8",
+      "algebraic/residual.rs": "d6a19517bf3e5a7a8ae1100586b7976f2d3e6f033f043d7adfffe84aba7af99e",
+      "ode/residual.rs": "fc3578d815d8f1c3422b910d602f36887474031ed18162d82ade7beae9767eba",
+      "ode/residual_tests.rs": "ec0db50b7be65406053840af922be4227ebe5da31619a5d45d2ffd3703406953",
+      "ode/step_size_tests.rs": "8cfa1a620e88bcecaf1b511772691bac483f4225f1193b54ccd1502a0acc96c2"
+    }
+  },
+  "public_api": {
+    "FlowOptions.local_coordinate": "LocalCoordinate::{Identity(default), BalancedMobius}",
+    "saved_segments": "TaylorSegment and BranchSegment coordinate metadata preserve physical center/end"
+  },
+  "implementation": [
+    "Exact original Atom connection and original domain conditions retained; native simultaneous substitution and derivative form mapped connection and Jacobian.",
+    "Each chart starts at the accepted physical boundary; map has exact binary-rationalized working coordinate choices, not promoted input precision.",
+    "Real poles choose nearest left/right endpoints; nonreal poles contribute symmetric radial distances. Actual transformed poles and retained domain guards constrain local steps.",
+    "Physical endpoint and midpoint are inverse-mapped before polynomial evaluation. Derivatives are divided by the map Jacobian for physical equation defects.",
+    "Full-degree rational and registered-root residual owners use mapped rows; registered-root projection uses original physical radicands and accepted signed roots.",
+    "Both existing step controllers share the same predicate, budgets, cancellation and accepted-state-only updates.",
+    "Physical cache values and germs are saved through the existing refinement/uncertainty protocol; persistent cache schema unchanged."
+  ],
+  "validation": {
+    "standalone_integration": {
+      "passed": 29,
+      "failed": 0,
+      "seconds": 19.2,
+      "wall_cap_seconds": 600,
+      "cpu": 33,
+      "log": "target/mobius-charts/tests-full-residual.log",
+      "sha256": "36f25e7ab4fff9898c46f9ca20aacac3b9f9db4ba5d86af0e1bbdae1f7ca4911",
+      "exit_code": 0,
+      "new_integration_tests": 9,
+      "copied_regression_tests": 20
+    },
+    "exact_map_units": {
+      "passed": 4,
+      "failed": 0,
+      "seconds": 0.01,
+      "log": "target/mobius-charts/map-tests.log",
+      "sha256": "987a6b81facf392ed052185177d4c82a6d458387e8591486467d85e29aa3142f"
+    },
+    "strict_clippy": {
+      "exit_code": 0,
+      "command_file": "target/mobius-charts/clippy-command.json",
+      "log": "target/mobius-charts/clippy-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "rustfmt": {
+      "exit_code": 0,
+      "log": "target/mobius-charts/fmt-check.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "strict_test_clippy": {
+      "exit_code": 0,
+      "command_file": "target/mobius-charts/test-clippy-command.json",
+      "log": "target/mobius-charts/test-clippy-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "tests": [
+    "Asymmetric rational analytic solution with physical-step extension, saved midpoint evaluation and50/96 to70/128 refinement.",
+    "Coupled noncommuting epsilon hierarchy against identity transport and independent precision/order refinement.",
+    "One/two complex root windings, accepted signed sheets, exp(-4)/1 analytic values, saved physical points and refinement.",
+    "Original removable source holes, map-pole Jacobian cancellation, reverse/complex legs, forged saved-center refusal and exact map identities.",
+    "Entire sparse polynomial fallback, cancellation/step budget, both step controllers and predicate accounting.",
+    "High-degree mapped rational and registered-root collocation aliases rejected by full-degree whole-segment bounds under both controllers.",
+    "Native algebraic RustFlow cache growth, physical Derived checkpoints, germ preservation, binary save/restart and exact hit."
+  ],
+  "preserved_failed_experiments": [
+    {
+      "log": "target/mobius-charts/first-stage/tests.log",
+      "sha256": "5e61c51c1ede266aa7e37389692f7fac93abce98b6ae533e49a5b1e15cc72a67",
+      "passed": 23,
+      "failed": 2,
+      "cause": "Initial conservative-order first-step assertion did not establish a gain; projected nonreal-pole real coordinates created an artificial boundary-centered barrier. Geometry was changed to symmetric radial proposals, with actual mapped pole bounds retained."
+    },
+    {
+      "log": "target/mobius-charts/diagnostic-tests.log",
+      "sha256": "afacc2658598b1d9bdbfb10d8073ad7bde9386ad357efa619fe260e2966c48f7",
+      "scope": "Failure diagnostics only, not a native Symbolica defect claim; a separate large-number evaluation probe did not reproduce a generic arithmetic failure."
+    }
+  ],
+  "limitations": [
+    "No off-center future-boundary predivision, fundamental-matrix matching or singular-center Mobius Frobenius charts.",
+    "Exact per-chart recompilation is deliberate; no performance advantage or broad upstream parity claim.",
+    "No complete production Cargo gate in this report; parent integrates reviewed patch then validates.",
+    "Whole-segment MPFR estimates are not outward-rounded interval certificates or a complete global forward-error proof.",
+    "No additional numerical-input or cache precision evidence is inferred from exact binary-rational chart choices."
+  ],
+  "artifacts": [
+    {
+      "path": "target/mobius-charts/library-command.json",
+      "bytes": 2125,
+      "sha256": "ecde3a8149cbec7587a4d16208c12af4c9f13c3b820bda05612b50411c79fab8"
+    },
+    {
+      "path": "target/mobius-charts/test-command.json",
+      "bytes": 2063,
+      "sha256": "60013e3758e0ff0e9cee61f8f1d00d4f98c104702195f8efb354a5d1ce2b9c07"
+    },
+    {
+      "path": "target/mobius-charts/clippy-command.json",
+      "bytes": 2168,
+      "sha256": "5534a84447369f1409c9fe839abec3be97261b834a7e689ed7dba83e4af8dd77"
+    },
+    {
+      "path": "target/mobius-charts/map-command.json",
+      "bytes": 2099,
+      "sha256": "6e338ae7d3bd1ae90456443663a3e02ce875161d05d97cbd1b5e3f71c6a5ed65"
+    },
+    {
+      "path": "target/mobius-charts/probe.rs",
+      "bytes": 1271,
+      "sha256": "b39146829abb5f39e064eef387bbf7af1bbbafbdaf6e71d77b39a0f27177e409"
+    },
+    {
+      "path": "target/mobius-charts/options_shim.rs",
+      "bytes": 3323,
+      "sha256": "eebfaa4fc805ef42c4bbce49452fee055cffd9355d1755b8a03795d2d45011a6"
+    },
+    {
+      "path": "target/mobius-charts/tests.rs",
+      "bytes": 269,
+      "sha256": "2852c29133cbc2e64e91d0337e4b3438f3dda76bd6003fbdfe2a1f3d5629815c"
+    },
+    {
+      "path": "target/mobius-charts/libmobius_stage.rlib",
+      "bytes": 70561828,
+      "sha256": "722a948c25abce1a2305cb9a9e378d34a45eee911cf70268a28fd72487077b9e"
+    },
+    {
+      "path": "target/mobius-charts/mobius_tests",
+      "bytes": 655790920,
+      "sha256": "21f064a68d4a0a9aee7e218de5cb9f74e09fc5b985f86f0056542759db4b7023"
+    },
+    {
+      "path": "target/mobius-charts/map-probe",
+      "bytes": 636859072,
+      "sha256": "881ac10e72bc8e7e52128b6e24e8a6a31e14f326a8bdd8f46e2818e7a760b6cc"
+    },
+    {
+      "path": "target/mobius-charts/mobius-over-whole-residual.patch",
+      "bytes": 65348,
+      "sha256": "64dff76fdc6825d9a9129011e35c31d73f080fe03737a3d0b3c5bd4c6eae9717"
+    }
+  ],
+  "source_files": [
+    {
+      "source": "target/mobius-charts/production/src/local_coordinates.rs",
+      "destination": "src/local_coordinates.rs",
+      "sha256": "eb856320fa4dec60170a5972cdb44c2906789e591c3f09cc9264d8392a8d899f",
+      "baseline_sha256": null
+    },
+    {
+      "source": "target/mobius-charts/production/src/options.rs",
+      "destination": "src/options.rs",
+      "sha256": "dc2f69af6f40eeaa153bbc8593e80f9cecda7f79078755e07953d23ff2ed853b",
+      "baseline_sha256": "a3f83c3fa34c262c2deecfee5cacdffbea850901794d2da8a26f4746ba61689a"
+    },
+    {
+      "source": "target/mobius-charts/production/src/ode.rs",
+      "destination": "src/ode.rs",
+      "sha256": "33df0101cd6afcd1796ca3372edba9394ad97fc48ab8de62c5b371f524e43ae5",
+      "baseline_sha256": "bbb90c6d7a2078a548dbf69829d09831adcf8307baf54949a1144f3cdb392d6a"
+    },
+    {
+      "source": "target/mobius-charts/production/src/diffexp.rs",
+      "destination": "src/diffexp.rs",
+      "sha256": "967dacd7e2e06b7ec819bdc351a76b65453cfda3f0c047826a38bbf9cb7dfa1e",
+      "baseline_sha256": "3684e427f236c1cb3a9e5c6116b98e3057aec221b7cfe045d350172470216bfd"
+    },
+    {
+      "source": "target/mobius-charts/production/src/algebraic.rs",
+      "destination": "src/algebraic.rs",
+      "sha256": "c1a4a56308b43dd8f23e7b2f2553b54286152969e7f6f5554f6ba19c834e9211",
+      "baseline_sha256": "0069001cbe943fae16ce858d473cb0a94a5a92cd10a3c528a06d0d071044bbc6"
+    },
+    {
+      "source": "target/mobius-charts/production/src/algebraic/analytic_origin.rs",
+      "destination": "src/algebraic/analytic_origin.rs",
+      "sha256": "1f9dd40af3c69e0cb233d1a11999516df4744b77c65470af6bbdb758ed91a7c8",
+      "baseline_sha256": "bbccc06377abe81dd97c68ec5c7010c2f9abd8c9160c593c78cc43c24b65afb8"
+    },
+    {
+      "source": "target/mobius-charts/production/tests/mobius.rs",
+      "destination": "tests/mobius.rs",
+      "sha256": "b1acfe0c9d2f9663201b191987a4b8699f5bfab6db9d837cbd7563e6436dbbb9",
+      "baseline_sha256": null
+    },
+    {
+      "source": "target/mobius-charts/production/tests/mobius_cache.rs",
+      "destination": "tests/mobius_cache.rs",
+      "sha256": "7b370d49b7524dbcba00bf9cb4252b4bcb128d9458345dba4938eab5742c2c91",
+      "baseline_sha256": null
+    },
+    {
+      "source": "target/mobius-charts/production/docs/local-coordinates.md",
+      "destination": "docs/local-coordinates.md",
+      "sha256": "549be3262c315c4b4e8bee93ba29e14297a66f286021ab7642ef5cd5a243afaf",
+      "baseline_sha256": null
+    }
+  ]
+}

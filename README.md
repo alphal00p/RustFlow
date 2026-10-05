@@ -21,10 +21,13 @@ refinement and agreement with upstream data at its recorded precision. See the
 and [implemented coverage and limits](docs/coverage.md).
 [Whole-segment Taylor checks](docs/transport-verification.md) now address the
 [recorded sparse-polynomial verification failure](reports/validation/2026-10-05-residual-alias-counterexample.json).
-The [release gate](reports/validation/2026-10-05-whole-segment-residual-release.json) passes 440 tests and one doctest.
-A separate [large-cancellation counterexample](reports/validation/2026-10-05-coordinate-roundoff-counterexample.json)
-still produces false verified digits and needs a precision-retry fix. Local
-defect checks and independent refinements are not a general accuracy proof.
+The [release gate](reports/validation/2026-10-05-conditioned-transport-release.json) passes 469 tests and one doctest, with 10 long scientific regressions opt-in.
+[Endpoint conditioning and bounded precision retries](docs/arithmetic-conditioning.md)
+address the separate [large-cancellation counterexample](reports/validation/2026-10-05-coordinate-roundoff-counterexample.json).
+Ordinary rational charts also check directed defect enclosures against exact
+source coefficients. Optional [regular Möbius charts](docs/local-coordinates.md)
+share the same endpoint, path and cache checks. These local checks and independent
+refinements are not a general accumulated-error proof.
 The [implementation and benchmark comparison](docs/benchmark-comparison.md)
 lists completed and pending features with RustFlow and reference timings side by side.
 An executable [performance comparison](docs/performance.md) measures the Rust

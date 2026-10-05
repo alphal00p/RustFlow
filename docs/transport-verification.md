@@ -41,16 +41,25 @@ analytic-origin initialization have separate solution recurrences. An
 analytic-origin root chart can check root errors without claiming a
 whole-segment bound for that separate solution recurrence.
 
-These are arbitrary-precision MPFR estimates, not directed interval bounds.
+Ordinary rational and epsilon charts retain exact Gaussian-rational source rows
+after denominator clearing. Symbolica's directed `ComplexBall` and polynomial
+arithmetic enclose their residual against those rows, interpreting retained
+Taylor coefficients and finite numerical parameters as their stored dyadics.
+Directed coefficient bounds use a component one-norm disk containing the step.
+The endpoint-conditioning diagnostic separately checks arithmetic cancellation.
+Registered-root assembly retains its MPFR-estimate scope.
+
 The whole-segment test bounds a local differential defect; it does not by itself
 prove an accumulated solution-error bound. Propagation through nonnormal
 systems, accumulation over many segments, arithmetic cancellation and final
 output conditioning require separate accounting. Independent refinements and
 reference comparisons establish evidence for their particular inputs, not a
 general guarantee for every connection. The [large-cancellation reproducer](../reports/validation/2026-10-05-coordinate-roundoff-counterexample.json)
-still defeats both numerical profiles on this corrected build. An endpoint
-arithmetic-conditioning guard with fresh higher-precision source evaluation is
-being implemented separately.
+records the previous false-verification failure. The new
+[arithmetic-conditioning guard](arithmetic-conditioning.md) requests fresh
+higher-precision evaluation and caps cache evidence. An unresolved containing
+saved segment is reported rather than silently discarded during path lookup.
+Severe non-dyadic cancellation can still exhaust the bounded precision budget.
 
 ## Step proposals and retained evidence
 

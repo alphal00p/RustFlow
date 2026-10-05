@@ -16,6 +16,45 @@ pub struct Precision {
 }
 
 impl Precision {
+    /// Sample the physical midpoint without discarding higher-precision input
+    /// coordinates before averaging. This need not be an exact dyadic midpoint
+    /// when the endpoints have widely separated binary exponents.
+    pub(crate) fn coordinate_midpoint(
+        &self,
+        a: &ComplexFloat,
+        b: &ComplexFloat,
+    ) -> Result<ComplexFloat> {
+        let bits = [
+            self.bits,
+            a.re.prec(),
+            a.im.prec(),
+            b.re.prec(),
+            b.im.prec(),
+        ]
+        .into_iter()
+        .max()
+        .unwrap()
+        .checked_add(1)
+        .ok_or_else(|| Error::Limit("midpoint coordinate precision overflow".into()))?;
+        let p = Self { bits };
+        Ok(p.scale(&p.add(a, b), 1, 2))
+    }
+
+    /// Raise a decimal working precision using an integer bit-count hint.
+    /// The conversion is conservative and shares `decimal`'s 3322/1000 scale.
+    pub(crate) fn refinement_digits(current: u32, minimum_bits: u32) -> Result<u32> {
+        let suggested = u64::from(minimum_bits)
+            .checked_mul(1000)
+            .and_then(|v| v.checked_add(3321))
+            .map(|v| v / 3322 + 1)
+            .and_then(|v| u32::try_from(v).ok())
+            .ok_or_else(|| Error::Limit("precision retry hint overflow".into()))?;
+        current
+            .checked_add(20)
+            .map(|next| next.max(suggested))
+            .ok_or_else(|| Error::Limit("precision refinement overflow".into()))
+    }
+
     pub fn decimal(digits: u32) -> Result<Self> {
         let bits = digits
             .checked_mul(3322)

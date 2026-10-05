@@ -802,13 +802,12 @@ pub(crate) fn fit_samples_refined_leading(
         ));
     }
     let mut previous: Option<Vec<LaurentExpansion>> = None;
+    let mut working_digits = options.digits + options.guard_digits;
     for attempt in 0..=options.max_precision_attempts {
         let mut refined = options.clone();
-        refined.guard_digits = refined
-            .guard_digits
-            .checked_add(attempt as u32 * 20)
-            .ok_or_else(|| Error::Limit("precision refinement overflow".into()))?;
+        refined.guard_digits = working_digits - options.digits;
         refined.series_order += attempt * 16;
+        refined.validate()?;
         let samples = epsilon::epsilon_samples(
             count + attempt * 4,
             100 * (1_i64
@@ -816,7 +815,16 @@ pub(crate) fn fit_samples_refined_leading(
                 .ok_or_else(|| Error::Limit("too many precision attempts".into()))?),
         )?;
         let p = Precision::decimal(refined.digits + refined.guard_digits)?;
+        let current_digits = working_digits;
+        working_digits = Precision::refinement_digits(current_digits, 0)?;
         let values = match evaluate(&samples, &refined) {
+            Err(Error::InsufficientPrecision { minimum_bits, .. })
+                if attempt < options.max_precision_attempts =>
+            {
+                working_digits = Precision::refinement_digits(current_digits, minimum_bits)?;
+                previous = None;
+                continue;
+            }
             Err(Error::Accuracy(_) | Error::Numerical(_))
                 if attempt < options.max_precision_attempts =>
             {
@@ -891,6 +899,37 @@ pub(crate) fn fit_samples_refined_leading(
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn laurent_refinement_rebuilds_samples_after_a_precision_hint() -> Result<()> {
+        let calls = std::cell::RefCell::new(Vec::new());
+        let minimum = Precision::decimal(140)?.bits;
+        let fits = fit_samples_refined_leading(1, 0, 0, &FlowOptions::default(), |samples, o| {
+            let p = Precision::decimal(o.digits + o.guard_digits)?;
+            calls.borrow_mut().push((p.bits, samples[0].clone()));
+            if p.bits < minimum {
+                return Err(Error::InsufficientPrecision {
+                    minimum_bits: minimum,
+                    context: "boundary reconstruction needs additional precision".into(),
+                });
+            }
+            Ok(samples.iter().map(|_| vec![p.i(1)]).collect())
+        })?;
+        let calls = calls.into_inner();
+        assert_eq!(calls.len(), 3);
+        assert!(calls[0].0 < minimum);
+        assert!(calls[1].0 >= minimum && calls[2].0 > calls[1].0);
+        assert_ne!(calls[0].1, calls[1].1);
+        assert_ne!(calls[1].1, calls[2].1);
+        assert_eq!(fits[0].verified_digits, Some(20));
+        assert_eq!(fits[0].refinements, 2);
+        assert!(Precision::decimal(160)?.close(
+            &fits[0].coefficients[&0],
+            &Precision::decimal(160)?.i(1),
+            20
+        ));
+        Ok(())
+    }
+
     #[test]
     fn fit_refinement_checks_relative_accuracy_for_small_coefficients() {
         for guard_digits in [40, 0] {

@@ -27,6 +27,7 @@ struct Settings {
     series_order: usize,
     max_steps: usize,
     step_size_strategy: String,
+    local_coordinate: String,
     max_precision_attempts: usize,
     max_boundary_attempts: usize,
     workers: usize,
@@ -48,6 +49,7 @@ impl Default for Settings {
             series_order: f.series_order,
             max_steps: f.max_steps,
             step_size_strategy: "halving".into(),
+            local_coordinate: "identity".into(),
             max_precision_attempts: f.max_precision_attempts,
             max_boundary_attempts: f.max_boundary_attempts,
             workers: f.workers,
@@ -73,6 +75,11 @@ impl Settings {
                 "halving" => StepSizeStrategy::Halving,
                 "bracketed" => StepSizeStrategy::Bracketed,
                 _ => return Err("step_size_strategy must be halving or bracketed".into()),
+            },
+            local_coordinate: match self.local_coordinate.as_str() {
+                "identity" => LocalCoordinate::Identity,
+                "balanced_mobius" => LocalCoordinate::BalancedMobius,
+                _ => return Err("local_coordinate must be identity or balanced_mobius".into()),
             },
             max_precision_attempts: self.max_precision_attempts,
             max_boundary_attempts: self.max_boundary_attempts,
@@ -894,6 +901,7 @@ fn execute_transport(
             "starting_point":point_json(&result.starting_point)?,
             "verified_digits":result.boundary.accuracy.verified_digits(),
             "working_bits":result.boundary.accuracy.working_bits(),
+            "conditioning_digits":result.transport.as_ref().and_then(|t| t.diagnostics.conditioning_digits),
             "steps":result.transport.as_ref().map_or(0,|t| t.diagnostics.steps),
             "rejected_steps":result.transport.as_ref().map_or(0,|t| t.diagnostics.rejected_steps),
             "predicate_evaluations":result.transport.as_ref().map_or(0,|t| t.diagnostics.predicate_evaluations),
@@ -1012,6 +1020,21 @@ mod step_size_settings_tests {
         }
         let invalid: Settings =
             serde_json::from_value(json!({"step_size_strategy":"unchecked"})).unwrap();
+        assert!(invalid.options(Path::new(".")).is_err());
+        assert_eq!(defaults.local_coordinate, LocalCoordinate::Identity);
+        for (text, expected) in [
+            ("identity", LocalCoordinate::Identity),
+            ("balanced_mobius", LocalCoordinate::BalancedMobius),
+        ] {
+            let settings: Settings =
+                serde_json::from_value(json!({"local_coordinate": text})).unwrap();
+            assert_eq!(
+                settings.options(Path::new(".")).unwrap().local_coordinate,
+                expected
+            );
+        }
+        let invalid: Settings =
+            serde_json::from_value(json!({"local_coordinate": "unchecked"})).unwrap();
         assert!(invalid.options(Path::new(".")).is_err());
     }
 }

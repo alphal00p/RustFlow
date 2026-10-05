@@ -16,6 +16,10 @@ pub enum Error {
     Limit(String),
     #[error("requested accuracy was not reached: {0}")]
     Accuracy(String),
+    /// Working precision cannot resolve endpoint arithmetic conditioning.
+    /// Re-evaluation must use fresh source/boundary data at the suggested bits.
+    #[error("insufficient working precision (at least {minimum_bits} bits): {context}")]
+    InsufficientPrecision { minimum_bits: u32, context: String },
     #[error("calculation cancelled")]
     Cancelled,
     #[error("cache error: {0}")]

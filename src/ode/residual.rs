@@ -3,8 +3,10 @@
 //! All source polynomial degrees are retained: a high-degree sparse connection
 //! must not disappear merely because the requested solution order is smaller.
 //! Symbolica owns polynomial differentiation, shifting and multiplication.
-//! The resulting bounds use MPFR arithmetic, not directed interval arithmetic,
-//! and bound the local differential defect rather than accumulated global error.
+//! Ordinary rational charts retain exact source coefficients and use native
+//! directed ball arithmetic. Registered-root assembly currently retains its
+//! separate MPFR estimate scope. Both bound local differential defects, not
+//! accumulated global solution error.
 use crate::fixed_series::FixedComplexRing;
 use crate::ode::{NumericRational, PolynomialRow};
 use crate::{ComplexFloat as C, Error, Precision, Result};
@@ -15,6 +17,7 @@ use symbolica::prelude::*;
 #[derive(Clone, Debug)]
 pub(crate) struct RationalResidualChart {
     residuals: Vec<NumericRational>,
+    exact_source: Option<super::source::ExactSourceResidual>,
 }
 
 impl RationalResidualChart {
@@ -25,8 +28,44 @@ impl RationalResidualChart {
         {
             return Err(Error::InvalidInput("empty residual polynomial".into()));
         }
-        Ok(Self { residuals })
+        Ok(Self {
+            residuals,
+            exact_source: None,
+        })
     }
+    pub(crate) fn new_exact(
+        p: Precision,
+        rows: &[super::source::ExactPolynomialRow],
+        center: &C,
+        coefficients: &[Vec<C>],
+        channels: usize,
+    ) -> Result<Self> {
+        Ok(Self {
+            residuals: Vec::new(),
+            exact_source: Some(super::source::ExactSourceResidual::new(
+                p,
+                rows,
+                center,
+                coefficients,
+                channels,
+            )?),
+        })
+    }
+
+    pub(crate) fn defect_bounds_with_budget(
+        &self,
+        p: Precision,
+        step: &C,
+        values: &[C],
+        tolerance: &Float,
+    ) -> Result<Vec<Float>> {
+        if let Some(source) = &self.exact_source {
+            source.defect_bounds(p, step, Some((values, tolerance)))
+        } else {
+            self.defect_bounds(p, step)
+        }
+    }
+
     pub(crate) fn new(
         p: Precision,
         rows: &[PolynomialRow],
@@ -94,13 +133,19 @@ impl RationalResidualChart {
                 };
             }
         }
-        Ok(Self { residuals })
+        Ok(Self {
+            residuals,
+            exact_source: None,
+        })
     }
 
     /// For every component, estimate |h| sup_{|z|<=|h|} |P'(z)-A(c+z)P(z)|.
     /// An inconclusive denominator lower bound requests a shorter step; it
     /// must never be converted into acceptance or a zero bound.
     pub(crate) fn defect_bounds(&self, p: Precision, step: &C) -> Result<Vec<Float>> {
+        if let Some(source) = &self.exact_source {
+            return source.defect_bounds(p, step, None);
+        }
         let radius = p.norm(step);
         if !radius.is_finite() {
             return Err(Error::Accuracy("nonfinite residual disk radius".into()));

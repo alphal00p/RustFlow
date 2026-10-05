@@ -409,13 +409,42 @@ pub(crate) fn amplification_from_integral(
     Ok(amplification)
 }
 
+/// A full polynomial at a disk center. At exact zero the coefficients are
+/// already in the requested coordinate; preserve fixed-precision rounding
+/// without running a quadratic identity shift. Nonfinite inputs keep the
+/// existing shift/error behavior.
+fn disk_coefficients<'a>(
+    p: Precision,
+    coefficients: &'a [C],
+    center: &C,
+) -> std::borrow::Cow<'a, [C]> {
+    if !coefficients.is_empty() && *center == p.zero() && coefficients.iter().all(|a| p.finite(a)) {
+        if coefficients
+            .iter()
+            .all(|a| a.re.as_raw().prec() == p.bits && a.im.as_raw().prec() == p.bits)
+        {
+            std::borrow::Cow::Borrowed(coefficients)
+        } else {
+            // The old zero shift rounds every finite coefficient to p.bits.
+            std::borrow::Cow::Owned(coefficients.iter().map(|a| p.round(a)).collect())
+        }
+    } else {
+        std::borrow::Cow::Owned(shift_polynomial(
+            p,
+            coefficients,
+            center,
+            coefficients.len() - 1,
+        ))
+    }
+}
+
 pub(crate) fn rational_disk_bound(
     p: Precision,
     value: &crate::ode::NumericRational,
     center: &C,
     radius: &Float,
 ) -> Result<Option<Float>> {
-    let denominator = shift_polynomial(p, &value.denominator, center, value.denominator.len() - 1);
+    let denominator = disk_coefficients(p, &value.denominator, center);
     let mut lower = p.norm(&denominator[0]);
     let mut power = radius.clone();
     for a in denominator.iter().skip(1) {
@@ -430,11 +459,11 @@ pub(crate) fn rational_disk_bound(
     if lower <= p.real(0) {
         return Ok(None);
     }
-    let numerator = shift_polynomial(p, &value.numerator, center, value.numerator.len() - 1);
+    let numerator = disk_coefficients(p, &value.numerator, center);
     let mut upper = p.real(0);
     let mut power = p.real(1);
-    for a in numerator {
-        upper += p.norm(&a) * &power;
+    for a in numerator.iter() {
+        upper += p.norm(a) * &power;
         power *= radius;
     }
     let bound = upper / lower;
@@ -475,19 +504,50 @@ impl SeriesSystem for CompiledEpsilonSystem {
         let coefficients = self
             .rows
             .taylor_channels(center, values, order, self.count)?;
-        let chart = crate::ode::residual::RationalResidualChart::new(
+        let chart = crate::ode::residual::RationalResidualChart::new_exact(
             self.rows.p,
-            &self.rows.polynomial_rows,
+            &self.rows.exact_source_rows,
             center,
             &coefficients,
             self.count,
         )?;
         Ok((coefficients, chart))
     }
+    fn mapped_chart(
+        &self,
+        coordinate: &crate::local_coordinates::TaylorCoordinate,
+        _: &C,
+        values: &[C],
+        order: usize,
+        _: &(),
+    ) -> Result<crate::ode::MappedTaylorChart<Self::Chart>> {
+        let mapped = self.rows.in_coordinate(coordinate)?;
+        let coefficients =
+            mapped.taylor_channels(&self.rows.p.zero(), values, order, self.count)?;
+        let chart = crate::ode::residual::RationalResidualChart::new_exact(
+            self.rows.p,
+            &mapped.exact_source_rows,
+            &self.rows.p.zero(),
+            &coefficients,
+            self.count,
+        )?;
+        Ok((coefficients, chart, mapped.poles))
+    }
     fn whole_segment_residual(&self, chart: &Self::Chart, step: &C) -> Result<Option<Vec<Float>>> {
         chart.defect_bounds(self.rows.p, step).map(Some)
     }
 
+    fn whole_segment_residual_with_budget(
+        &self,
+        chart: &Self::Chart,
+        step: &C,
+        values: &[C],
+        tolerance: &Float,
+    ) -> Result<Option<Vec<Float>>> {
+        chart
+            .defect_bounds_with_budget(self.rows.p, step, values, tolerance)
+            .map(Some)
+    }
     fn rhs(&self, point: &C, values: &[C], _: &Self::Chart) -> Result<Vec<C>> {
         let p = self.rows.p;
         let n = self.rows.dimension();
@@ -518,35 +578,49 @@ impl EpsilonSolution {
     /// Evaluate only when the retained path identifies one value at the point.
     /// Self-intersections carrying different monodromies are rejected.
     pub fn evaluate_path(&self, point: &C) -> Result<Vec<Vec<C>>> {
+        Ok(self.evaluate_path_conditioned(point)?.0)
+    }
+    fn evaluate_path_conditioned(&self, point: &C) -> Result<(Vec<Vec<C>>, u32)> {
         let p = Precision {
             bits: self.diagnostics.working_bits,
         };
         let mut value: Option<Vec<Vec<C>>> = None;
+        let mut conditioning_digits = u32::MAX;
         for i in 0..self.segments.len() {
-            if let Ok(candidate) = self.evaluate_segment(i, point) {
-                if let Some(previous) = &value {
-                    if !candidate
-                        .iter()
-                        .flatten()
-                        .zip(previous.iter().flatten())
-                        .all(|(a, b)| p.close(a, b, 30))
-                    {
-                        return Err(Error::InvalidInput(
+            match self.evaluate_segment_conditioned(i, point) {
+                Err(error @ Error::InsufficientPrecision { .. }) => return Err(error),
+                Err(_) => continue,
+                Ok((candidate, checked)) => {
+                    conditioning_digits = conditioning_digits.min(checked);
+                    if let Some(previous) = &value {
+                        if !candidate
+                            .iter()
+                            .flatten()
+                            .zip(previous.iter().flatten())
+                            .all(|(a, b)| p.close(a, b, 30))
+                        {
+                            return Err(Error::InvalidInput(
                             "saved path has multiple branch values at this point; select a segment"
                                 .into(),
                         ));
+                        }
+                    } else {
+                        value = Some(candidate);
                     }
-                } else {
-                    value = Some(candidate);
                 }
             }
         }
-        value.ok_or_else(|| Error::InvalidInput("point is outside the saved path".into()))
+        value
+            .map(|v| (v, conditioning_digits))
+            .ok_or_else(|| Error::InvalidInput("point is outside the saved path".into()))
     }
     /// Evaluate a saved segment only on its traversed straight interval. This
     /// avoids silently switching analytic branches at overlapping disks. At a
     /// self-intersection the caller chooses the desired segment explicitly.
     pub fn evaluate_segment(&self, index: usize, point: &C) -> Result<Vec<Vec<C>>> {
+        Ok(self.evaluate_segment_conditioned(index, point)?.0)
+    }
+    fn evaluate_segment_conditioned(&self, index: usize, point: &C) -> Result<(Vec<Vec<C>>, u32)> {
         let segment = self
             .segments
             .get(index)
@@ -568,10 +642,18 @@ impl EpsilonSolution {
         if !p.finite(point) {
             return Err(Error::InvalidInput("nonfinite evaluation point".into()));
         }
-        let t = p.div(
-            &p.sub(point, &segment.center),
-            &p.sub(&segment.end, &segment.center),
-        );
+        let span = p.sub(&segment.end, &segment.center);
+        if !p.finite(&span) || span == p.zero() {
+            return Err(Error::InvalidInput(
+                "saved segment has a nonfinite or zero numerical span".into(),
+            ));
+        }
+        let t = p.div(&p.sub(point, &segment.center), &span);
+        if !p.finite(&t) {
+            return Err(Error::InvalidInput(
+                "saved segment interval coordinate is nonfinite".into(),
+            ));
+        }
         let tolerance = p.tolerance((p.bits / 4).min(30));
         if t.im > tolerance
             || t.im < -tolerance.clone()
@@ -582,8 +664,11 @@ impl EpsilonSolution {
                 "point is outside the saved segment interval".into(),
             ));
         }
-        let (flat, _) = evaluate_taylor(p, &segment.coefficients, &p.sub(point, &segment.center));
-        Ok(flat.chunks(n).map(<[C]>::to_vec).collect())
+        let local = segment.coordinate.local_point(p, &segment.center, point)?;
+        let (flat, _) = evaluate_taylor(p, &segment.coefficients, &local);
+        let checked = crate::ode::conditioning::ConditioningChart::new(p, &segment.coefficients)?
+            .check(p, &local, &flat, segment.conditioning_digits)?;
+        Ok((flat.chunks(n).map(<[C]>::to_vec).collect(), checked))
     }
 }
 
@@ -605,13 +690,22 @@ pub fn transport_epsilon(
             .iter()
             .map(|a| p.eval(a, &Default::default()))
             .collect::<Result<Vec<_>>>()?;
-        compiled.transport(
-            &boundary_provider(p)?,
+        let boundary = boundary_provider(p)?;
+        let coordinate_digits = crate::ode::conditioning::exact_waypoint_conditioning(
+            p,
+            &boundary.point,
+            waypoints,
             &points,
-            refined,
-            context,
-            save_segments,
-        )
+            options.digits,
+        )?;
+        let mut result = compiled.transport(&boundary, &points, refined, context, save_segments)?;
+        result.diagnostics.conditioning_digits = Some(
+            result
+                .diagnostics
+                .conditioning_digits
+                .map_or(coordinate_digits, |old| old.min(coordinate_digits)),
+        );
+        Ok(result)
     })
 }
 
@@ -641,26 +735,51 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
 ) -> Result<(EpsilonSolution, M)> {
     options.validate()?;
     let mut previous: Option<(EpsilonSolution, M)> = None;
+    let mut working_digits = options
+        .digits
+        .checked_add(options.guard_digits)
+        .ok_or_else(|| Error::Limit("working precision overflow".into()))?;
+    let mut last_precision_failure = None;
     for attempt in 0..=options.max_precision_attempts {
         context.cancellation.check()?;
         let mut refined = options.clone();
-        refined.guard_digits = refined
-            .guard_digits
-            .checked_add(20 * attempt as u32)
-            .ok_or_else(|| Error::Limit("working precision overflow".into()))?;
+        refined.guard_digits = working_digits - options.digits;
         refined.series_order = refined
             .series_order
             .checked_add(32 * attempt)
             .ok_or_else(|| Error::Limit("series order overflow".into()))?;
         refined.validate()?;
         let p = Precision::decimal(refined.digits + refined.guard_digits)?;
-        let (mut result, metadata) = run(p, &refined)?;
+        let (mut result, metadata) = match run(p, &refined) {
+            Ok(result) => result,
+            Err(Error::InsufficientPrecision {
+                minimum_bits,
+                context,
+            }) => {
+                working_digits = Precision::refinement_digits(working_digits, minimum_bits)?;
+                previous = None;
+                last_precision_failure = Some((minimum_bits, context));
+                continue;
+            }
+            Err(error) => return Err(error),
+        };
+        last_precision_failure = None;
+        working_digits = working_digits
+            .checked_add(20)
+            .ok_or_else(|| Error::Limit("working precision overflow".into()))?;
         if let Some((old, old_metadata)) = &previous {
             if old.leading != result.leading {
                 return Err(Error::InvalidInput(
                     "boundary provider changed the leading epsilon power".into(),
                 ));
             }
+            result.diagnostics.conditioning_digits = match (
+                old.diagnostics.conditioning_digits,
+                result.diagnostics.conditioning_digits,
+            ) {
+                (Some(a), Some(b)) => Some(a.min(b)),
+                _ => None,
+            };
             result.comparison_errors = result
                 .coefficients
                 .iter()
@@ -682,10 +801,23 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
                 result.verified_digits = Some(options.digits);
                 if save_segments {
                     for (index, segment) in result.segments.iter().enumerate() {
-                        if let Ok(reference) = old.evaluate_path(&segment.end)
+                        if let Ok((reference, old_checked)) =
+                            old.evaluate_path_conditioned(&segment.end)
                             && compatible(old, old_metadata, &result, &metadata, index)?
                         {
-                            let values = result.evaluate_segment(index, &segment.end)?;
+                            let (values, new_checked) =
+                                match result.evaluate_segment_conditioned(index, &segment.end) {
+                                    Ok(v) => v,
+                                    Err(Error::InsufficientPrecision { .. }) => continue,
+                                    Err(error) => return Err(error),
+                                };
+                            let checked = old_checked.min(new_checked);
+                            result.diagnostics.conditioning_digits = Some(
+                                result
+                                    .diagnostics
+                                    .conditioning_digits
+                                    .map_or(checked, |old| old.min(checked)),
+                            );
                             if values
                                 .iter()
                                 .flatten()
@@ -716,6 +848,14 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
             }
         }
         previous = Some((result, metadata));
+    }
+    if let Some((minimum_bits, context)) = last_precision_failure {
+        return Err(Error::InsufficientPrecision {
+            minimum_bits,
+            context: format!(
+                "precision retry budget exhausted without two successful profiles; last diagnostic: {context}"
+            ),
+        });
     }
     Err(Error::Accuracy(
         "epsilon transport did not stabilize under precision/order refinement".into(),

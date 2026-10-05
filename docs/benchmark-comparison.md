@@ -11,11 +11,11 @@ and the [unified-flow design](unified-flow.md).
 | Part of the plan | Implemented | Still outstanding |
 |---|---|---|
 | Native family and reduction input | HEPKit graphs/kinematics, native tensor owners, exact families, RustRed and scoped table backends, derivative closure, reduction domains | Reducer search/compiled arity limits remain explicit; a target-only table need not cover derivatives or recursive families |
-| Shared numerical engine | Rational Taylor transport, rational Frobenius matching with resonances/logarithms, direct epsilon hierarchies, algebraic root charts, whole-segment Taylor defects | Arithmetic cancellation and accumulated error accounting; general algebraic Puiseux/logarithmic singular endpoints and degenerate Gram charts |
+| Shared numerical engine | Rational Taylor transport, rational Frobenius matching with resonances/logarithms, direct epsilon hierarchies, algebraic root charts, whole-segment defects, exact-source rational enclosures and endpoint precision retries | General accumulated error accounting and difficult non-dyadic conditioning; algebraic Puiseux/logarithmic singular endpoints and degenerate Gram charts |
 | Automatic AMF boundaries | Regions, factorization, recursive boundaries, gamma terminals, generic single-mass loop peeling including complex masses off the mass cut; separate unequal-mass two-body and massless N-body cut terminals | General linear/cut recursion and automatic Higgs+jet initialization |
 | AMFlow 2.0 options | Euclidean FT, configurable dimension, skipped initial reduction, basis refinement, symbolic restart | Broader validation/performance; FT physical contours remain outside its supported automatic scope |
 | Physical transport and cache | Progressive binary `RustFlowCache`, compatible-source search, checked intermediate points, inherited errors, supplied/AMF seeds, regular complex paths with explicit root germs | General causal-path inference, arbitrary algebraic coordinate constants and non-affine cached routes |
-| DiffExp controls | Exact multivariate pullback, canonical dlogs, supplied and compatible analytic-origin boundaries, explicit prescribed detours, exact diagonal epsilon rescaling of rational and registered-root systems, optional checked bracket proposals | General nondiagonal epsilon regularization, Möbius/Padé controls, full singular algebraic boundary matching |
+| DiffExp controls | Exact multivariate pullback, canonical dlogs, supplied and compatible analytic-origin boundaries, explicit prescribed detours, exact diagonal epsilon rescaling, optional checked bracket proposals and regular Möbius charts | General nondiagonal epsilon regularization, off-center predivision, Padé, full singular algebraic boundary matching |
 | Higgs+jet amplitude | Supplied full master systems, W/Z crossings, native HEPKit contraction, HEFT square/interference | Uniform 20-digit EW square, fresh automatic AMF boundaries, matched full-amplitude timing |
 
 AMF direct evaluation and AMF-generated seeds for physical transport share the
@@ -84,7 +84,7 @@ timing trials. Most rows have one timing observation per profile.
 | [Full 108-master nonplanar five-point](../reports/diffexp/nonplanar108-validation.json) | 233.89 low / 684.63 high transport | 200.73 accurate transport | All 540 coefficients, 20 absolute digits; original fast 44.08-second profile only passes 14 digits |
 | [Full 74-master MZZ five-point](../reports/diffexp/fivepoint-mzz-validation.json) | 3524.86 low / 4541.57 high transport | 1147.09 transport | All 370 coefficients, 20 absolute digits, independent refinement |
 | [Full 75-master ZMZ five-point](../reports/diffexp/fivepoint-zmz-validation.json) | 9308.38 cumulative low / 12157.19 fresh high process | 1847.95 transport; 1854.56 process | All 375 coefficients, 20 absolute digits, independent refinement |
-| [Full 86-master ZZZ five-point](../reports/diffexp/fivepoint-zzz-first-endpoint.json) | 10122.59 cumulative first endpoint | 2453.68 transport | All 430 first comparisons pass 20 absolute digits; independent high profile pending |
+| [Full 86-master ZZZ five-point](../reports/diffexp/fivepoint-zzz-validation.json) | 10122.59 cumulative low; 14042.05 fresh high transport (14052.49 in-program total) | 2453.68 transport | All 430 coefficients pass 20 absolute digits, independent refinement and three root sheets; monitoring interruption and unavailable exit status retained |
 | [ZZZ 86-master, separate 128-digit notebook profile](../reports/diffexp/fivepoint-zzz-128-original-failure.json) | [Baseline running](../reports/diffexp/fivepoint-zzz-128-native-launch.json); no endpoint result | Mathematica memory failure after 1811.93 s; 36/108 segments | Acceptance pending; original failed under declared 16 GiB address-space cap, no wall/RSS watchdog censor |
 
 The 75- and 86-master cumulative times include capped predecessors, discarded
@@ -92,9 +92,12 @@ work and checkpoint restoration. They are not uninterrupted transport timings.
 The higher profiles start independently from the supplied original boundary.
 Original MZZ/ZMZ/ZZZ notebook runs request 15 digits; their observed reference
 agreement is sufficient for the stated 20-digit comparisons, but does not change
-their configured accuracy target. The full 75-master refinement now passes; the full 86-master refinement is
-still pending. These scientific runs use the immutable library revisions named
-in their reports; the prepared current-library full-system regressions remain
+their configured accuracy target. Both full 75- and 86-master refinements now pass.
+The 86-master monitoring parent ended while its numerical child continued; the
+original cap was adopted without restarting the calculation. Its complete output
+was independently checked, but its exit status is unavailable and RSS polling has
+a roughly 345-second gap. These scientific runs use the immutable library
+revisions named in their reports; current-library full-system regressions remain
 separate, opt-in validations.
 
 A [controlled step-selection experiment](../reports/performance/step-bracket-leg100.json)

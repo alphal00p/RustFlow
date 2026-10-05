@@ -1,0 +1,264 @@
+{
+  "schema_version": 1,
+  "status": "frozen target-only rational exact-source residual stage, ready for coherent parent integration",
+  "recorded_utc": "2026-10-05T06:10:40.194123+00:00",
+  "base": {
+    "base_commit": "c3a05476a224afaf163b12c4c132cce8de694c9e",
+    "files": {
+      "src/ode.rs": "bbb90c6d7a2078a548dbf69829d09831adcf8307baf54949a1144f3cdb392d6a",
+      "src/diffexp.rs": "3684e427f236c1cb3a9e5c6116b98e3057aec221b7cfe045d350172470216bfd",
+      "src/ode/residual.rs": "fc3578d815d8f1c3422b910d602f36887474031ed18162d82ade7beae9767eba"
+    },
+    "error_source": "target/endpoint-conditioning/production/src/error.rs",
+    "scope": "Target-only rational exact-source residuals, no production writes"
+  },
+  "production_files": [
+    {
+      "staged_path": "target/exact-source-residual-production/production/src/ode.rs",
+      "destination": "src/ode.rs",
+      "sha256": "a0c0d2bc1849f0239c5a319a2f4fa7166fc041c50e2cda4e28b04c82ca9c4aaa"
+    },
+    {
+      "staged_path": "target/exact-source-residual-production/production/src/diffexp.rs",
+      "destination": "src/diffexp.rs",
+      "sha256": "10df5b6b4a46ad7322305a264e5ba9d487cfbdd711b19ceb5181395c08bc8ecc"
+    },
+    {
+      "staged_path": "target/exact-source-residual-production/production/src/ode/residual.rs",
+      "destination": "src/ode/residual.rs",
+      "sha256": "a52fd7ee6a2c1177bcc81b19ed7afc039cd6d6add007ecb24acb3caa1004eb50"
+    },
+    {
+      "staged_path": "target/exact-source-residual-production/production/src/ode/source.rs",
+      "destination": "src/ode/source.rs",
+      "sha256": "29f76e2264af98e434decd2b4f8a5c8b41f011e3ca6665487bf027310593249d"
+    }
+  ],
+  "test_file": {
+    "path": "target/exact-source-residual-production/standalone/exact_source_tests.rs",
+    "sha256": "2119828850fd56a02fddb774ed7062656fed4d753f37b6c3863b9faa9591f1ed",
+    "suggested_destination": "src/ode/source_tests.rs",
+    "integration": "Add a cfg(test) module include under ode or source; adjust only module path, no test semantics."
+  },
+  "patches": [
+    {
+      "path": "target/exact-source-residual-production/production.patch",
+      "sha256": "ef98280378a4ffca5b3c0f49510dd09d65e9f8b3c1c6aadfb509345919506d7b"
+    },
+    {
+      "path": "target/exact-source-residual-production/mapped-adaptation.patch",
+      "sha256": "faf2955eadefba7687e0cfe77dbe70b74e0eb124f3ac791ac4f8a217b0de2477"
+    },
+    {
+      "path": "target/exact-source-residual-production/mapped-adaptation-base.json",
+      "sha256": "1c7c89f9bc33a1d110684f6ded120c3390c2bd309331f1be05848e6d3e76b8d4"
+    }
+  ],
+  "validation": {
+    "build": {
+      "exit": 0,
+      "elapsed_seconds": 104.27334842085838,
+      "command": [
+        "taskset",
+        "-c",
+        "36",
+        "rustc",
+        "--edition=2024",
+        "-C",
+        "opt-level=1",
+        "/common/dev/amflow/target/exact-source-residual-production/standalone/driver.rs",
+        "-o",
+        "/common/dev/amflow/target/exact-source-residual-production/tests",
+        "-L",
+        "dependency=/common/dev/amflow/target/whole-segment-release/deps",
+        "-L",
+        "dependency=/common/dev/amflow/target/release/deps",
+        "--extern",
+        "symbolica_amflow=/common/dev/amflow/target/whole-segment-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+        "--extern",
+        "symbolica=/common/dev/amflow/target/release/deps/libsymbolica-75e897282e2131a2.rlib",
+        "--extern",
+        "serde_json=/common/dev/amflow/target/release/deps/libserde_json-570390c70cf80f0e.rlib",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/blake3-9252326cebd21167/out",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/blake3-222d768860627915/out",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-d5e4317be2c2f047/out/lib",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+        "--test",
+        "--extern",
+        "ahash=/common/dev/amflow/target/release/deps/libahash-83e25d37cc3da50b.rlib",
+        "--extern",
+        "serde=/common/dev/amflow/target/release/deps/libserde-56ff5551063f771d.rlib",
+        "--extern",
+        "linnet=/common/dev/amflow/target/release/deps/liblinnet-207fb9ba6bc15b59.rlib",
+        "--extern",
+        "thiserror=/common/dev/amflow/target/release/deps/libthiserror-f61969d60e953433.rlib"
+      ],
+      "cpu": 36,
+      "cap_seconds": 180,
+      "cap_bytes": 6442450944,
+      "sources": {
+        "production/src/diffexp.rs": "10df5b6b4a46ad7322305a264e5ba9d487cfbdd711b19ceb5181395c08bc8ecc",
+        "production/src/ode.rs": "a0c0d2bc1849f0239c5a319a2f4fa7166fc041c50e2cda4e28b04c82ca9c4aaa",
+        "production/src/ode/step_size_tests.rs": "8cfa1a620e88bcecaf1b511772691bac483f4225f1193b54ccd1502a0acc96c2",
+        "production/src/ode/source.rs": "29f76e2264af98e434decd2b4f8a5c8b41f011e3ca6665487bf027310593249d",
+        "production/src/ode/residual.rs": "a52fd7ee6a2c1177bcc81b19ed7afc039cd6d6add007ecb24acb3caa1004eb50",
+        "production/src/ode/residual_tests.rs": "ec0db50b7be65406053840af922be4227ebe5da31619a5d45d2ffd3703406953",
+        "standalone/diffexp.rs": "aa51709bf7947515eaf4648a6c4bec0937973ed2a016f408b5a50478406e42f2",
+        "standalone/error.rs": "32bb6340c4d9d7689ea3b39606acfa0e22e80189faaa09d145ee82898db94822",
+        "standalone/options.rs": "a3f83c3fa34c262c2deecfee5cacdffbea850901794d2da8a26f4746ba61689a",
+        "standalone/driver.rs": "14c566a030066fb8a2048502c2473cda0b1b8292418e0d5a598db69181ad2403",
+        "standalone/family.rs": "5c86ebb7bdc5894801f8cf34064b3341aa640e4033136ee67c7287c86dd910f8",
+        "standalone/algebra.rs": "e34b40238dcfc393c8153dbdcac26362254aec1ea1b4d28b54e157eb6c4f110e",
+        "standalone/exact_source_tests.rs": "2119828850fd56a02fddb774ed7062656fed4d753f37b6c3863b9faa9591f1ed",
+        "standalone/fixed_series.rs": "a0a0e13c37fc129ed0f6e5e10768343dc1e913d512b7ef5598c4a54981e295db",
+        "standalone/cli_settings.rs": "fd70af1f48026a538f2ff13b989e00b3346c7f531346499b76f77a131ae8bd46",
+        "standalone/physical_conditions.rs": "a522e5151d287664378f2e7ad8b437dd6dc2fa51afbf818a2b342c218526e056"
+      }
+    },
+    "tests": {
+      "exit": 0,
+      "elapsed_seconds": 5.180112909991294,
+      "command": [
+        "taskset",
+        "-c",
+        "36",
+        "/common/dev/amflow/target/exact-source-residual-production/tests",
+        "--skip",
+        "hidden_system_never_receives_false_verified_digits",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "cpu": 36,
+      "cap_seconds": 120,
+      "cap_bytes": 6442450944,
+      "excluded_test_reason": "This isolated stage retains the old refinement wrapper which does not catch new typed precision outcomes. Parent has integrated the shared retry owner and must run this full high-degree endpoint test after combining stages."
+    },
+    "clippy": {
+      "exit": 0,
+      "elapsed_seconds": 1.0190360648557544,
+      "command": [
+        "taskset",
+        "-c",
+        "36",
+        "clippy-driver",
+        "--edition=2024",
+        "-C",
+        "opt-level=1",
+        "/common/dev/amflow/target/exact-source-residual-production/standalone/driver.rs",
+        "-o",
+        "/common/dev/amflow/target/exact-source-residual-production/clippy.rmeta",
+        "-L",
+        "dependency=/common/dev/amflow/target/whole-segment-release/deps",
+        "-L",
+        "dependency=/common/dev/amflow/target/release/deps",
+        "--extern",
+        "symbolica_amflow=/common/dev/amflow/target/whole-segment-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+        "--extern",
+        "symbolica=/common/dev/amflow/target/release/deps/libsymbolica-75e897282e2131a2.rlib",
+        "--extern",
+        "serde_json=/common/dev/amflow/target/release/deps/libserde_json-570390c70cf80f0e.rlib",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/blake3-9252326cebd21167/out",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/blake3-222d768860627915/out",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-d5e4317be2c2f047/out/lib",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+        "--test",
+        "--extern",
+        "ahash=/common/dev/amflow/target/release/deps/libahash-83e25d37cc3da50b.rlib",
+        "--extern",
+        "serde=/common/dev/amflow/target/release/deps/libserde-56ff5551063f771d.rlib",
+        "--extern",
+        "linnet=/common/dev/amflow/target/release/deps/liblinnet-207fb9ba6bc15b59.rlib",
+        "--extern",
+        "thiserror=/common/dev/amflow/target/release/deps/libthiserror-f61969d60e953433.rlib",
+        "--emit=metadata",
+        "-D",
+        "warnings"
+      ],
+      "cpu": 36,
+      "cap_seconds": 60,
+      "cap_bytes": 6442450944
+    },
+    "fmt_exit": 0,
+    "executed_tests": 28,
+    "new_tests": 10,
+    "existing_tests": 18,
+    "filtered_tests": 1,
+    "remaining_combined_gate_test": "ode::residual_tests::hidden_system_never_receives_false_verified_digits requires the parent shared typed-precision retry owner; this old-wrapper isolated stage did not run it."
+  },
+  "library": {
+    "path": "target/whole-segment-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+    "sha256": "21451b9dafd72706b8fd6f75a0a9f9a680860a8f6ab4cfaf5847a8180c4e1ecf"
+  },
+  "typed_error_contract": {
+    "owner": "boundary_budget endpoint-conditioning stage",
+    "path": "target/exact-source-residual-production/standalone/error.rs",
+    "sha256": "32bb6340c4d9d7689ea3b39606acfa0e22e80189faaa09d145ee82898db94822",
+    "variant": "Error::InsufficientPrecision { minimum_bits:u32, context:String }",
+    "shared_retry_owner": "Parent owns current Precision::refinement_digits and refinement orchestration; no competing retry loop added."
+  },
+  "changes": [
+    "Existing native coefficient extraction shared by central Float and exact Gaussian-rational specialization. Central recurrence arithmetic is unchanged.",
+    "compile_rows retains parallel exact_source_rows after existing exact denominator LCM, preserving full degree and exact nonzero sparse entries. Numerical parameters are specialized as stored exact dyadics; their physical uncertainty remains separate.",
+    "Ordinary and epsilon charts use native ComplexBall coefficient construction and UnivariatePolynomial<FloatField<ComplexBall>> derivative/shift/product/subtraction to enclose the full exact-source differential defect. Registered-root assembly retains its explicit existing MPFR estimate scope.",
+    "Native outward precision rescaling preserves exact stored dyadic Taylor coefficient values without letting an old storage precision unnecessarily limit evidence arithmetic. This does not promote input accuracy.",
+    "Directed Float operations form disk majorants using a certified component one-norm radius and lower component denominator modulus. No new convolution, recurrence or transcendental interval arithmetic.",
+    "Budgeted whole_segment_residual hook defaults to existing mandatory evidence. Rational owner requests precision only when enclosure width exceeds budget and dominates the central residual magnitude; genuine truncation and geometric denominator uncertainty remain step rejection.",
+    "No acceptance tolerance relaxation. Strongly cancelling non-dyadic sources can still exhaust the working-derived local tolerance and must fail with a typed result."
+  ],
+  "mapped_integration": [
+    "Retained source data travels through CompiledSystem returned by shared compile_rows, including in_coordinate mapped recompilation.",
+    "Both mapped ordinary/epsilon RationalResidualChart constructors must use new_exact and mapped.exact_source_rows at zero local center.",
+    "Budgeted StepTrial hook must receive local polynomial step, endpoint values and existing local tolerance; preserve physical coordinate/branch/domain guards.",
+    "Patch generated against current parent production source; parent independently handles three-way conflicts with conditioning and M\u00f6bius sources."
+  ],
+  "proof_scope": [
+    "Certified coefficient/residual enclosure for the local rational polynomial chart against exact specialized source.",
+    "No full global solution-error certificate: amplification, boundary/parameter uncertainty, endpoint arithmetic and singular matching remain separate evidence.",
+    "Existing early numeric compilation failures retain their prior handling; this stage classifies chart residual enclosure width.",
+    "Registered root, logarithm and singular Frobenius source enclosures remain follow-up.",
+    "No numerical performance claim; no current live benchmark modified."
+  ],
+  "standalone_adapters": [
+    "Local Error mirrors parent endpoint-stage variant and converts archived errors only in standalone shim.",
+    "Standalone diffexp differs only by omitted unrelated cache uncertainty tests and conversion of archived Precision::eval error at map collection.",
+    "No production files edited by this agent."
+  ],
+  "artifact_hashes": [
+    {
+      "path": "target/exact-source-residual-production/build.json",
+      "sha256": "dc946715e777fea11829aa614ce08d603d90e699f342fe8cb4e6038ce2978c56"
+    },
+    {
+      "path": "target/exact-source-residual-production/build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/exact-source-residual-production/tests.json",
+      "sha256": "6d65d75221a80d07e13de44a2a0add9804f5c5f1f77b334fd3406308e47d2ae4"
+    },
+    {
+      "path": "target/exact-source-residual-production/tests.log",
+      "sha256": "0e798168621c0e6e4caedfdcde6dda3db41dd29dbbe1019c5c7ee77930049939"
+    },
+    {
+      "path": "target/exact-source-residual-production/clippy.json",
+      "sha256": "86807ad1c68186b63b0e41f7c3df2e2fa0589545e538f5b9be155e97b28474dd"
+    },
+    {
+      "path": "target/exact-source-residual-production/clippy.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "target/exact-source-residual-production/command.json",
+      "sha256": "0911262bab48104692ff20ef1029faf83aa0161e18db45c97aba0aac859438a0"
+    }
+  ]
+}

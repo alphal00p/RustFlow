@@ -1,0 +1,42 @@
+{
+  "recorded_utc": "2026-10-05T06:24:10.894641+00:00",
+  "status": "frozen_for_parent_integration; formatting and strict metadata-only Clippy pass; runtime tests pending parent full gate",
+  "base": {
+    "file": "src/physical_transport.rs",
+    "sha256": "f2607e04d8ba04a2288fbd5796a852a4053dc124b691f4c741e0f4357afc1c52",
+    "scope": "Only exhausted typed precision joins accuracy-rejected boundary fallback. Other errors, caps and cancellation unchanged."
+  },
+  "files": {
+    "production/src/physical_transport.rs": "55efb2573b0fbbba2ce197cdd9e93e5ab6219e8f7d00bdf860e943d82fd4339c",
+    "production/tests/precision_cache_fallback.rs": "cb41996cb07523fa136af42f2317fee877c75718e5deedc765a011fc2d22b89c",
+    "production.patch": "4d92de8a216a07ea937c25803462bfc1d2ce92279ea995fdd89cbfe798e3fe07",
+    "base.json": "bff11021ce2feba2ff67ca1a1a756445255c5a96fbe3000d430b6e4977e75522",
+    "typecheck.json": "4e248c171d05faec3b3e1d183f1278b4ef095ba5d191a87c5deb896c1294d5fc",
+    "typecheck.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "scope": "Treat exhausted typed precision as a rejected starting boundary and continue bounded cache source search. No new recurrence, source accuracy, caps or cancellation semantics. Other typed errors propagate.",
+  "analytic_regression": {
+    "system": "Y1_prime=(1/3-2^400)*Y2; Y2_prime=0",
+    "exact_solution": "Y=[2^400+(1/3-2^400)*s,1]",
+    "target": "s=1; Y=[1/3,1]",
+    "first_source": "s=0; Y=[2^400,1]",
+    "second_source": "s=1-2^-400; Y=[4/3-1/(3*2^400),1]",
+    "policy": "exact coordinate ranking: initial bad source cost0, near source cost1; exact target cache hit cost0 preferred by existing tie rule",
+    "accuracy": "Both boundaries computed directly from exact Gaussian-rational values at220decimaldigits; supplied180digit evidence unchanged. No source uncertainty improvement claim.",
+    "tests": [
+      "exact Gaussian solution identity",
+      "fallback from exhausted precision then cache hit",
+      "attempt cap and exhausted bank unchanged",
+      "cancellation between source attempts with unchanged cache"
+    ]
+  },
+  "validation": {
+    "metadata_only_clippy": "passed against immutable 440-test whole-segment archive (API/type only)",
+    "runtime": "not launched; requires merged exact-source/endpoint/fallback production in parent gate"
+  },
+  "limitations": [
+    "Does not relax strict working-derived local residual budget.",
+    "Does not certify global propagated solution error.",
+    "Does not address separately rounded Float parameter specialization."
+  ]
+}

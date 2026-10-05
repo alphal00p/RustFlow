@@ -22,16 +22,27 @@ candidate and commits only the selected state. Exact cache hits preserve source
 provenance, and a captured erroneous old snapshot is rejected by source-fingerprint
 compatibility before its values are admitted.
 
-These [local defect checks](transport-verification.md) use finite MPFR arithmetic;
-they do not establish directed interval bounds or accumulated global accuracy.
-A separate [coordinate/coefficient-cancellation failure](../reports/validation/2026-10-05-coordinate-roundoff-counterexample.json)
-is reproduced on the corrected library: two insufficient working precisions
-return zero instead of one and claim 20 verified digits, even when the residual
-of the rounded numerical system vanishes. Source and recurrence roundoff need
-a separate precision-retry mechanism. This is a RustFlow verification gap;
-Symbolica rounds the requested numerical operations correctly. Historical reference
-comparisons establish accuracy for their recorded inputs; they have not all
-been repeated on this new library.
+The newer [conditioned-transport release](../reports/validation/2026-10-05-conditioned-transport-release.json)
+passes **469 release unit/integration tests**, one doctest, strict all-target
+Clippy and formatting; 10 long scientific regressions remain opt-in. It adds
+regular boundary-centered Möbius charts and directed rational/epsilon residual
+enclosures against exact Gaussian-rational source coefficients. Symbolica owns
+the polynomial and ball arithmetic. Registered-root residual assembly retains
+its separately documented MPFR-estimate scope.
+
+[Arithmetic conditioning checks](arithmetic-conditioning.md) now catch the
+[coordinate/coefficient-cancellation failure](../reports/validation/2026-10-05-coordinate-roundoff-counterexample.json)
+and request fresh higher-precision sources within a finite retry budget. Relative
+componentwise perturbations preserve coordinate scaling and exact zero tails;
+the original complex-mass profiles still pass. Values, physical defects, branch
+state and saved segments use the same declared endpoint, including high-storage-
+precision input coordinates. A stalled rounded step requests precision, and
+nonfinite saved-interval coordinates are rejected. Cache evidence retains source
+accuracy constraints and can fall back to another boundary after precision
+exhaustion. Neither these local checks nor profile agreement proves accumulated
+global accuracy; severe source cancellation can still exhaust the strict local
+budget. Historical long reference comparisons retain their measured library
+revisions and have not all been rerun on this release.
 
 The preceding registered-root epsilon-shearing milestone passes **408 release unit/integration
 tests**, one doctest, strict all-target Clippy and formatting. Nine long scientific
@@ -250,10 +261,15 @@ is 5.5571e−47 and all three endpoint root sheets agree. The first profile took
 high profile took 12157.19 seconds as a fresh process. These results use the
 immutable scientific library recorded in the report; its new opt-in current-library
 regression has not been rerun. The
-[full 86-master ZZZ first native endpoint](../reports/diffexp/fivepoint-zzz-first-endpoint.json)
-now passes all 430 comparisons at 20 absolute digits, after 10122.59 seconds
-including its capped predecessor and resumed work. Its independent higher
-precision/order profile is running; full acceptance remains pending. The
+[full 86-master ZZZ comparison](../reports/diffexp/fivepoint-zzz-validation.json)
+now passes all 430 coefficients at 20 absolute digits, including independent
+60/56 and 70/64 precision/order refinement and all three root sheets. The first
+profile took 10122.59 seconds including capped/resumed work; fresh high transport
+took 14042.05 seconds (14052.49 in-program total). Maximum refinement difference
+is 1.5174e−46. The complete output was independently checked after the original
+monitor ended and its unchanged child was adopted under the original cap. The
+report preserves the unavailable exit status and roughly 345-second RSS polling
+gap. This is supplied-boundary acceptance on the named immutable library. The
 [separate 128-digit PH1→PH2 original profile](../reports/diffexp/fivepoint-zzz-128-original-failure.json)
 ended with a native Mathematica memory failure after 1811.93 seconds and 36 of
 108 segments under its declared 16 GiB per-process address-space cap. Neither

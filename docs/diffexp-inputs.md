@@ -58,7 +58,7 @@ no numerical reference seeds the integration. The unequal original full route
 was separately censored by its memory cap, while its alternate route completed.
 The separate [planar one-loop five-point result](fivepoint-planar.md) validates
 all 65 coefficients using its supplied ancillary boundary. The 75-, 74-, and
-86-master planar families and the 108-master nonplanar system remain pending.
+86-master planar families and the 108-master nonplanar system were pending at this milestone. They now have complete supplied-boundary comparisons in the [current benchmark table](benchmark-comparison.md); the separate 128-digit ZZZ notebook profile remains pending.
 
 ## Complete 74-master MZZ family
 

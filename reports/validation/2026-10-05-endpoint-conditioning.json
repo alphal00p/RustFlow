@@ -1,0 +1,253 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-10-05T06:02:29.735600+00:00",
+  "status": "target-only frozen implementation; standalone checks passed; production integration gate pending",
+  "scope": "Heuristic endpoint arithmetic conditioning, typed precision retries, exact-waypoint separation and evidence ceilings. Not a complete forward-error certificate.",
+  "counterexample": {
+    "exact_matrix": [
+      [
+        "0",
+        "1-10^100"
+      ],
+      [
+        "0",
+        "0"
+      ]
+    ],
+    "exact_boundary": [
+      "10^100",
+      "1"
+    ],
+    "interval": [
+      "0",
+      "1"
+    ],
+    "exact_endpoint": [
+      "1",
+      "1"
+    ],
+    "observed_prior_wrong_result": "0 with verified_digits=20 after 60/80-working-digit profiles",
+    "prior_log": {
+      "path": "target/endpoint-cancellation-audit/probe.log",
+      "sha256": "b686c571e416d376e55061c4ff927349e14b5c60b57ced78b6423740fb581943",
+      "bytes": 1715
+    }
+  },
+  "implementation": {
+    "numeric_owner": "Symbolica ComplexBall with directed rational construction and native UnivariatePolynomial evaluation; no independent Horner or ball recurrence",
+    "perturbations": "One unit at the minimum retained coefficient/argument and working precision, scaled by max(1, component L1 magnitude); choice is heuristic",
+    "metric": "absolute_error <= 10^(-d) * max(1, |coefficient|)",
+    "precision_error": "InsufficientPrecision { minimum_bits, context }",
+    "retry": "Fresh exact compilation and boundary provider after conservative bit-hint jump; existing attempt budget and requirement for two successful profiles retained",
+    "evidence": "Minimum checked conditioning threshold caps final/checkpoint promotion alongside source evidence, inherited uncertainty, comparison and working-precision constraints",
+    "waypoints": "Exact expression identity is tested before numerical separation; first boundary coordinate remains its supplied Float dyadic, not an invented exact original"
+  },
+  "validation": {
+    "focused_test_count": 17,
+    "new_conditioning_tests": 8,
+    "retained_mobius_tests": 8,
+    "retained_mapped_cache_tests": 1,
+    "elapsed_seconds_from_test_harness": "11.53",
+    "test_threads": 1,
+    "cpu_affinity": "33",
+    "strict_library_clippy": "passed",
+    "strict_test_clippy": "passed",
+    "rustfmt": "passed",
+    "independent_native_ball_tests": 4,
+    "test_log": {
+      "path": "target/endpoint-conditioning/tests-final.log",
+      "sha256": "f4a464732b7724c8b4b2fd89943cbc62a8c17ed1ad3154b16fa1b6cbfb021f70",
+      "bytes": 1570
+    }
+  },
+  "preserved_initial_refusal": {
+    "log": {
+      "path": "target/endpoint-conditioning/first-stage/tests.log",
+      "sha256": "0e5223d8711e078889a99059fce19900669ca2f30c6e81d6afe8e3f5728dd80e",
+      "bytes": 1940
+    },
+    "outcome": "15 passed, 1 conservative InsufficientPrecision refusal in repeated nonlinear mapped cancellation",
+    "resolution": "Acceptance regression now uses a single scaled Mobius chart with symmetric distant poles; independent existing nonlinear map/branch tests remain. Repeated severe nonlinear cancellation remains a documented bounded-retry limitation."
+  },
+  "limitations": [
+    "Perturbation sizes are conditioning probes, not proven bounds on all coefficient construction errors.",
+    "Exact-source polynomial residual balls and global forward-error certification are separate work.",
+    "Rounded input data cannot acquire missing source accuracy through higher arithmetic precision.",
+    "A stale provider or extreme repeated nonlinear cancellation can exhaust the finite retry budget.",
+    "Standalone shadow-module validation is not the production Cargo release gate."
+  ],
+  "source_files": [
+    {
+      "source": "target/endpoint-conditioning/production/src/error.rs",
+      "destination": "src/error.rs",
+      "sha256": "32bb6340c4d9d7689ea3b39606acfa0e22e80189faaa09d145ee82898db94822",
+      "baseline_sha256": "9da961af3e2d550ee6b2a66564e9f2794f3f073e96d332367d8695acbd76fac3",
+      "live_baseline_matches": true
+    },
+    {
+      "source": "target/endpoint-conditioning/production/src/ode.rs",
+      "destination": "src/ode.rs",
+      "sha256": "8a8d90c7040b5b922c30bbbccb75ae47fdd46a934f56a5c80fd20294291916a8",
+      "baseline_sha256": "33df0101cd6afcd1796ca3372edba9394ad97fc48ab8de62c5b371f524e43ae5",
+      "live_baseline_matches": true
+    },
+    {
+      "source": "target/endpoint-conditioning/production/src/ode/conditioning.rs",
+      "destination": "src/ode/conditioning.rs",
+      "sha256": "de416b65550cf1147a157ec2ea788543a606369b6c7bc6e239d6b510c013553c",
+      "baseline_sha256": null,
+      "live_baseline_matches": null
+    },
+    {
+      "source": "target/endpoint-conditioning/production/src/diffexp.rs",
+      "destination": "src/diffexp.rs",
+      "sha256": "67c7bd0a9ac0966353532de6a31c41409806a3b1f0b2f5ea0928f0b4d06ab07c",
+      "baseline_sha256": "967dacd7e2e06b7ec819bdc351a76b65453cfda3f0c047826a38bbf9cb7dfa1e",
+      "live_baseline_matches": true
+    },
+    {
+      "source": "target/endpoint-conditioning/production/src/physical_transport.rs",
+      "destination": "src/physical_transport.rs",
+      "sha256": "f2607e04d8ba04a2288fbd5796a852a4053dc124b691f4c741e0f4357afc1c52",
+      "baseline_sha256": "7f20ed9ac3d372a1cf3cfe680b4dd821ba4697a61445b4b2785f37feae446cde",
+      "live_baseline_matches": true
+    },
+    {
+      "source": "target/endpoint-conditioning/production/tests/conditioning.rs",
+      "destination": "tests/conditioning.rs",
+      "sha256": "01e7a486f0d57e64088e5606a5acb76ccbb4dd5e0c29a25091bb53fcbe050a30",
+      "baseline_sha256": null,
+      "live_baseline_matches": null
+    },
+    {
+      "source": "target/endpoint-conditioning/production/docs/arithmetic-conditioning.md",
+      "destination": "docs/arithmetic-conditioning.md",
+      "sha256": "a0891f0373f6eabfc2e9a828e5224387c39a4e41ad963a007213abc33989e744",
+      "baseline_sha256": null,
+      "live_baseline_matches": null
+    }
+  ],
+  "baseline_archive": {
+    "path": "target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+    "sha256": "e733f9be6deb8146b12628fd4519813a93133b5fa6aae6918b53fe5c02a068b2",
+    "bytes": 437377132
+  },
+  "standalone_compatibility": "Private shadow wrapper converts archived Error values and provides module/options shims. Synthetic PORT_SOURCE_DIGEST identifies only this standalone namespace. None of these adapters are production changes.",
+  "artifacts": [
+    {
+      "path": "target/endpoint-conditioning/probe.rs",
+      "sha256": "5a0e8033566287c2da57067d4952805ad150590ff12a185213490f27f059fca1",
+      "bytes": 2043
+    },
+    {
+      "path": "target/endpoint-conditioning/build.py",
+      "sha256": "3d47c6523800e448fca9e4e070a16a5011d0598629504bec06dafce404ce0078",
+      "bytes": 802
+    },
+    {
+      "path": "target/endpoint-conditioning/library-command.json",
+      "sha256": "14594bd2d1d8a1238fb0d1eb574b19ed1655cc59c188f3391b08b577719b848a",
+      "bytes": 2256
+    },
+    {
+      "path": "target/endpoint-conditioning/test-command.json",
+      "sha256": "ad3c6ba24be085fc51e567f1fed577c26b10834da8ee4670c660a8a9623f53ac",
+      "bytes": 2208
+    },
+    {
+      "path": "target/endpoint-conditioning/clippy-command.json",
+      "sha256": "37aa1d7b37a597e2c0d288791d9ee7960ba8d15d9f865ba3abe8b4a21423b6e2",
+      "bytes": 2293
+    },
+    {
+      "path": "target/endpoint-conditioning/test-clippy-command.json",
+      "sha256": "c34a7d9efa4c07377e5b9574909e944b7cbec47c0b40b460ce2fe7d04227d457",
+      "bytes": 2258
+    },
+    {
+      "path": "target/endpoint-conditioning/libconditioning_stage.rlib",
+      "sha256": "a7e2ae9e02a8804eca91bd3224d69727578b74cebef4ca5014e33b1c3b9c115b",
+      "bytes": 71519878
+    },
+    {
+      "path": "target/endpoint-conditioning/conditioning_tests",
+      "sha256": "51479548168e1d464529a0aa63f268337101051e5c9d7b52921e492659c8a28a",
+      "bytes": 655775592
+    },
+    {
+      "path": "target/endpoint-conditioning/library-exit.json",
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17",
+      "bytes": 17
+    },
+    {
+      "path": "target/endpoint-conditioning/test-exit.json",
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17",
+      "bytes": 17
+    },
+    {
+      "path": "target/endpoint-conditioning/clippy-exit.json",
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17",
+      "bytes": 17
+    },
+    {
+      "path": "target/endpoint-conditioning/test-clippy-exit.json",
+      "sha256": "e89df0eae5ec7db81135aed16463968955c578bcc4f2ec43172eff351f080c17",
+      "bytes": 17
+    },
+    {
+      "path": "target/endpoint-conditioning/tests-final.log",
+      "sha256": "f4a464732b7724c8b4b2fd89943cbc62a8c17ed1ad3154b16fa1b6cbfb021f70",
+      "bytes": 1570
+    },
+    {
+      "path": "target/endpoint-conditioning/clippy-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target/endpoint-conditioning/test-clippy-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target/endpoint-conditioning/fmt.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "target/endpoint-conditioning/first-stage/tests.log",
+      "sha256": "0e5223d8711e078889a99059fce19900669ca2f30c6e81d6afe8e3f5728dd80e",
+      "bytes": 1940
+    },
+    {
+      "path": "target/endpoint-cancellation-audit/probe.rs",
+      "sha256": "631ca16e6811cd5c377ee8044f6a9d61412c92a53dc0f4c0f064e11251504af6",
+      "bytes": 2785
+    },
+    {
+      "path": "target/endpoint-cancellation-audit/probe.log",
+      "sha256": "b686c571e416d376e55061c4ff927349e14b5c60b57ced78b6423740fb581943",
+      "bytes": 1715
+    },
+    {
+      "path": "target/endpoint-cancellation-audit/native_ball_tests.rs",
+      "sha256": "12791366e59077e8a32480e12c9743b3b5549c63646b33b18c8978493adf87d4",
+      "bytes": 4109
+    },
+    {
+      "path": "target/endpoint-cancellation-audit/native-ball-tests.log",
+      "sha256": "c9dc1860cb986d10e7b9f9c4cb5a85de28a73664a5c05587c327cc7dc7750674",
+      "bytes": 420
+    },
+    {
+      "path": "target/endpoint-cancellation-audit/proposal.json",
+      "sha256": "063113dff1f38179e35087668c7e764fc6cd83dcf855f7aad5f9a971e4a6300f",
+      "bytes": 6304
+    }
+  ],
+  "patch": {
+    "path": "target/endpoint-conditioning/endpoint-conditioning.patch",
+    "sha256": "eef25bc963bb7f2c2e081fb3ad1e8c025c96909890edbb803ebb0ce627bd2657",
+    "bytes": 38483
+  }
+}

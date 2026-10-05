@@ -27,6 +27,7 @@ pub mod integrand;
 pub mod kinematic_derivative;
 pub mod kinematics;
 pub mod linear;
+pub mod local_coordinates;
 mod native;
 pub mod normalize;
 pub mod numeric;
@@ -55,6 +56,7 @@ pub use epsilon_flow::EpsilonShearedFlow;
 pub use epsilon_shearing::EpsilonShearing;
 pub use error::{Error, Result};
 pub use family::{Integral, IntegralFamily, KinematicPoint, Propagator};
+pub use local_coordinates::LocalCoordinate;
 pub use numeric::{ComplexFloat, Precision};
 pub use ode::{BoundaryData, DifferentialSystem, FlowDiagnostics, FlowResult};
 pub use options::{

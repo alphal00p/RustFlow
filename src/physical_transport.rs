@@ -623,7 +623,14 @@ fn evaluate_physical(
                 result.boundary_attempts = attempts;
                 return Ok(result);
             }
-            Err(Error::Accuracy(message)) => {
+            Err(error @ (Error::Accuracy(_) | Error::InsufficientPrecision { .. })) => {
+                // A different cached boundary can avoid the conditioning that
+                // exhausted this route's bounded precision retries. Preserve
+                // the attempt cap and never commit its failed trajectory.
+                let message = match error {
+                    Error::Accuracy(message) => message,
+                    error => error.to_string(),
+                };
                 diagnostic.outcome = BoundaryAttemptOutcome::AccuracyRejected {
                     message: message.clone(),
                 };
@@ -756,7 +763,13 @@ fn evaluate_from_source(
     let evidence_cap = source
         .accuracy
         .verified_digits()
-        .min((options.digits + options.guard_digits).saturating_sub(10));
+        .min((options.digits + options.guard_digits).saturating_sub(10))
+        .min(
+            solution
+                .diagnostics
+                .conditioning_digits
+                .unwrap_or(options.digits),
+        );
     let mut integrated_norm = p.real(0);
     let mut amplification = p.real(1);
     let epsilon_product_limit = prepared.epsilon_product_limit();
@@ -1132,14 +1145,23 @@ fn transport_algebraic_checked(
                 .iter()
                 .map(|a| p.eval(a, &Default::default()))
                 .collect::<Result<Vec<_>>>()?;
-            let result = compiled.transport(
-                &source.as_epsilon_boundary(&Atom::new(), range, p)?,
+            let boundary = source.as_epsilon_boundary(&Atom::new(), range, p)?;
+            let coordinate_digits = crate::ode::conditioning::exact_waypoint_conditioning(
+                p,
+                &boundary.point,
+                waypoints,
                 &points,
-                &seeds,
-                refined,
-                context,
-                true,
+                options.digits,
             )?;
+            let mut result =
+                compiled.transport(&boundary, &points, &seeds, refined, context, true)?;
+            result.solution.diagnostics.conditioning_digits = Some(
+                result
+                    .solution
+                    .diagnostics
+                    .conditioning_digits
+                    .map_or(coordinate_digits, |old| old.min(coordinate_digits)),
+            );
             if !system.roots.is_empty()
                 && Some(&classify_germ(&compiled, &result.branches)?) != target.root_germ()
             {

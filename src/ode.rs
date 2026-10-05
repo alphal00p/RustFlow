@@ -1,11 +1,15 @@
 //! Rational linear differential systems and arbitrary-precision Taylor transport.
-use crate::{
-    ComplexFloat as C, Error, FlowOptions, Precision, Progress, Result, RunContext,
-    StepSizeStrategy,
-};
+use crate::StepSizeStrategy;
+use crate::local_coordinates::{LocalCoordinate, TaylorCoordinate};
+use crate::{ComplexFloat as C, Error, FlowOptions, Precision, Progress, Result, RunContext};
 use std::sync::Arc;
+#[path = "ode/conditioning.rs"]
+pub(crate) mod conditioning;
 #[path = "ode/residual.rs"]
 pub(crate) mod residual;
+use conditioning::ConditioningChart;
+#[path = "ode/source.rs"]
+pub(crate) mod source;
 use residual::RationalResidualChart;
 use symbolica::domains::float::FloatField;
 use symbolica::poly::univariate::UnivariatePolynomial;
@@ -36,6 +40,9 @@ pub struct FlowDiagnostics {
     pub superseded_successes: usize,
     pub working_bits: u32,
     pub expansion_order: usize,
+    /// Minimum checked endpoint arithmetic-conditioning tolerance along this
+    /// run (mixed decimal scale). This is not a full forward-error certificate.
+    pub conditioning_digits: Option<u32>,
 }
 
 #[derive(Clone, Debug)]
@@ -51,14 +58,13 @@ pub(crate) struct NumericRational {
     pub denominator: Vec<C>,
 }
 
-pub(crate) fn polynomial_coefficients(
+/// Native coefficient extraction shared by fixed-precision and exact source compilation.
+pub(crate) fn polynomial_coefficient_terms(
     a: &Atom,
     variable: Symbol,
-    p: Precision,
-    values: &ahash::HashMap<Atom, C>,
-) -> Result<Vec<C>> {
+) -> Result<Vec<(usize, Atom)>> {
     let x = Atom::var(variable);
-    let mut result = vec![p.zero()];
+    let mut terms = Vec::new();
     for (monomial, coefficient) in a.coefficient_list::<i32>(std::slice::from_ref(&x)) {
         let degree = if monomial.is_one() {
             0
@@ -81,6 +87,19 @@ pub(crate) fn polynomial_coefficients(
         if degree > 100_000 {
             return Err(Error::Limit("polynomial degree exceeds 100000".into()));
         }
+        terms.push((degree, coefficient));
+    }
+    Ok(terms)
+}
+
+pub(crate) fn polynomial_coefficients(
+    a: &Atom,
+    variable: Symbol,
+    p: Precision,
+    values: &ahash::HashMap<Atom, C>,
+) -> Result<Vec<C>> {
+    let mut result = vec![p.zero()];
+    for (degree, coefficient) in polynomial_coefficient_terms(a, variable)? {
         result.resize(result.len().max(degree + 1), p.zero());
         result[degree] = p.add(&result[degree], &p.eval(&coefficient, values)?);
     }
@@ -248,12 +267,21 @@ pub(crate) struct PolynomialRow {
 }
 
 #[derive(Clone, Debug)]
+struct ExactRows {
+    variable: Symbol,
+    rows: Vec<Vec<Atom>>,
+    values: ahash::HashMap<Atom, C>,
+}
+
+#[derive(Clone, Debug)]
 pub struct CompiledSystem {
+    source: Arc<ExactRows>,
     pub(crate) p: Precision,
     pub(crate) matrix: Vec<Vec<NumericRational>>,
     pub poles: Vec<C>,
     pub(crate) pole_polynomials: Vec<Atom>,
     pub(crate) polynomial_rows: Vec<PolynomialRow>,
+    pub(crate) exact_source_rows: Vec<source::ExactPolynomialRow>,
 }
 
 impl DifferentialSystem {
@@ -349,6 +377,8 @@ pub(crate) fn compile_rows(
     let mut pole_polynomials = Vec::new();
     let mut seen_factors = ahash::HashSet::default();
     let mut polynomial_rows = Vec::new();
+    let mut exact_source_rows = Vec::new();
+    let exact_values = source::ExactSpecialization::new(p, values)?;
     for row in rows {
         let mut out = Vec::new();
         let mut exact = Vec::new();
@@ -421,6 +451,9 @@ pub(crate) fn compile_rows(
         let common_denominator = common_denominator.unwrap();
         let denominator =
             polynomial_coefficients(&common_denominator.to_expression(), variable, p, values)?;
+        let exact_denominator =
+            exact_values.polynomial(&common_denominator.to_expression(), variable)?;
+        let mut exact_entries = Vec::new();
         let mut entries = Vec::new();
         for (j, rational) in exact.iter().enumerate() {
             if rational.numerator.is_zero() {
@@ -432,6 +465,10 @@ pub(crate) fn compile_rows(
             let cleared = multiply_polynomials(&rational.numerator, &multiplier)?;
             let coefficients =
                 polynomial_coefficients(&cleared.to_expression(), variable, p, values)?;
+            let exact_coefficients = exact_values.polynomial(&cleared.to_expression(), variable)?;
+            if exact_coefficients.iter().any(|c| !c.is_zero()) {
+                exact_entries.push((j, exact_coefficients));
+            }
             if coefficients.iter().any(|c| *c != p.zero()) {
                 entries.push((j, coefficients));
             }
@@ -440,18 +477,61 @@ pub(crate) fn compile_rows(
             denominator,
             entries,
         });
+        exact_source_rows.push(source::ExactPolynomialRow {
+            denominator: exact_denominator,
+            entries: exact_entries,
+        });
         matrix.push(out);
     }
     Ok(CompiledSystem {
+        source: Arc::new(ExactRows {
+            variable,
+            rows: rows.to_vec(),
+            values: values.clone(),
+        }),
         p,
         matrix,
         poles,
         pole_polynomials,
         polynomial_rows,
+        exact_source_rows,
     })
 }
 
 impl CompiledSystem {
+    /// Recompile the retained exact source in the local coordinate. Original
+    /// source domains and the map denominator survive Jacobian cancellation.
+    pub(crate) fn in_coordinate(&self, coordinate: &TaylorCoordinate) -> Result<Self> {
+        let source = &self.source;
+        let (rows, mut guards) = coordinate.pullback_rows(source.variable, &source.rows)?;
+        let replacements = std::collections::BTreeMap::from([(
+            Atom::var(source.variable),
+            coordinate.expression(source.variable)?,
+        )]);
+        guards.extend(self.pole_polynomials.iter().map(|g| {
+            crate::family::substitute(g, &replacements)
+                .together()
+                .cancel()
+        }));
+        let mut compiled = compile_rows(source.variable, &rows, self.p, &source.values)?;
+        let guard_rows = guards
+            .iter()
+            .map(|g| {
+                if g.is_zero() {
+                    return Err(Error::InvalidInput(
+                        "mapped chart violates original domain".into(),
+                    ));
+                }
+                Ok(vec![Atom::num(1) / g])
+            })
+            .collect::<Result<Vec<_>>>()?;
+        let exclusions = compile_rows(source.variable, &guard_rows, self.p, &source.values)?;
+        compiled.poles.extend(exclusions.poles);
+        compiled
+            .pole_polynomials
+            .extend(exclusions.pole_polynomials);
+        Ok(compiled)
+    }
     /// A real radius strictly inside the local convergence disk around an
     /// endpoint, excluding only a pole exactly at that endpoint.
     pub fn endpoint_radius(&self, endpoint: &C) -> Float {
@@ -593,7 +673,11 @@ pub struct TaylorSegment {
     pub end: C,
     pub coefficients: Vec<Vec<C>>,
     pub working_bits: u32,
+    pub coordinate: TaylorCoordinate,
+    pub conditioning_digits: u32,
 }
+
+pub(crate) type MappedTaylorChart<Chart> = (Vec<Vec<C>>, Chart, Vec<C>);
 
 pub(crate) trait SeriesSystem {
     type State;
@@ -609,10 +693,35 @@ pub(crate) trait SeriesSystem {
         order: usize,
         state: &Self::State,
     ) -> Result<(Vec<Vec<C>>, Self::Chart)>;
-    fn rhs(&self, point: &C, values: &[C], chart: &Self::Chart) -> Result<Vec<C>>;
-    /// A whole-segment defect estimate is mandatory for every transport owner.
-    /// None means evidence is unavailable and therefore rejects the trial.
+    fn mapped_chart(
+        &self,
+        coordinate: &TaylorCoordinate,
+        center: &C,
+        values: &[C],
+        order: usize,
+        state: &Self::State,
+    ) -> Result<MappedTaylorChart<Self::Chart>> {
+        let _ = (coordinate, center, values, order, state);
+        Err(Error::Unsupported(
+            "this series system has no mapped local-chart compiler".into(),
+        ))
+    }
+    /// The step is in the chart's polynomial coordinate. Unavailable bounds
+    /// reject the trial; they cannot be treated as a successful certificate.
     fn whole_segment_residual(&self, chart: &Self::Chart, step: &C) -> Result<Option<Vec<Float>>>;
+    fn rhs(&self, point: &C, values: &[C], chart: &Self::Chart) -> Result<Vec<C>>;
+    /// A source owner may distinguish arithmetic enclosure width from a real
+    /// differential defect. Existing mandatory evidence remains the default.
+    fn whole_segment_residual_with_budget(
+        &self,
+        chart: &Self::Chart,
+        step: &C,
+        _values: &[C],
+        _tolerance: &Float,
+    ) -> Result<Option<Vec<Float>>> {
+        self.whole_segment_residual(chart, step)
+    }
+
     fn accepted_state(
         &self,
         chart: &Self::Chart,
@@ -644,18 +753,49 @@ impl SeriesSystem for CompiledSystem {
         values: &[C],
         order: usize,
         _: &(),
-    ) -> Result<(Vec<Vec<C>>, RationalResidualChart)> {
+    ) -> Result<(Vec<Vec<C>>, Self::Chart)> {
         let coefficients = self.taylor(center, values, order)?;
-        let chart =
-            RationalResidualChart::new(self.p, &self.polynomial_rows, center, &coefficients, 1)?;
+        let chart = RationalResidualChart::new_exact(
+            self.p,
+            &self.exact_source_rows,
+            center,
+            &coefficients,
+            1,
+        )?;
         Ok((coefficients, chart))
     }
-    fn whole_segment_residual(
+    fn mapped_chart(
+        &self,
+        coordinate: &TaylorCoordinate,
+        _: &C,
+        values: &[C],
+        order: usize,
+        _: &(),
+    ) -> Result<MappedTaylorChart<Self::Chart>> {
+        let mapped = self.in_coordinate(coordinate)?;
+        let coefficients = mapped.taylor(&self.p.zero(), values, order)?;
+        let chart = RationalResidualChart::new_exact(
+            self.p,
+            &mapped.exact_source_rows,
+            &self.p.zero(),
+            &coefficients,
+            1,
+        )?;
+        Ok((coefficients, chart, mapped.poles))
+    }
+    fn whole_segment_residual(&self, chart: &Self::Chart, step: &C) -> Result<Option<Vec<Float>>> {
+        chart.defect_bounds(self.p, step).map(Some)
+    }
+    fn whole_segment_residual_with_budget(
         &self,
         chart: &RationalResidualChart,
         step: &C,
+        values: &[C],
+        tolerance: &Float,
     ) -> Result<Option<Vec<Float>>> {
-        chart.defect_bounds(self.p, step).map(Some)
+        chart
+            .defect_bounds_with_budget(self.p, step, values, tolerance)
+            .map(Some)
     }
     fn rhs(&self, point: &C, values: &[C], _: &RationalResidualChart) -> Result<Vec<C>> {
         self.matrix
@@ -674,18 +814,22 @@ impl SeriesSystem for CompiledSystem {
     }
 }
 
+#[allow(clippy::too_many_arguments)] // Shared physical-coordinate defect check.
 fn residual_is_small<S: SeriesSystem>(
     system: &S,
     chart: &S::Chart,
+    coordinate: &TaylorCoordinate,
     center: &C,
+    point: &C,
     step: &C,
     coefficients: &[Vec<C>],
     values: &[C],
     tolerance: &Float,
 ) -> Result<bool> {
     let p = system.precision();
-    let point = p.add(center, step);
-    let rhs = match system.rhs(&point, values, chart) {
+    let local = coordinate.local_point(p, center, point)?;
+    let jacobian = coordinate.jacobian_at(p, center, point)?;
+    let rhs = match system.rhs(point, values, chart) {
         Ok(rhs) => rhs,
         Err(Error::Accuracy(_)) => return Ok(false),
         Err(error) => return Err(error),
@@ -694,10 +838,11 @@ fn residual_is_small<S: SeriesSystem>(
         let mut derivative = p.zero();
         for k in (1..coefficients.len()).rev() {
             derivative = p.add(
-                &p.mul(&derivative, step),
+                &p.mul(&derivative, &local),
                 &p.scale(&coefficients[k][i], k as i64, 1),
             );
         }
+        let derivative = p.div(&derivative, &jacobian);
         let defect = p.mul(step, &p.sub(&derivative, rhs));
         let magnitude = p.norm(&values[i]);
         let scale = if magnitude > p.real(1) {
@@ -742,23 +887,41 @@ pub(crate) fn transport_series_with_state<S: SeriesSystem>(
     )
 }
 
-type CheckedStep<State> = Option<(Vec<C>, State)>;
+type CheckedStep<State> = Option<(C, Vec<C>, State, u32)>;
 
 /// Read-only checks within one fixed Taylor chart. Only the returned candidate
 /// chosen by the controller may become committed state or a saved segment.
 struct StepTrial<'a, S: SeriesSystem> {
     system: &'a S,
     chart: &'a S::Chart,
+    coordinate: &'a TaylorCoordinate,
     center: &'a C,
     delta: &'a C,
     target: &'a C,
     coefficients: &'a [Vec<C>],
     tolerance: &'a Float,
+    conditioning: &'a ConditioningChart,
+    conditioning_digits: u32,
 }
 impl<S: SeriesSystem> StepTrial<'_, S> {
     fn evaluate(&self, step: &C) -> Result<CheckedStep<S::State>> {
         let p = self.system.precision();
-        let (values, tail) = evaluate_taylor(p, self.coefficients, step);
+        // A supplied endpoint may retain more bits than this compiled system.
+        // Use the declared physical point for values, defects and branch state.
+        let next = if step == self.delta {
+            self.target.clone()
+        } else {
+            p.add(self.center, step)
+        };
+        if next == *self.center {
+            return Err(Error::InsufficientPrecision {
+                minimum_bits: p.bits.saturating_mul(2),
+                context: "physical continuation step rounds back to its center".into(),
+            });
+        }
+        let displacement = p.sub(&next, self.center);
+        let local = self.coordinate.local_point(p, self.center, &next)?;
+        let (values, tail) = evaluate_taylor(p, self.coefficients, &local);
         let good = values.iter().zip(&tail).all(|(value, tail)| {
             let magnitude = p.norm(value);
             let scale = if magnitude > p.real(1) {
@@ -772,8 +935,10 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
             || !residual_is_small(
                 self.system,
                 self.chart,
+                self.coordinate,
                 self.center,
-                step,
+                &next,
+                &displacement,
                 self.coefficients,
                 &values,
                 self.tolerance,
@@ -783,12 +948,16 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
         }
         // The final retained terms can vanish for sparse systems. Keep the
         // independent midpoint defect as well as the endpoint defect above.
-        let half = p.scale(step, 1, 2);
-        let (middle, _) = evaluate_taylor(p, self.coefficients, &half);
+        let midpoint = p.coordinate_midpoint(self.center, &next)?;
+        let half = p.sub(&midpoint, self.center);
+        let local_middle = self.coordinate.local_point(p, self.center, &midpoint)?;
+        let (middle, _) = evaluate_taylor(p, self.coefficients, &local_middle);
         if !residual_is_small(
             self.system,
             self.chart,
+            self.coordinate,
             self.center,
+            &midpoint,
             &half,
             self.coefficients,
             &middle,
@@ -796,7 +965,12 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
         )? {
             return Ok(None);
         }
-        let majorant = match self.system.whole_segment_residual(self.chart, step) {
+        let majorant = match self.system.whole_segment_residual_with_budget(
+            self.chart,
+            &local,
+            &values,
+            self.tolerance,
+        ) {
             Ok(Some(bounds)) => Some(bounds),
             Ok(None) => return Ok(None),
             Err(Error::Accuracy(_)) => return Ok(None),
@@ -821,15 +995,13 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
                 }
             }
         }
-        let next = if step == self.delta {
-            self.target.clone()
-        } else {
-            p.add(self.center, step)
-        };
+        let checked = self
+            .conditioning
+            .check(p, &local, &values, self.conditioning_digits)?;
         Ok(self
             .system
             .accepted_state(self.chart, &next, self.tolerance)?
-            .map(|state| (values, state)))
+            .map(|state| (next, values, state, checked)))
     }
 }
 
@@ -874,41 +1046,81 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                 ));
             }
             let delta = p.sub(target, &center);
-            let distance = p.norm(&delta);
-            let radius = system
-                .poles()
-                .iter()
-                .map(|s| p.norm(&p.sub(&center, s)))
-                .min_by(|a, b| a.partial_cmp(b).unwrap());
-            let mut step = delta.clone();
-            if let Some(radius) = radius {
-                if radius == p.real(0) {
-                    return Err(Error::Numerical(
-                        "path reached a differential-equation pole".into(),
-                    ));
-                }
-                let safe = radius / 3;
-                if distance > safe {
-                    step = p.mul(
-                        &delta,
-                        &p.div(&C::new(safe, p.real(0)), &C::new(distance, p.real(0))),
-                    );
-                }
-            } else if let Some(previous) = &previous_step {
-                // Entire systems have no pole-based scale. Reuse the last
-                // accepted step instead of repeatedly rejecting the full
-                // remaining interval. Every proposal still passes all checks.
-                let proposal = p.norm(&p.scale(previous, 2, 1));
-                if distance > proposal {
-                    step = p.mul(
-                        &delta,
-                        &p.div(&C::new(proposal, p.real(0)), &C::new(distance, p.real(0))),
-                    );
-                }
+            if !p.finite(&delta) || delta == p.zero() {
+                return Err(Error::Accuracy(
+                    "distinct continuation coordinates have an unresolved displacement".into(),
+                ));
             }
+            let distance = p.norm(&delta);
+            let coordinate = match options.local_coordinate {
+                LocalCoordinate::Identity => TaylorCoordinate::Identity,
+                LocalCoordinate::BalancedMobius => {
+                    TaylorCoordinate::balanced(p, &center, target, system.poles())?
+                }
+            };
+            let mut step = delta.clone();
             context.cancellation.check()?;
-            let (coefficients, chart) =
-                system.local_chart(&center, &values, options.series_order, &state)?;
+            let (coefficients, chart) = if matches!(coordinate, TaylorCoordinate::Identity) {
+                let radius = system
+                    .poles()
+                    .iter()
+                    .map(|s| p.norm(&p.sub(&center, s)))
+                    .min_by(|a, b| a.partial_cmp(b).unwrap());
+                if let Some(radius) = radius {
+                    if radius == p.real(0) {
+                        return Err(Error::Numerical(
+                            "path reached a differential-equation pole".into(),
+                        ));
+                    }
+                    let safe = radius / 3;
+                    if distance > safe {
+                        step = p.mul(
+                            &delta,
+                            &p.div(&C::new(safe, p.real(0)), &C::new(distance, p.real(0))),
+                        );
+                    }
+                } else if let Some(previous) = &previous_step {
+                    // Entire systems have no pole-based scale. Reuse the last
+                    // accepted step instead of repeatedly rejecting the full
+                    // remaining interval. Every proposal still passes all checks.
+                    let proposal = p.norm(&p.scale(previous, 2, 1));
+                    if distance > proposal {
+                        step = p.mul(
+                            &delta,
+                            &p.div(&C::new(proposal, p.real(0)), &C::new(distance, p.real(0))),
+                        );
+                    }
+                }
+                system.local_chart(&center, &values, options.series_order, &state)?
+            } else {
+                let (coefficients, chart, poles) = system.mapped_chart(
+                    &coordinate,
+                    &center,
+                    &values,
+                    options.series_order,
+                    &state,
+                )?;
+                if let Some(radius) = poles
+                    .iter()
+                    .map(|pole| p.norm(pole))
+                    .min_by(|a, b| a.partial_cmp(b).unwrap())
+                {
+                    if radius == p.real(0) {
+                        return Err(Error::Numerical(
+                            "mapped chart starts on an excluded domain".into(),
+                        ));
+                    }
+                    // Positive real local steps preserve the declared straight
+                    // physical leg. Actual transformed poles bound this proposal.
+                    let proposed =
+                        coordinate.physical_point(p, &center, &C::new(radius / 3, p.real(0)))?;
+                    let candidate = p.sub(&proposed, &center);
+                    if p.norm(&candidate) < distance {
+                        step = candidate;
+                    }
+                }
+                (coefficients, chart)
+            };
             // Regulator fitting and endpoint matching consume guard digits too.
             // Keep the same truncation target under either proposal policy.
             let truncation_digits = options
@@ -917,14 +1129,18 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                 .max((options.digits + options.guard_digits).saturating_sub(10));
             let available_digits = (u64::from(p.bits) * 1000 / 3322) as u32;
             let tolerance = p.tolerance(truncation_digits.min(available_digits.saturating_sub(3)));
+            let conditioning = ConditioningChart::new(p, &coefficients)?;
             let trial = StepTrial {
                 system,
                 chart: &chart,
+                coordinate: &coordinate,
                 center: &center,
                 delta: &delta,
                 target,
                 coefficients: &coefficients,
                 tolerance: &tolerance,
+                conditioning: &conditioning,
+                conditioning_digits: options.digits,
             };
             let bracketed = options.step_size_strategy == StepSizeStrategy::Bracketed;
             let mut accepted = None;
@@ -983,17 +1199,14 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                 }
             }
             context.cancellation.check()?;
-            let (next_values, next_state) = accepted;
+            let (next, next_values, next_state, conditioning_digits) = accepted;
+            diagnostics.conditioning_digits = Some(
+                diagnostics
+                    .conditioning_digits
+                    .map_or(conditioning_digits, |old| old.min(conditioning_digits)),
+            );
             values = next_values;
             state = next_state;
-            let next = if step == delta {
-                target.clone()
-            } else {
-                p.add(&center, &step)
-            };
-            if next == center {
-                return Err(Error::Accuracy("continuation step lost to rounding".into()));
-            }
             observe(&chart, &state);
             if let Some(segments) = saved.as_deref_mut() {
                 segments.push(TaylorSegment {
@@ -1001,6 +1214,8 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                     end: next.clone(),
                     coefficients,
                     working_bits: p.bits,
+                    coordinate: coordinate.clone(),
+                    conditioning_digits: options.digits,
                 });
             }
             previous_step = Some(step);
@@ -1279,9 +1494,9 @@ mod recurrence_tests {
 }
 
 #[cfg(test)]
-#[path = "ode/step_size_tests.rs"]
-mod step_size_tests;
+#[path = "ode/source_tests.rs"]
+mod source_tests;
 
 #[cfg(test)]
-#[path = "ode/residual_tests.rs"]
-mod residual_tests;
+#[path = "ode/endpoint_tests.rs"]
+mod endpoint_tests;

@@ -1,0 +1,78 @@
+{
+  "recorded_utc": "2026-10-05T06:27:02.200723+00:00",
+  "status": "coefficient discrepancy reproduced; full current transport outcome not executed",
+  "scope": "Availability concern only. No source modifications, no endpoint transport, no false verified digits claimed.",
+  "native_owner": "Symbolica75f8350 native Float evaluator and evaluate_in_ring over FloatField<Complex<Rational>>. RustFlow public Precision::eval delegates to native Float evaluator; Gaussian specialization supplies exact stored dyadics.",
+  "parameters": "a=2^400,b=2^800-1; both provided as300digit Floats and checked to_rational exactly",
+  "observed": "a^2-b is0 at60/100/200digits by Float evaluation, but1 exactly by Gaussian evaluation; Float returns1 at260digits.",
+  "current_source_review": {
+    "src/ode.rs": "9594e492d377c029ec034bf92c81496dd487eaf13b6734eb0b5673d8909268d7",
+    "src/ode/source.rs": "29f76e2264af98e434decd2b4f8a5c8b41f011e3ca6665487bf027310593249d",
+    "src/numeric.rs": "752bded1d0333c32980929e79148682751c9257bf1a9ca9d0e7f7d931b744bfb"
+  },
+  "implementation_inference": "Current compile_rows independently evaluates Float numeric/cleared coefficients and exact Gaussian rows. For this constant nilpotent kernel, the rounded recurrence has zero first derivative, while exact residual is -1 with zero enclosure width. Width-based precision classification intentionally does not treat that as enclosure arithmetic failure; it remains a central defect and triggers subdivision/rejection rather than a precision hint. This inference has not been measured with current full transport.",
+  "proposed_followup": "Use the existing exact Gaussian specialization as the owner of central coefficient conversion too, converting each resulting Rational component once to working Float. Apply consistently to NumericRational numerators/denominators, pole factor coefficients and cleared rows; retain original symbolic domains and mapped source. No parallel recurrence is needed. Avoid blanket classification of central defects as precision failures.",
+  "scope_limits": [
+    "Supplied parameter uncertainty is unchanged; exact here means the stored dyadic parameter values.",
+    "All coefficient construction sites must agree before performance or coverage claims.",
+    "Registered-root and nonrational analytic source handling should preserve their separate contracts."
+  ],
+  "evidence": {
+    "probe.rs": "e38226df3597db5d316595dc84885a7f5764aad16bd23fa0eee42e5259755997",
+    "build.json": "fb977f1be052256542e6671d9b3a1fafcade52c9110fc28572f2319470e0eb4c",
+    "build.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "output.json": "ec16811aa29ff78975e29fdffdc88debadc3f0b3477962aee7b34d9f6a1946a4",
+    "run.json": "aba86f584498a1c98ca04cb1647664d42715096f90d6110ae003835297293a60"
+  },
+  "validation": {
+    "build": {
+      "exit": 0,
+      "seconds": 14.804645135998726,
+      "command": [
+        "taskset",
+        "-c",
+        "36",
+        "rustc",
+        "--edition=2024",
+        "-C",
+        "opt-level=2",
+        "/common/dev/amflow/target/parameter-specialization-mre/probe.rs",
+        "-o",
+        "/common/dev/amflow/target/parameter-specialization-mre/probe",
+        "-L",
+        "dependency=/common/dev/amflow/target/epsilon-algebraic-release/deps",
+        "-L",
+        "dependency=/common/dev/amflow/target/release/deps",
+        "--extern",
+        "symbolica_amflow=/common/dev/amflow/target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+        "--extern",
+        "symbolica=/common/dev/amflow/target/release/deps/libsymbolica-75e897282e2131a2.rlib",
+        "--extern",
+        "serde_json=/common/dev/amflow/target/release/deps/libserde_json-570390c70cf80f0e.rlib",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/blake3-9252326cebd21167/out",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/blake3-222d768860627915/out",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-d5e4317be2c2f047/out/lib",
+        "-L",
+        "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+        "--extern",
+        "ahash=/common/dev/amflow/target/release/deps/libahash-83e25d37cc3da50b.rlib"
+      ],
+      "cpu": 36,
+      "cap_seconds": 60,
+      "cap_bytes": 4294967296,
+      "source_sha256": "e38226df3597db5d316595dc84885a7f5764aad16bd23fa0eee42e5259755997"
+    },
+    "run": {
+      "exit": 0,
+      "seconds": 0.018547954969108105,
+      "cpu": 36,
+      "cap_seconds": 10,
+      "cap_bytes": 4294967296
+    }
+  },
+  "probe_source": "use symbolica::domains::float::FloatField;\nuse symbolica::prelude::*;\nuse symbolica_amflow::{Precision, Result};\n\nfn symbol(name: &str) -> Symbol {\n    match Atom::parse(name, \"parameter_specialization_mre\", Default::default())\n        .unwrap()\n        .as_view()\n    {\n        AtomView::Var(v) => v.get_symbol(),\n        _ => unreachable!(),\n    }\n}\n\nfn main() -> Result<()> {\n    let a = Atom::var(symbol(\"a\"));\n    let b = Atom::var(symbol(\"b\"));\n    let coefficient = a.clone().pow(2) - &b;\n    let high = Precision::decimal(300)?;\n    let exact_a = Rational::from(Integer::from(2).pow(400));\n    let exact_b = &exact_a * &exact_a - Rational::one();\n    let numeric = ahash::HashMap::from_iter([\n        (a.clone(), high.rational(&exact_a)),\n        (b.clone(), high.rational(&exact_b)),\n    ]);\n    assert_eq!(numeric[&a].re.to_rational(), exact_a);\n    assert_eq!(numeric[&b].re.to_rational(), exact_b);\n    let exact_values = ahash::HashMap::from_iter([\n        (a, Complex::new(exact_a, Rational::zero())),\n        (b, Complex::new(exact_b, Rational::zero())),\n    ]);\n    let gaussian_ring = FloatField::from_rep(Complex::new(Rational::zero(), Rational::zero()));\n    let exact = coefficient\n        .evaluate_in_ring(&exact_values, &gaussian_ring)\n        .unwrap();\n    assert_eq!(exact, Complex::new(Rational::one(), Rational::zero()));\n    let mut profiles = Vec::new();\n    for working in [60, 100, 200, 260] {\n        let p = Precision::decimal(working)?;\n        let evaluated = p.eval(&coefficient, &numeric)?;\n        let stored_derivative =\n            Complex::new(evaluated.re.to_rational(), evaluated.im.to_rational());\n        let exact_defect = stored_derivative - &exact;\n        profiles.push(serde_json::json!({\n            \"working_digits\":working,\"working_bits\":p.bits,\n            \"float_evaluation\":evaluated.to_string(),\n            \"exact_source_value\":exact.to_string(),\n            \"exact_constant_differential_defect\":exact_defect.to_string(),\n        }));\n    }\n    println!(\"{}\", serde_json::to_string_pretty(&serde_json::json!({\n        \"scope\":\"Native Float versus Gaussian parameter specialization; exact coefficient discrepancy, no endpoint transport or verified-digit claim.\",\n        \"expression\":\"a^2-b\", \"exact_parameters\":\"a=2^400,b=2^800-1 supplied as exactly represented 300-digit Floats\",\n        \"system\":\"Y1prime=(a^2-b)*Y2,Y2prime=0,Y(0)=[0,1]\",\n        \"exact_solution\":\"Y(x)=[x,1]\", \"profiles\":profiles,\n    })).unwrap());\n    Ok(())\n}\n",
+  "parent_scope_note": "This is a confirmed numerical specialization mismatch, not a Symbolica bug or a false-admission demonstration. The merged exact-source residual rejects inconsistent charts. Native exact Gaussian specialization should also own central coefficient conversion in a follow-up."
+}

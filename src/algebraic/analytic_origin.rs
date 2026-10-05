@@ -269,6 +269,8 @@ impl AlgebraicSystem {
             return Err(Error::Numerical("nonfinite analytic series".into()));
         }
         let chart = RootChart {
+            coordinate: TaylorCoordinate::Identity,
+            local_system: None,
             residual: Some(AlgebraicResidualChart::roots_only(
                 &compiled,
                 &p.zero(),

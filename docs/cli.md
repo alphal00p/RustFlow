@@ -314,3 +314,13 @@ output includes `predicate_evaluations`, `steps` (committed segments),
 `rejected_steps`, and `superseded_successes`. An exact cache hit has zero transport
 counts. Cache identity and accuracy requirements are unchanged; either strategy
 can use a mathematically compatible, sufficiently accurate cached boundary.
+
+`options.local_coordinate` accepts `"identity"` (the default) or
+`"balanced_mobius"`. The latter uses regular boundary-centered Möbius charts
+through the same acceptance checks and cache. See [local coordinates](local-coordinates.md)
+for the supported maps and remaining predivision work.
+
+Transport results also include `conditioning_digits`, the minimum checked
+arithmetic-conditioning tolerance along the retained path and compared profiles.
+It is `null` for exact cache hits, whose existing accuracy evidence is retained.
+This diagnostic is separate from working precision and from a global error proof.
