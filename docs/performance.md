@@ -421,3 +421,25 @@ A shared step-growth proposal was tested on one saved, expensive segment of the 
 | Growth cap | 252 | 255 | 700.74 s | 30.11 s | 730.85 s |
 
 All 375 endpoint coefficients agreed within 1.25e−48 absolute and the root values were identical. Chart construction accounted for about 92% of the baseline transport time: fewer rejected attempts could not offset the extra charts. This is one run per mode on a shared host, so it establishes neither a statistical slowdown nor a general speed ratio. The candidate was left out of production. The complete scientific state, every coefficient comparison, exact source/binary provenance and timings are preserved in [the controlled-segment report](../reports/performance/pole-step-growth-leg100.json). This supplied-checkpoint experiment is separate from full-path precision refinement.
+
+### Bounded upward step search on the same Taylor chart
+
+A follow-up to the unsuccessful growth cap keeps the same initial proposal and
+tries at most two fully checked points between the last failed and first
+successful step. One supplied 75-master leg 100 comparison on CPU 35 used a common
+binary from validated source `fa1110f`, 60 working digits/order 56 and the same
+375-component boundary. All 375 endpoint coefficients agree within 20 absolute
+digits (maximum difference `6.718190e-49`), and all three root values are identical.
+The prior cap experiment remains separate.
+
+| Controller | Charts | Rejected trials | Superseded successes | Total trials | Chart time | Transport time |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Existing proposal | 239 | 1261 | 0 | 1500 | 672.035 s | 729.713 s |
+| Two upward trials | 187 | 1179 | 178 | 1544 | 516.157 s | 581.216 s |
+
+Fewer expensive charts outweighed the extra acceptance checks in this one pair.
+These are single observations, not a statistical or full-path speed claim.
+Every trial uses the same tail, midpoint/endpoint defect and branch checks;
+all 1544 candidate trials include the 178 successful results later superseded.
+Production adoption remains subject to complete outer-budget accounting and
+broader validation. See the [raw outputs, source and provenance](../reports/performance/step-bracket-leg100.json).

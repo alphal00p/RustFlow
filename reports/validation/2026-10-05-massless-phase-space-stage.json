@@ -1,0 +1,112 @@
+{
+  "schema": 1,
+  "status": "standalone_target_stage_passed_pending_production_integration",
+  "scope": "Generic all-cut massless N-body terminal; not general mixed-cut AMF recursion or full upstream parity.",
+  "created_utc": "2026-10-05T04:32:15.021622+00:00",
+  "base_source_commit": "c8204d6bcba26c44f519917d387efd6e8c0def75",
+  "normalization": {
+    "measure": "L=N-1 independent integration momenta; normalized positive-energy massless cuts, oriented sum equals declared future channel; no flux or identical-particle factor.",
+    "base_owner": "HEPKit Kinematics::two_body_phase_space at D=4, same existing dimensional continuation as PreparedTwoBodyPhaseSpace.",
+    "formula": "C2^(N-1)/(2*pi)^(N-2)*Gamma(a)*Gamma(2a)^(N-1)/(Gamma((N-1)*a)*Gamma(Na))*s^((N-1)*a-1)*abs(det routing)^(-D), a=(D-2)/2.",
+    "derivation": "Repeated dt/(2*pi) phase-space factorization gives Cn=C2*C(n-1)/(2*pi)*Beta((n-2)*a,2a). Gamma factors telescope. Re(a)>0 establishes the convolution; formula then supplies meromorphic continuation away from exceptional samples.",
+    "native_owners": [
+      "HEPKit two-body measure",
+      "HEPKit three-body Dalitz density used as independent D4 Laurent normalization",
+      "Symbolica Matrix<Q>::det for exact affine routing",
+      "RustRed cut-aware reductions and original nonzero conditions",
+      "Existing shared RustFlow sample evaluation and independent-grid/precision Laurent fitting",
+      "Symbolica MPFR powers/gamma; no f64"
+    ],
+    "removable_case": "N=2 gamma quotient cancels exactly, preserving finite D=2 value.",
+    "fit_bound": "New terminal starts at -2L, lowered further by maximal exact epsilon pole order of reduction weights. Existing two-body leading0 convention remains unchanged."
+  },
+  "validation": {
+    "new_tests": 8,
+    "existing_two_body_regressions": 3,
+    "result": {
+      "exit_code": 0,
+      "limit_reason": null,
+      "elapsed_seconds": 3.123887818772346,
+      "log_sha256": "575241ada4fef859c64d2cdcdf3751ec8c18bf83e2d14ba5ae3cf9d69c225df8"
+    },
+    "limits": {
+      "scope": "Target-only new production-shaped phase-space source plus exact verbatim fitting helper from current source; external immutable library owns existing AMF/reduction. Not a production Cargo result.",
+      "command": [
+        "taskset",
+        "-c",
+        "33",
+        "/common/dev/amflow/target/massless-phase-space/tests",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "declared_utc": "2026-10-05T04:31:01.781306+00:00",
+      "wall_limit_seconds": 300,
+      "per_process_address_space_bytes": 17179869184,
+      "binary_sha256": "b4b724dadfecb0cfb6bb16ed288f1f21feba655949d0638c990be7878fe30d71",
+      "source_sha256": "e10d567f9a5e3bc71fd74a423c3a16638ee1af96fccc07c6b14f2e9af576d4c7",
+      "tests_sha256": "a7d57c3a770b1204c615e5bbb1880e5e4110cada7e1a5c86021d0d90d1c5ad01",
+      "existing_two_body_tests_sha256": "30302fe4acb24f5777eb165df9faf958f6dd1f0095d68ceeacf1ba0c6dea0598"
+    },
+    "strict_standalone_clippy": {
+      "exit_code": 0
+    },
+    "coverage": [
+      "L2/L3 massless unit volumes at exact epsilon1/13 and1/17 versus separately prepared automatic uncut AMF discontinuities;20relative-digit assertion.",
+      "Higher working precision/order reevaluations compared at50digits; no50digit physical-accuracy claim.",
+      "Native cut-aware IBP reduction of L2 raised cut and ISP numerator versus independent ordinary AMF discontinuity; missing required cuts zero.",
+      "Public20digit Laurent fit of L2 unit volume through epsilon0 versus native three-body Dalitz density times exact triangle area; independent grids/refinement.",
+      "L1 throughL4 unit volumes: nonunit determinants, external affine shifts, cut permutations, backward channel and pinched cuts.",
+      "Two-external-vector channel at D0=6 compared to automatic ordinary bubble discontinuity.",
+      "Exact D=2 finite N=2 case avoids removable gamma singularity.",
+      "Incomplete or wrong residual reductions rejected; epsilon guard evaluated; extra1/epsilon^3 weight extends L2 bound to-7.",
+      "Massive, mixed-cut and extra-ISP-denominator inputs rejected."
+    ],
+    "build_scope": "Standalone harness links immutable core2b32fa9... for existing reduction/AMF. Its only private helper is a verbatim copy of current engine::fit_samples_refined_leading; production source calls that owner directly. No production Cargo result is claimed."
+  },
+  "initial_independent_probe": {
+    "provenance": {
+      "declared_utc": "2026-10-05T04:11:07.960452+00:00",
+      "scope": "Exploratory general massless phase-space convolution versus independent automatic uncut AMF discontinuity; no production implementation claim.",
+      "command": [
+        "taskset",
+        "-c",
+        "33",
+        "/common/dev/amflow/target/massless-phase-space/probe"
+      ],
+      "wall_limit_seconds": 300,
+      "per_process_address_space_bytes": 17179869184,
+      "source_sha256": "03a08df8d652621774d3ed228e0753f5b2b78a8d34f7830d8332cab92e339287",
+      "binary_sha256": "53e17cfd2beb5ba01e5131c089fb72e2893c5b0e7b4b8c9fdab296181d7c5441",
+      "native_library_sha256": "2b32fa9ed9ab769fe19b7a8e8e1f97e09fa26fa8897e17d3c2453dace07b7338"
+    },
+    "result": {
+      "exit_code": 0,
+      "reason": null,
+      "elapsed_seconds": 2.5728008206933737,
+      "log_sha256": "6458e015a97107164017728c083a103296b53fc57121c0676b9bd5f229423d15"
+    },
+    "full_output": "prepare L=2\nprepared L=2 15.519539ms\nL=2 eps=1/13 relative=6.05205092105075953290904706856717642561522393884351984523595339404189532196e-64 phase=(1.4505669841677713325676985265274885184430504494207613523308476936445890360e-3+0i) elapsed=143.318084ms\nL=2 eps=1/17 relative=5.93749015181127898351355462495991600656733991099121111546045070880249431808e-64 phase=(1.2911075312694302453972569247793432796968947964284144350396438899803012854e-3+0i) elapsed=265.871282ms\nprepare L=3\nprepared L=3 79.766102ms\nL=3 eps=1/13 relative=5.39009752532579075930263314512720090231938210656566506581058228033687464609e-64 phase=(1.6147790109881315297453204737329144021011324858802467567381967611659898109e-5+0i) elapsed=1.176099366s\nL=3 eps=1/17 relative=3.73042002209950383628251921111944857159049291466227129962024116918466308192e-64 phase=(1.3053018313430437075366487147054458365565143916215356419193936010410308111e-5+0i) elapsed=2.271365646s\n",
+    "scope": "Parent exploratory convolution formula versus fresh automatic uncut AMF, before new terminal integration. Tiny stored residuals do not raise the20digit claim."
+  },
+  "files": {
+    "target/massless-phase-space/production/src/phase_space.rs": "e10d567f9a5e3bc71fd74a423c3a16638ee1af96fccc07c6b14f2e9af576d4c7",
+    "target/massless-phase-space/production/tests/massless_phase_space.rs": "a7d57c3a770b1204c615e5bbb1880e5e4110cada7e1a5c86021d0d90d1c5ad01",
+    "target/massless-phase-space/production/docs/cuts.md": "f2c587ab00228adcb7efc80874a2c1b827c67166ba6a4ea5f9c5c0659251f392",
+    "target/massless-phase-space/test-command.json": "486abaf5db2db28832a61ea0f1e4978403d7a0c305ece3e594bee7d25482c2d1",
+    "target/massless-phase-space/test-harness.rs": "3bd897346f3c39f200a4254f9b56cf31b102c9a6406b8ad4243ebbe3915b4fd8",
+    "target/massless-phase-space/fit_helper.rs": "98503b07a8dab7f49b9c0a0353efc3a88df52b49006555ad95c0e2847c5ae01c",
+    "target/massless-phase-space/tests": "b4b724dadfecb0cfb6bb16ed288f1f21feba655949d0638c990be7878fe30d71",
+    "target/massless-phase-space/tests.log": "575241ada4fef859c64d2cdcdf3751ec8c18bf83e2d14ba5ae3cf9d69c225df8",
+    "target/massless-phase-space/tests-provenance.json": "88762085df2786bee98054d17174c9406e4834fa01eed27c1097ee824ee7f36c",
+    "target/massless-phase-space/tests-result.json": "f94f2452da9c5c872167c92af8b7b5807bcdeb4dee434e7d987074d64f799fbf",
+    "target/massless-phase-space/clippy-command.json": "22ef2aef3c51af7ec52009df3b78adc8d8cd8eee0a8c1f70d7eced7dfcac2e37",
+    "target/massless-phase-space/clippy.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "limitations": [
+    "Other exceptional gamma samples can return typed numerical errors; no arbitrary removable-pole continuation engine is added.",
+    "Raised/numerator support requires actual exact cut-reduction closure; unsupported backends/residuals do not become accepted basis integrals.",
+    "Massive N>2, mixed cuts, general cut boundary recursion, cut-preserving partial fractions and singular timelike thresholds remain excluded.",
+    "Finite-sample L3 evidence is separate from the L2 full Laurent regression; no full L3 Laurent acceptance is claimed here.",
+    "No benchmark speedup or broad AMFlow parity claim; production integration and central gates are pending."
+  ]
+}

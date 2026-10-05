@@ -1,0 +1,189 @@
+{
+  "schema_version": 1,
+  "status": "reproduced_open_correctness_gap",
+  "recorded_utc": "2026-10-05T04:53:59.191472+00:00",
+  "component": "RustFlow shared Taylor acceptance and independent-refinement verification; not a Symbolica algebra failure.",
+  "scope": "High-degree sparse polynomial forcing can vanish at both sampled defect points and lie above both retained Taylor orders.",
+  "reproduction": {
+    "N": 1000,
+    "antiderivative": "(-1/668*residual_alias_mre::{}::x^1002+1/1003*residual_alias_mre::{}::x^1003+1/2002*residual_alias_mre::{}::x^1001)*2012022012",
+    "counterexample": "y'=epsilon*g(x)*y, y(0)=1; epsilon orders zero and one",
+    "exact_derivative_verified_by_symbolica": true,
+    "exact_endpoint_coefficients": [
+      "1",
+      "-999"
+    ],
+    "exact_integral": "-999",
+    "explanation": "All retained Taylor orders below N+1 miss g; endpoint and midpoint g vanish exactly, so all collocation defects and retained tail vanish. Independent order/precision reruns agree on an incorrect answer.",
+    "g": "(-1+residual_alias_mre::{}::x)*(-1/2+residual_alias_mre::{}::x)*2012022012*residual_alias_mre::{}::x^1000",
+    "public_verified_transport": {
+      "checkpoints": 1,
+      "comparison_errors": [
+        [
+          "0"
+        ],
+        [
+          "0"
+        ]
+      ],
+      "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, working_bits: 282, expansion_order: 112 }",
+      "epsilon1": "0",
+      "epsilon1_absolute_error": "999.0000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+      "verified_digits": 20
+    },
+    "raw_runs": [
+      {
+        "coefficients": [
+          [
+            {
+              "im": "0",
+              "re": "1.0000000000000000000000000000000000000000000000000000000000000000"
+            }
+          ],
+          [
+            {
+              "im": "0",
+              "re": "0"
+            }
+          ]
+        ],
+        "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, working_bits: 216, expansion_order: 16 }",
+        "order": 16,
+        "segments": 1,
+        "verified_digits": null,
+        "working_digits": 60
+      },
+      {
+        "coefficients": [
+          [
+            {
+              "im": "0",
+              "re": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            }
+          ],
+          [
+            {
+              "im": "0",
+              "re": "0"
+            }
+          ]
+        ],
+        "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, working_bits: 282, expansion_order: 48 }",
+        "order": 48,
+        "segments": 1,
+        "verified_digits": null,
+        "working_digits": 80
+      },
+      {
+        "coefficients": [
+          [
+            {
+              "im": "0",
+              "re": "1.0000000000000000000000000000000000000000000000000000000000000000"
+            }
+          ],
+          [
+            {
+              "im": "0",
+              "re": "0"
+            }
+          ]
+        ],
+        "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, working_bits: 216, expansion_order: 80 }",
+        "order": 80,
+        "segments": 1,
+        "verified_digits": null,
+        "working_digits": 60
+      },
+      {
+        "coefficients": [
+          [
+            {
+              "im": "0",
+              "re": "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            }
+          ],
+          [
+            {
+              "im": "0",
+              "re": "0"
+            }
+          ]
+        ],
+        "diagnostics": "FlowDiagnostics { steps: 1, rejected_steps: 0, working_bits: 282, expansion_order: 112 }",
+        "order": 112,
+        "segments": 1,
+        "verified_digits": null,
+        "working_digits": 80
+      }
+    ]
+  },
+  "build": {
+    "command": [
+      "taskset",
+      "-c",
+      "36",
+      "rustc",
+      "--edition=2024",
+      "-C",
+      "opt-level=2",
+      "/common/dev/amflow/target/accuracy-policy-audit/residual_alias_mre.rs",
+      "-o",
+      "/common/dev/amflow/target/accuracy-policy-audit/residual_alias_mre",
+      "-L",
+      "dependency=/common/dev/amflow/target/epsilon-algebraic-release/deps",
+      "-L",
+      "dependency=/common/dev/amflow/target/release/deps",
+      "--extern",
+      "symbolica_amflow=/common/dev/amflow/target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "--extern",
+      "symbolica=/common/dev/amflow/target/release/deps/libsymbolica-75e897282e2131a2.rlib",
+      "--extern",
+      "serde_json=/common/dev/amflow/target/release/deps/libserde_json-570390c70cf80f0e.rlib",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/blake3-9252326cebd21167/out",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/blake3-222d768860627915/out",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-d5e4317be2c2f047/out/lib",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 14.001794864889234,
+    "wall_cap_seconds": 120,
+    "address_space_cap_bytes": 4294967296,
+    "library": {
+      "path": "/common/dev/amflow/target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "sha256": "e733f9be6deb8146b12628fd4519813a93133b5fa6aae6918b53fe5c02a068b2"
+    },
+    "source_sha256": "1704c250fa9e9d11416d68dd621fd4055272acbc433bc93c5efaf685175d89d8"
+  },
+  "run": {
+    "exit_code": 0,
+    "seconds": 0.1169118550606072,
+    "cpu": 36,
+    "wall_cap_seconds": 120,
+    "address_space_cap_bytes": 4294967296,
+    "binary_sha256": "626769476d97869926e4dbb2a6374e3bab57fb226c5c8b54ce1a878ee9d214fa"
+  },
+  "source": {
+    "path": "target/accuracy-policy-audit/residual_alias_mre.rs",
+    "sha256": "1704c250fa9e9d11416d68dd621fd4055272acbc433bc93c5efaf685175d89d8",
+    "text": "use symbolica::prelude::*;\nuse symbolica_amflow::{diffexp::{EpsilonSystem,EpsilonBoundary,transport_epsilon},FlowOptions,Precision,RunContext,Result,Error};\nuse serde_json::json;\nfn atom(s:&str)->Atom { Atom::parse(s,\"residual_alias_mre\",Default::default()).unwrap() }\nfn main()->Result<()> {\n let x=match atom(\"x\").as_view(){AtomView::Var(v)=>v.get_symbol(),_=>unreachable!()};\n let g=atom(\"2*1001*1002*1003*x^1000*(x-1/2)*(x-1)\");\n let primitive=atom(\"2*1001*1002*1003*(x^1003/1003-3*x^1002/(2*1002)+x^1001/(2*1001))\");\n let derivative_proof=(&primitive.derivative(x)-&g).expand().is_zero();\n let exact_integral=primitive.replace(Atom::var(x)).with(1).expand();\n if !derivative_proof || exact_integral != atom(\"-999\") { return Err(Error::InvalidInput(\"exact proof failed\".into())); }\n let system=EpsilonSystem{variable:x,matrices:vec![vec![vec![atom(\"0\")]],vec![vec![g.clone()]]]};\n let bdy=|p:Precision| Ok(EpsilonBoundary{point:p.zero(),leading:0,coefficients:vec![vec![p.i(1)],vec![p.zero()]]});\n let context=RunContext::default();\n let mut runs=Vec::new();\n for (digits,order) in [(60,16),(80,48),(60,80),(80,112)] {\n  let p=Precision::decimal(digits)?;\n  let options=FlowOptions{digits:20,guard_digits:digits-20,series_order:order,max_steps:100,..Default::default()};\n  let solution=system.compile(p,&Default::default())?.transport(&bdy(p)?,&[p.i(1)],&options,&context,true)?;\n  runs.push(json!({\"working_digits\":digits,\"order\":order,\"coefficients\":solution.coefficients.iter().map(|r|r.iter().map(|z|json!({\"re\":z.re.to_string(),\"im\":z.im.to_string()})).collect::<Vec<_>>()).collect::<Vec<_>>(),\"verified_digits\":solution.verified_digits,\"segments\":solution.segments.len(),\"diagnostics\":format!(\"{:?}\",solution.diagnostics)}));\n }\n let options=FlowOptions{digits:20,guard_digits:40,series_order:80,max_steps:100,..Default::default()};\n let solution=transport_epsilon(&system,bdy,&[atom(\"1\")],&options,&context,true)?;\n let p=Precision::decimal(80)?;\n let error=p.norm(&p.sub(&solution.coefficients[1][0],&p.i(-999)));\n let record=json!({\"counterexample\":\"y'=epsilon*g(x)*y, y(0)=1; epsilon orders zero and one\", \"g\":g.to_canonical_string(),\"N\":1000,\"antiderivative\":primitive.to_canonical_string(),\"exact_derivative_verified_by_symbolica\":derivative_proof,\"exact_integral\":exact_integral.to_canonical_string(),\"exact_endpoint_coefficients\":[\"1\",\"-999\"],\"raw_runs\":runs,\"public_verified_transport\":{\"verified_digits\":solution.verified_digits,\"epsilon1\":solution.coefficients[1][0].re.to_string(),\"epsilon1_absolute_error\":error.to_string(),\"comparison_errors\":solution.comparison_errors.iter().map(|r|r.iter().map(ToString::to_string).collect::<Vec<_>>()).collect::<Vec<_>>(),\"checkpoints\":solution.checkpoints.len(),\"diagnostics\":format!(\"{:?}\",solution.diagnostics)},\"explanation\":\"All retained Taylor orders below N+1 miss g; endpoint and midpoint g vanish exactly, so all collocation defects and retained tail vanish. Independent order/precision reruns agree on an incorrect answer.\"});\n println!(\"{}\",serde_json::to_string_pretty(&record).unwrap());\n if solution.verified_digits != Some(20) || !p.norm(&solution.coefficients[1][0]).is_zero() {return Err(Error::InvalidInput(\"expected old-library failure mode not reproduced\".into()));}\n Ok(())\n}\n"
+  },
+  "exact_proof": "For N=1000, g=2(N+1)(N+2)(N+3)x^N(x-1/2)(x-1), integrate termwise. Integral0..1 g=2(N+1)(N+2)(N+3)*(1/(N+3)-3/(2(N+2))+1/(2(N+1)))=1-N=-999; Symbolica verifies the derivative and integral exactly.",
+  "impact": "Public transport_epsilon incorrectly returns verified_digits=20, zero comparison errors and one verified checkpoint for epsilon1=0. Agreement between two truncations and endpoint/midpoint defects is insufficient to rule out this aliasing.",
+  "historical_benchmark_scope": "Recorded comparisons against independent reference values remain separate evidence for those specific examples. This reproducer contradicts generic assurance from refinement agreement alone.",
+  "corrective_work": "Stage a whole-segment cleared-polynomial residual majorant retaining full source degrees and using native Symbolica polynomial operations; preserve denominator bounds and later add compatible algebraic/root error estimates. Do not substitute extra collocation points or silently lower tolerances.",
+  "current_production_owner_hashes": {
+    "src/ode.rs": "94743743483f93211034a84bf32a9a7f976485f1212eab537ee01496d3f757e2",
+    "src/diffexp.rs": "1926d0fa8a2d7e6d7967dbe628a628d6cf7a953f68b571438a8d7daec0fa454e",
+    "src/algebraic.rs": "79fc6929c58a0f4719d48296b6fef42b77b711d274fbe137aad247baf3cd4340"
+  },
+  "files": {
+    "mre-output.json": "5b96c15576e06052cc1816873f169186cc6240b8feffa3d2524edbf253ea7797",
+    "build.json": "0eaf143c0bd7504cc450a840f32ee11353cc5e3baac6e86cf26d58522fb12de0",
+    "run.json": "591751f38141584a36dddfc1a29acec73aa8992505814d4879086de5a071f2e9"
+  }
+}

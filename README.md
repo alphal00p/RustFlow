@@ -19,6 +19,9 @@ epsilon power zero: 20-digit stability under independent sample/precision/order
 refinement and agreement with upstream data at its recorded precision. See the
 [acceptance report](reports/validation/2026-10-04-paper-two-loop-acceptance.json)
 and [implemented coverage and limits](docs/coverage.md).
+A [known transport-verification gap](reports/validation/2026-10-05-residual-alias-counterexample.json)
+can produce false verified digits for sparse high-degree polynomial systems;
+a whole-segment residual check is in progress.
 The [implementation and benchmark comparison](docs/benchmark-comparison.md)
 lists completed and pending features with RustFlow and reference timings side by side.
 An executable [performance comparison](docs/performance.md) measures the Rust
@@ -142,8 +145,9 @@ supports persistent transport caches across processes.
   `AlgebraicSystem::analytic_origin` for a compatible analytic sector at a singular
   source and validates all 540 coefficients with independent refinement.
 - `cuts::CutFamily` preserves distributional and positive-energy cut metadata
-  through native IBP reduction. The [two-body terminal](docs/cuts.md) uses native
-  HEPKit phase-space normalization and dimensional gamma factors.
+  through native IBP reduction. The [phase-space terminals](docs/cuts.md) cover
+  unequal-mass two-body and massless N-body final states, using native HEPKit
+  normalization, exact routing Jacobians and dimensional gamma factors.
 
 See [library usage](docs/usage.md), the runnable examples, and integration tests
 for complete typed inputs.

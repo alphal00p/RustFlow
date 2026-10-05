@@ -1,0 +1,261 @@
+{
+  "schema_version": 1,
+  "status": "native_baseline_running_refinement_unrun_acceptance_pending",
+  "recorded_utc": "2026-10-05T04:38:09.393255+00:00",
+  "case": "DiffExp full86 ZZZ PH1 to PH2, epsilon0..4,128absolute endpoint comparison",
+  "preparation_report": "reports/diffexp/fivepoint-zzz-128-preparation.json",
+  "original_live_failure_report": "reports/diffexp/fivepoint-zzz-128-original-failure.json",
+  "launch_decision": {
+    "status": "baseline_launch_declared_before_start",
+    "recorded_utc": "2026-10-05T04:34:15.927144+00:00",
+    "profile": {
+      "working_digits": 280,
+      "series_order": 230,
+      "requested_absolute_digits": 128,
+      "max_steps": 30000,
+      "wall_seconds": 14400,
+      "per_process_address_space_bytes": 17179869184,
+      "aggregate_descendant_rss_poll_bytes": 17179869184,
+      "cpu": 32,
+      "workers": 1
+    },
+    "aggregate_actual_predicate_budget": 30000,
+    "source_commit": "c8204d6bcba26c44f519917d387efd6e8c0def75",
+    "library": {
+      "path": "/common/dev/amflow/target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "sha256": "e733f9be6deb8146b12628fd4519813a93133b5fa6aae6918b53fe5c02a068b2"
+    },
+    "build": {
+      "path": "target/zzz-128-profile/native-checkpointed-build.json",
+      "sha256": "c2a24cd6d71241594f9d0c882b9aa2b30c9ca5a050cb9cb764375a92174cf3c1"
+    },
+    "launcher_sha256": "a49603888832aa8da227d76c0770c12f9f3e99b08bf2731a404881d25da46e53",
+    "driver_sha256": "35220cac6d75a5bc6af094d7434f9d1cd7243159c3eeef32917e5ad51aade82a",
+    "binary_sha256": "52849bcb0451e5edb88ddb3f641fb315c923546721474ce985b1ddea478b1b09",
+    "input_sha256": "872ff25244d6a43cd390be8acfd7ca8e2c304c6d4f98b297c44376c0a23975d9",
+    "plan_sha256": "29a3ff870f32f7413a2d8e3ae0886e855568c53d4a6841c8c086a930fac52ea2",
+    "readiness_audit_sha256": "d6d4ed6f3a8bc5dbbbcdc12a882b919beba9fc21231816f9074a80280810cb60",
+    "preparation": {
+      "status": "prepared_not_transported",
+      "started_utc": "2026-10-05T04:31:49.868571+00:00",
+      "command": [
+        "taskset",
+        "-c",
+        "32",
+        "/common/dev/amflow/target/zzz-128-profile/native_checkpointed",
+        "280",
+        "230",
+        "/common/dev/amflow/target/zzz-128-profile/native-input.json",
+        "/common/dev/amflow/target/zzz-128-profile/native-prepare-280-230/result.json"
+      ],
+      "binary_sha256": "52849bcb0451e5edb88ddb3f641fb315c923546721474ce985b1ddea478b1b09",
+      "driver_sha256": "35220cac6d75a5bc6af094d7434f9d1cd7243159c3eeef32917e5ad51aade82a",
+      "archive": {
+        "path": "/common/dev/amflow/target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+        "sha256": "e733f9be6deb8146b12628fd4519813a93133b5fa6aae6918b53fe5c02a068b2"
+      },
+      "input_sha256": "872ff25244d6a43cd390be8acfd7ca8e2c304c6d4f98b297c44376c0a23975d9",
+      "wall_cap_seconds": 300,
+      "address_space_cap_bytes": 17179869184,
+      "purpose": "Compile, exact pullback, contour and initial root validation only; no numerical transport or accuracy claim.",
+      "returncode": 0,
+      "elapsed_seconds": 5.227982691023499,
+      "log_sha256": "5880b2688fd2fffac4bdeef3d7927dd49154817b238d58877df87bd7cf658774",
+      "waypoints": 52,
+      "crossings": 17,
+      "result_sha256": "8aef747461673fe0dd2bd1eb553b2ac7f76010145af80290c5832eea1b86f75a"
+    },
+    "caps": "Fixed before launch; never extend live wall, memory or predicate limits. Preserve failure/censor/checkpoints.",
+    "checkpoint_scope": "Diagnostic only, no automatic resume or source-error certification.",
+    "reference_scope": "All430coefficients compared to stored PH2 at128absolute digits; original live128run failed memory with no endpoint; independent320/280 native refinement remains separate.",
+    "background_jobs": "Existing full86high scientific run CPU34; RustFlow production gate constrained CPUs24-31; massless staged gate CPU33 now complete. Baseline uses CPU32."
+  },
+  "launch_provenance": {
+    "status": "launched",
+    "started_utc": "2026-10-05T04:34:18.870795+00:00",
+    "command": [
+      "taskset",
+      "-c",
+      "32",
+      "/common/dev/amflow/target/zzz-128-profile/native_checkpointed",
+      "280",
+      "230",
+      "/common/dev/amflow/target/zzz-128-profile/native-input.json",
+      "/common/dev/amflow/target/zzz-128-profile/runs/native-checkpointed-280-230/native-result.json"
+    ],
+    "profile": {
+      "working_digits": 280,
+      "series_order": 230,
+      "requested_absolute_digits": 128,
+      "max_steps": 30000,
+      "wall_seconds": 14400,
+      "per_process_address_space_bytes": 17179869184,
+      "aggregate_descendant_rss_poll_bytes": 17179869184,
+      "cpu": 32,
+      "workers": 1
+    },
+    "plan_sha256": "29a3ff870f32f7413a2d8e3ae0886e855568c53d4a6841c8c086a930fac52ea2",
+    "input_sha256": "872ff25244d6a43cd390be8acfd7ca8e2c304c6d4f98b297c44376c0a23975d9",
+    "implementation": "native_baseline",
+    "binary_sha256": "52849bcb0451e5edb88ddb3f641fb315c923546721474ce985b1ddea478b1b09",
+    "driver_sha256": "35220cac6d75a5bc6af094d7434f9d1cd7243159c3eeef32917e5ad51aade82a",
+    "library": {
+      "path": "/common/dev/amflow/target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "sha256": "e733f9be6deb8146b12628fd4519813a93133b5fa6aae6918b53fe5c02a068b2"
+    },
+    "dependency_snapshot": {
+      "path": "/common/dev/amflow/target/epsilon-algebraic-release/archive.json",
+      "sha256": "19f34319c9abae63993544c55dca699ad98c616cdc9807af1ffb07999443e070"
+    },
+    "build_manifest_sha256": "c2a24cd6d71241594f9d0c882b9aa2b30c9ca5a050cb9cb764375a92174cf3c1",
+    "launcher_sha256": "a49603888832aa8da227d76c0770c12f9f3e99b08bf2731a404881d25da46e53",
+    "checkpoint_scope": "Per-waypoint unverified diagnostic points, no automatic restart or source-error certificate",
+    "actual_native_predicate_budget": 30000,
+    "resource_scope": "Inherited per-process RLIMIT_AS plus0.25-second descendant RSS polling with PID-start-time checks. Polling is not a kernel-enforced aggregate limit and can miss short-lived descendants."
+  },
+  "driver_build": {
+    "status": "compiled",
+    "returncode": 0,
+    "elapsed_seconds": 15.799812692217529,
+    "cpu": 32,
+    "wall_cap_seconds": 600,
+    "recorded_utc": "2026-10-05T04:30:42.428645+00:00",
+    "source_sha256": "35220cac6d75a5bc6af094d7434f9d1cd7243159c3eeef32917e5ad51aade82a",
+    "library": {
+      "path": "/common/dev/amflow/target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "sha256": "e733f9be6deb8146b12628fd4519813a93133b5fa6aae6918b53fe5c02a068b2"
+    },
+    "dependency_snapshot": {
+      "path": "/common/dev/amflow/target/epsilon-algebraic-release/archive.json",
+      "sha256": "19f34319c9abae63993544c55dca699ad98c616cdc9807af1ffb07999443e070"
+    },
+    "command": [
+      "taskset",
+      "-c",
+      "32",
+      "rustc",
+      "--edition=2024",
+      "-C",
+      "opt-level=2",
+      "/common/dev/amflow/target/zzz-128-profile/native_checkpointed.rs",
+      "-o",
+      "/common/dev/amflow/target/zzz-128-profile/native_checkpointed",
+      "-L",
+      "dependency=/common/dev/amflow/target/epsilon-algebraic-release/deps",
+      "-L",
+      "dependency=/common/dev/amflow/target/release/deps",
+      "--extern",
+      "symbolica_amflow=/common/dev/amflow/target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib",
+      "--extern",
+      "symbolica=/common/dev/amflow/target/release/deps/libsymbolica-75e897282e2131a2.rlib",
+      "--extern",
+      "serde_json=/common/dev/amflow/target/release/deps/libserde_json-570390c70cf80f0e.rlib",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/blake3-9252326cebd21167/out",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/blake3-222d768860627915/out",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-d5e4317be2c2f047/out/lib",
+      "-L",
+      "native=/common/dev/amflow/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib"
+    ],
+    "build_log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "binary_sha256": "52849bcb0451e5edb88ddb3f641fb315c923546721474ce985b1ddea478b1b09",
+    "scope": "Checkpointed driver compiled against frozen e733f9be; long numerical profiles require separate launch provenance."
+  },
+  "independent_source_audit": {
+    "recorded_utc": "2026-10-05T04:32:02.339839+00:00",
+    "status": "checkpointed_driver_source_preflight_passed_conditional_on_frozen_build_and_launch_provenance",
+    "reviewed_sha256": {
+      "target/zzz-128-profile/native.rs": "5d1f2c733444091247a5607f7cd96f96f8000e5447bb41b7b1928ec600f327d9",
+      "target/zzz-128-profile/native_checkpointed.rs": "35220cac6d75a5bc6af094d7434f9d1cd7243159c3eeef32917e5ad51aade82a",
+      "target/zzz-128-profile/native-input.json": "872ff25244d6a43cd390be8acfd7ca8e2c304c6d4f98b297c44376c0a23975d9",
+      "target/zzz-128-profile/plan.json": "29a3ff870f32f7413a2d8e3ae0886e855568c53d4a6841c8c086a930fac52ea2",
+      "target/zzz-128-profile/README.md": "663424576d8b1c832b78d4382df5add52f4106bcde0cdad116083dee1520ccf4",
+      "src/algebraic.rs": "79fc6929c58a0f4719d48296b6fef42b77b711d274fbe137aad247baf3cd4340",
+      "src/ode.rs": "94743743483f93211034a84bf32a9a7f976485f1212eab537ee01496d3f757e2",
+      "src/contour.rs": "1f8801c07a7b55a8bffca135b4c42d82c32698e0f80e5c72a9763e5d8fb15cbe",
+      "target/epsilon-algebraic-release/archive.json": "19f34319c9abae63993544c55dca699ad98c616cdc9807af1ffb07999443e070"
+    },
+    "scope": "Read-only preflight for fresh baseline/refinement supplied-boundary ZZZ PH1 -> PH2 128-absolute-digit comparisons. No native numerical launch, numerical result, error-box certificate or performance result is claimed.",
+    "findings": [
+      "Input has full86 components and epsilon0..4, all430 source/reference values, full58-letter alphabet with49 active coefficient matrices and4241 distinct nonzero sparse entries. No duplicate matrix assignment was found.",
+      "Exact affine coordinates and epsilon-independent root definitions are pulled back through the public canonical/algebraic API. Both endpoints are regular. The two tr5 radicand roots require opposite parameter detour sides under their common radicand +i0 prescription.",
+      "Source root seeds use radicand +i0. Continued root Value hints retain each discrete branch at regular waypoint boundaries; endpoint expected roots use exact endpoint substitution before numerical principal square roots.",
+      "The unchanged single-call solver already maintains one accepted+rejected budget across all waypoints. The new wrapper subtracts the aggregate checked counts before each leg, retains the30000 global bound and atomically writes accepted regular-waypoint diagnostics.",
+      "The checkpointed driver checks final point1, coefficient shape5x86, all coefficient/difference finiteness, exactly3 ordered finite roots and root differences before scientific pass.",
+      "Requested mixed local transport digits128 are distinguished from the final absolute reference threshold1e-128. Source Accuracy132 and uncertain zeros remain input metadata; arithmetic precision never promotes source evidence.",
+      "A baseline pass alone is insufficient for acceptance: the independent320-digit/order280 profile must start from original PH1 values, all430 low/high coefficient differences and endpoint sheets must be compared, and any fresh-original comparison remains unavailable after the original memory failure."
+    ],
+    "launch_requirements": [
+      "Build and bind the checkpointed source to the immutable e733f9be library archive and matching dependencies; retain driver, archive, input, binary and profile hashes.",
+      "Do not use the old launch.py provenance unchanged: it hardcodes driver_sha256(native.rs). A new launcher/provenance record must point explicitly to native_checkpointed.rs and preserve prior original/native preparation evidence.",
+      "Preserve fixed per-profile wall/memory caps and one-worker CPU affinity. Checkpoints are diagnostic values pending independent validation; future restart use requires authenticated matching source/binary/options/route and budget accounting.",
+      "Preparation-only output is not a scientific pass; inherited source-error propagation is explicitly unclaimed. No matched performance ratio can be inferred from the failed original128 run or historical notebook timing."
+    ]
+  },
+  "observed_live_process": {
+    "elapsed_seconds": 230.29962582187727,
+    "aggregate_descendant_rss": 130646016,
+    "processes": [
+      {
+        "pid": 3453495,
+        "ppid": 3452823,
+        "start_ticks": 266208510,
+        "rss": 130646016
+      }
+    ]
+  },
+  "state_scope": "Process PID/start-time verified at recorded_utc. This is an immutable launch snapshot, not an assertion of later process liveness. No endpoint or128-digit accuracy result exists.",
+  "matrix_scope": "Full86system from58letter alphabet with49nonzero letter matrices and4241unique sparse entries.",
+  "source_precision_scope": "Finite supplied coefficients have approximately132absolute Accuracy digits, including uncertain zeros. Working digits do not increase that evidence. Conditional endpoint comparison and independent refinement do not constitute a propagated-source-error certificate.",
+  "comparison_requirements": [
+    "All430complex endpoint coefficients present and finite; each absolute error below1e-128 against recorded PH2 reference.",
+    "Exactly3finite roots in declared order and correct physical endpoint sheets.",
+    "Independent320working-digit/order280 native refinement at128absolute digits.",
+    "Independent Decimal postprocessing and retained source accuracy metadata.",
+    "Any reference full-workflow performance comparison reports original memory failure; no completed live original128endpoint exists."
+  ],
+  "checkpoint_policy": "Atomic per-waypoint diagnostics retain values and projected root-sheet hints. They are not verified RustFlowCache entries and are not automatically resumed. Total accepted+rejected trials is bounded by30000across all waypoint calls for this immutable Halving controller.",
+  "reproduction_sources": {
+    "native_checkpointed.rs": {
+      "sha256": "35220cac6d75a5bc6af094d7434f9d1cd7243159c3eeef32917e5ad51aade82a",
+      "text": "//! Target-only public-API driver: conditional supplied-boundary comparison.\n//! Working precision is not source evidence; inherited errors remain in input metadata.\nuse serde_json::{Value, json};\nuse std::collections::{BTreeMap, BTreeSet};\nuse std::sync::Arc;\nuse std::time::Instant;\nuse symbolica::prelude::*;\nuse symbolica_amflow::algebraic::{CanonicalAlgebraicSystem, RootSeed, SquareRoot};\nuse symbolica_amflow::contour::{PolynomialPrescription, PrescribedContour};\nuse symbolica_amflow::{\n    ComplexFloat, Error, FlowOptions, Precision, Prescription, Progress, Result, RunContext,\n    diffexp, kinematics,\n};\nfn atom(s: &str) -> Result<Atom> {\n    Atom::parse(s, \"zzz_128_profile\", Default::default())\n        .map_err(|e| Error::InvalidInput(e.to_string()))\n}\nfn symbol(s: &str) -> Symbol {\n    match atom(s).unwrap().as_view() {\n        AtomView::Var(v) => v.get_symbol(),\n        _ => panic!(\"symbol required\"),\n    }\n}\nfn encoded(value: &ComplexFloat) -> Value {\n    json!({\"real\":value.re.to_string(),\"imaginary\":value.im.to_string()})\n}\nfn scalar(p: Precision, v: &Value) -> Result<ComplexFloat> {\n    p.parse(\n        v[\"real\"].as_str().unwrap(),\n        v[\"imaginary\"].as_str().unwrap(),\n    )\n}\nfn main() -> Result<()> {\n    let args = std::env::args().collect::<Vec<_>>();\n    if args.len() != 5 {\n        return Err(Error::InvalidInput(\n            \"usage: native WORKING_DIGITS ORDER INPUT_JSON OUTPUT_JSON\".into(),\n        ));\n    }\n    let working = args[1]\n        .parse::<u32>()\n        .map_err(|e| Error::InvalidInput(e.to_string()))?;\n    let order = args[2]\n        .parse::<usize>()\n        .map_err(|e| Error::InvalidInput(e.to_string()))?;\n    if working <= 128 || order < 8 {\n        return Err(Error::InvalidInput(\"insufficient declared profile\".into()));\n    }\n    let fixture: Value = serde_json::from_str(\n        &std::fs::read_to_string(&args[3]).map_err(|e| Error::InvalidInput(e.to_string()))?,\n    )\n    .map_err(|e| Error::InvalidInput(e.to_string()))?;\n    if fixture[\"dimension\"] != 86 || fixture[\"epsilon_order\"] != 4 {\n        return Err(Error::InvalidInput(\"expected full86 epsilon0..4\".into()));\n    }\n    let clock = Instant::now();\n    let p = Precision::decimal(working)?;\n    let parameter = symbol(\"x\");\n    let epsilon = symbol(\"eps\");\n    let variables = fixture[\"coordinate_names\"]\n        .as_array()\n        .unwrap()\n        .iter()\n        .map(|x| symbol(x.as_str().unwrap()))\n        .collect::<Vec<_>>();\n    let mut coordinates = BTreeMap::new();\n    for name in fixture[\"coordinate_names\"].as_array().unwrap() {\n        let name = name.as_str().unwrap();\n        let start = atom(fixture[\"source_point\"][name].as_str().unwrap())?;\n        let end = atom(fixture[\"destination_point\"][name].as_str().unwrap())?;\n        coordinates.insert(symbol(name), &start + (end - &start) * Atom::var(parameter));\n    }\n    let path = kinematics::KinematicPath {\n        parameter,\n        coordinates,\n    };\n    let entries = fixture[\"sparse_rational_coefficients\"].as_array().unwrap();\n    let used = entries\n        .iter()\n        .map(|e| e[\"indices\"][0].as_u64().unwrap() as usize)\n        .collect::<BTreeSet<_>>();\n    let mut letters = Vec::new();\n    let mut matrices = Vec::new();\n    for index in used {\n        letters.push(atom(fixture[\"letters\"][index - 1].as_str().unwrap())?);\n        let mut m = vec![vec![Atom::new(); 86]; 86];\n        for entry in entries {\n            let q = entry[\"indices\"].as_array().unwrap();\n            if q[0].as_u64().unwrap() as usize == index {\n                m[q[1].as_u64().unwrap() as usize - 1][q[2].as_u64().unwrap() as usize - 1] =\n                    atom(entry[\"coefficient\"].as_str().unwrap())?;\n            }\n        }\n        matrices.push(m);\n    }\n    let root_names = [\"tr5\", \"sqrtG3\", \"sqrtG3nc\"];\n    let roots = root_names\n        .iter()\n        .map(|name| {\n            let definition = fixture[\"root_definitions\"][name].as_str().unwrap();\n            Ok(SquareRoot {\n                symbol: symbol(name),\n                radicand: atom(\n                    definition\n                        .strip_prefix(\"sqrt(\")\n                        .unwrap()\n                        .strip_suffix(')')\n                        .unwrap(),\n                )?,\n            })\n        })\n        .collect::<Result<Vec<_>>>()?;\n    let symbolic = Instant::now();\n    let canonical = CanonicalAlgebraicSystem::new(epsilon, &variables, &letters, &matrices, roots)?;\n    let pulled = canonical.pullback(&path, 4)?;\n    let symbolic_seconds = symbolic.elapsed().as_secs_f64();\n    eprintln!(\n        \"symbolic pullback {symbolic_seconds:.3}s, {} source guards, {} path guards\",\n        canonical.nonzero_conditions().len(),\n        pulled.nonzero_conditions.len()\n    );\n    let compilation = Instant::now();\n    let compiled = pulled.compile(p)?;\n    let compile_seconds = compilation.elapsed().as_secs_f64();\n    let mut prescriptions = path\n        .coordinates\n        .values()\n        .cloned()\n        .map(|polynomial| PolynomialPrescription {\n            polynomial,\n            prescription: Prescription::PlusI0,\n        })\n        .collect::<Vec<_>>();\n    prescriptions.extend(pulled.roots.iter().map(|r| PolynomialPrescription {\n        polynomial: r.radicand.clone(),\n        prescription: Prescription::PlusI0,\n    }));\n    let context = RunContext {\n        progress: Some(Arc::new(|event| {\n            if let Progress::Step { index } = event\n                && index % 25 == 0\n            {\n                eprintln!(\"step {index}\");\n            }\n        })),\n        ..Default::default()\n    };\n    let contour_clock = Instant::now();\n    let route = PrescribedContour {\n        variable: parameter,\n        prescriptions,\n        unprescribed_side: Prescription::PlusI0,\n    }\n    .plan_with_context(\n        p,\n        compiled.singularity_polynomials(),\n        &p.zero(),\n        &p.i(1),\n        &context,\n    )?;\n    let contour_seconds = contour_clock.elapsed().as_secs_f64();\n    eprintln!(\n        \"compiled {compile_seconds:.3}s, planned {} exact-polynomial crossings / {} waypoints in {contour_seconds:.3}s\",\n        route.crossings.len(),\n        route.waypoints.len()\n    );\n    let coefficients = fixture[\"boundary_by_epsilon\"]\n        .as_array()\n        .unwrap()\n        .iter()\n        .map(|row| {\n            row.as_array()\n                .unwrap()\n                .iter()\n                .map(|v| scalar(p, v))\n                .collect::<Result<Vec<_>>>()\n        })\n        .collect::<Result<Vec<_>>>()?;\n    if coefficients.len() != 5 || coefficients.iter().any(|r| r.len() != 86) {\n        return Err(Error::InvalidInput(\"boundary dimensions\".into()));\n    }\n    let boundary = diffexp::EpsilonBoundary {\n        point: p.zero(),\n        leading: 0,\n        coefficients,\n    };\n    let seeds = root_names\n        .iter()\n        .map(|name| (symbol(name), RootSeed::I0(Prescription::PlusI0)))\n        .collect::<BTreeMap<_, _>>();\n    let options = FlowOptions {\n        digits: 128,\n        guard_digits: working - 128,\n        series_order: order,\n        max_steps: 30000,\n        ..Default::default()\n    };\n    let output_path = std::path::Path::new(&args[4]);\n    let directory = output_path\n        .parent()\n        .ok_or_else(|| Error::InvalidInput(\"output directory required\".into()))?;\n    let write_json = |path: &std::path::Path, record: &Value| -> Result<()> {\n        let temporary = path.with_extension(\"json.tmp\");\n        std::fs::write(&temporary, serde_json::to_vec_pretty(record).unwrap())\n            .map_err(|e| Error::InvalidInput(e.to_string()))?;\n        std::fs::rename(&temporary, path).map_err(|e| Error::InvalidInput(e.to_string()))\n    };\n    let initialized = compiled.transport(&boundary, &[], &seeds, &options, &context, false)?;\n    let plan = json!({\n        \"status\":\"prepared_not_transported\", \"working_digits\":working, \"order\":order,\n        \"requested_mixed_digits\":128,\"aggregate_step_predicate_budget\":options.max_steps,\n        \"dimension\":86,\"epsilon_order\":4,\"symbolic_seconds\":symbolic_seconds,\n        \"compile_seconds\":compile_seconds,\"contour_seconds\":contour_seconds,\n        \"waypoints\":route.waypoints.iter().map(encoded).collect::<Vec<_>>(),\n        \"crossings\":route.crossings.iter().map(|r|json!({\"point\":encoded(&r.point),\"side\":format!(\"{:?}\",r.side),\"prescription_indices\":r.prescription_indices})).collect::<Vec<_>>(),\n        \"source_guards\":canonical.nonzero_conditions().iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),\n        \"path_guards\":pulled.nonzero_conditions.iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),\n        \"initial_roots\":initialized.branches.roots.iter().map(|(s,v)|json!({\"root\":Atom::var(*s).to_canonical_string(),\"value\":encoded(v)})).collect::<Vec<_>>(),\n        \"checkpoint_scope\":\"Regular waypoint diagnostics only; source errors retained in input metadata, no independent checkpoint accuracy or inherited-error certificate.\"\n    });\n    write_json(&directory.join(\"transport-plan.json\"), &plan)?;\n    if std::env::var_os(\"RUSTFLOW_PREPARE_ONLY\").is_some() {\n        write_json(output_path, &plan)?;\n        return Ok(());\n    }\n    if route.waypoints.is_empty() {\n        return Err(Error::InvalidInput(\"empty declared benchmark route\".into()));\n    }\n    let transport = Instant::now();\n    let mut current_boundary = boundary;\n    let mut current_seeds = seeds;\n    let mut accepted = 0_usize;\n    let mut rejected = 0_usize;\n    let mut last_answer = None;\n    for (leg, target) in route.waypoints.iter().enumerate() {\n        let used = accepted\n            .checked_add(rejected)\n            .ok_or_else(|| Error::Limit(\"aggregate predicate overflow\".into()))?;\n        let remaining = options\n            .max_steps\n            .checked_sub(used)\n            .filter(|left| *left > 0)\n            .ok_or_else(|| Error::Limit(\"aggregate30000 predicate budget exhausted\".into()))?;\n        let leg_options = FlowOptions {\n            max_steps: remaining,\n            ..options.clone()\n        };\n        eprintln!(\n            \"waypoint {}/{} begins, accepted {accepted}, rejected {rejected}\",\n            leg + 1,\n            route.waypoints.len()\n        );\n        let answer = compiled.transport(\n            &current_boundary,\n            std::slice::from_ref(target),\n            &current_seeds,\n            &leg_options,\n            &context,\n            false,\n        )?;\n        if answer.solution.point != *target || answer.branches.point != *target {\n            return Err(Error::Numerical(\n                \"waypoint did not reach its exact requested endpoint\".into(),\n            ));\n        }\n        accepted = accepted\n            .checked_add(answer.solution.diagnostics.steps)\n            .ok_or_else(|| Error::Limit(\"accepted count overflow\".into()))?;\n        rejected = rejected\n            .checked_add(answer.solution.diagnostics.rejected_steps)\n            .ok_or_else(|| Error::Limit(\"rejected count overflow\".into()))?;\n        let record = json!({\"status\":\"regular_checkpoint_pending_independent_validation\",\"waypoint_index\":leg,\"working_digits\":working,\"order\":order,\n            \"point\":encoded(&answer.solution.point),\"accepted\":accepted,\"rejected\":rejected,\"transport_seconds\":transport.elapsed().as_secs_f64(),\n            \"values_by_epsilon\":answer.solution.coefficients.iter().map(|r|r.iter().map(encoded).collect::<Vec<_>>()).collect::<Vec<_>>(),\n            \"branch_roots\":answer.branches.roots.iter().map(|(s,v)|json!({\"root\":Atom::var(*s).to_canonical_string(),\"value\":encoded(v)})).collect::<Vec<_>>()});\n        write_json(\n            &directory.join(format!(\"checkpoint-{leg:03}.json\")),\n            &record,\n        )?;\n        current_seeds = answer\n            .branches\n            .roots\n            .iter()\n            .map(|(symbol, value)| (*symbol, RootSeed::Value(value.clone())))\n            .collect();\n        current_boundary = diffexp::EpsilonBoundary {\n            point: answer.solution.point.clone(),\n            leading: 0,\n            coefficients: answer.solution.coefficients.clone(),\n        };\n        last_answer = Some(answer);\n    }\n    let mut answer = last_answer.unwrap();\n    answer.solution.diagnostics.steps = accepted;\n    answer.solution.diagnostics.rejected_steps = rejected;\n    let transport_seconds = transport.elapsed().as_secs_f64();\n    if answer.solution.point != p.i(1)\n        || answer.solution.coefficients.len() != 5\n        || answer\n            .solution\n            .coefficients\n            .iter()\n            .any(|row| row.len() != 86 || row.iter().any(|v| !p.finite(v)))\n        || answer.branches.roots.len() != root_names.len()\n        || answer\n            .branches\n            .roots\n            .iter()\n            .zip(root_names)\n            .any(|((actual, value), name)| *actual != symbol(name) || !p.finite(value))\n    {\n        return Err(Error::Numerical(\n            \"malformed or nonfinite full86 endpoint\".into(),\n        ));\n    }\n    let mut maximum = p.real(0);\n    let mut differences = Vec::new();\n    for (k, row) in answer.solution.coefficients.iter().enumerate() {\n        for (j, value) in row.iter().enumerate() {\n            let difference =\n                p.norm(&p.sub(value, &scalar(p, &fixture[\"reference_by_epsilon\"][k][j])?));\n            if !difference.is_finite() {\n                return Err(Error::Numerical(\"nonfinite reference difference\".into()));\n            }\n            if difference > maximum {\n                maximum = difference.clone();\n            }\n            differences.push(json!({\"epsilon\":k,\"master_one_based\":j+1,\"absolute_difference\":difference.to_string()}));\n        }\n    }\n    let half = p.rational(&Rational::from((1, 2)));\n    let mut root_records = Vec::new();\n    let mut branch_pass = true;\n    for (root, value) in &answer.branches.roots {\n        let definition = pulled.roots.iter().find(|r| r.symbol == *root).unwrap();\n        let exact_endpoint = symbolica_amflow::family::substitute(\n            &definition.radicand,\n            &BTreeMap::from([(Atom::var(parameter), Atom::one())]),\n        )\n        .together()\n        .cancel();\n        let radicand = p.eval(&exact_endpoint, &Default::default())?;\n        let expected = p.pow(&radicand, &half);\n        let difference = p.norm(&p.sub(value, &expected));\n        branch_pass &=\n            p.finite(&expected) && difference.is_finite() && difference < p.tolerance(128);\n        root_records.push(json!({\"root\":Atom::var(*root).to_canonical_string(),\"value\":encoded(value),\"principal_expected\":encoded(&expected),\"absolute_difference\":difference.to_string()}));\n    }\n    let pass = maximum < p.tolerance(128) && branch_pass;\n    let output = json!({\"status\":if pass {\"passed\"} else {\"reference_or_branch_disagreement\"},\"case\":\"ZZZ86_PH1_PH2_128\",\"working_digits\":working,\"order\":order,\"requested_mixed_digits\":128,\"asserted_reference_absolute_digits\":128,\"dimension\":86,\"epsilon_order\":4,\"symbolic_seconds\":symbolic_seconds,\"compile_seconds\":compile_seconds,\"contour_seconds\":contour_seconds,\"transport_seconds\":transport_seconds,\"total_seconds\":clock.elapsed().as_secs_f64(),\"checkpoint_scope\":\"Per-waypoint public transports preserve discrete branch hints; accepted+rejected budget is aggregate over all legs for this immutable controller. Checkpoints are unverified until an independent comparison.\",\"steps\":answer.solution.diagnostics.steps,\"rejected_steps\":answer.solution.diagnostics.rejected_steps,\"values\":answer.solution.coefficients.iter().map(|r|r.iter().map(encoded).collect::<Vec<_>>()).collect::<Vec<_>>(),\"coefficient_differences\":differences,\"max_absolute_difference\":maximum.to_string(),\"branches\":root_records,\"crossings\":route.crossings.iter().map(|r|json!({\"point\":encoded(&r.point),\"side\":format!(\"{:?}\",r.side),\"prescription_indices\":r.prescription_indices})).collect::<Vec<_>>(),\"waypoints\":route.waypoints.iter().map(encoded).collect::<Vec<_>>(),\"source_error_propagation_certificate\":false,\"precision_scope\":\"Low-level supplied-boundary transport checks128 absolute digits against stored PH2 values. Independent profile comparison remains separate. Source Accuracy132 and finite zeros are preserved in input, not promoted by working precision; a128-digit inherited-error certificate is not claimed by this result.\"});\n    write_json(output_path, &output)?;\n    if !pass {\n        return Err(Error::Accuracy(format!(\n            \"ZZZ128 absolute endpoint residual {maximum}, branch_pass={branch_pass}\"\n        )));\n    }\n    Ok(())\n}\n"
+    },
+    "build_native_checkpointed.py": {
+      "sha256": "d4dde729858213611dbd7bcb1840c743bfa7cb3bae868c85608cb5418f235742",
+      "text": "from pathlib import Path\nimport datetime,hashlib,json,os,subprocess,time\nbase=Path(__file__).resolve().parent;root=base.parents[1]\narchive=root/'target/epsilon-algebraic-release/deps/libsymbolica_amflow-d39e426db931b928.rlib';want='e733f9be6deb8146b12628fd4519813a93133b5fa6aae6918b53fe5c02a068b2'\nsha=lambda p:hashlib.sha256(p.read_bytes()).hexdigest();assert sha(archive)==want\nargs=['taskset','-c','32','rustc','--edition=2024','-C','opt-level=2',str(base/'native_checkpointed.rs'),'-o',str(base/'native_checkpointed'),'-L',f'dependency={archive.parent}','-L',f'dependency={root}/target/release/deps','--extern',f'symbolica_amflow={archive}','--extern',f'symbolica={root}/target/release/deps/libsymbolica-75e897282e2131a2.rlib','--extern',f'serde_json={root}/target/release/deps/libserde_json-570390c70cf80f0e.rlib']\nfor pattern in ['blake3-*/out','gmp-mpfr-sys-*/out/lib']:\n for p in (root/'target/release/build').glob(pattern):args+=['-L',f'native={p}']\n(base/'native-checkpointed-build-command.json').write_text(json.dumps(args,indent=2)+'\\n');start=time.monotonic()\nwith (base/'native-checkpointed-build.log').open('w') as out:result=subprocess.run(args,cwd=base,stdout=out,stderr=subprocess.STDOUT,timeout=600)\nr={'status':'compiled' if result.returncode==0 else 'compile_failed','returncode':result.returncode,'elapsed_seconds':time.monotonic()-start,'cpu':32,'wall_cap_seconds':600,'recorded_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'source_sha256':sha(base/'native_checkpointed.rs'),'library':{'path':str(archive),'sha256':want},'dependency_snapshot':{'path':str(archive.parent.parent/'archive.json'),'sha256':sha(archive.parent.parent/'archive.json')},'command':args,'build_log_sha256':sha(base/'native-checkpointed-build.log'),'binary_sha256':sha(base/'native_checkpointed') if result.returncode==0 else None,'scope':'Checkpointed driver compiled against frozen e733f9be; long numerical profiles require separate launch provenance.'}\n(base/'native-checkpointed-build.json').write_text(json.dumps(r,indent=2)+'\\n');print(json.dumps(r));raise SystemExit(result.returncode)\n"
+    },
+    "launch_checkpointed.py": {
+      "sha256": "a49603888832aa8da227d76c0770c12f9f3e99b08bf2731a404881d25da46e53",
+      "text": "\"\"\"Run one reviewed, fixed-cap profile; never extend a live cap or overwrite runs.\"\"\"\nfrom pathlib import Path\nimport argparse,datetime,hashlib,json,os,resource,signal,subprocess,time\nbase=Path(__file__).resolve().parent;root=base.parents[1]\nparser=argparse.ArgumentParser();parser.add_argument('profile',choices=['native_baseline','native_refined']);parser.add_argument('--name',required=True);parser.add_argument('--binary',type=Path);args=parser.parse_args()\nplan=json.loads((base/'plan.json').read_text());profile=plan['profiles'][args.profile]\nif Path(args.name).name!=args.name:raise SystemExit('Run name must be one path component')\nwork=base/'runs'/args.name;work.mkdir(parents=True,exist_ok=False)\ndef sha(p):return hashlib.sha256(Path(p).read_bytes()).hexdigest()\nfor item in plan['source_files'].values():\n if sha(item['path'])!=item['sha256']:raise SystemExit(f'Changed pinned input: {item[\"path\"]}')\nenv=os.environ.copy();env.pop('RUSTFLOW_PREPARE_ONLY',None);env.update(OMP_NUM_THREADS='1',MKL_NUM_THREADS='1',OPENBLAS_NUM_THREADS='1',RUSTFLOW_WOLFRAM_KERNEL='/home/ben/.local/bin/bern-wolfram',ZZZ_RUN_DIR=str(work))\nif args.profile=='original':\n command=[str(root/'scripts/wolfram_one_thread.py'),'-noinit','-noprompt','-script',str(base/'original.wl')]\n expected=work/'result.json';extra={'driver_sha256':sha(base/'original.wl'),'launcher_sha256':sha(root/'scripts/wolfram_one_thread.py'),'loader_sha256':sha(root/'scripts/wolfram_one_thread.wl')}\nelse:\n if args.binary is None or not args.binary.is_file():raise SystemExit('Native profile requires an explicitly built --binary')\n build=json.loads((base/'native-checkpointed-build.json').read_text())\n if build['status']!='compiled' or sha(args.binary)!=build['binary_sha256'] or sha(base/'native_checkpointed.rs')!=build['source_sha256']:raise SystemExit('Checkpointed driver/build mismatch')\n if sha(build['library']['path'])!=build['library']['sha256']:raise SystemExit('Frozen library mismatch')\n if sha(build['dependency_snapshot']['path'])!=build['dependency_snapshot']['sha256']:raise SystemExit('Dependency archive manifest mismatch')\n command=[str(args.binary.resolve()),str(profile['working_digits']),str(profile['series_order']),str(base/'native-input.json'),str(work/'native-result.json')]\n expected=work/'native-result.json';extra={'binary_sha256':sha(args.binary),'driver_sha256':sha(base/'native_checkpointed.rs'),'library':build['library'],'dependency_snapshot':build['dependency_snapshot'],'build_manifest_sha256':sha(base/'native-checkpointed-build.json'),'launcher_sha256':sha(Path(__file__)),'checkpoint_scope':'Per-waypoint unverified diagnostic points, no automatic restart or source-error certificate','actual_native_predicate_budget':30000}\ncommand=['taskset','-c',str(profile['cpu']),*command]\nmetadata={'status':'launched','started_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'command':command,'profile':profile,'plan_sha256':sha(base/'plan.json'),'input_sha256':sha(base/'native-input.json'),'implementation':args.profile,**extra,'resource_scope':'Inherited per-process RLIMIT_AS plus0.25-second descendant RSS polling with PID-start-time checks. Polling is not a kernel-enforced aggregate limit and can miss short-lived descendants.'}\n(work/'provenance.json').write_text(json.dumps(metadata,indent=2)+'\\n')\ncap=profile['per_process_address_space_bytes'];tracked={}\ndef limit():resource.setrlimit(resource.RLIMIT_AS,(cap,cap))\ndef state(pid):\n try:\n  f=Path(f'/proc/{pid}/stat').read_text().rsplit(')',1)[1].split();return {'pid':pid,'ppid':int(f[1]),'start_ticks':int(f[19]),'rss':int(f[21])*os.sysconf('SC_PAGE_SIZE')}\n except (OSError,ValueError,IndexError):return None\ndef living(root_pid):\n allstates={}\n for q in Path('/proc').glob('[0-9]*/stat'):\n  x=state(int(q.parent.name))\n  if x:allstates[x['pid']]=x\n if root_pid not in tracked and root_pid in allstates:tracked[root_pid]=allstates[root_pid]\n found={pid:allstates[pid] for pid,old in tracked.items() if pid in allstates and allstates[pid]['start_ticks']==old['start_ticks']}\n while True:\n  new={pid:x for pid,x in allstates.items() if pid not in found and x['ppid'] in found}\n  if not new:break\n  found.update(new)\n tracked.update(found);return found\ndef signal_owned(processes,sig):\n for pid,old in processes.items():\n  now=state(pid)\n  if now and now['start_ticks']==old['start_ticks']:\n   try:os.kill(pid,sig)\n   except ProcessLookupError:pass\nstart=time.monotonic();reason=None;peak=0\nwith (work/'run.log').open('w') as log,(work/'descendants.jsonl').open('w') as observations:\n proc=subprocess.Popen(command,cwd=work,env=env,stdout=log,stderr=subprocess.STDOUT,start_new_session=True,preexec_fn=limit)\n while proc.poll() is None:\n  processes=living(proc.pid);rss=sum(x['rss'] for x in processes.values());peak=max(peak,rss);elapsed=time.monotonic()-start\n  observations.write(json.dumps({'elapsed_seconds':elapsed,'aggregate_descendant_rss':rss,'processes':list(processes.values())})+'\\n');observations.flush()\n  if elapsed>profile['wall_seconds']:reason='wall_limit'\n  if rss>profile['aggregate_descendant_rss_poll_bytes']:reason='polled_rss_limit'\n  if reason:\n   signal_owned(living(proc.pid),signal.SIGTERM)\n   try:proc.wait(timeout=5)\n   except subprocess.TimeoutExpired:pass\n   signal_owned(living(proc.pid),signal.SIGKILL);proc.wait();break\n  time.sleep(.25)\n code=proc.returncode\n remaining=living(proc.pid)\n if remaining:signal_owned(remaining,signal.SIGTERM);time.sleep(1);signal_owned(living(proc.pid),signal.SIGKILL)\npassed=code==0 and reason is None and expected.is_file() and json.loads(expected.read_text()).get('status')=='passed'\nresult={'status':'passed' if passed else 'incomplete_or_failed','returncode':code,'limit_reason':reason,'elapsed_seconds':time.monotonic()-start,'peak_polled_descendant_rss_bytes':peak,'finished_utc':datetime.datetime.now(datetime.timezone.utc).isoformat(),'provenance_sha256':sha(work/'provenance.json'),'log_sha256':sha(work/'run.log'),'descendant_log_sha256':sha(work/'descendants.jsonl'),'scientific_result_sha256':sha(expected) if expected.exists() else None}\n(work/'runner-result.json').write_text(json.dumps(result,indent=2)+'\\n');print(json.dumps(result));raise SystemExit(0 if passed else 1)\n"
+    }
+  },
+  "files": [
+    {
+      "path": "target/zzz-128-profile/native-input.json",
+      "sha256": "872ff25244d6a43cd390be8acfd7ca8e2c304c6d4f98b297c44376c0a23975d9",
+      "bytes": 1283173
+    },
+    {
+      "path": "target/zzz-128-profile/plan.json",
+      "sha256": "29a3ff870f32f7413a2d8e3ae0886e855568c53d4a6841c8c086a930fac52ea2",
+      "bytes": 10091
+    },
+    {
+      "path": "target/zzz-128-profile/native-baseline-launch-decision.json",
+      "sha256": "f130111e9eab521437b46e9516c4d6c0be9473a54fbfd02e5cab81f90afa40fd",
+      "bytes": 3425
+    },
+    {
+      "path": "target/zzz-128-profile/native-prepare-280-230/runner-result.json",
+      "sha256": "51682c027cfc20d9d770e32d3a239a6d827166a47d7705ff7b42d3fead2bb4d1",
+      "bytes": 1329
+    },
+    {
+      "path": "target/zzz-128-profile/native-readiness-audit.json",
+      "sha256": "d6d4ed6f3a8bc5dbbbcdc12a882b919beba9fc21231816f9074a80280810cb60",
+      "bytes": 4033
+    }
+  ]
+}

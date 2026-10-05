@@ -738,7 +738,7 @@
     {
       "id": "fivepoint-planar-zzz-ph1-to-ph2-128digits",
       "notebook": "5pPlanar1Mass.nb",
-      "status": "original_native_memory_failure_native_unrun_acceptance_pending",
+      "status": "original_native_memory_failure_native_baseline_running_acceptance_pending",
       "family": "zzz",
       "dimension": 86,
       "canonical": true,
@@ -776,7 +776,7 @@
         "cpu": 32,
         "workers": 1
       },
-      "native_status": "not launched",
+      "native_status": "baseline280/230running;independent320/280refinementunrun",
       "original_report": "reports/diffexp/fivepoint-zzz-128-original-failure.json",
       "original_report_sha256": "ead385ef511fc84d963d6a2c17c0a788b05a43e465b92d2b732dd2d4316ec8eb",
       "current_original_outcome": {
@@ -789,7 +789,9 @@
         "native_error": "No more memory available. Mathematica kernel has shut down.",
         "endpoint_result_available": false,
         "scope": "Failure under declared inherited16GiB per-process address-space cap. No wall/RSS watchdog censor; no completed endpoint timing or128-digit acceptance."
-      }
+      },
+      "native_launch_report": "reports/diffexp/fivepoint-zzz-128-native-launch.json",
+      "native_launch_report_sha256": "357d5d39807efeffbd4ddb66c4fc1bf6c4cf0de91cc6ca6e0de84420161056c0"
     }
   ],
   "additional_paper_profiles": [
@@ -897,7 +899,7 @@
         "anc/XB_Boundary_values_X1.txt": "7883537af39b181f84266934b9440df3f67a5eb8f67b576388d7aa29524d9b92"
       },
       "download_reproduction": "python scripts/fetch_diffexp_ancillaries.py",
-      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native 1loop, 74-master MZZ and 75-master ZMZ independent refinement passed. Native full86 first endpoint passed; its higher profile is running. Separate 86-master PH1-to-PH2 128-digit original profile ended with a native memory failure after36/108segments under its declared16GiB address-space cap; native profiles remain unrun."
+      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native 1loop, 74-master MZZ and 75-master ZMZ independent refinement passed. Native full86 first endpoint passed; its higher profile is running. Separate 86-master PH1-to-PH2 128-digit original profile ended with a native memory failure after36/108segments under its declared16GiB address-space cap; native280/230baseline now running;independent320/280refinement remains unrun."
     },
     {
       "id": "2005.04195v2",
@@ -934,7 +936,7 @@
         "anc/determinants.m": "81655e7efd9628aac262ab2ac586e55c77ecb2f4657b88932bf0de2acdf19ca2"
       },
       "download_reproduction": "python scripts/fetch_diffexp_ancillaries.py",
-      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native 1loop, 74-master MZZ and 75-master ZMZ independent refinement passed. Native full86 first endpoint passed; its higher profile is running. Separate 86-master PH1-to-PH2 128-digit original profile ended with a native memory failure after36/108segments under its declared16GiB address-space cap; native profiles remain unrun."
+      "numerical_benchmark_status": "All PH1-to-PH6 original planar families completed. Native 1loop, 74-master MZZ and 75-master ZMZ independent refinement passed. Native full86 first endpoint passed; its higher profile is running. Separate 86-master PH1-to-PH2 128-digit original profile ended with a native memory failure after36/108segments under its declared16GiB address-space cap; native280/230baseline now running;independent320/280refinement remains unrun."
     }
   ],
   "preparation_tools": [

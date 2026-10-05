@@ -1,6 +1,24 @@
 # Implementation coverage
 
-The registered-root epsilon-shearing milestone passes **408 release unit/integration
+The massless phase-space milestone passes **416 release unit/integration tests**,
+one doctest, strict all-target Clippy and formatting. Nine long scientific tests
+remain opt-in. Its [release report](../reports/validation/2026-10-05-massless-phase-space-release.json)
+records the tested source and immutable library. The [N-body terminal](cuts.md)
+uses one dimensional convolution formula, native HEPKit normalization, Symbolica
+routing determinants and cut-aware reductions. Two- and three-loop finite-epsilon
+values match independent automatic AMF discontinuities; a two-loop Laurent fit
+matches the native three-body measure. General mixed-cut recursion remains open.
+
+A separate [reproduced correctness gap](../reports/validation/2026-10-05-residual-alias-counterexample.json)
+affects generic transport verification: sparse high-degree polynomial forcing can
+vanish at both sampled defect points and lie above both retained Taylor orders.
+The current public interface can then incorrectly report verified digits and a
+verified checkpoint. A whole-segment residual check is being implemented. The
+ordinary release suite does not cover this reproducer yet; independent reference
+comparisons in the benchmark reports establish accuracy only for their recorded
+inputs.
+
+The preceding registered-root epsilon-shearing milestone passes **408 release unit/integration
 tests**, one doctest, strict all-target Clippy and formatting. Nine long scientific
 tests remain opt-in. The [release report](../reports/validation/2026-10-05-epsilon-algebraic-release.json)
 records the exact tested sources and immutable compiled library. Rational and
@@ -224,8 +242,11 @@ precision/order profile is running; full acceptance remains pending. The
 [separate 128-digit PH1→PH2 original profile](../reports/diffexp/fivepoint-zzz-128-original-failure.json)
 ended with a native Mathematica memory failure after 1811.93 seconds and 36 of
 108 segments under its declared 16 GiB per-process address-space cap. Neither
-watchdog fired and no endpoint result was produced. Native 128-digit profiles
-remain unrun; finite source data carry about 132 absolute accuracy digits. The staged MZZ offline regression has not yet been rerun against the
+watchdog fired and no endpoint result was produced. The [native 128-digit
+baseline](../reports/diffexp/fivepoint-zzz-128-native-launch.json) is now running
+at 280 working digits/order 230 under fixed four-hour/16 GiB limits; its separate
+320-digit/order-280 refinement remains unrun. Finite source data carry about
+132 absolute accuracy digits. The staged MZZ offline regression has not yet been rerun against the
 latest production library.
 
 The original paper's mandatory numerical acceptance gate passes: all four

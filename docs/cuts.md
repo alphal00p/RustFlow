@@ -1,8 +1,8 @@
-# Cut integrals and two-body phase space
+# Cut integrals and phase-space terminals
 
 `cuts::CutFamily` pairs an ordinary algebraic family with its cut measure. It records the cut slots, exact oriented cut momenta and per-loop causal conventions. There is no implicit conversion to an ordinary integral family: `ReductionBackend::reduce_cut` must explicitly support the measure. The RustRed adapter uses native `SectorConfig::deltas`, cut restrictions and cut-aware ordering. A required cut with nonpositive power is zero by its distributional definition, independently of scaleless-sector analysis. Raised cuts are supported by exact IBPs. Both the native factorized solver and RustRed’s sparse runtime bridge receive the explicit cut mask; neither treats a cut family as an ordinary uncut family.
 
-The current numerical terminal is `phase_space::PreparedTwoBodyPhaseSpace`. It accepts one integration loop, one external channel, exactly two normalized quadratic physical denominators, both cut, and no extra denominator slots. The specialized invariant and squared masses must be exact real rationals, with nonnegative masses and a timelike channel. `LoopPrescription::Insensitive` identifies the pure phase-space integration loop. This is a two-body terminal; general mixed real/virtual cut AMF recursion is not implemented by this entrypoint.
+The massive two-body terminal is `phase_space::PreparedTwoBodyPhaseSpace`. It accepts one integration loop, one external channel, exactly two normalized quadratic physical denominators, both cut, and no extra denominator slots. The specialized invariant and squared masses must be exact real rationals, with nonnegative masses and a timelike channel. `LoopPrescription::Insensitive` identifies the pure phase-space integration loop. This is a two-body terminal; general mixed real/virtual cut AMF recursion is not implemented by this entrypoint.
 
 ## Orientation, support and normalization
 
@@ -28,6 +28,26 @@ Phi_n = 2 * (4*pi)^(-D/2) * Im(I_uncut_n).
 ```
 
 This relation is tested using the existing auxiliary-mass differential-equation solver for the uncut unequal-mass bubble, rather than a second call to the phase-space formula. It must not be applied to a general cut graph as the imaginary part of the whole graph.
+
+## Massless N-body terminal
+
+`phase_space::PreparedMasslessPhaseSpace` and `solve_massless_phase_space` accept a complete massless final state with `N=L+1 >= 2` positive-energy cut momenta. All physical denominators must be cut and normalized, every cut mass must vanish exactly, and the oriented momenta must sum to the declared future-timelike channel or its negative. Several external coordinates and affine loop shifts are allowed. Symbolica computes the exact determinant of the independent loop-routing matrix; the measure retains `|det|^(-D)`. Reversed total energy and pinched required cuts give exact zero.
+
+Let `a=(D-2)/2` and let `C2` be the existing HEPKit-normalized massless two-body volume at `s=1`. Repeated phase-space factorization with measure `dt/(2*pi)` gives
+
+```text
+Phi_N(s) = C2^(N-1)/(2*pi)^(N-2)
+    * Gamma(a)*Gamma(2*a)^(N-1)/(Gamma((N-1)*a)*Gamma(N*a))
+    * s^((N-1)*a-1) * |det|^(-D).
+```
+
+The convolution converges for `Re(a)>0`; this gamma expression supplies its meromorphic dimensional continuation. The N=2 gamma quotient cancels exactly, retaining finite cases such as D=2. Other exceptional gamma samples that cannot be evaluated finitely return a typed numerical error. No initial flux or identical-particle factor is inserted. The native three-body Dalitz density, integrated over the exact massless triangle, independently checks the four-dimensional normalization.
+
+The unit volume is certified by this geometry. Raised cuts and polynomial numerators still require the caller's cut-aware reduction backend, and every nonzero residual must reduce onto that unit volume. Missing reductions and residuals outside this class are errors. Reduction nonzero conditions are checked at every exact epsilon sample. An uncut denominator in an ISP slot is invalid input.
+
+Both terminal APIs share one sample-evaluation and independent-fit owner. The new massless fitter uses a conservative leading pole allowance `-2*L`, extended by any additional exact epsilon poles of the reduction weights; it never assumes all raised massless cuts are finite. `PreparedMasslessPhaseSpace::leading_power` exposes this bound. The existing two-body API retains its off-threshold leading-zero convention.
+
+This class does not implement massive N-body phase space, mixed real/virtual cut recursion, or singular-threshold endpoint limits. The independent uncut check used for its all-cut `N=L+1` components is `2*(-1)^N*(4*pi)^(-L*D/2)*Im(I_uncut)` with the ordinary `+i0` prescription. It is not a prescription for the imaginary part of an arbitrary cut graph.
 
 ## Native HEPKit graph input
 
@@ -70,7 +90,8 @@ Ordinary `GraphIntegral::integral_groups` continues to reject cut metadata. Nati
 |---|---|
 | Cut partitions, half-edge identity and momentum routing | HEPKit `DiagramCut`, `LoopMomentumBasis`, Linnet |
 | Model denominator formulas and numerator contraction | HEPKit, Spenso, Idenso |
-| Four-dimensional two-body measure | HEPKit `Kinematics::two_body_phase_space` |
+| Four-dimensional two-body measure and three-body normalization check | HEPKit `Kinematics::two_body_phase_space`, `three_body_phase_space` |
+| Exact N-body affine routing determinant | Symbolica `Matrix<Q>::det` |
 | Cut IBPs and sector restrictions | RustRed native solver and `Restrictions` |
 | Arbitrary-precision algebra, powers and gamma arithmetic | Symbolica and the existing `Precision` wrapper |
 | Epsilon fitting and independent refinement | Existing RustFlow fitter |
