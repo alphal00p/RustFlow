@@ -1,0 +1,26 @@
+{
+  "schema": 1,
+  "symbolica_repository": "https://github.com/symbolica-dev/symbolica",
+  "symbolica_branch": "community",
+  "symbolica_revision": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+  "installed_extension_sha256": "73cdb0bc4f1c4a51e22b390d8186fa0b9064fff01197a3253bbeb1fc601a828a",
+  "python": "3.14.7",
+  "expression": "1i*x",
+  "parameters": ["x"],
+  "compile_options": {
+    "number_type": "complex",
+    "inline_asm": "none",
+    "native": false
+  },
+  "direct_translation_modes": [true, false],
+  "expected_interpreted_and_compiled_values": ["(-3+2j)", "-4j", "(5+0j)"],
+  "observed_interpreter": "passed in both modes",
+  "observed_compilation": "failed in both modes",
+  "generated_assignment": "Z[2] = params[0]*T(T(0e0), T(1e0));",
+  "cpp_type": "std::complex<double>",
+  "diagnostic": "no matching constructor std::complex<double>::complex(std::complex<double>, std::complex<double>)",
+  "source_location": "src/evaluate/export.rs:110-118",
+  "license_key_included": false,
+  "local_symbolica_patch": false,
+  "native_mpfr_loop_solver_uses_this_exporter": false
+}
