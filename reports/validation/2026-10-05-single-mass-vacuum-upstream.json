@@ -219,5 +219,15 @@
     "Original computational source files and Kira adapter match the pinned hashes; only private executable install configuration changed.",
     "Wall time is recorded with phase/worker/settings and does not support a matched performance comparison.",
     "The original and native methods implement the same mathematical scheme but use different reducer/DE solver implementations."
-  ]
+  ],
+  "resource_scope_correction": {
+    "recorded_utc": "2026-10-05T02:01:18.524006+00:00",
+    "kind": "Retrospective clarification; original launch records and numerical/timing measurements are unchanged.",
+    "previous_report_sha256": "1159696f8653b2bccdcafe3cc7106a495dab45e2fdc2600e39e5411d009275d9",
+    "original_launch_limit": "The launcher set a16GiB per-process hard RLIMIT_AS inherited by Wolfram,Kira and Fermat. It did not establish a16GiB aggregate limit over all descendants.",
+    "original_rss_monitor": "The original runner polled only the Wolfram kernel process group. Kira can create its own group, so the reported peak_process_group_rss_bytes may exclude Kira/Fermat and is not aggregate workflow RSS.",
+    "original_timeout_cleanup": "The original runner signaled the kernel process group only. This completed finite run exited0 normally; it did not have the later ancestry-aware watcher.",
+    "no_retroactive_watcher": "An ancestry watcher was added only to the subsequent all-four paper run. No earlier run is claimed to have used it.",
+    "comparison_limit": "Reported RSS quantities are not a matched memory benchmark."
+  }
 }

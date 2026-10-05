@@ -281,7 +281,7 @@
   "original_report": {
     "path": "reports/validation/2026-10-05-single-mass-vacuum-upstream.json",
     "staged_path": "target/single-mass-upstream/report.json",
-    "sha256": "1159696f8653b2bccdcafe3cc7106a495dab45e2fdc2600e39e5411d009275d9"
+    "sha256": "dd7f3e9a6d03219421e6cc6c331115ffab38ca335031af626f619028bb44115a"
   },
   "comparisons": [
     {
@@ -339,5 +339,16 @@
     "Process timing includes executable/kernel initialization and output; original SolveIntegrals timing excludes package startup. The native process linked an alreadycompiled production library, as the original used alreadyinstalledWolfram/Kira/Fermat.",
     "Both outputs are checked without importing original values as native boundary data.",
     "The public Laurent accuracy claim remains20digits; the finite sample is independently checked35digits and no inference beyond the original40-digit precision is made."
-  ]
+  ],
+  "resource_scope_correction": {
+    "recorded_utc": "2026-10-05T02:01:18.524006+00:00",
+    "kind": "Retrospective clarification; original launch records and numerical/timing measurements are unchanged.",
+    "previous_report_sha256": "2edd5d3e6ed1db5d1915e9ac038524eb2626c2c371ba4e266b5d31f8baeec46a",
+    "original_launch_limit": "The launcher set a16GiB per-process hard RLIMIT_AS inherited by Wolfram,Kira and Fermat. It did not establish a16GiB aggregate limit over all descendants.",
+    "original_rss_monitor": "The original runner polled only the Wolfram kernel process group. Kira can create its own group, so the reported peak_process_group_rss_bytes may exclude Kira/Fermat and is not aggregate workflow RSS.",
+    "original_timeout_cleanup": "The original runner signaled the kernel process group only. This completed finite run exited0 normally; it did not have the later ancestry-aware watcher.",
+    "no_retroactive_watcher": "An ancestry watcher was added only to the subsequent all-four paper run. No earlier run is claimed to have used it.",
+    "comparison_limit": "Reported RSS quantities are not a matched memory benchmark.",
+    "native_rss_scope": "Native timing used one in-process RustRed/ODE executable; its polled RSS covers that process, not a generic descendant-tree policy."
+  }
 }

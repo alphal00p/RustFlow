@@ -47,6 +47,12 @@ variable label; rebinding that label preserves their exact coefficients.
 The [factorization report](../reports/validation/2026-10-05-contour-factorization.json)
 records the successful complete NP contour geometry. Numerical physical
 continuation remains a separate validation step.
+The [first full numerical retry](../reports/validation/2026-10-05-nonplanar-long-continuation.json)
+admitted all 18 crossings and 55 vertices, then reached its declared 1800-second
+limit during the first trajectory. More than 300 accepted steps were observed;
+no checked endpoint, final root germs or 305-coefficient comparison was returned.
+The regenerated source accuracy has therefore not been promoted to a new
+physical-point accuracy claim.
 
 For entire differential systems with no pole list, the shared solver initially proposes the full remaining segment, then uses up to twice the last accepted step length. This avoids repeatedly rejecting an oversized proposal at each expansion point. Taylor-tail, midpoint, endpoint and branch checks remain unchanged. Regressions cover the zero connection, exponential and polynomial systems along changing complex directions, and a sparse Taylor series with a misleading zero tail. Step-budget exhaustion remains a limit error, so cache accuracy fallback does not retry it.
 

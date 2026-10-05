@@ -1,0 +1,243 @@
+{
+  "status": "bounded_native_run_incomplete",
+  "outcome": "wall_time_limit",
+  "scope": "Full61 NP W Euclidean-to-physical candidate continuation with regenerated40digit Euclidean boundary; full305 endpoint validation is NOT achieved.",
+  "run": {
+    "status": "failed",
+    "started_utc": "2026-10-05T01:26:20.400471+00:00",
+    "cpu": 26,
+    "workers": 1,
+    "cap_seconds": 1800,
+    "rss_limit_bytes": 17179869184,
+    "max_steps_per_trajectory": 20000,
+    "max_precision_attempts": 3,
+    "maximum_trajectory_passes": 4,
+    "maximum_total_step_attempts": 80000,
+    "max_boundary_attempts": 1,
+    "source_absolute_allowance": "1e-40 per coefficient including zeros",
+    "requested_digits": 28,
+    "guard_digits": 50,
+    "initial_series_order": 80,
+    "command": [
+      "timeout",
+      "--signal=TERM",
+      "--kill-after=5s",
+      "1800s",
+      "taskset",
+      "-c",
+      "26",
+      "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/native"
+    ],
+    "input_hashes": {
+      "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/native": "367a952f409cd09d057f3f874cddc1048b88a412b1fcf792dddce99a425cdac0",
+      "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/main.rs": "70bead1270e45ec4be74bc1d2f7891ceed1e3b22cedc457b56007cf431172c56",
+      "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/run.py": "82cc839660adb2c81c11b42eb0d53b061260b22a079898b66b2a1f8ec7e1ded6",
+      "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/build-provenance.json": "7176a28e1ccc24e95b06344044c863d36c013c43b85a80521ce382c32aecba36",
+      "/common/dev/amflow/target/np-w-long-continuation/fixture.json": "0f2b520b95c747d0c9933f3b28750852c05f48567147e7a7c38fe6ed48beab2c",
+      "/common/dev/amflow/target/np-w-long-continuation/original-001/result.json": "5cb9b090d3b06c99540e72cb97a4f71236a5dc24630660be5c1a3085c6cb66bc",
+      "/common/dev/amflow/target/np-w-long-continuation/original-provenance.json": "cce608a6bda668c3b70774dfd21e740e1e07fb42107ee8883defddfee088f60e"
+    },
+    "root_full_release_gate_status_at_authorization": "pending; independent candidate scientific validation authorized; final gate confirmation required before promotion",
+    "scope": "Native-only full61 NP W affine Euclidean-to-physical retry, all305 epsilon coefficients. Fresh unchanged original35digit endpoint is comparison-only. No performance claim. Prior failures preserved separately.",
+    "supervisor_pid": 1094275,
+    "exit_code": 124,
+    "finished_utc": "2026-10-05T01:56:22.229362+00:00",
+    "elapsed_seconds": 1800.9847547989339,
+    "peak_polled_process_tree_rss_bytes": 1647222784,
+    "rss_poll_seconds": 1,
+    "memory_limit_triggered": false,
+    "thread_environment": {
+      "OMP_NUM_THREADS": "1",
+      "MKL_NUM_THREADS": "1",
+      "OPENBLAS_NUM_THREADS": "1",
+      "RAYON_NUM_THREADS": "1"
+    },
+    "log_sha256": "4b9e0541ee509dd1fc6207947e088a86a0203ef52d9ee5554536203826ff5411",
+    "outputs": {
+      "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/native-branch-input.json": "4bff2ceebcee07f74de35fcf3e69773787548993af58e156f8ca7da32ae94035",
+      "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/native-exact-route.json": "250a94538e0e3f51497a95f05212e09cb3eaac1a370579dede0e5b871706b5ea",
+      "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/native-source-guards.json": "6faaf7efca0c808dddda4309e43732429ad791afbdad83b01d705b0139c187bd"
+    }
+  },
+  "preparation": {
+    "canonical_identity_seconds": 0.435,
+    "exact_prescribed_crossings": 18,
+    "exact_waypoints": 55,
+    "nonzero_conditions": 71,
+    "route_admitted": true
+  },
+  "numerical_progress": {
+    "events": [
+      {
+        "trajectory": 1,
+        "last_observed_accepted_step_count": 0,
+        "elapsed_seconds": 5.425
+      },
+      {
+        "trajectory": 1,
+        "last_observed_accepted_step_count": 50,
+        "elapsed_seconds": 261.142
+      },
+      {
+        "trajectory": 1,
+        "last_observed_accepted_step_count": 100,
+        "elapsed_seconds": 519.802
+      },
+      {
+        "trajectory": 1,
+        "last_observed_accepted_step_count": 150,
+        "elapsed_seconds": 793.819
+      },
+      {
+        "trajectory": 1,
+        "last_observed_accepted_step_count": 200,
+        "elapsed_seconds": 1079.3
+      },
+      {
+        "trajectory": 1,
+        "last_observed_accepted_step_count": 250,
+        "elapsed_seconds": 1340.183
+      },
+      {
+        "trajectory": 1,
+        "last_observed_accepted_step_count": 300,
+        "elapsed_seconds": 1637.0
+      }
+    ],
+    "started_trajectory_passes": 1,
+    "last_observed_pre_step_event": {
+      "trajectory": 1,
+      "last_observed_accepted_step_count": 300,
+      "elapsed_seconds": 1637.0
+    },
+    "interpretation": "Progress::Step reports accepted steps before the next trial. Last logged index is only a lower bound at interruption; the final unlogged accepted/rejected counts are not available."
+  },
+  "checked_endpoint_returned": false,
+  "coefficient_comparison_performed": false,
+  "source_accuracy": "Unchanged uniform1e-40 absolute complex allowance for every source coefficient, cap40; empirical independent evidence, not interval certification.",
+  "unchanged_limits": {
+    "wall_seconds": 1800,
+    "termination_grace_seconds": 5,
+    "process_tree_rss_bytes": 17179869184,
+    "step_attempts_per_trajectory": 20000,
+    "max_precision_attempts": 3,
+    "maximum_trajectory_passes": 4,
+    "maximum_total_step_attempts": 80000,
+    "boundary_source_attempts": 1
+  },
+  "library_validation": {
+    "scope": "Library validation confirmation only; native long-route run outcome remains independent.",
+    "root_gate_report": "reports/validation/2026-10-05-boundary-contour-release.json",
+    "report_sha256": "1841f24ee0e6463fb0bebd93048a3f8bf068aadecc1419cc8d83f5b1e3804270",
+    "library_sha256": "f602e3a25e5bcdc356a6bbfdf36246937cf379692e3ed889ae5a2ddc1623d7fb",
+    "source_snapshot_sha256": "54416dd79fe801bff42debe9a6759310af2eecd684f209e21138e1be80790f54",
+    "parent_confirmation": "Full release gate passed353 unit/integration tests and1doctest;7intentional ignored; strictalltargetsClippy/fmt; source/archive unchanged.",
+    "report": {
+      "status": "passed",
+      "date_utc": "2026-10-05T01:31:57.517005+00:00",
+      "scope": "Full release gate for native factor/isolate contours, cold-cache side certificates and generic single-mass vacuum recursion. Scientific finite-sample and full Laurent/physical endpoint acceptances remain distinct.",
+      "root_head_before_gate": "c202ed46643d48d8e352681901443b0af53a65da",
+      "checks": {
+        "tests": {
+          "passed": 353,
+          "failed": 0,
+          "ignored": 7
+        },
+        "doc": {
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        "formatting": "cargo fmt -p symbolica-amflow --check passed",
+        "clippy": "cargo clippy --release --all-targets -- -D warnings passed;8 preexisting RustRed dependency warnings",
+        "git_diff_check": "passed"
+      },
+      "commands": [
+        "cargo test --release --lib --tests",
+        "cargo test --release --doc",
+        "cargo clippy --release --all-targets -- -D warnings",
+        "cargo fmt -p symbolica-amflow --check"
+      ],
+      "source_snapshot_matches": true,
+      "archive": {
+        "status": "passed full release unit/integration/doc tests, formatting and strict Clippy",
+        "captured_utc": "2026-10-05T01:25:23.524616+00:00",
+        "source_snapshot_sha256": "54416dd79fe801bff42debe9a6759310af2eecd684f209e21138e1be80790f54",
+        "source_snapshot_matches": true,
+        "files": {
+          "target/boundary-sign-production-gate/deps/libsymbolica_amflow-d39e426db931b928.rlib": {
+            "sha256": "f602e3a25e5bcdc356a6bbfdf36246937cf379692e3ed889ae5a2ddc1623d7fb",
+            "bytes": 423436514
+          },
+          "target/boundary-sign-production-gate/deps/libsymbolica_amflow-d39e426db931b928.rmeta": {
+            "sha256": "d9b73228cf22d125feb3793c04b5977e40e42b69340e52dc1f15b0b0ebbc3087",
+            "bytes": 3205656
+          },
+          "target/boundary-sign-production-gate/deps/librustred-d70ca661149f6db6.rlib": {
+            "sha256": "3484fc124051aac01902b4fe018f00bd89a0c2af13b84f31666178f3f292a0a0",
+            "bytes": 406493312
+          },
+          "target/boundary-sign-production-gate/deps/librustred-d70ca661149f6db6.rmeta": {
+            "sha256": "453484445bee428588feb2efcf54f85b8d1c94fac7af9b6a3b83cfe8c53aac08",
+            "bytes": 36752833
+          }
+        }
+      },
+      "artifacts": [
+        {
+          "path": "target/boundary-sign-production-gate/tests.log",
+          "sha256": "8bdef98f113e3753737cacd1dd9c5a4a7321bc210a51fc70ac269b49aa27ec9f",
+          "bytes": 45472
+        },
+        {
+          "path": "target/boundary-sign-production-gate/doc.log",
+          "sha256": "2ce33611921487ea92f745a38164c2bce1fde18cd00f26d2a0573834bad349bf",
+          "bytes": 2905
+        },
+        {
+          "path": "target/boundary-sign-production-gate/clippy.log",
+          "sha256": "2cc95fbea3bf670cad0349d6eba7a41a8249e85081b3e839956fc397ff7b9e02",
+          "bytes": 2722
+        },
+        {
+          "path": "target/boundary-sign-production-gate/fmt.log",
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+          "bytes": 0
+        },
+        {
+          "path": "target/boundary-sign-production-gate/source.json",
+          "sha256": "54416dd79fe801bff42debe9a6759310af2eecd684f209e21138e1be80790f54",
+          "bytes": 12078
+        },
+        {
+          "path": "target/boundary-sign-production-gate/rustred-core.json",
+          "sha256": "5489d12d0461f25c517f1f87602638d2edfb0fa3d679fd5a6693638c62721b0e",
+          "bytes": 208086
+        }
+      ],
+      "rustred_core_unchanged_vs_snapshot": true,
+      "rustred_head_and_remote_main": "1b49d2f140f91e05e035268bf5f6aa1c98f8aa26"
+    }
+  },
+  "remaining_gate": "A returned checked endpoint with all305 independent original-value comparisons,8target-germ checks and inherited source-error bounds. No physical-value or stronger-source-accuracy claim follows from contour planning or partial continuation.",
+  "next_step_constraint": "Any follow-up must use a new versioned run with limits declared before launch. This timeout alone justifies no weakening of branch/domain/source-error checks or correctness claim.",
+  "original_reference": {
+    "path": "/common/dev/amflow/target/np-w-long-continuation/original-001/result.json",
+    "sha256": "5cb9b090d3b06c99540e72cb97a4f71236a5dc24630660be5c1a3085c6cb66bc",
+    "requested_digits": 35,
+    "scope": "Already completed independent unchanged original exact-origin physical result; not provided to native solver."
+  },
+  "hashes": {
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/main.rs": "70bead1270e45ec4be74bc1d2f7891ceed1e3b22cedc457b56007cf431172c56",
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/build.py": "294549f518c6dafc2ec2d2a3523c0e21e97ddf2ebedb82128aa13dd65579b8a2",
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/build-provenance.json": "7176a28e1ccc24e95b06344044c863d36c013c43b85a80521ce382c32aecba36",
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/run.py": "82cc839660adb2c81c11b42eb0d53b061260b22a079898b66b2a1f8ec7e1ded6",
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/finalize.py": "010c02a7f700011252d9d001d356f0ff4c00c41151fab8778914a962d8b29a0b",
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/native.log": "4b9e0541ee509dd1fc6207947e088a86a0203ef52d9ee5554536203826ff5411",
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/native-provenance.json": "4eb82461c8960110fbb9649952186e7825b616d78f571274ad12322dfb0ac449",
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/native-branch-input.json": "4bff2ceebcee07f74de35fcf3e69773787548993af58e156f8ca7da32ae94035",
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/native-exact-route.json": "250a94538e0e3f51497a95f05212e09cb3eaac1a370579dede0e5b871706b5ea",
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/native-source-guards.json": "6faaf7efca0c808dddda4309e43732429ad791afbdad83b01d705b0139c187bd",
+    "/common/dev/amflow/target/np-w-long-continuation/factor-retry-001/library-validation.json": "bfb819eec043a42b1d8a4582b923b7ba9c9f658c80648da4518dd40e4b538c70"
+  }
+}

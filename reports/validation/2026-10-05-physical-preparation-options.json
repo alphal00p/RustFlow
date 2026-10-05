@@ -185,5 +185,12 @@
     "exit_code": 0,
     "log": "\nrunning 1 test\ntest single_mass_public_laurent_matches_independent_ft_and_mass_derivative ... ok\n\ntest result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 167.92s\n\n"
   },
-  "independent_single_mass_laurent_library": "f602e3a25e5bcdc356a6bbfdf36246937cf379692e3ed889ae5a2ddc1623d7fb; validated preceding contour/boundary library, separate from this release gate"
+  "independent_single_mass_laurent_library": "f602e3a25e5bcdc356a6bbfdf36246937cf379692e3ed889ae5a2ddc1623d7fb; validated preceding contour/boundary library, separate from this release gate",
+  "rustred_remote_check_after_gate": {
+    "checked_utc": "2026-10-05T02:06:18.008067+00:00",
+    "head_and_remote_main": "986c427f36b280a2c741d52d0401152a1f90e4d6",
+    "changes_since_snapshot": "App/feynkit/Python artifact transport and terminal normalization plus documentation; none of the consumed core/order/workspace snapshot files changed.",
+    "consumed_files_match_gate_snapshot": true,
+    "existing_checkout_modified_by_this_task": false
+  }
 }
