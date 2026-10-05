@@ -212,7 +212,6 @@
     "scope": "The MPFR integration solver and native Higgs-jet amplitude do not use C++ evaluator export. No test was skipped or weakened."
   },
   "pending": [
-    "Independent native Euclidean20 anchor run",
     "Full16 physical run with anchor-report, forced40-digit cancellation/resume, numerical refinement and nearby cache reuse"
   ],
   "stub_regeneration": {
@@ -262,5 +261,14 @@
     "wheel_host": "514143641929e821f3a48fd3a819044d59d799c0",
     "steering_host": "73db70123f4a1f9ad947b043fef715fe7fd095b9",
     "core": "db9cbbafa470b1402d335ad635e608a6b7a03c07"
+  },
+  "euclidean_anchor_validation": {
+    "status": "passed",
+    "report": "reports/validation/2026-10-05-public-wheel/anchor-acceptance.json",
+    "sha256": "c03530cd10b6c0a7d4a038dbb55ca31609f9c58b65253896e1c9b431fae01587",
+    "coefficients": 545,
+    "native_verified_digits": 20,
+    "reference_accuracy_cap_digits": 40,
+    "native_reference_difference_is_not_an_accuracy_upgrade": true
   }
 }
