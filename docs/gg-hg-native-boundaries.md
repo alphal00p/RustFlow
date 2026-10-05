@@ -107,6 +107,15 @@ amplitude remains a separate gate. See the
 [performance audit](native-boundary-performance-audit.md) for the scope of these
 timings.
 
+Fresh reruns with the exact coefficient collector and official Symbolica
+`c3408e4` pass the same 240/305 comparisons at 20 requested digits:
+[planar](../reports/validation/2026-10-05-native-planar-boundary-exact-guard.json)
+and [nonplanar](../reports/validation/2026-10-05-native-nonplanar-boundary-exact-guard.json).
+With 32 sample workers, fresh numerical generation took 318.77 and 1132.13
+seconds; identical binary reloads took 0.46 and 1.82 seconds. These runs reused
+exact IBP checkpoints, ran alongside other work, and make no timing comparison
+with upstream. Reference data were loaded only after each native fit succeeded.
+
 To compare a completed physical-source report with the independently recorded
 plugin starting values, run:
 
