@@ -1,0 +1,130 @@
+{
+  "schema": "rustflow-cache-snapshot-export-validation-v1",
+  "status": "passed",
+  "recorded_at_utc": "2026-10-05T23:49:31.458056+00:00",
+  "base_commit": "a98c6b9f78c33661725ca03e09709b5f40e24e7c",
+  "source_sha256": {
+    "src/transport_cache.rs": "882fa84bd93698b7f0b9a5c5a0b517f64e0bfdb819a7ba4068c175203081ee78",
+    "src/transport_cache_serialization_tests.rs": "e77acb21aab77507c34ca808b9fce4f0fcedd16efc001202bb28ec6d8be1a64b",
+    "Cargo.toml": "9c109c014341e3b3f9cb75293e7114dbfa6fbb6c1cca8924bb64c48292617058",
+    "Cargo.lock": "4c5b7575719b551a186318342392dc24b2d7aec7d1ff0ab02650f5559cc4fa9c"
+  },
+  "toolchain": {
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+    "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)",
+    "architecture": "x86_64",
+    "cpu": "AMD EPYC 9754 128-Core Processor",
+    "cargo_build_jobs": 8
+  },
+  "dependencies": {
+    "symbolica": "official community c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustred": "official main 7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "hepkit": "published owner a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+    "manifest_and_lock_unchanged": true
+  },
+  "validation": {
+    "focused_release_unit_tests": {
+      "passed": 4,
+      "ignored_profile": 1,
+      "source_state_isolated_in_child_processes": true,
+      "mixed_native_state_import_with_different_preregistration": true
+    },
+    "strict_release_clippy_all_targets": true,
+    "format_check": true,
+    "release_serialization_profile": true,
+    "focused_release_integration_tests": {
+      "passed": 40,
+      "suites": {
+        "algebraic_cache": 10,
+        "canonical_cache": 4,
+        "complex_cache": 8,
+        "prescribed_cache": 6,
+        "transport_cache": 12
+      },
+      "scope": "Same production implementation; final subsequent changes strengthen unit fixtures and clarify the serialization synchronization comment."
+    },
+    "logs_sha256": {
+      "snapshot-tests.log": "9ecc380bc4558da01ccc797f09d0533912778f244c6e6836aae1744da6dff9b5",
+      "snapshot-integration-tests.log": "9ed7853fc3672178d7b4794e7021537c21ec7560cfe10a441beae30462cceb20",
+      "snapshot-clippy.log": "607ca599124bf6eeff04434a00e2a1700b058f124d56d2bb9d30ff32fd4886d8",
+      "snapshot-format.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "snapshot-profile.log": "3ea2241b3e76223b0f4814a7e25254db8f531a1ca343f8f6a3bbb0fb210fd72c"
+    }
+  },
+  "measurement": {
+    "dependency_digest": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+    "entries": 48,
+    "initial_registered_symbols": 332,
+    "matrix_entries": 362019,
+    "matrix_zeros": 357430,
+    "memoized_atomic_save_seconds_after_registry_growth": [
+      0.289371271,
+      0.315247517,
+      0.289709163
+    ],
+    "production_roundtrip_preserved_payload": true,
+    "profiles": [
+      {
+        "distinct_exported_atoms": 605,
+        "extra_unrelated_symbols": 0,
+        "memoized_payload_seconds": [
+          0.209267992,
+          0.206131018,
+          0.192715203,
+          0.217261544,
+          0.193478726
+        ],
+        "payload_bytes": 22472150,
+        "payloads_byte_identical": true,
+        "registered_symbols": 332,
+        "uncached_payload_seconds": [
+          1.296869887,
+          1.283475763,
+          1.288586974,
+          1.269134924,
+          1.276690265
+        ],
+        "uncached_median_seconds": 1.283475763,
+        "memoized_median_seconds": 0.206131018,
+        "median_speedup": 6.2265047514586085
+      },
+      {
+        "distinct_exported_atoms": 605,
+        "extra_unrelated_symbols": 1000,
+        "memoized_payload_seconds": [
+          0.214382142,
+          0.211234649,
+          0.199776032,
+          0.212713405,
+          0.210942929
+        ],
+        "payload_bytes": 22472150,
+        "payloads_byte_identical": true,
+        "registered_symbols": 1332,
+        "uncached_payload_seconds": [
+          4.323369394,
+          4.276064229,
+          4.308617573,
+          4.326937588,
+          4.439865303
+        ],
+        "uncached_median_seconds": 4.323369394,
+        "memoized_median_seconds": 0.211234649,
+        "median_speedup": 20.467141231171787
+      }
+    ],
+    "scope": "real canonical topology, synthetic numerical values; isolated process, not notebook runtime",
+    "source_digest": "27348d0581ca076b720519880705c94696ae7b8b69302ef46a29f9dd1b07f7d0",
+    "memoized_atomic_save_median_seconds_after_registry_growth": 0.289709163
+  },
+  "scope_limits": [
+    "Values and uncertainty evidence are synthetic; canonical systems and physical coordinates are real embedded scientific inputs.",
+    "Not a notebook runtime measurement, physics validation, or comparison against upstream solvers.",
+    "Timings include boundary validation and bincode payload encoding, with byte comparisons outside timing; five alternating pairs after warmup.",
+    "Atomic file writes are measured only for the memoized implementation, separately from the paired payload measurements.",
+    "The +1000 unrelated symbols profile measures registration-state sensitivity; it does not recreate the notebook model/session state.",
+    "Frozen runtime environments and numerical acceptance banks were not modified or loaded.",
+    "Production save and load retain the ordinary source fingerprint and corruption checks.",
+    "Registry-growth safety covers changes between native export calls. The inherited official c340 exporter may be inconsistent if polynomial/finite-field registration occurs during one export; this optimization does not fix that owner-level issue."
+  ]
+}
