@@ -25,6 +25,8 @@ bincode = { version = "2.0.1", features = ["serde"] }
 
 # Match the host source identities; Cargo.lock pins standalone builds.
 # Required owner-level HEPKit fixes: docs/hepkit-integration.md.
+feynkit-amplitude = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false, features = ["native"] }
+feynkit-generator = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false, features = ["native"] }
 feynkit-graph = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false }
 feynkit-model = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false }
 feynkit-kinematics = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false }

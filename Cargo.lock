@@ -3290,6 +3290,8 @@ dependencies = [
  "ahash 0.8.12",
  "bincode",
  "blake3",
+ "feynkit-amplitude",
+ "feynkit-generator",
  "feynkit-graph",
  "feynkit-kinematics",
  "feynkit-model",
