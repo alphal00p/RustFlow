@@ -1,0 +1,100 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-05T18:08:36.408556+00:00",
+  "previous_validation": {
+    "path": "reports/validation/2026-10-05-python-official-collector.json",
+    "sha256": "329c51ddd10cd9c19624ece55c9b6c519768b11ca18b0c2b8a1f72e0947bb9df"
+  },
+  "community_base_commit": "5296ca4b0d0679b1d5e2f03d9e76abd59da98486",
+  "source_state": "Three Python files changed, tested, not yet committed; no core, extension or dependency changes",
+  "changes": [
+    "Fail before work if Python assertions are disabled",
+    "Require all4360 independently refined coefficients to satisfy mixed20-digit target and combined native error estimates",
+    "Compare all8 W/Z form factors against archived absolute allowances at cold/refined stages",
+    "Display all8 form factors with native uncertainty/accuracy and reference comparisons only at recorded kinematics",
+    "Include notebook source in runtime attestation"
+  ],
+  "checks": {
+    "controller_acceptance_notebook": {
+      "passed": 34,
+      "deselected": 245,
+      "seconds": 14.57,
+      "includes_optimized_python_rejection": true,
+      "includes_underreported_error_rejection": true,
+      "includes_all_eight_reference_allowances": true,
+      "includes_real_marimo_recorded_and_nearby_point_displays": true,
+      "includes_real_marimo_clean_session": true
+    },
+    "typing": {
+      "passed": true,
+      "fixtures": 4
+    },
+    "diff_check": {
+      "passed": true
+    },
+    "previous_native_and_interoperability_gates_retained": true
+  },
+  "runtime_attestation": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "9f3fb219752cd2b3bebc7f6f1baa58000622491dab68cb4aec8824bdb0cef095"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/symbolica-community/loop-integration/python/symbolica/core.abi3.so",
+      "size_bytes": 346164896,
+      "sha256": "79241c85373fe8590c6ba896d2860ee2b4a8f870776a2f0084af16a8710bb614"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 23808,
+        "sha256": "85dbd04343fa1556a04fe0bef5ddfd6acdba2f04b30120d4ade6152df986323b"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg_support.py",
+        "size_bytes": 16451,
+        "sha256": "6c4b1030265072ca44e68fe25ecf3419ca54235c3c5d8a6d75890490b73068eb"
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/loop-integration/examples/hep/gg_hg.py",
+        "size_bytes": 11597,
+        "sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/python-integration-venv/bin/python"
+    }
+  },
+  "native_runtime_unchanged": true,
+  "scientific_data_hashes": {
+    "native-model.json": {
+      "path": "/common/dev/symbolica-community/loop-integration/examples/hep/data/gg_hg/native-model.json",
+      "sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12"
+    },
+    "coherent-reference.json": {
+      "path": "/common/dev/symbolica-community/loop-integration/examples/hep/data/gg_hg/coherent-reference.json",
+      "sha256": "dd791b4d0400504ae8bc13e4e4bffa3d35773579a73c49ef4559d8e7985787e3"
+    },
+    "amplitude-validation.json": {
+      "path": "/common/dev/symbolica-community/loop-integration/examples/hep/data/gg_hg/amplitude-validation.json",
+      "sha256": "868b9fde9448e54b315e96c4ce5a83bcb2501f219cf45a4cf2c147e521fef071"
+    }
+  },
+  "logs": {
+    "tests": {
+      "path": "/common/dev/amflow/target/python-acceptance-evidence-notebook-tests.log",
+      "sha256": "396e8b1de3477ce60c06a9d74388c0fe15f9f41b5dca2c1f06d5f1e674c329be"
+    },
+    "typing": {
+      "path": "/common/dev/amflow/target/python-acceptance-evidence-notebook-typing.log",
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18"
+    }
+  },
+  "source_diff_sha256": "834661c46adeab17ff791bdaa481b49beb425bbd5ee5f82c71e3e0a5187bc75c",
+  "full_acceptance": "Not launched; pending root gate. Fresh PL/NP Euclidean anchor reports are independent prerequisites, not certified by this lightweight cohort.",
+  "community_committed_milestone": "66d571392cf75cef67625b1bb33e771cb0b371d5",
+  "community_milestone_published": false,
+  "scope": "Python acceptance and display checks on the existing validated shared native extension; no full empty-cache sixteen-source amplitude result."
+}
