@@ -43,7 +43,7 @@ value magnitudes must be below `1e-20`.
 | [Automatic massless bubble](../reports/validation/2026-10-04-live-upstream-oracles.json) | 0.1868 cross-check including refinement | 26.7388 `SolveIntegrals` | 20 digits against the original and analytic gamma formula; different measured work |
 | [Automatic vacuum sunset, mass squares (1,1,0)](../reports/validation/2026-10-04-live-upstream-oracles.json) | 0.1179 cross-check including refinement | 9.0585 `SolveIntegrals` | 20 digits against the original and analytic gamma formula; different measured work |
 | [Automatic connected three-loop single-mass vacuum, two targets at epsilon=1/10](../reports/performance/single-mass-full-workflow.json) | 2.814 process | 175.447 process | Both pass 35 relative digits against 40-digit original data; fresh caches, one worker, different bases/extra-order controls |
-| [Required paper example: all four two-loop targets through epsilon zero](../reports/validation/2026-10-04-paper-two-loop-acceptance.json) | 3553.007 complete acceptance | Successful full runtime pending | 20 verified digits, all coefficients checked within recorded reference precision; native time includes warm exact caches and helper workers |
+| [Required paper example: all four two-loop targets through epsilon zero](../reports/validation/2026-10-04-paper-two-loop-acceptance.json) | 3553.007 complete acceptance | [2428.977 process](../reports/performance/2026-10-05-original-paper-full-workflow.json) | All 20 complex coefficients agree within recorded accuracy at the requested 20 digits; different caches, workers, bases and precision/sample profiles |
 
 The first original four-target run failed during Wolfram child-thread
 initialization. An unchanged copied subsystem succeeded after explicitly setting
@@ -51,7 +51,15 @@ Wolfram's internal thread counts to one. A subsequent
 [30-minute run](../reports/performance/paper-original-censored.json) completed
 all 23 boundary systems and eight of fourteen top-system samples before its cap
 (1805.707 seconds including cleanup). A separate fresh run with a declared
-one-hour cap is underway; partial work is not a completed timing.
+one-hour cap completed successfully in 2428.977 seconds, including all recursive
+boundaries, reduction, sample evaluations and fitting. The original uses one
+worker, a 51-integral top basis, 23 boundary systems, 14 samples, 180 working
+digits and order 360 plus 50 extra terms. The historical native acceptance uses
+a 27-integral basis, warm exact caches, four workers plus four helpers, 31 fit
+samples checked against 27 validation samples, and 60/80 working digits with
+orders 80/96. This is a complete-workflow comparison with different work and
+settings, not a matched speed ratio. Observed coefficient differences near
+`1e-38` do not promote the original's configured 20-digit accuracy claim.
 The native three-loop **Laurent** AMF/FT
 comparison took 120.115/52.336 seconds at different profiles; those are separate
 from the finite-epsilon original comparison above.
