@@ -23,7 +23,7 @@ pub struct PyEvaluationOptions {
 #[pymethods]
 impl PyEvaluationOptions {
     #[new]
-    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode="automatic", refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None))]
+    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode=None, deformed_propagator_slots=None, refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None))]
     #[allow(clippy::too_many_arguments)]
     fn new(
         digits: u32,
@@ -34,7 +34,8 @@ impl PyEvaluationOptions {
         dimension: i64,
         recursion: &str,
         prescription: &str,
-        mass_mode: &str,
+        mass_mode: Option<&str>,
+        deformed_propagator_slots: Option<Vec<usize>>,
         refine_basis: bool,
         skip_reduction: bool,
         sampled_reduction: bool,
@@ -75,19 +76,8 @@ impl PyEvaluationOptions {
                     ));
                 }
             },
-            mass_mode: match mass_mode {
-                "automatic" => crate::MassMode::Auto,
-                "all" => crate::MassMode::All,
-                "mass" => crate::MassMode::Mass,
-                "propagator" => crate::MassMode::Propagator,
-                "branch" => crate::MassMode::Branch,
-                "loop" => crate::MassMode::Loop,
-                _ => {
-                    return Err(InvalidInputError::new_err(
-                        "unknown auxiliary mass placement",
-                    ));
-                }
-            },
+            mass_mode: crate::MassMode::from_selection(mass_mode, deformed_propagator_slots)
+                .map_err(error)?,
             local_coordinate: match local_coordinate {
                 "identity" => crate::LocalCoordinate::Identity,
                 "balanced_mobius" => crate::LocalCoordinate::BalancedMobius,
@@ -135,10 +125,29 @@ impl PyEvaluationOptions {
     fn dimension(&self) -> i64 {
         self.inner.dimension
     }
+    /// Auxiliary mass placement name; explicit selections retain their slot list.
+    #[getter]
+    fn mass_mode(&self) -> &'static str {
+        self.inner.mass_mode.name()
+    }
+    /// Zero-based physical denominator slots, never HEPKit edge IDs or ISP slots.
+    #[getter]
+    fn deformed_propagator_slots(&self) -> Option<Vec<usize>> {
+        self.inner
+            .mass_mode
+            .deformed_propagator_slots()
+            .map(<[usize]>::to_vec)
+    }
     fn __repr__(&self) -> String {
         format!(
-            "EvaluationOptions(digits={}, guard_digits={}, series_order={}, workers={})",
-            self.inner.digits, self.inner.guard_digits, self.inner.series_order, self.inner.workers
+            "EvaluationOptions(digits={}, guard_digits={}, series_order={}, workers={}, mass_mode={:?}, deformed_propagator_slots={})",
+            self.inner.digits,
+            self.inner.guard_digits,
+            self.inner.series_order,
+            self.inner.workers,
+            self.mass_mode(),
+            self.deformed_propagator_slots()
+                .map_or_else(|| "None".into(), |slots| format!("{slots:?}"))
         )
     }
 }

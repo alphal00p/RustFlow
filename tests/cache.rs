@@ -558,3 +558,40 @@ fn mass_placement_modes_follow_intrinsic_masses_and_loop_topology() {
         Err(Error::Unsupported(_))
     ));
 }
+
+#[test]
+fn explicit_mass_selection_roundtrips_and_ordinary_deformation_keeps_native_slots() {
+    let (family, _) = benchmarks::paper_two_loop().unwrap();
+    let selected = MassMode::from_selection(None, Some(vec![1])).unwrap();
+    assert_eq!(selected.name(), "explicit");
+    assert_eq!(selected.deformed_propagator_slots(), Some([1].as_slice()));
+    let roundtrip = MassMode::from_selection(
+        Some(selected.name()),
+        selected.deformed_propagator_slots().map(<[usize]>::to_vec),
+    )
+    .unwrap();
+    assert_eq!(selected, roundtrip);
+    let (_, mask) = family
+        .deform(symbol!("explicit_slot_eta"), &roundtrip)
+        .unwrap();
+    assert_eq!(
+        mask,
+        vec![false, true, false, false, false, false, false, false, false]
+    );
+    assert!(
+        family
+            .deform(
+                symbol!("explicit_slot_eta"),
+                &MassMode::from_selection(None, Some(vec![7])).unwrap()
+            )
+            .is_err()
+    );
+    for name in ["automatic", "all", "mass", "propagator", "branch", "loop"] {
+        let mode = MassMode::from_selection(Some(name), None).unwrap();
+        assert_eq!(mode.name(), name);
+        assert!(mode.deformed_propagator_slots().is_none());
+        assert!(MassMode::from_selection(Some(name), Some(vec![1])).is_err());
+    }
+    assert!(MassMode::from_selection(None, Some(vec![])).is_err());
+    assert!(MassMode::from_selection(Some("explicit"), None).is_err());
+}

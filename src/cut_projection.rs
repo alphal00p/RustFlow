@@ -43,6 +43,11 @@ impl<'a> PreparedCutProjections<'a> {
         let (mut ordinary, cuts) = family.at(point)?.into_parts();
         ordinary.dimension = options.dimension;
         let family = CutFamily::new(ordinary, cuts)?;
+        // Terminal phase-space formulas do not deform any line. Explicit input
+        // still requires native slot admission, including for zero projections.
+        if matches!(options.mass_mode, crate::MassMode::Propagators(_)) {
+            crate::cut_flow::placement(&family, options)?;
+        }
         let ordinary = family.family();
         let allowed = BTreeSet::from([
             Atom::var(ordinary.epsilon),
@@ -158,6 +163,9 @@ impl<'a> PreparedCutProjections<'a> {
     ) -> Result<Vec<ComplexFloat>> {
         options.validate()?;
         context.cancellation.check()?;
+        if matches!(options.mass_mode, crate::MassMode::Propagators(_)) {
+            crate::cut_flow::placement(self.family(), options)?;
+        }
         if epsilon.is_zero() {
             return Err(Error::InvalidInput(
                 "epsilon samples must be nonzero".into(),

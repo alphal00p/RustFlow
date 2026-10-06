@@ -272,7 +272,7 @@ fn validate_options(options: &FlowOptions) -> Result<()> {
     Ok(())
 }
 
-fn placement(family: &CutFamily, options: &FlowOptions) -> Result<Vec<bool>> {
+pub(crate) fn placement(family: &CutFamily, options: &FlowOptions) -> Result<Vec<bool>> {
     let ordinary = family.family();
     let mut shifted = vec![false; ordinary.propagators.len()];
     match &options.mass_mode {

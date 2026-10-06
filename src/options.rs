@@ -29,7 +29,63 @@ pub enum MassMode {
     Branch,
     /// Shift the smallest set of lines outside an independent (L-1)-branch span.
     Loop,
+    /// Zero-based physical denominator slots in the evaluated family, excluding ISPs.
+    /// Cut graph conversion preserves `GraphIntegral::propagator_edges()` order.
     Propagators(Vec<usize>),
+}
+
+impl MassMode {
+    /// Decode native interface settings without silently overriding a named mode.
+    /// Bounds and cut/ISP admission require the evaluated family and are checked
+    /// by its deformation owner. `explicit` permits lossless option roundtrips.
+    pub fn from_selection(name: Option<&str>, slots: Option<Vec<usize>>) -> Result<Self> {
+        if let Some(slots) = slots {
+            if name.is_some_and(|name| name != "explicit") {
+                return Err(Error::InvalidInput(
+                    "deformed_propagator_slots cannot be combined with a named mass_mode other than explicit".into(),
+                ));
+            }
+            if slots.is_empty() {
+                return Err(Error::InvalidInput(
+                    "deformed_propagator_slots must be nonempty".into(),
+                ));
+            }
+            return Ok(Self::Propagators(slots));
+        }
+        match name.unwrap_or("automatic") {
+            "automatic" => Ok(Self::Auto),
+            "all" => Ok(Self::All),
+            "mass" => Ok(Self::Mass),
+            "propagator" => Ok(Self::Propagator),
+            "branch" => Ok(Self::Branch),
+            "loop" => Ok(Self::Loop),
+            "explicit" => Err(Error::InvalidInput(
+                "explicit mass_mode requires deformed_propagator_slots".into(),
+            )),
+            _ => Err(Error::InvalidInput(
+                "unknown auxiliary mass placement".into(),
+            )),
+        }
+    }
+
+    pub fn name(&self) -> &'static str {
+        match self {
+            Self::Auto => "automatic",
+            Self::All => "all",
+            Self::Mass => "mass",
+            Self::Propagator => "propagator",
+            Self::Branch => "branch",
+            Self::Loop => "loop",
+            Self::Propagators(_) => "explicit",
+        }
+    }
+
+    pub fn deformed_propagator_slots(&self) -> Option<&[usize]> {
+        match self {
+            Self::Propagators(slots) => Some(slots),
+            _ => None,
+        }
+    }
 }
 
 /// Proposal policy for ordinary continuation. Both policies use the same
