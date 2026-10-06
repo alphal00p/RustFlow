@@ -182,7 +182,9 @@ runs without Mathematica and preserves the independent native fit comparison.
   certifying root-sheet transitions with native exact polynomial arithmetic.
   General algebraic coordinate constants, automatic causal-path inference,
   degenerate Gram charts and algebraic singular endpoints require further work.
-- General Möbius/Padé transport controls remain unfinished.
+- Regular Möbius charts and opt-in [rational/epsilon Padé trials](pade-transport.md)
+  are available. Registered-root Padé candidates and general off-center
+  predivision remain unfinished.
 
 Benchmarks test these interfaces; family-specific fixtures do not define the
 solver's mathematical scope. New coverage must exercise the same public route

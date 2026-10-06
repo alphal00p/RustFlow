@@ -7,7 +7,7 @@ reduction. Rust 2024; independent MIT-licensed repository.
 RustFlow is being extended with DiffExp-style transport in physical kinematic
 variables and a progressively filled native `RustFlowCache`. The Rust crate
 retains the name `symbolica-amflow`. See the [active parity plan](docs/parity-plan.md)
-and [cache and transport interface](docs/rustflow.md). Full AMFlow/DiffExp parity
+and [cache and transport interface](docs/rustflow.md). Optional [native Padé trials](docs/pade-transport.md) are available for rational and epsilon transport. Full AMFlow/DiffExp parity
 remains a development goal. The [Python API and native Higgs+jet notebook](docs/python-notebook-status.md)
 generate all sixteen physical boundary configurations from empty numerical
 caches and reproduce 4,360 transport coefficients, eight W/Z form factors and

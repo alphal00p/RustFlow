@@ -12,7 +12,7 @@ use symbolica::poly::univariate::UnivariatePolynomial;
 use symbolica::prelude::*;
 
 pub(crate) type Gaussian = Complex<Rational>;
-type BallPolynomial = UnivariatePolynomial<FloatField<ComplexBall>>;
+pub(crate) type BallPolynomial = UnivariatePolynomial<FloatField<ComplexBall>>;
 
 /// Exact coefficients after specializing numerical parameters as their stored
 /// dyadics. Any uncertainty in those parameters remains a separate contract.
@@ -82,21 +82,21 @@ fn dyadic_ball(p: Precision, value: &C) -> ComplexBall {
     ball
 }
 
-fn exact_ball(value: &Gaussian, p: Precision) -> ComplexBall {
+pub(crate) fn exact_ball(value: &Gaussian, p: Precision) -> ComplexBall {
     ComplexBall::from_rational_ball(value, &Rational::zero(), p.bits)
 }
 
 #[derive(Clone, Debug)]
 pub(crate) struct ExactSourceResidual {
-    residuals: Vec<BallPolynomial>,
+    pub(crate) residuals: Vec<BallPolynomial>,
     /// One denominator per physical row, shared by every epsilon channel.
-    denominators: Vec<DenominatorEnclosure>,
+    pub(crate) denominators: Vec<DenominatorEnclosure>,
 }
 
 #[derive(Clone, Debug)]
-struct DenominatorEnclosure {
-    expanded: BallPolynomial,
-    factors: Vec<(BallPolynomial, usize)>,
+pub(crate) struct DenominatorEnclosure {
+    pub(crate) expanded: BallPolynomial,
+    pub(crate) factors: Vec<(BallPolynomial, usize)>,
 }
 
 /// Triangle inequality on a disk; a nonpositive result is inconclusive.

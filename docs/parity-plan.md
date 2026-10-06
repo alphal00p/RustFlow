@@ -121,7 +121,10 @@ and timing tests, separately from cold boundary construction.
    higher algebraic roots or elliptic-function prefactors.
 6. **Transport controls.** Dynamic/predivision segmentation, convergence-radius
    controls, Möbius coordinates, Padé with explicit fallback/error checks,
-   reusable piecewise evaluation, and degenerate paths.
+   reusable piecewise evaluation, and degenerate paths. Regular rational/epsilon
+   [Padé trials](pade-transport.md) now share checked accepted/saved output,
+   exact-source defects, fallback and genuinely different refinement orders;
+   registered-root candidates remain Taylor.
 7. **AMFlow extensions.** Linear propagator regions/terminals and reverse-unitarity
    cut semantics; broaden normalization, boundary recursion and basis refinement
    to the supported upstream surface. Track limitations separately from the

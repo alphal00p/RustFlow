@@ -1000,6 +1000,7 @@ pub(crate) fn fit_samples_refined_leading(
         let mut refined = options.clone();
         refined.guard_digits = working_digits - options.digits;
         refined.series_order += attempt * 16;
+        refined.refine_rational_order(attempt);
         refined.validate()?;
         let samples = epsilon::epsilon_samples(
             count + attempt * 4,

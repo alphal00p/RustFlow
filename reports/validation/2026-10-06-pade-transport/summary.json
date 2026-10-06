@@ -1,0 +1,147 @@
+{
+  "date": "2026-10-06",
+  "base_commit": "73ac179fafaafb3936d26793d490c7af1ca0104b",
+  "branch": "codex/pade-transport",
+  "author": "ValentinHirschi <valentin.hirschi@gmail.com>",
+  "scope": "Opt-in ordinary rational and epsilon-series Pad\u00e9 candidates in the shared transport controller; registered roots retain Taylor.",
+  "source_manifest": "source.sha256",
+  "checks": [
+    {
+      "command": "cargo test --release --lib ode:: --locked",
+      "passed": 34,
+      "failed": 0,
+      "log": "pade-final-unit.log.gz"
+    },
+    {
+      "command": "cargo test --release --test pade --test conditioning --test mobius --test epsilon_cache --test mobius_cache --test transport_cache --test algebraic_cache --test complex_ode --locked",
+      "passed": 52,
+      "failed": 0,
+      "log": "pade-final-integration.log.gz"
+    },
+    {
+      "command": "cargo test --release --bin rustflow step_size_settings_tests --locked",
+      "passed": 2,
+      "failed": 0,
+      "log": "pade-final-cli.log.gz"
+    },
+    {
+      "command": "cargo check --release --features python_stubgen --all-targets --locked",
+      "exit_code": 0,
+      "log": "pade-python-stubgen.log.gz"
+    },
+    {
+      "command": "cargo clippy --release --all-targets --locked -- -D warnings",
+      "exit_code": 0,
+      "log": "pade-final-clippy.log.gz"
+    },
+    {
+      "command": "cargo fmt --all -- --check",
+      "exit_code": 0,
+      "log": "pade-final-fmt.log.gz"
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0,
+      "log": "pade-final-diff-check.log.gz"
+    }
+  ],
+  "passed_release_tests": 88,
+  "independent_review": "Arithmetic, native ownership, candidate/saved-output agreement, disk denominator exclusion, refinement and resource wrappers reviewed. Fixed-degree refinement and missing-operation budget findings resolved before final gates.",
+  "new_coverage": [
+    "Exact rational ordinary and epsilon transport including Mobius charts",
+    "Accepted rational intermediate output, native point-bank persistence, exact hit and nearby restart",
+    "Coupled complex epsilon channels with independent precision and order",
+    "Actual [1/1] and [2/2] exponential approximants compared; degree cap uses Taylor reference",
+    "Tiny-residue interior pole and high-degree sparse source rejection",
+    "Defective approximants, exact zero and constants, preconversion dyadic and finite construction limits",
+    "10^100 cancellation retains fresh precision retries",
+    "Cancellation/cache immutability and registered-root sheet-preserving Taylor fallback",
+    "CLI opt-in degree validation"
+  ],
+  "limitations": [
+    "Local defect and conditioning checks are not a global forward-error certificate.",
+    "Native growth/work bounds are conservative estimates, not hard allocator or wall-clock quotas.",
+    "Registered-root rational candidates and source-radius extension remain unsupported.",
+    "No upstream performance-parity claim or large-system Pad\u00e9 benchmark is made.",
+    "Python/stub-generation feature compilation passed; publication-host wheel/stub regeneration was not performed in this isolated task."
+  ],
+  "earlier_failures": {
+    "pade-integration.log": "Five of six passed; max_work=1 rejected the two-coefficient source during representation preflight, while the assertion expected the later work estimate message. The test now uses max_work=2 and reaches the intended guard.",
+    "pade-check.log": "Initial moved-series Rust ownership error, corrected with the native conversion ownership contract.",
+    "pade-check2.log": "Existing internal StepTrial fixtures needed the new candidate field/diagnostic argument.",
+    "pade-clippy.log": "Test-only cloned-ref-to-slice lint corrected.",
+    "pade-clippy2.log": "Native univariate accessor is coefficient_ring(), not ring(); corrected."
+  },
+  "logs": {
+    "pade-check.log": {
+      "sha256": "b032ac86650c9fd6b10b448954d1f324168ef196a6a0f57d2c76f57323285244",
+      "bytes": 3170,
+      "archive": "pade-check.log.gz"
+    },
+    "pade-check2.log": {
+      "sha256": "0f8f432862607d9f0c29dc499da49a0806dccf92033943a2b7359f90c7fddaf7",
+      "bytes": 1903,
+      "archive": "pade-check2.log.gz"
+    },
+    "pade-clippy.log": {
+      "sha256": "4fdc710ecab0f600d48987d4ebe22f773577fe5f5398fdff9c5409c73d67a61b",
+      "bytes": 1422,
+      "archive": "pade-clippy.log.gz"
+    },
+    "pade-clippy2.log": {
+      "sha256": "42e62ce616f4b6c0cc64eabc80f0a2db58883a73b189102a3d510ef47fefd6c0",
+      "bytes": 2187,
+      "archive": "pade-clippy2.log.gz"
+    },
+    "pade-clippy3.log": {
+      "sha256": "975db6e61c03eee51715a853738ad268693b099b67bff807903458178b593c2d",
+      "bytes": 812,
+      "archive": "pade-clippy3.log.gz"
+    },
+    "pade-final-cli.log": {
+      "sha256": "a08a25e8a3db99e9be4b540548a3de00a985e3e0e3754ba1b36420e28eb2d07d",
+      "bytes": 1201,
+      "archive": "pade-final-cli.log.gz"
+    },
+    "pade-final-clippy.log": {
+      "sha256": "494075025d6e31ab17befbfb6c46afc1fb36efae65f2e17c166374e597bf73fa",
+      "bytes": 812,
+      "archive": "pade-final-clippy.log.gz"
+    },
+    "pade-final-diff-check.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "archive": "pade-final-diff-check.log.gz"
+    },
+    "pade-final-fmt.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0,
+      "archive": "pade-final-fmt.log.gz"
+    },
+    "pade-final-integration.log": {
+      "sha256": "cc3a18ef6543c19832c55964f346f650b12f2a6c93c8bb916c51b8f108a947d7",
+      "bytes": 6465,
+      "archive": "pade-final-integration.log.gz"
+    },
+    "pade-final-unit.log": {
+      "sha256": "78d2c29b173867ba79a781ba177e502007eb9774e06c5f0cbab7b16a0fe0ae6e",
+      "bytes": 4317,
+      "archive": "pade-final-unit.log.gz"
+    },
+    "pade-integration.log": {
+      "sha256": "7c42d2a07ca89fef0e29c18c9d30d696dad27e11d5d6c32e49e38f9d4612f6ff",
+      "bytes": 2035,
+      "archive": "pade-integration.log.gz"
+    },
+    "pade-python-stubgen.log": {
+      "sha256": "3909712cf039a12eedca97bc12b67007b727ef6ce98e0c00671ad51dbc2288f1",
+      "bytes": 12271,
+      "archive": "pade-python-stubgen.log.gz"
+    },
+    "pade-unit.log": {
+      "sha256": "e7399202c6eeaf8e531f0ea00252aac05964a4ff102b0508f66653bfd454a759",
+      "bytes": 1275,
+      "archive": "pade-unit.log.gz"
+    }
+  }
+}

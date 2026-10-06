@@ -65,6 +65,7 @@ impl<'a> RecursiveBoundary<'a> {
             .guard_digits
             .max(working_digits.saturating_sub(options.digits));
         options.series_order += extra as usize * 4 / 5;
+        options.refine_rational_order(extra.div_ceil(20) as usize);
         options
     }
     fn child(&self, keys: BTreeSet<String>) -> Self {

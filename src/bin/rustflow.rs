@@ -25,6 +25,7 @@ struct Settings {
     digits: u32,
     guard_digits: u32,
     series_order: usize,
+    pade_degree: Option<usize>,
     max_steps: usize,
     step_size_strategy: String,
     local_coordinate: String,
@@ -47,6 +48,7 @@ impl Default for Settings {
             digits: f.digits,
             guard_digits: f.guard_digits,
             series_order: f.series_order,
+            pade_degree: None,
             max_steps: f.max_steps,
             step_size_strategy: "halving".into(),
             local_coordinate: "identity".into(),
@@ -70,6 +72,10 @@ impl Settings {
             digits: self.digits,
             guard_digits: self.guard_digits,
             series_order: self.series_order,
+            pade: self.pade_degree.map(|degree| PadeOptions {
+                degree,
+                ..Default::default()
+            }),
             max_steps: self.max_steps,
             step_size_strategy: match self.step_size_strategy.as_str() {
                 "halving" => StepSizeStrategy::Halving,
@@ -905,6 +911,10 @@ fn execute_transport(
             "steps":result.transport.as_ref().map_or(0,|t| t.diagnostics.steps),
             "rejected_steps":result.transport.as_ref().map_or(0,|t| t.diagnostics.rejected_steps),
             "predicate_evaluations":result.transport.as_ref().map_or(0,|t| t.diagnostics.predicate_evaluations),
+            "rational_trials":result.transport.as_ref().map_or(0,|t| t.diagnostics.pade_trials),
+            "rational_steps":result.transport.as_ref().map_or(0,|t| t.diagnostics.pade_steps),
+            "rational_fallbacks":result.transport.as_ref().map_or(0,|t| t.diagnostics.pade_fallbacks),
+            "last_rational_fallback":result.transport.as_ref().and_then(|t| t.diagnostics.last_pade_fallback.clone()),
             "superseded_successes":result.transport.as_ref().map_or(0,|t| t.diagnostics.superseded_successes),
             "inserted_points":result.inserted_points,
             "coefficients":result.boundary.coefficients.iter().map(|row| row.iter().map(complex_json).collect::<Vec<_>>()).collect::<Vec<_>>(),
@@ -1003,6 +1013,30 @@ fn main() {
 #[cfg(test)]
 mod step_size_settings_tests {
     use super::*;
+    #[test]
+    fn rational_trials_are_opt_in_and_degree_is_validated() {
+        assert!(
+            Settings::default()
+                .options(Path::new("."))
+                .unwrap()
+                .pade
+                .is_none()
+        );
+        let requested: Settings = serde_json::from_value(json!({"pade_degree":8})).unwrap();
+        assert_eq!(
+            requested
+                .options(Path::new("."))
+                .unwrap()
+                .pade
+                .unwrap()
+                .degree,
+            8
+        );
+        for degree in [0, 33] {
+            let invalid: Settings = serde_json::from_value(json!({"pade_degree":degree})).unwrap();
+            assert!(invalid.options(Path::new(".")).is_err());
+        }
+    }
     #[test]
     fn step_strategy_is_explicit_and_unknown_values_are_rejected() {
         let defaults = Settings::default().options(Path::new(".")).unwrap();

@@ -23,7 +23,7 @@ pub struct PyEvaluationOptions {
 #[pymethods]
 impl PyEvaluationOptions {
     #[new]
-    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode="automatic", refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true))]
+    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode="automatic", refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None))]
     #[allow(clippy::too_many_arguments)]
     fn new(
         digits: u32,
@@ -44,11 +44,16 @@ impl PyEvaluationOptions {
         local_coordinate: &str,
         sample_cache_directory: Option<PathBuf>,
         reuse_samples: bool,
+        pade_degree: Option<usize>,
     ) -> PyResult<Self> {
         let inner = crate::FlowOptions {
             digits,
             guard_digits,
             series_order,
+            pade: pade_degree.map(|degree| crate::PadeOptions {
+                degree,
+                ..Default::default()
+            }),
             max_steps,
             workers,
             dimension,
@@ -116,6 +121,11 @@ impl PyEvaluationOptions {
     #[getter]
     fn series_order(&self) -> usize {
         self.inner.series_order
+    }
+    /// Optional rational approximation degree; absent means Taylor transport.
+    #[getter]
+    fn pade_degree(&self) -> Option<usize> {
+        self.inner.pade.as_ref().map(|p| p.degree)
     }
     #[getter]
     fn workers(&self) -> usize {
@@ -761,6 +771,22 @@ impl PyTransportResult {
     #[getter]
     fn predicate_evaluations(&self) -> usize {
         self.diagnostics.predicate_evaluations
+    }
+    #[getter]
+    fn rational_trials(&self) -> usize {
+        self.diagnostics.pade_trials
+    }
+    #[getter]
+    fn rational_steps(&self) -> usize {
+        self.diagnostics.pade_steps
+    }
+    #[getter]
+    fn rational_fallbacks(&self) -> usize {
+        self.diagnostics.pade_fallbacks
+    }
+    #[getter]
+    fn last_rational_fallback(&self) -> Option<String> {
+        self.diagnostics.last_pade_fallback.clone()
     }
     #[getter]
     fn conditioning_digits(&self) -> Option<u32> {
