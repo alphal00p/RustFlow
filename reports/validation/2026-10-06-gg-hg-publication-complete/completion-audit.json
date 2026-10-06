@@ -1,7 +1,7 @@
 {
-  "schema": "approved-python-notebook-completion-audit-v4-final-native-proof",
-  "observed_utc": "2026-10-06T00:50:43.034354+00:00",
-  "scope": "Final read-only 25-item approved native Python API and gg-to-Hg notebook milestone audit. Scientific proof belongs to frozen db9/c340 core and 8758 host; exact prepared 5c source follow-ups are separately reviewed/tested/rendered. No global community-CI or full general AMFlow/DiffExp parity claim.",
+  "schema": "approved-python-notebook-completion-audit-v5-final-applied-steering",
+  "observed_utc": "2026-10-06T00:53:12.024876+00:00",
+  "scope": "Final read-only 25-item approved native Python API and gg-to-Hg notebook milestone audit. Scientific proof belongs to the attested db9/c340 runtime and original 8758 host; final 5c204ba source is applied and separately tested/rendered. No global community-CI or full general AMFlow/DiffExp parity claim.",
   "runtime": {
     "core": "db9cbbafa470b1402d335ad635e608a6b7a03c07",
     "host": "8758b93d1e1a6fed2aace41493a91be569f98a98",
@@ -14,23 +14,27 @@
       "acceptance": {
         "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_acceptance.py",
         "recorded_sha256": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d",
-        "current_sha256": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d",
-        "matched": true
+        "sha256_rechecked_before_fast_forward": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d",
+        "matched_before_fast_forward": true
       },
       "controller": {
         "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_support.py",
         "recorded_sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25",
-        "current_sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25",
-        "matched": true
+        "sha256_rechecked_before_fast_forward": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25",
+        "matched_before_fast_forward": true
       },
       "notebook": {
         "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
         "recorded_sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d",
-        "current_sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d",
-        "matched": true
+        "sha256_rechecked_before_fast_forward": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d",
+        "matched_before_fast_forward": true
       }
     },
-    "frozen_worktree_clean": true
+    "applied_community": "5c204ba34b836d448f9d166d546baecca8fda8e3",
+    "publication_path": "/common/dev/symbolica-community/loop-integration-publication",
+    "frozen_path_note": "Historical execution location: original 8758 source bytes were attested and all eight file hashes rechecked before the approved fast-forward to 5c204ba. This path now contains applied 5c204ba source.",
+    "frozen_worktree_clean_at_original_attestation": true,
+    "original_attestation_status": "Unmodified historical proof; source paths are not claims that current applied text still equals the original frozen text."
   },
   "evidence": {
     "api": "/common/dev/amflow-publication/src/python/mod.rs",
@@ -79,12 +83,14 @@
     "python310_polling_fix": "/common/dev/symbolica-community/python310-toml-tests/target/polling-timeout-validation/validation.json",
     "inherited_ci_repairs": "/common/dev/symbolica-community/python310-ci-repairs/target/python310-ci-repairs/validation.json",
     "live_snapshot": "/common/dev/amflow/target/publication-python-notebook-completion-audit-2026-10-06-live-snapshot.json",
-    "final_proof": "/common/dev/amflow/target/publication-final-full16-complete/summary.json",
-    "final_acceptance": "/common/dev/amflow/target/publication-final-full16-complete/acceptance.json",
-    "final_source_rechecks": "/common/dev/amflow/target/publication-final-full16-complete/source-rechecks.json",
-    "authoritative_process_exit": "/common/dev/amflow/target/publication-final-full16-complete/process-exit.json",
+    "final_proof": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/summary.json",
+    "final_acceptance": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/acceptance.json",
+    "final_source_rechecks": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/source-rechecks.json",
+    "authoritative_process_exit": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/process-exit.json",
     "prepared_notebook_render": "/common/dev/amflow/reports/validation/2026-10-06-notebook-finalization/render-validation.json",
-    "prepared_notebook_visual": "/common/dev/amflow/reports/validation/2026-10-06-notebook-finalization/normalization.png"
+    "prepared_notebook_visual": "/common/dev/amflow/reports/validation/2026-10-06-notebook-finalization/normalization.png",
+    "applied_steering_validation": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/prepared-steering-validation.json",
+    "applied_steering_junit": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/prepared-steering-tests.xml"
   },
   "requirements": [
     {
@@ -157,9 +163,11 @@
         "inherited_ci_repairs",
         "final_proof",
         "final_source_rechecks",
-        "authoritative_process_exit"
+        "authoritative_process_exit",
+        "applied_steering_validation",
+        "applied_steering_junit"
       ],
-      "qualification_or_remaining": "Native progress and cancellation passed in the complete run. Prepared d36b9f4 fixes Python 3.10 future-timeout handling; 72 relevant Python 3.10 and 70 Python 3.14 checks passed without skips. Post-fast-forward confirmation remains an operational publication check."
+      "qualification_or_remaining": "Native progress and cancellation passed in the complete run. Applied d36b9f4 fixes Python 3.10 future-timeout handling; 72 relevant Python 3.10 and 70 Python 3.14 checks passed without skips. After applying 5c204ba, the final publication worktree passed another 70 Python 3.14 checks with no failures or skips."
     },
     {
       "requirement": "Coherent public dependency graph/source fingerprints and preserved namespaces; browser excludes native integration",
@@ -256,9 +264,11 @@
         "final_source_rechecks",
         "authoritative_process_exit",
         "prepared_notebook_render",
-        "prepared_notebook_visual"
+        "prepared_notebook_visual",
+        "applied_steering_validation",
+        "applied_steering_junit"
       ],
-      "qualification_or_remaining": "Prepared 5c notebook SHA matches rendered 059 text exactly: canonical two-loop measure, supplied parent connections versus native recursive numerical boundaries, 20-digit mixed comparisons and 19-digit EW oracle are explicit. Empty-state HTML/Chromium/visual checks passed; original frozen populated-interactive proof is retained separately, with text-only notebook AST differences audited."
+      "qualification_or_remaining": "Prepared 5c notebook SHA matches rendered 059 text exactly: canonical two-loop measure, supplied parent connections versus native recursive numerical boundaries, 20-digit mixed comparisons and 19-digit EW oracle are explicit. Empty-state HTML/Chromium/visual checks passed; original frozen populated-interactive proof is retained separately, with text-only notebook AST differences audited. The applied publication source then passed 70 focused Python 3.14 checks, including the actual notebook smoke test."
     },
     {
       "requirement": "Separate load/compute and recompute controls for boundaries, transport and amplitude",
@@ -390,7 +400,7 @@
     },
     {
       "requirement": "Acceptance: preserve unrelated changes, validated commits/pushes and community bump",
-      "status": "scientific proof archived; prepared source committed and pushed",
+      "status": "passed: reviewed source applied, pushed commits retained, final proof archived",
       "evidence": [
         "core_validation",
         "interactive",
@@ -400,9 +410,11 @@
         "inherited_ci_repairs",
         "final_proof",
         "final_source_rechecks",
-        "authoritative_process_exit"
+        "authoritative_process_exit",
+        "applied_steering_validation",
+        "applied_steering_junit"
       ],
-      "qualification_or_remaining": "Immutable proof and all eight post-completion source/extension/model/reference checks are archived under target/publication-final-full16-complete. Prepared 5c follow-ups are committed/pushed with preserved unrelated work. Root is coordinating publication fast-forward, final focused confirmation and report/status publication; those operational follow-ups do not reopen numerical proof."
+      "qualification_or_remaining": "Immutable proof and all eight post-completion source/extension/model/reference checks are archived in reports/validation/2026-10-06-gg-hg-publication-complete. Root fast-forwarded publication to the committed/pushed 5c204ba only after those checks, then confirmed 70 focused Python 3.14 tests passed with no failures or skips. Final report/audit commit and publication are operational follow-ups; numerical proof retains original 8758 execution provenance."
     }
   ],
   "inherited_defects": [
@@ -446,7 +458,7 @@
     "interpretation": "The plan explicitly admits scoped supplied reductions and durable scientific inputs, and requires native numerical boundaries rather than independent rederivation of every published IBP. A source-certified exact parent connection transformed by the generic common-mass machinery is a permitted supplied symbolic reduction result for that numerical workflow. Native generic closure and recursive IBPs are actually exercised for boundary subfamilies; the parent supplied connection remains an explicit trust boundary, not an unverified residual silently accepted as a master. Therefore no additional top-level RustRed regeneration is a prerequisite for this scoped notebook gate. Its absence must remain stated and must not be used as evidence of broader automatic-reduction parity."
   },
   "prepared_steering_compatibility": {
-    "status": "reviewed source equivalence, exact rendered notebook text, and focused Python 3.10/3.14 validation passed; post-fast-forward confirmation planned by root",
+    "status": "passed: reviewed source equivalence, exact rendered notebook text, focused Python 3.10/3.14 checks, and applied 5c204ba Python 3.14 confirmation",
     "source_comparison": {
       "Cargo.toml": {
         "frozen_sha256": "0f6c16da982f098846ee7cfe011da8d6633507971856829e9b29eba7cee8745a",
@@ -483,7 +495,7 @@
     "notebook_diff_scope": "Two Markdown cells only; no control/model/cache/kinematics code changes.",
     "acceptance_ast_equal_excluding_wait_for_stage_and_its_import": true,
     "polling_fix_commit": "d36b9f4fe2b2b0766f313dab05237e90ea544640",
-    "required_final_action": "Root may fast-forward after immutable original attestation rechecks and run focused confirmation. A fresh populated final-bank rerender is not required: exact text has rendered, original populated interactions are proven, and scientific execution/controller source is unchanged apart from separately tested polling handling. Keep presentation-copy runs distinct from original native cold proof.",
+    "required_final_action": "Completed: root fast-forwarded only after immutable original attestation rechecks, then confirmed 70 focused Python 3.14 tests passed with no failures or skips. A fresh populated final-bank rerender is not required: exact text rendered, original populated interactions are proven, and scientific execution/controller source is unchanged apart from separately tested polling handling. Presentation-copy runs remain distinct from original native cold proof.",
     "exact_prepared_notebook_sha256": "9e7a5e5a4837785ee302d8cb4016e6dacb9b0d06b0548bc3be31fdbe16bc15d6",
     "rendered_source_commit": "059ec1faf663e38ccb4def8bfeb368eb7b5edc8e",
     "render_report": {
@@ -491,7 +503,25 @@
       "sha256": "9deaeb02f1c3f8e832dffa0b199573943344e8abc418c4d760a8008126ebe797",
       "scope": "Static HTML of documentation-only notebook followup with empty numerical caches; no integral evaluation"
     },
-    "frozen_populated_proof": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/notebook-interactive-validation.json"
+    "frozen_populated_proof": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/notebook-interactive-validation.json",
+    "applied_source_validation": {
+      "path": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/prepared-steering-validation.json",
+      "sha256": "b166ccd2d50ff93eed2e3cbe7cd129dd9d48a06bd1430333f42c7a4a89b5e9b7",
+      "community_commit": "5c204ba34b836d448f9d166d546baecca8fda8e3",
+      "python": "3.14",
+      "passed": 70,
+      "deselected": 249,
+      "failed": 0,
+      "skipped": 0,
+      "elapsed_seconds": 28.18,
+      "process_exit_code": 0,
+      "command": "CI=true python -m pytest -q tests/test_hep_gg_hg.py tests/test_hep_gg_hg_anchors.py tests/test_hep_notebooks.py -k gg_hg",
+      "junit_path": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/prepared-steering-tests.xml",
+      "junit_sha256": "1b3cf5ec54718d90460be871ec661c2f480e1512e4c5d7dba87df9d1ad627466",
+      "log_path": "/common/dev/amflow/target/publication-final-steering-tests.log",
+      "log_sha256": "671c2f63cd35c0a10180ddb317211ce2fa91742949c4f099da1417f76a3189e6",
+      "scope": "Applied final presentation and polling compatibility checks; full numerical acceptance retains original8758 steering provenance."
+    }
   },
   "broader_community_ci": {
     "milestone_distinction": "These checks concern broader community packaging, examples and browser APIs. They do not replace the frozen full native numerical acceptance. Final full-suite claims need a rerun after the separate pinned Linnet dependency is available.",
@@ -548,24 +578,29 @@
     "scope": "Complete final public db9/c340 installed-wheel native gg-to-Hg acceptance; distinct from historical4c dependency graph. No Mathematica/plugin runtime or numerical-reference boundary fallback.",
     "files": {
       "acceptance.json": {
-        "path": "/common/dev/amflow/target/publication-final-full16-complete/acceptance.json",
-        "sha256": "b930ced7e7375906c5ea0fbc7b753400a93fda67075e4a13ccc858df1606d442"
+        "path": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/acceptance.json",
+        "sha256": "b930ced7e7375906c5ea0fbc7b753400a93fda67075e4a13ccc858df1606d442",
+        "original_capture_path": "/common/dev/amflow/target/publication-final-full16-complete/acceptance.json"
       },
       "summary.json": {
-        "path": "/common/dev/amflow/target/publication-final-full16-complete/summary.json",
-        "sha256": "2df948a1e070bb0afb5964d6a6d42bb7730daa40c2861e22220f509def132cc6"
+        "path": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/summary.json",
+        "sha256": "2df948a1e070bb0afb5964d6a6d42bb7730daa40c2861e22220f509def132cc6",
+        "original_capture_path": "/common/dev/amflow/target/publication-final-full16-complete/summary.json"
       },
       "source-rechecks.json": {
-        "path": "/common/dev/amflow/target/publication-final-full16-complete/source-rechecks.json",
-        "sha256": "2aaf87897b6eae163b77796b42b04e549ab50056aac60de1295a6e5e0a1f628f"
+        "path": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/source-rechecks.json",
+        "sha256": "2aaf87897b6eae163b77796b42b04e549ab50056aac60de1295a6e5e0a1f628f",
+        "original_capture_path": "/common/dev/amflow/target/publication-final-full16-complete/source-rechecks.json"
       },
       "process-exit.json": {
-        "path": "/common/dev/amflow/target/publication-final-full16-complete/process-exit.json",
-        "sha256": "b0599fd91cca8895e9bf13b116dd0198ad102c21cd62b20ffb2cf1b3b5eb2df4"
+        "path": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/process-exit.json",
+        "sha256": "b0599fd91cca8895e9bf13b116dd0198ad102c21cd62b20ffb2cf1b3b5eb2df4",
+        "original_capture_path": "/common/dev/amflow/target/publication-final-full16-complete/process-exit.json"
       },
       "manifest.json": {
-        "path": "/common/dev/amflow/target/publication-final-full16-complete/manifest.json",
-        "sha256": "64e8c9e9cc6d42c3ce090632e1a082b21f2799a321a6daee5ccbd428665755ab"
+        "path": "/common/dev/amflow/reports/validation/2026-10-06-gg-hg-publication-complete/manifest.json",
+        "sha256": "64e8c9e9cc6d42c3ce090632e1a082b21f2799a321a6daee5ccbd428665755ab",
+        "original_capture_path": "/common/dev/amflow/target/publication-final-full16-complete/manifest.json"
       }
     },
     "process_exit": {
@@ -720,7 +755,8 @@
         "recompute": true
       }
     ],
-    "concurrency_note": "Shared cluster, four boundary workers within256sampleworker budget. Cold/resumed/warm times are observations, not matched upstream full-workflow performance comparisons."
+    "concurrency_note": "Shared cluster, four boundary workers within256sampleworker budget. Cold/resumed/warm times are observations, not matched upstream full-workflow performance comparisons.",
+    "archive_copy_verified": true
   },
   "historical_live_observation": {
     "path": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-native30/acceptance.json",
@@ -865,9 +901,7 @@
   },
   "pending_scientific_or_api_requirement_gates": [],
   "pending_publication_followups": [
-    "Root-coordinated fast-forward to the approved prepared source and focused post-fast-forward test confirmation.",
-    "Publish/archive the immutable proof and final status wording while retaining original execution source hashes.",
-    "Finish separately tracked broad community CI dependency/example/browser issues; no global CI-green claim."
+    "Commit/publish the archived final proof, applied-steering validation and completion audit while retaining original execution source hashes."
   ],
   "final_acceptance_claim_scope": "Complete scoped native gg-to-Hg scientific acceptance on frozen db9/c340 runtime and original8758 execution hashes only; prepared5c follow-ups have separately recorded compatibility/presentation evidence.",
   "root_confirmed_exit": {
@@ -879,5 +913,12 @@
   },
   "whole_project_feature_complete": false,
   "global_community_ci_green": false,
-  "requirements_count": 25
+  "requirements_count": 25,
+  "before_applied_steering_audit": {
+    "path": "/common/dev/amflow/target/publication-python-notebook-completion-audit-2026-10-06-before-applied-steering.json",
+    "sha256": "0d6dd389ccdb4f618875884882734d4a206e9f307c306abecfa7b33d253ed0c6"
+  },
+  "separate_non_milestone_followups": [
+    "Broader community CI dependency/example/browser issues, including the optional pinned Linnet build; no global CI-green claim and no dependency of this native notebook milestone."
+  ]
 }
