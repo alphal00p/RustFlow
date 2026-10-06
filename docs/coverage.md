@@ -10,6 +10,17 @@ RustRed is not established. External reference uncertainty caps the EW-square
 comparison at 19 relative digits. The broader AMFlow/DiffExp parity goal remains
 open; the milestones below retain their original scope and source provenance.
 
+The [cache/arithmetic release](../reports/validation/2026-10-06-cache-arithmetic-release/summary.json)
+passes **547 release unit/integration tests** and one doctest, with 13 explicit
+opt-in tests ignored, formatting and strict Python/stub-generation all-target
+Clippy. It integrates snapshot-local native Atom export reuse and Symbolica's
+explicitly rounded Float operations. The numerical sources were verified
+unchanged after the full run. The fresh
+[ordinary transport comparison](../reports/performance/2026-10-06-ordinary-transport.json)
+passes all three original-solver and independent refinement checks; ordinary
+native transport remains slower than the original. This source revision is
+separate from the completed publication-wheel gg→hg acceptance above.
+
 The massless phase-space milestone passes **416 release unit/integration tests**,
 one doctest, strict all-target Clippy and formatting. Nine long scientific tests
 remain opt-in. Its [release report](../reports/validation/2026-10-05-massless-phase-space-release.json)

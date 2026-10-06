@@ -74,7 +74,10 @@ Those checks remain required; the profile identifies optimization work, not a
 reason to weaken numerical acceptance. Local checks still do not certify global
 forward error. The combined full release suite was running when this benchmark
 report was captured; its three benchmark validations and strict Python/stubgen
-Clippy had independently completed.
+Clippy had independently completed. The subsequent
+[full release result](../reports/validation/2026-10-06-cache-arithmetic-release/summary.json)
+passes 547 unit/integration tests and one doctest, with 13 opt-in tests ignored,
+and verifies that the measured numerical sources remained unchanged.
 
 ## Preceding checked release
 
