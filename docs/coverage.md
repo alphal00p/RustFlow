@@ -64,6 +64,12 @@ The latest isolated milestones add:
   outputs. Numerical coefficients, poles and residuals are still compiled at
   each requested precision; no supplied boundary or rounded coefficient is
   cached in the exact preparation object.
+- [Exact rational-row preparation](../reports/performance/2026-10-06-exact-rational-row-preparation/README.md):
+  native denominator factors, row common denominators and cleared numerators are
+  reused across algebraic precision profiles. All non-timing outputs agree in
+  matched checks; first and nearby transports improve by 1.04–1.08× for the
+  tested 48/61-master systems. The isolated report separates its full gg→hg
+  scientific gate from the final internal layout change and route checks.
 
 These isolated counts overlap and must not be added together. Their reports
 retain exact revisions; none replaces the frozen notebook scientific run.
@@ -87,6 +93,17 @@ terminal hits. Non-Gaussian leading roots reject without changing the cache.
 All 244 recorded source/test inputs match the commit before and after the gate;
 44 additional fixtures match the preceding frozen gate, tested commit and final
 recheck. This does not rebuild the publication wheel or rerun scientific timings.
+
+The subsequent [rational-row/sheet integration](../reports/validation/2026-10-06-prepared-rows-sheet-integration/summary.json)
+passes **366 top-level release tests across 27 targets**, with six successful
+child-process checks recorded separately and five opt-in tests ignored.
+Formatting and strict all-target Python/stub Clippy pass; all 290 source and
+fixture inputs match the tested commit before and after the run. It combines
+exact preparation, sheet constraints, Python interfaces and cache behavior with
+ordinary AMF/FT evaluation, conditioning and existing physical transport. This
+targeted gate is separate from the isolated full gg→hg scientific acceptance
+and the frozen community notebook runtime. The native partial-fraction adapter
+and its updated HEPKit owner remain isolated work.
 
 The [combined endpoint/cut/arithmetic gate](../reports/validation/2026-10-06-endpoint-cut-arithmetic-integration/summary.json)
 passes **328 top-level release tests across 29 targets**, plus six successful

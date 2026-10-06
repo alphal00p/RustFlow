@@ -92,7 +92,14 @@ coefficients and poles freshly at each precision. Matched checked transports
 improve by 1.12× for 48 masters and 1.16× for 61 masters; nearby reuse improves
 by 1.12× and 1.17×. All non-timing outputs agree exactly. These remain
 supplied-boundary native comparisons, with no new automatic-boundary or
-full-amplitude timing claim. Reusing exact rational-row preparation is next.
+full-amplitude timing claim. The next
+[rational-row preparation milestone](../reports/performance/2026-10-06-exact-rational-row-preparation/README.md)
+now reuses native denominator factorizations and cleared rows, with an additional
+1.04–1.08× improvement in matched checked transports and identical numerical
+outputs. Its integration with current endpoint/Python interfaces passes 366
+top-level release checks across 27 targets, six separate child-process checks,
+formatting and strict Python/stub Clippy. The scientific and timing evidence
+retains the isolated source revision; no broader upstream ratio is claimed.
 
 The [unified-flow design and generality audit](unified-flow.md) makes reduced-family
 evaluation the central interface. AMF direct evaluation, AMF-generated physical
