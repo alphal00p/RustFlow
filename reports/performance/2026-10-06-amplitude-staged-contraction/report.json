@@ -1,0 +1,302 @@
+{
+  "scope": "first-use native gg->hg amplitude constructor; one CPU; unchanged scientific kernel and errors",
+  "base_commit": "bf6b865",
+  "source_digest": "b6e7b8db752f1f9d008094c1a80ca7233809de2be77cda4fafa24abee0cd3812",
+  "baseline_source_digest": "a8e17584df583d823059db180f72a08fd18082d057578b16a3b3e4348bad76a2",
+  "dependency_digest": "9ee6eced2bc39b05bb333b1b021ab556d2a1bb790a255205d3f141fc64cc96ff",
+  "owners": {
+    "Symbolica/Numerica/Graphica": "6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+    "HEPKit": "b96600b0085d9ddfa9e6acbc11fa72ec6163253c",
+    "RustRed": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+  },
+  "runtime_registry_arities": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16
+  ],
+  "machine": "AMD EPYC 9754 shared Linux host",
+  "cpu_affinity": [
+    43
+  ],
+  "threads": 1,
+  "background_work": "other compilation continued; no exclusive-host claim",
+  "trials": [
+    {
+      "baseline_seconds": 33.078563294,
+      "staged_seconds": 8.59783411,
+      "seconds_saved": 24.480729183999998,
+      "reduction_percent": 74.00783693782877,
+      "speedup": 3.84731350602902,
+      "baseline_stages": [
+        {
+          "seconds": 1.621e-05,
+          "stage": "generating native Higgs-jet effective diagrams"
+        },
+        {
+          "seconds": 0.014209699,
+          "stage": "summing native Higgs-jet spin and color states"
+        },
+        {
+          "seconds": 0.034914225,
+          "stage": "contracting native Higgs-jet tensors"
+        },
+        {
+          "seconds": 31.15910085,
+          "stage": "preparing kinematics-dependent Higgs-jet scalar kernels"
+        }
+      ],
+      "staged_stages": [
+        {
+          "seconds": 2.912e-05,
+          "stage": "generating native Higgs-jet effective diagrams"
+        },
+        {
+          "seconds": 0.014706129,
+          "stage": "summing native Higgs-jet spin and color states"
+        },
+        {
+          "seconds": 0.035532015,
+          "stage": "contracting native Higgs-jet tensors"
+        },
+        {
+          "seconds": 6.775705651,
+          "stage": "preparing kinematics-dependent Higgs-jet scalar kernels"
+        }
+      ],
+      "observable_evaluation_seconds": 0.853737951
+    },
+    {
+      "baseline_seconds": 33.001004655,
+      "staged_seconds": 8.527479883,
+      "seconds_saved": 24.473524772000005,
+      "reduction_percent": 74.15993854687694,
+      "speedup": 3.869959836644038,
+      "baseline_stages": [
+        {
+          "seconds": 6.42e-06,
+          "stage": "generating native Higgs-jet effective diagrams"
+        },
+        {
+          "seconds": 0.007418169,
+          "stage": "summing native Higgs-jet spin and color states"
+        },
+        {
+          "seconds": 0.023529243,
+          "stage": "contracting native Higgs-jet tensors"
+        },
+        {
+          "seconds": 31.072902319,
+          "stage": "preparing kinematics-dependent Higgs-jet scalar kernels"
+        }
+      ],
+      "staged_stages": [
+        {
+          "seconds": 1.346e-05,
+          "stage": "generating native Higgs-jet effective diagrams"
+        },
+        {
+          "seconds": 0.00734617,
+          "stage": "summing native Higgs-jet spin and color states"
+        },
+        {
+          "seconds": 0.023107662,
+          "stage": "contracting native Higgs-jet tensors"
+        },
+        {
+          "seconds": 6.691666045,
+          "stage": "preparing kinematics-dependent Higgs-jet scalar kernels"
+        }
+      ],
+      "observable_evaluation_seconds": 0.844547658
+    }
+  ],
+  "baseline_binary": {
+    "path": "/common/dev/amflow-physical-compiled-reuse/target/physical-compiled-reuse-evidence/kernel-capture-native",
+    "size": 734582928,
+    "sha256": "dceedf19282862f2ca9fa33854e09be7538ed2d01aea0f51110888f661154bf8"
+  },
+  "staged_binary": {
+    "path": "/common/dev/amflow-amplitude-factorized-contraction/target/amplitude-factorized-evidence/staged-native",
+    "size": 738437712,
+    "sha256": "b753ab5cd3dd13b19fd0329f0b5c20471ec3096982ddaa1cc8c3e7cf9e9d1e32"
+  },
+  "source_files": {
+    "src/gg_hg/amplitude.rs": "966b88b8ab0a4e91f59af1736ac92a6f2ea68d3c3092682c78d6292f34bcad88",
+    "Cargo.toml": "0da45793c1b8a08437da46b206ef32d3546629d3e1d3b84742b4f85aafce32cf",
+    "Cargo.lock": "35263caf736a5330891d517cc57ad6cc13f39d2de8135bc4f47775f8ce71c464",
+    "examples/amplitude_factorized_check.rs": "98c21ba1a6a051ea2b356a87c8499f3384f5626e586a4e48f9b0f72924897899"
+  },
+  "canonical_scalar_kernel_blake3": "2a909a82184597995afe8d5774d4ca045e0949032b9c7e213575f354d4489410",
+  "kernel_characters": [
+    4181453,
+    1288494,
+    75671
+  ],
+  "scientific_comparison": {
+    "scalar_kernels_exactly_equal": true,
+    "observables": [
+      {
+        "label": "electroweak_squared",
+        "value_and_precision_identical": true,
+        "error_and_precision_identical": true,
+        "arithmetic_change_and_precision_identical": true,
+        "baseline_verified_relative_digits": 35,
+        "candidate_verified_relative_digits": 35,
+        "difference_exact": "0",
+        "error_difference_exact": "0",
+        "within_combined_admitted_errors": true,
+        "both_admitted_errors_and_difference_meet_requested20": true
+      },
+      {
+        "label": "interference",
+        "value_and_precision_identical": true,
+        "error_and_precision_identical": true,
+        "arithmetic_change_and_precision_identical": true,
+        "baseline_verified_relative_digits": 36,
+        "candidate_verified_relative_digits": 36,
+        "difference_exact": "0",
+        "error_difference_exact": "0",
+        "within_combined_admitted_errors": true,
+        "both_admitted_errors_and_difference_meet_requested20": true
+      },
+      {
+        "label": "effective_squared",
+        "value_and_precision_identical": true,
+        "error_and_precision_identical": true,
+        "arithmetic_change_and_precision_identical": true,
+        "baseline_verified_relative_digits": 47,
+        "candidate_verified_relative_digits": 47,
+        "difference_exact": "0",
+        "error_difference_exact": "0",
+        "within_combined_admitted_errors": true,
+        "both_admitted_errors_and_difference_meet_requested20": true
+      }
+    ],
+    "candidate_kernel_seconds": 8.59783411,
+    "candidate_amplitude_seconds": 0.853737951
+  },
+  "confirmation_scientific_comparison": {
+    "scalar_kernels_exactly_equal": true,
+    "observables": [
+      {
+        "label": "electroweak_squared",
+        "value_and_precision_identical": true,
+        "error_and_precision_identical": true,
+        "arithmetic_change_and_precision_identical": true,
+        "baseline_verified_relative_digits": 35,
+        "candidate_verified_relative_digits": 35,
+        "difference_exact": "0",
+        "error_difference_exact": "0",
+        "within_combined_admitted_errors": true,
+        "both_admitted_errors_and_difference_meet_requested20": true
+      },
+      {
+        "label": "interference",
+        "value_and_precision_identical": true,
+        "error_and_precision_identical": true,
+        "arithmetic_change_and_precision_identical": true,
+        "baseline_verified_relative_digits": 36,
+        "candidate_verified_relative_digits": 36,
+        "difference_exact": "0",
+        "error_difference_exact": "0",
+        "within_combined_admitted_errors": true,
+        "both_admitted_errors_and_difference_meet_requested20": true
+      },
+      {
+        "label": "effective_squared",
+        "value_and_precision_identical": true,
+        "error_and_precision_identical": true,
+        "arithmetic_change_and_precision_identical": true,
+        "baseline_verified_relative_digits": 47,
+        "candidate_verified_relative_digits": 47,
+        "difference_exact": "0",
+        "error_difference_exact": "0",
+        "within_combined_admitted_errors": true,
+        "both_admitted_errors_and_difference_meet_requested20": true
+      }
+    ],
+    "candidate_kernel_seconds": 8.527479883,
+    "candidate_amplitude_seconds": 0.844547658
+  },
+  "supplied_form_factor_document": {
+    "path": "baseline/full16-high.json",
+    "sha256": "161c2f13376ae6459228e59b078cb7b50bb950319e1f475b07a8476b3d809350",
+    "blake3": "9a6bf75f73cb588168475e7783f1a5aaeb2117a88134c72180bc26c93b876271",
+    "origin": "all16 native initial physical transports; guard60/order96; supplied40; requested20"
+  },
+  "intermediate_diagnostic": {
+    "exact_expanded_intermediate_equal": true,
+    "profiles": [
+      {
+        "profile": "repeat",
+        "seconds": 7.151277823,
+        "shape": {
+          "blake3": "f17330be94f793ead730d507b1f894cf6dcd8e578a1168483322d67c7ce8a62f",
+          "characters": 5606642,
+          "function_heads": {
+            "conj": 38994
+          },
+          "powers": 285496,
+          "symbols": 25
+        }
+      }
+    ]
+  },
+  "rejected_probes": [
+    {
+      "status": "performance rejection; stopped before scientific equality gate",
+      "elapsed_process_seconds_lower_bound": 321,
+      "last_stage": "preparing kinematics-dependent Higgs-jet scalar kernels",
+      "last_stage_started_seconds": 0.373970165,
+      "baseline_kernel_capture_seconds": 33.078563294,
+      "sample": "candidate-active.txt;99.34% inclusive exact_coefficient_list/native polynomial conversion",
+      "exact_scalar_equality_claim": false,
+      "observable_gate_reached": false,
+      "signal": "SIGINT to own frozen candidate process"
+    },
+    {
+      "status": "performance rejection; stopped before scientific equality gate",
+      "elapsed_process_seconds_lower_bound": 66,
+      "last_stage": "preparing kinematics-dependent Higgs-jet scalar kernels",
+      "last_stage_started_seconds": 0.735782683,
+      "baseline_kernel_capture_seconds": 33.078563294,
+      "sample": "late-active.txt;98.90% inclusive exact_coefficient_list/native polynomial conversion",
+      "exact_scalar_equality_claim": false,
+      "observable_gate_reached": false,
+      "signal": "SIGINT to own frozen late-native process"
+    }
+  ],
+  "checks": {
+    "native_amplitude_integration": "passed: 1 test; archived reference, source cap and changed kinematics",
+    "native_all_target_clippy": "passed with -D warnings",
+    "python_stubgen_all_target_clippy": "passed with -D warnings",
+    "format": "passed",
+    "exact_three_kernel_equality": "passed both runs",
+    "observable_value_error_arithmetic_change_precision_identity": "passed both runs"
+  },
+  "limitations": [
+    "native timings, not WASM/browser timings",
+    "two before/after samples on shared host, not statistical confidence intervals",
+    "constructor-only improvement; not end-to-end notebook, transport or cold-AMF timing",
+    "archived independent EW reference remains limited to19 relative digits"
+  ],
+  "evidence": {
+    "file": "evidence.tar.gz",
+    "bytes": 2895293,
+    "sha256": "ca8eeff1ef2e9fbb7a555db352dc34189d074ef5ab0d9f28b18cc4616bf43f39",
+    "archived_files": 80
+  }
+}

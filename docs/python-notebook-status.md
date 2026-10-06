@@ -54,9 +54,20 @@ points, eight form factors and three observables. The reported observable
 accuracy estimates remain 35/36/47 relative digits. The separate EW reference
 still supports 19 comparison digits. Each profile has one native run on the
 same shared host; setup, Python/UI overhead and checkpoint I/O are excluded.
-First-use amplitude kernel construction remains about 34 seconds, followed by
-about 2.5 seconds for projection and numerical observable evaluation. These are
-native component measurements, not end-to-end notebook or WASM timings.
+That transport experiment also measured about 34 seconds for first-use amplitude
+kernel construction and about 2.5 seconds for projection and numerical observable
+evaluation. These are native component measurements, not end-to-end notebook or
+WASM timings.
+
+A subsequent [native tensor-contraction optimization](../reports/performance/2026-10-06-amplitude-staged-contraction/README.md)
+reduces first-use kernel construction from 33.00–33.08 to 8.53–8.60 seconds in two
+single-core comparisons. It runs the existing Idenso simplifier before expansion
+and again afterward, requiring completed contractions before scalar extraction.
+All three symbolic kernels are exactly identical; observable values, propagated
+errors, arithmetic-change bounds and binary precisions are unchanged. The native
+amplitude regression, both feature configurations of strict release Clippy and
+formatting pass. This is a separate constructor measurement, not a new complete
+notebook or browser timing.
 
 The notebook working branch uses guard 30/order 32 only for physical transport;
 automatic AMF boundary settings are unchanged. It adds a supplied-values control,

@@ -135,21 +135,26 @@ impl HiggsJetAmplitude {
         context.emit(crate::Progress::Stage {
             name: "contracting native Higgs-jet tensors".into(),
         })?;
+        let algebra = idenso::tensor::AlgebraSettings {
+            contract: idenso::tensor::AlgebraContraction::Dots,
+            ..idenso::tensor::AlgebraSettings::hep()
+        };
+        // Reduce connected tensor work before distributing products. Expansion
+        // exposes deferred closed scopes for the final native reduction.
         let scalar =
             idenso::tensor::SymbolicTensor::<spenso::structure::partial::PartialStructure>::infer(
                 summed.expression().clone(),
             )
             .map_err(native_error)?
+            .simplify_algebra(&algebra)
+            .map_err(native_error)?
             .expanded(None, false)
             .map_err(native_error)?
-            .simplify_algebra(&idenso::tensor::AlgebraSettings {
-                contract: idenso::tensor::AlgebraContraction::Dots,
-                ..idenso::tensor::AlgebraSettings::hep()
-            })
+            .simplify_algebra(&algebra)
             .map_err(native_error)?;
-        if !scalar.is_scalar() {
+        if !scalar.contraction_complete() || !scalar.is_scalar() {
             return Err(Error::Unsupported(
-                "Higgs-jet state sum retains tensor indices".into(),
+                "Higgs-jet state sum retains unresolved tensor contractions".into(),
             ));
         }
         context.emit(crate::Progress::Stage {
