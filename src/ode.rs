@@ -441,6 +441,9 @@ impl CompiledSystem {
     /// matrix is regular there. Roots restrict contour planning and Taylor
     /// radii; the exact polynomials survive local-coordinate recompilation.
     pub(crate) fn exclude_polynomials(&mut self, guards: &[Atom]) -> Result<()> {
+        if guards.is_empty() {
+            return Ok(());
+        }
         let guard_rows = guards
             .iter()
             .map(|g| {
