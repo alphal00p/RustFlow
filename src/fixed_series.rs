@@ -214,11 +214,37 @@ pub fn fixed_series(p: Precision, variable: Symbol, coefficients: &[C]) -> Resul
         p.zero(),
         Rational::from(coefficients.len() as i64),
     );
-    let mut result = prototype.zero();
-    for (index, coefficient) in coefficients.iter().enumerate() {
-        result = result + prototype.monomial(p.round(coefficient), Rational::from(index as i64));
+    // A linear fold repeatedly copies a growing dense native Series. Pairwise
+    // native addition preserves the same coefficient operations without that
+    // quadratic construction cost. Omit rounded zero monomials so a sparse
+    // high-power input does not repeatedly materialize its leading zeros.
+    let mut level = coefficients
+        .iter()
+        .enumerate()
+        .map(|(index, coefficient)| (index, p.round(coefficient)))
+        .filter(|(_, coefficient)| !coefficient.is_zero())
+        .map(|(index, coefficient)| prototype.monomial(coefficient, Rational::from(index as i64)))
+        .collect::<Vec<_>>();
+    while level.len() > 1 {
+        let mut next = Vec::with_capacity(level.len().div_ceil(2));
+        let mut terms = level.into_iter();
+        while let Some(left) = terms.next() {
+            next.push(if let Some(right) = terms.next() {
+                left + right
+            } else {
+                left
+            });
+        }
+        level = next;
     }
-    Ok(result)
+    // A shifted monomial knows more than the supplied finite prefix. Intersect
+    // with the original zero prototype to retain exactly its absolute order,
+    // also when every coefficient or all leading coefficients vanish.
+    Ok(if let Some(result) = level.pop() {
+        prototype.zero() + result
+    } else {
+        prototype.zero()
+    })
 }
 
 /// Read only known Taylor coefficients. A request crossing the series remainder
@@ -337,6 +363,72 @@ mod tests {
         let zero = fixed_series(p, x, &vec![p.zero(); 8]).unwrap();
         assert_eq!(zero.absolute_order(), Rational::from(8));
         assert_eq!(coefficients(&zero, 8).unwrap(), vec![p.zero(); 8]);
+    }
+
+    #[test]
+    fn balanced_native_construction_preserves_sparse_prefix_and_products() {
+        let variable = symbol!("balanced_series_contract::x");
+        let stored = Precision::decimal(120).unwrap();
+        for working_bits in [201, 333] {
+            let p = Precision { bits: working_bits };
+            for length in [1, 4, 7, 64, 96, 256, 512] {
+                for kind in 0..4 {
+                    let input = (0..length)
+                        .map(|index| {
+                            if kind == 2
+                                || (kind == 1 && index < length / 2)
+                                || (kind == 3 && index + 1 < length)
+                            {
+                                stored.zero()
+                            } else {
+                                C::new(
+                                    stored.rational(&Rational::from((index + 1, index + 3))).re,
+                                    stored.rational(&Rational::from((-index - 2, index + 5))).re,
+                                )
+                            }
+                        })
+                        .collect::<Vec<_>>();
+                    let prototype = Series::new(
+                        &FixedComplexRing::new(p),
+                        None,
+                        std::sync::Arc::new(variable.into()),
+                        p.zero(),
+                        Rational::from(length),
+                    );
+                    // Retain the preceding native linear construction as an
+                    // independent representation oracle, including its remainder.
+                    let reference =
+                        input
+                            .iter()
+                            .enumerate()
+                            .fold(prototype.zero(), |sum, (index, value)| {
+                                sum + prototype
+                                    .monomial(p.round(value), Rational::from(index as i64))
+                            });
+                    let result = fixed_series(p, variable, &input).unwrap();
+                    assert_eq!(result.absolute_order(), Rational::from(length));
+                    assert_eq!(result.absolute_order(), reference.absolute_order());
+                    assert_eq!(
+                        coefficients(&result, length as usize).unwrap(),
+                        coefficients(&reference, length as usize).unwrap(),
+                    );
+                    assert!(result.coefficient(Rational::from(length)).is_none());
+                    bits(p, &result);
+                    if length <= 96 {
+                        let actual_product = &result * &result;
+                        let reference_product = &reference * &reference;
+                        assert_eq!(
+                            actual_product.absolute_order(),
+                            reference_product.absolute_order()
+                        );
+                        assert_eq!(
+                            coefficients(&actual_product, length as usize).unwrap(),
+                            coefficients(&reference_product, length as usize).unwrap(),
+                        );
+                    }
+                }
+            }
+        }
     }
 
     #[test]

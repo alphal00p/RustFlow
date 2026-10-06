@@ -1,0 +1,614 @@
+{
+  "scope": "Native balanced finite Series construction only; fresh supplied-boundary physical gg\u2192hg transports, existing reference inputs and original source uncertainty. No automatic boundary-generation/amplitude timing or upstream performance parity claim.",
+  "compiler": "rustc 1.97.1 (8bab26f4f 2026-07-14), built from source tarball",
+  "base_commit": "7e01651d1c50010ab9b140829db8835c9f9f5c09",
+  "changed_numerical_source": {
+    "path": "src/fixed_series.rs",
+    "sha256": "2938f2adbc789e6d6fb4139001e643aa29dd99ff4565c16b23e5276bf5e392e7"
+  },
+  "native_port_source_digest": "42287297a86b8356096223fc74234cd87c98b14104022fb4227900cac03d43fd",
+  "native_dependency_source_digest": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+  "rustred_source_digest": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+  "symbolica": {
+    "remote": "https://github.com/symbolica-dev/symbolica",
+    "branch": "community",
+    "commit": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "local_changes_required": false
+  },
+  "fixture": {
+    "path": "fixtures/gg-hg/full-systems.json",
+    "sha256": "b643716de4212e8cc3ddcaf4fb5d13eb67f993ac3ae8563c291c16ae284cbb86"
+  },
+  "projection_fixture": {
+    "path": "fixtures/gg-hg/projections.json",
+    "sha256": "6547c9c29fa4861bccd7d61a15f0566a6bf1175d9be0eb4a82e22f8291b772aa"
+  },
+  "validation": {
+    "focused_unit_tests": 3,
+    "integration": {
+      "targets": [
+        {
+          "binary": "tests/algebraic.rs (target/release/deps/algebraic-a6ab50e88d56ea71)",
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/algebraic_cache.rs (target/release/deps/algebraic_cache-c4453cf62fc6de21)",
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/algebraic_endpoints.rs (target/release/deps/algebraic_endpoints-1fddc4aa165dca18)",
+          "passed": 11,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/canonical_algebraic.rs (target/release/deps/canonical_algebraic-ddc51ac693eb50ad)",
+          "passed": 9,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/complex_ode.rs (target/release/deps/complex_ode-b8c7b790d55895fb)",
+          "passed": 2,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/conditioning.rs (target/release/deps/conditioning-31388e38f668b02c)",
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/diffexp.rs (target/release/deps/diffexp-eb10693d1c394ff3)",
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/epsilon_algebraic.rs (target/release/deps/epsilon_algebraic-c372004b3a0ac8ff)",
+          "passed": 7,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/gg_hg.rs (target/release/deps/gg_hg-8565606d224bec00)",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 1
+        },
+        {
+          "binary": "tests/gg_hg_amplitude.rs (target/release/deps/gg_hg_amplitude-6c436905d7c86868)",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/mobius.rs (target/release/deps/mobius-be6eb5e00cf79c76)",
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/mobius_cache.rs (target/release/deps/mobius_cache-bfdad7e0ed168332)",
+          "passed": 1,
+          "failed": 0,
+          "ignored": 0
+        },
+        {
+          "binary": "tests/pade.rs (target/release/deps/pade-91bf586b1af5f0fd)",
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0
+        }
+      ],
+      "passed": 76,
+      "failed": 0,
+      "ignored": 1
+    },
+    "explicit_full_gg_hg_test": {
+      "passed": 1,
+      "reference_coefficients": 4360,
+      "precanonical_projection_rows": 4376,
+      "form_factor_relative_digits": {
+        "W F1": 20,
+        "W F2": 19,
+        "W F3": 20,
+        "W F4": 19,
+        "Z F1": 20,
+        "Z F2": 19,
+        "Z F3": 19,
+        "Z F4": 19
+      },
+      "configurations": 16,
+      "independent_precision_order_profiles": true,
+      "existing_coherent_projections_checked": true,
+      "uniform_20_significant_digit_observable_claim": false
+    },
+    "native_all_target_strict_clippy": true,
+    "python_stubgen_all_target_strict_clippy": true,
+    "format_and_diff_checks": true
+  },
+  "batched_comparison": [
+    {
+      "label": "W-Planar_EW1-2",
+      "all_non_timing_outputs_equal": true,
+      "timings": {
+        "exact_hit": {
+          "old_median_seconds": 0.002138966,
+          "new_median_seconds": 0.002152335,
+          "speed_ratio": 0.9937886063275466
+        },
+        "fixed_integration": {
+          "old_median_seconds": 1.238484946,
+          "new_median_seconds": 1.027583629,
+          "speed_ratio": 1.2052400515617792
+        },
+        "independent_direct_second_validation": {
+          "old_median_seconds": 1.231816329,
+          "new_median_seconds": 1.029712805,
+          "speed_ratio": 1.1962717400605696
+        },
+        "load": {
+          "old_median_seconds": 0.119814286,
+          "new_median_seconds": 0.11774188,
+          "speed_ratio": 1.017601264732651
+        },
+        "nearby_reuse": {
+          "old_median_seconds": 6.055811802,
+          "new_median_seconds": 5.41753749,
+          "speed_ratio": 1.1178163165789186
+        },
+        "public_checked_cold": {
+          "old_median_seconds": 6.038265518,
+          "new_median_seconds": 5.453818393,
+          "speed_ratio": 1.1071629238241854
+        },
+        "save": {
+          "old_median_seconds": 0.028971083,
+          "new_median_seconds": 0.028986123,
+          "speed_ratio": 0.9994811310225932
+        },
+        "source_cache_insert": {
+          "old_median_seconds": 0.001050953,
+          "new_median_seconds": 0.001036713,
+          "speed_ratio": 1.0137357204935213
+        },
+        "standalone_endpoint_cache_insert": {
+          "old_median_seconds": 0.000843232,
+          "new_median_seconds": 0.000834442,
+          "speed_ratio": 1.0105339855855768
+        }
+      }
+    },
+    {
+      "label": "W-NP_EW1-2",
+      "all_non_timing_outputs_equal": true,
+      "timings": {
+        "exact_hit": {
+          "old_median_seconds": 0.018411277,
+          "new_median_seconds": 0.018320236,
+          "speed_ratio": 1.0049694228829804
+        },
+        "fixed_integration": {
+          "old_median_seconds": 2.874302895,
+          "new_median_seconds": 2.6632311189999998,
+          "speed_ratio": 1.079254021363063
+        },
+        "independent_direct_second_validation": {
+          "old_median_seconds": 2.919728911,
+          "new_median_seconds": 2.665552005,
+          "speed_ratio": 1.0953561984621643
+        },
+        "load": {
+          "old_median_seconds": 0.548376818,
+          "new_median_seconds": 0.56917169,
+          "speed_ratio": 0.9634646761858447
+        },
+        "nearby_reuse": {
+          "old_median_seconds": 16.028450699,
+          "new_median_seconds": 15.244942732,
+          "speed_ratio": 1.0513946153012024
+        },
+        "public_checked_cold": {
+          "old_median_seconds": 16.092922972,
+          "new_median_seconds": 16.118091307,
+          "speed_ratio": 0.9984385040064223
+        },
+        "save": {
+          "old_median_seconds": 0.101036207,
+          "new_median_seconds": 0.104783887,
+          "speed_ratio": 0.9642341956640719
+        },
+        "source_cache_insert": {
+          "old_median_seconds": 0.003294939,
+          "new_median_seconds": 0.003291898,
+          "speed_ratio": 1.0009237831791873
+        },
+        "standalone_endpoint_cache_insert": {
+          "old_median_seconds": 0.003127508,
+          "new_median_seconds": 0.003103398,
+          "speed_ratio": 1.0077689036340167
+        }
+      }
+    }
+  ],
+  "alternating_comparison": {
+    "scope": "Three alternating baseline/balanced frozen binary pairs on CPU35; shared cluster host, other workloads present; not statistical proof or upstream parity. Each binary evaluates both systems and retains all source/refinement/uncertainty checks.",
+    "cases": [
+      {
+        "label": "W-Planar_EW1-2",
+        "all_non_timing_outputs_equal": true,
+        "median_timings": {
+          "exact_hit": {
+            "baseline_seconds": 0.002139555,
+            "balanced_seconds": 0.002159385,
+            "paired_speed_ratios": [
+              0.992318321358861,
+              0.9911059960912827,
+              0.9908168297918156
+            ],
+            "median_speed_ratio": 0.9908168297918156
+          },
+          "fixed_integration": {
+            "baseline_seconds": 1.24741045,
+            "balanced_seconds": 1.032462782,
+            "paired_speed_ratios": [
+              1.1946467780781596,
+              1.1755437427477167,
+              1.2201112704769617
+            ],
+            "median_speed_ratio": 1.2081892652669004
+          },
+          "independent_direct_second_validation": {
+            "baseline_seconds": 1.2543790879999999,
+            "balanced_seconds": 1.03974978,
+            "paired_speed_ratios": [
+              1.1851666116793014,
+              1.1874135381507553,
+              1.2064239994357102
+            ],
+            "median_speed_ratio": 1.2064239994357102
+          },
+          "load": {
+            "baseline_seconds": 0.125867392,
+            "balanced_seconds": 0.122453242,
+            "paired_speed_ratios": [
+              1.0467388912032,
+              0.9843716910929174,
+              1.0278812544628257
+            ],
+            "median_speed_ratio": 1.0278812544628257
+          },
+          "nearby_reuse": {
+            "baseline_seconds": 6.209086498,
+            "balanced_seconds": 5.424595238,
+            "paired_speed_ratios": [
+              1.1189633535675287,
+              1.1158434939025716,
+              1.1446174738540003
+            ],
+            "median_speed_ratio": 1.1446174738540003
+          },
+          "public_checked_cold": {
+            "baseline_seconds": 6.159560272,
+            "balanced_seconds": 5.46408615,
+            "paired_speed_ratios": [
+              1.1174573803431027,
+              1.113461402873379,
+              1.1401637159340732
+            ],
+            "median_speed_ratio": 1.1272809584087542
+          },
+          "save": {
+            "baseline_seconds": 0.031831722,
+            "balanced_seconds": 0.030307158,
+            "paired_speed_ratios": [
+              1.0246383380061352,
+              1.1164873197046663,
+              1.0477732686119892
+            ],
+            "median_speed_ratio": 1.0503037599236458
+          },
+          "source_cache_insert": {
+            "baseline_seconds": 0.001072982,
+            "balanced_seconds": 0.001057342,
+            "paired_speed_ratios": [
+              1.276346872863707,
+              1.0002867567146474,
+              1.0147918081377645
+            ],
+            "median_speed_ratio": 1.0147918081377645
+          },
+          "standalone_endpoint_cache_insert": {
+            "baseline_seconds": 0.000851523,
+            "balanced_seconds": 0.000832912,
+            "paired_speed_ratios": [
+              1.0118686676678008,
+              1.0067834297020575,
+              1.0326723115469414
+            ],
+            "median_speed_ratio": 1.0223444973778741
+          }
+        },
+        "samples": [
+          {
+            "baseline": {
+              "exact_hit": 0.002144386,
+              "fixed_integration": 1.267227561,
+              "independent_direct_second_validation": 1.262693629,
+              "load": 0.128879928,
+              "nearby_reuse": 6.247216235,
+              "public_checked_cold": 6.222171032,
+              "save": 0.031831722,
+              "source_cache_insert": 0.001368554,
+              "standalone_endpoint_cache_insert": 0.000851702
+            },
+            "balanced": {
+              "exact_hit": 0.002160986,
+              "fixed_integration": 1.060755015,
+              "independent_direct_second_validation": 1.065414446,
+              "load": 0.123125193,
+              "nearby_reuse": 5.583039172,
+              "public_checked_cold": 5.568150644,
+              "save": 0.0310663,
+              "source_cache_insert": 0.001072243,
+              "standalone_endpoint_cache_insert": 0.000841712
+            }
+          },
+          {
+            "baseline": {
+              "exact_hit": 0.002133986,
+              "fixed_integration": 1.213705163,
+              "independent_direct_second_validation": 1.226920538,
+              "load": 0.120200506,
+              "nearby_reuse": 6.046296783,
+              "public_checked_cold": 6.08404903,
+              "save": 0.033714006,
+              "source_cache_insert": 0.001046483,
+              "standalone_endpoint_cache_insert": 0.000838562
+            },
+            "balanced": {
+              "exact_hit": 0.002153136,
+              "fixed_integration": 1.032462782,
+              "independent_direct_second_validation": 1.033271475,
+              "load": 0.122108861,
+              "nearby_reuse": 5.418588553,
+              "public_checked_cold": 5.46408615,
+              "save": 0.030196497,
+              "source_cache_insert": 0.001046183,
+              "standalone_endpoint_cache_insert": 0.000832912
+            }
+          },
+          {
+            "baseline": {
+              "exact_hit": 0.002139555,
+              "fixed_integration": 1.24741045,
+              "independent_direct_second_validation": 1.2543790879999999,
+              "load": 0.125867392,
+              "nearby_reuse": 6.209086498,
+              "public_checked_cold": 6.159560272,
+              "save": 0.03175503,
+              "source_cache_insert": 0.001072982,
+              "standalone_endpoint_cache_insert": 0.000851523
+            },
+            "balanced": {
+              "exact_hit": 0.002159385,
+              "fixed_integration": 1.022374336,
+              "independent_direct_second_validation": 1.03974978,
+              "load": 0.122453242,
+              "nearby_reuse": 5.424595238,
+              "public_checked_cold": 5.4023472120000005,
+              "save": 0.030307158,
+              "source_cache_insert": 0.001057342,
+              "standalone_endpoint_cache_insert": 0.000824582
+            }
+          }
+        ]
+      },
+      {
+        "label": "W-NP_EW1-2",
+        "all_non_timing_outputs_equal": true,
+        "median_timings": {
+          "exact_hit": {
+            "baseline_seconds": 0.018158476,
+            "balanced_seconds": 0.018161997,
+            "paired_speed_ratios": [
+              0.9961041160984373,
+              1.0017558641816755,
+              0.9920572184470482
+            ],
+            "median_speed_ratio": 0.9998061336536946
+          },
+          "fixed_integration": {
+            "baseline_seconds": 2.902064328,
+            "balanced_seconds": 2.501966318,
+            "paired_speed_ratios": [
+              1.134013314519984,
+              1.1599134277394376,
+              1.1498384904984054
+            ],
+            "median_speed_ratio": 1.1599134277394376
+          },
+          "independent_direct_second_validation": {
+            "baseline_seconds": 2.938974182,
+            "balanced_seconds": 2.5169472859999997,
+            "paired_speed_ratios": [
+              1.1690223023686486,
+              1.1891242882390667,
+              1.1413026997136553
+            ],
+            "median_speed_ratio": 1.1676741099614751
+          },
+          "load": {
+            "baseline_seconds": 0.550682184,
+            "balanced_seconds": 0.54893446,
+            "paired_speed_ratios": [
+              1.0333507501059416,
+              1.009179749803363,
+              1.0004779903816436
+            ],
+            "median_speed_ratio": 1.003183848213865
+          },
+          "nearby_reuse": {
+            "baseline_seconds": 16.21272219,
+            "balanced_seconds": 14.816550191,
+            "paired_speed_ratios": [
+              1.1155689886323483,
+              1.0942305719618914,
+              1.0758578328805384
+            ],
+            "median_speed_ratio": 1.0942305719618914
+          },
+          "public_checked_cold": {
+            "baseline_seconds": 15.962902623,
+            "balanced_seconds": 14.770153113,
+            "paired_speed_ratios": [
+              1.097162436215302,
+              1.083135622251776,
+              1.0779192134431599
+            ],
+            "median_speed_ratio": 1.080754038287538
+          },
+          "save": {
+            "baseline_seconds": 0.10997587,
+            "balanced_seconds": 0.108152865,
+            "paired_speed_ratios": [
+              1.0246479849596875,
+              1.0125207408976173,
+              1.0204578490681708
+            ],
+            "median_speed_ratio": 1.0168558179203113
+          },
+          "source_cache_insert": {
+            "baseline_seconds": 0.003252059,
+            "balanced_seconds": 0.003260198,
+            "paired_speed_ratios": [
+              1.0409959915469762,
+              0.9971212173243295,
+              0.990592595909819
+            ],
+            "median_speed_ratio": 0.9975035258594722
+          },
+          "standalone_endpoint_cache_insert": {
+            "baseline_seconds": 0.003144299,
+            "balanced_seconds": 0.003081978,
+            "paired_speed_ratios": [
+              1.0124632818987807,
+              1.0203104901567572,
+              1.0035529130967191
+            ],
+            "median_speed_ratio": 1.0202211047580483
+          }
+        },
+        "samples": [
+          {
+            "baseline": {
+              "exact_hit": 0.018158476,
+              "fixed_integration": 2.905218256,
+              "independent_direct_second_validation": 2.938974182,
+              "load": 0.567241836,
+              "nearby_reuse": 16.541981729,
+              "public_checked_cold": 16.623399416,
+              "save": 0.113592949,
+              "source_cache_insert": 0.003370389,
+              "standalone_endpoint_cache_insert": 0.003177209
+            },
+            "balanced": {
+              "exact_hit": 0.018229496,
+              "fixed_integration": 2.561890781,
+              "independent_direct_second_validation": 2.514044579,
+              "load": 0.54893446,
+              "nearby_reuse": 14.828291121,
+              "public_checked_cold": 15.151265544,
+              "save": 0.110860462,
+              "source_cache_insert": 0.003237658,
+              "standalone_endpoint_cache_insert": 0.003138098
+            }
+          },
+          {
+            "baseline": {
+              "exact_hit": 0.018193887,
+              "fixed_integration": 2.902064328,
+              "independent_direct_second_validation": 2.99296315,
+              "load": 0.550682184,
+              "nearby_reuse": 16.21272219,
+              "public_checked_cold": 15.962902623,
+              "save": 0.109507019,
+              "source_cache_insert": 0.003252059,
+              "standalone_endpoint_cache_insert": 0.003144299
+            },
+            "balanced": {
+              "exact_hit": 0.018161997,
+              "fixed_integration": 2.501966318,
+              "independent_direct_second_validation": 2.5169472859999997,
+              "load": 0.545673042,
+              "nearby_reuse": 14.816550191,
+              "public_checked_cold": 14.7376767,
+              "save": 0.108152865,
+              "source_cache_insert": 0.003261448,
+              "standalone_endpoint_cache_insert": 0.003081708
+            }
+          },
+          {
+            "baseline": {
+              "exact_hit": 0.018001906,
+              "fixed_integration": 2.861870406,
+              "independent_direct_second_validation": 2.881100455,
+              "load": 0.549857442,
+              "nearby_reuse": 15.899208771,
+              "public_checked_cold": 15.921031826,
+              "save": 0.10997587,
+              "source_cache_insert": 0.003229528,
+              "standalone_endpoint_cache_insert": 0.003092928
+            },
+            "balanced": {
+              "exact_hit": 0.018146036,
+              "fixed_integration": 2.488932515,
+              "independent_direct_second_validation": 2.524396425,
+              "load": 0.549594741,
+              "nearby_reuse": 14.778168904,
+              "public_checked_cold": 14.770153113,
+              "save": 0.107771105,
+              "source_cache_insert": 0.003260198,
+              "standalone_endpoint_cache_insert": 0.003081978
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "timing_limitations": [
+    "Shared cluster host, not exclusive CPUs or controlled thermal/load state.",
+    "Processes pinned CPU35; concurrent compiler/tests on other pinned CPUs.",
+    "Retain raw variation and initial marginal nonplanar checked regression; alternating measurements are characterization, not statistical proof.",
+    "Builder-only speed ratios do not imply complete-transport speed ratios.",
+    "Instrumented phases overlap; do not sum enclosing and child timers.",
+    "Perf symbols report28408samples with12lost samples; diagnostic only."
+  ],
+  "numerical_evidence": {
+    "requested_decimal_digits": 20,
+    "supplied_input_accuracy_cap": 24,
+    "observed_verified_digits": {
+      "first_destination": 21,
+      "nearby_destination": 20
+    },
+    "selected_profile": {
+      "working_bits": 282,
+      "series_order": 96,
+      "accepted_steps": 1,
+      "rejected_steps": 0
+    },
+    "all_non_timing_outputs_equal_between_baseline_and_candidate": true
+  },
+  "next_step": "Separately benchmark immutable exact registered-root preparation shared across precision profiles, while numerical compile(p) remains fresh.",
+  "evidence_archive": {
+    "path": "evidence.tar.gz",
+    "bytes": 2413059,
+    "sha256": "c049f2b160c6d488dad56204f9f24469ed68d821adaa59adecec7b99a6a31a2e"
+  }
+}
