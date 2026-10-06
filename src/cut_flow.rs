@@ -133,6 +133,13 @@ impl<'a> PreparedCutFlow<'a> {
         self.flow.as_ref().map(|flow| &flow.system)
     }
 
+    /// Conditions of the prepared cut-aware reduction, checked at every sample.
+    pub fn nonzero_conditions(&self) -> &[Atom] {
+        self.flow
+            .as_ref()
+            .map_or(&[], |flow| flow.reduced.nonzero_conditions.as_slice())
+    }
+
     pub fn evaluate(
         &self,
         epsilon: &Rational,

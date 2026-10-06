@@ -183,6 +183,27 @@ struct ScalarProduct {
 
 #[derive(Deserialize)]
 #[serde(deny_unknown_fields)]
+struct CutSelection {
+    index: usize,
+    future_channel: Vec<String>,
+    loop_prescriptions: Vec<String>,
+    /// Present for finite samples; omitted for independently refined Laurent fitting.
+    #[serde(default)]
+    epsilon_samples: Option<Vec<String>>,
+}
+
+fn exact_rational(value: &str, namespace: &str) -> CliResult<Rational> {
+    if let AtomView::Num(n) = parse(value, namespace)?.as_view()
+        && let symbolica::coefficient::Coefficient::Complex(c) = n.get_coeff_view().to_owned()
+        && c.im.is_zero()
+    {
+        return Ok(c.re);
+    }
+    Err(format!("expected an exact real rational, got {value:?}").into())
+}
+
+#[derive(Deserialize)]
+#[serde(deny_unknown_fields)]
 struct GraphRequest {
     schema_version: u32,
     model: PathBuf,
@@ -199,6 +220,8 @@ struct GraphRequest {
     substitutions: BTreeMap<String, String>,
     #[serde(default)]
     edge_powers: BTreeMap<usize, i16>,
+    #[serde(default)]
+    cut: Option<CutSelection>,
     #[serde(default)]
     last_epsilon_power: i32,
     #[serde(default = "partial_fraction_limit")]
@@ -243,28 +266,85 @@ fn graph(request: GraphRequest, directory: &Path) -> CliResult<Value> {
             .map(|(edge, power)| (EdgeId(*edge), *power))
             .collect(),
     )?;
-    let groups = input.integral_groups(
-        &point,
-        symbol(&request.epsilon, ns)?,
-        options.dimension,
-        request.max_partial_fraction_states,
-        &context,
-    )?;
-    let result = solve_integral_combinations(
-        &groups,
-        &KinematicPoint::default(),
-        request.last_epsilon_power,
-        &options,
-        &RustRedBackend::default(),
-        &context,
-    )?;
-    Ok(json!({
-        "schema_version":1,"operation":"graph","verified_digits":result.verified_digits,
+    let backend = RustRedBackend::default();
+    let (result, operation, conditions) = if let Some(cut) = request.cut {
+        let channel = cuts::FutureTimelikeChannel {
+            external: cut
+                .future_channel
+                .iter()
+                .map(|value| exact_rational(value, ns))
+                .collect::<CliResult<_>>()?,
+        };
+        let prescriptions = cut
+            .loop_prescriptions
+            .iter()
+            .map(|value| value.parse())
+            .collect::<Result<Vec<cuts::LoopPrescription>>>()?;
+        let prepared = input.prepare_cut_projection(
+            cut.index,
+            &point,
+            symbol(&request.epsilon, ns)?,
+            &channel,
+            prescriptions,
+            &backend,
+            &options,
+            &context,
+        )?;
+        let conditions = prepared
+            .nonzero_conditions()
+            .iter()
+            .map(Atom::to_canonical_string)
+            .collect::<Vec<_>>();
+        if let Some(samples) = cut.epsilon_samples {
+            let samples = samples
+                .iter()
+                .map(|value| exact_rational(value, ns))
+                .collect::<CliResult<Vec<_>>>()?;
+            let values = prepared.evaluate_samples(&samples, &options, &context)?;
+            return Ok(json!({
+                "schema_version": 1, "operation": "cut_graph_samples", "cut_index": cut.index,
+                "epsilon_samples": samples.iter().map(ToString::to_string).collect::<Vec<_>>(),
+                "values": values.iter().map(|row| complex_json(&row[0])).collect::<Vec<_>>(),
+                "working_bits": Precision::decimal(options.digits + options.guard_digits)?.bits,
+                "verified_digits": Value::Null, "nonzero_conditions": conditions,
+            }));
+        }
+        (
+            prepared
+                .solve(request.last_epsilon_power, &options, &context)?
+                .remove(0),
+            "cut_graph",
+            Some(conditions),
+        )
+    } else {
+        let groups = input.integral_groups(
+            &point,
+            symbol(&request.epsilon, ns)?,
+            options.dimension,
+            request.max_partial_fraction_states,
+            &context,
+        )?;
+        let result = solve_integral_combinations(
+            &groups,
+            &KinematicPoint::default(),
+            request.last_epsilon_power,
+            &options,
+            &RustRedBackend::default(),
+            &context,
+        )?;
+        (result, "graph", None)
+    };
+    let mut output = json!({
+        "schema_version":1,"operation":operation,"verified_digits":result.verified_digits,
         "working_bits":result.working_bits,"samples":result.samples,
         "validation_samples":result.validation_samples,"refinements":result.refinements,
         "coefficients":result.coefficients.iter().map(|(k,v)| (k.to_string(),complex_json(v))).collect::<BTreeMap<_,_>>(),
         "comparison_errors":result.comparison_errors.iter().map(|(k,v)| (k.to_string(),v.as_raw().to_string())).collect::<BTreeMap<_,_>>()
-    }))
+    });
+    if let Some(conditions) = conditions {
+        output["nonzero_conditions"] = json!(conditions);
+    }
+    Ok(output)
 }
 
 #[derive(Deserialize)]

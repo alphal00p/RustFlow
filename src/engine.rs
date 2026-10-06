@@ -799,39 +799,8 @@ pub(crate) fn solve_integral_projections_with_preparer(
                 if coefficient.is_zero() {
                     continue;
                 }
-                let mut symbols = Default::default();
-                crate::family::scalar_symbols(coefficient.as_view(), &mut symbols)?;
-                if !symbols.is_subset(&allowed) {
-                    return Err(Error::InvalidInput(
-                        "projection coefficient has unsubstituted variables or unregistered roots"
-                            .into(),
-                    ));
-                }
-                let encoded = crate::family::encode_complex(&coefficient);
-                let _: RationalPolynomial<IntegerRing, u16> = encoded
-                    .try_to_rational_polynomial(&Q, &Z, None)
-                    .map_err(|e| {
-                        Error::Unsupported(format!(
-                            "combination weights must be exact rational functions: {e}"
-                        ))
-                    })?;
-                let expansion = encoded
-                    .series(family.epsilon, 0, 1)
-                    .map_err(|e| Error::Unsupported(e.to_string()))?;
-                let valuation = if expansion.is_zero() {
-                    0
-                } else {
-                    expansion
-                        .get_trailing_exponent()
-                        .to_string()
-                        .parse::<i32>()
-                        .map_err(|_| {
-                            Error::Unsupported(
-                                "noninteger epsilon valuation in combination weight".into(),
-                            )
-                        })?
-                        .min(0)
-                };
+                let valuation =
+                    projection_weight_valuation(&coefficient, family.epsilon, &allowed)?;
                 leading = leading.min(
                     bound
                         .checked_add(valuation)
@@ -960,6 +929,46 @@ pub(crate) fn solve_integral_projections_with_preparer(
                 .install(|| samples.par_iter().enumerate().map(evaluate).collect())
         }
     })
+}
+
+/// Admit an exact specialized projection weight and retain its epsilon pole.
+/// Shared by ordinary and cut projections before finite-sample multiplication.
+pub(crate) fn projection_weight_valuation(
+    coefficient: &Atom,
+    epsilon: Symbol,
+    allowed: &std::collections::BTreeSet<Atom>,
+) -> Result<i32> {
+    let mut symbols = Default::default();
+    crate::family::scalar_symbols(coefficient.as_view(), &mut symbols)?;
+    if !symbols.is_subset(allowed) {
+        return Err(Error::InvalidInput(
+            "projection coefficient has unsubstituted variables or unregistered roots".into(),
+        ));
+    }
+    let encoded = crate::family::encode_complex(coefficient);
+    let _: RationalPolynomial<IntegerRing, u16> = encoded
+        .try_to_rational_polynomial(&Q, &Z, None)
+        .map_err(|e| {
+            Error::Unsupported(format!(
+                "combination weights must be exact rational functions: {e}"
+            ))
+        })?;
+    let expansion = encoded
+        .series(epsilon, 0, 1)
+        .map_err(|e| Error::Unsupported(e.to_string()))?;
+    let valuation = if expansion.is_zero() {
+        0
+    } else {
+        expansion
+            .get_trailing_exponent()
+            .to_string()
+            .parse::<i32>()
+            .map_err(|_| {
+                Error::Unsupported("noninteger epsilon valuation in combination weight".into())
+            })?
+            .min(0)
+    };
+    Ok(valuation)
 }
 
 fn fit_samples_refined(

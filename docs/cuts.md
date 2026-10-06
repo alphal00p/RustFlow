@@ -140,20 +140,67 @@ let (family, weights) = graph.cut_integral_group(
     vec![LoopPrescription::Insensitive],
     &context,
 )?;
-let targets = weights.keys().cloned().collect::<Vec<_>>();
-let prepared = PreparedTwoBodyPhaseSpace::new(
+let prepared = PreparedCutProjections::new(
     &family,
     &FutureTimelikeChannel { external: vec![Rational::from(1)] },
-    &targets,
+    &[weights],
     &KinematicPoint::default(), // the graph adapter already specialized the point
     &backend,
     &options,
     &context,
 )?;
 let samples = prepared.evaluate_samples(&epsilon_samples, &options, &context)?;
+let result = prepared.solve(0, &options, &context)?;
 ```
 
-The returned `weights` include the contracted numerator, projector and native overall factors exactly once. Apply them to each target's value at the corresponding exact epsilon before fitting a weighted answer. An empty weight map is an exact zero; it does not require a numerical terminal. `PreparedTwoBodyPhaseSpace::solve` performs independent-grid and increased-precision/order Laurent validation for its individual integral targets.
+`GraphIntegral::prepare_cut_projection` combines the conversion and preparation
+above for a diagram's complete weighted numerator. `PreparedCutProjections`
+inspects the exact cut inventory and dispatches to the two-body terminal,
+massless N-body terminal, or mixed cut flow. It does not suppress an admission
+error by retrying a different measure. Multiple projection rows share the
+underlying target values. Exact epsilon-dependent numerator weights multiply the
+finite-epsilon values before the shared independent-grid/precision Laurent fit;
+the inherited pole allowance is extended by any poles in those weights.
+
+The returned `weights` include the contracted numerator, projector and native
+overall factors exactly once. Point substitutions also occur exactly once.
+Empty weight rows yield exact zero but still undergo complete family, cut and
+physical-domain admission. Reduction conditions stay with the prepared owner and
+are checked at every sample; `nonzero_conditions()` exposes the preparation
+conditions. The RustRed backend supports this measure explicitly. A supplied
+backend must implement `reduce_cut`; an ordinary `ReductionTables` scope alone
+cannot be used to authorize cut reductions.
+
+The Python evaluator accepts the existing native diagram and kinematics objects:
+
+```python
+from symbolica.community.hep.integration import IntegralEvaluator, ComputationControl
+
+control = ComputationControl()
+selection = dict(
+    cut_index=0,
+    future_channel=[one],            # exact native Symbolica expressions
+    loop_prescriptions=["insensitive"],
+)
+evaluator = IntegralEvaluator()
+result = evaluator.evaluate_cut_diagram(
+    diagram, kinematics, exact_point, epsilon, last=0, control=control, **selection
+)
+values = evaluator.evaluate_cut_diagram_samples(
+    diagram, kinematics, exact_point, epsilon, [one / 13, one / 17],
+    control=control, **selection
+)
+```
+
+`future_channel` lists exact rational coefficients in the native independent
+external basis. `loop_prescriptions` follows the native loop basis and accepts
+`"+i0"`, `"-i0"`, or `"insensitive"`; numerical support is still restricted to
+the classes described above. Optional `edge_powers={native_edge_id: power}`
+retains raised-cut and signed-numerator conventions. Computation releases the
+GIL, so another thread can poll progress or cancel through the same control.
+Finite samples retain native arbitrary precision but do not claim verified
+accuracy. Fitted results carry independent-fit evidence. These methods do not
+create another model registry or a numerical cache format.
 
 The adapter selects exactly one cut by index. Native `DiagramCut::cut` contains the left half-edge of each crossing. A source half-edge gives the native routed momentum; a target half-edge gives its negative. HEPKit's `LoopMomentumBasis` supplies the routing, including the original external-coordinate labels and dependent-momentum elimination. `CutFamily::new` checks that every resulting oriented momentum squared agrees with its retained normalized denominator.
 
@@ -176,3 +223,11 @@ Ordinary `GraphIntegral::integral_groups` continues to reject cut metadata. Nati
 The focused tests cover native cut IBPs, missing cuts, cache restart and measure identity; the unequal-mass volume and raised cuts at `s=25, m1²=1, m2²=4`; the finite value `sqrt(6)/(25*pi)` and mass-derivative factors `-7/96` and `-11/192`; independent uncut discontinuities at epsilon `1/13` and `1/17`; threshold orientation, routing Jacobians and precision refinement. Native graph tests cover the future-channel sum, numerator cancellation, reversed partitions, edge reversal and the massless volume.
 
 Both reduction adapters follow RustRed’s compiled runtime registry, defaulting to 1–16 scalar-product slots. RustFlow delegates to the upstream dispatcher and preserves local development in that checkout. Finite search and representation limits remain. General cut boundary recursion, cut-preserving partial fractions, mixed-sheet physical normalization, nonzero widths, algebraic/complex phase-space masses, and singular threshold endpoint evaluation remain outside this numerical terminal. Algebraic `Distribution` cuts can be reduced, but do not automatically define a positive-energy phase-space volume.
+
+The native evaluation interfaces and their independent ownership review are
+recorded in [`reports/validation/2026-10-06-native-cut-interfaces`](../reports/validation/2026-10-06-native-cut-interfaces).
+The frozen gate covers exact real/complex weights, raised cuts, native connected
+two-loop boundary generation, CLI DOT round trips, typed Python failures,
+threaded progress/cancellation and generated stubs, alongside ordinary projection
+regressions. The publication wheel and numerical boundary banks were not changed
+by this interface milestone.

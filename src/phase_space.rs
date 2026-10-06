@@ -693,6 +693,10 @@ impl PreparedTwoBodyPhaseSpace {
     pub fn family(&self) -> &CutFamily {
         &self.terminal.family
     }
+    /// Exact nonzero conditions retained from the cut reduction.
+    pub fn nonzero_conditions(&self) -> &[Atom] {
+        &self.terminal.nonzero_conditions
+    }
     pub fn evaluate(
         &self,
         epsilon: &Rational,
@@ -751,6 +755,10 @@ impl PreparedMasslessPhaseSpace {
     }
     pub fn family(&self) -> &CutFamily {
         &self.terminal.family
+    }
+    /// Exact nonzero conditions retained from the cut reduction.
+    pub fn nonzero_conditions(&self) -> &[Atom] {
+        &self.terminal.nonzero_conditions
     }
     /// Conservative generic loop pole bound, supplemented by exact poles of
     /// reduction weights. This is not inferred from a unit-volume finite value.

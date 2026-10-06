@@ -344,6 +344,99 @@ impl PyIntegralEvaluator {
             .map_err(error)?;
         Ok(PyLaurentExpansion::from(inner))
     }
+    /// Integrate one native positive-energy cut, including the contracted numerator.
+    /// Channel coefficients refer to the native independent external basis. Loop
+    /// prescriptions are +i0, -i0 or insensitive in native loop-basis order.
+    /// Raised cut powers use derivative-delta normalization; no flux or symmetry
+    /// factor is added beyond the diagram's own exact overall factor.
+    #[pyo3(signature=(diagram, kinematics, point, epsilon, *, cut_index, future_channel, loop_prescriptions, edge_powers=None, last=0, control=None))]
+    #[allow(clippy::too_many_arguments)]
+    fn evaluate_cut_diagram(
+        &self,
+        py: Python<'_>,
+        diagram: &PyFeynmanDiagram,
+        kinematics: &PyKinematics,
+        point: Expressions,
+        epsilon: PythonExpression,
+        cut_index: usize,
+        future_channel: Vec<PythonExpression>,
+        loop_prescriptions: Vec<String>,
+        edge_powers: Option<BTreeMap<usize, i16>>,
+        last: i32,
+        control: Option<&PyComputationControl>,
+    ) -> PyResult<PyLaurentExpansion> {
+        let graph = cut_graph(py, diagram, kinematics, edge_powers)?;
+        let point = super::point(point);
+        let epsilon = symbol(&epsilon)?;
+        let channel = cut_channel(&future_channel)?;
+        let prescriptions = cut_prescriptions(loop_prescriptions)?;
+        let context = context(control);
+        py.detach(|| {
+            let prepared = graph.prepare_cut_projection(
+                cut_index,
+                &point,
+                epsilon,
+                &channel,
+                prescriptions,
+                self.backend.as_ref(),
+                &self.options,
+                &context,
+            )?;
+            prepared
+                .solve(last, &self.options, &context)
+                .map(|mut rows| rows.remove(0))
+        })
+        .map(PyLaurentExpansion::from)
+        .map_err(error)
+    }
+
+    /// Shared finite-epsilon cut evaluation. Exact numerator weights and cut IBP
+    /// coefficients are applied at each nonzero sample before any truncation.
+    /// Values have working precision; this method does not assert fitted accuracy.
+    #[pyo3(signature=(diagram, kinematics, point, epsilon, samples, *, cut_index, future_channel, loop_prescriptions, edge_powers=None, control=None))]
+    #[allow(clippy::too_many_arguments)]
+    fn evaluate_cut_diagram_samples(
+        &self,
+        py: Python<'_>,
+        diagram: &PyFeynmanDiagram,
+        kinematics: &PyKinematics,
+        point: Expressions,
+        epsilon: PythonExpression,
+        samples: Vec<PythonExpression>,
+        cut_index: usize,
+        future_channel: Vec<PythonExpression>,
+        loop_prescriptions: Vec<String>,
+        edge_powers: Option<BTreeMap<usize, i16>>,
+        control: Option<&PyComputationControl>,
+    ) -> PyResult<Vec<PythonMultiPrecisionComplex>> {
+        let graph = cut_graph(py, diagram, kinematics, edge_powers)?;
+        let point = super::point(point);
+        let epsilon = symbol(&epsilon)?;
+        let channel = cut_channel(&future_channel)?;
+        let prescriptions = cut_prescriptions(loop_prescriptions)?;
+        let samples = samples.iter().map(rational).collect::<PyResult<Vec<_>>>()?;
+        let context = context(control);
+        py.detach(|| {
+            let prepared = graph.prepare_cut_projection(
+                cut_index,
+                &point,
+                epsilon,
+                &channel,
+                prescriptions,
+                self.backend.as_ref(),
+                &self.options,
+                &context,
+            )?;
+            prepared.evaluate_samples(&samples, &self.options, &context)
+        })
+        .map(|rows| {
+            rows.into_iter()
+                .map(|mut row| PythonMultiPrecisionComplex(row.remove(0)))
+                .collect()
+        })
+        .map_err(error)
+    }
+
     /// Prepare a common derivative-closed basis in all remaining physical variables.
     #[pyo3(signature=(family, powers, variables, epsilon, *, branch_domain, physical_propagators=None, fixed_parameters=None, epsilon_shearing=false, control=None))]
     #[allow(clippy::too_many_arguments)]
@@ -579,4 +672,46 @@ impl PyPreparedIntegralFamily {
         .map(|result| result.timed(started))
         .map_err(error)
     }
+}
+
+fn cut_graph(
+    py: Python<'_>,
+    diagram: &PyFeynmanDiagram,
+    kinematics: &PyKinematics,
+    edge_powers: Option<BTreeMap<usize, i16>>,
+) -> PyResult<crate::hepkit::GraphIntegral> {
+    let diagram = diagram.as_shared_diagram()?.clone();
+    let kinematics = kinematics.as_kinematics().clone();
+    let powers = edge_powers
+        .unwrap_or_default()
+        .into_iter()
+        .map(|(edge, power)| (feynkit_graph::EdgeId(edge), power))
+        .collect();
+    py.detach(|| {
+        crate::hepkit::GraphIntegral::new(diagram, &kinematics)
+            .and_then(|graph| graph.with_powers(&powers))
+    })
+    .map_err(error)
+}
+
+fn cut_channel(values: &[PythonExpression]) -> PyResult<crate::cuts::FutureTimelikeChannel> {
+    Ok(crate::cuts::FutureTimelikeChannel {
+        external: values
+            .iter()
+            .map(|value| {
+                rational(value).map_err(|_| {
+                    InvalidInputError::new_err(
+                        "future channel coefficients must be exact rational Symbolica expressions",
+                    )
+                })
+            })
+            .collect::<PyResult<Vec<_>>>()?,
+    })
+}
+
+fn cut_prescriptions(values: Vec<String>) -> PyResult<Vec<crate::cuts::LoopPrescription>> {
+    values
+        .iter()
+        .map(|value| value.parse().map_err(error))
+        .collect()
 }

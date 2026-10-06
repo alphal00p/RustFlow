@@ -18,6 +18,20 @@ pub enum LoopPrescription {
     Insensitive,
 }
 
+impl std::str::FromStr for LoopPrescription {
+    type Err = Error;
+    fn from_str(value: &str) -> Result<Self> {
+        match value {
+            "+i0" => Ok(Self::PlusI0),
+            "-i0" => Ok(Self::MinusI0),
+            "insensitive" => Ok(Self::Insensitive),
+            _ => Err(Error::InvalidInput(
+                "loop prescription must be +i0, -i0, or insensitive".into(),
+            )),
+        }
+    }
+}
+
 /// The physical momentum `sum loops[i] l_i + sum external[j] p_j`.
 /// A positive-energy cut uses this oriented momentum, not its negative.
 #[derive(Clone, Debug, PartialEq, Eq)]
