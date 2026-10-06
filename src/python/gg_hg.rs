@@ -129,6 +129,31 @@ impl PyHiggsJetIntegralSystem {
     fn dimension(&self) -> usize {
         self.inner.map.kind.dimension()
     }
+    /// Stable mathematical certificate for portable, externally supplied seeds.
+    /// This does not bypass runtime-sensitive binary cache compatibility checks.
+    #[getter]
+    fn mathematical_fingerprint(&self) -> String {
+        self.inner.mathematical_fingerprint()
+    }
+    /// Share this system's canonical connection and ordinary supplied-boundary
+    /// validation. No reduction, boundary generation or numeric transport runs.
+    #[pyo3(signature=(options=None))]
+    fn kinematic_transport(
+        &self,
+        options: Option<&PyEvaluationOptions>,
+    ) -> PyResult<PyKinematicTransport> {
+        let options = super::options(options);
+        options.validate().map_err(error)?;
+        if options.dimension != 4 || options.prescription != crate::Prescription::PlusI0 {
+            return Err(error(crate::Error::Unsupported(
+                "the certified Higgs-jet canonical basis uses D=4-2 epsilon and +i0".into(),
+            )));
+        }
+        Ok(PyKinematicTransport::from_canonical(
+            self.inner.transport.clone(),
+            options,
+        ))
+    }
     #[getter]
     fn epsilon(&self) -> PythonExpression {
         Atom::var(self.inner.map.epsilon).into()

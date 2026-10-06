@@ -12,7 +12,7 @@ use pyo3_stub_gen::derive::{gen_stub_pyclass, gen_stub_pymethods};
 enum Connection {
     Rational(crate::RustFlow),
     Algebraic(crate::RustFlow<AlgebraicKinematicSystem>),
-    Canonical(crate::RustFlow<CanonicalAlgebraicSystem>),
+    Canonical(Arc<crate::RustFlow<CanonicalAlgebraicSystem>>),
 }
 impl Connection {
     fn identity(&self) -> &BoundaryIdentity {
@@ -63,6 +63,18 @@ pub struct PyKinematicTransport {
     connection: Arc<Connection>,
     options: crate::FlowOptions,
 }
+impl PyKinematicTransport {
+    pub(super) fn from_canonical(
+        flow: Arc<crate::RustFlow<CanonicalAlgebraicSystem>>,
+        options: crate::FlowOptions,
+    ) -> Self {
+        Self {
+            connection: Arc::new(Connection::Canonical(flow)),
+            options,
+        }
+    }
+}
+
 #[cfg_attr(feature = "python_stubgen", gen_stub_pymethods)]
 #[pymethods]
 impl PyKinematicTransport {
@@ -314,10 +326,7 @@ impl PyKinematicTransport {
                 super::continuation::bind(flow, continuation)
             })
             .map_err(error)?;
-        Ok(Self {
-            connection: Arc::new(Connection::Canonical(flow)),
-            options,
-        })
+        Ok(Self::from_canonical(Arc::new(flow), options))
     }
     #[getter]
     fn identity(&self) -> &str {
@@ -540,5 +549,31 @@ impl PyKinematicTransport {
         })
         .map(|result| result.timed(started))
         .map_err(error)
+    }
+}
+
+#[cfg(test)]
+mod sharing_tests {
+    use super::*;
+
+    #[test]
+    fn higgs_adapter_shares_the_existing_canonical_owner() -> crate::Result<()> {
+        let system = crate::gg_hg::HiggsJetIntegralSystem::load(
+            crate::gg_hg::PluginFamilyKind::Planar,
+            "portable_owner_test",
+        )?;
+        let connection = system.transport.clone();
+        let adapter =
+            PyKinematicTransport::from_canonical(connection.clone(), crate::FlowOptions::default());
+        match adapter.connection.as_ref() {
+            Connection::Canonical(shared) => assert!(Arc::ptr_eq(shared, &connection)),
+            _ => panic!("canonical owner changed"),
+        }
+        drop(system);
+        assert_eq!(
+            adapter.connection.identity().key(),
+            connection.identity().key()
+        );
+        Ok(())
     }
 }

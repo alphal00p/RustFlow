@@ -10,17 +10,42 @@ use crate::transport_cache::{
 use crate::{Error, FlowOptions, KinematicPoint, Precision, Result, RunContext, RustFlowCache};
 use serde::Deserialize;
 use std::collections::BTreeMap;
+use std::sync::Arc;
 use symbolica::prelude::*;
 
 const SYSTEMS: &str = include_str!("../../fixtures/gg-hg/integral-systems.json");
 const CONFIGURATIONS: &str = include_str!("../../fixtures/gg-hg/physical-configurations.json");
+const PHYSICAL_MAP: &str = include_str!("../../fixtures/gg-hg/plugin-physical-map.json");
+// Version mathematical conventions explicitly: changes to normalization,
+// basis interpretation or root sheets must change this tag or the schema.
+const MATHEMATICS_SCHEMA: &str = "symbolica-hep-integration:higgs-jet-mathematics:v1";
+const MATHEMATICS_CONVENTIONS: &str = "D=4-2*eps;+i0;measure=exp(2*eps*EulerGamma);mV2=mu2=1;basis=ordered-plugin-canonical;root-sheets=principal-or-opposite";
+
+fn mathematical_fingerprint(kind: PluginFamilyKind) -> String {
+    let mut digest = blake3::Hasher::new();
+    for field in [
+        MATHEMATICS_SCHEMA,
+        kind.id(),
+        MATHEMATICS_CONVENTIONS,
+        "integral-systems.json",
+        SYSTEMS,
+        "plugin-physical-map.json",
+        PHYSICAL_MAP,
+        "physical-configurations.json",
+        CONFIGURATIONS,
+    ] {
+        digest.update(&(field.len() as u64).to_le_bytes());
+        digest.update(field.as_bytes());
+    }
+    digest.finalize().to_hex().to_string()
+}
 
 /// A single canonical system shared by every mass and crossing configuration.
 /// All coordinates are in units mV² = 1; b is mH²/mV².
 pub struct HiggsJetIntegralSystem {
     pub(crate) map: PluginBasisMap,
     pub(crate) canonical: CanonicalAlgebraicSystem,
-    pub(crate) transport: crate::RustFlow<CanonicalAlgebraicSystem>,
+    pub(crate) transport: Arc<crate::RustFlow<CanonicalAlgebraicSystem>>,
 }
 
 #[derive(Clone, Debug)]
@@ -97,6 +122,14 @@ impl HiggsJetIntegralSystem {
 
     pub fn canonical_system(&self) -> &CanonicalAlgebraicSystem {
         &self.canonical
+    }
+
+    /// Certificate of immutable equations, ordered basis maps and conventions.
+    /// Independent of backend, build and symbol namespace. Portable supplied
+    /// values must verify this certificate and still enter through normal
+    /// boundary validation; it is not a replacement for binary cache identity.
+    pub fn mathematical_fingerprint(&self) -> String {
+        mathematical_fingerprint(self.map.kind)
     }
 
     pub fn transport(&self) -> &crate::RustFlow<CanonicalAlgebraicSystem> {
@@ -187,7 +220,7 @@ impl HiggsJetIntegralSystem {
         Ok(Self {
             map,
             canonical,
-            transport,
+            transport: Arc::new(transport),
         })
     }
 
@@ -502,6 +535,18 @@ impl HiggsJetIntegralSystem {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn portable_mathematics_certificate_matches_independent_protocol() {
+        assert_eq!(
+            mathematical_fingerprint(PluginFamilyKind::Planar),
+            "b77f8d97fadc07001ebf3cd87e68ed5338b40a4b0d58fb06a8636956fbd87dc8"
+        );
+        assert_eq!(
+            mathematical_fingerprint(PluginFamilyKind::Nonplanar),
+            "ab5364501a91e2e7c0960f2f8b84fe14f039321153145e62e55c75ecc4521958"
+        );
+    }
+
     #[test]
     fn all_sixteen_configurations_share_one_exact_physical_point() -> Result<()> {
         let namespace = "higgs_jet_configuration_test";

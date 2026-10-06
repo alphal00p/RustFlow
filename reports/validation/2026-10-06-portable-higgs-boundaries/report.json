@@ -1,0 +1,73 @@
+{
+  "base_commit": "115d9e5b74cf56300972f200889f5ff75f6e9c74",
+  "scope": "Share certified gg-to-hg canonical connection with generic supplied-boundary API; portable mathematical certificate separate from binary cache fingerprints.",
+  "source_digest": "c19473da2cb7bef8abbcd38164892de51e072f7d214d75d11092bed6c40c911d",
+  "dependency_digest": "f76203907801bdb985fb3a77b521a7b702756c5cdc59a5eef27cd69cb8e1b720",
+  "mathematical_fingerprints": {
+    "planar": "b77f8d97fadc07001ebf3cd87e68ed5338b40a4b0d58fb06a8636956fbd87dc8",
+    "nonplanar": "ab5364501a91e2e7c0960f2f8b84fe14f039321153145e62e55c75ecc4521958"
+  },
+  "scientific_inputs": {
+    "bundle_sha256": "984b64a1617eb111543fc3b97e1cd36c84c610cfd8a02b11e8dfa861809acee4",
+    "manifest_sha256": "767b359ab86aa06cc50a2624a7f992d9cb951061d302f18bda38ece14b062722",
+    "loader_sha256": "d3eeacce5e67607980bad57a96370119c2a68af552a0bad3db8071b15197c54a",
+    "old_binary_sha256": "5e8c60c1b5fce269b8f521821e37368b8272c4682afe6578a5b9891f4c136d98",
+    "configurations": 16,
+    "complex_coefficients": 4360,
+    "absolute_error_values": 4360,
+    "verified_digits": 40,
+    "working_bits": 415
+  },
+  "validation": {
+    "release_features": "python_stubgen",
+    "focused_tests_passed": 20,
+    "portable_python_tests": 3,
+    "canonical_owner_unit": 1,
+    "math_and_config_units": 2,
+    "generic_rooted_python_tests": 2,
+    "persistent_cache_tests": 12,
+    "all_targets_clippy": "passed with -D warnings",
+    "format": "passed",
+    "diff_check": "passed",
+    "bundle_and_adapter_tests_seconds": "2.12",
+    "exact_checks": [
+      "Every coefficient real/imaginary ratio and per-number precision preserved",
+      "Every absolute error ratio and per-number precision preserved",
+      "All sixteen entries admitted through ordinary supplied-boundary validation",
+      "All sixteen entries survive binary reload and produce exact zero-step source hits",
+      "Prior publication binary bank rejected by current implementation compatibility",
+      "Imported identities differ from origin identities",
+      "Missing root germs and changed dimension/prescription reject",
+      "Math certificate invariant across namespaces; runtime identity differs",
+      "Shared Arc pointer and adapter lifetime after dropping original system",
+      "Generated native stubs expose both APIs"
+    ]
+  },
+  "limitations": [
+    "Supplied starting data, not fresh boundary recomputation",
+    "No new destination/amplitude performance calculation in this adapter milestone",
+    "Native validation only; browser build belongs to host",
+    "Initial external-loader test harness failed compilation because numeric conversion wrappers lack PyTypeInfo; corrected to registered core classes without runtime source changes"
+  ],
+  "commands": [
+    "cargo test --release --locked --features python_stubgen --test python_portable_higgs_seeds -- --include-ignored",
+    "cargo test --release --locked --features python_stubgen --lib higgs",
+    "cargo test --release --locked --features python_stubgen --lib gg_hg::workflow::tests",
+    "cargo test --release --locked --features python_stubgen --test python_algebraic_transport --test transport_cache",
+    "cargo clippy --locked --all-targets --features python_stubgen -- -D warnings",
+    "cargo fmt --check",
+    "git diff --check"
+  ],
+  "bundle_gate_environment": {
+    "RUSTFLOW_PORTABLE_BUNDLE_LOADER": "/common/dev/symbolica-community/notebook-supplied-boundaries/examples/hep/gg_hg_boundaries.py",
+    "RUSTFLOW_PORTABLE_BUNDLE_DIRECTORY": "/common/dev/symbolica-community/notebook-supplied-boundaries/examples/hep/data/gg_hg",
+    "RUSTFLOW_PORTABLE_ORIGIN_CACHE": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-native30/seeds"
+  },
+  "archive": {
+    "path": "evidence.tar.gz",
+    "sha256": "64d4882dd43028ddd257bf4272d75edb0a8f29f2e45c586c90ae76c6c30549cb",
+    "bytes": 28167,
+    "contents": "Runtime patch, changed source/test/docs snapshots, complete SHA256 source-input manifest, external loader/manifest snapshots and passing logs. Base commit anchors unchanged inputs; scientific bundle remains in community."
+  },
+  "review": "Root read-only source review accepted; math fingerprint independently reproduced."
+}
