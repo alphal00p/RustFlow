@@ -1,0 +1,245 @@
+{
+  "scope": "native shared-host release cdylib; supplied boundaries; full notebook controller stages; one CPU",
+  "runtime": {
+    "schema": 1,
+    "native_identity_witness": {
+      "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+      "identity": "bc250218637cf9e4b06886d280765723606a9b5ab1b490a9a79a83b2f6c2b66e"
+    },
+    "loaded_extension": {
+      "path": "/common/dev/amflow/target/gg-hg-browser-seeds/native-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+      "size_bytes": 401487600,
+      "sha256": "69b4f8a40f158e38f7add85b5666d21a5db31e62bc93d58f425145e3a5956a53"
+    },
+    "execution_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/notebook-supplied-boundaries/examples/hep/gg_hg_acceptance.py",
+        "size_bytes": 32119,
+        "sha256": "6f1686b22017dce4d1f0a2f7cc2362a8d78dcc6aded49a6428355941ecf1ba3c"
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/notebook-supplied-boundaries/examples/hep/gg_hg_support.py",
+        "size_bytes": 26764,
+        "sha256": "ae11b96523b0c7195d5630b908291fc96ae7acf1e20ee2be23a5ef87e7af8910"
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/notebook-supplied-boundaries/examples/hep/gg_hg.py",
+        "size_bytes": 15165,
+        "sha256": "5f805c543f2b5f8d081a6d87a5da24b7396094510ca63d280d935e6fe3fb9683"
+      }
+    },
+    "python": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/gg-hg-browser-seeds/native-venv/bin/python"
+    }
+  },
+  "runner": {
+    "path": "/common/dev/amflow/target/gg-hg-browser-seeds/check_supplied_notebook.py",
+    "size_bytes": 5035,
+    "sha256": "8697e1c24c6fed6f89e785c5ca688a3b9abe7fe495b8277e89b35823a08342e3"
+  },
+  "extension_build": {
+    "runtime_kind": "local release shared-host cdylib, built with python_stubgen; not a newly built wheel",
+    "source": "/common/dev/amflow/target/publication-native/release/deps/libsymbolica_community.so",
+    "sha256": "69b4f8a40f158e38f7add85b5666d21a5db31e62bc93d58f425145e3a5956a53",
+    "host_worktree": "/common/dev/symbolica-community/notebook-supplied-boundaries",
+    "rustflow_revision": "7096ba8e1f4d7edda4402f9ff01c961f6f3e6a4e",
+    "host_features": "python_stubgen",
+    "no_default_features": true
+  },
+  "stage_seconds": {
+    "supplied_boundaries": 0.6618753061629832,
+    "transport": 101.77471973514184,
+    "amplitude": 38.37631597509608,
+    "restart": 2.4239665577188134,
+    "warm_transport": 0.5203864546492696,
+    "warm_amplitude": 2.6805122643709183
+  },
+  "reference_inputs": {
+    "transport": {
+      "path": "/common/dev/symbolica-community/notebook-supplied-boundaries/examples/hep/data/gg_hg/coherent-reference.json",
+      "size_bytes": 1445530,
+      "sha256": "dd791b4d0400504ae8bc13e4e4bffa3d35773579a73c49ef4559d8e7985787e3",
+      "schema": "higgs-jet-coherent-reference-v1",
+      "provenance": {
+        "provenance": [
+          {
+            "path": "fixtures/gg-hg/full-systems.json",
+            "sha256": "b643716de4212e8cc3ddcaf4fb5d13eb67f993ac3ae8563c291c16ae284cbb86"
+          },
+          {
+            "path": "target/gg-hg-coherent/native/fixture.json",
+            "sha256": "e1c774ffc8bf811cf3e588f8a5406f677d30d7a9eefbb609fb3ec6cc83f949d6"
+          }
+        ],
+        "purpose": "Comparison only. Not an evaluator input. Values retain original source precision caps and absolute error metadata."
+      }
+    },
+    "amplitude": {
+      "path": "/common/dev/symbolica-community/notebook-supplied-boundaries/examples/hep/data/gg_hg/amplitude-validation.json",
+      "size_bytes": 6920,
+      "sha256": "868b9fde9448e54b315e96c4ce5a83bcb2501f219cf45a4cf2c147e521fef071",
+      "schema": 1,
+      "provenance": {
+        "scope": "Component-level amplitude validation with archived natively transported form factors; not an automatic-boundary acceptance. Never loaded by production evaluation.",
+        "source_input_sha256": "c8d2e3a61b0b1f97a82db89b1a7774531447cc221a5b3a6c43adf00fb247d674",
+        "references": [
+          "reports/validation/2026-10-04-gg-hg-squared-matrix-element.json",
+          "reports/validation/2026-10-05-gg-hg-heft-interference.json"
+        ],
+        "reference_accuracy": {
+          "scope": "Conditional on archived transported form-factor allowances. The 30-digit component comparison holds those form factors fixed and is not a physical-accuracy claim.",
+          "electroweak_squared": {
+            "input_absolute_error": "1.036965279540889484229816607147212347491680749337440461240057773672673644280375266356913373971924891557682004240003e-27",
+            "rounding_absolute_error": "1e-39",
+            "conditional_relative_digits": 19
+          },
+          "interference": {
+            "input_absolute_error": "1.386179807571189324116816980709306921379782632659449692282195647591677068094016282224644333359816355956402393946359e-25",
+            "rounding_absolute_error": "1e-42",
+            "conditional_relative_digits": 20
+          },
+          "effective_squared": {
+            "input_absolute_error": "1e-65",
+            "rounding_absolute_error": "1e-42",
+            "conditional_relative_digits": 39
+          }
+        },
+        "physical_s_t_MH_squared": [
+          "7173070292440521/111284741846000",
+          "-12058167788971/339319588980",
+          "1"
+        ]
+      }
+    }
+  },
+  "transport_comparison": {
+    "coefficients": 4360,
+    "digits": 20,
+    "maximum_scaled_difference": "1.6980229525008497382366283020476159897653468E-30"
+  },
+  "form_factors": {
+    "components": 8,
+    "comparison": {
+      "W": [
+        {
+          "index": 1,
+          "value": "(0.00000196122238618354244187226751552453320477653483944165664762606489867484580508333415443390572078014525539648-0.00000809007076182998492997694095330234148133866943165310769334485594416410046515289128934013911952949675155646j)",
+          "absolute_difference": "5.143808442078450051612643023275552187879427787351965240980284261934992E-36",
+          "native_absolute_error": "2.27528209277603329918978059008035089516343067302260053717694200804430538467E-42",
+          "native_verified_relative_digits": 36,
+          "reference_absolute_error": "2.2894422778484710617219023758127296980340123201305702853536819931315854569613945923191920875928305767078971597261130888225138070911525519357053588958538600877261666e-26"
+        },
+        {
+          "index": 2,
+          "value": "(0.00000311877285945116004083112030594674900485706001164483932878156571651090667423061251544678302103761597005161-0.00000319630617603961230595104819312248865212806294553555074487246517573831811647487443084294463316092785145377j)",
+          "absolute_difference": "2.972825980245488824505888048245316776304091579678111195184613182822377E-36",
+          "native_absolute_error": "4.32748699796940939207751472384346698767191500166082345117370716631643103001E-41",
+          "native_verified_relative_digits": 35,
+          "reference_absolute_error": "4.3530140922574367346069825631297457026237300281776625510195222985544606775618232408987391125346916753001696620985137181011120232532908393972071889336312263234000659e-25"
+        },
+        {
+          "index": 3,
+          "value": "(-0.00000242513800782883147494572181185168174690542507085904020898027354144690394610273921286559502292695490488753+0.00000348790358169000308503319605913086193810123417292375915259352316483533917193433499398497570002276016535227j)",
+          "absolute_difference": "6.858352966900754846893347336765578299016025131023685885668615103720325E-36",
+          "native_absolute_error": "4.068440150651563175124939937295862940254711479637256532648613186059332194E-42",
+          "native_verified_relative_digits": 36,
+          "reference_absolute_error": "4.1031713688203874617267147671521978982359561343847099674600667217295867776446285029394868152776080573874796524790687365319894624470261424412548734671996325004454210e-26"
+        },
+        {
+          "index": 4,
+          "value": "(0.00000472112415267974335518758062622869704631978493887290300057398949885466967213907712638370160451672865294136-0.0000129880123126617041227000407141235718309941498734878670586333424059152502811734814111104739406429729414051j)",
+          "absolute_difference": "9.374603750071727379251063167512014895417542615798619005839204451202026E-36",
+          "native_absolute_error": "1.89810694949784327902427015763552553443263262757899269918898999419468273409E-41",
+          "native_verified_relative_digits": 35,
+          "reference_absolute_error": "1.9094573980705271453356802757638948060172978128304488653863004290182128447255574285641967745015322850106247319193602797553938530752662679457110187024301184619912323e-25"
+        }
+      ],
+      "Z": [
+        {
+          "index": 1,
+          "value": "(0.00000149584519527614786931022238968926179211529654689221343854458649151886873665018162958800247369550250602663-0.00000645820543916701705715581112889532758609497089669671070467787977665903211172650746463243005912330228908263j)",
+          "absolute_difference": "7.1531564062088553721724593462332221604785321135533064927071616029976207E-36",
+          "native_absolute_error": "3.06685625768707309444970524933486856040051920363138450607779913655890008965E-42",
+          "native_verified_relative_digits": 36,
+          "reference_absolute_error": "3.0850617437448454289042478895604472907991349916940237444912356572551816162999327330149626983955837842877165641790760177202838195326091938840114099087668125589542106e-26"
+        },
+        {
+          "index": 2,
+          "value": "(0.00000264220789391826749913508610578135971711596391361523255519303492374697289216274727760664871432540577399354-0.00000255024204961584667892488527407044226340730845904321189551829785430609333029509018083774203285324558225387j)",
+          "absolute_difference": "6.639051322591531942104208058415024915585550238038036409228886874022978E-35",
+          "native_absolute_error": "5.52628000480279423129804070431159139362597487978321781100552595319429693334E-41",
+          "native_verified_relative_digits": 34,
+          "reference_absolute_error": "5.5597103718713992760207099541422720732121534798581672099528317771589607038154737432213500596489696049461799014198859006611423656892337659624777698076137696487113882e-25"
+        },
+        {
+          "index": 3,
+          "value": "(-0.00000201901733252621387687016087627611654726911972288811832524138164372786933131352942036844091277409824511873+0.00000279014951455226281385884472453395821897117977075193707796400548953179291781928239918012229981106429966547j)",
+          "absolute_difference": "2.9610172592520556764469743689316193168496252582760312536934147531362281E-35",
+          "native_absolute_error": "9.19078575656866646359228269540186264203617069260094329637368554648882446671E-42",
+          "native_verified_relative_digits": 35,
+          "reference_absolute_error": "9.2721561940592548105963169949791233675514410882632020540084462640997947635386978524812090864272906423477908447474043250048144018137816077048655852131263861370412818e-26"
+        },
+        {
+          "index": 4,
+          "value": "(0.00000375132485640043335955350112366438195588328292200095344675857546412211654677770359924791997020141232048969-0.0000103869776958708844496710907773540796162523074370720286269506727461031506621767709680355219477120013788307j)",
+          "absolute_difference": "2.997401249980010051080527111307418190406742417165437816561210738928878E-35",
+          "native_absolute_error": "2.48392110356906555342055982516840375998472208011709226953643959558321799613E-41",
+          "native_verified_relative_digits": 35,
+          "reference_absolute_error": "2.4987744496469589053257508973342428304922848075000439862141204924183340631536046473872500275855612750787128354083877781483922261005890440863712022753194839308751673e-25"
+        }
+      ]
+    }
+  },
+  "observables": {
+    "effective_squared": {
+      "value": "0.00176839492856040838255513143874534782898210399687219844018557709100056424479576777129467967484813",
+      "absolute_error": "1E-50",
+      "verified_relative_digits": 47,
+      "reference_difference": "3.996872198440185577091000564244795767771294679674848127E-45",
+      "reference_absolute_error": "1.00000000000000000000001E-42",
+      "reference_conditional_relative_digits": 39
+    },
+    "electroweak_squared": {
+      "value": "4.33089662023980781068590560931974942994040642487940681678246676343151153543378903448506478517476E-8",
+      "absolute_error": "1.03038260335993893216919157365809519175316271715491776146739441198846170498729393605695870446204E-43",
+      "verified_relative_digits": 35,
+      "reference_difference": "4.344880059593575120593183217533236568488464566210965514935214825244E-38",
+      "reference_absolute_error": "1.036965279541889484229816607147212347491680749337440461240057773672673644280375266356913373971924892E-27",
+      "reference_conditional_relative_digits": 19
+    },
+    "interference": {
+      "value": "0.0000166580193666104352713434174523346881653549846139505767407266481227466639539644700311084000307538",
+      "absolute_error": "1.37731031668813119886716616564282984427049555471971273577930789602016741885590302603348045980441E-41",
+      "verified_relative_digits": 36,
+      "reference_difference": "8.06288718001538604942325927335187725333604603552996889159996924624E-36",
+      "reference_absolute_error": "1.386179807571189334116816980709306921379782632659449692282195647591677068094016282224644333359816356E-25",
+      "reference_conditional_relative_digits": 20
+    }
+  },
+  "verified_cache_entries": 48,
+  "references_loaded_only_after_native_success": true,
+  "runtime_unchanged": true,
+  "status": "passed",
+  "evidence": {
+    "file": "evidence.tar.gz",
+    "bytes": 2779093,
+    "sha256": "9fecad98e63f662237e74fc9849ab9be5bd55d2d1575283ae2b378f9d4793240"
+  },
+  "tests": {
+    "controller": 55,
+    "bundle": 14,
+    "export": 6,
+    "notebook_smoke_and_static": 7,
+    "marimo_check": "passed",
+    "initial_fixture_failure": "Added strict provenance assertion initially omitted the deliberate cache-hit history annotation; raw stored provenance is now compared exactly and returned history must preserve original provenance. No production numerical change."
+  },
+  "limitations": [
+    "native release shared-host cdylib, not a new distributable wheel or WASM run",
+    "extension uses RustFlow7096ba8, before staged tensor optimization7d6f01a",
+    "one run on shared AMD EPYC9754 pinned CPU44; other compilation active",
+    "stage times include controller persistence, exclude UI/startup and module/model setup",
+    "supplied boundaries; fresh AMF generation deliberately unavailable in this harness",
+    "archived EW reference retains19-digit evidence"
+  ]
+}

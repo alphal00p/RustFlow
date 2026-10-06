@@ -35,8 +35,15 @@ passed its focused Python, cache and stub gates. The
 [portable-number experiment](../reports/validation/2026-10-06-portable-gg-hg-seeds/report.json)
 verified all values and errors in actual single-core Pyodide in 0.78 seconds,
 excluding startup/downloads. That experiment checks numeric portability, not
-browser transport, amplitude assembly or native-cache admission. The new host
-wheel and complete WASM solver path are still under validation.
+browser transport, amplitude assembly or native-cache admission. A subsequent
+[native shared-host controller run](../reports/validation/2026-10-06-supplied-notebook-controller/README.md)
+passed all 4,360 transported coefficients, eight form factors, three observables,
+binary restart and warm reuse from the shipped starting values. Import took
+0.66 seconds, initial transport including checkpoint I/O took 101.77 seconds,
+and warm transport/amplitude took 0.52/2.68 seconds on one core. That development
+extension predates the tensor optimization below; its initial amplitude stage
+took 38.38 seconds. A new distribution wheel and complete WASM solver path remain
+under validation.
 
 The [initial physical transport comparison](../reports/performance/2026-10-06-physical-transport-compact-profile/README.md)
 uses the same frozen native executable, exact starting values and growing cache
