@@ -74,8 +74,8 @@ pub use local_coordinates::LocalCoordinate;
 pub use numeric::{ComplexFloat, Precision};
 pub use ode::{BoundaryData, DifferentialSystem, FlowDiagnostics, FlowResult};
 pub use options::{
-    CancellationToken, FlowOptions, MassMode, PadeOptions, Prescription, Progress, RecursionMode,
-    ResidualArithmetic, RunContext, StepSizeStrategy,
+    BoundaryErrorStrategy, CancellationToken, FlowOptions, MassMode, PadeOptions, Prescription,
+    Progress, RecursionMode, ResidualArithmetic, RunContext, StepSizeStrategy,
 };
 pub use physical_family::PreparedPhysicalFamily;
 pub use physical_targets::ProjectedLaurentExpansion;

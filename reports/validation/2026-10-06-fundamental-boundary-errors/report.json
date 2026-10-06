@@ -1,0 +1,111 @@
+{
+  "base_commit": "59457c5eab62e81741b49b89e00da2c9fd5eb08f",
+  "scope": "Opt-in ordinary rational supplied-boundary error propagation; default scalar policy, hierarchy/root fallback, source uncertainty caps and existing cache owner retained. No full-parity or performance claim.",
+  "source_digest": "665b383a6334c1641bbf4ef51b405dbcca3b77fa71e61a8f3817bb808e19848b",
+  "frozen_manifest_sha256": "fd92a4f25043bf1766421c9daa53201998680b1eee8519eff4fe498e5b8ad238",
+  "frozen_files": 250,
+  "dependency_scope": "Runtime gates use unchanged c340 Symbolica community and unchanged Cargo lock. Main updates to6def independently; only scoped diff inspection of6def is included here.",
+  "provenance": [
+    {
+      "build": "symbolica-amflow-21205e99f6af8c86",
+      "dependency_digest": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+      "metadata_sha256": "70c59fc984e263739aa004caf9db3b80f168b0bcd364c6d3e6929cdefeaee6a3"
+    },
+    {
+      "build": "symbolica-amflow-5596bcfe9419bd8d",
+      "dependency_digest": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+      "metadata_sha256": "b9fb48512647787c2beda5f5968eba38e54d627c3b36a238458072e5548d2a77"
+    },
+    {
+      "build": "symbolica-amflow-680c35a75065b1d9",
+      "dependency_digest": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+      "metadata_sha256": "b9fb48512647787c2beda5f5968eba38e54d627c3b36a238458072e5548d2a77"
+    },
+    {
+      "build": "symbolica-amflow-7d91f93e51f25f3e",
+      "dependency_digest": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+      "metadata_sha256": "70c59fc984e263739aa004caf9db3b80f168b0bcd364c6d3e6929cdefeaee6a3"
+    }
+  ],
+  "validation": {
+    "private": {
+      "passed": 7,
+      "cargo_binaries": 1,
+      "log": "fundamental-private-final.log"
+    },
+    "integrations": {
+      "passed": 62,
+      "cargo_binaries": 11,
+      "log": "fundamental-integrations-final.log"
+    },
+    "cli": {
+      "passed": 4,
+      "cargo_binaries": 1,
+      "log": "fundamental-cli-final.log"
+    },
+    "python": {
+      "passed": 2,
+      "cargo_binaries": 1,
+      "log": "fundamental-python-final.log"
+    },
+    "native-clippy": "passed, release all-targets, -D warnings",
+    "python-clippy": "passed, release all-targets, -D warnings",
+    "fmt": "passed"
+  },
+  "scientific_controls": {
+    "nilpotent_rates": [
+      100,
+      2500,
+      5800
+    ],
+    "requested_decimal_digits": 20,
+    "source_verified_digits": 30,
+    "source_storage_decimal_digits": 90,
+    "central_closed_form_comparison_digits": 45,
+    "weak_exponential_source_digits": 25,
+    "exponential_rate": 20,
+    "exact_source_rounding_precisions_bits": [
+      160,
+      282,
+      400
+    ],
+    "noncommuting_complex_manufactured_fundamental": true,
+    "nonzero_chart_jump_witness": true,
+    "mapped_pade_candidate_accepted": true,
+    "cache_restart_and_nearby_reuse": true,
+    "mid_proof_cancellation_atomic": true,
+    "default_matches_explicit_scalar": true
+  },
+  "resource_controls": {
+    "max_dimension": 16,
+    "max_order": 256,
+    "max_working_bits": 4096,
+    "coefficient_cells": 1000000,
+    "estimated_work": 100000000,
+    "storage_estimate_bytes": 268435456,
+    "exact_coefficient_bits": 65536,
+    "qualification": "Conservative admission estimates with native-operation cancellation granularity; not hard allocator or time quotas."
+  },
+  "pre_resource_validation": {
+    "private": 6,
+    "integrations": 62,
+    "cli": 4,
+    "strict_native_clippy": true,
+    "fmt": true,
+    "manifest_sha256": "74a34df87c0c65b86607a37ff0a89cbb52113777aeddfdc2c67c48ea14d20b05",
+    "correction": "Retained endpoints, guards and exact transpose storage are now charged; arithmetic contract unchanged."
+  },
+  "final_test_fixture_correction": "The first final Python run passed transport/restart but its stub assertion expected double quotes. Only that test literal was corrected to match generated single quotes; the implementation PORT digest is unchanged. The failed log, original test and original 250-file manifest are retained. Python tests, strict feature Clippy and fmt were rerun.",
+  "remaining_work": [
+    "Automatic stronger fallback when scalar error growth would reject",
+    "Sparse epsilon-hierarchy and registered-root proof owners",
+    "Authenticated finite-epsilon source records and error-aware Laurent fitting",
+    "Broad reference performance and full-physics parity"
+  ],
+  "archive": {
+    "path": "evidence.tar.gz",
+    "sha256": "b871211b0dd9ccaf4124edeaf080bd1d147e9b6b4460d1663d0c7a204d226a87",
+    "bytes": 2315821,
+    "entries": 533
+  }
+}

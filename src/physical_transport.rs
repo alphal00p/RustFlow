@@ -1016,6 +1016,56 @@ fn evaluate_from_source(
         }
     }
     input_relative_error += p.tolerance(source.accuracy.verified_digits());
+    let fundamental_errors =
+        if options.boundary_error_strategy == crate::BoundaryErrorStrategy::FundamentalMatrix {
+            // The existing source floor remains mandatory. Construct its power of
+            // ten with outward conversion rather than treating storage as accuracy.
+            use symbolica::domains::float::RoundingDirection;
+            let floor = symbolica::domains::float::RealBall::from_rational_ball(
+                &Rational::from((1, 10)),
+                &Rational::zero(),
+                p.bits,
+            )
+            .pow(u64::from(source.accuracy.verified_digits()))
+            .upper_bound();
+            let input_errors = source.accuracy.comparison_errors()[..count]
+                .iter()
+                .flatten()
+                .zip(&weights)
+                .map(|(error, weight)| {
+                    error.add_round(
+                        &weight.mul_round(&floor, p.bits, RoundingDirection::Up),
+                        p.bits,
+                        RoundingDirection::Up,
+                    )
+                })
+                .collect::<Vec<_>>();
+            let proof = match &prepared {
+                CompiledConnection::Rational(system) => system.fundamental_boundary_errors(
+                    &solution.segments,
+                    &input_errors,
+                    &weights,
+                    solution.diagnostics.expansion_order,
+                    context,
+                ),
+                CompiledConnection::Algebraic(_) => Err(Error::Unsupported(
+                    "registered-root boundary errors retain their scalar owner".into(),
+                )),
+            };
+            match proof {
+                Ok(proof) => {
+                    solution.diagnostics.fundamental_boundary_charts = proof.endpoints.len();
+                    Some(proof.endpoints)
+                }
+                Err(error @ (Error::Cancelled | Error::InvalidInput(_))) => return Err(error),
+                Err(error) => {
+                    solution.diagnostics.fundamental_boundary_fallback = Some(error.to_string());
+                    None
+                }
+            }
+        } else {
+            None
+        };
     let evidence_cap = source
         .accuracy
         .verified_digits()
@@ -1032,22 +1082,31 @@ fn evaluate_from_source(
     let mut accepted = Vec::new();
     for (index, segment) in solution.segments.iter().enumerate() {
         context.cancellation.check()?;
-        integrated_norm +=
-            prepared.error_norm_integral_weighted(&segment.center, &segment.end, &weights)?;
-        amplification = crate::diffexp::amplification_from_integral(
-            p,
-            &integrated_norm,
-            epsilon_product_limit,
-        )?;
+        if fundamental_errors.is_none() {
+            integrated_norm +=
+                prepared.error_norm_integral_weighted(&segment.center, &segment.end, &weights)?;
+            amplification = crate::diffexp::amplification_from_integral(
+                p,
+                &integrated_norm,
+                epsilon_product_limit,
+            )?;
+        }
         if let Some(checkpoint) = solution.checkpoints.iter().find(|c| c.segment == index) {
             let mut checkpoint = checkpoint.clone();
-            for (error, weight) in checkpoint
+            for (component, (error, weight)) in checkpoint
                 .comparison_errors
                 .iter_mut()
                 .flatten()
                 .zip(&weights)
+                .enumerate()
             {
-                *error += weight.clone() * &input_relative_error * &amplification;
+                if let Some(errors) = &fundamental_errors {
+                    use symbolica::domains::float::RoundingDirection;
+                    *error =
+                        error.add_round(&errors[index][component], p.bits, RoundingDirection::Up);
+                } else {
+                    *error += weight.clone() * &input_relative_error * &amplification;
+                }
             }
             if errors_meet(
                 p,
@@ -1059,13 +1118,19 @@ fn evaluate_from_source(
             }
         }
     }
-    for (error, weight) in solution
+    for (component, (error, weight)) in solution
         .comparison_errors
         .iter_mut()
         .flatten()
         .zip(&weights)
+        .enumerate()
     {
-        *error += weight.clone() * &input_relative_error * &amplification;
+        if let Some(errors) = fundamental_errors.as_ref().and_then(|errors| errors.last()) {
+            use symbolica::domains::float::RoundingDirection;
+            *error = error.add_round(&errors[component], p.bits, RoundingDirection::Up);
+        } else {
+            *error += weight.clone() * &input_relative_error * &amplification;
+        }
     }
     if !errors_meet(
         p,
@@ -1073,7 +1138,16 @@ fn evaluate_from_source(
         &solution.comparison_errors,
         options.digits,
     ) {
-        return Err(Error::Accuracy("cached boundary uncertainty grows beyond the requested target accuracy; provide a more accurate or closer boundary".into()));
+        let fallback = solution
+            .diagnostics
+            .fundamental_boundary_fallback
+            .as_ref()
+            .map_or_else(String::new, |reason| {
+                format!("; optional fundamental proof unavailable: {reason}")
+            });
+        return Err(Error::Accuracy(format!(
+            "cached boundary uncertainty grows beyond the requested target accuracy; provide a more accurate or closer boundary{fallback}"
+        )));
     }
     solution.verified_digits = Some(strongest_evidence(
         p,
@@ -1083,6 +1157,11 @@ fn evaluate_from_source(
         evidence_cap,
     ));
     solution.checkpoints = accepted;
+    let propagation_provenance = if solution.diagnostics.fundamental_boundary_charts > 0 {
+        "; signed fundamental matrices with outward whole-chart inverse, differential-defect and rounding-jump bounds"
+    } else {
+        ""
+    };
     let boundary = CachedBoundary {
         identity: identity.clone(),
         point: target,
@@ -1093,7 +1172,7 @@ fn evaluate_from_source(
             &solution,
             source.accuracy.verified_digits(),
             &format!(
-                "independently refined physical transport including propagated cached input uncertainty; source: {}",
+                "independently refined physical transport including propagated cached input uncertainty{propagation_provenance}; source: {}",
                 source.accuracy.provenance(),
             ),
         )?,
@@ -1123,7 +1202,7 @@ fn evaluate_from_source(
                 p.bits,
                 checkpoint.comparison_errors.clone(),
                 &format!(
-                    "independent precision/order check at trajectory endpoint, with propagated cached input uncertainty; source: {}",
+                    "independent precision/order check at trajectory endpoint, with propagated cached input uncertainty{propagation_provenance}; source: {}",
                     source.accuracy.provenance(),
                 ),
             )?;

@@ -23,7 +23,7 @@ pub struct PyEvaluationOptions {
 #[pymethods]
 impl PyEvaluationOptions {
     #[new]
-    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode=None, deformed_propagator_slots=None, refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None, residual_arithmetic="ball"))]
+    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode=None, deformed_propagator_slots=None, refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None, residual_arithmetic="ball", boundary_error_strategy="scalar_norm"))]
     #[allow(clippy::too_many_arguments)]
     fn new(
         digits: u32,
@@ -47,6 +47,7 @@ impl PyEvaluationOptions {
         reuse_samples: bool,
         pade_degree: Option<usize>,
         residual_arithmetic: &str,
+        boundary_error_strategy: &str,
     ) -> PyResult<Self> {
         let inner = crate::FlowOptions {
             digits,
@@ -57,6 +58,7 @@ impl PyEvaluationOptions {
                 ..Default::default()
             }),
             residual_arithmetic: residual_arithmetic.parse().map_err(error)?,
+            boundary_error_strategy: boundary_error_strategy.parse().map_err(error)?,
             max_steps,
             workers,
             dimension,
@@ -123,6 +125,11 @@ impl PyEvaluationOptions {
     #[getter]
     fn residual_arithmetic(&self) -> &'static str {
         self.inner.residual_arithmetic.as_str()
+    }
+    /// Supplied-error propagation policy; unavailable proofs retain scalar bounds.
+    #[getter]
+    fn boundary_error_strategy(&self) -> &'static str {
+        self.inner.boundary_error_strategy.as_str()
     }
     #[getter]
     fn workers(&self) -> usize {
@@ -820,6 +827,14 @@ impl PyTransportResult {
     #[getter]
     fn last_rational_fallback(&self) -> Option<String> {
         self.diagnostics.last_pade_fallback.clone()
+    }
+    #[getter]
+    fn fundamental_boundary_charts(&self) -> usize {
+        self.diagnostics.fundamental_boundary_charts
+    }
+    #[getter]
+    fn fundamental_boundary_fallback(&self) -> Option<String> {
+        self.diagnostics.fundamental_boundary_fallback.clone()
     }
     #[getter]
     fn conditioning_digits(&self) -> Option<u32> {

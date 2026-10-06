@@ -16,6 +16,37 @@ pub enum Prescription {
     MinusI0,
 }
 
+/// How supplied boundary uncertainty is propagated during physical transport.
+/// This selects verification policy, not a different mathematical identity.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum BoundaryErrorStrategy {
+    #[default]
+    ScalarNorm,
+    /// Bounded signed fundamental matrices for ordinary rational systems;
+    /// unsupported or inconclusive proofs retain the scalar-norm fallback.
+    FundamentalMatrix,
+}
+impl BoundaryErrorStrategy {
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::ScalarNorm => "scalar_norm",
+            Self::FundamentalMatrix => "fundamental_matrix",
+        }
+    }
+}
+impl std::str::FromStr for BoundaryErrorStrategy {
+    type Err = Error;
+    fn from_str(value: &str) -> Result<Self> {
+        match value {
+            "scalar_norm" => Ok(Self::ScalarNorm),
+            "fundamental_matrix" => Ok(Self::FundamentalMatrix),
+            _ => Err(Error::InvalidInput(
+                "boundary_error_strategy must be scalar_norm or fundamental_matrix".into(),
+            )),
+        }
+    }
+}
+
 /// Arithmetic for source-defect enclosures in rational Taylor charts.
 /// Registered-root charts and Padé candidates retain their own arithmetic.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
@@ -159,6 +190,7 @@ pub struct FlowOptions {
     pub series_order: usize,
     pub pade: Option<PadeOptions>,
     pub residual_arithmetic: ResidualArithmetic,
+    pub boundary_error_strategy: BoundaryErrorStrategy,
     /// Regular boundary-centered Taylor coordinates; physical paths remain unchanged.
     pub local_coordinate: crate::local_coordinates::LocalCoordinate,
     /// Maximum physical proposals per continuation call. A rejected Padé
@@ -195,6 +227,7 @@ impl Default for FlowOptions {
             series_order: 80,
             pade: None,
             residual_arithmetic: ResidualArithmetic::Ball,
+            boundary_error_strategy: BoundaryErrorStrategy::ScalarNorm,
             local_coordinate: crate::local_coordinates::LocalCoordinate::Identity,
             max_steps: 1000,
             step_size_strategy: StepSizeStrategy::Halving,

@@ -164,6 +164,30 @@ impl EpsilonSystem {
 }
 
 impl CompiledEpsilonSystem {
+    pub(crate) fn fundamental_boundary_errors(
+        &self,
+        segments: &[TaylorSegment],
+        input_errors: &[Float],
+        weights: &[Float],
+        order: usize,
+        context: &RunContext,
+    ) -> Result<crate::ode::fundamental::FundamentalErrors> {
+        context.cancellation.check()?;
+        if self.count != 1 {
+            return Err(Error::Unsupported(
+                "fundamental boundary proof currently supports ordinary rational systems only; epsilon hierarchies retain scalar bounds".into(),
+            ));
+        }
+        crate::ode::fundamental::propagate(
+            &self.rows,
+            segments,
+            input_errors,
+            weights,
+            order,
+            context,
+        )
+    }
+
     pub fn poles(&self) -> &[C] {
         &self.rows.poles
     }

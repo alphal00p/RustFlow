@@ -71,7 +71,7 @@ impl ExactSpecialization {
     }
 }
 
-fn dyadic_ball(p: Precision, value: &C) -> ComplexBall {
+pub(crate) fn dyadic_ball(p: Precision, value: &C) -> ComplexBall {
     let mut ball = ComplexBall::new(
         RealBall::exact(value.re.clone()),
         RealBall::exact(value.im.clone()),
@@ -100,7 +100,7 @@ pub(crate) struct DenominatorEnclosure {
 }
 
 /// Triangle inequality on a disk; a nonpositive result is inconclusive.
-fn polynomial_lower(a: &BallPolynomial, radius: &Float, p: Precision) -> Float {
+pub(crate) fn polynomial_lower(a: &BallPolynomial, radius: &Float, p: Precision) -> Float {
     let mut lower = complex_lower(&a.get_constant(), p);
     let mut power = radius.clone();
     for coefficient in a.coefficients().iter().skip(1) {
@@ -371,7 +371,7 @@ fn real_upper(value: &RealBall) -> Float {
     if lower > upper { lower } else { upper }
 }
 
-fn complex_upper(value: &ComplexBall, p: Precision) -> Float {
+pub(crate) fn complex_upper(value: &ComplexBall, p: Precision) -> Float {
     real_upper(&value.re).add_round(&real_upper(&value.im), p.bits, RoundingDirection::Up)
 }
 

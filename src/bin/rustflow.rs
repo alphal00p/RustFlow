@@ -27,6 +27,7 @@ struct Settings {
     series_order: usize,
     pade_degree: Option<usize>,
     residual_arithmetic: String,
+    boundary_error_strategy: String,
     max_steps: usize,
     step_size_strategy: String,
     local_coordinate: String,
@@ -53,6 +54,7 @@ impl Default for Settings {
             series_order: f.series_order,
             pade_degree: None,
             residual_arithmetic: "ball".into(),
+            boundary_error_strategy: "scalar_norm".into(),
             max_steps: f.max_steps,
             step_size_strategy: "halving".into(),
             local_coordinate: "identity".into(),
@@ -83,6 +85,7 @@ impl Settings {
                 ..Default::default()
             }),
             residual_arithmetic: self.residual_arithmetic.parse()?,
+            boundary_error_strategy: self.boundary_error_strategy.parse()?,
             max_steps: self.max_steps,
             step_size_strategy: match self.step_size_strategy.as_str() {
                 "halving" => StepSizeStrategy::Halving,
@@ -1006,6 +1009,8 @@ fn execute_transport(
             "rational_steps":result.transport.as_ref().map_or(0,|t| t.diagnostics.pade_steps),
             "rational_fallbacks":result.transport.as_ref().map_or(0,|t| t.diagnostics.pade_fallbacks),
             "last_rational_fallback":result.transport.as_ref().and_then(|t| t.diagnostics.last_pade_fallback.clone()),
+            "fundamental_boundary_charts":result.transport.as_ref().map_or(0,|t| t.diagnostics.fundamental_boundary_charts),
+            "fundamental_boundary_fallback":result.transport.as_ref().and_then(|t| t.diagnostics.fundamental_boundary_fallback.clone()),
             "superseded_successes":result.transport.as_ref().map_or(0,|t| t.diagnostics.superseded_successes),
             "inserted_points":result.inserted_points,
             "coefficients":result.boundary.coefficients.iter().map(|row| row.iter().map(complex_json).collect::<Vec<_>>()).collect::<Vec<_>>(),
@@ -1104,6 +1109,29 @@ fn main() {
 #[cfg(test)]
 mod step_size_settings_tests {
     use super::*;
+    #[test]
+    fn fundamental_boundary_errors_are_opt_in_and_validated() {
+        assert_eq!(
+            Settings::default()
+                .options(Path::new("."))
+                .unwrap()
+                .boundary_error_strategy,
+            BoundaryErrorStrategy::ScalarNorm
+        );
+        let settings: Settings =
+            serde_json::from_value(json!({"boundary_error_strategy":"fundamental_matrix"}))
+                .unwrap();
+        assert_eq!(
+            settings
+                .options(Path::new("."))
+                .unwrap()
+                .boundary_error_strategy,
+            BoundaryErrorStrategy::FundamentalMatrix
+        );
+        let invalid: Settings =
+            serde_json::from_value(json!({"boundary_error_strategy":"unchecked"})).unwrap();
+        assert!(invalid.options(Path::new(".")).is_err());
+    }
     #[test]
     fn integer_residual_arithmetic_is_explicit_and_validated() {
         assert_eq!(

@@ -15,6 +15,8 @@ pub mod pade;
 #[path = "ode/source.rs"]
 pub(crate) mod source;
 use residual::RationalResidualChart;
+#[path = "ode/fundamental.rs"]
+pub(crate) mod fundamental;
 #[path = "ode/prepared.rs"]
 pub(crate) mod prepared;
 use symbolica::domains::float::FloatField;
@@ -35,6 +37,10 @@ pub struct BoundaryData {
 
 #[derive(Clone, Debug, Default)]
 pub struct FlowDiagnostics {
+    /// Whole-chart fundamental proofs used for supplied boundary errors.
+    pub fundamental_boundary_charts: usize,
+    /// Why an optional fundamental proof retained scalar source-error handling.
+    pub fundamental_boundary_fallback: Option<String>,
     pub pade_trials: usize,
     pub pade_steps: usize,
     pub pade_fallbacks: usize,
