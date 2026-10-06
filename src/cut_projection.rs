@@ -252,3 +252,209 @@ impl<'a> PreparedCutProjections<'a> {
         Ok(result)
     }
 }
+
+/// A native cut integrand decomposed into independent families and summed at
+/// finite epsilon. Child Laurent expansions are never fitted independently.
+/// Original physical slot identities survive native partial fractions.
+pub struct PreparedCutCombination<'a> {
+    groups: Vec<(PreparedCutProjections<'a>, MassMode)>,
+    original_slots: Vec<Vec<usize>>,
+    nonzero_conditions: Vec<Atom>,
+    coefficient_conditions: Vec<Atom>,
+    leading: i32,
+    epsilon: Symbol,
+}
+
+impl<'a> PreparedCutCombination<'a> {
+    /// Input kinematics must already be specialized exactly. The native family
+    /// may be overcomplete; its cuts and every original denominator are admitted
+    /// before HEPKit performs bounded partial fractions. Numerator dimension
+    /// symbols are decoded only after native contraction/rewriting.
+    #[allow(clippy::too_many_arguments)]
+    pub fn from_hepkit(
+        family: &feynkit_graph::IntegralFamily,
+        powers: &[i16],
+        numerator: &Atom,
+        cuts: crate::cuts::CutMetadata,
+        channel: &FutureTimelikeChannel,
+        epsilon: Symbol,
+        backend: &'a dyn ReductionBackend,
+        options: &FlowOptions,
+        max_partial_fraction_states: usize,
+        context: &RunContext,
+    ) -> Result<Self> {
+        options.validate()?;
+        context.cancellation.check()?;
+        if let MassMode::Propagators(slots) = &options.mass_mode
+            && (slots.is_empty() || slots.iter().any(|&s| s >= powers.len() || cuts.is_cut(s)))
+        {
+            return Err(Error::InvalidInput(
+                "mass insertion must select original uncut physical propagators".into(),
+            ));
+        }
+        let decomposed = crate::hepkit::decompose_cut_inventory(
+            family,
+            powers,
+            numerator,
+            &cuts,
+            channel,
+            epsilon,
+            options.dimension,
+            max_partial_fraction_states,
+            context,
+        )?;
+        let mut leading = i32::try_from(family.loop_momenta().len())
+            .ok()
+            .and_then(|n| n.checked_mul(-2))
+            .and_then(|n| n.checked_add(decomposed.coefficient_valuation))
+            .ok_or_else(|| Error::Limit("cut combination pole bound overflow".into()))?;
+        let mut groups = Vec::new();
+        let mut original_slots = Vec::new();
+        let coefficient_conditions = decomposed.coefficient_conditions;
+        let mut conditions = coefficient_conditions
+            .iter()
+            .cloned()
+            .collect::<BTreeSet<_>>();
+        for group in decomposed.groups {
+            context.cancellation.check()?;
+            let mut child = options.clone();
+            if let MassMode::Propagators(slots) = &options.mass_mode {
+                let retained = group
+                    .original_slots
+                    .iter()
+                    .enumerate()
+                    .filter_map(|(new, old)| slots.contains(old).then_some(new))
+                    .collect::<Vec<_>>();
+                let terminal =
+                    group.family.cuts().lines().len() == group.family.family().physical_propagators;
+                if retained.is_empty() && !terminal {
+                    return Err(Error::Unsupported("partial fractions removed every explicitly selected mass insertion from a nonterminal child".into()));
+                }
+                child.mass_mode = if terminal {
+                    MassMode::Auto
+                } else {
+                    MassMode::Propagators(retained)
+                };
+            }
+            let prepared = PreparedCutProjections::new(
+                &group.family,
+                channel,
+                &[group.weights],
+                &KinematicPoint::default(),
+                backend,
+                &child,
+                context,
+            )?;
+            leading = leading.min(prepared.leading_power());
+            conditions.extend(prepared.nonzero_conditions().iter().cloned());
+            original_slots.push(group.original_slots);
+            groups.push((prepared, child.mass_mode));
+        }
+        context.cancellation.check()?;
+        Ok(Self {
+            groups,
+            original_slots,
+            nonzero_conditions: conditions.into_iter().collect(),
+            coefficient_conditions,
+            leading,
+            epsilon,
+        })
+    }
+
+    /// Child physical slots mapped back to the original native inventory order.
+    pub fn original_slots(&self) -> &[Vec<usize>] {
+        &self.original_slots
+    }
+    pub fn nonzero_conditions(&self) -> &[Atom] {
+        &self.nonzero_conditions
+    }
+    pub fn leading_power(&self) -> i32 {
+        self.leading
+    }
+
+    /// Working-precision values; verified accuracy comes from `solve` refinement.
+    pub fn evaluate(
+        &self,
+        epsilon: &Rational,
+        options: &FlowOptions,
+        context: &RunContext,
+    ) -> Result<Vec<ComplexFloat>> {
+        options.validate()?;
+        context.cancellation.check()?;
+        if epsilon.is_zero() {
+            return Err(Error::InvalidInput(
+                "epsilon samples must be nonzero".into(),
+            ));
+        }
+        crate::physical_conditions::validate_conditions_at(
+            &self.coefficient_conditions,
+            self.epsilon,
+            &BTreeMap::from([(self.epsilon, Atom::num(epsilon.clone()))]),
+        )?;
+        let precision = Precision::decimal(options.digits + options.guard_digits)?;
+        let mut sum = precision.zero();
+        for (group, placement) in &self.groups {
+            context.cancellation.check()?;
+            let mut child = options.clone();
+            child.mass_mode = placement.clone();
+            let value = group.evaluate(epsilon, &child, context)?.remove(0);
+            sum = precision.add(&sum, &value);
+        }
+        context.cancellation.check()?;
+        if !precision.finite(&sum) {
+            return Err(Error::Numerical("nonfinite cut combination".into()));
+        }
+        Ok(vec![sum])
+    }
+
+    pub fn evaluate_samples(
+        &self,
+        samples: &[Rational],
+        options: &FlowOptions,
+        context: &RunContext,
+    ) -> Result<Vec<Vec<ComplexFloat>>> {
+        options.validate()?;
+        context.cancellation.check()?;
+        if samples.is_empty() || samples.iter().any(Rational::is_zero) {
+            return Err(Error::InvalidInput(
+                "at least one nonzero epsilon sample is required".into(),
+            ));
+        }
+        let evaluate = |(index, epsilon): (usize, &Rational)| {
+            context.emit(Progress::Sample {
+                index,
+                total: samples.len(),
+            })?;
+            self.evaluate(epsilon, options, context)
+        };
+        // Parallelize samples once; independent family contributions are summed
+        // within that worker instead of creating nested worker pools.
+        if options.workers == 1 {
+            samples.iter().enumerate().map(evaluate).collect()
+        } else {
+            rayon::ThreadPoolBuilder::new()
+                .num_threads(options.workers)
+                .build()
+                .map_err(|e| Error::InvalidInput(e.to_string()))?
+                .install(|| samples.par_iter().enumerate().map(evaluate).collect())
+        }
+    }
+
+    pub fn solve(
+        &self,
+        last: i32,
+        options: &FlowOptions,
+        context: &RunContext,
+    ) -> Result<Vec<LaurentExpansion>> {
+        context.cancellation.check()?;
+        let result = crate::engine::fit_samples_refined_leading(
+            1,
+            self.leading,
+            last,
+            options,
+            |samples, refined| self.evaluate_samples(samples, refined, context),
+        )?;
+        context.cancellation.check()?;
+        Ok(result)
+    }
+}

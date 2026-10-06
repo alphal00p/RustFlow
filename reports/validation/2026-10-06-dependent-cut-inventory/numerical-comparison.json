@@ -1,0 +1,48 @@
+{
+  "native_samples": [
+    {
+      "epsilon_exact": "1/13",
+      "placement": "All",
+      "sample_seconds": "1.942970482",
+      "real_value": "-3.8875269429474178005050710232153496402784691543773926927228817711319921842e-5",
+      "relative_residual_to_independent_series": "8.6351859036380417150209727291959287584193253309821159666243910011683702385850927980123278513524e-53",
+      "cold_preparation_seconds": "1.112585791",
+      "preparation_plus_sample_seconds": "3.055556273",
+      "raw_relative_residual_to_recorded_upstream_difference": "2.684475839329435074439731021004221284628660118660128548759538610731431259561541097028985007838373099E-32"
+    },
+    {
+      "epsilon_exact": "1/17",
+      "placement": "All",
+      "sample_seconds": "1.899875821",
+      "real_value": "-3.3198146756474411513409517822856176036500223931740827321164243930036926547e-5",
+      "relative_residual_to_independent_series": "7.8311676585121052661004935255052384906713906468129475971990450427433266916252767363325811406131e-53"
+    },
+    {
+      "epsilon_exact": "1/13",
+      "placement": "Propagators([5])",
+      "sample_seconds": "7.274461801",
+      "real_value": "-3.8875269429474178005050710232153496402784691543773926927228873969135101756e-5",
+      "relative_residual_to_independent_series": "8.6351860483516785445778124520797891058151872417738229847169746155496717179923534519661095769102e-53",
+      "cold_preparation_seconds": "19.22833516",
+      "preparation_plus_sample_seconds": "26.502796961",
+      "raw_relative_residual_to_recorded_upstream_difference": "2.684475839329435074439731020859507650471154200846890606039386805527738739310636238372167760966899675E-32"
+    },
+    {
+      "epsilon_exact": "1/17",
+      "placement": "Propagators([5])",
+      "sample_seconds": "7.229785774",
+      "real_value": "-3.3198146756474411513409517822856176036500223931740827321164822380503195161e-5",
+      "relative_residual_to_independent_series": "7.8311694009300768183117508175074148301573936137328896540874090541631159062737534402235838965102e-53"
+    }
+  ],
+  "upstream_child_solve_seconds": [
+    129.144518,
+    128.614578
+  ],
+  "upstream_sum_solve_seconds": "257.759096",
+  "comparison_digits": 20,
+  "upstream_child_recorded_digits": 24,
+  "upstream_cancellation_lost_relative_digits": "about 2.2",
+  "reference_nominal_relative_uncertainty": "1.6282906576477295618114370345399655190694093702056442373691198612631865050918440E-22",
+  "profile_note": "Native combined original inventory versus sum of two independent upstream SolveIntegrals jobs. Same physical point, normalization and epsilon; different precision/order profiles and reducers. Native All and explicit partial placements agree; upstream timings are All only. No broad performance-parity claim."
+}

@@ -1,0 +1,24 @@
+{
+  "captured_utc": "2026-10-06T06:16:58.880130+00:00",
+  "port_source_digest": "412f4afb7bc20c57bcf34de7547673b0a6e834e00817cd85b71d01d3f477b9da",
+  "artifacts": [
+    {
+      "source": "/common/dev/amflow-dependent-cut-inventory/target/release/deps/dependent_cut_inventory-16c6da556217326f",
+      "frozen": "/common/dev/amflow-dependent-cut-inventory/target/frozen-dependent-cut-412f4afb/dependent_cut_inventory-16c6da556217326f",
+      "sha256": "97d8926f168e09f5be6fe7551b7e8c817f238d3ab24012b76d6178aa77ac0964",
+      "bytes": 1186335296
+    },
+    {
+      "source": "/common/dev/amflow-dependent-cut-inventory/target/release/deps/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+      "frozen": "/common/dev/amflow-dependent-cut-inventory/target/frozen-dependent-cut-412f4afb/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+      "sha256": "f3f8b6271cdda3f2ab51e6fe5fcd4e862206d41f072f04fba0e4075560d7bb66",
+      "bytes": 505160622
+    },
+    {
+      "source": "/common/dev/amflow-dependent-cut-inventory/target/release/deps/symbolica_amflow-47f5668f32c80192",
+      "frozen": "/common/dev/amflow-dependent-cut-inventory/target/frozen-dependent-cut-412f4afb/symbolica_amflow-47f5668f32c80192",
+      "sha256": "5d15515888129055191bd99b46d52dbced7b4cee6bf5f20560f358592aa3e4a7",
+      "bytes": 1199352816
+    }
+  ]
+}

@@ -59,7 +59,7 @@ pub mod vacuum;
 mod vacuum_peel;
 pub use asymptotic::AsymptoticConstraint;
 pub use cut_flow::PreparedCutFlow;
-pub use cut_projection::PreparedCutProjections;
+pub use cut_projection::{PreparedCutCombination, PreparedCutProjections};
 pub use engine::{
     PreparedFlow, evaluate_samples, solve_integral_combinations, solve_integral_projections,
     solve_integral_projections_normalized, solve_integrals, solve_prepared,

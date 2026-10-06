@@ -1,6 +1,8 @@
 #![cfg(feature = "python")]
 #[path = "support/native_cut_graph.rs"]
 mod native_cut_graph;
+#[path = "support/native_dependent_cut_graph.rs"]
+mod native_dependent_cut_graph;
 #[path = "support/native_mixed_cut_graph.rs"]
 mod native_mixed_cut_graph;
 use feynkit_py::PyFeynmanDiagram;
@@ -203,9 +205,50 @@ fn cut_bindings_have_descriptive_generated_stubs_with_native_types() {
     assert!(source.contains("future_channel:"));
     assert!(source.contains("loop_prescriptions:"));
     assert!(source.contains("edge_powers:"));
+    assert!(source.contains("max_partial_fraction_states:"));
     assert!(source.contains("deformed_propagator_slots:"));
     assert!(source.contains("def mass_mode("));
     assert!(source.contains("FeynmanDiagram"));
     assert!(source.contains("Kinematics"));
     assert!(!source.contains("class RustFlow"));
+}
+
+#[test]
+fn dependent_native_cut_bindings_apply_raised_measures_and_decomposition_limits() {
+    Python::initialize();
+    Python::attach(|py| -> PyResult<()> {
+        let core=PyModule::new(py,"symbolica.core")?;create_symbolica_module(&core)?;
+        let hep=PyModule::new(py,"symbolica.community.hepkit")?;feynkit_py::initialize_feynkit(&hep)?;
+        let integration=PyModule::new(py,"symbolica.community.hep.integration")?;symbolica_amflow::python::register(&integration)?;
+        let local=PyDict::new(py);local.set_item("hep",&hep)?;local.set_item("integration",&integration)?;
+        local.set_item("diagram",PyFeynmanDiagram::from(native_dependent_cut_graph::diagram()))?;
+        local.set_item("D",PythonExpression::from(Atom::var(symbol!("dependent_python::D"))))?;
+        local.set_item("eps",PythonExpression::from(Atom::var(symbol!("dependent_python::eps"))))?;
+        local.set_item("P",PythonExpression::from(feynkit_graph::symbols::external_momentum().call(0)))?;
+        local.set_item("M",PythonExpression::from(Atom::var(symbol!("UFO::M"))))?;
+        local.set_item("mass",PythonExpression::from(Atom::num(2).pow(Rational::from((1,2)))))?;
+        local.set_item("one",PythonExpression::from(Atom::one()))?;
+        local.set_item("sample",PythonExpression::from(Atom::num(Rational::from((1,13)))))?;
+        py.run(c"
+kinematics=hep.Kinematics(D).with_scalar_product(P,P,one)
+evaluator=integration.IntegralEvaluator(options=integration.EvaluationOptions(digits=30,guard_digits=40))
+selection=dict(cut_index=0,future_channel=[one],loop_prescriptions=['insensitive'],edge_powers={1:2})
+values=evaluator.evaluate_cut_diagram_samples(diagram,kinematics,{M:mass},eps,[sample],**selection)
+assert not isinstance(values[0],(float,complex))
+try:
+    evaluator.evaluate_cut_diagram_samples(diagram,kinematics,{M:mass},eps,[sample],max_partial_fraction_states=0,**selection)
+    raise AssertionError('decomposition limit ignored')
+except integration.ResourceLimitError:
+    pass
+",Some(&local),Some(&local))?;
+        let value=local.get_item("values")?.unwrap().get_item(0)?.extract::<PythonMultiPrecisionComplex>()?;
+        let p=Precision::decimal(90).unwrap();let epsilon=Rational::from((1,13));
+        let pi=ComplexFloat::new(p.real(1).pi(),p.real(0));
+        let volume=p.div(&p.mul(&p.pow(&p.scale(&pi,4,1),&p.rational(&epsilon)),
+            &p.gamma_real(&p.rational(&(Rational::one()-&epsilon)).re).unwrap()),
+            &p.mul(&p.scale(&pi,8,1),&p.gamma_real(&p.rational(&(Rational::from(2)-Rational::from(2)*&epsilon)).re).unwrap()));
+        let expected=p.mul(&volume,&p.rational(&(Rational::from((1,4))-&epsilon)));
+        assert!(p.norm(&p.sub(&value.0,&expected))<p.tolerance(40)*p.norm(&expected),"{} != {expected}",value.0);
+        Ok(())
+    }).unwrap();
 }

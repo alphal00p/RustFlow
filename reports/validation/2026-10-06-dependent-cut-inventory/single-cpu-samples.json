@@ -1,0 +1,29 @@
+{
+  "started_utc": "2026-10-06T06:19:35.372329+00:00",
+  "completed_utc": "2026-10-06T06:20:27.950485+00:00",
+  "command": [
+    "taskset",
+    "-c",
+    "46",
+    "/common/dev/amflow-dependent-cut-inventory/target/frozen-dependent-cut-412f4afb/dependent_cut_inventory-16c6da556217326f",
+    "nonfactorized_overcomplete_virtual_inventory_matches_independent_double_beta_series",
+    "--exact",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 52.578179594129324,
+  "binary_sha256": "97d8926f168e09f5be6fe7551b7e8c817f238d3ab24012b76d6178aa77ac0964",
+  "requested_digits": 20,
+  "initial_working_decimal_digits": 70,
+  "refined_working_decimal_digits": 90,
+  "initial_series_order": 80,
+  "refined_series_order": 112,
+  "workers": 1,
+  "cpu_affinity": [
+    46
+  ],
+  "numeric_cache": "none",
+  "exact_system_cache": "none",
+  "scope": "Fresh process, native family construction before preparation timer. Full independent verification and both placements included in process wall time. Unrelated cluster work may run on other cores."
+}

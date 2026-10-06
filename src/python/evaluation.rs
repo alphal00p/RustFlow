@@ -349,7 +349,7 @@ impl PyIntegralEvaluator {
     /// prescriptions are +i0, -i0 or insensitive in native loop-basis order.
     /// Raised cut powers use derivative-delta normalization; no flux or symmetry
     /// factor is added beyond the diagram's own exact overall factor.
-    #[pyo3(signature=(diagram, kinematics, point, epsilon, *, cut_index, future_channel, loop_prescriptions, edge_powers=None, last=0, control=None))]
+    #[pyo3(signature=(diagram, kinematics, point, epsilon, *, cut_index, future_channel, loop_prescriptions, edge_powers=None, last=0, max_partial_fraction_states=10000, control=None))]
     #[allow(clippy::too_many_arguments)]
     fn evaluate_cut_diagram(
         &self,
@@ -363,6 +363,7 @@ impl PyIntegralEvaluator {
         loop_prescriptions: Vec<String>,
         edge_powers: Option<BTreeMap<usize, i16>>,
         last: i32,
+        max_partial_fraction_states: usize,
         control: Option<&PyComputationControl>,
     ) -> PyResult<PyLaurentExpansion> {
         let graph = cut_graph(py, diagram, kinematics, edge_powers)?;
@@ -372,7 +373,7 @@ impl PyIntegralEvaluator {
         let prescriptions = cut_prescriptions(loop_prescriptions)?;
         let context = context(control);
         py.detach(|| {
-            let prepared = graph.prepare_cut_projection(
+            let prepared = graph.prepare_cut_combination(
                 cut_index,
                 &point,
                 epsilon,
@@ -380,6 +381,7 @@ impl PyIntegralEvaluator {
                 prescriptions,
                 self.backend.as_ref(),
                 &self.options,
+                max_partial_fraction_states,
                 &context,
             )?;
             prepared
@@ -393,7 +395,7 @@ impl PyIntegralEvaluator {
     /// Shared finite-epsilon cut evaluation. Exact numerator weights and cut IBP
     /// coefficients are applied at each nonzero sample before any truncation.
     /// Values have working precision; this method does not assert fitted accuracy.
-    #[pyo3(signature=(diagram, kinematics, point, epsilon, samples, *, cut_index, future_channel, loop_prescriptions, edge_powers=None, control=None))]
+    #[pyo3(signature=(diagram, kinematics, point, epsilon, samples, *, cut_index, future_channel, loop_prescriptions, edge_powers=None, max_partial_fraction_states=10000, control=None))]
     #[allow(clippy::too_many_arguments)]
     fn evaluate_cut_diagram_samples(
         &self,
@@ -407,6 +409,7 @@ impl PyIntegralEvaluator {
         future_channel: Vec<PythonExpression>,
         loop_prescriptions: Vec<String>,
         edge_powers: Option<BTreeMap<usize, i16>>,
+        max_partial_fraction_states: usize,
         control: Option<&PyComputationControl>,
     ) -> PyResult<Vec<PythonMultiPrecisionComplex>> {
         let graph = cut_graph(py, diagram, kinematics, edge_powers)?;
@@ -417,7 +420,7 @@ impl PyIntegralEvaluator {
         let samples = samples.iter().map(rational).collect::<PyResult<Vec<_>>>()?;
         let context = context(control);
         py.detach(|| {
-            let prepared = graph.prepare_cut_projection(
+            let prepared = graph.prepare_cut_combination(
                 cut_index,
                 &point,
                 epsilon,
@@ -425,6 +428,7 @@ impl PyIntegralEvaluator {
                 prescriptions,
                 self.backend.as_ref(),
                 &self.options,
+                max_partial_fraction_states,
                 &context,
             )?;
             prepared.evaluate_samples(&samples, &self.options, &context)

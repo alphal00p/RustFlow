@@ -130,6 +130,182 @@ impl CutFamily {
 
     pub fn validate(&self) -> Result<()> {
         self.family.validate()?;
+        self.inventory().validate()
+    }
+
+    pub(crate) fn inventory(&self) -> CutInventory<'_> {
+        CutInventory {
+            family: &self.family,
+            cuts: &self.cuts,
+        }
+    }
+
+    /// Intrinsic squared mass of the retained normalized positive-energy shell.
+    pub fn cut_mass_squared(&self, slot: usize) -> Result<Atom> {
+        self.inventory().cut_mass_squared(slot)
+    }
+
+    pub fn at(&self, point: &KinematicPoint) -> Result<Self> {
+        Self::new(self.family.at(point), self.cuts.clone())
+    }
+
+    /// A cut with nonpositive integer power vanishes by its distributional
+    /// definition. This is separate from a RustRed scaleless-sector certificate.
+    pub fn is_cut_zero(&self, integral: &Integral) -> Result<bool> {
+        self.family.validate_integral(integral)?;
+        Ok(self.cuts.lines.keys().any(|&slot| integral.0[slot] <= 0))
+    }
+
+    pub fn validate_auxiliary_mask(&self, shifted: &[bool]) -> Result<()> {
+        if shifted.len() != self.family.propagators.len() {
+            return Err(Error::InvalidInput("auxiliary mass mask dimensions".into()));
+        }
+        if self.cuts.lines.keys().any(|&slot| shifted[slot]) {
+            return Err(Error::InvalidInput(
+                "auxiliary mass cannot shift a cut denominator".into(),
+            ));
+        }
+        Ok(())
+    }
+
+    /// Required-active constraints for RustRed's zero analysis and symmetry
+    /// filtering. An excluded sector is not thereby a scaleless certificate.
+    pub fn native_restrictions(&self) -> Result<Restrictions> {
+        let arity = self.family.propagators.len();
+        let cuts = CutConstraint::try_from_positions(arity, self.cuts.lines.keys().copied())
+            .map_err(|e| Error::InvalidInput(e.to_string()))?;
+        let pattern = Pattern::any(arity).map_err(|e| Error::InvalidInput(e.to_string()))?;
+        Restrictions::try_new(cuts, pattern).map_err(|e| Error::InvalidInput(e.to_string()))
+    }
+
+    /// Configure the existing native solver for ordinary, possibly raised cuts.
+    /// Removed cuts require a separate authenticated source transformation and
+    /// are deliberately not inferred here. The caller's resource limits and
+    /// runtime arity dispatch remain unchanged.
+    pub fn configure_native<const N: usize>(
+        &self,
+        mut config: SectorConfig<N>,
+    ) -> Result<SectorConfig<N>> {
+        if N != self.family.propagators.len() {
+            return Err(Error::InvalidInput("native cut configuration arity".into()));
+        }
+        if config.integral_order.is_some() {
+            return Err(Error::Unsupported("RustRed programmable ordering does not support cuts; use its native cut-aware ordering".into()));
+        }
+        if config.removed_deltas.iter().any(|&x| x) {
+            return Err(Error::Unsupported(
+                "removed cuts require an explicitly prepared native source system".into(),
+            ));
+        }
+        let deltas = std::array::from_fn(|slot| self.cuts.is_cut(slot));
+        if config.deltas.iter().any(|&x| x) && config.deltas != deltas {
+            return Err(Error::InvalidInput(
+                "native cut configuration conflicts with family metadata".into(),
+            ));
+        }
+        config.deltas = deltas;
+        Ok(config)
+    }
+
+    pub fn propagator_loop_prescription(&self, slot: usize) -> Result<LoopPrescription> {
+        self.inventory().propagator_loop_prescription(slot)
+    }
+
+    /// Value identity includes cuts and orientation; it cannot collide with an
+    /// uncut family or the opposite positive-energy channel.
+    pub fn fingerprint(&self) -> Result<String> {
+        let algebraic = self.family.convert()?.family;
+        let content = format!(
+            "cut-family-v1:{}:{}:{:?}",
+            algebraic.fingerprint(),
+            self.family.physical_propagators,
+            self.cuts
+        );
+        Ok(blake3::hash(content.as_bytes()).to_hex().to_string())
+    }
+}
+
+/// Internal view used to reuse the ordinary authenticated reduction-cache codec.
+/// Its identity contains the measure, and every reduction reattaches that measure
+/// explicitly before calling the underlying cut-aware backend.
+pub(crate) struct CutBackendView<'a> {
+    pub backend: &'a dyn crate::ReductionBackend,
+    pub cuts: &'a CutMetadata,
+}
+impl crate::ReductionBackend for CutBackendView<'_> {
+    fn identity(&self) -> String {
+        let measure = blake3::hash(format!("cut-measure-v1:{:?}", self.cuts).as_bytes());
+        format!("{}:cut-measure-v1:{measure}", self.backend.identity())
+    }
+    fn reduce(
+        &self,
+        family: &IntegralFamily,
+        targets: &[Integral],
+        context: &crate::RunContext,
+    ) -> Result<crate::reduction::Reduction> {
+        let family = CutFamily::new(family.clone(), self.cuts.clone())?;
+        self.backend.reduce_cut(&family, targets, context)
+    }
+    fn reduce_at_epsilon(
+        &self,
+        family: &IntegralFamily,
+        targets: &[Integral],
+        epsilon: &Rational,
+        context: &crate::RunContext,
+    ) -> Result<crate::reduction::Reduction> {
+        let family = CutFamily::new(family.clone(), self.cuts.clone())?;
+        self.backend
+            .reduce_cut_at_epsilon(&family, targets, epsilon, context)
+    }
+}
+
+/// Borrowed measure geometry before an overcomplete native denominator inventory
+/// is reduced to independent families. This never authorizes an IBP conversion.
+#[derive(Clone, Copy)]
+pub(crate) struct CutInventory<'a> {
+    family: &'a IntegralFamily,
+    cuts: &'a CutMetadata,
+}
+impl<'a> CutInventory<'a> {
+    pub(crate) fn new(family: &'a IntegralFamily, cuts: &'a CutMetadata) -> Result<Self> {
+        let inventory = Self { family, cuts };
+        inventory.validate()?;
+        Ok(inventory)
+    }
+    pub(crate) fn family(&self) -> &'a IntegralFamily {
+        self.family
+    }
+    pub(crate) fn cuts(&self) -> &'a CutMetadata {
+        self.cuts
+    }
+    pub fn validate(&self) -> Result<()> {
+        let loops = self.family.loops.len();
+        let external = self.family.external.len();
+        let size = loops
+            .checked_add(1)
+            .and_then(|n| loops.checked_mul(n))
+            .map(|n| n / 2)
+            .and_then(|n| loops.checked_mul(external).and_then(|m| n.checked_add(m)))
+            .ok_or_else(|| {
+                Error::Limit("cut inventory scalar-product dimension overflow".into())
+            })?;
+        if loops == 0
+            || self.family.physical_propagators > self.family.propagators.len()
+            || self
+                .family
+                .propagators
+                .iter()
+                .any(|d| d.scalar_products.len() != size)
+            || self.family.external_gram.len() != external
+            || self
+                .family
+                .external_gram
+                .iter()
+                .any(|row| row.len() != external)
+        {
+            return Err(Error::InvalidInput("cut inventory dimensions".into()));
+        }
+
         if self.cuts.loop_prescriptions.len() != self.family.loops.len() {
             return Err(Error::InvalidInput(
                 "one prescription is required per loop momentum".into(),
@@ -207,68 +383,6 @@ impl CutFamily {
         Ok(mass.together().cancel())
     }
 
-    pub fn at(&self, point: &KinematicPoint) -> Result<Self> {
-        Self::new(self.family.at(point), self.cuts.clone())
-    }
-
-    /// A cut with nonpositive integer power vanishes by its distributional
-    /// definition. This is separate from a RustRed scaleless-sector certificate.
-    pub fn is_cut_zero(&self, integral: &Integral) -> Result<bool> {
-        self.family.validate_integral(integral)?;
-        Ok(self.cuts.lines.keys().any(|&slot| integral.0[slot] <= 0))
-    }
-
-    pub fn validate_auxiliary_mask(&self, shifted: &[bool]) -> Result<()> {
-        if shifted.len() != self.family.propagators.len() {
-            return Err(Error::InvalidInput("auxiliary mass mask dimensions".into()));
-        }
-        if self.cuts.lines.keys().any(|&slot| shifted[slot]) {
-            return Err(Error::InvalidInput(
-                "auxiliary mass cannot shift a cut denominator".into(),
-            ));
-        }
-        Ok(())
-    }
-
-    /// Required-active constraints for RustRed's zero analysis and symmetry
-    /// filtering. An excluded sector is not thereby a scaleless certificate.
-    pub fn native_restrictions(&self) -> Result<Restrictions> {
-        let arity = self.family.propagators.len();
-        let cuts = CutConstraint::try_from_positions(arity, self.cuts.lines.keys().copied())
-            .map_err(|e| Error::InvalidInput(e.to_string()))?;
-        let pattern = Pattern::any(arity).map_err(|e| Error::InvalidInput(e.to_string()))?;
-        Restrictions::try_new(cuts, pattern).map_err(|e| Error::InvalidInput(e.to_string()))
-    }
-
-    /// Configure the existing native solver for ordinary, possibly raised cuts.
-    /// Removed cuts require a separate authenticated source transformation and
-    /// are deliberately not inferred here. The caller's resource limits and
-    /// runtime arity dispatch remain unchanged.
-    pub fn configure_native<const N: usize>(
-        &self,
-        mut config: SectorConfig<N>,
-    ) -> Result<SectorConfig<N>> {
-        if N != self.family.propagators.len() {
-            return Err(Error::InvalidInput("native cut configuration arity".into()));
-        }
-        if config.integral_order.is_some() {
-            return Err(Error::Unsupported("RustRed programmable ordering does not support cuts; use its native cut-aware ordering".into()));
-        }
-        if config.removed_deltas.iter().any(|&x| x) {
-            return Err(Error::Unsupported(
-                "removed cuts require an explicitly prepared native source system".into(),
-            ));
-        }
-        let deltas = std::array::from_fn(|slot| self.cuts.is_cut(slot));
-        if config.deltas.iter().any(|&x| x) && config.deltas != deltas {
-            return Err(Error::InvalidInput(
-                "native cut configuration conflicts with family metadata".into(),
-            ));
-        }
-        config.deltas = deltas;
-        Ok(config)
-    }
-
     /// Read the per-loop causal convention on which this propagator depends.
     /// Opposite nonzero conventions in one denominator are inconsistent.
     ///
@@ -316,53 +430,6 @@ impl CutFamily {
             result = *prescription;
         }
         Ok(result)
-    }
-
-    /// Value identity includes cuts and orientation; it cannot collide with an
-    /// uncut family or the opposite positive-energy channel.
-    pub fn fingerprint(&self) -> Result<String> {
-        let algebraic = self.family.convert()?.family;
-        let content = format!(
-            "cut-family-v1:{}:{}:{:?}",
-            algebraic.fingerprint(),
-            self.family.physical_propagators,
-            self.cuts
-        );
-        Ok(blake3::hash(content.as_bytes()).to_hex().to_string())
-    }
-}
-
-/// Internal view used to reuse the ordinary authenticated reduction-cache codec.
-/// Its identity contains the measure, and every reduction reattaches that measure
-/// explicitly before calling the underlying cut-aware backend.
-pub(crate) struct CutBackendView<'a> {
-    pub backend: &'a dyn crate::ReductionBackend,
-    pub cuts: &'a CutMetadata,
-}
-impl crate::ReductionBackend for CutBackendView<'_> {
-    fn identity(&self) -> String {
-        let measure = blake3::hash(format!("cut-measure-v1:{:?}", self.cuts).as_bytes());
-        format!("{}:cut-measure-v1:{measure}", self.backend.identity())
-    }
-    fn reduce(
-        &self,
-        family: &IntegralFamily,
-        targets: &[Integral],
-        context: &crate::RunContext,
-    ) -> Result<crate::reduction::Reduction> {
-        let family = CutFamily::new(family.clone(), self.cuts.clone())?;
-        self.backend.reduce_cut(&family, targets, context)
-    }
-    fn reduce_at_epsilon(
-        &self,
-        family: &IntegralFamily,
-        targets: &[Integral],
-        epsilon: &Rational,
-        context: &crate::RunContext,
-    ) -> Result<crate::reduction::Reduction> {
-        let family = CutFamily::new(family.clone(), self.cuts.clone())?;
-        self.backend
-            .reduce_cut_at_epsilon(&family, targets, epsilon, context)
     }
 }
 

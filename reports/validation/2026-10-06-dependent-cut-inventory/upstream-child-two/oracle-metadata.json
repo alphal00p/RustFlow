@@ -1,0 +1,112 @@
+{
+	"upstream_commit":"26005517a288086c4cb4d1b26d829691bc088485",
+	"case":"dependent_child_two",
+	"mode":"sample",
+	"requested_amf_mode":"All",
+	"actual_system_configurations":[
+		{
+			"path":"cache\/partialcut_amflow\/10\/config",
+			"loops":"{r}",
+			"propagators":"{-eta + r^2, -eta + l^2 + 2*l*r + r^2}",
+			"eta_positions_one_based":[
+				1,
+				2
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/11\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/12\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/1\/config",
+			"loops":"{r, l, k}",
+			"propagators":"{r^2, l^2, (-l + p - r)^2, -2 - eta + k^2, -5 - eta + (k - l - r)^2, (p - r)^2, (-l + p)^2, (k - r)^2, (-k + p)^2}",
+			"eta_positions_one_based":[
+				4,
+				5
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/2\/config",
+			"loops":"{r, l, k}",
+			"propagators":"{-1 + k^2, -eta + l^2, -eta + r^2, -eta + (l - p + r)^2, (l + r)^2, (k + r)^2, (k + l)^2, (p + r)^2, (k + p)^2}",
+			"eta_positions_one_based":[
+				2,
+				3,
+				4
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/3\/config",
+			"loops":"{r, l, k}",
+			"propagators":"{-1 - eta + k^2, -1 + l^2, -1 + (k + l)^2, -1 + r^2, (l + r)^2, (k + r)^2, (p + r)^2, (l + p)^2, (k + p)^2}",
+			"eta_positions_one_based":[
+				1
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/4\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/5\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/6\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/7\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/8\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/9\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		}
+	],
+	"epsilon_exact":"1\/13",
+	"requested_digits":24,
+	"asserted_digits":20,
+	"wolfram_version":"15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+	"coefficients":[
+		"0.00318444953599229637406421702536975702`24."
+	],
+	"expected":[
+		"0.003184449535992296374064217025369791356025553408683505508317456197999255259117972193257021027368`80."
+	],
+	"scaled_absolute_errors":[
+		"3.4333792054830201704686983025822238864369841068908942566593123`47.73165740580664*^-35"
+	],
+	"independent_series_absolute_tail_bound":"1.2039304607787821306598387765090011413325563421501987235120643069236003903554351091086891588798861712845`80.*^-51",
+	"solve_wall_seconds":1.29144518e2,
+	"analytic_check_passed":true,
+	"normalization":"Complete massless three-body Lorentz-invariant phase space times d^D k\/(i Pi^(D\/2)); no EulerGamma, flux or symmetry factor",
+	"independence":"Comparison-only double-beta\/Feynman-parameter series; no numerical reference boundary enters the evaluator",
+	"comparison_scope":"Independent child of native overcomplete inventory. Combined value is child(mass=3)-child(mass=2). No claim that upstream accepts the original dependent inventory.",
+	"first_squared_mass":2
+}

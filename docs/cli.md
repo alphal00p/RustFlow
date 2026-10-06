@@ -90,7 +90,8 @@ serve different purposes and use separate paths.
 propagators, set `"deformed_propagator_slots": [2]`. Slots are zero-based
 positions in the evaluated family's physical denominator list, never native
 HEPKit `EdgeId` values and never irreducible scalar-product slots. The cut graph
-converter preserves `GraphIntegral::propagator_edges()` order: if this list is
+adapter maps original `GraphIntegral::propagator_edges()` slots into each
+independent child: if this list is
 `[EdgeId(1), EdgeId(2), EdgeId(3), EdgeId(4)]`, slot `2` denotes `EdgeId(3)`.
 Ordinary partial-fraction conversion produces family-local denominator lists;
 explicit slots apply separately to each converted family. Use a named mode when
@@ -381,3 +382,12 @@ with independently refined Laurent coefficients through `last_epsilon_power`.
 Both outputs include retained preparation `nonzero_conditions`. The cut APIs
 use existing native model/graph/tensor owners and do not create numerical cache
 entries or infer a cut from the imaginary part of the whole diagram.
+
+
+Cut graph evaluation uses the same HEPKit partial-fraction state limit as ordinary
+graph requests (`max_partial_fraction_states`, default `10000`). The complete
+original cut inventory is admitted before decomposition. Original coefficient
+denominator guards remain in `nonzero_conditions` even when a numerator or
+required-cut identity makes the result zero. Explicit deformation slots refer to
+the original graph; losing every requested slot from a live nonterminal child
+returns a typed unsupported-input error.

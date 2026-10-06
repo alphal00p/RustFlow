@@ -251,9 +251,10 @@ restored = EvaluationOptions(
 ```
 
 This example assumes physical slot `2` is an uncut propagator. These are zero-based
-positions in `GraphIntegral::propagator_edges()`, not native edge IDs; unlike
-ordinary partial fractions, cut conversion retains every original denominator
-slot. The same CLI setting is `"deformed_propagator_slots": [2]` in `options`.
+positions in `GraphIntegral::propagator_edges()`, not native edge IDs. The grouped
+cut evaluator maps these original slots into every independent partial-fraction
+child. A live nonterminal child losing every selected slot is unsupported.
+The same CLI setting is `"deformed_propagator_slots": [2]` in `options`.
 A nonempty explicit list can appear alone or with `mass_mode="explicit"`;
 combining it with a different named mode is rejected. Bounds, cut-line and ISP
 admission stay in the native cut owner, including for terminal and zero results.
@@ -274,7 +275,12 @@ create another model registry or a numerical cache format.
 
 The adapter selects exactly one cut by index. Native `DiagramCut::cut` contains the left half-edge of each crossing. A source half-edge gives the native routed momentum; a target half-edge gives its negative. HEPKit's `LoopMomentumBasis` supplies the routing, including the original external-coordinate labels and dependent-momentum elimination. `CutFamily::new` checks that every resulting oriented momentum squared agrees with its retained normalized denominator.
 
-Cut conversion keeps every original denominator slot and preserves signed powers. It bypasses ordinary sector deletion and partial fractions. Dependent denominators are rejected until a cut-aware decomposition can retain their measure identity. Numerator terms that cancel a required cut are removed by the exact cut-zero identity. Other cuts in the graph's inventory are not combined with the selected cut.
+The singular `cut_integral_group`/`prepare_cut_projection` adapters keep every
+original denominator slot and require an independent family. The grouped
+`prepare_cut_combination` adapter used by Python and the CLI accepts overcomplete
+native inventories in the physical class below. Numerator terms that cancel a
+required cut use the exact cut-zero identity. Other cuts in the graph's inventory
+are not combined with the selected cut.
 
 Ordinary `GraphIntegral::integral_groups` continues to reject cut metadata. Native compact DOT `is_cut` tags apply to matched dangling initial-state legs that HEPKit sews; they are not arbitrary internal-edge Boolean attributes. The graph-cut tests construct their cuts through native builder/partition APIs.
 
@@ -292,7 +298,7 @@ Ordinary `GraphIntegral::integral_groups` continues to reject cut metadata. Nati
 
 The focused tests cover native cut IBPs, missing cuts, cache restart and measure identity; the unequal-mass volume and raised cuts at `s=25, m1²=1, m2²=4`; the finite value `sqrt(6)/(25*pi)` and mass-derivative factors `-7/96` and `-11/192`; independent uncut discontinuities at epsilon `1/13` and `1/17`; threshold orientation, routing Jacobians and precision refinement. Native graph tests cover the future-channel sum, numerator cancellation, reversed partitions, edge reversal and the massless volume.
 
-Both reduction adapters follow RustRed’s compiled runtime registry, defaulting to 1–16 scalar-product slots. RustFlow delegates to the upstream dispatcher and preserves local development in that checkout. Finite search and representation limits remain. General cut boundary recursion, cut-preserving partial fractions, mixed-sheet physical normalization, nonzero widths, algebraic/complex phase-space masses, and singular threshold endpoint evaluation remain outside this numerical terminal. Algebraic `Distribution` cuts can be reduced, but do not automatically define a positive-energy phase-space volume.
+Both reduction adapters follow RustRed’s compiled runtime registry, defaulting to 1–16 scalar-product slots. RustFlow delegates to the upstream dispatcher and preserves local development in that checkout. Finite search and representation limits remain. General cut boundary recursion outside the admitted complete-final-state class, mixed-sheet physical normalization, nonzero widths, algebraic/complex phase-space masses, and singular threshold endpoint evaluation remain outside this numerical terminal. Algebraic `Distribution` cuts can be reduced, but do not automatically define a positive-energy phase-space volume.
 
 The native evaluation interfaces and their independent ownership review are
 recorded in [`reports/validation/2026-10-06-native-cut-interfaces`](../reports/validation/2026-10-06-native-cut-interfaces).
@@ -301,3 +307,61 @@ two-loop boundary generation, CLI DOT round trips, typed Python failures,
 threaded progress/cancellation and generated stubs, alongside ordinary projection
 regressions. The publication wheel and numerical boundary banks were not changed
 by this interface milestone.
+
+
+## Dependent native denominator inventories
+
+`PreparedCutCombination::from_hepkit` accepts an existing native HEPKit
+`IntegralFamily`, signed powers, a polynomial scalar numerator, `CutMetadata`,
+and a future channel. This entry accepts a physical denominator inventory;
+its completion slots are supplied by HEPKit after decomposition. Supply extra
+polynomial scalar products through the numerator rather than marking them as
+physical poles. Its native kinematics must already be specialized exactly.
+`GraphIntegral::prepare_cut_combination` performs the existing native graph
+contraction and one-pass exact substitutions before this same preparation.
+Python `evaluate_cut_diagram` and `evaluate_cut_diagram_samples`, and CLI `graph`
+requests with `cut`, use this grouped owner. The optional Python
+`max_partial_fraction_states=10000` and existing CLI request field of that name
+bound HEPKit's decomposition work.
+
+The entire original measure is authenticated before HEPKit removes any line.
+Current admission requires complete positive-energy final states, exact real
+rational masses and quadratic forms, independent cut shells, and uniform `+i0`
+virtual directions. Real-only uncut poles require the existing exact bound away
+from zero on supported physical phase space. Original virtual diagonal
+scalar-product coefficients give a strictly positive common regulator rate;
+real cuts have zero rate. This check precedes denominator normalization. Mixed
+virtual signs, negative normalizations, coincident delta products, and unproved
+phase-space poles retain typed failures.
+
+HEPKit owns affine partial fractions, original signed-power ordering, sector
+selection, basis completion and numerator rewriting. After exact admission the
+adapter rebuilds the native inventory from its canonical rational coefficients
+and Gram entries, so provisional symbolic rank estimates are not reused. It
+does not admit unspecialized symbolic or Gaussian quadratic forms through this
+entrypoint. The adapter retains each
+cut's original oriented momentum and remaps only its slot index. For the
+normalized raised-cut measure, `D*C_n(D)=C_(n-1)(D)` and `C_0=0`. No cut Jacobian
+or energy orientation is inferred from a normalized uncut expression.
+Independent contributions with the same original physical support share one
+prepared projection. `original_slots()` records each child-to-original mapping.
+
+Every child is evaluated at the same finite epsilon; exact numerator and
+partial-fraction coefficients are multiplied before summing and before the
+single shared Laurent reconstruction. The fit range includes original and
+surviving coefficient pole orders. Original represented numerator denominator
+guards survive rational cancellation, removed-cut terms and zero results; they
+are checked by exact epsilon substitution on every sample. Backend and terminal
+nonzero conditions remain owned and checked by those same reduction/flow owners.
+Finite-epsilon methods expose working precision only. `solve` uses independent
+samples and increased-precision/order evidence before reporting accuracy.
+
+The new regression families include a massless two-body cut with the smooth
+dependent pole `r²-2` at `P²=1`, whose unit value is `-Phi_2/2` and raised first
+cut value is `(1/4-epsilon)*Phi_2`; and the nonfactorized massless three-body
+measure with virtual poles `k²-2`, `k²-3`, `(k-r-l)²-5`. The latter is checked
+against an independent convergent double-beta series. Equal-mass specialization
+uses the native homogeneous relation and raised virtual powers rather than a
+generic mass-difference division. Original AMFlow comparison uses its independent
+child families; this does not claim that the upstream reducer accepts a raw
+overcomplete family.

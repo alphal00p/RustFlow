@@ -1,0 +1,37 @@
+{
+  "created_utc": "2026-10-06T06:23:39.034489+00:00",
+  "source_base_revision": "0b1418fa8a36e6523945861599bc7e710d0a0e11",
+  "source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "412f4afb7bc20c57bcf34de7547673b0a6e834e00817cd85b71d01d3f477b9da"
+  },
+  "source_files": "source-files.json",
+  "frozen_artifacts": "frozen-artifacts.json",
+  "passed_release_tests": 68,
+  "separate_single_cpu_benchmark_tests": 1,
+  "strict_release_all_target_python_stubgen_clippy": "passed",
+  "format": "passed",
+  "diff_check": "passed",
+  "oracle_python_syntax": "passed",
+  "cpu_model": "AMD EPYC 9754 128-Core Processor",
+  "routine_tests_cpu_affinity": [
+    44,
+    45
+  ],
+  "routine_test_threads": 2,
+  "single_cpu_benchmark_affinity": [
+    46
+  ],
+  "symbolica_revision": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+  "hepkit_revision": "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+  "rustred_revision": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+  "native_dependency_single_ownership": true,
+  "upstream_revision": "26005517a288086c4cb4d1b26d829691bc088485",
+  "upstream_scope": "Independent complete child families, not raw overcomplete inventory acceptance.",
+  "numerical_cache_schema_change": false,
+  "publication_runtime_modified": false,
+  "new_commit_identity": "Ben Ruijl <ben@ruijl.ch>",
+  "later_dependency_updates": "Separate source-matched integration gate required.",
+  "archive_encoding": "Logs and upstream oracle-result.wl files use lossless gzip; original recorded hashes refer to uncompressed bytes."
+}

@@ -1,0 +1,262 @@
+{
+  "started_utc": "2026-10-06T06:16:49.981120+00:00",
+  "cpu_affinity": [
+    44,
+    45
+  ],
+  "test_threads": 2,
+  "checks": [
+    {
+      "name": "exact-unit",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/symbolica_amflow-47f5668f32c80192",
+        "cut_inventory_tests",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.21518333768472075,
+      "binary_sha256": "5d15515888129055191bd99b46d52dbced7b4cee6bf5f20560f358592aa3e4a7",
+      "log": "logs/verified-exact-unit.log.gz",
+      "log_sha256": "213fce8bbd1b1aba768023652d01291f6ec90e7cc1ae3089051ce1d9a7d1f7e7",
+      "passed_test_count": 1,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "611b9bb671624ae283eac9c1cb1f4ebea84bc7964847defe57d335a4f73949f7"
+    },
+    {
+      "name": "cut-private",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/symbolica_amflow-47f5668f32c80192",
+        "cuts::tests",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.016545272897928953,
+      "binary_sha256": "5d15515888129055191bd99b46d52dbced7b4cee6bf5f20560f358592aa3e4a7",
+      "log": "logs/verified-cut-private.log.gz",
+      "log_sha256": "ff3dcc2f3e3c5c92cc2f6f95448799fc07a07e8a4a57081798b0a597618f2808",
+      "passed_test_count": 3,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "731b963abd70830858645899b1184ee866d5613d679383114c4c7f0657ebbece"
+    },
+    {
+      "name": "dependent_cut_inventory",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/dependent_cut_inventory-16c6da556217326f",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 179.38059114478528,
+      "binary_sha256": "97d8926f168e09f5be6fe7551b7e8c817f238d3ab24012b76d6178aa77ac0964",
+      "log": "logs/verified-dependent_cut_inventory.log.gz",
+      "log_sha256": "fe968f43aecbc1d090d2609223ca69960a53b04eb237dff5bd6b9497bfe7c4d9",
+      "passed_test_count": 10,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "55d2046a1c15800ed7a94821b966f6b548ce98a4ed4668a6f6bc95c013cf96c5"
+    },
+    {
+      "name": "native_cut_interfaces",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/native_cut_interfaces-b8025262cd589a14",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.2172239017672837,
+      "binary_sha256": "623559b02fae5f83237ecbd0fd11f403fe346b160e2e601252c87b2cc9e0f930",
+      "log": "logs/verified-native_cut_interfaces.log.gz",
+      "log_sha256": "b25656fab350f745214116a2787130b97718ffd3c41d34bbe86b883d3e6c25d7",
+      "passed_test_count": 10,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "517b1735c8aaacd8b08ac4edf41ba1a96a319cbe258aa412fe3a739a15558af4"
+    },
+    {
+      "name": "python_cut_interfaces",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/python_cut_interfaces-0c93b36f06af37f0",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.0167049430310726,
+      "binary_sha256": "3b2d27bc65b6cddbe2eed35501d2e1d16ecce4c8b61df13b85d608e2cfe1d5da",
+      "log": "logs/verified-python_cut_interfaces.log.gz",
+      "log_sha256": "470730821a5e1f6ddce8a079550107b34d4b02219450f2e357a9f05e3c0b8d58",
+      "passed_test_count": 4,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "c1c4803ed10908557cdcb94554e74fb6dee2bccb19ef0629afd9f0ee67014fc8"
+    },
+    {
+      "name": "partial_cut_boundaries",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/partial_cut_boundaries-0e47a1b4bceed9e6",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 7.229101012926549,
+      "binary_sha256": "208c1128c716bb853a177ea85a4d3ea655bfb432e8710d0ad39f8d02319821ca",
+      "log": "logs/verified-partial_cut_boundaries.log.gz",
+      "log_sha256": "7f9337f730d8a3dc49b4e0565e06dbf88e0d5b424621831a5d0738c97dd68f6a",
+      "passed_test_count": 2,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "85c299313efd31bedc1c4ce68e324001d5e08c366ffd00761a1507489cafcaad"
+    },
+    {
+      "name": "massless_phase_space",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/massless_phase_space-0842cc1abb029024",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 8.731663323938847,
+      "binary_sha256": "3ac7f9f8524acfcbacd7ed08897c5b44c098a62ca6484ca9e194a67539954b77",
+      "log": "logs/verified-massless_phase_space.log.gz",
+      "log_sha256": "7a659860c33c6fad5df4f7ebc5901e2dd284f5fe4e4e6654eb60cba208ac67ce",
+      "passed_test_count": 9,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "c51d16c80932cf93155824a46ae582708a1cb0fd5a93ffefd4fd3543228da27c"
+    },
+    {
+      "name": "mixed_cut_flow",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/mixed_cut_flow-6160795369f67968",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 15.099393625743687,
+      "binary_sha256": "3faf646efb659d17be0c77b61b6c172bbf351f769011e88e99f519598b21c091",
+      "log": "logs/verified-mixed_cut_flow.log.gz",
+      "log_sha256": "08022d082b80f2ecfe83357d3fc2ac839426014eaeebd4888187631e605b294c",
+      "passed_test_count": 6,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "4d0265a056526e160de4d1148b9dbcecc02cedb8e64b2eb54448f1d68ce65673"
+    },
+    {
+      "name": "cuts",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/cuts-f15fcfb26cf35640",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.16471042623743415,
+      "binary_sha256": "e1a8239523893d1fe57da269ee20f2b364166f9cd08f9960fc602f4ba77d87db",
+      "log": "logs/verified-cuts.log.gz",
+      "log_sha256": "ccdcbcb1fcd4d52c3e2ea7c08ad4787b03cda657b745593846707c24d5699e97",
+      "passed_test_count": 3,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "44a4f89a18b5be14fa30e5d9a9a9c96656cc3bebabf3412d351fbc7ced62c74e"
+    },
+    {
+      "name": "phase_space",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/phase_space-b67a6f1ad27399a5",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.9666641941294074,
+      "binary_sha256": "23809c7dfaee08ef130ec52e26c4a8b0a6116ebd55c7014dd85f413aa6d51880",
+      "log": "logs/verified-phase_space.log.gz",
+      "log_sha256": "a1dfe6fd8fe5a5cf48d6ec118d2c978a9543decda14a285ffb8f4dc200cc8443",
+      "passed_test_count": 3,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "ec55f6baa7c4ca2e0f627b061a77c9e981b7a0694248dc316bc6bb78ba89205a"
+    },
+    {
+      "name": "hepkit_cuts",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/hepkit_cuts-5837e62ad67e827d",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.21499182702973485,
+      "binary_sha256": "6b845a039bf97299aa46a0f9d9b13cf928ba6862cd39da7b91a923607f08fd45",
+      "log": "logs/verified-hepkit_cuts.log.gz",
+      "log_sha256": "89933035ba57533b550ca60af94a5fa66b8bcf83c413fee29264e24ed91bc336",
+      "passed_test_count": 3,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "b674ecffe0c3d01b04f7b19b814a0f256722c8da376f0c591743fec26cf808f0"
+    },
+    {
+      "name": "hepkit",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/hepkit-d086bd8a21bf856a",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 14.148373402655125,
+      "binary_sha256": "4a2be2fbb98bd1ca6ff60490ef374e8a1e57c655677d2889fe3914e72189a8af",
+      "log": "logs/verified-hepkit.log.gz",
+      "log_sha256": "36b989b8de08e5c4fb883cb48ff86741664517259fc6a5916ffbf6c1537315af",
+      "passed_test_count": 9,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "9c016b286c4b93b6b5cc9ed8d2ec9bc24caa660db4ef5e6a03ce0b5168ade031"
+    },
+    {
+      "name": "combinations",
+      "command": [
+        "taskset",
+        "-c",
+        "44,45",
+        "/common/dev/amflow-dependent-cut-inventory/target/release/deps/combinations-1da742627b948499",
+        "--nocapture",
+        "--test-threads=2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 14.349347162991762,
+      "binary_sha256": "cdb240c9960aebb81974f45a1a71662aaa44f87128b7dfce4ba445f7a49c70e1",
+      "log": "logs/verified-combinations.log.gz",
+      "log_sha256": "95ae7f94ed93da7f0e7b91166d4fdab8d6683dc1b221fea9aa188cd913e0d39e",
+      "passed_test_count": 5,
+      "log_sha256_encoding": "uncompressed",
+      "compressed_log_sha256": "677389521e96e721532597213077de2e6ebd77806a5bc9132f2c8132bb4eacb8"
+    }
+  ],
+  "completed_utc": "2026-10-06T06:21:39.910456+00:00",
+  "passed": true,
+  "passed_test_count": 68
+}

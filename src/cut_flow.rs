@@ -86,7 +86,7 @@ impl<'a> PreparedCutFlow<'a> {
         let shifted = placement(&family, options)?;
         family.validate_auxiliary_mask(&shifted)?;
         if supported {
-            validate_uncut_domain(&family, &boundary, channel)?;
+            validate_uncut_domain(family.inventory(), &boundary, channel, true)?;
         }
         let flow = if supported && shifted.iter().any(|v| *v) {
             let backend = CutBackendView {
@@ -356,6 +356,14 @@ impl CutProvenance {
     }
 
     fn project(family: &CutFamily, hard: &[bool], shifted: &[bool]) -> Result<Self> {
+        Self::project_inventory(family.inventory(), hard, shifted)
+    }
+
+    fn project_inventory(
+        family: crate::cuts::CutInventory<'_>,
+        hard: &[bool],
+        shifted: &[bool],
+    ) -> Result<Self> {
         let ordinary = family.family();
         let real = family
             .cuts()
@@ -573,10 +581,51 @@ impl CutProvenance {
     }
 }
 
+/// Admit the complete original measure before partial fractions can remove a
+/// pole or a cut. No dependent inventory is passed to the reduction backend.
+pub(crate) fn admit_inventory(
+    family: crate::cuts::CutInventory<'_>,
+    channel: &FutureTimelikeChannel,
+    context: &RunContext,
+) -> Result<()> {
+    context.cancellation.check()?;
+    family.validate()?;
+    let ordinary = family.family();
+    for value in ordinary.external_gram.iter().flatten().chain(
+        ordinary
+            .propagators
+            .iter()
+            .flat_map(|d| std::iter::once(&d.constant).chain(&d.scalar_products)),
+    ) {
+        real_rational(value, "cut inventory kinematics and quadratic coefficient")?;
+    }
+    let hard = family
+        .cuts()
+        .loop_prescriptions()
+        .iter()
+        .map(|p| match p {
+            LoopPrescription::Insensitive => Ok(false),
+            LoopPrescription::PlusI0 => Ok(true),
+            LoopPrescription::MinusI0 => Err(Error::Unsupported(
+                "cut inventory requires uniform +i0 virtual directions".into(),
+            )),
+        })
+        .collect::<Result<Vec<_>>>()?;
+    let shifted = (0..ordinary.propagators.len())
+        .map(|i| !family.cuts().is_cut(i))
+        .collect::<Vec<_>>();
+    let boundary = CutProvenance::project_inventory(family, &hard, &shifted)?;
+    let leaf = boundary.unit_leaf()?;
+    let supported = crate::phase_space::supported_leaf(&leaf, channel)?;
+    validate_uncut_domain(family, &boundary, channel, supported)?;
+    context.cancellation.check()
+}
+
 fn validate_uncut_domain(
-    family: &CutFamily,
+    family: crate::cuts::CutInventory<'_>,
     boundary: &CutProvenance,
     channel: &FutureTimelikeChannel,
+    supported: bool,
 ) -> Result<()> {
     let ordinary = family.family();
     for slot in 0..ordinary.physical_propagators {
@@ -618,8 +667,32 @@ fn validate_uncut_domain(
                 "cut flow currently requires nonnegative uncut squared masses".into(),
             ));
         }
-        if family.propagator_loop_prescription(slot)? == LoopPrescription::Insensitive {
-            certify_soft_denominator(family, boundary, channel, slot)?;
+        // A common imaginary displacement of virtual diagonal scalar products
+        // preserves every affine relation. Its exact rate is read from the
+        // original quadratic form, before any denominator normalization.
+        let mut diagonal = 0;
+        let mut rate = Rational::zero();
+        for (loop_index, prescription) in family.cuts().loop_prescriptions().iter().enumerate() {
+            if *prescription == LoopPrescription::PlusI0 {
+                rate += real_rational(
+                    &propagator.scalar_products[diagonal],
+                    "virtual regulator rate",
+                )?;
+            }
+            diagonal += ordinary.loops.len() - loop_index;
+        }
+        match family.propagator_loop_prescription(slot)? {
+            LoopPrescription::PlusI0 if rate > Rational::zero() => {}
+            LoopPrescription::Insensitive if rate.is_zero() => {
+                if supported {
+                    certify_soft_denominator(family, boundary, channel, slot)?;
+                }
+            }
+            _ => {
+                return Err(Error::Unsupported(
+                    "no compatible positive virtual regulator for cut denominator inventory".into(),
+                ));
+            }
         }
     }
     Ok(())
@@ -629,7 +702,7 @@ fn validate_uncut_domain(
 /// inequalities hold on the entire compact physical phase space. An inconclusive
 /// bound is unsupported; endpoint checks cannot certify absence of an interior pole.
 fn certify_soft_denominator(
-    family: &CutFamily,
+    family: crate::cuts::CutInventory<'_>,
     boundary: &CutProvenance,
     channel: &FutureTimelikeChannel,
     slot: usize,

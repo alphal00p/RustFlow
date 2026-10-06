@@ -1,0 +1,22 @@
+{
+  "changed_utc": "2026-10-06T06:04:33.617533+00:00",
+  "compiler_processes": [
+    3086615,
+    3086619
+  ],
+  "build_jobs": 2,
+  "initial_build_affinity": [
+    44,
+    45
+  ],
+  "remaining_heavy_codegen_affinity": [
+    44,
+    45,
+    46,
+    47
+  ],
+  "test_affinity_unchanged": [
+    44,
+    45
+  ]
+}

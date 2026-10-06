@@ -1,5 +1,7 @@
 #[path = "support/native_cut_graph.rs"]
 mod native_cut_graph;
+#[path = "support/native_dependent_cut_graph.rs"]
+mod native_dependent_cut_graph;
 #[path = "support/native_mixed_cut_graph.rs"]
 mod native_mixed_cut_graph;
 use feynkit_graph::EdgeId;
@@ -562,7 +564,80 @@ fn native_cut_cli_explicit_slots_are_physical_positions_and_validate_conflicts()
         card["options"]["deformed_propagator_slots"] = serde_json::json!([slot]);
         let invalid = run(&card);
         assert!(!invalid.status.success());
-        assert!(String::from_utf8_lossy(&invalid.stderr).contains("uncut physical denominators"));
+        assert!(String::from_utf8_lossy(&invalid.stderr).contains("uncut physical"));
     }
     std::fs::remove_dir_all(temporary).unwrap();
+}
+
+#[test]
+fn dependent_native_graph_and_cli_share_cut_preserving_partial_fractions() -> Result<()> {
+    let diagram = native_dependent_cut_graph::diagram();
+    let kin =
+        feynkit_kinematics::Kinematics::in_dimension(&Atom::var(symbol!("native_dependent::D")))
+            .unwrap()
+            .with_scalar_product(
+                &feynkit_graph::symbols::external_momentum().call(0),
+                &feynkit_graph::symbols::external_momentum().call(0),
+                Atom::one(),
+            )
+            .unwrap();
+    let graph = GraphIntegral::new(Arc::new(diagram.clone()), &kin)?
+        .with_powers(&BTreeMap::from([(EdgeId(1), 2)]))?;
+    let point = KinematicPoint(BTreeMap::from([(
+        Atom::var(symbol!("UFO::M")),
+        Atom::num(2).pow(Rational::from((1, 2))),
+    )]));
+    let backend = RustRedBackend::default();
+    let options = FlowOptions::default();
+    let context = RunContext::default();
+    let prepared = graph.prepare_cut_combination(
+        0,
+        &point,
+        epsilon(),
+        &channel(),
+        vec![LoopPrescription::Insensitive],
+        &backend,
+        &options,
+        10000,
+        &context,
+    )?;
+    let sample = Rational::from((1, 13));
+    let reference = prepared.evaluate(&sample, &options, &context)?.remove(0);
+    let temporary = std::env::temp_dir().join(format!("dependent-cut-cli-{}", std::process::id()));
+    std::fs::create_dir_all(&temporary).unwrap();
+    std::fs::write(
+        temporary.join("model.json"),
+        diagram.model().to_json().unwrap(),
+    )
+    .unwrap();
+    std::fs::write(temporary.join("cut.dot"), diagram.to_dot().unwrap()).unwrap();
+    let card = serde_json::json!({"schema_version":1,"model":"model.json","diagram":"cut.dot",
+        "scalar_products":[{"left":"gammalooprs::P(0)","right":"gammalooprs::P(0)","value":"1"}],
+        "substitutions":{"UFO::M":"2^(1/2)"},"edge_powers":{"1":2},"max_partial_fraction_states":10000,
+        "cut":{"index":0,"future_channel":["1"],"loop_prescriptions":["insensitive"],"epsilon_samples":["1/13"]}});
+    std::fs::write(
+        temporary.join("input.json"),
+        serde_json::to_vec(&card).unwrap(),
+    )
+    .unwrap();
+    let output = std::process::Command::new(env!("CARGO_BIN_EXE_rustflow"))
+        .arg("graph")
+        .arg(temporary.join("input.json"))
+        .output()
+        .unwrap();
+    assert!(
+        output.status.success(),
+        "{}",
+        String::from_utf8_lossy(&output.stderr)
+    );
+    let data: serde_json::Value = serde_json::from_slice(&output.stdout).unwrap();
+    let p = Precision::decimal(80)?;
+    let actual = p.parse(
+        data["values"][0]["real"].as_str().unwrap(),
+        data["values"][0]["imaginary"].as_str().unwrap(),
+    )?;
+    assert!(p.close(&actual, &reference, 30));
+    assert_eq!(prepared.original_slots(), &[vec![0, 1]]);
+    std::fs::remove_dir_all(temporary).unwrap();
+    Ok(())
 }

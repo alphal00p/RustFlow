@@ -288,7 +288,7 @@ fn graph(request: GraphRequest, directory: &Path) -> CliResult<Value> {
             .iter()
             .map(|value| value.parse())
             .collect::<Result<Vec<cuts::LoopPrescription>>>()?;
-        let prepared = input.prepare_cut_projection(
+        let prepared = input.prepare_cut_combination(
             cut.index,
             &point,
             symbol(&request.epsilon, ns)?,
@@ -296,6 +296,7 @@ fn graph(request: GraphRequest, directory: &Path) -> CliResult<Value> {
             prescriptions,
             &backend,
             &options,
+            request.max_partial_fraction_states,
             &context,
         )?;
         let conditions = prepared

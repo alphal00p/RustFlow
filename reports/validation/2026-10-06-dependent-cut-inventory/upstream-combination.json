@@ -1,0 +1,16 @@
+{
+  "epsilon_exact": "1/13",
+  "operation": "child(mass_squared=3)-child(mass_squared=2)",
+  "upstream_result": "-0.00003887526942947417800505071023215454",
+  "independent_series": "-0.000038875269429474178005050710232153496402784691543773923570277031936056740174477675",
+  "raw_difference": "1.043597215308456226076429722968063943259825522325E-36",
+  "upstream_input_recorded_decimal_precision": 24,
+  "comparison_requested_digits": 20,
+  "upstream_child_solve_seconds": [
+    129.144518,
+    128.614578
+  ],
+  "scope": "Independent complete families accepted by upstream. No claim of raw dependent-inventory acceptance. Raw residuals do not upgrade recorded reference precision. Cancellation loses about2.2 relative digits from the24-digit child inputs; the comparison asserts20 digits only.",
+  "nominal_absolute_uncertainty_from_input_precision": "6.33002380255511857012338334050735950E-27",
+  "nominal_relative_uncertainty_from_input_precision": "1.6282906576477295618114370345399655190694093702056442373691198612631865050918440E-22"
+}
