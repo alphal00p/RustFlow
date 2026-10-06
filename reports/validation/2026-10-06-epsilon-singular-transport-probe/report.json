@@ -1,0 +1,221 @@
+{
+  "base_commit": "6a774c0ed5d2e6fc4161c940e03f7d1adbac7189",
+  "production_source_changed": false,
+  "scope": "Unchanged engine probe; exact rational specialization at epsilon, full existing physical source uncertainty retained; closed-form transfer bound is comparison only and not supplied to controller.",
+  "source_digest": "8c7f1b436b99c6f40d3ec6e071a2548930d60eb008d0e037cd6ef6ce56891675",
+  "dependency_digest": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+  "example_sha256": "5356060d3c3c789f078075b507487916df71f50b8170f3c50dc604892cb175af",
+  "binary_sha256": "b178e017bd45a7e3c48bedd3b0e56cff4f5f153c15afe1736b426ec224ca35e6",
+  "validation": {
+    "experiment_exit_code": 0,
+    "cases": 6,
+    "exact_nondiagonal_gauge_verified": true,
+    "exact_solution_digits_checked": 50,
+    "central_integration_passed": 6,
+    "full_physical_long_rejected": 3,
+    "full_physical_nearby_passed": 3,
+    "strict_example_clippy": "passed",
+    "fmt": "passed"
+  },
+  "result": {
+    "base_commit": "6a774c0",
+    "cases": [
+      {
+        "distance": "1",
+        "epsilon": "1/100",
+        "exact_nilpotent_transfer_infinity_norm": "201",
+        "exact_transfer_propagated_source_error_for_comparison_only": "2.010020100000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-28",
+        "expected": [
+          "(101.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)",
+          "(-100.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)"
+        ],
+        "log10_error_amplification": "86.85889638065036553022578378332101645887940116073331322289075663317292984177415494584498986769",
+        "low_level": {
+          "does_not_include_boundary_uncertainty": true,
+          "order": 112,
+          "rejected_steps": 0,
+          "seconds": 0.006138226,
+          "steps": 1,
+          "verified_digits": 20,
+          "working_bits": 282
+        },
+        "physical": {
+          "cache_entries": 1,
+          "error": "requested accuracy was not reached: none of 1 compatible cached boundaries reached the target accuracy; last attempt: cached boundary uncertainty grows beyond the requested target accuracy; provide a more accurate or closer boundary",
+          "error_debug": "Accuracy(\"none of 1 compatible cached boundaries reached the target accuracy; last attempt: cached boundary uncertainty grows beyond the requested target accuracy; provide a more accurate or closer boundary\")",
+          "status": "rejected"
+        },
+        "physical_seconds": 0.005290374,
+        "unchanged_error_amplification": "722597376812574925817747704218930569735687442852731928403269789123221909361473891661561.9265900"
+      },
+      {
+        "distance": "1/1000",
+        "epsilon": "1/100",
+        "exact_nilpotent_transfer_infinity_norm": "6/5",
+        "exact_transfer_propagated_source_error_for_comparison_only": "1.200012000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-30",
+        "expected": [
+          "(1.100000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)",
+          "(-1.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-1+0i)"
+        ],
+        "log10_error_amplification": "8.685889638065036553022578378332101645887940116073331322289075663317292984177415494584498986768e-2",
+        "low_level": {
+          "does_not_include_boundary_uncertainty": true,
+          "order": 112,
+          "rejected_steps": 0,
+          "seconds": 0.004804593,
+          "steps": 1,
+          "verified_digits": 20,
+          "working_bits": 282
+        },
+        "physical": {
+          "cache_entries": 3,
+          "component_errors": [
+            "1.221414972187751435619411205359620570847511115633838345350610316569655376015744507803e-30",
+            "1.221414972187751435619411205359620567286673210973913814999886113082658672075329643569e-30"
+          ],
+          "inserted_points": 2,
+          "status": "accepted",
+          "steps": 1,
+          "verified_digits": 27
+        },
+        "physical_seconds": 0.006145906,
+        "unchanged_error_amplification": "1.221402758160169833921071994639674170307580941520503641273425098599206233083637816242288744013"
+      },
+      {
+        "distance": "1",
+        "epsilon": "1/2500",
+        "exact_nilpotent_transfer_infinity_norm": "5001",
+        "exact_transfer_propagated_source_error_for_comparison_only": "5.001050010000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-27",
+        "expected": [
+          "(2501.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)",
+          "(-2500.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)"
+        ],
+        "log10_error_amplification": "2171.472409516259138255644594583025411471985029018332830572268915829323246044353873646124746692",
+        "low_level": {
+          "does_not_include_boundary_uncertainty": true,
+          "order": 112,
+          "rejected_steps": 0,
+          "seconds": 0.004610722,
+          "steps": 1,
+          "verified_digits": 20,
+          "working_bits": 282
+        },
+        "physical": {
+          "cache_entries": 1,
+          "error": "requested accuracy was not reached: none of 1 compatible cached boundaries reached the target accuracy; last attempt: cached boundary uncertainty grows beyond the requested target accuracy; provide a more accurate or closer boundary",
+          "error_debug": "Accuracy(\"none of 1 compatible cached boundaries reached the target accuracy; last attempt: cached boundary uncertainty grows beyond the requested target accuracy; provide a more accurate or closer boundary\")",
+          "status": "rejected"
+        },
+        "physical_seconds": 0.004854372,
+        "unchanged_error_amplification": "2.967628384023667068966296805289470090569860460170727827136290193826614902606097220252710694609e2171"
+      },
+      {
+        "distance": "1/1000",
+        "epsilon": "1/2500",
+        "exact_nilpotent_transfer_infinity_norm": "6",
+        "exact_transfer_propagated_source_error_for_comparison_only": "6.000060000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-30",
+        "expected": [
+          "(3.500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)",
+          "(-2.500000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)"
+        ],
+        "log10_error_amplification": "2.171472409516259138255644594583025411471985029018332830572268915829323246044353873646124746692",
+        "low_level": {
+          "does_not_include_boundary_uncertainty": true,
+          "order": 112,
+          "rejected_steps": 0,
+          "seconds": 0.004648752,
+          "steps": 1,
+          "verified_digits": 20,
+          "working_bits": 282
+        },
+        "physical": {
+          "cache_entries": 3,
+          "component_errors": [
+            "1.48414643234167629187149791196352685146283902470554927836643312639363173941606785665e-28",
+            "1.48414643234167629187149791196352685146283902470554927836643312639363173941606785665e-28"
+          ],
+          "inserted_points": 2,
+          "status": "accepted",
+          "steps": 1,
+          "verified_digits": 26
+        },
+        "physical_seconds": 0.005746995,
+        "unchanged_error_amplification": "148.4131591025766034211155800405522796234876675938789890467528451109120648209585760796884094599"
+      },
+      {
+        "distance": "1",
+        "epsilon": "1/5800",
+        "exact_nilpotent_transfer_infinity_norm": "11601",
+        "exact_transfer_propagated_source_error_for_comparison_only": "1.160111601000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-26",
+        "expected": [
+          "(5801.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)",
+          "(-5800.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)"
+        ],
+        "log10_error_amplification": "5037.815990077721200753095459432618954615005267322532166927663884724029930822900986859009412326",
+        "low_level": {
+          "does_not_include_boundary_uncertainty": true,
+          "order": 112,
+          "rejected_steps": 0,
+          "seconds": 0.004575542,
+          "steps": 1,
+          "verified_digits": 20,
+          "working_bits": 282
+        },
+        "physical": {
+          "cache_entries": 1,
+          "error": "requested accuracy was not reached: none of 1 compatible cached boundaries reached the target accuracy; last attempt: cached boundary uncertainty grows beyond the requested target accuracy; provide a more accurate or closer boundary",
+          "error_debug": "Accuracy(\"none of 1 compatible cached boundaries reached the target accuracy; last attempt: cached boundary uncertainty grows beyond the requested target accuracy; provide a more accurate or closer boundary\")",
+          "status": "rejected"
+        },
+        "physical_seconds": 0.004819733,
+        "unchanged_error_amplification": "6.546212178366489740137119071095556870090246625638147877085905191306260075962896421481883611939e5037"
+      },
+      {
+        "distance": "1/1000",
+        "epsilon": "1/5800",
+        "exact_nilpotent_transfer_infinity_norm": "63/5",
+        "exact_transfer_propagated_source_error_for_comparison_only": "1.260012600000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-29",
+        "expected": [
+          "(6.800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)",
+          "(-5.800000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000+0i)"
+        ],
+        "log10_error_amplification": "5.037815990077721200753095459432618954615005267322532166927663884724029930822900986859009412326",
+        "low_level": {
+          "does_not_include_boundary_uncertainty": true,
+          "order": 112,
+          "rejected_steps": 0,
+          "seconds": 0.004539452,
+          "steps": 1,
+          "verified_digits": 20,
+          "working_bits": 282
+        },
+        "physical": {
+          "cache_entries": 3,
+          "component_errors": [
+            "1.090988902545003455049860298258993017741472362306551503457741458165502577634464565462e-25",
+            "1.090988902545003455049860298258993017741472362306551503457741458165502577634464565462e-25"
+          ],
+          "inserted_points": 2,
+          "status": "accepted",
+          "steps": 1,
+          "verified_digits": 23
+        },
+        "physical_seconds": 0.005797005,
+        "unchanged_error_amplification": "109097.7992765075804291817380085192165819510309035596833929478901577789242689968083713611143866"
+      }
+    ],
+    "diagonal_shearing_error": "diagonal power shearing has a negative constraint cycle [1, 1]; a nondiagonal basis change may be required",
+    "exact_nondiagonal_gauge_verified": true,
+    "options": "FlowOptions { digits: 20, guard_digits: 40, series_order: 80, pade: None, residual_arithmetic: Ball, local_coordinate: Identity, max_steps: 1000, step_size_strategy: Halving, max_precision_attempts: 3, max_boundary_attempts: 8, workers: 1, dimension: 4, recursion: Amf, mass_mode: Auto, prescription: PlusI0, refine_basis: false, skip_reduction: false, sampled_reduction: true, cache_directory: None, sample_cache_directory: None, reuse_samples: true }",
+    "scope": "Unchanged engine probe; exact rational specialization at epsilon, full existing physical source uncertainty retained; closed-form transfer bound is comparison only and not supplied to controller.",
+    "source_error_per_component": "1e-35",
+    "source_storage_decimal_digits": 90,
+    "source_verified_digits": 30
+  },
+  "archive": {
+    "path": "evidence.tar.gz",
+    "sha256": "2ad600eaa44ed2f6a4775cbe85d7e941ff7d1da92b36a5e54be6a28ae3f955f6",
+    "bytes": 611608,
+    "entries": 126
+  }
+}
