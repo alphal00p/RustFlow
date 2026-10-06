@@ -641,3 +641,7 @@ mod factor_tests {
         }
     }
 }
+
+#[cfg(test)]
+#[path = "source_integer_tests.rs"]
+mod integer_performance;

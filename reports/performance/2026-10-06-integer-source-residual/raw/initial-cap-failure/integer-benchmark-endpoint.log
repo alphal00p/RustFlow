@@ -1,0 +1,24 @@
+
+running 1 test
+test ode::source::integer_performance::exact_source_residual_performance_comparison ... benchmarking upstream12.json, bits=201, order=80
+benchmarking upstream12.json, bits=333, order=80
+benchmarking paper27.json, bits=201, order=80
+benchmarking paper27.json, bits=333, order=80
+benchmarking nondyadic_complex, bits=201, order=80
+benchmarking sparse_high_degree, bits=201, order=80
+benchmarking shifted_repeated_degree64, bits=201, order=80
+benchmarking rational_growth_degree32, bits=201, order=80
+
+thread 'ode::source::integer_performance::exact_source_residual_performance_comparison' (408175) panicked at src/ode/source_integer_tests.rs:194:13:
+assertion failed: (input_bits + center_bits).saturating_mul(a.len() as u64).saturating_mul(4) <
+    MAX_SHARED_BITS
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    ode::source::integer_performance::exact_source_residual_performance_comparison
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 147 filtered out; finished in 12.08s
+

@@ -1,0 +1,289 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-06T02:12:23.047227+00:00",
+  "title": "Shared-denominator integer-polynomial residual experiment",
+  "status": "test-only prototype validated; production adaptive implementation pending",
+  "base_commit": "881ec21ce2495b7a8daa87cfcffdffd9e54abfd1",
+  "branch": "codex/integer-residual-performance",
+  "production_arithmetic_unchanged": true,
+  "production_file_matches_base_except_test_module_include": true,
+  "design": {
+    "native_owner": "Symbolica UnivariatePolynomial<Z>, Integer::lcm, native Gaussian-rational shifting and outward ComplexBall conversion",
+    "identity": "Use one positive denominator S for all stored-dyadic solution coefficients/channels and one T for each shifted source row. Integer real/imag products compute ST*(D_i P_i\u2032 - sum_j A_ij P_j); divide byST to restore the exact residual. Original shifted D_i and factors retain source-domain guards.",
+    "no_custom_convolution": true,
+    "preliminary_limits": "Test-only assertions bound known input dimensions, stored Float exponent/precision, predicted shift/multiply heights and shared denominators. They are an experimental envelope, not a production memory/time/cancellation contract."
+  },
+  "validation": {
+    "passed_focused_tests": 21,
+    "benchmark_cases_per_invocation": 14,
+    "complete_benchmark_invocations": 2,
+    "exact_component_containment_checks": 31716,
+    "independent_exact_polynomial_equality": "Every observed residual, shifted source denominator and retained factor equals the separate native Complex<Rational> polynomial reference, outside timing. Coupled three-channel regression separately checks equality.",
+    "format": true,
+    "strict_all_target_release_clippy": true,
+    "source_unchanged_during_benchmarks": true,
+    "complete_runs_session": 89918,
+    "complete_runs_exit_code": 0,
+    "complete_runs_tool_chunk": "dd7f91"
+  },
+  "environment": {
+    "cpu_model": "AMD EPYC 9754 128-Core Processor",
+    "cpu_affinity": 42,
+    "rayon_threads": 1,
+    "profile": "release, debuginfo=1",
+    "system": "Linux-6.18.45-x86_64-with-glibc2.42",
+    "symbolica": "official community c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "repetitions": 3,
+    "order": "alternating ball and integer constructor timings per case",
+    "limitations": "Shared host, concurrent builds, no isolated whole-transport timing. Short sub-millisecond cases are noisy."
+  },
+  "measurements": {
+    "initial": [
+      {
+        "case": "upstream12.json",
+        "bits": 201,
+        "ball_median_ms": 241.784197,
+        "integer_median_ms": 12.831342,
+        "ball_over_integer": 18.843250924182367,
+        "maximum_final_exact_coefficient_bits": 381
+      },
+      {
+        "case": "upstream12.json",
+        "bits": 333,
+        "ball_median_ms": 273.403323,
+        "integer_median_ms": 13.676404,
+        "ball_over_integer": 19.99087793838205,
+        "maximum_final_exact_coefficient_bits": 514
+      },
+      {
+        "case": "paper27.json",
+        "bits": 201,
+        "ball_median_ms": 830.009274,
+        "integer_median_ms": 55.893105,
+        "ball_over_integer": 14.849940328060143,
+        "maximum_final_exact_coefficient_bits": 945
+      },
+      {
+        "case": "paper27.json",
+        "bits": 333,
+        "ball_median_ms": 974.486207,
+        "integer_median_ms": 58.133261,
+        "ball_over_integer": 16.762971666082866,
+        "maximum_final_exact_coefficient_bits": 1077
+      },
+      {
+        "case": "nondyadic_complex",
+        "bits": 201,
+        "ball_median_ms": 2.572486,
+        "integer_median_ms": 0.724542,
+        "ball_over_integer": 3.550499487952389,
+        "maximum_final_exact_coefficient_bits": 569
+      },
+      {
+        "case": "sparse_high_degree",
+        "bits": 201,
+        "ball_median_ms": 112.515004,
+        "integer_median_ms": 3.655758,
+        "ball_over_integer": 30.777475970783623,
+        "maximum_final_exact_coefficient_bits": 1
+      },
+      {
+        "case": "shifted_repeated_degree64",
+        "bits": 201,
+        "ball_median_ms": 48.641948,
+        "integer_median_ms": 94.59052,
+        "ball_over_integer": 0.5142370292498656,
+        "maximum_final_exact_coefficient_bits": 13100
+      },
+      {
+        "case": "rational_growth_degree32",
+        "bits": 201,
+        "ball_median_ms": 21.805443,
+        "integer_median_ms": 51.386235,
+        "ball_over_integer": 0.4243440485569725,
+        "maximum_final_exact_coefficient_bits": 22868
+      },
+      {
+        "case": "dyadic_cancellation",
+        "bits": 216,
+        "ball_median_ms": 0.13577,
+        "integer_median_ms": 0.03808,
+        "ball_over_integer": 3.5653886554621845,
+        "maximum_final_exact_coefficient_bits": 1
+      },
+      {
+        "case": "nondyadic_cancellation",
+        "bits": 216,
+        "ball_median_ms": 0.12623,
+        "integer_median_ms": 0.03626,
+        "ball_over_integer": 3.4812465526751244,
+        "maximum_final_exact_coefficient_bits": 2
+      },
+      {
+        "case": "dyadic_cancellation",
+        "bits": 415,
+        "ball_median_ms": 0.13089,
+        "integer_median_ms": 0.0368,
+        "ball_over_integer": 3.55679347826087,
+        "maximum_final_exact_coefficient_bits": 1
+      },
+      {
+        "case": "nondyadic_cancellation",
+        "bits": 415,
+        "ball_median_ms": 0.129331,
+        "integer_median_ms": 0.03743,
+        "ball_over_integer": 3.4552765161635053,
+        "maximum_final_exact_coefficient_bits": 16
+      },
+      {
+        "case": "dyadic_cancellation",
+        "bits": 548,
+        "ball_median_ms": 0.13479,
+        "integer_median_ms": 0.03694,
+        "ball_over_integer": 3.648890092041148,
+        "maximum_final_exact_coefficient_bits": 1
+      },
+      {
+        "case": "nondyadic_cancellation",
+        "bits": 548,
+        "ball_median_ms": 0.141651,
+        "integer_median_ms": 0.04043,
+        "ball_over_integer": 3.5036111798169673,
+        "maximum_final_exact_coefficient_bits": 149
+      }
+    ],
+    "endpoint": [
+      {
+        "case": "upstream12.json",
+        "bits": 201,
+        "ball_median_ms": 298.223835,
+        "integer_median_ms": 53.6305,
+        "ball_over_integer": 5.560713306793709,
+        "maximum_final_exact_coefficient_bits": 3007
+      },
+      {
+        "case": "upstream12.json",
+        "bits": 333,
+        "ball_median_ms": 350.227902,
+        "integer_median_ms": 84.316615,
+        "ball_over_integer": 4.153723462451618,
+        "maximum_final_exact_coefficient_bits": 4981
+      },
+      {
+        "case": "paper27.json",
+        "bits": 201,
+        "ball_median_ms": 831.327034,
+        "integer_median_ms": 54.218701,
+        "ball_over_integer": 15.332846760751424,
+        "maximum_final_exact_coefficient_bits": 865
+      },
+      {
+        "case": "paper27.json",
+        "bits": 333,
+        "ball_median_ms": 981.331551,
+        "integer_median_ms": 56.674528,
+        "ball_over_integer": 17.315213476502176,
+        "maximum_final_exact_coefficient_bits": 995
+      },
+      {
+        "case": "nondyadic_complex",
+        "bits": 201,
+        "ball_median_ms": 2.584127,
+        "integer_median_ms": 0.747991,
+        "ball_over_integer": 3.4547568085712266,
+        "maximum_final_exact_coefficient_bits": 569
+      },
+      {
+        "case": "sparse_high_degree",
+        "bits": 201,
+        "ball_median_ms": 114.121478,
+        "integer_median_ms": 3.65064,
+        "ball_over_integer": 31.260677031972474,
+        "maximum_final_exact_coefficient_bits": 1
+      },
+      {
+        "case": "shifted_repeated_degree64",
+        "bits": 201,
+        "ball_median_ms": 48.765568,
+        "integer_median_ms": 94.31533,
+        "ball_over_integer": 0.5170481617357433,
+        "maximum_final_exact_coefficient_bits": 13100
+      },
+      {
+        "case": "rational_growth_degree32",
+        "bits": 201,
+        "ball_median_ms": 21.889913,
+        "integer_median_ms": 51.223125,
+        "ball_over_integer": 0.42734434886586864,
+        "maximum_final_exact_coefficient_bits": 22868
+      },
+      {
+        "case": "dyadic_cancellation",
+        "bits": 216,
+        "ball_median_ms": 0.12819,
+        "integer_median_ms": 0.03724,
+        "ball_over_integer": 3.4422663802363047,
+        "maximum_final_exact_coefficient_bits": 1
+      },
+      {
+        "case": "nondyadic_cancellation",
+        "bits": 216,
+        "ball_median_ms": 0.125511,
+        "integer_median_ms": 0.036701,
+        "ball_over_integer": 3.419825072886298,
+        "maximum_final_exact_coefficient_bits": 2
+      },
+      {
+        "case": "dyadic_cancellation",
+        "bits": 415,
+        "ball_median_ms": 0.136111,
+        "integer_median_ms": 0.03665,
+        "ball_over_integer": 3.713806275579809,
+        "maximum_final_exact_coefficient_bits": 1
+      },
+      {
+        "case": "nondyadic_cancellation",
+        "bits": 415,
+        "ball_median_ms": 0.13102,
+        "integer_median_ms": 0.038549,
+        "ball_over_integer": 3.398791148927339,
+        "maximum_final_exact_coefficient_bits": 16
+      },
+      {
+        "case": "dyadic_cancellation",
+        "bits": 548,
+        "ball_median_ms": 0.14278,
+        "integer_median_ms": 0.03769,
+        "ball_over_integer": 3.788272751392942,
+        "maximum_final_exact_coefficient_bits": 1
+      },
+      {
+        "case": "nondyadic_cancellation",
+        "bits": 548,
+        "ball_median_ms": 0.133861,
+        "integer_median_ms": 0.04179,
+        "ball_over_integer": 3.2031825795644893,
+        "maximum_final_exact_coefficient_bits": 149
+      }
+    ]
+  },
+  "decision": [
+    "Proceed to a separately reviewed bounded adaptive production implementation; do not integrate this test-only constructor.",
+    "Genuine 12/27-master initial/endpoint chart constructors improve about4.15\u201319.99 times.",
+    "Repeated-degree64 and512-bit degree32 cases are about1.94 and2.36 times slower: retain oldballs when a conservative cost/growth selector rejects integer construction.",
+    "Exact construction still removes old interval-width precision hints in cancellation examples. Preserve old-ball retry diagnostics through lazy same-chart fallback on a failed exact trial budget; a passing tighter exact bound can legitimately change controller behavior."
+  ],
+  "scope": "Exact local defect of the stored polynomial only. No global solution-error certificate, original-AMFlow speedup, whole-transport gain, or production behavior change is established by these constructor measurements.",
+  "initial_failed_measurement": "Both earlier runs stopped after seven completed cases when the conservative 131072-bit predicted-shift envelope rejected rational_growth_degree32. Their partial outputs, exact measured source and logs are retained. The final test-only4194304-bit envelope completes all cases; it is not proposed as a production default.",
+  "reproduction": "From this branch: cargo test --locked --release --lib integer_performance; then set INTEGER_RESIDUAL_BENCH_DIR to an absolute raw/initial or raw/endpoint directory and RAYON_NUM_THREADS=1, run the ignored exact_source_residual_performance_comparison on CPU42. Copy fixtures to a writable directory to preserve the archive.",
+  "prior_experiment": "https://github.com/alphal00p/RustFlow/commit/d8738fc0a9f0e08572fbae84cef58f5d3378ef24",
+  "source_sha256": {
+    "src/ode/source.rs": "2d33d6b7ac0bc9f580f0052362d415b598a02ea7080a5244c9684a5b0e0b6e96",
+    "src/ode/source_integer_tests.rs": "20517380813b107740b3a0996b7d13d8f5bdf94817a4984099c0012fb6e889fa",
+    "Cargo.toml": "9c109c014341e3b3f9cb75293e7114dbfa6fbb6c1cca8924bb64c48292617058",
+    "Cargo.lock": "4c5b7575719b551a186318342392dc24b2d7aec7d1ff0ab02650f5559cc4fa9c",
+    "src/ode.rs": "2b26b081ce2303de243db531b12b2f55385295c1cf8918065d3b8d8205b61c63",
+    "src/numeric.rs": "17c9e27d1ffac7903e1dfb021de557aa55703e02823b0940a91794b94a17b518"
+  },
+  "binary_sha256": "8f929e1b74cb9c89f4fd86c5c517dc69d61ab4ff93e3536152f0faf8b382bf84"
+}
