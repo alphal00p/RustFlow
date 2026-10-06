@@ -1,9 +1,9 @@
 //! Auxiliary-mass flow with an explicit positive-energy cut measure.
 //!
-//! Every uncut line is deformed. Compact final-state momenta stay soft; the
-//! virtual directions are hard. Any other region has a free polynomial virtual
-//! integration and vanishes in dimensional regularization. Boundary factors
-//! therefore contain unchanged cut shells and ordinary massive vacuum systems.
+//! Compact final-state momenta stay soft. Partial mass placements retain soft
+//! virtual families, which recursively deform all remaining uncut poles. Their
+//! strictly smaller pole inventory bounds cut recursion; hard factors reuse
+//! ordinary recursive vacuum boundaries.
 //! This adapter reuses the ordinary flow, exact region algebra, native tensor
 //! projection and cut-aware IBPs; it never takes the imaginary part of a mixed
 //! graph to infer its cut.
@@ -19,18 +19,19 @@ use crate::phase_space::{PreparedMasslessPhaseSpace, PreparedTwoBodyPhaseSpace, 
 use crate::*;
 use rayon::prelude::*;
 use std::collections::{BTreeMap, BTreeSet};
+use std::sync::Mutex;
 use symbolica::prelude::*;
 
 /// A prepared positive-energy cut system with automatic virtual vacuum
 /// boundaries. Current leaves are massive two-body and massless N-body phase
-/// space. Virtual loops use +i0; partial mass placements and algebraic-only
-/// distribution cuts retain explicit unsupported errors.
+/// space. Virtual loops use +i0. Explicit partial placements require independent
+/// surviving soft poles; dependent decompositions and algebraic-only cuts remain
+/// explicitly unsupported.
 pub struct PreparedCutFlow<'a> {
     family: CutFamily,
     channel: FutureTimelikeChannel,
     flow: Option<PreparedFlow>,
     backend: &'a dyn ReductionBackend,
-    boundary: CutProvenance,
     hard: Vec<bool>,
     shifted: Vec<bool>,
     targets: usize,
@@ -82,11 +83,8 @@ impl<'a> PreparedCutFlow<'a> {
         let boundary = CutProvenance::new(&family, &hard)?;
         let leaf = boundary.unit_leaf()?;
         let supported = crate::phase_space::supported_leaf(&leaf, channel)?;
-        let shifted = (0..family.family().propagators.len())
-            .map(|slot| slot < family.family().physical_propagators && !family.cuts().is_cut(slot))
-            .collect::<Vec<_>>();
+        let shifted = placement(&family, options)?;
         family.validate_auxiliary_mask(&shifted)?;
-        validate_placement(options, &shifted)?;
         if supported {
             validate_uncut_domain(&family, &boundary, channel)?;
         }
@@ -118,7 +116,6 @@ impl<'a> PreparedCutFlow<'a> {
             channel: channel.clone(),
             flow,
             backend,
-            boundary,
             hard,
             shifted,
             targets: targets.len(),
@@ -156,6 +153,36 @@ impl<'a> PreparedCutFlow<'a> {
             ));
         }
         let options = flow_options(options, &self.shifted);
+        if self.flow.is_none() {
+            return Ok(vec![
+                Precision::decimal(
+                    options.digits + options.guard_digits
+                )?
+                .zero();
+                self.targets
+            ]);
+        }
+        let ordinary = recursive::RecursiveBoundary::new(self.backend, &options, context);
+        self.evaluate_recursive(
+            epsilon,
+            &options,
+            context,
+            &ordinary,
+            &BTreeSet::new(),
+            &Mutex::default(),
+        )
+    }
+
+    fn evaluate_recursive(
+        &self,
+        epsilon: &Rational,
+        options: &FlowOptions,
+        context: &RunContext,
+        ordinary: &recursive::RecursiveBoundary<'_>,
+        ancestry: &BTreeSet<String>,
+        memo: &Mutex<BTreeMap<String, ComplexFloat>>,
+    ) -> Result<Vec<ComplexFloat>> {
+        context.cancellation.check()?;
         let Some(flow) = &self.flow else {
             return Ok(vec![
                 Precision::decimal(
@@ -165,17 +192,29 @@ impl<'a> PreparedCutFlow<'a> {
                 self.targets
             ]);
         };
-        let ordinary = recursive::RecursiveBoundary::new(self.backend, &options, context);
+        let key = self.family.fingerprint()?;
+        if ancestry.contains(&key) {
+            return Err(Error::Unsupported("recursive cut boundary cycle".into()));
+        }
+        if ancestry.len() >= 32 {
+            return Err(Error::Limit(
+                "cut boundary recursion exceeds 32 levels".into(),
+            ));
+        }
+        let mut ancestry = ancestry.clone();
+        ancestry.insert(key);
         let boundary = CutBoundary {
-            provenance: &self.boundary,
             hard: &self.hard,
             channel: &self.channel,
             backend: self.backend,
-            ordinary: &ordinary,
-            options: &options,
+            ordinary,
+            options,
             context,
+            cuts: &self.family,
+            ancestry: &ancestry,
+            memo,
         };
-        flow.evaluate(epsilon, &options, &boundary, context)
+        flow.evaluate(epsilon, options, &boundary, context)
     }
 
     pub fn evaluate_samples(
@@ -233,6 +272,42 @@ fn validate_options(options: &FlowOptions) -> Result<()> {
     Ok(())
 }
 
+fn placement(family: &CutFamily, options: &FlowOptions) -> Result<Vec<bool>> {
+    let ordinary = family.family();
+    let mut shifted = vec![false; ordinary.propagators.len()];
+    match &options.mass_mode {
+        MassMode::Auto | MassMode::All => {
+            for (slot, value) in shifted
+                .iter_mut()
+                .enumerate()
+                .take(ordinary.physical_propagators)
+            {
+                *value = !family.cuts().is_cut(slot);
+            }
+        }
+        MassMode::Propagators(slots) => {
+            if slots.is_empty()
+                || slots
+                    .iter()
+                    .any(|&i| i >= ordinary.physical_propagators || family.cuts().is_cut(i))
+            {
+                return Err(Error::InvalidInput(
+                    "cut deformation needs a nonempty subset of uncut physical denominators".into(),
+                ));
+            }
+            for &slot in slots {
+                shifted[slot] = true;
+            }
+        }
+        _ => {
+            return Err(Error::Unsupported(
+                "cut flow supports All, Auto, or an explicit uncut propagator subset".into(),
+            ));
+        }
+    }
+    Ok(shifted)
+}
+
 fn validate_placement(options: &FlowOptions, shifted: &[bool]) -> Result<()> {
     match &options.mass_mode {
         MassMode::Auto | MassMode::All => Ok(()),
@@ -242,8 +317,8 @@ fn validate_placement(options: &FlowOptions, shifted: &[bool]) -> Result<()> {
         {
             Ok(())
         }
-        _ => Err(Error::Unsupported(
-            "cut flow currently deforms every uncut physical denominator".into(),
+        _ => Err(Error::InvalidInput(
+            "cut evaluation changed the prepared mass placement".into(),
         )),
     }
 }
@@ -268,15 +343,35 @@ struct CutProvenance {
     momenta: Vec<MomentumRouting>,
     coordinates: Vec<Atom>,
     real: Vec<usize>,
+    uncut: Vec<Propagator>,
+    prescriptions: Vec<LoopPrescription>,
 }
 
 impl CutProvenance {
     fn new(family: &CutFamily, hard: &[bool]) -> Result<Self> {
+        let shifted = (0..family.family().propagators.len())
+            .map(|i| !family.cuts().is_cut(i))
+            .collect::<Vec<_>>();
+        Self::project(family, hard, &shifted)
+    }
+
+    fn project(family: &CutFamily, hard: &[bool], shifted: &[bool]) -> Result<Self> {
         let ordinary = family.family();
-        let real = (0..hard.len()).filter(|&i| !hard[i]).collect::<Vec<_>>();
-        if real.is_empty() || family.cuts().lines().len() != real.len() + 1 {
+        let real = family
+            .cuts()
+            .loop_prescriptions()
+            .iter()
+            .enumerate()
+            .filter_map(|(i, p)| (*p == LoopPrescription::Insensitive).then_some(i))
+            .collect::<Vec<_>>();
+        let kept = (0..hard.len()).filter(|&i| !hard[i]).collect::<Vec<_>>();
+        if real.is_empty()
+            || family.cuts().lines().len() != real.len() + 1
+            || real.iter().any(|&i| hard[i])
+        {
             return Err(Error::Unsupported(
-                "cuts must form one complete final state in the insensitive loop subspace".into(),
+                "cuts must form one complete soft final state in the insensitive loop subspace"
+                    .into(),
             ));
         }
         let mut labels = Vec::new();
@@ -294,9 +389,16 @@ impl CutProvenance {
             .iter()
             .enumerate()
             .filter_map(|(i, &(a, b))| {
-                (real.contains(&a) && (b >= hard.len() || real.contains(&b))).then_some(i)
+                (kept.contains(&a) && (b >= hard.len() || kept.contains(&b))).then_some(i)
             })
             .collect::<Vec<_>>();
+        let project = |d: &Propagator| Propagator {
+            constant: d.constant.clone(),
+            scalar_products: selected
+                .iter()
+                .map(|&i| d.scalar_products[i].clone())
+                .collect(),
+        };
         let mut denominators = Vec::new();
         let mut momenta = Vec::new();
         for (&slot, definition) in family.cuts().lines() {
@@ -309,41 +411,36 @@ impl CutProvenance {
                 .loops
                 .iter()
                 .zip(hard)
-                .any(|(a, hard)| *hard && !a.is_zero())
+                .any(|(a, h)| *h && !a.is_zero())
             {
                 return Err(Error::Unsupported(
-                    "cut momenta must have no virtual-direction component".into(),
+                    "cut momenta must have no hard-direction component".into(),
                 ));
             }
             momenta.push(MomentumRouting {
-                loops: real.iter().map(|&i| momentum.loops[i].clone()).collect(),
+                loops: kept.iter().map(|&i| momentum.loops[i].clone()).collect(),
                 external: momentum.external.clone(),
             });
-            let propagator = &ordinary.propagators[slot];
-            denominators.push(Propagator {
-                constant: propagator.constant.clone(),
-                scalar_products: selected
-                    .iter()
-                    .map(|&i| propagator.scalar_products[i].clone())
-                    .collect(),
-            });
+            denominators.push(project(&ordinary.propagators[slot]));
         }
-        if crate::algebra::rref(
-            denominators
-                .iter()
-                .map(|d| d.scalar_products.clone())
-                .collect(),
-        )
-        .1
-        .len()
-            != denominators.len()
+        let mut uncut = Vec::new();
+        for (slot, d) in ordinary
+            .propagators
+            .iter()
+            .enumerate()
+            .take(ordinary.physical_propagators)
         {
-            return Err(Error::Unsupported(
-                "dependent cut shells need a cut-preserving decomposition".into(),
-            ));
+            if family.cuts().is_cut(slot) || shifted[slot] {
+                continue;
+            }
+            let branch = regions::branch(d, hard.len())?;
+            if branch.iter().zip(hard).all(|(a, h)| !*h || a.is_zero()) {
+                uncut.push(project(d));
+            }
         }
+        independent_soft_poles(denominators.iter().chain(&uncut))?;
         let template = IntegralFamily {
-            loops: real.iter().map(|&i| ordinary.loops[i].clone()).collect(),
+            loops: kept.iter().map(|&i| ordinary.loops[i].clone()).collect(),
             propagators: vec![],
             physical_propagators: 0,
             ..ordinary.clone()
@@ -351,12 +448,18 @@ impl CutProvenance {
         let coordinates = (0..selected.len())
             .map(|i| Atom::var(symbol!(format!("symbolica_amflow::cut_soft_{i}"))))
             .collect();
+        let prescriptions = kept
+            .iter()
+            .map(|&i| family.cuts().loop_prescriptions()[i])
+            .collect();
         Ok(Self {
             template,
             denominators,
             momenta,
             coordinates,
             real,
+            uncut,
+            prescriptions,
         })
     }
 
@@ -388,33 +491,41 @@ impl CutProvenance {
                 "boundary factor changed the retained cut coordinate space".into(),
             ));
         }
-        let mut lines = Vec::new();
+        let expected = self
+            .denominators
+            .iter()
+            .chain(&self.uncut)
+            .collect::<Vec<_>>();
         let mut matched = BTreeSet::new();
         let mut identities = Vec::new();
-        for expected in &self.denominators {
-            let pivot = expected
+        for d in &expected {
+            let pivot = d
                 .scalar_products
                 .iter()
                 .position(|c| !c.is_zero())
-                .unwrap();
+                .ok_or_else(|| Error::Unsupported("constant soft pole".into()))?;
             let mut matches = Vec::new();
-            for (slot, d) in term.family.propagators.iter().enumerate() {
-                let scale = (&d.scalar_products[pivot] / &expected.scalar_products[pivot])
+            for (slot, actual) in term.family.propagators.iter().enumerate() {
+                let scale = (&actual.scalar_products[pivot] / &d.scalar_products[pivot])
                     .together()
                     .cancel();
-                if scale.is_zero() {
-                    continue;
-                }
-                if std::iter::once((&d.constant, &expected.constant))
-                    .chain(d.scalar_products.iter().zip(&expected.scalar_products))
-                    .all(|(a, b)| (a - &scale * b).together().cancel().is_zero())
+                if !scale.is_zero()
+                    && std::iter::once((&actual.constant, &d.constant))
+                        .chain(actual.scalar_products.iter().zip(&d.scalar_products))
+                        .all(|(a, b)| (a - &scale * b).together().cancel().is_zero())
                 {
+                    if real_rational(&scale, "soft pole normalization")? <= Rational::zero() {
+                        return Err(Error::Unsupported(
+                            "soft pole normalization must preserve the cut orientation and +i0"
+                                .into(),
+                        ));
+                    }
                     matches.push((slot, scale));
                 }
             }
             if matches.len() > 1 {
                 return Err(Error::Unsupported(
-                    "ambiguous cut identity in a boundary factor".into(),
+                    "ambiguous soft pole identity in a boundary factor".into(),
                 ));
             }
             let identity = matches.pop();
@@ -423,43 +534,41 @@ impl CutProvenance {
             }
             identities.push(identity);
         }
-        // Check the surviving-denominator invariant even for a cut-zero term.
-        // An unknown uncut pole must not be silently discarded as cancellation.
-        if (0..term.family.physical_propagators).any(|slot| !matched.contains(&slot)) {
+        if (0..term.family.physical_propagators).any(|i| !matched.contains(&i)) {
             return Err(Error::Unsupported(
-                "an undeformed uncut denominator survived in the soft boundary".into(),
+                "an unauthenticated uncut pole survived in the soft boundary".into(),
             ));
         }
-        for ((expected, momentum), identity) in
-            self.denominators.iter().zip(&self.momenta).zip(identities)
+        // Validate every surviving pole before declaring a missing cut zero.
+        if identities[..self.denominators.len()]
+            .iter()
+            .any(|identity| {
+                identity
+                    .as_ref()
+                    .is_none_or(|(slot, _)| term.integral.0[*slot] <= 0)
+            })
         {
+            return Ok(None);
+        }
+        let mut lines = Vec::new();
+        for (index, (expected, identity)) in expected.into_iter().zip(identities).enumerate() {
             let Some((slot, scale)) = identity else {
-                // All surviving soft denominators are independent cut shells.
-                // Native conversion can therefore remove one only by numerator
-                // cancellation, whose nonpositive cut power is exactly zero.
-                return Ok(None);
+                continue;
             };
-            if term.integral.0[slot] <= 0 {
-                return Ok(None);
-            }
-            let rational = real_rational(&scale, "cut normalization")?;
-            if rational <= Rational::zero() {
-                return Err(Error::Unsupported(
-                    "cut normalization must be positive".into(),
-                ));
-            }
             term.coefficient *= scale.pow(-i64::from(term.integral.0[slot]));
             term.family.propagators[slot] = expected.clone();
-            lines.push(CutLine {
-                propagator: slot,
-                definition: CutDefinition::PositiveEnergy {
-                    momentum: momentum.clone(),
-                },
-            });
+            if index < self.denominators.len() {
+                lines.push(CutLine {
+                    propagator: slot,
+                    definition: CutDefinition::PositiveEnergy {
+                        momentum: self.momenta[index].clone(),
+                    },
+                });
+            }
         }
         Ok(Some(CutFamily::new(
             term.family.clone(),
-            CutMetadata::new(lines, vec![LoopPrescription::Insensitive; self.real.len()])?,
+            CutMetadata::new(lines, self.prescriptions.clone())?,
         )?))
     }
 }
@@ -617,13 +726,15 @@ fn certify_soft_denominator(
 }
 
 struct CutBoundary<'a, 'b> {
-    provenance: &'a CutProvenance,
     hard: &'a [bool],
     channel: &'a FutureTimelikeChannel,
     backend: &'a dyn ReductionBackend,
     ordinary: &'a recursive::RecursiveBoundary<'b>,
     options: &'a FlowOptions,
     context: &'a RunContext,
+    cuts: &'a CutFamily,
+    ancestry: &'a BTreeSet<String>,
+    memo: &'a Mutex<BTreeMap<String, ComplexFloat>>,
 }
 
 enum RequestFamily {
@@ -640,7 +751,9 @@ struct Product {
 }
 struct Pending {
     component: usize,
+    series: usize,
     order: usize,
+    jacobian: ComplexFloat,
     products: Vec<Product>,
 }
 
@@ -666,23 +779,45 @@ impl BoundaryProvider for CutBoundary<'_, '_> {
         p: Precision,
         solutions: &FrobeniusBasis,
     ) -> Result<Vec<ComplexFloat>> {
-        let region = regions::LoopRegion {
-            transformation: (0..self.hard.len())
-                .map(|i| {
-                    (0..self.hard.len())
-                        .map(|j| Atom::num(i64::from(i == j)))
-                        .collect()
-                })
-                .collect(),
-            hard: self.hard.to_vec(),
-            hard_branches: vec![],
-            jacobian_determinant: Atom::one(),
-        };
+        let regions =
+            if (0..family.physical_propagators).all(|i| self.cuts.cuts().is_cut(i) || shifted[i]) {
+                vec![regions::LoopRegion {
+                    transformation: (0..self.hard.len())
+                        .map(|i| {
+                            (0..self.hard.len())
+                                .map(|j| Atom::num(i64::from(i == j)))
+                                .collect()
+                        })
+                        .collect(),
+                    hard: self.hard.to_vec(),
+                    hard_branches: vec![],
+                    jacobian_determinant: Atom::one(),
+                }]
+            } else {
+                crate::cut_regions::enumerate(self.cuts, self.context)?
+            };
+        let mut provenance = Vec::new();
+        for region in &regions {
+            self.context.cancellation.check()?;
+            let transformed = CutFamily::new(
+                family.transform_loops(&region.transformation)?,
+                self.cuts.cuts().clone(),
+            )?;
+            provenance.push(CutProvenance::project(&transformed, &region.hard, shifted)?);
+        }
+        let parent_poles = distinct_uncut_poles(self.cuts)?;
+        let parameters =
+            ahash::HashMap::from_iter([(Atom::var(family.epsilon), p.rational(epsilon))]);
         let powers = basis
             .iter()
             .map(|integral| {
-                regions::expand_region(family, integral, shifted, &region, 0)
-                    .map(|expansion| vec![-expansion.eta_power])
+                regions
+                    .iter()
+                    .map(|region| {
+                        regions::expand_region(family, integral, shifted, region, 0)
+                            .map(|expansion| -expansion.eta_power)
+                    })
+                    .collect::<Result<Vec<_>>>()
             })
             .collect::<Result<Vec<_>>>()?;
         let orders = solutions.region_orders(&powers, 32)?;
@@ -707,89 +842,106 @@ impl BoundaryProvider for CutBoundary<'_, '_> {
                 .max()
                 .unwrap_or(0),
         })?;
-        let mut data = Vec::new();
+        let mut data = vec![Vec::new(); basis.len()];
         let mut requests = BTreeMap::<String, Request>::new();
         let mut pending = Vec::new();
         for (component, integral) in basis.iter().enumerate() {
-            self.context.cancellation.check()?;
-            let order = orders[component][0];
-            data.push(
-                (0..2)
-                    .map(|parity| RegionBoundary {
-                        exponent: (&powers[component][0] + Atom::num((parity as i64, 2)))
+            for (r, region) in regions.iter().enumerate() {
+                self.context.cancellation.check()?;
+                let order = orders[component][r];
+                for parity in 0..2 {
+                    data[component].push(RegionBoundary {
+                        exponent: (&powers[component][r] + Atom::num((parity as i64, 2)))
                             .together()
                             .cancel(),
                         coefficients: vec![
                             p.zero();
                             order.map_or(0, |order| (order + 2 - parity) / 2)
                         ],
-                    })
-                    .collect::<Vec<_>>(),
-            );
-            let Some(order) = order else {
-                continue;
-            };
-            let expansion = regions::expand_region(family, integral, shifted, &region, order)?;
-            for (index, expression) in expansion.coefficients.iter().enumerate() {
-                let terms = integrand::factor_region(
-                    expression,
-                    &expansion.coordinates,
-                    family,
-                    self.hard,
-                    10000,
-                )?;
-                let mut products = Vec::new();
-                for term in terms {
-                    let mut product = Product {
-                        coefficient: term.coefficient,
-                        factors: vec![],
-                    };
-                    let mut children = Vec::new();
-                    let mut zero = false;
-                    for mut factor in term.factors {
-                        let child = if factor.family.external.is_empty() {
-                            if recursive::scaleless(&factor.family, &factor.integral)? {
-                                zero = true;
-                                break;
-                            }
-                            RequestFamily::Ordinary(factor.family.clone())
-                        } else {
-                            let Some(cut) = self.provenance.restore(&mut factor)? else {
-                                zero = true;
-                                break;
-                            };
-                            RequestFamily::Cut(cut)
-                        };
-                        product.coefficient *= &factor.coefficient;
-                        let key = match &child {
-                            RequestFamily::Ordinary(family) => {
-                                format!("ordinary:{}", family.convert()?.family.fingerprint())
-                            }
-                            RequestFamily::Cut(family) => format!("cut:{}", family.fingerprint()?),
-                        };
-                        product.factors.push((key.clone(), factor.integral.clone()));
-                        children.push((key, child, factor.integral));
-                    }
-                    if zero {
-                        continue;
-                    }
-                    for (key, family, integral) in children {
-                        requests
-                            .entry(key)
-                            .or_insert_with(|| Request {
-                                family,
-                                targets: BTreeSet::new(),
-                            })
-                            .targets
-                            .insert(integral);
-                    }
-                    products.push(product);
+                    });
                 }
-                pending.push(Pending {
-                    component,
-                    order: index,
-                    products,
-                });
+                let Some(order) = order else {
+                    continue;
+                };
+                let expansion = regions::expand_region(family, integral, shifted, region, order)?;
+                let determinant = p.eval(&expansion.jacobian_determinant, &parameters)?;
+                let jacobian = p.pow(
+                    &ComplexFloat::new(p.norm(&determinant), p.real(0)),
+                    &p.rational(&(Rational::from(family.dimension) - epsilon * &Rational::from(2))),
+                );
+                for (index, expression) in expansion.coefficients.iter().enumerate() {
+                    self.context.cancellation.check()?;
+                    let terms = integrand::factor_region(
+                        expression,
+                        &expansion.coordinates,
+                        family,
+                        &region.hard,
+                        10000,
+                    )?;
+                    let mut products = Vec::new();
+                    for term in terms {
+                        self.context.cancellation.check()?;
+                        let mut product = Product {
+                            coefficient: term.coefficient,
+                            factors: vec![],
+                        };
+                        let mut children = Vec::new();
+                        let mut zero = false;
+                        for mut factor in term.factors {
+                            let child = if factor.family.external.is_empty() {
+                                zero |= recursive::scaleless(&factor.family, &factor.integral)?;
+                                RequestFamily::Ordinary(factor.family.clone())
+                            } else {
+                                let Some(cut) = provenance[r].restore(&mut factor)? else {
+                                    zero = true;
+                                    continue;
+                                };
+                                if distinct_uncut_poles(&cut)? >= parent_poles {
+                                    return Err(Error::Unsupported("soft cut recursion did not strictly decrease distinct uncut poles".into()));
+                                }
+                                zero |= cut_scaleless(&cut, &factor.integral)?;
+                                RequestFamily::Cut(cut)
+                            };
+                            product.coefficient *= &factor.coefficient;
+                            let key = match &child {
+                                RequestFamily::Ordinary(family) => {
+                                    format!("ordinary:{}", family.convert()?.family.fingerprint())
+                                }
+                                RequestFamily::Cut(family) => {
+                                    format!("cut:{}", family.fingerprint()?)
+                                }
+                            };
+                            product.factors.push((key.clone(), factor.integral.clone()));
+                            children.push((key, child, factor.integral));
+                        }
+                        if zero {
+                            continue;
+                        }
+                        for (key, family, integral) in children {
+                            requests
+                                .entry(key)
+                                .or_insert_with(|| Request {
+                                    family,
+                                    targets: BTreeSet::new(),
+                                })
+                                .targets
+                                .insert(integral);
+                            if requests.len() > 10000 {
+                                return Err(Error::Limit(
+                                    "cut boundary family budget exhausted".into(),
+                                ));
+                            }
+                        }
+                        products.push(product);
+                    }
+                    pending.push(Pending {
+                        component,
+                        series: 2 * r + index % 2,
+                        order: index / 2,
+                        jacobian: jacobian.clone(),
+                        products,
+                    });
+                }
             }
         }
         let mut values = BTreeMap::new();
@@ -800,39 +952,14 @@ impl BoundaryProvider for CutBoundary<'_, '_> {
                 RequestFamily::Ordinary(family) => {
                     self.ordinary.evaluate_many(&family, &targets, epsilon, p)?
                 }
-                RequestFamily::Cut(family) => {
-                    if family.family().loops.len() == 1 {
-                        PreparedTwoBodyPhaseSpace::new(
-                            &family,
-                            self.channel,
-                            &targets,
-                            &KinematicPoint::default(),
-                            self.backend,
-                            self.options,
-                            self.context,
-                        )?
-                        .evaluate(epsilon, self.options, self.context)?
-                    } else {
-                        PreparedMasslessPhaseSpace::new(
-                            &family,
-                            self.channel,
-                            &targets,
-                            &KinematicPoint::default(),
-                            self.backend,
-                            self.options,
-                            self.context,
-                        )?
-                        .evaluate(epsilon, self.options, self.context)?
-                    }
-                }
+                RequestFamily::Cut(family) => self.evaluate_cut(&family, &targets, epsilon, p)?,
             };
             for (target, value) in targets.into_iter().zip(evaluated) {
                 values.insert((key.clone(), target), value);
             }
         }
-        let parameters =
-            ahash::HashMap::from_iter([(Atom::var(family.epsilon), p.rational(epsilon))]);
         for coefficient in pending {
+            self.context.cancellation.check()?;
             let mut value = p.zero();
             for product in coefficient.products {
                 let mut term = p.eval(&product.coefficient, &parameters)?;
@@ -844,16 +971,215 @@ impl BoundaryProvider for CutBoundary<'_, '_> {
                 }
                 value = p.add(&value, &term);
             }
-            data[coefficient.component][coefficient.order % 2].coefficients
-                [coefficient.order / 2] = value;
+            data[coefficient.component][coefficient.series].coefficients[coefficient.order] =
+                p.mul(&value, &coefficient.jacobian);
         }
+        self.context.cancellation.check()?;
         solutions.match_regions(&data)
     }
+}
+
+/// Distinct affine pole shapes, including constants and excluding ISP slots.
+fn distinct_uncut_poles(family: &CutFamily) -> Result<usize> {
+    let mut shapes = BTreeSet::new();
+    for (slot, d) in family
+        .family()
+        .propagators
+        .iter()
+        .enumerate()
+        .take(family.family().physical_propagators)
+    {
+        if family.cuts().is_cut(slot) {
+            continue;
+        }
+        let scale = d
+            .scalar_products
+            .iter()
+            .find(|c| !c.is_zero())
+            .ok_or_else(|| Error::Unsupported("constant uncut pole".into()))?;
+        shapes.insert(
+            std::iter::once(&d.constant)
+                .chain(&d.scalar_products)
+                .map(|a| (a / scale).together().cancel())
+                .collect::<Vec<_>>(),
+        );
+    }
+    Ok(shapes.len())
+}
+
+/// Reuse the native zero certificate with the required cuts when a partial
+/// region leaves a polynomial soft virtual direction. Exclusion is not a proof.
+fn cut_scaleless(family: &CutFamily, integral: &Integral) -> Result<bool> {
+    if family
+        .cuts()
+        .loop_prescriptions()
+        .iter()
+        .all(|p| *p == LoopPrescription::Insensitive)
+    {
+        return Ok(false);
+    }
+    use rustred::sector::{
+        Mask,
+        zero::{Analyzer, Decision},
+    };
+    let converted = family.family().convert()?;
+    let analyzer = Analyzer::try_new(&converted.family, family.native_restrictions()?)
+        .map_err(|e| Error::Reduction(e.to_string()))?;
+    let mask = Mask::try_new(integral.0.iter().map(|&n| n > 0))
+        .map_err(|e| Error::InvalidInput(e.to_string()))?;
+    Ok(matches!(
+        analyzer
+            .analyze(&mask)
+            .map_err(|e| Error::Reduction(e.to_string()))?,
+        Decision::ProvedZero(_)
+    ))
+}
+
+impl CutBoundary<'_, '_> {
+    fn evaluate_cut(
+        &self,
+        family: &CutFamily,
+        targets: &[Integral],
+        epsilon: &Rational,
+        p: Precision,
+    ) -> Result<Vec<ComplexFloat>> {
+        self.context.cancellation.check()?;
+        let prefix = format!("{}:{epsilon}:{}", family.fingerprint()?, p.bits);
+        let keys = targets
+            .iter()
+            .map(|target| format!("{prefix}:{:?}", target.0))
+            .collect::<Vec<_>>();
+        let lock_error = |_| Error::Numerical("cut boundary memo poisoned".into());
+        let missing = {
+            let memo = self.memo.lock().map_err(lock_error)?;
+            targets
+                .iter()
+                .zip(&keys)
+                .filter(|(_, key)| !memo.contains_key(*key))
+                .map(|(target, _)| target.clone())
+                .collect::<Vec<_>>()
+        };
+        if !missing.is_empty() {
+            let mut options = self.options.clone();
+            options.mass_mode = MassMode::All;
+            // Match the actual Frobenius working precision, including adaptive
+            // retries. This remains working precision, not accuracy evidence.
+            let working_digits =
+                (u64::from(p.bits.saturating_sub(16)) * 1000).div_ceil(3322) as u32;
+            let extra = working_digits.saturating_sub(options.digits + options.guard_digits);
+            options.guard_digits = options
+                .guard_digits
+                .max(working_digits.saturating_sub(options.digits));
+            options.series_order += extra as usize * 4 / 5;
+            options.refine_rational_order(extra.div_ceil(20) as usize);
+            let pure_cut =
+                (0..family.family().physical_propagators).all(|i| family.cuts().is_cut(i));
+            let evaluated = if pure_cut && family.family().loops.len() == 1 {
+                PreparedTwoBodyPhaseSpace::new(
+                    family,
+                    self.channel,
+                    &missing,
+                    &KinematicPoint::default(),
+                    self.backend,
+                    &options,
+                    self.context,
+                )?
+                .evaluate(epsilon, &options, self.context)?
+            } else if pure_cut {
+                PreparedMasslessPhaseSpace::new(
+                    family,
+                    self.channel,
+                    &missing,
+                    &KinematicPoint::default(),
+                    self.backend,
+                    &options,
+                    self.context,
+                )?
+                .evaluate(epsilon, &options, self.context)?
+            } else {
+                let flow = PreparedCutFlow::new(
+                    family,
+                    self.channel,
+                    &missing,
+                    &KinematicPoint::default(),
+                    self.backend,
+                    &options,
+                    self.context,
+                )?;
+                flow.evaluate_recursive(
+                    epsilon,
+                    &flow_options(&options, &flow.shifted),
+                    self.context,
+                    self.ordinary,
+                    self.ancestry,
+                    self.memo,
+                )?
+            };
+            self.context.cancellation.check()?;
+            let mut memo = self.memo.lock().map_err(lock_error)?;
+            if memo
+                .len()
+                .checked_add(missing.len())
+                .is_none_or(|size| size > 10000)
+            {
+                return Err(Error::Limit(
+                    "cut boundary value memo budget exhausted".into(),
+                ));
+            }
+            for (target, value) in missing.into_iter().zip(evaluated) {
+                memo.insert(format!("{prefix}:{:?}", target.0), value);
+            }
+        }
+        let memo = self.memo.lock().map_err(lock_error)?;
+        keys.into_iter()
+            .map(|key| {
+                memo.get(&key)
+                    .cloned()
+                    .ok_or_else(|| Error::Numerical("missing evaluated cut boundary".into()))
+            })
+            .collect()
+    }
+}
+
+fn independent_soft_poles<'a>(poles: impl Iterator<Item = &'a Propagator>) -> Result<()> {
+    // Exclude the affine constant column: different masses on one momentum
+    // are dependent scalar-product poles despite independent affine forms.
+    let rows = poles.map(|d| d.scalar_products.clone()).collect::<Vec<_>>();
+    let count = rows.len();
+    if crate::algebra::rref(rows).1.len() != count {
+        return Err(Error::Unsupported(
+            "dependent soft poles need a cut-preserving decomposition before partial fractions"
+                .into(),
+        ));
+    }
+    Ok(())
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn distinct_masses_do_not_authorize_dependent_soft_partial_fractions() {
+        let poles = [
+            Propagator {
+                constant: Atom::zero(),
+                scalar_products: vec![Atom::one(), Atom::zero()],
+            },
+            Propagator {
+                constant: Atom::num(-2),
+                scalar_products: vec![Atom::zero(), Atom::one()],
+            },
+            Propagator {
+                constant: Atom::num(-3),
+                scalar_products: vec![Atom::zero(), Atom::one()],
+            },
+        ];
+        assert!(
+            matches!(independent_soft_poles(poles.iter()),Err(Error::Unsupported(message)) if message.contains("before partial fractions"))
+        );
+        assert!(independent_soft_poles(poles[..2].iter()).is_ok());
+    }
 
     fn provenance() -> CutProvenance {
         let gram = vec![vec![Atom::num(25)]];
@@ -888,6 +1214,8 @@ mod tests {
                 Atom::var(symbol!("cut_provenance_test::rp")),
             ],
             real: vec![0],
+            uncut: vec![],
+            prescriptions: vec![LoopPrescription::Insensitive],
         }
     }
 
@@ -930,7 +1258,7 @@ mod tests {
         )?;
         assert!(
             matches!(provenance.restore(&mut terms.remove(0)), Err(Error::Unsupported(message))
-            if message.contains("undeformed uncut"))
+            if message.contains("unauthenticated uncut"))
         );
         Ok(())
     }

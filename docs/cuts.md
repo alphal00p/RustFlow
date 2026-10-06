@@ -60,10 +60,10 @@ exact kinematics and cut-aware reduction backend used by the terminal APIs.
 The current domain contains one complete positive-energy final state in the
 prescription-insensitive loop subspace, with all virtual directions using
 `PlusI0`. Inputs specialize to exact real coefficients and nonnegative squared
-masses. Every uncut physical denominator receives the auxiliary mass; `Auto` and
-`All` select this placement, while an explicit list must contain the same slots.
-Cuts and ISP slots are never deformed. Partial placements, algebraic distribution
-cuts and opposite virtual causal signs return typed unsupported errors.
+masses. `Auto` and `All` deform every uncut physical denominator. An explicit
+`MassMode::Propagators` selects a nonempty subset of those slots. Cuts and ISP
+slots are never deformed. Algebraic distribution cuts and opposite virtual
+causal signs return typed unsupported errors.
 
 The boundary construction uses compact physical support. In the rest frame of
 the future total momentum, all on-shell final-state energies are bounded and
@@ -74,9 +74,31 @@ directions hard and all real directions soft. Existing region expansion and
 HEPKit's native tensor projector factor it into ordinary vacuum integrals and
 unchanged phase-space shells. Ordinary vacuum factors recursively use the
 existing AMF/FT boundary engine. Current phase-space leaves are the massive
-two-body and massless N-body terminals above. This proof does not cover a
-partial auxiliary-mass placement, an incomplete final-state cut, or conflicting
-causal assignments.
+two-body and massless N-body terminals above. Incomplete final states and
+conflicting causal assignments remain unsupported.
+
+Partial placements use the existing branch-based region enumeration. A region is
+admitted only when every oriented cut momentum exactly annihilates its hard
+subspace. Symbolica linear algebra selects an equivalent virtual basis while
+fixing all real coordinates; the adapted determinant retains the integration
+Jacobian. This includes common hard virtual momenta whose difference stays soft.
+Before factorization, the surviving original undeformed soft poles must be
+linearly independent in their scalar-product coefficients, excluding constants.
+Different masses on the same momentum therefore do not bypass this check.
+Dependent soft decompositions require future cut-aware partial fractions.
+
+Existing region expansion and native tensor projection produce hard ordinary
+vacua and soft cut families. Every surviving soft pole is authenticated against
+an original undeformed denominator, preserving its mass, positive normalization,
+cut orientation, and per-loop prescription. A native RustRed zero certificate
+with cut restrictions removes polynomial soft virtual integrations; an excluded
+sector is not treated as a scaleless proof. A nonterminal soft child deforms all
+its remaining uncut lines. Each child must have strictly fewer distinct physical
+uncut poles than its parent, checked mechanically before evaluation. Cycles and
+more than 32 recursive levels fail explicitly. Region enumeration, child families,
+and the shared per-evaluation value memo each retain bounded work. Hard children
+share the ordinary recursive provider; child reductions preserve and check their
+nonzero conditions at each finite epsilon.
 
 Each cut carries its original oriented momentum and unscaled denominator through
 boundary conversion. If native normalization produces `d = c D`, the adapter
@@ -100,9 +122,9 @@ Symbolic system caches use the existing source-sensitive keys and the explicit
 cut backend identity, including oriented momenta and loop prescriptions. Physical
 support and domain checks run again on preparation. This adapter does not add a
 persistent numerical cut-value cache or turn working precision into an achieved
-accuracy claim. General partial cut recursion, massive N-body leaves, internal
-real-phase-space poles and mixed virtual signs remain part of the broader parity
-goal.
+accuracy claim. Dependent soft-pole decompositions, massive N-body leaves,
+internal real-phase-space poles and mixed virtual signs remain part of the
+broader parity goal.
 
 The automatic connected benchmark has cut lines `r²-1`, `(P-r)²-4`, virtual
 lines `k²`, `(k-r)²`, and `P²=25`. Its independent result is
@@ -125,6 +147,20 @@ and normalization conversion are in
 [`reports/validation/2026-10-06-mixed-cut-flow`](../reports/validation/2026-10-06-mixed-cut-flow).
 These examples exercise the generic adapter; their analytic formulas occur only
 in tests and the reference driver.
+
+The partial-placement regression has massless cuts `r²`, `l²`, `(P-r-l)²`,
+virtual lines `k²-2`, `(k-r-l)²-3`, and `P²=1`; only `k²-2` is deformed.
+The virtual bubble depends on the varying invariant `(r+l)²`, so its phase-space
+integral does not factor into a constant bubble times a volume. Its comparison
+formula is a double beta/Feynman-parameter integral expanded into an exact
+rational series at nonzero epsilon. The normalized tail after N terms is bounded
+by `3^(-N)/(1-1/3)` for the positive samples used in the tests. This formula exists
+only in regression/oracle code; production uses the shared recursive owners.
+`scripts/upstream_partial_cut_oracle.py` runs the pinned original implementation
+in `Propagator` or `All` mode and records actual per-system deformed positions.
+The [32-test validation archive](../reports/validation/2026-10-06-partial-cut-boundaries)
+contains native/reference comparisons, distinct numerical profiles, source and
+binary provenance, and qualified single-case timings.
 
 ## Native HEPKit graph input
 
