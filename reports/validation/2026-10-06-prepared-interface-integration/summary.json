@@ -1,0 +1,191 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "recorded_utc": "2026-10-06T04:57:45.270897+00:00",
+  "tested_commit": "c3542054790113fdf5f010ac672b0947b72cdf56",
+  "source_files_verified_before_after_against_commit": 283,
+  "scope": "Main integration of immutable exact algebraic preparation with rational endpoint constraints, Python public re-exports, explicit propagator slots, prescribed/root transport and existing cut interfaces. Targeted release gate, not a new community wheel or complete long scientific run.",
+  "release_tests": {
+    "passed": 154,
+    "failed": 0,
+    "ignored": 1,
+    "targets": [
+      {
+        "target": "tests/algebraic.rs",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/algebraic_cache.rs",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/algebraic_endpoints.rs",
+        "passed": 11,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/algebraic_preparation.rs",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/canonical_algebraic.rs",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/conditioning.rs",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/constrained_singular_endpoints.rs",
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/diffexp.rs",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/epsilon_algebraic.rs",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/gg_hg.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/gg_hg_amplitude.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/mobius.rs",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/mobius_cache.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_cut_interfaces.rs",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/pade.rs",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/physical_conditions.rs",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/physical_transport.rs",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/prescribed_cache.rs",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_algebraic_transport.rs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_cut_interfaces.rs",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_endpoint_constraints.rs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_prescribed_transport.rs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/residual_arithmetic.rs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/supplied_singular_endpoints.rs",
+        "passed": 19,
+        "failed": 0,
+        "ignored": 0
+      }
+    ]
+  },
+  "execution": {
+    "session": 79552,
+    "exit_code": 0
+  },
+  "checks": {
+    "fmt": "passed",
+    "strict_all_target_python_stubgen_clippy": "passed"
+  },
+  "compiled_source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "eed3cfd6a7f905257630728caf307d0fc923009d12cf236fcc93f3208bee5f98"
+  },
+  "library": {
+    "archive": "/common/dev/amflow/target/prepared-interface-release-c354205/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "sha256": "6dd49fa5ed6e1093873da41b6a9f8e702aaf7cd993559613e32182a7a6dd2177"
+  },
+  "prior_full_release": "../2026-10-06-constraints-roots-cuts-integration/summary.json",
+  "separate_preparation_scientific_acceptance": "../../performance/2026-10-06-exact-algebraic-preparation/report.json",
+  "limits": [
+    "Full 16-configuration 4,360-coefficient scientific acceptance belongs to the isolated preparation revision, not a rerun in this targeted gate.",
+    "No fresh automatic-boundary, complete-amplitude or upstream speed comparison.",
+    "Frozen publication extension and scientific cache banks unchanged."
+  ],
+  "artifact_sha256": {
+    "clippy.log.gz": "35a5dddd36f7d072dfa0037a6d6e19f0be54ef97c6be48c85b344e142f527f7f",
+    "fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "processes.json": "3814bf941ce665938a1688c3326e7036de274b25ea84be7993df79a0a826f1c8",
+    "source-after.json": "9177f66c6ac713461a98f354d7a5f075704c333e3499894e02f06f04215b64f0",
+    "source-before.json": "46f6023575f7aab7d441d2e2eeabf8309ad69fe5a206e6b968af65229b71b449",
+    "tests.log.gz": "66e4b8bf1df9a13da1f2c3827d997baea3d243dfd18eb1afaf4da2eeb1153634"
+  }
+}

@@ -50,9 +50,25 @@ The latest isolated milestones add:
   exact old/new output agreement in matched 48/61-master timings and a completed
   separate full gg→hg transport acceptance. This improves existing native series
   assembly without a Symbolica dependency patch.
+- [Immutable exact algebraic preparation](../reports/performance/2026-10-06-exact-algebraic-preparation/report.json):
+  120 affected integration tests and a full 16-configuration gg→hg transport
+  acceptance pass. Matched checked transports improve by 1.12–1.17× across the
+  tested 48/61-master first and nearby destinations, with identical non-timing
+  outputs. Numerical coefficients, poles and residuals are still compiled at
+  each requested precision; no supplied boundary or rounded coefficient is
+  cached in the exact preparation object.
 
 These isolated counts overlap and must not be added together. Their reports
 retain exact revisions; none replaces the frozen notebook scientific run.
+
+The [preparation/interface integration](../reports/validation/2026-10-06-prepared-interface-integration/summary.json)
+subsequently passes **154 release tests across 24 targets**, formatting and strict
+all-target Python/stub Clippy. All 283 recorded build/test inputs match the tested
+commit before and after validation. The gate combines immutable algebraic
+preparation with rational endpoint constraints, public Python exports, explicit
+deformation slots, cut interfaces, prescribed continuation and native amplitude
+assembly. One full crossed gg→hg scientific test is opt-in here; the isolated
+preparation milestone above records its separate successful execution.
 
 The [combined endpoint/cut/arithmetic gate](../reports/validation/2026-10-06-endpoint-cut-arithmetic-integration/summary.json)
 passes **328 top-level release tests across 29 targets**, plus six successful

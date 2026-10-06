@@ -75,7 +75,15 @@ checked first-destination medians improve from 6.160 to 5.464 seconds for 48
 masters and from 15.963 to 14.770 seconds for 61 masters. The full 4,360-coefficient
 transport acceptance also passes. These are native revision comparisons;
 full-amplitude timing against the original plugin and broad performance parity
-remain open. Immutable exact connection preparation is the next optimization.
+remain open. The subsequent
+[immutable exact connection preparation](algebraic-preparation.md) milestone
+passes 120 affected integration tests and a separate full gg→hg transport
+acceptance. It reuses exact normalized data while compiling all numerical
+coefficients and poles freshly at each precision. Matched checked transports
+improve by 1.12× for 48 masters and 1.16× for 61 masters; nearby reuse improves
+by 1.12× and 1.17×. All non-timing outputs agree exactly. These remain
+supplied-boundary native comparisons, with no new automatic-boundary or
+full-amplitude timing claim. Reusing exact rational-row preparation is next.
 
 The [unified-flow design and generality audit](unified-flow.md) makes reduced-family
 evaluation the central interface. AMF direct evaluation, AMF-generated physical
