@@ -81,8 +81,9 @@ solution checks. Rejected trials leave branch state unchanged. The returned
 values.
 
 Root zeros and poles join rational matrix poles in the shared step-radius
-constraints. This entrypoint transports between regular points. Algebraic
-Frobenius endpoints and arbitrary algebraic extensions are not implemented here.
+constraints. This entrypoint transports between regular points. Registered-root
+singular endpoints have a separate [Frobenius adapter](algebraic-endpoints.md);
+arbitrary algebraic extensions remain unsupported.
 The separate [physical algebraic cache](algebraic-cache.md) supports progressive
 `RustFlowCache` reuse on regular affine complex paths with certified root germs. The separate
 [prescribed-contour planner](prescribed-contours.md) constructs detours from

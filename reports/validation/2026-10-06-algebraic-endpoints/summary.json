@@ -1,0 +1,106 @@
+{
+  "date": "2026-10-06",
+  "base_commit": "e0f7619869fd2c77072a054734a9ef4cfe75398c",
+  "feature": "Registered-root local Puiseux/logarithmic endpoint expansions by exact restriction of scalars",
+  "status": "validated_native_local_endpoint_extension",
+  "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "dependencies": {
+    "feynkit-amplitude": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+    "graphica": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "idenso": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+    "linnet": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+    "numerica": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustred": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "spenso": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+    "symbolica": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+  },
+  "source_hashes_verified_before_and_after_final_checks": true,
+  "checks": [
+    {
+      "command": "cargo test --release --locked --test algebraic_endpoints --test frobenius --test prepared_frobenius --test algebraic --test algebraic_quotients",
+      "exit_code": 0,
+      "passed": 36,
+      "new_endpoint_tests": 11,
+      "ignored": 0,
+      "log": "release-tests.log.gz"
+    },
+    {
+      "command": "cargo clippy --release --locked --all-targets -- -D warnings",
+      "exit_code": 0,
+      "log": "clippy.log.gz"
+    },
+    {
+      "command": "cargo fmt --all --check",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    },
+    {
+      "command": "sha256sum -c target/endpoint-frozen-source.sha256",
+      "exit_code": 0
+    }
+  ],
+  "analytic_coverage": [
+    "exp(plus_or_minus 2 sqrt(x)); two working precisions/orders and winding -1,0,1,2",
+    "coupled sqrt(x) log(x) and 2 sqrt(x) (log(x)-2) sectors with finite limits",
+    "three epsilon coefficients with a common Laurent leading power",
+    "dependent radicals with different sign constraints and nonunit rejection",
+    "multi-root product subgroup with an unused registered radical",
+    "infinity/root pole with divergent auxiliary rows and finite original component",
+    "lower-lip initial prescription matched against independent regular-contour transport",
+    "exact complex radicand and arbitrary-precision analytic comparison",
+    "lifted-boundary roundtrip through existing rational transport",
+    "source-hole preservation at matching and later local evaluation, dimension limit and cancellation",
+    "epsilon/x hierarchy rejects logarithmic divergence instead of claiming dimensional-sector selection"
+  ],
+  "numerical_checks": "Analytic comparisons use 28 to 55 mixed decimal digits, with fresh 55/80 digit boundary data and order 40/64 in the independent Puiseux refinement test. No f64 conversion of arbitrary-precision values.",
+  "prior_failures": [
+    {
+      "log": "initial-regressions.log.gz",
+      "cause": "Existing Frobenius numerical recurrence passed native complex coefficients directly to a rational Q-polynomial conversion. Fixed by the existing exact imaginary-parameter encoding before native polynomial conversion. A dependent-root test also overconstrained the existing error variant: a zero norm may be InvalidInput as well as Unsupported."
+    },
+    {
+      "log": "before-domain-guard.log.gz",
+      "cause": "The endpoint evaluator initially checked source domains only when lifting its matching boundary. A newly added regression showed it accepted a canceled source hole at a later local evaluation. The matched expansion now retains the compiled original domain guards and exact singularity polynomials, checking exact point substitution before evaluation. The final source-hash-verified run passes that same regression."
+    }
+  ],
+  "independent_review": {
+    "agent": "/root/linear_cut_generality",
+    "status": "reviewed_no_remaining_correctness_findings",
+    "resolved_finding": "Rename physical_limit to coefficient_limits and add epsilon/x regression; flattened epsilon coefficients cannot reconstruct symbolic dimensional-sector provenance."
+  },
+  "ownership_audit": {
+    "exact_root_algebra": "Existing Symbolica AlgebraicQuotient normalization; no replacement quotient implementation.",
+    "series_and_linear_algebra": "Existing prepared rational Frobenius engine, Symbolica exact algebra and arbitrary-precision Complex<Float>.",
+    "graph_and_tensor_operations": "None added; no replacement of HEPKit/Linnet/Spenso/Idenso functionality."
+  },
+  "reference": {
+    "repository": "https://gitlab.com/hiddingm/diffexp",
+    "commit": "784c8229bf92369a03f011a48e161522c8c54bbd",
+    "paper_source": "Paper/main.tex",
+    "implementation_provenance": "Independently derived product-rule restriction of scalars; no GPL reference implementation was copied or translated."
+  },
+  "limits": [
+    "Coefficientwise finite limits after epsilon expansion; no inferred symbolic dimensional-regulator sectors.",
+    "Caller supplies local logarithm winding, matching sheet, and a point inside the convergence domain; no physical homotopy inference.",
+    "Working-precision values are not achieved-accuracy estimates or valid cache evidence without independent checks and propagated input uncertainty.",
+    "Dense dimension bounded by caller before allocation; generated monomial subgroup can still grow exponentially. Fewer than usize::BITS registered roots.",
+    "Inherited Fuchsian normalization and exact indicial-root support; irregular exponential sectors may be rejected.",
+    "No automatic singular-point insertion into the physical boundary cache or large-system performance-parity claim."
+  ],
+  "artifact_sha256": {
+    "before-domain-guard.log.gz": "41801916cd7a5550243caaa18505d0999fc74d9b6ec3a9b0e30fe47fed7ca67d",
+    "clippy.log.gz": "e267b84102606fdd8190173182b0b89f48589ad0e70ccc6fae23a1abb3b1f0b1",
+    "initial-regressions.log.gz": "4312ec9264b542ec7a83f5e4f14a346ba1c8adaa2c3542c2f8e9c616d2f4aa0e",
+    "release-tests.log.gz": "15041b2567bec401e7e770a407b8091b9c3750de2c94b43d9495cc04dbb2a885",
+    "source.sha256": "05b54631b2b3563b6eee3728168d025c2e87dfb3ba5e62cad5671511c3695f3c"
+  },
+  "raw_log_sha256": {
+    "initial-regressions.log": "97ca71443f8a1bf287265cfb1efad09d49810bbd4e57b640fa43bea7958e77fa",
+    "clippy.log": "d5650ccc9a6d3b8538ba145c453c758872829b9c882dcbbb235b1ffc7871d48b",
+    "release-tests.log": "9ea09a5512db1414360455a7e1b7636962a83bebf1bb86a7f47a604ae0845fa2",
+    "before-domain-guard.log": "14bacd6dac15934ecba90bb89ff56622c5fb06e0d1b94fc30b012c345d298e04"
+  }
+}
