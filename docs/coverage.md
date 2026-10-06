@@ -10,8 +10,21 @@ RustRed is not established. External reference uncertainty caps the EW-square
 comparison at 19 relative digits. The broader AMFlow/DiffExp parity goal remains
 open; the milestones below retain their original scope and source provenance.
 
+The [combined endpoint/cut/arithmetic gate](../reports/validation/2026-10-06-endpoint-cut-arithmetic-integration/summary.json)
+passes **328 top-level release tests across 29 targets**, plus six successful
+child-process checks, formatting and strict Python/stub-generation Clippy. Six
+explicitly opt-in tests are ignored. All 260 recorded source/input files match
+commit `ba16032` before and after validation. Supplied finite singular endpoints
+now integrate with regular physical transport and a separate terminal cache;
+native HEPKit cut diagrams share the Rust, Python and CLI projection adapters.
+Bounded integer-polynomial residual arithmetic is available as an opt-in with
+the existing ball path as fallback. Constrained endpoint sectors, dimensional
+sector selection and partial cut placements remain open. This targeted gate
+does not rebuild the community publication wheel or repeat its long scientific
+acceptance.
+
 The [combined Padé/cut release](../reports/validation/2026-10-06-pade-cut-integration/summary.json)
-passes **580 release unit/integration tests** and one doctest, with 13 explicit
+passes **574 release unit/integration tests** and one doctest, with 13 explicit
 opt-in tests ignored, formatting and strict Python/stub-generation all-target
 Clippy. All 248 recorded source/input files match the tested commit and remained
 unchanged throughout the run. Optional [rational/epsilon Padé trials](pade-transport.md)
@@ -24,8 +37,13 @@ leaves and interior phase-space poles remain unsupported. Neither the full
 gg→hg publication acceptance nor the other opt-in scientific gates was rerun on
 this source revision.
 
+Release totals count each Cargo test binary once; six successful native-cache
+child-process checks are recorded separately in each archive. Earlier reported
+totals of 580 and 547 included those child runs; their corrected top-level counts
+are 574 and 541. Raw logs and all passing outcomes are unchanged.
+
 The [cache/arithmetic release](../reports/validation/2026-10-06-cache-arithmetic-release/summary.json)
-passes **547 release unit/integration tests** and one doctest, with 13 explicit
+passes **541 release unit/integration tests** and one doctest, with 13 explicit
 opt-in tests ignored, formatting and strict Python/stub-generation all-target
 Clippy. It integrates snapshot-local native Atom export reuse and Symbolica's
 explicitly rounded Float operations. The numerical sources were verified

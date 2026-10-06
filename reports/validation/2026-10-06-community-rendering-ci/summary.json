@@ -42,18 +42,19 @@
       "exit_code": 0,
       "tool_chunk": "60c5ff"
     },
-    "whole_new_ci_status": "pending"
+    "whole_new_ci_status": "Both platforms completed with 1148 passed, one inherited C++ exporter failure and 172 skipped."
   },
   "artifact_sha256": {
     "fixture-tests.log": "eed1d5f0b06a704cebe0b6a4e7c8bacc6867652f4da58e7fd1babb3c65a7245e",
     "fixture-tests.xml": "bf92c02b22886ae9e748fc365765223f87df30d36da8259bfd66ca4d15ae7d85",
-    "330f-linux.log.gz": "4f53e3ef7d30beb38f791a0ac3ea943304baed6d521dcb23b1fe545c1b6ccc7b"
+    "330f-linux.log.gz": "4f53e3ef7d30beb38f791a0ac3ea943304baed6d521dcb23b1fe545c1b6ccc7b",
+    "330f-macos.log.gz": "a88cd13d48a17617057b47c69f050527fe5153a2430a243f223afc0cd0ba791a"
   },
   "follow_up_ci": {
     "run": 37404883976,
     "url": "https://github.com/symbolica-dev/symbolica-community/actions/runs/37404883976",
     "community_commit": "330f0a4b315330765ad067b2b5b96f4844dfd118",
-    "status": "macos pending",
+    "status": "completed: failure",
     "linux": {
       "job": 112080118081,
       "passed": 1148,
@@ -61,6 +62,15 @@
       "skipped": 172,
       "seconds": "235.60",
       "log": "330f-linux.log.gz",
+      "remaining_failure": "Inherited Symbolica C++ exporter (owner PR51); controller and atomic sample fixture tests pass."
+    },
+    "macos": {
+      "job": 112080118303,
+      "passed": 1148,
+      "failed": 1,
+      "skipped": 172,
+      "seconds": "385.42",
+      "log": "330f-macos.log.gz",
       "remaining_failure": "Inherited Symbolica C++ exporter (owner PR51); controller and atomic sample fixture tests pass."
     }
   }

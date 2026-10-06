@@ -25,16 +25,23 @@ publication status and accuracy limits.
 
 The shared Rust engine also supports recursive Euclidean FT for tested mixed
 linear families and local registered-root Frobenius endpoints; their combined
-gate passes 74 targeted release tests on top of the preceding 547-test baseline.
+gate passes 74 targeted release tests on top of the preceding 541-test baseline.
 Checked rational/epsilon Padé transport and a mixed-cut adapter have since
 passed a [combined full release run](../reports/validation/2026-10-06-pade-cut-integration/summary.json):
-580 unit/integration tests and one doctest, formatting and strict all-target
+574 unit/integration tests and one doctest, formatting and strict all-target
 Python/stub-generation Clippy, with 13 scientific tests explicitly opt-in.
 Mixed-cut boundaries cover complete positive-energy
 final states with uniform causal virtual directions, massive two-body or
 massless N-body leaves and certified nonzero real-only denominators. Broader
-cut recursion, remaining DiffExp controls, automatic singular endpoint/cache
-integration and broad performance parity remain unfinished. The
+cut recursion, remaining DiffExp controls, constrained endpoint sectors and
+broad performance parity remain unfinished. Supplied finite singular endpoints
+now integrate with regular transport and a separate terminal cache. Native cut
+diagram projection is exposed in Rust, Python and the CLI; bounded adaptive
+integer residual arithmetic is opt-in. These three additions pass a
+[combined targeted gate](../reports/validation/2026-10-06-endpoint-cut-arithmetic-integration/summary.json)
+of 328 top-level release tests across 29 targets, six child-process checks,
+formatting and strict Python/stub-generation Clippy. They have not been rebuilt
+into the frozen notebook publication wheel. The
 [comparison table](benchmark-comparison.md) records measured successes and
 remaining coverage, without treating successful benchmark families as proof of
 arbitrary kinematic, mass or loop-count support.

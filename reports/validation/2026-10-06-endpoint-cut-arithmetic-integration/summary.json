@@ -1,0 +1,237 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-06T03:25:41.540804+00:00",
+  "status": "passed",
+  "tested_commit": "ba16032dbdf80eca09e4070793c995fcc8a92a91",
+  "scope": "Combined targeted gate after the previous full release; includes descriptive embedded Python cut API and generated stubs, not a rebuilt community publication wheel.",
+  "milestones": [
+    "9d252a8 (supplied finite singular endpoints and schema6 cache)",
+    "7e01651 (native cut projections and interfaces)",
+    "ba16032 (opt-in adaptive integer source residuals; default ball)"
+  ],
+  "source_manifest": "source-before.json",
+  "source_files_verified_against_commit_and_after_run": 260,
+  "release_tests": {
+    "command": "cargo test --locked --release --features python_stubgen --lib --bin rustflow [27 integration targets recorded below] -- --test-threads=8",
+    "session": 61912,
+    "exit_code": 0,
+    "tool_chunk": "8be1cc",
+    "top_level_passed": 328,
+    "ignored": 6,
+    "additional_child_process_checks_passed": 6,
+    "counting_method": "Final libtest summary per Cargo test binary; nested native-serialization invocations recorded separately.",
+    "targets": [
+      {
+        "target": "Running unittests src/lib.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/symbolica_amflow-47f5668f32c80192)",
+        "passed": 156,
+        "failed": 0,
+        "ignored": 5
+      },
+      {
+        "target": "Running unittests src/bin/rustflow.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/rustflow-66ade57ec07076be)",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/algebraic_cache.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/algebraic_cache-5ed8c0d81f8ddbbc)",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/algebraic_endpoints.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/algebraic_endpoints-87d88062e743ce79)",
+        "passed": 11,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/cli.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/cli-c44a158de0f60bf4)",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/combinations.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/combinations-1da742627b948499)",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/complex_ode.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/complex_ode-f6b2c3b5f2ab84ad)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/conditioning.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/conditioning-52764b01f6239853)",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/continuation_budget.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/continuation_budget-6c0cb4c2ec8c3db8)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/diffexp.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/diffexp-9183d77f18e4c0b9)",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/end_to_end.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/end_to_end-62eb7ab79b04a842)",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/epsilon_cache.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/epsilon_cache-2dadc067da912228)",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/frobenius.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/frobenius-c90a7b0ccb273ae0)",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/gg_hg.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/gg_hg-60baf397a5dc3e99)",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "Running tests/hepkit_cuts.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/hepkit_cuts-5837e62ad67e827d)",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/massless_phase_space.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/massless_phase_space-0842cc1abb029024)",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/mixed_cut_flow.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/mixed_cut_flow-6160795369f67968)",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/mobius.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/mobius-8257838a5c2b3520)",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/mobius_cache.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/mobius_cache-7db668effc0bbb10)",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/native_cut_interfaces.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/native_cut_interfaces-b8025262cd589a14)",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/pade.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/pade-3dc4363bf3fe42d5)",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/physical_transport.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/physical_transport-589817d75c532205)",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/precision_cache_fallback.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/precision_cache_fallback-d2f333dde3d53ff0)",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/prepared_frobenius.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/prepared_frobenius-5d12c9184350855e)",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/prescribed_cache.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/prescribed_cache-a73394a27d9780ec)",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/python_cut_interfaces.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/python_cut_interfaces-0c93b36f06af37f0)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/residual_arithmetic.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/residual_arithmetic-2a1503c86646de0e)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/supplied_singular_endpoints.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/supplied_singular_endpoints-68b6cf9865f6b0f2)",
+        "passed": 19,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/transport_cache.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/transport_cache-1b93bbfbe5052ab9)",
+        "passed": 12,
+        "failed": 0,
+        "ignored": 0
+      }
+    ]
+  },
+  "checks": {
+    "format": {
+      "command": "cargo fmt --all -- --check",
+      "exit_code": 0
+    },
+    "clippy": {
+      "command": "cargo clippy --locked --release --all-targets --features python_stubgen -- -D warnings",
+      "exit_code": 0
+    },
+    "execution": "All commands ran sequentially under set -e in session61912."
+  },
+  "compiled_source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "21f92a0b82068056cbcebef1b84ab8b79c1fbc848203d3b53fc86975ea7e7581"
+  },
+  "native_owners": "dependency-ownership.json",
+  "library": {
+    "original": "/common/dev/amflow-native-cut-interfaces/target/release/deps/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "archive": "/common/dev/amflow/target/endpoint-cut-arithmetic-release-ba16032/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "sha256": "2edebad3c09c18deb189b519cdddec0980a51742d6b54cac04283134e27f610b"
+  },
+  "previous_full_release": "../2026-10-06-pade-cut-integration/summary.json",
+  "limits": [
+    "Six explicitly opt-in tests remain ignored in the selected targets; no ignored acceptance was implicitly counted as passing.",
+    "Endpoint support is finite coefficientwise and conservative; correlated/asymptotic constraints and dimensional-sector selection remain open.",
+    "Cut support retains its complete-final-state and pole-domain restrictions.",
+    "Adaptive integer arithmetic is opt-in; no registered-root or full-amplitude performance claim.",
+    "Publication extension, scientific banks and completed gg-to-Hg acceptance were not changed or regenerated."
+  ],
+  "artifact_sha256": {
+    "clippy.log.gz": "20cf25a5d24570ee2afc965c569c27766d34fa7b53d7205bac742d0f9e4cf33c",
+    "dependency-ownership.json": "12b434db1389462efcbf212d422c14728bdcdce8a286bfd5027366db0b8ad6af",
+    "fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "release-tests.log.gz": "045584a0f7cdcbfaf56a9a3d669595fb6be4bab78df0e1f206e7a5286aef0075",
+    "source-before.json": "35d00d6461687f1000b5a1cd777003095ca148d9055b71e2a1f133b149fa9232"
+  }
+}

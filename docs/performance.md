@@ -76,7 +76,7 @@ forward error. The combined full release suite was running when this benchmark
 report was captured; its three benchmark validations and strict Python/stubgen
 Clippy had independently completed. The subsequent
 [full release result](../reports/validation/2026-10-06-cache-arithmetic-release/summary.json)
-passes 547 unit/integration tests and one doctest, with 13 opt-in tests ignored,
+passes 541 unit/integration tests and one doctest, with 13 opt-in tests ignored,
 and verifies that the measured numerical sources remained unchanged.
 
 An [exact-rational residual experiment](https://github.com/alphal00p/RustFlow/blob/d8738fc0a9f0e08572fbae84cef58f5d3378ef24/reports/performance/2026-10-06-exact-source-residual/report.json)
@@ -102,9 +102,20 @@ endpoint charts improved by 4.15–19.99 times. The shifted degree-64 and large
 rational degree-32 cases were 1.94 and 2.36 times slower, respectively. Earlier
 runs stopped at the experimental growth limit; their partial results remain
 archived alongside the completed runs. These are constructor measurements on a
-shared host, not whole-transport speedups. A bounded adaptive implementation
-with a lazy ball-arithmetic fallback is under development; its numerical and
-full-transport performance gates must pass before integration.
+shared host, not whole-transport speedups.
+
+The subsequent [bounded adaptive implementation](../reports/performance/2026-10-06-adaptive-integer-residual/report.json)
+is integrated as opt-in `AdaptiveInteger`; the default remains `Ball`. It retains
+source-domain guards, outward bounds and a lazy ball fallback when exact growth
+exhausts its budget. The measured long fixed-boundary transports improve by
+1.028–1.120 times and nearby transports by 3.051–6.402 times, relative to the ball
+mode in the same build. Those comparisons use fixed supplied boundaries without
+an inherited input-uncertainty cap; they are neither registered-root/full-amplitude
+measurements nor ratios against upstream. Independent refinement and adverse
+cases passed. The subsequent combined endpoint/cut/arithmetic gate passes 328
+top-level tests, strict Python/stub-generation Clippy and formatting; its
+[archive](../reports/validation/2026-10-06-endpoint-cut-arithmetic-integration/summary.json)
+records the unchanged numerical sources and separate publication-wheel scope.
 
 ## Preceding checked release
 

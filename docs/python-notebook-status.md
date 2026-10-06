@@ -7,10 +7,10 @@ the demonstrated calculation from remaining generality and packaging work.
 
 | Plan item | Implemented and checked | Remaining acceptance |
 |---|---|---|
-| Descriptive Python API | Optional PyO3 bindings in this crate, registered under `symbolica.community.hep.integration`; shared native HEPKit/Symbolica objects, scoped reductions, precision evidence, progress/cancellation and generated stubs | Advanced Rust Frobenius/infinity/endpoint operations, custom physical routes and cut-graph evaluation are not separate Python interfaces |
+| Descriptive Python API | Optional PyO3 bindings in this crate, registered under `symbolica.community.hep.integration`; shared native HEPKit/Symbolica objects, scoped reductions, precision evidence, progress/cancellation and generated stubs. New core bindings expose supplied finite endpoints and native cut-diagram evaluation | The newer endpoint/cut interfaces are not in the frozen publication wheel; prescribed-contour bindings and broader constrained endpoint operations are in progress |
 | Unified numerical evaluation | Automatic AMF, Euclidean FT, finite-epsilon sampling and Laurent reconstruction share the series machinery used for physical transport | Full AMFlow/DiffExp generality and performance parity remain open; see the [comparison table](benchmark-comparison.md) |
 | Original AMFlow acceptance | All four two-loop paper targets through epsilon zero passed the requested 20-digit comparison and independent sampling/refinement | That completed gate does not establish full upstream feature coverage |
-| Growing boundary cache | Binary persistence, compatible-source selection, intermediate points, source fingerprints and retained uncertainty; completed samples are stored separately. Final-wheel forced recomputation, interruption/resume and nearby reuse passed | Serialization overhead remains a performance issue |
+| Growing boundary cache | Binary persistence, compatible-source selection, intermediate points, source fingerprints and retained uncertainty; completed samples are stored separately. Final-wheel forced recomputation, interruption/resume and nearby reuse passed. Warm controller persistence improved from 49.88 s to 3.35 s | Further serialization and source-preparation performance work remains |
 | Exact Higgs-plus-jet inputs | Native physical families, certified supplied 48/61 canonical basis maps and parent connections, exact normalization and kinematics-dependent form-factor projections | Top-level RustRed derivation of those parent connections is not demonstrated; general multiloop reduction coverage remains open |
 | Fresh physical boundaries and amplitude | All 16 native 30-digit configurations from empty numerical caches, all 4,360 transport coefficients, eight W/Z form factors and three coherent observables passed. Independent 40-digit regeneration, interruption/resume, uncertainty consistency and nearby-point checks also passed | External EW-square comparison remains limited to 19 relative digits; no matched full-amplitude reference timing |
 | Independent Euclidean anchors | Publication wheel passed all 545 comparisons at 20 digits with fresh native boundaries | This prerequisite alone does not certify the physical calculation |
@@ -114,7 +114,7 @@ and it has not changed the publication runtime.
 
 Both changes are now published on RustFlow main, with their own PRs closed after
 integration. Their combined [release gate](../reports/validation/2026-10-06-cache-arithmetic-release/summary.json)
-passed 547 unit/integration tests and one doctest, formatting and strict
+passed 541 unit/integration tests and one doctest, formatting and strict
 Python/stub-generation Clippy. The subsequent
 [linear/endpoint gate](../reports/validation/2026-10-06-endpoint-linear-integration/summary.json)
 passed 74 targeted integration tests and the same static checks. These newer
@@ -234,8 +234,9 @@ writer could publish an empty sample before finishing its payload. The native
 writer already uses atomic replacement. Test-only commit `330f0a4b` follows that
 contract, explicitly keeps a partial temporary invisible to the monitor and
 retains all hash-preservation assertions; all 51 controller tests pass locally.
-The follow-up Linux job passes 1,148 tests with only the inherited exporter
-failure; macOS remains pending. Native numerical
+The follow-up run passes 1,148 tests on each platform, with only the inherited
+exporter failure on each. Rendering and interruption fixtures pass both full
+platform suites. Native numerical
 dependencies and the completed publication runtime are unchanged, and the whole
 community suite is not yet green.
 

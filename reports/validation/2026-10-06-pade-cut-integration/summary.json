@@ -16,10 +16,18 @@
     "session": 26907,
     "exit_code": 0,
     "tool_chunk": "fca673",
-    "unit_and_integration_passed": 580,
+    "unit_and_integration_passed": 574,
     "ignored": 13,
     "doctests_passed": 1,
-    "log": "release-tests.log.gz"
+    "log": "release-tests.log.gz",
+    "additional_child_process_checks_passed": 6,
+    "counting_method": "Count the final libtest summary once per Cargo test binary; successful nested serialization processes are recorded separately.",
+    "count_correction": {
+      "originally_reported": 580,
+      "corrected_top_level": 574,
+      "reason": "The previous sum counted both parent tests and their six successful child-process invocations. Raw logs, exit status and numerical outcomes are unchanged.",
+      "audited_utc": "2026-10-06T03:21:18.623236+00:00"
+    }
   },
   "checks": {
     "format": {
