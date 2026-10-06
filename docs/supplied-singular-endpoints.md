@@ -85,4 +85,7 @@ false, and terminal cache hits still require endpoint admission. The result
 exposes its route, finite coefficients, comparison errors, digit evidence and
 regular `matching_boundary`; ordinary transport diagnostics are attached to
 that matching result. Cache merging preserves both terminal and regular records.
-The prescribed-contour endpoint interface is currently exposed in Rust.
+With a [ContinuationPrescription](python-prescribed-transport.md) bound to the
+transport, the same Python endpoint method uses the native prescribed matching
+route; `admit_matching_path` admits its declared homotopy. The endpoint approach
+still requires its own admission.

@@ -309,6 +309,62 @@ fn log_crossing_uses_typed_identity_and_cannot_alias_a_different_monodromy_domai
 }
 
 #[test]
+fn prescribed_exact_hit_skips_routes_but_preserves_source_policy_and_germ() -> Result<()> {
+    let flow = root_flow()?;
+    let mut bank = RustFlowCache::default();
+    bank.insert(seed(&flow, 1, Some(RootSheet::Principal))?)?;
+    let before = cache_bytes(&bank, "constant-before")?;
+    let no_route = |_: &CachedBoundary, _: &CachedPoint, _: &PhysicalRoute| -> Result<bool> {
+        panic!("a constant chart has no new homotopy to admit")
+    };
+    let hit = flow.evaluate_prescribed_to(
+        &mut bank,
+        &point(1),
+        &germ(RootSheet::Principal),
+        EpsilonRange::new(0, 2)?,
+        &options(),
+        &RunContext::default(),
+        &policy(),
+        &no_route,
+    )?;
+    assert!(hit.transport.is_none());
+    assert_eq!(hit.inserted_points, 0);
+    assert_eq!(cache_bytes(&bank, "constant-hit")?, before);
+    assert!(matches!(
+        flow.evaluate_prescribed_to(
+            &mut bank,
+            &point(1),
+            &germ(RootSheet::Opposite),
+            EpsilonRange::new(0, 2)?,
+            &options(),
+            &RunContext::default(),
+            &policy(),
+            &no_route,
+        ),
+        Err(Error::IncompleteReduction(_))
+    ));
+    let deny_source = ScaledDistance {
+        scales: BTreeMap::new(),
+        admissible: |_: &CachedBoundary, _: &CachedPoint| Ok(false),
+    };
+    assert!(matches!(
+        flow.evaluate_prescribed_to(
+            &mut bank,
+            &point(1),
+            &germ(RootSheet::Principal),
+            EpsilonRange::new(0, 2)?,
+            &options(),
+            &RunContext::default(),
+            &deny_source,
+            &no_route,
+        ),
+        Err(Error::IncompleteReduction(_))
+    ));
+    assert_eq!(cache_bytes(&bank, "constant-rejections")?, before);
+    Ok(())
+}
+
+#[test]
 fn wrong_sheet_denied_homotopy_and_cancellation_leave_the_bank_unchanged() -> Result<()> {
     let flow = root_flow()?;
     let mut bank = RustFlowCache::default();

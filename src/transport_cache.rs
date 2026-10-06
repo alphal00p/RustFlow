@@ -287,6 +287,16 @@ impl CachedPoint {
         self.rounded_coordinates_as_exact()
     }
 
+    /// Exact coordinate equality on restart; branch compatibility is separate.
+    pub(crate) fn same_coordinates(&self, other: &Self) -> Result<bool> {
+        let left = self.restart_coordinates()?;
+        let right = other.restart_coordinates()?;
+        Ok(left.keys().eq(right.keys())
+            && left
+                .iter()
+                .all(|(s, value)| (value - &right[s]).together().cancel().is_zero()))
+    }
+
     pub fn evaluate(&self, p: Precision) -> Result<BTreeMap<Symbol, C>> {
         self.validate()?;
         match self {
@@ -1273,17 +1283,8 @@ fn compare_exact_hits(
     right: &CachedPoint,
     target: &CachedPoint,
 ) -> Result<std::cmp::Ordering> {
-    let target_germ = target.root_germ();
-    let target = target.restart_coordinates()?;
     let is_hit = |point: &CachedPoint| -> Result<bool> {
-        if point.root_germ() != target_germ {
-            return Ok(false);
-        }
-        let point = point.restart_coordinates()?;
-        Ok(point.keys().eq(target.keys())
-            && point
-                .iter()
-                .all(|(s, value)| (value - &target[s]).together().cancel().is_zero()))
+        Ok(point.root_germ() == target.root_germ() && point.same_coordinates(target)?)
     };
     Ok(is_hit(right)?.cmp(&is_hit(left)?))
 }
