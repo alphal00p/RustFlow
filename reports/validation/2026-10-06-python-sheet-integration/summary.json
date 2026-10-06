@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "recorded_utc": "2026-10-06T05:25:36.458729+00:00",
+  "tested_commit": "68d7889c8ce2899b275d86e86e05f5bbaf14d606",
+  "source_files_verified_before_after_against_commit": 244,
+  "supplemental_fixtures_matching_previous_frozen_gate_commit_and_after": 44,
+  "scope": "Main integration of exact constrained root sheets with immutable algebraic preparation and the descriptive Python API, including terminal binary restart. Registered native module tests, not a rebuilt community host wheel.",
+  "release_tests": {
+    "passed": 138,
+    "failed": 0,
+    "ignored": 0,
+    "targets": [
+      {
+        "target": "tests/algebraic_cache.rs",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/algebraic_endpoints.rs",
+        "passed": 11,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/algebraic_preparation.rs",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/canonical_algebraic.rs",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/constrained_singular_endpoints.rs",
+        "passed": 24,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/epsilon_algebraic.rs",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/frobenius.rs",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/physical_conditions.rs",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/physical_transport.rs",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/prepared_frobenius.rs",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/prescribed_cache.rs",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_algebraic_transport.rs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_cut_interfaces.rs",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_endpoint_constraints.rs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_prescribed_transport.rs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/supplied_singular_endpoints.rs",
+        "passed": 19,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/transport_cache.rs",
+        "passed": 12,
+        "failed": 0,
+        "ignored": 0
+      }
+    ]
+  },
+  "execution": {
+    "session": 2631,
+    "exit_code": 0,
+    "terminal_tool_chunk": "4eb13f"
+  },
+  "checks": {
+    "fmt": "passed",
+    "strict_all_target_python_stubgen_clippy": "passed"
+  },
+  "compiled_source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "778701a08b10e14a01e0df3c2a1b035147cbaff6f01bd0aff8fa1ce919387e42"
+  },
+  "library": {
+    "archive": "/common/dev/amflow/target/python-sheet-release-68d7889/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "sha256": "804a8386e539986cba6862fd6f1d6d1217cf7c4478bf29206e83c09a33dc4fdf"
+  },
+  "endpoint_evidence": [
+    "Gaussian-leading root constraint removes a divergent half-power mode.",
+    "All native endpoint values are checked through Complex<Float>.",
+    "Repeated endpoint hits and binary reload retain exact constraints and provenance.",
+    "Unsupported non-Gaussian leading sqrt(2) leaves the cache unchanged."
+  ],
+  "isolated_proof_validation": "../2026-10-06-sheet-constrained-endpoints/validation.json",
+  "previous_integration": "../2026-10-06-prepared-interface-integration/summary.json",
+  "limits": [
+    "No new full scientific benchmark, automatic boundary or upstream performance run.",
+    "Non-Gaussian leading root constants and dimensional-sector selection remain open.",
+    "Publication wheel and completed numerical cache banks unchanged."
+  ],
+  "artifact_sha256": {
+    "clippy.log.gz": "c63b079ece70e5aed5e37b6c04f2bf155b5070aa4cc1f545dfa0a07eda7468ac",
+    "development-tests.log.gz": "d6d561f1fe54356f2938b1a028a0c1d0f7e8e291d9480bad474fcbed9d448ba0",
+    "fixture-supplement.json": "6e1c98054889f97a2bddde3a45d5153caa1275f324d7d9501d1f1f1af57cc045",
+    "fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "processes.json": "1d47d72e9172af45f31932f5e0541e8b0f68bde1571ec742238e861e480c9516",
+    "source-after.json": "75659a3ae2b75604858b5487106a2b98f9de0cf42f0f7411e5dcde997e37a673",
+    "source-before.json": "39b1fea8accce983b9c2f2a8db9c20ff4e2b275cacc477102242e0e1905afd28",
+    "tests.log.gz": "9397454f3cd25cc443fbd0a6a91c1c6a738bdd810d32263eec28ce6ccf862cb7",
+    "validate.py": "d9a48c6461f00c409c1c6f285fe5dd0b860900f329b35d72bae9ec12e82153d0"
+  }
+}

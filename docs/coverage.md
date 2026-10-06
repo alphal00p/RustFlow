@@ -77,6 +77,17 @@ deformation slots, cut interfaces, prescribed continuation and native amplitude
 assembly. One full crossed gg→hg scientific test is opt-in here; the isolated
 preparation milestone above records its separate successful execution.
 
+The [constrained root/Python integration](../reports/validation/2026-10-06-python-sheet-integration/summary.json)
+passes **138 release tests across 17 targets**, formatting and strict all-target
+Python/stub Clippy. It combines the exact sheet proof with immutable preparation,
+the descriptive Python classes and persistent endpoint records. The Python
+regression removes a divergent half-power mode, checks native arbitrary-precision
+values, retains regular matching anchors and confirms repeated and reloaded
+terminal hits. Non-Gaussian leading roots reject without changing the cache.
+All 244 recorded source/test inputs match the commit before and after the gate;
+44 additional fixtures match the preceding frozen gate, tested commit and final
+recheck. This does not rebuild the publication wheel or rerun scientific timings.
+
 The [combined endpoint/cut/arithmetic gate](../reports/validation/2026-10-06-endpoint-cut-arithmetic-integration/summary.json)
 passes **328 top-level release tests across 29 targets**, plus six successful
 child-process checks, formatting and strict Python/stub-generation Clippy. Six

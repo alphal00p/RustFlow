@@ -60,13 +60,22 @@ Three further validated milestones extend this coverage. Exact
 [correlated rational endpoint constraints](supplied-singular-endpoints.md)
 retain an affine space of integration constants and check every reconstructed
 matching component. Schema 7 stores their asserted relations and provenance;
-constrained registered-root spaces and dimensional-sector selection remain open.
+the subsequent exact sheet proof admits registered-root spaces with
+Gaussian-rational leading constants. Non-Gaussian leading constants and
+dimensional-sector selection remain open.
 [Partial cut mass placements](cuts.md) reuse the existing region, tensor,
 recursive vacuum and phase-space owners, including a nonfactorized three-loop
 comparison with original AMFlow. The
 [general registered-root Python constructor](python-algebraic-transport.md)
 handles dense coupled connections as well as canonical ones. These newer
 interfaces are separate from the frozen community notebook runtime.
+
+The exact sheet proof passes 297 isolated top-level checks. Its
+[Python integration](../reports/validation/2026-10-06-python-sheet-integration/summary.json)
+passes 138 release checks across 17 targets, including a divergent half-power
+constraint, exact endpoint reuse, binary restart and unsupported-field admission.
+Both gates pass formatting and strict Python/stub-generation Clippy. Counts
+overlap and do not form a new full-suite total.
 
 The [native series-construction comparison](../reports/performance/2026-10-06-native-series-construction/README.md)
 uses balanced additions of native Symbolica series. All numerical outputs and

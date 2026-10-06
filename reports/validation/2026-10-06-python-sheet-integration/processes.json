@@ -1,0 +1,78 @@
+[
+  {
+    "name": "fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--check"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 1.3062890451401472
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--locked",
+      "--release",
+      "--all-targets",
+      "--features",
+      "python_stubgen",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 18.27767836302519
+  },
+  {
+    "name": "tests",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--release",
+      "--features",
+      "python_stubgen",
+      "--test",
+      "algebraic_cache",
+      "--test",
+      "algebraic_endpoints",
+      "--test",
+      "algebraic_preparation",
+      "--test",
+      "canonical_algebraic",
+      "--test",
+      "constrained_singular_endpoints",
+      "--test",
+      "epsilon_algebraic",
+      "--test",
+      "frobenius",
+      "--test",
+      "prepared_frobenius",
+      "--test",
+      "physical_conditions",
+      "--test",
+      "physical_transport",
+      "--test",
+      "prescribed_cache",
+      "--test",
+      "supplied_singular_endpoints",
+      "--test",
+      "transport_cache",
+      "--test",
+      "python_algebraic_transport",
+      "--test",
+      "python_prescribed_transport",
+      "--test",
+      "python_endpoint_constraints",
+      "--test",
+      "python_cut_interfaces",
+      "--",
+      "--test-threads=4"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 82.4551515057683
+  }
+]
