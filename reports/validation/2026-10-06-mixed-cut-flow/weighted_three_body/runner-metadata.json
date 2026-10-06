@@ -1,0 +1,42 @@
+{
+  "upstream_commit": "26005517a288086c4cb4d1b26d829691bc088485",
+  "upstream_source": "/common/dev/amflow/target/upstream-performance/reproducible-build/amflow-26005517a288086c4cb4d1b26d829691bc088485",
+  "source_sha256": {
+    "AMFlow.m": "76feadd3990586dbba22c96f515328fd79b64d6767ed021f2f80c9e4a2b98184",
+    "diffeq_solver/DESolver.m": "0dfa7f91bd8b8d160412dbc3a8c076413e488745bcefe58bc434999d03f76a46",
+    "ibp_interface/Kira/interface.m": "1c4476b32d8757ee18d6689d5b406bc00a2cfb00ad178926233f1768def7faaa"
+  },
+  "modified_upstream_file": "ibp_interface/Kira/install.m",
+  "install_sha256": "9bb5aa8a3aff14f8ed60e75a430f2c18592fc5b2b52f943ecb12537c80337e17",
+  "driver_sha256": "603070f9255349468959d38c9ed8947c2977768405931068033bb7c13034d398",
+  "runner_sha256": "b15c89004ceb04f5394188939f59edbf19761d553ed3ff4041e090518ca7a1c1",
+  "kernel_command": [
+    "/common/dev/amflow-mixed-cut-flow/target/weighted_three_body-oracle2/wolfram_one_thread.py",
+    "-noinit",
+    "-noprompt",
+    "-script",
+    "/common/dev/amflow-mixed-cut-flow/target/weighted_three_body-oracle2/oracle.wl"
+  ],
+  "licensed_kernel_launcher": "/home/ben/.local/bin/bern-wolfram",
+  "runtime_thread_controls": {
+    "ParallelThreadNumber": 1,
+    "MKLThreadNumber": 1,
+    "scope": "Parent and AMFlow-generated Wolfram child scripts",
+    "launcher_sha256": "6551142d15c38061fd17f7d97d67d8386f63fe7cb95989a912260c13f2e9443b",
+    "loader_sha256": "12b870d2278f8c417917a05dff3e7aa18fd888a0ac73633f962b300d24504318"
+  },
+  "kira_executable": "/nix/store/rlxy7f90ifbzr77a6hvnsc7a13vmzzay-kira-3.1-git-dad964c/bin/kira",
+  "kira_version": "Kira version: 3.1 (Git: dad964cd79a39a9fca728bb2606f59537a95109c)\nBuild configuration: plain; non-MPI; 64 bit weights; without jemalloc;\nwithout FireFly",
+  "fermat_executable": "/nix/store/0582y8gjxv1j01phy7i7l3z07ky72bry-fermat-7.9b/bin/fer64",
+  "cpu_affinity": [
+    29
+  ],
+  "workers": 1,
+  "timeout_seconds": 900,
+  "start_utc": "2026-10-06T01:49:55.568037+00:00",
+  "timed_out": false,
+  "exit_code": 0,
+  "end_utc": "2026-10-06T01:52:00.972210+00:00",
+  "wall_seconds": 125.40415992215276,
+  "result_sha256": "c83174c744deb77f7414933321d58bd0f8bc2cd70ea7111093adb9fec2d87640"
+}

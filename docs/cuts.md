@@ -49,6 +49,83 @@ Both terminal APIs share one sample-evaluation and independent-fit owner. The ne
 
 This class does not implement massive N-body phase space, mixed real/virtual cut recursion, or singular-threshold endpoint limits. The independent uncut check used for its all-cut `N=L+1` components is `2*(-1)^N*(4*pi)^(-L*D/2)*Im(I_uncut)` with the ordinary `+i0` prescription. It is not a prescription for the imaginary part of an arbitrary cut graph.
 
+## Mixed cut auxiliary-mass flow
+
+`cut_flow::PreparedCutFlow` prepares a cut-aware differential system and supplies
+its infinity boundaries automatically. `evaluate`, `evaluate_samples` and `solve`
+reuse ordinary finite-epsilon transport, endpoint projection and independently
+refined Laurent fitting. Pass the same `CutFamily`, declared future channel,
+exact kinematics and cut-aware reduction backend used by the terminal APIs.
+
+The current domain contains one complete positive-energy final state in the
+prescription-insensitive loop subspace, with all virtual directions using
+`PlusI0`. Inputs specialize to exact real coefficients and nonnegative squared
+masses. Every uncut physical denominator receives the auxiliary mass; `Auto` and
+`All` select this placement, while an explicit list must contain the same slots.
+Cuts and ISP slots are never deformed. Partial placements, algebraic distribution
+cuts and opposite virtual causal signs return typed unsupported errors.
+
+The boundary construction uses compact physical support. In the rest frame of
+the future total momentum, all on-shell final-state energies are bounded and
+nonnegative. No cut momentum can become hard. With all uncut lines deformed,
+each remaining soft virtual integration appears only polynomially at every
+asymptotic order and is scaleless. The surviving region has all virtual
+directions hard and all real directions soft. Existing region expansion and
+HEPKit's native tensor projector factor it into ordinary vacuum integrals and
+unchanged phase-space shells. Ordinary vacuum factors recursively use the
+existing AMF/FT boundary engine. Current phase-space leaves are the massive
+two-body and massless N-body terminals above. This proof does not cover a
+partial auxiliary-mass placement, an incomplete final-state cut, or conflicting
+causal assignments.
+
+Each cut carries its original oriented momentum and unscaled denominator through
+boundary conversion. If native normalization produces `d = c D`, the adapter
+restores `D` and multiplies the coefficient by `c^(-n)` for cut power `n`, requiring
+exact positive rational `c`. It proves the cut shells independent before partial
+fractions and interprets numerator cancellation of a required cut as its exact
+cut-zero identity. Unknown or ambiguous surviving cut identities and unresolved
+reductions remain errors. Routing Jacobians are retained by the exact hard
+vacuum and soft phase-space factors. No imaginary part of the mixed graph is
+used to obtain its cut value.
+
+An uncut line depending only on real momenta needs a separate support check:
+`Insensitive` does not supply a causal prescription for an interior pole. For a
+single future external channel, the adapter rewrites that denominator in the
+final-state scalar products, then uses `q_i.q_j >= 0` and
+`sum_(i<j) q_i.q_j = (s - sum_i m_i²)/2` to bound it on the full physical region.
+Bounds containing zero are rejected, including singular endpoints. The bound
+can be conservative; rejection does not prove that a physical singularity exists.
+
+Symbolic system caches use the existing source-sensitive keys and the explicit
+cut backend identity, including oriented momenta and loop prescriptions. Physical
+support and domain checks run again on preparation. This adapter does not add a
+persistent numerical cut-value cache or turn working precision into an achieved
+accuracy claim. General partial cut recursion, massive N-body leaves, internal
+real-phase-space poles and mixed virtual signs remain part of the broader parity
+goal.
+
+The automatic connected benchmark has cut lines `r²-1`, `(P-r)²-4`, virtual
+lines `k²`, `(k-r)²`, and `P²=25`. Its independent result is
+`Phi_2^D(25;1,4) Gamma(eps) Gamma(1-eps)^2/Gamma(2-2eps) exp(i*pi*eps)`.
+Raising the first cut differentiates both the volume and its attached bubble,
+giving the relative factor `-7*(1-2eps)/96-eps`. Tests also cover the second
+raised cut, virtual pinches, rank-two scalar numerators, positive-energy reversal,
+nonzero reduction conditions and a triangular routing with determinant six.
+
+The second class has massless three-body cuts and an uncut denominator
+`(q1+q2)²-M²`, with `M²>s`. Its result is
+`-Phi_3^D(s)/M² * 2F1(1,a;3*a;s/M²)`, where `a=D/2-1`.
+Tests compare a convergent independent beta-integral series, raised uncut powers
+and the 20-digit independently refined finite coefficient
+`-(1-log(2))/(128*pi^3)` at `s=1`, `M²=2`.
+
+`scripts/upstream_cut_oracle.py` optionally regenerates both examples using the
+unchanged pinned AMFlow 2.0 computational sources and Kira. The recorded results
+and normalization conversion are in
+[`reports/validation/2026-10-06-mixed-cut-flow`](../reports/validation/2026-10-06-mixed-cut-flow).
+These examples exercise the generic adapter; their analytic formulas occur only
+in tests and the reference driver.
+
 ## Native HEPKit graph input
 
 Use the application's existing `Arc<Model>` and a finalized native `FeynmanDiagram` containing `DiagramCut` metadata. No separate model registry or DOT cut parser is introduced.

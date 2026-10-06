@@ -58,14 +58,14 @@ def executable(value):
     return path
 
 
-def main():
+def main(*, cases=("bubble", "sunset", "eikonal"), driver_path=None):
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--upstream", required=True, type=Path)
     parser.add_argument("--kernel", required=True, type=executable)
     parser.add_argument("--kira", required=True, type=executable)
     parser.add_argument("--fermat", required=True, type=executable)
     parser.add_argument("--output", required=True, type=Path)
-    parser.add_argument("--case", choices=("bubble", "sunset", "eikonal"), default="bubble")
+    parser.add_argument("--case", choices=cases, default=cases[0])
     parser.add_argument("--mode", choices=("sample", "laurent"), default="sample")
     parser.add_argument("--recursion", choices=("AMF", "FT"), default="AMF")
     parser.add_argument("--cpu", type=int)
@@ -94,7 +94,7 @@ def main():
     work = output / "work"
     work.mkdir()
     driver = output / "oracle.wl"
-    shutil.copyfile(Path(__file__).with_suffix(".wl"), driver)
+    shutil.copyfile(driver_path or Path(__file__).with_suffix(".wl"), driver)
     shutil.copyfile(Path(__file__), output / "runner.py")
     thread_launcher = output / "wolfram_one_thread.py"
     thread_loader = output / "wolfram_one_thread.wl"

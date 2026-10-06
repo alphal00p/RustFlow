@@ -15,7 +15,7 @@ use std::collections::BTreeMap;
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
-fn real_rational(value: &Atom, description: &str) -> Result<Rational> {
+pub(crate) fn real_rational(value: &Atom, description: &str) -> Result<Rational> {
     let normalized = value.together().cancel();
     if let AtomView::Num(number) = normalized.as_view()
         && let Coefficient::Complex(value) = number.get_coeff_view().to_owned()
@@ -26,6 +26,15 @@ fn real_rational(value: &Atom, description: &str) -> Result<Rational> {
     Err(Error::Unsupported(format!(
         "{description} must specialize to an exact real rational value"
     )))
+}
+
+/// Reuse the terminal's exact orientation/threshold checks before cut flow.
+pub(crate) fn supported_leaf(family: &CutFamily, channel: &FutureTimelikeChannel) -> Result<bool> {
+    if family.family().loops.len() == 1 {
+        Ok(TwoBodyGeometry::new(family, channel)?.supported)
+    } else {
+        Ok(MasslessGeometry::new(family, channel)?.supported)
+    }
 }
 
 fn native_two_body_volume(
