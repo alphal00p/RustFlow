@@ -8,11 +8,21 @@ RustFlow is being extended with DiffExp-style transport in physical kinematic
 variables and a progressively filled native `RustFlowCache`. The Rust crate
 retains the name `symbolica-amflow`. See the [active parity plan](docs/parity-plan.md)
 and [cache and transport interface](docs/rustflow.md). Full AMFlow/DiffExp parity
-remains a development goal. The [coherent pure W/Z Higgs+jet squared amplitude](docs/gg-hg-matrix-element.md)
-has a native HEPKit validation at one physical point with 19 propagated relative
-digits. At that same point, the infinite-top HEFT–EW interference has a native
-HEPKit validation with 20 propagated relative digits, conditional on the supplied
-form-factor allowances. General automatic amplitude evaluation remains open.
+remains a development goal. The [Python API and native Higgs+jet notebook](docs/python-notebook-status.md)
+generate all sixteen physical boundary configurations from empty numerical
+caches and reproduce 4,360 transport coefficients, eight W/Z form factors and
+three coherent observables. Published numerical seeds are comparison data only.
+The independent reference supports 19 relative comparison digits for the EW
+square and 20 for the infinite-top HEFT–EW interference; native uncertainty
+estimates and higher-precision checks are recorded separately. General automatic
+amplitude evaluation remains open.
+
+The notebook is `examples/hep/gg_hg.py` in
+[symbolica-community PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19),
+with staged computation, native diagram displays and reusable binary caches.
+See the [checkout and installation instructions](docs/clean-community-build.md)
+and [current validation status](docs/python-notebook-status.md) for the exact
+published dependency snapshot and outstanding acceptance checks.
 
 The original paper's four two-loop targets pass the required calculation through
 epsilon power zero: 20-digit stability under independent sample/precision/order
