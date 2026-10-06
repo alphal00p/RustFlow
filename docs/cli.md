@@ -85,6 +85,31 @@ refinement, initial-reduction skipping and symbolic caching. The default values
 match `FlowOptions`. Persistent numerical snapshots and symbolic reduction caches
 serve different purposes and use separate paths.
 
+`options.mass_mode` accepts `"automatic"` (the default), `"all"`, `"mass"`,
+`"propagator"`, `"branch"`, or `"loop"`. To select particular physical
+propagators, set `"deformed_propagator_slots": [2]`. Slots are zero-based
+positions in the evaluated family's physical denominator list, never native
+HEPKit `EdgeId` values and never irreducible scalar-product slots. The cut graph
+converter preserves `GraphIntegral::propagator_edges()` order: if this list is
+`[EdgeId(1), EdgeId(2), EdgeId(3), EdgeId(4)]`, slot `2` denotes `EdgeId(3)`.
+Ordinary partial-fraction conversion produces family-local denominator lists;
+explicit slots apply separately to each converted family. Use a named mode when
+a graph decomposes into different denominator inventories.
+
+For example, a mixed cut request can contain:
+
+```json
+"options": {"digits": 20, "deformed_propagator_slots": [2]}
+```
+
+The list must be nonempty. A supplied `mass_mode` must be `"explicit"` when
+slots are present; combinations such as `"all"` plus a slot list are errors.
+`"explicit"` without a list is also an error. Native family preparation checks
+slot bounds; cut preparation additionally rejects cut lines. A terminal or zero
+cut result still validates an explicit selection. Ordinary named placement modes
+retain their existing scope, and mixed cut flow currently accepts `"automatic"`,
+`"all"`, or explicit subsets of uncut physical lines.
+
 The optional Python bindings live in this crate and are registered in the shared
 host under `symbolica.community.hep.integration`; this executable uses the same
 native Rust libraries.
