@@ -85,8 +85,9 @@ refinement, initial-reduction skipping and symbolic caching. The default values
 match `FlowOptions`. Persistent numerical snapshots and symbolic reduction caches
 serve different purposes and use separate paths.
 
-The Python API will live in HEPKit; this executable uses only the native Rust
-libraries.
+The optional Python bindings live in this crate and are registered in the shared
+host under `symbolica.community.hep.integration`; this executable uses the same
+native Rust libraries.
 
 Transport requests may include `nonzero_conditions`, a list of exact expressions
 carried from IBP reduction or a kinematic chart. These restrictions participate
@@ -324,3 +325,34 @@ Transport results also include `conditioning_digits`, the minimum checked
 arithmetic-conditioning tolerance along the retained path and compared profiles.
 It is `null` for exact cache hits, whose existing accuracy evidence is retained.
 This diagnostic is separate from working precision and from a global error proof.
+
+## Native positive-energy cut graphs
+
+The `graph` operation accepts an optional `cut` selection. The diagram must
+already contain native HEPKit cut partitions (for example stable DOT emitted by
+`FeynmanDiagram.to_dot()`); no separate Boolean-edge cut parser is used.
+
+```json
+"cut": {
+  "index": 0,
+  "future_channel": ["1"],
+  "loop_prescriptions": ["insensitive"],
+  "epsilon_samples": ["1/13", "1/17"]
+}
+```
+
+Channel coefficients and epsilon samples are exact rational strings. Channel
+coefficients follow the native independent external basis, and prescriptions
+follow its loop basis. Prescriptions accept `+i0`, `-i0`, and `insensitive`;
+current automatic physical support is specified in [cuts.md](cuts.md).
+Existing `edge_powers` can raise a cut; numerator cancellation of a required cut
+returns zero only after domain admission. The shared native dispatcher applies
+all numerator weights before sample fitting and retains cut IBP conditions.
+
+With `epsilon_samples`, the result has operation `cut_graph_samples`, native
+precision real/imaginary decimal strings, working bits, and
+`verified_digits: null`. Omit `epsilon_samples` to obtain operation `cut_graph`
+with independently refined Laurent coefficients through `last_epsilon_power`.
+Both outputs include retained preparation `nonzero_conditions`. The cut APIs
+use existing native model/graph/tensor owners and do not create numerical cache
+entries or infer a cut from the imaginary part of the whole diagram.

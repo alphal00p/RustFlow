@@ -532,3 +532,47 @@ fn cut_system_restart_nonzero_conditions_and_cancellation_remain_explicit() -> R
     );
     Ok(())
 }
+
+#[test]
+fn mixed_cut_projection_batches_weights_before_epsilon_fitting() -> Result<()> {
+    use std::collections::BTreeMap;
+    let family = mixed_family();
+    let eps = Atom::var(family.family().epsilon);
+    let unit = Integral(vec![1, 1, 1, 1, 0]);
+    let raised = Integral(vec![2, 1, 1, 1, 0]);
+    let rows = [
+        BTreeMap::from([(unit.clone(), Atom::one() / eps.clone())]),
+        BTreeMap::from([
+            (
+                unit,
+                -Atom::num(7) * (1 - 2 * eps.clone()) / 96 - eps.clone(),
+            ),
+            (raised, Atom::num(-1)),
+        ]),
+    ];
+    let backend = RustRedBackend::default();
+    let options = options();
+    let context = RunContext::default();
+    let prepared = PreparedCutProjections::new(
+        &family,
+        &channel(),
+        &rows,
+        &KinematicPoint::default(),
+        &backend,
+        &options,
+        &context,
+    )?;
+    assert_eq!(prepared.leading_power(), -5);
+    let p = Precision::decimal(70)?;
+    for epsilon in [Rational::from((1, 13)), Rational::from((1, 17))] {
+        let values = prepared.evaluate(&epsilon, &options, &context)?;
+        close(
+            p,
+            &values[0],
+            &p.div(&mixed_analytic(&epsilon, p), &p.rational(&epsilon)),
+            20,
+        );
+        assert!(p.norm(&values[1]) < p.tolerance(20));
+    }
+    Ok(())
+}

@@ -263,6 +263,41 @@ impl GraphIntegral {
         Ok((family, retained))
     }
 
+    /// Prepare the selected cut and its full native numerator as one projection.
+    /// Exact point substitutions are applied once by the native graph converter.
+    /// The shared cut dispatcher then retains terminal normalization and IBP
+    /// conditions and multiplies numerator weights before epsilon fitting.
+    #[allow(clippy::too_many_arguments)]
+    pub fn prepare_cut_projection<'a>(
+        &self,
+        cut_index: usize,
+        point: &KinematicPoint,
+        epsilon: Symbol,
+        channel: &crate::cuts::FutureTimelikeChannel,
+        loop_prescriptions: Vec<LoopPrescription>,
+        backend: &'a dyn crate::ReductionBackend,
+        options: &crate::FlowOptions,
+        context: &RunContext,
+    ) -> Result<crate::PreparedCutProjections<'a>> {
+        let (family, weights) = self.cut_integral_group(
+            cut_index,
+            point,
+            epsilon,
+            options.dimension,
+            loop_prescriptions,
+            context,
+        )?;
+        crate::PreparedCutProjections::new(
+            &family,
+            channel,
+            &[weights],
+            &KinematicPoint::default(),
+            backend,
+            options,
+            context,
+        )
+    }
+
     #[allow(clippy::too_many_arguments)] // Shared ordinary/cut conversion avoids a second tensor or routing implementation.
     fn integral_groups_impl(
         &self,

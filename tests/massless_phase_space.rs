@@ -655,3 +655,49 @@ fn two_particle_gamma_cancellation_retains_the_finite_dimension_two_value() -> R
     close(p, &result[0], &p.rational(&Rational::from((1, 7))), 50);
     Ok(())
 }
+
+#[test]
+fn generic_cut_dispatch_preserves_nbody_routing_and_weight_poles() -> Result<()> {
+    let context = RunContext::default();
+    let options = options();
+    let p = Precision::decimal(70)?;
+    let epsilon = Rational::from((1, 13));
+    for loops in [2, 3] {
+        let family = family(loops, true, false, true);
+        let target = unit(&family);
+        let row = BTreeMap::from([(
+            target.clone(),
+            Atom::one() / Atom::var(family.family().epsilon).pow(3),
+        )]);
+        let projections = PreparedCutProjections::new(
+            &family,
+            &channel(),
+            &[row],
+            &KinematicPoint::default(),
+            &NoReduction,
+            &options,
+            &context,
+        )?;
+        let terminal = PreparedMasslessPhaseSpace::new(
+            &family,
+            &channel(),
+            &[target],
+            &KinematicPoint::default(),
+            &NoReduction,
+            &options,
+            &context,
+        )?;
+        assert_eq!(projections.leading_power(), terminal.leading_power() - 3);
+        let expected = p.div(
+            &terminal.evaluate(&epsilon, &options, &context)?[0],
+            &p.powi(&p.rational(&epsilon), 3),
+        );
+        close(
+            p,
+            &projections.evaluate(&epsilon, &options, &context)?[0],
+            &expected,
+            50,
+        );
+    }
+    Ok(())
+}

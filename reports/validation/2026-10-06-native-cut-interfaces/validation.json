@@ -1,0 +1,145 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-10-06",
+  "base_commit": "7b6a8c99abf1a41ab7ef37b61409e6a65c44a717",
+  "implementation": "Native HEPKit cut-diagram projections shared by Rust, CLI and descriptive Python methods",
+  "compiled_source_fingerprints": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "PORT_SOURCE_DIGEST": "2f7cf259e256dc0dd3f1d3ff506cb589fbad21fd3755e4a8c98a6eefa1113309",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232"
+  },
+  "frozen_source_hashes_checked_after_tests": true,
+  "artifact_hashes": {
+    "target/release/deps/libsymbolica_amflow-f22bcb54479a61ec.rlib": {
+      "sha256": "ee5e4b47c1ec8f095cfb9e4a47b62721755d874860b1e5df4835331beba30cbc",
+      "bytes": 499933686
+    },
+    "target/release/deps/native_cut_interfaces-b8025262cd589a14": {
+      "sha256": "61151fb80f4c6d4d8c9c99ebf43f0f8c1deee436f865ab090ad44b22cb0461be",
+      "bytes": 1185038792
+    },
+    "target/release/deps/python_cut_interfaces-0c93b36f06af37f0": {
+      "sha256": "b609bdece404866115a3723a6679bd7f3b11c216980164905a671c36484e05c5",
+      "bytes": 1184246728
+    },
+    "target/release/rustflow": {
+      "sha256": "33ddc4b7e59bbc8f8082bc949e46a24e16ebff148dcaed5d33a0739b37fe5556",
+      "bytes": 1189334800
+    }
+  },
+  "validation": {
+    "release_command": "cargo test --locked --release --features python_stubgen --test python_cut_interfaces --test native_cut_interfaces --test hepkit_cuts --test mixed_cut_flow --test massless_phase_space --test combinations --test cli",
+    "passed": 41,
+    "failed": 0,
+    "ignored": 0,
+    "targets": {
+      "cli": {
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0,
+        "seconds": 24.54
+      },
+      "combinations": {
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "seconds": 8.5
+      },
+      "hepkit_cuts": {
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0,
+        "seconds": 0.13
+      },
+      "massless_phase_space": {
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "seconds": 8.63
+      },
+      "mixed_cut_flow": {
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "seconds": 12.9
+      },
+      "native_cut_interfaces": {
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0,
+        "seconds": 0.56
+      },
+      "python_cut_interfaces": {
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "seconds": 0.22
+      }
+    },
+    "clippy_command": "cargo clippy --locked --release --all-targets --features python_stubgen -- -D warnings",
+    "clippy_passed": true,
+    "format_passed": true,
+    "diff_check_passed": true,
+    "initial_gate": {
+      "passed": 40,
+      "status": "Informational pre-cancellation-tightening gate. Its build fingerprint was generated during the dependency build before the final equivalent helper-reference cleanup. Final evidence is the frozen 41-test gate and its matching source/Clippy digest."
+    }
+  },
+  "interfaces": {
+    "rust": [
+      "PreparedCutProjections",
+      "GraphIntegral::prepare_cut_projection"
+    ],
+    "python_namespace": "symbolica.community.hep.integration",
+    "python_methods": [
+      "IntegralEvaluator.evaluate_cut_diagram",
+      "IntegralEvaluator.evaluate_cut_diagram_samples"
+    ],
+    "python_native_inputs": [
+      "existing HEPKit FeynmanDiagram with shared Model owner",
+      "existing HEPKit Kinematics",
+      "native exact Symbolica expressions",
+      "explicit cut index and future channel",
+      "native loop-order prescriptions and optional edge powers"
+    ],
+    "python_exceptions_exercised": [
+      "InvalidInputError",
+      "UnsupportedInputError",
+      "CalculationCancelled"
+    ],
+    "other_error_policy": "Existing reduction/resource/numerical errors remain typed through the shared exception mapper. Ordinary ReductionTables do not authorize cut reductions; a backend must explicitly own reduce_cut.",
+    "gil_and_control": "Native construction and evaluation detach the GIL. The threaded Python regression polls native progress and cancels an active evaluation; a deterministic Rust backend-cancellation regression prevents returning prepared state after cancellation.",
+    "stub_validation": "Generated inventory stubs include both methods, native FeynmanDiagram/Kinematics types, exact channel/prescription arguments and edge powers.",
+    "cli": "graph steering accepts an optional cut selection; finite samples return operation cut_graph_samples and verified_digits=null; omitting epsilon_samples gives independently refined cut_graph Laurent output. Ordinary graph JSON is unchanged."
+  },
+  "scientific_coverage": [
+    "20-digit weighted two-body Laurent coefficients with native D=4-2 epsilon contraction and an extra numerator pole; analytic volume and finite coefficient compared independently.",
+    "30 requested and independently fitted decimal digits through the native Python phase-space interface; finite sample compared to the independent gamma expression at 50 digits.",
+    "Exact single-pass point substitution, raised-cut derivative signs, nonzero guards even for zero numerator rows, invalid physical measures and epsilon samples, direct and native-encoded exact complex weights.",
+    "Connected native two-loop graph with massive phi cut shells and a massless chi virtual bubble, native requested loop-edge basis and native cut partitions. Exact M=1 overrides model default 123. Finite epsilon 1/13 matches the independent phase-volume times bubble gamma product at 20 digits.",
+    "Shared mixed cut projections at epsilon 1/13 and 1/17 retain epsilon pole weights and cancellation with a raised-cut target.",
+    "Two- and three-loop all-cut massless projection dispatch retains determinant Jacobians, permutations and inherited/extra epsilon poles.",
+    "Existing ordinary projection and CLI transport regressions pass unchanged."
+  ],
+  "accuracy_scope": "Finite-epsilon outputs carry working precision only, without a guaranteed accuracy field. Laurent solve uses the existing independent-grid/increased-precision fitter and reports achieved comparison evidence; no global interval certificate is claimed.",
+  "reuse_audit": {
+    "root_review": "No substantive blocker; shared ordinary helper preserves prior behavior and dispatch never suppresses domain errors.",
+    "independent_peer_review": "Endpoint/cache agent found no substantive admission issue and recommended per-row/final cancellation checks; implemented and validated.",
+    "owners": {
+      "graph_model_routing": "HEPKit and Linnet",
+      "numerators": "HEPKit, Spenso and Idenso",
+      "exact_numbers_weights_and_gamma": "Symbolica and existing Precision wrapper",
+      "cut_reduction": "existing cut-aware RustRed backend",
+      "boundaries_and_transport": "existing PreparedCutFlow and phase-space terminal owners",
+      "epsilon_reconstruction": "existing fit_samples_refined_leading"
+    },
+    "dependency_uniqueness": "dependency-ownership.json records exactly one resolved owner each for Symbolica, Numerica, RustRed, HEPKit model/graph/kinematics/Python/tensor, Linnet, Spenso and Idenso. Locked official Symbolica community and RustRed sources are unchanged."
+  },
+  "remaining_scope": [
+    "Complete positive-energy final states with uniform +i0 virtual directions remain the current automatic mixed-cut domain.",
+    "Massive two-body and massless N-body terminals; general massive N-body, singular thresholds, interior real-phase-space poles and cut-preserving partial fractions remain unsupported.",
+    "No persistent numerical cut cache or cache schema change. No reference numerical values enter evaluation.",
+    "No new whole-algorithm performance comparison; target runtimes above are regression-suite timings."
+  ],
+  "deployment_scope": "Bindings are validated in the embedded shared native Python runtime of this crate. No publication host wheel, community source, numerical bank or runtime was edited or rebuilt by this milestone."
+}
