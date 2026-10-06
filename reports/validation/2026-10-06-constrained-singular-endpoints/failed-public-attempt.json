@@ -1,0 +1,12 @@
+{
+  "session": 4121,
+  "exit_code": 101,
+  "tool_chunk": "ee8487",
+  "new_public_tests": {
+    "passed": 16,
+    "failed": 1
+  },
+  "failure": "Test setup unwrapped an epsilon range rejected by the existing 1..1024 coefficient validator before endpoint API entry",
+  "fix": "Assert invalid range rejection separately; use largest valid range 0..1023 for endpoint hierarchy resource limit",
+  "production_source_changed": false
+}

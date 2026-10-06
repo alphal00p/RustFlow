@@ -1,0 +1,407 @@
+{
+  "status": "validated isolated rational-constraint milestone; broader endpoint parity remains open",
+  "recorded_utc": "2026-10-06T03:59:51.335640+00:00",
+  "branch": "codex/constrained-singular-endpoints",
+  "base_commit": "af1025932a1bde31e7716995cb4260b63762ebba",
+  "scope": [
+    "Reusable explicitly asserted Gaussian-rational asymptotic relations and exact affine constant space",
+    "One shared numerical/exact Frobenius recurrence and native normalization/series/matrix owners",
+    "Rational constrained singular endpoint evaluation through ordinary/prescribed physical transport",
+    "Every-component constrained reconstruction and input sensitivity with independent precision/order estimates",
+    "Schema-7 constrained terminal evidence with exact-range cache reuse and original regular anchors"
+  ],
+  "checks": {
+    "final-core": {
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "targets": {
+        "unittests src/lib.rs": {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.03s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "6",
+              "0",
+              "0",
+              "0",
+              "147",
+              "0.03s"
+            ]
+          ]
+        }
+      }
+    },
+    "final-private-endpoints": {
+      "passed": 7,
+      "failed": 0,
+      "ignored": 0,
+      "targets": {
+        "unittests src/lib.rs": {
+          "passed": 7,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.01s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "7",
+              "0",
+              "0",
+              "0",
+              "146",
+              "0.01s"
+            ]
+          ]
+        }
+      }
+    },
+    "final-public": {
+      "passed": 101,
+      "failed": 0,
+      "ignored": 0,
+      "targets": {
+        "tests/algebraic_endpoints.rs": {
+          "passed": 11,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.53s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "11",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.53s"
+            ]
+          ]
+        },
+        "tests/analytic_origin.rs": {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.08s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "6",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.08s"
+            ]
+          ]
+        },
+        "tests/asymptotic.rs": {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.00s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "6",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.00s"
+            ]
+          ]
+        },
+        "tests/constrained_singular_endpoints.rs": {
+          "passed": 17,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.12s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "17",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.12s"
+            ]
+          ]
+        },
+        "tests/frobenius.rs": {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.09s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "8",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.09s"
+            ]
+          ]
+        },
+        "tests/physical_transport.rs": {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.96s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "4",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.96s"
+            ]
+          ]
+        },
+        "tests/prepared_frobenius.rs": {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.30s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "5",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.30s"
+            ]
+          ]
+        },
+        "tests/prescribed_cache.rs": {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "5.14s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "6",
+              "0",
+              "0",
+              "0",
+              "0",
+              "5.14s"
+            ]
+          ]
+        },
+        "tests/supplied_flow.rs": {
+          "passed": 7,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.42s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "7",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.42s"
+            ]
+          ]
+        },
+        "tests/supplied_singular_endpoints.rs": {
+          "passed": 19,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.56s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "19",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.56s"
+            ]
+          ]
+        },
+        "tests/transport_cache.rs": {
+          "passed": 12,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.04s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "12",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.04s"
+            ]
+          ]
+        }
+      }
+    },
+    "final-private-cache": {
+      "passed": 4,
+      "failed": 0,
+      "ignored": 1,
+      "targets": {
+        "unittests src/lib.rs": {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 1,
+          "seconds": "0.03s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "1",
+              "0",
+              "0",
+              "0",
+              "152",
+              "0.00s"
+            ],
+            [
+              "ok",
+              "1",
+              "0",
+              "0",
+              "0",
+              "152",
+              "0.02s"
+            ],
+            [
+              "ok",
+              "1",
+              "0",
+              "0",
+              "0",
+              "152",
+              "0.02s"
+            ],
+            [
+              "ok",
+              "1",
+              "0",
+              "0",
+              "0",
+              "152",
+              "0.02s"
+            ],
+            [
+              "ok",
+              "1",
+              "0",
+              "0",
+              "0",
+              "152",
+              "0.01s"
+            ],
+            [
+              "ok",
+              "1",
+              "0",
+              "0",
+              "0",
+              "152",
+              "0.02s"
+            ],
+            [
+              "ok",
+              "4",
+              "0",
+              "1",
+              "0",
+              "148",
+              "0.03s"
+            ]
+          ]
+        }
+      }
+    }
+  },
+  "totals": {
+    "passed": 118,
+    "failed": 0,
+    "ignored": 1
+  },
+  "counting": "Only the final summary of each top-level Cargo target enters totals; nested subprocess summaries are retained separately. The earlier seven-test pass is historical evidence and is not added again.",
+  "static_checks": {
+    "strict_clippy": "cargo clippy --release --all-targets --features python_stubgen -- -D warnings",
+    "session": 6161,
+    "exit_code": 0,
+    "tool_chunk": "41f598",
+    "fmt": "cargo fmt --all -- --check",
+    "diff": "git diff --check"
+  },
+  "source_recheck": {
+    "source_test_manifest_files": 196,
+    "unchanged_base_embedded_build_inputs": 15,
+    "all_matched": true
+  },
+  "reviews": [
+    "Independent exact affine support and normalization-prefix review: no mathematical blocker; source/series/RHS resource follow-ups addressed",
+    "Independent constrained matching/inverse bound review: no blocker; incomplete-prefix retry finding addressed by separate Ok(None) status and public normalization-shift regression",
+    "Independent terminal identity/codec/evidence review: no blocker; no independent reviewer Cargo run",
+    "Root read-only exact-support/matching review: no additional blocker"
+  ],
+  "open_requirements": [
+    "Constrained registered-root spaces need a formal exact sheet-consistency action proof; currently refused without weakening ordinary root endpoint support",
+    "Exact non-Gaussian coefficient fields",
+    "Symbolic dimensional-regulator sector selection remains distinct from finite epsilon coefficient limits",
+    "Large-system algorithmic and performance parity",
+    "New constraint Python declarations/bindings after parent integration; Python feature compilation is not host-wheel interoperability",
+    "No global/joint uncertainty certificate: numerical matching checks remain estimated and conditional on explicit physical relations"
+  ],
+  "isolation": {
+    "publication_runtime": "untouched",
+    "native_dependencies": "unchanged owners and pins; no wheel rebuilt or installed",
+    "parent_main": "untouched; source overlap audit preserves GuardedCost/same_coordinates and existing Pad\u00e9/adaptive changes"
+  },
+  "commands": {
+    "core": "cargo test --release --lib asymptotic::exact::tests",
+    "private_endpoints": "cargo test --release --lib endpoint",
+    "public": "cargo test --release --test constrained_singular_endpoints --test supplied_singular_endpoints --test algebraic_endpoints --test frobenius --test prepared_frobenius --test asymptotic --test analytic_origin --test supplied_flow --test physical_transport --test transport_cache --test prescribed_cache",
+    "private_cache": "cargo test --release --lib transport_cache::serialization_tests"
+  },
+  "earlier_failures": "Initial compile/API spelling and Clippy diagnostics were corrected before the production freeze. The public stage then found two test-fixture issues: a range-constructor unwrap rejected before API entry, and a legacy schema-6 header literal. Both were corrected without changing production source or weakening numerical/fingerprint assertions. Failed logs and source manifests are retained. No failing numerical behavior was suppressed.",
+  "process_exits": {
+    "final_public_cache_clippy_fmt": {
+      "session": 6161,
+      "exit_code": 0,
+      "tool_chunk": "41f598"
+    },
+    "initial_frozen_gate": {
+      "session": 4121,
+      "exit_code": 101,
+      "tool_chunk": "ee8487",
+      "core_exit": 0,
+      "private_endpoint_exit": 0,
+      "reason": "invalid epsilon range in new test fixture"
+    },
+    "public_attempt2": {
+      "session": 53267,
+      "exit_code": 101,
+      "tool_chunk": "065668",
+      "reason": "legacy expected current schema header required update to 7"
+    },
+    "initial_seven_public_tests": {
+      "session": 91133,
+      "exit_code": 0,
+      "tool_chunk": "e0e567"
+    },
+    "test_fixture_fixes_changed_production_source": false
+  }
+}

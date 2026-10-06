@@ -12,6 +12,7 @@ mod frobenius;
 mod quotient;
 mod residual;
 pub use analytic_origin::{AnalyticOriginOptions, AnalyticOriginSeed};
+pub(crate) use frobenius::EndpointLinearMap;
 pub use frobenius::{
     AlgebraicEndpointExpansion, PreparedAlgebraicFrobenius, RationalAlgebraicSystem,
 };

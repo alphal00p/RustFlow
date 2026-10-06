@@ -82,7 +82,7 @@ fn dyadic_ball(p: Precision, value: &C) -> ComplexBall {
     ball
 }
 
-fn exact_ball(value: &Gaussian, p: Precision) -> ComplexBall {
+pub(crate) fn exact_ball(value: &Gaussian, p: Precision) -> ComplexBall {
     ComplexBall::from_rational_ball(value, &Rational::zero(), p.bits)
 }
 

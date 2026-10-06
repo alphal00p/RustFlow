@@ -1,0 +1,27 @@
+{
+  "final_public_cache_clippy_fmt": {
+    "session": 6161,
+    "exit_code": 0,
+    "tool_chunk": "41f598"
+  },
+  "initial_frozen_gate": {
+    "session": 4121,
+    "exit_code": 101,
+    "tool_chunk": "ee8487",
+    "core_exit": 0,
+    "private_endpoint_exit": 0,
+    "reason": "invalid epsilon range in new test fixture"
+  },
+  "public_attempt2": {
+    "session": 53267,
+    "exit_code": 101,
+    "tool_chunk": "065668",
+    "reason": "legacy expected current schema header required update to 7"
+  },
+  "initial_seven_public_tests": {
+    "session": 91133,
+    "exit_code": 0,
+    "tool_chunk": "e0e567"
+  },
+  "test_fixture_fixes_changed_production_source": false
+}

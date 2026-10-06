@@ -1,0 +1,30 @@
+{
+  "base": "af1025932a1bde31e7716995cb4260b63762ebba",
+  "status": "passed",
+  "session": 91133,
+  "command": "cargo test --release --test constrained_singular_endpoints",
+  "scope": "seven first public rational constrained endpoint tests; not final gate",
+  "source_sha256": {
+    "src/algebraic.rs": "4653f8a804865a581e33fe750ae111c2a0a3e750ee4d25bf54b3a93de01d6be5",
+    "src/algebraic/frobenius.rs": "8addd7d67d15b0c957e46e2a65c7a0b0fd1ce501350ffe48ee9e7f90733bd303",
+    "src/algebraic/frobenius/constrained.rs": "d557f94681a1089664d84551774e84bbaba0ff449547879fcae87db4a30db57e",
+    "src/asymptotic.rs": "117d3f8b85041a0bcd0d73072d51a76eee4184e8421390f65989be145731cb3a",
+    "src/asymptotic/exact.rs": "7e9af8a8385dbaf210ee1ad9a5c3b3c7888f28915407cea0cc52af79bfed2df6",
+    "src/asymptotic/exact_tests.rs": "67b3bca347cf46a3c62c55e2156384497889022153ebe5e112f33a6bd56f9de5",
+    "src/frobenius.rs": "3742b8381aacce50e970bdf38f3626ec8ab5db801f1b49238ebdb7ab621bab10",
+    "src/frobenius/exact.rs": "5cf55f8ecd9d95ac13dab28f33476ddfdcd7ac736f7a78d3b73b18f7f9c7af1d",
+    "src/frobenius/recurrence.rs": "a499145a238dca8939343ed52b3a8268cc6cb73cba95760dd2bbe743806f1028",
+    "src/ode/source.rs": "4e127e5d105d311e5c50aa6d896487f8eee0f3b0c9613f12fdde38e31999bbe4",
+    "src/physical_transport.rs": "fe48fed463150c907cf55205bdce6f43043eca99c7f2758d7bd0d4bb00dbb66f",
+    "src/singular_endpoint.rs": "04fa09a4cc64ed44f0d1c941b69ae9026842803d36cbf1258cdd86d35b0781ed",
+    "src/transport_cache.rs": "195ec26a4da5b36c97a1e81beb3e12e212957462c2193da29058e565a9cbaae8",
+    "tests/constrained_singular_endpoints.rs": "a7b3203f6bb8bad4bc9dcfa852f6ed1a5f018f82274742648080c8c7665e0b16"
+  },
+  "exit_code": 0,
+  "tool_chunk": "e0e567",
+  "passed": 7,
+  "failed": 0,
+  "ignored": 0,
+  "build_elapsed": "4m39s",
+  "test_seconds": 0.04
+}

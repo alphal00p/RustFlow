@@ -115,6 +115,7 @@ macro_rules! endpoint_api {
                     &self.identity,
                     cache,
                     request,
+                    None,
                     options,
                     context,
                     policy,
@@ -141,6 +142,62 @@ macro_rules! endpoint_api {
                     &self.identity,
                     cache,
                     request,
+                    None,
+                    options,
+                    context,
+                    policy,
+                    RouteMode::Prescribed(route_admission),
+                    endpoint_admission,
+                )
+            }
+            /// Evaluate a finite coefficientwise singular limit through a
+            /// regular matching anchor. The caller explicitly admits the final
+            /// chart approach; terminal limits never initialize regular transport.
+            #[allow(clippy::too_many_arguments)]
+            pub fn evaluate_constrained_endpoint(
+                &self,
+                cache: &mut RustFlowCache,
+                request: &crate::singular_endpoint::EndpointRequest,
+                constraints: &crate::singular_endpoint::EndpointConstraints,
+                options: &FlowOptions,
+                context: &RunContext,
+                policy: &dyn TransportCost,
+                admission: &dyn crate::singular_endpoint::EndpointAdmission,
+            ) -> Result<crate::singular_endpoint::EndpointResult> {
+                evaluate_endpoint(
+                    Connection::$kind(&self.system),
+                    &self.identity,
+                    cache,
+                    request,
+                    Some(constraints),
+                    options,
+                    context,
+                    policy,
+                    RouteMode::Straight,
+                    admission,
+                )
+            }
+
+            /// Reach the regular matching anchor along an explicitly admitted
+            /// prescribed route, then admit and evaluate its endpoint chart.
+            #[allow(clippy::too_many_arguments)]
+            pub fn evaluate_prescribed_constrained_endpoint(
+                &self,
+                cache: &mut RustFlowCache,
+                request: &crate::singular_endpoint::EndpointRequest,
+                constraints: &crate::singular_endpoint::EndpointConstraints,
+                options: &FlowOptions,
+                context: &RunContext,
+                policy: &dyn TransportCost,
+                route_admission: &dyn HomotopyAdmission,
+                endpoint_admission: &dyn crate::singular_endpoint::EndpointAdmission,
+            ) -> Result<crate::singular_endpoint::EndpointResult> {
+                evaluate_endpoint(
+                    Connection::$kind(&self.system),
+                    &self.identity,
+                    cache,
+                    request,
+                    Some(constraints),
                     options,
                     context,
                     policy,
@@ -161,6 +218,7 @@ fn evaluate_endpoint(
     identity: &BoundaryIdentity,
     cache: &mut RustFlowCache,
     request: &crate::singular_endpoint::EndpointRequest,
+    constraints: Option<&crate::singular_endpoint::EndpointConstraints>,
     options: &FlowOptions,
     context: &RunContext,
     policy: &dyn TransportCost,
@@ -170,14 +228,21 @@ fn evaluate_endpoint(
     use crate::singular_endpoint::{EndpointResult, PreparedEndpoint};
     options.validate()?;
     request.preflight(identity)?;
+    if let Some(constraints) = constraints {
+        constraints.preflight(identity, request.range, context)?;
+    }
     request.chart.validate(identity)?;
     if mode.is_prescribed() != identity.physical_continuation().is_some() {
         return Err(Error::InvalidInput("endpoint matching route must use the identity's prescribed/ordinary transport interface".into()));
     }
     context.cancellation.check()?;
-    if let Some(boundary) =
-        cache.endpoint(identity, &request.chart, request.range, options.digits)?
-    {
+    if let Some(boundary) = cache.endpoint(
+        identity,
+        &request.chart,
+        request.range,
+        options.digits,
+        constraints,
+    )? {
         if !admission.admit(&boundary.matching_boundary, &request.chart)? {
             return Err(Error::InvalidInput(
                 "endpoint approach was not admitted".into(),
@@ -201,7 +266,7 @@ fn evaluate_endpoint(
         },
         PreparedConnection::Algebraic(system) => system,
     };
-    let prepared = PreparedEndpoint::new(source, identity, request, options, context)?;
+    let prepared = PreparedEndpoint::new(source, identity, request, constraints, options, context)?;
     evaluate_physical_with(
         system,
         identity,

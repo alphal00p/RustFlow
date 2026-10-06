@@ -4,6 +4,10 @@ use crate::numeric::solve_constraints;
 use crate::{ComplexFloat, Error, Result};
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
+mod exact;
+pub use exact::{
+    AsymptoticSelector, ExactAsymptoticConstraints, ExactAsymptoticRelation, ExactAsymptoticSpace,
+};
 
 /// A known coefficient of `x^power * log(x)^log_power` in one component.
 ///

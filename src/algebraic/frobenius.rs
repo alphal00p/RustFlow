@@ -10,6 +10,8 @@ use crate::frobenius::{FrobeniusBasis, PreparedFrobenius};
 use symbolica::domains::float::{ComplexBall, FloatField, RealBall, RoundingDirection};
 use symbolica::tensors::matrix::Matrix;
 
+mod constrained;
+
 pub(crate) struct EndpointLinearMap {
     pub(crate) values: Vec<Vec<C>>,
     pub(crate) arithmetic_errors: Vec<Vec<Float>>,
@@ -496,68 +498,10 @@ impl PreparedAlgebraicFrobenius {
         )
         .map_err(Error::Numerical)?;
         context.cancellation.check()?;
-        let inverse = matching.inv().map_err(|e| Error::InsufficientPrecision {
-            minimum_bits: p.bits.saturating_mul(2),
-            context: format!("endpoint matching matrix: {e}"),
-        })?;
-        context.cancellation.check()?;
-        let exact = |a: &C| {
-            let mut ball =
-                ComplexBall::new(RealBall::exact(a.re.clone()), RealBall::exact(a.im.clone()));
-            // Float arithmetic may retain only a few significant bits in an
-            // almost-cancelled imaginary component. Enclose that stored dyadic
-            // at the requested precision before native complex ball products;
-            // its metadata must not force all real operations down to two bits.
-            ball.set_precision(p.bits);
-            ball
-        };
+        let (b, inverse_error) = conditioned_inverse(&matching, p, context)?;
+        let exact = |a: &C| stored_ball(a, p);
+        let upper = |a: &ComplexBall| ball_upper(a, p);
         let ball_field = FloatField::from_rep(exact(&p.zero()));
-        let a = matching.map(exact, ball_field.clone());
-        let b = inverse.map(exact, ball_field.clone());
-        let identity = Matrix::identity(n as u32, ball_field.clone());
-        let residual = &identity - &(&a * &b);
-        let absolute = |a: &Float| {
-            if *a < p.real(0) {
-                -a.clone()
-            } else {
-                a.clone()
-            }
-        };
-        let upper = |a: &ComplexBall| {
-            absolute(&a.re.center)
-                .add_round(&a.re.radius, p.bits, RoundingDirection::Up)
-                .add_round(&absolute(&a.im.center), p.bits, RoundingDirection::Up)
-                .add_round(&a.im.radius, p.bits, RoundingDirection::Up)
-        };
-        let norm = |a: &Matrix<FloatField<ComplexBall>>| {
-            (0..a.nrows())
-                .map(|i| {
-                    (0..a.ncols()).fold(p.real(0), |sum, j| {
-                        sum.add_round(
-                            &upper(&a[(i as u32, j as u32)]),
-                            p.bits,
-                            RoundingDirection::Up,
-                        )
-                    })
-                })
-                .reduce(|a, b| if a > b { a } else { b })
-                .unwrap_or_else(|| p.real(0))
-        };
-        let defect = norm(&residual);
-        if !defect.is_finite() || defect >= p.real(1) / p.real(2) {
-            return Err(Error::InsufficientPrecision {
-                minimum_bits: p.bits.saturating_mul(2),
-                context: "endpoint matching inverse has an unresolved residual".into(),
-            });
-        }
-        let inverse_error = norm(&b)
-            .mul_round(&defect, p.bits, RoundingDirection::Up)
-            .div_round(
-                &p.real(1)
-                    .sub_round(&defect, p.bits, RoundingDirection::Down),
-                p.bits,
-                RoundingDirection::Up,
-            );
         let mut lift = Matrix::new(n as u32, physical as u32, ball_field.clone());
         for (block, &mask) in self.lifted.monomials.iter().enumerate() {
             let factor = branches
@@ -757,4 +701,74 @@ impl AlgebraicEndpointExpansion {
             .collect::<Result<Vec<_>>>()?;
         Ok(values.chunks(self.size).map(<[C]>::to_vec).collect())
     }
+}
+
+fn stored_ball(a: &C, p: Precision) -> ComplexBall {
+    let mut ball = ComplexBall::new(RealBall::exact(a.re.clone()), RealBall::exact(a.im.clone()));
+    ball.set_precision(p.bits);
+    ball
+}
+fn ball_upper(a: &ComplexBall, p: Precision) -> Float {
+    let absolute = |a: &Float| {
+        if *a < p.real(0) {
+            -a.clone()
+        } else {
+            a.clone()
+        }
+    };
+    absolute(&a.re.center)
+        .add_round(&a.re.radius, p.bits, RoundingDirection::Up)
+        .add_round(&absolute(&a.im.center), p.bits, RoundingDirection::Up)
+        .add_round(&a.im.radius, p.bits, RoundingDirection::Up)
+}
+
+fn conditioned_inverse(
+    matching: &Matrix<FloatField<C>>,
+    p: Precision,
+    context: &RunContext,
+) -> Result<(Matrix<FloatField<ComplexBall>>, Float)> {
+    context.cancellation.check()?;
+    let n = matching.nrows();
+    let inverse = matching.inv().map_err(|e| Error::InsufficientPrecision {
+        minimum_bits: p.bits.saturating_mul(2),
+        context: format!("endpoint matching matrix: {e}"),
+    })?;
+    context.cancellation.check()?;
+    let exact = |a: &C| stored_ball(a, p);
+    let ball_field = FloatField::from_rep(exact(&p.zero()));
+    let a = matching.map(exact, ball_field.clone());
+    let b = inverse.map(exact, ball_field.clone());
+    let identity = Matrix::identity(n as u32, ball_field.clone());
+    let residual = &identity - &(&a * &b);
+    let upper = |a: &ComplexBall| ball_upper(a, p);
+    let norm = |a: &Matrix<FloatField<ComplexBall>>| {
+        (0..a.nrows())
+            .map(|i| {
+                (0..a.ncols()).fold(p.real(0), |sum, j| {
+                    sum.add_round(
+                        &upper(&a[(i as u32, j as u32)]),
+                        p.bits,
+                        RoundingDirection::Up,
+                    )
+                })
+            })
+            .reduce(|a, b| if a > b { a } else { b })
+            .unwrap_or_else(|| p.real(0))
+    };
+    let defect = norm(&residual);
+    if !defect.is_finite() || defect >= p.real(1) / p.real(2) {
+        return Err(Error::InsufficientPrecision {
+            minimum_bits: p.bits.saturating_mul(2),
+            context: "endpoint matching inverse has an unresolved residual".into(),
+        });
+    }
+    let inverse_error = norm(&b)
+        .mul_round(&defect, p.bits, RoundingDirection::Up)
+        .div_round(
+            &p.real(1)
+                .sub_round(&defect, p.bits, RoundingDirection::Down),
+            p.bits,
+            RoundingDirection::Up,
+        );
+    Ok((b, inverse_error))
 }
