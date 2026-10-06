@@ -101,12 +101,18 @@ top-level release checks across 27 targets, six separate child-process checks,
 formatting and strict Python/stub Clippy. The scientific and timing evidence
 retains the isolated source revision; no broader upstream ratio is claimed.
 
-The native boundary-integrand adapter now delegates rational decomposition,
+The native boundary-integrand adapter now delegates Gaussian-rational decomposition,
 completion and numerator rewriting to HEPKit's shared family owner. Its isolated
 gate passes 341 release checks, formatting and strict Python/stub Clippy; a fresh
 planar anchor passes all 240 comparisons at 20 digits in 337.42 seconds with
-empty numerical and reduction caches. Combined main validation is pending.
-Native Gaussian coefficient support is the next adapter extension. Separately,
+empty numerical and reduction caches. The subsequent
+[combined main compatibility gate](../reports/validation/2026-10-06-symbolica-community-update/summary.json)
+passes 447 top-level release tests across 51 targets, six separate child checks,
+formatting and strict Python/stub Clippy with official Symbolica community
+`6defcca9` and native Gaussian owner `b96600b`. It verifies all 293 recorded source
+and fixture inputs and fixes the empty-exclusion-list preparation regression.
+The frozen publication wheel and scientific measurements retain their original
+revisions. Separately,
 the [epsilon-singular transport probe](../reports/validation/2026-10-06-epsilon-singular-transport-probe/README.md)
 demonstrates why a generic sampled physical-transport route also needs tighter
 boundary-error propagation: exact coupled cancellations can make the scalar

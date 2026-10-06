@@ -1,0 +1,52 @@
+{
+  "scope": "Existing binary isolated reproductions and source review; no builds or source edits. Root owns fix and final validation.",
+  "cases": [
+    {
+      "label": "current-frozen",
+      "source_commit": "010dba37f862fcbf02d17d8e6cfdbd8527616067",
+      "binary": "/common/dev/amflow/target/release/deps/supplied_flow-bf1b0a61a06baf71",
+      "binary_sha256": "44776df4d8674941dd4db3f32b7870cf1d8d35aea5b349457bc44e5b484efd75",
+      "command": [
+        "/common/dev/amflow/target/release/deps/supplied_flow-bf1b0a61a06baf71",
+        "--exact",
+        "partial_deformation_stays_fixed_and_targets_precede_endpoint_extraction",
+        "--nocapture"
+      ],
+      "exit_code": 101,
+      "log": "/common/dev/amflow/target/symbolica-community-update-2026-10-06/supplied-flow-isolated.log",
+      "log_sha256": "c65dd163d0828c25276d116d195a72f194d59b3b11d062390332abff0978cba4"
+    },
+    {
+      "label": "old-frozen",
+      "source_commit": "bfb1093f738ee68b488cd7952b2a24b6e835ddb4",
+      "binary": "/common/dev/amflow/target/release/deps/supplied_flow-e59b483b5e0103c6",
+      "binary_sha256": "6bf0d61fec8e8e4287861845596b85afb2ec32b0e3dc32d4602de6fe70244137",
+      "command": [
+        "/common/dev/amflow/target/release/deps/supplied_flow-e59b483b5e0103c6",
+        "--exact",
+        "partial_deformation_stays_fixed_and_targets_precede_endpoint_extraction",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "log": "/common/dev/amflow/target/symbolica-community-update-2026-10-06/supplied-flow-old-isolated.log",
+      "log_sha256": "790d3a301fc95ab335c6bed5f597ee6a7ee75eee2d2bb5a4f4524d80efe3c99b"
+    }
+  ],
+  "fixture_source_unchanged": true,
+  "finding": "Deterministic local prepared-row integration regression. Empty declared guard list is not an empty physical differential system.",
+  "causal_chain": [
+    "Fixture supplied reduced.nonzero_conditions is empty; physical_conditions::canonical_conditions preserves that empty collection.",
+    "PreparedFlow::evaluate successfully compiles its nonempty 2x2 system, then unconditionally calls compiled.exclude_polynomials(&guards) at engine.rs:273.",
+    "exclude_polynomials constructs zero guard rows and calls compile_rows at ode.rs:455.",
+    "PreparedRows::new rejects empty rows at prepared.rs:33, whereas bfb1093 legacy compile_rows returned an empty auxiliary exclusion system.",
+    "The failure occurs before constructing Frobenius infinity or calling the recursive boundary provider/native IntegralFamily decomposition."
+  ],
+  "minimal_fix": "Return Ok(()) immediately when exclude_polynomials receives an empty guard list; retain PreparedRows rejection of empty actual compilation rows and retain nonzero guard validation.",
+  "upstream_causality": "No evidence implicates Gaussian owner or Symbolica wildcard-series change; this exact path fails without reaching either affected algorithm.",
+  "shared_state_required": false,
+  "recommended_validation": [
+    "Existing supplied_flow public 20-digit tadpole regression",
+    "Direct empty exclusion no-op preserving compiled poles/source",
+    "Existing nonzero guard domain/pole and zero-guard refusal regressions"
+  ]
+}

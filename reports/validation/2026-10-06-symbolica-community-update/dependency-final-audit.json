@@ -1,0 +1,238 @@
+{
+  "schema": 1,
+  "audit_utc": "2026-10-06T06:27:13.231376+00:00",
+  "scope": "Read-only source, existing resolved metadata and documentation audit; no Cargo invocation, builds, tests, source edits or publication runtime changes.",
+  "main_commit": "010dba37f862fcbf02d17d8e6cfdbd8527616067",
+  "symbolica_revision": "6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+  "hepkit_owner_revision": "b96600b0085d9ddfa9e6acbc11fa72ec6163253c",
+  "rustred_revision": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+  "source_status": {
+    "tracked_worktree_clean": true,
+    "frozen_input_count": 293,
+    "frozen_input_mismatches": [],
+    "audited_sha256": {
+      "Cargo.toml": "0da45793c1b8a08437da46b206ef32d3546629d3e1d3b84742b4f85aafce32cf",
+      "Cargo.lock": "35263caf736a5330891d517cc57ad6cc13f39d2de8135bc4f47775f8ce71c464",
+      "build.rs": "73a572d44bcd9adbea3d6818f4a5125ba6a2670ec1436ecc0e45644b109a3edf",
+      "build_support/source_fingerprint.rs": "595dd5b8071bf54068484cb7911dc6c7d5441635c54283c239126daedb3a779b",
+      "src/cache.rs": "20196933dfb0ab9e379fd8e674d2b371f1de980aaa04b18f0258803e2331028c",
+      "src/native.rs": "e13c3ea24e1d603da3b4fcb7b038823ff4741f1dff9319944f22cca0784c74be",
+      "src/reduction.rs": "821bd82d402822a22aafae437ff20dac5f2fcacf97c8b1b1dd5ec02732cde36d",
+      "src/transport_cache.rs": "5a3fa0883ab596e22a81294a6be84c6eeb18b8076d80a6f6af1499d088771842",
+      "tests/source_fingerprint.rs": "4e53ae329426bc8d62f60fed7ff41e99b7f2a074f0e590715949cdbbea45ea3d",
+      "README.md": "b925a6d214eca1dcbcf6b2a49709b6ff613946761f01a22cdd14c41cd5387017",
+      "docs/dependency-embedding.md": "32a930edb278c72af1143f34390d6825a86a3b4796bfb3a4aa5d7cbfd77c712d",
+      "docs/hepkit-integration.md": "6fcea93d9ec3922ddf2e31bb1544e49fefd2410d4c90d84f905af87bcd85c3aa",
+      "docs/native-boundary-integrands.md": "1a69c09436d7f5278a2b73d398d0fcb81c2343781fa6af5f4fe168651517c58f",
+      "docs/python-notebook-status.md": "fde282e13d90429e0c2737a75923859fc22e0d02168ffc72cf2096e16946e703",
+      "docs/clean-community-build.md": "9ea9c4485fe204872ff0dd0dbffc62f36deeb4fdedba7ab14c685a7bd864f26e"
+    }
+  },
+  "dependency_graph": {
+    "manifest_owner_pins": 24,
+    "resolved_owner_packages": [
+      "feynkit-amplitude",
+      "feynkit-cff",
+      "feynkit-generator",
+      "feynkit-graph",
+      "feynkit-kinematics",
+      "feynkit-model",
+      "feynkit-py",
+      "feynkit-tensor",
+      "gammaloop-workspace-hack",
+      "idenso",
+      "kurvst",
+      "linnest",
+      "linnet",
+      "spenso",
+      "spenso-hep-lib",
+      "spenso-macros",
+      "spynso3",
+      "symbolica-utils",
+      "three-dimensional-reps",
+      "typst-library",
+      "typst-renderer",
+      "typst-svg"
+    ],
+    "unused_owner_patches": [
+      "feynkit-ufo",
+      "linnet-py"
+    ],
+    "native_package_counts": {
+      "feynkit-amplitude": 1,
+      "feynkit-cff": 1,
+      "feynkit-generator": 1,
+      "feynkit-graph": 1,
+      "feynkit-kinematics": 1,
+      "feynkit-model": 1,
+      "feynkit-py": 1,
+      "feynkit-tensor": 1,
+      "gammaloop-workspace-hack": 1,
+      "graphica": 1,
+      "idenso": 1,
+      "kurvst": 1,
+      "linnest": 1,
+      "linnet": 1,
+      "numerica": 1,
+      "pyo3": 1,
+      "rustred": 1,
+      "rustred-order": 1,
+      "spenso": 1,
+      "spenso-hep-lib": 1,
+      "spenso-macros": 1,
+      "spynso3": 1,
+      "symbolica": 1,
+      "symbolica-utils": 1,
+      "three-dimensional-reps": 1,
+      "typst-library": 1,
+      "typst-renderer": 1,
+      "typst-svg": 1
+    },
+    "duplicate_native_owners": false,
+    "resolved_metadata": "/common/dev/amflow/target/release/build/symbolica-amflow-7d91f93e51f25f3e/out/dependency-metadata.json",
+    "resolved_metadata_sha256": "8246a05f09f4c3d2b980e769b38dd1a35641a5bc60c249fc57ed466e31803469",
+    "resolved_shared_algebra": {
+      "symbolica": {
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+        "features": [
+          "bincode",
+          "float-mpfr",
+          "integer-gmp",
+          "native_code_generation",
+          "numpy",
+          "pyo3",
+          "pyo3-stub-gen",
+          "pyo3-stub-gen-derive",
+          "python_export",
+          "python_stubgen",
+          "serde",
+          "tracing_max_level_info"
+        ]
+      },
+      "numerica": {
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+        "features": [
+          "bincode",
+          "float-mpfr",
+          "integer-gmp",
+          "numpy",
+          "pyo3",
+          "pyo3-stub-gen",
+          "python",
+          "python_stubgen",
+          "serde"
+        ]
+      },
+      "graphica": {
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+        "features": []
+      },
+      "rustred": {
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+        "features": []
+      },
+      "rustred-order": {
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+        "features": []
+      },
+      "pyo3": {
+        "version": "0.28.3",
+        "source": "registry+https://github.com/rust-lang/crates.io-index",
+        "features": [
+          "abi3",
+          "default",
+          "eyre",
+          "inventory",
+          "macros",
+          "multiple-pymethods",
+          "num-complex",
+          "py-clone",
+          "pyo3-macros"
+        ]
+      }
+    },
+    "reconstruction_enabled": false,
+    "source_checkout_tracked_changes": false
+  },
+  "historical_metadata": {
+    "path": "target/symbolica-community-update-2026-10-06/metadata.json",
+    "sha256": "57aa029912e17436594df3bdf7727ddb9e09130c95bb538099f1a506cc8aad57",
+    "scope": "Initial Symbolica update graph: 6defcca plus HEPKit 8bfd027. Preserved; not final b966 graph evidence."
+  },
+  "cache_identity": {
+    "emitted_digests": {
+      "DEPENDENCY_SOURCE_DIGEST": "f76203907801bdb985fb3a77b521a7b702756c5cdc59a5eef27cd69cb8e1b720",
+      "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+      "PORT_SOURCE_DIGEST": "cad1d5c116a22333113e5267214bdddaa70d5366c5010cd71c6866d7f5ade89c"
+    },
+    "build_output": "/common/dev/amflow/target/release/build/symbolica-amflow-7d91f93e51f25f3e/output",
+    "build_output_sha256": "7a04da2f6cf371013bffdbbdfdc7d4d6d93cc8e7759b77545fc418e5e13c81f3",
+    "behavior": [
+      "Owning host manifest/lock and Cargo configuration select the actual locked offline resolved graph; actual optional features are checked against Cargo feature environment.",
+      "Git/path dependency source contents, package identities, resolved features, ancestor manifests, Cargo home configuration and RustRed runtime arities enter the dependency digest. Registry checksums come from the owning lock.",
+      "Owned src/build_support/build.rs/Cargo.toml and embedded gg-hg fixture contents enter the implementation digest; directory watching includes newly added source files. Build products and Git administration are excluded.",
+      "Reduction and DE cache keys include dependency and implementation digests; native family/reduction identities include dependency and RustRed digests.",
+      "Physical BoundaryIdentity and saved cache envelopes carry both implementation and dependency digests; load rejects differing digests or schema. Existing binary schema remains 7."
+    ],
+    "references": [
+      "build.rs:17",
+      "build.rs:75",
+      "build_support/source_fingerprint.rs:50",
+      "src/cache.rs:230",
+      "src/cache.rs:382",
+      "src/native.rs:80",
+      "src/reduction.rs:172",
+      "src/transport_cache.rs:756",
+      "src/transport_cache.rs:2496",
+      "src/transport_cache.rs:2554"
+    ],
+    "validation_limit": "Source and emitted-build evidence only in this audit; parent owns the running combined consumer test gate."
+  },
+  "publication_separation": {
+    "frozen_symbolica_revision": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "frozen_hepkit_revision": "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+    "frozen_rustred_revision": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "consistent_primary_documents": [
+      "README.md",
+      "docs/dependency-embedding.md",
+      "docs/hepkit-integration.md",
+      "docs/clean-community-build.md"
+    ],
+    "historical_acceptance_transferred_to_new_build": false,
+    "publication_runtime_modified": false
+  },
+  "cpp_export_fix": {
+    "upstream_commit": "6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+    "reviewed_files": [
+      "src/evaluate/export.rs",
+      "tests/cpp_transcendentals.rs"
+    ],
+    "change": "Build complex constants arithmetically from wrapped real/imaginary parts, preserving exact divisions and custom scalar wrappers instead of nesting complex values into the two-real-component constructor.",
+    "upstream_tests": [
+      "complex_constants_compile_in_both_translation_modes",
+      "complex_constants_preserve_custom_wrapper_precision"
+    ],
+    "coverage": "Direct and linear translations, exact rational and floating coefficients, complex/real constants, custom long-double wrapper precision.",
+    "existing_rustflow_example_directly_exercises_fix": false,
+    "existing_reproducer": "tools/mre/symbolica-complex-cpp/reproduce.py",
+    "reproducer_limit": "Uses the installed Symbolica Python extension. Running against frozen c340 would retest the old defect, not the new 6def fix. examples/symbolica_exact_division.rs covers AtomField division, not C++ export.",
+    "build_performed": false
+  },
+  "blockers": [],
+  "nonblocking_documentation_followups": [
+    {
+      "path": "docs/native-boundary-integrands.md:46",
+      "finding": "The phrase Symbolica and RustRed revisions are unchanged describes the isolated Gaussian patch; current main separately updates Symbolica to 6def. Clarify its historical scope or link the current embedding pins."
+    },
+    {
+      "path": "docs/python-notebook-status.md:10",
+      "finding": "The first table still says constrained registered-root endpoint sectors remain under development. Current main admits the proved Gaussian-leading slice; general leading constants/dimensional sectors remain open. The frozen-wheel limitation itself is accurate."
+    }
+  ],
+  "gate_status": "Parent reported strict all-target release python_stubgen Clippy and fmt passed; 51-target combined suite was still compiling. This audit claims no terminal result for that running suite."
+}

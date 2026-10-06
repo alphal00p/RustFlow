@@ -103,8 +103,8 @@ exact preparation, sheet constraints, Python interfaces and cache behavior with
 ordinary AMF/FT evaluation, conditioning and existing physical transport. This
 targeted gate is separate from the isolated full gg→hg scientific acceptance
 and the frozen community notebook runtime. The native partial-fraction adapter
-and its updated HEPKit owner have since been integrated; combined main validation
-is pending, while the isolated evidence below retains its exact tested revision.
+and its updated HEPKit owner have since been integrated; the isolated evidence
+below retains its exact tested revision.
 
 The [native boundary-integrand milestone](../reports/validation/2026-10-06-native-boundary-integrands/summary.json)
 passes 341 top-level release tests across 36 targets, six separate child checks,
@@ -116,6 +116,19 @@ caches, generates all 240 coefficients through epsilon four, and passes the
 20-digit comparison in 337.42 seconds. Reference values are loaded only after
 native success. This is one Euclidean anchor, not a new full amplitude timing;
 the frozen community publication wheel remains unchanged.
+
+The [Symbolica community update and native Gaussian integration](../reports/validation/2026-10-06-symbolica-community-update/summary.json)
+passes **447 top-level release tests across 51 targets**, with six successful
+child-process checks recorded separately and six opt-in tests ignored.
+Formatting and strict all-target Python/stub Clippy pass. All 293 recorded source
+and fixture inputs match tested commit `fa5fe1b` before and after validation.
+Symbolica, Numerica and Graphica share official community revision `6defcca9`;
+native family operations share HEPKit owner `b96600b`. Gaussian-rational partial
+fractions and rank extraction use these native owners. The initial gate exposed
+a local preparation regression for empty exclusion lists; the existing supplied
+flow test passes after restoring the empty-list no-op. The failed gate and its
+diagnosis remain in the report. This compatibility run does not rebuild the
+publication wheel or replace the complete paper and gg→hg scientific runs.
 
 The [epsilon-singular transport probe](../reports/validation/2026-10-06-epsilon-singular-transport-probe/README.md)
 records a remaining generality limitation: the central solution of a coupled
@@ -742,7 +755,7 @@ Ordinary Taylor propagation clears denominators exactly per matrix row and
 recurs over finite polynomial coefficients, omitting structural zeros. Tests
 compare these coefficients against the independent rational-series recurrence
 at complex centers. Tail and differential-equation defect checks are unchanged.
-The pinned Symbolica `main` revision also checks root corrections and relative
+The pinned Symbolica `community` revision also checks root corrections and relative
 coefficient backward error, fixing the coefficient-scale-dependent convergence
 report reproduced in `repros/symbolica-root-scaling`. Scaling and root-set
 validation remain in the AMFlow adapter. Cache keys include the manifest and

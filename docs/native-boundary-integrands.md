@@ -43,9 +43,10 @@ also covers momentum and Symanzik coefficient grouping. The previous owner could
 lose an expanded symbolic coefficient such as `(a+b)/10^1000` during statistical
 zero testing and return a loop-dependent weight. The direct regression checks
 both scalar weights and exact reconstruction; reconstruction alone would miss
-that failure. All native crates share one pinned owner revision; Symbolica and
-RustRed revisions are unchanged. Source-sensitive cache fingerprints therefore
-change, while the binary schema does not.
+that failure. All native crates share one pinned owner revision. The isolated
+owner update retained its Symbolica and RustRed revisions; the later standalone
+Symbolica update is recorded in [dependency embedding](dependency-embedding.md).
+Source-sensitive cache fingerprints change, while the binary schema does not.
 
 This is an ownership and exactness improvement within the boundary recursion.
 It does not establish automatic evaluation of every topology or remove the

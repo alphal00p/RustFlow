@@ -1,0 +1,66 @@
+{
+  "symbolica_revision": "6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+  "lock_change_only_shared_revision": true,
+  "single_owners": {
+    "symbolica": [
+      {
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#6defcca968ca8411977fb1f641a9dee49ee7b7a7"
+      }
+    ],
+    "numerica": [
+      {
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#6defcca968ca8411977fb1f641a9dee49ee7b7a7"
+      }
+    ],
+    "graphica": [
+      {
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#6defcca968ca8411977fb1f641a9dee49ee7b7a7"
+      }
+    ],
+    "rustred": [
+      {
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+      }
+    ],
+    "feynkit-graph": [
+      {
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=8bfd027a8df276ab640adf1f238833bbcf9bb9c1#8bfd027a8df276ab640adf1f238833bbcf9bb9c1"
+      }
+    ],
+    "feynkit-py": [
+      {
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=8bfd027a8df276ab640adf1f238833bbcf9bb9c1#8bfd027a8df276ab640adf1f238833bbcf9bb9c1"
+      }
+    ],
+    "linnet": [
+      {
+        "version": "0.17.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=8bfd027a8df276ab640adf1f238833bbcf9bb9c1#8bfd027a8df276ab640adf1f238833bbcf9bb9c1"
+      }
+    ],
+    "spenso": [
+      {
+        "version": "0.6.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=8bfd027a8df276ab640adf1f238833bbcf9bb9c1#8bfd027a8df276ab640adf1f238833bbcf9bb9c1"
+      }
+    ],
+    "idenso": [
+      {
+        "version": "0.3.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=8bfd027a8df276ab640adf1f238833bbcf9bb9c1#8bfd027a8df276ab640adf1f238833bbcf9bb9c1"
+      }
+    ],
+    "pyo3": [
+      {
+        "version": "0.28.3",
+        "source": "registry+https://github.com/rust-lang/crates.io-index"
+      }
+    ]
+  }
+}
