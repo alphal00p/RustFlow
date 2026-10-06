@@ -1,0 +1,118 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-10-06",
+  "base_commit": "d44d11b97a64b759bafe0502556dc37d772bbbcd",
+  "implementation": "Generic partial auxiliary-mass placement for complete positive-energy cut families with independent surviving soft poles",
+  "compiled_source_fingerprints": {
+    "DEPENDENCY_SOURCE_DIGEST": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "6c364431ea274ac7cc44762475c47b031074c3c08694ba23d939a60fc0052f2a"
+  },
+  "frozen_source_hashes_checked_after_tests": true,
+  "artifact_hashes": {
+    "target/release/deps/partial_cut_boundaries-b64fd52fd85fe7fe": {
+      "sha256": "5975943a679c064beccae8269a1f1ec55d7fd66ae5d86bb04c5a8aa1b8267420",
+      "bytes": 787779632
+    },
+    "target/release/deps/libsymbolica_amflow-1a547349a172a295.rlib": {
+      "sha256": "fec2744ff1518f3f9532c232768072021afb2315608b06019e77a32526ed2d16",
+      "bytes": 490571428
+    },
+    "target/release/deps/symbolica_amflow-e0823456bc226c98": {
+      "sha256": "c7692d4e9752c8e60ca754df7577f08c6a0e4f5df210af1a5ee91b1061d9dfda",
+      "bytes": 744442984
+    }
+  },
+  "validation": {
+    "release_unit_command": "cargo test --locked --release --lib cut_ -- --nocapture --test-threads=1",
+    "release_unit_passed": 7,
+    "release_command": "cargo test --locked --release --test partial_cut_boundaries --test mixed_cut_flow --test native_cut_interfaces --test massless_phase_space -- --nocapture --test-threads=1",
+    "release_passed": 25,
+    "failed": 0,
+    "ignored": 0,
+    "clippy_command": "cargo clippy --locked --all-targets -- -D warnings",
+    "clippy_passed": true,
+    "fmt_passed": true,
+    "diff_check_passed": true,
+    "source_scope": "Native generic boundary implementation. Python explicit-slot settings will be a separate interface milestone.",
+    "peer_review": "Root read-only review found no blocker in exact hard-space admission, real coordinates, pole rank/provenance, native zero certificates or strict recursion decrease."
+  },
+  "native_comparison": {
+    "epsilon_samples_exact": [
+      "1/13",
+      "1/17"
+    ],
+    "asserted_relative_digits": 20,
+    "requested_digits": 20,
+    "guard_digits": 50,
+    "series_order": 80,
+    "refinement_guard_digits": 70,
+    "refinement_series_order": 112,
+    "refined_sample": "1/13",
+    "independent_series_terms": 140,
+    "normalized_tail_bound": "3^(-140)/(1-1/3)",
+    "actual_values_and_relative_residuals": "release-tests.log.gz"
+  },
+  "nonfactorized_case": {
+    "cuts": [
+      "r^2",
+      "l^2",
+      "(P-r-l)^2"
+    ],
+    "uncut": [
+      "k^2-2",
+      "(k-r-l)^2-3"
+    ],
+    "P_squared": "1",
+    "prescriptions": [
+      "insensitive",
+      "insensitive",
+      "+i0"
+    ],
+    "future_channel": "P",
+    "native_partial_slots_zero_based": [
+      3
+    ],
+    "normalization": "Lorentz-invariant positive-energy three-body phase space times d^D k/(i pi^(D/2)), without EulerGamma, flux or symmetry factors."
+  },
+  "timings_seconds": {
+    "native_partial_preparation": 0.430852998,
+    "native_partial_first_sample": 1.235109549,
+    "native_all_preparation": 0.59245024,
+    "native_all_first_sample": 0.844756174,
+    "reference_partial_solve": 146.248401,
+    "reference_all_solve": 125.876374,
+    "scope": "Single runs from empty numerical/symbolic caches. Native reports PreparedCutFlow preparation plus first finite-epsilon evaluation; reference reports SolveIntegrals. Compilation and runtime startup excluded. Different internal precision/order profiles and algorithmic work; not a claim of broad performance parity."
+  },
+  "reference_comparison": {
+    "upstream_commit": "26005517a288086c4cb4d1b26d829691bc088485",
+    "requested_and_recorded_decimal_digits": 24,
+    "asserted_scaled_absolute_digits": 20,
+    "scaled_error_definition": "abs(actual-expected)/max(1,abs(expected))",
+    "working_decimal_digits": 48,
+    "truncated_order": 96,
+    "extra_order": 50,
+    "partial_scaled_error": "2.620683360389902996447656606090923777910282471708929927596116`46.603833879812555*^-36",
+    "all_scaled_error": "3.8744962845046394408972182138759901624528558471100829954296857`47.773634577345646*^-35",
+    "precision_note": "Residuals against the 80-digit comparison series do not upgrade the reference values beyond their recorded 24-digit precision.",
+    "initial_run": "Preserved in initial-partial-oracle; numerical comparison passed, but its configuration collector included Kira directories. Fixed partial-oracle and all-oracle contain verified regular config files and checked root-system placements."
+  },
+  "reuse_audit": [
+    "Existing regions::enumerate_regions and expand_region",
+    "Symbolica Matrix row reduction and determinants via existing algebra owner",
+    "Existing integrand factor_region and native HEPKit tensor projector",
+    "Existing RustRed cut restrictions and ProvedZero certificate",
+    "Existing ordinary RecursiveBoundary and phase-space terminals",
+    "Existing shared finite-epsilon flow and Laurent fitter"
+  ],
+  "unsupported": [
+    "Dependent surviving soft poles requiring cut-preserving partial fractions",
+    "Incomplete positive-energy final states",
+    "Mixed-sign virtual prescriptions",
+    "Uncertified real phase-space poles",
+    "Massive N-body leaves beyond two bodies",
+    "Linear cut-flow propagators",
+    "Algebraic-only distribution cut automatic boundaries"
+  ],
+  "cache_scope": "No persistent numerical schema change. Bounded in-memory child value memo is scoped to one evaluation, epsilon, working precision and fixed backend/channel/options; source-sensitive symbolic cache ownership is unchanged."
+}

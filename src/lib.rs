@@ -13,6 +13,7 @@ pub mod common_mass;
 pub mod contour;
 pub mod cut_flow;
 pub mod cut_projection;
+mod cut_regions;
 pub mod cuts;
 pub mod diffexp;
 pub mod engine;

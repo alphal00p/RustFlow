@@ -1,0 +1,98 @@
+{
+	"upstream_commit":"26005517a288086c4cb4d1b26d829691bc088485",
+	"case":"partial_three_body",
+	"mode":"sample",
+	"requested_amf_mode":"Propagator",
+	"actual_system_configurations":[
+		{
+			"path":"cache\/partialcut_amflow\/10\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/1\/config",
+			"loops":"{r, l, k}",
+			"propagators":"{r^2, l^2, (-l + p - r)^2, -2 - eta + k^2, -3 + (k - l - r)^2, (p - r)^2, (-l + p)^2, (k - r)^2, (-k + p)^2}",
+			"eta_positions_one_based":[
+				4
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/2\/config",
+			"loops":"{r, l, k}",
+			"propagators":"{l^2, r^2, -3 - eta + (-k + l + r)^2, (l - p + r)^2, (l + r)^2, (k + r)^2, (k + l)^2, (p + r)^2, (k + p)^2}",
+			"eta_positions_one_based":[
+				3
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/3\/config",
+			"loops":"{r, l, k}",
+			"propagators":"{-1 + k^2, -eta + l^2, r^2, (l - p + r)^2, (l + r)^2, (k + r)^2, (k + l)^2, (p + r)^2, (k + p)^2}",
+			"eta_positions_one_based":[
+				2
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/4\/config",
+			"loops":"{l}",
+			"propagators":"{-eta + l^2, k^2 + 2*k*l + l^2}",
+			"eta_positions_one_based":[
+				1
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/5\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/6\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/7\/config",
+			"loops":"{r, l, k}",
+			"propagators":"{-1 + k^2, -eta + l^2, r^2, (l - p + r)^2, (l + r)^2, (k + r)^2, (k + l)^2, (p + r)^2, (k + p)^2}",
+			"eta_positions_one_based":[
+				2
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/8\/config",
+			"loops":"{l}",
+			"propagators":"{-eta + l^2, k^2 + 2*k*l + l^2}",
+			"eta_positions_one_based":[
+				1
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/9\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		}
+	],
+	"epsilon_exact":"1\/13",
+	"requested_digits":24,
+	"asserted_digits":20,
+	"wolfram_version":"15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+	"coefficients":[
+		"0.00326250116740301702407430069708829546`24."
+	],
+	"expected":[
+		"0.003262501167403017024074300697088292842609102045865923956167549621566745545146881728791731973766`80."
+	],
+	"scaled_absolute_errors":[
+		"2.620683360389902996447656606090923777910282471708929927596116`46.603833879812555*^-36"
+	],
+	"independent_series_absolute_tail_bound":"7.6836433196017110770651013565426046947632027126926731885264239358322668868288415973839405870961644859162`80.*^-70",
+	"solve_wall_seconds":1.46248401e2,
+	"analytic_check_passed":true,
+	"normalization":"Complete massless three-body Lorentz-invariant phase space times d^D k\/(i Pi^(D\/2)); no EulerGamma, flux or symmetry factor",
+	"independence":"Comparison-only double-beta\/Feynman-parameter series; no numerical reference boundary enters the evaluator"
+}

@@ -298,7 +298,7 @@ fn weighted_three_body_flow_matches_beta_integral() -> Result<()> {
 }
 
 #[test]
-fn phase_space_pole_and_partial_cut_deformation_are_rejected() {
+fn phase_space_pole_and_deformation_of_a_cut_are_rejected() {
     let backend = RustRedBackend::default();
     let context = RunContext::default();
     let target = Integral(vec![1, 1, 1, 1, 0]);
@@ -310,7 +310,7 @@ fn phase_space_pole_and_partial_cut_deformation_are_rejected() {
     options.mass_mode = MassMode::Propagators(vec![0]);
     assert!(
         matches!(PreparedCutFlow::new(&mixed_family(), &channel(), &[target],
-        &KinematicPoint::default(), &backend, &options, &context), Err(Error::Unsupported(message)) if message.contains("every uncut"))
+        &KinematicPoint::default(), &backend, &options, &context), Err(Error::InvalidInput(message)) if message.contains("uncut physical"))
     );
 }
 

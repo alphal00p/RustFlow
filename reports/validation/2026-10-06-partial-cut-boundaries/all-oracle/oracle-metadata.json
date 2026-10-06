@@ -1,0 +1,110 @@
+{
+	"upstream_commit":"26005517a288086c4cb4d1b26d829691bc088485",
+	"case":"all_three_body",
+	"mode":"sample",
+	"requested_amf_mode":"All",
+	"actual_system_configurations":[
+		{
+			"path":"cache\/partialcut_amflow\/10\/config",
+			"loops":"{r}",
+			"propagators":"{-eta + r^2, -eta + l^2 + 2*l*r + r^2}",
+			"eta_positions_one_based":[
+				1,
+				2
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/11\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/12\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/1\/config",
+			"loops":"{r, l, k}",
+			"propagators":"{r^2, l^2, (-l + p - r)^2, -2 - eta + k^2, -3 - eta + (k - l - r)^2, (p - r)^2, (-l + p)^2, (k - r)^2, (-k + p)^2}",
+			"eta_positions_one_based":[
+				4,
+				5
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/2\/config",
+			"loops":"{r, l, k}",
+			"propagators":"{-1 + k^2, -eta + l^2, -eta + r^2, -eta + (l - p + r)^2, (l + r)^2, (k + r)^2, (k + l)^2, (p + r)^2, (k + p)^2}",
+			"eta_positions_one_based":[
+				2,
+				3,
+				4
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/3\/config",
+			"loops":"{r, l, k}",
+			"propagators":"{-1 - eta + k^2, -1 + l^2, -1 + (k + l)^2, -1 + r^2, (l + r)^2, (k + r)^2, (p + r)^2, (l + p)^2, (k + p)^2}",
+			"eta_positions_one_based":[
+				1
+			]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/4\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/5\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/6\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/7\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/8\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		},
+		{
+			"path":"cache\/partialcut_amflow\/9\/config",
+			"loops":"{}",
+			"propagators":"{}",
+			"eta_positions_one_based":[]
+		}
+	],
+	"epsilon_exact":"1\/13",
+	"requested_digits":24,
+	"asserted_digits":20,
+	"wolfram_version":"15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+	"coefficients":[
+		"0.0032625011674030170240743006970882541`24."
+	],
+	"expected":[
+		"0.003262501167403017024074300697088292842609102045865923956167549621566745545146881728791731973766`80."
+	],
+	"scaled_absolute_errors":[
+		"3.8744962845046394408972182138759901624528558471100829954296857`47.773634577345646*^-35"
+	],
+	"independent_series_absolute_tail_bound":"7.6836433196017110770651013565426046947632027126926731885264239358322668868288415973839405870961644859162`80.*^-70",
+	"solve_wall_seconds":1.25876374e2,
+	"analytic_check_passed":true,
+	"normalization":"Complete massless three-body Lorentz-invariant phase space times d^D k\/(i Pi^(D\/2)); no EulerGamma, flux or symmetry factor",
+	"independence":"Comparison-only double-beta\/Feynman-parameter series; no numerical reference boundary enters the evaluator"
+}
