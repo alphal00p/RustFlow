@@ -1,5 +1,7 @@
 #[path = "support/native_cut_graph.rs"]
 mod native_cut_graph;
+#[path = "support/native_mixed_cut_graph.rs"]
+mod native_mixed_cut_graph;
 use feynkit_graph::EdgeId;
 use native_cut_graph::{diagram, kinematics};
 use std::{collections::BTreeMap, sync::Arc};
@@ -150,6 +152,14 @@ fn cut_zero_rows_still_require_valid_measure_and_cancellation_propagates() -> Re
     ));
     assert!(matches!(
         prepared.evaluate_samples(&[Rational::zero()], &options, &context),
+        Err(Error::InvalidInput(_))
+    ));
+    let explicit_cut = FlowOptions {
+        mass_mode: MassMode::Propagators(vec![0]),
+        ..options.clone()
+    };
+    assert!(matches!(
+        prepared.evaluate(&Rational::from((1, 13)), &explicit_cut, &context),
         Err(Error::InvalidInput(_))
     ));
     let cancelled = RunContext::default();
@@ -372,99 +382,7 @@ fn exact_complex_weights_survive_native_graph_encoding_and_direct_projection() -
 
 #[test]
 fn connected_native_two_loop_cut_graph_generates_virtual_boundaries() -> Result<()> {
-    use feynkit_graph::{
-        DiagramEdge, DiagramEndpoint, DiagramHalfEdge, DiagramVertex, ExternalLeg, ExternalState,
-        FeynmanDiagram,
-    };
-    use feynkit_model::Model;
-    // A phi/chi scalar model: massive phi cuts and massless chi virtual lines.
-    // Native model validation and native routing own this graph, as in user input.
-    let mut model: serde_json::Value =
-        serde_json::from_str(include_str!("../fixtures/hepkit/massless_phi3.json")).unwrap();
-    model["name"] = "native_mixed_cut_model".into();
-    model["parameters"]
-        .as_array_mut()
-        .unwrap()
-        .push(serde_json::json!({
-            "name":"M", "lhablock":null,"lhacode":null,"nature":"external","parameter_type":"real",
-            "value":[123.0,0.0],"expression":null
-        }));
-    let mut massless = model["particles"][0].clone();
-    massless["name"] = "chi".into();
-    massless["antiname"] = "chi".into();
-    massless["pdg_code"] = 1001.into();
-    model["particles"][0]["mass"] = "M".into();
-    model["particles"].as_array_mut().unwrap().push(massless);
-    let mut massless_prop = model["propagators"][0].clone();
-    massless_prop["name"] = "chi_prop".into();
-    massless_prop["particle"] = "chi".into();
-    model["propagators"][0]["denominator"] = "(UFO::P(UFO::idx(1,1)))^2-UFO::M^2".into();
-    model["propagators"]
-        .as_array_mut()
-        .unwrap()
-        .push(massless_prop);
-    model["lorentz_structures"]
-        .as_array_mut()
-        .unwrap()
-        .push(serde_json::json!({"name":"scalar4","spins":[1,1,1,1],"structure":"1"}));
-    model["vertex_rules"].as_array_mut().unwrap().extend([
-        serde_json::json!({"name":"phichichi","particles":["phi","chi","chi"],"color_structures":["1"],"lorentz_structures":["scalar3"],"couplings":[[null]]}),
-        serde_json::json!({"name":"phiphichichi","particles":["phi","phi","chi","chi"],"color_structures":["1"],"lorentz_structures":["scalar4"],"couplings":[[null]]}),
-    ]);
-    let model = Arc::new(Model::from_json(&model.to_string()).unwrap());
-    let phi = model.particle_id("phi").unwrap();
-    let chi = model.particle_id("chi").unwrap();
-    let mut builder = FeynmanDiagram::builder(model.clone(), "connected_native_real_virtual");
-    let a = builder.add_vertex(DiagramVertex::interaction(
-        "a",
-        model.vertex_rule_id("phi3").unwrap(),
-    ));
-    let b = builder.add_vertex(DiagramVertex::interaction(
-        "b",
-        model.vertex_rule_id("phichichi").unwrap(),
-    ));
-    let c = builder.add_vertex(DiagramVertex::interaction(
-        "c",
-        model.vertex_rule_id("phiphichichi").unwrap(),
-    ));
-    let mut external = DiagramEdge::new(phi, false);
-    external.external = Some(ExternalLeg {
-        name: "p".into(),
-        index: 0,
-        state: ExternalState::Incoming,
-        connection: 0,
-    });
-    let incoming = builder.add_edge(a, c, external).unwrap();
-    let first = builder
-        .add_edge(a, b, DiagramEdge::new(phi, false))
-        .unwrap();
-    let second = builder
-        .add_edge(a, c, DiagramEdge::new(phi, false))
-        .unwrap();
-    let virtual_first = builder
-        .add_edge(b, c, DiagramEdge::new(chi, false))
-        .unwrap();
-    let virtual_second = builder
-        .add_edge(b, c, DiagramEdge::new(chi, false))
-        .unwrap();
-    let half = |edge, endpoint| DiagramHalfEdge { edge, endpoint };
-    let mut left = [incoming, first, second]
-        .map(|edge| half(edge, DiagramEndpoint::Target))
-        .to_vec();
-    for edge in [virtual_first, virtual_second] {
-        left.push(half(edge, DiagramEndpoint::Source));
-        left.push(half(edge, DiagramEndpoint::Target));
-    }
-    let right = [incoming, first, second]
-        .map(|edge| half(edge, DiagramEndpoint::Source))
-        .to_vec();
-    let graph = builder
-        .build()
-        .unwrap()
-        .with_loop_momentum_edges(&[first, virtual_first])
-        .unwrap()
-        .with_cut_partitions(vec![(left, right)])
-        .unwrap();
+    let graph = native_mixed_cut_graph::connected_diagram();
     let graph = GraphIntegral::new(Arc::new(graph), &kinematics())?;
     let point = KinematicPoint(BTreeMap::from([(
         Atom::var(symbol!("UFO::M")),
@@ -570,4 +488,81 @@ fn cancellation_during_cut_reduction_cannot_return_a_prepared_projection() -> Re
         Err(Error::Cancelled)
     ));
     Ok(())
+}
+
+#[test]
+fn native_cut_cli_explicit_slots_are_physical_positions_and_validate_conflicts() {
+    let temporary =
+        std::env::temp_dir().join(format!("native-partial-cut-cli-{}", std::process::id()));
+    std::fs::create_dir_all(&temporary).unwrap();
+    let diagram = native_mixed_cut_graph::connected_diagram();
+    let graph = GraphIntegral::new(Arc::new(diagram.clone()), &kinematics()).unwrap();
+    // Native EdgeId(3) is the first virtual line, at physical slot 2.
+    assert_eq!(
+        graph.propagator_edges(),
+        &[EdgeId(1), EdgeId(2), EdgeId(3), EdgeId(4)]
+    );
+    std::fs::write(temporary.join("cut.dot"), diagram.to_dot().unwrap()).unwrap();
+    std::fs::write(
+        temporary.join("model.json"),
+        diagram.model().to_json().unwrap(),
+    )
+    .unwrap();
+    let mut card = serde_json::json!({
+        "schema_version":1,"model":"model.json","diagram":"cut.dot",
+        "scalar_products":[{"left":"gammalooprs::P(0)","right":"gammalooprs::P(0)","value":"25"}],
+        "substitutions":{"UFO::M":"1"},
+        "options":{"digits":20,"guard_digits":50,"deformed_propagator_slots":[2]},
+        "cut":{"index":0,"future_channel":["1"],"loop_prescriptions":["insensitive","+i0"],"epsilon_samples":["1/13"]}
+    });
+    let run = |card: &serde_json::Value| {
+        let path = temporary.join("input.json");
+        std::fs::write(&path, serde_json::to_vec(card).unwrap()).unwrap();
+        std::process::Command::new(env!("CARGO_BIN_EXE_rustflow"))
+            .arg("graph")
+            .arg(path)
+            .output()
+            .unwrap()
+    };
+    let partial = run(&card);
+    assert!(
+        partial.status.success(),
+        "{}",
+        String::from_utf8_lossy(&partial.stderr)
+    );
+    let partial: serde_json::Value = serde_json::from_slice(&partial.stdout).unwrap();
+    card["options"]
+        .as_object_mut()
+        .unwrap()
+        .remove("deformed_propagator_slots");
+    card["options"]["mass_mode"] = "all".into();
+    let all = run(&card);
+    assert!(
+        all.status.success(),
+        "{}",
+        String::from_utf8_lossy(&all.stderr)
+    );
+    let all: serde_json::Value = serde_json::from_slice(&all.stdout).unwrap();
+    let p = Precision::decimal(70).unwrap();
+    let value = |data: &serde_json::Value| {
+        p.parse(
+            data["values"][0]["real"].as_str().unwrap(),
+            data["values"][0]["imaginary"].as_str().unwrap(),
+        )
+        .unwrap()
+    };
+    assert!(p.close(&value(&partial), &value(&all), 20));
+    assert!(partial["verified_digits"].is_null());
+    card["options"]["deformed_propagator_slots"] = serde_json::json!([2]);
+    let conflict = run(&card);
+    assert!(!conflict.status.success());
+    assert!(String::from_utf8_lossy(&conflict.stderr).contains("cannot be combined"));
+    card["options"]["mass_mode"] = "explicit".into();
+    for slot in [0, 1, 4, 999] {
+        card["options"]["deformed_propagator_slots"] = serde_json::json!([slot]);
+        let invalid = run(&card);
+        assert!(!invalid.status.success());
+        assert!(String::from_utf8_lossy(&invalid.stderr).contains("uncut physical denominators"));
+    }
+    std::fs::remove_dir_all(temporary).unwrap();
 }

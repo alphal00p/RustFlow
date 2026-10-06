@@ -1,0 +1,82 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-10-06",
+  "base_commit": "fa26f780712c154c1fb4fb273e0bda84a954e842",
+  "implementation": "Shared explicit physical propagator slot selection in Rust, descriptive Python options, and native DOT CLI",
+  "compiled_source_fingerprints": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "a6e7f9269a090b64e766f7c7762d82fa556b17b5c6a1b5427938962d631854c4"
+  },
+  "frozen_source_hashes_checked_after_tests": true,
+  "artifact_hashes": {
+    "/common/dev/amflow/target/explicit-cut-slots-release-a6e7f926-final/libsymbolica_amflow-f22bcb54479a61ec.rlib": {
+      "sha256": "51c0af41362315df4977e6779e7d19201a9aa84136ce722968e096d1924f5a9c",
+      "bytes": 503257778
+    },
+    "/common/dev/amflow/target/explicit-cut-slots-release-a6e7f926-final/native_cut_interfaces-b8025262cd589a14": {
+      "sha256": "cb2269b42e3b5f2e50010de13112329e64766532fdb6b929997951f237b8b66d",
+      "bytes": 1185934520
+    },
+    "/common/dev/amflow/target/explicit-cut-slots-release-a6e7f926-final/python_cut_interfaces-0c93b36f06af37f0": {
+      "sha256": "6a1610383bd5d9d13387665e4f011d52009f2d2a39633384c19551e00e6c85f5",
+      "bytes": 1185446280
+    },
+    "/common/dev/amflow/target/explicit-cut-slots-release-a6e7f926-final/rustflow": {
+      "sha256": "9b9f18f1d186c7e3f51c74b43395d5ca151e891ba3d1cf67f9cf5eed406d5678",
+      "bytes": 1190009152
+    }
+  },
+  "validation": {
+    "release_passed": 33,
+    "release_failed": 0,
+    "release_ignored": 0,
+    "cut_gate_passed": 29,
+    "ordinary_exact_placement_passed": 3,
+    "ordinary_numerical_placement_passed": 1,
+    "affected_interface_tests_rerun_after_test_fixture_move": 12,
+    "clippy_command": "cargo clippy --locked --all-targets --features python_stubgen -- -D warnings",
+    "clippy_passed": true,
+    "fmt_passed": true,
+    "diff_check_passed": true
+  },
+  "interface_admission": [
+    "MassMode owns optional name/list parsing; conflicting named mode plus slots rejected",
+    "Explicit selection retained by EvaluationOptions getters and IntegralEvaluator.options",
+    "Native family and cut owners validate physical slots, cuts, and ISPs",
+    "Explicit terminal admission retained for new and already prepared zero or nonzero projections",
+    "Duplicate slots pass through to existing native mask semantics"
+  ],
+  "native_fixture": {
+    "loop_count": 2,
+    "propagator_edge_ids": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "deformed_physical_slot": 2,
+    "corresponding_native_edge_id": 3,
+    "kinematics": {
+      "P^2": "25",
+      "UFO::M": "1"
+    },
+    "epsilon_sample": "1/13",
+    "comparison": "partial versus all-uncut, 20 scaled digits; existing independent gamma-product check retained"
+  },
+  "accuracy_scope": "Finite-epsilon samples retain arbitrary precision and working_bits without verified_digits. Laurent fits retain independent-grid and precision evidence. No new benchmark-parity claim.",
+  "reuse_audit": [
+    "Existing MassMode and native family/cut deformation owner",
+    "HEPKit Model and Diagram builder, native routing, and DOT serialization",
+    "Existing weighted cut projection, recursive boundary, and shared Laurent fitter",
+    "Single Symbolica/Numerica/RustRed/HEPKit/Linnet/Spenso/Idenso dependency graph"
+  ],
+  "peer_review": "Root read-only review found no shared-selector, native admission or Python/CLI option-roundtrip blocker.",
+  "cache_scope": "No schema change; existing source-sensitive cache fingerprints include the completed implementation and exact dependency feature graph.",
+  "prior_oracle_milestone": "../2026-10-06-partial-cut-boundaries",
+  "prior_measured_artifacts_preserved_at": "/common/dev/amflow/target/partial-cut-release-fa26f78/",
+  "development_history": [
+    "Initial 20-test feature gate passed, but build-script fingerprint preceded the final evaluation-time terminal admission guard; final source rebuilt and retested.",
+    "Initial strict Clippy rejected an unused test helper in a shared fixture; test-only fixture split, affected 12 tests and Clippy rerun successfully."
+  ]
+}

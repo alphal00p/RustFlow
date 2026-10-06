@@ -228,6 +228,40 @@ values = evaluator.evaluate_cut_diagram_samples(
 )
 ```
 
+Explicit partial placements use the same native family slots in every interface:
+
+```rust
+let options = FlowOptions {
+    mass_mode: MassMode::Propagators(vec![2]),
+    ..Default::default()
+};
+```
+
+```python
+from symbolica.community.hep.integration import EvaluationOptions
+
+options = EvaluationOptions(deformed_propagator_slots=[2])
+evaluator = IntegralEvaluator(options=options)
+assert evaluator.options.mass_mode == "explicit"
+assert evaluator.options.deformed_propagator_slots == [2]
+restored = EvaluationOptions(
+    mass_mode=options.mass_mode,
+    deformed_propagator_slots=options.deformed_propagator_slots,
+)
+```
+
+This example assumes physical slot `2` is an uncut propagator. These are zero-based
+positions in `GraphIntegral::propagator_edges()`, not native edge IDs; unlike
+ordinary partial fractions, cut conversion retains every original denominator
+slot. The same CLI setting is `"deformed_propagator_slots": [2]` in `options`.
+A nonempty explicit list can appear alone or with `mass_mode="explicit"`;
+combining it with a different named mode is rejected. Bounds, cut-line and ISP
+admission stay in the native cut owner, including for terminal and zero results.
+For example, if the native propagator edges are `[1, 2, 3, 4]`, selecting slot
+`2` deforms native edge `3`, whereas `edge_powers` continues to use native IDs.
+The connected two-loop regression checks this mapping and agreement between
+partial and all-uncut placements through both Python and the native DOT CLI.
+
 `future_channel` lists exact rational coefficients in the native independent
 external basis. `loop_prescriptions` follows the native loop basis and accepts
 `"+i0"`, `"-i0"`, or `"insensitive"`; numerical support is still restricted to
