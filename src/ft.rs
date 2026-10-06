@@ -172,7 +172,10 @@ struct FtMemo {
 
 /// Recursive FT evaluator. Each propagator combination reduces the number of
 /// active denominators in its midpoint boundary problem. The final Gaussian
-/// integral is analytic, including polynomial tensor numerators.
+/// integral is analytic, including polynomial tensor numerators. Quadratic and
+/// linear denominators may be mixed: the Euclidean Schwinger-polynomial check
+/// applies to their full affine forms, and linear lines need not share an
+/// external direction or admit a rank-one quadratic deformation.
 pub struct FtEvaluator<'a> {
     backend: &'a dyn ReductionBackend,
     context: &'a RunContext,

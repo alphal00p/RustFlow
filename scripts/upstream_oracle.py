@@ -65,8 +65,9 @@ def main():
     parser.add_argument("--kira", required=True, type=executable)
     parser.add_argument("--fermat", required=True, type=executable)
     parser.add_argument("--output", required=True, type=Path)
-    parser.add_argument("--case", choices=("bubble", "sunset"), default="bubble")
+    parser.add_argument("--case", choices=("bubble", "sunset", "eikonal"), default="bubble")
     parser.add_argument("--mode", choices=("sample", "laurent"), default="sample")
+    parser.add_argument("--recursion", choices=("AMF", "FT"), default="AMF")
     parser.add_argument("--cpu", type=int)
     parser.add_argument("--timeout", type=int, default=600)
     args = parser.parse_args()
@@ -108,6 +109,7 @@ def main():
         AMFLOW_ORACLE_WORKDIR=str(work),
         AMFLOW_ORACLE_CASE=args.case,
         AMFLOW_ORACLE_MODE=args.mode,
+        AMFLOW_ORACLE_RECURSION=args.recursion,
         FERMATPATH=str(args.fermat),
         OMP_NUM_THREADS="1",
         OPENBLAS_NUM_THREADS="1",

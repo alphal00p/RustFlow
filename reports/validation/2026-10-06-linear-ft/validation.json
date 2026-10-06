@@ -1,0 +1,133 @@
+{
+  "base_commit": "e0f7619869fd2c77072a054734a9ef4cfe75398c",
+  "source_sha256": {
+    "src/engine.rs": "57acaec6ecedb0f6485fd3e3676745dd4e53cc33f3e160c3fb4e6d531cc33653",
+    "src/ft.rs": "cd2ea476da1bf86d9e6f48c73eec5053a3d8b83af7de2f1d52b9501e53d63c90",
+    "tests/linear_two_directions.rs": "1a4a8367af08e86bac49ec64b9e1203106fc4a2ee3eb5f6d860cf5d0d015d67a",
+    "scripts/upstream_oracle.py": "6703ccfc7bb450a5e81287592ae9d7896f10d5d90d2bb9144ee9fdbab2971854",
+    "scripts/upstream_oracle.wl": "4c731bd0113073814096569d39e52744f1f62e5bd1da3dd981ff0c093a870cf5",
+    "Cargo.lock": "4c5b7575719b551a186318342392dc24b2d7aec7d1ff0ab02650f5559cc4fa9c"
+  },
+  "production_change": "Honor FT recursion before AMF linear deformation in solve_integrals and solve_integral_projections. Reuse the existing FT evaluator without new terminal formulas or relaxed U/F domain checks.",
+  "native_dependencies": {
+    "symbolica_community": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustred_main": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "hepkit_owner": "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+  },
+  "release_tests": {
+    "command": "cargo test --locked --release --test linear_two_directions --test linear --test ft -- --nocapture",
+    "result": "17 passed",
+    "log": "target/linear-ft-tests.log",
+    "suite_seconds": {
+      "ft": 7.12,
+      "linear": 35.7,
+      "linear_two_directions": 22.98
+    },
+    "additional_command": "cargo test --locked --release --test combinations -- --nocapture",
+    "additional_result": "5 passed",
+    "additional_log": "target/linear-ft-combinations.log",
+    "additional_seconds": 8.09
+  },
+  "checks": {
+    "clippy": "cargo clippy --locked --release --all-targets -- -D warnings: passed",
+    "format": "cargo fmt --check: passed",
+    "python_syntax": "python -m py_compile scripts/upstream_oracle.py: passed",
+    "thread_wrapper": "python scripts/test_wolfram_one_thread.py: 5 passed",
+    "initial_lint": "Clippy rejected a temporary owned Rational comparison in a new test; replaced with its supported tuple comparison and reran lint.",
+    "post_lint_regression": "cargo test --locked --release --test linear_two_directions ft_two_independent_eikonal_directions -- --exact --nocapture: 1 passed, 2.07 s"
+  },
+  "numerical_scope": {
+    "target_digits": 20,
+    "working_digits": [
+      60,
+      80
+    ],
+    "series_orders": [
+      80,
+      112
+    ],
+    "one_loop": {
+      "denominators": [
+        "q^2",
+        "2*q.v-2",
+        "2*q.w-2"
+      ],
+      "gram": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "epsilon": [
+        "1/3",
+        "2/5"
+      ],
+      "powers": [
+        [
+          1,
+          1,
+          1
+        ],
+        [
+          1,
+          2,
+          1
+        ]
+      ],
+      "formula": "-2^(-1-eps)*Gamma(eps)^2*Gamma(1-eps), raised linear power multiplies by -eps/2",
+      "amf_comparison": "Corner at eps=1/3 also passes through native AMF quadratic deformation",
+      "public_acceptance": "Laurent coefficients -2 through 0 and epsilon^2 projection; independently refined fit verifies 20 digits"
+    },
+    "two_loop": {
+      "denominators": [
+        "l1^2",
+        "l2^2",
+        "2*l1.v+2*l2.w-2"
+      ],
+      "gram": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ],
+      "epsilon": "7/8",
+      "formula": "-2^(3-4eps)*Gamma(1-eps)^2*Gamma(4eps-3)",
+      "rank": "rank-two loop/external linear coefficient matrix; native AMF deformation correctly rejects it",
+      "routing": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "1",
+          "-1"
+        ]
+      ],
+      "routing_check": "Restores original value after multiplying by abs(det routing)^D = 2^D; fresh higher-precision/order solves."
+    },
+    "invalid_domain": "v.w=-1 rejected because M^2=2*t+2*u-2*t*u crosses zero in the positive parameter region."
+  },
+  "ownership": "No independent graph, tensor, Symanzik, reduction, matrix, or gamma implementation added. Generic FT recursion, Gaussian terminal, shared DE engine, Symbolica algebra and RustRed Symanzik construction/reduction retained; existing Gaussian tensor connectivity uses Linnet.",
+  "upstream_reference": {
+    "result": "oracle-metadata.json",
+    "runner": "runner-metadata.json",
+    "log": "kernel.log",
+    "comparison_digits": 20,
+    "recorded_output_digits": 24,
+    "runtime_scope": "46.833677 seconds, original automatic FT solve with one worker at 48 working digits and series order 96 plus extra order 50. Native test timings are different work and do not establish matched performance parity."
+  },
+  "remaining_limits": [
+    "Physical-region FT",
+    "Arbitrary mixed-sheet cuts and general cut boundary recursion",
+    "AMF linear terms outside its real rational rank-one loop geometry",
+    "Native reduction search and resource limits"
+  ]
+}

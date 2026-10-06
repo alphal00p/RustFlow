@@ -152,7 +152,11 @@ constructed boundary series. `linear::PreparedLinearFlow` evaluates supported
 rank-one linear denominators by quadratic deformation and Frobenius projection;
 an HQET example matches its gamma formula to 20 digits under refinement.
 `solve_integrals` now dispatches these linear families automatically, including
-Laurent reconstruction. `solve_integral_combinations` applies exact numerator
+Laurent reconstruction. [FT recursion for linear families](linear-propagators.md)
+also uses the automatic and projected interfaces; independent eikonal directions
+and a rank-two two-loop linear form pass 20-digit analytic checks, and the
+eikonal case has a live original AMFlow FT reference. AMF's rank-one contour
+restriction remains intact. `solve_integral_combinations` applies exact numerator
 weights across partial-fraction families at each epsilon sample before fitting,
 and includes any additional poles from those weights.
 

@@ -1,0 +1,39 @@
+{
+	"upstream_commit":"26005517a288086c4cb4d1b26d829691bc088485",
+	"case":"eikonal",
+	"mode":"sample",
+	"recursion":"FT",
+	"wolfram_version":"15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+	"reducer":"Kira 3.1 dad964cd79a39a9fca728bb2606f59537a95109c",
+	"desolver":"MMA",
+	"workers":1,
+	"cache":false,
+	"cache_directory":"\/common\/dev\/amflow-linear-cut\/target\/eikonal-ft-oracle\/work\/cache",
+	"requested_digits":24,
+	"asserted_digits":20,
+	"epsilon_samples_exact":[
+		"1\/3"
+	],
+	"working_decimal_precision":48,
+	"x_order":96,
+	"extra_x_order":50,
+	"leading_epsilon_power":0,
+	"coefficient_powers":[
+		0
+	],
+	"coefficients":[
+		"-3.85663610547731999372773380013725693079`24."
+	],
+	"expected":[
+		"-3.856636105477319993727733820791336607599711919226931382892022432248516056264628029692875877799206`80."
+	],
+	"scaled_absolute_errors":[
+		"5.355464999012054664028489657537423427803964137013027677216375407905889`53.42776718963229*^-27"
+	],
+	"solve_wall_seconds":4.6833677e1,
+	"parent_kernel_cpu_seconds":1.4368379999999998,
+	"analytic_check_passed":true,
+	"comparison":"Stored returned numbers padded to 80 digits only for residual computation; no added accuracy is claimed.",
+	"normalization":"d^D l\/(i Pi^(D\/2)) per loop; no exp(EulerGamma eps) factor",
+	"scope":"Original automatic workflow smoke test against an analytic formula; not a matched Rust timing."
+}
