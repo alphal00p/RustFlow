@@ -1,0 +1,54 @@
+{
+  "owner_commit": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+  "evidence_kind": "read-only pinned native source audit; future non-Gaussian endpoint integration not claimed",
+  "native_fields": {
+    "source": "src/domains/algebraic.rs",
+    "apis": [
+      "AlgebraicExtension::from_polynomial_with_embedding",
+      "AlgebraicContext::from_generators",
+      "AlgebraicContext::adjoin_root",
+      "AlgebraicContext::convert_atom",
+      "AlgebraicExtension::adjoin_with_embedding",
+      "RealEmbedding::try_sign"
+    ],
+    "selection_caution": "A default root index is not a physical sheet. General complex constants require an explicitly selected native embedding; no numerical rationalization."
+  },
+  "root_certificates": {
+    "source": "src/poly/univariate/roots.rs",
+    "apis": [
+      "ExactComplexPolynomial::isolate_roots",
+      "IsolatedRoot::classify_location",
+      "IsolatedRoot::refined",
+      "ComplexDisk::center",
+      "ComplexDisk::radius",
+      "ComplexDisk::to_ball"
+    ],
+    "interpretation": "Exact rational defining polynomial and certified rational disk; floating centers alone are not branch evidence."
+  },
+  "linear_algebra": {
+    "source": "lib/numerica/src/tensors/matrix.rs",
+    "apis": [
+      "Matrix::rank",
+      "Matrix::row_reduce",
+      "Matrix::inv",
+      "native matrix multiplication"
+    ],
+    "interpretation": "Ring/field-generic owner supports selected native algebraic extensions without a new solver."
+  },
+  "reuse_in_this_stage": [
+    "existing rational restriction of scalars and normalized-root XOR/intersection multiplication",
+    "existing root_path::principal_flip",
+    "shared exact/numerical Frobenius recurrence",
+    "native exact series and polynomial products",
+    "native Gaussian matrices and ball matrices"
+  ],
+  "open_extension": "For Gaussian rational lifted connections, F can remain Gaussian while non-Gaussian root leading constants first require an extension in J_g, C_g and the affine support space. General coefficient-domain integration and its branch/error tests remain future work.",
+  "no_duplicate_owners": [
+    "graph",
+    "tensor",
+    "polynomial convolution",
+    "Frobenius recurrence",
+    "root isolation",
+    "algebraic extension field"
+  ]
+}

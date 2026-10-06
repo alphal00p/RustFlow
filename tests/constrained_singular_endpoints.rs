@@ -363,7 +363,7 @@ fn native_atom_codec_preserves_constraints_and_exact_range_identity() {
     );
 }
 #[test]
-fn constrained_root_lifts_are_refused_until_sheet_relations_are_proved() {
+fn constrained_root_lift_uses_proved_sheet_space_and_checks_matching_data() {
     let flow = rooted(&[&["1/r"]]);
     let range = EpsilonRange::new(0, 0).unwrap();
     let p = Precision::decimal(90).unwrap();
@@ -384,8 +384,9 @@ fn constrained_root_lifts_are_refused_until_sheet_relations_are_proved() {
         &cost(),
         &admit,
     );
-    assert!(matches!(result, Err(Error::Unsupported(_))));
-    assert!(cache.endpoint_entries().is_empty());
+    let result = result.unwrap();
+    assert!(p.close(&result.boundary.coefficients[0][0], &p.i(1), 40));
+    assert_eq!(cache.endpoint_entries().len(), 1);
 }
 #[test]
 fn short_normalized_prefix_refines_instead_of_guessing_missing_coefficients() {
@@ -773,4 +774,316 @@ fn constraints_do_not_erase_retained_source_holes() {
         Err(Error::InvalidInput(_))
     ));
     assert!(cache.endpoint_entries().is_empty());
+}
+
+#[test]
+fn root_correlations_cancel_divergence_on_both_sheets_and_windings() {
+    let flow = rooted(&[
+        &["0", "1/(s*r)", "-1/(s*r)"],
+        &["0", "0", "0"],
+        &["0", "0", "0"],
+    ]);
+    let p = Precision::decimal(90).unwrap();
+    let range = EpsilonRange::new(0, 0).unwrap();
+    for sheet in [RootSheet::Principal, RootSheet::Opposite] {
+        for winding in [0, 1] {
+            let mut req = request(range, Some(sheet));
+            req.chart.winding = winding;
+            let mut cache = bank(
+                flow.identity(),
+                range,
+                "1/16",
+                Some(sheet),
+                vec![vec![p.i(3), p.i(5), p.i(5)]],
+                60,
+            );
+            let result = flow
+                .evaluate_constrained_endpoint(
+                    &mut cache,
+                    &req,
+                    &constraints(&[(0, "-1/2", 0, "0")]),
+                    &options(),
+                    &RunContext::default(),
+                    &cost(),
+                    &admit,
+                )
+                .unwrap();
+            for (value, expected) in result.boundary.coefficients[0].iter().zip([3, 5, 5]) {
+                assert!(p.close(value, &p.i(expected), 35));
+            }
+            assert!(result.boundary.accuracy.verified_digits() <= 60);
+            assert_eq!(cache.len(), 1);
+            assert_eq!(cache.endpoint_entries().len(), 1);
+        }
+    }
+}
+
+#[test]
+fn root_log_constraint_rejects_nonzero_divergent_component() {
+    let flow = rooted(&[&["0", "1/(s*r)"], &["0", "1/(2*s)"]]);
+    let p = Precision::decimal(90).unwrap();
+    let range = EpsilonRange::new(0, 0).unwrap();
+    for (second, accepted) in [
+        (p.zero(), true),
+        (p.rational(&Rational::from((1, 4))), false),
+    ] {
+        let mut cache = bank(
+            flow.identity(),
+            range,
+            "1/16",
+            Some(RootSheet::Principal),
+            vec![vec![p.i(3), second]],
+            60,
+        );
+        let result = flow.evaluate_constrained_endpoint(
+            &mut cache,
+            &request(range, Some(RootSheet::Principal)),
+            &constraints(&[(0, "0", 1, "0")]),
+            &options(),
+            &RunContext::default(),
+            &cost(),
+            &admit,
+        );
+        assert_eq!(result.is_ok(), accepted, "{:?}", result.as_ref().err());
+        if let Ok(result) = result {
+            assert!(p.close(&result.boundary.coefficients[0][0], &p.i(3), 35));
+        } else {
+            assert!(cache.endpoint_entries().is_empty());
+        }
+    }
+}
+
+#[test]
+fn coupled_epsilon_root_constraints_survive_cache_restart_and_exact_range() {
+    let flow = rooted(&[&["eps/r"]]);
+    let p = Precision::decimal(90).unwrap();
+    let range = EpsilonRange::new(-1, 1).unwrap();
+    let req = request(range, Some(RootSheet::Opposite));
+    let declared = constraints(&[(0, "-1", 0, "0")]);
+    let mut cache = bank(
+        flow.identity(),
+        range,
+        "1/16",
+        Some(RootSheet::Opposite),
+        vec![
+            vec![p.i(1)],
+            vec![p.rational(&Rational::from((-1, 2)))],
+            vec![p.rational(&Rational::from((1, 8)))],
+        ],
+        60,
+    );
+    let result = flow
+        .evaluate_constrained_endpoint(
+            &mut cache,
+            &req,
+            &declared,
+            &options(),
+            &RunContext::default(),
+            &cost(),
+            &admit,
+        )
+        .unwrap();
+    assert!(p.close(&result.boundary.coefficients[0][0], &p.i(1), 35));
+    for row in &result.boundary.coefficients[1..] {
+        assert!(p.close(&row[0], &p.zero(), 35));
+    }
+    let directory = std::env::temp_dir().join(format!(
+        "amflow-root-constrained-endpoint-{}",
+        std::process::id()
+    ));
+    cache.save(&directory).unwrap();
+    let mut loaded = RustFlowCache::load(&directory).unwrap();
+    std::fs::remove_dir_all(directory).unwrap();
+    let hit = flow
+        .evaluate_constrained_endpoint(
+            &mut loaded,
+            &req,
+            &declared,
+            &options(),
+            &RunContext::default(),
+            &cost(),
+            &admit,
+        )
+        .unwrap();
+    assert!(hit.cache_hit);
+    assert_eq!(hit.boundary.coefficients, result.boundary.coefficients);
+    let mut narrow = req.clone();
+    narrow.range = EpsilonRange::new(-1, 0).unwrap();
+    let recomputed = flow
+        .evaluate_constrained_endpoint(
+            &mut loaded,
+            &narrow,
+            &declared,
+            &options(),
+            &RunContext::default(),
+            &cost(),
+            &admit,
+        )
+        .unwrap();
+    assert!(!recomputed.cache_hit);
+}
+
+#[test]
+fn root_refinement_profiles_agree_with_analytic_exponential() {
+    let flow = rooted(&[&["1/r"]]);
+    let p = Precision::decimal(90).unwrap();
+    let range = EpsilonRange::new(0, 0).unwrap();
+    let mut outcomes = Vec::new();
+    for (guard, order, sheet, sign) in [
+        (35, 8, RootSheet::Principal, 1),
+        (55, 8, RootSheet::Principal, 1),
+        (35, 32, RootSheet::Opposite, -1),
+    ] {
+        let mut req = request(range, Some(sheet));
+        req.options.series_order = order;
+        let mut cache = bank(
+            flow.identity(),
+            range,
+            "1/16",
+            Some(sheet),
+            vec![vec![p.scale(
+                &p.exp(&p.rational(&Rational::from((sign, 2)))),
+                3,
+                1,
+            )]],
+            60,
+        );
+        let mut opts = options();
+        opts.guard_digits = guard;
+        let result = flow
+            .evaluate_constrained_endpoint(
+                &mut cache,
+                &req,
+                &constraints(&[(0, "-1", 0, "0")]),
+                &opts,
+                &RunContext::default(),
+                &cost(),
+                &admit,
+            )
+            .unwrap();
+        assert!(p.close(&result.boundary.coefficients[0][0], &p.i(3), 30));
+        assert!(result.boundary.accuracy.comparison_errors()[0][0] > p.real(0));
+        outcomes.push(result.boundary.coefficients[0][0].clone());
+    }
+    for value in &outcomes[1..] {
+        assert!(p.close(value, &outcomes[0], 30));
+    }
+}
+
+#[test]
+fn exact_half_power_declaration_uses_matching_germ_and_common_winding_on_complex_rays() {
+    let flow = rooted(&[&["1/r"]]);
+    let p = Precision::decimal(90).unwrap();
+    let range = EpsilonRange::new(0, 0).unwrap();
+    for coordinate in ["1/16", "𝑖/16"] {
+        let square_root = p
+            .eval(&a(&format!("({coordinate})^(1/2)")), &Default::default())
+            .unwrap();
+        for (sheet, sign) in [(RootSheet::Principal, 1), (RootSheet::Opposite, -1)] {
+            for winding in [0, 1] {
+                let amplitude = if winding == 0 { sign } else { -sign };
+                let boundary = p.scale(&p.exp(&p.scale(&square_root, 2 * sign, 1)), amplitude, 1);
+                let mut req = request(range, Some(sheet));
+                req.chart.matching_parameter = a(coordinate);
+                req.chart.winding = winding;
+                let mut cache = bank(
+                    flow.identity(),
+                    range,
+                    coordinate,
+                    Some(sheet),
+                    vec![vec![boundary]],
+                    60,
+                );
+                let result = flow
+                    .evaluate_constrained_endpoint(
+                        &mut cache,
+                        &req,
+                        &constraints(&[(0, "1/2", 0, "2")]),
+                        &options(),
+                        &RunContext::default(),
+                        &cost(),
+                        &admit,
+                    )
+                    .unwrap();
+                assert!(p.close(&result.boundary.coefficients[0][0], &p.i(amplitude), 35));
+            }
+        }
+    }
+}
+
+#[test]
+fn constrained_root_lift_dimension_and_cancellation_preserve_the_bank() {
+    let flow = rooted(&[&["1/r"]]);
+    let p = Precision::decimal(90).unwrap();
+    let range = EpsilonRange::new(0, 0).unwrap();
+    let original = bank(
+        flow.identity(),
+        range,
+        "1/16",
+        Some(RootSheet::Principal),
+        vec![vec![p.exp(&p.rational(&Rational::from((1, 2))))]],
+        60,
+    );
+    let req = request(range, Some(RootSheet::Principal));
+    let mut limited = constraints(&[(0, "-1", 0, "0")]);
+    limited.limits.max_dimension = 1;
+    let mut cache = original.clone();
+    assert!(matches!(
+        flow.evaluate_constrained_endpoint(
+            &mut cache,
+            &req,
+            &limited,
+            &options(),
+            &RunContext::default(),
+            &cost(),
+            &admit
+        ),
+        Err(Error::Limit(_))
+    ));
+    assert_eq!(cache.len(), 1);
+    assert!(cache.endpoint_entries().is_empty());
+    let context = RunContext::default();
+    let cancel = |_: &CachedBoundary, _: &EndpointChart| {
+        context.cancellation.cancel();
+        Ok(true)
+    };
+    let mut cache = original;
+    assert!(matches!(
+        flow.evaluate_constrained_endpoint(
+            &mut cache,
+            &req,
+            &constraints(&[(0, "-1", 0, "0")]),
+            &options(),
+            &context,
+            &cost(),
+            &cancel
+        ),
+        Err(Error::Cancelled)
+    ));
+    assert_eq!(cache.len(), 1);
+    assert!(cache.endpoint_entries().is_empty());
+}
+
+#[test]
+fn rational_coefficient_height_limit_does_not_limit_working_precision() {
+    let flow = ordinary(&[&["0"]]);
+    let p = Precision::decimal(120).unwrap();
+    let range = EpsilonRange::new(0, 0).unwrap();
+    let mut cache = bank(flow.identity(), range, "1/16", None, vec![vec![p.i(3)]], 60);
+    let mut declared = constraints(&[(0, "-1", 0, "0")]);
+    declared.limits.max_coefficient_bits = 32;
+    let mut opts = options();
+    opts.guard_digits = 80;
+    let result = flow
+        .evaluate_constrained_endpoint(
+            &mut cache,
+            &request(range, None),
+            &declared,
+            &opts,
+            &RunContext::default(),
+            &cost(),
+            &admit,
+        )
+        .unwrap();
+    assert!(p.close(&result.boundary.coefficients[0][0], &p.i(3), 50));
 }

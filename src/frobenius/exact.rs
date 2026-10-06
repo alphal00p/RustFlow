@@ -1,8 +1,13 @@
 //! Exact coefficient operations for the shared Frobenius recurrence.
+pub(crate) use super::recurrence::RecurrenceColumn;
 use super::recurrence::*;
 use super::*;
 use symbolica::domains::float::FloatField;
 use symbolica::tensors::matrix::Matrix;
+mod resources;
+pub(crate) use resources::preflight_operation;
+#[cfg(test)]
+mod series_tests;
 
 pub(crate) type Gaussian = Complex<Rational>;
 type ExactMatrix = Matrix<FloatField<Gaussian>>;
@@ -138,6 +143,166 @@ pub(crate) fn height(a: &Gaussian) -> u64 {
 }
 pub(crate) fn field() -> FloatField<Gaussian> {
     FloatField::from_rep(Gaussian::new(Rational::zero(), Rational::zero()))
+}
+
+pub(crate) fn preflight_expression(
+    expression: &Atom,
+    variable: Symbol,
+    order: usize,
+    limits: &ExactFrobeniusLimits,
+    context: &RunContext,
+) -> Result<()> {
+    ExactDomain { limits, context }.preflight_series(expression, variable, order)
+}
+
+/// The caller proves H(0)=1 exactly. Native series arithmetic then selects the
+/// unique inverse square-root germ with constant one, over the existing field.
+pub(crate) fn normalized_root_series(
+    h: &Atom,
+    factor: &Atom,
+    variable: Symbol,
+    order: usize,
+    limits: &ExactFrobeniusLimits,
+    context: &RunContext,
+) -> Result<Vec<Gaussian>> {
+    let domain = ExactDomain { limits, context };
+    domain.preflight_series(h, variable, order)?;
+    domain.preflight_series(factor, variable, order)?;
+    let h0 = crate::family::substitute(h, &BTreeMap::from([(Atom::var(variable), Atom::new())]))
+        .together()
+        .cancel();
+    if gaussian_bounded(&h0, limits, context)? != Gaussian::new(Rational::one(), Rational::zero()) {
+        return Err(Error::InvalidInput(
+            "normalized exact root series must have constant one".into(),
+        ));
+    }
+    // Binomial denominators and products can grow beyond the rational input.
+    let mut nodes = 0;
+    let bits = domain
+        .series_bound(h.as_view(), variable, order, 0, &mut nodes)?
+        .saturating_add(domain.series_bound(factor.as_view(), variable, order, 0, &mut nodes)?)
+        .saturating_add(4)
+        .saturating_mul((order + 1) as u64)
+        .saturating_mul(2);
+    if bits > limits.max_coefficient_bits {
+        return Err(Error::Limit(
+            "exact root series height estimate exceeds limit".into(),
+        ));
+    }
+    let expression = factor * h.pow(Atom::num(Rational::from((-1, 2))));
+    context.cancellation.check()?;
+    let series = expression
+        .series(variable, 0, order as i64 + 1)
+        .map_err(|e| Error::Unsupported(format!("native exact root series: {e}")))?;
+    context.cancellation.check()?;
+    regular_root_coefficients(series.terms(), order, &domain)
+}
+
+fn regular_root_coefficients<'a>(
+    terms: impl Iterator<Item = (Rational, &'a Atom)>,
+    order: usize,
+    domain: &ExactDomain<'_>,
+) -> Result<Vec<Gaussian>> {
+    let mut result = vec![domain.zero(); order + 1];
+    for (power, coefficient) in terms {
+        domain.context.cancellation.check()?;
+        // Native series retain their ramification grid, including exact zero
+        // slots at half-integer powers of this regular unit-root series.
+        if coefficient.is_zero() {
+            continue;
+        }
+        let k = power.to_string().parse::<usize>().map_err(|_| {
+            Error::Unsupported(format!(
+                "normalized root product has nonzero nonregular power {power}"
+            ))
+        })?;
+        if k <= order {
+            result[k] = domain.evaluate(coefficient)?;
+        }
+    }
+    Ok(result)
+}
+
+pub(crate) fn rank(
+    rows: &[Vec<Gaussian>],
+    limits: &ExactFrobeniusLimits,
+    context: &RunContext,
+) -> Result<usize> {
+    let domain = ExactDomain { limits, context };
+    domain.matrix_bound(rows)?;
+    let matrix = ExactMatrix::from_nested_vec(rows.to_vec(), field()).map_err(Error::Numerical)?;
+    let result = matrix.rank();
+    context.cancellation.check()?;
+    Ok(result)
+}
+
+pub(crate) fn inverse(
+    rows: &[Vec<Gaussian>],
+    limits: &ExactFrobeniusLimits,
+    context: &RunContext,
+) -> Result<Vec<Vec<Gaussian>>> {
+    let domain = ExactDomain { limits, context };
+    domain.matrix_bound(rows)?;
+    let n = rows.len();
+    let inverse = ExactMatrix::from_nested_vec(rows.to_vec(), field())
+        .map_err(Error::Numerical)?
+        .inv()
+        .map_err(|e| Error::Numerical(format!("exact prefix inverse: {e}")))?;
+    let result = inverse
+        .into_vec()
+        .chunks(n)
+        .map(<[Gaussian]>::to_vec)
+        .collect::<Vec<_>>();
+    domain.check_rows(&result)?;
+    Ok(result)
+}
+
+pub(crate) fn polynomial_product(
+    mut a: Vec<Gaussian>,
+    mut b: Vec<Gaussian>,
+    variable: Symbol,
+    limits: &ExactFrobeniusLimits,
+    context: &RunContext,
+) -> Result<Vec<Gaussian>> {
+    let domain = ExactDomain { limits, context };
+    domain.check_rows(&[a.clone(), b.clone()])?;
+    while a.len() > 1 && a.last().is_some_and(Gaussian::is_zero) {
+        a.pop();
+    }
+    while b.len() > 1 && b.last().is_some_and(Gaussian::is_zero) {
+        b.pop();
+    }
+    let terms = a.len().min(b.len());
+    let bits = a
+        .iter()
+        .map(height)
+        .max()
+        .unwrap_or(0)
+        .saturating_add(b.iter().map(height).max().unwrap_or(0))
+        .saturating_add(1)
+        .saturating_mul(terms as u64)
+        .saturating_mul(2);
+    if a.len()
+        .checked_mul(b.len())
+        .is_none_or(|v| v > limits.max_scalar_cells)
+        || bits > limits.max_coefficient_bits
+    {
+        return Err(Error::Limit(
+            "exact root polynomial product estimate exceeds limit".into(),
+        ));
+    }
+    let variable = std::sync::Arc::new(PolyVariable::Symbol(variable));
+    let a = symbolica::poly::univariate::UnivariatePolynomial::from_coefficients(
+        &field(),
+        a,
+        variable.clone(),
+    );
+    let b =
+        symbolica::poly::univariate::UnivariatePolynomial::from_coefficients(&field(), b, variable);
+    let product = a * &b;
+    let result = product.coefficients().to_vec();
+    domain.check_rows(std::slice::from_ref(&result))?;
+    Ok(result)
 }
 
 pub(crate) fn row_reduce(

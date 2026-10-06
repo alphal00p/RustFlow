@@ -1,0 +1,802 @@
+{
+  "captured_utc": "2026-10-06T04:44:38.437590+00:00",
+  "purpose": "candidate final source freeze after resource review and expanded regressions",
+  "files": {
+    "src/algebra.rs": {
+      "sha256": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a",
+      "size": 5615
+    },
+    "src/algebraic/analytic_origin.rs": {
+      "sha256": "1f9dd40af3c69e0cb233d1a11999516df4744b77c65470af6bbdb758ed91a7c8",
+      "size": 14164
+    },
+    "src/algebraic/canonical.rs": {
+      "sha256": "96960771c9fd38e16f70e797241dd363d6e88cdea802e43d961fe76594c34246",
+      "size": 12486
+    },
+    "src/algebraic/frobenius/constrained.rs": {
+      "sha256": "1c75b9123257b17e4c4dccc78fa5275b03a90013bb8ace8120af3f42a2c2aac3",
+      "size": 7803
+    },
+    "src/algebraic/frobenius/sheet.rs": {
+      "sha256": "5fce48ff2dac0259f678a40e031b744bf90f22f92dd2ce891e29945c8cedec55",
+      "size": 15114
+    },
+    "src/algebraic/frobenius/sheet_germ.rs": {
+      "sha256": "c21c6f4d079f7637687d678556c3682a0acb7dee45f03e99071e630510f052b2",
+      "size": 12776
+    },
+    "src/algebraic/frobenius/sheet_tests.rs": {
+      "sha256": "bfd4f18d74649fc9d5cf863d6f085f8bd21a916616bbe5449be38eb1f47c8c08",
+      "size": 11712
+    },
+    "src/algebraic/frobenius.rs": {
+      "sha256": "f4c135f4d49be39eda0c5a21065bc2e694c600126ce5593d1000111fca9c0e5a",
+      "size": 31421
+    },
+    "src/algebraic/quotient.rs": {
+      "sha256": "543b34a27d485d3c5450c65cff7defbc24106c9560854615ebfb3b0c84f75117",
+      "size": 4127
+    },
+    "src/algebraic/residual.rs": {
+      "sha256": "d6a19517bf3e5a7a8ae1100586b7976f2d3e6f033f043d7adfffe84aba7af99e",
+      "size": 19589
+    },
+    "src/algebraic.rs": {
+      "sha256": "91750cc7835d7d5bd96995275405fe7f01d2a319f2d3901190161a6e6086657c",
+      "size": 69760
+    },
+    "src/asymptotic/exact.rs": {
+      "sha256": "f0e53d826d5444bca56c4084aad328e2dea06e9b1d9370ce16ab439d8d04b206",
+      "size": 14444
+    },
+    "src/asymptotic/exact_tests.rs": {
+      "sha256": "350fc485cdabceb78249a8e2e700fd9709e0b1489fe2f2af59797205b75796d0",
+      "size": 9789
+    },
+    "src/asymptotic.rs": {
+      "sha256": "117d3f8b85041a0bcd0d73072d51a76eee4184e8421390f65989be145731cb3a",
+      "size": 4183
+    },
+    "src/benchmarks.rs": {
+      "sha256": "a3b74d5c9915e86f2992e3c43d8c56c337c6e17ddd9d8640db12777b8b5ee463",
+      "size": 5515
+    },
+    "src/bin/rustflow.rs": {
+      "sha256": "7d2abebdfdd88a5579e775611c061d02d4e54478162893a7bbaa5e4e82b29b64",
+      "size": 38111
+    },
+    "src/boundary.rs": {
+      "sha256": "a4cdf7022bc0d67e4ac6ce3784b7f85a9042fc4981dd84c4109619a9b00c32c5",
+      "size": 30164
+    },
+    "src/bubble.rs": {
+      "sha256": "ec541b9a7017c32f64f0ebfe762108f3974033b88b3480ff007f21aeae58f1b6",
+      "size": 22888
+    },
+    "src/cache.rs": {
+      "sha256": "20196933dfb0ab9e379fd8e674d2b371f1de980aaa04b18f0258803e2331028c",
+      "size": 30891
+    },
+    "src/coefficient.rs": {
+      "sha256": "77837fd43b19bd079eb9ed64398c92bc78f8182c0dad0fd30ad3512af44c3de7",
+      "size": 16622
+    },
+    "src/common_mass.rs": {
+      "sha256": "15cf22baa774fb3fdb5e85d2db7a4e7804271537e45feb7dde584ab391094124",
+      "size": 26657
+    },
+    "src/contour.rs": {
+      "sha256": "1f8801c07a7b55a8bffca135b4c42d82c32698e0f80e5c72a9763e5d8fb15cbe",
+      "size": 24687
+    },
+    "src/cuts.rs": {
+      "sha256": "e0522a9171bbfe0eda2e90c28b53dd1d3d50ef14e5b31ad5bcb2d1249fc4837e",
+      "size": 21975
+    },
+    "src/diffexp/uncertainty_tests.rs": {
+      "sha256": "b8f9ae9fdab0cc62e78a68b787170b24dccfb882122abeb6773288416033d6a2",
+      "size": 8654
+    },
+    "src/diffexp.rs": {
+      "sha256": "a3d9b15a41d59265ab85fb8f1515c99a2ce117fd4ec4a4b49110dde05e11886e",
+      "size": 33794
+    },
+    "src/engine/frobenius_cache.rs": {
+      "sha256": "223f42f0b30b3818480d73f465dbb8bab2b78762d3d3c981a2812996e5e018e0",
+      "size": 9435
+    },
+    "src/engine/projection_tests.rs": {
+      "sha256": "7cbbaa3522f0c63b83639450ee60a8e9b25a54ad520f5c448eee10ba206fcb6e",
+      "size": 3754
+    },
+    "src/engine/supplied.rs": {
+      "sha256": "7d04baf7c9b06b7cecc0a432fa3c36a47b406a84756ab9899ad9cf3d615cb1f2",
+      "size": 14110
+    },
+    "src/engine.rs": {
+      "sha256": "57acaec6ecedb0f6485fd3e3676745dd4e53cc33f3e160c3fb4e6d531cc33653",
+      "size": 45257
+    },
+    "src/epsilon.rs": {
+      "sha256": "e10f50d16875dad211ae025ed2f05c177e356189428ee4564d9e6d1f5be15112",
+      "size": 3502
+    },
+    "src/epsilon_flow.rs": {
+      "sha256": "6f5b051c12e9f487d10361c565bac96835af801160001986d430785110848189",
+      "size": 4451
+    },
+    "src/epsilon_shearing.rs": {
+      "sha256": "afd0f0ccdc333805a71f0069f41d3d6d4f2432a9fce6efa74c68babb3d09626c",
+      "size": 18167
+    },
+    "src/error.rs": {
+      "sha256": "32bb6340c4d9d7689ea3b39606acfa0e22e80189faaa09d145ee82898db94822",
+      "size": 1069
+    },
+    "src/family.rs": {
+      "sha256": "95fd5c3fc7ecb47d54a45489406b987099e4a094a94f6754c997158f88f37226",
+      "size": 19707
+    },
+    "src/fixed_series.rs": {
+      "sha256": "a0a0e13c37fc129ed0f6e5e10768343dc1e913d512b7ef5598c4a54981e295db",
+      "size": 12605
+    },
+    "src/frobenius/endpoint_support.rs": {
+      "sha256": "dc8b5c863c9450f32403bb7aa7f633720bd2219a85939861ed13928c4e3c412b",
+      "size": 9815
+    },
+    "src/frobenius/exact/resources.rs": {
+      "sha256": "dce41a06433c66f18509e30709f4318e9383bda2fbcd411be1b06b58ad6fc916",
+      "size": 4341
+    },
+    "src/frobenius/exact.rs": {
+      "sha256": "d545330815534ba76a300e6759c1df952a598b90e661276cd765665b758ffb56",
+      "size": 25263
+    },
+    "src/frobenius/recurrence.rs": {
+      "sha256": "a499145a238dca8939343ed52b3a8268cc6cb73cba95760dd2bbe743806f1028",
+      "size": 16035
+    },
+    "src/frobenius.rs": {
+      "sha256": "3742b8381aacce50e970bdf38f3626ec8ab5db801f1b49238ebdb7ab621bab10",
+      "size": 22866
+    },
+    "src/ft.rs": {
+      "sha256": "cd2ea476da1bf86d9e6f48c73eec5053a3d8b83af7de2f1d52b9501e53d63c90",
+      "size": 20253
+    },
+    "src/gaussian.rs": {
+      "sha256": "8ad1b25983c86015c856990e0e86a58db8502162353fddc813cdbaed74d6ac9e",
+      "size": 8133
+    },
+    "src/gg_hg/amplitude.rs": {
+      "sha256": "46e31f9356be66fb4ee5fd322023d44713cbb62abad68776da6de091d4288fa2",
+      "size": 19126
+    },
+    "src/gg_hg/form_factors.rs": {
+      "sha256": "138e24e79d3991b87bc83a0c3ccaf0acc11182d6edda015e497b195f4cb0b481",
+      "size": 21574
+    },
+    "src/gg_hg/mod.rs": {
+      "sha256": "eeda4b2ce4fb71e14935af8600f0cde52b5180735a15368fd2650f57ffa53183",
+      "size": 594
+    },
+    "src/gg_hg/plugin_basis.rs": {
+      "sha256": "2bc5136ad397b449af87e1195a3b5b1ec705ec63d02570622292172ae632272e",
+      "size": 15758
+    },
+    "src/gg_hg/published.rs": {
+      "sha256": "911dd0f3521820533de5d4d823fd08d8bab18f521cb532c3bf8284900feee590",
+      "size": 18483
+    },
+    "src/gg_hg/workflow.rs": {
+      "sha256": "cbdbb2991084687207f115e7f202f646c43b94151bfc074f3fafadb28808b406",
+      "size": 20623
+    },
+    "src/hepkit.rs": {
+      "sha256": "5ec51c42d4def41541bff1248d100728029133a4f766569719c37ea1076548b2",
+      "size": 25096
+    },
+    "src/integer_shearing.rs": {
+      "sha256": "aedbf9a1491afc66e9f77452c26cbacf476486757da7e5d8ab4849012b14de06",
+      "size": 4744
+    },
+    "src/integrand.rs": {
+      "sha256": "07f172586c904fcdc9511a8ba63ae562c56a9d74234dd44a829d04a71bb541b1",
+      "size": 17620
+    },
+    "src/kinematic_derivative.rs": {
+      "sha256": "2be373a311b03b8b847c73bb5e88497a2361a0d76c016679c9d8a17216ce324f",
+      "size": 11305
+    },
+    "src/kinematics.rs": {
+      "sha256": "a5df4d1682ccf6e9457ac8a5c0f9ae1dcf51c7089a5e653c215ade7b6809d0fc",
+      "size": 10795
+    },
+    "src/lib.rs": {
+      "sha256": "fe25b1e9b6aae36fd0a2ed94708f7b5b70dbe35fc141ad47ab56849c58d6cedd",
+      "size": 2238
+    },
+    "src/linear.rs": {
+      "sha256": "db6a804bc0fe42a608e2ab0baaa6d7fa1f58bb5d53fcb0e5d75b5bcd8bbbd368",
+      "size": 15290
+    },
+    "src/local_coordinates.rs": {
+      "sha256": "eb856320fa4dec60170a5972cdb44c2906789e591c3f09cc9264d8392a8d899f",
+      "size": 13414
+    },
+    "src/native/parametric.rs": {
+      "sha256": "fea11102da91c592e35e10b480d02ba2305c57fd8843401edae90b006bf7e385",
+      "size": 11027
+    },
+    "src/native/parametric_tests.rs": {
+      "sha256": "224fa9c425d1beabce6c110f75190c4b2c632a407ec558dd43ddbd7ba814d387",
+      "size": 13881
+    },
+    "src/native/symmetry.rs": {
+      "sha256": "3e81ae5492e865aea6add52402848a812d677b0162b7d9d1fa70d069b440efd2",
+      "size": 24178
+    },
+    "src/native.rs": {
+      "sha256": "e13c3ea24e1d603da3b4fcb7b038823ff4741f1dff9319944f22cca0784c74be",
+      "size": 90791
+    },
+    "src/normalize.rs": {
+      "sha256": "7b96ca7e31e1c72de53a410ba601ff8e3e459522331939d5ab0d4cf2446743a7",
+      "size": 13505
+    },
+    "src/numeric.rs": {
+      "sha256": "17c9e27d1ffac7903e1dfb021de557aa55703e02823b0940a91794b94a17b518",
+      "size": 14651
+    },
+    "src/ode/conditioning.rs": {
+      "sha256": "bc12392051c0d9a6ee65b0e6fed7430113a8d4e38e9fc6e05378aef87c56bcf1",
+      "size": 8767
+    },
+    "src/ode/endpoint_tests.rs": {
+      "sha256": "dd0e06047bcc04a0688f5b9361eb420ba1422901fb71174a46630f5911647342",
+      "size": 9632
+    },
+    "src/ode/exclusion_tests.rs": {
+      "sha256": "c3860aa8289b5eca988efdf5a922c8141b61c6be839dc00c05069baa0de7fc96",
+      "size": 2282
+    },
+    "src/ode/residual.rs": {
+      "sha256": "a52fd7ee6a2c1177bcc81b19ed7afc039cd6d6add007ecb24acb3caa1004eb50",
+      "size": 6315
+    },
+    "src/ode/residual_tests.rs": {
+      "sha256": "ec0db50b7be65406053840af922be4227ebe5da31619a5d45d2ffd3703406953",
+      "size": 5361
+    },
+    "src/ode/source.rs": {
+      "sha256": "4e127e5d105d311e5c50aa6d896487f8eee0f3b0c9613f12fdde38e31999bbe4",
+      "size": 24672
+    },
+    "src/ode/source_tests.rs": {
+      "sha256": "450af212e17614ba2c18012fc4161a937f73c4011e480447357f864be8dbf5cc",
+      "size": 12219
+    },
+    "src/ode/step_size_tests.rs": {
+      "sha256": "ccebef86f152b7f08b9261e6e70a9db1625bd552f0b9183084ea85bbfd236c0b",
+      "size": 10487
+    },
+    "src/ode.rs": {
+      "sha256": "2b26b081ce2303de243db531b12b2f55385295c1cf8918065d3b8d8205b61c63",
+      "size": 63906
+    },
+    "src/options.rs": {
+      "sha256": "7861db9d30767814904d6b921b52f80a58439bf6af25547eb37d0665ae9c52aa",
+      "size": 7140
+    },
+    "src/phase_space.rs": {
+      "sha256": "e10d567f9a5e3bc71fd74a423c3a16638ee1af96fccc07c6b14f2e9af576d4c7",
+      "size": 30232
+    },
+    "src/physical_conditions.rs": {
+      "sha256": "52af20b182eedbf0dc9a9885b450afacc88cb1db50fb83e13f2ddfd4edf993af",
+      "size": 12954
+    },
+    "src/physical_family.rs": {
+      "sha256": "4c0e26104870f91b26afb9e7fa019e141f74985f18d9ba567e9c7ab67a0a240a",
+      "size": 17380
+    },
+    "src/physical_targets.rs": {
+      "sha256": "518679de973ea56a44573fd2df4f1b25ad2a3fcf76924425945aac258b28a58b",
+      "size": 14196
+    },
+    "src/physical_transport.rs": {
+      "sha256": "af120e8144e9be025e429f5394a658b7d282d677bee6550679a51b14f41781d4",
+      "size": 51316
+    },
+    "src/projections.rs": {
+      "sha256": "afc0bca52c987e81b6bf260dad507b641a2b0a157f20e618c6ca5fd2b3e503b5",
+      "size": 7688
+    },
+    "src/python/amplitude.rs": {
+      "sha256": "b0ddadadf9f6f358a57f76374251cad6e8e9c6baf07bf3db787bbfec8e675610",
+      "size": 7551
+    },
+    "src/python/endpoint.rs": {
+      "sha256": "c1a02df0e48012c2c516a2ced89d087845abcd1cc924e0d32b1c786fb5e8bd6b",
+      "size": 6840
+    },
+    "src/python/evaluation.rs": {
+      "sha256": "59aa21bf99920074379def982a71587da7bf5e6ac73fea52b48acc1cbe57dd18",
+      "size": 21578
+    },
+    "src/python/gg_hg.rs": {
+      "sha256": "a06a634673d684b5dff71f503178bd3953908aad9317484a8486439025025a70",
+      "size": 12510
+    },
+    "src/python/mod.rs": {
+      "sha256": "db07ccdb429e2b50c6247d3fea8bc3585202d8358da878c17287567569e711d0",
+      "size": 9099
+    },
+    "src/python/transport.rs": {
+      "sha256": "1b14172e72bca0a39d6b687999350e1c6f59dfbaae479a15a68a62063a369afa",
+      "size": 15383
+    },
+    "src/python/types.rs": {
+      "sha256": "b27ddbbdbc96e01224bdd3b4ba31808f1beaadf04b998d1238267480c0011cff",
+      "size": 27130
+    },
+    "src/recursive.rs": {
+      "sha256": "5acc53007a5a821bebaed329a0ba0f5e93312937efc0d7aa66a4ab6e546a18d9",
+      "size": 23721
+    },
+    "src/reduction/scoped_tables.rs": {
+      "sha256": "fdea80cd4df5f3ac29209a6a4f82ef378b84c06856322140955c7b4ee28d44ce",
+      "size": 10008
+    },
+    "src/reduction/table_graph.rs": {
+      "sha256": "e409b2634944ce1d2a1d7865b0a09a7b7bcb1134f7fe1d84e09286cb14efb1bf",
+      "size": 7606
+    },
+    "src/reduction.rs": {
+      "sha256": "821bd82d402822a22aafae437ff20dac5f2fcacf97c8b1b1dd5ec02732cde36d",
+      "size": 29317
+    },
+    "src/refine.rs": {
+      "sha256": "c84a057862f9a85cca05a1250883fb19b135e3cb4214e45ee66b3819daa1c22c",
+      "size": 9562
+    },
+    "src/regions.rs": {
+      "sha256": "80774144c51cf3a72cad25d14c33cfae183fbae666db1178b31ae7163c0369ca",
+      "size": 9890
+    },
+    "src/root_path.rs": {
+      "sha256": "3dc20f95947915ef26589c9739a006026de794d05048efbb10c2fd2e0f8870bd",
+      "size": 12486
+    },
+    "src/sample_checkpoint.rs": {
+      "sha256": "54b38c2c45fd16a00cc07a3bf45d5b35f10d3075820b27d7742d716e228ab09e",
+      "size": 9832
+    },
+    "src/singular_endpoint.rs": {
+      "sha256": "e137f63e775599f5ac59b1882f17b0cf20ee755468852dc5d7b1d5613558ef3d",
+      "size": 30738
+    },
+    "src/tensor.rs": {
+      "sha256": "bc27dc820275c76716ca24c677e714f61e5734156dcb94ee95ec6bd8eab4a77b",
+      "size": 7134
+    },
+    "src/transport_cache.rs": {
+      "sha256": "db02ba9ad187a0bfb05f0435f3a41c79e715caefaadd00309fbf0ff62b6721d9",
+      "size": 95330
+    },
+    "src/transport_cache_serialization_tests.rs": {
+      "sha256": "e77acb21aab77507c34ca808b9fce4f0fcedd16efc001202bb28ec6d8be1a64b",
+      "size": 21319
+    },
+    "src/vacuum.rs": {
+      "sha256": "b3347458d799616cee718fc52176dfa9ff23ddc85b7769cedee5ae4e77bf3f52",
+      "size": 2127
+    },
+    "src/vacuum_peel.rs": {
+      "sha256": "982ea36fed6fe832eae3b9f16489649c18e09c46fdf60fd91422ddd1746e28c2",
+      "size": 27968
+    },
+    "tests/accuracy_fallback.rs": {
+      "sha256": "d7fc58b40b6cfb07a1f77061c27a142573c508ac883e64b8c866da4c90724b45",
+      "size": 6839
+    },
+    "tests/algebraic.rs": {
+      "sha256": "1897f156399853d7e1648f0078bd4f72afc7a6201e068625c767d8c93b86c39e",
+      "size": 12328
+    },
+    "tests/algebraic_cache.rs": {
+      "sha256": "bc4c1db34306cd8a5d1864d56e6ee0c6b7570bdf19853b92732425a09624a4b5",
+      "size": 16402
+    },
+    "tests/algebraic_endpoints.rs": {
+      "sha256": "ca595d11c959d392ba6397016313eb1d2afb1333e615835020e4b478a2db8c28",
+      "size": 16921
+    },
+    "tests/algebraic_kinematic.rs": {
+      "sha256": "8cb95c8031fa3245fe6be7e43685b5076846a411265d455f74516fb137b4449a",
+      "size": 6276
+    },
+    "tests/algebraic_quotients.rs": {
+      "sha256": "110720b1496bc822460da095d264e0d9dd8a84f9bea6f145cefed76efb3f408b",
+      "size": 14971
+    },
+    "tests/amf_mass_sheet.rs": {
+      "sha256": "e215dd6e5257b56315e7bc49e7803e67c3649e74a23175de66ba49a54071dd0c",
+      "size": 12730
+    },
+    "tests/analytic_origin.rs": {
+      "sha256": "bb307c0b01d4ddd389a011a329372db62ba83d25dc38557edc5fbe2fc14c8251",
+      "size": 7361
+    },
+    "tests/asymptotic.rs": {
+      "sha256": "f2941ad50f3da9ae9ba80e743df9962e75eae635930f2bb801c397fbc92f6fd0",
+      "size": 6200
+    },
+    "tests/banana_equal.rs": {
+      "sha256": "a789a39765c310c6c4383bef9406c28c32fa2e547d6ff91ff6ec8706701ceeb0",
+      "size": 8353
+    },
+    "tests/banana_unequal.rs": {
+      "sha256": "803d499d51e3e36ff86b937a39814926680bbc6a6ec19fd78878c0b6e7f53a2a",
+      "size": 6222
+    },
+    "tests/cache.rs": {
+      "sha256": "b72832d2eb3481e29ae4b3425f71d9d8e09a8c46c3d6276d3386d32c2e110056",
+      "size": 19617
+    },
+    "tests/cache_lower_bounds.rs": {
+      "sha256": "b0505398c12d22550d2ce1ac20dc7ac1716debe76da51e3d5623980a7010a496",
+      "size": 10341
+    },
+    "tests/canonical_algebraic.rs": {
+      "sha256": "cefc5aa18a12c63cf513bb95377072f5fc7ec0158df713a9e288c93284031f68",
+      "size": 13964
+    },
+    "tests/canonical_cache.rs": {
+      "sha256": "e10aefa56c594d156e5b897297c1e192d7d60f626933608a7e5325368ea06bc3",
+      "size": 10798
+    },
+    "tests/cli.rs": {
+      "sha256": "ae654600e128164ce7ddf018df4b1748c9ce4dccd66399077983a97ad6c893f5",
+      "size": 13850
+    },
+    "tests/cli_algebraic.rs": {
+      "sha256": "4fb0ec982c79a5d32971f15df535e1d260c8c8f5e34cb01e6242f7b77cb9a9f7",
+      "size": 8013
+    },
+    "tests/cli_canonical.rs": {
+      "sha256": "af396edb86719764985f179422bc9b746619e6ab664c88e72e93702131922c35",
+      "size": 6706
+    },
+    "tests/cli_epsilon_shearing.rs": {
+      "sha256": "d74366a8d42e2553a23bba3d6848a23d8667d632c892460d0a6e64f2aedff973",
+      "size": 12875
+    },
+    "tests/cli_fallback.rs": {
+      "sha256": "38f23dcba3181c9403e123ab9f6f64d9f4122fac577954153f8141225db1c6ca",
+      "size": 4242
+    },
+    "tests/combinations.rs": {
+      "sha256": "a425f23ad806fa581490b2df0e75c592bbf642306a45598289b7bb58cc16e473",
+      "size": 8196
+    },
+    "tests/common/banana.rs": {
+      "sha256": "b1aaebfc81166d36c4d9f8f02caaa2223165c0379450b979577184a7d4f69100",
+      "size": 8266
+    },
+    "tests/common/fivepoint.rs": {
+      "sha256": "0f92c6b82385f19255c5a1080ec1fa6b6e0f0a2b44b38e80be47c619cb7b8c34",
+      "size": 13470
+    },
+    "tests/common/gg_hg.rs": {
+      "sha256": "a1490680822ecfa888f4c622e5e74618fb0502347ebfdccdc7dde83eff45d8f8",
+      "size": 12361
+    },
+    "tests/complex_cache.rs": {
+      "sha256": "2ca0bbd737b529e8329de5fdddf26230e8f639fcc842179efbf2cf22fdc5d0ac",
+      "size": 18918
+    },
+    "tests/complex_kinematics.rs": {
+      "sha256": "b346323d16fd3db7c7a49e2566892ad84255573fd61ea5ae05f3661c3e61f41c",
+      "size": 3211
+    },
+    "tests/complex_ode.rs": {
+      "sha256": "b06f10cf9cf9abc477c5b5f4037ea48d5b17b7527ed70ac8bfbe33fb08d962b1",
+      "size": 2204
+    },
+    "tests/conditioning.rs": {
+      "sha256": "43a7a01a04157ccd531cba8c31b238eb1578c6416ffec0fc8161969a5d85ba96",
+      "size": 15753
+    },
+    "tests/constrained_singular_endpoints.rs": {
+      "sha256": "ddd34632f33c1811f2ac592bda55417b3e2ca0b977f4685b108fb6dba658658a",
+      "size": 34905
+    },
+    "tests/continuation_budget.rs": {
+      "sha256": "1660ab09cca9639543533194320b69283586e9567c9fcf6d8fa339e5d26fd1e3",
+      "size": 1392
+    },
+    "tests/continuation_empty_poles.rs": {
+      "sha256": "60847d0f0d12b41a80e86b76d05bf62b37227956d302a443d14079ee50e4e395",
+      "size": 3658
+    },
+    "tests/contour_endpoints.rs": {
+      "sha256": "ea1991c2442608ad2a48df5e140c751e731625b96f607237948bc9621c7d64ef",
+      "size": 2112
+    },
+    "tests/contour_factorization.rs": {
+      "sha256": "f4c85a4b5419724c68971955665d002ec26e2e6f6a242a46ef2b64397a22f0d7",
+      "size": 5137
+    },
+    "tests/contour_signs.rs": {
+      "sha256": "366969e6733db40e39f3056577675bc87d59b0796a1d9b20851a19a44fde15ba",
+      "size": 3474
+    },
+    "tests/core.rs": {
+      "sha256": "879e5887c330febd3296dc015854583bc3ce9f66f2708eef76448484743d1684",
+      "size": 14595
+    },
+    "tests/cuts.rs": {
+      "sha256": "1295570164cc01f8d7176eb0cb1f854c14dbc9cc2c99a93308a870f079095462",
+      "size": 6931
+    },
+    "tests/diffexp.rs": {
+      "sha256": "a892011fcafb59b4c6de3c32f1d7adb9fc1cd83240cf172b3ec2eeba76478402",
+      "size": 10701
+    },
+    "tests/end_to_end.rs": {
+      "sha256": "3d5fb7f4414e114313dd90b475e6599afec97878db8086fb28eefd82f2d2ebda",
+      "size": 13082
+    },
+    "tests/epsilon_algebraic.rs": {
+      "sha256": "6e7fa5d428fca21b08502d2df924dbdb17714421f0608867bc1d773089e54dd4",
+      "size": 17142
+    },
+    "tests/epsilon_cache.rs": {
+      "sha256": "d8bb5f7fd68ef48476fcda8ba2898af2ee1c85894a0a9466e4bf45893a3c5e13",
+      "size": 8523
+    },
+    "tests/epsilon_physical_family.rs": {
+      "sha256": "eca7dd9dee31b6a7017895b77c65d0ad35c410eb0fc86d9ca7842e760617c023",
+      "size": 9635
+    },
+    "tests/epsilon_shearing.rs": {
+      "sha256": "e3a1ddb4f5dcb6e4eebe88609a79d5ac3e88d5aa9b8c2ce6f29bf1bf515614fc",
+      "size": 12696
+    },
+    "tests/fivepoint_mzz.rs": {
+      "sha256": "e36ec4a68bfca2dac49aa3b92d90d5e244254f965f1b591db9c976b0286adcc2",
+      "size": 1270
+    },
+    "tests/fivepoint_planar.rs": {
+      "sha256": "8f55a0f7eb63b0d1b7e1dad7b497dbff411dc9c54b638b9a71f1d92a6452760d",
+      "size": 1452
+    },
+    "tests/fivepoint_prescribed_cache.rs": {
+      "sha256": "da87447424cc9b398ca8bba7073825a63cef4433ab840f9d803a50107a0f106b",
+      "size": 9085
+    },
+    "tests/fivepoint_zmz.rs": {
+      "sha256": "44a0e6791dde6a299163b315a69f4ac0dee3c09758b477af5fc3fda82455a3b3",
+      "size": 1270
+    },
+    "tests/fivepoint_zmz_sector.rs": {
+      "sha256": "595b503c5663c33ff331e8cfb379a248dc350c05e82df8a400548f2be16fa51f",
+      "size": 1317
+    },
+    "tests/fivepoint_zzz.rs": {
+      "sha256": "34b32eb3009aac1567ea12e051636daf96ecda6fe1e4d97d0268f2e552817c98",
+      "size": 1270
+    },
+    "tests/frobenius.rs": {
+      "sha256": "22386fe9459823670a3d5acb435b80ae73638f3ac13bf5a8c5a74fdfcc3ef306",
+      "size": 10157
+    },
+    "tests/ft.rs": {
+      "sha256": "9c4a7afa0ba9d31ba36be9c7bfa8e3c1197a942735c61da4e7fbe4b31981ecd5",
+      "size": 10604
+    },
+    "tests/gg_hg.rs": {
+      "sha256": "218b1782fb43c711eea611064c586d2ba7cae4fc2e18bea8e23e85275f1e0c4f",
+      "size": 1362
+    },
+    "tests/gg_hg_amplitude.rs": {
+      "sha256": "daaa63248222e898cf6c98517d17020f000c8aff803c99f52d797980da9a89f0",
+      "size": 5272
+    },
+    "tests/gg_hg_anchors.rs": {
+      "sha256": "1858b0e358f5e47b9fdb73ecbf4373b7e675400f07b778f832f125ef16d51a24",
+      "size": 2473
+    },
+    "tests/hepkit.rs": {
+      "sha256": "be563db1d9187e3b9573c7b03a0e89429b7a61d379986018f7066f29ab6af6e3",
+      "size": 14924
+    },
+    "tests/hepkit_cuts.rs": {
+      "sha256": "85ca25cdfd16467329d464abf01486150d667aa7fa9c0caadf2e3ecdd6fa9cd4",
+      "size": 7280
+    },
+    "tests/integrand.rs": {
+      "sha256": "9ca6288360707282b748d3c26e522a29c2e2c054b23c0ead4fcf088ac9f31563",
+      "size": 5789
+    },
+    "tests/kinematic_derivative.rs": {
+      "sha256": "04b4769edf2027e6e26511ef4edd74146790a61498a2c39b6f4ca7d952ead46e",
+      "size": 8975
+    },
+    "tests/kinematics.rs": {
+      "sha256": "e2988a7488ac50eb2b4c31fe8388124feba0ad8f48fb9e18866518bc84ad71c0",
+      "size": 8765
+    },
+    "tests/linear.rs": {
+      "sha256": "1302f54801f24493e3949db840e1511158b8a96c61a6924d6fa135ceda3d5605",
+      "size": 9998
+    },
+    "tests/linear_two_directions.rs": {
+      "sha256": "1a4a8367af08e86bac49ec64b9e1203106fc4a2ee3eb5f6d860cf5d0d015d67a",
+      "size": 10915
+    },
+    "tests/massless_phase_space.rs": {
+      "sha256": "a7d57c3a770b1204c615e5bbb1880e5e4110cada7e1a5c86021d0d90d1c5ad01",
+      "size": 20523
+    },
+    "tests/mg5_pointbank.rs": {
+      "sha256": "0a197777d89918007360c31922295de3b363bc289a48f20000ad255a160be943",
+      "size": 10906
+    },
+    "tests/mobius.rs": {
+      "sha256": "b1acfe0c9d2f9663201b191987a4b8699f5bfab6db9d837cbd7563e6436dbbb9",
+      "size": 15439
+    },
+    "tests/mobius_cache.rs": {
+      "sha256": "7b370d49b7524dbcba00bf9cb4252b4bcb128d9458345dba4938eab5742c2c91",
+      "size": 4763
+    },
+    "tests/mpl_additional.rs": {
+      "sha256": "cc3ff302f18ca55afc9abbecde435f930d4bfaf5a5a40a1164525920d0a93472",
+      "size": 5923
+    },
+    "tests/multimass_physical.rs": {
+      "sha256": "c0e80f5378b9c1b4449bc91715cea35ebe3d0804fea127e783a96e01a0677f0e",
+      "size": 3888
+    },
+    "tests/native_arity.rs": {
+      "sha256": "6f5c06469b5f2a84deb44367259ed31a4c69281e54af76295772285688a61101",
+      "size": 4678
+    },
+    "tests/native_family_cache.rs": {
+      "sha256": "e51d5c04ff92f32417b363f64a297562d8c2e92767e6edf1a4f711dc63bd12be",
+      "size": 5244
+    },
+    "tests/native_graphs.rs": {
+      "sha256": "6f21e3561fcda3d84f66d228a88a89391c7c36e03b8b19e59256c876f36bd4da",
+      "size": 1066
+    },
+    "tests/native_parametric.rs": {
+      "sha256": "2c4bdbadb00da143873996fe41463357f3f9c7bc356b19bc5b4118f0512d27ad",
+      "size": 3680
+    },
+    "tests/native_physical.rs": {
+      "sha256": "29f0e7a4695130dd0d143495d35f16c73256cd71d9adbcb0b5bbb2974ba7b356",
+      "size": 4259
+    },
+    "tests/native_symmetry.rs": {
+      "sha256": "60cf5d13274aff4ed9c2c5b7534e95c1bfeda481c8b7c9b4018245ead9ba3294",
+      "size": 5157
+    },
+    "tests/nonplanar108.rs": {
+      "sha256": "1ce305af1ea2c9b1fd9b719a298b3e710d91c70f3e7c4350712c9c3c58cd9bf5",
+      "size": 7566
+    },
+    "tests/numeric_rounding.rs": {
+      "sha256": "2826054f1c85c8dc99f04689d408a2e493bb2a3115cfb6a6c08eac958e8bbaac",
+      "size": 5639
+    },
+    "tests/phase_space.rs": {
+      "sha256": "30302fe4acb24f5777eb165df9faf958f6dd1f0095d68ceeacf1ba0c6dea0598",
+      "size": 8249
+    },
+    "tests/physical_conditions.rs": {
+      "sha256": "fd61c1f6cd773e4c85267a572e6a7b187454eae34172b9c2e0df82cc2b488a66",
+      "size": 10622
+    },
+    "tests/physical_family.rs": {
+      "sha256": "48138ed34390b8d309db19fa27053840a84f91f46e4a074fa4d8f7365b42a719",
+      "size": 3898
+    },
+    "tests/physical_preparation_options.rs": {
+      "sha256": "aaa79799c9afe77f60d62435cb08662c0ec117ce7492b2f45abc75006f26c14b",
+      "size": 13678
+    },
+    "tests/physical_targets.rs": {
+      "sha256": "84558cdd13d2f2240542df10259a9c49d32ba510683437c64a7f793e2e754ef0",
+      "size": 7244
+    },
+    "tests/physical_transport.rs": {
+      "sha256": "d375f794fa4ae2d7958fd64111b635462e22fc199a2fd15356faa1522d2ae0a5",
+      "size": 11156
+    },
+    "tests/precision_cache_fallback.rs": {
+      "sha256": "cb41996cb07523fa136af42f2317fee877c75718e5deedc765a011fc2d22b89c",
+      "size": 10061
+    },
+    "tests/prepared_frobenius.rs": {
+      "sha256": "07db3c5bf67f90f17084eeea17c93e5642ef0502040ad47570e0a5b30b90b14c",
+      "size": 6534
+    },
+    "tests/prescribed_cache.rs": {
+      "sha256": "789f5df2b8c00f4f4a896a71835b3af6c517157efc0a95ac57ef6566fd83ee53",
+      "size": 15637
+    },
+    "tests/prescribed_contours.rs": {
+      "sha256": "d3a68de129691f9ebfde0d1bb6ea8905d9d2db4fa110d12802ba82badc4f0a4c",
+      "size": 11209
+    },
+    "tests/recursive.rs": {
+      "sha256": "48bf280ab6fb91e1c8a145c967b6cb506682a12eaaf03b74a6b93eac88f9cf6a",
+      "size": 32725
+    },
+    "tests/reduction_graphs.rs": {
+      "sha256": "189a074a714eefc6ee6a19cbf7f96beffbed716706a2871fd24bec9f049b2e9a",
+      "size": 8895
+    },
+    "tests/regions.rs": {
+      "sha256": "53b88258a61739adf20d8a0a52fa5d1c92fc5097676278c70552a8af0c72a33c",
+      "size": 1870
+    },
+    "tests/scoped_reductions.rs": {
+      "sha256": "8421ad085312dac27f188b644a7a75ba38c6bca0f4702e6e959ecc4ebd8b8062",
+      "size": 14965
+    },
+    "tests/single_mass.rs": {
+      "sha256": "388ed1db6fe35bb13baa9aee00fa3c0e4acabbe9e19e45784063e40ffc2d490a",
+      "size": 15650
+    },
+    "tests/source_fingerprint.rs": {
+      "sha256": "4e53ae329426bc8d62f60fed7ff41e99b7f2a074f0e590715949cdbbea45ea3d",
+      "size": 5215
+    },
+    "tests/supplied_flow.rs": {
+      "sha256": "e53ffdc9471a83bf4006be2a1e019a2ed1ca13fb44db6bb7dafc4dde72a55779",
+      "size": 12005
+    },
+    "tests/supplied_singular_endpoints.rs": {
+      "sha256": "3486bfe6e2c7acbe8c207627050ae64e46e0ea8a0a66d9b76e1724b96f059654",
+      "size": 29946
+    },
+    "tests/support/gg_hg_anchors.rs": {
+      "sha256": "d3584356d8b365415e2801a6572c6099ca11f40e0df9ede11b0238ab23cf99d0",
+      "size": 8104
+    },
+    "tests/symbolica_root_scaling.rs": {
+      "sha256": "ea7a417ec4f383459fb49ddf49a6cc3f9757ded7bf424fed7cee7202c67ca4ce",
+      "size": 2054
+    },
+    "tests/tensor_vacuum.rs": {
+      "sha256": "e67d430f3a6027af9109aa4abc2fbe10d6160afdf08092c08bd95cd73694e444",
+      "size": 6071
+    },
+    "tests/transport_cache.rs": {
+      "sha256": "dd5a855a4332ccfe1b72b742704753e633f42cf0e4f901f4e6a508ce54c5acea",
+      "size": 25716
+    },
+    "tests/weighted_uncertainty.rs": {
+      "sha256": "9e1c57d3fd54237eb3036f99e21f8c1965182748e2f3ec3eb7651d919b5da0ad",
+      "size": 5141
+    },
+    "Cargo.toml": {
+      "sha256": "9c109c014341e3b3f9cb75293e7114dbfa6fbb6c1cca8924bb64c48292617058",
+      "size": 6391
+    },
+    "Cargo.lock": {
+      "sha256": "4c5b7575719b551a186318342392dc24b2d7aec7d1ff0ab02650f5559cc4fa9c",
+      "size": 138001
+    },
+    "build.rs": {
+      "sha256": "73a572d44bcd9adbea3d6818f4a5125ba6a2670ec1436ecc0e45644b109a3edf",
+      "size": 6875
+    }
+  }
+}

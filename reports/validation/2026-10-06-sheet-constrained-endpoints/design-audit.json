@@ -1,0 +1,27 @@
+{
+  "base": "0c9d34f1d98b720be352eec8fbb763a4e838a7eb",
+  "native_owner": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+  "parent_design_approved": true,
+  "proof": [
+    "exact covariance of M_g/g",
+    "complete exact Frobenius columns through all integer resonances",
+    "injective honestly known common coefficient prefix",
+    "constant sheet action C_g with involution/commutation checks",
+    "(C_g-I)c=0 plus asserted relations",
+    "all nonpositive/log physical rows annihilate affine offset and all free directions"
+  ],
+  "open": [
+    "non-Gaussian leading coefficient domain",
+    "dimensional-regulator sector projection",
+    "large-system parity"
+  ],
+  "source_sha256": {
+    "/common/dev/amflow-sheet-constrained-endpoints/src/algebraic/frobenius.rs": "96e00de1bd67c3944e94b8d8465dfad68a8a4ea11c5c408a0c050202a92fad7d",
+    "/common/dev/amflow-sheet-constrained-endpoints/src/frobenius/exact.rs": "2c430bcbe0a718a00e743948d2acf7d9ad0ca95555f1b43ffb7d3bb78d65a75e",
+    "/common/dev/amflow-sheet-constrained-endpoints/src/frobenius/recurrence.rs": "a499145a238dca8939343ed52b3a8268cc6cb73cba95760dd2bbe743806f1028",
+    "/common/dev/amflow-sheet-constrained-endpoints/src/root_path.rs": "0ca261341c9ddb8bf6e2418dec1928254a7f1fa05ef6a49ab97f1381f0f73ade",
+    "/home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4/src/domains/algebraic.rs": "81fc50d65bead87d5ecda0185d3feb8a7528394686bd7625adf742b4b5e39f81",
+    "/home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4/src/poly/univariate/roots.rs": "8891edefea3980a17f88630610bf9020a9adc121e26bfee05939c3f3534eebe3",
+    "/home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4/lib/numerica/src/tensors/matrix.rs": "dd73530736a2254981df4a8bfdb277aaf4b7bc8260385c563301205aab27b550"
+  }
+}

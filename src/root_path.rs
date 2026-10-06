@@ -39,7 +39,7 @@ fn complex_coefficient(c: &AlgebraicNumber<RationalField>) -> Complex<Rational> 
     value
 }
 
-fn rational_parts(a: &Atom, parameter: Symbol) -> Result<[ExactComplexPolynomial; 2]> {
+pub(crate) fn rational_parts(a: &Atom, parameter: Symbol) -> Result<[ExactComplexPolynomial; 2]> {
     let mut symbols = BTreeSet::new();
     crate::family::scalar_symbols(a.as_view(), &mut symbols)?;
     // scalar_symbols marks native complex coefficients with the reducer's

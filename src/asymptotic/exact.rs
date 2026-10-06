@@ -211,10 +211,32 @@ impl ExactFrobeniusBasis {
         limits: &ExactFrobeniusLimits,
         context: &RunContext,
     ) -> Result<ExactAsymptoticSpace> {
+        self.constrain_with_rows(constraints, Vec::new(), limits, context)
+    }
+
+    /// Additional exact equations are derived by the registered-root owner;
+    /// they are never inferred from numerical matching values.
+    pub(crate) fn constrain_with_rows(
+        &self,
+        constraints: &ExactAsymptoticConstraints,
+        mut equations: Vec<Vec<Gaussian>>,
+        limits: &ExactFrobeniusLimits,
+        context: &RunContext,
+    ) -> Result<ExactAsymptoticSpace> {
         context.cancellation.check()?;
         let n = self.dimension();
         constraints.validate(n, limits, context)?;
-        let mut equations = Vec::with_capacity(constraints.relations.len());
+        if equations.iter().any(|row| row.len() != n + 1)
+            || equations
+                .len()
+                .checked_add(constraints.relations.len())
+                .and_then(|rows| rows.checked_mul(n + 1))
+                .is_none_or(|cells| cells > limits.max_scalar_cells)
+        {
+            return Err(Error::Limit(
+                "exact sheet/asymptotic equation allocation exceeds limit".into(),
+            ));
+        }
         for relation in &constraints.relations {
             context.cancellation.check()?;
             let mut row = vec![zero(); n + 1];

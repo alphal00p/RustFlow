@@ -1,0 +1,12 @@
+{
+  "scope": "public constrained endpoint/cache tests",
+  "exit_code": 0,
+  "tool_chunk": "1ce9c0",
+  "passed": 21,
+  "failed": 0,
+  "source_recheck_changed": [],
+  "binary_sha256": "88ac38b947a0420498de64168334207f5e34acf5913bc4ef113b8b32597bfcd4",
+  "log": "first-public.log",
+  "source_manifest": "second-unit-source.json",
+  "source_snapshot": "initial-passing-source"
+}

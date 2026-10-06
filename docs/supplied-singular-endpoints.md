@@ -144,12 +144,41 @@ clock quotas; symbolic preparation still has the existing Frobenius owner's
 restrictions. The standalone `ExactFrobeniusBasis::constrain` API also exposes
 the reusable affine space independently of endpoint transport.
 
-This constrained interface currently admits rational connections, including
-coupled finite epsilon hierarchies. A registered-root restriction of scalars
-requires an additional exact proof that the constrained space stays on the
-declared root sheet; the implementation refuses it until that proof is owned.
-The ordinary registered-root endpoint interface remains available. Exact
-non-Gaussian coefficient fields, symbolic dimensional-regulator sector
-selection, larger systems and Python exposure of the new constraint declarations
-remain open work. None of these restrictions redefines broader endpoint parity
-as complete.
+The constrained interface also admits registered-root connections when every
+generator of the lift's actual root-monomial subgroup has a Gaussian-rational
+leading root constant. This condition applies to generator products: individual
+unused radicals, or individual factors of a product-only generator, need not
+have Gaussian leading constants.
+
+For a monomial `g` with `g^2=R_g`, the existing normalized-root multiplication
+owner constructs `M_g`. Exact native matrix arithmetic checks
+`M_g^2=R_g I` and `M_g'=[B,M_g]+R_g'/(2 R_g) M_g`. Thus `J_g=M_g/g` is a
+covariantly constant involution. The exact recurrence must cross every positive
+integer indicial resonance, and a uniformly known common coefficient prefix
+must have full exact rank. Those conditions establish a complete formal basis
+`F`, in which `J_g F=F C_g` for a constant matrix `C_g`. The injective prefix
+recovers that matrix; truncated equality alone is never treated as an infinite
+identity. Recovered actions must be involutory and commute. Their equations
+`(C_g-I)c=0` join the asserted physical constraints before the affine finite-limit
+proof. Every remaining physical free direction must be finite.
+
+The formal leading sign is connected to the declared matching germs by native
+certified quadratic-root disks and the existing exact root-path cut certificate.
+The certificate distinguishes a product of principal roots from the principal
+root of a product, and includes the complex matching ray and common logarithm
+winding. It never guesses a sign from a floating center. The numerical matching
+map uses certified root balls and native ball products for the lift, while its
+finite-basis/truncation accuracy retains the independent-profile estimates
+described above. Incomplete honest prefixes request more order; incompatible
+constraints, unresolved branch certificates and resource limits remain typed
+failures. The complete existing chart/germ identity owns these derived sheet
+equations, so the terminal representation remains schema 7.
+
+Exact non-Gaussian leading constants remain unsupported in this stage.
+The pinned Symbolica owner provides selected `AlgebraicExtension` and
+`AlgebraicContext` fields, native matrices and certified algebraic embeddings;
+extending the sheet/affine coefficient domain should reuse those capabilities.
+Symbolic dimensional-regulator sector selection and larger systems remain
+separate work. Python host/runtime validation is outside this isolated Rust
+milestone. None of these restrictions redefines broader endpoint parity as
+complete.
