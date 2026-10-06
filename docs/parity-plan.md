@@ -26,10 +26,15 @@ publication status and accuracy limits.
 The shared Rust engine also supports recursive Euclidean FT for tested mixed
 linear families and local registered-root Frobenius endpoints; their combined
 gate passes 74 targeted release tests on top of the preceding 547-test baseline.
-General mixed-cut recursion, remaining DiffExp controls, automatic singular
-endpoint/cache integration and broad performance parity remain unfinished.
-Padé transport and the mixed-cut adapter are under implementation and review;
-they are not included in that validated milestone. The
+Checked rational/epsilon Padé transport and a mixed-cut adapter have since
+passed a [combined full release run](../reports/validation/2026-10-06-pade-cut-integration/summary.json):
+580 unit/integration tests and one doctest, formatting and strict all-target
+Python/stub-generation Clippy, with 13 scientific tests explicitly opt-in.
+Mixed-cut boundaries cover complete positive-energy
+final states with uniform causal virtual directions, massive two-body or
+massless N-body leaves and certified nonzero real-only denominators. Broader
+cut recursion, remaining DiffExp controls, automatic singular endpoint/cache
+integration and broad performance parity remain unfinished. The
 [comparison table](benchmark-comparison.md) records measured successes and
 remaining coverage, without treating successful benchmark families as proof of
 arbitrary kinematic, mass or loop-count support.

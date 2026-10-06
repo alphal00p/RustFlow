@@ -1,0 +1,67 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-06T02:34:41.753116+00:00",
+  "run": 37402040489,
+  "url": "https://github.com/symbolica-dev/symbolica-community/actions/runs/37402040489",
+  "community_commit": "5cde08fdc6523d5c1da648c5cb902d2dbcac8657",
+  "conclusion": "failure",
+  "platforms": {
+    "linux": {
+      "job": 112071166783,
+      "failed": 1,
+      "passed": 1146,
+      "skipped": 172,
+      "seconds": "243.69",
+      "log": "linux.log.gz",
+      "sha256": "89aba95b6cada0cafad830da67bf6b66630fd8c042c963103f6fb926ccf8ea97",
+      "uncompressed_sha256": "722e7d7a18599e4da081988f137efbfaed9ecc2e0ee3292a269e42b0011e53d2"
+    },
+    "macos": {
+      "job": 112071166585,
+      "failed": 2,
+      "passed": 1145,
+      "skipped": 172,
+      "seconds": "369.83",
+      "log": "macos.log.gz",
+      "sha256": "767ff9e85d64d6e78ff7ea67ae6fad2ad942c9d640c88fb3c2a2e63d0a36141c",
+      "uncompressed_sha256": "d5052345665fbedd7243913221b8026d7ea76334a36bb6495a376913f5439d08"
+    }
+  },
+  "remaining_failures": [
+    "Both platforms: tests/test_spenso_and_idenso.py::TestTensorEvaluation::test_tensor_compilation: inherited C++ exporter initializes std::complex<double> as T(T(real),T(imag)); owner fix proposed in Symbolica PR51.",
+    "macOS: interruption fixture publishes a sample with direct write_bytes; monitor can observe the file before payload completion, making retained hash differ. Native sample_checkpoint.rs already flushes/syncs then renames a temporary file. Fixture corrected by the separately recorded test-only follow-up."
+  ],
+  "scope": "Fresh-interpreter rendering fix passes both full platform suites; no whole-suite-green claim. This CI is before the 29cdbff9 controller persistence follow-up. Native scientific runtime/pins/banks unchanged.",
+  "atomic_fixture_fix": {
+    "community_commit": "330f0a4b315330765ad067b2b5b96f4844dfd118",
+    "change": "Mock sample writer stages a partial hidden temporary, proves the monitor cannot see it, then atomically replaces the complete filename; all hash-preservation assertions remain. Production native writer and acceptance monitor unchanged.",
+    "local_validation": {
+      "passed": 51,
+      "seconds": 21.14,
+      "session": 58056,
+      "exit_code": 0,
+      "tool_chunk": "60c5ff"
+    },
+    "whole_new_ci_status": "pending"
+  },
+  "artifact_sha256": {
+    "fixture-tests.log": "eed1d5f0b06a704cebe0b6a4e7c8bacc6867652f4da58e7fd1babb3c65a7245e",
+    "fixture-tests.xml": "bf92c02b22886ae9e748fc365765223f87df30d36da8259bfd66ca4d15ae7d85",
+    "330f-linux.log.gz": "4f53e3ef7d30beb38f791a0ac3ea943304baed6d521dcb23b1fe545c1b6ccc7b"
+  },
+  "follow_up_ci": {
+    "run": 37404883976,
+    "url": "https://github.com/symbolica-dev/symbolica-community/actions/runs/37404883976",
+    "community_commit": "330f0a4b315330765ad067b2b5b96f4844dfd118",
+    "status": "macos pending",
+    "linux": {
+      "job": 112080118081,
+      "passed": 1148,
+      "failed": 1,
+      "skipped": 172,
+      "seconds": "235.60",
+      "log": "330f-linux.log.gz",
+      "remaining_failure": "Inherited Symbolica C++ exporter (owner PR51); controller and atomic sample fixture tests pass."
+    }
+  }
+}

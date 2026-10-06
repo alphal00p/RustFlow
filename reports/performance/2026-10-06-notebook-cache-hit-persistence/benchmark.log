@@ -1,0 +1,9 @@
+initialized baseline entries 80
+initialized candidate entries 80
+{'controller': 'baseline', 'repetition': 0, 'elapsed_ns': 50105667199, 'save_calls': 16, 'cache_hits': 16, 'ode_steps': 0, 'new_points': 0, 'coefficients_equal': 4360, 'provenance_and_error_evidence_equal': True}
+{'controller': 'candidate', 'repetition': 0, 'elapsed_ns': 3353368284, 'save_calls': 1, 'cache_hits': 16, 'ode_steps': 0, 'new_points': 0, 'coefficients_equal': 4360, 'provenance_and_error_evidence_equal': True}
+{'controller': 'candidate', 'repetition': 1, 'elapsed_ns': 3351083763, 'save_calls': 1, 'cache_hits': 16, 'ode_steps': 0, 'new_points': 0, 'coefficients_equal': 4360, 'provenance_and_error_evidence_equal': True}
+{'controller': 'baseline', 'repetition': 1, 'elapsed_ns': 49877460550, 'save_calls': 16, 'cache_hits': 16, 'ode_steps': 0, 'new_points': 0, 'coefficients_equal': 4360, 'provenance_and_error_evidence_equal': True}
+{'controller': 'baseline', 'repetition': 2, 'elapsed_ns': 49652214821, 'save_calls': 16, 'cache_hits': 16, 'ode_steps': 0, 'new_points': 0, 'coefficients_equal': 4360, 'provenance_and_error_evidence_equal': True}
+{'controller': 'candidate', 'repetition': 2, 'elapsed_ns': 3359292262, 'save_calls': 1, 'cache_hits': 16, 'ode_steps': 0, 'new_points': 0, 'coefficients_equal': 4360, 'provenance_and_error_evidence_equal': True}
+{'baseline': 49877460550, 'candidate': 3353368284}

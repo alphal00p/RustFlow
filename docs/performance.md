@@ -91,6 +91,21 @@ not end-to-end transport timings. The archived branch retains the prototype,
 counterexamples, failed preliminary checks and complete measurement provenance;
 the validated production ball-arithmetic path remains in use.
 
+A subsequent [shared-denominator integer-polynomial experiment](https://github.com/alphal00p/RustFlow/blob/540710da29e16e74f3d14bc77580f30ba648557d/reports/performance/2026-10-06-integer-source-residual/report.json)
+also remains separate from production. It clears denominators once and uses
+Symbolica's native integer polynomials for the residual products, retaining the
+original denominator guards and outward conversion. Two complete 14-case runs
+passed exact polynomial equality and 31,716 component-containment checks; 21
+focused tests, formatting and strict release Clippy passed. Three-run median
+constructor measurements on the genuine 12/27-master initial and complex
+endpoint charts improved by 4.15–19.99 times. The shifted degree-64 and large
+rational degree-32 cases were 1.94 and 2.36 times slower, respectively. Earlier
+runs stopped at the experimental growth limit; their partial results remain
+archived alongside the completed runs. These are constructor measurements on a
+shared host, not whole-transport speedups. A bounded adaptive implementation
+with a lazy ball-arithmetic fallback is under development; its numerical and
+full-transport performance gates must pass before integration.
+
 ## Preceding checked release
 
 Library commit `3f1daea` was measured on 2026-10-05 against the original,

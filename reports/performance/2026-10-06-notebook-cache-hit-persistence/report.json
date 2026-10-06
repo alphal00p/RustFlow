@@ -1,0 +1,147 @@
+{
+  "schema": 1,
+  "scope": "Matched notebook repeated exact cache-hit stage, unchanged native publication wheel; no ODE work or upstream timing.",
+  "python": "/common/dev/amflow/target/publication-python-venv/bin/python",
+  "cpu_affinity": [
+    44
+  ],
+  "original_bank_sha256": {
+    "seeds": "5e8c60c1b5fce269b8f521821e37368b8272c4682afe6578a5b9891f4c136d98",
+    "transport": "4e7ff017963c54bb08051bc7c3bb131e0f10ede81998f306dbd7489d6da06e8a"
+  },
+  "controller_sha256": {
+    "baseline": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25",
+    "candidate": "363887ae8517f4aeef20f7e4299b1e4aaf7bf1961d7492c093766acc8954da02"
+  },
+  "measurements": [
+    {
+      "controller": "baseline",
+      "repetition": 0,
+      "elapsed_ns": 50105667199,
+      "save_calls": 16,
+      "cache_hits": 16,
+      "ode_steps": 0,
+      "new_points": 0,
+      "coefficients_equal": 4360,
+      "provenance_and_error_evidence_equal": true
+    },
+    {
+      "controller": "candidate",
+      "repetition": 0,
+      "elapsed_ns": 3353368284,
+      "save_calls": 1,
+      "cache_hits": 16,
+      "ode_steps": 0,
+      "new_points": 0,
+      "coefficients_equal": 4360,
+      "provenance_and_error_evidence_equal": true
+    },
+    {
+      "controller": "candidate",
+      "repetition": 1,
+      "elapsed_ns": 3351083763,
+      "save_calls": 1,
+      "cache_hits": 16,
+      "ode_steps": 0,
+      "new_points": 0,
+      "coefficients_equal": 4360,
+      "provenance_and_error_evidence_equal": true
+    },
+    {
+      "controller": "baseline",
+      "repetition": 1,
+      "elapsed_ns": 49877460550,
+      "save_calls": 16,
+      "cache_hits": 16,
+      "ode_steps": 0,
+      "new_points": 0,
+      "coefficients_equal": 4360,
+      "provenance_and_error_evidence_equal": true
+    },
+    {
+      "controller": "baseline",
+      "repetition": 2,
+      "elapsed_ns": 49652214821,
+      "save_calls": 16,
+      "cache_hits": 16,
+      "ode_steps": 0,
+      "new_points": 0,
+      "coefficients_equal": 4360,
+      "provenance_and_error_evidence_equal": true
+    },
+    {
+      "controller": "candidate",
+      "repetition": 2,
+      "elapsed_ns": 3359292262,
+      "save_calls": 1,
+      "cache_hits": 16,
+      "ode_steps": 0,
+      "new_points": 0,
+      "coefficients_equal": 4360,
+      "provenance_and_error_evidence_equal": true
+    }
+  ],
+  "native_extension": {
+    "path": "/common/dev/amflow/target/publication-python-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+    "sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf"
+  },
+  "initialization_ns": {
+    "baseline": 2153485116,
+    "candidate": 2179904928
+  },
+  "cache_entries": {
+    "baseline": 80,
+    "candidate": 80
+  },
+  "native_values_and_evidence_preserved_after_reload": true,
+  "original_banks_unchanged": true,
+  "median_elapsed_ns": {
+    "baseline": 49877460550,
+    "candidate": 3353368284
+  },
+  "status": "passed",
+  "recorded_utc": "2026-10-06T02:28:32.397652+00:00",
+  "baseline_community_commit": "5cde08fdc6523d5c1da648c5cb902d2dbcac8657",
+  "candidate_community_commit": "29cdbff9318bfb23935877247b2dfee4d2a469a5",
+  "scope_limitations": [
+    "Warm notebook stage only; same native extension, no ODE work.",
+    "Three alternating observations on CPU 44, shared cluster with concurrent builds/tests.",
+    "Initialization and final semantic reload comparisons are outside transport timings.",
+    "Each cache contains 80 entries, including completed nearby evaluations; do not compare directly with the older 48-entry milestone.",
+    "Original completed scientific banks and acceptance reports were not changed."
+  ],
+  "process_exit": {
+    "session": 62378,
+    "exit_code": 0,
+    "tool_chunk": "d99373"
+  },
+  "validation": {
+    "controller_tests": 51,
+    "controller_seconds": 21.16,
+    "controller_session": 50466,
+    "controller_exit_code": 0,
+    "controller_exit_chunk": "733dd3",
+    "notebook_render_checks": 6,
+    "render_seconds": 1.77,
+    "render_session": 16111,
+    "render_exit_code": 0,
+    "render_exit_chunk": "641b3c",
+    "format": "git diff --check passed"
+  },
+  "median_speed_ratio": 14.873839174772847,
+  "artifact_sha256": {
+    "driver.py": "ebf3614ff351f728406d39923be9edfdd377d00f7e59c4f150383e3c4f7683c6",
+    "benchmark.log": "98436c2640c44fed11dc3a144cf96847b1f224db618b1c01fb68ff8a8cd02112",
+    "controller-tests.log": "b84273eed8fe87e44c6269f11e962a4b0be7d85bb67269373b207f87cdf20aa8",
+    "controller-tests.xml": "1754dc648f0a9c5a6a448644e1480390ec66a2ee4d3e4c33301cc25f0e68ea66",
+    "notebook-tests.log": "edb61a2ad6fba94dd19a9028b77137d90f2195fed1be4752dfac433733569f65",
+    "notebook-tests.xml": "901c8efa911442eae84069961a091a9a6041cef193a2b63b2a7d162bf71577f4"
+  },
+  "reproduction": "The archived driver retains the measured absolute worktree paths. Restore each controller at its recorded community commit and use copies of a compatible completed native bank before rerunning; the final publication branch now includes the candidate.",
+  "published_community_branch": "codex/loop-integration-publication",
+  "push_exit": {
+    "session": 7602,
+    "exit_code": 0,
+    "chunk": "4cfcca"
+  }
+}

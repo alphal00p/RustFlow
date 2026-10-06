@@ -1,0 +1,82 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-06T02:57:32.004335+00:00",
+  "status": "passed",
+  "tested_numerical_commit": "7b6a8c99abf1a41ab7ef37b61409e6a65c44a717",
+  "source_manifest": "source-before.json",
+  "source_files_checked": 248,
+  "source_hashes_match_tested_commit_and_remain_unchanged": true,
+  "changes": [
+    "Optional checked native Pade trials for rational and epsilon transport, with unchanged default Taylor transport.",
+    "Automatic mixed cut/virtual infinity boundaries through the shared region, tensor, recursive vacuum and phase-space owners.",
+    "Combined ordinary/cut upstream oracle launcher retains custom drivers and existing case defaults."
+  ],
+  "release_tests": {
+    "command": "cargo test --locked --release -- --test-threads=8",
+    "session": 26907,
+    "exit_code": 0,
+    "tool_chunk": "fca673",
+    "unit_and_integration_passed": 580,
+    "ignored": 13,
+    "doctests_passed": 1,
+    "log": "release-tests.log.gz"
+  },
+  "checks": {
+    "format": {
+      "command": "cargo fmt --all -- --check",
+      "exit_code": 0,
+      "session": 4613,
+      "tool_chunk": "68f613"
+    },
+    "clippy": {
+      "command": "cargo clippy --locked --release --all-targets --features python_stubgen -- -D warnings",
+      "exit_code": 0,
+      "session": 4613,
+      "tool_chunk": "68f613",
+      "log": "clippy.log.gz"
+    },
+    "oracle_launchers": {
+      "unit_tests_passed": 5,
+      "py_compile": true,
+      "ordinary_and_cut_help": true,
+      "exit_code": 0,
+      "tool_chunk": "4f4d4f",
+      "log": "python-runner.log.gz"
+    }
+  },
+  "library": {
+    "original": "/common/dev/amflow-cache-export/target/release/deps/libsymbolica_amflow-1a547349a172a295.rlib",
+    "archive": "/common/dev/amflow/target/pade-cut-release-7b6a8c9/libsymbolica_amflow-1a547349a172a295.rlib",
+    "sha256": "15a53a38fb8a0e03894ed3ccdfa4da8a0265d36c9eee3d5af7cd0e0845f571ec"
+  },
+  "dependencies": {
+    "symbolica_community": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustred_main": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "shared_hepkit": "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+  },
+  "individual_feature_reports": [
+    "../2026-10-06-pade-transport/summary.json",
+    "../2026-10-06-mixed-cut-flow/validation.json"
+  ],
+  "limits": [
+    "Explicitly ignored long scientific acceptances are not part of this routine release command.",
+    "Full gg-to-Hg scientific acceptance remains tied to its recorded publication wheel and was not rerun on this source.",
+    "Registered-root Pade candidates remain Taylor; there is no extension of the source convergence disk or general forward-error certificate.",
+    "Mixed cuts require a complete positive-energy final state, uniform virtual +i0, all uncut physical lines deformed and supported phase-space leaves.",
+    "No general feature-completeness or performance-parity claim."
+  ],
+  "artifact_sha256": {
+    "clippy.log.gz": "ec5b7c0dbf3fb711afced8bd794d887c0ebab4e3c71c422a61a0bc9f64d91810",
+    "cut-oracle-help.txt.gz": "0f411cc2fba7ee0f9e6256680128adde2572ad357ec654714804d023a87663f7",
+    "fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "oracle-help.txt.gz": "964c24ab3e4c26a55e9b11046d75b700c5bb1b5b2982b1f686cb62e382adb2a7",
+    "python-runner.log.gz": "559c99929068950bc26f6e9c88859af8971cd8e3411ba5448dd843a5f30278ba",
+    "release-tests.log.gz": "a8e40d1d6cd7043fa81478c53c0ccbd183474d92dcaf6e5b68093a4301a5e8d7",
+    "source-before.json": "26b084a8a25fa5c564a8aa342d027f3c4e5ba357107644962f33757bbba3d0dd"
+  },
+  "dependency_remote_checks": {
+    "symbolica_community_unchanged": true,
+    "rustred_main_unchanged": true,
+    "method": "git ls-remote over HTTPS on 2026-10-06 after the release run; existing RustRed checkout untouched"
+  }
+}

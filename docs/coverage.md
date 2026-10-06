@@ -10,6 +10,20 @@ RustRed is not established. External reference uncertainty caps the EW-square
 comparison at 19 relative digits. The broader AMFlow/DiffExp parity goal remains
 open; the milestones below retain their original scope and source provenance.
 
+The [combined Padé/cut release](../reports/validation/2026-10-06-pade-cut-integration/summary.json)
+passes **580 release unit/integration tests** and one doctest, with 13 explicit
+opt-in tests ignored, formatting and strict Python/stub-generation all-target
+Clippy. All 248 recorded source/input files match the tested commit and remained
+unchanged throughout the run. Optional [rational/epsilon Padé trials](pade-transport.md)
+preserve source-domain checks and use the same accepted representation for saved
+segments. [Mixed cut/virtual boundaries](cuts.md) now use shared region expansion,
+native tensor projection, recursive vacuum evaluation and phase-space terminals.
+This covers complete positive-energy final states with all uncut physical lines
+deformed and a uniform virtual prescription; partial placements, massive N-body
+leaves and interior phase-space poles remain unsupported. Neither the full
+gg→hg publication acceptance nor the other opt-in scientific gates was rerun on
+this source revision.
+
 The [cache/arithmetic release](../reports/validation/2026-10-06-cache-arithmetic-release/summary.json)
 passes **547 release unit/integration tests** and one doctest, with 13 explicit
 opt-in tests ignored, formatting and strict Python/stub-generation all-target
@@ -29,8 +43,9 @@ can use the shared rational Frobenius engine for local singular endpoints,
 including infinity, resonant logarithms and common branch winding. These endpoint
 expansions are standalone Rust functionality: they do not infer dimensional
 sectors after epsilon expansion, establish global accuracy, or automatically
-insert singular endpoints into the physical cache. General mixed-cut recursion
-and upstream/performance parity remain open.
+insert singular endpoints into the physical cache. The later cut release above
+extends the separate automatic boundary workflow; upstream/performance parity
+remains open.
 
 The massless phase-space milestone passes **416 release unit/integration tests**,
 one doctest, strict all-target Clippy and formatting. Nine long scientific tests

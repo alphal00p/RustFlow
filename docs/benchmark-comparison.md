@@ -17,7 +17,7 @@ and the [unified-flow design](unified-flow.md).
 |---|---|---|
 | Native family and reduction input | HEPKit graphs/kinematics, native tensor owners, exact families, RustRed and scoped table backends, derivative closure, reduction domains | Reducer search/compiled arity limits remain explicit; a target-only table need not cover derivatives or recursive families |
 | Shared numerical engine | Rational Taylor transport, Frobenius matching with resonances/logarithms, registered-root local singular endpoints via rational lifting, direct epsilon hierarchies, algebraic root charts, whole-segment defects, exact-source rational enclosures and endpoint precision retries | General accumulated error accounting and difficult non-dyadic conditioning; automatic algebraic endpoint/cache integration and degenerate Gram charts |
-| Automatic AMF boundaries | Regions, factorization, recursive boundaries, gamma terminals, generic single-mass loop peeling including complex masses off the mass cut; separate unequal-mass two-body and massless N-body cut terminals; fresh Higgs+jet initialization and independent 40-digit refinement passed on the publication wheel | General linear/cut recursion and broader family coverage |
+| Automatic AMF boundaries | Regions, factorization, recursive boundaries, gamma terminals, generic single-mass loop peeling including complex masses off the mass cut; unequal-mass two-body and massless N-body cut terminals; [mixed cut/virtual recursion](cuts.md) for complete positive-energy final states with certified regular real-only denominators; fresh Higgs+jet initialization and independent 40-digit refinement passed on the publication wheel | Broader linear/cut recursion, partial mass placements, massive N-body leaves, internal real-phase-space poles and mixed virtual signs |
 | AMFlow 2.0 options | Euclidean FT including tested mixed linear families, configurable dimension, skipped initial reduction, basis refinement, symbolic restart | Broader validation/performance; FT physical contours remain outside its supported automatic scope |
 | Physical transport and cache | Progressive binary `RustFlowCache`, compatible-source search, checked intermediate points, inherited errors, supplied/AMF seeds, regular complex paths with explicit root germs | General causal-path inference, arbitrary algebraic coordinate constants and non-affine cached routes |
 | DiffExp controls | Exact multivariate pullback, canonical dlogs, supplied and compatible analytic-origin boundaries, explicit prescribed detours, exact diagonal epsilon rescaling, optional checked bracket proposals, regular Möbius charts, local registered-root Frobenius matching and [checked rational/epsilon Padé trials](pade-transport.md) | General nondiagonal epsilon regularization, off-center predivision, registered-root Padé candidates, automatic physical-path/singular-boundary integration |
@@ -161,3 +161,11 @@ transport and propagates source uncertainty.
 There is no established full-amplitude end-to-end speed ratio. Source accuracy,
 AMF initialization, uncertainty checks, serialization, master transport and
 amplitude contraction must be included consistently before making that claim.
+
+The separate [notebook persistence comparison](../reports/performance/2026-10-06-notebook-cache-hit-persistence/report.json)
+keeps the native publication extension fixed and compares three alternating warm
+queries on copies of the same 80-entry bank. Avoiding redundant writes reduces
+median stage time from 49.88 s to 3.35 s, with all sixteen exact hits taking zero
+ODE steps. All 4,360 coefficients and their evidence remain exactly equal and
+survive reload. These controller-stage measurements are separate from the
+per-family cache lookup times above and do not measure an upstream speed ratio.

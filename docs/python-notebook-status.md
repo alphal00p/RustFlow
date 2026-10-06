@@ -145,14 +145,28 @@ RustFlow milestones and validation reports are pushed to its repository. The
 community notebook/API changes and dependency pins are pushed in
 [draft PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19),
 authored by `ValentinHirschi`. Its head is
-`5cde08fd`; the full numerical run used
-`8758b93d1e1a6fed2aace41493a91be569f98a98`. Native dependencies, extension bytes,
-the calculation controller and anchor runner are unchanged between these
-revisions. The differences are presentation, polling compatibility and the
-documented CI repairs, including installation of matching native graph bindings
-for the Python 3.10 tests. Merge and release remain pending upstream/CI work. The
+`330f0a4b`; the full numerical run used
+`8758b93d1e1a6fed2aace41493a91be569f98a98`. Native dependencies, extension bytes
+and the anchor runner are unchanged between these revisions. Presentation,
+polling compatibility and documented CI repairs include installation of matching
+native graph bindings for Python 3.10. The newer controller also avoids repeated
+binary writes after exact transport hits, as measured below. Merge and release
+remain pending upstream/CI work. The
 notebook's repository-relative destination is `examples/hep/gg_hg.py`; the local
 publication checkout is `/common/dev/symbolica-community/loop-integration-publication`.
+
+The [controller persistence comparison](../reports/performance/2026-10-06-notebook-cache-hit-persistence/report.json)
+uses the unchanged publication extension and copies of its completed 80-entry
+bank. Three alternating runs on one CPU reduce median warm transport from
+**49.88 s to 3.35 s** by replacing sixteen full-bank writes with one. Every run
+checks all 4,360 coefficients, uncertainties, root sheets and provenance for
+exact equality; binary reload preserves the full bank evidence. There are zero
+ODE steps and no inserted points. This is a controller-stage improvement, not
+a numerical-kernel or upstream speed ratio. The original scientific banks and
+acceptance reports are unchanged. All 51 lightweight controller tests and six
+notebook/render checks pass, including recovery from a failed save. New points
+still checkpoint after each successful configuration, while the initial save
+also persists valid in-memory points left by an earlier checkpoint failure.
 
 The inherited tensor list-output failure has a separate
 [draft owner PR #126](https://github.com/alphal00p/gammaloop/pull/126).
@@ -212,7 +226,16 @@ with two failures each. One is the inherited exporter defect; the other was an
 offline-rendering check that assumed no earlier test had imported Linnet.
 Community `5cde08fd` runs that unchanged checker in a fresh interpreter, preserving
 all no-import assertions. All 17 graph/display tests passed locally with Linnet
-deliberately imported in the parent; the new workflow is pending. Native numerical
+deliberately imported in the parent. The
+[follow-up workflow](../reports/validation/2026-10-06-community-rendering-ci/summary.json)
+passed 1,146 tests on Linux, with only the inherited exporter failure. macOS
+passed 1,145 tests and exposed a second failure: the interruption test's mock
+writer could publish an empty sample before finishing its payload. The native
+writer already uses atomic replacement. Test-only commit `330f0a4b` follows that
+contract, explicitly keeps a partial temporary invisible to the monitor and
+retains all hash-preservation assertions; all 51 controller tests pass locally.
+The follow-up Linux job passes 1,148 tests with only the inherited exporter
+failure; macOS remains pending. Native numerical
 dependencies and the completed publication runtime are unchanged, and the whole
 community suite is not yet green.
 
