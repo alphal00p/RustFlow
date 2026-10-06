@@ -180,22 +180,43 @@ seed(prescribed, prescribed_bank)
 prescribed_answer = endpoint(prescribed, prescribed_bank)
 assert endpoint(prescribed, prescribed_bank).cache_hit
 
-# Unsupported algebraic constrained spaces must remain an explicit native failure.
-rooted = integration.KinematicTransport(eps, {s:[[zero,r/s],[zero,zero]]}, [Y1,Y2], one,
+# The sheet-consistent constraint removes a genuinely divergent root sector.
+rooted = integration.KinematicTransport(eps, {s:[[zero,r/(s*s)],[zero,zero]]}, [Y1,Y2], one,
     roots={r:s}, branch_domain='root constraint admission', options=opts)
 root_bank = integration.BoundaryCache()
 rooted.add_boundary(root_bank, {s:one}, [[amplitude,n0]], 0, verified_digits=60,
     comparison_errors=[[error0,error0]], provenance='constant root-system solution', root_sheets={r:1})
 root_route = integration.EndpointRoute(z, {s:z}, half, homotopy='positive root ray', root_sheets={r:1})
-try:
-    rooted.evaluate_endpoint(root_bank, root_route, 0, 0, constraints=constraints,
+root_constraints = Constraints([R([(C(0,-half),one)],zero)], 'vanishing root-pole coefficient')
+root_answer = rooted.evaluate_endpoint(root_bank, root_route, 0, 0, constraints=root_constraints,
+    admit_matching_path=True, admit_endpoint=True)
+assert len(root_bank.endpoint_entries()) == 1
+assert len(root_bank) >= 2  # Keep the regular matching anchor as well.
+assert rooted.evaluate_endpoint(root_bank, root_route, 0, 0, constraints=root_constraints,
+    admit_matching_path=True, admit_endpoint=True).cache_hit
+with tempfile.TemporaryDirectory() as directory:
+    root_bank.save(directory)
+    restored_root = integration.BoundaryCache.load(directory)
+    root_restart = rooted.evaluate_endpoint(restored_root, root_route, 0, 0, constraints=root_constraints,
         admit_matching_path=True, admit_endpoint=True)
-    raise AssertionError('unproved root constraint space was admitted')
+    assert root_restart.cache_hit
+    assert root_restart.constraints.provenance == root_constraints.provenance
+
+# Leading sqrt(2) is outside the currently admitted Gaussian coefficient field.
+unsupported_root = integration.KinematicTransport(eps, {s:[[zero,r/(s*s)],[zero,zero]]}, [Y1,Y2], one,
+    roots={r:2*s}, branch_domain='non-Gaussian leading root', options=opts)
+unsupported_bank = integration.BoundaryCache()
+unsupported_root.add_boundary(unsupported_bank, {s:one}, [[amplitude,n0]], 0, verified_digits=60,
+    comparison_errors=[[error0,error0]], provenance='constant root-system solution', root_sheets={r:1})
+try:
+    unsupported_root.evaluate_endpoint(unsupported_bank, root_route, 0, 0, constraints=root_constraints,
+        admit_matching_path=True, admit_endpoint=True)
+    raise AssertionError('non-Gaussian leading root was admitted')
 except integration.UnsupportedInputError:
     pass
-assert len(root_bank) == 1 and root_bank.endpoint_entries() == []
+assert len(unsupported_bank) == 1 and unsupported_bank.endpoint_entries() == []
 ", Some(&local), Some(&local))?;
-        for name in ["answer", "canonical_answer", "prescribed_answer"] {
+        for name in ["answer", "canonical_answer", "prescribed_answer", "root_answer", "root_restart"] {
             let row = local.get_item(name)?.unwrap().getattr("coefficients")?.get_item(0)?;
             let actual = row.get_item(0)?.extract::<PythonMultiPrecisionComplex>()?;
             let zero = row.get_item(1)?.extract::<PythonMultiPrecisionComplex>()?;

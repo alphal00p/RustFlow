@@ -41,9 +41,12 @@ Assertions do not turn working precision into measured accuracy.
 
 The optional `constraints` argument works with ordinary and prescribed endpoint
 matching. Omitting it preserves the existing unconstrained interface. This
-milestone supports rational connections and finite epsilon hierarchies; native
-admission rejects constrained registered-root spaces pending an exact sheet
-proof. It does not perform symbolic dimensional-regulator sector selection.
+milestone supports rational connections, finite epsilon hierarchies and
+registered-root connections whose local leading constants are Gaussian rational.
+The native solver derives exact sheet actions on the complete local solution
+space and enforces their consistency together with the supplied relations.
+Leading constants such as `sqrt(2)` remain unsupported. It does not perform
+symbolic dimensional-regulator sector selection.
 
 Relations and their provenance are retained in `EndpointResult.constraints`,
 including results returned by `BoundaryCache.endpoint_entries()`. Binary

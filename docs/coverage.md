@@ -37,8 +37,15 @@ The latest isolated milestones add:
 - [Exact correlated rational endpoint constraints](../reports/validation/2026-10-06-constrained-singular-endpoints/validation.json):
   118 top-level checks, six cache child checks, formatting and strict Clippy.
   Physical relations are explicit Gaussian-rational assertions; numerical small
-  values are never promoted to exact constraints. Constrained root sheets,
-  non-Gaussian coefficient fields and dimensional-sector selection remain open.
+  values are never promoted to exact constraints. The later root-sheet milestone
+  below extends this scope; non-Gaussian coefficient fields and dimensional-sector
+  selection remain open.
+- [Exact constrained root sheets](../reports/validation/2026-10-06-sheet-constrained-endpoints/validation.json):
+  297 isolated top-level checks, formatting and strict Python/stub Clippy pass.
+  Registered-root connections with Gaussian-rational leading constants use exact
+  sheet actions on a complete local Frobenius space, certified matching germs
+  and the same affine physical constraints. Non-Gaussian leading constants and
+  dimensional-sector selection remain open. These counts overlap earlier gates.
 - [Recursive partial cut mass placements](../reports/validation/2026-10-06-partial-cut-boundaries/validation.json):
   32 native checks and a nonfactorized three-loop comparison with original
   AMFlow. Complete positive-energy final states and uniform virtual signs remain
