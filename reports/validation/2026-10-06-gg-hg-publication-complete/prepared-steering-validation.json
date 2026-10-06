@@ -1,0 +1,21 @@
+{
+  "recorded_utc": "2026-10-06T00:50:31.037375+00:00",
+  "community_commit": "5c204ba34b836d448f9d166d546baecca8fda8e3",
+  "native_runtime": "same db9/c340 publication wheel, no rebuild or replacement",
+  "command": "CI=true python -m pytest -q tests/test_hep_gg_hg.py tests/test_hep_gg_hg_anchors.py tests/test_hep_notebooks.py -k gg_hg",
+  "process_exit_code": 0,
+  "testsuite": {
+    "name": "pytest",
+    "errors": "0",
+    "failures": "0",
+    "skipped": "0",
+    "tests": "70",
+    "time": "28.157",
+    "timestamp": "2026-10-06T00:49:36.402486+00:00",
+    "hostname": "itphlies"
+  },
+  "source_worktree": "/common/dev/symbolica-community/loop-integration-publication",
+  "scope": "Applied final presentation and polling compatibility checks; full numerical acceptance retains original8758 steering provenance.",
+  "junit_sha256": "1b3cf5ec54718d90460be871ec661c2f480e1512e4c5d7dba87df9d1ad627466",
+  "log_sha256": "671c2f63cd35c0a10180ddb317211ce2fa91742949c4f099da1417f76a3189e6"
+}

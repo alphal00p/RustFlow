@@ -1,30 +1,34 @@
 # Python API and Higgs-plus-jet notebook status
 
-Snapshot: 2026-10-06, during final publication-wheel acceptance. The implementation
-is not feature-complete. This page separates completed numerical evidence from
-checks still running on the dependency graph intended for publication.
+Snapshot: 2026-10-06, after successful final publication-wheel acceptance. The
+Python API and native Higgs-plus-jet numerical milestone have passed; the broader
+AMFlow/DiffExp implementation is not feature-complete. This page distinguishes
+the demonstrated calculation from remaining generality and packaging work.
 
 | Plan item | Implemented and checked | Remaining acceptance |
 |---|---|---|
 | Descriptive Python API | Optional PyO3 bindings in this crate, registered under `symbolica.community.hep.integration`; shared native HEPKit/Symbolica objects, scoped reductions, precision evidence, progress/cancellation and generated stubs | Advanced Rust Frobenius/infinity/endpoint operations, custom physical routes and cut-graph evaluation are not separate Python interfaces |
 | Unified numerical evaluation | Automatic AMF, Euclidean FT, finite-epsilon sampling and Laurent reconstruction share the series machinery used for physical transport | Full AMFlow/DiffExp generality and performance parity remain open; see the [comparison table](benchmark-comparison.md) |
 | Original AMFlow acceptance | All four two-loop paper targets through epsilon zero passed the requested 20-digit comparison and independent sampling/refinement | That completed gate does not establish full upstream feature coverage |
-| Growing boundary cache | Binary persistence, compatible-source selection, intermediate points, source fingerprints and retained uncertainty; completed samples are stored separately | Final-wheel forced recomputation, interruption/resume and nearby-query acceptance are still running |
+| Growing boundary cache | Binary persistence, compatible-source selection, intermediate points, source fingerprints and retained uncertainty; completed samples are stored separately. Final-wheel forced recomputation, interruption/resume and nearby reuse passed | Serialization overhead remains a performance issue |
 | Exact Higgs-plus-jet inputs | Native physical families, certified supplied 48/61 canonical basis maps and parent connections, exact normalization and kinematics-dependent form-factor projections | Top-level RustRed derivation of those parent connections is not demonstrated; general multiloop reduction coverage remains open |
-| Fresh physical boundaries and amplitude | The publication wheel completed all 16 native 30-digit configurations from empty numerical caches, all 4,360 transport coefficient comparisons, eight W/Z form factors and three coherent observables | Forced 40-digit regeneration, interruption/resume, independent stability and nearby-point checks remain |
+| Fresh physical boundaries and amplitude | All 16 native 30-digit configurations from empty numerical caches, all 4,360 transport coefficients, eight W/Z form factors and three coherent observables passed. Independent 40-digit regeneration, interruption/resume, uncertainty consistency and nearby-point checks also passed | External EW-square comparison remains limited to 19 relative digits; no matched full-amplitude reference timing |
 | Independent Euclidean anchors | Publication wheel passed all 545 comparisons at 20 digits with fresh native boundaries | This prerequisite alone does not certify the physical calculation |
-| Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; initial HTML export, native SVG display and populated original notebook execution passed using a copied completed native cache. Actual Chromium transport, amplitude and restart clicks passed, with native diagram/form-factor panels inspected | Finish the complete 40-digit headless acceptance; boundary-generation and cancellation controls have native/controller evidence, not browser-click coverage |
+| Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; complete headless acceptance passed. HTML export, native SVG display and populated original notebook execution passed using a copied completed native cache. Actual Chromium transport, amplitude and restart clicks passed | Boundary-generation and cancellation controls have native/controller evidence, not browser-click coverage |
 | Packaging | Rust core release suite: 534 passed, 12 opt-in tests ignored; strict Python-feature Clippy and formatting passed. Original native wheel component suite: 206 passed, one inherited C++ export failure. Corrected tensor stubs: seven checks passed. Isolated tensor fix passes native and actual Pyodide checks with/without NumPy | Existing full browser wheel still contains the inherited tensor list-output bug; its fix has not been integrated into the frozen host. The whole browser suite has not been rerun with that fix |
 
-The final publication run has now completed
+The final publication run completed
 [all 16 physical starting configurations](../reports/validation/2026-10-05-public-wheel/physical-boundary-validation.json)
 at 30 verified digits, with 1,248 completed finite-epsilon samples. Fresh boundary
 generation took 6,467.54 seconds. The
 [cold physical calculation](../reports/validation/2026-10-05-public-wheel/cold-physics-validation.json)
 also passed transport and native amplitude comparison, with the same 25/26/47
-propagated relative-digit estimates as the earlier build. Its runtime, dependency
-pins, model and numerical steering sources remain frozen while the later
-restart/refinement stages continue.
+propagated relative-digit estimates as the earlier build. The complete
+[publication acceptance](../reports/validation/2026-10-06-gg-hg-publication-complete/summary.json)
+subsequently passed independent 40-digit regeneration, all uncertainty checks,
+interruption/resume and nearby reuse. The root process exited with code zero;
+final runtime attestation and post-completion source hashes passed before any
+presentation or compatibility follow-up was applied.
 
 The [independent scope audit](../reports/validation/2026-10-06-notebook-finalization/independent-scope-audit.json)
 distinguishes the exact supplied parent equations from computed numerical data.
@@ -53,6 +57,11 @@ reference comparison therefore does not independently establish 20 digits.
 | Binary reload and repeated transport | 75.39 s | 73.88 s |
 | Warm transport, 16 exact hits and zero ODE steps | 69.44 s | 68.43 s |
 | Warm amplitude assembly | 4.06 s | 4.03 s |
+| Resumed independent 40-digit boundaries | 10,317.13 s | 5,503.79 s |
+| Refined transport | 426.26 s | 412.67 s |
+| Refined amplitude | 51.64 s | 36.88 s |
+| Nearby transport, all 16 reuse accumulated points | 374.08 s | 363.54 s |
+| Nearby amplitude | 4.23 s | 4.02 s |
 
 The historical build subsequently
 [completed its entire acceptance with exit code zero](../reports/validation/2026-10-05-gg-hg-historical-complete/summary.json).
@@ -64,8 +73,10 @@ stage; refined transport and amplitude took 426.26 and 51.64 seconds. Nearby
 transport reused accumulated physical points for all sixteen configurations,
 inserted 32 points, and took 374.08 seconds, followed by 4.23 seconds for amplitude
 assembly. Completed sample hashes survived the interruption and resume; final
-runtime attestation passed. This is proof for the historical dependency graph;
-the publication wheel's independent full acceptance remains in progress.
+runtime attestation passed. The publication wheel now independently passes the
+same complete gates: 1,248 initial and 1,376 refined samples, all 4,360 stable
+coefficients, all eight form factors and three observables, and 32 points
+inserted by nearby transport. Each report retains its own runtime provenance.
 
 These observations used four boundary workers sharing a 256-sample-worker budget
 on a busy cluster. Warm controller timings include persistence after each query;
@@ -110,23 +121,27 @@ of the committed cold bank; its originals, runtime and steering sources were
 verified unchanged. Click-to-completion timings include UI refresh and persistence,
 and are not isolated solver measurements.
 
-A documentation-only notebook follow-up is prepared at community commit
+A documentation-only notebook follow-up was validated at community commit
 `059ec1faf663e38ccb4def8bfeb368eb7b5edc8e`, on
 `codex/gg-hg-notebook-finalization`. Its exact-input provenance, comparison
 precision and explicit loop measure passed
 [static Chromium rendering and notebook smoke checks](../reports/validation/2026-10-06-notebook-finalization/render-validation.json).
 The [measure display](../reports/validation/2026-10-06-notebook-finalization/normalization.png)
 was visually inspected. This empty-cache presentation check starts no numerical
-work. Apply the wording commits to the publication branch after its current
-runtime attestation finishes.
+work. Its wording and the separately tested Python compatibility changes were
+applied after the full numerical run's final attestation and source rechecks.
 
 ## Publication and remaining work
 
 RustFlow milestones and validation reports are pushed to its repository. The
 community notebook/API changes and dependency pins are pushed in
 [draft PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19),
-authored by `ValentinHirschi`. Its head is `8758b93d1e1a6fed2aace41493a91be569f98a98`;
-merge and release remain pending the acceptance and upstream issues below. The
+authored by `ValentinHirschi`. Its head is
+`5c204ba34b836d448f9d166d546baecca8fda8e3`; the full numerical run used
+`8758b93d1e1a6fed2aace41493a91be569f98a98`. Native dependencies, extension bytes,
+the calculation controller and anchor runner are unchanged between these
+revisions. The differences are presentation, polling compatibility and the
+documented CI repairs. Merge and release remain pending upstream/CI work. The
 notebook's repository-relative destination is `examples/hep/gg_hg.py`; the local
 publication checkout is `/common/dev/symbolica-community/loop-integration-publication`.
 
@@ -139,12 +154,13 @@ also passes both output types. The live wheel has not been changed; the isolated
 tensor host is not a rerun of the full community browser suite.
 
 The final wheel's forced cancellation after one fresh 40-digit sample passed;
-regeneration resumed in a fresh session. All sixteen refined 40-digit sources
-have now passed, using 1,376 new-generation samples and preserving the interrupted
-sample. Resumed boundary generation took 5,503.78 seconds. Independent physical
-transport, observable stability and nearby-query checks are still running; no
-final process success is claimed yet. The live calculation and its sources stay
-frozen until its completion attestation and process exit are collected.
+regeneration resumed in a fresh session and preserved completed sample hashes.
+All sixteen refined sources passed, using 1,376 new-generation samples. Refined
+physical transport and observable stability passed, and all sixteen nearby
+configurations reused accumulated physical points with preserved provenance.
+The [complete report](../reports/validation/2026-10-06-gg-hg-publication-complete/acceptance.json)
+records the final integrity attestation; its summary includes the authoritative
+process exit rather than inferring success from a progress file.
 
 Separate Python 3.10 checks found and fixed the headless runner's use of the
 built-in timeout exception: `Future.result` raises a distinct exception on that
@@ -154,8 +170,11 @@ and 70 on Python 3.14 with identical native extension bytes; the difference is
 two tests for exception classes that become aliases on newer Python. A separate
 conditional `tomli` dependency fixes the inherited Python 3.10 test-collection
 failure. Both commits are pushed on `codex/python310-toml-tests`, ending at
-`d36b9f4fe2b2b0766f313dab05237e90ea544640`, pending application after the frozen
-run. See the [compatibility evidence](../reports/validation/2026-10-06-python310-compatibility/polling-validation.json).
+`d36b9f4fe2b2b0766f313dab05237e90ea544640`, and are now included in the prepared
+publication branch. The final applied checkout also passed all 70 focused
+Python 3.14 controller, anchor and notebook checks. See the
+[compatibility evidence](../reports/validation/2026-10-06-python310-compatibility/polling-validation.json)
+and [applied-steering checks](../reports/validation/2026-10-06-gg-hg-publication-complete/prepared-steering-validation.json).
 
 The full Python 3.10 suite before the polling fix recorded 1,095 passes,
 36 failures and 172 skips. Its
@@ -164,6 +183,10 @@ identifies 29 missing native Linnet dependency failures, inherited documentation
 and accessor issues, an unrelated showcase symlink issue, the polling defect and
 the known C++ export defect. These are being repaired or tracked separately;
 the focused green checks do not mean the entire community suite is green.
+The [subsequent documentation/accessor repair](../reports/validation/2026-10-06-python310-compatibility/ci-repair-validation.json)
+passed 653 documentation examples and 32 focused checks, retaining only the same
+29 missing-Linnet failures in that documentation run. API signatures were
+unchanged. Verification with a matching native Linnet wheel remains separate.
 
 Broader work remains on general linear/cut recursion, algebraic singular
 endpoints, causal paths, nondiagonal epsilon transformations, advanced Python

@@ -1,0 +1,18 @@
+{
+  "acceptance.json": {
+    "size_bytes": 61017,
+    "sha256": "b930ced7e7375906c5ea0fbc7b753400a93fda67075e4a13ccc858df1606d442"
+  },
+  "process-exit.json": {
+    "size_bytes": 263,
+    "sha256": "b0599fd91cca8895e9bf13b116dd0198ad102c21cd62b20ffb2cf1b3b5eb2df4"
+  },
+  "source-rechecks.json": {
+    "size_bytes": 2669,
+    "sha256": "2aaf87897b6eae163b77796b42b04e549ab50056aac60de1295a6e5e0a1f628f"
+  },
+  "summary.json": {
+    "size_bytes": 28099,
+    "sha256": "2df948a1e070bb0afb5964d6a6d42bb7730daa40c2861e22220f509def132cc6"
+  }
+}

@@ -16,13 +16,16 @@ The independent reference supports 19 relative comparison digits for the EW
 square and 20 for the infinite-top HEFT–EW interference; native uncertainty
 estimates and higher-precision checks are recorded separately. General automatic
 amplitude evaluation remains open.
+The [publication-wheel acceptance](reports/validation/2026-10-06-gg-hg-publication-complete/summary.json)
+also passed independent 40-digit regeneration, interruption/resume, binary
+restart and nearby-point reuse, with final runtime attestation and process exit zero.
 
 The notebook is `examples/hep/gg_hg.py` in
 [symbolica-community PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19),
 with staged computation, native diagram displays and reusable binary caches.
 See the [checkout and installation instructions](docs/clean-community-build.md)
 and [current validation status](docs/python-notebook-status.md) for the exact
-published dependency snapshot and outstanding acceptance checks.
+published dependency snapshot and remaining generality, packaging and CI work.
 
 The original paper's four two-loop targets pass the required calculation through
 epsilon power zero: 20-digit stability under independent sample/precision/order

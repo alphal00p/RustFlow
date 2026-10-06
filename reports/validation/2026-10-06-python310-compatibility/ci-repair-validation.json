@@ -1,0 +1,229 @@
+{
+  "base_commit": "d36b9f4fe2b2b0766f313dab05237e90ea544640",
+  "branch": "codex/python310-ci-repairs",
+  "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+  "executable": "/common/dev/symbolica-community/python310-toml-tests/target/python310-venv/bin/python",
+  "CI": "true",
+  "runtime_extension_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf",
+  "marimo_version": "0.24.2",
+  "results": {
+    "documentation": {
+      "suite": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "29",
+        "skipped": "0",
+        "tests": "682",
+        "time": "17.346",
+        "timestamp": "2026-10-06T00:38:13.944021+00:00",
+        "hostname": "itphlies"
+      },
+      "failures": [
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.linnet_selection]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.half_edges]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.to_linnet]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.subgraph]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.filter]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.boundary]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.connected_components]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.is_connected]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.bridges]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.cycle_basis]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.all_spanning_forests]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.all_bonds]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.all_cuts]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.depth_first_traverse]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.breadth_first_traverse]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:FeynmanDiagram.contracted_momentum_basis]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.original]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.n_half_edges]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.excise]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.half_edge_indices]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.isolated_node_indices]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.__len__]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.__bool__]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.__and__]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.__or__]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.__xor__]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.__sub__]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        },
+        {
+          "name": "test_reference_examples_execute[__init__.pyi:Subgraph.__invert__]",
+          "classname": "tests.test_hep_documentation",
+          "message": "ModuleNotFoundError: No module named 'linnet'"
+        }
+      ],
+      "log": "/common/dev/symbolica-community/python310-ci-repairs/target/python310-ci-repairs/documentation.log",
+      "junit": "/common/dev/symbolica-community/python310-ci-repairs/target/python310-ci-repairs/documentation-junit.xml"
+    },
+    "focused": {
+      "suite": {
+        "name": "pytest",
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "32",
+        "time": "2.372",
+        "timestamp": "2026-10-06T00:38:13.947088+00:00",
+        "hostname": "itphlies"
+      },
+      "failures": [],
+      "log": "/common/dev/symbolica-community/python310-ci-repairs/target/python310-ci-repairs/focused.log",
+      "junit": "/common/dev/symbolica-community/python310-ci-repairs/target/python310-ci-repairs/focused-junit.xml"
+    }
+  },
+  "remaining_failure_set_exactly_matches_baseline_linnet": true,
+  "api_ast_comparison": {
+    "stubs/ibp.pyi": {
+      "unchanged": true,
+      "base_api_ast_sha256": "22f6657208ea34d9cf5a5087eb914edb6b21d16d7c084c66502b52de666aa8e0",
+      "current_api_ast_sha256": "22f6657208ea34d9cf5a5087eb914edb6b21d16d7c084c66502b52de666aa8e0"
+    },
+    "python/symbolica/community/hepkit/__init__.pyi": {
+      "unchanged": true,
+      "base_api_ast_sha256": "2bd18d4e38274747d319a0f426f48d446245d3d9a36f6b56d55eef0c8d70ae50",
+      "current_api_ast_sha256": "2bd18d4e38274747d319a0f426f48d446245d3d9a36f6b56d55eef0c8d70ae50"
+    }
+  },
+  "template_equality": {
+    "exact_occurrences_in_generated_stub": 1,
+    "sha256": "dfa0d388da2b15fff0ed7007d3ecba1396c90e5acc5cd01b3019e4ee3176ea72"
+  },
+  "review_patch_sha256": "d7e50883ece2c3b0d57cc2322c751f320ec21e094b0a121011ad68e63bcb0a9f",
+  "source_files_changed": [
+    "examples/hep/four_loop_reduction.py",
+    "python/symbolica/community/hepkit/__init__.pyi",
+    "stubs/ibp.pyi",
+    "tests/test_hep_symbols.py"
+  ],
+  "excluded_work": [
+    "absolute showcase symlink and its external target",
+    "native owner sources",
+    "publication worktree/runtime",
+    "Linnet install or build"
+  ],
+  "new_test_exclusions_skips_or_xfails": false,
+  "validation_commands": [
+    "CI=true /common/dev/symbolica-community/python310-toml-tests/target/python310-venv/bin/python -m pytest tests/test_hep_documentation.py -v --junitxml=target/python310-ci-repairs/documentation-junit.xml",
+    "CI=true /common/dev/symbolica-community/python310-toml-tests/target/python310-venv/bin/python -m pytest tests/test_hep_symbols.py::test_public_heads_match_typed_tensors_and_generated_momenta tests/test_hep_notebooks.py::test_helpers_have_one_folded_preamble[four_loop_reduction] tests/test_hep_notebooks.py::test_notebook_runs_from_clean_session[four_loop_reduction] tests/test_rustred_native_api.py tests/test_rustred_campaign_support.py -v --junitxml=target/python310-ci-repairs/focused-junit.xml"
+  ],
+  "commit": "5c204ba34b836d448f9d166d546baecca8fda8e3",
+  "remote_commit": "5c204ba34b836d448f9d166d546baecca8fda8e3",
+  "author_and_committer": [
+    "ValentinHirschi <valentin.hirschi@gmail.com>",
+    "ValentinHirschi <valentin.hirschi@gmail.com>"
+  ],
+  "worktree_status_after_push": ""
+}

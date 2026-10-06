@@ -16,12 +16,15 @@ directory:
 git clone --branch codex/loop-integration-publication \
   https://github.com/symbolica-dev/symbolica-community.git symbolica-community-integration
 cd symbolica-community-integration
-git checkout --detach 8758b93d1e1a6fed2aace41493a91be569f98a98
+git checkout --detach 5c204ba34b836d448f9d166d546baecca8fda8e3
 ```
 
-This snapshot has completed the native cold calculation and populated notebook
-checks. See [current acceptance status](python-notebook-status.md) for the
-remaining refinement and upstream checks; it is not a released package.
+The same native wheel and numerical controller completed the full cold,
+independent-refinement, restart and nearby-point acceptance on `8758b93d`.
+This snapshot adds validated notebook wording, Python 3.10 polling compatibility
+and CI documentation repairs, without changing native dependencies or numerical
+code. See [current acceptance status](python-notebook-status.md) for exact
+provenance and remaining upstream/CI checks; it is not a released package.
 
 Normal builds fetch the required native owners directly from public Git pins.
 They require no sibling checkout, private owner commit, patch application, or

@@ -1,0 +1,883 @@
+{
+  "schema": "approved-python-notebook-completion-audit-v4-final-native-proof",
+  "observed_utc": "2026-10-06T00:50:43.034354+00:00",
+  "scope": "Final read-only 25-item approved native Python API and gg-to-Hg notebook milestone audit. Scientific proof belongs to frozen db9/c340 core and 8758 host; exact prepared 5c source follow-ups are separately reviewed/tested/rendered. No global community-CI or full general AMFlow/DiffExp parity claim.",
+  "runtime": {
+    "core": "db9cbbafa470b1402d335ad635e608a6b7a03c07",
+    "host": "8758b93d1e1a6fed2aace41493a91be569f98a98",
+    "steering_commit": "73db70123f4a1f9ad947b043fef715fe7fd095b9",
+    "native_extension_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf",
+    "prepared_community": "5c204ba34b836d448f9d166d546baecca8fda8e3",
+    "prepared_path": "/common/dev/symbolica-community/python310-ci-repairs",
+    "frozen_path": "/common/dev/symbolica-community/loop-integration-publication",
+    "attested_frozen_sources": {
+      "acceptance": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_acceptance.py",
+        "recorded_sha256": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d",
+        "current_sha256": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d",
+        "matched": true
+      },
+      "controller": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_support.py",
+        "recorded_sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25",
+        "current_sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25",
+        "matched": true
+      },
+      "notebook": {
+        "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
+        "recorded_sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d",
+        "current_sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d",
+        "matched": true
+      }
+    },
+    "frozen_worktree_clean": true
+  },
+  "evidence": {
+    "api": "/common/dev/amflow-publication/src/python/mod.rs",
+    "evaluation": "/common/dev/amflow-publication/src/python/evaluation.rs",
+    "gg_hg": "/common/dev/amflow-publication/src/python/gg_hg.rs",
+    "amplitude": "/common/dev/amflow-publication/src/python/amplitude.rs",
+    "transport": "/common/dev/amflow-publication/src/python/transport.rs",
+    "types": "/common/dev/amflow-publication/src/python/types.rs",
+    "core_manifest": "/common/dev/amflow-publication/Cargo.toml",
+    "api_limits": "/common/dev/amflow-publication/docs/hepkit-integration.md",
+    "cache": "/common/dev/amflow-publication/src/transport_cache.rs",
+    "basis": "/common/dev/amflow-publication/docs/gg-hg-basis.md",
+    "exact_inputs": "/common/dev/amflow-publication/fixtures/gg-hg",
+    "basis_extraction": "/common/dev/amflow-publication/scripts/extract-gg-hg-physical-map.wl",
+    "notebook": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
+    "controller": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_support.py",
+    "acceptance": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_acceptance.py",
+    "anchor_runner": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_anchor_acceptance.py",
+    "native_tests": "/common/dev/symbolica-community/loop-integration-publication/tests/test_loop_integration.py",
+    "reduction_tests": "/common/dev/symbolica-community/loop-integration-publication/tests/test_loop_integration_reductions.py",
+    "controller_tests": "/common/dev/symbolica-community/loop-integration-publication/tests/test_hep_gg_hg.py",
+    "package_gate": "/common/dev/symbolica-community/loop-integration-publication/.github/scripts/check_integration_package.py",
+    "core_validation": "/common/dev/amflow/reports/validation/2026-10-05-public-owner-core.json",
+    "component_validation": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/component-validation.json",
+    "native_xml": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/publication-final-native-python-tests.xml",
+    "controller_xml": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/publication-final-controller-tests.xml",
+    "stub_xml": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/publication-final-stub-tests.xml",
+    "anchors": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/anchor-acceptance.json",
+    "boundaries": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/physical-boundary-validation.json",
+    "cold": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/cold-physics-validation.json",
+    "browser": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/browser-validation.json",
+    "browser_fix": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/tensor-sequence-browser-validation.json",
+    "display": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/notebook-native-display-validation.json",
+    "empty_render": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/notebook-render-validation.json",
+    "populated": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/populated-notebook-validation.json",
+    "interactive": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/notebook-interactive-validation.json",
+    "warm_audit": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/warm-cache-audit.json",
+    "initial_empty_observation": "/common/dev/amflow/target/publication-final-full16-initial-state-observation.json",
+    "live": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-native30/acceptance.json",
+    "prepared_notebook": "/common/dev/symbolica-community/python310-ci-repairs/examples/hep/gg_hg.py",
+    "prepared_acceptance": "/common/dev/symbolica-community/python310-ci-repairs/examples/hep/gg_hg_acceptance.py",
+    "prepared_controller": "/common/dev/symbolica-community/python310-ci-repairs/examples/hep/gg_hg_support.py",
+    "python310_full_suite": "/common/dev/symbolica-community/python310-toml-tests/target/python310-full-suite/analysis.json",
+    "python310_failure_provenance": "/common/dev/symbolica-community/python310-toml-tests/target/python310-full-suite/provenance.json",
+    "python310_toml_fix": "/common/dev/symbolica-community/python310-toml-tests/target/python310-validation/validation.json",
+    "python310_polling_fix": "/common/dev/symbolica-community/python310-toml-tests/target/polling-timeout-validation/validation.json",
+    "inherited_ci_repairs": "/common/dev/symbolica-community/python310-ci-repairs/target/python310-ci-repairs/validation.json",
+    "live_snapshot": "/common/dev/amflow/target/publication-python-notebook-completion-audit-2026-10-06-live-snapshot.json",
+    "final_proof": "/common/dev/amflow/target/publication-final-full16-complete/summary.json",
+    "final_acceptance": "/common/dev/amflow/target/publication-final-full16-complete/acceptance.json",
+    "final_source_rechecks": "/common/dev/amflow/target/publication-final-full16-complete/source-rechecks.json",
+    "authoritative_process_exit": "/common/dev/amflow/target/publication-final-full16-complete/process-exit.json",
+    "prepared_notebook_render": "/common/dev/amflow/reports/validation/2026-10-06-notebook-finalization/render-validation.json",
+    "prepared_notebook_visual": "/common/dev/amflow/reports/validation/2026-10-06-notebook-finalization/normalization.png"
+  },
+  "requirements": [
+    {
+      "requirement": "Descriptive names, nine classes/exceptions; current-crate optional python/python_stubgen; requested namespace",
+      "status": "covered",
+      "evidence": [
+        "api",
+        "core_manifest",
+        "component_validation",
+        "stub_xml"
+      ],
+      "qualification_or_remaining": ""
+    },
+    {
+      "requirement": "Native HEPKit families/diagrams/model/kinematics; shared exact Expression and arbitrary-precision Float/ComplexFloat",
+      "status": "covered",
+      "evidence": [
+        "evaluation",
+        "gg_hg",
+        "amplitude",
+        "native_xml"
+      ],
+      "qualification_or_remaining": "No numerical f64 conversion in this path."
+    },
+    {
+      "requirement": "Automatic evaluation, preparation/boundaries, physical transport, finite exact epsilon samples, Laurent fitting",
+      "status": "covered",
+      "evidence": [
+        "evaluation",
+        "transport",
+        "types",
+        "api_limits"
+      ],
+      "qualification_or_remaining": "Not every Rust standalone solver operation is wrapped; documented separate Python Frobenius/infinity, custom-route and cut-diagram limitations remain outside this ordinary notebook milestone."
+    },
+    {
+      "requirement": "RustRed and immutable family-scoped supplied reductions, retained basis/normalization/nonzero conditions",
+      "status": "covered",
+      "evidence": [
+        "reduction_tests",
+        "native_xml"
+      ],
+      "qualification_or_remaining": ""
+    },
+    {
+      "requirement": "Shared growing binary cache, compatible sources, intermediate points and provenance",
+      "status": "passed",
+      "evidence": [
+        "cache",
+        "native_tests",
+        "cold",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Shared binary restart preserved all 48 values/evidence; all 16 nearby configurations selected accumulated physical points and inserted 32 points with retained provenance."
+    },
+    {
+      "requirement": "GIL release, progress, cooperative cancellation, typed errors and generated stubs",
+      "status": "covered and validated across supported CI interpreters",
+      "evidence": [
+        "api",
+        "types",
+        "evaluation",
+        "component_validation",
+        "stub_xml",
+        "prepared_notebook",
+        "prepared_acceptance",
+        "python310_polling_fix",
+        "inherited_ci_repairs",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Native progress and cancellation passed in the complete run. Prepared d36b9f4 fixes Python 3.10 future-timeout handling; 72 relevant Python 3.10 and 70 Python 3.14 checks passed without skips. Post-fast-forward confirmation remains an operational publication check."
+    },
+    {
+      "requirement": "Coherent public dependency graph/source fingerprints and preserved namespaces; browser excludes native integration",
+      "status": "required graph/build/exclusion passed",
+      "evidence": [
+        "component_validation",
+        "core_validation",
+        "package_gate",
+        "browser"
+      ],
+      "qualification_or_remaining": "Inherited full-browser tensor adapter smoke still fails; isolated fix does not change live pins."
+    },
+    {
+      "requirement": "Exact physical families and 48/61 transformations: routing, measure, epsilon, mass, gamma and roots",
+      "status": "covered with certificate scope",
+      "evidence": [
+        "basis",
+        "exact_inputs",
+        "basis_extraction",
+        "core_validation"
+      ],
+      "qualification_or_remaining": "Original-root/dlog equivalence is source-hashed extraction-time certification, supplemented by native inverse/root/family tests; no claim of rerunning Mathematica or deriving all physical IBPs during notebook use."
+    },
+    {
+      "requirement": "Batch canonical outputs over shared finite-epsilon work, transformations/gamma normalization before fitting",
+      "status": "covered",
+      "evidence": [
+        "basis",
+        "boundaries",
+        "cold"
+      ],
+      "qualification_or_remaining": "Cold sources used78 samples each; completed refined sources use86."
+    },
+    {
+      "requirement": "Fresh independent Euclidean anchors on matching graph before16 native physical sources; comparison-only references",
+      "status": "passed",
+      "evidence": [
+        "anchors",
+        "cold",
+        "anchor_runner"
+      ],
+      "qualification_or_remaining": "545 coefficients checked at requested20/reference cap40; both native anchor calls finish before reference reads."
+    },
+    {
+      "requirement": "Generic reduction/closure/recursive boundaries required by these16 families, typed failures retained",
+      "status": "passed within the approved supplied-parent scope",
+      "evidence": [
+        "boundaries",
+        "cold",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Certified supplied 48/61 canonical connections and exact common-mass gauge transformations close parent AMF systems; native region enumeration, recursive boundary-family IBPs, analytic terminals, finite-epsilon propagation and independent Laurent reconstruction generated all 16 numerical source configurations at 30 and 40 digits. Independent native rederivation of every parent IBP is not claimed."
+    },
+    {
+      "requirement": "Completed samples distinct from verified boundaries and safe restart",
+      "status": "passed",
+      "evidence": [
+        "controller",
+        "controller_tests",
+        "controller_xml",
+        "live",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Actual forced 40-digit work cancelled after one completed new sample and before any verified configuration; a new session retained that payload hash and completed all 16 configurations. Old 1248-sample generation was archived with payload preservation."
+    },
+    {
+      "requirement": "20-digit observables from30-digit seeds and propagated uncertainty-driven refinement",
+      "status": "passed with explicit oracle precision limits",
+      "evidence": [
+        "cold",
+        "live",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "All refined observables passed native >=20-digit admission and cold/refined uncertainty-consistency assertions. All 4360 transport coefficients passed 20-digit mixed comparisons and combined-uncertainty refinement checks. EW-square external reference supports 19 conditional relative digits; no stronger oracle or rigorous interval guarantee is claimed."
+    },
+    {
+      "requirement": "Notebook location, one native model, exact point, native diagram display and explicit normalization",
+      "status": "covered; exact prepared presentation render passed",
+      "evidence": [
+        "notebook",
+        "display",
+        "interactive",
+        "prepared_notebook",
+        "prepared_acceptance",
+        "python310_polling_fix",
+        "inherited_ci_repairs",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit",
+        "prepared_notebook_render",
+        "prepared_notebook_visual"
+      ],
+      "qualification_or_remaining": "Prepared 5c notebook SHA matches rendered 059 text exactly: canonical two-loop measure, supplied parent connections versus native recursive numerical boundaries, 20-digit mixed comparisons and 19-digit EW oracle are explicit. Empty-state HTML/Chromium/visual checks passed; original frozen populated-interactive proof is retained separately, with text-only notebook AST differences audited."
+    },
+    {
+      "requirement": "Separate load/compute and recompute controls for boundaries, transport and amplitude",
+      "status": "covered",
+      "evidence": [
+        "notebook",
+        "controller",
+        "interactive",
+        "controller_xml"
+      ],
+      "qualification_or_remaining": "Actual Chromium exercised transport/amplitude/restart/repeat; fresh heavy boundary UI click is not claimed."
+    },
+    {
+      "requirement": "Progress/cancel/timings/provenance/resumability; forced boundaries bypass numerical caches, retain exact work",
+      "status": "passed",
+      "evidence": [
+        "controller",
+        "controller_xml",
+        "live",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Forced numerical generation archived prior banks and 1248 samples, preserved exact reductions, cancelled after one new completed sample, resumed with that sample preserved, and completed all stages through nearby amplitude and exit0."
+    },
+    {
+      "requirement": "Coherent8 W/Z form factors, EW/HEFT squares/interference via native HEPKit/Spenso/Idenso; dynamic projections",
+      "status": "passed",
+      "evidence": [
+        "cold",
+        "populated",
+        "controller_tests",
+        "amplitude",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Eight W/Z form factors and three coherent observables passed cold/refined checks, followed by native current-kinematics nearby assembly. No Mathematica/plugin runtime was used; finite-top QCD remains excluded."
+    },
+    {
+      "requirement": "Reference comparisons with uncertainties, binary restart, exact repeats and nearby accumulated-point reuse",
+      "status": "passed",
+      "evidence": [
+        "cold",
+        "interactive",
+        "live",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Reference comparisons, binary reload, 16 zero-step warm hits and nearby accumulated-point selection/provenance all passed. Nearby transport inserted 32 points and all 16 configurations reused accumulated physical sources; no independent nearby external oracle is claimed."
+    },
+    {
+      "requirement": "Acceptance: native interoperability, exact precision/substitution, exceptions, cancellation, stubs, cache compatibility",
+      "status": "passed",
+      "evidence": [
+        "component_validation",
+        "native_xml",
+        "controller_xml",
+        "stub_xml"
+      ],
+      "qualification_or_remaining": "21 installed native tests,67 controller/anchor cases,6 stub cases; typing fixtures pass."
+    },
+    {
+      "requirement": "Acceptance: basis/normalization and all4360 coefficients/coherent observables",
+      "status": "passed",
+      "evidence": [
+        "basis",
+        "cold",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Exactly 16 configurations, all 4360 reference and refined coefficients, 8 form factors and 3 coherent observables passed the frozen final acceptance. Exact basis/normalization evidence retains the stated extraction-time certification scope."
+    },
+    {
+      "requirement": "Acceptance: full empty-cache calculation without reference seeds, then independent sampling/precision refinement",
+      "status": "passed",
+      "evidence": [
+        "initial_empty_observation",
+        "cold",
+        "live",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Complete empty-cache native30 calculation followed by independent native40 regeneration, fresh refined transport, uncertainty consistency and amplitude assembly; no numerical reference seeds supplied to the evaluator. Final attestation matched and root confirmed process exit0."
+    },
+    {
+      "requirement": "Acceptance: interruption/restart/force/cache reload/nearby-source selection",
+      "status": "passed",
+      "evidence": [
+        "controller_xml",
+        "cold",
+        "live",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Actual interruption/restart, forced regeneration, old-generation archive, retained sample hash, binary reload, warm repeat and nearby-source selection passed. Final nearby stage used all 16 accumulated-point sources and preserved their provenance."
+    },
+    {
+      "requirement": "Acceptance: lightweight smoke tests plus separate long headless acceptance",
+      "status": "covered",
+      "evidence": [
+        "controller_tests",
+        "acceptance",
+        "anchor_runner",
+        "empty_render",
+        "populated",
+        "interactive"
+      ],
+      "qualification_or_remaining": "Actual native original notebook render and Chromium panels/controls pass using copied verified cold banks."
+    },
+    {
+      "requirement": "Acceptance: relevant Rust/Python checks and separate cold/resumed/warm timings",
+      "status": "passed for required milestone checks; broader CI reported separately",
+      "evidence": [
+        "core_validation",
+        "component_validation",
+        "cold",
+        "warm_audit",
+        "live",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Required native Rust/Python checks and complete cold, warm, interrupted, resumed-refinement and nearby timings are recorded. Root confirmed final process exit0. Timings reflect concurrent cluster work, not a matched upstream end-to-end benchmark."
+    },
+    {
+      "requirement": "Acceptance: preserve unrelated changes, validated commits/pushes and community bump",
+      "status": "scientific proof archived; prepared source committed and pushed",
+      "evidence": [
+        "core_validation",
+        "interactive",
+        "prepared_notebook",
+        "prepared_acceptance",
+        "python310_polling_fix",
+        "inherited_ci_repairs",
+        "final_proof",
+        "final_source_rechecks",
+        "authoritative_process_exit"
+      ],
+      "qualification_or_remaining": "Immutable proof and all eight post-completion source/extension/model/reference checks are archived under target/publication-final-full16-complete. Prepared 5c follow-ups are committed/pushed with preserved unrelated work. Root is coordinating publication fast-forward, final focused confirmation and report/status publication; those operational follow-ups do not reopen numerical proof."
+    }
+  ],
+  "inherited_defects": [
+    {
+      "issue": "Complex C++ exporter",
+      "pr": "https://github.com/symbolica-dev/symbolica/pull/51",
+      "required_native_gg_hg_path_affected": false
+    },
+    {
+      "issue": "Spynso3 browser/no-NumPy list adapter",
+      "pr": "https://github.com/alphal00p/gammaloop/pull/126",
+      "required_native_gg_hg_path_affected": false,
+      "isolated_fix_not_live_pin": true
+    }
+  ],
+  "final_acceptance_claimed": true,
+  "pending_gates": [],
+  "prior_audit": {
+    "path": "/common/dev/amflow/target/publication-python-notebook-completion-audit-2026-10-05.json",
+    "sha256": "969bf35a374b9538f68a7d56f5f61be1a29c07b16ab37f3fcd6bdd6a399936f5"
+  },
+  "approved_plan": {
+    "source": "/common/dev/amflow/target/publication-python-notebook-independent-scope-audit-2026-10-06.json",
+    "sha256": "2a47659c8d861137f9023774cb68b0c0aa90a37b3242a6f9937c6fb0cd31fc23",
+    "provenance": "Root supplied the exact relevant text of the latest user-approved plan in a task message on 2026-10-06; no standalone file was asserted.",
+    "quotes": [
+      "Expose automatic evaluation, boundary generation, physical transport, finite-epsilon sampling, and Laurent reconstruction.",
+      "Support RustRed and scoped supplied reductions, retaining basis definitions and nonzero conditions.",
+      "Establish exact physical families and certify their transformations into the plugin\u2019s 48/61 canonical bases, including routing, measure, epsilon factors, mass normalization, gamma factors, and root conventions.",
+      "Batch canonical outputs over shared finite-epsilon evaluations, applying transformations before Laurent fitting.",
+      "Validate fresh AMFlow boundaries against the independent Euclidean anchors, then generate the sixteen physical starting configurations natively. Reference numerical boundaries serve only as comparison data.",
+      "Complete the generic reduction, closure, and recursive-boundary functionality required by these families, retaining typed failures for incomplete work.",
+      "Persist completed samples separately from verified boundaries for safe restart.",
+      "Target 20-digit observables, starting with 30-digit seeds and refining according to propagated uncertainty.",
+      "Use durable scientific inputs and kinematics-dependent projections. Notebook execution requires neither Mathematica nor the original plugin runtime. Finite-top QCD remains outside this demonstration.",
+      "Certify basis transformations and normalization; compare all 4,360 reference transport coefficients and the coherent amplitude observables.",
+      "Complete the full calculation from empty caches with reference seeds unavailable to the evaluator, followed by independent sampling and precision refinement.",
+      "Validate interruption/restart, forced recomputation, cache reload, and nearby-source selection.",
+      "Completion requires native boundary generation through the final amplitude."
+    ],
+    "interpretation": "The plan explicitly admits scoped supplied reductions and durable scientific inputs, and requires native numerical boundaries rather than independent rederivation of every published IBP. A source-certified exact parent connection transformed by the generic common-mass machinery is a permitted supplied symbolic reduction result for that numerical workflow. Native generic closure and recursive IBPs are actually exercised for boundary subfamilies; the parent supplied connection remains an explicit trust boundary, not an unverified residual silently accepted as a master. Therefore no additional top-level RustRed regeneration is a prerequisite for this scoped notebook gate. Its absence must remain stated and must not be used as evidence of broader automatic-reduction parity."
+  },
+  "prepared_steering_compatibility": {
+    "status": "reviewed source equivalence, exact rendered notebook text, and focused Python 3.10/3.14 validation passed; post-fast-forward confirmation planned by root",
+    "source_comparison": {
+      "Cargo.toml": {
+        "frozen_sha256": "0f6c16da982f098846ee7cfe011da8d6633507971856829e9b29eba7cee8745a",
+        "prepared_sha256": "0f6c16da982f098846ee7cfe011da8d6633507971856829e9b29eba7cee8745a",
+        "unchanged": true
+      },
+      "Cargo.lock": {
+        "frozen_sha256": "62369e956c6e9e6c8eb5f559dfffdc3bc2621b709030a986da40c226024f8e0c",
+        "prepared_sha256": "62369e956c6e9e6c8eb5f559dfffdc3bc2621b709030a986da40c226024f8e0c",
+        "unchanged": true
+      },
+      "src/lib.rs": {
+        "frozen_sha256": "083010df6f2792066b905fe65ee6ec2b786ece162ddd08290698dc7024e7e933",
+        "prepared_sha256": "083010df6f2792066b905fe65ee6ec2b786ece162ddd08290698dc7024e7e933",
+        "unchanged": true
+      },
+      "python/symbolica/community/hep/integration/__init__.pyi": {
+        "frozen_sha256": "2120a4efb0fa55a43c8aaf02bde51b9a0dfb1e70f89bc416dbf0b753f76a7d46",
+        "prepared_sha256": "2120a4efb0fa55a43c8aaf02bde51b9a0dfb1e70f89bc416dbf0b753f76a7d46",
+        "unchanged": true
+      },
+      "examples/hep/gg_hg_support.py": {
+        "frozen_sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25",
+        "prepared_sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25",
+        "unchanged": true
+      },
+      "examples/hep/gg_hg_anchor_acceptance.py": {
+        "frozen_sha256": "e666df0f743127df1a41667d81df73949190c4059b07aeb01da358863c7c23e1",
+        "prepared_sha256": "e666df0f743127df1a41667d81df73949190c4059b07aeb01da358863c7c23e1",
+        "unchanged": true
+      }
+    },
+    "notebook_ast_equal_ignoring_string_values": true,
+    "notebook_diff_scope": "Two Markdown cells only; no control/model/cache/kinematics code changes.",
+    "acceptance_ast_equal_excluding_wait_for_stage_and_its_import": true,
+    "polling_fix_commit": "d36b9f4fe2b2b0766f313dab05237e90ea544640",
+    "required_final_action": "Root may fast-forward after immutable original attestation rechecks and run focused confirmation. A fresh populated final-bank rerender is not required: exact text has rendered, original populated interactions are proven, and scientific execution/controller source is unchanged apart from separately tested polling handling. Keep presentation-copy runs distinct from original native cold proof.",
+    "exact_prepared_notebook_sha256": "9e7a5e5a4837785ee302d8cb4016e6dacb9b0d06b0548bc3be31fdbe16bc15d6",
+    "rendered_source_commit": "059ec1faf663e38ccb4def8bfeb368eb7b5edc8e",
+    "render_report": {
+      "path": "/common/dev/amflow/reports/validation/2026-10-06-notebook-finalization/render-validation.json",
+      "sha256": "9deaeb02f1c3f8e832dffa0b199573943344e8abc418c4d760a8008126ebe797",
+      "scope": "Static HTML of documentation-only notebook followup with empty numerical caches; no integral evaluation"
+    },
+    "frozen_populated_proof": "/common/dev/amflow/reports/validation/2026-10-05-public-wheel/notebook-interactive-validation.json"
+  },
+  "broader_community_ci": {
+    "milestone_distinction": "These checks concern broader community packaging, examples and browser APIs. They do not replace the frozen full native numerical acceptance. Final full-suite claims need a rerun after the separate pinned Linnet dependency is available.",
+    "initial_python310_full_scope": {
+      "commit": "3759d72f81f305423d1207965b560ebfa5c31159",
+      "passed": 1095,
+      "failed": 36,
+      "skipped": 172,
+      "seconds": 105.1542655583471,
+      "scope": "CI=true pytest tests/ -v; 1302 collected plus one collection skip; no exclusions or added skips"
+    },
+    "repairs_in_prepared_source": {
+      "3759d72": "Inherited Python 3.10 TOML collection failure repaired.",
+      "d36b9f4": "Milestone polling timeout incompatibility on Python 3.10 repaired; 72 relevant Python 3.10 checks passed with actual Marimo installed.",
+      "5c204ba": "Two inherited IBP documentation check failures, inherited momentum-accessor test and inherited four-loop preamble repaired. Full documentation file: 653 passed, only unchanged 29 missing-Linnet failures. Focused checks: 32 passed, including actual notebook clean run. Both stub API ASTs unchanged and authoritative/generated template equality verified."
+    },
+    "remaining_known": [
+      {
+        "issue": "29 HEP graph documentation examples need the separate GammaLoop Linnet extension",
+        "provenance": "Owner graph bridge and failing examples predate PR base 69509f1b; PyPI linnet is unrelated.",
+        "action": "Separate exact a3d1c8a Linnet wheel build/verification is coordinated by cache_snapshot_export; no install or completion assumed by this audit.",
+        "milestone_native_path_affected": false
+      },
+      {
+        "issue": "Absolute local showcase symlink resolves an external notebook using gammalooprs::hedge",
+        "provenance": "Unrelated post-base commit 33456209; environment-dependent example-source audit failure.",
+        "action": "Preserve external symlink target; report separately, no implicit external edit.",
+        "milestone_native_path_affected": false
+      },
+      {
+        "issue": "Known complex C++ exporter",
+        "pr": "https://github.com/symbolica-dev/symbolica/pull/51",
+        "milestone_native_path_affected": false
+      },
+      {
+        "issue": "Whole-community browser tensor-list adapter defect",
+        "pr": "https://github.com/alphal00p/gammaloop/pull/126",
+        "isolated_fix_passed": true,
+        "integrated_in_frozen_pin": false,
+        "milestone_native_path_affected": false
+      }
+    ],
+    "coverage_qualification": "Initial suite skipped 169 missing-Marimo tests, two existing CI FORM tests, and one missing-Playwright collection. Marimo was installed later in isolated Python 3.10; no full post-install suite result is claimed here."
+  },
+  "no_additional_notebook_or_api_requirements_identified": true,
+  "broader_goal_not_completed_by_milestone": "Full general AMFlow/DiffExp feature or performance parity, separate advanced Python Frobenius/infinity/cut/custom-route wrappers, independent parent48/61 RustRed regeneration, nearby external oracle and rigorous interval certification are not established by this scoped acceptance.",
+  "finalization_waits_for_root_confirmed_exit": false,
+  "before_exit_audit": {
+    "path": "/common/dev/amflow/target/publication-python-notebook-completion-audit-2026-10-06-before-exit.json",
+    "sha256": "bbd06a419646b22fbe56de48f333fe393804b3544b4cfa9eb4f6a0798a6d2d63"
+  },
+  "final_native_proof": {
+    "status": "passed",
+    "scope": "Complete final public db9/c340 installed-wheel native gg-to-Hg acceptance; distinct from historical4c dependency graph. No Mathematica/plugin runtime or numerical-reference boundary fallback.",
+    "files": {
+      "acceptance.json": {
+        "path": "/common/dev/amflow/target/publication-final-full16-complete/acceptance.json",
+        "sha256": "b930ced7e7375906c5ea0fbc7b753400a93fda67075e4a13ccc858df1606d442"
+      },
+      "summary.json": {
+        "path": "/common/dev/amflow/target/publication-final-full16-complete/summary.json",
+        "sha256": "2df948a1e070bb0afb5964d6a6d42bb7730daa40c2861e22220f509def132cc6"
+      },
+      "source-rechecks.json": {
+        "path": "/common/dev/amflow/target/publication-final-full16-complete/source-rechecks.json",
+        "sha256": "2aaf87897b6eae163b77796b42b04e549ab50056aac60de1295a6e5e0a1f628f"
+      },
+      "process-exit.json": {
+        "path": "/common/dev/amflow/target/publication-final-full16-complete/process-exit.json",
+        "sha256": "b0599fd91cca8895e9bf13b116dd0198ad102c21cd62b20ffb2cf1b3b5eb2df4"
+      },
+      "manifest.json": {
+        "path": "/common/dev/amflow/target/publication-final-full16-complete/manifest.json",
+        "sha256": "64e8c9e9cc6d42c3ce090632e1a082b21f2799a321a6daee5ccbd428665755ab"
+      }
+    },
+    "process_exit": {
+      "session": 1082,
+      "exit_code": 0,
+      "tool_chunk": "ad5c09",
+      "observed_by": "root agent owning exec session1082",
+      "observation": "Authoritative tool completion exit0, no output. Root confirmed by collaboration message before this immutable collection."
+    },
+    "source_rechecks": {
+      "rechecked_at_utc": "2026-10-06T00:49:18.472168+00:00",
+      "file_count": 8,
+      "all_recorded_files_matched": true
+    },
+    "publication_pins": {
+      "community": "8758b93d",
+      "numerical_steering_commit": "73db70123f4a1f9ad947b043fef715fe7fd095b9",
+      "rustflow_core": "db9cbbafa470b1402d335ad635e608a6b7a03c07",
+      "symbolica": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+      "hepkit_owner": "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+      "vakint": "6203c6cbba6ae5e90329ba5081fad55319e678db",
+      "rustred": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+    },
+    "gate_counts": {
+      "fresh_30_digit_configurations": 16,
+      "initial_completed_samples": 1248,
+      "fresh_40_digit_configurations": 16,
+      "refined_completed_samples": 1376,
+      "total_completed_samples_across_generations": 2624,
+      "independent_euclidean_coefficients": 545,
+      "reference_transport_coefficients": 4360,
+      "precision_stable_transport_coefficients": 4360,
+      "W_Z_form_factors": 8,
+      "coherent_observables": 3,
+      "warm_exact_cache_hits": 16,
+      "warm_ode_steps": 0,
+      "nearby_configurations_reusing_accumulated_points": 16,
+      "nearby_inserted_points": 32,
+      "interrupted_new_completed_samples": 1,
+      "interrupted_sample_payloads_preserved_after_resume": true,
+      "final_runtime_attestation_verified": true
+    },
+    "runtime_attestation_verified_at_completion": true,
+    "reference_precision_scope": {
+      "EW_squared_relative_reference_cap": 19,
+      "interference_relative_reference_cap": 20,
+      "HEFT_squared_relative_reference_cap": 39,
+      "transport_checked_mixed_digits": 20,
+      "note": "Independent native sampling/precision refinement demonstrates stability and uncertainty consistency; it does not increase recorded external reference precision or provide an interval certificate."
+    },
+    "refined_observable_scope": "The final runner asserts all3 refined observables achieve>=20 conditional digits and agree with cold values within combined native errors. The report stores cold observable values and refined form-factor values; it does not store a second set of refined observable values.",
+    "timings": [
+      {
+        "stage": "boundaries",
+        "mode": "cold",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 6467540504060
+      },
+      {
+        "stage": "transport",
+        "mode": "cold",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 400068170794
+      },
+      {
+        "stage": "amplitude",
+        "mode": "cold",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 35956245285
+      },
+      {
+        "stage": "restart",
+        "mode": "reloaded",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 73878067407
+      },
+      {
+        "stage": "transport",
+        "mode": "warm",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 68433739984
+      },
+      {
+        "stage": "amplitude",
+        "mode": "warm",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 4032656709
+      },
+      {
+        "stage": "boundaries",
+        "mode": "forced_refinement_interrupted",
+        "seed_digits": 40,
+        "observable_digits": 20,
+        "elapsed_ns": 332781844403,
+        "recompute": true,
+        "outcome": "CalculationCancelled"
+      },
+      {
+        "stage": "boundaries",
+        "mode": "resumed_refinement",
+        "seed_digits": 40,
+        "final_seed_digits": 40,
+        "observable_digits": 20,
+        "elapsed_ns": 5503786127260
+      },
+      {
+        "stage": "transport",
+        "mode": "forced_refinement",
+        "seed_digits": 40,
+        "final_seed_digits": 40,
+        "observable_digits": 20,
+        "elapsed_ns": 412668411848,
+        "recompute": true
+      },
+      {
+        "stage": "amplitude",
+        "mode": "forced_refinement",
+        "seed_digits": 40,
+        "final_seed_digits": 40,
+        "observable_digits": 20,
+        "elapsed_ns": 36881747397,
+        "recompute": true
+      },
+      {
+        "stage": "transport",
+        "mode": "nearby",
+        "seed_digits": 40,
+        "final_seed_digits": 40,
+        "observable_digits": 20,
+        "elapsed_ns": 363539130979,
+        "nearby": true
+      },
+      {
+        "stage": "amplitude",
+        "mode": "nearby",
+        "seed_digits": 40,
+        "final_seed_digits": 40,
+        "observable_digits": 20,
+        "elapsed_ns": 4023915428,
+        "recompute": true
+      }
+    ],
+    "concurrency_note": "Shared cluster, four boundary workers within256sampleworker budget. Cold/resumed/warm times are observations, not matched upstream full-workflow performance comparisons."
+  },
+  "historical_live_observation": {
+    "path": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-native30/acceptance.json",
+    "snapshot": "/common/dev/amflow/target/publication-python-notebook-completion-audit-2026-10-06-live-snapshot.json",
+    "sha256": "c9eaa1b312dfd70b4bc240a181bf0f71870707712564de5e710023860616f060",
+    "observed_utc": "2026-10-06T00:44:55.969008+00:00",
+    "status": "running",
+    "progress": {
+      "stage": "transport",
+      "mode": "nearby",
+      "seed_digits": 40,
+      "status": "running transport",
+      "done": false,
+      "completed_sample_files": 1376
+    },
+    "refinement": {
+      "seed_digits": 40,
+      "old_numerical_caches_bypassed": true,
+      "new_precision_samples_resumed": true,
+      "exact_reductions_reusable": true,
+      "checked_mixed_digits": 20,
+      "coefficients_with_consistent_uncertainties": 4360
+    },
+    "refined_form_factor_components": 8,
+    "interruption": {
+      "phase": "forced_refinement",
+      "seed_digits": 40,
+      "baseline_sample_files": 1248,
+      "retained_sample_files": 1,
+      "new_complete_samples": 1,
+      "archived_sample_files": 1248,
+      "previous_generation": {
+        "schema": 1,
+        "generation": "initial",
+        "archive_directory": null
+      },
+      "numerical_generation": {
+        "schema": 1,
+        "generation": "e62a7b9da894493589d1819a7c5bb97b",
+        "archive_directory": "numerical-history/e62a7b9da894493589d1819a7c5bb97b"
+      },
+      "archived_sample_payloads_preserved": true,
+      "elapsed_ns": 332781844403,
+      "cancellation_latency_ns": 1978250221,
+      "sample_payloads_preserved": true,
+      "verified_configurations_before_cancel": 0,
+      "sample_payloads_preserved_after_resume": true
+    },
+    "binary_restart": {
+      "entries": 48,
+      "values_and_evidence_preserved": true,
+      "exact_repeat_without_steps": true
+    },
+    "stages": [
+      {
+        "stage": "boundaries",
+        "mode": "cold",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 6467540504060
+      },
+      {
+        "stage": "transport",
+        "mode": "cold",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 400068170794
+      },
+      {
+        "stage": "amplitude",
+        "mode": "cold",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 35956245285
+      },
+      {
+        "stage": "restart",
+        "mode": "reloaded",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 73878067407
+      },
+      {
+        "stage": "transport",
+        "mode": "warm",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 68433739984
+      },
+      {
+        "stage": "amplitude",
+        "mode": "warm",
+        "seed_digits": 30,
+        "final_seed_digits": 30,
+        "observable_digits": 20,
+        "elapsed_ns": 4032656709
+      },
+      {
+        "stage": "boundaries",
+        "mode": "forced_refinement_interrupted",
+        "seed_digits": 40,
+        "observable_digits": 20,
+        "elapsed_ns": 332781844403,
+        "recompute": true,
+        "outcome": "CalculationCancelled"
+      },
+      {
+        "stage": "boundaries",
+        "mode": "resumed_refinement",
+        "seed_digits": 40,
+        "final_seed_digits": 40,
+        "observable_digits": 20,
+        "elapsed_ns": 5503786127260
+      },
+      {
+        "stage": "transport",
+        "mode": "forced_refinement",
+        "seed_digits": 40,
+        "final_seed_digits": 40,
+        "observable_digits": 20,
+        "elapsed_ns": 412668411848,
+        "recompute": true
+      },
+      {
+        "stage": "amplitude",
+        "mode": "forced_refinement",
+        "seed_digits": 40,
+        "final_seed_digits": 40,
+        "observable_digits": 20,
+        "elapsed_ns": 36881747397,
+        "recompute": true
+      }
+    ],
+    "runtime_attestation_verified_at_completion": false,
+    "note": "Snapshot of mutable progress only. Root has not confirmed authoritative process exit; no final native-proof claim.",
+    "superseded_by": "/common/dev/amflow/target/publication-final-full16-complete/acceptance.json"
+  },
+  "pending_scientific_or_api_requirement_gates": [],
+  "pending_publication_followups": [
+    "Root-coordinated fast-forward to the approved prepared source and focused post-fast-forward test confirmation.",
+    "Publish/archive the immutable proof and final status wording while retaining original execution source hashes.",
+    "Finish separately tracked broad community CI dependency/example/browser issues; no global CI-green claim."
+  ],
+  "final_acceptance_claim_scope": "Complete scoped native gg-to-Hg scientific acceptance on frozen db9/c340 runtime and original8758 execution hashes only; prepared5c follow-ups have separately recorded compatibility/presentation evidence.",
+  "root_confirmed_exit": {
+    "session": 1082,
+    "exit_code": 0,
+    "tool_chunk": "ad5c09",
+    "observed_by": "root agent owning exec session1082",
+    "observation": "Authoritative tool completion exit0, no output. Root confirmed by collaboration message before this immutable collection."
+  },
+  "whole_project_feature_complete": false,
+  "global_community_ci_green": false,
+  "requirements_count": 25
+}

@@ -1,0 +1,58 @@
+{
+  "rechecked_at_utc": "2026-10-06T00:49:18.472168+00:00",
+  "files": {
+    "installed_extension": {
+      "path": "/common/dev/amflow/target/publication-python-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+      "sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf",
+      "size_bytes": 393671056,
+      "matches_recorded": true
+    },
+    "acceptance": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_acceptance.py",
+      "sha256": "ab3e745e0101feb3976c0afd6f5cf3dfde65a951ff3b46fc4f6e713544fb7f9d",
+      "size_bytes": 32019,
+      "matches_recorded": true
+    },
+    "controller": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_support.py",
+      "sha256": "161766e05f5f29258dfcc1023956f982fed2b7fee72e15d2f524147875a3ab25",
+      "size_bytes": 20678,
+      "matches_recorded": true
+    },
+    "notebook": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
+      "sha256": "32191bcb0ff3f6957250ecedb5587586665ea5e1c3b7cbf50186db35975fa16d",
+      "size_bytes": 11597,
+      "matches_recorded": true
+    },
+    "independent_anchor_report": {
+      "path": "/common/dev/amflow/target/gg-hg-notebook-acceptance/publication-euclidean20/anchor-acceptance.json",
+      "sha256": "c03530cd10b6c0a7d4a038dbb55ca31609f9c58b65253896e1c9b431fae01587",
+      "size_bytes": 202667,
+      "matches_recorded": true
+    },
+    "reference_transport_coefficients": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/data/gg_hg/coherent-reference.json",
+      "sha256": "dd791b4d0400504ae8bc13e4e4bffa3d35773579a73c49ef4559d8e7985787e3",
+      "size_bytes": 1445530,
+      "matches_recorded": true
+    },
+    "reference_amplitude": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/data/gg_hg/amplitude-validation.json",
+      "sha256": "868b9fde9448e54b315e96c4ce5a83bcb2501f219cf45a4cf2c147e521fef071",
+      "size_bytes": 6920,
+      "matches_recorded": true
+    },
+    "model": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/data/gg_hg/native-model.json",
+      "sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+      "size_bytes": 207856,
+      "matches_recorded": true
+    }
+  },
+  "native_identity_witness": {
+    "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+    "identity": "5e8319c74a327e09349d7626d629c77d8a39d625e0503267e5ebfbb0994039cf"
+  },
+  "all_recorded_files_matched": true
+}
