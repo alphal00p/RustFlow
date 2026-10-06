@@ -116,9 +116,13 @@ revisions. Separately,
 the [epsilon-singular transport probe](../reports/validation/2026-10-06-epsilon-singular-transport-probe/README.md)
 demonstrates why a generic sampled physical-transport route also needs tighter
 boundary-error propagation: exact coupled cancellations can make the scalar
-bound excessively conservative. Signed fundamental-matrix proofs are being
-validated without weakening uncertainty requirements or inventing source values
-from a finite Laurent prefix.
+bound excessively conservative. Bounded signed fundamental-matrix proofs for
+ordinary rational systems are now integrated, with automatic retry only after
+scalar uncertainty admission fails. The reviewed source passed 209 isolated
+checks, strict Clippy and an exact four-case comparison with the preceding
+scalar implementation; the main integration preserves those source files.
+Sparse epsilon hierarchies and registered roots remain outside that proof.
+No source value is invented from a finite Laurent prefix.
 
 The [unified-flow design and generality audit](unified-flow.md) makes reduced-family
 evaluation the central interface. AMF direct evaluation, AMF-generated physical

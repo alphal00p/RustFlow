@@ -1,0 +1,16 @@
+{
+  "recorded_utc": "2026-10-06T08:58:37.684998+00:00",
+  "main_commits": [
+    "58a1f21",
+    "699691c"
+  ],
+  "validated_isolated_commit": "cbb587bfba04856e2cd8ac965fdcb1a9bf9e16c8",
+  "source_comparison": "git diff --exit-code reports identical src/, tests/, fixtures/, Cargo.toml, Cargo.lock and build.rs",
+  "source_gate": "report.json: 209 tests, native/Python strict all-target Clippy, exact baseline scalar comparison",
+  "additional_integration_checks": [
+    "cargo fmt --check",
+    "git diff --check"
+  ],
+  "additional_runtime_build": false,
+  "scope": "Integrate already independently reviewed and tested exact source; retain original runtime evidence, not a new full-suite count."
+}

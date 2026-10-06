@@ -1,0 +1,43 @@
+{
+  "controller_sha256": "363887ae8517f4aeef20f7e4299b1e4aaf7bf1961d7492c093766acc8954da02",
+  "native_extension_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf",
+  "cpu": 44,
+  "records": [
+    {
+      "operation": "exact_transport",
+      "elapsed_ns": 3346042433
+    },
+    {
+      "operation": "HiggsJetAmplitude",
+      "elapsed_ns": 30769007322
+    },
+    {
+      "operation": "HiggsJetFormFactorProjector",
+      "elapsed_ns": 1254622229
+    },
+    {
+      "operation": "assemble",
+      "repetition": 0,
+      "elapsed_ns": 34652865332
+    },
+    {
+      "operation": "HiggsJetFormFactorProjector",
+      "elapsed_ns": 1220268081
+    },
+    {
+      "operation": "assemble",
+      "repetition": 1,
+      "elapsed_ns": 3852185490
+    },
+    {
+      "operation": "HiggsJetFormFactorProjector",
+      "elapsed_ns": 1220254306
+    },
+    {
+      "operation": "assemble",
+      "repetition": 2,
+      "elapsed_ns": 3842744747
+    }
+  ],
+  "original_banks_unchanged": true
+}

@@ -1,0 +1,43 @@
+         155 function calls in 3.849 seconds
+
+   Ordered by: cumulative time
+   List reduced from 51 to 35 due to restriction <35>
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        1    0.000    0.000    3.849    3.849 /common/dev/symbolica-community/notebook-amplitude-performance/examples/hep/gg_hg_support.py:386(assemble)
+        2    1.759    0.879    1.759    0.879 {method 'evaluate' of 'symbolica.community.hep.integration.HiggsJetFormFactorProjector' objects}
+        1    1.220    1.220    1.220    1.220 /common/dev/amflow/target/notebook-amplitude-performance/measure_assembly.py:19(traced)
+        1    0.870    0.870    0.870    0.870 {method 'evaluate' of 'symbolica.community.hep.integration.HiggsJetAmplitude' objects}
+        1    0.000    0.000    0.000    0.000 /common/dev/symbolica-community/notebook-amplitude-performance/examples/hep/gg_hg_support.py:133(_require_numerical_generation)
+        1    0.000    0.000    0.000    0.000 /common/dev/symbolica-community/notebook-amplitude-performance/examples/hep/gg_hg_support.py:108(numerical_generation)
+        1    0.000    0.000    0.000    0.000 /common/dev/symbolica-community/notebook-amplitude-performance/examples/hep/gg_hg_support.py:113(_read_numerical_generation)
+        1    0.000    0.000    0.000    0.000 /common/dev/symbolica-community/notebook-amplitude-performance/examples/hep/gg_hg_support.py:105(_preparation_pending)
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:663(exists)
+        2    0.000    0.000    0.000    0.000 <frozen genericpath>:16(exists)
+        2    0.000    0.000    0.000    0.000 {built-in method posix.stat}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.print}
+        5    0.000    0.000    0.000    0.000 {built-in method symbolica.core.E}
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:190(__fspath__)
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:251(__str__)
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:341(drive)
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:172(__truediv__)
+        2    0.000    0.000    0.000    0.000 {method 'sqrt' of 'symbolica.core.Expression' objects}
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:157(with_segments)
+       20    0.000    0.000    0.000    0.000 /common/dev/symbolica-community/notebook-amplitude-performance/examples/hep/gg_hg_support.py:411(<genexpr>)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1409(_handle_fromlist)
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:330(_raw_path)
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:135(__init__)
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:281(_parse_path)
+        2    0.000    0.000    0.000    0.000 <frozen posixpath>:72(join)
+        4    0.000    0.000    0.000    0.000 {method 'parameter' of 'symbolica.community.hepkit.Model' objects}
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:632(__new__)
+        2    0.000    0.000    0.000    0.000 {built-in method posix._path_splitroot_ex}
+        4    0.000    0.000    0.000    0.000 {built-in method builtins.hasattr}
+       16    0.000    0.000    0.000    0.000 /common/dev/symbolica-community/notebook-amplitude-performance/examples/hep/gg_hg_support.py:412(<lambda>)
+        2    0.000    0.000    0.000    0.000 /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/python3.14/pathlib/__init__.py:261(_format_parsed_parts)
+        4    0.000    0.000    0.000    0.000 /common/dev/symbolica-community/notebook-amplitude-performance/examples/hep/gg_hg_support.py:434(<genexpr>)
+        2    0.000    0.000    0.000    0.000 {built-in method time.perf_counter_ns}
+
+

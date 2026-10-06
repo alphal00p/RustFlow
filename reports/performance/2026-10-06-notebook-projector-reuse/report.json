@@ -1,0 +1,162 @@
+{
+  "schema": 1,
+  "scope": "Warm forced amplitude assembly with unchanged release extension and supplied native completed banks; no fresh boundaries, no ODE work, no upstream speed ratio.",
+  "cpu": 44,
+  "original_bank_sha256": {
+    "seeds": "5e8c60c1b5fce269b8f521821e37368b8272c4682afe6578a5b9891f4c136d98",
+    "transport": "4e7ff017963c54bb08051bc7c3bb131e0f10ede81998f306dbd7489d6da06e8a"
+  },
+  "native_extension_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf",
+  "controller_sha256": {
+    "baseline": "363887ae8517f4aeef20f7e4299b1e4aaf7bf1961d7492c093766acc8954da02",
+    "candidate": "02a4441f62b52ec9ed16e11e711d819c97c369829c282463e75ab1b0bbc3fbd2"
+  },
+  "measurements": [
+    {
+      "controller": "baseline",
+      "point": "original",
+      "repetition": 0,
+      "elapsed_ns": 3868347888,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "candidate",
+      "point": "original",
+      "repetition": 0,
+      "elapsed_ns": 2677933574,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "candidate",
+      "point": "original",
+      "repetition": 1,
+      "elapsed_ns": 2680004096,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "baseline",
+      "point": "original",
+      "repetition": 1,
+      "elapsed_ns": 3881421875,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "baseline",
+      "point": "original",
+      "repetition": 2,
+      "elapsed_ns": 3900929201,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "candidate",
+      "point": "original",
+      "repetition": 2,
+      "elapsed_ns": 2639553390,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "baseline",
+      "point": "nearby_cached",
+      "repetition": 0,
+      "elapsed_ns": 3881668414,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "candidate",
+      "point": "nearby_cached",
+      "repetition": 0,
+      "elapsed_ns": 2696926238,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "candidate",
+      "point": "nearby_cached",
+      "repetition": 1,
+      "elapsed_ns": 2650864948,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "baseline",
+      "point": "nearby_cached",
+      "repetition": 1,
+      "elapsed_ns": 3908331360,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "baseline",
+      "point": "nearby_cached",
+      "repetition": 2,
+      "elapsed_ns": 3880798257,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    },
+    {
+      "controller": "candidate",
+      "point": "nearby_cached",
+      "repetition": 2,
+      "elapsed_ns": 2641939520,
+      "form_factors": 8,
+      "observables": 3,
+      "exact_values_errors_precision_and_provenance_equal": true
+    }
+  ],
+  "native_amplitude_preparation_ns": 31109769886,
+  "median_ns": {
+    "original": {
+      "baseline": 3881421875,
+      "candidate": 2677933574
+    },
+    "nearby_cached": {
+      "baseline": 3881668414,
+      "candidate": 2650864948
+    }
+  },
+  "original_banks_unchanged": true,
+  "status": "passed",
+  "recorded_utc": "2026-10-06T08:57:38.414989+00:00",
+  "baseline_community_commit": "66a67bb0bc7b01ae53757c274aba92fc2ef234f8",
+  "candidate_community_commit": "8c339a4ff8461b92140428abdfb34cdde83cef52",
+  "validation": {
+    "publication_release_wheel_gg_hg_tests": 57,
+    "current_host_amplitude_tests": 4,
+    "diff_check": "passed"
+  },
+  "process_exit": {
+    "benchmark_session": 83441,
+    "exit_code": 0,
+    "terminal_chunk": "507dfc"
+  },
+  "limitations": [
+    "Warm forced amplitude stage only, exact native preparation retained; no ODE or boundary generation timing in this comparison.",
+    "Three alternating observations per point on CPU44 of a shared cluster.",
+    "Both controllers share one immutable native amplitude kernel, as warm sessions do; first-time construction is outside the matched stage.",
+    "Same earlier db9/c340/a3 native release wheel; current 6def/b966 host compatibility separately checked but not timed.",
+    "The nearby point was already present in copied completed native banks; only its changing form-factor and observable assembly is measured.",
+    "No reduction of precision, uncertainty checks or kinematics-dependent reevaluation."
+  ],
+  "relative_reduction": {
+    "original": 0.3100637703805387,
+    "nearby_cached": 0.31708104215209765
+  }
+}

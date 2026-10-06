@@ -1,0 +1,13 @@
+{'controller': 'baseline', 'point': 'original', 'repetition': 0, 'elapsed_ns': 3868347888, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'candidate', 'point': 'original', 'repetition': 0, 'elapsed_ns': 2677933574, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'candidate', 'point': 'original', 'repetition': 1, 'elapsed_ns': 2680004096, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'baseline', 'point': 'original', 'repetition': 1, 'elapsed_ns': 3881421875, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'baseline', 'point': 'original', 'repetition': 2, 'elapsed_ns': 3900929201, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'candidate', 'point': 'original', 'repetition': 2, 'elapsed_ns': 2639553390, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'baseline', 'point': 'nearby_cached', 'repetition': 0, 'elapsed_ns': 3881668414, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'candidate', 'point': 'nearby_cached', 'repetition': 0, 'elapsed_ns': 2696926238, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'candidate', 'point': 'nearby_cached', 'repetition': 1, 'elapsed_ns': 2650864948, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'baseline', 'point': 'nearby_cached', 'repetition': 1, 'elapsed_ns': 3908331360, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'baseline', 'point': 'nearby_cached', 'repetition': 2, 'elapsed_ns': 3880798257, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'controller': 'candidate', 'point': 'nearby_cached', 'repetition': 2, 'elapsed_ns': 2641939520, 'form_factors': 8, 'observables': 3, 'exact_values_errors_precision_and_provenance_equal': True}
+{'original': {'baseline': 3881421875, 'candidate': 2677933574}, 'nearby_cached': {'baseline': 3881668414, 'candidate': 2650864948}}

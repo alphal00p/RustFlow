@@ -162,6 +162,24 @@ There is no established full-amplitude end-to-end speed ratio. Source accuracy,
 AMF initialization, uncertainty checks, serialization, master transport and
 amplitude contraction must be included consistently before making that claim.
 
+The [notebook projector-reuse comparison](../reports/performance/2026-10-06-notebook-projector-reuse/report.json)
+retains the exact native form-factor projector between amplitude evaluations.
+Three alternating measurements at each of two physical points reduce median
+warm forced assembly from 3.881 to 2.678 seconds at the original point and from
+3.882 to 2.651 seconds at the cached nearby point (31–32% less time). All eight
+form factors, three observables, uncertainties, precision metadata and provenance
+match exactly. Each call still evaluates the current kinematics, masses and
+transported masters. The immutable native amplitude kernel is already prepared;
+its roughly 31-second first preparation is outside these warm comparisons.
+
+These timings use one CPU and the frozen publication release wheel. The 57
+controller/notebook checks pass with that wheel, and four affected checks pass
+with the updated community host. This Python steering improvement does not
+reduce the recorded 6,467.54-second boundary-generation time. That full cold run
+used four concurrent configurations and a 256-thread sample budget, whereas
+the notebook currently defaults to one worker. No default-resource cold timing
+or new full scientific acceptance is inferred from the warm measurement.
+
 A later [native series-construction comparison](../reports/performance/2026-10-06-native-series-construction/README.md)
 uses three alternating runs of frozen before/after executables on one CPU.
 The checked first destination improves from 6.160 to 5.464 seconds for 48 masters
