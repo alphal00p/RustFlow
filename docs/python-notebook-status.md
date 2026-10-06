@@ -17,6 +17,56 @@ the demonstrated calculation from remaining generality and packaging work.
 | Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; complete headless acceptance passed. HTML export, native SVG display and populated original notebook execution passed using a copied completed native cache. Actual Chromium transport, amplitude and restart clicks passed | Boundary-generation and cancellation controls have native/controller evidence, not browser-click coverage |
 | Packaging | The publication-era Rust core suite passed 534 tests, with 12 opt-in tests ignored; newer [library release coverage](coverage.md) passes 651 tests and one doctest after a test-only schema repair. Strict Python-feature Clippy and formatting passed. Original native wheel component suite: 206 passed, one inherited C++ export failure. Corrected tensor stubs: seven checks passed. Isolated tensor fix passes native and actual Pyodide checks with/without NumPy | Existing full browser wheel still contains the inherited tensor list-output bug; its fix has not been integrated into the frozen host. The whole browser suite has not been rerun with that fix |
 
+## Live demonstration with supplied starting values
+
+The newer live-notebook work packages the independently refined native starting
+values instead of regenerating them interactively. The
+[community data commit](https://github.com/symbolica-dev/symbolica-community/commit/0744f89496cfa3d4e46e1149a45ee0b6bf8112cd)
+contains all sixteen configurations in a **1,054,943-byte** gzip bundle. Every
+number retains its exact dyadic value, working precision, original comparison
+error and 40-digit input cap. A mathematical fingerprint checks the ordered
+bases, equations, normalization and root conventions before admission through
+the ordinary supplied-boundary API. Source-sensitive binary caches retain their
+separate compatibility requirements. No destination integrals or amplitudes are
+included in the numerical bundle.
+
+The [native import adapter](../reports/validation/2026-10-06-portable-higgs-boundaries/report.json)
+passed its focused Python, cache and stub gates. The
+[portable-number experiment](../reports/validation/2026-10-06-portable-gg-hg-seeds/report.json)
+verified all values and errors in actual single-core Pyodide in 0.78 seconds,
+excluding startup/downloads. That experiment checks numeric portability, not
+browser transport, amplitude assembly or native-cache admission. The new host
+wheel and complete WASM solver path are still under validation.
+
+The [initial physical transport comparison](../reports/performance/2026-10-06-physical-transport-compact-profile/README.md)
+uses the same frozen native executable, exact starting values and growing cache
+across all sixteen physical configurations:
+
+| Initial guard/order | All sixteen transports | Final working bits/order |
+|---|---:|---:|
+| 60 / 96 | 270.213 s | 349 / 128 |
+| 40 / 64 | 163.129 s | 282 / 96 |
+| 30 / 32 | 91.512 s | 249 / 64 |
+
+Requested accuracy remains 20 digits, with the adaptive checks unchanged. Two
+exact-rational checkers verify all 4,360 final coefficients, inserted cache
+points, eight form factors and three observables. The reported observable
+accuracy estimates remain 35/36/47 relative digits. The separate EW reference
+still supports 19 comparison digits. Each profile has one native run on the
+same shared host; setup, Python/UI overhead and checkpoint I/O are excluded.
+First-use amplitude kernel construction remains about 34 seconds, followed by
+about 2.5 seconds for projection and numerical observable evaluation. These are
+native component measurements, not end-to-end notebook or WASM timings.
+
+The notebook working branch uses guard 30/order 32 only for physical transport;
+automatic AMF boundary settings are unchanged. It adds a supplied-values control,
+cooperative single-thread execution between checkpointed configurations, and a
+browser export helper that includes the required external inputs. Integration
+checks and the transport-enabled browser wheel must pass before treating that
+browser demonstration as complete.
+
+## Frozen publication run
+
 The final publication run completed
 [all 16 physical starting configurations](../reports/validation/2026-10-05-public-wheel/physical-boundary-validation.json)
 at 30 verified digits, with 1,248 completed finite-epsilon samples. Fresh boundary
