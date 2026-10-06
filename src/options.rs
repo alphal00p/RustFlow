@@ -20,7 +20,11 @@ pub enum Prescription {
 /// This selects verification policy, not a different mathematical identity.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum BoundaryErrorStrategy {
+    /// Keep successful scalar admission; retry its accuracy failures with the
+    /// bounded signed proof without repeating central transport/refinement.
     #[default]
+    Automatic,
+    /// Use only the original scalar uncertainty estimate.
     ScalarNorm,
     /// Bounded signed fundamental matrices for ordinary rational systems;
     /// unsupported or inconclusive proofs retain the scalar-norm fallback.
@@ -29,6 +33,7 @@ pub enum BoundaryErrorStrategy {
 impl BoundaryErrorStrategy {
     pub fn as_str(self) -> &'static str {
         match self {
+            Self::Automatic => "automatic",
             Self::ScalarNorm => "scalar_norm",
             Self::FundamentalMatrix => "fundamental_matrix",
         }
@@ -38,10 +43,12 @@ impl std::str::FromStr for BoundaryErrorStrategy {
     type Err = Error;
     fn from_str(value: &str) -> Result<Self> {
         match value {
+            "automatic" => Ok(Self::Automatic),
             "scalar_norm" => Ok(Self::ScalarNorm),
             "fundamental_matrix" => Ok(Self::FundamentalMatrix),
             _ => Err(Error::InvalidInput(
-                "boundary_error_strategy must be scalar_norm or fundamental_matrix".into(),
+                "boundary_error_strategy must be automatic, scalar_norm or fundamental_matrix"
+                    .into(),
             )),
         }
     }
@@ -227,7 +234,7 @@ impl Default for FlowOptions {
             series_order: 80,
             pade: None,
             residual_arithmetic: ResidualArithmetic::Ball,
-            boundary_error_strategy: BoundaryErrorStrategy::ScalarNorm,
+            boundary_error_strategy: BoundaryErrorStrategy::Automatic,
             local_coordinate: crate::local_coordinates::LocalCoordinate::Identity,
             max_steps: 1000,
             step_size_strategy: StepSizeStrategy::Halving,

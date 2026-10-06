@@ -54,7 +54,7 @@ impl Default for Settings {
             series_order: f.series_order,
             pade_degree: None,
             residual_arithmetic: "ball".into(),
-            boundary_error_strategy: "scalar_norm".into(),
+            boundary_error_strategy: "automatic".into(),
             max_steps: f.max_steps,
             step_size_strategy: "halving".into(),
             local_coordinate: "identity".into(),
@@ -1011,6 +1011,7 @@ fn execute_transport(
             "last_rational_fallback":result.transport.as_ref().and_then(|t| t.diagnostics.last_pade_fallback.clone()),
             "fundamental_boundary_charts":result.transport.as_ref().map_or(0,|t| t.diagnostics.fundamental_boundary_charts),
             "fundamental_boundary_fallback":result.transport.as_ref().and_then(|t| t.diagnostics.fundamental_boundary_fallback.clone()),
+            "fundamental_boundary_retry":result.transport.as_ref().and_then(|t| t.diagnostics.fundamental_boundary_retry.clone()),
             "superseded_successes":result.transport.as_ref().map_or(0,|t| t.diagnostics.superseded_successes),
             "inserted_points":result.inserted_points,
             "coefficients":result.boundary.coefficients.iter().map(|row| row.iter().map(complex_json).collect::<Vec<_>>()).collect::<Vec<_>>(),
@@ -1110,13 +1111,13 @@ fn main() {
 mod step_size_settings_tests {
     use super::*;
     #[test]
-    fn fundamental_boundary_errors_are_opt_in_and_validated() {
+    fn automatic_boundary_errors_are_default_and_validated() {
         assert_eq!(
             Settings::default()
                 .options(Path::new("."))
                 .unwrap()
                 .boundary_error_strategy,
-            BoundaryErrorStrategy::ScalarNorm
+            BoundaryErrorStrategy::Automatic
         );
         let settings: Settings =
             serde_json::from_value(json!({"boundary_error_strategy":"fundamental_matrix"}))

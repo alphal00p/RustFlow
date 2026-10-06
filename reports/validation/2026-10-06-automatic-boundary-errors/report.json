@@ -1,0 +1,283 @@
+{
+  "base_commit": "c406cc6553d404ccc4fa97a5784ef1d72ebf13f7",
+  "parent_dependency_update": "fa5fe1b",
+  "prior_signed_proof_milestone": "4d412d69e7ea8412e953fa38fa66e7209e436e58",
+  "scope": "Automatic retry of pure supplied-boundary uncertainty admission; original scalar success path, central solve/refinement once, transactional error/checkpoint candidates and unchanged signed arithmetic owner.",
+  "source_digest": "9f2c304e02ee8da169af8a597b8d64209d81509fb9506ecad7835fccc3a5b92f",
+  "frozen_manifest_sha256": "dd22fc0c340fb79ed2755b9fa615e857b5812f6bd1d7fb0f1d7d2e0b036b7e16",
+  "frozen_files": 314,
+  "official_dependency_pins": {
+    "symbolica_community": "6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+    "hepkit": "b96600b0085d9ddfa9e6acbc11fa72ec6163253c"
+  },
+  "provenance": [
+    {
+      "build": "symbolica-amflow-21205e99f6af8c86",
+      "dependency_digest": "f76203907801bdb985fb3a77b521a7b702756c5cdc59a5eef27cd69cb8e1b720",
+      "metadata_sha256": "48144820ab32cfbc02625a2c1f1084a58c54e4225969cd29eb9f6a863e13477f"
+    },
+    {
+      "build": "symbolica-amflow-5596bcfe9419bd8d",
+      "dependency_digest": "9ee6eced2bc39b05bb333b1b021ab556d2a1bb790a255205d3f141fc64cc96ff",
+      "metadata_sha256": "dde1698e6f6a4566b66b9f63af877c3f52a8e7cd2e16d6c5913d56ba630f6cbc"
+    },
+    {
+      "build": "symbolica-amflow-680c35a75065b1d9",
+      "dependency_digest": "9ee6eced2bc39b05bb333b1b021ab556d2a1bb790a255205d3f141fc64cc96ff",
+      "metadata_sha256": "dde1698e6f6a4566b66b9f63af877c3f52a8e7cd2e16d6c5913d56ba630f6cbc"
+    },
+    {
+      "build": "symbolica-amflow-7d91f93e51f25f3e",
+      "dependency_digest": "f76203907801bdb985fb3a77b521a7b702756c5cdc59a5eef27cd69cb8e1b720",
+      "metadata_sha256": "48144820ab32cfbc02625a2c1f1084a58c54e4225969cd29eb9f6a863e13477f"
+    }
+  ],
+  "validation": {
+    "private": {
+      "passed": 7,
+      "targets": [
+        {
+          "target": "unittests src/lib.rs",
+          "passed": 7,
+          "ignored": 0
+        }
+      ],
+      "nested_child_checks": 0
+    },
+    "integrations": {
+      "passed": 190,
+      "targets": [
+        {
+          "target": "tests/accuracy_fallback.rs",
+          "passed": 3,
+          "ignored": 0
+        },
+        {
+          "target": "tests/algebraic_cache.rs",
+          "passed": 10,
+          "ignored": 0
+        },
+        {
+          "target": "tests/algebraic_preparation.rs",
+          "passed": 4,
+          "ignored": 0
+        },
+        {
+          "target": "tests/cache_lower_bounds.rs",
+          "passed": 7,
+          "ignored": 0
+        },
+        {
+          "target": "tests/canonical_cache.rs",
+          "passed": 4,
+          "ignored": 0
+        },
+        {
+          "target": "tests/complex_cache.rs",
+          "passed": 8,
+          "ignored": 0
+        },
+        {
+          "target": "tests/conditioning.rs",
+          "passed": 10,
+          "ignored": 0
+        },
+        {
+          "target": "tests/constrained_singular_endpoints.rs",
+          "passed": 24,
+          "ignored": 0
+        },
+        {
+          "target": "tests/diffexp.rs",
+          "passed": 5,
+          "ignored": 0
+        },
+        {
+          "target": "tests/epsilon_algebraic.rs",
+          "passed": 7,
+          "ignored": 0
+        },
+        {
+          "target": "tests/epsilon_cache.rs",
+          "passed": 3,
+          "ignored": 0
+        },
+        {
+          "target": "tests/fivepoint_prescribed_cache.rs",
+          "passed": 0,
+          "ignored": 1
+        },
+        {
+          "target": "tests/fundamental_boundary_errors.rs",
+          "passed": 12,
+          "ignored": 0
+        },
+        {
+          "target": "tests/mobius.rs",
+          "passed": 8,
+          "ignored": 0
+        },
+        {
+          "target": "tests/mobius_cache.rs",
+          "passed": 1,
+          "ignored": 0
+        },
+        {
+          "target": "tests/pade.rs",
+          "passed": 6,
+          "ignored": 0
+        },
+        {
+          "target": "tests/physical_conditions.rs",
+          "passed": 9,
+          "ignored": 0
+        },
+        {
+          "target": "tests/physical_preparation_options.rs",
+          "passed": 7,
+          "ignored": 0
+        },
+        {
+          "target": "tests/physical_transport.rs",
+          "passed": 4,
+          "ignored": 0
+        },
+        {
+          "target": "tests/precision_cache_fallback.rs",
+          "passed": 4,
+          "ignored": 0
+        },
+        {
+          "target": "tests/prescribed_cache.rs",
+          "passed": 7,
+          "ignored": 0
+        },
+        {
+          "target": "tests/residual_arithmetic.rs",
+          "passed": 2,
+          "ignored": 0
+        },
+        {
+          "target": "tests/source_fingerprint.rs",
+          "passed": 5,
+          "ignored": 0
+        },
+        {
+          "target": "tests/supplied_flow.rs",
+          "passed": 7,
+          "ignored": 0
+        },
+        {
+          "target": "tests/supplied_singular_endpoints.rs",
+          "passed": 19,
+          "ignored": 0
+        },
+        {
+          "target": "tests/transport_cache.rs",
+          "passed": 12,
+          "ignored": 0
+        },
+        {
+          "target": "tests/weighted_uncertainty.rs",
+          "passed": 2,
+          "ignored": 0
+        }
+      ],
+      "nested_child_checks": 0
+    },
+    "cli": {
+      "passed": 4,
+      "targets": [
+        {
+          "target": "unittests src/bin/rustflow.rs",
+          "passed": 4,
+          "ignored": 0
+        }
+      ],
+      "nested_child_checks": 0
+    },
+    "python": {
+      "passed": 8,
+      "targets": [
+        {
+          "target": "tests/python_algebraic_transport.rs",
+          "passed": 2,
+          "ignored": 0
+        },
+        {
+          "target": "tests/python_endpoint_constraints.rs",
+          "passed": 2,
+          "ignored": 0
+        },
+        {
+          "target": "tests/python_fundamental_errors.rs",
+          "passed": 2,
+          "ignored": 0
+        },
+        {
+          "target": "tests/python_prescribed_transport.rs",
+          "passed": 2,
+          "ignored": 0
+        }
+      ],
+      "nested_child_checks": 0
+    },
+    "clippy": "release all-targets -D warnings, native and python/python_stubgen",
+    "fmt": "passed"
+  },
+  "top_level_tests": 209,
+  "exact_prechange_scalar_comparison": {
+    "features": "[\"default\", \"python\", \"python_stubgen\"]",
+    "compiler": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+    "cases": 4,
+    "exact_output_match": true,
+    "harness_sha256": "8861fe618f5d683376b8b035162976a549d78a51e5e82b5a111ed10365152682",
+    "runs": {
+      "baseline": {
+        "library": "/common/dev/amflow/target/symbolica-community-release-fa5fe1b/libsymbolica_amflow-c31211c1e00f5a5b.rlib",
+        "library_sha256": "ec472f770d500589cc1a76b8875f742667d986d90f42be75e7c67c96a46638d0",
+        "binary_sha256": "53f95dcc3fb21afff54bc9bf4ec6661303445b72b243e6a4b1fc14d20e88ee0a",
+        "output_sha256": "99eaf42ea6ddc4201c72d9f8c472206253742818ad88c8653beb76864190f3f3",
+        "lines": 103
+      },
+      "automatic": {
+        "library": "/common/dev/amflow-automatic-boundary-errors/target/release/deps/libsymbolica_amflow-c31211c1e00f5a5b.rlib",
+        "library_sha256": "9e6f94cb7336ad501b68f8e1edc0e3b7c856103828ba4fef9ca56f0d7188072e",
+        "binary_sha256": "cd4587433fa5c8586a64f747383a6bc641df3d01f88ab15cfa8e5fc3cb2ca24c",
+        "output_sha256": "99eaf42ea6ddc4201c72d9f8c472206253742818ad88c8653beb76864190f3f3",
+        "lines": 103
+      }
+    }
+  },
+  "controls": [
+    "Actual nonfinite scalar amplification recovers with finite signed proof",
+    "Analytic multi-chart nilpotent transport matches forced proof errors/checkpoints and central Step events",
+    "True instability remains rejected with unchanged cache",
+    "Optional dimension budget refusal retains scalar accuracy rejection",
+    "Cancellation during retry is terminal and leaves cache unchanged",
+    "Central domain and step failures never trigger proof retry",
+    "Typed native objects, generated stubs and existing endpoint/prescribed Python interfaces"
+  ],
+  "retained_development_failures": [
+    "Test-only Debug formatting attempted on PhysicalResult; fixture corrected without implementation edits.",
+    "Standalone rustc harness initially omitted CARGO_CRATE_NAME required by symbol!; environment corrected."
+  ],
+  "remaining_scope": [
+    "Sparse epsilon-hierarchy and registered-root signed proof support",
+    "Authenticated finite-epsilon boundary/sample records and error-aware Laurent fitting",
+    "Broad reference performance and full-physics parity"
+  ],
+  "prior_archive_unchanged_sha256": "b871211b0dd9ccaf4124edeaf080bd1d147e9b6b4460d1663d0c7a204d226a87",
+  "archive": {
+    "path": "evidence.tar.gz",
+    "sha256": "c65f39c1ad44195079c85d4999b6f67ae72123643d1bafebe669fe9d0788ddd3",
+    "bytes": 1654810,
+    "entries": 354
+  },
+  "independent_review": {
+    "scope": "Read-only orchestration, evidence floors/caps, typed failures, transactional cache handling, one central solve, native owner reuse and frozen comparison/source evidence.",
+    "outcome": "No actionable findings.",
+    "verified": "All 314 archived source files match the worktree; final baseline and automatic comparison outputs are byte-identical and archive hash matches this report.",
+    "runtime_scope": "Reviewer did not build, run Cargo tests or edit sources."
+  }
+}

@@ -41,6 +41,8 @@ pub struct FlowDiagnostics {
     pub fundamental_boundary_charts: usize,
     /// Why an optional fundamental proof retained scalar source-error handling.
     pub fundamental_boundary_fallback: Option<String>,
+    /// Scalar accuracy rejection which triggered an automatic stronger proof.
+    pub fundamental_boundary_retry: Option<String>,
     pub pade_trials: usize,
     pub pade_steps: usize,
     pub pade_fallbacks: usize,

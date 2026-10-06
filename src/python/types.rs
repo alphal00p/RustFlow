@@ -23,7 +23,7 @@ pub struct PyEvaluationOptions {
 #[pymethods]
 impl PyEvaluationOptions {
     #[new]
-    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode=None, deformed_propagator_slots=None, refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None, residual_arithmetic="ball", boundary_error_strategy="scalar_norm"))]
+    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode=None, deformed_propagator_slots=None, refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None, residual_arithmetic="ball", boundary_error_strategy="automatic"))]
     #[allow(clippy::too_many_arguments)]
     fn new(
         digits: u32,
@@ -835,6 +835,10 @@ impl PyTransportResult {
     #[getter]
     fn fundamental_boundary_fallback(&self) -> Option<String> {
         self.diagnostics.fundamental_boundary_fallback.clone()
+    }
+    #[getter]
+    fn fundamental_boundary_retry(&self) -> Option<String> {
+        self.diagnostics.fundamental_boundary_retry.clone()
     }
     #[getter]
     fn conditioning_digits(&self) -> Option<u32> {

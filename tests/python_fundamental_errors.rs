@@ -36,9 +36,10 @@ fn python_boundary_error_policy_runs_native_transport_and_persistent_reuse() {
         py.run(
             c"
 import tempfile
-assert integration.EvaluationOptions().boundary_error_strategy == 'scalar_norm'
-opts = integration.EvaluationOptions(boundary_error_strategy='fundamental_matrix')
-assert opts.boundary_error_strategy == 'fundamental_matrix'
+assert integration.EvaluationOptions().boundary_error_strategy == 'automatic'
+assert integration.EvaluationOptions(boundary_error_strategy='fundamental_matrix').boundary_error_strategy == 'fundamental_matrix'
+assert integration.EvaluationOptions(boundary_error_strategy='scalar_norm').boundary_error_strategy == 'scalar_norm'
+opts = integration.EvaluationOptions()
 try:
     integration.EvaluationOptions(boundary_error_strategy='unchecked')
     raise AssertionError('invalid strategy accepted')
@@ -52,6 +53,7 @@ flow.add_boundary(bank, {x:zero}, [[n1,n0]], 0, verified_digits=30,
 answer = flow.evaluate(bank, {x:one}, 0, 0, admit_straight_path=True)
 assert answer.fundamental_boundary_charts > 0
 assert answer.fundamental_boundary_fallback is None
+assert answer.fundamental_boundary_retry is not None
 assert 20 <= answer.verified_digits <= answer.input_verified_digits == 30
 assert not isinstance(answer.coefficients[0][0], (float,complex))
 with tempfile.TemporaryDirectory() as directory:
@@ -84,12 +86,15 @@ fn boundary_error_policy_and_evidence_diagnostics_have_generated_stubs() {
         .unwrap()
         .to_string();
     assert!(
-        text.contains("boundary_error_strategy: builtins.str = 'scalar_norm'"),
+        text.contains("boundary_error_strategy: builtins.str = 'automatic'"),
         "{text}"
     );
     assert!(text.contains("def boundary_error_strategy(self) -> builtins.str:"));
     assert!(text.contains("def fundamental_boundary_charts(self) -> builtins.int:"));
     assert!(
         text.contains("def fundamental_boundary_fallback(self) -> typing.Optional[builtins.str]:")
+    );
+    assert!(
+        text.contains("def fundamental_boundary_retry(self) -> typing.Optional[builtins.str]:")
     );
 }
