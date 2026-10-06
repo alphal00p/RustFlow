@@ -1,6 +1,6 @@
 # Python API and Higgs-plus-jet notebook status
 
-Snapshot: 2026-10-06, after successful final publication-wheel acceptance. The
+Snapshot: 2026-10-06, after native publication and supplied-boundary WASM acceptance. The
 Python API and native Higgs-plus-jet numerical milestone have passed; the broader
 AMFlow/DiffExp implementation is not feature-complete. This page distinguishes
 the demonstrated calculation from remaining generality and packaging work.
@@ -14,7 +14,7 @@ the demonstrated calculation from remaining generality and packaging work.
 | Exact Higgs-plus-jet inputs | Native physical families, certified supplied 48/61 canonical basis maps and parent connections, exact normalization and kinematics-dependent form-factor projections | Top-level RustRed derivation of those parent connections is not demonstrated; general multiloop reduction coverage remains open |
 | Fresh physical boundaries and amplitude | All 16 native 30-digit configurations from empty numerical caches, all 4,360 transport coefficients, eight W/Z form factors and three coherent observables passed. Independent 40-digit regeneration, interruption/resume, uncertainty consistency and nearby-point checks also passed | External EW-square comparison remains limited to 19 relative digits; no matched full-amplitude reference timing |
 | Independent Euclidean anchors | Publication wheel passed all 545 comparisons at 20 digits with fresh native boundaries | This prerequisite alone does not certify the physical calculation |
-| Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; complete headless acceptance passed. HTML export, native SVG display and populated original notebook execution passed using a copied completed native cache. Actual Chromium transport, amplitude and restart clicks passed | Boundary-generation and cancellation controls have native/controller evidence, not browser-click coverage |
+| Marimo notebook | `symbolica-community/examples/hep/gg_hg.py` shows the native transport, projection, amplitude and binary-cache API calls directly. Supplied-boundary native cold/warm and actual single-core Chromium runs pass; code and populated results are visible, with no browser console errors | Fresh boundary generation and cancellation retain separate native/controller acceptance; browser files live only for the current page |
 | Packaging | The publication-era Rust core suite passed 534 tests, with 12 opt-in tests ignored; newer [library release coverage](coverage.md) passes 651 tests and one doctest after a test-only schema repair. Strict Python-feature Clippy and formatting passed. Original native wheel component suite: 206 passed, one inherited C++ export failure. Corrected tensor stubs: seven checks passed. Isolated tensor fix passes native and actual Pyodide checks with/without NumPy | Existing full browser wheel still contains the inherited tensor list-output bug; its fix has not been integrated into the frozen host. The whole browser suite has not been rerun with that fix |
 
 ## Live demonstration with supplied starting values
@@ -42,8 +42,8 @@ binary restart and warm reuse from the shipped starting values. Import took
 0.66 seconds, initial transport including checkpoint I/O took 101.77 seconds,
 and warm transport/amplitude took 0.52/2.68 seconds on one core. That development
 extension predates the tensor optimization below; its initial amplitude stage
-took 38.38 seconds. A new distribution wheel and complete WASM solver path remain
-under validation.
+took 38.38 seconds. The subsequent WASM acceptance below uses a different,
+explicitly identified wheel with the staged contraction optimization.
 
 The [initial physical transport comparison](../reports/performance/2026-10-06-physical-transport-compact-profile/README.md)
 uses the same frozen native executable, exact starting values and growing cache
@@ -87,12 +87,34 @@ initial transport including checkpoint I/O, 0.626-second seed import and
 0.498-second warm transport. That extension predates the staged amplitude
 optimization; these are not browser measurements.
 
-The notebook working branch uses guard 20/order 16 only for physical transport;
-automatic AMF boundary settings are unchanged. It adds a supplied-values control,
-cooperative single-thread execution between checkpointed configurations, and a
-browser export helper that includes the required external inputs. Integration
-checks and the transport-enabled browser wheel must pass before treating that
-browser demonstration as complete.
+The [complete actual Pyodide calculation](https://github.com/symbolica-dev/symbolica-community/blob/757b6b70bda37789f69d2076e07f5dd44fbdb023/reports/2026-10-06-pyodide-gg-hg/README.md)
+now passes on one CPU without license credentials: all 4,360 master coefficients,
+eight form factors and three observables, exact cross-process restart and warm
+reuse. An independent host checker uses exact integers and rational numbers.
+The sixteen unique initial calls take 275.747 s, including checkpoint I/O;
+first amplitude assembly takes 24.113 s. Warm transport/amplitude take
+1.477/7.776 s. These Node Pyodide measurements exclude rendering/downloads and
+keep substantial benchmark verification/serialization costs separate.
+
+The [code-first notebook validation](https://github.com/symbolica-dev/symbolica-community/blob/757b6b70bda37789f69d2076e07f5dd44fbdb023/reports/2026-10-06-visible-higgs-api/README.md)
+also passes. The notebook shows `system.evaluate(cache, destination, root_sheets,
+options=...)`, native form-factor projection and amplitude evaluation directly,
+without a stage-button dashboard. Editing kinematics preserves model/kernel
+preparation and the growing cache. Tables wait for numerical work to finish,
+resolving earlier Marimo RPC timeouts. Actual Chromium completes the page and
+binary repeat in 339.705 s on one CPU, with 280.67 s displayed transport time,
+populated result tables and no console, page or network errors. The browser
+wheel is pinned to RustFlow `d81dae9`; it evaluates supplied boundaries live and
+does not generate them in the browser.
+
+Native execution of the visible cells separately passes all scientific checks,
+with 76.070 s cold transport and 1.354 s warm transport, sixteen exact hits and
+zero ODE steps. That run uses the older `7096ba8` development extension; full
+`app.run()` reconstructs its older amplitude kernel, so whole-notebook timings
+are not warm-reactivity measurements or a matched native/WASM comparison.
+The notebook keeps guard 20/order 16 for physical transport. Full native AMF
+boundary generation, forced recomputation and cancellation remain covered by
+the separate long acceptance runner.
 
 ## Frozen publication run
 
