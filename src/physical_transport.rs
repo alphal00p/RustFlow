@@ -691,6 +691,11 @@ enum PreparedConnection {
     Rational(EpsilonSystem),
     Algebraic(Box<PreparedAlgebraicSystem>),
 }
+struct RefinedTransport {
+    solution: EpsilonSolution,
+    checkpoint_germs: BTreeMap<usize, RootGerm>,
+    compiled: Option<CompiledConnection>,
+}
 impl PreparedConnection {
     fn compile(&self, p: Precision, context: &RunContext) -> Result<CompiledConnection> {
         context.cancellation.check()?;
@@ -713,10 +718,10 @@ impl PreparedConnection {
         waypoints: &[Atom],
         options: &FlowOptions,
         context: &RunContext,
-    ) -> Result<(EpsilonSolution, BTreeMap<usize, RootGerm>)> {
+    ) -> Result<RefinedTransport> {
         match self {
-            Self::Rational(system) => Ok((
-                transport_epsilon(
+            Self::Rational(system) => Ok(RefinedTransport {
+                solution: transport_epsilon(
                     system,
                     |p| source.as_epsilon_boundary(&Atom::new(), range, p),
                     waypoints,
@@ -724,8 +729,9 @@ impl PreparedConnection {
                     context,
                     true,
                 )?,
-                BTreeMap::new(),
-            )),
+                checkpoint_germs: BTreeMap::new(),
+                compiled: None,
+            }),
             Self::Algebraic(system) => transport_algebraic_checked(
                 system, source, target, range, waypoints, options, context,
             ),
@@ -981,7 +987,11 @@ fn evaluate_from_source(
     };
     let path = &route.physical.path;
     let system = &route.system;
-    let (mut solution, checkpoint_germs) = system.transport(
+    let RefinedTransport {
+        mut solution,
+        checkpoint_germs,
+        compiled,
+    } = system.transport(
         &source,
         &target,
         range,
@@ -992,7 +1002,11 @@ fn evaluate_from_source(
     let p = Precision {
         bits: solution.diagnostics.working_bits,
     };
-    let prepared = system.compile(p, context)?;
+    let prepared = match compiled {
+        Some(compiled) => compiled,
+        None => system.compile(p, context)?,
+    };
+    context.cancellation.check()?;
     // Retry only supplied-error admission; both proofs borrow this one centrally
     // refined trajectory, and commit their error/checkpoint candidate atomically.
     uncertainty::admit(&prepared, &source, &mut solution, options, context)?;
@@ -1328,7 +1342,7 @@ fn transport_algebraic_checked(
     waypoints: &[Atom],
     options: &FlowOptions,
     context: &RunContext,
-) -> Result<(EpsilonSolution, BTreeMap<usize, RootGerm>)> {
+) -> Result<RefinedTransport> {
     let seeds = source
         .point
         .root_germ()
@@ -1410,5 +1424,12 @@ fn transport_algebraic_checked(
             );
         }
     }
-    Ok((solution, germs))
+    // Refinement returns the numerical object from its successful final
+    // profile. It owns the same immutable exact source and working precision
+    // as this solution, so uncertainty admission can use it directly.
+    Ok(RefinedTransport {
+        solution,
+        checkpoint_germs: germs,
+        compiled: Some(CompiledConnection::Algebraic(trace.compiled)),
+    })
 }
