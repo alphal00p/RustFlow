@@ -1,0 +1,85 @@
+{
+  "status": "development gate passed; separate owner adversarial regression still fails pending owner fix",
+  "session": 14682,
+  "exit_code": 0,
+  "terminal_chunk": "b15c54",
+  "targets": [
+    {
+      "target": "tests/complex_kinematics.rs",
+      "passed": 1,
+      "ignored": 0
+    },
+    {
+      "target": "tests/end_to_end.rs",
+      "passed": 9,
+      "ignored": 0
+    },
+    {
+      "target": "tests/ft.rs",
+      "passed": 6,
+      "ignored": 0
+    },
+    {
+      "target": "tests/integrand.rs",
+      "passed": 4,
+      "ignored": 0
+    },
+    {
+      "target": "tests/linear.rs",
+      "passed": 6,
+      "ignored": 0
+    },
+    {
+      "target": "tests/linear_two_directions.rs",
+      "passed": 5,
+      "ignored": 0
+    },
+    {
+      "target": "tests/mixed_cut_flow.rs",
+      "passed": 6,
+      "ignored": 0
+    },
+    {
+      "target": "tests/native_cut_interfaces.rs",
+      "passed": 9,
+      "ignored": 0
+    },
+    {
+      "target": "tests/partial_cut_boundaries.rs",
+      "passed": 2,
+      "ignored": 0
+    },
+    {
+      "target": "tests/recursive.rs",
+      "passed": 17,
+      "ignored": 0
+    },
+    {
+      "target": "tests/regions.rs",
+      "passed": 1,
+      "ignored": 0
+    },
+    {
+      "target": "tests/single_mass.rs",
+      "passed": 4,
+      "ignored": 1
+    },
+    {
+      "target": "tests/supplied_flow.rs",
+      "passed": 7,
+      "ignored": 0
+    },
+    {
+      "target": "tests/tensor_vacuum.rs",
+      "passed": 4,
+      "ignored": 0
+    }
+  ],
+  "passed": 81,
+  "ignored": 1,
+  "adapter_source_after": {
+    "src/integrand.rs": "b2f89ef6ec11cbe5a2f3310850a41159f601f163e6b4d47879856fbc354df98f",
+    "src/integrand/native.rs": "beda9c29fb510af489bf40d828131308156b7be26545cc18254d06da7815a2e9",
+    "tests/native_boundary_integrand.rs": "8dd76f94bf3bbeef3af2f7ae77d82bde66edcfa70a779ea9a204b94bdedf3384"
+  }
+}

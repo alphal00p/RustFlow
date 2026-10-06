@@ -1,0 +1,40 @@
+{
+  "build": {
+    "dependency_source_digest": "239a0e3581f0e4441c108e9096cc72b7f060d614375ee7123edab1b4a30dc3a1",
+    "profile": "release",
+    "rustflow_source_digest": "517ec71ffac512f9559bef282b56ad6fdd48d48cb0ae405503dceda581f5f4cc"
+  },
+  "cache_directory": "/common/dev/amflow-native-boundary-partial-fractions/target/native-boundary-validation/scientific-planar/state",
+  "canonical_identity": "26d95d832f065b4389f4859e99ae5774a5bc78bd7e585ebaaa5cab80cc220b59",
+  "coordinates": {
+    "rustflow_gg_hg_boundaries::{}::b": "-1/50",
+    "rustflow_gg_hg_boundaries::{}::s": "-1/10",
+    "rustflow_gg_hg_boundaries::{}::t": "-1/25"
+  },
+  "family": "Planar_EW1",
+  "ibp_checkpoints": "/common/dev/amflow-native-boundary-partial-fractions/target/native-boundary-validation/scientific-planar/state/ibp",
+  "label": "Planar_EW1-euclidean",
+  "mathematical_source": "https://arxiv.org/abs/2112.07578v1",
+  "namespace": "rustflow_gg_hg_boundaries",
+  "options": {
+    "digits": 20,
+    "force_numerical_recomputation": false,
+    "guard_digits": 40,
+    "last_epsilon_power": 4,
+    "max_precision_attempts": 3,
+    "max_steps": 1000,
+    "reducer_case_batch": 16,
+    "series_order": 80,
+    "workers": 16
+  },
+  "physical_map_source_sha256": "a6bd80f1edeb056f89ee1613561be3066bb3b3ea1fe7f4ab65b928891fa74380",
+  "reference_loaded": false,
+  "root_germs": {
+    "rustflow_gg_hg_boundaries::{}::root1": "Principal",
+    "rustflow_gg_hg_boundaries::{}::root2": "Principal"
+  },
+  "sample_directory": "/common/dev/amflow-native-boundary-partial-fractions/target/native-boundary-validation/scientific-planar/state/samples",
+  "schema": "rustflow-native-gg-hg-boundary-run-v1",
+  "status": "prepared",
+  "verified_bank_saved": false
+}
