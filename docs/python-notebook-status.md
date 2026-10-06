@@ -92,7 +92,7 @@ preparation in a fresh process on a busy host; it measures a persistence
 bottleneck but establishes no optimization speedup. A matched full-application
 reference timing is not yet available.
 
-A separate [cache-save optimization PR](https://github.com/alphal00p/RustFlow/pull/1)
+The integrated [cache-save optimization](https://github.com/alphal00p/RustFlow/pull/1)
 reuses native Symbolica exports within each snapshot. Four new release tests,
 forty existing cache integration tests, formatting and strict release Clippy pass.
 A paired profile with the real canonical topology and synthetic numerical values
@@ -105,12 +105,20 @@ Its validated owner fix is proposed in
 part of the tested runtime. Native import/export regressions, standalone
 reproducers, generator reentrancy checks and strict Clippy passed in isolation.
 
-The separate [native-arithmetic follow-up](https://github.com/alphal00p/RustFlow/pull/2)
+The integrated [native-arithmetic follow-up](https://github.com/alphal00p/RustFlow/pull/2)
 uses official Symbolica's explicit rounded scalar operations in the complex
 arithmetic layer. It preserves the working precision and operation order;
 24,192 bit comparisons, 76 selected regressions, formatting and strict Clippy
 passed. Its report makes no new scientific acceptance or performance claim,
 and it has not changed the publication runtime.
+
+Both changes are now published on RustFlow main, with their own PRs closed after
+integration. Their combined [release gate](../reports/validation/2026-10-06-cache-arithmetic-release/summary.json)
+passed 547 unit/integration tests and one doctest, formatting and strict
+Python/stub-generation Clippy. The subsequent
+[linear/endpoint gate](../reports/validation/2026-10-06-endpoint-linear-integration/summary.json)
+passed 74 targeted integration tests and the same static checks. These newer
+library validations do not replace the frozen publication-wheel scientific run.
 
 The [interactive notebook check](../reports/validation/2026-10-05-public-wheel/notebook-interactive-validation.json)
 served the unchanged notebook with native Marimo and clicked transport, amplitude,

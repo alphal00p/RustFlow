@@ -21,6 +21,17 @@ passes all three original-solver and independent refinement checks; ordinary
 native transport remains slower than the original. This source revision is
 separate from the completed publication-wheel gg→hg acceptance above.
 
+The [combined linear/endpoint integration](../reports/validation/2026-10-06-endpoint-linear-integration/summary.json)
+passes **74 targeted release tests**, formatting and strict Python/stub-generation
+all-target Clippy. Recursive Euclidean FT now admits tested mixed linear families
+through the public evaluation and projection interfaces. Registered-root systems
+can use the shared rational Frobenius engine for local singular endpoints,
+including infinity, resonant logarithms and common branch winding. These endpoint
+expansions are standalone Rust functionality: they do not infer dimensional
+sectors after epsilon expansion, establish global accuracy, or automatically
+insert singular endpoints into the physical cache. General mixed-cut recursion
+and upstream/performance parity remain open.
+
 The massless phase-space milestone passes **416 release unit/integration tests**,
 one doctest, strict all-target Clippy and formatting. Nine long scientific tests
 remain opt-in. Its [release report](../reports/validation/2026-10-05-massless-phase-space-release.json)
