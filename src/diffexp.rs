@@ -7,8 +7,7 @@
 //! regular in epsilon at zero. A common Laurent prefactor of the solution is
 //! allowed and is carried explicitly.
 use crate::ode::{
-    CompiledSystem, SeriesSystem, TaylorSegment, compile_rows, evaluate_taylor, shift_polynomial,
-    transport_series,
+    CompiledSystem, SeriesSystem, TaylorSegment, compile_rows, shift_polynomial, transport_series,
 };
 use crate::{
     BoundaryData, ComplexFloat as C, DifferentialSystem, Error, FlowDiagnostics, FlowOptions,
@@ -533,6 +532,35 @@ impl SeriesSystem for CompiledEpsilonSystem {
         )?;
         Ok((coefficients, chart, mapped.poles))
     }
+    fn pade_candidate(
+        &self,
+        coordinate: &crate::local_coordinates::TaylorCoordinate,
+        center: &C,
+        coefficients: &[Vec<C>],
+        options: &crate::PadeOptions,
+        context: &RunContext,
+    ) -> Result<Option<crate::ode::pade::RationalCandidate>> {
+        let mapped;
+        let (source, center) = if matches!(
+            coordinate,
+            crate::local_coordinates::TaylorCoordinate::Identity
+        ) {
+            (&self.rows, center.clone())
+        } else {
+            mapped = self.rows.in_coordinate(coordinate)?;
+            (&mapped, self.rows.p.zero())
+        };
+        crate::ode::pade::RationalCandidate::build(
+            self.rows.p,
+            &source.exact_source_rows,
+            &center,
+            coefficients,
+            self.count,
+            options,
+            context,
+        )
+        .map(Some)
+    }
     fn whole_segment_residual(&self, chart: &Self::Chart, step: &C) -> Result<Option<Vec<Float>>> {
         chart.defect_bounds(self.rows.p, step).map(Some)
     }
@@ -665,9 +693,7 @@ impl EpsilonSolution {
             ));
         }
         let local = segment.coordinate.local_point(p, &segment.center, point)?;
-        let (flat, _) = evaluate_taylor(p, &segment.coefficients, &local);
-        let checked = crate::ode::conditioning::ConditioningChart::new(p, &segment.coefficients)?
-            .check(p, &local, &flat, segment.conditioning_digits)?;
+        let (flat, checked) = segment.evaluate_local(&local)?;
         Ok((flat.chunks(n).map(<[C]>::to_vec).collect(), checked))
     }
 }
@@ -748,6 +774,7 @@ pub(crate) fn refine_epsilon_transport_with_metadata<M>(
             .series_order
             .checked_add(32 * attempt)
             .ok_or_else(|| Error::Limit("series order overflow".into()))?;
+        refined.refine_rational_order(attempt);
         refined.validate()?;
         let p = Precision::decimal(refined.digits + refined.guard_digits)?;
         let (mut result, metadata) = match run(p, &refined) {

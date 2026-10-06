@@ -8,6 +8,8 @@ pub(crate) mod conditioning;
 #[path = "ode/residual.rs"]
 pub(crate) mod residual;
 use conditioning::ConditioningChart;
+#[path = "ode/pade.rs"]
+pub mod pade;
 #[path = "ode/source.rs"]
 pub(crate) mod source;
 use residual::RationalResidualChart;
@@ -29,11 +31,16 @@ pub struct BoundaryData {
 
 #[derive(Clone, Debug, Default)]
 pub struct FlowDiagnostics {
+    pub pade_trials: usize,
+    pub pade_steps: usize,
+    pub pade_fallbacks: usize,
+    pub last_pade_fallback: Option<String>,
     /// Committed continuation segments.
     pub steps: usize,
     /// Trials that failed an acceptance check.
     pub rejected_steps: usize,
-    /// Every evaluated acceptance predicate; the authoritative work count.
+    /// Physical step proposals checked; the authoritative proposal budget.
+    /// A Padé failure may additionally check Taylor at the same proposal.
     /// On success this equals steps + rejected_steps + superseded_successes.
     pub predicate_evaluations: usize,
     /// Successful trials replaced by a larger successful trial in the same chart.
@@ -732,16 +739,50 @@ impl CompiledSystem {
     }
 }
 
-/// A retained local Taylor polynomial; its validated interval runs from
-/// `center` to `end`. Coefficients are indexed by Taylor power, then component.
+/// A retained local Taylor or rational segment, validated from `center` to
+/// `end`. Seed coefficients are indexed by Taylor power, then component.
 #[derive(Clone, Debug)]
 pub struct TaylorSegment {
     pub center: C,
     pub end: C,
+    /// Stored Taylor coefficients used to build the chart. If `pade` is
+    /// present, use `evaluate_local` for the accepted/saved function.
     pub coefficients: Vec<Vec<C>>,
+    pub pade: Option<Arc<pade::RationalCandidate>>,
     pub working_bits: u32,
     pub coordinate: TaylorCoordinate,
     pub conditioning_digits: u32,
+}
+
+impl TaylorSegment {
+    pub fn evaluate_local(&self, point: &C) -> Result<(Vec<C>, u32)> {
+        let p = Precision {
+            bits: self.working_bits,
+        };
+        if let Some(candidate) = &self.pade {
+            let values = candidate.evaluate(p, point)?.0;
+            let seed_values = evaluate_taylor(p, &self.coefficients, point).0;
+            let seed = ConditioningChart::new(p, &self.coefficients)?.check(
+                p,
+                point,
+                &seed_values,
+                self.conditioning_digits,
+            )?;
+            let checked = candidate
+                .check_conditioning(p, point, &values, self.conditioning_digits)?
+                .min(seed);
+            Ok((values, checked))
+        } else {
+            let values = evaluate_taylor(p, &self.coefficients, point).0;
+            let checked = ConditioningChart::new(p, &self.coefficients)?.check(
+                p,
+                point,
+                &values,
+                self.conditioning_digits,
+            )?;
+            Ok((values, checked))
+        }
+    }
 }
 
 pub(crate) type MappedTaylorChart<Chart> = (Vec<Vec<C>>, Chart, Vec<C>);
@@ -787,6 +828,17 @@ pub(crate) trait SeriesSystem {
         _tolerance: &Float,
     ) -> Result<Option<Vec<Float>>> {
         self.whole_segment_residual(chart, step)
+    }
+
+    fn pade_candidate(
+        &self,
+        _coordinate: &TaylorCoordinate,
+        _center: &C,
+        _coefficients: &[Vec<C>],
+        _options: &crate::PadeOptions,
+        _context: &RunContext,
+    ) -> Result<Option<pade::RationalCandidate>> {
+        Ok(None)
     }
 
     fn accepted_state(
@@ -850,6 +902,32 @@ impl SeriesSystem for CompiledSystem {
         )?;
         Ok((coefficients, chart, mapped.poles))
     }
+    fn pade_candidate(
+        &self,
+        coordinate: &TaylorCoordinate,
+        center: &C,
+        coefficients: &[Vec<C>],
+        options: &crate::PadeOptions,
+        context: &RunContext,
+    ) -> Result<Option<pade::RationalCandidate>> {
+        let mapped;
+        let (source, center) = if matches!(coordinate, TaylorCoordinate::Identity) {
+            (self, center.clone())
+        } else {
+            mapped = self.in_coordinate(coordinate)?;
+            (&mapped, self.p.zero())
+        };
+        pade::RationalCandidate::build(
+            self.p,
+            &source.exact_source_rows,
+            &center,
+            coefficients,
+            1,
+            options,
+            context,
+        )
+        .map(Some)
+    }
     fn whole_segment_residual(&self, chart: &Self::Chart, step: &C) -> Result<Option<Vec<Float>>> {
         chart.defect_bounds(self.p, step).map(Some)
     }
@@ -890,6 +968,7 @@ fn residual_is_small<S: SeriesSystem>(
     point: &C,
     step: &C,
     coefficients: &[Vec<C>],
+    candidate: Option<&pade::RationalCandidate>,
     values: &[C],
     tolerance: &Float,
     location: &str,
@@ -906,6 +985,9 @@ fn residual_is_small<S: SeriesSystem>(
         }
         Err(error) => return Err(error),
     };
+    let rational_derivatives = candidate
+        .map(|a| a.evaluate(p, &local).map(|a| a.1))
+        .transpose()?;
     for (i, rhs) in rhs.iter().enumerate() {
         let mut derivative = p.zero();
         for k in (1..coefficients.len()).rev() {
@@ -913,6 +995,9 @@ fn residual_is_small<S: SeriesSystem>(
                 &p.mul(&derivative, &local),
                 &p.scale(&coefficients[k][i], k as i64, 1),
             );
+        }
+        if let Some(derivatives) = &rational_derivatives {
+            derivative = derivatives[i].clone();
         }
         let derivative = p.div(&derivative, &jacobian);
         let defect = p.mul(step, &p.sub(&derivative, rhs));
@@ -968,7 +1053,7 @@ pub(crate) fn transport_series_with_state<S: SeriesSystem>(
     )
 }
 
-type CheckedStep<State> = Option<(C, Vec<C>, State, u32)>;
+type CheckedStep<State> = Option<(C, Vec<C>, State, u32, bool)>;
 
 /// Read-only checks within one fixed Taylor chart. Only the returned candidate
 /// chosen by the controller may become committed state or a saved segment.
@@ -983,9 +1068,34 @@ struct StepTrial<'a, S: SeriesSystem> {
     tolerance: &'a Float,
     conditioning: &'a ConditioningChart,
     conditioning_digits: u32,
+    pade: Option<&'a pade::RationalCandidate>,
 }
 impl<S: SeriesSystem> StepTrial<'_, S> {
-    fn evaluate(&self, step: &C, rejection: &mut String) -> Result<CheckedStep<S::State>> {
+    fn evaluate(
+        &self,
+        step: &C,
+        rejection: &mut String,
+        diagnostics: &mut FlowDiagnostics,
+    ) -> Result<CheckedStep<S::State>> {
+        if let Some(candidate) = self.pade {
+            diagnostics.pade_trials += 1;
+            match self.evaluate_candidate(step, rejection, Some(candidate)) {
+                Ok(Some(accepted)) => return Ok(Some(accepted)),
+                Err(Error::Cancelled) => return Err(Error::Cancelled),
+                Err(error) => *rejection = error.to_string(),
+                Ok(None) => {}
+            }
+            diagnostics.pade_fallbacks += 1;
+            diagnostics.last_pade_fallback = Some(rejection.clone());
+        }
+        self.evaluate_candidate(step, rejection, None)
+    }
+    fn evaluate_candidate(
+        &self,
+        step: &C,
+        rejection: &mut String,
+        candidate: Option<&pade::RationalCandidate>,
+    ) -> Result<CheckedStep<S::State>> {
         let p = self.system.precision();
         // A supplied endpoint may retain more bits than this compiled system.
         // Use the declared physical point for values, defects and branch state.
@@ -1002,7 +1112,14 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
         }
         let displacement = p.sub(&next, self.center);
         let local = self.coordinate.local_point(p, self.center, &next)?;
-        let (values, tail) = evaluate_taylor(p, self.coefficients, &local);
+        let (values, tail) = if let Some(candidate) = candidate {
+            (
+                candidate.evaluate(p, &local)?.0,
+                vec![p.real(0); self.system.dimension()],
+            )
+        } else {
+            evaluate_taylor(p, self.coefficients, &local)
+        };
         for (i, (value, tail)) in values.iter().zip(&tail).enumerate() {
             let magnitude = p.norm(value);
             let scale = if magnitude > p.real(1) {
@@ -1028,6 +1145,7 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
             &next,
             &displacement,
             self.coefficients,
+            candidate,
             &values,
             self.tolerance,
             "endpoint",
@@ -1040,7 +1158,11 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
         let midpoint = p.coordinate_midpoint(self.center, &next)?;
         let half = p.sub(&midpoint, self.center);
         let local_middle = self.coordinate.local_point(p, self.center, &midpoint)?;
-        let (middle, _) = evaluate_taylor(p, self.coefficients, &local_middle);
+        let middle = if let Some(candidate) = candidate {
+            candidate.evaluate(p, &local_middle)?.0
+        } else {
+            evaluate_taylor(p, self.coefficients, &local_middle).0
+        };
         if !residual_is_small(
             self.system,
             self.chart,
@@ -1049,6 +1171,7 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
             &midpoint,
             &half,
             self.coefficients,
+            candidate,
             &middle,
             self.tolerance,
             "midpoint",
@@ -1056,12 +1179,19 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
         )? {
             return Ok(None);
         }
-        let majorant = match self.system.whole_segment_residual_with_budget(
-            self.chart,
-            &local,
-            &values,
-            self.tolerance,
-        ) {
+        let enclosure = if let Some(candidate) = candidate {
+            candidate
+                .defect_bounds(p, &local, &values, self.tolerance)
+                .map(Some)
+        } else {
+            self.system.whole_segment_residual_with_budget(
+                self.chart,
+                &local,
+                &values,
+                self.tolerance,
+            )
+        };
+        let majorant = match enclosure {
             Ok(Some(bounds)) => Some(bounds),
             Ok(None) => {
                 *rejection = "whole-segment differential defect bound is unavailable".into();
@@ -1093,16 +1223,25 @@ impl<S: SeriesSystem> StepTrial<'_, S> {
                 }
             }
         }
-        let checked = self
-            .conditioning
-            .check(p, &local, &values, self.conditioning_digits)?;
+        let checked = if let Some(candidate) = candidate {
+            // Preserve the existing arithmetic safeguard for seed coefficients;
+            // compare that diagnostic with the Taylor value, not the rational value.
+            let seed_values = evaluate_taylor(p, self.coefficients, &local).0;
+            let seed =
+                self.conditioning
+                    .check(p, &local, &seed_values, self.conditioning_digits)?;
+            seed.min(candidate.check_conditioning(p, &local, &values, self.conditioning_digits)?)
+        } else {
+            self.conditioning
+                .check(p, &local, &values, self.conditioning_digits)?
+        };
         let state = self
             .system
             .accepted_state(self.chart, &next, self.tolerance)?;
         if state.is_none() {
             *rejection = "local branch or state admission failed".into();
         }
-        Ok(state.map(|state| (next, values, state, checked)))
+        Ok(state.map(|state| (next, values, state, checked, candidate.is_some())))
     }
 }
 
@@ -1231,6 +1370,28 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
             let available_digits = (u64::from(p.bits) * 1000 / 3322) as u32;
             let tolerance = p.tolerance(truncation_digits.min(available_digits.saturating_sub(3)));
             let conditioning = ConditioningChart::new(p, &coefficients)?;
+            let pade = if let Some(pade_options) = &options.pade {
+                match system.pade_candidate(
+                    &coordinate,
+                    &center,
+                    &coefficients,
+                    pade_options,
+                    context,
+                ) {
+                    Ok(Some(candidate)) => Some(Arc::new(candidate)),
+                    Err(Error::Cancelled) => return Err(Error::Cancelled),
+                    result => {
+                        diagnostics.pade_fallbacks += 1;
+                        diagnostics.last_pade_fallback = Some(match result {
+                            Err(error) => error.to_string(),
+                            _ => "source owner supports Taylor candidates only".into(),
+                        });
+                        None
+                    }
+                }
+            } else {
+                None
+            };
             let trial = StepTrial {
                 system,
                 chart: &chart,
@@ -1242,6 +1403,7 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                 tolerance: &tolerance,
                 conditioning: &conditioning,
                 conditioning_digits: options.digits,
+                pade: pade.as_deref(),
             };
             let bracketed = options.step_size_strategy == StepSizeStrategy::Bracketed;
             let mut accepted = None;
@@ -1256,7 +1418,7 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                     ));
                 }
                 diagnostics.predicate_evaluations += 1;
-                if let Some(candidate) = trial.evaluate(&step, &mut rejection)? {
+                if let Some(candidate) = trial.evaluate(&step, &mut rejection, &mut diagnostics)? {
                     accepted = Some(candidate);
                     break;
                 }
@@ -1293,7 +1455,9 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                         break;
                     }
                     diagnostics.predicate_evaluations += 1;
-                    if let Some(candidate) = trial.evaluate(&proposal, &mut rejection)? {
+                    if let Some(candidate) =
+                        trial.evaluate(&proposal, &mut rejection, &mut diagnostics)?
+                    {
                         accepted = candidate;
                         step = proposal;
                         diagnostics.superseded_successes += 1;
@@ -1304,7 +1468,10 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                 }
             }
             context.cancellation.check()?;
-            let (next, next_values, next_state, conditioning_digits) = accepted;
+            let (next, next_values, next_state, conditioning_digits, used_pade) = accepted;
+            if used_pade {
+                diagnostics.pade_steps += 1;
+            }
             diagnostics.conditioning_digits = Some(
                 diagnostics
                     .conditioning_digits
@@ -1318,6 +1485,7 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                     center: center.clone(),
                     end: next.clone(),
                     coefficients,
+                    pade: if used_pade { pade } else { None },
                     working_bits: p.bits,
                     coordinate: coordinate.clone(),
                     conditioning_digits: options.digits,

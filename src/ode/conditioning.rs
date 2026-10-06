@@ -14,7 +14,7 @@ pub(crate) struct ConditioningChart {
     polynomials: Vec<BallPolynomial>,
 }
 
-fn perturbation_ball(p: Precision, value: &C) -> ComplexBall {
+pub(crate) fn perturbation_ball(p: Precision, value: &C) -> ComplexBall {
     let component = |value: &Float| {
         let bits = p.bits.min(value.prec());
         let epsilon = Rational::from((Integer::one(), Integer::from(2).pow(u64::from(bits))));
@@ -68,67 +68,81 @@ impl ConditioningChart {
             ));
         }
         let argument = perturbation_ball(p, step);
-        let ceiling = p.bits / 4; // conservative decimal ceiling; no f64 conversion
-        let mut checked = ceiling.max(digits);
-        let mut minimum_bits = p.bits;
-        let mut witness = 0;
-        for (index, (polynomial, value)) in self.polynomials.iter().zip(values).enumerate() {
-            let ball = polynomial.evaluate(&argument);
-            let center = C::new(ball.re.center.clone(), ball.im.center.clone());
-            let delta = p.sub(&center, value);
-            let radius = ball.re.radius + ball.im.radius + delta.re.norm() + delta.im.norm();
-            if !radius.is_finite() {
-                return Err(Error::InsufficientPrecision {
-                    minimum_bits: p.bits.saturating_mul(2),
-                    context: "nonfinite endpoint conditioning estimate".into(),
-                });
-            }
-            let magnitude = p.norm(value);
-            let scale = if magnitude > p.real(1) {
-                magnitude
-            } else {
-                p.real(1)
-            };
-            let ratio = radius.clone() / (p.tolerance(digits) * &scale);
-            if ratio > p.real(1) {
-                let q = ratio.to_rational();
-                let extra = q
-                    .numerator_ref()
-                    .significant_bits()
-                    .saturating_sub(q.denominator_ref().significant_bits())
-                    .saturating_add(1);
-                let extra = u32::try_from(extra)
-                    .map_err(|_| Error::Limit("conditioning precision hint overflow".into()))?;
-                let need = p
-                    .bits
-                    .checked_add(extra)
-                    .and_then(|n| n.checked_add(32))
-                    .ok_or_else(|| Error::Limit("conditioning precision hint overflow".into()))?;
-                if need > minimum_bits {
-                    minimum_bits = need;
-                    witness = index;
-                }
-            } else {
-                let mut candidate = digits;
-                for d in digits.saturating_add(1)..=checked {
-                    if radius > p.tolerance(d) * &scale {
-                        break;
-                    }
-                    candidate = d;
-                }
-                checked = checked.min(candidate);
-            }
+        check_balls(
+            p,
+            self.polynomials.iter().map(|a| a.evaluate(&argument)),
+            values,
+            digits,
+        )
+    }
+}
+
+/// Shared diagnostic for explicitly enclosed candidate evaluations.
+pub(crate) fn check_balls(
+    p: Precision,
+    balls: impl Iterator<Item = ComplexBall>,
+    values: &[C],
+    digits: u32,
+) -> Result<u32> {
+    let ceiling = p.bits / 4; // conservative decimal ceiling; no f64 conversion
+    let mut checked = ceiling.max(digits);
+    let mut minimum_bits = p.bits;
+    let mut witness = 0;
+    for (index, (ball, value)) in balls.zip(values).enumerate() {
+        let center = C::new(ball.re.center.clone(), ball.im.center.clone());
+        let delta = p.sub(&center, value);
+        let radius = ball.re.radius + ball.im.radius + delta.re.norm() + delta.im.norm();
+        if !radius.is_finite() {
+            return Err(Error::InsufficientPrecision {
+                minimum_bits: p.bits.saturating_mul(2),
+                context: "nonfinite endpoint conditioning estimate".into(),
+            });
         }
-        if minimum_bits > p.bits {
-            Err(Error::InsufficientPrecision {
-                minimum_bits,
-                context: format!(
-                    "Taylor endpoint cancellation in component {witness}; {digits} requested decimal digits are unresolved"
-                ),
-            })
+        let magnitude = p.norm(value);
+        let scale = if magnitude > p.real(1) {
+            magnitude
         } else {
-            Ok(checked)
+            p.real(1)
+        };
+        let ratio = radius.clone() / (p.tolerance(digits) * &scale);
+        if ratio > p.real(1) {
+            let q = ratio.to_rational();
+            let extra = q
+                .numerator_ref()
+                .significant_bits()
+                .saturating_sub(q.denominator_ref().significant_bits())
+                .saturating_add(1);
+            let extra = u32::try_from(extra)
+                .map_err(|_| Error::Limit("conditioning precision hint overflow".into()))?;
+            let need = p
+                .bits
+                .checked_add(extra)
+                .and_then(|n| n.checked_add(32))
+                .ok_or_else(|| Error::Limit("conditioning precision hint overflow".into()))?;
+            if need > minimum_bits {
+                minimum_bits = need;
+                witness = index;
+            }
+        } else {
+            let mut candidate = digits;
+            for d in digits.saturating_add(1)..=checked {
+                if radius > p.tolerance(d) * &scale {
+                    break;
+                }
+                candidate = d;
+            }
+            checked = checked.min(candidate);
         }
+    }
+    if minimum_bits > p.bits {
+        Err(Error::InsufficientPrecision {
+            minimum_bits,
+            context: format!(
+                "endpoint arithmetic cancellation in component {witness}; {digits} requested decimal digits are unresolved"
+            ),
+        })
+    } else {
+        Ok(checked)
     }
 }
 

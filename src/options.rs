@@ -32,8 +32,8 @@ pub enum MassMode {
     Propagators(Vec<usize>),
 }
 
-/// Proposal policy for ordinary Taylor continuation. Both policies use the same
-/// tail, differential-defect, domain and branch checks.
+/// Proposal policy for ordinary continuation. Both policies use the same
+/// candidate-specific differential-defect, conditioning, domain and branch checks.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
 pub enum StepSizeStrategy {
     /// Halve the geometric proposal until every acceptance check passes.
@@ -44,15 +44,39 @@ pub enum StepSizeStrategy {
     Bracketed,
 }
 
+/// Resource bounds for optional native rational-approximant trials. Unsupported
+/// charts and failed candidates fall back to Taylor at the same proposed point.
+#[derive(Debug, Clone)]
+pub struct PadeOptions {
+    pub degree: usize,
+    pub max_common_degree: usize,
+    pub max_input_bits: u64,
+    pub max_coefficient_bits: u64,
+    pub max_work: u64,
+}
+impl Default for PadeOptions {
+    fn default() -> Self {
+        Self {
+            degree: 16,
+            max_common_degree: 128,
+            max_input_bits: 4096,
+            max_coefficient_bits: 1_000_000,
+            max_work: 100_000_000,
+        }
+    }
+}
+
 #[derive(Debug, Clone)]
 pub struct FlowOptions {
     pub digits: u32,
     pub guard_digits: u32,
     pub series_order: usize,
+    pub pade: Option<PadeOptions>,
     /// Regular boundary-centered Taylor coordinates; physical paths remain unchanged.
     pub local_coordinate: crate::local_coordinates::LocalCoordinate,
-    /// Maximum acceptance-predicate evaluations per continuation call.
-    /// Includes committed, rejected and successful superseded trials.
+    /// Maximum physical proposals per continuation call. A rejected Padé
+    /// candidate may also try Taylor at the same proposal. Includes committed,
+    /// rejected and successful superseded proposals.
     pub max_steps: usize,
     pub step_size_strategy: StepSizeStrategy,
     pub max_precision_attempts: usize,
@@ -82,6 +106,7 @@ impl Default for FlowOptions {
             digits: 20,
             guard_digits: 40,
             series_order: 80,
+            pade: None,
             local_coordinate: crate::local_coordinates::LocalCoordinate::Identity,
             max_steps: 1000,
             step_size_strategy: StepSizeStrategy::Halving,
@@ -102,7 +127,34 @@ impl Default for FlowOptions {
     }
 }
 impl FlowOptions {
+    /// An independent transport profile must change rational order as well as
+    /// precision. Beyond the native degree cap the reference uses Taylor.
+    pub(crate) fn refine_rational_order(&mut self, increment: usize) {
+        if let Some(pade) = &mut self.pade {
+            match pade
+                .degree
+                .checked_add(increment)
+                .filter(|degree| *degree <= 32)
+            {
+                Some(degree) => pade.degree = degree,
+                None => self.pade = None,
+            }
+        }
+    }
     pub fn validate(&self) -> Result<()> {
+        if let Some(pade) = &self.pade
+            && (pade.degree == 0
+                || pade.degree > 32
+                || pade.max_common_degree == 0
+                || pade.max_common_degree > 256
+                || pade.max_input_bits == 0
+                || pade.max_input_bits > 16384
+                || pade.max_coefficient_bits < pade.max_input_bits
+                || pade.max_coefficient_bits > 8_000_000
+                || pade.max_work == 0)
+        {
+            return Err(Error::InvalidInput("Padé resource bounds require degree 1..32, common degree 1..256, input bits 1..16384, coefficient bits between input bits and 8000000, and positive work".into()));
+        }
         if self.digits == 0
             || self.workers == 0
             || self.series_order < 8

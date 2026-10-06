@@ -208,6 +208,7 @@ fn mapped_trial_uses_declared_point_for_local_argument_jacobian_and_state() -> R
     let tolerance = p.tolerance(50);
     let conditioning = ConditioningChart::new(p, &coefficients)?;
     let candidate = StepTrial {
+        pade: None,
         system: &probe,
         chart: &chart,
         coordinate: &coordinate,
@@ -219,7 +220,7 @@ fn mapped_trial_uses_declared_point_for_local_argument_jacobian_and_state() -> R
         conditioning: &conditioning,
         conditioning_digits: 20,
     }
-    .evaluate(&delta, &mut String::new())?
+    .evaluate(&delta, &mut String::new(), &mut FlowDiagnostics::default())?
     .expect("the exact mapped quadratic must pass the shared predicate");
     assert_eq!(candidate.0, target);
     assert_eq!(
@@ -244,6 +245,7 @@ fn saved_segment_rejects_nonfinite_span_or_interval_coordinate() -> Result<()> {
             ..Default::default()
         },
         segments: vec![TaylorSegment {
+            pade: None,
             center: p.zero(),
             end,
             coefficients: vec![vec![p.i(7)]],
