@@ -145,7 +145,7 @@ RustFlow milestones and validation reports are pushed to its repository. The
 community notebook/API changes and dependency pins are pushed in
 [draft PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19),
 authored by `ValentinHirschi`. Its head is
-`38740f3533051d8ad1cb63aeed4d44eb1ae21d5f`; the full numerical run used
+`5cde08fd`; the full numerical run used
 `8758b93d1e1a6fed2aace41493a91be569f98a98`. Native dependencies, extension bytes,
 the calculation controller and anchor runner are unchanged between these
 revisions. The differences are presentation, polling compatibility and the
@@ -205,9 +205,16 @@ unrelated PyPI package with the same name. An isolated Python 3.10 installation
 passed native Graph/Subgraph identity, physical selection, rendering and cycle
 collection, plus all 682 documentation checks and 11 package guards. The full
 previous Linux CI had 1,106 passes and 30 failures: those 29 missing-Linnet cases
-and the inherited Symbolica C++ complex exporter. The new Linux/macOS workflow
-run is pending; local success does not establish cross-platform CI success.
-Native numerical dependencies and the completed publication runtime are unchanged.
+and the inherited Symbolica C++ complex exporter. The subsequent
+[Linux/macOS workflow](../reports/validation/2026-10-06-community-native-ci/summary.json)
+passed native graph build/identity checks and **1,145 tests on each platform**,
+with two failures each. One is the inherited exporter defect; the other was an
+offline-rendering check that assumed no earlier test had imported Linnet.
+Community `5cde08fd` runs that unchanged checker in a fresh interpreter, preserving
+all no-import assertions. All 17 graph/display tests passed locally with Linnet
+deliberately imported in the parent; the new workflow is pending. Native numerical
+dependencies and the completed publication runtime are unchanged, and the whole
+community suite is not yet green.
 
 Broader work remains on general linear/cut recursion, algebraic singular
 endpoints, causal paths, nondiagonal epsilon transformations, advanced Python

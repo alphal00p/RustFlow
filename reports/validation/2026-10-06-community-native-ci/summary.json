@@ -1,0 +1,62 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-06T02:01:50.249827+00:00",
+  "ci": {
+    "run": 37399537481,
+    "url": "https://github.com/symbolica-dev/symbolica-community/actions/runs/37399537481",
+    "commit": "38740f3533051d8ad1cb63aeed4d44eb1ae21d5f",
+    "conclusion": "failure",
+    "platforms": {
+      "linux": {
+        "job": 112063380138,
+        "passed": 1145,
+        "failed": 2,
+        "skipped": 172,
+        "seconds": 567.96
+      },
+      "macos": {
+        "job": 112063379988,
+        "passed": 1145,
+        "failed": 2,
+        "skipped": 172,
+        "seconds": 326.43
+      }
+    },
+    "packaging": "Matching native graph wheel build, installation and identity/rendering checks passed on both platforms; prior missing-linnet documentation failures are resolved.",
+    "failures": [
+      "Known inherited complex C++ exporter: T(T(real),T(imag)) cannot initialize std::complex<double>. Owner fix remains proposed in Symbolica PR51.",
+      "Offline rendering checker used runpy in the shared test interpreter and rejected an existing linnet import from preceding graph interoperability tests."
+    ]
+  },
+  "rendering_fix": {
+    "commit": "5cde08fdc6523d5c1da648c5cb902d2dbcac8657",
+    "change": "Run the unchanged offline rendering check in a fresh interpreter. Existing no-import assertions and import interception remain intact; the same checker remains directly used by Pyodide.",
+    "local_validation": {
+      "passed": 17,
+      "seconds": 1.72,
+      "session": 77182,
+      "exit_code": 0,
+      "tool_chunk": "9676d1",
+      "interpreter": "/common/dev/symbolica-community/linnet-ci-owner/target/venv/bin/python",
+      "test_files": [
+        "tests/test_native_graph_package.py",
+        "tests/test_tensor_display.py"
+      ],
+      "deliberately_preimported_linnet": true,
+      "log": "render-isolation-tests.log",
+      "junit": "render-isolation-tests.xml"
+    },
+    "native_manifests_runtime_or_scientific_banks_changed": false
+  },
+  "scope": "No whole-suite-green claim. New CI on the rendering fix is separate. Full native gg-to-hg scientific acceptance retains its original publication-wheel provenance.",
+  "logs": {
+    "linux.log.gz": {
+      "sha256": "4333acf99e607df6641025caf63fefcc42865c37e0db9601d50a14321c69f797",
+      "uncompressed_sha256": "93d70abedbc51a5628ac17d438c267dfd530ab3be496da36182d695b1c1f66a7"
+    },
+    "macos.log.gz": {
+      "sha256": "0f5d40299cec9b16db836573ca3020d7a37ff07ef5ff92a146b4fcd73f2085c5",
+      "uncompressed_sha256": "484944dd2b3223c7b915f8d97672f53c2120d9e63e1a49e970e027374beb2644"
+    }
+  }
+}
