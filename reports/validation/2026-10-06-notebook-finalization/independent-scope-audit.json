@@ -1,0 +1,166 @@
+{
+  "schema": "independent-python-notebook-acceptance-scope-audit-v1",
+  "date": "2026-10-06",
+  "method": "Read-only inspection of frozen source files and existing reports. No builds, numerical evaluations, dependency changes or cache mutations.",
+  "sources": {
+    "core": {
+      "path": "/common/dev/amflow-publication",
+      "revision": "db9cbbafa470b1402d335ad635e608a6b7a03c07"
+    },
+    "community": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication",
+      "revision": "8758b93d1e1a6fed2aace41493a91be569f98a98"
+    },
+    "completion_audit": "/common/dev/amflow/target/publication-python-notebook-completion-audit-2026-10-05.json",
+    "notebook_wording_commit": "56bcce494a14a7bcf638ca845c96eaaf6d353685"
+  },
+  "plan_scope": {
+    "direct_user_requirements": [
+      "Original plan: ReductionBackend adapters for RustRed and caller-supplied reduction tables; standalone differential-equation solver with supplied boundary data.",
+      "Later user direction: once integrated in HEPKit, take the result of reduction with e.g. RustRed and numerically evaluate the loops.",
+      "Notebook implementation direction conveyed in the task: native automatic AMFlow seed generation for the full ggHg families, not supplied numerical grid seeds; staged cache and forced recomputation."
+    ],
+    "qualification": "Supplied exact equations are compatible with the requested post-reduction evaluation capability and do not supply numerical boundary values. They do not demonstrate that RustRed itself derived the top-level 48/61 master bases. The full general AMFlow/DiffExp feature-completeness goal remains open.",
+    "approved_narrower_plan_provenance": "Root supplied the exact relevant text of the latest user-approved plan in a task message on 2026-10-06; no standalone file was asserted.",
+    "approved_narrower_plan_quotes": [
+      "Expose automatic evaluation, boundary generation, physical transport, finite-epsilon sampling, and Laurent reconstruction.",
+      "Support RustRed and scoped supplied reductions, retaining basis definitions and nonzero conditions.",
+      "Establish exact physical families and certify their transformations into the plugin’s 48/61 canonical bases, including routing, measure, epsilon factors, mass normalization, gamma factors, and root conventions.",
+      "Batch canonical outputs over shared finite-epsilon evaluations, applying transformations before Laurent fitting.",
+      "Validate fresh AMFlow boundaries against the independent Euclidean anchors, then generate the sixteen physical starting configurations natively. Reference numerical boundaries serve only as comparison data.",
+      "Complete the generic reduction, closure, and recursive-boundary functionality required by these families, retaining typed failures for incomplete work.",
+      "Persist completed samples separately from verified boundaries for safe restart.",
+      "Target 20-digit observables, starting with 30-digit seeds and refining according to propagated uncertainty.",
+      "Use durable scientific inputs and kinematics-dependent projections. Notebook execution requires neither Mathematica nor the original plugin runtime. Finite-top QCD remains outside this demonstration.",
+      "Certify basis transformations and normalization; compare all 4,360 reference transport coefficients and the coherent amplitude observables.",
+      "Complete the full calculation from empty caches with reference seeds unavailable to the evaluator, followed by independent sampling and precision refinement.",
+      "Validate interruption/restart, forced recomputation, cache reload, and nearby-source selection.",
+      "Completion requires native boundary generation through the final amplitude."
+    ],
+    "interpretation_against_actual_plan": "The plan explicitly admits scoped supplied reductions and durable scientific inputs, and requires native numerical boundaries rather than independent rederivation of every published IBP. A source-certified exact parent connection transformed by the generic common-mass machinery is a permitted supplied symbolic reduction result for that numerical workflow. Native generic closure and recursive IBPs are actually exercised for boundary subfamilies; the parent supplied connection remains an explicit trust boundary, not an unverified residual silently accepted as a master. Therefore no additional top-level RustRed regeneration is a prerequisite for this scoped notebook gate. Its absence must remain stated and must not be used as evidence of broader automatic-reduction parity."
+  },
+  "findings": [
+    {
+      "severity": "wording",
+      "item": "Disambiguate required-family reduction and closure",
+      "location": "completion audit requirement 'Generic reduction/closure/recursive boundaries required by these16 families, typed failures retained'",
+      "replacement": "Certified supplied 48/61 canonical connections and exact common-mass gauge transformations close the parent AMF systems; native region enumeration, recursive boundary-family IBPs, analytic terminals, finite-epsilon propagation and independent Laurent reconstruction generate all numerical seeds.",
+      "evidence": [
+        "src/gg_hg/workflow.rs: prepare_common_mass calls HomogeneousCanonicalBasis::pullback and PreparedFlow::from_supplied",
+        "src/engine/supplied.rs:6-11 and 29-35 explicitly state the supplied closure/IBP trust boundary",
+        "src/engine.rs:265-289 builds infinity expansions and calls constants_with_deformation",
+        "src/recursive.rs:245-287 recursively prepares/evaluates boundary families through the backend",
+        "src/recursive.rs:445 onward enumerates regions and derives required boundary orders",
+        "src/reduction.rs:515-589 rejects failure to obtain stable differential closure"
+      ],
+      "required_for_acceptance": "Clarify the report; do not claim native top-level RustRed regeneration of all48/61 equations."
+    },
+    {
+      "severity": "wording",
+      "item": "Make numerical comparison precision literal",
+      "location": "notebook wording56bcce49 phrase 'passed comparisons at their recorded reference precision'",
+      "replacement": "All 4,360 transport coefficients passed a 20-digit mixed comparison; eight W/Z form factors and three observables agreed within retained native and reference uncertainties.",
+      "evidence": [
+        "examples/hep/gg_hg_acceptance.py:434-465 checks 4360 coefficients at mixed tolerance1e-20, not at every reference's full stored precision",
+        "examples/hep/gg_hg_acceptance.py:469-488 compares observables within native plus reference uncertainty"
+      ],
+      "qualification": "The archived EW-square reference has19 conditional relative digits, interference20 and HEFT39. Native propagated errors and independent30-to40 stability are separate evidence, not a20-digit EW oracle or interval proof.",
+      "required_for_acceptance": "Use unambiguous wording when applying the prepared notebook update."
+    }
+  ],
+  "verified_source_contracts": [
+    {
+      "item": "Numerical reference isolation",
+      "result": "No production numerical-seed fixture or fallback found.",
+      "evidence": [
+        "src/gg_hg/workflow.rs embeds exact integral-systems and physical-configurations only",
+        "src/gg_hg/plugin_basis.rs embeds exact physical-power/basis data",
+        "src/gg_hg/form_factors.rs embeds exact generic projection weights; point-specialized projection fixture occurs under tests",
+        "examples/hep/gg_hg_support.py reads the single native model and cache-generation bookkeeping, no numerical comparison data",
+        "examples/hep/gg_hg_acceptance.py:429 onward opens numerical references only after seeds, transport and amplitude succeed",
+        "examples/hep/gg_hg_anchor_acceptance.py:265 onward opens both independent references only after both native anchor calculations succeed",
+        "examples/hep/gg_hg.py:182-185 stops the comparison cell until native observables exist"
+      ]
+    },
+    {
+      "item": "Model ownership and dynamic physical assembly",
+      "result": "One native Model is loaded in CalculationSession and passed to native HiggsJetAmplitude. Native Process generation, spin/color sums, Idenso/Spenso contraction, native Kinematics and Model parameter expansion own their operations.",
+      "evidence": [
+        "examples/hep/gg_hg_support.py:62 and assemble",
+        "src/gg_hg/amplitude.rs:108-184",
+        "src/gg_hg/form_factors.rs:231-354"
+      ],
+      "qualification": "Displayed diagrams are effective zero-loop vertices containing the two-loop EW form factors. They are not an enumeration of all underlying two-loop diagrams. Finite-top QCD is excluded."
+    },
+    {
+      "item": "Exact normalization and current-kinematics projections",
+      "result": "Finite-epsilon canonical projection includes exp(2 gamma_E epsilon) and exact root factors before fitting. Form factors use current s,t,mH squared,mV squared and apply -1/[mV^4(4pi)^4] once. Input boundary identity, crossing coordinates, epsilon range and root germ are checked before contraction.",
+      "evidence": [
+        "src/gg_hg/workflow.rs:generate_boundary",
+        "src/engine.rs:887 onward",
+        "src/gg_hg/form_factors.rs:231-354",
+        "examples/hep/gg_hg_support.py:_destination and assemble"
+      ],
+      "qualification": "The ggHg convenience workflow supports the admitted real physical chamber and its declared root conventions; this gate does not prove all kinematics or arbitrary multiloop configurations."
+    },
+    {
+      "item": "Progressive cache and source selection",
+      "result": "Native cache filters exact source identity, epsilon range, retained precision and root germ before cost-based source selection; admitted trajectories add physical intermediate points. Incompatible entries are errors. Source fingerprints include actual resolved host dependency graph.",
+      "evidence": [
+        "src/transport_cache.rs:1536-1595 and1642 onward",
+        "build.rs and build_support/source_fingerprint.rs",
+        "src/sample_checkpoint.rs:34-103",
+        "src/engine/supplied.rs:185-200"
+      ]
+    },
+    {
+      "item": "Interruption, force and restart",
+      "result": "Forced numerical regeneration archives old seeds/transport/completed samples while preserving exact IBPs. Completed samples are independently keyed and committed. Success alone adds verified boundaries. A new session resumes the forced generation and checks preserved sample hashes. Binary reload compares native values and evidence.",
+      "evidence": [
+        "examples/hep/gg_hg_support.py:_prepare_forced_boundaries, generate_boundaries and restart_and_repeat",
+        "examples/hep/gg_hg_acceptance.py:489-545",
+        "src/sample_checkpoint.rs"
+      ],
+      "qualification": "Cancellation is cooperative. Browser clicks cover transport/amplitude/restart; full boundary generation and cancellation have native/controller evidence rather than browser-click coverage."
+    },
+    {
+      "item": "Python API ownership",
+      "result": "Bindings register in the host's existing Symbolica extension rather than creating a second runtime. Native Expression/Float/ComplexFloat and HEPKit objects are used; expensive methods release the GIL and typed numerical/reduction/cancellation errors are preserved.",
+      "evidence": [
+        "src/python/mod.rs:1-16,131-143,191 onward",
+        "src/python/evaluation.rs",
+        "src/python/transport.rs",
+        "src/python/types.rs"
+      ],
+      "qualification": "Advanced standalone Frobenius/infinity/endpoint, custom route and cut-graph APIs are not all wrapped as separate Python interfaces; full Rust feature parity is not claimed."
+    }
+  ],
+  "acceptance_scope": {
+    "counts": {
+      "euclidean_coefficients": 545,
+      "physical_configurations": 16,
+      "transport_coefficients": 4360,
+      "vector_form_factors": 8,
+      "observables": 3
+    },
+    "historical": "The full historical acceptance has authoritative exit0, including16 fresh40-digit sources,4360 stability checks, refinement, interruption/resume and nearby accumulated-cache reuse. It attests the historical runtime only.",
+    "publication": "Cold16 native30-digit sources and coefficient/form-factor/observable comparisons, restart and warm exact hits passed. Per root's latest observation,12/16 independent40-digit sources were complete; final refined transports, stability, nearby assembly, attestation and exit remain pending.",
+    "pending_required": [
+      "All16 native40-digit source fits and interrupted-sample preservation on the frozen publication graph.",
+      "Fresh refined transport and4360 coefficient/uncertainty consistency checks.",
+      "Refined eight form factors and three observables with required native precision admission.",
+      "Nearby-point source search from accumulated physical points, retained provenance and amplitude at the new kinematics.",
+      "Final unchanged runtime attestation and authoritative successful process exit.",
+      "Archive immutable proof; apply accurately qualified notebook wording and rerender the final presentation."
+    ],
+    "not_demonstrated_or_not_required_by_scoped_gate": [
+      "Independent RustRed derivation of all parent48/61 master equations.",
+      "Independent external numerical oracle at the nearby point.",
+      "Full general AMFlow/DiffExp feature or performance parity.",
+      "A matched full Mathematica/DiffExp versus native end-to-end performance comparison.",
+      "Whole community browser suite with the separate inherited tensor-list fix integrated into the frozen host.",
+      "Outward-rounded rigorous global error bounds."
+    ]
+  },
+  "conclusion": "No additional algorithmic blocker found for the scoped native Python/ggHg notebook acceptance. Complete the already-running final publication gates, clarify supplied parent equations versus native recursive reductions and comparison precision, and preserve historical/publication provenance separately. Do not use this milestone to mark the broader feature-complete port goal complete."
+}

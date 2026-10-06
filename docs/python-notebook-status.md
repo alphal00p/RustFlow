@@ -1,6 +1,6 @@
 # Python API and Higgs-plus-jet notebook status
 
-Snapshot: 2026-10-05, during final publication-wheel acceptance. The implementation
+Snapshot: 2026-10-06, during final publication-wheel acceptance. The implementation
 is not feature-complete. This page separates completed numerical evidence from
 checks still running on the dependency graph intended for publication.
 
@@ -10,7 +10,7 @@ checks still running on the dependency graph intended for publication.
 | Unified numerical evaluation | Automatic AMF, Euclidean FT, finite-epsilon sampling and Laurent reconstruction share the series machinery used for physical transport | Full AMFlow/DiffExp generality and performance parity remain open; see the [comparison table](benchmark-comparison.md) |
 | Original AMFlow acceptance | All four two-loop paper targets through epsilon zero passed the requested 20-digit comparison and independent sampling/refinement | That completed gate does not establish full upstream feature coverage |
 | Growing boundary cache | Binary persistence, compatible-source selection, intermediate points, source fingerprints and retained uncertainty; completed samples are stored separately | Final-wheel forced recomputation, interruption/resume and nearby-query acceptance are still running |
-| Exact Higgs-plus-jet inputs | Native physical families, certified 48/61 canonical basis maps, exact normalization and kinematics-dependent form-factor projections | No claim of automatic reduction or boundary coverage for every possible multiloop family |
+| Exact Higgs-plus-jet inputs | Native physical families, certified supplied 48/61 canonical basis maps and parent connections, exact normalization and kinematics-dependent form-factor projections | Top-level RustRed derivation of those parent connections is not demonstrated; general multiloop reduction coverage remains open |
 | Fresh physical boundaries and amplitude | The publication wheel completed all 16 native 30-digit configurations from empty numerical caches, all 4,360 transport coefficient comparisons, eight W/Z form factors and three coherent observables | Forced 40-digit regeneration, interruption/resume, independent stability and nearby-point checks remain |
 | Independent Euclidean anchors | Publication wheel passed all 545 comparisons at 20 digits with fresh native boundaries | This prerequisite alone does not certify the physical calculation |
 | Marimo notebook | `symbolica-community/examples/hep/gg_hg.py`, stage controls, precision/provenance tables and cache controls; initial HTML export, native SVG display and populated original notebook execution passed using a copied completed native cache. Actual Chromium transport, amplitude and restart clicks passed, with native diagram/form-factor panels inspected | Finish the complete 40-digit headless acceptance; boundary-generation and cancellation controls have native/controller evidence, not browser-click coverage |
@@ -25,6 +25,14 @@ also passed transport and native amplitude comparison, with the same 25/26/47
 propagated relative-digit estimates as the earlier build. Its runtime, dependency
 pins, model and numerical steering sources remain frozen while the later
 restart/refinement stages continue.
+
+The [independent scope audit](../reports/validation/2026-10-06-notebook-finalization/independent-scope-audit.json)
+distinguishes the exact supplied parent equations from computed numerical data.
+Generic common-mass transformations use those certified equations to close the
+parent flow. Native region enumeration, recursive boundary-family IBPs, analytic
+terminals and finite-epsilon reconstruction then generate the boundary values.
+This route admits supplied symbolic reduction results; it does not establish
+that RustRed independently rederived all 48/61 parent master equations.
 
 ## Completed cold calculation and precision scope
 
@@ -86,6 +94,13 @@ Its validated owner fix is proposed in
 part of the tested runtime. Native import/export regressions, standalone
 reproducers, generator reentrancy checks and strict Clippy passed in isolation.
 
+The separate [native-arithmetic follow-up](https://github.com/alphal00p/RustFlow/pull/2)
+uses official Symbolica's explicit rounded scalar operations in the complex
+arithmetic layer. It preserves the working precision and operation order;
+24,192 bit comparisons, 76 selected regressions, formatting and strict Clippy
+passed. Its report makes no new scientific acceptance or performance claim,
+and it has not changed the publication runtime.
+
 The [interactive notebook check](../reports/validation/2026-10-05-public-wheel/notebook-interactive-validation.json)
 served the unchanged notebook with native Marimo and clicked transport, amplitude,
 binary reload and repeated amplitude controls in Chromium. All completed without
@@ -94,6 +109,16 @@ eight-row form-factor tables and native diagram display. Both checks used copies
 of the committed cold bank; its originals, runtime and steering sources were
 verified unchanged. Click-to-completion timings include UI refresh and persistence,
 and are not isolated solver measurements.
+
+A documentation-only notebook follow-up is prepared at community commit
+`059ec1faf663e38ccb4def8bfeb368eb7b5edc8e`, on
+`codex/gg-hg-notebook-finalization`. Its exact-input provenance, comparison
+precision and explicit loop measure passed
+[static Chromium rendering and notebook smoke checks](../reports/validation/2026-10-06-notebook-finalization/render-validation.json).
+The [measure display](../reports/validation/2026-10-06-notebook-finalization/normalization.png)
+was visually inspected. This empty-cache presentation check starts no numerical
+work. Apply the wording commits to the publication branch after its current
+runtime attestation finishes.
 
 ## Publication and remaining work
 

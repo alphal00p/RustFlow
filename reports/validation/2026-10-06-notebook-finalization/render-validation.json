@@ -1,0 +1,38 @@
+{
+  "schema": "notebook-finalization-render-v1",
+  "status": "passed",
+  "recorded_utc": "2026-10-06T00:16:17.012Z",
+  "scope": "Static HTML of documentation-only notebook followup with empty numerical caches; no integral evaluation",
+  "page_errors": [],
+  "browser_version": "151.0.7922.173",
+  "normalization_visible": true,
+  "cold_validation_visible": true,
+  "katex_errors": 0,
+  "katex_formulas": 13,
+  "notebook_commit": "059ec1faf663e38ccb4def8bfeb368eb7b5edc8e",
+  "notebook_source_sha256": "9e7a5e5a4837785ee302d8cb4016e6dacb9b0d06b0548bc3be31fdbe16bc15d6",
+  "publication_runtime_unchanged": true,
+  "documentation_only_followup": true,
+  "export_exit_code": 0,
+  "browser_exit_code": 0,
+  "smoke_tests": {
+    "command": "pytest -q tests/test_hep_gg_hg.py -k notebook",
+    "passed": 2,
+    "deselected": 44,
+    "seconds": 0.83,
+    "exit_code": 0
+  },
+  "visual_review": {
+    "reviewed": true,
+    "canonical_measure_displays_as_block_math": true,
+    "parent_equations_and_reference_precision_qualified": true
+  },
+  "literal_dollar_delimiters_in_visible_text": 0,
+  "numerical_cache_bin_count": 0,
+  "artifact_sha256": {
+    "gg_hg.html": "086370431b711551bb4f2359da444a2cb0532a3d66b454571de9bb99b25bf780",
+    "normalization.png": "f14b8c5adafafcf3f2eb3c4acea6bb1d71129c0b69a6416f8d8545c44a844485"
+  },
+  "local_artifacts": "/common/dev/amflow/target/notebook-finalization-render-v2",
+  "scope_limit": "Empty-state static rendering and notebook structure only. Full populated interaction and scientific acceptance have separate evidence."
+}
