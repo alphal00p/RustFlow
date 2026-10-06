@@ -1,0 +1,18 @@
+[
+  {
+    "snapshot": "failed-series",
+    "base": "0c9d34f1d98b720be352eec8fbb763a4e838a7eb",
+    "patch": "failed-series-source.patch.gz",
+    "manifest": "failed-series-final-source.json",
+    "files_reconstructed": 199,
+    "all_hashes_match": true
+  },
+  {
+    "snapshot": "initial-passing",
+    "base": "0c9d34f1d98b720be352eec8fbb763a4e838a7eb",
+    "patch": "initial-passing-source.patch.gz",
+    "manifest": "second-unit-source.json",
+    "files_reconstructed": 101,
+    "all_hashes_match": true
+  }
+]

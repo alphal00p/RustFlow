@@ -11,6 +11,10 @@ use symbolica::domains::float::{ComplexBall, FloatField, RealBall, RoundingDirec
 use symbolica::tensors::matrix::Matrix;
 
 mod constrained;
+mod sheet;
+mod sheet_germ;
+#[cfg(test)]
+mod sheet_tests;
 
 pub(crate) struct EndpointLinearMap {
     pub(crate) values: Vec<Vec<C>>,
@@ -237,13 +241,10 @@ impl AlgebraicSystem {
         for (offset, i, j, term_mask, coefficient) in terms {
             context.cancellation.check()?;
             for (monomial, &mask) in monomials.iter().enumerate() {
-                let mut factor = coefficient.clone();
-                for (index, root) in self.roots.iter().enumerate() {
-                    if mask & term_mask & (1 << index) != 0 {
-                        factor *= &root.radicand;
-                    }
-                }
-                factor = factor.together().cancel();
+                let factor = (coefficient.clone()
+                    * intersection_factor(&self.roots, mask, term_mask))
+                .together()
+                .cancel();
                 let target = monomial_indices[&(mask ^ term_mask)];
                 for k in offset..count {
                     matrix[monomial * stride + k * size + i]
@@ -295,6 +296,18 @@ impl AlgebraicSystem {
         let prepared = lifted.rational.prepare_frobenius(context)?;
         Ok(PreparedAlgebraicFrobenius { lifted, prepared })
     }
+}
+
+/// Native normalized-root monomials multiply by XOR with intersection squares.
+/// Both connection construction and exact sheet action use this same owner.
+fn intersection_factor(roots: &[SquareRoot], left: usize, right: usize) -> Atom {
+    roots
+        .iter()
+        .enumerate()
+        .filter(|(i, _)| left & right & (1 << i) != 0)
+        .fold(Atom::one(), |a, (_, root)| a * &root.radicand)
+        .together()
+        .cancel()
 }
 
 impl RationalAlgebraicSystem {

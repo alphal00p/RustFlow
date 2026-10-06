@@ -1,0 +1,483 @@
+{
+  "status": "validated isolated Gaussian-leading registered-root constrained endpoint milestone; broader endpoint parity remains open",
+  "recorded_utc": "2026-10-06T05:09:17.105618+00:00",
+  "branch": "codex/sheet-constrained-endpoints",
+  "base_commit": "0c9d34f1d98b720be352eec8fbb763a4e838a7eb",
+  "scope": [
+    "Exact constant root-sheet actions on a complete rational-lift Frobenius solution space",
+    "Native certified matching germ, complex-ray, product-generator and common winding selection",
+    "All admitted affine physical directions proved finite by exact support",
+    "Certified root-ball boundary lift and independent precision/order matching estimates",
+    "Existing physical endpoint/cache interfaces and schema-7 identity; regular anchors retained"
+  ],
+  "checks": {
+    "final-lib": {
+      "exit_code": 0,
+      "elapsed_seconds": 275.9790845136158,
+      "passed": 162,
+      "failed": 0,
+      "ignored": 3,
+      "targets": {
+        "unittests src/lib.rs": {
+          "passed": 162,
+          "failed": 0,
+          "ignored": 3,
+          "seconds": "7.19s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "1",
+              "0",
+              "0",
+              "0",
+              "164",
+              "0.00s"
+            ],
+            [
+              "ok",
+              "1",
+              "0",
+              "0",
+              "0",
+              "164",
+              "0.01s"
+            ],
+            [
+              "ok",
+              "1",
+              "0",
+              "0",
+              "0",
+              "164",
+              "0.01s"
+            ],
+            [
+              "ok",
+              "162",
+              "0",
+              "3",
+              "0",
+              "0",
+              "7.19s"
+            ]
+          ]
+        }
+      }
+    },
+    "final-public": {
+      "exit_code": 0,
+      "elapsed_seconds": 354.9539443543181,
+      "passed": 135,
+      "failed": 0,
+      "ignored": 0,
+      "targets": {
+        "tests/algebraic_cache.rs": {
+          "passed": 10,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.50s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "10",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.50s"
+            ]
+          ]
+        },
+        "tests/algebraic_endpoints.rs": {
+          "passed": 11,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.53s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "11",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.53s"
+            ]
+          ]
+        },
+        "tests/algebraic_kinematic.rs": {
+          "passed": 3,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.07s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "3",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.07s"
+            ]
+          ]
+        },
+        "tests/algebraic_quotients.rs": {
+          "passed": 7,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "1.43s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "7",
+              "0",
+              "0",
+              "0",
+              "0",
+              "1.43s"
+            ]
+          ]
+        },
+        "tests/analytic_origin.rs": {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.12s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "6",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.12s"
+            ]
+          ]
+        },
+        "tests/asymptotic.rs": {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.03s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "6",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.03s"
+            ]
+          ]
+        },
+        "tests/constrained_singular_endpoints.rs": {
+          "passed": 24,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.21s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "24",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.21s"
+            ]
+          ]
+        },
+        "tests/epsilon_algebraic.rs": {
+          "passed": 7,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "17.27s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "7",
+              "0",
+              "0",
+              "0",
+              "0",
+              "17.27s"
+            ]
+          ]
+        },
+        "tests/frobenius.rs": {
+          "passed": 8,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.10s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "8",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.10s"
+            ]
+          ]
+        },
+        "tests/physical_transport.rs": {
+          "passed": 4,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "1.04s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "4",
+              "0",
+              "0",
+              "0",
+              "0",
+              "1.04s"
+            ]
+          ]
+        },
+        "tests/prepared_frobenius.rs": {
+          "passed": 5,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.31s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "5",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.31s"
+            ]
+          ]
+        },
+        "tests/prescribed_cache.rs": {
+          "passed": 6,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "5.17s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "6",
+              "0",
+              "0",
+              "0",
+              "0",
+              "5.17s"
+            ]
+          ]
+        },
+        "tests/supplied_flow.rs": {
+          "passed": 7,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.46s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "7",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.46s"
+            ]
+          ]
+        },
+        "tests/supplied_singular_endpoints.rs": {
+          "passed": 19,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.57s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "19",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.57s"
+            ]
+          ]
+        },
+        "tests/transport_cache.rs": {
+          "passed": 12,
+          "failed": 0,
+          "ignored": 0,
+          "seconds": "0.04s",
+          "all_summaries_including_child_processes": [
+            [
+              "ok",
+              "12",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0.04s"
+            ]
+          ]
+        }
+      }
+    },
+    "final-fmt": {
+      "exit_code": 0,
+      "elapsed_seconds": 1.1593533959239721,
+      "passed": 0,
+      "failed": 0,
+      "ignored": 0,
+      "targets": {}
+    }
+  },
+  "total_top_level_passed": 297,
+  "total_top_level_ignored": 3,
+  "counting": "Only final summary per Cargo target contributes to totals; nested process summaries are preserved separately. Earlier passing runs are not added to final totals.",
+  "source_recheck": {
+    "source_files": 200,
+    "embedded_inputs": 46,
+    "all_match": true
+  },
+  "binary_hashes": {
+    "target/native/release/deps/symbolica_amflow-e0823456bc226c98": {
+      "sha256": "2fe4003b461849390856d05b98d7d87ff6eae22e281b34413c0c6d0fe7f4909b",
+      "size": 745720312
+    },
+    "target/native/release/deps/algebraic_cache-c4453cf62fc6de21": {
+      "sha256": "fb0cd5f4a959f7e9e062e9e293456f4ab8b6e9a655160ba819b361a73def3a4b",
+      "size": 736069256
+    },
+    "target/native/release/deps/algebraic_endpoints-1fddc4aa165dca18": {
+      "sha256": "69f4459faa4e1a5924ef08286f330bad07b3ef8cbe57ff802cb55849770b88ff",
+      "size": 734052408
+    },
+    "target/native/release/deps/algebraic_kinematic-d17859eaa1a74da2": {
+      "sha256": "2d6c76f46be17ef1fa2ca9b32166143d15faa548b90c740342adda5abb9cffa0",
+      "size": 732806552
+    },
+    "target/native/release/deps/algebraic_quotients-26969d8b2427779c": {
+      "sha256": "d153ad9d12396864718ba6798936ab669c2acffa9fcf8df2c601ff1211e7e4a1",
+      "size": 733148784
+    },
+    "target/native/release/deps/analytic_origin-4934d371b9c6b206": {
+      "sha256": "f217b7e916db07f18ba8a59cbb924f61cd81c01e1ee472e3ee9e405acad2b745",
+      "size": 732314192
+    },
+    "target/native/release/deps/asymptotic-ab589e4fc27f3062": {
+      "sha256": "2ce31e25f6f1f847f80400585b6f61c97314d52fa878828b86010b03615bef76",
+      "size": 723713120
+    },
+    "target/native/release/deps/constrained_singular_endpoints-3db625b8296b144b": {
+      "sha256": "aa7102e34c4229c8d512f2eb9b7b4100d3686dc37864d4675d86682fec00daaf",
+      "size": 737973776
+    },
+    "target/native/release/deps/epsilon_algebraic-c372004b3a0ac8ff": {
+      "sha256": "899857b0d35ed4168462ca28b86666668e52ad94137761e1876ccc4b585a6e84",
+      "size": 736674768
+    },
+    "target/native/release/deps/frobenius-1651dad7fcf98448": {
+      "sha256": "62b045052e56ac7e1da6c014c730d863143e9b5ba4a79169a2011845d93ae42c",
+      "size": 727945904
+    },
+    "target/native/release/deps/physical_transport-0b2938655ddf6c66": {
+      "sha256": "e80ef709cdfed4befbc1116c31bd399a1c85e80c8d866f0829dc0ba0638c4794",
+      "size": 736251680
+    },
+    "target/native/release/deps/prepared_frobenius-ffb61443f2de5313": {
+      "sha256": "8c0ea8f0adf4921332b3f23e58060b1c47b94cf590e5008e372e45debad751eb",
+      "size": 727674768
+    },
+    "target/native/release/deps/prescribed_cache-40cf6a90b743363b": {
+      "sha256": "ab4d5964ae7d387efcd4cfd0771867f99fa6c385f1c011e22261aa888dafbf38",
+      "size": 735925408
+    },
+    "target/native/release/deps/supplied_flow-2934b1e313fd70e7": {
+      "sha256": "76abd177a5f25d12392a76b89e0c05aadc98c537aaad03944452805ba3bc4128",
+      "size": 786115504
+    },
+    "target/native/release/deps/supplied_singular_endpoints-59b845c912afab7e": {
+      "sha256": "c3a5da98310e70dc12d483eb05e4b93752cfcaeedad26e0459de26d64d2d2307",
+      "size": 737643504
+    },
+    "target/native/release/deps/transport_cache-d97ba5e9e103df75": {
+      "sha256": "a5a5ccf4cdd49af934fd2cb93588a691c02a40c8f81d82adc6656dc52c37ca6f",
+      "size": 737495752
+    }
+  },
+  "strict_python_stubgen_clippy": {
+    "command": [
+      "cargo",
+      "clippy",
+      "--release",
+      "--all-targets",
+      "--features",
+      "python_stubgen",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "session": 35133,
+    "tool_chunk": "a6cba6",
+    "log": "final-clippy-with-grid-tests.log.gz"
+  },
+  "reviews": [
+    "Parent approved staged proof/admission and exact-zero grid fix",
+    "algebraic_endpoint independently reviewed exact covariance/completeness, germ signs, affine matching, resource admission and exact-zero extraction; no remaining source-review blocker"
+  ],
+  "failures_retained": [
+    {
+      "kind": "initial compile/API issues",
+      "logs": [
+        "first-check.log.gz",
+        "second-check.log.gz",
+        "third-check-tests.log.gz"
+      ]
+    },
+    {
+      "kind": "overconstrained private fixture",
+      "result": "first private run 4 passed, 1 failed; fixture only needed rational_lift rather than preparing an irregular Frobenius system",
+      "log": "first-unit.log.gz"
+    },
+    {
+      "kind": "strict Clippy style/type findings",
+      "logs": [
+        "first-clippy.log.gz",
+        "second-clippy.log.gz"
+      ]
+    },
+    {
+      "kind": "real native-series adapter defect",
+      "result": "expanded library run 159 passed, 1 failed, 3 existing ignores; native exact-zero half-integer grid slots were incorrectly rejected",
+      "fix": "Skip coefficient.is_zero() before integral exponent admission; nonzero fractional support remains Unsupported. Independent direct positive/control tests and nonconstant root action regression pass in final gate.",
+      "log": "failed-series-final-lib.log.gz",
+      "source": "failed-series-source.patch.gz",
+      "manifest": "failed-series-final-source.json",
+      "retained_native_binary_sha256": "7148e6ff1c2d1d7e8985ed79cfb4f8cf966c16a01df62061bc8e1c27e040c31d",
+      "native_probe": "native-series-probe.rs"
+    }
+  ],
+  "open_requirements": [
+    "Non-Gaussian leading root constants require selected native extension-field integration",
+    "Symbolic dimensional-regulator sector projection remains distinct from finite epsilon coefficient limits",
+    "Large-system admission/performance and broader upstream parity remain open"
+  ],
+  "limitations": [
+    "Native symbolic resource limits are conservative degree/height/work admission estimates, not hard memory/time quotas",
+    "Matching/truncation uncertainty remains independently refined estimated evidence conditional on asserted exact relations; no global or joint interval-feasibility certificate",
+    "Python/stubgen compiled; this stage has no new Python binding, installed host wheel or publication runtime validation"
+  ],
+  "unchanged": [
+    "Cargo/native dependency pins and owner code",
+    "Python bindings",
+    "Physical transport/cache codec representation and schema 7",
+    "Publication runtime and frozen artifacts"
+  ]
+}

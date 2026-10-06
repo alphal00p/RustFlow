@@ -332,11 +332,14 @@ impl PreparedEndpoint {
         );
         if let Some(constraints) = constraints {
             constraints.preflight(identity, request.range, context)?;
-            if !source.roots.is_empty() {
-                return Err(Error::Unsupported("constrained registered-root endpoints require an exact sheet-consistency proof".into()));
-            }
         }
-        let prepared = source.prepare_frobenius(request.options.max_lift_dimension, context)?;
+        let max_dimension = constraints.map_or(request.options.max_lift_dimension, |constraints| {
+            request
+                .options
+                .max_lift_dimension
+                .min(constraints.limits.max_dimension)
+        });
+        let prepared = source.prepare_frobenius(max_dimension, context)?;
         if constraints.is_none() {
             prepared.rational_preparation().admit_endpoint_support(
                 identity.dimension().checked_mul(count).ok_or_else(|| {
@@ -462,6 +465,8 @@ impl PreparedEndpoint {
             let (map, reconstruction) = if let Some(constraints) = &self.constraints {
                 match self.prepared.constrained_endpoint_map(
                     &parameter,
+                    &self.request.chart.matching_parameter,
+                    &seeds,
                     p,
                     order,
                     self.request.chart.winding,

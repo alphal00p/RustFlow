@@ -1,0 +1,11 @@
+{
+  "scope": "unfiltered Rust library tests",
+  "passed": 162,
+  "failed": 0,
+  "ignored": 3,
+  "runner_session": 24829,
+  "library_transition_tool_chunk": "7d0666",
+  "source_manifest": "final-source.json",
+  "binary_sha256": "2fe4003b461849390856d05b98d7d87ff6eae22e281b34413c0c6d0fe7f4909b",
+  "source_files": 200
+}
