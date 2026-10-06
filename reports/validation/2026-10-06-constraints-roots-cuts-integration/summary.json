@@ -1,0 +1,834 @@
+{
+  "schema": 1,
+  "status": "passed_after_test_only_repair",
+  "recorded_utc": "2026-10-06T04:48:16.927198+00:00",
+  "tested_commit": "0afd889f6b48c892bce189d705163e1f9a1ab12f",
+  "initial_source_commit": "a67ccea0e4d01e1e852befc2d5c9cf193457b073",
+  "scope": "Complete release unit/integration target coverage plus doctest, split after an inherited schema-version test assertion failure. Production sources unchanged between the two runs; failed target rerun once and remaining targets completed. New Python endpoint constraints and explicit mass-slot bindings are not yet in this source. Frozen community publication wheel and scientific banks unchanged.",
+  "source_files_verified": 278,
+  "test_only_repair": [
+    "tests/physical_conditions.rs"
+  ],
+  "execution": {
+    "initial_session": 57818,
+    "initial_exit_code": 101,
+    "initial_chunk": "90df7f",
+    "continuation_session": 96674,
+    "continuation_exit_code": 0,
+    "continuation_chunk": "ad5925"
+  },
+  "release_tests": {
+    "passed": 651,
+    "failed": 0,
+    "ignored": 15,
+    "targets": [
+      {
+        "target": "unittests src/lib.rs",
+        "log": "release-tests.log",
+        "passed": 165,
+        "failed": 0,
+        "ignored": 5
+      },
+      {
+        "target": "unittests src/bin/rustflow.rs",
+        "log": "release-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/accuracy_fallback.rs",
+        "log": "release-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/algebraic.rs",
+        "log": "release-tests.log",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/algebraic_cache.rs",
+        "log": "release-tests.log",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/algebraic_endpoints.rs",
+        "log": "release-tests.log",
+        "passed": 11,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/algebraic_kinematic.rs",
+        "log": "release-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/algebraic_quotients.rs",
+        "log": "release-tests.log",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/amf_mass_sheet.rs",
+        "log": "release-tests.log",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/analytic_origin.rs",
+        "log": "release-tests.log",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/asymptotic.rs",
+        "log": "release-tests.log",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/banana_equal.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/banana_unequal.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/cache.rs",
+        "log": "release-tests.log",
+        "passed": 11,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/cache_lower_bounds.rs",
+        "log": "release-tests.log",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/canonical_algebraic.rs",
+        "log": "release-tests.log",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/canonical_cache.rs",
+        "log": "release-tests.log",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/cli.rs",
+        "log": "release-tests.log",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/cli_algebraic.rs",
+        "log": "release-tests.log",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/cli_canonical.rs",
+        "log": "release-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/cli_epsilon_shearing.rs",
+        "log": "release-tests.log",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/cli_fallback.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/combinations.rs",
+        "log": "release-tests.log",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/complex_cache.rs",
+        "log": "release-tests.log",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/complex_kinematics.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/complex_ode.rs",
+        "log": "release-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/conditioning.rs",
+        "log": "release-tests.log",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/constrained_singular_endpoints.rs",
+        "log": "release-tests.log",
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/continuation_budget.rs",
+        "log": "release-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/continuation_empty_poles.rs",
+        "log": "release-tests.log",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/contour_endpoints.rs",
+        "log": "release-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/contour_factorization.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/contour_signs.rs",
+        "log": "release-tests.log",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/core.rs",
+        "log": "release-tests.log",
+        "passed": 13,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/cuts.rs",
+        "log": "release-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/diffexp.rs",
+        "log": "release-tests.log",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/end_to_end.rs",
+        "log": "release-tests.log",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/epsilon_algebraic.rs",
+        "log": "release-tests.log",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/epsilon_cache.rs",
+        "log": "release-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/epsilon_physical_family.rs",
+        "log": "release-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/epsilon_shearing.rs",
+        "log": "release-tests.log",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/fivepoint_mzz.rs",
+        "log": "release-tests.log",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/fivepoint_planar.rs",
+        "log": "release-tests.log",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/fivepoint_prescribed_cache.rs",
+        "log": "release-tests.log",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/fivepoint_zmz.rs",
+        "log": "release-tests.log",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/fivepoint_zmz_sector.rs",
+        "log": "release-tests.log",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/fivepoint_zzz.rs",
+        "log": "release-tests.log",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/frobenius.rs",
+        "log": "release-tests.log",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/ft.rs",
+        "log": "release-tests.log",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/gg_hg.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/gg_hg_amplitude.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/gg_hg_anchors.rs",
+        "log": "release-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/hepkit.rs",
+        "log": "release-tests.log",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/hepkit_cuts.rs",
+        "log": "release-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/integrand.rs",
+        "log": "release-tests.log",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/kinematic_derivative.rs",
+        "log": "release-tests.log",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/kinematics.rs",
+        "log": "release-tests.log",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/linear.rs",
+        "log": "release-tests.log",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/linear_two_directions.rs",
+        "log": "release-tests.log",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/massless_phase_space.rs",
+        "log": "release-tests.log",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/mg5_pointbank.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/mixed_cut_flow.rs",
+        "log": "release-tests.log",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/mobius.rs",
+        "log": "release-tests.log",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/mobius_cache.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/mpl_additional.rs",
+        "log": "release-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/multimass_physical.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_arity.rs",
+        "log": "release-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_cut_interfaces.rs",
+        "log": "release-tests.log",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_family_cache.rs",
+        "log": "release-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_graphs.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_parametric.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_physical.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_symmetry.rs",
+        "log": "release-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/nonplanar108.rs",
+        "log": "release-tests.log",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/numeric_rounding.rs",
+        "log": "release-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/pade.rs",
+        "log": "release-tests.log",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/partial_cut_boundaries.rs",
+        "log": "release-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/phase_space.rs",
+        "log": "release-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/physical_conditions.rs",
+        "log": "remaining-tests.log",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/physical_family.rs",
+        "log": "remaining-tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/physical_preparation_options.rs",
+        "log": "remaining-tests.log",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/physical_targets.rs",
+        "log": "remaining-tests.log",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/physical_transport.rs",
+        "log": "remaining-tests.log",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/precision_cache_fallback.rs",
+        "log": "remaining-tests.log",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/prepared_frobenius.rs",
+        "log": "remaining-tests.log",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/prescribed_cache.rs",
+        "log": "remaining-tests.log",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/prescribed_contours.rs",
+        "log": "remaining-tests.log",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/python_algebraic_transport.rs",
+        "log": "remaining-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_cut_interfaces.rs",
+        "log": "remaining-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_prescribed_transport.rs",
+        "log": "remaining-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/recursive.rs",
+        "log": "remaining-tests.log",
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/reduction_graphs.rs",
+        "log": "remaining-tests.log",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/regions.rs",
+        "log": "remaining-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/residual_arithmetic.rs",
+        "log": "remaining-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/scoped_reductions.rs",
+        "log": "remaining-tests.log",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/single_mass.rs",
+        "log": "remaining-tests.log",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/source_fingerprint.rs",
+        "log": "remaining-tests.log",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/supplied_flow.rs",
+        "log": "remaining-tests.log",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/supplied_singular_endpoints.rs",
+        "log": "remaining-tests.log",
+        "passed": 19,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/symbolica_root_scaling.rs",
+        "log": "remaining-tests.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/tensor_vacuum.rs",
+        "log": "remaining-tests.log",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/transport_cache.rs",
+        "log": "remaining-tests.log",
+        "passed": 12,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/weighted_uncertainty.rs",
+        "log": "remaining-tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      }
+    ]
+  },
+  "child_checks": [
+    {
+      "log": "release-tests.log",
+      "parent": "unittests src/lib.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/symbolica_amflow-47f5668f32c80192)",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "log": "release-tests.log",
+      "parent": "unittests src/lib.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/symbolica_amflow-47f5668f32c80192)",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "log": "release-tests.log",
+      "parent": "unittests src/lib.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/symbolica_amflow-47f5668f32c80192)",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "log": "release-tests.log",
+      "parent": "unittests src/lib.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/symbolica_amflow-47f5668f32c80192)",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "log": "release-tests.log",
+      "parent": "unittests src/lib.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/symbolica_amflow-47f5668f32c80192)",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "log": "release-tests.log",
+      "parent": "unittests src/lib.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/symbolica_amflow-47f5668f32c80192)",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "doctests": {
+    "passed": 1,
+    "failed": 0
+  },
+  "checks": {
+    "fmt": "passed before and after test repair",
+    "strict_all_target_python_stubgen_clippy": "passed before and after test repair"
+  },
+  "retained_failure": "physical_conditions expected schema5, serializer correctly wrote schema7. Test now requires version>=6 and rejects every older version; no serializer change.",
+  "compiled_source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "61b6cd50bac933655f693ff93e459b8ffa9136b1bf8f0fa18c1b973516ffe296"
+  },
+  "library": {
+    "original": "/common/dev/amflow-native-cut-interfaces/target/release/deps/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "archive": "/common/dev/amflow/target/constraints-roots-cuts-release-0afd889/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "sha256": "3a330503f25e4505dd61c64fba9c86ef1201be98acdcda0b0617450ccef5ab6e"
+  },
+  "limits": [
+    "15 explicitly opt-in tests remain ignored; this gate does not repeat every long scientific acceptance.",
+    "Separate frozen publication acceptance is not repeated by this run.",
+    "No general AMFlow/DiffExp feature or performance parity claim."
+  ],
+  "artifact_sha256": {
+    "clippy-corrected.log.gz": "62ee045e0f27772bd19edc3cc4cb175fc6b2451a66ad889ac2c05a58d8e75440",
+    "clippy.log.gz": "ca14b0dbbfb0dceb06080db6d09ee0b1745ddddbad622e73982771ca04ad890e",
+    "compiled-source-digests.json": "5a64c589f685aa190a5d75789c67930cd5d3544cf3b6b285d966c4409dfcda0a",
+    "corrected-processes.json": "74372e268975d0c243ec938087475a85dcd60ca237e98b9387fdf0a953f33e15",
+    "dependency-ownership.json": "3c20f38fbf0bdd81142017638101acfe3292e7cbb9c8a1725dd8aeceee2cd3a4",
+    "doctests.log.gz": "cacb648d07d1b7fd61e7d4eaaad8f5eb2bacc541a700b94a7127556204bc0a1d",
+    "fmt-corrected.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "processes.json": "1e9366dc48e07a4b755611d10bd5a0ed2106b3dc9013f1389126bf52713fdd3e",
+    "release-tests.log.gz": "492599dfad5db48ffa7dad4857f68257ade61d87b0b2c6edf205a86ab8390709",
+    "remaining-targets.json": "302a6dd77656b9dadf51d84b2f25f16985a6f2d48329b037e85ba032f938e886",
+    "remaining-tests.log.gz": "494f42276a436d81ac1584bc67d4686e6580031d0917fdb33ec1d4496e2d518d",
+    "source-after-failed-run.json": "508bd025c09d500460a9d18b22ed47665e51c0130240a433951ca01b9b46259b",
+    "source-before.json": "83d27458e4dffd6eb2904ddaaaa1369e733b4e2e12ab72b3450461236be6d775",
+    "source-corrected-after.json": "18a67c01b34298694a289443ec4a2ff33c0b887afdeab00689e1200de384626a",
+    "source-corrected-before.json": "206c112aea1c8952fdf3408bbb7252123e86b9b783a3b03875ef1d459d4a4184"
+  }
+}

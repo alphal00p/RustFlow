@@ -1,0 +1,8 @@
+{
+  "output": "/common/dev/amflow-native-cut-interfaces/target/release/build/symbolica-amflow-7d91f93e51f25f3e/output",
+  "digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "61b6cd50bac933655f693ff93e459b8ffa9136b1bf8f0fa18c1b973516ffe296"
+  }
+}

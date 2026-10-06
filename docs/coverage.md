@@ -10,6 +10,18 @@ RustRed is not established. External reference uncertainty caps the EW-square
 comparison at 19 relative digits. The broader AMFlow/DiffExp parity goal remains
 open; the milestones below retain their original scope and source provenance.
 
+The latest [full release coverage](../reports/validation/2026-10-06-constraints-roots-cuts-integration/summary.json)
+passes **651 top-level unit/integration tests across 103 targets**, one doctest
+and six separate cache child checks, with 15 tests explicitly opt-in. Formatting
+and strict all-target Python/stub-generation Clippy pass. The first run stopped
+at an inherited test assertion expecting cache schema 5 instead of 7; after a
+test-only repair, that target and all remaining targets passed. All 278 recorded
+inputs were verified, with no production-source change between those runs.
+This integrates rational endpoint constraints, recursive partial cut placements,
+dense registered-root Python transport and balanced native series construction;
+the newer constraint/slot Python bindings and immutable algebraic preparation
+have separate gates. The frozen community publication wheel is unchanged.
+
 The latest isolated milestones add:
 
 - [Exact correlated rational endpoint constraints](../reports/validation/2026-10-06-constrained-singular-endpoints/validation.json):
