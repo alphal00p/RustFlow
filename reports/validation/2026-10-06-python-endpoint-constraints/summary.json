@@ -1,0 +1,164 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "recorded_utc": "2026-10-06T04:22:48.295609+00:00",
+  "tested_commit": "7001f9befaa1c52c86b691871bb9d6bc7417a3ae",
+  "scope": "Exact rational endpoint constraint declarations and existing native dispatch in embedded Python; unchanged mathematical solver and cache schema; community publication runtime unchanged.",
+  "execution": {
+    "session": 93650,
+    "exit_code": 0,
+    "tool_chunk": "4d9207"
+  },
+  "source_files_verified_before_after_and_against_commit": 280,
+  "release_tests": {
+    "passed": 42,
+    "failed": 0,
+    "ignored": 0,
+    "targets": [
+      {
+        "target": "Running tests/constrained_singular_endpoints.rs (/common/dev/amflow/target/release/deps/constrained_singular_endpoints-5d53be169c9926bf)",
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/python_algebraic_transport.rs (/common/dev/amflow/target/release/deps/python_algebraic_transport-1485f4739f7fdc0a)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/python_endpoint_constraints.rs (/common/dev/amflow/target/release/deps/python_endpoint_constraints-9e77ade5b1082303)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/python_prescribed_transport.rs (/common/dev/amflow/target/release/deps/python_prescribed_transport-476848dd320f7ab3)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/supplied_singular_endpoints.rs (/common/dev/amflow/target/release/deps/supplied_singular_endpoints-68b6cf9865f6b0f2)",
+        "passed": 19,
+        "failed": 0,
+        "ignored": 0
+      }
+    ]
+  },
+  "checks": [
+    {
+      "name": "fmt",
+      "command": [
+        "cargo",
+        "fmt",
+        "--all",
+        "--",
+        "--check"
+      ],
+      "exit_code": 0,
+      "seconds": 1.2662156918086112
+    },
+    {
+      "name": "clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--release",
+        "--all-targets",
+        "--features",
+        "python_stubgen",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "seconds": 18.32556595467031
+    },
+    {
+      "name": "tests",
+      "command": [
+        "cargo",
+        "test",
+        "--locked",
+        "--release",
+        "--features",
+        "python_stubgen",
+        "--test",
+        "python_endpoint_constraints",
+        "--test",
+        "python_prescribed_transport",
+        "--test",
+        "python_algebraic_transport",
+        "--test",
+        "constrained_singular_endpoints",
+        "--test",
+        "supplied_singular_endpoints",
+        "--",
+        "--test-threads=8"
+      ],
+      "exit_code": 0,
+      "seconds": 44.501374727115035
+    }
+  ],
+  "compiled_source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "cd3ade605410a773ade3667e073ca19db8d9fff51fe0a6467ed9d92548cbdc27"
+  },
+  "library": {
+    "original": "/common/dev/amflow/target/release/deps/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "archive": "/common/dev/amflow/target/python-endpoint-constraints-release-7001f9b/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "sha256": "5a8bc112b95bdcad4b260b080a56c010d14b3515fef008c00a8989e45c558b91"
+  },
+  "coverage": [
+    "Analytic complex constant solutions, general and canonical epsilon matrices, prescribed endpoint routes.",
+    "Exact relation/property roundtrip, native typed validation, contradictory assertions and arbitrarily tiny exact divergent values.",
+    "Every-component numerical consistency; inherited source accuracy caps and native arbitrary-precision values.",
+    "Binary reload, terminal declarations/provenance, distinct assertion identity, work limits excluded from mathematical cache identity.",
+    "Cancellation and endpoint admission on exact hits, unchanged cache on errors, root constrained spaces refused by native owner.",
+    "Native generated stubs; existing unconstrained, general-root and prescribed Python tests remain passing.",
+    "Cancellation coverage is pre-cancellation, including an exact cache hit; this milestone has no independent in-flight cancellation or concurrent GIL probe. Computation uses the existing detached native owner."
+  ],
+  "native_reuse_review": [
+    "Exact-core owner: native declaration validation and complete endpoint preflight retained; no blocker.",
+    "Independent interface/cache review: no blocker; native atoms, four-way dispatch, cache identity/provenance and typed failures preserved."
+  ],
+  "development_history": {
+    "initial_check": {
+      "session": 10477,
+      "exit_code": 0,
+      "tool_chunk": "702854"
+    },
+    "initial_test": {
+      "session": 80543,
+      "exit_code": 101,
+      "tool_chunk": "47a773",
+      "reason": "Preliminary test expected UnsupportedInputError for absent exact support; native owner correctly returns AccuracyError. Test exception expectations were corrected and test-only literal construction was tightened during the exploratory compile. Production source unchanged by those test corrections."
+    },
+    "corrected_test": {
+      "session": 87935,
+      "exit_code": 0,
+      "tool_chunk": "f18d84"
+    }
+  },
+  "limitations": [
+    "Constrained registered-root spaces and non-Gaussian exact coefficient fields remain unsupported.",
+    "No symbolic dimensional-regulator sector projection or global forward-error certificate.",
+    "No rebuilt community host wheel, full-amplitude acceptance or timing claim."
+  ],
+  "artifact_sha256": {
+    "clippy.log.gz": "c2c721cad7b435b542805a42a957d500efd29a5d6ac53035a19fc331d731fa32",
+    "current-tests.log.gz": "efbbba36101f1dba827fbb4df5468c04b1e71f3c17fd1fb987d935b7c5f40279",
+    "dependency-ownership.json": "63374ed75e19630c3af216b6fa8db835f15bb1bba7a0fe815adcc3715ec6b8e8",
+    "fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "initial-check.log.gz": "075c7fec9e2fff9291e844dbe966d92f8bfed4a6645e6c333a71c99c07b5d7e7",
+    "initial-tests.log.gz": "deb823f276b1691a46fbe88e43e2f51d25c0a9ea3e64230472a6675d8939856a",
+    "processes.json": "0a32244f45d23f104d28ae6a0d10a6a8e7a27b1a3f83ee2231ca18cca0981e43",
+    "source-after.json": "36c8b39fdf65b8231916d0590b31a7da05644e1eb0fcd112ecba6a1fc31a82db",
+    "source-before.json": "614609757fe2cc4081de3d88fa89617250b138666bd75d08a264b620a659c315",
+    "tests.log.gz": "6147925b062b037a2869bb08c51da0e1fa65df4a45f1b1a62e81b6d2d2ed256a"
+  }
+}
