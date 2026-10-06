@@ -23,6 +23,23 @@ sector selection and partial cut placements remain open. This targeted gate
 does not rebuild the community publication wheel or repeat its long scientific
 acceptance.
 
+The [Python prescribed-contour milestone](../reports/validation/2026-10-06-python-prescribed-transport/summary.json)
+passes **58 release tests across seven targets**, formatting and strict
+Python/stub-generation Clippy. `ContinuationPrescription` connects descriptive
+Python transport and endpoint methods to the existing native planner. Native
+exact-coordinate comparison is shared by source selection, Python admission and
+cache hits; a compatible hit needs no new homotopy admission but still respects
+the source policy and root germ. Both analytic logarithm sides, canonical root
+sheets, typed failures, cancellation, stubs and terminal restart are checked.
+The report preserves failed preliminary assertions and the exact-hit regression;
+none is counted as passing evidence before the correction. This is embedded
+Python validation, separate from the frozen community extension.
+The subsequent [main integration gate](../reports/validation/2026-10-06-python-contour-integration/summary.json)
+passes **62 release tests across nine targets**, including the cut Python API
+and residual-arithmetic regressions, with formatting and strict Clippy. All 262
+source/input hashes match the tested commit and remained unchanged during the
+run. The longer scientific publication acceptance remains a separate revision.
+
 The [combined Padé/cut release](../reports/validation/2026-10-06-pade-cut-integration/summary.json)
 passes **574 release unit/integration tests** and one doctest, with 13 explicit
 opt-in tests ignored, formatting and strict Python/stub-generation all-target

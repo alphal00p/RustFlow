@@ -46,6 +46,16 @@ into the frozen notebook publication wheel. The
 remaining coverage, without treating successful benchmark families as proof of
 arbitrary kinematic, mass or loop-count support.
 
+The [Python prescribed-contour interface](python-prescribed-transport.md) now
+binds native exact polynomial declarations through `ContinuationPrescription`.
+It reuses the same continuation, branch and endpoint-cache owners; nonconstant
+paths require explicit admission, while exact compatible hits retain source
+policy without planning a new route. Its isolated milestone passes 58 release
+tests, formatting and strict Python/stub-generation Clippy, including both
+logarithm sides, root sheets, cancellation and endpoint restart.
+The subsequent main integration passes 62 release tests across nine targets
+with the same static checks and unchanged source hashes.
+
 The [unified-flow design and generality audit](unified-flow.md) makes reduced-family
 evaluation the central interface. AMF direct evaluation, AMF-generated physical
 boundaries and DiffExp-style transport share the numerical engine. Supplied

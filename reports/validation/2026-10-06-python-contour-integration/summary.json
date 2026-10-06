@@ -1,0 +1,110 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-06T03:45:33.761304+00:00",
+  "status": "passed",
+  "tested_commit": "b33769eafcc31831733706e2a07291a9584e730e",
+  "source_files_verified_before_after_and_against_commit": 262,
+  "scope": "Targeted main integration of prescribed Python transport after the previously validated endpoint/cut/adaptive-residual release. Embedded Python and generated stubs; publication wheel unchanged.",
+  "execution": {
+    "session": 44417,
+    "exit_code": 0,
+    "tool_chunk": "262656",
+    "shell": "Sequential commands under set -e; source hashes rechecked after completion."
+  },
+  "checks": {
+    "format": {
+      "command": "cargo fmt --all -- --check",
+      "exit_code": 0
+    },
+    "clippy": {
+      "command": "cargo clippy --locked --release --all-targets --features python_stubgen -- -D warnings",
+      "exit_code": 0
+    }
+  },
+  "release_tests": {
+    "command": "cargo test --locked --release --features python_stubgen --test python_prescribed_transport --test prescribed_cache --test physical_transport --test transport_cache --test supplied_singular_endpoints --test precision_cache_fallback --test algebraic_cache --test python_cut_interfaces --test residual_arithmetic -- --test-threads=8",
+    "passed": 62,
+    "failed": 0,
+    "ignored": 0,
+    "targets": [
+      {
+        "target": "Running tests/algebraic_cache.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/algebraic_cache-5ed8c0d81f8ddbbc)",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/physical_transport.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/physical_transport-589817d75c532205)",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/precision_cache_fallback.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/precision_cache_fallback-d2f333dde3d53ff0)",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/prescribed_cache.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/prescribed_cache-a73394a27d9780ec)",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/python_cut_interfaces.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/python_cut_interfaces-0c93b36f06af37f0)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/python_prescribed_transport.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/python_prescribed_transport-476848dd320f7ab3)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/residual_arithmetic.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/residual_arithmetic-2a1503c86646de0e)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/supplied_singular_endpoints.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/supplied_singular_endpoints-68b6cf9865f6b0f2)",
+        "passed": 19,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/transport_cache.rs (/common/dev/amflow-native-cut-interfaces/target/release/deps/transport_cache-1b93bbfbe5052ab9)",
+        "passed": 12,
+        "failed": 0,
+        "ignored": 0
+      }
+    ]
+  },
+  "compiled_source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "399e697e30e630b9340aef8be0f10117ef5ad97201b8e1ec2be4a561cdbb7100"
+  },
+  "library": {
+    "original": "/common/dev/amflow-native-cut-interfaces/target/release/deps/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "archive": "/common/dev/amflow/target/python-contour-release-b33769e/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "sha256": "270d68d80bd20c3ce46e9ec4a45226009fee03a6830150fa4cf03008c9d264e5"
+  },
+  "previous_gate": "../2026-10-06-endpoint-cut-arithmetic-integration/summary.json",
+  "isolated_milestone": "../2026-10-06-python-prescribed-transport/summary.json",
+  "limits": [
+    "No full release, doctest or long scientific acceptance rerun is implied by this targeted integration gate.",
+    "Existing publication extension and scientific boundary banks are unchanged.",
+    "General constrained/dimensional endpoint selection, broader cut recursion and performance parity remain open."
+  ],
+  "artifact_sha256": {
+    "clippy.log.gz": "d59aed7ca34485ed2bcea330a223514dfa53515ddcc0bd59caece3767d07be7b",
+    "dependency-ownership.json": "12b434db1389462efcbf212d422c14728bdcdce8a286bfd5027366db0b8ad6af",
+    "fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "release-tests.log.gz": "a6775485ee541fb2a5a9e16f8c32e6d99673b79d7799fed2d72c3f001859de9a",
+    "source-before.json": "333da877b9e0130b3c1347217404c3696a176bab1fa38958316b3a5d5b07e4cd"
+  }
+}
