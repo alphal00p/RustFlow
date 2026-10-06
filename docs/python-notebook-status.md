@@ -76,7 +76,18 @@ amplitude regression, both feature configurations of strict release Clippy and
 formatting pass. This is a separate constructor measurement, not a new complete
 notebook or browser timing.
 
-The notebook working branch uses guard 30/order 32 only for physical transport;
+A subsequent [smaller-order comparison](../reports/performance/2026-10-06-physical-transport-order16/README.md)
+reduces the native solver time to 68.106 seconds with guard 20/order 16. All
+4,360 final coefficients, 8,720 inserted coefficients, eight form factors and
+three observables pass independent exact-arithmetic checks. The master accuracy
+estimate remains 28 digits and observable estimates remain 35/36/47. A guard-10
+trial took 64.383 seconds but left the master estimate at 20 digits; the notebook
+retains guard 20. The complete native controller rerun passed with 75.295-second
+initial transport including checkpoint I/O, 0.626-second seed import and
+0.498-second warm transport. That extension predates the staged amplitude
+optimization; these are not browser measurements.
+
+The notebook working branch uses guard 20/order 16 only for physical transport;
 automatic AMF boundary settings are unchanged. It adds a supplied-values control,
 cooperative single-thread execution between checkpointed configurations, and a
 browser export helper that includes the required external inputs. Integration

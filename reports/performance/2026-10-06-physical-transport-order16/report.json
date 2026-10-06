@@ -1,0 +1,361 @@
+{
+  "schema": "higgs-jet-native-order16-profile-v1",
+  "status": "passed",
+  "date": "2026-10-06",
+  "scope": "Native single-core supplied-boundary transport and notebook controller. No WASM performance claim.",
+  "source_digest": "a8e17584df583d823059db180f72a08fd18082d057578b16a3b3e4348bad76a2",
+  "dependency_digest": "9ee6eced2bc39b05bb333b1b021ab556d2a1bb790a255205d3f141fc64cc96ff",
+  "input_blake3": "a7134112b899e7d95dd95deb73a61d22e9379894c0d312cfbeae28c8d261202e",
+  "binary": {
+    "path": "/common/dev/amflow-physical-compiled-reuse/target/physical-compiled-reuse-evidence/full16-native",
+    "size": 763556480,
+    "sha256": "a85a748fd412cb6e20f39ea59d4caf8b14c2222476a45d751f6c785175421b75"
+  },
+  "notebook_commit": "9507de0edbbc9214f5d8e1ee8ff82e286024877a",
+  "selected": {
+    "digits": 20,
+    "guard_digits": 20,
+    "series_order": 16,
+    "workers": 1
+  },
+  "selection_reason": "Guard10 saves5.5percent but reduces master accuracy estimate28to20; guard20 preserves margin for reuse.",
+  "profiles": [
+    {
+      "file": "full16-high.json",
+      "sha256": "161c2f13376ae6459228e59b078cb7b50bb950319e1f475b07a8476b3d809350",
+      "settings": {
+        "amplitude_digits": 20,
+        "amplitude_guard_digits": 40,
+        "digits": 20,
+        "form_factor_digits": 100,
+        "guard_digits": 60,
+        "series_order": 96,
+        "workers": 1
+      },
+      "solver_seconds": 270.213073985,
+      "diagnostics": [
+        "FlowDiagnostics { fundamental_boundary_charts: 0, fundamental_boundary_fallback: None, fundamental_boundary_retry: None, pade_trials: 0, pade_steps: 0, pade_fallbacks: 0, last_pade_fallback: None, steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 349, expansion_order: 128, conditioning_digits: Some(70) }"
+      ],
+      "achieved_master_digits": [
+        37
+      ],
+      "input_caps": [
+        40
+      ],
+      "observable_relative_digits": {
+        "electroweak_squared": 35,
+        "interference": 36,
+        "effective_squared": 47
+      },
+      "final_cache_entries": 48
+    },
+    {
+      "file": "full16-guard30-order32.json",
+      "sha256": "fdccae157788c7750c5ff2f4d470bef9242c75bfa96cfe6c0058f6ab70d69ddb",
+      "settings": {
+        "amplitude_digits": 20,
+        "amplitude_guard_digits": 40,
+        "digits": 20,
+        "form_factor_digits": 100,
+        "guard_digits": 30,
+        "series_order": 32,
+        "workers": 1
+      },
+      "solver_seconds": 91.512430188,
+      "diagnostics": [
+        "FlowDiagnostics { fundamental_boundary_charts: 0, fundamental_boundary_fallback: None, fundamental_boundary_retry: None, pade_trials: 0, pade_steps: 0, pade_fallbacks: 0, last_pade_fallback: None, steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 249, expansion_order: 64, conditioning_digits: Some(45) }"
+      ],
+      "achieved_master_digits": [
+        37
+      ],
+      "input_caps": [
+        40
+      ],
+      "observable_relative_digits": {
+        "electroweak_squared": 35,
+        "interference": 36,
+        "effective_squared": 47
+      },
+      "final_cache_entries": 48
+    },
+    {
+      "file": "full16-guard20-order16.json",
+      "sha256": "f2139357e6db0fa470d40bc55c2b91958cc011c1e049244af6f7b90db14ba20e",
+      "settings": {
+        "amplitude_digits": 20,
+        "amplitude_guard_digits": 40,
+        "digits": 20,
+        "form_factor_digits": 100,
+        "guard_digits": 20,
+        "series_order": 16,
+        "workers": 1
+      },
+      "solver_seconds": 68.105766538,
+      "diagnostics": [
+        "FlowDiagnostics { fundamental_boundary_charts: 0, fundamental_boundary_fallback: None, fundamental_boundary_retry: None, pade_trials: 0, pade_steps: 0, pade_fallbacks: 0, last_pade_fallback: None, steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 216, expansion_order: 48, conditioning_digits: Some(37) }"
+      ],
+      "achieved_master_digits": [
+        28
+      ],
+      "input_caps": [
+        40
+      ],
+      "observable_relative_digits": {
+        "electroweak_squared": 35,
+        "interference": 36,
+        "effective_squared": 47
+      },
+      "final_cache_entries": 48
+    },
+    {
+      "file": "full16-guard10-order16.json",
+      "sha256": "6b3f6a8b4f8dd34c67d6a39035aa8d37efe96beb3edc0fb0898f28ebc62c9522",
+      "settings": {
+        "amplitude_digits": 20,
+        "amplitude_guard_digits": 40,
+        "digits": 20,
+        "form_factor_digits": 100,
+        "guard_digits": 10,
+        "series_order": 16,
+        "workers": 1
+      },
+      "solver_seconds": 64.383390414,
+      "diagnostics": [
+        "FlowDiagnostics { fundamental_boundary_charts: 0, fundamental_boundary_fallback: None, fundamental_boundary_retry: None, pade_trials: 0, pade_steps: 0, pade_fallbacks: 0, last_pade_fallback: None, steps: 1, rejected_steps: 0, predicate_evaluations: 1, superseded_successes: 0, working_bits: 183, expansion_order: 48, conditioning_digits: Some(29) }"
+      ],
+      "achieved_master_digits": [
+        20
+      ],
+      "input_caps": [
+        40
+      ],
+      "observable_relative_digits": {
+        "electroweak_squared": 30,
+        "interference": 31,
+        "effective_squared": 47
+      },
+      "final_cache_entries": 48
+    }
+  ],
+  "checks": {
+    "independent_exact_rational_checkers": 2,
+    "final_complex_coefficients": 4360,
+    "inserted_complex_coefficients": 8720,
+    "form_factors": 8,
+    "observables": 3,
+    "all_within_combined_errors_and_requested20": true,
+    "original_input_caps_unchanged": 40,
+    "derived_caps_follow_achieved_accuracy": true,
+    "native_notebook_tests_passed": 75,
+    "marimo_lint": "passed",
+    "whitespace": "passed"
+  },
+  "controller": {
+    "source_rustflow_commit": "7096ba8e1f4d7edda4402f9ff01c961f6f3e6a4e",
+    "stage_seconds": {
+      "supplied_boundaries": 0.6261425330303609,
+      "transport": 75.29549654619768,
+      "amplitude": 37.175344720017165,
+      "restart": 2.353642287198454,
+      "warm_transport": 0.4975027949549258,
+      "warm_amplitude": 2.6675976552069187
+    },
+    "transport_comparison": {
+      "coefficients": 4360,
+      "digits": 20,
+      "maximum_scaled_difference": "1.698022952500849738236628302047616E-30"
+    },
+    "verified_cache_entries": 48,
+    "references_loaded_only_after_native_success": true,
+    "runtime_unchanged": true
+  },
+  "nearby": {
+    "stage_seconds": {
+      "warm_original_transport": 0.5431769313290715,
+      "nearby_transport": 64.18941897107288,
+      "nearby_first_amplitude": 37.0239932728
+    },
+    "previous_destination_selected_for_all16": true,
+    "achieved_master_digits": [
+      25
+    ],
+    "input_caps": [
+      28
+    ],
+    "final_cache_entries": 80,
+    "observable_relative_digits": {
+      "effective_squared": 47,
+      "electroweak_squared": 23,
+      "interference": 24
+    }
+  },
+  "reference_note": "archived EW component inputs support19 relative digits; used only for comparison, never as evaluation input",
+  "timing_limits": "One run per profile on shared EPYC9754; baselineCPU43, newprofiles/controllerCPU44. Solver excludes setup/Python/I/O; controller includes checkpointI/O, excludes interpreter/modelsetup. Older amplitude constructor in native controller.",
+  "evidence": {
+    "path": "evidence.tar.gz",
+    "bytes": 15276909,
+    "sha256": "31fadad2991d04b3dfd34acb4ca3b78ded38d702941b3369ff6735afbf5e5c4b",
+    "members": {
+      "native/full16-high.json": {
+        "bytes": 13213281,
+        "sha256": "161c2f13376ae6459228e59b078cb7b50bb950319e1f475b07a8476b3d809350"
+      },
+      "native/full16-guard30-order32.json": {
+        "bytes": 10730099,
+        "sha256": "fdccae157788c7750c5ff2f4d470bef9242c75bfa96cfe6c0058f6ab70d69ddb"
+      },
+      "native/full16-guard20-order16.json": {
+        "bytes": 9955821,
+        "sha256": "f2139357e6db0fa470d40bc55c2b91958cc011c1e049244af6f7b90db14ba20e"
+      },
+      "native/full16-guard10-order16.json": {
+        "bytes": 9136530,
+        "sha256": "6b3f6a8b4f8dd34c67d6a39035aa8d37efe96beb3edc0fb0898f28ebc62c9522"
+      },
+      "native/full16-binary.json": {
+        "bytes": 214,
+        "sha256": "d347ca107ec8050c7a349d8961401cac7e72bd43e7f75483f0349c0511f94a8a"
+      },
+      "native/full_initial_transport_profile.rs": {
+        "bytes": 16029,
+        "sha256": "007a06870ac5ab804651c5d5b0b6ee0625096de2418df965f18843f7789cd964"
+      },
+      "checks/compare_adaptive_profiles.py": {
+        "bytes": 7344,
+        "sha256": "ee9b1cef1041d1cceb7a9b71026e1ef2c0fec82a1fd92f13a377880ef0fe68e9"
+      },
+      "checks/compare_native_compact.py": {
+        "bytes": 7707,
+        "sha256": "abf9c9a4907db4c32c2b090dee5d7bed36ff1a8ae2d2e4ffc055c32684d72144"
+      },
+      "checks/independent-guard20-order16.json": {
+        "bytes": 102208,
+        "sha256": "d8aaecb6d67e839ef1d331300aedf3efdbb5f7ed0fd93afcf2a81c12521408b8"
+      },
+      "checks/independent-guard10-order16.json": {
+        "bytes": 94749,
+        "sha256": "2c947804a337a1c42072644f6417fbcb01c30055cd5d6311626c5e4f85f3fda9"
+      },
+      "checks/independent-guard20-order16.log": {
+        "bytes": 5066,
+        "sha256": "4893fb1b78c30f5bbc04507b9268b522abd82d17651c23c6068c121df3f88839"
+      },
+      "checks/independent-guard10-order16.log": {
+        "bytes": 5148,
+        "sha256": "5b7ee45afc5eca43c214ba10335060b991ec8b0ec73055a6171704b531001fd7"
+      },
+      "checks/order16-notebook-tests.log": {
+        "bytes": 682,
+        "sha256": "fd3962f757d7701b297bbb162c1312bf3cdff424ddebfee64608b8bb6954366c"
+      },
+      "controller/check_supplied_notebook_order16.py": {
+        "bytes": 5243,
+        "sha256": "7e26c6ee3a47e6d348fb926c65d4f0075073e301ccea4ecc6f1e8c54dae73586"
+      },
+      "controller/check_supplied_nearby_order16.py": {
+        "bytes": 3369,
+        "sha256": "9054d910ff8e0ea8aaa039abcad1e5e936c55539520bb3d4be00201ca17c1d10"
+      },
+      "controller/initial.log": {
+        "bytes": 180,
+        "sha256": "d1e27ebd4fa152f771714e00741b181eb46088e7e8ac0fa4c78e022e4d88369d"
+      },
+      "controller/nearby.log": {
+        "bytes": 115,
+        "sha256": "afc11bea4749dcaca5d76fe0b25e211580678bb2792bee0df87344fc4f378174"
+      },
+      "controller/native-development-extension.json": {
+        "bytes": 506,
+        "sha256": "49640d47a75f23cc4bbc0763ed0d31645c251cecd6c7c5c12bbaa370cac1a9c6"
+      },
+      "native/full16-guard20-order16.log": {
+        "bytes": 921,
+        "sha256": "eb8f59bde7fa2718f128256ff8a0a0d8bed489b87a6ec282745ec3f6e5b5cd54"
+      },
+      "native/full16-guard20-order16-comparison.json": {
+        "bytes": 126253,
+        "sha256": "a372fabb4dacf4b454359de742a5f2a6fb115ba3ba696d59b9aa90ca9816d433"
+      },
+      "native/full16-guard20-order16-comparison.log": {
+        "bytes": 4283,
+        "sha256": "204bc48205a9bd234047b23b05bd8875282af961157199fbde54d997f4ee0d22"
+      },
+      "native/full16-guard10-order16.log": {
+        "bytes": 927,
+        "sha256": "1d58a0d306d24b5fe4e9996ac687586b879ea1973679925c8d515c261bdc35f4"
+      },
+      "native/full16-guard10-order16-comparison.json": {
+        "bytes": 118566,
+        "sha256": "f0155416848e24d2355b180761a52a09c0894c0cc305b5c243704a6fe69b01d7"
+      },
+      "native/full16-guard10-order16-comparison.log": {
+        "bytes": 4278,
+        "sha256": "fe420f48aec780aaeb4d28c934377c5e7fd06a76dd57051d823b57fdf56d1d44"
+      },
+      "controller/initial/report.json": {
+        "bytes": 13879,
+        "sha256": "4141ddf99a142e5924e4a3fa882575bced8f4d52a731ad0cddf41d1429cf0bb1"
+      },
+      "controller/initial/cache/seeds/physical-boundaries.bin": {
+        "bytes": 20423916,
+        "sha256": "0007f669a5d84960e1e8eadfd711934993e6ee6363b74ffdd23e720f87c23531"
+      },
+      "controller/initial/cache/transport/physical-boundaries.bin": {
+        "bytes": 22098704,
+        "sha256": "8bef3073db1486d282e1c0c4f4f3eddec9884fddfa822fd95a1cfe62b5fb26d2"
+      },
+      "controller/nearby/report.json": {
+        "bytes": 6749,
+        "sha256": "5bfb504f7ca361d2933963f06be9e02748e6eeab85bd9836da57b08bfe719df1"
+      },
+      "controller/nearby/cache/seeds/physical-boundaries.bin": {
+        "bytes": 20423916,
+        "sha256": "0007f669a5d84960e1e8eadfd711934993e6ee6363b74ffdd23e720f87c23531"
+      },
+      "controller/nearby/cache/transport/physical-boundaries.bin": {
+        "bytes": 23776388,
+        "sha256": "c08667a4abbd7ba4b19abe02b464e8c577440423b839b6944075f936c8cc3080"
+      },
+      "notebook/gg_hg.py": {
+        "bytes": 15165,
+        "sha256": "5f805c543f2b5f8d081a6d87a5da24b7396094510ca63d280d935e6fe3fb9683"
+      },
+      "notebook/gg_hg_support.py": {
+        "bytes": 26764,
+        "sha256": "ecad610397e57a0e93742b92de4beec64d31c96531e2360c283afdf5fb900fbf"
+      },
+      "notebook/gg_hg_boundaries.py": {
+        "bytes": 6101,
+        "sha256": "d3eeacce5e67607980bad57a96370119c2a68af552a0bad3db8071b15197c54a"
+      },
+      "notebook/gg_hg_acceptance.py": {
+        "bytes": 32119,
+        "sha256": "6f1686b22017dce4d1f0a2f7cc2362a8d78dcc6aded49a6428355941ecf1ba3c"
+      },
+      "notebook/gg_hg_anchor_acceptance.py": {
+        "bytes": 16657,
+        "sha256": "e666df0f743127df1a41667d81df73949190c4059b07aeb01da358863c7c23e1"
+      },
+      "notebook/data/gg_hg/boundaries-manifest.json": {
+        "bytes": 1489,
+        "sha256": "767b359ab86aa06cc50a2624a7f992d9cb951061d302f18bda38ece14b062722"
+      },
+      "notebook/data/gg_hg/boundaries.json.gz": {
+        "bytes": 1054943,
+        "sha256": "984b64a1617eb111543fc3b97e1cd36c84c610cfd8a02b11e8dfa861809acee4"
+      },
+      "notebook/data/gg_hg/native-model.json": {
+        "bytes": 207856,
+        "sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12"
+      },
+      "notebook/data/gg_hg/amplitude-validation.json": {
+        "bytes": 6920,
+        "sha256": "868b9fde9448e54b315e96c4ce5a83bcb2501f219cf45a4cf2c147e521fef071"
+      },
+      "notebook/data/gg_hg/coherent-reference.json": {
+        "bytes": 1445530,
+        "sha256": "dd791b4d0400504ae8bc13e4e4bffa3d35773579a73c49ef4559d8e7985787e3"
+      }
+    }
+  }
+}
