@@ -489,9 +489,10 @@ impl PreparedFrobenius {
             context.cancellation.check()?;
             for (j, expr) in row.iter().enumerate() {
                 let expr = (expr * Atom::var(self.source.variable)).together().cancel();
-                let rat: RationalPolynomial<IntegerRing, u16> = expr
-                    .try_to_rational_polynomial(&Q, &Z, None)
-                    .map_err(|e| Error::InvalidInput(e.to_string()))?;
+                let rat: RationalPolynomial<IntegerRing, u16> =
+                    crate::family::encode_complex(&expr)
+                        .try_to_rational_polynomial(&Q, &Z, None)
+                        .map_err(|e| Error::InvalidInput(e.to_string()))?;
                 let num = polynomial_coefficients(
                     &rat.numerator.to_expression(),
                     self.source.variable,
@@ -742,6 +743,18 @@ impl FrobeniusBasis {
         Ok(())
     }
     pub fn evaluate(&self, z: &C, values: &ahash::HashMap<Atom, C>) -> Result<Vec<Vec<C>>> {
+        self.evaluate_with_winding(z, values, 0)
+    }
+
+    /// Evaluate on the logarithm branch `log(z) + 2*pi*i*winding`. The same
+    /// logarithm determines fractional powers and all explicit logarithms.
+    /// Winding is local about the expansion center, not a contour planner.
+    pub fn evaluate_with_winding(
+        &self,
+        z: &C,
+        values: &ahash::HashMap<Atom, C>,
+        winding: i32,
+    ) -> Result<Vec<Vec<C>>> {
         self.validate()?;
         let p = self.precision;
         if !p.finite(z) || *z == p.zero() {
@@ -749,12 +762,19 @@ impl FrobeniusBasis {
                 "evaluate Frobenius series at a nonzero matching point".into(),
             ));
         }
-        let log = p.log(z);
+        let log = if winding == 0 {
+            p.log(z)
+        } else {
+            p.add(
+                &p.log(z),
+                &p.scale(&p.log(&p.i(-1)), 2 * i64::from(winding), 1),
+            )
+        };
         let n = self.columns.len();
         let mut matrix = vec![vec![p.zero(); n]; n];
         for (j, column) in self.columns.iter().enumerate() {
             let exponent = p.eval(&column.exponent, values)?;
-            let mut power = p.pow(z, &exponent);
+            let mut power = p.exp(&p.mul(&log, &exponent));
             for coeff in &column.coefficients {
                 let mut logpower = p.i(1);
                 for row in coeff {

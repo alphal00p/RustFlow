@@ -4,12 +4,17 @@
 //! inversion uses native Symbolica quotient arithmetic. Source domains survive
 //! path and kernel cancellation; their norm conditions can conservatively exclude
 //! points regular on a particular sheet. Only accepted continuation steps advance
-//! branch state. Singular endpoints require a separate Frobenius treatment.
+//! branch state. Singular endpoints use the separate exact rational lift and
+//! shared Frobenius treatment exposed by [`AlgebraicSystem::prepare_frobenius`].
 mod analytic_origin;
 mod canonical;
+mod frobenius;
 mod quotient;
 mod residual;
 pub use analytic_origin::{AnalyticOriginOptions, AnalyticOriginSeed};
+pub use frobenius::{
+    AlgebraicEndpointExpansion, PreparedAlgebraicFrobenius, RationalAlgebraicSystem,
+};
 use residual::AlgebraicResidualChart;
 
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution, EpsilonSystem};
