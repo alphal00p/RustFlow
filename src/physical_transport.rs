@@ -8,6 +8,7 @@
 //! validated terminal evidence.
 use crate::algebraic::{
     AlgebraicKinematicSystem, AlgebraicSystem, CanonicalAlgebraicSystem, CompiledAlgebraicSystem,
+    PreparedAlgebraicSystem,
 };
 use crate::diffexp::{EpsilonSolution, EpsilonSystem, transport_epsilon};
 use crate::kinematics::{KinematicPath, KinematicSystem};
@@ -259,12 +260,12 @@ fn evaluate_endpoint(
     }
     let order = (i64::from(request.range.last) - i64::from(request.range.leading)) as usize;
     let source = match system.pullback(&request.chart.path, order)? {
-        PreparedConnection::Rational(system) => AlgebraicSystem {
+        PulledConnection::Rational(system) => AlgebraicSystem {
             system,
             roots: Vec::new(),
             nonzero_conditions: Vec::new(),
         },
-        PreparedConnection::Algebraic(system) => system,
+        PulledConnection::Algebraic(system) => system,
     };
     let prepared = PreparedEndpoint::new(source, identity, request, constraints, options, context)?;
     evaluate_physical_with(
@@ -655,32 +656,52 @@ enum Connection<'a> {
     Canonical(&'a CanonicalAlgebraicSystem),
 }
 impl Connection<'_> {
-    fn pullback(&self, path: &KinematicPath, order: usize) -> Result<PreparedConnection> {
+    fn pullback(&self, path: &KinematicPath, order: usize) -> Result<PulledConnection> {
         Ok(match self {
             Self::Rational(system) => {
-                PreparedConnection::Rational(EpsilonSystem::from_differential_system(
+                PulledConnection::Rational(EpsilonSystem::from_differential_system(
                     &system.pullback(path)?,
                     system.epsilon,
                     order,
                 )?)
             }
-            Self::Algebraic(system) => PreparedConnection::Algebraic(system.pullback(path, order)?),
-            Self::Canonical(system) => PreparedConnection::Algebraic(system.pullback(path, order)?),
+            Self::Algebraic(system) => PulledConnection::Algebraic(system.pullback(path, order)?),
+            Self::Canonical(system) => PulledConnection::Algebraic(system.pullback(path, order)?),
+        })
+    }
+}
+enum PulledConnection {
+    Rational(EpsilonSystem),
+    Algebraic(AlgebraicSystem),
+}
+impl PulledConnection {
+    fn prepare(self, context: &RunContext) -> Result<PreparedConnection> {
+        context.cancellation.check()?;
+        Ok(match self {
+            Self::Rational(system) => PreparedConnection::Rational(system),
+            Self::Algebraic(system) => {
+                PreparedConnection::Algebraic(system.prepare_with_context(context)?)
+            }
         })
     }
 }
 enum PreparedConnection {
     Rational(EpsilonSystem),
-    Algebraic(AlgebraicSystem),
+    Algebraic(PreparedAlgebraicSystem),
 }
 impl PreparedConnection {
-    fn compile(&self, p: Precision) -> Result<CompiledConnection> {
-        Ok(match self {
+    fn compile(&self, p: Precision, context: &RunContext) -> Result<CompiledConnection> {
+        context.cancellation.check()?;
+        let compiled = match self {
             Self::Rational(system) => {
                 CompiledConnection::Rational(system.compile(p, &Default::default())?)
             }
-            Self::Algebraic(system) => CompiledConnection::Algebraic(system.compile(p)?),
-        })
+            Self::Algebraic(system) => {
+                CompiledConnection::Algebraic(system.compile_with_context(p, context)?)
+            }
+        };
+        context.cancellation.check()?;
+        Ok(compiled)
     }
     fn transport(
         &self,
@@ -937,8 +958,8 @@ fn evaluate_from_source(
                 "selected physical path leaves the reduction domain".into(),
             ));
         }
-        let system = system.pullback(&path, count - 1)?;
-        let prepared = system.compile(p)?;
+        let system = system.pullback(&path, count - 1)?.prepare(context)?;
+        let prepared = system.compile(p, context)?;
         if prepared.poles().iter().any(|pole| {
             pole.re >= p.real(0)
                 && pole.re <= p.real(1)
@@ -969,7 +990,7 @@ fn evaluate_from_source(
     let p = Precision {
         bits: solution.diagnostics.working_bits,
     };
-    let prepared = system.compile(p)?;
+    let prepared = system.compile(p, context)?;
     // A second transport from the same cached values checks integration
     // error only. Carry the supplied boundary uncertainty forward too.
     // Fix one scale per coefficient for the whole trajectory. A large
@@ -1272,11 +1293,13 @@ fn prepare_prescribed_route(
         &start,
         &finish,
     )?;
-    let system = system.pullback(
-        &path,
-        (i64::from(range.last) - i64::from(range.leading)) as usize,
-    )?;
-    let compiled = system.compile(p)?;
+    let system = system
+        .pullback(
+            &path,
+            (i64::from(range.last) - i64::from(range.leading)) as usize,
+        )?
+        .prepare(context)?;
+    let compiled = system.compile(p, context)?;
     let mut polynomials = compiled.singularity_polynomials().to_vec();
     polynomials.extend(identity.prescribed_path_conditions(&path)?);
     let convention = identity
@@ -1363,7 +1386,7 @@ fn classify_germ(
 
 #[allow(clippy::too_many_arguments)]
 fn transport_algebraic_checked(
-    system: &AlgebraicSystem,
+    system: &PreparedAlgebraicSystem,
     source: &CachedBoundary,
     target: &CachedPoint,
     range: EpsilonRange,
@@ -1381,7 +1404,7 @@ fn transport_algebraic_checked(
         context,
         true,
         |p, refined| {
-            let compiled = system.compile(p)?;
+            let compiled = system.compile_with_context(p, context)?;
             let points = waypoints
                 .iter()
                 .map(|a| p.eval(a, &Default::default()))
@@ -1403,7 +1426,7 @@ fn transport_algebraic_checked(
                     .conditioning_digits
                     .map_or(coordinate_digits, |old| old.min(coordinate_digits)),
             );
-            if !system.roots.is_empty()
+            if !system.source().roots.is_empty()
                 && Some(&classify_germ(&compiled, &result.branches)?) != target.root_germ()
             {
                 return Err(Error::InvalidInput("planned continuation reaches a different root germ than requested; the route is not admitted to that destination sheet".into()));
@@ -1444,7 +1467,7 @@ fn transport_algebraic_checked(
         },
     )?;
     let mut germs = BTreeMap::new();
-    if !system.roots.is_empty() {
+    if !system.source().roots.is_empty() {
         for checkpoint in &solution.checkpoints {
             germs.insert(
                 checkpoint.segment,
