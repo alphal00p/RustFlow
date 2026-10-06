@@ -3,6 +3,7 @@
 //! This module deliberately has no `pymodule` entry point: loading a second
 //! Symbolica runtime would invalidate native expression and family identities.
 mod amplitude;
+mod constraints;
 mod continuation;
 mod endpoint;
 mod evaluation;
@@ -18,6 +19,7 @@ use symbolica::domains::float::{PythonMultiPrecisionComplex, PythonMultiPrecisio
 use symbolica::prelude::*;
 
 pub use amplitude::{PyAmplitudeResult, PyHiggsJetAmplitude};
+pub use constraints::{PyAsymptoticCoefficient, PyAsymptoticRelation, PyEndpointConstraints};
 pub use continuation::PyContinuationPrescription;
 pub use endpoint::{PyEndpointResult, PyEndpointRoute};
 pub use evaluation::{PyIntegralEvaluator, PyPreparedIntegralFamily, PyReductionTables};
@@ -207,6 +209,9 @@ pub fn register(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<PyKinematicTransport>()?;
     module.add_class::<PyContinuationPrescription>()?;
     module.add_class::<PyEndpointRoute>()?;
+    module.add_class::<PyAsymptoticCoefficient>()?;
+    module.add_class::<PyAsymptoticRelation>()?;
+    module.add_class::<PyEndpointConstraints>()?;
     module.add_class::<PyEndpointResult>()?;
     module.add_class::<PyBoundaryCache>()?;
     module.add_class::<PyBoundaryData>()?;

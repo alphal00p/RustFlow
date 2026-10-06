@@ -72,7 +72,7 @@ impl PyKinematicTransport {
     /// contour and admit_matching_path admits its declared global homotopy.
     /// Recorded input errors and independent precision/order profiles determine
     /// reusable evidence; this is not symbolic dimensional-sector projection.
-    #[pyo3(signature=(cache, route, leading, last, *, admit_matching_path=false, admit_endpoint=false, scales=None, max_lift_dimension=256, series_order=64, control=None))]
+    #[pyo3(signature=(cache, route, leading, last, *, admit_matching_path=false, admit_endpoint=false, scales=None, max_lift_dimension=256, series_order=64, constraints=None, control=None))]
     #[allow(clippy::too_many_arguments)]
     fn evaluate_endpoint(
         &self,
@@ -86,6 +86,7 @@ impl PyKinematicTransport {
         scales: Option<Expressions>,
         max_lift_dimension: usize,
         series_order: usize,
+        constraints: Option<&PyEndpointConstraints>,
         control: Option<&PyComputationControl>,
     ) -> PyResult<PyEndpointResult> {
         let request = crate::singular_endpoint::EndpointRequest {
@@ -115,58 +116,55 @@ impl PyKinematicTransport {
         let started = std::time::Instant::now();
         py.detach(|| {
             cache
-                .access(|cache| match self.connection.as_ref() {
-                    Connection::Rational(flow) if prescribed => flow.evaluate_prescribed_endpoint(
-                        cache,
-                        &request,
-                        &self.options,
-                        &context,
-                        &policy,
-                        &route_admission,
-                        &admission,
-                    ),
-                    Connection::Canonical(flow) if prescribed => flow.evaluate_prescribed_endpoint(
-                        cache,
-                        &request,
-                        &self.options,
-                        &context,
-                        &policy,
-                        &route_admission,
-                        &admission,
-                    ),
-                    Connection::Algebraic(flow) if prescribed => flow.evaluate_prescribed_endpoint(
-                        cache,
-                        &request,
-                        &self.options,
-                        &context,
-                        &policy,
-                        &route_admission,
-                        &admission,
-                    ),
-                    Connection::Rational(flow) => flow.evaluate_endpoint(
-                        cache,
-                        &request,
-                        &self.options,
-                        &context,
-                        &policy,
-                        &admission,
-                    ),
-                    Connection::Canonical(flow) => flow.evaluate_endpoint(
-                        cache,
-                        &request,
-                        &self.options,
-                        &context,
-                        &policy,
-                        &admission,
-                    ),
-                    Connection::Algebraic(flow) => flow.evaluate_endpoint(
-                        cache,
-                        &request,
-                        &self.options,
-                        &context,
-                        &policy,
-                        &admission,
-                    ),
+                .access(|cache| {
+                    macro_rules! evaluate {
+                        ($flow:expr) => {
+                            match (prescribed, constraints) {
+                                (true, Some(asserted)) => $flow
+                                    .evaluate_prescribed_constrained_endpoint(
+                                        cache,
+                                        &request,
+                                        &asserted.constraints,
+                                        &self.options,
+                                        &context,
+                                        &policy,
+                                        &route_admission,
+                                        &admission,
+                                    ),
+                                (false, Some(asserted)) => $flow.evaluate_constrained_endpoint(
+                                    cache,
+                                    &request,
+                                    &asserted.constraints,
+                                    &self.options,
+                                    &context,
+                                    &policy,
+                                    &admission,
+                                ),
+                                (true, None) => $flow.evaluate_prescribed_endpoint(
+                                    cache,
+                                    &request,
+                                    &self.options,
+                                    &context,
+                                    &policy,
+                                    &route_admission,
+                                    &admission,
+                                ),
+                                (false, None) => $flow.evaluate_endpoint(
+                                    cache,
+                                    &request,
+                                    &self.options,
+                                    &context,
+                                    &policy,
+                                    &admission,
+                                ),
+                            }
+                        };
+                    }
+                    match self.connection.as_ref() {
+                        Connection::Rational(flow) => evaluate!(flow),
+                        Connection::Canonical(flow) => evaluate!(flow),
+                        Connection::Algebraic(flow) => evaluate!(flow),
+                    }
                 })
                 .and_then(PyEndpointResult::from_result)
         })
