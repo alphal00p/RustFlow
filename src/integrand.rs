@@ -1,4 +1,5 @@
-//! Convert rational boundary integrands to independent denominator families.
+//! Convert rational boundary integrands with exact scalar coefficients to independent families.
+//! Gaussian-rational coefficients use HEPKit; other admitted expressions use the exact AtomField route.
 use crate::algebra::{inverse, nullspace, rref};
 use crate::family::substitute;
 use crate::*;
@@ -123,9 +124,9 @@ pub fn to_integrals(
             budget,
         );
     }
-    // HEPKit's current affine owner uses a rational coefficient field. Keep
-    // the existing exact AtomField route only for inputs outside that field;
-    // in particular, a formal replacement of i would not preserve rank.
+    // Keep the existing exact AtomField route for coefficients outside the
+    // structurally admitted native Gaussian-rational field. Native errors and
+    // limits never enter this route; i is handled by the native exact field.
     let mut out = Vec::new();
     let mut remaining = budget;
     atom_field_partial_fraction(

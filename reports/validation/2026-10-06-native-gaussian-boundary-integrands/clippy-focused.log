@@ -1,0 +1,20 @@
+warning: patch `feynkit-ufo v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)` was not used in the crate graph
+warning: patch `linnet-py v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+    Checking gammaloop-workspace-hack v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Checking symbolica-utils v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+   Compiling symbolica-amflow v0.1.0 (/common/dev/amflow-native-gaussian-boundary-integrands)
+    Checking linnet v0.17.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Checking spenso v0.6.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Checking feynkit-model v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Checking idenso v0.3.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Checking feynkit-kinematics v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Checking feynkit-graph v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Checking spenso-hep-lib v0.1.7 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Checking feynkit-amplitude v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Checking feynkit-tensor v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Checking feynkit-generator v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0)
+    Finished `release` profile [optimized + debuginfo] target(s) in 29.38s

@@ -1,0 +1,81 @@
+{
+  "base_revision": "bfb1093f738ee68b488cd7952b2a24b6e835ddb4",
+  "recorded_utc": "2026-10-06T06:19:38.699787+00:00",
+  "scope": "Gaussian-rational structural admission to native boundary-integrand decomposition; exact AtomField fallback retained outside admission",
+  "owners": {
+    "hepkit": "b96600b0085d9ddfa9e6acbc11fa72ec6163253c",
+    "symbolica_numerica_graphica": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustred": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+  },
+  "checks": [
+    {
+      "command": "cargo test --locked --offline --release --test native_boundary_integrand -- --nocapture",
+      "passed": 8,
+      "failed": 0,
+      "ignored": 0,
+      "session": 48850,
+      "exit_code": 0,
+      "tool_chunk": "cf9e9d",
+      "compile_seconds_rounded": 477,
+      "test_seconds": 0.08
+    },
+    {
+      "command": "cargo clippy --locked --offline --release --test native_boundary_integrand -- -D warnings",
+      "session": 12768,
+      "exit_code": 0,
+      "tool_chunk": "93bece",
+      "elapsed_seconds": 29.38
+    },
+    {
+      "command": "rustfmt --edition 2024 --check src/integrand.rs src/integrand/native.rs tests/native_boundary_integrand.rs",
+      "exit_code": 0
+    },
+    {
+      "command": "git diff --check",
+      "exit_code": 0
+    }
+  ],
+  "dependency_audit": "dependency-ownership.json",
+  "source_inputs": 252,
+  "runtime_source_recheck": "focused-source-recheck.json",
+  "final_rustdoc_delta": {
+    "after_runtime_test_changes": [
+      "src/integrand.rs"
+    ],
+    "kind": "leading module rustdoc only",
+    "non_doc_code_equal": true,
+    "final_source_scoped_clippy_passed": true
+  },
+  "compiled_target_directory": "/common/dev/amflow-native-gaussian-boundary-integrands/target/native",
+  "binary": {
+    "path": "/common/dev/amflow-native-gaussian-boundary-integrands/target/native-gaussian-validation/native-boundary-focused-tests",
+    "sha256": "bc78c2ea5a7220a9c09b14b9f9e99f5cb22a6b6827ff8dd7b9565cf134cc60bb",
+    "size": 719959896
+  },
+  "metadata_context": "Cargo metadata was read-only and inherited the publication-native target setting; compilation explicitly overrode CARGO_TARGET_DIR to the independent target/native. Metadata context is not compiled-artifact provenance.",
+  "coverage": [
+    "native Gaussian rank collapse without formal imaginary parameter",
+    "native state-limit routing on Gaussian denominator coefficients",
+    "exact sin(a) and sqrt(2) AtomField fallback reconstruction and limit routing",
+    "tiny Gaussian scalar weights",
+    "existing numerator/interleaved coordinate/family metadata/collision/typed validation regressions"
+  ],
+  "review": {
+    "root": "source/review approved",
+    "algebraic_endpoint": "read-only review found no blocker; native Complex<Rational> conversion rejects inexact float numbers"
+  },
+  "author_and_committer_for_new_commit": "Ben Ruijl <ben@ruijl.ch>",
+  "unchanged": [
+    "native algorithms",
+    "official Symbolica/RustRed revisions in this isolated archive",
+    "published community extension/runtime/banks",
+    "prior frozen builds and archives"
+  ],
+  "not_claimed": [
+    "newer Symbolica 6defcca968ca8411977fb1f641a9dee49ee7b7a7 compatibility; parent owns that next gate",
+    "combined-main/full scientific acceptance",
+    "Python/stubgen feature gate",
+    "installed host wheel interoperability",
+    "diagram formal-imaginary bridge migration"
+  ]
+}

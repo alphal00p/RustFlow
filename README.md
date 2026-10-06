@@ -71,11 +71,11 @@ Basis refinement also retains symbolic epsilon, taking precedence over sampled
 reduction so that dimension-dependent denominator factors can be identified.
 
 The manifest fetches the public HEPKit/Linnet/Spenso/Idenso owner at
-[`a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`](https://github.com/ValentinHirschi/gammaloop/commit/a3d1c8a867ac0e89d8f58f9722cf9a7e83338901),
+[`b96600b0085d9ddfa9e6acbc11fa72ec6163253c`](https://github.com/ValentinHirschi/gammaloop/commit/b96600b0085d9ddfa9e6acbc11fa72ec6163253c),
 including its native rendering components. Normal builds need no sibling checkout
 or local patch configuration. The community host keeps Vakint at its separate
 [`6203c6cbba6ae5e90329ba5081fad55319e678db`](https://github.com/ValentinHirschi/gammaloop/commit/6203c6cbba6ae5e90329ba5081fad55319e678db)
-revision and shares the same RustRed and algebra sources. See the
+revision and owns its shared RustRed and algebra pins. See the
 [published community build recipe](docs/clean-community-build.md) and
 [embedding requirements](docs/dependency-embedding.md); the community manifest
 and lock select its RustFlow runtime revision. The Cargo config example is only

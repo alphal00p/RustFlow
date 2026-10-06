@@ -1,0 +1,42 @@
+{
+  "summary.json": {
+    "sha256": "dd9f7b1fd72ea02ca44f13a5d62e8ba783e3aa6ec1ed80d3853a1554db4378ca",
+    "size": 3396
+  },
+  "dependency-ownership.json": {
+    "sha256": "d133d81f2d8c11e27ea6f2937f4e1bfe44fbd5a1c254dffa28c2ccdffb7bf865",
+    "size": 4340
+  },
+  "focused-source.json": {
+    "sha256": "fbc72c676becb9e5790c611f1012912eb09d8257a81d642845c8cd6b037f84f0",
+    "size": 25491
+  },
+  "focused-source-recheck.json": {
+    "sha256": "d4ebb4c5c7660d1d44aa540b41ed3f665074726f55ccaee8db2e05dc035f0a57",
+    "size": 124
+  },
+  "final-source.json": {
+    "sha256": "fd40c5cd39f8ed6d3c62769e9632bec00b21b2c23453cc53115e620a9c3cc310",
+    "size": 25353
+  },
+  "rustdoc-only-delta.json": {
+    "sha256": "50a17abf7d1c2a0dbafcd16c74983e1ffeff9fea6f44e0f92231773e2a677a4b",
+    "size": 181
+  },
+  "focused-release.log": {
+    "sha256": "818d72a196b4bce45af43035428e7d4eb3b2d301927288084a613dcbfba27cbe",
+    "size": 3499
+  },
+  "clippy-focused.log": {
+    "sha256": "3298737bcb06b9d275379417e0b9139e82de531ff02dd357b22beeebf1adf3a5",
+    "size": 2461
+  },
+  "fmt.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0
+  },
+  "diff-check.log": {
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "size": 0
+  }
+}

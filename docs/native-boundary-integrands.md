@@ -1,6 +1,6 @@
 # Native boundary-integrand decomposition
 
-`integrand::to_integrals` delegates rational-coefficient partial fractions,
+`integrand::to_integrals` delegates Gaussian-rational partial fractions,
 independent sectors, scalar-product completion and numerator rewriting to
 HEPKit's native `IntegralFamily`. This is the same family owner used for native
 diagram input. The adapter changes notation and returns the existing RustFlow
@@ -14,13 +14,20 @@ and normalization. Original denominator scaling stays in the numerator weight.
 Internal momentum, dimension and denominator symbols are chosen to avoid every
 input coordinate and scalar coefficient, including successive suffix collisions.
 
-The native path currently admits real rational functions of scalar parameters
-in denominator coefficients. Gaussian numerators also work: native rewriting
-uses exact substitution, and the existing exact coefficient adapter extracts
-the final integral powers. Denominators outside the native rational coefficient
-field retain the previous exact Symbolica `AtomField` path. In particular, the
-imaginary unit cannot be replaced by a free parameter when computing rank:
-rows proportional over `Q(i)` need not be proportional over `Q(t)`.
+The native path admits rational functions of scalar parameters with exact
+Gaussian-rational number coefficients. HEPKit uses Symbolica's native
+`AlgebraicExtension::complex(Q)` field, enforcing `i^2 = -1` during rank,
+partial fractions, completion and rewriting. Gaussian numerators also work:
+native rewriting uses exact substitution, and the existing exact coefficient
+adapter extracts the final integral powers. No free imaginary parameter is
+introduced: rows proportional over `Q(i)` need not be proportional over `Q(t)`.
+
+Functions, noninteger powers and number coefficients outside the admitted
+Gaussian-rational field retain the existing exact Symbolica `AtomField` path.
+The reserved formal imaginary parameter also remains outside native admission.
+This conservative structural boundary does not claim every coefficient
+expression supported internally by the owner. Regressions distinguish both
+routes through their limit errors and verify exact reconstruction.
 
 Admission is structural and happens before native decomposition. A native error
 or exhausted state budget never activates the other path. Native partial-fraction
@@ -29,9 +36,10 @@ retain typed input errors. A returned partial-fraction weight must be independen
 of the loop scalar products. No partially accumulated result escapes an error.
 
 The shared HEPKit revision is
-[`8bfd027`](https://github.com/ValentinHirschi/gammaloop/commit/8bfd027a8df276ab640adf1f238833bbcf9bb9c1).
-It fixes affine extraction and partial fractions using native exact rational
-polynomials, preserving original row denominators. The previous owner could
+[`b96600b`](https://github.com/ValentinHirschi/gammaloop/commit/b96600b0085d9ddfa9e6acbc11fa72ec6163253c).
+It extends exact affine extraction and native matrix operations to Gaussian
+rationals, preserving original row denominators. The earlier extraction fix
+also covers momentum and Symanzik coefficient grouping. The previous owner could
 lose an expanded symbolic coefficient such as `(a+b)/10^1000` during statistical
 zero testing and return a loop-dependent weight. The direct regression checks
 both scalar weights and exact reconstruction; reconstruction alone would miss

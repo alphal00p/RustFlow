@@ -1,0 +1,146 @@
+{
+  "only_native_revision_changed": true,
+  "manifest_pin_count": 24,
+  "lock_revision_occurrences": 48,
+  "resolved_hepkit_packages": 13,
+  "owners": {
+    "symbolica": [
+      {
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+      }
+    ],
+    "numerica": [
+      {
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+      }
+    ],
+    "graphica": [
+      {
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+      }
+    ],
+    "rustred": [
+      {
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+      }
+    ],
+    "feynkit-amplitude": [
+      {
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0085d9ddfa9e6acbc11fa72ec6163253c"
+      }
+    ],
+    "feynkit-generator": [
+      {
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0085d9ddfa9e6acbc11fa72ec6163253c"
+      }
+    ],
+    "feynkit-graph": [
+      {
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0085d9ddfa9e6acbc11fa72ec6163253c"
+      }
+    ],
+    "feynkit-model": [
+      {
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0085d9ddfa9e6acbc11fa72ec6163253c"
+      }
+    ],
+    "feynkit-kinematics": [
+      {
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0085d9ddfa9e6acbc11fa72ec6163253c"
+      }
+    ],
+    "feynkit-tensor": [
+      {
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0085d9ddfa9e6acbc11fa72ec6163253c"
+      }
+    ],
+    "linnet": [
+      {
+        "version": "0.17.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0085d9ddfa9e6acbc11fa72ec6163253c"
+      }
+    ],
+    "spenso": [
+      {
+        "version": "0.6.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0085d9ddfa9e6acbc11fa72ec6163253c"
+      }
+    ],
+    "idenso": [
+      {
+        "version": "0.3.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=b96600b0085d9ddfa9e6acbc11fa72ec6163253c#b96600b0085d9ddfa9e6acbc11fa72ec6163253c"
+      }
+    ]
+  },
+  "cargo_metadata_context": {
+    "target_directory": "/common/dev/amflow/target/publication-native",
+    "read_only_metadata_no_compilation": true
+  },
+  "compiled_target_directory": "/common/dev/amflow-native-gaussian-boundary-integrands/target/native",
+  "manifest_owner_packages": [
+    "feynkit-amplitude",
+    "feynkit-cff",
+    "feynkit-generator",
+    "feynkit-graph",
+    "feynkit-kinematics",
+    "feynkit-model",
+    "feynkit-py",
+    "feynkit-tensor",
+    "feynkit-ufo",
+    "gammaloop-workspace-hack",
+    "idenso",
+    "kurvst",
+    "linnest",
+    "linnet",
+    "linnet-py",
+    "spenso",
+    "spenso-hep-lib",
+    "spenso-macros",
+    "spynso3",
+    "symbolica-utils",
+    "three-dimensional-reps",
+    "typst-library",
+    "typst-renderer",
+    "typst-svg"
+  ],
+  "lock_owner_packages": [
+    "feynkit-amplitude",
+    "feynkit-cff",
+    "feynkit-generator",
+    "feynkit-graph",
+    "feynkit-kinematics",
+    "feynkit-model",
+    "feynkit-py",
+    "feynkit-tensor",
+    "gammaloop-workspace-hack",
+    "idenso",
+    "kurvst",
+    "linnest",
+    "linnet",
+    "spenso",
+    "spenso-hep-lib",
+    "spenso-macros",
+    "spynso3",
+    "symbolica-utils",
+    "three-dimensional-reps",
+    "typst-library",
+    "typst-renderer",
+    "typst-svg"
+  ],
+  "unused_owner_patches": [
+    "feynkit-ufo",
+    "linnet-py"
+  ],
+  "duplicate_owner_packages": []
+}

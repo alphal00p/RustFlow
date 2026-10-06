@@ -88,7 +88,7 @@ fn native_partial_fractions_preserve_symbolic_degeneracy_and_gaussian_numerators
 }
 
 #[test]
-fn gaussian_affine_dependencies_remain_exact_without_formal_imaginary_rank() {
+fn native_gaussian_affine_dependencies_remain_exact_without_formal_imaginary_rank() {
     let variables = [parse!("x"), parse!("y")];
     let family = template(1, 1);
     let i = Atom::num(Complex::new(Rational::zero(), Rational::one()));
@@ -96,6 +96,11 @@ fn gaussian_affine_dependencies_remain_exact_without_formal_imaginary_rank() {
     let d2 = -&i * &variables[0] + &variables[1] - 2;
     // The rows are proportional over Q(i), but independent if i is encoded as
     // a free parameter t (their determinant would be 1+t^2).
+    let limited =
+        integrand::to_integrals(&(Atom::one() / (&d1 * &d2)), &variables, &family, 1).unwrap_err();
+    assert!(
+        matches!(limited, Error::Limit(ref message) if message.contains("native boundary partial fractions"))
+    );
     for expression in [
         Atom::one() / (&d1 * &d2),
         (&variables[0] + &i * &variables[1]).pow(2) / (d1.pow(2) * &d2),
@@ -118,6 +123,26 @@ fn gaussian_affine_dependencies_remain_exact_without_formal_imaginary_rank() {
             .cancel()
             .is_zero()
     );
+}
+
+#[test]
+fn outside_gaussian_field_coefficients_retain_exact_atom_field_fallback() {
+    let variables = [parse!("x")];
+    let family = template(1, 0);
+    for mass in [parse!("sin(a)"), parse!("2^(1/2)")] {
+        let expression = Atom::one() / ((&variables[0] - &mass) * (&variables[0] - 2));
+        let limited = integrand::to_integrals(&expression, &variables, &family, 1).unwrap_err();
+        assert!(
+            matches!(limited, Error::Limit(ref message) if message == "boundary partial fraction budget exhausted")
+        );
+        let terms = integrand::to_integrals(&expression, &variables, &family, 100).unwrap();
+        assert!(
+            (reconstruct(&terms, &variables) - expression)
+                .together()
+                .cancel()
+                .is_zero()
+        );
+    }
 }
 
 #[test]
@@ -189,6 +214,7 @@ fn native_extreme_symbolic_coefficients_stay_scalar_and_reconstruct_exactly() {
         parse!("(a+b)/10^1000"),
         parse!("10^1000*(a+b)"),
         parse!("a+(a+b)/10^1000"),
+        parse!("(a+𝑖*b)/10^1000"),
     ] {
         let expression = Atom::one() / ((x + q * y - 1) * (x - 2) * (y - 3));
         let terms = integrand::to_integrals(&expression, &variables, &template(1, 1), 100).unwrap();

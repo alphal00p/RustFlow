@@ -12,11 +12,12 @@ application or sibling checkout. The community manifest and lock select its
 RustFlow runtime revision.
 
 The standalone root and community host each own their Cargo patch tables;
-Cargo ignores a dependency's patch table. Each maps the original GammaLoop
-source through 22 native-package entries and uses the same owner for the lean
-Typst library and SVG crates. The standalone native owner follows
-[native boundary integration](native-boundary-integrands.md); the frozen notebook
-host retains `a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`. The host additionally pins Vakint separately at
+Cargo ignores a dependency's patch table. The standalone root maps the original
+GammaLoop source to public HEPKit owner `b96600b0085d9ddfa9e6acbc11fa72ec6163253c`
+through 22 native-package entries and uses that owner for the lean Typst library
+and SVG crates. The published community runtime retains its separately validated
+`a3d1c8a867ac0e89d8f58f9722cf9a7e83338901` owner pin until a coordinated host update.
+The host additionally pins Vakint separately at
 `6203c6cbba6ae5e90329ba5081fad55319e678db`. Keep that separate implementation when
 embedding RustFlow in a host that also exposes Vakint.
 
@@ -80,7 +81,7 @@ the degree bound is not a general bound on the number of multivariate terms.
 ## Public native owners
 
 The required HEPKit extensions live in the public
-[owner revision `a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`](https://github.com/ValentinHirschi/gammaloop/commit/a3d1c8a867ac0e89d8f58f9722cf9a7e83338901),
+[owner revision `b96600b0085d9ddfa9e6acbc11fa72ec6163253c`](https://github.com/ValentinHirschi/gammaloop/commit/b96600b0085d9ddfa9e6acbc11fa72ec6163253c),
 based on upstream `6c707c6b77a437256eb1180da13d4d327b371d13`.
 The changes are proposed upstream in [GammaLoop PR #125](https://github.com/alphal00p/gammaloop/pull/125).
 It retains the upstream external-wavefunction, rendering and tensor APIs while

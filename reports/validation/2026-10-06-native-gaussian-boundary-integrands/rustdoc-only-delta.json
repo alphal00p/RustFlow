@@ -1,0 +1,8 @@
+{
+  "after_runtime_test_changes": [
+    "src/integrand.rs"
+  ],
+  "kind": "leading module rustdoc only",
+  "non_doc_code_equal": true,
+  "final_source_scoped_clippy_passed": true
+}

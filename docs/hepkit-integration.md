@@ -2,21 +2,22 @@
 
 RustFlow accepts HEPKit's model JSON and native compact or serialized DOT directly through `FeynmanDiagram::from_dot`. HEPKit/Linnet own parsing, edge identities, graph validation, routing, denominator construction and partial fractions. Spenso/Idenso own scalar numerator contraction. This crate translates the resulting complete denominator basis into `IntegralFamily` and exact `LinearCombination` values. The application owns one loaded UFO model at a time and shares its `Arc<Model>` with all graph inputs; RustFlow does not maintain a competing model registry. Python bindings are optional modules in this crate, registered by the shared community extension under `symbolica.community.hep.integration`; the library and CLI remain usable without Python. See [dependency-embedding.md](dependency-embedding.md) for the current shared dependency graph and source fingerprint configuration.
 
-The frozen notebook publication selects the public [native owner revision
-`a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`](https://github.com/ValentinHirschi/gammaloop/commit/a3d1c8a867ac0e89d8f58f9722cf9a7e83338901),
-based on upstream HEPKit `6c707c6b77a437256eb1180da13d4d327b371d13`. The standalone
-and community manifests contain the full shared-owner patch tables. The
-[published-input build recipe](clean-community-build.md) uses those pins
-directly, with no private checkout or patch application. Symbolica, Numerica
-and Graphica resolve from official community `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`;
-RustRed resolves from official main `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`.
-The community host preserves its separate Vakint implementation at
-`6203c6cbba6ae5e90329ba5081fad55319e678db`.
-The standalone build uses the newer owner in
-[native boundary integration](native-boundary-integrands.md) and official
+The standalone build selects public native owner
+[`b96600b0085d9ddfa9e6acbc11fa72ec6163253c`](https://github.com/ValentinHirschi/gammaloop/commit/b96600b0085d9ddfa9e6acbc11fa72ec6163253c),
+based on upstream HEPKit `6c707c6b77a437256eb1180da13d4d327b371d13`, and official
 Symbolica/Numerica/Graphica community `6defcca968ca8411977fb1f641a9dee49ee7b7a7`.
-The publication wheel and its acceptance data retain their original pins.
-The native owner changes are proposed upstream in
+The standalone and community manifests each own their shared-owner patch tables.
+The frozen publication runtime retains native owner
+`a3d1c8a867ac0e89d8f58f9722cf9a7e83338901` and Symbolica community
+`c3408e4ba1d3bdd4ea55678fad50e27009be13d4`; its acceptance data keep those original
+pins. The [published-input build recipe](clean-community-build.md) needs no
+private checkout or patch application.
+
+Both resolve RustRed from official main `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`.
+The community host preserves its separate Vakint implementation at
+`6203c6cbba6ae5e90329ba5081fad55319e678db`. See
+[native boundary integration](native-boundary-integrands.md) for the newer
+Gaussian coefficient support. The native owner changes are proposed upstream in
 [GammaLoop PR #125](https://github.com/alphal00p/gammaloop/pull/125).
 
 The native owner supplies:
@@ -76,7 +77,7 @@ Native `Kinematics` provides `with_mass_squared` and `with_scalar_product` sette
 
 Unqualified DOT expression symbols belong to `feynkit_graph`; model formulas belong to `UFO`. Fully qualified names remove ambiguity. Exact scalar substitutions use symbol keys. Model `f64` default values are never used as exact inputs; required parameter values must be provided explicitly. The adapter specializes the supplied point before partial fractions, so pass an empty `KinematicPoint` when solving its returned groups. This preserves simultaneous substitution semantics even for maps such as `a -> b, b -> 3`.
 
-HEPKit and RustRed order scalar products differently when there is more than one loop. The adapter matches exact Atom identities: loop-loop products first, followed by loop-external products in RustRed order. Native complex affine algebra uses a rational coefficient field; RustFlow reuses its formal imaginary-unit bridge for exact complex kinematics, then restores Gaussian-rational coefficients before evaluation. No arbitrary-precision value is routed through `f64`.
+HEPKit and RustRed order scalar products differently when there is more than one loop. The adapter matches exact Atom identities: loop-loop products first, followed by loop-external products in RustRed order. Native family affine algebra now uses Symbolica's Gaussian-rational field. The [ordinary boundary-integrand adapter](native-boundary-integrands.md) admits Gaussian coefficients directly, preserving exact rank over `Q(i)`. The diagram adapter still retains its existing formal imaginary-unit bridge and restores Gaussian-rational coefficients before evaluation; that separate adapter is not migrated by this change. No arbitrary-precision value is routed through `f64`.
 
 ## Tensor projection and supported scope
 

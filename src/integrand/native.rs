@@ -1,4 +1,4 @@
-//! HEPKit owns rational boundary partial fractions, completion and rewriting.
+//! HEPKit owns Gaussian-rational boundary partial fractions, completion and rewriting.
 //!
 //! This adapter changes only scalar-product notation and preserves the original
 //! family coordinates and normalization. Inputs outside the native coefficient
@@ -37,15 +37,15 @@ pub(super) fn validate_coordinates(variables: &[Atom], template: &IntegralFamily
 
 // Do not use a failed polynomial conversion as a fallback signal: an exponent
 // overflow or native resource limit is not a coefficient-field mismatch.
-fn rational_coefficient(a: AtomView<'_>) -> bool {
+fn gaussian_rational_coefficient(a: AtomView<'_>) -> bool {
     match a {
-        AtomView::Num(_) => Rational::try_from(a).is_ok(),
+        AtomView::Num(_) => Complex::<Rational>::try_from(a).is_ok(),
         AtomView::Var(v) => v.get_symbol() != crate::family::imaginary_parameter(),
-        AtomView::Add(v) => v.iter().all(rational_coefficient),
-        AtomView::Mul(v) => v.iter().all(rational_coefficient),
+        AtomView::Add(v) => v.iter().all(gaussian_rational_coefficient),
+        AtomView::Mul(v) => v.iter().all(gaussian_rational_coefficient),
         AtomView::Pow(v) => {
             let (base, exponent) = v.get_base_exp();
-            Integer::try_from(exponent).is_ok() && rational_coefficient(base)
+            Integer::try_from(exponent).is_ok() && gaussian_rational_coefficient(base)
         }
         _ => false,
     }
@@ -55,7 +55,7 @@ pub(super) fn supports(denominators: &[Propagator]) -> bool {
     denominators.iter().all(|d| {
         std::iter::once(&d.constant)
             .chain(&d.scalar_products)
-            .all(|a| rational_coefficient(a.as_view()))
+            .all(|a| gaussian_rational_coefficient(a.as_view()))
     })
 }
 
