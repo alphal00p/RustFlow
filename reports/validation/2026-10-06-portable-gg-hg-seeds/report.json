@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "status": "numeric_data_portability_passed",
+  "scope": "Supplied starting values for a single-core live demo; native importer and actual initial transport optimization remain in progress.",
+  "bundle": {
+    "binary_bytes": 20420475,
+    "json_bytes": 4044799,
+    "gzip_bytes": 1054943,
+    "sha256": "984b64a1617eb111543fc3b97e1cd36c84c610cfd8a02b11e8dfa861809acee4",
+    "configurations": 16,
+    "coefficients": 4360,
+    "verified_digits": [
+      40
+    ],
+    "input_verified_digits": [
+      40
+    ],
+    "working_bits": [
+      415
+    ],
+    "source_unchanged": true
+  },
+  "mathematical_input_files_unchanged_between": "db9cbba and 115d9e5",
+  "native_round_trip": {
+    "complex_values": 4360,
+    "absolute_errors": 4360,
+    "all_values_and_per_number_precision_preserved": true,
+    "epsilon_range": [
+      0,
+      4
+    ]
+  },
+  "actual_wasm": {
+    "status": "passed",
+    "coefficients": 4360,
+    "absolute_errors": 4360,
+    "decode_ns": 27889139,
+    "number_import_and_exact_verification_ns": 751464628,
+    "total_ns": 779353767,
+    "working_bits": 415,
+    "scope": "Actual single-core Pyodide arbitrary-precision data import; no RustFlow transport or amplitude calculation.",
+    "wheel_sha256": "0b13c919f8f7a1c419ca3a8a883182a375caae8fdd6272a3f83873f4a9c5dd46",
+    "wheel_path": "/common/dev/symbolica-community/main/dist/wasm-performance/symbolica-3.0.1-cp314-abi3-pyemscripten_2026_0_wasm32.whl",
+    "runtime_path": "/home/ben/.cache/pyodide-build/.pyodide-xbuildenv-143319190fb8/314.0.7/xbuildenv/pyodide-root/dist",
+    "node_version": "v24.18.0"
+  },
+  "controller_checks": {
+    "existing_passed": 51,
+    "seconds": 20.91,
+    "number_rejection_checks": 4
+  },
+  "loader_sha256": "8258c66f9feacea2a45ffbf302b9037133c4cb488cc33d683e1e9bdc4da00b28",
+  "limitations": [
+    "WASM import time excludes runtime startup, package download, mathematical certificate validation and insertion into a solver boundary cache.",
+    "This is not a WASM transport or amplitude timing. The current community WASM build excludes the loop evaluator.",
+    "The live notebook adapter, exact mathematical certificate and generic supplied-boundary insertion still require end-to-end integration validation.",
+    "Original frozen scientific bank unchanged; no destination points or amplitudes are included."
+  ],
+  "retained_initial_probe_failure": "The first WASM probe asserted every error had the coefficient working precision. Some error estimates intentionally retain a different precision. The probe was corrected to compare each error with its own exported precision; exact values were preserved."
+}

@@ -1,0 +1,18 @@
+{
+  "binary_bytes": 20420475,
+  "json_bytes": 4044799,
+  "gzip_bytes": 1054943,
+  "sha256": "984b64a1617eb111543fc3b97e1cd36c84c610cfd8a02b11e8dfa861809acee4",
+  "configurations": 16,
+  "coefficients": 4360,
+  "verified_digits": [
+    40
+  ],
+  "input_verified_digits": [
+    40
+  ],
+  "working_bits": [
+    415
+  ],
+  "source_unchanged": true
+}
