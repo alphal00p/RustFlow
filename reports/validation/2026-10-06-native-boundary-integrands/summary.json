@@ -1,0 +1,354 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "recorded_utc": "2026-10-06T05:55:57.733029+00:00",
+  "tested_commit": "bfb1093f738ee68b488cd7952b2a24b6e835ddb4",
+  "source_files_verified_before_after_against_commit": 285,
+  "scope": "Isolated native boundary-integrand decomposition with the published exact-affine HEPKit owner, including ordinary boundaries, native graph/reduction input, cuts and Python/CLI interfaces. Not a rebuilt community extension.",
+  "release_tests": {
+    "passed": 341,
+    "failed": 0,
+    "ignored": 6,
+    "targets": [
+      {
+        "target": "unittests src/lib.rs",
+        "passed": 165,
+        "failed": 0,
+        "ignored": 5
+      },
+      {
+        "target": "tests/cli.rs",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/complex_kinematics.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/core.rs",
+        "passed": 13,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/cuts.rs",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/end_to_end.rs",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/ft.rs",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/gg_hg_amplitude.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/hepkit.rs",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/hepkit_cuts.rs",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/integrand.rs",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/kinematic_derivative.rs",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/kinematics.rs",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/linear.rs",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/linear_two_directions.rs",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/massless_phase_space.rs",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/mixed_cut_flow.rs",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/multimass_physical.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_arity.rs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_boundary_integrand.rs",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_cut_interfaces.rs",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_family_cache.rs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_graphs.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_parametric.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_physical.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_symmetry.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/partial_cut_boundaries.rs",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/physical_family.rs",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_cut_interfaces.rs",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/recursive.rs",
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/reduction_graphs.rs",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/regions.rs",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/scoped_reductions.rs",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/single_mass.rs",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 1
+      },
+      {
+        "target": "tests/supplied_flow.rs",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/tensor_vacuum.rs",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      }
+    ]
+  },
+  "separate_child_checks": [
+    {
+      "parent": "unittests src/lib.rs",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "parent": "unittests src/lib.rs",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "parent": "unittests src/lib.rs",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "parent": "unittests src/lib.rs",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "parent": "unittests src/lib.rs",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "parent": "unittests src/lib.rs",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "counting": "Only the last summary in each Cargo target contributes to release_tests; child-process checks are separate.",
+  "execution": {
+    "session": 36780,
+    "exit_code": 0
+  },
+  "checks": {
+    "fmt": "passed",
+    "strict_all_target_python_stubgen_clippy": "passed"
+  },
+  "compiled_source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "239a0e3581f0e4441c108e9096cc72b7f060d614375ee7123edab1b4a30dc3a1",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "517ec71ffac512f9559bef282b56ad6fdd48d48cb0ae405503dceda581f5f4cc"
+  },
+  "library": {
+    "archive": "/common/dev/amflow-native-boundary-partial-fractions/target/native-boundary-release-bfb1093/libsymbolica_amflow-3f29a007f7acf38f.rlib",
+    "sha256": "a2898a893edf88fdb48514f62a3d88bf87175b5c65ec40a816e1f24597566151"
+  },
+  "native_owner_revision": "8bfd027a8df276ab640adf1f238833bbcf9bb9c1",
+  "native_owner_pr": "https://github.com/alphal00p/gammaloop/pull/125",
+  "limits": [
+    "No new complete four-target paper or full gg-to-hg acceptance; the separate fresh planar anchor passes 240 comparisons.",
+    "Gaussian denominator coefficients retain the existing exact AtomField path; Gaussian numerators use native rewriting.",
+    "Publication wheel and completed numerical cache banks unchanged.",
+    "Native graph owner suite retains its inherited raw-Gaussian failure; its exact-affine tests pass."
+  ],
+  "artifact_sha256": {
+    "boundary-development-result.json": "ae3655338d3940f713651c2508397108584c35232aa26161f7e7f0ee93e5de01",
+    "boundary-development-tests.log.gz": "3c102681ae082d016f413ec0703ce1a45d376ef6319eb2e19a63f947c70fd608",
+    "clippy.log.gz": "aaa60162ee26805f607dbd1a1f36b84a8caf3e054f0c1b30b503eccd379afd3c",
+    "fixed-owner-direct-tests.log.gz": "dfd4d32c5986928cbd7de6fc1278b74947f4eafa2a4f682a7fa27b3d903e4f21",
+    "fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "owner-graph-check.json": "d46b6baef280da27c54225abfcf588eb03562ad6d352e5e2908b8ba9d50b88b8",
+    "owner-regression-before.log.gz": "54bacc87b9632dfc27755bba0f95b859c1141a59625590d136ebd0c19a172afe",
+    "planar-build.json": "ef7e33c41f7953309b6327e7eb5f17d020e4aefa4c1e40d9d9a00e3cb70c7ed9",
+    "planar-process.json": "768c886d0bcc74e7b26c6df4cdb5cbef6c610ef8a16bead258c0e3d925e4ce0f",
+    "planar-result.json.gz": "314365bbe95248777e5f816a67b8e3b255359cf332a68ee1533b978845d70044",
+    "planar-stderr.log.gz": "05ae23f55b68bcb4f1e6482bb9d05af7dbff23ddc8602d33185295c572a833d6",
+    "processes.json": "41c8ea4e41abca3a8defc7ce3442567fbaf790e9252ac13072e9c0f4a2e45f64",
+    "run-planar.py": "25c2b2af75012699be1bdd55d5dfd74802d6eca53f01fcf0a8cf3341dfdc439c",
+    "scientific-build.log.gz": "736a66d4073c0bddd278140c973cd477591e4aab661fa2e85c66097d785fb916",
+    "source-after.json": "a0f9602567fbda12e433ede1803ff762281008ae986e7a38f6cdfd17e6ff425f",
+    "source-before.json": "5d4b34a74d70c0d92c0fa50fdbcf3bf42a29df05348b1f889deb4857ef00fc73",
+    "tests.log.gz": "aa53200c817f50a17535458759c02ae68c1b2660371872b7502901bb823d899a",
+    "validate.py": "11b8f09e6ef0c86b448665770729b4fa943b386265746ccd4d38ec3ae50e2ab6"
+  },
+  "scientific_planar": {
+    "status": "passed",
+    "family": "Planar_EW1",
+    "coordinates": {
+      "rustflow_gg_hg_boundaries::{}::b": "-1/50",
+      "rustflow_gg_hg_boundaries::{}::s": "-1/10",
+      "rustflow_gg_hg_boundaries::{}::t": "-1/25"
+    },
+    "cold_numerical_and_exact_cache": true,
+    "initial_boundary_entries": 0,
+    "final_boundary_entries": 1,
+    "verified_digits": 20,
+    "working_bits": 282,
+    "wall_seconds": 337.4233635123819,
+    "native_generation_seconds": "336.842981558",
+    "sample_progress_events": 66,
+    "reference_comparison": {
+      "checked_coefficients": 240,
+      "failures": [],
+      "last_reference_power": 4,
+      "maximum_absolute_difference": "6.139683029766705646907368033397347240036136033618372601107216773179720301291407554843e-47",
+      "maximum_error_ratio": "3.438751540963748852371118848769875007403370445976012044397976039896757082979269094753e-13",
+      "metric": "absolute complex difference <= native allowance + recorded reference allowance",
+      "passed": true,
+      "reference_accuracy_cap_digits": 40,
+      "reference_loaded_after_native_success": true,
+      "reference_provenance": "Planar_EW1; reports/validation/2026-10-04-planar-exact-seed.json sha256=19f63f9b996c571e6170af3f0d65af9233cb830a265ffa394ea4e3d350cd1865; Exact upstream singular PL formulas plus all68 regenerated GPL constants; native80/80/start1/8 and110/112/start1/10, original singular-core comparison45digits; conditionalGPLsource and error propagation documented in planar-exact-seed-report.json. No physical FF precision upgrade implied."
+    },
+    "source_unchanged": true,
+    "session": 99073,
+    "terminal_chunk": "b025b2",
+    "binary_sha256": "7d230c2823338710c70bce9327c7ffb97d4e1afc541bece0ce9f6b9ce2624fcd",
+    "scope": "One Euclidean planar anchor, 48 masters through epsilon^4; no physical amplitude or upstream timing claim."
+  },
+  "history": {
+    "before_owner_fix": "The new extreme expanded coefficient regression fails on the previous native owner: a partial-fraction weight still depends on loop scalar products. All six other direct checks passed.",
+    "after_owner_fix": "All seven direct checks pass on native owner 8bfd027; final frozen 341-test gate is recorded above.",
+    "development_gate": "81 passed, one ignored, before owner pin update; overlaps final gate and is retained only as development evidence."
+  }
+}

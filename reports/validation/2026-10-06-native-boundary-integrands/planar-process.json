@@ -1,0 +1,33 @@
+{
+  "status": "completed",
+  "started_utc": "2026-10-06T05:58:23.422023+00:00",
+  "tested_commit": "bfb1093f738ee68b488cd7952b2a24b6e835ddb4",
+  "command": [
+    "/common/dev/amflow-native-boundary-partial-fractions/target/native-boundary-validation/scientific-planar/gg_hg_boundaries",
+    "--family",
+    "pl",
+    "--digits",
+    "20",
+    "--guard-digits",
+    "40",
+    "--order",
+    "80",
+    "--workers",
+    "16",
+    "--cache-directory",
+    "/common/dev/amflow-native-boundary-partial-fractions/target/native-boundary-validation/scientific-planar/state",
+    "--cancel-file",
+    "/common/dev/amflow-native-boundary-partial-fractions/target/native-boundary-validation/scientific-planar/cancel"
+  ],
+  "binary_sha256": "7d230c2823338710c70bce9327c7ffb97d4e1afc541bece0ce9f6b9ce2624fcd",
+  "cold_numerical_and_exact_cache": true,
+  "reference_role": "Comparison only after native boundary fit.",
+  "wall_cap_seconds": 1800,
+  "cancel_grace_seconds": 60,
+  "pid": 3096447,
+  "exit_code": 0,
+  "elapsed_seconds": 337.4233635123819,
+  "finished_utc": "2026-10-06T06:04:02.555951+00:00",
+  "source_unchanged": true,
+  "binary_sha256_after": "7d230c2823338710c70bce9327c7ffb97d4e1afc541bece0ce9f6b9ce2624fcd"
+}
