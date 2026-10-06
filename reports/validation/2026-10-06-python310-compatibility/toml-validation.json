@@ -1,0 +1,78 @@
+{
+  "created_utc": "2026-10-06T00:27:30.623330+00:00",
+  "scope": "Python 3.9/3.10 test-only TOML fallback and conditional development/CI test dependency; no native build, runtime, skip or supported-version changes.",
+  "community_commit": "3759d72f81f305423d1207965b560ebfa5c31159",
+  "worktree_base": "059ec1faf663e38ccb4def8bfeb368eb7b5edc8e",
+  "inherited_failure": {
+    "pr_base_commit": "69509f1b8a386d22f2333a2182d4b1505cd804e3",
+    "introduced_in": "c115b9d532bcb2c43f1e39aecff4c9d8b4025f91",
+    "file": "tests/test_rustred_dot_families.py",
+    "base_file_sha256": "637a2502163dae2f34f46ea2ae55133458e92fb846a81fccc40fdcb6e88c8c64",
+    "base_import": "import tomllib",
+    "ci_error": "ModuleNotFoundError: No module named 'tomllib'",
+    "ci_logs_sha256": {
+      "/common/dev/amflow/target/community-pr19-linux-failed.log": "e62f76e6bb2635808a6bd364e8dd14d73a9b83e6b82fb7cf94e8feaff133b5da",
+      "/common/dev/amflow/target/community-pr19-macos-failed.log": "aff91c09df0ae9e13fd69d1798a40456168119338faf4571ed2e70a928585e5a"
+    }
+  },
+  "environment": {
+    "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+    "interpreter": "/common/dev/symbolica-community/python310-toml-tests/target/python310-venv/bin/python",
+    "stdlib_tomllib_available": false,
+    "tomli_version": "2.4.1",
+    "dev_and_ci_tomli_marker": "tomli>=2.0.1; python_version < \"3.11\"",
+    "marker_results": {
+      "3.9": true,
+      "3.10": true,
+      "3.11": false,
+      "3.14": false
+    },
+    "wheel": {
+      "path": "/common/dev/amflow/target/publication-wheels-db9-c340-stubs/symbolica-3.0.0-cp39-abi3-linux_x86_64.whl",
+      "sha256": "ced5ecd02b0be1c6271580bdb6d39b1cd995abf60b5cc18efb4b80254b993afa"
+    },
+    "extension": {
+      "path": "/common/dev/symbolica-community/python310-toml-tests/target/python310-venv/lib/python3.10/site-packages/symbolica/core.abi3.so",
+      "sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf"
+    },
+    "live_runtime_modified": false
+  },
+  "setup_commands": [
+    "/nix/store/cdj5kh05zgih6fc8bq128ala4c2mwybn-uv-0.12.17/bin/uv python install 3.10 --install-dir target/python310-runtime --no-bin",
+    "source /common/dev/amflow/target/publication-python-env.sh",
+    "/nix/store/cdj5kh05zgih6fc8bq128ala4c2mwybn-uv-0.12.17/bin/uv venv target/python310-venv --python target/python310-runtime/cpython-3.10.21-linux-x86_64-gnu/bin/python3.10",
+    "/nix/store/cdj5kh05zgih6fc8bq128ala4c2mwybn-uv-0.12.17/bin/uv pip install --python target/python310-venv/bin/python \"/common/dev/amflow/target/publication-wheels-db9-c340-stubs/symbolica-3.0.0-cp39-abi3-linux_x86_64.whl[notebook-display]\" pytest ty numpy \"tomli>=2.0.1; python_version < '3.11'\"",
+    "export CI=true"
+  ],
+  "checks": [
+    {
+      "command": "target/python310-venv/bin/python -m pytest -q tests/test_rustred_dot_families.py",
+      "result": "4 passed",
+      "log_sha256": "f87e1ec159e73ceaff96b34a3bc29b017111816d05b56b64e23a829128ce891b"
+    },
+    {
+      "command": "target/python310-venv/bin/python -m pytest --collect-only -q tests",
+      "result": "1302 tests collected; no collection errors",
+      "log_sha256": "2548e66c989f05bad8b37720162e0baba09c5efed02b26e307b498e92ba9bbd9"
+    },
+    {
+      "command": "git diff --check",
+      "result": "passed"
+    },
+    {
+      "command": "rg --hidden -n 'tomllib|tomli' . -g '*.py' -g '*.toml' -g '*requirements*' -g '*.yml' -g '!.git'",
+      "result": "Only one Python import site; fixed with fallback. Matching conditional dependency in development group and CI."
+    },
+    {
+      "result": "On actual Python 3.10, stdlib tomllib is absent and tomli 2.4.1 imports. Dependency marker admits 3.9/3.10 and excludes 3.11/3.14."
+    }
+  ],
+  "files_sha256": {
+    ".github/workflows/test.yml": "52bf25a4a0124937459d3ad374730b168fbcad5fa09d2fe7dd9bca74935f096d",
+    "pyproject.toml": "8aad6ee6b967eee1d75b75e3ff9e7a28c3d4c780b59aa519b4ebb6f9068424e0",
+    "tests/test_rustred_dot_families.py": "170aa9e5937d9c043614d41648de02cd07eba2b8b84cc487c94c93de0354b08a"
+  },
+  "full_suite": "Running independently in the same frozen isolated environment; results recorded by /root/community_py310_suite, not claimed here.",
+  "frozen_publication_and_main_unchanged": true,
+  "push_performed": false
+}

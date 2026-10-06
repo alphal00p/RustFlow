@@ -139,9 +139,32 @@ also passes both output types. The live wheel has not been changed; the isolated
 tensor host is not a rerun of the full community browser suite.
 
 The final wheel's forced cancellation after one fresh 40-digit sample passed;
-regeneration resumed in a fresh session. Next are all sixteen refined sources,
-independent stability and nearby-query checks. Update the draft's acceptance
-evidence after those checks; the live calculation and its sources stay frozen.
+regeneration resumed in a fresh session. All sixteen refined 40-digit sources
+have now passed, using 1,376 new-generation samples and preserving the interrupted
+sample. Resumed boundary generation took 5,503.78 seconds. Independent physical
+transport, observable stability and nearby-query checks are still running; no
+final process success is claimed yet. The live calculation and its sources stay
+frozen until its completion attestation and process exit are collected.
+
+Separate Python 3.10 checks found and fixed the headless runner's use of the
+built-in timeout exception: `Future.result` raises a distinct exception on that
+Python version. The follow-up preserves pending polling, worker exception
+identity and final failure progress. It passed 72 focused checks on Python 3.10
+and 70 on Python 3.14 with identical native extension bytes; the difference is
+two tests for exception classes that become aliases on newer Python. A separate
+conditional `tomli` dependency fixes the inherited Python 3.10 test-collection
+failure. Both commits are pushed on `codex/python310-toml-tests`, ending at
+`d36b9f4fe2b2b0766f313dab05237e90ea544640`, pending application after the frozen
+run. See the [compatibility evidence](../reports/validation/2026-10-06-python310-compatibility/polling-validation.json).
+
+The full Python 3.10 suite before the polling fix recorded 1,095 passes,
+36 failures and 172 skips. Its
+[source-provenance audit](../reports/validation/2026-10-06-python310-compatibility/full-suite-provenance.json)
+identifies 29 missing native Linnet dependency failures, inherited documentation
+and accessor issues, an unrelated showcase symlink issue, the polling defect and
+the known C++ export defect. These are being repaired or tracked separately;
+the focused green checks do not mean the entire community suite is green.
+
 Broader work remains on general linear/cut recursion, algebraic singular
 endpoints, causal paths, nondiagonal epsilon transformations, advanced Python
 solver access, and performance across the reference benchmark suite. Numerical

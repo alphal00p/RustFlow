@@ -1,0 +1,136 @@
+{
+  "created_utc": "2026-10-06T00:36:41.760443+00:00",
+  "commit": "d36b9f4fe2b2b0766f313dab05237e90ea544640",
+  "base_commit": "3759d72f81f305423d1207965b560ebfa5c31159",
+  "scope": "Explicit concurrent.futures timeout handling; retain pending polling, worker exception identity, immediate warm results and final failure progress across Python 3.10 and 3.14.",
+  "environment_setup": [
+    "source /common/dev/amflow/target/publication-python-env.sh",
+    "export CI=true",
+    "export PYTHONDONTWRITEBYTECODE=1"
+  ],
+  "python310_notebook_dependency_command": "/nix/store/cdj5kh05zgih6fc8bq128ala4c2mwybn-uv-0.12.17/bin/uv pip install --python target/python310-venv/bin/python 'marimo>=0.24.2,<0.25'",
+  "python310_published_wheel": {
+    "path": "/common/dev/amflow/target/publication-wheels-db9-c340-stubs/symbolica-3.0.0-cp39-abi3-linux_x86_64.whl",
+    "sha256": "ced5ecd02b0be1c6271580bdb6d39b1cd995abf60b5cc18efb4b80254b993afa"
+  },
+  "environments": {
+    "3.10": {
+      "version": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+      "executable": "/common/dev/symbolica-community/python310-toml-tests/target/python310-venv/bin/python",
+      "extension": "/common/dev/symbolica-community/python310-toml-tests/target/python310-venv/lib/python3.10/site-packages/symbolica/core.abi3.so",
+      "native_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf"
+    },
+    "3.14": {
+      "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "executable": "/common/dev/amflow/target/publication-python-venv/bin/python",
+      "extension": "/common/dev/amflow/target/publication-python-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+      "native_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf"
+    }
+  },
+  "checks": [
+    {
+      "python": "3.10",
+      "command": "target/python310-venv/bin/python -m pytest -q -o cache_dir=target/polling-timeout-validation/pytest310-cache tests/test_hep_gg_hg.py tests/test_hep_gg_hg_anchors.py tests/test_hep_notebooks.py -k gg_hg",
+      "passed": 72,
+      "skipped": 0,
+      "log": "/common/dev/symbolica-community/python310-toml-tests/target/polling-timeout-validation/python310-notebook.log",
+      "log_sha256": "87b8aef9b39f952d30fa85bf0cb73560da5cb61e9b5a5df78f61b15d988d9691"
+    },
+    {
+      "python": "3.14",
+      "command": "python -m pytest -q -o cache_dir=target/polling-timeout-validation/pytest314-cache tests/test_hep_gg_hg.py tests/test_hep_gg_hg_anchors.py",
+      "passed": 64,
+      "skipped": 0,
+      "log": "/common/dev/symbolica-community/python310-toml-tests/target/polling-timeout-validation/python314.log",
+      "log_sha256": "d6e9222a072bd7ed2dbec45310a21226ff07a494b7a53a8b2a581ef3fed7d695"
+    },
+    {
+      "python": "3.14",
+      "command": "python -m pytest -q -o cache_dir=target/polling-timeout-validation/pytest314-cache tests/test_hep_notebooks.py -k gg_hg",
+      "passed": 6,
+      "skipped": 0,
+      "log": "/common/dev/symbolica-community/python310-toml-tests/target/polling-timeout-validation/python314-notebook.log",
+      "log_sha256": "4868b5d2cd5eec1abbb72c5ffad5fb6f8adbac2702e8bf4e09ed659474d71932"
+    }
+  ],
+  "totals": {
+    "3.10": {
+      "passed": 72,
+      "skipped": 0
+    },
+    "3.14": {
+      "passed": 70,
+      "skipped": 0
+    }
+  },
+  "test_count_difference": "The futures and built-in timeout exceptions are distinct on Python 3.10 and aliases on Python 3.14. Parameterized worker-error cases deduplicate aliases.",
+  "baseline_control": {
+    "3.10": {
+      "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+      "timeout_classes_are_aliases": false,
+      "old_pending": {
+        "result": "poll timeout escaped",
+        "progress": [
+          false,
+          false
+        ]
+      },
+      "fixed_pending": {
+        "result": "completed",
+        "progress": [
+          false,
+          false,
+          true
+        ]
+      },
+      "old_worker_failure_progress": [
+        false
+      ],
+      "fixed_worker_failure_progress": [
+        false,
+        true
+      ]
+    },
+    "3.14": {
+      "python": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+      "timeout_classes_are_aliases": true,
+      "old_pending": {
+        "result": "completed",
+        "progress": [
+          false,
+          false,
+          true
+        ]
+      },
+      "fixed_pending": {
+        "result": "completed",
+        "progress": [
+          false,
+          false,
+          true
+        ]
+      },
+      "old_worker_failure_progress": [
+        false
+      ],
+      "fixed_worker_failure_progress": [
+        false,
+        true
+      ]
+    }
+  },
+  "baseline_control_commands": [
+    "target/python310-venv/bin/python target/polling-timeout-validation/regression_control.py",
+    "python target/polling-timeout-validation/regression_control.py"
+  ],
+  "baseline_control_script_sha256": "2ecad17f3579cceee596a1c7ee328799acdc8bc0d088e5a7ce14fc4b7afbe3a4",
+  "files_sha256": {
+    "examples/hep/gg_hg_acceptance.py": "6f1686b22017dce4d1f0a2f7cc2362a8d78dcc6aded49a6428355941ecf1ba3c",
+    "tests/test_hep_gg_hg.py": "7a0796d73bed03e71420a53a60c30176f485bcce7c8242b84ef22c22ac860df2"
+  },
+  "diff_check": "git diff --check passed",
+  "limitations": [
+    "Focused controller/acceptance/smoke validation; no full two-loop numerical calculation or performance claim.",
+    "Only the isolated branch changed. Applying this helper to the frozen publication must wait for its live acceptance attestation to finish."
+  ]
+}

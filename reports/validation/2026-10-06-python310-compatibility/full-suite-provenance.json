@@ -1,0 +1,217 @@
+{
+  "base": "69509f1b8a386d22f2333a2182d4b1505cd804e3",
+  "inspected_head": "3759d72f81f305423d1207965b560ebfa5c31159",
+  "unchanged_base_files": {
+    "tests/test_hep_documentation.py": {
+      "base_blob": "d22087a79706e0edf17ee09e48b1a121cfdcbaaa",
+      "current_blob": "d22087a79706e0edf17ee09e48b1a121cfdcbaaa"
+    },
+    "tests/test_hep_symbols.py": {
+      "base_blob": "260986c13785baa1bdad966b25d524b1791751a5",
+      "current_blob": "260986c13785baa1bdad966b25d524b1791751a5"
+    },
+    "tests/test_hep_notebooks.py": {
+      "base_blob": "568ce4d6ef77b12789bef8c88c177ab1ec0b7f79",
+      "current_blob": "568ce4d6ef77b12789bef8c88c177ab1ec0b7f79"
+    },
+    "examples/hep/four_loop_reduction.py": {
+      "base_blob": "c131c98e7361d27e902125066098394c575abc2a",
+      "current_blob": "c131c98e7361d27e902125066098394c575abc2a"
+    }
+  },
+  "owner_base": "6c707c6b77a437256eb1180da13d4d327b371d13",
+  "owner_current": "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+  "owner_unchanged_files": {
+    "crates/feynkit-py/src/graph_interop.rs": {
+      "base_blob": "65a5fe82fcb914acab9b6a599fc822bc879a92bd",
+      "current_blob": "65a5fe82fcb914acab9b6a599fc822bc879a92bd"
+    },
+    "crates/feynkit-py/src/kinematics.rs": {
+      "base_blob": "0e1c5d9fb52977e973831bac34dc512209cc21cb",
+      "current_blob": "0e1c5d9fb52977e973831bac34dc512209cc21cb"
+    },
+    "crates/linnet-py/Cargo.toml": {
+      "base_blob": "543ff23bb39359d4c67237c8220014274f48db4a",
+      "current_blob": "543ff23bb39359d4c67237c8220014274f48db4a"
+    },
+    "crates/linnet-py/src/lib.rs": {
+      "base_blob": "9b00ab71261fe00fc46fdb45bda2990d734c982a",
+      "current_blob": "9b00ab71261fe00fc46fdb45bda2990d734c982a"
+    }
+  },
+  "documentation_audit": {
+    "base": {
+      "missing_examples": [
+        "IBPFamily.compiled_runtime_arities",
+        "IBPFamily.cut",
+        "IBPFamily.parameter_bindings",
+        "IBPFamily.start_generation",
+        "IBPFamily.normalize_candidate_terminals",
+        "IBPSolution.depth",
+        "IBPSolution.stable_depth",
+        "IBPSolution.preferred_masters",
+        "IBPSolution.replaced",
+        "IBPSolution.certify",
+        "IBPCertificate",
+        "IBPCertificate.reduction",
+        "IBPCertificate.masters",
+        "IBPCertificate.master_counts",
+        "IBPCertificate.residual_counts",
+        "IBPCertificate.excess_sectors",
+        "IBPCertificate.no_verdict",
+        "IBPCertificate.stable_depth",
+        "IBPCertificate.replayed_rules",
+        "IBPCertificate.identities",
+        "IBPCertificate.seed"
+      ],
+      "missing_parameters": [
+        {
+          "entry": "IBPFamily.__init__",
+          "parameters": [
+            "cut"
+          ]
+        },
+        {
+          "entry": "IBPFamily.start_generation",
+          "parameters": [
+            "event_capacity",
+            "options"
+          ]
+        },
+        {
+          "entry": "IBPFamily.normalize_candidate_terminals",
+          "parameters": [
+            "artifact",
+            "max_matrix_cells",
+            "max_output_terms",
+            "max_supports",
+            "max_terminals"
+          ]
+        },
+        {
+          "entry": "IBPFamily.reduce_laporta",
+          "parameters": [
+            "preferred_masters",
+            "until_stable"
+          ]
+        },
+        {
+          "entry": "IBPSolution.certify",
+          "parameters": [
+            "count_masters",
+            "replay",
+            "seed"
+          ]
+        }
+      ]
+    },
+    "current": {
+      "missing_examples": [
+        "IBPFamily.compiled_runtime_arities",
+        "IBPFamily.cut",
+        "IBPFamily.parameter_bindings",
+        "IBPFamily.start_generation",
+        "IBPFamily.normalize_candidate_terminals",
+        "IBPSolution.depth",
+        "IBPSolution.stable_depth",
+        "IBPSolution.preferred_masters",
+        "IBPSolution.replaced",
+        "IBPSolution.certify",
+        "IBPCertificate",
+        "IBPCertificate.reduction",
+        "IBPCertificate.masters",
+        "IBPCertificate.master_counts",
+        "IBPCertificate.residual_counts",
+        "IBPCertificate.excess_sectors",
+        "IBPCertificate.no_verdict",
+        "IBPCertificate.stable_depth",
+        "IBPCertificate.replayed_rules",
+        "IBPCertificate.identities",
+        "IBPCertificate.seed",
+        "IBPCertificate.__repr__"
+      ],
+      "missing_parameters": [
+        {
+          "entry": "IBPFamily.__init__",
+          "parameters": [
+            "cut"
+          ]
+        },
+        {
+          "entry": "IBPFamily.start_generation",
+          "parameters": [
+            "event_capacity",
+            "options"
+          ]
+        },
+        {
+          "entry": "IBPFamily.normalize_candidate_terminals",
+          "parameters": [
+            "artifact",
+            "max_matrix_cells",
+            "max_output_terms",
+            "max_supports",
+            "max_terminals"
+          ]
+        },
+        {
+          "entry": "IBPFamily.reduce_laporta",
+          "parameters": [
+            "preferred_masters",
+            "until_stable"
+          ]
+        },
+        {
+          "entry": "IBPSolution.certify",
+          "parameters": [
+            "count_masters",
+            "replay",
+            "seed"
+          ]
+        }
+      ]
+    }
+  },
+  "linnet": {
+    "failure_count": 29,
+    "provenance": "Inherited: relevant community test/doc examples and owner graph bridge unchanged",
+    "correct_dependency": "GammaLoop crates/linnet-py, project and module linnet, 0.1.0, Python >=3.10, extension-module + abi3-py310",
+    "contract": "Separate installed top-level linnet extension; public Graph/Subgraph objects are shared through Python calls, not duplicate embedded PyO3 class registration",
+    "source_references": [
+      "/home/ben/.cargo/git/checkouts/gammaloop-7728595a5b8ab3ff/a3d1c8a/crates/feynkit-py/src/graph_interop.rs:174",
+      "/home/ben/.cargo/git/checkouts/gammaloop-7728595a5b8ab3ff/a3d1c8a/crates/feynkit-py/src/graph_interop.rs:236",
+      "/home/ben/.cargo/git/checkouts/gammaloop-7728595a5b8ab3ff/a3d1c8a/crates/linnet-py/pyproject.toml:1",
+      "/home/ben/.cargo/git/checkouts/gammaloop-7728595a5b8ab3ff/a3d1c8a/docs/products/linnet/content/quickstart-python.typ:6",
+      "/home/ben/.cargo/git/checkouts/gammaloop-7728595a5b8ab3ff/a3d1c8a/crates/feynkit-py/tests/installed_graph_interop.py:1"
+    ],
+    "next_action": "Supply a separately verified owner-built Linnet wheel as a CI/test dependency; do not install the unrelated PyPI linnet project or alias a community namespace.",
+    "existing_unverified_artifact": "/tmp/feynkit-marimo-release-20261002/linnet-wheels/linnet-0.1.0-cp310-abi3-manylinux_2_34_x86_64.whl (referenced by main .venv-feynkit direct_url.json; not used)"
+  },
+  "documentation": {
+    "failure_count": 2,
+    "provenance": "Inherited first failures; current added IBPCertificate.__repr__ adds one more missing example beyond 21 at base",
+    "next_action": "Complete Examples and Parameters in stubs/ibp.pyi and mirror/regenerate only appended IBP portion of python/symbolica/community/hepkit/__init__.pyi; preserve API signatures."
+  },
+  "four_loop_preamble": {
+    "failure_count": 1,
+    "provenance": "Notebook and test both byte-identical to base",
+    "next_action": "Add standard folded setup explanatory cell near notebook introduction, keeping existing app.setup and calculation unchanged; do not remove notebook coverage."
+  },
+  "public_momentum_head": {
+    "failure_count": 1,
+    "provenance": "Test and owner API byte-identical to base",
+    "next_action": "Obtain P = hep.Kinematics.external_momentum(); compare leg.momentum to P(leg.index), and compare user symbol against P, not the method object. Corrected expression verified for four amplitude legs."
+  },
+  "showcase": {
+    "failure_count": 1,
+    "provenance": "Post-base unrelated commit 33456209 adds absolute symlink to /common/dev/gammaloop/feynkit-typed-products/examples/notebooks/spenso_notation.py",
+    "next_action": "Separately reviewed owner notebook update: use hep.Symbols.half_edge() with explicit public import and marimo dependency plumbing. Verified equals old symbol and constructs both showcased tensors. Preserve symlink; do not edit its external target implicitly."
+  },
+  "complex_exporter": {
+    "failure_count": 1,
+    "provenance": "Known upstream exporter defect; adapted current test reaches complex codegen via current evaluator API",
+    "next_action": "Track https://github.com/symbolica-dev/symbolica/pull/51; no exclusion or local native patch."
+  },
+  "source_edits": false,
+  "installations_or_rebuilds": false
+}
