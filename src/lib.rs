@@ -11,6 +11,7 @@ pub mod cache;
 mod coefficient;
 pub mod common_mass;
 pub mod contour;
+pub mod cut_flow;
 pub mod cuts;
 pub mod diffexp;
 pub mod engine;
@@ -55,6 +56,7 @@ pub mod transport_cache;
 pub mod vacuum;
 mod vacuum_peel;
 pub use asymptotic::AsymptoticConstraint;
+pub use cut_flow::PreparedCutFlow;
 pub use engine::{
     PreparedFlow, evaluate_samples, solve_integral_combinations, solve_integral_projections,
     solve_integral_projections_normalized, solve_integrals, solve_prepared,

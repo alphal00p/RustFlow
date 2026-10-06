@@ -1,0 +1,52 @@
+{
+	"upstream_commit":"26005517a288086c4cb4d1b26d829691bc088485",
+	"case":"weighted_three_body",
+	"mode":"sample",
+	"wolfram_version":"15.0.1 for Linux x86 (64-bit) (July 2, 2026)",
+	"requested_digits":24,
+	"asserted_digits":20,
+	"targets":[
+		"j[cutoracle, 1, 1, 1, 1, 0]",
+		"j[cutoracle, 1, 1, 1, 2, 0]"
+	],
+	"epsilon_samples_exact":[
+		"1\/13"
+	],
+	"working_decimal_precision":48,
+	"x_order":96,
+	"extra_x_order":50,
+	"coefficient_powers":[
+		0
+	],
+	"coefficients":[
+		[
+			"-0.00017182071594970132664172866921240416`24."
+		],
+		[
+			"0.00010851330381941607435427497385970802`24."
+		]
+	],
+	"expected":[
+		[
+			"-0.000171820715949701326641728669212401752516384226256142492059259024266289436961651115020900157039`80."
+		],
+		[
+			"0.000108513303819416074354274973859712664067017278614108821162561180420602064698037191928422006367`80."
+		]
+	],
+	"scaled_absolute_errors":[
+		[
+			"2.408608472549779232909951940581353086608276386976894555505889`47.84566068969569*^-36"
+		],
+		[
+			"4.642753948236385950981929128944957944482352114096040095524661`48.33026268602653*^-36"
+		]
+	],
+	"solve_wall_seconds":1.22885211e2,
+	"analytic_check_passed":true,
+	"normalization":"Lorentz-invariant positive-energy phase space times d^D k\/(i Pi^(D\/2)) for each virtual loop; no EulerGamma factor, flux or particle symmetry factor",
+	"normalization_conversion_to_rust":"1. Original guarded phase-volume ending uses 2*(-1)^(Lcut+1)*(4 Pi)^(-Lcut D\/2) Im(I_uncut). This is used only for complete all-cut boundary components, never for the mixed graph.",
+	"orientation":"Cut momenta r and p-r in mixed case; r,k,p-r-k in three-body case; p declared future timelike",
+	"numerator_conversion":"Original extra slot is (k-p)^2 in mixed case, whereas native tests use k.p; scaleless virtual pinches imply first and second moments 14 I and [(121D-25)\/(D-1)+75] I",
+	"comparison":"Stored returned numbers padded only for residual computation; no additional precision claimed"
+}

@@ -1,0 +1,131 @@
+{
+  "schema_version": 1,
+  "date_utc": "2026-10-06",
+  "base_commit": "73ac179fafaafb3936d26793d490c7af1ca0104b",
+  "implementation": "Generic complete-final-state cut-aware auxiliary-mass flow with unchanged positive-energy cut shells and recursively generated vacuum boundaries",
+  "dependencies": {
+    "symbolica_community": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "rustred": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "hepkit_owner": "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+    "original_amflow": "26005517a288086c4cb4d1b26d829691bc088485"
+  },
+  "validation": {
+    "release_integration_command": "cargo test --locked --release --test mixed_cut_flow --test cuts --test phase_space --test massless_phase_space --test hepkit_cuts --test regions --test recursive --test tensor_vacuum",
+    "release_integration_passed": 44,
+    "release_integration_counts": {
+      "cuts": 3,
+      "hepkit_cuts": 3,
+      "massless_phase_space": 8,
+      "mixed_cut_flow": 5,
+      "phase_space": 3,
+      "recursive": 17,
+      "regions": 1,
+      "tensor_vacuum": 4
+    },
+    "mixed_cut_test_runtime_seconds": 13.21,
+    "private_unit_command": "cargo test --locked --release --lib cut_flow::tests -- --nocapture",
+    "private_unit_passed": 1,
+    "strict_clippy_command": "cargo clippy --locked --release --all-targets -- -D warnings",
+    "strict_clippy_passed": true,
+    "format_check_passed": true,
+    "python_syntax_passed": [
+      "scripts/upstream_oracle.py",
+      "scripts/upstream_cut_oracle.py"
+    ],
+    "wolfram_one_thread_wrapper_tests_passed": 5,
+    "post_test_change": "Clippy-only rewrite of pairs[i][j] range traversal to the equivalent pairs[i][i+1..] iterator; final source compiled by strict all-target Clippy.",
+    "independent_review": "Root mathematical/code review accepted the final source, API, normalization, routing and cut-zero restoration guard before commit."
+  },
+  "benchmarks": {
+    "mixed_cut_bubble": {
+      "family": "r^2-1, (P-r)^2-4 cut; k^2, (k-r)^2 uncut; P^2=25; original ISP (k-P)^2, native ISP k.P",
+      "native_targets": 8,
+      "native_epsilon_exact": [
+        "1/13",
+        "1/17"
+      ],
+      "native_comparison_digits": 20,
+      "native_working_digits": [
+        70,
+        90
+      ],
+      "native_series_orders": [
+        80,
+        112
+      ],
+      "original_targets": 5,
+      "original_epsilon_exact": [
+        "1/13"
+      ],
+      "original_requested_digits": 24,
+      "original_asserted_digits": 20,
+      "original_solve_wall_seconds": 54.976,
+      "original_max_scaled_absolute_error": "2.223029602150166387792697588541622390044853233822409830951559332e-33",
+      "independent_oracle": "Two-body phase volume times massless virtual bubble gamma quotient, differentiated for raised cuts and Lorentz-projected for rank-one/two numerators.",
+      "extra_invariants": [
+        "cut powers zero and negative vanish",
+        "virtual pinch vanishes",
+        "triangular loop routing determinant six",
+        "permuted denominators",
+        "routed raised cut",
+        "reversed cut energy has empty support",
+        "symbolic cache restart",
+        "retained reduction nonzero condition",
+        "cancellation"
+      ]
+    },
+    "weighted_three_body": {
+      "family": "r^2, k^2, (P-r-k)^2 cut; (r+k)^2-2 uncut; P^2=1",
+      "native_targets": 2,
+      "native_epsilon_exact": [
+        "1/13"
+      ],
+      "native_comparison_digits": 20,
+      "native_laurent_verified_digits": 20,
+      "native_finite_coefficient": "-(1-log(2))/(128*pi^3)",
+      "original_targets": 2,
+      "original_epsilon_exact": [
+        "1/13"
+      ],
+      "original_requested_digits": 24,
+      "original_asserted_digits": 20,
+      "original_solve_wall_seconds": 122.885211,
+      "original_max_scaled_absolute_error": "4.642753948236385950981929128944957944482352114096040095524661e-36",
+      "independent_oracle": "Convergent beta integral / hypergeometric series for uncut powers one and two; independent-grid and higher-precision/order fitting for the finite coefficient."
+    }
+  },
+  "comparison_limits": [
+    "Recorded original coefficients retain their Wolfram precision annotations. Small residuals do not authorize claiming more than the asserted 20 digits.",
+    "Original and native both agree with independently derived analytic observables. Their extra-slot numerator bases are explicitly converted in the original oracle metadata.",
+    "No speedup ratio: the native test workload includes extra targets, samples, refinements, failures, cache/routing checks and Laurent fitting; the oracle timings measure separate upstream finite-epsilon solves.",
+    "Native integration tests use no reference numerical boundary values and require neither Mathematica nor Kira."
+  ],
+  "remaining_limits": [
+    "All uncut physical denominators must be deformed; cuts and ISP slots remain unshifted.",
+    "One complete positive-energy final state must span the insensitive loop subspace; uniform +i0 virtual directions remain separate from the cut momenta.",
+    "Exact real rational kinematics, nonnegative squared masses, independent cut-shell rows and ordinary positive quadratic uncut normalization.",
+    "Current terminal leaves are massive two-body or massless N-body; massive N-body and algebraic-only distribution cuts lack automatic boundaries.",
+    "Real-only uncut denominators require the conservative exact global nonzero support bound and a single future external channel.",
+    "Partial placements, interior phase-space poles, mixed virtual signs and general cut-preserving partial fractions remain broader parity work.",
+    "All-cut inputs use the existing phase-space terminal APIs directly.",
+    "The adapter reuses existing bounded exact reduction, region order, recursion and singular-ODE limits; numerical samples do not automatically acquire an achieved-accuracy claim.",
+    "No persistent numerical cut-value cache is added by this adapter."
+  ],
+  "sha256": {
+    "src/cut_flow.rs": "f718324c88bdde355267db0e549e408f39dd2cbd51cf431123caf6719c5cc6b6",
+    "src/phase_space.rs": "8c8763b4e74ae76b476a6bc5fbff6e25244fadbacca7ed572ab07eda7334d58c",
+    "src/lib.rs": "b7110b5ce3ba43be09e054a5590a22065fbf565044dedd3c266597fcbdab7dd3",
+    "tests/mixed_cut_flow.rs": "7481e01241ca51f7535548110da4301a6c4ec06fa3b2087443c77f078effba0d",
+    "scripts/upstream_oracle.py": "b15c89004ceb04f5394188939f59edbf19761d553ed3ff4041e090518ca7a1c1",
+    "scripts/upstream_cut_oracle.py": "96224afaf50240ff273f49c7b571bab7da6fecaadc2d64bd359ae4637de45937",
+    "scripts/upstream_cut_oracle.wl": "603070f9255349468959d38c9ed8947c2977768405931068033bb7c13034d398",
+    "docs/cuts.md": "3319106fcbe85b386f0610fa176206e0a749ab5a4d91ce90a5240d4b212bc228",
+    "Cargo.lock": "4c5b7575719b551a186318342392dc24b2d7aec7d1ff0ab02650f5559cc4fa9c",
+    "reports/validation/2026-10-06-mixed-cut-flow/mixed_cut_bubble/kernel.log": "387252e8a1cb2b0f190ab4dd1afc5575d771c84f9a9401cbe2cbd471cf230a46",
+    "reports/validation/2026-10-06-mixed-cut-flow/mixed_cut_bubble/oracle-metadata.json": "b49243f23769ebffccd97d1484570fa6fe1ef79bd3b11670b2aa02dad19c5869",
+    "reports/validation/2026-10-06-mixed-cut-flow/mixed_cut_bubble/runner-metadata.json": "a21f75a9e36bc3e3bbf2f819fbef322028826a3f30ed8d6ac888fa95e46e78ef",
+    "reports/validation/2026-10-06-mixed-cut-flow/weighted_three_body/kernel.log": "cf6c3fe4cf0a786b11a6cf585810bf39e4d25a1646a968f7098d1c61fc1fc99c",
+    "reports/validation/2026-10-06-mixed-cut-flow/weighted_three_body/oracle-metadata.json": "c83174c744deb77f7414933321d58bd0f8bc2cd70ea7111093adb9fec2d87640",
+    "reports/validation/2026-10-06-mixed-cut-flow/weighted_three_body/runner-metadata.json": "536d2a984239858928ad099a3f90821f69abf25cc2bf2f47f52b7bcd82f73401"
+  }
+}
