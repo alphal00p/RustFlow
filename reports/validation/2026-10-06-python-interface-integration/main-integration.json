@@ -1,0 +1,9 @@
+{
+  "commit": "9204b08500ac51ed3ca9e65f1a0619e6c309b983",
+  "verified_utc": "2026-10-06T04:50:13.932614+00:00",
+  "checked_inputs": 281,
+  "production_and_other_test_inputs_identical_to_validated_interface_commit": true,
+  "only_different_input": "tests/physical_conditions.rs",
+  "difference": "Version-relative cache test already validated in the full release continuation; no production change.",
+  "full_release_report": "../2026-10-06-constraints-roots-cuts-integration/summary.json"
+}

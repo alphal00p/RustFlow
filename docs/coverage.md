@@ -22,6 +22,16 @@ dense registered-root Python transport and balanced native series construction;
 the newer constraint/slot Python bindings and immutable algebraic preparation
 have separate gates. The frozen community publication wheel is unchanged.
 
+The subsequent [Python interface integration](../reports/validation/2026-10-06-python-interface-integration/summary.json)
+passes 80 targeted checks combining explicit physical deformation slots and
+exact rational endpoint constraints. A further 26 overlapping checks validate
+the corrected community re-export list, all affected Python adapters and native
+constraints. Both gates pass formatting and strict all-target Python/stub Clippy.
+The export regression executes the actual community wrapper statements and then
+uses the exported classes for numerical and cache tests. It retains the initial
+harness quoting error and the corrected reproducer's missing-export failure.
+These are registered-module checks, not a rebuilt community publication wheel.
+
 The latest isolated milestones add:
 
 - [Exact correlated rational endpoint constraints](../reports/validation/2026-10-06-constrained-singular-endpoints/validation.json):
