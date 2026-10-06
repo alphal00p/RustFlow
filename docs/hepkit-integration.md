@@ -7,6 +7,8 @@ The standalone build selects public native owner
 based on upstream HEPKit `6c707c6b77a437256eb1180da13d4d327b371d13`, and official
 Symbolica/Numerica/Graphica community `6defcca968ca8411977fb1f641a9dee49ee7b7a7`.
 The standalone and community manifests each own their shared-owner patch tables.
+Community `main` now aligns with the standalone `b96600b` owner and official
+Symbolica community `6defcca9` after PR #19.
 The frozen publication runtime retains native owner
 `a3d1c8a867ac0e89d8f58f9722cf9a7e83338901` and Symbolica community
 `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`; its acceptance data keep those original

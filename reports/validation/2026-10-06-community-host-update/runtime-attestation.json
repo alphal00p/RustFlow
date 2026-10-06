@@ -1,0 +1,33 @@
+{
+  "schema": 1,
+  "native_identity_witness": {
+    "contract": "zero connection, integration_acceptance_attestation_v1 symbols, normalization 1",
+    "identity": "67b6a1366916f121ceb449cb893b93e6aa75503e3a3b65818cf1e19264245e08"
+  },
+  "loaded_extension": {
+    "path": "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+    "size_bytes": 4090026520,
+    "sha256": "4e6cf5b2db5e180a4cccc287497b29b20075aafe65df611328aa0c88d19dbcaa"
+  },
+  "execution_sources": {
+    "acceptance": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_acceptance.py",
+      "size_bytes": 32119,
+      "sha256": "6f1686b22017dce4d1f0a2f7cc2362a8d78dcc6aded49a6428355941ecf1ba3c"
+    },
+    "controller": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg_support.py",
+      "size_bytes": 20976,
+      "sha256": "363887ae8517f4aeef20f7e4299b1e4aaf7bf1961d7492c093766acc8954da02"
+    },
+    "notebook": {
+      "path": "/common/dev/symbolica-community/loop-integration-publication/examples/hep/gg_hg.py",
+      "size_bytes": 12121,
+      "sha256": "9e7a5e5a4837785ee302d8cb4016e6dacb9b0d06b0548bc3be31fdbe16bc15d6"
+    }
+  },
+  "python": {
+    "version": "3.14.7 (main, Aug  5 2026, 10:29:49) [GCC 15.3.0]",
+    "executable": "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/bin/python"
+  }
+}

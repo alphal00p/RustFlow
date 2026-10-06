@@ -15,15 +15,17 @@ The standalone root and community host each own their Cargo patch tables;
 Cargo ignores a dependency's patch table. The standalone root maps the original
 GammaLoop source to public HEPKit owner `b96600b0085d9ddfa9e6acbc11fa72ec6163253c`
 through 22 native-package entries and uses that owner for the lean Typst library
-and SVG crates. The published community runtime retains its separately validated
-`a3d1c8a867ac0e89d8f58f9722cf9a7e83338901` owner pin until a coordinated host update.
+and SVG crates. Community `main` selects the same owner after PR #19. The earlier
+scientific publication wheel and its reports retain their separately validated
+`a3d1c8a867ac0e89d8f58f9722cf9a7e83338901` owner pin.
 The host additionally pins Vakint separately at
 `6203c6cbba6ae5e90329ba5081fad55319e678db`. Keep that separate implementation when
 embedding RustFlow in a host that also exposes Vakint.
 
-The standalone lock selects Symbolica, Numerica and Graphica 3.0.1 from official
-community revision `6defcca968ca8411977fb1f641a9dee49ee7b7a7`. The frozen
-notebook host retains `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`; its historical
+The standalone and updated community locks select Symbolica, Numerica and
+Graphica 3.0.1 from official community revision
+`6defcca968ca8411977fb1f641a9dee49ee7b7a7`. The earlier scientific notebook wheel
+retains `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`; its historical
 acceptance is not transferred to the newer build. Both use RustRed's `main`
 branch at `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`. RustRed's core Cargo package
 is named `rustred`; its experimental `reconstruction` feature is disabled across
@@ -40,7 +42,7 @@ Physical nonplanar boundary preparation exposed an exact-zero-policy bug in
 Symbolica's checked division and inversion. The [minimal reproducer and
 validation](symbolica-exact-division-mre.md) explain the failure. The correction
 is now in official community commit `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`.
-The newer standalone revision retains that fix and the earlier polynomial
+The current shared revision retains that fix and the earlier polynomial
 root-convergence correction, and adds the generic C++ complex-constant export
 fix. The owning manifests keep all three algebra crates on the same source:
 

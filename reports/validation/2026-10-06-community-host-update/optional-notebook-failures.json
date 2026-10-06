@@ -1,0 +1,804 @@
+{
+  "scope": "Broader optional notebook run with Marimo preinstalled, beyond CI notebook scope; retained failed run, not a green suite.",
+  "counts": {
+    "passed": 1184,
+    "failed": 106,
+    "errors": 26,
+    "skipped": 3
+  },
+  "failures": [
+    {
+      "module": "tests.test_hep_generated_ladders",
+      "test": "test_generated_particles_weights_and_color[gluon]",
+      "kind": "failure",
+      "message": "TypeError: 'builtin_function_or_method' object is not iterable"
+    },
+    {
+      "module": "tests.test_hep_generated_ladders",
+      "test": "test_generated_particles_weights_and_color[outer_quark]",
+      "kind": "failure",
+      "message": "TypeError: 'builtin_function_or_method' object is not iterable"
+    },
+    {
+      "module": "tests.test_hep_generated_ladders",
+      "test": "test_notebook_projects_and_reduces_selected_ladder_without_splitting[gluon]",
+      "kind": "failure",
+      "message": "ValueError: Cell got unexpected argument D; The allowed arguments are {'model', 'diagram', 'S', 'TensorExpression'}."
+    },
+    {
+      "module": "tests.test_hep_generated_ladders",
+      "test": "test_notebook_projects_and_reduces_selected_ladder_without_splitting[outer_quark]",
+      "kind": "failure",
+      "message": "ValueError: Cell got unexpected argument D; The allowed arguments are {'model', 'diagram', 'S', 'TensorExpression'}."
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_tensor_helpers_preserve_external_interface",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_uv_stages_preserve_tensor_type",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_expression_copy_uv_poles_and_subtraction",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_uv_measure_and_logarithmic_truncation",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_scalar_scaling_factors_out_of_dots",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_feynkit_tensor_reduction[1]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_feynkit_tensor_reduction[2]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_feynkit_tensor_reduction[3]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_feynkit_tensor_reduction[4]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_feynkit_tensor_reduction[6]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_uv_rejects_unsupported_topology",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_massive_uv_expansion_point",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_gluon_example",
+      "test": "test_denominators_come_from_model_propagators",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_higgs_diphoton",
+      "test": "test_full_rate_and_independent_momentum_space_oracles[125.0-173.0-1.3333333333333333-2026]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_higgs_diphoton",
+      "test": "test_full_rate_and_independent_momentum_space_oracles[80.0-173.0-1.0-17]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_higgs_diphoton",
+      "test": "test_full_rate_and_independent_momentum_space_oracles[250.0-173.0-1.3333333333333333-41]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_higgs_diphoton",
+      "test": "test_full_rate_and_independent_momentum_space_oracles[125.0-250.0-1.3333333333333333-93]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[Higgs_diphoton_decay]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[color_epsilon]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[compton]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[diphoton]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[electron_self_energy]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[electron_two_loop]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[gluon_scattering]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[gminus2]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[higgs_decay]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[higgs_gluons]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[ibp_phi4]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[identical_leptons]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[muon_decay]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[odd_photons]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[pauli_form_factor]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[phi3_renormalization]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[phi4_renormalization]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[phi4_scattering]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[phi4_two_loop_vertex]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[photon_gluon]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[photon_radiation]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[photon_self_energy]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[photon_two_loop]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[polarization_sums]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[qcd_annihilation]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[qcd_ghost_vertex]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[qcd_ghosts]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[qcd_gluons]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[qcd_massless_renormalization]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[qcd_renormalization]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[qed_cross_section]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[qed_renormalization]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[quark_gluon_scattering]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[quark_loop_ladder]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[quark_scattering]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[sewn_diphoton]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[sewn_qed]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[soft_function]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[symmetric_color_vertex]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[tadpole_mass_insertions]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[three_gluon_rung_ladder]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[weak_decays]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[ww_production]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[yukawa_renormalization]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[z_decay]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[hep_showcase]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_notebook_runs_from_clean_session[hep_showcase_uv]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[higgs_decay-Electrons-model-channel]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[higgs_decay-Charm quarks-model-channel]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[higgs_decay-Bottom quarks-model-channel]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[higgs_decay-W bosons-model-channel]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[higgs_decay-Z bosons-model-channel]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[z_decay-Electron neutrinos-model-channel]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[z_decay-Electrons-model-channel]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[z_decay-Charm quarks-model-channel]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[z_decay-Bottom quarks-model-channel]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[identical_leptons-Bhabha-lepton_model-reaction]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_selectable_particle_channels[identical_leptons-M\\xf8ller-lepton_model-reaction]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Sum over states-Symbolic D-g]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Sum over states-Symbolic D-a]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Sum over states-Symbolic D-Z]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Sum over states-4-g]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Sum over states-4-a]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Sum over states-4-Z]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Sum over states-6-g]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Sum over states-6-a]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Sum over states-6-Z]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average in D dimensions-Symbolic D-g]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average in D dimensions-Symbolic D-a]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average in D dimensions-Symbolic D-Z]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average in D dimensions-4-g]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average in D dimensions-4-a]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average in D dimensions-4-Z]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average in D dimensions-6-g]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average in D dimensions-6-a]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average in D dimensions-6-Z]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average over four-dimensional states-Symbolic D-g]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average over four-dimensional states-Symbolic D-a]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average over four-dimensional states-Symbolic D-Z]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average over four-dimensional states-4-g]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average over four-dimensional states-4-a]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average over four-dimensional states-4-Z]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average over four-dimensional states-6-g]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average over four-dimensional states-6-a]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_polarization_conventions[Average over four-dimensional states-6-Z]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[0.0--1.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[0.0-0.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[0.0-1.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[0.0-2.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[1.0--1.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[1.0-0.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[1.0-1.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[1.0-2.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[3.0--1.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[3.0-0.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[3.0-1.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_notebooks",
+      "test": "test_self_energy_limits_and_physical_branch[3.0-2.0]",
+      "kind": "failure",
+      "message": "AssertionError: Traceback (most recent call last):"
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_color_projection_preserves_only_the_lorentz_interface",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_color_projection_leaves_dirac_contractions_for_later",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_distinct_color_structures_keep_their_relative_coefficients",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_zero_color_projection_can_pass_through_lorentz_projection",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_color_projection_preserves_full_projection_and_uv_residues",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_contraction_preserves_unrelated_scalar_factors[g]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_contraction_preserves_unrelated_scalar_factors[ghG]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_contraction_preserves_unrelated_scalar_factors[b]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_factorized_uv_reference[ghG-1/4-3/4]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_factorized_uv_reference[g-19/4--3/4]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_factorized_uv_reference[b--2/3-0]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_routing_exposes_local_cancellations_before_contraction[1]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_showcase_color",
+      "test": "test_routing_exposes_local_cancellations_before_contraction[2]",
+      "kind": "error",
+      "message": "failed on setup with \"AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'\""
+    },
+    {
+      "module": "tests.test_hep_symbols",
+      "test": "test_notebook_sources_do_not_fetch_internal_namespace_symbols",
+      "kind": "failure",
+      "message": "AssertionError: (PosixPath('/common/dev/symbolica-community/loop-integration-publication/examples/spenso_notation.py'), 238, 'gammalooprs::hedge')"
+    }
+  ],
+  "triage": "131 initial errors are explained by the old/new API probes; the remaining failure follows an external development symlink and is fixed by limiting the source guard to repository-owned files. Subsequent optional notebook physics remains unvalidated."
+}

@@ -1,0 +1,61 @@
+........................................................................ [  5%]
+........................................................................ [ 10%]
+........................................................................ [ 16%]
+........................................................................ [ 21%]
+........................................................................ [ 27%]
+........................................................................ [ 32%]
+........................................................................ [ 38%]
+........................................................................ [ 43%]
+........................................................................ [ 49%]
+.....................................................................sss [ 54%]
+sss.................................................ss...............sss [ 60%]
+ssssssssssssss.......................................................... [ 65%]
+...................sssssssssssssssssssssssssssssssssssssssssssssssssssss [ 71%]
+ssssssssss.............................................................. [ 76%]
+.sssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssss [ 81%]
+ssssss....F............................................................. [ 87%]
+....................................................................s.s. [ 92%]
+...s..................................................s................. [ 98%]
+....ss................                                                   [100%]
+=================================== FAILURES ===================================
+________ test_notebook_sources_do_not_fetch_internal_namespace_symbols _________
+
+    def test_notebook_sources_do_not_fetch_internal_namespace_symbols():
+        examples = Path(__file__).parents[1] / "examples"
+        for path in examples.rglob("*"):
+            # Check repository-owned sources only. Optional development symlinks
+            # may resolve to different external checkouts on different machines.
+            if path.is_symlink() or not path.is_file():
+                continue
+            if path.suffix == ".ipynb":
+                sources = [
+                    "".join(cell["source"])
+                    for cell in json.loads(path.read_text())["cells"]
+                    if cell["cell_type"] == "code"
+                ]
+            elif path.suffix == ".py" and "@app.cell" in path.read_text():
+                sources = [path.read_text()]
+            else:
+                continue
+            for source in sources:
+                # Inspect calls rather than saved output or explanatory prose.
+                for node in ast.walk(ast.parse(source)):
+                    if not isinstance(node, ast.Call):
+                        continue
+                    name = getattr(node.func, "id", getattr(node.func, "attr", ""))
+                    if name not in {"S", "E", "TensorName", "parse"}:
+                        continue
+                    for argument in node.args:
+                        if isinstance(argument, ast.Constant) and isinstance(
+                            argument.value, str
+>                       ):
+E                       AssertionError: (PosixPath('/common/dev/symbolica-community/loop-integration-publication/examples/spenso_notation.py'), 238, 'gammalooprs::hedge')
+E                       assert not True
+E                        +  where True = any(<generator object test_notebook_sources_do_not_fetch_internal_namespace_symbols.<locals>.<genexpr> at 0x77176f487920>)
+
+tests/test_hep_symbols.py:168: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_hep_symbols.py::test_notebook_sources_do_not_fetch_internal_namespace_symbols - AssertionError: (PosixPath('/common/dev/symbolica-community/loop-integration-publication/examples/spenso_notation.py'), 238, 'gammalooprs::hedge')
+assert not True
+ +  where True = any(<generator object test_notebook_sources_do_not_fetch_internal_namespace_symbols.<locals>.<genexpr> at 0x77176f487920>)
+1 failed, 1146 passed, 172 skipped in 396.77s (0:06:36)

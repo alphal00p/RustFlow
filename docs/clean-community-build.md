@@ -7,24 +7,24 @@ community repository's native Rust/Python build environment and run these
 commands from its root. Python 3.11 or newer is suitable for the setup and
 notebook tools.
 
-The API and notebook are currently on
-[community draft PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19),
-not on the community default branch. To obtain the reviewed snapshot in a new
-directory:
+The API and notebook are on community `main` after
+[squash-merging PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19).
+To obtain the validated source snapshot in a new directory:
 
 ```sh
-git clone --branch codex/loop-integration-publication \
+git clone --branch main \
   https://github.com/symbolica-dev/symbolica-community.git symbolica-community-integration
 cd symbolica-community-integration
-git checkout --detach 5c204ba34b836d448f9d166d546baecca8fda8e3
+git checkout --detach 66a67bb0bc7b01ae53757c274aba92fc2ef234f8
 ```
 
-The same native wheel and numerical controller completed the full cold,
-independent-refinement, restart and nearby-point acceptance on `8758b93d`.
-This snapshot adds validated notebook wording, Python 3.10 polling compatibility
-and CI documentation repairs, without changing native dependencies or numerical
-code. See [current acceptance status](python-notebook-status.md) for exact
-provenance and remaining upstream/CI checks; it is not a released package.
+This snapshot aligns the host with RustFlow `92cfc9d`, official Symbolica
+community `6defcca9` and native HEPKit owner `b96600b`, including regenerated
+integration stubs. The earlier wheel and controller completed full cold,
+independent-refinement, restart and nearby-point acceptance on `8758b93d`;
+that evidence retains its original dependencies and numerical cache identity.
+See [current acceptance status](python-notebook-status.md) for exact provenance
+and remaining upstream/CI checks. Merging the source does not publish a package.
 
 Normal builds fetch the required native owners directly from public Git pins.
 They require no sibling checkout, private owner commit, patch application, or
@@ -33,9 +33,9 @@ machine-local Cargo source configuration.
 | Component | Published source selected by the manifest and lock |
 | --- | --- |
 | RustFlow | The community manifest's `symbolica-amflow` Git revision and matching lock entry |
-| HEPKit, Linnet, Spenso, Idenso and native rendering | [ValentinHirschi/gammaloop `a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`](https://github.com/ValentinHirschi/gammaloop/commit/a3d1c8a867ac0e89d8f58f9722cf9a7e83338901) |
+| HEPKit, Linnet, Spenso, Idenso and native rendering | [ValentinHirschi/gammaloop `b96600b0085d9ddfa9e6acbc11fa72ec6163253c`](https://github.com/ValentinHirschi/gammaloop/commit/b96600b0085d9ddfa9e6acbc11fa72ec6163253c) |
 | Vakint | [Separate revision `6203c6cbba6ae5e90329ba5081fad55319e678db`](https://github.com/ValentinHirschi/gammaloop/commit/6203c6cbba6ae5e90329ba5081fad55319e678db), based on upstream `8d6c8f7b14f2438126819328e20a10e6caf9e0b7` |
-| Symbolica, Numerica and Graphica | [Official community revision `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`](https://github.com/symbolica-dev/symbolica/commit/c3408e4ba1d3bdd4ea55678fad50e27009be13d4) |
+| Symbolica, Numerica and Graphica | [Official community revision `6defcca968ca8411977fb1f641a9dee49ee7b7a7`](https://github.com/symbolica-dev/symbolica/commit/6defcca968ca8411977fb1f641a9dee49ee7b7a7) |
 | RustRed | [Official main revision `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`](https://github.com/alphal00p/rustred/commit/7c1ed03722b8c05daf60c89ba4ecc79457ed2ada) |
 
 The Cargo package for RustRed's core is `rustred`. Its experimental

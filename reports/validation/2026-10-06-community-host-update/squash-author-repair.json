@@ -1,0 +1,7 @@
+{
+  "github_merge_commit": "cd4f0530c44eef44f8e164d164aa5a5cdb02f9ab",
+  "corrected_main_commit": "66a67bb0bc7b01ae53757c274aba92fc2ef234f8",
+  "parent": "69509f1b8a386d22f2333a2182d4b1505cd804e3",
+  "tree": "5f19ed17fb4cdd2a9a8ac14f411b218dacac9d57",
+  "scope": "Correct only the just-created squash commit author and committer; preserve tree, parent, message and dates. GitHub ignored the explicit author-email merge flag."
+}

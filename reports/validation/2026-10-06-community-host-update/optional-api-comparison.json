@@ -1,0 +1,142 @@
+{
+  "old_frozen_wheel": {
+    "extension": "/common/dev/amflow/target/publication-python-venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+    "extension_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf",
+    "probes": {
+      "external_momentum_with_index": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Kinematics.external_momentum() takes no arguments (1 given)"
+      },
+      "external_momentum_with_index_rep": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Kinematics.external_momentum() takes no arguments (2 given)"
+      },
+      "loop_momentum_with_index": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Kinematics.loop_momentum() takes no arguments (1 given)"
+      },
+      "polarization_with_indices": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Symbols.polarization() takes no arguments (2 given)"
+      },
+      "ufo_index_with_indices": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Symbols.ufo_index() takes no arguments (2 given)"
+      },
+      "half_edge_with_indices": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Symbols.half_edge() takes no arguments (2 given)"
+      },
+      "edge_momentum_property_name": {
+        "status": "error",
+        "type": "AttributeError",
+        "message": "'builtin_function_or_method' object has no attribute 'get_name'"
+      },
+      "external_momentum_property_tags": {
+        "status": "error",
+        "type": "AttributeError",
+        "message": "'builtin_function_or_method' object has no attribute 'get_tags'"
+      },
+      "slots_property_iteration": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "'builtin_function_or_method' object is not iterable"
+      },
+      "slots_property_length": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "object of type 'builtin_function_or_method' has no len()"
+      },
+      "ladder_old_cell_parameters": {
+        "status": "error",
+        "type": "ValueError",
+        "message": "Cell got unexpected argument D; The allowed arguments are {'model', 'diagram', 'S', 'TensorExpression'}."
+      }
+    }
+  },
+  "updated_wheel": {
+    "extension": "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/lib/python3.14/site-packages/symbolica/core.abi3.so",
+    "extension_sha256": "4e6cf5b2db5e180a4cccc287497b29b20075aafe65df611328aa0c88d19dbcaa",
+    "probes": {
+      "external_momentum_with_index": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Kinematics.external_momentum() takes no arguments (1 given)"
+      },
+      "external_momentum_with_index_rep": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Kinematics.external_momentum() takes no arguments (2 given)"
+      },
+      "loop_momentum_with_index": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Kinematics.loop_momentum() takes no arguments (1 given)"
+      },
+      "polarization_with_indices": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Symbols.polarization() takes no arguments (2 given)"
+      },
+      "ufo_index_with_indices": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Symbols.ufo_index() takes no arguments (2 given)"
+      },
+      "half_edge_with_indices": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "Symbols.half_edge() takes no arguments (2 given)"
+      },
+      "edge_momentum_property_name": {
+        "status": "error",
+        "type": "AttributeError",
+        "message": "'builtin_function_or_method' object has no attribute 'get_name'"
+      },
+      "external_momentum_property_tags": {
+        "status": "error",
+        "type": "AttributeError",
+        "message": "'builtin_function_or_method' object has no attribute 'get_tags'"
+      },
+      "slots_property_iteration": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "'builtin_function_or_method' object is not iterable"
+      },
+      "slots_property_length": {
+        "status": "error",
+        "type": "TypeError",
+        "message": "object of type 'builtin_function_or_method' has no len()"
+      },
+      "ladder_old_cell_parameters": {
+        "status": "error",
+        "type": "ValueError",
+        "message": "Cell got unexpected argument D; The allowed arguments are {'model', 'diagram', 'S', 'TensorExpression'}."
+      }
+    }
+  },
+  "matching_exception_types": true,
+  "matching_api_messages": true,
+  "ladder_allowed_arguments_unchanged": true,
+  "matching_all_probe_results": true,
+  "observed_failure_categories": {
+    "AttributeError: 'builtin_function_or_method' object has no attribute 'get_name'": 27,
+    "TypeError: 'builtin_function_or_method' object is not iterable": 4,
+    "ValueError: Cell got unexpected argument D; The allowed arguments are {'model', 'diagram', 'S', 'TensorExpression'}.": 2,
+    "TypeError: Kinematics.loop_momentum() takes no arguments (1 given)": 13,
+    "TypeError: object of type 'builtin_function_or_method' has no len()": 2,
+    "TypeError: Kinematics.external_momentum() takes no arguments (1 given)": 34,
+    "TypeError: Symbols.ufo_index() takes no arguments (2 given)": 17,
+    "TypeError: Kinematics.external_momentum() takes no arguments (2 given)": 2,
+    "TypeError: Symbols.polarization() takes no arguments (2 given)": 28,
+    "TypeError: Symbols.half_edge() takes no arguments (2 given)": 1,
+    "AttributeError: 'builtin_function_or_method' object has no attribute 'get_tags'": 1
+  },
+  "limits": "Representative initial API failures reproduce with both wheels. This does not validate later notebook execution or physics after those helper API mismatches are fixed."
+}

@@ -1,0 +1,74 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-06T08:41:35.857540+00:00",
+  "status": "merged_with_documented_optional_notebook_failures_and_remote_ci_pending",
+  "scope": "Community native extension dependency update and PR publication; no new full scientific run or upstream parity claim.",
+  "pull_request": "https://github.com/symbolica-dev/symbolica-community/pull/19",
+  "pr_head": "54d7ae1a92edf4e6adc82340571c098d1fec540d",
+  "main_commit": "66a67bb0bc7b01ae53757c274aba92fc2ef234f8",
+  "main_author_and_committer": "Ben Ruijl <ben@ruijl.ch>",
+  "pins": {
+    "rustflow": "92cfc9d2babfd95af8205b1193b4ec303bf8b610",
+    "symbolica_numerica_graphica": "6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+    "native_hepkit": "b96600b0085d9ddfa9e6acbc11fa72ec6163253c",
+    "rustred": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "rustred_reconstruction": false
+  },
+  "checks": {
+    "shared_dependency_graphs": {
+      "native": 495,
+      "stubgen": 499,
+      "core": 155,
+      "wasm": 427,
+      "wasm_core": 136,
+      "status": "passed"
+    },
+    "format_and_diff": "passed",
+    "release_stub_generation": "passed",
+    "python39_stub_grammar": "passed",
+    "wheel_namespace_and_stub": "passed",
+    "native_graph_source_hash_identity_and_rendering": "passed",
+    "typing_fixtures": 6,
+    "ci_equivalent_broad_suite": {
+      "errors": 0,
+      "failures": 1,
+      "skipped": 172,
+      "tests": 1319,
+      "time": 396.754
+    },
+    "ci_equivalent_followup_symbols_suite": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 5,
+      "time": 0.606
+    },
+    "focused_gg_hg_notebook_controller": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 57,
+      "time": 92.026
+    }
+  },
+  "broad_suite_interpretation": "1,146 passed and 172 skipped. Sole failure followed an external development symlink using the test version loaded before correction. All five affected tests passed afterward in the same CI-equivalent environment. No runtime failure remained; a second whole-suite pass was not performed.",
+  "optional_notebook_run": "1,184 passed, 106 failures, 26 setup errors, 3 skipped with Marimo preinstalled. 131 initial failures/errors match eleven representative old/new API probes; one external source-guard failure was corrected. See optional-notebook-failures.json; subsequent optional physics remains unvalidated.",
+  "wheel_profile": "CI/default dev; stub generator built release",
+  "source_attestation": {
+    "inputs": 187,
+    "unchanged_except": [
+      "tests/test_hep_symbols.py"
+    ],
+    "reason": "Hermetic source guard excludes external development symlinks; product sources and native build inputs unchanged."
+  },
+  "historical_scientific_acceptance": "../2026-10-06-gg-hg-publication-complete/summary.json retains db9cbbaf/c3408e4b/a3d1c8a release wheel; not transferred to the new graph.",
+  "merge": {
+    "method": "GitHub squash merge, then exact leased metadata repair of its new main tip because GitHub retained the PR author despite --author-email. Trees, parent, dates and message preserved. PR remains merged/closed; its immutable original merge link is recorded separately.",
+    "token_account": "benruijl",
+    "protection_changed": false,
+    "cla_signed_by_agent": false,
+    "cla_status_at_merge": "pending for benruijl",
+    "github_ci_at_merge": "Linux/macOS builds in progress, no remote all-green claim"
+  },
+  "raw_artifacts": "/common/dev/amflow/target/community-pr-update-2026-10-06"
+}

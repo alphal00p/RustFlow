@@ -1,0 +1,14 @@
+{
+  "exit_code": 0,
+  "session": 33704,
+  "terminal_chunk": "8b46f4",
+  "profile": "release",
+  "generated_changes": {
+    "python/symbolica/community/hep/integration/__init__.pyi": {
+      "before": "2120a4efb0fa55a43c8aaf02bde51b9a0dfb1e70f89bc416dbf0b753f76a7d46",
+      "after": "f5f04269b74358e6ba79021b101077a8838919667fe1a81157d5bf260a7750e7"
+    }
+  },
+  "python39_grammar": "passed",
+  "note": "Completed normally before proposed LTO change; no compiler was stopped and no alternate flags were used."
+}

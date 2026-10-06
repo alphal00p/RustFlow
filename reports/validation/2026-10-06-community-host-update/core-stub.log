@@ -1,0 +1,6 @@
+python/symbolica/core.pyi:1554: SyntaxWarning: "\o" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\o"? A raw string is also an option.
+  or `PrintMode` values) to strings, e.g. `{'latex': r'\overline{a}', PrintMode.Typst: '#overline(a)'}`.
+python/symbolica/core.pyi:2552: SyntaxWarning: "\o" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\o"? A raw string is also an option.
+  or `PrintMode` values) to strings, e.g. `{'latex': r'\overline{a}', PrintMode.Typst: '#overline(a)'}`.
+/common/dev/amflow/target/community-pr-update-2026-10-06/wheels/symbolica-3.0.0-cp39-abi3-linux_x86_64.whl:1554: SyntaxWarning: "\o" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\o"? A raw string is also an option.
+/common/dev/amflow/target/community-pr-update-2026-10-06/wheels/symbolica-3.0.0-cp39-abi3-linux_x86_64.whl:2552: SyntaxWarning: "\o" is an invalid escape sequence. Such sequences will not work in the future. Did you mean "\\o"? A raw string is also an option.

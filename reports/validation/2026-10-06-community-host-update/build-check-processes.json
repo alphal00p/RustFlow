@@ -1,0 +1,133 @@
+[
+  {
+    "name": "wheel-build",
+    "command": [
+      "maturin",
+      "build",
+      "--locked",
+      "--compatibility",
+      "linux",
+      "--out",
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/wheels"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 890.0775201609358
+  },
+  {
+    "name": "wheel-install",
+    "command": [
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "--no-index",
+      "--no-deps",
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/wheels/symbolica-3.0.0-cp39-abi3-linux_x86_64.whl"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 9.894608075264841
+  },
+  {
+    "name": "graph-install",
+    "command": [
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/bin/python",
+      "-m",
+      "pip",
+      "install",
+      "--no-index",
+      "--no-deps",
+      "--require-hashes",
+      "-r",
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/native-graph/linnet-wheel.txt"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.7860167557373643
+  },
+  {
+    "name": "native-graph-installed",
+    "command": [
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/bin/python",
+      ".github/scripts/check_native_graph_package.py",
+      "installed",
+      "--owner",
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/native-graph/owner",
+      "--record",
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/native-graph/linnet-wheel.json"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.22919553192332387
+  },
+  {
+    "name": "wheel-package",
+    "command": [
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/bin/python",
+      "-c",
+      "import importlib.util,sys; s=importlib.util.spec_from_file_location(\"package_check\", \".github/scripts/check_integration_package.py\"); m=importlib.util.module_from_spec(s); s.loader.exec_module(m); m.check_wheel(sys.argv[1]); print(\"Wheel namespaces and stubs passed\")",
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/wheels/symbolica-3.0.0-cp39-abi3-linux_x86_64.whl"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.04658859921619296
+  },
+  {
+    "name": "core-stub",
+    "command": [
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/bin/python",
+      ".github/scripts/check_core_stub.py",
+      "python/symbolica/core.pyi",
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/wheels/symbolica-3.0.0-cp39-abi3-linux_x86_64.whl"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.13137300591915846
+  },
+  {
+    "name": "runtime-attestation",
+    "command": [
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/bin/python",
+      "-c",
+      "import hashlib,json,sys; from pathlib import Path; import symbolica.core as core; assert Path(core.__file__).is_relative_to(Path(sys.executable).parents[1]); sys.path.insert(0,\"examples/hep\"); from gg_hg_acceptance import runtime_attestation; print(json.dumps(runtime_attestation(),indent=2))"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 4.574736790731549
+  },
+  {
+    "name": "native-graph-identity",
+    "command": [
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/bin/python",
+      ".github/scripts/check_native_graph_identity.py",
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/native-graph/owner"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.24972878023982048
+  },
+  {
+    "name": "typing",
+    "command": [
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/bin/ty",
+      "check",
+      "--python-version",
+      "3.10",
+      "tests/typing/community_layout.py",
+      "tests/typing/expression_products.py",
+      "tests/typing/integration.py",
+      "tests/typing/loop_integration.py",
+      "tests/typing/scoped_reductions.py",
+      "tests/typing/tensor_evaluation.py"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.25171257508918643
+  },
+  {
+    "name": "python-tests",
+    "command": [
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/venv/bin/python",
+      "-m",
+      "pytest",
+      "tests/",
+      "-q",
+      "--junitxml",
+      "/common/dev/amflow/target/community-pr-update-2026-10-06/python-tests.xml"
+    ],
+    "exit_code": 1,
+    "elapsed_seconds": 697.9940697271377
+  }
+]

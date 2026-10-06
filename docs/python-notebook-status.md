@@ -142,18 +142,36 @@ applied after the full numerical run's final attestation and source rechecks.
 ## Publication and remaining work
 
 RustFlow milestones and validation reports are pushed to its repository. The
-community notebook/API changes and dependency pins are pushed in
-[draft PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19),
-authored by `ValentinHirschi`. Its head is
-`330f0a4b`; the full numerical run used
-`8758b93d1e1a6fed2aace41493a91be569f98a98`. Native dependencies, extension bytes
-and the anchor runner are unchanged between these revisions. Presentation,
-polling compatibility and documented CI repairs include installation of matching
+community notebook/API changes and dependency pins were squash-merged through
+[PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19), which is
+closed. Community `main` commit `66a67bb0bc7b01ae53757c274aba92fc2ef234f8` is
+authored and committed by Ben Ruijl <ben@ruijl.ch>. It selects RustFlow `92cfc9d`,
+Symbolica community `6defcca9` and HEPKit owner `b96600b`, and includes regenerated
+integration stubs. GitHub retained the original PR author during its squash,
+so the new main tip received a leased metadata-only correction; its tree,
+parent and message are unchanged.
+The full numerical run used `8758b93d1e1a6fed2aace41493a91be569f98a98` and its
+earlier native graph; its extension bytes and acceptance data remain historical.
+Presentation, polling compatibility and documented CI repairs include matching
 native graph bindings for Python 3.10. The newer controller also avoids repeated
-binary writes after exact transport hits, as measured below. Merge and release
-remain pending upstream/CI work. The
+binary writes after exact transport hits, as measured below. Package release and browser follow-ups remain separate. The
 notebook's repository-relative destination is `examples/hep/gg_hg.py`; the local
 publication checkout is `/common/dev/symbolica-community/loop-integration-publication`.
+
+The [host-update report](../reports/validation/2026-10-06-community-host-update/summary.json)
+records the rebuilt wheel, shared dependency checks, native graph identity,
+regenerated stubs and six typing fixtures. All 57 focused gg→hg notebook/controller
+checks pass. The CI-equivalent suite recorded 1,146 passes and 172 skips; its one
+failure was a repository source check following a machine-local development
+symlink. That check now excludes external sources and all five affected tests
+pass. GitHub's Linux/macOS Python 3.10 jobs were still running at merge time.
+
+A broader optional notebook run with Marimo preinstalled is not green: 131
+initial failures/errors reproduce as API getter/slot mismatches or stale cell
+arguments with both old and updated wheels. The separate source-guard failure
+was corrected. These optional examples and their later physics need follow-up;
+they do not invalidate the separately checked gg→hg notebook. The full scientific
+calculation has not been repeated on the new dependencies.
 
 The [controller persistence comparison](../reports/performance/2026-10-06-notebook-cache-hit-persistence/report.json)
 uses the unchanged publication extension and copies of its completed 80-entry
