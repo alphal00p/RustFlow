@@ -1,0 +1,798 @@
+{
+  "schema": 1,
+  "date_utc": "2026-10-06",
+  "title": "Exact stored-dyadic residual numerator experiment: retain the production ball path",
+  "decision": "Do not integrate or switch production. Keep this test-only experiment on codex/exact-residual-performance; report-only publication can be reviewed separately.",
+  "repository_base_commit": "2a1ffac2243f9c3a3f3ad90884105a1081006db2",
+  "experiment_branch": "codex/exact-residual-performance",
+  "scope": {
+    "changed_production_arithmetic": false,
+    "production_source_without_test_include_matches_base": true,
+    "certificate": "Local exact-source defect of the stored-dyadic Taylor polynomial only. No global solution-error, amplification, coordinate-conversion or singular-matching accuracy claim.",
+    "not_measured": [
+      "Full transport with the alternate constructor",
+      "An alternate controller policy",
+      "Peak transient rational allocation per constructor",
+      "Production-safe exact/ball selector"
+    ]
+  },
+  "design": {
+    "polynomial_type": "Symbolica UnivariatePolynomial<FloatField<Complex<Rational>>>",
+    "formula": "For each row and channel: D(c+z) * derivative(P_i(z)) - sum_j A_ij(c+z) * P_j(z), including the existing channel shifts. Stored Float components and chart center are converted to exact rationals.",
+    "operations": "Native Symbolica polynomial shifting, derivative, multiplication and subtraction; no custom convolution. Cache derivatives within the prototype.",
+    "enclosure": "Outward-enclose each final exact rational component with native ComplexBall via the existing exact_ball helper, then reuse production denominator guards and defect_bounds.",
+    "validation_boundary": "Prototype test inputs are bounded and checked by normal compilation/production-constructor comparisons. The test-only constructor omits production validation, cancellation and Result plumbing, so it is not a drop-in production implementation."
+  },
+  "environment": {
+    "os": "Linux 6.18.45 x86_64 GNU/Linux",
+    "cpu": "AMD EPYC 9754 128-Core Processor",
+    "cpu_affinity": 40,
+    "rayon_threads": 1,
+    "cargo": "1.97.0 (c980f4866 2026-06-30)",
+    "rustc": "1.97.1 (8bab26f4f 2026-07-14)",
+    "profile": "release, optimized, debuginfo=1",
+    "cargo_locked": true,
+    "cargo_target": "/common/dev/amflow-exact-residual/target/native",
+    "symbolica_owner_commit": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "symbolica_owner_source_sha256": {
+      "src/poly/univariate.rs": "5e828a92ff501724607b064a004f2c8e8843c7d20776505b9c266d739eeda104"
+    },
+    "source_sha256": {
+      "Cargo.toml": "9c109c014341e3b3f9cb75293e7114dbfa6fbb6c1cca8924bb64c48292617058",
+      "Cargo.lock": "4c5b7575719b551a186318342392dc24b2d7aec7d1ff0ab02650f5559cc4fa9c",
+      "src/ode/source.rs": "4e6706f6a625b7cd310d25cc224df525b6b7dbfb29a0d0ff24011ee491f37aff",
+      "src/ode/source_exact_tests.rs": "07e800ce5b3b4ae73baf7a4d7b1047005c361f424adc62e619306453dec6b62c",
+      "src/ode/source_tests.rs": "450af212e17614ba2c18012fc4161a937f73c4011e480447357f864be8dbf5cc",
+      "src/ode.rs": "2b26b081ce2303de243db531b12b2f55385295c1cf8918065d3b8d8205b61c63",
+      "scripts/benchmark_de.py": "ba662f2090f3b284ad496ec58c7cba6d4e030afd109ade2811312b9dc64acd11",
+      "fixtures/performance/upstream12-diffeq.wl": "828dd1ae41291007fd3b37b664e695d67e0daebde3e9330f0e178f3d39cc40e3",
+      "fixtures/performance/upstream12-boundary.wl": "fcbe018f60ca9cf1bf909dec36d3608993d22fe5c8bb97a86df432870c1f92c6",
+      "fixtures/performance/paper27-eta-eps-1-2700.json": "1e112b7549af1b78c845cca4f7e9bf32b089527a6ae7a94a059903a584515880",
+      "src/numeric.rs": "17c9e27d1ffac7903e1dfb021de557aa55703e02823b0940a91794b94a17b518",
+      "src/ode/conditioning.rs": "bc12392051c0d9a6ee65b0e6fed7430113a8d4e38e9fc6e05378aef87c56bcf1"
+    },
+    "dependencies": "Used the base Cargo.lock and an independent Cargo target. Existing release dependency artifacts were copied read-only from a completed target; no changes to dependency owners or live Python runtimes.",
+    "timing_limit": "Three alternating old/new constructor measurements per case on a shared machine. Ratios are local constructor medians, not end-to-end transport speedups; short sub-millisecond cancellation timings are especially noisy."
+  },
+  "measurement_source": {
+    "measured_file": "raw/compiled-experiment-source.rs",
+    "sha256": "6a2ab16c51d351be30e0aa5c7becdfde958da3d3dace0a202f713b021aa500ab",
+    "final_source_sha256": "07e800ce5b3b4ae73baf7a4d7b1047005c361f424adc62e619306453dec6b62c",
+    "only_final_change": "Corrected the independent three-channel test fixture so all equivalent rows have the same cleared denominator. Constructor, oracle and benchmark bytes are unchanged.",
+    "bytes_equal_after_omitting_channel_test": true,
+    "remaining_source_sha256": "d4d587bd8adf091e49f803c7738e93da0aa8832561d1b6f358870cdc528c29eb"
+  },
+  "inputs": {
+    "initial": "raw/upstream12.json and raw/paper27.json contain exact source matrices, epsilon, centers and boundary inputs. Upstream12 was generated by scripts/benchmark_de.py workloads()[1]; paper27 is copied from the pinned fixture.",
+    "endpoint": "raw/end-charts contains the same genuine matrices at their regular final chart centers, initialized with the actual native current2a endpoint outputs archived alongside them. This is local Taylor-chart timing, not another full transport or independent accuracy proof.",
+    "counterexamples": "All formulas, centers, stored precision, initial values and orders are encoded in the archived measured experiment source. Includes non-dyadic Gaussian coefficients, sparse degree257, shifted repeated denominator64, degree32 factors with 512-bit rational coefficients, and 2^400 cancellation at 216/415/548 bits.",
+    "endpoint_provenance": "endpoint-provenance.json"
+  },
+  "measurements": {
+    "initial": [
+      {
+        "name": "upstream12.json",
+        "bits": 201,
+        "dimension": 12,
+        "center": [
+          "5.0000000000000000000000000000000000000000000000000000000000000e-1",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 240.94203,
+        "exact_median_ms": 162.22701,
+        "ball_over_exact": 1.4852152548456634,
+        "source_coefficient_height_bits": 164,
+        "final_exact_coefficient_height_bits": 381,
+        "denominator_degree": 14,
+        "entry_degree": 13,
+        "components_contained_in_both": 2444,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "upstream12.json",
+        "bits": 333,
+        "dimension": 12,
+        "center": [
+          "5.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000e-1",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 271.907319,
+        "exact_median_ms": 177.652489,
+        "ball_over_exact": 1.5305573286958,
+        "source_coefficient_height_bits": 164,
+        "final_exact_coefficient_height_bits": 514,
+        "denominator_degree": 14,
+        "entry_degree": 13,
+        "components_contained_in_both": 2444,
+        "exact_interval_not_nested": 1,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "paper27.json",
+        "bits": 201,
+        "dimension": 27,
+        "center": [
+          "0",
+          "-512.00000000000000000000000000000000000000000000000000000000000"
+        ],
+        "order": 80,
+        "ball_median_ms": 816.887451,
+        "exact_median_ms": 679.898156,
+        "ball_over_exact": 1.2014850221185185,
+        "source_coefficient_height_bits": 142,
+        "final_exact_coefficient_height_bits": 945,
+        "denominator_degree": 17,
+        "entry_degree": 16,
+        "components_contained_in_both": 4752,
+        "exact_interval_not_nested": 3,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "paper27.json",
+        "bits": 333,
+        "dimension": 27,
+        "center": [
+          "0",
+          "-512.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "order": 80,
+        "ball_median_ms": 961.445166,
+        "exact_median_ms": 705.981884,
+        "ball_over_exact": 1.3618552937259223,
+        "source_coefficient_height_bits": 142,
+        "final_exact_coefficient_height_bits": 1077,
+        "denominator_degree": 17,
+        "entry_degree": 16,
+        "components_contained_in_both": 4752,
+        "exact_interval_not_nested": 3,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "nondyadic_complex",
+        "bits": 201,
+        "dimension": 1,
+        "center": [
+          "2.9999999999999999999999999999999999999999999999999999999999997e-1",
+          "1.2500000000000000000000000000000000000000000000000000000000000e-1"
+        ],
+        "order": 80,
+        "ball_median_ms": 2.563947,
+        "exact_median_ms": 2.016785,
+        "ball_over_exact": 1.2713040805043672,
+        "source_coefficient_height_bits": 11,
+        "final_exact_coefficient_height_bits": 569,
+        "denominator_degree": 1,
+        "entry_degree": 1,
+        "components_contained_in_both": 174,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "sparse_high_degree",
+        "bits": 201,
+        "dimension": 1,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 108.369666,
+        "exact_median_ms": 3.601369,
+        "ball_over_exact": 30.091241969373314,
+        "source_coefficient_height_bits": 1,
+        "final_exact_coefficient_height_bits": 1,
+        "denominator_degree": 0,
+        "entry_degree": 257,
+        "components_contained_in_both": 520,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "shifted_repeated_degree64",
+        "bits": 201,
+        "dimension": 1,
+        "center": [
+          "2.9999999999999999999999999999999999999999999999999999999999997e-1",
+          "1.2500000000000000000000000000000000000000000000000000000000000e-1"
+        ],
+        "order": 80,
+        "ball_median_ms": 48.244003,
+        "exact_median_ms": 179.080276,
+        "ball_over_exact": 0.26939875276940045,
+        "source_coefficient_height_bits": 61,
+        "final_exact_coefficient_height_bits": 13100,
+        "denominator_degree": 64,
+        "entry_degree": 0,
+        "components_contained_in_both": 422,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "rational_growth_degree32",
+        "bits": 201,
+        "dimension": 1,
+        "center": [
+          "2.9999999999999999999999999999999999999999999999999999999999997e-1",
+          "1.2500000000000000000000000000000000000000000000000000000000000e-1"
+        ],
+        "order": 80,
+        "ball_median_ms": 21.809666,
+        "exact_median_ms": 134.297262,
+        "ball_over_exact": 0.1623984411536253,
+        "source_coefficient_height_bits": 16414,
+        "final_exact_coefficient_height_bits": 22868,
+        "denominator_degree": 32,
+        "entry_degree": 0,
+        "components_contained_in_both": 294,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "dyadic_cancellation",
+        "bits": 216,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.126201,
+        "exact_median_ms": 0.03493,
+        "ball_over_exact": 3.6129687947323217,
+        "source_coefficient_height_bits": 400,
+        "final_exact_coefficient_height_bits": 1,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 10,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "nondyadic_cancellation",
+        "bits": 216,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.1289,
+        "exact_median_ms": 0.034371,
+        "ball_over_exact": 3.750254575077827,
+        "source_coefficient_height_bits": 402,
+        "final_exact_coefficient_height_bits": 2,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 10,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "dyadic_cancellation",
+        "bits": 415,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.130011,
+        "exact_median_ms": 0.03412,
+        "ball_over_exact": 3.8104044548651816,
+        "source_coefficient_height_bits": 400,
+        "final_exact_coefficient_height_bits": 1,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 8,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "nondyadic_cancellation",
+        "bits": 415,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.13105,
+        "exact_median_ms": 0.03672,
+        "ball_over_exact": 3.5688997821350763,
+        "source_coefficient_height_bits": 402,
+        "final_exact_coefficient_height_bits": 16,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 10,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "dyadic_cancellation",
+        "bits": 548,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.13585,
+        "exact_median_ms": 0.03567,
+        "ball_over_exact": 3.8085225679843004,
+        "source_coefficient_height_bits": 400,
+        "final_exact_coefficient_height_bits": 1,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 8,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "nondyadic_cancellation",
+        "bits": 548,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.13377,
+        "exact_median_ms": 0.03974,
+        "ball_over_exact": 3.366129843985908,
+        "source_coefficient_height_bits": 402,
+        "final_exact_coefficient_height_bits": 149,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 10,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      }
+    ],
+    "endpoint": [
+      {
+        "name": "upstream12.json",
+        "bits": 201,
+        "dimension": 12,
+        "center": [
+          "1.0000000000000000000000000000000000000000000000000000000000002e-1",
+          "2.0000000000000000000000000000000000000000000000000000000000003e-1"
+        ],
+        "order": 80,
+        "ball_median_ms": 296.051624,
+        "exact_median_ms": 307.967415,
+        "ball_over_exact": 0.9613082734743219,
+        "source_coefficient_height_bits": 164,
+        "final_exact_coefficient_height_bits": 3007,
+        "denominator_degree": 14,
+        "entry_degree": 13,
+        "components_contained_in_both": 2444,
+        "exact_interval_not_nested": 4,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "upstream12.json",
+        "bits": 333,
+        "dimension": 12,
+        "center": [
+          "1.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003e-1",
+          "2.00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000006e-1"
+        ],
+        "order": 80,
+        "ball_median_ms": 343.984718,
+        "exact_median_ms": 411.090918,
+        "ball_over_exact": 0.8367606846522452,
+        "source_coefficient_height_bits": 164,
+        "final_exact_coefficient_height_bits": 4981,
+        "denominator_degree": 14,
+        "entry_degree": 13,
+        "components_contained_in_both": 2444,
+        "exact_interval_not_nested": 11,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "paper27.json",
+        "bits": 201,
+        "dimension": 27,
+        "center": [
+          "0",
+          "-256.00000000000000000000000000000000000000000000000000000000000"
+        ],
+        "order": 80,
+        "ball_median_ms": 822.015811,
+        "exact_median_ms": 674.082302,
+        "ball_over_exact": 1.2194591202900325,
+        "source_coefficient_height_bits": 142,
+        "final_exact_coefficient_height_bits": 865,
+        "denominator_degree": 17,
+        "entry_degree": 16,
+        "components_contained_in_both": 4752,
+        "exact_interval_not_nested": 1,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "paper27.json",
+        "bits": 333,
+        "dimension": 27,
+        "center": [
+          "0",
+          "-256.000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        ],
+        "order": 80,
+        "ball_median_ms": 962.450366,
+        "exact_median_ms": 697.523315,
+        "ball_over_exact": 1.3798110332699058,
+        "source_coefficient_height_bits": 142,
+        "final_exact_coefficient_height_bits": 995,
+        "denominator_degree": 17,
+        "entry_degree": 16,
+        "components_contained_in_both": 4752,
+        "exact_interval_not_nested": 3,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "nondyadic_complex",
+        "bits": 201,
+        "dimension": 1,
+        "center": [
+          "2.9999999999999999999999999999999999999999999999999999999999997e-1",
+          "1.2500000000000000000000000000000000000000000000000000000000000e-1"
+        ],
+        "order": 80,
+        "ball_median_ms": 2.549977,
+        "exact_median_ms": 2.000786,
+        "ball_over_exact": 1.2744876263628393,
+        "source_coefficient_height_bits": 11,
+        "final_exact_coefficient_height_bits": 569,
+        "denominator_degree": 1,
+        "entry_degree": 1,
+        "components_contained_in_both": 174,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "sparse_high_degree",
+        "bits": 201,
+        "dimension": 1,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 106.289202,
+        "exact_median_ms": 3.65025,
+        "ball_over_exact": 29.118334908567906,
+        "source_coefficient_height_bits": 1,
+        "final_exact_coefficient_height_bits": 1,
+        "denominator_degree": 0,
+        "entry_degree": 257,
+        "components_contained_in_both": 520,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "shifted_repeated_degree64",
+        "bits": 201,
+        "dimension": 1,
+        "center": [
+          "2.9999999999999999999999999999999999999999999999999999999999997e-1",
+          "1.2500000000000000000000000000000000000000000000000000000000000e-1"
+        ],
+        "order": 80,
+        "ball_median_ms": 48.126834,
+        "exact_median_ms": 178.404737,
+        "ball_over_exact": 0.269762085969724,
+        "source_coefficient_height_bits": 61,
+        "final_exact_coefficient_height_bits": 13100,
+        "denominator_degree": 64,
+        "entry_degree": 0,
+        "components_contained_in_both": 422,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "rational_growth_degree32",
+        "bits": 201,
+        "dimension": 1,
+        "center": [
+          "2.9999999999999999999999999999999999999999999999999999999999997e-1",
+          "1.2500000000000000000000000000000000000000000000000000000000000e-1"
+        ],
+        "order": 80,
+        "ball_median_ms": 21.880007,
+        "exact_median_ms": 133.449912,
+        "ball_over_exact": 0.16395669860014594,
+        "source_coefficient_height_bits": 16414,
+        "final_exact_coefficient_height_bits": 22868,
+        "denominator_degree": 32,
+        "entry_degree": 0,
+        "components_contained_in_both": 294,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "dyadic_cancellation",
+        "bits": 216,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.126751,
+        "exact_median_ms": 0.03475,
+        "ball_over_exact": 3.6475107913669063,
+        "source_coefficient_height_bits": 400,
+        "final_exact_coefficient_height_bits": 1,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 10,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "nondyadic_cancellation",
+        "bits": 216,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.13118,
+        "exact_median_ms": 0.03466,
+        "ball_over_exact": 3.7847663012117714,
+        "source_coefficient_height_bits": 402,
+        "final_exact_coefficient_height_bits": 2,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 10,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "dyadic_cancellation",
+        "bits": 415,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.13018,
+        "exact_median_ms": 0.03456,
+        "ball_over_exact": 3.7667824074074074,
+        "source_coefficient_height_bits": 400,
+        "final_exact_coefficient_height_bits": 1,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 8,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "nondyadic_cancellation",
+        "bits": 415,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.13038,
+        "exact_median_ms": 0.0372,
+        "ball_over_exact": 3.5048387096774194,
+        "source_coefficient_height_bits": 402,
+        "final_exact_coefficient_height_bits": 16,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 10,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "dyadic_cancellation",
+        "bits": 548,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.137751,
+        "exact_median_ms": 0.03606,
+        "ball_over_exact": 3.8200499168053246,
+        "source_coefficient_height_bits": 400,
+        "final_exact_coefficient_height_bits": 1,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 8,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      },
+      {
+        "name": "nondyadic_cancellation",
+        "bits": 548,
+        "dimension": 2,
+        "center": [
+          "0",
+          "0"
+        ],
+        "order": 80,
+        "ball_median_ms": 0.13226,
+        "exact_median_ms": 0.03952,
+        "ball_over_exact": 3.34665991902834,
+        "source_coefficient_height_bits": 402,
+        "final_exact_coefficient_height_bits": 149,
+        "denominator_degree": 0,
+        "entry_degree": 0,
+        "components_contained_in_both": 10,
+        "exact_interval_not_nested": 0,
+        "exact_width_larger": 0
+      }
+    ]
+  },
+  "containment": {
+    "checked_components": 31716,
+    "failed_containment": 0,
+    "wider_final_intervals": 0,
+    "non_nested_final_intervals": 26,
+    "meaning": "Every raw exact Gaussian component in the benchmark residuals, denominators and factors is contained by both old and final-conversion balls. Symmetric outward balls can be non-nested even when neither is wider. Containment is the required property; strict nesting is not.",
+    "oracle_limit": "Exact benchmark coefficients are produced by the experimental native formula, with an independent analytic scalar test and independent six-component expansion for three coupled channels. This is experimental validation, not a new proof of all Symbolica polynomial operations."
+  },
+  "negative_results": [
+    "The initial upstream12 chart was 1.49\u20131.53x faster, but the real complex endpoint was 1.04\u20131.20x slower; its final rational coefficient height rose to 3007/4981 bits.",
+    "Paper27 remained 1.20\u20131.38x faster on measured initial/endpoint charts; this does not establish an overall transport improvement.",
+    "Shifted (1-x)^64 was about 3.7x slower, reaching 13100-bit final rational coefficients. The degree32 large-rational example was about 6.1\u20136.2x slower, reaching 22868 bits.",
+    "Sparse x^257 at zero was about 29\u201330x faster; an isolated favorable sparse case does not justify an unconditional switch."
+  ],
+  "precision_hint_regression": {
+    "measured": "At 216 bits and step1, the dyadic 2^400 cancellation case requests InsufficientPrecision(minimum_bits=614) on the production ball path. Exact arithmetic returns a nonzero local defect bound [1,0] with zero enclosure width, so the width-based precision hint disappears. The non-dyadic case similarly loses the hint at 216,415 and548 bits.",
+    "comparison_budget": "defect_bounds is given evaluated Taylor endpoint values and p.tolerance(p.bits/4); these are explicit diagnostic budgets, not a full alternate production-controller run.",
+    "safety": "An over-budget nonzero defect remains unacceptable to the existing controller; no false accepted accuracy was demonstrated.",
+    "inference": "Without a precision hint, the controller may repeatedly shrink toward stagnation or its step limit. That outcome was not executed with a switched constructor.",
+    "unchanged": "The separate endpoint conditioning guard and production residual path remain untouched.",
+    "possible_future_work": "A separately evaluated fallback could run the old ball precision diagnostic on rejected exact trials, but duplicate work may erase gains. A low-order residual diagnostic would itself be a new policy requiring full bounded-outcome tests."
+  },
+  "resource_risks": {
+    "observed": "Large final rational heights and constructor slowdowns on repeated/non-dyadic denominator factors.",
+    "unmeasured": "maximum_exact_coefficient_bits records final numerator/denominator heights, not potentially larger temporary products or conversion allocations. source_coefficient_height_bits currently summarizes expanded denominators and entries, not a complete preflight bound.",
+    "required_before_any_production_candidate": [
+      "Bound actual stored Float exponents and significand precision before Float::to_rational, not merely requested p.bits.",
+      "Account for source entries, expanded denominators, denominator factors, degrees, dimensions, channels and transient products before native exact calls.",
+      "Preserve validation, cancellation and conservative denominator rejection.",
+      "Measure full controller outcomes and resource-bounded fallback behavior."
+    ]
+  },
+  "known_experiment_failures": [
+    {
+      "log": "raw/build.log",
+      "classification": "Initial prototype Rust type/API errors; corrected before successful builds and measurements."
+    },
+    {
+      "log": "raw/benchmark.log",
+      "classification": "Initial oracle incorrectly demanded interval nesting. Replaced with direct exact-rational containment for both old and new balls; all final cases pass. Partial result retained as comparison-initial-strict-nesting.json."
+    },
+    {
+      "log": "raw/benchmark-oracle.log",
+      "classification": "Synthetic imaginary-unit text parsed as an unbound Symbolica variable. Replaced explicitly with native exact Gaussian imaginary unit. The four genuine chart results preceding that error are retained separately."
+    },
+    {
+      "log": "raw/tests-complete.log",
+      "classification": "Original channel fixture compared equivalent equations with different cleared row denominators, whose triangle bounds need not equal. Corrected fixture keeps the same denominators while independently expanding all three channels; final equality test passes. Measured kernel unchanged."
+    }
+  ],
+  "validation": [
+    {
+      "name": "tests-channel-final",
+      "command": [
+        "taskset",
+        "-c",
+        "40",
+        "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+        "exact_performance",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.04743231413885951,
+      "source_sha256": "07e800ce5b3b4ae73baf7a4d7b1047005c361f424adc62e619306453dec6b62c",
+      "test_binary_sha256": "9bb3c5da2d16103b587b8b3232f3004db7f04cc8762120e7a1dfb1dd9cdc6b3d"
+    },
+    {
+      "name": "tests-source-final",
+      "command": [
+        "taskset",
+        "-c",
+        "40",
+        "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+        "ode::source_tests",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 3.2432681121863425,
+      "source_sha256": "07e800ce5b3b4ae73baf7a4d7b1047005c361f424adc62e619306453dec6b62c",
+      "test_binary_sha256": "9bb3c5da2d16103b587b8b3232f3004db7f04cc8762120e7a1dfb1dd9cdc6b3d"
+    },
+    {
+      "name": "tests-factor-final",
+      "command": [
+        "taskset",
+        "-c",
+        "40",
+        "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+        "ode::source::factor_tests",
+        "--nocapture",
+        "--test-threads=1"
+      ],
+      "exit_code": 0,
+      "elapsed_seconds": 0.018035431392490864,
+      "source_sha256": "07e800ce5b3b4ae73baf7a4d7b1047005c361f424adc62e619306453dec6b62c",
+      "test_binary_sha256": "9bb3c5da2d16103b587b8b3232f3004db7f04cc8762120e7a1dfb1dd9cdc6b3d"
+    },
+    {
+      "name": "cargo-fmt-check",
+      "command": [
+        "cargo",
+        "fmt",
+        "--check"
+      ],
+      "exit_code": 0,
+      "log": "raw/format-final.log"
+    },
+    {
+      "name": "cargo-clippy",
+      "command": [
+        "cargo",
+        "clippy",
+        "--locked",
+        "--release",
+        "--lib",
+        "--tests",
+        "--",
+        "-D",
+        "warnings"
+      ],
+      "exit_code": 0,
+      "log": "raw/clippy-final.log"
+    }
+  ],
+  "test_summary": {
+    "experiment_unit_tests_passed": 3,
+    "existing_source_tests_passed": 10,
+    "existing_denominator_factor_tests_passed": 8,
+    "explicit_benchmark_invocations_passed": 2,
+    "cases_per_benchmark": 14,
+    "ignored_test": "One opt-in file-writing benchmark is ignored in normal unit-test selection and was explicitly run twice with --ignored. No production test was skipped or weakened.",
+    "format_passed": true,
+    "clippy_warnings_denied_passed": true
+  },
+  "reproduction": {
+    "branch": "Use the containing experiment commit, not main; do not cherry-pick the prototype as a production optimization.",
+    "setup": "Provide the repository's normal native build prerequisites and licensed Symbolica runtime without archiving credentials. The original machine sourced /common/dev/amflow/target/publication-python-env.sh only for that setup.",
+    "commands": [
+      "export CARGO_TARGET_DIR=\"$PWD/target/exact-residual-reproduction/native\"",
+      "export CARGO_BUILD_JOBS=4 RAYON_NUM_THREADS=1",
+      "cargo test --locked --release --lib exact_performance -- --nocapture --test-threads=1",
+      "mkdir -p target/exact-residual-reproduction/initial target/exact-residual-reproduction/endpoint",
+      "cp reports/performance/2026-10-06-exact-source-residual/raw/{upstream12,paper27}.json target/exact-residual-reproduction/initial/",
+      "cp reports/performance/2026-10-06-exact-source-residual/raw/end-charts/{upstream12,paper27}.json target/exact-residual-reproduction/endpoint/",
+      "EXACT_RESIDUAL_BENCH_DIR=\"$PWD/target/exact-residual-reproduction/initial\" taskset -c 40 cargo test --locked --release --lib exact_source_residual_performance_comparison -- --ignored --nocapture --test-threads=1",
+      "EXACT_RESIDUAL_BENCH_DIR=\"$PWD/target/exact-residual-reproduction/endpoint\" taskset -c 40 cargo test --locked --release --lib exact_source_residual_performance_comparison -- --ignored --nocapture --test-threads=1"
+    ],
+    "note": "Choose an available CPU instead of40 on other hosts and record it. Run into target so the archived measured inputs/results stay unchanged."
+  },
+  "recommendation": "Retain the existing native ball constructor and its conservative precision/rejection policy. Prefer optimizations that preserve the current certificate and controller behavior without unbounded exact coefficient growth. This branch supplies negative evidence and a reproducible isolated prototype only.",
+  "profile_context": {
+    "source": "raw/current2a-profile-inclusive.txt",
+    "measured_by": "Parent task; separate CPU36 full paper27 transport profile at the same base revision. Not directly comparable to CPU40 constructor timings.",
+    "exact_source_constructor_inclusive_percent": 77.98,
+    "native_ball_polynomial_multiplication_inclusive_percent": 70.15,
+    "lost_samples": 0,
+    "interpretation": "Confirms the constructor remains a hotspot after the later denominator changes; historical3f1 timing was not used as the benchmark baseline."
+  },
+  "archive_note": "Raw logs and perf text preserve original tool-output whitespace; the raw directory applies a local whitespace attribute only to those evidence files."
+}

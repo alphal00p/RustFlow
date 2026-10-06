@@ -1,0 +1,3 @@
+# Preserve unmodified tool output, including its original whitespace.
+*.log -whitespace
+*.txt -whitespace

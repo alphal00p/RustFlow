@@ -1,0 +1,20 @@
+
+running 4 tests
+test ode::source::exact_performance::exact_constructor_coupled_channels_match_an_independent_augmented_system ... 
+thread 'ode::source::exact_performance::exact_constructor_coupled_channels_match_an_independent_augmented_system' (71271) panicked at src/ode/source_exact_tests.rs:217:9:
+assertion `left == right` failed
+  left: [3.401398023972690921858712475707724791464794152005345198533780876413e-45, 4.828899094154160625618111059176043442785898360165294960770516158671e-67, 1.034872834939290456342957418329804101229817468679384315579042009105e-44, 3.469418548622570373391191621655069592325114825389983759009059634569e-45, 2.403096639235909304478306583628295167454400549870663094712580655615e-44, 1.055396748268350085956014964223272132858039334496676386736826189422e-44]
+ right: [3.490753425525797477666959224493633442786707423396976594511981193100e-45, 4.243170860049854696716040589341644682217059765665238664320731926196e-67, 1.034872834939290456342957418329804101229817468679384315579042009105e-44, 3.469418548622570373391191621655069592325114825389983759009059634569e-45, 2.403096639235909304478306583628295167454400549870663094712580655615e-44, 1.055396748268350085956014964223272132858039334496676386736826189422e-44]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+test ode::source::exact_performance::exact_gaussian_polynomial_defect_encloses_independent_coefficients ... ok
+test ode::source::exact_performance::exact_polynomial_constructor_preserves_inconclusive_denominator_rejection ... ok
+test ode::source::exact_performance::exact_source_residual_performance_comparison ... ignored, explicit performance experiment; writes JSON to EXACT_RESIDUAL_BENCH_DIR
+
+failures:
+
+failures:
+    ode::source::exact_performance::exact_constructor_coupled_channels_match_an_independent_augmented_system
+
+test result: FAILED. 2 passed; 1 failed; 1 ignored; 0 measured; 144 filtered out; finished in 0.02s
+

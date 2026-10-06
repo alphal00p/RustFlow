@@ -1,0 +1,15 @@
+
+running 1 test
+test ode::source::exact_performance::exact_source_residual_performance_comparison ... 
+thread 'ode::source::exact_performance::exact_source_residual_performance_comparison' (3931731) panicked at src/ode/source_exact_tests.rs:136:13:
+assertion failed: a.lower_bound().to_rational() <= b.lower_bound().to_rational()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    ode::source::exact_performance::exact_source_residual_performance_comparison
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 146 filtered out; finished in 2.71s
+

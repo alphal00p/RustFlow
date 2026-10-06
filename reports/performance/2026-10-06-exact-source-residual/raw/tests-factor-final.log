@@ -1,0 +1,13 @@
+
+running 8 tests
+test ode::source::factor_tests::coupled_epsilon_channels_share_denominator_enclosures ... ok
+test ode::source::factor_tests::distinct_rows_and_cross_channel_coupling_match_an_ordinary_system ... ok
+test ode::source::factor_tests::exact_content_multiplicity_and_complex_specialization_survive_shifting ... ok
+test ode::source::factor_tests::expanded_bound_is_retained_when_factorization_is_weaker ... ok
+test ode::source::factor_tests::factors_becoming_constants_preserve_the_source_domain ... ok
+test ode::source::factor_tests::polynomial_ode_accepts_the_certified_empty_product_for_one ... ok
+test ode::source::factor_tests::repeated_pole_disk_gets_a_strictly_positive_directed_lower_bound ... ok
+test ode::source::factor_tests::two_inconclusive_factors_cannot_certify_a_disk_containing_poles ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 140 filtered out; finished in 0.01s
+

@@ -1,0 +1,15 @@
+
+running 1 test
+test ode::source::exact_performance::exact_source_residual_performance_comparison ... 
+thread 'ode::source::exact_performance::exact_source_residual_performance_comparison' (4043787) panicked at src/ode/source_exact_tests.rs:373:10:
+called `Result::unwrap()` on an `Err` value: Numerical("variable ⅈ is not in a parameter map and does not have an evaluator")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    ode::source::exact_performance::exact_source_residual_performance_comparison
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 146 filtered out; finished in 23.33s
+

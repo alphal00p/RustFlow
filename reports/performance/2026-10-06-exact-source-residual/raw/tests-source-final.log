@@ -1,0 +1,15 @@
+
+running 10 tests
+test ode::source_tests::denominator_enclosure_is_inconclusive_instead_of_requesting_precision ... ok
+test ode::source_tests::exact_complex_constants_and_dyadic_parameters_use_native_specialization ... ok
+test ode::source_tests::exact_polynomial_cancellation_and_epsilon_channels_are_preserved ... ok
+test ode::source_tests::exact_source_normalized_cancellation_requests_precision_before_transport_admission ... ok
+test ode::source_tests::full_sparse_source_degree_does_not_become_an_arithmetic_failure ... ok
+test ode::source_tests::genuine_truncation_subdivides_and_preserves_an_analytic_result ... ok
+test ode::source_tests::lower_precision_stored_dyadics_do_not_limit_residual_arithmetic_precision ... ok
+test ode::source_tests::nondyadic_severe_cancellation_fails_boundedly_without_false_metadata ... ok
+test ode::source_tests::ordinary_transport_uses_the_same_exact_source_evidence ... ok
+test ode::source_tests::rational_mobius_pullback_retains_exact_mapped_rows ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 138 filtered out; finished in 3.24s
+

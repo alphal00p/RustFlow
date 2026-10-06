@@ -383,6 +383,10 @@ fn complex_lower(value: &ComplexBall, p: Precision) -> Float {
 }
 
 #[cfg(test)]
+#[path = "source_exact_tests.rs"]
+mod exact_performance;
+
+#[cfg(test)]
 mod factor_tests {
     use super::*;
     use crate::ode::compile_rows;

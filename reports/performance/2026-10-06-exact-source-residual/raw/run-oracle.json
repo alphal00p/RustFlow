@@ -1,0 +1,33 @@
+[
+  {
+    "name": "tests-oracle",
+    "command": [
+      "taskset",
+      "-c",
+      "40",
+      "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+      "exact_performance",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.030556211713701487,
+    "max_rss_kib_children": 12308
+  },
+  {
+    "name": "benchmark-oracle",
+    "command": [
+      "taskset",
+      "-c",
+      "40",
+      "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+      "exact_source_residual_performance_comparison",
+      "--ignored",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 101,
+    "elapsed_seconds": 23.338259406853467,
+    "max_rss_kib_children": 15396
+  }
+]

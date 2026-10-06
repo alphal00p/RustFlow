@@ -1,0 +1,16 @@
+{
+  "upstream12": {
+    "matrix_input": "/common/dev/amflow-exact-residual/target/exact-residual-benchmark/upstream12.json",
+    "native_endpoint_output": "/common/dev/amflow/target/transport-profile-2026-10-06/current2a/regular-defaults/upstream_12_master/base/rust-0.log",
+    "native_output_sha256": "4858d242ea0d2e5fe5775887069b867456438e652188b03ab2f24e093203b2c4",
+    "scope": "Same genuine system at its final regular endpoint, initialized with recorded native2a endpoint values for local-constructor timing; not a second full transport or accuracy claim.",
+    "archived_native_endpoint_output": "raw/end-charts/upstream12-native-endpoint.log"
+  },
+  "paper27": {
+    "matrix_input": "/common/dev/amflow-exact-residual/target/exact-residual-benchmark/paper27.json",
+    "native_endpoint_output": "/common/dev/amflow/target/transport-profile-2026-10-06/current2a/regular-paper27/paper_27_integral_system/base/rust-0.log",
+    "native_output_sha256": "b402b38cf10d7e834caf2bd4bc96ec8beb78082759874a3568605a3598956b3c",
+    "scope": "Same genuine system at its final regular endpoint, initialized with recorded native2a endpoint values for local-constructor timing; not a second full transport or accuracy claim.",
+    "archived_native_endpoint_output": "raw/end-charts/paper27-native-endpoint.log"
+  }
+}

@@ -1,0 +1,8 @@
+
+running 3 tests
+test ode::source::exact_performance::exact_gaussian_polynomial_defect_encloses_independent_coefficients ... ok
+test ode::source::exact_performance::exact_polynomial_constructor_preserves_inconclusive_denominator_rejection ... ok
+test ode::source::exact_performance::exact_source_residual_performance_comparison ... ignored, explicit performance experiment; writes JSON to EXACT_RESIDUAL_BENCH_DIR
+
+test result: ok. 2 passed; 0 failed; 1 ignored; 0 measured; 144 filtered out; finished in 0.01s
+

@@ -1,0 +1,50 @@
+[
+  {
+    "name": "tests-channel-final",
+    "command": [
+      "taskset",
+      "-c",
+      "40",
+      "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+      "exact_performance",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.04743231413885951,
+    "source_sha256": "07e800ce5b3b4ae73baf7a4d7b1047005c361f424adc62e619306453dec6b62c",
+    "test_binary_sha256": "9bb3c5da2d16103b587b8b3232f3004db7f04cc8762120e7a1dfb1dd9cdc6b3d"
+  },
+  {
+    "name": "tests-source-final",
+    "command": [
+      "taskset",
+      "-c",
+      "40",
+      "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+      "ode::source_tests",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 3.2432681121863425,
+    "source_sha256": "07e800ce5b3b4ae73baf7a4d7b1047005c361f424adc62e619306453dec6b62c",
+    "test_binary_sha256": "9bb3c5da2d16103b587b8b3232f3004db7f04cc8762120e7a1dfb1dd9cdc6b3d"
+  },
+  {
+    "name": "tests-factor-final",
+    "command": [
+      "taskset",
+      "-c",
+      "40",
+      "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+      "ode::source::factor_tests",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 0.018035431392490864,
+    "source_sha256": "07e800ce5b3b4ae73baf7a4d7b1047005c361f424adc62e619306453dec6b62c",
+    "test_binary_sha256": "9bb3c5da2d16103b587b8b3232f3004db7f04cc8762120e7a1dfb1dd9cdc6b3d"
+  }
+]

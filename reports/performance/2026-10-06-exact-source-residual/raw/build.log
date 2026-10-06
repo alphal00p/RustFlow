@@ -1,0 +1,83 @@
+warning: patch `feynkit-ufo v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a8)` was not used in the crate graph
+warning: patch `linnet-py v0.1.0 (https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a8)` was not used in the crate graph
+help: Check that the patched package version and available features are compatible
+      with the dependency requirements. If the patch has a different version from
+      what is locked in the Cargo.lock file, run `cargo update` to use the new
+      version. This may also occur with an optional dependency that is not enabled.
+   Compiling symbolica-amflow v0.1.0 (/common/dev/amflow-exact-residual)
+error[E0308]: mismatched types
+   --> src/ode/source_exact_tests.rs:128:5
+    |
+127 |   fn coefficient_height(rows: &[ExactPolynomialRow]) -> usize {
+    |                                                         ----- expected `usize` because of return type
+128 | /     rows.iter().flat_map(|row| {
+129 | |         row.denominator.iter().chain(row.entries.iter().flat_map(|(_, a)| a))
+130 | |     }).flat_map(|a| [&a.re, &a.im]).map(|a| {
+131 | |         a.numerator_ref().significant_bits().max(a.denominator_ref().significant_bits())
+132 | |     }).max().unwrap_or(0)
+    | |_________________________^ expected `usize`, found `u64`
+    |
+help: you can convert a `u64` to a `usize` and panic if the converted value doesn't fit
+    |
+132 |     }).max().unwrap_or(0).try_into().unwrap()
+    |                          ++++++++++++++++++++
+
+error[E0277]: the trait bound `symbolica::coefficient::Coefficient: From<&symbolica::atom::Atom>` is not satisfied
+    --> src/ode/source_exact_tests.rs:218:91
+     |
+ 218 | ...()).replace(&epsilon).with(&value).together().cancel()).collect()
+     |        ------- ^^^^^^^^ the trait `From<&symbolica::atom::Atom>` is not implemented for `symbolica::coefficient::Coefficient`
+     |        |
+     |        required by a bound introduced by this call
+     |
+     = help: `symbolica::coefficient::Coefficient` implements trait `From<T>`:
+               From<&(i128, i128)>
+               From<&(i16, i16)>
+               From<&(i32, i32)>
+               From<&(i64, i64)>
+               From<&(i8, i8)>
+               From<&(isize, isize)>
+               From<&(u128, u128)>
+               From<&(u16, u16)>
+             and 96 others
+     = note: required for `&symbolica::atom::Atom` to implement `Into<symbolica::coefficient::Coefficient>`
+     = note: required for `BorrowedOrOwned<'_, symbolica::id::Pattern>` to implement `From<&symbolica::atom::Atom>`
+     = note: 1 redundant requirement hidden
+     = note: required for `&symbolica::atom::Atom` to implement `Into<BorrowedOrOwned<'_, symbolica::id::Pattern>>`
+note: required by a bound in `symbolica::atom::AtomCore::replace`
+    --> /home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4/src/atom/core.rs:1985:23
+     |
+1985 |     fn replace<'b, P: Into<BorrowedOrOwned<'b, Pattern>>>(
+     |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `AtomCore::replace`
+
+error[E0277]: the trait bound `symbolica::coefficient::Coefficient: From<&symbolica::atom::Atom>` is not satisfied
+   --> src/ode/source_exact_tests.rs:218:106
+    |
+218 | ...silon).with(&value).together().cancel()).collect()
+    |           ---- ^^^^^^ the trait `From<&symbolica::atom::Atom>` is not implemented for `symbolica::coefficient::Coefficient`
+    |           |
+    |           required by a bound introduced by this call
+    |
+    = help: `symbolica::coefficient::Coefficient` implements trait `From<T>`:
+              From<&(i128, i128)>
+              From<&(i16, i16)>
+              From<&(i32, i32)>
+              From<&(i64, i64)>
+              From<&(i8, i8)>
+              From<&(isize, isize)>
+              From<&(u128, u128)>
+              From<&(u16, u16)>
+            and 96 others
+    = note: required for `&symbolica::atom::Atom` to implement `Into<symbolica::coefficient::Coefficient>`
+    = note: required for `BorrowedOrOwned<'_, symbolica::id::Pattern>` to implement `From<&symbolica::atom::Atom>`
+    = note: 1 redundant requirement hidden
+    = note: required for `&symbolica::atom::Atom` to implement `Into<BorrowedOrOwned<'_, symbolica::id::Pattern>>`
+note: required by a bound in `ReplaceBuilder::<'a, 'b>::with`
+   --> /home/ben/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/c3408e4/src/id.rs:580:24
+    |
+580 |     pub fn with<'c, R: Into<BorrowedOrOwned<'c, Pattern>>>(&mut self, rhs: R) -> Atom {
+    |                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ required by this bound in `ReplaceBuilder::<'a, 'b>::with`
+
+Some errors have detailed explanations: E0277, E0308.
+For more information about an error, try `rustc --explain E0277`.
+error: could not compile `symbolica-amflow` (lib test) due to 3 previous errors

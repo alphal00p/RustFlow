@@ -1,0 +1,55 @@
+[
+  {
+    "name": "tests-complete",
+    "command": [
+      "taskset",
+      "-c",
+      "40",
+      "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+      "exact_performance",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 101,
+    "elapsed_seconds": 0.032514141872525215,
+    "max_rss_kib_children": 12332,
+    "source_sha256": "6a2ab16c51d351be30e0aa5c7becdfde958da3d3dace0a202f713b021aa500ab",
+    "input_directory": "/common/dev/amflow-exact-residual/target/exact-residual-benchmark"
+  },
+  {
+    "name": "benchmark-complete",
+    "command": [
+      "taskset",
+      "-c",
+      "40",
+      "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+      "exact_source_residual_performance_comparison",
+      "--ignored",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 16.15623235795647,
+    "max_rss_kib_children": 15416,
+    "source_sha256": "6a2ab16c51d351be30e0aa5c7becdfde958da3d3dace0a202f713b021aa500ab",
+    "input_directory": "/common/dev/amflow-exact-residual/target/exact-residual-benchmark"
+  },
+  {
+    "name": "benchmark-end-charts",
+    "command": [
+      "taskset",
+      "-c",
+      "40",
+      "/common/dev/amflow-exact-residual/target/native/release/deps/symbolica_amflow-e0823456bc226c98",
+      "exact_source_residual_performance_comparison",
+      "--ignored",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "elapsed_seconds": 18.061060295905918,
+    "max_rss_kib_children": 15436,
+    "source_sha256": "6a2ab16c51d351be30e0aa5c7becdfde958da3d3dace0a202f713b021aa500ab",
+    "input_directory": "/common/dev/amflow-exact-residual/target/exact-residual-benchmark/end-charts"
+  }
+]

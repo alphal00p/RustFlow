@@ -1,0 +1,150 @@
+{
+  "algorithm": "sha256",
+  "excludes": "manifest.json itself; Git commit identifies the complete immutable archive",
+  "files": {
+    "endpoint-provenance.json": {
+      "bytes": 1311,
+      "sha256": "4b72efbc56f2809464e9201073b4b1a7be0b0d9a5a956b4b9136c7ba8a8fb12b"
+    },
+    "raw/.gitattributes": {
+      "bytes": 106,
+      "sha256": "b7090891f706eef13f450955272e12969b3d86aaee12bc1f68e7bec803367a80"
+    },
+    "raw/benchmark-complete.log": {
+      "bytes": 941,
+      "sha256": "d0f7259cc88a7d874472f43aaa48268201fc5705ce6e2e9512a482411455453a"
+    },
+    "raw/benchmark-end-charts.log": {
+      "bytes": 941,
+      "sha256": "71ca81583071466a44863d27a1efa02707723dc991f3c47445385d2af77b7278"
+    },
+    "raw/benchmark-oracle.log": {
+      "bytes": 668,
+      "sha256": "8715728b8ef37726d904a4a4851db958768a7f0d3786c10086201ee134620460"
+    },
+    "raw/benchmark.log": {
+      "bytes": 620,
+      "sha256": "3506cb1839d19abb8629ef6d9852258a12506af3fc4d317da4e43f1bf14bea55"
+    },
+    "raw/build-channel-validation.log": {
+      "bytes": 909,
+      "sha256": "38c394ee48801ebee45999c697a7b95ea9bb76df8781fb1ef65b2090b0921fc5"
+    },
+    "raw/build-complete.log": {
+      "bytes": 909,
+      "sha256": "797c2000afe464e34faff01233c1aa764b9327c2ee1bc531c97936816b2efd7a"
+    },
+    "raw/build-oracle.log": {
+      "bytes": 909,
+      "sha256": "d447f695d1e42f5418310ff22d056e8fb38731c6d148c116ec6ba6ee7a543459"
+    },
+    "raw/build-second.log": {
+      "bytes": 909,
+      "sha256": "e21157b4b9beaa5e9f06e4fa3ca3344c53ac511de7cf852b31012266c59b29e7"
+    },
+    "raw/build.log": {
+      "bytes": 4904,
+      "sha256": "9fa30f51bf7a94e0eb9588dd23d0d7c3e501b813d2fd2403e5c41e16e0a71660"
+    },
+    "raw/clippy-final.log": {
+      "bytes": 812,
+      "sha256": "77191568e62210969e3478ecc534a22a1a991c185f858b3dea0bf7fa0ae5316e"
+    },
+    "raw/comparison-before-complete.json": {
+      "bytes": 120485,
+      "sha256": "bdb9f1f4bf90762828dbd85601876b272c2edfdecf67f520f646d11aea37f4f4"
+    },
+    "raw/comparison-initial-strict-nesting.json": {
+      "bytes": 13669,
+      "sha256": "a2b7e4a7e20838c6cbe662df9975e4dc3c60f0454b360b7837e2b4768c4f0186"
+    },
+    "raw/comparison.json": {
+      "bytes": 158673,
+      "sha256": "7a76020db8070a932b9c4446c1d0f18006ddbc4db521c8b3d9aa819d80af0441"
+    },
+    "raw/compiled-experiment-source.rs": {
+      "bytes": 18972,
+      "sha256": "6a2ab16c51d351be30e0aa5c7becdfde958da3d3dace0a202f713b021aa500ab"
+    },
+    "raw/current2a-profile-inclusive.txt": {
+      "bytes": 60949,
+      "sha256": "1790194158071cee07f5aafaec7792e43c4db3014211c515e4081bf5e8c73836"
+    },
+    "raw/end-charts/comparison.json": {
+      "bytes": 158831,
+      "sha256": "b92866013f1e42640438b3709aeab7c12077f428c211856bf0a8a478e6443d2d"
+    },
+    "raw/end-charts/paper27-native-endpoint.log": {
+      "bytes": 3771,
+      "sha256": "b402b38cf10d7e834caf2bd4bc96ec8beb78082759874a3568605a3598956b3c"
+    },
+    "raw/end-charts/paper27.json": {
+      "bytes": 51587,
+      "sha256": "2eb35498fab04674c66ba2e10b33788974120134e7b976a6c927800f3a70b9db"
+    },
+    "raw/end-charts/provenance.json": {
+      "bytes": 1138,
+      "sha256": "533eb9fac3419590cc2138bc59efb85cc1b3a6be2cb7d0e811f3a098b6ba61e3"
+    },
+    "raw/end-charts/upstream12-native-endpoint.log": {
+      "bytes": 1790,
+      "sha256": "4858d242ea0d2e5fe5775887069b867456438e652188b03ab2f24e093203b2c4"
+    },
+    "raw/end-charts/upstream12.json": {
+      "bytes": 23366,
+      "sha256": "33c322c42f64edb42ddd4f4310368da00a8d68a95ba13ddf42e6a57fd34f752b"
+    },
+    "raw/format-final.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "raw/paper27.json": {
+      "bytes": 48275,
+      "sha256": "1e112b7549af1b78c845cca4f7e9bf32b089527a6ae7a94a059903a584515880"
+    },
+    "raw/run-complete.json": {
+      "bytes": 1796,
+      "sha256": "3937aed9f2eb58e0140ce71c2036bb92b1ad52dfe93d200dc5c36e7616ab63c3"
+    },
+    "raw/run-oracle.json": {
+      "bytes": 809,
+      "sha256": "e1a75fbc7bb611f4943bd9d4b074bf876accef684795908b494029c51ec7573e"
+    },
+    "raw/tests-channel-final.log": {
+      "bytes": 629,
+      "sha256": "b6aaa498511cf98646257d5b681bd8eb7d51d7f15155cac6362d7be6c5bab252"
+    },
+    "raw/tests-complete.log": {
+      "bytes": 1957,
+      "sha256": "9c8c6fb449441e2d33b458bd60b6a509e303d1273f011621bcd15cd635095e37"
+    },
+    "raw/tests-factor-final.log": {
+      "bytes": 916,
+      "sha256": "8807d22f2ea053fc144f4cc3fabc95a8c9483a2fa2d55044ea70ab2492416044"
+    },
+    "raw/tests-oracle.log": {
+      "bytes": 512,
+      "sha256": "063016f38a21b4424a1ed25f70dfad719a96bb8467cdbd80e99e1206ee9ad0f6"
+    },
+    "raw/tests-source-final.log": {
+      "bytes": 1093,
+      "sha256": "88ef702243810f9170235a6e530e8ed9def27c70e81d866af577e0bb027b67e5"
+    },
+    "raw/tests.log": {
+      "bytes": 512,
+      "sha256": "7a3c93fe6a299c6b01a87494f1e62bd370cc743f8686b2ccf54461b20f1ee832"
+    },
+    "raw/upstream12.json": {
+      "bytes": 26253,
+      "sha256": "78ff0774afe68f649209b87103dd868a290273064f4989548aefad8da3a639d3"
+    },
+    "raw/validation-final.json": {
+      "bytes": 1605,
+      "sha256": "1b6725d672618a3842338921d86ba58e943d9e0a275806d78baae3d4fc84aecb"
+    },
+    "report.json": {
+      "bytes": 33900,
+      "sha256": "7a00a60d417957908fe809488955f3498aee5e75324f56b2aa4f96c487094207"
+    }
+  }
+}
