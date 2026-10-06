@@ -129,6 +129,30 @@ Computation releases the GIL. `ComputationControl.poll()` drains native progress
 
 The Higgs-jet scalar kernel delegates exact internal-parameter expansion to native `Model::expand_parameters`, including the owner's dependency ordering and typed cycle detection. This API is included in the public owner pin; [hepkit-exact-parameters.patch](../scripts/patches/hepkit-exact-parameters.patch) preserves the earlier isolated-owner change. Model numeric defaults and reference integral boundaries are not inputs to this kernel. Form-factor kinematics and W/Z masses must match the explicit model parameters; the notebook constructs both from one set of exact physical inputs.
 
+The Higgs-jet example can start from the built-in Standard Model:
+
+```python
+model = Model.standard_model()
+model = HiggsJetAmplitude.with_form_factor_vertices(model)
+amplitude = HiggsJetAmplitude(model)
+```
+
+The extension adds three symbolic W/Z/HEFT form-factor vertices through HEPKit's
+native model interchange, preserving the original particles and interactions.
+It returns a native `Model` and rejects declaration-name collisions. Gluon and
+Higgs names are resolved by PDG code, including the built-in gluon name `g`.
+The [minimal declarations](../fixtures/gg-hg/form-factor-vertices.json) and their
+[provenance](../fixtures/gg-hg/form-factor-vertices-provenance.json) contain no
+numerical loop results. Numerical form factors and exact physical parameters
+must still be supplied explicitly to `evaluate`.
+
+The shared `symbolica.get_citations()` result includes the AMFlow 2 and DiffExp
+method papers after numerical transport preparation. Automatic evaluation also
+credits the original AMFlow paper; the Higgs-jet workflow includes that paper
+and the Becchetti--Moriello--Schweitzer calculation. Citation usage is cumulative:
+imports and failed preparation do not activate these entries, and reading them
+does not reset the registry.
+
 ## Remaining numerical specialization
 
 Exact matrix determinant, multiplication and inversion already use Symbolica's matrix facilities. At official Symbolica/Numerica revision `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`, native `Float::{add,sub,mul,div}_round` accepts an explicit precision and rounding direction. `numeric.rs` uses those primitives with `RoundingDirection::Nearest` for the real components of complex arithmetic, retaining the order and working precision of each intermediate operation. Output accuracy continues to come from independent checks, not from the working precision.

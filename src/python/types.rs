@@ -430,6 +430,7 @@ impl PyDifferentialSystem {
                 .collect(),
         };
         inner.validate().map_err(error)?;
+        super::citations::transport();
         Ok(Self { inner })
     }
     #[getter]

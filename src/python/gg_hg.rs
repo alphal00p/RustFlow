@@ -120,6 +120,7 @@ impl PyHiggsJetIntegralSystem {
         let inner = py
             .detach(|| HiggsJetIntegralSystem::load(kind, namespace))
             .map_err(error)?;
+        super::citations::higgs_jet();
         Ok(Self {
             inner: Arc::new(inner),
             namespace: namespace.into(),
@@ -321,6 +322,7 @@ impl PyHiggsJetFormFactorProjector {
     #[pyo3(signature=(*,namespace="hep_higgs_jet"))]
     fn new(py: Python<'_>, namespace: &str) -> PyResult<Self> {
         py.detach(|| crate::gg_hg::HiggsJetFormFactors::load(namespace))
+            .inspect(|_| super::citations::higgs_jet())
             .map(|inner| Self {
                 inner: Arc::new(inner),
             })

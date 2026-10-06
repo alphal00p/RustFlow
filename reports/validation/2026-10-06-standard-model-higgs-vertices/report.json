@@ -1,0 +1,71 @@
+{
+  "base_commit": "8fc503226d45b6fad2df6126c7cd1e91e80f4a6e",
+  "scope": "Extend native Model.standard_model with minimal symbolic ggHg form-factor declarations and credit successfully prepared numerical methods/scientific inputs through native cumulative Citation records.",
+  "validation": {
+    "native_amplitude": "2 passed; exact equality of all three kernels with the legacy scientific model, native graph/model sharing, original SM preservation and collision rejection.",
+    "python_stubgen": "4 passed; process-isolated cumulative citations including import/failed-preparation controls, native Model interoperability, generated method stubs and supplied boundary precision/restart.",
+    "ignored_python_test": "all_packaged_higgs_values_enter_the_current_native_evidence_path requires the independent community loader/bundle; it was not run in this focused gate.",
+    "strict_release_clippy": "Native lib/amplitude gate and python_stubgen lib/python_portable_higgs_seeds gate passed with -D warnings.",
+    "format_and_diff": "passed",
+    "scientific_asset_regeneration": "Both committed declaration/provenance assets reproduced byte-for-byte with --check.",
+    "stub": "Generated from the current Rust python_stubgen metadata, normalized by the community host compatibility owner, and parsed with Python3.9 grammar."
+  },
+  "pins": {
+    "symbolica": "6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+    "hepkit": "b96600b0085d9ddfa9e6acbc11fa72ec6163253c",
+    "rustred": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+  },
+  "cargo_lock_sha256": "de053384fb8c95fdf48f590b868ab5bad3c86df16a083841a96bb4383c911bfa",
+  "source_inputs": {
+    "base": "8fc503226d45b6fad2df6126c7cd1e91e80f4a6e",
+    "files": {
+      "src/gg_hg/amplitude.rs": "8fc6f919e1297077ab2b987e064c4392941bdbc86b71993bd25d7b7d92d0be94",
+      "src/python/citations.rs": "00107e75a375524c3ca664cc3c1f64e9a17a1013365c2b9592536d1a2c1e0fe7",
+      "src/python/amplitude.rs": "2c21d4c36ad3550a406a23f500700fa3b22eabe87ea0b2d398d0175ebce9c603",
+      "src/python/mod.rs": "ec41f85bea48a2de0922f6ac729271a61a6beaf38e4633fe51b48eb1821e9610",
+      "src/python/evaluation.rs": "44c08c6d7d70076e0b93d3dcc04504ded311a81ca2bcadeb05dee6a3f887c53d",
+      "src/python/transport.rs": "813c0980d19ce49089157f055971ef3e2dd25b2393d3050f5d90bf2eab99acfc",
+      "src/python/types.rs": "e81c5149fded734d908ff1a54551ed7c8ca0baf7d19be9416c322127d59224cd",
+      "src/python/gg_hg.rs": "1aea57e6da66e96741281fb87e5ac8dfbe944e33357470a620d929674aa958e8",
+      "tests/gg_hg_amplitude.rs": "9c63e086f8b71a6ac80a5fe0c1d6748843987e372e8b35ba7432e61d52dc19fb",
+      "tests/python_portable_higgs_seeds.rs": "d85b602e5aa847a114040417644ecc8f1124f0f02b7764f4dffe32ef0247cce5",
+      "fixtures/gg-hg/form-factor-vertices.json": "52a70c0ff098a7add3484f95082d2eb7ab61e34552814ec774312b74106bf29f",
+      "fixtures/gg-hg/form-factor-vertices-provenance.json": "e21b14b26b3c892628ba1f6d9c24ec533750e40283840364c7210efcf6f96e60",
+      "scripts/extract_gg_hg_form_factor_vertices.py": "6328245f934818cec1b0d6bee74cb31dab9c3433f1ba66c22af510850f201bd9"
+    }
+  },
+  "stub_sha256": "195c32d90582eb09e5285903dcde4f8f9ec0b7792ff83e6e90472f8b958ece13",
+  "stub_compat_sha256": "7403ca0f0d027b7607a1346d297572a49e3a09ed6b78bcf00c1114392dbd19c9",
+  "stub_generator_sha256": "7775fe1dce4b4d7439917a065d510e87583a52be555015a358251aa2b8723537",
+  "log_sha256": {
+    "native_amplitude": "fc1d526aa4e2dbbb178e425bead2f402824160c2cf4fa930a12cefc76d68f3cf",
+    "native_clippy": "3f5e3c5bec3e9a231dc75ce16bb2bfe9dcd23db699ddf6a93009c8eb89605a0e",
+    "python": "9cc653ae076bb1b3807744c3de8017f650129aba1dae6b8aad464775ddb6b98c",
+    "python_clippy": "19b0d85e8129a049ccb6866991d7461fd910eee1a1f0a808f0a85be37d76123f",
+    "stub_build": "11baa2fb885bf2968a0cf5b10527b8511dde9aed7077b0f02001a19baf84bc08",
+    "stub_generation": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "asset_check": "ef3ba2539b1982e3c8a1280854416557a6b79cf8186d07f16ec8b48a80da50e1",
+    "format": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "diff_check": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  "remaining_runtime_validation": "The new complete community native/WASM notebook builds and notebook-level citation aggregation are separate host gates. This report does not claim that the previously validated browser wheel contains this new API.",
+  "development_evidence": "Retained initial Process::new selector type error and invalid taskset invocation; corrected runs are the accepted gates above. Earlier33-check asset validation uses the prior7096 native runtime and is separately labeled.",
+  "compiler": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+  "commands": [
+    "cargo test --locked --release -j2 --test gg_hg_amplitude",
+    "cargo test --locked --release -j2 --features python_stubgen --test python_portable_higgs_seeds",
+    "cargo clippy --locked --release -j2 --features python_stubgen --lib --test python_portable_higgs_seeds -- -D warnings",
+    "cargo rustc --locked --release -j2 --features python_stubgen --example _generate_integration_stub -- -C opt-level=0 -C lto=off",
+    "CARGO_TARGET_DIR/release/examples/_generate_integration_stub target/standard-model-validation/integration.pyi",
+    "python scripts/extract_gg_hg_form_factor_vertices.py --check",
+    "cargo fmt --all --check",
+    "git diff --check"
+  ],
+  "python_target": "/common/dev/amflow/target/standard-model-native-host",
+  "python_interpreter": "/common/dev/amflow/target/gg-hg-browser-seeds/native-venv/bin/python",
+  "archive": {
+    "path": "evidence.tar.gz",
+    "sha256": "657bd12bac5a6763767c9240b0f65205ab7da20cdbab881828effb8c3cd04274",
+    "bytes": 27679
+  }
+}

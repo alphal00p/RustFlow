@@ -1,0 +1,747 @@
+{
+  "schema": "rustflow-gg-hg-form-factor-vertices-v1",
+  "orders": [
+    {
+      "name": "GGGHEW",
+      "expansion_order": -1,
+      "hierarchy": 1
+    },
+    {
+      "name": "ZZ",
+      "expansion_order": -1,
+      "hierarchy": 2
+    },
+    {
+      "name": "WW",
+      "expansion_order": -1,
+      "hierarchy": 2
+    },
+    {
+      "name": "GGGHEFT",
+      "expansion_order": -1,
+      "hierarchy": 2
+    }
+  ],
+  "parameters": [
+    {
+      "name": "GGGH_HEFT_ForFac1",
+      "texname": "\\text{GGGH_HEFT_ForFac1}",
+      "lhablock": "GGGHHEFT",
+      "lhacode": [
+        30001
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGH_HEFT_ForFac2",
+      "texname": "\\text{GGGH_HEFT_ForFac2}",
+      "lhablock": "GGGHHEFT",
+      "lhacode": [
+        30002
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGH_HEFT_ForFac3",
+      "texname": "\\text{GGGH_HEFT_ForFac3}",
+      "lhablock": "GGGHHEFT",
+      "lhacode": [
+        30003
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGH_HEFT_ForFac4",
+      "texname": "\\text{GGGH_HEFT_ForFac4}",
+      "lhablock": "GGGHHEFT",
+      "lhacode": [
+        30004
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWZZ_ForFac1_RE",
+      "texname": "\\text{GGGHEWZZ_ForFac1_RE}",
+      "lhablock": "GGGHEWZZ",
+      "lhacode": [
+        77001
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWZZ_ForFac1_IM",
+      "texname": "\\text{GGGHEWZZ_ForFac1_IM}",
+      "lhablock": "GGGHEWZZ",
+      "lhacode": [
+        77002
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWZZ_ForFac2_RE",
+      "texname": "\\text{GGGHEWZZ_ForFac2_RE}",
+      "lhablock": "GGGHEWZZ",
+      "lhacode": [
+        77003
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWZZ_ForFac2_IM",
+      "texname": "\\text{GGGHEWZZ_ForFac2_IM}",
+      "lhablock": "GGGHEWZZ",
+      "lhacode": [
+        77004
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWZZ_ForFac3_RE",
+      "texname": "\\text{GGGHEWZZ_ForFac3_RE}",
+      "lhablock": "GGGHEWZZ",
+      "lhacode": [
+        77005
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWZZ_ForFac3_IM",
+      "texname": "\\text{GGGHEWZZ_ForFac3_IM}",
+      "lhablock": "GGGHEWZZ",
+      "lhacode": [
+        77006
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWZZ_ForFac4_RE",
+      "texname": "\\text{GGGHEWZZ_ForFac4_RE}",
+      "lhablock": "GGGHEWZZ",
+      "lhacode": [
+        77007
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWZZ_ForFac4_IM",
+      "texname": "\\text{GGGHEWZZ_ForFac4_IM}",
+      "lhablock": "GGGHEWZZ",
+      "lhacode": [
+        77008
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWWW_ForFac1_RE",
+      "texname": "\\text{GGGHEWWW_ForFac1_RE}",
+      "lhablock": "GGGHEWWW",
+      "lhacode": [
+        88001
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWWW_ForFac1_IM",
+      "texname": "\\text{GGGHEWWW_ForFac1_IM}",
+      "lhablock": "GGGHEWWW",
+      "lhacode": [
+        88002
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWWW_ForFac2_RE",
+      "texname": "\\text{GGGHEWWW_ForFac2_RE}",
+      "lhablock": "GGGHEWWW",
+      "lhacode": [
+        88003
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWWW_ForFac2_IM",
+      "texname": "\\text{GGGHEWWW_ForFac2_IM}",
+      "lhablock": "GGGHEWWW",
+      "lhacode": [
+        88004
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWWW_ForFac3_RE",
+      "texname": "\\text{GGGHEWWW_ForFac3_RE}",
+      "lhablock": "GGGHEWWW",
+      "lhacode": [
+        88005
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWWW_ForFac3_IM",
+      "texname": "\\text{GGGHEWWW_ForFac3_IM}",
+      "lhablock": "GGGHEWWW",
+      "lhacode": [
+        88006
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWWW_ForFac4_RE",
+      "texname": "\\text{GGGHEWWW_ForFac4_RE}",
+      "lhablock": "GGGHEWWW",
+      "lhacode": [
+        88007
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "GGGHEWWW_ForFac4_IM",
+      "texname": "\\text{GGGHEWWW_ForFac4_IM}",
+      "lhablock": "GGGHEWWW",
+      "lhacode": [
+        88008
+      ],
+      "nature": "external",
+      "parameter_type": "complex",
+      "value": [
+        0.0,
+        0.0
+      ],
+      "expression": null
+    },
+    {
+      "name": "CHEFT",
+      "texname": "AllGGHEWCoup",
+      "lhablock": "GGHEFT",
+      "lhacode": [
+        20000
+      ],
+      "nature": "internal",
+      "parameter_type": "complex",
+      "value": null,
+      "expression": "-1/3*aS/(𝜋*vev)"
+    },
+    {
+      "name": "AllGGGHEWZZCoup",
+      "texname": "AllGGGHEWCoup",
+      "lhablock": "GGGHEWZZ",
+      "lhacode": [
+        77000
+      ],
+      "nature": "internal",
+      "parameter_type": "complex",
+      "value": null,
+      "expression": "𝑖/2*G^3*MW*gw^3*(5/8-7/6*sw^2+11/9*sw^4)/cw^4"
+    },
+    {
+      "name": "AllGGGHEWWWCoup",
+      "texname": "AllGGGHEWWWCoup",
+      "lhablock": "GGGHEWWW",
+      "lhacode": [
+        88000
+      ],
+      "nature": "internal",
+      "parameter_type": "complex",
+      "value": null,
+      "expression": "𝑖/2*G^3*MW*gw^3"
+    }
+  ],
+  "couplings": [
+    {
+      "name": "GGGH_HEFT_C1",
+      "expression": "-1/2*CHEFT*G*GGGH_HEFT_ForFac1",
+      "orders": [
+        [
+          "GGGHEFT",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGH_HEFT_C2",
+      "expression": "-1/2*CHEFT*G*GGGH_HEFT_ForFac2",
+      "orders": [
+        [
+          "GGGHEFT",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGH_HEFT_C3",
+      "expression": "-1/2*CHEFT*G*GGGH_HEFT_ForFac3",
+      "orders": [
+        [
+          "GGGHEFT",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGH_HEFT_C4",
+      "expression": "-1/2*CHEFT*G*GGGH_HEFT_ForFac4",
+      "orders": [
+        [
+          "GGGHEFT",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGHEWZZ_C1",
+      "expression": "AllGGGHEWZZCoup*(𝑖*GGGHEWZZ_ForFac1_IM+GGGHEWZZ_ForFac1_RE)",
+      "orders": [
+        [
+          "GGGHEW",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          3
+        ],
+        [
+          "ZZ",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGHEWZZ_C2",
+      "expression": "AllGGGHEWZZCoup*(𝑖*GGGHEWZZ_ForFac2_IM+GGGHEWZZ_ForFac2_RE)",
+      "orders": [
+        [
+          "GGGHEW",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          3
+        ],
+        [
+          "ZZ",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGHEWZZ_C3",
+      "expression": "AllGGGHEWZZCoup*(𝑖*GGGHEWZZ_ForFac3_IM+GGGHEWZZ_ForFac3_RE)",
+      "orders": [
+        [
+          "GGGHEW",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          3
+        ],
+        [
+          "ZZ",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGHEWZZ_C4",
+      "expression": "AllGGGHEWZZCoup*(𝑖*GGGHEWZZ_ForFac4_IM+GGGHEWZZ_ForFac4_RE)",
+      "orders": [
+        [
+          "GGGHEW",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          3
+        ],
+        [
+          "ZZ",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGHEWWW_C1",
+      "expression": "AllGGGHEWWWCoup*(𝑖*GGGHEWWW_ForFac1_IM+GGGHEWWW_ForFac1_RE)",
+      "orders": [
+        [
+          "GGGHEW",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          3
+        ],
+        [
+          "WW",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGHEWWW_C2",
+      "expression": "AllGGGHEWWWCoup*(𝑖*GGGHEWWW_ForFac2_IM+GGGHEWWW_ForFac2_RE)",
+      "orders": [
+        [
+          "GGGHEW",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          3
+        ],
+        [
+          "WW",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGHEWWW_C3",
+      "expression": "AllGGGHEWWWCoup*(𝑖*GGGHEWWW_ForFac3_IM+GGGHEWWW_ForFac3_RE)",
+      "orders": [
+        [
+          "GGGHEW",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          3
+        ],
+        [
+          "WW",
+          1
+        ]
+      ],
+      "value": null
+    },
+    {
+      "name": "GGGHEWWW_C4",
+      "expression": "AllGGGHEWWWCoup*(𝑖*GGGHEWWW_ForFac4_IM+GGGHEWWW_ForFac4_RE)",
+      "orders": [
+        [
+          "GGGHEW",
+          1
+        ],
+        [
+          "QCD",
+          3
+        ],
+        [
+          "QED",
+          3
+        ],
+        [
+          "WW",
+          1
+        ]
+      ],
+      "value": null
+    }
+  ],
+  "lorentz_structures": [
+    {
+      "name": "gggHTensStruc1",
+      "spins": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "structure": "-(P(dummy(10),idx(1,1))*P(dummy(10),idx(1,3))*P(idx(1,3),idx(1,2))-P(dummy(15),idx(1,2))*P(dummy(15),idx(1,3))*P(idx(1,3),idx(1,1)))*(-P(dummy(6),idx(1,1))*P(dummy(6),idx(1,2))*Metric(idx(1,1),idx(1,2))+P(idx(1,1),idx(1,2))*P(idx(1,2),idx(1,1)))/spenso::bracket(P(-15,2)*P(-15,3))"
+    },
+    {
+      "name": "gggHTensStruc2",
+      "spins": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "structure": "-(-P(dummy(6),idx(1,1))*P(dummy(6),idx(1,2))*P(idx(1,1),idx(1,3))+P(dummy(10),idx(1,1))*P(dummy(10),idx(1,3))*P(idx(1,1),idx(1,2)))*(-P(dummy(15),idx(1,2))*P(dummy(15),idx(1,3))*Metric(idx(1,2),idx(1,3))+P(idx(1,2),idx(1,3))*P(idx(1,3),idx(1,2)))/spenso::bracket(P(-10,1)*P(-10,3))"
+    },
+    {
+      "name": "gggHTensStruc3",
+      "spins": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "structure": "-(-P(dummy(6),idx(1,1))*P(dummy(6),idx(1,2))*P(idx(1,2),idx(1,3))+P(dummy(15),idx(1,2))*P(dummy(15),idx(1,3))*P(idx(1,2),idx(1,1)))*(-P(dummy(10),idx(1,1))*P(dummy(10),idx(1,3))*Metric(idx(1,1),idx(1,3))+P(idx(1,1),idx(1,3))*P(idx(1,3),idx(1,1)))/spenso::bracket(P(-15,2)*P(-15,3))"
+    },
+    {
+      "name": "gggHTensStruc4",
+      "spins": [
+        3,
+        3,
+        3,
+        1
+      ],
+      "structure": "-(P(dummy(6),idx(1,1))*P(dummy(6),idx(1,2))*P(idx(1,2),idx(1,3))*Metric(idx(1,1),idx(1,3))-P(dummy(10),idx(1,1))*P(dummy(10),idx(1,3))*P(idx(1,3),idx(1,2))*Metric(idx(1,1),idx(1,2))-P(dummy(15),idx(1,2))*P(dummy(15),idx(1,3))*P(idx(1,2),idx(1,1))*Metric(idx(1,1),idx(1,3))+P(dummy(15),idx(1,2))*P(dummy(15),idx(1,3))*P(idx(1,3),idx(1,1))*Metric(idx(1,1),idx(1,2))+(P(dummy(10),idx(1,1))*P(dummy(10),idx(1,3))*Metric(idx(1,2),idx(1,3))-P(idx(1,2),idx(1,3))*P(idx(1,3),idx(1,1)))*P(idx(1,1),idx(1,2))+(-P(dummy(6),idx(1,1))*P(dummy(6),idx(1,2))*Metric(idx(1,2),idx(1,3))+P(idx(1,2),idx(1,1))*P(idx(1,3),idx(1,2)))*P(idx(1,1),idx(1,3)))"
+    }
+  ],
+  "vertex_rules": [
+    {
+      "name": "GGGHHEFT",
+      "particles": [
+        "G",
+        "G",
+        "G",
+        "H"
+      ],
+      "color_structures": [
+        "f(1,2,3)"
+      ],
+      "lorentz_structures": [
+        "gggHTensStruc1",
+        "gggHTensStruc2",
+        "gggHTensStruc3",
+        "gggHTensStruc4"
+      ],
+      "couplings": [
+        [
+          "GGGH_HEFT_C1",
+          "GGGH_HEFT_C2",
+          "GGGH_HEFT_C3",
+          "GGGH_HEFT_C4"
+        ]
+      ]
+    },
+    {
+      "name": "GGGHEWZZ",
+      "particles": [
+        "G",
+        "G",
+        "G",
+        "H"
+      ],
+      "color_structures": [
+        "f(1,2,3)"
+      ],
+      "lorentz_structures": [
+        "gggHTensStruc1",
+        "gggHTensStruc2",
+        "gggHTensStruc3",
+        "gggHTensStruc4"
+      ],
+      "couplings": [
+        [
+          "GGGHEWZZ_C1",
+          "GGGHEWZZ_C2",
+          "GGGHEWZZ_C3",
+          "GGGHEWZZ_C4"
+        ]
+      ]
+    },
+    {
+      "name": "GGGHEWWW",
+      "particles": [
+        "G",
+        "G",
+        "G",
+        "H"
+      ],
+      "color_structures": [
+        "f(1,2,3)"
+      ],
+      "lorentz_structures": [
+        "gggHTensStruc1",
+        "gggHTensStruc2",
+        "gggHTensStruc3",
+        "gggHTensStruc4"
+      ],
+      "couplings": [
+        [
+          "GGGHEWWW_C1",
+          "GGGHEWWW_C2",
+          "GGGHEWWW_C3",
+          "GGGHEWWW_C4"
+        ]
+      ]
+    }
+  ]
+}

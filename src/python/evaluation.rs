@@ -179,6 +179,7 @@ impl PyIntegralEvaluator {
                 ..Default::default()
             }),
         };
+        super::citations::automatic();
         Ok(Self { options, backend })
     }
     #[getter]

@@ -3,6 +3,7 @@
 //! This module deliberately has no `pymodule` entry point: loading a second
 //! Symbolica runtime would invalidate native expression and family identities.
 mod amplitude;
+mod citations;
 mod constraints;
 mod continuation;
 mod endpoint;
@@ -20,6 +21,7 @@ use symbolica::domains::float::{PythonMultiPrecisionComplex, PythonMultiPrecisio
 use symbolica::prelude::*;
 
 pub use amplitude::{PyAmplitudeResult, PyHiggsJetAmplitude};
+pub use citations::get_citations;
 pub use constraints::{PyAsymptoticCoefficient, PyAsymptoticRelation, PyEndpointConstraints};
 pub use continuation::PyContinuationPrescription;
 pub use endpoint::{PyEndpointResult, PyEndpointRoute};

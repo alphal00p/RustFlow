@@ -8,6 +8,197 @@ use symbolica::domains::float::{PythonMultiPrecisionComplex, PythonMultiPrecisio
 use symbolica_amflow::Precision;
 
 #[test]
+fn numerical_method_citations_are_process_isolated_and_cumulative() {
+    const CHILD: &str = "RUSTFLOW_CITATION_TEST_OPERATION";
+    let Ok(operation) = std::env::var(CHILD) else {
+        for operation in [
+            "import",
+            "ordinary",
+            "kinematic",
+            "higgs",
+            "model",
+            "automatic",
+        ] {
+            if operation == "automatic" && !cfg!(feature = "automatic") {
+                continue;
+            }
+            let output = std::process::Command::new(std::env::current_exe().unwrap())
+                .args([
+                    "--exact",
+                    "numerical_method_citations_are_process_isolated_and_cumulative",
+                    "--nocapture",
+                ])
+                .env(CHILD, operation)
+                .output()
+                .unwrap();
+            assert!(
+                output.status.success(),
+                "{operation}: {}\n{}",
+                String::from_utf8_lossy(&output.stdout),
+                String::from_utf8_lossy(&output.stderr)
+            );
+        }
+        return;
+    };
+    assert!(symbolica_amflow::python::get_citations().is_empty());
+    Python::initialize();
+    Python::attach(|py| -> PyResult<()> {
+        let core = PyModule::new(py, "symbolica.core")?;
+        create_symbolica_module(&core)?;
+        let hep = PyModule::new(py, "symbolica.community.hepkit")?;
+        feynkit_py::initialize_feynkit(&hep)?;
+        let integration = PyModule::new(py, "symbolica.community.hep.integration")?;
+        symbolica_amflow::python::register(&integration)?;
+        let locals = PyDict::new(py);
+        locals.set_item("core", core)?;
+        locals.set_item("hep", hep)?;
+        locals.set_item("integration", integration)?;
+        locals.set_item("operation", &operation)?;
+        assert!(symbolica_amflow::python::get_citations().is_empty());
+        py.run(
+            c"
+integration.EvaluationOptions()
+integration.BoundaryCache()
+integration.ComputationControl()
+for invalid in [lambda: integration.HiggsJetIntegralSystem('invalid'),
+                lambda: integration.DifferentialSystem(core.S('citation_x'), []),
+                lambda: integration.HiggsJetAmplitude.with_form_factor_vertices(hep.Model.phi4())]:
+    try:
+        invalid()
+    except integration.InvalidInputError:
+        pass
+    else:
+        raise AssertionError('invalid API preparation succeeded')
+",
+            Some(&locals),
+            Some(&locals),
+        )?;
+        assert!(symbolica_amflow::python::get_citations().is_empty());
+        py.run(
+            c"
+if operation == 'ordinary':
+    integration.DifferentialSystem(core.S('citation_x'), [[core.E('0')]])
+elif operation == 'kinematic':
+    integration.KinematicTransport(core.S('citation_eps'), {core.S('citation_x'):[[core.E('0')]]},
+        [core.S('citation_master')], core.E('1'), branch_domain='citation preparation')
+elif operation == 'higgs':
+    integration.HiggsJetIntegralSystem('planar')
+elif operation == 'model':
+    integration.HiggsJetAmplitude.with_form_factor_vertices(hep.Model.standard_model())
+elif operation == 'automatic':
+    integration.IntegralEvaluator()
+",
+            Some(&locals),
+            Some(&locals),
+        )?;
+        Ok(())
+    })
+    .unwrap();
+    let snapshot = || {
+        symbolica_amflow::python::get_citations()
+            .into_iter()
+            .map(|c| (c.id, c.reference, c.bibtex, c.reasons, c.description))
+            .collect::<Vec<_>>()
+    };
+    let first = snapshot();
+    let expected = match operation.as_str() {
+        "import" => vec![],
+        "ordinary" | "kinematic" => vec!["arXiv:2607.08477", "arXiv:2006.05510"],
+        "automatic" => vec!["arXiv:2607.08477", "arXiv:2006.05510", "arXiv:2201.11669"],
+        _ => vec![
+            "arXiv:2607.08477",
+            "arXiv:2006.05510",
+            "arXiv:2201.11669",
+            "arXiv:2112.07578",
+        ],
+    };
+    assert_eq!(
+        first.iter().map(|c| c.0.as_str()).collect::<Vec<_>>(),
+        expected
+    );
+    assert_eq!(
+        snapshot(),
+        first,
+        "reading citations reset cumulative usage"
+    );
+    for (_, reference, bibtex, reasons, description) in first {
+        assert!(!reference.is_empty() && bibtex.starts_with("@article{"));
+        assert!(!reasons.is_empty());
+        assert!(!description.is_empty());
+    }
+}
+
+#[test]
+fn higgs_form_factor_extension_returns_the_shared_native_model() {
+    Python::initialize();
+    Python::attach(|py| -> PyResult<()> {
+        let core = PyModule::new(py, "symbolica.core")?;
+        create_symbolica_module(&core)?;
+        let hep = PyModule::new(py, "symbolica.community.hepkit")?;
+        feynkit_py::initialize_feynkit(&hep)?;
+        let integration = PyModule::new(py, "symbolica.community.hep.integration")?;
+        symbolica_amflow::python::register(&integration)?;
+        let locals = PyDict::new(py);
+        locals.set_item("core", core)?;
+        locals.set_item("hep", hep)?;
+        locals.set_item("integration", integration)?;
+        py.run(
+            c"
+import json
+model = hep.Model.standard_model()
+original = model.to_json()
+extended = integration.HiggsJetAmplitude.with_form_factor_vertices(model)
+assert type(extended) is hep.Model
+assert model.to_json() == original
+assert extended.particle_by_pdg(21).name == 'g'
+assert extended.particle_by_pdg(25).name == 'H'
+assert isinstance(extended.parameter('GGGHEWWW_ForFac1_RE').symbol, core.Expression)
+assert isinstance(extended.coupling('GGGH_HEFT_C1').expression, core.Expression)
+for name in ['GGGHEWWW', 'GGGHEWZZ', 'GGGHHEFT']:
+    assert extended.vertex_rule(name).particles == ['g', 'g', 'g', 'H']
+# The returned object is accepted directly by the native process owner.
+process = extended.process(['g', 'g'], ['g', 'H'],
+    vertex_allow=['GGGHEWWW', 'GGGHEWZZ', 'GGGHHEFT'])
+assert isinstance(process, hep.Process)
+extended_json = extended.to_json()
+try:
+    integration.HiggsJetAmplitude.with_form_factor_vertices(extended)
+    raise AssertionError('conflicting effective declarations were overwritten')
+except integration.InvalidInputError as error:
+    assert 'already exists' in str(error)
+assert extended.to_json() == extended_json and model.to_json() == original
+try:
+    integration.HiggsJetAmplitude.with_form_factor_vertices(hep.Model.phi4())
+    raise AssertionError('a model without the required native species was accepted')
+except integration.InvalidInputError:
+    pass
+restored = hep.Model.from_json(extended_json)
+assert json.loads(restored.to_json()) == json.loads(extended_json)
+",
+            Some(&locals),
+            Some(&locals),
+        )?;
+        let extended = locals.get_item("extended")?.unwrap();
+        let native = extended.extract::<PyRef<'_, feynkit_py::PyModel>>()?;
+        let owner = std::sync::Arc::clone(native.as_model());
+        let second_view = feynkit_py::PyModel::from(std::sync::Arc::clone(&owner));
+        assert!(std::sync::Arc::ptr_eq(
+            native.as_model(),
+            second_view.as_model()
+        ));
+        assert_eq!(owner.particle_by_pdg(21).unwrap().name, "g");
+        let original = locals.get_item("model")?.unwrap();
+        let original = original.extract::<PyRef<'_, feynkit_py::PyModel>>()?;
+        assert_eq!(
+            owner.vertex_rules().len(),
+            original.as_model().vertex_rules().len() + 3
+        );
+        Ok(())
+    })
+    .unwrap();
+}
+
+#[test]
 fn portable_higgs_connections_preserve_supplied_evidence_and_restart() {
     Python::initialize();
     Python::attach(|py| -> PyResult<()> {
@@ -99,6 +290,10 @@ fn portable_higgs_adapter_has_native_generated_stubs() {
     assert!(text.contains("automatic_boundary_generation_available: builtins.bool"));
     assert!(text.contains("def mathematical_fingerprint(self) -> builtins.str:"));
     assert!(text.contains("def kinematic_transport(self, options: typing.Optional[EvaluationOptions] = None) -> KinematicTransport:"), "{text}");
+    assert!(
+        text.contains("@staticmethod\n    def with_form_factor_vertices(model: Model) -> Model:"),
+        "{text}"
+    );
 }
 
 #[test]

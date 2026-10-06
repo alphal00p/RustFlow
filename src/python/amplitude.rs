@@ -26,6 +26,19 @@ pub struct PyHiggsJetAmplitude {
 #[cfg_attr(feature = "python_stubgen", gen_stub_pymethods)]
 #[pymethods]
 impl PyHiggsJetAmplitude {
+    /// Add the symbolic W, Z and HEFT gggH vertices to an existing Standard Model.
+    /// Returns a native HEPKit model retaining its existing particles, parameters
+    /// and interactions. Numerical form factors still come from loop evaluation;
+    /// conflicting declaration names are rejected rather than overwritten.
+    #[staticmethod]
+    fn with_form_factor_vertices(py: Python<'_>, model: &PyModel) -> PyResult<PyModel> {
+        let model = model.as_model().clone();
+        py.detach(|| HiggsJetAmplitude::with_form_factor_vertices(&model))
+            .inspect(|_| super::citations::higgs_jet())
+            .map(Into::into)
+            .map_err(error)
+    }
+
     #[new]
     #[pyo3(signature=(model, *, control=None))]
     fn new(
@@ -36,6 +49,7 @@ impl PyHiggsJetAmplitude {
         let model = model.as_model().clone();
         let context = context(control);
         py.detach(|| HiggsJetAmplitude::new(model, &context))
+            .inspect(|_| super::citations::higgs_jet())
             .map(|inner| Self {
                 inner: Arc::new(inner),
             })

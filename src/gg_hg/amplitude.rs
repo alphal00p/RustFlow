@@ -74,6 +74,66 @@ pub fn effective_form_factors(s: &Atom, t: &Atom, higgs_mass_squared: &Atom) -> 
 }
 
 impl HiggsJetAmplitude {
+    /// Add the three effective gggH form-factor vertices to a Standard Model.
+    ///
+    /// Existing particles, parameters and interactions are retained. The added
+    /// declarations contain symbolic tensors and couplings, not numerical loop
+    /// results. HEPKit validates the resulting model through its native model
+    /// interchange. Existing declaration names are never overwritten.
+    pub fn with_form_factor_vertices(model: &Model) -> Result<Model> {
+        let gluon = model.particle_by_pdg(21).map_err(native_error)?;
+        let higgs = model.particle_by_pdg(25).map_err(native_error)?;
+        if (gluon.spin, gluon.color, higgs.spin, higgs.color) != (3, 8, 1, 1) {
+            return Err(native_error(
+                "form-factor vertices require a gluon and a scalar Higgs",
+            ));
+        }
+        for name in ["aS", "vev", "G", "MW", "gw", "sw", "cw"] {
+            model.parameter(name).map_err(native_error)?;
+        }
+        let mut definition: serde_json::Value =
+            serde_json::from_str(&model.to_json().map_err(native_error)?).map_err(native_error)?;
+        let mut additions: serde_json::Value = serde_json::from_str(include_str!(
+            "../../fixtures/gg-hg/form-factor-vertices.json"
+        ))
+        .map_err(native_error)?;
+        for vertex in additions["vertex_rules"]
+            .as_array_mut()
+            .ok_or_else(|| native_error("invalid form-factor vertex declarations"))?
+        {
+            vertex["particles"] =
+                serde_json::json!([gluon.name, gluon.name, gluon.name, higgs.name,]);
+        }
+        for section in [
+            "orders",
+            "parameters",
+            "lorentz_structures",
+            "couplings",
+            "vertex_rules",
+        ] {
+            let existing = definition[section]
+                .as_array_mut()
+                .ok_or_else(|| native_error(format!("invalid model {section}")))?;
+            let incoming = additions[section]
+                .as_array()
+                .ok_or_else(|| native_error(format!("invalid form-factor {section}")))?;
+            for declaration in incoming {
+                let name = declaration["name"]
+                    .as_str()
+                    .ok_or_else(|| native_error("unnamed form-factor declaration"))?;
+                if existing.iter().any(|entry| entry["name"] == name) {
+                    return Err(native_error(format!(
+                        "cannot add form-factor {section}: {name} already exists"
+                    )));
+                }
+                existing.push(declaration.clone());
+            }
+        }
+        definition["name"] = format!("{} + Higgs-jet form factors", model.name()).into();
+        Model::from_json(&serde_json::to_string(&definition).map_err(native_error)?)
+            .map_err(native_error)
+    }
+
     /// Reuse one already loaded effective UFO model, including its scoped Lorentz structures.
     /// Incoming two-gluon spin/color averages and all outgoing state sums are included.
     pub fn new(model: Arc<Model>, context: &RunContext) -> Result<Self> {
@@ -97,7 +157,7 @@ impl HiggsJetAmplitude {
         {
             model.parameter(&name).map_err(native_error)?;
         }
-        let process = Process::new(["G", "G"], ["G", "H"]).with_filters(
+        let process = Process::new([21_i64, 21], [21_i64, 25]).with_filters(
             vec![],
             Some(vec![
                 "GGGHEWZZ".into(),

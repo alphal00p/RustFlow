@@ -20,6 +20,24 @@ fn native_coherent_amplitude_and_reused_kinematic_kernel() {
     );
     let context = RunContext::default();
     let kernel = HiggsJetAmplitude::new(model.clone(), &context).unwrap();
+    let standard_model = feynkit_model::Model::standard_model();
+    let extended = Arc::new(HiggsJetAmplitude::with_form_factor_vertices(&standard_model).unwrap());
+    assert_eq!(extended.particle_by_pdg(21).unwrap().name, "g");
+    let standard_kernel = HiggsJetAmplitude::new(extended.clone(), &context).unwrap();
+    assert_eq!(standard_kernel.diagrams().len(), kernel.diagrams().len());
+    assert!(
+        standard_kernel
+            .diagrams()
+            .iter()
+            .all(|g| std::ptr::eq(g.model(), extended.as_ref()))
+    );
+    for (standard, legacy) in standard_kernel
+        .expressions()
+        .iter()
+        .zip(kernel.expressions())
+    {
+        assert!((standard - legacy).expand().is_zero());
+    }
     assert!(!kernel.diagrams().is_empty());
     assert!(
         kernel
@@ -150,4 +168,26 @@ fn native_coherent_amplitude_and_reused_kinematic_kernel() {
                 .re
         );
     }
+}
+
+#[test]
+fn form_factor_extension_preserves_standard_model_and_rejects_name_collisions() {
+    let model = feynkit_model::Model::standard_model();
+    let original = model.to_json().unwrap();
+    let before: serde_json::Value = serde_json::from_str(&original).unwrap();
+    let extended = HiggsJetAmplitude::with_form_factor_vertices(&model).unwrap();
+    let after: serde_json::Value = serde_json::from_str(&extended.to_json().unwrap()).unwrap();
+    for (section, value) in before.as_object().unwrap() {
+        match section.as_str() {
+            "name" => {}
+            "orders" | "parameters" | "lorentz_structures" | "couplings" | "vertex_rules" => {
+                let old = value.as_array().unwrap();
+                assert_eq!(&after[section].as_array().unwrap()[..old.len()], old);
+            }
+            _ => assert_eq!(&after[section], value, "changed {section}"),
+        }
+    }
+    assert_eq!(model.to_json().unwrap(), original);
+    assert!(HiggsJetAmplitude::with_form_factor_vertices(&extended).is_err());
+    assert_eq!(model.to_json().unwrap(), original);
 }

@@ -264,6 +264,7 @@ impl PyKinematicTransport {
                 }
             })
             .map_err(error)?;
+        super::citations::transport();
         Ok(Self {
             connection: Arc::new(connection),
             options,
@@ -326,6 +327,7 @@ impl PyKinematicTransport {
                 super::continuation::bind(flow, continuation)
             })
             .map_err(error)?;
+        super::citations::transport();
         Ok(Self::from_canonical(Arc::new(flow), options))
     }
     #[getter]

@@ -1,0 +1,36 @@
+{
+  "schema": "rustflow-gg-hg-form-factor-vertices-provenance-v1",
+  "kind": "Effective interaction declarations extending the native Standard Model; no numerical integral boundaries or amplitudes",
+  "source": {
+    "path": "fixtures/gg-hg/native-model.json",
+    "sha256": "1891f93a8b8926e1e66d54a95c03bba2d36e7ee1a812b91010fa0e88b4e92e12",
+    "provenance_path": "fixtures/gg-hg/native-model-provenance.json",
+    "provenance_sha256": "572e5b473ae5c03699f8a87cd96cd6ac73a8ad8e798a47083c33d2e470c9068d",
+    "upstream": {
+      "repository": "https://bitbucket.org/aschweitzer/mg5_higgs_ew_plugin",
+      "commit": "89f64b93d0bdbd8ee90eb85737021189229b034a",
+      "directory": "UFO_model_gggH",
+      "original_lorentz_sha256": "c8469e01e5f041188c0af926d01aed263649760be66826cec78a1cdf6d7b9db6"
+    }
+  },
+  "asset": {
+    "path": "fixtures/gg-hg/form-factor-vertices.json",
+    "sha256": "52a70c0ff098a7add3484f95082d2eb7ab61e34552814ec774312b74106bf29f",
+    "counts": {
+      "orders": 4,
+      "parameters": 23,
+      "couplings": 12,
+      "lorentz_structures": 4,
+      "vertex_rules": 3
+    }
+  },
+  "transformations": [
+    "Select only the three effective Higgs-jet vertices and their four orders, 23 parameters, 12 couplings and four Lorentz structures; preserve source order.",
+    "Replace v by the existing Standard Model vev in CHEFT=-aS/(3*pi*vev); both native parameter definitions are exactly 2*MW*sw/ee.",
+    "Set added internal-parameter and coupling cached values to null. Set external form-factor placeholders to zero; physical W/Z coefficients must be supplied and HEFT coefficients remain analytic kinematic functions.",
+    "Keep legacy G/G/G/H labels in the declaration asset; the native extension must resolve their PDG21/25 species in the supplied model, without adding or renaming particles."
+  ],
+  "tensor_ownership": "The four native UFO Lorentz expressions, color structures, vertex coupling slots and EW prefactors are copied unchanged. HEPKit/Spenso continue to generate diagrams and contract tensors; this asset implements no tensor algebra.",
+  "normalization": "The integral projector retains -1/(mV2^2*(4*pi)^4) exactly once. These declarations add only the native coherent W/Z and HEFT coupling factors; no extra integral measure, spin/color average, flux or phase-space factor is introduced.",
+  "regeneration": "python3 scripts/extract_gg_hg_form_factor_vertices.py; python3 scripts/extract_gg_hg_form_factor_vertices.py --check"
+}
