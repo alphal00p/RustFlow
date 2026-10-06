@@ -7,7 +7,7 @@ the demonstrated calculation from remaining generality and packaging work.
 
 | Plan item | Implemented and checked | Remaining acceptance |
 |---|---|---|
-| Descriptive Python API | Optional PyO3 bindings in this crate, registered under `symbolica.community.hep.integration`; shared native HEPKit/Symbolica objects, scoped reductions, precision evidence, progress/cancellation and generated stubs. New core bindings expose supplied finite endpoints, native cut-diagram evaluation and prescribed physical continuation | The newer endpoint/cut/contour interfaces are not in the frozen publication wheel; broader constrained endpoint operations remain in progress |
+| Descriptive Python API | Optional PyO3 bindings in this crate, registered under `symbolica.community.hep.integration`; shared native HEPKit/Symbolica objects, scoped reductions, precision evidence, progress/cancellation and generated stubs. New core bindings expose supplied finite endpoints, native cut-diagram evaluation, prescribed physical continuation and general dense registered-root connections | The newer endpoint/cut/contour/root interfaces are not in the frozen publication wheel; new exact endpoint constraint declarations still need Python exposure |
 | Unified numerical evaluation | Automatic AMF, Euclidean FT, finite-epsilon sampling and Laurent reconstruction share the series machinery used for physical transport | Full AMFlow/DiffExp generality and performance parity remain open; see the [comparison table](benchmark-comparison.md) |
 | Original AMFlow acceptance | All four two-loop paper targets through epsilon zero passed the requested 20-digit comparison and independent sampling/refinement | That completed gate does not establish full upstream feature coverage |
 | Growing boundary cache | Binary persistence, compatible-source selection, intermediate points, source fingerprints and retained uncertainty; completed samples are stored separately. Final-wheel forced recomputation, interruption/resume and nearby reuse passed. Warm controller persistence improved from 49.88 s to 3.35 s | Further serialization and source-preparation performance work remains |
@@ -240,7 +240,16 @@ platform suites. Native numerical
 dependencies and the completed publication runtime are unchanged, and the whole
 community suite is not yet green.
 
-Broader work remains on general linear/cut recursion, algebraic singular
+The later [general registered-root Python milestone](python-algebraic-transport.md)
+adds exact `roots` declarations to the dense `KinematicTransport` constructor,
+including coupled epsilon-independent matrices. Its isolated release gate passes
+43 tests covering analytic values on both sheets, prescribed paths, cache
+restart, nearby-source selection, finite endpoints, cancellation and native
+stubs. It uses the existing native algebraic transport owner and does not modify
+the frozen community extension. The newer rational correlated endpoint
+constraints are currently Rust-only.
+
+Broader work remains on general linear/cut recursion, constrained algebraic singular
 endpoints, causal paths, nondiagonal epsilon transformations, advanced Python
 solver access, and performance across the reference benchmark suite. Numerical
 success for the demonstrated families is not a claim of arbitrary-family parity.

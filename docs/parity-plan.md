@@ -56,6 +56,27 @@ logarithm sides, root sheets, cancellation and endpoint restart.
 The subsequent main integration passes 62 release tests across nine targets
 with the same static checks and unchanged source hashes.
 
+Three further validated milestones extend this coverage. Exact
+[correlated rational endpoint constraints](supplied-singular-endpoints.md)
+retain an affine space of integration constants and check every reconstructed
+matching component. Schema 7 stores their asserted relations and provenance;
+constrained registered-root spaces and dimensional-sector selection remain open.
+[Partial cut mass placements](cuts.md) reuse the existing region, tensor,
+recursive vacuum and phase-space owners, including a nonfactorized three-loop
+comparison with original AMFlow. The
+[general registered-root Python constructor](python-algebraic-transport.md)
+handles dense coupled connections as well as canonical ones. These newer
+interfaces are separate from the frozen community notebook runtime.
+
+The [native series-construction comparison](../reports/performance/2026-10-06-native-series-construction/README.md)
+uses balanced additions of native Symbolica series. All numerical outputs and
+uncertainty data agree exactly with the preceding implementation. Matched
+checked first-destination medians improve from 6.160 to 5.464 seconds for 48
+masters and from 15.963 to 14.770 seconds for 61 masters. The full 4,360-coefficient
+transport acceptance also passes. These are native revision comparisons;
+full-amplitude timing against the original plugin and broad performance parity
+remain open. Immutable exact connection preparation is the next optimization.
+
 The [unified-flow design and generality audit](unified-flow.md) makes reduced-family
 evaluation the central interface. AMF direct evaluation, AMF-generated physical
 boundaries and DiffExp-style transport share the numerical engine. Supplied

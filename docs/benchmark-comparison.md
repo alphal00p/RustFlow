@@ -16,11 +16,11 @@ and the [unified-flow design](unified-flow.md).
 | Part of the plan | Implemented | Still outstanding |
 |---|---|---|
 | Native family and reduction input | HEPKit graphs/kinematics, native tensor owners, exact families, RustRed and scoped table backends, derivative closure, reduction domains | Reducer search/compiled arity limits remain explicit; a target-only table need not cover derivatives or recursive families |
-| Shared numerical engine | Rational Taylor transport, Frobenius matching with resonances/logarithms, registered-root local singular endpoints via rational lifting, direct epsilon hierarchies, algebraic root charts, whole-segment defects, exact-source rational enclosures and endpoint precision retries; supplied finite endpoints integrate with physical transport and a separate terminal cache | General accumulated error accounting and difficult non-dyadic conditioning; correlated endpoint constraints, dimensional-sector selection and degenerate Gram charts |
-| Automatic AMF boundaries | Regions, factorization, recursive boundaries, gamma terminals, generic single-mass loop peeling including complex masses off the mass cut; unequal-mass two-body and massless N-body cut terminals; [mixed cut/virtual recursion](cuts.md) for complete positive-energy final states with certified regular real-only denominators; fresh Higgs+jet initialization and independent 40-digit refinement passed on the publication wheel | Broader linear/cut recursion, partial mass placements, massive N-body leaves, internal real-phase-space poles and mixed virtual signs |
+| Shared numerical engine | Rational Taylor transport, Frobenius matching with resonances/logarithms, registered-root local singular endpoints via rational lifting, direct epsilon hierarchies, algebraic root charts, whole-segment defects, exact-source rational enclosures and endpoint precision retries; supplied finite endpoints and exact correlated Gaussian-rational constraints integrate with physical transport and a separate terminal cache | General accumulated error accounting and difficult non-dyadic conditioning; constrained registered-root spaces, non-Gaussian exact constraints, dimensional-sector selection and degenerate Gram charts |
+| Automatic AMF boundaries | Regions, factorization, recursive boundaries, gamma terminals, generic single-mass loop peeling including complex masses off the mass cut; unequal-mass two-body and massless N-body cut terminals; [mixed cut/virtual recursion](cuts.md) including partial uncut mass placements for complete positive-energy final states with certified regular real-only denominators; fresh Higgs+jet initialization and independent 40-digit refinement passed on the publication wheel | Broader linear/cut recursion, massive N-body leaves, internal real-phase-space poles and mixed virtual signs |
 | AMFlow 2.0 options | Euclidean FT including tested mixed linear families, configurable dimension, skipped initial reduction, basis refinement, symbolic restart | Broader validation/performance; FT physical contours remain outside its supported automatic scope |
 | Physical transport and cache | Progressive binary `RustFlowCache`, compatible-source search, checked intermediate points, inherited errors, supplied/AMF seeds, regular complex paths with explicit root germs, separate terminal records retaining regular matching anchors | General causal-path inference, arbitrary algebraic coordinate constants and non-affine cached routes |
-| DiffExp controls | Exact multivariate pullback, canonical dlogs, supplied and compatible analytic-origin boundaries, explicit prescribed detours, exact diagonal epsilon rescaling, optional checked bracket proposals, regular Möbius charts, local registered-root Frobenius matching and [checked rational/epsilon Padé trials](pade-transport.md) | General nondiagonal epsilon regularization, off-center predivision, registered-root Padé candidates, inferred physical contours and general constrained singular boundaries |
+| DiffExp controls | Exact multivariate pullback, canonical dlogs, supplied and compatible analytic-origin boundaries, explicit prescribed detours, exact diagonal epsilon rescaling, optional checked bracket proposals, regular Möbius charts, local registered-root Frobenius matching, rational correlated endpoint constraints and [checked rational/epsilon Padé trials](pade-transport.md) | General nondiagonal epsilon regularization, off-center predivision, registered-root Padé candidates, inferred physical contours and broader constrained singular boundaries |
 | Higgs+jet amplitude | W/Z crossings, native HEPKit contraction, HEFT square/interference; publication-wheel empty-cache calculation and forced 40-digit regeneration passed all 4,360 coefficient checks, uncertainty consistency, interruption/restart and nearby reuse. Populated notebook checks passed | Matched full-amplitude timing; external EW-square reference evidence remains capped at 19 relative digits |
 
 AMF direct evaluation and AMF-generated seeds for physical transport share the
@@ -161,6 +161,16 @@ transport and propagates source uncertainty.
 There is no established full-amplitude end-to-end speed ratio. Source accuracy,
 AMF initialization, uncertainty checks, serialization, master transport and
 amplitude contraction must be included consistently before making that claim.
+
+A later [native series-construction comparison](../reports/performance/2026-10-06-native-series-construction/README.md)
+uses three alternating runs of frozen before/after executables on one CPU.
+The checked first destination improves from 6.160 to 5.464 seconds for 48 masters
+and from 15.963 to 14.770 seconds for 61 masters; nearby reuse improves from
+6.209 to 5.425 seconds and from 16.213 to 14.817 seconds respectively. Every
+non-timing output, including propagated errors and selected precision/order,
+agrees exactly. The separate full 4,360-coefficient acceptance also passes.
+These are native revision comparisons with retained raw variability, not reruns
+of the original driver or measurements of fresh boundaries or amplitude assembly.
 
 The separate [notebook persistence comparison](../reports/performance/2026-10-06-notebook-cache-hit-persistence/report.json)
 keeps the native publication extension fixed and compares three alternating warm

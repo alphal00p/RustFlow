@@ -10,6 +10,28 @@ RustRed is not established. External reference uncertainty caps the EW-square
 comparison at 19 relative digits. The broader AMFlow/DiffExp parity goal remains
 open; the milestones below retain their original scope and source provenance.
 
+The latest isolated milestones add:
+
+- [Exact correlated rational endpoint constraints](../reports/validation/2026-10-06-constrained-singular-endpoints/validation.json):
+  118 top-level checks, six cache child checks, formatting and strict Clippy.
+  Physical relations are explicit Gaussian-rational assertions; numerical small
+  values are never promoted to exact constraints. Constrained root sheets,
+  non-Gaussian coefficient fields and dimensional-sector selection remain open.
+- [Recursive partial cut mass placements](../reports/validation/2026-10-06-partial-cut-boundaries/validation.json):
+  32 native checks and a nonfactorized three-loop comparison with original
+  AMFlow. Complete positive-energy final states and uniform virtual signs remain
+  required; massive N-body leaves and interior phase-space poles remain open.
+- [General dense registered-root Python transport](../reports/validation/2026-10-06-python-algebraic-transport/summary.json):
+  43 release tests covering coupled analytic systems, both sheets, prescribed
+  paths, endpoints, cancellation, restart and native generated stubs.
+- [Balanced native series construction](../reports/performance/2026-10-06-native-series-construction/README.md):
+  exact old/new output agreement in matched 48/61-master timings and a completed
+  separate full gg→hg transport acceptance. This improves existing native series
+  assembly without a Symbolica dependency patch.
+
+These isolated counts overlap and must not be added together. Their reports
+retain exact revisions; none replaces the frozen notebook scientific run.
+
 The [combined endpoint/cut/arithmetic gate](../reports/validation/2026-10-06-endpoint-cut-arithmetic-integration/summary.json)
 passes **328 top-level release tests across 29 targets**, plus six successful
 child-process checks, formatting and strict Python/stub-generation Clippy. Six
@@ -18,8 +40,8 @@ commit `ba16032` before and after validation. Supplied finite singular endpoints
 now integrate with regular physical transport and a separate terminal cache;
 native HEPKit cut diagrams share the Rust, Python and CLI projection adapters.
 Bounded integer-polynomial residual arithmetic is available as an opt-in with
-the existing ball path as fallback. Constrained endpoint sectors, dimensional
-sector selection and partial cut placements remain open. This targeted gate
+the existing ball path as fallback. At that revision, constrained endpoint
+sectors, dimensional sector selection and partial cut placements remained open. This targeted gate
 does not rebuild the community publication wheel or repeat its long scientific
 acceptance.
 
