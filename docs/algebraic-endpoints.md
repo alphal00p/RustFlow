@@ -79,5 +79,7 @@ Analytic tests cover `exp(±2 sqrt(x))` and monodromy, coupled
 different signs, a multi-root product with an unused generator, infinity with
 divergent auxiliary rows, retained source holes, resource limits and
 cancellation. These local tests do not establish general large-system
-performance parity or automatic singular-point insertion into the physical
-boundary cache.
+performance parity. The separate [supplied-boundary endpoint interface](supplied-singular-endpoints.md)
+adds explicit chart admission, independent accuracy checks and terminal cache
+records while retaining regular anchors. The local expansion alone is still
+not reusable boundary evidence.

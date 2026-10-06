@@ -3,8 +3,9 @@
 //! Every request selects a compatible boundary before forming its path. Accepted
 //! intermediate physical points are independently checked and retained. The
 //! ordinary interface supports regular straight paths. An explicitly bound
-//! prescribed interface reuses the same engine for threshold detours; singular
-//! endpoints remain the responsibility of separate boundary solvers.
+//! prescribed interface reuses the same engine for threshold detours. Explicit
+//! singular endpoint requests retain regular matching anchors and separately
+//! validated terminal evidence.
 use crate::algebraic::{
     AlgebraicKinematicSystem, AlgebraicSystem, CanonicalAlgebraicSystem, CompiledAlgebraicSystem,
 };
@@ -91,6 +92,145 @@ pub struct PhysicalResult {
     pub inserted_points: usize,
     /// Compatible sources tried in selection order, including an exact hit.
     pub boundary_attempts: Vec<BoundaryAttempt>,
+}
+
+macro_rules! endpoint_api {
+    ($system:ty, $kind:ident) => {
+        impl RustFlow<$system> {
+            /// Evaluate a finite coefficientwise singular limit through a
+            /// regular matching anchor. The caller explicitly admits the final
+            /// chart approach; terminal limits never initialize regular transport.
+            #[allow(clippy::too_many_arguments)]
+            pub fn evaluate_endpoint(
+                &self,
+                cache: &mut RustFlowCache,
+                request: &crate::singular_endpoint::EndpointRequest,
+                options: &FlowOptions,
+                context: &RunContext,
+                policy: &dyn TransportCost,
+                admission: &dyn crate::singular_endpoint::EndpointAdmission,
+            ) -> Result<crate::singular_endpoint::EndpointResult> {
+                evaluate_endpoint(
+                    Connection::$kind(&self.system),
+                    &self.identity,
+                    cache,
+                    request,
+                    options,
+                    context,
+                    policy,
+                    RouteMode::Straight,
+                    admission,
+                )
+            }
+
+            /// Reach the regular matching anchor along an explicitly admitted
+            /// prescribed route, then admit and evaluate its endpoint chart.
+            #[allow(clippy::too_many_arguments)]
+            pub fn evaluate_prescribed_endpoint(
+                &self,
+                cache: &mut RustFlowCache,
+                request: &crate::singular_endpoint::EndpointRequest,
+                options: &FlowOptions,
+                context: &RunContext,
+                policy: &dyn TransportCost,
+                route_admission: &dyn HomotopyAdmission,
+                endpoint_admission: &dyn crate::singular_endpoint::EndpointAdmission,
+            ) -> Result<crate::singular_endpoint::EndpointResult> {
+                evaluate_endpoint(
+                    Connection::$kind(&self.system),
+                    &self.identity,
+                    cache,
+                    request,
+                    options,
+                    context,
+                    policy,
+                    RouteMode::Prescribed(route_admission),
+                    endpoint_admission,
+                )
+            }
+        }
+    };
+}
+endpoint_api!(KinematicSystem, Rational);
+endpoint_api!(AlgebraicKinematicSystem, Algebraic);
+endpoint_api!(CanonicalAlgebraicSystem, Canonical);
+
+#[allow(clippy::too_many_arguments)]
+fn evaluate_endpoint(
+    system: Connection<'_>,
+    identity: &BoundaryIdentity,
+    cache: &mut RustFlowCache,
+    request: &crate::singular_endpoint::EndpointRequest,
+    options: &FlowOptions,
+    context: &RunContext,
+    policy: &dyn TransportCost,
+    mode: RouteMode<'_>,
+    admission: &dyn crate::singular_endpoint::EndpointAdmission,
+) -> Result<crate::singular_endpoint::EndpointResult> {
+    use crate::singular_endpoint::{EndpointResult, PreparedEndpoint};
+    options.validate()?;
+    request.preflight(identity)?;
+    request.chart.validate(identity)?;
+    if mode.is_prescribed() != identity.physical_continuation().is_some() {
+        return Err(Error::InvalidInput("endpoint matching route must use the identity's prescribed/ordinary transport interface".into()));
+    }
+    context.cancellation.check()?;
+    if let Some(boundary) =
+        cache.endpoint(identity, &request.chart, request.range, options.digits)?
+    {
+        if !admission.admit(&boundary.matching_boundary, &request.chart)? {
+            return Err(Error::InvalidInput(
+                "endpoint approach was not admitted".into(),
+            ));
+        }
+        context.cancellation.check()?;
+        return Ok(EndpointResult {
+            boundary,
+            matching_transport: None,
+            inserted_regular_points: 0,
+            cache_hit: true,
+            boundary_attempts: Vec::new(),
+        });
+    }
+    let order = (i64::from(request.range.last) - i64::from(request.range.leading)) as usize;
+    let source = match system.pullback(&request.chart.path, order)? {
+        PreparedConnection::Rational(system) => AlgebraicSystem {
+            system,
+            roots: Vec::new(),
+            nonzero_conditions: Vec::new(),
+        },
+        PreparedConnection::Algebraic(system) => system,
+    };
+    let prepared = PreparedEndpoint::new(source, identity, request, options, context)?;
+    evaluate_physical_with(
+        system,
+        identity,
+        cache,
+        request.chart.matching_point()?,
+        request.range,
+        options,
+        context,
+        policy,
+        mode,
+        |regular| {
+            if !admission.admit(&regular.boundary, &request.chart)? {
+                return Err(Error::InvalidInput(
+                    "endpoint approach was not admitted".into(),
+                ));
+            }
+            let boundary = prepared.evaluate(regular.boundary, options, context)?;
+            Ok((
+                EndpointResult {
+                    boundary: boundary.clone(),
+                    matching_transport: regular.transport,
+                    inserted_regular_points: regular.inserted_points,
+                    cache_hit: false,
+                    boundary_attempts: regular.boundary_attempts,
+                },
+                vec![boundary],
+            ))
+        },
+    )
 }
 
 impl RustFlow {
@@ -552,6 +692,35 @@ fn evaluate_physical(
     policy: &dyn TransportCost,
     mode: RouteMode<'_>,
 ) -> Result<PhysicalResult> {
+    evaluate_physical_with(
+        system,
+        identity,
+        cache,
+        target,
+        range,
+        options,
+        context,
+        policy,
+        mode,
+        |result| Ok((result, Vec::new())),
+    )
+}
+
+#[allow(clippy::too_many_arguments)]
+fn evaluate_physical_with<T>(
+    system: Connection<'_>,
+    identity: &BoundaryIdentity,
+    cache: &mut RustFlowCache,
+    target: CachedPoint,
+    range: EpsilonRange,
+    options: &FlowOptions,
+    context: &RunContext,
+    policy: &dyn TransportCost,
+    mode: RouteMode<'_>,
+    mut complete: impl FnMut(
+        PhysicalResult,
+    ) -> Result<(T, Vec<crate::singular_endpoint::EndpointBoundary>)>,
+) -> Result<T> {
     options.validate()?;
     if mode.is_prescribed() != identity.physical_continuation().is_some() {
         return Err(Error::InvalidInput("prescribed identities require evaluate_prescribed_to with explicit homotopy admission; ordinary identities require evaluate_to".into()));
@@ -606,7 +775,6 @@ fn evaluate_physical(
         match evaluate_from_source(
             system,
             identity,
-            cache,
             target.clone(),
             source,
             range,
@@ -617,12 +785,16 @@ fn evaluate_physical(
                 .borrow()
                 .get(&diagnostic.starting_point.key()?)
                 .cloned(),
-        ) {
-            Ok(mut result) => {
-                attempts.push(diagnostic);
-                result.boundary_attempts = attempts;
-                return Ok(result);
-            }
+        )
+        .and_then(|(mut result, pending)| {
+            result.boundary_attempts = attempts.clone();
+            result.boundary_attempts.push(diagnostic.clone());
+            let (output, endpoints) = complete(result)?;
+            context.cancellation.check()?;
+            cache.insert_batch(pending, endpoints)?;
+            Ok(output)
+        }) {
+            Ok(result) => return Ok(result),
             Err(error @ (Error::Accuracy(_) | Error::InsufficientPrecision { .. })) => {
                 // A different cached boundary can avoid the conditioning that
                 // exhausted this route's bounded precision retries. Preserve
@@ -651,14 +823,13 @@ fn evaluate_physical(
 fn evaluate_from_source(
     system: Connection<'_>,
     identity: &BoundaryIdentity,
-    cache: &mut RustFlowCache,
     target: CachedPoint,
     source: CachedBoundary,
     range: EpsilonRange,
     options: &FlowOptions,
     context: &RunContext,
     supplied_route: Option<Rc<PreparedRoute>>,
-) -> Result<PhysicalResult> {
+) -> Result<(PhysicalResult, Vec<CachedBoundary>)> {
     let p = Precision::decimal(options.digits + options.guard_digits)?;
     let destination = target.restart_coordinates()?;
     let coordinates = source.point.rounded_coordinates_as_exact()?;
@@ -675,13 +846,16 @@ fn evaluate_from_source(
             source.accuracy.comparison_errors()[..count].to_vec(),
             "compatible exact-coordinate cache hit",
         )?;
-        return Ok(PhysicalResult {
-            boundary,
-            starting_point: source.point,
-            transport: None,
-            inserted_points: 0,
-            boundary_attempts: Vec::new(),
-        });
+        return Ok((
+            PhysicalResult {
+                boundary,
+                starting_point: source.point,
+                transport: None,
+                inserted_points: 0,
+                boundary_attempts: Vec::new(),
+            },
+            Vec::new(),
+        ));
     }
     let route = if let Some(route) = supplied_route {
         route
@@ -876,17 +1050,19 @@ fn evaluate_from_source(
     )?;
     let inserted = pending.len() + 1;
     pending.push(boundary.clone());
-    cache.insert_many(pending)?;
-    Ok(PhysicalResult {
-        boundary,
-        starting_point: source.point,
-        transport: Some(solution),
-        inserted_points: inserted,
-        boundary_attempts: Vec::new(),
-    })
+    Ok((
+        PhysicalResult {
+            boundary,
+            starting_point: source.point,
+            transport: Some(solution),
+            inserted_points: inserted,
+            boundary_attempts: Vec::new(),
+        },
+        pending,
+    ))
 }
 
-fn errors_meet(
+pub(crate) fn errors_meet(
     p: Precision,
     values: &[Vec<crate::ComplexFloat>],
     errors: &[Vec<Float>],
@@ -906,7 +1082,7 @@ fn errors_meet(
 // Stronger cache evidence requires explicitly passing tighter comparisons and
 // propagated input errors. Arithmetic precision supplies only a conservative
 // ceiling. Keep two decimal digits beyond any accuracy advertised to the bank.
-fn strongest_evidence(
+pub(crate) fn strongest_evidence(
     p: Precision,
     values: &[Vec<crate::ComplexFloat>],
     errors: &[Vec<Float>],

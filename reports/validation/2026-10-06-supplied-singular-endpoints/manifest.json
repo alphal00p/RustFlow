@@ -1,0 +1,84 @@
+{
+  "artifacts": [
+    {
+      "path": "check-python.log.gz",
+      "bytes": 3030,
+      "sha256": "5ef53a36ddc95c8e02b7f59121f2a946782b18fcffc8bd3bc85d9cbcf2afcfcd",
+      "uncompressed_bytes": 12230,
+      "uncompressed_sha256": "bd7b55174f6deebae8877f959ab32d67e00e38f2a13b82d1738443ba5241d88e"
+    },
+    {
+      "path": "clippy-final.log.gz",
+      "bytes": 452,
+      "sha256": "3e7b8bd230c18d8885c46797333af274527c5d04c148e4622d72bc85c03cf8e2",
+      "uncompressed_bytes": 825,
+      "uncompressed_sha256": "abad8d6f0bfe25af80e3e5cb239a12c9d513bec57a99e57525ae1b678696d500"
+    },
+    {
+      "path": "endpoints.log.gz",
+      "bytes": 1392,
+      "sha256": "e63a10d986c3aaaee4d7ff73c164d8b9663df0e82c0009cf286749927f3b0e61",
+      "uncompressed_bytes": 3228,
+      "uncompressed_sha256": "52282598befcd2a49d4dc163c0cbacb12caacbb246b735b75bd45ff3bd32ec44"
+    },
+    {
+      "path": "fmt-final.log.gz",
+      "bytes": 20,
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "uncompressed_bytes": 0,
+      "uncompressed_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "integration-final.log.gz",
+      "bytes": 2751,
+      "sha256": "9c7be78c156e28dc51a44f8086d2263e0180c5bc04eedc604d4850217c6114d0",
+      "uncompressed_bytes": 7577,
+      "uncompressed_sha256": "02a9059dddf5d7889d6e9dcd06949fc92d19b9ebb29f162eb6ed523760afd5ed"
+    },
+    {
+      "path": "private-cache.log.gz",
+      "bytes": 808,
+      "sha256": "593f156e005e020be08c4a63cbfa78f9cf9f5e75769f4a0d47f69eca81e5c008",
+      "uncompressed_bytes": 2925,
+      "uncompressed_sha256": "85d478685861f39d122d39bb1b1b9eef1bf81bd1cb0efb12570456957397ef92"
+    },
+    {
+      "path": "private-endpoint-before-order-preflight.log.gz",
+      "bytes": 1140,
+      "sha256": "22a815c6a080088b39d7c97103a7289b3c2abd43c24fe8991d51f64a458fc9f1",
+      "uncompressed_bytes": 2455,
+      "uncompressed_sha256": "d3941dd737ad52cd25103e9cad9d1d6ee15e91a5be18ea35fa1d68f81db88807"
+    },
+    {
+      "path": "private-endpoint.log.gz",
+      "bytes": 881,
+      "sha256": "9af9cbfab2e5a09f751a3bdc2e5651108f1afaa9c8f9964c9c09dd29a29df40d",
+      "uncompressed_bytes": 1740,
+      "uncompressed_sha256": "2a246d9e729174f1645aaa99ba434873209c66205b396f7a4625e176f9231ff3"
+    },
+    {
+      "path": "validation.json",
+      "bytes": 18315,
+      "sha256": "47a9cf16e3053e5754d1db3ca3a6c4362c0b12b9c8ada7ea730c775b394adef5"
+    },
+    {
+      "path": "winding-probe-rescaled.log.gz",
+      "bytes": 1101,
+      "sha256": "6673e37de70627dd76e147ca40b9845f6ea5fbc81811e9bbf2c547703c8d501b",
+      "uncompressed_bytes": 5764,
+      "uncompressed_sha256": "a8f24d178674ea5b4e3db40e99c8090a634e3b26255ae0d91855d34bf3a16933"
+    },
+    {
+      "path": "winding-probe.log.gz",
+      "bytes": 891,
+      "sha256": "d09fcf4a5e0fbdd7187aab50c0831bcfa10daea0dad70bd4cfc2fc4b789acd79",
+      "uncompressed_bytes": 5058,
+      "uncompressed_sha256": "c001bb8085a2815013334d287fe6e32045f4736fe5b187fdc6ba3c3c9ddff445"
+    },
+    {
+      "path": "winding-probe.rs",
+      "bytes": 1376,
+      "sha256": "975392c255d3d73e6c865289320b42e73e7331069c0e1ef7768683801b07b0c5"
+    }
+  ]
+}

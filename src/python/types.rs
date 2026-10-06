@@ -519,11 +519,14 @@ impl PyBoundaryCache {
             // Release the source lock before acquiring the destination. Both
             // Python objects may refer to the same cache, or be merged from
             // different Python threads in opposite directions.
-            let entries = other.access(|cache| Ok(cache.entries().to_vec()))?;
-            self.access(|cache| cache.insert_many(entries))
+            let (entries, endpoints) = other.access(|cache| {
+                Ok((cache.entries().to_vec(), cache.endpoint_entries().to_vec()))
+            })?;
+            self.access(|cache| cache.insert_batch(entries, endpoints))
         })
         .map_err(error)
     }
+    /// Number of regular initial conditions; endpoint_entries() is separate.
     fn __len__(&self, py: Python<'_>) -> PyResult<usize> {
         py.detach(|| self.access(|cache| Ok(cache.len())))
             .map_err(error)
@@ -537,6 +540,20 @@ impl PyBoundaryCache {
                     .iter()
                     .cloned()
                     .map(PyTransportResult::cached)
+                    .collect()
+            })
+        })
+        .map_err(error)
+    }
+    /// Terminal endpoint records are separate from regular initial conditions.
+    fn endpoint_entries(&self, py: Python<'_>) -> PyResult<Vec<PyEndpointResult>> {
+        py.detach(|| {
+            self.access(|cache| {
+                cache
+                    .endpoint_entries()
+                    .iter()
+                    .cloned()
+                    .map(PyEndpointResult::cached)
                     .collect()
             })
         })

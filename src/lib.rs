@@ -51,6 +51,7 @@ pub mod refine;
 pub mod regions;
 mod root_path;
 mod sample_checkpoint;
+pub mod singular_endpoint;
 pub mod tensor;
 pub mod transport_cache;
 pub mod vacuum;

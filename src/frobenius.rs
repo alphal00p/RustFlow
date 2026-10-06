@@ -4,6 +4,8 @@ use crate::algebra;
 use crate::family::substitute;
 use crate::numeric::solve;
 use crate::ode::{polynomial_coefficients, quotient_series};
+mod endpoint_support;
+
 use crate::{
     ComplexFloat as C, DifferentialSystem, Error, Precision, Progress, Result, RunContext,
 };
@@ -405,6 +407,31 @@ impl PreparedFrobenius {
         order: usize,
         context: &RunContext,
     ) -> Result<FrobeniusBasis> {
+        self.evaluate_with_policy(p, values, order, context, false)
+    }
+
+    /// Endpoint admission must not erase a small divergent logarithmic sector.
+    /// Keep every nonzero numerical row and require resonant equations to close
+    /// without a magnitude-based zero threshold. Independent profiles remain
+    /// necessary: this strict policy is not an exact arithmetic certificate.
+    pub(crate) fn evaluate_endpoint(
+        &self,
+        p: Precision,
+        values: &ahash::HashMap<Atom, C>,
+        order: usize,
+        context: &RunContext,
+    ) -> Result<FrobeniusBasis> {
+        self.evaluate_with_policy(p, values, order, context, true)
+    }
+
+    fn evaluate_with_policy(
+        &self,
+        p: Precision,
+        values: &ahash::HashMap<Atom, C>,
+        order: usize,
+        context: &RunContext,
+        strict: bool,
+    ) -> Result<FrobeniusBasis> {
         phase(context, "evaluating the prepared Frobenius recurrence")?;
         if order > 10_000 {
             return Err(Error::Limit(
@@ -424,8 +451,10 @@ impl PreparedFrobenius {
                 ));
             }
         }
-        ensure_generic_exponents(&self.exponents().collect::<Vec<_>>(), p, values)?;
-        let mut basis = self.evaluate_normal(p, values, order, context)?;
+        if !strict {
+            ensure_generic_exponents(&self.exponents().collect::<Vec<_>>(), p, values)?;
+        }
+        let mut basis = self.evaluate_normal(p, values, order, context, strict)?;
         let mut terms = Vec::new();
         let mut low = 0_i64;
         let mut high = 0_i64;
@@ -482,6 +511,7 @@ impl PreparedFrobenius {
         values: &ahash::HashMap<Atom, C>,
         order: usize,
         context: &RunContext,
+        strict: bool,
     ) -> Result<FrobeniusBasis> {
         let n = self.normal.matrix.len();
         let mut a = vec![vec![vec![p.zero(); n]; n]; order + 1];
@@ -562,7 +592,8 @@ impl PreparedFrobenius {
                     for other in self.eigenspaces.iter().map(|space| &space.exponent) {
                         let difference = (lambda + Atom::num(k as i64) - other).together().cancel();
                         if difference.is_zero()
-                            || p.norm(&p.eval(&difference, values)?) < p.tolerance(p.bits / 4)
+                            || (!strict
+                                && p.norm(&p.eval(&difference, values)?) < p.tolerance(p.bits / 4))
                         {
                             resonance = true;
                             break;
@@ -604,6 +635,7 @@ impl PreparedFrobenius {
                                 system,
                                 extended.into_iter().flatten().collect(),
                                 context,
+                                strict,
                             ) {
                                 Ok(flat) => {
                                     result = Some(flat.chunks(n).map(|r| r.to_vec()).collect());
@@ -637,11 +669,13 @@ impl PreparedFrobenius {
                         }
                     }
                     while next.len() > 1
-                        && next
-                            .last()
-                            .unwrap()
-                            .iter()
-                            .all(|v| p.norm(v) < p.tolerance(p.bits / 4))
+                        && next.last().unwrap().iter().all(|v| {
+                            if strict {
+                                v == &zero
+                            } else {
+                                p.norm(v) < p.tolerance(p.bits / 4)
+                            }
+                        })
                     {
                         next.pop();
                     }
@@ -666,6 +700,7 @@ fn solve_any(
     mut a: Vec<Vec<C>>,
     mut b: Vec<C>,
     context: &RunContext,
+    strict: bool,
 ) -> Result<Vec<C>> {
     let n = b.len();
     let mut row = 0;
@@ -678,7 +713,11 @@ fn solve_any(
         else {
             break;
         };
-        if p.norm(&a[pivot][col]) < tol {
+        if if strict {
+            a[pivot][col] == p.zero()
+        } else {
+            p.norm(&a[pivot][col]) < tol
+        } {
             continue;
         }
         a.swap(row, pivot);
@@ -703,7 +742,13 @@ fn solve_any(
             break;
         }
     }
-    if b.iter().skip(row).any(|v| p.norm(v) > tol) {
+    if b.iter().skip(row).any(|v| {
+        if strict {
+            v != &p.zero()
+        } else {
+            p.norm(v) > tol
+        }
+    }) {
         return Err(Error::Numerical(
             "inconsistent resonant Frobenius recurrence".into(),
         ));
