@@ -103,7 +103,27 @@ exact preparation, sheet constraints, Python interfaces and cache behavior with
 ordinary AMF/FT evaluation, conditioning and existing physical transport. This
 targeted gate is separate from the isolated full gg→hg scientific acceptance
 and the frozen community notebook runtime. The native partial-fraction adapter
-and its updated HEPKit owner remain isolated work.
+and its updated HEPKit owner have since been integrated; combined main validation
+is pending, while the isolated evidence below retains its exact tested revision.
+
+The [native boundary-integrand milestone](../reports/validation/2026-10-06-native-boundary-integrands/summary.json)
+passes 341 top-level release tests across 36 targets, six separate child checks,
+formatting and strict Python/stub Clippy. HEPKit owns rational partial fractions,
+independent sectors, completion and numerator rewriting. Its exact-affine fix
+prevents tiny symbolic coefficients from being dropped during rank extraction.
+A separate fresh planar gg→hg anchor starts with empty numerical and reduction
+caches, generates all 240 coefficients through epsilon four, and passes the
+20-digit comparison in 337.42 seconds. Reference values are loaded only after
+native success. This is one Euclidean anchor, not a new full amplitude timing;
+the frozen community publication wheel remains unchanged.
+
+The [epsilon-singular transport probe](../reports/validation/2026-10-06-epsilon-singular-transport-probe/README.md)
+records a remaining generality limitation: the central solution of a coupled
+nilpotent system passes 50-digit checks, but the scalar boundary-error estimate
+rejects long transport paths because it loses signed cancellations. Nearby paths
+pass with source uncertainty retained. A stronger generic propagation proof is
+under development; the probe does not bypass source errors or establish a
+finite-epsilon physical-transport fallback.
 
 The [combined endpoint/cut/arithmetic gate](../reports/validation/2026-10-06-endpoint-cut-arithmetic-integration/summary.json)
 passes **328 top-level release tests across 29 targets**, plus six successful

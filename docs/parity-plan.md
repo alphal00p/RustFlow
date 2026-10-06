@@ -101,6 +101,19 @@ top-level release checks across 27 targets, six separate child-process checks,
 formatting and strict Python/stub Clippy. The scientific and timing evidence
 retains the isolated source revision; no broader upstream ratio is claimed.
 
+The native boundary-integrand adapter now delegates rational decomposition,
+completion and numerator rewriting to HEPKit's shared family owner. Its isolated
+gate passes 341 release checks, formatting and strict Python/stub Clippy; a fresh
+planar anchor passes all 240 comparisons at 20 digits in 337.42 seconds with
+empty numerical and reduction caches. Combined main validation is pending.
+Native Gaussian coefficient support is the next adapter extension. Separately,
+the [epsilon-singular transport probe](../reports/validation/2026-10-06-epsilon-singular-transport-probe/README.md)
+demonstrates why a generic sampled physical-transport route also needs tighter
+boundary-error propagation: exact coupled cancellations can make the scalar
+bound excessively conservative. Signed fundamental-matrix proofs are being
+validated without weakening uncertainty requirements or inventing source values
+from a finite Laurent prefix.
+
 The [unified-flow design and generality audit](unified-flow.md) makes reduced-family
 evaluation the central interface. AMF direct evaluation, AMF-generated physical
 boundaries and DiffExp-style transport share the numerical engine. Supplied

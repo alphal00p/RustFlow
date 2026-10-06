@@ -347,7 +347,7 @@
     "scope": "One Euclidean planar anchor, 48 masters through epsilon^4; no physical amplitude or upstream timing claim."
   },
   "history": {
-    "before_owner_fix": "The new extreme expanded coefficient regression fails on the previous native owner: a partial-fraction weight still depends on loop scalar products. All six other direct checks passed.",
+    "before_owner_fix": "The new extreme expanded coefficient regression fails on the previous native owner: a partial-fraction weight still depends on loop scalar products. The five other direct checks present in that run passed; the second symbol-collision regression was added later.",
     "after_owner_fix": "All seven direct checks pass on native owner 8bfd027; final frozen 341-test gate is recorded above.",
     "development_gate": "81 passed, one ignored, before owner pin update; overlaps final gate and is retained only as development evidence."
   }
