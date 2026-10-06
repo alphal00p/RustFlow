@@ -11,6 +11,29 @@ independent arity registry is maintained here. Broad coverage, including
 the complete Higgs+jet application, takes priority over general performance
 tuning; performance blockers may be addressed to make a coverage test practical.
 
+## Current implementation snapshot
+
+As of 2026-10-06, the descriptive Python API and complete native gg→hg notebook
+acceptance have passed on the publication wheel. Fresh numerical boundaries,
+4,360 transported coefficients, eight W/Z form factors, three coherent
+observables, independent 40-digit regeneration and interruption/restart/cache
+reuse are covered. The 48/61 parent equations and basis maps are certified
+supplied symbolic inputs; independent full parent reduction with RustRed is not
+demonstrated. The external EW-square reference supports 19 relative digits.
+See [the notebook report](python-notebook-status.md) for exact runtime provenance,
+publication status and accuracy limits.
+
+The shared Rust engine also supports recursive Euclidean FT for tested mixed
+linear families and local registered-root Frobenius endpoints; their combined
+gate passes 74 targeted release tests on top of the preceding 547-test baseline.
+General mixed-cut recursion, remaining DiffExp controls, automatic singular
+endpoint/cache integration and broad performance parity remain unfinished.
+Padé transport and the mixed-cut adapter are under implementation and review;
+they are not included in that validated milestone. The
+[comparison table](benchmark-comparison.md) records measured successes and
+remaining coverage, without treating successful benchmark families as proof of
+arbitrary kinematic, mass or loop-count support.
+
 The [unified-flow design and generality audit](unified-flow.md) makes reduced-family
 evaluation the central interface. AMF direct evaluation, AMF-generated physical
 boundaries and DiffExp-style transport share the numerical engine. Supplied

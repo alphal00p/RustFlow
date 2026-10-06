@@ -79,6 +79,18 @@ Clippy had independently completed. The subsequent
 passes 547 unit/integration tests and one doctest, with 13 opt-in tests ignored,
 and verifies that the measured numerical sources remained unchanged.
 
+An [exact-rational residual experiment](https://github.com/alphal00p/RustFlow/blob/d8738fc0a9f0e08572fbae84cef58f5d3378ef24/reports/performance/2026-10-06-exact-source-residual/report.json)
+was evaluated separately and was **not integrated into production**. It reuses
+Symbolica polynomials to assemble an exact defect before outward conversion.
+Two 14-case runs passed 31,716 exact-component containment checks, and 21 focused
+tests, formatting and strict release Clippy passed. Initial-chart gains did not
+persist across genuine complex endpoint charts; adverse high-degree/rational
+inputs made construction 3.7–6.2 times slower. Exact cancellation also removed
+an existing precision-retry signal. These are local constructor measurements,
+not end-to-end transport timings. The archived branch retains the prototype,
+counterexamples, failed preliminary checks and complete measurement provenance;
+the validated production ball-arithmetic path remains in use.
+
 ## Preceding checked release
 
 Library commit `3f1daea` was measured on 2026-10-05 against the original,
