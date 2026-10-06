@@ -1,0 +1,496 @@
+{
+  "status": "validated isolated milestone; broader algorithmic parity remains open",
+  "recorded_utc": "2026-10-06T02:57:36.880844+00:00",
+  "base_commit": "881ec21ce2495b7a8daa87cfcffdffd9e54abfd1",
+  "branch": "codex/supplied-singular-endpoints",
+  "scope": [
+    "physical rational, registered-root and canonical RustFlow endpoint APIs",
+    "separate typed terminal cache entries with reusable regular anchors and schema6",
+    "ordinary and prescribed matching routes with separate endpoint admission",
+    "descriptive Python EndpointRoute/EndpointResult and ordinary matching endpoint binding"
+  ],
+  "checks": {
+    "private-endpoint": {
+      "passed": 7,
+      "failed": 0,
+      "ignored": 0,
+      "summaries_including_native_subprocesses": [
+        [
+          "7",
+          "0",
+          "0",
+          "0",
+          "140",
+          "0.01s"
+        ]
+      ]
+    },
+    "private-cache": {
+      "passed": 4,
+      "failed": 0,
+      "ignored": 1,
+      "summaries_including_native_subprocesses": [
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "146",
+          "0.00s"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "146",
+          "0.00s"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "146",
+          "0.00s"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "146",
+          "0.01s"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0",
+          "146",
+          "0.01s"
+        ],
+        [
+          "4",
+          "0",
+          "1",
+          "0",
+          "142",
+          "0.02s"
+        ]
+      ]
+    },
+    "integration-final": {
+      "passed": 65,
+      "failed": 0,
+      "ignored": 1,
+      "summaries_including_native_subprocesses": [
+        [
+          "11",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0.53s"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0",
+          "0",
+          "0.00s"
+        ],
+        [
+          "8",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0.11s"
+        ],
+        [
+          "4",
+          "0",
+          "0",
+          "0",
+          "0",
+          "1.00s"
+        ],
+        [
+          "5",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0.31s"
+        ],
+        [
+          "6",
+          "0",
+          "0",
+          "0",
+          "0",
+          "5.17s"
+        ],
+        [
+          "19",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0.56s"
+        ],
+        [
+          "12",
+          "0",
+          "0",
+          "0",
+          "0",
+          "0.04s"
+        ]
+      ]
+    }
+  },
+  "strict_clippy": "cargo clippy --release --features python_stubgen --all-targets -- -D warnings; passed",
+  "python_status": "Python/stubgen all-target compilation passed. No new host wheel was built or installed, so new-host-wheel interoperability is not claimed. Existing publication runtime was untouched.",
+  "commands": [
+    "cargo test --release --lib endpoint_",
+    "cargo test --release --lib transport_cache::serialization_tests",
+    "cargo test --release --test supplied_singular_endpoints --test algebraic_endpoints --test physical_transport --test transport_cache --test prescribed_cache --test fivepoint_prescribed_cache --test frobenius --test prepared_frobenius",
+    "cargo clippy --release --features python_stubgen --all-targets -- -D warnings",
+    "cargo fmt --check"
+  ],
+  "isolation": "Own worktree and target/native; publication environment script sourced only for toolchain/license/shared-library paths. No publication source/runtime or dependency owner edited; Cargo.toml and Cargo.lock unchanged.",
+  "native_reuse": [
+    "existing exact registered-root restriction of scalars and rational PreparedFrobenius",
+    "Symbolica exact polynomial valuations/coefficient extraction and rational arithmetic",
+    "one native Symbolica matrix inverse per numerical profile, applied to all physical unit directions",
+    "native ComplexBall arithmetic for stored matrix residual and transfer arithmetic",
+    "Linnet-owned incidence for exact valuation-support propagation",
+    "existing physical route planner, transport solver, root-germ and cache evidence machinery"
+  ],
+  "no_duplication": "No graph/tensor representation, graph generator, tensor contraction engine, convolution engine, or second Frobenius recurrence introduced.",
+  "resolved_native_closures": [
+    {
+      "features": [
+        "default",
+        "python",
+        "python_stubgen"
+      ],
+      "native_owners": {
+        "feynkit-amplitude": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-cff": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-generator": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-graph": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-kinematics": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-model": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-py": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-tensor": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "idenso": [
+          {
+            "version": "0.3.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "linnet": [
+          {
+            "version": "0.17.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "spenso": [
+          {
+            "version": "0.6.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "symbolica": [
+          {
+            "version": "3.0.1",
+            "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+          }
+        ],
+        "graphica": [
+          {
+            "version": "3.0.1",
+            "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+          }
+        ],
+        "numerica": [
+          {
+            "version": "3.0.1",
+            "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+          }
+        ]
+      },
+      "fingerprints": {
+        "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+        "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+        "PORT_SOURCE_DIGEST": "a74cf0d5e6121a800a61b6f4969482b1186a9546ded171e2a070319366a361ba"
+      }
+    },
+    {
+      "features": [
+        "default"
+      ],
+      "native_owners": {
+        "feynkit-amplitude": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-generator": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-graph": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-kinematics": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-model": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "feynkit-tensor": [
+          {
+            "version": "0.1.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "idenso": [
+          {
+            "version": "0.3.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "linnet": [
+          {
+            "version": "0.17.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "spenso": [
+          {
+            "version": "0.6.0",
+            "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+          }
+        ],
+        "symbolica": [
+          {
+            "version": "3.0.1",
+            "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+          }
+        ],
+        "graphica": [
+          {
+            "version": "3.0.1",
+            "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+          }
+        ],
+        "numerica": [
+          {
+            "version": "3.0.1",
+            "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+          }
+        ]
+      },
+      "fingerprints": {
+        "DEPENDENCY_SOURCE_DIGEST": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+        "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+        "PORT_SOURCE_DIGEST": "a74cf0d5e6121a800a61b6f4969482b1186a9546ded171e2a070319366a361ba"
+      }
+    }
+  ],
+  "review_findings_addressed": [
+    "Magnitude-based Frobenius trimming could erase tiny divergent logarithms: endpoint-only strict evaluation and exact support admission; 10^-300 leading/later/cancellation adversaries tested.",
+    "Normalization pads coefficient arrays beyond the uniformly known series order: true-order check and a private normalization-padding regression.",
+    "Rounded root/basis cancellation cannot prove finite support: exact conservative all-lifted-direction admission occurs before numerical matching.",
+    "Tiny exact positive exponents must not be rejected by a sampled-parameter genericity test: exact-rational endpoint path uses exact resonance decisions.",
+    "Complex inverse cancellation can leave a few-bit imaginary component: outward rescale exact stored dyadic balls before native products; winding\u00b11 probes and endpoint regressions retain unchanged residual threshold.",
+    "Bounded epsilon count and checked dimension*count preflight precede source pullback; bounded checked order growth and rollback tested."
+  ],
+  "initial_development_run": "Archived endpoints.log is the preceding13/15 run: winding residual metadata and rounded-root-cancellation failures were diagnosed and fixed. The initial private normalization-padding regression exposed that the order check needed to precede matching inversion; that failing log is retained separately. Final logs are authoritative.",
+  "known_ignored_scope": "Existing explicitly ignored full13 prescribed-cache acceptance and optional native serialization profiling remain ignored. No new ignored tests, skips, or weakened assertions were added.",
+  "limits": [
+    "Coefficientwise limits after finite epsilon expansion; not symbolic dimensional-sector projection.",
+    "Independent-profile comparisons plus propagated input uncertainty are estimates, not a global forward-error certificate.",
+    "Exact support admission is sufficient and conservative for every lifted rational direction; valid correlated/constrained physical sectors may be rejected and require further work for full parity.",
+    "Existing Fuchsian normalization, indicial-root, irregular-sector and resource limits remain explicit.",
+    "Exact punctured-disk admission can conservatively reject larger valid matching domains.",
+    "Rust prescribed endpoint routes are available; Python exposes the ordinary matching route.",
+    "No claim of whole-project feature completeness, global CI green, or new publication physics acceptance."
+  ],
+  "source_files": [
+    {
+      "path": "docs/algebraic-endpoints.md",
+      "bytes": 5279,
+      "sha256": "56e8f411f8732b838c88cc68105a2817bf0eb6995dee834b2257641557c05c00"
+    },
+    {
+      "path": "docs/prescribed-cache.md",
+      "bytes": 10316,
+      "sha256": "739163b2c78a2c02e0a54e2e2f63dec313fcb067b3d8266652cc904424238402"
+    },
+    {
+      "path": "docs/supplied-singular-endpoints.md",
+      "bytes": 5588,
+      "sha256": "e5265c4150f75a88e8b87767cae78016f5959d4a9ac8829ceab867982c624382"
+    },
+    {
+      "path": "src/algebraic/frobenius.rs",
+      "bytes": 31005,
+      "sha256": "07d09ed60d0bbb741c72eb514177652753aec77fa410c38da5a2c66b7301a8dc"
+    },
+    {
+      "path": "src/frobenius.rs",
+      "bytes": 33319,
+      "sha256": "433987ff7e3751001943db8fb3676e3ce0d677f6241047c8f36d394a935b5c4c"
+    },
+    {
+      "path": "src/frobenius/endpoint_support.rs",
+      "bytes": 9815,
+      "sha256": "dc8b5c863c9450f32403bb7aa7f633720bd2219a85939861ed13928c4e3c412b"
+    },
+    {
+      "path": "src/lib.rs",
+      "bytes": 2238,
+      "sha256": "fe25b1e9b6aae36fd0a2ed94708f7b5b70dbe35fc141ad47ab56849c58d6cedd"
+    },
+    {
+      "path": "src/physical_transport.rs",
+      "bytes": 48539,
+      "sha256": "c75aa642d67f2cfcf99b2b143a5b1286567a648153137fa5beee76219e5255ae"
+    },
+    {
+      "path": "src/python/endpoint.rs",
+      "bytes": 6840,
+      "sha256": "c1a02df0e48012c2c516a2ced89d087845abcd1cc924e0d32b1c786fb5e8bd6b"
+    },
+    {
+      "path": "src/python/mod.rs",
+      "bytes": 9099,
+      "sha256": "db07ccdb429e2b50c6247d3fea8bc3585202d8358da878c17287567569e711d0"
+    },
+    {
+      "path": "src/python/transport.rs",
+      "bytes": 15383,
+      "sha256": "1b14172e72bca0a39d6b687999350e1c6f59dfbaae479a15a68a62063a369afa"
+    },
+    {
+      "path": "src/python/types.rs",
+      "bytes": 27130,
+      "sha256": "b27ddbbdbc96e01224bdd3b4ba31808f1beaadf04b998d1238267480c0011cff"
+    },
+    {
+      "path": "src/singular_endpoint.rs",
+      "bytes": 22356,
+      "sha256": "68423f9c850a5937967c8c06668d4098777addae0fa55b36fdfa9df30f59d999"
+    },
+    {
+      "path": "src/transport_cache.rs",
+      "bytes": 91506,
+      "sha256": "9747646cf761ba2f2960c7eb77ec22e918ca8a5bd98e1827b3a082414e09e99b"
+    },
+    {
+      "path": "tests/supplied_singular_endpoints.rs",
+      "bytes": 29946,
+      "sha256": "3486bfe6e2c7acbe8c207627050ae64e46e0ea8a0a66d9b76e1724b96f059654"
+    },
+    {
+      "path": "tests/transport_cache.rs",
+      "bytes": 25716,
+      "sha256": "b8f254eced9c0da3eb59059e53aec93b5b854545d12ac171aca8b2844dc592e4"
+    },
+    {
+      "path": "Cargo.toml",
+      "bytes": 6391,
+      "sha256": "9c109c014341e3b3f9cb75293e7114dbfa6fbb6c1cca8924bb64c48292617058"
+    },
+    {
+      "path": "Cargo.lock",
+      "bytes": 138001,
+      "sha256": "4c5b7575719b551a186318342392dc24b2d7aec7d1ff0ab02650f5559cc4fa9c"
+    },
+    {
+      "path": "build.rs",
+      "bytes": 6875,
+      "sha256": "73a572d44bcd9adbea3d6818f4a5125ba6a2670ec1436ecc0e45644b109a3edf"
+    }
+  ],
+  "final_gate_exit": {
+    "exec_session": 95013,
+    "tool_chunk": "6ce9b9",
+    "exit_code": 0,
+    "shell_policy": "set -e; all final checks completed sequentially"
+  },
+  "prior_cached_builds": [
+    {
+      "features": [
+        "default",
+        "python",
+        "python_stubgen"
+      ],
+      "fingerprints": {
+        "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+        "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+        "PORT_SOURCE_DIGEST": "cb4c994e2f253c609692680bf0a3ed5f8d58b06d2f2d5135067a729549f61608"
+      },
+      "scope": "prior development snapshot, excluded from final source validation"
+    }
+  ],
+  "log_archive_encoding": "Archived logs use deterministic gzip; decompression preserves the original bytes, including trailing blank lines. Uncompressed originals remain under target/singular-endpoint-validation."
+}

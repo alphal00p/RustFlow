@@ -21,7 +21,7 @@ impl Connection {
         }
     }
 }
-fn germ(sheets: Option<HashMap<PythonExpression, i8>>) -> PyResult<Option<RootGerm>> {
+pub(super) fn germ(sheets: Option<HashMap<PythonExpression, i8>>) -> PyResult<Option<RootGerm>> {
     sheets
         .map(|sheets| {
             sheets
@@ -64,6 +64,71 @@ pub struct PyKinematicTransport {
 #[cfg_attr(feature = "python_stubgen", gen_stub_pymethods)]
 #[pymethods]
 impl PyKinematicTransport {
+    /// Evaluate finite epsilon coefficient limits in an exact endpoint chart.
+    /// Admit the regular matching path and final endpoint approach separately.
+    /// Recorded input errors and independent precision/order profiles determine
+    /// reusable evidence; this is not symbolic dimensional-sector projection.
+    #[pyo3(signature=(cache, route, leading, last, *, admit_matching_path=false, admit_endpoint=false, scales=None, max_lift_dimension=256, series_order=64, control=None))]
+    #[allow(clippy::too_many_arguments)]
+    fn evaluate_endpoint(
+        &self,
+        py: Python<'_>,
+        cache: &PyBoundaryCache,
+        route: &PyEndpointRoute,
+        leading: i32,
+        last: i32,
+        admit_matching_path: bool,
+        admit_endpoint: bool,
+        scales: Option<Expressions>,
+        max_lift_dimension: usize,
+        series_order: usize,
+        control: Option<&PyComputationControl>,
+    ) -> PyResult<PyEndpointResult> {
+        let request = crate::singular_endpoint::EndpointRequest {
+            chart: route.chart.clone(),
+            range: EpsilonRange::new(leading, last).map_err(error)?,
+            options: crate::singular_endpoint::EndpointOptions {
+                max_lift_dimension,
+                series_order,
+            },
+        };
+        let context = context(control);
+        let policy = ScaledDistance {
+            scales: coordinates(scales.unwrap_or_default())?,
+            admissible: |source: &CachedBoundary, target: &CachedPoint| {
+                Ok(admit_matching_path
+                    || (source.point.restart_coordinates()? == target.restart_coordinates()?
+                        && source.point.root_germ() == target.root_germ()))
+            },
+        };
+        let admission =
+            |_: &CachedBoundary, _: &crate::singular_endpoint::EndpointChart| Ok(admit_endpoint);
+        let started = std::time::Instant::now();
+        py.detach(|| {
+            cache
+                .access(|cache| match self.connection.as_ref() {
+                    Connection::Rational(flow) => flow.evaluate_endpoint(
+                        cache,
+                        &request,
+                        &self.options,
+                        &context,
+                        &policy,
+                        &admission,
+                    ),
+                    Connection::Canonical(flow) => flow.evaluate_endpoint(
+                        cache,
+                        &request,
+                        &self.options,
+                        &context,
+                        &policy,
+                        &admission,
+                    ),
+                })
+                .and_then(PyEndpointResult::from_result)
+        })
+        .map(|result| result.timed(started))
+        .map_err(error)
+    }
     #[new]
     #[pyo3(signature=(epsilon, derivatives, basis, normalization, *, branch_domain, options=None, nonzero_conditions=None))]
     #[allow(clippy::too_many_arguments)]

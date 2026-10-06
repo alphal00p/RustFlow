@@ -7,6 +7,7 @@
 use crate::algebraic::{AlgebraicKinematicSystem, CanonicalAlgebraicSystem, RootSeed, SquareRoot};
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution};
 use crate::kinematics::{KinematicPath, KinematicSystem};
+use crate::singular_endpoint::{EndpointBoundary, EndpointChart};
 use crate::{ComplexFloat as C, Error, Precision, Prescription, Result};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
@@ -19,8 +20,8 @@ use std::sync::{
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
-const VERSION: u32 = 5;
-const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x05";
+const VERSION: u32 = 6;
+const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x06";
 const FILE: &str = "physical-boundaries.bin";
 static NEXT_FILE: AtomicU64 = AtomicU64::new(0);
 
@@ -1025,6 +1026,23 @@ pub struct BoundaryAccuracy {
     provenance: String,
 }
 impl BoundaryAccuracy {
+    pub(crate) fn endpoint(
+        source: &Self,
+        verified_digits: u32,
+        working_bits: u32,
+        comparison_errors: Vec<Vec<Float>>,
+        provenance: &str,
+    ) -> Result<Self> {
+        let result = Self {
+            verified_digits: verified_digits.min(source.verified_digits),
+            working_bits,
+            input_verified_digits: source.input_verified_digits,
+            comparison_errors,
+            provenance: format!("{provenance}; regular input: {}", source.provenance),
+        };
+        result.validate()?;
+        Ok(result)
+    }
     /// Exact coefficient reindexing preserves both evidence caps and the
     /// complete prior provenance. Only the matching error array is replaced.
     pub(crate) fn reindexed(
@@ -1462,17 +1480,90 @@ pub struct BoundaryMatch<'a> {
 pub struct RustFlowCache {
     entries: Vec<CachedBoundary>,
     index: BTreeMap<String, usize>,
+    endpoints: Vec<EndpointBoundary>,
+    endpoint_index: BTreeMap<String, usize>,
 }
 
 /// Compatibility name for the native RustFlow physical boundary cache.
 pub type BoundaryCache = RustFlowCache;
 
 impl RustFlowCache {
+    /// Terminal limits are separate from the regular initial-value entries.
+    pub fn endpoint_entries(&self) -> &[EndpointBoundary] {
+        &self.endpoints
+    }
+    pub fn insert_endpoint(&mut self, endpoint: EndpointBoundary) -> Result<()> {
+        self.insert_batch(Vec::new(), vec![endpoint])
+    }
+    pub(crate) fn endpoint(
+        &self,
+        identity: &BoundaryIdentity,
+        chart: &EndpointChart,
+        range: EpsilonRange,
+        digits: u32,
+    ) -> Result<Option<EndpointBoundary>> {
+        let key = chart.key(identity)?;
+        let mut best: Option<&EndpointBoundary> = None;
+        for entry in &self.endpoints {
+            if entry.identity.key() == identity.key()
+                && entry.chart.key(identity)? == key
+                && entry.range.covers(range)
+                && entry.accuracy.verified_digits() >= digits
+                && best.is_none_or(|old| {
+                    (
+                        entry.accuracy.verified_digits(),
+                        entry.accuracy.working_bits(),
+                    ) > (old.accuracy.verified_digits(), old.accuracy.working_bits())
+                })
+            {
+                best = Some(entry);
+            }
+        }
+        best.map(|entry| entry.truncated(range)).transpose()
+    }
+    /// Validate the entire regular/terminal batch before either collection changes.
+    pub(crate) fn insert_batch(
+        &mut self,
+        mut boundaries: Vec<CachedBoundary>,
+        endpoints: Vec<EndpointBoundary>,
+    ) -> Result<()> {
+        let endpoints = endpoints
+            .into_iter()
+            .map(|endpoint| {
+                endpoint.validate()?;
+                Ok((endpoint.key()?, endpoint))
+            })
+            .collect::<Result<Vec<_>>>()?;
+        boundaries.extend(
+            endpoints
+                .iter()
+                .map(|(_, endpoint)| endpoint.matching_boundary.clone()),
+        );
+        self.insert_many(boundaries)?;
+        for (key, endpoint) in endpoints {
+            if let Some(&index) = self.endpoint_index.get(&key) {
+                let old = &mut self.endpoints[index];
+                if (
+                    endpoint.accuracy.verified_digits(),
+                    endpoint.accuracy.working_bits(),
+                ) > (old.accuracy.verified_digits(), old.accuracy.working_bits())
+                {
+                    *old = endpoint;
+                }
+            } else {
+                self.endpoint_index.insert(key, self.endpoints.len());
+                self.endpoints.push(endpoint);
+            }
+        }
+        Ok(())
+    }
+    /// Number of regular initial-condition records. Terminal limits are
+    /// counted separately by `endpoint_entries().len()`.
     pub fn len(&self) -> usize {
         self.entries.len()
     }
     pub fn is_empty(&self) -> bool {
-        self.entries.is_empty()
+        self.entries.is_empty() && self.endpoints.is_empty()
     }
     pub fn entries(&self) -> &[CachedBoundary] {
         &self.entries
@@ -2190,10 +2281,53 @@ struct StoredBoundary {
     coefficients: Vec<Vec<C>>,
     accuracy: BoundaryAccuracy,
 }
+impl StoredBoundary {
+    fn encode(
+        boundary: &CachedBoundary,
+        identity: usize,
+        atoms: &mut impl AtomEncoder,
+    ) -> Result<Self> {
+        Ok(Self {
+            identity,
+            point: StoredPoint::encode(&boundary.point, atoms)?,
+            kind: boundary.kind,
+            range: boundary.range,
+            coefficients: boundary.coefficients.clone(),
+            accuracy: boundary.accuracy.clone(),
+        })
+    }
+    fn decode(self, identities: &[BoundaryIdentity]) -> Result<CachedBoundary> {
+        Ok(CachedBoundary {
+            identity: identities
+                .get(self.identity)
+                .ok_or_else(|| Error::Cache("unknown cached boundary identity".into()))?
+                .clone(),
+            point: self.point.decode()?,
+            kind: self.kind,
+            range: self.range,
+            coefficients: self.coefficients,
+            accuracy: self.accuracy,
+        })
+    }
+}
+#[derive(Serialize, Deserialize)]
+struct StoredEndpoint {
+    identity: usize,
+    parameter: StoredAtom,
+    coordinates: Vec<(StoredAtom, StoredAtom)>,
+    matching_parameter: StoredAtom,
+    winding: i32,
+    homotopy: String,
+    range: EpsilonRange,
+    coefficients: Vec<Vec<C>>,
+    accuracy: BoundaryAccuracy,
+    matching: StoredBoundary,
+}
 #[derive(Serialize, Deserialize)]
 struct StoredCache {
     identities: Vec<StoredIdentity>,
     boundaries: Vec<StoredBoundary>,
+    endpoints: Vec<StoredEndpoint>,
 }
 #[derive(Serialize, Deserialize)]
 struct Envelope {
@@ -2219,18 +2353,42 @@ impl StoredCache {
                 keys.insert(boundary.identity.key().to_owned(), index);
                 index
             };
-            boundaries.push(StoredBoundary {
+            boundaries.push(StoredBoundary::encode(boundary, identity, atoms)?);
+        }
+        let mut endpoints = Vec::new();
+        for endpoint in &cache.endpoints {
+            endpoint.validate()?;
+            let identity = if let Some(index) = keys.get(endpoint.identity.key()) {
+                *index
+            } else {
+                let index = identities.len();
+                identities.push(StoredIdentity::encode(&endpoint.identity, atoms)?);
+                keys.insert(endpoint.identity.key().to_owned(), index);
+                index
+            };
+            endpoints.push(StoredEndpoint {
                 identity,
-                point: StoredPoint::encode(&boundary.point, atoms)?,
-                kind: boundary.kind,
-                range: boundary.range,
-                coefficients: boundary.coefficients.clone(),
-                accuracy: boundary.accuracy.clone(),
+                parameter: atoms.symbol(endpoint.chart.path.parameter)?,
+                coordinates: endpoint
+                    .chart
+                    .path
+                    .coordinates
+                    .iter()
+                    .map(|(&s, a)| Ok((atoms.symbol(s)?, atoms.atom(a)?)))
+                    .collect::<Result<_>>()?,
+                matching_parameter: atoms.atom(&endpoint.chart.matching_parameter)?,
+                winding: endpoint.chart.winding,
+                homotopy: endpoint.chart.homotopy.clone(),
+                range: endpoint.range,
+                coefficients: endpoint.coefficients.clone(),
+                accuracy: endpoint.accuracy.clone(),
+                matching: StoredBoundary::encode(&endpoint.matching_boundary, identity, atoms)?,
             });
         }
         Ok(Self {
             identities,
             boundaries,
+            endpoints,
         })
     }
 }
@@ -2318,17 +2476,33 @@ impl RustFlowCache {
             .collect::<Result<Vec<_>>>()?;
         let mut cache = Self::default();
         for boundary in stored.boundaries {
-            let identity = identities
-                .get(boundary.identity)
-                .ok_or_else(|| Error::Cache("unknown cached boundary identity".into()))?
-                .clone();
-            cache.insert(CachedBoundary {
-                identity,
-                point: boundary.point.decode()?,
-                kind: boundary.kind,
-                range: boundary.range,
-                coefficients: boundary.coefficients,
-                accuracy: boundary.accuracy,
+            cache.insert(boundary.decode(&identities)?)?;
+        }
+        for endpoint in stored.endpoints {
+            if endpoint.identity != endpoint.matching.identity {
+                return Err(Error::Cache("endpoint and anchor identities differ".into()));
+            }
+            let matching = endpoint.matching.decode(&identities)?;
+            cache.insert_endpoint(EndpointBoundary {
+                identity: matching.identity.clone(),
+                chart: EndpointChart {
+                    path: KinematicPath {
+                        parameter: symbol_read(&endpoint.parameter)?,
+                        coordinates: endpoint
+                            .coordinates
+                            .into_iter()
+                            .map(|(s, a)| Ok((symbol_read(&s)?, atom_read(&a)?)))
+                            .collect::<Result<_>>()?,
+                    },
+                    matching_parameter: atom_read(&endpoint.matching_parameter)?,
+                    matching_germ: matching.point.root_germ().cloned(),
+                    winding: endpoint.winding,
+                    homotopy: endpoint.homotopy,
+                },
+                range: endpoint.range,
+                coefficients: endpoint.coefficients,
+                accuracy: endpoint.accuracy,
+                matching_boundary: matching,
             })?;
         }
         Ok(cache)

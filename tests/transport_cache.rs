@@ -609,7 +609,7 @@ fn persistent_implementation_or_dependency_mismatch_rejects_before_exact_hit() {
     cache.save(&directory).unwrap();
     let file = directory.join("physical-boundaries.bin");
     let pristine = std::fs::read(&file).unwrap();
-    let magic = b"AMFLOW-BOUNDARIES\0\x05";
+    let magic = b"AMFLOW-BOUNDARIES\0\x06";
     let (envelope, consumed): (Envelope, _) = bincode::serde::decode_from_slice(
         pristine.strip_prefix(magic).unwrap(),
         bincode::config::standard(),
