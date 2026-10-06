@@ -1,0 +1,54 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-06T01:31:55.587607+00:00",
+  "status": "local_exact_owner_packaging_and_documentation_passed_ci_pending",
+  "community_commit": "38740f3533051d8ad1cb63aeed4d44eb1ae21d5f",
+  "source_sha256": {
+    ".github/workflows/test.yml": "4063448a23d52013d6ee8a54eff5d6d62ed6dfe379eb90ad5b56b272eadfcd7c",
+    ".github/scripts/check_native_graph_identity.py": "a3c5e29cb4428e3a1f3039a33a9943ad7b8167832d87a362b22bb086afe2d23b",
+    ".github/scripts/check_native_graph_package.py": "7e675648e45ba0ed09c7342e05b294995629d43d284aeb4a518d19bc32ce9655",
+    "tests/test_native_graph_package.py": "d353c68d9388cab7bf35e9bd857cef81862e50414ed55259d5e2c19885aa5e3d"
+  },
+  "author_and_committer": "ValentinHirschi <valentin.hirschi@gmail.com>",
+  "publication_push": {
+    "session": 19033,
+    "exit_code": 0,
+    "branch": "codex/loop-integration-publication",
+    "pull_request": "https://github.com/symbolica-dev/symbolica-community/pull/19"
+  },
+  "prior_ci": {
+    "run": 37396101271,
+    "community_commit": "5c204ba34b836d448f9d166d546baecca8fda8e3",
+    "ubuntu_result": {
+      "passed": 1106,
+      "failed": 30,
+      "skipped": 172
+    },
+    "classification": {
+      "missing_native_linnet_documentation": 29,
+      "inherited_symbolica_complex_cpp_exporter": 1
+    },
+    "failed_log_sha256": "6ae49cb23c04cdfd30e117f0d098be3aba2982bd35df04bb3ec4434be950c175"
+  },
+  "current_ci": {
+    "run": 37399537481,
+    "observed_status": "in_progress",
+    "scope": "Actual Linux and macOS native wheel builds are pending, not covered by local Linux proof."
+  },
+  "local_suite": {
+    "passed": 693,
+    "new_guard_checks": 11,
+    "documentation_examples": 682
+  },
+  "native_integrity": "Published Symbolica native extension, scientific controllers, dependency manifests and locks are unchanged. Standalone Linnet is built only from its matching immutable HEPKit owner and installed without index lookup or dependencies.",
+  "limits": [
+    "Full community CI is not green; the inherited Symbolica exporter remains unchanged.",
+    "Core Python>=3.9 policy remains unchanged; the standalone graph-test package requires Python>=3.10.",
+    "Local wheel is Linux x86_64; no local manylinux/macOS artifact claim."
+  ],
+  "artifacts_sha256": {
+    "local-tests.xml": "d3cb5303d3e62560280afbedb372b36d5527d6a9a9a45ead61e46c6d56e1543b",
+    "ci-local-validation.json": "108bcafe30d9ac2416311158351d6a04ec023587c99ab318c825bbb35787988c",
+    "owner-wheel-validation.json": "9b387381335434af45e4949a6e2f31276a96a929e4b00730d6095c13e0939403"
+  }
+}

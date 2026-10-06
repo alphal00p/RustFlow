@@ -137,11 +137,12 @@ RustFlow milestones and validation reports are pushed to its repository. The
 community notebook/API changes and dependency pins are pushed in
 [draft PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19),
 authored by `ValentinHirschi`. Its head is
-`5c204ba34b836d448f9d166d546baecca8fda8e3`; the full numerical run used
+`38740f3533051d8ad1cb63aeed4d44eb1ae21d5f`; the full numerical run used
 `8758b93d1e1a6fed2aace41493a91be569f98a98`. Native dependencies, extension bytes,
 the calculation controller and anchor runner are unchanged between these
 revisions. The differences are presentation, polling compatibility and the
-documented CI repairs. Merge and release remain pending upstream/CI work. The
+documented CI repairs, including installation of matching native graph bindings
+for the Python 3.10 tests. Merge and release remain pending upstream/CI work. The
 notebook's repository-relative destination is `examples/hep/gg_hg.py`; the local
 publication checkout is `/common/dev/symbolica-community/loop-integration-publication`.
 
@@ -186,7 +187,19 @@ the focused green checks do not mean the entire community suite is green.
 The [subsequent documentation/accessor repair](../reports/validation/2026-10-06-python310-compatibility/ci-repair-validation.json)
 passed 653 documentation examples and 32 focused checks, retaining only the same
 29 missing-Linnet failures in that documentation run. API signatures were
-unchanged. Verification with a matching native Linnet wheel remains separate.
+unchanged.
+
+The subsequent [native graph packaging milestone](../reports/validation/2026-10-06-native-graph-packaging/summary.json)
+builds the standalone Linnet Python wheel from the exact HEPKit owner used by
+the shared extension, checks its source pin and wheel/native hashes, and installs
+only that local artifact with no dependency or index lookup. This is not the
+unrelated PyPI package with the same name. An isolated Python 3.10 installation
+passed native Graph/Subgraph identity, physical selection, rendering and cycle
+collection, plus all 682 documentation checks and 11 package guards. The full
+previous Linux CI had 1,106 passes and 30 failures: those 29 missing-Linnet cases
+and the inherited Symbolica C++ complex exporter. The new Linux/macOS workflow
+run is pending; local success does not establish cross-platform CI success.
+Native numerical dependencies and the completed publication runtime are unchanged.
 
 Broader work remains on general linear/cut recursion, algebraic singular
 endpoints, causal paths, nondiagonal epsilon transformations, advanced Python

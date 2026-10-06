@@ -1,0 +1,128 @@
+{
+  "status": "wheel_built_and_installed_graph_smoke_passed_owner_test_expectations_fail",
+  "owner": {
+    "repository": "https://github.com/ValentinHirschi/gammaloop",
+    "commit": "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+    "checkout": "/common/dev/linnet-a3d1c8a-wheel-audit",
+    "tracked_diff": "",
+    "files": {
+      "Cargo.lock": "c2a83fed69a31aa4131c764f8ccc0c1c57b5fbe85bcddf3e00d06053fa80fdb1",
+      "crates/linnet-py/Cargo.toml": "1e7bfdc567d2476104437a8ee17bdbb04cac8d10c2435bd42f06b6caee15ef1b",
+      "crates/linnet-py/pyproject.toml": "86269c1b6270c790494f4a57359460b12aba37806f8f0f4a906f32276c654364",
+      "crates/feynkit-py/src/graph_interop.rs": "9d96003adccd0c994090670a4034926eb6313cb37e8462843ec50908fd99f96d"
+    },
+    "final_git_status": "",
+    "test_hashes": {
+      "crates/feynkit-py/tests/installed_graph_interop.py": "4982d891a285835b13e53651266c3889e718733362d02c4ff4cf02ed6b50b03a",
+      "crates/linnet-py/tests/test_render_sources.py": "e017a5f2369376745cacdeffafc801749d8d4eea7c60682f61a183f0f2aff8d0",
+      "crates/linnet-py/tests/test_basic.py": "9281140a82e4424b36955a70523ac13c16c52aec231e55e1b3e2534831359753"
+    }
+  },
+  "active_graph": {
+    "command": "cargo tree --locked -p linnet-py --no-default-features --features extension-module,abi3-py310 --edges normal,build --prefix none --format {p}",
+    "sha256": "19988f211ca3ad8440dfe705737669ca55901a697e9b3e9d11d559bdef5a53fe",
+    "unique_output_lines": 538,
+    "symbolica_feynkit_owners": []
+  },
+  "rejected_existing_wheel": {
+    "path": "/tmp/feynkit-marimo-release-20261002/linnet-wheels/linnet-0.1.0-cp310-abi3-manylinux_2_34_x86_64.whl",
+    "sha256": "66a9dfc6e7e5ef516e8820e8e57b7b45947f86b100e82a896a847a18d202eccf",
+    "reason": "Unverifiable a3d1c8a lineage. Build metadata names mutable local owner and Symbolica checkouts; wheel Requires-Dist typst==0.15.0 differs from exact owner dependencies=[] and embedded native renderer."
+  },
+  "build": {
+    "command": "CARGO_TARGET_DIR=/common/dev/linnet-a3d1c8a-wheel-audit/target/native CARGO_BUILD_JOBS=4 maturin build --release --locked --manifest-path crates/linnet-py/Cargo.toml --features extension-module,abi3-py310 --interpreter /common/dev/symbolica-community/python310-toml-tests/target/python310-venv/bin/python --out target/wheels",
+    "environment": "source /common/dev/amflow/target/publication-python-env.sh; separate CARGO_TARGET_DIR and CARGO_BUILD_JOBS=4 override; no live environment edits",
+    "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)",
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+    "maturin": "maturin 1.15.0",
+    "profile": "Owner release defaults including fat LTO; no profile override",
+    "log": "/common/dev/linnet-a3d1c8a-wheel-audit/target/linnet-wheel-validation/build.log",
+    "exit_code": 0,
+    "selected_environment": {
+      "_PYTHON_HOST_PLATFORM": "linux-x86_64",
+      "CC": "gcc"
+    },
+    "platform_scope": "Native Linux x86_64 only; inherited _PYTHON_HOST_PLATFORM=linux_x86_64 disables manylinux platform-tag selection. This is a local test wheel, not a validated redistributable manylinux or macOS artifact.",
+    "log_sha256": "075434fef616debafddd4eae863d23a1f4f5242aa52b9a55b2b7216097327cab"
+  },
+  "isolation": {
+    "live_runtime_changed": false,
+    "source_or_dependency_pins_changed": false,
+    "test_interpreter": "/common/dev/symbolica-community/python310-toml-tests/target/python310-venv/bin/python",
+    "native_symbolica_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf"
+  },
+  "ci_proposal": {
+    "path": "/common/dev/linnet-a3d1c8a-wheel-audit/target/linnet-wheel-validation/ci-proposal.yml",
+    "applied": false,
+    "limits": "Only exact Linux native build is being validated here. CI proposal is not a Linux container/macOS result; owner distribution requires Python>=3.10, while community core supports>=3.9. Never install the unrelated PyPI linnet.",
+    "review": "Read-only reviewed by community_py310_suite: place after package/dependency install and before tests; keep separate wheel directory. For application add owner pin guard, single-wheel metadata/hash guard and direct native graph smoke. No workflow file edited."
+  },
+  "wheel": {
+    "path": "/common/dev/linnet-a3d1c8a-wheel-audit/target/wheels/linnet-0.1.0-cp310-abi3-linux_x86_64.whl",
+    "sha256": "63ec9cca8dde96fffba52d44fd95ba7f623f8caa10a1276ce5161ebbac577aa5",
+    "size_bytes": 27161815,
+    "metadata": {
+      "Metadata-Version": "2.4",
+      "Name": "linnet",
+      "Version": "0.1.0",
+      "License-File": "LICENSE",
+      "Summary": "Native Python bindings and in-process Typst rendering for Linnet graphs",
+      "License-Expression": "MIT",
+      "Requires-Python": ">=3.10",
+      "Description-Content-Type": "text/markdown; charset=UTF-8; variant=GFM"
+    },
+    "native": {
+      "linnet/linnet.abi3.so": "1cdf0bcfdaaccb13847426c7974f4d67d1c5ee810bac0a0ad342405137e25b99"
+    }
+  },
+  "installation": {
+    "changed_packages": {
+      "linnet": "0.1.0"
+    },
+    "removed_packages": [],
+    "core_sha256": "dc55af02da528c482c31882ce14c652ce328ba4d57fd985a5bc9380ea1b8bebf",
+    "linnet_module": "/common/dev/symbolica-community/python310-toml-tests/target/python310-venv/lib/python3.10/site-packages/linnet/__init__.py",
+    "native_path": "/common/dev/symbolica-community/python310-toml-tests/target/python310-venv/lib/python3.10/site-packages/linnet/linnet.abi3.so",
+    "native_sha256": "1cdf0bcfdaaccb13847426c7974f4d67d1c5ee810bac0a0ad342405137e25b99",
+    "python": "3.10.21 (main, Sep  1 2026, 14:16:49) [Clang 22.1.3 ]",
+    "executable": "/common/dev/symbolica-community/python310-toml-tests/target/python310-venv/bin/python",
+    "command": "/nix/store/cdj5kh05zgih6fc8bq128ala4c2mwybn-uv-0.12.17/bin/uv pip install --python /common/dev/symbolica-community/python310-toml-tests/target/python310-venv/bin/python --no-deps /common/dev/linnet-a3d1c8a-wheel-audit/target/wheels/linnet-0.1.0-cp310-abi3-linux_x86_64.whl"
+  },
+  "validation": {
+    "python": "/common/dev/symbolica-community/python310-toml-tests/target/python310-venv/bin/python",
+    "current_contract_smoke": {
+      "command": "python target/linnet-wheel-validation/graph-smoke.py",
+      "exit_code": 0,
+      "script_sha256": "a712ec3020a8db4e050c2133697728b6dcb1bf0c656c0283395a73e617542fef",
+      "log": "/common/dev/linnet-a3d1c8a-wheel-audit/target/linnet-wheel-validation/graph-smoke.log",
+      "coverage": [
+        "Native Graph/Subgraph class identity",
+        "cached graph identity",
+        "topology counts",
+        "physical numerator and denominator equivalence",
+        "loop count",
+        "JSON roundtrip",
+        "foreign selection rejection",
+        "dict-based authored native SVG rendering",
+        "Python payload ownership cycle collection"
+      ]
+    },
+    "unmodified_owner_graph_test": {
+      "command": "python crates/feynkit-py/tests/installed_graph_interop.py",
+      "exit_code": 1,
+      "log": "/common/dev/linnet-a3d1c8a-wheel-audit/target/linnet-wheel-validation/graph-interop.log",
+      "failure": "Line160 expects literal is_cut: in to_linnest output. Current owner graph.rs3600-3637 explicitly exports self-contained rendered SVG Typst; typst-renderer/src/lib.rs69 serializes #image(bytes(svg)). This assertion describes the older source format. Checks through line159 passed; later checks were not executed. No test modified."
+    },
+    "unmodified_owner_render_subset": {
+      "command": "python -m pytest -q crates/linnet-py/tests/test_render_sources.py crates/linnet-py/tests/test_basic.py -k 'configuration_and_imported_modules_are_snapshotted or default_graph_render_uses_native_impred or half_edge_routes_validate_and_reach_native_rendering or invalid_configuration_and_missing_entrypoint_are_rejected or native_render_formats_and_package_environment' --junitxml=target/linnet-wheel-validation/render-junit.xml",
+      "exit_code": 1,
+      "passed": 4,
+      "failed": 1,
+      "deselected": 83,
+      "subtests_passed": 4,
+      "log": "/common/dev/linnet-a3d1c8a-wheel-audit/target/linnet-wheel-validation/render.log",
+      "failure": "test_render_sources.py87 expects config={} to raise TypeError. Current owner typst.rs3455-3457 explicitly accepts a PyDict and render.rs845-848 calls that conversion. Native SVG/PDF/PNG checks, route checks, and authored source snapshot checks passed. No test modified."
+    },
+    "community_suite": "Handed stable environment to /root/community_py310_suite for all repaired Python3.10 tests. Results recorded separately."
+  }
+}
