@@ -144,6 +144,41 @@ impl DenominatorEnclosure {
     }
 }
 
+pub(crate) fn validate_inputs(
+    p: Precision,
+    rows: &[ExactPolynomialRow],
+    center: &C,
+    coefficients: &[Vec<C>],
+    channels: usize,
+) -> Result<(usize, usize)> {
+    let n = rows.len();
+    let size = n
+        .checked_mul(channels)
+        .ok_or_else(|| Error::Limit("exact-source residual dimensions overflow".into()))?;
+    if n == 0
+        || channels == 0
+        || coefficients.is_empty()
+        || !p.finite(center)
+        || coefficients
+            .iter()
+            .any(|r| r.len() != size || r.iter().any(|a| !p.finite(a)))
+        || rows.iter().any(|r| {
+            r.denominator.is_empty()
+                || (r.denominator_factors.is_empty()
+                    && !(r.denominator.len() == 1 && r.denominator[0].is_one()))
+                || r.denominator_factors
+                    .iter()
+                    .any(|(a, multiplicity)| a.is_empty() || *multiplicity == 0)
+                || r.entries.iter().any(|(j, a)| *j >= size || a.is_empty())
+        })
+    {
+        return Err(Error::InvalidInput(
+            "exact-source residual dimensions or coefficients".into(),
+        ));
+    }
+    Ok((n, size))
+}
+
 impl ExactSourceResidual {
     pub(crate) fn new(
         p: Precision,
@@ -152,31 +187,7 @@ impl ExactSourceResidual {
         coefficients: &[Vec<C>],
         channels: usize,
     ) -> Result<Self> {
-        let n = rows.len();
-        let size = n
-            .checked_mul(channels)
-            .ok_or_else(|| Error::Limit("exact-source residual dimensions overflow".into()))?;
-        if n == 0
-            || channels == 0
-            || coefficients.is_empty()
-            || !p.finite(center)
-            || coefficients
-                .iter()
-                .any(|r| r.len() != size || r.iter().any(|a| !p.finite(a)))
-            || rows.iter().any(|r| {
-                r.denominator.is_empty()
-                    || (r.denominator_factors.is_empty()
-                        && !(r.denominator.len() == 1 && r.denominator[0].is_one()))
-                    || r.denominator_factors
-                        .iter()
-                        .any(|(a, multiplicity)| a.is_empty() || *multiplicity == 0)
-                    || r.entries.iter().any(|(j, a)| *j >= size || a.is_empty())
-            })
-        {
-            return Err(Error::InvalidInput(
-                "exact-source residual dimensions or coefficients".into(),
-            ));
-        }
+        let (n, size) = validate_inputs(p, rows, center, coefficients, channels)?;
         let ring = FloatField::from_rep(dyadic_ball(p, &p.zero()));
         let variable = Arc::new(PolyVariable::Temporary(0));
         let polynomial = |a| UnivariatePolynomial::from_coefficients(&ring, a, variable.clone());

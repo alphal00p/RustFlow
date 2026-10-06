@@ -17,7 +17,7 @@ use symbolica::prelude::*;
 #[derive(Clone, Debug)]
 pub(crate) struct RationalResidualChart {
     residuals: Vec<NumericRational>,
-    exact_source: Option<super::source::ExactSourceResidual>,
+    exact_source: Option<super::integer_residual::AdaptiveResidual>,
 }
 
 impl RationalResidualChart {
@@ -33,22 +33,43 @@ impl RationalResidualChart {
             exact_source: None,
         })
     }
-    pub(crate) fn new_exact(
+    pub(crate) fn new_with_options(
         p: Precision,
         rows: &[super::source::ExactPolynomialRow],
         center: &C,
         coefficients: &[Vec<C>],
         channels: usize,
+        options: &crate::FlowOptions,
+        context: &crate::RunContext,
     ) -> Result<Self> {
+        let constructor = match options.residual_arithmetic {
+            crate::ResidualArithmetic::Ball => super::integer_residual::AdaptiveResidual::ball,
+            crate::ResidualArithmetic::AdaptiveInteger => {
+                super::integer_residual::AdaptiveResidual::new
+            }
+        };
         Ok(Self {
             residuals: Vec::new(),
-            exact_source: Some(super::source::ExactSourceResidual::new(
+            exact_source: Some(constructor(
                 p,
                 rows,
                 center,
                 coefficients,
                 channels,
+                &context.cancellation,
             )?),
+        })
+    }
+
+    #[cfg(test)]
+    pub(crate) fn selected_arithmetic(&self) -> Option<crate::ResidualArithmetic> {
+        self.exact_source.as_ref().map(|a| match a {
+            super::integer_residual::AdaptiveResidual::Ball { .. } => {
+                crate::ResidualArithmetic::Ball
+            }
+            super::integer_residual::AdaptiveResidual::Integer { .. } => {
+                crate::ResidualArithmetic::AdaptiveInteger
+            }
         })
     }
 

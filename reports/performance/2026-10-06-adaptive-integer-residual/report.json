@@ -1,0 +1,702 @@
+{
+  "schema": 1,
+  "date": "2026-10-06",
+  "status": "validated opt-in implementation; default ball",
+  "base_commit": "ccfd654ad7d7b3f298a1019d81223eb5b6879de8",
+  "branch": "codex/adaptive-integer-residual",
+  "port_source_digest": "dc1863c2255fe8067f0f251de50362f67098ae04325a6b794e2ece571e2ee2f9",
+  "dependency_source_digest": {
+    "native": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+    "python": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9"
+  },
+  "rustred_source_digest": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+  "implementation": {
+    "default": "ball",
+    "opt_in": "adaptive_integer",
+    "native_owner": "paired Symbolica univariate integer polynomials with shared positive scales",
+    "registered_root_owner": "unchanged",
+    "pade_owner": "unchanged",
+    "fallback": "bounded admission then lazy same-chart ball computation on failed exact local budgets, preserving precision hints",
+    "resource_limits": "conservative admission estimates; not hard memory or native-call time quotas"
+  },
+  "scope": {
+    "measured": "complete shared rational transport controller, Taylor construction and residual checks; exact differential system compilation excluded",
+    "comparison": "ball versus bounded adaptive integer, not external reference-code runtime",
+    "boundary_evidence": "agreement conditional on fixed stored boundary values; no independent input uncertainty cap in the endpoint fixtures",
+    "paper27": "actual 27-integral paper-family sampled differential matrix with deterministic supplied boundary, not automatic physical boundary construction",
+    "excluded": [
+      "cache lookup",
+      "registered-root gg->hg transport",
+      "automatic boundary generation",
+      "full amplitude assembly",
+      "physical achieved-accuracy claim"
+    ]
+  },
+  "measurement": {
+    "repetitions": 3,
+    "ordering": "alternating ball/adaptive",
+    "local_target_digits": 20,
+    "series_order": 80,
+    "bits": [
+      201,
+      333
+    ],
+    "cpu": "AMD EPYC 9754 128-Core Processor",
+    "environment": "shared unpinned cluster host; other builds/jobs active; characterization rather than controlled parity claim"
+  },
+  "transport_measurements": [
+    {
+      "scope": "long",
+      "name": "upstream12",
+      "bits": 201,
+      "ball_median_ns": 3827196057,
+      "adaptive_median_ns": 3545230287,
+      "speedup": 1.0795338376279644,
+      "ball": [
+        {
+          "adaptive": false,
+          "ball_charts": 11,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 3712439183,
+          "rejected": 8,
+          "steps": 11
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 11,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 3827196057,
+          "rejected": 8,
+          "steps": 11
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 11,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 3845202690,
+          "rejected": 8,
+          "steps": 11
+        }
+      ],
+      "adaptive": [
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 8,
+          "integer_charts": 11,
+          "ns": 3545230287,
+          "rejected": 8,
+          "steps": 11
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 8,
+          "integer_charts": 11,
+          "ns": 3508450478,
+          "rejected": 8,
+          "steps": 11
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 8,
+          "integer_charts": 11,
+          "ns": 3564074514,
+          "rejected": 8,
+          "steps": 11
+        }
+      ]
+    },
+    {
+      "scope": "long",
+      "name": "upstream12",
+      "bits": 333,
+      "ball_median_ns": 4468147545,
+      "adaptive_median_ns": 4305663775,
+      "speedup": 1.0377372174166108,
+      "ball": [
+        {
+          "adaptive": false,
+          "ball_charts": 11,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 4470109645,
+          "rejected": 8,
+          "steps": 11
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 11,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 4468147545,
+          "rejected": 8,
+          "steps": 11
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 11,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 4269165654,
+          "rejected": 8,
+          "steps": 11
+        }
+      ],
+      "adaptive": [
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 8,
+          "integer_charts": 11,
+          "ns": 4305663775,
+          "rejected": 8,
+          "steps": 11
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 8,
+          "integer_charts": 11,
+          "ns": 4430917378,
+          "rejected": 8,
+          "steps": 11
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 8,
+          "integer_charts": 11,
+          "ns": 4133756498,
+          "rejected": 8,
+          "steps": 11
+        }
+      ]
+    },
+    {
+      "scope": "long",
+      "name": "paper27",
+      "bits": 201,
+      "ball_median_ns": 3752476729,
+      "adaptive_median_ns": 3651773813,
+      "speedup": 1.0275764385081865,
+      "ball": [
+        {
+          "adaptive": false,
+          "ball_charts": 4,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 3748043615,
+          "rejected": 3,
+          "steps": 4
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 4,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 3752476729,
+          "rejected": 3,
+          "steps": 4
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 4,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 3836794539,
+          "rejected": 3,
+          "steps": 4
+        }
+      ],
+      "adaptive": [
+        {
+          "adaptive": true,
+          "ball_charts": 3,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 3651773813,
+          "rejected": 3,
+          "steps": 4
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 3,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 3625569582,
+          "rejected": 3,
+          "steps": 4
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 3,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 4017779815,
+          "rejected": 3,
+          "steps": 4
+        }
+      ]
+    },
+    {
+      "scope": "long",
+      "name": "paper27",
+      "bits": 333,
+      "ball_median_ns": 4518879747,
+      "adaptive_median_ns": 4035845637,
+      "speedup": 1.119685972518775,
+      "ball": [
+        {
+          "adaptive": false,
+          "ball_charts": 4,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 4635539477,
+          "rejected": 3,
+          "steps": 4
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 4,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 4518879747,
+          "rejected": 3,
+          "steps": 4
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 4,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 4376646005,
+          "rejected": 3,
+          "steps": 4
+        }
+      ],
+      "adaptive": [
+        {
+          "adaptive": true,
+          "ball_charts": 3,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 4221680984,
+          "rejected": 3,
+          "steps": 4
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 3,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 4035845637,
+          "rejected": 3,
+          "steps": 4
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 3,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 3997194783,
+          "rejected": 3,
+          "steps": 4
+        }
+      ]
+    },
+    {
+      "scope": "nearby",
+      "name": "upstream12",
+      "bits": 201,
+      "ball_median_ns": 336560534,
+      "adaptive_median_ns": 90733382,
+      "speedup": 3.709335269790781,
+      "ball": [
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 335295792,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 337131846,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 336560534,
+          "rejected": 0,
+          "steps": 1
+        }
+      ],
+      "adaptive": [
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 90962473,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 90228341,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 90733382,
+          "rejected": 0,
+          "steps": 1
+        }
+      ]
+    },
+    {
+      "scope": "nearby",
+      "name": "upstream12",
+      "bits": 333,
+      "ball_median_ns": 392348212,
+      "adaptive_median_ns": 128599605,
+      "speedup": 3.0509285934431913,
+      "ball": [
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 418428745,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 392348212,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 391616500,
+          "rejected": 0,
+          "steps": 1
+        }
+      ],
+      "adaptive": [
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 144160593,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 128354134,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 128599605,
+          "rejected": 0,
+          "steps": 1
+        }
+      ]
+    },
+    {
+      "scope": "nearby",
+      "name": "paper27",
+      "bits": 201,
+      "ball_median_ns": 928659305,
+      "adaptive_median_ns": 150364448,
+      "speedup": 6.1760563574176786,
+      "ball": [
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 928659305,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 920721617,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 953153286,
+          "rejected": 0,
+          "steps": 1
+        }
+      ],
+      "adaptive": [
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 153131076,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 150364448,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 149930018,
+          "rejected": 0,
+          "steps": 1
+        }
+      ]
+    },
+    {
+      "scope": "nearby",
+      "name": "paper27",
+      "bits": 333,
+      "ball_median_ns": 1083130936,
+      "adaptive_median_ns": 169178805,
+      "speedup": 6.402285061654148,
+      "ball": [
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 1086475784,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 1082741366,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": false,
+          "ball_charts": 1,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 0,
+          "ns": 1083130936,
+          "rejected": 0,
+          "steps": 1
+        }
+      ],
+      "adaptive": [
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 170188018,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 168886204,
+          "rejected": 0,
+          "steps": 1
+        },
+        {
+          "adaptive": true,
+          "ball_charts": 0,
+          "charts_with_lazy_ball": 0,
+          "integer_charts": 1,
+          "ns": 169178805,
+          "rejected": 0,
+          "steps": 1
+        }
+      ]
+    }
+  ],
+  "independent_refinement": {
+    "bits_orders": [
+      [
+        201,
+        80
+      ],
+      [
+        397,
+        112
+      ]
+    ],
+    "agreement_digits": 20,
+    "source_and_boundary_recompiled": true,
+    "scope": "fixed supplied boundary numbers",
+    "final_source_raw": "final-opt-in/refinement-adverse.json"
+  },
+  "adverse_cases": {
+    "shifted_degree64": "selects ball; identical typed min-244-bit request at 201 bits, succeeds at 397",
+    "rational_height512_degree32": "selects ball, comparable constructor cost",
+    "sparse_degree257_zero_center": "integer selector retained",
+    "non_dyadic_complex": "integer selector retained",
+    "earlier_harness_failure": "initial experiment incorrectly assumed all old-ball paths must succeed; archived failure was corrected to compare identical typed errors, with no change to production arithmetic"
+  },
+  "validation": {
+    "frozen_before_steering": {
+      "integration_targets": 19,
+      "passed": 95,
+      "ignored": 2,
+      "note": "isolated candidate selected adaptive by default; not the final default policy; original fixtures/source/logs retained"
+    },
+    "final_opt_in": {
+      "ode_unit_passed": 41,
+      "ode_unit_ignored_benchmarks": 2,
+      "public_and_cli_targets": 7,
+      "public_and_cli_passed": 36,
+      "explicit_refinement_adverse_benchmark_passed": 1,
+      "native_strict_all_target_clippy": true,
+      "python_stubgen_strict_all_target_clippy": true,
+      "formatting": true,
+      "diff_whitespace": true,
+      "note": "Python feature/stub generation compilation checked; no community-host runtime rebuild claimed"
+    },
+    "mathematics": [
+      "exact coefficient equality against independent native Gaussian rational polynomials",
+      "outward containment in both integer and old-ball enclosures",
+      "complex epsilon channel orientation and common scales",
+      "source holes and conditioning",
+      "high stored precision, source heights and Float exponents preflight",
+      "lazy fallback precision hints, sharing and cancellation",
+      "default and explicit Ball, opt-in identity and Mobius charts",
+      "public epsilon independent refinement and saved segment replay"
+    ],
+    "independent_review": "root and community_py310_suite reviewed arithmetic, fallback and opt-in routing without remaining substantive blocker"
+  },
+  "cache_compatibility": {
+    "schema_change": false,
+    "sample_settings_fingerprint": "includes residual_arithmetic through full settings Debug representation",
+    "physical_boundary_identity": "mode independent within compatible source build, existing accuracy contracts apply",
+    "source_digest": "changed implementation rejects incompatible binary snapshots"
+  },
+  "next_profile_priorities": [
+    "long 12-master paths use lazy old-ball fallback in 8 of 11 charts; 27-integral paths select ball in 3 of 4 charts",
+    "profile current registered-root checked gg->hg pipeline before selecting a native algebra optimization; nearby one-chart workloads cannot benefit from fewer steps",
+    "a possible future experiment is a rigorously conservative bound on old-ball rounding width that can prove a precision hint impossible before constructing oldballs; no such shortcut is implemented here"
+  ],
+  "archive": {
+    "file": "evidence.tar.gz",
+    "sha256": "50bad1b1c71c6bf66ab803a494f994b2c7a9e5f4bc83338f2e19eec64cffb5bc",
+    "files": {
+      "earlier-harness-failure/adaptive-final-source.sha256": "8721f02f79636557dc2032a7ef040975482420c707ad5a658fa8b5dfb861b5af",
+      "earlier-harness-failure/adaptive-refinement-adverse.log": "9df919ef296111f062791360b3211d03d7e7eacddcaa46c8f5866d812bf24ad2",
+      "earlier-harness-failure/integer_residual_bench.rs": "15f98a6ccb134e9aca2be05509a3757140ce8e6597aee1687732edd87ba81b1a",
+      "earlier-harness-failure/refinement-adverse.json": "080c4862c584f9a21dc997d432643b026fc4f597685ebcf37fae6a9e37000861",
+      "final-opt-in/Cargo.lock": "4c5b7575719b551a186318342392dc24b2d7aec7d1ff0ab02650f5559cc4fa9c",
+      "final-opt-in/Cargo.toml": "9c109c014341e3b3f9cb75293e7114dbfa6fbb6c1cca8924bb64c48292617058",
+      "final-opt-in/adaptive-opt-in-clippy1.log": "be33dc6888bebbcde8d81f2fd548e8bdbbbdff9a5a31b0cba6e2205bb9bbfafc",
+      "final-opt-in/adaptive-opt-in-final-comparison.log": "186da1341920e3b00c2a9c12c2c317b63090fd5e97a21c27102845e261dbd938",
+      "final-opt-in/adaptive-opt-in-ode-tests.log": "2689311d1922e39e7e7db3f263a4154b42dcec27978735e7dfe14fc9ad37f11f",
+      "final-opt-in/adaptive-opt-in-public-tests.log": "0efc10784ce1488912dc41c2c6e800fefa39d5df60634f0cb2b50c4a7fad3c82",
+      "final-opt-in/adaptive-opt-in-python-clippy.log": "55552074c8c45495bbb5fe403621d8b5a21e219387978f68e27efab0fdf35fc0",
+      "final-opt-in/adaptive-opt-in-source.sha256": "809a5895eadc6fd581e48ddf83a6f16515f71b7ae2aca8d1287ff6a6cd45b7ea",
+      "final-opt-in/build.rs": "73a572d44bcd9adbea3d6818f4a5125ba6a2670ec1436ecc0e45644b109a3edf",
+      "final-opt-in/refinement-adverse.json": "16c47dc02b57b4e2039e1c73f5dd3dea5f5f0211bbed1982c18a29ae1afc0cd6",
+      "final-opt-in/src/bin/rustflow.rs": "b8128631bfbcd42a4e5c3e0f4aa358453deaa65aee28d48e95f270291bfa8121",
+      "final-opt-in/src/diffexp.rs": "f0f39a6295b9c6eb9f1fcaee92753359424493c9dbb9363b22e2ed930eb3c147",
+      "final-opt-in/src/lib.rs": "d63e1c1d293c028c6debd77903b3a0b183f6c467f384f1a18ec1073b23d25e1d",
+      "final-opt-in/src/ode.rs": "7fba54a1212a3de09b550c40dc15cf0ae7a3f6477aac7d7cfed1363665c1ca1f",
+      "final-opt-in/src/ode/integer_residual.rs": "ae413163b43200c93c85a471302ec84c7645a71ac7c310bc110657cddf097581",
+      "final-opt-in/src/ode/integer_residual_bench.rs": "69e03a7088385e042fe19523dd9c76212a0aca143fc7452679ea240173548be2",
+      "final-opt-in/src/ode/integer_residual_tests.rs": "c475e6827ae18222f7d03b79f6ad2d79824f5e0f38753483cda875f2db91b31f",
+      "final-opt-in/src/ode/residual.rs": "090b74d89189c0f86ea7bc673b135e478f54fbf054aed01958ac38ea06ff343c",
+      "final-opt-in/src/ode/source.rs": "e18b0f46bab181a1fc0962af3e76829f4bcb024cceeb2df5b639081e224a3e9a",
+      "final-opt-in/src/options.rs": "42c821d66f0a6d2fdae5e4a37812a7ca8546b951d4814d755cb6c04d01e0f8a7",
+      "final-opt-in/src/python/types.rs": "738f9589a23a69283627e56e54bb5bcedab05b2cf77b7592dab589878a5ebe55",
+      "final-opt-in/tests/residual_arithmetic.rs": "e13effe2812d887af3f65d84d852907176de9a12f2f45d7ef972052ce9727a7b",
+      "frozen-adaptive-default/adaptive-benchmark/adaptive-comparison.json": "d2cca2ddcc5828b8de425807b2d297b06ceac8938e42b7523162fe419c69b969",
+      "frozen-adaptive-default/adaptive-benchmark/endpoint/paper27.json": "2eb35498fab04674c66ba2e10b33788974120134e7b976a6c927800f3a70b9db",
+      "frozen-adaptive-default/adaptive-benchmark/endpoint/upstream12.json": "33c322c42f64edb42ddd4f4310368da00a8d68a95ba13ddf42e6a57fd34f752b",
+      "frozen-adaptive-default/adaptive-benchmark/initial/paper27.json": "1e112b7549af1b78c845cca4f7e9bf32b089527a6ae7a94a059903a584515880",
+      "frozen-adaptive-default/adaptive-benchmark/initial/upstream12.json": "78ff0774afe68f649209b87103dd868a290273064f4989548aefad8da3a639d3",
+      "frozen-adaptive-default/adaptive-benchmark/refinement-adverse.json": "cb58d2bbee7771c0016230349e6bd9e51d263e55af3d27829be62065855ee6c7",
+      "frozen-adaptive-default/adaptive-nearby/adaptive-comparison.json": "8dae1d63e23cfb3010e62275c3da0405007ecdc354e64d02ba6ed4c27ac6e3ec",
+      "frozen-adaptive-default/adaptive-nearby/endpoint/paper27.json": "2eb35498fab04674c66ba2e10b33788974120134e7b976a6c927800f3a70b9db",
+      "frozen-adaptive-default/adaptive-nearby/endpoint/upstream12.json": "33c322c42f64edb42ddd4f4310368da00a8d68a95ba13ddf42e6a57fd34f752b",
+      "frozen-adaptive-default/adaptive-nearby/initial/paper27.json": "afc7d509824a7fd24bc0c80bc9e5c3322d3678d307e8f8d3b997af50c44c18fe",
+      "frozen-adaptive-default/adaptive-nearby/initial/upstream12.json": "f305c901b8e9d2bc950a699d47b5c91fd3350e7ead01982ba6d582ffd75e7f5c",
+      "frozen-adaptive-default/adaptive-nearby/provenance.json": "5bae80c2bd36f7e9f8978929c73152f6b7aadcd4a96a142551e5d712a0e67f82",
+      "frozen-adaptive-default/adaptive-nearby/refinement-adverse.json": "f2cf31fd3901e0cdbfc503cf05026a6dde5bada3e29a2cfb7b70c8c99e28fa54",
+      "frozen-adaptive-default/results.json": "5c168acf555130d8130e72f8e686bf1b09066b533a8eadae83fddcd9f1fd2b52",
+      "frozen-adaptive-default/src/diffexp.rs": "ae4c8eb0024854dd7514aca66e5d8f1d8a9f19463b2bdaaa84341a9258aeff5a",
+      "frozen-adaptive-default/src/ode.rs": "2536d5b822f3920cc90bcd04c5104572267fffbd1e2dc2136ea0cf5fe0a305a5",
+      "frozen-adaptive-default/src/ode/integer_residual.rs": "fd7bb10a0e643b057d8c17fb85cd04a1b9e0652819daad63d8313743c557e6dc",
+      "frozen-adaptive-default/src/ode/integer_residual_bench.rs": "69e03a7088385e042fe19523dd9c76212a0aca143fc7452679ea240173548be2",
+      "frozen-adaptive-default/src/ode/integer_residual_tests.rs": "6bb1b67399b4638aed688d1839f3e86ef8c1a0da86da6b140fa750ac34f52828",
+      "frozen-adaptive-default/src/ode/residual.rs": "bde0ff2a52d2d2cb71e7fbce8d2ef0cc82a580a54577957985f0f351efa4e4ca",
+      "frozen-adaptive-default/src/ode/source.rs": "e18b0f46bab181a1fc0962af3e76829f4bcb024cceeb2df5b639081e224a3e9a",
+      "frozen-adaptive-default/target/adaptive-final2-source.sha256": "4a2402f785405e0663a76bb6fc194f57bdc9b1f5bb1041a4cc12388ee5449d3a",
+      "frozen-adaptive-default/target/adaptive-integer-clippy3.log": "9233838359843cac2cabcdd830e5e9b73a3d32c8b5f0a30cd49b16456aa6509c",
+      "frozen-adaptive-default/target/adaptive-nearby-refinement.log": "db7e50fda046daca4d37f3d733dcf143e343ac040f77257b106826b0857c62b9",
+      "frozen-adaptive-default/target/adaptive-nearby.log": "9e892ad0bf090ad0278a5df902d45b0e168c72393c5a1ee1cee8c19746bb6a90",
+      "frozen-adaptive-default/target/adaptive-python-clippy.log": "67bfbbaab373e41584828d34ad1b42c178bba245cfbbf9f0d73ec8707a9d87ff",
+      "frozen-adaptive-default/target/adaptive-refinement-adverse2.log": "ebdf63ed56d9a3c59c1375ac989d067969f335128b2484d557cdc32c765198a6",
+      "frozen-adaptive-default/target/adaptive-transport-integration.log": "ca049ac00b1943ce444e95e1a0c80d0700d72839f12e06d5d390a4644d820b33"
+    }
+  }
+}

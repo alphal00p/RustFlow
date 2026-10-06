@@ -498,37 +498,82 @@ impl SeriesSystem for CompiledEpsilonSystem {
         center: &C,
         values: &[C],
         order: usize,
-        _: &(),
+        state: &(),
     ) -> Result<(Vec<Vec<C>>, Self::Chart)> {
+        self.local_chart_with_options(
+            center,
+            values,
+            order,
+            state,
+            &FlowOptions::default(),
+            &RunContext::default(),
+        )
+    }
+    fn local_chart_with_options(
+        &self,
+        center: &C,
+        values: &[C],
+        order: usize,
+        _: &(),
+        options: &FlowOptions,
+        context: &RunContext,
+    ) -> Result<(Vec<Vec<C>>, Self::Chart)> {
+        context.cancellation.check()?;
         let coefficients = self
             .rows
             .taylor_channels(center, values, order, self.count)?;
-        let chart = crate::ode::residual::RationalResidualChart::new_exact(
+        let chart = crate::ode::residual::RationalResidualChart::new_with_options(
             self.rows.p,
             &self.rows.exact_source_rows,
             center,
             &coefficients,
             self.count,
+            options,
+            context,
         )?;
         Ok((coefficients, chart))
     }
     fn mapped_chart(
         &self,
         coordinate: &crate::local_coordinates::TaylorCoordinate,
+        center: &C,
+        values: &[C],
+        order: usize,
+        state: &(),
+    ) -> Result<crate::ode::MappedTaylorChart<Self::Chart>> {
+        self.mapped_chart_with_options(
+            coordinate,
+            center,
+            values,
+            order,
+            state,
+            &FlowOptions::default(),
+            &RunContext::default(),
+        )
+    }
+    #[allow(clippy::too_many_arguments)] // Shared source options and cancellation context.
+    fn mapped_chart_with_options(
+        &self,
+        coordinate: &crate::local_coordinates::TaylorCoordinate,
         _: &C,
         values: &[C],
         order: usize,
         _: &(),
+        options: &FlowOptions,
+        context: &RunContext,
     ) -> Result<crate::ode::MappedTaylorChart<Self::Chart>> {
+        context.cancellation.check()?;
         let mapped = self.rows.in_coordinate(coordinate)?;
         let coefficients =
             mapped.taylor_channels(&self.rows.p.zero(), values, order, self.count)?;
-        let chart = crate::ode::residual::RationalResidualChart::new_exact(
+        let chart = crate::ode::residual::RationalResidualChart::new_with_options(
             self.rows.p,
             &mapped.exact_source_rows,
             &self.rows.p.zero(),
             &coefficients,
             self.count,
+            options,
+            context,
         )?;
         Ok((coefficients, chart, mapped.poles))
     }

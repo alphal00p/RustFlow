@@ -326,6 +326,12 @@ arithmetic-conditioning tolerance along the retained path and compared profiles.
 It is `null` for exact cache hits, whose existing accuracy evidence is retained.
 This diagnostic is separate from working precision and from a global error proof.
 
+`options.residual_arithmetic` accepts `"ball"` (default) or
+`"adaptive_integer"`. The latter tries bounded native integer source-defect
+products for rational and epsilon Taylor charts, with conservative same-chart
+ball fallback. Registered-root charts and Padé candidate arithmetic are unchanged.
+See [arithmetic, limits and validation](adaptive-integer-residuals.md).
+
 ## Native positive-energy cut graphs
 
 The `graph` operation accepts an optional `cut` selection. The diagram must

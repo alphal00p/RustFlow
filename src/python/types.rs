@@ -23,7 +23,7 @@ pub struct PyEvaluationOptions {
 #[pymethods]
 impl PyEvaluationOptions {
     #[new]
-    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode="automatic", refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None))]
+    #[pyo3(signature = (*, digits=20, guard_digits=40, series_order=80, max_steps=1000, workers=1, dimension=4, recursion="auxiliary_mass", prescription="+i0", mass_mode="automatic", refine_basis=false, skip_reduction=false, sampled_reduction=true, max_precision_attempts=3, max_boundary_attempts=8, cache_directory=None, local_coordinate="identity", sample_cache_directory=None, reuse_samples=true, pade_degree=None, residual_arithmetic="ball"))]
     #[allow(clippy::too_many_arguments)]
     fn new(
         digits: u32,
@@ -45,6 +45,7 @@ impl PyEvaluationOptions {
         sample_cache_directory: Option<PathBuf>,
         reuse_samples: bool,
         pade_degree: Option<usize>,
+        residual_arithmetic: &str,
     ) -> PyResult<Self> {
         let inner = crate::FlowOptions {
             digits,
@@ -54,6 +55,7 @@ impl PyEvaluationOptions {
                 degree,
                 ..Default::default()
             }),
+            residual_arithmetic: residual_arithmetic.parse().map_err(error)?,
             max_steps,
             workers,
             dimension,
@@ -126,6 +128,11 @@ impl PyEvaluationOptions {
     #[getter]
     fn pade_degree(&self) -> Option<usize> {
         self.inner.pade.as_ref().map(|p| p.degree)
+    }
+    /// Source-defect arithmetic: ball (default) or adaptive_integer (opt-in).
+    #[getter]
+    fn residual_arithmetic(&self) -> &'static str {
+        self.inner.residual_arithmetic.as_str()
     }
     #[getter]
     fn workers(&self) -> usize {
