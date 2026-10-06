@@ -1,0 +1,4 @@
+registered finite state after count at offset 15
+mode=finite bytes=51 export=Ok callback=true
+import=Ok atom=1 trailing=0 equal=true
+post_registration_control=Ok bytes=59 atom=1 trailing=0

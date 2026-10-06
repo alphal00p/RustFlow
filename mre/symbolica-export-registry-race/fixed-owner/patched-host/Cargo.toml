@@ -1,0 +1,22 @@
+[package]
+name = "symbolica-export-registry-race-patched"
+version = "0.0.0"
+edition = "2024"
+[workspace]
+[[bin]]
+name = "export-registry-race-patched"
+path = "main.rs"
+[dependencies]
+symbolica = { path = "/common/dev/symbolica-atomic-export", default-features = false, features = ["integer-gmp", "float-mpfr", "native_code_generation"] }
+[profile.dev]
+debug = 0
+[profile.dev.package."*"]
+opt-level = 1
+[[test]]
+name = "owner_import_export"
+path = "/common/dev/symbolica-atomic-export/tests/import_export.rs"
+[dev-dependencies]
+smartstring = "1.0"
+[patch.crates-io]
+numerica = { path = "/common/dev/symbolica-atomic-export/lib/numerica" }
+graphica = { path = "/common/dev/symbolica-atomic-export/lib/graphica" }

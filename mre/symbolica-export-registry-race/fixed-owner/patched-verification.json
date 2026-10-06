@@ -1,0 +1,202 @@
+{
+  "scope": "Isolated owner correction and focused native serialization verification only. No RustFlow/community runtime source, dependency pin, installed wheel or scientific acceptance bank was changed. No owner push or PR.",
+  "timestamp_utc": "2026-10-06T00:03:08.677513+00:00",
+  "owner": {
+    "path": "/common/dev/symbolica-atomic-export",
+    "branch": "codex/atomic-export-registry-snapshot",
+    "base": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "commit": "e771a7b92c3f63c3bb49089f03ed4da108598a99",
+    "author": "ValentinHirschi <valentin.hirschi@gmail.com>",
+    "clean": true,
+    "files": [
+      "src/state.rs",
+      "tests/import_export.rs"
+    ]
+  },
+  "inherited_defect": {
+    "baseline_report": "/common/dev/amflow/target/mre/symbolica-export-registry-race/baseline-verification.json",
+    "sha256": "1587f74189b6418107bb80fe93757bf5bc43b5950380d4c0871917e770e384dd",
+    "finite_registration": "Native export succeeds; native import UnexpectedEof.",
+    "polynomial_registration": "Native export succeeds; native import InvalidData legacy-format error.",
+    "introduced_by_rustflow_cache_memoization": false
+  },
+  "final_design": {
+    "snapshot": "Two equal successive collections of monotonic append-only registry offsets/counts establish a common unchanged interval.",
+    "dependency_closure": "Both polynomial-list-to-symbol and symbol-user-data-to-coefficient-domain dependencies preclude relying only on a fixed registry read order.",
+    "serialization": "Native full and partial exporters use the same bounded prefixes for dependency discovery, counts and payload. No wire-format change.",
+    "locking": "No State lock is acquired; existing initial-state initialization condition retained; reentrant writer and SymbolBuilder generator callbacks remain possible.",
+    "memory": "Constant-size six-counter snapshot; registry entries are not cloned.",
+    "limitations": [
+      "Unsafe State::reset must not overlap export or live atoms, as in existing contract.",
+      "Snapshot loop can retry under continuous registration; no bounded-wait performance guarantee is claimed.",
+      "This freezes published registry prefixes, not atomic publication of an entire build_group; importer already requires symbol userdata references to earlier-created symbols."
+    ]
+  },
+  "discarded_candidate": {
+    "description": "Read-lock-based snapshot was never published/activated and is not in committed fix.",
+    "independent_generator_control_exit": 0,
+    "independent_read_lock_candidate_exit": 124,
+    "reason": "Public with_generator callback runs while build_group holds State write lock; reacquiring read lock deadlocks."
+  },
+  "dependency_scope": {
+    "symbolica": "isolated owner commit e771a7b92c3f63c3bb49089f03ed4da108598a99",
+    "numerica": "isolated owner lib/numerica at unmodified c340 source",
+    "graphica": "isolated owner lib/graphica at unmodified c340 source",
+    "features": [
+      "integer-gmp",
+      "float-mpfr",
+      "native_code_generation"
+    ],
+    "compiler": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+    "rlib": "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target/debug/deps/libsymbolica-8cb1c7278ac7adf9.rlib",
+    "rlib_sha256": "c159c5a7b91b7060000269ed595eef657fc0b41e5b37e5f471010b4433fdee7b"
+  },
+  "validation": {
+    "owner_import_export": {
+      "command": "CARGO_TARGET_DIR=/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target CARGO_BUILD_JOBS=8 cargo test --locked --offline --manifest-path /common/dev/amflow/target/mre/symbolica-export-registry-race/patched-host/Cargo.toml --test owner_import_export -- --nocapture",
+      "result": "1 integration test passed, including existing rename/conflict/partial-state/finite-field-offset/userdata checks plus6new reentrant writer cases and1generator export regression;0failed",
+      "test_seconds": 0.01
+    },
+    "owner_clippy": {
+      "command": "CARGO_TARGET_DIR=/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target CARGO_BUILD_JOBS=8 cargo clippy --locked --offline --manifest-path /common/dev/amflow/target/mre/symbolica-export-registry-race/patched-host/Cargo.toml -p symbolica --lib -- -D warnings",
+      "exit": 0,
+      "seconds": 35.45
+    },
+    "harness_clippy": {
+      "command": "CARGO_TARGET_DIR=/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target CARGO_BUILD_JOBS=8 cargo clippy --locked --offline --manifest-path /common/dev/amflow/target/mre/symbolica-export-registry-race/patched-host/Cargo.toml --all-targets -- -D warnings",
+      "exit": 0,
+      "seconds": 0.34
+    },
+    "format": [
+      "rustfmt --edition 2024 --check src/state.rs tests/import_export.rs",
+      "git diff --check"
+    ],
+    "patched_mre_runs": [
+      {
+        "mode": "control",
+        "command": [
+          "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target/debug/export-registry-race-patched",
+          "control",
+          "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-control.bin"
+        ],
+        "exit": 0,
+        "seconds": 0.009867310989648104,
+        "log": "mode=control bytes=51 export=Ok callback=false\nimport=Ok atom=1 trailing=0 equal=true\npost_registration_control=Ok bytes=51 atom=1 trailing=0\n"
+      },
+      {
+        "mode": "finite",
+        "command": [
+          "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target/debug/export-registry-race-patched",
+          "finite",
+          "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-finite.bin"
+        ],
+        "exit": 0,
+        "seconds": 0.005477562081068754,
+        "log": "registered finite state after count at offset 15\nmode=finite bytes=51 export=Ok callback=true\nimport=Ok atom=1 trailing=0 equal=true\npost_registration_control=Ok bytes=59 atom=1 trailing=0\n"
+      },
+      {
+        "mode": "polynomial",
+        "command": [
+          "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target/debug/export-registry-race-patched",
+          "polynomial",
+          "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-polynomial.bin"
+        ],
+        "exit": 0,
+        "seconds": 0.009859360754489899,
+        "log": "registered polynomial state after count at offset 23\nmode=polynomial bytes=51 export=Ok callback=true\nimport=Ok atom=1 trailing=0 equal=true\npost_registration_control=Ok bytes=130 atom=1 trailing=0\n"
+      }
+    ],
+    "patched_mre_exports_byte_identical_to_callback_free_baseline": true,
+    "independent_generator": {
+      "reviewer": "/root/cache_snapshot_export",
+      "source": "/common/dev/amflow-cache-export/target/symbolica-generator-export-review/repro.rs",
+      "final_rlib": "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target/debug/deps/libsymbolica-8cb1c7278ac7adf9.rlib",
+      "exit": 0,
+      "output": "entered generator; export completed:51bytes; group completed",
+      "scope": "separate direct-rustc link with short process timeout; commands retained in reviewer tool transcript"
+    }
+  },
+  "not_run": [
+    "Full Symbolica all-feature test suite",
+    "Python/browser suite",
+    "Scientific numerical workflow or performance benchmark"
+  ],
+  "files": {
+    "patched-host/Cargo.toml": {
+      "bytes": 711,
+      "sha256": "ae4771cb51b2b44fe19672269c46088773a9594ca2e5ae8a824ecb4aa3d1dc20"
+    },
+    "patched-host/Cargo.lock": {
+      "bytes": 30236,
+      "sha256": "1d1abbb40d751e2535fbb3258bed6f1f9f2f179ac9ecb178238488cac1dbf03e"
+    },
+    "patched-host/main.rs": {
+      "bytes": 4024,
+      "sha256": "99212f7f8d7c748940ee52b44d08247e8b8d4f792272259b5b40681638491f7e"
+    },
+    "patched-owner-tests.log": {
+      "bytes": 6660,
+      "sha256": "918ba46ff0afbe0959af45259854863f973ab9eebb838458fbf9766f2d7e0e53"
+    },
+    "patched-owner-clippy.log": {
+      "bytes": 3152,
+      "sha256": "44d73f7e3d4a86d98e07fbe8b64f692f4df398e5e15e42565b269b3976b42de2"
+    },
+    "patched-harness-clippy.log": {
+      "bytes": 195,
+      "sha256": "164e1a7bbf9cad4e625d49f0c99e3ad9dfc32e056a65b645e4d77794ae9c7eea"
+    },
+    "patched-runs.json": {
+      "bytes": 1593,
+      "sha256": "acbe68d8c84d6ebe0c5af606f7fb34dd3c8546532ebde95d2dad07902585ac90"
+    },
+    "patched-control.log": {
+      "bytes": 142,
+      "sha256": "7f2afc510013f4e06b86cd9f55496c580a47f7d109dbfa023044ae5992f8e000"
+    },
+    "patched-finite.log": {
+      "bytes": 189,
+      "sha256": "c5dfe115c11ccba7c2b6c0e7dd42078263a03d65329ba0b5611bebc5484e06f0"
+    },
+    "patched-polynomial.log": {
+      "bytes": 198,
+      "sha256": "975c5e3980594da149013cf4c338bdb91d29d10f5f85d7866e1f4bdfe1e192cc"
+    },
+    "patched-control.bin": {
+      "bytes": 51,
+      "sha256": "73cf665e9ca662ffc044496528c33e201b7f7acef071c2a0a8f169fd49d60bed"
+    },
+    "patched-finite.bin": {
+      "bytes": 51,
+      "sha256": "73cf665e9ca662ffc044496528c33e201b7f7acef071c2a0a8f169fd49d60bed"
+    },
+    "patched-polynomial.bin": {
+      "bytes": 51,
+      "sha256": "73cf665e9ca662ffc044496528c33e201b7f7acef071c2a0a8f169fd49d60bed"
+    },
+    "generator-repro.rs": {
+      "bytes": 576,
+      "sha256": "faac192ed1a986434d446f0bde37e04bf75b4f7489bc1eafe5a296b4e3b47b8c"
+    },
+    "generator-control.log": {
+      "bytes": 61,
+      "sha256": "2a5890a6eb5100da495e4d9331fed23ead3f48a10f1afcba3611c4e6536041bc"
+    },
+    "generator-read-lock-patch.log": {
+      "bytes": 18,
+      "sha256": "bc9a46fb6787c89535f036b5e70bc93db7af57d9af9f08931c7c57987e6cd148"
+    },
+    "generator-final-patch.log": {
+      "bytes": 61,
+      "sha256": "2a5890a6eb5100da495e4d9331fed23ead3f48a10f1afcba3611c4e6536041bc"
+    },
+    "owner-snapshot-fix.patch": {
+      "bytes": 13385,
+      "sha256": "a9e7328feba23759f4857aaa785088a58745b8e7b7b624d90638bbbceb627e52"
+    }
+  },
+  "owner_source_hashes": {
+    "src/state.rs": "ed5e987ca5d159832a89f71bda6f7db20e09776f03605af79ed47cac772ec973",
+    "tests/import_export.rs": "827b864c74d530382b613e44cd65ae23995f1359bd70d571e3936496ab6713e9"
+  }
+}

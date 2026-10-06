@@ -1,0 +1,4 @@
+registered polynomial state after count at offset 23
+mode=polynomial bytes=51 export=Ok callback=true
+import=Ok atom=1 trailing=0 equal=true
+post_registration_control=Ok bytes=130 atom=1 trailing=0

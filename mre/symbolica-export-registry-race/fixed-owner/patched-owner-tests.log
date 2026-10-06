@@ -1,0 +1,43 @@
+   Compiling symbolica-export-registry-race-patched v0.0.0 (/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-host)
+    Finished `test` profile [unoptimized] target(s) in 3.30s
+     Running /common/dev/symbolica-atomic-export/tests/import_export.rs (target/mre/symbolica-export-registry-race/patched-target/debug/deps/owner_import_export-25af81605cef1740)
+
+running 1 test
+2026-10-06T00:00:39.553217Z  WARN symbolica::state: Imported symbol symbolica::tan was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553314Z  WARN symbolica::state: Imported symbol symbolica::cot was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553324Z  WARN symbolica::state: Imported symbol symbolica::sec was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553334Z  WARN symbolica::state: Imported symbol symbolica::csc was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553345Z  WARN symbolica::state: Imported symbol symbolica::sinh was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553358Z  WARN symbolica::state: Imported symbol symbolica::cosh was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553367Z  WARN symbolica::state: Imported symbol symbolica::tanh was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553377Z  WARN symbolica::state: Imported symbol symbolica::coth was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553386Z  WARN symbolica::state: Imported symbol symbolica::sech was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553396Z  WARN symbolica::state: Imported symbol symbolica::csch was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553405Z  WARN symbolica::state: Imported symbol symbolica::asin was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553415Z  WARN symbolica::state: Imported symbol symbolica::acos was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553427Z  WARN symbolica::state: Imported symbol symbolica::atan was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553437Z  WARN symbolica::state: Imported symbol symbolica::acot was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553446Z  WARN symbolica::state: Imported symbol symbolica::asec was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553456Z  WARN symbolica::state: Imported symbol symbolica::acsc was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553466Z  WARN symbolica::state: Imported symbol symbolica::asinh was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553475Z  WARN symbolica::state: Imported symbol symbolica::acosh was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553484Z  WARN symbolica::state: Imported symbol symbolica::atanh was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553496Z  WARN symbolica::state: Imported symbol symbolica::acoth was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553505Z  WARN symbolica::state: Imported symbol symbolica::asech was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553514Z  WARN symbolica::state: Imported symbol symbolica::acsch was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553526Z  WARN symbolica::state: Imported symbol symbolica::root was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553536Z  WARN symbolica::state: Imported symbol symbolica::γ was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553545Z  WARN symbolica::state: Imported symbol symbolica::gamma was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553557Z  WARN symbolica::state: Imported symbol symbolica::polygamma was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553567Z  WARN symbolica::state: Imported symbol symbolica::polylog was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553576Z  WARN symbolica::state: Imported symbol symbolica::dzeta was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553592Z  WARN symbolica::state: Imported symbol symbolica::zeta was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553602Z  WARN symbolica::state: Imported symbol symbolica::erf was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553612Z  WARN symbolica::state: Imported symbol symbolica::bessel_j was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553622Z  WARN symbolica::state: Imported symbol symbolica::bessel_y was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553638Z  WARN symbolica::state: Imported symbol symbolica::bessel_i was previously defined with user-defined functions, but the imported version does not have any.
+2026-10-06T00:00:39.553647Z  WARN symbolica::state: Imported symbol symbolica::bessel_k was previously defined with user-defined functions, but the imported version does not have any.
+test rational_rename ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

@@ -1,0 +1,35 @@
+[
+  {
+    "mode": "control",
+    "command": [
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target/debug/export-registry-race-patched",
+      "control",
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-control.bin"
+    ],
+    "exit": 0,
+    "seconds": 0.009867310989648104,
+    "log": "mode=control bytes=51 export=Ok callback=false\nimport=Ok atom=1 trailing=0 equal=true\npost_registration_control=Ok bytes=51 atom=1 trailing=0\n"
+  },
+  {
+    "mode": "finite",
+    "command": [
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target/debug/export-registry-race-patched",
+      "finite",
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-finite.bin"
+    ],
+    "exit": 0,
+    "seconds": 0.005477562081068754,
+    "log": "registered finite state after count at offset 15\nmode=finite bytes=51 export=Ok callback=true\nimport=Ok atom=1 trailing=0 equal=true\npost_registration_control=Ok bytes=59 atom=1 trailing=0\n"
+  },
+  {
+    "mode": "polynomial",
+    "command": [
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-target/debug/export-registry-race-patched",
+      "polynomial",
+      "/common/dev/amflow/target/mre/symbolica-export-registry-race/patched-polynomial.bin"
+    ],
+    "exit": 0,
+    "seconds": 0.009859360754489899,
+    "log": "registered polynomial state after count at offset 23\nmode=polynomial bytes=51 export=Ok callback=true\nimport=Ok atom=1 trailing=0 equal=true\npost_registration_control=Ok bytes=130 atom=1 trailing=0\n"
+  }
+]
