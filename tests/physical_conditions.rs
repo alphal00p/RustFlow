@@ -121,8 +121,9 @@ fn conditions_are_part_of_persistent_identity_and_old_schema_is_rejected() {
     let path = directory.join("physical-boundaries.bin");
     let mut bytes = std::fs::read(&path).unwrap();
     let version = b"AMFLOW-BOUNDARIES\0".len();
-    assert_eq!(bytes[version], 5);
-    for old_version in [1, 2, 3, 4] {
+    let current_version = bytes[version];
+    assert!(current_version >= 6);
+    for old_version in 1..current_version {
         bytes[version] = old_version;
         std::fs::write(&path, &bytes).unwrap();
         assert!(matches!(

@@ -1,0 +1,566 @@
+{
+  "scope": "Immutable exact algebraic preparation reuse across checked supplied-boundary physical gg\u2192hg profiles; fresh numerical source specialization, refinement and uncertainty propagation unchanged. No automatic-boundary, full-amplitude timing or upstream-parity claim.",
+  "base_commit": "3d29512a0021d94e50dc4daf07854c99040c7267",
+  "compiler": "rustc 1.97.1 (8bab26f4f 2026-07-14), built from source tarball",
+  "native_port_source_digest": "234279bd68bcb24ebc7731e5256f708779c6b8a6bbe51a1450ac039290f3857f",
+  "native_dependency_source_digest": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+  "python_dependency_source_digest": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+  "rustred_source_digest": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+  "symbolica": {
+    "remote": "https://github.com/symbolica-dev/symbolica",
+    "branch": "community",
+    "commit": "c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+    "local_changes_required": false
+  },
+  "fixture": {
+    "path": "fixtures/gg-hg/full-systems.json",
+    "sha256": "b643716de4212e8cc3ddcaf4fb5d13eb67f993ac3ae8563c291c16ae284cbb86"
+  },
+  "projection_fixture": {
+    "path": "fixtures/gg-hg/projections.json",
+    "sha256": "6547c9c29fa4861bccd7d61a15f0566a6bf1175d9be0eb4a82e22f8291b772aa"
+  },
+  "changed_source": [
+    {
+      "path": "src/algebraic.rs",
+      "sha256": "344ac291c246cc5ec5ab6780d2eb057dd98820e2140a308fec2ace8802cbbbc5"
+    },
+    {
+      "path": "src/algebraic/prepared.rs",
+      "sha256": "60bebbf9d8ae6bf2b9fed08f9ae1da90f8bc9f46acf1c1cdc6345945ad131886"
+    },
+    {
+      "path": "src/physical_transport.rs",
+      "sha256": "952b8a8d428823a0c00462cbb365af74df848c340ef6bd115ab994d804fe230a"
+    }
+  ],
+  "binaries": {
+    "baseline": {
+      "path": "target/root-profile-balanced/native",
+      "sha256": "8633cdf8c5f1936758b86ee6f5bbe52001ce3b5d60cec94fa3e7852940c4e545"
+    },
+    "prepared": {
+      "path": "target/prepared-profile/native",
+      "sha256": "0c80df6900bf07bb4933604299f7aa12a29bb821354217414e653079c2bc1667"
+    },
+    "full_gg_hg": {
+      "path": "target/release/deps/gg_hg-8565606d224bec00",
+      "sha256": "ec515c4a883e2520ed5381fa8b1b9439bab568a1656105daf7bacd752b1b0ce3"
+    }
+  },
+  "comparison": {
+    "scope": "Three alternating baseline/prepared frozen binary pairs on CPU35; shared cluster host, other workloads present; not statistical proof or upstream parity. Each binary evaluates both systems and retains all source/refinement/uncertainty checks.",
+    "cases": [
+      {
+        "label": "W-Planar_EW1-2",
+        "all_non_timing_outputs_equal": true,
+        "median_timings": {
+          "exact_hit": {
+            "baseline_seconds": 0.002182615,
+            "prepared_seconds": 0.002186194,
+            "paired_speed_ratios": [
+              0.9926956007595483,
+              1.0510480771605815,
+              1.005815785236027
+            ],
+            "median_speed_ratio": 0.9983629083237812
+          },
+          "fixed_integration": {
+            "baseline_seconds": 1.039620672,
+            "prepared_seconds": 1.038449105,
+            "paired_speed_ratios": [
+              0.9753007433436637,
+              0.9955010848665911,
+              1.0011281891373964
+            ],
+            "median_speed_ratio": 1.0011281891373964
+          },
+          "independent_direct_second_validation": {
+            "baseline_seconds": 1.026629922,
+            "prepared_seconds": 1.06544761,
+            "paired_speed_ratios": [
+              1.0141921421638387,
+              0.9614274896163124,
+              0.9801010946436374
+            ],
+            "median_speed_ratio": 0.9635667792243673
+          },
+          "load": {
+            "baseline_seconds": 0.123938899,
+            "prepared_seconds": 0.123836029,
+            "paired_speed_ratios": [
+              1.0008306952413664,
+              0.9927710728334038,
+              0.9999022608540552
+            ],
+            "median_speed_ratio": 1.0008306952413664
+          },
+          "nearby_reuse": {
+            "baseline_seconds": 5.444995717,
+            "prepared_seconds": 4.875269414,
+            "paired_speed_ratios": [
+              1.1579395571019822,
+              1.1068935983949737,
+              1.1439334067641538
+            ],
+            "median_speed_ratio": 1.1168604757234448
+          },
+          "public_checked_cold": {
+            "baseline_seconds": 5.4587873909999995,
+            "prepared_seconds": 4.870580095,
+            "paired_speed_ratios": [
+              1.1361317201127714,
+              1.120767400294646,
+              1.1309921848402331
+            ],
+            "median_speed_ratio": 1.120767400294646
+          },
+          "save": {
+            "baseline_seconds": 0.030740592,
+            "prepared_seconds": 0.032962098,
+            "paired_speed_ratios": [
+              0.9581217494104896,
+              0.8930018709259973,
+              1.0253035985895642
+            ],
+            "median_speed_ratio": 0.9326042292574944
+          },
+          "source_cache_insert": {
+            "baseline_seconds": 0.001059922,
+            "prepared_seconds": 0.001048313,
+            "paired_speed_ratios": [
+              1.0236394150498511,
+              1.0033731421440188,
+              1.0110739826750217
+            ],
+            "median_speed_ratio": 1.0110739826750217
+          },
+          "standalone_endpoint_cache_insert": {
+            "baseline_seconds": 0.000842592,
+            "prepared_seconds": 0.000841222,
+            "paired_speed_ratios": [
+              1.002055343298202,
+              0.9695726808402866,
+              1.0114518661500123
+            ],
+            "median_speed_ratio": 1.0016285831801832
+          }
+        },
+        "samples": [
+          {
+            "baseline": {
+              "exact_hit": 0.002182615,
+              "fixed_integration": 1.048225201,
+              "independent_direct_second_validation": 1.087183934,
+              "load": 0.123938899,
+              "nearby_reuse": 5.645267306,
+              "public_checked_cold": 5.5873464550000005,
+              "save": 0.031581703,
+              "source_cache_insert": 0.001183883,
+              "standalone_endpoint_cache_insert": 0.000842951
+            },
+            "prepared": {
+              "exact_hit": 0.002198675,
+              "fixed_integration": 1.074771252,
+              "independent_direct_second_validation": 1.071970378,
+              "load": 0.123836029,
+              "nearby_reuse": 4.875269414,
+              "public_checked_cold": 4.91786855,
+              "save": 0.032962098,
+              "source_cache_insert": 0.001156543,
+              "standalone_endpoint_cache_insert": 0.000841222
+            }
+          },
+          {
+            "baseline": {
+              "exact_hit": 0.002297795,
+              "fixed_integration": 1.029884882,
+              "independent_direct_second_validation": 1.024350621,
+              "load": 0.124768644,
+              "nearby_reuse": 5.404593328,
+              "public_checked_cold": 5.4587873909999995,
+              "save": 0.030528412,
+              "source_cache_insert": 0.001050032,
+              "standalone_endpoint_cache_insert": 0.000826902
+            },
+            "prepared": {
+              "exact_hit": 0.002186194,
+              "fixed_integration": 1.034539186,
+              "independent_direct_second_validation": 1.06544761,
+              "load": 0.125677155,
+              "nearby_reuse": 4.882667436,
+              "public_checked_cold": 4.870580095,
+              "save": 0.03418628,
+              "source_cache_insert": 0.001046502,
+              "standalone_endpoint_cache_insert": 0.000852852
+            }
+          },
+          {
+            "baseline": {
+              "exact_hit": 0.002154905,
+              "fixed_integration": 1.039620672,
+              "independent_direct_second_validation": 1.026629922,
+              "load": 0.119899293,
+              "nearby_reuse": 5.444995717,
+              "public_checked_cold": 5.419847024,
+              "save": 0.030740592,
+              "source_cache_insert": 0.001059922,
+              "standalone_endpoint_cache_insert": 0.000842592
+            },
+            "prepared": {
+              "exact_hit": 0.002142445,
+              "fixed_integration": 1.038449105,
+              "independent_direct_second_validation": 1.047473498,
+              "load": 0.119911013,
+              "nearby_reuse": 4.759888718,
+              "public_checked_cold": 4.792117131,
+              "save": 0.029981941,
+              "source_cache_insert": 0.001048313,
+              "standalone_endpoint_cache_insert": 0.000833052
+            }
+          }
+        ]
+      },
+      {
+        "label": "W-NP_EW1-2",
+        "all_non_timing_outputs_equal": true,
+        "median_timings": {
+          "exact_hit": {
+            "baseline_seconds": 0.018281203,
+            "prepared_seconds": 0.018482283,
+            "paired_speed_ratios": [
+              0.9891203916745567,
+              0.9946060057357657,
+              1.0045802260354237
+            ],
+            "median_speed_ratio": 0.9891203916745567
+          },
+          "fixed_integration": {
+            "baseline_seconds": 2.487553922,
+            "prepared_seconds": 2.587384116,
+            "paired_speed_ratios": [
+              0.9923671909099716,
+              0.9593574226386296,
+              0.9981876419235061
+            ],
+            "median_speed_ratio": 0.9614165545105325
+          },
+          "independent_direct_second_validation": {
+            "baseline_seconds": 2.520532869,
+            "prepared_seconds": 2.511106519,
+            "paired_speed_ratios": [
+              1.0207759987015048,
+              0.9996580608319722,
+              1.0037538630594427
+            ],
+            "median_speed_ratio": 1.0037538630594427
+          },
+          "load": {
+            "baseline_seconds": 0.547232327,
+            "prepared_seconds": 0.552570288,
+            "paired_speed_ratios": [
+              0.986973936476169,
+              0.9943310687019784,
+              0.9935327915987122
+            ],
+            "median_speed_ratio": 0.990339761083933
+          },
+          "nearby_reuse": {
+            "baseline_seconds": 14.902701785,
+            "prepared_seconds": 12.736510408000001,
+            "paired_speed_ratios": [
+              1.2082350017422447,
+              1.1558164639135504,
+              1.1723975355796625
+            ],
+            "median_speed_ratio": 1.1700773059188474
+          },
+          "public_checked_cold": {
+            "baseline_seconds": 14.833457384,
+            "prepared_seconds": 12.796911013999999,
+            "paired_speed_ratios": [
+              1.1894515815064808,
+              1.157963767099015,
+              1.187341966727036
+            ],
+            "median_speed_ratio": 1.159143590806562
+          },
+          "save": {
+            "baseline_seconds": 0.10981364,
+            "prepared_seconds": 0.110026609,
+            "paired_speed_ratios": [
+              0.9971438580170071,
+              0.980621187734687,
+              1.014655637836658
+            ],
+            "median_speed_ratio": 0.9980643864067464
+          },
+          "source_cache_insert": {
+            "baseline_seconds": 0.003218527,
+            "prepared_seconds": 0.003262648,
+            "paired_speed_ratios": [
+              0.9835075562411373,
+              0.9820234974781221,
+              0.9913720400007638
+            ],
+            "median_speed_ratio": 0.9864769352991803
+          },
+          "standalone_endpoint_cache_insert": {
+            "baseline_seconds": 0.003090087,
+            "prepared_seconds": 0.003175897,
+            "paired_speed_ratios": [
+              0.9790280199482476,
+              0.9729808617848753,
+              1.0045389320876126
+            ],
+            "median_speed_ratio": 0.9729808617848753
+          }
+        },
+        "samples": [
+          {
+            "baseline": {
+              "exact_hit": 0.018281203,
+              "fixed_integration": 2.567635107,
+              "independent_direct_second_validation": 2.647282537,
+              "load": 0.547232327,
+              "nearby_reuse": 15.388697675,
+              "public_checked_cold": 15.221306044,
+              "save": 0.110700159,
+              "source_cache_insert": 0.003254218,
+              "standalone_endpoint_cache_insert": 0.003131987
+            },
+            "prepared": {
+              "exact_hit": 0.018482283,
+              "fixed_integration": 2.587384116,
+              "independent_direct_second_validation": 2.59340202,
+              "load": 0.554454689,
+              "nearby_reuse": 12.736510408000001,
+              "public_checked_cold": 12.796911013999999,
+              "save": 0.11101724,
+              "source_cache_insert": 0.003308788,
+              "standalone_endpoint_cache_insert": 0.003199078
+            }
+          },
+          {
+            "baseline": {
+              "exact_hit": 0.018581303,
+              "fixed_integration": 2.486215143,
+              "independent_direct_second_validation": 2.5084918050000002,
+              "load": 0.549437805,
+              "nearby_reuse": 14.902701785,
+              "public_checked_cold": 14.833457384,
+              "save": 0.107894424,
+              "source_cache_insert": 0.003203997,
+              "standalone_endpoint_cache_insert": 0.003090087
+            },
+            "prepared": {
+              "exact_hit": 0.018682074,
+              "fixed_integration": 2.591542093,
+              "independent_direct_second_validation": 2.50934985,
+              "load": 0.552570288,
+              "nearby_reuse": 12.893657644,
+              "public_checked_cold": 12.809949504,
+              "save": 0.110026609,
+              "source_cache_insert": 0.003262648,
+              "standalone_endpoint_cache_insert": 0.003175897
+            }
+          },
+          {
+            "baseline": {
+              "exact_hit": 0.018208763,
+              "fixed_integration": 2.487553922,
+              "independent_direct_second_validation": 2.520532869,
+              "load": 0.540498527,
+              "nearby_reuse": 14.787608574,
+              "public_checked_cold": 14.680108156,
+              "save": 0.10981364,
+              "source_cache_insert": 0.003218527,
+              "standalone_endpoint_cache_insert": 0.003085147
+            },
+            "prepared": {
+              "exact_hit": 0.018125743,
+              "fixed_integration": 2.492070446,
+              "independent_direct_second_validation": 2.511106519,
+              "load": 0.544016797,
+              "nearby_reuse": 12.613135157,
+              "public_checked_cold": 12.36384173,
+              "save": 0.108227497,
+              "source_cache_insert": 0.003246538,
+              "standalone_endpoint_cache_insert": 0.003071207
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "harness_metadata_correction": "ROOT_PROFILE_REPEATS=1 controls actual runs; each of six invocations has one run per system. settings.repeats is a stale hardcoded 3; compare actual runs arrays and driver records.",
+  "validation": {
+    "affected_integration_passed": 120,
+    "affected_integration_targets": [
+      {
+        "binary": "tests/algebraic.rs (target/release/deps/algebraic-a6ab50e88d56ea71)",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/algebraic_cache.rs (target/release/deps/algebraic_cache-c4453cf62fc6de21)",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/algebraic_endpoints.rs (target/release/deps/algebraic_endpoints-1fddc4aa165dca18)",
+        "passed": 11,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/algebraic_preparation.rs (target/release/deps/algebraic_preparation-e2cba62cd9110674)",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/canonical_algebraic.rs (target/release/deps/canonical_algebraic-ddc51ac693eb50ad)",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/complex_ode.rs (target/release/deps/complex_ode-b8c7b790d55895fb)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/conditioning.rs (target/release/deps/conditioning-31388e38f668b02c)",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/contour_endpoints.rs (target/release/deps/contour_endpoints-61e036e71dac4497)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/diffexp.rs (target/release/deps/diffexp-eb10693d1c394ff3)",
+        "passed": 5,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/epsilon_algebraic.rs (target/release/deps/epsilon_algebraic-c372004b3a0ac8ff)",
+        "passed": 7,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/fivepoint_prescribed_cache.rs (target/release/deps/fivepoint_prescribed_cache-70e9ab6bf284b0b8)",
+        "passed": 0,
+        "failed": 0,
+        "ignored": 1,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/gg_hg.rs (target/release/deps/gg_hg-8565606d224bec00)",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 1,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/gg_hg_amplitude.rs (target/release/deps/gg_hg_amplitude-6c436905d7c86868)",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/mobius.rs (target/release/deps/mobius-be6eb5e00cf79c76)",
+        "passed": 8,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/mobius_cache.rs (target/release/deps/mobius_cache-bfdad7e0ed168332)",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/pade.rs (target/release/deps/pade-91bf586b1af5f0fd)",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-integration-schema-failure.log"
+      },
+      {
+        "binary": "tests/physical_conditions.rs (target/release/deps/physical_conditions-315c12c50cad9b02)",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-physical-conditions-final.log"
+      },
+      {
+        "binary": "tests/physical_transport.rs (target/release/deps/physical_transport-0b2938655ddf6c66)",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-remaining-tests.log"
+      },
+      {
+        "binary": "tests/prescribed_cache.rs (target/release/deps/prescribed_cache-40cf6a90b743363b)",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-remaining-tests.log"
+      },
+      {
+        "binary": "tests/supplied_singular_endpoints.rs (target/release/deps/supplied_singular_endpoints-59b845c912afab7e)",
+        "passed": 19,
+        "failed": 0,
+        "ignored": 0,
+        "log": "target/prepared-remaining-tests.log"
+      }
+    ],
+    "full_gg_hg": {
+      "passed": 1,
+      "seconds": 676.49,
+      "configurations": 16,
+      "reference_coefficients": 4360,
+      "precanonical_projection_rows": 4376,
+      "w_z_form_factor_checks": 8,
+      "uniform_20_significant_digits_claimed": false
+    },
+    "native_clippy": "passed, release all-targets -D warnings",
+    "python_stubgen_clippy": "passed, release all-targets -D warnings",
+    "fmt": "passed"
+  },
+  "retained_failures": [
+    "Test-only initial convenience-method compile error; fixed to use native Float sqrt.",
+    "Inherited physical_conditions expected cache schema 5; actual base schema 6; corrected to require version >=6 and reject every older version (1\u20135 on this base). No serializer change.",
+    "A remaining-test dependency build accidentally inherited publication-native target; stopped before own crate compilation, then rerun successfully in private target. Not validation evidence."
+  ],
+  "evidence_archive": {
+    "path": "evidence.tar.gz",
+    "sha256": "16c1872f5a96b6a7cab781ea56e772fd05525e39994f7199cc8f28d984c0fa05",
+    "bytes": 1489000,
+    "entries": 150
+  },
+  "independent_source_review": "Parent and native_cut_interfaces agent reviewed exact snapshot extraction, original domain guards and fresh precision compilation; no blocker."
+}
