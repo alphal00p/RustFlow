@@ -1,0 +1,109 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-06T04:02:17.216645+00:00",
+  "status": "passed",
+  "tested_commit": "fdabb75b944542bbb8ec611caaed25f77e6d46ca",
+  "scope": "Embedded general registered-root Python connection and generated stubs; no new numerical algorithm, rebuilt community wheel or full-amplitude acceptance.",
+  "execution": {
+    "session": 96681,
+    "exit_code": 0,
+    "tool_chunk": "0568c0",
+    "sequence": "Formatting, strict Clippy, seven release targets and post-run source verification under set -e."
+  },
+  "source_files_verified_before_after_and_against_commit": 264,
+  "release_tests": {
+    "command": "cargo test --locked --release --features python_stubgen --test python_algebraic_transport --test python_prescribed_transport --test python_cut_interfaces --test algebraic_cache --test canonical_cache --test supplied_singular_endpoints --test physical_transport -- --test-threads=8",
+    "passed": 43,
+    "failed": 0,
+    "ignored": 0,
+    "targets": [
+      {
+        "target": "Running tests/algebraic_cache.rs (/common/dev/amflow/target/release/deps/algebraic_cache-5ed8c0d81f8ddbbc)",
+        "passed": 10,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/canonical_cache.rs (/common/dev/amflow/target/release/deps/canonical_cache-acb8ad631c405fcf)",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/physical_transport.rs (/common/dev/amflow/target/release/deps/physical_transport-589817d75c532205)",
+        "passed": 4,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/python_algebraic_transport.rs (/common/dev/amflow/target/release/deps/python_algebraic_transport-1485f4739f7fdc0a)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/python_cut_interfaces.rs (/common/dev/amflow/target/release/deps/python_cut_interfaces-0c93b36f06af37f0)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/python_prescribed_transport.rs (/common/dev/amflow/target/release/deps/python_prescribed_transport-476848dd320f7ab3)",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "Running tests/supplied_singular_endpoints.rs (/common/dev/amflow/target/release/deps/supplied_singular_endpoints-68b6cf9865f6b0f2)",
+        "passed": 19,
+        "failed": 0,
+        "ignored": 0
+      }
+    ]
+  },
+  "checks": {
+    "format": {
+      "command": "cargo fmt --all -- --check",
+      "exit_code": 0
+    },
+    "clippy": {
+      "command": "cargo clippy --locked --release --all-targets --features python_stubgen -- -D warnings",
+      "exit_code": 0
+    }
+  },
+  "compiled_source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "95f377c892a5cbf56c441b37895c9d1b2f7bcbc9e8a9521b5b38336394d6d9a5"
+  },
+  "library": {
+    "original": "/common/dev/amflow/target/release/deps/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "archive": "/common/dev/amflow/target/python-algebraic-release-fdabb75/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "sha256": "29bcd6c6ae4c11e39faa4beae9d08fdd295ca3ed424ab72761a45b6635bb7e09"
+  },
+  "coverage": [
+    "Two physical variables and a coupled dense matrix with epsilon-independent entries; analytic epsilon coefficients through epsilon squared on both root sheets.",
+    "Two registered roots and a quotient denominator, with retained original norm-domain rejection.",
+    "Positive/negative prescribed threshold paths, exact hits, wrong or missing root germs, cancellation and unchanged banks on rejection.",
+    "Binary restart and nearby-source selection preserving input uncertainty; ordinary and prescribed finite endpoints retain separate terminal records.",
+    "Empty root declarations preserve legacy rational identity; malformed native declarations fail through existing typed errors.",
+    "Generated dense-constructor/property stubs use native Expression types; existing canonical, prescribed and cut Python interfaces remain checked."
+  ],
+  "accuracy_scope": "Analytic comparisons require 20 scaled decimal digits using 100-digit native test arithmetic. Supplied numerical evidence is capped at 60 digits; transport cannot promote that evidence to working precision.",
+  "reuse_audit": "Independent read-only review found no blocker. Binding dispatches to existing AlgebraicKinematicSystem/RustFlow owners; one shared official Symbolica/FeynKit/RustRed graph, no local dependency patch.",
+  "limits": [
+    "Native epsilon-regularity, root/radicand and conservative source-norm restrictions remain.",
+    "General epsilon-singular basis transforms and constrained registered-root endpoint sectors remain separate work.",
+    "No global forward-error certificate, end-to-end performance comparison or fresh gg-to-Hg boundary acceptance is implied.",
+    "Publication extension and scientific banks remain unchanged."
+  ],
+  "artifact_sha256": {
+    "clippy-initial.log.gz": "ee469946fbaf4b4bf25751b3c99bd5a8716314ecb2a8fe93cde9fa358b306f10",
+    "dependency-ownership.json": "12b434db1389462efcbf212d422c14728bdcdce8a286bfd5027366db0b8ad6af",
+    "final-clippy.log.gz": "11874eafec2ce523b5cfbd1335703e1d50021bc8f611d701739f902e05570982",
+    "final-fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "final-tests.log.gz": "eaf3daf058e37ad6fead6b465ae60558d745a91ba268487f7fc8b4e48b5f5e72",
+    "source-before.json": "de7cfc8b813ffa801a0af4fe94a642afcb5eff217cf5b58f2f6cb5e5f52f3fe7",
+    "tests-initial.log.gz": "98b6498257c4754b483987d1681951c6bbb321aa333f89402e446a209b63eb65"
+  }
+}
