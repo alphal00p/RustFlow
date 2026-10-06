@@ -1,0 +1,136 @@
+{
+  "schema": 1,
+  "recorded_utc": "2026-10-06T03:38:29.885514+00:00",
+  "status": "passed",
+  "tested_commit": "c47ee796994a9494b95e5d4299c4493f50f7eb03",
+  "scope": "Embedded Python API and generated stubs with native contour/cache/endpoint regressions; no rebuilt community publication wheel or full-amplitude rerun.",
+  "source_files_verified_before_after_and_against_commit": 254,
+  "release_tests": {
+    "passed": 58,
+    "failed": 0,
+    "ignored": 0,
+    "runs": [
+      {
+        "log": "cache-hit-fix-tests.log.gz",
+        "session": 76710,
+        "exit_code": 0,
+        "tool_chunk": "62f40f",
+        "targets": [
+          {
+            "target": "Running tests/prescribed_cache.rs (/common/dev/amflow/target/release/deps/prescribed_cache-a73394a27d9780ec)",
+            "passed": 7,
+            "failed": 0,
+            "ignored": 0
+          },
+          {
+            "target": "Running tests/python_prescribed_transport.rs (/common/dev/amflow/target/release/deps/python_prescribed_transport-476848dd320f7ab3)",
+            "passed": 2,
+            "failed": 0,
+            "ignored": 0
+          }
+        ]
+      },
+      {
+        "log": "final-related-tests.log.gz",
+        "session": 13856,
+        "exit_code": 0,
+        "tool_chunk": "399df2",
+        "targets": [
+          {
+            "target": "Running tests/algebraic_cache.rs (/common/dev/amflow/target/release/deps/algebraic_cache-5ed8c0d81f8ddbbc)",
+            "passed": 10,
+            "failed": 0,
+            "ignored": 0
+          },
+          {
+            "target": "Running tests/physical_transport.rs (/common/dev/amflow/target/release/deps/physical_transport-589817d75c532205)",
+            "passed": 4,
+            "failed": 0,
+            "ignored": 0
+          },
+          {
+            "target": "Running tests/precision_cache_fallback.rs (/common/dev/amflow/target/release/deps/precision_cache_fallback-d2f333dde3d53ff0)",
+            "passed": 4,
+            "failed": 0,
+            "ignored": 0
+          },
+          {
+            "target": "Running tests/supplied_singular_endpoints.rs (/common/dev/amflow/target/release/deps/supplied_singular_endpoints-68b6cf9865f6b0f2)",
+            "passed": 19,
+            "failed": 0,
+            "ignored": 0
+          },
+          {
+            "target": "Running tests/transport_cache.rs (/common/dev/amflow/target/release/deps/transport_cache-1b93bbfbe5052ab9)",
+            "passed": 12,
+            "failed": 0,
+            "ignored": 0
+          }
+        ]
+      }
+    ],
+    "counting_method": "Last libtest summary per Cargo test binary, seven targets; no nested child-process summaries."
+  },
+  "checks": {
+    "format": {
+      "command": "cargo fmt --all -- --check",
+      "session": 6388,
+      "exit_code": 0
+    },
+    "clippy": {
+      "command": "cargo clippy --locked --release --all-targets --features python_stubgen -- -D warnings",
+      "session": 13856,
+      "exit_code": 0
+    }
+  },
+  "compiled_source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "36fac5b46982345f58306aaabfabcfd85f936f05536a36057831004611ac1074"
+  },
+  "library": {
+    "original": "/common/dev/amflow/target/release/deps/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "archive": "/common/dev/amflow/target/python-prescribed-release-c47ee79/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "sha256": "3c70b3a5969f16f3470b71fd10003bd2937d96dce646b8889062f7fa9d8cdc01"
+  },
+  "coverage": [
+    "Rational and canonical registered-root prescribed transport; exact native expression and arbitrary-precision object interoperability.",
+    "Analytic positive/negative logarithm continuation and square-root germs at 20 digits; explicit side/domain identity isolation.",
+    "Prescribed endpoint matching, separate final admission, binary reload and terminal/regular cache merge.",
+    "Precancelled computation and denied/inconsistent routes preserve cache; existing regular cache and endpoint suites pass.",
+    "Exact compatible hits bypass new route admission while retaining source policy, coordinate equality and identical germ; opposite-sheet constant paths cannot mask another source.",
+    "Single shared native Symbolica/FeynKit/RustRed graph; Python adds no contour/series/graph/tensor implementation."
+  ],
+  "failed_trials": [
+    {
+      "log": "initial-release-tests.log.gz",
+      "issue": "Tests wrongly required exactly the minimum verified digits and a fully qualified Expression spelling in stubs; numerical/stub contracts allow stronger evidence and imported native type names."
+    },
+    {
+      "log": "diagnostic-tests.log.gz",
+      "issue": "Diagnostic reproduction of the two assertions; preserved generated stubs and actual evidence."
+    },
+    {
+      "log": "corrected-python-tests.log.gz",
+      "issue": "Corrected assertions exposed an exact prescribed cache hit invoking a new route admission. Native GuardedCost fixed, coordinate comparison shared and native source-policy/opposite-germ regression added."
+    }
+  ],
+  "review": "Independent read-only review of native constant-route behavior and Symbolica ownership found no blocker; no local Symbolica patch.",
+  "limits": [
+    "Contour declarations do not infer global monodromy; callers explicitly admit nonconstant prescribed paths and endpoint approaches.",
+    "Endpoint limits are finite coefficientwise; exact correlated-sector and dimensional selection work remains separate.",
+    "Accuracy remains propagated input/refinement evidence and local solver checks, not a global forward-error certificate.",
+    "Community publication extension, numerical banks and completed gg-to-Hg acceptance remain unchanged."
+  ],
+  "artifact_sha256": {
+    "cache-hit-fix-tests.log.gz": "c78b35203d2a9fafc5b33dd9c833ca2beada38cb441dedbe456bc295ba3b8340",
+    "corrected-python-tests.log.gz": "ea8ed049e112b094bf17b0a6b6fe8060f13f594f28fe7e950a547c3b16330b06",
+    "dependency-ownership.json": "12b434db1389462efcbf212d422c14728bdcdce8a286bfd5027366db0b8ad6af",
+    "diagnostic-tests.log.gz": "628df39a04f831cddd4bd3e9d23734c74e451b932fc8d948ab1662d34211e110",
+    "final-clippy.log.gz": "be7579ef3091a657b04fb81ed5d80098d6ddde58c0385babed2b81c5a2fce2fd",
+    "final-fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "final-related-tests.log.gz": "f510641fc586b061fad2f681a456c814ba79e30a065076cefb966a2488d0a28b",
+    "initial-release-tests.log.gz": "aac9b3a3dedf145b4dfa582e5f83a27685ab40905bb6dab16625e83be177b2db",
+    "source-before.json": "1a0bbb490caf1d2d68715094b0df3e18de2a40dae8b72975532062eed9e6d950"
+  }
+}
