@@ -153,6 +153,13 @@ impl PyEndpointResult {
 #[pymethods]
 impl PyEndpointResult {
     #[getter]
+    fn constraints(&self) -> Option<PyEndpointConstraints> {
+        self.boundary
+            .constraints
+            .clone()
+            .map(|constraints| PyEndpointConstraints { constraints })
+    }
+    #[getter]
     fn route(&self) -> PyEndpointRoute {
         PyEndpointRoute {
             chart: self.boundary.chart.clone(),
