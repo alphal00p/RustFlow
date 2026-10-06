@@ -144,10 +144,15 @@ pub struct EndpointBoundary {
     pub coefficients: Vec<Vec<C>>,
     pub accuracy: BoundaryAccuracy,
     pub matching_boundary: CachedBoundary,
+    /// Explicit asserted physical relations, separate from numerical evidence.
+    pub constraints: Option<EndpointConstraints>,
 }
 impl EndpointBoundary {
     pub fn validate(&self) -> Result<()> {
         self.chart.validate(&self.identity)?;
+        if let Some(constraints) = &self.constraints {
+            constraints.preflight(&self.identity, self.range, &RunContext::default())?;
+        }
         self.matching_boundary.validate()?;
         if self.matching_boundary.identity.key() != self.identity.key()
             || self.matching_boundary.point.key()? != self.chart.matching_point()?.key()?
@@ -180,13 +185,21 @@ impl EndpointBoundary {
     }
     pub(crate) fn key(&self) -> Result<String> {
         Ok(format!(
-            "{}:{}:{}",
+            "{}:{}:{}:{}",
             self.chart.key(&self.identity)?,
             self.range.leading,
-            self.range.last
+            self.range.last,
+            self.constraints
+                .as_ref()
+                .map(EndpointConstraints::key)
+                .transpose()?
+                .unwrap_or_default(),
         ))
     }
     pub(crate) fn truncated(&self, range: EpsilonRange) -> Result<Self> {
+        if self.constraints.is_some() && range != self.range {
+            return Err(Error::Unsupported("constrained endpoint evidence requires the exact epsilon range; dropping higher constraints requires a separate projection proof".into()));
+        }
         let count = EpsilonRange::new(range.leading, range.last)?;
         if count.leading != self.range.leading || count.last > self.range.last {
             return Err(Error::InvalidInput(
@@ -229,6 +242,35 @@ pub struct EndpointRequest {
     pub range: EpsilonRange,
     pub options: EndpointOptions,
 }
+
+/// Exact asserted physical relations and bounded exact coefficient work.
+/// The relations may correlate epsilon coefficients in flattened order
+/// `epsilon_offset * physical_dimension + component`.
+#[derive(Clone, Debug)]
+pub struct EndpointConstraints {
+    pub asymptotic: crate::asymptotic::ExactAsymptoticConstraints,
+    pub limits: crate::frobenius::ExactFrobeniusLimits,
+}
+impl EndpointConstraints {
+    pub(crate) fn preflight(
+        &self,
+        identity: &BoundaryIdentity,
+        range: EpsilonRange,
+        context: &RunContext,
+    ) -> Result<()> {
+        EpsilonRange::new(range.leading, range.last)?;
+        let count = usize::try_from(i64::from(range.last) - i64::from(range.leading) + 1)
+            .map_err(|_| Error::Limit("constrained endpoint epsilon count overflow".into()))?;
+        let dimension = identity
+            .dimension()
+            .checked_mul(count)
+            .ok_or_else(|| Error::Limit("constrained endpoint dimension overflow".into()))?;
+        self.asymptotic.validate(dimension, &self.limits, context)
+    }
+    pub(crate) fn key(&self) -> Result<String> {
+        self.asymptotic.key()
+    }
+}
 impl EndpointRequest {
     /// Bound the epsilon hierarchy before pulling back or allocating its
     /// coefficient matrices. The later root lift enforces this same cap as
@@ -257,6 +299,7 @@ pub(crate) struct PreparedEndpoint {
     request: EndpointRequest,
     radius: Rational,
     guard_count: usize,
+    constraints: Option<EndpointConstraints>,
 }
 
 impl PreparedEndpoint {
@@ -264,6 +307,7 @@ impl PreparedEndpoint {
         mut source: crate::algebraic::AlgebraicSystem,
         identity: &BoundaryIdentity,
         request: &EndpointRequest,
+        constraints: Option<&EndpointConstraints>,
         options: &FlowOptions,
         context: &RunContext,
     ) -> Result<Self> {
@@ -286,13 +330,21 @@ impl PreparedEndpoint {
                 &BTreeSet::from([z]),
             )?,
         );
+        if let Some(constraints) = constraints {
+            constraints.preflight(identity, request.range, context)?;
+            if !source.roots.is_empty() {
+                return Err(Error::Unsupported("constrained registered-root endpoints require an exact sheet-consistency proof".into()));
+            }
+        }
         let prepared = source.prepare_frobenius(request.options.max_lift_dimension, context)?;
-        prepared.rational_preparation().admit_endpoint_support(
-            identity.dimension().checked_mul(count).ok_or_else(|| {
-                Error::Limit("endpoint physical hierarchy dimension overflow".into())
-            })?,
-            context,
-        )?;
+        if constraints.is_none() {
+            prepared.rational_preparation().admit_endpoint_support(
+                identity.dimension().checked_mul(count).ok_or_else(|| {
+                    Error::Limit("endpoint physical hierarchy dimension overflow".into())
+                })?,
+                context,
+            )?;
+        }
         let p = Precision::decimal(options.digits + options.guard_digits)?;
         let mut guards = prepared.endpoint_guards(p)?;
         let rational = prepared.rational_preparation();
@@ -346,6 +398,7 @@ impl PreparedEndpoint {
             request: request.clone(),
             radius,
             guard_count: guards.len(),
+            constraints: constraints.cloned(),
         })
     }
 
@@ -362,7 +415,18 @@ impl PreparedEndpoint {
         matching.point = self.request.chart.matching_point()?;
         let size = matching.identity.dimension();
         let count = matching.coefficients.len();
-        let source = matching.coefficients.iter().flatten().collect::<Vec<_>>();
+        let mut source = matching
+            .coefficients
+            .iter()
+            .flatten()
+            .cloned()
+            .collect::<Vec<_>>();
+        if self.constraints.is_some() {
+            source.insert(
+                0,
+                Precision::decimal(options.digits + options.guard_digits)?.i(1),
+            );
+        }
         let seeds = self
             .request
             .chart
@@ -371,7 +435,7 @@ impl PreparedEndpoint {
             .map(RootGerm::seeds)
             .unwrap_or_default();
         let mut digits = options.digits + options.guard_digits;
-        let mut previous: Option<(Vec<Vec<C>>, Vec<C>)> = None;
+        let mut previous: Option<EndpointProfile> = None;
         let mut profiles = Vec::new();
         let mut last =
             "endpoint precision/order profiles did not establish requested accuracy".to_owned();
@@ -395,97 +459,163 @@ impl PreparedEndpoint {
             )]))
             .evaluate(p)?[&self.request.chart.path.parameter]
                 .clone();
-            let map = match self.prepared.endpoint_map(
-                &parameter,
-                &seeds,
-                p,
-                order,
-                self.request.chart.winding,
-                context,
-            ) {
-                Ok(Some(map)) => map,
-                Ok(None) => {
-                    last = "endpoint order does not reach every nonpositive exponent after the normalization's lowest Laurent shift".into();
-                    digits = digits
-                        .checked_add(20)
-                        .ok_or_else(|| Error::Limit("endpoint precision overflow".into()))?;
-                    continue;
+            let (map, reconstruction) = if let Some(constraints) = &self.constraints {
+                match self.prepared.constrained_endpoint_map(
+                    &parameter,
+                    p,
+                    order,
+                    self.request.chart.winding,
+                    &constraints.asymptotic,
+                    &constraints.limits,
+                    context,
+                ) {
+                    Ok(Some(map)) => (map.endpoint, Some(map.reconstruction)),
+                    Ok(None) => {
+                        last = "exact constrained endpoint prefix does not yet cover all requested or nonpositive coefficients".into();
+                        digits = digits
+                            .checked_add(20)
+                            .ok_or_else(|| Error::Limit("endpoint precision overflow".into()))?;
+                        continue;
+                    }
+                    Err(Error::InsufficientPrecision {
+                        minimum_bits,
+                        context: message,
+                    }) => {
+                        last = message;
+                        digits = Precision::refinement_digits(digits, minimum_bits)?;
+                        continue;
+                    }
+                    Err(error) => return Err(error),
                 }
-                Err(Error::InsufficientPrecision {
-                    minimum_bits,
-                    context: message,
-                }) => {
-                    last = message;
-                    digits = Precision::refinement_digits(digits, minimum_bits)?;
-                    continue;
-                }
-                Err(error) => return Err(error),
+            } else {
+                let map = match self.prepared.endpoint_map(
+                    &parameter,
+                    &seeds,
+                    p,
+                    order,
+                    self.request.chart.winding,
+                    context,
+                ) {
+                    Ok(Some(map)) => map,
+                    Ok(None) => {
+                        last = "endpoint order does not reach every nonpositive exponent after the normalization's lowest Laurent shift".into();
+                        digits = digits
+                            .checked_add(20)
+                            .ok_or_else(|| Error::Limit("endpoint precision overflow".into()))?;
+                        continue;
+                    }
+                    Err(Error::InsufficientPrecision {
+                        minimum_bits,
+                        context: message,
+                    }) => {
+                        last = message;
+                        digits = Precision::refinement_digits(digits, minimum_bits)?;
+                        continue;
+                    }
+                    Err(error) => return Err(error),
+                };
+                (map, None)
             };
             profiles.push((p.bits, order));
-            let values = map
-                .values
-                .iter()
-                .map(|row| {
-                    row.iter()
-                        .zip(&source)
-                        .fold(p.zero(), |sum, (a, b)| p.add(&sum, &p.mul(a, b)))
-                })
-                .collect::<Vec<_>>();
-            if let Some((prior_map, prior_values)) = &previous {
-                let input = matching
+            let values = contract(&map.values, &source, p);
+            let reconstruction_values = reconstruction
+                .as_ref()
+                .map(|map| contract(&map.values, &source, p));
+            if let Some(prior) = &previous {
+                let mut input = matching
                     .accuracy
                     .comparison_errors()
                     .iter()
                     .flatten()
-                    .zip(&source)
+                    .zip(matching.coefficients.iter().flatten())
                     .map(|(error, value)| {
-                        let norm = p.norm(value);
-                        let scale = if norm > p.real(1) { norm } else { p.real(1) };
+                        let scale = unit_scale(value, p);
                         let floor = p
                             .tolerance(matching.accuracy.verified_digits())
                             .mul_round(&scale, p.bits, Up);
                         error.add_round(&floor, p.bits, Up)
                     })
                     .collect::<Vec<_>>();
-                let errors = map
-                    .values
-                    .iter()
-                    .enumerate()
-                    .map(|(i, row)| {
-                        let mut error = p.norm(&p.sub(&values[i], &prior_values[i]));
-                        for (j, transfer) in row.iter().enumerate() {
-                            let disagreement = p.norm(&p.sub(transfer, &prior_map[i][j]));
-                            let arithmetic = &map.arithmetic_errors[i][j];
-                            let transfer_error = disagreement.add_round(arithmetic, p.bits, Up);
-                            let transfer_upper =
-                                p.norm(transfer).add_round(&transfer_error, p.bits, Up);
-                            error = error.add_round(
-                                &transfer_upper.mul_round(&input[j], p.bits, Up),
-                                p.bits,
-                                Up,
-                            );
-                            error = error.add_round(
-                                &transfer_error.mul_round(&p.norm(source[j]), p.bits, Up),
-                                p.bits,
-                                Up,
-                            );
-                        }
-                        // Contraction roundoff is independent of the stored-input
-                        // uncertainty. Sum magnitudes before cancellation.
-                        let magnitude = row.iter().zip(&source).fold(p.real(0), |sum, (a, b)| {
-                            sum.add_round(&p.norm(a).mul_round(&p.norm(b), p.bits, Up), p.bits, Up)
+                if self.constraints.is_some() {
+                    input.insert(0, p.real(0));
+                }
+                let errors = contraction_errors(
+                    &map,
+                    &prior.map,
+                    &values,
+                    &prior.values,
+                    &source,
+                    &input,
+                    p,
+                    digits,
+                );
+                if let (
+                    Some(reconstruction),
+                    Some(reconstructed),
+                    Some((prior_map, prior_values)),
+                ) = (
+                    &reconstruction,
+                    &reconstruction_values,
+                    &prior.reconstruction,
+                ) {
+                    let reconstruction_errors = contraction_errors(
+                        reconstruction,
+                        prior_map,
+                        reconstructed,
+                        prior_values,
+                        &source,
+                        &input,
+                        p,
+                        digits,
+                    );
+                    let numerical_errors = contraction_errors(
+                        reconstruction,
+                        prior_map,
+                        reconstructed,
+                        prior_values,
+                        &source,
+                        &vec![p.real(0); input.len()],
+                        p,
+                        digits,
+                    );
+                    let stable =
+                        reconstructed
+                            .iter()
+                            .zip(&numerical_errors)
+                            .all(|(value, error)| {
+                                *error
+                                    <= p.tolerance(options.digits).mul_round(
+                                        &unit_scale(value, p),
+                                        p.bits,
+                                        Up,
+                                    )
+                            });
+                    if !stable {
+                        last = "constrained matching reconstruction has not converged across independent profiles".into();
+                        previous = Some(EndpointProfile {
+                            map: map.values,
+                            values,
+                            reconstruction: Some((
+                                reconstruction.values.clone(),
+                                reconstructed.clone(),
+                            )),
                         });
-                        error.add_round(
-                            &magnitude.mul_round(
-                                &p.tolerance(digits.saturating_sub(5)),
-                                p.bits,
-                                Up,
-                            ),
-                            p.bits,
-                            Up,
-                        )
-                    })
-                    .collect::<Vec<_>>();
+                        digits = digits
+                            .checked_add(20)
+                            .ok_or_else(|| Error::Limit("endpoint precision overflow".into()))?;
+                        continue;
+                    }
+                    for (i, (value, error)) in
+                        reconstructed.iter().zip(&reconstruction_errors).enumerate()
+                    {
+                        let residual = p.norm(&p.sub(value, &source[i + 1]));
+                        if residual > error.add_round(&input[i + 1], p.bits, Up) {
+                            return Err(Error::Accuracy(format!(
+                                "supplied regular component {i} is inconsistent with the asserted exact asymptotic relations and propagated input evidence"
+                            )));
+                        }
+                    }
+                }
                 let values = values.chunks(size).map(<[C]>::to_vec).collect::<Vec<_>>();
                 let errors = errors
                     .chunks(size)
@@ -503,6 +633,14 @@ impl PreparedEndpoint {
                         "finite epsilon coefficient limit; independent (bits, order) profiles {profiles:?}; one native inverse and all physical unit directions per profile; propagated independent-component matching errors and input evidence floor; {} exact source/chart/normalization guards with punctured disk radius {}; consistency estimates, not a global error certificate",
                         self.guard_count, self.radius
                     );
+                    let provenance = if let Some(constraints) = &self.constraints {
+                        format!(
+                            "{provenance}; exact affine nonpositive-support proof from explicitly asserted physical relations ({}); all regular components checked against constrained reconstruction and input evidence; conservative consistency checks, not a rigorous joint uncertainty certificate",
+                            constraints.asymptotic.provenance
+                        )
+                    } else {
+                        provenance
+                    };
                     let accuracy = BoundaryAccuracy::endpoint(
                         &matching.accuracy,
                         verified,
@@ -517,6 +655,7 @@ impl PreparedEndpoint {
                         coefficients: values,
                         accuracy,
                         matching_boundary: matching,
+                        constraints: self.constraints.clone(),
                     };
                     result.validate()?;
                     context.cancellation.check()?;
@@ -528,11 +667,77 @@ impl PreparedEndpoint {
                 );
             }
             debug_assert_eq!(values.len(), size * count);
-            previous = Some((map.values, values));
+            previous = Some(EndpointProfile {
+                map: map.values,
+                values,
+                reconstruction: reconstruction
+                    .zip(reconstruction_values)
+                    .map(|(map, values)| (map.values, values)),
+            });
             digits = digits
                 .checked_add(20)
                 .ok_or_else(|| Error::Limit("endpoint precision overflow".into()))?;
         }
         Err(Error::Accuracy(last))
     }
+}
+
+struct EndpointProfile {
+    map: Vec<Vec<C>>,
+    values: Vec<C>,
+    reconstruction: Option<(Vec<Vec<C>>, Vec<C>)>,
+}
+fn contract(map: &[Vec<C>], source: &[C], p: Precision) -> Vec<C> {
+    map.iter()
+        .map(|row| {
+            row.iter()
+                .zip(source)
+                .fold(p.zero(), |sum, (a, b)| p.add(&sum, &p.mul(a, b)))
+        })
+        .collect()
+}
+#[allow(clippy::too_many_arguments)]
+fn contraction_errors(
+    map: &crate::algebraic::EndpointLinearMap,
+    prior: &[Vec<C>],
+    values: &[C],
+    prior_values: &[C],
+    source: &[C],
+    input: &[Float],
+    p: Precision,
+    digits: u32,
+) -> Vec<Float> {
+    map.values
+        .iter()
+        .enumerate()
+        .map(|(i, row)| {
+            let mut error = p.norm(&p.sub(&values[i], &prior_values[i]));
+            for (j, transfer) in row.iter().enumerate() {
+                let disagreement = p.norm(&p.sub(transfer, &prior[i][j]));
+                let transfer_error =
+                    disagreement.add_round(&map.arithmetic_errors[i][j], p.bits, Up);
+                let transfer_upper = p.norm(transfer).add_round(&transfer_error, p.bits, Up);
+                error =
+                    error.add_round(&transfer_upper.mul_round(&input[j], p.bits, Up), p.bits, Up);
+                error = error.add_round(
+                    &transfer_error.mul_round(&p.norm(&source[j]), p.bits, Up),
+                    p.bits,
+                    Up,
+                );
+            }
+            let magnitude = row.iter().zip(source).fold(p.real(0), |sum, (a, b)| {
+                sum.add_round(&p.norm(a).mul_round(&p.norm(b), p.bits, Up), p.bits, Up)
+            });
+            error.add_round(
+                &magnitude.mul_round(&p.tolerance(digits.saturating_sub(5)), p.bits, Up),
+                p.bits,
+                Up,
+            )
+        })
+        .collect()
+}
+
+fn unit_scale(value: &C, p: Precision) -> Float {
+    let norm = p.norm(value);
+    if norm > p.real(1) { norm } else { p.real(1) }
 }

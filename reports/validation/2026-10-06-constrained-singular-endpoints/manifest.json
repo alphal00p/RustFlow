@@ -1,0 +1,142 @@
+{
+  "build-provenance.json": {
+    "sha256": "fd63ff8b3c6332f3ca5830f9ad4027190afb026117ec40103b26d84631e14683",
+    "size": 12797
+  },
+  "clippy-complete.log.gz": {
+    "sha256": "02beab0814e21f0d05498506bce632ccc8f0d387354ca5b059b21d026ca8f56e",
+    "size": 450
+  },
+  "clippy-final.log.gz": {
+    "sha256": "ad16c953ba0cbafd4343431e8c4ff1d8efb217964151996bb1b135d8341aa21a",
+    "size": 456
+  },
+  "clippy-first.log.gz": {
+    "sha256": "2ab6c06a30ce1ccfd499e9b98047e964b5ae8689c2a5217f6c6abbc42eaaf2ac",
+    "size": 1343
+  },
+  "clippy-second.log.gz": {
+    "sha256": "4b66c33c64333bcc0aefa93fa7758776b224ef81cad0cf0405fe5906faa5a05b",
+    "size": 455
+  },
+  "constraints-check.log.gz": {
+    "sha256": "4aff91238bec3d9a9052a50ae2ba648a0210d5893c2e32030d5757a651c1440e",
+    "size": 647
+  },
+  "core-check.log.gz": {
+    "sha256": "ed0af4120f473a07ce5236048338a45199794fbd2fd866f00bac4773c76842c4",
+    "size": 767
+  },
+  "core-tests.log.gz": {
+    "sha256": "b3832d718bb19267c521a7d9460dfa3ef11e5dba963ecb95ee2063385207cc77",
+    "size": 794
+  },
+  "exact-check.log.gz": {
+    "sha256": "634d9faf1705fe587d3dc74c6d3c9f1e8eebc4794a873f8f4d16beb9618b2b68",
+    "size": 639
+  },
+  "exact-check2.log.gz": {
+    "sha256": "4a9b0f74e47eadb0f9058439ed401523b07f887e8374c8425a8a94d02f3373c2",
+    "size": 455
+  },
+  "failed-public-attempt.json": {
+    "sha256": "83c9d39929472c9dbc382d0169ff28333a2ab4eb47cfa07197591f38857856ae",
+    "size": 429
+  },
+  "failed-public-attempt2.json": {
+    "sha256": "ad708a45b61beba389243e5dcb9327270bc416d975e809d086bd86d3556b6289",
+    "size": 456
+  },
+  "final-core.log.gz": {
+    "sha256": "67e3cbb83777d92a03bfabb130b41fbb9d7106844cdbcf65ba392ab84039c508",
+    "size": 835
+  },
+  "final-diff.log.gz": {
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "size": 20
+  },
+  "final-fmt.log.gz": {
+    "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "size": 20
+  },
+  "final-private-cache.log.gz": {
+    "sha256": "d9dee668c9b399eebb2ccad0ee79dbd1e65e02e4d6614d3e654d2e4014c5ece3",
+    "size": 800
+  },
+  "final-private-endpoints.log.gz": {
+    "sha256": "68145acf4eb90b691055dd2528f34df8148e644f20d310e6e8c727cb36442869",
+    "size": 838
+  },
+  "final-public-attempt1.log.gz": {
+    "sha256": "a66bae297ce4ffb9659cf8d7f88d59e9b3a33addaa8b4eccc2dd9b628fdea37c",
+    "size": 2041
+  },
+  "final-public-attempt2.log.gz": {
+    "sha256": "dd52589c2f36a43e23f4269503068fa75df86c3b946e67b2b4a7b1dab063da12",
+    "size": 3827
+  },
+  "final-public.log.gz": {
+    "sha256": "69b1bd8a469eb542b351b3d8ae71f427cf55a731a5becef5280f45080872e85f",
+    "size": 3610
+  },
+  "final-source-attempt1.json": {
+    "sha256": "520fe3e43c97640b43166fc639e948c9d8623b953eff765f1dde8be76defdb39",
+    "size": 21082
+  },
+  "final-source-attempt2.json": {
+    "sha256": "33d44ae4a21b381535171206bac9d76a929b0518dd390fc6a1ca25842e4a91e8",
+    "size": 21214
+  },
+  "final-source.json": {
+    "sha256": "9e43131adb868b938359a433e0f03666fb891f1eac8eb752e9986316a5f3e348",
+    "size": 21285
+  },
+  "first-core.json": {
+    "sha256": "c0a32a1e4deb563777962d97ae47db229a9c9edc006abffbb930d635a8b8fa37",
+    "size": 993
+  },
+  "integration-check.log.gz": {
+    "sha256": "b5f64f879f9c0532e5425141e5811e5f6196f233c3f7f18781648e57065ed019",
+    "size": 1089
+  },
+  "map-check.log.gz": {
+    "sha256": "5238bb96e96d34180e09a7076cd9968d4b2a1f8a395f41c92cdbb222fa068641",
+    "size": 1038
+  },
+  "native-owner-audit.json": {
+    "sha256": "56667f46ca5bb6cf9c9cda643d4d97f56a579cd929a0a46efdd078d83ac24938",
+    "size": 5354
+  },
+  "process-exits.json": {
+    "sha256": "e67b790e52ddd04ef43bab77c197d830322525393ee1f8da077b584f7f6e8275",
+    "size": 666
+  },
+  "public-check.log.gz": {
+    "sha256": "99ce12e9bd99d66c009f656e080e91e6ad3a439834e122a851a1f269ba4a2fdc",
+    "size": 455
+  },
+  "public-first.json": {
+    "sha256": "7a92caa3f6c2984e24189c3db607cadbaf9023e83ffe33974ffbe67b2b6b023c",
+    "size": 1831
+  },
+  "public-first.log.gz": {
+    "sha256": "bb109068053dfe173b9f160b2d78a0d1bdbbf9c8d1346262e9f65f5869dae02b",
+    "size": 822
+  },
+  "refinement-check.log.gz": {
+    "sha256": "f9baeddaec772b80fe9e5b9a8d11a2e7f2211ea8e4e454037f43b64afa8ea81e",
+    "size": 742
+  },
+  "resource-check.log.gz": {
+    "sha256": "2709df9952016fd69e9b0e5641f1e3f1e2754581d68aff0721dfe8faebf50471",
+    "size": 726
+  },
+  "shared-check.log.gz": {
+    "sha256": "32e1a22c006fde84b12e078e37cad96557a8faaa5fa51ea8bec8e708ec9bfc09",
+    "size": 452
+  },
+  "validation.json": {
+    "sha256": "5dd9ed06ae641174d84575865b01f735fdf616d8fda4d45e90f5a36a613ce214",
+    "size": 11616
+  }
+}

@@ -7,7 +7,7 @@
 use crate::algebraic::{AlgebraicKinematicSystem, CanonicalAlgebraicSystem, RootSeed, SquareRoot};
 use crate::diffexp::{EpsilonBoundary, EpsilonSolution};
 use crate::kinematics::{KinematicPath, KinematicSystem};
-use crate::singular_endpoint::{EndpointBoundary, EndpointChart};
+use crate::singular_endpoint::{EndpointBoundary, EndpointChart, EndpointConstraints};
 use crate::{ComplexFloat as C, Error, Precision, Prescription, Result};
 use serde::{Deserialize, Serialize};
 use std::collections::BTreeMap;
@@ -20,8 +20,8 @@ use std::sync::{
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
-const VERSION: u32 = 6;
-const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x06";
+const VERSION: u32 = 7;
+const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x07";
 const FILE: &str = "physical-boundaries.bin";
 static NEXT_FILE: AtomicU64 = AtomicU64::new(0);
 
@@ -1502,12 +1502,21 @@ impl RustFlowCache {
         chart: &EndpointChart,
         range: EpsilonRange,
         digits: u32,
+        constraints: Option<&EndpointConstraints>,
     ) -> Result<Option<EndpointBoundary>> {
         let key = chart.key(identity)?;
+        let constraint_key = constraints.map(EndpointConstraints::key).transpose()?;
         let mut best: Option<&EndpointBoundary> = None;
         for entry in &self.endpoints {
             if entry.identity.key() == identity.key()
                 && entry.chart.key(identity)? == key
+                && entry
+                    .constraints
+                    .as_ref()
+                    .map(EndpointConstraints::key)
+                    .transpose()?
+                    == constraint_key
+                && (constraints.is_none() || entry.range == range)
                 && entry.range.covers(range)
                 && entry.accuracy.verified_digits() >= digits
                 && best.is_none_or(|old| {
@@ -2323,6 +2332,82 @@ struct StoredEndpoint {
     coefficients: Vec<Vec<C>>,
     accuracy: BoundaryAccuracy,
     matching: StoredBoundary,
+    constraints: Option<StoredEndpointConstraints>,
+}
+#[derive(Serialize, Deserialize)]
+struct StoredEndpointConstraints {
+    provenance: String,
+    limits: crate::frobenius::ExactFrobeniusLimits,
+    relations: Vec<StoredAsymptoticRelation>,
+}
+#[derive(Serialize, Deserialize)]
+struct StoredAsymptoticRelation {
+    terms: Vec<(usize, StoredAtom, usize, StoredAtom)>,
+    value: StoredAtom,
+}
+impl StoredEndpointConstraints {
+    fn encode(value: &EndpointConstraints, atoms: &mut impl AtomEncoder) -> Result<Self> {
+        Ok(Self {
+            provenance: value.asymptotic.provenance.clone(),
+            limits: value.limits.clone(),
+            relations: value
+                .asymptotic
+                .relations
+                .iter()
+                .map(|relation| {
+                    Ok(StoredAsymptoticRelation {
+                        terms: relation
+                            .terms
+                            .iter()
+                            .map(|(selector, weight)| {
+                                Ok((
+                                    selector.component,
+                                    atoms.atom(&selector.power)?,
+                                    selector.log_power,
+                                    atoms.atom(weight)?,
+                                ))
+                            })
+                            .collect::<Result<_>>()?,
+                        value: atoms.atom(&relation.value)?,
+                    })
+                })
+                .collect::<Result<_>>()?,
+        })
+    }
+    fn decode(self) -> Result<EndpointConstraints> {
+        use crate::asymptotic::{
+            AsymptoticSelector, ExactAsymptoticConstraints, ExactAsymptoticRelation,
+        };
+        Ok(EndpointConstraints {
+            limits: self.limits,
+            asymptotic: ExactAsymptoticConstraints {
+                provenance: self.provenance,
+                relations: self
+                    .relations
+                    .into_iter()
+                    .map(|relation| {
+                        Ok(ExactAsymptoticRelation {
+                            terms: relation
+                                .terms
+                                .into_iter()
+                                .map(|(component, power, log_power, weight)| {
+                                    Ok((
+                                        AsymptoticSelector {
+                                            component,
+                                            power: atom_read(&power)?,
+                                            log_power,
+                                        },
+                                        atom_read(&weight)?,
+                                    ))
+                                })
+                                .collect::<Result<_>>()?,
+                            value: atom_read(&relation.value)?,
+                        })
+                    })
+                    .collect::<Result<_>>()?,
+            },
+        })
+    }
 }
 #[derive(Serialize, Deserialize)]
 struct StoredCache {
@@ -2384,6 +2469,11 @@ impl StoredCache {
                 coefficients: endpoint.coefficients.clone(),
                 accuracy: endpoint.accuracy.clone(),
                 matching: StoredBoundary::encode(&endpoint.matching_boundary, identity, atoms)?,
+                constraints: endpoint
+                    .constraints
+                    .as_ref()
+                    .map(|value| StoredEndpointConstraints::encode(value, atoms))
+                    .transpose()?,
             });
         }
         Ok(Self {
@@ -2504,6 +2594,10 @@ impl RustFlowCache {
                 coefficients: endpoint.coefficients,
                 accuracy: endpoint.accuracy,
                 matching_boundary: matching,
+                constraints: endpoint
+                    .constraints
+                    .map(StoredEndpointConstraints::decode)
+                    .transpose()?,
             })?;
         }
         Ok(cache)

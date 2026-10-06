@@ -1,0 +1,34 @@
+{
+  "gate": "first exact coefficient/constraint core",
+  "session": 80258,
+  "exit_code": 0,
+  "tool_chunk": "424f79",
+  "passed": 5,
+  "ignored": 0,
+  "source_files": [
+    {
+      "path": "src/frobenius.rs",
+      "sha256": "3742b8381aacce50e970bdf38f3626ec8ab5db801f1b49238ebdb7ab621bab10"
+    },
+    {
+      "path": "src/frobenius/recurrence.rs",
+      "sha256": "3b99375aa26d94a6a4d1cd7d1655e27054d2191d4c6aeafb7629b6189c4a01e2"
+    },
+    {
+      "path": "src/frobenius/exact.rs",
+      "sha256": "0d823d2272c67ab38d9d4e379d251c5cfdf6b49a65171ac5534b4f5c9c076212"
+    },
+    {
+      "path": "src/asymptotic.rs",
+      "sha256": "117d3f8b85041a0bcd0d73072d51a76eee4184e8421390f65989be145731cb3a"
+    },
+    {
+      "path": "src/asymptotic/exact.rs",
+      "sha256": "6d5e8444b0cafabb6eb5e77e188531f7c2ad39744d68e1ccd3c20b30e90bbb92"
+    },
+    {
+      "path": "src/asymptotic/exact_tests.rs",
+      "sha256": "67b3bca347cf46a3c62c55e2156384497889022153ebe5e112f33a6bd56f9de5"
+    }
+  ]
+}

@@ -1,0 +1,373 @@
+[
+  {
+    "build_output": "target/native/release/build/symbolica-amflow-5596bcfe9419bd8d/output",
+    "output_sha256": "861409a96c874644bac767f16f1aadb69cdc41e893e65d3b88fdef6c81190090",
+    "fingerprints": {
+      "DEPENDENCY_SOURCE_DIGEST": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+      "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+      "PORT_SOURCE_DIGEST": "98d3920e6e93b690fd146b17dec1e39c267bfbf1ccace177e68be4db147a1d0c"
+    },
+    "active_native_owners": [
+      {
+        "name": "feynkit-amplitude",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "feynkit-generator",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "feynkit-graph",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "feynkit-kinematics",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "feynkit-model",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "feynkit-tensor",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": []
+      },
+      {
+        "name": "graphica",
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+        "features": []
+      },
+      {
+        "name": "idenso",
+        "version": "0.3.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "linnet",
+        "version": "0.17.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "bincode",
+          "native",
+          "nodestore-vec",
+          "serde",
+          "symbolica"
+        ]
+      },
+      {
+        "name": "numerica",
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+        "features": [
+          "bincode",
+          "float-mpfr",
+          "integer-gmp",
+          "serde"
+        ]
+      },
+      {
+        "name": "rustred",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+        "features": []
+      },
+      {
+        "name": "rustred-order",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+        "features": []
+      },
+      {
+        "name": "spenso",
+        "version": "0.6.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native",
+          "shadowing"
+        ]
+      },
+      {
+        "name": "spenso-hep-lib",
+        "version": "0.1.7",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "spenso-macros",
+        "version": "0.3.2",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": []
+      },
+      {
+        "name": "symbolica",
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+        "features": [
+          "bincode",
+          "float-mpfr",
+          "integer-gmp",
+          "native_code_generation",
+          "serde",
+          "tracing_max_level_info"
+        ]
+      },
+      {
+        "name": "symbolica-amflow",
+        "version": "0.1.0",
+        "source": null,
+        "features": [
+          "default"
+        ]
+      },
+      {
+        "name": "symbolica-typst-plugin",
+        "version": "0.1.0",
+        "source": "git+https://github.com/symbolica-dev/symbolica-typst-plugin?rev=57b7455b37c30f4f87353c0073e49f5225e937ab#57b7455b37c30f4f87353c0073e49f5225e937ab",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "symbolica-utils",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      }
+    ]
+  },
+  {
+    "build_output": "target/native/release/build/symbolica-amflow-21205e99f6af8c86/output",
+    "output_sha256": "739b5f3fffa29730c030a0cbfeca8bea633dff750252b95b736e1a10d2e3632c",
+    "fingerprints": {
+      "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+      "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+      "PORT_SOURCE_DIGEST": "98d3920e6e93b690fd146b17dec1e39c267bfbf1ccace177e68be4db147a1d0c"
+    },
+    "active_native_owners": [
+      {
+        "name": "feynkit-amplitude",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "feynkit-cff",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "feynkit-generator",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "feynkit-graph",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native",
+          "svg"
+        ]
+      },
+      {
+        "name": "feynkit-kinematics",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "feynkit-model",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "feynkit-py",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native",
+          "python_stubgen"
+        ]
+      },
+      {
+        "name": "feynkit-tensor",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "graphica",
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+        "features": []
+      },
+      {
+        "name": "idenso",
+        "version": "0.3.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "linnet",
+        "version": "0.17.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "bincode",
+          "drawing",
+          "native",
+          "nodestore-vec",
+          "rkyv",
+          "serde",
+          "symbolica"
+        ]
+      },
+      {
+        "name": "numerica",
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+        "features": [
+          "bincode",
+          "float-mpfr",
+          "integer-gmp",
+          "numpy",
+          "pyo3",
+          "pyo3-stub-gen",
+          "python",
+          "python_stubgen",
+          "serde"
+        ]
+      },
+      {
+        "name": "rustred",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+        "features": []
+      },
+      {
+        "name": "rustred-order",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+        "features": []
+      },
+      {
+        "name": "spenso",
+        "version": "0.6.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native",
+          "native-code-generation",
+          "portable-payload",
+          "python",
+          "python_stubgen",
+          "shadowing"
+        ]
+      },
+      {
+        "name": "spenso-hep-lib",
+        "version": "0.1.7",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "spenso-macros",
+        "version": "0.3.2",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": []
+      },
+      {
+        "name": "symbolica",
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4",
+        "features": [
+          "bincode",
+          "float-mpfr",
+          "integer-gmp",
+          "native_code_generation",
+          "numpy",
+          "pyo3",
+          "pyo3-stub-gen",
+          "pyo3-stub-gen-derive",
+          "python_export",
+          "python_stubgen",
+          "serde",
+          "tracing_max_level_info"
+        ]
+      },
+      {
+        "name": "symbolica-amflow",
+        "version": "0.1.0",
+        "source": null,
+        "features": [
+          "default",
+          "python",
+          "python_stubgen"
+        ]
+      },
+      {
+        "name": "symbolica-typst-plugin",
+        "version": "0.1.0",
+        "source": "git+https://github.com/symbolica-dev/symbolica-typst-plugin?rev=57b7455b37c30f4f87353c0073e49f5225e937ab#57b7455b37c30f4f87353c0073e49f5225e937ab",
+        "features": [
+          "native"
+        ]
+      },
+      {
+        "name": "symbolica-utils",
+        "version": "0.1.0",
+        "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901",
+        "features": [
+          "native"
+        ]
+      }
+    ]
+  }
+]

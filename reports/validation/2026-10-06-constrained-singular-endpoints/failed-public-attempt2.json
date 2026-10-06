@@ -1,0 +1,12 @@
+{
+  "session": 53267,
+  "exit_code": 101,
+  "tool_chunk": "065668",
+  "new_public_tests": {
+    "passed": 17,
+    "failed": 0
+  },
+  "failure": "Legacy fingerprint-tampering fixture hardcoded the prior schema-6 magic and failed before decoding the schema-7 envelope",
+  "fix": "Update only the expected current header byte to 7; retain implementation/dependency tamper rejection and explicit prior-schema rejection",
+  "production_source_changed": false
+}
