@@ -41,24 +41,26 @@ value magnitudes must be below `1e-20`.
 
 | Case | RustFlow | Original AMFlow | Numerical result and scope |
 |---|---:|---:|---|
-| [Analytic logarithmic chain](../reports/performance/2026-10-05-conditioned-transport-checked.json) | 0.08315 transport; 0.09007 process | 0.001903 transport; 1.72620 process | Current checked release, five-run medians; 20 digits and independent refinement |
-| [Upstream 12-master DE](../reports/performance/2026-10-05-conditioned-transport-checked.json) | 5.38297 transport; 5.49649 process | 0.10237 transport; 4.71083 process | Current checked release, five-run medians; all 12 at 20 digits and independent refinement |
-| [Paper-derived 27-master DE](../reports/performance/2026-10-05-conditioned-transport-checked.json) | 32.40346 transport; 32.60942 process | 0.06163 transport; 14.34587 process | Current checked release, five-run medians; all 27 at 20 digits, deterministic test boundary |
-| [Resonant singular matching](../reports/performance/2026-10-05-conditioned-transport-checked.json) | 0.00730 matching; 0.01401 process | 1.13746 matching; 1.14281 process | Current release, five-run medians; 20 digits, analytic/refinement checks; different internal precision requirements |
+| [Analytic logarithmic chain](../reports/performance/2026-10-06-ordinary-transport.json) | 0.08291 transport; 0.09119 process | 0.001927 transport; 1.75172 process | Revision `2a1ffac`, five-run medians; 20 digits and independent refinement |
+| [Upstream 12-master DE](../reports/performance/2026-10-06-ordinary-transport.json) | 3.64918 transport; 3.76605 process | 0.10220 transport; 4.88680 process | Revision `2a1ffac`, five-run medians; all 12 at 20 digits and independent refinement |
+| [Paper-derived 27-master DE](../reports/performance/2026-10-06-ordinary-transport.json) | 3.74547 transport; 3.96480 process | 0.06188 transport; 14.67071 process | Revision `2a1ffac`, five-run medians; all 27 at 20 digits, deterministic test boundary |
+| [Resonant singular matching](../reports/performance/2026-10-05-conditioned-transport-checked.json) | 0.00730 matching; 0.01401 process | 1.13746 matching; 1.14281 process | Earlier revision `3f1daea`, five-run medians; 20 digits, analytic/refinement checks; different internal precision requirements |
 | [Automatic massless bubble](../reports/validation/2026-10-04-live-upstream-oracles.json) | 0.1868 cross-check including refinement | 26.7388 `SolveIntegrals` | 20 digits against the original and analytic gamma formula; different measured work |
 | [Automatic vacuum sunset, mass squares (1,1,0)](../reports/validation/2026-10-04-live-upstream-oracles.json) | 0.1179 cross-check including refinement | 9.0585 `SolveIntegrals` | 20 digits against the original and analytic gamma formula; different measured work |
 | [Automatic connected three-loop single-mass vacuum, two targets at epsilon=1/10](../reports/performance/single-mass-full-workflow.json) | 2.814 process | 175.447 process | Both pass 35 relative digits against 40-digit original data; fresh caches, one worker, different bases/extra-order controls |
 | [Required paper example: all four two-loop targets through epsilon zero](../reports/validation/2026-10-04-paper-two-loop-acceptance.json) | 3553.007 complete acceptance | [2428.977 process](../reports/performance/2026-10-05-original-paper-full-workflow.json) | All 20 complex coefficients agree within recorded accuracy at the requested 20 digits; different caches, workers, bases and precision/sample profiles |
 
-The fresh checked release passes all four comparisons and independent
-precision/order refinements at the requested 20 scaled digits. Its ordinary
+The latest regular measurements pass all three comparisons and independent
+precision/order refinements at the requested 20 scaled digits; the singular
+row retains its earlier measured revision. The ordinary
 transport phases are slower than the original C++ solver. Process time includes
 original pole-finding and MPSolve startup, so the short analytic chain still has
 a smaller native process total despite a slower transport phase. Native accepted
-step counts are 9/16/33 versus original 4/5/1 for the chain/12-master/27-master
+step counts are 9/11/4 versus original 4/5/1 for the chain/12-master/27-master
 cases. Additional checking and step selection both need optimization. The
-[preceding measured release](../reports/performance/2026-10-05-whole-segment-checked.json)
-remains preserved; its faster ordinary timings do not describe this library.
+[preceding conditioned release](../reports/performance/2026-10-05-conditioned-transport-checked.json)
+and [earlier whole-segment release](../reports/performance/2026-10-05-whole-segment-checked.json)
+remain preserved with their own numerical and timing scope.
 
 The first original four-target run failed during Wolfram child-thread
 initialization. An unchanged copied subsystem succeeded after explicitly setting

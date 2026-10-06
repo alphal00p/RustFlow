@@ -42,7 +42,41 @@ preserves that failed trial, both successful outputs, configuration differences,
 source/binary hashes and all timed phases. No reference value was used as a
 native boundary.
 
-## Current checked release
+## Latest ordinary-transport measurements
+
+Commit `2a1ffac` was measured on 2026-10-06 with the same driver, exact inputs,
+CPU 35, original executable and independent precision/order checks as the
+preceding comparison. All three regular systems pass 20 scaled digits. Each
+entry is a median of five fresh processes after an excluded warmup, alternating
+implementations; base settings are 201 bits/order 80 and refinement uses
+267 bits/order 112.
+
+| Workload | Rust process | Original process | Rust transport | Original transport | Accepted steps, Rust / original |
+|---|---:|---:|---:|---:|---:|
+| Analytic 3-component chain | 0.09119 s | 1.75172 s | 0.082911 s | 0.001927 s | 9 / 4 |
+| Upstream 12-master system | 3.76605 s | 4.88680 s | 3.649177 s | 0.102201 s | 11 / 5 |
+| Paper 27-integral system | 3.96480 s | 14.67071 s | 3.745475 s | 0.061878 s | 4 / 1 |
+
+The [complete report](../reports/performance/2026-10-06-ordinary-transport.json)
+retains outputs, source hashes, settings, runtime provenance and all comparisons.
+The largest scaled differences remain `8.06e-28`, `6.40e-43` and `1.45e-21`.
+Native rejections are 8/8/3. The faster 12/27-master results accompany fewer
+trial charts after changes to denominator enclosures; this comparison spans
+multiple numerical changes and does not isolate a single optimization.
+
+The native ordinary transport phase remains slower than upstream. Original
+process totals include MPSolve setup, and neither these supplied-boundary jobs
+nor their process ratios measure automatic AMFlow or the gg→hg application.
+Concurrent tests/builds and uncontrolled OS caches remain timing limitations.
+A separate current 27-integral profile places 77.98% of sampled time in exact
+source residual assembly and 70.15% in native ball-polynomial multiplication.
+Those checks remain required; the profile identifies optimization work, not a
+reason to weaken numerical acceptance. Local checks still do not certify global
+forward error. The combined full release suite was running when this benchmark
+report was captured; its three benchmark validations and strict Python/stubgen
+Clippy had independently completed.
+
+## Preceding checked release
 
 Library commit `3f1daea` was measured on 2026-10-05 against the original,
 unmodified AMFlow 2.0 C++ executable. All four supplied-boundary comparisons

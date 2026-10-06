@@ -1,9 +1,14 @@
 # Implementation coverage
 
-The [Python API and notebook status](python-notebook-status.md) records the latest
-packaging milestone and distinguishes the completed historical native gg→hg cold
-calculation from the publication wheel's still-running full acceptance. The
-milestones below retain their original numerical scope and source provenance.
+The [Python API and notebook status](python-notebook-status.md) records the
+completed publication-wheel native gg→hg acceptance: all 16 fresh boundary
+configurations, 4,360 transport coefficients, eight W/Z form factors and three
+coherent observables, followed by independent 40-digit regeneration,
+interruption/restart and nearby-point reuse. The calculation uses certified
+supplied parent equations; independently deriving all parent equations with
+RustRed is not established. External reference uncertainty caps the EW-square
+comparison at 19 relative digits. The broader AMFlow/DiffExp parity goal remains
+open; the milestones below retain their original scope and source provenance.
 
 The massless phase-space milestone passes **416 release unit/integration tests**,
 one doctest, strict all-target Clippy and formatting. Nine long scientific tests
