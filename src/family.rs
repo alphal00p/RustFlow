@@ -1,10 +1,16 @@
-use crate::{Error, MassMode, Result};
+#[cfg(feature = "automatic")]
+use crate::MassMode;
+use crate::{Error, Result};
+#[cfg(feature = "automatic")]
 use rustred::algebra::{Coefficient, CoefficientContext};
 use std::collections::{BTreeMap, BTreeSet};
 use symbolica::prelude::*;
 
 #[derive(Clone, Debug, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Integral(pub Vec<i16>);
+
+/// Exact combinations shared by basis descriptions and native reductions.
+pub type LinearCombination = BTreeMap<Integral, Atom>;
 
 /// A propagator affine in scalar products: loop-loop upper triangle first,
 /// then loop-external products in loop-major order, as in RustRed.
@@ -147,6 +153,7 @@ pub(crate) fn encode_complex(a: &Atom) -> Atom {
     })
 }
 
+#[cfg(feature = "automatic")]
 pub(crate) struct ConvertedFamily {
     pub family: rustred::family::IntegralFamily,
     pub reverse: BTreeMap<Atom, Atom>,
@@ -255,6 +262,7 @@ impl IntegralFamily {
         ))
     }
 
+    #[cfg(feature = "automatic")]
     pub fn deform(&self, eta: Symbol, mode: &MassMode) -> Result<(Self, Vec<bool>)> {
         if self.physical_propagators > self.propagators.len() {
             return Err(Error::InvalidInput(
@@ -315,6 +323,7 @@ impl IntegralFamily {
         }
         Ok((out, mask))
     }
+    #[cfg(feature = "automatic")]
     fn topological_placement(&self, mode: &MassMode) -> Result<Vec<usize>> {
         self.validate()?;
         let mut branches: Vec<(Vec<Atom>, Vec<usize>)> = Vec::new();
@@ -401,11 +410,23 @@ impl IntegralFamily {
         }
     }
     pub fn validate(&self) -> Result<()> {
-        self.convert().map(|_| ())
+        #[cfg(feature = "automatic")]
+        {
+            self.convert().map(|_| ())
+        }
+        #[cfg(not(feature = "automatic"))]
+        {
+            Err(Error::Unsupported(
+                "integral-family validation requires the native automatic feature and RustRed"
+                    .into(),
+            ))
+        }
     }
+    #[cfg(feature = "automatic")]
     pub(crate) fn convert(&self) -> Result<ConvertedFamily> {
         self.convert_at_epsilon(None)
     }
+    #[cfg(feature = "automatic")]
     pub(crate) fn convert_at_epsilon(&self, epsilon: Option<&Rational>) -> Result<ConvertedFamily> {
         if self.physical_propagators > self.propagators.len() {
             return Err(Error::InvalidInput("too many physical propagators".into()));

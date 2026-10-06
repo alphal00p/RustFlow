@@ -404,7 +404,7 @@ impl PublishedNormalization {
         let scale = p.rational(higgs_squared);
         let logarithm = if higgs_squared > &Rational::from(0) {
             let mut logarithm = p.log(&scale);
-            let pi = Float::with_val(p.bits, rug::float::Constant::Pi);
+            let pi = p.real(0).pi();
             logarithm.im = match prescription {
                 Prescription::PlusI0 => -pi,
                 Prescription::MinusI0 => pi,
@@ -429,6 +429,7 @@ impl PublishedNormalization {
 mod tests {
     use super::*;
 
+    #[cfg(feature = "automatic")]
     fn family(kind: PublishedFamilyKind) -> Result<PublishedFamily> {
         PublishedFamily::new(
             kind,
@@ -441,6 +442,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg(feature = "automatic")]
     fn published_routings_keep_mass_assignments_numerators_and_signs() -> Result<()> {
         let planar = family(PublishedFamilyKind::Planar2020)?;
         let nonplanar = family(PublishedFamilyKind::Nonplanar2020)?;
@@ -497,6 +499,7 @@ mod tests {
     }
 
     #[test]
+    #[cfg(feature = "native")]
     fn finite_epsilon_normalization_preserves_the_physical_log_sheet() -> Result<()> {
         let norm = PublishedNormalization::HiggsScaleAndGamma2020;
         let p = Precision::decimal(70)?;

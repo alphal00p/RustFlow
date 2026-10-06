@@ -6,6 +6,7 @@ mod amplitude;
 mod constraints;
 mod continuation;
 mod endpoint;
+#[cfg(feature = "automatic")]
 mod evaluation;
 mod gg_hg;
 mod transport;
@@ -22,6 +23,7 @@ pub use amplitude::{PyAmplitudeResult, PyHiggsJetAmplitude};
 pub use constraints::{PyAsymptoticCoefficient, PyAsymptoticRelation, PyEndpointConstraints};
 pub use continuation::PyContinuationPrescription;
 pub use endpoint::{PyEndpointResult, PyEndpointRoute};
+#[cfg(feature = "automatic")]
 pub use evaluation::{PyIntegralEvaluator, PyPreparedIntegralFamily, PyReductionTables};
 pub use gg_hg::{
     PyFormFactorResult, PyHiggsJetConfiguration, PyHiggsJetFormFactorProjector,
@@ -32,6 +34,13 @@ pub use types::{
     PyBoundaryCache, PyBoundaryData, PyComputationControl, PyDifferentialSystem,
     PyEvaluationOptions, PyLaurentExpansion, PyTransportResult,
 };
+
+#[cfg(feature = "python_stubgen")]
+pyo3_stub_gen::module_variable!(
+    "symbolica.community.hep.integration",
+    "automatic_boundary_generation_available",
+    bool
+);
 
 type Expressions = HashMap<PythonExpression, PythonExpression>;
 type NumericValues = HashMap<PythonExpression, PythonMultiPrecisionComplex>;
@@ -203,8 +212,11 @@ pub fn register(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add_class::<PyAmplitudeResult>()?;
     module.add_class::<PyEvaluationOptions>()?;
     module.add_class::<PyComputationControl>()?;
+    #[cfg(feature = "automatic")]
     module.add_class::<PyIntegralEvaluator>()?;
+    #[cfg(feature = "automatic")]
     module.add_class::<PyPreparedIntegralFamily>()?;
+    #[cfg(feature = "automatic")]
     module.add_class::<PyReductionTables>()?;
     module.add_class::<PyKinematicTransport>()?;
     module.add_class::<PyContinuationPrescription>()?;
@@ -237,6 +249,7 @@ pub fn register(module: &Bound<'_, PyModule>) -> PyResult<()> {
     module.add(
         "__all__",
         [
+            "automatic_boundary_generation_available",
             "HiggsJetIntegralSystem",
             "HiggsJetConfiguration",
             "HiggsJetFormFactorProjector",
@@ -271,7 +284,20 @@ pub fn register(module: &Bound<'_, PyModule>) -> PyResult<()> {
             "ResourceLimitError",
             "CalculationCancelled",
             "BoundaryCacheError",
-        ],
+        ]
+        .into_iter()
+        .filter(|name| {
+            cfg!(feature = "automatic")
+                || !matches!(
+                    *name,
+                    "IntegralEvaluator" | "PreparedIntegralFamily" | "ReductionTables"
+                )
+        })
+        .collect::<Vec<_>>(),
+    )?;
+    module.add(
+        "automatic_boundary_generation_available",
+        cfg!(feature = "automatic"),
     )?;
     Ok(())
 }

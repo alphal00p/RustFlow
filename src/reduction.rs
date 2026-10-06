@@ -7,7 +7,7 @@ use crate::{Error, Integral, IntegralFamily, Progress, Result, RunContext};
 use std::collections::{BTreeMap, BTreeSet};
 use symbolica::prelude::*;
 
-pub type LinearCombination = BTreeMap<Integral, Atom>;
+pub use crate::family::LinearCombination;
 
 #[derive(Clone, Debug, Default)]
 pub struct Reduction {

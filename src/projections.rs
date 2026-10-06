@@ -2,9 +2,12 @@
 //!
 //! Root signs are discrete data. Root magnitudes, gamma factors, and exponential
 //! factors are recomputed at every working precision, before Laurent fitting.
+use crate::Prescription;
 use crate::algebraic::SquareRoot;
 use crate::transport_cache::{RootGerm, RootSheet};
-use crate::{ComplexFloat, Error, KinematicPoint, Precision, Prescription, Result};
+#[cfg(feature = "automatic")]
+use crate::{ComplexFloat, Error, KinematicPoint, Precision, Result};
+#[cfg(feature = "automatic")]
 use std::collections::BTreeSet;
 use symbolica::prelude::*;
 
@@ -47,6 +50,7 @@ impl ProjectionFactors {
         }
     }
 
+    #[cfg(feature = "automatic")]
     pub(crate) fn at(&self, point: &KinematicPoint) -> Result<Self> {
         let roots = self
             .roots
@@ -110,6 +114,7 @@ impl ProjectionFactors {
         })
     }
 
+    #[cfg(feature = "automatic")]
     pub(crate) fn parameters(&self, p: Precision) -> Result<ahash::HashMap<Atom, ComplexFloat>> {
         self.roots
             .iter()
@@ -132,15 +137,13 @@ impl ProjectionFactors {
             .collect()
     }
 
+    #[cfg(feature = "automatic")]
     pub(crate) fn evaluate(&self, epsilon: &Rational, p: Precision) -> Result<ComplexFloat> {
         let mut product = p.i(1);
         for factor in &self.normalization {
             let value = match factor {
                 SampleNormalization::EulerGammaExponential(coefficient) => {
-                    let euler = ComplexFloat::new(
-                        Float::with_val(p.bits, rug::float::Constant::Euler),
-                        p.real(0),
-                    );
+                    let euler = ComplexFloat::new(p.real(0).euler(), p.real(0));
                     p.exp(&p.mul(&p.rational(&(coefficient * epsilon)), &euler))
                 }
                 SampleNormalization::Gamma {
@@ -159,7 +162,7 @@ impl ProjectionFactors {
                     let base = p.eval(base, &Default::default())?;
                     let mut logarithm = p.log(&base);
                     if base.im == p.real(0) && base.re < p.real(0) {
-                        let pi = Float::with_val(p.bits, rug::float::Constant::Pi);
+                        let pi = p.real(0).pi();
                         logarithm.im = match prescription {
                             Prescription::PlusI0 => pi,
                             Prescription::MinusI0 => -pi,
@@ -179,6 +182,7 @@ impl ProjectionFactors {
     }
 }
 
+#[cfg(feature = "automatic")]
 fn validate_exact_constant(value: &Atom) -> Result<()> {
     let mut symbols = BTreeSet::new();
     crate::family::scalar_symbols(value.as_view(), &mut symbols)?;

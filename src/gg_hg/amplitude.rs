@@ -211,7 +211,7 @@ impl HiggsJetAmplitude {
         for (monomial, coefficient) in
             crate::coefficient::exact_coefficient_list(&expression, std::slice::from_ref(&marker))?
         {
-            let degree = crate::integrand::powers(&monomial, std::slice::from_ref(&marker))?[0];
+            let degree = crate::coefficient::powers(&monomial, std::slice::from_ref(&marker))?[0];
             if !(0..=2).contains(&degree) || coefficient.contains(marker.as_view()) {
                 return Err(Error::Unsupported(
                     "native Higgs-jet kernel is not quadratic in the effective coupling marker"
@@ -238,7 +238,7 @@ impl HiggsJetAmplitude {
             for (monomial, coefficient) in
                 crate::coefficient::exact_coefficient_list(expression, &variables)?
             {
-                let exponents = crate::integrand::powers(&monomial, &variables)?;
+                let exponents = crate::coefficient::powers(&monomial, &variables)?;
                 if exponents.iter().any(|e| *e < 0)
                     || exponents.iter().map(|&e| i32::from(e)).sum::<i32>() != 2 - index as i32
                     || form_factors

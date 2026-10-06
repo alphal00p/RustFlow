@@ -609,7 +609,7 @@ fn persistent_implementation_or_dependency_mismatch_rejects_before_exact_hit() {
     cache.save(&directory).unwrap();
     let file = directory.join("physical-boundaries.bin");
     let pristine = std::fs::read(&file).unwrap();
-    let magic = b"AMFLOW-BOUNDARIES\0\x07";
+    let magic = b"AMFLOW-BOUNDARIES\0\x08";
     let (envelope, consumed): (Envelope, _) = bincode::serde::decode_from_slice(
         pristine.strip_prefix(magic).unwrap(),
         bincode::config::standard(),
@@ -672,6 +672,31 @@ fn persistent_implementation_or_dependency_mismatch_rejects_before_exact_hit() {
             !reused.get(),
             "incompatible snapshot reached exact-hit reuse"
         );
+    }
+    for obsolete_schema in [true, false] {
+        let mut payload = envelope.payload.clone();
+        if !obsolete_schema {
+            payload.push(0);
+        }
+        let changed = Envelope {
+            version: if obsolete_schema { 7 } else { envelope.version },
+            implementation: envelope.implementation.clone(),
+            dependencies: envelope.dependencies.clone(),
+            digest: blake3::hash(&payload).to_hex().to_string(),
+            payload,
+        };
+        let mut bytes = magic.to_vec();
+        bytes.extend(bincode::serde::encode_to_vec(&changed, bincode::config::standard()).unwrap());
+        std::fs::write(&file, bytes).unwrap();
+        let error = RustFlowCache::load(&directory).unwrap_err();
+        assert!(matches!(error, Error::Cache(_)));
+        if !obsolete_schema {
+            assert!(
+                error
+                    .to_string()
+                    .contains("trailing boundary-cache payload bytes")
+            );
+        }
     }
     std::fs::remove_dir_all(directory).unwrap();
 }

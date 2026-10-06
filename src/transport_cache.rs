@@ -20,8 +20,8 @@ use std::sync::{
 use symbolica::coefficient::Coefficient;
 use symbolica::prelude::*;
 
-const VERSION: u32 = 7;
-const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x07";
+const VERSION: u32 = 8;
+const MAGIC: &[u8] = b"AMFLOW-BOUNDARIES\0\x08";
 const FILE: &str = "physical-boundaries.bin";
 static NEXT_FILE: AtomicU64 = AtomicU64::new(0);
 
@@ -35,7 +35,9 @@ fn fingerprint<T: Serialize>(value: &T) -> Result<String> {
 
 /// Inclusive epsilon powers. Reuse preserves the leading power because lower
 /// coefficients can feed higher ones through the differential equations.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(
+    Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, bincode::Encode, bincode::Decode,
+)]
 pub struct EpsilonRange {
     pub leading: i32,
     pub last: i32,
@@ -59,7 +61,9 @@ impl EpsilonRange {
     }
 }
 
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(
+    Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, bincode::Encode, bincode::Decode,
+)]
 pub enum PointKind {
     Physical,
     /// An explicitly retained numerical continuation detour; excluded by default.
@@ -68,7 +72,9 @@ pub enum PointKind {
 
 /// A local sign relative to the principal square root at the exact point.
 /// This is discrete sheet information, not a precision claim about a root value.
-#[derive(Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize)]
+#[derive(
+    Clone, Copy, Debug, PartialEq, Eq, Serialize, Deserialize, bincode::Encode, bincode::Decode,
+)]
 pub enum RootSheet {
     Principal,
     Opposite,
@@ -1027,7 +1033,7 @@ impl BoundaryIdentity {
 /// not rigorous error bounds. The provenance must explain how accuracy was obtained.
 /// A verified digit count d uses the mixed coefficient scale
 /// 10^(-d) * max(1, |c|), not d significant digits for arbitrarily small c.
-#[derive(Clone, Debug, Serialize, Deserialize)]
+#[derive(Clone, Debug, Serialize, Deserialize, bincode::Encode, bincode::Decode)]
 pub struct BoundaryAccuracy {
     verified_digits: u32,
     working_bits: u32,
@@ -1343,7 +1349,11 @@ impl<F> ScaledDistance<F> {
                     &C::new(difference.re.clone(), -difference.im.clone()),
                 )
                 .re;
-            sum = Float::with_val(p.bits, sum.as_raw() + term.as_raw());
+            sum = sum.add_round(
+                &term,
+                p.bits,
+                symbolica::domains::float::RoundingDirection::Nearest,
+            );
         }
         Ok(sum)
     }
@@ -1890,8 +1900,9 @@ impl RustFlowCache {
     }
 }
 
-// Storage uses native Atom serialization and precision-bearing Symbolica Float
-// serialization. Identity hashing instead uses canonical expressions, independent
+// Storage uses native Atom serialization and Symbolica Float binary Encode/Decode
+// (exact hexadecimal values with their stored precision), including all numerical
+// coordinates, values and error metadata. Identity hashing instead uses canonical expressions, independent
 // of process-local Symbol allocation order.
 fn atom_bytes(a: &Atom) -> Result<Vec<u8>> {
     let mut out = Vec::new();
@@ -1953,7 +1964,7 @@ impl AtomEncoder for SnapshotAtoms {
     }
 }
 
-#[derive(Serialize, Deserialize)]
+#[derive(bincode::Encode, bincode::Decode)]
 enum StoredSystem {
     Dense {
         derivatives: Vec<(StoredAtom, StoredMatrix)>,
@@ -1964,7 +1975,7 @@ enum StoredSystem {
         matrices: Vec<StoredMatrix>,
     },
 }
-#[derive(Serialize, Deserialize)]
+#[derive(bincode::Encode, bincode::Decode)]
 enum StoredContinuation {
     PrescribedAffineV1 {
         domain: String,
@@ -2017,7 +2028,7 @@ impl StoredContinuation {
         })
     }
 }
-#[derive(Serialize, Deserialize)]
+#[derive(bincode::Encode, bincode::Decode)]
 struct StoredIdentity {
     key: String,
     roots: Vec<(StoredAtom, StoredAtom)>,
@@ -2182,7 +2193,7 @@ impl StoredIdentity {
         Ok(identity)
     }
 }
-#[derive(Serialize, Deserialize)]
+#[derive(bincode::Encode, bincode::Decode)]
 enum StoredPoint {
     Algebraic {
         point: Box<StoredPoint>,
@@ -2282,7 +2293,7 @@ impl StoredPoint {
         }
     }
 }
-#[derive(Serialize, Deserialize)]
+#[derive(bincode::Encode, bincode::Decode)]
 struct StoredBoundary {
     identity: usize,
     point: StoredPoint,
@@ -2320,7 +2331,7 @@ impl StoredBoundary {
         })
     }
 }
-#[derive(Serialize, Deserialize)]
+#[derive(bincode::Encode, bincode::Decode)]
 struct StoredEndpoint {
     identity: usize,
     parameter: StoredAtom,
@@ -2334,13 +2345,13 @@ struct StoredEndpoint {
     matching: StoredBoundary,
     constraints: Option<StoredEndpointConstraints>,
 }
-#[derive(Serialize, Deserialize)]
+#[derive(bincode::Encode, bincode::Decode)]
 struct StoredEndpointConstraints {
     provenance: String,
     limits: crate::frobenius::ExactFrobeniusLimits,
     relations: Vec<StoredAsymptoticRelation>,
 }
-#[derive(Serialize, Deserialize)]
+#[derive(bincode::Encode, bincode::Decode)]
 struct StoredAsymptoticRelation {
     terms: Vec<(usize, StoredAtom, usize, StoredAtom)>,
     value: StoredAtom,
@@ -2409,7 +2420,7 @@ impl StoredEndpointConstraints {
         })
     }
 }
-#[derive(Serialize, Deserialize)]
+#[derive(bincode::Encode, bincode::Decode)]
 struct StoredCache {
     identities: Vec<StoredIdentity>,
     boundaries: Vec<StoredBoundary>,
@@ -2489,7 +2500,7 @@ impl RustFlowCache {
     /// callers sharing a directory should serialize writes or merge before saving.
     pub fn save(&self, directory: &Path) -> Result<()> {
         let snapshot = StoredCache::encode(self, &mut SnapshotAtoms::default())?;
-        let payload = bincode::serde::encode_to_vec(&snapshot, bincode::config::standard())
+        let payload = bincode::encode_to_vec(&snapshot, bincode::config::standard())
             .map_err(|e| Error::Cache(e.to_string()))?;
         let envelope = Envelope {
             version: VERSION,
@@ -2559,7 +2570,12 @@ impl RustFlowCache {
                 "incompatible or corrupt boundary cache".into(),
             ));
         }
-        let stored: StoredCache = decode(&envelope.payload)?;
+        let (stored, count): (StoredCache, usize) =
+            bincode::decode_from_slice(&envelope.payload, bincode::config::standard())
+                .map_err(|error| Error::Cache(error.to_string()))?;
+        if count != envelope.payload.len() {
+            return Err(Error::Cache("trailing boundary-cache payload bytes".into()));
+        }
         let identities = stored
             .identities
             .into_iter()

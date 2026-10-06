@@ -10,7 +10,7 @@ impl AtomEncoder for UncachedAtoms {
 }
 
 fn payload(cache: &RustFlowCache, atoms: &mut impl AtomEncoder) -> Vec<u8> {
-    bincode::serde::encode_to_vec(
+    bincode::encode_to_vec(
         StoredCache::encode(cache, atoms).unwrap(),
         bincode::config::standard(),
     )
@@ -206,17 +206,15 @@ fn snapshot_roundtrips_in_a_fresh_process_with_different_symbol_order() {
                 a.point.restart_coordinates().unwrap(),
                 b.point.restart_coordinates().unwrap()
             );
-            // Native Float serialization checks the MPFR precision as well as
+            // Native Float serialization checks the stored precision as well as
             // values; the whole evidence object retains errors and provenance.
             assert_eq!(
-                bincode::serde::encode_to_vec(&a.coefficients, bincode::config::standard())
-                    .unwrap(),
-                bincode::serde::encode_to_vec(&b.coefficients, bincode::config::standard())
-                    .unwrap()
+                bincode::encode_to_vec(&a.coefficients, bincode::config::standard()).unwrap(),
+                bincode::encode_to_vec(&b.coefficients, bincode::config::standard()).unwrap()
             );
             assert_eq!(
-                serde_json::to_value(&a.accuracy).unwrap(),
-                serde_json::to_value(&b.accuracy).unwrap()
+                bincode::encode_to_vec(&a.accuracy, bincode::config::standard()).unwrap(),
+                bincode::encode_to_vec(&b.accuracy, bincode::config::standard()).unwrap()
             );
             assert_eq!(
                 payload(

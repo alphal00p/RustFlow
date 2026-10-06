@@ -270,6 +270,11 @@ impl FlowOptions {
         }
     }
     pub fn validate(&self) -> Result<()> {
+        if cfg!(feature = "wasm") && self.workers != 1 {
+            return Err(Error::Unsupported(
+                "the browser transport build supports exactly one worker".into(),
+            ));
+        }
         if let Some(pade) = &self.pade
             && (pade.degree == 0
                 || pade.degree > 32

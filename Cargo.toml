@@ -7,15 +7,26 @@ description = "RustFlow: Symbolica-native auxiliary mass flow and physical kinem
 license = "MIT"
 
 [features]
-default = []
-python = ["dep:pyo3", "dep:feynkit-py", "symbolica/python_export", "feynkit-py/native"]
+default = ["native", "automatic"]
+native = ["symbolica/integer-gmp", "symbolica/float-mpfr", "dep:rug", "feynkit-amplitude/native", "feynkit-generator/native", "feynkit-py?/native"]
+automatic = ["native", "dep:rustred", "dep:rayon"]
+wasm = ["symbolica/wasm", "feynkit-amplitude/wasm", "feynkit-generator/wasm", "feynkit-py?/wasm"]
+python_api = ["dep:pyo3", "dep:feynkit-py", "symbolica/python_export"]
+# Preserve the existing full native Python feature and add a browser entry.
+python = ["python_api", "automatic"]
+python_wasm = ["python_api", "wasm"]
 python_stubgen = ["python", "dep:pyo3-stub-gen", "symbolica/python_stubgen", "feynkit-py/python_stubgen"]
 
+[[bin]]
+name = "rustflow"
+path = "src/bin/rustflow.rs"
+required-features = ["automatic"]
+
 [dependencies]
-symbolica = { version = "=3.0.1", default-features = false, features = ["integer-gmp", "float-mpfr", "bincode", "serde", "tracing_max_level_info"] }
-rustred = { git = "https://github.com/alphal00p/rustred", branch = "main", default-features = false }
-rug = { version = "1.28", default-features = false, features = ["float", "integer", "rational"] }
-rayon = "1.11"
+symbolica = { version = "=3.0.1", default-features = false, features = ["bincode", "serde", "tracing_max_level_info"] }
+rustred = { git = "https://github.com/alphal00p/rustred", branch = "main", default-features = false, optional = true }
+rug = { version = "1.28", default-features = false, features = ["float", "integer", "rational"], optional = true }
+rayon = { version = "1.11", optional = true }
 thiserror = "2"
 serde = { version = "1", features = ["derive"] }
 serde_json = "1"
@@ -25,8 +36,8 @@ bincode = { version = "2.0.1", features = ["serde"] }
 
 # Match the host source identities; Cargo.lock pins standalone builds.
 # Required owner-level HEPKit fixes: docs/hepkit-integration.md.
-feynkit-amplitude = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false, features = ["native"] }
-feynkit-generator = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false, features = ["native"] }
+feynkit-amplitude = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false }
+feynkit-generator = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false }
 feynkit-graph = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false }
 feynkit-model = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false }
 feynkit-kinematics = { git = "https://github.com/alphal00p/gammaloop", branch = "feynkit", default-features = false }

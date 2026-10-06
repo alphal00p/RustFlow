@@ -1,5 +1,5 @@
 #![allow(clippy::needless_range_loop)] // Matrix row/column indexing mirrors the recurrence equations.
-//! Fixed working-precision operations on Symbolica's MPFR-backed numbers.
+//! Fixed working-precision operations on Symbolica's selected arbitrary-precision numbers.
 //!
 //! Symbolica's ordinary Float arithmetic tracks significant bits. ODE recurrences
 //! instead round each operation to an explicit working precision; accuracy is
@@ -163,12 +163,22 @@ impl Precision {
             out
         }
     }
+    #[cfg(feature = "native")]
     pub fn gamma_real(&self, a: &Float) -> Result<ComplexFloat> {
         let g = rug::Float::with_val(self.bits, a.as_raw()).gamma();
         if !g.is_finite() {
             return Err(Error::Numerical("gamma function pole".into()));
         }
         Ok(Complex::new(Float::from_raw(g), self.real(0)))
+    }
+    /// The browser transport path consumes supplied boundary values and does not
+    /// evaluate Gamma factors. This capability remains native until the numeric
+    /// owner provides a portable implementation.
+    #[cfg(not(feature = "native"))]
+    pub fn gamma_real(&self, _a: &Float) -> Result<ComplexFloat> {
+        Err(Error::Unsupported(
+            "Gamma evaluation requires the native numeric backend".into(),
+        ))
     }
     pub fn tolerance(&self, digits: u32) -> Float {
         self.powi(&self.i(10), -(digits as i64)).re

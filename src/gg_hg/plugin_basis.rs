@@ -1,7 +1,7 @@
 //! Exact physical-integral maps for the 48/61 canonical systems of arXiv:2112.07578.
 use super::{CanonicalTerm, SourceEvidence};
 use crate::algebraic::SquareRoot;
-use crate::reduction::LinearCombination;
+use crate::family::LinearCombination;
 use crate::transport_cache::RootGerm;
 use crate::{
     Error, Integral, IntegralFamily, ProjectionFactors, Propagator, Result, SampleNormalization,
@@ -330,7 +330,9 @@ fn validate_scalar(a: &Atom, allowed: &BTreeSet<Atom>) -> Result<()> {
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[cfg(feature = "automatic")]
     use crate::KinematicPoint;
+    #[cfg(feature = "automatic")]
     use crate::transport_cache::RootSheet;
     #[test]
     fn published_plugin_inverse_is_exact_in_native_symbolica() -> Result<()> {
@@ -351,6 +353,7 @@ mod tests {
         Ok(())
     }
     #[test]
+    #[cfg(feature = "automatic")]
     fn physical_plugin_routings_and_epsilon_normalization_are_explicit() -> Result<()> {
         for kind in [PluginFamilyKind::Planar, PluginFamilyKind::Nonplanar] {
             let map = PluginBasisMap::load(kind, "rustflow_plugin_route_test")?;

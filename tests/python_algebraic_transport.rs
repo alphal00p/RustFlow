@@ -1,4 +1,4 @@
-#![cfg(feature = "python")]
+#![cfg(feature = "python_api")]
 use pyo3::{
     prelude::*,
     types::{PyDict, PyModule},

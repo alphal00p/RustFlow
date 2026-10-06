@@ -71,8 +71,23 @@ pub(crate) fn ensure_generic_exponents(
                 continue;
             }
             let value = p.eval(&difference, parameters)?;
-            if let Some(integer) = value.re.as_raw().to_integer()
-                && let Ok(integer) = integer.to_string().parse::<i64>()
+            // Raw MPFR and Astro integer conversions have different rounding
+            // semantics. Bound the binary exponent before using their shared
+            // exact rational rounding owner: tiny dyadics need no denominator,
+            // and large values cannot produce an i64 candidate.
+            let integer = match value.re.as_raw().get_exp() {
+                None => value.re.is_zero().then_some(0),
+                Some(exponent) if exponent < 0 => Some(0),
+                Some(exponent) if exponent > 64 => None,
+                Some(_) => value
+                    .re
+                    .to_rational()
+                    .round_to_nearest_integer()
+                    .to_string()
+                    .parse::<i64>()
+                    .ok(),
+            };
+            if let Some(integer) = integer
                 && p.close(&value, &p.i(integer), p.bits / 5)
             {
                 return Err(Error::Unsupported("parameter specialization introduces an additional indicial resonance; choose a generic sample or prepare the exactly specialized system".into()));
@@ -623,7 +638,7 @@ impl FrobeniusBasis {
                 let weights = (0..n)
                     .map(|j| Atom::num(i64::from(i == j)))
                     .collect::<Vec<_>>();
-                crate::engine::project_limit(
+                project_limit(
                     self,
                     constants,
                     &weights,
@@ -634,4 +649,101 @@ impl FrobeniusBasis {
             })
             .collect()
     }
+}
+
+pub(crate) fn project_limit(
+    basis: &FrobeniusBasis,
+    constants: &[C],
+    weights: &[Atom],
+    epsilon: Symbol,
+    eta: Symbol,
+    parameters: &ahash::HashMap<Atom, C>,
+) -> Result<C> {
+    basis.validate()?;
+    let p = basis.precision;
+    if constants.len() != basis.columns.len() || weights.len() != basis.columns.len() {
+        return Err(Error::InvalidInput("endpoint projection dimensions".into()));
+    }
+    let mut terms: BTreeMap<(Rational, usize), C> = BTreeMap::new();
+    for (column, constant) in basis.columns.iter().zip(constants) {
+        if *constant == p.zero() || !column.exponent.derivative(epsilon).is_zero() {
+            continue;
+        }
+        let lambda = if let AtomView::Num(n) = column.exponent.as_view() {
+            if let symbolica::coefficient::Coefficient::Complex(c) = n.get_coeff_view().to_owned() {
+                if !c.im.is_zero() {
+                    return Err(Error::Unsupported(
+                        "complex physical endpoint exponent".into(),
+                    ));
+                }
+                c.re
+            } else {
+                return Err(Error::Unsupported("nonrational endpoint exponent".into()));
+            }
+        } else {
+            return Err(Error::Unsupported(
+                "parameter-dependent physical endpoint exponent".into(),
+            ));
+        };
+        for (i, weight) in weights.iter().enumerate() {
+            if weight.is_zero() {
+                continue;
+            }
+            let valuation = crate::frobenius::valuation(weight, eta)?;
+            if &lambda + &Rational::from(valuation + column.coefficients.len() as i64)
+                <= Rational::zero()
+            {
+                return Err(Error::Accuracy(
+                    "endpoint series does not reach every term required by the target reduction"
+                        .into(),
+                ));
+            }
+            let through = (-lambda.clone())
+                .floor()
+                .to_string()
+                .parse::<i64>()
+                .map_err(|_| Error::Limit("endpoint exponent exceeds index range".into()))?;
+            if through < valuation {
+                continue;
+            }
+            if through.saturating_sub(valuation) > 10000 {
+                return Err(Error::Limit(
+                    "endpoint target expansion exceeds 10000 terms".into(),
+                ));
+            }
+            let expansion = weight
+                .series(eta, 0, through + 1)
+                .map_err(|e| Error::Unsupported(e.to_string()))?;
+            for (power, coefficient) in expansion.terms() {
+                let power = power
+                    .to_string()
+                    .parse::<i64>()
+                    .map_err(|_| Error::Unsupported("noninteger reduction exponent".into()))?;
+                let coefficient = p.eval(coefficient, parameters)?;
+                for (k, logs) in column.coefficients.iter().enumerate() {
+                    let exponent = &lambda + &Rational::from(power + k as i64);
+                    if exponent > Rational::zero() {
+                        break;
+                    }
+                    for (l, row) in logs.iter().enumerate() {
+                        let term = p.mul(constant, &p.mul(&coefficient, &row[i]));
+                        let entry = terms
+                            .entry((exponent.clone(), l))
+                            .or_insert_with(|| p.zero());
+                        *entry = p.add(entry, &term);
+                    }
+                }
+            }
+        }
+    }
+    for ((power, log), value) in &terms {
+        if (*power < Rational::zero() || *log > 0) && p.norm(value) > p.tolerance(p.bits / 5) {
+            return Err(Error::Numerical(
+                "uncancelled physical endpoint divergence".into(),
+            ));
+        }
+    }
+    Ok(terms
+        .remove(&(Rational::zero(), 0))
+        .unwrap_or_else(|| p.zero()))
 }

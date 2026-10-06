@@ -267,6 +267,41 @@ pub(crate) fn exact_coefficient_list(
         .collect())
 }
 
+pub(crate) fn factors(a: &Atom) -> Vec<(Atom, i64)> {
+    let list = if let AtomView::Mul(m) = a.as_view() {
+        m.iter().map(|v| v.to_owned()).collect()
+    } else {
+        vec![a.clone()]
+    };
+    list.into_iter()
+        .map(|v| {
+            if let AtomView::Pow(w) = v.as_view() {
+                let (base, exponent) = w.get_base_exp();
+                if let Ok(power) = exponent.to_string().parse::<i64>() {
+                    return (base.to_owned(), power);
+                }
+            }
+            (v, 1)
+        })
+        .collect()
+}
+
+pub(crate) fn powers(monomial: &Atom, variables: &[Atom]) -> Result<Vec<i16>> {
+    let mut out = vec![0_i16; variables.len()];
+    for (base, power) in factors(monomial) {
+        if base.is_one() {
+            continue;
+        }
+        let j = variables
+            .iter()
+            .position(|v| v == &base)
+            .ok_or_else(|| Error::Unsupported("nonpolynomial boundary numerator".into()))?;
+        out[j] =
+            i16::try_from(power).map_err(|_| Error::Limit("numerator power overflow".into()))?;
+    }
+    Ok(out)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

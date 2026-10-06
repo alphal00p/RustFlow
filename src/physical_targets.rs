@@ -275,10 +275,10 @@ impl PreparedPhysicalFamily {
                 if !p.finite(value) || !refined.finite(high) {
                     return Err(Error::Numerical("nonfinite projected target".into()));
                 }
-                let error = Float::with_val(
+                let error = input_errors[index].re.add_round(
+                    &refined.norm(&refined.sub(high, value)),
                     p.bits,
-                    input_errors[index].re.as_raw()
-                        + refined.norm(&refined.sub(high, value)).as_raw(),
+                    symbolica::domains::float::RoundingDirection::Nearest,
                 );
                 let scale = maximum(p.norm(value), p.real(1));
                 if !error.is_finite() || error > p.tolerance(digits) * scale {

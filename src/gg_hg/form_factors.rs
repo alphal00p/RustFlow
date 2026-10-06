@@ -305,7 +305,7 @@ impl HiggsJetFormFactors {
                 .collect(),
         );
         let parameters = self.parameters(&point, p)?;
-        let pi = ComplexFloat::new(Float::with_val(p.bits, rug::float::Constant::Pi), p.real(0));
+        let pi = ComplexFloat::new(p.real(0).pi(), p.real(0));
         let normalization = p.div(
             &p.i(-1),
             &p.mul(

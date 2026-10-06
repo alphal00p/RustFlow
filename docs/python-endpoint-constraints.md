@@ -54,8 +54,8 @@ restart preserves them, and constrained terminal reuse requires the same exact
 epsilon range and mathematical declarations. Different provenance is a distinct
 assertion. Work limits (`max_dimension`, `max_order`, `max_coefficient_bits`,
 `max_scalar_cells`) are validated but do not change a completed record's
-mathematical identity. Source-sensitive schema-7 compatibility remains native
-owned. Computation releases the GIL, and cancellation or failed admission does
+mathematical identity. Source-sensitive compatibility remains owned by the
+[versioned binary cache](browser-transport.md). Computation releases the GIL, and cancellation or failed admission does
 not publish partial endpoint records.
 
 These bindings are in this crate's optional `python`/`python_stubgen` features;

@@ -153,6 +153,40 @@ fn nongeneric_parameter_collision_cannot_return_degenerate_columns() {
 }
 
 #[test]
+fn near_integer_resonance_is_rejected_from_both_sides_and_signs() {
+    let x = symbol!("portable_resonance::x");
+    let a = symbol!("portable_resonance::a");
+    let system = DifferentialSystem {
+        variable: x,
+        matrix: vec![
+            vec![Atom::var(a) / Atom::var(x), Atom::new()],
+            vec![Atom::num(1) / Atom::var(x), Atom::new()],
+        ],
+    };
+    let prepared = system.prepare_frobenius(&RunContext::default()).unwrap();
+    let p = Precision::decimal(60).unwrap();
+    let displacement = Rational::from((Integer::one(), Integer::from(10).pow(55)));
+    for sign in [-1, 1] {
+        for side in [-1, 1] {
+            let value = Rational::from(sign) + &(&displacement * &Rational::from(side));
+            let parameters = ahash::HashMap::from_iter([(Atom::var(a), p.rational(&value))]);
+            assert!(
+                matches!(prepared.evaluate(p, &parameters, 12, &RunContext::default()), Err(Error::Unsupported(message)) if message.contains("resonance")),
+                "near integer {sign}, side {side} was admitted"
+            );
+        }
+    }
+    // The integer candidate is zero; obtaining it must not materialize a
+    // denominator proportional to this finite float's very negative exponent.
+    let tiny = p.parse("1e-10000000", "0").unwrap();
+    assert!(!tiny.re.is_zero());
+    let parameters = ahash::HashMap::from_iter([(Atom::var(a), tiny)]);
+    assert!(
+        matches!(prepared.evaluate(p, &parameters, 12, &RunContext::default()), Err(Error::Unsupported(message)) if message.contains("resonance"))
+    );
+}
+
+#[test]
 fn tiny_nonzero_parameters_do_not_acquire_an_artificial_exclusion_radius() {
     let system = DifferentialSystem {
         variable: symbol!("prepared_small::x"),

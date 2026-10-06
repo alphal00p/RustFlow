@@ -576,7 +576,9 @@ mod disk_geometry_tests {
         let p = Precision::decimal(60).unwrap();
         let c = Rational::from((1, 2));
         let margin = Rational::from((Integer::from(16), Integer::from(10).pow(43)));
-        let delta = &margin + &Rational::from((Integer::one(), Integer::from(10).pow(68)));
+        // Astro may retain the enclosing machine-word precision, beyond the
+        // requested bits. Make this detour unresolvable on either backend.
+        let delta = &margin + &Rational::from((Integer::one(), Integer::from(10).pow(100)));
         // These radius-zero disks are exact analytic certificates for the roots
         // 1/2 +/- i*delta of (x-1/2)^2 + delta^2.
         for sign in [-1, 1] {
@@ -586,10 +588,14 @@ mod disk_geometry_tests {
             let distance = distance_to_disk(&c, &other, &Rational::zero());
             let radius = (&distance - &margin) / Rational::from(8);
             assert!(radius > Rational::zero());
+            let center = p.rational(&c);
+            let step = p.rational(&radius);
+            assert_eq!(p.add(&center, &step), center);
+            assert_eq!(p.sub(&center, &step), center);
             assert!(matches!(
                 rounded_triangle(
                     p,
-                    &p.rational(&c),
+                    &center,
                     &[c.clone(), c.clone()],
                     &radius,
                     &distance,

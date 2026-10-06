@@ -167,7 +167,8 @@ impl PyEvaluationOptions {
 }
 
 /// Thread-safe cancellation and progress polling for a running calculation.
-/// Run an evaluator in a worker thread and poll this object from the UI thread.
+/// Cooperative cancellation and queued progress for the active computation.
+/// Native hosts may poll from another thread; browser hosts schedule serial stages.
 /// At most the 4096 most recent progress events are retained.
 #[cfg_attr(feature = "python_stubgen", gen_stub_pyclass)]
 #[pyclass(

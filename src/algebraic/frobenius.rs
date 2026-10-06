@@ -702,7 +702,7 @@ impl AlgebraicEndpointExpansion {
                 let weights = (0..n)
                     .map(|j| Atom::num(i64::from(component == j)))
                     .collect::<Vec<_>>();
-                crate::engine::project_limit(
+                crate::frobenius::project_limit(
                     &self.basis,
                     &self.constants,
                     &weights,

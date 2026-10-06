@@ -1,0 +1,189 @@
+{
+  "base_commit": "7096ba8e1f4d7edda4402f9ff01c961f6f3e6a4e",
+  "owner_reproducer_commit": "bffbad98d71f17ee171122dd75a4b810065e8dd4",
+  "scope": "Portable supplied-boundary transport feature split and exact numerical cache schema8; no automatic reduction/boundaries in browser feature.",
+  "official_owners": {
+    "symbolica_community": "6defcca968ca8411977fb1f641a9dee49ee7b7a7",
+    "hepkit": "b96600b0085d9ddfa9e6acbc11fa72ec6163253c",
+    "rustred_native_only": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+  },
+  "host_platform": "x86_64-linux; Rust1.97.1; no Emscripten runtime claim",
+  "native": {
+    "features": "python_stubgen",
+    "regular_tests_passed": 261,
+    "regular_ignored": 6,
+    "harnesses": [
+      {
+        "passed": 189,
+        "ignored": 5,
+        "seconds": "8.19s"
+      },
+      {
+        "passed": 24,
+        "ignored": 0,
+        "seconds": "0.24s"
+      },
+      {
+        "passed": 4,
+        "ignored": 0,
+        "seconds": "1.05s"
+      },
+      {
+        "passed": 6,
+        "ignored": 0,
+        "seconds": "0.38s"
+      },
+      {
+        "passed": 2,
+        "ignored": 1,
+        "seconds": "2.20s"
+      },
+      {
+        "passed": 5,
+        "ignored": 0,
+        "seconds": "0.00s"
+      },
+      {
+        "passed": 19,
+        "ignored": 0,
+        "seconds": "0.61s"
+      },
+      {
+        "passed": 12,
+        "ignored": 0,
+        "seconds": "0.07s"
+      }
+    ],
+    "additional_scientific_bundle_passed": 1,
+    "source_digest": "b250b04424319df31620d2465dc739bba79a436473c052a94dc66f4b25e846c5",
+    "dependency_digest": "0a8d2f1993696d8bedd0aae38404a6a5fb557db57a0f0f7713ba6432b96b489b",
+    "note": "Native runtime binary predates the contour test-only fixture adjustment. All production code is identical; final native all-target Clippy checks adjusted source. The previous contour fixture remains in the evidence archive."
+  },
+  "portable": {
+    "features": "--no-default-features --features python_wasm",
+    "regular_tests_passed": 189,
+    "regular_ignored": 5,
+    "harnesses": [
+      {
+        "passed": 118,
+        "ignored": 3,
+        "seconds": "114.76s"
+      },
+      {
+        "passed": 24,
+        "ignored": 0,
+        "seconds": "1.55s"
+      },
+      {
+        "passed": 1,
+        "ignored": 1,
+        "seconds": "16.35s"
+      },
+      {
+        "passed": 1,
+        "ignored": 0,
+        "seconds": "38.42s"
+      },
+      {
+        "passed": 4,
+        "ignored": 0,
+        "seconds": "6.01s"
+      },
+      {
+        "passed": 2,
+        "ignored": 0,
+        "seconds": "0.01s"
+      },
+      {
+        "passed": 6,
+        "ignored": 0,
+        "seconds": "0.82s"
+      },
+      {
+        "passed": 1,
+        "ignored": 0,
+        "seconds": "26.49s"
+      },
+      {
+        "passed": 1,
+        "ignored": 1,
+        "seconds": "2.18s"
+      },
+      {
+        "passed": 19,
+        "ignored": 0,
+        "seconds": "3.09s"
+      },
+      {
+        "passed": 12,
+        "ignored": 0,
+        "seconds": "0.10s"
+      }
+    ],
+    "additional_scientific_bundle_passed": 1,
+    "source_digest": "142e1b5e1eea75518b439c27cbdd1256fbb5a79fccc40755b9e3ea2887b10cc6",
+    "dependency_digest": "6b5738c089ae85c654001716e9fa326e36eb59415c8749de94f2eeeece03c8d4",
+    "test_times_not_benchmarks": {
+      "planar_48_transport_reference_restart_seconds": 16.35,
+      "coherent_amplitude_component_seconds": 38.42
+    },
+    "separate_browser_smoke_helper": "Passed embedded CPython with this Astro library; actual Pyodide still required."
+  },
+  "scientific_inputs": {
+    "loader_sha256": "d3eeacce5e67607980bad57a96370119c2a68af552a0bad3db8071b15197c54a",
+    "manifest_sha256": "767b359ab86aa06cc50a2624a7f992d9cb951061d302f18bda38ece14b062722",
+    "bundle_sha256": "984b64a1617eb111543fc3b97e1cd36c84c610cfd8a02b11e8dfa861809acee4",
+    "configurations": 16,
+    "complex_coefficients": 4360,
+    "absolute_errors": 4360,
+    "verified_digits": 40,
+    "working_bits": 415
+  },
+  "validation": {
+    "native_all_target_clippy": "passed -D warnings",
+    "portable_library_and_all_selected_target_clippy": "passed -D warnings",
+    "format": "passed",
+    "exact_checks": [
+      "Every supplied coefficient real/imaginary ratio and per-number precision preserved",
+      "Every supplied error ratio and precision preserved",
+      "All16 cache entries preserve raw provenance, cap and working precision through binary restart",
+      "Cache schema7, source/dependency mismatch, corrupt checksum and checksummed trailing payload are rejected",
+      "Source cache import passes normal validation and does not bypass binary cache identity",
+      "Separate processes with different symbol registration order preserve native binary numerical evidence",
+      "No local Symbolica/HEPKit/RustRed patches or independent graph/numerical owner"
+    ]
+  },
+  "changes": {
+    "feature_split": "Default native+automatic preserves full native behavior; python remains native; python_wasm enables existing portable owners and supplied transport only",
+    "shared_owners": "Moved existing project_limit to Frobenius, factor/power traversal to coefficient, and LinearCombination to family without implementing substitute algorithms",
+    "rounding": "Use owner exact rational nearest-integer with exponent bounds for consistent near-resonance detection",
+    "cache": "Schema8 native bincode Encode/Decode for all numerical payload fields; outer version/source/checksum/atomic-write checks unchanged"
+  },
+  "resolved_findings": [
+    "Official Astro serde changes the exact value of415-bit1/3; owner binary codec is exact (standalone MRE committed separately)",
+    "Astro stores machine-word precision beyond requested bits; contour test now establishes actual rounded collapse explicitly using a smaller exact detour, without production proof changes",
+    "Cache-hit provenance annotations and derived-input caps differ intentionally from original transport wrappers; tests compare raw persisted evidence and selected-source semantics"
+  ],
+  "limitations": [
+    "Actual Emscripten/Pyodide build and runtime validation not performed by this RustFlow feature milestone",
+    "Full16 portable physical transport and browser performance remain separate host gates",
+    "Supplied starting values are used, not freshly computed browser boundaries",
+    "Gamma evaluation and RustRed-backed family validation/automatic operations remain native capabilities",
+    "Finite non-Gaussian endpoint leading constants and existing unsupported domains retain typed failures"
+  ],
+  "commands": [
+    "cargo test --release --locked --offline --features python_stubgen --lib --test python_portable_higgs_seeds --test prepared_frobenius --test source_fingerprint --test physical_transport --test transport_cache --test supplied_singular_endpoints --test constrained_singular_endpoints",
+    "cargo test --release --locked --offline --no-default-features --features python_wasm --lib --test portable_backend --test python_portable_higgs_seeds --test python_algebraic_transport --test physical_transport --test transport_cache --test prepared_frobenius --test gg_hg --test gg_hg_amplitude --test supplied_singular_endpoints --test constrained_singular_endpoints -- --test-threads=1",
+    "cargo test --release --locked --offline --no-default-features --features python_wasm --test python_portable_higgs_seeds -- --include-ignored --test-threads=1",
+    "cargo clippy --locked --offline --features python_stubgen --all-targets -- -D warnings",
+    "cargo clippy --locked --offline --no-default-features --features python_wasm --lib --test portable_backend --test python_portable_higgs_seeds --test python_algebraic_transport --test physical_transport --test transport_cache --test prepared_frobenius --test gg_hg --test gg_hg_amplitude --test supplied_singular_endpoints --test constrained_singular_endpoints -- -D warnings",
+    "cargo fmt --check"
+  ],
+  "review": "Parent and owner-audit agent independently reviewed source/feature split, bounded rounding and native codec without blocker.",
+  "archive": {
+    "path": "evidence.tar.gz",
+    "sha256": "82ce169b6b1bdd3ea3c18f8bf4847cee9715bc7b8988c46393c1e866cf5cc2ac",
+    "bytes": 230041,
+    "contents": "Source changes and snapshots, source-input hashes, current loader/manifest, passing logs and explicitly retained corrected failure evidence."
+  }
+}

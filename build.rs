@@ -40,10 +40,22 @@ fn main() {
     // In a host, its dependency declaration supplies these features.
     let standalone = host_manifest == own_manifest.canonicalize().unwrap();
     if standalone {
-        if env::var_os("CARGO_FEATURE_PYTHON_STUBGEN").is_some() {
-            command.args(["--features", "python_stubgen"]);
-        } else if env::var_os("CARGO_FEATURE_PYTHON").is_some() {
-            command.args(["--features", "python"]);
+        let features = [
+            "native",
+            "automatic",
+            "wasm",
+            "python_api",
+            "python",
+            "python_wasm",
+            "python_stubgen",
+        ]
+        .into_iter()
+        .filter(|feature| {
+            env::var_os(format!("CARGO_FEATURE_{}", feature.to_uppercase())).is_some()
+        })
+        .collect::<Vec<_>>();
+        if !features.is_empty() {
+            command.args(["--features", &features.join(",")]);
         }
     }
     if let Ok(features) = env::var("RUSTFLOW_WORKSPACE_FEATURES")

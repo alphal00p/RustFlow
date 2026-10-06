@@ -234,6 +234,7 @@ fn mapped_trial_uses_declared_point_for_local_argument_jacobian_and_state() -> R
 }
 
 #[test]
+#[cfg(feature = "native")]
 fn saved_segment_rejects_nonfinite_span_or_interval_coordinate() -> Result<()> {
     let p = Precision::decimal(60)?;
     let make = |end: C| crate::diffexp::EpsilonSolution {

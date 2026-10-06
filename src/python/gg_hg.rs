@@ -125,6 +125,11 @@ impl PyHiggsJetIntegralSystem {
             namespace: namespace.into(),
         })
     }
+    /// Whether this build contains native reduction and boundary generation.
+    #[getter]
+    fn automatic_boundary_generation_available(&self) -> bool {
+        cfg!(feature = "automatic")
+    }
     #[getter]
     fn dimension(&self) -> usize {
         self.inner.map.kind.dimension()
@@ -220,6 +225,7 @@ impl PyHiggsJetIntegralSystem {
     /// retaining the evaluator's exact reduction cache.
     #[pyo3(signature=(evaluator,cache,point,root_sheets,*,last=4,recompute=false,control=None))]
     #[allow(clippy::too_many_arguments)]
+    #[cfg(feature = "automatic")]
     fn generate_boundary(
         &self,
         py: Python<'_>,

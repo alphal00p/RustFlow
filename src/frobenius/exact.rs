@@ -13,7 +13,7 @@ pub(crate) type Gaussian = Complex<Rational>;
 type ExactMatrix = Matrix<FloatField<Gaussian>>;
 
 /// Conservative admission limits for exact coefficient work, not allocator quotas.
-#[derive(Clone, Debug, serde::Serialize, serde::Deserialize)]
+#[derive(Clone, Debug, serde::Serialize, serde::Deserialize, bincode::Encode, bincode::Decode)]
 pub struct ExactFrobeniusLimits {
     pub max_dimension: usize,
     pub max_order: usize,

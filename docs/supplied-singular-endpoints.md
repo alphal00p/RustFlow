@@ -172,7 +172,8 @@ finite-basis/truncation accuracy retains the independent-profile estimates
 described above. Incomplete honest prefixes request more order; incompatible
 constraints, unresolved branch certificates and resource limits remain typed
 failures. The complete existing chart/germ identity owns these derived sheet
-equations, so the terminal representation remains schema 7.
+equations. The current [binary cache schema](browser-transport.md) preserves
+the terminal representation and encodes numerical payloads exactly.
 
 Exact non-Gaussian leading constants remain unsupported in this stage.
 The pinned Symbolica owner provides selected `AlgebraicExtension` and
