@@ -16,6 +16,36 @@ pub enum Prescription {
     MinusI0,
 }
 
+/// Arithmetic for source-defect enclosures in rational Taylor charts.
+/// Registered-root charts and Padé candidates retain their own arithmetic.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum ResidualArithmetic {
+    #[default]
+    Ball,
+    /// Bounded native integer products, with conservative ball fallback.
+    AdaptiveInteger,
+}
+impl ResidualArithmetic {
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::Ball => "ball",
+            Self::AdaptiveInteger => "adaptive_integer",
+        }
+    }
+}
+impl std::str::FromStr for ResidualArithmetic {
+    type Err = Error;
+    fn from_str(value: &str) -> Result<Self> {
+        match value {
+            "ball" => Ok(Self::Ball),
+            "adaptive_integer" => Ok(Self::AdaptiveInteger),
+            _ => Err(Error::InvalidInput(
+                "residual_arithmetic must be ball or adaptive_integer".into(),
+            )),
+        }
+    }
+}
+
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub enum MassMode {
     /// All lines at one loop; one massive line (or the first line) at higher loops.
@@ -72,6 +102,7 @@ pub struct FlowOptions {
     pub guard_digits: u32,
     pub series_order: usize,
     pub pade: Option<PadeOptions>,
+    pub residual_arithmetic: ResidualArithmetic,
     /// Regular boundary-centered Taylor coordinates; physical paths remain unchanged.
     pub local_coordinate: crate::local_coordinates::LocalCoordinate,
     /// Maximum physical proposals per continuation call. A rejected Padé
@@ -107,6 +138,7 @@ impl Default for FlowOptions {
             guard_digits: 40,
             series_order: 80,
             pade: None,
+            residual_arithmetic: ResidualArithmetic::Ball,
             local_coordinate: crate::local_coordinates::LocalCoordinate::Identity,
             max_steps: 1000,
             step_size_strategy: StepSizeStrategy::Halving,

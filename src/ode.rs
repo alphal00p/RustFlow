@@ -8,6 +8,8 @@ pub(crate) mod conditioning;
 #[path = "ode/residual.rs"]
 pub(crate) mod residual;
 use conditioning::ConditioningChart;
+#[path = "ode/integer_residual.rs"]
+pub(crate) mod integer_residual;
 #[path = "ode/pade.rs"]
 pub mod pade;
 #[path = "ode/source.rs"]
@@ -814,6 +816,36 @@ pub(crate) trait SeriesSystem {
             "this series system has no mapped local-chart compiler".into(),
         ))
     }
+    fn local_chart_with_options(
+        &self,
+        center: &C,
+        values: &[C],
+        order: usize,
+        state: &Self::State,
+        _options: &FlowOptions,
+        context: &RunContext,
+    ) -> Result<(Vec<Vec<C>>, Self::Chart)> {
+        context.cancellation.check()?;
+        let chart = self.local_chart(center, values, order, state)?;
+        context.cancellation.check()?;
+        Ok(chart)
+    }
+    #[allow(clippy::too_many_arguments)] // Shared source options and cancellation context.
+    fn mapped_chart_with_options(
+        &self,
+        coordinate: &TaylorCoordinate,
+        center: &C,
+        values: &[C],
+        order: usize,
+        state: &Self::State,
+        _options: &FlowOptions,
+        context: &RunContext,
+    ) -> Result<MappedTaylorChart<Self::Chart>> {
+        context.cancellation.check()?;
+        let chart = self.mapped_chart(coordinate, center, values, order, state)?;
+        context.cancellation.check()?;
+        Ok(chart)
+    }
     /// The step is in the chart's polynomial coordinate. Unavailable bounds
     /// reject the trial; they cannot be treated as a successful certificate.
     fn whole_segment_residual(&self, chart: &Self::Chart, step: &C) -> Result<Option<Vec<Float>>>;
@@ -871,34 +903,79 @@ impl SeriesSystem for CompiledSystem {
         center: &C,
         values: &[C],
         order: usize,
-        _: &(),
+        state: &(),
     ) -> Result<(Vec<Vec<C>>, Self::Chart)> {
+        self.local_chart_with_options(
+            center,
+            values,
+            order,
+            state,
+            &FlowOptions::default(),
+            &RunContext::default(),
+        )
+    }
+    fn local_chart_with_options(
+        &self,
+        center: &C,
+        values: &[C],
+        order: usize,
+        _: &(),
+        options: &FlowOptions,
+        context: &RunContext,
+    ) -> Result<(Vec<Vec<C>>, Self::Chart)> {
+        context.cancellation.check()?;
         let coefficients = self.taylor(center, values, order)?;
-        let chart = RationalResidualChart::new_exact(
+        let chart = RationalResidualChart::new_with_options(
             self.p,
             &self.exact_source_rows,
             center,
             &coefficients,
             1,
+            options,
+            context,
         )?;
         Ok((coefficients, chart))
     }
     fn mapped_chart(
         &self,
         coordinate: &TaylorCoordinate,
+        center: &C,
+        values: &[C],
+        order: usize,
+        state: &(),
+    ) -> Result<MappedTaylorChart<Self::Chart>> {
+        self.mapped_chart_with_options(
+            coordinate,
+            center,
+            values,
+            order,
+            state,
+            &FlowOptions::default(),
+            &RunContext::default(),
+        )
+    }
+    #[allow(clippy::too_many_arguments)] // Shared source options and cancellation context.
+    fn mapped_chart_with_options(
+        &self,
+        coordinate: &TaylorCoordinate,
         _: &C,
         values: &[C],
         order: usize,
         _: &(),
+        options: &FlowOptions,
+        context: &RunContext,
     ) -> Result<MappedTaylorChart<Self::Chart>> {
+        context.cancellation.check()?;
         let mapped = self.in_coordinate(coordinate)?;
         let coefficients = mapped.taylor(&self.p.zero(), values, order)?;
-        let chart = RationalResidualChart::new_exact(
+        let chart = RationalResidualChart::new_with_options(
             self.p,
             &mapped.exact_source_rows,
             &self.p.zero(),
             &coefficients,
             1,
+            options,
+            context,
         )?;
         Ok((coefficients, chart, mapped.poles))
     }
@@ -1331,14 +1408,23 @@ pub(crate) fn transport_series_observed<S: SeriesSystem>(
                         );
                     }
                 }
-                system.local_chart(&center, &values, options.series_order, &state)?
+                system.local_chart_with_options(
+                    &center,
+                    &values,
+                    options.series_order,
+                    &state,
+                    options,
+                    context,
+                )?
             } else {
-                let (coefficients, chart, poles) = system.mapped_chart(
+                let (coefficients, chart, poles) = system.mapped_chart_with_options(
                     &coordinate,
                     &center,
                     &values,
                     options.series_order,
                     &state,
+                    options,
+                    context,
                 )?;
                 if let Some(radius) = poles
                     .iter()

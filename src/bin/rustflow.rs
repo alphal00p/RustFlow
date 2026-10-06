@@ -26,6 +26,7 @@ struct Settings {
     guard_digits: u32,
     series_order: usize,
     pade_degree: Option<usize>,
+    residual_arithmetic: String,
     max_steps: usize,
     step_size_strategy: String,
     local_coordinate: String,
@@ -49,6 +50,7 @@ impl Default for Settings {
             guard_digits: f.guard_digits,
             series_order: f.series_order,
             pade_degree: None,
+            residual_arithmetic: "ball".into(),
             max_steps: f.max_steps,
             step_size_strategy: "halving".into(),
             local_coordinate: "identity".into(),
@@ -76,6 +78,7 @@ impl Settings {
                 degree,
                 ..Default::default()
             }),
+            residual_arithmetic: self.residual_arithmetic.parse()?,
             max_steps: self.max_steps,
             step_size_strategy: match self.step_size_strategy.as_str() {
                 "halving" => StepSizeStrategy::Halving,
@@ -1013,6 +1016,33 @@ fn main() {
 #[cfg(test)]
 mod step_size_settings_tests {
     use super::*;
+    #[test]
+    fn integer_residual_arithmetic_is_explicit_and_validated() {
+        assert_eq!(
+            Settings::default()
+                .options(Path::new("."))
+                .unwrap()
+                .residual_arithmetic,
+            ResidualArithmetic::Ball
+        );
+        for (value, expected) in [
+            ("ball", ResidualArithmetic::Ball),
+            ("adaptive_integer", ResidualArithmetic::AdaptiveInteger),
+        ] {
+            let settings: Settings =
+                serde_json::from_value(json!({"residual_arithmetic":value})).unwrap();
+            assert_eq!(
+                settings
+                    .options(Path::new("."))
+                    .unwrap()
+                    .residual_arithmetic,
+                expected
+            );
+        }
+        let invalid: Settings =
+            serde_json::from_value(json!({"residual_arithmetic":"integer"})).unwrap();
+        assert!(invalid.options(Path::new(".")).is_err());
+    }
     #[test]
     fn rational_trials_are_opt_in_and_degree_is_validated() {
         assert!(
