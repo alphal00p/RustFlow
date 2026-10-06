@@ -1,0 +1,12 @@
+[package]
+name = "symbolica-astro-float-serde-mre"
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+publish = false
+
+[workspace]
+
+[dependencies]
+symbolica = { git = "https://github.com/symbolica-dev/symbolica", rev = "6defcca968ca8411977fb1f641a9dee49ee7b7a7", default-features = false, features = ["wasm", "serde", "bincode"] }
+bincode = { version = "=2.0.1", features = ["serde"] }
