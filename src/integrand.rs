@@ -5,6 +5,8 @@ use crate::*;
 use std::collections::BTreeMap;
 use symbolica::prelude::*;
 
+mod native;
+
 #[derive(Clone, Debug)]
 pub struct IntegralTerm {
     pub coefficient: Atom,
@@ -72,6 +74,7 @@ pub fn to_integrals(
     template: &IntegralFamily,
     budget: usize,
 ) -> Result<Vec<IntegralTerm>> {
+    native::validate_coordinates(variables, template)?;
     if expression.is_zero() {
         return Ok(vec![]);
     }
@@ -110,9 +113,22 @@ pub fn to_integrals(
             numerator *= base.pow(power);
         }
     }
+    if native::supports(&denominators) {
+        return native::to_integrals(
+            &denominators,
+            &indices,
+            &numerator,
+            variables,
+            template,
+            budget,
+        );
+    }
+    // HEPKit's current affine owner uses a rational coefficient field. Keep
+    // the existing exact AtomField route only for inputs outside that field;
+    // in particular, a formal replacement of i would not preserve rank.
     let mut out = Vec::new();
     let mut remaining = budget;
-    partial_fraction(
+    atom_field_partial_fraction(
         denominators,
         indices,
         numerator,
@@ -124,7 +140,7 @@ pub fn to_integrals(
     Ok(out)
 }
 
-fn partial_fraction(
+fn atom_field_partial_fraction(
     denominators: Vec<Propagator>,
     indices: Vec<i16>,
     numerator: Atom,
@@ -164,7 +180,7 @@ fn partial_fraction(
                 }
                 let mut next = indices.clone();
                 next[i] -= 1;
-                partial_fraction(
+                atom_field_partial_fraction(
                     denominators.clone(),
                     next,
                     (&numerator * c / &constant).together().cancel(),
@@ -185,7 +201,7 @@ fn partial_fraction(
                 next[active[pivot]] = next[active[pivot]]
                     .checked_add(1)
                     .ok_or_else(|| Error::Limit("partial fraction index overflow".into()))?;
-                partial_fraction(
+                atom_field_partial_fraction(
                     denominators.clone(),
                     next,
                     (-&numerator * c / &relation[pivot]).together().cancel(),
@@ -227,9 +243,7 @@ fn partial_fraction(
             .map(|p| p.scalar_products.clone())
             .collect::<Vec<_>>(),
     )?;
-    let d = (0..n)
-        .map(|j| Atom::var(symbol!(format!("symbolica_amflow::boundary_d_{j}"))))
-        .collect::<Vec<_>>();
+    let d = denominator_labels(&numerator, &denominators, variables)?;
     let rules = variables
         .iter()
         .enumerate()
@@ -246,11 +260,66 @@ fn partial_fraction(
     let mut family = template.clone();
     family.propagators = propagators;
     family.physical_propagators = physical;
-    for (m, c) in crate::coefficient::exact_coefficient_list(&numerator, &d)? {
+    append_numerator_terms(&numerator, &d, &family, &indices, out)
+}
+
+fn denominator_labels(
+    numerator: &Atom,
+    denominators: &[Propagator],
+    variables: &[Atom],
+) -> Result<Vec<Atom>> {
+    let sources = boundary_sources(numerator, denominators, variables);
+    (0..variables.len())
+        .map(|j| fresh_boundary_symbol(&format!("symbolica_amflow::boundary_d_{j}"), &sources))
+        .collect()
+}
+
+fn boundary_sources<'a>(
+    numerator: &'a Atom,
+    denominators: &'a [Propagator],
+    variables: &'a [Atom],
+) -> Vec<&'a Atom> {
+    std::iter::once(numerator)
+        .chain(variables)
+        .chain(
+            denominators
+                .iter()
+                .flat_map(|d| std::iter::once(&d.constant).chain(&d.scalar_products)),
+        )
+        .collect()
+}
+
+// Internal notation must not turn a user's scalar parameter into a momentum
+// or denominator coordinate. All callers use distinct stems.
+fn fresh_boundary_symbol(stem: &str, sources: &[&Atom]) -> Result<Atom> {
+    let mut suffix = 0_usize;
+    loop {
+        let label = Atom::var(symbol!(if suffix == 0 {
+            stem.to_owned()
+        } else {
+            format!("{stem}_fresh_{suffix}")
+        }));
+        if !sources.iter().any(|a| a.contains(label.as_view())) {
+            return Ok(label);
+        }
+        suffix = suffix
+            .checked_add(1)
+            .ok_or_else(|| Error::Limit("boundary symbol allocation exhausted".into()))?;
+    }
+}
+
+fn append_numerator_terms(
+    numerator: &Atom,
+    d: &[Atom],
+    family: &IntegralFamily,
+    indices: &[i16],
+    out: &mut Vec<IntegralTerm>,
+) -> Result<()> {
+    for (m, c) in crate::coefficient::exact_coefficient_list(numerator, d)? {
         if c.is_zero() {
             continue;
         }
-        let powers = powers(&m, &d)?;
+        let powers = powers(&m, d)?;
         let integral = Integral(
             indices
                 .iter()

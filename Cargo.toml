@@ -47,8 +47,8 @@ serde_json = "1"
 # The community revision retains the scale-independent root-convergence fix.
 [patch.crates-io]
 # The native HEPKit renderer uses its maintained lean Typst components.
-typst-library = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-typst-svg = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
+typst-library = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+typst-svg = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
 symbolica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
 numerica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
 graphica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
@@ -63,25 +63,25 @@ debug = 1
 
 # Owner fixes for exact native integration, pinned to the public review branch.
 [patch."https://github.com/alphal00p/gammaloop"]
-feynkit-amplitude = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-feynkit-cff = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-feynkit-generator = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-feynkit-graph = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-feynkit-kinematics = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-feynkit-model = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-feynkit-py = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-feynkit-tensor = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-feynkit-ufo = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-gammaloop-workspace-hack = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-idenso = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-kurvst = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-linnest = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-linnet = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-linnet-py = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-spenso = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-spenso-hep-lib = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-spenso-macros = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-spynso3 = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-symbolica-utils = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-three-dimensional-reps = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
-typst-renderer = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "a3d1c8a867ac0e89d8f58f9722cf9a7e83338901" }
+feynkit-amplitude = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+feynkit-cff = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+feynkit-generator = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+feynkit-graph = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+feynkit-kinematics = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+feynkit-model = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+feynkit-py = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+feynkit-tensor = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+feynkit-ufo = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+gammaloop-workspace-hack = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+idenso = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+kurvst = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+linnest = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+linnet = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+linnet-py = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+spenso = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+spenso-hep-lib = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+spenso-macros = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+spynso3 = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+symbolica-utils = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+three-dimensional-reps = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
+typst-renderer = { git = "https://github.com/ValentinHirschi/gammaloop", rev = "8bfd027a8df276ab640adf1f238833bbcf9bb9c1" }
