@@ -12,15 +12,18 @@ application or sibling checkout. The community manifest and lock select its
 RustFlow runtime revision.
 
 The standalone root and community host each own their Cargo patch tables;
-Cargo ignores a dependency's patch table. Both roots map the original GammaLoop
-source to public HEPKit owner `a3d1c8a867ac0e89d8f58f9722cf9a7e83338901` through
-22 native-package entries and use that owner for the lean Typst library and SVG
-crates. The host additionally pins Vakint separately at
+Cargo ignores a dependency's patch table. Each maps the original GammaLoop
+source through 22 native-package entries and uses the same owner for the lean
+Typst library and SVG crates. The standalone native owner follows
+[native boundary integration](native-boundary-integrands.md); the frozen notebook
+host retains `a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`. The host additionally pins Vakint separately at
 `6203c6cbba6ae5e90329ba5081fad55319e678db`. Keep that separate implementation when
 embedding RustFlow in a host that also exposes Vakint.
 
-The locks select Symbolica, Numerica and Graphica 3.0.1 from the official
-community revision `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`, and RustRed's `main`
+The standalone lock selects Symbolica, Numerica and Graphica 3.0.1 from official
+community revision `6defcca968ca8411977fb1f641a9dee49ee7b7a7`. The frozen
+notebook host retains `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`; its historical
+acceptance is not transferred to the newer build. Both use RustRed's `main`
 branch at `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`. RustRed's core Cargo package
 is named `rustred`; its experimental `reconstruction` feature is disabled across
 the shared graph. The host bridge retains `campaign-api`. Run the root-scaling
@@ -36,9 +39,9 @@ Physical nonplanar boundary preparation exposed an exact-zero-policy bug in
 Symbolica's checked division and inversion. The [minimal reproducer and
 validation](symbolica-exact-division-mre.md) explain the failure. The correction
 is now in official community commit `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`.
-Both build environments use that upstream source, including the earlier
-polynomial root-convergence correction. The owning manifests keep all three
-algebra crates on the same source:
+The newer standalone revision retains that fix and the earlier polynomial
+root-convergence correction, and adds the generic C++ complex-constant export
+fix. The owning manifests keep all three algebra crates on the same source:
 
 ```toml
 [patch.crates-io]
@@ -47,7 +50,7 @@ numerica = { git = "https://github.com/symbolica-dev/symbolica", branch = "commu
 graphica = { git = "https://github.com/symbolica-dev/symbolica", branch = "community" }
 ```
 
-The checked-in locks select the immutable commit above. Once dependencies are
+Each checked-in lock selects its recorded immutable commit above. Once dependencies are
 fetched, `cargo metadata --locked --offline --format-version 1` checks the graph
 without rebuilding. Exactly one instance of each of these three packages must
 resolve from that upstream revision. The two-line local patch and isolated

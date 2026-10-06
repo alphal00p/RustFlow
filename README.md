@@ -52,9 +52,10 @@ the original Mathematica package with Kira and the university license server.
 
 Requires Rust 1.96 or newer. The standalone lock pins Symbolica and its companion
 crates to community commit
-[`c3408e4ba1d3bdd4ea55678fad50e27009be13d4`](https://github.com/symbolica-dev/symbolica/commit/c3408e4ba1d3bdd4ea55678fad50e27009be13d4)
-(package version 3.0.1), including the root convergence and exact division fixes.
-The shared Python host uses this same numerical and native type graph; see
+[`6defcca968ca8411977fb1f641a9dee49ee7b7a7`](https://github.com/symbolica-dev/symbolica/commit/6defcca968ca8411977fb1f641a9dee49ee7b7a7)
+(package version 3.0.1), including the root convergence, exact division and complex
+C++ export fixes. The embedding host owns its corresponding shared dependency
+graph; the frozen notebook wheel retains its recorded revision. See
 [embedding and source fingerprints](docs/dependency-embedding.md).
 
 RustRed is a Git dependency, locked to `7c1ed037`; its experimental

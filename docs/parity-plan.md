@@ -126,7 +126,7 @@ upstream parity is not established by process-specific benchmark success.
 |---|---|---|
 | AMFlow 2.0 | `26005517a288086c4cb4d1b26d829691bc088485` | Automatic auxiliary-mass boundaries, AMF/FT recursion, oracle |
 | DiffExp 1.1 | `784c8229bf92369a03f011a48e161522c8c54bbd` | Physical-variable transport, examples, oracle |
-| Symbolica community | `c3408e4ba1d3bdd4ea55678fad50e27009be13d4` | Current shared algebra and arbitrary-precision dependency; older benchmark reports retain their measured revisions |
+| Symbolica community | `6defcca968ca8411977fb1f641a9dee49ee7b7a7` | Current shared algebra and arbitrary-precision dependency; older benchmark reports retain their measured revisions |
 
 DiffExp is checked out at `/common/dev/diffexp`. Its source is GPL-3.0-or-later;
 the Rust algorithms are implemented independently on this project's existing

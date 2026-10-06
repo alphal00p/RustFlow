@@ -2,7 +2,7 @@
 
 RustFlow accepts HEPKit's model JSON and native compact or serialized DOT directly through `FeynmanDiagram::from_dot`. HEPKit/Linnet own parsing, edge identities, graph validation, routing, denominator construction and partial fractions. Spenso/Idenso own scalar numerator contraction. This crate translates the resulting complete denominator basis into `IntegralFamily` and exact `LinearCombination` values. The application owns one loaded UFO model at a time and shares its `Arc<Model>` with all graph inputs; RustFlow does not maintain a competing model registry. Python bindings are optional modules in this crate, registered by the shared community extension under `symbolica.community.hep.integration`; the library and CLI remain usable without Python. See [dependency-embedding.md](dependency-embedding.md) for the current shared dependency graph and source fingerprint configuration.
 
-Current builds select the public [native owner revision
+The frozen notebook publication selects the public [native owner revision
 `a3d1c8a867ac0e89d8f58f9722cf9a7e83338901`](https://github.com/ValentinHirschi/gammaloop/commit/a3d1c8a867ac0e89d8f58f9722cf9a7e83338901),
 based on upstream HEPKit `6c707c6b77a437256eb1180da13d4d327b371d13`. The standalone
 and community manifests contain the full shared-owner patch tables. The
@@ -12,6 +12,10 @@ and Graphica resolve from official community `c3408e4ba1d3bdd4ea55678fad50e27009
 RustRed resolves from official main `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`.
 The community host preserves its separate Vakint implementation at
 `6203c6cbba6ae5e90329ba5081fad55319e678db`.
+The standalone build uses the newer owner in
+[native boundary integration](native-boundary-integrands.md) and official
+Symbolica/Numerica/Graphica community `6defcca968ca8411977fb1f641a9dee49ee7b7a7`.
+The publication wheel and its acceptance data retain their original pins.
 The native owner changes are proposed upstream in
 [GammaLoop PR #125](https://github.com/alphal00p/gammaloop/pull/125).
 
