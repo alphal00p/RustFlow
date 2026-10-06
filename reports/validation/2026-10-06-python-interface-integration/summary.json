@@ -1,0 +1,215 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "recorded_utc": "2026-10-06T04:49:25.999387+00:00",
+  "tested_commit": "cf4c7f8c10e8e8e7dfcb68c4a19ee9ae2965f666",
+  "scope": "Isolated combined explicit physical propagator slots and exact endpoint-constraint Python interfaces, preserving residual-arithmetic options. Actual two-line community re-export behavior is exercised with the registered shared native module; published community wheel is unchanged.",
+  "source_files_verified": 281,
+  "initial_gate": {
+    "commit": "6a354fb407ea40df38fe582ae928ac612c636da5",
+    "passed": 80,
+    "targets": [
+      {
+        "target": "tests/constrained_singular_endpoints.rs",
+        "log": "cohort.log",
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/hepkit_cuts.rs",
+        "log": "cohort.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/massless_phase_space.rs",
+        "log": "cohort.log",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/mixed_cut_flow.rs",
+        "log": "cohort.log",
+        "passed": 6,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/native_cut_interfaces.rs",
+        "log": "cohort.log",
+        "passed": 9,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/partial_cut_boundaries.rs",
+        "log": "cohort.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_algebraic_transport.rs",
+        "log": "cohort.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_cut_interfaces.rs",
+        "log": "cohort.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_endpoint_constraints.rs",
+        "log": "cohort.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_prescribed_transport.rs",
+        "log": "cohort.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/residual_arithmetic.rs",
+        "log": "cohort.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/supplied_singular_endpoints.rs",
+        "log": "cohort.log",
+        "passed": 19,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/cache.rs",
+        "log": "ordinary-placement.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/end_to_end.rs",
+        "log": "ordinary-numerical.log",
+        "passed": 1,
+        "failed": 0,
+        "ignored": 0
+      }
+    ],
+    "session": 24819,
+    "exit_code": 0,
+    "chunk": "035820"
+  },
+  "export_fix_gate": {
+    "passed": 26,
+    "targets": [
+      {
+        "target": "tests/constrained_singular_endpoints.rs",
+        "log": "public-exports/tests.log",
+        "passed": 17,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_algebraic_transport.rs",
+        "log": "public-exports/tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_cut_interfaces.rs",
+        "log": "public-exports/tests.log",
+        "passed": 3,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_endpoint_constraints.rs",
+        "log": "public-exports/tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      },
+      {
+        "target": "tests/python_prescribed_transport.rs",
+        "log": "public-exports/tests.log",
+        "passed": 2,
+        "failed": 0,
+        "ignored": 0
+      }
+    ],
+    "changed_inputs": [
+      "src/python/mod.rs",
+      "tests/python_endpoint_constraints.rs"
+    ],
+    "session": 49735,
+    "exit_code": 0,
+    "chunk": "c94910"
+  },
+  "retained_failures": [
+    {
+      "log": "initial-public-reexport-before.log.gz",
+      "scope": "First regression harness had a Python newline quoting SyntaxError; fixed the harness before diagnosing exports.",
+      "session": 30276,
+      "exit_code": 101
+    },
+    {
+      "log": "initial-public-reexport-red.log.gz",
+      "scope": "Corrected harness reproduces missing public __all__ entries with AssertionError before source fix.",
+      "session": 6153,
+      "exit_code": 101
+    }
+  ],
+  "checks": {
+    "fmt": "passed for initial integration and export fix",
+    "strict_all_target_python_stubgen_clippy": "passed for initial integration and export fix"
+  },
+  "independent_review": "algebraic_endpoint read-only review verified actual community wrapper statements, complete class/exception export set, object identity and subsequent numerical tests through re-exported namespace. No blocker.",
+  "compiled_source_digests": {
+    "DEPENDENCY_SOURCE_DIGEST": "8c7abebd8af93dde691d6a273265d2dc78d21e0f636dd555468f16d1bc0c95c9",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "9e3e6fffa0658cf878e05ae35bd1f9e9573b9323a344a33f011a0031cd6b7496"
+  },
+  "library": {
+    "archive": "/common/dev/amflow/target/python-interface-release-cf4c7f8/libsymbolica_amflow-f22bcb54479a61ec.rlib",
+    "sha256": "6b308fd50711e5932cc108e2f57446f33549b4822b0d09d0e54c217f2b6d1d00"
+  },
+  "limits": [
+    "Initial and final test counts overlap and are not additive.",
+    "No full release, doctest or fresh long scientific acceptance is implied by these targeted gates.",
+    "Frozen community extension and scientific boundary banks are unchanged.",
+    "Registered-root endpoint constraints remain unsupported at this revision."
+  ],
+  "artifact_sha256": {
+    "dependency-ownership.json": "3c20f38fbf0bdd81142017638101acfe3292e7cbb9c8a1725dd8aeceee2cd3a4",
+    "initial-clippy.log.gz": "fdf42369f43a6cb6c28ef15694eec29409599f68efbdeff2c90520604be579ef",
+    "initial-cohort.log.gz": "c78c6f7af521b58d3133e43bf52170568c6c225622691b87d1409035f6acc099",
+    "initial-fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "initial-ordinary-numerical.log.gz": "fdba20a41328f11ff768a1e827e81567d10491f10483884c352e2ed46ee1d11e",
+    "initial-ordinary-placement.log.gz": "41f9f8d871a95c62b7674b257a72205dfd0580459e6dafaad03dae77fd3e3027",
+    "initial-processes.json": "26e0225c478def882c7e05751b155ec12228ff04124f0855cfeacaaf082b9a30",
+    "initial-public-reexport-before.log.gz": "f7d5e8463155e17def4184d4e77b6c4b8ae3bc30a2013fdc6036c70d462ec7e1",
+    "initial-public-reexport-red.log.gz": "77cc8ea9ad996775fe44009605d894ded4d9e6116b95819d39e04ef3a1ce1298",
+    "initial-source-after.json": "ea25376434c528c52c342d839fc18428031e4ee78715280ac1cd5230978b10c6",
+    "initial-source-before.json": "e16077952af94dbf976037e6cde30bc4dbb187d0ba45521b260f37f83d2064d5",
+    "public-exports-clippy.log.gz": "38647986ad549b2120322f2b0af06a8de5a0dbf0e58658abf9237275c1d83286",
+    "public-exports-fmt.log.gz": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+    "public-exports-processes.json": "f98e07fb26fb4c040cd762c32800dc9c240fce708ddb8b8b7bafc1f0cdd1db7d",
+    "public-exports-source-after.json": "5bd3f58d375cf580c8199c1bc93e4f064bcddac2c2da805d1b6c340003be87cb",
+    "public-exports-source-before.json": "77c58a8a1154d84c594217c3e4d91f6f22e46a0715ee078d6494837eaf64fb5b",
+    "public-exports-tests.log.gz": "82472c3faa02dbf7b0d522be6c4a43c1612b83136d8dea246a9a891c8d489959"
+  }
+}

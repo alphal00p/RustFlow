@@ -1,0 +1,56 @@
+[
+  {
+    "name": "fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.2980036931112409
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--locked",
+      "--release",
+      "--all-targets",
+      "--features",
+      "python_stubgen",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 18.839474895969033
+  },
+  {
+    "name": "tests",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--release",
+      "--features",
+      "python_stubgen",
+      "--test",
+      "python_endpoint_constraints",
+      "--test",
+      "python_prescribed_transport",
+      "--test",
+      "python_algebraic_transport",
+      "--test",
+      "python_cut_interfaces",
+      "--test",
+      "constrained_singular_endpoints",
+      "--",
+      "--test-threads=8"
+    ],
+    "exit_code": 0,
+    "seconds": 259.115375386551
+  }
+]

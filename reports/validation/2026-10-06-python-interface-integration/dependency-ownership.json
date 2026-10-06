@@ -1,0 +1,47 @@
+[
+  {
+    "name": "feynkit-graph",
+    "version": "0.1.0",
+    "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+  },
+  {
+    "name": "feynkit-py",
+    "version": "0.1.0",
+    "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+  },
+  {
+    "name": "graphica",
+    "version": "3.0.1",
+    "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+  },
+  {
+    "name": "idenso",
+    "version": "0.3.0",
+    "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+  },
+  {
+    "name": "linnet",
+    "version": "0.17.0",
+    "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+  },
+  {
+    "name": "numerica",
+    "version": "3.0.1",
+    "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+  },
+  {
+    "name": "rustred",
+    "version": "0.1.0",
+    "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+  },
+  {
+    "name": "spenso",
+    "version": "0.6.0",
+    "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+  },
+  {
+    "name": "symbolica",
+    "version": "3.0.1",
+    "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+  }
+]
