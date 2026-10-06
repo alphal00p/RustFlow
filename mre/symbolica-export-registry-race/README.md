@@ -59,3 +59,11 @@ in one fixed order alone does not establish a coherent dependency closure.
 The binary layout need not change. The recorded baseline's suggested locking
 approach is an initial proposal, not a validated fix. This inherited defect is
 separate from RustFlow's reuse of native export blobs between calls.
+
+The validated correction is proposed in
+[Symbolica PR #52](https://github.com/symbolica-dev/symbolica/pull/52).
+It uses two equal collections of monotonic registry bounds, without taking a
+State lock, and preserves the existing native format. The
+[fixed-owner report](fixed-owner/README.md) includes all corrected reproducer
+cases and the generator regression. The installed notebook runtime remains on
+official community `c3408e4`.

@@ -81,7 +81,10 @@ measured 6.23–20.47× faster payload serialization with byte-identical output.
 These are isolated serialization results, not a notebook speedup; the publication
 runtime remains unchanged. The review also produced a standalone
 [Symbolica export-race reproducer](../mre/symbolica-export-registry-race/README.md).
-Its owner fix is being reviewed separately and is not part of the tested runtime.
+Its validated owner fix is proposed in
+[Symbolica PR #52](https://github.com/symbolica-dev/symbolica/pull/52) and is not
+part of the tested runtime. Native import/export regressions, standalone
+reproducers, generator reentrancy checks and strict Clippy passed in isolation.
 
 The [interactive notebook check](../reports/validation/2026-10-05-public-wheel/notebook-interactive-validation.json)
 served the unchanged notebook with native Marimo and clicked transport, amplitude,
