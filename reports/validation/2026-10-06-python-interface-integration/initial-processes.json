@@ -1,0 +1,106 @@
+[
+  {
+    "name": "fmt",
+    "command": [
+      "cargo",
+      "fmt",
+      "--all",
+      "--",
+      "--check"
+    ],
+    "exit_code": 0,
+    "seconds": 1.2668877611868083
+  },
+  {
+    "name": "clippy",
+    "command": [
+      "cargo",
+      "clippy",
+      "--locked",
+      "--release",
+      "--all-targets",
+      "--features",
+      "python_stubgen",
+      "--",
+      "-D",
+      "warnings"
+    ],
+    "exit_code": 0,
+    "seconds": 19.75807734997943
+  },
+  {
+    "name": "cohort",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--release",
+      "--features",
+      "python_stubgen",
+      "--test",
+      "python_cut_interfaces",
+      "--test",
+      "python_endpoint_constraints",
+      "--test",
+      "python_prescribed_transport",
+      "--test",
+      "python_algebraic_transport",
+      "--test",
+      "native_cut_interfaces",
+      "--test",
+      "partial_cut_boundaries",
+      "--test",
+      "massless_phase_space",
+      "--test",
+      "hepkit_cuts",
+      "--test",
+      "residual_arithmetic",
+      "--test",
+      "constrained_singular_endpoints",
+      "--test",
+      "supplied_singular_endpoints",
+      "--test",
+      "mixed_cut_flow",
+      "--",
+      "--test-threads=8"
+    ],
+    "exit_code": 0,
+    "seconds": 300.58635789575055
+  },
+  {
+    "name": "ordinary-placement",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--release",
+      "--features",
+      "python_stubgen",
+      "--test",
+      "cache",
+      "mass_",
+      "--",
+      "--test-threads=8"
+    ],
+    "exit_code": 0,
+    "seconds": 26.42459463700652
+  },
+  {
+    "name": "ordinary-numerical",
+    "command": [
+      "cargo",
+      "test",
+      "--locked",
+      "--release",
+      "--features",
+      "python_stubgen",
+      "--test",
+      "end_to_end",
+      "alternative_mass_placements",
+      "--",
+      "--test-threads=8"
+    ],
+    "exit_code": 0,
+    "seconds": 25.652320386376232
+  }
+]
