@@ -1,0 +1,102 @@
+"RUSTFLOW THREAD CONFIGURATION: "InputForm[{"AbortPause" -> 2., "BusyWait" -> 0.01, "MathLinkTimeout" -> 15., "MKLThreadNumber" -> 1, "ParallelThreadNumber" -> 1, "RecoveryMode" -> "ReQueue", "RelaunchFailedKernels" -> False, "VectorParallelLengthThresholds" -> {32768, 8192, 8192, 8192}, "VectorVendorLengthThresholds" -> {128, 32, 32}}]
+"--------------------------------------------------"
+"AMFlow: package loaded\nAuthor: Rui-Jun Huang[huangrj2215@pku.edu.cn], Xiao Liu[xiao.liu@ucas.ac.cn] and Yan-Qing Ma[yqma@pku.edu.cn]\nCurrent version: 2.0\nRelease date: 10-July-2026"
+"--------------------------------------------------"
+SetAMFOptions -> {"AMFMode" -> {"Prescription", "Mass", "Propagator"}, "EndingScheme" -> {"Tradition", "Cutkosky", "SingleMass", "Trivial"}, "D0" -> 4, "WorkingPre" -> 100, "ExtraWorkingPre" -> 0, "ChopPre" -> 20, "XOrder" -> 100, "ExtraXOrder" -> 30, "LearnXOrder" -> -1, "TestXOrder" -> 5, "RationalizePre" -> 100, "RunLength" -> 1000, "UseCache" -> False, "SkipReduction" -> False, "RefineBasis" -> False, "DESolver" -> "CPP", "CacheName" -> "cache", "SplitTarget" -> True, "RecursionMode" -> "AMF", "DebugMode" -> False, "FTMode" -> {"Linear", "Branch", "All"}}
+SetReductionOptions -> {"IBPReducer" -> "FiniteFlow+LiteRed", "BlackBoxRank" -> 3, "BlackBoxDot" -> 0, "ComplexMode" -> True, "DeleteBlackBoxDirectory" -> False}
+"CheckDep: dependencies of current reducer:"
+"FiniteFlow.m" -> False
+"fflowmlink.so or fflowmlink.dylib" -> False
+"LiteIBP.m" -> False
+"LiteRed.m" -> False
+SetReducerOptions -> {"MaxPrime" -> 200, "MaxDegree" -> 1000, "EMSymmetry" -> False}
+"--------------------------------------------------"
+"To start evaluating a family of loop integrals, you need to define:\n - AMFlowInfo[\"Family\"] as the name of the family (should be a symbol)\n - AMFlowInfo[\"Loop\"] as a list of loop momenta like {l1, l2}\n - AMFlowInfo[\"Leg\"] as a list of external legs like {p1, p2, p3}\n - AMFlowInfo[\"Conservation\"] as a replacement rule of momentum conservation like {p3 -> -p1-p2}\n - AMFlowInfo[\"Replacement\"] as a list of complete replacement rules for scalar products among external legs like {p1^2 -> 0, p2^2 -> 0, p3^2 -> s} \n - AMFlowInfo[\"Propagator\"] as a list of complete inverse propagators like {l1^2-msq, l2^2, (l1+l2+p1)^2, ...}\n - AMFlowInfo[\"Numeric\"] as a list of replacement rules for involved mass scales like {s -> 100, msq -> 1}\n - AMFlowInfo[\"NThread\"] as the number of threads in use\nFor phase-space integrations, you also need to define:\n - AMFlowInfo[\"Prescription\"] as a list with the same length as AMFlowInfo[\"Loop\"], each element being 1, -1 or 0 specifying the Feynman prescription of the corresponding loop, where 1 means +i0, -1 means -i0 and 0 means no prescription at all\n - AMFlowInfo[\"Cut\"] as a list with the same length as AMFlowInfo[\"Propagator\"], each element being 1 or 0 specifying whether the corresponding propagator is on cut or not"
+"--------------------------------------------------"
+"Please keep clear of these global variables during computations:\n - eps, which serves as the dimensional regulator\n - eta, which serves as the auxiliary mass parameter\n - j, which serves as the Head of integrals"
+"--------------------------------------------------"
+SetReductionOptions -> {"IBPReducer" -> "Kira", "BlackBoxRank" -> 3, "BlackBoxDot" -> 0, "ComplexMode" -> True, "DeleteBlackBoxDirectory" -> False}
+"CheckDep: dependencies of current reducer:"
+"Kira executable" -> True
+"Fermat executable" -> True
+"Ratracer executable (optional)" -> False
+"FastRec (optional; private at the moment)" -> False
+SetReducerOptions -> {"IntegralOrder" -> 5, "ReductionMode" -> "Kira", "UseMaximalCut" -> True, "ProbeLevel" -> 1}
+SetAMFOptions -> {"AMFMode" -> {"Prescription", "Mass", "Propagator"}, "EndingScheme" -> {"Tradition", "Cutkosky", "SingleMass", "Trivial"}, "D0" -> 4, "WorkingPre" -> 100, "ExtraWorkingPre" -> 0, "ChopPre" -> 20, "XOrder" -> 100, "ExtraXOrder" -> 30, "LearnXOrder" -> -1, "TestXOrder" -> 5, "RationalizePre" -> 100, "RunLength" -> 1000, "UseCache" -> False, "SkipReduction" -> False, "RefineBasis" -> False, "DESolver" -> "MMA", "CacheName" -> "work/cache", "SplitTarget" -> True, "RecursionMode" -> "FT", "DebugMode" -> False, "FTMode" -> {"Linear", "Branch", "All"}}
+"SolveIntegrals: please note that the option value of \"WorkingPre\", \"XOrder\" and \"ExtraXOrder\" will not affect this function at all."
+"SolveIntegrals: started."
+"SolveIntegrals: integrals will be evaluated at 1 eps value(s) {1/3}."
+"SolveIntegrals: working precision: 48, truncated order: 96, extra order: 50."
+"BlackBoxFT: started."
+"BlackBoxFT: target integrals split into 1 parts."
+"BlackBoxFT: computing part 1 out of 1."
+"BlackBoxFTSingle: started."
+"BlackBoxFTSingle: working directory is \"/common/dev/amflow-linear-cut/target/eikonal-ft-oracle/work/cache/oracle_FT\"."
+"BlackBoxFTSingle: reducing 1 target integrals."
+"BlackBoxFTSingle: target integrals reduced to 1 master integrals in 1s."
+"BlackBoxFTSingle: constructing FT systems."
+"------------------------------"
+"FTSystemsSetup: setting up system 1."
+"FTSystemFindBestPair: determining best pair of propagators to insert Feynman parameters."
+"FTSystemFindBestPair: 1 pair(s) found {{2, 3}}."
+"FTSystemFindBestPair: {2, 3} tested with 1 master integrals."
+"FTSystemFindBestPair: sorted pairs" -> {{2, 3} -> 1}
+"FTSystemFindBestPair: best pair determined in 3s."
+"Family" -> oracle
+"Loop" -> {l}
+"Leg" -> {v, w}
+"Conservation" -> {}
+"Replacement" -> {v^2 -> 0, w^2 -> 0, v*w -> 1}
+"Propagator" -> {l^2, -2 + 2*eta*l*v + 2*l*w - 2*eta*l*w, -2 + 2*l*w}
+"Numeric" -> {eps -> 1/3}
+"FTSystemReduceCombinedIntegrals: reducing 1 target integrals."
+"FTSystemReduceCombinedIntegrals: target integrals reduced to 1 master integrals in 8s."
+"FTSystemDifferentialEquation: preparing differential equations."
+"FTSystemDifferentialEquation: differential equations prepared with 1 master integrals in 8s."
+"FTSystemsSetup: system 1 set up in 19s."
+"------------------------------"
+"FTSystemsSetup: setting up system 2."
+"FTSystemFindBestPair: determining best pair of propagators to insert Feynman parameters."
+"FTSystemFindBestPair: 1 pair(s) found {{1, 2}}."
+"FTSystemFindBestPair: {1, 2} tested with 1 master integrals."
+"FTSystemFindBestPair: sorted pairs" -> {{1, 2} -> 1}
+"FTSystemFindBestPair: best pair determined in 3s."
+"Family" -> oracle
+"Loop" -> {l}
+"Leg" -> {v, w}
+"Conservation" -> {}
+"Replacement" -> {v^2 -> 0, w^2 -> 0, v*w -> 1}
+"Propagator" -> {-2 + 2*eta + eta*l^2 + l*v - eta*l*v + l*w - eta*l*w, -2 + l*v + l*w, -2 + 2*l*w}
+"Numeric" -> {eps -> 1/3}
+"FTSystemReduceCombinedIntegrals: reducing 1 target integrals."
+"FTSystemReduceCombinedIntegrals: target integrals reduced to 1 master integrals in 8s."
+"FTSystemDifferentialEquation: preparing differential equations."
+"FTSystemDifferentialEquation: differential equations prepared with 1 master integrals in 8s."
+"FTSystemsSetup: system 2 set up in 18s."
+"------------------------------"
+"FTSystemsSetup: setting up system 3."
+"FTSystemFindBestPair: determining best pair of propagators to insert Feynman parameters."
+"FTSystemFindBestPair: 0 pair(s) found {}."
+"FTSystemFindBestPair: sorted pairs" -> {}
+"FTSystemFindBestPair: best pair determined in 1s."
+"Family" -> oracle
+"Loop" -> {l}
+"Leg" -> {v, w}
+"Conservation" -> {}
+"Replacement" -> {v^2 -> 0, w^2 -> 0, v*w -> 1}
+"Propagator" -> {-1 + l^2/2 + (l*v)/2 + (l*w)/2, -2 + l*v + l*w, -2 + 2*l*w}
+"Numeric" -> {eps -> 1/3}
+"FTSystemsSetup: this is an ending system, skip."
+"BlackBoxFTSingle: FT systems constructed in 37s."
+"BlackBoxFTSingle: solving FT systems."
+"FTSystemsSolution: system 3 is an ending system."
+"FTSystemsSolution: boundary input of system 2 done, solving."
+"FTSystemsSolution: system 2 solved in 3s."
+"FTSystemsSolution: boundary input of system 1 done, solving."
+"FTSystemsSolution: system 1 solved in 3s."
+"BlackBoxFTSingle: FT systems solved in 6s."
+"BlackBoxFTSingle: finished in 47s."
+"BlackBoxFT: part 1 out of 1 done."
+"BlackBoxFT: finished in 47s."
+"SolveIntegrals: finished in 47s."
+"ORACLE PASS: ""eikonal"" ""sample""; max scaled error = ""5.355464999012054664028489657537423427803964137013027677216375407905889`53.42776718963229*^-27"

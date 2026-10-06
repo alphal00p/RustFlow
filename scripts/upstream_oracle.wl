@@ -10,11 +10,14 @@ assert[StringQ[root] && DirectoryQ[root], "AMFLOW_ROOT must name the configured 
 run = Environment["AMFLOW_ORACLE_WORKDIR"];
 oracleCase = Environment["AMFLOW_ORACLE_CASE"];
 mode = Environment["AMFLOW_ORACLE_MODE"];
+recursion = Environment["AMFLOW_ORACLE_RECURSION"];
+If[!StringQ[recursion], recursion = "AMF"];
 assert[StringQ[run] && DirectoryQ[run], "A fresh AMFLOW_ORACLE_WORKDIR is required."];
 assert[StringStartsQ[run, base <> "/"], "Working directory must be inside the oracle directory."];
 assert[FileNames["*", run] === {}, "Refusing a nonempty working directory."];
-assert[MemberQ[{"bubble", "sunset"}, oracleCase], "Unknown case."];
+assert[MemberQ[{"bubble", "sunset", "eikonal"}, oracleCase], "Unknown case."];
 assert[MemberQ[{"sample", "laurent"}, mode], "Unknown mode."];
+assert[MemberQ[{"AMF", "FT"}, recursion], "Unknown recursion."];
 assert[IntegerString[FileHash[FileNameJoin[{root, "AMFlow.m"}], "SHA256"], 16, 64] ===
   "76feadd3990586dbba22c96f515328fd79b64d6767ed021f2f80c9e4a2b98184",
   "AMFlow.m differs from the pinned original."];
@@ -30,7 +33,7 @@ CheckAbort[
   AMFlow`Private`$WolframPath = controlledKernel;
   AMFlow`SetReductionOptions["IBPReducer" -> "Kira"];
   AMFlow`SetAMFOptions["UseCache" -> False, "DESolver" -> "MMA",
-    "RecursionMode" -> "AMF", "D0" -> 4,
+    "RecursionMode" -> recursion, "D0" -> 4,
     (* Original AMFlow resolves CacheName relative to this script, not Directory[]. *)
     "CacheName" -> FileNameJoin[{StringDrop[run, StringLength[base]+1], "cache"}]];
   CloseKernels[];
@@ -54,7 +57,18 @@ CheckAbort[
       target = {j[oracle, 1, 1, 1]}; loops = 2; sample = 3/4;
       analytic = Gamma[eps]^2/((1-eps) (1-2eps));
       expectedCoefficients = {0, 0, 1, 3-2EulerGamma,
-        7-6EulerGamma+2EulerGamma^2+Pi^2/6}
+        7-6EulerGamma+2EulerGamma^2+Pi^2/6},
+    "eikonal",
+      AMFlow`AMFlowInfo["Loop"] = {l};
+      AMFlow`AMFlowInfo["Leg"] = {v, w};
+      AMFlow`AMFlowInfo["Replacement"] = {v^2 -> 0, w^2 -> 0, v*w -> 1};
+      AMFlow`AMFlowInfo["Propagator"] = {l^2, 2l*v-2, 2l*w-2};
+      target = {j[oracle, 1, 1, 1]}; loops = 1; sample = 1/3;
+      (* Positive Feynman parameters give M^2=2t+2u+2tu.
+         Integrating t then u is convergent for 0<Re[eps]<1. *)
+      analytic = -2^(-1-eps) Gamma[eps]^2 Gamma[1-eps];
+      expectedCoefficients = {-1/2, (EulerGamma+Log[2])/2,
+        -(EulerGamma+Log[2])^2/4-Pi^2/8}
   ];
   AMFlow`AMFlowInfo["Numeric"] = If[mode === "sample", {eps -> sample}, {}];
   requestedDigits = 24;
@@ -89,7 +103,8 @@ CheckAbort[
   passed = TrueQ[Max[errors] < 10^-20];
   Export["oracle-metadata.json", <|
     "upstream_commit" -> "26005517a288086c4cb4d1b26d829691bc088485",
-    "case" -> oracleCase, "mode" -> mode, "wolfram_version" -> $Version,
+    "case" -> oracleCase, "mode" -> mode, "recursion" -> recursion,
+    "wolfram_version" -> $Version,
     "reducer" -> "Kira 3.1 dad964cd79a39a9fca728bb2606f59537a95109c",
     "desolver" -> "MMA", "workers" -> 1, "cache" -> False,
     "cache_directory" -> FileNameJoin[{run, "cache"}],

@@ -544,7 +544,10 @@ pub fn solve_integrals(
     if targets.is_empty() {
         return Err(Error::InvalidInput("empty target list".into()));
     }
-    if has_linear_propagators(&family.at(point)) {
+    // FT combines denominators directly, including linear ones. Its Schwinger
+    // polynomial check below certifies the parameter domain before recursion;
+    // it does not need the rank-one quadratic deformation used by AMF.
+    if options.recursion == RecursionMode::Amf && has_linear_propagators(&family.at(point)) {
         let prepared = crate::linear::PreparedLinearFlow::new(
             family, targets, point, backend, options, context,
         )?;
@@ -854,6 +857,8 @@ pub(crate) fn solve_integral_projections_with_preparer(
             .collect::<Vec<_>>();
         let preparation = if let Some(prepare) = supplied_preparer {
             Preparation::Amf(prepare(&family, &integrals, options, context)?)
+        } else if options.recursion == RecursionMode::Ft {
+            Preparation::Ft
         } else if has_linear_propagators(&family) {
             Preparation::Linear(crate::linear::PreparedLinearFlow::new(
                 &family,
@@ -863,8 +868,6 @@ pub(crate) fn solve_integral_projections_with_preparer(
                 options,
                 context,
             )?)
-        } else if options.recursion == RecursionMode::Ft {
-            Preparation::Ft
         } else if options.sampled_reduction && !options.refine_basis && family.loops.len() > 1 {
             Preparation::Sampled
         } else {
