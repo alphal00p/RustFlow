@@ -1,5 +1,5 @@
 use super::*;
-use crate::algebraic::{CanonicalAlgebraicSystem, SquareRoot};
+use crate::algebraic::{AlgebraicKinematicSystem, CanonicalAlgebraicSystem, SquareRoot};
 use crate::transport_cache::{
     BoundaryAccuracy, BoundaryIdentity, CachedBoundary, CachedPoint, EpsilonRange, PointKind,
     RootGerm, RootSheet, ScaledDistance,
@@ -11,12 +11,14 @@ use pyo3_stub_gen::derive::{gen_stub_pyclass, gen_stub_pymethods};
 
 enum Connection {
     Rational(crate::RustFlow),
+    Algebraic(crate::RustFlow<AlgebraicKinematicSystem>),
     Canonical(crate::RustFlow<CanonicalAlgebraicSystem>),
 }
 impl Connection {
     fn identity(&self) -> &BoundaryIdentity {
         match self {
             Self::Rational(f) => f.identity(),
+            Self::Algebraic(f) => f.identity(),
             Self::Canonical(f) => f.identity(),
         }
     }
@@ -132,6 +134,15 @@ impl PyKinematicTransport {
                         &route_admission,
                         &admission,
                     ),
+                    Connection::Algebraic(flow) if prescribed => flow.evaluate_prescribed_endpoint(
+                        cache,
+                        &request,
+                        &self.options,
+                        &context,
+                        &policy,
+                        &route_admission,
+                        &admission,
+                    ),
                     Connection::Rational(flow) => flow.evaluate_endpoint(
                         cache,
                         &request,
@@ -148,14 +159,26 @@ impl PyKinematicTransport {
                         &policy,
                         &admission,
                     ),
+                    Connection::Algebraic(flow) => flow.evaluate_endpoint(
+                        cache,
+                        &request,
+                        &self.options,
+                        &context,
+                        &policy,
+                        &admission,
+                    ),
                 })
                 .and_then(PyEndpointResult::from_result)
         })
         .map(|result| result.timed(started))
         .map_err(error)
     }
+    /// Construct a general physical connection, optionally with named square roots.
+    /// Registered roots require explicit source and destination sheet signs.
+    /// Matrix entries may contain epsilon-independent and higher epsilon terms;
+    /// their admission and expansion use the native connection implementation.
     #[new]
-    #[pyo3(signature=(epsilon, derivatives, basis, normalization, *, branch_domain, options=None, nonzero_conditions=None, continuation=None))]
+    #[pyo3(signature=(epsilon, derivatives, basis, normalization, *, branch_domain, roots=None, options=None, nonzero_conditions=None, continuation=None))]
     #[allow(clippy::too_many_arguments)]
     fn new(
         py: Python<'_>,
@@ -164,6 +187,7 @@ impl PyKinematicTransport {
         basis: Vec<PythonExpression>,
         normalization: PythonExpression,
         branch_domain: &str,
+        roots: Option<Expressions>,
         options: Option<&PyEvaluationOptions>,
         nonzero_conditions: Option<Vec<PythonExpression>>,
         continuation: Option<&PyContinuationPrescription>,
@@ -191,21 +215,47 @@ impl PyKinematicTransport {
             .into_iter()
             .map(|x| x.expr)
             .collect::<Vec<_>>();
-        let flow = py
+        let roots = coordinates(roots.unwrap_or_default())?
+            .into_iter()
+            .map(|(symbol, radicand)| SquareRoot { symbol, radicand })
+            .collect::<Vec<_>>();
+        let connection = py
             .detach(|| {
-                let flow = crate::RustFlow::with_conditions(
-                    system,
-                    &basis,
-                    &normalization.expr,
-                    options.prescription,
-                    branch_domain,
-                    &conditions,
-                )?;
-                super::continuation::bind(flow, continuation)
+                if roots.is_empty() {
+                    let flow = crate::RustFlow::with_conditions(
+                        system,
+                        &basis,
+                        &normalization.expr,
+                        options.prescription,
+                        branch_domain,
+                        &conditions,
+                    )?;
+                    Ok(Connection::Rational(super::continuation::bind(
+                        flow,
+                        continuation,
+                    )?))
+                } else {
+                    let flow = crate::RustFlow::with_algebraic_conditions(
+                        AlgebraicKinematicSystem {
+                            epsilon: system.epsilon,
+                            derivatives: system.derivatives,
+                            roots,
+                        },
+                        &basis,
+                        &normalization.expr,
+                        options.prescription,
+                        branch_domain,
+                        &conditions,
+                    )?;
+                    Ok(Connection::Algebraic(super::continuation::bind(
+                        flow,
+                        continuation,
+                    )?))
+                }
             })
             .map_err(error)?;
         Ok(Self {
-            connection: Arc::new(Connection::Rational(flow)),
+            connection: Arc::new(connection),
             options,
         })
     }
@@ -278,6 +328,16 @@ impl PyKinematicTransport {
     #[getter]
     fn dimension(&self) -> usize {
         self.connection.identity().dimension()
+    }
+    /// Native root declarations; discrete sheet signs live on each boundary/query.
+    #[getter]
+    fn roots(&self) -> Expressions {
+        self.connection
+            .identity()
+            .roots()
+            .iter()
+            .map(|root| (Atom::var(root.symbol).into(), root.radicand.clone().into()))
+            .collect()
     }
     #[getter]
     fn nonzero_conditions(&self) -> Vec<PythonExpression> {
@@ -439,6 +499,35 @@ impl PyKinematicTransport {
                         &policy,
                         &route_admission,
                     ),
+                    Connection::Algebraic(flow) => {
+                        let germ = germ.as_ref().ok_or_else(|| {
+                            crate::Error::InvalidInput(
+                                "registered-root transport requires destination root_sheets".into(),
+                            )
+                        })?;
+                        if prescribed {
+                            flow.evaluate_prescribed_to(
+                                cache,
+                                &destination,
+                                germ,
+                                range,
+                                &self.options,
+                                &context,
+                                &policy,
+                                &route_admission,
+                            )
+                        } else {
+                            flow.evaluate_to(
+                                cache,
+                                &destination,
+                                germ,
+                                range,
+                                &self.options,
+                                &context,
+                                &policy,
+                            )
+                        }
+                    }
                     Connection::Canonical(flow) => flow.evaluate_to(
                         cache,
                         &destination,
