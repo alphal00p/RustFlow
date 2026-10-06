@@ -1,0 +1,150 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-06T00:14:03.118451+00:00",
+  "scope": "Use official native rounded scalar Float primitives in Precision complex arithmetic; preserve operation order, working precision and solver algorithms.",
+  "base_commit": "c85a08de9b6cf05e52e3041627eec32ebeca4fd3",
+  "branch": "codex/native-rounded-arithmetic",
+  "environment": {
+    "working_directory": "/common/dev/amflow-native-rounded",
+    "setup_commands": [
+      "source /common/dev/amflow/target/publication-python-env.sh",
+      "export CARGO_TARGET_DIR=/common/dev/amflow-cache-export/target",
+      "export CARGO_BUILD_JOBS=8",
+      "unset RUSTFLOW_WORKSPACE_MANIFEST RUSTFLOW_WORKSPACE_FEATURES RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES"
+    ],
+    "rustc": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+    "cargo": "cargo 1.97.0 (c980f4866 2026-06-30)",
+    "features": [
+      "default"
+    ],
+    "target_is_separate_from_live_publication_runtime": true
+  },
+  "dependencies": {
+    "feynkit-graph": {
+      "version": "0.1.0",
+      "source": "git+https://github.com/ValentinHirschi/gammaloop?rev=a3d1c8a867ac0e89d8f58f9722cf9a7e83338901#a3d1c8a867ac0e89d8f58f9722cf9a7e83338901"
+    },
+    "graphica": {
+      "version": "3.0.1",
+      "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+    },
+    "numerica": {
+      "version": "3.0.1",
+      "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+    },
+    "rustred": {
+      "version": "0.1.0",
+      "source": "git+https://github.com/alphal00p/rustred?branch=main#7c1ed03722b8c05daf60c89ba4ecc79457ed2ada"
+    },
+    "symbolica": {
+      "version": "3.0.1",
+      "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#c3408e4ba1d3bdd4ea55678fad50e27009be13d4"
+    }
+  },
+  "build_source_fingerprints": {
+    "DEPENDENCY_SOURCE_DIGEST": "67c600c99822108adc326b5638d79629f3797a7a514640e016886f7766cf1c7e",
+    "RUSTRED_SOURCE_DIGEST": "90d46f89e952516cf121332a603f2fedea899f221ade3bdcf94e2313f7b23232",
+    "PORT_SOURCE_DIGEST": "c01d7fbc26e345258c8589f3bfa559a39144cbfc124c975c5635b7eeae2df205"
+  },
+  "files_sha256": {
+    "src/numeric.rs": "17c9e27d1ffac7903e1dfb021de557aa55703e02823b0940a91794b94a17b518",
+    "tests/numeric_rounding.rs": "2826054f1c85c8dc99f04689d408a2e493bb2a3115cfb6a6c08eac958e8bbaac",
+    "docs/hepkit-integration.md": "750d99fea6852176afd6adf41f9d8e819d26d831a8f697135a1de3f66754a7ae",
+    "Cargo.toml": "9c109c014341e3b3f9cb75293e7114dbfa6fbb6c1cca8924bb64c48292617058",
+    "Cargo.lock": "4c5b7575719b551a186318342392dc24b2d7aec7d1ff0ab02650f5559cc4fa9c"
+  },
+  "equivalence": {
+    "oracle": "Pre-migration raw MPFR implementation retained only in tests/numeric_rounding.rs; explicit product and conjugate-division ordering.",
+    "complex_input_count": 32,
+    "working_precisions_bits": [
+      2,
+      3,
+      24,
+      53,
+      113,
+      256
+    ],
+    "complex_outputs_compared": 24192,
+    "compared_properties": [
+      "stored precision",
+      "integer significand",
+      "binary exponent",
+      "sign including signed zero"
+    ],
+    "cases": [
+      "mixed component input precision",
+      "near cancellation",
+      "decimal exponents +100000 and -100000",
+      "ties to even",
+      "signed zeros",
+      "complex cross terms"
+    ],
+    "separate_assertions": [
+      "3-bit component products rounded before combining",
+      "512-bit inputs cancel to an exact unit at 24-bit working precision without premature input rounding"
+    ],
+    "result": "bit-for-bit equivalent for all tested finite inputs with nonzero divisors",
+    "not_covered": [
+      "NaN/infinity semantics",
+      "MPFR exponent-limit behavior"
+    ]
+  },
+  "checks": [
+    {
+      "command": "cargo test --locked --release --test numeric_rounding",
+      "status": "passed",
+      "tests_passed": 3,
+      "log": "target/native-rounded-validation/arithmetic.log",
+      "log_sha256": "bf6b5bebd3cf57d50f9adee4f20fd7f7957d6291788ba5d150267d1c1a85b3e5"
+    },
+    {
+      "command": "cargo test --locked --release --test core --test conditioning --test complex_ode --test frobenius --test prepared_frobenius --test diffexp",
+      "status": "passed",
+      "tests_passed": 43,
+      "log": "target/native-rounded-validation/regressions.log",
+      "log_sha256": "94dcf94576af90dbf73ebb69bfed9e59f0274f8eda9b87d1e3f66c0d1404111c"
+    },
+    {
+      "command": "cargo test --locked --release --lib ode::",
+      "status": "passed",
+      "tests_passed": 30,
+      "log": "target/native-rounded-validation/unit-ode.log",
+      "log_sha256": "12834839b330ddf7948095f96a82ac3935b1fca029b4e973536089b0580b6284"
+    },
+    {
+      "command": "cargo clippy --locked --release --all-targets -- -D warnings",
+      "status": "passed",
+      "tests_passed": null,
+      "log": "target/native-rounded-validation/clippy.log",
+      "log_sha256": "75409259244b407a3d63afb303d9d9e2b40ddab67e6ca52b4dce217b310d83b8"
+    },
+    {
+      "command": "cargo fmt --all -- --check",
+      "status": "passed",
+      "tests_passed": null,
+      "log": "target/native-rounded-validation/format.log",
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "command": "git diff --check",
+      "status": "passed"
+    }
+  ],
+  "tests_passed": 76,
+  "integration_test_counts": {
+    "core": 13,
+    "conditioning": 10,
+    "complex_ode": 2,
+    "frobenius": 8,
+    "prepared_frobenius": 5,
+    "diffexp": 5
+  },
+  "review": "Root and independent native-owner audit approved the implementation and scoped documentation before final validation.",
+  "cache_behavior": "No codec or compatibility changes; normal source-sensitive invalidation remains. No existing acceptance bank was loaded or migrated.",
+  "limitations": [
+    "This is an arithmetic refactor validation, not a new full gg→hg notebook or physics acceptance run.",
+    "No runtime or performance measurements are claimed.",
+    "The live extension, dependency pins, publication target and frozen acceptance runs were unchanged.",
+    "Cargo emits the existing unused optional feynkit-ufo/linnet-py patch notices; strict Rust Clippy warnings pass."
+  ]
+}

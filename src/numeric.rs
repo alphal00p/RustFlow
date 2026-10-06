@@ -5,7 +5,7 @@
 //! instead round each operation to an explicit working precision; accuracy is
 //! assessed separately by recomputation, never inferred from that precision.
 use crate::{Error, Result};
-use symbolica::domains::float::{Complex, Float};
+use symbolica::domains::float::{Complex, Float, RoundingDirection::Nearest};
 use symbolica::prelude::*;
 
 pub type ComplexFloat = Complex<Float>;
@@ -95,24 +95,27 @@ impl Precision {
     }
     pub fn add(&self, a: &ComplexFloat, b: &ComplexFloat) -> ComplexFloat {
         Complex::new(
-            Float::with_val(self.bits, a.re.as_raw() + b.re.as_raw()),
-            Float::with_val(self.bits, a.im.as_raw() + b.im.as_raw()),
+            a.re.add_round(&b.re, self.bits, Nearest),
+            a.im.add_round(&b.im, self.bits, Nearest),
         )
     }
     pub fn neg(&self, a: &ComplexFloat) -> ComplexFloat {
         Complex::new(-a.re.clone(), -a.im.clone())
     }
     pub fn sub(&self, a: &ComplexFloat, b: &ComplexFloat) -> ComplexFloat {
-        self.add(a, &self.neg(b))
+        Complex::new(
+            a.re.sub_round(&b.re, self.bits, Nearest),
+            a.im.sub_round(&b.im, self.bits, Nearest),
+        )
     }
     pub fn mul(&self, a: &ComplexFloat, b: &ComplexFloat) -> ComplexFloat {
-        let ac = rug::Float::with_val(self.bits, a.re.as_raw() * b.re.as_raw());
-        let bd = rug::Float::with_val(self.bits, a.im.as_raw() * b.im.as_raw());
-        let ad = rug::Float::with_val(self.bits, a.re.as_raw() * b.im.as_raw());
-        let bc = rug::Float::with_val(self.bits, a.im.as_raw() * b.re.as_raw());
+        let ac = a.re.mul_round(&b.re, self.bits, Nearest);
+        let bd = a.im.mul_round(&b.im, self.bits, Nearest);
+        let ad = a.re.mul_round(&b.im, self.bits, Nearest);
+        let bc = a.im.mul_round(&b.re, self.bits, Nearest);
         Complex::new(
-            Float::with_val(self.bits, ac - bd),
-            Float::with_val(self.bits, ad + bc),
+            ac.sub_round(&bd, self.bits, Nearest),
+            ad.add_round(&bc, self.bits, Nearest),
         )
     }
     pub fn div(&self, a: &ComplexFloat, b: &ComplexFloat) -> ComplexFloat {
@@ -120,8 +123,8 @@ impl Precision {
         let top = self.mul(a, &conj);
         let den = self.mul(b, &conj).re;
         Complex::new(
-            Float::with_val(self.bits, top.re.as_raw() / den.as_raw()),
-            Float::with_val(self.bits, top.im.as_raw() / den.as_raw()),
+            top.re.div_round(&den, self.bits, Nearest),
+            top.im.div_round(&den, self.bits, Nearest),
         )
     }
     pub fn scale(&self, a: &ComplexFloat, n: i64, d: i64) -> ComplexFloat {
