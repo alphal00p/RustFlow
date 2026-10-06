@@ -834,11 +834,7 @@ fn evaluate_from_source(
     let destination = target.restart_coordinates()?;
     let coordinates = source.point.rounded_coordinates_as_exact()?;
     let count = (i64::from(range.last) - i64::from(range.leading) + 1) as usize;
-    if source.point.root_germ() == target.root_germ()
-        && coordinates
-            .iter()
-            .all(|(s, a)| (a - &destination[s]).together().cancel().is_zero())
-    {
+    if source.point.root_germ() == target.root_germ() && source.point.same_coordinates(&target)? {
         let mut boundary = source.clone();
         boundary.range = range;
         boundary.coefficients.truncate(count);
@@ -1134,16 +1130,14 @@ impl TransportCost for GuardedCost<'_> {
             }
             RouteMode::Prescribed(admission) => {
                 // A constant affine chart has no loop and cannot change sheet.
-                // Reject it before distance zero can outrank a valid source.
-                if source.point.root_germ() != target.root_germ() {
-                    let a = source.point.restart_coordinates()?;
-                    let b = target.restart_coordinates()?;
-                    if a.keys().eq(b.keys())
-                        && a.iter()
-                            .all(|(s, v)| (v - &b[s]).together().cancel().is_zero())
-                    {
+                // An exact compatible hit needs no homotopy admission, but the
+                // caller's source policy still applies. Opposite sheets must
+                // not let a zero distance outrank a valid source.
+                if source.point.same_coordinates(target)? {
+                    if source.point.root_germ() != target.root_germ() {
                         return Ok(None);
                     }
+                    return self.policy.cost(source, target, p);
                 }
                 let route = prepare_prescribed_route(
                     self.system,

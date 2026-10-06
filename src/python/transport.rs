@@ -66,6 +66,8 @@ pub struct PyKinematicTransport {
 impl PyKinematicTransport {
     /// Evaluate finite epsilon coefficient limits in an exact endpoint chart.
     /// Admit the regular matching path and final endpoint approach separately.
+    /// With a continuation declaration, matching uses the native prescribed
+    /// contour and admit_matching_path admits its declared global homotopy.
     /// Recorded input errors and independent precision/order profiles determine
     /// reusable evidence; this is not symbolic dimensional-sector projection.
     #[pyo3(signature=(cache, route, leading, last, *, admit_matching_path=false, admit_endpoint=false, scales=None, max_lift_dimension=256, series_order=64, control=None))]
@@ -97,16 +99,39 @@ impl PyKinematicTransport {
             scales: coordinates(scales.unwrap_or_default())?,
             admissible: |source: &CachedBoundary, target: &CachedPoint| {
                 Ok(admit_matching_path
-                    || (source.point.restart_coordinates()? == target.restart_coordinates()?
+                    || (source.point.same_coordinates(target)?
                         && source.point.root_germ() == target.root_germ()))
             },
         };
         let admission =
             |_: &CachedBoundary, _: &crate::singular_endpoint::EndpointChart| Ok(admit_endpoint);
+        let route_admission =
+            |_: &CachedBoundary, _: &CachedPoint, _: &crate::physical_transport::PhysicalRoute| {
+                Ok(admit_matching_path)
+            };
+        let prescribed = self.connection.identity().physical_continuation().is_some();
         let started = std::time::Instant::now();
         py.detach(|| {
             cache
                 .access(|cache| match self.connection.as_ref() {
+                    Connection::Rational(flow) if prescribed => flow.evaluate_prescribed_endpoint(
+                        cache,
+                        &request,
+                        &self.options,
+                        &context,
+                        &policy,
+                        &route_admission,
+                        &admission,
+                    ),
+                    Connection::Canonical(flow) if prescribed => flow.evaluate_prescribed_endpoint(
+                        cache,
+                        &request,
+                        &self.options,
+                        &context,
+                        &policy,
+                        &route_admission,
+                        &admission,
+                    ),
                     Connection::Rational(flow) => flow.evaluate_endpoint(
                         cache,
                         &request,
@@ -130,7 +155,7 @@ impl PyKinematicTransport {
         .map_err(error)
     }
     #[new]
-    #[pyo3(signature=(epsilon, derivatives, basis, normalization, *, branch_domain, options=None, nonzero_conditions=None))]
+    #[pyo3(signature=(epsilon, derivatives, basis, normalization, *, branch_domain, options=None, nonzero_conditions=None, continuation=None))]
     #[allow(clippy::too_many_arguments)]
     fn new(
         py: Python<'_>,
@@ -141,6 +166,7 @@ impl PyKinematicTransport {
         branch_domain: &str,
         options: Option<&PyEvaluationOptions>,
         nonzero_conditions: Option<Vec<PythonExpression>>,
+        continuation: Option<&PyContinuationPrescription>,
     ) -> PyResult<Self> {
         let options = super::options(options);
         options.validate().map_err(error)?;
@@ -167,14 +193,15 @@ impl PyKinematicTransport {
             .collect::<Vec<_>>();
         let flow = py
             .detach(|| {
-                crate::RustFlow::with_conditions(
+                let flow = crate::RustFlow::with_conditions(
                     system,
                     &basis,
                     &normalization.expr,
                     options.prescription,
                     branch_domain,
                     &conditions,
-                )
+                )?;
+                super::continuation::bind(flow, continuation)
             })
             .map_err(error)?;
         Ok(Self {
@@ -185,7 +212,7 @@ impl PyKinematicTransport {
     /// Construct dY = epsilon sum(M_a dlog(letter_a))Y without dense physical assembly.
     /// Named square roots retain separate generators and explicit endpoint sheet signs.
     #[staticmethod]
-    #[pyo3(signature=(epsilon, variables, letters, matrices, basis, normalization, *, branch_domain, roots=None, options=None, nonzero_conditions=None))]
+    #[pyo3(signature=(epsilon, variables, letters, matrices, basis, normalization, *, branch_domain, roots=None, options=None, nonzero_conditions=None, continuation=None))]
     #[allow(clippy::too_many_arguments)]
     fn canonical(
         py: Python<'_>,
@@ -199,6 +226,7 @@ impl PyKinematicTransport {
         roots: Option<Expressions>,
         options: Option<&PyEvaluationOptions>,
         nonzero_conditions: Option<Vec<PythonExpression>>,
+        continuation: Option<&PyContinuationPrescription>,
     ) -> PyResult<Self> {
         let options = super::options(options);
         options.validate().map_err(error)?;
@@ -227,14 +255,15 @@ impl PyKinematicTransport {
             .detach(|| {
                 let system =
                     CanonicalAlgebraicSystem::new(epsilon, &variables, &letters, &matrices, roots)?;
-                crate::RustFlow::with_canonical_conditions(
+                let flow = crate::RustFlow::with_canonical_conditions(
                     system,
                     &basis,
                     &normalization.expr,
                     options.prescription,
                     branch_domain,
                     &conditions,
-                )
+                )?;
+                super::continuation::bind(flow, continuation)
             })
             .map_err(error)?;
         Ok(Self {
@@ -318,8 +347,9 @@ impl PyKinematicTransport {
         PyTransportResult::cached(boundary).map_err(error)
     }
     /// A true cache hit needs no admission. Other points require an explicitly
-    /// admitted regular affine path within the constructor's branch domain.
-    #[pyo3(signature=(cache, destination, leading, last, *, root_sheets=None, admit_straight_path=false, scales=None, control=None))]
+    /// admitted regular affine path or, with continuation declarations, an
+    /// explicitly admitted prescribed homotopy. These admissions are separate.
+    #[pyo3(signature=(cache, destination, leading, last, *, root_sheets=None, admit_straight_path=false, admit_prescribed_path=false, scales=None, control=None))]
     #[allow(clippy::too_many_arguments)]
     fn evaluate(
         &self,
@@ -330,6 +360,7 @@ impl PyKinematicTransport {
         last: i32,
         root_sheets: Option<HashMap<PythonExpression, i8>>,
         admit_straight_path: bool,
+        admit_prescribed_path: bool,
         scales: Option<Expressions>,
         control: Option<&PyComputationControl>,
     ) -> PyResult<PyTransportResult> {
@@ -341,13 +372,17 @@ impl PyKinematicTransport {
         let p = crate::Precision::decimal(self.options.digits + self.options.guard_digits)
             .map_err(error)?;
         let identity = self.connection.identity();
+        let prescribed = identity.physical_continuation().is_some();
         let policy = ScaledDistance {
             scales,
             admissible: |source: &CachedBoundary, target: &CachedPoint| {
-                if source.point.restart_coordinates()? == target.restart_coordinates()?
+                if source.point.same_coordinates(target)?
                     && source.point.root_germ() == target.root_germ()
                 {
                     return Ok(true);
+                }
+                if prescribed {
+                    return Ok(admit_prescribed_path);
                 }
                 if !admit_straight_path {
                     return Ok(false);
@@ -360,6 +395,10 @@ impl PyKinematicTransport {
                 )
             },
         };
+        let route_admission =
+            |_: &CachedBoundary, _: &CachedPoint, _: &crate::physical_transport::PhysicalRoute| {
+                Ok(admit_prescribed_path)
+            };
         let started = std::time::Instant::now();
         py.detach(|| {
             cache
@@ -370,6 +409,17 @@ impl PyKinematicTransport {
                                 "rational system has no root sheets".into(),
                             ));
                         }
+                        if prescribed {
+                            return flow.evaluate_prescribed_to(
+                                cache,
+                                &destination,
+                                range,
+                                &self.options,
+                                &context,
+                                &policy,
+                                &route_admission,
+                            );
+                        }
                         flow.evaluate_to(
                             cache,
                             &destination,
@@ -379,6 +429,16 @@ impl PyKinematicTransport {
                             &policy,
                         )
                     }
+                    Connection::Canonical(flow) if prescribed => flow.evaluate_prescribed_to(
+                        cache,
+                        &destination,
+                        germ.as_ref(),
+                        range,
+                        &self.options,
+                        &context,
+                        &policy,
+                        &route_admission,
+                    ),
                     Connection::Canonical(flow) => flow.evaluate_to(
                         cache,
                         &destination,
