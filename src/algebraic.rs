@@ -25,8 +25,7 @@ use crate::family::{encode_complex, imaginary_parameter, scalar_symbols, substit
 use crate::fixed_series::{coefficients, fixed_series};
 use crate::local_coordinates::TaylorCoordinate;
 use crate::ode::{
-    CompiledSystem, NumericRational, SeriesSystem, compile_rows, evaluate_taylor,
-    transport_series_observed,
+    CompiledSystem, NumericRational, SeriesSystem, evaluate_taylor, transport_series_observed,
 };
 use crate::{
     BoundaryData, ComplexFloat as C, DifferentialSystem, Error, FlowOptions, Precision,

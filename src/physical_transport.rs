@@ -680,14 +680,14 @@ impl PulledConnection {
         Ok(match self {
             Self::Rational(system) => PreparedConnection::Rational(system),
             Self::Algebraic(system) => {
-                PreparedConnection::Algebraic(system.prepare_with_context(context)?)
+                PreparedConnection::Algebraic(Box::new(system.prepare_with_context(context)?))
             }
         })
     }
 }
 enum PreparedConnection {
     Rational(EpsilonSystem),
-    Algebraic(PreparedAlgebraicSystem),
+    Algebraic(Box<PreparedAlgebraicSystem>),
 }
 impl PreparedConnection {
     fn compile(&self, p: Precision, context: &RunContext) -> Result<CompiledConnection> {

@@ -1,5 +1,6 @@
 //! Immutable exact preparation for repeated numerical registered-root compilation.
 use super::*;
+use crate::ode::prepared::PreparedRows;
 
 #[derive(Clone, Debug)]
 struct PreparedKernelTerm {
@@ -18,12 +19,12 @@ struct PreparedKernelTerm {
 #[derive(Clone, Debug)]
 pub struct PreparedAlgebraicSystem {
     source: std::sync::Arc<AlgebraicSystem>,
-    entries: Vec<Vec<Atom>>,
+    entries: PreparedRows,
     normalized: Vec<PreparedKernelTerm>,
-    residual_entries: Vec<Vec<Atom>>,
+    residual_entries: PreparedRows,
     residual_terms: Vec<Vec<usize>>,
     term_count: usize,
-    root_matrix: Vec<Vec<Atom>>,
+    root_matrix: Option<PreparedRows>,
     domain_guards: Vec<Atom>,
 }
 
@@ -143,6 +144,18 @@ impl AlgebraicSystem {
             entries.push(vec![Atom::new()]);
         }
         context.cancellation.check()?;
+        let residual_entries = PreparedRows::new(self.system.variable, &residual_entries, context)?;
+        let entries = PreparedRows::new(self.system.variable, &entries, context)?;
+        let root_matrix = if root_matrix.is_empty() {
+            None
+        } else {
+            Some(PreparedRows::new(
+                self.system.variable,
+                &root_matrix,
+                context,
+            )?)
+        };
+        context.cancellation.check()?;
         Ok(PreparedAlgebraicSystem {
             source: std::sync::Arc::new(self.clone()),
             entries,
@@ -180,25 +193,17 @@ impl PreparedAlgebraicSystem {
         }
         context.cancellation.check()?;
         let source = &self.source;
-        let mut residual_rows = compile_rows(
-            source.system.variable,
-            &self.residual_entries,
-            p,
-            &Default::default(),
-        )?
-        .polynomial_rows;
+        let mut residual_rows = self
+            .residual_entries
+            .compile(p, &Default::default(), context)?
+            .polynomial_rows;
         for (row, indices) in residual_rows.iter_mut().zip(&self.residual_terms) {
             for (column, _) in &mut row.entries {
                 *column = indices[*column];
             }
         }
         context.cancellation.check()?;
-        let compiled = compile_rows(
-            source.system.variable,
-            &self.entries,
-            p,
-            &Default::default(),
-        )?;
+        let compiled = self.entries.compile(p, &Default::default(), context)?;
         context.cancellation.check()?;
         let terms = self
             .normalized
@@ -226,16 +231,11 @@ impl PreparedAlgebraicSystem {
             })
             .collect();
         context.cancellation.check()?;
-        let root_system = if self.root_matrix.is_empty() {
-            None
-        } else {
-            Some(compile_rows(
-                source.system.variable,
-                &self.root_matrix,
-                p,
-                &Default::default(),
-            )?)
-        };
+        let root_system = self
+            .root_matrix
+            .as_ref()
+            .map(|rows| rows.compile(p, &Default::default(), context))
+            .transpose()?;
         context.cancellation.check()?;
         Ok(CompiledAlgebraicSystem {
             source: self.source.clone(),

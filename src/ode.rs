@@ -15,6 +15,8 @@ pub mod pade;
 #[path = "ode/source.rs"]
 pub(crate) mod source;
 use residual::RationalResidualChart;
+#[path = "ode/prepared.rs"]
+pub(crate) mod prepared;
 use symbolica::domains::float::FloatField;
 use symbolica::poly::univariate::UnivariatePolynomial;
 use symbolica::prelude::*;
@@ -430,135 +432,8 @@ pub(crate) fn compile_rows(
     p: Precision,
     values: &ahash::HashMap<Atom, C>,
 ) -> Result<CompiledSystem> {
-    validate_ode_variable(variable)?;
-    let mut matrix = Vec::new();
-    let mut poles = Vec::new();
-    let mut pole_polynomials = Vec::new();
-    let mut seen_factors = ahash::HashSet::default();
-    let mut factorizations = ahash::HashMap::default();
-    let mut polynomial_rows = Vec::new();
-    let mut exact_source_rows = Vec::new();
-    let exact_values = source::ExactSpecialization::new(p, values)?;
-    for row in rows {
-        let mut out = Vec::new();
-        let mut exact = Vec::new();
-        let mut common_denominator: Option<ExactPolynomial> = None;
-        for a in row {
-            let rational: RationalPolynomial<IntegerRing, u16> = crate::family::encode_complex(a)
-                .try_to_rational_polynomial(&Q, &Z, None)
-                .map_err(|e| Error::InvalidInput(e.to_string()))?;
-            let numerator =
-                polynomial_coefficients(&rational.numerator.to_expression(), variable, p, values)?;
-            let denominator = polynomial_coefficients(
-                &rational.denominator.to_expression(),
-                variable,
-                p,
-                values,
-            )?;
-            if denominator.iter().all(|v| *v == p.zero()) {
-                return Err(Error::Numerical(
-                    "identically zero specialized denominator".into(),
-                ));
-            }
-            let factors = denominator_factors(&rational.denominator, &mut factorizations)?;
-            for (factor, _) in factors.iter() {
-                let base = factor.to_expression();
-                if !seen_factors.insert(base.clone()) {
-                    continue;
-                }
-                let coefficients = polynomial_coefficients(&base, variable, p, values)?;
-                if coefficients.len() <= 1 {
-                    continue;
-                }
-                pole_polynomials.push(base);
-                let roots = polynomial_roots(p, &coefficients, variable)?;
-                for root in roots {
-                    retain_distinct_pole(p, &mut poles, root);
-                }
-            }
-            out.push(NumericRational {
-                numerator,
-                denominator,
-            });
-            common_denominator = Some(if let Some(previous) = common_denominator {
-                let quotient = previous
-                    .try_div(&previous.gcd(&rational.denominator))
-                    .ok_or_else(|| {
-                        Error::Numerical("exact denominator LCM division failed".into())
-                    })?;
-                multiply_polynomials(&quotient, &rational.denominator)?
-            } else {
-                rational.denominator.clone()
-            });
-            exact.push(rational);
-        }
-        let common_denominator = common_denominator.unwrap();
-        let denominator =
-            polynomial_coefficients(&common_denominator.to_expression(), variable, p, values)?;
-        let exact_denominator =
-            exact_values.polynomial(&common_denominator.to_expression(), variable)?;
-        let exact_denominator_factors =
-            denominator_factors(&common_denominator, &mut factorizations)?
-                .iter()
-                .map(|(factor, multiplicity)| {
-                    Ok((
-                        exact_values.polynomial(&factor.to_expression(), variable)?,
-                        *multiplicity,
-                    ))
-                })
-                .collect::<Result<Vec<_>>>()?;
-        if exact_denominator_factors
-            .iter()
-            .any(|(factor, _)| factor.iter().all(SingleFloat::is_zero))
-        {
-            return Err(Error::Numerical(
-                "identically zero specialized denominator factor".into(),
-            ));
-        }
-        let mut exact_entries = Vec::new();
-        let mut entries = Vec::new();
-        for (j, rational) in exact.iter().enumerate() {
-            if rational.numerator.is_zero() {
-                continue;
-            }
-            let multiplier = common_denominator
-                .try_div(&rational.denominator)
-                .ok_or_else(|| Error::Numerical("exact denominator clearing failed".into()))?;
-            let cleared = multiply_polynomials(&rational.numerator, &multiplier)?;
-            let coefficients =
-                polynomial_coefficients(&cleared.to_expression(), variable, p, values)?;
-            let exact_coefficients = exact_values.polynomial(&cleared.to_expression(), variable)?;
-            if exact_coefficients.iter().any(|c| !c.is_zero()) {
-                exact_entries.push((j, exact_coefficients));
-            }
-            if coefficients.iter().any(|c| *c != p.zero()) {
-                entries.push((j, coefficients));
-            }
-        }
-        polynomial_rows.push(PolynomialRow {
-            denominator,
-            entries,
-        });
-        exact_source_rows.push(source::ExactPolynomialRow {
-            denominator: exact_denominator,
-            denominator_factors: exact_denominator_factors,
-            entries: exact_entries,
-        });
-        matrix.push(out);
-    }
-    Ok(CompiledSystem {
-        source: Arc::new(ExactRows {
-            variable,
-            rows: rows.to_vec(),
-            values: values.clone(),
-        }),
-        p,
-        matrix,
-        poles,
-        pole_polynomials,
-        polynomial_rows,
-        exact_source_rows,
-    })
+    let context = RunContext::default();
+    prepared::PreparedRows::new(variable, rows, &context)?.compile(p, values, &context)
 }
 
 impl CompiledSystem {
@@ -1942,3 +1817,7 @@ mod endpoint_tests;
 #[cfg(test)]
 #[path = "ode/exclusion_tests.rs"]
 mod exclusion_tests;
+
+#[cfg(test)]
+#[path = "ode/prepared_tests.rs"]
+mod prepared_tests;
