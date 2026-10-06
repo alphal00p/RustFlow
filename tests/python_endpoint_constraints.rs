@@ -33,6 +33,29 @@ fn exact_python_endpoint_relations_preserve_native_evidence_and_cache_identity()
         local.set_item("error0", PythonMultiPrecisionFloat(p.real(0)))?;
         py.run(c"
 import tempfile
+import sys
+import types
+
+# Mirror the actual community wrapper, including its explicit export list.
+native_name = 'symbolica.community.hep_integration_native'
+previous = sys.modules.get(native_name)
+sys.modules[native_name] = integration
+try:
+    exposed = types.ModuleType('symbolica.community.hep.integration')
+    exec('from symbolica.community.hep_integration_native import *; '
+         'from symbolica.community.hep_integration_native import __all__ as __all__', vars(exposed))
+finally:
+    if previous is None:
+        del sys.modules[native_name]
+    else:
+        sys.modules[native_name] = previous
+native_public = {name for name, value in vars(integration).items()
+                 if isinstance(value, type) and value.__module__ == exposed.__name__}
+assert set(exposed.__all__) == native_public
+assert len(exposed.__all__) == len(native_public)
+for name in native_public:
+    assert getattr(exposed, name) is getattr(integration, name)
+integration = exposed
 C, R, Constraints = integration.AsymptoticCoefficient, integration.AsymptoticRelation, integration.EndpointConstraints
 select = C(0, zero, 1)
 relation = R([(select, one)], zero)
