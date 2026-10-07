@@ -175,11 +175,14 @@ impl Bank {
         powers: [i16; N],
         order: &IntegralOrder<N>,
     ) -> Option<Vec<Term<N, Coefficient>>> {
-        if self.arity != N || self.fingerprint != family.fingerprint() {
+        if self.arity > N
+            || powers[self.arity..].iter().any(|&value| value != 0)
+            || self.fingerprint != family.fingerprint()
+        {
             return None;
         }
         let lhs = Integral::numeric(powers).ok()?;
-        let key = IntegralKey::try_new(powers.map(i64::from)).ok()?;
+        let key = IntegralKey::try_new(powers[..self.arity].iter().copied().map(i64::from)).ok()?;
         for map in &self.maps {
             let transported = match map.transport(&key, self.expansion) {
                 Ok(value) => value,
@@ -192,7 +195,7 @@ impl Bank {
                 .terms()
                 .iter()
                 .map(|term| {
-                    let values = term
+                    let mut values = term
                         .key()
                         .powers()
                         .iter()
@@ -200,6 +203,7 @@ impl Bank {
                         .map(i16::try_from)
                         .collect::<Result<Vec<_>, _>>()
                         .ok()?;
+                    values.resize(N, 0);
                     let integral = Integral::numeric(values.try_into().ok()?).ok()?;
                     (order.compare(&lhs, &integral) == Ordering::Less).then(|| Term {
                         integral,

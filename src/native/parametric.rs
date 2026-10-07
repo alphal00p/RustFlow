@@ -29,13 +29,14 @@ pub(super) struct Bank<'a, const N: usize> {
 
 fn generic_rules<const N: usize>(
     solver: &SectorSolver<'_, N>,
+    sources: &SourceSystem<N>,
     depth: u32,
     max_cases: usize,
 ) -> Vec<SectorRule<N>> {
     let mut admitted = Vec::new();
     let result = solver.solve_domains_with_observer(
         vec![
-            CoordinateCase::new([None; N])
+            CoordinateCase::new(*sources.fixed())
                 .expect("symbolic coordinates are valid")
                 .into(),
         ],
@@ -260,7 +261,7 @@ impl<'a, const N: usize> Bank<'a, N> {
         // rays, so retain that strategy outside this measured tier.
         if self.generic.is_none() && solver.ordering().sector().iter().filter(|&&v| v).count() == 4
         {
-            self.generic = Some(generic_rules(solver, depth, 32));
+            self.generic = Some(generic_rules(solver, sources, depth, 32));
             self.domains += 1;
         }
         if let Some(rules) = &self.generic {

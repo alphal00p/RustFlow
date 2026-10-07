@@ -10,6 +10,9 @@ license = "MIT"
 default = ["native", "automatic"]
 native = ["symbolica/integer-gmp", "symbolica/float-mpfr", "dep:rug", "rustred?/native", "feynkit-amplitude/native", "feynkit-generator/native", "feynkit-py?/native"]
 automatic = ["dep:rustred", "dep:rayon"]
+# Opt-in solver storage policy; defaults retain exact arity dispatch.
+capacity-dispatch = ["rustred?/capacity-dispatch"]
+runtime-arity-selection = ["rustred?/runtime-arity-selection"]
 wasm = ["symbolica/wasm", "rustred?/wasm", "feynkit-amplitude/wasm", "feynkit-generator/wasm", "feynkit-py?/wasm"]
 python_api = ["dep:pyo3", "dep:feynkit-py", "symbolica/python_export"]
 # Preserve the existing full native Python feature and add a browser entry.
@@ -24,7 +27,7 @@ required-features = ["automatic"]
 
 [dependencies]
 symbolica = { version = "=3.0.1", default-features = false, features = ["bincode", "serde", "tracing_max_level_info"] }
-rustred = { git = "https://github.com/alphal00p/rustred", branch = "main", default-features = false, optional = true }
+rustred = { git = "https://github.com/alphal00p/rustred", rev = "1e9723f874ae375cdbf87df7ffd0c6bfc8a9fd29", default-features = false, optional = true }
 rug = { version = "1.28", default-features = false, features = ["float", "integer", "rational"], optional = true }
 rayon = { version = "1.11", optional = true }
 thiserror = "2"

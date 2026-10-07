@@ -39,15 +39,48 @@ pub(crate) fn reduce(
     } else {
         options
     };
-    rustred::dispatch_arity!(
+    let arity = family.family.denominator_count();
+    let mut result = rustred::dispatch_solver_capacity!(
         family.family.denominator_count(),
         solve(family, original, dimension, targets, options, context, cuts),
         n => Err(Error::Unsupported(format!(
             "native runtime was compiled for {:?} scalar-product slots; received {n}",
             rustred::compiled_runtime_arities()
         )))
-    )
+    )?;
+    result.rules = result
+        .rules
+        .into_iter()
+        .map(|(key, terms)| {
+            Ok((
+                physical_key(key, arity)?,
+                terms
+                    .into_iter()
+                    .map(|(key, value)| Ok((physical_key(key, arity)?, value)))
+                    .collect::<Result<_>>()?,
+            ))
+        })
+        .collect::<Result<_>>()?;
+    result.residuals = result
+        .residuals
+        .into_iter()
+        .map(|key| physical_key(key, arity))
+        .collect::<Result<_>>()?;
+    Ok(result)
 }
+
+fn physical_key(mut key: Integral, arity: usize) -> Result<Integral> {
+    if key.0.len() < arity || key.0[arity..].iter().any(|&power| power != 0) {
+        return Err(Error::Reduction("nonzero or invalid solver padding".into()));
+    }
+    key.0.truncate(arity);
+    Ok(key)
+}
+
+fn capacity_permutation<const N: usize>(physical: Vec<usize>) -> [usize; N] {
+    std::array::from_fn(|axis| physical.get(axis).copied().unwrap_or(axis))
+}
+
 fn cut_stage_key(key: String, cuts: Option<&str>) -> String {
     cuts.map_or_else(
         || key.clone(),
@@ -61,14 +94,14 @@ fn cut_stage_key(key: String, cuts: Option<&str>) -> String {
 fn native_error(error: impl std::fmt::Display) -> Error {
     Error::Reduction(error.to_string())
 }
-fn family_stage_key(
+fn family_stage_key<const N: usize>(
     family: &ConvertedFamily,
     physical_propagators: usize,
     options: &RustRedBackend,
 ) -> String {
     let digest = blake3::hash(
         format!(
-            "native-family-v1/native-factorized-v5/bubble-subloops-v2/symmetry-v1:{}:{:?}:{}:{}:{}:{}:{}:{}:{}:{}",
+            "native-family-v1/capacity-{N}/native-factorized-v5/bubble-subloops-v2/symmetry-v1:{}:{:?}:{}:{}:{}:{}:{}:{}:{}:{}",
             family.family.fingerprint(),
             family.reverse,
             physical_propagators,
@@ -218,6 +251,22 @@ fn solve<const N: usize>(
     context: &RunContext,
     cuts: Option<&crate::cuts::CutFamily>,
 ) -> Result<Reduction> {
+    let arity = family.family.denominator_count();
+    if arity == 0 || arity > N {
+        return Err(Error::InvalidInput("native solver capacity".into()));
+    }
+    let targets = targets
+        .iter()
+        .map(|key| {
+            if key.len() != arity {
+                return Err(Error::InvalidInput("native integral arity".into()));
+            }
+            let mut key = key.clone();
+            key.resize(N, 0);
+            Ok(key)
+        })
+        .collect::<Result<Vec<_>>>()?;
+    let targets = targets.as_slice();
     let mut pending = targets
         .iter()
         .map(|t| {
@@ -228,9 +277,10 @@ fn solve<const N: usize>(
         .collect::<Result<BTreeSet<[i16; N]>>>()?;
     let initial = pending.iter().map(|p| p.map(|n| n > 0)).collect::<Vec<_>>();
     let sources =
-        SourceSystem::<N>::from_family_with_lorentz(&family.family, options.include_lorentz)
+        SourceSystem::<N>::from_family_with_capacity(&family.family, options.include_lorentz)
             .map_err(native_error)?;
-    let deltas: [bool; N] = std::array::from_fn(|slot| cuts.is_some_and(|c| c.cuts().is_cut(slot)));
+    let deltas: [bool; N] =
+        std::array::from_fn(|slot| slot < arity && cuts.is_some_and(|c| c.cuts().is_cut(slot)));
     let cut_key = cuts.map(crate::cuts::CutFamily::fingerprint).transpose()?;
     let analyzer = if let Some(cuts) = cuts {
         Analyzer::try_new(&family.family, cuts.native_restrictions()?)
@@ -238,18 +288,18 @@ fn solve<const N: usize>(
         Analyzer::try_unrestricted(&family.family)
     }
     .map_err(native_error)?;
-    let sector_count = u32::try_from(N)
+    let sector_count = u32::try_from(arity)
         .ok()
         .and_then(|bits| 1usize.checked_shl(bits))
         .ok_or_else(|| {
             Error::Limit(format!(
-                "native sector enumeration cannot represent {N} scalar-product slots on this host"
+                "native sector enumeration cannot represent {arity} scalar-product slots on this host"
             ))
         })?;
     let mut zero = Vec::new();
     for bits in 0..sector_count {
         context.cancellation.check()?;
-        let sector = std::array::from_fn(|i| bits & (1 << i) != 0);
+        let sector = std::array::from_fn(|i| i < arity && bits & (1 << i) != 0);
         // A verified automorphism may route a target into another physical
         // sector, so that lane needs zero certificates outside the initial
         // top sectors too. Positive irreducible numerators remain excluded.
@@ -276,7 +326,7 @@ fn solve<const N: usize>(
             zero.push(sector);
             continue;
         }
-        let mask = Mask::try_new(sector).map_err(native_error)?;
+        let mask = Mask::try_new(sector[..arity].iter().copied()).map_err(native_error)?;
         if matches!(
             analyzer.analyze(&mask).map_err(native_error)?,
             Decision::ProvedZero(_)
@@ -303,7 +353,7 @@ fn solve<const N: usize>(
     let legacy_key_for_depth = |depth| {
         let raw = blake3::hash(
             format!(
-                "native-factorized-v5:{}:{:?}:{targets:?}:{}:{}:{}:{}:{}",
+                "native-factorized-v5/capacity-{N}:{}:{:?}:{targets:?}:{}:{}:{}:{}:{}",
                 family.family.fingerprint(),
                 family.reverse,
                 depth,
@@ -338,7 +388,7 @@ fn solve<const N: usize>(
     let legacy_key = legacy_key_for_depth(options.max_depth);
     let stage_key = stage_key_for_depth(options.max_depth);
     let family_key = cut_stage_key(
-        family_stage_key(family, original.physical_propagators, options),
+        family_stage_key::<N>(family, original.physical_propagators, options),
         cut_key.as_deref(),
     );
     let mut patterns = BTreeMap::<[bool; N], Option<crate::bubble::Bubble>>::new();
@@ -384,7 +434,7 @@ fn solve<const N: usize>(
             if let std::collections::btree_map::Entry::Vacant(entry) = patterns.entry(sector) {
                 entry.insert(crate::bubble::Bubble::find(
                     original,
-                    &sector,
+                    &sector[..arity],
                     dimension.clone(),
                 )?);
             }
@@ -507,20 +557,22 @@ fn solve<const N: usize>(
                     {
                         entry.insert(crate::bubble::Bubble::find(
                             original,
-                            &sector,
+                            &sector[..arity],
                             dimension.clone(),
                         )?);
                     }
                     if let Some(pattern) = &patterns[&sector]
-                        && let Some(terms) = pattern.reduce(&Integral(target.to_vec()))?
+                        && let Some(terms) = pattern.reduce(&Integral(target[..arity].to_vec()))?
                     {
+                        let terms: LinearCombination = terms
+                            .into_iter()
+                            .map(|(mut key, value)| {
+                                key.0.resize(N, 0);
+                                (key, value)
+                            })
+                            .collect();
                         let order = rustred::solver::IntegralOrder::new(sector, [false; N])
-                            .with_permutation(
-                                pattern
-                                    .permutation()
-                                    .try_into()
-                                    .expect("bubble permutation arity"),
-                            )
+                            .with_permutation(capacity_permutation::<N>(pattern.permutation()))
                             .map_err(native_error)?;
                         let lhs =
                             rustred::solver::Integral::numeric(target).map_err(native_error)?;
@@ -580,13 +632,10 @@ fn solve<const N: usize>(
                             SectorConfig {
                                 deltas,
                                 zero_sectors: zero.clone(),
-                                permutation: patterns.get(&sector).and_then(|p| p.as_ref()).map(
-                                    |p| {
-                                        p.permutation()
-                                            .try_into()
-                                            .expect("bubble permutation arity")
-                                    },
-                                ),
+                                permutation: patterns
+                                    .get(&sector)
+                                    .and_then(|p| p.as_ref())
+                                    .map(|p| capacity_permutation::<N>(p.permutation())),
                                 numerical_exact_backend: NumericalExactBackend::SparseFactorized,
                                 ..Default::default()
                             },
@@ -742,12 +791,7 @@ fn solve<const N: usize>(
                 let order = rustred::solver::IntegralOrder::new(sector, deltas);
                 let order = if let Some(pattern) = patterns.get(&sector).and_then(|p| p.as_ref()) {
                     order
-                        .with_permutation(
-                            pattern
-                                .permutation()
-                                .try_into()
-                                .expect("bubble permutation arity"),
-                        )
+                        .with_permutation(capacity_permutation::<N>(pattern.permutation()))
                         .map_err(native_error)?
                 } else {
                     order

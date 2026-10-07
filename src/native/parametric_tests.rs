@@ -263,7 +263,7 @@ fn budget_exhausted_domain_preserves_exact_rules_and_fallbacks() {
         },
     );
     assert!(matches!(bounded, Err(SectorSolveError::CaseBudget { .. })));
-    let partial = generic_rules(&solver, 3, 1);
+    let partial = generic_rules(&solver, &sources, 3, 1);
     assert_eq!(partial.len(), 1);
     assert!(!partial[0].candidate.sources.is_empty());
 
