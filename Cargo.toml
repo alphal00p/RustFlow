@@ -27,7 +27,7 @@ required-features = ["automatic"]
 
 [dependencies]
 symbolica = { version = "=3.0.1", default-features = false, features = ["bincode", "serde", "tracing_max_level_info"] }
-rustred = { git = "https://github.com/alphal00p/rustred", rev = "1e9723f874ae375cdbf87df7ffd0c6bfc8a9fd29", default-features = false, optional = true }
+rustred = { git = "https://github.com/alphal00p/rustred", branch = "main", default-features = false, optional = true }
 rug = { version = "1.28", default-features = false, features = ["float", "integer", "rational"], optional = true }
 rayon = { version = "1.11", optional = true }
 thiserror = "2"
