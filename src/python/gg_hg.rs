@@ -120,6 +120,7 @@ impl PyHiggsJetIntegralSystem {
         let inner = py
             .detach(|| HiggsJetIntegralSystem::load(kind, namespace))
             .map_err(error)?;
+        super::citations::transport();
         super::citations::higgs_jet();
         Ok(Self {
             inner: Arc::new(inner),

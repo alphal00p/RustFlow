@@ -21,14 +21,19 @@ pub(super) fn higgs_jet() {
     USED.fetch_or(HIGGS_JET, Ordering::Relaxed);
 }
 
-fn citation(id: &str, reference: &str, bibtex: &str, reasons: Vec<String>) -> Citation {
+fn citation(
+    id: &str,
+    reference: &str,
+    description: &str,
+    bibtex: &str,
+    reasons: Vec<String>,
+) -> Citation {
     Citation {
         id: id.into(),
         reference: reference.into(),
         bibtex: bibtex.into(),
         reasons,
-        description:
-            "Literature underlying the numerical integration methods and scientific inputs.".into(),
+        description: description.into(),
         relevance: None,
     }
 }
@@ -41,20 +46,23 @@ pub fn get_citations() -> Vec<Citation> {
     if used == 0 {
         return Vec::new();
     }
-    let mut continuation_reasons = Vec::new();
+    let mut amflow2_reasons = Vec::new();
+    let mut diffexp_reasons = Vec::new();
     if used & TRANSPORT != 0 {
-        continuation_reasons.push("Prepared native differential-equation transport using local series and analytic continuation methods.".into());
+        amflow2_reasons.push("Local series solver for integral transport.".into());
+        diffexp_reasons.push("Analytic continuation along the transport path.".into());
     }
     if used & AUTOMATIC != 0 {
-        continuation_reasons.push("Prepared native automatic integral evaluation combining auxiliary-mass flow and differential-equation continuation.".into());
+        amflow2_reasons.push("Recursive boundary construction in the integral evaluator.".into());
+        diffexp_reasons
+            .push("Series continuation of the evaluator's differential equations.".into());
     }
-    if used & HIGGS_JET != 0 {
-        continuation_reasons.push("Prepared the Higgs-jet workflow with native auxiliary-mass-flow starting values and physical series transport.".into());
-    }
-    let mut citations = vec![
-        citation(
+    let mut citations = Vec::new();
+    if !amflow2_reasons.is_empty() {
+        citations.push(citation(
             "arXiv:2607.08477",
             "Rui-Jun Huang, Xiao Liu and Yan-Qing Ma. AMFlow 2.0: significant algorithmic and software improvements for Feynman integral evaluation (2026). arXiv:2607.08477.",
+            "Efficient differential-equation solving and recursive boundary evaluation.",
             r#"@article{Huang:2026AMFlow2,
   author = {Huang, Rui-Jun and Liu, Xiao and Ma, Yan-Qing},
   title = {{AMFlow 2.0}: significant algorithmic and software improvements for {Feynman} integral evaluation},
@@ -64,11 +72,12 @@ pub fn get_citations() -> Vec<Citation> {
   year = {2026},
   url = {https://arxiv.org/abs/2607.08477}
 }"#,
-            continuation_reasons.clone(),
-        ),
-        citation(
+            amflow2_reasons,
+        ));
+        citations.push(citation(
             "arXiv:2006.05510",
             "Martijn Hidding. DiffExp, a Mathematica package for computing Feynman integrals in terms of one-dimensional series expansions (2020). arXiv:2006.05510.",
+            "Transport of Feynman integrals by local series expansions.",
             r#"@article{Hidding:2020DiffExp,
   author = {Hidding, Martijn},
   title = {{DiffExp}, a {Mathematica} package for computing {Feynman} integrals in terms of one-dimensional series expansions},
@@ -78,20 +87,14 @@ pub fn get_citations() -> Vec<Citation> {
   year = {2020},
   url = {https://arxiv.org/abs/2006.05510}
 }"#,
-            continuation_reasons,
-        ),
-    ];
-    if used & (AUTOMATIC | HIGGS_JET) != 0 {
-        let mut reasons = Vec::new();
-        if used & AUTOMATIC != 0 {
-            reasons.push("Auxiliary-mass-flow methodology for the prepared native automatic integral evaluator.".into());
-        }
-        if used & HIGGS_JET != 0 {
-            reasons.push("Auxiliary-mass-flow methodology for native starting boundaries in the supplied-boundary Higgs-jet workflow.".into());
-        }
+            diffexp_reasons,
+        ));
+    }
+    if used & AUTOMATIC != 0 {
         citations.push(citation(
             "arXiv:2201.11669",
             "Xiao Liu and Yan-Qing Ma. AMFlow: a Mathematica package for Feynman integrals computation via Auxiliary Mass Flow. Comput. Phys. Commun. 283 (2023) 108565. doi:10.1016/j.cpc.2022.108565.",
+            "Feynman integral evaluation through auxiliary mass flow.",
             r#"@article{Liu:2022AMFlow,
   author = {Liu, Xiao and Ma, Yan-Qing},
   title = {{AMFlow}: a {Mathematica} package for {Feynman} integrals computation via {Auxiliary Mass Flow}},
@@ -105,13 +108,14 @@ pub fn get_citations() -> Vec<Citation> {
   doi = {10.1016/j.cpc.2022.108565},
   url = {https://arxiv.org/abs/2201.11669}
 }"#,
-            reasons,
+            vec!["Auxiliary-mass flow for automatic integral evaluation.".into()],
         ));
     }
     if used & HIGGS_JET != 0 {
         citations.push(citation(
             "arXiv:2112.07578",
             "Matteo Becchetti, Francesco Moriello and Armin Schweitzer. Two-loop amplitude for mixed QCD-EW corrections to gg -> Hg. JHEP 04 (2022) 139. doi:10.1007/JHEP04(2022)139.",
+            "Two-loop mixed QCD-EW Higgs-plus-jet amplitudes.",
             r#"@article{Becchetti:2021HiggsJet,
   author = {Becchetti, Matteo and Moriello, Francesco and Schweitzer, Armin},
   title = {Two-loop amplitude for mixed {QCD-EW} corrections to {$gg \to Hg$}},
@@ -125,7 +129,7 @@ pub fn get_citations() -> Vec<Citation> {
   doi = {10.1007/JHEP04(2022)139},
   url = {https://arxiv.org/abs/2112.07578}
 }"#,
-            vec!["Scientific Higgs-jet differential systems, form-factor projectors and tensor structures used by the prepared native application.".into()],
+            vec!["Higgs-plus-jet form factors, differential systems and amplitude tensors.".into()],
         ));
     }
     citations

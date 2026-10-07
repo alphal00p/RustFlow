@@ -147,9 +147,12 @@ numerical loop results. Numerical form factors and exact physical parameters
 must still be supplied explicitly to `evaluate`.
 
 The shared `symbolica.get_citations()` result includes the AMFlow 2 and DiffExp
-method papers after numerical transport preparation. Automatic evaluation also
-credits the original AMFlow paper; the Higgs-jet workflow includes that paper
-and the Becchetti--Moriello--Schweitzer calculation. Citation usage is cumulative:
+method papers after numerical transport preparation. Preparing an automatic
+evaluator also credits the original AMFlow paper. Higgs-jet systems, form-factor
+projectors and amplitude tensors credit the Becchetti--Moriello--Schweitzer
+calculation; preparing tensors alone does not activate numerical-method citations.
+Each entry has a short description and reasons specific to the prepared APIs.
+Citation usage is cumulative:
 imports and failed preparation do not activate these entries, and reading them
 does not reset the registry.
 

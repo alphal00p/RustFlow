@@ -17,6 +17,7 @@ fn numerical_method_citations_are_process_isolated_and_cumulative() {
             "kinematic",
             "higgs",
             "model",
+            "projector",
             "automatic",
         ] {
             if operation == "automatic" && !cfg!(feature = "automatic") {
@@ -85,6 +86,8 @@ elif operation == 'higgs':
     integration.HiggsJetIntegralSystem('planar')
 elif operation == 'model':
     integration.HiggsJetAmplitude.with_form_factor_vertices(hep.Model.standard_model())
+elif operation == 'projector':
+    integration.HiggsJetFormFactorProjector()
 elif operation == 'automatic':
     integration.IntegralEvaluator()
 ",
@@ -105,12 +108,9 @@ elif operation == 'automatic':
         "import" => vec![],
         "ordinary" | "kinematic" => vec!["arXiv:2607.08477", "arXiv:2006.05510"],
         "automatic" => vec!["arXiv:2607.08477", "arXiv:2006.05510", "arXiv:2201.11669"],
-        _ => vec![
-            "arXiv:2607.08477",
-            "arXiv:2006.05510",
-            "arXiv:2201.11669",
-            "arXiv:2112.07578",
-        ],
+        "higgs" => vec!["arXiv:2607.08477", "arXiv:2006.05510", "arXiv:2112.07578"],
+        "model" | "projector" => vec!["arXiv:2112.07578"],
+        _ => unreachable!(),
     };
     assert_eq!(
         first.iter().map(|c| c.0.as_str()).collect::<Vec<_>>(),
@@ -121,6 +121,13 @@ elif operation == 'automatic':
         first,
         "reading citations reset cumulative usage"
     );
+    if let (Some(amflow2), Some(diffexp)) = (
+        first.iter().find(|c| c.0 == "arXiv:2607.08477"),
+        first.iter().find(|c| c.0 == "arXiv:2006.05510"),
+    ) {
+        assert_ne!(amflow2.3, diffexp.3, "method-specific citation reasons");
+        assert_ne!(amflow2.4, diffexp.4, "paper-specific descriptions");
+    }
     for (_, reference, bibtex, reasons, description) in first {
         assert!(!reference.is_empty() && bibtex.starts_with("@article{"));
         assert!(!reasons.is_empty());
