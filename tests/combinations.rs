@@ -45,10 +45,7 @@ fn epsilon_pole_weights_and_cross_family_cancellation_precede_fitting() {
     )
     .unwrap();
     let p = Precision::decimal(80).unwrap();
-    let gamma = ComplexFloat::new(
-        Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Euler)),
-        p.real(0),
-    );
+    let gamma = ComplexFloat::new(p.real(0).euler(), p.real(0));
     let logarithm = p.log(&p.i(4));
     let finite = p.sub(
         &p.mul(&logarithm, &p.sub(&p.i(1), &gamma)),
@@ -106,10 +103,7 @@ fn shared_integral_projections_preserve_cancellations_and_epsilon_prefactors() {
     )
     .unwrap();
     let p = Precision::decimal(80).unwrap();
-    let gamma = ComplexFloat::new(
-        Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Euler)),
-        p.real(0),
-    );
+    let gamma = ComplexFloat::new(p.real(0).euler(), p.real(0));
     assert_eq!(values.len(), 3);
     for result in &values {
         assert_eq!(result.verified_digits, Some(20));
@@ -223,14 +217,8 @@ fn algebraic_projection_and_gamma_normalization_precede_fitting() {
     .remove(0);
     let p = Precision::decimal(100).unwrap();
     let r = ComplexFloat::new(p.real(0), -p.real(2).sqrt());
-    let gamma = ComplexFloat::new(
-        Float::with_val(p.bits, rug::float::Constant::Euler),
-        p.real(0),
-    );
-    let log = ComplexFloat::new(
-        p.log(&p.i(3)).re,
-        -Float::with_val(p.bits, rug::float::Constant::Pi),
-    );
+    let gamma = ComplexFloat::new(p.real(0).euler(), p.real(0));
+    let log = ComplexFloat::new(p.log(&p.i(3)).re, -p.real(0).pi());
     assert_eq!(result.verified_digits, Some(20));
     assert!(p.close(&result.coefficients[&0], &r, 20));
     assert!(p.close(

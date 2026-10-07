@@ -71,7 +71,7 @@ Basis refinement also retains symbolic epsilon, taking precedence over sampled
 reduction so that dimension-dependent denominator factors can be identified.
 
 The manifest fetches the public HEPKit/Linnet/Spenso/Idenso owner at
-[`b96600b0085d9ddfa9e6acbc11fa72ec6163253c`](https://github.com/ValentinHirschi/gammaloop/commit/b96600b0085d9ddfa9e6acbc11fa72ec6163253c),
+[`635d3a1feb44067583a668c7d18f67405fe144e1`](https://github.com/alphal00p/gammaloop/commit/635d3a1feb44067583a668c7d18f67405fe144e1),
 including its native rendering components. Normal builds need no sibling checkout
 or local patch configuration. The community host keeps Vakint at its separate
 [`6203c6cbba6ae5e90329ba5081fad55319e678db`](https://github.com/ValentinHirschi/gammaloop/commit/6203c6cbba6ae5e90329ba5081fad55319e678db)
@@ -83,6 +83,10 @@ for optional standalone development against a local native owner.
 
 Python features are optional and disabled by default. The bindings are
 registered by the community host under `symbolica.community.hep.integration`.
+Pyodide builds use `python_wasm`, including automatic RustRed reduction and
+boundary generation. Rust consumers select `--no-default-features --features
+wasm,automatic`; `wasm` alone retains supplied-boundary transport. See the
+[WASM execution contract](docs/wasm.md).
 Actual dependency source content is included in persistent-cache identities.
 Public source availability and component checks are separate from a completed
 clean-machine build and full native notebook acceptance for that graph.

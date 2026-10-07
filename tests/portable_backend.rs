@@ -17,10 +17,7 @@ fn portable_constants_and_arithmetic_use_the_existing_numeric_owner() {
             .parse("0.57721566490153286060651209008240243104215933593992", "0")
             .unwrap();
         assert!(p.close(&Complex::new(gamma, p.real(0)), &reference, digits.min(45)));
-        assert!(matches!(
-            p.gamma_real(&p.real(3)),
-            Err(Error::Unsupported(_))
-        ));
+        assert!(p.close(&p.gamma_real(&p.real(3)).unwrap(), &p.i(2), digits));
     }
 }
 

@@ -126,7 +126,7 @@ impl PyHiggsJetIntegralSystem {
             namespace: namespace.into(),
         })
     }
-    /// Whether this build contains native reduction and boundary generation.
+    /// Whether this build contains automatic reduction and boundary generation.
     #[getter]
     fn automatic_boundary_generation_available(&self) -> bool {
         cfg!(feature = "automatic")

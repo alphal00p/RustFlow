@@ -272,14 +272,8 @@ fn public_ft_linear_samples_are_fitted_after_exact_projection() {
     )
     .unwrap();
     let p = Precision::decimal(80).unwrap();
-    let gamma = ComplexFloat::new(
-        Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Euler)),
-        p.real(0),
-    );
-    let pi = ComplexFloat::new(
-        Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Pi)),
-        p.real(0),
-    );
+    let gamma = ComplexFloat::new(p.real(0).euler(), p.real(0));
+    let pi = ComplexFloat::new(p.real(0).pi(), p.real(0));
     let logarithm = p.add(&gamma, &p.log(&p.i(2)));
     let finite = p.neg(&p.add(
         &p.scale(&p.powi(&logarithm, 2), 1, 4),

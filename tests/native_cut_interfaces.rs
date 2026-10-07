@@ -49,10 +49,7 @@ fn native_weighted_cut_dimension_contraction_and_independent_laurent_fit() -> Re
     let p = Precision::decimal(80)?;
     let pi = ComplexFloat::new(p.real(1).pi(), p.real(0));
     let volume = p.div(&p.i(1), &p.scale(&pi, 8, 1));
-    let gamma = ComplexFloat::new(
-        Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Euler)),
-        p.real(0),
-    );
+    let gamma = ComplexFloat::new(p.real(0).euler(), p.real(0));
     // (D-3)/eps = 1/eps-2; Phi_2'(0)/Phi_2(0)=2-gamma+log(4*pi/s).
     let finite = p.mul(&volume, &p.sub(&p.log(&p.scale(&pi, 4, 25)), &gamma));
     assert!(p.close(&result[0].coefficients[&-1], &volume, 20));

@@ -610,12 +610,12 @@ pub struct PyTransportResult {
     pub(crate) cache_hit: bool,
     pub(crate) identity: Option<String>,
     ordinary_provenance: Option<String>,
-    elapsed_nanoseconds: u128,
+    elapsed: std::time::Duration,
     attempts: Vec<crate::physical_transport::BoundaryAttempt>,
 }
 impl PyTransportResult {
     pub(crate) fn timed(mut self, started: std::time::Instant) -> Self {
-        self.elapsed_nanoseconds = started.elapsed().as_nanos();
+        self.elapsed = started.elapsed();
         self
     }
     fn ordinary(result: crate::FlowResult, boundary: &PyBoundaryData) -> Self {
@@ -634,7 +634,7 @@ impl PyTransportResult {
             cache_hit: false,
             identity: None,
             ordinary_provenance: Some(boundary.provenance.clone()),
-            elapsed_nanoseconds: 0,
+            elapsed: std::time::Duration::ZERO,
             attempts: vec![],
         }
     }
@@ -657,7 +657,7 @@ impl PyTransportResult {
             cache_hit: true,
             identity: Some(boundary.identity.key().to_owned()),
             ordinary_provenance: None,
-            elapsed_nanoseconds: 0,
+            elapsed: std::time::Duration::ZERO,
             attempts: vec![],
         })
     }
@@ -714,7 +714,7 @@ impl PyTransportResult {
     /// Wall time in integer nanoseconds, including cache-lock wait; zero for cache inspection.
     #[getter]
     fn elapsed_nanoseconds(&self) -> u128 {
-        self.elapsed_nanoseconds
+        self.elapsed.as_nanos()
     }
     /// Compatible sources actually attempted, in selection order.
     #[getter]
@@ -857,5 +857,46 @@ impl PyTransportResult {
     #[getter]
     fn identity(&self) -> Option<String> {
         self.identity.clone()
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn transport_elapsed_nanoseconds_retains_full_duration_range() {
+        let precision = crate::Precision::decimal(40).unwrap();
+        let boundary = PyBoundaryData {
+            inner: crate::BoundaryData {
+                point: precision.zero(),
+                values: vec![precision.i(1)],
+            },
+            verified_digits: Some(20),
+            provenance: "duration regression".into(),
+        };
+        let mut result = PyTransportResult::ordinary(
+            crate::FlowResult {
+                point: precision.i(1),
+                values: vec![precision.i(2)],
+                diagnostics: crate::FlowDiagnostics::default(),
+            },
+            &boundary,
+        );
+        assert_eq!(result.elapsed_nanoseconds(), 0);
+
+        // The Python integer API retains values beyond u64 nanoseconds without
+        // keeping an over-aligned u128 inside the Python-allocated object.
+        result.elapsed = std::time::Duration::new(u64::MAX, 999_999_999);
+        assert_eq!(
+            result.elapsed_nanoseconds(),
+            u128::from(u64::MAX) * 1_000_000_000 + 999_999_999,
+        );
+        assert_eq!(
+            result.clone().elapsed_nanoseconds(),
+            result.elapsed_nanoseconds()
+        );
+        assert_eq!(result.input_verified_digits, Some(20));
+        assert_eq!(result.coefficients, vec![vec![precision.i(2)]]);
     }
 }

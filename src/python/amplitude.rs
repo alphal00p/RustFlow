@@ -151,7 +151,7 @@ impl PyHiggsJetAmplitude {
             .map_err(error)?;
         Ok(PyAmplitudeResult {
             inner,
-            elapsed_nanoseconds: started.elapsed().as_nanos(),
+            elapsed: started.elapsed(),
         })
     }
 }
@@ -167,7 +167,7 @@ impl PyHiggsJetAmplitude {
 #[derive(Clone)]
 pub struct PyAmplitudeResult {
     inner: HiggsJetObservables,
-    elapsed_nanoseconds: u128,
+    elapsed: std::time::Duration,
 }
 
 impl PyAmplitudeResult {
@@ -235,6 +235,6 @@ impl PyAmplitudeResult {
     }
     #[getter]
     fn elapsed_nanoseconds(&self) -> u128 {
-        self.elapsed_nanoseconds
+        self.elapsed.as_nanos()
     }
 }

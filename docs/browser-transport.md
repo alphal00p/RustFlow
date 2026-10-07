@@ -9,11 +9,12 @@ The optional browser build uses Symbolica's official Malachite integer and Astro
 | `python_stubgen` | Existing native API and generated stubs |
 | `native`, without defaults | GMP/MPFR transport and supplied boundaries; no automatic reduction |
 | `wasm`, without defaults | Portable transport and supplied boundaries; no automatic reduction |
-| `python_wasm`, without defaults | Portable Python transport and Higgs-plus-jet classes for the shared community extension |
+| `wasm,automatic`, without defaults | Portable transport, RustRed reduction and automatic boundaries |
+| `python_wasm`, without defaults | Portable automatic Python API and Higgs-plus-jet classes for the shared community extension |
 
-`python_api` is the backend-neutral binding implementation used by the two Python entry features. Native and browser backends cannot be selected together. `automatic` selects RustRed and requires the native backend. The CLI requires `automatic`.
+`python_api` is the backend-neutral binding implementation used by the two Python entry features. Native and browser backends cannot be selected together. `automatic` selects RustRed independently of the numeric backend. The CLI requires `automatic`. See [wasm.md](wasm.md) for automatic browser evaluation, serial execution and persistence constraints.
 
-`symbolica.community.hep.integration.automatic_boundary_generation_available` and the property of the same name on `HiggsJetIntegralSystem` report the selected capability. Builds without `automatic` do not export `IntegralEvaluator`, `PreparedIntegralFamily`, `ReductionTables`, or `HiggsJetIntegralSystem.generate_boundary`. Integral-family validation still belongs to RustRed: asking for it without that feature returns a typed unsupported-input error. Gamma evaluation similarly remains a native capability; it is not used by the supplied canonical boundary, transport, form-factor or amplitude path.
+`symbolica.community.hep.integration.automatic_boundary_generation_available` and the property of the same name on `HiggsJetIntegralSystem` report the selected capability. Builds without `automatic` do not export `IntegralEvaluator`, `PreparedIntegralFamily`, `ReductionTables`, or `HiggsJetIntegralSystem.generate_boundary`. Integral-family validation still belongs to RustRed: asking for it without that feature returns a typed unsupported-input error. Gamma evaluation uses Symbolica's selected numeric backend; it is not needed by the supplied canonical boundary, transport, form-factor or amplitude path.
 
 Import precomputed values through `HiggsJetIntegralSystem.kinematic_transport().add_boundary()` after checking `mathematical_fingerprint`, as described in [portable-higgs-boundaries.md](portable-higgs-boundaries.md). Exact ratios and their recorded precision preserve supplied values across numerical backends. Runtime-specific binary caches retain their original compatibility checks; a native binary cache is not a portable input file.
 

@@ -79,10 +79,7 @@ fn native_dot_graph_cli_matches_the_massless_bubble() {
     let result = tmp.run("graph", &card);
     assert_eq!(result["verified_digits"], 20);
     let p = Precision::decimal(80).unwrap();
-    let gamma = ComplexFloat::new(
-        Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Euler)),
-        p.real(0),
-    );
+    let gamma = ComplexFloat::new(p.real(0).euler(), p.real(0));
     let finite = p.sub(&p.sub(&p.i(2), &gamma), &p.log(&p.i(2)));
     assert!(p.close(&number(&result["coefficients"]["-2"], p), &p.zero(), 20));
     assert!(p.close(&number(&result["coefficients"]["-1"], p), &p.i(1), 20));
@@ -212,7 +209,7 @@ fn rational_prescribed_card() -> Value {
 #[test]
 fn prescribed_rational_and_rootless_canonical_cli_keep_native_representations() {
     let p = Precision::decimal(80).unwrap();
-    let pi = Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Pi));
+    let pi = p.real(0).pi();
     let logarithm = ComplexFloat::new(p.real(0), -pi);
     let mut identities = Vec::new();
     for canonical in [false, true] {
@@ -255,14 +252,7 @@ fn prescribed_rootful_canonical_cli_tracks_the_declared_sheet() {
     let point = &result["results"][0];
     assert_eq!(point["root_germ"][prescribed_root()], "opposite");
     let p = Precision::decimal(80).unwrap();
-    let logarithm = p.scale(
-        &ComplexFloat::new(
-            p.real(0),
-            -Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Pi)),
-        ),
-        1,
-        2,
-    );
+    let logarithm = p.scale(&ComplexFloat::new(p.real(0), -p.real(0).pi()), 1, 2);
     assert!(p.close(&number(&point["coefficients"][1][0], p), &logarithm, 20));
     assert!(p.close(
         &number(&point["coefficients"][2][0], p),

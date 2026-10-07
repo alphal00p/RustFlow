@@ -246,6 +246,11 @@ impl RustRedBackend {
                 "native_workers must be in 1..=64".into(),
             ));
         }
+        if cfg!(feature = "wasm") && self.native_workers != 1 {
+            return Err(Error::Unsupported(
+                "the browser reduction backend supports exactly one worker".into(),
+            ));
+        }
         context.emit(Progress::Reduction {
             integrals: targets.len(),
         })?;

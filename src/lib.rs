@@ -2,7 +2,7 @@
 #![doc = include_str!("../docs/usage.md")]
 #[cfg(all(feature = "wasm", feature = "native"))]
 compile_error!(
-    "`wasm` cannot be combined with `native`, `automatic`, or the native `python` feature; use --no-default-features --features python_wasm"
+    "`wasm` cannot be combined with `native` or the native `python` feature; use --no-default-features --features python_wasm"
 );
 pub use symbolica;
 mod algebra;

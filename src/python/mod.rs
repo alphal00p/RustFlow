@@ -206,32 +206,54 @@ fn options(value: Option<&PyEvaluationOptions>) -> crate::FlowOptions {
 /// Add integration classes to `symbolica.community.hep.integration`.
 /// The community host owns module creation and the shared Symbolica runtime.
 pub fn register(module: &Bound<'_, PyModule>) -> PyResult<()> {
-    module.add_class::<PyHiggsJetIntegralSystem>()?;
-    module.add_class::<PyHiggsJetConfiguration>()?;
-    module.add_class::<PyHiggsJetFormFactorProjector>()?;
-    module.add_class::<PyFormFactorResult>()?;
-    module.add_class::<PyHiggsJetAmplitude>()?;
-    module.add_class::<PyAmplitudeResult>()?;
-    module.add_class::<PyEvaluationOptions>()?;
-    module.add_class::<PyComputationControl>()?;
+    // CPython's WASM object allocator guarantees eight-byte alignment, whereas
+    // Rust's u128 (and any aggregate containing it) requires sixteen. Checking
+    // every registered wrapper here also covers nested numerical payloads and
+    // automatic-only classes, and runs in release as well as debug builds.
+    // Keep exact durations as Duration; put any other over-aligned owned data
+    // behind Box/Arc instead of narrowing it or relying on allocator luck.
+    macro_rules! add_class {
+        ($class:ty) => {{
+            const _: () = assert!(
+                std::mem::align_of::<$class>() <= 8,
+                concat!(
+                    stringify!($class),
+                    " exceeds Python's WASM object alignment"
+                ),
+            );
+            const _: () = assert!(
+                std::mem::align_of::<<$class as pyo3::impl_::pyclass::PyClassImpl>::Layout>() <= 8,
+                concat!(stringify!($class), " has an over-aligned Python layout"),
+            );
+            module.add_class::<$class>()?;
+        }};
+    }
+    add_class!(PyHiggsJetIntegralSystem);
+    add_class!(PyHiggsJetConfiguration);
+    add_class!(PyHiggsJetFormFactorProjector);
+    add_class!(PyFormFactorResult);
+    add_class!(PyHiggsJetAmplitude);
+    add_class!(PyAmplitudeResult);
+    add_class!(PyEvaluationOptions);
+    add_class!(PyComputationControl);
     #[cfg(feature = "automatic")]
-    module.add_class::<PyIntegralEvaluator>()?;
+    add_class!(PyIntegralEvaluator);
     #[cfg(feature = "automatic")]
-    module.add_class::<PyPreparedIntegralFamily>()?;
+    add_class!(PyPreparedIntegralFamily);
     #[cfg(feature = "automatic")]
-    module.add_class::<PyReductionTables>()?;
-    module.add_class::<PyKinematicTransport>()?;
-    module.add_class::<PyContinuationPrescription>()?;
-    module.add_class::<PyEndpointRoute>()?;
-    module.add_class::<PyAsymptoticCoefficient>()?;
-    module.add_class::<PyAsymptoticRelation>()?;
-    module.add_class::<PyEndpointConstraints>()?;
-    module.add_class::<PyEndpointResult>()?;
-    module.add_class::<PyBoundaryCache>()?;
-    module.add_class::<PyBoundaryData>()?;
-    module.add_class::<PyDifferentialSystem>()?;
-    module.add_class::<PyLaurentExpansion>()?;
-    module.add_class::<PyTransportResult>()?;
+    add_class!(PyReductionTables);
+    add_class!(PyKinematicTransport);
+    add_class!(PyContinuationPrescription);
+    add_class!(PyEndpointRoute);
+    add_class!(PyAsymptoticCoefficient);
+    add_class!(PyAsymptoticRelation);
+    add_class!(PyEndpointConstraints);
+    add_class!(PyEndpointResult);
+    add_class!(PyBoundaryCache);
+    add_class!(PyBoundaryData);
+    add_class!(PyDifferentialSystem);
+    add_class!(PyLaurentExpansion);
+    add_class!(PyTransportResult);
     macro_rules! add_error {
         ($($name:ident),* $(,)?) => { $(module.add(stringify!($name), module.py().get_type::<$name>())?;)* };
     }

@@ -163,21 +163,28 @@ impl Precision {
             out
         }
     }
-    #[cfg(feature = "native")]
+    /// Evaluate Gamma through Symbolica's selected arbitrary-precision backend.
+    /// Keep the argument symbolic until evaluation so normalization does not
+    /// select a different precision for the numeric function.
     pub fn gamma_real(&self, a: &Float) -> Result<ComplexFloat> {
-        let g = rug::Float::with_val(self.bits, a.as_raw()).gamma();
-        if !g.is_finite() {
-            return Err(Error::Numerical("gamma function pole".into()));
+        if !a.is_finite() {
+            return Err(Error::Numerical("nonfinite gamma argument".into()));
         }
-        Ok(Complex::new(Float::from_raw(g), self.real(0)))
-    }
-    /// The browser transport path consumes supplied boundary values and does not
-    /// evaluate Gamma factors. This capability remains native until the numeric
-    /// owner provides a portable implementation.
-    #[cfg(not(feature = "native"))]
-    pub fn gamma_real(&self, _a: &Float) -> Result<ComplexFloat> {
-        Err(Error::Unsupported(
-            "Gamma evaluation requires the native numeric backend".into(),
+        let argument = Atom::var(symbol!("symbolica_amflow::gamma_argument"));
+        let expression = symbolica::transcendental::gamma().call(&argument);
+        let parameters =
+            ahash::HashMap::from_iter([(argument, Float::with_val(self.bits, a.as_raw()))]);
+        let value: Float = expression
+            .evaluate_with_prec(&parameters, self.bits)
+            .map_err(|error| Error::Numerical(format!("gamma evaluation: {error}")))?;
+        if !value.is_finite() {
+            return Err(Error::Numerical(
+                "gamma evaluation reached a pole or exceeded the numeric backend's range".into(),
+            ));
+        }
+        Ok(Complex::new(
+            Float::with_val(self.bits, value.as_raw()),
+            self.real(0),
         ))
     }
     pub fn tolerance(&self, digits: u32) -> Float {

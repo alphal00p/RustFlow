@@ -1,3 +1,5 @@
+#![cfg(feature = "native")]
+
 use symbolica::domains::float::{Complex, Float};
 use symbolica_amflow::{ComplexFloat, Precision};
 

@@ -112,7 +112,7 @@ pub struct PyEndpointResult {
     boundary: EndpointBoundary,
     matching: PyTransportResult,
     cache_hit: bool,
-    elapsed_nanoseconds: u128,
+    elapsed: std::time::Duration,
 }
 impl PyEndpointResult {
     pub(crate) fn from_result(result: EndpointResult) -> crate::Result<Self> {
@@ -132,7 +132,7 @@ impl PyEndpointResult {
             boundary: result.boundary,
             matching,
             cache_hit: result.cache_hit,
-            elapsed_nanoseconds: 0,
+            elapsed: std::time::Duration::ZERO,
         })
     }
     pub(crate) fn cached(boundary: EndpointBoundary) -> crate::Result<Self> {
@@ -145,7 +145,7 @@ impl PyEndpointResult {
         })
     }
     pub(crate) fn timed(mut self, started: std::time::Instant) -> Self {
-        self.elapsed_nanoseconds = started.elapsed().as_nanos();
+        self.elapsed = started.elapsed();
         self
     }
 }
@@ -222,6 +222,6 @@ impl PyEndpointResult {
     }
     #[getter]
     fn elapsed_nanoseconds(&self) -> u128 {
-        self.elapsed_nanoseconds
+        self.elapsed.as_nanos()
     }
 }

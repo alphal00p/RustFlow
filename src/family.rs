@@ -417,8 +417,7 @@ impl IntegralFamily {
         #[cfg(not(feature = "automatic"))]
         {
             Err(Error::Unsupported(
-                "integral-family validation requires the native automatic feature and RustRed"
-                    .into(),
+                "integral-family validation requires the automatic feature and RustRed".into(),
             ))
         }
     }

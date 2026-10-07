@@ -192,10 +192,7 @@ pub fn first_planar_canonical(
     let plus = p.gamma_real(&p.rational(&(&one + epsilon)).re)?;
     let minus = p.gamma_real(&p.rational(&(&one - epsilon)).re)?;
     let denominator = p.gamma_real(&p.rational(&(&one - &(epsilon * &Rational::from(2)))).re)?;
-    let euler = ComplexFloat::new(
-        Float::with_val(p.bits, rug::float::Constant::Euler),
-        p.real(0),
-    );
+    let euler = ComplexFloat::new(p.real(0).euler(), p.real(0));
     let log_scale = p.log(&p.rational(&(-b.clone())));
     let exponential = p.exp(&p.mul(
         &p.rational(epsilon),

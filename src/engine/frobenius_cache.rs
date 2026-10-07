@@ -2,6 +2,7 @@
 use crate::frobenius::PreparedFrobenius;
 use crate::{DifferentialSystem, Error, Result, RunContext};
 use std::sync::{Arc, Mutex, TryLockError};
+#[cfg(not(target_arch = "wasm32"))]
 use std::time::Duration;
 use symbolica::prelude::*;
 
@@ -39,7 +40,17 @@ impl FrobeniusPreparations {
             context.cancellation.check()?;
             match slot.try_lock() {
                 Ok(entry) => break entry,
-                Err(TryLockError::WouldBlock) => std::thread::sleep(Duration::from_millis(10)),
+                Err(TryLockError::WouldBlock) => {
+                    // Pyodide executes one calculation inline. A held lock
+                    // therefore indicates callback reentry, not another worker
+                    // that can make progress while this interpreter waits.
+                    #[cfg(target_arch = "wasm32")]
+                    return Err(Error::Unsupported(
+                        "cannot reenter an active Frobenius preparation in the browser".into(),
+                    ));
+                    #[cfg(not(target_arch = "wasm32"))]
+                    std::thread::sleep(Duration::from_millis(10));
+                }
                 Err(TryLockError::Poisoned(_)) => {
                     return Err(Error::Numerical(
                         "Frobenius preparation cache lock poisoned".into(),

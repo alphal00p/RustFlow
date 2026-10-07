@@ -12,25 +12,25 @@ application or sibling checkout. The community manifest and lock select its
 RustFlow runtime revision.
 
 The standalone root and community host each own their Cargo patch tables;
-Cargo ignores a dependency's patch table. The standalone root maps the original
-GammaLoop source to public HEPKit owner `b96600b0085d9ddfa9e6acbc11fa72ec6163253c`
-through 22 native-package entries and uses that owner for the lean Typst library
-and SVG crates. Community `main` selects the same owner after PR #19. The earlier
-scientific publication wheel and its reports retain their separately validated
-`a3d1c8a867ac0e89d8f58f9722cf9a7e83338901` owner pin.
-The host additionally pins Vakint separately at
-`6203c6cbba6ae5e90329ba5081fad55319e678db`. Keep that separate implementation when
-embedding RustFlow in a host that also exposes Vakint.
+Cargo ignores a dependency's patch table. Both source HEPKit, Linnet, Spenso,
+Idenso and the lean Typst components from the canonical
+`https://github.com/alphal00p/gammaloop` repository, branch `feynkit`. The current
+standalone lock records `635d3a1feb44067583a668c7d18f67405fe144e1`; the former
+fork-based package overrides have been removed. Historical validation reports
+retain their original owner revisions.
 
-The standalone and updated community locks select Symbolica, Numerica and
-Graphica 3.0.1 from official community revision
-`6defcca968ca8411977fb1f641a9dee49ee7b7a7`. The earlier scientific notebook wheel
-retains `c3408e4ba1d3bdd4ea55678fad50e27009be13d4`; its historical
-acceptance is not transferred to the newer build. Both use RustRed's `main`
-branch at `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`. RustRed's core Cargo package
-is named `rustred`; its experimental `reconstruction` feature is disabled across
-the shared graph. The host bridge retains `campaign-api`. Run the root-scaling
-regression when changing the numerical dependency graph:
+The current lock selects Symbolica, Numerica and Graphica 3.0.1 from official
+community revision `ed2374f1d880d52c3a7ca48cd7c22f4baad5c020`, and RustRed main
+`acc92b0dad27b11fd194a4c284765fb6a93cbc94`. RustRed's core Cargo package is
+`rustred`; its experimental `reconstruction` feature remains disabled. Native
+and Pyodide consumers select one shared arithmetic backend. `python` enables
+the native automatic evaluator; `python_wasm` enables its serial portable
+counterpart. The core `automatic` feature is independent of `native` and can
+be paired with `wasm`. See [WASM support](wasm.md).
+
+The host additionally pins Vakint separately at
+`6203c6cbba6ae5e90329ba5081fad55319e678db`; it remains native-only. Run the
+root-scaling regression when changing the numerical dependency graph:
 
 ```sh
 cargo test --locked --test symbolica_root_scaling
@@ -82,14 +82,11 @@ the degree bound is not a general bound on the number of multivariate terms.
 
 ## Public native owners
 
-The required HEPKit extensions live in the public
-[owner revision `b96600b0085d9ddfa9e6acbc11fa72ec6163253c`](https://github.com/ValentinHirschi/gammaloop/commit/b96600b0085d9ddfa9e6acbc11fa72ec6163253c),
-based on upstream `6c707c6b77a437256eb1180da13d4d327b371d13`.
-The changes are proposed upstream in [GammaLoop PR #125](https://github.com/alphal00p/gammaloop/pull/125).
-It retains the upstream external-wavefunction, rendering and tensor APIs while
-providing the graph, parameter and tensor fixes documented in
-[hepkit-integration.md](hepkit-integration.md). HEPKit owns these operations;
-RustFlow does not duplicate them.
+The required HEPKit extensions have been consolidated into the canonical
+`feynkit` branch. It provides the graph, parameter and tensor operations
+documented in [hepkit-integration.md](hepkit-integration.md). RustFlow reuses
+those implementations. Historical fork pins and upstream review links in older
+validation reports describe those tested artifacts, not the active source.
 
 Native borrowing uses `PyIntegralFamily::as_family`,
 `PyKinematics::as_kinematics`, `PyModel::as_model`, and the checked
@@ -111,13 +108,11 @@ references with the host. Its FeynKit dependencies resolve to the shared owner
 through the host's patch table. Replacing Vakint with the crate from the HEPKit
 owner revision would discard that distinct implementation.
 
-For a custom embedding workspace, carry the complete native-owner and
-crates.io patch tables from this crate's `Cargo.toml` into the owning workspace,
-then verify the resolved graph and lock. A patch to a fork has a different Git
-source identity from the original repository, which Cargo requires; changing
-only a branch or revision under the same Git URL is not a substitute. The
-community host already declares these patches and its direct FeynKit/Spynso3
-pins. Its package check validates native and browser dependency ownership.
+For a custom embedding workspace, carry this crate's crates.io patch table
+into the owning workspace and use the same canonical FeynKit branch for every
+companion crate. Verify the resolved graph and lock contain one source and
+revision per owner. The community host's package checks validate native and
+browser dependency ownership, including disabled RustRed reconstruction.
 
 `.cargo/config.example.toml` is optional and intended only for standalone
 RustFlow development against a local native-owner checkout. It contains no

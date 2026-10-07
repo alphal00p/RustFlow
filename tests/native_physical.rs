@@ -71,10 +71,7 @@ fn native_graph_amf_seed_drives_a_progressively_filled_physical_cache() {
         admissible: |_: &CachedBoundary, _: &CachedPoint| Ok(true),
     };
     let p = Precision::decimal(80).unwrap();
-    let gamma = ComplexFloat::new(
-        Float::from_raw(rug::Float::with_val(p.bits, rug::float::Constant::Euler)),
-        p.real(0),
-    );
+    let gamma = ComplexFloat::new(p.real(0).euler(), p.real(0));
     // Preserve a reserve for the uncertainty amplified by target reduction.
     let transport_options = FlowOptions {
         digits: 28,
