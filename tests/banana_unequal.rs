@@ -130,10 +130,7 @@ fn unequal_banana_full_route_refinement_and_independent_contour() -> Result<()> 
     // Four factorized sectors are analytic products of three tadpoles:
     // exp(3*EulerGamma*eps)*Gamma(1+eps)^3 * Q^(-eps).
     let pi = ComplexFloat::new(p.log(&p.i(-1)).im, p.real(0));
-    let zeta3 = ComplexFloat::new(
-        Float::with_val(p.bits, p.real(3).as_raw().clone().zeta()),
-        p.real(0),
-    );
+    let zeta3 = p.eval(&Atom::num(3).zeta(), &Default::default())?;
     let gamma = [
         p.i(1),
         p.zero(),

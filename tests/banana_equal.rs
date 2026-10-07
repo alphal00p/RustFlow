@@ -94,10 +94,7 @@ fn evaluate_banana(digits: u32, order: usize) -> Result<(Vec<C>, Vec<C>)> {
     for k in [3, 5] {
         parameters.insert(
             atom(&format!("Zeta({k})"))?,
-            C::new(
-                Float::with_val(p.bits, p.real(k).as_raw().clone().zeta()),
-                p.real(0),
-            ),
+            p.eval(&Atom::num(k).zeta(), &Default::default())?,
         );
     }
     let leading = fixture["leading_epsilon_coefficients_by_master_wolfram"]
