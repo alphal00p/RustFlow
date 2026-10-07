@@ -487,10 +487,11 @@ fn construct_observed(
             .collect::<Result<Vec<_>>>()?;
         denominators.push(DenominatorEnclosure { expanded, factors });
     }
-    Ok(ExactSourceResidual {
+    Ok(ExactSourceResidual::from_polynomials(
+        p,
         residuals,
         denominators,
-    })
+    ))
 }
 
 #[derive(Debug)]

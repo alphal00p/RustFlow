@@ -103,3 +103,30 @@ pub fn epsilon_samples(count: usize, denominator: i64) -> Result<Vec<Rational>> 
         .map(|i| Rational::from((i as i64, total)))
         .collect())
 }
+
+/// Balanced real nodes for automatic Laurent reconstruction. Both signs are
+/// analytic regulator samples, not different physical i0 prescriptions. Avoid
+/// zero and retain exact rational coordinates for reduction and independent fits.
+#[cfg(feature = "automatic")]
+pub(crate) fn symmetric_epsilon_samples(count: usize, denominator: i64) -> Result<Vec<Rational>> {
+    if count == 0 || count > 10000 || denominator <= 0 {
+        return Err(Error::InvalidInput("epsilon sampling parameters".into()));
+    }
+    let half = count.div_ceil(2) as i64;
+    let total = denominator
+        .checked_mul(half)
+        .ok_or_else(|| Error::InvalidInput("epsilon denominator overflow".into()))?;
+    Ok((0..count)
+        .map(|index| {
+            let magnitude = (index / 2 + 1) as i64;
+            Rational::from((
+                if index % 2 == 0 {
+                    magnitude
+                } else {
+                    -magnitude
+                },
+                total,
+            ))
+        })
+        .collect())
+}

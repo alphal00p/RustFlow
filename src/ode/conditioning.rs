@@ -9,23 +9,33 @@ use symbolica::poly::univariate::UnivariatePolynomial;
 use symbolica::prelude::*;
 
 type BallPolynomial = UnivariatePolynomial<FloatField<ComplexBall>>;
+type RealPolynomial = UnivariatePolynomial<FloatField<RealBall>>;
+#[derive(Clone, Debug)]
+enum ConditioningPolynomials {
+    Real(Vec<RealPolynomial>),
+    Complex(Vec<BallPolynomial>),
+}
 #[derive(Clone, Debug)]
 pub(crate) struct ConditioningChart {
-    polynomials: Vec<BallPolynomial>,
+    polynomials: ConditioningPolynomials,
+}
+
+fn perturbation_real(p: Precision, value: &Float) -> RealBall {
+    let bits = p.bits.min(value.prec());
+    let epsilon = Rational::from((Integer::one(), Integer::from(2).pow(u64::from(bits))));
+    let center = value.to_rational();
+    // Relative perturbations of the stored value measure conditioning
+    // independently of coordinate scale. An absolute floor would invent
+    // high-degree uncertainty even for exact zero Taylor coefficients.
+    let radius = epsilon * center.clone().abs();
+    RealBall::from_rational_ball(&center, &radius, p.bits)
 }
 
 pub(crate) fn perturbation_ball(p: Precision, value: &C) -> ComplexBall {
-    let component = |value: &Float| {
-        let bits = p.bits.min(value.prec());
-        let epsilon = Rational::from((Integer::one(), Integer::from(2).pow(u64::from(bits))));
-        let center = value.to_rational();
-        // Relative perturbations of the stored value measure conditioning
-        // independently of coordinate scale. An absolute floor would invent
-        // high-degree uncertainty even for exact zero Taylor coefficients.
-        let radius = epsilon * center.clone().abs();
-        RealBall::from_rational_ball(&center, &radius, p.bits)
-    };
-    ComplexBall::new(component(&value.re), component(&value.im))
+    ComplexBall::new(
+        perturbation_real(p, &value.re),
+        perturbation_real(p, &value.im),
+    )
 }
 
 impl ConditioningChart {
@@ -40,11 +50,33 @@ impl ConditioningChart {
                 "conditioning polynomial dimensions or coefficients".into(),
             ));
         }
+        let variable = Arc::new(PolyVariable::Temporary(0));
+        if coefficients
+            .iter()
+            .flatten()
+            .all(|value| value.im.is_zero())
+        {
+            let ring = FloatField::from_rep(RealBall::exact(p.real(0)));
+            let polynomials = (0..n)
+                .map(|i| {
+                    RealPolynomial::from_coefficients(
+                        &ring,
+                        coefficients
+                            .iter()
+                            .map(|r| perturbation_real(p, &r[i].re))
+                            .collect(),
+                        variable.clone(),
+                    )
+                })
+                .collect();
+            return Ok(Self {
+                polynomials: ConditioningPolynomials::Real(polynomials),
+            });
+        }
         let ring = FloatField::from_rep(ComplexBall::new(
             RealBall::exact(p.real(0)),
             RealBall::exact(p.real(0)),
         ));
-        let variable = Arc::new(PolyVariable::Temporary(0));
         let polynomials = (0..n)
             .map(|i| {
                 UnivariatePolynomial::from_coefficients(
@@ -57,23 +89,67 @@ impl ConditioningChart {
                 )
             })
             .collect();
-        Ok(Self { polynomials })
+        Ok(Self {
+            polynomials: ConditioningPolynomials::Complex(polynomials),
+        })
     }
     /// Return the strongest decimal mixed-scale tolerance checked for every
     /// component, or request re-evaluation from fresh sources at higher bits.
     pub(crate) fn check(&self, p: Precision, step: &C, values: &[C], digits: u32) -> Result<u32> {
-        if values.len() != self.polynomials.len() || digits == 0 || !p.finite(step) {
+        let n = match &self.polynomials {
+            ConditioningPolynomials::Real(a) => a.len(),
+            ConditioningPolynomials::Complex(a) => a.len(),
+        };
+        if values.len() != n || digits == 0 || !p.finite(step) {
             return Err(Error::InvalidInput(
                 "conditioning evaluation dimensions".into(),
             ));
         }
-        let argument = perturbation_ball(p, step);
-        check_balls(
-            p,
-            self.polynomials.iter().map(|a| a.evaluate(&argument)),
-            values,
-            digits,
-        )
+        match &self.polynomials {
+            ConditioningPolynomials::Real(polynomials) if step.im.is_zero() => {
+                let argument = perturbation_real(p, &step.re);
+                check_balls(
+                    p,
+                    polynomials.iter().map(|a| {
+                        ComplexBall::new(a.evaluate(&argument), RealBall::exact(p.real(0)))
+                    }),
+                    values,
+                    digits,
+                )
+            }
+            ConditioningPolynomials::Real(polynomials) => {
+                // A real polynomial may still be evaluated on a complex path.
+                // Promote its complete balls without discarding their widths.
+                let ring = FloatField::from_rep(perturbation_ball(p, &p.zero()));
+                let variable = Arc::new(PolyVariable::Temporary(0));
+                let argument = perturbation_ball(p, step);
+                check_balls(
+                    p,
+                    polynomials.iter().map(|a| {
+                        BallPolynomial::from_coefficients(
+                            &ring,
+                            a.coefficients()
+                                .iter()
+                                .map(|r| ComplexBall::new(r.clone(), RealBall::exact(p.real(0))))
+                                .collect(),
+                            variable.clone(),
+                        )
+                        .evaluate(&argument)
+                    }),
+                    values,
+                    digits,
+                )
+            }
+            ConditioningPolynomials::Complex(polynomials) => {
+                let argument = perturbation_ball(p, step);
+                check_balls(
+                    p,
+                    polynomials.iter().map(|a| a.evaluate(&argument)),
+                    values,
+                    digits,
+                )
+            }
+        }
     }
 }
 
@@ -124,14 +200,7 @@ pub(crate) fn check_balls(
                 witness = index;
             }
         } else {
-            let mut candidate = digits;
-            for d in digits.saturating_add(1)..=checked {
-                if radius > p.tolerance(d) * &scale {
-                    break;
-                }
-                candidate = d;
-            }
-            checked = checked.min(candidate);
+            checked = checked_decimal_tolerance(p, &radius, &scale, digits, checked);
         }
     }
     if minimum_bits > p.bits {
@@ -143,6 +212,65 @@ pub(crate) fn check_balls(
         })
     } else {
         Ok(checked)
+    }
+}
+
+/// The decimal thresholds decrease monotonically. Usually the working
+/// precision already supports the ceiling; otherwise find the last passing
+/// threshold without rebuilding every intervening arbitrary-precision power.
+fn checked_decimal_tolerance(
+    p: Precision,
+    radius: &Float,
+    scale: &Float,
+    minimum: u32,
+    ceiling: u32,
+) -> u32 {
+    if *radius <= p.tolerance(ceiling) * scale {
+        return ceiling;
+    }
+    let mut low = minimum;
+    let mut high = ceiling;
+    while high - low > 1 {
+        let middle = low + (high - low) / 2;
+        if *radius <= p.tolerance(middle) * scale {
+            low = middle;
+        } else {
+            high = middle;
+        }
+    }
+    low
+}
+
+#[cfg(test)]
+mod decimal_search_tests {
+    use super::*;
+
+    #[test]
+    fn binary_threshold_search_preserves_the_linear_scan() {
+        for bits in [53, 106, 201, 400] {
+            let p = Precision { bits };
+            for minimum in [1, 8, 20] {
+                let ceiling = (bits / 4).max(minimum);
+                for scale in [p.real(1), p.real(17), p.real(1024)] {
+                    for digits in 0..=ceiling + 2 {
+                        for factor in [p.real(0), p.real(1), p.real(2), p.real(3) / 2] {
+                            let radius = p.tolerance(digits) * &scale * factor;
+                            let mut expected = minimum;
+                            for candidate in minimum + 1..=ceiling {
+                                if radius > p.tolerance(candidate) * &scale {
+                                    break;
+                                }
+                                expected = candidate;
+                            }
+                            assert_eq!(
+                                checked_decimal_tolerance(p, &radius, &scale, minimum, ceiling),
+                                expected
+                            );
+                        }
+                    }
+                }
+            }
+        }
     }
 }
 

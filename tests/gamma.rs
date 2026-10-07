@@ -47,6 +47,20 @@ fn gamma_poles_are_typed_numerical_failures() {
 }
 
 #[test]
+fn repeated_gamma_arguments_retain_each_requested_precision() {
+    let storage = Precision::decimal(120).unwrap();
+    let argument = storage.rational(&Rational::from((1, 7)));
+    let low = Precision::decimal(40).unwrap();
+    let high = Precision::decimal(100).unwrap();
+    let reference = high.gamma_real(&argument.re).unwrap();
+    for p in [low, high, low, high] {
+        let value = p.gamma_real(&argument.re).unwrap();
+        assert_eq!(value.re.prec(), p.bits);
+        assert!(high.close(&value, &reference, if p.bits == low.bits { 35 } else { 95 }));
+    }
+}
+
+#[test]
 fn gamma_residues_remain_finite_for_tiny_and_near_pole_arguments() {
     let p = Precision::decimal(100).unwrap();
     // Conversion of the argument to a machine float would underflow to zero.

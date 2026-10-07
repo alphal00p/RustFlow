@@ -144,6 +144,7 @@ impl PreparedFlow {
             system.blocks()?.iter().map(Vec::len).collect()
         };
         let mut flow = Self {
+            positive_mass_contour: None,
             family,
             reduced,
             system,

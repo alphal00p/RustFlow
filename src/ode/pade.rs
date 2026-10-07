@@ -387,10 +387,7 @@ impl RationalCandidate {
             denominator,
             numerator_derivatives,
             denominator_derivative: dq,
-            residual: ExactSourceResidual {
-                residuals,
-                denominators,
-            },
+            residual: ExactSourceResidual::from_polynomials(p, residuals, denominators),
         })
     }
 

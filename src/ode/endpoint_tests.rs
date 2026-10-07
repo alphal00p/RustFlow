@@ -270,7 +270,10 @@ fn saved_segment_rejects_nonfinite_span_or_interval_coordinate() -> Result<()> {
     // bypass all interval comparisons. No large exact integer is constructed.
     let mut raw = rug::Float::with_val(p.bits, 1);
     raw <<= rug::float::exp_max() / 2 + 32;
-    let end = C::new(Float::from_raw(raw), p.real(0));
+    // Keep both components nonzero: real division now computes the quotient
+    // directly, without an overflowing intermediate squared denominator.
+    let component = Float::from_raw(raw);
+    let end = C::new(component.clone(), component);
     assert!(p.finite(&end));
     assert!(!p.finite(&p.div(&end, &end)));
     assert!(matches!(

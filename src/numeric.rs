@@ -5,10 +5,20 @@
 //! instead round each operation to an explicit working precision; accuracy is
 //! assessed separately by recomputation, never inferred from that precision.
 use crate::{Error, Result};
+use std::{cell::RefCell, collections::VecDeque};
 use symbolica::domains::float::{Complex, Float, RoundingDirection::Nearest};
 use symbolica::prelude::*;
 
 pub type ComplexFloat = Complex<Float>;
+
+thread_local! {
+    // Recursive boundaries repeatedly request the same gamma arguments at a
+    // fixed precision. Keep a small per-worker cache; separate precisions never
+    // share results during independent numerical refinement.
+    static GAMMA_VALUES: RefCell<VecDeque<(u32, Float, ComplexFloat)>> = const {
+        RefCell::new(VecDeque::new())
+    };
+}
 
 #[derive(Clone, Copy, Debug)]
 pub struct Precision {
@@ -109,6 +119,22 @@ impl Precision {
         )
     }
     pub fn mul(&self, a: &ComplexFloat, b: &ComplexFloat) -> ComplexFloat {
+        // Keep the same rounded nonzero products as the general formula.
+        // Real coefficients occur throughout the Taylor and Frobenius solves;
+        // multiplying their exact zero imaginary part only allocates temporaries.
+        // Nonfinite operands retain the general IEEE zero-times-infinity behavior.
+        if b.im.is_zero() && self.finite(a) && self.finite(b) {
+            return Complex::new(
+                a.re.mul_round(&b.re, self.bits, Nearest),
+                a.im.mul_round(&b.re, self.bits, Nearest),
+            );
+        }
+        if a.im.is_zero() && self.finite(a) && self.finite(b) {
+            return Complex::new(
+                a.re.mul_round(&b.re, self.bits, Nearest),
+                a.re.mul_round(&b.im, self.bits, Nearest),
+            );
+        }
         let ac = a.re.mul_round(&b.re, self.bits, Nearest);
         let bd = a.im.mul_round(&b.im, self.bits, Nearest);
         let ad = a.re.mul_round(&b.im, self.bits, Nearest);
@@ -119,6 +145,15 @@ impl Precision {
         )
     }
     pub fn div(&self, a: &ComplexFloat, b: &ComplexFloat) -> ComplexFloat {
+        if b.im.is_zero() && !b.re.is_zero() && self.finite(a) && self.finite(b) {
+            // Divide each component directly by the real denominator. This
+            // gives the correctly rounded quotient without intermediate
+            // products or the extra rounding of the conjugate formula.
+            return Complex::new(
+                a.re.div_round(&b.re, self.bits, Nearest),
+                a.im.div_round(&b.re, self.bits, Nearest),
+            );
+        }
         let conj = Complex::new(b.re.clone(), -b.im.clone());
         let top = self.mul(a, &conj);
         let den = self.mul(b, &conj).re;
@@ -128,9 +163,22 @@ impl Precision {
         )
     }
     pub fn scale(&self, a: &ComplexFloat, n: i64, d: i64) -> ComplexFloat {
+        if n == 1 && d != 0 && self.finite(a) {
+            return self.div(a, &self.i(d));
+        }
         self.div(&self.mul(a, &self.i(n)), &self.i(d))
     }
     pub fn norm(&self, a: &ComplexFloat) -> Float {
+        if a.im.is_zero() && self.finite(a) {
+            return Float::with_val(self.bits, a.re.as_raw()).norm();
+        }
+        if self.finite(a) {
+            let real_square = a.re.mul_round(&a.re, self.bits, Nearest);
+            let imaginary_square = a.im.mul_round(&a.im, self.bits, Nearest);
+            return real_square
+                .add_round(&imaginary_square, self.bits, Nearest)
+                .sqrt();
+        }
         self.mul(a, &Complex::new(a.re.clone(), -a.im.clone()))
             .re
             .sqrt()
@@ -170,10 +218,24 @@ impl Precision {
         if !a.is_finite() {
             return Err(Error::Numerical("nonfinite gamma argument".into()));
         }
+        let rounded = Float::with_val(self.bits, a.as_raw());
+        if self.bits <= 4096
+            && let Some(value) = GAMMA_VALUES.with(|cache| {
+                let mut cache = cache.borrow_mut();
+                let index = cache
+                    .iter()
+                    .position(|(bits, argument, _)| *bits == self.bits && argument == &rounded)?;
+                let entry = cache.remove(index).unwrap();
+                let value = entry.2.clone();
+                cache.push_back(entry);
+                Some(value)
+            })
+        {
+            return Ok(value);
+        }
         let argument = Atom::var(symbol!("symbolica_amflow::gamma_argument"));
         let expression = symbolica::transcendental::gamma().call(&argument);
-        let parameters =
-            ahash::HashMap::from_iter([(argument, Float::with_val(self.bits, a.as_raw()))]);
+        let parameters = ahash::HashMap::from_iter([(argument, rounded.clone())]);
         let value: Float = expression
             .evaluate_with_prec(&parameters, self.bits)
             .map_err(|error| Error::Numerical(format!("gamma evaluation: {error}")))?;
@@ -182,10 +244,17 @@ impl Precision {
                 "gamma evaluation reached a pole or exceeded the numeric backend's range".into(),
             ));
         }
-        Ok(Complex::new(
-            Float::with_val(self.bits, value.as_raw()),
-            self.real(0),
-        ))
+        let result = Complex::new(Float::with_val(self.bits, value.as_raw()), self.real(0));
+        if self.bits <= 4096 {
+            GAMMA_VALUES.with(|cache| {
+                let mut cache = cache.borrow_mut();
+                if cache.len() == 64 {
+                    cache.pop_front();
+                }
+                cache.push_back((self.bits, rounded, result.clone()));
+            });
+        }
+        Ok(result)
     }
     pub fn tolerance(&self, digits: u32) -> Float {
         self.powi(&self.i(10), -(digits as i64)).re
@@ -224,6 +293,10 @@ impl Precision {
         Ok(self.round(&value))
     }
 }
+
+#[cfg(test)]
+#[path = "numeric/precision_tests.rs"]
+mod precision_tests;
 
 /// Pivoted elimination, with all arithmetic at the chosen working precision.
 pub fn solve(

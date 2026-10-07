@@ -5,7 +5,10 @@ use crate::family::substitute;
 use crate::numeric::solve;
 use crate::ode::{polynomial_coefficients, quotient_series};
 mod endpoint_support;
+mod evaluate;
 pub(crate) mod exact;
+#[cfg(test)]
+mod projection_tests;
 mod recurrence;
 pub use exact::{ExactFrobeniusBasis, ExactFrobeniusLimits};
 
@@ -602,14 +605,26 @@ impl FrobeniusBasis {
         for (j, column) in self.columns.iter().enumerate() {
             let exponent = p.eval(&column.exponent, values)?;
             let mut power = p.exp(&p.mul(&log, &exponent));
+            if let Some(values) = evaluate::real_column(p, z, &log, &power, column) {
+                for (i, value) in values.into_iter().enumerate() {
+                    matrix[i][j] = value;
+                }
+                continue;
+            }
             for coeff in &column.coefficients {
                 let mut logpower = p.i(1);
-                for row in coeff {
+                for (index, row) in coeff.iter().enumerate() {
+                    let term_power = if index == 0 {
+                        power.clone()
+                    } else {
+                        p.mul(&power, &logpower)
+                    };
                     for i in 0..n {
-                        matrix[i][j] =
-                            p.add(&matrix[i][j], &p.mul(&p.mul(&power, &logpower), &row[i]));
+                        matrix[i][j] = p.add(&matrix[i][j], &p.mul(&term_power, &row[i]));
                     }
-                    logpower = p.mul(&logpower, &log);
+                    if index + 1 < coeff.len() {
+                        logpower = p.mul(&logpower, &log);
+                    }
                 }
                 power = p.mul(&power, z);
             }
@@ -665,6 +680,11 @@ pub(crate) fn project_limit(
         return Err(Error::InvalidInput("endpoint projection dimensions".into()));
     }
     let mut terms: BTreeMap<(Rational, usize), C> = BTreeMap::new();
+    // Several endpoint columns share an exponent. A target's rational
+    // weights have the same valuation and series in each such column;
+    // expand and evaluate each required prefix only once per projection.
+    let mut valuations = vec![None; weights.len()];
+    let mut expansions = BTreeMap::<(usize, i64), Vec<(i64, C)>>::new();
     for (column, constant) in basis.columns.iter().zip(constants) {
         if *constant == p.zero() || !column.exponent.derivative(epsilon).is_zero() {
             continue;
@@ -689,7 +709,13 @@ pub(crate) fn project_limit(
             if weight.is_zero() {
                 continue;
             }
-            let valuation = crate::frobenius::valuation(weight, eta)?;
+            let valuation = if let Some(value) = valuations[i] {
+                value
+            } else {
+                let value = crate::frobenius::valuation(weight, eta)?;
+                valuations[i] = Some(value);
+                value
+            };
             if &lambda + &Rational::from(valuation + column.coefficients.len() as i64)
                 <= Rational::zero()
             {
@@ -711,22 +737,30 @@ pub(crate) fn project_limit(
                     "endpoint target expansion exceeds 10000 terms".into(),
                 ));
             }
-            let expansion = weight
-                .series(eta, 0, through + 1)
-                .map_err(|e| Error::Unsupported(e.to_string()))?;
-            for (power, coefficient) in expansion.terms() {
-                let power = power
-                    .to_string()
-                    .parse::<i64>()
-                    .map_err(|_| Error::Unsupported("noninteger reduction exponent".into()))?;
-                let coefficient = p.eval(coefficient, parameters)?;
+            let key = (i, through);
+            if let std::collections::btree_map::Entry::Vacant(entry) = expansions.entry(key) {
+                let expansion = weight
+                    .series(eta, 0, through + 1)
+                    .map_err(|e| Error::Unsupported(e.to_string()))?;
+                let coefficients = expansion
+                    .terms()
+                    .map(|(power, coefficient)| {
+                        let power = power.to_string().parse::<i64>().map_err(|_| {
+                            Error::Unsupported("noninteger reduction exponent".into())
+                        })?;
+                        Ok((power, p.eval(coefficient, parameters)?))
+                    })
+                    .collect::<Result<Vec<_>>>()?;
+                entry.insert(coefficients);
+            }
+            for (power, coefficient) in &expansions[&key] {
                 for (k, logs) in column.coefficients.iter().enumerate() {
-                    let exponent = &lambda + &Rational::from(power + k as i64);
+                    let exponent = &lambda + &Rational::from(*power + k as i64);
                     if exponent > Rational::zero() {
                         break;
                     }
                     for (l, row) in logs.iter().enumerate() {
-                        let term = p.mul(constant, &p.mul(&coefficient, &row[i]));
+                        let term = p.mul(constant, &p.mul(coefficient, &row[i]));
                         let entry = terms
                             .entry((exponent.clone(), l))
                             .or_insert_with(|| p.zero());

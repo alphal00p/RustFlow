@@ -11,6 +11,9 @@ use symbolica::domains::float::{ComplexBall, FloatField, RealBall, RoundingDirec
 use symbolica::poly::univariate::UnivariatePolynomial;
 use symbolica::prelude::*;
 
+#[path = "source/polynomials.rs"]
+mod polynomials;
+
 pub(crate) type Gaussian = Complex<Rational>;
 pub(crate) type BallPolynomial = UnivariatePolynomial<FloatField<ComplexBall>>;
 
@@ -91,6 +94,7 @@ pub(crate) struct ExactSourceResidual {
     pub(crate) residuals: Vec<BallPolynomial>,
     /// One denominator per physical row, shared by every epsilon channel.
     pub(crate) denominators: Vec<DenominatorEnclosure>,
+    bounds: Vec<Vec<(Float, Float, Float)>>,
 }
 
 #[derive(Clone, Debug)]
@@ -180,6 +184,42 @@ pub(crate) fn validate_inputs(
 }
 
 impl ExactSourceResidual {
+    pub(crate) fn from_polynomials(
+        p: Precision,
+        residuals: Vec<BallPolynomial>,
+        denominators: Vec<DenominatorEnclosure>,
+    ) -> Self {
+        let bounds = residuals
+            .iter()
+            .map(|polynomial| {
+                polynomial
+                    .coefficients()
+                    .iter()
+                    .map(|coefficient| {
+                        (
+                            complex_upper(coefficient, p),
+                            coefficient.re.radius.add_round(
+                                &coefficient.im.radius,
+                                p.bits,
+                                RoundingDirection::Up,
+                            ),
+                            coefficient.re.center.norm().add_round(
+                                &coefficient.im.center.norm(),
+                                p.bits,
+                                RoundingDirection::Up,
+                            ),
+                        )
+                    })
+                    .collect()
+            })
+            .collect();
+        Self {
+            residuals,
+            denominators,
+            bounds,
+        }
+    }
+
     pub(crate) fn new(
         p: Precision,
         rows: &[ExactPolynomialRow],
@@ -187,52 +227,58 @@ impl ExactSourceResidual {
         coefficients: &[Vec<C>],
         channels: usize,
     ) -> Result<Self> {
-        let (n, size) = validate_inputs(p, rows, center, coefficients, channels)?;
-        let ring = FloatField::from_rep(dyadic_ball(p, &p.zero()));
-        let variable = Arc::new(PolyVariable::Temporary(0));
-        let polynomial = |a| UnivariatePolynomial::from_coefficients(&ring, a, variable.clone());
-        let exact_polynomial =
-            |a: &[Gaussian]| polynomial(a.iter().map(|a| exact_ball(a, p)).collect());
-        let solutions = (0..size)
-            .map(|i| polynomial(coefficients.iter().map(|r| dyadic_ball(p, &r[i])).collect()))
-            .collect::<Vec<_>>();
-        let mut residuals = vec![polynomial(vec![ring.zero()]); size];
-        let mut denominators = Vec::with_capacity(n);
-        let center = dyadic_ball(p, center);
-        for (i, row) in rows.iter().enumerate() {
-            let denominator = exact_polynomial(&row.denominator).shift_var(&center);
-            let entries = row
-                .entries
-                .iter()
-                .map(|(j, a)| (*j, exact_polynomial(a).shift_var(&center)))
-                .collect::<Vec<_>>();
-            for channel in 0..channels {
-                let index = channel * n + i;
-                let mut numerator = &denominator * &solutions[index].derivative();
-                for (column, a) in &entries {
-                    let shift = column / n;
-                    if shift <= channel {
-                        let source = (channel - shift) * n + column % n;
-                        numerator = &numerator - &(a * &solutions[source]);
-                    }
-                }
-                residuals[index] = numerator;
-            }
-            denominators.push(DenominatorEnclosure {
-                expanded: denominator,
-                factors: row
-                    .denominator_factors
-                    .iter()
-                    .map(|(a, multiplicity)| {
-                        (exact_polynomial(a).shift_var(&center), *multiplicity)
+        validate_inputs(p, rows, center, coefficients, channels)?;
+        let (residuals, denominators) = if polynomials::all_real(rows, center, coefficients) {
+            // This field is valid only when every stored source, coordinate,
+            // and solution coefficient has exactly zero imaginary part.
+            let dyadic = |a: &C| {
+                let mut value = RealBall::exact(a.re.clone());
+                value.set_precision(p.bits);
+                value
+            };
+            let (residuals, denominators) = polynomials::construct(
+                FloatField::from_rep(RealBall::exact(p.real(0))),
+                rows,
+                dyadic(center),
+                coefficients,
+                channels,
+                dyadic,
+                |a| RealBall::from_rational_ball(&a.re, &Rational::zero(), p.bits),
+            );
+            (
+                residuals
+                    .into_iter()
+                    .map(|a| polynomials::promote(p, a))
+                    .collect(),
+                denominators
+                    .into_iter()
+                    .map(|(a, factors)| {
+                        (
+                            polynomials::promote(p, a),
+                            factors
+                                .into_iter()
+                                .map(|(a, k)| (polynomials::promote(p, a), k))
+                                .collect(),
+                        )
                     })
                     .collect(),
-            });
-        }
-        Ok(Self {
-            residuals,
-            denominators,
-        })
+            )
+        } else {
+            polynomials::construct(
+                FloatField::from_rep(dyadic_ball(p, &p.zero())),
+                rows,
+                dyadic_ball(p, center),
+                coefficients,
+                channels,
+                |a| dyadic_ball(p, a),
+                |a| exact_ball(a, p),
+            )
+        };
+        let denominators = denominators
+            .into_iter()
+            .map(|(expanded, factors)| DenominatorEnclosure { expanded, factors })
+            .collect();
+        Ok(Self::from_polynomials(p, residuals, denominators))
     }
 
     /// Bound |h| sup |P'-AP| on a disk containing the entire straight step.
@@ -267,7 +313,7 @@ impl ExactSourceResidual {
             .map(|denominator| denominator.lower(&radius, p))
             .collect::<Vec<_>>();
         let mut bounds = Vec::with_capacity(self.residuals.len());
-        for (i, numerator) in self.residuals.iter().enumerate() {
+        for (i, coefficients) in self.bounds.iter().enumerate() {
             let lower = &denominator_lowers[i % self.denominators.len()];
             if !lower.is_finite() || *lower <= p.real(0) {
                 return Err(Error::Accuracy(
@@ -277,32 +323,20 @@ impl ExactSourceResidual {
             let mut upper = p.real(0);
             let mut width = p.real(0);
             let mut central = p.real(0);
-            let mut power = p.real(1);
-            for a in numerator.coefficients() {
-                upper = upper.add_round(
-                    &complex_upper(a, p).mul_round(&power, p.bits, RoundingDirection::Up),
-                    p.bits,
-                    RoundingDirection::Up,
-                );
-                let central_upper = a.re.center.norm().add_round(
-                    &a.im.center.norm(),
-                    p.bits,
-                    RoundingDirection::Up,
-                );
-                central = central.add_round(
-                    &central_upper.mul_round(&power, p.bits, RoundingDirection::Up),
-                    p.bits,
-                    RoundingDirection::Up,
-                );
-                let coefficient_width =
-                    a.re.radius
-                        .add_round(&a.im.radius, p.bits, RoundingDirection::Up);
-                width = width.add_round(
-                    &coefficient_width.mul_round(&power, p.bits, RoundingDirection::Up),
-                    p.bits,
-                    RoundingDirection::Up,
-                );
-                power = power.mul_round(&radius, p.bits, RoundingDirection::Up);
+            // All coefficients and the radius are nonnegative. Horner's rule
+            // with upward rounding encloses the same polynomial disk bound.
+            for (coefficient_upper, coefficient_width, coefficient_central) in
+                coefficients.iter().rev()
+            {
+                upper = upper
+                    .mul_round(&radius, p.bits, RoundingDirection::Up)
+                    .add_round(coefficient_upper, p.bits, RoundingDirection::Up);
+                central = central
+                    .mul_round(&radius, p.bits, RoundingDirection::Up)
+                    .add_round(coefficient_central, p.bits, RoundingDirection::Up);
+                width = width
+                    .mul_round(&radius, p.bits, RoundingDirection::Up)
+                    .add_round(coefficient_width, p.bits, RoundingDirection::Up);
             }
             let bound = upper
                 .div_round(lower, p.bits, RoundingDirection::Up)

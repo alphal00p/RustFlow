@@ -6,6 +6,7 @@ use rayon::prelude::*;
 use std::collections::BTreeMap;
 use symbolica::prelude::*;
 
+mod euclidean;
 mod frobenius_cache;
 mod supplied;
 pub use supplied::SuppliedAuxiliarySystem;
@@ -21,6 +22,9 @@ pub struct PreparedFlow {
     // Retained independently of caller-mutable evaluation options and checked
     // on every evaluation, including systems loaded from the symbolic cache.
     principal_mass_constraints: Vec<Complex<Rational>>,
+    // Public family fields can be replaced after preparation. A certificate
+    // only applies to the exact family snapshot that was checked.
+    positive_mass_contour: Option<String>,
     pub basis_refinement: Option<crate::refine::RefinementReport>,
 }
 
@@ -57,6 +61,8 @@ impl PreparedFlow {
         )?;
         let eta = symbol!("symbolica_amflow::eta");
         let (auxiliary, mask) = family.deform(eta, &options.mass_mode)?;
+        let positive_mass_contour =
+            euclidean::positive_mass_contour(&auxiliary, eta)?.then(|| format!("{family:?}"));
         let cache = options
             .cache_directory
             .as_ref()
@@ -84,6 +90,7 @@ impl PreparedFlow {
                 deformation_mask: mask,
                 supplied: None,
                 principal_mass_constraints,
+                positive_mass_contour,
             });
         }
         let session = crate::reduction::ReductionSession::new(backend);
@@ -130,6 +137,7 @@ impl PreparedFlow {
             deformation_mask: mask,
             supplied: None,
             principal_mass_constraints,
+            positive_mass_contour,
         })
     }
     /// Prepare at an exact regulator sample. Dimension-factorizing refinement
@@ -297,7 +305,15 @@ impl PreparedFlow {
         } else {
             1
         };
-        let start = ComplexFloat::new(p.real(0), maximum * (8 * direction));
+        let positive_mass_contour = self
+            .positive_mass_contour
+            .as_ref()
+            .is_some_and(|original| original == &format!("{:?}", self.family));
+        let start = if positive_mass_contour {
+            ComplexFloat::new(maximum * 8, p.real(0))
+        } else {
+            ComplexFloat::new(p.real(0), maximum * (8 * direction))
+        };
         let at_start = infinity.evaluate(&p.div(&p.i(1), &start), &parameters)?;
         let initial = at_start
             .iter()
@@ -313,7 +329,11 @@ impl PreparedFlow {
             .map(|v| p.norm(v))
             .filter(|v| *v > p.real(0))
             .fold(p.real(1), |a, b| if a < b { a } else { b });
-        let end = ComplexFloat::new(p.real(0), (minimum / 8) * direction);
+        let end = if positive_mass_contour {
+            ComplexFloat::new(minimum / 8, p.real(0))
+        } else {
+            ComplexFloat::new(p.real(0), (minimum / 8) * direction)
+        };
         let path = compiled.plan_path(&start, &end, -direction)?;
         stage("transporting the auxiliary-mass solution")?;
         let transported = compiled.transport(
@@ -900,31 +920,55 @@ pub(crate) fn fit_samples_refined_leading(
             "last epsilon power precedes leading pole bound".into(),
         ));
     }
-    let count =
-        (i64::from(last) - i64::from(leading) + 1) as usize + (options.digits as usize / 2) + 12;
-    let count = count + (1 - count % 2);
+    let width = (i64::from(last) - i64::from(leading) + 1) as usize;
+    // A smaller regulator radius and balanced nodes reduce the extrapolation
+    // order and conditioning cost. This is an initial proposal only: the
+    // independent higher-order, smaller-radius fit still admits every result.
+    let count = width + (options.digits as usize).div_ceil(3) + 2;
+    // Use complete +/- pairs. An unpaired positive node adds a flow solve
+    // without the even/odd cancellation of a balanced interpolation grid.
+    let count = count + count % 2;
     if count > 10000 {
         return Err(Error::Limit(
             "epsilon reconstruction exceeds 10000 samples".into(),
         ));
     }
     let mut previous: Option<Vec<LaurentExpansion>> = None;
-    let mut working_digits = options.digits + options.guard_digits;
+    // Reserve digits for extracting positive powers from a pole-subtracted
+    // polynomial at |epsilon| <= 1e-3. Starting an underresolved Vandermonde
+    // fit wastes a complete AMF sample set before its first accuracy check.
+    let fit_guard = u32::try_from(width)
+        .ok()
+        .and_then(|n| n.checked_sub(1))
+        .and_then(|n| n.checked_mul(3))
+        .and_then(|n| n.checked_add(8))
+        .ok_or_else(|| Error::Limit("epsilon fit precision overflow".into()))?;
+    let mut working_digits = options
+        .digits
+        .checked_add(options.guard_digits.max(fit_guard))
+        .ok_or_else(|| Error::Limit("epsilon fit precision overflow".into()))?;
     for attempt in 0..=options.max_precision_attempts {
         let mut refined = options.clone();
         refined.guard_digits = working_digits - options.digits;
         refined.series_order += attempt * 16;
         refined.refine_rational_order(attempt);
         refined.validate()?;
-        let samples = epsilon::epsilon_samples(
+        let samples = epsilon::symmetric_epsilon_samples(
             count + attempt * 4,
-            100 * (1_i64
+            1000 * (1_i64
                 .checked_shl(attempt as u32)
                 .ok_or_else(|| Error::Limit("too many precision attempts".into()))?),
         )?;
         let p = Precision::decimal(refined.digits + refined.guard_digits)?;
         let current_digits = working_digits;
-        working_digits = Precision::refinement_digits(current_digits, 0)?;
+        // Nodes are normalized to the unit interval before solving the fit;
+        // only the requested coefficient range loses powers of the regulator
+        // radius. An independent twelve-digit precision increase is sufficient
+        // as an initial refinement. Failed stabilization continues to refine,
+        // and arithmetic precision failures retain the larger retry increment.
+        working_digits = current_digits
+            .checked_add(12)
+            .ok_or_else(|| Error::Limit("epsilon fit precision overflow".into()))?;
         let values = match evaluate(&samples, &refined) {
             Err(Error::InsufficientPrecision { minimum_bits, .. })
                 if attempt < options.max_precision_attempts =>
@@ -1010,6 +1054,94 @@ mod projection_tests;
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn balanced_laurent_reconstruction_verifies_poles_and_positive_orders() -> Result<()> {
+        let calls = std::cell::RefCell::new(Vec::new());
+        let options = FlowOptions {
+            digits: 20,
+            guard_digits: 24,
+            ..Default::default()
+        };
+        let fits = fit_samples_refined_leading(1, -4, 2, &options, |samples, refined| {
+            let p = Precision::decimal(refined.digits + refined.guard_digits)?;
+            assert!(samples.iter().any(|value| value < &Rational::zero()));
+            calls.borrow_mut().push(samples.len());
+            // epsilon^-4/(1-epsilon) has every coefficient equal to one.
+            Ok(samples
+                .iter()
+                .map(|sample| {
+                    let epsilon = p.rational(sample);
+                    vec![p.div(
+                        &p.i(1),
+                        &p.mul(&p.powi(&epsilon, 4), &p.sub(&p.i(1), &epsilon)),
+                    )]
+                })
+                .collect())
+        })?;
+        assert_eq!(fits[0].verified_digits, Some(20));
+        assert!(fits[0].validation_samples > 0);
+        assert!(calls.borrow().iter().sum::<usize>() < 62);
+        let p = Precision::decimal(100)?;
+        for power in -4..=2 {
+            assert!(p.close(&fits[0].coefficients[&power], &p.i(1), 20));
+        }
+        Ok(())
+    }
+
+    #[test]
+    fn balanced_laurent_fits_retain_zeros_and_tiny_relative_coefficients() -> Result<()> {
+        let options = FlowOptions {
+            digits: 20,
+            guard_digits: 24,
+            ..Default::default()
+        };
+        let fits = fit_samples_refined_leading(1, -2, 2, &options, |samples, refined| {
+            let p = Precision::decimal(refined.digits + refined.guard_digits)?;
+            let scale = p.parse("1e-30", "0")?;
+            Ok(samples
+                .iter()
+                .map(|sample| {
+                    let epsilon = p.rational(sample);
+                    vec![p.mul(&scale, &p.add(&p.powi(&epsilon, -2), &p.powi(&epsilon, 2)))]
+                })
+                .collect())
+        })?;
+        let p = Precision::decimal(100)?;
+        for power in -2_i32..=2 {
+            let expected = if power.abs() == 2 {
+                p.parse("1e-30", "0")?
+            } else {
+                p.zero()
+            };
+            assert!(
+                p.norm(&p.sub(&fits[0].coefficients[&power], &expected))
+                    < p.real(1) * p.parse("1e-45", "0")?.re
+            );
+        }
+        Ok(())
+    }
+
+    #[test]
+    fn balanced_fit_does_not_admit_a_regulator_pole_inside_the_sample_disk() -> Result<()> {
+        let options = FlowOptions {
+            digits: 20,
+            guard_digits: 24,
+            ..Default::default()
+        };
+        let outcome = fit_samples_refined_leading(1, 0, 0, &options, |samples, refined| {
+            let p = Precision::decimal(refined.digits + refined.guard_digits)?;
+            Ok(samples
+                .iter()
+                .map(|sample| {
+                    let epsilon = p.rational(sample);
+                    vec![p.div(&p.i(1), &p.sub(&p.i(1), &p.scale(&epsilon, 100_000, 1)))]
+                })
+                .collect())
+        });
+        assert!(matches!(outcome, Err(Error::Accuracy(_))));
+        Ok(())
+    }
+
     #[test]
     fn laurent_refinement_rebuilds_samples_after_a_precision_hint() -> Result<()> {
         let calls = std::cell::RefCell::new(Vec::new());
