@@ -18,6 +18,33 @@ fn main() {
     }
     let own_root = PathBuf::from(env::var_os("CARGO_MANIFEST_DIR").unwrap());
     let own_manifest = own_root.join("Cargo.toml");
+    // Only authenticated metadata is compiled in; example mathematics is loaded
+    // by the caller from the pinned remote source or an explicit data directory.
+    let mut manifest = String::from("pub const FILES: &[(&str, &str)] = &[\n");
+    for name in [
+        "integral-systems.json",
+        "physical-configurations.json",
+        "plugin-physical-map.json",
+        "generic-form-factors.json",
+        "form-factor-vertices.json",
+        "published-physical-families.json",
+        "published-canonical-64.json",
+    ] {
+        let path = own_root.join("fixtures/gg-hg").join(name);
+        println!("cargo:rerun-if-changed={}", path.display());
+        let digest = blake3::hash(&fs::read(&path).expect("read Higgs-jet data"));
+        manifest.push_str(&format!(
+            "    ({name:?}, {:?}),\n",
+            digest.to_hex().as_str()
+        ));
+    }
+    manifest.push_str("];\n");
+    fs::write(
+        PathBuf::from(env::var_os("OUT_DIR").unwrap()).join("gg_hg_data_manifest.rs"),
+        manifest,
+    )
+    .expect("write Higgs-jet data manifest");
+
     let host_manifest = env::var_os("RUSTFLOW_WORKSPACE_MANIFEST")
         .map(PathBuf::from)
         .unwrap_or_else(|| own_manifest.clone())

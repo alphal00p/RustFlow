@@ -10,8 +10,6 @@ use serde::Deserialize;
 use std::collections::BTreeSet;
 use symbolica::prelude::*;
 
-const DATA: &str = include_str!("../../fixtures/gg-hg/plugin-physical-map.json");
-
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub enum PluginFamilyKind {
     Planar,
@@ -108,14 +106,17 @@ impl PluginBasisMap {
     /// Include the extracted mathematics as well as its upstream source in
     /// boundary identities: correcting an exporter must invalidate old seeds.
     pub(crate) fn input_fingerprint() -> String {
-        blake3::hash(DATA.as_bytes()).to_hex().to_string()
+        super::data::digest("plugin-physical-map.json")
+            .expect("known fixture")
+            .to_owned()
     }
 
     /// Parse exact mathematical data in the caller's Symbolica namespace.
     /// Names s,t,b,eps and root1..root8 therefore match a system loaded there.
     pub fn load(kind: PluginFamilyKind, namespace: &str) -> Result<Self> {
-        let data: Document = serde_json::from_str(DATA)
-            .map_err(|e| Error::InvalidInput(format!("plugin physical map: {e}")))?;
+        let data: Document =
+            serde_json::from_str(&super::data::get("plugin-physical-map.json")?)
+                .map_err(|e| Error::InvalidInput(format!("plugin physical map: {e}")))?;
         if data.schema != "rustflow-gg-hg-plugin-physical-map-v2"
             || data.dimension != "4-2*eps"
             || data.physical_propagators != 7

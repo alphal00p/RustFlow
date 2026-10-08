@@ -6,8 +6,6 @@ use serde::Deserialize;
 use std::collections::BTreeSet;
 use symbolica::prelude::*;
 
-const FAMILY_DATA: &str = include_str!("../../fixtures/gg-hg/published-physical-families.json");
-const CANONICAL_DATA: &str = include_str!("../../fixtures/gg-hg/published-canonical-64.json");
 const NAMESPACE: &str = "rustflow_gg_hg_published_2020";
 
 /// Primary-source provenance of independently serialized mathematical inputs.
@@ -91,8 +89,9 @@ impl PublishedFamily {
         mv2: Atom,
         epsilon: Symbol,
     ) -> Result<Self> {
-        let document: FamilyDocument = serde_json::from_str(FAMILY_DATA)
-            .map_err(|e| Error::InvalidInput(format!("published family data: {e}")))?;
+        let document: FamilyDocument =
+            serde_json::from_str(&super::data::get("published-physical-families.json")?)
+                .map_err(|e| Error::InvalidInput(format!("published family data: {e}")))?;
         if document.schema != "rustflow-published-gg-hg-families-v1"
             || document.physical_propagators != 7
             || document.dimension != 4
@@ -265,8 +264,9 @@ fn symbol(text: &str) -> Result<Symbol> {
 
 impl PublishedCanonicalBasis {
     pub fn load() -> Result<Self> {
-        let data: CanonicalDocument = serde_json::from_str(CANONICAL_DATA)
-            .map_err(|e| Error::InvalidInput(format!("published canonical data: {e}")))?;
+        let data: CanonicalDocument =
+            serde_json::from_str(&super::data::get("published-canonical-64.json")?)
+                .map_err(|e| Error::InvalidInput(format!("published canonical data: {e}")))?;
         if data.schema != "rustflow-published-gg-hg-canonical-v1"
             || data.paper != "2007.09813v2"
             || data.dimension != 64

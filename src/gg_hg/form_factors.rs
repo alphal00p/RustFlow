@@ -7,8 +7,6 @@ use serde::Deserialize;
 use std::collections::{BTreeMap, BTreeSet};
 use symbolica::prelude::*;
 
-const DATA: &str = include_str!("../../fixtures/gg-hg/generic-form-factors.json");
-
 #[derive(Clone, Debug)]
 pub struct HiggsJetFormFactorResult {
     pub values: [ComplexFloat; 4],
@@ -111,7 +109,7 @@ fn exact_scalar(value: &Atom, allowed: &BTreeSet<Atom>) -> Result<()> {
 
 impl HiggsJetFormFactors {
     pub fn load(namespace: &str) -> Result<Self> {
-        let data: Document = serde_json::from_str(DATA)
+        let data: Document = serde_json::from_str(&super::data::get("generic-form-factors.json")?)
             .map_err(|e| Error::InvalidInput(format!("form-factor data: {e}")))?;
         if data.schema != "rustflow-gg-hg-generic-form-factors-v1"
             || data.coordinates != ["s", "t", "b"]
