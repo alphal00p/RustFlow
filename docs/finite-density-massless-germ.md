@@ -305,3 +305,9 @@ structural endpoint admission of every occupied cut sector of the E7 input. It d
 the prism multicuts or the E8 common-pole complete-cut prescription. The structural
 certificate supplies no numerical integral value and does not bypass native
 weighted reduction, boundary integration or AMF transport.
+
+
+The optional [free-virtual-loop zero domains](finite-density-free-virtual-zeros.md)
+can expose the same active-rank polynomial zero to native guarded discovery.
+That source optimization is false by default and requires this bound sealed
+proof; it does not change the endpoint prescription or replace AMF transport.

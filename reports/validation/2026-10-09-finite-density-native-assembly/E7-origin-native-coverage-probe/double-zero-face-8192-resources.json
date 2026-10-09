@@ -1,0 +1,19 @@
+{
+  "command": [
+    "timeout",
+    "90s",
+    "env",
+    "PROBE_DOMAINS=8192",
+    "/tmp/e7_native_domain_probe",
+    "/tmp/e7-origin-double.bin",
+    "double",
+    "zero-face",
+    "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/double-zero-face-8192.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 36.54646208928898,
+  "user_seconds": 36.005991,
+  "system_seconds": 0.240372,
+  "peak_child_rss_kib": 187416,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

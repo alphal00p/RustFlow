@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/python_finite_density-bede1c03c02f84bf",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.8576644998975098,
+  "user_seconds": 1.607184,
+  "system_seconds": 0.23052199999999998,
+  "peak_child_rss_kib": 30768,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

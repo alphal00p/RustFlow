@@ -110,7 +110,10 @@ def main():
             require(tuple(tuple(c["cut_slots"]) for c in record["contributions"]) == CUTS, "complete physical cut set mismatch")
             occupied = record["occupied_reports"]
             require(tuple(tuple(c["cut_slots"]) for c in occupied) == CUTS[1:], "occupied provenance does not cover all cuts")
-            require(all(c["construction"] == "weighted_amf" and c["massless_endpoint"] is not None for c in occupied), "occupied values require native AMF with bound massless endpoint evidence")
+            # Both native harnesses retain the physical cut order. The runtime
+            # serializer nests the actual OccupiedFlowEvaluation under report.
+            occupied_evaluations = [c.get("report", c) for c in occupied]
+            require(all(isinstance(c, dict) and c.get("construction") == "weighted_amf" and c.get("massless_endpoint") is not None for c in occupied_evaluations), "occupied values require native AMF with bound massless endpoint evidence")
             for sector, entries in zip(SECTORS, [c["values"] for c in record["contributions"]] + [record["values"]]):
                 require(len(entries) == len(TARGETS), "target count mismatch")
                 for i, target in enumerate(TARGETS):

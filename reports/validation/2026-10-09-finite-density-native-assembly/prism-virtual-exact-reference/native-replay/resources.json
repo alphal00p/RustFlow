@@ -1,0 +1,24 @@
+{
+  "scope": "validation-only native exact source proof of optional external candidates; no AMF or numerical reference values",
+  "sha256": {
+    "/tmp/finite_density_prism_virtual_replay": "8e5ab61801db5a12b7c66f310ed7ba18e4bffa7eb0e983620746461be66a682e",
+    "/tmp/finite_density_prism_virtual_replay.rs": "9bdc929707471cb9db2111321502a6388e3c727dfdb89ef5a0d846a14c348dba",
+    "/tmp/rustflow-prism-symbolic-f5yyyumi/work/candidate-relations.json": "0f57d536eb5e7296d4aceff6e75e22c08a0f847add18b12b98a76ef218869336"
+  },
+  "timeout_seconds": 180,
+  "start_utc": "2026-10-09T20:59:30.103183+00:00",
+  "command": [
+    "/tmp/finite_density_prism_virtual_replay",
+    "optional_prism_candidates_are_native_exact_source_consequences",
+    "--exact",
+    "--ignored",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "timed_out": false,
+  "wall_seconds": 0.16515650134533644,
+  "peak_rss_kib": 18492,
+  "user_seconds": 0.099378,
+  "system_seconds": 0.055585999999999997,
+  "end_utc": "2026-10-09T20:59:30.268694+00:00"
+}

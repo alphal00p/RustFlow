@@ -3,8 +3,10 @@
 Validation-only construction. The complete raised finite-density prism
 reference remains ungenerated. A bounded independent upstream run now supplies
 one profile of five virtual coefficient functions at epsilon=1/5, independently
-checked against Gamma functions; it does not supply the missing complete
-Laurent amplitude. See the partial-reference report linked below. This does not establish the original common thermal endpoint
+checked against Gamma functions. A subsequent generic-epsilon candidate has
+now passed independent native exact source replay for all five rational
+coefficient identities; it does not supply the missing complete Laurent
+amplitude. See the partial-reference report linked below. This does not establish the original common thermal endpoint
 prescription. It supplies implementable UV and isolated-collinear subtraction
 operators for the three-cut kernel in
 [the remaining-reference derivation](finite-density-missing-references.md), derived from the original fixed
@@ -225,8 +227,11 @@ collinear, radial and Fermi-surface terms must carry one consistent regulator.
 
 ### All three two-cut sectors reduce to five single-scale virtual coefficients
 
-This supplies the missing numerator/routing maps, but not their evaluated
-coefficients. Use the native Minkowski family
+The five generic rational coefficient identities are now independently
+verified by native exact source replay, with Gamma expressions for the three
+remaining ordinary masters. This does not prove the common off-shell mass-jet
+continuation needed for the complete thermal amplitude. Use the native
+Minkowski family
 
 ```
 D0=K^2, D1=L^2, D2=(K-p)^2, D3=(L-p)^2,
@@ -327,9 +332,11 @@ The concrete code path can be a validation-only integrand generator:
    scale S varied independently. Retain real/imaginary branch conventions.
 
 This gives explicit local counterterms rather than a request to integrate an
-unregulated singular kernel. It does not yet provide the required epsilon expansions of all five single-scale
-two-cut tensor/jet coefficient integrals, a complete sector list, or a proved common
-thermal mass-derivative continuation, or an empirical precision estimate.
+unregulated singular kernel. The five single-scale virtual rational identities and their Gamma expansions
+are now available, together with a formal compact two-cut-sector expression.
+It still does not provide a complete sector list, a proved common thermal
+mass-derivative continuation, or an empirical precision estimate for the full
+prism amplitude.
 Those are substantive remaining tasks. No supplied coefficient, AMF prediction,
 or target-dependent fit enters this construction, and no generated reference
 should be claimed until the complete refined calculation succeeds.
@@ -344,3 +351,22 @@ their Gamma formulas agrees with all five saved virtual combinations within
 1e-12. This is neither a full prism amplitude nor a Laurent coefficient
 reference. The missing common continuation, analytic-index cancellation and
 overlapping endpoint subtractions remain necessary.
+
+## Generic coefficient identities independently verified natively
+
+The [exact virtual report](../reports/validation/2026-10-09-finite-density-native-assembly/prism-virtual-exact-reference/README.md)
+separates optional external candidate generation from independent native proof.
+RustRed source replay and verified routing symmetries reduce every coefficient
+of all five original-minus-candidate differences to exact zero. The ordinary
+proof uses neither AMF nor analytic bubble shortcuts, and it saves all native
+and raw candidate denominator conditions. Required replay has no external
+solver dependency. A formal two-cut compact Laurent expression is saved only
+as a partial component; no complete raised prism reference has been generated.
+
+The [three-cut high-D bound](../reports/validation/2026-10-09-finite-density-native-assembly/prism-virtual-exact-reference/three-cut-high-D-bound.md)
+provides an additional sufficient endpoint domain after explicit virtual UV
+meromorphic continuation. Here A=1 and F_eta=eta+sum x_i*x_j*h_ij. Re D>8
+bounds the original one-mass jet, simultaneous three-direction collisions and
+compact radial origins. This does not restore an unregulated virtual UV
+convergence strip, admit the coupled two-virtual class, or resolve the common
+thermal prescription for the complete cut sum.

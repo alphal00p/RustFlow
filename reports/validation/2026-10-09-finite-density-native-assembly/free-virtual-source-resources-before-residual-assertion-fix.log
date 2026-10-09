@@ -1,0 +1,18 @@
+
+running 4 tests
+test one_virtual_massless_origin_requires_its_sealed_prescription ... ok
+test fully_compact_massless_origin_keeps_polynomial_and_storage_domains ... ok
+
+thread 'sealed_free_virtual_zero_policy_is_opt_in_and_preserves_every_domain_bound' (1193583) panicked at tests/finite_density_massless_sources.rs:361:17:
+assertion failed: replay.reduce(invalid, Default::default()).is_err()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test sealed_free_virtual_zero_policy_is_opt_in_and_preserves_every_domain_bound ... FAILED
+test four_loop_e7_sources_bind_each_sealed_endpoint_variant_and_zero_origin ... ok
+
+failures:
+
+failures:
+    sealed_free_virtual_zero_policy_is_opt_in_and_preserves_every_domain_bound
+
+test result: FAILED. 3 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.71s
+

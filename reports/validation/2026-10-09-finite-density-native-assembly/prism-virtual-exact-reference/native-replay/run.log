@@ -1,0 +1,104 @@
+
+running 1 test
+prism native replay: Reduction { integrals: 25 }
+prism native replay: SymmetryReduction { candidates: 12, automorphisms: 1, applied: 0, uncovered: 0, transport_failures: 0, search_limited: false, elapsed_ms: 15 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 1, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SectorReduction { active_lines: 6, integrals: 1, visited: 0 }
+prism native replay: SectorReduced { integrals: 1, seeds: 1, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: Substitution { rules: 5 }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 0, terminals: 0, minimum_lines: 6, backward: true, weighted: false }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 25, terminals: 24, minimum_lines: 0, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 5, remaining: 24 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 4, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 1, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 2, uncovered: 0, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 1, uncovered: 0, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 2, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 1, uncovered: 2, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 4, visited: 9 }
+prism native replay: SectorReduced { integrals: 4, seeds: 3, rows: 23, exact_trace_rows: 4, elapsed_ms: 1, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 1, visited: 13 }
+prism native replay: SectorReduced { integrals: 1, seeds: 1, rows: 7, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 2, visited: 14 }
+prism native replay: SectorReduced { integrals: 2, seeds: 2, rows: 15, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 2, visited: 16 }
+prism native replay: SectorReduced { integrals: 2, seeds: 2, rows: 14, exact_trace_rows: 2, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: Substitution { rules: 18 }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 6, terminals: 4, minimum_lines: 5, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 18, remaining: 4 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 4, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 4, visited: 18 }
+prism native replay: SectorReduced { integrals: 4, seeds: 10, rows: 80, exact_trace_rows: 12, elapsed_ms: 1, exact_ms: 1 }
+prism native replay: Substitution { rules: 22 }
+prism native replay: SubstitutionPlan { roots: 4, retained_nodes: 0, terminals: 0, minimum_lines: 5, backward: true, weighted: true }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 59, terminals: 41, minimum_lines: 0, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 22, remaining: 41 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 1, uncovered: 7, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 10, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 8, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 2, uncovered: 0, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 1, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 3, uncovered: 0, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 1, uncovered: 0, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 3, uncovered: 4, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 7, visited: 32 }
+prism native replay: SectorReduced { integrals: 7, seeds: 120, rows: 960, exact_trace_rows: 34, elapsed_ms: 10, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 10, visited: 39 }
+prism native replay: SectorReduced { integrals: 10, seeds: 23, rows: 183, exact_trace_rows: 35, elapsed_ms: 2, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 8, visited: 49 }
+prism native replay: SectorReduced { integrals: 8, seeds: 5, rows: 38, exact_trace_rows: 2, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 1, visited: 57 }
+prism native replay: SectorReduced { integrals: 1, seeds: 1, rows: 7, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 4, visited: 58 }
+prism native replay: SectorReduced { integrals: 4, seeds: 120, rows: 960, exact_trace_rows: 3, elapsed_ms: 8, exact_ms: 0 }
+prism native replay: Substitution { rules: 60 }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 53, terminals: 14, minimum_lines: 4, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 62, remaining: 11 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 1, uncovered: 3, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 6, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 1, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 3, visited: 63 }
+prism native replay: SectorReduced { integrals: 3, seeds: 20, rows: 158, exact_trace_rows: 36, elapsed_ms: 1, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 6, visited: 66 }
+prism native replay: SectorReduced { integrals: 6, seeds: 30, rows: 237, exact_trace_rows: 53, elapsed_ms: 3, exact_ms: 1 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 1, visited: 72 }
+prism native replay: SectorReduced { integrals: 1, seeds: 2, rows: 16, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: Substitution { rules: 71 }
+prism native replay: SubstitutionPlan { roots: 13, retained_nodes: 18, terminals: 4, minimum_lines: 4, backward: true, weighted: true }
+prism native replay: ReductionFrontier { searched: 73, remaining: 2 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 2, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 2, visited: 73 }
+prism native replay: SectorReduced { integrals: 2, seeds: 9, rows: 65, exact_trace_rows: 7, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: Substitution { rules: 73 }
+prism native replay: SubstitutionPlan { roots: 4, retained_nodes: 2, terminals: 2, minimum_lines: 4, backward: true, weighted: true }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 99, terminals: 30, minimum_lines: 0, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 75, remaining: 26 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 25, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 1, uncovered: 0, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 25, visited: 76 }
+prism native replay: SectorReduced { integrals: 25, seeds: 140, rows: 1120, exact_trace_rows: 61, elapsed_ms: 12, exact_ms: 0 }
+prism native replay: Substitution { rules: 98 }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 108, terminals: 14, minimum_lines: 3, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 101, remaining: 8 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 8, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 8, visited: 101 }
+prism native replay: SectorReduced { integrals: 8, seeds: 43, rows: 341, exact_trace_rows: 43, elapsed_ms: 3, exact_ms: 0 }
+prism native replay: Substitution { rules: 106 }
+prism native replay: SubstitutionPlan { roots: 11, retained_nodes: 28, terminals: 11, minimum_lines: 3, backward: true, weighted: true }
+prism native replay: ReductionFrontier { searched: 109, remaining: 8 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 8, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 8, visited: 109 }
+prism native replay: SectorReduced { integrals: 8, seeds: 42, rows: 332, exact_trace_rows: 44, elapsed_ms: 3, exact_ms: 0 }
+prism native replay: Substitution { rules: 114 }
+prism native replay: SubstitutionPlan { roots: 11, retained_nodes: 23, terminals: 7, minimum_lines: 3, backward: true, weighted: true }
+prism native replay: ReductionFrontier { searched: 117, remaining: 4 }
+prism native replay: SymmetryReduction { candidates: 0, automorphisms: 0, applied: 0, uncovered: 4, transport_failures: 0, search_limited: false, elapsed_ms: 0 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 4, visited: 117 }
+prism native replay: SectorReduced { integrals: 4, seeds: 15, rows: 114, exact_trace_rows: 25, elapsed_ms: 1, exact_ms: 0 }
+prism native replay: Substitution { rules: 118 }
+prism native replay: SubstitutionPlan { roots: 7, retained_nodes: 12, terminals: 3, minimum_lines: 3, backward: true, weighted: true }
+prism native replay: ReductionFrontier { searched: 121, remaining: 0 }
+test optional_prism_candidates_are_native_exact_source_consequences ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.14s
+

@@ -1,0 +1,10 @@
+{
+  "status": "compiled_not_executed",
+  "reason": "User requested safe pause before new target-ray runs.",
+  "source": "native-domain-probe-target-rays.rs",
+  "source_sha256": "9199050a1e2307d2388c156f63513311110ae84ae1183d0c677fc6b28ba284e4",
+  "binary": "/tmp/e7_native_domain_probe_target_rays",
+  "binary_sha256": "d5ed4a02b47ae0471032c96820568e98c21c3e1906751a5bcae75776941e9a0d",
+  "production_changes": false,
+  "results": null
+}

@@ -1,0 +1,794 @@
+{
+  "backend_identity": "rustred-exact:94c5ac3eea30196d6607a11cb2be2558fb8ec3341a6b114409a8530f239c04b7:dc69000f3474e0127a4b2dcc13256b8b079b191cdd917a0bbf6d353819d7e982:3:4096:false:true:512:false:18446744073709551615:false:bridge-arities=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]:symmetry-v1",
+  "bubble_subloops": false,
+  "candidate_nonzero_conditions": [
+    "eps",
+    "1+eps",
+    "1+2*eps"
+  ],
+  "candidate_path": "/common/dev/rustflow_fermi/fixtures/finite_density/prism_virtual_candidate_relations.json",
+  "candidate_raw_denominators": [
+    "8*eps^3",
+    "8*eps^3*(1+eps)",
+    "8*eps^3",
+    "8*eps^3*(1+eps)*(1+2*eps)",
+    "8*eps^3*(1+eps)*(1+2*eps)"
+  ],
+  "family": {
+    "denominators": [
+      "K^2",
+      "L^2",
+      "(K-p)^2",
+      "(L-p)^2",
+      "(K-q)^2",
+      "(K-L)^2",
+      "(L-q)^2"
+    ],
+    "dimension": "4-2*eps",
+    "external": [
+      "p",
+      "q"
+    ],
+    "external_gram": [
+      [
+        "-1",
+        "-1/2"
+      ],
+      [
+        "-1/2",
+        "0"
+      ]
+    ],
+    "loops": [
+      "K",
+      "L"
+    ],
+    "physical_propagators": 6
+  },
+  "max_depth": 3,
+  "originals": [
+    [
+      {
+        "coefficient": "1/4",
+        "indices": [
+          -1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2",
+        "indices": [
+          0,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          -1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          -1,
+          1,
+          0,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          -1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          0,
+          1,
+          0,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1",
+        "indices": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          0,
+          0,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2",
+        "indices": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          1,
+          0,
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          1,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          -1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/2",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/2",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "1/4",
+        "indices": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          0,
+          0,
+          0,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          0,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          0,
+          1,
+          0,
+          0,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          0,
+          1,
+          0,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          0,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          1,
+          1,
+          0,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "1/4",
+        "indices": [
+          -1,
+          1,
+          1,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          0,
+          1,
+          0,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "3/4",
+        "indices": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          1,
+          0,
+          0,
+          1,
+          2,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          1,
+          0,
+          1,
+          2,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0
+        ]
+      }
+    ]
+  ],
+  "scope": "validation-only generic-epsilon exact source replay; no AMF or numerical values",
+  "symmetry_rules": true,
+  "targets": [
+    [
+      -1,
+      1,
+      0,
+      1,
+      2,
+      1,
+      0
+    ],
+    [
+      -1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      -1,
+      1,
+      1,
+      1,
+      2,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      2,
+      1,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      2,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      1,
+      2,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      1,
+      2,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      1,
+      2,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      0,
+      1,
+      2,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      0,
+      1,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      -1,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      1,
+      0
+    ]
+  ]
+}

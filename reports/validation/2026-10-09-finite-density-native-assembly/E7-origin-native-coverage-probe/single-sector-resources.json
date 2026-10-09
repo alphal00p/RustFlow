@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "90s",
+    "/tmp/e7_native_domain_probe",
+    "/tmp/e7-origin-single.bin",
+    "single",
+    "sector",
+    "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/single-sector.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.38592386711388826,
+  "user_seconds": 0.363461,
+  "system_seconds": 0.023628999999999997,
+  "peak_child_rss_kib": 21536,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

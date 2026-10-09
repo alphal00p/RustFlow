@@ -1,0 +1,10 @@
+{
+  "scope": "test-only correction after fresh source replay regression expected Err instead of exact native unresolved; production unchanged",
+  "test_file": "tests/finite_density_massless_sources.rs",
+  "sha256": "c9ec92d607a4bd14af6078c1618d73097eb1b74778f620aa49382d8aa1b59e2b",
+  "original_production_snapshot": "free-virtual-source-hashes.json",
+  "owned_boundary_gates": "free-virtual-boundary-gates.json",
+  "failed_source_run": "free-virtual-source-resources.json",
+  "correction": "assert exact NoApplicableRule/InvalidOccupation residual integral and unit coefficient; keep storage-tail Err; independently assert public prepare_weighted_system rejection",
+  "post_correction_result": "owned by guarded_dependency; consult its final source report"
+}

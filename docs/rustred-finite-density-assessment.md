@@ -136,3 +136,11 @@ metadata are retained in the
 This comparison still does not add independently certified zero domains for
 unrestricted virtual polynomial directions. It demonstrates neither a closed
 four-loop basis nor a RustRed correctness defect.
+
+### First-residual coverage isolated from whole-family closure
+
+The historical E7 origin-only programs were inspected and then reloaded through native exact replay. For both first residuals, no saved rule domain contains the target, although 20 original Lorentz-source guards admit it. The nearest applicable target patterns are excluded by concrete raised ordinary-index guards (or a separate compact-loop cut guard), rather than coefficient poles or failed descent at application.
+
+Bounded rediscovery using the unchanged historical source corpus finds native rules on exact-point and one-ray boxes for both targets. More usefully, the double-cut ordinary-zero-face box finishes its initial discovery at depth 3 / 8192 domains with 3652 rules and no discovery gaps, and covers the target. The corresponding broad sign box still misses it with 6251 domain-budget gaps. The single-cut broad box does cover its target when isolated from the larger request queue. These are concrete frontend domain-presentation and queue-coverage effects, not evidence that RustRed lacks the necessary row algebra.
+
+The resulting double-cut reduction still leaves 59 explicit child residual terms; this is not a closed spanning basis or an amplitude result. Complete source-bound programs, exact requested boxes, conditions, nearest guard/proof records and 11 measured controls are saved in [the historical coverage probe](../reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/README.md). No source row, native order, physical guard or elimination implementation was changed.

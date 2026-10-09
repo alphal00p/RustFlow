@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/tmp/rustflow-prism-symbolic-f5yyyumi/wolfram_one_thread.py",
+    "-noinit",
+    "-noprompt",
+    "-script",
+    "/tmp/rustflow-prism-symbolic-f5yyyumi/work/compact-driver.wl"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 4.404109129682183,
+  "timeout_seconds": 120,
+  "scope": "symbolic validation-only compact-sector candidate; no native inputs"
+}

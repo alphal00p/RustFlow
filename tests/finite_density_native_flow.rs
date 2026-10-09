@@ -302,6 +302,7 @@ fn complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors() {
             .unwrap_or_default(),
         positive_compact_energy_powers: std::env::var("RUSTFLOW_WEIGHTED_POSITIVE_ENERGY_POWERS")
             .is_ok_and(|value| value == "1"),
+        free_virtual_zero_sectors: false,
     };
     let both = PreparedOccupiedFlow::<9>::prepare_with_source_options(
         &prepared,
@@ -381,6 +382,7 @@ fn complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors() {
             "double_cut_closure_diagnostics":format!("{:?}",both.closure_diagnostics()),
             "double_cut_source_policy":source_options.policy.as_str(),
             "double_cut_positive_compact_energy_powers":source_options.positive_compact_energy_powers,
+            "double_cut_free_virtual_zero_sectors":source_options.free_virtual_zero_sectors,
             "stability_criterion":"relative 1e-12 for resolved nonzero values; absolute 1e-25 Euclidean units for values below 1e-20",
             "contributions":parts.iter().map(|v|v.iter().map(ToString::to_string).collect::<Vec<_>>()).collect::<Vec<_>>(),
             "assembled":assembled.iter().map(ToString::to_string).collect::<Vec<_>>(),

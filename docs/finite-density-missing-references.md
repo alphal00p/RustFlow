@@ -327,3 +327,24 @@ within 1e-12; a second AMFlow precision profile timed out. The
 and [local subtraction construction](finite-density-prism-reference-construction.md)
 preserve the inputs, completed values, timeout and remaining mathematical
 obligations. This does not fill the missing complete prism reference row above.
+
+The five generic prism virtual coefficient identities were subsequently
+verified by independent native exact source replay, retaining every coefficient
+guard and requiring no external solver at verification time. The
+[separate exact report](../reports/validation/2026-10-09-finite-density-native-assembly/prism-virtual-exact-reference/README.md)
+preserves the optional candidate origin, native proof and formal two-cut Beta
+combination. This is partial reference construction only: the common regulated
+coupled-virtual mass jet and the complete refined three-cut contribution remain
+missing, so neither full prism target has a newly generated reference here.
+
+A future E8 implementation also needs an endpoint-assembly decision distinct
+from the missing energy-contour proof. The current full evaluator reconstructs
+each occupied cut endpoint separately and then sums. If the proved common
+thermal prescription instead requires cancellation of eta-singular power/log
+modes between cut sectors, it must retain those transported endpoint series,
+combine the complete cut amplitudes with their exact `(2*pi)^k` and routing
+Jacobian factors, and only then apply the shared rational endpoint projector.
+Such an assembly change would not itself prove that real-shell denominators
+with uniform `+i0` reproduce the common thermal distribution. The shared-locus
+energy-regulator/contact analysis, lower-cut terms and limit ordering remain
+separate obligations; E8 remains unadmitted.

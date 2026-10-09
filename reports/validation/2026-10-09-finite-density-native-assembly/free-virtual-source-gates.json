@@ -1,0 +1,43 @@
+{
+  "source_snapshot": "free-virtual-source-hashes.json",
+  "status": "passed",
+  "passed": 4,
+  "failed": 0,
+  "ignored": 0,
+  "harness_seconds": 0.67,
+  "resources": {
+    "command": [
+      "target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+      "--nocapture"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.6902715479955077,
+    "user_seconds": 1.352595,
+    "system_seconds": 0.058955999999999995,
+    "peak_child_rss_kib": 15472,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "provenance": {
+    "captured_utc": "2026-10-09T21:22:19.447879+00:00",
+    "command": [
+      "target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+      "--nocapture"
+    ],
+    "argument_files": {
+      "target/release/deps/finite_density_massless_sources-13090b99f983b9e3": {
+        "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+        "sha256": "4de58639626c732dc69450f36a524001d59c5f2535285ecd966cdc655e50a214",
+        "size_bytes": 1280974176
+      }
+    },
+    "scope": "existing file arguments and PATH executables before child launch"
+  },
+  "test_only_delta": {
+    "path": "tests/finite_density_massless_sources.rs",
+    "sha256": "c9ec92d607a4bd14af6078c1618d73097eb1b74778f620aa49382d8aa1b59e2b",
+    "report": "free-virtual-source-test-correction.json"
+  },
+  "prior_failure_resources": "free-virtual-source-resources-before-residual-assertion-fix.json",
+  "rebuild": "cargo test --locked --release --features python --test finite_density_massless_sources --no-run",
+  "rebuild_cargo_wall": "2m52s"
+}

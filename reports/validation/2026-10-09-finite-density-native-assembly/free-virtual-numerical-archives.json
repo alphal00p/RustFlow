@@ -1,0 +1,448 @@
+{
+  "schema": 1,
+  "scope": "completed L2 sample/Laurent native corpora and sample/Laurent/Python logs; predictions remain readable",
+  "files": [
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "original_sha256": "4f778cb886e415a7f5a53b9d7adcb5a1ed4c9f26c86a82c3c06bc3bcb0f88a6b",
+      "original_bytes": 175562,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_sha256": "712dd744e9ff8ccd380fdcf982b0ca7d1f3f7ea381ee4dd29928032517770a54",
+      "archive_bytes": 27351,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0/round-000-provisional.json",
+      "original_sha256": "423f04ad8f25b909672579d21028e3f3e6bea7647ca2f4fd64e46a188e255bdc",
+      "original_bytes": 6812,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0/round-000-provisional.json.gz",
+      "archive_sha256": "4d70a161502ca2d0324ec48b0b73e0513dea71fe4d83552d21ea24ce2427dc91",
+      "archive_bytes": 1700,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0/round-001-closed.bin",
+      "original_sha256": "0e6f602993b70ed4ed9134e329ddae508c7be9bda79b3c7d664f87314e584ad8",
+      "original_bytes": 337765,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0/round-001-closed.bin.gz",
+      "archive_sha256": "1d234de6c879e33974cf1fcc1273c925ab23db62bd661d8aa14baa24db2e7a91",
+      "archive_bytes": 57992,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0/round-001-closed.json",
+      "original_sha256": "d938f84e97b97aee202e1b590dfbe2ad21e3aea63454c542984a5825dddd0c80",
+      "original_bytes": 7716,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0/round-001-closed.json.gz",
+      "archive_sha256": "a214dedb8dbef95ce9447bfadd6d5ae2aa5cee62c1783dd2e5e69fbc31b93a89",
+      "archive_bytes": 1747,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "original_sha256": "b17baae4bab6f1b370edb2c8c5418e8b2e327376fb89089772b15cee8e69d5fa",
+      "original_bytes": 337749,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_sha256": "77cd01e68a83822aa34832c82125abc2eefa30b138c84c01d05da9dc26bc3eff",
+      "archive_bytes": 57986,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0/round-001-provisional.json",
+      "original_sha256": "f5833a287dd540e64b055d78ba5bb804f9c6b228d1fdc8ec6b8b2327bba2e2a2",
+      "original_bytes": 7721,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_sha256": "c85a0deff246bbce4067aa176aee227276f824fe025ad114acb98c230dd64cf7",
+      "archive_bytes": 1755,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0-1/guard-refinements.json",
+      "original_sha256": "1f5c9efb2d24dcc27cc5c35d2a5bca0426f314fb9a75d486b121d49e04a4f4a8",
+      "original_bytes": 1676,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0-1/guard-refinements.json.gz",
+      "archive_sha256": "76309f5041a671cc307573fe05b5636d4fc86f3378ba7c2c59ca3673b83ffff8",
+      "archive_bytes": 350,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0-1/round-000-provisional.bin",
+      "original_sha256": "e115696ba92b816c3f074eebd8836f6ad629bcb61ed93e9d2b237fedd8f68fde",
+      "original_bytes": 259919,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "archive_sha256": "349cb15a7a4fc9cb9b66002159b4cfb78c34f9f84b1ad6ba38bfeb906d684bee",
+      "archive_bytes": 35634,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0-1/round-000-provisional.json",
+      "original_sha256": "b57678dc7337cffd669d72606ac7935d626e3da413da752fb326fc151833bc8f",
+      "original_bytes": 7353,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "archive_sha256": "17b7380d836b394939d3d1592f387cd6cccef9be2ffc5486a6cd60f9576a1ad5",
+      "archive_bytes": 1672,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "original_sha256": "ed8851d6e02d9fad992f4d79215f4d5bcd66758aa1bfeb2c6490e755acbd5ae2",
+      "original_bytes": 706057,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "archive_sha256": "149c2eb98213159b956591cdf2a2417c7634005be17e1c4c17f132b04902673e",
+      "archive_bytes": 105411,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0-1/round-001-provisional.json",
+      "original_sha256": "851d5814dd2e8db3a5aa6a3901a5ea80954fa4f43c10b71cc2bc5dcee3236b58",
+      "original_bytes": 9135,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "archive_sha256": "1176cbf81428eac8c425b8b2ff90c4fe685e4ff52a1cb333e834bc46ae23ed19",
+      "archive_bytes": 1760,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0-1/round-002-closed.bin",
+      "original_sha256": "39f1d57e03032ca5f19738e5c6c5fc98b7df24dd108af4bb19f966595b80f665",
+      "original_bytes": 933195,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0-1/round-002-closed.bin.gz",
+      "archive_sha256": "a768df8cce9cc25b3605c9ad4b8eb303a2a18f7d71176cbe178e2dcd1e3eb412",
+      "archive_bytes": 143122,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0-1/round-002-closed.json",
+      "original_sha256": "51379afe5a756f46d76282f541b98ab3ed15e7a5b71c960278fd402ae42c39ae",
+      "original_bytes": 9597,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0-1/round-002-closed.json.gz",
+      "archive_sha256": "310c7fe9a6d8f3893bcda5b4df26a60e7276b55b65300187aa4b55cb92d5fcd8",
+      "archive_bytes": 1777,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0-1/round-002-provisional.bin",
+      "original_sha256": "7f248555ca2b9659c32e4cb20a683ff865f942616badb652f06dc3989bf9ec6e",
+      "original_bytes": 933165,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "archive_sha256": "eb7bf1065706cf95185f558e6fce1f52c43d7b6a36e9c32ca60213e87564dfe7",
+      "archive_bytes": 143116,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-0-1/round-002-provisional.json",
+      "original_sha256": "fbd7f9092ec700b640401dfeb71d5256d5324da112fc368e4324125516b67fee",
+      "original_bytes": 9602,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "archive_sha256": "cd78a3d799a380255e026c538dda35126332c06c63a124224afcf39e2cb5cfcc",
+      "archive_bytes": 1785,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-1/round-000-provisional.bin",
+      "original_sha256": "ecc8c952366c59dc5a39d14f439df36cacd84d79a792049a7276308f453c26a2",
+      "original_bytes": 114351,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-1/round-000-provisional.bin.gz",
+      "archive_sha256": "399e6898cabfa14c7bfe70b97a49a781e6efd884c0c70dbbbffeca5ab237ce9a",
+      "archive_bytes": 17763,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-1/round-000-provisional.json",
+      "original_sha256": "41c9de19b85b6e98f7573bb6cf97b1af57a8690d2732fd11a41cbd2c9873a987",
+      "original_bytes": 6272,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-1/round-000-provisional.json.gz",
+      "archive_sha256": "20ed19e8a7eb178afaf550e71909cb8813413e16858b1b5af15d4dabc922c03e",
+      "archive_bytes": 1677,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-1/round-001-provisional.bin",
+      "original_sha256": "6f6f5f77dc37455d509a261c0bcf9855018af7132b147b8b6d7da472ab313885",
+      "original_bytes": 239259,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-1/round-001-provisional.bin.gz",
+      "archive_sha256": "dc05d1fdfdf81edee85b97dc318b4f81679fbbc748f8eff6068aef09efb58f57",
+      "archive_bytes": 35853,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-1/round-001-provisional.json",
+      "original_sha256": "1308a4a736b865d0b287f18365837a823ed7b92f9b681e576765c2f5ae5b6026",
+      "original_bytes": 6880,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-1/round-001-provisional.json.gz",
+      "archive_sha256": "4af4c537fb743c3fc8c7d5ba3a5b8b5a835e4ac217307f809dda9147669fa251",
+      "archive_bytes": 1712,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-1/round-002-closed.bin",
+      "original_sha256": "53060da79818d23bedc92e666abd33501120b451f8d0ab80cc786fa2fb027663",
+      "original_bytes": 350379,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-1/round-002-closed.bin.gz",
+      "archive_sha256": "85eaa737bcfe0d8976092407f45f38f18139bc375e01d8b5d55702a06849686f",
+      "archive_bytes": 56105,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-1/round-002-closed.json",
+      "original_sha256": "11489d07cb6fb8da24a46a9a928d1fe9cdd490fe4a40a9f87d81468b2549720f",
+      "original_bytes": 7256,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-1/round-002-closed.json.gz",
+      "archive_sha256": "7fb89d1219a7f17df43a7f91ffd1731aa4acd3b6f0893a0c2a65e9b72297b9cf",
+      "archive_bytes": 1731,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-1/round-002-provisional.bin",
+      "original_sha256": "2fb6661e7dc0548fb30a4ab36fdf45104eb4895bd0ac33db0f6d50135a5bd3ba",
+      "original_bytes": 350363,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-1/round-002-provisional.bin.gz",
+      "archive_sha256": "621e6355d88f78af197d77a1ecaba4c8a7fa0d0bba8725053d6af300380d6fbe",
+      "archive_bytes": 56104,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed/native-closure/cut-1/round-002-provisional.json",
+      "original_sha256": "0fbedcbe2789dba8d222f428327967040d5f4978464513bd2be30a8482c36ab2",
+      "original_bytes": 7261,
+      "archive": "free-virtual-L2-fixed/native-closure/cut-1/round-002-provisional.json.gz",
+      "archive_sha256": "72a1bab287637372262d0bbc1969f6ea1f95b5ce3b31326b3e676bdf85d07987",
+      "archive_bytes": 1738,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0/round-000-provisional.bin",
+      "original_sha256": "4f778cb886e415a7f5a53b9d7adcb5a1ed4c9f26c86a82c3c06bc3bcb0f88a6b",
+      "original_bytes": 175562,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_sha256": "07d35d0cc9034cbc3843e77465b5997d6b77d4f1c28ad5727e414a6332bc3e72",
+      "archive_bytes": 27351,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0/round-000-provisional.json",
+      "original_sha256": "423f04ad8f25b909672579d21028e3f3e6bea7647ca2f4fd64e46a188e255bdc",
+      "original_bytes": 6812,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0/round-000-provisional.json.gz",
+      "archive_sha256": "0aa3969c256e0166c7eb8f5aefec04600c9bb5d1602cbbdfd3e8367f888d97ef",
+      "archive_bytes": 1700,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0/round-001-closed.bin",
+      "original_sha256": "0e6f602993b70ed4ed9134e329ddae508c7be9bda79b3c7d664f87314e584ad8",
+      "original_bytes": 337765,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0/round-001-closed.bin.gz",
+      "archive_sha256": "0f747f6366f7dfd6014f8a7ed8feceb20f5bd64a1302c72f2bf48eca02de96c5",
+      "archive_bytes": 57992,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0/round-001-closed.json",
+      "original_sha256": "d938f84e97b97aee202e1b590dfbe2ad21e3aea63454c542984a5825dddd0c80",
+      "original_bytes": 7716,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0/round-001-closed.json.gz",
+      "archive_sha256": "af826f94dd44a156aa4870df4dc19a41bd4b50b3522b2d453478f48bfe41c9f5",
+      "archive_bytes": 1747,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0/round-001-provisional.bin",
+      "original_sha256": "b17baae4bab6f1b370edb2c8c5418e8b2e327376fb89089772b15cee8e69d5fa",
+      "original_bytes": 337749,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_sha256": "1e838e5040fd175f724d5489dadc47ca23121b67e14c64457f07a502f83facf2",
+      "archive_bytes": 57986,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0/round-001-provisional.json",
+      "original_sha256": "f5833a287dd540e64b055d78ba5bb804f9c6b228d1fdc8ec6b8b2327bba2e2a2",
+      "original_bytes": 7721,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_sha256": "21c1ebf3ccc6b88d676672a0886eb6139876926de0dacb6c1075e458735cad10",
+      "archive_bytes": 1755,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0-1/guard-refinements.json",
+      "original_sha256": "1f5c9efb2d24dcc27cc5c35d2a5bca0426f314fb9a75d486b121d49e04a4f4a8",
+      "original_bytes": 1676,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0-1/guard-refinements.json.gz",
+      "archive_sha256": "766337d06e744522369f21f3ddaface5a8ee46a038a593248cdc092aba627133",
+      "archive_bytes": 350,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0-1/round-000-provisional.bin",
+      "original_sha256": "e115696ba92b816c3f074eebd8836f6ad629bcb61ed93e9d2b237fedd8f68fde",
+      "original_bytes": 259919,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "archive_sha256": "e53b46ce2bbdb295ebea3d6df10f3dac06ea0e3a5ae61592e37b47a08c2c0232",
+      "archive_bytes": 35634,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0-1/round-000-provisional.json",
+      "original_sha256": "b57678dc7337cffd669d72606ac7935d626e3da413da752fb326fc151833bc8f",
+      "original_bytes": 7353,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "archive_sha256": "c54b0bd8d4d2ed0855180385129742cd450bd14d2be6fc092c4fb36b78bc9251",
+      "archive_bytes": 1672,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0-1/round-001-provisional.bin",
+      "original_sha256": "ed8851d6e02d9fad992f4d79215f4d5bcd66758aa1bfeb2c6490e755acbd5ae2",
+      "original_bytes": 706057,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "archive_sha256": "4b4b1fe38bf270e5420eefab6d54f12f0c0310b08469908bcaccf7d3bfb5238d",
+      "archive_bytes": 105411,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0-1/round-001-provisional.json",
+      "original_sha256": "851d5814dd2e8db3a5aa6a3901a5ea80954fa4f43c10b71cc2bc5dcee3236b58",
+      "original_bytes": 9135,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "archive_sha256": "35d59cf6a38e4b1942aebda63ae8fbd95de98859b855e889cd3749e953a12033",
+      "archive_bytes": 1760,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0-1/round-002-closed.bin",
+      "original_sha256": "39f1d57e03032ca5f19738e5c6c5fc98b7df24dd108af4bb19f966595b80f665",
+      "original_bytes": 933195,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0-1/round-002-closed.bin.gz",
+      "archive_sha256": "b2e38676984a5f44610f5fbbf93b51b8cd73e3f8468841079cbcf2146caafc1f",
+      "archive_bytes": 143122,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0-1/round-002-closed.json",
+      "original_sha256": "51379afe5a756f46d76282f541b98ab3ed15e7a5b71c960278fd402ae42c39ae",
+      "original_bytes": 9597,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0-1/round-002-closed.json.gz",
+      "archive_sha256": "99c1797312feb60aba09e4909d2d2c90e5901132ae5c65abbffdf67d16e1fbf4",
+      "archive_bytes": 1777,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0-1/round-002-provisional.bin",
+      "original_sha256": "7f248555ca2b9659c32e4cb20a683ff865f942616badb652f06dc3989bf9ec6e",
+      "original_bytes": 933165,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "archive_sha256": "87c14253daf11a9b87c213b84c708dc86b7ad2ef6d0ddcef3de31fb4b507664f",
+      "archive_bytes": 143116,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-0-1/round-002-provisional.json",
+      "original_sha256": "fbd7f9092ec700b640401dfeb71d5256d5324da112fc368e4324125516b67fee",
+      "original_bytes": 9602,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "archive_sha256": "cd78a3d799a380255e026c538dda35126332c06c63a124224afcf39e2cb5cfcc",
+      "archive_bytes": 1785,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-1/round-000-provisional.bin",
+      "original_sha256": "ecc8c952366c59dc5a39d14f439df36cacd84d79a792049a7276308f453c26a2",
+      "original_bytes": 114351,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-1/round-000-provisional.bin.gz",
+      "archive_sha256": "399e6898cabfa14c7bfe70b97a49a781e6efd884c0c70dbbbffeca5ab237ce9a",
+      "archive_bytes": 17763,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-1/round-000-provisional.json",
+      "original_sha256": "41c9de19b85b6e98f7573bb6cf97b1af57a8690d2732fd11a41cbd2c9873a987",
+      "original_bytes": 6272,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-1/round-000-provisional.json.gz",
+      "archive_sha256": "20ed19e8a7eb178afaf550e71909cb8813413e16858b1b5af15d4dabc922c03e",
+      "archive_bytes": 1677,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-1/round-001-provisional.bin",
+      "original_sha256": "6f6f5f77dc37455d509a261c0bcf9855018af7132b147b8b6d7da472ab313885",
+      "original_bytes": 239259,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-1/round-001-provisional.bin.gz",
+      "archive_sha256": "dc05d1fdfdf81edee85b97dc318b4f81679fbbc748f8eff6068aef09efb58f57",
+      "archive_bytes": 35853,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-1/round-001-provisional.json",
+      "original_sha256": "1308a4a736b865d0b287f18365837a823ed7b92f9b681e576765c2f5ae5b6026",
+      "original_bytes": 6880,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-1/round-001-provisional.json.gz",
+      "archive_sha256": "4af4c537fb743c3fc8c7d5ba3a5b8b5a835e4ac217307f809dda9147669fa251",
+      "archive_bytes": 1712,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-1/round-002-closed.bin",
+      "original_sha256": "53060da79818d23bedc92e666abd33501120b451f8d0ab80cc786fa2fb027663",
+      "original_bytes": 350379,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-1/round-002-closed.bin.gz",
+      "archive_sha256": "85eaa737bcfe0d8976092407f45f38f18139bc375e01d8b5d55702a06849686f",
+      "archive_bytes": 56105,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-1/round-002-closed.json",
+      "original_sha256": "11489d07cb6fb8da24a46a9a928d1fe9cdd490fe4a40a9f87d81468b2549720f",
+      "original_bytes": 7256,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-1/round-002-closed.json.gz",
+      "archive_sha256": "7fb89d1219a7f17df43a7f91ffd1731aa4acd3b6f0893a0c2a65e9b72297b9cf",
+      "archive_bytes": 1731,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-1/round-002-provisional.bin",
+      "original_sha256": "2fb6661e7dc0548fb30a4ab36fdf45104eb4895bd0ac33db0f6d50135a5bd3ba",
+      "original_bytes": 350363,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-1/round-002-provisional.bin.gz",
+      "archive_sha256": "621e6355d88f78af197d77a1ecaba4c8a7fa0d0bba8725053d6af300380d6fbe",
+      "archive_bytes": 56104,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent/native-closure/cut-1/round-002-provisional.json",
+      "original_sha256": "0fbedcbe2789dba8d222f428327967040d5f4978464513bd2be30a8482c36ab2",
+      "original_bytes": 7261,
+      "archive": "free-virtual-L2-laurent/native-closure/cut-1/round-002-provisional.json.gz",
+      "archive_sha256": "72a1bab287637372262d0bbc1969f6ea1f95b5ce3b31326b3e676bdf85d07987",
+      "archive_bytes": 1738,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-fixed-resources.log",
+      "original_sha256": "ead2da1402ea3539876aadb24c3fa933c3943ccd3b66a888bf92cb3540500d7c",
+      "original_bytes": 13539,
+      "archive": "free-virtual-L2-fixed-resources.log.gz",
+      "archive_sha256": "d12ca41978542984811444c8cf682b284c5179ae16aba588d2e7077f68ecc301",
+      "archive_bytes": 892,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-L2-laurent-resources.log",
+      "original_sha256": "8315f08ead051b5ac588c5ed58bce066f210fcb5878150af30b29a1a32095c43",
+      "original_bytes": 495666,
+      "archive": "free-virtual-L2-laurent-resources.log.gz",
+      "archive_sha256": "e715122f150d1a0af19c60a04c501ee748eaef149d42d952e28914754346f8b5",
+      "archive_bytes": 5174,
+      "decompression_verified": true
+    },
+    {
+      "original": "free-virtual-python-resources.log",
+      "original_sha256": "38fab5e71d971f7377d865f5b5854335a8adbc2eff78f1f97a1e3f226579f34f",
+      "original_bytes": 193,
+      "archive": "free-virtual-python-resources.log.gz",
+      "archive_sha256": "f58ff472451a2702a721fd1a3e2f9f5964f0d3e0ef3d9e456f067d034b498f7a",
+      "archive_bytes": 188,
+      "decompression_verified": true
+    }
+  ],
+  "count": 49
+}

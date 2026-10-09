@@ -1,0 +1,30 @@
+{
+	"status":"formal_three_pair_compact_Beta_sum_derived",
+	"scope":"unit-index meromorphic two-cut candidate; not full thermal prism reference",
+	"orders":[
+		-7,
+		-6,
+		-5,
+		-4,
+		-3,
+		-2,
+		-1,
+		0
+	],
+	"msbar_coefficients_mu1":[
+		"0",
+		"-1\/64",
+		"1\/48",
+		"-1\/4 - Pi^2\/96",
+		"(14 + 2*Pi^2 - 13*Zeta[3])\/96",
+		"-35\/16 - (5*Pi^2)\/48 + (29*Pi^4)\/1920 + (2*Zeta[3])\/9",
+		"(2790 - 36*Pi^4 - 2040*Zeta[3] + 10*Pi^2*(-33 + 107*Zeta[3]) + 423*Zeta[5])\/1440",
+		"(4116*Pi^4 + 277*Pi^6 - 140*Pi^2*(403 + 172*Zeta[3]) + 70*Zeta[3]*(-92 + 2063*Zeta[3]) - 84*(4235 + 64*Zeta[5]))\/20160"
+	],
+	"normalization":"(4 Pi)^8 Exp[4 eps (EulerGamma-Log[Pi])] times raw Euclidean amplitude, mu=1",
+	"exact_single_point_reduction_agreement":true,
+	"complete_prism_reference":false,
+	"remaining":"triple-cut compact integration, common mass-jet\/analytic-index continuation and endpoint overlap subtractions",
+	"native_predictions_read":0,
+	"oracle_records_read":0
+}

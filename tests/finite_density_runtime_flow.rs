@@ -82,6 +82,8 @@ impl Run {
             "native_closure":format!("{:?}",run.closure),
             "guard_digits":run.options.guard_digits,
             "profiles":run.profiles(),
+            "source_options":run.source_options(),
+            "initial_epsilon_grid":setting("RUSTFLOW_DENSITY_FLOW_GRID",1000_i64),
             "epsilon":std::env::var("RUSTFLOW_DENSITY_FLOW_EPSILON").unwrap_or_else(|_|"1/8".into()),
             "independent_reference_comparisons":0,
         }));
@@ -133,14 +135,25 @@ impl Run {
             .unwrap_or_else(|_| vec![(18, 60, 8)])
     }
 
+    fn source_options(&self) -> WeightedSourceOptions {
+        WeightedSourceOptions {
+            policy: std::env::var("RUSTFLOW_WEIGHTED_SOURCE_POLICY")
+                .map(|value| value.parse().unwrap())
+                .unwrap_or_default(),
+            free_virtual_zero_sectors: setting("RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS", false),
+            ..Default::default()
+        }
+    }
+
     fn full(&self) -> PreparedDensityFlow {
         self.checked(
             "complete preparation",
-            PreparedDensityFlow::prepare(
+            PreparedDensityFlow::prepare_with_source_options(
                 &self.input,
                 &self.options,
                 self.closure.clone(),
                 &self.context,
+                self.source_options(),
             ),
         )
     }
@@ -185,12 +198,7 @@ fn stable(
 
 fn occupied<const N: usize>(run: &Run, cuts: &[usize]) {
     let input = run.input.prepare().unwrap();
-    let source_options = WeightedSourceOptions {
-        policy: std::env::var("RUSTFLOW_WEIGHTED_SOURCE_POLICY")
-            .map(|value| value.parse().unwrap())
-            .unwrap_or_default(),
-        ..Default::default()
-    };
+    let source_options = run.source_options();
     run.save("sector.json",json!({"cut_slots":cuts,"storage_capacity":N,"source_options":source_options,"full_amplitude":false}));
     let flow = run.checked(
         "occupied preparation",
@@ -297,8 +305,20 @@ fn runtime_graph_full_laurent() {
     let run = Run::new();
     let flow = run.full();
     let grid = setting("RUSTFLOW_DENSITY_FLOW_GRID", 1000_i64);
+    let mut profiles = run
+        .profiles()
+        .into_iter()
+        .map(|(digits, order, start)| (digits, order, start, grid))
+        .collect::<Vec<_>>();
+    let &(digits, order, start, _) = profiles.last().expect("at least one numerical profile");
+    profiles.push((
+        digits,
+        order,
+        start,
+        grid.checked_mul(2).expect("grid overflow"),
+    ));
     let mut previous = None;
-    for (digits, order, start) in run.profiles() {
+    for (digits, order, start, grid) in profiles {
         let options = FlowOptions {
             digits,
             series_order: order,

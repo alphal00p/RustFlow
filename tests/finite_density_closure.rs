@@ -121,6 +121,7 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
         WeightedSourceOptions {
             policy,
             positive_compact_energy_powers,
+            free_virtual_zero_sectors: false,
         },
     );
     let root = std::env::var_os("RUSTFLOW_WEIGHTED_CLOSURE_REPORT")
@@ -180,6 +181,7 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
             "input": input, "cut_slots": cut, "shifted_slots": shifted,
             "source_policy": policy.as_str(),
             "positive_compact_energy_powers": positive_compact_energy_powers,
+            "free_virtual_zero_sectors": false,
             "source_count": preparation.context.sources().sources().len(),
             "max_rounds": options.max_rounds, "max_depth": options.discovery.max_depth,
             "max_domains": options.discovery.max_domains,
@@ -549,6 +551,7 @@ fn native_single_domain_recenter_diagnostic() {
         WeightedSourceOptions {
             policy,
             positive_compact_energy_powers,
+            free_virtual_zero_sectors: false,
         },
     );
     // One concrete domain retained by the bounded physical search, rather than
@@ -620,6 +623,7 @@ fn native_single_domain_recenter_diagnostic() {
     let result = serde_json::json!({
         "input": input, "source_policy": policy.as_str(),
         "positive_compact_energy_powers": positive_compact_energy_powers,
+        "free_virtual_zero_sectors": false,
         "source_context": format!("{:?}", prepared.context.sources()),
         "domains": format!("{domains:?}"), "domain_mode": mode, "target": target,
         "max_depth": 3, "max_domains": 8192, "sample_seed": 0,

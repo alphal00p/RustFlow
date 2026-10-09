@@ -1,0 +1,23 @@
+{
+  "command": [
+    "timeout",
+    "1200",
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_two_loop_sunset.json",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8,28:60:8,28:80:8,28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/free-virtual-L2-fixed",
+    "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 20.10449205338955,
+  "user_seconds": 19.663709,
+  "system_seconds": 0.20776699999999998,
+  "peak_child_rss_kib": 52076,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

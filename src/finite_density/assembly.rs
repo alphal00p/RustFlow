@@ -1,5 +1,6 @@
 //! Assembly at a common regulator sample, before Laurent reconstruction.
 use super::flow::{OccupiedFlowEvaluation, PreparedOccupiedFlow};
+use super::preparation::WeightedSourceOptions;
 use super::reduction::{WeightedClosureDiagnostics, WeightedClosureOptions};
 use super::vacuum::PreparedDensityVacuum;
 use super::{DensityInput, PreparedDensityInput};
@@ -98,6 +99,25 @@ impl PreparedDensityFlow {
         closure: WeightedClosureOptions,
         context: &RunContext,
     ) -> Result<Self> {
+        Self::prepare_with_source_options(
+            input,
+            options,
+            closure,
+            context,
+            WeightedSourceOptions::default(),
+        )
+    }
+
+    /// Use one explicit guarded source policy for every flowing occupied
+    /// sector. Each sector independently verifies the policy's physical proof
+    /// requirements before reduction. Compact terminals retain their own owner.
+    pub fn prepare_with_source_options(
+        input: &DensityInput,
+        options: &FlowOptions,
+        closure: WeightedClosureOptions,
+        context: &RunContext,
+        source_options: WeightedSourceOptions,
+    ) -> Result<Self> {
         super::flow::validate_options(options)?;
         let input = input.prepare()?;
         let mut occupied = Vec::new();
@@ -137,26 +157,61 @@ impl PreparedDensityFlow {
             // bucket for larger or intermediate physical arities. Padding is
             // confined to zero-tail index storage, never physical factors.
             let flow: Box<dyn OccupiedEvaluation> = match arity {
-                7 => Box::new(PreparedOccupiedFlow::<7>::prepare(
-                    &input, &cuts, options, limits, context,
+                7 => Box::new(PreparedOccupiedFlow::<7>::prepare_with_source_options(
+                    &input,
+                    &cuts,
+                    options,
+                    limits,
+                    context,
+                    source_options,
                 )?),
-                9 => Box::new(PreparedOccupiedFlow::<9>::prepare(
-                    &input, &cuts, options, limits, context,
+                9 => Box::new(PreparedOccupiedFlow::<9>::prepare_with_source_options(
+                    &input,
+                    &cuts,
+                    options,
+                    limits,
+                    context,
+                    source_options,
                 )?),
-                1..=12 => Box::new(PreparedOccupiedFlow::<12>::prepare(
-                    &input, &cuts, options, limits, context,
+                1..=12 => Box::new(PreparedOccupiedFlow::<12>::prepare_with_source_options(
+                    &input,
+                    &cuts,
+                    options,
+                    limits,
+                    context,
+                    source_options,
                 )?),
-                13..=16 => Box::new(PreparedOccupiedFlow::<16>::prepare(
-                    &input, &cuts, options, limits, context,
+                13..=16 => Box::new(PreparedOccupiedFlow::<16>::prepare_with_source_options(
+                    &input,
+                    &cuts,
+                    options,
+                    limits,
+                    context,
+                    source_options,
                 )?),
-                17..=20 => Box::new(PreparedOccupiedFlow::<20>::prepare(
-                    &input, &cuts, options, limits, context,
+                17..=20 => Box::new(PreparedOccupiedFlow::<20>::prepare_with_source_options(
+                    &input,
+                    &cuts,
+                    options,
+                    limits,
+                    context,
+                    source_options,
                 )?),
-                21..=24 => Box::new(PreparedOccupiedFlow::<24>::prepare(
-                    &input, &cuts, options, limits, context,
+                21..=24 => Box::new(PreparedOccupiedFlow::<24>::prepare_with_source_options(
+                    &input,
+                    &cuts,
+                    options,
+                    limits,
+                    context,
+                    source_options,
                 )?),
-                25..=32 => Box::new(PreparedOccupiedFlow::<32>::prepare(
-                    &input, &cuts, options, limits, context,
+                25..=32 => Box::new(PreparedOccupiedFlow::<32>::prepare_with_source_options(
+                    &input,
+                    &cuts,
+                    options,
+                    limits,
+                    context,
+                    source_options,
                 )?),
                 _ => {
                     return Err(Error::Unsupported(format!(

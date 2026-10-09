@@ -1,0 +1,7 @@
+{
+  "change": "Test-only: lower-level invalid completion/occupation remain explicit unresolved; strict flow preparation rejects all invalid labels. Storage tails still error.",
+  "source_snapshot": "free-virtual-source-hashes.json",
+  "test_path": "tests/finite_density_massless_sources.rs",
+  "new_test_sha256": "c9ec92d607a4bd14af6078c1618d73097eb1b74778f620aa49382d8aa1b59e2b",
+  "historical_result": "free-virtual-source-resources-before-residual-assertion-fix.json"
+}

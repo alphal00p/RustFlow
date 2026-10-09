@@ -1,0 +1,15 @@
+{
+  "captured_utc": "2026-10-09T21:15:42.002198+00:00",
+  "command": [
+    "target/release/deps/finite_density_flow_boundary-93fe47e3ae5cecf9",
+    "--nocapture"
+  ],
+  "argument_files": {
+    "target/release/deps/finite_density_flow_boundary-93fe47e3ae5cecf9": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_flow_boundary-93fe47e3ae5cecf9",
+      "sha256": "bf4447eb3940080350bb7c8cfd7c6c90cebd7cfc13ac60ee0f753cc01e4256d1",
+      "size_bytes": 1218493272
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

@@ -1,0 +1,14 @@
+{
+  "scope": "validation-only native exact source proof of optional external candidates; no AMF or numerical reference values",
+  "sha256": {
+    "/common/dev/rustflow_fermi/target/release/deps/finite_density_prism_virtual_replay-f108e54f75c9280b": "0cdf25177d00a082c0fb83b190cfb2993006fc9ae18d09dc229d3dc6cd5d2972",
+    "/common/dev/rustflow_fermi/tests/finite_density_prism_virtual_replay.rs": "fff1a7ac5e27acee44ac05cde73bb12f27b37f0112ffaffcb15d828a30401c09",
+    "/common/dev/rustflow_fermi/fixtures/finite_density/prism_virtual_candidate_relations.json": "0f57d536eb5e7296d4aceff6e75e22c08a0f847add18b12b98a76ef218869336"
+  },
+  "timeout_seconds": 180,
+  "start_utc": "2026-10-09T21:18:31.138779+00:00",
+  "command": [
+    "/common/dev/rustflow_fermi/target/release/deps/finite_density_prism_virtual_replay-f108e54f75c9280b",
+    "--nocapture"
+  ]
+}

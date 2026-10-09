@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "90s",
+    "/tmp/e7_native_domain_probe",
+    "/tmp/e7-origin-double.bin",
+    "double",
+    "point",
+    "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/double-point.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.2356356647796929,
+  "user_seconds": 0.216695,
+  "system_seconds": 0.02107,
+  "peak_child_rss_kib": 21528,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,90 @@
+{
+  "candidate_nonzero_conditions": [
+    "eps",
+    "1+eps",
+    "1+2*eps"
+  ],
+  "common_thermal_continuation_proved": false,
+  "complete_prism_reference": false,
+  "elapsed_seconds": 0.126533627,
+  "native_predictions_read": 0,
+  "nonzero_conditions": [
+    "2",
+    "32",
+    "prism_reference::{}::eps",
+    "2*prism_reference::{}::eps",
+    "3*prism_reference::{}::eps",
+    "4*prism_reference::{}::eps",
+    "6*prism_reference::{}::eps",
+    "8*prism_reference::{}::eps^2",
+    "-15+18*prism_reference::{}::eps",
+    "-4+4*prism_reference::{}::eps",
+    "-4+6*prism_reference::{}::eps",
+    "-3+3*prism_reference::{}::eps",
+    "-2+2*prism_reference::{}::eps",
+    "-2+4*prism_reference::{}::eps",
+    "-1+prism_reference::{}::eps",
+    "-1+2*prism_reference::{}::eps",
+    "-1+4*prism_reference::{}::eps",
+    "1+prism_reference::{}::eps",
+    "1+2*prism_reference::{}::eps",
+    "1+4*prism_reference::{}::eps",
+    "2+2*prism_reference::{}::eps",
+    "2+4*prism_reference::{}::eps",
+    "2+8*prism_reference::{}::eps",
+    "4+4*prism_reference::{}::eps",
+    "-8*prism_reference::{}::eps+8*prism_reference::{}::eps^2",
+    "-6*prism_reference::{}::eps+12*prism_reference::{}::eps^2",
+    "-6*prism_reference::{}::eps+24*prism_reference::{}::eps^3",
+    "-2*prism_reference::{}::eps+4*prism_reference::{}::eps^2",
+    "-1*prism_reference::{}::eps+2*prism_reference::{}::eps^2",
+    "-1*prism_reference::{}::eps+3*prism_reference::{}::eps^2",
+    "3*prism_reference::{}::eps+6*prism_reference::{}::eps^2",
+    "12*prism_reference::{}::eps^2+6*prism_reference::{}::eps",
+    "-4+4*prism_reference::{}::eps+8*prism_reference::{}::eps^2",
+    "-2+2*prism_reference::{}::eps+4*prism_reference::{}::eps^2",
+    "-6*prism_reference::{}::eps+1+8*prism_reference::{}::eps^2",
+    "1+2*prism_reference::{}::eps^2+3*prism_reference::{}::eps",
+    "-6*prism_reference::{}::eps+2+4*prism_reference::{}::eps^2",
+    "2+4*prism_reference::{}::eps^2+6*prism_reference::{}::eps",
+    "-17*prism_reference::{}::eps+12+6*prism_reference::{}::eps^2",
+    "-4*prism_reference::{}::eps^2+4*prism_reference::{}::eps^3+prism_reference::{}::eps",
+    "-4*prism_reference::{}::eps+4*prism_reference::{}::eps^2+8*prism_reference::{}::eps^3",
+    "-2*prism_reference::{}::eps+2*prism_reference::{}::eps^2+4*prism_reference::{}::eps^3",
+    "-8*prism_reference::{}::eps^2+2*prism_reference::{}::eps+8*prism_reference::{}::eps^3",
+    "-18*prism_reference::{}::eps^2+12*prism_reference::{}::eps^3+6*prism_reference::{}::eps",
+    "-36*prism_reference::{}::eps^2+12*prism_reference::{}::eps+24*prism_reference::{}::eps^3",
+    "-12*prism_reference::{}::eps+-96*prism_reference::{}::eps^3+48*prism_reference::{}::eps^4+60*prism_reference::{}::eps^2",
+    "-32*prism_reference::{}::eps^3+-4*prism_reference::{}::eps+16*prism_reference::{}::eps^4+20*prism_reference::{}::eps^2",
+    "-16*prism_reference::{}::eps^3+-2*prism_reference::{}::eps+10*prism_reference::{}::eps^2+8*prism_reference::{}::eps^4"
+  ],
+  "oracle_records_read": 0,
+  "relations": [
+    {
+      "exact_zero": true,
+      "label": "C0A",
+      "residual_difference": []
+    },
+    {
+      "exact_zero": true,
+      "label": "C1A",
+      "residual_difference": []
+    },
+    {
+      "exact_zero": true,
+      "label": "C0B",
+      "residual_difference": []
+    },
+    {
+      "exact_zero": true,
+      "label": "C1B",
+      "residual_difference": []
+    },
+    {
+      "exact_zero": true,
+      "label": "CC",
+      "residual_difference": []
+    }
+  ],
+  "status": "all_five_candidate_relations_verified_by_native_exact_source_replay"
+}

@@ -1,0 +1,13 @@
+{
+  "cut_slots": [
+    0,
+    4
+  ],
+  "full_amplitude": false,
+  "source_options": {
+    "free_virtual_zero_sectors": false,
+    "policy": "legacy-lorentz",
+    "positive_compact_energy_powers": false
+  },
+  "storage_capacity": 20
+}

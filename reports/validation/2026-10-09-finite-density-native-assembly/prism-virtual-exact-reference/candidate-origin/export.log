@@ -1,0 +1,2 @@
+"RUSTFLOW THREAD CONFIGURATION: "InputForm[{"AbortPause" -> 2., "BusyWait" -> 0.01, "MathLinkTimeout" -> 15., "MKLThreadNumber" -> 1, "ParallelThreadNumber" -> 1, "RecoveryMode" -> "ReQueue", "RelaunchFailedKernels" -> False, "VectorParallelLengthThresholds" -> {32768, 8192, 8192, 8192}, "VectorVendorLengthThresholds" -> {128, 32, 32}}]
+"EXPORTED_CANDIDATE_RELATIONS "5

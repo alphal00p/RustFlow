@@ -102,6 +102,7 @@ fn sample_report(
         "source_options":report.source_options.as_ref().map(|source| json!({
             "policy":source.policy.as_str(),
             "positive_compact_energy_powers":source.positive_compact_energy_powers,
+            "free_virtual_zero_sectors":source.free_virtual_zero_sectors,
         })),
         "basis_size":report.basis_size,
         "physical_arity":report.physical_arity,

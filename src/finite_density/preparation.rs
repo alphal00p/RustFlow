@@ -61,6 +61,10 @@ impl std::str::FromStr for WeightedSourcePolicy {
 pub struct WeightedSourceOptions {
     pub policy: WeightedSourcePolicy,
     pub positive_compact_energy_powers: bool,
+    /// Attach measure-aware polynomial zeros only through a bound sealed
+    /// massless endpoint/origin proof. The default preserves existing sources.
+    #[serde(default)]
+    pub free_virtual_zero_sectors: bool,
 }
 
 /// Exact algebraic preparation. The measure identity must describe the actual
@@ -156,7 +160,7 @@ impl OccupiedCutFamily {
         )
     }
 
-    /// Use a sealed finite-positive-eta origin certificate for the narrow
+    /// Use a sealed finite-positive-eta origin certificate for the proved
     /// massless flow classes. The resulting lower-contact zeros are defined by
     /// joint high-dimensional continuation of the complete smooth kernel; they
     /// are not inferred from massive empty support or a separately chosen PV.
@@ -197,6 +201,11 @@ impl OccupiedCutFamily {
         options: WeightedSourceOptions,
         origin: Option<&MasslessFlowEvidence>,
     ) -> Result<PreparedWeightedSources<N>> {
+        if options.free_virtual_zero_sectors && origin.is_none() {
+            return Err(Error::InvalidInput(
+                "free virtual zero sectors require bound sealed massless evidence".into(),
+            ));
+        }
         let massless_origin_loops = if let Some(origin) = origin {
             if origin.source_options() != options {
                 return Err(Error::InvalidInput(
@@ -223,6 +232,13 @@ impl OccupiedCutFamily {
                 .branch
                 .push_str(&format!("; {}", origin.origin_identity()));
             loops
+        } else {
+            Vec::new()
+        };
+        let free_virtual_zeros = if options.free_virtual_zero_sectors {
+            origin
+                .unwrap()
+                .free_virtual_zero_supports(self, shifted, domain_budget)?
         } else {
             Vec::new()
         };
@@ -355,7 +371,7 @@ impl OccupiedCutFamily {
             ));
         }
         // This is a different physical statement from massive empty support.
-        // At fixed eta>0 the sealed narrow-flow proof supplies a smooth complete
+        // At fixed eta>0 the sealed flow proof supplies a smooth complete
         // virtual/transfer kernel at each origin. With polynomial insertions,
         // every finite C_n H_lower,l label has vanishing required zero-energy
         // jets on a sufficiently high-Re(D) open domain. Joint meromorphic
@@ -386,6 +402,36 @@ impl OccupiedCutFamily {
             identity.support.push_str(&format!(
                 "; certified joint dimensional origin zero jets: occupied loop {loop_index}, cut slot {}>=1 and lower-energy slot {}>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint {}>0",
                 shell.physical_slot, shell.lower_slot, shell.chemical_potential,
+            ));
+        }
+        // Only unrestricted virtual directions occur in these certificates.
+        // Intersect the actual admitted box, preserving every completion,
+        // occupation and frozen storage coordinate before exposing a zero.
+        for proof in free_virtual_zeros {
+            let mut support = bounds;
+            for shell in self.shells() {
+                support[shell.physical_slot] = IndexBounds::new(Some(1), None)
+                    .map_err(|e| Error::InvalidInput(e.to_string()))?;
+            }
+            for &slot in proof.forced_nonpositive_slots() {
+                if slot >= self.physical_slots()
+                    || roles[slot] != super::guarded::IndexRole::Ordinary
+                {
+                    return Err(Error::InvalidInput(
+                        "free-virtual zero certificate includes a compact or absent slot".into(),
+                    ));
+                }
+                support[slot] = IndexBounds::new(None, Some(0))
+                    .map_err(|e| Error::InvalidInput(e.to_string()))?;
+            }
+            let proposed =
+                IndexDomain::new(support).map_err(|e| Error::InvalidInput(e.to_string()))?;
+            if let Some(domain) = proposed.intersection(&admitted_domain) {
+                zero_domains.push(domain);
+            }
+            identity.support.push_str(&format!(
+                "; certified free virtual zero support: {}",
+                proof.identity()
             ));
         }
         for parameter in [eta, epsilon] {

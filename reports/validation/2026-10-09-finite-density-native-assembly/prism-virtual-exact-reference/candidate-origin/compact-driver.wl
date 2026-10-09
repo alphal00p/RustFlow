@@ -1,0 +1,24 @@
+$HistoryLength=0;
+root=Environment["RUSTFLOW_PRISM_SYMBOLIC_DIR"];
+red=Get[FileNameJoin[{root,"reduced-combinations.wl"}]];
+old=Get["/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/upstream-prism-virtual-attempt-2/reduced-combinations.wl"];
+assert[c_,m_]:=If[!TrueQ[c],Print["FAIL ",m];Exit[1]];
+assert[And@@Thread[Factor[(red["reduced"]/.eps->1/5)-old["reduced"]]==0],"exact specialization of five original coefficients"];
+m=red["surviving_masters"];coef=red["reduced"];
+s0=coef[[1]]+coef[[3]];s1=coef[[2]]+coef[[4]];
+combo=Factor[Together[s0/(1-4eps)+((-1-2eps)*s0+s1-coef[[5]])/(16eps^2)]];
+weights=Factor[Coefficient[combo,#]]&/@m;
+Put[<|"master_order"->m,"compact_combination"->combo,"master_weights"->weights,"raw_prefactor"->"-pi^(-8+4eps)*mu^(-8eps)/49152*Gamma[1-eps]*Gamma[1-3eps]/((1-2eps)*(1+3eps)*Gamma[1-2eps]*Gamma[1-4eps])"|>,FileNameJoin[{root,"formal-two-cut-combination.wl"}]];
+Print["GENERIC_WEIGHTS ",weights];
+(* Independent exact series arithmetic from log Gamma(1+a eps). *)
+g[a_]:=Exp[-EulerGamma*a*eps+Sum[(-1)^n Zeta[n] a^n eps^n/n,{n,2,8}]];
+b=g[1]*g[-1]^2/(eps*(1-2eps)*g[-2]);
+masters={b*g[2]*g[-2]^2/(2eps*(1-3eps)*g[-3]),-g[-1]^3*g[2]/((2eps)*(2eps-1)*(2-3eps)*(1-3eps)*g[-3]),b^2};
+pref=-4Exp[4EulerGamma*eps]/3*g[-1]*g[-3]/((1-2eps)*(1+3eps)*g[-2]*g[-4]);
+series=TimeConstrained[Normal[Series[pref*(weights.masters),{eps,0,0}]],90,$Failed];
+assert[series=!=$Failed,"formal compact series budget exceeded"];
+series=Collect[Expand[series],eps,FullSimplify];
+Put[series,FileNameJoin[{root,"formal-two-cut-msbar-series.wl"}]];
+orders=Range[-7,0];values=Coefficient[series,eps,#]&/@orders;
+Export[FileNameJoin[{root,"formal-two-cut-status.json"}],<|"status"->"formal_three_pair_compact_Beta_sum_derived","scope"->"unit-index meromorphic two-cut candidate; not full thermal prism reference","orders"->orders,"msbar_coefficients_mu1"->(ToString[#,InputForm]&/@values),"normalization"->"(4 Pi)^8 Exp[4 eps (EulerGamma-Log[Pi])] times raw Euclidean amplitude, mu=1","exact_single_point_reduction_agreement"->True,"complete_prism_reference"->False,"remaining"->"triple-cut compact integration, common mass-jet/analytic-index continuation and endpoint overlap subtractions","native_predictions_read"->0,"oracle_records_read"->0|>,"RawJSON"];
+Print["FORMAL_TWO_CUT_SERIES ",series];Exit[0];

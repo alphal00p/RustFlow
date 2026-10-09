@@ -1,0 +1,134 @@
+{
+  "lossless": true,
+  "restore": "gzip -dk ARCHIVE.gz",
+  "entries": [
+    {
+      "original": "E7-free-single-off/native-closure/round-000-provisional.bin",
+      "archive": "E7-free-single-off/native-closure/round-000-provisional.bin.gz",
+      "original_bytes": 7426145,
+      "archive_bytes": 596791,
+      "original_sha256": "165be6049ba9a1f663b05a19a78a64cdeb1efd5046bc8c3b235941cfbc2745a9",
+      "archive_sha256": "463519552bd003b4026dd8c1f31aab95bf6af595c310ed0b5a4dd663b260f0a4"
+    },
+    {
+      "original": "E7-free-single-off/native-closure/round-000-provisional.json",
+      "archive": "E7-free-single-off/native-closure/round-000-provisional.json.gz",
+      "original_bytes": 59764,
+      "archive_bytes": 3048,
+      "original_sha256": "ffe535d001380c0e794974949413fb7547bc43ee7b6bfacbb3ada11488d5e854",
+      "archive_sha256": "5e674b2a30af7156c7f9b8fdebec692128919ccff88adece12c0d90a92f0f114"
+    },
+    {
+      "original": "E7-free-single-off/native-closure/round-001-provisional.bin",
+      "archive": "E7-free-single-off/native-closure/round-001-provisional.bin.gz",
+      "original_bytes": 3156577,
+      "archive_bytes": 276885,
+      "original_sha256": "2be4d27d13b905f4715c14fe9d7dad362186cf59536d5141a67d81d765ec292c",
+      "archive_sha256": "6f8d84a7a30ed4c13abf99104042278b33333b55c8435158943e406db3a3f839"
+    },
+    {
+      "original": "E7-free-single-off/native-closure/round-001-provisional.json",
+      "archive": "E7-free-single-off/native-closure/round-001-provisional.json.gz",
+      "original_bytes": 470026,
+      "archive_bytes": 11989,
+      "original_sha256": "076cb405e4bfa3601027b62557e133deea6c2e8a78e93f6941679d42cc95e006",
+      "archive_sha256": "d02dfdb7f39619fbe36e74b14f5b584a18be807f35dc944863a9698280e34017"
+    },
+    {
+      "original": "E7-free-single-off-resources.log",
+      "archive": "E7-free-single-off-resources.log.gz",
+      "original_bytes": 1449,
+      "archive_bytes": 608,
+      "original_sha256": "d62dbd792a89685688c8a9d0f0f563eac0d97241e3c9a55ebcae2530cac24ea3",
+      "archive_sha256": "a31a7a1da280a53ad550f53d1621c28a66a15f707bd097d5cbe1e45626f71b9d"
+    },
+    {
+      "original": "E7-free-single-on/native-closure/round-000-provisional.bin",
+      "archive": "E7-free-single-on/native-closure/round-000-provisional.bin.gz",
+      "original_bytes": 7427879,
+      "archive_bytes": 596966,
+      "original_sha256": "43186e12b6a8a725480ef6edc416163309391a81f450cbfc87750176acd0114e",
+      "archive_sha256": "3a97cb34e242d74b8c1820b3c584ea839d8e5ca62551d33e471bba63e4a7b186"
+    },
+    {
+      "original": "E7-free-single-on/native-closure/round-000-provisional.json",
+      "archive": "E7-free-single-on/native-closure/round-000-provisional.json.gz",
+      "original_bytes": 61292,
+      "archive_bytes": 3192,
+      "original_sha256": "072a36ee6377deec17ceb95f7ba5603189b3f3beb8e2b2ff55dc1e4be16b20a2",
+      "archive_sha256": "6753fcdf71c0c5963e7965b1f59e96bfa850cc3e86edf05ed5bbea7e058c44e3"
+    },
+    {
+      "original": "E7-free-single-on/native-closure/round-001-provisional.bin",
+      "archive": "E7-free-single-on/native-closure/round-001-provisional.bin.gz",
+      "original_bytes": 3158311,
+      "archive_bytes": 277051,
+      "original_sha256": "c5b2ba113af79e060ee5d003a5a835cd03cba34772d960139e4dee1cda6b845c",
+      "archive_sha256": "10475be4dc152061b4432b382a841aab36afdfa67cd89c93fba5b1065bf572cf"
+    },
+    {
+      "original": "E7-free-single-on/native-closure/round-001-provisional.json",
+      "archive": "E7-free-single-on/native-closure/round-001-provisional.json.gz",
+      "original_bytes": 465604,
+      "archive_bytes": 12000,
+      "original_sha256": "6c321a15044d898bcfe0dbaf2c9fef8aa0a486f2ede17080027f14f14212b1b1",
+      "archive_sha256": "a71b770ffc46a4ebb7dafa69e3a3d2c09a2c6c050f55c7a7187956fb4b1e78f9"
+    },
+    {
+      "original": "E7-free-single-on-resources.log",
+      "archive": "E7-free-single-on-resources.log.gz",
+      "original_bytes": 1449,
+      "archive_bytes": 607,
+      "original_sha256": "514635935de244533aec1b654f2b941700317b740826c96c6426e09cabcafa93",
+      "archive_sha256": "d0451aac1c766c46660966c83b3d3d4ff9756165e65c8250d94619b704c19129"
+    },
+    {
+      "original": "E7-free-double-off/native-closure/round-000-provisional.bin",
+      "archive": "E7-free-double-off/native-closure/round-000-provisional.bin.gz",
+      "original_bytes": 6097511,
+      "archive_bytes": 491625,
+      "original_sha256": "2b1854cc33a178b457a7847fedeca29edc4da1606e29aad1e558a647b92df29e",
+      "archive_sha256": "c016e022638e68aefbe92b10f7b35367b573277f9f5932b86a3a81c942079947"
+    },
+    {
+      "original": "E7-free-double-off/native-closure/round-000-provisional.json",
+      "archive": "E7-free-double-off/native-closure/round-000-provisional.json.gz",
+      "original_bytes": 45408,
+      "archive_bytes": 2718,
+      "original_sha256": "cf8cd8e6b8c28abc67e9ff7f8a3933c1bacb63ffda6030537afce97f7a6095bd",
+      "archive_sha256": "598191f25f51d3a31c6b3e40cadb150da7f32030a375b59abd65d45cb044de30"
+    },
+    {
+      "original": "E7-free-double-off-resources.log",
+      "archive": "E7-free-double-off-resources.log.gz",
+      "original_bytes": 268,
+      "archive_bytes": 215,
+      "original_sha256": "465ca052bef8650bd519f35deaffe057fe82822c46a7fa82fafe4546ffb8645b",
+      "archive_sha256": "8db3e66fefd2476255a08c0ce967d806b4c8374e609db12c22cc6605f1feca18"
+    },
+    {
+      "original": "E7-free-double-on/native-closure/round-000-provisional.bin",
+      "archive": "E7-free-double-on/native-closure/round-000-provisional.bin.gz",
+      "original_bytes": 6098095,
+      "archive_bytes": 491746,
+      "original_sha256": "c4648337dc58afcf6e508447eeb188ea0439c907e80be2a24d06d1fd4e6d93a6",
+      "archive_sha256": "6593ca823de76c24957300a90b2ea99df8fe0fd3821aa844fa99f6b882e68aec"
+    },
+    {
+      "original": "E7-free-double-on/native-closure/round-000-provisional.json",
+      "archive": "E7-free-double-on/native-closure/round-000-provisional.json.gz",
+      "original_bytes": 45888,
+      "archive_bytes": 2816,
+      "original_sha256": "d7ca21e8a164a3294f1c58be0b29e236a741896429017700a226949fd6ba55c9",
+      "archive_sha256": "9d8dbb24245ded1a10c6bbe19bf21aaea476291daa6e7cc17221e462d3b9eb6f"
+    },
+    {
+      "original": "E7-free-double-on-resources.log",
+      "archive": "E7-free-double-on-resources.log.gz",
+      "original_bytes": 268,
+      "archive_bytes": 215,
+      "original_sha256": "465ca052bef8650bd519f35deaffe057fe82822c46a7fa82fafe4546ffb8645b",
+      "archive_sha256": "8db3e66fefd2476255a08c0ce967d806b4c8374e609db12c22cc6605f1feca18"
+    }
+  ]
+}

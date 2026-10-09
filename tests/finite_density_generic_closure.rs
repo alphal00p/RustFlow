@@ -55,6 +55,7 @@ fn pilot<const N: usize>(input: DensityInput, cuts: &[usize], root: PathBuf) -> 
     let source_options = WeightedSourceOptions {
         policy,
         positive_compact_energy_powers: enabled("RUSTFLOW_WEIGHTED_POSITIVE_ENERGY_POWERS", false),
+        free_virtual_zero_sectors: false,
     };
     let report = root.join(format!(
         "physical-{physical_arity}-capacity-{N}-cuts-{}",
@@ -88,7 +89,7 @@ fn pilot<const N: usize>(input: DensityInput, cuts: &[usize], root: PathBuf) -> 
     save(
         &report,
         "input.json",
-        &serde_json::json!({"input":input,"cut_slots":cuts,"shifted_slots":shifted,"physical_arity":physical_arity,"storage_capacity":N,"source_policy":policy.as_str(),"positive_compact_energy_powers":source_options.positive_compact_energy_powers,"source_domain_budget":budget("RUSTFLOW_WEIGHTED_SOURCE_DOMAIN_BUDGET",65536),"max_rounds":options.max_rounds,"max_frontier":options.max_frontier,"max_requested":options.max_requested,"max_depth":options.discovery.max_depth,"max_domains":options.discovery.max_domains,"sample_seed":options.discovery.sample_seed,"guard_refinement":options.guard_refinement,"search_frontier_sectors":options.search_frontier_sectors,"split_ordinary_zero_faces":options.split_ordinary_zero_faces,"numerical_prediction":false,"contour_admission":false}),
+        &serde_json::json!({"input":input,"cut_slots":cuts,"shifted_slots":shifted,"physical_arity":physical_arity,"storage_capacity":N,"source_policy":policy.as_str(),"positive_compact_energy_powers":source_options.positive_compact_energy_powers,"free_virtual_zero_sectors":source_options.free_virtual_zero_sectors,"source_domain_budget":budget("RUSTFLOW_WEIGHTED_SOURCE_DOMAIN_BUDGET",65536),"max_rounds":options.max_rounds,"max_frontier":options.max_frontier,"max_requested":options.max_requested,"max_depth":options.discovery.max_depth,"max_domains":options.discovery.max_domains,"sample_seed":options.discovery.sample_seed,"guard_refinement":options.guard_refinement,"search_frontier_sectors":options.search_frontier_sectors,"split_ordinary_zero_faces":options.split_ordinary_zero_faces,"numerical_prediction":false,"contour_admission":false}),
     );
     let prepared=family.guarded_sources_with_options::<N>(symbol!("generic_closure::epsilon"),4,symbol!("generic_closure::eta"),&shifted,budget("RUSTFLOW_WEIGHTED_SOURCE_DOMAIN_BUDGET",65536),vec![],GuardedMeasureIdentity {
         measure:format!("runtime graph input={}; assigned factors={:?}; coordinates={:?}",input.prepare()?.identity(),family.factors(),family.coordinates()),

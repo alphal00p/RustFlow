@@ -2,7 +2,9 @@
 use std::collections::BTreeMap;
 use symbolica::prelude::*;
 use symbolica_amflow::finite_density::DensityInput;
-use symbolica_amflow::finite_density::guarded::{GuardedMeasureIdentity, IndexRole};
+use symbolica_amflow::finite_density::guarded::{
+    GuardedApplicationFailure, GuardedMeasureIdentity, IndexRole,
+};
 use symbolica_amflow::finite_density::massless_endpoint::MasslessFlowEvidence;
 use symbolica_amflow::finite_density::preparation::{WeightedSourceOptions, WeightedSourcePolicy};
 use symbolica_amflow::finite_density::reduction::{
@@ -240,5 +242,159 @@ fn four_loop_e7_sources_bind_each_sealed_endpoint_variant_and_zero_origin() {
     .unwrap();
     for cuts in [vec![0], vec![4], vec![0, 4]] {
         source_origin::<24>(definition.clone(), &cuts);
+    }
+}
+
+#[test]
+fn sealed_free_virtual_zero_policy_is_opt_in_and_preserves_every_domain_bound() {
+    let definition: DensityInput = serde_json::from_str(include_str!(
+        "../examples/finite_density/chain_of_three_parallel_pairs.json"
+    ))
+    .unwrap();
+    let input = definition.prepare().unwrap();
+    let epsilon = symbol!("free_virtual_source_test::epsilon");
+    let eta = symbol!("free_virtual_source_test::eta");
+    for cuts in [vec![0], vec![4], vec![0, 4]] {
+        let family = input.occupied_cut(&cuts, 16).unwrap().at_physical_masses();
+        let shifted = (0..family.physical_slots())
+            .filter(|s| !cuts.contains(s))
+            .collect::<Vec<_>>();
+        let off = WeightedSourceOptions::default();
+        let on = WeightedSourceOptions {
+            free_virtual_zero_sectors: true,
+            ..off
+        };
+        let off_proof = MasslessFlowEvidence::new(&input, &family, &shifted, off).unwrap();
+        let proof = MasslessFlowEvidence::new(&input, &family, &shifted, on).unwrap();
+        assert!(
+            matches!(family.guarded_sources_with_options::<24>(epsilon,4,eta,&shifted,16,vec![],identity(input.identity(),&cuts),on),
+            Err(symbolica_amflow::Error::InvalidInput(ref message)) if message.contains("bound sealed"))
+        );
+        assert!(
+            family
+                .guarded_sources_with_massless_origin::<24>(
+                    epsilon,
+                    4,
+                    eta,
+                    &shifted,
+                    16,
+                    vec![],
+                    identity(input.identity(), &cuts),
+                    on,
+                    &off_proof
+                )
+                .is_err()
+        );
+        let baseline = family
+            .guarded_sources_with_massless_origin::<24>(
+                epsilon,
+                4,
+                eta,
+                &shifted,
+                16,
+                vec![],
+                identity(input.identity(), &cuts),
+                off,
+                &off_proof,
+            )
+            .unwrap();
+        let admitted = family
+            .guarded_sources_with_massless_origin::<24>(
+                epsilon,
+                4,
+                eta,
+                &shifted,
+                16,
+                vec![],
+                identity(input.identity(), &cuts),
+                on,
+                &proof,
+            )
+            .unwrap();
+        let replay = admitted
+            .context
+            .discover(vec![], [], Default::default())
+            .unwrap()
+            .program;
+        let encoded = replay.encode(Default::default()).unwrap();
+        assert!(
+            baseline
+                .context
+                .decode(&encoded, Default::default())
+                .is_err()
+        );
+        let replay = admitted
+            .context
+            .decode(&encoded, Default::default())
+            .unwrap();
+        let bulk: [i64; 24] = std::array::from_fn(|slot| i64::from(slot < family.physical_slots()));
+        assert!(!admitted.context.sources().is_zero(&bulk));
+        for support in proof
+            .free_virtual_zero_supports(&family, &shifted, 16)
+            .unwrap()
+        {
+            let encoded_support = serde_json::to_string(&support.identity()).unwrap();
+            assert!(
+                admitted
+                    .context
+                    .sources()
+                    .measure_id()
+                    .contains(&encoded_support[1..encoded_support.len() - 1])
+            );
+            let mut polynomial = bulk;
+            for &slot in support.forced_nonpositive_slots() {
+                polynomial[slot] = 0;
+            }
+            assert!(!baseline.context.sources().is_zero(&polynomial));
+            assert!(admitted.context.sources().is_zero(&polynomial));
+            let reduced = replay.reduce(polynomial, Default::default()).unwrap();
+            assert!(reduced.terms.is_empty() && reduced.unresolved.is_empty());
+            let mut restored = polynomial;
+            restored[support.forced_nonpositive_slots()[0]] = 1;
+            assert!(!admitted.context.sources().is_zero(&restored));
+            for (slot, value) in [
+                (family.physical_slots(), 1),
+                (family.shells()[0].upper_slot, -1),
+                (family.factors().len(), 1),
+            ] {
+                let mut invalid = polynomial;
+                invalid[slot] = value;
+                assert!(!admitted.context.sources().is_zero(&invalid));
+                if slot == family.factors().len() {
+                    assert!(replay.reduce(invalid, Default::default()).is_err());
+                } else {
+                    // Native replay reports uncovered or role-invalid labels as
+                    // explicit residuals; physical-domain rejection belongs to
+                    // the weighted-system preparation layer below.
+                    let residual = replay.reduce(invalid, Default::default()).unwrap();
+                    assert!(residual.terms.is_empty());
+                    assert_eq!(residual.unresolved.len(), 1);
+                    assert_eq!(residual.unresolved[0].integral, invalid);
+                    assert_eq!(residual.unresolved[0].coefficient, Atom::one());
+                    assert_eq!(
+                        residual.unresolved[0].reason,
+                        if value < 0 {
+                            GuardedApplicationFailure::InvalidOccupation { axis: slot }
+                        } else {
+                            GuardedApplicationFailure::NoApplicableRule
+                        }
+                    );
+                }
+                assert!(
+                    prepare_weighted_system(
+                        &admitted.context,
+                        &[BTreeMap::from([(invalid, Atom::one())])],
+                        &admitted.deformation,
+                        Default::default(),
+                        &Default::default(),
+                    )
+                    .is_err()
+                );
+            }
+        }
+        assert!(
+            matches!(family.guarded_sources_with_massless_origin::<24>(epsilon,4,eta,&shifted,1,vec![],identity(input.identity(),&cuts),on,&proof),
+            Err(symbolica_amflow::Error::Limit(ref message)) if message.contains("flat"))
+        );
     }
 }

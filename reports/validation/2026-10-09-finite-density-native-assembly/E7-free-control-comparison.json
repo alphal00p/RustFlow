@@ -1,0 +1,283 @@
+{
+  "source_snapshot": "free-virtual-source-hashes.json",
+  "scope": "Bounded physical occupied preparation diagnostics only; no completed amplitude and no reference comparisons. All four cases used zero faces, depth3,8192domains,3rounds,frontier1024,requests4096,guardpasses0,timeout180s.",
+  "cases": [
+    {
+      "name": "E7-free-single-off",
+      "source_option_free_virtual_zero_sectors": false,
+      "resources": {
+        "command": [
+          "timeout",
+          "180",
+          "env",
+          "RUSTFLOW_WEIGHTED_CUTS=0",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+          "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=false",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-free-single-off",
+          "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+          "--ignored",
+          "--exact",
+          "runtime_graph_occupied_flow",
+          "--nocapture"
+        ],
+        "exit_code": 101,
+        "wall_seconds": 150.20238617481664,
+        "user_seconds": 148.755754,
+        "system_seconds": 0.24867399999999998,
+        "peak_child_rss_kib": 141412,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "provenance": "E7-free-single-off-resources.provenance.json",
+      "log": "E7-free-single-off-resources.log.gz",
+      "progress_events": [
+        {
+          "round": 0,
+          "requested": 5,
+          "basis_size": 318,
+          "new_derivatives": 1069
+        }
+      ],
+      "saved_rounds": [
+        {
+          "round": 0,
+          "status": "provisional",
+          "requested": 5,
+          "frontier": 318,
+          "metadata": "E7-free-single-off/native-closure/round-000-provisional.json.gz",
+          "program": "E7-free-single-off/native-closure/round-000-provisional.bin.gz"
+        },
+        {
+          "round": 1,
+          "status": "provisional",
+          "requested": 1175,
+          "frontier": 1764,
+          "metadata": "E7-free-single-off/native-closure/round-001-provisional.json.gz",
+          "program": "E7-free-single-off/native-closure/round-001-provisional.bin.gz"
+        }
+      ],
+      "failure": {
+        "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted provisional-frontier budget exhausted; rounds=2, provisional=1764, unresolved_terms=65907; first residual indices/reasons=[([1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 2, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 3, 0, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 2, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+        "numerical_acceptance": false,
+        "stage": "occupied preparation"
+      },
+      "numerical_prediction_files": [],
+      "numerical_acceptance": false
+    },
+    {
+      "name": "E7-free-single-on",
+      "source_option_free_virtual_zero_sectors": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "180",
+          "env",
+          "RUSTFLOW_WEIGHTED_CUTS=0",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+          "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-free-single-on",
+          "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+          "--ignored",
+          "--exact",
+          "runtime_graph_occupied_flow",
+          "--nocapture"
+        ],
+        "exit_code": 101,
+        "wall_seconds": 153.01677591819316,
+        "user_seconds": 151.480877,
+        "system_seconds": 0.27787,
+        "peak_child_rss_kib": 144312,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "provenance": "E7-free-single-on-resources.provenance.json",
+      "log": "E7-free-single-on-resources.log.gz",
+      "progress_events": [
+        {
+          "round": 0,
+          "requested": 5,
+          "basis_size": 318,
+          "new_derivatives": 1069
+        }
+      ],
+      "saved_rounds": [
+        {
+          "round": 0,
+          "status": "provisional",
+          "requested": 5,
+          "frontier": 318,
+          "metadata": "E7-free-single-on/native-closure/round-000-provisional.json.gz",
+          "program": "E7-free-single-on/native-closure/round-000-provisional.bin.gz"
+        },
+        {
+          "round": 1,
+          "status": "provisional",
+          "requested": 1175,
+          "frontier": 1726,
+          "metadata": "E7-free-single-on/native-closure/round-001-provisional.json.gz",
+          "program": "E7-free-single-on/native-closure/round-001-provisional.bin.gz"
+        }
+      ],
+      "failure": {
+        "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted provisional-frontier budget exhausted; rounds=2, provisional=1726, unresolved_terms=61586; first residual indices/reasons=[([1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 2, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 3, 0, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 2, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+        "numerical_acceptance": false,
+        "stage": "occupied preparation"
+      },
+      "numerical_prediction_files": [],
+      "numerical_acceptance": false
+    },
+    {
+      "name": "E7-free-double-off",
+      "source_option_free_virtual_zero_sectors": false,
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0,4",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+          "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=false",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-free-double-off",
+          "RUSTFLOW_DENSITY_FLOW_EPSILON=1/8",
+          "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8",
+          "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+          "--ignored",
+          "--exact",
+          "runtime_graph_occupied_flow",
+          "--nocapture"
+        ],
+        "exit_code": 124,
+        "wall_seconds": 180.0234715109691,
+        "user_seconds": 178.11361,
+        "system_seconds": 0.36899699999999996,
+        "peak_child_rss_kib": 135428,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "provenance": "E7-free-double-off-resources.provenance.json",
+      "log": "E7-free-double-off-resources.log.gz",
+      "progress_events": [
+        {
+          "round": 0,
+          "requested": 5,
+          "basis_size": 175,
+          "new_derivatives": 533
+        }
+      ],
+      "saved_rounds": [
+        {
+          "round": 0,
+          "status": "provisional",
+          "requested": 5,
+          "frontier": 175,
+          "metadata": "E7-free-double-off/native-closure/round-000-provisional.json.gz",
+          "program": "E7-free-double-off/native-closure/round-000-provisional.bin.gz"
+        }
+      ],
+      "failure": null,
+      "numerical_prediction_files": [],
+      "numerical_acceptance": false
+    },
+    {
+      "name": "E7-free-double-on",
+      "source_option_free_virtual_zero_sectors": true,
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0,4",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+          "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-free-double-on",
+          "RUSTFLOW_DENSITY_FLOW_EPSILON=1/8",
+          "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8",
+          "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+          "--ignored",
+          "--exact",
+          "runtime_graph_occupied_flow",
+          "--nocapture"
+        ],
+        "exit_code": 124,
+        "wall_seconds": 180.02541768411174,
+        "user_seconds": 178.25023,
+        "system_seconds": 0.347929,
+        "peak_child_rss_kib": 124940,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "provenance": "E7-free-double-on-resources.provenance.json",
+      "log": "E7-free-double-on-resources.log.gz",
+      "progress_events": [
+        {
+          "round": 0,
+          "requested": 5,
+          "basis_size": 175,
+          "new_derivatives": 533
+        }
+      ],
+      "saved_rounds": [
+        {
+          "round": 0,
+          "status": "provisional",
+          "requested": 5,
+          "frontier": 175,
+          "metadata": "E7-free-double-on/native-closure/round-000-provisional.json.gz",
+          "program": "E7-free-double-on/native-closure/round-000-provisional.bin.gz"
+        }
+      ],
+      "failure": null,
+      "numerical_prediction_files": [],
+      "numerical_acceptance": false
+    }
+  ],
+  "paired_checkpoint_comparisons": [
+    {
+      "cut": "single",
+      "round": 0,
+      "requested_identical": true,
+      "frontier_identical": true,
+      "off_frontier": 318,
+      "on_frontier": 318
+    },
+    {
+      "cut": "single",
+      "round": 1,
+      "requested_identical": true,
+      "frontier_identical": false,
+      "off_frontier": 1764,
+      "on_frontier": 1726
+    },
+    {
+      "cut": "double",
+      "round": 0,
+      "requested_identical": true,
+      "frontier_identical": true,
+      "off_frontier": 175,
+      "on_frontier": 175
+    }
+  ],
+  "user_pause": "All controls completed their bounds before safe pause; no diagnostic remains running."
+}

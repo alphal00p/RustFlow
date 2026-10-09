@@ -1428,6 +1428,121 @@ fn rank_one_blocks(
     })
 }
 
+/// Measure-owner proof that an admitted positive ordinary support leaves an
+/// unrestricted polynomial virtual direction. Fields are sealed; compact rows
+/// never occur in the rank calculation.
+#[derive(Clone, Debug, Serialize)]
+pub struct FreeVirtualZeroSupport {
+    proof_version: &'static str,
+    virtual_rank: usize,
+    allowed_positive_slots: Vec<usize>,
+    forced_nonpositive_slots: Vec<usize>,
+    /// Exact rational vector, normalized to first nonzero coefficient one.
+    virtual_null_direction: Vec<String>,
+}
+impl FreeVirtualZeroSupport {
+    pub fn forced_nonpositive_slots(&self) -> &[usize] {
+        &self.forced_nonpositive_slots
+    }
+    pub fn identity(&self) -> String {
+        format!(
+            "{};virtual-rank={};allowed={:?};nonpositive={:?};virtual-null={:?}",
+            self.proof_version,
+            self.virtual_rank,
+            self.allowed_positive_slots,
+            self.forced_nonpositive_slots,
+            self.virtual_null_direction
+        )
+    }
+}
+const FREE_VIRTUAL_ZERO_PROOF_VERSION: &str = "occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions";
+
+fn checked_flat_subsets(n: usize, k: usize, budget: usize) -> Result<usize> {
+    if k > n {
+        return Ok(0);
+    }
+    let k = k.min(n - k);
+    let mut count = 1usize;
+    for i in 0..k {
+        count = count
+            .checked_mul(n - i)
+            .ok_or_else(|| Error::Limit("free-virtual flat subset count overflow".into()))?
+            / (i + 1);
+        if count > budget {
+            return Err(Error::Limit(format!(
+                "free-virtual flat enumeration exceeds subset budget {budget}"
+            )));
+        }
+    }
+    if count > budget {
+        return Err(Error::Limit(
+            "free-virtual flat enumeration has zero budget".into(),
+        ));
+    }
+    Ok(count)
+}
+fn free_virtual_flat(
+    rows: &[CertifiedRow],
+    h: usize,
+    selected: Vec<Vec<Atom>>,
+) -> Result<Option<FreeVirtualZeroSupport>> {
+    let selected = if selected.is_empty() {
+        vec![vec![Atom::zero(); h]]
+    } else {
+        selected
+    };
+    let (reduced, pivots) = rref(selected);
+    if pivots.len() != h - 1 {
+        return Ok(None);
+    }
+    let free = (0..h)
+        .find(|j| !pivots.contains(j))
+        .ok_or_else(|| Error::InvalidInput("free-virtual flat has no null direction".into()))?;
+    let mut v = vec![Atom::zero(); h];
+    v[free] = Atom::one();
+    for (r, &pivot) in reduced.iter().zip(&pivots) {
+        v[pivot] = -r[free].clone();
+    }
+    let normalization = v.iter().find(|x| !x.is_zero()).unwrap().clone();
+    for x in &mut v {
+        *x = (&*x / &normalization).together().cancel();
+        rational(x)?;
+    }
+    let mut allowed = Vec::new();
+    let mut forced = Vec::new();
+    let mut flat_rows = Vec::new();
+    for row in rows {
+        let dot = row
+            .virtual_part
+            .iter()
+            .zip(&v)
+            .fold(Atom::zero(), |sum, (a, b)| sum + a * b)
+            .together()
+            .cancel();
+        rational(&dot)?;
+        if dot.is_zero() {
+            allowed.push(row.slot);
+            flat_rows.push(row.virtual_part.clone());
+        } else {
+            forced.push(row.slot);
+        }
+    }
+    if forced.is_empty() || rank(flat_rows) != h - 1 {
+        return Err(Error::InvalidInput(
+            "free-virtual flat witness failed exact rank verification".into(),
+        ));
+    }
+    allowed.sort_unstable();
+    forced.sort_unstable();
+    Ok(Some(FreeVirtualZeroSupport {
+        proof_version: FREE_VIRTUAL_ZERO_PROOF_VERSION,
+        virtual_rank: h,
+        allowed_positive_slots: allowed,
+        forced_nonpositive_slots: forced,
+        virtual_null_direction: v.iter().map(Atom::to_canonical_string).collect(),
+    }))
+}
+
 /// Sealed proof for singleton UV-meromorphic germs and independent rank-one
 /// virtual blocks with complete high-D endpoint arguments. General single-spacelike *degree evidence* cannot construct this
 /// permit. All fields are private, and every consumer rechecks family binding.
@@ -1706,6 +1821,72 @@ impl MasslessFlowEvidence {
         self.validate_family(family, shifted)?;
         Ok(family.shells().iter().map(|s| s.loop_index).collect())
     }
+    /// Enumerate complete maximal rank-deficient ordinary positive supports.
+    /// This supplies proof data only; attaching its zero domains is explicitly
+    /// opt-in at the guarded source factory. A budget failure supplies no zero.
+    pub fn free_virtual_zero_supports(
+        &self,
+        family: &super::geometry::OccupiedCutFamily,
+        shifted: &[usize],
+        budget: usize,
+    ) -> Result<Vec<FreeVirtualZeroSupport>> {
+        self.validate_family(family, shifted)?;
+        let h = self.class.virtual_loops();
+        if h == 0 {
+            return Ok(Vec::new());
+        }
+        let rows = self.class.rows();
+        let mut flats = BTreeMap::new();
+        if let CertifiedEndpointClass::RankOneBlocks {
+            representatives, ..
+        } = &self.class
+        {
+            if h > budget {
+                return Err(Error::Limit(format!(
+                    "free-virtual block flats need {h} domains; budget {budget}"
+                )));
+            }
+            for omitted in 0..h {
+                let selected = representatives
+                    .iter()
+                    .enumerate()
+                    .filter(|(i, _)| *i != omitted)
+                    .map(|(_, r)| r.clone())
+                    .collect();
+                let flat = free_virtual_flat(rows, h, selected)?.ok_or_else(|| {
+                    Error::InvalidInput("independent block hyperplane lost rank".into())
+                })?;
+                flats.insert(flat.allowed_positive_slots.clone(), flat);
+            }
+        } else {
+            checked_flat_subsets(rows.len(), h - 1, budget)?;
+            let k = h - 1;
+            let mut selection = (0..k).collect::<Vec<_>>();
+            loop {
+                let selected = selection
+                    .iter()
+                    .map(|&i| rows[i].virtual_part.clone())
+                    .collect();
+                if let Some(flat) = free_virtual_flat(rows, h, selected)? {
+                    flats.insert(flat.allowed_positive_slots.clone(), flat);
+                    if flats.len() > budget {
+                        return Err(Error::Limit(format!(
+                            "free-virtual flats exceed domain budget {budget}"
+                        )));
+                    }
+                }
+                let Some(j) = (0..k).rev().find(|&j| selection[j] < rows.len() - k + j) else {
+                    break;
+                };
+                selection[j] += 1;
+                for l in j + 1..k {
+                    selection[l] = selection[l - 1] + 1;
+                }
+            }
+        }
+        Ok(flats.into_values().collect())
+    }
+
     /// Audit every basis, target and retained candidate label independently.
     /// A label's meromorphic proof domain can depend on its finite indices;
     /// taking the intersection for any finite requested set is harmless.
@@ -2127,5 +2308,72 @@ mod permit_tests {
                 assert!(!x.is_integer());
             }
         }
+    }
+    #[test]
+    fn free_virtual_flat_boxes_equal_all_rank_deficient_e7_supports() {
+        let input = serde_json::from_str::<DensityInput>(include_str!(
+            "../../examples/finite_density/chain_of_three_parallel_pairs.json"
+        ))
+        .unwrap()
+        .prepare()
+        .unwrap();
+        for (cuts, count) in [(vec![0], 6), (vec![4], 6), (vec![0, 4], 2)] {
+            let family = input.occupied_cut(&cuts, 16).unwrap().at_physical_masses();
+            let shifted = (0..7).filter(|s| !cuts.contains(s)).collect::<Vec<_>>();
+            let proof = MasslessFlowEvidence::new(
+                &input,
+                &family,
+                &shifted,
+                WeightedSourceOptions::default(),
+            )
+            .unwrap();
+            let flats = proof
+                .free_virtual_zero_supports(&family, &shifted, 16)
+                .unwrap();
+            assert_eq!(flats.len(), count);
+            for mask in 0..1usize << shifted.len() {
+                let active = shifted
+                    .iter()
+                    .enumerate()
+                    .filter(|(j, _)| mask & (1 << j) != 0)
+                    .map(|(_, s)| *s)
+                    .collect::<BTreeSet<_>>();
+                let r = rank(
+                    proof
+                        .class
+                        .rows()
+                        .iter()
+                        .filter(|r| active.contains(&r.slot))
+                        .map(|r| r.virtual_part.clone())
+                        .collect(),
+                );
+                let covered = flats.iter().any(|f| {
+                    f.forced_nonpositive_slots
+                        .iter()
+                        .all(|s| !active.contains(s))
+                });
+                assert_eq!(covered, r < proof.class.virtual_loops());
+                for flat in &flats {
+                    assert!(
+                        flat.forced_nonpositive_slots
+                            .iter()
+                            .all(|s| !cuts.contains(s))
+                    );
+                    assert_eq!(
+                        flat.virtual_null_direction.len(),
+                        proof.class.virtual_loops()
+                    );
+                }
+            }
+            assert!(matches!(
+                proof.free_virtual_zero_supports(&family, &shifted, 1),
+                Err(Error::Limit(_))
+            ));
+            assert!(proof.free_virtual_zero_supports(&family, &[], 16).is_err());
+        }
+        assert!(matches!(
+            checked_flat_subsets(usize::MAX, 8, usize::MAX),
+            Err(Error::Limit(_))
+        ));
     }
 }

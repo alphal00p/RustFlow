@@ -1,0 +1,1262 @@
+[
+  {
+    "cuts": [
+      1,
+      5
+    ],
+    "parameter_slots": [
+      0,
+      2,
+      4,
+      6,
+      7,
+      8
+    ],
+    "pure_transfer_slots": [
+      3
+    ],
+    "routed_rows": [
+      [
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "-1",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "0",
+        "0"
+      ],
+      [
+        "-1",
+        "1",
+        "0",
+        "1"
+      ],
+      [
+        "-1",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "-1"
+      ]
+    ],
+    "U": [
+      {
+        "powers": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      }
+    ],
+    "V": [
+      {
+        "powers": [
+          0,
+          1,
+          0,
+          1,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          0,
+          1,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          1,
+          1,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          1,
+          0,
+          1,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      }
+    ],
+    "positive_coefficients_verified": true,
+    "G_points": 61,
+    "candidate_eta_facets": [
+      {
+        "parameter_scalings": [
+          -1,
+          -1,
+          0,
+          0,
+          -1,
+          -1
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 26
+      },
+      {
+        "parameter_scalings": [
+          -1,
+          0,
+          0,
+          -1,
+          -1,
+          0
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 11
+      },
+      {
+        "parameter_scalings": [
+          -1,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 21
+      },
+      {
+        "parameter_scalings": [
+          0,
+          -1,
+          -1,
+          0,
+          -1,
+          0
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 11
+      },
+      {
+        "parameter_scalings": [
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 14
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 26
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          -1,
+          0,
+          -1,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 21
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 14
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 14
+      }
+    ],
+    "facet_search_complete": false,
+    "admission": false
+  },
+  {
+    "cuts": [
+      1,
+      7
+    ],
+    "parameter_slots": [
+      2,
+      3,
+      4,
+      5,
+      6,
+      8
+    ],
+    "pure_transfer_slots": [
+      0
+    ],
+    "routed_rows": [
+      [
+        "1",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "1",
+        "-1",
+        "0",
+        "-1"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "-1"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "-1"
+      ],
+      [
+        "0",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "-1",
+        "-1",
+        "0"
+      ]
+    ],
+    "U": [
+      {
+        "powers": [
+          0,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      }
+    ],
+    "V": [
+      {
+        "powers": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          1,
+          0,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      }
+    ],
+    "positive_coefficients_verified": true,
+    "G_points": 61,
+    "candidate_eta_facets": [
+      {
+        "parameter_scalings": [
+          -1,
+          -1,
+          0,
+          -1,
+          -1,
+          0
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 26
+      },
+      {
+        "parameter_scalings": [
+          -1,
+          0,
+          -1,
+          -1,
+          0,
+          0
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 11
+      },
+      {
+        "parameter_scalings": [
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 14
+      },
+      {
+        "parameter_scalings": [
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          -1
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 11
+      },
+      {
+        "parameter_scalings": [
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 21
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          -1,
+          -1,
+          -1,
+          -1
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 26
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          -1,
+          -1,
+          0,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 21
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 14
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 14
+      }
+    ],
+    "facet_search_complete": false,
+    "admission": false
+  },
+  {
+    "cuts": [
+      5,
+      7
+    ],
+    "parameter_slots": [
+      0,
+      1,
+      2,
+      3,
+      6,
+      8
+    ],
+    "pure_transfer_slots": [
+      4
+    ],
+    "routed_rows": [
+      [
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      [
+        "-1",
+        "1",
+        "1",
+        "0"
+      ],
+      [
+        "1",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      [
+        "1",
+        "-1",
+        "-1",
+        "1"
+      ],
+      [
+        "0",
+        "-1",
+        "0",
+        "0"
+      ],
+      [
+        "0",
+        "0",
+        "1",
+        "-1"
+      ]
+    ],
+    "U": [
+      {
+        "powers": [
+          0,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          1,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          0,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          1,
+          0,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          0,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      }
+    ],
+    "V": [
+      {
+        "powers": [
+          0,
+          0,
+          0,
+          1,
+          1,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          1,
+          0,
+          1,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          0,
+          1,
+          1,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          0,
+          1,
+          0,
+          0,
+          1,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          0,
+          1,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          1,
+          0,
+          1
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          0,
+          1,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          1,
+          0,
+          1,
+          0
+        ],
+        "coefficient": "1"
+      },
+      {
+        "powers": [
+          1,
+          0,
+          1,
+          1,
+          0,
+          0
+        ],
+        "coefficient": "1"
+      }
+    ],
+    "positive_coefficients_verified": true,
+    "G_points": 61,
+    "candidate_eta_facets": [
+      {
+        "parameter_scalings": [
+          -1,
+          -1,
+          -1,
+          0,
+          0,
+          -1
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 26
+      },
+      {
+        "parameter_scalings": [
+          -1,
+          -1,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 11
+      },
+      {
+        "parameter_scalings": [
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 21
+      },
+      {
+        "parameter_scalings": [
+          0,
+          -1,
+          -1,
+          -1,
+          -1,
+          0
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 26
+      },
+      {
+        "parameter_scalings": [
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          -1
+        ],
+        "leading_G_power": -2,
+        "twice_D_coefficient": 2,
+        "face_points": 11
+      },
+      {
+        "parameter_scalings": [
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 21
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 14
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          0,
+          0,
+          -1,
+          0
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 14
+      },
+      {
+        "parameter_scalings": [
+          0,
+          0,
+          0,
+          0,
+          0,
+          -1
+        ],
+        "leading_G_power": -1,
+        "twice_D_coefficient": 1,
+        "face_points": 14
+      }
+    ],
+    "facet_search_complete": false,
+    "admission": false
+  }
+]

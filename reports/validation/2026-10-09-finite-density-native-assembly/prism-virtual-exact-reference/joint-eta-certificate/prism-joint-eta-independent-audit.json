@@ -1,0 +1,41 @@
+{
+  "scope": "Independent replay of every exact map, positive-unit factor, Jacobian and full branching/volume coverage. No integral values or production admission.",
+  "sector_count": 3008,
+  "chart_count": 720,
+  "per_chart_original_cube_volume": "1/120",
+  "total_projective_max_gauge_volume": "6",
+  "complete_branch_points": 2068,
+  "zero_D_axes": 940,
+  "zero_axis_all_original_alpha_valuations_zero": true,
+  "positive_D_axes": 7428,
+  "rank6_P7_strict_D_lower_bound": "18",
+  "bound_witness": {
+    "order": "aebcdf",
+    "trail": [
+      {
+        "set": [
+          1,
+          5
+        ],
+        "pivot": 1
+      },
+      {
+        "set": [
+          0,
+          5
+        ],
+        "pivot": 0
+      },
+      {
+        "set": [
+          2,
+          5
+        ],
+        "pivot": 2
+      }
+    ],
+    "axis": 1,
+    "slope": "1/2",
+    "constant": "-9"
+  }
+}

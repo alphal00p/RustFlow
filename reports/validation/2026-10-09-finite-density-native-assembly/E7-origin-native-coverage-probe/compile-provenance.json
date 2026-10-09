@@ -1,0 +1,33 @@
+{
+  "compiler": "rustc1.97.1 via nix develop",
+  "compile_scope": "standalone diagnostic, no Cargo build or production edits; elapsed compile time not measured",
+  "source": "native-domain-probe.rs",
+  "optimization": "opt-level1, debuginfo0",
+  "files": [
+    {
+      "path": "/tmp/e7_native_domain_probe",
+      "sha256": "97d56bb22088efdde66b296aec2a3b8aba339ab504501d33ec0097b33410289a",
+      "bytes": 425030456
+    },
+    {
+      "path": "/tmp/e7_native_domain_probe.rs",
+      "sha256": "b1c5a5bb2b3ad709c385f3837ecd3a0e529377da1d985b9b1e0e3ce8df6caee8",
+      "bytes": 7078
+    },
+    {
+      "path": "target/release/deps/librustred-42398b4d6555f617.rlib",
+      "sha256": "2fdfff0967079c8164d9145d7af545f2a53876c3107de4d8b2f546d56afcc46c",
+      "bytes": 435951328
+    },
+    {
+      "path": "target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60",
+      "bytes": 2197214
+    },
+    {
+      "path": "target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    }
+  ]
+}

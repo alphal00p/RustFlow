@@ -1,0 +1,105 @@
+
+running 1 test
+prism native replay: Reduction { integrals: 25 }
+prism native replay: SectorReduction { active_lines: 6, integrals: 1, visited: 0 }
+prism native replay: SectorReduced { integrals: 1, seeds: 1, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: Substitution { rules: 5 }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 0, terminals: 0, minimum_lines: 6, backward: true, weighted: false }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 25, terminals: 24, minimum_lines: 0, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 5, remaining: 24 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 4, visited: 5 }
+prism native replay: SectorReduced { integrals: 4, seeds: 3, rows: 23, exact_trace_rows: 4, elapsed_ms: 1, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 1, visited: 9 }
+prism native replay: SectorReduced { integrals: 1, seeds: 1, rows: 7, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 2, visited: 10 }
+prism native replay: SectorReduced { integrals: 2, seeds: 2, rows: 16, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 1, visited: 12 }
+prism native replay: SectorReduced { integrals: 1, seeds: 1, rows: 7, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 2, visited: 13 }
+prism native replay: SectorReduced { integrals: 2, seeds: 2, rows: 15, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 3, visited: 15 }
+prism native replay: SectorReduced { integrals: 3, seeds: 3, rows: 20, exact_trace_rows: 4, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: Substitution { rules: 18 }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 4, terminals: 3, minimum_lines: 5, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 18, remaining: 3 }
+prism native replay: SectorReduction { active_lines: 5, integrals: 3, visited: 18 }
+prism native replay: SectorReduced { integrals: 3, seeds: 9, rows: 72, exact_trace_rows: 12, elapsed_ms: 2, exact_ms: 1 }
+prism native replay: Substitution { rules: 21 }
+prism native replay: SubstitutionPlan { roots: 3, retained_nodes: 0, terminals: 0, minimum_lines: 5, backward: true, weighted: true }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 62, terminals: 45, minimum_lines: 0, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 21, remaining: 45 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 10, visited: 21 }
+prism native replay: SectorReduced { integrals: 10, seeds: 120, rows: 960, exact_trace_rows: 47, elapsed_ms: 10, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 10, visited: 31 }
+prism native replay: SectorReduced { integrals: 10, seeds: 21, rows: 167, exact_trace_rows: 25, elapsed_ms: 1, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 8, visited: 41 }
+prism native replay: SectorReduced { integrals: 8, seeds: 5, rows: 38, exact_trace_rows: 2, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 4, visited: 49 }
+prism native replay: SectorReduced { integrals: 4, seeds: 22, rows: 172, exact_trace_rows: 39, elapsed_ms: 2, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 1, visited: 53 }
+prism native replay: SectorReduced { integrals: 1, seeds: 1, rows: 7, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 3, visited: 54 }
+prism native replay: SectorReduced { integrals: 3, seeds: 3, rows: 22, exact_trace_rows: 2, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 1, visited: 57 }
+prism native replay: SectorReduced { integrals: 1, seeds: 1, rows: 7, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 7, visited: 58 }
+prism native replay: SectorReduced { integrals: 7, seeds: 120, rows: 960, exact_trace_rows: 5, elapsed_ms: 8, exact_ms: 0 }
+prism native replay: Substitution { rules: 63 }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 53, terminals: 14, minimum_lines: 4, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 65, remaining: 11 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 4, visited: 65 }
+prism native replay: SectorReduced { integrals: 4, seeds: 27, rows: 211, exact_trace_rows: 46, elapsed_ms: 2, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 4, visited: 69 }
+prism native replay: SectorReduced { integrals: 4, seeds: 19, rows: 150, exact_trace_rows: 35, elapsed_ms: 2, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 3, visited: 73 }
+prism native replay: SectorReduced { integrals: 3, seeds: 12, rows: 91, exact_trace_rows: 20, elapsed_ms: 1, exact_ms: 0 }
+prism native replay: Substitution { rules: 74 }
+prism native replay: SubstitutionPlan { roots: 13, retained_nodes: 13, terminals: 4, minimum_lines: 4, backward: true, weighted: true }
+prism native replay: ReductionFrontier { searched: 76, remaining: 2 }
+prism native replay: SectorReduction { active_lines: 4, integrals: 2, visited: 76 }
+prism native replay: SectorReduced { integrals: 2, seeds: 9, rows: 65, exact_trace_rows: 7, elapsed_ms: 0, exact_ms: 0 }
+prism native replay: Substitution { rules: 76 }
+prism native replay: SubstitutionPlan { roots: 4, retained_nodes: 2, terminals: 2, minimum_lines: 4, backward: true, weighted: true }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 110, terminals: 38, minimum_lines: 0, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 78, remaining: 33 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 24, visited: 78 }
+prism native replay: SectorReduced { integrals: 24, seeds: 140, rows: 1120, exact_trace_rows: 63, elapsed_ms: 12, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 9, visited: 102 }
+prism native replay: SectorReduced { integrals: 9, seeds: 15, rows: 114, exact_trace_rows: 30, elapsed_ms: 1, exact_ms: 0 }
+prism native replay: Substitution { rules: 108 }
+prism native replay: SubstitutionPlan { roots: 25, retained_nodes: 124, terminals: 20, minimum_lines: 3, backward: true, weighted: false }
+prism native replay: ReductionFrontier { searched: 111, remaining: 14 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 8, visited: 111 }
+prism native replay: SectorReduced { integrals: 8, seeds: 40, rows: 313, exact_trace_rows: 34, elapsed_ms: 3, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 6, visited: 119 }
+prism native replay: SectorReduced { integrals: 6, seeds: 123, rows: 984, exact_trace_rows: 23, elapsed_ms: 9, exact_ms: 0 }
+prism native replay: Substitution { rules: 121 }
+prism native replay: SubstitutionPlan { roots: 17, retained_nodes: 37, terminals: 15, minimum_lines: 3, backward: true, weighted: true }
+prism native replay: ReductionFrontier { searched: 125, remaining: 11 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 7, visited: 125 }
+prism native replay: SectorReduced { integrals: 7, seeds: 41, rows: 327, exact_trace_rows: 47, elapsed_ms: 4, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 4, visited: 132 }
+prism native replay: SectorReduced { integrals: 4, seeds: 14, rows: 110, exact_trace_rows: 37, elapsed_ms: 1, exact_ms: 0 }
+prism native replay: Substitution { rules: 132 }
+prism native replay: SubstitutionPlan { roots: 15, retained_nodes: 28, terminals: 10, minimum_lines: 3, backward: true, weighted: true }
+prism native replay: ReductionFrontier { searched: 136, remaining: 6 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 3, visited: 136 }
+prism native replay: SectorReduced { integrals: 3, seeds: 15, rows: 120, exact_trace_rows: 19, elapsed_ms: 1, exact_ms: 0 }
+prism native replay: SectorReduction { active_lines: 3, integrals: 3, visited: 139 }
+prism native replay: SectorReduced { integrals: 3, seeds: 22, rows: 169, exact_trace_rows: 47, elapsed_ms: 2, exact_ms: 0 }
+prism native replay: Substitution { rules: 138 }
+prism native replay: SubstitutionPlan { roots: 10, retained_nodes: 18, terminals: 4, minimum_lines: 3, backward: true, weighted: true }
+prism native replay: ReductionFrontier { searched: 142, remaining: 0 }
+
+thread 'optional_prism_candidates_are_native_exact_source_consequences' (119735) panicked at /tmp/finite_density_prism_virtual_replay.rs:133:5:
+bounded native replay left a nonzero common residual; candidate proof remains inconclusive
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test optional_prism_candidates_are_native_exact_source_consequences ... FAILED
+
+failures:
+
+failures:
+    optional_prism_candidates_are_native_exact_source_consequences
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 1 filtered out; finished in 0.12s
+

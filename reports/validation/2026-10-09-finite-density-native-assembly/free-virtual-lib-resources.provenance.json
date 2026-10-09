@@ -1,0 +1,16 @@
+{
+  "captured_utc": "2026-10-09T21:15:32.582167+00:00",
+  "command": [
+    "target/release/deps/symbolica_amflow-1bdbc910fbb47b04",
+    "finite_density::",
+    "--nocapture"
+  ],
+  "argument_files": {
+    "target/release/deps/symbolica_amflow-1bdbc910fbb47b04": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/symbolica_amflow-1bdbc910fbb47b04",
+      "sha256": "98bce6734ec06ae7a0f1d399e13686fd4441211bcef923d06aa47c16d7c1b2ed",
+      "size_bytes": 1249505008
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

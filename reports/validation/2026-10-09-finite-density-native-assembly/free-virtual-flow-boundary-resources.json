@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/finite_density_flow_boundary-93fe47e3ae5cecf9",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.11864349525421858,
+  "user_seconds": 0.131164,
+  "system_seconds": 0.085183,
+  "peak_child_rss_kib": 12308,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

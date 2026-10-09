@@ -1,0 +1,200 @@
+{
+  "schema": 1,
+  "status": "completed_native_L2_regressions_passed_work_paused_by_user",
+  "scope": "optional bound free-polynomial virtual zero certificates; full massless L2 sample/Laurent regression only; no four-loop closure/numerical acceptance",
+  "source_snapshot": "free-virtual-source-hashes.json",
+  "source_snapshot_sha256": "6ed453591592501288d4f5378cd469ed08b71becd049ad5f29e3e05eae5463fd",
+  "snapshot_file_count": 293,
+  "approved_test_only_delta": "free-virtual-source-test-delta.json",
+  "approved_test_only_delta_sha256": "4d6b45386b11945ae9c02b32226f3b08c902398bb2e973197cd6f4846a498640",
+  "comparisons": [
+    {
+      "path": "free-virtual-fixed-reference-comparison.json",
+      "sha256": "dc390c41e50d609b608ad12642b8fae47398299dfba48ef806580489fa98c0f6",
+      "reference_comparisons": 40,
+      "independent_refinements": 30
+    },
+    {
+      "path": "free-virtual-laurent-reference-comparison.json",
+      "sha256": "33d94ba5af6b5679f857e4a38f6ba9ef602dfe2b507080d1b20b883b2c499220",
+      "reference_comparisons": 30,
+      "independent_refinements": 24
+    }
+  ],
+  "total_independent_reference_comparisons": 70,
+  "total_independent_refinement_comparisons": 54,
+  "runs": [
+    {
+      "run": "free-virtual-L2-fixed",
+      "resources": "free-virtual-L2-fixed-resources.json",
+      "resources_sha256": "d6b9fde5c02b0092979f04665fee86962dd3f68ce1d0aff420f339141bc95f6d",
+      "result": {
+        "command": [
+          "timeout",
+          "1200",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_two_loop_sunset.json",
+          "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+          "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8,28:60:8,28:80:8,28:80:12",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/free-virtual-L2-fixed",
+          "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+          "--ignored",
+          "--exact",
+          "runtime_graph_full_amplitude",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 20.10449205338955,
+        "user_seconds": 19.663709,
+        "system_seconds": 0.20776699999999998,
+        "peak_child_rss_kib": 52076,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "prelaunch_executable_provenance": "free-virtual-L2-fixed-resources.provenance.json",
+      "provenance_sha256": "b1f2c3d1d921b92dff09278d79f45de9f8ba0cc3e4ab745af5b90fcd7e7f68e3",
+      "captured": {
+        "captured_utc": "2026-10-09T21:18:24.766810+00:00",
+        "command": [
+          "timeout",
+          "1200",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_two_loop_sunset.json",
+          "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+          "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8,28:60:8,28:80:8,28:80:12",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/free-virtual-L2-fixed",
+          "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+          "--ignored",
+          "--exact",
+          "runtime_graph_full_amplitude",
+          "--nocapture"
+        ],
+        "argument_files": {
+          "timeout": {
+            "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+            "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+            "size_bytes": 1768632
+          },
+          "env": {
+            "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+            "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+            "size_bytes": 1768632
+          },
+          "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe": {
+            "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+            "sha256": "1a607bf977169b5af0fd1c75e74d1507f256b5c7dc693cb3d57dd7080c289a36",
+            "size_bytes": 1286573768
+          }
+        },
+        "scope": "existing file arguments and PATH executables before child launch"
+      }
+    },
+    {
+      "run": "free-virtual-L2-laurent",
+      "resources": "free-virtual-L2-laurent-resources.json",
+      "resources_sha256": "31acfb1d7adfd1f8596facb86343b2b4872c73cc116dcc005f57b815508a0d9e",
+      "result": {
+        "command": [
+          "timeout",
+          "1800",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_two_loop_sunset.json",
+          "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+          "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8,28:60:8,28:80:8,28:80:12",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/free-virtual-L2-laurent",
+          "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+          "--ignored",
+          "--exact",
+          "runtime_graph_full_laurent",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 97.97398901777342,
+        "user_seconds": 96.880354,
+        "system_seconds": 0.223332,
+        "peak_child_rss_kib": 52224,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "prelaunch_executable_provenance": "free-virtual-L2-laurent-resources.provenance.json",
+      "provenance_sha256": "2b3d6c95210db0334c724ae2fd2c77f0fcbb1b6fa9373c0d42013013f75f531d",
+      "captured": {
+        "captured_utc": "2026-10-09T21:18:24.771237+00:00",
+        "command": [
+          "timeout",
+          "1800",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massless_two_loop_sunset.json",
+          "RUSTFLOW_DENSITY_FLOW_EPSILON=-5/4",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+          "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8,28:60:8,28:80:8,28:80:12",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/free-virtual-L2-laurent",
+          "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+          "--ignored",
+          "--exact",
+          "runtime_graph_full_laurent",
+          "--nocapture"
+        ],
+        "argument_files": {
+          "timeout": {
+            "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+            "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+            "size_bytes": 1768632
+          },
+          "env": {
+            "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+            "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+            "size_bytes": 1768632
+          },
+          "target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe": {
+            "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-9b62fdc92cd50cfe",
+            "sha256": "1a607bf977169b5af0fd1c75e74d1507f256b5c7dc693cb3d57dd7080c289a36",
+            "size_bytes": 1286573768
+          }
+        },
+        "scope": "existing file arguments and PATH executables before child launch"
+      }
+    },
+    {
+      "run": "free-virtual-python",
+      "resources": "free-virtual-python-resources.json",
+      "resources_sha256": "123296d821c44130ea77ffd48fb65b4013441f33cc58fe17f96058b89faeb5a1",
+      "result": {
+        "command": [
+          "target/release/deps/python_finite_density-bede1c03c02f84bf",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.8576644998975098,
+        "user_seconds": 1.607184,
+        "system_seconds": 0.23052199999999998,
+        "peak_child_rss_kib": 30768,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "prelaunch_executable_provenance": "free-virtual-python-resources.provenance.json",
+      "provenance_sha256": "938b98841878860e615a0c91e6e59155b869b14d5f81786344c831accbfaff0a",
+      "captured": {
+        "captured_utc": "2026-10-09T21:18:28.900693+00:00",
+        "command": [
+          "target/release/deps/python_finite_density-bede1c03c02f84bf",
+          "--nocapture"
+        ],
+        "argument_files": {
+          "target/release/deps/python_finite_density-bede1c03c02f84bf": {
+            "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/python_finite_density-bede1c03c02f84bf",
+            "sha256": "aa7d36f5471c082d0cc80c677f34bc70d24b39c452196cdf1b013d761dfa7db5",
+            "size_bytes": 1222133200
+          }
+        },
+        "scope": "existing file arguments and PATH executables before child launch"
+      }
+    }
+  ],
+  "archives": "free-virtual-numerical-archives.json",
+  "archives_sha256": "9b03a961b870a6af58a162632c58642d51f7424888d0dcc6f732769ce79d8143",
+  "four_loop_native_predictions_compared": 0,
+  "supplied_oracle_numerical_records_compared": 0,
+  "E7_control_status": "Both bounded origin/free-zero variants remain explicitly incomplete; control resources and residual/frontier details are owned by their separate pilot report. No full numerical prediction exists.",
+  "uncertainty": "empirical independent reference/refinement comparisons, not rigorous interval error bounds"
+}

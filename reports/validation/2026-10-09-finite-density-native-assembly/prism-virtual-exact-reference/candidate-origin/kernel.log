@@ -1,0 +1,27 @@
+"RUSTFLOW THREAD CONFIGURATION: "InputForm[{"AbortPause" -> 2., "BusyWait" -> 0.01, "MathLinkTimeout" -> 15., "MKLThreadNumber" -> 1, "ParallelThreadNumber" -> 1, "RecoveryMode" -> "ReQueue", "RelaunchFailedKernels" -> False, "VectorParallelLengthThresholds" -> {32768, 8192, 8192, 8192}, "VectorVendorLengthThresholds" -> {128, 32, 32}}]
+"--------------------------------------------------"
+"AMFlow: package loaded\nAuthor: Rui-Jun Huang[huangrj2215@pku.edu.cn], Xiao Liu[xiao.liu@ucas.ac.cn] and Yan-Qing Ma[yqma@pku.edu.cn]\nCurrent version: 2.0\nRelease date: 10-July-2026"
+"--------------------------------------------------"
+SetAMFOptions -> {"AMFMode" -> {"Prescription", "Mass", "Propagator"}, "EndingScheme" -> {"Tradition", "Cutkosky", "SingleMass", "Trivial"}, "D0" -> 4, "WorkingPre" -> 100, "ExtraWorkingPre" -> 0, "ChopPre" -> 20, "XOrder" -> 100, "ExtraXOrder" -> 30, "LearnXOrder" -> -1, "TestXOrder" -> 5, "RationalizePre" -> 100, "RunLength" -> 1000, "UseCache" -> False, "SkipReduction" -> False, "RefineBasis" -> False, "DESolver" -> "CPP", "CacheName" -> "cache", "SplitTarget" -> True, "RecursionMode" -> "AMF", "DebugMode" -> False, "FTMode" -> {"Linear", "Branch", "All"}}
+SetReductionOptions -> {"IBPReducer" -> "FiniteFlow+LiteRed", "BlackBoxRank" -> 3, "BlackBoxDot" -> 0, "ComplexMode" -> True, "DeleteBlackBoxDirectory" -> False}
+"CheckDep: dependencies of current reducer:"
+"FiniteFlow.m" -> False
+"fflowmlink.so or fflowmlink.dylib" -> False
+"LiteIBP.m" -> False
+"LiteRed.m" -> False
+SetReducerOptions -> {"MaxPrime" -> 200, "MaxDegree" -> 1000, "EMSymmetry" -> False}
+"--------------------------------------------------"
+"To start evaluating a family of loop integrals, you need to define:\n - AMFlowInfo[\"Family\"] as the name of the family (should be a symbol)\n - AMFlowInfo[\"Loop\"] as a list of loop momenta like {l1, l2}\n - AMFlowInfo[\"Leg\"] as a list of external legs like {p1, p2, p3}\n - AMFlowInfo[\"Conservation\"] as a replacement rule of momentum conservation like {p3 -> -p1-p2}\n - AMFlowInfo[\"Replacement\"] as a list of complete replacement rules for scalar products among external legs like {p1^2 -> 0, p2^2 -> 0, p3^2 -> s} \n - AMFlowInfo[\"Propagator\"] as a list of complete inverse propagators like {l1^2-msq, l2^2, (l1+l2+p1)^2, ...}\n - AMFlowInfo[\"Numeric\"] as a list of replacement rules for involved mass scales like {s -> 100, msq -> 1}\n - AMFlowInfo[\"NThread\"] as the number of threads in use\nFor phase-space integrations, you also need to define:\n - AMFlowInfo[\"Prescription\"] as a list with the same length as AMFlowInfo[\"Loop\"], each element being 1, -1 or 0 specifying the Feynman prescription of the corresponding loop, where 1 means +i0, -1 means -i0 and 0 means no prescription at all\n - AMFlowInfo[\"Cut\"] as a list with the same length as AMFlowInfo[\"Propagator\"], each element being 1 or 0 specifying whether the corresponding propagator is on cut or not"
+"--------------------------------------------------"
+"Please keep clear of these global variables during computations:\n - eps, which serves as the dimensional regulator\n - eta, which serves as the auxiliary mass parameter\n - j, which serves as the Head of integrals"
+"--------------------------------------------------"
+SetReductionOptions -> {"IBPReducer" -> "Kira", "BlackBoxRank" -> 3, "BlackBoxDot" -> 0, "ComplexMode" -> True, "DeleteBlackBoxDirectory" -> False}
+"CheckDep: dependencies of current reducer:"
+"Kira executable" -> True
+"Fermat executable" -> True
+"Ratracer executable (optional)" -> False
+"FastRec (optional; private at the moment)" -> False
+SetReducerOptions -> {"IntegralOrder" -> 5, "ReductionMode" -> "Kira", "UseMaximalCut" -> True, "ProbeLevel" -> 1}
+SetAMFOptions -> {"AMFMode" -> {"Prescription", "Mass", "Propagator"}, "EndingScheme" -> {"Tradition", "Cutkosky", "SingleMass", "Trivial"}, "D0" -> 4, "WorkingPre" -> 100, "ExtraWorkingPre" -> 0, "ChopPre" -> 20, "XOrder" -> 100, "ExtraXOrder" -> 30, "LearnXOrder" -> -1, "TestXOrder" -> 5, "RationalizePre" -> 100, "RunLength" -> 1000, "UseCache" -> False, "SkipReduction" -> False, "RefineBasis" -> False, "DESolver" -> "CPP", "CacheName" -> "work/combination-reduction", "SplitTarget" -> True, "RecursionMode" -> "AMF", "DebugMode" -> False, "FTMode" -> {"Linear", "Branch", "All"}}
+"PRISM COMPLETE COMBINATIONS REDUCED: "3" masters before coefficient cancellation; "3" surviving."
+"PRISM SYMBOLIC VIRTUAL REDUCTION PASS"

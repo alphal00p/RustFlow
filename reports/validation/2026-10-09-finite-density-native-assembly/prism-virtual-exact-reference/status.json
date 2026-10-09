@@ -1,0 +1,71 @@
+{
+  "schema": 1,
+  "status": "five_virtual_rational_coefficient_identities_independently_verified_by_native_exact_replay",
+  "complete_prism_reference": false,
+  "full_thermal_mass_jet_proved": false,
+  "candidate_origin": "optional bounded upstream AMFlow/Kira generic-epsilon symbolic reduction, retained separately under candidate-origin; its original pending-native status is historical",
+  "verification": "RustFlow ordinary RustRedBackend exact SourceSystem/SectorSolver replay with native routing symmetry and bubble_subloops=false; no AMF, external solver or numerical values used",
+  "candidate_count": 5,
+  "masters": [
+    [
+      0,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+    ]
+  ],
+  "native_replay_wall_seconds": 0.16515650134533644,
+  "native_replay_peak_rss_kib": 18492,
+  "independent_nonzero_conditions": "native-replay/result.json plus candidate raw denominators in native-replay/input.json",
+  "first_attempt": "native-replay-without-symmetry was inconclusive only by the exact K/L sunrise routing difference; retained unchanged",
+  "source_snapshot": "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-source-hashes.json",
+  "source_snapshot_sha256": "213f88509e23e50029dee577049f88e22f35f2e9a6650ee8dab3089981094835",
+  "standalone_source_sha256": "9bdc929707471cb9db2111321502a6388e3c727dfdb89ef5a0d846a14c348dba",
+  "integrated_test": "tests/finite_density_prism_virtual_replay.rs",
+  "integrated_test_sha256": "fff1a7ac5e27acee44ac05cde73bb12f27b37f0112ffaffcb15d828a30401c09",
+  "integrated_test_build_status": "coordinated_release_build_passed; fresh binary2_of2_tests_passed",
+  "candidate_fixture": "fixtures/finite_density/prism_virtual_candidate_relations.json",
+  "candidate_fixture_sha256": "0f57d536eb5e7296d4aceff6e75e22c08a0f847add18b12b98a76ef218869336",
+  "runtime_required_external_solvers": [],
+  "native_predictions_read": 0,
+  "oracle_records_read": 0,
+  "remaining": [
+    "common regulated offshell mass-jet continuation for coupled two-virtual prism cut sectors",
+    "complete three-cut compact/simplex endpoint-subtraction forest",
+    "complete cut assembly before regulator removal",
+    "refined full Laurent reference values with independent precision estimates"
+  ],
+  "integrated_gate": {
+    "passed": 2,
+    "failed": 0,
+    "resources": "native-cargo-replay/resources.json",
+    "resources_sha256": "2eaf4028e15d324370ec71559a2619a95079c8c9210db933ce810d0d7f5c254b",
+    "wall_seconds": 0.315822122618556,
+    "peak_rss_kib": 18472,
+    "source_snapshot": "free-virtual-source-hashes.json",
+    "source_snapshot_sha256": "6ed453591592501288d4f5378cd469ed08b71becd049ad5f29e3e05eae5463fd"
+  },
+  "joint_eta_proof_status": "Exact original-six-active-slot sector maps, coverage, high-D tensor bound and localized UV-subtracted Mellin argument independently audited; compact/thermal continuation write-up and all active-support generalization unfinished at user pause.",
+  "resume_note": "All proof drafts and exact audit artifacts preserved under joint-eta-certificate; scripts retain original /tmp paths. Do not infer production admission or a complete reference."
+}

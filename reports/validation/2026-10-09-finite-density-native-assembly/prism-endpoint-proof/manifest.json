@@ -1,0 +1,13 @@
+{
+  "status": "paused proof draft; no production admission",
+  "captured_utc": "2026-10-09T21:22:09.551561+00:00",
+  "files": {
+    "checkpoint.md": "96e6b5ea877b7b2dd699b5f2d9138dcd6362f41a1a59dbde41a13e9ef992c8c5",
+    "prism-joint-eta-independent-audit.json": "e60e57e4c6469911474c0e9bbb3b0ecd6cde999a692c99a31b7ad4cfbb58ce64",
+    "prism-joint-eta-sector-probe.json": "08f6f5c63156a15dd876aa2ee3197df680ecc156b5fbdbbc9d7b81b4dc88a968",
+    "prism_joint_eta_independent_audit.py": "166ba8541f0063c9dcfedd73f1d0faa27402a54016d826f459042ac3bebd5632",
+    "prism_joint_eta_sector_probe.py": "ff03c8d0d2922ed18b3e7d717ba445367411acc81523b1011a10b97918fb6a81",
+    "rustflow_prism_parametric.json": "a04b8fd04584a975dadc4829ad5aaee35a7e6c020fccdfc90b6b30b516fc6bfe",
+    "rustflow_prism_parametric.py": "b709e1177e74d8a41e7cdbca63adf6863044737719db5a1e37c6f5ef9992eaed"
+  }
+}
