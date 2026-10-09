@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "1800",
+    "target/release/deps/finite_density_native_flow-2ad25996bc8f14af",
+    "complete_massive_sunset_laurent_refinement",
+    "--ignored",
+    "--exact",
+    "--nocapture"
+  ],
+  "exit_code": 124,
+  "wall_seconds": 1800.016075691674,
+  "user_seconds": 1783.347319,
+  "system_seconds": 1.532365,
+  "peak_child_rss_kib": 49264,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

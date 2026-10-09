@@ -3,8 +3,8 @@
 Status: production storage adapter implemented and tested, including native
 closure, integrated boundaries and endpoints at padded capacities. The implementation does not broaden contour, endpoint,
 or distributional admission. The complete massive sunset has already passed
-its fixed-dimension reference comparison; Laurent comparison and mandatory
-four-loop evaluations remain separate gates.
+its fixed-dimension and five-profile Laurent reference comparisons. Mandatory
+four-loop evaluations remain separate, incomplete gates.
 The native dependency inspected is RustRed commit
 `78969aab524b7d6a2eec36f59b01e9af1e04cc04`.
 

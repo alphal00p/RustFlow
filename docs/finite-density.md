@@ -417,7 +417,11 @@ Independent references now also cover both complete massive targets through
 Laurent order zero, with separate vacuum, cut and Fermi-surface coefficients;
 the [subtracted reference report](../reports/validation/2026-10-09-finite-density-native-assembly/independent-laurent-reference/README.md)
 passes quadrature, epsilon-grid and precision refinements. Complete native AMF
-Laurent predictions have not yet been compared with those references.
+Laurent coefficients through order zero now pass all 30 independent-reference
+comparisons and 24 precision, order, start-scale and epsilon-grid refinement
+comparisons across five profiles. The largest relative reference discrepancy is
+1.430e-18 and the largest refinement difference is 9.250e-45; these are empirical
+agreements, subject to the independent reference accuracy estimates.
 The public sample and Laurent commands have also evaluated the complete massive
 one-loop tadpole above and below support. Its scalar and raised sample values
 and four Laurent coefficients pass independent analytic comparisons; see the
@@ -480,14 +484,14 @@ at `d=2` and retains an explicit singular-threshold diagnostic.
 
 | Mandatory result | Current scope and missing evidence |
 | --- | --- |
-| Complete nonfactorized small graph | Full D=12/5 vacuum-plus-all-cuts assembly passes for both targets: 40 independent reference checks and 30 refinements; Laurent comparison pending |
+| Complete nonfactorized small graph | Full D=12/5 vacuum-plus-all-cuts assembly passes for both targets: 40 independent sample reference checks and 30 refinements; Laurent [-2,0] passes 30 reference checks and 24 refinements |
 | Generic weighted reduction | Exact requested-target/derivative closure and source replay pass for all massive-sunset cut sectors with bounded guard refinement; generic four-loop closure remains unresolved |
 | Integrated occupied boundaries | Polynomial compact and recursively integrated hard coefficients verified; generic retained soft poles and recursive weighted values unresolved |
 | Regulated common-contour continuation | Massive sunset and routing-dependent heavy-edge sufficient domains derived; see [contour certificates](finite-density-contours.md); thresholds, massless pinches and general admission remain separate |
 | Full massive normalization | Complete massive-sunset scalar and raised-numerator values pass independent raw-Euclidean comparisons, including the nonzero vacuum and raised surface contributions |
 | Physical endpoint reconstruction | Full massive-sunset endpoint passes at D=12/5 with 40 guard digits; cancellation/divergence/depth regressions pass; generic massless endpoint admission remains open |
 | Three four-loop families | Exact distinct graph certificates available; independent E7 raised-line reference generated; all native predictions and the other two supplemental references absent |
-| Ten stable Laurent digits | Complete fixed-dimension precision, order and start-scale refinements pass; massive-sunset Laurent comparison pending; no AMF-to-oracle comparison |
+| Ten stable Laurent digits | Complete massive-sunset Laurent comparison passes five profiles, independently changing digits, order, start scale and epsilon grid; no four-loop AMF-to-oracle comparison |
 
 An independent validation-only reference for both complete massive sunset targets
 has been generated at D=12/5 using direct Schwinger/Feynman parameters and compact
@@ -498,7 +502,9 @@ targets across four configurations. All 40 vacuum/cut/total comparisons and
 30 independent refinement checks pass the 1e-12 relative criterion; the largest
 relative reference discrepancy is 9.449e-36. Agreement is empirical, subject to
 the independent reference's refinement estimates rather than a rigorous interval
-error bound. Laurent coefficients at epsilon=0 remain a separate pending gate. See the
+error bound. The separate complete Laurent comparison also passes all 30
+reference checks and 24 refinements; no four-loop numerical gate is completed
+by this small-graph result. See the
 [reference derivation](finite-density-reference.md) and the
 [native-assembly report](../reports/validation/2026-10-09-finite-density-native-assembly/README.md)
 for exact measurements, source provenance and failure records.

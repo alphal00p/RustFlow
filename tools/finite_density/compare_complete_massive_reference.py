@@ -80,9 +80,13 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mode", choices=("sample", "laurent"))
     parser.add_argument("--predictions", required=True, type=Path)
+    parser.add_argument("--additional-predictions", action="append", type=Path, default=[],
+                        help="additional bounded-run directories; input definitions must match and duplicate profiles must be byte-identical")
     parser.add_argument("--output", required=True, type=Path)
     args = parser.parse_args()
     prediction_dir = args.predictions.resolve()
+    prediction_dirs = [prediction_dir] + [path.resolve() for path in args.additional_predictions]
+    require(len(set(prediction_dirs)) == len(prediction_dirs), "duplicate prediction directory")
     output = args.output.resolve()
     laurent = args.mode == "laurent"
     reference_dir = REPORT / ("independent-laurent-reference" if laurent else "independent-reference")
@@ -90,14 +94,23 @@ def main():
     reference_path = reference_dir / ("laurent-64-80-20000.json" if laurent else "quadrature-64-60.json")
     input_path = prediction_dir / "input.json"
     configurations = LAURENT_CONFIGURATIONS if laurent else CONFIGURATIONS
-    paths = [input_path, provenance_path, reference_path] + [
-        prediction_dir / prediction_filename(configuration)
-        for configuration in configurations
-    ]
+    input_paths = [directory / "input.json" for directory in prediction_dirs]
+    prediction_paths = []
+    duplicate_paths = []
+    for configuration in configurations:
+        candidates = [directory / prediction_filename(configuration) for directory in prediction_dirs]
+        candidates = [path for path in candidates if path.is_file()]
+        require(candidates, f"missing completed prediction for {configuration}")
+        require(all(digest(path) == digest(candidates[0]) for path in candidates[1:]),
+                f"conflicting predictions for {configuration}")
+        prediction_paths.append(candidates[0])
+        duplicate_paths.extend(candidates[1:])
+    paths = input_paths + [provenance_path, reference_path] + prediction_paths + duplicate_paths
     require(output not in [p.resolve() for p in paths], "output must not replace any input artifact")
     provenance = read(provenance_path)
     reference = read(reference_path)
     require(read(input_path) == provenance["definition"], "input definition differs from the reference")
+    require(all(read(path) == read(input_path) for path in input_paths[1:]), "bounded runs used different input definitions")
     require(provenance["status"] == "refinement_passed", "reference refinement has not passed")
     require(provenance["normalization"] == NORMALIZATION, "unexpected reference normalization")
     if laurent:
@@ -109,7 +122,7 @@ def main():
     comparisons, refinements, assembly_checks = [], [], []
     previous = None
     common_profile = None
-    for config_index, (configuration, path) in enumerate(zip(configurations, paths[3:])):
+    for config_index, (configuration, path) in enumerate(zip(configurations, prediction_paths)):
         digits, order, start = configuration[:3]
         record = read(path)
         require(record["normalization"] == NORMALIZATION, "unexpected prediction normalization")
@@ -175,6 +188,7 @@ def main():
         "configuration_fields": list(VARIED_SETTINGS[:4 if laurent else 3]),
         "configurations": configurations,
         "invariant_profile": common_profile,
+        "prediction_directories": [label(path) for path in prediction_dirs],
         "reference_comparison_count": len(comparisons),
         "independent_refinement_comparison_count": len(refinements),
         "supplied_oracle_numerical_records_compared": 0,

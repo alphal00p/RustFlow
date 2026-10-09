@@ -92,7 +92,9 @@ preserves measured differences and failure evidence. Its independent Laurent
 extension through orders [-2,0] now passes 108 component-coefficient refinement
 comparisons and six analytic UV-residue checks, using six-sector subtraction and
 exact rational interpolation; the empirical errors are not rigorous interval
-bounds. Complete native Laurent comparison remains pending.
+bounds. Complete native Laurent comparison now passes 30 independent-reference
+checks and 24 refinements across five profiles, including a separate epsilon
+grid change. Required four-loop numerical comparisons remain absent.
 Concrete reference-only kernels and the E8 shared-pole obstruction are recorded
 in [the remaining-reference investigation](finite-density-missing-references.md).
 No E8 or prism supplemental reference values have been generated, and their

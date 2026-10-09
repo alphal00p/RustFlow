@@ -63,8 +63,10 @@ dimensional-origin admission.
 
 The complete massive example at D=12/5, including both requested targets,
 vacuum and every cut sector, passed 40 independent reference comparisons and
-30 refinements. Its full Laurent comparison remains pending, and no required
-four-loop native numerical comparison has passed. Storage capacity validation
+30 refinements. Its complete Laurent coefficients through order zero also pass
+30 independent-reference checks and 24 refinements across five profiles,
+including a separate epsilon-grid change. No required four-loop native
+numerical comparison has passed. Storage capacity validation
 also compared the p=7 and p=9 occupied flows against capacity 12, including
 native closure, boundaries and endpoints.
 See [finite-density.md](finite-density.md) for the exact measure and current scope.

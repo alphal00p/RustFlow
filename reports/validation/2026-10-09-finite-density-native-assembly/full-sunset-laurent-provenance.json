@@ -1,0 +1,51 @@
+{
+  "schema": 1,
+  "source_commit": "d005410fcf13be7219318eb81dbf698b9fb739ae",
+  "executable_sha256": "81869ef9c8b3458fc8c26cadc58795db736d4f72ad438fe671dbb66bede3b2e2",
+  "source_snapshot": "frontier-sector-source-hashes.json",
+  "test": "complete_massive_sunset_laurent_refinement",
+  "scope": "Pre-capacity implementation, run from the binary compiled before d005410 was committed. The terminal test assertion override in frontier-sector-regressions.json does not affect this binary. The running executable was preserved under /tmp before the next build replaced its original path. Predictions and native programs are saved before reference comparison.",
+  "initial_process_limit_seconds": 1800,
+  "initial_report": "full-sunset-laurent-frontier-resources.json",
+  "initial_exit": "1800-second timeout after the first three profiles had saved successful predictions; the partially evaluated fourth profile is not a completed prediction",
+  "resume_report": "full-sunset-laurent-resume-resources.json",
+  "resume_profiles": [
+    [
+      28,
+      80,
+      12,
+      1000
+    ],
+    [
+      28,
+      80,
+      12,
+      2000
+    ]
+  ],
+  "resume_process_limit_seconds": 1800,
+  "resume_executable": "same preserved executable and SHA256; no capacity source changes enter either Laurent run",
+  "status": "all_five_saved_profiles_compared_successfully",
+  "reference_comparison_report": "full-sunset-laurent-reference-comparison.json",
+  "reference_comparisons": 30,
+  "independent_refinement_comparisons": 24,
+  "lossless_raw_logs": [
+    {
+      "original_path": "full-sunset-laurent-frontier-resources.log",
+      "archive_path": "full-sunset-laurent-frontier-resources.log.gz",
+      "original_sha256": "d44a08a3e8b407d5c035ecf2370a5c59b730283f4522429ca1b0cdb9c439cb48",
+      "archive_sha256": "cfa59ef7b3bb0b7dba2781c999fff2e5ef3c65d394a1b14fecf806e7a2be42b9",
+      "original_bytes": 3693317,
+      "archive_bytes": 34652
+    },
+    {
+      "original_path": "full-sunset-laurent-resume-resources.log",
+      "archive_path": "full-sunset-laurent-resume-resources.log.gz",
+      "original_sha256": "269c40789aae90f3c5b51565e33ce228941a5fb50c3389399d59118a3531604e",
+      "archive_sha256": "d072303c8706c8509bfb7080ca7e0d4035fc57517a40fe5b1aa712ed4a5a442e",
+      "original_bytes": 2134105,
+      "archive_bytes": 22248
+    }
+  ],
+  "log_encoding": "gzip, original bytes preserved; mtime=0"
+}

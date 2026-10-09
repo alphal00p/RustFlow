@@ -1409,7 +1409,7 @@
       0
     ],
     "reference_derivation": "docs/finite-density-reference.md",
-    "attainable_comparison_precision": "All 12 reference components/totals pass independent node and precision refinements at D=12/5. All 108 Laurent component-coefficient refinement comparisons and six analytic UV-residue checks pass; largest relative quadrature change 3.48e-17, epsilon-grid change 1.0042e-22 and precision change 8.98e-53. These empirical changes are not rigorous interval bounds. Native fixed-dimension comparisons are recorded separately; complete native Laurent comparison is pending.",
+    "attainable_comparison_precision": "All 12 reference components/totals pass independent node and precision refinements at D=12/5. All 108 Laurent component-coefficient refinement comparisons and six analytic UV-residue checks pass; largest relative quadrature change 3.48e-17, epsilon-grid change 1.0042e-22 and precision change 8.98e-53. These empirical changes are not rigorous interval bounds. Native fixed-dimension and complete Laurent comparisons pass and are recorded separately.",
     "native_comparison": {
       "status": "full_amplitude_and_all_sectors_passed_at_D_12_over_5",
       "report": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-reference-comparison.json",
@@ -1425,6 +1425,60 @@
       "full_amplitude_compared": true,
       "laurent_coefficients_compared": 0,
       "accuracy_caution": "Observed agreement; independent reference refinement estimates are not rigorous interval bounds."
+    },
+    "native_laurent_comparison": {
+      "status": "passed_complete_massive_amplitude",
+      "report": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-laurent-reference-comparison.json",
+      "orders": [
+        -2,
+        0
+      ],
+      "targets": 2,
+      "configurations": 5,
+      "reference_comparisons": 30,
+      "independent_refinement_comparisons": 24,
+      "configurations_digits_order_start_grid": [
+        [
+          18,
+          60,
+          8,
+          1000
+        ],
+        [
+          28,
+          60,
+          8,
+          1000
+        ],
+        [
+          28,
+          80,
+          8,
+          1000
+        ],
+        [
+          28,
+          80,
+          12,
+          1000
+        ],
+        [
+          28,
+          80,
+          12,
+          2000
+        ]
+      ],
+      "guard_digits": 40,
+      "search_frontier_sectors": true,
+      "relative_tolerance": "1e-12",
+      "small_magnitude_threshold": "1e-18",
+      "small_absolute_tolerance": "1e-20",
+      "imaginary_zero_absolute_tolerance": "1e-20",
+      "largest_relative_reference_discrepancy": "1.429870667895067e-18",
+      "largest_relative_refinement_difference": "9.249528747539574e-45",
+      "amf_oracle_comparisons": 0,
+      "accuracy_caution": "Observed agreement against empirically refined independent quadrature references; not a rigorous interval error bound. Four-loop numerical acceptance is separate."
     },
     "native_closure": {
       "status": "passed_for_requested_targets_and_derivatives",
@@ -1542,7 +1596,7 @@
       "nonzero upper Fermi surface",
       "full massive assembly"
     ],
-    "evaluation_status": "full_fixed_dimension_amplitude_passed_native_laurent_pending"
+    "evaluation_status": "full_fixed_dimension_and_laurent_amplitude_passed"
   },
   "remaining_mandatory_cases": [
     {

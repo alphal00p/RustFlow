@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "1800",
+    "/tmp/rustflow-density-laurent-d005410",
+    "complete_massive_sunset_laurent_refinement",
+    "--ignored",
+    "--exact",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1238.9844685667194,
+  "user_seconds": 1226.010506,
+  "system_seconds": 1.066527,
+  "peak_child_rss_kib": 55296,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

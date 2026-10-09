@@ -3,11 +3,11 @@
 This report covers work after foundation checkpoint `530b7c8`. The foundation
 snapshot and its input/oracle provenance remain in
 [`../2026-10-09-finite-density-foundations/README.md`](../2026-10-09-finite-density-foundations/README.md).
-The selected complete massive-sunset amplitude passes at D=12/5. Native Laurent
-and mandatory four-loop acceptance remain pending; no AMF-to-oracle comparison
-has been performed.
+The selected complete massive-sunset amplitude passes at D=12/5 and through
+Laurent order zero. Mandatory four-loop acceptance remains pending; no numerical
+AMF-to-supplied-oracle comparison has been performed.
 
-## Current checkpoint: complete fixed-dimension amplitude passes
+## Current checkpoint: complete massive amplitude and Laurent coefficients pass
 
 The complete massive sunset now passes independent comparison at epsilon=4/5
 (D=12/5), for both the scalar target and the raised original medium-numerator
@@ -50,11 +50,31 @@ agreement test, not an exact master-basis transformation. Both predictions,
 their input definitions and their closed native programs are hashed in
 [`full-sunset-basis-comparison.json`](full-sunset-basis-comparison.json).
 
-Complete Laurent refinement requires five saved profiles, including the
-independent epsilon-grid denominator change from 1000 to 2000. That gate is
-pending. All mandatory four-loop native predictions and AMF-to-oracle
-comparisons remain absent. Earlier failures below are retained as historical
-evidence and are not the current fixed-dimension acceptance result.
+Complete Laurent refinement now also passes for both targets and orders
+`[-2,-1,0]`: **30 independent-reference comparisons and 24 refinements** across
+five saved profiles. The first four independently change digits, series order
+and occupied start scale as above, using epsilon-grid denominator 1000. The
+fifth repeats `(28,80,12)` with denominator 2000; guard precision and source
+search policy stay fixed. The largest relative reference discrepancy is
+1.429870667895067e-18 and the largest relative refinement difference is
+9.249528747539574e-45. Laurent comparisons require relative agreement within 1e-12 for magnitudes
+at least 1e-18, absolute agreement within 1e-20 below that threshold, and
+imaginary-zero agreement within 1e-20. They retain the empirical-reference
+qualification of the fixed-dimension gate. See
+[`full-sunset-laurent-reference-comparison.json`](full-sunset-laurent-reference-comparison.json)
+for all decimal differences and prediction/reference hashes.
+
+The initial bounded process reached its 1800-second limit after saving three
+profiles. Those predictions were preserved; the final two were resumed with
+the exact original prebuilt binary and completed in 1238.984469 seconds with peak RSS 55296 KiB. The
+run logs, resource records and timeout remain separate evidence rather than
+being reported as a single uninterrupted success. This comparison covers the
+complete sum, including the nonzero vacuum and all occupied contributions with
+the original raised numerator and moving support.
+
+All mandatory four-loop native predictions and AMF-to-oracle comparisons remain
+absent. Earlier failures below are retained as historical evidence and are not
+the current massive-small-graph acceptance result.
 
 ## Historical guard-refinement checkpoint: closure passed, endpoint failed
 
@@ -122,7 +142,7 @@ converted a second time.
 | Massive sunset vacuum and first single-cut endpoints | Passed both original targets at D=12/5 against independent quadrature: 16 comparisons across four configurations, plus 12 independent refinement checks |
 | Current native input regression | Refreshed frontier-sector binary passes 9/9; direct wall time 0.1008 seconds; binary hash and log retained |
 | Complete massive sunset at the physical endpoint | Passed at epsilon=4/5: all vacuum/cut/total values for both targets, 40 reference comparisons and 30 refinements |
-| Complete massive sunset Laurent coefficients | Pending five-profile native execution and independent comparison |
+| Complete massive sunset Laurent coefficients | PASS: five profiles, 30 independent-reference checks and 24 refinements for both targets through order zero |
 | Four-loop predictions and Laurent stability | Not performed |
 | AMF prediction records compared against the supplied oracle | 0 |
 | Independent analytic references compared against the supplied oracle | I37: three exact coefficient identities; reference-only check |
@@ -272,7 +292,7 @@ python3 tools/finite_density/compare_massive_reference.py
 
 These four historical unique sector/target comparisons did not complete the
 amplitude. The current checkpoint above now compares both single cuts, the
-two-cut term and the complete sum. Complete Laurent refinement and all
+two-cut term and the complete sum. At that earlier snapshot, complete Laurent refinement and all
 mandatory four-loop runs remain open. No AMF
 prediction has been compared against the supplied oracle, and no completed
 generic evaluator is claimed by this stage.
