@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "source_snapshot": "frontier-sector-source-hashes.json",
+  "scope": "Fresh direct native test executables; no numerical oracle or complete amplitude comparisons.",
+  "gates": [
+    {
+      "gate": "input",
+      "binary": "target/release/deps/finite_density_input-39d0974d115e1cc7",
+      "binary_sha256": "baf923f81d1c069ed1bdadfa4a0fd9639ec1516513fbf0a37ddd37b50941dc49",
+      "binary_mtime_utc_epoch": 1791573376.8016617,
+      "command": [
+        "target/release/deps/finite_density_input-39d0974d115e1cc7",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.10081354016438127,
+      "expected_test_count": 9,
+      "summary": [
+        "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s"
+      ]
+    },
+    {
+      "gate": "normalization",
+      "binary": "target/release/deps/finite_density_normalization-d2c3def69c1fec57",
+      "binary_sha256": "e1b5934540ced5c5f7b6e53b306ca019dbffd01abe524e08f95095fc96badd14",
+      "binary_mtime_utc_epoch": 1791573379.0836685,
+      "command": [
+        "target/release/deps/finite_density_normalization-d2c3def69c1fec57",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.27043019887059927,
+      "expected_test_count": 4,
+      "summary": [
+        "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.25s"
+      ]
+    },
+    {
+      "gate": "measure",
+      "binary": "target/release/deps/finite_density_measure-84b68ab92b3969d7",
+      "binary_sha256": "be601caf32e7c33a5663e62d94981d575221d0c4d545677c1b2ad2296bf57b38",
+      "binary_mtime_utc_epoch": 1791573376.0346594,
+      "command": [
+        "target/release/deps/finite_density_measure-84b68ab92b3969d7",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.10878679202869534,
+      "expected_test_count": 1,
+      "summary": [
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s"
+      ]
+    }
+  ],
+  "amplitude_predictions_compared": 0
+}

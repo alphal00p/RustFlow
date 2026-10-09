@@ -1,0 +1,14 @@
+
+running 1 test
+sunset N=9: native bounded discovery starting
+sunset N=9: DifferentialClosure { round: 0, requested: 4, basis_size: 66, new_derivatives: 38 }
+sunset N=9: Stage { name: "searching 65 new native weighted frontier labels, including constant sectors" }
+sunset N=9: DifferentialClosure { round: 1, requested: 88, basis_size: 62, new_derivatives: 6 }
+sunset N=9: Stage { name: "searching 53 new native weighted frontier labels, including constant sectors" }
+test physical_sunset_double_cut_native_closure has been running for over 60 seconds
+sunset N=9: DifferentialClosure { round: 2, requested: 143, basis_size: 11, new_derivatives: 0 }
+sunset N=9: closed, 112.951s; report=reports/validation/2026-10-09-finite-density-native-assembly/frontier-sectors/sunset-N9
+test physical_sunset_double_cut_native_closure ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 112.99s
+

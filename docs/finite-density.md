@@ -307,7 +307,8 @@ occupied sunset large-mass coefficients. At D=3, m1=m2=1/2 and mu=1, the leading
 Euclidean mixed and fully occupied sunset coefficients are respectively
 -1/(64*pi²) and +1/(64*pi²), obtained independently from occupied and uniform
 Gaussian seeds. These are boundary coefficients, not the sunset at its physical
-endpoint. The complete massive multiloop assembly remains required; a massless
+endpoint. Complete massive assembly is a separate validation gate; the selected
+sunset now passes it at D=12/5, including its nonzero vacuum term. A massless
 oracle cannot detect an omitted massive vacuum term. Current command results are
 recorded in the separate
 [`native-assembly` validation report](../reports/validation/2026-10-09-finite-density-native-assembly/README.md).
@@ -387,23 +388,25 @@ the smooth vector `u/(2E_i)`. The default remains the validated Lorentz
 presentation with polynomial completions. The option and exact certificates
 participate in program identity and evaluation provenance. It is an extension
 of the intermediate integral domain, not permission to replace a virtual pole
-by a compact moment, and it has not yet resolved the required two-cut system.
+by a compact moment. The successful selected two-cut system below uses the
+default polynomial completion domain.
 
 The complete generic numerical evaluator has not passed its required acceptance
-gates. With bounded native guard refinement, the massive sunset now passes exact
-requested-target and derivative closure: the two single-cut systems have basis
-sizes 7 and 6, and the fully occupied N9 system has basis size 64. These are
-closed generating sets, with no minimality or full index-domain coverage claim.
-The complete sample at epsilon=4/5 reached the N9 physical endpoint but failed
-with `Numerical("uncancelled physical endpoint divergence")`. This is the
-reported numerical failure, not a proof that the original massive integral
-diverges. No assembled prediction was written or accepted. Generic four-loop
-closure, integrated recursive soft boundaries, complete-amplitude numerical
-reconstruction and the acceptance gates remain open.
-The native vacuum and first occupied-cut endpoints for both massive targets
-have separately passed independent-reference comparisons at D=12/5, including
-working-precision, series-order and occupied-start-scale changes. This does not
-assemble the omitted second single-cut and two-cut contributions.
+gates. The selected massive sunset now passes complete numerical assembly at
+epsilon=4/5 (D=12/5), including its vacuum, both single cuts and the two-cut term
+for the scalar and raised original-numerator targets. All 40 independent
+reference comparisons and 30 precision/order/start-scale refinement comparisons
+pass, with 40 guard digits held fixed. Native frontier-sector discovery closes
+bases of sizes 6, 6 and 11. These are closed generating sets, with no minimality
+or full index-domain coverage claim.
+
+The earlier 64-element N9 basis also evaluates successfully when its guard
+precision is increased from 20 to 40 at otherwise unchanged numerical settings.
+Its saved predictions agree with the reduced bases at the matching profile;
+the earlier endpoint-divergence diagnostic was not evidence that the original
+massive integral diverges. Historical failures and their exact resource records
+remain in the validation report. Generic four-loop closure, integrated recursive
+soft boundaries and the remaining numerical acceptance gates stay open.
 Independent references now also cover both complete massive targets through
 Laurent order zero, with separate vacuum, cut and Fermi-surface coefficients;
 the [subtracted reference report](../reports/validation/2026-10-09-finite-density-native-assembly/independent-laurent-reference/README.md)
@@ -471,24 +474,25 @@ at `d=2` and retains an explicit singular-threshold diagnostic.
 
 | Mandatory result | Current scope and missing evidence |
 | --- | --- |
-| Complete nonfactorized small graph | All occupied systems close natively (basis sizes 7, 6, 64); full epsilon=4/5 attempt fails at the N9 physical endpoint, with no assembled prediction; earlier vacuum/cut-0 independent comparisons pass |
+| Complete nonfactorized small graph | Full D=12/5 vacuum-plus-all-cuts assembly passes for both targets: 40 independent reference checks and 30 refinements; Laurent comparison pending |
 | Generic weighted reduction | Exact requested-target/derivative closure and source replay pass for all massive-sunset cut sectors with bounded guard refinement; generic four-loop closure remains unresolved |
 | Integrated occupied boundaries | Polynomial compact and recursively integrated hard coefficients verified; generic retained soft poles and recursive weighted values unresolved |
 | Regulated common-contour continuation | Massive sunset and routing-dependent heavy-edge sufficient domains derived; see [contour certificates](finite-density-contours.md); thresholds, massless pinches and general admission remain separate |
-| Full massive normalization | Native mixed-measure/Wick adapters and massive seed/boundary regressions implemented; full massive multiloop assembly still missing |
-| Physical endpoint reconstruction | One-cut cancellation/divergence/depth regressions pass; the closed N9 full-sample endpoint currently reports an uncancelled divergence and blocks acceptance |
+| Full massive normalization | Complete massive-sunset scalar and raised-numerator values pass independent raw-Euclidean comparisons, including the nonzero vacuum and raised surface contributions |
+| Physical endpoint reconstruction | Full massive-sunset endpoint passes at D=12/5 with 40 guard digits; cancellation/divergence/depth regressions pass; generic massless endpoint admission remains open |
 | Three four-loop families | Exact distinct graph certificates available; independent E7 raised-line reference generated; all native predictions and the other two supplemental references absent |
-| Ten stable Laurent digits | Fixed-dimension vacuum/single-cut precision, order and start-scale refinements pass; no complete massive-sunset Laurent stability or AMF-to-oracle comparison |
+| Ten stable Laurent digits | Complete fixed-dimension precision, order and start-scale refinements pass; massive-sunset Laurent comparison pending; no AMF-to-oracle comparison |
 
 An independent validation-only reference for both complete massive sunset targets
 has been generated at D=12/5 using direct Schwinger/Feynman parameters and compact
 quadrature. All 12 components/totals passed node and working-precision refinement;
 the generator reads no AMF values or oracle answers. A separate validation-only
-script subsequently compared the saved native vacuum and first single-cut
-predictions for both targets across four configurations. All 16 comparisons and
-12 independent refinement checks pass the 1e-12 relative criterion; the largest
-relative reference discrepancy is 2.399e-30. These results do not establish the
-complete amplitude or Laurent coefficients at epsilon=0. See the
+script subsequently compared the complete saved native predictions for both
+targets across four configurations. All 40 vacuum/cut/total comparisons and
+30 independent refinement checks pass the 1e-12 relative criterion; the largest
+relative reference discrepancy is 9.449e-36. Agreement is empirical, subject to
+the independent reference's refinement estimates rather than a rigorous interval
+error bound. Laurent coefficients at epsilon=0 remain a separate pending gate. See the
 [reference derivation](finite-density-reference.md) and the
 [native-assembly report](../reports/validation/2026-10-09-finite-density-native-assembly/README.md)
 for exact measurements, source provenance and failure records.

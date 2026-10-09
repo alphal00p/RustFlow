@@ -162,6 +162,9 @@ pub struct WeightedClosureOptions {
     pub discovery: GuardedDiscoveryOptions,
     pub application: GuardedReductionLimits,
     pub guard_refinement: GuardRefinementOptions,
+    /// Request every provisional frontier label as well as derivatives, so
+    /// auxiliary-constant lower sectors receive native source discovery.
+    pub search_frontier_sectors: bool,
     /// A distinct directory per source/deformation context. Each round stores
     /// its exact native program plus explicitly provisional/closed metadata.
     pub checkpoints: Option<PathBuf>,
@@ -176,6 +179,7 @@ impl Default for WeightedClosureOptions {
             discovery: GuardedDiscoveryOptions::default(),
             application: GuardedReductionLimits::default(),
             guard_refinement: GuardRefinementOptions::default(),
+            search_frontier_sectors: false,
             checkpoints: None,
         }
     }
@@ -185,6 +189,9 @@ impl Default for WeightedClosureOptions {
 pub struct WeightedClosureDiagnostics {
     pub rounds: usize,
     pub requested: usize,
+    /// Provisional labels explicitly added for native source discovery, including
+    /// auxiliary-constant lower sectors that derivatives cannot request.
+    pub native_frontier_requests: usize,
     pub provisional_sizes: Vec<usize>,
     pub native_rules: usize,
     pub native_rule_applications: usize,
@@ -426,7 +433,21 @@ pub fn prepare_weighted_system<const N: usize>(
             basis_size: frontier.len(),
             new_derivatives: new_derivatives.len(),
         })?;
-        if new_derivatives.is_empty() {
+        let new_frontier = frontier
+            .iter()
+            .filter(|indices| options.search_frontier_sectors && !requested.contains(*indices))
+            .copied()
+            .collect::<BTreeSet<_>>();
+        diagnostics.native_frontier_requests += new_frontier.len();
+        if !new_frontier.is_empty() {
+            run.emit(Progress::Stage {
+                name: format!(
+                    "searching {} new native weighted frontier labels, including constant sectors",
+                    new_frontier.len()
+                ),
+            })?;
+        }
+        if new_derivatives.is_empty() && new_frontier.is_empty() {
             // Rebuild one source-replayed program whose explicit stopping set
             // is now audited against every derivative and target. This is the
             // only point at which provisional candidates become a closed basis.
@@ -534,6 +555,7 @@ pub fn prepare_weighted_system<const N: usize>(
             }));
         }
         requested.extend(new_derivatives);
+        requested.extend(new_frontier);
         last_frontier = frontier;
         last_unresolved = residuals;
         last_discovery = found.unresolved;
@@ -591,9 +613,13 @@ fn discover_with_refinement<const N: usize>(
                     // Let the ordinary caller report native application failure.
                     return Ok(found);
                 }
-                // Constant residuals are legitimate provisional candidates.
-                // In a final audit even a constant must reach its stopping set.
-                if !terminals.is_empty() || !deformation.derivative(residual.integral)?.is_empty() {
+                // Constant residuals need their own native lower-sector search.
+                // They remain provisional until all targets and derivatives are
+                // reconstructed by the final source-replayed program.
+                if options.search_frontier_sectors
+                    || !terminals.is_empty()
+                    || !deformation.derivative(residual.integral)?.is_empty()
+                {
                     residuals.insert(residual.integral);
                 }
             }
@@ -1120,6 +1146,7 @@ mod tests {
             &targets,
             &deformation,
             WeightedClosureOptions {
+                search_frontier_sectors: true,
                 discovery: GuardedDiscoveryOptions {
                     max_depth: 3,
                     ..Default::default()
@@ -1143,6 +1170,16 @@ mod tests {
             );
         }
         assert!(closed.diagnostics.rounds > 1);
+        assert!(closed.diagnostics.native_frontier_requests > 0);
+        // Every final stopping label was explicitly requested for native
+        // discovery, even when its auxiliary derivative vanishes.
+        assert!(
+            closed
+                .reduced
+                .basis
+                .iter()
+                .all(|basis| closed.reduced.candidates.contains_key(basis))
+        );
         assert!(!closed.reduced.nonzero_conditions.is_empty());
         // Every basis derivative must now reduce to this exact stopping set;
         // no NoApplicableRule outcome is hidden by the public Closed result.

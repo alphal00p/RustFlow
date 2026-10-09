@@ -799,7 +799,26 @@ pub(crate) fn fit_samples_refined_leading(
     options: &FlowOptions,
     evaluate: impl Fn(&[Rational], &FlowOptions) -> Result<Vec<Vec<ComplexFloat>>>,
 ) -> Result<Vec<LaurentExpansion>> {
+    fit_samples_refined_leading_with_grid(targets, leading, last, options, 1000, evaluate)
+}
+
+/// Same independent reconstruction checks with a caller-selected initial grid.
+/// Changing this denominator enables a grid-only validation run at fixed
+/// requested precision, boundary order and auxiliary start scale.
+pub(crate) fn fit_samples_refined_leading_with_grid(
+    targets: usize,
+    leading: i32,
+    last: i32,
+    options: &FlowOptions,
+    initial_denominator: i64,
+    evaluate: impl Fn(&[Rational], &FlowOptions) -> Result<Vec<Vec<ComplexFloat>>>,
+) -> Result<Vec<LaurentExpansion>> {
     options.validate()?;
+    if initial_denominator <= 0 {
+        return Err(Error::InvalidInput(
+            "epsilon sampling denominator must be positive".into(),
+        ));
+    }
     if last < leading {
         return Err(Error::InvalidInput(
             "last epsilon power precedes leading pole bound".into(),
@@ -840,9 +859,13 @@ pub(crate) fn fit_samples_refined_leading(
         refined.validate()?;
         let samples = epsilon::symmetric_epsilon_samples(
             count + attempt * 4,
-            1000 * (1_i64
-                .checked_shl(attempt as u32)
-                .ok_or_else(|| Error::Limit("too many precision attempts".into()))?),
+            initial_denominator
+                .checked_mul(
+                    1_i64
+                        .checked_shl(attempt as u32)
+                        .ok_or_else(|| Error::Limit("too many precision attempts".into()))?,
+                )
+                .ok_or_else(|| Error::Limit("epsilon sampling denominator overflow".into()))?,
         )?;
         let p = Precision::decimal(refined.digits + refined.guard_digits)?;
         let current_digits = working_digits;
@@ -939,6 +962,69 @@ mod projection_tests;
 #[cfg(test)]
 mod tests {
     use super::*;
+    #[test]
+    fn initial_laurent_grid_varies_without_changing_numerical_options() -> Result<()> {
+        let options = FlowOptions {
+            digits: 16,
+            guard_digits: 24,
+            series_order: 60,
+            ..Default::default()
+        };
+        let mut initial_grids = Vec::new();
+        for denominator in [1000, 2000] {
+            let first = std::cell::RefCell::new(None);
+            let fit = fit_samples_refined_leading_with_grid(
+                1,
+                -1,
+                1,
+                &options,
+                denominator,
+                |samples, refined| {
+                    if first.borrow().is_none() {
+                        assert_eq!(refined.digits, options.digits);
+                        assert_eq!(refined.guard_digits, options.guard_digits);
+                        assert_eq!(refined.series_order, options.series_order);
+                        *first.borrow_mut() = Some(samples.to_vec());
+                    }
+                    let p = Precision::decimal(refined.digits + refined.guard_digits)?;
+                    Ok(samples
+                        .iter()
+                        .map(|sample| {
+                            let epsilon = p.rational(sample);
+                            // 1/(epsilon*(1-epsilon)) has coefficients one at all
+                            // powers from -1 onward, independently of the fitter.
+                            vec![p.div(&p.i(1), &p.mul(&epsilon, &p.sub(&p.i(1), &epsilon)))]
+                        })
+                        .collect())
+                },
+            )?;
+            let p = Precision::decimal(60)?;
+            assert_eq!(fit[0].verified_digits, Some(16));
+            for value in fit[0].coefficients.values() {
+                assert!(p.close(value, &p.i(1), 16));
+            }
+            initial_grids.push(first.into_inner().unwrap());
+        }
+        assert_eq!(initial_grids[0].len(), initial_grids[1].len());
+        for (a, b) in initial_grids[0].iter().zip(&initial_grids[1]) {
+            assert_eq!(a, &(b * &Rational::from(2)));
+        }
+        for denominator in [0, -1, i64::MAX] {
+            assert!(
+                fit_samples_refined_leading_with_grid(
+                    1,
+                    -1,
+                    1,
+                    &options,
+                    denominator,
+                    |_, _| panic!("invalid grid must fail before evaluating integrals"),
+                )
+                .is_err()
+            );
+        }
+        Ok(())
+    }
+
     #[test]
     fn balanced_laurent_reconstruction_verifies_poles_and_positive_orders() -> Result<()> {
         let calls = std::cell::RefCell::new(Vec::new());

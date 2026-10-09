@@ -1,0 +1,211 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-09T19:24:53.737254+00:00",
+  "source_snapshot": "frontier-sector-source-hashes.json",
+  "snapshot_sha256": "4dfb99bdc24d0fa497885ead5bc726d200a057533baec838be617f58c36d9405",
+  "source_overrides": {
+    "tests/finite_density_terminal.rs": {
+      "snapshot_sha256": "6271ada916266f8918436a6de6b474c08f2c553d23abf9e60e9413ac7fa8cab6",
+      "current_sha256": "7f904f45684997e43d971b82bd9535f9989bae3c128b36e58a87dcf381f3e7b6"
+    }
+  },
+  "override_scope": "Approved terminal test-only assertion correction after initial link; production source snapshot remains exact. Full singular sample may first encounter its ordinary Gamma pole; direct occupied terminal still must return the exact compact dimensional-pole diagnostic.",
+  "compile": {
+    "python_feature_all_tests_check_status": "passed",
+    "check_seconds": 15.38,
+    "joint_release_no_run_status": "passed",
+    "joint_release_no_run_seconds": 398,
+    "terminal_final_test_only_compile_seconds": 15.42
+  },
+  "selected_tests_passed": 103,
+  "selected_tests_failed": 0,
+  "gates": [
+    {
+      "gate": "unit",
+      "passed": 34,
+      "failed": 0,
+      "evidence": "frontier-sector-unit-resources.json",
+      "command": [
+        "target/release/deps/symbolica_amflow-ad945eb4642fae0f",
+        "finite_density::",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 8.601288514677435,
+      "user_seconds": 9.212187,
+      "system_seconds": 0.30122099999999996,
+      "peak_child_rss_kib": 12384,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "engine-fit",
+      "passed": 6,
+      "failed": 0,
+      "evidence": "frontier-sector-engine-fit-resources.json",
+      "command": [
+        "target/release/deps/symbolica_amflow-ad945eb4642fae0f",
+        "engine::tests::",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.008578742854297161,
+      "user_seconds": 0.008917,
+      "system_seconds": 0.011007,
+      "peak_child_rss_kib": 12384,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "core",
+      "passed": 13,
+      "failed": 0,
+      "evidence": "frontier-sector-core-resources.json",
+      "command": [
+        "target/release/deps/core-e0c6134f216216a6",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.4031030549667776,
+      "user_seconds": 2.548644,
+      "system_seconds": 0.15545699999999998,
+      "peak_child_rss_kib": 12384,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "mixed",
+      "passed": 6,
+      "failed": 0,
+      "evidence": "frontier-sector-mixed-resources.json",
+      "command": [
+        "target/release/deps/mixed_cut_flow-8ac19c9d325a5bc2",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 4.874748948030174,
+      "user_seconds": 8.712463,
+      "system_seconds": 0.186408,
+      "peak_child_rss_kib": 12384,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "transport",
+      "passed": 4,
+      "failed": 0,
+      "evidence": "frontier-sector-transport-resources.json",
+      "command": [
+        "target/release/deps/physical_transport-577248d15bcd58cf",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.5141824050806463,
+      "user_seconds": 0.952649,
+      "system_seconds": 0.11408499999999999,
+      "peak_child_rss_kib": 12384,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "independent-mu",
+      "passed": 1,
+      "failed": 0,
+      "evidence": "frontier-sector-independent-mu-resources.json",
+      "command": [
+        "target/release/deps/finite_density_independent_mu-2ae9a9d323b5acac",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.38711584312841296,
+      "user_seconds": 0.248134,
+      "system_seconds": 0.141946,
+      "peak_child_rss_kib": 12384,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "closure-gates",
+      "passed": 6,
+      "failed": 0,
+      "evidence": "frontier-sector-closure-gates-resources.json",
+      "command": [
+        "target/release/deps/finite_density_closure-665c01718e3331cc",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.14889032719656825,
+      "user_seconds": 0.20529799999999998,
+      "system_seconds": 0.086932,
+      "peak_child_rss_kib": 12384,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    }
+  ],
+  "owner_boundary_evidence": "frontier-sector-boundary-gates.json",
+  "owner_input_normalization_measure_evidence": "frontier-sector-input-normalization-measure-gates.json",
+  "owner_capacity_evidence": "frontier-sector-capacity-gates.json",
+  "physical_closure": {
+    "N7": {
+      "status": "closed",
+      "runtime_seconds": 2.8302496870000002,
+      "rounds": 3,
+      "requested": 36,
+      "provisional_sizes": [
+        11,
+        7,
+        6
+      ],
+      "native_frontier_requests": 14,
+      "native_rules": 687,
+      "native_rule_applications": 6049,
+      "guard_refinement_passes": 3,
+      "guard_refinement_added_domains": 22,
+      "guard_refinement_budget_exhausted": false,
+      "evidence": "frontier-sectors/sunset-N7/result.json",
+      "basis_size": 6,
+      "constant_basis_rows": 0,
+      "matrix_nonzero_entries": 10,
+      "retained_native_domain_gaps": {
+        "SearchExhausted": 6,
+        "UnprovedDescent": 15
+      }
+    },
+    "N9": {
+      "status": "closed",
+      "runtime_seconds": 112.951440151,
+      "rounds": 3,
+      "requested": 143,
+      "provisional_sizes": [
+        66,
+        62,
+        11
+      ],
+      "native_frontier_requests": 118,
+      "native_rules": 1062,
+      "native_rule_applications": 94405,
+      "guard_refinement_passes": 5,
+      "guard_refinement_added_domains": 71,
+      "guard_refinement_budget_exhausted": false,
+      "evidence": "frontier-sectors/sunset-N9/result.json",
+      "basis_size": 11,
+      "constant_basis_rows": 4,
+      "matrix_nonzero_entries": 30,
+      "retained_native_domain_gaps": {
+        "SearchExhausted": 11,
+        "UnprovedDescent": 56
+      }
+    }
+  },
+  "closure_options": {
+    "source_policy": "legacy-lorentz",
+    "positive_compact_energy_powers": false,
+    "search_frontier_sectors": true,
+    "max_rounds": 12,
+    "max_frontier": 256,
+    "max_requested": 2048,
+    "native_depth": 3,
+    "native_domains": 8192,
+    "guard_passes_per_program": 3,
+    "max_added_faces": 256,
+    "max_interval_width": 2
+  },
+  "endpoint_algebra_evidence": [
+    "n9-endpoint-matrix-audit.json",
+    "n9-frontier-endpoint-matrix-audit.json"
+  ],
+  "scope": "Finite source-certified closed spanning bases; no minimality or full index-domain coverage claim. All source rows and rule discovery/replay remain native. Capacity padding is a validation-only probe, not production runtime dispatch. Numerical amplitude acceptance is recorded separately by the full-flow owner. Host embedding not built."
+}

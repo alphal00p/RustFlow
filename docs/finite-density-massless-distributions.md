@@ -150,3 +150,34 @@ inverse-energy and shell distributions at a singular fixed dimension. In
 particular, the nonnegative-power lower-contact proof above and the numerical
 graph admission are not widened by this isolated scalar-moment API. Its values
 carry neither a common graph contour certificate nor an eta=0 endpoint proof.
+
+## Polynomial terminal admission
+
+`PreparedOccupiedTerminal` now admits massless occupied shells only when every
+surviving target term has polynomial noncut factors. It requires positive
+chemical potential and evaluates at d>0. The original polynomial is projected
+before shell derivatives; inverse-energy weights remain excluded at zero mass.
+The measure identity
+`joint-high-D-massless-polynomial-origin-v1;mu>0;lower-contact-zero-jets;no-virtual-poles`
+is retained in the moment cache and public contour report. Upper contacts use
+their ordinary smooth radial density at E=mu; lower contacts use the jointly
+continued zero jets described above. Uncancelled dimensional poles remain
+errors, and mu=0 is not admitted. Other polynomial virtual-loop factors are
+scaleless in dimensional regularization.
+
+This is a direct compact-moment terminal: it introduces no auxiliary connection,
+virtual contour deformation or eta=0 projection. A massless occupied term with
+a surviving virtual pole still reaches the existing flow admission check and
+is rejected there. The associated public assembly tests compare one-loop scalar,
+raised and original medium/spatial numerators against fixed-numerator thermal
+mass derivatives, and separately distinguish removable ratios from true poles.
+
+The release terminal suite passes all eight tests, including these public
+massless amplitudes and the direct terminal pole checks. The singular full
+D=4 sample can first encounter the ordinary zero-cut auxiliary Gamma pole;
+the regression records that diagnostic and separately checks the compact
+meromorphic pole. Binary identities, the test-only error-precedence correction
+and earlier failed assertions are preserved in the
+[focused gate report](../reports/validation/2026-10-09-finite-density-native-assembly/frontier-sector-boundary-gates.json).
+This evidence concerns polynomial terminals and boundary identities, not a
+complete nonfactorized massive sunset or a flowing massless graph.

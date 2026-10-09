@@ -680,6 +680,7 @@ pub(crate) fn project_limit(
         return Err(Error::InvalidInput("endpoint projection dimensions".into()));
     }
     let mut terms: BTreeMap<(Rational, usize), C> = BTreeMap::new();
+    let mut divergent_scales = BTreeMap::new();
     // Several endpoint columns share an exponent. A target's rational
     // weights have the same valuation and series in each such column;
     // expand and evaluate each required prefix only once per projection.
@@ -761,6 +762,12 @@ pub(crate) fn project_limit(
                     }
                     for (l, row) in logs.iter().enumerate() {
                         let term = p.mul(constant, &p.mul(coefficient, &row[i]));
+                        if exponent < Rational::zero() || l > 0 {
+                            let scale = divergent_scales
+                                .entry((exponent.clone(), l))
+                                .or_insert_with(|| p.real(0));
+                            *scale += p.norm(&term);
+                        }
                         let entry = terms
                             .entry((exponent.clone(), l))
                             .or_insert_with(|| p.zero());
@@ -772,9 +779,13 @@ pub(crate) fn project_limit(
     }
     for ((power, log), value) in &terms {
         if (*power < Rational::zero() || *log > 0) && p.norm(value) > p.tolerance(p.bits / 5) {
-            return Err(Error::Numerical(
-                "uncancelled physical endpoint divergence".into(),
-            ));
+            return Err(Error::Numerical(format!(
+                "uncancelled physical endpoint divergence: power={power}, log_power={log}, coefficient={value}, absolute_coefficient={}, absolute_contribution_sum={}, tolerance={}, working_bits={}",
+                p.norm(value),
+                divergent_scales[&(power.clone(), *log)],
+                p.tolerance(p.bits / 5),
+                p.bits,
+            )));
         }
     }
     Ok(terms

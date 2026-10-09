@@ -1,0 +1,84 @@
+{
+  "name": "massive_two_loop_sunset",
+  "loops": 2,
+  "vertices": 2,
+  "edges": [
+    {
+      "vertices": [
+        0,
+        1
+      ],
+      "routing": [
+        "1",
+        "0"
+      ],
+      "mass_squared": "1/4",
+      "charges": [
+        1
+      ]
+    },
+    {
+      "vertices": [
+        1,
+        0
+      ],
+      "routing": [
+        "0",
+        "1"
+      ],
+      "mass_squared": "1/4",
+      "charges": [
+        1
+      ]
+    },
+    {
+      "vertices": [
+        1,
+        0
+      ],
+      "routing": [
+        "1",
+        "-1"
+      ],
+      "mass_squared": "1",
+      "charges": [
+        0
+      ]
+    }
+  ],
+  "loop_charges": [
+    [
+      1
+    ],
+    [
+      1
+    ]
+  ],
+  "chemical_potentials": [
+    "1"
+  ],
+  "targets": [
+    {
+      "powers": [
+        1,
+        1,
+        1
+      ],
+      "numerator": "1"
+    },
+    {
+      "powers": [
+        2,
+        1,
+        1
+      ],
+      "numerator": "g1_2+u1*u2"
+    }
+  ],
+  "numerator_convention": "shifted_euclidean",
+  "laurent_orders": [
+    -2,
+    0
+  ],
+  "digits": 12
+}

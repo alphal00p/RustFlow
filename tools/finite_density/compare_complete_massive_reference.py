@@ -2,7 +2,8 @@
 """Compare saved complete native predictions, after generation, to independent data.
 
 This validation-only program cannot generate or modify solver predictions. It
-requires all four precision/order/start configurations and records their hashes.
+requires all four sample precision/order/start configurations, and a fifth
+independent epsilon-grid configuration for Laurent data. All inputs are hashed.
 """
 
 import argparse
@@ -17,6 +18,10 @@ from compare_massive_reference import (
 TARGETS = ("scalar", "raised_numerator")
 SECTORS = ("vacuum", "cut_0", "cut_1", "cut_01", "total")
 NORMALIZATION = "unscaled Euclidean amplitude"
+LAURENT_CONFIGURATIONS = tuple((*config, 1000) for config in CONFIGURATIONS) + (
+    (28, 80, 12, 2000),
+)
+VARIED_SETTINGS = ("digits", "series_order", "occupied_start_scale", "epsilon_grid_denominator")
 
 
 def require(condition, message):
@@ -55,6 +60,22 @@ def component_keys(target, sector):
     return [base]
 
 
+def prediction_filename(configuration):
+    digits, order, start = configuration[:3]
+    grid = configuration[3] if len(configuration) == 4 else None
+    suffix = f"-grid-{grid}" if grid is not None and grid != 1000 else ""
+    return f"prediction-{digits}-{order}-{start}{suffix}.json"
+
+
+def invariant_profile(record):
+    guard_digits = record["guard_digits"]
+    require(type(guard_digits) is int and 0 <= guard_digits < 2**32,
+            "guard_digits must be an unsigned 32-bit integer")
+    search_frontier = record["search_frontier_sectors"]
+    require(type(search_frontier) is bool, "search_frontier_sectors must be a boolean")
+    return {"guard_digits": guard_digits, "search_frontier_sectors": search_frontier}
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("mode", choices=("sample", "laurent"))
@@ -68,9 +89,10 @@ def main():
     provenance_path = reference_dir / ("independent-laurent-reference.json" if laurent else "independent-reference.json")
     reference_path = reference_dir / ("laurent-64-80-20000.json" if laurent else "quadrature-64-60.json")
     input_path = prediction_dir / "input.json"
+    configurations = LAURENT_CONFIGURATIONS if laurent else CONFIGURATIONS
     paths = [input_path, provenance_path, reference_path] + [
-        prediction_dir / f"prediction-{digits}-{order}-{start}.json"
-        for digits, order, start in CONFIGURATIONS
+        prediction_dir / prediction_filename(configuration)
+        for configuration in configurations
     ]
     require(output not in [p.resolve() for p in paths], "output must not replace any input artifact")
     provenance = read(provenance_path)
@@ -86,13 +108,23 @@ def main():
 
     comparisons, refinements, assembly_checks = [], [], []
     previous = None
-    for config_index, ((digits, order, start), path) in enumerate(zip(CONFIGURATIONS, paths[3:])):
+    common_profile = None
+    for config_index, (configuration, path) in enumerate(zip(configurations, paths[3:])):
+        digits, order, start = configuration[:3]
         record = read(path)
         require(record["normalization"] == NORMALIZATION, "unexpected prediction normalization")
         require((record["digits"], record["series_order"], record["occupied_start_scale"]) == (digits, order, start), "prediction configuration mismatch")
         require(record["independent_reference_comparisons"] == 0, "expected predictions saved before comparison")
+        profile = invariant_profile(record)
+        if common_profile is None:
+            common_profile = profile
+        require(profile == common_profile,
+                "guard_digits and search_frontier_sectors must remain constant across comparison configurations")
         values = {}
         if laurent:
+            require(type(record["epsilon_grid_denominator"]) is int
+                    and record["epsilon_grid_denominator"] == configuration[3],
+                    "prediction epsilon-grid denominator mismatch")
             require(record["full_amplitude"] is True, "Laurent data must represent the complete amplitude")
             require(len(record["expansions"]) == len(TARGETS), "target count mismatch")
             for target, expansion in zip(TARGETS, record["expansions"]):
@@ -109,7 +141,7 @@ def main():
                     values[(target, sector, None)] = complex_decimal(value)
             for target in TARGETS:
                 total = tuple(sum((values[(target, sector, None)][part] for sector in SECTORS[:-1]), ZERO) for part in range(2))
-                assembly_checks.append({"target": target, "configuration": [digits, order, start], **compare(total, values[(target, "total", None)], args.mode)})
+                assembly_checks.append({"target": target, "configuration": list(configuration), **compare(total, values[(target, "total", None)], args.mode)})
         for (target, sector, power), value in values.items():
             keys = component_keys(target, sector)
             raw = reference["coefficients"] if laurent else reference["contributions"]
@@ -117,7 +149,7 @@ def main():
             absolute_tolerance = Decimal("1e-20" if laurent else "1e-25")
             comparisons.append({
                 "target": target, "sector": sector, "power": power,
-                "configuration": [digits, order, start], "prediction_path": label(path),
+                "configuration": list(configuration), "prediction_path": label(path),
                 "prediction_real": str(value[0]), "prediction_imaginary": str(value[1]),
                 "reference_real": str(expected), "reference_component_keys": keys,
                 **compare(value, (expected, ZERO), args.mode),
@@ -127,19 +159,22 @@ def main():
             if previous is not None:
                 refinements.append({
                     "target": target, "sector": sector, "power": power,
-                    "varied_setting": ["digits", "series_order", "occupied_start_scale"][config_index - 1],
-                    "from_configuration": CONFIGURATIONS[config_index - 1],
-                    "to_configuration": [digits, order, start],
+                    "varied_setting": VARIED_SETTINGS[config_index - 1],
+                    "from_configuration": configurations[config_index - 1],
+                    "to_configuration": list(configuration),
                     **compare(previous[(target, sector, power)], value, args.mode),
                 })
         previous = values
 
     passed = all(c["passed"] and c["imaginary_zero_passed"] for c in comparisons) and all(c["passed"] for c in refinements + assembly_checks)
     report = {
-        "schema": 1, "status": "passed" if passed else "failed", "mode": args.mode,
+        "schema": 2, "status": "passed" if passed else "failed", "mode": args.mode,
         "full_amplitude": True, "normalization": NORMALIZATION,
         "scope": "massive nonfactorized sunset, scalar and raised original medium numerator",
         "epsilon": None if laurent else "4/5", "laurent_orders": [-2, 0] if laurent else None,
+        "configuration_fields": list(VARIED_SETTINGS[:4 if laurent else 3]),
+        "configurations": configurations,
+        "invariant_profile": common_profile,
         "reference_comparison_count": len(comparisons),
         "independent_refinement_comparison_count": len(refinements),
         "supplied_oracle_numerical_records_compared": 0,

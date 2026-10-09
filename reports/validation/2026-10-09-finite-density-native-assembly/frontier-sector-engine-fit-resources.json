@@ -1,0 +1,13 @@
+{
+  "command": [
+    "target/release/deps/symbolica_amflow-ad945eb4642fae0f",
+    "engine::tests::",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.008578742854297161,
+  "user_seconds": 0.008917,
+  "system_seconds": 0.011007,
+  "peak_child_rss_kib": 12384,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

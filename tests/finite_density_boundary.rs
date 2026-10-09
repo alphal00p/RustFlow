@@ -450,3 +450,95 @@ fn retained_virtual_soft_factors_and_hard_occupied_loops_fail_explicitly() {
         Err(Error::InvalidInput(_))
     ));
 }
+
+#[test]
+fn raised_compact_boundary_seeds_obey_native_multiplication_and_endpoint_constraints() {
+    let family = family();
+    let coordinates = vec![
+        parse!("constraint_g11"),
+        parse!("constraint_g12"),
+        parse!("constraint_g22"),
+        parse!("constraint_e1"),
+        parse!("constraint_e2"),
+    ];
+    let backend = RustRedBackend {
+        bubble_subloops: false,
+        ..Default::default()
+    };
+    let options = FlowOptions::default();
+    let context = RunContext::default();
+    let boundary = IntegratedOccupiedBoundary::new(
+        &backend,
+        &options,
+        &context,
+        OccupiedBoundaryLimits::default(),
+    )
+    .unwrap();
+    let p = Precision::decimal(70).unwrap();
+    let epsilon = Rational::from((4, 5));
+    let evaluate = |expression: Atom, shells: &[OccupiedBoundaryDistribution]| {
+        let projected = integrand::projected_factor_region(
+            &expression,
+            &coordinates,
+            &family,
+            &[false, false],
+            100,
+        )
+        .unwrap();
+        boundary
+            .evaluate_projected(&projected, shells, &epsilon, &HashMap::default(), p)
+            .unwrap()
+    };
+    let mut shells = [distribution(0), distribution(1)];
+    shells[1].upper_index = 1;
+    // These are distribution identities, independently of the moment formula:
+    // (q²-m²) C_n=C_(n-1), and E H_s=mu H_s-H_(s-1) for s>=2.
+    // The H1 right-hand correction vanishes because h delta(h)=0.
+    for cut in 1..=3 {
+        for upper in 1..=3 {
+            shells[0].cut_index = cut;
+            shells[0].upper_index = upper;
+            let value = evaluate(Atom::one(), &shells);
+            let energy = evaluate(coordinates[3].clone(), &shells);
+            let mut lower_upper = shells.clone();
+            lower_upper[0].upper_index -= 1;
+            let correction = if upper == 1 {
+                p.zero()
+            } else {
+                evaluate(Atom::one(), &lower_upper)
+            };
+            assert!(p.close(&energy, &p.sub(&value, &correction), 40));
+            let inverse_shell = evaluate(&coordinates[0] - Atom::num((1, 4)), &shells);
+            let mut lower_cut = shells.clone();
+            lower_cut[0].cut_index -= 1;
+            let correction = if cut == 1 {
+                p.zero()
+            } else {
+                evaluate(Atom::one(), &lower_cut)
+            };
+            assert!(p.close(&inverse_shell, &correction, 40));
+        }
+    }
+    // Actual constant rows of the native 64-label fully occupied sunset
+    // system. At eps=4/5 its eta^-2 forcing is
+    // (I37-I45)/4 + 5*(I49-I58)/16; its eta^-4 forcing is 5/12 of this.
+    shells[0].cut_index = 1;
+    shells[0].upper_index = 1;
+    shells[1].cut_index = 2;
+    shells[1].upper_index = 1;
+    let i37 = evaluate(coordinates[4].clone(), &shells);
+    let i45 = evaluate(Atom::one(), &shells);
+    shells[0].upper_index = 2;
+    let i49 = evaluate(Atom::one(), &shells);
+    shells.swap(0, 1);
+    shells[0].source_loop_index = 0;
+    shells[1].source_loop_index = 1;
+    let i58 = evaluate(Atom::one(), &shells);
+    assert!(p.close(&i37, &i45, 40));
+    assert!(p.close(&i49, &i58, 40));
+    let principal = p.add(
+        &p.scale(&p.sub(&i37, &i45), 1, 4),
+        &p.scale(&p.sub(&i49, &i58), 5, 16),
+    );
+    assert!(p.close(&principal, &p.zero(), 40));
+}

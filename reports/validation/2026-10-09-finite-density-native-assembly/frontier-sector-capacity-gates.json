@@ -1,0 +1,18 @@
+{
+  "schema": 1,
+  "source_snapshot": "frontier-sector-source-hashes.json",
+  "scope": "Derived physical surface identity embedded in native zero-tail storage; exact target/replay/decoded-program equivalence and invalid-tail rejection. No production capacity dispatch or numerical amplitudes.",
+  "binary": "target/release/deps/finite_density_capacity-e2b631a769074ac5",
+  "binary_sha256": "269dc722a29b489479e9a2ef6631db21d0a194b2bf4928d3fae871e0b0239459",
+  "command": [
+    "target/release/deps/finite_density_capacity-e2b631a769074ac5",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.0631571039557457,
+  "peak_child_rss_kib": 12388,
+  "summary": [
+    "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s"
+  ],
+  "numerical_predictions_compared": 0
+}

@@ -1,0 +1,27 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "env",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY=legacy-lorentz",
+    "RUSTFLOW_WEIGHTED_DEPTH=3",
+    "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+    "RUSTFLOW_WEIGHTED_ROUNDS=12",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES=3",
+    "RUSTFLOW_WEIGHTED_GUARD_DOMAINS=256",
+    "RUSTFLOW_WEIGHTED_GUARD_WIDTH=2",
+    "RUSTFLOW_WEIGHTED_FRONTIER_SECTORS=1",
+    "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/frontier-sectors",
+    "target/release/deps/finite_density_closure-665c01718e3331cc",
+    "physical_sunset_double_cut_native_closure",
+    "--exact",
+    "--ignored",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 113.00036204000935,
+  "user_seconds": 111.983855,
+  "system_seconds": 0.21121099999999998,
+  "peak_child_rss_kib": 39936,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

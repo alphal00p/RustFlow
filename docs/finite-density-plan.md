@@ -81,18 +81,18 @@ when an uncertainty is supplied. The absolute criterion in the manifest applies
 only to zero reference coefficients. The massive two-loop graph and multiple-chemical-potential
 coverage require references beyond the massless oracle. A complete independent
 massive reference has now been generated at D=12/5, with 12 components/totals
-passing node and precision refinements. Saved native vacuum and first single-cut
-values for both targets pass its separate comparison and precision/order/start
-refinements. Native guard refinement now closes all occupied systems with basis
-sizes 7, 6 and 64, but the complete epsilon=4/5 sample fails at the N9 physical
-endpoint with an uncancelled-divergence diagnostic. No complete prediction was
-written or accepted.
+passing node and precision refinements. Complete saved native values for both
+targets now pass all 40 vacuum/cut/total comparisons and 30 precision/order/start
+refinements at epsilon=4/5, with 40 guard digits held fixed. Native guard and
+frontier-sector discovery closes occupied bases of sizes 6, 6 and 11. The earlier
+7/6/64 bases also pass at the matching high-guard profile; the historical
+20-guard-digit endpoint failure remains recorded.
 The [current validation report](../reports/validation/2026-10-09-finite-density-native-assembly/README.md)
 preserves measured differences and failure evidence. Its independent Laurent
 extension through orders [-2,0] now passes 108 component-coefficient refinement
 comparisons and six analytic UV-residue checks, using six-sector subtraction and
 exact rational interpolation; the empirical errors are not rigorous interval
-bounds. Complete native AMF and Laurent comparisons remain unperformed.
+bounds. Complete native Laurent comparison remains pending.
 Concrete reference-only kernels and the E8 shared-pole obstruction are recorded
 in [the remaining-reference investigation](finite-density-missing-references.md).
 No E8 or prism supplemental reference values have been generated, and their

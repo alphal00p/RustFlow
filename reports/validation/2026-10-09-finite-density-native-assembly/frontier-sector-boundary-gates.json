@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "production_source_snapshot": "frontier-sector-source-hashes.json",
+  "test_only_override": {"path":"tests/finite_density_terminal.rs","sha256":"7f904f45684997e43d971b82bd9535f9989bae3c128b36e58a87dcf381f3e7b6","reason":"assert exact ordinary-vacuum Gamma-pole or retained-condition precedence for the singular full-amplitude D=4 sample, then independently demand the compact terminal's uncancelled-dimensional-pole diagnostic"},
+  "build": "joint locked release batch after Python-feature all-tests check; terminal target rebuilt after test-only diagnostic assertion correction",
+  "timing_scope": "Rust test-harness elapsed seconds only; build/startup excluded; direct-run peak memory not measured",
+  "gates": [
+    {"binary":"target/release/deps/finite_density_boundary-4ae462f57ad10ba0","binary_sha256":"e93a0da51f979f662ad9ace1608d0376beccf969c19b4513f687581a03792d22","linked_utc":"2026-10-09T19:16:19Z","passed":5,"failed":0,"ignored":0,"test_harness_seconds":0.07,"arguments":["--nocapture"],"exit_code":0},
+    {"binary":"target/release/deps/finite_density_flow_boundary-5a28448dc4a00c03","binary_sha256":"d476b4bbf58902d056dfcc87b3ecff9fb732e3ee070c192dccd21394edb454f5","linked_utc":"2026-10-09T19:16:20Z","passed":5,"failed":0,"ignored":0,"test_harness_seconds":0.16,"arguments":["--nocapture"],"exit_code":0},
+    {"binary":"target/release/deps/finite_density_terminal-2fe28ef103e25538","binary_sha256":"77d6c0fa986acd803ce6d97398ede59d77c4fbbe798c767f59cfdd4089c7b2cc","linked_utc":"2026-10-09T19:22:09Z","passed":8,"failed":0,"ignored":0,"test_harness_seconds":0.12,"arguments":["--nocapture"],"exit_code":0,"additional_guarded_owner_run_seconds":0.09,"cargo_build_log":"frontier-sector-terminal-final-cargo.log"}
+  ],
+  "total_passed":18,
+  "total_failed":0,
+  "historical_failures": [
+    {"report":"frontier-sector-boundary-gates-before-pole-assertion-fix.json","total_passed":17,"total_failed":1},
+    {"binary_sha256":"6b1abbd046b8597fae825f8beb7f7114ee8c4a4bda8620626257f2b256a4325c","linked_utc":"2026-10-09T19:19:59Z","passed":7,"failed":1,"test_harness_seconds":0.09,"cause":"intermediate test assertion omitted the observed ordinary auxiliary Gamma pole","actual_diagnostic":"numerical failure: gamma evaluation reached a pole or exceeded the numeric backend's range","log_scope":"guarded-owner tool output retained in conversation; no standalone file log saved"}
+  ],
+  "scope":"Native compact multiplication identities through cut/upper order3 and exact old64-label N9 eta^-4/eta^-2 forcing cancellations; generic mixed/multihard/positive-energy flow boundaries; full one-loop massive threshold and massless polynomial-terminal amplitudes with original medium/spatial numerators, removable ratios and genuine pole rejection.",
+  "limitations":["These focused tests do not certify complete nonfactorized massive sunset numerical accuracy or mandatory four-loop acceptance.","Massless terminal origin continuation is restricted to polynomial noncut factors and does not admit massless flowing virtual poles or their eta=0 limits."]
+}

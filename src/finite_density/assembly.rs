@@ -252,6 +252,19 @@ impl PreparedDensityFlow {
         context: &RunContext,
         start_scale: u32,
     ) -> Result<Vec<LaurentExpansion>> {
+        self.solve_with_sampling_grid(options, context, start_scale, 1000)
+    }
+
+    /// Independently change the initial exact epsilon grid while keeping the
+    /// auxiliary start scale and numerical options fixed. The shared Laurent
+    /// owner still requires a further independent grid/precision refinement.
+    pub fn solve_with_sampling_grid(
+        &self,
+        options: &FlowOptions,
+        context: &RunContext,
+        start_scale: u32,
+        epsilon_grid_denominator: i64,
+    ) -> Result<Vec<LaurentExpansion>> {
         let input = self.input.input();
         let mut pole_bound = i32::try_from(input.loops)
             .ok()
@@ -274,11 +287,12 @@ impl PreparedDensityFlow {
         pole_bound = pole_bound
             .checked_add(coefficient_floor)
             .ok_or_else(|| Error::Limit("density numerator pole bound overflow".into()))?;
-        let mut expansions = crate::engine::fit_samples_refined_leading(
+        let mut expansions = crate::engine::fit_samples_refined_leading_with_grid(
             input.targets.len(),
             input.laurent_orders[0].min(pole_bound),
             input.laurent_orders[1],
             options,
+            epsilon_grid_denominator,
             |samples, refined| {
                 samples
                     .iter()

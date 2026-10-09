@@ -1,0 +1,21 @@
+{
+  "digits": 28,
+  "epsilon": "4/5",
+  "full_amplitude": false,
+  "guard_digits": 40,
+  "guard_refinement": {
+    "max_added_domains": 256,
+    "max_interval_width": 2,
+    "max_passes": 3
+  },
+  "independent_reference_comparisons": 0,
+  "normalization": "unscaled Euclidean amplitude",
+  "occupied_start_scale": 8,
+  "search_frontier_sectors": true,
+  "sector": "cut-01",
+  "series_order": 80,
+  "values": [
+    "(8.87305519980413574451974046554785756468856675719445463114360593783750337e-3+3.90815341105120079729398737493737169442917414523779041359282935285210718e-66i)",
+    "(-5.91815797093257192179845302648273473943887691699450575540932194599893608e-3+1.05545194362492509310894808350913062026426559651595334021250184863016728e-65i)"
+  ]
+}

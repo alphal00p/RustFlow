@@ -3,9 +3,60 @@
 This report covers work after foundation checkpoint `530b7c8`. The foundation
 snapshot and its input/oracle provenance remain in
 [`../2026-10-09-finite-density-foundations/README.md`](../2026-10-09-finite-density-foundations/README.md).
-No complete finite-density multiloop amplitude or oracle comparison is claimed.
+The selected complete massive-sunset amplitude passes at D=12/5. Native Laurent
+and mandatory four-loop acceptance remain pending; no AMF-to-oracle comparison
+has been performed.
 
-## Current checkpoint: closure passes, full endpoint fails
+## Current checkpoint: complete fixed-dimension amplitude passes
+
+The complete massive sunset now passes independent comparison at epsilon=4/5
+(D=12/5), for both the scalar target and the raised original medium-numerator
+target. Its vacuum, two single cuts, two-cut contribution and assembled total
+are compared independently. The raised reference includes its nonzero moving
+Fermi-surface terms. All **40 reference comparisons and 30 independent
+refinements** pass. Predictions were saved before the comparison utility read
+the independent reference.
+
+The configurations `(digits, series order, occupied start scale)` are
+`(18,60,8)`, `(28,60,8)`, `(28,80,8)` and `(28,80,12)`, with 40 guard digits and
+native frontier-sector search enabled throughout. The criterion is relative
+agreement within 1e-12 for magnitudes at least 1e-20 and absolute agreement
+within 1e-25 below that threshold. The largest relative reference discrepancy
+is 9.44882265757e-36; the largest relative refinement difference is 9.83297e-50.
+These observed discrepancies do not provide rigorous interval error bounds;
+the independent reference has its own empirical quadrature/precision estimates.
+See [`full-sunset-frontier-reference-comparison.json`](full-sunset-frontier-reference-comparison.json)
+for exact decimals, criteria and hashes of all input artifacts.
+
+The occupied source-closed bases have sizes 6, 6 and 11. Native search of
+provisional sectors, including auxiliary-constant sectors, uses the same source
+corpus and guarded replay; no minimality or complete integer-domain coverage is
+claimed. The four-profile prebuilt native process passed in 153.2576642698
+seconds with peak RSS 52372 KiB, excluding compilation and Nix startup. Its
+predictions and source checkpoints are in `full-sunset-frontier-sectors/`, with
+resources in
+[`full-sunset-frontier-sectors-resources.json`](full-sunset-frontier-sectors-resources.json).
+The supporting source-bound regression batch passes 103 selected gates; see
+[`frontier-sector-regressions.json`](frontier-sector-regressions.json).
+
+A controlled rerun retained the old 7/6/64 bases and the `(18,60,8)` profile,
+but increased guard digits from 20 to 40. It passed in 134.7241758639 seconds
+with peak RSS 193684 KiB. This isolates inadequate guard precision in the
+earlier endpoint failure from the later basis-size improvement; it does not
+license ignoring an uncancelled endpoint diagnostic. The old and new saved
+predictions agree for all ten sector/target values at their matching profile,
+with largest relative difference 2.29744838567709e-46. This is a numerical
+agreement test, not an exact master-basis transformation. Both predictions,
+their input definitions and their closed native programs are hashed in
+[`full-sunset-basis-comparison.json`](full-sunset-basis-comparison.json).
+
+Complete Laurent refinement requires five saved profiles, including the
+independent epsilon-grid denominator change from 1000 to 2000. That gate is
+pending. All mandatory four-loop native predictions and AMF-to-oracle
+comparisons remain absent. Earlier failures below are retained as historical
+evidence and are not the current fixed-dimension acceptance result.
+
+## Historical guard-refinement checkpoint: closure passed, endpoint failed
 
 The guard-refinement checkpoint passes 91 selected regression gates, including
 33 finite-density unit gates and the refreshed input, normalization, measure,
@@ -39,9 +90,8 @@ measurement was 121.2337249289 seconds with peak RSS 184372 KiB, excluding
 compilation and Nix startup. See
 [`full-sunset-guard-refinement-resources.json`](full-sunset-guard-refinement-resources.json)
 and its adjacent log. The earlier 59.2705-second failure below remains an
-unchanged historical closure failure; it is superseded as the current blocker
-by this endpoint failure. Full numerical assembly, Laurent stability and all
-native four-loop predictions remain unaccepted.
+unchanged historical closure failure. At this checkpoint the endpoint failure
+became the blocker; the later successful high-guard results above supersede it.
 
 ## Normalization adapter
 
@@ -63,15 +113,16 @@ converted a second time.
 
 | Check | Status and scope |
 | --- | --- |
-| Joint release type check | Current guard-refinement checkpoint passes `cargo check --locked --release --features python --tests`; see its source-bound regression report |
+| Joint release type check | Current frontier-sector checkpoint passes `cargo check --locked --release --features python --tests`; see its source-bound regression report |
 | Exact sunset cut phases and odd medium numerator map | Passed |
 | Unexpanded MSbar identity for L=1..4 and k=0..L | Passed at 60-digit working precision with a 50-digit comparison |
 | Massive one-loop complete vacuum plus occupied assembly | Passed with independent 40/60-digit settings, raised power and support-threshold checks |
 | Native massive sunset mixed and fully occupied leading boundary coefficients | Passed against independent Euclidean seed products, with a 35-digit comparison |
-| Native occupied weighted closure | All selected sunset cut sectors close with exact replay; current full-sample basis sizes 7, 6 and 64 |
+| Native occupied weighted closure | All selected sunset cut sectors close with exact replay; current full-sample basis sizes 6, 6 and 11 |
 | Massive sunset vacuum and first single-cut endpoints | Passed both original targets at D=12/5 against independent quadrature: 16 comparisons across four configurations, plus 12 independent refinement checks |
-| Current native input regression | Refreshed guard-refinement binary passes 9/9; direct wall time 0.1035 seconds; binary hash and log retained |
-| Complete massive sunset at the physical endpoint | All occupied sectors close; epsilon=4/5 numerical attempt fails at N9 endpoint extraction, with no assembled prediction |
+| Current native input regression | Refreshed frontier-sector binary passes 9/9; direct wall time 0.1008 seconds; binary hash and log retained |
+| Complete massive sunset at the physical endpoint | Passed at epsilon=4/5: all vacuum/cut/total values for both targets, 40 reference comparisons and 30 refinements |
+| Complete massive sunset Laurent coefficients | Pending five-profile native execution and independent comparison |
 | Four-loop predictions and Laurent stability | Not performed |
 | AMF prediction records compared against the supplied oracle | 0 |
 | Independent analytic references compared against the supplied oracle | I37: three exact coefficient identities; reference-only check |
@@ -219,11 +270,10 @@ independent generation stage. Reproduce the separate comparison with:
 python3 tools/finite_density/compare_massive_reference.py
 ```
 
-These four unique sector/target comparisons do not complete the amplitude.
-The later checkpoint above resolves the selected two-cut closure and reaches its
-endpoint after transport, but the endpoint numerical failure still blocks the
-complete sum. Separate validation of the second single-cut endpoint, complete
-Laurent refinement and all mandatory four-loop runs remain open. No AMF
+These four historical unique sector/target comparisons did not complete the
+amplitude. The current checkpoint above now compares both single cuts, the
+two-cut term and the complete sum. Complete Laurent refinement and all
+mandatory four-loop runs remain open. No AMF
 prediction has been compared against the supplied oracle, and no completed
 generic evaluator is claimed by this stage.
 
@@ -246,5 +296,7 @@ cut sets pass the sufficient positive-eta criterion; 12 of 29 cut sets of the
 eight-edge family pass, leaving 17 unresolved by this certificate. The
 [common-contour derivation](../../../docs/finite-density-massless-contours.md)
 and [dimensional compact-distribution construction](../../../docs/finite-density-massless-distributions.md)
-are mathematical preparation only. They do not enable production massless
-numerics or justify the eta=0 endpoint projector.
+are mathematical preparation for flowing graphs. They do not admit massless
+flowing amplitudes or justify their eta=0 endpoint projector. The separately
+admitted polynomial-only massless compact terminal has its own dimensional
+origin prescription and tests in `frontier-sector-boundary-gates.json`.

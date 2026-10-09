@@ -1,0 +1,1765 @@
+{
+  "schema": 2,
+  "status": "passed",
+  "mode": "sample",
+  "full_amplitude": true,
+  "normalization": "unscaled Euclidean amplitude",
+  "scope": "massive nonfactorized sunset, scalar and raised original medium numerator",
+  "epsilon": "4/5",
+  "laurent_orders": null,
+  "configuration_fields": [
+    "digits",
+    "series_order",
+    "occupied_start_scale"
+  ],
+  "configurations": [
+    [
+      18,
+      60,
+      8
+    ],
+    [
+      28,
+      60,
+      8
+    ],
+    [
+      28,
+      80,
+      8
+    ],
+    [
+      28,
+      80,
+      12
+    ]
+  ],
+  "invariant_profile": {
+    "guard_digits": 40,
+    "search_frontier_sectors": true
+  },
+  "reference_comparison_count": 40,
+  "independent_refinement_comparison_count": 30,
+  "supplied_oracle_numerical_records_compared": 0,
+  "reference_error_estimate": "independent node and precision changes, not a rigorous interval bound",
+  "reference_caution": "observed refinement agreement is not a rigorous interval error bound",
+  "arithmetic": "Python Decimal, 100 decimal digits, saved decimal inputs",
+  "inputs_sha256": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json": "4e797f1042b0fd7c24e7a9a698ca91573b9247ac648dadc77e85ae2a4bb6d18c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json": "bc586f5e92ae44667bbce5887710bdb466745afb5133a583525b18e156a07d01",
+    "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json": "71b6af605906096113a3ee84a096b17d8e4eb1992a193ff59ff5ea4c685892b0",
+    "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c"
+  },
+  "script_sha256": "52c6815a6d12b56681da8efa5402cea9bd79b1909a30e0677133edb9c01215d8",
+  "comparisons": [
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json",
+      "prediction_real": "0.019076998652317894765475094616691107058952434159040486305850136",
+      "prediction_imaginary": "-7.8905078563855348191750183143529921329389635059672795942107630E-58",
+      "reference_real": "0.019076998652317894765475094616691107058952434133500396699406557009",
+      "reference_component_keys": [
+        "scalar/vacuum"
+      ],
+      "absolute_difference": "2.554008960644357899101218870317040196942766214471290840799315896220290822072220113483409045715553909E-47",
+      "relative_difference": "1.338789715925277654532784626980086622094273945008871863718619513935096099687465035494180815146684729E-45",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json",
+      "prediction_real": "0.0098518079795749239688268140343575552077277887885398961303046634",
+      "prediction_imaginary": "-4.5047153131853117184945225195469945151858509563633617869854091E-58",
+      "reference_real": "0.0098518079795749239688268140343575552077277887788833814826368040951",
+      "reference_component_keys": [
+        "raised_numerator/vacuum"
+      ],
+      "absolute_difference": "9.656514647667859304910507134713323851443518820464511903242030457968357366792637029403418873416430936E-48",
+      "relative_difference": "9.801769043497444428732274197283344062628987808761367562474970512222477602472299132429286574547361587E-46",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_0",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json",
+      "prediction_real": "-0.010486072658411901573305809030045248850990265764025268038550043",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.010486072658411901573305809030045248837665222869701818869426313383",
+      "reference_component_keys": [
+        "scalar/cut_0"
+      ],
+      "absolute_difference": "1.3325042894323449169123729617E-38",
+      "relative_difference": "1.270737227214817426260836136895514326852585573938525558301482992296036654442567855645028971363101963E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_0",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json",
+      "prediction_real": "-0.0024835251862515791997377544165702764232240472356125834496879370",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.0024835251862515791997377544165702764445314455843614977695512836272",
+      "reference_component_keys": [
+        "raised_numerator/cut_0_bulk",
+        "raised_numerator/cut_0_surface"
+      ],
+      "absolute_difference": "2.13073983487489143198633466272E-38",
+      "relative_difference": "8.579497589435958787236979933389526028157242392315778489964896549762782326796376055548083962638468786E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_1",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json",
+      "prediction_real": "-0.010486072658411901573305809030045248850990265764025267953733712",
+      "prediction_imaginary": "-1.3316447795961870317965854630807506227359305531553287169206336E-57",
+      "reference_real": "-0.010486072658411901573305809030045248837665222869701818869426313383",
+      "reference_component_keys": [
+        "scalar/cut_1"
+      ],
+      "absolute_difference": "1.332504289432344908430739861700000000006653929120863111392437176477231376555744723489215950108726449E-38",
+      "relative_difference": "1.270737227214817418172361665763507734224766728047121847073713197442867733001344926388321281284337898E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_1",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json",
+      "prediction_real": "0.0021234366030207590846119799887816813227164356676340740270688306",
+      "prediction_imaginary": "-1.0933980726244259186361257409730235442706278217085375041834285E-57",
+      "reference_real": "0.0021234366030207590846119799887816813218533708562780976548934397435",
+      "reference_component_keys": [
+        "raised_numerator/cut_1"
+      ],
+      "absolute_difference": "8.630648113559763721753908565000000006926011404291340600190696983958008069673957818459633642847749905E-40",
+      "relative_difference": "4.064471763028843771194137844853309144915296564286771291117298193818474717687485973616350729728032179E-37",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_01",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json",
+      "prediction_real": "0.0088730551998041357445197404655478575646885667571947135205881434",
+      "prediction_imaginary": "6.7376070400475204069880659167209274994051498147860238488488544E-54",
+      "reference_real": "0.0088730551998041357445197404655478575242886393938912971965322027564",
+      "reference_component_keys": [
+        "scalar/cut_01"
+      ],
+      "absolute_difference": "4.039992736330341632405594064360056182463173599661563684006339336737279499423045432564348177170045996E-38",
+      "relative_difference": "4.553102223932429305891389003679132853854396614868488256113246863302440185390650941075872010099889963E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_01",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json",
+      "prediction_real": "-0.0059181579709325719217984530264827347394388769169942086612503338",
+      "prediction_imaginary": "1.8195857987002513987099601525988532940555062807019103046984269E-53",
+      "reference_real": "-0.00591815797093257192179845302648273468351925179014608698324975206195",
+      "reference_component_keys": [
+        "raised_numerator/cut_01_bulk",
+        "raised_numerator/cut_01_surface"
+      ],
+      "absolute_difference": "5.591962512684812167800058173805296040296346872917890187268850275841321170252527849314394412395981993E-38",
+      "relative_difference": "9.448822657573707004900091159574735614208433557657764279310522270420710282887632466571096857093835204E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json",
+      "prediction_real": "0.0069779085352982273633832170221484669216604693881846638341545240",
+      "prediction_imaginary": "6.7354863444822856664743518294264114495691199878822717921725126E-54",
+      "reference_real": "0.0069779085352982273633832170221484669079106277879880561570861329995",
+      "reference_component_keys": [
+        "scalar/total"
+      ],
+      "absolute_difference": "1.374984160019660767706839100050164971996099426513242281976751717554376474034445870187576222739365029E-38",
+      "relative_difference": "1.970481775540922319147902342124023035922729516531213210486348940145877514814096541428204916777448473E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-18-60-8.json",
+      "prediction_real": "0.0035735614254115319319025865800862253677813003035671780464352232",
+      "prediction_imaginary": "1.8194314117398571030009115947995605217559273594101758173301387E-53",
+      "reference_real": "0.0035735614254115319319025865800862254015304622606538943847292081492",
+      "reference_component_keys": [
+        "raised_numerator/total"
+      ],
+      "absolute_difference": "3.374916195708671633829398494920490431535194102737208130955602708028024186871676105521845694614714760E-38",
+      "relative_difference": "9.444125324696260733307974411668014514603994813862481559718823409114854692320737376789686289871310078E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json",
+      "prediction_real": "0.0190769986523178947654750946166911070589524341590404862914112635165717968",
+      "prediction_imaginary": "2.01256544557205080443664037511527955337327726675639523077248356616112889E-69",
+      "reference_real": "0.019076998652317894765475094616691107058952434133500396699406557009",
+      "reference_component_keys": [
+        "scalar/vacuum"
+      ],
+      "absolute_difference": "2.554008959200470650757179680000000000000000007929533015378705373123576184498839497791583317214993850E-47",
+      "relative_difference": "1.338789715168404272792201495287802769505697730941417109726110626552981234115554068127182359237950890E-45",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json",
+      "prediction_real": "0.00985180797957492396882681403435755520772778878853989612299019375245531336",
+      "prediction_imaginary": "1.57041607162814961387816776777270972010942915518029480635779231460833811E-69",
+      "reference_real": "0.0098518079795749239688268140343575552077277887788833814826368040951",
+      "reference_component_keys": [
+        "raised_numerator/vacuum"
+      ],
+      "absolute_difference": "9.656514640353389657355313360000000000000000127696520425807394594833174549546464771499465569451747585E-48",
+      "relative_difference": "9.801769036072949693634127014090379150149450999189025582626166790466084958418421430502737107508464943E-46",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json",
+      "prediction_real": "-0.0104860726584119015733058090300452488509902657640253532651410190574835719",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.010486072658411901573305809030045248837665222869701818869426313383",
+      "reference_component_keys": [
+        "scalar/cut_0"
+      ],
+      "absolute_difference": "1.33250428943235343957147056744835719E-38",
+      "relative_difference": "1.270737227214825553859580905168973083162259154073444395531329739293253256014893084020369565277287735E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json",
+      "prediction_real": "-0.00248352518625157919973775441657027642322404723561264524060680791880426256",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.0024835251862515791997377544165702764445314455843614977695512836272",
+      "reference_component_keys": [
+        "raised_numerator/cut_0_bulk",
+        "raised_numerator/cut_0_surface"
+      ],
+      "absolute_difference": "2.130739834874885252894447570839573744E-38",
+      "relative_difference": "8.579497589435933906909929906270737589756698603188900049541488090607855715450604849725162513407681719E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json",
+      "prediction_real": "-0.0104860726584119015733058090300452488509902657640253532651410190576260405",
+      "prediction_imaginary": "-5.51815097870589646624551308157771548524998810385043884640654446823098958E-67",
+      "reference_real": "-0.010486072658411901573305809030045248837665222869701818869426313383",
+      "reference_component_keys": [
+        "scalar/cut_1"
+      ],
+      "absolute_difference": "1.332504289432353439571470567462604050000000000000000000001142585073281997942857176141807444193415752E-38",
+      "relative_difference": "1.270737227214825553859580905182559542520397593172435363503003816372872205132844360700418058849051694E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json",
+      "prediction_real": "0.00212343660302075908461197998878168132271643566763408201889620422191521089",
+      "prediction_imaginary": "-4.53259504932392060833921208531682280578319045081844736465923238859320754E-67",
+      "reference_real": "0.0021234366030207590846119799887816813218533708562780976548934397435",
+      "reference_component_keys": [
+        "raised_numerator/cut_1"
+      ],
+      "absolute_difference": "8.630648113559843640027644784152108900000000000000000001190201338928291270520074318750181275417773346E-40",
+      "relative_difference": "4.064471763028881407483171635167603901228431042806117650016309439674243350479174577739406512935460127E-37",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_01",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json",
+      "prediction_real": "0.00887305519980413574451974046554785756468856675719445462543497477767487354",
+      "prediction_imaginary": "-2.83317812718388625355102111442728607901724947254629936765126822446041387E-67",
+      "reference_real": "0.0088730551998041357445197404655478575242886393938912971965322027564",
+      "reference_component_keys": [
+        "scalar/cut_01"
+      ],
+      "absolute_difference": "4.039992736330315742890277202127487354000000000000000000000099342979359467122459031015621234972507219E-38",
+      "relative_difference": "4.553102223932400128212749707353106209426588125058561185959276764542151092890339511343189334254429955E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_01",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json",
+      "prediction_real": "-0.00591815797093257192179845302648273473943887691699450577082628545738684808",
+      "prediction_imaginary": "-7.65139725677416421229678532417763960619331862485817107783895723972856574E-67",
+      "reference_real": "-0.00591815797093257192179845302648273468351925179014608698324975206195",
+      "reference_component_keys": [
+        "raised_numerator/cut_01_bulk",
+        "raised_numerator/cut_01_surface"
+      ],
+      "absolute_difference": "5.591962512684841878757653339543684808000000000000000000000523464524736797777948397356643000192511844E-38",
+      "relative_difference": "9.448822657573757207949318796097217510328194636149504117198782564556341154119412947072434130148385300E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json",
+      "prediction_real": "0.00697790853529822736338321702214846692166046938818423438656420017913705787",
+      "prediction_imaginary": "-8.33120345143406221175216779225384876873350480372917426175008785702979216E-67",
+      "reference_real": "0.0069779085352982273633832170221484669079106277879880561570861329995",
+      "reference_component_keys": [
+        "scalar/total"
+      ],
+      "absolute_difference": "1.374984160019617822947806717963705787000000000000000000002523990929037194379418548310842685923034135E-38",
+      "relative_difference": "1.970481775540860775264351643390986667549459109766734055192843087337046344427304619216164348603059787E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-60-8.json",
+      "prediction_real": "0.00357356142541153193190258658008622536778130030356682713045330459817941361",
+      "prediction_imaginary": "-1.21682881453818033244972157318167353147754147841248154944346117051756899E-66",
+      "reference_real": "0.0035735614254115319319025865800862254015304622606538943847292081492",
+      "reference_component_keys": [
+        "raised_numerator/total"
+      ],
+      "absolute_difference": "3.374916195708706725427590355102058639000000000000000000002193643157381369192532795358297615939194192E-38",
+      "relative_difference": "9.444125324696358931139253662806804462836652539277286769268062271162510545189705645176085031277208019E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json",
+      "prediction_real": "0.0190769986523178947654750946166911070589524341590404862914083038089446380",
+      "prediction_imaginary": "2.04578940997299846141067580879068280467957614906499182062977841928630447E-68",
+      "reference_real": "0.019076998652317894765475094616691107058952434133500396699406557009",
+      "reference_component_keys": [
+        "scalar/vacuum"
+      ],
+      "absolute_difference": "2.554008959200174679994463800000000000000000819349966428532591129142003567871577341532631420589157255E-47",
+      "relative_difference": "1.338789715168249127442500524930705201761549064104126319339365553124842736719979778992278068102440354E-45",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json",
+      "prediction_real": "0.00985180797957492396882681403435755520772778878853989612298885248812896426",
+      "prediction_imaginary": "1.00712681958711209856646268025443402868688064043427064239860028143973080E-68",
+      "reference_real": "0.0098518079795749239688268140343575552077277887788833814826368040951",
+      "reference_component_keys": [
+        "raised_numerator/vacuum"
+      ],
+      "absolute_difference": "9.656514640352048393028964260000000000000005251917842557492653789227054501285139519854845799999270233E-48",
+      "relative_difference": "9.801769036071588253856646727125093350311275464729994726363969738232580617398914241528457066075938374E-46",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json",
+      "prediction_real": "-0.0104860726584119015733058090300452488509902657640253532651365173113400455",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.010486072658411901573305809030045248837665222869701818869426313383",
+      "reference_component_keys": [
+        "scalar/cut_0"
+      ],
+      "absolute_difference": "1.33250428943235343957102039283400455E-38",
+      "relative_difference": "1.270737227214825553859151598002203157114835040552323784002329626190251433952769601042336618283924833E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json",
+      "prediction_real": "-0.00248352518625157919973775441657027642322404723561264524055824534297052264",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.0024835251862515791997377544165702764445314455843614977695512836272",
+      "reference_component_keys": [
+        "raised_numerator/cut_0_bulk",
+        "raised_numerator/cut_0_surface"
+      ],
+      "absolute_difference": "2.130739834874885252899303828422947736E-38",
+      "relative_difference": "8.579497589435933906929483795276001162007137184299628460892129436421044386156192519626337924695461786E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json",
+      "prediction_real": "-0.0104860726584119015733058090300452488509902657640253532651365173113610847",
+      "prediction_imaginary": "7.25321923870911167854870552490687458034759818847192371753631128522500232E-68",
+      "reference_real": "-0.010486072658411901573305809030045248837665222869701818869426313383",
+      "reference_component_keys": [
+        "scalar/cut_1"
+      ],
+      "absolute_difference": "1.332504289432353439571020392836108470000000000000000000000019740720439703608645777170358150546436234E-38",
+      "relative_difference": "1.270737227214825553859151598004209551757077234606954002684406957909378834653342299245346034077142769E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json",
+      "prediction_real": "0.00212343660302075908461197998878168132271643566763408201890084684749294343",
+      "prediction_imaginary": "5.95777790430012870961880986898461069000063642102556541655200697052515862E-68",
+      "reference_real": "0.0021234366030207590846119799887816813218533708562780976548934397435",
+      "reference_component_keys": [
+        "raised_numerator/cut_1"
+      ],
+      "absolute_difference": "8.630648113559843640074071039929434300000000000000000000020563413714666166651917161954187450588125370E-40",
+      "relative_difference": "4.064471763028881407505035370449966616000443240343221974142284683700395979680222792504545284412452375E-37",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_01",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json",
+      "prediction_real": "0.00887305519980413574451974046554785756468856675719445463114360593783750337",
+      "prediction_imaginary": "3.90815341105120079729398737493737169442917414523779041359282935285210718E-66",
+      "reference_real": "0.0088730551998041357445197404655478575242886393938912971965322027564",
+      "reference_component_keys": [
+        "scalar/cut_01"
+      ],
+      "absolute_difference": "4.039992736330315743461140318143750337000000000000000000018903082358243055664753316620980895534168586E-38",
+      "relative_difference": "4.553102223932400128856116736140286800176654441526975709892147962648576236975020592947328459869025468E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_01",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json",
+      "prediction_real": "-0.00591815797093257192179845302648273473943887691699450575540932194599893608",
+      "prediction_imaginary": "1.05545194362492509310894808350913062026426559651595334021250184863016728E-65",
+      "reference_real": "-0.00591815797093257192179845302648273468351925179014608698324975206195",
+      "reference_component_keys": [
+        "raised_numerator/cut_01_bulk",
+        "raised_numerator/cut_01_surface"
+      ],
+      "absolute_difference": "5.591962512684841877215956988404893608000000000000000000099605353467112461786364819457291901085942676E-38",
+      "relative_difference": "9.448822657573757205344291423203597940973741956744826558681956618338711525471520617386290821255588291E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json",
+      "prediction_real": "0.00697790853529822736338321702214846692166046938818423439227887512408101116",
+      "prediction_imaginary": "4.00114349753802189869358118827434726827944588861315956897449024989722025E-66",
+      "reference_real": "0.0069779085352982273633832170221484669079106277879880561570861329995",
+      "reference_component_keys": [
+        "scalar/total"
+      ],
+      "absolute_difference": "1.374984160019617823519274212458101116000000000000000000058215758964315564750257880086533069216180739E-38",
+      "relative_difference": "1.970481775540860776083318374759831558980140210782165249483377585120210303980908116491904532977983047E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-8.json",
+      "prediction_real": "0.00357356142541153193190258658008622536778130030356682714592213204665244896",
+      "prediction_imaginary": "1.06241684834881233391713335605836966498295311357741317627145245588213217E-65",
+      "reference_real": "0.0035735614254115319319025865800862254015304622606538943847292081492",
+      "reference_component_keys": [
+        "raised_numerator/total"
+      ],
+      "absolute_difference": "3.374916195708706723880707610254755104000000000000000000167223346329403993532680440072771010263631812E-38",
+      "relative_difference": "9.444125324696358926810567065040643890454590512555944630317082901056388214822748943232252874648483635E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json",
+      "prediction_real": "0.0190769986523178947654750946166911070589524341590404862914083038089446380",
+      "prediction_imaginary": "2.04578940997299846141067580879068280467957614906499182062977841928630447E-68",
+      "reference_real": "0.019076998652317894765475094616691107058952434133500396699406557009",
+      "reference_component_keys": [
+        "scalar/vacuum"
+      ],
+      "absolute_difference": "2.554008959200174679994463800000000000000000819349966428532591129142003567871577341532631420589157255E-47",
+      "relative_difference": "1.338789715168249127442500524930705201761549064104126319339365553124842736719979778992278068102440354E-45",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json",
+      "prediction_real": "0.00985180797957492396882681403435755520772778878853989612298885248812896426",
+      "prediction_imaginary": "1.00712681958711209856646268025443402868688064043427064239860028143973080E-68",
+      "reference_real": "0.0098518079795749239688268140343575552077277887788833814826368040951",
+      "reference_component_keys": [
+        "raised_numerator/vacuum"
+      ],
+      "absolute_difference": "9.656514640352048393028964260000000000000005251917842557492653789227054501285139519854845799999270233E-48",
+      "relative_difference": "9.801769036071588253856646727125093350311275464729994726363969738232580617398914241528457066075938374E-46",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json",
+      "prediction_real": "-0.0104860726584119015733058090300452488509902657640253532651365173114905129",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.010486072658411901573305809030045248837665222869701818869426313383",
+      "reference_component_keys": [
+        "scalar/cut_0"
+      ],
+      "absolute_difference": "1.33250428943235343957102039284905129E-38",
+      "relative_difference": "1.270737227214825553859151598016552418740377509357965964623302384426874986357034463865534229864294976E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json",
+      "prediction_real": "-0.00248352518625157919973775441657027642322404723561264524055824534432342827",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.0024835251862515791997377544165702764445314455843614977695512836272",
+      "reference_component_keys": [
+        "raised_numerator/cut_0_bulk",
+        "raised_numerator/cut_0_surface"
+      ],
+      "absolute_difference": "2.130739834874885252899303828287657173E-38",
+      "relative_difference": "8.579497589435933906929483794731249034068398537017098618360684742488334181692001944957516543647512973E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json",
+      "prediction_real": "-0.0104860726584119015733058090300452488509902657640253532651365173113685775",
+      "prediction_imaginary": "7.80006649676856612251473838695365927360669596791544178343686213862938264E-67",
+      "reference_real": "-0.010486072658411901573305809030045248837665222869701818869426313383",
+      "reference_component_keys": [
+        "scalar/cut_1"
+      ],
+      "absolute_difference": "1.332504289432353439571020392836857750000000000000000000002282958405332027916726236442139214953318627E-38",
+      "relative_difference": "1.270737227214825553859151598004924099542895721603252973300511042313549558131709905006890828430400695E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json",
+      "prediction_real": "0.00212343660302075908461197998878168132271643566763408201890084684748678964",
+      "prediction_imaginary": "6.40697109391337535737717862226231557743351664341463679451218030387509736E-67",
+      "reference_real": "0.0021234366030207590846119799887816813218533708562780976548934397435",
+      "reference_component_keys": [
+        "raised_numerator/cut_1"
+      ],
+      "absolute_difference": "8.630648113559843640074071039867896400000000000000000002378111009632516865950732400398137162121793833E-40",
+      "relative_difference": "4.064471763028881407505035370420986282934479605914056820907995136440888967480204096857104458958503658E-37",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_01",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json",
+      "prediction_real": "0.00887305519980413574451974046554785756468856675719445463114360593520261172",
+      "prediction_imaginary": "2.31404763594100305758507267013112451731362584549593182087091779384223432E-67",
+      "reference_real": "0.0088730551998041357445197404655478575242886393938912971965322027564",
+      "reference_component_keys": [
+        "scalar/cut_01"
+      ],
+      "absolute_difference": "4.039992736330315743461140317880261172000000000000000000000066272600112000886555660018924236524052550E-38",
+      "relative_difference": "4.553102223932400128856116735843332527869392932835229486195679450521074940665413922846503678900374831E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_01",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json",
+      "prediction_real": "-0.00591815797093257192179845302648273473943887691699450575540932195311488695",
+      "prediction_imaginary": "6.24941189346094016449984041320602593687404893103466180308614130008258129E-67",
+      "reference_real": "-0.00591815797093257192179845302648273468351925179014608698324975206195",
+      "reference_component_keys": [
+        "raised_numerator/cut_01_bulk",
+        "raised_numerator/cut_01_surface"
+      ],
+      "absolute_difference": "5.591962512684841877215956989116488695000000000000000000000349207893700450557955894300547514506240302E-38",
+      "relative_difference": "9.448822657573757205344291424405990797830633558562653053812301088344710055280989801151828619864562388E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json",
+      "prediction_real": "0.00697790853529822736338321702214846692166046938818423439227887512128815940",
+      "prediction_imaginary": "1.03186930737068690262408786379638520713882794283178727863707577744002474E-66",
+      "reference_real": "0.0069779085352982273633832170221484669079106277879880561570861329995",
+      "reference_component_keys": [
+        "scalar/total"
+      ],
+      "absolute_difference": "1.374984160019617823519274212178815940000000000000000000003871878303959769102851915507732457881733684E-38",
+      "relative_difference": "1.970481775540860776083318374359589603117266909765519955219214372065594592844662144085711847554858575E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors/prediction-28-80-12.json",
+      "prediction_real": "0.00357356142541153193190258658008622536778130030356682714592213203817743868",
+      "prediction_imaginary": "1.27570956693330267317336653034937849171762536384927256618381816321016517E-66",
+      "reference_real": "0.0035735614254115319319025865800862254015304622606538943847292081492",
+      "reference_component_keys": [
+        "raised_numerator/total"
+      ],
+      "absolute_difference": "3.374916195708706723880707611102256132000000000000000000002411074534583229415960339011317979696746481E-38",
+      "relative_difference": "9.444125324696358926810567067412230459453895288067251017260377244574703720285919459978864391727727181E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true,
+      "imaginary_zero_absolute_tolerance": "1E-25"
+    }
+  ],
+  "refinements": [
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "varied_setting": "digits",
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "1.446041630572993298159815092327275661877426587703623564650286096375113206224418379078801462858690879E-56",
+      "relative_difference": "7.580026905318758049499719355298054812762120542850160793410849145276529046028667557101745076312158522E-55",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "varied_setting": "digits",
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "7.328327969283468802329765554726307514155368416327579090091551209069688166538507412501719360394974245E-57",
+      "relative_difference": "7.438561515284085168482162678851018449703129761323156029762955007887398220816461192882458133219056515E-55",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_0",
+      "power": null,
+      "varied_setting": "digits",
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "8.52265909760574835719E-53",
+      "relative_difference": "8.127598744768273458756309673580134908509187553905464742150601613359210693228517090399870629077845238E-51",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_0",
+      "power": null,
+      "varied_setting": "digits",
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "6.179091887091880426256E-53",
+      "relative_difference": "2.488032705002711878843840054378912709190112935854448113275033727164734059477339070321627115998813890E-50",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_1",
+      "power": null,
+      "varied_setting": "digits",
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "8.531140731745059618027063374252886780225979912272594158369976650135136349727743543930891363660881763E-53",
+      "relative_difference": "8.135687220230540368465727459633973350622124173452873816753338218493242477720568771934724476838895151E-51",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_1",
+      "power": null,
+      "varied_setting": "digits",
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "7.991827448418284222756819568997818271720907972046920727777378134672159245357894214302786000367692391E-54",
+      "relative_difference": "3.763628938603237749298728895587062834465970660631511438740059377866271724432049582565336171294169674E-51",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_01",
+      "power": null,
+      "varied_setting": "digits",
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "2.589828096280340304106699829891137379096874574012465145481541363802587862188415707909192596515225523E-52",
+      "relative_difference": "2.918755758825334814179679898681257528138548330258137585589825917746006856882935957763746507403646609E-50",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_01",
+      "power": null,
+      "varied_setting": "digits",
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "2.976662382099401954864717329480382559992734823098738516854593224890354796440395509847806398933005666E-52",
+      "relative_difference": "5.029710928162914914939251413509398445772739109074374731612113545089702934133163609314477517693942831E-50",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "varied_setting": "digits",
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "4.295004069977501162596214999065275105485242648012329805334151684589390268907994270314990793698218611E-52",
+      "relative_difference": "6.155145267741658479838883382063222429540727211480097028539533134716657514648701208270239214938356227E-50",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "total",
+      "power": null,
+      "varied_setting": "digits",
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "3.513873353325345633097796678459648701934293131577262044463518958555601635230808381054631576556906365E-52",
+      "relative_difference": "9.832973146447839187673689456333779446020033858198259033580595169417382124536839610962883871122778020E-50",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "varied_setting": "series_order",
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "2.959707627158800057476986246527829694715140433068843653068440367621435189727199081681137391775601121E-60",
+      "relative_difference": "1.551453497009703601104623453417308874376774100942251648660917346518869917719900373363665161553477906E-58",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "varied_setting": "series_order",
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "1.341264326349100026938943136938940682742738245295719271031780230567217967259658975260750614410755941E-60",
+      "relative_difference": "1.361439777480286992629961633446740791692248969738377519752167623508233161859572137803777905334502119E-58",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_0",
+      "power": null,
+      "varied_setting": "series_order",
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "4.5017461435264E-60",
+      "relative_difference": "4.293071667699260474241135211206115284545765042771535397476419439997654613156191181958163891610936339E-58",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_0",
+      "power": null,
+      "varied_setting": "series_order",
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "4.856257583373992E-59",
+      "relative_difference": "1.955388900526357225043858111072841151840388939794530036748280730891571701822939207097630962218555956E-56",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_1",
+      "power": null,
+      "varied_setting": "series_order",
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "4.501746264955843295369830882073149315733393802921596312596477596865284052626671414219932258729190512E-60",
+      "relative_difference": "4.293071783499948921654697187628005435541624857212074769923510897707150800199976416161025245016735250E-58",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_1",
+      "power": null,
+      "varied_setting": "series_order",
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "4.642625577732568324713616438970591394752151691815310246053014134924850274203748900290562625985970663E-60",
+      "relative_difference": "2.186373528236284816292001246687869483712178874035713430358509479465612801822140533401343852732765985E-57",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_01",
+      "power": null,
+      "varied_setting": "series_order",
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "5.708631160162629831538760389906504564143159080382289975862822057000237038127832357778952188349714120E-57",
+      "relative_difference": "6.433670287871805909234857706763035056499421786314572508200085407134074533274580570035170309030097562E-55",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_01",
+      "power": null,
+      "varied_setting": "series_order",
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "1.541696351138791200415563945025692732378328636162787124796778263062726415053210730205478625402335554E-56",
+      "relative_difference": "2.605027372893619570056637289999330125275262370596017227132637895977691292165539169704706721348859795E-54",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "varied_setting": "series_order",
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "5.714674944943953292044745075249963326689601520329889377876784632089243124604405951928843164818408473E-57",
+      "relative_difference": "8.189667313688448917237123244696339206253983617782191946815328710292989835258545624589005945255758371E-55",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "total",
+      "power": null,
+      "varied_setting": "series_order",
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "1.546882744847303535453199240468955546416368532834759434914876220658840780254083676153403829898663545E-56",
+      "relative_difference": "4.328686597766160573650262531814842975585559652420386463486311336147502375915506079047215426782952703E-54",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "varied_setting": "occupied_start_scale",
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "0E-139",
+      "relative_difference": "0E-38",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "varied_setting": "occupied_start_scale",
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "0E-139",
+      "relative_difference": "0E-37",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_0",
+      "power": null,
+      "varied_setting": "occupied_start_scale",
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "1.504674E-67",
+      "relative_difference": "1.434926162554246880564218062097275821838941147364292556620483418174234651330988821597816431922129690E-65",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_0",
+      "power": null,
+      "varied_setting": "occupied_start_scale",
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "1.35290563E-66",
+      "relative_difference": "5.447521279387386472825298425314446986064097729546942621708919091544794458471273198459513134211369751E-64",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_1",
+      "power": null,
+      "varied_setting": "occupied_start_scale",
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "7.075141339713915723748746504950798242817861088407956746355967371870537944775125197879848121343196705E-67",
+      "relative_difference": "6.747179397081761421116880794702611282055146386950838335066945723537882688303643627718756511412787993E-65",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_1",
+      "power": null,
+      "varied_setting": "occupied_start_scale",
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "5.811519123567114744730061550753299525104956622512819355783183181544918652498342096879061573519610120E-67",
+      "relative_difference": "2.736846070798516948036423276560201015936380546930372354092811697617671677243111449021779762998997534E-64",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "cut_01",
+      "power": null,
+      "varied_setting": "occupied_start_scale",
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "4.523398570081719024462892481638499412630608368357326227302748903856299695184581598971297514246220664E-66",
+      "relative_difference": "5.097904237293112688240235523992030352311483732794929233822084188689551988457529504606605391503183514E-64",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "cut_01",
+      "power": null,
+      "varied_setting": "occupied_start_scale",
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "1.221610743836293083219614142260326137734650562065775824815582264893118484603834267071801844798529413E-65",
+      "relative_difference": "2.064173936951862097200265266819859034669109430819461583470062566648631336591254812810107078192456081E-63",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "varied_setting": "occupied_start_scale",
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "4.076347650744349929194549946361550120937281070729533397707903805120716504934776092155354589548720213E-66",
+      "relative_difference": "5.841790029381822164289029727207269008810187656082294119928391489747809713259503812352097351416847802E-64",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "sector": "total",
+      "power": null,
+      "varied_setting": "occupied_start_scale",
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "1.261822029291845141623573498199824845336420130316301260824570292065920303609756711197676957833241756E-65",
+      "relative_difference": "3.530992976135938409182947920177726434817177014746035336623270044170824575518279835651444212766702299E-63",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    }
+  ],
+  "assembly_checks": [
+    {
+      "target": "scalar",
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "absolute_difference": "4.0000000000000000000000000000000000000000000000000E-64",
+      "relative_difference": "5.732376656652529255854887109171642021323933517958484806291156831101458145322995903291946960643640384E-62",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "absolute_difference": "3.059E-116",
+      "relative_difference": "8.560087923066063004573826002568984497680859799162055631267384976246332697856909401685312976841474973E-114",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "7.0000000000000000000000000000000000000000000000000E-74",
+      "relative_difference": "1.003165914914192619774605244105037353731688365642796579827201954666517393523166045997868211191703324E-71",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "absolute_difference": "1.1E-139",
+      "relative_difference": "3.078161724541572182095851128743341924631888126537818187208463141581251050502838645086806268203101847E-137",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "1.00000000000000000000000000000000000000000000000000E-74",
+      "relative_difference": "1.433094164163132313963721777292910505330983379489709398579489206155148993183637686410775983846955944E-72",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "absolute_difference": "1.00000000000000000000000000000000000000000000000000E-74",
+      "relative_difference": "2.798328840492338347359864662493947204210807387761652885349150671637614025270144006290836625129624972E-72",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "8.0000000000000000000000000000000000000000000000000E-74",
+      "relative_difference": "1.146475331330505851170977421834328404264786703591767518863591365382986723507167515819537554620424950E-71",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "absolute_difference": "3.0E-138",
+      "relative_difference": "8.394986521477015042079593987481841612632422163284958656047452034822279357075514534667461177897161090E-136",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    }
+  ]
+}

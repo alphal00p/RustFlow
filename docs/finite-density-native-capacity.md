@@ -2,8 +2,8 @@
 
 Status: design only. No production padding, new runtime arity, or four-loop
 numerical admission is implemented by this note. The massive sunset's requested
-native closure now passes, but its full endpoint numerical comparison and the
-mandatory four-loop evaluations remain incomplete.
+native closure and complete fixed-dimension endpoint comparison now pass; its
+Laurent comparison and the mandatory four-loop evaluations remain incomplete.
 The native dependency inspected is RustRed commit
 `78969aab524b7d6a2eec36f59b01e9af1e04cc04`.
 
@@ -137,6 +137,19 @@ is exact physical source generation at several small const arities followed
 by one larger guarded reduction capacity; it reduces solver monomorphizations
 but still needs physical source dispatch.
 
+A smaller coherent refactor can retain `WeightedMeasure<N>` and its native
+shift/guard arrays while storing only p actual factors in a vector. The existing
+array constructor remains the exact-p=N wrapper; a new physical-vector
+constructor requires 0<p<=N. Numerator-basis generation and every factor or
+occupation loop must use p, and source emission must fix all tail bounds to
+zero and reject nonzero tail shifts. This applies the same embedding while
+constructing the source descriptions; it does not add physical factors or
+source identities. It avoids a complete dynamic-identity transport rewrite.
+Preparation, deformation admission and every physical export still need the
+same checked true-arity metadata. Retaining exact 7/9 dispatch initially avoids
+changing the measured massive-sunset seed search while larger capacity buckets
+are validated.
+
 Specific frontend integration points are
 [preparation.rs](../src/finite_density/preparation.rs) for source/target lowering,
 [guarded.rs](../src/finite_density/guarded.rs) for checked embedding and cache
@@ -147,13 +160,18 @@ admitted domain must retain `[0,0]` for all dummy axes. Its current
 `native_integral` exports every N index and must instead project a checked
 tail before `OccupiedFlowBoundary` receives the physical master labels.
 
-A draft external probe at `/tmp/finite_density_capacity_probe.rs` derives an
+A probe in [finite_density_capacity.rs](../tests/finite_density_capacity.rs) derives an
 unpadded occupation multiplication identity from `WeightedMeasure<2>`, then
 embeds only its native labels/guards into capacity 4. It compares target
 reduction, exact native replay and decoded-program application, tests a bulk
 point where the surface identity is invalid, rejects escaped tails through a
 frontend wrapper, and rejects a different embedding identity on cache load.
-The draft has not yet been compiled or run; it is not acceptance evidence.
+The fresh native test passed 1/1: direct execution took 0.06316 seconds with
+peak child RSS 12388 KiB, excluding compilation. The exact command, binary
+hash and source snapshot are recorded in
+[`frontier-sector-capacity-gates.json`](../reports/validation/2026-10-09-finite-density-native-assembly/frontier-sector-capacity-gates.json).
+This verifies the two-to-four coordinate algebraic probe only; no production
+capacity dispatch or numerical amplitude was tested.
 Follow-up tests must also compare a physical shell/occupation IBP corpus,
 guard refinements, nonzero conditions, closure/exported basis and ordinary
 nonpadded behavior before enabling any capacity dispatch.

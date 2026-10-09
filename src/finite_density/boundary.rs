@@ -23,6 +23,25 @@ use std::collections::BTreeMap;
 use std::sync::Mutex;
 use symbolica::prelude::*;
 
+/// This additional origin prescription is available only to the polynomial
+/// terminal owner. It is not a continuation certificate for a flowing graph.
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum CompactOriginPrescription {
+    Existing,
+    JointDimensionalMasslessTerminal,
+}
+
+impl CompactOriginPrescription {
+    pub(crate) fn identity(self) -> &'static str {
+        match self {
+            Self::Existing => "existing-compact-support-v1",
+            Self::JointDimensionalMasslessTerminal => {
+                "joint-high-D-massless-polynomial-origin-v1;mu>0;lower-contact-zero-jets;no-virtual-poles"
+            }
+        }
+    }
+}
+
 /// The distribution carried by one compact loop in the region's supplied
 /// routing. Indices refer to C_n and H_n, not ordinary denominator powers.
 #[derive(Clone, Debug)]
@@ -57,6 +76,7 @@ pub struct IntegratedOccupiedBoundary<'a> {
     limits: OccupiedBoundaryLimits,
     moments: Mutex<BTreeMap<String, C>>,
     positive_energy_powers: bool,
+    origin_prescription: CompactOriginPrescription,
 }
 
 /// Provenance of a single integrated region coefficient. The scaleless count
@@ -105,6 +125,7 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
             limits,
             moments: Mutex::new(BTreeMap::new()),
             positive_energy_powers: false,
+            origin_prescription: CompactOriginPrescription::Existing,
         })
     }
 
@@ -113,6 +134,11 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
     /// E>=m>0. Other soft denominators keep their existing rejection.
     pub fn with_positive_compact_energy_powers(mut self, enabled: bool) -> Self {
         self.positive_energy_powers = enabled;
+        self
+    }
+
+    pub(crate) fn with_terminal_origin(mut self, prescription: CompactOriginPrescription) -> Self {
+        self.origin_prescription = prescription;
         self
     }
 
@@ -154,6 +180,13 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
                 "occupied boundary product budget exhausted".into(),
             ));
         }
+        if self.origin_prescription == CompactOriginPrescription::JointDimensionalMasslessTerminal
+            && !projected.hard.template.loops.is_empty()
+        {
+            return Err(Error::Unsupported(
+                "joint massless origin prescription admits polynomial terminals only, not virtual hard factors".into(),
+            ));
+        }
         let mut by_loop = BTreeMap::new();
         for distribution in distributions {
             if by_loop
@@ -165,6 +198,15 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
                 ));
             }
             validate_distribution(distribution, self.limits)?;
+            if self.origin_prescription
+                == CompactOriginPrescription::JointDimensionalMasslessTerminal
+                && distribution.shell.mass_squared.is_zero()
+                && distribution.shell.chemical_potential <= 0
+            {
+                return Err(Error::Unsupported(
+                    "joint massless terminal origin requires positive chemical potential; coincident endpoints at mu=0 are not admitted".into(),
+                ));
+            }
         }
         if projected
             .hard
@@ -452,7 +494,7 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
         // requested seed accuracy and arithmetic precision. Equal-mass shells
         // can share values, but distinct physical mass derivatives cannot.
         let key = format!(
-            "raw-native-Cn-Hupper-Hlower-v1:{}:{}:{}:{}:{}:{}:{energy_power}:{radial_power}:{digits}:{}",
+            "raw-native-Cn-Hupper-Hlower-v2:{}:{}:{}:{}:{}:{}:{energy_power}:{radial_power}:{digits}:{}:{}",
             distribution.shell.mass_squared,
             distribution.shell.chemical_potential,
             distribution.cut_index,
@@ -460,6 +502,7 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
             distribution.lower_index,
             dimension,
             p.bits,
+            self.origin_prescription.identity(),
         );
         if let Some(value) = self
             .moments
@@ -477,6 +520,7 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
             radial_power,
             digits,
             self.limits,
+            self.origin_prescription,
             p,
         )?;
         if !p.finite(&value) {
@@ -631,6 +675,7 @@ fn distribution_moment(
     radial_power: u16,
     digits: u32,
     limits: OccupiedBoundaryLimits,
+    origin_prescription: CompactOriginPrescription,
     p: Precision,
 ) -> Result<C> {
     let shell = &distribution.shell;
@@ -638,11 +683,29 @@ fn distribution_moment(
     if cut <= 0 {
         return Ok(p.zero());
     }
+    let continued_massless = shell.mass_squared.is_zero()
+        && origin_prescription == CompactOriginPrescription::JointDimensionalMasslessTerminal;
+    if continued_massless
+        && (shell.chemical_potential <= 0
+            || spatial_dimension <= &Rational::zero()
+            || energy_power < 0)
+    {
+        return Err(Error::Unsupported(
+            "joint massless polynomial terminal requires mu>0, d>0 and nonnegative original energy powers".into(),
+        ));
+    }
     let gap = &shell.chemical_potential * &shell.chemical_potential - &shell.mass_squared;
     if gap < 0 {
         return Ok(p.zero());
     }
     if distribution.lower_index > 0 {
+        if continued_massless {
+            // For every fixed finite set of polynomial/distribution indices,
+            // sufficiently large ReD makes all required energy jets at zero
+            // vanish. Continue that jointly defined product meromorphically.
+            // This is not a real empty-support assertion at a massless cone.
+            return Ok(p.zero());
+        }
         if shell.mass_squared > 0 || distribution.upper_index > 0 && shell.chemical_potential > 0 {
             return Ok(p.zero());
         }
@@ -653,15 +716,25 @@ fn distribution_moment(
     let value = if distribution.upper_index == 0 {
         // CompactShell returns the occupied correction: its n=1 seed is -W.
         // C_n=1/(n-1)! (d/dm^2)^(n-1) C_1, hence raw C_n=(-1)^n I_n^occ.
-        let value = shell.raised_laurent_moment(
-            spatial_dimension,
-            cut as u16,
-            i32::from(energy_power),
-            radial_power,
-            digits,
-            limits.max_compact_series_terms,
-            p,
-        )?;
+        let value = if continued_massless {
+            shell.dimensionally_continued_massless_raised_moment(
+                spatial_dimension,
+                cut as u16,
+                i32::from(energy_power),
+                i32::from(radial_power),
+                p,
+            )?
+        } else {
+            shell.raised_laurent_moment(
+                spatial_dimension,
+                cut as u16,
+                i32::from(energy_power),
+                radial_power,
+                digits,
+                limits.max_compact_series_terms,
+                p,
+            )?
+        };
         if cut % 2 == 0 { value } else { p.neg(&value) }
     } else {
         let a = spatial_dimension.clone() / Rational::from(2) + Rational::from(radial_power);
@@ -721,4 +794,82 @@ fn distribution_moment(
         &p.pow(&pi, &p.rational(&(dimension / Rational::from(2)))),
     );
     Ok(p.mul(&normalization, &value))
+}
+
+#[cfg(test)]
+mod massless_terminal_origin_tests {
+    use super::*;
+
+    #[test]
+    fn joint_massless_terminal_origin_retains_upper_contacts_and_zero_lower_jets() {
+        let mut distribution = OccupiedBoundaryDistribution {
+            source_loop_index: 0,
+            shell: CompactShell {
+                mass_squared: Rational::zero(),
+                chemical_potential: Rational::one(),
+            },
+            cut_index: 2,
+            upper_index: 0,
+            lower_index: 1,
+        };
+        let p = Precision::decimal(60).unwrap();
+        let limits = OccupiedBoundaryLimits::default();
+        let value = |distribution: &OccupiedBoundaryDistribution, prescription| {
+            distribution_moment(
+                distribution,
+                &Rational::from(3),
+                0,
+                0,
+                45,
+                limits,
+                prescription,
+                p,
+            )
+        };
+        assert!(matches!(
+            value(&distribution, CompactOriginPrescription::Existing),
+            Err(Error::Unsupported(_))
+        ));
+        assert_eq!(
+            value(
+                &distribution,
+                CompactOriginPrescription::JointDimensionalMasslessTerminal
+            )
+            .unwrap(),
+            p.zero()
+        );
+        distribution.lower_index = 0;
+        distribution.upper_index = 1;
+        // Radially integrating raw C2 at d=3 gives -Ad/(4E), hence the
+        // upper contact at E=mu=1 is -1/pi in native occupied normalization.
+        let expected = p.eval(&parse!("-1/pi"), &HashMap::default()).unwrap();
+        assert!(
+            p.close(
+                &value(
+                    &distribution,
+                    CompactOriginPrescription::JointDimensionalMasslessTerminal
+                )
+                .unwrap(),
+                &expected,
+                45
+            )
+        );
+        distribution.lower_index = 1;
+        assert_eq!(
+            value(
+                &distribution,
+                CompactOriginPrescription::JointDimensionalMasslessTerminal
+            )
+            .unwrap(),
+            p.zero()
+        );
+        distribution.shell.chemical_potential = Rational::zero();
+        assert!(matches!(
+            value(
+                &distribution,
+                CompactOriginPrescription::JointDimensionalMasslessTerminal
+            ),
+            Err(Error::Unsupported(_))
+        ));
+    }
 }

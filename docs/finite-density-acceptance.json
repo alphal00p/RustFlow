@@ -1361,17 +1361,22 @@
       0
     ],
     "reference_derivation": "docs/finite-density-reference.md",
-    "attainable_comparison_precision": "All 12 reference components/totals pass independent node and precision refinements at D=12/5. All 108 Laurent component-coefficient refinement comparisons and six analytic UV-residue checks pass; largest relative quadrature change 3.48e-17, epsilon-grid change 1.0042e-22 and precision change 8.98e-53. These empirical changes are not rigorous interval bounds. No complete native AMF or Laurent comparison is inferred.",
+    "attainable_comparison_precision": "All 12 reference components/totals pass independent node and precision refinements at D=12/5. All 108 Laurent component-coefficient refinement comparisons and six analytic UV-residue checks pass; largest relative quadrature change 3.48e-17, epsilon-grid change 1.0042e-22 and precision change 8.98e-53. These empirical changes are not rigorous interval bounds. Native fixed-dimension comparisons are recorded separately; complete native Laurent comparison is pending.",
     "native_comparison": {
-      "status": "vacuum_and_cut0_only_passed",
-      "report": "reports/validation/2026-10-09-finite-density-native-assembly/single-sunset-reference-comparison.json",
-      "unique_sector_target_values": 4,
+      "status": "full_amplitude_and_all_sectors_passed_at_D_12_over_5",
+      "report": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-reference-comparison.json",
+      "unique_sector_target_values": 10,
       "configurations": 4,
+      "reference_comparisons": 40,
+      "refinement_comparisons": 30,
       "relative_tolerance": "1e-12",
       "small_magnitude_threshold": "1e-20",
       "small_absolute_tolerance": "1e-25",
-      "full_amplitude_compared": false,
-      "laurent_coefficients_compared": 0
+      "largest_relative_reference_discrepancy": "9.44882265757e-36",
+      "largest_relative_refinement_difference": "9.83297e-50",
+      "full_amplitude_compared": true,
+      "laurent_coefficients_compared": 0,
+      "accuracy_caution": "Observed agreement; independent reference refinement estimates are not rigorous interval bounds."
     },
     "native_closure": {
       "status": "passed_for_requested_targets_and_derivatives",
@@ -1381,7 +1386,7 @@
             0
           ],
           "native_arity": 7,
-          "basis_size": 7
+          "basis_size": 6
         },
         {
           "cut_slots": [
@@ -1396,7 +1401,7 @@
             1
           ],
           "native_arity": 9,
-          "basis_size": 64
+          "basis_size": 11
         }
       ],
       "guard_refinement": {
@@ -1404,11 +1409,69 @@
         "max_added_domains": 256,
         "max_interval_width": 2
       },
+      "search_frontier_sectors": true,
       "proof": "Exact native guarded original-source replay and final requested-target/derivative closure audit; no basis minimality or complete integer-domain coverage claim.",
-      "evidence": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-guard-refinement"
+      "evidence": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors"
     },
     "complete_sample_attempt": {
-      "status": "blocked_at_two_cut_physical_endpoint",
+      "status": "passed_full_amplitude_and_all_cut_sectors",
+      "epsilon": "4/5",
+      "guard_digits": 40,
+      "search_frontier_sectors": true,
+      "configurations_digits_order_start": [
+        [
+          18,
+          60,
+          8
+        ],
+        [
+          28,
+          60,
+          8
+        ],
+        [
+          28,
+          80,
+          8
+        ],
+        [
+          28,
+          80,
+          12
+        ]
+      ],
+      "process_wall_seconds": 153.2576642697677,
+      "peak_rss_kib": 52372,
+      "resources": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-frontier-sectors-resources.json",
+      "accepted_prediction_snapshots": 4,
+      "written_prediction_snapshots": 4,
+      "full_amplitude_target_comparisons": 8,
+      "amf_oracle_comparisons": 0
+    },
+    "controlled_basis_comparison": {
+      "status": "passed_at_one_matching_profile",
+      "old_basis_sizes": [
+        7,
+        6,
+        64
+      ],
+      "new_basis_sizes": [
+        6,
+        6,
+        11
+      ],
+      "digits": 18,
+      "guard_digits": 40,
+      "series_order": 60,
+      "occupied_start_scale": 8,
+      "epsilon": "4/5",
+      "sector_and_total_comparisons": 10,
+      "largest_relative_difference": "2.29744838567709e-46",
+      "report": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-basis-comparison.json",
+      "scope": "Saved native outputs only; not an exact master transformation or a new independent-reference generation."
+    },
+    "historical_complete_sample_failure": {
+      "status": "failed_at_two_cut_physical_endpoint_with_20_guard_digits",
       "epsilon": "4/5",
       "digits": 18,
       "guard_digits": 20,
@@ -1431,7 +1494,7 @@
       "nonzero upper Fermi surface",
       "full massive assembly"
     ],
-    "evaluation_status": "native_closure_passed_full_two_cut_endpoint_numerics_blocked"
+    "evaluation_status": "full_fixed_dimension_amplitude_passed_native_laurent_pending"
   },
   "remaining_mandatory_cases": [
     {

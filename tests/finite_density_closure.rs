@@ -137,6 +137,8 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
         max_rounds: budget("RUSTFLOW_WEIGHTED_ROUNDS", 4),
         max_frontier: budget("RUSTFLOW_WEIGHTED_FRONTIER", 256),
         max_requested: budget("RUSTFLOW_WEIGHTED_REQUESTED", 2048),
+        search_frontier_sectors: std::env::var("RUSTFLOW_WEIGHTED_FRONTIER_SECTORS")
+            .is_ok_and(|v| v == "1"),
         discovery: GuardedDiscoveryOptions {
             max_depth: budget("RUSTFLOW_WEIGHTED_DEPTH", 2).try_into().unwrap(),
             max_domains: budget("RUSTFLOW_WEIGHTED_DOMAINS", 128),
@@ -164,6 +166,7 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
             "max_domains": options.discovery.max_domains,
             "max_frontier": options.max_frontier, "max_requested": options.max_requested,
             "guard_refinement": options.guard_refinement,
+            "search_frontier_sectors":options.search_frontier_sectors,
             "source_context": format!("{:?}", preparation.context.sources()),
             "numerical_prediction": false
         }))
@@ -220,6 +223,7 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
         "rounds": diagnostics.rounds, "requested": diagnostics.requested,
         "provisional_sizes": diagnostics.provisional_sizes,
         "native_rules": diagnostics.native_rules,
+        "native_frontier_requests":diagnostics.native_frontier_requests,
         "native_rule_applications": diagnostics.native_rule_applications,
         "guard_refinement_passes":diagnostics.guard_refinement_passes,
         "guard_refinement_added_domains":diagnostics.guard_refinement_added_domains,

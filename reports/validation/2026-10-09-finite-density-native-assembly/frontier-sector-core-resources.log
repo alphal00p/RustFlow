@@ -1,0 +1,18 @@
+
+running 13 tests
+test unresolved_search_residuals_do_not_bypass_closure_and_cancellation ... ok
+test block_order_and_incomplete_table ... ok
+test scalar_substitution_keeps_general_expression_rules ... ok
+test pole_scaling_preserves_very_large_and_very_small_roots ... ok
+test scaleless_tadpole_is_removed_by_native_sector_analysis ... ok
+test poles_of_large_integer_region_polynomial_stabilize_with_precision ... ok
+test exact_tadpole_reduction_and_derivative ... ok
+test precision_refinement_also_tightens_taylor_truncation ... ok
+test taylor_transport_exponential_and_branch ... ok
+test automatic_contour_tracks_the_selected_branch ... ok
+test sampled_preparation_keeps_dimension_symbolic_for_basis_refinement ... ok
+test automatic_refinement_takes_precedence_over_sampled_reduction ... ok
+test sparse_ode_does_not_mistake_a_zero_taylor_tail_for_convergence ... ok
+
+test result: ok. 13 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 1.38s
+

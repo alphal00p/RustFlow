@@ -230,3 +230,47 @@ regulated complete amplitude fails to exist. Independent analytic propagator
 indices or a proved complete-sector subtraction/cancellation must precede the
 endpoint and mass-derivative limit. The exact kernels and missing-reference
 status are recorded in [the reference diagnosis](finite-density-missing-references.md).
+
+## Future single-cut endpoint proof obligation
+
+A possible generic zero criterion concerns exactly one future massless cut
+momentum q, at least one remaining virtual loop, zero masses on every uncut
+physical line, and a medium vector appearing only in polynomial numerators.
+After virtual integration there is only one external momentum: Lorentz tensor
+coefficients can depend on q², and contractions with the medium multiply them
+by polynomial powers of u.q. The compact chemical-potential scale therefore
+cannot by itself supply a scale inside these virtual tensor coefficients.
+This observation is **not** a current admission or a proof that the thermal
+contribution vanishes. Without a virtual loop, the one-cut polynomial terminal
+is a nonzero counterexample to an unqualified single-cut zero claim.
+
+One prospective construction starts with the off-shell virtual tensor
+amplitude in a convergent domain, with independent analytic indices on virtual
+lines. Its tensor coefficients form a meromorphic homogeneous family in q².
+Continue that family to an open parameter domain in which every coefficient
+vanishes with more derivatives at q²=0 than the largest finite cut-derivative
+order. Only there restrict it to the massless shell and its derivatives. The
+resulting zero family may then be jointly continued in dimension and analytic
+indices. Directly multiplying delta derivatives by a singular boundary value
+such as (-q²-i0)^lambda, or merely setting q²=0 in a scale-counting argument,
+does not implement this construction. The high-dimensional origin prescription
+is also required when the compact integration reaches q=0.
+
+An alternative starts from the common positive-eta virtual contour. If all
+virtual masses are the same auxiliary eta and q²=0, covariance and scaling
+suggest that each tensor coefficient, including any fixed finite number of
+q² derivatives, has an eta power hD/2 minus an integer, where h>0 is the number
+of virtual loops. Polynomial compact moments carry the remaining medium scale.
+Independent ultraviolet index continuation could then provide an open domain
+with all these eta powers positive, followed by a vanishing eta->0 limit and
+joint meromorphic continuation. A proof must establish this tensor scaling for
+the complete retained numerator and all shell/upper/lower distributions; it
+cannot silently replace a raised original numerator by its shell value.
+
+Either construction still needs equality with the original regulated thermal
+product, its common contour and its prescribed order of line regulators,
+thermal limit, cut sum and eta limit. A vanishing meromorphic family chosen by
+one order of restriction is not sufficient evidence for that equality.
+Overlapping pole contacts and exceptional homogeneity values must be treated
+before specializing dimension. No single-cut physical-zero owner or massless
+flow endpoint admission follows from this note.

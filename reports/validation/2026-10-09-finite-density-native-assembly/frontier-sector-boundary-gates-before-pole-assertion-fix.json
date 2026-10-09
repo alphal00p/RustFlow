@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "source_snapshot": "frontier-sector-source-hashes.json",
+  "build": "joint locked release batch after Python-feature all-tests check passed in 15.38 seconds",
+  "timing_scope": "Rust test-harness elapsed seconds only; build/startup excluded; direct-run peak memory not measured",
+  "gates": [
+    {"binary":"target/release/deps/finite_density_boundary-4ae462f57ad10ba0","binary_sha256":"e93a0da51f979f662ad9ace1608d0376beccf969c19b4513f687581a03792d22","linked_utc":"2026-10-09T19:16:19Z","passed":5,"failed":0,"ignored":0,"test_harness_seconds":0.07,"arguments":["--nocapture"],"exit_code":0},
+    {"binary":"target/release/deps/finite_density_flow_boundary-5a28448dc4a00c03","binary_sha256":"d476b4bbf58902d056dfcc87b3ecff9fb732e3ee070c192dccd21394edb454f5","linked_utc":"2026-10-09T19:16:20Z","passed":5,"failed":0,"ignored":0,"test_harness_seconds":0.16,"arguments":["--nocapture"],"exit_code":0},
+    {"binary":"target/release/deps/finite_density_terminal-2fe28ef103e25538","binary_sha256":"272321b27d224ea07f2d081a503aebacb500701698ff1e3ae6ff22b094710861","linked_utc":"2026-10-09T19:16:20Z","passed":7,"failed":1,"ignored":0,"test_harness_seconds":0.17,"arguments":["--nocapture"],"exit_code":101,"failure":"public_massless_terminal_keeps_removable_and_true_dimensional_poles_distinct: full-assembly result did not match the specifically expected compact Error::Numerical message; initial assertion did not print the actual result"}
+  ],
+  "total_passed":17,
+  "total_failed":1,
+  "scope":"Integrated native compact identities through cut/upper order3 and exact N9 leading endpoint-forcing cancellations; existing flow boundaries; massive and new massless polynomial-terminal public assembly tests.",
+  "limitations":["Terminal suite has an unresolved exact diagnostic assertion in this snapshot.","No flowing massless endpoint admission or complete massive sunset/four-loop acceptance follows from these focused gates."]
+}

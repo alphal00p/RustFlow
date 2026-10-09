@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "900",
+    "target/release/deps/finite_density_native_flow-2ad25996bc8f14af",
+    "complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors",
+    "--ignored",
+    "--exact",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 134.7241758638993,
+  "user_seconds": 133.266641,
+  "system_seconds": 0.34365799999999996,
+  "peak_child_rss_kib": 193684,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

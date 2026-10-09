@@ -173,9 +173,20 @@ python3 tools/finite_density/compare_complete_massive_reference.py laurent \
   --predictions PATH_TO_LAURENT_RUN --output PATH_TO_LAURENT_COMPARISON.json
 ```
 
-The sample test must use `RUSTFLOW_DENSITY_FLOW_EPSILON=4/5`. Both modes require
-all four independently varied precision/order/start configurations and the exact
-input definition. Sample comparisons include every vacuum/cut contribution,
+The sample test must use `RUSTFLOW_DENSITY_FLOW_EPSILON=4/5` and save all four
+precision/order/start configurations `(18,60,8)`, `(28,60,8)`, `(28,80,8)` and
+`(28,80,12)`. Laurent mode requires those four configurations at epsilon-grid
+denominator 1000 **plus** `(28,80,12)` at denominator 2000. The latter file is
+`prediction-28-80-12-grid-2000.json`; the first four retain their original
+`prediction-DIGITS-ORDER-START.json` names. Each Laurent record must declare
+its `epsilon_grid_denominator` explicitly. The fifth comparison changes only
+the grid denominator.
+
+All profiles must have identical `guard_digits` and `search_frontier_sectors`
+metadata within each comparison run, so these settings cannot silently change
+along with the independently varied precision, order, start scale or grid.
+The exact input definition must match the independent reference. Sample
+comparisons include every vacuum/cut contribution,
 the explicit nonzero raised surface terms in the reference, and the assembled
 sum. Laurent comparisons cover the assembled coefficients at powers −2, −1, 0.
 All compared inputs are hashed; this utility cannot generate predictions or

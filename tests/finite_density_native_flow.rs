@@ -11,6 +11,44 @@ use symbolica_amflow::finite_density::{
 };
 use symbolica_amflow::*;
 
+fn numerical_profiles() -> Vec<(u32, usize, u32)> {
+    std::env::var("RUSTFLOW_DENSITY_FLOW_PROFILES")
+        .map(|profiles| {
+            profiles
+                .split(',')
+                .map(|profile| {
+                    let fields = profile.split(':').collect::<Vec<_>>();
+                    assert_eq!(fields.len(), 3, "profiles use digits:order:start");
+                    (
+                        fields[0].parse().unwrap(),
+                        fields[1].parse().unwrap(),
+                        fields[2].parse().unwrap(),
+                    )
+                })
+                .collect()
+        })
+        .unwrap_or_else(|_| vec![(18, 60, 8), (28, 60, 8), (28, 80, 8), (28, 80, 12)])
+}
+
+fn guard_digits(default: u32) -> u32 {
+    std::env::var("RUSTFLOW_DENSITY_FLOW_GUARD_DIGITS")
+        .map(|value| value.parse().unwrap())
+        .unwrap_or(default)
+}
+
+fn save_exact_connection<const N: usize>(flow: &PreparedOccupiedFlow<N>, path: &std::path::Path) {
+    let reduced = flow.reduced();
+    std::fs::write(path, serde_json::to_vec_pretty(&serde_json::json!({
+        "basis":reduced.basis.iter().map(|integral| &integral.0).collect::<Vec<_>>(),
+        "matrix":reduced.matrix.iter().map(|row| row.iter().map(Atom::to_canonical_string).collect::<Vec<_>>()).collect::<Vec<_>>(),
+        "targets":reduced.targets.iter().map(|target| target.iter().map(|(integral,coefficient)|
+            serde_json::json!({"indices":integral.0,"coefficient":coefficient.to_canonical_string()})).collect::<Vec<_>>()).collect::<Vec<_>>(),
+        "nonzero_conditions":reduced.nonzero_conditions.iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),
+        "auxiliary_variable":flow.differential_system().map(|system| Atom::var(system.variable).to_canonical_string()),
+        "closure_diagnostics":format!("{:?}",flow.closure_diagnostics()),
+    })).unwrap()).unwrap();
+}
+
 #[test]
 #[ignore = "explicit vacuum and single-cut transport, independent of double-cut closure"]
 fn massive_vacuum_and_single_cut_transport() {
@@ -96,7 +134,7 @@ fn complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors() {
     };
     let options = FlowOptions {
         digits: 18,
-        guard_digits: 20,
+        guard_digits: guard_digits(20),
         series_order: 80,
         mass_mode: MassMode::All,
         ..Default::default()
@@ -123,6 +161,8 @@ fn complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors() {
             .try_into()
             .unwrap(),
     };
+    let search_frontier_sectors =
+        std::env::var("RUSTFLOW_WEIGHTED_FRONTIER_SECTORS").is_ok_and(|value| value == "1");
     let closure = |name: &str| WeightedClosureOptions {
         max_rounds: budget("RUSTFLOW_WEIGHTED_ROUNDS", 12),
         discovery: GuardedDiscoveryOptions {
@@ -131,6 +171,7 @@ fn complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors() {
             sample_seed: 0,
         },
         guard_refinement,
+        search_frontier_sectors,
         max_frontier: budget("RUSTFLOW_WEIGHTED_FRONTIER", 256),
         max_requested: budget("RUSTFLOW_WEIGHTED_REQUESTED", 4096),
         checkpoints: Some(report.join(name)),
@@ -160,6 +201,9 @@ fn complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors() {
         source_options,
     )
     .unwrap();
+    save_exact_connection(&first, &report.join("connection-cut-0.json"));
+    save_exact_connection(&second, &report.join("connection-cut-1.json"));
+    save_exact_connection(&both, &report.join("connection-cut-01.json"));
     let epsilon_text =
         std::env::var("RUSTFLOW_DENSITY_FLOW_EPSILON").unwrap_or_else(|_| "1/7".into());
     let epsilon = Rational::try_from(
@@ -169,24 +213,46 @@ fn complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors() {
     )
     .unwrap();
     let mut previous: Option<Vec<ComplexFloat>> = None;
-    for (digits, order, start_scale) in [(18, 60, 8), (28, 60, 8), (28, 80, 8), (28, 80, 12)] {
+    for (digits, order, start_scale) in numerical_profiles() {
         let options = FlowOptions {
             digits,
             series_order: order,
             ..options.clone()
         };
         let p = Precision::decimal(digits + options.guard_digits).unwrap();
-        let parts = [
-            vacuum.evaluate(&epsilon, &options, &context).unwrap(),
-            first
-                .evaluate_with_start_scale(&epsilon, &options, &context, start_scale)
+        let mut parts = Vec::new();
+        for sector in ["vacuum", "cut-0", "cut-1", "cut-01"] {
+            let values = match sector {
+                "vacuum" => vacuum.evaluate(&epsilon, &options, &context),
+                "cut-0" => {
+                    first.evaluate_with_start_scale(&epsilon, &options, &context, start_scale)
+                }
+                "cut-1" => {
+                    second.evaluate_with_start_scale(&epsilon, &options, &context, start_scale)
+                }
+                _ => both.evaluate_with_start_scale(&epsilon, &options, &context, start_scale),
+            }
+            .unwrap();
+            // Keep successful sector predictions even if a later sector fails;
+            // these are explicitly partial and cannot pass the full comparator.
+            std::fs::write(
+                report.join(format!(
+                    "prediction-{sector}-{digits}-{order}-{start_scale}.json"
+                )),
+                serde_json::to_vec_pretty(&serde_json::json!({
+                    "sector":sector,"full_amplitude":false,"epsilon":epsilon_text,
+                    "normalization":"unscaled Euclidean amplitude",
+                    "digits":digits,"guard_digits":options.guard_digits,"series_order":order,
+                    "occupied_start_scale":start_scale,"guard_refinement":guard_refinement,
+                    "search_frontier_sectors":search_frontier_sectors,
+                    "values":values.iter().map(ToString::to_string).collect::<Vec<_>>(),
+                    "independent_reference_comparisons":0,
+                }))
                 .unwrap(),
-            second
-                .evaluate_with_start_scale(&epsilon, &options, &context, start_scale)
-                .unwrap(),
-            both.evaluate_with_start_scale(&epsilon, &options, &context, start_scale)
-                .unwrap(),
-        ];
+            )
+            .unwrap();
+            parts.push(values);
+        }
         assert!(
             p.norm(&parts[0][0]) > p.tolerance(10),
             "massive vacuum was discarded"
@@ -198,7 +264,8 @@ fn complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors() {
         // establishes refinement stability only, not reference agreement.
         std::fs::write(report.join(format!("prediction-{digits}-{order}-{start_scale}.json")),serde_json::to_vec_pretty(&serde_json::json!({
             "normalization":"unscaled Euclidean amplitude", "epsilon":epsilon_text,
-            "digits":digits,"series_order":order,"occupied_start_scale":start_scale,
+            "digits":digits,"guard_digits":options.guard_digits,"series_order":order,"occupied_start_scale":start_scale,
+            "search_frontier_sectors":search_frontier_sectors,
             "guard_refinement":guard_refinement,
             "double_cut_closure_diagnostics":format!("{:?}",both.closure_diagnostics()),
             "double_cut_source_policy":source_options.policy.as_str(),
@@ -244,7 +311,7 @@ fn complete_massive_sunset_laurent_refinement() {
     };
     let options = FlowOptions {
         digits: 18,
-        guard_digits: 24,
+        guard_digits: guard_digits(40),
         series_order: 60,
         mass_mode: MassMode::All,
         ..Default::default()
@@ -278,27 +345,43 @@ fn complete_massive_sunset_laurent_refinement() {
                 .try_into()
                 .unwrap(),
         },
+        search_frontier_sectors: std::env::var("RUSTFLOW_WEIGHTED_FRONTIER_SECTORS")
+            .is_ok_and(|value| value == "1"),
         checkpoints: Some(report.join("native-closure")),
         ..Default::default()
     };
     let guard_refinement = closure.guard_refinement;
+    let search_frontier_sectors = closure.search_frontier_sectors;
     let flow = PreparedDensityFlow::prepare(&input, &options, closure, &context).unwrap();
     let mut previous: Option<Vec<symbolica_amflow::LaurentExpansion>> = None;
-    for (digits, order, start) in [(18, 60, 8), (28, 60, 8), (28, 80, 8), (28, 80, 12)] {
+    let mut profiles = numerical_profiles()
+        .into_iter()
+        .map(|(digits, order, start)| (digits, order, start, 1000))
+        .collect::<Vec<_>>();
+    let &(digits, order, start, _) = profiles.last().unwrap();
+    profiles.push((digits, order, start, 2000));
+    for (digits, order, start, epsilon_grid_denominator) in profiles {
         let refined = FlowOptions {
             digits,
             series_order: order,
             ..options.clone()
         };
         let values = flow
-            .solve_with_start_scale(&refined, &context, start)
+            .solve_with_sampling_grid(&refined, &context, start, epsilon_grid_denominator)
             .unwrap();
         // Save predictions before any independent-reference comparison.
-        std::fs::write(report.join(format!("prediction-{digits}-{order}-{start}.json")),
+        let filename = if epsilon_grid_denominator == 1000 {
+            format!("prediction-{digits}-{order}-{start}.json")
+        } else {
+            format!("prediction-{digits}-{order}-{start}-grid-{epsilon_grid_denominator}.json")
+        };
+        std::fs::write(report.join(filename),
             serde_json::to_vec_pretty(&serde_json::json!({
                 "full_amplitude":true,"normalization":"unscaled Euclidean amplitude",
-                "digits":digits,"series_order":order,"occupied_start_scale":start,
+                "digits":digits,"guard_digits":refined.guard_digits,"series_order":order,"occupied_start_scale":start,
+                "epsilon_grid_denominator":epsilon_grid_denominator,
                 "independent_reference_comparisons":0, "guard_refinement":guard_refinement,
+                "search_frontier_sectors":search_frontier_sectors,
                 "expansions":values.iter().map(|value|serde_json::json!({
                     "verified_digits":value.verified_digits,"working_bits":value.working_bits,
                     "samples":value.samples,"validation_samples":value.validation_samples,

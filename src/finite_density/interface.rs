@@ -189,6 +189,7 @@ pub fn evaluate_request(
                 "cut_slots":cuts,
                 "rounds":diagnostics.rounds,
                 "requested":diagnostics.requested,
+                "native_frontier_requests":diagnostics.native_frontier_requests,
                 "provisional_sizes":diagnostics.provisional_sizes,
                 "native_rules":diagnostics.native_rules,
                 "native_rule_applications":diagnostics.native_rule_applications,

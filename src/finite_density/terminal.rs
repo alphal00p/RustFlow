@@ -5,7 +5,8 @@
 //! introduced for a compact polynomial integral.
 use super::PreparedDensityInput;
 use super::boundary::{
-    IntegratedOccupiedBoundary, OccupiedBoundaryDistribution, OccupiedBoundaryLimits,
+    CompactOriginPrescription, IntegratedOccupiedBoundary, OccupiedBoundaryDistribution,
+    OccupiedBoundaryLimits,
 };
 use super::compact::CompactShell;
 use super::flow::OccupiedFlowEvaluation;
@@ -23,6 +24,7 @@ pub struct PreparedOccupiedTerminal {
     dimension: i64,
     epsilon: Symbol,
     nonzero_conditions: Vec<Atom>,
+    origin_prescription: CompactOriginPrescription,
 }
 
 impl PreparedOccupiedTerminal {
@@ -51,7 +53,25 @@ impl PreparedOccupiedTerminal {
         {
             return Ok(None);
         }
-        super::contour::positive_shells(&family)?;
+        let mut origin_prescription = CompactOriginPrescription::Existing;
+        for shell in family.shells() {
+            let mass = Rational::try_from(shell.mass_squared.as_view()).map_err(|_| {
+                Error::Unsupported(
+                    "occupied terminal requires assigned rational shell masses".into(),
+                )
+            })?;
+            if mass < 0 {
+                return Err(Error::Unsupported(
+                    "negative occupied shell mass squared".into(),
+                ));
+            }
+            if mass.is_zero() {
+                if shell.chemical_potential <= 0 {
+                    return Err(Error::Unsupported("massless polynomial terminal requires mu>0; coincident zero-energy endpoints are not admitted".into()));
+                }
+                origin_prescription = CompactOriginPrescription::JointDimensionalMasslessTerminal;
+            }
+        }
         // Keep denominator domains even when the cut removes a target term or
         // a physical assignment cancels a coefficient. Include the original
         // polynomial spelling before its inverse-propagator conversion.
@@ -86,11 +106,17 @@ impl PreparedOccupiedTerminal {
             dimension: options.dimension,
             epsilon: symbol!("rustflow_occupied::epsilon"),
             nonzero_conditions,
+            origin_prescription,
         }))
     }
 
     pub fn family(&self) -> &OccupiedCutFamily {
         &self.family
+    }
+
+    /// Measure-origin identity retained in seed caches and evaluation reports.
+    pub fn origin_prescription(&self) -> &'static str {
+        self.origin_prescription.identity()
     }
 
     /// Euclidean contribution with target Wick coefficients and the routing
@@ -129,7 +155,8 @@ impl PreparedOccupiedTerminal {
             ..Default::default()
         };
         let limits = OccupiedBoundaryLimits::default();
-        let boundary = IntegratedOccupiedBoundary::new(&backend, options, context, limits)?;
+        let boundary = IntegratedOccupiedBoundary::new(&backend, options, context, limits)?
+            .with_terminal_origin(self.origin_prescription);
         let ordinary = self.family.region_family(self.epsilon, self.dimension)?;
         let hard = vec![false; self.family.loops()];
         let mut provenance = OccupiedBoundaryProvenance::default();
@@ -199,7 +226,10 @@ impl PreparedOccupiedTerminal {
             values: values.iter().map(|value| p.mul(value, &factor)).collect(),
             boundary: provenance,
             nonzero_conditions: self.nonzero_conditions.clone(),
-            contour_admission: "independent positive-mass occupied shells; polynomial remaining factors have no virtual poles; unrestricted polynomial loop integrals are scaleless in dimensional regularization; threshold products decided by the compact distribution owner".into(),
+            contour_admission: format!(
+                "independent occupied shells; polynomial remaining factors have no virtual poles; unrestricted polynomial loop integrals are scaleless in dimensional regularization; compact origin prescription={}; massive threshold products retain their thermal limits; massless zero-origin products are jointly continued from sufficiently large ReD before specializing dimension; no flowing massless endpoint admission",
+                self.origin_prescription.identity()
+            ),
             shifted_slots: vec![],
             basis_size: 0,
             construction: "compact_polynomial_moments",
