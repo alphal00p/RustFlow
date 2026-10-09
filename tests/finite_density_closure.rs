@@ -133,23 +133,39 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
             .map(|text| text.parse().unwrap())
             .unwrap_or(default)
     };
+    let defaults = WeightedClosureOptions::default();
     let options = WeightedClosureOptions {
-        max_rounds: budget("RUSTFLOW_WEIGHTED_ROUNDS", 4),
-        max_frontier: budget("RUSTFLOW_WEIGHTED_FRONTIER", 256),
-        max_requested: budget("RUSTFLOW_WEIGHTED_REQUESTED", 2048),
+        max_rounds: budget("RUSTFLOW_WEIGHTED_ROUNDS", defaults.max_rounds),
+        max_frontier: budget("RUSTFLOW_WEIGHTED_FRONTIER", defaults.max_frontier),
+        max_requested: budget("RUSTFLOW_WEIGHTED_REQUESTED", defaults.max_requested),
         search_frontier_sectors: std::env::var("RUSTFLOW_WEIGHTED_FRONTIER_SECTORS")
-            .is_ok_and(|v| v == "1"),
+            .map(|v| v == "1")
+            .unwrap_or(defaults.search_frontier_sectors),
         discovery: GuardedDiscoveryOptions {
-            max_depth: budget("RUSTFLOW_WEIGHTED_DEPTH", 2).try_into().unwrap(),
-            max_domains: budget("RUSTFLOW_WEIGHTED_DOMAINS", 128),
+            max_depth: budget(
+                "RUSTFLOW_WEIGHTED_DEPTH",
+                defaults.discovery.max_depth as usize,
+            )
+            .try_into()
+            .unwrap(),
+            max_domains: budget("RUSTFLOW_WEIGHTED_DOMAINS", defaults.discovery.max_domains),
             sample_seed: 0,
         },
         guard_refinement: GuardRefinementOptions {
-            max_passes: budget("RUSTFLOW_WEIGHTED_GUARD_PASSES", 0),
-            max_added_domains: budget("RUSTFLOW_WEIGHTED_GUARD_DOMAINS", 256),
-            max_interval_width: budget("RUSTFLOW_WEIGHTED_GUARD_WIDTH", 2)
-                .try_into()
-                .unwrap(),
+            max_passes: budget(
+                "RUSTFLOW_WEIGHTED_GUARD_PASSES",
+                defaults.guard_refinement.max_passes,
+            ),
+            max_added_domains: budget(
+                "RUSTFLOW_WEIGHTED_GUARD_DOMAINS",
+                defaults.guard_refinement.max_added_domains,
+            ),
+            max_interval_width: budget(
+                "RUSTFLOW_WEIGHTED_GUARD_WIDTH",
+                defaults.guard_refinement.max_interval_width as usize,
+            )
+            .try_into()
+            .unwrap(),
         },
         checkpoints: Some(report.clone()),
         ..Default::default()

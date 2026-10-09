@@ -14,7 +14,8 @@ use symbolica::prelude::*;
 use super::guarded::{
     GuardedApplicationFailure, GuardedAtomUnresolved, GuardedContext, GuardedDiscovery,
     GuardedDiscoveryOptions, GuardedReductionLimits, GuardedReductionProgram, GuardedUnresolved,
-    IndexBounds, IndexDomain, IndexRole,
+    IndexBounds, IndexDomain, IndexRole, validate_storage_arity, validate_storage_domain,
+    validate_storage_label,
 };
 use crate::reduction::{LinearCombination, ReducedSystem};
 use crate::{DifferentialSystem, Error, Integral, Progress, Result, RunContext};
@@ -38,6 +39,7 @@ pub struct FixedShellDeformation<const N: usize> {
     roles: [IndexRole; N],
     shifted: [bool; N],
     admitted: IndexDomain<N>,
+    physical_arity: usize,
 }
 
 impl<const N: usize> FixedShellDeformation<N> {
@@ -67,12 +69,53 @@ impl<const N: usize> FixedShellDeformation<N> {
             roles,
             shifted,
             admitted: IndexDomain::for_roles(&roles),
+            physical_arity: N,
         })
+    }
+
+    /// Declare how many coordinates represent actual physical factors. The
+    /// remaining storage slots have no factors or deformation and stay zero.
+    pub fn with_physical_arity(mut self, physical_arity: usize) -> Result<Self> {
+        validate_storage_arity::<N>(physical_arity)?;
+        if self.roles[physical_arity..]
+            .iter()
+            .any(|role| *role != IndexRole::Ordinary)
+            || self.shifted[physical_arity..]
+                .iter()
+                .any(|&shifted| shifted)
+        {
+            return Err(Error::InvalidInput(
+                "weighted deformation uses a storage tail coordinate".into(),
+            ));
+        }
+        if self.admitted.bounds()[physical_arity..]
+            .iter()
+            .any(|bound| !bound.contains(0))
+        {
+            return Err(Error::InvalidInput(
+                "weighted admitted domain excludes zero storage tail".into(),
+            ));
+        }
+        self.admitted = IndexDomain::new(std::array::from_fn(|axis| {
+            if axis < physical_arity {
+                self.admitted.bounds()[axis]
+            } else {
+                IndexBounds::fixed(0)
+            }
+        }))
+        .map_err(|error| Error::InvalidInput(error.to_string()))?;
+        self.physical_arity = physical_arity;
+        Ok(self)
+    }
+
+    pub fn physical_arity(&self) -> usize {
+        self.physical_arity
     }
 
     /// Restrict valid integral labels independently of the native source guards.
     /// Invalid labels must never become provisional or constant terminal terms.
     pub fn with_admitted_domain(mut self, domain: IndexDomain<N>) -> Result<Self> {
+        validate_storage_domain(&domain, self.physical_arity)?;
         if !domain.is_subset_of(&IndexDomain::for_roles(&self.roles)) {
             return Err(Error::InvalidInput(
                 "weighted admitted domain includes undefined occupation indices".into(),
@@ -87,6 +130,7 @@ impl<const N: usize> FixedShellDeformation<N> {
     }
 
     fn validate_integral(&self, integral: &[i64; N]) -> Result<()> {
+        validate_storage_label(integral, self.physical_arity)?;
         if !self.admitted.contains(integral) {
             return Err(Error::InvalidInput(format!(
                 "weighted integral {integral:?} lies outside the admitted index domain"
@@ -137,7 +181,7 @@ pub struct GuardRefinementOptions {
 impl Default for GuardRefinementOptions {
     fn default() -> Self {
         Self {
-            max_passes: 0,
+            max_passes: 3,
             max_added_domains: 256,
             max_interval_width: 2,
         }
@@ -173,13 +217,17 @@ pub struct WeightedClosureOptions {
 impl Default for WeightedClosureOptions {
     fn default() -> Self {
         Self {
-            max_rounds: 8,
+            max_rounds: 12,
             max_frontier: 256,
             max_requested: 4096,
-            discovery: GuardedDiscoveryOptions::default(),
+            discovery: GuardedDiscoveryOptions {
+                max_depth: 3,
+                max_domains: 8192,
+                ..Default::default()
+            },
             application: GuardedReductionLimits::default(),
             guard_refinement: GuardRefinementOptions::default(),
-            search_frontier_sectors: false,
+            search_frontier_sectors: true,
             checkpoints: None,
         }
     }
@@ -217,6 +265,10 @@ pub struct WeightedReducedSystem<const N: usize> {
 }
 
 impl<const N: usize> WeightedReducedSystem<N> {
+    pub fn physical_arity(&self) -> usize {
+        self.program.physical_arity()
+    }
+
     /// An identically zero target collection needs no fictitious ODE component.
     pub fn differential_system(&self) -> Option<DifferentialSystem> {
         (!self.reduced.basis.is_empty()).then(|| DifferentialSystem {
@@ -269,6 +321,11 @@ pub fn prepare_weighted_system<const N: usize>(
             "enabled weighted guard refinement needs at least two faces and positive interval width".into(),
         ));
     }
+    if context.physical_arity() != deformation.physical_arity {
+        return Err(Error::InvalidInput(
+            "weighted source/deformation physical arities differ".into(),
+        ));
+    }
     if context.sources().roles() != &deformation.roles {
         return Err(Error::InvalidInput(
             "weighted source/deformation index roles differ".into(),
@@ -278,10 +335,12 @@ pub fn prepare_weighted_system<const N: usize>(
         .sources()
         .native_sources()
         .coefficient_variables()
-        .contains(&PolyVariable::Symbol(deformation.variable))
+        .iter()
+        .skip(N)
+        .any(|variable| variable == &PolyVariable::Symbol(deformation.variable))
     {
         return Err(Error::InvalidInput(
-            "auxiliary variable is absent from the weighted source context".into(),
+            "auxiliary variable must be a declared physical parameter of the weighted source context".into(),
         ));
     }
     if targets
@@ -520,12 +579,17 @@ pub fn prepare_weighted_system<const N: usize>(
                                 weight * coefficient;
                         }
                     }
-                    linear_combination(&weights)
+                    linear_combination(&weights, deformation.physical_arity)
                 })
                 .collect::<Result<Vec<_>>>()?;
             let candidates = reductions
                 .iter()
-                .map(|(indices, terms)| Ok((native_integral(indices)?, linear_combination(terms)?)))
+                .map(|(indices, terms)| {
+                    Ok((
+                        native_integral(indices, deformation.physical_arity)?,
+                        linear_combination(terms, deformation.physical_arity)?,
+                    ))
+                })
                 .collect::<Result<BTreeMap<_, _>>>()?;
             checkpoint(
                 options.checkpoints.as_deref(),
@@ -539,7 +603,7 @@ pub fn prepare_weighted_system<const N: usize>(
                 reduced: ReducedSystem {
                     basis: frontier
                         .iter()
-                        .map(native_integral)
+                        .map(|indices| native_integral(indices, deformation.physical_arity))
                         .collect::<Result<_>>()?,
                     matrix,
                     targets: target_weights,
@@ -776,9 +840,10 @@ fn retain_conditions(target: &mut BTreeMap<String, Atom>, conditions: Vec<Atom>)
     );
 }
 
-fn native_integral<const N: usize>(indices: &[i64; N]) -> Result<Integral> {
+fn native_integral<const N: usize>(indices: &[i64; N], physical_arity: usize) -> Result<Integral> {
+    validate_storage_label(indices, physical_arity)?;
     Ok(Integral(
-        indices
+        indices[..physical_arity]
             .iter()
             .map(|&index| {
                 i16::try_from(index).map_err(|_| {
@@ -791,12 +856,14 @@ fn native_integral<const N: usize>(indices: &[i64; N]) -> Result<Integral> {
 
 fn linear_combination<const N: usize>(
     terms: &BTreeMap<[i64; N], Atom>,
+    physical_arity: usize,
 ) -> Result<LinearCombination> {
     terms
         .iter()
         .filter_map(|(index, coefficient)| {
             let coefficient = coefficient.together().cancel();
-            (!coefficient.is_zero()).then(|| Ok((native_integral(index)?, coefficient)))
+            (!coefficient.is_zero())
+                .then(|| Ok((native_integral(index, physical_arity)?, coefficient)))
         })
         .collect()
 }
@@ -839,6 +906,7 @@ fn checkpoint<const N: usize>(
     std::fs::rename(temporary, program_path)?;
     let metadata = serde_json::json!({ "schema": 1, "round": round, "status": tag,
         "measure_id": program.native().sources().measure_id(),
+        "physical_arity": program.physical_arity(), "storage_capacity": N,
         "requested": requested.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>(),
         "frontier": frontier.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>() });
     let path = directory.join(format!("{base}.json"));
@@ -950,6 +1018,10 @@ mod tests {
         .unwrap();
         let target = [1, 1, 1, -2, 0, 0, 0, 1, 0];
         let mut options = WeightedClosureOptions {
+            guard_refinement: GuardRefinementOptions {
+                max_passes: 0,
+                ..Default::default()
+            },
             discovery: GuardedDiscoveryOptions {
                 max_depth: 3,
                 max_domains: 8192,

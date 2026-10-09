@@ -1,0 +1,200 @@
+{
+  "contour_admission": false,
+  "cut_slots": [
+    0
+  ],
+  "guard_refinement": {
+    "max_added_domains": 64,
+    "max_interval_width": 2,
+    "max_passes": 0
+  },
+  "input": {
+    "chemical_potentials": [
+      "1"
+    ],
+    "digits": 12,
+    "edges": [
+      {
+        "charges": [
+          1
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "vertices": [
+          0,
+          3
+        ]
+      },
+      {
+        "charges": [
+          0
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        "vertices": [
+          3,
+          2
+        ]
+      },
+      {
+        "charges": [
+          0
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        "vertices": [
+          2,
+          1
+        ]
+      },
+      {
+        "charges": [
+          0
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "vertices": [
+          1,
+          0
+        ]
+      },
+      {
+        "charges": [
+          1
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        "vertices": [
+          3,
+          0
+        ]
+      },
+      {
+        "charges": [
+          0
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "0",
+          "1",
+          "0",
+          "-1"
+        ],
+        "vertices": [
+          2,
+          3
+        ]
+      },
+      {
+        "charges": [
+          0
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        "vertices": [
+          1,
+          2
+        ]
+      }
+    ],
+    "laurent_orders": [
+      -4,
+      0
+    ],
+    "loop_charges": [
+      [
+        1
+      ],
+      [
+        0
+      ],
+      [
+        0
+      ],
+      [
+        0
+      ]
+    ],
+    "loops": 4,
+    "name": "chain_of_three_parallel_pairs",
+    "numerator_convention": "shifted_euclidean",
+    "targets": [
+      {
+        "numerator": "g1_2^2",
+        "powers": [
+          1,
+          1,
+          1,
+          2,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "numerator": "g1_2^2+g1_3*g2_4",
+        "powers": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "vertices": 4
+  },
+  "max_depth": 3,
+  "max_domains": 8192,
+  "max_frontier": 128,
+  "max_requested": 512,
+  "max_rounds": 3,
+  "numerical_prediction": false,
+  "physical_arity": 16,
+  "positive_compact_energy_powers": false,
+  "sample_seed": 0,
+  "search_frontier_sectors": true,
+  "shifted_slots": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "source_domain_budget": 65536,
+  "source_policy": "legacy-lorentz",
+  "storage_capacity": 16
+}

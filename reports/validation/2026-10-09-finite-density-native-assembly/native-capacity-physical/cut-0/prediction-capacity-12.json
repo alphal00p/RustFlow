@@ -1,0 +1,53 @@
+{
+  "basis_size": 6,
+  "boundary": "OccupiedBoundaryProvenance { regions: [OccupiedRegionProvenance { hard: [false, false], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [1, 1, 1, 1, 2, 2], half_orders: [None, None, None, None, None, None] }, OccupiedRegionProvenance { hard: [false, true], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [-1+rustflow_occupied::epsilon, -1+rustflow_occupied::epsilon, -1+rustflow_occupied::epsilon, -1+rustflow_occupied::epsilon, rustflow_occupied::epsilon, rustflow_occupied::epsilon], half_orders: [Some(0), Some(0), Some(0), Some(0), None, None] }], integrated_coefficients: 4, integrated_products: 4, scaleless_noncompact_products: 0, vanishing_required_cut_coefficients: 0 }",
+  "cut_slots": [
+    0
+  ],
+  "digits": 18,
+  "epsilon": "4/5",
+  "full_amplitude": false,
+  "guard_digits": 40,
+  "independent_reference_comparisons": 0,
+  "native_storage_capacity": 12,
+  "nonzero_conditions": [
+    "-1+2*rustflow_occupied::{}::epsilon",
+    "-1+rustflow_occupied::{}::epsilon",
+    "-10*rustflow_occupied::{}::epsilon+4+4*rustflow_occupied::{}::epsilon^2",
+    "-12+8*rustflow_occupied::{}::epsilon",
+    "-16+16*rustflow_occupied::{}::epsilon",
+    "-16+8*rustflow_occupied::{}::epsilon",
+    "-2+2*rustflow_occupied::{}::epsilon",
+    "-2+4*rustflow_occupied::{}::epsilon",
+    "-20*rustflow_occupied::{}::epsilon+8+8*rustflow_occupied::{}::epsilon^2",
+    "-3+2*rustflow_occupied::{}::epsilon",
+    "-4+2*rustflow_occupied::{}::epsilon",
+    "-4+4*rustflow_occupied::{}::epsilon",
+    "-4+8*rustflow_occupied::{}::epsilon",
+    "-40*rustflow_occupied::{}::epsilon+16+16*rustflow_occupied::{}::epsilon^2",
+    "-6+4*rustflow_occupied::{}::epsilon",
+    "-8+4*rustflow_occupied::{}::epsilon",
+    "-8+8*rustflow_occupied::{}::epsilon",
+    "1+2*rustflow_occupied::{}::epsilon",
+    "1+4*rustflow_occupied::{}::eta",
+    "1+rustflow_occupied::{}::eta",
+    "12+12*rustflow_occupied::{}::eta",
+    "2*rustflow_occupied::{}::eta",
+    "2+2*rustflow_occupied::{}::eta",
+    "2+4*rustflow_occupied::{}::epsilon",
+    "2+8*rustflow_occupied::{}::eta",
+    "3+3*rustflow_occupied::{}::eta",
+    "4*rustflow_occupied::{}::eta",
+    "4+4*rustflow_occupied::{}::eta",
+    "8+8*rustflow_occupied::{}::eta",
+    "rustflow_occupied::{}::eta"
+  ],
+  "normalization": "unscaled Euclidean amplitude",
+  "occupied_start_scale": 8,
+  "physical_arity": 7,
+  "series_order": 60,
+  "values": [
+    "(-1.0486072658411901573305809030045248850990265764025268038550043e-2+0i)",
+    "(-2.4835251862515791997377544165702764232240472356125834496879370e-3+0i)"
+  ]
+}

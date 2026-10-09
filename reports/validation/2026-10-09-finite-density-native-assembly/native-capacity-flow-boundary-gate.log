@@ -1,0 +1,10 @@
+
+running 5 tests
+test three_compact_loops_need_only_polynomial_soft_moments ... ok
+test mixed_boundary_keeps_symbolic_epsilon_power_and_deformation_roles ... ok
+test occupied_matching_plans_and_integrates_subleading_coefficients ... ok
+test inverse_completion_boundary_uses_exact_positive_energy_certificate ... ok
+test two_virtual_hard_loops_use_recursive_gaussian_boundaries ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s
+

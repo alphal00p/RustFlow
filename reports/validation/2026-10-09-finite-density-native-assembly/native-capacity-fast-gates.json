@@ -1,0 +1,158 @@
+{
+  "schema": 1,
+  "source_snapshot": "native-capacity-source-hashes.json",
+  "source_snapshot_sha256": "09329aaa90f620c9bb404101a22da66bb7309cd4cb6fbe2edf299cde3a592a01",
+  "scope": "Fresh prebuilt native capacity regression gates; compilation and Nix excluded. No supplied numerical oracle comparisons; boundary/terminal values are independent local checks, not mandatory four-loop acceptance.",
+  "gates": [
+    {
+      "gate": "boundary",
+      "binary": "target/release/deps/finite_density_boundary-4ae462f57ad10ba0",
+      "binary_sha256": "be63dd3fe1bbc170879a0523ebc35775b69a750314ff192be7022f37f37c9ad8",
+      "binary_mtime_utc_epoch": 1791574893.0700958,
+      "command": [
+        "target/release/deps/finite_density_boundary-4ae462f57ad10ba0",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.031196401920169592,
+      "peak_rss_kib": 12312,
+      "user_seconds": 0.024014,
+      "system_seconds": 0.040769,
+      "passed": 5,
+      "failed": 0,
+      "summary": [
+        "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s"
+      ],
+      "log": "native-capacity-boundary-gate.log"
+    },
+    {
+      "gate": "flow_boundary",
+      "binary": "target/release/deps/finite_density_flow_boundary-5a28448dc4a00c03",
+      "binary_sha256": "f9055cba8625a0056f27959ac5f9612f70e51fbfe1b8369f9c453368b09cb908",
+      "binary_mtime_utc_epoch": 1791574893.429097,
+      "command": [
+        "target/release/deps/finite_density_flow_boundary-5a28448dc4a00c03",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.0896552843041718,
+      "peak_rss_kib": 12312,
+      "user_seconds": 0.11914899999999999,
+      "system_seconds": 0.042533,
+      "passed": 5,
+      "failed": 0,
+      "summary": [
+        "test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.08s"
+      ],
+      "log": "native-capacity-flow-boundary-gate.log"
+    },
+    {
+      "gate": "terminal",
+      "binary": "target/release/deps/finite_density_terminal-2fe28ef103e25538",
+      "binary_sha256": "e008fb9de52d6f0c5d57ab779450c891c23ed91d3c09d2002d4bca377e0682db",
+      "binary_mtime_utc_epoch": 1791574893.5020971,
+      "command": [
+        "target/release/deps/finite_density_terminal-2fe28ef103e25538",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.10144622903317213,
+      "peak_rss_kib": 12312,
+      "user_seconds": 0.177642,
+      "system_seconds": 0.085917,
+      "passed": 8,
+      "failed": 0,
+      "summary": [
+        "test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s"
+      ],
+      "log": "native-capacity-terminal-gate.log"
+    },
+    {
+      "gate": "input",
+      "binary": "target/release/deps/finite_density_input-39d0974d115e1cc7",
+      "binary_sha256": "1654b6cfae0bf17a2bb8ba6e61cbfb7d6284d8cb5a8723c3ec26fe9ef371c7d4",
+      "binary_mtime_utc_epoch": 1791574890.4650884,
+      "command": [
+        "target/release/deps/finite_density_input-39d0974d115e1cc7",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.0773111586458981,
+      "peak_rss_kib": 12312,
+      "user_seconds": 0.15455,
+      "system_seconds": 0.041325,
+      "passed": 9,
+      "failed": 0,
+      "summary": [
+        "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s"
+      ],
+      "log": "native-capacity-input-gate.log"
+    },
+    {
+      "gate": "normalization",
+      "binary": "target/release/deps/finite_density_normalization-d2c3def69c1fec57",
+      "binary_sha256": "f58e2c52ab3e9398dcc969097f04ce43255df49557299ad9d96b9fb2eb526225",
+      "binary_mtime_utc_epoch": 1791574893.441097,
+      "command": [
+        "target/release/deps/finite_density_normalization-d2c3def69c1fec57",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.22052185097709298,
+      "peak_rss_kib": 12312,
+      "user_seconds": 0.201199,
+      "system_seconds": 0.047478,
+      "passed": 4,
+      "failed": 0,
+      "summary": [
+        "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.21s"
+      ],
+      "log": "native-capacity-normalization-gate.log"
+    },
+    {
+      "gate": "measure",
+      "binary": "target/release/deps/finite_density_measure-84b68ab92b3969d7",
+      "binary_sha256": "81e891dccd6f30cadaf005eca2b1d247795a4ffc4bd864cd88cd02ea9e5e0590",
+      "binary_mtime_utc_epoch": 1791574889.688086,
+      "command": [
+        "target/release/deps/finite_density_measure-84b68ab92b3969d7",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.0801737867295742,
+      "peak_rss_kib": 12312,
+      "user_seconds": 0.07016,
+      "system_seconds": 0.010012,
+      "passed": 1,
+      "failed": 0,
+      "summary": [
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s"
+      ],
+      "log": "native-capacity-measure-gate.log"
+    },
+    {
+      "gate": "independent_mu",
+      "binary": "target/release/deps/finite_density_independent_mu-2ae9a9d323b5acac",
+      "binary_sha256": "4c6dc7f7dfd81d988f7e03ca32202d60cd971ba5ee0e39208176e809c57d620a",
+      "binary_mtime_utc_epoch": 1791574893.1690962,
+      "command": [
+        "target/release/deps/finite_density_independent_mu-2ae9a9d323b5acac",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.34253613417968154,
+      "peak_rss_kib": 12312,
+      "user_seconds": 0.299898,
+      "system_seconds": 0.039483,
+      "passed": 1,
+      "failed": 0,
+      "summary": [
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.34s"
+      ],
+      "log": "native-capacity-independent-mu-gate.log"
+    }
+  ],
+  "status": "passed",
+  "total_passed": 33,
+  "numerical_oracle_records_compared": 0
+}

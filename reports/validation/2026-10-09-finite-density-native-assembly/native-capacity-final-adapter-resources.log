@@ -1,0 +1,8 @@
+
+running 3 tests
+test padded_source_admission_rejects_every_tail_escape_and_binds_arity ... ok
+test derived_unpadded_surface_sources_reduce_and_replay_in_zero_tail_storage ... ok
+test physical_basis_targets_candidates_and_connection_are_identical_after_padding ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.07s
+

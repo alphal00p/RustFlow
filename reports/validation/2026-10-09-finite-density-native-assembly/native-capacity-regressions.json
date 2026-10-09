@@ -1,0 +1,89 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "unique_tests_passed": 102,
+  "failed": 0,
+  "sources": [
+    {
+      "path": "native-capacity-source-hashes.json",
+      "sha256": "09329aaa90f620c9bb404101a22da66bb7309cd4cb6fbe2edf299cde3a592a01"
+    },
+    {
+      "path": "native-capacity-final-source-hashes.json",
+      "sha256": "0d575a9528bc74cba92381f7315c853140007eae80dbdab99aa2716194b215a9"
+    }
+  ],
+  "groups": [
+    {
+      "path": "native-capacity-owner-gates.json",
+      "sha256": "14bd29e90dec6f58374611fcdb8a0b13d084008c692cf976e520b45798e8bf54"
+    },
+    {
+      "path": "native-capacity-fast-gates.json",
+      "sha256": "b01c538d0699d3d5f2cad06a5e817d833265df2dab4faac13209941f23499a54"
+    }
+  ],
+  "additional_gates": [
+    {
+      "gate": "core",
+      "passed": 13,
+      "failed": 0,
+      "resources": {
+        "path": "native-capacity-core-resources.json",
+        "sha256": "98eb77256984a33349ebe083e8ff0578ebabb954df40882cb0345d5a048468c2"
+      },
+      "log": {
+        "path": "native-capacity-core-resources.log",
+        "sha256": "d3abec519205aee4c78544ae23067640f8cbad5ab0194c9c9d3dbc095c5ba4d9"
+      }
+    },
+    {
+      "gate": "mixed",
+      "passed": 6,
+      "failed": 0,
+      "resources": {
+        "path": "native-capacity-mixed-resources.json",
+        "sha256": "295a8a130240639bb66b9f846723a329b505791819ac7d1c24fdf5532008fc1c"
+      },
+      "log": {
+        "path": "native-capacity-mixed-resources.log",
+        "sha256": "cd7ca8c0ccc8327ba67506d38758330a871b5f6599d9d132c407f0790e39b3b6"
+      }
+    },
+    {
+      "gate": "transport",
+      "passed": 4,
+      "failed": 0,
+      "resources": {
+        "path": "native-capacity-transport-resources.json",
+        "sha256": "b138091b38acc462b25be94f937cd2e130b6005e50aed355eb5214a7bb7e5756"
+      },
+      "log": {
+        "path": "native-capacity-transport-resources.log",
+        "sha256": "b50dabb97086864ec4d766ee15bd342d21a135095e7401af7d9fd79828446c9d"
+      }
+    },
+    {
+      "gate": "physical",
+      "passed": 1,
+      "failed": 0,
+      "resources": {
+        "path": "native-capacity-physical-resources.json",
+        "sha256": "269cbc49e4605821660c342836cee0d1ea08e0ae5ce95b114fe56d65db1c50e6"
+      },
+      "log": {
+        "path": "native-capacity-physical-resources.log",
+        "sha256": "a8dfd70635c7c1167806a16c654cf0f50b49a93e7117e8755156486e7bf8af23"
+      }
+    }
+  ],
+  "final_delta_regression": {
+    "path": "native-capacity-final-owner-gates.json",
+    "sha256": "65930c40e5c77f8a0ed4f803feeafaa4513e593c415c1bc3bc431ed46e5af952"
+  },
+  "physical_value_comparison": {
+    "path": "native-capacity-physical-comparison.json",
+    "sha256": "ebd9c41d35f60a1f49a6f3c3d5ff88655364bfddcdd25ab3de42901863f1ebec"
+  },
+  "scope": "101 distinct regression tests and one expensive physical capacity test. The final adapter rerun adds the auxiliary-variable guard regression inside the existing three adapter tests and is not double counted. Four-loop source-only diagnostic runs are unresolved and are not counted as closure or numerical acceptance. Python runtime and full Laurent comparisons are separate gates. Source snapshots distinguish the initial capacity suite from the later guard/provenance additions."
+}

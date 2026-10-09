@@ -1,0 +1,430 @@
+{
+  "schema": 1,
+  "source_snapshot": "native-capacity-final-source-hashes.json",
+  "adapter": {
+    "passed": 3,
+    "failed": 0,
+    "ignored": 0,
+    "harness_seconds": 0.07,
+    "resources": {
+      "command": [
+        "target/release/deps/finite_density_capacity-e2b631a769074ac5",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.09159985277801752,
+      "user_seconds": 0.019219999999999998,
+      "system_seconds": 0.100131,
+      "peak_child_rss_kib": 12380,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    "binary": {
+      "path": "target/release/deps/finite_density_capacity-e2b631a769074ac5",
+      "sha256": "c784136efe64efa263464a7954d4f15f06e2e2eb574727e3cc56e4af36b3202c",
+      "mtime_utc": "2026-10-09T19:59:15.028700+00:00"
+    },
+    "includes": "production arity embedding/replay and projected derivative closure equivalence; nonzero-tail rejection; context arity cache binding; every physical and dummy index rejected as an auxiliary parameter"
+  },
+  "pilot_binary": {
+    "path": "target/release/deps/finite_density_generic_closure-f16c80ab031415bf",
+    "sha256": "6ac7f5de72bd7ad94253d250bda0f437539cbd34a263e076231b088ee531a540",
+    "mtime_utc": "2026-10-09T19:59:15.078701+00:00"
+  },
+  "four_loop_pilots": [
+    {
+      "closure_seconds": 0.042991572,
+      "contour_admission": false,
+      "guard_refinement_added_domains": 0,
+      "guard_refinement_budget_exhausted": false,
+      "guard_refinement_passes": 0,
+      "guard_refinements": [],
+      "native_frontier_requests": 0,
+      "native_rule_applications": 0,
+      "native_rules": 2,
+      "numerical_prediction": false,
+      "physical_arity": 16,
+      "preparation_seconds": 0.09362916,
+      "provisional_sizes": [
+        5
+      ],
+      "requested": 5,
+      "rounds": 1,
+      "status": "unresolved",
+      "storage_capacity": 16,
+      "graph": "chain_of_three_parallel_pairs",
+      "loops": 4,
+      "cut_slots": [
+        0
+      ],
+      "source_count": 84,
+      "reason": "weighted derivative closure round budget exhausted",
+      "retained_gap_reasons": {
+        "DomainBudget": 68
+      },
+      "retained_nonzero_condition_count": 0,
+      "report_directory": "four-loop-source-pilots/physical-16-capacity-16-cuts-0",
+      "resources_file": "four-loop-E7-single-source-resources.json",
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0",
+          "RUSTFLOW_WEIGHTED_CAPACITY=16",
+          "RUSTFLOW_WEIGHTED_ROUNDS=1",
+          "RUSTFLOW_WEIGHTED_DEPTH=1",
+          "RUSTFLOW_WEIGHTED_DOMAINS=64",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots",
+          "target/release/deps/finite_density_generic_closure-f16c80ab031415bf",
+          "--ignored",
+          "--exact",
+          "runtime_graph_native_closure",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.2126257997006178,
+        "user_seconds": 0.116354,
+        "system_seconds": 0.071168,
+        "peak_child_rss_kib": 12380,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "source_corpus_sha256": "80eebcd52a19f182cec3c96ecbe828c6d6bb25dae718e7d042ce0951e651e0a0",
+      "source_corpus_file": "sources.json.gz",
+      "full_result_file": "result.json.gz",
+      "evidence_encoding": "gzip; source_corpus_sha256 hashes decompressed original JSON bytes"
+    },
+    {
+      "closure_seconds": 0.175265238,
+      "contour_admission": false,
+      "guard_refinement_added_domains": 0,
+      "guard_refinement_budget_exhausted": false,
+      "guard_refinement_passes": 0,
+      "guard_refinements": [],
+      "native_frontier_requests": 0,
+      "native_rule_applications": 0,
+      "native_rules": 0,
+      "numerical_prediction": false,
+      "physical_arity": 18,
+      "preparation_seconds": 0.296294365,
+      "provisional_sizes": [
+        5
+      ],
+      "requested": 5,
+      "rounds": 1,
+      "status": "unresolved",
+      "storage_capacity": 20,
+      "graph": "chain_of_three_parallel_pairs",
+      "loops": 4,
+      "cut_slots": [
+        0,
+        4
+      ],
+      "source_count": 328,
+      "reason": "weighted derivative closure round budget exhausted",
+      "retained_gap_reasons": {
+        "DomainBudget": 68
+      },
+      "retained_nonzero_condition_count": 0,
+      "report_directory": "four-loop-source-pilots/physical-18-capacity-20-cuts-0_4",
+      "resources_file": "four-loop-E7-double-source-resources.json",
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0,4",
+          "RUSTFLOW_WEIGHTED_CAPACITY=20",
+          "RUSTFLOW_WEIGHTED_ROUNDS=1",
+          "RUSTFLOW_WEIGHTED_DEPTH=1",
+          "RUSTFLOW_WEIGHTED_DOMAINS=64",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots",
+          "target/release/deps/finite_density_generic_closure-f16c80ab031415bf",
+          "--ignored",
+          "--exact",
+          "runtime_graph_native_closure",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.548399506136775,
+        "user_seconds": 0.44539799999999996,
+        "system_seconds": 0.079389,
+        "peak_child_rss_kib": 39936,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "source_corpus_sha256": "a7f56173ee144ec2464a384a8cb586443cacd1219a7494b66f750ffd539ec89f",
+      "source_corpus_file": "sources.json.gz",
+      "full_result_file": "result.json.gz",
+      "evidence_encoding": "gzip; source_corpus_sha256 hashes decompressed original JSON bytes"
+    },
+    {
+      "closure_seconds": 0.235788776,
+      "contour_admission": false,
+      "guard_refinement_added_domains": 0,
+      "guard_refinement_budget_exhausted": false,
+      "guard_refinement_passes": 0,
+      "guard_refinements": [],
+      "native_frontier_requests": 0,
+      "native_rule_applications": 0,
+      "native_rules": 5,
+      "numerical_prediction": false,
+      "physical_arity": 16,
+      "preparation_seconds": 0.083600887,
+      "provisional_sizes": [
+        5,
+        32
+      ],
+      "requested": 32,
+      "rounds": 2,
+      "status": "unresolved",
+      "storage_capacity": 16,
+      "graph": "chain_of_three_parallel_pairs",
+      "loops": 4,
+      "cut_slots": [
+        0
+      ],
+      "source_count": 84,
+      "reason": "weighted derivative closure round budget exhausted",
+      "retained_gap_reasons": {
+        "DomainBudget": 257
+      },
+      "retained_nonzero_condition_count": 0,
+      "report_directory": "four-loop-source-pilots-depth2/physical-16-capacity-16-cuts-0",
+      "resources_file": "four-loop-E7-single-depth2-resources.json",
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0",
+          "RUSTFLOW_WEIGHTED_CAPACITY=16",
+          "RUSTFLOW_WEIGHTED_ROUNDS=2",
+          "RUSTFLOW_WEIGHTED_DEPTH=2",
+          "RUSTFLOW_WEIGHTED_DOMAINS=256",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-depth2",
+          "target/release/deps/finite_density_generic_closure-f16c80ab031415bf",
+          "--ignored",
+          "--exact",
+          "runtime_graph_native_closure",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.34288732521235943,
+        "user_seconds": 0.32665,
+        "system_seconds": 0.017474,
+        "peak_child_rss_kib": 12372,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "source_corpus_sha256": "80eebcd52a19f182cec3c96ecbe828c6d6bb25dae718e7d042ce0951e651e0a0",
+      "source_corpus_file": "sources.json.gz",
+      "full_result_file": "result.json.gz",
+      "evidence_encoding": "gzip; source_corpus_sha256 hashes decompressed original JSON bytes"
+    },
+    {
+      "closure_seconds": 1.427184347,
+      "contour_admission": false,
+      "guard_refinement_added_domains": 0,
+      "guard_refinement_budget_exhausted": false,
+      "guard_refinement_passes": 0,
+      "guard_refinements": [],
+      "native_frontier_requests": 0,
+      "native_rule_applications": 0,
+      "native_rules": 0,
+      "numerical_prediction": false,
+      "physical_arity": 18,
+      "preparation_seconds": 0.293803701,
+      "provisional_sizes": [
+        5,
+        27
+      ],
+      "requested": 27,
+      "rounds": 2,
+      "status": "unresolved",
+      "storage_capacity": 20,
+      "graph": "chain_of_three_parallel_pairs",
+      "loops": 4,
+      "cut_slots": [
+        0,
+        4
+      ],
+      "source_count": 328,
+      "reason": "weighted derivative closure round budget exhausted",
+      "retained_gap_reasons": {
+        "DomainBudget": 260
+      },
+      "retained_nonzero_condition_count": 0,
+      "report_directory": "four-loop-source-pilots-depth2/physical-18-capacity-20-cuts-0_4",
+      "resources_file": "four-loop-E7-double-depth2-resources.json",
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0,4",
+          "RUSTFLOW_WEIGHTED_CAPACITY=20",
+          "RUSTFLOW_WEIGHTED_ROUNDS=2",
+          "RUSTFLOW_WEIGHTED_DEPTH=2",
+          "RUSTFLOW_WEIGHTED_DOMAINS=256",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-depth2",
+          "target/release/deps/finite_density_generic_closure-f16c80ab031415bf",
+          "--ignored",
+          "--exact",
+          "runtime_graph_native_closure",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.74847964476794,
+        "user_seconds": 1.6815660000000001,
+        "system_seconds": 0.055064999999999996,
+        "peak_child_rss_kib": 43016,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "source_corpus_sha256": "a7f56173ee144ec2464a384a8cb586443cacd1219a7494b66f750ffd539ec89f",
+      "source_corpus_file": "sources.json.gz",
+      "full_result_file": "result.json.gz",
+      "evidence_encoding": "gzip; source_corpus_sha256 hashes decompressed original JSON bytes"
+    },
+    {
+      "closure_seconds": 21.611067097,
+      "contour_admission": false,
+      "guard_refinement_added_domains": 0,
+      "guard_refinement_budget_exhausted": false,
+      "guard_refinement_passes": 0,
+      "guard_refinements": [],
+      "native_frontier_requests": 5,
+      "native_rule_applications": 5,
+      "native_rules": 1650,
+      "numerical_prediction": false,
+      "physical_arity": 16,
+      "preparation_seconds": 0.085249933,
+      "provisional_sizes": [
+        5,
+        36,
+        147
+      ],
+      "requested": 146,
+      "rounds": 3,
+      "status": "unresolved",
+      "storage_capacity": 16,
+      "graph": "chain_of_three_parallel_pairs",
+      "loops": 4,
+      "cut_slots": [
+        0
+      ],
+      "source_count": 84,
+      "reason": "weighted provisional-frontier budget exhausted",
+      "retained_gap_reasons": {
+        "DomainBudget": 7311
+      },
+      "retained_nonzero_condition_count": 4,
+      "report_directory": "four-loop-source-pilots-depth3/physical-16-capacity-16-cuts-0",
+      "resources_file": "four-loop-E7-single-depth3-resources.json",
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0",
+          "RUSTFLOW_WEIGHTED_CAPACITY=16",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-depth3",
+          "target/release/deps/finite_density_generic_closure-f16c80ab031415bf",
+          "--ignored",
+          "--exact",
+          "runtime_graph_native_closure",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 21.82310580322519,
+        "user_seconds": 21.44533,
+        "system_seconds": 0.129252,
+        "peak_child_rss_kib": 55552,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "source_corpus_sha256": "80eebcd52a19f182cec3c96ecbe828c6d6bb25dae718e7d042ce0951e651e0a0",
+      "source_corpus_file": "sources.json.gz",
+      "full_result_file": "result.json.gz",
+      "evidence_encoding": "gzip; source_corpus_sha256 hashes decompressed original JSON bytes"
+    },
+    {
+      "closure_seconds": 108.605463226,
+      "contour_admission": false,
+      "guard_refinement_added_domains": 0,
+      "guard_refinement_budget_exhausted": false,
+      "guard_refinement_passes": 0,
+      "guard_refinements": [],
+      "native_frontier_requests": 2,
+      "native_rule_applications": 1,
+      "native_rules": 874,
+      "numerical_prediction": false,
+      "physical_arity": 18,
+      "preparation_seconds": 0.292000399,
+      "provisional_sizes": [
+        5,
+        27,
+        88
+      ],
+      "requested": 87,
+      "rounds": 3,
+      "status": "unresolved",
+      "storage_capacity": 20,
+      "graph": "chain_of_three_parallel_pairs",
+      "loops": 4,
+      "cut_slots": [
+        0,
+        4
+      ],
+      "source_count": 328,
+      "reason": "weighted derivative closure round budget exhausted",
+      "retained_gap_reasons": {
+        "DomainBudget": 7682
+      },
+      "retained_nonzero_condition_count": 0,
+      "report_directory": "four-loop-source-pilots-depth3/physical-18-capacity-20-cuts-0_4",
+      "resources_file": "four-loop-E7-double-depth3-resources.json",
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0,4",
+          "RUSTFLOW_WEIGHTED_CAPACITY=20",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-depth3",
+          "target/release/deps/finite_density_generic_closure-f16c80ab031415bf",
+          "--ignored",
+          "--exact",
+          "runtime_graph_native_closure",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 109.03328484017402,
+        "user_seconds": 107.685468,
+        "system_seconds": 0.178368,
+        "peak_child_rss_kib": 69096,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "source_corpus_sha256": "a7f56173ee144ec2464a384a8cb586443cacd1219a7494b66f750ffd539ec89f",
+      "source_corpus_file": "sources.json.gz",
+      "full_result_file": "result.json.gz",
+      "evidence_encoding": "gzip; source_corpus_sha256 hashes decompressed original JSON bytes"
+    }
+  ],
+  "scope": "The adapter regression passes. Six explicitly invoked source-only four-loop pilots execute successfully as harnesses but remain mathematically unresolved within their stated resource bounds. No four-loop closed system, physical contour admission, boundary/transport, numerical amplitude, or oracle agreement is claimed. The depth3 runs certify and apply genuine native rules at physical arities16 and18 using capacities16 and20; capacity24 is compiled but not exercised here.",
+  "archive_manifest": "four-loop-source-pilot-archives.json"
+}

@@ -1,0 +1,8 @@
+
+running 3 tests
+test finite_density::guarded::tests::uncancelled_source_and_condition_denominators_remain_required ... ok
+test finite_density::guarded::tests::generated_ball_sources_reduce_surface_moments_to_volume ... ok
+test finite_density::guarded::tests::roles_exact_replay_conditions_and_measure_bound_persistence ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 244 filtered out; finished in 0.07s
+

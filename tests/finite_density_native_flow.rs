@@ -46,7 +46,117 @@ fn save_exact_connection<const N: usize>(flow: &PreparedOccupiedFlow<N>, path: &
         "nonzero_conditions":reduced.nonzero_conditions.iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),
         "auxiliary_variable":flow.differential_system().map(|system| Atom::var(system.variable).to_canonical_string()),
         "closure_diagnostics":format!("{:?}",flow.closure_diagnostics()),
+        "physical_arity":flow.physical_arity(),"native_storage_capacity":flow.storage_capacity(),
     })).unwrap()).unwrap();
+}
+
+fn compare_storage_capacity<const P: usize, const N: usize>(
+    input: &finite_density::PreparedDensityInput,
+    cuts: &[usize],
+    report: &std::path::Path,
+    context: &RunContext,
+) {
+    let options = FlowOptions {
+        digits: 18,
+        guard_digits: 40,
+        series_order: 60,
+        mass_mode: MassMode::All,
+        ..Default::default()
+    };
+    let closure = |capacity: usize| WeightedClosureOptions {
+        checkpoints: Some(report.join(format!("native-capacity-{capacity}"))),
+        ..Default::default()
+    };
+    let exact =
+        PreparedOccupiedFlow::<P>::prepare(input, cuts, &options, closure(P), context).unwrap();
+    let stored =
+        PreparedOccupiedFlow::<N>::prepare(input, cuts, &options, closure(N), context).unwrap();
+    assert_eq!(exact.physical_arity(), P);
+    assert_eq!(stored.physical_arity(), P);
+    assert_eq!(stored.storage_capacity(), N);
+    assert_eq!(exact.family().factors(), stored.family().factors());
+    assert_eq!(exact.family().targets(), stored.family().targets());
+    for flow in [exact.reduced(), stored.reduced()] {
+        assert!(flow.basis.iter().all(|label| label.0.len() == P));
+        assert!(
+            flow.targets
+                .iter()
+                .flat_map(|target| target.keys())
+                .all(|label| label.0.len() == P)
+        );
+    }
+    save_exact_connection(
+        &exact,
+        &report.join(format!("connection-capacity-{P}.json")),
+    );
+    save_exact_connection(
+        &stored,
+        &report.join(format!("connection-capacity-{N}.json")),
+    );
+    let epsilon = Rational::from((4, 5));
+    let a = exact
+        .evaluate_report(&epsilon, &options, context, 8)
+        .unwrap();
+    let b = stored
+        .evaluate_report(&epsilon, &options, context, 8)
+        .unwrap();
+    let p = Precision::decimal(options.digits + options.guard_digits).unwrap();
+    // Save both independently prepared native predictions before comparison.
+    for (capacity, result) in [(P, &a), (N, &b)] {
+        std::fs::write(report.join(format!("prediction-capacity-{capacity}.json")),
+            serde_json::to_vec_pretty(&serde_json::json!({
+                "epsilon":"4/5","cut_slots":cuts,"full_amplitude":false,
+                "physical_arity":P,"native_storage_capacity":capacity,
+                "normalization":"unscaled Euclidean amplitude",
+                "digits":options.digits,"guard_digits":options.guard_digits,
+                "series_order":options.series_order,"occupied_start_scale":8,
+                "values":result.values.iter().map(ToString::to_string).collect::<Vec<_>>(),
+                "basis_size":result.basis_size,"boundary":format!("{:?}",result.boundary),
+                "nonzero_conditions":result.nonzero_conditions.iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),
+                "independent_reference_comparisons":0,
+            })).unwrap()).unwrap();
+    }
+    assert_eq!(a.values.len(), b.values.len());
+    for (a, b) in a.values.iter().zip(&b.values) {
+        let scale = p.norm(a);
+        let tolerance = if scale < p.tolerance(20) {
+            p.tolerance(25)
+        } else {
+            scale * p.tolerance(15)
+        };
+        assert!(
+            p.norm(&p.sub(a, b)) <= tolerance,
+            "physical flow changed with storage capacity {P}->{N}: {a} versus {b}"
+        );
+    }
+}
+
+#[test]
+#[ignore = "explicit native capacity comparison through closure, boundaries and physical transport"]
+fn native_storage_capacity_preserves_physical_occupied_flows() {
+    let input: DensityInput = serde_json::from_str(include_str!(
+        "../examples/finite_density/massive_two_loop_sunset.json"
+    ))
+    .unwrap();
+    let prepared = input.prepare().unwrap();
+    let report = std::env::var_os("RUSTFLOW_DENSITY_FLOW_REPORT")
+        .map(std::path::PathBuf::from)
+        .unwrap_or_else(|| std::env::temp_dir().join("rustflow-density-storage-capacity"));
+    std::fs::create_dir_all(&report).unwrap();
+    std::fs::write(
+        report.join("input.json"),
+        serde_json::to_vec_pretty(&input).unwrap(),
+    )
+    .unwrap();
+    let context = RunContext {
+        progress: Some(Arc::new(|event| eprintln!("{event:?}"))),
+        ..Default::default()
+    };
+    for name in ["cut-0", "cut-01"] {
+        std::fs::create_dir_all(report.join(name)).unwrap();
+    }
+    compare_storage_capacity::<7, 12>(&prepared, &[0], &report.join("cut-0"), &context);
+    compare_storage_capacity::<9, 12>(&prepared, &[0, 1], &report.join("cut-01"), &context);
 }
 
 #[test]
@@ -134,7 +244,7 @@ fn complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors() {
     };
     let options = FlowOptions {
         digits: 18,
-        guard_digits: guard_digits(20),
+        guard_digits: guard_digits(40),
         series_order: 80,
         mass_mode: MassMode::All,
         ..Default::default()
@@ -155,14 +265,15 @@ fn complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors() {
             .unwrap_or(default)
     };
     let guard_refinement = GuardRefinementOptions {
-        max_passes: budget("RUSTFLOW_WEIGHTED_GUARD_PASSES", 0),
+        max_passes: budget("RUSTFLOW_WEIGHTED_GUARD_PASSES", 3),
         max_added_domains: budget("RUSTFLOW_WEIGHTED_GUARD_DOMAINS", 256),
         max_interval_width: budget("RUSTFLOW_WEIGHTED_GUARD_WIDTH", 2)
             .try_into()
             .unwrap(),
     };
-    let search_frontier_sectors =
-        std::env::var("RUSTFLOW_WEIGHTED_FRONTIER_SECTORS").is_ok_and(|value| value == "1");
+    let search_frontier_sectors = std::env::var("RUSTFLOW_WEIGHTED_FRONTIER_SECTORS")
+        .map(|value| value == "1")
+        .unwrap_or(WeightedClosureOptions::default().search_frontier_sectors);
     let closure = |name: &str| WeightedClosureOptions {
         max_rounds: budget("RUSTFLOW_WEIGHTED_ROUNDS", 12),
         discovery: GuardedDiscoveryOptions {
@@ -346,7 +457,8 @@ fn complete_massive_sunset_laurent_refinement() {
                 .unwrap(),
         },
         search_frontier_sectors: std::env::var("RUSTFLOW_WEIGHTED_FRONTIER_SECTORS")
-            .is_ok_and(|value| value == "1"),
+            .map(|value| value == "1")
+            .unwrap_or(WeightedClosureOptions::default().search_frontier_sectors),
         checkpoints: Some(report.join("native-closure")),
         ..Default::default()
     };

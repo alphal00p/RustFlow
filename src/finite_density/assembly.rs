@@ -133,9 +133,10 @@ impl PreparedDensityFlow {
                             .join("-")
                     )));
             }
-            // Native guarded programs have a const-generic index arity. This
-            // dispatch is by representation size, never input or benchmark
-            // name. Extend the compiled arities alongside numerical admissions.
+            // Native guarded programs have const-generic storage. Preserve the
+            // established exact capacities, then select the smallest compiled
+            // bucket for larger or intermediate physical arities. Padding is
+            // confined to zero-tail index storage, never physical factors.
             let flow: Box<dyn OccupiedEvaluation> = match arity {
                 7 => Box::new(PreparedOccupiedFlow::<7>::prepare(
                     &input, &cuts, options, limits, context,
@@ -143,9 +144,24 @@ impl PreparedDensityFlow {
                 9 => Box::new(PreparedOccupiedFlow::<9>::prepare(
                     &input, &cuts, options, limits, context,
                 )?),
+                1..=12 => Box::new(PreparedOccupiedFlow::<12>::prepare(
+                    &input, &cuts, options, limits, context,
+                )?),
+                13..=16 => Box::new(PreparedOccupiedFlow::<16>::prepare(
+                    &input, &cuts, options, limits, context,
+                )?),
+                17..=20 => Box::new(PreparedOccupiedFlow::<20>::prepare(
+                    &input, &cuts, options, limits, context,
+                )?),
+                21..=24 => Box::new(PreparedOccupiedFlow::<24>::prepare(
+                    &input, &cuts, options, limits, context,
+                )?),
+                25..=32 => Box::new(PreparedOccupiedFlow::<32>::prepare(
+                    &input, &cuts, options, limits, context,
+                )?),
                 _ => {
                     return Err(Error::Unsupported(format!(
-                        "occupied runtime arity {arity} is not compiled; the const-generic Rust flow API admits separately compiled arities"
+                        "occupied physical arity {arity} exceeds the compiled native storage capacities [7, 9, 12, 16, 20, 24, 32]; use the const-generic Rust flow API to compile a larger capacity"
                     )));
                 }
             };

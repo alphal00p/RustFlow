@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "900",
+    "target/release/deps/finite_density_native_flow-2ad25996bc8f14af",
+    "native_storage_capacity_preserves_physical_occupied_flows",
+    "--ignored",
+    "--exact",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 245.70878702914342,
+  "user_seconds": 243.375946,
+  "system_seconds": 0.32992099999999996,
+  "peak_child_rss_kib": 55332,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "source_snapshot": "native-capacity-source-hashes.json",
+  "passed": 45,
+  "failed": 0,
+  "ignored": 3,
+  "scope": "Fresh production capacity adapter, full finite_density lib filter, and fast closure source/admission regressions; no four-loop numerical or full Laurent acceptance claim. Excludes duplicate guarded3 and reduction5 exploratory filters. The later auxiliary-variable guard and evaluation-report provenance additions are not covered by this historical snapshot.",
+  "gates": [
+    {
+      "command": [
+        "target/release/deps/symbolica_amflow-ad945eb4642fae0f",
+        "finite_density::",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 4.665255327243358,
+      "user_seconds": 5.4289,
+      "system_seconds": 0.15790099999999999,
+      "peak_child_rss_kib": 12348,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded",
+      "gate": "unit",
+      "passed": 36,
+      "failed": 0,
+      "ignored": 0,
+      "harness_seconds": 4.66,
+      "binary_sha256": "b9ab8ee4f8b535304e544b792fcbe3a8edcfc7ca22874dc540c7fbff77143166",
+      "binary_mtime_utc": "2026-10-09T19:41:21.866064+00:00",
+      "resources_file": "native-capacity-unit-resources.json",
+      "log_file": "native-capacity-unit-resources.log"
+    },
+    {
+      "command": [
+        "target/release/deps/finite_density_capacity-e2b631a769074ac5",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.08926217816770077,
+      "user_seconds": 0.016996,
+      "system_seconds": 0.098324,
+      "peak_child_rss_kib": 12348,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded",
+      "gate": "adapter",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "harness_seconds": 0.07,
+      "binary_sha256": "04fedc48d28b743aa5189a04da0e93da6ffc7762ab93aa2007f2ea16cd6d1799",
+      "binary_mtime_utc": "2026-10-09T19:44:08.780545+00:00",
+      "resources_file": "native-capacity-adapter-resources.json",
+      "log_file": "native-capacity-adapter-resources.log"
+    },
+    {
+      "command": [
+        "target/release/deps/finite_density_closure-665c01718e3331cc",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.15601599030196667,
+      "user_seconds": 0.20490799999999998,
+      "system_seconds": 0.089084,
+      "peak_child_rss_kib": 12348,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded",
+      "gate": "closure-gates",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 3,
+      "harness_seconds": 0.14,
+      "binary_sha256": "8aa28974ef98ebac692e513d89d56622e37266738f769b8c812d20bb94e870c0",
+      "binary_mtime_utc": "2026-10-09T19:44:08.660544+00:00",
+      "resources_file": "native-capacity-closure-gates-resources.json",
+      "log_file": "native-capacity-closure-gates-resources.log"
+    }
+  ]
+}

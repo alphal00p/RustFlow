@@ -41,6 +41,9 @@ pub struct OccupiedFlowEvaluation {
     pub contour_admission: String,
     pub shifted_slots: Vec<usize>,
     pub basis_size: usize,
+    pub physical_arity: usize,
+    /// None for compact terminals, which do not construct a native program.
+    pub native_storage_capacity: Option<usize>,
     /// None is reserved for constructions without a guarded source program.
     pub source_options: Option<WeightedSourceOptions>,
 }
@@ -218,6 +221,16 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
         &self.family
     }
 
+    /// Physical factors retained by geometry, boundaries and transport.
+    pub fn physical_arity(&self) -> usize {
+        self.family.factors().len()
+    }
+
+    /// Native guarded-program index storage; excess axes are fixed at zero.
+    pub fn storage_capacity(&self) -> usize {
+        N
+    }
+
     /// Euclidean occupied contribution, including target phases and the exact
     /// loop-routing Jacobian. This is one cut contribution, not a full vacuum
     /// plus density assembly. The returned target weights are projected jointly
@@ -342,6 +355,8 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
                 .filter_map(|(i, &b)| b.then_some(i))
                 .collect(),
             basis_size: self.closed.reduced.basis.len(),
+            physical_arity: self.physical_arity(),
+            native_storage_capacity: Some(N),
             source_options: Some(self.source_options),
         })
     }

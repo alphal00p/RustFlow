@@ -1,0 +1,14 @@
+
+running 8 tests
+test terminal_declines_virtual_poles_and_zeroes_unrestricted_polynomials ... ok
+test empty_support_and_compact_terminals_keep_the_common_amf_contract ... ok
+test massless_terminal_admission_does_not_admit_flowing_virtual_poles ... ok
+full massless D=4 pole diagnostic: numerical failure: gamma evaluation reached a pole or exceeded the numeric backend's range
+test public_massless_terminal_keeps_removable_and_true_dimensional_poles_distinct ... ok
+test public_assembly_below_threshold_retains_massive_vacuum ... ok
+test public_assembly_above_threshold_keeps_vacuum_and_raised_surface ... ok
+test public_massless_terminal_assembly_matches_fixed_numerator_mass_derivatives ... ok
+test public_assembly_threshold_uses_thermal_finite_jump_and_diagnoses_singular_case ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s
+

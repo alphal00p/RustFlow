@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/core-e0c6134f216216a6",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.3774295910261571,
+  "user_seconds": 2.51118,
+  "system_seconds": 0.155584,
+  "peak_child_rss_kib": 12348,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

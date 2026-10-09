@@ -3,7 +3,6 @@
 //! Answers are serialized only after the complete native operation succeeds.
 //! A failed occupied sector is never replaced by a partial amplitude.
 use super::assembly::{DensityEvaluation, PreparedDensityFlow};
-use super::guarded::GuardedDiscoveryOptions;
 use super::reduction::WeightedClosureOptions;
 use super::{DensityInput, PreparedDensityInput};
 use crate::{ComplexFloat, Error, FlowOptions, LaurentExpansion, MassMode, Result, RunContext};
@@ -20,15 +19,7 @@ pub fn default_options(input: &DensityInput) -> FlowOptions {
 }
 
 pub fn default_closure_options() -> WeightedClosureOptions {
-    WeightedClosureOptions {
-        max_rounds: 12,
-        discovery: GuardedDiscoveryOptions {
-            max_depth: 3,
-            max_domains: 8192,
-            ..Default::default()
-        },
-        ..Default::default()
-    }
+    WeightedClosureOptions::default()
 }
 
 /// Parse a nonzero real rational before any potentially expensive preparation.
@@ -113,6 +104,8 @@ fn sample_report(
             "positive_compact_energy_powers":source.positive_compact_energy_powers,
         })),
         "basis_size":report.basis_size,
+        "physical_arity":report.physical_arity,
+        "native_storage_capacity":report.native_storage_capacity,
         "shifted_slots":report.shifted_slots,
         "contour_admission":report.contour_admission,
         "nonzero_conditions":report.nonzero_conditions.iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),

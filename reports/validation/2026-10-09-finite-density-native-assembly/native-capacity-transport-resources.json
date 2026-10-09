@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/physical_transport-577248d15bcd58cf",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.5269052479416132,
+  "user_seconds": 0.9761209999999999,
+  "system_seconds": 0.09609799999999999,
+  "peak_child_rss_kib": 9284,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

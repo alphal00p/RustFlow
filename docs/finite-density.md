@@ -358,17 +358,23 @@ after summation. Shared evaluation entry points are `rustflow finite-density`,
 `evaluate_finite_density(input_json, epsilon=None)`, with detailed controls in
 the [CLI and Python protocol](cli.md#native-finite-density-input-and-evaluation).
 They retain raw Euclidean normalization and propagate any failed required sector.
-The runtime weighted-AMF dispatch currently compiles index arities 7 and 9; the
-const-generic Rust flow API can compile other arities, subject to physical
-admission and closure. Before that dispatch, a strict disjoint-support proof
+The runtime weighted-AMF dispatch preserves exact storage arities 7 and 9,
+then uses capacities 12, 16, 20, 24 or 32 for other physical arities that fit.
+Physical factors are never padded: only native index arrays acquire verified
+fixed-zero tails, which are removed before boundary and transport interfaces.
+The const-generic Rust API can compile larger capacities, subject to physical
+admission and closure. See the [capacity invariants and validation](finite-density-native-capacity.md).
+The default closure requests provisional frontier sectors, allows 12 rounds,
+and uses native search depth 3 with 8192 domains. Guard refinement is bounded
+to 3 additional passes, 256 added domains and interval width 2. Before that dispatch, a strict disjoint-support proof
 can return zero, and `PreparedOccupiedTerminal` handles surviving polynomial
 noncut factors using native compact moments without an auxiliary parameter or a
 compiled guarded index arity. It retains unrestricted polynomial virtual factors
 only when their dimensional integral is scaleless. It does not replace retained
 virtual poles by moments.
 
-Active occupied shells currently require assigned strictly positive rational
-squared masses. Numerical weighted flow uses either the open massive-sunset
+Active occupied shells in weighted AMF currently require assigned strictly
+positive rational squared masses. Numerical weighted flow uses either the open massive-sunset
 certificate or the routing-dependent heavy-edge certificate, with the common
 +i0 prescription and all uncut physical quadratic factors shifted. An uncut-line
 bound does not admit a massless shell endpoint. Generic massless occupied limits,

@@ -1,0 +1,10 @@
+
+running 5 tests
+test finite_density::reduction::tests::guard_faces_cover_only_one_finite_axis_and_preserve_symbolic_bounds ... ok
+test finite_density::reduction::tests::fixed_shell_placement_and_auxiliary_sign_are_explicit ... ok
+test finite_density::reduction::tests::round_budget_keeps_provisional_frontier_unresolved ... ok
+test finite_density::reduction::tests::native_compact_flow_closes_without_a_caller_terminal_basis ... ok
+test finite_density::reduction::tests::physical_recenter_gap_refines_through_native_discovery_and_replay ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 242 filtered out; finished in 0.48s
+

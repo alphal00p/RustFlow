@@ -144,6 +144,7 @@ impl OccupiedCutFamily {
     ) -> Result<PreparedWeightedSources<N>> {
         let policy = options.policy;
         let measure = self.deformed_measure::<N>(eta, shifted)?;
+        let physical_arity = measure.physical_arity();
         let indices =
             std::array::from_fn(|slot| symbol!(format!("rustflow_occupied_indices::a_{slot}")));
         let symbolic_dimension = Atom::num(dimension) - Atom::num(2) * Atom::var(epsilon);
@@ -213,6 +214,9 @@ impl OccupiedCutFamily {
             .push_str(&format!("; source presentation={}", policy.as_str()));
         let roles = *measure.roles();
         let mut bounds = *IndexDomain::for_roles(&roles).bounds();
+        // Backend storage coordinates are absent from the physical measure.
+        // Freeze them in source, support-zero, and deformation domains alike.
+        bounds[physical_arity..].fill(IndexBounds::fixed(0));
         identity.measure.push_str(&format!(
             "; positive compact energy completion powers={}",
             options.positive_compact_energy_powers,
@@ -271,14 +275,22 @@ impl OccupiedCutFamily {
                 parameters.push(parameter);
             }
         }
-        let context = GuardedContext::new(identity, roles, indices, parameters, identities)?
-            .with_measure_zero_domains(zero_domains)?;
+        let context = GuardedContext::new_with_physical_arity(
+            identity,
+            roles,
+            indices,
+            parameters,
+            identities,
+            physical_arity,
+        )?
+        .with_measure_zero_domains(zero_domains)?;
         let mut selected = [false; N];
         for &slot in shifted {
             selected[slot] = true;
         }
         let deformation =
             FixedShellDeformation::new(eta, AuxiliaryConvention::NativeMinusEta, roles, selected)?
+                .with_physical_arity(physical_arity)?
                 .with_admitted_domain(admitted_domain)?;
         let targets = self
             .targets()
@@ -287,13 +299,17 @@ impl OccupiedCutFamily {
                 target
                     .iter()
                     .map(|(integral, coefficient)| {
-                        let indices = integral
-                            .0
-                            .iter()
-                            .map(|&index| i64::from(index))
-                            .collect::<Vec<_>>()
-                            .try_into()
-                            .map_err(|_| Error::InvalidInput("weighted target arity".into()))?;
+                        if integral.0.len() != physical_arity {
+                            return Err(Error::InvalidInput(
+                                "weighted target physical arity".into(),
+                            ));
+                        }
+                        // Target conversion has already been performed in the
+                        // unpadded physical inverse-propagator basis.
+                        let mut indices = [0_i64; N];
+                        for (index, &physical) in indices.iter_mut().zip(&integral.0) {
+                            *index = i64::from(physical);
+                        }
                         Ok((indices, coefficient.clone()))
                     })
                     .collect::<Result<_>>()

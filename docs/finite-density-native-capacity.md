@@ -1,9 +1,10 @@
-# Guarded native capacity: source-inspected design
+# Guarded native storage capacity
 
-Status: design only. No production padding, new runtime arity, or four-loop
-numerical admission is implemented by this note. The massive sunset's requested
-native closure and complete fixed-dimension endpoint comparison now pass; its
-Laurent comparison and the mandatory four-loop evaluations remain incomplete.
+Status: production storage adapter implemented and tested, including native
+closure, integrated boundaries and endpoints at padded capacities. The implementation does not broaden contour, endpoint,
+or distributional admission. The complete massive sunset has already passed
+its fixed-dimension reference comparison; Laurent comparison and mandatory
+four-loop evaluations remain separate gates.
 The native dependency inspected is RustRed commit
 `78969aab524b7d6a2eec36f59b01e9af1e04cc04`.
 
@@ -13,17 +14,21 @@ The physical weighted arity is the number of completed scalar/medium slots
 plus two occupation slots per cut. For the supplied four-loop inputs the
 completed basis has 14 slots, so one through four cuts require arities
 16, 18, 20, 22. This count is a representation size, not a graph identity or
-an admission criterion. The public assembly currently dispatches occupied
-flows at exactly 7 and 9; its compact terminal and strict empty-support paths
-run before that dispatch. See [assembly.rs](../src/finite_density/assembly.rs).
+an admission criterion. The public assembly preserves exact capacities 7 and 9
+and otherwise chooses the smallest available capacity from 12, 16, 20, 24, 32.
+A physical arity above 32 requires a separately compiled const-generic Rust
+capacity. Compact terminal and strict empty-support paths run before this
+storage dispatch. See [assembly.rs](../src/finite_density/assembly.rs).
 
-[WeightedMeasure](../src/finite_density/measure.rs) owns actual factors and
-generates their distributional identities. It is currently const generic:
-its constructor builds the numerator basis from its `[Atom; N]` factors and
-source generation loops over all N factors. Adding constant or zero factors
-here is not storage padding: it changes the physical basis and source corpus.
-[geometry.rs](../src/finite_density/geometry.rs) also converts its factor
-vector to an exact-size array. These owners must keep the original factors.
+[WeightedMeasure](../src/finite_density/measure.rs) stores only the actual
+factors in a vector. `from_physical` accepts these factors and their real roles;
+the existing array-taking `new` remains an exact-arity compatibility wrapper.
+Numerator-basis construction and factor/occupation differentiation iterate over
+this physical vector. Native index and guard arrays alone have capacity N.
+[geometry.rs](../src/finite_density/geometry.rs) passes its original factor
+vector directly; no constant, zero, cut, occupation or ordinary factor is
+invented for storage. Source identifiers and expressions at exact p=N are
+unchanged.
 
 ## A sound embedding using the current public guarded API
 
@@ -122,43 +127,69 @@ it requires a reviewed dependency change and updated native transport tests.
 The guarded-only embedding can be an interim sound adapter with its resource
 cost stated explicitly.
 
-## RustFlow implementation choices and required probe
+## RustFlow implementation and validation
 
-The smallest short-term dispatch change is to compile exact N=16,18,20,22
-beside 7/9. It needs no padding and no new mathematical source rules, but adds
-large reduction/flow monomorphizations and leaves runtime support tied to a
-finite exact-size list. It does not admit any currently excluded contour.
+`WeightedMeasure<N>` keeps p physical factors and emits native index/guard
+arrays of capacity N. Every emitted source has zero tail shifts and fixed-zero
+tail guards. Source vector fields cannot depend on unused dummy index symbols.
+Normal-source shifting and domain pullbacks act only on actual physical slots.
 
-For a capacity backend, separate dynamic physical source generation from
-const-generic reduction storage. A vector-backed physical owner can preserve
-the current array-taking public wrappers, emit physical shift/guard vectors,
-then lower once to the selected backend capacity. A transitional alternative
-is exact physical source generation at several small const arities followed
-by one larger guarded reduction capacity; it reduces solver monomorphizations
-but still needs physical source dispatch.
+[preparation.rs](../src/finite_density/preparation.rs) pads already-converted
+physical target labels and fixes every admitted and support-zero tail domain.
+[guarded.rs](../src/finite_density/guarded.rs) validates the embedding at source,
+program discovery/decoding/application and terminal boundaries, and records
+`zero-tail-storage-v1:physical=p:capacity=N` only when p<N. Exact p=N measure
+identity is preserved. [reduction.rs](../src/finite_density/reduction.rs) requires
+the same true arity in its deformation, retains zero tails during discovery
+and refinement, and verifies then trims every exported physical master, target
+weight and candidate reduction. Physical region, boundary, normalization and
+transport owners receive unpadded labels.
 
-A smaller coherent refactor can retain `WeightedMeasure<N>` and its native
-shift/guard arrays while storing only p actual factors in a vector. The existing
-array constructor remains the exact-p=N wrapper; a new physical-vector
-constructor requires 0<p<=N. Numerator-basis generation and every factor or
-occupation loop must use p, and source emission must fix all tail bounds to
-zero and reject nonzero tail shifts. This applies the same embedding while
-constructing the source descriptions; it does not add physical factors or
-source identities. It avoids a complete dynamic-identity transport rewrite.
-Preparation, deformation admission and every physical export still need the
-same checked true-arity metadata. Retaining exact 7/9 dispatch initially avoids
-changing the measured massive-sunset seed search while larger capacity buckets
-are validated.
+The adapter retains the seed-enumeration cost described above. Compiled bucket
+bounds and bounded search budgets are backend resource limits, not loop-order
+or graph-name assumptions. Native exact source replay and closure are still
+required before numerical evaluation; the wider storage dispatch does not
+promise closure for every represented family. Massless flowing graphs remain
+unadmitted even if their index arrays fit a bucket.
 
-Specific frontend integration points are
-[preparation.rs](../src/finite_density/preparation.rs) for source/target lowering,
-[guarded.rs](../src/finite_density/guarded.rs) for checked embedding and cache
-identity, and [reduction.rs](../src/finite_density/reduction.rs) for admitted
-domains and final projection. Its `discovery_domains` broadens ordinary
-nonpositive indices, so the existing intersection with the deformation's
-admitted domain must retain `[0,0]` for all dummy axes. Its current
-`native_integral` exports every N index and must instead project a checked
-tail before `OccupiedFlowBoundary` receives the physical master labels.
+The fresh finite-density library suite passed 36/36, including equivalence of
+all five physical source presentations at p=4 versus capacity 6 and invalid
+physical-factor construction. The guarded adapter suite passed 3/3, covering
+invalid tails/domains/coefficients, exact replay and decoding, and identical
+physical closure exports. The physical occupied-flow test passed p=7 versus
+capacity 12 and p=9 versus capacity 12: the closed bases have 6 and 11 members,
+respectively, and all four target values agree at the test's 15-digit criterion.
+The saved physical bases, connection matrices, target weights and retained
+nonzero conditions are also exactly identical; see
+[`native-capacity-physical-comparison.json`](../reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical-comparison.json).
+That prebuilt test process took 245.7088 seconds and peak RSS 55332 KiB; native
+storage padding can change search cost even when results agree. Another 33
+boundary, terminal, input, normalization, measure and independent-chemical-
+potential regression checks passed.
+
+Evidence is retained in the native-assembly report directory as
+[`native-capacity-unit-resources.json`](../reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-unit-resources.json),
+[`native-capacity-adapter-resources.json`](../reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-adapter-resources.json),
+[`native-capacity-physical-resources.json`](../reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical-resources.json),
+and [`native-capacity-fast-gates.json`](../reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-fast-gates.json),
+tied to `native-capacity-source-hashes.json`. These gates compare storage
+representations of the admitted massive problem; they contain no numerical
+four-loop prediction or supplied-oracle comparison.
+
+The later final-source owner audit also exercised genuine four-loop sources
+for the E7 definition at physical arities 16 and 18, using capacities 16 and 20.
+Its depth-3 single-cut pilot derived 84 source rows and 1650 native rules,
+with 5 actual rule applications, but reached a frontier of 147 above its budget
+128. Its double-cut pilot derived 328 source rows and 874 native rules, with
+one application, and remained unresolved after three rounds at frontier 88.
+Closure discovery took 21.611 and 108.605 seconds respectively. These are
+bounded algebraic pilots, with retained native proof gaps and zero contour or
+numerical admission. See
+[`native-capacity-final-owner-gates.json`](../reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-final-owner-gates.json),
+which preserves the lower-depth attempts and final-source snapshot as well.
+
+The original design-stage probe below is historical evidence, with its source
+snapshot preserved separately from the current implementation.
 
 A probe in [finite_density_capacity.rs](../tests/finite_density_capacity.rs) derives an
 unpadded occupation multiplication identity from `WeightedMeasure<2>`, then
@@ -172,6 +203,5 @@ hash and source snapshot are recorded in
 [`frontier-sector-capacity-gates.json`](../reports/validation/2026-10-09-finite-density-native-assembly/frontier-sector-capacity-gates.json).
 This verifies the two-to-four coordinate algebraic probe only; no production
 capacity dispatch or numerical amplitude was tested.
-Follow-up tests must also compare a physical shell/occupation IBP corpus,
-guard refinements, nonzero conditions, closure/exported basis and ordinary
-nonpadded behavior before enabling any capacity dispatch.
+The current tests above extend this historical probe through the production
+physical owner, guarded closure and actual occupied numerical evaluation.

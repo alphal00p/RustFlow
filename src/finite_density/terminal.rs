@@ -232,6 +232,8 @@ impl PreparedOccupiedTerminal {
             ),
             shifted_slots: vec![],
             basis_size: 0,
+            physical_arity: self.family.factors().len(),
+            native_storage_capacity: None,
             construction: "compact_polynomial_moments",
             source_options: None,
         })

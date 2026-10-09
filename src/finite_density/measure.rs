@@ -23,15 +23,38 @@ use symbolica::prelude::*;
 /// with any additional physically admitted index domains before reduction.
 pub struct WeightedMeasure<const N: usize> {
     coordinates: Vec<Atom>,
-    factors: [Atom; N],
+    // Only actual physical factors are stored. N is backend storage capacity.
+    factors: Vec<Atom>,
     roles: [IndexRole; N],
     numerator_basis: InversePropagatorBasis,
     numerator_slots: Vec<usize>,
 }
 
 impl<const N: usize> WeightedMeasure<N> {
+    /// Exact-physical-arity compatibility constructor.
     pub fn new(coordinates: Vec<Atom>, factors: [Atom; N], roles: [IndexRole; N]) -> Result<Self> {
-        let numerator_slots = (0..N)
+        Self::from_physical(coordinates, factors.into(), roles.into())
+    }
+
+    /// Physical factors are never padded; only emitted index/guard arrays use N.
+    pub fn from_physical(
+        coordinates: Vec<Atom>,
+        factors: Vec<Atom>,
+        physical_roles: Vec<IndexRole>,
+    ) -> Result<Self> {
+        let physical_arity = factors.len();
+        if physical_arity == 0 || physical_arity > N || physical_roles.len() != physical_arity {
+            return Err(Error::InvalidInput(
+                "weighted physical arity exceeds storage or role count".into(),
+            ));
+        }
+        let roles = std::array::from_fn(|i| {
+            physical_roles
+                .get(i)
+                .copied()
+                .unwrap_or(IndexRole::Ordinary)
+        });
+        let numerator_slots = (0..physical_arity)
             .filter(|&i| roles[i] != IndexRole::Occupation)
             .collect::<Vec<_>>();
         let physical = numerator_slots
@@ -72,6 +95,23 @@ impl<const N: usize> WeightedMeasure<N> {
         &self.roles
     }
 
+    /// The complete physical factor list, without backend padding factors.
+    pub fn factors(&self) -> &[Atom] {
+        &self.factors
+    }
+
+    /// Number of physical inverse-propagator and distribution factors.
+    pub fn physical_arity(&self) -> usize {
+        self.factors.len()
+    }
+
+    /// Native guard coordinates beyond the physical measure are exactly zero.
+    fn default_bounds(&self) -> [IndexBounds; N] {
+        let mut bounds = *IndexDomain::for_roles(&self.roles).bounds();
+        bounds[self.physical_arity()..].fill(IndexBounds::fixed(0));
+        bounds
+    }
+
     fn multiply(
         &self,
         expression: &Atom,
@@ -94,10 +134,22 @@ impl<const N: usize> WeightedMeasure<N> {
     }
 
     fn source(
+        &self,
         id: String,
         terms: BTreeMap<[i16; N], Atom>,
         bounds: [IndexBounds; N],
     ) -> Result<Option<GuardedIdentity<N>>> {
+        if bounds[self.physical_arity()..]
+            .iter()
+            .any(|b| *b != IndexBounds::fixed(0))
+            || terms
+                .keys()
+                .any(|shift| shift[self.physical_arity()..].iter().any(|&n| n != 0))
+        {
+            return Err(Error::InvalidInput(
+                "weighted source escapes its physical coordinate image".into(),
+            ));
+        }
         let terms = terms
             .into_iter()
             .filter_map(|(shift, coefficient)| {
@@ -160,6 +212,19 @@ impl<const N: usize> WeightedMeasure<N> {
                 "weighted vector-field coordinate count".into(),
             ));
         }
+        if direction
+            .iter()
+            .chain(std::iter::once(divergence))
+            .any(|value| {
+                indices[self.physical_arity()..]
+                    .iter()
+                    .any(|&symbol| !value.derivative(symbol).is_zero())
+            })
+        {
+            return Err(Error::InvalidInput(
+                "physical vector field depends on a storage-only index".into(),
+            ));
+        }
         // A factor annihilated by this vector field contributes no derivative
         // in any of its distribution branches. Keep that occupation axis at
         // its full admitted range rather than splitting an inactive theta face.
@@ -181,7 +246,7 @@ impl<const N: usize> WeightedMeasure<N> {
                     .cancel()
             })
             .collect::<Vec<_>>();
-        let occupations = (0..N)
+        let occupations = (0..self.physical_arity())
             .filter(|&i| {
                 self.roles[i] == IndexRole::Occupation
                     && (split_inactive || !derivatives[i].is_zero())
@@ -200,7 +265,7 @@ impl<const N: usize> WeightedMeasure<N> {
         }
         let mut sources = Vec::new();
         for case in 0..cases {
-            let mut bounds = *IndexDomain::for_roles(&self.roles).bounds();
+            let mut bounds = self.default_bounds();
             for (j, &slot) in occupations.iter().enumerate() {
                 bounds[slot] = if (case >> j) & 1 == 0 {
                     IndexBounds::fixed(0)
@@ -211,7 +276,7 @@ impl<const N: usize> WeightedMeasure<N> {
             }
             let mut terms = BTreeMap::new();
             self.multiply(divergence, [0; N], &mut terms)?;
-            for slot in 0..N {
+            for slot in 0..self.physical_arity() {
                 let derivative = &derivatives[slot];
                 let coefficient = if self.roles[slot] == IndexRole::Occupation
                     && bounds[slot] == IndexBounds::fixed(0)
@@ -225,7 +290,7 @@ impl<const N: usize> WeightedMeasure<N> {
                 self.multiply(&(coefficient * derivative), shift, &mut terms)?;
             }
             if let Some(source) =
-                Self::source(format!("{id}/occupation-case-{case}"), terms, bounds)?
+                self.source(format!("{id}/occupation-case-{case}"), terms, bounds)?
             {
                 sources.push(source);
             }
@@ -367,7 +432,7 @@ impl<const N: usize> WeightedMeasure<N> {
         let mut used = std::collections::BTreeSet::new();
         for &(i, slot, ref coefficient) in completions {
             if i >= loops
-                || slot >= N
+                || slot >= self.physical_arity()
                 || self.roles[slot] != IndexRole::Ordinary
                 || coefficient.is_zero()
                 || !used.insert((i, slot))
@@ -433,9 +498,9 @@ impl<const N: usize> WeightedMeasure<N> {
     /// h*delta(h)=0 and h*C_n(h)=C_(n-1)(h), n>=2; h*theta(h) is not zero.
     pub fn multiplication_sources(&self) -> Result<Vec<GuardedIdentity<N>>> {
         let mut sources = Vec::new();
-        for slot in 0..N {
+        for slot in 0..self.physical_arity() {
             let mut cases = Vec::new();
-            let mut default_bounds = *IndexDomain::for_roles(&self.roles).bounds();
+            let mut default_bounds = self.default_bounds();
             if self.roles[slot] == IndexRole::Occupation {
                 default_bounds[slot] = IndexBounds::fixed(1);
                 cases.push((default_bounds, false));
@@ -454,7 +519,7 @@ impl<const N: usize> WeightedMeasure<N> {
                     *terms.entry(shift).or_default() -= Atom::num(1);
                 }
                 if let Some(source) =
-                    Self::source(format!("multiplication/{slot}/{case}"), terms, bounds)?
+                    self.source(format!("multiplication/{slot}/{case}"), terms, bounds)?
                 {
                     sources.push(source);
                 }
@@ -933,5 +998,132 @@ mod tests {
                 .filter(|s| s.id.starts_with("multiplication/2/"))
                 .all(|s| !s.domain.bounds()[2].contains(0))
         );
+    }
+
+    #[test]
+    fn storage_capacity_preserves_every_physical_source_presentation() {
+        let g = parse!("fd_storage::g");
+        let e = parse!("fd_storage::e");
+        let coordinates = vec![g.clone(), e.clone()];
+        let factors = [g - Atom::num(2), e.clone(), Atom::num(3) - &e, e];
+        let roles = [
+            IndexRole::RequiredCut,
+            IndexRole::Ordinary,
+            IndexRole::Occupation,
+            IndexRole::Occupation,
+        ];
+        let exact = WeightedMeasure::new(coordinates.clone(), factors.clone(), roles).unwrap();
+        let padded =
+            WeightedMeasure::<6>::from_physical(coordinates, factors.to_vec(), roles.to_vec())
+                .unwrap();
+        assert_eq!(exact.factors(), padded.factors());
+        assert_eq!(padded.physical_arity(), 4);
+        assert_eq!(padded.roles()[4..], [IndexRole::Ordinary; 2]);
+        let indices = std::array::from_fn(|i| symbol!(format!("fd_storage::a_{i}")));
+        let exact_indices = std::array::from_fn(|i| indices[i]);
+        let dimension = parse!("4-2*fd_storage::epsilon");
+        let exact_sources = [
+            exact.multiplication_sources().unwrap(),
+            exact
+                .lorentz_ibps(1, &dimension, &exact_indices, 4)
+                .unwrap(),
+            exact
+                .lorentz_ibps_legacy(1, &dimension, &exact_indices, 4)
+                .unwrap(),
+            exact
+                .compact_tangent_ibps(1, 1, &dimension, &exact_indices, 4)
+                .unwrap(),
+            exact
+                .compact_normal_ibps(1, &[(0, 1, Rational::one())], &exact_indices, 4)
+                .unwrap(),
+        ];
+        let padded_sources = [
+            padded.multiplication_sources().unwrap(),
+            padded.lorentz_ibps(1, &dimension, &indices, 4).unwrap(),
+            padded
+                .lorentz_ibps_legacy(1, &dimension, &indices, 4)
+                .unwrap(),
+            padded
+                .compact_tangent_ibps(1, 1, &dimension, &indices, 4)
+                .unwrap(),
+            padded
+                .compact_normal_ibps(1, &[(0, 1, Rational::one())], &indices, 4)
+                .unwrap(),
+        ];
+        for (physical_sources, stored_sources) in exact_sources.into_iter().zip(padded_sources) {
+            assert!(!physical_sources.is_empty());
+            assert_eq!(physical_sources.len(), stored_sources.len());
+            for (physical, stored) in physical_sources.into_iter().zip(stored_sources) {
+                assert_eq!(physical.id, stored.id);
+                assert_eq!(physical.domain.bounds(), &stored.domain.bounds()[..4]);
+                assert!(
+                    stored.domain.bounds()[4..]
+                        .iter()
+                        .all(|b| *b == IndexBounds::fixed(0))
+                );
+                assert_eq!(physical.nonzero_conditions, stored.nonzero_conditions);
+                assert_eq!(physical.terms.len(), stored.terms.len());
+                for (physical_term, stored_term) in physical.terms.into_iter().zip(stored.terms) {
+                    assert_eq!(physical_term.shift, stored_term.shift[..4]);
+                    assert_eq!(stored_term.shift[4..], [0, 0]);
+                    assert!(
+                        (physical_term.coefficient - &stored_term.coefficient)
+                            .together()
+                            .cancel()
+                            .is_zero()
+                    );
+                    assert!(
+                        indices[4..]
+                            .iter()
+                            .all(|&index| stored_term.coefficient.derivative(index).is_zero())
+                    );
+                }
+            }
+        }
+        // A source author cannot smuggle a storage index into a physical vector field.
+        assert!(
+            padded
+                .ibp(
+                    "invalid-tail-field",
+                    &indices,
+                    &[Atom::var(indices[4]), Atom::zero()],
+                    &Atom::zero(),
+                    4
+                )
+                .is_err()
+        );
+        assert!(
+            padded
+                .ibp(
+                    "invalid-tail-divergence",
+                    &indices,
+                    &[Atom::zero(), Atom::zero()],
+                    &Atom::var(indices[5]),
+                    4
+                )
+                .is_err()
+        );
+        assert!(
+            padded
+                .compact_normal_ibps(1, &[(0, 4, Rational::one())], &indices, 4)
+                .is_err()
+        );
+    }
+
+    #[test]
+    fn physical_factor_constructor_rejects_invalid_capacity_and_roles() {
+        let x = parse!("fd_storage_bad::x");
+        assert!(
+            WeightedMeasure::<1>::from_physical(
+                vec![x.clone()],
+                vec![x.clone(), x.clone()],
+                vec![IndexRole::Ordinary; 2]
+            )
+            .is_err()
+        );
+        assert!(
+            WeightedMeasure::<2>::from_physical(vec![x.clone()], vec![x.clone()], vec![]).is_err()
+        );
+        assert!(WeightedMeasure::<2>::from_physical(vec![x], vec![], vec![]).is_err());
     }
 }

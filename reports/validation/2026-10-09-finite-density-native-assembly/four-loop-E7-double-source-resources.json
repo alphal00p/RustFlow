@@ -1,0 +1,26 @@
+{
+  "command": [
+    "timeout",
+    "180s",
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+    "RUSTFLOW_WEIGHTED_CUTS=0,4",
+    "RUSTFLOW_WEIGHTED_CAPACITY=20",
+    "RUSTFLOW_WEIGHTED_ROUNDS=1",
+    "RUSTFLOW_WEIGHTED_DEPTH=1",
+    "RUSTFLOW_WEIGHTED_DOMAINS=64",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+    "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots",
+    "target/release/deps/finite_density_generic_closure-f16c80ab031415bf",
+    "--ignored",
+    "--exact",
+    "runtime_graph_native_closure",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.548399506136775,
+  "user_seconds": 0.44539799999999996,
+  "system_seconds": 0.079389,
+  "peak_child_rss_kib": 39936,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

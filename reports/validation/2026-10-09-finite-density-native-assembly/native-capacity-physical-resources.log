@@ -1,0 +1,345 @@
+
+running 1 test
+DifferentialClosure { round: 0, requested: 5, basis_size: 11, new_derivatives: 15 }
+Stage { name: "searching 10 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 1, requested: 28, basis_size: 7, new_derivatives: 4 }
+Stage { name: "searching 4 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 2, requested: 36, basis_size: 6, new_derivatives: 0 }
+DifferentialClosure { round: 0, requested: 5, basis_size: 11, new_derivatives: 15 }
+Stage { name: "searching 10 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 1, requested: 28, basis_size: 7, new_derivatives: 4 }
+Stage { name: "searching 4 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 2, requested: 36, basis_size: 6, new_derivatives: 0 }
+Stage { name: "compiling the auxiliary-mass differential equation (6 basis integrals, 2 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (6 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/6" }
+Stage { name: "factoring exact Frobenius indicial block 2/6" }
+Stage { name: "factoring exact Frobenius indicial block 3/6" }
+Stage { name: "factoring exact Frobenius indicial block 4/6" }
+Stage { name: "factoring exact Frobenius indicial block 5/6" }
+Stage { name: "factoring exact Frobenius indicial block 6/6" }
+Stage { name: "constructing exact Frobenius eigenspace 1/2" }
+Stage { name: "constructing exact Frobenius eigenspace 2/2" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (6 basis integrals, 2 loops)" }
+BoundaryPlan { basis_size: 6, region_series: 4, coefficients: 4, max_half_order: 0 }
+Stage { name: "transporting the auxiliary-mass solution (6 basis integrals, 2 loops)" }
+Step { index: 0 }
+Step { index: 1 }
+Step { index: 2 }
+Step { index: 3 }
+Step { index: 4 }
+Step { index: 5 }
+Step { index: 6 }
+Step { index: 7 }
+Step { index: 8 }
+Step { index: 9 }
+Step { index: 10 }
+Step { index: 11 }
+Step { index: 12 }
+Step { index: 13 }
+Step { index: 14 }
+Step { index: 15 }
+Step { index: 16 }
+Step { index: 17 }
+Step { index: 18 }
+Step { index: 19 }
+Step { index: 20 }
+Step { index: 21 }
+Step { index: 22 }
+Step { index: 23 }
+Step { index: 24 }
+Step { index: 25 }
+Step { index: 26 }
+Step { index: 27 }
+Step { index: 28 }
+Step { index: 29 }
+Step { index: 30 }
+Step { index: 31 }
+Step { index: 32 }
+Step { index: 33 }
+Step { index: 34 }
+Stage { name: "constructing the physical endpoint expansion (6 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/6" }
+Stage { name: "factoring exact Frobenius indicial block 2/6" }
+Stage { name: "factoring exact Frobenius indicial block 3/6" }
+Stage { name: "factoring exact Frobenius indicial block 4/6" }
+Stage { name: "factoring exact Frobenius indicial block 5/6" }
+Stage { name: "factoring exact Frobenius indicial block 6/6" }
+Stage { name: "constructing exact Frobenius eigenspace 1/2" }
+Stage { name: "constructing exact Frobenius eigenspace 2/2" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (6 basis integrals, 2 loops)" }
+Stage { name: "compiling the auxiliary-mass differential equation (6 basis integrals, 2 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (6 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/6" }
+Stage { name: "factoring exact Frobenius indicial block 2/6" }
+Stage { name: "factoring exact Frobenius indicial block 3/6" }
+Stage { name: "factoring exact Frobenius indicial block 4/6" }
+Stage { name: "factoring exact Frobenius indicial block 5/6" }
+Stage { name: "factoring exact Frobenius indicial block 6/6" }
+Stage { name: "constructing exact Frobenius eigenspace 1/2" }
+Stage { name: "constructing exact Frobenius eigenspace 2/2" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (6 basis integrals, 2 loops)" }
+BoundaryPlan { basis_size: 6, region_series: 4, coefficients: 4, max_half_order: 0 }
+Stage { name: "transporting the auxiliary-mass solution (6 basis integrals, 2 loops)" }
+Step { index: 0 }
+Step { index: 1 }
+Step { index: 2 }
+Step { index: 3 }
+Step { index: 4 }
+Step { index: 5 }
+Step { index: 6 }
+Step { index: 7 }
+Step { index: 8 }
+Step { index: 9 }
+Step { index: 10 }
+Step { index: 11 }
+Step { index: 12 }
+Step { index: 13 }
+Step { index: 14 }
+Step { index: 15 }
+Step { index: 16 }
+Step { index: 17 }
+Step { index: 18 }
+Step { index: 19 }
+Step { index: 20 }
+Step { index: 21 }
+Step { index: 22 }
+Step { index: 23 }
+Step { index: 24 }
+Step { index: 25 }
+Step { index: 26 }
+Step { index: 27 }
+Step { index: 28 }
+Step { index: 29 }
+Step { index: 30 }
+Step { index: 31 }
+Step { index: 32 }
+Step { index: 33 }
+Step { index: 34 }
+Stage { name: "constructing the physical endpoint expansion (6 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/6" }
+Stage { name: "factoring exact Frobenius indicial block 2/6" }
+Stage { name: "factoring exact Frobenius indicial block 3/6" }
+Stage { name: "factoring exact Frobenius indicial block 4/6" }
+Stage { name: "factoring exact Frobenius indicial block 5/6" }
+Stage { name: "factoring exact Frobenius indicial block 6/6" }
+Stage { name: "constructing exact Frobenius eigenspace 1/2" }
+Stage { name: "constructing exact Frobenius eigenspace 2/2" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (6 basis integrals, 2 loops)" }
+DifferentialClosure { round: 0, requested: 4, basis_size: 66, new_derivatives: 38 }
+Stage { name: "searching 65 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 1, requested: 88, basis_size: 62, new_derivatives: 6 }
+Stage { name: "searching 53 new native weighted frontier labels, including constant sectors" }
+test native_storage_capacity_preserves_physical_occupied_flows has been running for over 60 seconds
+DifferentialClosure { round: 2, requested: 143, basis_size: 11, new_derivatives: 0 }
+DifferentialClosure { round: 0, requested: 4, basis_size: 66, new_derivatives: 38 }
+Stage { name: "searching 65 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 1, requested: 88, basis_size: 62, new_derivatives: 6 }
+Stage { name: "searching 53 new native weighted frontier labels, including constant sectors" }
+DifferentialClosure { round: 2, requested: 143, basis_size: 11, new_derivatives: 0 }
+Stage { name: "compiling the auxiliary-mass differential equation (11 basis integrals, 2 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (11 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/10" }
+Stage { name: "factoring exact Frobenius indicial block 2/10" }
+Stage { name: "factoring exact Frobenius indicial block 3/10" }
+Stage { name: "factoring exact Frobenius indicial block 4/10" }
+Stage { name: "factoring exact Frobenius indicial block 5/10" }
+Stage { name: "factoring exact Frobenius indicial block 6/10" }
+Stage { name: "factoring exact Frobenius indicial block 7/10" }
+Stage { name: "factoring exact Frobenius indicial block 8/10" }
+Stage { name: "factoring exact Frobenius indicial block 9/10" }
+Stage { name: "factoring exact Frobenius indicial block 10/10" }
+Stage { name: "constructing exact Frobenius eigenspace 1/4" }
+Stage { name: "constructing exact Frobenius eigenspace 2/4" }
+Stage { name: "constructing exact Frobenius eigenspace 3/4" }
+Stage { name: "constructing exact Frobenius eigenspace 4/4" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (11 basis integrals, 2 loops)" }
+BoundaryPlan { basis_size: 11, region_series: 4, coefficients: 6, max_half_order: 2 }
+Stage { name: "transporting the auxiliary-mass solution (11 basis integrals, 2 loops)" }
+Step { index: 0 }
+Step { index: 1 }
+Step { index: 2 }
+Step { index: 3 }
+Step { index: 4 }
+Step { index: 5 }
+Step { index: 6 }
+Step { index: 7 }
+Step { index: 8 }
+Step { index: 9 }
+Step { index: 10 }
+Step { index: 11 }
+Step { index: 12 }
+Step { index: 13 }
+Step { index: 14 }
+Step { index: 15 }
+Step { index: 16 }
+Step { index: 17 }
+Step { index: 18 }
+Step { index: 19 }
+Step { index: 20 }
+Step { index: 21 }
+Step { index: 22 }
+Step { index: 23 }
+Step { index: 24 }
+Step { index: 25 }
+Step { index: 26 }
+Step { index: 27 }
+Step { index: 28 }
+Step { index: 29 }
+Step { index: 30 }
+Step { index: 31 }
+Step { index: 32 }
+Step { index: 33 }
+Step { index: 34 }
+Step { index: 35 }
+Step { index: 36 }
+Step { index: 37 }
+Step { index: 38 }
+Step { index: 39 }
+Step { index: 40 }
+Step { index: 41 }
+Step { index: 42 }
+Step { index: 43 }
+Step { index: 44 }
+Step { index: 45 }
+Step { index: 46 }
+Step { index: 47 }
+Step { index: 48 }
+Step { index: 49 }
+Step { index: 50 }
+Step { index: 51 }
+Step { index: 52 }
+Step { index: 53 }
+Step { index: 54 }
+Stage { name: "constructing the physical endpoint expansion (11 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/10" }
+Stage { name: "factoring exact Frobenius indicial block 2/10" }
+Stage { name: "factoring exact Frobenius indicial block 3/10" }
+Stage { name: "factoring exact Frobenius indicial block 4/10" }
+Stage { name: "factoring exact Frobenius indicial block 5/10" }
+Stage { name: "factoring exact Frobenius indicial block 6/10" }
+Stage { name: "factoring exact Frobenius indicial block 7/10" }
+Stage { name: "factoring exact Frobenius indicial block 8/10" }
+Stage { name: "factoring exact Frobenius indicial block 9/10" }
+Stage { name: "factoring exact Frobenius indicial block 10/10" }
+Stage { name: "constructing exact Frobenius eigenspace 1/3" }
+Stage { name: "constructing exact Frobenius eigenspace 2/3" }
+Stage { name: "constructing exact Frobenius eigenspace 3/3" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (11 basis integrals, 2 loops)" }
+Stage { name: "compiling the auxiliary-mass differential equation (11 basis integrals, 2 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (11 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/10" }
+Stage { name: "factoring exact Frobenius indicial block 2/10" }
+Stage { name: "factoring exact Frobenius indicial block 3/10" }
+Stage { name: "factoring exact Frobenius indicial block 4/10" }
+Stage { name: "factoring exact Frobenius indicial block 5/10" }
+Stage { name: "factoring exact Frobenius indicial block 6/10" }
+Stage { name: "factoring exact Frobenius indicial block 7/10" }
+Stage { name: "factoring exact Frobenius indicial block 8/10" }
+Stage { name: "factoring exact Frobenius indicial block 9/10" }
+Stage { name: "factoring exact Frobenius indicial block 10/10" }
+Stage { name: "constructing exact Frobenius eigenspace 1/4" }
+Stage { name: "constructing exact Frobenius eigenspace 2/4" }
+Stage { name: "constructing exact Frobenius eigenspace 3/4" }
+Stage { name: "constructing exact Frobenius eigenspace 4/4" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (11 basis integrals, 2 loops)" }
+BoundaryPlan { basis_size: 11, region_series: 4, coefficients: 6, max_half_order: 2 }
+Stage { name: "transporting the auxiliary-mass solution (11 basis integrals, 2 loops)" }
+Step { index: 0 }
+Step { index: 1 }
+Step { index: 2 }
+Step { index: 3 }
+Step { index: 4 }
+Step { index: 5 }
+Step { index: 6 }
+Step { index: 7 }
+Step { index: 8 }
+Step { index: 9 }
+Step { index: 10 }
+Step { index: 11 }
+Step { index: 12 }
+Step { index: 13 }
+Step { index: 14 }
+Step { index: 15 }
+Step { index: 16 }
+Step { index: 17 }
+Step { index: 18 }
+Step { index: 19 }
+Step { index: 20 }
+Step { index: 21 }
+Step { index: 22 }
+Step { index: 23 }
+Step { index: 24 }
+Step { index: 25 }
+Step { index: 26 }
+Step { index: 27 }
+Step { index: 28 }
+Step { index: 29 }
+Step { index: 30 }
+Step { index: 31 }
+Step { index: 32 }
+Step { index: 33 }
+Step { index: 34 }
+Step { index: 35 }
+Step { index: 36 }
+Step { index: 37 }
+Step { index: 38 }
+Step { index: 39 }
+Step { index: 40 }
+Step { index: 41 }
+Step { index: 42 }
+Step { index: 43 }
+Step { index: 44 }
+Step { index: 45 }
+Step { index: 46 }
+Step { index: 47 }
+Step { index: 48 }
+Step { index: 49 }
+Step { index: 50 }
+Step { index: 51 }
+Step { index: 52 }
+Step { index: 53 }
+Step { index: 54 }
+Stage { name: "constructing the physical endpoint expansion (11 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/10" }
+Stage { name: "factoring exact Frobenius indicial block 2/10" }
+Stage { name: "factoring exact Frobenius indicial block 3/10" }
+Stage { name: "factoring exact Frobenius indicial block 4/10" }
+Stage { name: "factoring exact Frobenius indicial block 5/10" }
+Stage { name: "factoring exact Frobenius indicial block 6/10" }
+Stage { name: "factoring exact Frobenius indicial block 7/10" }
+Stage { name: "factoring exact Frobenius indicial block 8/10" }
+Stage { name: "factoring exact Frobenius indicial block 9/10" }
+Stage { name: "factoring exact Frobenius indicial block 10/10" }
+Stage { name: "constructing exact Frobenius eigenspace 1/3" }
+Stage { name: "constructing exact Frobenius eigenspace 2/3" }
+Stage { name: "constructing exact Frobenius eigenspace 3/3" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (11 basis integrals, 2 loops)" }
+test native_storage_capacity_preserves_physical_occupied_flows ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 3 filtered out; finished in 245.68s
+

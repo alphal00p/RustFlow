@@ -51,17 +51,22 @@ alone does not establish accuracy. Laurent output retains independent fit change
 verified digits, regulator sample counts and refinement counts.
 
 These commands propagate native failures and never return an incomplete cut sum
-as a complete amplitude. Runtime weighted-AMF index arities 7 and 9 are currently
-compiled. Strict support-zero proofs and admitted polynomial compact terminals
-are handled before that dispatch and do not require those arities. Active shells
-require strictly positive rational squared masses; massless occupied endpoints are not
-numerically admitted. Weighted flow further requires a native massive-sunset or
-heavy-edge common-contour certificate, all uncut physical factors shifted and
-successful guarded closure. The above
-massive example's first single-cut and vacuum values have passed independent
-checks, but the recorded complete above-threshold attempt failed at two-cut
-closure. The full commands are interfaces to the current native pipeline, not a
-claim that the mandatory small-graph and four-loop acceptance gates have passed.
+as a complete amplitude. Runtime weighted-AMF storage preserves exact arities
+7 and 9 and otherwise uses capacities 12, 16, 20, 24 or 32. Extra array entries
+are fixed-zero labels, with no extra physical factors. Strict support-zero
+proofs and admitted polynomial compact terminals are handled before that
+dispatch. Numerical weighted flow requires strictly positive rational shell
+masses, a native massive-sunset or heavy-edge common-contour certificate,
+all uncut physical factors shifted and successful guarded closure. Massless
+flowing graphs remain unsupported; compact terminals have their own narrower
+dimensional-origin admission.
+
+The complete massive example at D=12/5, including both requested targets,
+vacuum and every cut sector, passed 40 independent reference comparisons and
+30 refinements. Its full Laurent comparison remains pending, and no required
+four-loop native numerical comparison has passed. Storage capacity validation
+also compared the p=7 and p=9 occupied flows against capacity 12, including
+native closure, boundaries and endpoints.
 See [finite-density.md](finite-density.md) for the exact measure and current scope.
 
 In the embedding Symbolica Python host, the corresponding functions are:

@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "encoding": "gzip, lossless original JSON bytes; mtime=0",
+  "replay": "Recorded harness commands reproduce original JSON files. Decompress archives to inspect every source and retained native gap. No proof data have been dropped.",
+  "files": [
+    {
+      "original_path": "four-loop-source-pilots/physical-16-capacity-16-cuts-0/sources.json",
+      "archive_path": "four-loop-source-pilots/physical-16-capacity-16-cuts-0/sources.json.gz",
+      "original_sha256": "80eebcd52a19f182cec3c96ecbe828c6d6bb25dae718e7d042ce0951e651e0a0",
+      "archive_sha256": "4f8c7e07eb99e1c18ab621f7ca70cf863cd04d3be17d6d306e1d49b2c2cacc21",
+      "original_bytes": 1080277,
+      "archive_bytes": 10626
+    },
+    {
+      "original_path": "four-loop-source-pilots/physical-18-capacity-20-cuts-0_4/sources.json",
+      "archive_path": "four-loop-source-pilots/physical-18-capacity-20-cuts-0_4/sources.json.gz",
+      "original_sha256": "a7f56173ee144ec2464a384a8cb586443cacd1219a7494b66f750ffd539ec89f",
+      "archive_sha256": "c86aaa52c23947b5f87ef66d365076bd27324e08092e6fa6ac5bee06dde3ab88",
+      "original_bytes": 6918040,
+      "archive_bytes": 54120
+    },
+    {
+      "original_path": "four-loop-source-pilots/physical-16-capacity-16-cuts-0/result.json",
+      "archive_path": "four-loop-source-pilots/physical-16-capacity-16-cuts-0/result.json.gz",
+      "original_sha256": "50c46f081bee9044a1392d1304e0796c0d056239ba6c3573b855ef91919aa1a4",
+      "archive_sha256": "a8409e0695e1f3ed195fd93bfbb416a0425c34c6e1531032fa8d858f8fa4bf38",
+      "original_bytes": 73707,
+      "archive_bytes": 1340
+    },
+    {
+      "original_path": "four-loop-source-pilots/physical-18-capacity-20-cuts-0_4/result.json",
+      "archive_path": "four-loop-source-pilots/physical-18-capacity-20-cuts-0_4/result.json.gz",
+      "original_sha256": "0ca3703cf251ee32981f7bc33a7a81b5c806002f1412fee047fbf7dc23989309",
+      "archive_sha256": "12653404c5e107cb5b006782b6a676309534c56ff93de6adc97c9d3325850676",
+      "original_bytes": 88865,
+      "archive_bytes": 1375
+    },
+    {
+      "original_path": "four-loop-source-pilots-depth2/physical-16-capacity-16-cuts-0/sources.json",
+      "archive_path": "four-loop-source-pilots-depth2/physical-16-capacity-16-cuts-0/sources.json.gz",
+      "original_sha256": "80eebcd52a19f182cec3c96ecbe828c6d6bb25dae718e7d042ce0951e651e0a0",
+      "archive_sha256": "4f8c7e07eb99e1c18ab621f7ca70cf863cd04d3be17d6d306e1d49b2c2cacc21",
+      "original_bytes": 1080277,
+      "archive_bytes": 10626
+    },
+    {
+      "original_path": "four-loop-source-pilots-depth2/physical-18-capacity-20-cuts-0_4/sources.json",
+      "archive_path": "four-loop-source-pilots-depth2/physical-18-capacity-20-cuts-0_4/sources.json.gz",
+      "original_sha256": "a7f56173ee144ec2464a384a8cb586443cacd1219a7494b66f750ffd539ec89f",
+      "archive_sha256": "c86aaa52c23947b5f87ef66d365076bd27324e08092e6fa6ac5bee06dde3ab88",
+      "original_bytes": 6918040,
+      "archive_bytes": 54120
+    },
+    {
+      "original_path": "four-loop-source-pilots-depth2/physical-16-capacity-16-cuts-0/result.json",
+      "archive_path": "four-loop-source-pilots-depth2/physical-16-capacity-16-cuts-0/result.json.gz",
+      "original_sha256": "1f9563a6a11c8f74dc4b19f98f6dabd18f7798aa6c27c5588ea2da28847b8004",
+      "archive_sha256": "a56f0257a78600c30901f7e1b7c6b10087ddcfc69c45741c4be3e1d6906dd7e6",
+      "original_bytes": 282759,
+      "archive_bytes": 3236
+    },
+    {
+      "original_path": "four-loop-source-pilots-depth2/physical-18-capacity-20-cuts-0_4/result.json",
+      "archive_path": "four-loop-source-pilots-depth2/physical-18-capacity-20-cuts-0_4/result.json.gz",
+      "original_sha256": "1c9ed63f65f1935acbd8d69098860e7111780602c94ce1cabad16bf44cdca44c",
+      "archive_sha256": "d47b7d644c543221391b4c2f3c609705422516cd4b954b4c484117ba6e3eaf84",
+      "original_bytes": 341911,
+      "archive_bytes": 3500
+    },
+    {
+      "original_path": "four-loop-source-pilots-depth3/physical-16-capacity-16-cuts-0/sources.json",
+      "archive_path": "four-loop-source-pilots-depth3/physical-16-capacity-16-cuts-0/sources.json.gz",
+      "original_sha256": "80eebcd52a19f182cec3c96ecbe828c6d6bb25dae718e7d042ce0951e651e0a0",
+      "archive_sha256": "4f8c7e07eb99e1c18ab621f7ca70cf863cd04d3be17d6d306e1d49b2c2cacc21",
+      "original_bytes": 1080277,
+      "archive_bytes": 10626
+    },
+    {
+      "original_path": "four-loop-source-pilots-depth3/physical-18-capacity-20-cuts-0_4/sources.json",
+      "archive_path": "four-loop-source-pilots-depth3/physical-18-capacity-20-cuts-0_4/sources.json.gz",
+      "original_sha256": "a7f56173ee144ec2464a384a8cb586443cacd1219a7494b66f750ffd539ec89f",
+      "archive_sha256": "c86aaa52c23947b5f87ef66d365076bd27324e08092e6fa6ac5bee06dde3ab88",
+      "original_bytes": 6918040,
+      "archive_bytes": 54120
+    },
+    {
+      "original_path": "four-loop-source-pilots-depth3/physical-16-capacity-16-cuts-0/result.json",
+      "archive_path": "four-loop-source-pilots-depth3/physical-16-capacity-16-cuts-0/result.json.gz",
+      "original_sha256": "39f2a306617cd7b41a38348ef1bf86e36f199c2abac68e5532c69cb4740d4152",
+      "archive_sha256": "084a1a0dfd59e6589cb395befd8ad0bb387f6fae6e64331c19cc4fef9d63d778",
+      "original_bytes": 7581781,
+      "archive_bytes": 64789
+    },
+    {
+      "original_path": "four-loop-source-pilots-depth3/physical-18-capacity-20-cuts-0_4/result.json",
+      "archive_path": "four-loop-source-pilots-depth3/physical-18-capacity-20-cuts-0_4/result.json.gz",
+      "original_sha256": "3e411c46e24f9306c02da24366dfadc4906b5bb7fd88917bca5813bfe640dda4",
+      "archive_sha256": "b990771f299f46340e8f63957393f9a134ba194430a5a8acb4882b4e328921a4",
+      "original_bytes": 9597288,
+      "archive_bytes": 72901
+    }
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema": 1,
+  "passed": true,
+  "scope": "Two occupied sectors, both scalar and raised medium-numerator targets; exact versus larger native storage; no independent reference or four-loop numerical comparison.",
+  "connections": [
+    {
+      "sector": "cut-0",
+      "basis_sizes": [
+        6,
+        6
+      ],
+      "identical_physical_connection": true
+    },
+    {
+      "sector": "cut-01",
+      "basis_sizes": [
+        11,
+        11
+      ],
+      "identical_physical_connection": true
+    }
+  ],
+  "comparisons": [
+    {
+      "sector": "cut-0",
+      "target": 0,
+      "absolute_error": "0E-63",
+      "relative_error": "0E+38",
+      "tolerance": "1.048607265841190157330580903004524885099026576402526803855004300000000000000000000000000000000000000E-17",
+      "passed": true
+    },
+    {
+      "sector": "cut-0",
+      "target": 1,
+      "absolute_error": "0E-64",
+      "relative_error": "0E+38",
+      "tolerance": "2.483525186251579199737754416570276423224047235612583449687937000000000000000000000000000000000000000E-18",
+      "passed": true
+    },
+    {
+      "sector": "cut-01",
+      "target": 0,
+      "absolute_error": "0E-115",
+      "relative_error": "0E-13",
+      "tolerance": "8.873055199804135744519740465547857564688566757194713520588143400000000000000000000000000000000000000E-18",
+      "passed": true
+    },
+    {
+      "sector": "cut-01",
+      "target": 1,
+      "absolute_error": "0E-114",
+      "relative_error": "0E-12",
+      "tolerance": "5.918157970932571921798453026482734739438876916994208661250333800000000000000000000000000000000000000E-18",
+      "passed": true
+    }
+  ],
+  "sha256": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-0/prediction-capacity-7.json": "1d39e45da3e4a84bd25f41e8ccb7633b2218f160f4382eaa7b5429d5a508f8b7",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-0/connection-capacity-7.json": "e59191da671dfd3fec47f2c7effe725107cfd10b5e20fd134e24f8ec5d25883e",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-0/native-capacity-7/round-002-closed.json": "2104866d92a245b5d1641b91ba7830e06677d8edb79b0003fce8794466dffe6c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-0/native-capacity-7/round-002-closed.bin": "9fb1d9f6c2f060d5321cda2a2c2acfcae2cc965c89389ed0dc12f33032028bd1",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-0/prediction-capacity-12.json": "55f290eeefe6d5e12130786222bcda0fc80b0b6b0bb6d9a3424e00b2a1cda84c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-0/connection-capacity-12.json": "2641a72de90f3227eb958040704eac32a84decf3557da12b2acae85ffe3cc13c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-0/native-capacity-12/round-002-closed.json": "f501748f5790ca1775e9f8371b55dc6e13d7cecffdac2c6b191171f897ee80e5",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-0/native-capacity-12/round-002-closed.bin": "81e68e003c1734879e77d0e57dfa7a4b82d0d18d8551309aaa589c5f81cabae2",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-01/prediction-capacity-9.json": "cc00048425dacd124c26ec06c75aaffdeac2bebdbcef17cb7d6b8ee2d585f18c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-01/connection-capacity-9.json": "dae78364366205483e36ce94230ed83124da538feecc6298102f5785ec29c62d",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-01/native-capacity-9/round-002-closed.json": "aef8f72540500ce984bc05da3600f6e6ad6b2aaf31ba447af2814d34dc9c5188",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-01/native-capacity-9/round-002-closed.bin": "122fc8f64d50b0d6805f9ad83d3867af624bf0483c965b9b88561c26f9612636",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-01/prediction-capacity-12.json": "d68bf1415bbe689930219ae3ba8022ec495485dde88ddf440df1b5bd680a4e2f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-01/connection-capacity-12.json": "7e4642e38e1c8f6bf23c325544fbd6e7035a0fa31cc52e5d693e90c9fd771f3c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-01/native-capacity-12/round-002-closed.json": "0f2f0fb52ef1852ba7ebc053bf1c3fe4fdc6ee9e267d757b4b0412eeeef13647",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-physical/cut-01/native-capacity-12/round-002-closed.bin": "769f65c9c4ec8b2323b96a37405d53e0cac7e5280347007eee5cfaaf82ff8a33"
+  }
+}

@@ -1,0 +1,10 @@
+
+running 5 tests
+test retained_virtual_soft_factors_and_hard_occupied_loops_fail_explicitly ... ok
+test inverse_energy_moments_require_explicit_positive_shell_admission ... ok
+test raised_compact_boundary_seeds_obey_native_multiplication_and_endpoint_constraints ... ok
+test actual_sunset_mixed_and_fully_occupied_region_coefficients_are_integrated ... ok
+test compact_tensor_projection_and_raised_shell_keep_the_original_numerator ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.02s
+

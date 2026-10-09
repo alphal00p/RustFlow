@@ -95,6 +95,8 @@ impl Default for GuardedDiscoveryOptions {
 #[derive(Debug)]
 pub struct GuardedContext<const N: usize> {
     sources: Arc<GuardedSourceSystem<N>>,
+    physical_arity: usize,
+    dummy_symbols: Vec<Symbol>,
 }
 
 #[derive(Debug)]
@@ -107,6 +109,8 @@ pub struct GuardedDiscovery<const N: usize> {
 #[derive(Debug)]
 pub struct GuardedReductionProgram<const N: usize> {
     native: GuardedProgram<N>,
+    physical_arity: usize,
+    dummy_symbols: Vec<Symbol>,
 }
 
 #[derive(Clone, Debug)]
@@ -129,6 +133,9 @@ impl<const N: usize> GuardedContext<N> {
     /// owner binds these exact domains into application and persisted replay;
     /// no ordinary sector census or algebraic rank inference is involved.
     pub(crate) fn with_measure_zero_domains(self, domains: Vec<IndexDomain<N>>) -> Result<Self> {
+        for domain in &domains {
+            validate_storage_domain(domain, self.physical_arity)?;
+        }
         let sources = Arc::try_unwrap(self.sources).map_err(|_| {
             Error::InvalidInput(
                 "measure zero evidence must be attached before guarded discovery".into(),
@@ -139,6 +146,8 @@ impl<const N: usize> GuardedContext<N> {
             .map_err(|error| Error::Reduction(error.to_string()))?;
         Ok(Self {
             sources: Arc::new(sources),
+            physical_arity: self.physical_arity,
+            dummy_symbols: self.dummy_symbols,
         })
     }
 
@@ -152,6 +161,51 @@ impl<const N: usize> GuardedContext<N> {
         parameter_symbols: Vec<Symbol>,
         identities: Vec<GuardedIdentity<N>>,
     ) -> Result<Self> {
+        Self::new_with_physical_arity(
+            measure,
+            roles,
+            index_symbols,
+            parameter_symbols,
+            identities,
+            N,
+        )
+    }
+
+    /// Embed actual physical coordinates in fixed inline storage. No factor is
+    /// introduced for a storage axis: its index is identically zero, all source
+    /// shifts vanish there, and its symbol cannot occur in physical algebra.
+    pub fn new_with_physical_arity(
+        measure: GuardedMeasureIdentity,
+        roles: [IndexRole; N],
+        index_symbols: [Symbol; N],
+        parameter_symbols: Vec<Symbol>,
+        identities: Vec<GuardedIdentity<N>>,
+        physical_arity: usize,
+    ) -> Result<Self> {
+        validate_storage_arity::<N>(physical_arity)?;
+        if roles[physical_arity..]
+            .iter()
+            .any(|role| *role != IndexRole::Ordinary)
+        {
+            return Err(Error::InvalidInput(
+                "storage tail roles must be ordinary".into(),
+            ));
+        }
+        let dummy_symbols = index_symbols[physical_arity..].to_vec();
+        for identity in &identities {
+            validate_storage_domain(&identity.domain, physical_arity)?;
+            for term in &identity.terms {
+                if term.shift[physical_arity..].iter().any(|&shift| shift != 0) {
+                    return Err(Error::InvalidInput(
+                        "guarded source shifts a storage tail coordinate".into(),
+                    ));
+                }
+                validate_storage_expression(&term.coefficient, &dummy_symbols)?;
+            }
+            for condition in &identity.nonzero_conditions {
+                validate_storage_expression(condition, &dummy_symbols)?;
+            }
+        }
         let symbols: Vec<_> = index_symbols.into_iter().chain(parameter_symbols).collect();
         let distinct: BTreeSet<_> = symbols.iter().copied().collect();
         if distinct.len() != symbols.len() {
@@ -216,16 +270,24 @@ impl<const N: usize> GuardedContext<N> {
                     .with_nonzero_conditions(conditions),
             );
         }
-        let sources = GuardedSourceSystem::new(
-            measure.native_identity()?,
-            roles,
-            std::array::from_fn(|i| i),
-            sources,
-        )
-        .map_err(|e| Error::Reduction(e.to_string()))?;
+        let mut native_identity = measure.native_identity()?;
+        if physical_arity != N {
+            native_identity.push_str(&format!(
+                ":zero-tail-storage-v1:physical={physical_arity}:capacity={N}"
+            ));
+        }
+        let sources =
+            GuardedSourceSystem::new(native_identity, roles, std::array::from_fn(|i| i), sources)
+                .map_err(|e| Error::Reduction(e.to_string()))?;
         Ok(Self {
             sources: Arc::new(sources),
+            physical_arity,
+            dummy_symbols,
         })
+    }
+
+    pub fn physical_arity(&self) -> usize {
+        self.physical_arity
     }
 
     pub fn sources(&self) -> &Arc<GuardedSourceSystem<N>> {
@@ -240,6 +302,13 @@ impl<const N: usize> GuardedContext<N> {
         terminals: impl IntoIterator<Item = [i64; N]>,
         options: GuardedDiscoveryOptions,
     ) -> Result<GuardedDiscovery<N>> {
+        for domain in &domains {
+            validate_storage_domain(domain, self.physical_arity)?;
+        }
+        let terminals = terminals.into_iter().collect::<Vec<_>>();
+        for terminal in &terminals {
+            validate_storage_label(terminal, self.physical_arity)?;
+        }
         let found = self
             .sources
             .solve_domains(
@@ -254,8 +323,13 @@ impl<const N: usize> GuardedContext<N> {
             .map_err(|e| Error::Reduction(e.to_string()))?;
         let native = GuardedProgram::new(self.sources.clone(), found.rules, terminals)
             .map_err(|e| Error::Reduction(e.to_string()))?;
+        validate_storage_program(&native, self.physical_arity)?;
         Ok(GuardedDiscovery {
-            program: GuardedReductionProgram { native },
+            program: GuardedReductionProgram {
+                native,
+                physical_arity: self.physical_arity,
+                dummy_symbols: self.dummy_symbols.clone(),
+            },
             unresolved: found.unresolved,
         })
     }
@@ -269,11 +343,20 @@ impl<const N: usize> GuardedContext<N> {
     ) -> Result<GuardedReductionProgram<N>> {
         let native = GuardedProgram::decode_generated(bytes, self.sources.clone(), limits)
             .map_err(|e| Error::Cache(e.to_string()))?;
-        Ok(GuardedReductionProgram { native })
+        validate_storage_program(&native, self.physical_arity)?;
+        Ok(GuardedReductionProgram {
+            native,
+            physical_arity: self.physical_arity,
+            dummy_symbols: self.dummy_symbols.clone(),
+        })
     }
 }
 
 impl<const N: usize> GuardedReductionProgram<N> {
+    pub fn physical_arity(&self) -> usize {
+        self.physical_arity
+    }
+
     pub fn native(&self) -> &GuardedProgram<N> {
         &self.native
     }
@@ -289,11 +372,12 @@ impl<const N: usize> GuardedReductionProgram<N> {
         target: [i64; N],
         limits: GuardedReductionLimits,
     ) -> Result<GuardedAtomReduction<N>> {
+        validate_storage_label(&target, self.physical_arity)?;
         let reduced = self
             .native
             .reduce(target, limits)
             .map_err(|e| Error::Reduction(e.to_string()))?;
-        Ok(GuardedAtomReduction {
+        let result = GuardedAtomReduction {
             terms: reduced
                 .terms
                 .into_iter()
@@ -314,8 +398,96 @@ impl<const N: usize> GuardedReductionProgram<N> {
                 .map(CoefficientPolynomial::to_expression)
                 .collect(),
             rule_applications: reduced.rule_applications,
-        })
+        };
+        for (indices, coefficient) in &result.terms {
+            validate_storage_label(indices, self.physical_arity)?;
+            validate_storage_expression(coefficient, &self.dummy_symbols)?;
+        }
+        for unresolved in &result.unresolved {
+            validate_storage_label(&unresolved.integral, self.physical_arity)?;
+            validate_storage_expression(&unresolved.coefficient, &self.dummy_symbols)?;
+        }
+        for condition in &result.nonzero_conditions {
+            validate_storage_expression(condition, &self.dummy_symbols)?;
+        }
+        Ok(result)
     }
+}
+
+pub(crate) fn validate_storage_arity<const N: usize>(physical_arity: usize) -> Result<()> {
+    if physical_arity == 0 || physical_arity > N {
+        return Err(Error::InvalidInput(format!(
+            "physical arity {physical_arity} does not fit guarded storage capacity {N}"
+        )));
+    }
+    Ok(())
+}
+
+pub(crate) fn validate_storage_label<const N: usize>(
+    indices: &[i64; N],
+    physical_arity: usize,
+) -> Result<()> {
+    validate_storage_arity::<N>(physical_arity)?;
+    if indices[physical_arity..].iter().any(|&index| index != 0) {
+        return Err(Error::InvalidInput(
+            "nonzero storage tail is not a physical integral".into(),
+        ));
+    }
+    Ok(())
+}
+
+pub(crate) fn validate_storage_domain<const N: usize>(
+    domain: &IndexDomain<N>,
+    physical_arity: usize,
+) -> Result<()> {
+    validate_storage_arity::<N>(physical_arity)?;
+    if domain.bounds()[physical_arity..]
+        .iter()
+        .any(|bound| *bound != IndexBounds::fixed(0))
+    {
+        return Err(Error::InvalidInput(
+            "guarded storage tail domains must be fixed at zero".into(),
+        ));
+    }
+    Ok(())
+}
+
+fn validate_storage_expression(expression: &Atom, dummy_symbols: &[Symbol]) -> Result<()> {
+    if dummy_symbols
+        .iter()
+        .any(|&symbol| expression.contains_symbol(symbol))
+    {
+        return Err(Error::InvalidInput(
+            "physical algebra depends on a storage tail symbol".into(),
+        ));
+    }
+    Ok(())
+}
+
+fn validate_storage_program<const N: usize>(
+    program: &GuardedProgram<N>,
+    physical_arity: usize,
+) -> Result<()> {
+    validate_storage_arity::<N>(physical_arity)?;
+    for terminal in program.terminals() {
+        validate_storage_label(terminal, physical_arity)?;
+    }
+    for rule in program.rules() {
+        validate_storage_domain(rule.domain(), physical_arity)?;
+        for integral in std::iter::once(&rule.candidate().target)
+            .chain(rule.candidate().rhs.iter().map(|term| &term.integral))
+        {
+            if integral.powers()[physical_arity..]
+                .iter()
+                .any(|power| power.is_symbolic() || power.value() != 0)
+            {
+                return Err(Error::Reduction(
+                    "native rule escaped fixed-zero storage tail".into(),
+                ));
+            }
+        }
+    }
+    Ok(())
 }
 
 fn native_coefficient(atom: &Atom, variables: &Arc<Vec<PolyVariable>>) -> Result<Coefficient> {

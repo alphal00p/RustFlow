@@ -418,20 +418,14 @@ impl OccupiedCutFamily {
                 "auxiliary mass collides with the occupied input".into(),
             ));
         }
-        let mut factors: [Atom; N] = self
-            .factors
-            .clone()
-            .try_into()
-            .map_err(|_| Error::InvalidInput("weighted slot arity mismatch".into()))?;
-        let roles: [IndexRole; N] = self
-            .roles
-            .clone()
-            .try_into()
-            .map_err(|_| Error::InvalidInput("weighted slot arity mismatch".into()))?;
+        // N is native index storage capacity. Only genuine factors enter the
+        // physical basis and source derivation; extra storage axes have no
+        // associated denominator or distribution.
+        let mut factors = self.factors.clone();
         for &i in shifted {
             factors[i] -= Atom::var(eta);
         }
-        WeightedMeasure::new(self.coordinates.clone(), factors, roles)
+        WeightedMeasure::from_physical(self.coordinates.clone(), factors, self.roles.clone())
     }
 
     /// Geometry for branch enumeration/ordinary hard projection. Occupation
@@ -522,6 +516,15 @@ mod tests {
         assert!(cut.deformed_measure::<9>(eta, &[0]).is_err());
         assert!(cut.deformed_measure::<9>(eta, &[3]).is_err());
         assert!(cut.deformed_measure::<7>(eta, &[2]).is_err());
+        let padded = cut.deformed_measure::<12>(eta, &[2]).unwrap();
+        assert_eq!(padded.physical_arity(), 9);
+        assert_eq!(padded.factors(), measure.factors());
+        assert_eq!(&padded.roles()[..9], measure.roles());
+        assert!(
+            padded.roles()[9..]
+                .iter()
+                .all(|role| *role == IndexRole::Ordinary)
+        );
         let family = cut
             .region_family(symbol!("occupied_geometry_test::eps"), 4)
             .unwrap();

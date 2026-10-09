@@ -1,0 +1,13 @@
+
+running 1 test
+generic physical=18 capacity=20 sources=328: bounded native closure starting
+generic capacity=20: DifferentialClosure { round: 0, requested: 5, basis_size: 5, new_derivatives: 22 }
+test runtime_graph_native_closure has been running for over 60 seconds
+generic capacity=20: DifferentialClosure { round: 1, requested: 27, basis_size: 27, new_derivatives: 60 }
+generic capacity=20: DifferentialClosure { round: 2, requested: 87, basis_size: 88, new_derivatives: 139 }
+generic capacity=20: Stage { name: "searching 2 new native weighted frontier labels, including constant sectors" }
+generic physical=18 capacity=20: unresolved; closure 108.605s; report=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-depth3/physical-18-capacity-20-cuts-0_4
+test runtime_graph_native_closure ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 109.02s
+

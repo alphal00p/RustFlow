@@ -1,0 +1,14 @@
+
+running 9 tests
+test native_single_domain_recenter_diagnostic ... ignored, one-domain native certification diagnostic; inspect retained unresolved evidence
+test physical_sunset_double_cut_native_closure ... ignored, bounded native search diagnostic; run explicitly and inspect closed/unresolved report
+test physical_sunset_single_cut_native_closure ... ignored, bounded native search diagnostic; run explicitly and inspect closed/unresolved report
+test admitted_indices_precede_zero_and_constant_terminal_classification ... ok
+test raw_target_domains_survive_exact_zero_integrals_and_reject_unknown_coefficients ... ok
+test positive_mass_lower_support_is_zero_but_massless_limit_is_not_inferred ... ok
+test source_policy_is_bound_and_legacy_preserves_all_occupation_faces ... ok
+test physical_sunset_weighted_contexts_construct ... ok
+test positive_completion_powers_require_opt_in_and_a_massive_shell_certificate ... ok
+
+test result: ok. 6 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 0.14s
+
