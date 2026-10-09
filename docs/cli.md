@@ -90,6 +90,12 @@ used. Both Python functions return JSON strings; evaluation releases the Python
 GIL and preserves native typed exceptions on failure. The bindings are registered
 in the existing Symbolica extension, not in a separately loaded Symbolica runtime.
 
+The [native Python runtime gate](../reports/validation/2026-10-09-finite-density-native-assembly/python-native-density-validation.json)
+passed full-amplitude and Laurent evaluation, decimal-string output, typed
+errors, progress polling and cancellation with the GIL released. It registers
+Symbolica, HEPKit and RustFlow from one freshly linked dependency graph; it does
+not change or certify a separately installed embedding host.
+
 ## Native HEPKit graph input
 
 The graph example references a native HEPKit model JSON and an unmodified native

@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/python_finite_density-bede1c03c02f84bf",
+    "--exact",
+    "native_density_binding_preserves_full_values_errors_and_cancellation",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.1362651060335338,
+  "user_seconds": 0.88432,
+  "system_seconds": 0.238124,
+  "peak_child_rss_kib": 27672,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,49 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "tests_passed": 1,
+  "tests_failed": 0,
+  "source_snapshot": "native-capacity-final-source-hashes.json",
+  "source_snapshot_sha256": "0d575a9528bc74cba92381f7315c853140007eae80dbdab99aa2716194b215a9",
+  "test": "tests/python_finite_density.rs",
+  "test_sha256": "c7c2209fd650aa71f982efd571778a4fecdcab37742717ed2b9692468d0a0af5",
+  "binary": "target/release/deps/python_finite_density-bede1c03c02f84bf",
+  "binary_sha256": "e234718da28367129d6b8cad6568bf771279c2583759787d15eab266b1d2303b",
+  "features": [
+    "default",
+    "python"
+  ],
+  "build_command": [
+    "nix",
+    "develop",
+    "--command",
+    "cargo",
+    "test",
+    "--release",
+    "--features",
+    "python",
+    "--no-run",
+    "--test",
+    "python_finite_density"
+  ],
+  "build_elapsed_reported": "12m04s including first feature dependency compilation",
+  "resources": {
+    "command": [
+      "timeout",
+      "180",
+      "target/release/deps/python_finite_density-bede1c03c02f84bf",
+      "--exact",
+      "native_density_binding_preserves_full_values_errors_and_cancellation",
+      "--nocapture"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 1.1362651060335338,
+    "user_seconds": 0.88432,
+    "system_seconds": 0.238124,
+    "peak_child_rss_kib": 27672,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "log": "python-native-density-resources.log",
+  "log_sha256": "4e81df98992910d54d854197752c0341262e7353360108b8154ddf134d9e52b8",
+  "scope": "In-process registered Symbolica, HEPKit and RustFlow bindings from one freshly linked native dependency graph. Does not modify or certify a separately installed embedding host. Exercises full massive one-loop vacuum-plus-occupied values and cancellation of raised terms, native decimal-string output, Laurent fitting/refinement evidence, typed invalid/unsupported errors, progress polling, and cancellation during massive two-loop native preparation with the GIL released. Massless flowing input is intentionally still unsupported in this source snapshot."
+}
