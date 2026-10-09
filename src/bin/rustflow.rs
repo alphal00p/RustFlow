@@ -1078,7 +1078,7 @@ fn run() -> CliResult<()> {
     let arguments = std::env::args().skip(1).collect::<Vec<_>>();
     if arguments.is_empty() || matches!(arguments[0].as_str(), "--help" | "-h" | "help") {
         println!(
-            "RustFlow\n\nUsage: rustflow graph INPUT.json\n       rustflow transport INPUT.json\n\nGraph input references native HEPKit model JSON and DOT files.\nTransport input supplies differential equations and a binary cache directory.\nPaths are relative to INPUT.json; results are JSON on stdout.\nSee docs/cli.md for exact-input and accuracy conventions."
+            "RustFlow\n\nUsage: rustflow graph INPUT.json\n       rustflow transport INPUT.json\n       rustflow finite-density-prepare INPUT.json\n\nGraph input references native HEPKit model JSON and DOT files.\nTransport input supplies differential equations and a binary cache directory.\nFinite-density preparation validates graph/charge evidence and converts targets; it does not evaluate integrals.\nPaths are relative to INPUT.json; results are JSON on stdout.\nSee docs/cli.md for exact-input and accuracy conventions."
         );
         return Ok(());
     }
@@ -1095,7 +1095,15 @@ fn run() -> CliResult<()> {
     let output = match arguments[0].as_str() {
         "graph" => graph(serde_json::from_str(&text)?, directory)?,
         "transport" => transport(serde_json::from_str(&text)?, directory)?,
-        _ => return Err("unknown command; expected graph or transport".into()),
+        "finite-density-prepare" => {
+            let input: finite_density::DensityInput = serde_json::from_str(&text)?;
+            input.prepare()?.preparation_report(65536)?
+        }
+        _ => {
+            return Err(
+                "unknown command; expected graph, transport or finite-density-prepare".into(),
+            );
+        }
     };
     println!("{}", serde_json::to_string_pretty(&output)?);
     Ok(())

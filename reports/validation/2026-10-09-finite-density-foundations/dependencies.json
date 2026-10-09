@@ -1,0 +1,174 @@
+{
+  "schema": 1,
+  "scope": "standalone native dependency integration; not finite-density numerical acceptance",
+  "compiler": "rustc 1.97.1 (8bab26f4f 2026-07-14)",
+  "native_target": "x86_64-unknown-linux-gnu",
+  "metadata_command": "nix develop --command cargo metadata --locked --offline --filter-platform x86_64-unknown-linux-gnu --format-version 1",
+  "one_instance_per_owner": true,
+  "packages": [
+    {
+      "name": "feynkit-amplitude",
+      "version": "0.1.0",
+      "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+    },
+    {
+      "name": "feynkit-generator",
+      "version": "0.1.0",
+      "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+    },
+    {
+      "name": "feynkit-graph",
+      "version": "0.1.0",
+      "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+    },
+    {
+      "name": "feynkit-kinematics",
+      "version": "0.1.0",
+      "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+    },
+    {
+      "name": "feynkit-model",
+      "version": "0.1.0",
+      "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+    },
+    {
+      "name": "feynkit-tensor",
+      "version": "0.1.0",
+      "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+    },
+    {
+      "name": "graphica",
+      "version": "3.0.1",
+      "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#ed2374f1d880d52c3a7ca48cd7c22f4baad5c020"
+    },
+    {
+      "name": "idenso",
+      "version": "0.3.0",
+      "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+    },
+    {
+      "name": "linnet",
+      "version": "0.17.0",
+      "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+    },
+    {
+      "name": "numerica",
+      "version": "3.0.1",
+      "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#ed2374f1d880d52c3a7ca48cd7c22f4baad5c020"
+    },
+    {
+      "name": "rustred",
+      "version": "0.1.0",
+      "source": "git+https://github.com/alphal00p/rustred?rev=78969aab524b7d6a2eec36f59b01e9af1e04cc04#78969aab524b7d6a2eec36f59b01e9af1e04cc04"
+    },
+    {
+      "name": "rustred-order",
+      "version": "0.1.0",
+      "source": "git+https://github.com/alphal00p/rustred?rev=78969aab524b7d6a2eec36f59b01e9af1e04cc04#78969aab524b7d6a2eec36f59b01e9af1e04cc04"
+    },
+    {
+      "name": "spenso",
+      "version": "0.6.0",
+      "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+    },
+    {
+      "name": "symbolica",
+      "version": "3.0.1",
+      "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#ed2374f1d880d52c3a7ca48cd7c22f4baad5c020"
+    }
+  ],
+  "original_rustred_revision": "acc92b0dad27b11fd194a4c284765fb6a93cbc94",
+  "new_rustred_is_verified_descendant": true,
+  "embedding_host_audit": {
+    "status": "inspected only; not modified or rebuilt",
+    "host_revision": "970c3faca3dcdcde221d9475a80705585c860604",
+    "rustflow_revision": "b3a4843e8327835d1ec3ada5a6f32f1841bab2c2",
+    "rustred_revision": "7c1ed03722b8c05daf60c89ba4ecc79457ed2ada",
+    "symbolica_numerica_graphica_revision": "58652fabc2f736302a570deaaf8d517679f7fe6e",
+    "hepkit_revision": "ec21ce9aedacaa95b36d6af371837539343ac10a",
+    "requirement": "A host embedding the guarded adapter must align every RustRed consumer, including rustred-feynkit and Vakint, to one guarded-capable source identity."
+  },
+  "cache_compatibility": "Dependency source fingerprint changes deliberately invalidate earlier numerical caches; guarded programs additionally bind roles, original sources, exact replay, support, orientation, normalization, branch, deformation.",
+  "python_feature_metadata": {
+    "command": "nix develop --command cargo metadata --locked --filter-platform x86_64-unknown-linux-gnu --features python --format-version 1",
+    "one_instance_per_owner": true,
+    "packages": [
+      {
+        "name": "feynkit-amplitude",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+      },
+      {
+        "name": "feynkit-generator",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+      },
+      {
+        "name": "feynkit-graph",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+      },
+      {
+        "name": "feynkit-kinematics",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+      },
+      {
+        "name": "feynkit-model",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+      },
+      {
+        "name": "feynkit-py",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+      },
+      {
+        "name": "feynkit-tensor",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+      },
+      {
+        "name": "graphica",
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#ed2374f1d880d52c3a7ca48cd7c22f4baad5c020"
+      },
+      {
+        "name": "idenso",
+        "version": "0.3.0",
+        "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+      },
+      {
+        "name": "linnet",
+        "version": "0.17.0",
+        "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+      },
+      {
+        "name": "numerica",
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#ed2374f1d880d52c3a7ca48cd7c22f4baad5c020"
+      },
+      {
+        "name": "rustred",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/rustred?rev=78969aab524b7d6a2eec36f59b01e9af1e04cc04#78969aab524b7d6a2eec36f59b01e9af1e04cc04"
+      },
+      {
+        "name": "rustred-order",
+        "version": "0.1.0",
+        "source": "git+https://github.com/alphal00p/rustred?rev=78969aab524b7d6a2eec36f59b01e9af1e04cc04#78969aab524b7d6a2eec36f59b01e9af1e04cc04"
+      },
+      {
+        "name": "spenso",
+        "version": "0.6.0",
+        "source": "git+https://github.com/alphal00p/gammaloop?branch=feynkit#635d3a1feb44067583a668c7d18f67405fe144e1"
+      },
+      {
+        "name": "symbolica",
+        "version": "3.0.1",
+        "source": "git+https://github.com/symbolica-dev/symbolica?branch=community#ed2374f1d880d52c3a7ca48cd7c22f4baad5c020"
+      }
+    ],
+    "scope": "Metadata ownership check; Python compilation status is recorded separately."
+  }
+}

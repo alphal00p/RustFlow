@@ -1,0 +1,12 @@
+{
+  "scope": "One native sunset input preparation subprocess; compilation excluded; no integral evaluation",
+  "command": [
+    "target/release/rustflow",
+    "finite-density-prepare",
+    "examples/finite_density/massive_two_loop_sunset.json"
+  ],
+  "wall_seconds": 0.006284651812165976,
+  "peak_child_rss_kib": 12340,
+  "cut_contributions": 4,
+  "numerical_integrals_evaluated": 0
+}

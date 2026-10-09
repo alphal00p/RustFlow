@@ -1,0 +1,168 @@
+{
+  "name": "chain_of_three_parallel_pairs",
+  "loops": 4,
+  "vertices": 4,
+  "edges": [
+    {
+      "vertices": [
+        0,
+        3
+      ],
+      "routing": [
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        1
+      ]
+    },
+    {
+      "vertices": [
+        3,
+        2
+      ],
+      "routing": [
+        "0",
+        "1",
+        "0",
+        "0"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    },
+    {
+      "vertices": [
+        2,
+        1
+      ],
+      "routing": [
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    },
+    {
+      "vertices": [
+        1,
+        0
+      ],
+      "routing": [
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    },
+    {
+      "vertices": [
+        3,
+        0
+      ],
+      "routing": [
+        "1",
+        "0",
+        "0",
+        "-1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        1
+      ]
+    },
+    {
+      "vertices": [
+        2,
+        3
+      ],
+      "routing": [
+        "0",
+        "1",
+        "0",
+        "-1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    },
+    {
+      "vertices": [
+        1,
+        2
+      ],
+      "routing": [
+        "0",
+        "0",
+        "1",
+        "-1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    }
+  ],
+  "loop_charges": [
+    [
+      1
+    ],
+    [
+      0
+    ],
+    [
+      0
+    ],
+    [
+      0
+    ]
+  ],
+  "chemical_potentials": [
+    "1"
+  ],
+  "numerator_convention": "shifted_euclidean",
+  "laurent_orders": [
+    -4,
+    0
+  ],
+  "digits": 12,
+  "targets": [
+    {
+      "powers": [
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "numerator": "g1_2^2"
+    },
+    {
+      "powers": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "numerator": "g1_2^2+g1_3*g2_4"
+    }
+  ]
+}

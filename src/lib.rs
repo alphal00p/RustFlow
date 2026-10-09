@@ -36,6 +36,8 @@ pub mod epsilon_flow;
 pub mod epsilon_shearing;
 pub mod error;
 pub mod family;
+#[cfg(feature = "automatic")]
+pub mod finite_density;
 mod fixed_series;
 pub mod frobenius;
 #[cfg(feature = "automatic")]

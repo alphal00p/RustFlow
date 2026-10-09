@@ -1,0 +1,255 @@
+{
+  "basis": {
+    "coordinates": [
+      "g1_1",
+      "g1_2",
+      "g2_2",
+      "u1",
+      "u2"
+    ],
+    "independent_masses": [
+      "line_mass_squared_0",
+      "line_mass_squared_1",
+      "line_mass_squared_2"
+    ],
+    "physical_slots": 3,
+    "slots": [
+      "g1_1+line_mass_squared_0",
+      "g2_2+line_mass_squared_1",
+      "g1_1-2*g1_2+g2_2+line_mass_squared_2",
+      "u1",
+      "u2"
+    ]
+  },
+  "cut_decomposition": [
+    {
+      "cut_sign": 1,
+      "cut_slots": [],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        0
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        1
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        0,
+        1
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1"
+        ]
+      ]
+    }
+  ],
+  "input": {
+    "chemical_potentials": [
+      "1"
+    ],
+    "digits": 12,
+    "edges": [
+      {
+        "charges": [
+          1
+        ],
+        "mass_squared": "1/4",
+        "routing": [
+          "1",
+          "0"
+        ],
+        "vertices": [
+          0,
+          1
+        ]
+      },
+      {
+        "charges": [
+          1
+        ],
+        "mass_squared": "1/4",
+        "routing": [
+          "0",
+          "1"
+        ],
+        "vertices": [
+          1,
+          0
+        ]
+      },
+      {
+        "charges": [
+          0
+        ],
+        "mass_squared": "1",
+        "routing": [
+          "1",
+          "-1"
+        ],
+        "vertices": [
+          1,
+          0
+        ]
+      }
+    ],
+    "laurent_orders": [
+      -2,
+      0
+    ],
+    "loop_charges": [
+      [
+        1
+      ],
+      [
+        1
+      ]
+    ],
+    "loops": 2,
+    "name": "massive_two_loop_sunset",
+    "numerator_convention": "shifted_euclidean",
+    "targets": [
+      {
+        "numerator": "1",
+        "powers": [
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "numerator": "g1_2+u1*u2",
+        "powers": [
+          2,
+          1,
+          1
+        ]
+      }
+    ],
+    "vertices": 2
+  },
+  "input_identity": "2b34581a89bbdf687f07f8e4f14fb7a8d5ac02d00eff6e41672702f3415cf49a",
+  "numerical_evaluation": {
+    "available": false,
+    "reason": "weighted closure, integrated recursive boundaries and common-contour continuation remain unvalidated"
+  },
+  "operation": "finite-density-prepare",
+  "schema_version": 1,
+  "status": "algebraic_preparation_only",
+  "targets": [
+    [
+      {
+        "coefficient": "1",
+        "powers": [
+          1,
+          1,
+          1,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "1/2",
+        "powers": [
+          1,
+          1,
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/2",
+        "powers": [
+          2,
+          0,
+          1,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2",
+        "powers": [
+          2,
+          1,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1",
+        "powers": [
+          2,
+          1,
+          1,
+          -1,
+          -1
+        ]
+      },
+      {
+        "coefficient": "-1/2*line_mass_squared_0-1/2*line_mass_squared_1+1/2*line_mass_squared_2",
+        "powers": [
+          2,
+          1,
+          1,
+          0,
+          0
+        ]
+      }
+    ]
+  ]
+}

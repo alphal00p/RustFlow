@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "command": "nix develop --command cargo test --locked --release --test finite_density_input",
+  "passed": 9,
+  "failed": 0,
+  "ignored": 0,
+  "reported_wait_and_build_seconds": 684,
+  "reported_test_seconds": 0.07,
+  "scope": "Native Symbolica input identities and exact graph/measure input preparation only; no numerical integral or oracle comparison.",
+  "oracle_targets_algebraically_checked": 108,
+  "oracle_four_loop_records": 95,
+  "oracle_lower_loop_records": 13,
+  "numerical_oracle_records_compared": 0,
+  "memory_measurement": null,
+  "tests": [
+    "full_routing_rank_does_not_replace_incidence_or_chemical_evidence",
+    "complete_reference_payload_is_preserved_and_parses_only_in_validation",
+    "physical_connectivity_is_undirected_under_consistent_edge_reorientation",
+    "independent_physical_mass_derivatives_preserve_original_polynomial",
+    "compatible_rational_routing_retains_a_nonunit_exact_jacobian",
+    "independent_chemical_species_retain_separate_cycle_assignments",
+    "zero_power_preserves_chemical_assignments_and_medium_offsets",
+    "all_108_supplied_target_expansions_use_the_same_inverse_propagator_slots",
+    "user_defined_graphs_prepare_and_retain_all_connected_occupied_cuts"
+  ]
+}

@@ -1,0 +1,3081 @@
+{
+  "schema_version": 3,
+  "usage": "User-supplied validation data only; do not use as production reductions, fit constraints, or AMF boundary conditions.",
+  "provenance": {
+    "source_description": "User-supplied finite-density reference dataset, schema 2",
+    "source_file_sha256": "dc2ac8b3c73a945b0e86207447a742eb2c94987957480680fbb6028016fe9a5c",
+    "preserved_source_payload_sha256": "0e3d34dd83503b22f6f564354d15078d3de3950068099743f00c9c79bae318f4",
+    "source_schema_version": 2,
+    "target_repository": "https://github.com/alphal00p/RustFlow",
+    "target_revision_inspected": "b3a4843e8327835d1ec3ada5a6f32f1841bab2c2",
+    "change": "Only additive interpretation, basis maps, and exact target combinations; original definitions, constants, coefficients, uncertainties and tags are unchanged.",
+    "verification_scope": "Exact algebraic representation checks only. No AMF predictions or numerical oracle comparisons are claimed."
+  },
+  "rustflow_interpretation": {
+    "status": "Validation fixture for a new finite-density feature; not an input schema already accepted by RustFlow's ordinary or final-state cut APIs.",
+    "component": "Full finite-chemical-potential Euclidean integral, including its zero-cut vacuum contribution. Do not substitute a density correction or a single cut term without an independent proof of equality.",
+    "source_powers": "The retained powers field has the original sign-dependent dotted convention: positive entries use positive_index_routings, negative entries use negative_index_dot_pairs. Never pass this field unchanged to RustFlow Integral.",
+    "new_powers": "finite_density_target.indexed_terms[*].powers uses a single uniform inverse-propagator basis: J(a)=integral product_j rho_j^(-a_j), with the original shifted Euclidean contours and measure. Negative a_j means a numerator power of that same rho_j. These are algebraic target expansions, not IBP reductions or master decompositions.",
+    "input_numerator": "finite_density_target.numerator_polynomial uses g<i>_<j>=P_i.P_j for the chemically shifted Euclidean momenta in conventions.momenta. These are not scalar products of the unshifted real loop variables. If an API uses unshifted numerators, explicitly substitute P_i=k_i+i*signature_i*mu*u, u.u=1, including all offsets and medium contractions.",
+    "chemical_assignments": "Keep every loop signature and every routed chemical shift sum_i routing[j][i]*signature_i*mu, including loops or denominator slots with zero or negative powers. No graph incidence or cut orientation certificate is supplied by this algebraic dataset; construct and verify those if required by the cutting algorithm.",
+    "physical_mapping": "All stored maps are at zero auxiliary mass and zero physical masses, as specified by the oracle. After forming indexed targets, hold their indices and input coefficients fixed under the chosen AMF deformation. A negative power of a shifted slot evolves with that slot. Reconstruct the input combination at the physical endpoint. Derived IBP coefficients can still depend on the auxiliary parameter. A different massive family needs its own mass-dependent physical basis map.",
+    "coordinates": "rho and g names are exact polynomial coordinates, not additional integration variables. Polynomial expressions and rational weights use native Symbolica syntax. Array slots are zero-based; momentum labels in names and dot pairs are one-based. The legacy eta_i in conventions.momenta is a chemical signature, not the auxiliary mass parameter; use a distinct symbol for the latter.",
+    "normalization": "Retain the original Euclidean measure_factor and normalization exactly. RustFlow's ordinary measure d^D l/(i*pi^(D/2)), Minkowski denominators, and final-state phase-space measures are different conventions. Implement and test an explicit whole-amplitude continuation and normalization adapter, including numerator Wick rotation and cut factors. No global Minkowski sign or phase has been inserted into these coefficients or indexed_terms.",
+    "coefficient_comparison": "First compute and save predictions from integral definitions alone. Then form the full Euclidean integral with the stated MSbar measure factor, divide by the unexpanded reference normalization, and compare only supplied Laurent orders. Never expand the normalization a second time or treat a finite zero as an all-orders identity.",
+    "uncertainty_comparison": "Supplied absolute uncertainties limit reference agreement; they do not relax the evaluator's separate numerical-stability target. Keep det tags uninterpreted. Exact rational spelling of an uncertain decimal central value does not certify the central value as exact.",
+    "oracle_isolation": "Only the validation harness may load constants, coefficients and uncertainties. No production reduction, boundary construction, interpolation, or fit constraints may consume them. Input extraction should pass only bases, conventions needed to define integrals, signatures, and target expressions to evaluation.",
+    "self_contained": "All integral definitions and reference values are present in this file. No original attachment, PDF, source checkout, or additional CAS is needed to interpret it."
+  },
+  "conventions": {
+    "expression_syntax": "Native Symbolica expressions: explicit multiplication *, powers ^, and functions log(2), zeta(3), exp(x). Parse expression strings with symbolica.E or Expression.parse in native mode. pi and symbolica::γ are built-in constants, not free parameters.",
+    "parameters": {
+      "eps": "Dimensional regulator; D=4-2*eps and spatial dimension d=3-2*eps.",
+      "mu": 1,
+      "Lambda_bar": "Positive MSbar renormalization scale in units where mu=1.",
+      "symbolica::γ": "Euler-Mascheroni constant.",
+      "masses_squared": 0,
+      "temperature": 0,
+      "external_momenta": []
+    },
+    "momenta": "For loop i, P_i=(p_i0 + imaginary_unit*eta_i*mu, spatial_p_i), with eta_i=loop_signatures[i-1], real p_i0 integrated from minus infinity to plus infinity, and spatial_p_i in dimension d. imaginary_unit^2=-1. All chemical shifts, including those on loops with zero powers, apply before forming routed momenta and dot products.",
+    "dot_product": "Euclidean bilinear product P_a.P_b=(p_a0+imaginary_unit*eta_a*mu)*(p_b0+imaginary_unit*eta_b*mu)+spatial_p_a.spatial_p_b; no complex conjugation.",
+    "measure": "For each loop integrate dp_i0/(2*pi) times d^d spatial_p_i/(2*pi)^d, multiplied by measure_factor. Dimensional regularization regulates both UV and IR divergences.",
+    "measure_factor": "(exp(symbolica::γ)*Lambda_bar^2/(4*pi))^eps",
+    "integrand": "Multiply the slot factors over j. For powers[j]=n>0, the factor is 1/(Q_j.Q_j)^n, where Q_j=sum_i positive_index_routings[j][i-1]*P_i. For n=0 it is 1. For n<0 it is (P_a.P_b)^(-n), where [a,b]=negative_index_dot_pairs[j]. Loop labels a,b are one-based; array slots j are zero-based. The integral is this product integrated with the measure for every loop. All propagators are massless.",
+    "normalization": "(4*pi)^(-2*L)*(Lambda_bar/2)^(2*L*eps)",
+    "coefficients": "For L=bases[basis].loops, integral/normalization has the listed Laurent coefficients: sum_k coefficients[k]*eps^k. All original numerical prefactors are already included. Keep normalization unexpanded when comparing. The expansion is supplied through the greatest listed k; all lower unlisted powers are zero, while all higher powers are unspecified. A finite zero does not imply an all-orders zero.",
+    "constants": "Substitute the expressions in constants, resolving a8 and a9 through a1. a2, a6, and a10 are the supplied epsilon coefficients, not the complete supplementary series. No unknown a4 coefficient is included.",
+    "uncertainties": "uncertainties[k].absolute is the absolute uncertainty of coefficients[k] in the same normalization, obtained from the supplied parenthesized last digits and scaled with the prefactor magnitude. For numerical terms with a supplied uncertainty, rational encoding preserves the decimal central value without making the approximate result exact. The optional det tag is retained as an uninterpreted supplied label; no confidence level or correlation model is specified."
+  },
+  "bases": {
+    "two_loop_dotted": {
+      "loops": 2,
+      "positive_index_routings": [
+        [1, 0],
+        [0, 1],
+        [1, -1]
+      ],
+      "negative_index_dot_pairs": [
+        [1, 1],
+        [2, 2],
+        [1, 2]
+      ],
+      "inverse_propagator_representation": {
+        "metric": "Euclidean bilinear, with the original shifted momentum contours",
+        "scalar_product_pairs": [
+          [1, 1],
+          [1, 2],
+          [2, 2]
+        ],
+        "scalar_product_symbols": ["g1_1", "g1_2", "g2_2"],
+        "inverse_propagator_symbols": ["rho1", "rho2", "rho3"],
+        "inverse_propagator_polynomials": ["g1_1", "g2_2", "g1_1-2*g1_2+g2_2"],
+        "scalar_products_in_inverse_propagators": {
+          "g1_1": "rho1",
+          "g1_2": "1/2*rho1+1/2*rho2-1/2*rho3",
+          "g2_2": "rho2"
+        },
+        "mass_squared": ["0", "0", "0"],
+        "basis_is_complete": true,
+        "reference_normalization": "(4*pi)^(-4)*(Lambda_bar/2)^(4*eps)"
+      }
+    },
+    "three_loop_dotted": {
+      "loops": 3,
+      "positive_index_routings": [
+        [1, 0, 0],
+        [0, 1, 0],
+        [0, 0, 1],
+        [1, -1, 0],
+        [1, 0, -1],
+        [0, 1, -1]
+      ],
+      "negative_index_dot_pairs": [
+        [1, 1],
+        [2, 2],
+        [3, 3],
+        [1, 2],
+        [1, 3],
+        [2, 3]
+      ],
+      "inverse_propagator_representation": {
+        "metric": "Euclidean bilinear, with the original shifted momentum contours",
+        "scalar_product_pairs": [
+          [1, 1],
+          [1, 2],
+          [1, 3],
+          [2, 2],
+          [2, 3],
+          [3, 3]
+        ],
+        "scalar_product_symbols": ["g1_1", "g1_2", "g1_3", "g2_2", "g2_3", "g3_3"],
+        "inverse_propagator_symbols": ["rho1", "rho2", "rho3", "rho4", "rho5", "rho6"],
+        "inverse_propagator_polynomials": ["g1_1", "g2_2", "g3_3", "g1_1-2*g1_2+g2_2", "g1_1-2*g1_3+g3_3", "g2_2-2*g2_3+g3_3"],
+        "scalar_products_in_inverse_propagators": {
+          "g1_1": "rho1",
+          "g1_2": "1/2*rho1+1/2*rho2-1/2*rho4",
+          "g1_3": "1/2*rho1+1/2*rho3-1/2*rho5",
+          "g2_2": "rho2",
+          "g2_3": "1/2*rho2+1/2*rho3-1/2*rho6",
+          "g3_3": "rho3"
+        },
+        "mass_squared": ["0", "0", "0", "0", "0", "0"],
+        "basis_is_complete": true,
+        "reference_normalization": "(4*pi)^(-6)*(Lambda_bar/2)^(6*eps)"
+      }
+    },
+    "four_loop_dotted": {
+      "loops": 4,
+      "positive_index_routings": [
+        [1, 0, 0, 0],
+        [0, 1, 0, 0],
+        [0, 0, 1, 0],
+        [0, 0, 0, 1],
+        [1, 0, 0, -1],
+        [0, 1, 0, -1],
+        [0, 0, 1, -1],
+        [1, -1, 0, 0],
+        [1, 0, -1, 0],
+        [1, -1, -1, 0]
+      ],
+      "negative_index_dot_pairs": [
+        [1, 1],
+        [2, 2],
+        [3, 3],
+        [4, 4],
+        [1, 4],
+        [2, 4],
+        [3, 4],
+        [1, 2],
+        [1, 3],
+        [2, 3]
+      ],
+      "inverse_propagator_representation": {
+        "metric": "Euclidean bilinear, with the original shifted momentum contours",
+        "scalar_product_pairs": [
+          [1, 1],
+          [1, 2],
+          [1, 3],
+          [1, 4],
+          [2, 2],
+          [2, 3],
+          [2, 4],
+          [3, 3],
+          [3, 4],
+          [4, 4]
+        ],
+        "scalar_product_symbols": ["g1_1", "g1_2", "g1_3", "g1_4", "g2_2", "g2_3", "g2_4", "g3_3", "g3_4", "g4_4"],
+        "inverse_propagator_symbols": ["rho1", "rho2", "rho3", "rho4", "rho5", "rho6", "rho7", "rho8", "rho9", "rho10"],
+        "inverse_propagator_polynomials": ["g1_1", "g2_2", "g3_3", "g4_4", "g1_1-2*g1_4+g4_4", "g2_2-2*g2_4+g4_4", "g3_3-2*g3_4+g4_4", "g1_1-2*g1_2+g2_2", "g1_1-2*g1_3+g3_3", "g1_1-2*g1_2+g2_2-2*g1_3+2*g2_3+g3_3"],
+        "scalar_products_in_inverse_propagators": {
+          "g1_1": "rho1",
+          "g1_2": "1/2*rho1+1/2*rho2-1/2*rho8",
+          "g1_3": "1/2*rho1+1/2*rho3-1/2*rho9",
+          "g1_4": "1/2*rho1+1/2*rho4-1/2*rho5",
+          "g2_2": "rho2",
+          "g2_3": "1/2*rho1-1/2*rho8-1/2*rho9+1/2*rho10",
+          "g2_4": "1/2*rho2+1/2*rho4-1/2*rho6",
+          "g3_3": "rho3",
+          "g3_4": "1/2*rho3+1/2*rho4-1/2*rho7",
+          "g4_4": "rho4"
+        },
+        "mass_squared": ["0", "0", "0", "0", "0", "0", "0", "0", "0", "0"],
+        "basis_is_complete": true,
+        "reference_normalization": "(4*pi)^(-8)*(Lambda_bar/2)^(8*eps)"
+      }
+    }
+  },
+  "constants": {
+    "a1": "243/4 - 3*pi^2/4",
+    "a2": "151/79 - (80*pi^2)/79 + (47*pi^4)/79 - (33*log(2))/79 - (75*pi^2*log(2))/79 - (36*log(2)^2)/79 - (26*pi^2*log(2)^2)/79 - (21*log(2)^3)/79 + (164*log(2)^4)/79 - (76*zeta(3))/79 + (33*log(2)*zeta(3))/79",
+    "a3": "553/2 - 57*pi^2/8 - pi^4/15 - 23*zeta(3)",
+    "a5": "233/4 - 3*pi^2/4 - 4*zeta(3)",
+    "a6": "319/9 + (104*pi^2)/3 - (13*pi^4)/9 + (212*log(2))/9 - (199*pi^2*log(2))/9 + (230*log(2)^2)/9 - (112*pi^2*log(2)^2)/9 - (121*log(2)^3)/3 - (32*log(2)^4)/9 - (238*zeta(3))/9 + 32*log(2)*zeta(3)",
+    "a7": "320 - 15*pi^2/2 - 11*zeta(3)",
+    "a8": "a1",
+    "a9": "16/9 + a1",
+    "a10": "-33/7 - (191*pi^2)/14 + (13*pi^4)/14 + 4*log(2) + (7*pi^2*log(2))/2 - (109*log(2)^2)/14 + (159*pi^2*log(2)^2)/14 + (2*log(2)^3)/7 - (73*log(2)^4)/7 + 2*zeta(3) + (123*log(2)*zeta(3))/7"
+  },
+  "lower_loop_oracles": [
+    {
+      "id": "L2_1",
+      "basis": "two_loop_dotted",
+      "powers": [1, 1, 0],
+      "loop_signatures": [1, 1],
+      "coefficients": {
+        "0": "4",
+        "1": "24",
+        "2": "92-2*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu"],
+        "denominator_powers": [1, 1, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "L3_1",
+      "basis": "three_loop_dotted",
+      "powers": [1, 1, 1, 1, 0, 0],
+      "loop_signatures": [1, 1, 1],
+      "coefficients": {
+        "-1": "8",
+        "0": "72",
+        "1": "392-6*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "L3_2",
+      "basis": "three_loop_dotted",
+      "powers": [2, 1, 1, 0, 0, 0],
+      "loop_signatures": [1, 1, 1],
+      "coefficients": {
+        "-1": "4",
+        "0": "24",
+        "1": "92-3*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu"],
+        "denominator_powers": [2, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [2, 1, 1, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "L3_3",
+      "basis": "three_loop_dotted",
+      "powers": [1, 1, 0, 0, 1, 1],
+      "loop_signatures": [1, 1, 1],
+      "coefficients": {
+        "-1": "4",
+        "0": "40",
+        "1": "4*a1"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 0, 0, 1, 1],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 0, 0, 1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "L3_4",
+      "basis": "three_loop_dotted",
+      "powers": [1, 1, 0, 0, 1, 1],
+      "loop_signatures": [1, 1, 0],
+      "coefficients": {
+        "-1": "24",
+        "0": "728/3-128/3*log(2)",
+        "1": "24*a2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0"],
+        "denominator_powers": [1, 1, 0, 0, 1, 1],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 0, 0, 1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "L3_5",
+      "basis": "three_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 0],
+      "loop_signatures": [1, 1, 1],
+      "coefficients": {
+        "-2": "-4",
+        "-1": "-38",
+        "0": "-228+8*zeta(3)+3*pi^2",
+        "1": "-4*a3"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "L3_6",
+      "basis": "three_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 0],
+      "loop_signatures": [0, 1, 1],
+      "coefficients": {
+        "-2": "-4",
+        "-1": "-40",
+        "0": "-24717/125"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "3/125"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "L3_7",
+      "basis": "three_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 0],
+      "loop_signatures": [0, 0, 1],
+      "coefficients": {
+        "-2": "-2",
+        "-1": "-20",
+        "0": "-126+3/2*pi^2",
+        "1": "-2*a7"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "0", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "L3_8",
+      "basis": "three_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, -1],
+      "loop_signatures": [1, 1, 1],
+      "coefficients": {
+        "-1": "-2",
+        "0": "-39/2",
+        "1": "-2*a5"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0],
+        "numerator_polynomial": "g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "L3_9",
+      "basis": "three_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, -1],
+      "loop_signatures": [0, 1, 1],
+      "coefficients": {
+        "-1": "6",
+        "0": "190/3-64/3*log(2)",
+        "1": "6*a6"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0],
+        "numerator_polynomial": "g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "L3_10",
+      "basis": "three_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, -1],
+      "loop_signatures": [0, 0, 1],
+      "coefficients": {
+        "-1": "1",
+        "0": "10",
+        "1": "a8"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "0", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0],
+        "numerator_polynomial": "g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "L3_11",
+      "basis": "three_loop_dotted",
+      "powers": [2, 1, 1, 1, 1, -2],
+      "loop_signatures": [0, 1, 0],
+      "coefficients": {
+        "-1": "1/3",
+        "0": "61/18",
+        "1": "1/3*a9"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "mu", "0"],
+        "denominator_powers": [2, 1, 1, 1, 1, 0],
+        "numerator_polynomial": "g2_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [2, -1, 1, 1, 1, 0]},
+          {"coefficient": "1/2", "powers": [2, 0, 0, 1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [2, 0, 1, 1, 1, -1]},
+          {"coefficient": "1/4", "powers": [2, 1, -1, 1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [2, 1, 0, 1, 1, -1]},
+          {"coefficient": "1/4", "powers": [2, 1, 1, 1, 1, -2]}
+        ]
+      }
+    },
+    {
+      "id": "L3_12",
+      "basis": "three_loop_dotted",
+      "powers": [2, 1, 1, 1, 1, -2],
+      "loop_signatures": [0, 1, 1],
+      "coefficients": {
+        "-1": "8/3",
+        "0": "400/9-32/3*log(2)-4/3*pi^2",
+        "1": "8/3*a10"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "mu", "mu"],
+        "denominator_powers": [2, 1, 1, 1, 1, 0],
+        "numerator_polynomial": "g2_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [2, -1, 1, 1, 1, 0]},
+          {"coefficient": "1/2", "powers": [2, 0, 0, 1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [2, 0, 1, 1, 1, -1]},
+          {"coefficient": "1/4", "powers": [2, 1, -1, 1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [2, 1, 0, 1, 1, -1]},
+          {"coefficient": "1/4", "powers": [2, 1, 1, 1, 1, -2]}
+        ]
+      }
+    }
+  ],
+  "four_loop_oracles": [
+    {
+      "id": "I1",
+      "basis": "four_loop_dotted",
+      "powers": [2, 2, 1, 1, 0, 0, 0, 0, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "4",
+        "-1": "24",
+        "0": "92-4*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [2, 2, 1, 1, 0, 0, 0, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [2, 2, 1, 1, 0, 0, 0, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I2",
+      "basis": "four_loop_dotted",
+      "powers": [3, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "0": "2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [3, 1, 1, 1, 0, 0, 0, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [3, 1, 1, 1, 0, 0, 0, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I3",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 2, 0, 0, 0, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "-2",
+        "-1": "-14",
+        "0": "-64+2*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 2, 0, 0, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 2, 0, 0, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I4",
+      "basis": "four_loop_dotted",
+      "powers": [1, 2, 1, 1, 1, 0, 0, 0, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "8",
+        "-1": "72",
+        "0": "392-8*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 2, 1, 1, 1, 0, 0, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 2, 1, 1, 1, 0, 0, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I5",
+      "basis": "four_loop_dotted",
+      "powers": [1, 2, 1, 1, 2, 0, 0, -1, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-1": "-4",
+        "0": "-32"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 2, 1, 1, 2, 0, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 2, 1, 1, 2, 0, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 1, 2, 0, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 2, 1, 1, 2, 0, 0, -1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I6",
+      "basis": "four_loop_dotted",
+      "powers": [2, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "2",
+        "-1": "14",
+        "0": "56-2*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [2, 1, 1, 1, 1, 0, 0, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [2, 1, 1, 1, 1, 0, 0, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I7",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 0, 1, 0, 0, 1, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "16",
+        "-1": "192",
+        "0": "1344-16*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 0, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 0, 1, 0, 0, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I8",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 2, 1, 0, 0, 0, 0, 0, 1],
+      "loop_signatures": [1, 1, 0, 1],
+      "coefficients": {
+        "-2": "-4",
+        "-1": "-44",
+        "0": "-296+4*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "mu"],
+        "denominator_powers": [1, 1, 2, 1, 0, 0, 0, 0, 0, 1],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 2, 1, 0, 0, 0, 0, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I9",
+      "basis": "four_loop_dotted",
+      "powers": [2, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+      "loop_signatures": [1, 1, 0, 1],
+      "coefficients": {
+        "-2": "2",
+        "-1": "13",
+        "0": "71/2-2*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "mu"],
+        "denominator_powers": [2, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [2, 1, 1, 1, 0, 0, 0, 0, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I10",
+      "basis": "four_loop_dotted",
+      "powers": [2, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "6",
+        "-1": "41",
+        "0": "263/2+32*log(2)-20/3*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [2, 1, 1, 1, 0, 0, 0, 0, 0, 1],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [2, 1, 1, 1, 0, 0, 0, 0, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I11",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "4",
+        "-1": "52",
+        "0": "400-4*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I12",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 0, -1, 0, 0],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "1",
+        "-1": "13",
+        "0": "100-pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 0, -1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I13",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 0, 0, -1, 0],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "2/3",
+        "-1": "46/9",
+        "0": "758/27-2/3*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 0, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 0, 0, -1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I14",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 0, 0, 0, -1],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "0": "0"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 0, 0, -1, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 2, 1, 1, 0, 0, 0, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I15",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 0, -2, 0, 0],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "1/3",
+        "-1": "79/18",
+        "0": "1841/54-1/3*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 3, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 0, 1, 3, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 3, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, -1, 1, 3, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 0, 1, 3, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 3, 1, 1, 0, -2, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I16",
+      "basis": "four_loop_dotted",
+      "powers": [1, 2, 1, 2, 1, 1, 0, -2, 0, 0],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-1": "1/2",
+        "0": "13/2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 2, 1, 2, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 2, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 2, 1, 2, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 0, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 2, 1, 2, 1, 1, 0, -2, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I17",
+      "basis": "four_loop_dotted",
+      "powers": [2, 1, 1, 2, 1, 1, 0, -2, 0, 0],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "1/2",
+        "-1": "16/3",
+        "0": "1259/36-1/2*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [2, 1, 1, 2, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [0, 1, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [2, -1, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [2, 0, 1, 2, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [2, 1, 1, 2, 1, 1, 0, -2, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I18",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "8",
+        "-1": "104",
+        "0": "800+64*log(2)-56*zeta(3)-32/3*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I19",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 0, -1, 0, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "2",
+        "-1": "10+4/3*pi^2",
+        "0": "714247816733/5000000000"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/100000000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 0, -1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I20",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 0, -2, 0, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "1/3",
+        "-1": "-5/3+2/3*pi^2",
+        "0": "112474769659/3000000000"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/100000000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 3, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 0, 1, 3, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 3, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, -1, 1, 3, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 0, 1, 3, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 3, 1, 1, 0, -2, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I21",
+      "basis": "four_loop_dotted",
+      "powers": [2, 1, 1, 1, 1, 1, 0, -1, 0, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "3/2",
+        "-1": "73/4",
+        "0": "1171016158983/10000000000"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "201/20000000000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [2, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [2, 0, 1, 1, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [2, 1, 1, 1, 1, 1, 0, -1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I22",
+      "basis": "four_loop_dotted",
+      "powers": [2, 1, 1, 2, 1, 1, 0, -2, 0, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-1": "-1/6+1/3*pi^2",
+        "0": "1731148277/60000000"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/1000000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [2, 1, 1, 2, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [0, 1, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [2, -1, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [2, 0, 1, 2, 1, 1, 0, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [2, 1, 1, 2, 1, 1, 0, -2, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I23",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "8",
+        "-1": "100",
+        "0": "740-16*zeta(3)-8*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I24",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 2, 1, 0, -1, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "-2",
+        "-1": "-28",
+        "0": "-214+2*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 2, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 2, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 2, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 2, 1, 0, -1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I25",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 0, -1, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "1",
+        "-1": "18",
+        "0": "152-pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 2, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 0, -1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I26",
+      "basis": "four_loop_dotted",
+      "powers": [2, 1, 1, 1, 1, 1, 0, -1, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "1/2",
+        "-1": "37/4",
+        "0": "647/8+4*zeta(3)-1/2*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [2, 1, 1, 1, 1, 1, 0, 0, 0, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [2, 0, 1, 1, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [2, 1, 1, 1, 1, 1, 0, -1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I27",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "4",
+        "-1": "56",
+        "0": "-22+8*a1+2*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I28",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "16",
+        "-1": "704/3-128/3*log(2)",
+        "0": "568/9+8*a1+24*a2-1792/9*log(2)+68/9*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I29",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "36",
+        "-1": "536-128*log(2)",
+        "0": "-3330657/62500+72*a2"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "153/250000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I30",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "6",
+        "-1": "90",
+        "0": "3587979/50000+12*a1"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "21/25000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I31",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+      "loop_signatures": [1, 1, 1, 2],
+      "coefficients": {
+        "-2": "36",
+        "-1": "536-128*log(2)",
+        "0": "-5331753/125000+72*a2"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "117/125000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "2*mu"],
+        "denominator_powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 0, 1, 1, 1, 0, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I32",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+      "loop_signatures": [0, 0, 0, 1],
+      "coefficients": {
+        "-1": "-1",
+        "0": "-33/2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "0", "0", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I33",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+      "loop_signatures": [0, 1, -1, 0],
+      "coefficients": {
+        "-2": "2",
+        "-1": "30",
+        "0": "23+4*a1+pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "mu", "-mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I34",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+      "loop_signatures": [0, 1, -1, 1],
+      "coefficients": {
+        "-2": "10",
+        "-1": "133",
+        "0": "42431/54+4*a1+1280/27*log(2)-112/3*zeta(3)-205/27*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "mu", "-mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I35",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+      "loop_signatures": [1, 1, 0, 1],
+      "coefficients": {
+        "-2": "6",
+        "-1": "78",
+        "0": "349+4*a1-3*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I36",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "24",
+        "-1": "980/3-128/3*log(2)",
+        "0": "1152424950387/1250000000+24*a2"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "249/1250000000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1],
+        "numerator_polynomial": "1",
+        "indexed_terms": [
+          {"coefficient": "1", "powers": [1, 1, 1, 1, 1, 0, 0, 0, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I37",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, -2, 0, 0],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "1/3",
+        "-1": "85/18",
+        "0": "-55/54+2/3*a1+1/6*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 0, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, -1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 0, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -2, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I38",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, -1, -1, 0],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "1/4",
+        "-1": "7/2",
+        "0": "-11/8+1/2*a1+1/8*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2*g1_3",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 0, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 0, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 0, 0, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -1, -1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I39",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, -1, 0, -1],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "1/4",
+        "-1": "7/2",
+        "0": "-11/8+1/2*a1+1/8*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 0, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 2, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 0, 1, 2, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -1, 0, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I40",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, -2],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "1/3",
+        "-1": "85/18",
+        "0": "-55/54+2/3*a1+1/6*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g2_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 1, 2, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 2, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 2, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, -2]}
+        ]
+      }
+    },
+    {
+      "id": "I41",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, -3, 0, 0],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "1/8",
+        "-1": "43/24",
+        "0": "-11/144+1/4*a1+1/16*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2^3",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "3/8", "powers": [-1, 0, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-3/8", "powers": [-1, 1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "3/8", "powers": [0, -1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-3/4", "powers": [0, 0, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/8", "powers": [1, -2, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-3/8", "powers": [1, -1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "3/8", "powers": [1, 0, 1, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -3, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I42",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, -1, -2, 0],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "1/12",
+        "-1": "85/72",
+        "0": "-55/216+1/6*a1+1/24*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2*g1_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/8", "powers": [-1, 0, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [-1, 1, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/8", "powers": [-1, 1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 0, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 0, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [0, 1, -1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "1/8", "powers": [1, 0, -1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 0, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [1, 0, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, -1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 0, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -2, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I43",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, -1, -1, -1],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "1/18",
+        "-1": "83/108",
+        "0": "-4/9+1/9*a1+1/36*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2*g1_3*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/8", "powers": [-1, 0, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/8", "powers": [-1, 1, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 0, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/8", "powers": [0, 0, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 0, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [0, 0, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "-1/4", "powers": [0, 1, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/8", "powers": [0, 1, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [0, 1, 0, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/8", "powers": [0, 1, 1, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "-1/8", "powers": [1, 0, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/8", "powers": [1, 0, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [1, 0, 0, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [1, 0, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "1/8", "powers": [1, 0, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/8", "powers": [1, 0, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -2, -1, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -2, 0]},
+          {"coefficient": "1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I44",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, -1, 0, -2],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "1/12",
+        "-1": "85/72",
+        "0": "-55/216+1/6*a1+1/24*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2*g2_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/8", "powers": [-1, 0, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-3/8", "powers": [-1, 1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "-1/4", "powers": [0, 0, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 0, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 0, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, 0, -2]},
+          {"coefficient": "1/8", "powers": [1, 0, 1, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 0, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "1/8", "powers": [1, 0, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "1/8", "powers": [1, 0, 1, 3, 1, 1, 1, 0, 0, -2]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -3, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 3, 1, 1, 1, -2, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 3, 1, 1, 1, -2, 0, -1]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -2, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -1, -1]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, 0, -2]}
+        ]
+      }
+    },
+    {
+      "id": "I45",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, 0, -2, -1],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "1/12",
+        "-1": "85/72",
+        "0": "-55/216+1/6*a1+1/24*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_3^2*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [-1, 1, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/8", "powers": [-1, 1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-3/8", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, -1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 0, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "-1/8", "powers": [1, 1, -1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, -1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [1, 1, -1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 0, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 0, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -2, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, 0, -3, 0]},
+          {"coefficient": "1/8", "powers": [1, 1, 1, 3, 1, 1, 1, 0, -2, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I46",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, -3],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "1/8",
+        "-1": "43/24",
+        "0": "-11/144+1/4*a1+1/16*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g2_3^3",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-3/8", "powers": [-1, 1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-3/8", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "3/8", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "3/4", "powers": [0, 1, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-3/4", "powers": [0, 1, 1, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-3/4", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, 0, -2]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -3, 0, 0]},
+          {"coefficient": "-3/8", "powers": [1, 1, 1, 3, 1, 1, 1, -2, -1, 0]},
+          {"coefficient": "3/8", "powers": [1, 1, 1, 3, 1, 1, 1, -2, 0, -1]},
+          {"coefficient": "-3/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -2, 0]},
+          {"coefficient": "3/4", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -1, -1]},
+          {"coefficient": "-3/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, 0, -2]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, 0, -3, 0]},
+          {"coefficient": "3/8", "powers": [1, 1, 1, 3, 1, 1, 1, 0, -2, -1]},
+          {"coefficient": "-3/8", "powers": [1, 1, 1, 3, 1, 1, 1, 0, -1, -2]},
+          {"coefficient": "1/8", "powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, -3]}
+        ]
+      }
+    },
+    {
+      "id": "I47",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, -1, 0, 0],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "4",
+        "-1": "184/3-64/3*log(2)",
+        "0": "242/9+2*a1+6*a6-1088/9*log(2)+14*zeta(3)+25/9*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 1, -1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I48",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, -2, 0, 0],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "5/3",
+        "-1": "343/9-32/3*log(2)-pi^2",
+        "0": "-559381/300000+4/3*a1-2/3*a9+8/3*a10"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/60000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 0, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, -1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 0, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -2, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I49",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, -1, -1, 0],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "3/2",
+        "-1": "131/6-16/3*log(2)",
+        "0": "1021/18+1/2*a1+3/2*a6-272/9*log(2)+7/2*zeta(3)+7/36*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2*g1_3",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 0, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 0, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 0, 0, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -1, -1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I50",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, -1, 0, -1],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "3/2",
+        "-1": "131/6-16/3*log(2)",
+        "0": "1021/18+1/2*a1+3/2*a6-272/9*log(2)+7/2*zeta(3)+7/36*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 0, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 2, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 0, 1, 2, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -1, 0, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I51",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, 0, -2, 0],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "5/3",
+        "-1": "24-32/9*log(2)",
+        "0": "1093/27+2/3*a1+2*a2-464/27*log(2)+8/27*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 0, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, -1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 0, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, 0, -2, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I52",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, 0, -1, -1],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "1",
+        "-1": "130/9-16/9*log(2)",
+        "0": "155/54+1/2*a1+2*a2-1/2*a6-160/27*log(2)-7/6*zeta(3)+43/108*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_3*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 0, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 2, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 0, 2, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 2, 1, 1, 1, 0, -1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I53",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, -2, -1, 0],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "5/6",
+        "-1": "253/18-8/3*log(2)-1/4*pi^2",
+        "0": "329280391/12000000+1/3*a1-1/6*a9+2/3*a10"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "13/3000000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2^2*g1_3",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [-1, 0, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/8", "powers": [-1, 1, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/8", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [0, -1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 0, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 0, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 0, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "1/8", "powers": [1, -1, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/8", "powers": [1, -1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "-1/4", "powers": [1, 0, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 0, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -2, -1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I54",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, -1, -1, -1],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "19/36",
+        "-1": "679/108-8/9*log(2)+1/12*pi^2",
+        "0": "3523994923/120000000+1/18*a1+1/2*a6+1/18*a9-2/9*a10"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "209/72000000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2*g1_3*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/8", "powers": [-1, 0, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/8", "powers": [-1, 1, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 0, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/8", "powers": [0, 0, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 0, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [0, 0, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "-1/4", "powers": [0, 1, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/8", "powers": [0, 1, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [0, 1, 0, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/8", "powers": [0, 1, 1, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "-1/8", "powers": [1, 0, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/8", "powers": [1, 0, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [1, 0, 0, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [1, 0, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "1/8", "powers": [1, 0, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/8", "powers": [1, 0, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -2, -1, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -2, 0]},
+          {"coefficient": "1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I55",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, 0, -3, 0],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "3/4",
+        "-1": "32/3-4/3*log(2)",
+        "0": "511/18+1/4*a1+3/4*a2-20/3*log(2)-1/72*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_3^3",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "3/8", "powers": [-1, 1, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-3/8", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "3/8", "powers": [0, 1, -1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-3/4", "powers": [0, 1, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "1/8", "powers": [1, 1, -2, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-3/8", "powers": [1, 1, -1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "3/8", "powers": [1, 1, 0, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, 0, -3, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I56",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, 0, -1, -2],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "5/12",
+        "-1": "53/9-4/9*log(2)",
+        "0": "115/12+1/6*a1+3/4*a2-1/4*a6-28/27*log(2)-7/12*zeta(3)+1/27*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_3*g2_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/8", "powers": [-1, 1, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-3/8", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "-1/4", "powers": [0, 1, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 0, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, 0, -2]},
+          {"coefficient": "1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 0, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "1/8", "powers": [1, 1, 0, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "1/8", "powers": [1, 1, 0, 3, 1, 1, 1, 0, 0, -2]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -2, -1, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -2, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -1, -1]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, 0, -3, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 3, 1, 1, 1, 0, -2, -1]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, 0, -1, -2]}
+        ]
+      }
+    },
+    {
+      "id": "I57",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, -1, 0, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "9",
+        "-1": "410/3-128/3*log(2)",
+        "0": "-16228899/1000000+12*a2+6*a6"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "153/1000000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 1, -1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I58",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, -2, 0, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "3",
+        "-1": "1277/18-160/9*log(2)-3/2*pi^2",
+        "0": "9355113/250000+2/3*a1+4*a2-2/3*a9+8/3*a10"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "51/1000000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 0, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, -1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 0, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -2, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I59",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 2, 1, 1, 1, -1, -1, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "13/4",
+        "-1": "929/18-112/9*log(2)-1/3*pi^2",
+        "0": "168584819/2000000+2*a2+5/2*a6"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "39/1000000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 2, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2*g1_3",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 0, 1, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 0, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 0, 0, 2, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 2, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 2, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 2, 1, 1, 1, -1, -1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I60",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 3, 1, 1, 1, -1, -1, -1],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "7/6",
+        "-1": "395/36-8/3*log(2)+9/16*pi^2",
+        "0": "1406620761/20000000-1/6*a1+3/2*a6+1/6*a9-2/3*a10"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "259/30000000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 3, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2*g1_3*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/8", "powers": [-1, 0, 1, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/8", "powers": [-1, 1, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [-1, 1, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 0, 0, 3, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/8", "powers": [0, 0, 1, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 0, 1, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [0, 0, 1, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "-1/4", "powers": [0, 1, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/8", "powers": [0, 1, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [0, 1, 0, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/8", "powers": [0, 1, 1, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "1/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/8", "powers": [0, 1, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "-1/8", "powers": [1, 0, 0, 3, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "-1/8", "powers": [1, 0, 0, 3, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/8", "powers": [1, 0, 0, 3, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/8", "powers": [1, 0, 1, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "1/8", "powers": [1, 0, 1, 3, 1, 1, 1, 0, -2, 0]},
+          {"coefficient": "-1/8", "powers": [1, 0, 1, 3, 1, 1, 1, 0, -1, -1]},
+          {"coefficient": "1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -2, 0, 0]},
+          {"coefficient": "1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -1, -1, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 0, 3, 1, 1, 1, -1, 0, -1]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -2, -1, 0]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -2, 0]},
+          {"coefficient": "1/8", "powers": [1, 1, 1, 3, 1, 1, 1, -1, -1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I61",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, -1, 0, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "-2",
+        "-1": "-47/2",
+        "0": "-353631408963/2500000000+2*a1-2*a5"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/100000000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 0, 0, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 1, -1, 0, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I62",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, -1, 1],
+      "loop_signatures": [0, 0, 1, 0],
+      "coefficients": {
+        "0": "6*zeta(3)"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+        "numerator_polynomial": "g1_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, -1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I65",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, -1, 0, 1],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "5/2",
+        "-1": "141/4",
+        "0": "6199452641/1000000000+4*a1+a8"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/100000000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, -1, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I66",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, -1, 1],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "-1/4",
+        "-1": "-29/8",
+        "0": "-8877265539/1000000000-1/2*a8"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/100000000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+        "numerator_polynomial": "g1_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, -1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I67",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, -1, 0, 1],
+      "loop_signatures": [1, 0, 1, 1],
+      "coefficients": {
+        "-2": "2",
+        "-1": "69/2",
+        "0": "-29523/250+6*a1+2*a5"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/20"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, -1, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I68",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, -1, 1],
+      "loop_signatures": [1, 0, 1, 1],
+      "coefficients": {
+        "-1": "-9/4",
+        "0": "257031/4000-a1-a5"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "81/2000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+        "numerator_polynomial": "g1_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, -1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I69",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, -1, 1],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "1/2",
+        "-1": "25/12+32/3*log(2)",
+        "0": "21929/125-3*a6"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "3/500"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+        "numerator_polynomial": "g1_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, -1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I70",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, -1, 1],
+      "loop_signatures": [1, 1, 0, 1],
+      "coefficients": {
+        "-2": "1/2",
+        "-1": "13/2",
+        "0": "-59/8+a5-2*zeta(3)+1/4*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+        "numerator_polynomial": "g1_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, -1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I73",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, -1, 0, 0, 1],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "0": "-1132/125"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "13/500"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 1],
+        "numerator_polynomial": "g3_4",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 0, 1, 1, 0, 0, 0, 1]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, -1, 0, 0, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I76",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0],
+      "loop_signatures": [0, 1, 1, 0],
+      "coefficients": {
+        "-2": "1",
+        "-1": "37/2",
+        "0": "6143/108+a1+a8+640/27*log(2)-56/3*zeta(3)+11/54*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I77",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, -1],
+      "loop_signatures": [0, 1, 1, 0],
+      "coefficients": {
+        "-2": "1/2",
+        "-1": "37/4",
+        "0": "778343/50000+a8"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "37/2000000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I78",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, -1, 0, 1, 0],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "1/2",
+        "-1": "41/4",
+        "0": "-1495/8+3*a1+2*a5-4*zeta(3)+13/4*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "g3_4",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 0, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, -1, 0, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I79",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "2",
+        "-1": "27",
+        "0": "93+a1+a8-1/2*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I80",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, -1],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "1/4",
+        "-1": "41/8",
+        "0": "-1495/16+a1+a5+1/2*a8-2*zeta(3)+13/8*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I81",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, -1, 0, 1, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "3",
+        "-1": "289/6-32/3*log(2)",
+        "0": "-3871119/25000+2*a1+6*a2+2*a5"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "93/100000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "g3_4",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [1, 1, 0, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 0, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, -1, 0, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I82",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "9/2",
+        "-1": "835/12-64/3*log(2)",
+        "0": "3952899/40000+a1+6*a6"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "117/100000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I83",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, -1],
+      "loop_signatures": [1, 1, 1, 0],
+      "coefficients": {
+        "-2": "3/2",
+        "-1": "305/12-32/3*log(2)",
+        "0": "-1067499/12500+a1+a5+3*a6"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "147/200000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I84",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "-3/2",
+        "-1": "-75/4",
+        "0": "-591/8+a1-2*a5-4*zeta(3)+3/4*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "g1_2",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "1/2", "powers": [1, 0, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I85",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, -1],
+      "loop_signatures": [1, 1, 1, 1],
+      "coefficients": {
+        "-2": "-1",
+        "-1": "-55/4",
+        "0": "-1/8-2*a5+4*zeta(3)-1/2*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "mu", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 0],
+        "numerator_polynomial": "g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 0, 0, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, -1, 1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I86",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0],
+      "loop_signatures": [0, 0, 1, 0],
+      "coefficients": {
+        "0": "1/12+2*zeta(3)"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "g1_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 0, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, -1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 0, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I87",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1],
+      "loop_signatures": [0, 0, 1, 0],
+      "coefficients": {
+        "0": "-1/6+2*zeta(3)"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "g1_3*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 0, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I88",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-1": "-1/3",
+        "0": "-79/18+1/3*a5-1/3*a8-2/3*zeta(3)"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "g1_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 0, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, -1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 0, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I89",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "-1/4",
+        "-1": "-91/24",
+        "0": "-3193/144-1/2*a1+1/3*a5-2/3*zeta(3)+1/8*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "g1_3*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 0, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I90",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, -2],
+      "loop_signatures": [1, 0, 0, 0],
+      "coefficients": {
+        "-2": "-1/2",
+        "-1": "-25/4",
+        "0": "-817/8+a5-2*zeta(3)+5/4*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "0", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "g2_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 1, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, -2]}
+        ]
+      }
+    },
+    {
+      "id": "I91",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "4",
+        "-1": "146/3",
+        "0": "7641873/25000+1/3*a5-1/3*a8"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/1000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "g1_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 0, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, -1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 0, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I92",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "15/4",
+        "-1": "1037/24",
+        "0": "21201003/80000-1/2*a1+1/3*a5"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "81/80000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "g1_3*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 0, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I93",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, -2],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "9/2",
+        "-1": "215/4",
+        "0": "57053357/150000-4*zeta(3)-9/2*pi^2"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "99/100000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "g2_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "1/2", "powers": [1, 1, 1, 1, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, -2]}
+        ]
+      }
+    },
+    {
+      "id": "I94",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-2": "1/2",
+        "-1": "65/18+32/9*log(2)",
+        "0": "2719499/20000-2/3*a1-2/3*a5-a6"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "39/20000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "g1_3^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "1/2", "powers": [0, 1, 0, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, -1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/2", "powers": [1, 1, 0, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]}
+        ]
+      }
+    },
+    {
+      "id": "I95",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1],
+      "loop_signatures": [1, 1, 0, 0],
+      "coefficients": {
+        "-1": "-17/18+16/9*log(2)",
+        "0": "137409/5000-2/3*a1+a2-a6"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "19/10000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, 0],
+        "numerator_polynomial": "g1_3*g2_3",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 0, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 0, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1]}
+        ]
+      }
+    },
+    {
+      "id": "I101",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, -2, 0, 1, 1],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "1/2",
+        "-1": "31/4",
+        "0": "37865761469/2000000000+a1"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/100000000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+        "numerator_polynomial": "g3_4^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [1, 1, -1, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "1/2", "powers": [1, 1, 0, 0, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "-1/2", "powers": [1, 1, 0, 1, 1, 1, -1, 0, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, -1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "-1/2", "powers": [1, 1, 1, 0, 1, 1, -1, 0, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, -2, 0, 1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I102",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, -1, -1, 1, 1],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-1": "-1/2",
+        "0": "-17251/8000"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "13/200000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+        "numerator_polynomial": "g1_2*g3_4",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [0, 1, 0, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 0, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 1, 1, 1, -1, 0, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, 0, 0, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, 0, 1, 0, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 1, 1, 1, -1, 0, 1, 1]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 1, 1, 1, 0, -1, 1, 1]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 0, 1, 1, 0, -1, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, -1, -1, 1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I103",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, -2, 1, 1],
+      "loop_signatures": [1, 0, 1, 0],
+      "coefficients": {
+        "-2": "5/2",
+        "-1": "69/2",
+        "0": "-80909/16000+5*a1"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/16000"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "0", "mu", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+        "numerator_polynomial": "g1_2^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "1/2", "powers": [0, 0, 1, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 0, -1, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, -1, 1, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "-1/2", "powers": [1, 0, 1, 1, 1, 1, 0, -1, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 0, -2, 1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I106",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, -1, -1, 1, 1],
+      "loop_signatures": [1, 1, 0, 1],
+      "coefficients": {
+        "-2": "-1/4",
+        "-1": "-19/8",
+        "0": "-543/16+20*zeta(3)+1/4*pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+        "numerator_polynomial": "g1_2*g3_4",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [0, 1, 0, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "1/4", "powers": [0, 1, 1, 0, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "-1/4", "powers": [0, 1, 1, 1, 1, 1, -1, 0, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, 0, 0, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, 0, 1, 0, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "-1/4", "powers": [1, 0, 1, 1, 1, 1, -1, 0, 1, 1]},
+          {"coefficient": "-1/4", "powers": [1, 1, 0, 1, 1, 1, 0, -1, 1, 1]},
+          {"coefficient": "-1/4", "powers": [1, 1, 1, 0, 1, 1, 0, -1, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, -1, -1, 1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I107",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 0, -2, 1, 1],
+      "loop_signatures": [1, 1, 0, 1],
+      "coefficients": {
+        "-2": "1",
+        "-1": "29/2",
+        "0": "1023/8-4*zeta(3)-pi^2"
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["mu", "mu", "0", "mu"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 0, 0, 1, 1],
+        "numerator_polynomial": "g1_2^2",
+        "indexed_terms": [
+          {"coefficient": "1/4", "powers": [-1, 1, 1, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "1/2", "powers": [0, 0, 1, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "-1/2", "powers": [0, 1, 1, 1, 1, 1, 0, -1, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, -1, 1, 1, 1, 1, 0, 0, 1, 1]},
+          {"coefficient": "-1/2", "powers": [1, 0, 1, 1, 1, 1, 0, -1, 1, 1]},
+          {"coefficient": "1/4", "powers": [1, 1, 1, 1, 1, 1, 0, -2, 1, 1]}
+        ]
+      }
+    },
+    {
+      "id": "I115",
+      "basis": "four_loop_dotted",
+      "powers": [1, 1, 1, 1, 1, 1, 1, 1, 1, -3],
+      "loop_signatures": [0, 1, 0, 0],
+      "coefficients": {
+        "0": "116666666667/100000000000"
+      },
+      "uncertainties": {
+        "0": {
+          "absolute": "1/10000000000",
+          "tag": "det"
+        }
+      },
+      "finite_density_target": {
+        "dimension": "4-2*eps",
+        "chemical_potentials": ["0", "mu", "0", "0"],
+        "denominator_powers": [1, 1, 1, 1, 1, 1, 1, 1, 1, 0],
+        "numerator_polynomial": "g2_3^3",
+        "indexed_terms": [
+          {"coefficient": "1/8", "powers": [-2, 1, 1, 1, 1, 1, 1, 1, 1, 0]},
+          {"coefficient": "-3/8", "powers": [-1, 1, 1, 1, 1, 1, 1, 0, 1, 0]},
+          {"coefficient": "-3/8", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 0, 0]},
+          {"coefficient": "3/8", "powers": [-1, 1, 1, 1, 1, 1, 1, 1, 1, -1]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 1, 1, 1, 1, -1, 1, 0]},
+          {"coefficient": "3/4", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 0, 0]},
+          {"coefficient": "-3/4", "powers": [0, 1, 1, 1, 1, 1, 1, 0, 1, -1]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 1, 1, 1, 1, 1, -1, 0]},
+          {"coefficient": "-3/4", "powers": [0, 1, 1, 1, 1, 1, 1, 1, 0, -1]},
+          {"coefficient": "3/8", "powers": [0, 1, 1, 1, 1, 1, 1, 1, 1, -2]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 1, 1, 1, 1, -2, 1, 0]},
+          {"coefficient": "-3/8", "powers": [1, 1, 1, 1, 1, 1, 1, -1, 0, 0]},
+          {"coefficient": "3/8", "powers": [1, 1, 1, 1, 1, 1, 1, -1, 1, -1]},
+          {"coefficient": "-3/8", "powers": [1, 1, 1, 1, 1, 1, 1, 0, -1, 0]},
+          {"coefficient": "3/4", "powers": [1, 1, 1, 1, 1, 1, 1, 0, 0, -1]},
+          {"coefficient": "-3/8", "powers": [1, 1, 1, 1, 1, 1, 1, 0, 1, -2]},
+          {"coefficient": "-1/8", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -2, 0]},
+          {"coefficient": "3/8", "powers": [1, 1, 1, 1, 1, 1, 1, 1, -1, -1]},
+          {"coefficient": "-3/8", "powers": [1, 1, 1, 1, 1, 1, 1, 1, 0, -2]},
+          {"coefficient": "1/8", "powers": [1, 1, 1, 1, 1, 1, 1, 1, 1, -3]}
+        ]
+      }
+    }
+  ]
+}

@@ -9,6 +9,8 @@ mod continuation;
 mod endpoint;
 #[cfg(feature = "automatic")]
 mod evaluation;
+#[cfg(feature = "automatic")]
+mod finite_density;
 mod gg_hg;
 mod transport;
 mod types;
@@ -206,6 +208,11 @@ fn options(value: Option<&PyEvaluationOptions>) -> crate::FlowOptions {
 /// Add integration classes to `symbolica.community.hep.integration`.
 /// The community host owns module creation and the shared Symbolica runtime.
 pub fn register(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    #[cfg(feature = "automatic")]
+    module.add_function(wrap_pyfunction!(
+        finite_density::prepare_finite_density,
+        module
+    )?)?;
     // CPython's WASM object allocator guarantees eight-byte alignment, whereas
     // Rust's u128 (and any aggregate containing it) requires sixteen. Checking
     // every registered wrapper here also covers nested numerical payloads and

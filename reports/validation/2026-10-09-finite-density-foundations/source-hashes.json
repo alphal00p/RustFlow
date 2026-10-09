@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "scope": "Staged foundation source snapshot; excludes subsequent occupied boundary and weighted closure implementation",
+  "parent_commit_at_snapshot": "815797fe0814ba77acec284d980456a776799822",
+  "algorithm": "sha256",
+  "files": {
+    "Cargo.lock": "7f30d5127022fdffa222c56f33ca2fd4088951bd624db3948e4f51f2eaef4e33",
+    "Cargo.toml": "9c7404fc4584ea3076fa60aefce532543d3f3a3f1f206003370cc09b0c6b8249",
+    "src/bin/rustflow.rs": "4cd2395554d10a5af4429b1f37730af82d908ef6e59606d8c06a3bb32762a8be",
+    "src/boundary.rs": "bfe99d76cf387f136f37a55a7c4c4b0be90077586f6c48d9971058c1cc03fa57",
+    "src/finite_density/basis.rs": "459f14bb294b5cc27fd4f43dbcda285c3bc9e24230515691ab90630d573a6484",
+    "src/finite_density/compact.rs": "815f2b5e17db1e73fee2519229d97b82b663b623b7a3895177f1acfa0b717145",
+    "src/finite_density/guarded.rs": "f6150c38519d714091af206d01781b617a9ff13860f54e0139fd40f85a81fde2",
+    "src/finite_density/input.rs": "4692e92580ee79514307b6822adf4becd912163a55f50947c1c3a8965858ff87",
+    "src/finite_density/measure.rs": "543a2b8291902a5782d893215e269883408c292561fe6725fddd982e73e88d62",
+    "src/finite_density/mod.rs": "e646d62575af20781b57433d8473d78d27606676371e166510145b415e445cc4",
+    "src/integrand.rs": "15896b2d1f77f5d11c4b2b76a71da86013b33f3414388aee5b3b52ced7403654",
+    "src/lib.rs": "87027c45c09be098cfdf160f83ffec4cfb5458e38abe32060c7347b310ddc792",
+    "src/python/finite_density.rs": "fc2a0275c709b566b873f06fb70d69352a0beef4b8ac672e6a212dac25cec53d",
+    "src/python/mod.rs": "d374627d2d56fc15ed413024c75c42fcec84bade13fb309ba075a503ad32c0d8",
+    "src/recursive.rs": "55f23cdbf7bbec0b72e98caf8cde6ac29d4fe574034a2c2d76b12b8c88a260df",
+    "tests/finite_density_input.rs": "5cafd6465af0d99943cfa6b894a69165ae3086069ef9e7a4170f9cdec8289c12",
+    "tests/finite_density_measure.rs": "1a57110fa1b324fa547cea74b677ff2a7309f953582bb0baa0006eddf8bc4246",
+    "tests/integrand.rs": "bc4bca1c0d1cd81272e4b306549e2481fec503d4cfb762ca67cd7dafcc7cf1f4",
+    "tests/recursive.rs": "79f4a0c5abf87ab66067639832761d8fed930ba24b205b423f7a3594a48d852d"
+  }
+}

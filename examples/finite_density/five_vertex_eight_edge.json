@@ -1,0 +1,186 @@
+{
+  "name": "five_vertex_eight_edge",
+  "loops": 4,
+  "vertices": 5,
+  "edges": [
+    {
+      "vertices": [
+        0,
+        4
+      ],
+      "routing": [
+        "1",
+        "0",
+        "0",
+        "0"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        1
+      ]
+    },
+    {
+      "vertices": [
+        4,
+        3
+      ],
+      "routing": [
+        "0",
+        "1",
+        "0",
+        "0"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    },
+    {
+      "vertices": [
+        3,
+        2
+      ],
+      "routing": [
+        "0",
+        "0",
+        "1",
+        "0"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        1
+      ]
+    },
+    {
+      "vertices": [
+        2,
+        0
+      ],
+      "routing": [
+        "0",
+        "0",
+        "0",
+        "1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    },
+    {
+      "vertices": [
+        1,
+        0
+      ],
+      "routing": [
+        "1",
+        "0",
+        "0",
+        "-1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        1
+      ]
+    },
+    {
+      "vertices": [
+        3,
+        1
+      ],
+      "routing": [
+        "0",
+        "1",
+        "0",
+        "-1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        0
+      ]
+    },
+    {
+      "vertices": [
+        2,
+        3
+      ],
+      "routing": [
+        "0",
+        "0",
+        "1",
+        "-1"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        1
+      ]
+    },
+    {
+      "vertices": [
+        4,
+        1
+      ],
+      "routing": [
+        "1",
+        "-1",
+        "0",
+        "0"
+      ],
+      "mass_squared": "0",
+      "charges": [
+        1
+      ]
+    }
+  ],
+  "loop_charges": [
+    [
+      1
+    ],
+    [
+      0
+    ],
+    [
+      1
+    ],
+    [
+      0
+    ]
+  ],
+  "chemical_potentials": [
+    "1"
+  ],
+  "numerator_convention": "shifted_euclidean",
+  "laurent_orders": [
+    -4,
+    0
+  ],
+  "digits": 12,
+  "targets": [
+    {
+      "powers": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "numerator": "g1_3^2"
+    },
+    {
+      "powers": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "numerator": "g1_2^2+g1_3*g2_4"
+    }
+  ]
+}

@@ -1,0 +1,143 @@
+{
+  "schema": 1,
+  "status": "all recorded gates passed",
+  "scope": "Regression and source/seed checks only. No finite-density full-amplitude or four-loop numerical acceptance.",
+  "groups": [
+    {
+      "command": "nix develop --command cargo test --locked --release --test core --test recursive --test cuts --test mixed_cut_flow --test partial_cut_boundaries --test physical_transport --test frobenius --test symbolica_root_scaling --test integrand",
+      "status": "passed",
+      "passed": 62,
+      "failed": 0,
+      "reported_wait_and_build_seconds": 431,
+      "reported_test_seconds_sum": 39.54,
+      "results": [
+        {
+          "target": "core",
+          "passed": 13,
+          "failed": 0,
+          "seconds": 1.34
+        },
+        {
+          "target": "cuts",
+          "passed": 3,
+          "failed": 0,
+          "seconds": 0.02
+        },
+        {
+          "target": "frobenius",
+          "passed": 8,
+          "failed": 0,
+          "seconds": 0.08
+        },
+        {
+          "target": "integrand",
+          "passed": 6,
+          "failed": 0,
+          "seconds": 2
+        },
+        {
+          "target": "mixed_cut_flow",
+          "passed": 6,
+          "failed": 0,
+          "seconds": 4.67
+        },
+        {
+          "target": "partial_cut_boundaries",
+          "passed": 2,
+          "failed": 0,
+          "seconds": 6.88
+        },
+        {
+          "target": "physical_transport",
+          "passed": 4,
+          "failed": 0,
+          "seconds": 0.46
+        },
+        {
+          "target": "recursive",
+          "passed": 19,
+          "failed": 0,
+          "seconds": 24.07
+        },
+        {
+          "target": "symbolica_root_scaling",
+          "passed": 1,
+          "failed": 0,
+          "seconds": 0.02
+        }
+      ]
+    },
+    {
+      "command": "nix develop --command cargo test --locked --release --test finite_density_measure",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "reported_wait_and_build_seconds": 581,
+      "reported_test_seconds": 0.08,
+      "scope": "Independent exact polynomial test functions verify generated distributional IBPs and multiplication identities; no numerical amplitude, oracle coefficient, or guarded replay supplies the reference."
+    },
+    {
+      "command": "nix develop --command cargo test --locked --release --lib boundary::",
+      "status": "passed",
+      "passed": 12,
+      "failed": 0,
+      "reported_wait_and_build_seconds": 722,
+      "reported_test_seconds": 0.01,
+      "scope": "Six logarithmic matching regressions and six existing boundary-planning tests."
+    },
+    {
+      "command": "nix develop --command cargo check --locked --release --features python",
+      "status": "passed",
+      "reported_wait_and_build_seconds": 940,
+      "scope": "Compilation of native Python bindings; not an embedding-host runtime execution."
+    },
+    {
+      "command": "nix develop --command cargo test --locked --release --test phase_space --test massless_phase_space --test native_cut_interfaces",
+      "status": "passed",
+      "passed": 21,
+      "failed": 0,
+      "reported_wait_and_build_seconds": 902,
+      "reported_test_seconds_sum": 8.99,
+      "results": [
+        {
+          "target": "massless_phase_space",
+          "passed": 9,
+          "failed": 0,
+          "seconds": 7.48
+        },
+        {
+          "target": "native_cut_interfaces",
+          "passed": 9,
+          "failed": 0,
+          "seconds": 0.78
+        },
+        {
+          "target": "phase_space",
+          "passed": 3,
+          "failed": 0,
+          "seconds": 0.73
+        }
+      ]
+    },
+    {
+      "command": "nix develop --command cargo test --locked --release --lib finite_density::",
+      "status": "passed",
+      "passed": 8,
+      "failed": 0,
+      "reported_wait_and_build_seconds": 628,
+      "reported_test_seconds": 0.01,
+      "scope": "Two basis tests, two distribution/raised-residue tests, two compact-seed tests, native guarded persistence/conditions test, and physically guarded ball sources reduced to a native bulk spanning basis with independently integrated exact basis conversion."
+    }
+  ],
+  "memory_measurement": null,
+  "memory_note": "Peak RSS was not instrumented; no finite-density evaluation memory or runtime is claimed.",
+  "passed_test_total": 104,
+  "failed_test_total": 0,
+  "test_seconds_sum": 48.63,
+  "timing_note": "Cargo Finished durations include serialized lock wait and compilation; target test durations are reported separately and summed. Input/oracle-algebra suite and CLI artifacts are recorded by their owners and excluded from this total.",
+  "resolved_development_findings": [
+    "Pinned Symbolica uses Atom::parse(expression,namespace,settings) and native polynomial to_expression APIs.",
+    "The ball physical source corpus restricts its ordinary x index to nonpositive integers.",
+    "Native guarded ordering uses bulk moments I(0,0) and I(-2,0) for the ball validation; the independently integrated relation I(-2,0)=R/3 I(0,0) reconstructs the requested surface basis. Unresolved remainders were not designated numerical masters."
+  ]
+}

@@ -1,0 +1,1594 @@
+{
+  "basis": {
+    "coordinates": [
+      "g1_1",
+      "g1_2",
+      "g1_3",
+      "g1_4",
+      "g2_2",
+      "g2_3",
+      "g2_4",
+      "g3_3",
+      "g3_4",
+      "g4_4",
+      "u1",
+      "u2",
+      "u3",
+      "u4"
+    ],
+    "independent_masses": [
+      "line_mass_squared_0",
+      "line_mass_squared_1",
+      "line_mass_squared_2",
+      "line_mass_squared_3",
+      "line_mass_squared_4",
+      "line_mass_squared_5",
+      "line_mass_squared_6",
+      "line_mass_squared_7"
+    ],
+    "physical_slots": 8,
+    "slots": [
+      "g1_1+line_mass_squared_0",
+      "g2_2+line_mass_squared_1",
+      "g3_3+line_mass_squared_2",
+      "g4_4+line_mass_squared_3",
+      "g1_1-2*g1_4+g4_4+line_mass_squared_4",
+      "g2_2-2*g2_4+g4_4+line_mass_squared_5",
+      "g3_3-2*g3_4+g4_4+line_mass_squared_6",
+      "g1_1-2*g1_2+g2_2+line_mass_squared_7",
+      "g1_3",
+      "g2_3",
+      "u1",
+      "u2",
+      "u3",
+      "u4"
+    ]
+  },
+  "cut_decomposition": [
+    {
+      "cut_sign": 1,
+      "cut_slots": [],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        0
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        2
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        0,
+        2
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        4
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        0,
+        4
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        2,
+        4
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        0,
+        2,
+        4
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        6
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        0,
+        6
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        2,
+        6
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        0,
+        2,
+        6
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        4,
+        6
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        0,
+        4,
+        6
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        2,
+        4,
+        6
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "0",
+          "1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        7
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        0,
+        7
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        2,
+        7
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        0,
+        2,
+        7
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "0",
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        4,
+        7
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        0,
+        4,
+        7
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        2,
+        4,
+        7
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        0,
+        2,
+        4,
+        7
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        6,
+        7
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        0,
+        6,
+        7
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        2,
+        6,
+        7
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        0,
+        2,
+        6,
+        7
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        4,
+        6,
+        7
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        0,
+        4,
+        6,
+        7
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ]
+      ]
+    },
+    {
+      "cut_sign": 1,
+      "cut_slots": [
+        2,
+        4,
+        6,
+        7
+      ],
+      "determinant": "-1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ]
+      ]
+    }
+  ],
+  "input": {
+    "chemical_potentials": [
+      "1"
+    ],
+    "digits": 12,
+    "edges": [
+      {
+        "charges": [
+          1
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "1",
+          "0",
+          "0",
+          "0"
+        ],
+        "vertices": [
+          0,
+          4
+        ]
+      },
+      {
+        "charges": [
+          0
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "0",
+          "1",
+          "0",
+          "0"
+        ],
+        "vertices": [
+          4,
+          3
+        ]
+      },
+      {
+        "charges": [
+          1
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "0",
+          "0",
+          "1",
+          "0"
+        ],
+        "vertices": [
+          3,
+          2
+        ]
+      },
+      {
+        "charges": [
+          0
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "0",
+          "0",
+          "0",
+          "1"
+        ],
+        "vertices": [
+          2,
+          0
+        ]
+      },
+      {
+        "charges": [
+          1
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "1",
+          "0",
+          "0",
+          "-1"
+        ],
+        "vertices": [
+          1,
+          0
+        ]
+      },
+      {
+        "charges": [
+          0
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "0",
+          "1",
+          "0",
+          "-1"
+        ],
+        "vertices": [
+          3,
+          1
+        ]
+      },
+      {
+        "charges": [
+          1
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "0",
+          "0",
+          "1",
+          "-1"
+        ],
+        "vertices": [
+          2,
+          3
+        ]
+      },
+      {
+        "charges": [
+          1
+        ],
+        "mass_squared": "0",
+        "routing": [
+          "1",
+          "-1",
+          "0",
+          "0"
+        ],
+        "vertices": [
+          4,
+          1
+        ]
+      }
+    ],
+    "laurent_orders": [
+      -4,
+      0
+    ],
+    "loop_charges": [
+      [
+        1
+      ],
+      [
+        0
+      ],
+      [
+        1
+      ],
+      [
+        0
+      ]
+    ],
+    "loops": 4,
+    "name": "five_vertex_eight_edge",
+    "numerator_convention": "shifted_euclidean",
+    "targets": [
+      {
+        "numerator": "g1_3^2",
+        "powers": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      },
+      {
+        "numerator": "g1_2^2+g1_3*g2_4",
+        "powers": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1
+        ]
+      }
+    ],
+    "vertices": 5
+  },
+  "input_identity": "bbef077652535fb5728f61ef88db53c3d55a58f8f13540b2074431f4bf547eb6",
+  "numerical_evaluation": {
+    "available": false,
+    "reason": "weighted closure, integrated recursive boundaries and common-contour continuation remain unvalidated"
+  },
+  "operation": "finite-density-prepare",
+  "schema_version": 1,
+  "status": "algebraic_preparation_only",
+  "targets": [
+    [
+      {
+        "coefficient": "1",
+        "powers": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -2,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "1/4",
+        "powers": [
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/2",
+        "powers": [
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2",
+        "powers": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2*line_mass_squared_0-1/2*line_mass_squared_1+1/2*line_mass_squared_7",
+        "powers": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "powers": [
+          2,
+          -1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2",
+        "powers": [
+          2,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/2",
+        "powers": [
+          2,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2*line_mass_squared_0-1/2*line_mass_squared_1+1/2*line_mass_squared_7",
+        "powers": [
+          2,
+          0,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/2",
+        "powers": [
+          2,
+          1,
+          1,
+          0,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2",
+        "powers": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "powers": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/2*line_mass_squared_0+1/2*line_mass_squared_1-1/2*line_mass_squared_7",
+        "powers": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2*line_mass_squared_1-1/2*line_mass_squared_3+1/2*line_mass_squared_5",
+        "powers": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/2*line_mass_squared_0*line_mass_squared_1-1/2*line_mass_squared_0*line_mass_squared_7-1/2*line_mass_squared_1*line_mass_squared_7+1/4*line_mass_squared_0^2+1/4*line_mass_squared_1^2+1/4*line_mass_squared_7^2",
+        "powers": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  ]
+}
