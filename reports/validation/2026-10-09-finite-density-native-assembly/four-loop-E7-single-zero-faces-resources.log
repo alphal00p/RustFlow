@@ -1,0 +1,9 @@
+
+running 1 test
+generic physical=16 capacity=16 sources=84: bounded native closure starting
+test runtime_graph_native_closure has been running for over 60 seconds
+generic physical=16 capacity=16: unresolved; closure 64.246s; report=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-zero-faces/physical-16-capacity-16-cuts-0
+test runtime_graph_native_closure ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 64.47s
+

@@ -1,0 +1,6 @@
+
+running 1 test
+generic physical=18 capacity=20 sources=328: bounded native closure starting
+generic capacity=20: DifferentialClosure { round: 0, requested: 5, basis_size: 197, new_derivatives: 608 }
+generic capacity=20: Stage { name: "searching 197 new native weighted frontier labels, including constant sectors" }
+test runtime_graph_native_closure has been running for over 60 seconds

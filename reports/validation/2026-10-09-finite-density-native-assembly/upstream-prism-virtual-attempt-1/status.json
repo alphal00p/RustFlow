@@ -1,0 +1,28 @@
+{
+  "status": "timed_out_no_complete_profile",
+  "exit_code": 124,
+  "wall_seconds": 620.232291047927,
+  "calculation_timeout_seconds": 600,
+  "termination_grace_seconds": 20,
+  "candidate_coefficients": [
+    "C0A",
+    "C1A"
+  ],
+  "epsilon": "1/5",
+  "complete_profiles": 0,
+  "complete_prism_reference": false,
+  "native_density_predictions": 0,
+  "supplied_numerical_oracle_records_compared": 0,
+  "scope": "Optional independent original AMFlow/Kira/Fermat virtual-subgraph attempt; no production dependency or answer use. Intermediate full work tree retained only at the stated temporary path.",
+  "temporary_full_work_tree": "/tmp/rustflow-prism-virtual-objyev6r",
+  "hashes": {
+    "exact-targets.wl": "bd13e0ac55ff4d4a4d0b6fa389f31e5ba3078fdeae69e8a4b70ee389946d01ad",
+    "definition.json": "b13be20d93afea39fd7f1ca4ac1aff3b18b9616f346bd4a8a48fc8bb69640e1c",
+    "wolfram_one_thread.wl": "12b870d2278f8c417917a05dff3e7aa18fd888a0ac73633f962b300d24504318",
+    "kernel.log": "74cce11fd7d392a8b6c770a556c8a979a6f759a5674d071f3ac9cdde826cfeb1",
+    "runner-metadata.json": "70a637777b33112d3084f69c36feac746e0a2be732972b322e90754c4828c77a",
+    "wolfram_one_thread.py": "6551142d15c38061fd17f7d97d67d8386f63fe7cb95989a912260c13f2e9443b",
+    "runner.py": "16598c884207315d3dd36e7546b23dff0b7f5ad74e83c8b6c1b3a2aef575e8bb",
+    "oracle.wl": "5322190c80a4149edcda60d94884f4254ccd2f81e1766ff35cddbab622579181"
+  }
+}

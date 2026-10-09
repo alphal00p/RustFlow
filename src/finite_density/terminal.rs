@@ -236,6 +236,7 @@ impl PreparedOccupiedTerminal {
             native_storage_capacity: None,
             construction: "compact_polynomial_moments",
             source_options: None,
+            massless_endpoint: None,
         })
     }
 }

@@ -1,0 +1,10 @@
+
+running 5 tests
+test generate_independent_massless_sunset_reference ... ignored, explicit independent reference generation with precision and quadrature refinements
+test massless_reference_binds_original_input ... ok
+test independent_laurent_poles_and_constants_match_small_epsilon_limits ... ok
+test independent_beta_moments_match_closed_expression_and_scaling ... ok
+test convergent_direct_quadrature_keeps_the_raised_upper_surface ... ok
+
+test result: ok. 4 passed; 0 failed; 1 ignored; 0 measured; 0 filtered out; finished in 0.05s
+

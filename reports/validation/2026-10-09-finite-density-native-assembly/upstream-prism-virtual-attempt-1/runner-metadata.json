@@ -1,0 +1,32 @@
+{
+  "scope": "independent validation-only prism virtual coefficient candidate; no production changes or answer data",
+  "source_sha256": {
+    "AMFlow.m": "76feadd3990586dbba22c96f515328fd79b64d6767ed021f2f80c9e4a2b98184",
+    "diffeq_solver/DESolver.m": "0dfa7f91bd8b8d160412dbc3a8c076413e488745bcefe58bc434999d03f76a46",
+    "ibp_interface/Kira/interface.m": "1c4476b32d8757ee18d6689d5b406bc00a2cfb00ad178926233f1768def7faaa"
+  },
+  "driver_sha256": "5322190c80a4149edcda60d94884f4254ccd2f81e1766ff35cddbab622579181",
+  "runner_sha256": "16598c884207315d3dd36e7546b23dff0b7f5ad74e83c8b6c1b3a2aef575e8bb",
+  "launcher_sha256": "6551142d15c38061fd17f7d97d67d8386f63fe7cb95989a912260c13f2e9443b",
+  "loader_sha256": "12b870d2278f8c417917a05dff3e7aa18fd888a0ac73633f962b300d24504318",
+  "kernel": "/nix/store/m4xs334vv5qlr31q6ayqr5r2x8lx43bn-mathematica-15.0.1/bin/WolframKernel",
+  "kira": "/nix/store/rlxy7f90ifbzr77a6hvnsc7a13vmzzay-kira-3.1-git-dad964c/bin/kira",
+  "fermat": "/nix/store/0582y8gjxv1j01phy7i7l3z07ky72bry-fermat-7.9b/bin/fer64",
+  "command": [
+    "/tmp/rustflow-prism-virtual-objyev6r/wolfram_one_thread.py",
+    "-noinit",
+    "-noprompt",
+    "-script",
+    "/tmp/rustflow-prism-virtual-objyev6r/oracle.wl"
+  ],
+  "timeout_seconds": 600,
+  "cpu_affinity": [
+    0
+  ],
+  "runtime_threads": 1,
+  "start_utc": "2026-10-09T19:52:50.774818+00:00",
+  "timed_out": true,
+  "exit_code": 124,
+  "wall_seconds": 620.232291047927,
+  "end_utc": "2026-10-09T20:03:11.007137+00:00"
+}

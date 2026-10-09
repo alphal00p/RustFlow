@@ -1,0 +1,173 @@
+{
+  "schema": 1,
+  "scope": "bounded genuine four-loop source closure; no numerical or contour admission",
+  "source_snapshot": "massless-native-source-hashes.json",
+  "binary": "target/release/deps/finite_density_generic_closure-efa84383047ba390",
+  "binary_sha256": "07303d4664572acefdccf85a04abf06d8f8e4274c395a63f0bdfb46ac80f3559",
+  "controls": {
+    "max_rounds": 3,
+    "max_depth": 3,
+    "max_domains": 8192,
+    "max_frontier": 1024,
+    "max_requested": 4096,
+    "guard_refinement_passes": 0,
+    "split_ordinary_zero_faces": true,
+    "process_time_limit_seconds": 180
+  },
+  "completed_harnesses": 1,
+  "timed_out_harnesses": 1,
+  "closed_systems": 0,
+  "archive_map": "four-loop-zero-face-expanded-archives.json",
+  "cases": [
+    {
+      "case": "single",
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0",
+          "RUSTFLOW_WEIGHTED_CAPACITY=16",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-zero-faces-expanded",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=1",
+          "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+          "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+          "RUSTFLOW_WEIGHTED_FRONTIER_SECTORS=1",
+          "RUSTFLOW_WEIGHTED_SOURCE_POLICY=legacy-lorentz",
+          "RUSTFLOW_WEIGHTED_POSITIVE_ENERGY_POWERS=0",
+          "RUSTFLOW_WEIGHTED_SOURCE_DOMAIN_BUDGET=65536",
+          "target/release/deps/finite_density_generic_closure-efa84383047ba390",
+          "--ignored",
+          "--exact",
+          "runtime_graph_native_closure",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 158.98136674705893,
+        "user_seconds": 157.255711,
+        "system_seconds": 0.46288599999999996,
+        "peak_child_rss_kib": 249164,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "source_bytes_equal_to_smaller_frontier_probe": true,
+      "source_sha256": "3ca2c9a75bff6f42e41f1e57a7401d937806105fe8b59f725743b56a65f98c4b",
+      "checkpoints": [
+        {
+          "metadata": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-000-provisional.json.gz",
+          "program": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-000-provisional.bin.gz",
+          "program_sha256": "3d96d34ac02deee813808a3e2a7ea6cfa2c1fe296a6ffc8fd831c29b9ffe0b3b",
+          "round": 0,
+          "requested": 5,
+          "frontier": 324,
+          "program_sha256_scope": "decompressed original native program bytes",
+          "encoding": "gzip"
+        },
+        {
+          "metadata": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-001-provisional.json.gz",
+          "program": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-001-provisional.bin.gz",
+          "program_sha256": "02a3bdb3929971440ac2e8895cca8ab8c606e3e7e35e1e91a1a21710205e1c42",
+          "round": 1,
+          "requested": 1209,
+          "frontier": 1869,
+          "program_sha256_scope": "decompressed original native program bytes",
+          "encoding": "gzip"
+        }
+      ],
+      "numerical_prediction": false,
+      "contour_admission": false,
+      "outcome": {
+        "closure_seconds": 158.025094047,
+        "contour_admission": false,
+        "guard_refinement_added_domains": 0,
+        "guard_refinement_budget_exhausted": false,
+        "guard_refinement_passes": 0,
+        "guard_refinements": [],
+        "native_frontier_requests": 324,
+        "native_rule_applications": 7204,
+        "native_rules": 3191,
+        "numerical_prediction": false,
+        "physical_arity": 16,
+        "preparation_seconds": 0.086105651,
+        "provisional_sizes": [
+          324,
+          1869
+        ],
+        "requested": 1209,
+        "rounds": 2,
+        "status": "unresolved",
+        "storage_capacity": 16,
+        "reason": "weighted provisional-frontier budget exhausted",
+        "discovery_gap_counts": {
+          "SearchExhausted": 15,
+          "UnprovedDescent": 3,
+          "DomainBudget": 5919
+        }
+      }
+    },
+    {
+      "case": "double",
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0,4",
+          "RUSTFLOW_WEIGHTED_CAPACITY=20",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-zero-faces-expanded",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=1",
+          "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+          "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+          "RUSTFLOW_WEIGHTED_FRONTIER_SECTORS=1",
+          "RUSTFLOW_WEIGHTED_SOURCE_POLICY=legacy-lorentz",
+          "RUSTFLOW_WEIGHTED_POSITIVE_ENERGY_POWERS=0",
+          "RUSTFLOW_WEIGHTED_SOURCE_DOMAIN_BUDGET=65536",
+          "target/release/deps/finite_density_generic_closure-efa84383047ba390",
+          "--ignored",
+          "--exact",
+          "runtime_graph_native_closure",
+          "--nocapture"
+        ],
+        "exit_code": 124,
+        "wall_seconds": 180.02012589713559,
+        "user_seconds": 178.255267,
+        "system_seconds": 0.27921799999999997,
+        "peak_child_rss_kib": 138472,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "source_bytes_equal_to_smaller_frontier_probe": true,
+      "source_sha256": "b72376b5593437a4343ef01399ace17b3c384439ce4a6b966b3255a189e6edf9",
+      "checkpoints": [
+        {
+          "metadata": "four-loop-source-pilots-zero-faces-expanded/physical-18-capacity-20-cuts-0_4/round-000-provisional.json.gz",
+          "program": "four-loop-source-pilots-zero-faces-expanded/physical-18-capacity-20-cuts-0_4/round-000-provisional.bin.gz",
+          "program_sha256": "8f64775b848cc29330cf477ce3c6b2195e062217fe290b63d7e9812e3ef97d35",
+          "round": 0,
+          "requested": 5,
+          "frontier": 197,
+          "program_sha256_scope": "decompressed original native program bytes",
+          "encoding": "gzip"
+        }
+      ],
+      "numerical_prediction": false,
+      "contour_admission": false,
+      "outcome": {
+        "status": "process time budget exhausted",
+        "seconds_limit": 180,
+        "final_result_written": false,
+        "last_complete_round": 0,
+        "note": "Round0 frontier197; log reports608 new derivatives and197 new frontier labels. The second discovery did not finish before timeout, so no final rule/gap counts are asserted."
+      }
+    }
+  ],
+  "interpretation": "Larger frontier allows one derivative iteration. Single-cut frontier then exceeds1024; double-cut next discovery exceeds180s. Neither is a proof of native impossibility. Prior and new rule counts concern separately constructed native programs; no assertion of monotonically accumulated proof coverage."
+}

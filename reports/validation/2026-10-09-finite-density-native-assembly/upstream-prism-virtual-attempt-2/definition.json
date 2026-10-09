@@ -1,0 +1,32 @@
+{
+	"role":"independent validation-only virtual subgraph coefficients; not a complete density reference",
+	"physical_input":"triangular_prism; occupied pair [1,5]; K=P1,L=P3,q=P2,p=P4",
+	"invariants_native_minkowski":[
+		"p^2=-1",
+		"q^2=0",
+		"p.q=-1\/2"
+	],
+	"off_shell_parameter":"s=q_E^2; (q-p)_E^2=0; derivative dq\/ds=p-q at h=p_E^2=1",
+	"virtual_jet":"I_E(h,s)=h^(D-4)*(C0+C1*s\/h+...); jet only, nonanalytic branches require common continuation",
+	"raw_native_normalization":"two loops d^D k\/(i Pi^(D\/2)); six physical denominators; no exp(EulerGamma eps)",
+	"raw_euclidean_conversion":"(4 Pi)^(-D) times native [C0A,C1A,C0B,C1B,-CC]",
+	"coefficient_labels":[
+		"C0A",
+		"C1A",
+		"C0B",
+		"C1B",
+		"CC"
+	],
+	"exact_expressions":[
+		"j[prismVirtual, -1, 1, 1, 1, 1, 1, 0]\/4 - j[prismVirtual, 0, 1, 1, 1, 0, 1, 0]\/2 - j[prismVirtual, 0, 1, 1, 1, 1, 1, 0]\/4 - j[prismVirtual, 1, 0, 1, 1, 1, 1, 0]\/4 + j[prismVirtual, 1, 1, 1, 1, -1, 1, 0]\/4 + j[prismVirtual, 1, 1, 1, 1, 1, 0, 0]\/4",
+		"-1\/4*j[prismVirtual, -1, 1, 0, 1, 2, 1, 0] + j[prismVirtual, -1, 1, 1, 1, 1, 1, 0]\/4 + j[prismVirtual, 0, 1, 0, 1, 2, 1, 0]\/4 - j[prismVirtual, 0, 1, 1, 1, 1, 1, 0] + j[prismVirtual, 1, 0, 0, 1, 2, 1, 0]\/4 - j[prismVirtual, 1, 0, 1, 1, 1, 1, 0]\/2 + j[prismVirtual, 1, 1, 0, 1, 0, 1, 0]\/4 - j[prismVirtual, 1, 1, 0, 1, 2, 0, 0]\/4 - j[prismVirtual, 1, 1, 1, 1, -1, 1, 0]\/4 + j[prismVirtual, 1, 1, 1, 1, 0, 1, 0]\/2 + j[prismVirtual, 1, 1, 1, 1, 1, 0, 0]\/2",
+		"j[prismVirtual, 0, 0, 1, 1, 1, 1, 0]\/4 - j[prismVirtual, 0, 1, 1, 0, 1, 1, 0]\/4 - j[prismVirtual, 0, 1, 1, 1, 1, 1, 0]\/4 - j[prismVirtual, 1, 0, 1, 1, 0, 1, 0]\/4 + j[prismVirtual, 1, 1, 1, 0, 0, 1, 0]\/4 + j[prismVirtual, 1, 1, 1, 1, 0, 1, 0]\/4 + j[prismVirtual, 1, 1, 1, 1, 1, 1, 0]\/4",
+		"-1\/4*j[prismVirtual, 0, 0, 0, 1, 2, 1, 0] + j[prismVirtual, 0, 0, 1, 1, 1, 1, 0]\/4 + j[prismVirtual, 0, 1, 0, 0, 2, 1, 0]\/4 + j[prismVirtual, 0, 1, 0, 1, 2, 1, 0]\/4 - j[prismVirtual, 0, 1, 1, 0, 1, 1, 0]\/4 - j[prismVirtual, 0, 1, 1, 1, 1, 1, 0]\/4 - j[prismVirtual, 1, 0, 1, 1, 1, 1, 0]\/4 - j[prismVirtual, 1, 1, 0, 1, 2, 1, 0]\/4 + j[prismVirtual, 1, 1, 1, 0, 1, 1, 0]\/4 + j[prismVirtual, 1, 1, 1, 1, 1, 1, 0]",
+		"j[prismVirtual, -1, 1, 1, 1, 2, 1, 0]\/4 + j[prismVirtual, 0, 1, 0, 1, 2, 1, 0]\/4 + (3*j[prismVirtual, 0, 1, 1, 1, 1, 1, 0])\/4 - j[prismVirtual, 1, 0, 0, 1, 2, 1, 0]\/4 - j[prismVirtual, 1, 0, 1, 1, 1, 1, 0]\/4 + j[prismVirtual, 1, 1, 0, 1, 2, 0, 0]\/4 + j[prismVirtual, 1, 1, 1, 1, 0, 1, 0]\/4 + j[prismVirtual, 1, 1, 1, 1, 1, 0, 0]\/4"
+	],
+	"target_count":22,
+	"epsilon":"1\/5",
+	"dimension":"18\/5",
+	"common_thermal_endpoint_proved":false,
+	"complete_prism_reference":false
+}

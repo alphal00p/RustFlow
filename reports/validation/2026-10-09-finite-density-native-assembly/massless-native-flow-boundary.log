@@ -1,0 +1,34 @@
+
+running 6 tests
+test three_compact_loops_need_only_polynomial_soft_moments ... ok
+test occupied_matching_plans_and_integrates_subleading_coefficients ... ok
+test inverse_completion_boundary_uses_exact_positive_energy_certificate ... ok
+test mixed_boundary_keeps_symbolic_epsilon_power_and_deformation_roles ... ok
+test sealed_massless_origin_integrates_hard_factors_upper_contacts_and_zero_lower_jets ... ok
+test two_virtual_hard_loops_use_recursive_gaussian_boundaries ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.17s
+
+	Command being timed: "target/release/deps/finite_density_flow_boundary-93fe47e3ae5cecf9 --nocapture"
+	User time (seconds): 0.12
+	System time (seconds): 0.22
+	Percent of CPU this job got: 163%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.21
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 9216
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 4913
+	Minor (reclaiming a frame) page faults: 3405
+	Voluntary context switches: 2978
+	Involuntary context switches: 2
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 1
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

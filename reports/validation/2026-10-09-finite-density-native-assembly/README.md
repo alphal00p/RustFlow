@@ -7,6 +7,46 @@ The selected complete massive-sunset amplitude passes at D=12/5 and through
 Laurent order zero. Mandatory four-loop acceptance remains pending; no numerical
 AMF-to-supplied-oracle comparison has been performed.
 
+## Narrow massless two-loop numerical acceptance
+
+The complete massless sunset passes independently at D=13/2 and D=15/4, each
+across four precision/order/start profiles, and through Laurent order zero
+across five profiles including an independent epsilon-grid change. These are
+**110 independent-reference checks and 84 refinements**. Every occupied sector
+uses weighted AMF, with native closed bases 2, 2 and 3. The references retain
+all original raised-numerator mass derivatives and the upper Fermi surface.
+Vacuum and singleton sample values are exactly zero; the largest expected
+Laurent zero residual is 8.6614970556e-56. The largest nonzero Laurent relative
+reference discrepancy is 2.0411365260e-44. Criteria are relative 1e-12 above
+magnitude 1e-20, otherwise absolute 1e-25, with imaginary-zero tolerance1e-25.
+These are observed agreement and refinement checks, not interval error bounds.
+
+The prebuilt D13/2 run took 26.027712 seconds (RSS46080 KiB), D15/4 took
+26.532928 seconds (RSS48468 KiB), and the five-profile Laurent run took
+327.330267 seconds (RSS46144 KiB), excluding compilation and Nix startup.
+Native D7 failed before any prediction because the ordinary recursive boundary
+reported an additional indicial resonance. Independent D7 convergent quadrature
+still passes and separately verifies the nonzero raised upper surface.
+
+The final source moved vacuum preparation after occupied admission/closure, so
+unsupported occupied input fails before expensive vacuum preparation. A fresh
+D13/2 `(28,80,12)` run passes in 22.093871 seconds and all ten sector/total target
+values are exactly equal as decimal complex strings to the original profile.
+The original runs are bound to the frozen277-file source snapshot. Their original
+native executable digest was not captured before relinking; it is explicitly
+unavailable, and the final binary digest is not assigned to those runs.
+Final-order Python validation also passes. The complete scope, resources and
+source limitation are in [`massless-native-validation.json`](massless-native-validation.json)
+and [`massless-native-provenance.json`](massless-native-provenance.json).
+Completed source corpora and logs are losslessly compressed with original and
+archive hashes in [`massless-native-archives.json`](massless-native-archives.json).
+
+This permit covers only the two proved two-loop structural classes. Required
+four-loop numerical predictions and supplied-oracle comparisons remain absent.
+The optional prism reference work generated five virtual coefficients at one
+regulator value; its second AMFlow precision timed out, so it remains a
+[partial virtual reference](upstream-prism-virtual-attempt-2/README.md).
+
 ## Current checkpoint: complete massive amplitude and Laurent coefficients pass
 
 The complete massive sunset now passes independent comparison at epsilon=4/5

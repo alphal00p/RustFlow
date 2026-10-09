@@ -5,6 +5,7 @@ use symbolica::prelude::*;
 
 use super::geometry::OccupiedCutFamily;
 use super::guarded::{GuardedContext, GuardedMeasureIdentity, IndexBounds, IndexDomain};
+use super::massless_endpoint::MasslessFlowEvidence;
 use super::reduction::{AuxiliaryConvention, FixedShellDeformation};
 use crate::{Error, Result};
 
@@ -138,10 +139,93 @@ impl OccupiedCutFamily {
         eta: Symbol,
         shifted: &[usize],
         domain_budget: usize,
+        parameters: Vec<Symbol>,
+        identity: GuardedMeasureIdentity,
+        options: WeightedSourceOptions,
+    ) -> Result<PreparedWeightedSources<N>> {
+        self.guarded_sources_with_origin(
+            epsilon,
+            dimension,
+            eta,
+            shifted,
+            domain_budget,
+            parameters,
+            identity,
+            options,
+            None,
+        )
+    }
+
+    /// Use a sealed finite-positive-eta origin certificate for the narrow
+    /// massless flow classes. The resulting lower-contact zeros are defined by
+    /// joint high-dimensional continuation of the complete smooth kernel; they
+    /// are not inferred from massive empty support or a separately chosen PV.
+    pub fn guarded_sources_with_massless_origin<const N: usize>(
+        &self,
+        epsilon: Symbol,
+        dimension: i64,
+        eta: Symbol,
+        shifted: &[usize],
+        domain_budget: usize,
+        parameters: Vec<Symbol>,
+        identity: GuardedMeasureIdentity,
+        options: WeightedSourceOptions,
+        origin: &MasslessFlowEvidence,
+    ) -> Result<PreparedWeightedSources<N>> {
+        self.guarded_sources_with_origin(
+            epsilon,
+            dimension,
+            eta,
+            shifted,
+            domain_budget,
+            parameters,
+            identity,
+            options,
+            Some(origin),
+        )
+    }
+
+    fn guarded_sources_with_origin<const N: usize>(
+        &self,
+        epsilon: Symbol,
+        dimension: i64,
+        eta: Symbol,
+        shifted: &[usize],
+        domain_budget: usize,
         mut parameters: Vec<Symbol>,
         mut identity: GuardedMeasureIdentity,
         options: WeightedSourceOptions,
+        origin: Option<&MasslessFlowEvidence>,
     ) -> Result<PreparedWeightedSources<N>> {
+        let massless_origin_loops = if let Some(origin) = origin {
+            if origin.source_options() != options {
+                return Err(Error::InvalidInput(
+                    "massless source origin certificate uses different source options".into(),
+                ));
+            }
+            if options.positive_compact_energy_powers {
+                return Err(Error::Unsupported(
+                    "massless source origin continuation requires polynomial completions".into(),
+                ));
+            }
+            origin.validate_family(self, shifted)?;
+            let loops = origin.certified_origin_loops(self, shifted)?;
+            if loops.is_empty() {
+                return Err(Error::InvalidInput(
+                    "massless source origin certificate covers no occupied loop".into(),
+                ));
+            }
+            identity.measure.push_str(&format!(
+                "; massless source origin evidence={}",
+                origin.source_identity()
+            ));
+            identity
+                .branch
+                .push_str(&format!("; {}", origin.origin_identity()));
+            loops
+        } else {
+            Vec::new()
+        };
         let policy = options.policy;
         let measure = self.deformed_measure::<N>(eta, shifted)?;
         let physical_arity = measure.physical_arity();
@@ -268,6 +352,40 @@ impl OccupiedCutFamily {
             identity.support.push_str(&format!(
                 "; certified real empty support: cut slot {}>=1 and lower-energy slot {}>=1, physical mass squared {}>0",
                 shell.physical_slot, shell.lower_slot, mass_squared
+            ));
+        }
+        // This is a different physical statement from massive empty support.
+        // At fixed eta>0 the sealed narrow-flow proof supplies a smooth complete
+        // virtual/transfer kernel at each origin. With polynomial insertions,
+        // every finite C_n H_lower,l label has vanishing required zero-energy
+        // jets on a sufficiently high-Re(D) open domain. Joint meromorphic
+        // continuation then gives zero pointwise in the integer-index family;
+        // no one finite dimension is asserted to cover all unbounded labels.
+        for loop_index in massless_origin_loops {
+            let shell = self
+                .shells()
+                .iter()
+                .find(|shell| shell.loop_index == loop_index)
+                .ok_or_else(|| {
+                    Error::InvalidInput(
+                        "massless origin certificate refers to an absent compact loop".into(),
+                    )
+                })?;
+            if !shell.mass_squared.is_zero() || shell.chemical_potential <= Rational::zero() {
+                return Err(Error::InvalidInput("massless origin source zero needs mass zero and a positive separated upper endpoint".into()));
+            }
+            let mut support = bounds;
+            support[shell.physical_slot] = IndexBounds::new(Some(1), None)
+                .map_err(|error| Error::InvalidInput(error.to_string()))?;
+            support[shell.lower_slot] = IndexBounds::new(Some(1), None)
+                .map_err(|error| Error::InvalidInput(error.to_string()))?;
+            zero_domains.push(
+                IndexDomain::new(support)
+                    .map_err(|error| Error::InvalidInput(error.to_string()))?,
+            );
+            identity.support.push_str(&format!(
+                "; certified joint dimensional origin zero jets: occupied loop {loop_index}, cut slot {}>=1 and lower-energy slot {}>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint {}>0",
+                shell.physical_slot, shell.lower_slot, shell.chemical_potential,
             ));
         }
         for parameter in [eta, epsilon] {

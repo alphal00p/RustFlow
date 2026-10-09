@@ -1,0 +1,79 @@
+{
+  "schema": 1,
+  "encoding": "gzip, lossless original JSON/native program bytes; mtime=0",
+  "files": [
+    {
+      "original_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/sources.json",
+      "archive_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/sources.json.gz",
+      "original_sha256": "3ca2c9a75bff6f42e41f1e57a7401d937806105fe8b59f725743b56a65f98c4b",
+      "archive_sha256": "536c7feb127bc0eb29b004467108a8093a306d24f2757d1ac83272c2644eb8ea",
+      "original_bytes": 1080277,
+      "archive_bytes": 10627
+    },
+    {
+      "original_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/result.json",
+      "archive_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/result.json.gz",
+      "original_sha256": "bb02227c43742a15247303538ea6b3b7c0101c4357e0ae458e96cc22f156fe66",
+      "archive_sha256": "776210e4d57490e910bda53c739afc50f9faa846fa861ab7e3011b87c14503d1",
+      "original_bytes": 31673309,
+      "archive_bytes": 645955
+    },
+    {
+      "original_path": "four-loop-source-pilots-zero-faces-expanded/physical-18-capacity-20-cuts-0_4/sources.json",
+      "archive_path": "four-loop-source-pilots-zero-faces-expanded/physical-18-capacity-20-cuts-0_4/sources.json.gz",
+      "original_sha256": "b72376b5593437a4343ef01399ace17b3c384439ce4a6b966b3255a189e6edf9",
+      "archive_sha256": "aea2239b67eae375cb2fe9f427176587be74008d3c504a03989a1bf4d8236583",
+      "original_bytes": 6918040,
+      "archive_bytes": 54123
+    },
+    {
+      "original_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-000-provisional.bin",
+      "archive_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-000-provisional.bin.gz",
+      "original_sha256": "3d96d34ac02deee813808a3e2a7ea6cfa2c1fe296a6ffc8fd831c29b9ffe0b3b",
+      "archive_sha256": "a227f4a87ef47b6f11e383aa81a72bad8b21740bd27ef383de17d5dcfa59b902",
+      "original_bytes": 7420012,
+      "archive_bytes": 595921
+    },
+    {
+      "original_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-000-provisional.json",
+      "archive_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-000-provisional.json.gz",
+      "original_sha256": "489fbde259d040b504418f80a2df74acd48e8966fd2883eecfce3f572e3cab56",
+      "archive_sha256": "261345172b4b7e2270b200314722a95813be00dddc6572b7b9109c8d8d68b840",
+      "original_bytes": 53852,
+      "archive_bytes": 2269
+    },
+    {
+      "original_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-001-provisional.bin",
+      "archive_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-001-provisional.bin.gz",
+      "original_sha256": "02a3bdb3929971440ac2e8895cca8ab8c606e3e7e35e1e91a1a21710205e1c42",
+      "archive_sha256": "4e5ece64743c29a079e0a33fe9596817bba93e23957138d4033c202c60ac8fc6",
+      "original_bytes": 2922340,
+      "archive_bytes": 262867
+    },
+    {
+      "original_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-001-provisional.json",
+      "archive_path": "four-loop-source-pilots-zero-faces-expanded/physical-16-capacity-16-cuts-0/round-001-provisional.json.gz",
+      "original_sha256": "9f1f997ff749adedf1c55610b762c2c9cf4fddb4c6a777bb1cca2cd301b52963",
+      "archive_sha256": "f41100b7f38cfa9c64330a1a86c5b916f581fb26ce206e532d6c30d3ff1bda29",
+      "original_bytes": 485038,
+      "archive_bytes": 11585
+    },
+    {
+      "original_path": "four-loop-source-pilots-zero-faces-expanded/physical-18-capacity-20-cuts-0_4/round-000-provisional.bin",
+      "archive_path": "four-loop-source-pilots-zero-faces-expanded/physical-18-capacity-20-cuts-0_4/round-000-provisional.bin.gz",
+      "original_sha256": "8f64775b848cc29330cf477ce3c6b2195e062217fe290b63d7e9812e3ef97d35",
+      "archive_sha256": "2a6122cb2f0e7a95c515a8b55af8982ef28b1231bca9944347d757023c8b5e21",
+      "original_bytes": 6090210,
+      "archive_bytes": 490678
+    },
+    {
+      "original_path": "four-loop-source-pilots-zero-faces-expanded/physical-18-capacity-20-cuts-0_4/round-000-provisional.json",
+      "archive_path": "four-loop-source-pilots-zero-faces-expanded/physical-18-capacity-20-cuts-0_4/round-000-provisional.json.gz",
+      "original_sha256": "375d754372cacf1be343a409e9d8e3cd4036b1a40c2c5a48b5b5bac46e188128",
+      "archive_sha256": "d0c87cd75fb59d8445550c9eaf96b287ad4fefb7768a3c9862cbf621b2c99125",
+      "original_bytes": 41668,
+      "archive_bytes": 1929
+    }
+  ],
+  "replay": "Decompress each archive to its original_path before direct native binary replay. original_sha256 hashes those exact restored bytes; no proof information is dropped."
+}

@@ -23,12 +23,14 @@ use std::collections::BTreeMap;
 use std::sync::Mutex;
 use symbolica::prelude::*;
 
-/// This additional origin prescription is available only to the polynomial
-/// terminal owner. It is not a continuation certificate for a flowing graph.
+/// Massless origins are continued jointly from sufficiently large ReD. The
+/// terminal prescription excludes virtual poles; the flow prescription requires
+/// a sealed family-bound finite-eta and endpoint proof from its caller.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
 pub(crate) enum CompactOriginPrescription {
     Existing,
     JointDimensionalMasslessTerminal,
+    JointDimensionalMasslessFlow,
 }
 
 impl CompactOriginPrescription {
@@ -37,6 +39,9 @@ impl CompactOriginPrescription {
             Self::Existing => "existing-compact-support-v1",
             Self::JointDimensionalMasslessTerminal => {
                 "joint-high-D-massless-polynomial-origin-v1;mu>0;lower-contact-zero-jets;no-virtual-poles"
+            }
+            Self::JointDimensionalMasslessFlow => {
+                super::massless_endpoint::MASSLESS_FLOW_ORIGIN_IDENTITY
             }
         }
     }
@@ -142,6 +147,16 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
         self
     }
 
+    /// Only the family-bound flow wrapper calls this, after retaining the
+    /// sealed proof and arranging an audit of every supplied basis label.
+    pub(crate) fn with_massless_flow_origin(
+        mut self,
+        _evidence: &super::massless_endpoint::MasslessFlowEvidence,
+    ) -> Self {
+        self.origin_prescription = CompactOriginPrescription::JointDimensionalMasslessFlow;
+        self
+    }
+
     /// Integrate a scalar region coefficient after hard tensor projection.
     /// The soft space contains only compact loops; if it has one external
     /// vector, that vector is explicitly the normalized medium `u.u=1`.
@@ -198,13 +213,12 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
                 ));
             }
             validate_distribution(distribution, self.limits)?;
-            if self.origin_prescription
-                == CompactOriginPrescription::JointDimensionalMasslessTerminal
+            if self.origin_prescription != CompactOriginPrescription::Existing
                 && distribution.shell.mass_squared.is_zero()
                 && distribution.shell.chemical_potential <= 0
             {
                 return Err(Error::Unsupported(
-                    "joint massless terminal origin requires positive chemical potential; coincident endpoints at mu=0 are not admitted".into(),
+                    "joint massless origin requires positive chemical potential; coincident endpoints at mu=0 are not admitted".into(),
                 ));
             }
         }
@@ -683,15 +697,15 @@ fn distribution_moment(
     if cut <= 0 {
         return Ok(p.zero());
     }
-    let continued_massless = shell.mass_squared.is_zero()
-        && origin_prescription == CompactOriginPrescription::JointDimensionalMasslessTerminal;
+    let continued_massless =
+        shell.mass_squared.is_zero() && origin_prescription != CompactOriginPrescription::Existing;
     if continued_massless
         && (shell.chemical_potential <= 0
             || spatial_dimension <= &Rational::zero()
             || energy_power < 0)
     {
         return Err(Error::Unsupported(
-            "joint massless polynomial terminal requires mu>0, d>0 and nonnegative original energy powers".into(),
+            "joint massless polynomial origin requires mu>0, d>0 and nonnegative original energy powers".into(),
         ));
     }
     let gap = &shell.chemical_potential * &shell.chemical_potential - &shell.mass_squared;

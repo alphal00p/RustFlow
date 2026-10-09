@@ -1,0 +1,132 @@
+{
+  "schema_version": 1,
+  "status": "passed_narrow_massless_two_loop_numerical_acceptance",
+  "scope": "Complete scalar and raised-original-medium-numerator massless sunset, native weighted AMF in every occupied sector, common thermal origin/endpoint prescription",
+  "cases": [
+    {
+      "name": "massless-sunset-fixed",
+      "comparison": "massless-sunset-fixed-reference-comparison.json",
+      "comparison_sha256": "a07004e30f8c247cdf37c4f74a972d4c7ad4939bc411be69e8bb705f0aea976d",
+      "dimension": "13/2",
+      "reference_comparisons": 40,
+      "refinement_comparisons": 30,
+      "resources": {
+        "command": [
+          "timeout",
+          "900",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_fixed_dimension",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 26.027711776085198,
+        "user_seconds": 25.370544,
+        "system_seconds": 0.43265499999999996,
+        "peak_child_rss_kib": 46080,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "comparisons_maximum_relative_nonzero": "1.126688989905034741452362338112000443035763364382546305312473584512773621237337101050521306571201468E-62",
+      "comparisons_maximum_absolute_zero": "0",
+      "refinements_maximum_relative_nonzero": "1.126688989819680293673770562097957731914961412852125332443146513730987910243628158522974457312583548E-62",
+      "refinements_maximum_absolute_zero": "0"
+    },
+    {
+      "name": "massless-sunset-d15over4",
+      "comparison": "massless-sunset-d15over4-reference-comparison.json",
+      "comparison_sha256": "a99abf60f5bdd990228cfd1de5d83cbf50bc3568c597afbbdba85bc198ccbe91",
+      "dimension": "15/4",
+      "reference_comparisons": 40,
+      "refinement_comparisons": 30,
+      "resources": {
+        "command": [
+          "timeout",
+          "180",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_fixed_dimension",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 26.532927884254605,
+        "user_seconds": 26.190969,
+        "system_seconds": 0.10735,
+        "peak_child_rss_kib": 48468,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "comparisons_maximum_relative_nonzero": "1.480847674711965434800546501497985946205175442676410573911964880427386681765537823032656210739396074E-62",
+      "comparisons_maximum_absolute_zero": "0",
+      "refinements_maximum_relative_nonzero": "1.480847674827445885208136825514073744258136268883858773114852530830368314585235070657748164025826708E-62",
+      "refinements_maximum_absolute_zero": "0"
+    },
+    {
+      "name": "massless-sunset-laurent",
+      "comparison": "massless-sunset-laurent-reference-comparison.json",
+      "comparison_sha256": "d78ae3a30fc9b80e5593446f447e664fb2ab76279cf740c7a4bf344cfc49b69c",
+      "dimension": "4-2*epsilon",
+      "reference_comparisons": 30,
+      "refinement_comparisons": 24,
+      "resources": {
+        "command": [
+          "timeout",
+          "900",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_laurent",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 327.33026664191857,
+        "user_seconds": 324.068949,
+        "system_seconds": 0.59527,
+        "peak_child_rss_kib": 46144,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "comparisons_maximum_relative_nonzero": "2.041136525965978003930408791132414108823096798870896291285970536438753861629237793188399844869034108E-44",
+      "comparisons_maximum_absolute_zero": "8.661497055645898292374991768187706620116566810207180110452091549572976556700000000000000000000000000E-56",
+      "refinements_maximum_relative_nonzero": "2.041136525965871943160585869054226904077073159303460082774492625348008292521059681817111783963230506E-44",
+      "refinements_maximum_absolute_zero": "8.661497055645606195938263055876335687774379208210504422997722871447873722290569264271812448109925000E-56"
+    }
+  ],
+  "total_independent_reference_comparisons": 110,
+  "total_independent_refinement_comparisons": 84,
+  "reference_criteria": {
+    "relative": "1e-12",
+    "small_magnitude_threshold": "1e-20",
+    "small_absolute": "1e-25",
+    "imaginary_zero_absolute": "1e-25"
+  },
+  "occupied_basis_sizes": [
+    {
+      "cut_slots": [
+        0
+      ],
+      "basis_size": 2
+    },
+    {
+      "cut_slots": [
+        1
+      ],
+      "basis_size": 2
+    },
+    {
+      "cut_slots": [
+        0,
+        1
+      ],
+      "basis_size": 3
+    }
+  ],
+  "d7_native_status": "failed_before_predictions_at_ordinary_recursive_boundary_additional_indicial_resonance; independent D7 convergent quadrature remains valid",
+  "final_order_verification": "massless-final-order-comparison.json",
+  "provenance": "massless-native-provenance.json",
+  "lossless_archives": "massless-native-archives.json",
+  "independent_reference": "independent-massless-reference/independent-massless-reference.json",
+  "source_scope": "Runtime numerical admission remains the sealed two-loop singleton one-virtual cone and double-cut pure-transfer classes; generic four-loop occupied flow remains unsupported",
+  "mandatory_four_loop_native_predictions": 0,
+  "supplied_oracle_numerical_records_compared": 0,
+  "uncertainty": "Observed agreement with separately derived Gamma/Beta formulas and independently refined convergent quadrature; no rigorous interval error bounds"
+}

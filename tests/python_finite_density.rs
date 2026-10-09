@@ -21,6 +21,7 @@ fn native_density_binding_preserves_full_values_errors_and_cancellation() {
         local.set_item("integration", integration)?;
         local.set_item("one_loop", include_str!("../examples/finite_density/massive_one_loop_tadpole.json"))?;
         local.set_item("two_loop", include_str!("../examples/finite_density/massive_two_loop_sunset.json"))?;
+        local.set_item("four_loop", include_str!("../examples/finite_density/chain_of_three_parallel_pairs.json"))?;
         py.run(c"
 import concurrent.futures
 import json
@@ -67,7 +68,7 @@ try:
     raise AssertionError('invalid start scale was accepted')
 except integration.InvalidInputError:
     pass
-massless = json.loads(two_loop)
+massless = json.loads(four_loop)
 for edge in massless['edges']:
     edge['mass_squared'] = '0'
 try:

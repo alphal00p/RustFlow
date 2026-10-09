@@ -46,6 +46,7 @@ pub struct OccupiedBoundaryProvenance {
     pub integrated_products: usize,
     pub scaleless_noncompact_products: usize,
     pub vanishing_required_cut_coefficients: usize,
+    pub massless_origin: Option<&'static str>,
 }
 
 #[derive(Clone, Debug)]
@@ -65,6 +66,7 @@ pub struct OccupiedFlowBoundary<'a> {
     max_half_order: usize,
     limits: OccupiedBoundaryLimits,
     positive_energy_powers: bool,
+    massless_evidence: Option<super::massless_endpoint::MasslessFlowEvidence>,
 }
 
 impl<'a> OccupiedFlowBoundary<'a> {
@@ -89,6 +91,7 @@ impl<'a> OccupiedFlowBoundary<'a> {
             max_half_order,
             limits,
             positive_energy_powers: false,
+            massless_evidence: None,
         })
     }
 
@@ -99,6 +102,22 @@ impl<'a> OccupiedFlowBoundary<'a> {
         self.positive_energy_powers = enabled;
         self.integrated = self.integrated.with_positive_compact_energy_powers(enabled);
         self
+    }
+
+    /// Retain the sealed proof. `constants` rechecks its exact family and
+    /// deformation and audits every supplied master before evaluating a seed.
+    pub fn with_massless_evidence(
+        mut self,
+        evidence: &super::massless_endpoint::MasslessFlowEvidence,
+    ) -> Result<Self> {
+        if self.positive_energy_powers {
+            return Err(Error::Unsupported(
+                "massless boundary evidence excludes inverse compact energies".into(),
+            ));
+        }
+        self.integrated = self.integrated.with_massless_flow_origin(evidence);
+        self.massless_evidence = Some(evidence.clone());
+        Ok(self)
     }
 
     /// Derive the needed region coefficients and match the supplied complete
@@ -166,6 +185,20 @@ impl<'a> OccupiedFlowBoundary<'a> {
             return Err(Error::Unsupported(
                 "an occupied family without uncut physical quadratics is a terminal moment, not an auxiliary mass flow".into(),
             ));
+        }
+        if let Some(evidence) = &self.massless_evidence {
+            if self.positive_energy_powers {
+                return Err(Error::Unsupported(
+                    "massless boundary evidence excludes inverse compact energies".into(),
+                ));
+            }
+            let selected = shifted
+                .iter()
+                .enumerate()
+                .filter_map(|(slot, &selected)| selected.then_some(slot))
+                .collect::<Vec<_>>();
+            evidence.validate_family(family, &selected)?;
+            evidence.validate_labels(family, basis)?;
         }
         let ordinary = family.region_family(self.epsilon_symbol, self.options.dimension)?;
         let shifted = &shifted[..input_slots];
@@ -299,6 +332,7 @@ impl<'a> OccupiedFlowBoundary<'a> {
                 .unwrap_or(0),
         })?;
         let mut provenance = OccupiedBoundaryProvenance {
+            massless_origin: self.massless_evidence.as_ref().map(|e| e.origin_identity()),
             regions: regions
                 .iter()
                 .enumerate()

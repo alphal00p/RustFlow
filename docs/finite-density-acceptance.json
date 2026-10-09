@@ -1299,6 +1299,38 @@
     "verified": true,
     "evidence": "Explicit connected, bridge-free, articulation-free incidence certificates with (V,E)=(4,7),(5,8),(6,9), different degree multisets and canonical multigraph adjacency words. Exhaustive exact row-rank partitions rule out denominator-block factorization. Physical edge count is preserved under graph relabeling and invertible loop rerouting; completion slots are excluded."
   },
+  "massless_small_graph": {
+    "definition": "examples/finite_density/massless_two_loop_sunset.json",
+    "reference_status": "independent_Gamma_Beta_and_convergent_D7_quadrature_generated",
+    "reference": "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json",
+    "native_status": "complete_amplitude_passed_at_D13_over2_D15_over4_and_Laurent_minus2_through_zero",
+    "report": "reports/validation/2026-10-09-finite-density-native-assembly/massless-native-validation.json",
+    "provenance": "reports/validation/2026-10-09-finite-density-native-assembly/massless-native-provenance.json",
+    "sample_dimensions": [
+      "13/2",
+      "15/4"
+    ],
+    "sample_profiles_per_dimension": 4,
+    "laurent_profiles": 5,
+    "reference_comparisons": 110,
+    "independent_refinement_comparisons": 84,
+    "occupied_basis_sizes": [
+      2,
+      2,
+      3
+    ],
+    "relative_tolerance": "1e-12",
+    "small_magnitude_threshold": "1e-20",
+    "small_absolute_tolerance": "1e-25",
+    "imaginary_zero_absolute_tolerance": "1e-25",
+    "largest_laurent_relative_reference_discrepancy": "2.041136525965978e-44",
+    "largest_laurent_absolute_expected_zero_residual": "8.661497055645898e-56",
+    "native_D7": "ordinary_recursive_boundary_additional_indicial_resonance_before_any_prediction; independent convergent_D7_reference_valid",
+    "admitted_scope": "Sealed exactly-two-loop all-massless positive-chemical classes: singleton one-virtual cone or double-cut pure spacelike transfer; polynomial completions, all uncut physical factors shifted, bound common thermal origin and finite-label endpoint proof.",
+    "binary_provenance_limitation": "Original native executable digest was not captured before relink; source277 snapshot and run/build evidence retained. Final-order executable digest captured and all10 matched-profile values are exact decimal-string equal.",
+    "four_loop_native_predictions": 0,
+    "supplied_oracle_numerical_records_compared": 0
+  },
   "small_graph": {
     "definition": "examples/finite_density/massive_two_loop_sunset.json",
     "graph_certificate": {

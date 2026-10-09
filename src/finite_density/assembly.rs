@@ -100,7 +100,6 @@ impl PreparedDensityFlow {
     ) -> Result<Self> {
         super::flow::validate_options(options)?;
         let input = input.prepare()?;
-        let vacuum = PreparedDensityVacuum::prepare(&input, options, context)?;
         let mut occupied = Vec::new();
         for certificate in input.cut_decomposition(65536)? {
             let cuts = certificate["cut_slots"]
@@ -167,6 +166,10 @@ impl PreparedDensityFlow {
             };
             occupied.push((cuts, OccupiedSector::Flow(flow)));
         }
+        // Diagnose an unsupported occupied contour before spending ordinary
+        // reduction work on its vacuum contribution. A complete amplitude
+        // still requires this same vacuum preparation and evaluation.
+        let vacuum = PreparedDensityVacuum::prepare(&input, options, context)?;
         Ok(Self {
             input,
             vacuum,

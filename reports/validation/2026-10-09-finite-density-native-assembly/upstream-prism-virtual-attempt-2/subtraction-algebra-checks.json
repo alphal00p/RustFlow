@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "scope": "Exact definition-only numerator/kinematic-derivative and local paired-collinear jet identities; no integral values",
+  "two_cut_numerator_maps_checked": 3,
+  "off_shell_jet_numerator_maps_checked": 2,
+  "collinear_jet_checks": [
+    {
+      "nu": 1,
+      "f0": "-675/32",
+      "f1_paired_fixed_w": "-23067/16",
+      "odd_sqrt_t_jets": "zero"
+    },
+    {
+      "nu": 2,
+      "f0": "-151875/64",
+      "f1_paired_fixed_w": "-24241275/128",
+      "odd_sqrt_t_jets": "zero"
+    }
+  ],
+  "complete_prism_reference": false,
+  "numerical_oracle_records_compared": 0,
+  "script_sha256": "19d0b1fbd328b6748d97e6acd76459907c81c1356e98da9d892cf02c90923501"
+}

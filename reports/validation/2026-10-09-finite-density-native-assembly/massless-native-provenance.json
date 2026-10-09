@@ -1,0 +1,137 @@
+{
+  "schema_version": 1,
+  "scope": "original native massless sample/Laurent predictions and independent reference are bound to the frozen277-file source snapshot; final source differs only by preparation order",
+  "source_snapshot": "massless-native-source-hashes.json",
+  "source_snapshot_sha256": "b2c1bfb6c842aaccc31794052ccfd8c5c65df59e67db461eacdb1e99762cc003",
+  "snapshot_file_count": 277,
+  "final_source_changes": [
+    {
+      "path": "src/finite_density/assembly.rs",
+      "original_snapshot_sha256": "3a23ee8a5348f1ceaf58918863dce15ad09dfcf7355f6c497205ba30db0f23d1",
+      "current_sha256": "a2724436d6a6b3806d29ded11e41d9ee46482fd6248efbee69956f8f6687f29f"
+    }
+  ],
+  "change_description": "Move ordinary vacuum preparation after occupied admission/closure so an unsupported four-loop occupied family fails before expensive vacuum preparation; no numerical formula or native flow setting changed. Final-order smoke is separate evidence.",
+  "change_patch": "massless-final-order-change.patch",
+  "change_patch_sha256": "4905e79a7c9867cd58d8114cbbe45a75f2db7199777725f74a5deb21a091aa5a",
+  "native_runs": [
+    {
+      "run": "massless-sunset-fixed",
+      "resources": "massless-sunset-fixed-resources.json",
+      "resources_sha256": "f497db6c17016f8b1c0002b84ce8d8e2e6e7f80a902092afd356c447a1e4a9b0",
+      "result": {
+        "command": [
+          "timeout",
+          "900",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_fixed_dimension",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 26.027711776085198,
+        "user_seconds": 25.370544,
+        "system_seconds": 0.43265499999999996,
+        "peak_child_rss_kib": 46080,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "comparison": "massless-sunset-fixed-reference-comparison.json",
+      "comparison_sha256": "a07004e30f8c247cdf37c4f74a972d4c7ad4939bc411be69e8bb705f0aea976d"
+    },
+    {
+      "run": "massless-sunset-d15over4",
+      "resources": "massless-sunset-d15over4-resources.json",
+      "resources_sha256": "5260db7a3df1696648646b0cdb0932a6fb06a78d1f423eb15462a50b0a1eba7f",
+      "result": {
+        "command": [
+          "timeout",
+          "180",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_fixed_dimension",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 26.532927884254605,
+        "user_seconds": 26.190969,
+        "system_seconds": 0.10735,
+        "peak_child_rss_kib": 48468,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "comparison": "massless-sunset-d15over4-reference-comparison.json",
+      "comparison_sha256": "a99abf60f5bdd990228cfd1de5d83cbf50bc3568c597afbbdba85bc198ccbe91"
+    },
+    {
+      "run": "massless-sunset-laurent",
+      "resources": "massless-sunset-laurent-resources.json",
+      "resources_sha256": "d13102e89b06d05e45f0b15d2076a2a5a6ad498570d33b32bd4d78b621d7d007",
+      "result": {
+        "command": [
+          "timeout",
+          "900",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_laurent",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 327.33026664191857,
+        "user_seconds": 324.068949,
+        "system_seconds": 0.59527,
+        "peak_child_rss_kib": 46144,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "comparison": "massless-sunset-laurent-reference-comparison.json",
+      "comparison_sha256": "d78ae3a30fc9b80e5593446f447e664fb2ab76279cf740c7a4bf344cfc49b69c"
+    },
+    {
+      "run": "massless-sunset-d7",
+      "resources": "massless-sunset-d7-resources.json",
+      "resources_sha256": "cbd101fb1f560ac22213382ba317729c74dc59f15cb1f2538b5f9cf10b3d0ddc",
+      "result": {
+        "command": [
+          "timeout",
+          "180",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_fixed_dimension",
+          "--nocapture"
+        ],
+        "exit_code": 101,
+        "wall_seconds": 20.72822809126228,
+        "user_seconds": 20.45345,
+        "system_seconds": 0.098219,
+        "peak_child_rss_kib": 54652,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "comparison": null,
+      "accepted_predictions": 0,
+      "diagnostic": "ordinary recursive boundary specialization introduces an additional indicial resonance at D7 before any prediction"
+    }
+  ],
+  "independent_reference": {
+    "report": "independent-massless-reference/independent-massless-reference.json",
+    "sha256": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6"
+  },
+  "archive_index": "massless-native-archives.json",
+  "archive_index_sha256": "2ffff2d555d3e542582d660b140d6db6914460f906611586bc9c052bb756d4c4",
+  "numerical_oracle_records_compared": 0,
+  "four_loop_native_predictions_compared": 0,
+  "original_native_binary_sha256": null,
+  "original_binary_limitation": "The original executable was overwritten during final-order relinking before its digest was captured. Original runs remain bound to the frozen source277 snapshot and completed build/resource logs; the current digest must not be assigned to them.",
+  "final_order_verification": {
+    "comparison": "massless-final-order-comparison.json",
+    "comparison_sha256": "e51763a29c6f14350f9512d3ea28397dc741feed80854e0f5bf063c109770682",
+    "resources": "massless-sunset-final-order-resources.json",
+    "resources_sha256": "d949e675f3bbab760a144cb4f1294e371cbd9523e46e9f5c9b9269cd46c8c613",
+    "current_native_binary_sha256": "2ceb404234eb10d65b6200a0ea97784c10e5b9fed84ce007cd5ebefcebbe48e3"
+  },
+  "python_final": {
+    "resources": "massless-python-final-resources.json",
+    "resources_sha256": "ca9f59db071ce20fa45ab4b70330f17c0aa8d7d07c23131b4f0a0325aa98ebbf"
+  }
+}

@@ -1,0 +1,1268 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-09T20:39:08.337261+00:00",
+  "scope": "completed original-source massless runs and completed final-order verification; numeric predictions and independent reference remain uncompressed",
+  "compression": "gzip level9, mtime0; exact decompression equality checked before original removal",
+  "artifacts": [
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_bytes": 5869,
+      "archive_bytes": 1406,
+      "original_sha256": "e108b564b43eef6589ba570d1ed99259a1525af7e092938d92a0351697b2cc74",
+      "archive_sha256": "218dc0525e73b306aef4093886504c048d5b1b585fca84b9e5e49efd7dc4b55f",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_bytes": 7311,
+      "archive_bytes": 1482,
+      "original_sha256": "cb69e20c8e4eda725c76bd47cb46ea9f7404579098c1d359a9ad853f3385c8ec",
+      "archive_sha256": "8ac517c042e1c3808dc0a620cbbdc69d3ed8714ca7da67696a85df3155a1e281",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-002-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-002-closed.json.gz",
+      "original_bytes": 7306,
+      "archive_bytes": 1478,
+      "original_sha256": "a7b6bc5f5b7b8caccb2f811d70e8e6d08ce59064bd2abf1f23227daa974f02aa",
+      "archive_sha256": "021ba70d85301b17dd47cfea877b2ca9ee555d98e4f1796af54254a4cca32004",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_bytes": 7311,
+      "archive_bytes": 1481,
+      "original_sha256": "23a8e86a5ccdc003f5061bdf3cdcb3dc4f9db9403fefb4575c21d7a330a7bdb6",
+      "archive_sha256": "5dab0b2681d95094ba27647786ea64223f6e1eb849d9d0408530cacba412db98",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/guard-refinements.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/guard-refinements.json.gz",
+      "original_bytes": 1676,
+      "archive_bytes": 327,
+      "original_sha256": "1f5c9efb2d24dcc27cc5c35d2a5bca0426f314fb9a75d486b121d49e04a4f4a8",
+      "archive_sha256": "77a28b7d532f724b61393b82e04ad324ec6f6397fd22ff6b08c9a2c44eff7e96",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_bytes": 6559,
+      "archive_bytes": 1443,
+      "original_sha256": "41c16092d69d383f3da4545af3f63f3e1a5e4d4b370c863793d2f2d5ba0294bc",
+      "archive_sha256": "391f98b9ab2e138008aa4d4767a9251067f528fd1d102aba77aea50a682e8bae",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "original_bytes": 8341,
+      "archive_bytes": 1515,
+      "original_sha256": "dc6a5a559948b647715bd3f13411efc9a7757a7ae45750adbd396ac5774f5a4f",
+      "archive_sha256": "25eaae4b638fa795c4e2052f75f81c0bebb39b6fd1af7fab1d0ebfd60d5d1f9f",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-002-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-002-closed.json.gz",
+      "original_bytes": 8803,
+      "archive_bytes": 1537,
+      "original_sha256": "3bbc694722e124b9ccadc862b2ffd802f79f6e03bb943ca1f8787125a1af9733",
+      "archive_sha256": "6f78603850eaf48b09ebd703044df591099d94a0404648c47355aff21f1ca7cc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "original_bytes": 8808,
+      "archive_bytes": 1539,
+      "original_sha256": "3ce3231fb23bf3fd7e59b2a27bb049532285c37c785df150422bc26c6af61b38",
+      "archive_sha256": "134ea6d8d2feaf2b47776043faf39be3ef86c77b64d50ae8fdca3686bb8aa252",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_bytes": 5177,
+      "archive_bytes": 1375,
+      "original_sha256": "3f2a3c0e14cdc0ebfecadb229a0f17b445e871b51d726969f0ab4d41ee13b751",
+      "archive_sha256": "58b7b7243f7bce25f51f42a6852af2c4fa2e9f22487643b9ef2f6761ab61b2ad",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_bytes": 6013,
+      "archive_bytes": 1420,
+      "original_sha256": "5b7fd4ca12019344e7fc4ac8cb905fb1d54b95aae707b81f70a1d2f50d98fe5a",
+      "archive_sha256": "23b9dbf257345e92415676a16f342682282774867a98963f8c7958db4c724a6b",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-002-provisional.json.gz",
+      "original_bytes": 6621,
+      "archive_bytes": 1452,
+      "original_sha256": "36f91b0d9ccb57ff70d6aef0b7e3b8fe6ae7b7ed367f37b8e54d3e2581ed090b",
+      "archive_sha256": "c662d03bd8ef3411e98d242aeaeb154472a861a700af2e09dcb31673ba873626",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-003-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-003-closed.json.gz",
+      "original_bytes": 6616,
+      "archive_bytes": 1455,
+      "original_sha256": "82232409c19f88002e245fc494256682d1ce54078f0fc94f248658cdd1b19eeb",
+      "archive_sha256": "4b57da838fa19af1c77c4da9578947d8b5485850899692e40c35265b2805cb63",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-003-provisional.json.gz",
+      "original_bytes": 6621,
+      "archive_bytes": 1457,
+      "original_sha256": "ee62a6f7bb8ad2cf785d77f83cb0316ddd77f2129567cf3d954d1ff98e607996",
+      "archive_sha256": "d9960ed5efb8581c9178879ebb997b4ba56e00202bafe84b4fac357396bbe3c7",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed-resources.log",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed-resources.log.gz",
+      "original_bytes": 94465,
+      "archive_bytes": 2617,
+      "original_sha256": "5ae227697c504a83d68ad378e6be23902e501442b8846b8ae1f0d3a71e952ca9",
+      "archive_sha256": "a336d2f4b9adfcd262737fb89dda404819fd5043b5b1185fb33718af0140ccbc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_bytes": 5869,
+      "archive_bytes": 1406,
+      "original_sha256": "e108b564b43eef6589ba570d1ed99259a1525af7e092938d92a0351697b2cc74",
+      "archive_sha256": "218dc0525e73b306aef4093886504c048d5b1b585fca84b9e5e49efd7dc4b55f",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_bytes": 7311,
+      "archive_bytes": 1482,
+      "original_sha256": "cb69e20c8e4eda725c76bd47cb46ea9f7404579098c1d359a9ad853f3385c8ec",
+      "archive_sha256": "8ac517c042e1c3808dc0a620cbbdc69d3ed8714ca7da67696a85df3155a1e281",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-002-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-002-closed.json.gz",
+      "original_bytes": 7306,
+      "archive_bytes": 1478,
+      "original_sha256": "a7b6bc5f5b7b8caccb2f811d70e8e6d08ce59064bd2abf1f23227daa974f02aa",
+      "archive_sha256": "021ba70d85301b17dd47cfea877b2ca9ee555d98e4f1796af54254a4cca32004",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_bytes": 7311,
+      "archive_bytes": 1481,
+      "original_sha256": "23a8e86a5ccdc003f5061bdf3cdcb3dc4f9db9403fefb4575c21d7a330a7bdb6",
+      "archive_sha256": "5dab0b2681d95094ba27647786ea64223f6e1eb849d9d0408530cacba412db98",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/guard-refinements.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/guard-refinements.json.gz",
+      "original_bytes": 1676,
+      "archive_bytes": 327,
+      "original_sha256": "1f5c9efb2d24dcc27cc5c35d2a5bca0426f314fb9a75d486b121d49e04a4f4a8",
+      "archive_sha256": "77a28b7d532f724b61393b82e04ad324ec6f6397fd22ff6b08c9a2c44eff7e96",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_bytes": 6559,
+      "archive_bytes": 1443,
+      "original_sha256": "41c16092d69d383f3da4545af3f63f3e1a5e4d4b370c863793d2f2d5ba0294bc",
+      "archive_sha256": "391f98b9ab2e138008aa4d4767a9251067f528fd1d102aba77aea50a682e8bae",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "original_bytes": 8341,
+      "archive_bytes": 1515,
+      "original_sha256": "dc6a5a559948b647715bd3f13411efc9a7757a7ae45750adbd396ac5774f5a4f",
+      "archive_sha256": "25eaae4b638fa795c4e2052f75f81c0bebb39b6fd1af7fab1d0ebfd60d5d1f9f",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-002-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-002-closed.json.gz",
+      "original_bytes": 8803,
+      "archive_bytes": 1537,
+      "original_sha256": "3bbc694722e124b9ccadc862b2ffd802f79f6e03bb943ca1f8787125a1af9733",
+      "archive_sha256": "6f78603850eaf48b09ebd703044df591099d94a0404648c47355aff21f1ca7cc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "original_bytes": 8808,
+      "archive_bytes": 1539,
+      "original_sha256": "3ce3231fb23bf3fd7e59b2a27bb049532285c37c785df150422bc26c6af61b38",
+      "archive_sha256": "134ea6d8d2feaf2b47776043faf39be3ef86c77b64d50ae8fdca3686bb8aa252",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_bytes": 5177,
+      "archive_bytes": 1375,
+      "original_sha256": "3f2a3c0e14cdc0ebfecadb229a0f17b445e871b51d726969f0ab4d41ee13b751",
+      "archive_sha256": "58b7b7243f7bce25f51f42a6852af2c4fa2e9f22487643b9ef2f6761ab61b2ad",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_bytes": 6013,
+      "archive_bytes": 1420,
+      "original_sha256": "5b7fd4ca12019344e7fc4ac8cb905fb1d54b95aae707b81f70a1d2f50d98fe5a",
+      "archive_sha256": "23b9dbf257345e92415676a16f342682282774867a98963f8c7958db4c724a6b",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-002-provisional.json.gz",
+      "original_bytes": 6621,
+      "archive_bytes": 1452,
+      "original_sha256": "36f91b0d9ccb57ff70d6aef0b7e3b8fe6ae7b7ed367f37b8e54d3e2581ed090b",
+      "archive_sha256": "c662d03bd8ef3411e98d242aeaeb154472a861a700af2e09dcb31673ba873626",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-003-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-003-closed.json.gz",
+      "original_bytes": 6616,
+      "archive_bytes": 1455,
+      "original_sha256": "82232409c19f88002e245fc494256682d1ce54078f0fc94f248658cdd1b19eeb",
+      "archive_sha256": "4b57da838fa19af1c77c4da9578947d8b5485850899692e40c35265b2805cb63",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-003-provisional.json.gz",
+      "original_bytes": 6621,
+      "archive_bytes": 1457,
+      "original_sha256": "ee62a6f7bb8ad2cf785d77f83cb0316ddd77f2129567cf3d954d1ff98e607996",
+      "archive_sha256": "d9960ed5efb8581c9178879ebb997b4ba56e00202bafe84b4fac357396bbe3c7",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4-resources.log",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4-resources.log.gz",
+      "original_bytes": 94465,
+      "archive_bytes": 2596,
+      "original_sha256": "329079229a3c23cd5caefdd3b2125e1245c92113382003c00da22fb74422bb39",
+      "archive_sha256": "5c01ecccae21ebc557f39f9d4394d5a939344e3fae976b6cb5264e99569d34d8",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_bytes": 5869,
+      "archive_bytes": 1406,
+      "original_sha256": "e108b564b43eef6589ba570d1ed99259a1525af7e092938d92a0351697b2cc74",
+      "archive_sha256": "218dc0525e73b306aef4093886504c048d5b1b585fca84b9e5e49efd7dc4b55f",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_bytes": 7311,
+      "archive_bytes": 1482,
+      "original_sha256": "cb69e20c8e4eda725c76bd47cb46ea9f7404579098c1d359a9ad853f3385c8ec",
+      "archive_sha256": "8ac517c042e1c3808dc0a620cbbdc69d3ed8714ca7da67696a85df3155a1e281",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-002-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-002-closed.json.gz",
+      "original_bytes": 7306,
+      "archive_bytes": 1478,
+      "original_sha256": "a7b6bc5f5b7b8caccb2f811d70e8e6d08ce59064bd2abf1f23227daa974f02aa",
+      "archive_sha256": "021ba70d85301b17dd47cfea877b2ca9ee555d98e4f1796af54254a4cca32004",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_bytes": 7311,
+      "archive_bytes": 1481,
+      "original_sha256": "23a8e86a5ccdc003f5061bdf3cdcb3dc4f9db9403fefb4575c21d7a330a7bdb6",
+      "archive_sha256": "5dab0b2681d95094ba27647786ea64223f6e1eb849d9d0408530cacba412db98",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/guard-refinements.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/guard-refinements.json.gz",
+      "original_bytes": 1676,
+      "archive_bytes": 327,
+      "original_sha256": "1f5c9efb2d24dcc27cc5c35d2a5bca0426f314fb9a75d486b121d49e04a4f4a8",
+      "archive_sha256": "77a28b7d532f724b61393b82e04ad324ec6f6397fd22ff6b08c9a2c44eff7e96",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_bytes": 6559,
+      "archive_bytes": 1443,
+      "original_sha256": "41c16092d69d383f3da4545af3f63f3e1a5e4d4b370c863793d2f2d5ba0294bc",
+      "archive_sha256": "391f98b9ab2e138008aa4d4767a9251067f528fd1d102aba77aea50a682e8bae",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "original_bytes": 8341,
+      "archive_bytes": 1515,
+      "original_sha256": "dc6a5a559948b647715bd3f13411efc9a7757a7ae45750adbd396ac5774f5a4f",
+      "archive_sha256": "25eaae4b638fa795c4e2052f75f81c0bebb39b6fd1af7fab1d0ebfd60d5d1f9f",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-002-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-002-closed.json.gz",
+      "original_bytes": 8803,
+      "archive_bytes": 1537,
+      "original_sha256": "3bbc694722e124b9ccadc862b2ffd802f79f6e03bb943ca1f8787125a1af9733",
+      "archive_sha256": "6f78603850eaf48b09ebd703044df591099d94a0404648c47355aff21f1ca7cc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "original_bytes": 8808,
+      "archive_bytes": 1539,
+      "original_sha256": "3ce3231fb23bf3fd7e59b2a27bb049532285c37c785df150422bc26c6af61b38",
+      "archive_sha256": "134ea6d8d2feaf2b47776043faf39be3ef86c77b64d50ae8fdca3686bb8aa252",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_bytes": 5177,
+      "archive_bytes": 1375,
+      "original_sha256": "3f2a3c0e14cdc0ebfecadb229a0f17b445e871b51d726969f0ab4d41ee13b751",
+      "archive_sha256": "58b7b7243f7bce25f51f42a6852af2c4fa2e9f22487643b9ef2f6761ab61b2ad",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_bytes": 6013,
+      "archive_bytes": 1420,
+      "original_sha256": "5b7fd4ca12019344e7fc4ac8cb905fb1d54b95aae707b81f70a1d2f50d98fe5a",
+      "archive_sha256": "23b9dbf257345e92415676a16f342682282774867a98963f8c7958db4c724a6b",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-002-provisional.json.gz",
+      "original_bytes": 6621,
+      "archive_bytes": 1452,
+      "original_sha256": "36f91b0d9ccb57ff70d6aef0b7e3b8fe6ae7b7ed367f37b8e54d3e2581ed090b",
+      "archive_sha256": "c662d03bd8ef3411e98d242aeaeb154472a861a700af2e09dcb31673ba873626",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-003-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-003-closed.json.gz",
+      "original_bytes": 6616,
+      "archive_bytes": 1455,
+      "original_sha256": "82232409c19f88002e245fc494256682d1ce54078f0fc94f248658cdd1b19eeb",
+      "archive_sha256": "4b57da838fa19af1c77c4da9578947d8b5485850899692e40c35265b2805cb63",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-003-provisional.json.gz",
+      "original_bytes": 6621,
+      "archive_bytes": 1457,
+      "original_sha256": "ee62a6f7bb8ad2cf785d77f83cb0316ddd77f2129567cf3d954d1ff98e607996",
+      "archive_sha256": "d9960ed5efb8581c9178879ebb997b4ba56e00202bafe84b4fac357396bbe3c7",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent-resources.log",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent-resources.log.gz",
+      "original_bytes": 4067001,
+      "archive_bytes": 32448,
+      "original_sha256": "b0e08e54261111f0b68e4a287f379994dd8d2bb8074bf0f3b5a4de8311e41705",
+      "archive_sha256": "da115d8697b43087ab9c8f9b7e02c3b3abe7e6ab1a43ace260de874ee8111bb4",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_bytes": 5869,
+      "archive_bytes": 1406,
+      "original_sha256": "e108b564b43eef6589ba570d1ed99259a1525af7e092938d92a0351697b2cc74",
+      "archive_sha256": "218dc0525e73b306aef4093886504c048d5b1b585fca84b9e5e49efd7dc4b55f",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_bytes": 7311,
+      "archive_bytes": 1482,
+      "original_sha256": "cb69e20c8e4eda725c76bd47cb46ea9f7404579098c1d359a9ad853f3385c8ec",
+      "archive_sha256": "8ac517c042e1c3808dc0a620cbbdc69d3ed8714ca7da67696a85df3155a1e281",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-002-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-002-closed.json.gz",
+      "original_bytes": 7306,
+      "archive_bytes": 1478,
+      "original_sha256": "a7b6bc5f5b7b8caccb2f811d70e8e6d08ce59064bd2abf1f23227daa974f02aa",
+      "archive_sha256": "021ba70d85301b17dd47cfea877b2ca9ee555d98e4f1796af54254a4cca32004",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_bytes": 7311,
+      "archive_bytes": 1481,
+      "original_sha256": "23a8e86a5ccdc003f5061bdf3cdcb3dc4f9db9403fefb4575c21d7a330a7bdb6",
+      "archive_sha256": "5dab0b2681d95094ba27647786ea64223f6e1eb849d9d0408530cacba412db98",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/guard-refinements.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/guard-refinements.json.gz",
+      "original_bytes": 1676,
+      "archive_bytes": 327,
+      "original_sha256": "1f5c9efb2d24dcc27cc5c35d2a5bca0426f314fb9a75d486b121d49e04a4f4a8",
+      "archive_sha256": "77a28b7d532f724b61393b82e04ad324ec6f6397fd22ff6b08c9a2c44eff7e96",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_bytes": 6559,
+      "archive_bytes": 1443,
+      "original_sha256": "41c16092d69d383f3da4545af3f63f3e1a5e4d4b370c863793d2f2d5ba0294bc",
+      "archive_sha256": "391f98b9ab2e138008aa4d4767a9251067f528fd1d102aba77aea50a682e8bae",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "original_bytes": 8341,
+      "archive_bytes": 1515,
+      "original_sha256": "dc6a5a559948b647715bd3f13411efc9a7757a7ae45750adbd396ac5774f5a4f",
+      "archive_sha256": "25eaae4b638fa795c4e2052f75f81c0bebb39b6fd1af7fab1d0ebfd60d5d1f9f",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-002-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-002-closed.json.gz",
+      "original_bytes": 8803,
+      "archive_bytes": 1537,
+      "original_sha256": "3bbc694722e124b9ccadc862b2ffd802f79f6e03bb943ca1f8787125a1af9733",
+      "archive_sha256": "6f78603850eaf48b09ebd703044df591099d94a0404648c47355aff21f1ca7cc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "original_bytes": 8808,
+      "archive_bytes": 1539,
+      "original_sha256": "3ce3231fb23bf3fd7e59b2a27bb049532285c37c785df150422bc26c6af61b38",
+      "archive_sha256": "134ea6d8d2feaf2b47776043faf39be3ef86c77b64d50ae8fdca3686bb8aa252",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_bytes": 5177,
+      "archive_bytes": 1375,
+      "original_sha256": "3f2a3c0e14cdc0ebfecadb229a0f17b445e871b51d726969f0ab4d41ee13b751",
+      "archive_sha256": "58b7b7243f7bce25f51f42a6852af2c4fa2e9f22487643b9ef2f6761ab61b2ad",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_bytes": 6013,
+      "archive_bytes": 1420,
+      "original_sha256": "5b7fd4ca12019344e7fc4ac8cb905fb1d54b95aae707b81f70a1d2f50d98fe5a",
+      "archive_sha256": "23b9dbf257345e92415676a16f342682282774867a98963f8c7958db4c724a6b",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-002-provisional.json.gz",
+      "original_bytes": 6621,
+      "archive_bytes": 1452,
+      "original_sha256": "36f91b0d9ccb57ff70d6aef0b7e3b8fe6ae7b7ed367f37b8e54d3e2581ed090b",
+      "archive_sha256": "c662d03bd8ef3411e98d242aeaeb154472a861a700af2e09dcb31673ba873626",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-003-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-003-closed.json.gz",
+      "original_bytes": 6616,
+      "archive_bytes": 1455,
+      "original_sha256": "82232409c19f88002e245fc494256682d1ce54078f0fc94f248658cdd1b19eeb",
+      "archive_sha256": "4b57da838fa19af1c77c4da9578947d8b5485850899692e40c35265b2805cb63",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-003-provisional.json.gz",
+      "original_bytes": 6621,
+      "archive_bytes": 1457,
+      "original_sha256": "ee62a6f7bb8ad2cf785d77f83cb0316ddd77f2129567cf3d954d1ff98e607996",
+      "archive_sha256": "d9960ed5efb8581c9178879ebb997b4ba56e00202bafe84b4fac357396bbe3c7",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7-resources.log",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7-resources.log.gz",
+      "original_bytes": 17692,
+      "archive_bytes": 1866,
+      "original_sha256": "eb544ae18161280fc3a3241c911a66179f9a4c947f2bad0d6603ea1abd019a1c",
+      "archive_sha256": "2261c171b78c3da89f090d7e4cba327fc684e85a17eb54e4229d707b9924cb20",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_bytes": 174497,
+      "archive_bytes": 25074,
+      "original_sha256": "4943c4db31b4d67225e8300251c179c74f5eb00523213d7739fa5265b0297739",
+      "archive_sha256": "ff60a73d7e39f4e29c48ccb3e60b8c82c19fce7ad06533c75c2cc13f57551ecc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_bytes": 352515,
+      "archive_bytes": 57357,
+      "original_sha256": "750f9ad35cd8b59c1f3e49fe1ab6de048053a157174ab45f549d1561c91d62bb",
+      "archive_sha256": "3bc8eca7bea98b8a3d04b26842f82ff2e7c9f72010177f215a7d0b69b45403ca",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-002-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-002-closed.bin.gz",
+      "original_bytes": 368853,
+      "archive_bytes": 60227,
+      "original_sha256": "1ce4b81fd08b7bc647f740a8c80472d45da72c0c110a5548301e8e83d9919bb4",
+      "archive_sha256": "1e4f7adb3a0755ad5ddb80d7faf1effd8d2dc7c5b54491f537ed6ed586d2311e",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_bytes": 368837,
+      "archive_bytes": 60212,
+      "original_sha256": "84404367bf0b231ae40d120bfd90c481b31660a82598f72a759ba1af000815f3",
+      "archive_sha256": "7a4b7e6740ecb60ae923c841dd60425967140e2c8b8082b0c517a53eeefe67c6",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_bytes": 259141,
+      "archive_bytes": 32092,
+      "original_sha256": "befc3ad60c3b5f12a67abfcdd6aba648530a1cfa859e3d11a54bd35d19655355",
+      "archive_sha256": "ee50fef9d6df03498e352238935267a40884d8e1ea7de4d914db0e3061653c55",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "original_bytes": 705279,
+      "archive_bytes": 99573,
+      "original_sha256": "3d69f5b077544ffde44adbaaa637da5b11d0444df41fdc3ee57c84cafa0f910b",
+      "archive_sha256": "2b41940dfb81079cf70190349e6136ee852d9c39c245cc24408f9a217f83ffe1",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-002-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-002-closed.bin.gz",
+      "original_bytes": 932417,
+      "archive_bytes": 134746,
+      "original_sha256": "a794b6276c333674e693160d441d6c21684301da8e025c05a49a7622aab74a91",
+      "archive_sha256": "c2f09bea63b9d59259d3ff2f9d50f601003d66410274c4e90afec54d32d14dd2",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "original_bytes": 932387,
+      "archive_bytes": 134733,
+      "original_sha256": "aaa41f306e4310205f52a28917ee6e8d90874366e1b0798004d8d11b08e7b8fa",
+      "archive_sha256": "9392e96d376d5f035d30a025694ac29a6996f488d4b84ce94f2f14a46bf9a65b",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_bytes": 113286,
+      "archive_bytes": 16155,
+      "original_sha256": "9b7942b30d797c90eb1bc639f62c422d1d56e31cf956a3a562f8918c9d9ce0bc",
+      "archive_sha256": "821593caca30f2fe6f63c6d6ae3715d836180a59d7caccac93a237815d013abc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_bytes": 238194,
+      "archive_bytes": 33502,
+      "original_sha256": "442b2771741b149909ac4c2c56f846967c76bd5bb27771d69e22fa084c93af2a",
+      "archive_sha256": "059c775ce37a91b9da2d6e1aab429305378bff01b444a8560f2a5ab98145b6bc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-002-provisional.bin.gz",
+      "original_bytes": 366681,
+      "archive_bytes": 55690,
+      "original_sha256": "81707c20560a06be24a5bf5b561b37637f7a456907b62994df79321160c53e7e",
+      "archive_sha256": "510392f69158fd3ea4b853bb0f5f15d4f9125281baccf3fea76da6171d224ada",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-003-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-003-closed.bin.gz",
+      "original_bytes": 383376,
+      "archive_bytes": 58858,
+      "original_sha256": "b011091b6e9bc9c41e59887498895edafbf3056445f58c68c3b66778a45c0ed7",
+      "archive_sha256": "7875bfb0e6d5f61ea4ea5cf950f46bf76745c0518d0a5e669b82e8affa41ac54",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/native-closure/cut-1/round-003-provisional.bin.gz",
+      "original_bytes": 383360,
+      "archive_bytes": 58845,
+      "original_sha256": "62cf525e86066e0b5097f3ba4c518a75f0e754671588d82d056b59f396d16a7a",
+      "archive_sha256": "82d0a39aec8db4b18e8f92b928661f88a3060ebc2c1a4d00f2ba1bed7640f56a",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_bytes": 174497,
+      "archive_bytes": 25074,
+      "original_sha256": "4943c4db31b4d67225e8300251c179c74f5eb00523213d7739fa5265b0297739",
+      "archive_sha256": "ff60a73d7e39f4e29c48ccb3e60b8c82c19fce7ad06533c75c2cc13f57551ecc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_bytes": 352515,
+      "archive_bytes": 57357,
+      "original_sha256": "750f9ad35cd8b59c1f3e49fe1ab6de048053a157174ab45f549d1561c91d62bb",
+      "archive_sha256": "3bc8eca7bea98b8a3d04b26842f82ff2e7c9f72010177f215a7d0b69b45403ca",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-002-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-002-closed.bin.gz",
+      "original_bytes": 368853,
+      "archive_bytes": 60227,
+      "original_sha256": "1ce4b81fd08b7bc647f740a8c80472d45da72c0c110a5548301e8e83d9919bb4",
+      "archive_sha256": "1e4f7adb3a0755ad5ddb80d7faf1effd8d2dc7c5b54491f537ed6ed586d2311e",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_bytes": 368837,
+      "archive_bytes": 60212,
+      "original_sha256": "84404367bf0b231ae40d120bfd90c481b31660a82598f72a759ba1af000815f3",
+      "archive_sha256": "7a4b7e6740ecb60ae923c841dd60425967140e2c8b8082b0c517a53eeefe67c6",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_bytes": 259141,
+      "archive_bytes": 32092,
+      "original_sha256": "befc3ad60c3b5f12a67abfcdd6aba648530a1cfa859e3d11a54bd35d19655355",
+      "archive_sha256": "ee50fef9d6df03498e352238935267a40884d8e1ea7de4d914db0e3061653c55",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "original_bytes": 705279,
+      "archive_bytes": 99573,
+      "original_sha256": "3d69f5b077544ffde44adbaaa637da5b11d0444df41fdc3ee57c84cafa0f910b",
+      "archive_sha256": "2b41940dfb81079cf70190349e6136ee852d9c39c245cc24408f9a217f83ffe1",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-002-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-002-closed.bin.gz",
+      "original_bytes": 932417,
+      "archive_bytes": 134746,
+      "original_sha256": "a794b6276c333674e693160d441d6c21684301da8e025c05a49a7622aab74a91",
+      "archive_sha256": "c2f09bea63b9d59259d3ff2f9d50f601003d66410274c4e90afec54d32d14dd2",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "original_bytes": 932387,
+      "archive_bytes": 134733,
+      "original_sha256": "aaa41f306e4310205f52a28917ee6e8d90874366e1b0798004d8d11b08e7b8fa",
+      "archive_sha256": "9392e96d376d5f035d30a025694ac29a6996f488d4b84ce94f2f14a46bf9a65b",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_bytes": 113286,
+      "archive_bytes": 16155,
+      "original_sha256": "9b7942b30d797c90eb1bc639f62c422d1d56e31cf956a3a562f8918c9d9ce0bc",
+      "archive_sha256": "821593caca30f2fe6f63c6d6ae3715d836180a59d7caccac93a237815d013abc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_bytes": 238194,
+      "archive_bytes": 33502,
+      "original_sha256": "442b2771741b149909ac4c2c56f846967c76bd5bb27771d69e22fa084c93af2a",
+      "archive_sha256": "059c775ce37a91b9da2d6e1aab429305378bff01b444a8560f2a5ab98145b6bc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-002-provisional.bin.gz",
+      "original_bytes": 366681,
+      "archive_bytes": 55690,
+      "original_sha256": "81707c20560a06be24a5bf5b561b37637f7a456907b62994df79321160c53e7e",
+      "archive_sha256": "510392f69158fd3ea4b853bb0f5f15d4f9125281baccf3fea76da6171d224ada",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-003-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-003-closed.bin.gz",
+      "original_bytes": 383376,
+      "archive_bytes": 58858,
+      "original_sha256": "b011091b6e9bc9c41e59887498895edafbf3056445f58c68c3b66778a45c0ed7",
+      "archive_sha256": "7875bfb0e6d5f61ea4ea5cf950f46bf76745c0518d0a5e669b82e8affa41ac54",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d15over4/native-closure/cut-1/round-003-provisional.bin.gz",
+      "original_bytes": 383360,
+      "archive_bytes": 58845,
+      "original_sha256": "62cf525e86066e0b5097f3ba4c518a75f0e754671588d82d056b59f396d16a7a",
+      "archive_sha256": "82d0a39aec8db4b18e8f92b928661f88a3060ebc2c1a4d00f2ba1bed7640f56a",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_bytes": 174497,
+      "archive_bytes": 25074,
+      "original_sha256": "4943c4db31b4d67225e8300251c179c74f5eb00523213d7739fa5265b0297739",
+      "archive_sha256": "ff60a73d7e39f4e29c48ccb3e60b8c82c19fce7ad06533c75c2cc13f57551ecc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_bytes": 352515,
+      "archive_bytes": 57357,
+      "original_sha256": "750f9ad35cd8b59c1f3e49fe1ab6de048053a157174ab45f549d1561c91d62bb",
+      "archive_sha256": "3bc8eca7bea98b8a3d04b26842f82ff2e7c9f72010177f215a7d0b69b45403ca",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-002-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-002-closed.bin.gz",
+      "original_bytes": 368853,
+      "archive_bytes": 60227,
+      "original_sha256": "1ce4b81fd08b7bc647f740a8c80472d45da72c0c110a5548301e8e83d9919bb4",
+      "archive_sha256": "1e4f7adb3a0755ad5ddb80d7faf1effd8d2dc7c5b54491f537ed6ed586d2311e",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_bytes": 368837,
+      "archive_bytes": 60212,
+      "original_sha256": "84404367bf0b231ae40d120bfd90c481b31660a82598f72a759ba1af000815f3",
+      "archive_sha256": "7a4b7e6740ecb60ae923c841dd60425967140e2c8b8082b0c517a53eeefe67c6",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_bytes": 259141,
+      "archive_bytes": 32092,
+      "original_sha256": "befc3ad60c3b5f12a67abfcdd6aba648530a1cfa859e3d11a54bd35d19655355",
+      "archive_sha256": "ee50fef9d6df03498e352238935267a40884d8e1ea7de4d914db0e3061653c55",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "original_bytes": 705279,
+      "archive_bytes": 99573,
+      "original_sha256": "3d69f5b077544ffde44adbaaa637da5b11d0444df41fdc3ee57c84cafa0f910b",
+      "archive_sha256": "2b41940dfb81079cf70190349e6136ee852d9c39c245cc24408f9a217f83ffe1",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-002-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-002-closed.bin.gz",
+      "original_bytes": 932417,
+      "archive_bytes": 134746,
+      "original_sha256": "a794b6276c333674e693160d441d6c21684301da8e025c05a49a7622aab74a91",
+      "archive_sha256": "c2f09bea63b9d59259d3ff2f9d50f601003d66410274c4e90afec54d32d14dd2",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "original_bytes": 932387,
+      "archive_bytes": 134733,
+      "original_sha256": "aaa41f306e4310205f52a28917ee6e8d90874366e1b0798004d8d11b08e7b8fa",
+      "archive_sha256": "9392e96d376d5f035d30a025694ac29a6996f488d4b84ce94f2f14a46bf9a65b",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_bytes": 113286,
+      "archive_bytes": 16155,
+      "original_sha256": "9b7942b30d797c90eb1bc639f62c422d1d56e31cf956a3a562f8918c9d9ce0bc",
+      "archive_sha256": "821593caca30f2fe6f63c6d6ae3715d836180a59d7caccac93a237815d013abc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_bytes": 238194,
+      "archive_bytes": 33502,
+      "original_sha256": "442b2771741b149909ac4c2c56f846967c76bd5bb27771d69e22fa084c93af2a",
+      "archive_sha256": "059c775ce37a91b9da2d6e1aab429305378bff01b444a8560f2a5ab98145b6bc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-002-provisional.bin.gz",
+      "original_bytes": 366681,
+      "archive_bytes": 55690,
+      "original_sha256": "81707c20560a06be24a5bf5b561b37637f7a456907b62994df79321160c53e7e",
+      "archive_sha256": "510392f69158fd3ea4b853bb0f5f15d4f9125281baccf3fea76da6171d224ada",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-003-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-003-closed.bin.gz",
+      "original_bytes": 383376,
+      "archive_bytes": 58858,
+      "original_sha256": "b011091b6e9bc9c41e59887498895edafbf3056445f58c68c3b66778a45c0ed7",
+      "archive_sha256": "7875bfb0e6d5f61ea4ea5cf950f46bf76745c0518d0a5e669b82e8affa41ac54",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-laurent/native-closure/cut-1/round-003-provisional.bin.gz",
+      "original_bytes": 383360,
+      "archive_bytes": 58845,
+      "original_sha256": "62cf525e86066e0b5097f3ba4c518a75f0e754671588d82d056b59f396d16a7a",
+      "archive_sha256": "82d0a39aec8db4b18e8f92b928661f88a3060ebc2c1a4d00f2ba1bed7640f56a",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_bytes": 174497,
+      "archive_bytes": 25074,
+      "original_sha256": "4943c4db31b4d67225e8300251c179c74f5eb00523213d7739fa5265b0297739",
+      "archive_sha256": "ff60a73d7e39f4e29c48ccb3e60b8c82c19fce7ad06533c75c2cc13f57551ecc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_bytes": 352515,
+      "archive_bytes": 57357,
+      "original_sha256": "750f9ad35cd8b59c1f3e49fe1ab6de048053a157174ab45f549d1561c91d62bb",
+      "archive_sha256": "3bc8eca7bea98b8a3d04b26842f82ff2e7c9f72010177f215a7d0b69b45403ca",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-002-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-002-closed.bin.gz",
+      "original_bytes": 368853,
+      "archive_bytes": 60227,
+      "original_sha256": "1ce4b81fd08b7bc647f740a8c80472d45da72c0c110a5548301e8e83d9919bb4",
+      "archive_sha256": "1e4f7adb3a0755ad5ddb80d7faf1effd8d2dc7c5b54491f537ed6ed586d2311e",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_bytes": 368837,
+      "archive_bytes": 60212,
+      "original_sha256": "84404367bf0b231ae40d120bfd90c481b31660a82598f72a759ba1af000815f3",
+      "archive_sha256": "7a4b7e6740ecb60ae923c841dd60425967140e2c8b8082b0c517a53eeefe67c6",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_bytes": 259141,
+      "archive_bytes": 32092,
+      "original_sha256": "befc3ad60c3b5f12a67abfcdd6aba648530a1cfa859e3d11a54bd35d19655355",
+      "archive_sha256": "ee50fef9d6df03498e352238935267a40884d8e1ea7de4d914db0e3061653c55",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "original_bytes": 705279,
+      "archive_bytes": 99573,
+      "original_sha256": "3d69f5b077544ffde44adbaaa637da5b11d0444df41fdc3ee57c84cafa0f910b",
+      "archive_sha256": "2b41940dfb81079cf70190349e6136ee852d9c39c245cc24408f9a217f83ffe1",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-002-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-002-closed.bin.gz",
+      "original_bytes": 932417,
+      "archive_bytes": 134746,
+      "original_sha256": "a794b6276c333674e693160d441d6c21684301da8e025c05a49a7622aab74a91",
+      "archive_sha256": "c2f09bea63b9d59259d3ff2f9d50f601003d66410274c4e90afec54d32d14dd2",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "original_bytes": 932387,
+      "archive_bytes": 134733,
+      "original_sha256": "aaa41f306e4310205f52a28917ee6e8d90874366e1b0798004d8d11b08e7b8fa",
+      "archive_sha256": "9392e96d376d5f035d30a025694ac29a6996f488d4b84ce94f2f14a46bf9a65b",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_bytes": 113286,
+      "archive_bytes": 16155,
+      "original_sha256": "9b7942b30d797c90eb1bc639f62c422d1d56e31cf956a3a562f8918c9d9ce0bc",
+      "archive_sha256": "821593caca30f2fe6f63c6d6ae3715d836180a59d7caccac93a237815d013abc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_bytes": 238194,
+      "archive_bytes": 33502,
+      "original_sha256": "442b2771741b149909ac4c2c56f846967c76bd5bb27771d69e22fa084c93af2a",
+      "archive_sha256": "059c775ce37a91b9da2d6e1aab429305378bff01b444a8560f2a5ab98145b6bc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-002-provisional.bin.gz",
+      "original_bytes": 366681,
+      "archive_bytes": 55690,
+      "original_sha256": "81707c20560a06be24a5bf5b561b37637f7a456907b62994df79321160c53e7e",
+      "archive_sha256": "510392f69158fd3ea4b853bb0f5f15d4f9125281baccf3fea76da6171d224ada",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-003-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-003-closed.bin.gz",
+      "original_bytes": 383376,
+      "archive_bytes": 58858,
+      "original_sha256": "b011091b6e9bc9c41e59887498895edafbf3056445f58c68c3b66778a45c0ed7",
+      "archive_sha256": "7875bfb0e6d5f61ea4ea5cf950f46bf76745c0518d0a5e669b82e8affa41ac54",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-d7/native-closure/cut-1/round-003-provisional.bin.gz",
+      "original_bytes": 383360,
+      "archive_bytes": 58845,
+      "original_sha256": "62cf525e86066e0b5097f3ba4c518a75f0e754671588d82d056b59f396d16a7a",
+      "archive_sha256": "82d0a39aec8db4b18e8f92b928661f88a3060ebc2c1a4d00f2ba1bed7640f56a",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_bytes": 174497,
+      "archive_bytes": 25079,
+      "original_sha256": "88b371904bcaac4a26cd8b16b917eb77fdf77c87e6cc5447873d323ae3f0b217",
+      "archive_sha256": "0794ac5fff7b111c05a00fccb27c45bf971860abdd07386492312e4511c8d5f6",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_bytes": 5869,
+      "archive_bytes": 1406,
+      "original_sha256": "e108b564b43eef6589ba570d1ed99259a1525af7e092938d92a0351697b2cc74",
+      "archive_sha256": "218dc0525e73b306aef4093886504c048d5b1b585fca84b9e5e49efd7dc4b55f",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_bytes": 352515,
+      "archive_bytes": 57364,
+      "original_sha256": "51d4a978004a99a5f763d376d14fbe6e2c0ee6469e3ba88905f3d8ec6109f6bf",
+      "archive_sha256": "71574d2677e4eecc91ce143ff553ef3dae2c27596e0ffd0a188f5d39b6219976",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_bytes": 7311,
+      "archive_bytes": 1482,
+      "original_sha256": "cb69e20c8e4eda725c76bd47cb46ea9f7404579098c1d359a9ad853f3385c8ec",
+      "archive_sha256": "8ac517c042e1c3808dc0a620cbbdc69d3ed8714ca7da67696a85df3155a1e281",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-002-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-002-closed.bin.gz",
+      "original_bytes": 368853,
+      "archive_bytes": 60230,
+      "original_sha256": "3e0420414ee454cb559fbd9e96dc3a4a5b589b1fd27105dccc90e0e381834b7d",
+      "archive_sha256": "fd0c7ed4153f9db064cddc3f336f5b87191c761700a579390807e4951b24b1d3",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-002-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-002-closed.json.gz",
+      "original_bytes": 7306,
+      "archive_bytes": 1478,
+      "original_sha256": "a7b6bc5f5b7b8caccb2f811d70e8e6d08ce59064bd2abf1f23227daa974f02aa",
+      "archive_sha256": "021ba70d85301b17dd47cfea877b2ca9ee555d98e4f1796af54254a4cca32004",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_bytes": 368837,
+      "archive_bytes": 60216,
+      "original_sha256": "b947589ea5101bcacf34a4faae7e1a0a6838404e1bbac173b250beec7c8df8fe",
+      "archive_sha256": "86248a186d33478c15d3af17e90bde4a006b06d26d7cff4495bb5a9bce5d0b7c",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_bytes": 7311,
+      "archive_bytes": 1481,
+      "original_sha256": "23a8e86a5ccdc003f5061bdf3cdcb3dc4f9db9403fefb4575c21d7a330a7bdb6",
+      "archive_sha256": "5dab0b2681d95094ba27647786ea64223f6e1eb849d9d0408530cacba412db98",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/guard-refinements.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/guard-refinements.json.gz",
+      "original_bytes": 1676,
+      "archive_bytes": 327,
+      "original_sha256": "1f5c9efb2d24dcc27cc5c35d2a5bca0426f314fb9a75d486b121d49e04a4f4a8",
+      "archive_sha256": "77a28b7d532f724b61393b82e04ad324ec6f6397fd22ff6b08c9a2c44eff7e96",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_bytes": 259141,
+      "archive_bytes": 32104,
+      "original_sha256": "f0443b8d671a244626024929d1c118cf04f07e912baff3b949eae6e8e2d5dfea",
+      "archive_sha256": "cdfdbf8fc1949d04be2f2a0cdd30966ff687cda5d4fdfff32cc640812b3c0cd4",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_bytes": 6559,
+      "archive_bytes": 1443,
+      "original_sha256": "41c16092d69d383f3da4545af3f63f3e1a5e4d4b370c863793d2f2d5ba0294bc",
+      "archive_sha256": "391f98b9ab2e138008aa4d4767a9251067f528fd1d102aba77aea50a682e8bae",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "original_bytes": 705279,
+      "archive_bytes": 99579,
+      "original_sha256": "55c1f56b92dff49885717fa88667378e4db0c0abda2963be1e9f11479da0bc9a",
+      "archive_sha256": "190d1807f2624f29d0bc8fbb1ff51b9204b44517625b251873c0133c6fb87d41",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "original_bytes": 8341,
+      "archive_bytes": 1515,
+      "original_sha256": "dc6a5a559948b647715bd3f13411efc9a7757a7ae45750adbd396ac5774f5a4f",
+      "archive_sha256": "25eaae4b638fa795c4e2052f75f81c0bebb39b6fd1af7fab1d0ebfd60d5d1f9f",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-002-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-002-closed.bin.gz",
+      "original_bytes": 932417,
+      "archive_bytes": 134755,
+      "original_sha256": "74de143a4f2452621a04a8f9dd835c09aa10460a94899cabd4d554aaf9b3e52a",
+      "archive_sha256": "ddbde56667f11d5231e1fd3b66ffd9f90036dedaba1642cb2e4039fd06fb42f6",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-002-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-002-closed.json.gz",
+      "original_bytes": 8803,
+      "archive_bytes": 1537,
+      "original_sha256": "3bbc694722e124b9ccadc862b2ffd802f79f6e03bb943ca1f8787125a1af9733",
+      "archive_sha256": "6f78603850eaf48b09ebd703044df591099d94a0404648c47355aff21f1ca7cc",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "original_bytes": 932387,
+      "archive_bytes": 134742,
+      "original_sha256": "3c0501825f9638c771fa5e0a695ab5991f1e75ca35731ed75423d19ca577749e",
+      "archive_sha256": "229682f775f6d341d4c58b042af475074e5d6139371cbf5ff87415ca685f4eea",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "original_bytes": 8808,
+      "archive_bytes": 1539,
+      "original_sha256": "3ce3231fb23bf3fd7e59b2a27bb049532285c37c785df150422bc26c6af61b38",
+      "archive_sha256": "134ea6d8d2feaf2b47776043faf39be3ef86c77b64d50ae8fdca3686bb8aa252",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_bytes": 113286,
+      "archive_bytes": 16161,
+      "original_sha256": "061b6a39dd3650447190fef8aa7e4ce3bb7eff74f3431179bf0752bbcc8d45cd",
+      "archive_sha256": "ac2730dc4d78b0e7d8d6e583923a145cc3630315f9f96f3f7de24f9e5d92f789",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_bytes": 5177,
+      "archive_bytes": 1375,
+      "original_sha256": "3f2a3c0e14cdc0ebfecadb229a0f17b445e871b51d726969f0ab4d41ee13b751",
+      "archive_sha256": "58b7b7243f7bce25f51f42a6852af2c4fa2e9f22487643b9ef2f6761ab61b2ad",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_bytes": 238194,
+      "archive_bytes": 33509,
+      "original_sha256": "f41267eb216e3f5971187d2abac10318f177a36d21ff80fb71205275fde1af4f",
+      "archive_sha256": "c5944979d0645289f97fd681c3480fe34dd41ccb0734ef34611ed8de0b6373b7",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_bytes": 6013,
+      "archive_bytes": 1420,
+      "original_sha256": "5b7fd4ca12019344e7fc4ac8cb905fb1d54b95aae707b81f70a1d2f50d98fe5a",
+      "archive_sha256": "23b9dbf257345e92415676a16f342682282774867a98963f8c7958db4c724a6b",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-002-provisional.bin.gz",
+      "original_bytes": 366681,
+      "archive_bytes": 55696,
+      "original_sha256": "dfba49d25431750336c41d4b12d6487c964e11022db0ce7bd93c7b25b2f42d78",
+      "archive_sha256": "cd6fbea9f3a8e16b1ef0752498d9e3ec8085ab0c3939430c92eb06f54e98fd28",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-002-provisional.json.gz",
+      "original_bytes": 6621,
+      "archive_bytes": 1452,
+      "original_sha256": "36f91b0d9ccb57ff70d6aef0b7e3b8fe6ae7b7ed367f37b8e54d3e2581ed090b",
+      "archive_sha256": "c662d03bd8ef3411e98d242aeaeb154472a861a700af2e09dcb31673ba873626",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-003-closed.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-003-closed.bin.gz",
+      "original_bytes": 383376,
+      "archive_bytes": 58863,
+      "original_sha256": "880e2a5d061d7477d120601b9c779cadfbab83ed8e19178967b793dcbba3d943",
+      "archive_sha256": "9675f4b5cd4e1486acdddf930f3a2b00141a0518b90ff3207e67b1b4e70d8163",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-003-closed.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-003-closed.json.gz",
+      "original_bytes": 6616,
+      "archive_bytes": 1455,
+      "original_sha256": "82232409c19f88002e245fc494256682d1ce54078f0fc94f248658cdd1b19eeb",
+      "archive_sha256": "4b57da838fa19af1c77c4da9578947d8b5485850899692e40c35265b2805cb63",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-003-provisional.bin",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-003-provisional.bin.gz",
+      "original_bytes": 383360,
+      "archive_bytes": 58852,
+      "original_sha256": "51a066b2a2b9fafe7815b65ece71ae5fe26ccdcb7fae95799271405142533f91",
+      "archive_sha256": "7ddb0653fe56227202f8aadf57f3eb0b623bb6a259adc6856ac466afcd827138",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-003-provisional.json",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/native-closure/cut-1/round-003-provisional.json.gz",
+      "original_bytes": 6621,
+      "archive_bytes": 1457,
+      "original_sha256": "ee62a6f7bb8ad2cf785d77f83cb0316ddd77f2129567cf3d954d1ff98e607996",
+      "archive_sha256": "d9960ed5efb8581c9178879ebb997b4ba56e00202bafe84b4fac357396bbe3c7",
+      "lossless_decompression_checked": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order-resources.log",
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order-resources.log.gz",
+      "original_bytes": 31171,
+      "archive_bytes": 1993,
+      "original_sha256": "c23663a0fb3bf80aa943a8bb150144a47bcdab9d1f9bf898bb04f2370dbc5abd",
+      "archive_sha256": "d3374b680745da7b1363dfa81cf78640a80da422ecdef3b15f2d34e653e0aa96",
+      "lossless_decompression_checked": true
+    }
+  ]
+}

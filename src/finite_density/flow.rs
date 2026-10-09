@@ -1,11 +1,13 @@
 //! Native occupied AMF: source discovery, integrated regions and shared transport.
 //! Numerical admission uses explicit common-contour certificates, independently
-//! of input names. Physical compact shell masses stay strictly positive.
+//! of input names. Massless shells need a separately bound endpoint and origin
+//! certificate; a positive auxiliary mass alone does not admit their limit.
 use super::PreparedDensityInput;
 use super::boundary::OccupiedBoundaryLimits;
 use super::flow_boundary::{OccupiedBoundaryProvenance, OccupiedFlowBoundary};
 use super::geometry::OccupiedCutFamily;
 use super::guarded::GuardedMeasureIdentity;
+use super::massless_endpoint::{MasslessFlowEvidence, MasslessLabelAudit};
 use super::normalization::native_measure_to_euclidean;
 use super::preparation::WeightedSourceOptions;
 use super::reduction::{
@@ -30,6 +32,8 @@ pub struct PreparedOccupiedFlow<const N: usize> {
     transport: ConnectionTransport,
     contour_admission: String,
     source_options: WeightedSourceOptions,
+    massless_evidence: Option<MasslessFlowEvidence>,
+    massless_label_audit: Option<MasslessLabelAudit>,
 }
 
 #[derive(Clone, Debug)]
@@ -46,6 +50,8 @@ pub struct OccupiedFlowEvaluation {
     pub native_storage_capacity: Option<usize>,
     /// None is reserved for constructions without a guarded source program.
     pub source_options: Option<WeightedSourceOptions>,
+    /// Finite-label proof domains, checked independently of native source replay.
+    pub massless_endpoint: Option<MasslessLabelAudit>,
 }
 
 pub(crate) fn validate_options(options: &FlowOptions) -> Result<()> {
@@ -150,9 +156,6 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
         validate_options(options)?;
         context.cancellation.check()?;
         let family = input.occupied_cut(cuts, 65536)?.at_physical_masses();
-        super::contour::positive_shells(&family)?;
-        let admission = positive_sunset_domain(input)
-            .or_else(|_| super::contour::heavy_edge_domain(input, &family))?;
         let epsilon = symbol!("rustflow_occupied::epsilon");
         let eta = symbol!("rustflow_occupied::eta");
         let shifted_slots = (0..family.physical_slots())
@@ -161,14 +164,55 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
         let shifted = (0..family.factors().len())
             .map(|i| shifted_slots.contains(&i))
             .collect::<Vec<_>>();
-        let sources = family.guarded_sources_with_options::<N>(epsilon,options.dimension,eta,&shifted_slots,65536,vec![],GuardedMeasureIdentity {
+        let massless_evidence = if input.physical_masses().iter().all(Atom::is_zero) {
+            Some(MasslessFlowEvidence::new(
+                input,
+                &family,
+                &shifted_slots,
+                source_options,
+            )?)
+        } else {
+            None
+        };
+        let admission = if let Some(evidence) = &massless_evidence {
+            evidence.source_identity()
+        } else {
+            super::contour::positive_shells(&family)?;
+            positive_sunset_domain(input)
+                .or_else(|_| super::contour::heavy_edge_domain(input, &family))?
+        };
+        let identity = GuardedMeasureIdentity {
             measure:format!("independent occupied Cn and Hn; input={}; factors={:?}",input.identity(),family.factors()),
             support:format!("real compact shell coordinates; {:?}",family.shells()),
             orientation:format!("future first {} loops; q=(-i PE0,-PEvec); inverse routing={:?}; determinant={}",cuts.len(),family.inverse_routing(),family.routing_determinant()),
             normalization:"virtual d^Dk/(i pi^(D/2)); occupied d^Dq/pi^(D/2); Euclidean target Wick phases already included".into(),
             branch:admission.clone(),
             deformation:format!("native Di-eta on {shifted_slots:?}; physical shells and upper/lower supports fixed; input indices and coefficients fixed"),
-        }, source_options)?;
+        };
+        let sources = if let Some(evidence) = &massless_evidence {
+            family.guarded_sources_with_massless_origin::<N>(
+                epsilon,
+                options.dimension,
+                eta,
+                &shifted_slots,
+                65536,
+                vec![],
+                identity,
+                source_options,
+                evidence,
+            )?
+        } else {
+            family.guarded_sources_with_options::<N>(
+                epsilon,
+                options.dimension,
+                eta,
+                &shifted_slots,
+                65536,
+                vec![],
+                identity,
+                source_options,
+            )?
+        };
         let closed = match prepare_weighted_system(
             &sources.context,
             &sources.targets,
@@ -193,6 +237,37 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
                 )));
             }
         };
+        // Closure establishes exact consequences of the physical sources. Its
+        // finite basis and every retained target/candidate label must also fit
+        // the independently justified massless continuation and origin domain.
+        let massless_label_audit = massless_evidence
+            .as_ref()
+            .map(|evidence| {
+                let labels = closed
+                    .reduced
+                    .basis
+                    .iter()
+                    .chain(
+                        closed
+                            .reduced
+                            .targets
+                            .iter()
+                            .flat_map(|target| target.keys()),
+                    )
+                    .chain(closed.reduced.candidates.keys())
+                    .chain(
+                        closed
+                            .reduced
+                            .candidates
+                            .values()
+                            .flat_map(|terms| terms.keys()),
+                    )
+                    .chain(family.targets().iter().flat_map(|target| target.keys()))
+                    .cloned()
+                    .collect::<std::collections::BTreeSet<_>>();
+                evidence.validate_labels(&family, &labels.into_iter().collect::<Vec<_>>())
+            })
+            .transpose()?;
         let system = closed.differential_system();
         Ok(Self {
             family,
@@ -204,6 +279,8 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             transport: ConnectionTransport::default(),
             contour_admission: admission,
             source_options,
+            massless_evidence,
+            massless_label_audit,
         })
     }
 
@@ -292,7 +369,7 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             bubble_subloops: false,
             ..Default::default()
         };
-        let boundary = OccupiedFlowBoundary::new(
+        let mut boundary = OccupiedFlowBoundary::new(
             &backend,
             options,
             context,
@@ -301,6 +378,9 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             OccupiedBoundaryLimits::default(),
         )?
         .with_positive_compact_energy_powers(self.source_options.positive_compact_energy_powers);
+        if let Some(evidence) = &self.massless_evidence {
+            boundary = boundary.with_massless_evidence(evidence)?;
+        }
         let mut boundary_provenance = OccupiedBoundaryProvenance::default();
         let values = self.transport.evaluate(
             ConnectionRequest {
@@ -358,6 +438,7 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             physical_arity: self.physical_arity(),
             native_storage_capacity: Some(N),
             source_options: Some(self.source_options),
+            massless_endpoint: self.massless_label_audit.clone(),
         })
     }
 }

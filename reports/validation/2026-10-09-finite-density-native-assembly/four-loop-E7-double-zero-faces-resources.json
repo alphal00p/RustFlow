@@ -1,0 +1,33 @@
+{
+  "command": [
+    "timeout",
+    "180s",
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+    "RUSTFLOW_WEIGHTED_CUTS=0,4",
+    "RUSTFLOW_WEIGHTED_CAPACITY=20",
+    "RUSTFLOW_WEIGHTED_ROUNDS=3",
+    "RUSTFLOW_WEIGHTED_DEPTH=3",
+    "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+    "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-zero-faces",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES=1",
+    "RUSTFLOW_WEIGHTED_FRONTIER=128",
+    "RUSTFLOW_WEIGHTED_REQUESTED=512",
+    "RUSTFLOW_WEIGHTED_FRONTIER_SECTORS=1",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY=legacy-lorentz",
+    "RUSTFLOW_WEIGHTED_POSITIVE_ENERGY_POWERS=0",
+    "RUSTFLOW_WEIGHTED_SOURCE_DOMAIN_BUDGET=65536",
+    "target/release/deps/finite_density_generic_closure-efa84383047ba390",
+    "--ignored",
+    "--exact",
+    "runtime_graph_native_closure",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 58.155472417362034,
+  "user_seconds": 57.420971,
+  "system_seconds": 0.20255599999999999,
+  "peak_child_rss_kib": 115216,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

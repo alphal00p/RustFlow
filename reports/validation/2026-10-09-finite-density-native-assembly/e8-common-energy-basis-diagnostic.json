@@ -1,0 +1,3485 @@
+{
+  "schema_version": 1,
+  "status": "exact_definition_checks_passed",
+  "scope": "local occupation-cell cancellation in the complete common energy-residue representation; no four-loop evaluation or contour admission",
+  "primary_reference": "https://arxiv.org/html/1609.04339v2#S3",
+  "input": "examples/finite_density/five_vertex_eight_edge.json",
+  "input_sha256": "8146dfc30f392748acb5cbb2d521944b043c058372daac53114c194b16265448",
+  "script_sha256": "8219aa59946049722ca6f577e03a6fc3be5047a8e0cad3ddd84a7b2b21e2968f",
+  "physical_basis_count": 40,
+  "energy_direction_checks": 160,
+  "charged_edges": [
+    0,
+    2,
+    4,
+    6,
+    7
+  ],
+  "neutral_edges": [
+    1,
+    3,
+    5
+  ],
+  "occupation_cell": "0<E_e<mu for all five charged edges, with a strict positive margin from each endpoint",
+  "cell_argument": "Each L=4 physical energy basis contains a charged edge because only three edges are neutral. Its complete-residue weight contains theta(E_e-mu), which vanishes throughout this open cell. The common energy-integrated sum therefore vanishes there. Raised original-mass differentiation preserves that local zero when performed before specialization, including all grouped terms.",
+  "one_energy_arc_checks": "Each original numerator divided by all simple-base denominators decays at least as the inverse square of every physical basis energy with the other basis energies fixed. The actual raised target has stronger denominator decay.",
+  "qualification": "This verifies a local consequence of the complete common energy representation and the absence of one-energy polynomial arc obstructions. It does not derive a general thermal distribution for separately evaluated cut amplitudes, establish overlapping endpoint continuation or compare uniform-Feynman and thermal full sums globally.",
+  "native_predictions_read": 0,
+  "oracle_records_read": 0,
+  "bases": [
+    {
+      "basis_edges": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "complementary_spanning_tree": [
+        4,
+        5,
+        6,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        2
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "complementary_spanning_tree": [
+        3,
+        5,
+        6,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        2,
+        4
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            3,
+            5,
+            6,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        1,
+        2,
+        5
+      ],
+      "complementary_spanning_tree": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        2
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            1,
+            3,
+            4,
+            6,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        1,
+        2,
+        6
+      ],
+      "complementary_spanning_tree": [
+        3,
+        4,
+        5,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        2,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        1,
+        3,
+        6
+      ],
+      "complementary_spanning_tree": [
+        2,
+        4,
+        5,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        1,
+        4,
+        6
+      ],
+      "complementary_spanning_tree": [
+        2,
+        3,
+        5,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        4,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            2,
+            3,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 3
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "-1",
+            "-1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        1,
+        5,
+        6
+      ],
+      "complementary_spanning_tree": [
+        2,
+        3,
+        4,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 3
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "-1",
+            "-1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        2,
+        3,
+        5
+      ],
+      "complementary_spanning_tree": [
+        1,
+        4,
+        6,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        2
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            1,
+            3,
+            4,
+            6,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        2,
+        3,
+        7
+      ],
+      "complementary_spanning_tree": [
+        1,
+        4,
+        5,
+        6
+      ],
+      "charged_basis_edges": [
+        0,
+        2,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        2,
+        4,
+        5
+      ],
+      "complementary_spanning_tree": [
+        1,
+        3,
+        6,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        2,
+        4
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            1,
+            3,
+            4,
+            6,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        2,
+        4,
+        7
+      ],
+      "complementary_spanning_tree": [
+        1,
+        3,
+        5,
+        6
+      ],
+      "charged_basis_edges": [
+        0,
+        2,
+        4,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        2,
+        5,
+        6
+      ],
+      "complementary_spanning_tree": [
+        1,
+        3,
+        4,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        2,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 3
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            1,
+            3,
+            4,
+            6,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        2,
+        5,
+        7
+      ],
+      "complementary_spanning_tree": [
+        1,
+        3,
+        4,
+        6
+      ],
+      "charged_basis_edges": [
+        0,
+        2,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            1,
+            3,
+            4,
+            6,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        2,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        1,
+        3,
+        4,
+        5
+      ],
+      "charged_basis_edges": [
+        0,
+        2,
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        3,
+        5,
+        6
+      ],
+      "complementary_spanning_tree": [
+        1,
+        2,
+        4,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 3
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        3,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "charged_basis_edges": [
+        0,
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        4,
+        5,
+        6
+      ],
+      "complementary_spanning_tree": [
+        1,
+        2,
+        3,
+        7
+      ],
+      "charged_basis_edges": [
+        0,
+        4,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "-1",
+            "-1"
+          ],
+          "physical_edge_support": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 3
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        4,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        1,
+        2,
+        3,
+        5
+      ],
+      "charged_basis_edges": [
+        0,
+        4,
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "-1",
+            "-1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        0,
+        5,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "charged_basis_edges": [
+        0,
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "-1",
+            "-1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "-1",
+            "-1"
+          ],
+          "physical_edge_support": [
+            1,
+            2,
+            3,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 3
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "complementary_spanning_tree": [
+        0,
+        5,
+        6,
+        7
+      ],
+      "charged_basis_edges": [
+        2,
+        4
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            3,
+            5,
+            6,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        2,
+        3,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        4,
+        5,
+        6
+      ],
+      "charged_basis_edges": [
+        2,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        2,
+        4,
+        5
+      ],
+      "complementary_spanning_tree": [
+        0,
+        3,
+        6,
+        7
+      ],
+      "charged_basis_edges": [
+        2,
+        4
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "-1",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            0,
+            3,
+            5,
+            6,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        2,
+        4,
+        6
+      ],
+      "complementary_spanning_tree": [
+        0,
+        3,
+        5,
+        7
+      ],
+      "charged_basis_edges": [
+        2,
+        4,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            2,
+            3,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 3
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "-1",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            0,
+            3,
+            5,
+            6,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        2,
+        4,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        3,
+        5,
+        6
+      ],
+      "charged_basis_edges": [
+        2,
+        4,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            3,
+            5,
+            6,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        2,
+        5,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        3,
+        4,
+        6
+      ],
+      "charged_basis_edges": [
+        2,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        2,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        3,
+        4,
+        5
+      ],
+      "charged_basis_edges": [
+        2,
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            3,
+            4,
+            5,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        3,
+        4,
+        6
+      ],
+      "complementary_spanning_tree": [
+        0,
+        2,
+        5,
+        7
+      ],
+      "charged_basis_edges": [
+        4,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            2,
+            3,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 3
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        3,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        2,
+        4,
+        5
+      ],
+      "charged_basis_edges": [
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        4,
+        5,
+        6
+      ],
+      "complementary_spanning_tree": [
+        0,
+        2,
+        3,
+        7
+      ],
+      "charged_basis_edges": [
+        4,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "-1",
+            "0",
+            "-1",
+            "-1"
+          ],
+          "physical_edge_support": [
+            0,
+            2,
+            3,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 3
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        4,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        2,
+        3,
+        5
+      ],
+      "charged_basis_edges": [
+        4,
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "-1",
+            "-1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            2,
+            3,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 10,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 3
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        1,
+        5,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        2,
+        3,
+        4
+      ],
+      "charged_basis_edges": [
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "-1",
+            "-1"
+          ],
+          "physical_edge_support": [
+            2,
+            3,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        2,
+        3,
+        4,
+        5
+      ],
+      "complementary_spanning_tree": [
+        0,
+        1,
+        6,
+        7
+      ],
+      "charged_basis_edges": [
+        2,
+        4
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        2,
+        3,
+        4,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        1,
+        5,
+        6
+      ],
+      "charged_basis_edges": [
+        2,
+        4,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        2,
+        3,
+        5,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        1,
+        4,
+        6
+      ],
+      "charged_basis_edges": [
+        2,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        2,
+        4,
+        5,
+        6
+      ],
+      "complementary_spanning_tree": [
+        0,
+        1,
+        3,
+        7
+      ],
+      "charged_basis_edges": [
+        2,
+        4,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "-1",
+            "-1",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        2,
+        4,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        1,
+        3,
+        5
+      ],
+      "charged_basis_edges": [
+        2,
+        4,
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "-1",
+            "-1",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        2,
+        5,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        1,
+        3,
+        4
+      ],
+      "charged_basis_edges": [
+        2,
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "-1",
+            "-1",
+            "0",
+            "-1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            3,
+            6
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        3,
+        4,
+        5,
+        6
+      ],
+      "complementary_spanning_tree": [
+        0,
+        1,
+        2,
+        7
+      ],
+      "charged_basis_edges": [
+        4,
+        6
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        3,
+        4,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        1,
+        2,
+        5
+      ],
+      "charged_basis_edges": [
+        4,
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "-1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            1,
+            5,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 0,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    },
+    {
+      "basis_edges": [
+        3,
+        5,
+        6,
+        7
+      ],
+      "complementary_spanning_tree": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "charged_basis_edges": [
+        6,
+        7
+      ],
+      "directions": [
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "1",
+            "1"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 4,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "1",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            1,
+            4,
+            5
+          ],
+          "simple_base_denominator_degree": 8,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 4
+        },
+        {
+          "original_energy_direction": [
+            "0",
+            "0",
+            "1",
+            "0"
+          ],
+          "physical_edge_support": [
+            2,
+            6
+          ],
+          "simple_base_denominator_degree": 4,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 1
+        },
+        {
+          "original_energy_direction": [
+            "1",
+            "0",
+            "0",
+            "0"
+          ],
+          "physical_edge_support": [
+            0,
+            4,
+            7
+          ],
+          "simple_base_denominator_degree": 6,
+          "I91_numerator_degree_upper_bound": 2,
+          "supplemental_numerator_degree_upper_bound": 2
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,222 @@
+{
+  "schema": 1,
+  "status": "both bounded mathematical closures unresolved",
+  "scope": "four-loop source discovery only; no contour admission or numerical prediction",
+  "source_snapshot": "massless-native-source-hashes.json",
+  "baseline_source_snapshot": "native-capacity-final-source-hashes.json",
+  "binary": {
+    "path": "target/release/deps/finite_density_generic_closure-efa84383047ba390",
+    "sha256": "07303d4664572acefdccf85a04abf06d8f8e4274c395a63f0bdfb46ac80f3559",
+    "mtime_utc": "2026-10-09T20:28:20.151876+00:00"
+  },
+  "policy": "split_ordinary_zero_faces=true; all other discovery/source/deformation controls equal to baseline",
+  "diagnostic_harnesses_completed": 2,
+  "closed_systems": 0,
+  "archive_map": "four-loop-zero-face-archives.json",
+  "cases": [
+    {
+      "case": "single",
+      "baseline_directory": "reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-depth3/physical-16-capacity-16-cuts-0",
+      "new_directory": "reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-zero-faces/physical-16-capacity-16-cuts-0",
+      "baseline": {
+        "closure_seconds": 21.611067097,
+        "contour_admission": false,
+        "guard_refinement_added_domains": 0,
+        "guard_refinement_budget_exhausted": false,
+        "guard_refinement_passes": 0,
+        "guard_refinements": [],
+        "native_frontier_requests": 5,
+        "native_rule_applications": 5,
+        "native_rules": 1650,
+        "numerical_prediction": false,
+        "physical_arity": 16,
+        "preparation_seconds": 0.085249933,
+        "provisional_sizes": [
+          5,
+          36,
+          147
+        ],
+        "requested": 146,
+        "rounds": 3,
+        "status": "unresolved",
+        "storage_capacity": 16,
+        "reason": "weighted provisional-frontier budget exhausted",
+        "discovery_gap_counts": {
+          "DomainBudget": 7311
+        }
+      },
+      "zero_faces": {
+        "closure_seconds": 64.246404976,
+        "contour_admission": false,
+        "guard_refinement_added_domains": 0,
+        "guard_refinement_budget_exhausted": false,
+        "guard_refinement_passes": 0,
+        "guard_refinements": [],
+        "native_frontier_requests": 0,
+        "native_rule_applications": 88,
+        "native_rules": 5410,
+        "numerical_prediction": false,
+        "physical_arity": 16,
+        "preparation_seconds": 0.097828055,
+        "provisional_sizes": [
+          324
+        ],
+        "requested": 5,
+        "rounds": 1,
+        "status": "unresolved",
+        "storage_capacity": 16,
+        "reason": "weighted provisional-frontier budget exhausted",
+        "discovery_gap_counts": {
+          "UnprovedDescent": 17
+        }
+      },
+      "source_equivalence": {
+        "all_rows_domains_conditions_targets_variables_equal": true,
+        "measure_identity_json_equal": true,
+        "rustred_source_digest_equal": true,
+        "full_measure_id_equal": false,
+        "baseline_dependency_digest": "6b43e40bda1678157fe05a57d7314c6d156470975bcd67d84868aa4c51612d38",
+        "new_dependency_digest": "dc69000f3474e0127a4b2dcc13256b8b079b191cdd917a0bbf6d353819d7e982",
+        "difference": "Dependency digest binds enabled features; new binary has python enabled. All mathematical source data and remaining identity fields exactly equal.",
+        "canonical_mathematical_payload_sha256": "681764489c48ffee168050705daa72f25c476f035f5ebac519b4f255bdca913b"
+      },
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0",
+          "RUSTFLOW_WEIGHTED_CAPACITY=16",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-zero-faces",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=1",
+          "RUSTFLOW_WEIGHTED_FRONTIER=128",
+          "RUSTFLOW_WEIGHTED_REQUESTED=512",
+          "RUSTFLOW_WEIGHTED_FRONTIER_SECTORS=1",
+          "RUSTFLOW_WEIGHTED_SOURCE_POLICY=legacy-lorentz",
+          "RUSTFLOW_WEIGHTED_POSITIVE_ENERGY_POWERS=0",
+          "RUSTFLOW_WEIGHTED_SOURCE_DOMAIN_BUDGET=65536",
+          "target/release/deps/finite_density_generic_closure-efa84383047ba390",
+          "--ignored",
+          "--exact",
+          "runtime_graph_native_closure",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 64.53045506309718,
+        "user_seconds": 63.597971,
+        "system_seconds": 0.38314499999999996,
+        "peak_child_rss_kib": 132096,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "baseline_resources": "reports/validation/2026-10-09-finite-density-native-assembly/four-loop-E7-single-depth3-resources.json"
+    },
+    {
+      "case": "double",
+      "baseline_directory": "reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-depth3/physical-18-capacity-20-cuts-0_4",
+      "new_directory": "reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-zero-faces/physical-18-capacity-20-cuts-0_4",
+      "baseline": {
+        "closure_seconds": 108.605463226,
+        "contour_admission": false,
+        "guard_refinement_added_domains": 0,
+        "guard_refinement_budget_exhausted": false,
+        "guard_refinement_passes": 0,
+        "guard_refinements": [],
+        "native_frontier_requests": 2,
+        "native_rule_applications": 1,
+        "native_rules": 874,
+        "numerical_prediction": false,
+        "physical_arity": 18,
+        "preparation_seconds": 0.292000399,
+        "provisional_sizes": [
+          5,
+          27,
+          88
+        ],
+        "requested": 87,
+        "rounds": 3,
+        "status": "unresolved",
+        "storage_capacity": 20,
+        "reason": "weighted derivative closure round budget exhausted",
+        "discovery_gap_counts": {
+          "DomainBudget": 7682
+        }
+      },
+      "zero_faces": {
+        "closure_seconds": 57.808612507,
+        "contour_admission": false,
+        "guard_refinement_added_domains": 0,
+        "guard_refinement_budget_exhausted": false,
+        "guard_refinement_passes": 0,
+        "guard_refinements": [],
+        "native_frontier_requests": 0,
+        "native_rule_applications": 75,
+        "native_rules": 5237,
+        "numerical_prediction": false,
+        "physical_arity": 18,
+        "preparation_seconds": 0.287604882,
+        "provisional_sizes": [
+          197
+        ],
+        "requested": 5,
+        "rounds": 1,
+        "status": "unresolved",
+        "storage_capacity": 20,
+        "reason": "weighted provisional-frontier budget exhausted",
+        "discovery_gap_counts": {
+          "UnprovedDescent": 3,
+          "DomainBudget": 445
+        }
+      },
+      "source_equivalence": {
+        "all_rows_domains_conditions_targets_variables_equal": true,
+        "measure_identity_json_equal": true,
+        "rustred_source_digest_equal": true,
+        "full_measure_id_equal": false,
+        "baseline_dependency_digest": "6b43e40bda1678157fe05a57d7314c6d156470975bcd67d84868aa4c51612d38",
+        "new_dependency_digest": "dc69000f3474e0127a4b2dcc13256b8b079b191cdd917a0bbf6d353819d7e982",
+        "difference": "Dependency digest binds enabled features; new binary has python enabled. All mathematical source data and remaining identity fields exactly equal.",
+        "canonical_mathematical_payload_sha256": "14082d402436553356bf91c1baf2b48f2a235f569aedb40f9abecf2180a1b559"
+      },
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0,4",
+          "RUSTFLOW_WEIGHTED_CAPACITY=20",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_CLOSURE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/four-loop-source-pilots-zero-faces",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=1",
+          "RUSTFLOW_WEIGHTED_FRONTIER=128",
+          "RUSTFLOW_WEIGHTED_REQUESTED=512",
+          "RUSTFLOW_WEIGHTED_FRONTIER_SECTORS=1",
+          "RUSTFLOW_WEIGHTED_SOURCE_POLICY=legacy-lorentz",
+          "RUSTFLOW_WEIGHTED_POSITIVE_ENERGY_POWERS=0",
+          "RUSTFLOW_WEIGHTED_SOURCE_DOMAIN_BUDGET=65536",
+          "target/release/deps/finite_density_generic_closure-efa84383047ba390",
+          "--ignored",
+          "--exact",
+          "runtime_graph_native_closure",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 58.155472417362034,
+        "user_seconds": 57.420971,
+        "system_seconds": 0.20255599999999999,
+        "peak_child_rss_kib": 115216,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "baseline_resources": "reports/validation/2026-10-09-finite-density-native-assembly/four-loop-E7-double-depth3-resources.json"
+    }
+  ],
+  "interpretation": "Exact zero faces increase native rule applications substantially, but the same frontier budget128 stops both after one round. This is neither a closed basis nor evidence of a native correctness defect."
+}

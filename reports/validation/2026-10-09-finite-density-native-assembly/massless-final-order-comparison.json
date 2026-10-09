@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "status": "passed_exact_decimal_strings",
+  "scope": "one matched D13/2 profile before/after preparation-order-only change; not another independent numerical refinement",
+  "configuration": [
+    28,
+    80,
+    12
+  ],
+  "sector_and_total_target_values": 10,
+  "all_decimal_complex_strings_identical": true,
+  "inputs_sha256": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-fixed/prediction-28-80-12.json": "b3a2914b6ad2ee0aea9a3250d0fc42306b3996d8e2318c10e0afc0a520011dbc",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-sunset-final-order/prediction-28-80-12.json": "b3a2914b6ad2ee0aea9a3250d0fc42306b3996d8e2318c10e0afc0a520011dbc"
+  },
+  "current_native_binary": "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+  "current_native_binary_sha256": "2ceb404234eb10d65b6200a0ea97784c10e5b9fed84ce007cd5ebefcebbe48e3",
+  "original_native_binary_sha256": null,
+  "original_binary_limitation": "The original executable was overwritten during final-order relinking before its digest was captured. Original runs remain bound to the frozen source277 snapshot and completed build/resource logs; the current digest must not be assigned to them."
+}

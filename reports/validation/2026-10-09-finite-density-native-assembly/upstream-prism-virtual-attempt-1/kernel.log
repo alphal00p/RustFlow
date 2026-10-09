@@ -1,0 +1,459 @@
+"RUSTFLOW THREAD CONFIGURATION: "InputForm[{"AbortPause" -> 2., "BusyWait" -> 0.01, "MathLinkTimeout" -> 15., "MKLThreadNumber" -> 1, "ParallelThreadNumber" -> 1, "RecoveryMode" -> "ReQueue", "RelaunchFailedKernels" -> False, "VectorParallelLengthThresholds" -> {32768, 8192, 8192, 8192}, "VectorVendorLengthThresholds" -> {128, 32, 32}}]
+"--------------------------------------------------"
+"AMFlow: package loaded\nAuthor: Rui-Jun Huang[huangrj2215@pku.edu.cn], Xiao Liu[xiao.liu@ucas.ac.cn] and Yan-Qing Ma[yqma@pku.edu.cn]\nCurrent version: 2.0\nRelease date: 10-July-2026"
+"--------------------------------------------------"
+SetAMFOptions -> {"AMFMode" -> {"Prescription", "Mass", "Propagator"}, "EndingScheme" -> {"Tradition", "Cutkosky", "SingleMass", "Trivial"}, "D0" -> 4, "WorkingPre" -> 100, "ExtraWorkingPre" -> 0, "ChopPre" -> 20, "XOrder" -> 100, "ExtraXOrder" -> 30, "LearnXOrder" -> -1, "TestXOrder" -> 5, "RationalizePre" -> 100, "RunLength" -> 1000, "UseCache" -> False, "SkipReduction" -> False, "RefineBasis" -> False, "DESolver" -> "CPP", "CacheName" -> "cache", "SplitTarget" -> True, "RecursionMode" -> "AMF", "DebugMode" -> False, "FTMode" -> {"Linear", "Branch", "All"}}
+SetReductionOptions -> {"IBPReducer" -> "FiniteFlow+LiteRed", "BlackBoxRank" -> 3, "BlackBoxDot" -> 0, "ComplexMode" -> True, "DeleteBlackBoxDirectory" -> False}
+"CheckDep: dependencies of current reducer:"
+"FiniteFlow.m" -> False
+"fflowmlink.so or fflowmlink.dylib" -> False
+"LiteIBP.m" -> False
+"LiteRed.m" -> False
+SetReducerOptions -> {"MaxPrime" -> 200, "MaxDegree" -> 1000, "EMSymmetry" -> False}
+"--------------------------------------------------"
+"To start evaluating a family of loop integrals, you need to define:\n - AMFlowInfo[\"Family\"] as the name of the family (should be a symbol)\n - AMFlowInfo[\"Loop\"] as a list of loop momenta like {l1, l2}\n - AMFlowInfo[\"Leg\"] as a list of external legs like {p1, p2, p3}\n - AMFlowInfo[\"Conservation\"] as a replacement rule of momentum conservation like {p3 -> -p1-p2}\n - AMFlowInfo[\"Replacement\"] as a list of complete replacement rules for scalar products among external legs like {p1^2 -> 0, p2^2 -> 0, p3^2 -> s} \n - AMFlowInfo[\"Propagator\"] as a list of complete inverse propagators like {l1^2-msq, l2^2, (l1+l2+p1)^2, ...}\n - AMFlowInfo[\"Numeric\"] as a list of replacement rules for involved mass scales like {s -> 100, msq -> 1}\n - AMFlowInfo[\"NThread\"] as the number of threads in use\nFor phase-space integrations, you also need to define:\n - AMFlowInfo[\"Prescription\"] as a list with the same length as AMFlowInfo[\"Loop\"], each element being 1, -1 or 0 specifying the Feynman prescription of the corresponding loop, where 1 means +i0, -1 means -i0 and 0 means no prescription at all\n - AMFlowInfo[\"Cut\"] as a list with the same length as AMFlowInfo[\"Propagator\"], each element being 1 or 0 specifying whether the corresponding propagator is on cut or not"
+"--------------------------------------------------"
+"Please keep clear of these global variables during computations:\n - eps, which serves as the dimensional regulator\n - eta, which serves as the auxiliary mass parameter\n - j, which serves as the Head of integrals"
+"--------------------------------------------------"
+SetReductionOptions -> {"IBPReducer" -> "Kira", "BlackBoxRank" -> 3, "BlackBoxDot" -> 0, "ComplexMode" -> True, "DeleteBlackBoxDirectory" -> False}
+"CheckDep: dependencies of current reducer:"
+"Kira executable" -> True
+"Fermat executable" -> True
+"Ratracer executable (optional)" -> False
+"FastRec (optional; private at the moment)" -> False
+SetReducerOptions -> {"IntegralOrder" -> 5, "ReductionMode" -> "Kira", "UseMaximalCut" -> True, "ProbeLevel" -> 1}
+SetAMFOptions -> {"AMFMode" -> {"Prescription", "Mass", "Propagator"}, "EndingScheme" -> {"Tradition", "Cutkosky", "SingleMass", "Trivial"}, "D0" -> 4, "WorkingPre" -> 100, "ExtraWorkingPre" -> 0, "ChopPre" -> 20, "XOrder" -> 100, "ExtraXOrder" -> 30, "LearnXOrder" -> -1, "TestXOrder" -> 5, "RationalizePre" -> 100, "RunLength" -> 1000, "UseCache" -> False, "SkipReduction" -> False, "RefineBasis" -> False, "DESolver" -> "MMA", "CacheName" -> "work/cache-18", "SplitTarget" -> True, "RecursionMode" -> "AMF", "DebugMode" -> False, "FTMode" -> {"Linear", "Branch", "All"}}
+"SolveIntegrals: please note that the option value of \"WorkingPre\", \"XOrder\" and \"ExtraXOrder\" will not affect this function at all."
+"SolveIntegrals: started."
+"SolveIntegrals: integrals will be evaluated at 1 eps value(s) {1/5}."
+"SolveIntegrals: working precision: 36, truncated order: 72, extra order: 50."
+"BlackBoxAMFlow: started."
+"BlackBoxAMFlow: target integrals split into 4 parts."
+"BlackBoxAMFlow: computing part 1 out of 4."
+"BlackBoxAMFlowQuadratic: started."
+"BlackBoxAMFlowQuadratic: working directory is \"/tmp/rustflow-prism-virtual-objyev6r/work/cache-18/prismVirtual_amflow\"."
+"BlackBoxAMFlowQuadratic: reducing 5 target integrals."
+"BlackBoxAMFlowQuadratic: target integrals reduced to 2 master integrals in 18s."
+"BlackBoxAMFlowQuadratic: constructing amflow systems."
+"------------------------------"
+"AMFSystemSetup: setting up system 1."
+"Family" -> prismVirtual
+"Loop" -> {k, l}
+"Leg" -> {p, q}
+"Conservation" -> {}
+"Replacement" -> {p^2 -> -1, q^2 -> 0, p*q -> -1/2}
+"Propagator" -> {k^2, -eta + l^2, (k - p)^2, (l - p)^2, (k - q)^2, (k - l)^2, (l - q)^2}
+"Numeric" -> {eps -> 1/5}
+"AMFSystemDifferentialEquation: preparing differential equations for system 1."
+"AMFSystemDifferentialEquation: differential equations for system 1 prepared with 4 master integrals in 22s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 1."
+"AMFSystemBoundaryOrder: boundary orders for system 1 determined in 7s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 1."
+"AMFSystemBoundaryCondition: 1 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {k -> Sqrt[eta]*l, l -> Sqrt[eta]*k}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 1 prepared in 9s."
+"AMFSystemSetup: system 1 set up in 37s."
+"------------------------------"
+"AMFSystemSetup: setting up system 2."
+"Family" -> prismVirtual
+"Loop" -> {l}
+"Leg" -> {k}
+"Conservation" -> {}
+"Replacement" -> {k^2 -> -1}
+"Propagator" -> {-eta + l^2, k^2 - 2*k*l + l^2}
+"Numeric" -> {}
+"AMFSystemDifferentialEquation: preparing differential equations for system 2."
+"AMFSystemDifferentialEquation: differential equations for system 2 prepared with 2 master integrals in 12s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 2."
+"AMFSystemBoundaryOrder: boundary orders for system 2 determined in 8s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 2."
+"AMFSystemBoundaryCondition: 1 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {l -> Sqrt[eta]*l}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 2 prepared in 8s."
+"AMFSystemSetup: system 2 set up in 27s."
+"------------------------------"
+"AMFSystemSetup: setting up system 3."
+"Family" -> prismVirtual
+"Loop" -> {}
+"Leg" -> {l}
+"Conservation" -> {}
+"Replacement" -> {l^2 -> -1}
+"Propagator" -> {}
+"Numeric" -> {}
+"AMFSystemSetup: this is an ending system."
+"AMFSystemSetup: system 3 set up in 1s."
+"BlackBoxAMFlowQuadratic: amflow systems constructed in 64s."
+"BlackBoxAMFlowQuadratic: solving amflow systems."
+"AMFSystemSolution: solving system 3."
+"AMFSystemSolution: integrals of system 3 are trivial."
+"AMFSystemSolution: system 3 solved in 1s."
+"AMFSystemSolution: solving system 2."
+"AMFSystemSolution: boundary integrals of system 2 read from subsystems {{3}}."
+"AMFSystemSolution: system 2 solved in 9s."
+"AMFSystemSolution: solving system 1."
+"AMFSystemSolution: boundary integrals of system 1 read from subsystems {{2}}."
+"AMFSystemSolution: system 1 solved in 7s."
+"BlackBoxAMFlowQuadratic: amflow systems solved in 15s."
+"BlackBoxAMFlowQuadratic: finished in 97s."
+"BlackBoxAMFlow: part 1 out of 4 done."
+"BlackBoxAMFlow: computing part 2 out of 4."
+"BlackBoxAMFlowQuadratic: started."
+"BlackBoxAMFlowQuadratic: working directory is \"/tmp/rustflow-prism-virtual-objyev6r/work/cache-18/prismVirtual_amflow\"."
+"BlackBoxAMFlowQuadratic: reducing 2 target integrals."
+"BlackBoxAMFlowQuadratic: target integrals reduced to 1 master integrals in 17s."
+"BlackBoxAMFlowQuadratic: constructing amflow systems."
+"------------------------------"
+"AMFSystemSetup: setting up system 4."
+"Family" -> prismVirtual
+"Loop" -> {k, l}
+"Leg" -> {p, q}
+"Conservation" -> {}
+"Replacement" -> {p^2 -> -1, q^2 -> 0, p*q -> -1/2}
+"Propagator" -> {-eta + k^2, l^2, (k - p)^2, (l - p)^2, (k - q)^2, (k - l)^2, (l - q)^2}
+"Numeric" -> {eps -> 1/5}
+"AMFSystemDifferentialEquation: preparing differential equations for system 4."
+"AMFSystemDifferentialEquation: differential equations for system 4 prepared with 2 master integrals in 9s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 4."
+"AMFSystemBoundaryOrder: boundary orders for system 4 determined in 5s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 4."
+"AMFSystemBoundaryCondition: 1 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {k -> Sqrt[eta]*k, l -> Sqrt[eta]*l}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 4 prepared in 7s."
+"AMFSystemSetup: system 4 set up in 21s."
+"------------------------------"
+"AMFSystemSetup: setting up system 5."
+"Family" -> prismVirtual
+"Loop" -> {l}
+"Leg" -> {k}
+"Conservation" -> {}
+"Replacement" -> {k^2 -> -1}
+"Propagator" -> {-eta + l^2, k^2 - 2*k*l + l^2}
+"Numeric" -> {}
+"AMFSystemDifferentialEquation: preparing differential equations for system 5."
+"AMFSystemDifferentialEquation: differential equations for system 5 prepared with 2 master integrals in 11s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 5."
+"AMFSystemBoundaryOrder: boundary orders for system 5 determined in 5s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 5."
+"AMFSystemBoundaryCondition: 1 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {l -> Sqrt[eta]*l}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 5 prepared in 7s."
+"AMFSystemSetup: system 5 set up in 22s."
+"------------------------------"
+"AMFSystemSetup: setting up system 6."
+"Family" -> prismVirtual
+"Loop" -> {}
+"Leg" -> {l}
+"Conservation" -> {}
+"Replacement" -> {l^2 -> -1}
+"Propagator" -> {}
+"Numeric" -> {}
+"AMFSystemSetup: this is an ending system."
+"AMFSystemSetup: system 6 set up in 1s."
+"BlackBoxAMFlowQuadratic: amflow systems constructed in 43s."
+"BlackBoxAMFlowQuadratic: solving amflow systems."
+"AMFSystemSolution: solving system 6."
+"AMFSystemSolution: integrals of system 6 are trivial."
+"AMFSystemSolution: system 6 solved in 1s."
+"AMFSystemSolution: solving system 5."
+"AMFSystemSolution: boundary integrals of system 5 read from subsystems {{6}}."
+"AMFSystemSolution: system 5 solved in 6s."
+"AMFSystemSolution: solving system 4."
+"AMFSystemSolution: boundary integrals of system 4 read from subsystems {{5}}."
+"AMFSystemSolution: system 4 solved in 5s."
+"BlackBoxAMFlowQuadratic: amflow systems solved in 10s."
+"BlackBoxAMFlowQuadratic: finished in 69s."
+"BlackBoxAMFlow: part 2 out of 4 done."
+"BlackBoxAMFlow: computing part 3 out of 4."
+"BlackBoxAMFlowQuadratic: started."
+"BlackBoxAMFlowQuadratic: working directory is \"/tmp/rustflow-prism-virtual-objyev6r/work/cache-18/prismVirtual_amflow\"."
+"BlackBoxAMFlowQuadratic: reducing 3 target integrals."
+"BlackBoxAMFlowQuadratic: target integrals reduced to 2 master integrals in 15s."
+"BlackBoxAMFlowQuadratic: constructing amflow systems."
+"------------------------------"
+"AMFSystemSetup: setting up system 7."
+"Family" -> prismVirtual
+"Loop" -> {k, l}
+"Leg" -> {p, q}
+"Conservation" -> {}
+"Replacement" -> {p^2 -> -1, q^2 -> 0, p*q -> -1/2}
+"Propagator" -> {-eta + k^2, l^2, (k - p)^2, (l - p)^2, (k - q)^2, (k - l)^2, (l - q)^2}
+"Numeric" -> {eps -> 1/5}
+"AMFSystemDifferentialEquation: preparing differential equations for system 7."
+"AMFSystemDifferentialEquation: differential equations for system 7 prepared with 7 master integrals in 33s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 7."
+"AMFSystemBoundaryOrder: boundary orders for system 7 determined in 6s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 7."
+"AMFSystemBoundaryCondition: 3 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {k -> k, l -> l}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: region 2 with transformation {k -> Sqrt[eta]*k, l -> l}."
+"AMFSystemBoundaryCondition: region 2 finished."
+"AMFSystemBoundaryCondition: region 3 with transformation {k -> Sqrt[eta]*k, l -> Sqrt[eta]*l}."
+"AMFSystemBoundaryCondition: region 3 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 7 prepared in 26s."
+"AMFSystemSetup: system 7 set up in 64s."
+"------------------------------"
+"AMFSystemSetup: setting up system 8."
+"Family" -> prismVirtual
+"Loop" -> {k, l}
+"Leg" -> {p, q}
+"Conservation" -> {}
+"Replacement" -> {p^2 -> -1, q^2 -> 0, p*q -> -1/2}
+"Propagator" -> {-eta + (k - p)^2, l^2, (k - l)^2, k^2, (k + q)^2, (l + p)^2, (l + q)^2}
+"Numeric" -> {eps -> 1/5}
+"AMFSystemDifferentialEquation: preparing differential equations for system 8."
+"AMFSystemDifferentialEquation: differential equations for system 8 prepared with 2 master integrals in 11s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 8."
+"AMFSystemBoundaryOrder: boundary orders for system 8 determined in 8s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 8."
+"AMFSystemBoundaryCondition: 1 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {k -> Sqrt[eta]*k, l -> Sqrt[eta]*l}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 8 prepared in 9s."
+"AMFSystemSetup: system 8 set up in 27s."
+"------------------------------"
+"AMFSystemSetup: setting up system 9."
+"Family" -> prismVirtual
+"Loop" -> {l}
+"Leg" -> {k}
+"Conservation" -> {}
+"Replacement" -> {k^2 -> -1}
+"Propagator" -> {-eta + l^2, k^2 - 2*k*l + l^2}
+"Numeric" -> {}
+"AMFSystemDifferentialEquation: preparing differential equations for system 9."
+"AMFSystemDifferentialEquation: differential equations for system 9 prepared with 2 master integrals in 16s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 9."
+"AMFSystemBoundaryOrder: boundary orders for system 9 determined in 13s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 9."
+"AMFSystemBoundaryCondition: 1 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {l -> Sqrt[eta]*l}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 9 prepared in 7s."
+"AMFSystemSetup: system 9 set up in 35s."
+"------------------------------"
+"AMFSystemSetup: setting up system 10."
+"Family" -> prismVirtual
+"Loop" -> {}
+"Leg" -> {l}
+"Conservation" -> {}
+"Replacement" -> {l^2 -> -1}
+"Propagator" -> {}
+"Numeric" -> {}
+"AMFSystemSetup: this is an ending system."
+"AMFSystemSetup: system 10 set up in 1s."
+"------------------------------"
+"AMFSystemSetup: setting up system 11."
+"Family" -> prismVirtual
+"Loop" -> {k, l}
+"Leg" -> {p, q}
+"Conservation" -> {}
+"Replacement" -> {p^2 -> -1, q^2 -> 0, p*q -> -1/2}
+"Propagator" -> {-1 + k^2, -eta + l^2, (l - p)^2, (k + l)^2, (k + p)^2, (k + q)^2, (l + q)^2}
+"Numeric" -> {eps -> 1/5}
+"AMFSystemDifferentialEquation: preparing differential equations for system 11."
+"AMFSystemDifferentialEquation: differential equations for system 11 prepared with 2 master integrals in 15s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 11."
+"AMFSystemBoundaryOrder: boundary orders for system 11 determined in 7s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 11."
+"AMFSystemBoundaryCondition: 1 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {k -> k, l -> Sqrt[eta]*l}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 11 prepared in 9s."
+"AMFSystemSetup: system 11 set up in 30s."
+"------------------------------"
+"AMFSystemSetup: setting up system 12."
+"Family" -> prismVirtual
+"Loop" -> {}
+"Leg" -> {k}
+"Conservation" -> {}
+"Replacement" -> {k^2 -> -1}
+"Propagator" -> {}
+"Numeric" -> {}
+"AMFSystemSetup: this is an ending system."
+"AMFSystemSetup: system 12 set up in 1s."
+"------------------------------"
+"AMFSystemSetup: setting up system 13."
+"Family" -> prismVirtual
+"Loop" -> {}
+"Leg" -> {l}
+"Conservation" -> {}
+"Replacement" -> {l^2 -> -1}
+"Propagator" -> {}
+"Numeric" -> {}
+"AMFSystemSetup: this is an ending system."
+"AMFSystemSetup: system 13 set up in 1s."
+"------------------------------"
+"AMFSystemSetup: setting up system 14."
+"Family" -> prismVirtual
+"Loop" -> {l}
+"Leg" -> {k}
+"Conservation" -> {}
+"Replacement" -> {k^2 -> -1}
+"Propagator" -> {-eta + l^2, k^2 - 2*k*l + l^2}
+"Numeric" -> {}
+"AMFSystemDifferentialEquation: preparing differential equations for system 14."
+"AMFSystemDifferentialEquation: differential equations for system 14 prepared with 2 master integrals in 13s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 14."
+"AMFSystemBoundaryOrder: boundary orders for system 14 determined in 20s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 14."
+"AMFSystemBoundaryCondition: 1 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {l -> Sqrt[eta]*l}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 14 prepared in 11s."
+"AMFSystemSetup: system 14 set up in 44s."
+"------------------------------"
+"AMFSystemSetup: setting up system 15."
+"Family" -> prismVirtual
+"Loop" -> {}
+"Leg" -> {l}
+"Conservation" -> {}
+"Replacement" -> {l^2 -> -1}
+"Propagator" -> {}
+"Numeric" -> {}
+"AMFSystemSetup: this is an ending system."
+"AMFSystemSetup: system 15 set up in 1s."
+"BlackBoxAMFlowQuadratic: amflow systems constructed in 199s."
+"BlackBoxAMFlowQuadratic: solving amflow systems."
+"AMFSystemSolution: solving system 10."
+"AMFSystemSolution: integrals of system 10 are trivial."
+"AMFSystemSolution: system 10 solved in 1s."
+"AMFSystemSolution: solving system 9."
+"AMFSystemSolution: boundary integrals of system 9 read from subsystems {{10}}."
+"AMFSystemSolution: system 9 solved in 27s."
+"AMFSystemSolution: solving system 8."
+"AMFSystemSolution: boundary integrals of system 8 read from subsystems {{9}}."
+"AMFSystemSolution: system 8 solved in 15s."
+"AMFSystemSolution: solving system 12."
+"AMFSystemSolution: integrals of system 12 are trivial."
+"AMFSystemSolution: system 12 solved in 1s."
+"AMFSystemSolution: solving system 13."
+"AMFSystemSolution: integrals of system 13 are trivial."
+"AMFSystemSolution: system 13 solved in 1s."
+"AMFSystemSolution: solving system 11."
+"AMFSystemSolution: boundary integrals of system 11 read from subsystems {{12, 13}}."
+"AMFSystemSolution: system 11 solved in 8s."
+"AMFSystemSolution: solving system 15."
+"AMFSystemSolution: integrals of system 15 are trivial."
+"AMFSystemSolution: system 15 solved in 1s."
+"AMFSystemSolution: solving system 14."
+"AMFSystemSolution: boundary integrals of system 14 read from subsystems {{15}}."
+"AMFSystemSolution: system 14 solved in 8s."
+"AMFSystemSolution: solving system 7."
+"AMFSystemSolution: boundary integrals of system 7 read from subsystems {{8}, {11}, {14}}."
+"AMFSystemSolution: system 7 solved in 8s."
+"BlackBoxAMFlowQuadratic: amflow systems solved in 64s."
+"BlackBoxAMFlowQuadratic: finished in 276s."
+"BlackBoxAMFlow: part 3 out of 4 done."
+"BlackBoxAMFlow: computing part 4 out of 4."
+"BlackBoxAMFlowQuadratic: started."
+"BlackBoxAMFlowQuadratic: working directory is \"/tmp/rustflow-prism-virtual-objyev6r/work/cache-18/prismVirtual_amflow\"."
+"BlackBoxAMFlowQuadratic: reducing 2 target integrals."
+"BlackBoxAMFlowQuadratic: target integrals reduced to 1 master integrals in 12s."
+"BlackBoxAMFlowQuadratic: constructing amflow systems."
+"------------------------------"
+"AMFSystemSetup: setting up system 16."
+"Family" -> prismVirtual
+"Loop" -> {k, l}
+"Leg" -> {p, q}
+"Conservation" -> {}
+"Replacement" -> {p^2 -> -1, q^2 -> 0, p*q -> -1/2}
+"Propagator" -> {-eta + k^2, l^2, (k - p)^2, (l - p)^2, (k - q)^2, (k - l)^2, (l - q)^2}
+"Numeric" -> {eps -> 1/5}
+"AMFSystemDifferentialEquation: preparing differential equations for system 16."
+"AMFSystemDifferentialEquation: differential equations for system 16 prepared with 2 master integrals in 13s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 16."
+"AMFSystemBoundaryOrder: boundary orders for system 16 determined in 14s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 16."
+"AMFSystemBoundaryCondition: 1 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {k -> Sqrt[eta]*k, l -> l}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 16 prepared in 12s."
+"AMFSystemSetup: system 16 set up in 38s."
+"------------------------------"
+"AMFSystemSetup: setting up system 17."
+"Family" -> prismVirtual
+"Loop" -> {k, l}
+"Leg" -> {p, q}
+"Conservation" -> {}
+"Replacement" -> {p^2 -> -1, q^2 -> 0, p*q -> -1/2}
+"Propagator" -> {-1 + k^2, -eta + l^2, (l - p)^2, (k + l)^2, (k + p)^2, (k + q)^2, (l + q)^2}
+"Numeric" -> {eps -> 1/5}
+"AMFSystemDifferentialEquation: preparing differential equations for system 17."
+"AMFSystemDifferentialEquation: differential equations for system 17 prepared with 2 master integrals in 15s."
+"AMFSystemBoundaryOrder: determining boundary orders for system 17."
+"AMFSystemBoundaryOrder: boundary orders for system 17 determined in 10s."
+"AMFSystemBoundaryCondition: preparing boundary integrals for system 17."
+"AMFSystemBoundaryCondition: 1 possible integration regions around eta = Infinity."
+"AMFSystemBoundaryCondition: region 1 with transformation {k -> k, l -> Sqrt[eta]*l}."
+"AMFSystemBoundaryCondition: region 1 finished."
+"AMFSystemBoundaryCondition: boundary integrals for system 17 prepared in 10s."
+"AMFSystemSetup: system 17 set up in 34s."
+"------------------------------"
+"AMFSystemSetup: setting up system 18."
+"Family" -> prismVirtual
+"Loop" -> {}
+"Leg" -> {k}
+"Conservation" -> {}
+"Replacement" -> {k^2 -> -1}
+"Propagator" -> {}
+"Numeric" -> {}
+"AMFSystemSetup: this is an ending system."
+"AMFSystemSetup: system 18 set up in 1s."
+"------------------------------"
+"AMFSystemSetup: setting up system 19."
+"Family" -> prismVirtual
+"Loop" -> {}
+"Leg" -> {l}
+"Conservation" -> {}
+"Replacement" -> {l^2 -> -1}
+"Propagator" -> {}
+"Numeric" -> {}
+"AMFSystemSetup: this is an ending system."
+"AMFSystemSetup: system 19 set up in 1s."
+"BlackBoxAMFlowQuadratic: amflow systems constructed in 73s."
+"BlackBoxAMFlowQuadratic: solving amflow systems."
+"AMFSystemSolution: solving system 18."
+"AMFSystemSolution: integrals of system 18 are trivial."
+"AMFSystemSolution: system 18 solved in 1s."
+"AMFSystemSolution: solving system 19."
+"AMFSystemSolution: integrals of system 19 are trivial."
+"AMFSystemSolution: system 19 solved in 1s."
+"AMFSystemSolution: solving system 17."
+"AMFSystemSolution: boundary integrals of system 17 read from subsystems {{18, 19}}."
+"AMFSystemSolution: system 17 solved in 11s."
+"AMFSystemSolution: solving system 16."
+"AMFSystemSolution: boundary integrals of system 16 read from subsystems {{17}}."
+"AMFSystemSolution: system 16 solved in 11s."
+"BlackBoxAMFlowQuadratic: amflow systems solved in 22s."
+"BlackBoxAMFlowQuadratic: finished in 105s."
+"BlackBoxAMFlow: part 4 out of 4 done."
+"BlackBoxAMFlow: finished in 545s."
+"SolveIntegrals: finished in 545s."
+"PRISM VIRTUAL PROFILE COMPLETE: "18
+SetAMFOptions -> {"AMFMode" -> {"Prescription", "Mass", "Propagator"}, "EndingScheme" -> {"Tradition", "Cutkosky", "SingleMass", "Trivial"}, "D0" -> 4, "WorkingPre" -> 100, "ExtraWorkingPre" -> 0, "ChopPre" -> 20, "XOrder" -> 100, "ExtraXOrder" -> 30, "LearnXOrder" -> -1, "TestXOrder" -> 5, "RationalizePre" -> 100, "RunLength" -> 1000, "UseCache" -> False, "SkipReduction" -> False, "RefineBasis" -> False, "DESolver" -> "MMA", "CacheName" -> "work/cache-26", "SplitTarget" -> True, "RecursionMode" -> "AMF", "DebugMode" -> False, "FTMode" -> {"Linear", "Branch", "All"}}
+"SolveIntegrals: please note that the option value of \"WorkingPre\", \"XOrder\" and \"ExtraXOrder\" will not affect this function at all."
+"SolveIntegrals: started."
+"SolveIntegrals: integrals will be evaluated at 1 eps value(s) {1/5}."
+"SolveIntegrals: working precision: 52, truncated order: 104, extra order: 50."
+"BlackBoxAMFlow: started."
+"BlackBoxAMFlow: target integrals split into 4 parts."
+"BlackBoxAMFlow: computing part 1 out of 4."
+"BlackBoxAMFlowQuadratic: started."
+"BlackBoxAMFlowQuadratic: working directory is \"/tmp/rustflow-prism-virtual-objyev6r/work/cache-26/prismVirtual_amflow\"."
+"BlackBoxAMFlowQuadratic: reducing 5 target integrals."
+"BlackBoxAMFlowQuadratic: target integrals reduced to 2 master integrals in 23s."
+"BlackBoxAMFlowQuadratic: constructing amflow systems."
+"------------------------------"
+"AMFSystemSetup: setting up system 1."
+"Family" -> prismVirtual
+"Loop" -> {k, l}
+"Leg" -> {p, q}
+"Conservation" -> {}
+"Replacement" -> {p^2 -> -1, q^2 -> 0, p*q -> -1/2}
+"Propagator" -> {k^2, -eta + l^2, (k - p)^2, (l - p)^2, (k - q)^2, (k - l)^2, (l - q)^2}
+"Numeric" -> {eps -> 1/5}
+"AMFSystemDifferentialEquation: preparing differential equations for system 1."

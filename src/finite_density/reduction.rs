@@ -209,6 +209,10 @@ pub struct WeightedClosureOptions {
     /// Request every provisional frontier label as well as derivatives, so
     /// auxiliary-constant lower sectors receive native source discovery.
     pub search_frontier_sectors: bool,
+    /// Keep requested ordinary zero indices on fixed-zero faces, and negative
+    /// indices on strictly negative boxes. This narrows native discovery only;
+    /// it does not classify a physical integral as zero or alter the ordering.
+    pub split_ordinary_zero_faces: bool,
     /// A distinct directory per source/deformation context. Each round stores
     /// its exact native program plus explicitly provisional/closed metadata.
     pub checkpoints: Option<PathBuf>,
@@ -228,6 +232,7 @@ impl Default for WeightedClosureOptions {
             application: GuardedReductionLimits::default(),
             guard_refinement: GuardRefinementOptions::default(),
             search_frontier_sectors: true,
+            split_ordinary_zero_faces: false,
             checkpoints: None,
         }
     }
@@ -403,10 +408,14 @@ pub fn prepare_weighted_system<const N: usize>(
                 diagnostics,
             ));
         }
-        let domains = discovery_domains(&requested, &deformation.roles)?
-            .into_iter()
-            .filter_map(|domain| domain.intersection(deformation.admitted_domain()))
-            .collect::<Vec<_>>();
+        let domains = discovery_domains(
+            &requested,
+            &deformation.roles,
+            options.split_ordinary_zero_faces,
+        )?
+        .into_iter()
+        .filter_map(|domain| domain.intersection(deformation.admitted_domain()))
+        .collect::<Vec<_>>();
         let found = discover_with_refinement(
             context,
             &domains,
@@ -450,6 +459,7 @@ pub fn prepare_weighted_system<const N: usize>(
         diagnostics.provisional_sizes.push(frontier.len());
         checkpoint(
             options.checkpoints.as_deref(),
+            options.split_ordinary_zero_faces,
             round,
             false,
             &found.program,
@@ -593,6 +603,7 @@ pub fn prepare_weighted_system<const N: usize>(
                 .collect::<Result<BTreeMap<_, _>>>()?;
             checkpoint(
                 options.checkpoints.as_deref(),
+                options.split_ordinary_zero_faces,
                 round,
                 true,
                 &final_found.program,
@@ -807,6 +818,7 @@ fn finite_guard_faces<const N: usize>(
 fn discovery_domains<const N: usize>(
     requested: &BTreeSet<[i64; N]>,
     roles: &[IndexRole; N],
+    split_ordinary_zero_faces: bool,
 ) -> Result<Vec<IndexDomain<N>>> {
     let mut domains = Vec::new();
     for indices in requested {
@@ -819,6 +831,10 @@ fn discovery_domains<const N: usize>(
                     ));
                 }
                 (IndexRole::Occupation, 0) => Ok(IndexBounds::fixed(0)),
+                (IndexRole::Ordinary, 0) if split_ordinary_zero_faces => Ok(IndexBounds::fixed(0)),
+                (IndexRole::Ordinary, index) if split_ordinary_zero_faces && index < 0 => {
+                    IndexBounds::new(None, Some(-1))
+                }
                 (_, index) if index > 0 => IndexBounds::new(Some(1), None),
                 _ => IndexBounds::new(None, Some(0)),
             }
@@ -888,6 +904,7 @@ fn unclosed<const N: usize>(
 
 fn checkpoint<const N: usize>(
     directory: Option<&Path>,
+    split_ordinary_zero_faces: bool,
     round: usize,
     closed: bool,
     program: &GuardedReductionProgram<N>,
@@ -907,6 +924,7 @@ fn checkpoint<const N: usize>(
     let metadata = serde_json::json!({ "schema": 1, "round": round, "status": tag,
         "measure_id": program.native().sources().measure_id(),
         "physical_arity": program.physical_arity(), "storage_capacity": N,
+        "split_ordinary_zero_faces":split_ordinary_zero_faces,
         "requested": requested.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>(),
         "frontier": frontier.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>() });
     let path = directory.join(format!("{base}.json"));
@@ -924,6 +942,93 @@ mod tests {
     use super::*;
     use crate::finite_density::guarded::GuardedMeasureIdentity;
     use crate::finite_density::measure::WeightedMeasure;
+
+    #[test]
+    fn ordinary_zero_faces_cover_requested_points_without_broadening_admission() {
+        let roles = [
+            IndexRole::Ordinary,
+            IndexRole::Ordinary,
+            IndexRole::RequiredCut,
+            IndexRole::Occupation,
+        ];
+        let requested = BTreeSet::from([[0, -2, 1, 0], [-3, 0, 2, 1], [2, 3, 1, 0]]);
+        let broad = discovery_domains(&requested, &roles, false).unwrap();
+        let faces = discovery_domains(&requested, &roles, true).unwrap();
+        for point in &requested {
+            assert!(faces.iter().any(|domain| domain.contains(point)));
+        }
+        for face in &faces {
+            assert!(broad.iter().any(|domain| face.is_subset_of(domain)));
+            for a in -4..=4 {
+                for b in -4..=4 {
+                    for cut in -1..=3 {
+                        for occupation in -1..=3 {
+                            let point = [a, b, cut, occupation];
+                            if face.contains(&point) {
+                                assert!(broad.iter().any(|domain| domain.contains(&point)));
+                                assert!(occupation >= 0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        let first = faces
+            .iter()
+            .find(|domain| domain.contains(&[0, -2, 1, 0]))
+            .unwrap();
+        assert_eq!(first.bounds()[0], IndexBounds::fixed(0));
+        assert_eq!(first.bounds()[1], IndexBounds::new(None, Some(-1)).unwrap());
+        assert_eq!(first.bounds()[2], IndexBounds::new(Some(1), None).unwrap());
+        assert_eq!(first.bounds()[3], IndexBounds::fixed(0));
+        assert!(discovery_domains(&BTreeSet::from([[0, 0, 0, -1]]), &roles, true).is_err());
+    }
+
+    #[test]
+    fn generated_compact_sources_close_and_replay_with_ordinary_zero_faces() {
+        let (context, deformation) = compact_context();
+        let target = [1, 0];
+        let outcome = prepare_weighted_system(
+            &context,
+            &[BTreeMap::from([(target, Atom::one())])],
+            &deformation,
+            WeightedClosureOptions {
+                split_ordinary_zero_faces: true,
+                ..Default::default()
+            },
+            &RunContext::default(),
+        )
+        .unwrap();
+        let WeightedClosureOutcome::Closed(closed) = outcome else {
+            panic!("zero-face compact closure unresolved: {outcome:?}")
+        };
+        closed.differential_system().unwrap().validate().unwrap();
+        let decoded = context
+            .decode(
+                &closed.program.encode(Default::default()).unwrap(),
+                Default::default(),
+            )
+            .unwrap();
+        assert!(
+            decoded
+                .reduce(target, Default::default())
+                .unwrap()
+                .unresolved
+                .is_empty()
+        );
+        for basis in &closed.reduced.basis {
+            let indices = [i64::from(basis.0[0]), i64::from(basis.0[1])];
+            for derivative in deformation.derivative(indices).unwrap().keys() {
+                assert!(
+                    decoded
+                        .reduce(*derivative, Default::default())
+                        .unwrap()
+                        .unresolved
+                        .is_empty()
+                );
+            }
+        }
+    }
 
     #[test]
     fn guard_faces_cover_only_one_finite_axis_and_preserve_symbolic_bounds() {

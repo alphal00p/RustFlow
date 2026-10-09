@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/mixed_cut_flow-28aa596346dc876f",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 4.944948816206306,
+  "user_seconds": 8.828579,
+  "system_seconds": 0.23496899999999998,
+  "peak_child_rss_kib": 12400,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

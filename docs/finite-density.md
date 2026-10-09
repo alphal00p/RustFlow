@@ -373,15 +373,20 @@ compiled guarded index arity. It retains unrestricted polynomial virtual factors
 only when their dimensional integral is scaleless. It does not replace retained
 virtual poles by moments.
 
-Active occupied shells in weighted AMF currently require assigned strictly
-positive rational squared masses. Numerical weighted flow uses either the open massive-sunset
-certificate or the routing-dependent heavy-edge certificate, with the common
-+i0 prescription and all uncut physical quadratic factors shifted. An uncut-line
-bound does not admit a massless shell endpoint. Generic massless occupied limits,
-pinched continuations and partial deformation placements remain unsupported by
-this numerical owner. Compact terminal thresholds have the narrower
-distributional criteria described below. These restrictions are separate from
-the algebraic parser, which can represent the massless oracle families.
+For assigned strictly positive rational shell masses, weighted AMF uses the
+open massive-sunset or routing-dependent heavy-edge certificate, with the common
++i0 prescription and all uncut physical quadratic factors shifted. A separate
+sealed massless permit now covers exactly two loops, all physical masses zero,
+positive occupied chemical magnitudes and polynomial completions. A singleton
+cut requires every uncut momentum to depend on its one virtual loop; a double
+cut requires every uncut momentum to be proportional to the spacelike transfer
+q1-q2. Exact routing, all-uncut deformation, origin convention and every finite
+basis label are bound to the [endpoint proof](finite-density-massless-endpoint.md).
+These classes are selected by physical structure, not graph names or targets.
+Generic massless four-loop endpoints, pinched continuations and partial
+deformation placements remain unsupported. Compact terminals retain their
+separate distributional admission. The algebraic parser can still represent
+families outside numerical admission.
 
 The optional Rust `PreparedOccupiedFlow::prepare_with_source_options` path can
 admit integer inverse powers of completion factors proved exactly equal to
@@ -396,6 +401,18 @@ participate in program identity and evaluation provenance. It is an extension
 of the intermediate integral domain, not permission to replace a virtual pole
 by a compact moment. The successful selected two-cut system below uses the
 default polynomial completion domain.
+
+The complete massless two-loop sunset now passes all four native profiles at
+D=13/2 and D=15/4, and five Laurent profiles through order zero. All occupied
+sectors use native weighted AMF, with closed bases 2, 2 and 3. The 110 independent
+reference comparisons and 84 refinements retain the raised original numerator
+and its nonzero upper surface; the vacuum and both singleton endpoints are
+checked as zeros. Native D=7 still encounters an explicit ordinary-boundary
+indicial resonance before producing a prediction, while independent convergent
+D=7 quadrature validates the reference and support derivative. See the
+[massless numerical report](../reports/validation/2026-10-09-finite-density-native-assembly/massless-native-validation.json)
+for counts and the [provenance record](../reports/validation/2026-10-09-finite-density-native-assembly/massless-native-provenance.json)
+for the original-source executable-digest limitation and final-order check.
 
 The complete generic numerical evaluator has not passed its required acceptance
 gates. The selected massive sunset now passes complete numerical assembly at
@@ -489,7 +506,7 @@ at `d=2` and retains an explicit singular-threshold diagnostic.
 | Integrated occupied boundaries | Polynomial compact and recursively integrated hard coefficients verified; generic retained soft poles and recursive weighted values unresolved |
 | Regulated common-contour continuation | Massive sunset and routing-dependent heavy-edge sufficient domains derived; see [contour certificates](finite-density-contours.md); thresholds, massless pinches and general admission remain separate |
 | Full massive normalization | Complete massive-sunset scalar and raised-numerator values pass independent raw-Euclidean comparisons, including the nonzero vacuum and raised surface contributions |
-| Physical endpoint reconstruction | Full massive-sunset endpoint passes at D=12/5 with 40 guard digits; cancellation/divergence/depth regressions pass; generic massless endpoint admission remains open |
+| Physical endpoint reconstruction | Complete massive and narrow massless two-loop endpoints and Laurent coefficients pass; D7 ordinary resonance remains explicit; generic massless four-loop admission remains open |
 | Three four-loop families | Exact distinct graph certificates available; independent E7 raised-line reference generated; all native predictions and the other two supplemental references absent |
 | Ten stable Laurent digits | Complete massive-sunset Laurent comparison passes five profiles, independently changing digits, order, start scale and epsilon grid; no four-loop AMF-to-oracle comparison |
 

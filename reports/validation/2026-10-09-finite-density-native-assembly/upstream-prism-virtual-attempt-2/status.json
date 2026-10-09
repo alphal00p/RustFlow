@@ -1,0 +1,39 @@
+{
+  "status": "partial_profile_completed_second_profile_timed_out",
+  "scope": "validation-only upstream virtual subgraph coefficients, not complete prism reference",
+  "completed_requested_digits": [
+    18
+  ],
+  "incomplete_requested_digits": [
+    26
+  ],
+  "complete_finite_density_references": 0,
+  "source_output": "/tmp/rustflow-prism-reduced-wiswxb20",
+  "definition_correction": "Both pair A [1,5] and pair B [1,7] jets plus pair C [5,7] raised neutral target are defined by the saved exact polynomial targets. The physical-input prose in the initial definition mentions pair A only; it is not the full five-target description.",
+  "artifacts_sha256": {
+    "runner-metadata.json": "7a1d8039646b9840e7fbe903115c1e0eb7e2f4f024a7e7ab2430cdf817fdb74e",
+    "archive-and-check.py": "3ec4c3549e7f01e6a0430ced6f00a7cfad57ff4b9ccb5acf17c513dcb5e602b3",
+    "gamma-check-resources.json": "717d8606ef8c0677fad4ea3b10be33cf6b53d651e0b70960b0b6646fb4f75197",
+    "gamma-check.wl": "50179d85e4cc9e429340cd890f448f120411dd10a43dbabb3026a9c76d18a0a7",
+    "oracle.wl": "6b68034bbc99009bb9abe915ab2b339e18e1431bf267abfea0e9572b842199f6",
+    "gamma-comparison.json": "94f1b58ec1bba7d6e1fba5295c44538aa1c1ac693ccaa10d6ed4c66f3e08d76e",
+    "wolfram_one_thread.py": "6551142d15c38061fd17f7d97d67d8386f63fe7cb95989a912260c13f2e9443b",
+    "subtraction-algebra-checks.json": "ad3e68c4fbef942a75823ed0be5e5c206e4b50e3551eaa4ca0185c0bcd4b3da9",
+    "initial-gamma-check.log": "8332450628549a2b168fa659b897c14f6fc038761bd0376b1bd155b3168a9166",
+    "initial-gamma-check-resources.json": "7ba99931739613551c69771892b972c8dc20a7a342dd89fbcf52befaae3270f0",
+    "README.md": "d0e6ba6fb6ca3bcfd9e0b5267887f2748b161919673b9da7f145b8b60570dbcd",
+    "reduced-combinations.wl": "a10a329c53980514152a8abae12d10792e7471f538fb82f4fcfaf5c4009297f9",
+    "runner.py": "6eb9508fa4264cd63ba10efba66895f8924c74da4cf2c6151150256d732a58a7",
+    "definition.json": "08e18ba8555af3e92e921c5e75b94db752c942e3ed6f6287be12cc4260187508",
+    "kernel.log": "99231247900746460539a2c53581833d0b9741701826dc2b992183211a9b768d",
+    "exact-combination-reduction.wl": "2543376fa565d3f24a761987aef1f72cdc8f10b2b2cb5fe1762751a6bdc0fb9b",
+    "profiles.json": "ea81bcece1700f9bb26f0416d5a6754cd87764673d69da4d509a23f030d69bc7",
+    "wolfram_one_thread.wl": "12b870d2278f8c417917a05dff3e7aa18fd888a0ac73633f962b300d24504318",
+    "gamma-check.log": "4ff2d6a8283099054e49f68c147afdc56b19bc3d7b74794493d727250dc914f8",
+    "subtraction-algebra-check.py": "19d0b1fbd328b6748d97e6acd76459907c81c1356e98da9d892cf02c90923501",
+    "exact-targets.wl": "767eb7e7d1bc1a45a5382a930e7726f4ad49de7a9a738271f8e1d34bbacae8ab",
+    "result-18.wl": "6febfe06e46bbc10ed817d7d4790f14e4779e27d0cf5af5f67349974b4ea7731",
+    "initial-gamma-check.wl": "43ce77e124739b8810359d2dc8e962eb993f605e081e483fdadbe8bd025fc574"
+  },
+  "gamma_crosscheck": "passed_three_masters_and_five_virtual_combinations_at_relative_1e-12"
+}

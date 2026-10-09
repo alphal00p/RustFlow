@@ -1,0 +1,20 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "/common/dev/rustflow_fermi/target/release/deps/finite_density_massless_reference-7381cfb00207829f",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.09140192810446024,
+  "user_seconds": 0.013045999999999999,
+  "system_seconds": 0.095417,
+  "peak_child_rss_kib": 15412,
+  "scope": "prebuilt independent validation-only reference, excludes compilation and Nix startup",
+  "binary": "target/release/deps/finite_density_massless_reference-7381cfb00207829f",
+  "binary_sha256": "a97c481860463e3061948656b8f13dfdb0a5856cb8679b39b73aa80f7c654751",
+  "source_sha256": "ecd441c7d46d63ff5c8cc8f2ea91f1c6fa9ea18157bddd82fdef7d653cfb6778",
+  "input_sha256": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+  "native_predictions_read": 0,
+  "oracle_records_read": 0
+}

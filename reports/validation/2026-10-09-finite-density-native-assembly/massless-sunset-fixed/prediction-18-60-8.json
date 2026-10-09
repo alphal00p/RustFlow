@@ -1,0 +1,3694 @@
+{
+  "contributions": [
+    {
+      "cut_slots": [],
+      "values": [
+        "(0+0i)",
+        "(0+0i)"
+      ]
+    },
+    {
+      "cut_slots": [
+        0
+      ],
+      "values": [
+        "(0+0i)",
+        "(0+0i)"
+      ]
+    },
+    {
+      "cut_slots": [
+        1
+      ],
+      "values": [
+        "(0+0i)",
+        "(0+0i)"
+      ]
+    },
+    {
+      "cut_slots": [
+        0,
+        1
+      ],
+      "values": [
+        "(1.9885727509936693838354812022600822175170849020706970574755725e-8+0i)",
+        "(-4.8609556135400807160422873833024231983750964272839261404958438e-8+0i)"
+      ]
+    }
+  ],
+  "digits": 18,
+  "epsilon": "-5/4",
+  "full_amplitude": true,
+  "guard_digits": 40,
+  "independent_reference_comparisons": 0,
+  "normalization": "unscaled Euclidean amplitude",
+  "occupied_reports": [
+    {
+      "basis_size": 2,
+      "boundary": "OccupiedBoundaryProvenance { regions: [OccupiedRegionProvenance { hard: [false, false], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [1, 1], half_orders: [None, None] }, OccupiedRegionProvenance { hard: [false, true], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [-1+rustflow_occupied::epsilon, -1+rustflow_occupied::epsilon], half_orders: [Some(0), Some(0)] }], integrated_coefficients: 2, integrated_products: 2, scaleless_noncompact_products: 0, vanishing_required_cut_coefficients: 0, massless_origin: Some(\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\") }",
+      "construction": "weighted_amf",
+      "contour_admission": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=one-virtual-loop-null-cone;input=b57a82738226c09fc07a78b20ec57422a08975c6518a019ab56071d8a6fe37f3;cuts=[0];shifted=[1, 2];options=WeightedSourceOptions { policy: LegacyLorentz, positive_compact_energy_powers: false };family=[\"loops=2;physical=3;input=5\", \"det=1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_2\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"-1*rustflow_occupied::{}::q_3+1\", \"rustflow_occupied::{}::q_3\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"1\", \"0\", \"0\", \"1\", \"shell=0:0:5:6:0:1\", \"target=0:[1, 1, 1, 0, 0, 0, 0]:-1\", \"target=1:[1, 1, 1, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 0, 1, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 1, 0, 0, 0, 0, 0]:1/2\", \"target=1:[2, 1, 1, -1, -1, 0, 0]:-1\", \"target=1:[2, 1, 1, 0, 0, 0, 0]:0\"]",
+      "cut_slots": [
+        0
+      ],
+      "massless_endpoint": {
+        "labels": [
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              0,
+              0,
+              -1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              0,
+              0,
+              0,
+              -2,
+              2,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              0,
+              0,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              0,
+              0,
+              0,
+              -1,
+              2,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              0,
+              1,
+              -1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              0,
+              1,
+              0,
+              0,
+              2,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              0,
+              2,
+              -1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              0,
+              2,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              0,
+              2,
+              0,
+              0,
+              2,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              0,
+              3,
+              -1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 3
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              0,
+              3,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 3
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              1,
+              -1,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              2,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              2,
+              -1,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              2,
+              0,
+              0,
+              0,
+              2,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              2,
+              1,
+              -1,
+              -2,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 3
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "17/2",
+            "indices": [
+              1,
+              2,
+              2,
+              -1,
+              -2,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 4
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "17/2",
+            "indices": [
+              1,
+              3,
+              1,
+              -1,
+              -2,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 4
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              2,
+              0,
+              0,
+              -1,
+              -2,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              2,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              2,
+              0,
+              0,
+              -1,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              2,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              2,
+              1,
+              1,
+              -1,
+              -1,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 2
+          }
+        ],
+        "origin_identity": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D"
+      },
+      "native_storage_capacity": 7,
+      "nonzero_conditions": [
+        "-1+2*rustflow_occupied::{}::epsilon",
+        "-2*rustflow_occupied::{}::eta",
+        "-2+2*rustflow_occupied::{}::epsilon",
+        "-3+2*rustflow_occupied::{}::epsilon",
+        "-3+6*rustflow_occupied::{}::epsilon",
+        "-4+2*rustflow_occupied::{}::epsilon",
+        "-4+4*rustflow_occupied::{}::epsilon",
+        "-5+2*rustflow_occupied::{}::epsilon",
+        "-6+2*rustflow_occupied::{}::epsilon",
+        "-6+4*rustflow_occupied::{}::epsilon",
+        "-8+4*rustflow_occupied::{}::epsilon",
+        "-8+8*rustflow_occupied::{}::epsilon",
+        "1+2*rustflow_occupied::{}::epsilon",
+        "16*rustflow_occupied::{}::epsilon",
+        "2*rustflow_occupied::{}::epsilon",
+        "2*rustflow_occupied::{}::eta",
+        "4*rustflow_occupied::{}::epsilon",
+        "4*rustflow_occupied::{}::eta",
+        "6*rustflow_occupied::{}::eta",
+        "8*rustflow_occupied::{}::epsilon",
+        "8*rustflow_occupied::{}::eta",
+        "rustflow_occupied::{}::epsilon",
+        "rustflow_occupied::{}::eta"
+      ],
+      "physical_arity": 7
+    },
+    {
+      "basis_size": 2,
+      "boundary": "OccupiedBoundaryProvenance { regions: [OccupiedRegionProvenance { hard: [false, false], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [1, 1], half_orders: [None, None] }, OccupiedRegionProvenance { hard: [false, true], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [-1+rustflow_occupied::epsilon, -1+rustflow_occupied::epsilon], half_orders: [Some(0), Some(0)] }], integrated_coefficients: 2, integrated_products: 2, scaleless_noncompact_products: 0, vanishing_required_cut_coefficients: 0, massless_origin: Some(\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\") }",
+      "construction": "weighted_amf",
+      "contour_admission": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=one-virtual-loop-null-cone;input=b57a82738226c09fc07a78b20ec57422a08975c6518a019ab56071d8a6fe37f3;cuts=[1];shifted=[0, 2];options=WeightedSourceOptions { policy: LegacyLorentz, positive_compact_energy_powers: false };family=[\"loops=2;physical=3;input=5\", \"det=-1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_0\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_3\", \"-1*rustflow_occupied::{}::q_3+1\", \"rustflow_occupied::{}::q_3\", \"role=Ordinary\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"0\", \"1\", \"1\", \"0\", \"shell=0:1:5:6:0:1\", \"target=0:[1, 1, 1, 0, 0, 0, 0]:-1\", \"target=1:[1, 1, 1, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 1, 0, 0, 0, 0, 0]:1/2\", \"target=1:[2, 1, 1, -1, -1, 0, 0]:-1\", \"target=1:[2, 1, 1, 0, 0, 0, 0]:0\"]",
+      "cut_slots": [
+        1
+      ],
+      "massless_endpoint": {
+        "labels": [
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              -1,
+              1,
+              1,
+              -1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              -1,
+              1,
+              1,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              -1,
+              1,
+              2,
+              -1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              -1,
+              1,
+              2,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              0,
+              1,
+              0,
+              -1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              0,
+              1,
+              0,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              0,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              0,
+              1,
+              1,
+              -1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              0,
+              1,
+              1,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              0,
+              1,
+              2,
+              -1,
+              -1,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              0,
+              1,
+              2,
+              -1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              0,
+              1,
+              2,
+              0,
+              -1,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              0,
+              1,
+              3,
+              -1,
+              -1,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 3
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              0,
+              1,
+              3,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 3
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "17/2",
+            "indices": [
+              0,
+              1,
+              4,
+              -1,
+              -1,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 4
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              0,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "scaleless-unrestricted-virtual-polynomial",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              0,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              2,
+              1,
+              1,
+              -1,
+              -1,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 3
+          },
+          {
+            "classification": "uniform-null-cone-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "uniform virtual null-cone endpoint jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact origin after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0
+            ],
+            "uncut_positive_power_sum": 3
+          }
+        ],
+        "origin_identity": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D"
+      },
+      "native_storage_capacity": 7,
+      "nonzero_conditions": [
+        "-1+2*rustflow_occupied::{}::epsilon",
+        "-1+rustflow_occupied::{}::epsilon",
+        "-14*rustflow_occupied::{}::epsilon+12+4*rustflow_occupied::{}::epsilon^2",
+        "-2+2*rustflow_occupied::{}::epsilon",
+        "-2+rustflow_occupied::{}::epsilon",
+        "-3*rustflow_occupied::{}::eta+6*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+        "-3+2*rustflow_occupied::{}::epsilon",
+        "-3+6*rustflow_occupied::{}::epsilon",
+        "-4*rustflow_occupied::{}::epsilon+8",
+        "-4+2*rustflow_occupied::{}::epsilon",
+        "-4+4*rustflow_occupied::{}::epsilon",
+        "-5+2*rustflow_occupied::{}::epsilon",
+        "-6*rustflow_occupied::{}::eta+12*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+        "-6+4*rustflow_occupied::{}::epsilon",
+        "-7*rustflow_occupied::{}::epsilon+2*rustflow_occupied::{}::epsilon^2+6",
+        "-8+4*rustflow_occupied::{}::epsilon",
+        "2*rustflow_occupied::{}::eta",
+        "4*rustflow_occupied::{}::eta",
+        "6*rustflow_occupied::{}::eta",
+        "rustflow_occupied::{}::eta"
+      ],
+      "physical_arity": 7
+    },
+    {
+      "basis_size": 3,
+      "boundary": "OccupiedBoundaryProvenance { regions: [OccupiedRegionProvenance { hard: [false, false], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [0, 1, 1], half_orders: [Some(0), None, None] }], integrated_coefficients: 1, integrated_products: 1, scaleless_noncompact_products: 0, vanishing_required_cut_coefficients: 0, massless_origin: Some(\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\") }",
+      "construction": "weighted_amf",
+      "contour_admission": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=two-compact-spacelike-transfer;input=b57a82738226c09fc07a78b20ec57422a08975c6518a019ab56071d8a6fe37f3;cuts=[0, 1];shifted=[2];options=WeightedSourceOptions { policy: LegacyLorentz, positive_compact_energy_powers: false };family=[\"loops=2;physical=3;input=5\", \"det=1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_2\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"-1*rustflow_occupied::{}::q_3+1\", \"rustflow_occupied::{}::q_3\", \"-1*rustflow_occupied::{}::q_4+1\", \"rustflow_occupied::{}::q_4\", \"role=RequiredCut\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"role=Occupation\", \"role=Occupation\", \"1\", \"0\", \"0\", \"1\", \"shell=0:0:5:6:0:1\", \"shell=1:1:7:8:0:1\", \"target=0:[1, 1, 1, 0, 0, 0, 0, 0, 0]:-1\", \"target=1:[1, 1, 1, 0, 0, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 1, 0, 0, 0, 0, 0, 0, 0]:1/2\", \"target=1:[2, 1, 1, -1, -1, 0, 0, 0, 0]:-1\", \"target=1:[2, 1, 1, 0, 0, 0, 0, 0, 0]:0\"]",
+      "cut_slots": [
+        0,
+        1
+      ],
+      "massless_endpoint": {
+        "labels": [
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              -2,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "11/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              -2,
+              2,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -5,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 1"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1,
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              -1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              -1,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "5/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -1,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "11/2",
+            "indices": [
+              1,
+              1,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -5,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 1"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1,
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              -1,
+              -2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              -1,
+              -1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              0,
+              -2,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              0,
+              -1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              0,
+              -1,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "9/2",
+            "indices": [
+              1,
+              1,
+              1,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              1,
+              2,
+              -1,
+              -2,
+              1,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              1,
+              2,
+              -1,
+              -1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              1,
+              2,
+              0,
+              -2,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              1,
+              2,
+              0,
+              -1,
+              0,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              1,
+              2,
+              0,
+              -1,
+              1,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              1,
+              2,
+              0,
+              -1,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              1,
+              1,
+              2,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 2
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "17/2",
+            "indices": [
+              1,
+              1,
+              3,
+              0,
+              -1,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -5,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -5,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 3
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "17/2",
+            "indices": [
+              1,
+              1,
+              3,
+              0,
+              0,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -5,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -5,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              0
+            ],
+            "uncut_positive_power_sum": 3
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "11/2",
+            "indices": [
+              1,
+              2,
+              0,
+              0,
+              -3,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -5,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 1"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              1
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "11/2",
+            "indices": [
+              1,
+              2,
+              0,
+              0,
+              -2,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -5,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 1"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              0,
+              1
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "11/2",
+            "indices": [
+              2,
+              1,
+              0,
+              0,
+              -2,
+              1,
+              0,
+              1,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -5,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 1"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1,
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "11/2",
+            "indices": [
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -5,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 0"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 1"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1,
+              0
+            ],
+            "uncut_positive_power_sum": 0
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              2,
+              1,
+              1,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -6,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 1"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          },
+          {
+            "classification": "pure-compact-transfer-endpoint",
+            "high_dimension_witness": "13/2",
+            "indices": [
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "inequalities": [
+              {
+                "degree": {
+                  "constant": -6,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 0 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -4,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "compact radius 1 after finite transfer jets"
+              },
+              {
+                "degree": {
+                  "constant": -3,
+                  "twice_dimension_coefficient": 1
+                },
+                "stratum": "compact collinear transfer after finite jets"
+              },
+              {
+                "degree": {
+                  "constant": -2,
+                  "twice_dimension_coefficient": 2
+                },
+                "stratum": "common compact origin domain at loop 1"
+              }
+            ],
+            "mass_and_upper_jet_orders": [
+              1,
+              0
+            ],
+            "uncut_positive_power_sum": 1
+          }
+        ],
+        "origin_identity": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D"
+      },
+      "native_storage_capacity": 9,
+      "nonzero_conditions": [
+        "-12*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta+9*rustflow_occupied::{}::eta",
+        "-12*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2",
+        "-12*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2+9",
+        "-12+4*rustflow_occupied::{}::epsilon",
+        "-2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta",
+        "-2*rustflow_occupied::{}::epsilon+rustflow_occupied::{}::epsilon^2",
+        "-2*rustflow_occupied::{}::eta+rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+        "-2+2*rustflow_occupied::{}::epsilon",
+        "-2+rustflow_occupied::{}::epsilon",
+        "-24*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+18*rustflow_occupied::{}::eta+8*rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta",
+        "-24*rustflow_occupied::{}::epsilon+18+8*rustflow_occupied::{}::epsilon^2",
+        "-3*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta",
+        "-3*rustflow_occupied::{}::epsilon+rustflow_occupied::{}::epsilon^2",
+        "-3*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+        "-3*rustflow_occupied::{}::eta+rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+        "-3+2*rustflow_occupied::{}::epsilon",
+        "-3+rustflow_occupied::{}::epsilon",
+        "-36*rustflow_occupied::{}::eta+-64*rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta+16*rustflow_occupied::{}::epsilon^3*rustflow_occupied::{}::eta+84*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+        "-36+-64*rustflow_occupied::{}::epsilon^2+16*rustflow_occupied::{}::epsilon^3+84*rustflow_occupied::{}::epsilon",
+        "-4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta",
+        "-4*rustflow_occupied::{}::epsilon+2*rustflow_occupied::{}::epsilon^2",
+        "-4+2*rustflow_occupied::{}::epsilon",
+        "-4+4*rustflow_occupied::{}::epsilon",
+        "-6*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta",
+        "-6*rustflow_occupied::{}::epsilon+2*rustflow_occupied::{}::epsilon^2",
+        "-6*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+        "-6+2*rustflow_occupied::{}::epsilon",
+        "-8*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2",
+        "-8+4*rustflow_occupied::{}::epsilon",
+        "2*rustflow_occupied::{}::epsilon",
+        "2*rustflow_occupied::{}::eta",
+        "4*rustflow_occupied::{}::epsilon",
+        "4+rustflow_occupied::{}::eta",
+        "rustflow_occupied::{}::eta"
+      ],
+      "physical_arity": 9
+    }
+  ],
+  "occupied_start_scale": 8,
+  "series_order": 60,
+  "values": [
+    "(1.9885727509936693838354812022600822175170849020706970574755725e-8+0i)",
+    "(-4.8609556135400807160422873833024231983750964272839261404958438e-8+0i)"
+  ]
+}

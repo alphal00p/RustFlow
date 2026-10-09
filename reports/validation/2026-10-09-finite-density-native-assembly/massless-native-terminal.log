@@ -1,0 +1,37 @@
+
+running 8 tests
+test terminal_declines_virtual_poles_and_zeroes_unrestricted_polynomials ... ok
+test empty_support_and_compact_terminals_keep_the_common_amf_contract ... ok
+test massless_terminal_admission_does_not_admit_flowing_virtual_poles ... ok
+full massless D=4 pole diagnostic: numerical failure: gamma evaluation reached a pole or exceeded the numeric backend's range
+test public_massless_terminal_keeps_removable_and_true_dimensional_poles_distinct ... ok
+test public_assembly_below_threshold_retains_massive_vacuum ... ok
+test public_assembly_above_threshold_keeps_vacuum_and_raised_surface ... ok
+test public_massless_terminal_assembly_matches_fixed_numerator_mass_derivatives ... ok
+test public_assembly_threshold_uses_thermal_finite_jump_and_diagnoses_singular_case ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.20s
+
+	Command being timed: "target/release/deps/finite_density_terminal-40746a28a7811244 --nocapture"
+	User time (seconds): 0.18
+	System time (seconds): 0.29
+	Percent of CPU this job got: 197%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 0:00.23
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 6144
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 5968
+	Minor (reclaiming a frame) page faults: 6721
+	Voluntary context switches: 6074
+	Involuntary context switches: 2
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 1
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0

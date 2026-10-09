@@ -1,0 +1,15 @@
+
+running 1 test
+
+thread 'native_density_binding_preserves_full_values_errors_and_cancellation' (3035844) panicked at tests/python_finite_density.rs:98:8:
+called `Result::unwrap()` on an `Err` value: PyErr { type: <class 'symbolica.community.hep.integration.ResourceLimitError'>, value: ResourceLimitError('resource limit: Laporta RHS closure exceeds max_targets=4096'), traceback: Some("Traceback (most recent call last):\n  File \"<string>\", line 51, in <module>\n") }
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test native_density_binding_preserves_full_values_errors_and_cancellation ... FAILED
+
+failures:
+
+failures:
+    native_density_binding_preserves_full_values_errors_and_cancellation
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 0 filtered out; finished in 21.60s
+

@@ -552,3 +552,99 @@ fn inverse_completion_boundary_uses_exact_positive_energy_certificate() {
         Err(Error::InvalidInput(_))
     ));
 }
+
+#[test]
+fn sealed_massless_origin_integrates_hard_factors_upper_contacts_and_zero_lower_jets() {
+    use symbolica_amflow::finite_density::massless_endpoint::MasslessFlowEvidence;
+    use symbolica_amflow::finite_density::preparation::WeightedSourceOptions;
+    let mut input: DensityInput = serde_json::from_str(include_str!(concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/examples/finite_density/massive_two_loop_sunset.json"
+    )))
+    .unwrap();
+    for edge in &mut input.edges {
+        edge.mass_squared = "0".into();
+    }
+    let input = input.prepare().unwrap();
+    let family = input.occupied_cut(&[0], 16).unwrap().at_physical_masses();
+    let proof =
+        MasslessFlowEvidence::new(&input, &family, &[1, 2], WeightedSourceOptions::default())
+            .unwrap();
+    let shell = &family.shells()[0];
+    let base = family.targets()[0].keys().next().unwrap().clone();
+    let mut raised = base.clone();
+    raised.0[shell.physical_slot] = 2;
+    let mut upper = base.clone();
+    upper.0[shell.upper_slot] = 1;
+    let mut lower = base;
+    lower.0[shell.lower_slot] = 1;
+    let basis = [raised, upper, lower];
+    let eps = symbol!("massless_flow_boundary_eps");
+    let p = Precision::decimal(60).unwrap();
+    // The artificial identity basis isolates boundary matching. Each actual
+    // leading region is eta^(-eps), with its coefficient integrated from the
+    // original graph; no endpoint or differential-equation value is supplied.
+    let solutions = FrobeniusBasis {
+        precision: p,
+        columns: (0..3)
+            .map(|column| FrobeniusColumn {
+                exponent: Atom::var(eps),
+                coefficients: vec![vec![
+                    (0..3).map(|row| p.i(i64::from(row == column))).collect(),
+                ]],
+            })
+            .collect(),
+    };
+    let backend = RustRedBackend {
+        bubble_subloops: false,
+        ..Default::default()
+    };
+    let options = FlowOptions::default();
+    let context = RunContext::default();
+    let boundary = OccupiedFlowBoundary::new(
+        &backend,
+        &options,
+        &context,
+        eps,
+        0,
+        OccupiedBoundaryLimits::default(),
+    )
+    .unwrap();
+    let epsilon = Rational::from((4, 5));
+    assert!(matches!(
+        boundary.constants(&family, &basis, &shift(&family), &epsilon, p, &solutions),
+        Err(Error::Unsupported(_))
+    ));
+    let boundary = boundary.with_massless_evidence(&proof).unwrap();
+    let result = boundary
+        .constants(&family, &basis, &shift(&family), &epsilon, p, &solutions)
+        .unwrap();
+    // At D=12/5 the C2 seed is outside its bare origin convergence range.
+    // These are the continued one-shell moments times the ordinary power-two
+    // Gaussian seed Gamma(4/5), not a two-loop integral formula.
+    let pi = ComplexFloat::new(p.real(1).pi(), p.real(0));
+    let normalization = p.mul(
+        &p.pow(&pi, &p.rational(&Rational::from((1, 2)))),
+        &p.gamma_real(&p.rational(&Rational::from((7, 10))).re)
+            .unwrap(),
+    );
+    let gaussian = p
+        .gamma_real(&p.rational(&Rational::from((4, 5))).re)
+        .unwrap();
+    let upper_expected = p.div(&gaussian, &normalization);
+    let raised_expected = p.scale(&upper_expected, -3, 16);
+    assert!(p.close(&result.constants[0], &raised_expected, 40));
+    assert!(p.close(&result.constants[1], &upper_expected, 40));
+    assert!(p.close(&result.constants[2], &p.zero(), 40));
+    assert_eq!(
+        result.provenance.massless_origin,
+        Some(proof.origin_identity())
+    );
+    assert!(
+        result
+            .provenance
+            .regions
+            .iter()
+            .any(|r| r.hard.iter().any(|&h| h))
+    );
+}

@@ -108,6 +108,7 @@ fn sample_report(
         "native_storage_capacity":report.native_storage_capacity,
         "shifted_slots":report.shifted_slots,
         "contour_admission":report.contour_admission,
+        "massless_endpoint":report.massless_endpoint,
         "nonzero_conditions":report.nonzero_conditions.iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),
         "boundary":{
             "integrated_coefficients":report.boundary.integrated_coefficients,

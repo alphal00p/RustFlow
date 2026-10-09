@@ -141,6 +141,9 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
         search_frontier_sectors: std::env::var("RUSTFLOW_WEIGHTED_FRONTIER_SECTORS")
             .map(|v| v == "1")
             .unwrap_or(defaults.search_frontier_sectors),
+        split_ordinary_zero_faces: std::env::var("RUSTFLOW_WEIGHTED_ZERO_FACES")
+            .map(|v| v == "1")
+            .unwrap_or(defaults.split_ordinary_zero_faces),
         discovery: GuardedDiscoveryOptions {
             max_depth: budget(
                 "RUSTFLOW_WEIGHTED_DEPTH",
@@ -183,6 +186,7 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
             "max_frontier": options.max_frontier, "max_requested": options.max_requested,
             "guard_refinement": options.guard_refinement,
             "search_frontier_sectors":options.search_frontier_sectors,
+            "split_ordinary_zero_faces":options.split_ordinary_zero_faces,
             "source_context": format!("{:?}", preparation.context.sources()),
             "numerical_prediction": false
         }))

@@ -1,0 +1,39 @@
+{
+  "schema": 1,
+  "source_snapshot": "massless-native-source-hashes.json",
+  "source_admission_regressions": {
+    "passed": 2,
+    "failed": 0,
+    "harness_seconds": 0.13,
+    "binary": "target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+    "binary_sha256": "514771007f3236674a5c1245f162926d961ec310dceabb2edd8b651f12653dfc",
+    "resources": {
+      "command": [
+        "target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.17328815022483468,
+      "user_seconds": 0.054959,
+      "system_seconds": 0.153442,
+      "peak_child_rss_kib": 12348,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    "scope": "sealed one-virtual and fully compact massless origin-source domains, native zero replay/decoding, options/routing/cache/completion/storage admission; no numerical prediction"
+  },
+  "zero_face_units": {
+    "owner_report": "massless-native-boundary-gates.json",
+    "included_in_full_lib_47": true,
+    "count": 2,
+    "rerun_by_this_owner": false
+  },
+  "four_loop_diagnostics": {
+    "comparison": "four-loop-zero-face-comparison.json",
+    "completed_harnesses": 2,
+    "closed": 0,
+    "numerical_predictions": 0,
+    "expanded_comparison": "four-loop-zero-face-expanded-comparison.json",
+    "expanded_completed_harnesses": 1,
+    "expanded_timeouts": 1
+  }
+}

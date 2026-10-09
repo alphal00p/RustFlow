@@ -1,0 +1,15 @@
+{
+  "command": [
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/upstream-prism-virtual-attempt-2/wolfram_one_thread.py",
+    "-noinit",
+    "-noprompt",
+    "-script",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/upstream-prism-virtual-attempt-2/gamma-check.wl"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 7.750000793952495,
+  "timeout_seconds": 60,
+  "runtime_threads": 1,
+  "scope": "independent Gamma evaluation and comparison only",
+  "script_sha256": "50179d85e4cc9e429340cd890f448f120411dd10a43dbabb3026a9c76d18a0a7"
+}
