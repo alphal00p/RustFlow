@@ -5,11 +5,12 @@ shared host extension. `python_stubgen` additionally enables stub metadata. This
 crate does not build a second Python extension. PyO3 0.28 and the Symbolica
 `python_export` API are shared with the community host.
 
-For a fresh consumer checkout, follow the [published-input setup
-recipe](clean-community-build.md). The checked-in manifests and locks fetch the
-native owners directly from public Git pins. They require no local patch
-application or sibling checkout. The community manifest and lock select its
-RustFlow runtime revision.
+The [published-input setup recipe](clean-community-build.md) describes a frozen
+community-host snapshot; its manifest and lock select that snapshot's RustFlow
+runtime revision. This checkout includes RustRed in
+[`vendor/rustred`](../vendor/README.md), while its other native owners come from
+public Git pins. Building this checkout requires no sibling RustRed checkout or
+local patch application.
 
 The standalone root and community host each own their Cargo patch tables;
 Cargo ignores a dependency's patch table. Both source HEPKit, Linnet, Spenso,
@@ -20,20 +21,43 @@ fork-based package overrides have been removed. Historical validation reports
 retain their original owner revisions.
 
 The current lock selects Symbolica, Numerica and Graphica 3.0.1 from official
-community revision `ed2374f1d880d52c3a7ca48cd7c22f4baad5c020`, and RustRed revision
-`78969aab524b7d6a2eec36f59b01e9af1e04cc04`. This descendant of the former
+community revision `ed2374f1d880d52c3a7ca48cd7c22f4baad5c020`. RustRed is a local
+path dependency at `vendor/rustred/crates/rustred-core`, initially copied without
+source changes from revision `78969aab524b7d6a2eec36f59b01e9af1e04cc04` of
+`../rustred_fermi`. This descendant of the former
 `acc92b0dad27b11fd194a4c284765fb6a93cbc94` lock adds guarded distribution-source
-reduction. The update leaves the Symbolica, Numerica, Graphica and HEPKit source
-identities unchanged; RustRed's standalone vendored patch table is not imported
-into RustFlow. The manifest pins this revision because the guarded interface
-is on RustRed's `fermi` branch; unpinned `main` is not an equivalent embedding
-source. Embedding workspaces that also depend on RustRed must select this same
-Git source identity. RustRed's core Cargo package is
-`rustred`; its experimental `reconstruction` feature remains disabled. Native
+reduction. The copy preserves the previously selected RustRed implementation
+and leaves the Symbolica, Numerica, Graphica and HEPKit source identities
+unchanged. RustRed's standalone patch table is not imported into RustFlow;
+the owning RustFlow or embedding workspace supplies the shared algebra sources.
+RustRed's core Cargo package is `rustred`; its experimental `reconstruction`
+feature remains disabled. Native
 and Pyodide consumers select one shared arithmetic backend. `python` enables
 the native automatic evaluator; `python_wasm` enables its serial portable
 counterpart. The core `automatic` feature is independent of `native` and can
 be paired with `wasm`. See [WASM support](wasm.md).
+
+Embedding workspaces that also use RustRed directly, or through Vakint or its
+FeynKit bridge, must resolve those uses to the same vendored source. An upstream
+RustRed Git dependency remains a distinct Cargo package even when its source
+files match this copy. For a development host, point its direct RustRed dependency
+to this checkout's `vendor/rustred/crates/rustred-core`, and patch upstream Git
+dependencies at the **host** root as needed:
+
+```toml
+[patch."https://github.com/alphal00p/rustred"]
+rustred = { path = "/path/to/rustflow/vendor/rustred/crates/rustred-core" }
+rustred-order = { path = "/path/to/rustflow/vendor/rustred/crates/rustred-order" }
+rustred-feynkit = { path = "/path/to/rustflow/vendor/rustred/crates/rustred-feynkit" }
+```
+
+Include any other RustRed workspace packages used by that host in the same
+override, update its lock deliberately, and verify that its resolved graph has
+one source per RustRed package. These are local development paths, not paths to
+publish in a portable host manifest. A host consuming RustFlow from Git must
+likewise align its other RustRed dependencies with the copy in the selected
+RustFlow revision. The frozen community-host recipe predates this vendoring
+change and has not been migrated by this checkout's update.
 
 The host additionally pins Vakint separately at
 `6203c6cbba6ae5e90329ba5081fad55319e678db`; it remains native-only. Run the

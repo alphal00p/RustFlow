@@ -1,0 +1,723 @@
+"""Input-only anchor planning tests: no native executable is invoked."""
+import copy
+import importlib.util
+import io
+import json
+import os
+from pathlib import Path
+import subprocess
+import sys
+import tempfile
+import unittest
+from unittest.mock import patch
+
+
+def module(name):
+    spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name(name + ".py"))
+    result = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(result)
+    return result
+
+
+STAGE = module("stage_saved_owner_campaign")
+PRODUCTION = module("production_saved_owner_campaign")
+
+
+def query(owner="10", query_id="original"):
+    return {"id": query_id, "owner": owner, "lower": [0, 1], "upper": [4, 5],
+            "max_numerator_rank": 2,
+            "power_bounds": {"max_positive_power": 5, "min_power_difference": 1,
+                             "max_power_difference": None}}
+
+
+def document(rows=None):
+    return {"schema": "rustred.owner-domain-queries.json.v2", "queries": rows or [query()]}
+
+
+class AnchorPlanningTests(unittest.TestCase):
+    def fixture(self, root):
+        owner = root / "owner.rrbin"
+        owner.write_bytes(b"fixture only, not a native rule program")
+        manifest = root / "selection-source.json"
+        manifest.write_text(json.dumps({"family_fingerprint": "fixture", "owners": [
+            {"mask": mask, "path": str(owner), "bytes": owner.stat().st_size} for mask in ("10", "01")],
+            "load_limits": {"max_total_input_bytes": 1234}, "initial_frontier_routes": []}))
+        queries = root / "queries-source.json"
+        queries.write_text(json.dumps(document(), separators=(",", ":")) + "\n\n")
+        return manifest, queries
+
+    def test_rank_and_optional_power_are_generic_native_obligations(self):
+        for rank, power in ((0, None), (12, None), (15, 24), (2 ** 32 - 1, 2 ** 64 - 1)):
+            with self.subTest(rank=rank, power=power):
+                original = document()
+                data, plan = STAGE.plan_anchor_queries(json.dumps(original).encode(), ["01", "10"], rank, power)
+                rows = json.loads(data)["queries"]
+                self.assertEqual(rows[:1], original["queries"])
+                self.assertEqual([row["owner"] for row in rows[1:]], ["01", "10"])
+                for row in rows[1:]:
+                    self.assertEqual(row["lower"], [0, 0])
+                    self.assertEqual(row["upper"], [None, None])
+                    self.assertEqual(row["max_numerator_rank"], rank)
+                    self.assertEqual(row["power_bounds"], {"max_positive_power": power,
+                                                          "min_power_difference": None, "max_power_difference": None})
+                self.assertEqual(plan["anchor_query_count"], 2)
+                self.assertFalse(plan["descendant_clipping"])
+                self.assertFalse(plan["family_closure_claim"])
+
+    def test_selected_power_owners_only_and_deterministic_manifest_order(self):
+        raw = json.dumps(document()).encode()
+        data, plan = STAGE.plan_anchor_queries(raw, ["01", "10", "11"], 12, 19, ["11", "01"])
+        anchors = json.loads(data)["queries"][1:]
+        self.assertEqual([row["power_bounds"]["max_positive_power"] for row in anchors], [19, None, 19])
+        self.assertEqual(plan["positive_power_owners"], ["01", "11"])
+        self.assertEqual(plan["positive_power_owner_scope"], "listed")
+        self.assertEqual((data, plan), STAGE.plan_anchor_queries(raw, ["01", "10", "11"], 12, 19, ["01", "11"]))
+
+    def test_original_objects_and_metadata_not_filtered_or_interpreted(self):
+        original = document([query("11", "unselected-owner-diagnostic"), query("10", "second")])
+        original["metadata_for_future_native_parser"] = {"untouched": [1, 2]}
+        original["queries"][1]["future_native_field"] = {"untouched": True}
+        before = copy.deepcopy(original)
+        raw, _ = STAGE.plan_anchor_queries(json.dumps(original).encode(), ["10", "01"], 3)
+        result = json.loads(raw)
+        self.assertEqual(result["queries"][:2], before["queries"])
+        self.assertEqual(result["metadata_for_future_native_parser"], before["metadata_for_future_native_parser"])
+        self.assertEqual(original, before)
+        # Keeping unknown fields is not admitting them; native validation remains authoritative.
+
+    def test_invalid_numbers_and_owner_scope_rejected(self):
+        raw = json.dumps(document()).encode()
+        for rank in (-1, 2 ** 32, True, 1.5, "12"):
+            with self.subTest(rank=rank), self.assertRaisesRegex(ValueError, "unsigned 32"):
+                STAGE.plan_anchor_queries(raw, ["10"], rank)
+        for power in (-1, 2 ** 64, True, float("nan"), "19"):
+            with self.subTest(power=power), self.assertRaisesRegex(ValueError, "unsigned 64"):
+                STAGE.plan_anchor_queries(raw, ["10"], 12, power)
+        for owners in ([], ["10", "10"], ["11"], "10", [True]):
+            with self.subTest(owners=owners), self.assertRaisesRegex(ValueError, "unique selected"):
+                STAGE.plan_anchor_queries(raw, ["10"], 12, 19, owners)
+        with self.assertRaisesRegex(ValueError, "explicit anchor positive power"):
+            STAGE.plan_anchor_queries(raw, ["10"], 12, None, ["10"])
+
+    def test_invalid_masks_ids_and_duplicate_json_rejected(self):
+        raw = json.dumps(document()).encode()
+        for masks in ([], ["10", "10"], ["10", "001"], ["1x"], [True]):
+            with self.subTest(masks=masks), self.assertRaisesRegex(ValueError, "common arity"):
+                STAGE.plan_anchor_queries(raw, masks, 1)
+        for query_id in ("", "é" * 65, 7):
+            with self.subTest(query_id=query_id), self.assertRaisesRegex(ValueError, "query id"):
+                STAGE.plan_anchor_queries(json.dumps(document([query(query_id=query_id)])).encode(), ["10"], 1)
+        with self.assertRaisesRegex(ValueError, "query ids must be unique"):
+            STAGE.plan_anchor_queries(json.dumps(document([query(), query()])).encode(), ["10"], 1)
+        with self.assertRaisesRegex(ValueError, "arity-sized binary"):
+            STAGE.plan_anchor_queries(json.dumps(document([query("100")])).encode(), ["10"], 1)
+        with self.assertRaisesRegex(ValueError, "duplicate JSON field"):
+            STAGE.plan_anchor_queries(b'{"schema":1,"schema":2,"queries":[]}', ["10"], 1)
+        collision = query(query_id="owner-anchor-r1-anone-10")
+        with self.assertRaisesRegex(ValueError, "collides"):
+            STAGE.plan_anchor_queries(json.dumps(document([collision])).encode(), ["10"], 1)
+
+    def test_default_staging_remains_byte_preserving(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, source = self.fixture(root)
+            staged = root / "inputs"
+            receipt = STAGE.stage(manifest, source, staged, root)
+            self.assertEqual((staged / "queries.json").read_bytes(), source.read_bytes())
+            self.assertTrue(receipt["query_bytes_unchanged"])
+            self.assertNotIn("anchor_plan", receipt)
+            self.assertFalse((staged / "queries-original.json").exists())
+            self.assertNotIn("preferred_owner_programs", receipt)
+            self.assertNotIn("preferred_owner_programs", json.loads((staged / "selection.json").read_bytes()))
+
+    def test_preferred_program_is_portable_preserved_and_verified(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, queries = self.fixture(root)
+            preferred = root / "choice.rrbin"
+            preferred.write_bytes(b"opaque preferred program, not mathematical authority")
+            selection = json.loads(manifest.read_bytes())
+            selection["preferred_owner_programs"] = [{
+                "owner_mask": "10", "path": str(preferred), "bytes": preferred.stat().st_size,
+                "sha256": STAGE.digest(preferred), "residual_policy": "defer-to-baseline"}]
+            manifest.write_text(json.dumps(selection))
+            campaign = root / "original"
+            receipt = STAGE.stage(manifest, queries, campaign / "inputs", root)
+            saved = receipt["preferred_owner_programs"][0]
+            self.assertEqual(saved["path"], "preferred/0000-10.rrbin")
+            self.assertEqual(saved["residual_policy"], "defer-to-baseline")
+            self.assertEqual(receipt["owner_count"], 2)
+            self.assertEqual(PRODUCTION.verify_inputs(campaign / "inputs")[0], 1)
+            copied = PRODUCTION.prepare_from(campaign, root / "copied", "preserve")
+            self.assertEqual(copied["preferred_owner_programs"][0]["sha256"], saved["sha256"])
+            self.assertEqual(PRODUCTION.verify_inputs(root / "copied/inputs")[0], 1)
+            target = campaign / "inputs" / saved["path"]
+            target.chmod(0o644)
+            target.write_bytes(b"corrupt")
+            with self.assertRaisesRegex(ValueError, "preferred program identity changed"):
+                PRODUCTION.verify_inputs(campaign / "inputs")
+
+    def test_preferred_declarations_are_explicit_and_nonconflicting(self):
+        for mutation in ("policy", "missing-owner", "duplicate", "overlay"):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                manifest, queries = self.fixture(root)
+                selection = json.loads(manifest.read_bytes())
+                row = {"owner_mask": "10", "path": str(root / "owner.rrbin"),
+                       "bytes": (root / "owner.rrbin").stat().st_size,
+                       "residual_policy": "defer-to-baseline"}
+                selection["preferred_owner_programs"] = [row]
+                if mutation == "policy":
+                    del row["residual_policy"]
+                elif mutation == "missing-owner":
+                    row["owner_mask"] = "11"
+                elif mutation == "duplicate":
+                    selection["preferred_owner_programs"].append(dict(row))
+                else:
+                    selection["domain_rule_overlays"] = [dict(row)]
+                manifest.write_text(json.dumps(selection))
+                with self.assertRaises(ValueError):
+                    STAGE.stage(manifest, queries, root / "invalid", root)
+                self.assertFalse((root / "invalid").exists())
+
+    def test_preferred_subset_roundtrips_and_cannot_change_in_receipt(self):
+        for ordinals in (None, [], [0, 110, 464]):
+            with self.subTest(ordinals=ordinals), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                manifest, queries = self.fixture(root)
+                selection = json.loads(manifest.read_bytes())
+                selection["preferred_owner_programs"] = [{
+                    "owner_mask": "10", "path": str(root / "owner.rrbin"),
+                    "bytes": (root / "owner.rrbin").stat().st_size,
+                    "residual_policy": "defer-to-baseline", "rule_ordinals": ordinals}]
+                manifest.write_text(json.dumps(selection))
+                campaign = root / "original"
+                receipt = STAGE.stage(manifest, queries, campaign / "inputs", root)
+                self.assertEqual(receipt["preferred_owner_programs"][0]["rule_ordinals"], ordinals)
+                self.assertEqual(PRODUCTION.verify_inputs(campaign / "inputs")[0], 1)
+                copied = PRODUCTION.prepare_from(campaign, root / "copied", "preserve")
+                self.assertEqual(copied["preferred_owner_programs"][0]["rule_ordinals"], ordinals)
+                self.assertEqual(PRODUCTION.verify_inputs(root / "copied/inputs")[0], 1)
+                receipt["preferred_owner_programs"][0]["rule_ordinals"] = [1]
+                (campaign / "inputs/input-receipt.json").write_text(json.dumps(receipt))
+                with self.assertRaisesRegex(ValueError, "preferred program inventory differs"):
+                    PRODUCTION.verify_inputs(campaign / "inputs")
+
+    def test_preferred_subset_is_canonical_before_any_staging(self):
+        for ordinals in (False, 1, "110", [-1], [True], [1.0], [1 << 64], [1, 1], [2, 1]):
+            with self.subTest(ordinals=ordinals), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                manifest, queries = self.fixture(root)
+                selection = json.loads(manifest.read_bytes())
+                selection["preferred_owner_programs"] = [{
+                    "owner_mask": "10", "path": str(root / "owner.rrbin"),
+                    "bytes": (root / "owner.rrbin").stat().st_size,
+                    "residual_policy": "defer-to-baseline", "rule_ordinals": ordinals}]
+                manifest.write_text(json.dumps(selection))
+                with self.assertRaisesRegex(ValueError, "rule_ordinals"):
+                    STAGE.stage(manifest, queries, root / "invalid", root)
+                self.assertFalse((root / "invalid").exists())
+
+    def test_duplicate_selector_fields_do_not_silently_change_staged_policy(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, queries = self.fixture(root)
+            text = manifest.read_text().rstrip()
+            self.assertTrue(text.endswith("}"))
+            manifest.write_text(text[:-1] + ', "preferred_owner_programs": '
+                '[{"rule_ordinals": [], "rule_ordinals": [0]}]}')
+            with self.assertRaisesRegex(ValueError, "duplicate JSON field: rule_ordinals"):
+                STAGE.stage(manifest, queries, root / "invalid", root)
+            self.assertFalse((root / "invalid").exists())
+
+    def test_preferred_inventory_cannot_be_omitted_or_relabelled(self):
+        for mutation in ("missing", "policy", "bytes", "path"):
+            with self.subTest(mutation=mutation), tempfile.TemporaryDirectory() as temporary:
+                root = Path(temporary)
+                manifest, queries = self.fixture(root)
+                selection = json.loads(manifest.read_bytes())
+                selection["preferred_owner_programs"] = [{
+                    "owner_mask": "10", "path": str(root / "owner.rrbin"),
+                    "bytes": (root / "owner.rrbin").stat().st_size,
+                    "residual_policy": "defer-to-baseline"}]
+                manifest.write_text(json.dumps(selection))
+                staged = root / "inputs"
+                receipt = STAGE.stage(manifest, queries, staged, root)
+                if mutation == "missing":
+                    del receipt["preferred_owner_programs"]
+                else:
+                    field = {"policy": "residual_policy", "bytes": "bytes", "path": "path"}[mutation]
+                    receipt["preferred_owner_programs"][0][field] = "changed"
+                (staged / "input-receipt.json").write_text(json.dumps(receipt))
+                with self.assertRaisesRegex(ValueError, "preferred program inventory differs"):
+                    PRODUCTION.verify_inputs(staged)
+
+    def test_partial_rules_are_portable_ordered_and_verified_without_native_work(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, queries = self.fixture(root)
+            patch = root / "partial.rrbin"
+            patch.write_bytes(b"opaque partial rules; native validation happens on load")
+            selection = json.loads(manifest.read_bytes())
+            selection["domain_rule_overlays"] = [
+                {"owner_mask": mask, "path": str(patch), "bytes": patch.stat().st_size}
+                for mask in ("01", "10")]
+            manifest.write_text(json.dumps(selection))
+            campaign = root / "old"
+            staged = campaign / "inputs"
+            receipt = STAGE.stage(manifest, queries, staged, root)
+            self.assertEqual(receipt["owner_count"], 2)
+            self.assertEqual([row["owner_mask"] for row in receipt["domain_rule_overlays"]], ["01", "10"])
+            for row in receipt["domain_rule_overlays"]:
+                self.assertFalse(Path(row["path"]).is_absolute())
+                self.assertEqual((staged / row["path"]).read_bytes(), patch.read_bytes())
+            self.assertEqual(PRODUCTION.verify_inputs(staged)[0], 1)
+            copied = root / "fresh"
+            second = PRODUCTION.prepare_from(campaign, copied, "preserve")
+            self.assertEqual(PRODUCTION.verify_inputs(copied / "inputs")[0], 1)
+            self.assertEqual(second["domain_rule_overlays"][0]["sha256"], STAGE.digest(patch))
+            target = staged / receipt["domain_rule_overlays"][0]["path"]
+            target.chmod(0o644)
+            target.write_bytes(b"corrupted partial rules")
+            with self.assertRaisesRegex(ValueError, "partial rule identity changed"):
+                PRODUCTION.verify_inputs(staged)
+
+    def test_partial_rule_owner_and_receipt_cannot_be_omitted(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, queries = self.fixture(root)
+            selection = json.loads(manifest.read_bytes())
+            selection["domain_rule_overlays"] = [{"owner_mask": "11", "path": "missing", "bytes": 1}]
+            manifest.write_text(json.dumps(selection))
+            with self.assertRaisesRegex(ValueError, "selected owner"):
+                STAGE.stage(manifest, queries, root / "invalid", root)
+            self.assertFalse((root / "invalid").exists())
+            selection["domain_rule_overlays"] = [{"owner_mask": "10", "path": "owner.rrbin",
+                "bytes": (root / "owner.rrbin").stat().st_size}]
+            manifest.write_text(json.dumps(selection))
+            staged = root / "inputs"
+            receipt = STAGE.stage(manifest, queries, staged, root)
+            del receipt["domain_rule_overlays"]
+            (staged / "input-receipt.json").write_text(json.dumps(receipt))
+            with self.assertRaisesRegex(ValueError, "partial rule inventory differs"):
+                PRODUCTION.verify_inputs(staged)
+
+    def test_staging_preserves_original_bytes_and_all_payloads(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, source = self.fixture(root)
+            staged = root / "inputs"
+            receipt = STAGE.stage(manifest, source, staged, root, anchor_max_numerator_rank=12,
+                                  anchor_max_positive_power=19, anchor_positive_power_owners=["01"])
+            self.assertEqual((staged / "queries-original.json").read_bytes(), source.read_bytes())
+            combined = json.loads((staged / "queries.json").read_bytes())
+            self.assertEqual(combined["queries"][:1], json.loads(source.read_bytes())["queries"])
+            self.assertFalse(receipt["query_bytes_unchanged"])
+            self.assertEqual(receipt["original_queries"]["sha256"], STAGE.digest(source))
+            self.assertEqual(receipt["queries_sha256"], STAGE.digest(staged / "queries.json"))
+            self.assertEqual(PRODUCTION.verify_inputs(staged)[:2], (3, (staged / "queries.json").stat().st_size))
+            self.assertFalse((staged / "STAGING_INCOMPLETE").exists())
+            for owner in receipt["owners"]:
+                self.assertEqual((staged / owner["path"]).read_bytes(), (root / "owner.rrbin").read_bytes())
+            with self.assertRaises(FileExistsError):
+                STAGE.stage(manifest, source, staged, root, anchor_max_numerator_rank=13)
+            self.assertEqual(STAGE.digest(staged / "queries.json"), receipt["queries_sha256"])
+            (staged / "queries-original.json").chmod(0o600)
+            (staged / "queries-original.json").write_bytes(b"tampered")
+            with self.assertRaisesRegex(ValueError, "original query identity changed"):
+                PRODUCTION.verify_inputs(staged)
+
+    def test_invalid_plan_has_no_destination_side_effects(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, source = self.fixture(root)
+            for options in ({"anchor_max_positive_power": 19}, {"anchor_max_numerator_rank": -1},
+                            {"anchor_positive_power_owners": ["10"]},
+                            {"anchor_max_numerator_rank": 12, "anchor_max_positive_power": 19,
+                             "anchor_positive_power_owners": ["11"]}):
+                with self.subTest(options=options), self.assertRaises(ValueError):
+                    STAGE.stage(manifest, source, root / "inputs", root, **options)
+                self.assertFalse((root / "inputs").exists())
+
+    def test_cli_strict_unsigned_limits(self):
+        for bits in (32, 64):
+            parse = STAGE.cli_unsigned(bits, "limit")
+            self.assertEqual(parse("0"), 0)
+            self.assertEqual(parse(str(2 ** bits - 1)), 2 ** bits - 1)
+            for text in ("-1", "+1", "1.0", " 1", "１", str(2 ** bits)):
+                with self.subTest(bits=bits, text=text), self.assertRaises(Exception):
+                    parse(text)
+
+    def test_cli_mixed_anchors_only_stage_inputs(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, source = self.fixture(root)
+            staged = root / "inputs"
+            result = subprocess.run([sys.executable, "-B", STAGE.__file__, "--manifest", str(manifest),
+                                     "--queries", str(source), "--destination", str(staged),
+                                     "--anchor-max-numerator-rank", "12", "--anchor-max-positive-power", "19",
+                                     "--anchor-positive-power-owners", "01"], capture_output=True, text=True, check=True)
+            self.assertEqual(json.loads(result.stdout)["anchor_plan"]["positive_power_owners"], ["01"])
+            self.assertEqual(sorted(path.name for path in root.iterdir()),
+                             ["inputs", "owner.rrbin", "queries-source.json", "selection-source.json"])
+
+    def test_launcher_reports_immutable_anchors_and_resumes_same_native_input(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, source = self.fixture(root)
+            campaign = root / "campaign"
+            receipt = STAGE.stage(manifest, source, campaign / "inputs", root, anchor_max_numerator_rank=15,
+                                  anchor_max_positive_power=24, anchor_positive_power_owners=["01"])
+            executable = root / "not-run"
+            executable.write_text("#!/bin/sh\nexit 99\n")
+            executable.chmod(0o700)
+            plans = []
+            for extra in (["--executable", str(executable), "--workers", "1", "--cpus", str(min(os.sched_getaffinity(0)))],
+                          ["--resume", "--max-memory-bytes", "700000000000"]):
+                output = io.StringIO()
+                with patch("sys.stdout", output), patch.object(PRODUCTION.os, "execv") as launch:
+                    self.assertEqual(PRODUCTION.main(["--campaign-directory", str(campaign), "--json", *extra]), 0)
+                launch.assert_not_called()
+                plans.append(json.loads(output.getvalue()))
+            for plan in plans:
+                self.assertEqual(plan["anchor_plan"], receipt["anchor_plan"])
+                self.assertEqual(plan["queries_sha256"], receipt["queries_sha256"])
+                self.assertEqual(plan["command"][plan["command"].index("--max-queries") + 1], "3")
+                self.assertFalse(plan["family_closure_claim"])
+            self.assertEqual(plans[0]["steering_policy"], plans[1]["steering_policy"])
+            self.assertIn("--resume", plans[1]["command"])
+            self.assertFalse((campaign / "runs").exists())
+
+
+class QueryOrderingTests(unittest.TestCase):
+    fixture = AnchorPlanningTests.fixture
+
+    def ordered_row(self, owner, query_id, rank=2):
+        row = query(owner, query_id)
+        row.update(lower=[0] * len(owner), upper=[None] * len(owner), max_numerator_rank=rank)
+        return row
+
+    def test_generic_first_seen_owner_order_stable_classes_and_helper_ranks(self):
+        for arity in (3, 17):
+            first, second = "1" + "0" * (arity - 1), "0" * (arity - 1) + "1"
+            rows = [self.ordered_row(first, "original-first"), self.ordered_row(second, "original-second"),
+                    self.ordered_row(first, "owner-anchor-low", 3),
+                    self.ordered_row(first, "owner-anchor-high-a", 9),
+                    self.ordered_row(first, "original-later"),
+                    self.ordered_row(first, "owner-anchor-high-b", 9),
+                    self.ordered_row(second, "owner-anchor-second", 4),
+                    self.ordered_row(first, "owner-anchor-unbounded", None)]
+            source = document(rows)
+            source["future_document_field"] = {"preserved": True}
+            source["queries"][0]["future_query_field"] = [1, 2]
+            original = copy.deepcopy(source)
+            raw = json.dumps(source).encode()
+            result, plan = STAGE.plan_query_order(raw, "helpers-first")
+            reordered = json.loads(result)
+            self.assertEqual([row["id"] for row in reordered["queries"]],
+                             ["owner-anchor-unbounded", "owner-anchor-high-a", "owner-anchor-high-b",
+                              "owner-anchor-low", "original-first", "original-later",
+                              "owner-anchor-second", "original-second"])
+            self.assertEqual({row["id"]: row for row in reordered["queries"]}, {row["id"]: row for row in rows})
+            self.assertEqual(reordered["future_document_field"], source["future_document_field"])
+            self.assertEqual(source, original)
+            self.assertEqual(STAGE.plan_query_order(raw, "helpers-first"), (result, plan))
+            self.assertEqual(STAGE.plan_query_order(raw, "preserve"), (raw, None))
+            self.assertFalse(plan["coverage_authority"])
+            self.assertFalse(plan["strict_bottom_up_evaluation"])
+
+    def test_reordering_staging_retains_source_bytes_and_payloads(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, source = self.fixture(root)
+            source.write_text(json.dumps(document([query(), query(query_id="owner-anchor-existing")])) + "\n\n")
+            original = source.read_bytes()
+            staged = root / "inputs"
+            receipt = STAGE.stage(manifest, source, staged, root, query_order="helpers-first")
+            self.assertEqual(source.read_bytes(), original)
+            self.assertEqual((staged / "queries-original.json").read_bytes(), original)
+            self.assertEqual([row["id"] for row in json.loads((staged / "queries.json").read_text())["queries"]],
+                             ["owner-anchor-existing", "original"])
+            self.assertEqual(receipt["query_order"], "helpers-first")
+            self.assertEqual(receipt["query_order_plan"]["query_count"], 2)
+            self.assertEqual(PRODUCTION.verify_inputs(staged)[0], 2)
+            self.assertNotIn("anchor_plan", receipt)
+            for owner in receipt["owners"]:
+                self.assertEqual((staged / owner["path"]).read_bytes(), (root / "owner.rrbin").read_bytes())
+            with self.assertRaises(FileExistsError):
+                STAGE.stage(manifest, source, staged, root, query_order="helpers-first")
+
+    def test_ordering_and_appended_anchors_compose_without_losing_originals(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, source = self.fixture(root)
+            receipt = STAGE.stage(manifest, source, root / "inputs", root,
+                                  anchor_max_numerator_rank=12, query_order="helpers-first")
+            rows = json.loads((root / "inputs/queries.json").read_text())["queries"]
+            self.assertEqual([row["id"] for row in rows], ["owner-anchor-r12-anone-10", "original", "owner-anchor-r12-anone-01"])
+            self.assertEqual(rows[1], query())
+            self.assertEqual(receipt["anchor_plan"]["anchor_query_count"], 2)
+            self.assertEqual(receipt["query_order_plan"]["query_count"], 3)
+
+    def test_invalid_order_document_fails_before_destination_creation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, source = self.fixture(root)
+            for contents, mode in ((json.dumps(document([query(), query()])), "helpers-first"),
+                                   ('{"schema":1,"schema":2}', "helpers-first"),
+                                   (json.dumps(document()), "unknown")):
+                source.write_text(contents)
+                with self.assertRaises(ValueError):
+                    STAGE.stage(manifest, source, root / "inputs", root, query_order=mode)
+                self.assertFalse((root / "inputs").exists())
+
+    def production_source(self, root):
+        manifest, queries = self.fixture(root)
+        queries.write_text(json.dumps(document([query("10", "first"), query("01", "second")])))
+        source = root / "source-campaign"
+        STAGE.stage(manifest, queries, source / "inputs", root, anchor_max_numerator_rank=12)
+        (source / "active-run.json").write_text('{"fixture": "untouched"}\n')
+        executable = root / "not-run"
+        executable.write_text("#!/bin/sh\nexit 99\n")
+        executable.chmod(0o700)
+        return source, executable
+
+    def snapshot(self, root):
+        return {str(path.relative_to(root)): (path.read_bytes(), path.stat().st_mtime_ns, path.stat().st_mode)
+                for path in root.rglob("*") if path.is_file()}
+
+    def test_fresh_production_copy_defaults_helpers_first_and_never_launches(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source, executable = self.production_source(root)
+            before = self.snapshot(source)
+            destination = root / "future-campaign"
+            output = io.StringIO()
+            with patch("sys.stdout", output), patch.object(PRODUCTION.os, "execv") as launch:
+                self.assertEqual(PRODUCTION.main(["--prepare-from", str(source), "--campaign-directory", str(destination),
+                    "--executable", str(executable), "--workers", "1", "--cpus", str(min(os.sched_getaffinity(0))),
+                    "--max-memory-bytes", "700000000000", "--json"]), 0)
+            launch.assert_not_called()
+            self.assertEqual(self.snapshot(source), before)
+            plan = json.loads(output.getvalue())
+            self.assertEqual(plan["query_order"], "helpers-first")
+            self.assertFalse(plan["launch_requested"])
+            self.assertEqual(plan["requested_hard_memory_bytes"], 700_000_000_000)
+            self.assertEqual(plan["ram_guard_margin_percent"], 5.0)
+            self.assertEqual(plan["command"][plan["command"].index("--max-queries") + 1], "4")
+            self.assertFalse((destination / "active-run.json").exists())
+            self.assertFalse((destination / "runs").exists())
+            source_rows = json.loads((source / "inputs/queries.json").read_text())["queries"]
+            new_rows = json.loads((destination / "inputs/queries.json").read_text())["queries"]
+            self.assertEqual({row["id"]: row for row in new_rows}, {row["id"]: row for row in source_rows})
+            self.assertEqual([row["id"] for row in new_rows],
+                             ["owner-anchor-r12-anone-10", "first", "owner-anchor-r12-anone-01", "second"])
+            self.assertEqual((destination / "inputs/queries-original.json").read_bytes(), (source / "inputs/queries.json").read_bytes())
+            output = io.StringIO()
+            with patch("sys.stdout", output), patch.object(PRODUCTION.os, "execv") as launch:
+                self.assertEqual(PRODUCTION.main(["--campaign-directory", str(destination), "--resume", "--json"]), 0)
+            launch.assert_not_called()
+            resumed = json.loads(output.getvalue())
+            self.assertEqual(resumed["steering_policy"], plan["steering_policy"])
+            self.assertEqual(resumed["query_order"], "helpers-first")
+            self.assertEqual(resumed["requested_hard_memory_bytes"], 700_000_000_000)
+            self.assertEqual(self.snapshot(source), before)
+
+    def test_fresh_preserve_override_and_source_tampering_rejection(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source, _ = self.production_source(root)
+            destination = root / "preserved"
+            PRODUCTION.prepare_from(source, destination, "preserve")
+            self.assertEqual((destination / "inputs/queries.json").read_bytes(), (source / "inputs/queries.json").read_bytes())
+            self.assertFalse((destination / "inputs/queries-original.json").exists())
+            (source / "inputs/queries.json").chmod(0o600)
+            (source / "inputs/queries.json").write_text("tampered")
+            with self.assertRaisesRegex(ValueError, "digest changed"):
+                PRODUCTION.prepare_from(source, root / "refused", "helpers-first")
+            self.assertFalse((root / "refused").exists())
+
+    def test_prepare_refuses_existing_nested_and_symlink_destinations_before_writes(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source, _ = self.production_source(root)
+            existing = root / "existing"
+            existing.mkdir()
+            link = root / "link"
+            link.symlink_to(root / "missing")
+            before = self.snapshot(source)
+            for destination in (existing, source, source / "nested", root, link):
+                with self.subTest(destination=destination), self.assertRaises(ValueError), patch.object(PRODUCTION, "verify_inputs") as verify:
+                    PRODUCTION.prepare_from(source, destination, "helpers-first")
+                verify.assert_not_called()
+            self.assertEqual(self.snapshot(source), before)
+            self.assertEqual(list(existing.iterdir()), [])
+            self.assertFalse((source / "nested").exists())
+            self.assertFalse((root / "missing").exists())
+
+    def test_prepare_resume_and_existing_query_order_are_cli_errors(self):
+        for extra in (["--prepare-from", "source", "--resume"], ["--query-order", "helpers-first"],
+                      ["--query-order", "preserve", "--resume"]):
+            with self.subTest(extra=extra), patch("sys.stderr", io.StringIO()), \
+                    patch.object(PRODUCTION, "verify_inputs") as verify, patch.object(PRODUCTION, "freeze_executable") as freeze:
+                with self.assertRaises(SystemExit) as error:
+                    PRODUCTION.main(extra)
+                self.assertEqual(error.exception.code, 2)
+                verify.assert_not_called()
+                freeze.assert_not_called()
+
+    def test_prepare_refuses_nested_destination_through_symlinked_source_inputs(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source, _ = self.production_source(root)
+            alias = root / "source-alias"
+            alias.mkdir()
+            (alias / "inputs").symlink_to(source / "inputs", target_is_directory=True)
+            destination = source / "inputs/new-campaign"
+            before = self.snapshot(source)
+            with self.assertRaisesRegex(ValueError, "source inputs.*not nested"), patch.object(PRODUCTION, "verify_inputs") as verify:
+                PRODUCTION.prepare_from(alias, destination, "helpers-first")
+            verify.assert_not_called()
+            self.assertFalse(destination.exists())
+            self.assertEqual(self.snapshot(source), before)
+
+
+
+class AttachmentAndQueryOverrideTests(unittest.TestCase):
+    fixture = AnchorPlanningTests.fixture
+    production_source = QueryOrderingTests.production_source
+    snapshot = QueryOrderingTests.snapshot
+
+    def test_attachments_are_copied_read_only_and_verified(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, source = self.fixture(root)
+            receipt_file = root / "entry-plan-receipt.json"
+            receipt_file.write_text('{"planner": "fixture"}\n')
+            note = root / "notes.txt"
+            note.write_text("opaque\n")
+            staged = root / "inputs"
+            receipt = STAGE.stage(manifest, source, staged, root, attachments=[receipt_file, note])
+            self.assertEqual([row["name"] for row in receipt["attachments"]], ["entry-plan-receipt.json", "notes.txt"])
+            for row in receipt["attachments"]:
+                copy = staged / row["path"]
+                self.assertEqual(copy.read_bytes(), (root / row["name"]).read_bytes())
+                self.assertEqual(copy.stat().st_mode & 0o777, 0o444)
+                self.assertEqual(row["bytes"], copy.stat().st_size)
+                self.assertEqual(row["sha256"], STAGE.digest(copy))
+            self.assertTrue(receipt["query_bytes_unchanged"])
+            self.assertEqual(PRODUCTION.verify_inputs(staged)[0], 1)
+            (staged / "notes.txt").chmod(0o600)
+            (staged / "notes.txt").write_text("tampered\n")
+            with self.assertRaisesRegex(ValueError, "attachment identity changed"):
+                PRODUCTION.verify_inputs(staged)
+            plain = STAGE.stage(manifest, source, root / "plain", root)
+            self.assertNotIn("attachments", plain)
+
+    def test_invalid_attachments_fail_before_destination_creation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            manifest, source = self.fixture(root)
+            good = root / "receipt.json"
+            good.write_text("{}")
+            (root / "sub").mkdir()
+            (root / "sub" / "receipt.json").write_text("{}")
+            reserved = root / "queries.json"
+            reserved.write_text("{}")
+            for attachments, fragment in (([root / "missing"], "not a file"), ([reserved], "reserved"),
+                                          ([good, root / "sub" / "receipt.json"], "duplicate"), ([root / "sub"], "not a file")):
+                with self.subTest(attachments=attachments), self.assertRaisesRegex(ValueError, fragment):
+                    STAGE.stage(manifest, source, root / "inputs", root, attachments=attachments)
+                self.assertFalse((root / "inputs").exists())
+            result = subprocess.run([sys.executable, "-B", STAGE.__file__, "--manifest", str(manifest), "--queries", str(source),
+                                     "--destination", str(root / "cli"), "--attach", str(good)], capture_output=True, text=True, check=True)
+            self.assertEqual(json.loads(result.stdout)["attachments"][0]["name"], "receipt.json")
+            self.assertTrue((root / "cli" / "receipt.json").is_file())
+
+    def override_document(self, rows=None):
+        document = {"schema": "rustred.owner-domain-queries.json.v2", "queries": rows or [
+            {"id": "planned-10", "owner": "10", "lower": [0, 0], "upper": [None, None], "max_numerator_rank": 9,
+             "power_bounds": {"max_positive_power": 25, "min_power_difference": None, "max_power_difference": None}},
+            {"id": "planned-01", "owner": "01", "lower": [0, 0], "upper": [None, 3], "max_numerator_rank": None,
+             "power_bounds": {"max_positive_power": None, "min_power_difference": None, "max_power_difference": None}}]}
+        document["query_roles"] = {"required":[row["id"] for row in document["queries"]],"auxiliary":[]}
+        return document
+
+    def test_prepare_from_with_query_override_and_attachments_records_receipts(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source, executable = self.production_source(root)
+            before = self.snapshot(source)
+            new_queries = root / "planned-queries.json"
+            new_queries.write_text(json.dumps(self.override_document(), indent=1) + "\n")
+            receipt_file = root / "entry-plan-receipt.json"
+            receipt_file.write_text('{"planner": "fixture", "family_closure_claim": false}\n')
+            classification = root / "skeleton-classification.json"
+            classification.write_text("{}\n")
+            destination = root / "planned-campaign"
+            output = io.StringIO()
+            with patch("sys.stdout", output), patch.object(PRODUCTION.os, "execv") as launch:
+                self.assertEqual(PRODUCTION.main(["--prepare-from", str(source), "--campaign-directory", str(destination),
+                    "--executable", str(executable), "--workers", "1", "--cpus", str(min(os.sched_getaffinity(0))),
+                    "--queries", str(new_queries), "--attach", str(receipt_file), "--attach", str(classification), "--json"]), 0)
+            launch.assert_not_called()
+            self.assertEqual(self.snapshot(source), before)
+            plan = json.loads(output.getvalue())
+            self.assertEqual(plan["queries_sha256"], STAGE.digest(new_queries))
+            self.assertEqual((destination / "inputs/queries.json").read_bytes(), new_queries.read_bytes())
+            self.assertEqual(plan["query_order"], "preserve")
+            self.assertEqual(plan["query_count"], 2)
+            self.assertEqual(plan["publication_policy"], "ready")
+            self.assertEqual(plan["command"][plan["command"].index("--max-queries") + 1], "2")
+            self.assertEqual([row["name"] for row in plan["attachments"]], ["entry-plan-receipt.json", "skeleton-classification.json"])
+            self.assertEqual(plan["entry_plan_receipt"], {"path": str(destination / "inputs/entry-plan-receipt.json"),
+                                                          "sha256": STAGE.digest(receipt_file), "bytes": receipt_file.stat().st_size})
+            self.assertEqual(plan["selection_sha256"], json.loads((source / "inputs/input-receipt.json").read_text())["selection_sha256"])
+            staged_receipt = json.loads((destination / "inputs/input-receipt.json").read_text())
+            self.assertEqual(staged_receipt["source_queries"], str(new_queries.resolve()))
+            self.assertEqual([row["mask"] for row in staged_receipt["owners"]], ["10", "01"])
+            self.assertFalse((destination / "inputs/queries-original.json").exists())
+            output = io.StringIO()
+            with patch("sys.stdout", output), patch.object(PRODUCTION.os, "execv") as launch:
+                self.assertEqual(PRODUCTION.main(["--campaign-directory", str(destination), "--resume", "--json"]), 0)
+            self.assertEqual(json.loads(output.getvalue())["entry_plan_receipt"], plan["entry_plan_receipt"])
+            ordered = root / "ordered-campaign"
+            with patch("sys.stdout", io.StringIO()) as output, patch.object(PRODUCTION.os, "execv"):
+                self.assertEqual(PRODUCTION.main(["--prepare-from", str(source), "--campaign-directory", str(ordered),
+                    "--executable", str(executable), "--workers", "1", "--cpus", str(min(os.sched_getaffinity(0))),
+                    "--queries", str(new_queries), "--query-order", "helpers-first", "--json"]), 0)
+            reordered = json.loads(output.getvalue())
+            self.assertEqual(reordered["query_order"], "helpers-first")
+            self.assertTrue((ordered / "inputs/queries-original.json").is_file())
+            self.assertIsNone(reordered["entry_plan_receipt"])
+
+    def test_invalid_query_overrides_are_refused_before_any_copy(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            source, _ = self.production_source(root)
+            before = self.snapshot(source)
+            good = self.override_document()
+            extra = self.override_document(); extra["queries"][0]["comment"] = "not allowed"
+            missing = self.override_document(); del missing["queries"][1]["power_bounds"]
+            foreign = self.override_document(); foreign["queries"][0]["owner"] = "11"
+            arity = self.override_document(); arity["queries"][0]["lower"] = [0]
+            duplicate = self.override_document(); duplicate["queries"][1]["id"] = "planned-10"
+            cases = [(dict(good, schema="rustred.owner-domain-queries.json.v1"), "v2 document"),
+                     (dict(good, queries=[]), "v2 document"), (extra, "exactly the fields"), (missing, "exactly the fields"),
+                     (foreign, "not a selected owner mask"), (arity, "arity-2 list"), (duplicate, "unique id"),
+                     ('{"schema": "rustred.owner-domain-queries.json.v2", "schema": "x", "queries": [{}]}', "duplicate JSON field")]
+            for index, (document, fragment) in enumerate(cases):
+                override = root / f"override-{index}.json"
+                override.write_text(document if isinstance(document, str) else json.dumps(document))
+                destination = root / f"refused-{index}"
+                with self.subTest(fragment=fragment), self.assertRaisesRegex(ValueError, fragment):
+                    PRODUCTION.prepare_from(source, destination, "preserve", queries_override=override)
+                self.assertFalse(destination.exists())
+            self.assertEqual(self.snapshot(source), before)
+            with self.assertRaisesRegex(ValueError, "not a file"):
+                PRODUCTION.prepare_from(source, root / "refused-attachment", "preserve", attachments=[root / "missing"])
+            self.assertFalse((root / "refused-attachment").exists())
+
+
+if __name__ == "__main__":
+    unittest.main()

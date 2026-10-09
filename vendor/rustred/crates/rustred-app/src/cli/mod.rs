@@ -1,0 +1,443 @@
+pub(crate) mod args;
+mod candidate_inspect;
+mod candidates;
+mod entry_domain;
+pub(crate) mod error;
+mod io;
+mod owner_domains;
+mod owner_guarded;
+mod owner_match;
+#[cfg(test)]
+pub(crate) use owner_match::walk_request_from_argv;
+mod artifact_inspect;
+mod master_reduction;
+mod master_table;
+mod progress;
+mod routed;
+mod shards;
+mod walk_inventory;
+mod walk_rescue;
+mod walk_verify;
+
+use std::ffi::OsString;
+use std::io::{IsTerminal, Write};
+use std::sync::Mutex;
+
+use crate::{
+    CampaignPlanRequest, CampaignPreflightRequest, ClosingArtifactGenerateRequest,
+    ClosingArtifactInspectRequest, ClosingArtifactReduceRequest, DeriveRequest, FamilyCloseRequest,
+    FamilySolveRequest, FoundryCampaignRunRequest, FoundryWaveCampaignRunRequest, campaign_plan,
+    campaign_preflight, closing_artifact_generate, closing_artifact_inspect,
+    closing_artifact_reduce, derive as derive_application, foundry_campaign_run_with_progress,
+    foundry_wave_campaign_run_with_progress,
+};
+use args::{
+    CampaignGenerateArgs, CampaignInspectArgs, CampaignPlanArgs, CampaignPreflightArgs,
+    CampaignReduceArgs, Command, DeriveArgs, FamilyCloseArgs, FamilySolveArgs,
+    FoundryCampaignRunArgs, FoundryWaveCampaignRunArgs, HELP, StreamPath, parse_args,
+};
+use error::CliError;
+use io::{preflight_output_destination, read_artifact, read_input, write_output};
+use progress::{CampaignProgressMonitor, FamilyCloseProgressMonitor, ProgressPresentation};
+
+pub(crate) fn main_entry() -> i32 {
+    match run(std::env::args_os()) {
+        Ok(()) => 0,
+        Err(error) => {
+            let code = error.exit_code();
+            let _ = writeln!(
+                std::io::stderr().lock(),
+                "rustred: {}: {error}",
+                error.category()
+            );
+            if matches!(error, CliError::Usage(_)) {
+                let _ = writeln!(
+                    std::io::stderr().lock(),
+                    "rustred: usage: run `rustred --help` for the command contract"
+                );
+            }
+            code
+        }
+    }
+}
+
+fn run(arguments: impl IntoIterator<Item = OsString>) -> Result<(), CliError> {
+    match parse_args(arguments)? {
+        Command::EntryDomainPlan(arguments) => entry_domain::run(arguments),
+        Command::OwnerGuardedApply(arguments) => owner_guarded::run(arguments),
+        Command::OwnerDomainMatch(arguments) => owner_match::run(arguments),
+        Command::OwnerDomainScan(arguments) => owner_domains::run(arguments),
+        Command::RoutedCampaign(arguments) => routed::run(arguments),
+        Command::Help => write_informational_output(HELP),
+        Command::Version => {
+            write_informational_output(concat!("RustRed ", env!("CARGO_PKG_VERSION"), "\n"))
+        }
+        Command::WalkSemanticsVersion => write_informational_output(&walk_semantics_probe()),
+        Command::Derive(arguments) => derive_cli(arguments),
+        Command::FamilySolve(arguments) => family_solve_cli(arguments),
+        Command::FamilyClose(arguments) => family_close_cli(arguments),
+        Command::FamilyCandidates(arguments) => candidates::generate(arguments),
+        Command::CandidateInspect(arguments) => candidate_inspect::run(arguments),
+        Command::CertifyCandidates(arguments) => candidates::certify(arguments),
+        Command::CampaignPlan(arguments) => plan_campaign(arguments),
+        Command::CampaignPreflight(arguments) => preflight_campaign(arguments),
+        Command::FoundryCampaignRun(arguments) => run_foundry_campaign_cli(arguments),
+        Command::FoundryWaveCampaignRun(arguments) => run_foundry_wave_campaign_cli(arguments),
+        Command::CampaignGenerate(arguments) => generate_campaign_artifact(arguments),
+        Command::CampaignInspect(arguments) => inspect_campaign_artifact(arguments),
+        Command::CampaignReduce(arguments) => reduce_campaign_target(arguments),
+        Command::CampaignShards(arguments) => shards::run(arguments),
+        Command::CampaignMonitor(arguments) => shards::monitor::run(arguments),
+        Command::PreparationMonitor(arguments) => progress::preparation::run(arguments),
+        Command::WalkVerifyClosure(arguments) => walk_verify::run(arguments),
+        Command::WalkRescuePlan(arguments) => walk_rescue::run(arguments),
+        Command::WalkInventory(arguments) => walk_inventory::run(arguments),
+        Command::WalkMasterReduce(arguments) => master_reduction::run(arguments),
+        Command::MasterInspect(arguments) => master_reduction::inspect(arguments),
+        Command::ArtifactInspect(arguments) => artifact_inspect::run(arguments),
+    }
+}
+
+fn family_solve_cli(arguments: FamilySolveArgs) -> Result<(), CliError> {
+    let source = read_input(&arguments.input)?;
+    preflight_output_destination(&arguments.output, arguments.force)?;
+    let result = crate::family_solve(FamilySolveRequest {
+        source,
+        input_format: arguments.input_format,
+        sectors: arguments.sectors,
+        n_cores: arguments.n_cores,
+    })?;
+    write_output(
+        &arguments.output,
+        result.as_toml().as_bytes(),
+        arguments.force,
+    )
+}
+
+fn family_close_cli(arguments: FamilyCloseArgs) -> Result<(), CliError> {
+    let source = read_input(&arguments.input)?;
+    preflight_output_destination(&arguments.output, arguments.force)?;
+    let terminal = std::io::stderr().is_terminal();
+    let monitor = Mutex::new(FamilyCloseProgressMonitor::new(
+        std::io::stderr(),
+        terminal,
+        arguments.progress,
+        std::env::var_os("NO_COLOR").is_some(),
+    ));
+    let request = FamilyCloseRequest {
+        source,
+        input_format: arguments.input_format,
+        n_cores: arguments.n_cores,
+        permutation: arguments.permutation,
+        nonpositive_indices: arguments.nonpositive_indices,
+        publication_limits: arguments.resources.publication_limits(),
+    };
+    let result = if terminal || arguments.progress {
+        crate::family_close_with_progress(request, |event| {
+            if let Ok(mut monitor) = monitor.lock() {
+                monitor.observe(event);
+            }
+        })
+    } else {
+        crate::family_close(request)
+    };
+    let result = result
+        .map_err(CliError::from)
+        .and_then(|result| write_output(&arguments.output, result.artifact(), arguments.force));
+    if let Ok(mut monitor) = monitor.lock() {
+        monitor.finish(result.is_ok());
+    }
+    result
+}
+
+fn run_foundry_wave_campaign_cli(arguments: FoundryWaveCampaignRunArgs) -> Result<(), CliError> {
+    let config = read_input(&arguments.config)?;
+    preflight_output_destination(&arguments.output, arguments.force)?;
+    if let Some(destination) = &arguments.measurements_output {
+        preflight_output_destination(destination, arguments.force)?;
+    }
+    if let Some(destination) = &arguments.artifact_output {
+        preflight_output_destination(destination, arguments.force)?;
+    }
+    let presentation = ProgressPresentation::resolve(
+        arguments.no_progress,
+        arguments.color,
+        std::io::stderr().is_terminal(),
+        std::env::var_os("NO_COLOR").is_some(),
+    );
+    let mut monitor = CampaignProgressMonitor::new(std::io::stderr(), presentation);
+    monitor.start();
+    let result = match foundry_wave_campaign_run_with_progress(
+        FoundryWaveCampaignRunRequest {
+            config,
+            sibling_worker_count: arguments.n_cores,
+        },
+        |progress| monitor.observe_wave(progress),
+    ) {
+        Ok(result) => result,
+        Err(error) => {
+            monitor.finish_failed();
+            return Err(error.into());
+        }
+    };
+    monitor.finish_wave();
+    let report = result.to_toml().as_bytes();
+    let measurements = result.measurements_to_toml().as_bytes();
+    let artifact = result.artifact_bytes().map(<[u8]>::to_vec);
+    // Install the authenticated durable payload before exposing any report
+    // which advertises its publication. File destinations are atomic, and an
+    // artifact sent to stdout is complete before a later companion-file error
+    // can be reported; neither ordering can leave a success report referring
+    // to an artifact whose destination was never installed.
+    if let (Some(destination), Some(artifact)) = (&arguments.artifact_output, artifact.as_deref()) {
+        write_output(destination, artifact, arguments.force)?;
+    }
+    match &arguments.measurements_output {
+        None => write_output(&arguments.output, report, arguments.force)?,
+        Some(measurements_output) => match (&arguments.output, measurements_output) {
+            (StreamPath::Stdio, StreamPath::File(_)) => {
+                write_output(measurements_output, measurements, arguments.force)?;
+                write_output(&arguments.output, report, arguments.force)?;
+            }
+            _ => {
+                write_output(&arguments.output, report, arguments.force)?;
+                write_output(measurements_output, measurements, arguments.force)?;
+            }
+        },
+    }
+    Ok(())
+}
+
+fn run_foundry_campaign_cli(arguments: FoundryCampaignRunArgs) -> Result<(), CliError> {
+    let config = read_input(&arguments.config)?;
+    preflight_output_destination(&arguments.output, arguments.force)?;
+    if let Some(destination) = &arguments.measurements_output {
+        preflight_output_destination(destination, arguments.force)?;
+    }
+    let presentation = ProgressPresentation::resolve(
+        arguments.no_progress,
+        arguments.color,
+        std::io::stderr().is_terminal(),
+        std::env::var_os("NO_COLOR").is_some(),
+    );
+    let mut monitor = CampaignProgressMonitor::new(std::io::stderr(), presentation);
+    monitor.start();
+    let result =
+        match foundry_campaign_run_with_progress(FoundryCampaignRunRequest { config }, |progress| {
+            monitor.observe(progress)
+        }) {
+            Ok(result) => result,
+            Err(error) => {
+                // Keep the application failure authoritative. The monitor makes
+                // a best effort to terminate its in-place row before main_entry
+                // prints the stable error message.
+                monitor.finish_failed();
+                return Err(error.into());
+            }
+        };
+    monitor.finish(
+        result.stop(),
+        result.snapshot(),
+        result.census(),
+        result.maximum_dimension(),
+        result.task_report_ceiling(),
+    );
+    let report = result.to_toml().as_bytes();
+    let measurements = result.measurements_to_toml().as_bytes();
+    match &arguments.measurements_output {
+        None => write_output(&arguments.output, report, arguments.force),
+        Some(measurements_output) => {
+            // At most one destination is stdout (enforced by the parser). Put
+            // durable file output first so stdout never advertises success
+            // before its companion file has been installed.
+            match (&arguments.output, measurements_output) {
+                (StreamPath::Stdio, StreamPath::File(_)) => {
+                    write_output(measurements_output, measurements, arguments.force)?;
+                    write_output(&arguments.output, report, arguments.force)
+                }
+                _ => {
+                    write_output(&arguments.output, report, arguments.force)?;
+                    write_output(measurements_output, measurements, arguments.force)
+                }
+            }
+        }
+    }
+}
+
+fn generate_campaign_artifact(arguments: CampaignGenerateArgs) -> Result<(), CliError> {
+    let result = closing_artifact_generate(ClosingArtifactGenerateRequest {
+        family: arguments.family,
+    })?;
+    write_output(&arguments.output, result.artifact(), arguments.force)
+}
+
+fn inspect_campaign_artifact(arguments: CampaignInspectArgs) -> Result<(), CliError> {
+    let artifact = read_artifact(&arguments.artifact)?;
+    let result = closing_artifact_inspect(ClosingArtifactInspectRequest {
+        artifact,
+        load_limits: arguments.resources.load_limits(),
+    })?;
+    write_output(
+        &arguments.output,
+        result.to_toml().as_bytes(),
+        arguments.force,
+    )
+}
+
+fn reduce_campaign_target(arguments: CampaignReduceArgs) -> Result<(), CliError> {
+    let artifact = read_artifact(&arguments.artifact)?;
+    let result = closing_artifact_reduce(ClosingArtifactReduceRequest {
+        artifact,
+        load_limits: arguments.resources.load_limits(),
+        target_powers: arguments.target_powers,
+        max_rule_applications: arguments.max_rule_applications,
+    })?;
+    write_output(
+        &arguments.output,
+        result.to_toml().as_bytes(),
+        arguments.force,
+    )
+}
+
+fn derive_cli(arguments: DeriveArgs) -> Result<(), CliError> {
+    // Every fallible stage completes before `write_output` sees one byte. In
+    // particular, stdout is never left with a truncated TOML document.
+    let source = read_input(&arguments.input)?;
+    let result = derive_application(DeriveRequest {
+        source,
+        input_format: arguments.input_format,
+        relations: arguments.relations,
+        n_cores: arguments.n_cores,
+    })?;
+    write_output(
+        &arguments.output,
+        result.to_toml().as_bytes(),
+        arguments.force,
+    )
+}
+
+fn plan_campaign(arguments: CampaignPlanArgs) -> Result<(), CliError> {
+    let source = read_input(&arguments.input)?;
+    let result = campaign_plan(CampaignPlanRequest {
+        source,
+        input_format: arguments.input_format,
+        root_id: arguments.root_id,
+    })?;
+    write_output(
+        &arguments.output,
+        result.to_toml().as_bytes(),
+        arguments.force,
+    )
+}
+
+fn preflight_campaign(arguments: CampaignPreflightArgs) -> Result<(), CliError> {
+    let profile = read_input(&arguments.profile)?;
+    let result = campaign_preflight(CampaignPreflightRequest {
+        profile,
+        n_cores: arguments.n_cores,
+        max_memory_bytes: arguments.max_memory_bytes,
+    })?;
+    write_output(
+        &arguments.output,
+        result.to_toml().as_bytes(),
+        arguments.force,
+    )
+}
+
+/// One JSON line naming the walk-checkpoint resume identity of this binary.
+/// Launchers compare it with a paused CP5 manifest before swapping in a
+/// performance-only executable; it opens no file and runs no algebra.
+/// Backward compatible: the three legacy keys stay first and unchanged (they
+/// describe the CP5 lanes); `per_policy` and `checkpoint_formats {cp5, cp6}`
+/// describe the separate CP6 epoch lane. The old S2 export is not resumable.
+fn walk_semantics_probe() -> String {
+    format!(
+        "{{\"walk_semantics_version\":{},\"checkpoint_format\":{},\"checkpoint_schema\":{},\"per_policy\":{{\"ordered\":{},\"ready\":{},\"epoch\":{}}},\"checkpoint_formats\":{{\"cp5\":{},\"cp6\":{}}},\"epoch_checkpoint\":{{\"format\":{},\"schema\":{},\"walk_semantics_version\":{},\"resumable\":true}}}}\n",
+        crate::OWNER_DOMAIN_WALK_SEMANTICS_VERSION,
+        serde_json::Value::from(crate::OWNER_DOMAIN_WALK_CHECKPOINT_FORMAT),
+        crate::OWNER_DOMAIN_WALK_CHECKPOINT_SCHEMA,
+        crate::OWNER_DOMAIN_WALK_SEMANTICS_VERSION,
+        crate::OWNER_DOMAIN_WALK_SEMANTICS_VERSION,
+        crate::OWNER_DOMAIN_WALK_EPOCH_SEMANTICS_VERSION,
+        serde_json::Value::from(crate::OWNER_DOMAIN_WALK_CHECKPOINT_FORMAT),
+        serde_json::Value::from(crate::application::EPOCH_WALK_CHECKPOINT_FORMAT),
+        serde_json::Value::from(crate::application::EPOCH_WALK_CHECKPOINT_FORMAT),
+        crate::application::EPOCH_WALK_CHECKPOINT_SCHEMA,
+        crate::OWNER_DOMAIN_WALK_EPOCH_SEMANTICS_VERSION,
+    )
+}
+
+fn write_informational_output(contents: &str) -> Result<(), CliError> {
+    let mut stdout = std::io::stdout().lock();
+    stdout
+        .write_all(contents.as_bytes())
+        .and_then(|()| stdout.flush())
+        .map_err(|error| CliError::OutputIo(format!("cannot write standard output: {error}")))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use args::ArgError;
+
+    fn arguments(values: &[&str]) -> Vec<OsString> {
+        values.iter().map(OsString::from).collect()
+    }
+
+    #[test]
+    fn walk_semantics_version_probe_is_one_json_line_of_checkpoint_identity() {
+        assert_eq!(
+            parse_args(arguments(&["rustred", "walk-semantics-version"])).unwrap(),
+            Command::WalkSemanticsVersion
+        );
+        assert_eq!(
+            parse_args(arguments(&["rustred", "walk-semantics-version", "--json"])),
+            Err(ArgError::UnexpectedArgument("--json".into()))
+        );
+        let line = walk_semantics_probe();
+        assert!(line.ends_with('\n') && line.matches('\n').count() == 1);
+        let probe: serde_json::Value = serde_json::from_str(&line).unwrap();
+        // The frozen legacy keys, unchanged (production_saved_owner_campaign.py
+        // reads exactly these three).
+        for (key, value) in [
+            (
+                "walk_semantics_version",
+                serde_json::json!(crate::OWNER_DOMAIN_WALK_SEMANTICS_VERSION),
+            ),
+            ("checkpoint_format", serde_json::json!("RUSTRED-WALK-CP5")),
+            ("checkpoint_schema", serde_json::json!(5)),
+        ] {
+            assert_eq!(probe[key], value, "{key}");
+        }
+        assert_eq!(probe["walk_semantics_version"], 1);
+        assert_eq!(
+            probe["per_policy"],
+            serde_json::json!({"ordered": 1, "ready": 1,
+                "epoch": crate::OWNER_DOMAIN_WALK_EPOCH_SEMANTICS_VERSION})
+        );
+        assert_eq!(
+            probe["checkpoint_formats"],
+            serde_json::json!({"cp5": "RUSTRED-WALK-CP5",
+                "cp6": crate::application::EPOCH_WALK_CHECKPOINT_FORMAT})
+        );
+        assert_eq!(
+            probe["epoch_checkpoint"],
+            serde_json::json!({
+                "format": crate::application::EPOCH_WALK_CHECKPOINT_FORMAT,
+                "schema": crate::application::EPOCH_WALK_CHECKPOINT_SCHEMA,
+                "walk_semantics_version": crate::OWNER_DOMAIN_WALK_EPOCH_SEMANTICS_VERSION,
+                "resumable": true
+            })
+        );
+        assert_eq!(
+            probe["per_policy"]["epoch"], probe["epoch_checkpoint"]["walk_semantics_version"],
+            "the public launch probe cannot advertise conflicting Epoch identities"
+        );
+        assert_eq!(
+            probe["checkpoint_formats"]["cp6"],
+            probe["epoch_checkpoint"]["format"]
+        );
+        assert_eq!(probe.as_object().unwrap().len(), 6);
+        assert!(line.starts_with("{\"walk_semantics_version\":"));
+    }
+}

@@ -1,0 +1,625 @@
+"""Fast bounded monitoring/staging tests; no native algebra or real campaign."""
+import importlib.util
+import io
+import json
+import os
+from pathlib import Path
+import tempfile
+import time
+import unittest
+from unittest.mock import patch
+
+
+def module(name):
+    spec = importlib.util.spec_from_file_location(name, Path(__file__).with_name(name + ".py"))
+    result = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(result)
+    return result
+
+
+MONITOR = module("campaign_monitor")
+PRODUCTION = module("production_saved_owner_campaign")
+STAGE = module("stage_saved_owner_campaign")
+
+
+class MonitorTests(unittest.TestCase):
+    @staticmethod
+    def closure(**changes):
+        return dict({"available": True, "initial_total": 20, "initial_closed": 3,
+                     "total_domains": 200, "total_closed": 60, "locally_inspected": 100,
+                     "unresolved_domains": 140, "dependency_edges": 250,
+                     "graph_revision": 12, "snapshot_revision": 12, "snapshot_stale": False,
+                     "snapshot_age_seconds": 2.0, "last_refresh_seconds": 0.01,
+                     "refresh_count": 4, "refresh_seconds": 0.04,
+                     "scan_history": {}, "refresh_policy": {"next_refresh_seconds": None,
+                         "earliest_refresh_unix_seconds": None, "status": "unknown"},
+                     "retained_storage_estimate_bytes": 1234, "refresh_scratch_estimate_bytes": 234,
+                     "storage_estimate_scope": "logical capacities; not RSS",
+                     "method": "reverse_unsealed_reachability_including_sealed_cycles",
+                     "scope": "discovered_dependency_coverage; not termination, descent, or family certification",
+                     "closed_counts_are_conservative_lower_bounds": True,
+                     "family_closure_claim": False, "reason": None}, **changes)
+
+    def test_checkpoint_milestones_survive_later_heartbeat_and_plain_throttle(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "events"
+            stream = io.StringIO()
+            presenter = MONITOR.Presenter(stream, plain_seconds=30)
+            presenter.render({"state": "running"}, now=0)
+            saved = {"state": "saved", "generation": 3, "state_path": "/checkpoint/state-3",
+                     "duration_seconds": 1.25, "saved_unix_time": 1790208000}
+            started = {"event": "checkpoint_started", "checkpoint_write": saved}
+            finished = {"event": "checkpoint_saved", "checkpoint": saved}
+            path.write_text("\n".join(map(json.dumps, [started, finished,
+                {"event": "heartbeat", "progress": finished},
+                {"event": "heartbeat", "progress": {"event": "domain_progress", "checkpoint": saved}}])) + "\n")
+            tail = MONITOR.EventTail(path)
+            self.assertEqual(tail.poll(1)["event"], "heartbeat")
+            self.assertEqual(tail.milestone_count, 2)
+            self.assertEqual(tail.saved_checkpoint["generation"], 3)
+            self.assertIsNone(tail.checkpoint_write)
+            status = {"state": "running", "checkpoint_milestones": list(tail.milestones)}
+            presenter.render(status, now=1)
+            presenter.render(status, now=2)
+            self.assertEqual(stream.getvalue().count("checkpoint started"), 1)
+            self.assertEqual(stream.getvalue().count("checkpoint saved"), 1)
+            self.assertIn("1.25s", stream.getvalue())
+            self.assertIn("UTC", stream.getvalue())
+            self.assertIn("/checkpoint/state-3", stream.getvalue())
+            tail._checkpoint_milestone({"event": "checkpoint_saved", "checkpoint": {
+                "generation": 2, "state_path": "/checkpoint/state-2"}})
+            self.assertEqual(tail.saved_checkpoint["generation"], 3)
+            for generation in range(4, 104):
+                tail._checkpoint_milestone({"event": "checkpoint_saved", "checkpoint": {
+                    "generation": generation, "state_path": f"/checkpoint/state-{generation}"}})
+            self.assertEqual(len(tail.milestones), 64)
+            self.assertEqual(tail.diagnostics()["checkpoint_milestones_history_dropped"], 39)
+
+    def test_partial_malformed_and_oversize_jsonl_are_bounded_and_visible(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "events"
+            tail = MONITOR.EventTail(path)
+            self.assertEqual(tail.poll(0), {})
+            path.write_bytes(b'{"event":"hel')
+            self.assertEqual(tail.poll(1), {})
+            with path.open("ab") as stream:
+                stream.write(b'lo"}\nnot json\n' + b'x' * (MONITOR.MAX_RECORD_BYTES + 1) + b'\n{"event":"last"}\n')
+            self.assertEqual(tail.poll(2), {"event": "last"})
+            self.assertEqual(tail.invalid_records, 1)
+            self.assertEqual(tail.oversized_records, 1)
+            self.assertLessEqual(len(tail.pending), MONITOR.MAX_RECORD_BYTES)
+            self.assertEqual(tail.observed_at, 2)
+
+    def test_event_rotation_and_truncation_reset_offsets(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "events"
+            path.write_text('{"event":"long event"}\n')
+            tail = MONITOR.EventTail(path)
+            tail.poll(0)
+            path.write_text('{"a":1}\n')
+            self.assertEqual(tail.poll(1), {"a": 1})
+            path.rename(path.with_suffix(".old"))
+            path.write_text('{"b":2}\n')
+            self.assertEqual(tail.poll(2), {"b": 2})
+            self.assertEqual(tail.rotations, 2)
+
+    def test_no_entry_denominator_or_closure_eta_is_invented(self):
+        event = {"progress_age_seconds": 2, "progress": {"completed_nodes": 100,
+                 "scheduled_nodes": 200, "queued_nodes": 100}}
+        result = MONITOR.progress_summary(event, 10, 15)
+        self.assertIsNone(result["initial_entry_progress"]["total"])
+        self.assertIsNone(result["initial_entry_progress"]["locally_inspected"])
+        self.assertIsNone(result["work"]["pending_descendants"])
+        self.assertIsNone(result["finished_native_awaiting_publication"])
+        self.assertEqual(result["progress_age_seconds"], 7)
+        self.assertIsNone(result["closure_eta_seconds"])
+        self.assertFalse(result["descendant_closure"]["available"])
+        self.assertIsNone(result["descendant_closure"]["initial_closed"])
+
+    def test_publication_counter_never_supplies_closure_bar(self):
+        event = {"progress": {"initial_entry_domains_total": 20,
+                 "initial_entry_domains_published": 15, "initial_entry_domains_inspected": 10,
+                 "pending_descendant_domains": 99, "parallel": {"active_workers": 2,
+                 "finished_uncommitted_domains": 159,
+                 "backpressured_workers": 1, "admission_preparation": {
+                     "inspection_worker_limit": 25, "lookup_worker_limit": 24, "coordinator_worker_limit": 1}}}}
+        progress = MONITOR.progress_summary(event, 0, 1)
+        text = "\n".join(MONITOR.dashboard({"progress": progress, "workers": 50,
+                    "resources": {"native_busy_cores": 1.4}, "hard_memory_bytes": 500_000_000_000}))
+        self.assertIn("15 / 20 published", text)
+        self.assertIn("initial native inspected 10", text)
+        self.assertIn("2 native active, 1 blocked", text)
+        self.assertIn("159 finished waiting", text)
+        self.assertIn("25 inspect + 24 admission + 1 coordinator", text)
+        self.assertIn("1.4 observed cores", text)
+        self.assertIn("not closure", text)
+        closure_line = next(line for line in text.splitlines() if line.startswith("Closure"))
+        self.assertIn("unknown / unknown initial roots recursively closed", closure_line)
+        self.assertNotIn("━", closure_line)
+        self.assertNotIn("[", next(line for line in text.splitlines() if line.startswith("Initial")))
+
+    def test_epoch_fixed_reservations_do_not_imply_activity_or_preparation_timings(self):
+        for workers, inspectors, helpers, coordinator in ((1, 1, 0, 0), (50, 49, 0, 1), (50, 20, 29, 1)):
+            with self.subTest(workers=workers, inspectors=inspectors):
+                parallel = {"activity_observation": "unavailable", "active_workers": None,
+                            "computing_workers": None, "admission_preparation": {
+                                "inspection_worker_limit": inspectors, "lookup_worker_limit": helpers,
+                                "coordinator_worker_limit": coordinator, "requested_worker_budget": workers,
+                                "scope": "configured compute reservation, not activity or successfully spawned workers"}}
+                progress = MONITOR.progress_summary({"progress": {"event": "epoch_heartbeat",
+                                                    "parallel": parallel}}, 0, 1)
+                self.assertEqual(progress["worker_reservations"], {
+                    "inspectors": inspectors, "admission_helpers": helpers, "coordinator": coordinator})
+                self.assertIsNone(progress["active_native_slots"])
+                text = "\n".join(MONITOR.dashboard({"progress": progress, "workers": workers}))
+                self.assertIn(f"{inspectors} inspect + {helpers} admission + {coordinator} coordinator", text)
+                self.assertNotIn("preparation_wall_seconds", parallel["admission_preparation"])
+                self.assertNotIn("ordered_commit_wall_seconds", parallel["admission_preparation"])
+
+    def test_closure_counts_are_independent_of_local_publication_and_queue(self):
+        native = {"event": "domain_progress", "snapshot": {
+            "descendant_closure": self.closure(), "initial_entry_domains_total": 20,
+            "initial_entry_domains_published": 20, "initial_entry_domains_inspected": 19,
+            "scheduled_nodes": 200, "completed_nodes": 100, "queued_nodes": 80,
+            "pending_descendant_domains": 75}}
+        progress = MONITOR.progress_summary({"progress": native, "recent_nodes_per_second": 4.5}, 0, 1)
+        text = "\n".join(MONITOR.dashboard({"progress": progress}))
+        self.assertIn("3 / 20 initial roots recursively closed", text)
+        self.assertIn("Domains 200 discovered · 60 recursively closed · 140 unresolved", text)
+        self.assertIn("Initial 20 / 20 published", text)
+        self.assertIn("Queue 80 pending · 100 local completions · 4.5/s local", text)
+        self.assertIn("Descendants 75 pending", text)
+        self.assertIn("not termination/family proof", text)
+        self.assertFalse(progress["family_closure_claim"])
+        self.assertIsNone(progress["closure_eta_seconds"])
+
+    def test_bootstrap_unavailable_is_unknown_but_actual_zero_is_zero(self):
+        unavailable = self.closure(available=False, initial_closed=0, total_closed=0,
+                                   unresolved_domains=200, reason="bootstrap inventory unavailable")
+        for state in ("starting", "completed"):
+            progress = MONITOR.progress_summary({"descendant_closure": unavailable,
+                "initial_entry_domains_total": 20, "initial_entry_domains_published": 20}, 0, 0)
+            closure = progress["descendant_closure"]
+            self.assertFalse(closure["available"])
+            self.assertIsNone(closure["initial_closed"])
+            self.assertIsNone(closure["total_closed"])
+            self.assertIsNone(closure["unresolved_domains"])
+            line = MONITOR.dashboard({"state": state, "progress": progress})[3]
+            self.assertIn("unknown / 20", line)
+            self.assertIn("bootstrap inventory unavailable", line)
+            self.assertNotIn("━", line)
+        native = self.closure(initial_closed=0, total_closed=0, unresolved_domains=200)
+        progress = MONITOR.progress_summary({"descendant_closure": native}, 0, 0)
+        line = MONITOR.dashboard({"progress": progress})[3]
+        self.assertIn("[────────────────] 0 / 20", line)
+        self.assertNotIn("unknown", line)
+
+    def test_missing_publication_is_not_replaced_by_native_inspections(self):
+        progress = MONITOR.progress_summary({"initial_entry_domains_total": 20,
+            "initial_entry_domains_inspected": 20}, 0, 0)
+        text = "\n".join(MONITOR.dashboard({"progress": progress}))
+        self.assertIn("Initial unknown / 20 published · initial native inspected 20", text)
+        self.assertIn("unknown / unknown initial roots recursively closed", text)
+
+    def test_invalid_closure_counters_fail_closed(self):
+        variants = [{"initial_closed": True}, {"initial_closed": -1}, {"initial_closed": 21},
+                    {"initial_closed": 3.0}, {"initial_total": None}, {"initial_total": 201},
+                    {"total_closed": 201}, {"total_closed": 2, "unresolved_domains": 198},
+                    {"unresolved_domains": 139}, {"total_domains": float("nan")}]
+        for changes in variants:
+            with self.subTest(changes=changes):
+                closure = MONITOR.descendant_closure_summary(self.closure(**changes))
+                self.assertFalse(closure["available"])
+                self.assertIsNone(closure["initial_closed"])
+                self.assertIsNone(closure["total_closed"])
+                self.assertIn("invalid", closure["reason"])
+                json.dumps(closure, allow_nan=False)
+
+    def test_conservative_snapshot_preserves_metadata_and_advances_age(self):
+        native = self.closure(initial_closed=0, total_closed=0, unresolved_domains=200,
+                              snapshot_stale=True, snapshot_revision=10)
+        progress = MONITOR.progress_summary({"progress_age_seconds": 2,
+            "progress": {"descendant_closure": native}}, 10, 15)
+        closure = progress["descendant_closure"]
+        self.assertEqual(closure, dict(native, snapshot_age_seconds=9.0))
+        text = "\n".join(MONITOR.dashboard({"progress": progress}))
+        self.assertIn("≥0 / 20 initial roots recursively closed", text)
+        self.assertIn("conservative snapshot 00:00:09 ago", text)
+        self.assertIn("Domains 200 discovered · ≥0 recursively closed · ≤200 unresolved", text)
+        self.assertEqual(json.loads(json.dumps(progress))["descendant_closure"], closure)
+
+    def test_old_frozen_status_remains_readable_and_json_fields_survive(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            status = {"state": "completed", "heartbeat_unix_time": time.time(),
+                      "custom_legacy_field": {"retained": True},
+                      "progress": {"initial_entry_progress": {"total": 20, "published": 20},
+                                   "work": {"scheduled": 200, "locally_completed": 200, "pending": 0}}}
+            MONITOR.atomic_json(directory / "status.json", status)
+            output = io.StringIO()
+            with patch("sys.stdout", output):
+                self.assertEqual(MONITOR.main([str(directory), "--json"]), 0)
+            observed = json.loads(output.getvalue())
+            self.assertEqual(observed["progress"], status["progress"])
+            self.assertEqual(observed["custom_legacy_field"], status["custom_legacy_field"])
+            text = "\n".join(MONITOR.dashboard(observed))
+            self.assertIn("unknown / unknown initial roots recursively closed", text)
+            self.assertIn("Domains 200 discovered · unknown recursively closed · unknown unresolved", text)
+
+    def test_snapshot_age_advances_on_status_read_without_changing_native_freshness(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            status = {"state": "completed", "heartbeat_unix_time": 100,
+                      "progress": {"progress_age_seconds": 3,
+                                   "descendant_closure": self.closure(snapshot_stale=True)}}
+            MONITOR.atomic_json(directory / "status.json", status)
+            with patch.object(MONITOR.time, "time", return_value=120):
+                observed = MONITOR.read_status(directory)
+            self.assertEqual(observed["progress"]["descendant_closure"]["snapshot_age_seconds"], 22)
+            self.assertTrue(observed["progress"]["descendant_closure"]["snapshot_stale"])
+            self.assertEqual(observed["progress"]["progress_age_seconds"], 23)
+            self.assertTrue(observed["heartbeat_stale"])
+
+    def test_plain_output_retains_checkpoint_and_never_contains_escape_codes(self):
+        stream = io.StringIO()
+        presenter = MONITOR.Presenter(stream, plain_seconds=30)
+        status = {"state": "running", "checkpoint": {"state": "saved", "generation": 3,
+                   "directory": "/run/checkpoint"}, "run_directory": "bad\x1b[31m\ntext"}
+        presenter.render(status, now=0)
+        presenter.render(status, now=1)
+        self.assertEqual(len(stream.getvalue().splitlines()), 1)
+        self.assertIn("generation 3", stream.getvalue())
+        self.assertIn("/run/checkpoint", stream.getvalue())
+        self.assertNotIn("\x1b", stream.getvalue())
+        self.assertIn("closure ETA unknown", stream.getvalue())
+
+    def test_in_progress_save_does_not_replace_last_good_checkpoint(self):
+        saved = {"state": "saved", "generation": 3, "directory": "/checkpoint",
+                 "saved_unix_time": 1790208000, "duration_seconds": 1.25}
+        writing = {"state": "writing", "generation": 4, "state_path": "/checkpoint/state-4"}
+        progress = MONITOR.progress_summary({"progress": {"checkpoint": saved,
+                    "checkpoint_write": writing}}, 0, 1)
+        self.assertEqual(progress["checkpoint"]["generation"], 3)
+        self.assertEqual(progress["checkpoint_write"]["generation"], 4)
+        text = "\n".join(MONITOR.dashboard({"progress": progress}))
+        self.assertIn("WRITING generation 4", text)
+        self.assertIn("saved generation 3", text)
+        self.assertIn("1.25s", text)
+        self.assertIn("UTC", text)
+        terminal = "\n".join(MONITOR.dashboard({"progress": progress, "checkpoint_write": None}))
+        self.assertNotIn("WRITING", terminal)
+        self.assertIn("saved generation 3", terminal)
+
+    def test_tty_has_colors_and_no_color_disables_only_color(self):
+        class Terminal(io.StringIO):
+            def isatty(self):
+                return True
+        for no_color in (False, True):
+            stream = Terminal()
+            environment = {"TERM": "xterm"}
+            if no_color:
+                environment["NO_COLOR"] = "1"
+            with patch.dict(os.environ, environment, clear=True):
+                MONITOR.Presenter(stream).render({"state": "running"}, now=0)
+            self.assertEqual("\x1b[1;36m" in stream.getvalue(), not no_color)
+            self.assertEqual("\x1b[94m" in stream.getvalue(), not no_color)
+            self.assertIn("\x1b[2K", stream.getvalue())
+
+    def test_atomic_status_and_stale_or_reused_pid_observation(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            status = {"heartbeat_unix_time": 1, "sample_seconds": 2,
+                      "process_identity": {"native": {"pid": os.getpid(), "start_ticks": -1}}}
+            MONITOR.atomic_json(directory / "status.json", status)
+            self.assertEqual(json.loads((directory / "status.json").read_text()), status)
+            read = MONITOR.read_status(directory)
+            self.assertTrue(read["heartbeat_stale"])
+            self.assertFalse(read["observed_processes_alive"]["native"])
+            self.assertEqual([path.name for path in directory.iterdir()], ["status.json"])
+
+    def test_stale_reader_checks_boot_and_shows_advancing_heartbeat_age(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            directory = Path(temporary)
+            stat = Path(f"/proc/{os.getpid()}/stat").read_text()
+            start = int(stat[stat.rfind(")") + 2:].split()[19])
+            identity = {"pid": os.getpid(), "start_ticks": start}
+            status = {"state": "running", "heartbeat_unix_time": time.time() - 20,
+                      "progress": {"progress_age_seconds": 3},
+                      "process_identity": {"boot_id": "previous boot", "supervisor": identity}}
+            MONITOR.atomic_json(directory / "status.json", status)
+            read = MONITOR.read_status(directory)
+            self.assertFalse(read["observed_boot_id_matches"])
+            self.assertFalse(read["observed_processes_alive"]["supervisor"])
+            self.assertGreaterEqual(read["progress"]["progress_age_seconds"], 23)
+            text = "\n".join(MONITOR.dashboard(read))
+            self.assertIn("LAST REPORTED RUNNING", text)
+            self.assertIn("STALE HEARTBEAT", text)
+            self.assertIn("heartbeat age 00:00:20", text)
+            status["process_identity"]["boot_id"] = Path("/proc/sys/kernel/random/boot_id").read_text().strip()
+            status["heartbeat_unix_time"] = time.time()
+            MONITOR.atomic_json(directory / "status.json", status)
+            self.assertTrue(MONITOR.read_status(directory)["observed_processes_alive"]["supervisor"])
+
+
+class ProductionTests(unittest.TestCase):
+    def test_policy_publication_syncs_file_before_rename_and_directory_after(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "policy.json"
+            events = []
+            replace = PRODUCTION.os.replace
+            with patch.object(PRODUCTION.os, "fsync", side_effect=lambda _fd: events.append("file_sync")), \
+                    patch.object(PRODUCTION.os, "replace", side_effect=lambda src, dst: (events.append("rename"), replace(src, dst))), \
+                    patch.object(PRODUCTION, "sync_directory", side_effect=lambda _path: events.append("directory_sync")):
+                PRODUCTION.write_json(path, {"frozen": True})
+            self.assertEqual(events, ["file_sync", "rename", "directory_sync"])
+            self.assertEqual(json.loads(path.read_text()), {"frozen": True})
+            with patch.object(PRODUCTION.os, "fsync", side_effect=OSError("sync failure")):
+                with self.assertRaisesRegex(OSError, "sync failure"):
+                    PRODUCTION.write_json(path, {"frozen": False})
+            self.assertEqual(json.loads(path.read_text()), {"frozen": True})
+            self.assertEqual(list(path.parent.iterdir()), [path])
+
+    def test_staging_preserves_query_and_payload_bytes_then_freezes_executable(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            owner = root / "owner.rrbin"
+            owner.write_bytes(b"fixture payload, not native data")
+            selection = {"family_fingerprint": "fixture", "owners": [
+                {"mask": "01", "path": str(owner), "bytes": owner.stat().st_size}],
+                "initial_frontier_routes": [], "load_limits": {"max_total_input_bytes": 1234}}
+            manifest = root / "manifest.json"
+            manifest.write_text(json.dumps(selection))
+            queries = root / "queries.json"
+            queries.write_text('{"schema":"rustred.owner-domain-queries.json.v2", "queries":[{"id":"unchanged"}], "query_roles":{"required":["unchanged"],"auxiliary":[]}}\n')
+            campaign = root / "campaign"
+            staged = campaign / "inputs"
+            receipt = STAGE.stage(manifest, queries, staged, root)
+            self.assertEqual((staged / "queries.json").read_bytes(), queries.read_bytes())
+            copy = json.loads((staged / "selection.json").read_text())
+            copy["owners"][0]["path"] = selection["owners"][0]["path"]
+            self.assertEqual(copy, selection)
+            self.assertEqual(PRODUCTION.verify_inputs(staged)[:2], (1, queries.stat().st_size))
+            executable = root / "fake-rustred"
+            executable.write_text("#!/bin/sh\nexit 0\n")
+            executable.chmod(0o700)
+            with patch.object(PRODUCTION.os, "fsync", wraps=os.fsync) as synced:
+                frozen, frozen_hash = PRODUCTION.freeze_executable(campaign, executable)
+            self.assertGreaterEqual(synced.call_count, 5)
+            self.assertEqual(PRODUCTION.freeze_executable(campaign, None), (frozen, frozen_hash))
+            executable.write_text("#!/bin/sh\nexit 1\n")
+            with self.assertRaisesRegex(ValueError, "different frozen executable"):
+                PRODUCTION.freeze_executable(campaign, executable)
+            self.assertEqual(PRODUCTION.digest(frozen), frozen_hash)
+            output = io.StringIO()
+            with patch("sys.stdout", output), patch.object(PRODUCTION.os, "execv") as launch:
+                self.assertEqual(PRODUCTION.main(["--campaign-directory", str(campaign), "--json"]), 0)
+            launch.assert_not_called()
+            plan = json.loads(output.getvalue())
+            self.assertIn("--unbounded-work", plan["command"])
+            self.assertNotIn("375000", plan["command"])
+            self.assertNotIn("--child-address-space-bytes", plan["command"])
+            self.assertFalse(plan["launch_requested"])
+            self.assertEqual(plan["queries_sha256"], receipt["queries_sha256"])
+            self.assertEqual(plan["checkpoint_interval_seconds"], 3600)
+            self.assertEqual(plan["ram_guard_margin_percent"], 5)
+            self.assertNotIn("--soft-memory-bytes", plan["command"])
+
+    def test_resume_reuses_exact_frozen_policy_not_new_defaults(self):
+        from argparse import Namespace
+        with tempfile.TemporaryDirectory() as temporary:
+            campaign = Path(temporary)
+            (campaign / "bin").mkdir()
+            cpu = min(os.sched_getaffinity(0))
+            args = Namespace(workers=1, cpus=str(cpu), checkpoint_interval_seconds=1234,
+                             max_memory_bytes=10_000_000_000, ram_guard_margin_percent=7,
+                             apply_subdivision_axis=2, apply_subdivision_cut=3, resume=False,
+                             publication_policy="ordered", auto_rescue=False)
+            policy = PRODUCTION.frozen_policy(campaign, args, campaign / "bin/rustred",
+                                               campaign / "inputs", 67, 123456)
+            args = Namespace(**{name: None for name in policy["options"]}, resume=True)
+            with patch.object(PRODUCTION.os, "sched_getaffinity", return_value={cpu + 1}):
+                resumed = PRODUCTION.frozen_policy(campaign, args, campaign / "ignored",
+                                                    campaign / "ignored", 1, 2)
+            self.assertEqual(resumed, policy)
+            self.assertIn("--apply-subdivision-axis", resumed["command_arguments"])
+            self.assertEqual(resumed["options"]["workers"], 1)
+            self.assertEqual(resumed["options"]["cpus"], str(cpu))
+            args.apply_subdivision_axis = 5
+            with self.assertRaisesRegex(ValueError, "differs from frozen policy"):
+                PRODUCTION.frozen_policy(campaign, args, campaign / "ignored", campaign, 1, 2)
+
+    def test_publication_policy_is_frozen_and_cannot_be_changed_on_resume(self):
+        from argparse import Namespace
+        for requested in (None, "ordered", "ready"):
+            with self.subTest(requested=requested), tempfile.TemporaryDirectory() as temporary:
+                campaign = Path(temporary)
+                (campaign / "bin").mkdir()
+                args = Namespace(workers=1, cpus=str(min(os.sched_getaffinity(0))),
+                                 checkpoint_interval_seconds=None, max_memory_bytes=None,
+                                 ram_guard_margin_percent=None, apply_subdivision_axis=None,
+                                 apply_subdivision_cut=None, resume=False,
+                                 publication_policy=requested, auto_rescue=False)
+                policy = PRODUCTION.frozen_policy(campaign, args, campaign / "bin/rustred",
+                                                   campaign / "inputs", 67, 123456)
+                command = policy["command_arguments"]
+                expected = requested or "ready"
+                self.assertEqual(policy["schema"], "rustred.production-steering.v5")
+                self.assertEqual(policy["options"]["publication_policy"], expected)
+                self.assertEqual(command[command.index("--publication-policy") + 1], expected)
+                self.assertEqual(command[command.index("--transfer-unreserved-lookahead") + 1], "256")
+                self.assertNotIn("--inspection-workers", command)
+                frozen = (campaign / "bin/steering.json").read_bytes()
+                resumed_args = Namespace(**{name: None for name in policy["options"]}, resume=True)
+                for explicit in (None, expected):
+                    resumed_args.publication_policy = explicit
+                    self.assertEqual(PRODUCTION.frozen_policy(campaign, resumed_args,
+                        campaign / "ignored", campaign / "ignored", 1, 2), policy)
+                resumed_args.publication_policy = "ready" if expected == "ordered" else "ordered"
+                with self.assertRaisesRegex(ValueError, "publication-policy differs from frozen policy"):
+                    PRODUCTION.frozen_policy(campaign, resumed_args,
+                        campaign / "ignored", campaign / "ignored", 1, 2)
+                self.assertEqual((campaign / "bin/steering.json").read_bytes(), frozen)
+
+    def test_ready_subdivision_is_rejected_before_input_or_binary_access(self):
+        with patch.object(PRODUCTION, "verify_inputs") as verify, \
+                patch.object(PRODUCTION, "freeze_executable") as freeze, \
+                patch("sys.stderr", new_callable=io.StringIO) as errors:
+            with self.assertRaises(SystemExit):
+                PRODUCTION.main(["--publication-policy", "ready",
+                                 "--apply-subdivision-axis", "0", "--apply-subdivision-cut", "2"])
+            self.assertIn("nonordered publication cannot be combined", errors.getvalue())
+            verify.assert_not_called()
+            freeze.assert_not_called()
+
+    def test_application_refinement_is_frozen_and_old_steering_means_off(self):
+        from argparse import Namespace
+        for cardinality in (None, 2):
+            with self.subTest(cardinality=cardinality), tempfile.TemporaryDirectory() as temporary:
+                campaign = Path(temporary)
+                (campaign / "bin").mkdir()
+                args = Namespace(workers=1, cpus=str(min(os.sched_getaffinity(0))),
+                                 checkpoint_interval_seconds=None, max_memory_bytes=None,
+                                 ram_guard_margin_percent=None, apply_subdivision_axis=None,
+                                 apply_subdivision_cut=None, resume=False, publication_policy=None,
+                                 apply_cell_refinement_max_cardinality=cardinality, auto_rescue=False)
+                policy = PRODUCTION.frozen_policy(campaign, args, campaign / "bin/rustred",
+                                                   campaign / "inputs", 2, 1024)
+                flag = "--apply-cell-refinement-max-cardinality"
+                if cardinality is None:
+                    self.assertNotIn(flag, policy["command_arguments"])
+                    # Explicitly exercise an older immutable steering image.
+                    del policy["options"]["apply_cell_refinement_max_cardinality"]
+                    path = campaign / "bin/steering.json"
+                    path.chmod(0o600)
+                    PRODUCTION.write_json(path, policy)
+                else:
+                    command = policy["command_arguments"]
+                    self.assertEqual(command[command.index(flag) + 1], "2")
+                original = (campaign / "bin/steering.json").read_bytes()
+                args.resume = True
+                args.apply_cell_refinement_max_cardinality = None
+                self.assertEqual(PRODUCTION.frozen_policy(campaign, args,
+                    campaign / "ignored", campaign / "ignored", 1, 2), policy)
+                args.apply_cell_refinement_max_cardinality = 3
+                with self.assertRaisesRegex(ValueError, "differs from frozen policy"):
+                    PRODUCTION.frozen_policy(campaign, args, campaign, campaign, 1, 2)
+                self.assertEqual((campaign / "bin/steering.json").read_bytes(), original)
+
+    def test_application_refinement_rejects_invalid_values_before_inputs(self):
+        flag = "--apply-cell-refinement-max-cardinality"
+        options = [[flag, value] for value in ("0", "-1", "+1", "1.5", "True", "１", "18446744073709551616")]
+        options.append([flag, "2", flag, "3"])
+        for flags in options:
+            with self.subTest(flags=flags), patch.object(PRODUCTION, "verify_inputs") as verify, \
+                    patch.object(PRODUCTION, "freeze_executable") as freeze, patch("sys.stderr", new_callable=io.StringIO):
+                with self.assertRaises(SystemExit):
+                    PRODUCTION.main(flags)
+                verify.assert_not_called()
+                freeze.assert_not_called()
+
+
+
+class DerivedDashboardTests(unittest.TestCase):
+    def derived_lines(self, status):
+        return [line for line in MONITOR.dashboard(status) if line.startswith(("Inspectors ", "Rate ", "Checkpoint gen "))]
+
+    def test_absent_derived_block_renders_unknown_without_eta(self):
+        for status in ({}, {"progress": {}}, {"derived": None}, {"derived": {}}, {"derived": {"last_checkpoint": None}}):
+            with self.subTest(status=status):
+                lines = self.derived_lines(status)
+                self.assertEqual(lines, [
+                    "Inspectors unknown computing / unknown reserved · stall >=5 s unknown · coordinator duty unknown",
+                    "Rate unknown per hour · pending unknown per completion · max scheduled rank unknown · RSS unknown KB per domain",
+                    "Checkpoint gen unknown · unknown in unknown · duty unknown · roots closed unknown/unknown"])
+        text = "\n".join(MONITOR.dashboard({"derived": {"completions_per_hour_1h": 10.0}}))
+        self.assertNotIn("ETA ", text.replace("closure ETA unknown", ""))
+        self.assertNotIn("estimate", text)
+
+    def test_measured_derived_values_are_formatted_and_partial_blocks_degrade(self):
+        derived = {"computing_inspectors_mean_1h": 3.26, "stall_share_5s": 0.317, "coordinator_duty_1h": 0.42,
+                   "completions_per_hour_1h": 12345.6, "pending_growth_per_completion_1h": 1.234,
+                   "window_wall_seconds": 600, "first_elapsed_seconds": 0, "last_elapsed_seconds": 600,
+                   "max_scheduled_finite_rank": 21, "rss_bytes_per_discovered_domain": 4375.0,
+                   "last_checkpoint": {"generation": 18, "bytes": 68_696_213_315, "duration_seconds": 496.1},
+                   "checkpoint_duty": 0.077, "roots_closed": 7, "roots_total": 67}
+        status = {"derived": derived, "progress": {"worker_reservations": {"inspectors": 5}}}
+        self.assertEqual(self.derived_lines(status), [
+            "Inspectors 3.3 computing / 5 reserved · stall >=5 s 32% · coordinator duty 42%",
+            "Rate 12,346 per hour · pending +1.23 per completion · max scheduled rank 21 · RSS 4.4 KB per domain",
+            "Checkpoint gen 18 · 68.70 GB in 496 s · duty 8% · roots closed 7/67"])
+        partial = {"derived": {"completions_per_hour_1h": 0.0, "pending_growth_per_completion_1h": -0.5,
+                               "stall_share_5s": float("nan"), "roots_closed": True, "last_checkpoint": {"generation": 3}}}
+        self.assertEqual(self.derived_lines(partial), [
+            "Inspectors unknown computing / unknown reserved · stall >=5 s unknown · coordinator duty unknown",
+            "Rate 0 per hour · pending -0.50 per completion · max scheduled rank unknown · RSS unknown KB per domain",
+            "Checkpoint gen 3 · unknown in unknown · duty unknown · roots closed unknown/unknown"])
+        stream = io.StringIO()
+        MONITOR.Presenter(stream, plain_seconds=1).render(dict(status, state="running"), now=0)
+        self.assertIn("Rate 12,346 per hour", stream.getvalue())
+        self.assertNotIn("\x1b", stream.getvalue())
+
+    def test_event_tail_observers_receive_every_complete_record(self):
+        with tempfile.TemporaryDirectory() as temporary:
+            path = Path(temporary) / "events.jsonl"
+            path.write_text('{"event": "a"}\nnot json\n{"event": "b"}\n{"event": "partial"')
+            tail = MONITOR.EventTail(path)
+            seen = []
+            tail.observers.append(seen.append)
+            tail.poll(1.0)
+            self.assertEqual(seen, [{"event": "a"}, {"event": "b"}])
+            self.assertEqual(tail.invalid_records, 1)
+            with path.open("a") as stream:
+                stream.write('}\n')
+            tail.poll(2.0)
+            self.assertEqual(seen[-1], {"event": "partial"})
+
+    def test_discovery_closure_ratio_window_and_freshness_in_plain_and_tty(self):
+        class TtyStream(io.StringIO):
+            def isatty(self):
+                return True
+
+        for rate, text in ((1.25, "1.625"), (-0.25, "0.875"), (0.0, "1.000")):
+            status = {"state": "running", "heartbeat_age_seconds": 3,
+                "progress": {"descendant_closure": MonitorTests.closure(snapshot_age_seconds=20, snapshot_stale=True)}, "derived": {
+                "pending_growth_per_completion_1h": -0.5,
+                "discovery_closure_net_1h": {"per_second": rate, "covered_seconds": 600,
+                    "window_seconds": 3600, "warmup": True, "state": "valid",
+                    "first_elapsed_seconds": 0, "last_elapsed_seconds": 600,
+                    "discovered_delta": (rate + 2) * 600, "closed_delta": 1200,
+                    "discovered_per_second": rate + 2, "closed_per_second": 2,
+                    "snapshot_stale": True, "snapshot_age_seconds": 17, "snapshot_advanced": False}}}
+            for stream in (io.StringIO(), TtyStream()):
+                with self.subTest(rate=rate, tty=stream.isatty()), patch.dict(os.environ, TERM="xterm"), \
+                        patch.object(MONITOR.shutil, "get_terminal_size", return_value=os.terminal_size((100, 24))):
+                    MONITOR.Presenter(stream).render(status, now=0)
+                    output = stream.getvalue()
+                    self.assertIn(f"Discovery/closure {text}", output)
+                    self.assertIn("00:10:00/01:00:00 warm-up", output)
+                    self.assertIn("Closure snapshot stale · age 00:00:20 · no new closure scan", output)
+                    self.assertIn("pending -0.50 per completion", output)
+                    self.assertEqual("\x1b" in output, stream.isatty())
+
+    def test_gap_missing_and_epoch_unknown_age_are_explicit(self):
+        for value in (None, {}, {"state": "invalid_counts", "warmup": True}):
+            lines = MONITOR.derived_lines({"derived": {"discovery_closure_net_1h": value}})
+            self.assertIn("Discovery/closure unknown observed scan-batched", "\n".join(lines))
+            self.assertIn("Closure snapshot unknown · age unknown · scan update unknown", lines)
+        lines = MONITOR.derived_lines({"derived": {"discovery_closure_net_1h": {
+            "per_second": 2, "snapshot_stale": True, "snapshot_advanced": False}}})
+        self.assertIn("Closure snapshot stale · age unknown · no new closure scan", lines)
+
+    def test_gap_prefers_already_aged_live_snapshot_without_double_aging(self):
+        status = {"heartbeat_age_seconds": 30, "heartbeat_stale": True,
+                  "progress": {"descendant_closure": MonitorTests.closure(snapshot_age_seconds=47)},
+                  "derived": {"discovery_closure_net_1h": {
+                      "per_second": -1, "snapshot_stale": True, "snapshot_age_seconds": 10,
+                      "snapshot_advanced": True}}}
+        self.assertIn("Closure snapshot fresh · age 00:00:47 · scan advanced · heartbeat stale",
+                      MONITOR.derived_lines(status))
+        del status["progress"]
+        self.assertIn("Closure snapshot stale · age 00:00:40 · scan advanced · heartbeat stale",
+                      MONITOR.derived_lines(status))
+
+
+if __name__ == "__main__":
+    unittest.main()

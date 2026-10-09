@@ -1,0 +1,1090 @@
+#[cfg(target_arch = "wasm32")]
+mod alignment;
+mod candidates;
+mod normalization;
+mod streaming;
+pub use normalization::{PyTerminalNormalization, normalize_from_native_family};
+pub use streaming::{PyCandidateArtifact, PyCandidateGenerationSession, start_from_native_family};
+mod coordinator;
+
+use std::str::FromStr;
+
+use pyo3::create_exception;
+use pyo3::exceptions::PyException;
+use pyo3::prelude::*;
+use pyo3::types::{PyAnyMethods, PyBool, PyBytes, PyDict};
+use rustred_app::{
+    AppError, AppErrorKind, CampaignPlanRequest, CampaignPreflightRequest,
+    ClosingArtifactGenerateRequest, ClosingArtifactInspectRequest, ClosingArtifactReduceRequest,
+    ClosingFamilySelector, DeriveRequest, FamilyCloseRequest, FoundryCampaignRunRequest,
+    FoundryWaveCampaignRunRequest, InputFormat, RelationSelection,
+    campaign_plan as app_campaign_plan, campaign_preflight as app_campaign_preflight,
+    closing_artifact_generate as app_closing_artifact_generate,
+    closing_artifact_inspect as app_closing_artifact_inspect,
+    closing_artifact_reduce as app_closing_artifact_reduce, derive as app_derive,
+    family_close as app_family_close, foundry_campaign_run as app_foundry_campaign_run,
+    foundry_wave_campaign_run as app_foundry_wave_campaign_run,
+};
+
+use crate::coordinator::{CoordinatorError, process_coordinator};
+
+create_exception!(rustred, RustRedError, PyException);
+create_exception!(rustred, RustRedInputError, RustRedError);
+create_exception!(rustred, RustRedSchemaError, RustRedInputError);
+create_exception!(rustred, RustRedLimitError, RustRedInputError);
+create_exception!(rustred, RustRedLoweringError, RustRedInputError);
+create_exception!(rustred, RustRedDerivationError, RustRedError);
+create_exception!(rustred, RustRedExecutionError, RustRedError);
+create_exception!(rustred, RustRedLicenseError, RustRedExecutionError);
+create_exception!(rustred, RustRedSerializationError, RustRedError);
+create_exception!(rustred, RustRedOutputLimitError, RustRedSerializationError);
+create_exception!(rustred, RustRedInternalError, RustRedError);
+create_exception!(
+    rustred,
+    RustRedCoordinatorPoisonedError,
+    RustRedInternalError
+);
+
+#[derive(Clone, Copy)]
+struct PythonInteger(i128);
+
+impl<'a, 'py> FromPyObject<'a, 'py> for PythonInteger {
+    type Error = PyErr;
+
+    fn extract(value: Borrowed<'a, 'py, PyAny>) -> PyResult<Self> {
+        if value.is_instance_of::<PyBool>() {
+            return Err(RustRedInputError::new_err(
+                "integer arguments cannot be bool",
+            ));
+        }
+        value.extract::<i128>().map(Self).map_err(|_| {
+            RustRedInputError::new_err("integer argument must fit a signed 128-bit integer")
+        })
+    }
+}
+
+macro_rules! canonical_result {
+    ($python_name:literal, $name:ident) => {
+        #[pyclass(frozen, module = "rustred", name = $python_name)]
+        #[derive(Debug)]
+        pub struct $name {
+            schema: &'static str,
+            status: &'static str,
+            canonical_toml: String,
+        }
+
+        impl $name {
+            fn new(schema: &'static str, status: &'static str, canonical_toml: String) -> Self {
+                Self {
+                    schema,
+                    status,
+                    canonical_toml,
+                }
+            }
+        }
+
+        #[pymethods]
+        impl $name {
+            #[getter]
+            fn schema(&self) -> &'static str {
+                self.schema
+            }
+
+            #[getter]
+            fn status(&self) -> &'static str {
+                self.status
+            }
+
+            /// Return the exact newline-terminated TOML from `rustred-app`.
+            fn to_toml(&self) -> &str {
+                &self.canonical_toml
+            }
+
+            fn __repr__(&self) -> String {
+                format!(
+                    "{}(schema={:?}, status={:?})",
+                    $python_name, self.schema, self.status
+                )
+            }
+        }
+    };
+}
+
+canonical_result!("DeriveResult", PyDeriveResult);
+canonical_result!("CampaignPlanResult", PyCampaignPlanResult);
+canonical_result!("CampaignPreflightResult", PyCampaignPreflightResult);
+canonical_result!(
+    "ClosingArtifactInspectionResult",
+    PyClosingArtifactInspectionResult
+);
+
+/// Deterministic diagnostic state from one bounded foundry experiment.
+///
+/// Measurements are deliberately separate from the semantic report so that
+/// callers can compare report bytes across runs and worker configurations.
+#[pyclass(frozen, module = "rustred", name = "FoundryCampaignRunResult")]
+#[derive(Debug)]
+pub struct PyFoundryCampaignRunResult {
+    schema: &'static str,
+    measurements_schema: &'static str,
+    report_toml: String,
+    measurements_toml: String,
+}
+
+/// Deterministic detached state from one full-rank atomic-wave experiment.
+#[pyclass(frozen, module = "rustred", name = "FoundryWaveCampaignRunResult")]
+#[derive(Debug)]
+pub struct PyFoundryWaveCampaignRunResult {
+    schema: &'static str,
+    measurements_schema: &'static str,
+    report_toml: String,
+    measurements_toml: String,
+    artifact: Option<Vec<u8>>,
+}
+
+#[pymethods]
+impl PyFoundryWaveCampaignRunResult {
+    #[getter]
+    fn schema(&self) -> &'static str {
+        self.schema
+    }
+
+    #[getter]
+    fn measurements_schema(&self) -> &'static str {
+        self.measurements_schema
+    }
+
+    fn to_toml(&self) -> &str {
+        &self.report_toml
+    }
+
+    fn measurements_to_toml(&self) -> &str {
+        &self.measurements_toml
+    }
+
+    #[getter]
+    fn artifact_bytes<'py>(&self, py: Python<'py>) -> Option<Bound<'py, PyBytes>> {
+        self.artifact
+            .as_deref()
+            .map(|bytes| PyBytes::new(py, bytes))
+    }
+
+    fn __repr__(&self) -> String {
+        format!(
+            "FoundryWaveCampaignRunResult(schema={:?}, measurements_schema={:?})",
+            self.schema, self.measurements_schema
+        )
+    }
+}
+
+#[pymethods]
+impl PyFoundryCampaignRunResult {
+    #[getter]
+    fn schema(&self) -> &'static str {
+        self.schema
+    }
+
+    #[getter]
+    fn measurements_schema(&self) -> &'static str {
+        self.measurements_schema
+    }
+
+    /// Return the deterministic, newline-terminated campaign report.
+    fn to_toml(&self) -> &str {
+        &self.report_toml
+    }
+
+    /// Return the nonsemantic wall-clock measurement sidecar.
+    fn measurements_to_toml(&self) -> &str {
+        &self.measurements_toml
+    }
+
+    fn __repr__(&self) -> String {
+        format!(
+            "FoundryCampaignRunResult(schema={:?}, measurements_schema={:?})",
+            self.schema, self.measurements_schema
+        )
+    }
+}
+
+#[pyclass(frozen, module = "rustred", name = "ClosingArtifactGenerationResult")]
+#[derive(Debug)]
+pub struct PyClosingArtifactGenerationResult {
+    schema: &'static str,
+    status: &'static str,
+    canonical_toml: String,
+    artifact: Py<PyBytes>,
+}
+
+#[pymethods]
+impl PyClosingArtifactGenerationResult {
+    #[getter]
+    fn schema(&self) -> &'static str {
+        self.schema
+    }
+
+    #[getter]
+    fn status(&self) -> &'static str {
+        self.status
+    }
+
+    #[getter]
+    fn artifact(&self, py: Python<'_>) -> Py<PyBytes> {
+        self.artifact.clone_ref(py)
+    }
+
+    fn to_toml(&self) -> &str {
+        &self.canonical_toml
+    }
+
+    fn __repr__(&self, py: Python<'_>) -> String {
+        format!(
+            "ClosingArtifactGenerationResult(schema={:?}, status={:?}, artifact_bytes={})",
+            self.schema,
+            self.status,
+            self.artifact.bind(py).as_bytes().len()
+        )
+    }
+}
+
+#[pyclass(
+    frozen,
+    module = "rustred",
+    name = "ExactMasterCoefficient",
+    skip_from_py_object
+)]
+#[derive(Clone, Debug)]
+pub struct PyExactMasterCoefficient {
+    master_powers: Vec<i64>,
+    unit_mass_coefficient: String,
+    // Box is required for alignment: CPython's wasm32 object allocator guarantees
+    // only 8 bytes, but i128 requires 16. Rust allocates the boxed value with the
+    // required alignment; do not inline it into the Python-owned object.
+    #[cfg(target_arch = "wasm32")]
+    common_mass_squared_power: Box<i128>,
+    #[cfg(not(target_arch = "wasm32"))]
+    common_mass_squared_power: i128,
+}
+
+#[pymethods]
+impl PyExactMasterCoefficient {
+    #[getter]
+    fn master_powers(&self) -> Vec<i64> {
+        self.master_powers.clone()
+    }
+
+    #[getter]
+    fn unit_mass_coefficient(&self) -> &str {
+        &self.unit_mass_coefficient
+    }
+
+    #[getter]
+    fn common_mass_squared_power(&self) -> i128 {
+        #[cfg(target_arch = "wasm32")]
+        {
+            *self.common_mass_squared_power
+        }
+        #[cfg(not(target_arch = "wasm32"))]
+        {
+            self.common_mass_squared_power
+        }
+    }
+
+    fn __repr__(&self) -> String {
+        format!(
+            "ExactMasterCoefficient(master_powers={:?}, unit_mass_coefficient={:?}, common_mass_squared_power={})",
+            self.master_powers, self.unit_mass_coefficient, self.common_mass_squared_power
+        )
+    }
+}
+
+#[pyclass(frozen, module = "rustred", name = "ClosingArtifactReductionResult")]
+#[derive(Debug)]
+pub struct PyClosingArtifactReductionResult {
+    schema: &'static str,
+    status: &'static str,
+    canonical_toml: String,
+    family_fingerprint: String,
+    target_powers: Vec<i64>,
+    terms: Vec<PyExactMasterCoefficient>,
+}
+
+#[pymethods]
+impl PyClosingArtifactReductionResult {
+    #[getter]
+    fn schema(&self) -> &'static str {
+        self.schema
+    }
+
+    #[getter]
+    fn status(&self) -> &'static str {
+        self.status
+    }
+
+    #[getter]
+    fn family_fingerprint(&self) -> &str {
+        &self.family_fingerprint
+    }
+
+    #[getter]
+    fn target_powers(&self) -> Vec<i64> {
+        self.target_powers.clone()
+    }
+
+    #[getter]
+    fn terms(&self) -> Vec<PyExactMasterCoefficient> {
+        self.terms.clone()
+    }
+
+    fn to_toml(&self) -> &str {
+        &self.canonical_toml
+    }
+
+    fn __repr__(&self) -> String {
+        format!(
+            "ClosingArtifactReductionResult(schema={:?}, status={:?}, target_powers={:?}, terms={})",
+            self.schema,
+            self.status,
+            self.target_powers,
+            self.terms.len()
+        )
+    }
+}
+
+#[pyfunction]
+#[pyo3(
+    signature = (source, *, input_format = "auto", relations = "all", n_cores = PythonInteger(1)),
+    text_signature = "(source, *, input_format='auto', relations='all', n_cores=1)"
+)]
+fn derive(
+    py: Python<'_>,
+    source: &str,
+    input_format: &str,
+    relations: &str,
+    n_cores: PythonInteger,
+) -> PyResult<PyDeriveResult> {
+    let request = DeriveRequest {
+        source: bounded_owned_input("derive input", source)?,
+        input_format: parse_input_format(input_format)?,
+        relations: parse_relation_selection(relations)?,
+        n_cores: positive_core_count("derive n_cores", n_cores.0)?,
+    };
+    let result = py
+        .detach(move || execute(move || app_derive(request)))
+        .map_err(map_coordinator_error)?;
+    let result = result.map_err(map_app_error)?;
+    Ok(PyDeriveResult::new(
+        result.schema(),
+        result.status(),
+        result.into_toml(),
+    ))
+}
+
+/// Plan a finite entry envelope. Returns a JSON-compatible dictionary, not a
+/// generated IBP artifact or a closure claim. All counting stays in Rust.
+#[pyfunction]
+fn entry_domain_plan(py: Python<'_>, source: &str) -> PyResult<Py<PyAny>> {
+    let source = bounded_owned_input("finite entry-domain input", source)?;
+    let report = py
+        .detach(move || execute(move || rustred_app::entry_domain_plan(&source)))
+        .map_err(map_coordinator_error)?
+        .map_err(map_app_error)?;
+    Ok(py
+        .import("json")?
+        .call_method1("loads", (report.to_string(),))?
+        .unbind())
+}
+
+#[pyfunction]
+#[pyo3(
+    signature = (source, *, input_format = "auto", root_id = None),
+    text_signature = "(source, *, input_format='auto', root_id=None)"
+)]
+fn campaign_plan(
+    py: Python<'_>,
+    source: &str,
+    input_format: &str,
+    root_id: Option<&str>,
+) -> PyResult<PyCampaignPlanResult> {
+    let request = CampaignPlanRequest {
+        source: bounded_owned_input("campaign input", source)?,
+        input_format: parse_input_format(input_format)?,
+        // Root identifiers have their own application/core validation and
+        // error category. The adapter must not apply the source-payload limit
+        // or invent a competing frontend rule.
+        root_id: root_id.map(str::to_owned),
+    };
+    let result = py
+        .detach(move || execute(move || app_campaign_plan(request)))
+        .map_err(map_coordinator_error)?;
+    let result = result.map_err(map_app_error)?;
+    Ok(PyCampaignPlanResult::new(
+        result.schema(),
+        result.status(),
+        result.into_toml(),
+    ))
+}
+
+#[pyfunction]
+#[pyo3(
+    signature = (profile, *, n_cores = PythonInteger(1), max_memory_bytes),
+    text_signature = "(profile, *, n_cores=1, max_memory_bytes)"
+)]
+fn campaign_preflight(
+    py: Python<'_>,
+    profile: &str,
+    n_cores: PythonInteger,
+    max_memory_bytes: PythonInteger,
+) -> PyResult<PyCampaignPreflightResult> {
+    let request = CampaignPreflightRequest {
+        profile: bounded_owned_input("campaign execution resource profile", profile)?,
+        n_cores: positive_core_count("campaign preflight n_cores", n_cores.0)?,
+        max_memory_bytes: positive_memory_bytes(max_memory_bytes.0)?,
+    };
+    let result = py
+        .detach(move || execute(move || app_campaign_preflight(request)))
+        .map_err(map_coordinator_error)?;
+    let result = result.map_err(map_app_error)?;
+    Ok(PyCampaignPreflightResult::new(
+        result.schema(),
+        result.status(),
+        result.into_toml(),
+    ))
+}
+
+#[pyfunction]
+#[pyo3(signature = (config), text_signature = "(config)")]
+fn run_foundry_campaign(py: Python<'_>, config: &str) -> PyResult<PyFoundryCampaignRunResult> {
+    let request = FoundryCampaignRunRequest {
+        config: bounded_owned_input("foundry campaign configuration", config)?,
+    };
+    let result = py
+        .detach(move || execute(move || app_foundry_campaign_run(request)))
+        .map_err(map_coordinator_error)?;
+    let result = result.map_err(map_app_error)?;
+    Ok(PyFoundryCampaignRunResult {
+        schema: result.schema(),
+        measurements_schema: result.measurements_schema(),
+        report_toml: result.to_toml().to_owned(),
+        measurements_toml: result.measurements_to_toml().to_owned(),
+    })
+}
+
+#[pyfunction]
+#[pyo3(
+    signature = (config, *, n_cores = PythonInteger(1)),
+    text_signature = "(config, *, n_cores=1)"
+)]
+fn run_foundry_wave_campaign(
+    py: Python<'_>,
+    config: &str,
+    n_cores: PythonInteger,
+) -> PyResult<PyFoundryWaveCampaignRunResult> {
+    let request = FoundryWaveCampaignRunRequest {
+        config: bounded_owned_input("foundry wave campaign configuration", config)?,
+        sibling_worker_count: positive_core_count("foundry wave campaign n_cores", n_cores.0)?,
+    };
+    let result = py
+        .detach(move || execute(move || app_foundry_wave_campaign_run(request)))
+        .map_err(map_coordinator_error)?;
+    let result = result.map_err(map_app_error)?;
+    Ok(PyFoundryWaveCampaignRunResult {
+        schema: result.schema(),
+        measurements_schema: result.measurements_schema(),
+        report_toml: result.to_toml().to_owned(),
+        measurements_toml: result.measurements_to_toml().to_owned(),
+        artifact: result.artifact_bytes().map(<[u8]>::to_vec),
+    })
+}
+
+#[pyfunction]
+#[pyo3(
+    signature = (source, *, input_format = "auto", n_cores = PythonInteger(1), permutation = None, nonpositive_indices = None, max_domain_bound_endpoint_cells = None, max_predicate_consistency_work = None, max_predicate_atoms = None),
+    text_signature = "(source, *, input_format='auto', n_cores=1, permutation=None, nonpositive_indices=None, max_domain_bound_endpoint_cells=None, max_predicate_consistency_work=None, max_predicate_atoms=None)"
+)]
+fn family_close(
+    py: Python<'_>,
+    source: &str,
+    input_format: &str,
+    n_cores: PythonInteger,
+    permutation: Option<Vec<PythonInteger>>,
+    nonpositive_indices: Option<Vec<PythonInteger>>,
+    max_domain_bound_endpoint_cells: Option<PythonInteger>,
+    max_predicate_consistency_work: Option<PythonInteger>,
+    max_predicate_atoms: Option<PythonInteger>,
+) -> PyResult<PyClosingArtifactGenerationResult> {
+    let permutation = permutation
+        .map(|coordinates| {
+            coordinates
+                .into_iter()
+                .enumerate()
+                .map(|(position, coordinate)| {
+                    nonnegative_usize(&format!("permutation[{position}]"), coordinate.0)
+                })
+                .collect::<PyResult<Vec<_>>>()
+        })
+        .transpose()?;
+    let nonpositive_indices = nonpositive_indices
+        .unwrap_or_default()
+        .into_iter()
+        .enumerate()
+        .map(|(position, index)| {
+            nonnegative_usize(&format!("nonpositive_indices[{position}]"), index.0)
+        })
+        .collect::<PyResult<Vec<_>>>()?;
+    let mut request = FamilyCloseRequest {
+        source: bounded_owned_input("family close input", source)?,
+        input_format: parse_input_format(input_format)?,
+        n_cores: positive_core_count("family close n_cores", n_cores.0)?,
+        permutation,
+        nonpositive_indices,
+        publication_limits: Default::default(),
+    };
+    apply_resource_limits(
+        max_domain_bound_endpoint_cells,
+        max_predicate_consistency_work,
+        max_predicate_atoms,
+        &mut request
+            .publication_limits
+            .rule_derivation
+            .max_domain_bound_endpoint_cells,
+        &mut request.publication_limits.max_predicate_consistency_work,
+        &mut request.publication_limits.max_predicate_atoms,
+    )?;
+    let result = py
+        .detach(move || execute(move || app_family_close(request)))
+        .map_err(map_coordinator_error)?;
+    let result = result.map_err(map_app_error)?;
+    Ok(PyClosingArtifactGenerationResult {
+        schema: rustred_app::FAMILY_CLOSE_SCHEMA,
+        status: "generated-durable",
+        canonical_toml: result.to_toml().to_owned(),
+        artifact: PyBytes::new(py, result.artifact()).unbind(),
+    })
+}
+
+#[pyfunction]
+#[pyo3(
+    signature = (*, family = "unit-mass-vacuum-k1"),
+    text_signature = "(*, family='unit-mass-vacuum-k1')"
+)]
+fn generate_closing_artifact(
+    py: Python<'_>,
+    family: &str,
+) -> PyResult<PyClosingArtifactGenerationResult> {
+    let family = family
+        .parse::<ClosingFamilySelector>()
+        .map_err(|error| RustRedInputError::new_err(error.to_string()))?;
+    let result = py
+        .detach(move || {
+            execute(move || {
+                app_closing_artifact_generate(ClosingArtifactGenerateRequest { family })
+            })
+        })
+        .map_err(map_coordinator_error)?;
+    let result = result.map_err(map_app_error)?;
+    Ok(PyClosingArtifactGenerationResult {
+        schema: result.schema(),
+        status: result.status(),
+        canonical_toml: result.to_toml().to_owned(),
+        artifact: PyBytes::new(py, result.artifact()).unbind(),
+    })
+}
+
+#[pyfunction]
+#[pyo3(
+    signature = (artifact, *, max_domain_bound_endpoint_cells = None, max_predicate_consistency_work = None, max_predicate_atoms = None),
+    text_signature = "(artifact, *, max_domain_bound_endpoint_cells=None, max_predicate_consistency_work=None, max_predicate_atoms=None)"
+)]
+fn inspect_closing_artifact(
+    py: Python<'_>,
+    artifact: &Bound<'_, PyBytes>,
+    max_domain_bound_endpoint_cells: Option<PythonInteger>,
+    max_predicate_consistency_work: Option<PythonInteger>,
+    max_predicate_atoms: Option<PythonInteger>,
+) -> PyResult<PyClosingArtifactInspectionResult> {
+    let mut request = ClosingArtifactInspectRequest::new(bounded_artifact_bytes(artifact)?);
+    apply_resource_limits(
+        max_domain_bound_endpoint_cells,
+        max_predicate_consistency_work,
+        max_predicate_atoms,
+        &mut request
+            .load_limits
+            .rule_derivation
+            .max_domain_bound_endpoint_cells,
+        &mut request.load_limits.max_predicate_consistency_work,
+        &mut request.load_limits.max_predicate_atoms,
+    )?;
+    let result = py
+        .detach(move || execute(move || app_closing_artifact_inspect(request)))
+        .map_err(map_coordinator_error)?;
+    let result = result.map_err(map_app_error)?;
+    Ok(PyClosingArtifactInspectionResult::new(
+        result.schema(),
+        result.status(),
+        result.into_toml(),
+    ))
+}
+
+#[pyfunction]
+#[pyo3(
+    signature = (artifact, target_powers, *, max_rule_applications = PythonInteger(1_000_000), max_domain_bound_endpoint_cells = None, max_predicate_consistency_work = None, max_predicate_atoms = None),
+    text_signature = "(artifact, target_powers, *, max_rule_applications=1000000, max_domain_bound_endpoint_cells=None, max_predicate_consistency_work=None, max_predicate_atoms=None)"
+)]
+fn reduce_with_closing_artifact(
+    py: Python<'_>,
+    artifact: &Bound<'_, PyBytes>,
+    target_powers: Vec<PythonInteger>,
+    max_rule_applications: PythonInteger,
+    max_domain_bound_endpoint_cells: Option<PythonInteger>,
+    max_predicate_consistency_work: Option<PythonInteger>,
+    max_predicate_atoms: Option<PythonInteger>,
+) -> PyResult<PyClosingArtifactReductionResult> {
+    let artifact = bounded_artifact_bytes(artifact)?;
+    let target_powers = target_powers
+        .into_iter()
+        .enumerate()
+        .map(|(position, power)| {
+            i64::try_from(power.0).map_err(|_| {
+                RustRedInputError::new_err(format!(
+                    "target_powers[{position}] must fit a signed 64-bit integer"
+                ))
+            })
+        })
+        .collect::<PyResult<Vec<_>>>()?;
+    let max_rule_applications = nonnegative_usize(
+        "closing-artifact max_rule_applications",
+        max_rule_applications.0,
+    )?;
+    let mut request = ClosingArtifactReduceRequest::new(artifact, target_powers);
+    request.max_rule_applications = max_rule_applications;
+    apply_resource_limits(
+        max_domain_bound_endpoint_cells,
+        max_predicate_consistency_work,
+        max_predicate_atoms,
+        &mut request
+            .load_limits
+            .rule_derivation
+            .max_domain_bound_endpoint_cells,
+        &mut request.load_limits.max_predicate_consistency_work,
+        &mut request.load_limits.max_predicate_atoms,
+    )?;
+    let result = py
+        .detach(move || execute(move || app_closing_artifact_reduce(request)))
+        .map_err(map_coordinator_error)?;
+    let result = result.map_err(map_app_error)?;
+    let terms = result
+        .terms()
+        .iter()
+        .map(|term| PyExactMasterCoefficient {
+            master_powers: term.master_powers().to_vec(),
+            unit_mass_coefficient: term.unit_mass_coefficient().to_owned(),
+            common_mass_squared_power: {
+                let power = term.common_mass_squared_power();
+                #[cfg(target_arch = "wasm32")]
+                let power = Box::new(power);
+                power
+            },
+        })
+        .collect();
+    Ok(PyClosingArtifactReductionResult {
+        schema: result.schema(),
+        status: result.status(),
+        canonical_toml: result.to_toml().to_owned(),
+        family_fingerprint: result.family_fingerprint().to_owned(),
+        target_powers: result.target_powers().to_vec(),
+        terms,
+    })
+}
+
+fn execute<T, F>(operation: F) -> Result<T, CoordinatorError>
+where
+    T: Send + 'static,
+    F: FnOnce() -> T + Send + 'static,
+{
+    // Module initialization establishes the process coordinator before any
+    // binding can reach here. If initialization ever failed, the module did
+    // not load and no Python call is possible.
+    process_coordinator()
+        .map_err(CoordinatorError::Unavailable)?
+        .execute(operation)
+}
+
+/// Internal regression helper: compare generated payloads after Symbolica state
+/// remapping, not process-local serialized symbol IDs. This does not certify a
+/// candidate or validate an artifact's mathematical claims. Both native inputs
+/// must come from trusted generators, just as for ordinary native loading.
+#[pyfunction]
+fn _equivalent_generated_programs(
+    py: Python<'_>,
+    left: &Bound<'_, PyBytes>,
+    right: &Bound<'_, PyBytes>,
+) -> PyResult<bool> {
+    let left = left.as_bytes().to_vec();
+    let right = right.as_bytes().to_vec();
+    py.detach(move || {
+        execute(move || {
+            rustred_app::equivalent_generated_programs(
+                &left,
+                &right,
+                rustred_app::BinaryIoLimits::default(),
+            )
+        })
+    })
+    .map_err(map_coordinator_error)?
+    .map_err(|error| RustRedInputError::new_err(error.to_string()))
+}
+
+fn parse_input_format(value: &str) -> PyResult<InputFormat> {
+    InputFormat::from_str(value).map_err(|error| RustRedInputError::new_err(error.to_string()))
+}
+
+fn parse_relation_selection(value: &str) -> PyResult<RelationSelection> {
+    RelationSelection::from_str(value)
+        .map_err(|error| RustRedInputError::new_err(error.to_string()))
+}
+
+fn positive_core_count(label: &str, value: i128) -> PyResult<usize> {
+    if value <= 0 {
+        return Err(RustRedInputError::new_err(format!(
+            "{label} must be a positive integer"
+        )));
+    }
+    if cfg!(target_arch = "wasm32") && value != 1 {
+        return Err(RustRedInputError::new_err(format!(
+            "{label} must be 1 in the single-threaded WebAssembly runtime"
+        )));
+    }
+    usize::try_from(value).map_err(|_| {
+        RustRedInputError::new_err(format!(
+            "{label} must be a positive integer fitting this platform"
+        ))
+    })
+}
+
+fn apply_resource_limits(
+    endpoint_cells: Option<PythonInteger>,
+    consistency_work: Option<PythonInteger>,
+    predicate_atoms: Option<PythonInteger>,
+    endpoint_limit: &mut usize,
+    consistency_limit: &mut usize,
+    atom_limit: &mut usize,
+) -> PyResult<()> {
+    if let Some(value) = endpoint_cells {
+        *endpoint_limit = nonnegative_usize("max_domain_bound_endpoint_cells", value.0)?;
+    }
+    if let Some(value) = consistency_work {
+        *consistency_limit = nonnegative_usize("max_predicate_consistency_work", value.0)?;
+    }
+    if let Some(value) = predicate_atoms {
+        let value = nonnegative_usize("max_predicate_atoms", value.0)?;
+        if value > rustred_app::SourcePortLimits::MAX_PREDICATE_ATOMS {
+            return Err(RustRedInputError::new_err(format!(
+                "max_predicate_atoms exceeds supported maximum {}",
+                rustred_app::SourcePortLimits::MAX_PREDICATE_ATOMS
+            )));
+        }
+        *atom_limit = value;
+    }
+    Ok(())
+}
+
+fn nonnegative_usize(label: &str, value: i128) -> PyResult<usize> {
+    if value < 0 {
+        return Err(RustRedInputError::new_err(format!(
+            "{label} must be a nonnegative integer"
+        )));
+    }
+    usize::try_from(value).map_err(|_| {
+        RustRedInputError::new_err(format!(
+            "{label} must be a nonnegative integer fitting this platform"
+        ))
+    })
+}
+
+fn positive_memory_bytes(value: i128) -> PyResult<u64> {
+    const LABEL: &str = "campaign preflight max_memory_bytes";
+    if value <= 0 {
+        return Err(RustRedInputError::new_err(format!(
+            "{LABEL} must be positive"
+        )));
+    }
+    u64::try_from(value).map_err(|_| {
+        RustRedInputError::new_err(format!("{LABEL} must fit an unsigned 64-bit integer"))
+    })
+}
+
+fn bounded_owned_input(label: &str, source: &str) -> PyResult<String> {
+    if source.len() > rustred_app::MAX_INPUT_BYTES {
+        return Err(RustRedLimitError::new_err(format!(
+            "{label} has {} bytes, exceeding the {}-byte application limit",
+            source.len(),
+            rustred_app::MAX_INPUT_BYTES
+        )));
+    }
+    Ok(source.to_owned())
+}
+
+fn bounded_artifact_bytes(artifact: &Bound<'_, PyBytes>) -> PyResult<Vec<u8>> {
+    let bytes = artifact.as_bytes();
+    if bytes.len() > rustred_app::MAX_CLOSING_ARTIFACT_BYTES {
+        return Err(RustRedLimitError::new_err(format!(
+            "closing artifact has {} bytes, exceeding the {}-byte application limit",
+            bytes.len(),
+            rustred_app::MAX_CLOSING_ARTIFACT_BYTES
+        )));
+    }
+    Ok(bytes.to_vec())
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+enum PythonExceptionKind {
+    Input,
+    Schema,
+    Limit,
+    Lowering,
+    Derivation,
+    Execution,
+    License,
+    Serialization,
+    OutputLimit,
+    Internal,
+}
+
+fn python_exception_kind(kind: AppErrorKind) -> PythonExceptionKind {
+    match kind {
+        AppErrorKind::Input => PythonExceptionKind::Input,
+        AppErrorKind::Schema => PythonExceptionKind::Schema,
+        AppErrorKind::Limit => PythonExceptionKind::Limit,
+        AppErrorKind::Lowering => PythonExceptionKind::Lowering,
+        AppErrorKind::Derivation => PythonExceptionKind::Derivation,
+        AppErrorKind::Execution | AppErrorKind::Cancelled => PythonExceptionKind::Execution,
+        AppErrorKind::License => PythonExceptionKind::License,
+        AppErrorKind::Serialization => PythonExceptionKind::Serialization,
+        AppErrorKind::OutputLimit => PythonExceptionKind::OutputLimit,
+        AppErrorKind::InternalInvariant => PythonExceptionKind::Internal,
+        // AppErrorKind is non-exhaustive across the crate boundary. Unknown
+        // future kinds fail closed as internal errors until this adapter adds
+        // an explicit public mapping and regression case.
+        _ => PythonExceptionKind::Internal,
+    }
+}
+
+fn map_app_error(error: AppError) -> PyErr {
+    let kind = python_exception_kind(error.kind());
+    let message = error.into_message();
+    match kind {
+        PythonExceptionKind::Input => RustRedInputError::new_err(message),
+        PythonExceptionKind::Schema => RustRedSchemaError::new_err(message),
+        PythonExceptionKind::Limit => RustRedLimitError::new_err(message),
+        PythonExceptionKind::Lowering => RustRedLoweringError::new_err(message),
+        PythonExceptionKind::Derivation => RustRedDerivationError::new_err(message),
+        PythonExceptionKind::Execution => RustRedExecutionError::new_err(message),
+        PythonExceptionKind::License => RustRedLicenseError::new_err(message),
+        PythonExceptionKind::Serialization => RustRedSerializationError::new_err(message),
+        PythonExceptionKind::OutputLimit => RustRedOutputLimitError::new_err(message),
+        PythonExceptionKind::Internal => RustRedInternalError::new_err(message),
+    }
+}
+
+fn map_coordinator_error(error: CoordinatorError) -> PyErr {
+    match error {
+        CoordinatorError::Busy => RustRedExecutionError::new_err(
+            "RustRed coordinator is busy; wait for the active session to drain",
+        ),
+        CoordinatorError::Poisoned => RustRedCoordinatorPoisonedError::new_err(
+            "the RustRed Python coordinator is permanently poisoned after an internal panic",
+        ),
+        #[cfg(not(target_arch = "wasm32"))]
+        CoordinatorError::Forked {
+            creator_pid,
+            current_pid,
+        } => RustRedCoordinatorPoisonedError::new_err(format!(
+            "the RustRed Python coordinator was created in process {creator_pid} and cannot be reused after fork in process {current_pid}"
+        )),
+        CoordinatorError::Panicked(message) => RustRedInternalError::new_err(format!(
+            "RustRed caught an internal panic and permanently poisoned the Python coordinator: {message}"
+        )),
+        CoordinatorError::Unavailable(message) => RustRedCoordinatorPoisonedError::new_err(message),
+    }
+}
+
+#[pymodule(gil_used = true)]
+fn _rustred(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    register_rustred_module(module)
+}
+
+/// Report execution semantics without starting computation.
+///
+/// WebAssembly sessions complete synchronously inside start(). Their bounded
+/// events can be inspected afterwards, but are not live background progress.
+/// A browser host should run its interpreter in a Web Worker for a responsive
+/// page; this API does not create that worker or imply pthread support.
+#[pyfunction]
+fn execution_capabilities(py: Python<'_>) -> PyResult<Bound<'_, PyDict>> {
+    let wasm = cfg!(target_arch = "wasm32");
+    let capabilities = PyDict::new(py);
+    capabilities.set_item("execution_mode", execution_mode())?;
+    capabilities.set_item("background_sessions", !wasm)?;
+    capabilities.set_item("live_event_polling", !wasm)?;
+    capabilities.set_item("cancellation_in_flight", !wasm)?;
+    capabilities.set_item("max_workers", wasm.then_some(1))?;
+    Ok(capabilities)
+}
+
+pub(crate) fn execution_mode() -> &'static str {
+    if cfg!(target_arch = "wasm32") {
+        "synchronous"
+    } else {
+        "background-coordinator"
+    }
+}
+
+/// Register in a host-owned extension (for example hep.rustred), sharing its
+/// linked Symbolica state. Does not import a second Python extension/DSO.
+pub fn register_rustred_module(module: &Bound<'_, PyModule>) -> PyResult<()> {
+    // Establish the coordinator before any binding can call Symbolica. Native
+    // builds start one OS thread; WASM uses a guarded inline executor.
+    process_coordinator().map_err(RustRedInternalError::new_err)?;
+    streaming::register(module)?;
+
+    module.add("__version__", env!("CARGO_PKG_VERSION"))?;
+    module.add("RustRedError", module.py().get_type::<RustRedError>())?;
+    module.add(
+        "RustRedInputError",
+        module.py().get_type::<RustRedInputError>(),
+    )?;
+    module.add(
+        "RustRedSchemaError",
+        module.py().get_type::<RustRedSchemaError>(),
+    )?;
+    module.add(
+        "RustRedLimitError",
+        module.py().get_type::<RustRedLimitError>(),
+    )?;
+    module.add(
+        "RustRedLoweringError",
+        module.py().get_type::<RustRedLoweringError>(),
+    )?;
+    module.add(
+        "RustRedDerivationError",
+        module.py().get_type::<RustRedDerivationError>(),
+    )?;
+    module.add(
+        "RustRedExecutionError",
+        module.py().get_type::<RustRedExecutionError>(),
+    )?;
+    module.add(
+        "RustRedLicenseError",
+        module.py().get_type::<RustRedLicenseError>(),
+    )?;
+    module.add(
+        "RustRedSerializationError",
+        module.py().get_type::<RustRedSerializationError>(),
+    )?;
+    module.add(
+        "RustRedOutputLimitError",
+        module.py().get_type::<RustRedOutputLimitError>(),
+    )?;
+    module.add(
+        "RustRedInternalError",
+        module.py().get_type::<RustRedInternalError>(),
+    )?;
+    module.add(
+        "RustRedCoordinatorPoisonedError",
+        module.py().get_type::<RustRedCoordinatorPoisonedError>(),
+    )?;
+    module.add_class::<PyDeriveResult>()?;
+    module.add_class::<PyCampaignPlanResult>()?;
+    module.add_class::<PyCampaignPreflightResult>()?;
+    module.add_class::<PyFoundryCampaignRunResult>()?;
+    module.add_class::<PyFoundryWaveCampaignRunResult>()?;
+    module.add_class::<PyClosingArtifactGenerationResult>()?;
+    module.add_class::<PyClosingArtifactInspectionResult>()?;
+    module.add_class::<PyExactMasterCoefficient>()?;
+    module.add_class::<PyClosingArtifactReductionResult>()?;
+    module.add_function(wrap_pyfunction!(derive, module)?)?;
+    module.add_function(wrap_pyfunction!(execution_capabilities, module)?)?;
+    module.add_function(wrap_pyfunction!(campaign_plan, module)?)?;
+    module.add_function(wrap_pyfunction!(entry_domain_plan, module)?)?;
+    module.add_function(wrap_pyfunction!(campaign_preflight, module)?)?;
+    module.add_function(wrap_pyfunction!(run_foundry_campaign, module)?)?;
+    module.add_function(wrap_pyfunction!(run_foundry_wave_campaign, module)?)?;
+    module.add_function(wrap_pyfunction!(generate_closing_artifact, module)?)?;
+    module.add_function(wrap_pyfunction!(family_close, module)?)?;
+    module.add_function(wrap_pyfunction!(inspect_closing_artifact, module)?)?;
+    module.add_function(wrap_pyfunction!(reduce_with_closing_artifact, module)?)?;
+    module.add_function(wrap_pyfunction!(_equivalent_generated_programs, module)?)?;
+    candidates::register(module)?;
+    Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn master_mass_power_preserves_the_full_integer_range() {
+        for power in [i128::MIN, -2, 0, i128::MAX] {
+            let term = PyExactMasterCoefficient {
+                master_powers: vec![1],
+                unit_mass_coefficient: "1".to_owned(),
+                common_mass_squared_power: {
+                    #[cfg(target_arch = "wasm32")]
+                    let power = Box::new(power);
+                    power
+                },
+            };
+            assert_eq!(term.common_mass_squared_power(), power);
+            assert_eq!(term.clone().common_mass_squared_power(), power);
+            assert!(term.__repr__().contains(&power.to_string()));
+        }
+    }
+
+    #[test]
+    fn frontend_values_are_validated_before_coordinator_work() {
+        assert_eq!(
+            parse_input_format("symbolica").expect("input format"),
+            InputFormat::Symbolica
+        );
+        assert_eq!(
+            parse_relation_selection("li").expect("relation selection"),
+            RelationSelection::LorentzInvariance
+        );
+        assert!(parse_input_format("json").is_err());
+        assert!(parse_relation_selection("laporta").is_err());
+        assert!(positive_core_count("n_cores", 0).is_err());
+        assert!(positive_core_count("n_cores", -1).is_err());
+        assert_eq!(positive_core_count("n_cores", 1).unwrap(), 1);
+        if cfg!(target_arch = "wasm32") {
+            assert!(positive_core_count("n_cores", 4).is_err());
+        } else {
+            assert_eq!(positive_core_count("n_cores", 4).unwrap(), 4);
+        }
+    }
+
+    #[test]
+    fn every_current_application_error_kind_has_an_explicit_python_mapping() {
+        let cases = [
+            (AppErrorKind::Input, PythonExceptionKind::Input),
+            (AppErrorKind::Schema, PythonExceptionKind::Schema),
+            (AppErrorKind::Limit, PythonExceptionKind::Limit),
+            (AppErrorKind::Lowering, PythonExceptionKind::Lowering),
+            (AppErrorKind::Derivation, PythonExceptionKind::Derivation),
+            (AppErrorKind::Execution, PythonExceptionKind::Execution),
+            (AppErrorKind::License, PythonExceptionKind::License),
+            (
+                AppErrorKind::Serialization,
+                PythonExceptionKind::Serialization,
+            ),
+            (AppErrorKind::OutputLimit, PythonExceptionKind::OutputLimit),
+            (
+                AppErrorKind::InternalInvariant,
+                PythonExceptionKind::Internal,
+            ),
+        ];
+        for (application, python) in cases {
+            assert_eq!(python_exception_kind(application), python);
+        }
+    }
+}

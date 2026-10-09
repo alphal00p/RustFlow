@@ -1,0 +1,1557 @@
+# RustRed
+
+The [Feynkit bridge](crates/rustred-feynkit/README.md) adds native parametric
+and Laporta IBP solving to `symbolica.community.hepkit`, including multiscale
+two-loop graph tests and a [FeynCalc phi4 reproduction notebook](examples/notebooks/feyncalc_phi4_two_loop.ipynb).
+
+The [WebAssembly/Pyodide build](docs/wasm.md) uses Symbolica's portable
+arithmetic backend and supports serial IBP generation, artifact inspection,
+certification and reduction through RustRed's Python and HEPKit APIs. Browser
+sessions execute synchronously; native builds retain their existing background
+coordinator and multicore execution.
+
+RustRed is a pre-alpha, pure-Rust and Symbolica-native project for deriving and
+applying parametric integration-by-parts identities. Its active target is
+finite, power-counted five-loop single-scale vacuum starting domains, building on the completed
+four-loop FORM-less Vakint numerical comparisons against FMFT.
+The four-loop numerical acceptance gate passes; unrestricted closure certification
+remains separate from the shipped candidate programs.
+The active generic solver treats loop count and topology as input data, not
+dispatch keys.
+
+The current optimization build adds [persisted runtime integral orders](docs/runtime_integral_order.md)
+and [parallel Epoch preparation/publication](docs/epoch_s5.md). Source-row
+visitation and mathematical integral ordering are separate runtime controls;
+changing a rule's mathematical order requires regenerating that owner, not
+recompiling the engine. Native and Python correctness gates pass. Matched
+[measurements](docs/research/final_order_s5_pilots_2026-09-30.md) show 40–44%
+less four-loop domain work with source-aware rule selection, with faster total
+runs in both pairs. Two small five-loop controls with different generation
+policies also improve, but do not cover the full production request. Fixed-cut
+S5 runtime is neutral, while checkpoints are56–61% smaller; current rolling
+controls are slower than Ready, so Epoch deployment remains unqualified. See
+[the current progress log](CODEX_PROGRESS.md) for deployment status; the dated
+development results below are not instructions to replace a running campaign.
+
+Uniform Symbolica-native binary I/O and the exact unit-weight terminal
+normalization gate are complete. Bounded five-loop candidate studies have
+resumed with the explicit goal of covering renormalizable starting inputs,
+with correlated numerator and denominator-power bounds. This supersedes the
+earlier demand for R10 with arbitrary positive powers; saved R10 programs and
+controls remain useful foundations. See [the current input contract](docs/finite_starting_domains.md)
+for the physical assumptions and the distinction between marginal coefficients
+and a full UV Taylor jet. Terminal minimization, numerical master lookup
+and five-loop Vakint integration follow only after that coverage succeeds. The recorded
+[full-family attempts](docs/research/five_loop_candidate_baselines.md) reach
+time or memory limits; checkpoints preserve partial work, but complete
+coverage of the frozen five-loop census is not yet established. The existing rule-application engine
+remains in use; no alternate Symbolica-replacement backend is planned.
+
+Candidate generation accepts an optional `--max-numerator-rank R`, also exposed
+as `max_numerator_rank` in the Rust request and `import rustred` Python API.
+It bounds the **sum of negative index powers** of starting integrals, not
+positive denominator powers or intermediate dependencies. Nonlinear exceptions
+can be refined into exhaustive bounded numerator slices while retaining
+symbolic denominator powers. Rank-scoped candidates are explicitly experimental,
+not certified closed artifacts; see [the scope and workflow](docs/rank_scoped_generation.md).
+The experimental `--finite-case-policy retain-rank-finite` option keeps finite
+rank-bounded leaves without trying to minimize their count. It requires an
+explicit R, never truncates positive rays, and reports exhausted work limits
+as incomplete. Its release regressions pass; complete five-loop coverage
+remains an open goal.
+
+The latest [five-loop checks](docs/rank_scoped_generation.md#completing-and-applying-that-six-sector-downset)
+generate a complete selected six-sector candidate bundle and exactly reduce
+two rank-10 inputs to declared terminals, with memoized equality and no uncovered
+dependencies. These finite checks are not all-family or arbitrary-positive-power
+closure. A separate native Symbolica Gröbner-ordering correction completes a
+previously stalled search-policy sector in 57.4 seconds; the complete core and
+application regression gates pass. All topologies remain external inputs.
+
+All 67 five-loop graph classes now have saved candidate programs. The experimental
+`load_generated_candidate_owners` and `RoutedCandidateReducer` share them across
+verified equivalent routings, including affine numerator expansion and pinches.
+Missing owners and missing rules remain distinct outcomes; saved local programs
+are not yet a recursively complete R10 family solve. The
+[shared five-loop campaign plan](docs/five_loop_rank_campaign.md) now targets the
+finite physical envelope within 15 hours on at most 50 cores and 500 GB,
+when measurements support a credible attempt. Certification is deferred and
+there is no inherited 30-minute deadline.
+
+The [shared-owner campaign driver](docs/shared_owner_campaign_driver.md) exposes
+`rustred routed-campaign`, the Rust `routed_campaign_with_progress` service and
+`examples/python/shared_owner_campaign.py`. Concrete targets share one parallel
+dependency queue, immutable programs and duplicate-work suppression. Live TTY
+and structured non-TTY monitoring report progress, resources and the first
+failure during native-call drain. Concrete-target mode does not persist its
+queue or claim parametric closure from a finite trace. Directed Rust owner searches can
+publish immutable partial-domain rule overlays without copying the saved
+library; see [the API boundary](docs/shared_owner_campaign_driver.md#directed-owner-search-and-shared-rule-installation).
+
+The symbolic saved-owner walk has a separate
+[manual production launcher](examples/python/production_saved_owner_campaign.py),
+native checkpoint/resume, Ctrl-C save-and-stop, hourly automatic saves and a
+configurable RAM guard (default: save and stop at 475 GB of a 500 GB ceiling).
+Its colored TTY/read-only monitor and persistent non-TTY receipts distinguish
+actual CPU use from reserved workers and completed entry obligations from the
+still-growing descendant worklist. See the
+[Nix/build/launch/resume instructions](docs/shared_owner_campaign_driver.md#running)
+and [launch-readiness record](docs/research/manual_five_loop_campaign_2026-09-24.md).
+Do not launch a duplicate of the user's production campaign. Its current
+identity, protected resources and status are recorded in
+[CODEX_PROGRESS.md](CODEX_PROGRESS.md); historical restart commands are not
+current launch instructions. Neither completion nor a full-family ETA is
+claimed. The earlier [four-loop control and five-loop restart](docs/research/five_loop_coarse_cover_restart_2026-09-24.md)
+remain historical evidence.
+
+An experimental [ready-ticket publication policy](docs/research/five_loop_ready_publication_2026-09-24.md)
+is being validated to remove same-owner head-of-line waiting while preserving
+shared admission and resumable per-source progress. Ordered remains the default;
+the live campaign is unchanged. A larger active-worker count alone is not a
+completed-workload speedup or a five-loop completion claim.
+
+The preceding local-matcher release gate passed **2,588 core tests** and **296
+application/integration tests**; the shared-campaign and domain-query Python
+steering tests passed **16 tests**. The preceding matched finite
+rank-one controls complete in 20.437/8.067 seconds of traversal with one/six
+workers (126.11/112.08 seconds including preparation), with identical reported
+graph counters and zero missing rules. The latest 50-worker R10 diagnostic gets
+past the earlier expansion-budget failure, but is cooperatively stopped for
+optimization after 854.064 seconds of traversal: 42.7 million queued nodes and
+25.47 GB peak RSS. This is not a timeout or completed reduction.
+[The profile and next improvements](docs/research/shared_rank10_pressure_2026-09-21.md)
+target expensive routing, native powering and limited effective parallelism.
+No full five-loop R10 completion is claimed.
+
+The delivered slices batch shared work publication, combine duplicate-work
+indexes, tighten structural expansion bounds and expose explicit per-call
+budgets. Dependency tracing now visits Symbolica's exact coalesced numerator
+support without constructing coefficient wrappers it would discard. This
+preserves the coefficient-returning reducer, endpoint ordering and per-call
+budget behavior; the matched controls above include this visitor.
+An opt-in Rust [`RoutedFeedbackSession`](docs/owner_source_feedback.md)
+retains source-generated parametric rules between rounds; automatic CLI feedback
+and durable graph resume remain unfinished. New performance measurements must
+be reported separately from the preceding corrected-run timings.
+
+The new [`owner-domain-scan`](docs/owner_domain_scan.md) Rust/CLI service and
+Python example stream the saved rules' possible successor domains without
+enumerating positive powers. It retains actual intermediate-rank requirements
+and native guard predicates. This conservative one-hop inventory is not yet
+the full-domain feedback worklist: finishing a scan does not establish closure
+or identify every reported edge as a genuine missing rule. The same release
+gate includes sharded duplicate preprobes, with ordered global budget admission.
+Their matched traversal times are **20.978 / 7.153 seconds** with one/six workers;
+all 18 reported counters match. Six-worker tracing improves modestly, but serial
+tracing and total command time do not. These are individual shared-host
+observations, not evidence of full R10 closure or fifty-worker scaling.
+The domain-scan Python steering adds two passing tests. Its live completion
+summary is compact even when the separately saved result is large; explicit
+reporting allowances can be raised without changing the mathematical rank scope.
+The [complete stored-rule inventory](docs/research/shared_owner_domain_inventory_2026-09-21.md)
+scans all 67 owners in 11.009 seconds after preparation (123.13 seconds whole
+command, about 6.45 GB peak RSS), retaining 4.76 million potential successor
+regions. This is not yet recursive rank-ten closure.
+
+[`owner-domain-match`](docs/shared_owner_domain_matching.md) and
+`examples/python/match_shared_owner_domains.py` then classify explicitly supplied
+symbolic index boxes against the saved rules' actual priority and native guards.
+Positive powers can stay unbounded, and successor rank is not clipped to the
+saved entry rank. The result distinguishes selected rules, terminals, genuine
+local gaps, invalid source conditions and unresolved geometry. This reuses saved
+programs; it does not regenerate IBPs or claim recursive closure. A local gap in
+a conservative successor box still needs its predecessor conditions checked
+before being treated as an actually reached missing-rule frontier.
+The [first real five-loop query study](docs/research/shared_owner_domain_matching_2026-09-21.md)
+finds applicable existing rules for all three examined rank-11 child boxes.
+Ten exact finite-numerator slices resolve one remaining source-guard ambiguity
+without bounding positive powers or generating new IBPs. The full R10 campaign
+is still unfinished; these are selected local examples, not closure timings.
+
+The implementation includes opt-in `--max-bounded-refinement-cells-per-query`
+to perform those finite inactive-coordinate splits automatically. Add
+`--bounded-refinement-axes finite-axes` to also use explicitly bounded positive
+coordinates; unbounded powers remain symbolic. This refinement option alone
+does not change routing or establish recursive closure. With
+`--follow-successors`, it also inspects selected RHSs and shares containing
+owner/box/rank domains through one worklist. Conditional coefficients and
+unresolved routing remain explicit; neither queue exhaustion nor a local match
+alone is presented as full closure. Add `--route-domain-overcover` to share
+conservative domain images through already admitted momentum
+maps, without expanding numerator polynomials. These images now preserve mapped
+finite positive-power bounds and account for the numerator degree consumed by
+each pinch. Bounds also survive IBP-successor routing and reentry; original
+entry restrictions are never reapplied to descendants. Unchecked source conditions or
+missing maps remain explicit obligations. Native algebra preflight refusals can
+use the same bounded inactive-coordinate refinement as unresolved guards;
+actual backend errors cannot. The same Python steering accepts these
+options and the native `--max-guard-univariate-degree` work allowance. No saved
+IBPs are regenerated for these domain queries. See the
+[interface and limits](docs/shared_owner_domain_matching.md).
+Full five-loop coverage is **not yet established**. An earlier same-input
+[67-owner local control](docs/research/guard_obstruction_triage_2026-09-22.md)
+resolves 60 owners and retains 81 unresolved guard regions, with no exact gaps
+or native-work refusal. Local matching takes 94.09 s (206.50 s whole command);
+this is not a complete recursive solve or IBP-generation timing. The guard
+shortcuts pass 2,661 core, 323 application and 19 Python tests, with zero failures
+and 32 existing ignored core diagnostics.
+
+The separate [shared-traversal controls](docs/research/shared_domain_index_2026-09-22.md)
+reuse saved programs across owners, reaching 3,886 completed domains before an
+optional RHS numerator-classification preflight refusal. Recursive work remains
+queued. The new slice retains conditional successors for eligible optional
+refusals while keeping denominator/source validity strict. Bounded first-per-phase
+diagnostics are separate from missing-rule frontiers. The new all67 shared
+control inspects 702,384 successors with 702,253 request reuses in 31.35 s of
+traversal, but stops at its RHS-cell work allowance before finishing its first
+domain. This is not complete R10 coverage. Bounded parallel symbolic inspection,
+coherent per-query/aggregate work allowances and tighter `R-k` bounds after
+routed pinches are now implemented and independently audited. Their release
+suites pass **2,663 core / 341 application / 22 Python tests**, with zero
+failures (32 existing core diagnostics ignored). The public
+`examples/python/shared_owner_campaign.py --queries ...` supervisor provides
+the same 50-core/500 GB ceiling and no elapsed solve deadline for symbolic work.
+Both full-census controls are incomplete: serial stopped at its containment-work
+allowance, while six workers were stopped for optimization after measured
+ordered-publication waiting. There is no matched completed-workload
+parallel speedup for this slice yet. See
+[the implementation report](docs/research/parallel_symbolic_domains_2026-09-22.md).
+No saved IBPs are regenerated merely to repeat these application diagnostics.
+
+The subsequent saved guarded-case core passes **2,684 release tests**, with
+zero failures and 32 existing ignored diagnostics. It applies native affine
+cases while retaining whole guards and exact successor images. Its application
+and bounded job-local reuse changes pass **362 Rust application/integration
+tests and 26 Python tests**. The new
+[`owner-guarded-apply` diagnostic](docs/guarded_owner_rule_diagnostics.md)
+and Python steering expose saved-rule conditions without regenerating IBPs.
+Both actual diagonal controls are rejected by later necessary exclusions before
+RHS application; successful diagnostic exit does not mean successful reduction.
+The reuse-only retry still used about one busy core out of six. The subsequent
+initial-domain sharing and larger bounded worker buffers pass **377 application/
+integration tests and 27 Python tests**. General containment comparisons are now
+unlimited by default; finite diagnostic budgets remain optional. The next full
+campaign uses **50 workers, 500 GB**, not six, and is now launched. The corrected
+optional guard lookahead passes **2,700 core tests**; the real all-67 check
+finishes without native errors and retains **57 unresolved regions rather than
+81**. Required guards remain strict. These are incomplete application
+diagnostics, not full R10 closure. See [the milestone](docs/research/guarded_owner_application_2026-09-22.md)
+and [current scheduling results](docs/research/parallel_symbolic_domains_2026-09-22.md).
+
+An opt-in [independent starting-topology campaign](docs/independent_owner_campaigns.md)
+adds a dynamic outer queue while preserving the native scheduler within each
+job (for example, 10 jobs × 5 workers). Rust owns the colored monitor, aggregate
+RAM protection, checkpoints and one compact combined rule selection. The
+default shared campaign remains available. Joint source-support mask pruning
+is a separate opt-in switch; neither switch regenerates saved IBPs or by
+itself establishes five-loop closure.
+Read the [measured comparison](docs/research/joint_pruning_independent_campaigns_2026-09-25.md)
+before restarting: isolating owners can lose the shared auxiliary coverage
+that makes a symbolic campaign finish, despite raising CPU occupancy.
+The limited all-67-owner control reached about 50 busy cores with 50 one-core
+slots, but completed in 296.1 seconds versus 153.4 seconds shared; repeated
+preparation and extra descendant work outweighed the utilization gain. Joint
+pruning also remains off by default: its measured rank-two pilot saved local
+work without an end-to-end speedup. Neither result recommends replacing the
+current production campaign.
+
+For a future fresh attempt, the production launcher can now copy an existing
+campaign's immutable inputs with `--prepare-from`, placing its existing broad
+helpers before narrower queries without changing their bounds. A completed
+four-loop FG control improved from 18.53 s to 16.44 s; five-loop benefit remains
+unmeasured. See the [fresh preparation and launch recipe](docs/shared_owner_campaign_driver.md#recommended-fresh-attempt-existing-helpers-first).
+This does not reorder, restart or alter a running campaign or its checkpoints.
+
+The shared-walker monitor now distinguishes **recursively closed starting
+domains** (the progress bar) from initial publication, and reports total
+discovered/closed/unresolved domains. Tracking is native and checkpointed;
+old runs without the dependency history display unknown closure. New CP5
+campaigns start fresh from the same saved rules, without IBP regeneration.
+See the [monitoring and clean restart recipe](docs/shared_owner_campaign_driver.md#dependency-closure-monitoring-fresh-campaign-format).
+
+Long candidate-generation campaigns can opt into native per-sector checkpoints
+using `family-candidates --checkpoint-dir TMP/my-campaign`, then `--resume` after
+interruption. Rust and Python expose the same controls. This saves completed
+work without changing any IBP algorithm or claiming closure; see the
+[checkpoint workflow and resource boundaries](docs/CLI.md#save-candidates-certify-independently).
+For a complete checkpoint directory, the Rust application API also offers
+`load_generated_candidate_checkpoint`: load the saved sectors into one shared
+experimental reducer without regenerating rules or assembling a monolithic
+bundle. It requires the matching generation request and explicit resume;
+missing sectors are errors. See [checkpoint application](docs/rank_scoped_generation.md#applying-a-complete-checkpoint-directory).
+For isolated Rust-library experiments, `encode_generated_candidate_sector`
+saves an already-returned `SectorSolution` in the same native candidate format,
+without another solve or any checkpoint mutation. A one-sector export remains
+partial: absent successor sectors are uncovered, not inferred terminals. See
+[saving an isolated sector](docs/rank_scoped_generation.md#saving-an-isolated-sector).
+
+To inspect saved candidate rules without generating them again, use
+`rustred candidate-inspect --input rules.rrbin --output rules.json`, or
+`rustred.inspect_candidate_program(bundle_bytes)` in Python. The Rust function is
+`rustred_app::inspect_generated_candidate_program`. These diagnostic views expose
+ordered cases, guards, shifts and exact terminal keys in original family
+coordinates. They are not a new persistence format or a closure certificate;
+see [candidate inspection](docs/CLI.md#inspect-saved-candidate-programs).
+
+For interactive Python clients, `rustred.start_family_candidates(...)` returns
+a native session with bounded structured events, retained progress snapshots,
+GIL-releasing waits and cooperative cancellation. `session.result().artifact()`
+provides paginated sector/rule/terminal views; selected coefficient polynomials
+are decoded and cached only on demand. HEPKit can use the same implementation
+through the optional `rustred-feynkit/campaign-api` feature and its existing
+native `IBPFamily`, sharing the host's Symbolica kernel rather than importing a
+second extension. See the [session API and lifecycle limits](crates/rustred-python/README.md#in-process-streamed-generation-and-lazy-exploration).
+Generated candidates and finite residual lists are not closure certificates.
+
+For saved owner campaigns, [`walk-inventory`](docs/scalar_rank_campaign.md#inspect-rules-terminals-and-normalized-candidate-masters)
+reports installed rules, rules and terminals encountered in the saved domain
+cover, and optional exact terminal normalization. It is read-only and uses
+cold reinspection; normalized representatives are candidate masters, not a
+proven minimal basis.
+
+Saved campaigns automatically publish a portable symbolic package after
+successful scoped coverage collection. Master refinement is **manual**, never
+an implicit consequence of running or extending the campaign. The
+[saved-campaign interface](docs/campaign_master_reduction.md) takes the campaign
+directory, so no hash-named artifact path needs to be copied:
+
+```bash
+python -B examples/python/saved_campaign.py run --campaign "$CAMPAIGN"
+python -B examples/python/saved_campaign.py inspect --campaign "$CAMPAIGN"
+python -B examples/python/saved_campaign.py extend --campaign "$CAMPAIGN" --rank 1
+# Optional, only when wanted:
+python -B examples/python/saved_campaign.py refine --campaign "$CAMPAIGN" --seed-depth 0
+```
+
+Inspection uses an aligned coloured table on a terminal, or JSON in a pipeline;
+it distinguishes published bounds from newly requested bounds. Refinement is
+a finite exact Laporta-style search with its own interruption/resume checkpoint.
+The last published package remains inspectable while an extension or refinement
+is unfinished. Remaining masters are a nonminimal candidate basis, not numerical
+values. These packages preserve native programs, routing and terminal relations
+for later Vakint integration; the saved-campaign engine does not yet provide
+general coefficient back-substitution through its dependency traces.
+
+Explicit `refine` also collects compatible scalar/dotted unit-mass vacuum
+terminals using exact full-U aliases and native diagonal ordinary IBPs. This
+runs in Rust automatically after the finite search; numerator-bearing and
+unsupported keys are retained. To collect across separately published families,
+repeat `--collection-artifact /path/to/peer-package`. The result owns its native
+member sessions and composed application maps, so it does not depend on those
+peer paths afterwards. Inspection distinguishes the primary campaign from the
+combined collection; fewer terminal labels imply neither new coverage nor a
+minimal master basis. See [collection and application](docs/campaign_master_reduction.md#native-terminal-collection-and-application).
+
+New explicit refinements also combine the retained finite rowspaces, including
+unresolved auxiliary integrals, to expose additional exact cancellations. This
+finite feedback adds no source seeds and does not run during `extend` or ordinary
+publication; those operations retain its already proved substitutions. Use
+`refine --no-finite-feedback` to disable new feedback discovery. On the frozen
+five-loop inventory it reduces 607 candidate masters to 601, with a one-off
+refinement cost of 34.76 s versus 21.39 s; the four-loop combined count stays 20.
+See the [measured impact and limitations](docs/research/finite_refinement_feedback_2026-10-08.md).
+
+Generated candidate programs now use a shared Symbolica-native binary
+coefficient dictionary and native family geometry, rather than coefficient
+strings in TOML. The original family input remains provenance, not a loading
+requirement. Timing reports and user input remain human-readable TOML.
+The new Rust loader is `load_generated_candidate_bundle`; load only trusted
+generated programs because Symbolica's native readers are not hostile-input
+parsers. This format change does not certify candidates or change rule
+application. Four-loop data migration and the corresponding certified-artifact
+format migration are tracked in the [binary I/O plan](docs/research/native_binary_io_plan.md).
+Certified artifacts use the same native container with a distinct certified
+kind and V6 proof records. Loading still independently replays sources, guards,
+descent and coverage before admitting the owner. Equal mathematical programs
+need not have identical file bytes when Symbolica's prior process state differs;
+the comparison checks structure, every exact coefficient and its variable map.
+The [measured candidate migration](docs/research/native_binary_io_results_2026-09-19.md)
+preserves all 59,636 saved four-loop rules: compressed size falls from 29.95 MB
+to 20.51 MB, and H/X cold-loader diagnostics improve by about 21×. This is not
+an IBP-generation or first-reduction speedup. Vakint milestone `b6b02a636`
+ships these native programs and passes all 15 numerical references, all 16
+expanded-numerator/pinch comparisons and 54 paired public scalar benchmark
+comparisons. The same nine-input benchmark uses 2.73 GiB peak RSS instead of
+14.0 GiB; these are shared-host diagnostics, not a controlled speedup claim.
+Vakint `39992f757` also ships the migrated certified V6 K1/K3/K6 assets, with
+the 83-test through-three-loop selection and all 31 four-loop comparisons
+passing on RustRed `d6718733`. This completes IBP-program transport migration.
+The remaining offline terminal-value catalogs now have a generic native
+Atom/State codec: all 1,155 values are preserved exactly in 30,307 bytes instead
+of 83,020. Vakint `909164121` pins RustRed `d51721b6` and passes the same
+83 lower-loop checks and all 31 four-loop comparisons, completing this I/O gate; see
+[the catalog migration](docs/research/native_terminal_catalog.md).
+Separately, [opt-in exact terminal normalization](docs/research/terminal_normalization.md)
+now proves 650 routing/product aliases and reduces the four-family output-key
+census from 1,155 to 505, without regenerating rules. The product-only baseline
+found 237 aliases; the extension verifies full-rank supports with one linear
+dependence among their active momenta. All 650 equalities pass independent exact
+catalog checks. Vakint `8e91d32f` enables this plan once per loaded four-loop
+program, pins RustRed `f91c47ab`, and passes all 83 lower-loop checks and 31
+four-loop comparisons. The matched nine-input public benchmark passes all 54
+numerical comparisons; whole-harness wall time decreases from 164.83 to 96.35 s
+and peak RSS from 2.73 to 2.12 GiB. These totals include both RustRed and FMFT,
+not just RustRed reduction. First-use cubed-parent calls remain slower than
+FMFT, whereas warm calls are faster on this matrix. See
+[the measured rollout](docs/research/terminal_normalization.md#vakint-routing-alias-rollout)
+for boundaries and caveats. This does not assert a minimal master basis.
+
+The next opt-in [parameter-equivalence lane](docs/research/vacuum_parametric_terminal_equivalence.md)
+compares complete vacuum `U` polynomials under power-preserving parameter
+permutations, using native Symbolica graph canonicalization and exact replay.
+It reduces the same 1,155 keys to **179 family-local representatives**; all 976
+equalities pass independent exact catalog checks. Preparation takes 53–178 ms
+per family in the recorded release run, excluding loading. The 105
+numerator-bearing keys are retained unchanged. Vakint `71e01122b` now enables
+this lane, pinning RustRed `2b50267c`, and passes the same 83 lower-loop checks,
+31 four-loop comparisons and 54 benchmark comparisons. In a fresh matched
+routing-versus-parameter comparison, first H/X cubed-parent calls improve from
+7.18/31.27 s to 6.26/29.45 s; this is a modest incremental gain over routing,
+not the larger raw-versus-normalized core speedup. The
+[public benchmark](docs/research/vacuum_parametric_terminal_equivalence.md#vakint-activation-and-matched-public-benchmark)
+keeps first use, cached calls and FMFT comparisons distinct.
+
+The same candidate applier also offers an explicit Rust-library
+`CandidateCacheRepresentation::Factorized` option using Symbolica's native
+factorized denominators. In three paired saved-program measurements, median
+first H/X cubed-parent applications take 3.86/21.01 s versus 4.40/24.44 s with
+ordinary coefficients. Retained memory and cache-hit materialization costs
+increase, so ordinary storage remains the default and Vakint is unchanged.
+See the [implementation and exact comparisons](docs/research/factorized_coefficients.md#persistent-cache-implemented-and-measured).
+These core-application measurements are distinct from the completed
+[three-mode generation matrix](docs/four_loop_generation_comparison.md#complete-three-mode-solver-time-matrix-2026-09-19),
+which now includes all four parents at one and six workers without a C++ timeout.
+
+The solver implementation follows the
+[executable SpIRed reference port](docs/spired_port.md): reproduce the actual
+C++ `solveSector` algorithm in Rust, using native Symbolica/numerica, and match
+or improve the supplied one-through-three-loop PM example workloads. The
+[artifact-to-Vakint delivery lane](docs/spired_vakint_artifact_plan.md) runs in
+parallel, extending FeynKit tensor reduction and RustRed scalar reduction to
+four loops. The
+[Gregor/SpIReD input plan](GREGOR_INPUT_PLAN.md) retains the wider roadmap.
+The local reference source and working notes
+`notes-spired.pdf` are ignored and are not distributed with the repository.
+
+## Symbolica 3.0 development checkout
+
+The workspace is pinned to Symbolica `3.0.0` and, by default, resolves the
+crate from the vendored `vendor/symbolica/` checkout through the
+`[patch.crates-io]` entries in the root `Cargo.toml`.  `vendor/symbolica` is a
+git submodule containing Symbolica and its graphica/numerica crates. Initialize
+it in a fresh checkout before building; no separate `cargo install symbolica`
+is needed:
+
+```bash
+git submodule update --init --recursive vendor/symbolica
+export SYMBOLICA_LICENSE="<your Symbolica 3 license>"
+cargo fetch --locked
+cargo check --workspace --locked --offline
+cargo build --release --locked --offline
+```
+
+The local checkout needs the usual native GMP/MPFR development prerequisites.
+The submodule pins unmodified upstream Symbolica `dev` (`ef0db494`, which
+contains the multithreaded polynomial-context fix `939c4de8` and the `heap_pow`
+overflow fix `7b31114c`); no local Symbolica patch is applied. Native `.rrbin`
+artifacts written by older RustRed builds (Symbolica export format 5) are
+rejected with an error naming the header converter
+`examples/python/convert_native_v5_to_v6.py`.
+
+To use Git dependencies instead, select one compatible revision for all three
+`[patch.crates-io]` entries: `symbolica`, `numerica`, and `graphica`. Leave
+versions and features unchanged.
+
+Then refresh the dependency source entries in the lockfile and build:
+
+```bash
+cargo update -p symbolica -p graphica -p numerica
+cargo build --release --locked
+```
+
+Keep the three crates on one revision; mixing a Symbolica 2 checkout with the
+3.0 `graphica`/`numerica` pair is unsupported.  The rebased GammaLoop
+`vakint_rustred` branch uses this same Symbolica 3.0 revision and pins RustRed
+to a published commit, while local development may temporarily replace that
+git dependency with a workspace path.
+
+## Finite starting-domain planning
+
+`entry-domain-plan` counts a finite scalar-index input envelope and optionally
+previews targets. It does **not** generate IBPs or claim closure. Both total
+positive denominator power and scalar numerator rank are bounded, with optional
+correlations. The separate fixed-target feedback API preserves all integer
+indices and reuses existing rules before searching genuine misses.
+
+```sh
+rustred entry-domain-plan --input examples/cli/finite_entry_domain.json --output -
+python examples/python/plan_finite_entry_domain.py --loops 1 --sectors 1
+```
+
+The example has exactly three starting targets: `[2]`, `[3]`, `[4]`.
+The Python example uses `import rustred`; `--cli /path/to/release/rustred`
+selects the equivalent CLI adapter. `--owner-selection SELECTION.json` reads
+sector masks from an existing census instead of an observable-specific list.
+
+The named `renormalizable_marginal_feynman` profile is conditional on its stated
+Feynman-gauge, forest, scalarization and mass-grading assumptions. It is not
+automatic authentication of an arbitrary physical calculation. At five loops
+it supplies `A<=24`, `R<=14`, `A-R>=10`; a preview is never exhaustive coverage.
+Input bounds never clip IBP descendants. See
+[the finite-domain plan and derivation](docs/finite_starting_domains.md).
+
+Two saved-rule five-loop controls have completed dependency tracing: one input
+per owner (67 inputs) in 4.26 s, and a 50-input diagonal stress control in
+1,552.88 s with 50 configured workers and 26.11 GB sampled peak RSS. The latter
+reaches five existing declared terminal keys without missing rules. These are
+trace-only timings, not coefficient reductions or complete-family coverage;
+cold setup/process time is reported separately in the linked plan. Finite-axis
+guard refinement also resolves all 57 previously ambiguous local R10 query
+boxes after conservative A24 bounding, in 2.70 s of matching. This removes
+those local guard unknowns, not the remaining recursive campaign obligations.
+
+## Current capability
+
+The [September 17 status report](STATUS_17_09_2026.md) and
+[checkpoint ledger](docs/checkpoints/2026-09-17.md) record the
+historical reconstruction, C++ comparison, certification and experimental Vakint
+results. Four-loop candidate generation is usable; unrestricted four-loop
+certification remains unfinished. The public Vakint RustRed backend now passes
+all 15 existing four-loop numerical-reference cases and 16 additional expanded
+propagator-numerator/pinch comparisons against FMFT. The native FeynKit tensor
+prepass and RustRed scalar tail use an invalid FORM path; the separate FMFT
+oracle uses FORM. These finite tests do not prove arbitrary-index closure.
+The [September 19 update](docs/checkpoints/2026-09-19.md) records saved H/FG/BMW/X
+programs, cold-load measurements, and a corrected FMFT numerator-routing error
+with revalidated offline terminal projections and the completed public-backend
+numerical matrices. The saved programs load once without regenerating rules.
+See the
+[matched generation measurements](docs/four_loop_generation_comparison.md)
+for completed versus interrupted runs and output-equivalence qualifications.
+
+K1/K3/K6 artifacts and offline master projections are shipped with Vakint.
+GammaLoop milestone `433e42d3` corrects MATAD's signed routing for contracted
+three-loop numerator momenta. After the independently audited 34-test targeted
+gate, a fresh rerun of the **complete recorded 83-test selection passes:
+83 passed, 0 failed, 0 ignored**. Both previously failing all-class comparisons
+reach all five three-loop classes, with unchanged tolerances. Native evaluation
+uses an invalid FORM path; separate oracle lanes use FORM for validation.
+The 83-test selection covers native peers, legacy comparisons, matching,
+defaults and the offline 38-terminal catalog; it is not 83 distinct integrals.
+GammaLoop milestone `a3d26dab` repeats that complete selection successfully on
+the published Symbolica 3/RustRed stack and ships the regenerated K6 artifact.
+The full workspace compiles; focused GammaLoop, Spenso and FeynKit runtime
+checks pass. See the [dependency migration report](docs/vakint_symbolica3_migration.md).
+
+Four-loop certified artifacts are not yet closed or shipped; the uncertified
+candidate programs and their terminal projections are shipped with Vakint.
+H, X, BMW and FG are
+[external unit-mass input families](examples/input/README.md), not hard-coded
+solver cases. Explicit caller-owned publication and cold-load resource policies,
+native coefficient-conjunction refinement and exhaustive short-axis consistency
+checks pass **629 focused core tests** and independent review. Defaults are
+unchanged; larger finite allowances expose the next proof obligations. The
+earlier recorded public release CLI attempts distinguish whole-sector certification
+from later durable-artifact publication:
+
+| Family | Exact sector audits | Remaining publication obstruction |
+| --- | --- | --- |
+| H | **314/314**, 21,360/21,360 replayed and descending rules, zero gaps/issues | 72 sectors lowered; new guard proof at H58, displayed rule77; 308.58s whole process |
+| FG | **124/124**, 9,272/9,272 replayed and descending rules, zero gaps/issues | 82 sectors lowered; new guard proof at FG83, displayed rule59; 283.58s whole process |
+| BMW | **134/134**, 9,024/9,024 replayed and descending rules, zero gaps/issues | 31 sectors lowered; next guard of BMW230 displayed rule49; 568.98s whole process |
+| X | 144 passing audits, 8,893 replayed/descending rules, zero gaps/issues | X394 is cleared; X369 preparation rejects a 33rd predicate under its independent 32-atom cap; 551.93s whole process |
+
+The H/FG/BMW candidate systems pass all sector checks, but still do **not**
+produce a durable, cold-validated artifact. The CLI, Rust and Python interfaces
+expose separate producer/load allowances, never serialized as artifact authority.
+These runs selected 65,536 endpoint-storage cells and 67,108,864 consistency
+work units; all local proof checks remain mandatory. The previous H282/FG158
+obstructions now pass complete lowering. New H/FG guards have an affine
+consequence hidden behind a domain-proved nonzero factor; BMW's next guard
+adds a factor already covered by a retained exclusion. Reusing native factor
+evidence is the next narrow refinement. X's new failure is a preparation
+resource cap, not a mathematical uncovered-domain witness. These observations
+identify verification limitations, not demonstrated missing IBPs, but do not
+prove the rest of X's unchecked sectors complete. Integer/finite-field sampling
+will guide diagnostics and exact work, never replace infinite-domain closure.
+A short X replay CPU profile again finds native rational-polynomial elimination
+dominating the sampled interval; that is a separate runtime issue. The
+[guard-consistency report](docs/research/four_loop_predicate_consistency.md)
+records exact boundaries, evidence and next steps.
+**No closed four-loop artifact is written or shipped.** Current
+release CLI K1/K3/K6 generation, fresh-process validation and master-only
+application pass with unchanged artifact bytes and exact reductions. K6 output
+is identical across one, two and six configured workers and sufficient resource
+policies. A fresh release wheel passes all 29 public Python API tests, including
+CLI parity. Shared-host timings are not controlled speed ratios.
+See the
+[certificate profiling report](docs/research/original_source_certificate_performance.md).
+Live phase diagnostics and an explicit domain-scoped publication path are
+implemented: `--nonpositive-indices` restricts specified auxiliary
+coordinates without bounding numerator rank or weakening exact closure checks.
+The unrestricted default is unchanged. A conservative source-projection fix
+resolves the earlier three-rule FG boundary failure without weakening replay.
+The
+[parent-probe report](docs/four_loop_parent_closure_probe.md) records the evidence.
+Earlier pending-three-loop development checkpoints
+below are historical and do not override this status.
+
+The currently evidenced core can:
+
+- automatically traverse coordinate and affine integer-equality cases with the compact `solver` API,
+  precondition polynomial IBPs, discover matching modular GPLU pivots, replay
+  compact exact traces, refine exceptional conditions, and share numerical
+  searches among fully fixed cases. Its first full `vac3` run reproduced
+  all 617 reference equations across 38 sectors with symbolic mass; independent
+  audits matched the guard domains and 38 residual keys. See the
+  [timing and validation report](docs/spired_vac3_results.md);
+- independently replay the full K6 set from its nine original IBPs, prove
+  descent and whole-sector coverage with 38 finite terminals, and obtain
+  zero uncovered regions for all 617 rules at one and six workers. This cold
+  audit also passes the complete K1/K3 families. The canonical unit-mass K6
+  program now installs into the existing `ClosedArtifact` and
+  memoizing `Reducer`: 623 rules, 5,640 sign-refined cells, 38 finite masters,
+  and 26 proved-zero sectors. Serial and six-worker generation writes identical
+  durable bytes; fresh CLI loading and application pass. Complete Vakint
+  acceptance now passes the complete selected matrix described above. See
+  the [artifact delivery report](docs/spired_vakint_artifact_plan.md);
+- run those independent sector solves on a bounded private worker pool with
+  shared source data and deterministic aggregate output. All `vac3` equations
+  and residuals agree at 1/2/4/6 workers; see the
+  [parallel timing and memory measurements](docs/spired_parallel_results.md);
+- derive and remove independent linear-cut derivatives, retain exact parameter
+  conditions, and support reference-compatible ordering permutations. The full
+  two-loop PM `fam1_11` run matches all 802 sector rules, both preliminary rules,
+  and 16 residual keys at 1/2/4/6 workers. Release campaign medians are 264 ms
+  serial and 66 ms with six workers, versus C++ 739 ms and 131 ms; see the
+  [PM benchmark and validation report](docs/spired_fam1_11_results.md);
+- match all 856 `bc4PMRad1` rules and all 15 selected `fam_cosmo` rules,
+  including exact guards and residual keys. Repeated `bc4PMRad1` end-to-end
+  medians are 736 ms serial and 180 ms with six workers, versus C++ 1805 ms
+  and 272 ms; see the
+  [additional-fixture results](docs/spired_additional_fixtures.md);
+- solve all 40 requested `fam1_12` sectors (1,104 nonempty rules) and all 132
+  requested `fam1_111` sectors (10,333 rules), matching exact required domains,
+  guards, coefficients, and residual keys. Seven-pair `fam1_12` process medians
+  are 741 ms serial and 292 ms with six workers, versus C++ 1,883 ms and 384 ms.
+  This verifies the reference rule finder, not certified family closure; see
+  the [affine-case results](docs/spired_affine_results.md);
+- compile compact, structured-text, and caller-owned Symbolica Atom family
+  descriptions, authenticating every form at ingress;
+- build exact topology-neutral affine integral families;
+- generate the complete ordinary parametric IBP and LI source rows;
+- exactly replay physical family rows/common-scale claims, retain auxiliary
+  roles, and structurally validate caller-attested presentation metadata;
+- project scalar, odd-rank, and rank-two vacuum tensors and, through a
+  separate post-projection service, lower polynomial loop--loop scalar
+  numerators onto shifted family keys with explicit common-mass powers;
+- derive both a guarded rule at one concrete anchor and a genuine fixed-sector
+  parametric recurrence over `K(n)`, accepting the latter only after exact
+  symbolic replay, uniform descent proofs, retained nonzero guards, and
+  exact base-field source replay at the declared anchor, with an optional
+  requested-pivot path that performs deterministic Symbolica RREF over
+  physical pivots, keeps chronological provenance columns as free source
+  weights, and retains every reachable pivot guard;
+- refine sector-monotone RHS shifts into lazy exact fixed-target-sector cells
+  and stream preflighted O(1), rule-bound proper-subsector obligation
+  descriptors with stable process-local resume and on-demand domain
+  materialization;
+- verify explicit affine symmetry maps;
+- analyze requested zero sectors using generic Symanzik/rank evidence; and
+- provide deterministic core-owned campaign execution and memory-preflight
+  primitives, with roots-only composition in the application layer;
+- drive one private SpIReD target lane from fair signed-L1 source scheduling
+  through direct `c(n+s)` finite-field evaluation, incremental Symbolica rank
+  separation, compact dependency tracing, fresh exact replay, and strict
+  `RuleCell` promotion; exact indexed-guard witnesses now admit zero/nonzero
+  branches and reject stale probes or unlucky primes before streaming; the
+  scheduler-driven K1 regression additionally compiles its admitted cell into
+  an executable owner and publishes a closed bounded wave against a separate
+  no-rule terminal authority, while recursive multi-case closure and complete
+  artifact publication remain in progress;
+- rebase independent modular hits onto one fresh canonical exact epoch,
+  promote only globally applicable candidates into guarded executable cells,
+  pair those cells with their exact semantic circuits, and transactionally
+  rebuild an immutable all-rank owner cover while retaining guard and terminal
+  incompleteness explicitly;
+- freshly generate, exactly replay, and seal the complete canonical one-loop
+  `K = 1` and equal-mass two-loop sunset `K = 3` vacuum partitions over
+  `Q(d)`, including explicit masters, scaleless zero terminals, exact `S3`
+  routing, pinched-face factorization, exceptional numerator-corner cells,
+  and checked common-mass homogeneity; and
+- apply a sealed artifact with the topology-independent `reduction::Reducer`,
+  using deterministic first-applicable rule selection, concrete strict-descent
+  checks, an explicit work stack, memoization with retained-payload limits,
+  like-master collection, typed uncovered/cycle failures, and optional common-
+  mass restoration; and
+- deterministically encode both sealed artifacts, authenticate and replay them
+  once when loading untrusted bytes, and expose durable generation,
+  inspection, and exact reduction through the Rust application API, the
+  `campaign` CLI, and `import rustred` Python API; and
+- drive Vakint's opt-in `EvaluationMethod::RustRed` scalar backend through the
+  shipped `K = 1`, `K = 3` and `K = 6` artifacts, reusing Vakint's existing matcher and
+  routing witness, returning exact terminal coefficients, restoring
+  a symbolic or exact common mass, and optionally applying Vakint's pure-Rust
+  offline master projections and values without invoking or falling back to FORM.
+
+It does **not** yet provide complete four-loop artifacts or four-loop
+acceptance, complete the
+supplied PM example suite, or implement a new generic
+higher-even-rank tensor reducer. Vakint uses FeynKit for that tensor prepass.
+RustRed itself deliberately does not
+own evaluated master values; the Vakint adapter can substitute Vakint's
+existing values after reduction. Structural source counts—at any loop
+count—remain insufficient closure evidence.
+
+## Active development stage
+
+The through-three-loop artifact milestone produced unit-mass artifacts for the one-loop
+`K = 1`, two-loop `K = 3`, and three-loop `K = 6` vacuum families. Together
+they cover Vakint's eight registered graph classes through three loops:
+the tadpole, the sunset and its pinch, and the K4/Mercedes parent with four
+inequivalent contractions. Their complete ordinary-source counts are 1, 4,
+and 9 respectively.
+
+The `K = 1` and `K = 3` families are installed as mathematically closed,
+deterministically encoded artifacts and consumed by the generic recursive
+reducer through Rust, CLI, and Python surfaces. They are also shipped with and
+consumed by Vakint's FORM-free scalar backend. The new SpIRed producer closes
+and durably installs canonical three-loop `K = 6`; fresh-process inspection
+and application pass. The complete recorded Vakint acceptance selection passes.
+
+The active four-loop work uses external H, X, BMW and FG parent inputs,
+each with ten scalar-product coordinates. A single ten-coordinate root family
+is not assumed universal. The generic `family-close` CLI runs complete-sector
+generation and exact artifact installation over the declared domain (unrestricted
+by default); see [its contract](docs/CLI.md).
+Four-loop routing, shipped offline master catalogs and FORM-less numerical
+parity already operate through the explicitly uncertified candidate-program
+lane. Exact unrestricted artifact publication remains a separate unfinished
+gate; passing numerical comparisons does not promote those candidates.
+
+### Earlier foundry research checkpoints
+
+The following records describe the separate earlier foundry/campaign lane,
+not the current SpIRed producer's closure status. Its bounded frontiers do not
+override the complete K6 artifact described above.
+
+The earlier foundry lane's test-only K6
+pressure fixture
+pins its exact family, nine sources, order-24 `S4` sector partition, the five
+revision-stamped Vakint class/routing snapshots, and certified `K3 x K1` plus
+both inequivalent `K1 x K1 x K1` factorization sectors. It also derives the
+first exact top-sector rule cell and the two inequivalent positive dotted-edge
+cells on the canonical five-line residual face. Each cell is projected from
+all nine sources and retains exact residual replay, guards, bounded application
+proof, provenance, and strict descent. Six further generated cells advance the
+five-line inactive-numerator partition: disjoint endpoint and bulk owners for
+the all-unit active-power lane, the adjacent active-dot orbit, and the opposite
+active-dot orbit. They retain exact source selections, endpoint specialization
+and pruning, held-out replay, machine-boundary coverage, and strict descent; the
+five-line scalar corner and the rest of the fixed point remain explicit
+obligations. On the irreducible four-line face, an exact target-aligned
+translation supplies a guarded canonical-dot multi-excess
+cell, while the untranslated span supplies the canonical mixed
+numerator/dot cell, including its isolated mixed corner. A complete depth-one
+search now also supplies disjoint endpoint and bulk owners for the scalar
+inactive-numerator ray `J(0,1,1,1,1,n)`, covering every representable `n<0`.
+The selected bulk rows are independently reprojected over the full i64 box;
+one exposed pinched child is now continued by separate generated endpoint and
+bulk cells for `J(0,0,2,n,1,1)` and then `J(0,0,1,n,1,1)`, again through the
+full representable negative-power domain. Exact orbit tests limit the
+decorated cell to one of five inequivalent `S4` orbits; the other orbits
+remain explicit obligations. Exact
+fixed-corner projections additionally lower the isolated pure-dot orbit to the scalar
+corner and supply a strict-descent recurrence for the opposite two-dot orbit
+from the complete nine-row one-dot translated source layer, with exact RREF
+selecting five rows. A topology-neutral bounded same-sector search now grows
+complete L1 translation diamonds deterministically; its first successful
+depth-two cone contains 28 translations and all 252 translated ordinary rows.
+An independent finite reachability planner applies caller-ordered rule cells
+with exact terminal/guard/coefficient semantics, strict descent, symmetry
+routing, and bounded deterministic uncovered-frontier reporting. It is a
+discovery aid, not a substitute for the symbolic proof required to publish a
+closing artifact. On the factorized four-line face, the untranslated nine-row
+span now also derives compact endpoint/bulk cells for the bridge-dot numerator
+orbit `J(0,n,2,1,1,1)`, covering every representable `n<0`. The endpoint
+terminates in authenticated product sectors; the bulk descends into two
+simpler path-numerator lanes. One of them, `J(-1,0,1,0,2,1)`, now has an exact
+singleton owner selected from two of the complete nine untranslated rows; it
+continues only to the installed decorated-path endpoint and an authenticated
+product. The other direct child, `J(0,-1,1,1,1,1)`, now has a separate
+depth-one endpoint cell selected from 8 of 63 complete rows. Its sole guard is
+`d-1`, and all three children are authenticated products; deeper negative
+powers remain explicitly open. A distinct two-dot placement,
+`J(0,-1,2,2,1,1)`, is owned by another exact endpoint selected from 9 of the
+same 63-row search span. Independent compact reprojection removes the
+complete-system's spurious `d-1` guard, and its four children terminate in
+factorization owners 2, 0, 1, and 2. The six inequivalent `S4` placement
+classes are exhaustively partitioned, so neighboring dot or numerator
+patterns are not overclaimed. The irreducible four-line numerator lanes are
+grouped under the semantic `four_line::numerator` module. Its newest exact
+endpoint owns only the `S4` orbit of `J(0,1,2,2,1,-1)`, where the inactive
+numerator is incident to both active dots. A complete depth-one search retains
+all 63 rows and selects ordinals 18, 21, 27, 28, and 30; independent compact
+reprojection removes the complete elimination's spurious `6-3d` guard. Its
+four children route through the existing adjacent-pair and triple-dot cells,
+factorization owner 2, and the still-open scalar corner. The other two
+inequivalent two-dot/inactive-numerator placement classes remain explicitly
+unowned. Two further endpoints own the undotted and one-dot members of the
+opposite-inactive-numerator-pair class, respectively
+`J(-1,1,1,1,1,-1)` and `J(-1,1,1,1,2,-1)`. The undotted rule selects four
+rows from a complete 63-row depth-one span and retains only the effective
+`3d-4` guard; the dotted rule selects two of the nine untranslated rows and is
+guard-free. Both share `J(0,0,1,-1,2,1)`, whose separate guard-free depth-zero
+endpoint selects rows 0 and 3 and closes through the installed undotted-path
+cell and factorization owner 2. Exact orbit tests keep all three cells narrow.
+On the irreducible scalar four-line face, a
+separate depth-zero bulk recurrence covers the full machine-wide ray
+`J(0,1,1,1,2,N)`, `N<=-2`. It independently reprojects rows 0, 3, and 4 of
+the complete nine-row source span, is guard-free, reaches `i64::MIN`, and
+routes only to the installed scalar-numerator/decorated-path lanes or the
+already-open scalar corner. Exact `S4` tests own all eight equivalent
+dot/numerator placements while rejecting the endpoint, higher-dot, two-dot,
+and two-negative neighbors. A depth-one continuation now covers the deeper
+opposite inactive-pair ray `J(-1,1,1,1,1,N)`, `N<=-2`, from five selected
+generated rows. Its first new child is closed by a coordinated three-line
+cluster: two machine-wide inactive-pair rays and one shifted-dot ray are
+independently reprojected from complete ordinary-source spans with exact
+guards, replay, descent, and `S4` ownership. These additions replace one
+finite frontier witness without treating any sampled miss as a terminal.
+
+The current test-only K6 census submits 115 bounded probes, which canonicalize
+to 44 roots and discover 89 nodes. It applies rules 53 times from 46 registered
+cells, discharges 27 nodes only by freshly proved zero/factorization terminals,
+and leaves nine nodes explicitly uncovered: the three scalar-corner
+certification obligations and six genuine recurrence witnesses enumerated in
+the [breakthrough research note](docs/research/parametric_ibp_breakthrough.md).
+Two independent complete depth-two projections now also lower the
+adjacent and opposite placements of powers two and three on the four-line
+corner. Exact elimination selects 17 and 18 source contributions respectively;
+both rules descend only to the certified path factorization and the unresolved
+scalar four-line corner. The three scalar graph corners, deeper mixed-dot
+faces, and remaining numerator directions remain obligations rather than implicit
+masters.
+The test-only completion geometry independently maps all 46 cells to exact
+sector-local carrier boxes and checks 33,534 small-lattice membership points.
+The foundry expands every one of the 205 retained guard occurrences in the
+base parameters with Symbolica. Of these, 119 have an immediate nonzero
+constant coefficient; the other 86 have exact one-index exceptional sets, and
+none of their roots intersects the owning application box. Thus the current
+cells have no hidden guard-zero holes. Their guard-blind structural complements
+still contain 20 and 32 disjoint boxes in the two sectors containing the six
+recurrence witnesses, with a six-dimensional varying component in each. Even
+endpoints that saturate the `i64` carrier remain explicit all-rank extension
+obligations rather than assumed rays.
+Exact targeted RREF selects 16 of those rows and supplies a guarded two-term,
+strictly descending recurrence for the inequivalent adjacent two-dot orbit,
+while complete provenance and projection replay retain the full search span.
+The resulting fixed-corner cells route all three dotted orbits under the exact
+`S4` action. The same complete diamond also derives the opposite-pair rule's
+single-line triple-dot descendant, again from 16 selected rows with exact
+guards and full 252-row replay; both children are the certified path
+factorization and the scalar four-line corner. A third target over a separately
+retained copy of the complete span lowers the remaining three-distinct-dot
+orbit onto the same two children using 17 selected rows and nine exact guards;
+`S4` routes all four raw placements. A fourth complete depth-two projection
+derives the selected repeated-edge ray `J(0,1,1,1,N,0)` for `N >= 3`. Its
+pivot shift is `[0,0,0,0,2,0]`; exact elimination selects 50 source
+contributions containing 358 source terms and produces eight RHS terms, 32
+guards, and 367 replay keys. Schema-V4 replay takes 1078 exact operations at
+free index one and 1080 at held-out indices two and eight. A symbolic
+leading-coefficient proof establishes that none of the 32 specialized guards
+becomes the zero polynomial in `d` for any positive free index, while concrete
+exceptional dimensions remain guarded. Exact `S4` routing covers every choice
+of the repeated active edge. A complete depth-three search over 84 translations
+and 756 ordinary rows next derives the exact corner target
+`J(0,1,2,2,3,0)`. Its exact elimination selects 46 generated rows. Reprojecting
+only that generated selection on a one-free-index face yields an algebraic
+recurrence for one `S4` orbit of `J(0,1,2,2,N,0)`, structurally `N >= 3`,
+with 13 source contributions, 90 source terms, five RHS terms, seven guards,
+96 replay keys, and 275 exact
+schema-V4 operations. The anchor free index one and held-out indices two and
+eight replay identically, and a symbolic leading-coefficient proof covers the
+complete positive ray. The concrete i64 rule cell owns
+`3 <= N <= i64::MAX - 1`; the final machine endpoint is rejected because an
+RHS shift would overflow. A separate complete depth-three projection closes the
+first point of the complementary orbit, `J(0,1,2,3,2,0)`: exact elimination
+selects 46 of 756 generated rows (310 source terms), producing four RHS terms,
+22 guards, 315 replay keys, and 939 exact schema-V4 operations. Depths zero
+through two retain typed target-absent results, the fixed application box owns
+only this `S4` orbit point, and neighboring points remain explicitly unowned.
+The remaining complementary ray, the exposed descendant
+`J(0,1,1,2,N,0)`, inequivalent path-numerator orbits, other numerator faces,
+scalar corners, and the rest of the fixed point remain open.
+
+RustRed does not require the eventual evaluation-terminal set to be a minimal
+master basis. An exactly proved finite complement may be shipped as a larger,
+versioned terminal set, provided each entry has an exact MATAD basis map or a
+separately validated, shipped high-precision Laurent evaluation at Stage 1
+(with AMFlow serving the analogous later high-loop role). The current nine
+bounded K6 misses are not such a proof: recurrence
+witnesses may sit on infinite uncovered strata and therefore cannot simply be
+declared masters. Vakint/MATAD may be used offline to diagnose their missing
+relations and to produce high-precision reference values; neither is part of
+the production RustRed scalar path. FORM recurrences may inform seed points,
+coordinate orderings, and validation targets, but a production K6 artifact and
+its Python example must regenerate every identity with RustRed. Importing FORM
+recurrence right-hand sides is diagnostic-only and cannot publish an artifact
+or supply a claimed generation time.
+
+K6 closure is being driven in two distinct modes. The hinted mode may use
+reviewed external search metadata—currently itinerary, proof/proposal order,
+probe portfolio, and bounded resource choices—but RustRed still regenerates
+every identity and produces a standalone artifact containing no FORM payload.
+The autonomous mode receives no FORM-derived hints and must discover that
+search guidance itself. Both modes must satisfy the identical exact closure,
+replay, durable reload, and reduction gates; only the autonomous result closes
+the algorithmic Stage 1 objective.
+
+The strict V2 campaign schema makes this distinction structural rather than a
+relabelable provenance flag. An autonomous request contains only the preset and
+bounded report ceilings; RustRed chooses its proof order, discovery chronology,
+probe portfolio, and itinerary deterministically. For example:
+
+```toml
+schema = "rustred.foundry-campaign-config.toml.v2"
+preset = "three-loop-unit-mass-vacuum-k6-orbit-0"
+mode = "autonomous"
+max_task_reports = 512
+max_reported_uncovered_boxes = 64
+```
+
+An externally informed run instead requires a reviewed `[hints]` object. That
+object may choose only supported search inputs such as the itinerary, proof and
+proposal order, probe portfolio, and bounded resource choices:
+
+```toml
+schema = "rustred.foundry-campaign-config.toml.v2"
+preset = "three-loop-unit-mass-vacuum-k6-orbit-0"
+mode = "external-hints-only"
+max_task_reports = 512
+max_reported_uncovered_boxes = 64
+
+[hints]
+itinerary = "full-rank-atomic-waves"
+interior_margin = 2
+polynomial_degree_ceiling = 0
+ordering_policy = "rustred.unshifted-sector-order.v1;priority=rustred.coordinate-priority.v1;k=6;rank-by-slot=5,3,4,2,0,1"
+discovery_coordinate_priority = [5, 3, 4, 2, 0, 1]
+
+[[hints.probes]]
+modulus = 1000000007
+base_parameters = [37]
+chart_offsets = [0, 0, 0, 0, 0, 0]
+```
+
+Unknown fields are rejected, and neither variant has a representation for
+recurrence right-hand sides, coefficients, source rows, supports, or imported
+rules. `rustred campaign run` selects the autonomous single-sector itinerary;
+`rustred campaign run-waves --n-cores N` selects the autonomous full-rank wave
+itinerary. External hints state the same itinerary explicitly and are rejected
+at the wrong entry point. Single-sector reports remain diagnostic and carry
+`artifact_published = false`. Full-wave reports distinguish an exact in-memory
+`artifact_installed` result from `durable_artifact_published`: the latter is
+true only after deterministic K6 encoding, independent cold-load validation,
+exact regenerated-source replay, and canonical re-encoding all succeed. An
+incomplete run exposes no artifact bytes; it instead reports each blocking
+orbit's typed stop and exact residual-box census, with partition coordinates
+bounded per orbit by `max_reported_uncovered_boxes` and an explicit truncation
+flag. The corresponding Python functions are
+`rustred.run_foundry_campaign(config)` and
+`rustred.run_foundry_wave_campaign(config, n_cores=N)`.
+
+The repository includes two directly runnable, reviewable full-wave inputs:
+[`examples/k6_external_search_hints.toml`](examples/k6_external_search_hints.toml)
+contains the 55 raw anchor/axis rectangles from the externally informed
+itinerary, while
+[`examples/k6_autonomous_campaign.toml`](examples/k6_autonomous_campaign.toml)
+contains no hints at all. The former carries search chronology only; it has no
+identity rows, right-hand sides, coefficients, supports, reductions, owners,
+terminals, or master payload. Both can be passed unchanged to release CLI and
+Python runs, and both remain bounded investigations until exact K6 closure is
+reported.
+
+Live matcher comparison remains an integration gate, and no artifact is
+published before the complete rule fixed point closes.
+
+Tensor-reducer development is explicitly outside Stage 1. Vakint's
+`vakint_rustred` branch is based on GammaLoop's `feynkit` branch and uses its
+native FORM-less tensor prepass before the RustRed scalar backend. Existing
+experimental RustRed rank-two tensor code remains frozen through Stage 1.
+After the complete through-three-loop artifact and Vakint acceptance gate is
+recorded and pushed, Stage 2 is authorized to proceed directly with four-
+through six-loop closure, the required high-loop execution infrastructure,
+and integration of the collaborator's advanced rank-generic tensor technology
+when it is available. Algorithm research, bounded K6 foundry experiments, and
+census-complete K10/K15/K21 scaling studies remain active during Stage 1;
+none is described as production closure before the exact publication gates
+pass. LiteRed2 is the correctness control, while modular
+target-separation, exact lattice-stratum completion, seedless syzygy sources,
+generating-function operators, and decorated graph/minor reuse are evaluated
+as possible routes beyond its scaling. See [`GOAL.md`](GOAL.md) for the
+authoritative gates.
+
+The current test-only A0 kernel samples the canonical degree-one `S4a`
+physical frame (63 ordinary-source rows, 157 raw integral columns, and 630
+structural entries) directly over Symbolica `Zp64`. An exhaustive
+decorated-stratum registry classifies every raw column as the target, a proved
+strictly descending RHS with all proper-subsector images terminal-owned, or a
+forbidden column. The registry admits lower images only from immutable sealed-
+artifact zero, factorization, or master owners; it never upgrades an ordinary
+RuleCell into closure authority.
+
+The current source-discovery boundary constructs every requested task natively
+with target shift zero. `SampledDeclaredModuleDual` can seal one complete,
+guard-free fixed-sample empty residual census after independently replaying all
+inverse-incidence and translated-term/support counts and rejoining the exact
+plan, sample, partition, stratum, ordering, lower-owner snapshot, and incidence
+index. A bounded multi-epoch driver now executes a prevalidated probe schedule
+in declared order. Each probe owns its request accumulator, selected matrices,
+samples, obstructions, and exact-lift result; cross-probe state is bounded
+scalar telemetry only. Live hits are lifted before their query-local evidence
+can escape, guarded dual evidence fails closed, and aggregate exhaustion marks
+the unexecuted suffix explicitly. No arbitrary-target coordinate-transport
+subsystem exists yet.
+
+The test-only K6 campaign also has a proof-backed terminal authority that is
+not a synthetic closing artifact. It authenticates the exact zero and
+factorization cover once, binds symmetry to the family, strongly retains the
+closed K1/K3 dependencies, and requires its terminal manifest to equal the
+compiled factorization images. Immutable completion snapshots flatten that
+cover for lookup while retaining the exact authority for cold verification.
+
+Its first audited campaign census covers all six full-rank sector orbits at
+three independent primes. Every one-epoch task builds 90 rows, 253 columns,
+and 918 structural entries; none has an immediate target-unit hit, and the
+right obstruction nominates 3,586--3,822 additional nonzero translations.
+Those are diagnostic proposal counts, not installed rules or evidence of
+closure. The current bounded follow-up derives `q0` plus as many as three
+target-normalized `q0 + z_i` directions from the same checked Symbolica RREF,
+replays every direction, evaluates their union support through a probe-local
+complete-row cache, and selects at most 32 rows by marginal signature rank plus
+one deterministic breadth slot. On both first path/star sectors, width one and
+width four preserve the same authoritative q0 census and grow the frame from
+90 to 122 requests. Width four incurs only the additional auxiliary-support
+evaluations, but this one-epoch experiment still produces no modular hit or
+exact-lift attempt. The path/star closure baselines remain `9/4/10` and
+`22/12/4`; that checkpoint had no K6 artifact. These results motivated the next
+fixed-slice/syzygy-guided discovery experiment and immutable solved-sector
+feedback work instead of a blind larger seed box.
+
+Positive finite-field supports can now be lifted over Symbolica's exact
+rational-function field. The lift recovers the original translated-source
+combination, retains every pivot/source/denominator guard, and independently
+replays all physical columns. Probe-local exact results now enter a bounded
+canonical-replay transaction before promotion: only raw probes and complete
+request sets cross worker boundaries; old circuits are discarded; bootstrap
+and the exact request union are rebuilt as one fresh epoch; and one
+authenticated target/lower-owner partition is shared read-only while every
+probe is independently resampled. The common domain must lie inside every
+contributing final domain. Structural exact-lift failures abort the whole
+transaction, while sample singularities, no-hits, and support-not-lifted
+outcomes remain explicit diagnostics.
+
+Fresh exact circuits are sorted by proof content rather than modular telemetry
+and deduplicated under aggregate work, diagnostic, exact-payload, integer-bit,
+anchor, and support-reference limits. A genuine distinct-request regression
+builds an epoch-one union and proves that no stale plan token crosses it. The
+selected common-plan candidate then passes exact guard refinement, lossless
+lowering, descent/source replay, and ordinary guarded `RuleCell` admission;
+the admitted value keeps its epoch and circuit authority alongside the
+executable cell. Guard walls remain typed retry or exceptional-stratum
+obligations, never implicit coverage.
+
+The canonical replay-to-publication bridge is now executable and bounded. It
+authenticates the shared partition once, retries a guard wall only at distinct
+exact anchors in canonical coordinate order, admits only globally applicable
+`RuleCell`s, keeps ordinary guard obstructions beside the unpublished exact
+authority, and pointer-pairs each admitted cell with its semantic circuit.
+Whole-cover compilation canonically sorts owners and terminals; insertion
+publishes only after a complete replacement cover and every pairing check
+succeeds. `Incomplete` remains the only answer for an unbounded geometric
+complement, unresolved guard branch, or undeclared finite terminal. A consuming
+seal now rejects every such incomplete cover, strongly retains the exact
+predecessor snapshot, and rechecks the complete common execution scope of every
+owner while preserving the existing proof/circuit/`RuleCell` pairing. A sealed
+cover can now be published as an immutable solved-sector layer with a bounded,
+one-time BLAKE3 identity over its complete executable content. Strong retained
+ownership—not the digest—authorizes dependency joins. Later snapshots append
+canonically ordered same-rank waves transactionally and reject split,
+decreasing, or foreign-predecessor publication. Their bounded append-only
+raw-to-owner route table now covers every authenticated symmetry image of root
+and solved owners, retains the exact canonicalizer authority, preserves
+factorization-before-master precedence, and performs allocation-free bucketed
+lookup. A generic one-shot coordinator now stages a complete same-rank
+frontier against one exact predecessor, accepts only pointer-paired executable
+owners and retained-authority terminals, resolves equivalent worker results by
+an exact canonical minimum, and enforces aggregate rather than per-sector
+resource limits. It publishes no layer unless every sector is exactly closed.
+On the K6 rank-three path/star frontier, the exact
+root-aware degree-one diagnostic currently gives `9/4/10` and `22/12/4`
+(replayed owners / guard-total owners / nonfinite complement boxes), so the
+atomic wave correctly stops without publication. That lane's next production
+boundary was the first complete bottom-up three-line wave. It is separate from
+the now-closed source-port K6 artifact.
+
+### Compatibility policy
+
+The codebase has no RustRed backward-compatibility promise during deep
+development. Obsolete prototype solvers, schemas, compatibility facades,
+authored recurrences, and milestone-log architecture have been deleted rather
+than migrated. Durable artifacts accept the current RustRed schema only: every
+obsolete version, including V1 through V4, is rejected and there is no migration
+or dual decoder. Vakint likewise provides no compatibility layer for obsolete
+RustRed artifact schemas. This does not weaken Vakint's separate API/default
+and existing FORM-method compatibility contract.
+
+## Workspace
+
+The repository root is a virtual Cargo workspace with three packages:
+
+- `crates/rustred-core` is package and library `rustred`; it owns exact
+  algebra, families, normalized input, identities, sectors, tensor and foundry
+  services, sealed artifacts, deterministic reduction, and generic campaign
+  primitives.
+- `crates/rustred-app` owns shared application operations and the `rustred`
+  CLI. Transport schemas and presentation stay here rather than in the
+  mathematical core. Library consumers can set `default-features = false`
+  to load/apply saved programs without the CLI's terminal-UI dependencies;
+  the default `cli` feature and executable behavior are unchanged.
+- `crates/rustred-python` is a thin PyO3 adapter over `rustred-app`. Python
+  users write `import rustred`; `rustred._rustred` is a private extension
+  detail, and top-level `import _rustred` is intentionally unsupported.
+
+The registry-shaped Symbolica 3.0.0 development dependency is patched to
+`vendor/symbolica`, whose submodule update branch is `dev` and whose parent
+repository pin selects an exact commit. It is built with the `integer-gmp` and
+`float-mpfr` backends. Symbolica is the sole production CAS, including its
+native finite-field and rational-polynomial reconstruction APIs used by the
+opt-in SpIReD semi-numerical route. RustRed never
+invokes FORM, Mathematica, SymPy, or authored recurrence tables.
+
+## Development
+
+Use the pinned Nix environment. Licensed or multicore Symbolica operations
+need `SYMBOLICA_LICENSE` set before the first Symbolica object or worker pool is
+created.
+
+```bash
+nix develop --command cargo fmt --all -- --check
+SYMBOLICA_LICENSE=... nix develop --command cargo check --workspace --all-targets
+SYMBOLICA_LICENSE=... nix develop --command cargo test --workspace --all-targets
+```
+
+Inspect the current CLI contract with:
+
+```bash
+nix develop --command cargo run -p rustred-app --bin rustred -- --help
+```
+
+The root `pyproject.toml` builds the Python distribution. The public smoke test
+is:
+
+```bash
+uv venv .venv
+source .venv/bin/activate
+maturin develop --features extension-module
+python -c 'import rustred'
+```
+
+### Selected saved-rule circuit diagnostics
+
+`SourcePortAudit::replay_sector_rule_circuits` optionally retains the exact
+ordinary-IBP weights already recovered by native source replay, together with
+their declared coordinate case, exceptions, denominator conditions and actual
+raw pivot/recentering. The existing count-only replay APIs remain unchanged.
+The returned batch borrows one audit context and its authenticated zero-sector
+evidence; no coefficient strings are parsed and no new CAS implementation is
+involved. Affine cases or affine exclusions currently return a typed refusal.
+
+These are identities on the **declared guarded domain, modulo authenticated
+zero sectors**—not unrestricted polynomial identities, descent proofs or closing
+artifacts. Copied weights are proposals only: composition must retain the full
+original-source product and pass the existing exact admission pipeline anew.
+In particular, canonical source offsets already include the recovered recenter;
+the separately reported raw recenter must not be applied a second time.
+
+For a saved native candidate bundle, the scoped application adapter is
+`rustred_app::with_replayed_candidate_rule_circuits`. A fallible consumer can
+return `Ok(analyze(batch))` with its own `Result<T, E>` as the owned result,
+keeping consumer errors separate from native replay errors. The input-driven
+diagnostic example accepts a sector and strictly increasing, sector-local rule ordinals:
+
+```bash
+nix develop --command cargo run --release --locked -p rustred-app \
+  --example replay_saved_rule_circuits -- request.json
+```
+
+For example, `request.json` for the first rule of a one-denominator candidate is:
+
+```json
+{
+  "bundle": "owner.candidates.rrbin",
+  "sector": [true],
+  "ordinals": [0],
+  "max_bundle_bytes": 134217728,
+  "max_total_coefficient_bytes": 268435456,
+  "max_collection_entries": 1000000,
+  "max_coefficient_bytes": 16777216,
+  "max_report_bytes": 1048576,
+  "retention": {
+    "max_rules": 2,
+    "max_source_entries": 4096,
+    "max_rhs_terms": 4096,
+    "max_conditions": 65536,
+    "max_coefficient_terms": 1000000,
+    "max_coefficient_clone_owned_bytes": 67108864,
+    "max_coordinate_cells": 1000000
+  }
+}
+```
+
+Use the sector and ordinals of your own bundle; they are runtime inputs, not
+compiled topology choices. Successful output reports
+`REPLAYED_DECLARED_DOMAIN_MODULO_AUTHENTICATED_ZEROS`, source offsets, case boxes,
+guard counts and replay time. It never installs a rule or writes an artifact.
+Retention limits are cumulative, pre-copy bounds on the retained observations,
+not replay scratch or arbitrary callback memory. `max_report_bytes` limits
+emitted JSON, not its construction; apply an external process-memory/time guard
+when examining large inputs.
+
+### Preferred saved-owner programs (research opt-in)
+
+Fresh saved-owner campaigns can try a different, trusted generated program
+before the original rules, while keeping **exactly the original terminal set**.
+Add the following optional field to the existing selection JSON; paths use
+the same owner-base directory as the baseline payloads:
+
+```json
+"preferred_owner_programs": [
+  {
+    "path": "preferred/alternative.rrbin",
+    "bytes": 12345,
+    "owner_mask": "111",
+    "residual_policy": "defer-to-baseline"
+  }
+]
+```
+
+Use the actual payload size and original-coordinate mask. Each preference must
+match an existing owner, family, saved root, mathematical order and generation
+scope. Discovery visitation strategies may differ. Duplicate preferences and
+preferences colliding with a repair overlay on the same owner are rejected.
+Other owners' repair overlays remain unchanged.
+
+Dispatch first recognizes baseline terminals. Preferred-only finite residuals
+are explicit holes that skip the entire preferred program, even when a formula
+overlaps them; they are **not additional masters**. Elsewhere preferred rules
+run first, with baseline fallback only for native `Uncovered`. A denominator
+exclusion is ordinary inapplicability; actual algebra, source-condition,
+descent or resource errors still propagate. Symbolic domains are partitioned
+exactly around the finite holes rather than approximated by a larger box.
+
+The Rust entry points are
+`CandidateOwnerPrograms::try_new_with_preferences` and
+`rustred_app::load_generated_candidate_owners_with_preferences`.
+The existing campaign CLI and Python staging use the same selection field;
+omitting it preserves the original path. Both immutable payloads and the
+explicit composition policy are bound into fresh checkpoints and cold loading.
+This is **not** an in-place update of an existing campaign, a new source proof,
+or a closure guarantee. Rule-local diagnostic APIs still inspect individual
+formulas and do not establish composed-program applicability. Performance
+benefits require matched full-worklist experiments, not rule-count comparisons.
+
+## Durable closing artifacts
+
+The semantic generation selectors are `unit-mass-vacuum-k1` for the canonical
+one-loop family and `unit-mass-vacuum-k3` for the equal-mass two-loop sunset.
+They are family selectors, not Vakint topology names. Generate a native binary
+program, then inspect or apply those bytes. Coefficient values and proof payloads
+are deterministic; serialized Symbolica State can include ambient registry
+entries, so byte-for-byte identity across different process histories is not
+promised. Load only trusted generated native files; exact source replay and
+closure checks still run at the mathematical admission boundary:
+
+```bash
+rustred campaign generate \
+  --family unit-mass-vacuum-k1 \
+  --output one_loop.rr
+
+rustred campaign inspect \
+  --artifact one_loop.rr \
+  --output one_loop.inspect.toml
+
+rustred campaign reduce \
+  --artifact one_loop.rr \
+  --powers 3 \
+  --output one_loop.I3.toml
+
+rustred campaign generate \
+  --family unit-mass-vacuum-k3 \
+  --output two_loop_sunset.rr
+
+rustred campaign reduce \
+  --artifact two_loop_sunset.rr \
+  --powers 2,2,1 \
+  --output two_loop_sunset.I221.toml
+```
+
+For the complete three-loop family, supply the external K6 family to the
+generic CLI, or use the public Python generation API:
+
+```bash
+rustred family-close --input examples/input/three_loop_k6.toml \
+  --n-cores 6 --progress --output k6.rr
+rustred campaign inspect --artifact k6.rr --output k6.inspect.toml
+rustred campaign reduce --artifact k6.rr --powers 2,1,1,1,1,1
+
+python examples/python/k6_closing_artifact.py another-k6.rr --generate --workers 6
+```
+
+Expected generation output includes 623 generated rules, 5,640 refined cells,
+38 finite terminals and 26 zero sectors. The output
+path must be new. The generic CLI and Python artifact readers apply these
+bytes without rerunning rule discovery; cold loading regenerates ordinary IBP
+rows and verifies the saved combinations. No dedicated family selector or
+specialized generator binary is needed. The identifier-safe example family
+label is part of its new artifact identity; existing Vakint assets are migrated
+atomically with their loader and producer pin, not silently replaced.
+See the [CLI](examples/cli/README.md#completed-k6-artifact),
+[Python](examples/python/README.md), and
+[Rust-library](examples/rust/README.md#complete-k6-closing-artifact) examples.
+
+Artifact input and output also support standard streams. For example, this
+inspects freshly generated bytes without a file:
+
+```bash
+rustred campaign generate --family unit-mass-vacuum-k1 \
+  | rustred campaign inspect --artifact -
+```
+
+For target `I(3)`, reduction returns the typed master key `[1]`, exact
+unit-mass coefficient
+`(-6*rustred::{}::d+8+rustred::{}::d^2)*1/8`, and
+`common_mass_squared_power = "-2"`; hence the complete coefficient is the
+reported exact coefficient times `(mass_squared)^(-2)`. The power is a decimal
+string in TOML because the generic homogeneity API uses a signed 128-bit
+exponent while TOML integers are restricted to signed 64-bit values.
+
+The Python surface uses immutable `bytes` directly:
+
+```python
+import rustred
+
+generated = rustred.generate_closing_artifact(
+    family=rustred.ClosingFamily.UNIT_MASS_VACUUM_K1,
+)
+artifact = generated.artifact
+inspection = rustred.inspect_closing_artifact(artifact)
+reduction = rustred.reduce_with_closing_artifact(artifact, [3])
+
+term = reduction.terms[0]
+assert term.master_powers == [1]
+assert term.common_mass_squared_power == -2
+```
+
+Loading a trusted generated certified program checks its mathematical contents
+and exactly replays its source identities once; recursive application then uses
+the sealed owner without repeating those checks in the hot path. The native
+Symbolica decoder is not an untrusted-file sandbox. The completed `K = 6`
+example uses that same generation, cold-loading and application path.
+
+## Reproducing Vakint's one- through four-loop rule packages
+
+[`examples/python/generate_vakint_artifacts.py`](examples/python/generate_vakint_artifacts.py)
+steers fresh native IBP generation from the input families used by Vakint. It
+does not copy pre-existing rules. First initialize the patched dependency as
+described in [Symbolica 3.0 development checkout](#symbolica-30-development-checkout).
+Build the release CLI and its small public-API terminal-normalization helper
+once, then run without recompiling:
+
+```sh
+mkdir -p TMP
+export TMPDIR="$PWD/TMP" TMP="$PWD/TMP" TEMP="$PWD/TMP"
+nix develop --command cargo build --release --locked -p rustred-app \
+  --bin rustred --example normalize_candidate_terminals
+nix develop --command python examples/python/generate_vakint_artifacts.py \
+  --loops 1 2 3 --workers 6 --output-directory TMP/vakint-lower-generated --execute
+nix develop --command python examples/python/generate_vakint_artifacts.py \
+  --loops 4 --workers 6 --output-directory TMP/vakint-four-generated --execute
+```
+
+Set `SYMBOLICA_LICENSE` in the environment first. Output directories must be
+new. Without `--execute`, the script prints its plan only. Four-loop generation
+is unrestricted in numerator rank, uses all sectors with physical propagators
+and nonpositive auxiliary indices, and can be substantially more expensive.
+Worker count does not impose a RAM limit.
+
+The lower-loop outputs are `unit_mass_vacuum_k{1,3,6}.rrbin`, plus fresh-process
+inspection and sample-reduction reports. Four-loop outputs are compressed native
+`{h,fg,bmw,x}.candidates.rrbin.gz` programs and `.rrnorm.bin` terminal-normalization
+plans. These are the same native package kinds consumed by Vakint, not the
+bounded starting-domain campaign format or a claim of unrestricted four-loop
+closure certification.
+
+Master **values** are a separate, precomputed input: optionally supply Vakint's
+four-loop directory with `--catalog-directory` to validate exact output-key
+coverage and copy its catalog alongside the generated rules. No FORM or master
+evaluation runs here. See the [complete example instructions](examples/python/README.md#generating-vakints-rule-packages)
+for filenames, scope, reference comparisons and expected output.
+
+## One- and two-loop parametric-IBP examples
+
+The [`examples/`](examples/) tree contains complete, runnable versions of the
+same closing-artifact calculation through the Rust library, CLI, and Python
+APIs. The registered `K = 3` family is the unit-mass presentation of
+
+```text
+D1 = k1^2 - 1
+D2 = k2^2 - 1
+D3 = (k1 + k2)^2 - 1.
+```
+
+RustRed generates all four ordinary sources, derives five guarded rule cells,
+proves exact `S3` routing and four scaleless zero sectors, and factorizes the
+two-line face through the immutable `K = 1` artifact. The two explicit masters
+are `I(1,1,1)` and `I(0,1,1)`. An arbitrary common `m^2` is restored after
+unit-mass reduction by the reported homogeneity power.
+
+The shortest complete campaign is the one-loop Python example. It generates
+and cold-loads the durable `K = 1` artifact, then reduces `I(3)` to `I(1)`:
+
+```bash
+uv venv .venv
+. .venv/bin/activate
+maturin develop --release --features extension-module
+python examples/python/one_loop_single_mass_vacuum.py
+```
+
+Its generation TOML reports one ordinary source and one guarded rule. The
+cold-loaded artifact has no uncovered branch; the reduction TOML reports
+master `[1]` with `common_mass_squared_power = -2`.
+
+The Rust example calls the public `rustred` crate directly:
+
+```bash
+cargo run --locked -p rustred-app --example two-loop-single-mass-vacuum
+```
+
+Its defining output is:
+
+```text
+algorithm = rustred.generated.two-loop-unit-mass-sunset.v1
+ordinary_sources = 4
+closing_rule_cells = 5
+source = ordinary-ibp:0:0
+source = ordinary-ibp:0:1
+source = ordinary-ibp:1:0
+source = ordinary-ibp:1:1
+target = [2, 2, 1]
+master [0, 1, 1]: ... mass_squared_power = -3
+master [1, 1, 1]: ... mass_squared_power = -2
+```
+
+The CLI runner generates durable bytes, authenticates them, and reduces
+`I(2,2,1)`:
+
+```bash
+sh examples/cli/run.sh
+```
+
+Its inspection TOML reports:
+
+```toml
+[artifact]
+algorithm_id = "rustred.generated.two-loop-unit-mass-sunset.v1"
+arity = 3
+
+[validation]
+source_rows = 4
+guarded_rules = 5
+master_terminals = 2
+zero_sector_terminals = 4
+```
+
+[`examples/python/two_loop_single_mass_vacuum.py`](examples/python/two_loop_single_mass_vacuum.py)
+uses the public package name `import rustred`, checks the complete five-cell
+artifact, and verifies both exact master keys and mass powers:
+
+```bash
+uv venv .venv
+. .venv/bin/activate
+maturin develop --release --features extension-module
+python examples/python/two_loop_single_mass_vacuum.py
+```
+
+## Vakint integration
+
+Vakint development occurs in the independent GammaLoop repository on branch
+`vakint_rustred`. The opt-in scalar API boundary
+`EvaluationMethod::RustRed(RustRedEvaluationOptions)` and
+`EvaluationOrder::rustred_only()` now support the one-loop tadpole, two-loop
+sunset, and its pinch. The backend consumes Vakint's existing topology match
+and simultaneous routing witness, applies shipped RustRed artifacts, returns
+exact coefficients in Vakint's existing MATAD master basis, and optionally
+reuses its pure-Rust master evaluations. It does not rematch graphs, regenerate
+artifacts, invoke FORM, or fall back to another scalar reducer.
+
+Vakint's public API conventions, defaults, and existing FORM-backed methods
+remain backward-compatible. Legacy integral notation remains accepted, and
+any newer FeynKit/RustRed spelling is additive and tested against its legacy
+equivalent; obsolete RustRed artifact schemas deliberately do not remain
+compatible. Tensor-bearing RustRed acceptance inputs explicitly use the FORM-less
+FeynKit tensor prepass before the FORM-less RustRed scalar tail. Dedicated
+invalid-FORM-path tests must cover that complete stack, while AlphaLoop and
+MATAD remain offline comparison oracles executed with the separately built
+official FORM5 binary. Broad raw-master and substituted-result
+tests agree with MATAD through the previously validated two-loop baseline; the
+post-rebase acceptance matrix is being revalidated. RustRed's experimental
+tensor code is frozen and is not an active Stage 1 dependency.
+
+Production `K = 1` and `K = 3` artifacts are generated once, checked into and
+shipped with Vakint, and loaded rather than rediscovered during evaluation.
+They are validated once at lazy load and reused thereafter. RustRed owns
+guarded rule application and typed master keys; Vakint owns topology matching,
+canonical routing, steering, normalization, presentation, and its existing
+master values.
+
+## Documentation
+
+[`GOAL.md`](GOAL.md) is the authoritative objective and execution roadmap.
+Stable design documents are:
+
+- [architecture and ownership](docs/architecture.md);
+- [Symbolica and exact algebra](docs/algebra.md);
+- [frozen tensor boundary and Vakint sequencing](docs/tensor.md);
+- [closing-rule foundry target](docs/foundry.md);
+- [application, Python, and Vakint interfaces](docs/interfaces.md);
+- [validation and oracle ladder](docs/validation.md);
+- [rule-generation versus independent-certification timing](docs/generation_and_certification.md);
+- [semi-numerical proof alternatives and four-loop certificate experiments](docs/research/seminumerical_proof_systems.md);
+- [LiteRed2 semantic reference](docs/references/litered2.md);
+- [parametric-IBP breakthrough research](docs/research/parametric_ibp_breakthrough.md);
+- [independent breakthrough viability audit](docs/research/parametric_ibp_breakthrough_audit.md);
+- [primary-literature synthesis through 2026](docs/research/parametric_ibp_literature_2026.md);
+- [finite-frame breakthrough candidates](docs/research/finite_frame_breakthrough_2026.md);
+- [high-loop proposal experiments and falsification gates](docs/research/high_loop_proposal_experiments_2026.md);
+- [Symbolica finite-frame feasibility audit](docs/research/symbolica_finite_frame_feasibility.md);
+- [Symbolica API audit for the SpIReD execution lane](docs/research/symbolica_spired_api_audit.md);
+- [nonminimal-terminal viability audit](docs/research/nonminimal_terminal_viability_audit_2026.md);
+- [independent six-loop candidate shootout](docs/research/six_loop_candidate_shootout_2026.md);
+- [independent six-loop closure scaling audit](docs/research/six_loop_scaling_audit_2026.md);
+- [universal nonminimal closure review](docs/research/universal_nonminimal_closure_review_2026.md);
+- [graph-orbit and Baikov source-compression audit](docs/research/graph_orbit_baikov_source_compression_2026.md);
+- [executable K6 breakthrough prototype specification](docs/research/k6_breakthrough_prototype_spec_2026.md);
+- [six-loop algorithm and implementation update](docs/research/six_loop_algorithm_update_2026.md);
+- [six-loop execution runbook](docs/research/six_loop_execution_runbook_2026.md);
+- [dual-obstruction source-discovery design and evidence boundary](docs/research/dual_obstruction_source_discovery_2026.md);
+- [Vakint K6 oracle and terminal-budget audit](docs/research/vakint_k6_oracle.md);
+- [blind-domain-guided Janet closure synthesis](docs/research/blind_domain_janet_closure_2026.md); and
+- [current CLI contract](docs/CLI.md).
+
+Local LiteRed2, GammaLoop/Vakint, FORM, and other reference checkouts live only
+under ignored `FOR_REFERENCE_ONLY_DO_NOT_PUSH/`. They must never enter RustRed
+history. GammaLoop inside that tree is a separate Git repository.
+
+RustRed is licensed under the [MIT License](LICENSE).

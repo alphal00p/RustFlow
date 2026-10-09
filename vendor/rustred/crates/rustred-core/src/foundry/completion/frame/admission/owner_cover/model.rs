@@ -1,0 +1,312 @@
+//! Sealed owner inputs, deterministic owners, and typed cover outcomes.
+
+use std::sync::Arc;
+
+use crate::algebra::IndexedCoefficientContext;
+use crate::family::IntegralKey;
+use crate::foundry::completion::guard::decision::GuardDecisionEvaluationLimits;
+use crate::foundry::completion::stratum::{ImmutableOwnerSnapshotId, TargetColumnPartition};
+use crate::foundry::completion::{LatticeBox, LatticePoint, SectorChart, UncoveredPartition};
+use crate::sector::{Mask, OrderingPolicy};
+
+use super::super::semantic::{
+    ExactCircuitSemanticCandidate, ExactCircuitSemanticDag, ExactCircuitSemanticSelection,
+};
+use super::{ExactCircuitOuterExtensionWitness, ExactCircuitOwnerCoverError};
+
+/// One semantic DAG paired with the exact partition against which it was
+/// compiled. The cover compiler performs the cold join before retaining it.
+#[derive(Debug)]
+pub(crate) struct ExactCircuitOwnerInput<'partition, 'frame> {
+    pub(super) partition: &'partition TargetColumnPartition<'frame>,
+    pub(super) outer_extension: ExactCircuitOuterExtensionWitness<'frame>,
+}
+
+impl<'partition, 'frame> ExactCircuitOwnerInput<'partition, 'frame> {
+    pub(crate) const fn new(
+        partition: &'partition TargetColumnPartition<'frame>,
+        outer_extension: ExactCircuitOuterExtensionWitness<'frame>,
+    ) -> Self {
+        Self {
+            partition,
+            outer_extension,
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub(crate) struct ExactCircuitOwnerId(pub(super) usize);
+
+impl ExactCircuitOwnerId {
+    pub(crate) const fn ordinal(self) -> usize {
+        self.0
+    }
+}
+
+/// One canonically ordered exact-rule region.
+///
+/// `guard_total` is compatibility telemetry: it records that at least one
+/// candidate is applicable throughout the region's intersection with the
+/// retained closure carrier. Actual geometric coverage is compiled from the
+/// exact union of every candidate's guard-free boxes, so this bit is never
+/// closure authority.
+#[derive(Debug)]
+pub(crate) struct ExactCircuitOwner {
+    pub(super) id: ExactCircuitOwnerId,
+    pub(super) leading: LatticePoint,
+    pub(super) region: LatticeBox,
+    pub(super) semantic: Arc<ExactCircuitSemanticDag>,
+    pub(super) guard_total: bool,
+}
+
+impl ExactCircuitOwner {
+    pub(crate) const fn id(&self) -> ExactCircuitOwnerId {
+        self.id
+    }
+
+    pub(crate) const fn leading(&self) -> &LatticePoint {
+        &self.leading
+    }
+
+    pub(crate) const fn region(&self) -> &LatticeBox {
+        &self.region
+    }
+
+    pub(crate) const fn is_guard_total(&self) -> bool {
+        self.guard_total
+    }
+
+    /// Retain the exact semantic identity used to pair this canonically
+    /// ordered proof owner with its separately owned executable payload.
+    pub(crate) const fn semantic(&self) -> &Arc<ExactCircuitSemanticDag> {
+        &self.semantic
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash, PartialOrd, Ord)]
+pub(crate) struct ExactFiniteTerminalOwnerId(pub(super) usize);
+
+/// One explicitly declared finite terminal. Merely being in a finite
+/// complement never constructs this value.
+#[derive(Debug)]
+pub(crate) struct ExactFiniteTerminalOwner {
+    pub(super) id: ExactFiniteTerminalOwnerId,
+    pub(super) integral: IntegralKey,
+    pub(super) point: LatticePoint,
+}
+
+impl ExactFiniteTerminalOwner {
+    pub(crate) const fn integral(&self) -> &IntegralKey {
+        &self.integral
+    }
+
+    pub(crate) const fn point(&self) -> &LatticePoint {
+        &self.point
+    }
+}
+
+/// Exact descending ownership found by evaluating a partial guard DAG at one
+/// enumerated point of an otherwise finite complement.
+#[derive(Debug)]
+#[allow(dead_code)] // Retained proof view awaits the staged foundry orchestrator.
+pub(crate) struct ExactFinitePointOwner {
+    pub(super) point: LatticePoint,
+    pub(super) owner: ExactCircuitOwnerId,
+    pub(super) candidate_ordinal: usize,
+    pub(super) circuit: Arc<crate::foundry::completion::frame::exact::ExactTargetCircuit>,
+}
+
+#[allow(dead_code)] // Retained proof view awaits the staged foundry orchestrator.
+impl ExactFinitePointOwner {
+    pub(crate) const fn point(&self) -> &LatticePoint {
+        &self.point
+    }
+
+    pub(crate) const fn owner(&self) -> ExactCircuitOwnerId {
+        self.owner
+    }
+
+    pub(crate) const fn candidate_ordinal(&self) -> usize {
+        self.candidate_ordinal
+    }
+
+    pub(crate) const fn circuit(
+        &self,
+    ) -> &Arc<crate::foundry::completion::frame::exact::ExactTargetCircuit> {
+        &self.circuit
+    }
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum ExactOwnerCoverObstructionKind {
+    /// Even the complete guard-blind owner-region union leaves an unbounded
+    /// geometric residue.
+    NonFinite,
+    /// Guard-blind geometry is finite, but at least one required unbounded
+    /// region reaches a semantic `Incomplete` branch.
+    GuardIncomplete,
+    /// The exact residue is finite, but one or more points lack an explicit
+    /// terminal declaration and any selected exact circuit.
+    FiniteTerminalOwnership,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub(crate) enum ExactOwnerCoverStatus {
+    Closed,
+    Incomplete(ExactOwnerCoverObstructionKind),
+}
+
+#[derive(Clone, Copy, Debug)]
+pub(crate) enum ExactOwnerCoverSelection<'a> {
+    Descending {
+        owner: &'a ExactCircuitOwner,
+        candidate: &'a ExactCircuitSemanticCandidate,
+    },
+    Terminal(&'a ExactFiniteTerminalOwner),
+    Incomplete,
+}
+
+/// One scope-bound deterministic cover and its exact finite/nonfinite verdict.
+#[derive(Debug)]
+#[allow(dead_code)] // Scope payload is publication evidence for the next stage.
+pub(crate) struct ExactCircuitOwnerCover {
+    pub(super) family_fingerprint: Arc<String>,
+    pub(super) context_fingerprint: Arc<String>,
+    pub(super) sector: Mask,
+    pub(super) ordering: OrderingPolicy,
+    pub(super) owner_snapshot_id: ImmutableOwnerSnapshotId,
+    /// Finite root universe against which `status` and `uncovered` are exact.
+    pub(super) closure_carrier: LatticeBox,
+    pub(super) owners: Box<[ExactCircuitOwner]>,
+    pub(super) terminals: Box<[ExactFiniteTerminalOwner]>,
+    pub(super) finite_point_owners: Box<[ExactFinitePointOwner]>,
+    pub(super) uncovered: UncoveredPartition,
+    pub(super) missing_terminals: Box<[LatticePoint]>,
+    pub(super) guard_incomplete_owners: Box<[ExactCircuitOwnerId]>,
+    pub(super) finite_complement_points: usize,
+    pub(super) point_owner_probes: usize,
+    pub(super) compiled_uncovered_boxes: usize,
+    pub(super) compiled_uncovered_box_coordinate_cells: usize,
+    pub(super) compiled_split_operations: usize,
+    pub(super) status: ExactOwnerCoverStatus,
+}
+
+#[allow(dead_code)] // Scope accessors are consumed by the next staged boundary.
+impl ExactCircuitOwnerCover {
+    pub(crate) const fn status(&self) -> ExactOwnerCoverStatus {
+        self.status
+    }
+
+    pub(crate) fn family_fingerprint(&self) -> &str {
+        self.family_fingerprint.as_str()
+    }
+
+    pub(crate) fn context_fingerprint(&self) -> &str {
+        self.context_fingerprint.as_str()
+    }
+
+    pub(crate) const fn sector(&self) -> &Mask {
+        &self.sector
+    }
+
+    pub(crate) fn ordering(&self) -> OrderingPolicy {
+        self.ordering.clone()
+    }
+
+    pub(crate) const fn owner_snapshot_id(&self) -> &ImmutableOwnerSnapshotId {
+        &self.owner_snapshot_id
+    }
+
+    pub(crate) const fn closure_carrier(&self) -> &LatticeBox {
+        &self.closure_carrier
+    }
+
+    pub(crate) fn owners(&self) -> &[ExactCircuitOwner] {
+        &self.owners
+    }
+
+    pub(crate) fn terminals(&self) -> &[ExactFiniteTerminalOwner] {
+        &self.terminals
+    }
+
+    pub(crate) fn finite_point_owners(&self) -> &[ExactFinitePointOwner] {
+        &self.finite_point_owners
+    }
+
+    pub(crate) const fn uncovered_partition(&self) -> &UncoveredPartition {
+        &self.uncovered
+    }
+
+    pub(crate) fn missing_terminals(&self) -> &[LatticePoint] {
+        &self.missing_terminals
+    }
+
+    pub(crate) fn guard_incomplete_owners(&self) -> &[ExactCircuitOwnerId] {
+        &self.guard_incomplete_owners
+    }
+
+    /// Exact finite-complement cardinality visited by this compilation. Zero
+    /// denotes an unbounded complement, not a sampled estimate.
+    pub(crate) const fn finite_complement_point_count(&self) -> usize {
+        self.finite_complement_points
+    }
+
+    /// Exact number of semantic owner selections attempted for explicit
+    /// terminal disjointness and finite-complement ownership.
+    pub(crate) const fn point_owner_probe_count(&self) -> usize {
+        self.point_owner_probes
+    }
+
+    pub(crate) const fn compiled_uncovered_box_count(&self) -> usize {
+        self.compiled_uncovered_boxes
+    }
+
+    pub(crate) const fn compiled_uncovered_box_coordinate_cells(&self) -> usize {
+        self.compiled_uncovered_box_coordinate_cells
+    }
+
+    pub(crate) const fn compiled_split_operation_count(&self) -> usize {
+        self.compiled_split_operations
+    }
+
+    /// Select the first exact applicable owner at one target key. Explicit
+    /// terminals are consulted only after every overlapping rule declined.
+    pub(crate) fn try_select_at(
+        &self,
+        context: &IndexedCoefficientContext,
+        target: &IntegralKey,
+        limits: GuardDecisionEvaluationLimits,
+    ) -> Result<ExactOwnerCoverSelection<'_>, ExactCircuitOwnerCoverError> {
+        if context.fingerprint() != self.context_fingerprint() {
+            return Err(ExactCircuitOwnerCoverError::WrongContext);
+        }
+        let point = SectorChart::new(self.sector.clone()).to_lattice(target)?;
+        if !self.closure_carrier.contains(&point) {
+            return Ok(ExactOwnerCoverSelection::Incomplete);
+        }
+        for owner in &self.owners {
+            if !owner.region().contains(&point) {
+                continue;
+            }
+            match owner
+                .semantic
+                .try_select_at(context, target.powers(), limits)
+                .map_err(|error| ExactCircuitOwnerCoverError::SemanticSelection {
+                    owner: owner.id.ordinal(),
+                    error,
+                })? {
+                ExactCircuitSemanticSelection::Selected(candidate) => {
+                    return Ok(ExactOwnerCoverSelection::Descending { owner, candidate });
+                }
+                ExactCircuitSemanticSelection::Incomplete => {}
+            }
+        }
+        match self
+            .terminals
+            .binary_search_by(|terminal| terminal.point.cmp(&point))
+        {
+            Ok(ordinal) => Ok(ExactOwnerCoverSelection::Terminal(&self.terminals[ordinal])),
+            Err(_) => Ok(ExactOwnerCoverSelection::Incomplete),
+        }
+    }
+}

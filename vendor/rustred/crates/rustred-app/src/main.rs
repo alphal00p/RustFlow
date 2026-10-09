@@ -1,0 +1,19 @@
+// N3 (opt-in `mimalloc` feature): mimalloc serves Rust allocations directly;
+// its `override` feature also replaces the C malloc family for the whole
+// process (GMP/MPFR included). Off by default.
+#[cfg(feature = "mimalloc")]
+#[global_allocator]
+static GLOBAL: mimalloc::MiMalloc = mimalloc::MiMalloc;
+
+fn main() {
+    // This executes before RustRed initializes Symbolica or starts worker
+    // threads. Suppressing Symbolica's informational banner is required by
+    // the CLI contract that successful stdout contains only protocol output
+    // (canonical TOML or durable artifact bytes).
+    if std::env::var_os("SYMBOLICA_HIDE_BANNER").is_none() {
+        // SAFETY: `main` has not spawned threads and no RustRed/Symbolica code
+        // has run, so no concurrent environment access exists here.
+        unsafe { std::env::set_var("SYMBOLICA_HIDE_BANNER", "1") };
+    }
+    std::process::exit(rustred_app::cli_main_entry());
+}

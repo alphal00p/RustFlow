@@ -1,0 +1,442 @@
+# Architecture
+
+[`GOAL.md`](../GOAL.md) is the project objective and sequencing authority.
+This document describes the live RustRed ownership boundaries. It separates
+implemented services from planned product domains so that a directory name or
+roadmap item is never mistaken for a capability claim.
+
+## Current capability boundary
+
+The current producer is the generic [SpIRed port](spired_port.md), with sparse
+exact and Symbolica rational-reconstruction routes. Its exact authority path
+has published K1/K3/K6 vacuum artifacts; its saved four-loop H/X/BMW/FG programs
+remain explicitly uncertified candidates. Candidate and certified programs share the native
+Symbolica Atom/State transport but not mathematical authority. Vakint's public
+FORM-less path passes the recorded through-three-loop selection and all 31
+four-loop reference/pinch comparisons. Numerical acceptance is not a substitute
+for unrestricted four-loop closure certification.
+
+The optional total-excess path publishes bounded owners only after
+complete source replay, scoped lowering, exact actual-cell coverage and every
+live RHS successor check. Entry scope and immutable descendant degrees belong
+to `ClosedArtifact`; the existing reducer checks entry scope before cache
+access or scalar mutation. A separate `BoundedCertified` native kind requires
+that scope and reconstructs its proof on cold loading. Bounded owners cannot
+become unrestricted vacuum capability. Rust, CLI and public Python steer the
+same saved-candidate request, defaulting to the unchanged unrestricted path.
+Their explicit total-excess argument changes the entry promise, not the
+proof-work allowance or owner authority. The core/native/app/Python bridge and
+the separate frontend release gates pass, but the full saved FG E30
+default-policy run exhausts retained successor
+work before publication. This does not certify the shipped four-loop programs.
+See the [bounded-owner contract](research/rank_bounded_certification.md) and
+[measured acceptance boundary](research/rank30_certification_audit_2026-09-17.md).
+
+Exact-materialization progress projects existing scalar events, including
+source-frame dimensions and sparse U/L counts, without copying expressions or
+changing solver work. The CLI retains one small frame record per live
+`(manifest ordinal, sector)` job, updates it before the unchanged shared 100 ms
+throttle, and invalidates it on phase changes or job completion. Disabled
+observation remains lazy. Progress is sampled: no refresh occurs within a long
+native call lacking callbacks, and frame numbers are run-local locators, not
+exact-input identities. Public Rust stage variants are source-visible, but no
+persisted schema changes. See the [verified follow-up](research/rank30_certification_audit_2026-09-17.md#frontend-and-progress-follow-up)
+and [exact-lift profiling limits](research/five_loop_exact_lift_profile.md).
+
+`solver::CandidateReducer` owns the candidate rule application, mass restoration
+and memoized terminal decompositions; Vakint supplies routing and offline
+terminal evaluation. `reduction::terminal_normalization` provides a separately
+verified, opt-in plan for exactly equivalent terminal products and full-rank
+vacuum supports with one linear momentum dependence, preserving raw catalog
+keys. Native Symbolica matrix operations propose their routings; the existing
+exact momentum-map verifier establishes every alias before installation.
+See [the normalization contract](research/terminal_normalization.md).
+The separately selected `vacuum_parametric_equivalences` factory admits
+positive-power unit-mass vacuum supports and compares their full restricted
+native Symanzik `U` polynomials under power-preserving parameter permutations.
+Symbolica graph canonicalization proposes a permutation; exact polynomial and
+variable-context replay proves it. `TerminalAliasWitness` distinguishes these
+sealed parameter-integral proofs from momentum maps. Neither kind creates a
+new terminal or claims master independence. The parameter lane's core tests
+and saved-program census/application checks are validated. Its U-only Vakint
+rollout (`71e01122b`, RustRed `2b50267c`) is now superseded by the weighted
+normalization rollout below; the reusable core factory remains available.
+
+`TerminalNormalizationPlan::vacuum_quadratic_numerators` extends that service
+to exact weighted decompositions for structurally admitted quadratic numerators.
+Its rank/circuit conditions are independent of loop count and topology name;
+Symbolica owns the matrix arithmetic and existing witnesses prove each map.
+Vakint `fdfb0e43`, pinning RustRed `8ad62b96`, ships four native sidecars with
+**74 positive family-local output representatives**, preserving all 1,155 raw
+terminal declarations and offline catalog entries. All 83 lower-loop checks,
+15 four-loop references and 16 pinch comparisons pass, as do the focused
+loading and public numerical benchmark gates. This is a delivered finite
+output convention, not a minimal basis or a four-loop closure certificate.
+See [the weighted contract and measured rollout](research/weighted_terminal_normalization.md).
+
+`persistence::ExactTerminalCatalog` provides the same native Atom/State strategy
+for exact offline values attached to typed integral keys. Its distinct payload
+kind carries no IBP authority; downstream consumers still verify their declared
+key sets. The codec, exact asset conversion and pinned Vakint runtime rollout
+are validated: the I/O rollout `909164121` used RustRed `d51721b6`, with the 83 lower-loop
+and 31 four-loop numerical checks passing. Aliases were not enabled for that
+I/O migration gate. The separate Vakint rollout `8e91d32f`, pinning RustRed
+`f91c47ab`, prepared the routing plan once per four-loop program and passed
+the same numerical matrix. These earlier rollouts are superseded by the
+weighted pin above. Core factories remain opt-in; Vakint steers the
+RustRed implementation without duplicating proof or application logic.
+
+### Foundry mathematical spine
+
+RustRed currently provides a topology-neutral mathematical spine for:
+
+- compiling compact, structured-text, and caller-owned Symbolica input into a
+  normalized project;
+- lowering a complete affine scalar-product basis into an authenticated
+  integral family;
+- automatic ISP completion and construction of `U`, `F`, and
+  Lee--Pomeransky/Symanzik data;
+- exact ordinary parametric IBP rows and separate Lorentz-invariance rows over
+  symbolic integral indices;
+- authenticated physical/auxiliary family presentations and sealed semantic
+  admission for a common-scale vacuum lane;
+- bounded scalar, odd-rank, and global rank-two vacuum tensor projection;
+- separate, artifact-bound lowering of already scalarized polynomial vacuum
+  numerators onto shifted integral keys, with exact affine coefficients and
+  explicit common-mass powers;
+- concrete-anchor and fixed-sector parametric foundry boundaries that derive
+  guarded strictly descending rows through Symbolica's sparse reducer; the
+  latter eliminates directly over `K(n)` and requires exact symbolic replay,
+  uniform descent, and exact concrete base-field replay, while both boundaries
+  can target a requested pivot through guarded deterministic RREF; the
+  targeted path can additionally classify a maximal parent-sector box into
+  exact fixed-target-sector product cells and expose a preflighted, resumable
+  stream of compact rule-bound proper-subsector obligation descriptors;
+- a versioned immutable artifact owner whose current verifier freshly
+  generates and seals the mathematically complete canonical one-loop `q^2-1`
+  and equal-mass two-loop sunset vacuum partitions, plus a deterministic
+  bounded durable codec whose mathematical load boundary authenticates complete
+  source, cell, projection, symmetry, factorization, terminal, and homogeneity
+  semantics once; native Atom/State payloads require trusted generated provenance;
+- a topology-independent deterministic memoizing reducer with canonical
+  symmetry routing, guarded cells, lower-artifact factorization, explicit
+  master and zero terminals, concrete strict-descent checks, retained-payload
+  limits, and common-mass homogeneity restoration;
+- sector masks, restrictions, deterministic ordering, verification of
+  caller-supplied momentum maps, verified denominator permutations, and an
+  on-demand sufficient zero-sector rank test; and
+- deterministic ordered work execution, resource-profile validation, campaign
+  width preflight, roots-only campaign planning, and canonical TOML output
+  through Rust, CLI, and Python application surfaces.
+
+The application `derive` path still emits raw parametric identities. The
+generic fixed-sector foundry exposes exact translated-source, elimination,
+guard, residual-projection, and dependency primitives; an artifact owner must
+compose those primitives with complete cell coverage, symmetry, zero,
+factorization, and terminal proofs before claiming closure. The installed
+`K = 1` and `K = 3` owners do so, including immutable lower-artifact feedback
+for the sunset pinch. No application service substitutes or numerically
+evaluates masters. The core codec publishes and loads both artifacts, and
+`reduction::Reducer` applies their guarded cells with canonical symmetry and
+memoized strict descent. The Rust application, CLI, and Python transports use
+those same durable bytes. The tensor slice does **not** support generic
+kinematics or even rank above two and is frozen during Stage 1. Generic
+three- and six-loop source-count tests exercise only row censuses; they are not
+physical closure results.
+
+The exact public Rust surface is the module facade in
+[`crates/rustred-core/src/lib.rs`](../crates/rustred-core/src/lib.rs). Public
+items remain under their owning modules; the crate root is not a compatibility
+re-export catalogue.
+
+## Virtual workspace
+
+The repository root is a virtual Cargo workspace: the
+[`Cargo.toml`](../Cargo.toml) root has no `[package]`, and there is no root
+`src/` or `tests/` tree. The three live packages are:
+
+| Package | Canonical path | Responsibility |
+|---|---|---|
+| `rustred` | [`crates/rustred-core`](../crates/rustred-core) | Generic mathematical/domain services. Its directory name is `rustred-core`, but its Cargo package and library names are `rustred`. |
+| `rustred-app` | [`crates/rustred-app`](../crates/rustred-app) | Typed application composition, deterministic transport models, bounded I/O policy, and the `rustred` CLI binary. |
+| `rustred-python` | [`crates/rustred-python`](../crates/rustred-python) | Thin PyO3 adapter over `rustred-app`. The distribution is imported as `rustred`; `rustred._rustred` is a private native implementation detail. |
+
+The repository-level [`pyproject.toml`](../pyproject.toml) is the maturin
+authority. It maps the extension to `rustred._rustred` and packages the public
+Python module from
+[`crates/rustred-python/python/rustred`](../crates/rustred-python/python/rustred).
+
+The package dependency direction is:
+
+```text
+rustred-python  --->  rustred-app  --->  rustred
+       |                    |               |
+      PyO3        transport/rendering   mathematical CAS
+                            |               |
+                            +-----> Symbolica <---+
+```
+
+`rustred-app` uses Symbolica only at its application boundary, for example to
+render canonical expressions and report the resolved Symbolica version. It
+does not own coefficient or matrix algebra. `rustred-python` owns no
+mathematical representation or independent output schema.
+
+## Core ownership DAG
+
+The ten current core domains are rooted at
+[`crates/rustred-core/src`](../crates/rustred-core/src):
+
+```text
+input ------> family ------> algebra ------> Symbolica public Rust API
+   |             ^
+   +-------------+
+
+identity ---> family, algebra
+sector -----> family, algebra
+tensor -----> family, algebra, Symbolica public Rust API
+foundry ----> identity, sector, family, algebra, Symbolica public Rust API
+reduction --> foundry, sector, family, algebra
+scalar_numerator --> foundry, family, algebra, Symbolica public Rust API
+campaign ---> Rayon and Symbolica license admission
+```
+
+An arrow means “may depend on.” Same-domain child imports are omitted. There
+is no reverse dependency from a mathematical value layer into input,
+application transport, CLI, or Python.
+
+### `algebra`
+
+[`algebra`](../crates/rustred-core/src/algebra/mod.rs) owns the authenticated
+base coefficient field, its index-extended field, checked exact operations,
+and private matrix adapters. It knows nothing about integral families,
+sectors, identities, campaigns, or frontends. Symbolica remains the algebra
+authority; see [`algebra.md`](algebra.md).
+
+### `family`
+
+[`family`](../crates/rustred-core/src/family/mod.rs) owns authenticated family
+kinematics, scalar-product coordinates, affine denominators, power shifts,
+family-domain conditions, integral keys, deterministic fingerprints, ISP
+completion, Symanzik polynomials, and authenticated family presentations.
+The presentation layer exactly replays physical propagators, retains auxiliary
+ISP roles, structurally validates caller-attested routing/convention metadata,
+and mints sealed common-scale-physical vacuum evidence from semantic
+properties. Source-side routing replay remains the topology matcher's proof;
+the presentation does not manufacture it. Family construction is the semantic
+boundary between a normalized declaration and reusable mathematical data.
+
+### `input`
+
+[`input`](../crates/rustred-core/src/input/mod.rs) owns untrusted expression
+admission, parsing, normalization, affine-denominator compilation, and exact
+lowering to `family::IntegralFamily`. Every supported frontend converges on
+the same normalized `input::Project`. Transport metadata and TOML decoding
+remain in `rustred-app`.
+
+### `tensor`
+
+[`tensor`](../crates/rustred-core/src/tensor/mod.rs) owns authenticated caller
+heads, numerator-momentum labels, semantic lane selection, Lorentz projection,
+and family-aware scalar-product lowering onto integral keys. Its first bounded
+slice is the single-scale-vacuum scalar/odd/rank-two service; generic external
+kinematics and higher even rank remain typed unsupported frontiers.
+
+### `identity`
+
+[`identity`](../crates/rustred-core/src/identity/mod.rs) owns sparse parametric
+relations, shifts, exceptional-domain condition values, stable row identity,
+and topology-neutral ordinary-IBP/LI generation. Prepared source batches have
+stable ordinals; the application may execute independent rows in parallel and
+then complete them in that order. Generation performs no sector solving or
+rule publication. A bounded translated-source boundary accepts only one of
+those sealed complete batches, binds its sealed family and indexed-context
+scope, canonicalizes arbitrary `IntegralShift` offsets, and returns immutable
+exact translations with stable source-row/offset provenance. It uses the
+existing Symbolica-backed `n -> n+a` algebra and checked lattice-shift
+addition; it is source preparation for the generic foundry, not a recurrence
+or closure claim.
+
+### `foundry`
+
+[`foundry`](../crates/rustred-core/src/foundry/mod.rs) owns rule discovery and
+its proof-bearing result values. The anchored boundary specializes supplied
+relations at one integer anchor. The parametric boundary eliminates them
+directly over `K(n)` on a representable fixed-sector interior. Both order
+integral columns through the sector owner and invoke Symbolica's public sparse
+row reducer; the latter retains every required guard and source provenance,
+proves uniform strict descent, exactly replays the symbolic row, and requires
+an exact specialization replay of the retained source combination at the
+declared anchor. Targeted discovery performs
+physical-pivot-only deterministic back-substitution while retaining identity
+columns as free source weights. Those general rule-discovery paths are not yet
+an exceptional-domain engine or complete-source/closure search.
+`foundry::search` supplies two smaller topology-neutral primitives required by
+that engine. `SectorSearchDiamond` plans a bounded exact-sector L1 neighborhood
+around one concrete integral, with exact count/storage preflight and
+deterministic lexicographic offsets. `ReachabilityPlanner` binds an ordered set
+of authenticated rule cells and follows their exact nonzero concrete
+dependencies from a finite root set, including guard fallthrough, terminal
+precedence, strict descent, optional symmetry routing, deterministic
+uncovered-frontier reporting, and typed work budgets. The former does not
+perform translation or elimination, and the latter is a bounded dependency
+census rather than an infinite-domain closure proof. Applicability refinement
+and symbolic closure remain with their existing owners. The targeted
+parametric API can additionally retain a maximal parent-
+sector domain with compact first-pinched witnesses and exact fixed-target-
+sector product partitions. `foundry::dependency` owns aggregate work admission
+and a stable process-local cursor over O(1) proper-subsector descriptors; exact
+cell domains are materialized only on demand. These values retain rule,
+coefficient, and guard context but do not refine applicability or feed solved
+children back. Separately, `foundry::artifact` generates and verifies the
+canonical `K = 1` and `K = 3` closures and seals them for `reduction`; the
+reusable primitives are topology-neutral, while these first complete
+partition verifiers are registered family manifests rather than a generic
+closure search. Its schema-v6 codec shares the native Atom/State envelope and
+coefficient dictionary with candidate programs. Bounded source-port owners
+reuse the same proof body, dictionary and final exact comparator, with required
+versioned scope independently checked by the actual-cell installer.
+Generated native payloads must
+come from a trusted source: Symbolica's readers are not hostile-input parsers.
+Loading checks mathematical claims independently, once. It reconstructs tagged complete-ordinary
+source plans under explicit family/generator/rule policies, compares retained
+semantics exactly, and authenticates replay before exposing a sealed owner.
+Exact payload equivalence compares all structural sections and ordered decoded
+coefficient values/maps, not ambient State bytes or process-local symbol IDs.
+The sunset pinch additionally retains and replays a unimodular loop-basis
+certificate proving its denominator blocks factor into immutable `K = 1`
+dependencies. Product-sector application is generic over multi-master lower
+families: installation compiles the complete finite Cartesian product of typed
+dependency masters into authenticated canonical parent terminals, and the
+runtime performs deterministic exact convolution without repeating that
+authentication. Installation and runtime both bound Cartesian product
+cardinality before retaining terms.
+
+### `sector`
+
+[`sector`](../crates/rustred-core/src/sector/mod.rs) owns unshifted-index
+sector masks, cuts/pattern exclusions, deterministic ordering, exact symmetry
+verification, verified internal-permutation transport, and zero-sector proof
+results. Cuts and patterns are exclusion metadata, not analytic zero proofs.
+The current symmetry service verifies a supplied exact momentum map; graph
+canonization and routing-candidate discovery are not implemented yet.
+
+### `campaign`
+
+[`campaign`](../crates/rustred-core/src/campaign/mod.rs) owns checked resource
+values, calibrated execution profiles, RAM-aware width selection, and one
+bounded ordered execution context. It does not know about roots, sectors,
+closure, artifacts, or a solver. Roots-only interning and planning currently
+live in the application layer because no reusable foundry plan exists.
+
+## Application and process boundaries
+
+The current derivation flow is:
+
+```text
+CLI or Python request
+    -> rustred-app ingress and transport decoding
+    -> input::Compiler and Project::into_lowered
+    -> family::IntegralFamily
+    -> identity::ParametricIbpGenerator
+    -> campaign::ParallelExecution ordered batches
+    -> rustred-app canonical result model and TOML
+    -> CLI file/stdout or public Python value
+```
+
+The application enforces common input/output byte ceilings and owns error
+classification so CLI and Python do not invent competing semantics. The CLI
+performs application work before writing the final output. Optional candidate
+checkpoints are a separate application-owned persistence boundary: completed
+sectors are atomically saved during generation through the existing native
+codec and released from worker output memory. Resume preserves manifest order
+and only schedules missing sectors. This is not a new mathematical solver or
+artifact authority; the topology-neutral core remains filesystem-independent.
+The shared atomic writer serves both CLI outputs and checkpoint publication.
+The Python adapter releases
+the GIL for application work and serializes top-level requests through one
+process coordinator. A caught native panic permanently poisons that
+coordinator, and a post-fork PID mismatch is rejected before reuse.
+
+Trust is established at real boundaries: untrusted input, cross-process data,
+and future durable artifacts. Inside a boundary, private fields, consuming
+constructors, borrowed views, and sealed result types carry invariants.
+Repeated schema round-trips or full proof replay between private functions are
+not an architectural requirement.
+
+## Topology neutrality
+
+Production core algorithms receive loop momenta, external momenta,
+denominator rows, integral coordinates, sector masks, graphs, and verified
+maps as data. They do not dispatch on a topology name or embed a recurrence
+for a named family. Loop count is a dimension of the input, not an algorithm
+identity.
+
+Optimized paths may be selected only from authenticated semantic properties.
+The live vacuum tensor lane and future optimized foundry lanes may, for
+example, recognize no external denominator shifts and a common nonzero scale;
+they may not recognize a family label or a literal loop-count condition.
+Concrete topologies belong in fixtures, external oracle corpora, benchmarks,
+or shipped artifact metadata.
+
+Symbolica's graph implementation is the intended authority for future graph
+canonization and automorphism candidate generation. RustRed will own the
+physics-colored graph encoding and exact routing replay, not a second graph
+isomorphism engine. This statement is a future ownership rule, not a claim
+that graph-driven discovery exists today.
+
+## Reference and repository isolation
+
+The only tracked vendor gitlink is
+[`vendor/symbolica`](../vendor/symbolica), the production CAS dependency listed
+in [`.gitmodules`](../.gitmodules). The local
+`FOR_REFERENCE_ONLY_DO_NOT_PUSH/` tree is ignored reference material. LiteRed2,
+GammaLoop/Vakint, and readable external-oracle sources under that tree never
+enter RustRed history, the Cargo workspace, or the production dependency
+graph.
+
+Vakint integration is developed in the GammaLoop repository on its own
+`vakint_rustred` branch. Vakint remains the user-facing steering layer, while
+RustRed supplies reusable mathematical services. The additive scalar RustRed
+backend now ships and consumes the sealed `K = 1` and `K = 3` artifacts for the
+registered one- and two-loop families. It provides a FORM-free scalar tail
+after FeynKit's FORM-less tensor prepass. Tensor-bearing end-to-end RustRed
+tests explicitly select FeynKit and use an invalid FORM path, proving that the
+whole active lane has no FORM dependency or fallback. Existing FORM-backed
+tensor and scalar methods remain backward-compatible oracles in segregated
+coverage.
+
+## Stage 1 artifact and reduction owners
+
+The table below records the earlier foundry lane's Stage 1 checkpoints, not
+the current SpIRed producer's closure status. In particular, its old bounded
+K6 frontiers do not supersede the published K6 artifact described above.
+
+| Owner | Current responsibility | Remaining production gate |
+|---|---|---|
+| `foundry::artifact` | Versioned immutable `K = 1` and `K = 3` production artifacts with exact source/rule/projection replay, guarded exceptional cells, symmetry, zero/factorization/lower-artifact/master/homogeneity proofs, and deterministic bounded loading with one-time authentication. The test-only `K = 6` pressure fixture currently registers 46 exact rule cells; its deterministic census visits 89 nodes and leaves 9 explicit uncovered obligations. See [`foundry.md`](foundry.md) for the detailed evidence. | Own the remaining recurrence strata and certify the three scalar terminals, then prove zero-uncovered all-rank coverage across all five registered three-loop graph classes and publish the `K = 6` installer and durable artifact. |
+| `foundry::completion` (crate-private production) | Converts rule domains into exact sector-chart carrier boxes, checks matcher/box agreement, keeps polynomial guards separate from structural coverage, and computes deterministic disjoint complements. Its physical-frame lane builds raw translated-source CSR plans, classifies every target-local column through an exact decorated-stratum role registry, and runs independent bounded probe-local obstruction campaigns. Live hits are lifted to guarded exact ordinary-source circuits with full physical replay. Independent hits are rebased onto one canonical union epoch; globally applicable candidates are promoted into executable `RuleCell`s, pointer-paired with their semantic circuits, and compiled into a canonically ordered all-rank cover. Guard-wall retries use distinct exact anchors rather than modular telemetry, normal guard obstructions confer no ownership, and whole-cover insertion is atomic. A consuming closed-cover seal strongly retains and revalidates the exact predecessor snapshot without disturbing the proof/circuit/cell pairing. Closed covers publish once as content-identified immutable layers; snapshots retain their exact `Arc` chain and append strictly increasing, transactional same-rank waves without rehashing content on lookup. A bounded append-only raw-to-owner symmetry-route table covers root and solved owners, retains exact canonicalizer authority, commits its records and sector buckets in snapshot V4, and preserves owner precedence under allocation-free lookup. A one-shot, topology-neutral frontier coordinator binary-searches exact proof keys, resolves equivalent worker arrivals by their full published-content canonical minimum, authenticates finite terminals against retained root authority, and applies aggregate coordinate, comparison, pairing, finite-complement, and geometry budgets across the whole wave. It reports all incomplete sectors before publication and performs only an all-closed atomic wave extension. Proper-subsector owners therefore come from strongly retained immutable authority; a bare RuleCell is never transitive closure authority. | Close the path/star complements measured by the exact root-aware `9/4/10` and `22/12/4` baselines, run the first complete three-line wave, then use obstruction-block/syzygy-guided discovery bottom-up and close the remaining K6 structural complement. Machine endpoints remain explicit outer-extension obligations. |
+| `reduction` | Topology-independent deterministic guarded rule selection/application, canonical symmetry routing, lower-artifact factorization, memoization with retained-payload budgets, typed master maps, common-mass restoration, and shared Rust/CLI/Python application surfaces | The additional generic features demanded by `K = 6`; Vakint comparison through two loops is complete |
+
+These are real owners rather than empty shells. Both closed artifacts cross a
+durable byte boundary through one user-facing application layer.
+Dependencies remain acyclic: the foundry composes current
+mathematical domains and emits a sealed artifact value; reduction consumes
+artifacts; artifact models do not depend on application transports.
+
+## Change rules
+
+- Put a responsibility under its mathematical owner; do not create
+  `generated`, `residual`, `parametric`, `runtime`, `legacy`, or `misc`
+  dumping grounds.
+- Split large implementations along real value, algorithm, admission, error,
+  and test boundaries. A small file count is not an architectural goal.
+- Keep visibility minimal and expose public items under the owning module.
+- Delete obsolete RustRed APIs directly; there is no pre-release RustRed
+  compatibility promise. Preserve Vakint's public API conventions, defaults,
+  and existing FORM-backed methods, but never add a Vakint decoder or migration
+  layer for obsolete RustRed artifact schemas.
+- Add a subcrate only when it creates a demonstrable dependency or independent
+  build/test boundary.
+- Describe capabilities from passing live evidence. A source count, proposed
+  API, historical prototype, or readable oracle is not an implemented
+  reduction or closure result.

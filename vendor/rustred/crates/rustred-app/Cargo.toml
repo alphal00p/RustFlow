@@ -1,0 +1,121 @@
+[package]
+name = "rustred-app"
+version.workspace = true
+authors.workspace = true
+edition = "2024"
+rust-version = "1.89"
+description = "Shared application and CLI frontend for RustRed"
+license = "MIT"
+publish = false
+
+[features]
+capacity-dispatch = ["rustred/capacity-dispatch"]
+runtime-arity-selection = ["rustred/runtime-arity-selection"]
+default = ["native", "cli", "reconstruction"]
+native = ["rustred/native"]
+wasm = ["rustred/wasm"]
+reconstruction = ["rustred/reconstruction"]
+cli = ["dep:tabled", "dep:crossterm", "dep:ratatui", "dep:libc", "dep:signal-hook"]
+# N3 (opt-in, default off): mimalloc as the `rustred` binary's Rust global
+# allocator and, through its `override` feature, as the process-wide C
+# malloc/free, so GMP/MPFR allocations (statically linked, through C malloc)
+# use it too. Verify a build with `nm -D target/<profile>/rustred`: `malloc`
+# and `free` must be defined (T), not imported (U).
+mimalloc = ["cli", "dep:mimalloc"]
+
+[lib]
+name = "rustred_app"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rustred"
+path = "src/main.rs"
+doc = false
+required-features = ["cli"]
+
+[[example]]
+name = "two-loop-single-mass-vacuum"
+path = "../../examples/rust/two_loop_single_mass_vacuum.rs"
+
+[[example]]
+name = "probe_owner_case"
+path = "examples/probe_owner_case.rs"
+
+[[example]]
+name = "rule_optimizer_projected_bank"
+path = "../../tools/research/rule_optimizer/projected_bank.rs"
+
+[[example]]
+name = "rule_optimizer_prescribed_source"
+path = "../../tools/research/rule_optimizer/prescribed_source.rs"
+
+[[example]]
+name = "rule_optimizer_logarithmic_kernel"
+path = "../../tools/research/rule_optimizer/logarithmic_kernel.rs"
+
+[[example]]
+name = "rule_optimizer_symbolic_projector"
+path = "../../tools/research/rule_optimizer/symbolic_projector.rs"
+
+[[example]]
+name = "rule_optimizer_applied_observer"
+path = "../../tools/research/rule_optimizer/applied_observer.rs"
+required-features = ["cli"]
+
+[[example]]
+name = "rule_optimizer_routed_cancellation"
+path = "../../tools/research/rule_optimizer/routed_cancellation.rs"
+required-features = ["cli"]
+
+# These integration tests compare the library against the CLI executable.
+[[test]]
+name = "application_api"
+required-features = ["cli"]
+
+[[test]]
+name = "closing_artifact_api"
+required-features = ["cli"]
+
+[[test]]
+name = "cli_candidates"
+required-features = ["cli"]
+
+[[test]]
+name = "cli_foundry_campaign_run"
+required-features = ["cli"]
+
+[[test]]
+name = "cli_family_close"
+required-features = ["cli"]
+
+[[test]]
+name = "cli_campaign_plan"
+required-features = ["cli"]
+
+[[test]]
+name = "cli_campaign_preflight"
+required-features = ["cli"]
+
+[[test]]
+name = "cli_derive"
+required-features = ["cli"]
+
+[[test]]
+name = "cli_routed_campaign"
+required-features = ["cli"]
+
+[dependencies]
+bincode.workspace = true
+blake3 = "1"
+rayon = "1"
+rustred = { path = "../rustred-core", default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+symbolica.workspace = true
+tabled = { version = "0.21", default-features = false, features = ["ansi", "std"], optional = true }
+crossterm = { version = "0.28", optional = true }
+ratatui = { version = "0.29", default-features = false, features = ["crossterm"], optional = true }
+libc = { version = "0.2", optional = true }
+signal-hook = { version = "0.3", optional = true }
+toml = "1"
+mimalloc = { version = "0.1.52", default-features = false, features = ["override"], optional = true }

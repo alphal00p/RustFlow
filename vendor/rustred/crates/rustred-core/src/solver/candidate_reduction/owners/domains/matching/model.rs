@@ -1,0 +1,248 @@
+use std::fmt;
+
+use crate::algebra::{IndexedAlgebraError, IndexedGuardLimits};
+use crate::foundry::completion::LatticeBox;
+use crate::solver::candidate_reduction::power_domain::{DomainPowerBounds, DomainPowerError};
+
+/// Coordinates eligible for exact singleton refinement of an unresolved guard.
+/// This is a partition policy, not sampling or a claim of recursive coverage.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum OwnerDomainRefinementAxes {
+    /// Preserve the original policy: only bounded inactive coordinates.
+    #[default]
+    InactiveOnly,
+    /// Also allow positive coordinates with an explicitly finite box upper
+    /// bound. The inactive-rank cap never supplies a positive-coordinate bound.
+    FiniteAxes,
+}
+
+/// Aggregate dispatch/geometry counters; native guard limits are per predicate.
+/// Geometry cells and coordinate entries are conservative cumulative charges,
+/// including temporary BoxCover storage, not a measured byte count.
+#[derive(Clone, Copy, Debug)]
+pub struct OwnerDomainMatchLimits {
+    pub max_rules: usize,
+    pub max_terminal_checks: usize,
+    pub max_predicates: usize,
+    pub max_pieces: usize,
+    pub max_cells: usize,
+    pub max_split_operations: usize,
+    pub max_coordinate_cells: usize,
+    /// Optional cumulative allowance for exact singleton faces of bounded
+    /// coordinates admitted by `refinement_axes` when a predicate is unresolved
+    /// or its next GCD/factor operation refuses prospective admission. Zero preserves
+    /// the conservative diagnostic/native refusal without refinement. A split is
+    /// admitted only in full, including its geometry allowance; otherwise the
+    /// original unresolved piece or typed native refusal is retained. No axis
+    /// is sampled; prior native work/attempt charges are not undone.
+    pub max_bounded_refinement_cells: usize,
+    pub refinement_axes: OwnerDomainRefinementAxes,
+    pub guard_algebra: IndexedGuardLimits,
+}
+impl Default for OwnerDomainMatchLimits {
+    fn default() -> Self {
+        Self {
+            max_rules: 100_000,
+            max_terminal_checks: 1_000_000,
+            max_predicates: 100_000,
+            max_pieces: 65_536,
+            max_cells: 1_000_000,
+            max_split_operations: 1_000_000,
+            max_coordinate_cells: 32_000_000,
+            max_bounded_refinement_cells: 0,
+            refinement_axes: OwnerDomainRefinementAxes::InactiveOnly,
+            guard_algebra: Default::default(),
+        }
+    }
+}
+
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub struct OwnerDomainMatchStats {
+    pub rules: usize,
+    /// Exact finite-point boundary tests: saved terminals and, when explicitly
+    /// enabled, preferred residual points that defer to the baseline batch.
+    pub terminal_checks: usize,
+    pub predicates: usize,
+    /// Charged before optional whole-piece selection and callback, including a
+    /// failed optional guard or a consumer-rejected last attempted piece.
+    pub pieces: usize,
+    pub cells: usize,
+    pub split_operations: usize,
+    pub coordinate_cells: usize,
+    pub rank_empty_cells: usize,
+    /// Empty intersections with retained total-power predicates.
+    pub correlation_empty_cells: usize,
+    /// Singleton faces admitted up front. Cancellation may leave some unvisited.
+    pub refinement_cells: usize,
+    /// Entire bounded-coordinate refinements admitted (not predicate retries).
+    pub refinement_steps: usize,
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum OwnerDomainPredicate {
+    /// Admission/cancellation while considering a whole-piece alternative.
+    WholePieceAlternative {
+        batch: usize,
+        rule: usize,
+    },
+    SourceCondition {
+        ordinal: usize,
+    },
+    Equality {
+        batch: usize,
+        rule: usize,
+        ordinal: usize,
+    },
+    ExcludedConjunction {
+        batch: usize,
+        rule: usize,
+        branch: usize,
+        ordinal: usize,
+    },
+    OriginalDenominator {
+        batch: usize,
+        rule: usize,
+        term: usize,
+    },
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+pub enum OwnerDomainMatchDisposition {
+    /// Exact ordered guard applicability only. RHS specialization, cancellation,
+    /// descent, successors and recursive coverage have NOT been established.
+    SelectedRule {
+        batch: usize,
+        rule: usize,
+    },
+    Terminal {
+        batch: usize,
+    },
+    ExactGap,
+    /// Native coupled/conservative geometry or an unrepresentable exact cut.
+    /// This piece does not fall through to later rules or become a gap.
+    Unresolved {
+        predicate: OwnerDomainPredicate,
+    },
+    InvalidSourceCondition {
+        ordinal: usize,
+    },
+    ExactZeroSector,
+}
+
+/// Exact box intersected with the rank and retained total-power predicates.
+/// Active physical powers are 1+x, inactive powers are -x. None is mathematical
+/// infinity, not a machine index bound. Callers bound their own retained output.
+#[derive(Debug)]
+pub struct OwnerDomainMatchPiece<const N: usize> {
+    pub(super) owner: [bool; N],
+    pub(super) cell: LatticeBox,
+    pub(super) rank: Option<u32>,
+    pub(super) powers: DomainPowerBounds,
+    pub(super) disposition: OwnerDomainMatchDisposition,
+}
+impl<const N: usize> OwnerDomainMatchPiece<N> {
+    /// Internal saved-candidate adapter only: the guarded caller must wrap ALL
+    /// downstream events in its additional case/guard domain. This value must
+    /// never escape as ordinary first-priority box applicability authority.
+    pub(in crate::solver::candidate_reduction::owners::domains) fn guarded_candidate(
+        owner: [bool; N],
+        cell: LatticeBox,
+        rank: Option<u32>,
+        batch: usize,
+        rule: usize,
+    ) -> Self {
+        Self {
+            owner,
+            cell,
+            rank,
+            powers: DomainPowerBounds::default(),
+            disposition: OwnerDomainMatchDisposition::SelectedRule { batch, rule },
+        }
+    }
+    pub fn owner(&self) -> &[bool; N] {
+        &self.owner
+    }
+    pub fn lower(&self) -> &[u64] {
+        self.cell.lower()
+    }
+    pub fn upper(&self) -> &[Option<u64>] {
+        self.cell.upper()
+    }
+    pub fn max_numerator_rank(&self) -> Option<u32> {
+        self.rank
+    }
+    pub fn power_bounds(&self) -> DomainPowerBounds {
+        self.powers
+    }
+    pub fn disposition(&self) -> OwnerDomainMatchDisposition {
+        self.disposition
+    }
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub enum OwnerDomainMatchFailure {
+    UnknownOwner,
+    InvalidInput(String),
+    Cancelled,
+    StoppedByConsumer,
+    ResourceLimit {
+        resource: &'static str,
+        requested: usize,
+        limit: usize,
+    },
+    CountOverflow {
+        resource: &'static str,
+    },
+    AllocationFailure {
+        resource: &'static str,
+    },
+    Algebra(IndexedAlgebraError),
+    Geometry(String),
+    PowerDomain(DomainPowerError),
+}
+
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct OwnerDomainMatchError {
+    pub failure: OwnerDomainMatchFailure,
+    pub stats: OwnerDomainMatchStats,
+    /// Present for a failed native predicate resolution/refinement admission.
+    /// Identifies the actual failed cursor, not a reached missing-rule claim.
+    pub predicate: Option<OwnerDomainPredicate>,
+    /// Actual query simplex; None is unbounded, not the saved entry rank.
+    pub max_numerator_rank: Option<u32>,
+    pub power_bounds: DomainPowerBounds,
+    pub(super) predicate_bounds: Option<(Box<[u64]>, Box<[Option<u64>]>)>,
+}
+impl OwnerDomainMatchError {
+    pub fn predicate_lower(&self) -> Option<&[u64]> {
+        self.predicate_bounds
+            .as_ref()
+            .map(|(lower, _)| lower.as_ref())
+    }
+    pub fn predicate_upper(&self) -> Option<&[Option<u64>]> {
+        self.predicate_bounds
+            .as_ref()
+            .map(|(_, upper)| upper.as_ref())
+    }
+}
+impl fmt::Display for OwnerDomainMatchError {
+    fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            f,
+            "incomplete owner domain match after {} pieces: {:?}",
+            self.stats.pieces, self.failure
+        )?;
+        if let Some(predicate) = self.predicate {
+            write!(
+                f,
+                " at {predicate:?}, lower={:?}, upper={:?}, rank={:?}, powers={:?}",
+                self.predicate_lower(),
+                self.predicate_upper(),
+                self.max_numerator_rank,
+                self.power_bounds
+            )?;
+        }
+        Ok(())
+    }
+}
+impl std::error::Error for OwnerDomainMatchError {}

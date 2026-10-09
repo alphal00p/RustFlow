@@ -1,0 +1,1608 @@
+# Finite starting domains and fixed-target repair
+
+## September 24 evening: four-loop control before further delivery
+
+The user requests continued work in the order now recorded at the top of
+`GOAL.md`: complete the analogous four-loop full-UV-jet control, reassess and
+improve the generic traversal if it is inefficient, and only then refresh
+Vakint's unrestricted one- through four-loop native packages with numerical
+and matched performance gates. Commit and push the resulting milestones.
+The experiment's A<=19/R<=12/A-R>=7 bounds apply only to starting queries and
+must never restrict the shipped rules or discard descendants. The live
+five-loop process remains user-owned. The subsequent September 24 instruction
+authorizes a cooperative checkpointed stop if this strategy is impractical,
+followed by an assistant-launched replacement in the user's Zellij campaign tab
+after measured four-loop success. Explain changed-input checkpoint compatibility;
+do not silently resume an old checkpoint against different queries.
+
+The first FG control shows millions of region obligations and tens of billions
+of containment comparisons despite no observed missing cases. This motivates
+testing coarser reusable covers, with unchanged native guard, RHS, descent and
+dependency checks. A containing region is an obligation to inspect, not a
+certificate merely because it was admitted. An unsuccessful stronger cover
+does not establish a gap inside the original finite entry envelope.
+
+The completed reassessment now passes independently audited four-parent controls:
+FG/BMW/H/X finish in 18.52/38.53/16.50/38.51 seconds whole-command time on six
+workers, with zero pending work/frontiers and all obligations discharged. These
+use the unchanged native binary with ordinary auxiliary owner regions, never
+descendant clipping; see [the full record](research/four_loop_saved_cover_control_2026-09-24.md).
+The old five-loop campaign has saved an authorized paused generation-13 checkpoint.
+The revised input is now running in a new campaign, launched explicitly at
+21:06 UTC in the user-confirmed Zellij session `rustred`, tab `five_loop_vacuum`.
+`campaigns/five-loop-saved-coarse-cover` retains the exact original 67 queries
+and adds 67 rank-15 auxiliary owner regions, with A<=24 on the 54 owners in the
+upstream guard cone. Every one of the 134 initial queries passes local matching;
+recursive descendant exhaustion and runtime compatibility are still open.
+The run uses 50 workers, 500 GB requested RAM and hourly checkpoints. Do not bind
+its changed queries to the old checkpoint. Continue the unrestricted Vakint refresh
+and numerical/performance gates independently after this four-loop success.
+
+The subsequent producer-example directive requires freshly generated one- to
+four-loop packages, not only a writer re-export. Keep their explicit generation
+recipes and cold-check workflow under `examples/python`; numerical master values
+remain a separate catalog. Once Vakint validation passes, investigate the
+actual slow five-loop inspections: safe internal subdivision and publication
+of independent ready results without an unnecessary global sequence. Preserve
+shared responsibility/duplicate-work accounting and deterministic mathematical
+ownership. Profile and test before changing the live run; earlier isolated
+subdivision gains did not yet improve the complete small campaign.
+The user explicitly accepts some redundant computation to unlock useful core
+scaling. Compare completed-workload wall time and RAM with total CPU/work
+inflation; do not make zero overlapping computation a design constraint.
+This does not relax source coverage, guards, failure handling or obligation
+accounting.
+
+The next scheduler slice is opt-in `--publication-policy ready`, using the
+existing global queue and exclusive admission path, not one isolated engine
+per sector. It needs per-ticket accepted prefixes, explicit completed holes,
+and a credit bound on genuinely outstanding native work so a stalled early
+source does not stop refill. Checkpoints must persist all those effects together.
+The ordered default and frozen live campaign remain unchanged. Initially require
+`--transfer-unreserved-lookahead H` and reject physical subdivision. Validate
+held-head progress beyond H later completions, repeated interrupt/resume, genuine
+fault propagation and matched release wall/CPU/RAM before promoting this policy.
+The [live profiling record](research/five_loop_slow_inspection_parallelism_2026-09-24.md)
+now includes the four-million-inspection phase, where 159 finished jobs wait
+behind one active source; it is evidence for scheduler work, not a closure ETA.
+
+## September 24: campaign now running under user control
+
+The user launched the prepared campaign and requests short monitoring reports
+every 30 minutes. Keep the live process untouched and inspect its durable status,
+actual CPU/RAM use, queue progress, frontiers and checkpoint milestones.
+The RAM argument is user-configurable: 500 GB is the default, not an application
+maximum. Allow larger positive requests, including 700 GB, subject to host/cgroup
+headroom and the cooperative 5% save-and-stop margin. A supervisor-only RAM
+override on resume must preserve the native policy, executable and checkpoint.
+
+## Current launch-readiness directive (24 September)
+
+The next full run belongs to the user. First finish the physical-subdivision
+experiment and integrate it only with exact parent/part accounting; enable it
+by default only after a matched end-to-end benefit. The native three-order pilot has completed: median split
+serial 11.548 s, parallel 7.657 s, without native gaps. This does not establish
+recursive coverage or a full-run ETA.
+
+The subsequent complete four-owner controls show no integrated subdivision win:
+median 11.548 s with checkpoints and no split versus 11.731 s with the split.
+Keep the feature opt-in and off by default. Genuine disk/native W2/W6 restart,
+fresh-process Ctrl-C/resume and automatic periodic-save validation pass; the full
+release application gate passes 593 tests (one existing ignored). The production
+input remains all 67 original A24/R15/D9 roots, not the smaller augmented A12
+pilot. See [the delivery record](research/manual_five_loop_campaign_2026-09-24.md).
+
+Deliver resumable work checkpoints, not report replay: save the queue, logical
+responsibilities, reuse state and partially published physical-job progress;
+retain completed work and verify any skipped prefix when an unfinished part is
+replayed. Ctrl-C must cooperatively quiesce, atomically save, and print both the
+checkpoint path and restart invocation. Periodic checkpoints should provide a
+recoverable earlier state if an ungraceful process or host failure occurs.
+The periodic default is one hour at a consistent publication boundary. Expose
+the RAM guard in Python; reaching 95% of its configured ceiling requests a
+checkpoint and graceful stop. Show checkpoint starts/completions and paths in
+the monitor. Host-memory emergency protection remains active independently.
+
+Production uses the complete saved 67-owner A≤24/R≤15/A−R≥9 inputs and preserves
+all descendants. No pilot elapsed/work caps may silently stop it. Protect total
+RAM and retain bounded buffers under 50 cores and the user-configured RAM ceiling
+(500 GB by default); report
+actual host headroom. Use honest colored live progress plus persistent JSON/status
+evidence that remains inspectable after a user launch. Update Nix, release-build
+and Python steering documentation. Existing saved IBPs are reused, not regenerated
+without cause; final outputs must support subsequent terminal reduction,
+evaluation and Vakint stages (b)–(e).
+
+Validate small matched runs and repeated interrupt/resume cycles, independently
+audit state/replay and measurement claims, clean up and push. Give the user exact
+launch/restart instructions and then wait. Do not start the full campaign in this
+implementation session or mark the complete mathematical objective achieved.
+
+## September 24: challenge the work representation, not only the scheduler
+
+Run independent architecture and adversarial-review lanes on the whole IBP
+workflow. The measured bottleneck in the stopped broad campaign is repeated
+saved-rule coverage traversal, so faster elimination alone is not a remedy for
+that run. Investigate replacing redundant path histories with independently
+checkable finite domains, sharing guarded Apply/Route transfers, and organizing
+work by mathematical subtopology rather than arrival order. Also assess whether
+future generated rules should optimize downstream dispatch, branching and
+routing cost instead of only local discovery cost.
+
+Retain the objective and domain contract below. Any candidate cover must contain
+the entire entry envelope and every descendant, preserve original validity
+conditions, terminate under a sound concrete order and account for all unknown
+or failed obligations. A cover check is not automatically an original-source
+IBP proof. Unbounded prerequisite experiments must not become a new demand for
+universal closure beyond this finite goal. On-demand repair without exhaustive
+offline coverage is a different delivery contract, not a silent replacement.
+
+First seek small falsifiable experiments using existing public/native APIs and
+the saved rules. Count synthesis, preparation, execution, output and memory;
+compare completed logical scope, not just busy-core statistics. Keep the current
+Ordered/default worker partition until a matched larger pilot demonstrates an
+improvement. Do not restart the all-67-owner walk merely because another source
+of concurrency has been identified.
+
+Read the [ranked whole-system proposal](research/ibp_generation_architecture_review_2026-09-24.md)
+with the [separate adversarial critique](research/ibp_generation_independent_critique_2026-09-24.md).
+The fresh [radical-architecture review](research/radical_parallel_architecture_2026-09-24.md)
+and [independent challenge](research/radical_parallel_critique_2026-09-24.md)
+add genuine competing decompositions: independent exact entry shards, frozen
+micro-epoch reconciliation, and guarded relational reachability. Their initial
+recommendation was to test the measured regional-sharing strategy on a bounded
+all-owner scope first, then consider two exact entry shards under one aggregate
+resource budget. The stopped all-owner results below now challenge that shard
+design. More duplicated work may buy less coordination, but this is a
+hypothesis, not a demonstrated speedup. New discovery algorithms do not remedy
+this saved-rule traversal without a demonstrated generation bottleneck.
+The first finite-cover falsifier now completes through the existing walker,
+with no engine change. Direct A11 traversal takes 5.846 s; larger four-owner
+P≤13 Apply regions take 12.174 s. Pre-admitting P≤13 regions for the saved routing
+sources reduces this to 6.799 s, with 9,758 native inspections instead of the
+direct run's 27,806. It also lowers peak RSS 13.3%, but is still 16.3% slower
+and costs 64.1% more process CPU than the direct control. All three walks fully
+discharge their retained local obligations and pass independent raw review.
+The larger covers include additional points (29,816,130 initial sector-labelled
+tuples in the routing-seeded version versus 45,342 required entries), so these
+are same-required-scope strategies, not identical native workloads. Symbolic
+successor regions reach P=16 and are retained; the initial cover is not certified
+invariant. See [the complete measurements and limits](research/finite_cover_pilot_2026-09-24.md).
+
+The fresh A12 amortization pair now completes and passes independent raw review.
+Keeping all four original roots and the **fixed** P13 anchors reduces traversal
+22.388→11.720 s, command CPU 174.73→128.34 s and peak RSS 1,403,176→771,516 KiB.
+All 296,802 required tuples outside P13 and every escape remain. Both walks
+exhaust with no frontiers or failures; represented regions extend to P=17.
+The native-operation counter rises slightly while inspections and containment
+charges fall substantially. This is a single shared-host pair with sampled
+busy cores 7.74→10.56, not full-machine saturation, an invariant or a full-family
+ETA. The positive result supports broader owner coverage rather than endless
+four-owner anchor tuning.
+
+A read-only count for the complete manifest needs 57,621 queries (339 Apply
+anchors, 57,215 Route anchors and the unchanged 67 required roots), about
+16.14 MB compact JSON. The previous 10,000-query/1 MiB admission rejected it.
+The generic input/index slice is now implemented: explicit count and byte
+allowances retain the 256-query/1 MiB defaults; the optional overlap index excludes
+Route storage while preserving original IDs and all Apply membership. Its 406
+relevant entries fit the unchanged count/byte limits. Independent source review,
+562 release application/CLI tests (one existing ignored), 38 Python steering
+tests and the release CLI build pass. The unchanged-input A11 canary also
+finishes with every prior semantic result/counter preserved: 27,806 native
+inspections, no frontiers or pending work. It makes no new speed claim. See
+[implementation and validation](research/query_admission_and_regional_sharing_2026-09-24.md).
+No new CAS or topology-specific algorithm was added.
+
+A bounded all-owner A12/R3/D9 pair has now run: 2,123,560 required tuples,
+67 versus 57,621 input regions, every required root and escape retained. Both
+controls stop at their prospective scheduled-work gate, not a time or memory
+limit: direct has 457,176 scheduled/61 committed native inspections, anchored
+382,970/105,514. Neither exhausts its descendants; zero observed frontiers is
+only a prefix result. Sampled traversal uses about 4.16/4.29 busy cores despite
+the W50 reservation. No completed-work speed ratio or full-envelope ETA follows.
+See [the stopped comparison and bottleneck evidence](research/all_owner_regional_sharing_2026-09-24.md).
+
+The new traces distinguish running visitors blocked on bounded output from a
+later head with 255 already-finished inspections waiting behind it. Larger
+bounded outboxes may address the former, not the latter; their benefit must be
+measured. The independent critic also rejects promoting an E-only shard split
+that duplicates every anchor: it replicates the same expensive early anchor
+instead of dividing it. Reconsider the actual unit of work before implementing
+micro-epochs or restarting the full A24/R15/D9 envelope. This diagnostic does not
+replace that objective.
+The attempted early-phase profile captured only a 0.188-second startup burst
+after acknowledgement framing failed; it cannot establish sustained hotspots.
+The separately audited singleton-classification reuse now passes 2,818 core and
+562 application release tests (32/1 existing ignored) and the CLI build. Six
+completed same-input A12 controls reduce median traversal 11.550→10.873 s and
+process CPU 129.28→117.57 s, without changing mathematical results. The native
+work and optional-diagnostic reductions are explicit; three shared-host pairs
+do not establish fifty-core scaling or a full-envelope ETA.
+See [the measurements and physical-subdivision falsifier](research/native_inspection_subdivision_2026-09-24.md).
+The exact two-part native experiment now completes in three rotated orders,
+reducing median serial span 11.548→7.657 s with matching per-part outcomes.
+Integrate under one unchanged logical obligation and measure routing/publication
+before selecting a production default. This is not recursive closure.
+Demand-activated optional anchors are a
+separately challenged alternative, not implemented coverage. Do not restart the
+full envelope solely because either design exposes possible concurrency.
+Keep every descendant and distinguish extra-anchor gaps from actual
+entry failures. Concrete-runtime compatibility and cold delivery remain required;
+local walk exhaustion is not sufficient. If sharing ceases to amortize, measure
+reusable ordered guard/term work before building a new compiler. Sampled diagonal
+guards do not establish that affine refinement dominates runtime.
+
+An observational support-transition census now runs at the existing native
+Apply-successor boundary, without new algebra or a second traversal. Independent
+source/math review, 2,809 core and 303 routed-application release tests (32/1
+existing ignored) and the CLI build pass. An unchanged A11 canary retains every
+prior semantic field/counter, and its 512,726 successors split into 402,205
+same-support and 110,521 strict pinches, with zero unsupported transitions.
+Counts remain provisional on stopped inspections, and even a successful local
+check is not the complete envelope or a standalone termination/provenance proof.
+
+## Current follow-up: measured native cost, worker split and cover prerequisites
+
+The profile-driven substitution optimization now also passes three alternating
+A12/R3/D9 before/after pairs on 357,192 starting tuples across four saved owners.
+Median traversal is 38.916 → 20.511 s (47.29% lower), with identical structural
+results and counters in all six runs. Descendants remain uncut and scheduled
+rank bounds reach four. Independent raw review passes. A separate post-change
+profile shows replacement no longer dominates; domain projection and allocation
+are next measurement targets. See [the full evidence](research/finite_closure_native_profile_2026-09-23.md).
+
+Two bounded implementation slices pass independent source review and 539 release
+application/CLI unit tests (zero failures, one existing ignored): an explicit optional
+inspector/helper partition, retaining both historical scheduler defaults; and
+an unbounded saved-rule shift census through the existing native successor
+visitor. The latter tests prerequisites for a finite closed-cover experiment,
+not guard coverage, original IBP validity or family closure. Do not replace
+complete responsibility accounting with a shift bound. Keep Ordered default
+and require measured controls before choosing another worker partition.
+The all-67-owner envelope remains stopped and incomplete; these four-owner
+results do not yet justify a full-run completion estimate. The focused Python
+steering gate passes 30 tests and the release executable builds successfully.
+
+Eleven A12 partition controls now complete with identical logical results and
+counters. Median traversal is 20.239 s at the default 25/24/1, 20.160 s at
+40/9/1 and 23.835 s at 48/1/1. The sub-percent I40 difference is not an established
+wall-time gain; keep the default. The unbounded census now also completes on all
+67 saved owners: maximum shift L1=8, no positive same-support Δ(A+R), and
+1,958,316 potential unsupported-support sign regions. Independent raw review
+passes; these are not demonstrated missing rules or reached failures. Two native
+one-step boundary diagnostics now complete without child problems: all 10,238
+emitted successors preserve support, including the 189 conditional edges.
+These overlapping examples do not discharge the global prerequisite. The complete
+census supplies 406 conservative finite-width activation bands, with the other
+coordinates/rank unbounded. The first full width-six band completes without
+problems and all 15,874 successors preserve support; this easy five-denominator
+owner is not representative of all 406. Three higher-support bands have since
+completed one-step capture: all emitted edges preserve support or go to a strict
+subset, but eight guard-uncertain cells remain in the hardest band. All eight
+sampled finite-entry witnesses inside those cells select existing rules and
+finish their one-step applications; this does not settle their whole boxes.
+Both diagnostic sets pass independent raw review. Do not turn this into an
+automatic all-band run or a new descendant cutoff. A narrow no-crossing shortcut
+passes independent source/math review, all 2,803 core release tests (32 existing
+ignored) and the CLI build. Twelve matched controls preserve exact results but
+show no material wall-time or utilization improvement. See
+[the experiment and caveats](research/finite_closure_architecture_review_2026-09-23.md).
+
+## Completed-slot reuse — modest measured progress, full envelope unfinished
+
+The owner-local scheduler now reuses physical slots held by completed jobs
+without publishing them out of order. It shares the existing bounded retained
+result store with Ordered; pending obligations remain explicit. Independent
+source review, 195 clean optimized tests and 521 release library tests pass
+(one existing ignored in each; suites overlap), and the release CLI builds.
+Six unchanged A11 controls complete, with median traversal 7.484 s owner-local
+versus 8.284 s Ordered. The 9.65% wall-time reduction comes with about 18.8% more
+native visits and 24.8% more whole-process CPU. Corrected heartbeat-labelled
+busy-core medians are 13.99 versus 9.99, not fifty-core saturation.
+
+Keep Ordered default. One larger A12/R3/D9 pair also completes, covering 357,192
+starting tuples across the same four saved owners: 26.746 s owner-local versus
+28.427 s Ordered. Both average about nine sampled busy cores, and owner-local
+still performs more native inspections. All descendants remain required, with
+scheduled rank bounds reaching four. This is not a replacement for the complete
+67-owner envelope. A profile-guided, generic native-substitution-order change
+passes 2,798 core release tests (32 existing ignored) and the CLI build. Six
+matched Ordered A11 runs retain identical non-timing results and counters;
+median traversal is 5.938 s versus 11.647 s before, and process CPU 51.06 s
+versus 147.14 s. Independent raw measurement review passes. This does not
+establish fifty-core saturation or a full-family ETA; the larger A12 controls
+are now reported above.
+See [profile, API audit and controls](research/finite_closure_native_profile_2026-09-23.md).
+The broad campaign remains stopped and unfinished, with no completion ETA.
+See [the measured implementation checkpoint](research/owner_completed_slot_reuse_2026-09-23.md).
+
+## Preceding concurrent-inspection checkpoint
+
+The ready-stream milestone is pushed as `fbeb4e2f` (documentation follow-up
+`22ea812b`). Its completed controls show that independent sector publication
+alone is insufficient: two shared Apply owners dominate, and smaller reservation
+windows reduce redundant work without filling the inspector pool.
+
+The new implementation lets several inspectors read the same immutable owner
+program while retaining **one FIFO publisher per owner**. Separate dispatch and
+publication cursors; reserve each dispatched ID through the existing ledger.
+Drain only the current publisher's stream. Later chunks and completed results
+stay in the existing bounded pool slots, so frontier/refusal diagnostics cannot
+mix between jobs and no new unbounded completion store is needed. Prefer work
+across ready keys before filling spare slots from a busy key. Neither entry nor
+descendant geometry changes, and default Ordered execution stays unchanged.
+
+Cancellation/failure must keep every non-head result explicitly uncommitted;
+never advance a ledger with an out-of-order `Finished`. Required regressions
+include reverse completion within one owner, held chunks, alias dispatch fences,
+initial anchors and failed/cancelled predecessor obligations. Independent source
+review passes. The optimized clean-owned gate passes 176 tests (one existing
+ignored), including ten new coordinator regressions. Its first run exposed an
+empty-region test fixture; correcting that fixture kept the fairness assertion
+unchanged and required no production fix. All 511 release library tests pass
+(one existing ignored), including 38 focused owner-scheduler tests. The release
+CLI build also completes. Sixteen unchanged saved-input controls complete without
+frontiers or unresolved responsibilities. Three alternating six-worker A10 pairs
+give medians 3.676820 s concurrent owner versus 2.334292 s Ordered; peak same-owner
+inspection width reaches three, but this is still slower. A completed H4 pair
+reduces redundant work without beating Ordered H256. The same A10 input at fifty
+workers takes 2.950783 s concurrent owner versus 1.403919 s Ordered. Actual
+same-owner dispatch width reaches 25, but sampled busy cores average only 10.27
+versus 15.24 Ordered. These heartbeat-labelled windows and tiny controls do not
+establish full-family scaling or a completion ETA. Keep Ordered default and do
+not restart the broad campaign merely because sector concurrency works. Next
+profile repeated-work cost, pool allocation and completed-slot retention in
+parallel with monitored saved-input pilots. The current fifty-worker baseline
+includes pre-existing Ordered escrow work; the owner-local lane does not use
+that reclamation path, and both report zero producer-buffer backpressure.
+Implement/audit bounded slot reuse separately from matched pilot measurements,
+without changing a running executable or accepting CPU occupancy as speedup. See the
+[implementation and measured controls](research/owner_concurrent_inspection_2026-09-23.md).
+This is still a step toward the complete 67-owner envelope,
+not a substitute for exhausting it.
+
+Two independent design/review agents have also assessed changes to the amount
+of proof work, beyond scheduler tuning. Their research priorities are reusable
+immutable rule transfers and a separately checked finite closed domain cover;
+exact union differences and tighter routed images are competing hypotheses.
+All remain subject to measured cold pilots and unchanged responsibility,
+guard, descent and artifact-provenance requirements. See
+[the architecture review](research/finite_closure_architecture_review_2026-09-23.md).
+The historical pre-reuse A11 saved-input control completed in 7.778 s Ordered
+versus 9.593 s concurrent owner. The newer result is recorded above; neither
+small control establishes a broad-run completion estimate.
+
+### Older full attempt: cooperative stop completed
+
+The original all-67-owner run stopped through its existing stop
+file, not an elapsed deadline. At the 32,202.860-second heartbeat it had 8,267,886
+native publications, 10,409,734 pending native obligations and zero observed
+frontiers. Its preceding 899.13-second window processed 299.23 native regions/s
+while pending work grew by 344.42/s. Even a zero-new-work, constant-throughput
+extrapolation would need another 9.66 hours; this is a planning illustration,
+not a rigorous lower bound or completion ETA. It no longer supports the desired
+15-hour completion attempt without optimization. The 2-billion-event allowance
+is separate from mathematical completeness.
+
+Native and supervisor handles are terminal, with exit4 and
+`existing_operator_stop_file`, not a hard resource kill. The final journal records
+8,274,060 completed native inspections, one cancelled partial, 10,413,595 pending
+native obligations, zero observed frontiers and 1,447,411,449 committed events.
+Supervisor time including draining/reporting is 32,948.858 s (9 h 09 min), with
+sampled aggregate peak RSS 234,755,051,520 bytes. The final partial JSON report is
+20,506,320,000 bytes. Bounded prefix/suffix and terminal-journal inspection were
+checked independently; this is not a full parse of that large document.
+The result is incomplete and not a resumable work checkpoint. Preserve it and
+all original rules/routes. No replacement is launched yet.
+
+The following scheduling/checkpoint sections are historical snapshots, retained
+to explain the measurements and decisions. Their references to an ongoing run
+describe the situation then; the terminal status above supersedes those references.
+The Objective, Domain contract and Implementation sequence below remain active.
+
+## Current follow-up — ready sector streams
+
+The published owner-local prototype (`ea5c558e`) passes its implementation gates
+and completed routed controls, but does not improve the measured small five-loop
+workloads. On the larger four-owner A10/R1/D9 control (3,852 starting tuples),
+six-worker traversal is 6.982 s owner-batched versus 2.373 s ordered; both finish
+without frontiers and schedule descendant regions with rank bounds up to R2.
+Owner-batched execution averages
+about 1.15 busy cores in a heartbeat-labelled sampled window (not an exactly
+isolated traversal interval). It has 5.814 s of chunk-rendezvous
+waiting versus 0.280 s delivery; waiting is not automatically wasted CPU.
+
+The implemented follow-up removes that all-producer rendezvous: poll all active
+streams nonblockingly, deliver ready chunks, acknowledge/refill completed jobs,
+and wait only when no stream is ready. Independent source review passes, as do
+501 release library tests and 166 clean-owned tests (one existing diagnostic
+ignored in each; these suites overlap). All twelve fresh saved-input controls
+complete without errors/frontiers or pending responsibilities. It retains bounded buffers, shared
+immutable rules, exclusive destination admission, global budgets and one producer
+per phase/owner. Diagnostic IDs/covers can vary even at fixed worker count;
+mathematical artifacts and concrete reductions do not change. The same-input
+controls must demonstrate useful throughput before a full campaign replacement.
+The three repeated six-worker A10 pairs give median traversal 4.564 s
+ready-stream versus 2.301 s ordered. Sampled CPU use remains lower, with
+ready-stream processing more native regions and concentrating work in two
+expensive Apply owners. Keep Ordered as default. Examine within-owner native
+concurrency and worker allocation next; do not restart the full campaign merely
+because sectors are now semi-independent. No full-family speedup or completion
+is established. Four further same-input controls with H1/H4 also finish and
+reduce ready-stream native work by about 9%, but traversal remains about 3.9 s.
+H is both a reservation and dispatch horizon, so Ordered H1 is effectively
+serial while owner-local H1 can still overlap sectors. These are scheduling
+experiments, not a reduced coverage requirement or a controlled pure-deduplication
+speedup. Keep the default and the live full-run configuration unchanged.
+
+## Next scheduling priority — semi-independent sector progress
+
+The global publication cursor is not a mathematical requirement. Current
+containment and responsibility transfer already require an identical
+`(phase, owner)` key within one immutable program snapshot. Independent keys
+can therefore own separate admission indices and publication state, while
+sharing the loaded reducer, exact rules and routing maps. A slow publisher in
+one key must not fence unrelated keys merely because it has an earlier global
+diagnostic ID.
+
+The next structural scheduling experiment should partition **admission and
+publication**, not only native inspection. These are logical queues scheduled
+on one bounded worker pool, not a thread or a complete Symbolica/program copy
+per sector. Cross-owner Apply/Route successors go to the destination queue,
+where existing native containment provides shared-subtopology reuse. Retain
+initial anchors, local acyclic delegation and honest pending/frontier/failure
+states. A locally empty queue is not permanently finished: incoming messages
+can reopen it. Global completion requires no queued or running work, no
+in-flight successor delivery, no unresolved responsibilities and zero
+errors/frontiers.
+
+First compare a bounded deterministic owner-batch prototype with the current
+runner on routed lower-loop controls and a saved five-loop subset. Preserve
+all descendants, including those above entry bounds, and use the existing
+native visitor without generating rules. Study asynchronous inboxes only
+with explicit backpressure/termination and determinism semantics. Canonical
+IBP artifacts and exact reductions must remain deterministic; global
+diagnostic ID order is not itself mathematical authority. Historical trace
+equality or capped-run prefix equality must not be claimed for a changed
+scheduling policy without testing it.
+
+Measure useful work per active owner, admission time, queued/in-flight work,
+memory and actual CPU use. Sector traffic can be highly skewed, so sharding
+alone does not promise fifty busy cores; retain within-owner domain parallelism
+and shared work scheduling. The opt-in prototype now passes its release library
+gate. It is not a reason to replace the ongoing full run before native
+correctness and useful throughput are measured.
+
+### Owner-batched prototype and measurement boundary
+
+The Rust request exposes `OwnerDomainWalkPublicationPolicy::OwnerBatched`;
+the CLI and both Python steering scripts accept
+`--follow-successors --publication-policy owner-batched`. The default stays
+`ordered`. Immutable programs, routing and initial geometry are shared. Each
+phase/owner has its own inclusion index and responsibility ledger; only
+successor geometry crosses to the destination queue, while diagnostics remain
+with their producer. The current follow-up polls each active stream without
+blocking, delivers the ready subset, and refills completed slots without waiting
+for silent peers. Each pass accepts at most one bounded chunk per producer.
+Global allowances remain aggregate; near a cap, serial admission allows
+duplicates to reuse existing obligations without charging another domain.
+
+The new walk receipt uses schema v4 and composite `(bucket, local id)` handles.
+Canonical rules and concrete reductions are unchanged; diagnostic IDs, cover
+fragmentation and resource-limited prefixes need not match the ordered runner
+or another worker budget; readiness-driven diagnostics may also vary at a fixed
+worker budget. Initial-admission failures retain their pre-traversal
+schema and are explicitly distinguished from a started owner-batched walk.
+No local queue being empty is enough for success: all delivery, native work,
+alias/anchor responsibilities, errors and frontiers must be accounted for.
+
+The published first implementation rendezvoused at chunk boundaries. The
+ready-stream follow-up removes that barrier but retains only one active native
+producer per bucket and synchronous destination-admission batches. With unlimited comparisons, fifty
+configured compute slots divide into 25 inspectors, 24 admission helpers and
+one coordinator. A few hot owners or slow chunk producers can therefore still
+limit utilization. Test real routed controls and saved five-loop inputs before
+deciding whether within-owner concurrency or a different compute-budget split
+is needed. Report completed native work, pending trend, ready-owner diversity,
+admission/wait time and RSS, not just configured workers or CPU occupancy.
+
+The published prototype's independent review, corrected release library gate
+and completed controls pass. Review removed an unnecessary per-callback copy of
+the full request and a wait condition that could spin on an unrelated finished
+worker. These are implementation corrections, not measured campaign speedups.
+The earlier full baseline Cargo gate was intentionally stopped during its
+serial compilation after saving a freshly built baseline CLI. It did not pass
+the full suite. The first integrated release run passed 491 library tests,
+with one cancellation-diagnostic failure and one existing ignored diagnostic.
+The corrected run passes 495 library tests with zero failures and one existing
+ignored diagnostic; the focused 24-test owner-batch gate exercises all
+1/2/6/50-worker native controls without availability skips. Seven parser tests
+and 27 Python steering tests also pass. The release CLI build passes. The
+separate clean-owned compatibility gate passes 160 tests (one existing diagnostic
+ignored), including all 14 new internal tests; it uses the committed pool without
+unrelated escrow work. Eight application/CLI integration tests pass. All eight
+saved routed two-loop controls complete under both policies with unchanged
+rules and no remaining obligations. Their millisecond timings show no consistent
+speedup. The four-owner five-loop A9/R0 canary also completes under both policies
+at one/six workers, retaining descendant region rank bounds up to R1, but six-worker owner batching is
+slower (0.407 s versus 0.174 s ordered). Next remove the remaining all-producer
+chunk rendezvous with bounded ready-stream delivery, explicitly allowing varying
+diagnostic interleavings while preserving exact rules and reductions. The Cargo gate used sixteen compiler jobs
+(not a solver-worker performance comparison). The ongoing full five-loop campaign
+has not been replaced. See the [publication measurement plan and remaining
+barriers](research/owner_batched_publication_2026-09-23.md).
+
+## Active full-run checkpoint — September 23
+
+The separate coordinate-block admission filter now passes independent review
+and focused index, queue and clean-owned walking gates. The small native
+walking controls also pass with 1/2/6/50-worker variants enabled. Paired non-test
+production-queue replays preserve all tested representatives, retirements and
+semantic counters, using 44–55% of baseline proposal-admission CPU on three
+small saved-shape/synthetic-reuse mixes. Candidate-index storage increases;
+these measurements are not a campaign speedup or evidence of 50-core scaling.
+The filter is committed/pushed as `fb1850bc` but is not in the live executable.
+See the [measurement boundary](research/five_loop_utilization_2026-09-23.md#paired-production-admission-measurements).
+
+The unchanged full run reaches 6,133,742 native publications, 7,540,268 pending
+native obligations and zero observed frontiers at heartbeat 17,453.200 s
+(about 4 hours 51 minutes). The latest complete 15-minute audit services
+240.39 native inspections/s against 525.66/s net demand, using only 3.02 busy
+cores on average. Pending work is not draining; no under-ten-hour ETA or
+finite-domain closure is established. Shared-host memory pressure has eased,
+but the process still has swapped-out state and incurs major faults. Keep the
+ongoing campaign and the new index's isolated performance evidence distinct.
+
+The earlier resource snapshot below is historical, not current RSS or usage.
+
+The unchanged 67-owner full-jet attempt remains live. At heartbeat
+12,628.923 s (about 3.5 hours), it had published 5,094,503 native inspections,
+with 6,473,505 native obligations pending and zero observed frontiers.
+Nearby sampled aggregate RSS was 79.71 GB (82.59 GB half-hour peak). The entry
+policy is
+`A<=24, R<=15, A-R>=9`, under the physical assumptions below; descendants are
+not clipped and their maximum scheduled rank bound is 19. No missing-rule frontier has been found
+in completed inspections; this does not establish coverage of unfinished work.
+
+Parallel admission and safe initial-overlap reuse are running, but actual
+utilization remains far below the configured 50-core budget. A clean
+120-second sample averaged 7.16 busy cores, mostly admission lookup; the latest
+complete fifteen-minute interval averaged 8.54. A short earlier drainage
+interval did not persist: all six latest five-minute bins grew pending work.
+There is no defensible sub-ten-hour completion estimate. Continue this same
+attempt while monitoring useful progress and the existing memory limits.
+The [utilization report](research/five_loop_utilization_2026-09-23.md)
+distinguishes measured intervals and records the newer, independently tested
+identity-specialization optimization, which is not in the live binary.
+The existing event allowance is a nearer conditional constraint than memory;
+its time-to-limit projection must not be confused with completion. A tiny
+two-loop input-only staircase control now suppresses new Apply work while
+preserving full descendant processing. It is not a five-loop speedup and has
+not changed or replaced this full attempt. Its five-loop adjacent-band follow-up
+has now stopped at the same diagnostic domain allowance for both inputs and
+does not demonstrate useful compression. The main run has entered a fourth
+creation wave and already admitted a fifth; this is not a queue drain or an
+estimate of eventual depth. The utilization report records these negative
+findings as well as the continuing full run.
+
+Completion requires exhausted regional work without errors or frontiers and
+resolved alias/anchor dependencies, then the narrow concrete-runtime compatibility
+check and a portable, cold-loadable package of the existing rules, routes, entry policy
+and explicit finite terminal union. It does not require a minimal basis,
+terminal numerical evaluation, or universal certification. Earlier checkpoints
+below are historical and do not describe the present process state.
+
+The unchanged owner bundles already carry the explicit fixed terminal keys;
+their union supplies the finite terminal set. A separate human-readable CSV
+is optional convenience, not another completion gate or reason to build a
+new extractor. Portable packaging changes only owner file paths, preserving
+all payloads, masks, routes, limits and the exact finite entry policy.
+
+The portable inputs are now staged under
+`TMP/portable-owner-inventory.rb8tYe/prepared-inputs/`, explicitly marked
+**INCOMPLETE**. All 67 bundles (1,280,854,595 bytes), the unchanged entry document
+and the existing 67-key canary are present. The generic local copy helper passes
+nine focused tests; staging imports no Symbolica data and changes no solver
+state. This prepares delivery only: no full-walk result or cold-load success is
+claimed by the copy. The live run continues unchanged.
+
+## Integrated reuse policy — September 23
+
+The measured initial-domain overlap optimization is implemented and passes
+independent source/mathematical review. Enable it with
+`--follow-successors --transfer-unreserved-lookahead 256 --reuse-initial-d-bands`
+and unlimited aggregate containment. The Rust request exposes the same
+default-off `reuse_initial_d_bands` field, and both Python steering scripts
+forward the flag. A native containment proof allows only the overlapping
+high-D slice to reuse an initial obligation; the remaining low-D slice is
+inspected normally. Initial work and every descendant remain required, and
+cancelled, pending, failed or frontier-bearing anchors cannot discharge reuse.
+
+The full release application/CLI gate passes 536 tests (one existing diagnostic
+ignored); an independently isolated owned-source gate passes 135 (one ignored).
+All 74 Python/API/steering tests pass as well. The implementation is pushed as
+`02f03d63`. The same 67-owner A24/R15/D9 campaign is now launched with
+50 physical cores, H256, a 500-GB
+hard memory ceiling and a 300-GB cooperative threshold for report/drain
+headroom, without an elapsed deadline. No new rules are generated by this
+optimization, and no finite-domain completion or whole-campaign speedup has
+yet been established. See the
+[integrated policy and measurement boundaries](research/five_loop_utilization_2026-09-23.md#integrated-initial-domain-overlap-reuse).
+
+## Pre-integration measurements — September 23
+
+The first matched-input native experiment takes 27.3–27.4 s for an expensive
+saved region and 2.99 s for its exact residual outside an initial anchor.
+The unchanged native visitor reproduces the saved original statistics; both
+inputs are deterministic across repeats. The skipped slice is contained by
+the native domain service, and its anchor's work and descendants must remain
+obligations. This is approximately 9.1x less local inspection time, not yet a
+production improvement or a five-loop completion forecast. All four heavy
+regions now pass repeat and independent receipt checks, showing approximately
+9–24x less local inspection time. The narrow production integration now passes
+its source audit and release gates, as recorded above; full-campaign impact
+remains to be measured.
+The separate containment-index model also improved, but does not include the
+real reused-request stream. See the
+[measurement boundaries and results](research/five_loop_utilization_2026-09-23.md#follow-up-first-native-originalresidual-comparison).
+
+## Earlier H256 outcome — cooperative optimization stop, September 23
+
+The H256 diagnostic below is now terminal, with a saved incomplete result:
+1,335,458 complete native regions, one cancelled partial, 1,958,574 pending
+native obligations and zero observed frontiers. It stopped for measured
+repeated Apply work and publication waiting, not an elapsed deadline or memory
+limit. Supervisor time was 2,690.417 s; peak sampled RSS was 40.535 GB including
+report writing. No resumable work checkpoint or closure is claimed.
+
+The focused next experiment uses the unchanged native API on expensive saved
+regions and an exact D-band residual, after native containment proves the
+complementary slice belongs to an original initial region. Initial obligations
+and their descendants must remain retained; skipping an overlap cannot silently
+turn it into a terminal. The simpler containment-filter measurement is separate
+and cannot establish a whole-campaign speedup. Full-run details are recorded in
+the [utilization report](research/five_loop_utilization_2026-09-23.md#delegation-pilot-terminal-outcome).
+
+## Earlier H256 diagnostic — frozen observation, September 23
+
+At heartbeat **2,074.852853168 s**, the release-gated H256 delegation run over
+all 67 starting owners was still live: 1,325,896 native publications,
+3,772,729 transfers, 1,253,309 alias publications and **1,946,321 pending
+native obligations**, with zero observed frontiers. Alias publication is not
+native inspection or successful discharge. Recent complete windows used
+3.48–4.56 CPU cores of 50 configured slots; heartbeat RSS was 27.38 GB.
+The slowdown now includes repeated expensive Apply streaming and ordered
+head-of-line waiting, not merely serial admission. No finite-domain exhaustion,
+family closure or completion ETA follows. The containment-filter harness is
+prepared and independently source-reviewed, but not built or run; its possible
+benefit remains unmeasured. See the
+[frozen observations and timing caveats](research/five_loop_utilization_2026-09-23.md#live-delegation-pilot-frozen-slowdown-observations).
+The older stopped diagnostic below is a separate run.
+
+## Resumed investigation — September 23
+
+The user has resumed the five-loop utilization investigation. The prepared
+67-owner A24/R15/D9 symbolic diagnostic ran with the previously
+gated release CLI, 50 compute-worker slots, a 500 GB sampled memory ceiling,
+and no elapsed-time deadline. Its input is broader than the earlier diagonal
+pilot, so elapsed times are not an equal-work speed comparison. Measure actual
+worker CPU and queue growth before making any completion forecast. Wider
+symbolic inspection does not alter the saved R10 concrete entry scope or prove
+family closure. The first two diagnostics encountered explicit predicate and
+scheduled-domain allowances. The larger monitored attempt inspected all
+67 initial regions locally and reached the descendant traversal. It then
+stopped cooperatively for measured lookup/publication optimization, with
+2,522,397 complete regions, 6,029,467 pending and one cancelled partial.
+Traversal took 1,865.666 s; whole-supervisor time was 2,029.718 s and sampled
+peak process-tree RSS was 50.119 GB. No missing-rule frontier was observed,
+but the worklist was not exhausted. Utilization remains well below 50 cores
+and the queue was still growing, so there is no reliable completion ETA. See the
+[September 23 investigation](research/five_loop_utilization_2026-09-23.md)
+for receipts, timing boundaries and proposed next measurements.
+
+## Previous checkpoint — stopped at user request
+
+The user requested a committed checkpoint and stop after the safe parallel-
+admission implementation. Its full release Rust and Python gates pass. The
+matched 60,000-domain prefix is unchanged and runs 1.54–1.64x faster in observed
+traversal time; this is not a full-family or whole-launch timing. The pilot
+stopped cooperatively with 97,814 completed domains, 132,653 pending and one
+cancelled partial. At that checkpoint no solver or build remained active, and
+the full 67-owner input had not been launched. The new instruction above
+authorizes resumption.
+
+The objective below is **unfinished**, not complete or mathematically blocked.
+The broader shared-root diagnostic is measured but incomplete. Explicit
+finite-root admission is implemented and independently reviewed. Its full
+initial release gate, report-size follow-up gate and saved-five-loop canary
+pass. Actual-root witness feedback and
+complete finite-envelope handling remain unfinished.
+Evidence and resume steps are in the
+[bounded-routing pilot report](research/bounded_routing_pilot_2026-09-22.md).
+
+## Objective
+
+Generate a closing finite IBP program for a generic, finite envelope of
+dimension-four renormalizable starting integrals. Do not specialize to an
+enumerated QCD beta-function diagram catalogue. Five loops is the current
+pressure workload, not an engine specialization.
+
+Retain existing parametric rules as the fast path and repair only concrete
+missing targets. Terminal minimization and numerical evaluation are deferred.
+
+## Domain contract
+
+For a scalar key `n`, distinguish:
+
+- `A = sum(max(n_i, 0))`, total positive denominator power;
+- `R = sum(max(-n_i, 0))`, scalar-product numerator degree;
+- `t = count(n_i > 0)` and dot excess `A - t`.
+
+A finite entry envelope supplies finite bounds on both A and R, optionally
+correlated by dimensional power counting. This is an input-domain restriction,
+never a reduction or source-generation cutoff. Entry bounds never filter
+descendants; existing compact-index admission and resource failures remain
+explicit rather than silently dropping a dependency.
+
+The engine accepts explicit budgets and masks without recognizing topology
+names, fixed loop counts or a specific observable. A separate physical profile
+must justify its budgets from graph/vertex power counting, gauge convention,
+external Taylor order and the treatment of nested renormalization forests.
+In particular, a one-shot two-point Taylor expansion is not automatically a
+bound on every recursively expanded GammaLoop forest term. Until the profile
+is audited, explicit budgets define only the stated finite mathematical domain,
+not a guarantee of all renormalizable amplitudes.
+
+### Conditional marginal-coefficient profile
+
+The first named profile is
+`EntryPowerBudget::renormalizable_marginal_feynman(L)`. Its explicit assumptions
+are ordinary dimension-four renormalizable vertices in Feynman gauge,
+three-/four-valent skeletons with tree two-point insertions resummed, conventional
+proper UV forests without vacuum/one-point nodes or oversubtraction, and
+polynomial scalarization without loop-dependent projector denominators. All
+explicit mass factors must be retained in the power count; stripping an
+inverse-mass factor invalidates the grading argument. This is not automatic
+authentication of an arbitrary GammaLoop model or UV prescription.
+For the forest argument, maximal children must be vertex-disjoint and each
+contracted forest quotient must retain a loop. Forest conventions allowing
+children to share vertices are not automatically covered by this proof.
+
+For E external legs and root superficial degree delta <= 4-E, a connected
+skeleton has I <= 3L+E-3 internal lines. Contracting the proper 1PI children of
+each ordinary forest node leaves a nonempty bridgeless quotient and therefore
+at least one loop. Quotient loop counts telescope to L, bounding the number of
+Taylor nodes by L. Since each proper nonvacuum, non-one-point node has degree
+at most two, their total derivative budget obeys
+`B <= 2(L-1) + delta`.
+
+Each denominator derivative adds at most one positive power:
+`A <= I+B <= 5L-1`. A child external momentum can be another loop momentum,
+so a Taylor factor can add **two** global numerator degrees. Starting from
+`N0 <= 2I-4L+delta` and extracting the marginal coefficient's delta true
+external degrees gives `2R <= N0+2B-delta <= 6L-2`.
+Finally, dimensional homogeneity with nonnegative explicit mass/coupling
+degree P gives `4L+2R-2A+P=0`. Hence this conservative finite envelope is:
+
+```
+A <= 5L-1,  R <= 3L-1,  A-R >= 2L.
+```
+
+At five loops this is `A<=24, R<=14, A-R>=10`. It is not legitimate to claim
+that R10 alone covers every raw nested-forest term. The correlated restriction
+is nevertheless much smaller than admitting independent rank and dot caps:
+an undotted twelve-line target permits R<=2, an eleven-line target R<=1,
+and a ten-line target only R=0. Scalar rank is not tensor rank.
+
+L is the number of **still-unintegrated** loops, summed across factorized
+components. A lower-loop skeleton multiplied by an already integrated
+counterterm needs its own profile, not the five-loop grading merely because
+its perturbative order is five. A full two-point jet including its mass term
+likewise needs a different grading than the marginal p-squared coefficient.
+General covariant-gauge longitudinal terms and different forest policies can
+be admitted with explicit larger budgets; they are not silently included in
+this named profile.
+
+### GammaLoop integration boundary
+
+A read-only audit of the local GammaLoop checkout supports the forest premise
+for its default `HedgePoset` path: additions tested independent are vertex-disjoint,
+and evaluation of a disconnected union multiplies its components without an
+additional Taylor operation (`uv/hedge_poset.rs`, `from_spinneys` and
+`compute_4d_for_node`). Ordinary subtraction steps add cycle rank.
+
+However, `uv/approx/local_4d.rs` keeps the full UV scaling jet, and
+`uv/approx/integrated.rs` sends it to integration without first selecting only
+the marginal coefficient. Thus the current marginal profile is **not** a
+coverage guarantee for every GammaLoop integration call. For example, the
+one-loop mass tadpole `[1]` belongs to a two-point mass term but fails the
+marginal entry condition `A-R>=2`.
+
+For a full nonvacuum two-/three-/four-point UV jet under the same structural
+assumptions, the conservative input bounds instead are
+`A<=5L-1`, `R<=3L`, `A-R>=2L-1`: a two-point coefficient can retain engineering
+dimension two instead of zero. At five loops this gives `A<=24`, `R<=15`,
+`A-R>=9`. The generic explicit-budget interface can represent these bounds;
+there is no new automatic physics-authentication claim. The final campaign
+must either use a documented marginal projection or include the full-jet
+domain. It must not silently drop mass-counterterm inputs. Gauge/model
+assumptions and graph-local correlations still require explicit admission.
+
+### Next tightening: graph/forest profiles, not a diagram catalogue
+
+The conservative envelope is an admission mechanism, not a claim that every
+tuple can occur. The next useful restriction is a union of structural profiles,
+each supplied by graph/forest power counting rather than by an observable's
+enumerated diagrams. Under the assumptions above, a profile can record:
+
+- I: original propagator count before equal-momentum denominator merging;
+- N0: original numerator momentum-degree bound;
+- B: sum of the applicable forest Taylor degrees;
+- e: extracted degree in true external momenta.
+
+These imply `A<=I+B` and `R<=floor((N0+2B-e)/2)`, retaining any additional
+mass-grading restriction. For example, a **primitive** five-loop two-point
+graph has `B<=2`, `I<=14`, `N0<=10`, `e=2`, hence `A<=16, R<=6` for its
+marginal coefficient. That example does not cover graphs with subdivergences.
+Recording the number V4 of quartic vertices sharpens the conservative marginal
+profile to `A<=5L-1-V4, R<=3L-1-V4` under the same skeleton assumptions.
+These are proposed derived bounds, not implemented automatic graph admission.
+
+One can also retain where Taylor derivatives act. Let b_j be baseline powers
+after native equal-momentum denominator merging, and let C_v contain the merged
+slots containing any original line that Taylor node v may differentiate. All
+indices refer to the same merged-slot coordinates. For `d_j=max(0,a_j-b_j)`, necessary
+conditions include
+
+```
+d_j <= sum(delta_v for v with j in C_v)
+sum(d_j for j in S) <= sum(delta_v for v with C_v intersect S nonempty).
+```
+
+Here S is a recorded group of denominator slots, not necessarily every possible
+subset. A root with Taylor budget two and one child with budget two permits
+four additional powers globally, but at most two on lines outside that child.
+Numerator cancellation only lowers denominator powers, so it preserves these
+upper bounds. Conservative incidence must include every line a derivative can
+affect; an incorrect routing-based omission would make the restriction unsafe.
+
+Keep the **union** of profiles: separately maximizing every budget discards
+these correlations. Generate admitted regions directly rather than filtering
+the trillion-tuple envelope. None of this requires another CAS or integer
+programming implementation. Conversely, do not infer I or V4 from the final
+support size t: quartic vertices, numerator pinches and equal-momentum merging
+can all reduce t. Already integrated counterterm insertions require explicit
+baseline powers and numerator/Taylor data as well. The marginal/full-jet and
+gauge distinctions still apply.
+
+The auxiliary-mass method also requires consistent treatment of mass terms and
+counterterms; it does not justify silently deleting them. See Section 2 of
+[Chetyrkin, Misiak and Münz](https://arxiv.org/abs/hep-ph/9711266). The particular
+finite bounds above are our conditional power-counting derivations, not claims
+that this paper supplies those bounds.
+
+## Implementation sequence
+
+1. Audit and document the physical envelope; expose generic finite entry-domain
+   traversal with deterministic ordering and bounded-memory input generation.
+2. Add opt-in fully fixed nomination to the existing feedback session. Keep all
+   powers; use the existing `SearchFinite` source solver and exact replay.
+3. Separate unresolved search outcomes from deliberately accepted finite
+   terminals. A nonminimal terminal policy is allowed, but unfinished work,
+   cancellation and errors are never silently accepted.
+4. Connect bounded entry batches to shared concrete dependency tracing and
+   owner feedback. Do not require coefficient back-substitution or terminal
+   numerical values to establish this generation milestone.
+5. Validate entry-domain exhaustion, concrete guard selection, cross-owner
+   routing, strict descent, fixed-point feedback and finite explicit terminal
+   output on small controls. Audit implementation and mathematical scope
+   independently. Run release builds for solver experiments.
+6. Run the complete five-loop census with one shared rule/dependency campaign,
+   Python steering, useful progress accounting, and 50-core/500-GB limits.
+   Report exhaustive completion only when every admitted input and its
+   dependencies reaches an explicit terminal or zero without unresolved work.
+
+## Scalability and reporting
+
+Finite does not mean cheap. Report exact input counts when available, queued
+and processed nodes, actual missing keys, new rules, searched residuals and
+accepted terminals, maximum intermediate A/R, cache hits, worker utilization,
+CPU/wall time and aggregate RSS. An iterator must not be mistaken for bounded
+campaign memory if the scheduler eagerly consumes it before starting workers.
+
+No elapsed deadline replaces monitoring. The retained objective is completion
+within fifteen hours when measurements support a realistic attempt; otherwise
+checkpoint, diagnose, optimize and retry. Saved rules are not regenerated by
+default.
+
+## Initial implementation checkpoint
+
+The generic finite-domain iterator and opt-in fixed-target nomination are
+implemented. The licensed release application gate passes 332 library tests
+and 82 integration tests; the matching release Python/CLI gate passes all
+50 Python tests. CLI and Python return identical complete planning JSON for
+the 67-owner census. These gates ran in the shared working tree; unrelated
+pre-existing edits are not part of this milestone. The domain uses Symbolica's
+public `CombinationIterator` and `Integer::binom`, not another combinatorial or
+CAS kernel. Declaration, public re-export and existing call sites were checked.
+Independent review caught and corrected an empty-shell traversal issue before
+the milestone: correlated bands now prune impossible A layers before iteration.
+
+The one-loop end-to-end control exhausts the starting keys `[2]`, `[3]`, `[4]`,
+repairs missing rules, and reaches the explicitly searched terminal `[1]`,
+which lies outside the starting envelope. Its results agree with one, two and
+six trace workers. This checks the separation of entry bounds from descendants;
+it is not a five-loop performance measurement.
+
+Planning the current 67-owner census with the conservative five-loop profile
+counts **2,188,260,327,648 labelled starting tuples**. This is an exact count
+of the envelope, not a count of missing rules or independent integrals. It
+includes many tuples that no renormalizable graph produces. Consequently,
+bounded batches alone are not a practical full-campaign algorithm. Reuse
+parametric rule regions to skip already covered inputs, intersect their genuine
+gaps with the finite envelope, and repair only the remaining concrete targets.
+Graph-local power-counting correlations may tighten admission further without
+requiring an observable-specific diagram catalogue. No brute-force traversal of
+the trillion-entry envelope has been launched.
+
+### Five-loop concrete control
+
+A release, Python-steered control selected the first admitted starting key in
+each of the 67 owner classes, then traced their dependencies jointly through
+the **unchanged saved rules** with 50 workers. It completed with zero missing
+rules/owners and zero failed nodes:
+
+- 67 starting keys, 347,816 distinct reachable integrals, 348,652 operational nodes;
+- 130,348 rule applications, 5,797,375 shared-work deduplication hits;
+- 314 existing declared terminals, with no new source search or terminal evaluation;
+- 4.2647 s shared traversal; 108.2325 s application timer including owner loading,
+  route verification and post-trace work; 112.0488 s supervisor wall time;
+- 5.645 GB sampled aggregate peak RSS (not an exact transient-peak measurement).
+
+This demonstrates complete dependency traversal for those 67 explicit inputs,
+not coverage of every index configuration in their classes. It performs no
+coefficient back-substitution and is not a new closing parametric artifact.
+Most cold time is setup rather than rule traversal; retained sessions are
+therefore important for the next campaign. Evidence:
+`TMP/finite-entry-gate.2GG13m/shared-owner-campaign.p3kv5i96/`.
+
+Two campaign integration requirements remain explicit: the current scheduler
+eagerly admits all supplied targets, so a lazy generator alone is not bounded
+campaign memory; and saved R10 entry scopes must not silently admit a wider
+profile. An explicit finite entry policy is now implemented separately from
+saved generation provenance; the initial release gate and saved-five-loop
+canary pass, including the report-size follow-up application gate. Bounded
+retained-session batches and compressed
+coverage/gap traversal are still required before the full run.
+At that earlier checkpoint, no finite renormalizable five-loop envelope had
+been claimed exhaustively covered, and no full-envelope campaign had been
+launched. The active full attempt is recorded at the top of this document.
+
+### Five-loop diagonal stress control
+
+A second control uses 50 concrete inputs in owner `111010100100101`, on a
+diagonal associated with a previously unresolved symbolic guard. In ordinary
+integral indices, `n_0=n_1=t` for `3<=t<=9` and `n_11=-k` for
+`1<=k<=min(10,2t-4)`; other active powers are one and inactive powers zero.
+They lie inside the conditional marginal envelope and the saved R10 entry
+scope. This is a diagnostic input selection, not topology-specific engine code.
+
+The first run hit its explicit two-million operational-node diagnostic
+allowance after 13.585 s of tracing. It had not observed any missing rule, but
+1,384,225 nodes remained queued, so it established no completion. Its 46 failed
+nodes were resource-stop fallout, not 46 missing IBPs. A second run retained
+the same inputs/rules and increased the diagnostic work allowances, without
+an elapsed deadline. It **completed**:
+
+- 50 inputs; 54,695,037 distinct reachable integrals, 54,695,087 operational nodes;
+- 15,512,818 rule applications; 14,535,822,697 deduplication hits;
+- zero missing rules, missing owners, failed nodes or remaining queued work;
+- five existing declared terminal keys; no new rules or terminal evaluations;
+- 1,552.875 s shared traversal (25.881 min), 1,666.006 s application timer,
+  1,695.856 s supervisor wall time;
+- 50 configured workers, not a claim of 50 continuously busy cores;
+- 31,294 s sampled aggregate CPU time (about 18.48 busy cores averaged across
+  the sampled supervisor interval, including setup);
+- 26.109 GB sampled aggregate peak RSS, well below the 450/500 GB thresholds.
+
+The application timer includes preparation and post-trace work, but is not
+the whole child-process lifetime: heartbeat evidence indicates about 102.7 s
+before tracing and 10.4 s after the final scheduler snapshot; the supervisor
+also includes process shutdown/reaping. None of those differences is a pure
+artifact-loading benchmark. These counts refer to exact dependency tracing without coefficient
+back-substitution. The trace made 1,198,295 routing calls and charged an aggregate
+projected pre-coalescing endpoint bound of 29,691,375,754; this is a prospective
+work counter, not the observed number of emitted endpoints. Deduplication avoids repeating node expansion,
+but does not eliminate the work of generating repeated routed dependencies.
+Thus this run is evidence of large concrete routing fan-out, not a new rule gap
+or an estimate that the complete envelope can finish in fifteen hours. Its
+finite completion is restricted to the 50 supplied roots and their descendants.
+Evidence: `TMP/finite-entry-gate.2GG13m/shared-owner-campaign.k1ou4fev/`; the
+resource-censored first attempt is `shared-owner-campaign.gcu38c5o/` beside it.
+
+### Bounded positive-coordinate refinement
+
+The opt-in `OwnerDomainRefinementAxes::FiniteAxes` policy extends existing exact
+guard refinement to positive coordinates with explicit finite upper bounds.
+The default remains `InactiveOnly`. CLI/Python steering exposes
+`--bounded-refinement-axes finite-axes` together with a separate positive
+`--max-bounded-refinement-cells-per-query` allowance. A full split is admitted
+before any of its faces is published; insufficient allowance retains the
+original unresolved condition or typed native refusal. Rank bounds apply only
+to inactive coordinates and never manufacture a positive-coordinate bound.
+
+This reuses Symbolica-backed guard algebra. It preserves first-rule priority,
+whole excluded conjunctions, denominator/source guards and cancellation. It
+is exact local dispatch classification, not a routing extension or a closure
+claim. Bound preservation across owners is handled separately by the bounded
+routing implementation below, not by the refinement flag alone. The focused
+release gate passes 84 matching tests, including ten new finite-axis tests and
+the full `u64`-width overflow boundary. The subsequent complete release core
+gate passes **2,710 tests**, zero failures and 32 existing ignored diagnostics
+in 156.47 s (suite time, not a solver benchmark). The licensed release
+integration gate also passes 335 application-library tests and 82 integration tests, 50 public
+Python API/CLI tests, ten matcher-steering tests and twelve campaign-supervisor
+tests. Independent code/mathematical review found no remaining issue.
+
+On the saved five-loop diagonal, a box with local coordinates `x_0,x_1=1..16`,
+`x_11=1..10` and all others zero contains 2,560 points. For positive axes
+`n=x+1`; inactive `n=-x`. The default policy leaves its coupled equality
+unresolved. Finite-axis refinement resolves it into 46 selected-rule regions
+using one 16-face split: 16 diagonal pieces select rule 285 and 30 off-diagonal
+pieces select rule 309. All 2,560 points were independently dispatched as
+singletons, with **zero partition or rule-selection mismatches**. All 50 stress
+roots lie inside this box. Only 980 of its points satisfy the marginal envelope:
+this rectangular diagnostic intentionally overcovers, rather than defining
+the physical starting domain.
+
+The one-owner query takes 9.574 ms of matching, 893.360 ms of preparation and
+0.94 s whole-command wall time. It performs **no RHS traversal** and must not
+be compared as the same workload as the 25.881-minute concrete trace. Evidence:
+`TMP/finite-entry-gate.2GG13m/diagonal-match-{inactive-only,finite-axes}.json`
+and `diagonal-singletons-result.json`.
+
+A larger local control restricts all 57 formerly unresolved R10 boxes to a
+conservative box overcover of `A<=24`. For each positive axis i, its new local
+upper bound is `min(old_upper_i,24-t-sum(other_positive_lower))`; inactive
+bounds and the R10 simplex remain unchanged. This preserves every original
+point satisfying A24 but can include points violating the correlated A/R
+profile. None of the 57 queries is empty. Loading the seven relevant unchanged
+owners without routing, native first-rule dispatch resolves **all 57 queries**
+into 1,956 selected-rule regions using 45 existing owner/batch/rule combinations,
+with zero unknowns, exact gaps or invalid
+source conditions. It uses 954 refinement faces in 84 splits; matching takes
+2.700 s, preparation 9.534 s and the application timer 12.240 s.
+
+This removes the local guard obstruction for these **bounded R10 queries**.
+It does not cover R14/R15 inputs, all recursively reachable domains, or the
+whole five-loop physical envelope. The saved candidate rule IDs were not
+forced: each query used ordinary ordered dispatch. Evidence:
+`TMP/finite-entry-gate.2GG13m/bounded-guard-{queries,owners,result}.json`.
+
+### Bounded routing implementation
+
+The audited design is now implemented. The complete release core gate passes
+2,720 tests (32 existing diagnostics ignored) in 161.61 s, including the 21
+focused native routing tests. Application/integration tests pass 422; all 72
+Python API/CLI, matcher-steering and supervisor tests pass against the matching
+release build. Existing
+admitted `Prepared` maps already store an active-row unit bijection. Their
+endpoints have powers `n'=B-e`, where B copies positive source powers and the
+affine inactive numerator substitution gives `|e|<=R`. Thus surviving positive
+axes can retain their mapped source upper bounds, with physical lower bound one
+(local lower zero). For a pinched source subset P, each lost positive axis
+consumes at least `local_lower_j+1` numerator degree, giving the conservative
+residual rank bound
+
+```
+R_child <= R - sum(local_lower_j + 1 for j in P).
+```
+
+If that sum exceeds R, the subset is impossible; do not saturate the residual
+rank to zero. Affine constants can only lower the monomial degree. Do not
+permute inactive-coordinate bounds as if the numerator map were a bijection,
+and do not preserve positive lower bounds after numerator cancellation.
+Literal-owner routing can preserve the original box exactly. Source validity
+remains a separate mandatory obligation, even for known-zero destinations.
+
+`visit_bounded_domain_route_overcover` uses the already compiled
+`Prepared.active_target` map, not another routing or CAS implementation. Bounds
+are carried through initial nonliteral admission, RHS successor admission,
+mapped Apply and route reentry. Full-orthant calls delegate to the same visitor
+with zero lowers and unbounded uppers. Weighted subset pruning charges examined
+candidates, not only emitted covers; `masks_pruned` records impossible weighted
+pinches separately from emitted events. Invalid boxes fail before dispatch and
+rank-empty intersections emit nothing.
+
+Ten new native differential/boundary tests compare covers with actual
+`Prepared::transport` endpoints and cover affine constants, multi-pinches, rank
+zero, unbounded rank, overflow, cancellation and source guards. Application
+tests exercise both initial and genuine generated-IBP successor routing, source
+obligations, above-entry rank and worker-count parity. Independent mathematical
+and source review confirms the bound for the currently admitted map class; it
+is not a claim for arbitrary nonlinear denominator transformations or global
+recursive closure. No polynomial algebra kernel was introduced. An initial new
+application test supplied a multi-sector bundle to a single-owner loader; its
+fixture was corrected to use the existing single-sector native solver/exporter,
+without weakening the bound assertions. Gate evidence is in
+`TMP/bounded-route-gate.clR7HK/`; the shared working tree also contains unrelated
+scheduler edits, which are not part of the bounded-routing commit.
+
+The first 50-worker recursive diagonal-box pilot then stopped for optimization:
+74,326 of 159,344 scheduled domains completed with zero observed frontiers, but
+85,017 remained queued. It spent 321.095 s in traversal and reached 15.301 GB
+sampled peak RSS. Its 6.091 billion general containment comparisons saturated
+serial publication throughput. Every committed record retained finite positive
+bounds. This is incomplete diagnostic evidence, not a closed domain. A small
+maximal-candidate lookup optimization is implemented and independently audited;
+its release gate passes 428 application/integration and all 72 Python/steering
+tests. The core is unchanged from the passing 2,720-test gate. The index retires
+only redundant lookup entries, never pending work. The resumed matched run
+now establishes a 2.88–2.92× traversal improvement for an identical completed
+74,326-domain prefix. It stops at the inherited 50-million-event allowance,
+with 137,684 complete and 127,080 pending. The all-67-owner binary-dot/R0 control
+then stops at 500,000 scheduled domains, with 90,428 complete and 409,571 pending.
+Neither reports a missing-rule frontier, and neither is closed. The all-owner
+control exposes renewed serial admission pressure despite low memory use;
+do not blindly widen it or the independent-axis A24 envelope. Preserve compact
+correlations and improve containment lookup before the next larger attempt.
+See the [three-lane audit and measurements](research/bounded_routing_pilot_2026-09-22.md#resumed-measurements-and-recommendations)
+and [primary-source recommendations](research/finite_domain_campaign_literature_audit_2026-09-22.md).
+
+### Retaining total-power correlations
+
+Even finite coordinate bounds can be a very loose overcover. The 67-owner
+rectangular A24/R10 control contains 91,254,043,244,510,861 index tuples: separate
+coordinate caps allow total A as high as 156, instead of 24. Such boxes are
+diagnostics, not a faithful enumeration of the physical input envelope. The
+resumed pilots confirmed excessive growth. The implementation now retains
+`A<=A_max` and a band `D_min<=D=A-R<=D_max` alongside each box and the existing
+rank cap. These constraints survive tightening and participate in equality,
+containment, reuse and reported domain provenance.
+
+For a fixed support, active and inactive sums range over independent integer
+intervals. Their aggregate feasibility and coordinate projections can be
+computed in O(N) with checked integer arithmetic and explicit infinity; no
+general polyhedral solver or CAS kernel is needed. Include the active offset
+`A=t+sum(active_local_coordinates)`. Tightened coordinate bounds alone do not
+replace the A/D predicates: e.g. two powers in 1..3 still include (3,3), which
+violates A<=4.
+
+After the existing sign-crossing coordinates are fixed, native
+`applied/geometry.rs::image` already computes exact delta_R. For a fixed IBP
+shift s, `delta_D=sum(s)` and `delta_A=delta_R+delta_D`, so translate the
+constraints with the image. Do not reapply original entry caps to descendants.
+Admitted affine routing obeys `A_child<=A_source`, `D_child>=D_source`; a
+weighted pinch cost C tightens A and R upper bounds by C. Preserve D_min but
+generally widen D_max, because affine constants can lower numerator degree.
+Literal routing preserves the entire contract. Effective projected caps, such
+as `R<=A_max-D_min`, should be used before costly candidate enumeration.
+
+An exact decomposition into independent axis boxes is not a practical
+alternative: distinct positive tuples on A=24 cannot share a contained box.
+Thus support size t alone requires at least `binomial(23,t-1)` boxes, totaling
+37,167,402 across the present census even at R0. This is a lower bound on exact
+box representation, not a lower bound on solving the parametric problem.
+The compact geometry service and its native/application integration have
+independent mathematical/source review. Its 11 standalone optimized tests pass,
+including exhaustive comparison across 442,368 small finite domains. Native
+matching, applied successors, routing, application queue/cache identity and
+diagnostics now retain the predicates. The full release core gate passes 2,748
+tests (32 existing diagnostics ignored); application/integration gates pass 435
+tests and Python/API/steering gates pass 72. Query, match and walk JSON schemas are
+v2; see [the input contract](shared_owner_domain_matching.md). The optional
+guarded-pullback path explicitly refuses constrained inputs rather than silently
+discarding predicates. No original entry bounds are reapplied to descendants.
+The unconstrained wrappers retain their existing behavior.
+
+Workspace design and audit evidence is in
+`TMP/bounded-routing-pilot.4kY19R/CORRELATIONS{,_AUDIT,_IMPLEMENTATION}.md`
+and `POWER_DOMAIN_INTEGRATION_AUDIT_2026-09-22.md`. Release-gate evidence is in
+`TMP/power-domain-gate.UpQa87/`. This implementation milestone does not establish
+recursive five-loop completion, a campaign speedup, or an all-family ETA.
+
+The first constrained local five-loop query selects 980 of the old diagonal's
+2,560 points using A<=24, D>=10 and R<=10. Its 28 selected-rule regions agree
+point-for-point with the saved singleton oracle: zero partition or rule-selection
+mismatches and no excluded point admitted. Native matching takes 0.008475 s,
+preparation 0.702373 s and application total 0.710908 s. This is first-rule
+classification only, with neither RHS following nor new rule generation.
+The subsequent 50-worker recursive pilot stopped cooperatively for admission
+optimization after 106.956 s traversal: 49,686 completed domains, 145,431 queued,
+one partial cancelled domain and zero observed frontiers. It spent 4.972 billion
+containment comparisons, including 0.988 billion reverse maintenance, with
+9.589 GB sampled peak RSS. Correlation fidelity alone does not remove redundant
+domain representations or conservative routing fanout. Independent review
+initially recommended measuring cached semantic inclusion, followed by a census
+of exact full-permutation routes. The subsequent audit now measures a 4.27-fold
+index-only replay gain, while the map census rules out full-permutation routing
+for the observed traffic. Support-aware affine bounds instead tighten 62.23%
+of projected root covers in a native diagnostic. The integrated
+semantic-containment gate and recursive measurement are now complete; the
+narrower support-aware routing slice has also passed its release gate and its
+separate recursive pilot is now measured. These are not end-to-end speedups; details and
+validation caveats are in the [parallel audit](research/finite_domain_parallel_audit_2026-09-22.md).
+Neither input covers the full marginal R14 or full-jet
+R15 envelope. Local receipts are under
+`TMP/correlated-routing-pilots.jw6Bwo/match-probe.hQCWzw/`; the independent
+verification is recorded in `LOCAL_MATCH_AUDIT.md` in the parent directory.
+The recursive receipt is `shared-owner-campaign.jtsg2q0t/` in the same parent;
+the [pilot report](research/bounded_routing_pilot_2026-09-22.md) gives complete
+boundaries and audit findings. No durable pending-work resume or closing
+artifact is claimed from the interrupted run.
+
+### Cached semantic containment checkpoint
+
+The queue now caches exact coordinate/A/R/D extrema for its admitted domain
+vocabulary. This recognizes equivalent or containing regions missed by raw
+optional-bound comparisons, without changing raw keys or cancelling pending
+obligations. Six completed-descriptor replays measure a 4.27-fold median paired
+index-time improvement and approximately fivefold fewer comparisons; they do
+not replay every original admission or establish an end-to-end speedup.
+
+The release core gate passes 2,758 tests (32 diagnostics ignored), and the
+application/integration gates pass 443 (one replay diagnostic ignored).
+Two initially failing fixture counts were corrected with explicit shared-ID
+assertions: a fully active owner has actual R=0 regardless of its rank label.
+All original worker-count and initial-orthant equivalence checks pass. The
+same-input 980-point recursive pilot uses a frozen semantic-only binary,
+independent of the subsequent support-aware native routing implementation.
+Its receipts are `TMP/correlated-routing-pilots.jw6Bwo/shared-owner-campaign.r8txq1a3/`;
+this implementation checkpoint does not claim that pilot or the full physical
+five-loop envelope has closed. See the [audit synthesis](research/finite_domain_parallel_audit_2026-09-22.md).
+
+That semantic-only pilot stopped cooperatively after 169.163 s traversal with
+125,503 completed domains, 103,626 pending and one partial cancelled domain.
+It observed no frontier, but spent 8.157 billion containment comparisons and
+averaged about 2.08 busy cores in its late interval. Peak sampled RSS was
+11.515 GB. This is unfinished conservative traversal, not a missing-rule
+diagnosis, a completed envelope, or an end-to-end speedup versus the differently
+scheduled earlier prefix.
+
+### Support-aware affine routing checkpoint
+
+Prepared native maps now cache which inactive source rows can contribute to
+each target denominator, using Symbolica's exact coefficient zero test. For
+target j, the source-derived degree bound is
+`C_j=min(sum(relevant upper_i), R_max-sum(irrelevant lower_i))`.
+A surviving positive local coordinate retains lower bound
+`max(0, source_lower_j-C_j)`; a pinch is impossible if `C_j<=source_lower_j`.
+Simultaneous pinches still consume their full combined weighted cost. Each
+child uses source-derived bounds rather than the projected all-positive
+sibling's bounds, and newly inactive axes reset their local lower to zero.
+These are necessary support conditions, not assertions of actual reachability.
+
+The unconstrained wrapper's behavior and artifact schemas are unchanged.
+There is no numerator expansion or new CAS primitive, and no entry caps are
+reapplied to descendants. The release gate passes **2,768 core tests** (32
+existing diagnostics ignored), **443 application/integration tests** (one
+index-replay diagnostic ignored), and all **72 Python/steering tests** against
+the matching release CLI and extension. The focused routing gate passes 40
+tests. Independent mathematical and source review passes; see the
+[routing audit](research/affine_support_routing_audit_2026-09-22.md).
+
+The same-input 50-worker pilot is recorded separately under
+`TMP/correlated-routing-pilots.jw6Bwo/shared-owner-campaign.ujyk56ua/` with
+release-gate evidence in `TMP/affine-support-gate.cv24Y0/`. Measurements include
+the pre-existing scheduler/escrow working-tree changes used by both compared
+pilots, not just the clean native-routing commit. No full-envelope completion
+or fifteen-hour forecast follows from passing these implementation gates.
+
+The pilot stopped cooperatively for optimization after **121.100 s traversal**:
+63,913 domains complete, 113,500 pending, one partial cancelled domain and zero
+observed frontiers. Preparation was 103.737 s, application total 224.836 s and
+supervisor total 232.155 s; sampled peak RSS was 8.666 GB. It spent 6.887 billion
+containment comparisons. The completed-result buffer again filled while the
+queue grew and only 1–3 cores were typically busy late in the run. Stronger
+bounds also distinguish more domains and can reduce reuse by containing boxes;
+the observed prefix did not establish a traversal benefit. Stopped runs with
+different admission histories do not define a campaign-speed ratio.
+
+Independent comparison of 5,910 **identical Route source descriptors** present
+in both completed prefixes does establish local pruning: emitted Route
+descendants fall from 101,805 to 18,429 (81.90% fewer), with unchanged Apply/zero
+counts and identical examined-mask counts. This is a per-query result, not a
+full-campaign reduction factor. The index must handle the resulting more varied
+domain descriptions efficiently before that local gain can improve traversal.
+
+The next bounded step is an aggregate-extremum filter over cached native
+summaries, preserving exact containment, the earliest valid retained candidate,
+all pending jobs and fallible-allocation semantics. Both forward lookup and
+reverse retirement must avoid unconditional scans. Measure complete admission
+streams and memory/selectivity before adoption; see the
+[independent index recommendation](research/domain_admission_index_next_step_2026-09-22.md).
+This is not a reason to widen the physical envelope, generate new rules, or
+begin terminal evaluation.
+
+### Aggregate admission index: release gates and matched pilot complete
+
+The queue implementation groups maximal candidates by exact
+native `(A_max,R_max,D_min)` extrema, including explicit infinity and empty
+cases. Both forward lookup and reverse retirement filter whole groups before
+the unchanged exact containment test. Exact/orthant lookup retains priority;
+the fallback still returns the minimum valid retained ID, independent of group
+order. Retiring a lookup candidate never removes an exact key or pending job.
+Finite-comparison-cap behavior is unchanged, and storage/counters are preflighted
+before mutation. There is no new CAS primitive or production schema.
+
+Independent source/math review passes. The actual-source optimized queue gate
+passes 36 tests (one diagnostic ignored), including three complete streams of
+46,080 requests with every returned ID and complete state checked against an
+independent linear-semantic model. This includes repeated and rejected requests.
+The frozen original production queue also returns identical IDs in twelve
+saved-descriptor timing replays, six per receipt. Median paired wall-time ratios
+are 2.59x on the 63,913 support-pilot descriptors and 2.09x on the 125,503
+semantic-pilot descriptors, including all filter work in the timing boundary.
+These sequences omit original rejected campaign proposals; they are not full
+campaign replays or closure results. Filtering is not universally faster: one
+shuffled synthetic stream performs slightly more full checks.
+
+The full release gate passes 370 application-library tests and 82 integration
+tests (one replay diagnostic ignored); all 72 Python/API/steering tests pass
+against the fresh CLI and extension. The matched pilot preserves every field
+except timing in the first 60,000 completed domain records and improves that
+prefix by 1.38–1.44x. It still stops cooperatively with 74,400 complete,
+120,886 pending and one partial domain. Late utilization averages 1.85 busy
+cores; the 65,536-result escrow is full. This is an incomplete campaign, not
+five-loop closure. Source and timing audit:
+[aggregate index audit](research/domain_admission_index_audit_2026-09-22.md).
+Local evidence: `TMP/aggregate-admission-gate.HrfYdG/`.
+
+### Current implementation priority: safe parallel admission
+
+The user explicitly requests parallelizing the expensive commit path before
+launching the broader all-owner diagnostic. Work stealing alone does not remove
+the observed bottleneck: native workers already finish tens of thousands of
+inspections ahead of the ordered publisher. A larger buffer postpones the
+imbalance, and owner sharding alone faces strongly skewed traffic.
+
+The next slice parallelizes lookup preparation, not authority:
+
+- Process bounded batches against a borrowed immutable queue snapshot; do not
+  clone the entire candidate index or Symbolica expressions per worker.
+- Recheck current exact-key and orthant priority during ordered publication.
+  A still-live minimum snapshot hit remains valid; a retired hit needs a fresh
+  search. A snapshot miss needs comparisons against subsequently admitted
+  candidates, because retirement alone cannot create a new containing region.
+- Keep reverse retirement, storage/counter preflights and final admission in
+  their original order. No pending obligation disappears. Near counter
+  exhaustion, fall back to the serial path rather than changing its failure
+  prefix. Explicit finite-comparison-cap mode retains serial behavior.
+- Reserve independent lookup helpers within the total requested budget,
+  including inspection workers and the coordinator. Do not queue helper work
+  behind native workers blocked on publication; that would permit deadlock.
+- Account for attempted speculative work, including discarded preparations,
+  separately from committed-prefix work. Preserve event/frontier limits,
+  cancellation, bounded buffering and deterministic IDs.
+
+The implementation is now present. A 50-worker request reserves 25 native
+inspectors, 24 lookup helpers and one ordered coordinator; the helper pool is
+separate from producers that can block on publication. Preparation borrows the
+queue only for a bounded batch of at most 256 records, never clones the entire
+queue or Symbolica expressions, and preserves every callback ordinal. Batches
+with fewer than 16 admissions or fewer than 128 retained candidates use the
+ordinary serial path. Finite comparison caps also disable speculative lookup.
+Cancellation and native failure interrupt both preparation and publication.
+
+Independent adversarial review and the actual-source optimized walking gate
+pass: 98 tests, with one existing diagnostic ignored. This includes eight new
+queue tests and eight new execution tests, stale hits/misses, retirement,
+foreign-queue tokens, counter overflow, event-limit prefixes and helper-panic
+cleanup. A separate optimized gate using the committed scheduler (without the
+pre-existing escrow changes) passes 89 tests, one ignored, including all sixteen
+new queue/execution tests. The subsequent full release gates pass 470 Rust
+application/integration tests (one existing diagnostic ignored) and 72
+Python/steering tests. The matched 50-worker pilot has stopped cooperatively.
+Its identical 60,000-domain prefix takes 48.272–50.279 s of traversal versus
+77.319–79.328 s before this change: an observational 1.54–1.64x improvement,
+not a controlled statistical estimate or whole-launch speedup. Late sampled
+utilization averages 7.610 busy cores, including 4.753 lookup-helper cores;
+the full 50-core allocation is not saturated and pending work still grows.
+Progress distinguishes
+active native workers from reserved lookup slots; it does not invent a busy
+helper count. Speculative comparisons include discarded work and overlap the
+committed comparison counter when reused, so the two must not be summed.
+Afterward, test the prepared 67-owner
+input and continue the explicit-entry-scope / actual-witness / fixed-target
+feedback work below; admission parallelism does not replace those obligations.
+
+### Readiness beyond the index pilot
+
+A follow-up source audit separates the remaining integration obligations:
+
+- The complete conservative full-jet input is representable with existing
+  query fields: for each census owner of support size t, use zero local lowers,
+  active upper `24-t`, inactive upper 15, rank 15, and retained `A<=24,D>=9`.
+  All 67 queries are now prepared and validated under
+  `TMP/full-jet-symbolic67.CwBp4L/`, together with an explicit-budget planning
+  specification and deferred Python steering command. The existing release
+  `entry-domain-plan` now counts **3,258,551,484,224 starting keys** across these
+  disjoint supports, with no target enumeration or solver run. This count
+  concerns the conservative supplied envelope, not an actual QCD diagram list
+  or distinct descendants. Coordinate conventions
+  and 249,744 boundary/control membership comparisons pass. This is input
+  preparation, not a native run, wider concrete admission or completed campaign.
+- Wider symbolic matching is intentionally allowed by `walking/mod.rs`.
+  Default concrete root admission still enforces saved R10 context scope.
+  The new opt-in `FiniteRootAdmission` accepts a separate explicit finite
+  region union without retagging saved bundles; it is wired through serial
+  and parallel tracing, retained feedback, CLI `--entry-domains`, and Python
+  campaign steering. Source/mathematical review, the initial release suite
+  and the saved-five-loop canary pass, including the report-size follow-up
+  application gate. A wider symbolic
+  diagnostic alone still does not establish concrete evaluator coverage.
+- Conservative frontier boxes are explicitly not reached missing-rule claims
+  (`walking/inspection.rs`). Concrete witness extraction and replay from an
+  admitted starting input remain necessary before fixed-target repair.
+- `RoutedFeedbackSession::replace_targets` already supplies bounded retained
+  batches, and exact fixed-target nomination/overlay installation exist. The
+  missing connection is compact traversal to genuine witnesses and retained
+  CLI/Python feedback steering. Explicit requested-entry-domain authority is
+  implemented and release-validated; it is not a change to saved
+  source-search scope or the batch-replacement primitive itself.
+- Worklist resolution remains separate from final bounded-closure reporting,
+  fixed-point feedback, source-valid routing, and explicit finite terminals.
+  Graph/forest incidence profiles are still proposed restrictions, not
+  implemented or automatically authenticated physical input filters.
+
+Do not treat index speedups as completion of these tasks or move to terminal
+minimization/evaluation before the requested finite starting domain is handled.
+
+Two isolated implementation prototypes validated the next connection. The
+finite-root policy has now been integrated into production and passed its
+initial release gate and saved-five-loop control. It uses existing native
+`DomainPowerSummary` projection and singleton containment, without duplicating
+the application budget arithmetic. Seven optimized tests include 1,277,760
+comparisons with existing application membership and all 67 prepared full-jet
+regions. It accepts selected routing-source supports without requiring a
+literal Apply owner; normal routing remains responsible for missing owners.
+The proposed integration changes only initial-root admission, leaving saved
+generation scope, source checks and all descendant handling untouched.
+
+The other prototype selects a deterministic integer point by successively
+fixing a current projected coordinate minimum and reprojecting. It does not
+combine separately attainable minima. Seven tests cover 466,560 small-domain
+configurations, 82,944 intersections and integer-representability boundaries.
+The combined 18-test gate also checks 3,624 nonempty intersection witnesses
+against the original entry policy and 1,632 empty intersections. Independent
+review passes for both prototypes; production witness selection and its
+connection to actual missing-target feedback remain pending.
+
+If a symbolic frontier intersects an actual starting region, such a point is
+already an allowed root, irrespective of the conservative path that discovered
+the frontier. Exact concrete tracing can then nominate only an actual native
+`MissingRule` result. An unresolved guard, a successful point reduction or a
+bounded witness search finding no gap is never a region-coverage proof.
+Outside-entry frontiers still require a genuinely replayable ancestry.
+No new CAS, source search or solver campaign was introduced by these prototype
+tests. Local source, tests and audit notes are in
+`TMP/explicit-entry-policy.qJ4dZd/` and
+`TMP/parallel-admission-gate.53B924/ENTRY_WITNESS_CANDIDATE.md`.
+
+### Explicit finite-root admission: integrated five-loop control
+
+`FiniteRootAdmission` now owns an exact finite union of existing native
+coordinate/A/R/D regions. `CandidateEntryAdmission::ExplicitFinite` replaces
+only the initial saved-generation-rank gate. Omission retains the default.
+It never changes saved source-search provenance, rewrites the rule bundle,
+clips descendants, accepts an unresolved source condition, or declares wider
+closure. Selected routing-source supports need no literal Apply owner;
+ordinary routing still reports a genuinely missing owner.
+
+The Rust request and retained feedback session accept `entry_domains_json`;
+the CLI and Python campaign supervisor expose `--entry-domains PATH` using
+`rustred.owner-domain-queries.json.v2`. Batch replacement validates every new
+root before replacing the previous batch. Overlays, policy and verified routes
+remain retained across rounds. The normalized domain description is measured
+once and charged to the feedback report budget before loading owners; large
+valid input descriptions can exceed the old fixed metadata allowance.
+
+Independent source/mathematical review passes. The final actual-source release
+gates pass 2,778 core-library tests plus 15 core-integration tests, 395
+application-library tests plus 82 application-integration tests, and all 72
+Python/API/steering tests. There are 36 existing ignored Rust diagnostics
+across those suites. The follow-up application gate includes the independently
+audited report-size correction and its large-policy/overflow regression.
+These gates use the shared working tree; unrelated pre-existing scheduler
+edits are not part of the finite-entry milestone. Tests exercise union holes and correlated predicates,
+R15 entry with a reached R16 descendant, genuine R11 overlays without saved-R10
+retagging, source-condition failures, atomic admission, and serial/one/two/six
+worker agreement. The exhaustive geometry control checks 1,277,760 small
+integer memberships against an independent enumeration.
+
+The matching release CLI then completed the original **67 concrete control
+inputs**, with the explicit full-jet 67-region policy enabled, 50 workers and
+CPU affinity 0–49. Saved rules were reused without regeneration. Every final
+non-timing graph-snapshot field matches the earlier control: 347,816 distinct
+integrals, 348,652 operational nodes, 130,348 rule applications, 5,797,375
+deduplication hits, 314 declared-terminal keys counted, and zero missing rules,
+missing owners, failures or pending nodes. The public summaries contain the
+terminal count, not a complete terminal-key list comparison.
+
+Traversal took **4.6687 s**, the application timer **110.9826 s**, and the
+supervisor **116.0519 s**; sampled aggregate peak RSS was **5.660 GB**. These
+are release shared-host observations, not a statistical speed comparison or
+evidence of fifty continuously busy cores. Preparation and process teardown
+are excluded from the traversal timer; their difference is not a pure I/O
+benchmark. The report retains saved generation rank 10 alongside explicit
+requested rank 15. The supplied control roots are unchanged from the earlier
+small run, with R=0 and A=10..12: this is neither an above-R10 evaluation test,
+an exhaustive R15 test, nor closure of the full
+finite envelope, and no coefficient back-substitution was performed.
+
+Evidence: `TMP/finite-root-integration.GIUpjn/`, with canary
+`shared-owner-campaign.w0d369gw/` and exact counter comparison
+`canary-comparison.json`. Deterministic intersection-point selection and its
+connection to actual missing-target feedback now pass release validation;
+complete finite-envelope handling remains unfinished.
+
+### Connected witness feedback and delegation: release gates pass
+
+The Rust API now connects `pick_entry_intersection_witness` to
+`RoutedFeedbackSession::run_entry_witness_round` through typed native match
+pieces tied to an immutable program snapshot. The original entry-region union
+is retained separately from projected extrema. All selected points are checked
+against that union, deduplicated and admitted atomically before replacing the
+session's batch. Only subsequent exact tracing may nominate a missing rule;
+the match disposition alone never authorizes an IBP or terminal. Empty proposal
+intersections do not accidentally retrace the previous batch. Old-snapshot
+proposals must be recollected after publishing overlays.
+
+The new point interface always reports `more_region_work_required=true`:
+successful point traces are not region exhaustion. Nine native and seven
+feedback tests pass, including exact correlated intersections,
+representability limits, stale-snapshot/limit/cancellation atomicity and actual
+two-round one-loop fixed-target repair. Independent source/math review passes.
+The release core gate passes 2,787 library and 15 integration tests (35 ignored),
+including all nine witness tests. The application gate passes 435 library and
+82 integration tests (one existing diagnostic ignored), including all seven
+connected feedback tests. The freshly built CLI and Python extension pass
+50 public API tests, 11 matcher-steering tests and 12 supervisor tests.
+
+In parallel, opt-in unreserved-domain delegation is integrated with the
+symbolic worklist. It transfers an untouched smaller obligation only to an
+exactly containing later region in the same snapshot/owner/phase. A fixed
+logical dispatch lookahead makes reservation independent of worker timing;
+frontiers, failed publication and unresolved representatives cannot silently
+discharge aliases. Rust, CLI and Python expose the policy, while the original
+inspect-all policy remains the default. See the
+[interface contract](shared_owner_domain_matching.md#opt-in-delegation-of-unreserved-domains).
+The native release gate covers the delegation ledger, six queue-transaction
+tests and nine execution tests. Its one-loop worker-count control includes
+50 configured workers, but uses lookahead one and therefore is not evidence
+of concurrent 50-core utilization. An additional actual-source compatibility
+gate against the committed scheduler passes 120 tests (one existing diagnostic
+ignored). The full Cargo tests
+use the shared working tree, including unrelated pre-existing escrow changes
+that are excluded from this milestone. The full-67-owner H=256 diagnostic ran
+with 50 configured workers, fixed CPU affinity 0–49, the 450/500 GB memory policy
+and no elapsed deadline, then stopped for the measured optimization described
+above. Its receipt is `shared-owner-campaign.zx0rs62j/` under the gate
+directory. Alias publication is measured separately from native inspection and
+does not establish discharge. Current evidence is under
+`TMP/witness-delegation-gate.9qXc3m/`. Neither addition establishes complete
+coverage of the finite five-loop envelope or improves its ETA yet.
+
+The all-owner input has a concrete reuse advantage worth testing after the
+matched index pilot. Sufficient implication of the recorded coordinate and
+A/R/D bounds proves that **23,206 of 23,276 completed Apply regions (99.699%)**
+in the support-aware diagonal pilot lie inside their corresponding prepared
+full-jet starting regions. They account for 97.827% of that prefix's Apply
+events. Its 40,637 Route obligations are separate and cannot be discharged by
+an Apply root alone. The remaining 70 Apply descriptors fail this sufficient
+test (65 have an A25 cap and five a D8 lower bound); no descendant may be
+clipped to make it fit the starting envelope. Broader initial regions may
+therefore suppress repeated inspection, but can also introduce new guard
+partitions and descendants. This census justifies a full shared diagnostic;
+it predicts neither its running time nor closure. Reproducible read-only
+evidence is in `TMP/aggregate-admission-gate.HrfYdG/FULL_JET_CONTAINMENT_AUDIT.md`.
+
+Local verification evidence is in `TMP/finite-entry-gate.2GG13m/` (untracked).
+The passing app gate took 64.97 s wall / 61.52 s user CPU, and the Python gate
+50.20 s wall / 48.89 s user CPU; these are test-suite times, not solver benchmarks.
+An initial unlicensed app run failed nine multicore preflights; rerunning with
+the supplied license passed. An initial Python comparison accidentally selected
+an older debug CLI and was interrupted; the passing gate explicitly selected
+the matching release CLI and freshly built extension. No solver changes were
+needed to resolve either setup issue.

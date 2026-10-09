@@ -15,7 +15,10 @@ The frozen publication runtime retains native owner
 pins. The [published-input build recipe](clean-community-build.md) needs no
 private checkout or patch application.
 
-Both resolve RustRed from official main `7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`.
+This checkout uses the [vendored RustRed copy](../vendor/README.md) initially
+imported from revision `78969aab524b7d6a2eec36f59b01e9af1e04cc04`; the frozen
+community-host snapshot retains official main
+`7c1ed03722b8c05daf60c89ba4ecc79457ed2ada`.
 The community host preserves its separate Vakint implementation at
 `6203c6cbba6ae5e90329ba5081fad55319e678db`. See
 [native boundary integration](native-boundary-integrands.md) for the newer

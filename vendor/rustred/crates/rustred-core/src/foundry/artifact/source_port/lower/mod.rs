@@ -1,0 +1,268 @@
+//! One exact original-domain lowering shared by generation and cold decoding.
+mod diagnostic;
+mod domain;
+#[cfg(test)]
+pub(in crate::foundry::artifact) mod durable_tests;
+mod original_combination;
+mod refined_replay;
+#[cfg(test)]
+mod tests;
+mod verification;
+
+use std::sync::Arc;
+
+use crate::algebra::{IndexedCoefficient, IndexedPolynomial};
+use crate::foundry::cell::{FixedIndexRestriction, RuleCell, SourceViewBatch};
+use crate::foundry::completion::LatticeBox;
+use crate::foundry::parametric::{AffineApplicationDomain, ParametricGuardOrigin};
+use crate::identity::{IndexShift, ParametricIbpGenerator, RowId};
+use crate::sector::{OrderingPolicy, SectorMonotoneDomain};
+
+use super::super::geometry;
+use super::{CheckedRule, SourcePortAuditError, error};
+pub(in crate::foundry::artifact) use verification::PreparedOriginalDomain;
+pub(crate) use verification::ReplayLimits;
+
+/// Consumed only from the private full-domain replay record.
+pub(crate) struct OriginalDomainParts {
+    pub sources: Arc<SourceViewBatch>,
+    pub application: SectorMonotoneDomain,
+    pub mathematical_application: LatticeBox,
+    pub fixed: Vec<FixedIndexRestriction>,
+    pub ordering: OrderingPolicy,
+    pub rhs: Vec<(IndexShift, IndexedCoefficient)>,
+    pub contributions: Vec<(usize, RowId, IndexedCoefficient)>,
+    pub guards: Vec<(IndexedPolynomial, Vec<ParametricGuardOrigin>)>,
+    pub affine: Option<Arc<AffineApplicationDomain>>,
+    pub affine_exclusions: Arc<[Arc<AffineApplicationDomain>]>,
+    pub source_rows_used: usize,
+    pub shift_columns_checked: usize,
+    pub limits: ReplayLimits,
+}
+
+pub(crate) struct ReplayedOriginalDomain(OriginalDomainParts);
+
+impl ReplayedOriginalDomain {
+    pub(crate) fn into_parts(self) -> OriginalDomainParts {
+        self.0
+    }
+}
+
+pub(super) fn lower_rule<const N: usize>(
+    corpus: &super::super::normalization::OriginalSourceCorpus,
+    generator: &ParametricIbpGenerator<'_>,
+    sector: [bool; N],
+    ordering: OrderingPolicy,
+    zero_sectors: &[[bool; N]],
+    inherited: &[crate::algebra::CoefficientPolynomial],
+    checked: CheckedRule<N>,
+    max_total_excess_degree: Option<u64>,
+    rule_limits: crate::foundry::parametric::ParametricRuleLimits,
+    cover_limits: crate::foundry::artifact::ArtifactCoverReplayLimits,
+) -> Result<Vec<Arc<RuleCell>>, SourcePortAuditError> {
+    let context = corpus.context();
+    let physical_arity = context.index_count();
+    if sector[physical_arity..].iter().any(|active| *active)
+        || checked.fixed[physical_arity..]
+            .iter()
+            .any(|value| *value != Some(0))
+        || checked
+            .rhs
+            .iter()
+            .any(|term| term.shift[physical_arity..].iter().any(|value| *value != 0))
+    {
+        return Err(error("retained rule has invalid storage coordinates"));
+    }
+    let sector = &sector[..physical_arity];
+    let zero_sectors: Vec<_> = zero_sectors
+        .iter()
+        .map(|sector| &sector[..physical_arity])
+        .collect();
+    let zero_sectors = zero_sectors.as_slice();
+    let limits = ReplayLimits {
+        rule: rule_limits,
+        geometry: cover_limits.geometry(),
+        ..Default::default()
+    };
+    let fixed: Vec<_> = checked
+        .fixed
+        .iter()
+        .take(physical_arity)
+        .enumerate()
+        .filter_map(|(position, value)| {
+            value.map(|value| FixedIndexRestriction::new(position, value))
+        })
+        .collect();
+    let fixed_pairs: Vec<_> = fixed
+        .iter()
+        .map(|item| (item.position(), item.value()))
+        .collect();
+    let affine = checked
+        .affine
+        .as_ref()
+        .map(|domain| domain.project_storage(context).map(Arc::new).map_err(error))
+        .transpose()?;
+    let affine_exclusions = checked
+        .affine_exclusions
+        .iter()
+        .map(|domain| domain.project_storage(context).map(Arc::new).map_err(error))
+        .collect::<Result<Vec<_>, _>>()?;
+    let translated = corpus.translate_normalized(
+        generator,
+        &checked.ordinary,
+        &fixed,
+        Default::default(),
+        limits.cell,
+    )?;
+    // Conditions of canceled contributions remain mandatory. All original
+    // RHS denominators are also retained before any physical zero omission.
+    let mut conditions = translated.weight_conditions;
+    for condition in inherited.iter().chain(&checked.nonzero_conditions) {
+        conditions.push(
+            context
+                .admit_storage_polynomial_result_with_limits(
+                    condition.clone(),
+                    limits.cell.indexed_algebra.exact_algebra,
+                )
+                .map_err(error)?,
+        );
+    }
+    let mut rhs = Vec::with_capacity(checked.rhs.len());
+    for term in checked.rhs {
+        let shift =
+            IndexShift::try_new(term.shift[..physical_arity].iter().copied(), physical_arity)
+                .map_err(error)?;
+        let coefficient = context
+            .admit_storage_result_with_limits(
+                term.coefficient,
+                limits.cell.indexed_algebra.exact_algebra,
+            )
+            .map_err(error)?;
+        let (coefficient, denominator) = context
+            .specialize_fixed_indices_sealed(
+                &coefficient,
+                &fixed_pairs,
+                limits.cell.indexed_algebra,
+            )
+            .map_err(error)?;
+        conditions.push(denominator);
+        rhs.push((shift, coefficient));
+    }
+    let parent = PreparedOriginalDomain::try_new(
+        context,
+        Arc::new(translated.sources),
+        translated.contributions,
+        fixed,
+        affine.clone(),
+        affine_exclusions.into(),
+        conditions,
+        limits,
+    )?;
+    let mut result = Vec::new();
+    for (application_ordinal, application) in checked.application.into_iter().enumerate() {
+        if application.lower()[physical_arity..]
+            .iter()
+            .any(|value| *value != 0)
+            || application.upper()[physical_arity..]
+                .iter()
+                .any(|value| *value != Some(0))
+        {
+            return Err(error(
+                "retained application has invalid storage coordinates",
+            ));
+        }
+        let application = LatticeBox::try_new(
+            application.lower()[..physical_arity].iter().copied(),
+            application.upper()[..physical_arity].iter().copied(),
+        )
+        .map_err(error)?;
+        let application = if let Some(degree) = max_total_excess_degree {
+            // Admission of original sources, canceled poles, fixed faces and
+            // coefficient maps above is never bypassed by a small scope.
+            let count = application_ordinal
+                .checked_add(1)
+                .ok_or_else(|| error("degree hull count overflow"))?;
+            if count > limits.geometry.max_requested_boxes
+                || count
+                    .checked_mul(physical_arity)
+                    .and_then(|v| v.checked_mul(2))
+                    .is_none_or(|v| v > limits.geometry.max_requested_box_coordinate_cells)
+                || count
+                    .checked_mul(physical_arity)
+                    .and_then(|v| v.checked_mul(3))
+                    .is_none_or(|v| v > limits.geometry.max_split_operations)
+            {
+                return Err(SourcePortAuditError::ResourceBudgetExhausted {
+                    resource: "scoped lowering degree hulls",
+                });
+            }
+            use super::super::predicate_cover::{PredicateCoverError, degree_hull};
+            let Some(hull) = degree_hull(
+                &sector,
+                &application,
+                super::super::scope::EntryDegreeBound::MaxTotalExcessDegree(degree),
+            )
+            .map_err(|issue| match issue {
+                PredicateCoverError::Budget(resource) => {
+                    SourcePortAuditError::ResourceBudgetExhausted { resource }
+                }
+                other => error(other),
+            })?
+            else {
+                continue;
+            };
+            hull
+        } else {
+            application
+        };
+        let mut pieces = vec![application];
+        for (shift, _) in &rhs {
+            let mut refined = Vec::new();
+            for piece in pieces {
+                refined.extend(geometry::sign_partition(&piece, &sector, shift.values())?);
+                if refined.len() > limits.geometry.max_requested_boxes {
+                    return Err(error("combined sign-cell refinement budget exceeded"));
+                }
+            }
+            pieces = refined;
+        }
+        for piece in pieces {
+            if parent.application_is_proved_empty(&piece, &sector)? {
+                continue;
+            }
+            let mut retained = Vec::new();
+            for (shift, coefficient) in &rhs {
+                if geometry::uniformly_zero_wide_with_limits(
+                    shift.values(),
+                    Some(coefficient),
+                    std::slice::from_ref(&piece),
+                    &sector,
+                    zero_sectors,
+                    limits.geometry,
+                    |coefficient, piece| {
+                        parent.coefficient_vanishes(context, coefficient, piece, &sector)
+                    },
+                )? {
+                    continue;
+                }
+                retained.push((shift.clone(), coefficient.clone()));
+            }
+            if retained.is_empty() {
+                return Err(error(
+                    "combined lowering does not admit a nonzero-sector rule with zero RHS",
+                ));
+            }
+            // Complete weighted original identity, all original poles and
+            // true-unbounded descent are rechecked by the same cold entry.
+            result.push(parent.verify_cell(
+                context,
+                ordering.clone(),
+                &sector,
+                zero_sectors,
+                piece,
+                retained,
+            )?);
+        }
+    }
+    Ok(result)
+}

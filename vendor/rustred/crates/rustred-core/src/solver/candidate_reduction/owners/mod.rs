@@ -1,0 +1,35 @@
+//! Immutable, same-family candidate programs; not closure certificates.
+mod domains;
+mod evaluation;
+pub use domains::{
+    OwnerAppliedCellRefinement, OwnerAppliedError, OwnerAppliedEvent, OwnerAppliedFailure,
+    OwnerAppliedLimits, OwnerAppliedNonzero, OwnerAppliedProblem, OwnerAppliedProblemKind,
+    OwnerAppliedStats, OwnerAppliedSuccessor, OwnerDomainMatchDisposition, OwnerDomainMatchError,
+    OwnerDomainMatchFailure, OwnerDomainMatchLimits, OwnerDomainMatchPiece, OwnerDomainMatchStats,
+    OwnerDomainPredicate, OwnerDomainRefinementAxes, OwnerGuardedDomain, OwnerGuardedError,
+    OwnerGuardedEvent, OwnerGuardedFailure, OwnerGuardedImage, OwnerGuardedLimits,
+    OwnerGuardedResidualKind, OwnerGuardedStats, OwnerGuardedSuccessor, OwnerSuccessorError,
+    OwnerSuccessorFailure, OwnerSuccessorLimits, OwnerSuccessorRegion, OwnerSuccessorStats,
+    OwnerSuccessorTransition,
+};
+mod factor_census;
+mod feedback;
+mod identities;
+mod model;
+pub use factor_census::{FactorCensusLimits, FactorCensusRole, OwnerFactorCensus};
+mod preferred;
+mod prepare;
+pub(in crate::solver::candidate_reduction) use evaluation::OwnerStep;
+pub use feedback::{
+    BoundOwnerOverlay, BoundOwnerSearch, OwnerDomainAttemptLimits, OwnerDomainScope,
+    OwnerFeedbackError, OwnerFeedbackPolicy, OwnerOverlayLimits, OwnerOverlayMetadata,
+    OwnerOverlayUsage,
+};
+
+pub use model::{
+    CandidateIntegralIdentity, CandidateOwnerContext, CandidateOwnerInput, CandidateOwnerPrograms,
+    CandidateOwnerScope,
+};
+
+#[cfg(test)]
+mod tests;

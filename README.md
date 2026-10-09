@@ -58,12 +58,16 @@ C++ export fixes. The embedding host owns its corresponding shared dependency
 graph; the frozen notebook wheel retains its recorded revision. See
 [embedding and source fingerprints](docs/dependency-embedding.md).
 
-RustRed is a Git dependency, locked to `7c1ed037`; its experimental
-reconstruction feature is disabled. The high-level multiloop solver defaults to
+RustRed is checked into [`vendor/rustred`](vendor/rustred) and used through a
+local Cargo path dependency. It was copied from revision
+`78969aab524b7d6a2eec36f59b01e9af1e04cc04`; edit its sources directly in this
+repository and build from the RustFlow root. See the [vendoring notes](vendor/README.md)
+for provenance and validation commands. Its experimental reconstruction feature
+is disabled. The high-level multiloop solver defaults to
 exact rational epsilon specialization before IBP elimination;
 `sampled_reduction: false` selects fully symbolic epsilon reduction. Upstream
-RustRed updates are checked between validation milestones; local work is
-preserved. Both reduction adapters now use RustRed’s compiled arity registry
+RustRed updates are reviewed as ordinary changes to the vendored source tree.
+Both reduction adapters now use RustRed’s compiled arity registry
 (default 1–16); the factorized path delegates to its native dispatch macro.
 `RUSTRED_RUNTIME_ARITIES` configures that registry at build time. Search and
 representation limits still apply.

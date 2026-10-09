@@ -1,0 +1,392 @@
+# Interfaces
+
+This document separates the currently available interfaces from planned
+services. RustRed is pre-alpha and does not promise backward compatibility;
+Vakint's existing user-facing behavior does.
+
+## Current workspace
+
+The repository is a virtual Cargo workspace with three packages:
+
+| Package | Responsibility |
+|---|---|
+| `rustred` (`crates/rustred-core`) | Topology-neutral mathematical values and services backed by Symbolica |
+| `rustred-app` | Shared application composition, canonical TOML results, and the `rustred` CLI |
+| `rustred-python` | Thin PyO3 adapter exposing the public Python package `rustred` |
+
+There is no root Rust package or root `src/` tree. A pinned revision of
+Symbolica's tracked `dev` branch, configured with `integer-gmp` and
+`float-mpfr`, is the sole production CAS. RustRed has no FORM, Mathematica, or
+SymPy runtime path.
+
+## Rust core
+
+The executable-reference port is exposed through `rustred::solver`:
+`SourceSystem::from_family` prepares ordinary and Lorentz-invariance sources;
+`SectorSolver::new` preconditions a sector; `solve_case`,
+`solve_numeric_cases`, and `solve_sector` perform single-case, shared finite-case,
+and automatic coordinate-case searches. `SectorSolveOptions` controls bounded
+search, and `solve_sector_with_observer` provides borrowed progress events.
+`SectorExecutor` adds a reusable bounded worker pool with deterministic
+manifest-order results, shared immutable sources, structural scheduling, and
+worker-side result consumers for memory-efficient output.
+`SectorSolution` contains conditional `SectorRule` values and finite numerical
+residuals, not a certified closing artifact. This new solver is currently a
+Rust-library interface; its Cargo examples exercise complete reference runs.
+The existing CLI/Python campaign interfaces below still use the earlier
+artifact foundry. See [the port status](spired_port.md).
+
+The public `rustred` facade is organized by mathematical owner:
+
+- `algebra` provides authenticated base and index-extended Symbolica
+  coefficient contexts and checked exact operations;
+- `family` owns complete affine integral families, integral keys, automatic
+  ISP completion, kinematics, domain conditions, Symanzik polynomials, and the
+  authenticated physical/auxiliary presentation used for optimized-lane
+  evidence;
+- `input` compiles compact, TOML-derived, text-Symbolica, or caller-owned Atom
+  descriptions into one normalized project, authenticates them at ingress,
+  and lowers the result to a family;
+- `identity` owns sparse parametric relations and the topology-neutral
+  `ParametricIbpGenerator`, including ordinary and LI source batches;
+- `sector` owns masks, restrictions, ordering, exact caller-supplied symmetry
+  verification/transport, and on-demand zero-sector analysis;
+- `tensor` owns validated caller Symbolica heads, sealed-evidence lane
+  selection, bounded key-aware Lorentz projection, and affine scalar-product
+  lowering onto typed integral keys;
+- `scalar_numerator` starts after tensor projection and lowers an already
+  scalarized polynomial vacuum numerator through a sealed artifact's affine
+  basis, returning exact shifted keys, spectator coefficients, and explicit
+  common-mass powers; it does not perform Lorentz projection;
+- `foundry::anchored` owns concrete-index rule derivation, while
+  `foundry::parametric` owns fixed-sector `K(n)` elimination, uniform descent,
+  exact symbolic and concrete-specialization replay, and guards/provenance;
+  both expose
+  a requested-pivot variant backed by deterministic Symbolica RREF;
+  `foundry::dependency` owns exact target-sector partition work admission and
+  compact, resumable proper-subsector obligation descriptors;
+- `foundry::artifact` owns the versioned immutable closed-artifact value and
+  currently admits the freshly generated canonical one-loop and equal-mass
+  two-loop unit-mass vacuum partitions, with deterministic bounded durable
+  encoding and one-time authenticated load/replay;
+- `reduction` owns the topology-independent deterministic memoizing applier,
+  exact typed-master decompositions, resource limits, termination checks, and
+  common-mass restoration; and
+- `campaign` owns resource profiles, execution-width preflight, and bounded
+  ordered parallel execution.
+
+The core therefore has two genuine durable closing artifacts and a reusable
+scalar-IBP reducer. It still has no master substitution, generic tensor
+kinematics, higher-even-rank projector, or closed three- or higher-loop family.
+The Rust API may change directly as these owners and callers are extended;
+obsolete facades are not retained for compatibility.
+
+## Shared application API
+
+`rustred-app` exposes transport-neutral derivation, campaign, artifact, and
+reduction operations, including the two bounded foundry diagnostics:
+
+```rust
+derive(DeriveRequest) -> Result<DeriveResult, AppError>
+campaign_plan(CampaignPlanRequest) -> Result<CampaignPlanResult, AppError>
+campaign_preflight(CampaignPreflightRequest)
+    -> Result<CampaignPreflightResult, AppError>
+foundry_campaign_run(FoundryCampaignRunRequest)
+    -> Result<FoundryCampaignRunResult, AppError>
+foundry_wave_campaign_run(FoundryWaveCampaignRunRequest)
+    -> Result<FoundryWaveCampaignRunResult, AppError>
+closing_artifact_generate(ClosingArtifactGenerateRequest)
+    -> Result<ClosingArtifactGenerateResult, AppError>
+closing_artifact_inspect(ClosingArtifactInspectRequest)
+    -> Result<ClosingArtifactInspectResult, AppError>
+closing_artifact_reduce(ClosingArtifactReduceRequest)
+    -> Result<ClosingArtifactReduceResult, AppError>
+```
+
+The strict foundry-config V2 schema is a sum type with two construction paths.
+`mode = "autonomous"` accepts no caller-authored proof order, proposal order,
+probe portfolio, domain queue, or itinerary; the selected application entry
+point and RustRed preset derive that deterministic program. `mode =
+"external-hints-only"` requires a typed `[hints]` object and may choose only
+the supported non-authoritative itinerary, proof/proposal order, probe, and
+resource inputs. Unknown fields are rejected, and neither shape can represent
+an imported rule, recurrence RHS, coefficient, source row, or support. The
+report-only provenance ID is derived from the successful construction path,
+never accepted as a free label. RustRed derives and replays all identities
+itself. Single-sector results remain diagnostic-only. A complete full-wave
+result crosses the separate installation boundary, deterministically encodes
+and cold-reloads the artifact, and owns its canonical durable bytes; an
+incomplete result owns no artifact bytes. Full-wave diagnostics retain a
+detached report for every sibling that blocks atomic wave publication,
+including its typed stop, exact residual-box census, the caller-bounded box
+coordinates for that sibling, and an explicit truncation bit.
+
+`derive` parses and lowers one family and emits selected raw parametric
+ordinary and/or LI relations. A concrete target in the input is validated and
+reported, not reduced. `campaign_plan` authenticates and interns only supplied
+roots; it does not discover dependencies or prove closure.
+`campaign_preflight` computes a topology-neutral memory-limited execution
+width and does not start workers. Closing-artifact generation accepts the
+semantic `unit-mass-vacuum-k1` and `unit-mass-vacuum-k3` family selectors and
+owns deterministic durable bytes. Inspection and reduction require those
+bytes and decode/authenticate them exactly once; they never substitute a
+hidden preset. The `K = 3` loader cold-regenerates its tagged derivation and
+requires byte-exact equality at that one untrusted boundary. Reduction returns
+an ordered exact decomposition keyed by typed master power vectors plus
+common-mass-squared homogeneity powers.
+
+Rust callers that accept untrusted artifact bytes may use
+`ClosedArtifact::decode_durable_with_limits` with `ArtifactLoadLimits`. Its
+public `cover_replay: ArtifactCoverReplayLimits` member independently bounds
+arity, requested boxes and coordinate cells, uncovered boxes and coordinate
+cells, and exact-cover split operations. K6 decoding also applies the existing
+translated-source and rule-cell limits before retaining cell-plan payloads.
+These checks belong only to cold loading; a successfully sealed artifact does
+not repeat them during memoized reduction.
+
+Each result owns a canonical, newline-terminated TOML document accessible
+through `to_toml()` (and, where appropriate, `into_toml()`). The generation
+result additionally owns its durable `Vec<u8>`. Application errors retain
+typed input, schema, resource, lowering, derivation, execution, license,
+serialization, output-limit, and internal categories.
+
+## Command line
+
+The binary is `rustred`, supplied by `rustred-app`:
+
+```text
+rustred derive [OPTIONS]
+rustred campaign plan [OPTIONS]
+rustred campaign preflight [OPTIONS]
+rustred campaign run --config <PATH|-> --output <PATH|-> [OPTIONS]
+rustred campaign run-waves --config <PATH|-> --output <PATH|-> --n-cores <N> [OPTIONS]
+rustred campaign generate \
+  --family <unit-mass-vacuum-k1|unit-mass-vacuum-k3> [OPTIONS]
+rustred campaign inspect --artifact <PATH|-> [OPTIONS]
+rustred campaign reduce --artifact <PATH|-> --powers <N,...> [OPTIONS]
+```
+
+`derive` accepts `--input-format auto|toml|symbolica`,
+`--relations all|ordinary|li`, and a positive `--n-cores`. Campaign planning
+accepts an optional root identifier. Campaign preflight requires a resource
+profile and an explicit positive memory limit. Input and output default to
+standard streams; file output requires `--force` to replace an existing file
+and is committed atomically.
+
+`campaign run` executes one bounded single-sector K6 diagnostic campaign.
+`campaign run-waves` executes the bounded full-rank atomic-wave itinerary and
+requires an explicit positive sibling-worker count. Both consume the strict
+V2 campaign configuration, produce diagnostic reports, and distinguish
+autonomous requests from external search hints structurally. A completely
+published `run-waves` result additionally exposes canonical artifact bytes only
+after exact installation, deterministic encoding, and one cold reload; an
+incomplete result exposes none. Neither command accepts or imports recurrence
+algebra.
+
+`campaign generate` writes binary durable bytes. Inspection and reduction read
+those bytes from a file or standard input and emit canonical TOML. Invalid
+bytes are rejected before output begins. The three-loop `K = 6` selector is not
+available yet.
+
+The CLI calls the same application functions as Python. It is not a separate
+solver implementation.
+
+## Python
+
+Users always import the public package:
+
+```python
+import rustred
+
+relations = rustred.derive(source, relations="all", n_cores=4)
+plan = rustred.campaign_plan(source)
+width = rustred.campaign_preflight(
+    profile,
+    n_cores=4,
+    max_memory_bytes=16 * 1024**3,
+)
+generated = rustred.generate_closing_artifact(
+    family=rustred.ClosingFamily.UNIT_MASS_VACUUM_K1,
+)
+inspection = rustred.inspect_closing_artifact(generated.artifact)
+reduction = rustred.reduce_with_closing_artifact(generated.artifact, [3])
+```
+
+The result classes expose `schema`, `status`, and `to_toml()`. Generation also
+exposes immutable `artifact: bytes`; reduction exposes typed exact master
+terms. Public exception classes mirror the application error categories.
+`rustred._rustred` is a private extension implementation detail; top-level
+`_rustred` is not the user API.
+
+Long-running calls release the GIL and pass through one process coordinator.
+If an internal panic crosses that boundary, the coordinator is poisoned and
+later requests fail instead of reusing uncertain native state. A coordinator
+created before `fork()` is likewise rejected in the child.
+
+## Vakint tensor boundary
+
+Vakint/GammaLoop development lives in its separate repository on the
+`vakint_rustred` feature branch, rebased onto `feynkit`. Tensor-bearing RustRed
+lanes explicitly select `TensorReductionMethod::FeynKit`; RustRed itself does
+not provide or extend the Stage 1 tensor reducer. Existing FORM-backed Vakint
+methods and syntax remain backward-compatible alternatives and oracle lanes.
+
+## Active Stage 1 Vakint backend
+
+The new additive interface provides a scalar evaluation backend, separate
+from tensor mode selection:
+
+```rust
+EvaluationMethod::RustRed(RustRedEvaluationOptions::default())
+EvaluationOrder::rustred_only()
+```
+
+`RustRedEvaluationOptions` controls optional master substitution, enabled by
+default. The backend currently supports the registered one-loop tadpole,
+two-loop sunset, and pinch. It consumes the topology match and simultaneous
+routing witness already produced by Vakint, loads the corresponding shipped
+immutable artifact once, applies guarded rules through RustRed, and returns
+exact coefficients of typed master keys mapped to Vakint's existing MATAD
+master basis. It reuses Vakint's pure-Rust master values when substitution is
+requested, reports no FORM dependency, invokes no FORM scalar reduction, and
+never falls back internally. Unsupported graph classes remain unsupported so
+mixed orders can continue safely to their next configured method.
+
+Tensor-bearing inputs use FeynKit's FORM-less tensor prepass before this
+FORM-less scalar tail. The complete lane is tested with an invalid FORM path;
+AlphaLoop/MATAD comparisons run separately with the pinned FORM 5 oracle.
+
+Production `K = 1` and `K = 3` artifacts are generated once by RustRed, checked
+into and shipped with Vakint, validated once when lazily loaded, and reused for
+ordinary evaluation. The same ownership applies to the pending `K = 6`
+artifact. Vakint does not regenerate them or maintain topology-authored
+recurrence code.
+
+Milestone commits in GammaLoop pin RustRed to an exact Git revision and resolve
+RustRed and Vakint against one exact Symbolica-family revision. A relative
+local path may be used while co-developing uncommitted changes, but a pushed,
+reproducible milestone uses an exact Git revision. Reference checkouts under
+`FOR_REFERENCE_ONLY_DO_NOT_PUSH/` never enter RustRed history.
+
+## Ownership of the completed Vakint path
+
+Vakint remains the user-facing steering and presentation layer. It owns:
+
+- its existing topology registry and
+  `Topologies::match_topologies_to_user_input` matcher;
+- canonical graph/routing selection and simultaneous numerator routing maps;
+- conversion between Vakint terms and typed RustRed requests;
+- backend choice, orchestration, normalization, existing master values, and
+  result presentation; and
+- backward compatibility for its public API conventions, defaults, and all
+  existing FORM-backed modes and legacy integral notation, while accepting any
+  newer notation additively, but not for obsolete RustRed artifact schemas.
+
+RustRed owns or will own the reusable mathematical services:
+
+- authentication of a matched family presentation, including physical versus
+  auxiliary denominators, routing, shifts, and common-scale evidence;
+- guarded artifact lookup and deterministic memoized IBP application;
+- stable master keys, common-mass restoration, and typed supplied-master
+  substitution; and
+- exact failures for unsupported domains, missing artifacts, undecidable
+  guards, cycles, or resource exhaustion.
+
+RustRed does not rematch a topology that Vakint has already matched, and
+Vakint does not duplicate the rule engine. Defects in Vakint matching are
+fixed and tested in that matcher rather than bypassed by a second topology
+table.
+
+The existing tensor API remains available at its evidenced bounded frontier.
+Extension or replacement of tensor reduction belongs to the already-authorized
+Stage 2 and begins only after the complete Stage 1 gate.
+
+## Stage 1 fine-grained surfaces
+
+The Rust application, CLI, and Python package now expose durable generation,
+inspection/replay, and guarded memoized reduction for the closed `K = 1` and
+`K = 3` families. The same service boundaries will extend to the remaining
+work:
+
+- family construction and raw IBP/LI generation;
+- closure campaigns for `K = 6`;
+- a durable artifact and reduction to stable master keys for that family;
+- the additional symmetry/factorization and lower-artifact routing it requires;
+  and
+- supplied master-value validation and substitution.
+
+These interfaces remain useful for arbitrary non-vacuum families. The Vakint
+vacuum artifact library is an optimized deployment of the generic services,
+not the limit of RustRed's family model. Tensor API expansion is not part of
+these Stage 1 surfaces.
+
+The executable-reference solver also exposes an opt-in SpIReD
+semi-numerical target-lifting backend. It delegates interpolation, CRT and
+rational reconstruction to Symbolica 3.0's public API; exact replay and
+publication remain the authority. The backend is diagnostic/experimental and
+does not alter RustRed's default exact sparse path.
+
+Candidate generation also accepts the opt-in native factorized-denominator
+field through Rust `CandidateExactBackend::SparseFactorized`, CLI
+`family-candidates --exact-backend sparse-factorized`, and Python
+`family_candidates(..., exact_backend="sparse-factorized")`. It changes only
+symbolic and shared numerical-case exact materialization; source discovery, guards and independent
+certification keep their existing paths. Returned coefficients use the
+ordinary representation and the existing candidate bundle schema. The
+generation report records the choice in `exact_backend`; `sparse` remains the
+default. This option does not select an application-cache representation.
+The Rust sector API exposes the numerical choice independently as
+`SectorConfig::numerical_exact_backend` (`NumericalExactBackend::Sparse` or
+`SparseFactorized`), preserving ordinary lifting by default. A single native
+Symbolica reducer shares elimination across requested pivots; ordinary exact
+coefficients and their original variable maps are restored before rule creation.
+
+`FamilyCandidatesRequest::numerical_depth`, CLI `--numerical-depth` and Python
+`family_candidates(..., numerical_depth=...)` expose the same existing generic
+finite-case search depth. Default two is unchanged; zero still processes the
+initial seeds and may retain a larger finite nonminimal residual set. It does
+not change the preceding symbolic traversal, exact rule checks or certification.
+The native record layout is unchanged: its versioned solver-policy tag records
+the chosen depth, checked before Symbolica state import. Structural inspection
+and the generation report expose `numerical_depth`. Default-depth policy bytes
+are unchanged; unknown or noncanonical policy tags are rejected. The tag is
+generation metadata, never a replacement for source/guard/coverage evidence.
+
+`FamilyCandidatesRequest::checkpoint: Option<CandidateCheckpointOptions>` adds
+opt-in persistence without changing the solver or binary candidate schema.
+The CLI options are `--checkpoint-dir`, `--resume`, `--checkpoint-max-bytes`;
+Python keywords are `checkpoint_dir`, `resume`, `checkpoint_max_bytes`.
+Completed exact sectors use the existing native codec, are atomically installed,
+and are released from worker output memory. Resume only schedules missing
+manifest ordinals; changing worker count is allowed, changing source/root/
+ordering/backend/depth is not. Assembly admits cumulative limits, checks native
+family/coefficient contexts and interns sectors before the final family so the
+logical output is unchanged. Checkpoint files remain uncertified and require
+trusted generated provenance. See the [workflow and resource contract](CLI.md#save-candidates-certify-independently).
+
+Candidate generation can select explicit native jobs without generating unused
+nonzero sectors. Rust's `FamilyCandidatesRequest::selected_sectors` is
+`Option<Vec<Vec<bool>>>`; `None` retains the full root downset. The public Python
+API accepts original-family-axis binary strings:
+
+```python
+from pathlib import Path
+import rustred
+
+source = Path("examples/input/three_loop_k6.toml").read_text()
+result = rustred.family_candidates(
+    source, input_format="toml", n_cores=2,
+    selected_sectors=["111111"],
+)
+Path("selected.rrcandidate").write_bytes(result.bundle)
+print(result.to_toml())
+```
+
+The selection is separate from permutation, source visitation and lawful integral
+ordering. It is canonicalized, validated against the prepared nonzero sectors,
+and included in checkpoint/resume identity. Inspection exposes `root_sector`
+and `sectors`; reports explicitly label selected generation. **This output is
+partial and uncertified**, not a closing artifact: omitted nonzero sectors stay
+uncovered, while the existing full native zero-sector analysis is retained.
+Checkpoint resume must repeat the same selection; no omitted jobs are silently
+filled from an old bundle. Existing full generation remains the default.

@@ -1,0 +1,24 @@
+[package]
+name = "rustred-feynkit"
+version.workspace = true
+authors.workspace = true
+edition = "2024"
+rust-version = "1.89"
+description = "Native RustRed IBP bridge for Feynkit and symbolica.community.hepkit"
+license = "MIT"
+
+[features]
+capacity-dispatch = ["rustred/capacity-dispatch", "rustred_python?/capacity-dispatch"]
+runtime-arity-selection = ["rustred/runtime-arity-selection"]
+default = ["native"]
+native = ["rustred/native", "rustred_python?/native"]
+wasm = ["rustred/wasm", "rustred_python?/wasm"]
+# Optional application/event API; finite native IBP users need not link the
+# campaign application layer or adopt a standalone Python ABI.
+campaign-api = ["dep:rustred_python", "pyo3/multiple-pymethods"]
+
+[dependencies]
+rustred = { path = "../rustred-core", default-features = false }
+rustred_python = { package = "rustred-python", path = "../rustred-python", default-features = false, optional = true }
+symbolica = { workspace = true, features = ["python_export"] }
+pyo3 = { version = "0.28" }

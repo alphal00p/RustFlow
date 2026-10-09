@@ -1,0 +1,623 @@
+use std::panic::{AssertUnwindSafe, catch_unwind};
+
+use symbolica::domains::Ring;
+use symbolica::domains::finite_field::Zp64;
+use symbolica::tensors::sparse::{LuLMode, SparseMatrix, SparseRowReducer};
+
+use super::sample::{check_limit, checked_add, checked_mul, checked_u32, try_vec};
+use super::{
+    ModularHit, ModularKernelError, ModularKernelLimits, ModularPhysicalFrame,
+    ModularRankDiagnostics, ModularTargetQuery,
+};
+
+const PROJECTED_COLUMNS: &str = "modular projected columns";
+const PROJECTED_ENTRIES: &str = "modular projected nonzero entries";
+const PROJECTED_ROW_OFFSETS: &str = "modular projected CSR row offsets";
+const REDUCER_DENSE_CELLS: &str = "modular reducer dense-fill cells";
+const REDUCER_TOTAL_FILL: &str = "modular reducer total L-pattern plus U fill entries";
+const REDUCER_FILL_MULTIPLE: &str = "modular reducer fill-multiple entries";
+
+#[derive(Debug)]
+struct RankSummary {
+    rank: usize,
+    pivot_columns: Box<[usize]>,
+    input_nonzeros: usize,
+    lower_pattern_nonzeros: usize,
+    upper_nonzeros: usize,
+    total_fill_nonzeros: usize,
+    independent_source_rows: Box<[usize]>,
+}
+
+struct ProjectionReduction {
+    summary: RankSummary,
+    projected: SparseMatrix<Zp64>,
+    reducer: SparseRowReducer<Zp64>,
+}
+
+pub(super) fn query_target<'frame>(
+    frame: &ModularPhysicalFrame<'frame>,
+    target_column: usize,
+    forbidden_columns: &[usize],
+    obstruction_rotation: usize,
+    limits: ModularKernelLimits,
+) -> Result<ModularTargetQuery<'frame>, ModularKernelError> {
+    let physical_columns = frame.matrix().ncols() as usize;
+    if target_column >= physical_columns {
+        return Err(ModularKernelError::TargetColumnOutOfRange {
+            target: target_column,
+            columns: physical_columns,
+        });
+    }
+
+    let augmented_count = checked_add(PROJECTED_COLUMNS, forbidden_columns.len(), 1)?;
+    check_limit(
+        PROJECTED_COLUMNS,
+        augmented_count,
+        limits.max_projected_columns,
+    )?;
+    let mut forbidden = try_vec(PROJECTED_COLUMNS, forbidden_columns.len())?;
+    forbidden.extend_from_slice(forbidden_columns);
+    forbidden.sort_unstable();
+    for pair in forbidden.windows(2) {
+        if pair[0] == pair[1] {
+            return Err(ModularKernelError::DuplicateForbiddenColumn { column: pair[0] });
+        }
+    }
+    for &column in &forbidden {
+        if column >= physical_columns {
+            return Err(ModularKernelError::ForbiddenColumnOutOfRange {
+                column,
+                columns: physical_columns,
+            });
+        }
+    }
+    if forbidden.binary_search(&target_column).is_ok() {
+        return Err(ModularKernelError::TargetIsForbidden {
+            target: target_column,
+        });
+    }
+
+    let forbidden_summary = rank_projection(frame.matrix(), &forbidden, limits)?;
+    // The obstruction normalization requires a query-local logical order:
+    // every canonical forbidden column first and the target last.  Physical
+    // frame order is deliberately not reused here.
+    let mut logical_physical_columns = try_vec(PROJECTED_COLUMNS, augmented_count)?;
+    logical_physical_columns.extend_from_slice(&forbidden);
+    logical_physical_columns.push(target_column);
+    let ProjectionReduction {
+        summary: augmented_summary,
+        projected: augmented_projected,
+        reducer: augmented_reducer,
+    } = reduce_nonempty_projection(frame.matrix(), &forbidden, Some(target_column), limits)?;
+
+    if augmented_summary.rank < forbidden_summary.rank
+        || augmented_summary.rank > forbidden_summary.rank.saturating_add(1)
+    {
+        return Err(ModularKernelError::Invariant {
+            detail: "adding one target column changed rank by more than one",
+        });
+    }
+    let augmented_input_nonzeros = augmented_summary.input_nonzeros;
+    let diagnostics = ModularRankDiagnostics {
+        target_column,
+        forbidden_columns: forbidden.into_boxed_slice(),
+        forbidden_rank: forbidden_summary.rank,
+        augmented_rank: augmented_summary.rank,
+        forbidden_pivot_columns: forbidden_summary.pivot_columns,
+        augmented_pivot_columns: augmented_summary.pivot_columns,
+        forbidden_independent_source_rows: forbidden_summary.independent_source_rows,
+        augmented_independent_source_rows: augmented_summary.independent_source_rows,
+        forbidden_input_nonzeros: forbidden_summary.input_nonzeros,
+        augmented_input_nonzeros: augmented_summary.input_nonzeros,
+        forbidden_lower_pattern_nonzeros: forbidden_summary.lower_pattern_nonzeros,
+        augmented_lower_pattern_nonzeros: augmented_summary.lower_pattern_nonzeros,
+        forbidden_upper_nonzeros: forbidden_summary.upper_nonzeros,
+        augmented_upper_nonzeros: augmented_summary.upper_nonzeros,
+        forbidden_total_fill_nonzeros: forbidden_summary.total_fill_nonzeros,
+        augmented_total_fill_nonzeros: augmented_summary.total_fill_nonzeros,
+    };
+    if diagnostics.augmented_rank > diagnostics.forbidden_rank {
+        Ok(ModularTargetQuery::Hit(ModularHit::new(
+            frame.plan(),
+            frame.sample_fingerprint().clone(),
+            diagnostics,
+        )))
+    } else {
+        let obstruction = super::obstruction::finish_no_hit(
+            frame,
+            diagnostics,
+            logical_physical_columns,
+            &augmented_projected,
+            augmented_reducer,
+            augmented_input_nonzeros,
+            obstruction_rotation,
+            limits,
+        )?;
+        Ok(ModularTargetQuery::NoHitWithObstruction(obstruction))
+    }
+}
+
+fn rank_projection(
+    matrix: &SparseMatrix<Zp64>,
+    selected_columns: &[usize],
+    limits: ModularKernelLimits,
+) -> Result<RankSummary, ModularKernelError> {
+    if selected_columns.is_empty() || matrix.nrows() == 0 {
+        return Ok(RankSummary {
+            rank: 0,
+            pivot_columns: Box::new([]),
+            input_nonzeros: 0,
+            lower_pattern_nonzeros: 0,
+            upper_nonzeros: 0,
+            total_fill_nonzeros: 0,
+            independent_source_rows: Box::new([]),
+        });
+    }
+    reduce_nonempty_projection(matrix, selected_columns, None, limits)
+        .map(|reduction| reduction.summary)
+}
+
+/// Reduce one logical projection whose canonical forbidden columns come
+/// first and whose optional target is numbered last, independently of its
+/// physical frame position.
+fn reduce_nonempty_projection(
+    matrix: &SparseMatrix<Zp64>,
+    forbidden_columns: &[usize],
+    target_column: Option<usize>,
+    limits: ModularKernelLimits,
+) -> Result<ProjectionReduction, ModularKernelError> {
+    if forbidden_columns.windows(2).any(|pair| pair[0] >= pair[1]) {
+        return Err(ModularKernelError::Invariant {
+            detail: "rank projection columns are not strictly sorted",
+        });
+    }
+    let physical_columns = matrix.ncols() as usize;
+    if forbidden_columns
+        .last()
+        .is_some_and(|&column| column >= physical_columns)
+    {
+        return Err(ModularKernelError::Invariant {
+            detail: "rank projection column is outside the physical matrix",
+        });
+    }
+    if let Some(target) = target_column {
+        if target >= physical_columns {
+            return Err(ModularKernelError::TargetColumnOutOfRange {
+                target,
+                columns: physical_columns,
+            });
+        }
+        if forbidden_columns.binary_search(&target).is_ok() {
+            return Err(ModularKernelError::TargetIsForbidden { target });
+        }
+    }
+    let logical_column_count = checked_add(
+        PROJECTED_COLUMNS,
+        forbidden_columns.len(),
+        usize::from(target_column.is_some()),
+    )?;
+    if logical_column_count == 0 {
+        return Err(ModularKernelError::Invariant {
+            detail: "nonempty projection reducer received no logical columns",
+        });
+    }
+    check_limit(
+        PROJECTED_COLUMNS,
+        logical_column_count,
+        limits.max_projected_columns,
+    )?;
+    let dense_cells = checked_mul(
+        REDUCER_DENSE_CELLS,
+        matrix.nrows() as usize,
+        logical_column_count,
+    )?;
+    check_limit(
+        REDUCER_DENSE_CELLS,
+        dense_cells,
+        limits.max_reducer_dense_cells,
+    )?;
+    let rank_bound = usize::min(matrix.nrows() as usize, logical_column_count);
+    let upper_fill_bound = checked_mul(REDUCER_TOTAL_FILL, rank_bound, logical_column_count)?;
+    let lower_fill_bound = checked_mul(REDUCER_TOTAL_FILL, matrix.nrows() as usize, rank_bound)?;
+    let total_fill_bound = checked_add(REDUCER_TOTAL_FILL, upper_fill_bound, lower_fill_bound)?;
+    check_limit(
+        REDUCER_TOTAL_FILL,
+        total_fill_bound,
+        limits.max_reducer_total_fill_entries,
+    )?;
+
+    let input_nonzeros = projected_entry_count(matrix, forbidden_columns, target_column)?;
+    check_limit(
+        PROJECTED_ENTRIES,
+        input_nonzeros,
+        limits.max_projected_entries,
+    )?;
+    let row_offset_count = checked_add(PROJECTED_ROW_OFFSETS, matrix.nrows() as usize, 1)?;
+    check_limit(
+        PROJECTED_ROW_OFFSETS,
+        row_offset_count,
+        limits.max_csr_row_offsets,
+    )?;
+    let mut values = try_vec(PROJECTED_ENTRIES, input_nonzeros)?;
+    let mut column_indices = try_vec(PROJECTED_ENTRIES, input_nonzeros)?;
+    let mut row_offsets = try_vec(PROJECTED_ROW_OFFSETS, row_offset_count)?;
+    row_offsets.push(0usize);
+
+    for bounds in matrix.row_ptrs().windows(2) {
+        let source_columns =
+            matrix
+                .col_idcs()
+                .get(bounds[0]..bounds[1])
+                .ok_or(ModularKernelError::Invariant {
+                    detail: "physical modular CSR has invalid row bounds during projection",
+                })?;
+        let source_values =
+            matrix
+                .values()
+                .get(bounds[0]..bounds[1])
+                .ok_or(ModularKernelError::Invariant {
+                    detail: "physical modular CSR values have invalid row bounds during projection",
+                })?;
+        let mut target_value = None;
+        for (&column, value) in source_columns.iter().zip(source_values) {
+            let physical_column = column as usize;
+            if target_column == Some(physical_column) {
+                if target_value.replace(value.clone()).is_some() {
+                    return Err(ModularKernelError::Invariant {
+                        detail: "physical modular CSR repeats the target in one row",
+                    });
+                }
+            } else if let Ok(projected) = forbidden_columns.binary_search(&physical_column) {
+                values.push(value.clone());
+                column_indices.push(checked_u32("modular projected column index", projected)?);
+            }
+        }
+        if let Some(value) = target_value {
+            values.push(value);
+            column_indices.push(checked_u32(
+                "modular projected target column index",
+                logical_column_count - 1,
+            )?);
+        }
+        row_offsets.push(values.len());
+    }
+
+    let row_count = matrix.nrows();
+    let column_count = checked_u32("modular projected matrix columns", logical_column_count)?;
+    validate_projected_csr(
+        row_count,
+        column_count,
+        &values,
+        &row_offsets,
+        &column_indices,
+        matrix.field(),
+        input_nonzeros,
+    )?;
+    let projected = SparseMatrix::from_csr(
+        row_count,
+        column_count,
+        values,
+        row_offsets,
+        column_indices,
+        matrix.field().clone(),
+    );
+    let fill_multiple_limit = checked_mul(
+        REDUCER_FILL_MULTIPLE,
+        input_nonzeros,
+        limits.max_reducer_fill_multiple,
+    )?;
+    let mut reducer = call_native("constructing the modular sparse row reducer", || {
+        SparseRowReducer::new(column_count, projected.field().clone(), LuLMode::Pattern)
+    })?;
+    let mut independent_source_rows = try_vec(
+        "modular independent source rows",
+        usize::min(matrix.nrows() as usize, logical_column_count),
+    )?;
+    for (row, bounds) in projected.row_ptrs().windows(2).enumerate() {
+        let columns = &projected.col_idcs()[bounds[0]..bounds[1]];
+        if columns.is_empty() {
+            continue;
+        }
+        let values = &projected.values()[bounds[0]..bounds[1]];
+        let accepted = call_native("adding a row to the modular sparse reducer", || {
+            reducer.add_row(values, columns)
+        })?;
+        if accepted.is_some() {
+            independent_source_rows.push(row);
+        }
+        let current_total_fill = checked_add(
+            REDUCER_TOTAL_FILL,
+            reducer.u().nvalues(),
+            reducer.l().col_idcs().len(),
+        )?;
+        check_limit(
+            REDUCER_TOTAL_FILL,
+            current_total_fill,
+            limits.max_reducer_total_fill_entries,
+        )?;
+        check_limit(
+            REDUCER_FILL_MULTIPLE,
+            current_total_fill,
+            fill_multiple_limit,
+        )?;
+    }
+    let rank = reducer.u().nrows() as usize;
+    let pivot_count = reducer.pivots().iter().flatten().count();
+    if rank != pivot_count || rank > matrix.nrows() as usize || rank > logical_column_count {
+        return Err(ModularKernelError::Invariant {
+            detail: "Symbolica sparse reducer returned an invalid rank/pivot shape",
+        });
+    }
+    if independent_source_rows.len() != rank
+        || independent_source_rows
+            .windows(2)
+            .any(|pair| pair[0] >= pair[1])
+    {
+        return Err(ModularKernelError::Invariant {
+            detail: "Symbolica sparse reducer lost original independent-row chronology",
+        });
+    }
+    let upper_nonzeros = reducer.u().nvalues();
+    if upper_nonzeros > dense_cells {
+        return Err(ModularKernelError::Invariant {
+            detail: "Symbolica sparse reducer exceeded its admitted dense-fill bound",
+        });
+    }
+    let lower_pattern_nonzeros = reducer.l().col_idcs().len();
+    if lower_pattern_nonzeros > lower_fill_bound {
+        return Err(ModularKernelError::Invariant {
+            detail: "Symbolica sparse reducer exceeded its admitted L-pattern fill bound",
+        });
+    }
+    let total_fill_nonzeros =
+        checked_add(REDUCER_TOTAL_FILL, lower_pattern_nonzeros, upper_nonzeros)?;
+    if total_fill_nonzeros > total_fill_bound {
+        return Err(ModularKernelError::Invariant {
+            detail: "Symbolica sparse reducer exceeded its admitted total fill bound",
+        });
+    }
+    let mut pivot_columns = try_vec("modular reducer pivot columns", rank)?;
+    for (projected_column, pivot) in reducer.pivots().iter().enumerate() {
+        if pivot.is_some() {
+            let physical_column = if projected_column < forbidden_columns.len() {
+                forbidden_columns[projected_column]
+            } else {
+                target_column.ok_or(ModularKernelError::Invariant {
+                    detail: "rank projection pivot is outside its logical-to-physical map",
+                })?
+            };
+            pivot_columns.push(physical_column);
+        }
+    }
+    // Diagnostics and evidence traces use canonical physical-frame identity,
+    // not the query-local logical elimination order (where the target is
+    // deliberately last).  There is no row/pivot positional pairing in the
+    // trace, so sorting here preserves both contracts.
+    pivot_columns.sort_unstable();
+
+    Ok(ProjectionReduction {
+        summary: RankSummary {
+            rank,
+            pivot_columns: pivot_columns.into_boxed_slice(),
+            input_nonzeros,
+            lower_pattern_nonzeros,
+            upper_nonzeros,
+            total_fill_nonzeros,
+            independent_source_rows: independent_source_rows.into_boxed_slice(),
+        },
+        projected,
+        reducer,
+    })
+}
+
+fn call_native<T>(
+    operation: &'static str,
+    callback: impl FnOnce() -> T,
+) -> Result<T, ModularKernelError> {
+    catch_unwind(AssertUnwindSafe(callback))
+        .map_err(|_| ModularKernelError::NativePanic { operation })
+}
+
+fn projected_entry_count(
+    matrix: &SparseMatrix<Zp64>,
+    forbidden_columns: &[usize],
+    target_column: Option<usize>,
+) -> Result<usize, ModularKernelError> {
+    let mut count = 0usize;
+    for &column in matrix.col_idcs() {
+        let column = column as usize;
+        if target_column == Some(column) || forbidden_columns.binary_search(&column).is_ok() {
+            count = checked_add(PROJECTED_ENTRIES, count, 1)?;
+        }
+    }
+    Ok(count)
+}
+
+#[allow(clippy::too_many_arguments)]
+fn validate_projected_csr(
+    row_count: u32,
+    column_count: u32,
+    values: &[symbolica::domains::finite_field::FiniteFieldElement<u64>],
+    row_offsets: &[usize],
+    column_indices: &[u32],
+    field: &Zp64,
+    expected_entries: usize,
+) -> Result<(), ModularKernelError> {
+    if values.len() != expected_entries
+        || column_indices.len() != expected_entries
+        || row_offsets.len() != row_count as usize + 1
+        || row_offsets.first() != Some(&0)
+        || row_offsets.last() != Some(&expected_entries)
+        || row_offsets.windows(2).any(|pair| pair[0] > pair[1])
+        || values.iter().any(|value| field.is_zero(value))
+    {
+        return Err(ModularKernelError::Invariant {
+            detail: "projected modular CSR failed shape or nonzero validation",
+        });
+    }
+    for bounds in row_offsets.windows(2) {
+        let row_columns =
+            column_indices
+                .get(bounds[0]..bounds[1])
+                .ok_or(ModularKernelError::Invariant {
+                    detail: "projected modular CSR row bounds are invalid",
+                })?;
+        if row_columns.iter().any(|&column| column >= column_count)
+            || row_columns.windows(2).any(|pair| pair[0] >= pair[1])
+        {
+            return Err(ModularKernelError::Invariant {
+                detail: "projected modular CSR columns are unsorted or out of range",
+            });
+        }
+    }
+    Ok(())
+}
+
+#[cfg(test)]
+pub(super) fn rank_projection_for_test(
+    matrix: &SparseMatrix<Zp64>,
+    selected_columns: &[usize],
+    limits: ModularKernelLimits,
+) -> Result<(usize, usize), ModularKernelError> {
+    rank_projection(matrix, selected_columns, limits)
+        .map(|summary| (summary.rank, summary.total_fill_nonzeros))
+}
+
+#[cfg(test)]
+pub(super) fn right_obstruction_for_test(
+    matrix: &SparseMatrix<Zp64>,
+    target_column: usize,
+    forbidden_columns: &[usize],
+    limits: ModularKernelLimits,
+) -> Result<
+    (
+        usize,
+        usize,
+        Vec<usize>,
+        SparseMatrix<Zp64>,
+        Vec<super::ModularObstructionEntry>,
+    ),
+    ModularKernelError,
+> {
+    let physical_columns = matrix.ncols() as usize;
+    if target_column >= physical_columns {
+        return Err(ModularKernelError::TargetColumnOutOfRange {
+            target: target_column,
+            columns: physical_columns,
+        });
+    }
+    let mut forbidden = try_vec(PROJECTED_COLUMNS, forbidden_columns.len())?;
+    forbidden.extend_from_slice(forbidden_columns);
+    forbidden.sort_unstable();
+    for pair in forbidden.windows(2) {
+        if pair[0] == pair[1] {
+            return Err(ModularKernelError::DuplicateForbiddenColumn { column: pair[0] });
+        }
+    }
+    if let Some(&column) = forbidden.iter().find(|&&column| column >= physical_columns) {
+        return Err(ModularKernelError::ForbiddenColumnOutOfRange {
+            column,
+            columns: physical_columns,
+        });
+    }
+    if forbidden.binary_search(&target_column).is_ok() {
+        return Err(ModularKernelError::TargetIsForbidden {
+            target: target_column,
+        });
+    }
+    let forbidden_summary = rank_projection(matrix, &forbidden, limits)?;
+    let reduction = reduce_nonempty_projection(matrix, &forbidden, Some(target_column), limits)?;
+    if forbidden_summary.rank != reduction.summary.rank {
+        return Err(ModularKernelError::Invariant {
+            detail: "test obstruction request is a modular target hit",
+        });
+    }
+    let input_nonzeros = reduction.summary.input_nonzeros;
+    let entries = super::obstruction::checked_entries(
+        &reduction.projected,
+        reduction.reducer,
+        input_nonzeros,
+        limits,
+    )?;
+    let mut logical_physical_columns = try_vec(PROJECTED_COLUMNS, forbidden.len() + 1)?;
+    logical_physical_columns.extend_from_slice(&forbidden);
+    logical_physical_columns.push(target_column);
+    Ok((
+        forbidden_summary.rank,
+        reduction.summary.rank,
+        logical_physical_columns,
+        reduction.projected,
+        entries,
+    ))
+}
+
+#[cfg(test)]
+pub(super) fn right_obstruction_block_for_test(
+    matrix: &SparseMatrix<Zp64>,
+    target_column: usize,
+    forbidden_columns: &[usize],
+    rotation: usize,
+    limits: ModularKernelLimits,
+) -> Result<
+    (
+        Vec<usize>,
+        SparseMatrix<Zp64>,
+        std::sync::Arc<[super::ModularObstructionEntry]>,
+        super::ModularObstructionBlock,
+    ),
+    ModularKernelError,
+> {
+    let physical_columns = matrix.ncols() as usize;
+    if target_column >= physical_columns {
+        return Err(ModularKernelError::TargetColumnOutOfRange {
+            target: target_column,
+            columns: physical_columns,
+        });
+    }
+    let mut forbidden = try_vec(PROJECTED_COLUMNS, forbidden_columns.len())?;
+    forbidden.extend_from_slice(forbidden_columns);
+    forbidden.sort_unstable();
+    if forbidden.windows(2).any(|pair| pair[0] == pair[1]) {
+        return Err(ModularKernelError::DuplicateForbiddenColumn {
+            column: forbidden
+                .windows(2)
+                .find(|pair| pair[0] == pair[1])
+                .expect("duplicate window was found")[0],
+        });
+    }
+    if let Some(&column) = forbidden.iter().find(|&&column| column >= physical_columns) {
+        return Err(ModularKernelError::ForbiddenColumnOutOfRange {
+            column,
+            columns: physical_columns,
+        });
+    }
+    if forbidden.binary_search(&target_column).is_ok() {
+        return Err(ModularKernelError::TargetIsForbidden {
+            target: target_column,
+        });
+    }
+    let forbidden_summary = rank_projection(matrix, &forbidden, limits)?;
+    let reduction = reduce_nonempty_projection(matrix, &forbidden, Some(target_column), limits)?;
+    if forbidden_summary.rank != reduction.summary.rank {
+        return Err(ModularKernelError::Invariant {
+            detail: "test obstruction-block request is a modular target hit",
+        });
+    }
+    let input_nonzeros = reduction.summary.input_nonzeros;
+    let (primary, block) = super::obstruction::checked_obstruction_data_for_test(
+        &reduction.projected,
+        reduction.reducer,
+        input_nonzeros,
+        rotation,
+        limits,
+    )?;
+    let mut logical_physical_columns = try_vec(PROJECTED_COLUMNS, forbidden.len() + 1)?;
+    logical_physical_columns.extend_from_slice(&forbidden);
+    logical_physical_columns.push(target_column);
+    Ok((
+        logical_physical_columns,
+        reduction.projected,
+        primary,
+        block,
+    ))
+}

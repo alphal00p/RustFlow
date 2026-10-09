@@ -1,0 +1,112 @@
+//! Immutable, proof-bearing owners for completely discharged foundry output.
+//!
+//! The installed owner is generic in arity and topology. Complete verifiers
+//! are registered for the generated unit-mass `K = 1` tadpole and `K = 3`
+//! sunset families and complete source-port programs, including the canonical
+//! unit-mass `K = 6` family. Source-port installation and durable loading both
+//! replay original-source combinations on whole mathematical domains. The
+//! separate K6 wave producer requires its complete authenticated wave chain;
+//! a successful isolated rule is not thereby a [`ClosedArtifact`].
+
+mod error;
+mod factorization;
+#[allow(dead_code, unused_imports)]
+pub(crate) mod factorized_numerator_lift;
+mod factorized_product_moments;
+mod install;
+mod model;
+mod one_loop;
+mod persistence;
+mod scope;
+mod source_port;
+mod terminal;
+mod three_loop;
+mod two_loop;
+
+/// Durable algorithm identifier for a complete unit-mass vacuum artifact.
+///
+/// This is intentionally a capability identifier rather than a topology
+/// name.  A consumer such as Vakint can use it after the artifact has passed
+/// [`ClosedArtifact::decode_durable`] to admit any authenticated arity,
+/// including a future four-loop artifact, without maintaining another
+/// hard-coded loop-count table in the RustRed adapter.
+pub const COMPLETE_VACUUM_SOURCE_PORT_ALGORITHM_ID: &str = "rustred.source-port-original-domain.v1";
+
+pub use error::{ArtifactError, ArtifactPersistenceError};
+pub use factorization::{
+    FactorizationFactor, FactorizationMasterEmbedding, FactorizationRule, UnimodularLoopBasis,
+};
+pub(crate) use install::validate_unit_mass_family;
+pub use model::{
+    ArtifactSchemaVersion, ArtifactValidationWitness, ClosedArtifact, CommonMassHomogeneityProof,
+    ZeroSectorTerminal, ZeroTerminalProof,
+};
+pub use one_loop::derive_one_loop_unit_mass_tadpole;
+pub use persistence::{ArtifactCoverReplayLimits, ArtifactEncodingLimits, ArtifactLoadLimits};
+pub(crate) use scope::RootDomainError;
+pub use scope::TotalExcessProofScope;
+pub(crate) use source_port::ReplayedOriginalDomain;
+pub(crate) use source_port::prove_wide_descent_with_limits;
+pub(crate) use source_port::sign_partition_with_limits;
+pub use source_port::{
+    AffineApplicationDomain, AffineOwnershipRole, CheckedOriginalSourceCombination,
+    OriginalSourceCombinationLimits, OriginalSourceCombinationRequest, OriginalSourceContribution,
+    ReplayCircuitLimits, ReplayedSourceCircuit, ReplayedSourceCircuitBatch, SourcePortAudit,
+    SourcePortAuditError, SourcePortInstallEvent, SourcePortLimits, SourcePortReplayedRule,
+    SourcePortRuleReplayAudit, SourcePortSectorAudit, SourcePortSuccessorAttempt,
+    SourcePortSuccessorCounts, SourcePortSuccessorSnapshot, SourcePortSuccessorStage,
+    SourcePortTotalExcessAudit, check_original_source_combination,
+};
+pub use two_loop::derive_two_loop_unit_mass_sunset;
+
+/// Consume a fully published K6 same-rank campaign and install its exact
+/// owners as the same generic artifact type used by lower-loop families.
+/// Search diagnostics and hint provenance are intentionally discarded before
+/// this cold proof boundary.
+pub fn install_published_k6_sector_waves(
+    published: crate::foundry::campaign::K6PublishedSectorWaves,
+) -> Result<ClosedArtifact, ArtifactError> {
+    three_loop::install_published_sector_waves(published)
+}
+
+pub(crate) use factorized_product_moments::ProductApplicationDomain;
+#[allow(unused_imports)] // Used by the next production SpIReD campaign slice.
+pub(crate) use one_loop::derive_one_loop_unit_mass_tadpole_terminal_authority;
+pub(crate) use terminal::{ClosedTerminalAuthority, DeclaredMasterManifest};
+
+pub(crate) use three_loop::{
+    FULL_RANK_ORBITS, derive_k6_terminal_authority, derive_k6_terminal_authority_with_ordering,
+};
+
+/// Shared publication/load ceiling for a complete persisted K6 rule-cell
+/// collection.  Durable replay and wave publication must not silently impose
+/// incompatible hidden limits on the same artifact.
+pub(crate) const MAX_PUBLISHED_K6_RULE_CELLS: usize = 1_000_000;
+pub(crate) const K6_ARITY: usize = 6;
+pub(crate) const K6_MASTER_TERMINAL_COUNT: usize = 6;
+
+pub(crate) use three_loop::canonical_family as canonical_three_loop_family;
+
+#[cfg(test)]
+pub(crate) use install::authenticate_k6_rule_cell_sources_for_test;
+#[cfg(test)]
+pub(crate) use install::{TerminalAuthorityCandidate, install_terminal_authority};
+#[cfg(test)]
+pub(crate) use terminal::k6_product_reducer_fixture;
+#[cfg(test)]
+pub(crate) use three_loop::alphaloop_lhs_diagnostic::{
+    MaterializedAlphaLoopLhsAnchor, certify_alpha_to_rust_map, materialize_alpha_loop_lhs_anchors,
+    materialize_alpha_loop_lhs_anchors_with_ordering,
+};
+#[cfg(test)]
+pub(crate) use three_loop::fresh_k6_terminal_authority_for_test;
+
+#[cfg(test)]
+#[path = "tests/one_loop.rs"]
+mod one_loop_tests;
+#[cfg(test)]
+#[path = "tests/persistence.rs"]
+mod persistence_tests;
+#[cfg(test)]
+#[path = "tests/two_loop.rs"]
+mod two_loop_tests;

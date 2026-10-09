@@ -1,0 +1,407 @@
+use std::collections::BTreeSet;
+
+use rustred::solver::DomainPowerBounds;
+use serde_json::Value;
+
+use crate::AppError;
+#[cfg(test)]
+mod admission_tests;
+
+#[derive(Debug)]
+pub(in crate::application::routed_campaign) struct Query {
+    pub id: String,
+    /// Scope is an exact-ID declaration, never inferred from the display name.
+    pub auxiliary: bool,
+    pub role_declared: bool,
+    pub owner: Vec<bool>,
+    pub lower: Vec<u64>,
+    pub upper: Vec<Option<u64>>,
+    pub rank: Option<u32>,
+    pub powers: DomainPowerBounds,
+}
+
+pub(in crate::application::routed_campaign) fn power_bounds_json(p: DomainPowerBounds) -> Value {
+    serde_json::json!({"max_positive_power":p.max_positive_power,
+        "min_power_difference":p.min_power_difference,"max_power_difference":p.max_power_difference})
+}
+
+fn only_fields(value: &Value, allowed: &[&str], context: &str) -> Result<(), AppError> {
+    if value
+        .as_object()
+        .is_none_or(|object| object.keys().any(|k| !allowed.contains(&k.as_str())))
+    {
+        return Err(AppError::input(format!(
+            "unknown field or non-object {context}"
+        )));
+    }
+    Ok(())
+}
+
+fn parse_powers(value: Option<&Value>) -> Result<DomainPowerBounds, AppError> {
+    let Some(value) = value else {
+        return Ok(DomainPowerBounds::default());
+    };
+    only_fields(
+        value,
+        &[
+            "max_positive_power",
+            "min_power_difference",
+            "max_power_difference",
+        ],
+        "power_bounds",
+    )?;
+    let signed = |key| match value.get(key) {
+        None | Some(Value::Null) => Ok(None),
+        Some(v) => v.as_i64().map(Some).ok_or_else(|| {
+            AppError::input(format!("{key} must be a signed 64-bit integer or null"))
+        }),
+    };
+    let powers = DomainPowerBounds {
+        max_positive_power: match value.get("max_positive_power") {
+            None | Some(Value::Null) => None,
+            Some(v) => Some(v.as_u64().ok_or_else(|| {
+                AppError::input("max_positive_power must be an unsigned 64-bit integer or null")
+            })?),
+        },
+        min_power_difference: signed("min_power_difference")?,
+        max_power_difference: signed("max_power_difference")?,
+    };
+    powers
+        .validate()
+        .map_err(|e| AppError::input(e.to_string()))?;
+    Ok(powers)
+}
+
+/// Validate configured allowances and bytes before parsing or native loading.
+pub(in crate::application::routed_campaign) fn preflight(
+    text: &str,
+    limit: usize,
+    max_bytes: usize,
+) -> Result<(), AppError> {
+    super::OwnerDomainMatchRequest::validate_query_allowances(limit, max_bytes)
+        .map_err(AppError::input)?;
+    if text.len() > max_bytes {
+        return Err(AppError::input(format!(
+            "owner-domain query input exceeds its {max_bytes}-byte allowance"
+        )));
+    }
+    Ok(())
+}
+
+/// Validate every query before loading native rule programs.
+pub(in crate::application::routed_campaign) fn parse(
+    text: &str,
+    arity: usize,
+    limit: usize,
+    max_bytes: usize,
+) -> Result<Vec<Query>, AppError> {
+    preflight(text, limit, max_bytes)?;
+    let document: Value = serde_json::from_str(text)
+        .map_err(|error| AppError::input(format!("owner-domain query JSON: {error}")))?;
+    if document["schema"] != "rustred.owner-domain-queries.json.v2" {
+        return Err(AppError::input("unsupported owner-domain query schema"));
+    }
+    only_fields(
+        &document,
+        &["schema", "queries", "query_roles"],
+        "query document",
+    )?;
+    let rows = document["queries"]
+        .as_array()
+        .ok_or_else(|| AppError::input("queries must be an array"))?;
+    if rows.is_empty() || rows.len() > limit {
+        return Err(AppError::input(
+            "query count must be positive and within its allowance",
+        ));
+    }
+    let mut ids = BTreeSet::new();
+    // Reserve only actual, byte-admitted input rows, never the caller's cap.
+    let mut queries = Vec::new();
+    queries
+        .try_reserve_exact(rows.len())
+        .map_err(|_| AppError::input("cannot reserve admitted owner-domain queries"))?;
+    rows.iter().try_for_each(|row| {
+        only_fields(
+            row,
+            &[
+                "id",
+                "owner",
+                "lower",
+                "upper",
+                "max_numerator_rank",
+                "power_bounds",
+            ],
+            "query",
+        )?;
+        let id = row["id"]
+            .as_str()
+            .filter(|id| !id.is_empty() && id.len() <= 128)
+            .ok_or_else(|| AppError::input("query id must contain 1..=128 UTF-8 bytes"))?;
+        if !ids.insert(id) {
+            return Err(AppError::input("query ids must be unique"));
+        }
+        let owner = row["owner"]
+            .as_str()
+            .filter(|bits| bits.len() == arity && bits.bytes().all(|b| b == b'0' || b == b'1'))
+            .ok_or_else(|| AppError::input("query owner must be an arity-sized binary mask"))?;
+        let array = |name: &str| {
+            row[name]
+                .as_array()
+                .filter(|a| a.len() == arity)
+                .ok_or_else(|| AppError::input(format!("query {name} must have family arity")))
+        };
+        let lower: Vec<_> = array("lower")?
+            .iter()
+            .map(|n| {
+                n.as_u64()
+                    .ok_or_else(|| AppError::input("query lower bounds must be unsigned integers"))
+            })
+            .collect::<Result<_, _>>()?;
+        let upper: Vec<_> = array("upper")?
+            .iter()
+            .map(|n| {
+                if n.is_null() {
+                    Ok(None)
+                } else {
+                    n.as_u64().map(Some).ok_or_else(|| {
+                        AppError::input("query upper bounds must be unsigned integers or null")
+                    })
+                }
+            })
+            .collect::<Result<_, _>>()?;
+        if lower
+            .iter()
+            .zip(&upper)
+            .any(|(&lo, &hi)| hi.is_some_and(|hi| hi < lo))
+        {
+            return Err(AppError::input("query lower bound exceeds upper bound"));
+        }
+        let rank = match row.get("max_numerator_rank") {
+            Some(Value::Null) => None,
+            Some(value) => Some(
+                value
+                    .as_u64()
+                    .and_then(|n| u32::try_from(n).ok())
+                    .ok_or_else(|| {
+                        AppError::input("query rank must be an unsigned 32-bit integer or null")
+                    })?,
+            ),
+            None => {
+                return Err(AppError::input(
+                    "query rank must be explicit (null means unbounded)",
+                ));
+            }
+        };
+        queries.push(Query {
+            id: id.into(),
+            auxiliary: false,
+            role_declared: false,
+            owner: owner.bytes().map(|b| b == b'1').collect(),
+            lower,
+            upper,
+            rank,
+            powers: parse_powers(row.get("power_bounds"))?,
+        });
+        Ok::<(), AppError>(())
+    })?;
+    // The optional declaration is a complete, disjoint partition. Omitting
+    // the declaration keeps every query required, including names that happen
+    // to contain "helper" or "anchor". The original JSON (and hence this
+    // partition) is already part of the immutable checkpoint request binding.
+    if let Some(roles) = document.get("query_roles") {
+        only_fields(roles, &["required", "auxiliary"], "query_roles")?;
+        // Typed decoding rejects duplicate JSON keys as well as duplicate
+        // IDs below; Value alone would silently keep the last declaration.
+        #[derive(serde::Deserialize)]
+        struct Roles {
+            required: Vec<String>,
+            auxiliary: Vec<String>,
+        }
+        #[derive(serde::Deserialize)]
+        struct Envelope {
+            query_roles: Roles,
+        }
+        let envelope: Envelope = serde_json::from_str(text)
+            .map_err(|error| AppError::input(format!("query_roles: {error}")))?;
+        let mut declared = std::collections::BTreeMap::new();
+        for (rows, auxiliary) in [
+            (&envelope.query_roles.required, false),
+            (&envelope.query_roles.auxiliary, true),
+        ] {
+            for row in rows {
+                let id = row.as_str();
+                if !ids.contains(id) {
+                    return Err(AppError::input(format!(
+                        "query_roles names unknown query {id}"
+                    )));
+                }
+                if declared.insert(id, auxiliary).is_some() {
+                    return Err(AppError::input(format!("query_roles repeats query {id}")));
+                }
+            }
+        }
+        if declared.len() != queries.len() {
+            return Err(AppError::input(
+                "query_roles must declare every query exactly once",
+            ));
+        }
+        for query in &mut queries {
+            query.auxiliary = declared[query.id.as_str()];
+            query.role_declared = true;
+        }
+    }
+    Ok(queries)
+}
+
+/// Rescue may retire auxiliary work only after the initial scope has been
+/// declared explicitly and bound. No naming convention can grant that right.
+pub(in crate::application::routed_campaign) fn require_explicit_roles(
+    queries: &[Query],
+) -> Result<(), String> {
+    if queries.iter().any(|query| !query.role_declared) {
+        Err("rescue requires an explicit complete query_roles declaration in the original query document".into())
+    } else {
+        Ok(())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use serde_json::json;
+
+    fn parse(text: &str, arity: usize, limit: usize) -> Result<Vec<Query>, AppError> {
+        super::parse(text, arity, limit, 1024 * 1024)
+    }
+
+    #[test]
+    fn exact_query_roles_are_complete_immutable_scope_not_name_patterns() {
+        let mut document = json!({"schema":"rustred.owner-domain-queries.json.v2","queries":[
+            {"id":"required-anchor", "owner":"1", "lower":[0], "upper":[null], "max_numerator_rank":0},
+            {"id":"ordinary-looking", "owner":"1", "lower":[0], "upper":[null], "max_numerator_rank":0}]});
+        let plain = parse(&document.to_string(), 1, 2).unwrap();
+        assert!(plain.iter().all(|q| !q.auxiliary && !q.role_declared));
+        assert!(require_explicit_roles(&plain).is_err());
+        document["query_roles"] =
+            json!({"required":["required-anchor"],"auxiliary":["ordinary-looking"]});
+        let declared = parse(&document.to_string(), 1, 2).unwrap();
+        assert!(!declared[0].auxiliary);
+        assert!(declared[1].auxiliary);
+        assert!(require_explicit_roles(&declared).is_ok());
+        for invalid in [
+            json!({"required":[],"auxiliary":["ordinary-looking"]}),
+            json!({"required":["required-anchor","required-anchor"],"auxiliary":["ordinary-looking"]}),
+            json!({"required":["required-anchor"],"auxiliary":["ordinary-looking","required-anchor"]}),
+            json!({"required":["required-anchor"],"auxiliary":["unknown"]}),
+            json!({"required":["required-anchor"]}),
+        ] {
+            document["query_roles"] = invalid;
+            assert!(parse(&document.to_string(), 1, 2).is_err());
+        }
+        document["query_roles"] =
+            json!({"required":["required-anchor"],"auxiliary":["ordinary-looking"]});
+        let text = document
+            .to_string()
+            .replace("\"query_roles\":", "\"query_roles\":{},\"query_roles\":");
+        assert!(parse(&text, 1, 2).is_err());
+        let text = document
+            .to_string()
+            .replace("\"required\":", "\"required\":[],\"required\":");
+        assert!(parse(&text, 1, 2).is_err());
+    }
+
+    #[test]
+    fn power_predicates_are_admitted_exactly_and_unknown_fields_fail_closed() {
+        let base = json!({"schema":"rustred.owner-domain-queries.json.v2", "queries":[
+            {"id":"q", "owner":"10", "lower":[0,0], "upper":[null,null],
+             "max_numerator_rank":11, "power_bounds":{"max_positive_power":24,
+             "min_power_difference":-3,"max_power_difference":10}}]});
+        let row = parse(&base.to_string(), 2, 1).unwrap().remove(0);
+        assert_eq!(
+            row.powers,
+            DomainPowerBounds {
+                max_positive_power: Some(24),
+                min_power_difference: Some(-3),
+                max_power_difference: Some(10)
+            }
+        );
+        assert_eq!(
+            power_bounds_json(row.powers),
+            base["queries"][0]["power_bounds"]
+        );
+        for (field, value) in [
+            ("max_positive_power", json!(-1)),
+            ("min_power_difference", json!(11)),
+            ("max_power_difference", json!(-4)),
+            ("min_power_difference", json!(u64::MAX)),
+            ("unexpected", json!(1)),
+        ] {
+            let mut doc = base.clone();
+            doc["queries"][0]["power_bounds"][field] = value;
+            assert!(parse(&doc.to_string(), 2, 1).is_err(), "{field}");
+        }
+        let mut unknown = base.clone();
+        unknown["queries"][0]["max_positive_power"] = json!(24);
+        assert!(parse(&unknown.to_string(), 2, 1).is_err());
+        let mut old = base.clone();
+        old["schema"] = json!("rustred.owner-domain-queries.json.v1");
+        assert!(parse(&old.to_string(), 2, 1).is_err());
+        let mut absent = base;
+        absent["queries"][0]
+            .as_object_mut()
+            .unwrap()
+            .remove("power_bounds");
+        assert!(
+            parse(&absent.to_string(), 2, 1).unwrap()[0]
+                .powers
+                .is_unconstrained()
+        );
+    }
+
+    #[test]
+    fn queries_retain_unbounded_positive_bounds_and_actual_rank() {
+        let doc = json!({"schema":"rustred.owner-domain-queries.json.v2", "queries":[
+            {"id":"above-entry", "owner":"10", "lower":[0,11], "upper":[null,11], "max_numerator_rank":11}]});
+        let rows = parse(&doc.to_string(), 2, 1).unwrap();
+        assert_eq!(rows[0].lower, [0, 11]);
+        assert_eq!(rows[0].upper, [None, Some(11)]);
+        assert_eq!(rows[0].rank, Some(11));
+    }
+
+    #[test]
+    fn invalid_queries_fail_before_native_preparation() {
+        let base = json!({"schema":"rustred.owner-domain-queries.json.v2", "queries":[
+            {"id":"q", "owner":"10", "lower":[0,0], "upper":[null,0], "max_numerator_rank":0}]});
+        for (field, value) in [
+            ("id", json!("")),
+            ("owner", json!("11x")),
+            ("lower", json!([-1, 0])),
+            ("upper", json!([null])),
+            ("max_numerator_rank", json!(-1)),
+            ("max_numerator_rank", json!(4294967296u64)),
+        ] {
+            let mut doc = base.clone();
+            doc["queries"][0][field] = value;
+            assert!(parse(&doc.to_string(), 2, 1).is_err(), "{field}");
+        }
+        let mut duplicate = base.clone();
+        duplicate["queries"]
+            .as_array_mut()
+            .unwrap()
+            .push(base["queries"][0].clone());
+        assert!(parse(&duplicate.to_string(), 2, 2).is_err());
+        assert!(parse(&base.to_string(), 2, 0).is_err());
+        let mut missing = base.clone();
+        missing["queries"][0]
+            .as_object_mut()
+            .unwrap()
+            .remove("max_numerator_rank");
+        assert!(parse(&missing.to_string(), 2, 1).is_err());
+        let mut inverted = base.clone();
+        inverted["queries"][0]["lower"] = json!([0, 1]);
+        assert!(parse(&inverted.to_string(), 2, 1).is_err());
+        let mut unbounded = base;
+        unbounded["queries"][0]["max_numerator_rank"] = Value::Null;
+        assert_eq!(parse(&unbounded.to_string(), 2, 1).unwrap()[0].rank, None);
+    }
+}

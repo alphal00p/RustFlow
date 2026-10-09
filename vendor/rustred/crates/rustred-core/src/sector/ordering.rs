@@ -1,0 +1,408 @@
+use std::cmp::Ordering;
+use std::fmt;
+use std::sync::Arc;
+
+use super::error::{Error, try_reserve_exact};
+use super::mask::Mask;
+
+mod comparison;
+mod coordinate_priority;
+mod policy;
+
+pub use coordinate_priority::{
+    CoordinatePriority, CoordinatePriorityError, CoordinatePriorityLimits,
+};
+#[cfg(test)]
+pub(super) use policy::RUSTRED_UNSHIFTED_ORDER_V1_ID;
+pub use policy::{
+    CoordinatePriorityOrderingV1, MAX_PACKED_ORDERING_PRIORITY_ARITY, OrderingPolicy,
+    OrderingPolicyStableId,
+};
+
+impl OrderingPolicy {
+    /// Build an exact, injective complexity key from unshifted indices.
+    pub fn complexity_key(&self, indices: &[i64]) -> Result<ComplexityKey, Error> {
+        self.require_arity(indices.len())?;
+        let sector = Mask::try_from_indices(indices)?;
+        let mut dots = 0_u128;
+        let mut numerators = 0_u128;
+        let mut index_excess = Vec::new();
+        try_reserve_exact(
+            &mut index_excess,
+            indices.len(),
+            "integral complexity index excess",
+        )?;
+        for (&active, &index) in sector.active.iter().zip(indices) {
+            let excess: u64 = if active {
+                debug_assert!(index >= 1);
+                (index - 1) as u64
+            } else {
+                index.unsigned_abs()
+            };
+            index_excess.push(excess);
+            let target = if active { &mut dots } else { &mut numerators };
+            *target = target
+                .checked_add(u128::from(excess))
+                .ok_or(Error::ComplexityOverflow {
+                    measure: if active { "dots" } else { "numerators" },
+                })?;
+        }
+        let corner_distance = dots
+            .checked_add(numerators)
+            .ok_or(Error::ComplexityOverflow {
+                measure: "corner distance",
+            })?;
+        Ok(ComplexityKey {
+            policy: self.clone(),
+            arity: indices.len(),
+            propagators: sector.active_count(),
+            sector,
+            corner_distance,
+            dots,
+            numerators,
+            index_excess: Arc::new(index_excess),
+        })
+    }
+
+    /// Compare integrals by the persisted exact key. `Less` means simpler.
+    pub fn compare(&self, left: &[i64], right: &[i64]) -> Result<Ordering, Error> {
+        if left.len() != right.len() {
+            return Err(Error::WrongArity {
+                expected: left.len(),
+                actual: right.len(),
+            });
+        }
+        if let Some(program) = self.program() {
+            return program
+                .compare(left, right)
+                .map(|comparison| comparison.ordering)
+                .map_err(Error::OrderProgram);
+        }
+        Ok(self.complexity_key(left)?.cmp(&self.complexity_key(right)?))
+    }
+
+    /// Compare only the support priorities. This is not a whole-order proof
+    /// when a programmed physical-degree prefix precedes support.
+    pub fn compare_support(&self, left: &[bool], right: &[bool]) -> Result<Ordering, Error> {
+        self.require_arity(left.len())?;
+        if left.len() != right.len() {
+            return Err(Error::WrongArity {
+                expected: left.len(),
+                actual: right.len(),
+            });
+        }
+        if let Some(program) = self.program() {
+            return program
+                .compare_support(left, right)
+                .map(|comparison| comparison.ordering)
+                .map_err(Error::OrderProgram);
+        }
+        Ok(left
+            .iter()
+            .filter(|&&active| active)
+            .count()
+            .cmp(&right.iter().filter(|&&active| active).count())
+            .then_with(|| left.cmp(right)))
+    }
+
+    /// Prove that `target` is strictly simpler than `source` under this exact
+    /// serialized policy.
+    pub fn prove_strict_descent(
+        &self,
+        source: &[i64],
+        target: &[i64],
+    ) -> Result<StrictDescentWitness, Error> {
+        if source.len() != target.len() {
+            return Err(Error::WrongArity {
+                expected: source.len(),
+                actual: target.len(),
+            });
+        }
+        let source_key = self.complexity_key(source)?;
+        let target_key = self.complexity_key(target)?;
+        if target_key >= source_key {
+            return Err(Error::NotStrictDescent);
+        }
+        let decisive_component = first_differing_component(&source_key, &target_key)
+            .expect("strictly different keys have a first differing component");
+        Ok(StrictDescentWitness {
+            policy: self.clone(),
+            source: source_key,
+            target: target_key,
+            decisive_component,
+        })
+    }
+}
+
+/// Exact strict total-order key. The persisted policy chooses the aggregate
+/// and coordinate comparison semantics; storage order alone is not an order.
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+pub struct ComplexityKey {
+    policy: OrderingPolicy,
+    arity: usize,
+    propagators: usize,
+    sector: Mask,
+    corner_distance: u128,
+    dots: u128,
+    numerators: u128,
+    // Retain the single fallibly reserved caller-sized buffer. Each coordinate
+    // is derived from an i64 and therefore fits u64; only aggregate sums widen
+    // to u128.
+    index_excess: Arc<Vec<u64>>,
+}
+
+impl PartialOrd for ComplexityKey {
+    fn partial_cmp(&self, other: &Self) -> Option<Ordering> {
+        Some(self.cmp(other))
+    }
+}
+
+impl Ord for ComplexityKey {
+    fn cmp(&self, other: &Self) -> Ordering {
+        let prefix = self
+            .policy
+            .cmp(&other.policy)
+            .then_with(|| self.arity.cmp(&other.arity));
+        if prefix != Ordering::Equal {
+            return prefix;
+        }
+        if let Some(program) = self.policy.program() {
+            return program
+                .compare_excess(
+                    self.sector.active_bits(),
+                    &self.index_excess,
+                    other.sector.active_bits(),
+                    &other.index_excess,
+                )
+                .expect("keys retain validated i64-derived coordinates")
+                .ordering;
+        }
+        self.policy
+            .cmp(&other.policy)
+            .then_with(|| self.arity.cmp(&other.arity))
+            .then_with(|| self.propagators.cmp(&other.propagators))
+            .then_with(|| self.sector.cmp(&other.sector))
+            .then_with(|| self.corner_distance.cmp(&other.corner_distance))
+            .then_with(|| {
+                self.policy.compare_degrees(
+                    &self.dots,
+                    &self.numerators,
+                    &other.dots,
+                    &other.numerators,
+                )
+            })
+            .then_with(|| {
+                self.policy.compare_coordinate_slices(
+                    &self.sector,
+                    self.index_excess.as_slice(),
+                    other.index_excess.as_slice(),
+                )
+            })
+    }
+}
+
+impl ComplexityKey {
+    pub fn policy(&self) -> OrderingPolicy {
+        self.policy.clone()
+    }
+
+    pub fn arity(&self) -> usize {
+        self.arity
+    }
+
+    pub fn propagators(&self) -> usize {
+        self.propagators
+    }
+
+    pub fn sector(&self) -> &Mask {
+        &self.sector
+    }
+
+    pub fn corner_distance(&self) -> u128 {
+        self.corner_distance
+    }
+
+    pub fn dots(&self) -> u128 {
+        self.dots
+    }
+
+    pub fn numerators(&self) -> u128 {
+        self.numerators
+    }
+
+    pub fn index_excess(&self) -> &[u64] {
+        self.index_excess.as_slice()
+    }
+}
+
+impl fmt::Display for ComplexityKey {
+    fn fmt(&self, formatter: &mut fmt::Formatter<'_>) -> fmt::Result {
+        write!(
+            formatter,
+            "{}|arity={}|propagators={}|sector={}|corner={}|dots={}|numerators={}|excess=[",
+            self.policy.stable_id(),
+            self.arity,
+            self.propagators,
+            self.sector,
+            self.corner_distance,
+            self.dots,
+            self.numerators,
+        )?;
+        for (position, excess) in self.index_excess.iter().enumerate() {
+            if position != 0 {
+                formatter.write_str(",")?;
+            }
+            write!(formatter, "{excess}")?;
+        }
+        formatter.write_str("]")
+    }
+}
+
+/// First field that proves strict descent in the named lexicographic key.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub enum ComplexityComponent {
+    Arity,
+    PropagatorCount,
+    SectorBit { position: usize },
+    CornerDistance,
+    DotPower,
+    NumeratorPower,
+    IndexExcess { position: usize },
+    SupportWeight,
+    DegreeRow { ordinal: usize },
+    PreSupportDegreeRow { ordinal: usize },
+}
+
+impl From<rustred_order::Component> for ComplexityComponent {
+    fn from(component: rustred_order::Component) -> Self {
+        match component {
+            rustred_order::Component::SupportCount => Self::PropagatorCount,
+            rustred_order::Component::SupportWeight => Self::SupportWeight,
+            rustred_order::Component::SupportAxis(position) => Self::SectorBit { position },
+            rustred_order::Component::DegreeRow(ordinal) => Self::DegreeRow { ordinal },
+            rustred_order::Component::PreSupportDegreeRow(ordinal) => {
+                Self::PreSupportDegreeRow { ordinal }
+            }
+            rustred_order::Component::Coordinate(position) => Self::IndexExcess { position },
+        }
+    }
+}
+
+/// Exact witness that a target key is strictly below a source key.
+#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+pub struct StrictDescentWitness {
+    policy: OrderingPolicy,
+    source: ComplexityKey,
+    target: ComplexityKey,
+    decisive_component: ComplexityComponent,
+}
+
+impl StrictDescentWitness {
+    pub fn policy(&self) -> OrderingPolicy {
+        self.policy.clone()
+    }
+
+    pub fn source(&self) -> &ComplexityKey {
+        &self.source
+    }
+
+    pub fn target(&self) -> &ComplexityKey {
+        &self.target
+    }
+
+    pub fn decisive_component(&self) -> ComplexityComponent {
+        self.decisive_component
+    }
+
+    pub fn verify(&self) -> bool {
+        self.source.policy == self.policy
+            && self.target.policy == self.policy
+            && self.target < self.source
+            && first_differing_component(&self.source, &self.target)
+                == Some(self.decisive_component)
+    }
+}
+
+fn first_differing_component(
+    source: &ComplexityKey,
+    target: &ComplexityKey,
+) -> Option<ComplexityComponent> {
+    if source.arity != target.arity {
+        return Some(ComplexityComponent::Arity);
+    }
+    if let Some(program) = source.policy.program() {
+        return program
+            .compare_excess(
+                source.sector.active_bits(),
+                &source.index_excess,
+                target.sector.active_bits(),
+                &target.index_excess,
+            )
+            .expect("keys retain validated i64-derived coordinates")
+            .component
+            .map(Into::into);
+    }
+    if source.propagators != target.propagators {
+        return Some(ComplexityComponent::PropagatorCount);
+    }
+    if source.sector != target.sector {
+        let position = source
+            .sector
+            .active
+            .iter()
+            .zip(target.sector.active.iter())
+            .position(|(left, right)| left != right)
+            .expect("different equal-arity sectors have a differing bit");
+        return Some(ComplexityComponent::SectorBit { position });
+    }
+    if source.corner_distance != target.corner_distance {
+        return Some(ComplexityComponent::CornerDistance);
+    }
+    if let Some(component) = source.policy.first_differing_degree(
+        &source.dots,
+        &source.numerators,
+        &target.dots,
+        &target.numerators,
+    ) {
+        return Some(component);
+    }
+    source
+        .policy
+        .first_differing_coordinate(
+            &source.sector,
+            source.index_excess.as_slice(),
+            target.index_excess.as_slice(),
+        )
+        .map(|position| ComplexityComponent::IndexExcess { position })
+}
+
+#[cfg(test)]
+#[path = "ordering/spired_tests.rs"]
+mod spired_tests;
+
+#[cfg(test)]
+#[path = "ordering/programmed_tests.rs"]
+mod programmed_tests;
+
+#[cfg(test)]
+mod tests {
+    use std::sync::Arc;
+
+    use super::OrderingPolicy;
+
+    #[test]
+    fn complexity_key_clones_share_the_fallibly_built_excess_buffer() {
+        let key = OrderingPolicy::default()
+            .complexity_key(&[i64::MIN, 1, i64::MAX])
+            .unwrap();
+        assert_eq!(
+            key.index_excess(),
+            &[i64::MIN.unsigned_abs(), 0, (i64::MAX - 1) as u64]
+        );
+        assert_eq!(key.numerators(), u128::from(i64::MIN.unsigned_abs()));
+        assert_eq!(key.dots(), u128::from((i64::MAX - 1) as u64));
+        let cloned = key.clone();
+        assert!(Arc::ptr_eq(&key.index_excess, &cloned.index_excess));
+        assert_eq!(key, cloned);
+    }
+}

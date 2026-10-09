@@ -1,0 +1,52 @@
+# Vendored RustRed
+
+`rustred/` is an editable copy of `../rustred_fermi` at commit
+`78969aab524b7d6a2eec36f59b01e9af1e04cc04`, originally from
+[`alphal00p/rustred`](https://github.com/alphal00p/rustred). The source checkout was
+clean when copied. RustFlow's root manifest selects
+`rustred/crates/rustred-core` as a path dependency; its `rustred-order` dependency
+also resolves within this directory. Edit these files directly and commit the
+changes in the RustFlow repository. No sibling checkout or Git submodule is
+needed to build RustFlow.
+
+The initial import contains all 3,071 tracked regular files and symlinks,
+byte-checked against the source checkout, including the upstream workspace,
+tests, examples, documentation, and [MIT license](rustred/LICENSE). Upstream
+files are unmodified. Git metadata and untracked files, including build outputs,
+were not copied. The only omitted tracked entry is the uninitialized
+`vendor/symbolica` submodule gitlink. RustFlow already supplies Symbolica,
+Numerica, and Graphica through its root manifest and lock.
+
+Run builds and RustFlow tests from the **RustFlow repository root**, for example:
+
+```sh
+cargo check --locked
+cargo test --locked --test source_fingerprint
+cargo test --locked --release -p rustred --test guarded_source_api
+```
+
+Use `nix develop --command` before each command when using the repository's
+Nix development environment. The root selects the shared Symbolica dependency
+and disables RustRed's experimental `reconstruction` feature. RustRed's retained
+standalone workspace patch table refers to its omitted Symbolica submodule, so
+running Cargo with `vendor/rustred/Cargo.toml` as the root is a separate upstream
+build setup, not the RustFlow build workflow.
+
+RustFlow's existing source fingerprint hashes both resolved RustRed packages,
+their manifests, source files, and enabled features. Moving from Git to this
+path dependency changes the cache identity, and later edits here invalidate it
+without a version bump. Historical numerical results retain their original
+dependency provenance.
+
+If an embedding host also uses RustRed, align all of its RustRed dependencies
+with this copy as described in
+[dependency embedding](../docs/dependency-embedding.md). To update the import,
+review changes against the upstream revision above, preserve any local edits,
+and record the new baseline here.
+
+Import validation passed with the unchanged shared dependency pins:
+
+```sh
+cargo test --locked --offline --release -p rustred --test guarded_source_api
+cargo check --locked --offline --release --features python --all-targets
+```

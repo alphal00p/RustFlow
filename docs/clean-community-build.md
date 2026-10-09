@@ -7,6 +7,16 @@ community repository's native Rust/Python build environment and run these
 commands from its root. Python 3.11 or newer is suitable for the setup and
 notebook tools.
 
+This recipe records the frozen community snapshot below. The current RustFlow
+checkout instead carries RustRed in [`vendor/rustred`](../vendor/README.md),
+copied from upstream revision `78969aab524b7d6a2eec36f59b01e9af1e04cc04`, and uses
+it through a local path dependency. That change does not migrate the recorded
+community snapshot. To embed this newer checkout, follow the
+[shared-source requirements](dependency-embedding.md): direct and transitive
+RustRed consumers must all use the same vendored source while the host retains
+ownership of the shared Symbolica patch table. The historical pins and
+acceptance evidence below remain unchanged.
+
 The API and notebook are on community `main` after
 [squash-merging PR #19](https://github.com/symbolica-dev/symbolica-community/pull/19).
 To obtain the validated source snapshot in a new directory:

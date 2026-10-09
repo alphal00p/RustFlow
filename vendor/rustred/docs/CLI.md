@@ -1,0 +1,1089 @@
+# RustRed command-line interface
+
+`rustred derive` is the human-facing entry point for RustRed's generic
+LiteRed-like derivation layer. It constructs an exact affine integral family
+with Symbolica and emits the complete fully parametric ordinary IBP and
+Lorentz-invariance identities. It does not choose sectors, masters, special
+recurrences, or reduce a concrete target.
+
+The CLI never invokes FORM. The RustRed crate and binary use Symbolica's GMP
+backend; there is no `no_gmp` mode.
+
+## Shared saved-owner dependency campaign
+
+For an opt-in dynamic queue across starting topologies, with the existing
+parallel scheduler retained inside each job, see
+[independent campaigns](independent_owner_campaigns.md). Native commands are
+`campaign shards --config PATH --directory DIR`,
+`campaign shards --directory DIR --resume`, and the read-only
+`campaign monitor --directory DIR [--once|--json]`. The existing shared mode
+and its defaults remain unchanged.
+
+`rustred owner-domain-scan` inventories possible parametric successors of saved
+rules without enumerating positive powers or generating IBPs. Its bounded,
+Python-steerable report retains actual intermediate-rank requirements but is
+not a recursive closure result or a proven missing-rule list; see
+[the domain-scan interface](owner_domain_scan.md).
+
+`rustred routed-campaign` loads an externally supplied owner/routing manifest
+once and follows a batch of concrete targets with a shared parallel work queue.
+It reports uncovered rules/owners, resource failures and live progress rather
+than regenerating saved IBPs. The standard-library Python driver adds process
+and memory supervision, with no fixed short timeout. See the
+[driver, input format and scope](shared_owner_campaign_driver.md).
+This is finite dependency inspection, not complete parametric-family generation,
+coefficient back-substitution or a resumable work cache.
+
+Optional `--entry-domains DOMAINS.json` supplies a finite union in the existing
+owner-domain query format. It replaces starting-root admission only, permitting
+an explicitly requested scope distinct from saved rule-generation scope.
+`--targets` still specifies the actual inputs; no exhaustive-domain coverage
+or descendant truncation is implied. The Python supervisor forwards the same
+option; see [the finite-domain contract](shared_owner_campaign_driver.md#explicit-finite-starting-domains).
+
+### Optional application-cell refinement
+
+`owner-domain-match --follow-successors` accepts
+`--apply-cell-refinement-max-cardinality N` (positive integer, off when omitted).
+After selecting a rule, this experimental policy splits an application cell
+with exactly one varying coordinate, whose upper bound is finite (all other
+coordinates fixed), into exact singleton cells when its cardinality is at most
+`N`. It reuses the matched rule and its guards;
+it does not repeat matching, add workers, or change the requested domain.
+Ineligible cells use the existing path. All descendants remain obligations.
+
+The Rust setting is `OwnerAppliedLimits::cell_refinement`, using
+`OwnerAppliedCellRefinement::SingleFiniteAxis { max_cardinality }` or `Off`.
+The Python campaign steering examples forward the same CLI option; this is
+not a new installed `import rustred` method. The policy is bound into saved
+checkpoints, so changing it requires a fresh campaign. `--unbounded-work`
+does not change its eligibility threshold. Native application counters
+`application_refinement_steps` and `application_refinement_cells` measure
+per-shift-group refinement work, not extra logical completions.
+
+This remains off by default pending recursive-workload measurements. A faster
+local inspection can emit more successors and need not accelerate the campaign.
+
+### Walk checkpoints (CP5)
+
+`owner-domain-match --follow-successors --checkpoint DIR` saves the walk
+state into an empty directory (`--checkpoint-interval-seconds`, default
+3600, is stretched to twenty times the last save duration); `--resume DIR`
+continues it and `--stop-file PATH` requests a cooperative save-and-pause
+(exit 4). The directory holds a `latest.json`/`previous.json` manifest
+(schema 5, `format: "RUSTRED-WALK-CP5"`) over generation-suffixed sections:
+`meta-<G>.json`, `nodes-<G>.bin`, `ledger-<G>.bin` and `index-<G>.bin` are
+rewritten each save; `domains-<S>.bin`, `edges-<S>.bin` and
+`records-<S>.jsonl` are append-only segments tiling their section. Every
+referenced file carries its byte length and blake3 digest and is verified
+before decoding. The walk keeps at most one 64 KiB batch of committed
+records in RAM: each record is serialized when it is committed and its
+batch is appended to the open `records-<G>.jsonl`; the save of generation
+`G` writes the last batch, seals that segment (fsync, digest) and an unsealed tail left
+by a crash is ignored on resume and later removed by cleanup. The final
+`result.json` streams its `domains` array from the segments one record at a
+time (library callers: `OwnerDomainWalkResult::write_json` or
+`into_document`; `document["domains"]` is `null` for checkpointed walks). Resume requires the same request/policy digest, owner
+digests and executable `WALK_SEMANTICS_VERSION`; a different executable
+digest with the same semantics version is accepted and reported. CP1-CP4
+directories are refused; start a fresh campaign.
+
+`rustred walk-semantics-version` is a read-only probe for launchers deciding
+whether a paused checkpoint may resume on this executable. It takes no
+options, opens no file, runs no algebra, prints one JSON line and exits 0:
+
+```text
+$ rustred walk-semantics-version
+{"walk_semantics_version":1,"checkpoint_format":"RUSTRED-WALK-CP5","checkpoint_schema":5}
+```
+
+A resume on a different executable digest is compatible only when all three
+values equal the saved manifest's `walk_semantics_version`, `format` and
+`schema`. That is necessary, not sufficient: the native resume also requires
+the manifest's request binding (inputs, limits including this executable's
+default limits, and the `Debug` form of the reduction-limit, publication and
+scheduling policies) to equal the new request's, and otherwise refuses with
+`checkpoint request or policy differs; refusing to restart` before touching
+the checkpoint. The probe does not report that binding, so a
+performance-only change to those defaults or types stops existing
+checkpoints from resuming even without a semantics bump. Executables built
+before this probe exit 2 (unknown command); the production launcher's
+`--upgrade-executable` refuses them unless the campaign's own executable
+history lists them (a rollback;
+[driver guide](shared_owner_campaign_driver.md#resuming-onto-a-semantics-compatible-binary)).
+
+## Generic complete artifact generation
+
+`rustred family-close` uses the family supplied in the input, not a built-in
+family selector. By default it enumerates the full sector census, proves zero sectors
+with the existing exact analyzer, and solves the remaining sectors. Durable
+bytes are written only after the core replay, guard, strict-descent and complete
+coverage gates succeed. An incomplete solver result is an error, not a partial
+artifact. The concrete target in a Project input is validated but does not
+restrict the family-wide closure request.
+
+```console
+rustred family-close --input YOUR_UNIT_MASS_FAMILY.toml \
+  --input-format toml --n-cores 4 --output family.rr
+rustred campaign inspect --artifact family.rr --output family.inspect.toml
+rustred campaign reduce --artifact family.rr --powers 2,2,1
+```
+
+The existing core artifact producer currently admits unshifted vacuum families
+with 1 through 16 denominator coordinates, dimension `d`, no other scalar
+parameters, and literal constant term `-1` in every denominator. Normalize the
+common mass before providing input; a denominator containing symbolic `m` is
+not unit-mass input. A shared core admission check rejects incompatible families
+before the sector census or solver runs, and the installer repeats that same
+check at publication.
+Accepted mathematical scope is separate from successful closure: challenging
+families can still fail with exact incomplete/unsupported-domain diagnostics.
+
+`--permutation 2,1,0` optionally supplies a zero-based coordinate priority used
+coherently in every sector (here for a three-coordinate family). Every index
+must appear exactly once. `--force` opts into
+atomic replacement; otherwise existing output files are preserved.
+
+### Explicit nonpositive coordinates
+
+`--nonpositive-indices 8,9` explicitly restricts input coordinates 8 and 9 to
+integer powers at most zero. This is useful for auxiliary scalar-product
+coordinates: their numerator powers remain unbounded below. All other powers
+remain unrestricted, and every sector and contraction in this declared domain
+must still pass the complete closure gates. Indices are zero-based in the
+original input order, independently of `--permutation`.
+
+This is a domain declaration, not a finite sample or a list of convenient
+sectors. The input target's zero powers never imply this restriction. Omitting
+the option requests the unrestricted family. Duplicate or out-of-range indices
+are errors. Scopes containing only zero sectors currently fail closed rather
+than producing a zero-only artifact.
+
+The artifact stores the domain, cold loading checks it, and reduction rejects
+an out-of-domain target. Every published rule still proves strict descent and
+valid RHS transitions. Globally proved zero sectors outside the domain remain
+available as exact source-replay evidence; they do not expand the reduction
+domain. Generation report schema v3 distinguishes `zero_sectors` (inside the
+domain) from `global_zero_sectors` and records `root_sector`. Inspection schema
+v3 exposes `root_power_lower`, `root_power_upper`, and `in_scope_zero_sectors`.
+Its existing zero-terminal list includes the global proof evidence.
+
+```console
+rustred family-close --input examples/input/four_loop_fg.toml \
+  --nonpositive-indices 8,9 --n-cores 2 --progress --output fg-physical.rr
+```
+
+This requests closure of the physical FG domain; it is not a claim that the
+four-loop run already passes publication. See the
+[current parent-probe evidence](four_loop_parent_closure_probe.md).
+
+On a terminal, `family-close` and `family-candidates` use a bounded, overwriting
+inline stderr dashboard with a colored header and a sector-generation progress
+bar. They do not enter an alternate screen. An independent presenter refreshes
+at most every 100 ms, including during a long solver phase with no new events.
+Redirected stderr is quiet by default; add `--progress` to request plain,
+newline-delimited snapshots at most once per second (plus final status), without
+ANSI escapes:
+
+```console
+rustred family-close --input YOUR_UNIT_MASS_FAMILY.toml \
+  --n-cores 4 --progress --output family.rr 2>family.progress.log
+```
+
+Worker progress may arrive out of order. The dashboard retains the latest
+scalar event and coalesces intermediate details; it is **not a complete event
+journal**. Generation, checkpoint reuse, checkpoint-save and failure counters
+update before coalescing. Completed-sector rule/residual totals are separate
+from live observed rule-hit counts. Frame/source/U/L/probe details come from the
+latest available event, not an inferred view inside a silent algebra call.
+Elapsed time, time since the latest event (`quiet`), and the latest job/phase
+age remain visible during that silence. Case counts and pending queues do not
+imply a completion percentage or ETA.
+
+The bar uses generated plus reused sectors only after the prepared census
+provides a denominator; otherwise it is indeterminate. Even a full bar means
+sector generation, **not closure, certification, or durable output**. The
+resource line reports current and peak **process** RSS on Linux, not combined
+worker-process-tree memory or an enforced memory limit. Peak RSS is the OS
+process-lifetime high-water mark. CPU utilization is explicitly unavailable;
+active-worker utilization and reconstruction-cache statistics are not measured
+by this dashboard. `NO_COLOR` disables terminal colors without disabling cursor
+management.
+
+Presentation, resource sampling and stderr I/O run outside solver callbacks.
+Presentation failures never change the solve result. Final status flushes once
+without waiting for the normal refresh interval; shutdown waits at most 500 ms
+for a blocked presenter, with best-effort terminal cleanup if the writer later
+unblocks. Progress never shares artifact stdout. The final `output written`
+message is emitted only after output succeeds; an early drop reports output as
+unconfirmed rather than claiming success. Use the Rust observation API below
+when a complete per-event diagnostic record is needed.
+
+The Rust application API exposes `FamilyCloseRequest`, `family_close`, and
+`FamilyCloseResult`. The result owns durable bytes through `artifact()` and
+`into_artifact()`, and a `to_toml()` report with preparation, generation,
+installation and encoding wall times. Those timings are observational metadata,
+not part of the semantic artifact. Existing inspect/reduce APIs cold-load and
+apply the returned bytes without re-running discovery.
+`FamilyCloseRequest::nonpositive_indices` declares the same optional domain;
+Python exposes `rustred.family_close(..., nonpositive_indices=[8, 9])`.
+
+`family_close_with_progress(request, observer)` produces identical artifact
+bytes and exposes owned, lightweight `FamilyCloseProgress` events. Its observer
+has type `Fn(FamilyCloseProgress) + Send + Sync`: generation callbacks can run
+concurrently on sector workers, while installation callbacks run on the calling
+thread. Keep callbacks short and synchronize any mutable observer state.
+Sector masks use bit `i` for input denominator coordinate `i`; ordinals are
+zero-based. No symbolic expressions are copied into progress. `family_close`
+uses the unobserved path, avoiding renderer locking and application-event construction.
+
+Live progress is currently exposed through the Rust application API and CLI.
+Python's existing `rustred.family_close` still provides the same generation,
+artifact and timing-report result; Python callbacks are deferred until their
+interaction with the detached coordinator and GIL is designed and tested.
+
+## Inspect saved candidate programs
+
+Read trusted native candidate bundles without another generation or coverage
+run:
+
+```bash
+rustred candidate-inspect --input saved.candidates.rrbin --output inspection.json
+rustred candidate-inspect --input saved.candidates.rrbin \
+  --options inspection-options.json --output detailed-inspection.json
+```
+
+For example, `inspection-options.json` can contain:
+
+```json
+{
+  "rule_ordinals": [0, 1],
+  "include_rhs_coefficients": true,
+  "max_output_bytes": 16777216
+}
+```
+
+Omit `rule_ordinals` to retain every rule. Optional `sectors` is a list of
+original-coordinate Boolean masks. Rule ordinals are zero-based within each
+selected sector; saved ordering is preserved. Invalid, empty or duplicate
+filters fail explicitly. The report states omitted rule/sector/terminal counts.
+By default it includes guard expressions and RHS coefficient IDs, but not RHS
+coefficient expressions. IDs are local to one payload, never cross-file
+algebraic identities. `max_output_bytes` bounds the diagnostic JSON, not import
+peak memory; overflow fails instead of silently truncating a successful report.
+
+The same operation is available as
+`rustred_app::inspect_generated_candidate_program` in Rust and
+`rustred.inspect_candidate_program(bundle_bytes, options_json=...)` in Python
+(returning a JSON string). The small Rust example can be built separately with
+`cargo build --release --locked -p rustred-app --example inspect_candidate_program`.
+
+Integral coordinates always refer to the original denominators. Saved
+`priority_slots` affect ordering, not coordinate labels. Applicability exclusions
+are an OR of AND-branches: a rule is excluded if every polynomial in any one
+branch vanishes. Ordered candidate cases are not disjoint dispatch cells;
+earlier rules, source conditions, denominator poles, zero sectors and terminals
+still govern application. Terminal keys are exact saved integers, not a claim
+of a minimal basis. Symbolica expression strings here are for diagnosis only;
+native binary persistence remains unchanged. No source-replay or closure claim
+is established by inspection, and native bundles must be trusted inputs.
+
+## Save candidates, certify independently
+
+Use `family-candidates` when you want the solver's formulas even before global
+artifact certification succeeds. It saves an explicitly **uncertified** bundle;
+it does not perform original-source replay or prove family closure. A separate
+`certify-candidates` invocation reconstructs those formulas and uses the existing
+replay, guard, strict-descent, coverage and publication gates without repeating
+the search.
+
+```console
+rustred family-candidates --input examples/input/three_loop_k6.toml \
+  --output k6.rrcandidate --report-output k6.search.toml --n-cores 1
+rustred certify-candidates --input k6.rrcandidate \
+  --output k6.rribp --report-output k6.certification.toml
+rustred campaign inspect --artifact k6.rribp
+```
+
+Generation accepts `--input-format`, `--permutation`, and
+`--nonpositive-indices` with their existing meanings. Certification alone
+accepts `--max-domain-bound-endpoint-cells`,
+`--max-predicate-consistency-work`, and `--max-predicate-atoms` as caller-owned
+proof budgets. Increasing a budget never certifies an invalid formula.
+Generation supports the generic source solver; certification retains the
+current unit-mass vacuum publication admission.
+
+To generate only specific nonzero sectors, pass `--selected-sectors` as a
+comma-separated list of binary masks, in the **original input-family coordinate
+order**. This is independent of `--permutation` and of the mathematical integral
+ordering descriptor. For example, generate only the full sector of the supplied
+six-coordinate three-loop family:
+
+```console
+rustred family-candidates --input examples/input/three_loop_k6.toml \
+  --selected-sectors 111111 --n-cores 2 \
+  --output selected.rrcandidate --report-output selected.report.toml
+```
+
+Without this option, generation still schedules the complete nonzero root
+downset. With it, every listed sector must be nonzero and contained in the root
+chosen by `--nonpositive-indices`. Empty, repeated, wrong-arity, zero-sector and
+out-of-root masks are rejected. The canonical selection is bound into the
+checkpoint identity and appears in the generation report as
+`generation_scope = "selected-sectors"` and `selected_sectors`.
+
+**Selected generation is intentionally partial.** Completing these jobs neither
+certifies family closure nor supplies rules for omitted sectors. Missing nonzero
+sectors remain uncovered; the native family-wide zero analysis is retained.
+Changing or omitting an explicit selection when resuming a checkpoint is an
+error, even if that selection previously listed every nonzero sector. Inspection
+returns the root and the actual saved sector inventory. No extra solver or
+topology-specific generation path is used.
+
+`--numerical-depth N` controls the signed-L1 search around fully fixed cases
+(default `2`). Zero still searches each unresolved initial seed; it can retain
+more finite residuals without changing symbolic search, guards or exact rule
+checks. It does not claim the retained integrals are independent masters. The
+choice is saved in the bundle's versioned solver policy and reported as
+`numerical_depth`. It is independent of loop count, workers and exact backend:
+
+```console
+rustred family-candidates --input family.toml --numerical-depth 0 \
+  --n-cores 6 --output family.rrcandidate --report-output family.report.toml
+```
+
+For long campaigns, opt into resumable, native sector checkpoints:
+
+```console
+rustred family-candidates --input family.toml --n-cores 6 \
+  --checkpoint-dir TMP/my-campaign --output family.rrcandidate
+# After interruption, keep every semantic option identical; workers may change.
+rustred family-candidates --input family.toml --n-cores 1 \
+  --checkpoint-dir TMP/my-campaign --resume --output family.rrcandidate
+```
+
+The dedicated directory's parent must exist. Keep the input, final bundle and
+report outside it. `--checkpoint-max-bytes N` sets a positive logical disk-payload
+budget (default 1 GiB), independent of the unchanged final candidate/algebra
+limits; it is not a memory cap. `--resume` and this budget require
+`--checkpoint-dir`. Fresh creation requires an empty directory; `--force`
+applies only to final outputs, never checkpoint replacement. One process owns
+the directory at a time. No checkpoint is removed automatically.
+
+Completed sectors use the existing native candidate format. Resume checks the
+same source, family, root, explicit sector selection, ordering, backend and numerical depth, then solves
+only missing sectors. Final assembly imports one shard at a time and preserves
+original sector/coefficient order; fully saved work resumes without any search.
+Malformed committed files cause an error, not silent replacement. Native data
+still requires trusted provenance. A saved sector is not a closure certificate.
+
+The optional `[checkpoint]` report gives reused/new sector counts, charged
+disk bytes, validation time and assembly time. `solve_us` includes this
+attempt's new solves and sector writes, **not** the historical work reused.
+`bundle_encoding_us` includes native assembly. Compare solver benchmarks with
+checkpointing disabled, or explicitly include this extra I/O boundary.
+Checkpointing avoids retaining all completed expanded solutions, but worker
+frames, native state and the final global bundle still consume memory. An
+output-limit failure preserves the completed files for a later assembly retry.
+
+`--exact-backend sparse` is the unchanged generation default. The opt-in
+`sparse-factorized` choice uses Symbolica's native factorized-denominator field
+during exact symbolic materialization and the shared numerical-case lift, then
+restores ordinary coefficients before rule extraction. `semi-numerical` selects
+Symbolica rational reconstruction and retains ordinary exact replay.
+The experimental `sparse-target-factorized` choice instead restricts symbolic
+GPLU to the harder/target columns and reconstructs the full row using native
+factorized arithmetic; the shared numerical-case lift stays full factorized.
+It requires source prefixes independent in the harder/target block and reports
+a failure rather than silently falling back. All these strategies are
+topology/arity generic.
+The selected name appears in the report's `exact_backend` field. These choices
+retain the same discovery, guards and candidate format; they do not select an
+application cache or certify a bundle.
+
+The optional `--max-negative-index-degree N` still fails closed for `N <= 30`;
+larger values are input errors. This numerator-only request leaves positive
+propagator dots unbounded, and that successor-closed contract is not implemented.
+It is never reinterpreted as total excess or replaced by unrestricted
+certification.
+
+The certification-only `--max-total-excess-degree D` option, Rust
+`CandidateCertificationRequest::with_max_total_excess_degree(D)` builder and
+Python `certify_candidates(..., max_total_excess_degree=D)` keyword request
+`sum(max(n_i-1,0) + max(-n_i,0)) <= D` at entry. Successful certification
+produces native bounded scope and independently checked descendant degrees,
+which may exceed `D`; all replay and publication checks remain required. The
+option is omitted by default (`None` in Rust/Python), preserving ordinary
+certification. `D` is an unsigned 64-bit integer, including zero, with no
+degree-30 ceiling. It is independent of resource limits and mutually exclusive
+with the numerator-only request. Large accepted arguments do not promise that
+proof work fits the chosen resource limits. For example:
+
+```console
+rustred certify-candidates --input saved.candidates.rrbin \
+  --max-total-excess-degree 2 --output saved.e2.rrbin
+rustred campaign inspect --artifact saved.e2.rrbin
+```
+
+This certifies saved formulas without rerunning rule generation. See
+[the bounded contract](research/rank_bounded_certification.md).
+
+Native binary bundle schema `rustred.generated-candidates.binary.v1` records
+`status = "uncertified-candidates"`, not closure. It cannot be passed to
+`campaign inspect` or `campaign reduce` as an artifact. The optional separate
+generation report (`rustred.family-candidates-output.toml.v1`) records
+`preparation_us`, `solve_us`, `bundle_encoding_us`, and `total_us`.
+The certification report (`rustred.candidate-certification-output.toml.v1`)
+separately records bundle decoding, preparation, native reconstruction,
+certification and artifact encoding. These are observational timings, not part
+of the bundle or artifact identity, and exclude a later explicit cold reload.
+Successful bounded certification reports additionally include optional
+`max_total_excess_degree`, `successor_sector_count` and
+`max_successor_total_excess_degree` fields; unrestricted reports omit them.
+`certify_candidates_with_progress` observes preparation, replay, lowering,
+installation and encoding without regenerating rules or changing proof policy.
+
+Both commands default to stdin/stdout and accept `--force` for atomic file
+replacement. `--report-output` must differ from the data output stream/path
+and the input file. Both destinations are preflighted before expensive work;
+bundle/artifact data is written before its report. Certification failure writes
+no artifact or success report, while the saved input bundle remains available.
+
+## Generic family solve diagnostic
+
+`rustred family-solve` accepts the same arbitrary Project TOML as `derive`,
+lowers it to the topology-neutral core family, and runs the generic sector
+solver. It never dispatches on a family name and does not publish a durable
+closing artifact; the output is explicitly marked `status = "diagnostic"`.
+Sectors can be supplied as comma-separated bit strings, or are enumerated
+automatically for families with at most 16 denominators:
+
+```console
+rustred family-solve --input examples/input/four_loop_h.toml \
+  --input-format toml --sectors 0000000001 --n-cores 4
+```
+
+The command remains useful for bounded sector diagnostics separate from
+`family-close`'s complete publication gate. Its currently compiled arity
+dispatch supports 1 through 16 denominators; an explicit sector manifest
+avoids full enumeration but does not lift that implementation limit.
+
+## Quick start
+
+The smallest input is a single Symbolica expression:
+
+```text
+I(
+  name(tadpole),
+  loops(k),
+  externals(),
+  dimension(d),
+  prop(D1,k^2-m2,1)
+)
+```
+
+Run it from a file or standard input:
+
+```console
+rustred derive --input INPUT.symbolica \
+  --input-format symbolica --output one_loop.derive.toml --n-cores 4
+
+rustred derive --input-format symbolica < INPUT.symbolica
+```
+
+`--n-cores N` is a positive invocation-wide worker-core budget. The current raw
+one-family `derive` command uses one private bounded Rayon pool for independent
+ordinary IBP rows, then—after an ordinary/LI barrier—independent LI rows and
+relation materialization. `--n-cores 1` stays entirely on the coordinator and
+is the deterministic serial reference. For `N > 1`, this current command
+constructs exactly `N` worker threads; it has no `--max-memory` policy and does
+not derive a smaller effective width. Values greater than one require a
+Symbolica license. The RustRed-owned scheduler never reads or mutates Rayon's
+global pool, and worker count does not enter the semantic output. Vendored
+restricted/unlicensed Symbolica
+currently initializes its own one-thread global fallback, while the licensed
+multicore path does not use it. Integration tests require
+byte-identical output for `N=1`, `N=2`, and `N=4`. The separate implemented
+`campaign run-waves --n-cores N` option bounds sibling workers within one
+atomic K6 wave; it is not a generic multi-topology execution width.
+
+`parameters(d,m2)` is intentionally absent: RustRed infers family scalars after
+excluding declared family identifiers, momenta, and propagator IDs. The
+optional `parameters(...)` clause is only an advanced strict allowlist. It can
+also disambiguate a numerator-only scalar from tensor syntax—for example, in
+`c*vec(k,mu)`, an explicit list can identify `c` as scalar without treating the
+Lorentz index `mu` as one. The current `derive` command retains numerators as
+unprocessed target metadata and therefore does not guess that distinction.
+
+RustRed retains an explicitly declared allowlist and its source order in the
+canonical `I(...)` and in `provenance.input_parameters`. Only scalars actually
+discovered in dimension, propagators, power shifts, and external Gram values
+enter the operational coefficient field. That active subset is sorted in
+`family.parameters`, so declaration order and numerator-only extras cannot
+change a family fingerprint or specialize a parametric IBP.
+
+## Input modes
+
+All three modes normalize into the same syntax-authenticated DTO and then use
+the same affine lowering and parametric relation generator. There is no
+topology or loop-count dispatch in this path.
+
+### Raw Symbolica
+
+Select raw mode with `--input-format symbolica`, or let `auto` recognize an
+input whose first expression is `I(...)`, `rustred::I(...)`, or Symbolica's
+fully explicit `rustred::{}::I(...)` spelling.
+
+The v1 grammar is:
+
+```text
+I(
+  name(family_name),                 # optional
+  loops(k1,k2,...),                  # required, nonempty
+  externals(p1,p2,...),              # required, may be empty
+  parameters(d,m2,...),              # optional; inferred when absent
+  dimension(d),                      # required
+  prop(D1, denominator_expression, target_power),
+  prop(D2, denominator_expression, target_power),
+  ...,
+  power_shift(D1, shift_expression), # optional, at most once per propagator
+  gram(p1,p1, scalar_expression),    # one upper-triangular entry per pair
+  gram(p1,p2, scalar_expression),
+  ...,
+  numerator(expression)              # optional concrete target metadata
+)
+```
+
+Clause order is immaterial. Unknown clauses, repeated singleton clauses,
+ambiguous patterns, undeclared identifiers, missing Gram entries, noninteger
+target powers, and conflicting labels are errors. `prop` rows must form a
+complete affine scalar-product basis: for `L` loops and `E` external momenta,
+there are exactly `L(L+1)/2 + L E` propagators.
+
+`target_power` and `numerator(...)` describe a concrete validation/reduction
+target. `derive` retains them in its output with disposition
+`not_processed_by_derive`; they do not specialize the universal IBP rows.
+
+### Hybrid TOML
+
+Hybrid mode embeds the same compact `I(...)` expression and keeps document
+metadata outside it:
+
+```toml
+schema = "rustred.project.toml.v1"
+
+integral = """
+I(
+  name(sunset),
+  loops(k1,k2),
+  externals(),
+  dimension(d),
+  prop(D1,k1^2-m2,1),
+  prop(D2,k2^2-m2,1),
+  prop(D3,(k1+k2)^2-m2,1)
+)
+"""
+
+[metadata]
+description = "two-loop massive vacuum family"
+campaign = "massive-vacuum-validation"
+tags = ["vacuum", "two-loop"]
+```
+
+Metadata is a bounded, sorted table whose values are strings or string arrays.
+It is reported as provenance but never enters the family or relation
+fingerprint. If supplied, `parameters` is a strict declared allowlist, not
+metadata: every scalar discovered in a family-defining field must occur in it.
+Its complete user-written order is retained in provenance and canonical input,
+while only the discovered subset enters the sorted operational coefficient
+context.
+Consequently, a declared parameter used solely by `numerator(...)` remains
+available for later tensor processing without changing derived IBPs.
+
+### Fully explicit compact TOML
+
+The explicit form is useful for generated configurations and tooling while
+still accepting concise Symbolica expressions instead of coefficient
+matrices:
+
+```toml
+schema = "rustred.project.toml.v1"
+
+[family]
+name = "sunset"
+loop_momenta = ["k1", "k2"]
+external_momenta = []
+dimension = "d"
+
+[[family.denominators]]
+id = "D1"
+expression = "k1^2-m2"
+
+[[family.denominators]]
+id = "D2"
+expression = "k2^2-m2"
+
+[[family.denominators]]
+id = "D3"
+expression = "(k1+k2)^2-m2"
+
+[kinematics]
+external_gram = []
+
+[target]
+powers = [1, 1, 1]
+numerator = "1"
+
+[metadata]
+description = "explicit form of the same family"
+```
+
+`power_shift = "..."` is optional on each denominator. For external
+kinematics, `external_gram` is a full symmetric matrix of Symbolica strings.
+Its mirrored entries must use identical strings after surrounding whitespace
+is removed; the sparse form below avoids duplicating off-diagonal entries.
+As an alternative, omit the matrix and provide sparse upper-triangular tables:
+
+```toml
+[[kinematics.gram]]
+left = "p"
+right = "p"
+value = "s"
+```
+
+The explicit and hybrid fields are mutually exclusive. The TOML reader uses
+strict schemas and rejects unknown fields rather than silently ignoring a
+misspelling.
+
+### Four-loop vacuum input (external family data)
+
+[`examples/input/four_loop_h.toml`](../examples/input/four_loop_h.toml) is a
+fully explicit user-supplied four-loop single-scale vacuum family. It has ten
+denominator coordinates because a four-loop vacuum has ten independent scalar
+products: the first nine rows are the physical H propagators and `D10` is an
+auxiliary ISP with target power zero. This is input data, not a RustRed
+topology selector or a built-in family. It can be passed directly to the
+generic derivation command:
+
+```console
+rustred derive --input examples/input/four_loop_h.toml \
+  --input-format toml --output four_loop_h.derive.toml --n-cores 4
+```
+
+The same file can be generated by tooling or supplied by an application; no
+RustRed source change is needed for another routing, mass polynomial, or
+loop count (subject to the authenticated family-basis limits). `derive`
+produces the complete parametric ordinary/LI source system. Closing-artifact
+campaign orchestration is a separate layer and consumes this normalized family
+rather than dispatching on the name `four-loop-unit-mass-vacuum-h`.
+
+## Command contract
+
+```text
+rustred derive [OPTIONS]
+
+--input <PATH|->          input path or standard input [default: -]
+--output <PATH|->         output path or standard output [default: -]
+--input-format <FORMAT>   auto, toml, or symbolica [default: auto]
+--relations <SELECTION>   all, ordinary, or li [default: all]
+--n-cores <COUNT>         maximum worker cores for parallel stages [default: 1]
+--force                   atomically replace an existing output file
+```
+
+For values above one, `COUNT` may not exceed the logical cores reported as
+available to the process, including operating-system/container restrictions.
+This prevents an accidental request from creating an unbounded OS-thread
+storm; a 100-core request is admitted on a node exposing at least 100 logical
+cores.
+
+Successful standard output contains only the complete TOML document.
+Diagnostics go to standard error. File output is staged, synchronized, and
+installed atomically in the destination directory; without `--force`, an
+existing destination is never replaced.
+
+The current command reports these exit-status categories; pre-alpha interfaces
+and schemas may still change during the repository reset:
+
+| Status | Category |
+|---:|---|
+| 0 | success |
+| 2 | command usage |
+| 3 | input I/O |
+| 4 | input schema, grammar, lowering, or resource limit |
+| 5 | parametric derivation |
+| 6 | output serialization or size policy |
+| 7 | output I/O |
+| 8 | parallel-execution setup or Symbolica license policy |
+| 70 | internal application invariant |
+
+Both input and output have finite byte limits. The output is fully rendered
+and checked before any byte is written to stdout, so an error never leaves a
+partial machine-readable document.
+
+Before generation, the shared application service checks a topology-independent
+worst-case count of raw relation-term additions, capped at 2,000,000 attempts.
+Before rendering,
+it charges the packed normalized/source Atoms with a conservative canonical
+render factor and censuses all exact family and generated-relation rational
+polynomials: sparse numerator/denominator terms, dense exponent payload,
+integer magnitudes, shifts, and condition sources share the 256 MiB
+retained/render budget. These conservative limits are shared application policy
+for both the CLI and the existing Python API; lower-level core-library users can
+select their own resource policy. `--relations ordinary` does not construct LI rows;
+`--relations li` constructs only the authenticated ordinary source rows needed
+internally by LiteRed's LI construction and emits only LI rows.
+
+## Output schema
+
+The output schema is `rustred.derive-output.toml.v1`. It includes:
+
+- RustRed and Symbolica producer versions and the canonical expression-format
+  identifier;
+- detected input mode, canonical normalized `I(...)`, parameter provenance
+  including source and operational orders, and external metadata;
+- the family fingerprint, exact parameter order, dimension, momentum order,
+  and abstract index names;
+- typed scalar-product coordinates and every denominator's canonical source,
+  normalized expression, constant, and full affine coefficient row;
+- the external Gram matrix and all generic-domain nonzero conditions with
+  their deterministic `sources` collections;
+- generated/emitted row counts;
+- every selected relation with a typed row ID, its ordered integer shift
+  vectors, canonical Symbolica coefficients, and exceptional nonzero
+  conditions.
+
+The equation convention is recorded literally in each document:
+
+```text
+sum(term.coefficient * I(n + term.shift) for term in relation.terms) = 0
+```
+
+All authoritative expression strings use Symbolica's fully qualified
+`AtomCore::to_canonical_string()` representation. They are independent of
+symbol registration order and can be parsed back to the same expression.
+
+## Multi-topology campaign planning
+
+The current `derive` command emits raw generic IBP/LI relations for one family;
+it does not solve sectors or publish a closed replacement-rule bundle.
+`campaign plan` now provides the deliberately smaller roots-only ingress:
+
+```text
+rustred campaign plan --input campaign.toml --output campaign.plan.toml
+```
+
+The compact v1 container can contain independently named concrete targets
+expressed as ordinary Symbolica `I(...)` strings:
+
+```toml
+schema = "rustred.campaign-input.toml.v1"
+
+[[roots]]
+id = "tadpole-scalar"
+integral = """
+I(
+  name(tadpole),
+  loops(k),
+  externals(),
+  dimension(d),
+  prop(D1,k^2-m2,1)
+)
+"""
+
+[roots.metadata]
+purpose = "scalar validation root"
+```
+
+Every `integral` value is passed whole to the existing Symbolica input
+compiler; the campaign layer does not split strings or define another
+expression grammar. Parameter inference, optional `parameters`, target powers,
+numerators, and affine-family lowering therefore have exactly the same input
+meaning as under `derive`. The roots-only command retains the numerator but
+does not tensor-reduce, scalar-lower, or cancel it against propagators.
+
+Generated configurations may instead use the same existing project schema and
+fields under a per-root `project` prefix. This cleanly reuses both its hybrid
+`integral` and fully explicit `family` forms:
+
+```toml
+[[roots]]
+id = "generated-root"
+
+[roots.project]
+schema = "rustred.project.toml.v1"
+
+[roots.project.family]
+name = "tadpole"
+loop_momenta = ["k"]
+external_momenta = []
+dimension = "d"
+
+[[roots.project.family.denominators]]
+id = "D1"
+expression = "k^2-m2"
+
+[roots.project.target]
+powers = [1]
+numerator = "1"
+```
+
+The root must choose exactly one of `integral` and `project`. Metadata and
+parameters belong beside `integral` in compact mode or inside the nested
+project in project mode. Root IDs are unique ingress labels. Families with
+identical exact representations and identical `(family, declared-power sector,
+ordering)` jobs are interned even when they came from different roots or input
+modes. The `declared_power_sector` is derived only from the signs of the
+declared target powers. It is deliberately not called a target or normalized sector: numerator
+lowering or denominator cancellation can change the eventual concrete support.
+
+A one-root raw Symbolica convenience is also available:
+
+```console
+rustred campaign plan --input-format symbolica --root-id tadpole \
+  < INPUT.symbolica
+```
+
+The output schema is `rustred.campaign-plan-output.toml.v1`. It is sorted by
+stable mathematical keys, has the same 256 MiB conservative/final output
+limit as `derive`, and explicitly reports `status = "ok"` and
+`scope = "roots_only"`.
+
+Thus a successful plan authenticates, lowers, deduplicates, and records only
+the supplied declarations and their declared-power jobs. It does not normalize
+targets, enumerate subsectors, discover dependencies, derive an IBP, claim
+masters/closure, or publish replacement rules. It contains no fictional status
+records for those unimplemented operations and no dependency counts.
+`campaign plan` deliberately rejects `--n-cores` and `--max-memory`: neither
+resource controls a roots-only metadata operation. The K6-specific execution
+commands below consume their own strict foundry configuration; they do not
+consume or upgrade this roots-only plan into a closure claim.
+
+### Physical campaign preflight
+
+The separate topology-free preflight accepts those physical controls today:
+
+```console
+rustred campaign preflight \
+  --profile PROFILE.toml \
+  --n-cores 100 \
+  --max-memory 150GiB \
+  --output campaign.preflight.toml
+```
+
+The profile schema is `rustred.campaign-execution-resource-profile.v1`.
+There are deliberately no default byte estimates: it must explicitly provide
+an estimator revision, an enclosing memory limit, all fixed components, and
+the retained/transient envelope of a one-core minimum runnable task. Byte
+strings accept only an unsigned integer followed by the case-sensitive binary
+unit `B`, `KiB`, `MiB`, `GiB`, or `TiB`. Unknown TOML fields and arithmetic
+overflow are rejected.
+
+Output uses schema
+`rustred.campaign-execution-preflight-output.toml.v1`. It reports either a
+`ready` width or `paused_for_memory_capacity` with a typed shortfall. Both are
+valid preflight outcomes and exit with status 0; invalid arguments exit 2 and
+an invalid profile exits 4. Every unsigned output integer is a lossless decimal
+string, identified by `unsigned_integer_encoding = "unsigned-decimal-string"`.
+
+This command invokes only the pure width planner. It does not parse a topology,
+initialize Symbolica or require a license, consume an accepted plan, construct
+a worker pool, hydrate a reducer, or schedule campaign work. The inline test
+profiles contain illustrative values, not named-host measurements.
+
+### Bounded K6 foundry execution
+
+Two implemented commands exercise the current K6 foundry without accepting
+recurrence algebra from the caller:
+
+```console
+rustred campaign run \
+  --config CONFIG.toml \
+  --output run.report.toml \
+  --measurements-output run.measurements.toml
+
+rustred campaign run-waves \
+  --config examples/k6_autonomous_campaign.toml \
+  --output waves.report.toml \
+  --measurements-output waves.measurements.toml \
+  --artifact-output waves.rribp \
+  --n-cores 4
+```
+
+Both commands consume schema `rustred.foundry-campaign-config.toml.v2`.
+`mode = "autonomous"` admits no caller-authored hint object: RustRed selects
+the proposal ordering, probes, coordinate priority, and itinerary. `mode =
+"external-hints-only"` requires a typed `[hints]` object containing only
+bounded search metadata. Neither form can encode an imported identity,
+recurrence right-hand side, coefficient, source row, support, reduction, or
+artifact payload. `campaign run` requires the single-sector fixed-point
+itinerary and remains diagnostic-only. `campaign run-waves` requires the
+full-rank atomic-wave itinerary and publishes same-rank siblings only as a
+complete wave.
+
+The deterministic semantic schemas are
+`rustred.foundry-campaign-report.toml.v2` and
+`rustred.foundry-wave-campaign-report.toml.v2`. Optional timing sidecars use
+`rustred.foundry-campaign-measurements.toml.v1` and
+`rustred.foundry-wave-campaign-measurements.toml.v1`; timings never enter the
+semantic report. The stderr dashboard is terminal-only by default,
+`--no-progress` disables it, and `--color auto|always|never` controls only that
+presentation.
+
+A completed process is not necessarily a closed campaign. An incomplete wave
+report has `publication = "diagnostic_only"`, `outcome = "incomplete"`,
+`artifact_installed = false`, and `durable_artifact_published = false`. It owns
+no artifact bytes and does not touch `--artifact-output`; the report instead
+contains the blocking wave and detached exact residual diagnostics for every
+blocking sibling. Only a fully published wave chain is installed as a K6
+artifact, encoded into native bytes, decoded through the cold validation
+boundary, replayed, and semantically compared with its re-encoding before artifact bytes become
+available. Report, measurement, and artifact destinations must be distinct;
+lexical aliases and aliases through existing symlinked parents are rejected
+before any write, including with `--force`.
+
+The supplied external-hint and autonomous example configurations are bounded
+release inputs, not evidence of K6 closure. Run both from a release build after
+each coherent foundry slice and retain their exact residual geometry, resource
+stop, and execution time. K6 remains open until both lanes independently pass
+the documented closure, replay, reload, and representative-reduction gates.
+
+### Durable closing artifacts
+
+Three fine-grained campaign operations expose the completed `K = 1` and
+`K = 3` closing artifacts without introducing topology-name dispatch:
+
+```console
+rustred campaign generate \
+  --family unit-mass-vacuum-k1 \
+  --output one_loop.rr
+
+rustred campaign inspect \
+  --artifact one_loop.rr \
+  --output one_loop.inspect.toml
+
+rustred campaign reduce \
+  --artifact one_loop.rr \
+  --powers 3 \
+  --output one_loop.I3.toml
+
+rustred campaign generate \
+  --family unit-mass-vacuum-k3 \
+  --output two_loop_sunset.rr
+
+rustred campaign reduce \
+  --artifact two_loop_sunset.rr \
+  --powers 2,2,1 \
+  --output two_loop_sunset.I221.toml
+```
+
+`campaign generate` writes the native binary artifact itself, not a
+TOML proxy. The semantic family selectors are `unit-mass-vacuum-k1` and
+`unit-mass-vacuum-k3`. There is no preset K6 selector: use the generic
+`family-close` command with `examples/input/three_loop_k6.toml` to generate
+the closed K6 artifact from its ordinary IBPs. The CLI and Python K6 examples
+include fresh-process inspection and canary application.
+`campaign inspect` and `campaign reduce` require artifact bytes from a path or
+from `--artifact -`; neither substitutes a hidden preset for those bytes. The
+`K = 3` cold validation boundary regenerates its registered derivation once
+and compares complete program structure and all exact coefficients, including
+ordered variable maps, after native state remapping. Ambient Symbolica
+registrations can change dump bytes without changing these semantics. Native
+Atom/State payloads must come from trusted generators; mathematical validation
+does not make the native binary reader a hardened hostile-input parser. No
+foundry work or authentication repeats in the reducer hot path. Generation
+output uses the existing atomic file installer, so `--force` is required to
+replace an existing file. Invalid or truncated bytes are rejected before any
+requested TOML output file is created.
+
+The equivalent stream operation is exact binary piping:
+
+```console
+rustred campaign generate --family unit-mass-vacuum-k1 \
+  | rustred campaign inspect --artifact -
+```
+
+Inspection emits schema
+`rustred.closing-artifact-inspect-output.toml.v4` after one bounded decode,
+authentication, and exact replay. Reduction emits schema
+`rustred.closing-artifact-reduce-output.toml.v3`, exact Symbolica-canonical
+unit-mass coefficients keyed by master power vectors, and a separate decimal
+string `common_mass_squared_power`. For `--powers 3`, the only master is `[1]`,
+the coefficient is
+`(-6*rustred::{}::d+8+rustred::{}::d^2)*1/8`, and the common-mass-squared
+power is `-2`.
+
+For a cold-verified bounded owner, inspection additionally reports
+`artifact.total_excess_scope` with `max_entry_total_excess_degree`,
+`successor_sector_count` and `max_successor_total_excess_degree`. This is a
+summary, not the complete persisted successor map. Existing inspection and
+reduction commands consume bounded bytes through their ordinary loader; it
+reproves the scope before exposing the owner.
+
+`--max-rule-applications N` is a nonnegative per-call ceiling, defaulting to
+and capped at 1,000,000. Durable input is bounded at 256 MiB before decode and
+then by the core codec's structural, string, coefficient, arity, and exact-
+algebra limits. Successful decoding produces one sealed owner; recursive hot-
+path application does not repeat cold authentication.
+
+`family-close`, `campaign inspect` and `campaign reduce` accept three matching
+resource controls:
+
+- `--max-domain-bound-endpoint-cells N`: conservative per-rule endpoint-buffer
+  allowance, default 8,192.
+- `--max-predicate-consistency-work N`: aggregate native consistency work per
+  exact predicate-cover traversal, default 4,194,304. It is not reset on each
+  Boolean branch or cache miss.
+- `--max-predicate-atoms N`: distinct affine atoms per cover, default 32 and
+  supported maximum 256. Atom IDs and assignments are dynamically sized;
+  the supported ceiling bounds recursive traversal depth. The separate native
+  affine equation, Boolean-node, clause and work ceilings remain in force.
+
+Zero is a restrictive allowance, not an unlimited setting. Larger allowances
+permit more verification work or storage; they do not remove a guard, skip a
+proof or authorize a new master. Choose sufficient limits explicitly for both
+generation and subsequent untrusted loading. They are caller policy, not
+trusted artifact contents, and successful choices do not change durable bytes.
+Values above 256 are rejected for the atom policy before generation or decoding;
+zero permits coordinate-only covers, not an unlimited predicate allowance.
+The Rust policies expose `max_predicate_atoms`; Python's `family_close`,
+`inspect_closing_artifact` and `reduce_with_closing_artifact` accept the same
+optional keyword (default `None`, selecting the core default). All three
+reports include it as a decimal-string resource field; family generation uses
+`rustred.family-close-output.toml.v4`. Durable artifact schemas are unchanged.
+The existing input/output byte ceiling and other structural limits remain.
+Reports record chosen resource counts as decimal strings so every supported
+`usize` value is representable in TOML.
+
+The core library contains a host-independent pre-pool effective-width planner,
+checked resource values, bounded ordered execution, and the K6-specific
+single-sector and atomic-wave foundry drivers. Roots-only family/sector/job
+interning is application-owned. The width plan enforces
+`M_operational < M_enclosing`, charges the coordinator and every possible
+warmed worker plus one minimum runnable task, and returns a typed no-fit pause
+without constructing a pool. The roots-only CLI remains separate; the resource
+preflight exposes only the pure decision from an explicit profile. Named-host
+calibration, task-specific estimator adapters, generic multi-family campaign
+execution, and checkpointing remain unimplemented. The
+fine-grained artifact commands are separate from roots-only planning and
+physical preflight. The generic K6 artifact and through-three-loop Vakint
+integration are available. Four-loop public numerical references and pinch
+checks pass; see the [numerical acceptance checkpoint](checkpoints/2026-09-19.md#completed-public-numerical-acceptance).
+Optional bounded four-loop artifact certification remains unfinished; see the
+[bounded certification audit](research/rank30_certification_audit_2026-09-17.md).
+
+`--n-cores` is always a ceiling. The planner derives an effective execution
+width `E` with `1 <= E <= --n-cores`. `E=1` denotes inline coordinator
+execution without a worker pool; `E>1` denotes `E` worker threads, while the
+separate coordinator remains another possible Symbolica workspace owner. The
+fixed baseline therefore charges the coordinator plus every possible worker
+and any explicitly admitted inner thread. If the inline baseline plus one
+minimum runnable task does not fit, preflight returns a typed memory-capacity
+pause.
+
+Operators should keep `--max-memory` below physical RAM to preserve headroom
+for the OS and opaque Symbolica scratch that its public API cannot census. The
+reported width, limits, fixed breakdown, and estimator revision are physical
+metadata excluded from mathematical identities. The exact closure boundary,
+remaining checkpoint work, and parallel-memory contracts are documented in
+the [foundry design](foundry.md); the present K6 commands implement only the
+bounded execution and conditional publication surfaces described above.
