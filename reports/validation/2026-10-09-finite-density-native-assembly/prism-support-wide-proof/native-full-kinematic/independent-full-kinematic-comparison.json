@@ -1,0 +1,36 @@
+{
+  "scope": "independent exact routed Gaussian determinants versus native full off-null HEPKit U/F; query only; no admission or integral values",
+  "script_sha256": "bc2059e2b79c2af516d68ca016500a33bf066fd61737b6da98915482ac4af86a",
+  "passed": 200,
+  "failed": 0,
+  "runs": [
+    {
+      "file": "reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-full-kinematic/prism-cuts-1-5-supports.json.gz",
+      "sha256": "d272575f7a26e6cbc54252085ba594d28912850341ecdcaa3ccb1cb82670e773",
+      "supports": 64,
+      "rank_deficient": 12,
+      "full_rank": 52
+    },
+    {
+      "file": "reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-full-kinematic/prism-cuts-1-7-supports.json.gz",
+      "sha256": "5484aa7337d9e703870b2191bbfc7d4c3f5f9abf9c3a9cafeb3fe1c0158fdc22",
+      "supports": 64,
+      "rank_deficient": 12,
+      "full_rank": 52
+    },
+    {
+      "file": "reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-full-kinematic/prism-cuts-5-7-supports.json.gz",
+      "sha256": "b267d053b0246a349f55282ec309c70a5cd9cdaa25b85f8cbd0d82467e99ab45",
+      "supports": 64,
+      "rank_deficient": 12,
+      "full_rank": 52
+    },
+    {
+      "file": "reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-full-kinematic/prism-cuts-1-5-7-one-virtual-supports.json.gz",
+      "sha256": "fd012821bd3eae1a292c74fa1738eef592aa4dbd8316e9b9bf6b7ebf3cc323cf",
+      "supports": 8,
+      "rank_deficient": 1,
+      "full_rank": 7
+    }
+  ]
+}

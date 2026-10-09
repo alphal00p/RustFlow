@@ -92,6 +92,57 @@ pub(super) fn image_domain<const N: usize>(
     IndexDomain::new(bounds)
 }
 
+/// Search hints only: neither queue grants coverage or changes an identity.
+struct PendingDomains<'a, const N: usize> {
+    points: &'a [[i64; N]],
+    prioritized: VecDeque<(IndexDomain<N>, Vec<usize>)>,
+    ordinary: VecDeque<IndexDomain<N>>,
+}
+
+impl<'a, const N: usize> PendingDomains<'a, N> {
+    fn new(domains: Vec<IndexDomain<N>>, points: &'a [[i64; N]]) -> Self {
+        let mut pending = Self {
+            points,
+            prioritized: VecDeque::new(),
+            ordinary: VecDeque::new(),
+        };
+        let all = (0..points.len()).collect::<Vec<_>>();
+        pending.extend(domains, &all);
+        pending
+    }
+
+    // Every child supplied by discovery is a subset of its parent. Filtering
+    // the parent's matching point indices therefore retains precisely all
+    // global priority points in that child without rescanning unrelated ones.
+    fn extend(&mut self, domains: impl IntoIterator<Item = IndexDomain<N>>, parent: &[usize]) {
+        for domain in domains {
+            let matching = parent
+                .iter()
+                .copied()
+                .filter(|&index| domain.contains(&self.points[index]))
+                .collect::<Vec<_>>();
+            if matching.is_empty() {
+                self.ordinary.push_back(domain);
+            } else {
+                self.prioritized.push_back((domain, matching));
+            }
+        }
+    }
+
+    fn pop_front(&mut self) -> Option<(IndexDomain<N>, Vec<usize>)> {
+        self.prioritized
+            .pop_front()
+            .or_else(|| self.ordinary.pop_front().map(|domain| (domain, Vec::new())))
+    }
+
+    fn into_domains(self) -> impl Iterator<Item = IndexDomain<N>> {
+        self.prioritized
+            .into_iter()
+            .map(|(domain, _)| domain)
+            .chain(self.ordinary)
+    }
+}
+
 impl<const N: usize> GuardedSourceSystem<N> {
     /// Discover reusable rules on one explicit integer box. Search and domain
     /// traversal are bounded; uncovered pieces remain in `unresolved`.
@@ -109,6 +160,22 @@ impl<const N: usize> GuardedSourceSystem<N> {
         options: SearchOptions,
         max_domains: usize,
     ) -> Result<GuardedSolution<N>, SolverError> {
+        self.solve_domains_with_priority_points(domains, &[], options, max_domains)
+    }
+
+    /// Discover exactly the requested boxes, visiting pieces containing a
+    /// priority point before other pieces. Points are scheduling hints, not
+    /// terminal labels or coverage certificates; admissible points outside all
+    /// requested boxes have no effect. Negative occupation indices are invalid
+    /// hints. Unvisited pieces remain explicit at the budget.
+    /// With no points, traversal is identical to `solve_domains`.
+    pub fn solve_domains_with_priority_points(
+        &self,
+        domains: Vec<IndexDomain<N>>,
+        priority_points: &[[i64; N]],
+        options: SearchOptions,
+        max_domains: usize,
+    ) -> Result<GuardedSolution<N>, SolverError> {
         if options.max_depth.is_none() || max_domains == 0 {
             return Err(SolverError::InvalidInput(
                 "guarded discovery requires a finite search depth and positive domain budget"
@@ -121,14 +188,19 @@ impl<const N: usize> GuardedSourceSystem<N> {
                 "requested domain includes a negative occupation index".into(),
             ));
         }
-        let mut pending: VecDeque<_> = domains.into();
+        if priority_points.iter().any(|point| !valid.contains(point)) {
+            return Err(SolverError::InvalidInput(
+                "priority point includes a negative occupation index".into(),
+            ));
+        }
+        let mut pending = PendingDomains::new(domains, priority_points);
         let mut visited = Vec::new();
         let mut solution = GuardedSolution {
             rules: Vec::new(),
             unresolved: Vec::new(),
         };
         let mut work = 0;
-        while let Some(domain) = pending.pop_front() {
+        while let Some((domain, priority_indices)) = pending.pop_front() {
             if visited.contains(&domain) {
                 continue;
             }
@@ -139,7 +211,7 @@ impl<const N: usize> GuardedSourceSystem<N> {
                     GuardedUnresolvedReason::DomainBudget,
                     "domain traversal budget exhausted",
                 );
-                for domain in pending {
+                for domain in pending.into_domains() {
                     unresolved(
                         &mut solution,
                         domain,
@@ -159,8 +231,8 @@ impl<const N: usize> GuardedSourceSystem<N> {
                 .position(|b| b.lower().is_none_or(|n| n <= 0) && b.upper().is_none_or(|n| n > 0))
             {
                 let (left, right) = domain.split(axis, 0)?;
-                pending.extend(left);
-                pending.extend(right);
+                pending.extend(left, &priority_indices);
+                pending.extend(right, &priority_indices);
                 continue;
             }
             if self.roles.iter().enumerate().any(|(axis, role)| {
@@ -203,8 +275,8 @@ impl<const N: usize> GuardedSourceSystem<N> {
                         self.source_boundary(&domain, options.max_depth.unwrap())
                     {
                         let (left, right) = domain.split(axis, at)?;
-                        pending.extend(left);
-                        pending.extend(right);
+                        pending.extend(left, &priority_indices);
+                        pending.extend(right, &priority_indices);
                         continue;
                     }
                     unresolved(
@@ -242,8 +314,8 @@ impl<const N: usize> GuardedSourceSystem<N> {
                 })
             }) {
                 let (left, right) = domain.split(axis, at)?;
-                pending.extend(left);
-                pending.extend(right);
+                pending.extend(left, &priority_indices);
+                pending.extend(right, &priority_indices);
                 continue;
             }
             let rule =
@@ -263,7 +335,10 @@ impl<const N: usize> GuardedSourceSystem<N> {
             // A box difference has at most 2N pieces. Preserve them even when
             // the traversal budget is smaller; the queue reports each unvisited
             // piece as unresolved instead of discarding the discovered rule.
-            pending.extend(domain.difference(&rule.domain, N.saturating_mul(2))?);
+            pending.extend(
+                domain.difference(&rule.domain, N.saturating_mul(2))?,
+                &priority_indices,
+            );
             // Reuse native polynomial exception extraction and exact case
             // intersections for index-only poles, including source weights.
             let exceptions = condition_exceptions(&rule, self.system.index_variables(), &sector)?;
@@ -289,7 +364,7 @@ impl<const N: usize> GuardedSourceSystem<N> {
                                             "condition vanishes throughout the requested case",
                                         );
                                     } else {
-                                        pending.push_back(child_domain);
+                                        pending.extend([child_domain], &priority_indices);
                                     }
                                 }
                             } else {
@@ -403,4 +478,150 @@ fn condition_exceptions<const N: usize>(
     };
     extract_exceptions(&candidate, indices, sector)
         .map_err(|e| SolverError::ExactReplay(e.to_string()))
+}
+
+#[cfg(test)]
+mod priority_tests {
+    use super::super::{GuardedApplicationStatus, GuardedProgram, GuardedSource};
+    use super::*;
+    use crate::algebra::CoefficientContext;
+    use crate::solver::{Integral, Term};
+    use std::sync::Arc;
+
+    fn source() -> (CoefficientContext, Arc<GuardedSourceSystem<1>>) {
+        let context = CoefficientContext::new(["priority_n", "priority_x"]);
+        let x = context.parameter("priority_x").unwrap();
+        let row = GuardedSource::new(
+            "positive-ray-recurrence",
+            vec![
+                Term {
+                    integral: Integral::symbolic([0]).unwrap(),
+                    coefficient: context.one().numerator,
+                },
+                Term {
+                    integral: Integral::symbolic([-1]).unwrap(),
+                    coefficient: (-x.clone()).numerator,
+                },
+            ],
+            IndexDomain::new([IndexBounds::new(Some(2), None).unwrap()]).unwrap(),
+        )
+        .with_nonzero_conditions(vec![x.numerator]);
+        let source = GuardedSourceSystem::new(
+            "priority-domain-regression",
+            [IndexRole::Ordinary],
+            [0],
+            vec![row],
+        )
+        .unwrap();
+        (context, Arc::new(source))
+    }
+
+    fn options() -> SearchOptions {
+        SearchOptions {
+            max_depth: Some(2),
+            sample_seed: 0,
+            ..Default::default()
+        }
+    }
+
+    #[test]
+    fn requested_sign_child_is_searched_before_unrelated_siblings() {
+        let (context, source) = source();
+        let domain = IndexDomain::unrestricted();
+        let old = source
+            .solve_domains(vec![domain.clone()], options(), 3)
+            .unwrap();
+        let old_program = GuardedProgram::new(source.clone(), old.rules, []).unwrap();
+        assert!(!matches!(
+            old_program.apply(&[2]).unwrap().status,
+            GuardedApplicationStatus::Applied { .. }
+        ));
+
+        let found = source
+            .solve_domains_with_priority_points(vec![domain.clone()], &[[2]], options(), 3)
+            .unwrap();
+        // Scheduling may postpone regions, but never certifies or discards
+        // them. Every sampled point outside the accepted rule is still in an
+        // explicitly unresolved box when the three-domain budget stops.
+        for point in -8..=8 {
+            assert!(
+                found
+                    .rules
+                    .iter()
+                    .any(|rule| rule.domain().contains(&[point]))
+                    || found
+                        .unresolved
+                        .iter()
+                        .any(|gap| gap.domain.contains(&[point]))
+            );
+        }
+        assert!(
+            found
+                .unresolved
+                .iter()
+                .all(|gap| gap.reason == GuardedUnresolvedReason::DomainBudget)
+        );
+        let program = GuardedProgram::new(source.clone(), found.rules, []).unwrap();
+        let applied = program.apply(&[2]).unwrap();
+        assert!(matches!(
+            applied.status,
+            GuardedApplicationStatus::Applied { .. }
+        ));
+        let x = context.parameter("priority_x").unwrap();
+        assert_eq!(applied.terms.get(&[1]), Some(&x));
+        assert!(applied.nonzero_conditions.contains(&x.numerator));
+        let replay = GuardedProgram::decode_generated(
+            &program.encode_native(Default::default()).unwrap(),
+            source,
+            Default::default(),
+        )
+        .unwrap();
+        assert_eq!(replay.apply(&[2]).unwrap().terms, applied.terms);
+        assert_eq!(
+            replay.apply(&[2]).unwrap().nonzero_conditions,
+            applied.nonzero_conditions
+        );
+    }
+
+    #[test]
+    fn empty_priority_hints_preserve_rule_transport_and_unresolved_order() {
+        let (_, source) = source();
+        let domains = vec![IndexDomain::unrestricted()];
+        let plain = source
+            .solve_domains(domains.clone(), options(), 32)
+            .unwrap();
+        let hinted = source
+            .solve_domains_with_priority_points(domains, &[], options(), 32)
+            .unwrap();
+        assert_eq!(plain.unresolved.len(), hinted.unresolved.len());
+        for (a, b) in plain.unresolved.iter().zip(&hinted.unresolved) {
+            assert_eq!(a.domain, b.domain);
+            assert_eq!(a.reason, b.reason);
+            assert_eq!(a.detail, b.detail);
+        }
+        let plain = GuardedProgram::new(source.clone(), plain.rules, []).unwrap();
+        let hinted = GuardedProgram::new(source, hinted.rules, []).unwrap();
+        assert!(
+            crate::persistence::equivalent_generated_programs(
+                &plain.encode_native(Default::default()).unwrap(),
+                &hinted.encode_native(Default::default()).unwrap(),
+                Default::default(),
+            )
+            .unwrap()
+        );
+    }
+
+    #[test]
+    fn occupation_priority_points_cannot_be_undefined() {
+        let program = super::super::lifecycle::tests::sample("priority-role-validation");
+        let result = program.sources().solve_domains_with_priority_points(
+            vec![IndexDomain::for_roles(&[IndexRole::Occupation])],
+            &[[-1]],
+            options(),
+            8,
+        );
+        assert!(
+            matches!(result, Err(SolverError::InvalidInput(message)) if message.contains("priority point"))
+        );
+    }
 }

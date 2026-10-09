@@ -1,0 +1,1 @@
+GuardedApplication { status: Applied { rule: 0 }, terms: {[1]: RationalPolynomial { numerator: [ { 1, [0, 1] } ], denominator: [ { 1, [0, 0] } ] }}, nonzero_conditions: [[ { 1, [0, 1] } ]] }

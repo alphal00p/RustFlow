@@ -1,0 +1,13 @@
+{
+  "command": [
+    "target/release/deps/symbolica_amflow-6c032eef1649ac2e",
+    "finite_density::",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 4.751068336889148,
+  "user_seconds": 7.84544,
+  "system_seconds": 0.50972,
+  "peak_child_rss_kib": 55056,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

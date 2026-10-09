@@ -1,0 +1,15 @@
+{
+  "captured_utc": "2026-10-09T22:40:59.427750+00:00",
+  "command": [
+    "/tmp/native_priority_legacy_probe",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/legacy"
+  ],
+  "argument_files": {
+    "/tmp/native_priority_legacy_probe": {
+      "resolved_path": "/tmp/native_priority_legacy_probe",
+      "sha256": "884c415e45a0a06f1075b3d16e8541715e002aed89f86a03841a070eeccb560d",
+      "size_bytes": 424172088
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

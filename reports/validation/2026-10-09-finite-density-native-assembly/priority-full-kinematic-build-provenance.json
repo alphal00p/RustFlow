@@ -1,0 +1,55 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-09T22:47:29.905694+00:00",
+  "source_snapshot": {
+    "sha256": "ca845be3307a5e48c135937f5a2d30d1ed64c81e779df9c403dd74a10b3c6fc3",
+    "size_bytes": 270128,
+    "mtime_utc": "2026-10-09T22:30:10.934807+00:00"
+  },
+  "source_files_verified_unchanged": 1807,
+  "release_build": "cargo test --locked --offline --release --features python --no-run --lib --test finite_density_runtime_flow --test finite_density_massless_sources --test finite_density_flow_boundary --test source_fingerprint --test python_finite_density",
+  "build_completed": true,
+  "build_wall": "8m20s",
+  "files": {
+    "target/release/deps/symbolica_amflow-6c032eef1649ac2e": {
+      "sha256": "4d74e858e5a63d4da264a75df39868b538f81b154b640567d405737672464c58",
+      "size_bytes": 1255320008,
+      "mtime_utc": "2026-10-09T22:46:41.792306+00:00"
+    },
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f": {
+      "sha256": "88715a622c5ac56e1c447b84dd9e9f1edabb46f77fb81faa71d38c5c3d5f7592",
+      "size_bytes": 1288875136,
+      "mtime_utc": "2026-10-09T22:46:13.239233+00:00"
+    },
+    "target/release/deps/finite_density_flow_boundary-9423d5e4f8668f3b": {
+      "sha256": "33a7586d4b8e2f217626e69b589b8de11d6f004773ece583b2521bcd8e685bf1",
+      "size_bytes": 1220365240,
+      "mtime_utc": "2026-10-09T22:43:50.066869+00:00"
+    },
+    "target/release/deps/finite_density_massless_sources-6295c8431ae8f488": {
+      "sha256": "455167779cbace81664786e00a77d4ef4049bf14f1fdb2c5d20d3b26197f904f",
+      "size_bytes": 1283104048,
+      "mtime_utc": "2026-10-09T22:46:13.250232+00:00"
+    },
+    "target/release/deps/python_finite_density-86655a919328faf8": {
+      "sha256": "0c56016bc3535ebce7eb27d7cdde713edbc1991e23ec7135a277f3b121a2f0ae",
+      "size_bytes": 1224133344,
+      "mtime_utc": "2026-10-09T22:43:49.505867+00:00"
+    },
+    "target/release/deps/source_fingerprint-3c52aa1b71e5ce60": {
+      "sha256": "e6b4eac4368dde090af6c7de33c480ead1a3ea435650fd4edb5fc16639232143",
+      "size_bytes": 3280600,
+      "mtime_utc": "2026-10-09T22:43:21.910798+00:00"
+    },
+    "target/release/deps/librustred-392075d0c6995fd1.rlib": {
+      "sha256": "74c82177a573e40d08513c6c568873398d3bfb197ad690aca476792bc6982523",
+      "size_bytes": 435875004,
+      "mtime_utc": "2026-10-09T22:42:05.584607+00:00"
+    },
+    "target/release/build/symbolica-amflow-5130bc8702e2f88e/output": {
+      "sha256": "f7a19d631f7a805286daa95639fd0533ccdfdfb8e1e5391b6f3e626de7e32edd",
+      "size_bytes": 723764,
+      "mtime_utc": "2026-10-09T22:30:10.016804+00:00"
+    }
+  }
+}

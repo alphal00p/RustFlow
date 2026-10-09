@@ -302,6 +302,19 @@ impl<const N: usize> GuardedContext<N> {
         terminals: impl IntoIterator<Item = [i64; N]>,
         options: GuardedDiscoveryOptions,
     ) -> Result<GuardedDiscovery<N>> {
+        self.discover_with_priority_points(domains, terminals, &[], options)
+    }
+
+    /// Spend the same bounded native search budget on domains containing these
+    /// indices first. Hints do not become terminals or establish coverage:
+    /// every unvisited box is still returned as an unresolved discovery gap.
+    pub fn discover_with_priority_points(
+        &self,
+        domains: Vec<IndexDomain<N>>,
+        terminals: impl IntoIterator<Item = [i64; N]>,
+        priority_points: &[[i64; N]],
+        options: GuardedDiscoveryOptions,
+    ) -> Result<GuardedDiscovery<N>> {
         for domain in &domains {
             validate_storage_domain(domain, self.physical_arity)?;
         }
@@ -309,10 +322,14 @@ impl<const N: usize> GuardedContext<N> {
         for terminal in &terminals {
             validate_storage_label(terminal, self.physical_arity)?;
         }
+        for point in priority_points {
+            validate_storage_label(point, self.physical_arity)?;
+        }
         let found = self
             .sources
-            .solve_domains(
+            .solve_domains_with_priority_points(
                 domains,
+                priority_points,
                 SearchOptions {
                     max_depth: Some(options.max_depth),
                     sample_seed: options.sample_seed,
@@ -602,6 +619,71 @@ mod tests {
         assert_eq!(uncovered.unresolved.len(), 1);
         let invalid = restored.reduce([1, -1], Default::default()).unwrap();
         assert_eq!(invalid.unresolved.len(), 1);
+    }
+
+    #[test]
+    fn priority_hints_preserve_storage_and_occupation_domains() {
+        let domain = IndexDomain::new([
+            IndexBounds::new(Some(2), None).unwrap(),
+            IndexBounds::fixed(0),
+            IndexBounds::fixed(0),
+        ])
+        .unwrap();
+        let context = GuardedContext::new_with_physical_arity(
+            measure(),
+            [
+                IndexRole::RequiredCut,
+                IndexRole::Occupation,
+                IndexRole::Ordinary,
+            ],
+            [
+                symbol!("priority_cut"),
+                symbol!("priority_occupation"),
+                symbol!("priority_tail"),
+            ],
+            vec![],
+            vec![GuardedIdentity {
+                id: "padded-priority-source".into(),
+                terms: vec![
+                    GuardedIdentityTerm {
+                        shift: [0, 0, 0],
+                        coefficient: Atom::one(),
+                    },
+                    GuardedIdentityTerm {
+                        shift: [-1, 1, 0],
+                        coefficient: -Atom::one(),
+                    },
+                ],
+                domain: domain.clone(),
+                nonzero_conditions: vec![],
+            }],
+            2,
+        )
+        .unwrap();
+        let discover = |points: &[[i64; 3]]| {
+            context.discover_with_priority_points(
+                vec![domain.clone()],
+                [[1, 1, 0]],
+                points,
+                Default::default(),
+            )
+        };
+        assert!(discover(&[[2, 0, 1]]).is_err());
+        assert!(discover(&[[2, -1, 0]]).is_err());
+        let found = discover(&[[2, 0, 0]]).unwrap();
+        let restored = context
+            .decode(
+                &found.program.encode(Default::default()).unwrap(),
+                Default::default(),
+            )
+            .unwrap();
+        let reduced = restored.reduce([2, 0, 0], Default::default()).unwrap();
+        assert!(reduced.unresolved.is_empty());
+        // The hinted index was reduced; it was not added as a terminal.
+        assert_eq!(reduced.terms, BTreeMap::from([([1, 1, 0], Atom::one())]));
+        let uncovered = restored.reduce([1, 0, 0], Default::default()).unwrap();
+        assert!(uncovered.terms.is_empty());
+        assert!(!uncovered.unresolved.is_empty());
     }
 
     #[test]

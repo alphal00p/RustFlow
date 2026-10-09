@@ -1,0 +1,122 @@
+{
+  "schema": 1,
+  "scope": "standalone external API probe; production and Cargo inputs unchanged",
+  "baseline_commit": "c224ab7",
+  "original_rlib_path": "target/release/deps/librustred-392075d0c6995fd1.rlib",
+  "original_rlib_mtime_utc": "2026-10-09T22:02:16.151333162Z",
+  "search_edit_mtime_utc": "2026-10-09T22:25:52.889107473Z",
+  "copied_rlib": {
+    "path": "/tmp/librustred-priority-legacy-392075d0c6995fd1.rlib",
+    "sha256": "e1e14e3c5aa0e496545cb220731818b20677fb135bc5b1e876b7914616b2f674",
+    "bytes": 435845948
+  },
+  "probe": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/probe.rs",
+    "sha256": "f90b55dc73d1c608d8c23c4139833ac69c0560106f7febc9330683371d61c945",
+    "bytes": 3078
+  },
+  "legacy_executable": {
+    "path": "/tmp/native_priority_legacy_probe",
+    "sha256": "884c415e45a0a06f1075b3d16e8541715e002aed89f86a03841a070eeccb560d",
+    "bytes": 424172088
+  },
+  "compiler": "nix develop rustc1.97.1; --edition=2024 -C opt-level=1 -C debuginfo=0; dependency target/release/deps; both existing gmp-mpfr-sys native library directories",
+  "initial_compile_failure": {
+    "code": "E0599",
+    "message": "CoefficientContext::new is available only to internal unit tests; external probe must use CoefficientContext::try_new(...).unwrap()",
+    "production_changes": false
+  },
+  "fresh_comparison": {
+    "passed": true,
+    "cases": 2,
+    "budgets": [
+      3,
+      32
+    ],
+    "native_generated_program_equivalence": true,
+    "ordered_gap_domain_reason_and_detail_equal": true,
+    "both_programs_independently_replayed": true,
+    "rules": [
+      0,
+      1
+    ],
+    "gaps": [
+      4,
+      3
+    ],
+    "scope": "identical one-dimensional recurrence under unrestricted domain; independent historical/fresh native builds, no claim of exhaustive legacy equivalence"
+  },
+  "fresh_rlib": {
+    "path": "target/release/deps/librustred-392075d0c6995fd1.rlib",
+    "sha256": "74c82177a573e40d08513c6c568873398d3bfb197ad690aca476792bc6982523",
+    "bytes": 435875004
+  },
+  "fresh_rlib_mtime_utc": "2026-10-09T22:42:05.584607299Z",
+  "fresh_executable": {
+    "path": "/tmp/native_priority_fresh_probe",
+    "sha256": "e9c971755ec2e7d67a47fec7c64f2cfe2557e951cad50ad137839d2b80781f51",
+    "bytes": 424176560
+  },
+  "artifacts": [
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/fresh/budget-3-application.txt",
+      "sha256": "6a13ec515d3d1f2cdbee8f8d2ffe3b66b40b14480aa8ff74b3de077f66ffcb5d",
+      "bytes": 95
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/fresh/budget-3-gaps.txt",
+      "sha256": "fe2fff7a0c7e09ce1a5fe0a3097765fde4e883742c583b8067e1ecb66b0bb88a",
+      "bytes": 475
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/fresh/budget-3.bin",
+      "sha256": "479538fdc4c8602b86411f7b02cc138c599eb9ca69d9a9658b59b0eccbcbde2e",
+      "bytes": 478
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/fresh/budget-32-application.txt",
+      "sha256": "3b28ae8ffbdc39a80ccc81a4a46c88bbd56b15ac51bc7366b6157e9fef949ea0",
+      "bytes": 191
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/fresh/budget-32-gaps.txt",
+      "sha256": "a02f5d1b3543c784e14db6e155b74d743f582962c17d49c189d2b4ca4c8e3c28",
+      "bytes": 397
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/fresh/budget-32.bin",
+      "sha256": "a543d2bd16995cf9eaf4598642c99d8a6b02893a3d5133107bf7c1d7193af564",
+      "bytes": 508
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/legacy/budget-3-application.txt",
+      "sha256": "6a13ec515d3d1f2cdbee8f8d2ffe3b66b40b14480aa8ff74b3de077f66ffcb5d",
+      "bytes": 95
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/legacy/budget-3-gaps.txt",
+      "sha256": "fe2fff7a0c7e09ce1a5fe0a3097765fde4e883742c583b8067e1ecb66b0bb88a",
+      "bytes": 475
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/legacy/budget-3.bin",
+      "sha256": "479538fdc4c8602b86411f7b02cc138c599eb9ca69d9a9658b59b0eccbcbde2e",
+      "bytes": 478
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/legacy/budget-32-application.txt",
+      "sha256": "3b28ae8ffbdc39a80ccc81a4a46c88bbd56b15ac51bc7366b6157e9fef949ea0",
+      "bytes": 191
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/legacy/budget-32-gaps.txt",
+      "sha256": "a02f5d1b3543c784e14db6e155b74d743f582962c17d49c189d2b4ca4c8e3c28",
+      "bytes": 397
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/legacy/budget-32.bin",
+      "sha256": "a543d2bd16995cf9eaf4598642c99d8a6b02893a3d5133107bf7c1d7193af564",
+      "bytes": 508
+    }
+  ]
+}

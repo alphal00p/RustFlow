@@ -60,6 +60,7 @@ impl Run {
             },
             split_ordinary_zero_faces: setting("RUSTFLOW_WEIGHTED_ZERO_FACES", false),
             requested_index_rays: setting("RUSTFLOW_WEIGHTED_REQUESTED_RAYS", false),
+            prioritize_requested_indices: setting("RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED", false),
             checkpoints: Some(report.join("native-closure")),
             ..Default::default()
         };

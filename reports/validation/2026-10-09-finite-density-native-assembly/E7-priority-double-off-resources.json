@@ -1,0 +1,33 @@
+{
+  "command": [
+    "timeout",
+    "180s",
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+    "RUSTFLOW_WEIGHTED_CUTS=0,4",
+    "RUSTFLOW_WEIGHTED_ROUNDS=3",
+    "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+    "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+    "RUSTFLOW_WEIGHTED_DEPTH=3",
+    "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=false",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=1/8",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture"
+  ],
+  "exit_code": 101,
+  "wall_seconds": 127.13851813599467,
+  "user_seconds": 125.802667,
+  "system_seconds": 0.35628699999999996,
+  "peak_child_rss_kib": 126400,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

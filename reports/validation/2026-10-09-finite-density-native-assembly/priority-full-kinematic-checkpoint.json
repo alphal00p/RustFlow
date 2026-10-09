@@ -1,0 +1,267 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-09T22:51:56.526235+00:00",
+  "base_commit": "c224ab7f971c072c1e161192d639ff37cc542c79",
+  "status": "regressions_passed_priority_did_not_improve_four_loop_closure",
+  "changes": [
+    "opt-in native guarded requested-point domain scheduling with exact legacy probe",
+    "query-only full off-null Symanzik identities, one-virtual multipair supports and role-aware finite-index bounds"
+  ],
+  "physical_admission_expanded": false,
+  "rustflow_nonignored_tests_passed": 80,
+  "rustred_guarded_nonignored_tests_passed": 60,
+  "runtime_numerical_gates_passed": 2,
+  "independent_route_uv_comparisons_passed": 192,
+  "independent_full_kinematic_comparisons_passed": 200,
+  "massless_reference_comparisons_passed": 70,
+  "massless_independent_refinement_comparisons_passed": 54,
+  "full_four_loop_numerical_acceptance_gates_passed": 0,
+  "supplied_oracle_numerical_records_compared": 0,
+  "priority_remains_opt_in_default_false": true,
+  "source_files_verified_unchanged": 1807,
+  "validation_reports": {
+    "priority-full-kinematic-boundary-gates.json": "852f58fb0d40a694453b42617d45c7ddf0850025da3297d3ad775171c2db4780",
+    "native-target-priority-gates.json": "5b34eb6a5fbe9ba5a3ae426cc42c8362d7497562db0fc4295b630f81d3f01ecd",
+    "priority-full-kinematic-build-provenance.json": "b7ad2c7580870dbc01f326a2cbed4bb02fd49a595173112b6d900aeae3e2152a",
+    "priority-full-kinematic-source-hashes.json": "ca845be3307a5e48c135937f5a2d30d1ed64c81e779df9c403dd74a10b3c6fc3",
+    "priority-source-fingerprint-resources.json": "8ddbb1d7743af4c7f2d281050578ef64befed66bd304a45d8e7bc9f6b90f3274",
+    "priority-python-resources.json": "6380540ec21d761637702be510d7ae72e57370bce2e7bd0852b27ad0d7b47e8c",
+    "priority-massless-sources-resources.json": "64ee5324d8c0c42b55a91bb99be99041ddc7d0a6c1abedf119c682efbee4fe71",
+    "priority-massless-fixed-resources.json": "bf30c4d34c8f76dc33b638925ee9fdc6cd2f651028d5cd336413b688a61c9e4d",
+    "priority-massless-laurent-resources.json": "1045c9574c34fc54e756d8872f47eedfe81f2b4af788c0b3965cd2e62d10e85d",
+    "priority-massless-fixed-comparison.json": "55312c9ad0f0d22104ac709788d1b98a8422c230dfa61c68bee63c870208e09d",
+    "priority-massless-laurent-comparison.json": "fc7b558a38a0023b7166fe25278aca9e07e6f11821625ade80da1f46b5fc3ae2",
+    "priority-root-archive-manifest.json": "4bb63aa8761525fde9c90a07669f9dc5d571460c6f7d0fa8545ec45a8cb8d1bf"
+  },
+  "four_loop_controls": [
+    {
+      "name": "E7-priority-single-off",
+      "status": "unresolved",
+      "rounds": [
+        {
+          "round": 0,
+          "requested": 5,
+          "frontier": 106,
+          "metadata": "E7-priority-single-off/native-closure/round-000-provisional.json.gz",
+          "sha256": "8030093cea4e7fd7f61a7bd3fa362ee811fe1813b9bdfeb0204f45f56af69e8f"
+        },
+        {
+          "round": 1,
+          "requested": 502,
+          "frontier": 538,
+          "metadata": "E7-priority-single-off/native-closure/round-001-provisional.json.gz",
+          "sha256": "959ceb3cbc473a9a581039b9341b344b3c6001164620303b3c754e2e5886dbf7"
+        },
+        {
+          "round": 2,
+          "requested": 1736,
+          "frontier": 1608,
+          "metadata": "E7-priority-single-off/native-closure/round-002-provisional.json.gz",
+          "sha256": "b7a2ad2f2bed96dcc9db5906b35650bedb04dd88e7b2e25e1ac54b91846a3c69"
+        }
+      ],
+      "resources": {
+        "command": [
+          "env",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+          "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+          "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=false",
+          "RUSTFLOW_WEIGHTED_CUTS=0",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+          "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-single-off",
+          "timeout",
+          "180",
+          "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+          "--ignored",
+          "--exact",
+          "runtime_graph_occupied_flow",
+          "--nocapture"
+        ],
+        "exit_code": 101,
+        "wall_seconds": 39.64492163527757,
+        "user_seconds": 39.160325,
+        "system_seconds": 0.177978,
+        "peak_child_rss_kib": 89172,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "failure": {
+        "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted provisional-frontier budget exhausted; rounds=3, provisional=1608, unresolved_terms=1789; first residual indices/reasons=[([1, 0, 1, 0, 2, 1, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 2, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 2, 1, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 2, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 2, 2, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 2, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 3, 1, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+        "numerical_acceptance": false,
+        "stage": "occupied preparation"
+      },
+      "numerical_acceptance": false
+    },
+    {
+      "name": "E7-priority-single-on",
+      "status": "timed_out",
+      "rounds": [
+        {
+          "round": 0,
+          "requested": 5,
+          "frontier": 106,
+          "metadata": "E7-priority-single-on/native-closure/round-000-provisional.json.gz",
+          "sha256": "cc2c1197f47026b28712145d951ca35b09c54d7f9474bfd109da94b1332ab2e0"
+        }
+      ],
+      "resources": {
+        "command": [
+          "env",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+          "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+          "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=true",
+          "RUSTFLOW_WEIGHTED_CUTS=0",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+          "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-single-on",
+          "timeout",
+          "180",
+          "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+          "--ignored",
+          "--exact",
+          "runtime_graph_occupied_flow",
+          "--nocapture"
+        ],
+        "exit_code": 124,
+        "wall_seconds": 180.01516664167866,
+        "user_seconds": 178.435435,
+        "system_seconds": 0.252456,
+        "peak_child_rss_kib": 96984,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "failure": null,
+      "numerical_acceptance": false
+    },
+    {
+      "name": "E7-priority-double-off",
+      "status": "unresolved",
+      "rounds": [
+        {
+          "round": 0,
+          "requested": 5,
+          "frontier": 68,
+          "metadata": "E7-priority-double-off/native-closure/round-000-provisional.json.gz",
+          "sha256": "8e92a0812b2391748b0e04229caa732e1db0bc2bb6e177197f52b4013f2040c2"
+        },
+        {
+          "round": 1,
+          "requested": 318,
+          "frontier": 308,
+          "metadata": "E7-priority-double-off/native-closure/round-001-provisional.json.gz",
+          "sha256": "aae430923a30e4dea7d58a757117a47843f7ad7e981aa841ba8b755c2ccdb117"
+        },
+        {
+          "round": 2,
+          "requested": 962,
+          "frontier": 899,
+          "metadata": "E7-priority-double-off/native-closure/round-002-provisional.json.gz",
+          "sha256": "7754527cc07a94f369e9b3e38de32b8656b13180981fe7bf8b052b7f11d74d65"
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0,4",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+          "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+          "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+          "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=false",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off",
+          "RUSTFLOW_DENSITY_FLOW_EPSILON=1/8",
+          "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8",
+          "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+          "--ignored",
+          "--exact",
+          "runtime_graph_occupied_flow",
+          "--nocapture"
+        ],
+        "exit_code": 101,
+        "wall_seconds": 127.13851813599467,
+        "user_seconds": 125.802667,
+        "system_seconds": 0.35628699999999996,
+        "peak_child_rss_kib": 126400,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "failure": {
+        "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted derivative closure round budget exhausted; rounds=3, provisional=899, unresolved_terms=1060; first residual indices/reasons=[([1, -1, 1, 1, 1, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 2, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 2, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 3, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 3, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 4, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 2, 1, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 2, 1, 2, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+        "numerical_acceptance": false,
+        "stage": "occupied preparation"
+      },
+      "numerical_acceptance": false
+    },
+    {
+      "name": "E7-priority-double-on",
+      "status": "timed_out",
+      "rounds": [
+        {
+          "round": 0,
+          "requested": 5,
+          "frontier": 68,
+          "metadata": "E7-priority-double-on/native-closure/round-000-provisional.json.gz",
+          "sha256": "4afd4d035450e6b6d3980863523022d766a4324a7f3f43ae277ef8aca54213ac"
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "180s",
+          "env",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+          "RUSTFLOW_WEIGHTED_CUTS=0,4",
+          "RUSTFLOW_WEIGHTED_ROUNDS=3",
+          "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+          "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+          "RUSTFLOW_WEIGHTED_DEPTH=3",
+          "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+          "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+          "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+          "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+          "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true",
+          "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=true",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-on",
+          "RUSTFLOW_DENSITY_FLOW_EPSILON=1/8",
+          "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8",
+          "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+          "--ignored",
+          "--exact",
+          "runtime_graph_occupied_flow",
+          "--nocapture"
+        ],
+        "exit_code": 124,
+        "wall_seconds": 180.0190353449434,
+        "user_seconds": 178.30112,
+        "system_seconds": 0.322557,
+        "peak_child_rss_kib": 145248,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "failure": null,
+      "numerical_acceptance": false
+    }
+  ],
+  "timing_scope": "prebuilt child wall time and RSS, excluding build/Nix; concurrent shared-host runs, not isolated benchmarks",
+  "next_required_work": [
+    "native bounded union of prior replayed rules across closure rounds",
+    "sealed physical endpoint admission using replayed parametric support evidence",
+    "complete independent four-loop references and native numerical gates",
+    "resolve or explicitly retain unsupported original eight-edge common contour prescription"
+  ]
+}

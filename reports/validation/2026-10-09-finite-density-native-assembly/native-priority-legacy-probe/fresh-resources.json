@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/tmp/native_priority_fresh_probe",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/fresh",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/legacy"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.012390241958200932,
+  "user_seconds": 0.0,
+  "system_seconds": 0.016316,
+  "peak_child_rss_kib": 15460,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

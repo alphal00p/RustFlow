@@ -1,0 +1,1 @@
+GuardedApplication { status: Unresolved(NoApplicableRule), terms: {}, nonzero_conditions: [] }

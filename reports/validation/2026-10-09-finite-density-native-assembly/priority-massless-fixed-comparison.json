@@ -1,0 +1,1747 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "mode": "sample",
+  "scope": "complete massless two-loop sunset with scalar and raised original numerator; no four-loop acceptance",
+  "normalization": "unscaled Euclidean amplitude",
+  "dimension": "13/2",
+  "configurations": [
+    [
+      18,
+      60,
+      8
+    ],
+    [
+      28,
+      60,
+      8
+    ],
+    [
+      28,
+      80,
+      8
+    ],
+    [
+      28,
+      80,
+      12
+    ]
+  ],
+  "guard_digits": 40,
+  "source_policy_provenance": "fixed native source snapshot and bound endpoint evidence; these native test records do not serialize source-search policy separately",
+  "relative_tolerance": "1e-12",
+  "small_magnitude_threshold": "1e-20",
+  "small_absolute_tolerance": "1e-25",
+  "imaginary_zero_absolute_tolerance": "1e-25",
+  "reference_comparison_count": 40,
+  "independent_refinement_comparison_count": 30,
+  "supplied_oracle_numerical_records_compared": 0,
+  "reference_uncertainty": "empirical precision and quadrature refinement, checked against independent exact Beta formulas; no rigorous numerical error interval",
+  "arithmetic": "Python Decimal, 100 digits, saved decimal inputs",
+  "inputs_sha256": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+    "examples/finite_density/massless_two_loop_sunset.json": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+    "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/input.json": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json": "3b36a6b244daedb93997625e5696112cc5764fe4858e9160dc47a8b628c62b45",
+    "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json": "36828e3b1cb733aa2f0c29e461e13cb4c7586918944d5371e0db888d85764580",
+    "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json": "69fccfd657e4f19ca5e9d514bb759fa9dafa2f26629f5f9c22fa2b14d378e96f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json": "44641be70a4893ffb9f67c08e2c22683db691fec8b4024c19aa21710ccc42850"
+  },
+  "script_sha256": "fa616b666d8a70291db943ec78e6760ef70a65aa062a6848b2a0d29ab25a0bc3",
+  "comparisons": [
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_0",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_0",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_1",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_1",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "double_cut",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json",
+      "prediction_real": "1.9885727509936693838354812022600822175170849020706970574755725E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "1.988572750993669383835481202260082217517084902070697057475572477594969758302664709713802593126E-8",
+      "real_difference": "2.2405030241697335290286197406874E-70",
+      "imaginary_difference": "0",
+      "absolute_difference": "2.2405030241697335290286197406874E-70",
+      "relative_difference": "1.126688989905034741452362338112000443035763364382546305312473584512773621237337101050521306571201468E-62",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "double_cut",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json",
+      "prediction_real": "-4.8609556135400807160422873833024231983750964272839261404958438E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "-4.860955613540080716042287383302423198375096427283926140495843834121037186962069290411517449865E-8",
+      "real_difference": "3.4121037186962069290411517449865E-70",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.4121037186962069290411517449865E-70",
+      "relative_difference": "7.019409330115811051988031679458863158004011841191420308312610219812533884874748576730020282685616725E-63",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json",
+      "prediction_real": "1.9885727509936693838354812022600822175170849020706970574755725E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "1.988572750993669383835481202260082217517084902070697057475572477594969758302664709713802593126E-8",
+      "real_difference": "2.2405030241697335290286197406874E-70",
+      "imaginary_difference": "0",
+      "absolute_difference": "2.2405030241697335290286197406874E-70",
+      "relative_difference": "1.126688989905034741452362338112000443035763364382546305312473584512773621237337101050521306571201468E-62",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-18-60-8.json",
+      "prediction_real": "-4.8609556135400807160422873833024231983750964272839261404958438E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "-4.860955613540080716042287383302423198375096427283926140495843834121037186962069290411517449865E-8",
+      "real_difference": "3.4121037186962069290411517449865E-70",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.4121037186962069290411517449865E-70",
+      "relative_difference": "7.019409330115811051988031679458863158004011841191420308312610219812533884874748576730020282685616725E-63",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "double_cut",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json",
+      "prediction_real": "1.98857275099366938383548120226008221751708490207069705747557247759496976E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "1.988572750993669383835481202260082217517084902070697057475572477594969758302664709713802593126E-8",
+      "real_difference": "1.697335290286197406874E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.697335290286197406874E-80",
+      "relative_difference": "8.535444777859177601404271112080195153042097286932705808750491222311333271553377450028754753304983370E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "double_cut",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json",
+      "prediction_real": "-4.86095561354008071604228738330242319837509642728392614049584383412103719E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "-4.860955613540080716042287383302423198375096427283926140495843834121037186962069290411517449865E-8",
+      "real_difference": "-3.037930709588482550135E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.037930709588482550135E-80",
+      "relative_difference": "6.249657374213407793087342705883134347791392701117636472674314899040569589800648427765509028727611945E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json",
+      "prediction_real": "1.98857275099366938383548120226008221751708490207069705747557247759496976E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "1.988572750993669383835481202260082217517084902070697057475572477594969758302664709713802593126E-8",
+      "real_difference": "1.697335290286197406874E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.697335290286197406874E-80",
+      "relative_difference": "8.535444777859177601404271112080195153042097286932705808750491222311333271553377450028754753304983370E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-60-8.json",
+      "prediction_real": "-4.86095561354008071604228738330242319837509642728392614049584383412103719E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "-4.860955613540080716042287383302423198375096427283926140495843834121037186962069290411517449865E-8",
+      "real_difference": "-3.037930709588482550135E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.037930709588482550135E-80",
+      "relative_difference": "6.249657374213407793087342705883134347791392701117636472674314899040569589800648427765509028727611945E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "double_cut",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json",
+      "prediction_real": "1.98857275099366938383548120226008221751708490207069705747557247759496976E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "1.988572750993669383835481202260082217517084902070697057475572477594969758302664709713802593126E-8",
+      "real_difference": "1.697335290286197406874E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.697335290286197406874E-80",
+      "relative_difference": "8.535444777859177601404271112080195153042097286932705808750491222311333271553377450028754753304983370E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "double_cut",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json",
+      "prediction_real": "-4.86095561354008071604228738330242319837509642728392614049584383412103719E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "-4.860955613540080716042287383302423198375096427283926140495843834121037186962069290411517449865E-8",
+      "real_difference": "-3.037930709588482550135E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.037930709588482550135E-80",
+      "relative_difference": "6.249657374213407793087342705883134347791392701117636472674314899040569589800648427765509028727611945E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json",
+      "prediction_real": "1.98857275099366938383548120226008221751708490207069705747557247759496976E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "1.988572750993669383835481202260082217517084902070697057475572477594969758302664709713802593126E-8",
+      "real_difference": "1.697335290286197406874E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.697335290286197406874E-80",
+      "relative_difference": "8.535444777859177601404271112080195153042097286932705808750491222311333271553377450028754753304983370E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-8.json",
+      "prediction_real": "-4.86095561354008071604228738330242319837509642728392614049584383412103719E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "-4.860955613540080716042287383302423198375096427283926140495843834121037186962069290411517449865E-8",
+      "real_difference": "-3.037930709588482550135E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.037930709588482550135E-80",
+      "relative_difference": "6.249657374213407793087342705883134347791392701117636472674314899040569589800648427765509028727611945E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_0",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_1",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json",
+      "prediction_real": "0",
+      "prediction_imaginary": "0",
+      "reference_real": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "double_cut",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json",
+      "prediction_real": "1.98857275099366938383548120226008221751708490207069705747557247759496976E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "1.988572750993669383835481202260082217517084902070697057475572477594969758302664709713802593126E-8",
+      "real_difference": "1.697335290286197406874E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.697335290286197406874E-80",
+      "relative_difference": "8.535444777859177601404271112080195153042097286932705808750491222311333271553377450028754753304983370E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "double_cut",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json",
+      "prediction_real": "-4.86095561354008071604228738330242319837509642728392614049584383412103719E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "-4.860955613540080716042287383302423198375096427283926140495843834121037186962069290411517449865E-8",
+      "real_difference": "-3.037930709588482550135E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.037930709588482550135E-80",
+      "relative_difference": "6.249657374213407793087342705883134347791392701117636472674314899040569589800648427765509028727611945E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json",
+      "prediction_real": "1.98857275099366938383548120226008221751708490207069705747557247759496976E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "1.988572750993669383835481202260082217517084902070697057475572477594969758302664709713802593126E-8",
+      "real_difference": "1.697335290286197406874E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.697335290286197406874E-80",
+      "relative_difference": "8.535444777859177601404271112080195153042097286932705808750491222311333271553377450028754753304983370E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": null,
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "prediction_path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-massless-fixed/prediction-28-80-12.json",
+      "prediction_real": "-4.86095561354008071604228738330242319837509642728392614049584383412103719E-8",
+      "prediction_imaginary": "0",
+      "reference_real": "-4.860955613540080716042287383302423198375096427283926140495843834121037186962069290411517449865E-8",
+      "real_difference": "-3.037930709588482550135E-80",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.037930709588482550135E-80",
+      "relative_difference": "6.249657374213407793087342705883134347791392701117636472674314899040569589800648427765509028727611945E-73",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    }
+  ],
+  "refinements": [
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "varied_setting": "digits",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "varied_setting": "digits",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_0",
+      "power": null,
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "varied_setting": "digits",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_0",
+      "power": null,
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "varied_setting": "digits",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_1",
+      "power": null,
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "varied_setting": "digits",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_1",
+      "power": null,
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "varied_setting": "digits",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "double_cut",
+      "power": null,
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "varied_setting": "digits",
+      "real_difference": "-2.240503024E-70",
+      "imaginary_difference": "0",
+      "absolute_difference": "2.240503024E-70",
+      "relative_difference": "1.126688989819680293673770562097957731914961412852125332443146513730987910243628158522974457312583548E-62",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "double_cut",
+      "power": null,
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "varied_setting": "digits",
+      "real_difference": "-3.412103719E-70",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.412103719E-70",
+      "relative_difference": "7.019409330740776789409372458767597428592325275970559578424373916352072722882595121665374110379410751E-63",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "varied_setting": "digits",
+      "real_difference": "-2.240503024E-70",
+      "imaginary_difference": "0",
+      "absolute_difference": "2.240503024E-70",
+      "relative_difference": "1.126688989819680293673770562097957731914961412852125332443146513730987910243628158522974457312583548E-62",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": null,
+      "from_configuration": [
+        18,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8
+      ],
+      "varied_setting": "digits",
+      "real_difference": "-3.412103719E-70",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.412103719E-70",
+      "relative_difference": "7.019409330740776789409372458767597428592325275970559578424373916352072722882595121665374110379410751E-63",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_0",
+      "power": null,
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_0",
+      "power": null,
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_1",
+      "power": null,
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_1",
+      "power": null,
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "double_cut",
+      "power": null,
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "double_cut",
+      "power": null,
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": null,
+      "from_configuration": [
+        28,
+        60,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "vacuum",
+      "power": null,
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "vacuum",
+      "power": null,
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_0",
+      "power": null,
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_0",
+      "power": null,
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "single_cut_1",
+      "power": null,
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "single_cut_1",
+      "power": null,
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "double_cut",
+      "power": null,
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "double_cut",
+      "power": null,
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": null,
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": null,
+      "from_configuration": [
+        28,
+        80,
+        8
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    }
+  ],
+  "assembly_checks": [
+    {
+      "target": "scalar",
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "real_difference": "0E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-69",
+      "relative_difference": "0E+38",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "configuration": [
+        18,
+        60,
+        8
+      ],
+      "real_difference": "0E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-69",
+      "relative_difference": "0E+38",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "configuration": [
+        28,
+        60,
+        8
+      ],
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "configuration": [
+        28,
+        80,
+        8
+      ],
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "configuration": [
+        28,
+        80,
+        12
+      ],
+      "real_difference": "0E-79",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-79",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    }
+  ]
+}

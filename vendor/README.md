@@ -58,3 +58,8 @@ Local changes after the initial import:
   different paths. It retains all nonzero conditions and preserves other
   failure records such as `WorkLimit`. Native replayed-diamond regressions
   cover cancellation, a nonzero sum, and exhaustion of the application budget.
+- Guarded domain discovery exposes `solve_domains_with_priority_points` to
+  visit pieces containing requested labels before unrelated pieces. Hints
+  affect traversal only: source guards, native search, sealing and exact replay
+  are unchanged, and all unvisited boxes remain explicit `DomainBudget`
+  results. Calling the existing solver without hints retains its FIFO order.

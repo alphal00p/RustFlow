@@ -1,0 +1,4 @@
+IndexDomain { bounds: [IndexBounds { lower: None, upper: Some(-1) }] }	DomainBudget	domain traversal budget exhausted
+IndexDomain { bounds: [IndexBounds { lower: Some(0), upper: Some(0) }] }	DomainBudget	domain traversal budget exhausted
+IndexDomain { bounds: [IndexBounds { lower: Some(1), upper: Some(1) }] }	DomainBudget	domain traversal budget exhausted
+IndexDomain { bounds: [IndexBounds { lower: Some(2), upper: None }] }	DomainBudget	domain traversal budget exhausted

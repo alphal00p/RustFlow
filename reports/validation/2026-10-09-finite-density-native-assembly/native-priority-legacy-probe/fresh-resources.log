@@ -1,0 +1,2 @@
+budget=3 rules=0 gaps=4 application=Unresolved(NoApplicableRule) baseline_equivalent=true
+budget=32 rules=1 gaps=3 application=Applied { rule: 0 } baseline_equivalent=true

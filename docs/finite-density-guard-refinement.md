@@ -64,6 +64,15 @@ It defaults to false. The runtime graph harness accepts
 policy. Narrowed coverage is not a claim that the surrounding sign sector has
 been solved.
 
+The independent opt-in `prioritize_requested_indices` policy passes the current
+requested labels to RustRed's native domain queue. Domains containing a hint
+are visited before other domains; every split retains all children and all
+unvisited pieces remain explicit `DomainBudget` gaps. Hints neither become
+terminals nor alter identities, guards, ordering or exact replay. Empty hints
+preserve the original FIFO traversal. The runtime graph harness accepts
+`RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED=true`, and each round checkpoint records
+the policy. It defaults to false and can be combined with requested-index rays.
+
 The initial 2026-10-09 standalone validation used `legacy-lorentz` sources,
 polynomial completion powers, native depth 3/domain budget 8192, and refinement
 limits 3/256/2, without requesting constant frontier sectors:

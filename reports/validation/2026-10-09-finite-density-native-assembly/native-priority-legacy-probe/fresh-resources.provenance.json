@@ -1,0 +1,16 @@
+{
+  "captured_utc": "2026-10-09T22:46:15.024209+00:00",
+  "command": [
+    "/tmp/native_priority_fresh_probe",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/fresh",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-priority-legacy-probe/legacy"
+  ],
+  "argument_files": {
+    "/tmp/native_priority_fresh_probe": {
+      "resolved_path": "/tmp/native_priority_fresh_probe",
+      "sha256": "e9c971755ec2e7d67a47fec7c64f2cfe2557e951cad50ad137839d2b80781f51",
+      "size_bytes": 424176560
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

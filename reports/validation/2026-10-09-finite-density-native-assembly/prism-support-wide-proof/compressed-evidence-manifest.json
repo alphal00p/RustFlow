@@ -60,6 +60,46 @@
       "uncompressed_sha256": "c48eca0d5a592222ed7a653f320f4b251b228bc7fd30617cafa2d394c39a8770",
       "compressed_sha256": "67077907889d3bb721efbfe5ad778d3498f5a31f92a000b5c660ce9ed89f0eb7",
       "gzip_mtime": 0
+    },
+    {
+      "scope": "coherent-native-full-kinematic-query",
+      "logical_file": "native-full-kinematic/prism-cuts-1-5-7-one-virtual-supports.json",
+      "compressed_file": "native-full-kinematic/prism-cuts-1-5-7-one-virtual-supports.json.gz",
+      "uncompressed_bytes": 35416,
+      "compressed_bytes": 1532,
+      "uncompressed_sha256": "d2174062d4a79908cc61d5821c7e51c7caeca555fd3006d365157fb3d68e13de",
+      "compressed_sha256": "fd012821bd3eae1a292c74fa1738eef592aa4dbd8316e9b9bf6b7ebf3cc323cf",
+      "gzip_mtime": 0
+    },
+    {
+      "scope": "coherent-native-full-kinematic-query",
+      "logical_file": "native-full-kinematic/prism-cuts-1-5-supports.json",
+      "compressed_file": "native-full-kinematic/prism-cuts-1-5-supports.json.gz",
+      "uncompressed_bytes": 1917638,
+      "compressed_bytes": 72300,
+      "uncompressed_sha256": "7cb5f8aec9280f28410d06758fda461e3e474f8a383de73b037d68fa60444abb",
+      "compressed_sha256": "d272575f7a26e6cbc54252085ba594d28912850341ecdcaa3ccb1cb82670e773",
+      "gzip_mtime": 0
+    },
+    {
+      "scope": "coherent-native-full-kinematic-query",
+      "logical_file": "native-full-kinematic/prism-cuts-1-7-supports.json",
+      "compressed_file": "native-full-kinematic/prism-cuts-1-7-supports.json.gz",
+      "uncompressed_bytes": 1917766,
+      "compressed_bytes": 70694,
+      "uncompressed_sha256": "49d451eedba73f22db6d83f0610de601a24f2f51f3d5cec43a7f742019cb4719",
+      "compressed_sha256": "5484aa7337d9e703870b2191bbfc7d4c3f5f9abf9c3a9cafeb3fe1c0158fdc22",
+      "gzip_mtime": 0
+    },
+    {
+      "scope": "coherent-native-full-kinematic-query",
+      "logical_file": "native-full-kinematic/prism-cuts-5-7-supports.json",
+      "compressed_file": "native-full-kinematic/prism-cuts-5-7-supports.json.gz",
+      "uncompressed_bytes": 1917702,
+      "compressed_bytes": 71240,
+      "uncompressed_sha256": "adb7f1e66d0cf8b2ef7d6c82b5db2691a4cc221d1994f89b201955ec543c9929",
+      "compressed_sha256": "b267d053b0246a349f55282ec309c70a5cd9cdaa25b85f8cbd0d82467e99ab45",
+      "gzip_mtime": 0
     }
   ]
 }

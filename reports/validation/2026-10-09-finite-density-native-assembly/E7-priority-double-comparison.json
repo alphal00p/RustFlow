@@ -1,0 +1,99 @@
+{
+  "schema": 1,
+  "scope": "matched bounded four-loop occupied weighted-source discovery controls, prebuilt binary only; no numerical acceptance",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-full-kinematic-source-hashes.json",
+    "sha256": "ca845be3307a5e48c135937f5a2d30d1ed64c81e779df9c403dd74a10b3c6fc3",
+    "bytes": 270128
+  },
+  "cuts": [
+    0,
+    4
+  ],
+  "ordinary_zero_faces": true,
+  "requested_index_rays": true,
+  "free_virtual_zero_sectors": true,
+  "guard_refinement_passes": 0,
+  "round_budget": 3,
+  "frontier_budget": 1024,
+  "requested_budget": 4096,
+  "search_depth": 3,
+  "domain_budget": 8192,
+  "timeout_seconds": 180,
+  "timing_scope": "concurrent prebuilt diagnostic children on the shared host; compilation and Nix startup excluded",
+  "runs": {
+    "off": {
+      "priority_enabled": false,
+      "resources": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off-resources.json",
+        "sha256": "ee8bdfbf98901a1992e90c7bfb4f2c5d314cf30960ceab757c4f68e26127cb03",
+        "bytes": 1205
+      },
+      "provenance": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off-resources.provenance.json",
+        "sha256": "c2aec1014d55aa06de770bed1a6a665c6bc20b9f7adbac7791bbf7d30535a200",
+        "bytes": 1899
+      },
+      "exit_code": 101,
+      "wall_seconds": 127.13851813599467,
+      "peak_child_rss_kib": 126400,
+      "completed_rounds": [
+        {
+          "round": 0,
+          "requested": 5,
+          "provisional_frontier": 68,
+          "new_derivatives": 258
+        },
+        {
+          "round": 1,
+          "requested": 318,
+          "provisional_frontier": 308,
+          "new_derivatives": 628
+        },
+        {
+          "round": 2,
+          "requested": 962,
+          "provisional_frontier": 899,
+          "new_derivatives": 1200
+        }
+      ],
+      "closed": false,
+      "numerical_predictions": false,
+      "status": "round_budget_exhausted",
+      "failure": {
+        "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted derivative closure round budget exhausted; rounds=3, provisional=899, unresolved_terms=1060; first residual indices/reasons=[([1, -1, 1, 1, 1, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 2, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 2, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 3, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 3, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 4, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 2, 1, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 2, 1, 2, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+        "numerical_acceptance": false,
+        "stage": "occupied preparation"
+      }
+    },
+    "on": {
+      "priority_enabled": true,
+      "resources": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-on-resources.json",
+        "sha256": "46fd0330f3b14d8f233390bfde2f74acfd570a4a2a00135ea5ed1b4fb761ee95",
+        "bytes": 1190
+      },
+      "provenance": {
+        "path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-on-resources.provenance.json",
+        "sha256": "80e967dca33a7814c7de8616ea77886cccf1ef27afabca2cc6ea882b059e3d43",
+        "bytes": 1897
+      },
+      "exit_code": 124,
+      "wall_seconds": 180.0190353449434,
+      "peak_child_rss_kib": 145248,
+      "completed_rounds": [
+        {
+          "round": 0,
+          "requested": 5,
+          "provisional_frontier": 68,
+          "new_derivatives": 258
+        }
+      ],
+      "closed": false,
+      "numerical_predictions": false,
+      "status": "timeout_during_native_search_after_round_zero"
+    }
+  },
+  "conclusion": "Off reproduces the prior three-round unresolved frontier. On times out during the next native search after round zero. The synthetic priority regression passes, but this bounded E7 double-cut comparison establishes no closure or numerical benefit.",
+  "archives": "E7-priority-double-archives.json"
+}

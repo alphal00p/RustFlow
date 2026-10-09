@@ -1,0 +1,47 @@
+{
+  "schema": 1,
+  "scope": "native guarded scheduling, exact replay, explicit uncovered domains and condition retention; no four-loop closure or numerical acceptance claim",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/priority-full-kinematic-source-hashes.json",
+    "sha256": "ca845be3307a5e48c135937f5a2d30d1ed64c81e779df9c403dd74a10b3c6fc3",
+    "bytes": 270128
+  },
+  "files": [
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/solver/guarded/search.rs",
+      "sha256": "c2886c970d66565311a1f5ca92759db16359baa04d26a9e77365b8554e3db028",
+      "bytes": 24694
+    },
+    {
+      "path": "vendor/README.md",
+      "sha256": "298992c66acd43783b572db74758cde00fa4068516847a4fa032818f356b147b",
+      "bytes": 3379
+    }
+  ],
+  "native_tests": {
+    "passed": 60,
+    "failed": 0,
+    "ignored": 1,
+    "target_priority_subset_included": 3,
+    "harness_seconds": 0.04,
+    "resources": "native-target-priority-resources.json",
+    "provenance": "native-target-priority-resources.provenance.json",
+    "log": "native-target-priority-resources.log"
+  },
+  "legacy_compatibility": {
+    "code_review": "empty hints preserve original FIFO traversal and explicit DomainBudget leftovers",
+    "current_api_test_scope": "alias consistency, generated-program equivalence and exact ordered unresolved records within current build",
+    "independent_cross_revision_probe": {
+      "passed": true,
+      "report": "native-priority-legacy-probe/provenance.json",
+      "cases": 2,
+      "budgets": [
+        3,
+        32
+      ],
+      "ordered_gap_records_equal": true,
+      "native_generated_program_equivalence": true,
+      "scope": "one exact recurrence, budgeted and saturated discovery; supplements FIFO code review"
+    }
+  }
+}

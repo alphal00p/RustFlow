@@ -1,0 +1,95 @@
+{
+  "schema": 1,
+  "files": [
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-000-provisional.bin",
+      "original_sha256": "d2e9bf3f0cb445a03f5d6e3e66bfd75944713165a137973c274eb5bfa0487e80",
+      "original_bytes": 4145996,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-000-provisional.bin.gz",
+      "archive_sha256": "871143eb89677b3e24a04d8b1a78a1c9ef82ab6633281df99d1eed7092ed0cdc",
+      "archive_bytes": 345762,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-000-provisional.json",
+      "original_sha256": "043c3acfe9449947fdae37a08f48fef07a39d21b5318bf616bf3a5ee12f6aac0",
+      "original_bytes": 25337,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-000-provisional.json.gz",
+      "archive_sha256": "8e92a0812b2391748b0e04229caa732e1db0bc2bb6e177197f52b4013f2040c2",
+      "archive_bytes": 2389,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-001-provisional.bin",
+      "original_sha256": "f400d66ee47b87047fa5336bfff647bd73fb706be0190c84897c9bdce69dcfb0",
+      "original_bytes": 2307461,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-001-provisional.bin.gz",
+      "archive_sha256": "86906833c063b5309a126958b72df3222122f7cc0979cd042ccd2ad9c5f7a9f5",
+      "archive_bytes": 146523,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-001-provisional.json",
+      "original_sha256": "246124fda3c1edc18d3fdf8b442fb0c9da8158a2532bf0af9ca5b44db3c6af17",
+      "original_bytes": 132143,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-001-provisional.json.gz",
+      "archive_sha256": "aae430923a30e4dea7d58a757117a47843f7ad7e981aa841ba8b755c2ccdb117",
+      "archive_bytes": 4541,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-002-provisional.bin",
+      "original_sha256": "aaff3d44bf0c8421b82be2769213b9f684fb7557a597463e9dd7e0f80cb500d2",
+      "original_bytes": 1588802,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-002-provisional.bin.gz",
+      "archive_sha256": "69f782b2e503a8f055b822ed4f099c43b7a8a5f6e38894ccd469fd557a5f1e09",
+      "archive_bytes": 67005,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-002-provisional.json",
+      "original_sha256": "0060a5fddb01da3a17fb53f73551c865472b9e6115647d08066daae4b8bf449f",
+      "original_bytes": 370717,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off/native-closure/round-002-provisional.json.gz",
+      "archive_sha256": "7754527cc07a94f369e9b3e38de32b8656b13180981fe7bf8b052b7f11d74d65",
+      "archive_bytes": 8672,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off-resources.log",
+      "original_sha256": "eef0e51c77bc234b6c733dfe048652bfbbd4c12e7af79fe50e220bed3610fdb5",
+      "original_bytes": 1922,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-off-resources.log.gz",
+      "archive_sha256": "ceb67a8a3265d8d69973f5cad15688146921335960519b19057bcb8a1f9c8b37",
+      "archive_bytes": 652,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-on/native-closure/round-000-provisional.bin",
+      "original_sha256": "59e7dfe25265fceaffb2a8800d71c311f8ef9aee19d0e6bbfb0dfaa75790f36a",
+      "original_bytes": 4142144,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-on/native-closure/round-000-provisional.bin.gz",
+      "archive_sha256": "1d61e2f4a650c1d03ba75de8e96d8676737ce05ce1875aadff6c8923f711f9fc",
+      "archive_bytes": 354720,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-on/native-closure/round-000-provisional.json",
+      "original_sha256": "e4d837e36927e8bbd8f9caa2c8b50256a99e5ef6947f54becd7e0db3c5be9c7d",
+      "original_bytes": 25336,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-on/native-closure/round-000-provisional.json.gz",
+      "archive_sha256": "4afd4d035450e6b6d3980863523022d766a4324a7f3f43ae277ef8aca54213ac",
+      "archive_bytes": 2384,
+      "lossless_roundtrip_verified": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-on-resources.log",
+      "original_sha256": "18b1ceea745666fce078beab5da8b251e1df9bc4201b1c21a2d87803674acbc0",
+      "original_bytes": 266,
+      "archive_path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-priority-double-on-resources.log.gz",
+      "archive_sha256": "1cb493261203a959daeedaa52121be424b409a4de7acf998cd52b3c8d7ec299f",
+      "archive_bytes": 214,
+      "lossless_roundtrip_verified": true
+    }
+  ]
+}

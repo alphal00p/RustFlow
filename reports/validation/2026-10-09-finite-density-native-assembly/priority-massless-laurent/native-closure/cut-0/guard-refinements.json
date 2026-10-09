@@ -1,0 +1,199 @@
+{
+  "added_domains": [
+    [
+      [
+        1,
+        1
+      ],
+      [
+        4,
+        4
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    [
+      [
+        1,
+        1
+      ],
+      [
+        5,
+        5
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    [
+      [
+        1,
+        1
+      ],
+      [
+        6,
+        6
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        -1,
+        -1
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ]
+  ],
+  "native_parent_gaps": [
+    {
+      "axis": 1,
+      "fixed_values": [
+        4,
+        5
+      ],
+      "native_failure": "recentered source proof misses the requested target domain",
+      "parent_bounds": [
+        [
+          1,
+          1
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "pass": 1,
+      "trigger": [
+        1,
+        4,
+        1,
+        -1,
+        -1,
+        0,
+        0
+      ]
+    },
+    {
+      "axis": 1,
+      "fixed_values": [
+        5,
+        6
+      ],
+      "native_failure": "recentered source proof misses the requested target domain",
+      "parent_bounds": [
+        [
+          1,
+          1
+        ],
+        [
+          5,
+          6
+        ],
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          -1,
+          -1
+        ],
+        [
+          0,
+          0
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "pass": 1,
+      "trigger": [
+        1,
+        5,
+        1,
+        -1,
+        -1,
+        0,
+        0
+      ]
+    }
+  ],
+  "options": {
+    "max_added_domains": 256,
+    "max_interval_width": 2,
+    "max_passes": 3
+  },
+  "parent_coverage_certified": false,
+  "schema": 1
+}

@@ -5,7 +5,7 @@
 //! with one source-replayed native program. It makes no minimality claim.
 
 use std::collections::{BTreeMap, BTreeSet};
-use std::path::{Path, PathBuf};
+use std::path::PathBuf;
 
 use rustred::solver::guarded::GuardedUnresolvedReason;
 use serde::Serialize;
@@ -217,6 +217,9 @@ pub struct WeightedClosureOptions {
     /// indices fixed. Narrows discovery only; all resulting native rules still
     /// carry their exact domains and must reconstruct the full connection.
     pub requested_index_rays: bool,
+    /// Ask native RustRed to explore domains containing requested labels first.
+    /// This only schedules bounded work; unvisited domains remain explicit gaps.
+    pub prioritize_requested_indices: bool,
     /// A distinct directory per source/deformation context. Each round stores
     /// its exact native program plus explicitly provisional/closed metadata.
     pub checkpoints: Option<PathBuf>,
@@ -238,6 +241,7 @@ impl Default for WeightedClosureOptions {
             search_frontier_sectors: true,
             split_ordinary_zero_faces: false,
             requested_index_rays: false,
+            prioritize_requested_indices: false,
             checkpoints: None,
         }
     }
@@ -464,9 +468,7 @@ pub fn prepare_weighted_system<const N: usize>(
         let frontier = frontier.into_iter().collect::<Vec<_>>();
         diagnostics.provisional_sizes.push(frontier.len());
         checkpoint(
-            options.checkpoints.as_deref(),
-            options.split_ordinary_zero_faces,
-            options.requested_index_rays,
+            &options,
             round,
             false,
             &found.program,
@@ -609,9 +611,7 @@ pub fn prepare_weighted_system<const N: usize>(
                 })
                 .collect::<Result<BTreeMap<_, _>>>()?;
             checkpoint(
-                options.checkpoints.as_deref(),
-                options.split_ordinary_zero_faces,
-                options.requested_index_rays,
+                &options,
                 round,
                 true,
                 &final_found.program,
@@ -668,6 +668,11 @@ fn discover_with_refinement<const N: usize>(
     conditions: &mut BTreeMap<String, Atom>,
     run: &RunContext,
 ) -> Result<GuardedDiscovery<N>> {
+    let priority_points = if options.prioritize_requested_indices {
+        requested.iter().copied().collect::<Vec<_>>()
+    } else {
+        Vec::new()
+    };
     for pass in 0..=options.guard_refinement.max_passes {
         run.cancellation.check()?;
         let mut submitted = domains.to_vec();
@@ -677,7 +682,12 @@ fn discover_with_refinement<const N: usize>(
                 .filter(|face| !domains.contains(face))
                 .cloned(),
         );
-        let found = context.discover(submitted, terminals.iter().copied(), options.discovery)?;
+        let found = context.discover_with_priority_points(
+            submitted,
+            terminals.iter().copied(),
+            &priority_points,
+            options.discovery,
+        )?;
         if options.guard_refinement.max_passes == 0 {
             return Ok(found);
         }
@@ -917,16 +927,14 @@ fn unclosed<const N: usize>(
 }
 
 fn checkpoint<const N: usize>(
-    directory: Option<&Path>,
-    split_ordinary_zero_faces: bool,
-    requested_index_rays: bool,
+    options: &WeightedClosureOptions,
     round: usize,
     closed: bool,
     program: &GuardedReductionProgram<N>,
     requested: &BTreeSet<[i64; N]>,
     frontier: &[[i64; N]],
 ) -> Result<()> {
-    let Some(directory) = directory else {
+    let Some(directory) = options.checkpoints.as_deref() else {
         return Ok(());
     };
     std::fs::create_dir_all(directory)?;
@@ -939,8 +947,9 @@ fn checkpoint<const N: usize>(
     let metadata = serde_json::json!({ "schema": 1, "round": round, "status": tag,
         "measure_id": program.native().sources().measure_id(),
         "physical_arity": program.physical_arity(), "storage_capacity": N,
-        "split_ordinary_zero_faces":split_ordinary_zero_faces,
-        "requested_index_rays":requested_index_rays,
+        "split_ordinary_zero_faces":options.split_ordinary_zero_faces,
+        "requested_index_rays":options.requested_index_rays,
+        "prioritize_requested_indices":options.prioritize_requested_indices,
         "requested": requested.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>(),
         "frontier": frontier.iter().map(|indices| indices.to_vec()).collect::<Vec<_>>() });
     let path = directory.join(format!("{base}.json"));
@@ -1036,10 +1045,12 @@ mod tests {
     }
 
     #[test]
-    fn generated_compact_sources_close_and_replay_with_ordinary_zero_faces_and_rays() {
+    fn generated_compact_sources_close_and_replay_with_discovery_policies() {
         let (context, deformation) = compact_context();
         let target = [1, 0];
-        for requested_index_rays in [false, true] {
+        for (requested_index_rays, prioritize_requested_indices) in
+            [(false, false), (false, true), (true, false), (true, true)]
+        {
             let outcome = prepare_weighted_system(
                 &context,
                 &[BTreeMap::from([(target, Atom::one())])],
@@ -1047,6 +1058,7 @@ mod tests {
                 WeightedClosureOptions {
                     split_ordinary_zero_faces: true,
                     requested_index_rays,
+                    prioritize_requested_indices,
                     ..Default::default()
                 },
                 &RunContext::default(),
