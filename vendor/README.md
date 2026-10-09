@@ -50,3 +50,11 @@ Import validation passed with the unchanged shared dependency pins:
 cargo test --locked --offline --release -p rustred --test guarded_source_api
 cargo check --locked --offline --release --features python --all-targets
 ```
+
+Local changes after the initial import:
+
+- Guarded recursive reduction combines exact coefficients of repeated
+  `NoApplicableRule` residuals, including cancellations reached through
+  different paths. It retains all nonzero conditions and preserves other
+  failure records such as `WorkLimit`. Native replayed-diamond regressions
+  cover cancellation, a nonzero sum, and exhaustion of the application budget.

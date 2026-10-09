@@ -318,6 +318,12 @@ impl<const N: usize> GuardedProgram<N> {
             return Ok(result);
         }
         let mut pending = BTreeMap::from([(target, self.one())]);
+        // A lexicographically earlier uncovered leaf may be reached again
+        // after it has left `pending`. Keep its exact coefficient sum, just as
+        // for declared terminals; distinct paths can cancel without any new
+        // reduction identity. Other failures remain explicit even if their
+        // labels coincide with an uncovered leaf.
+        let mut uncovered = BTreeMap::new();
         while let Some((integral, coefficient)) = pending.pop_first() {
             if result.rule_applications >= limits.max_rule_applications
                 && !self.terminals.contains(&integral)
@@ -345,6 +351,9 @@ impl<const N: usize> GuardedProgram<N> {
                 GuardedApplicationStatus::Terminal => {
                     accumulate(&mut result.terms, integral, coefficient)
                 }
+                GuardedApplicationStatus::Unresolved(
+                    GuardedApplicationFailure::NoApplicableRule,
+                ) => accumulate(&mut uncovered, integral, coefficient),
                 GuardedApplicationStatus::Unresolved(reason) => {
                     result.unresolved.push(GuardedUnresolvedTerm {
                         integral,
@@ -379,6 +388,17 @@ impl<const N: usize> GuardedProgram<N> {
                 }
             }
         }
+        result
+            .unresolved
+            .extend(
+                uncovered
+                    .into_iter()
+                    .map(|(integral, coefficient)| GuardedUnresolvedTerm {
+                        integral,
+                        coefficient,
+                        reason: GuardedApplicationFailure::NoApplicableRule,
+                    }),
+            );
         Ok(result)
     }
 }
@@ -525,6 +545,144 @@ pub(super) mod tests {
             .unwrap();
         assert!(complete.unresolved.is_empty());
         assert_eq!(complete.terms.len(), 1);
+    }
+
+    fn diamond_program(cancel: bool) -> GuardedProgram<1> {
+        let context = CoefficientContext::new(["guarded_diamond_n", "guarded_diamond_x"]);
+        let x = context.parameter("guarded_diamond_x").unwrap();
+        let target = Integral::symbolic([0]).unwrap();
+        let branches = [
+            (4, vec![(-1, context.one()), (-2, context.one())]),
+            (2, vec![(-1, x.clone())]),
+            (3, vec![(-2, if cancel { -x.clone() } else { x.clone() })]),
+        ];
+        let sources = Arc::new(
+            GuardedSourceSystem::new(
+                "replayed-uncovered-diamond",
+                [IndexRole::Occupation],
+                [0],
+                branches
+                    .iter()
+                    .enumerate()
+                    .map(|(ordinal, (point, rhs))| {
+                        let mut row = vec![Term {
+                            integral: target,
+                            coefficient: context.one().numerator,
+                        }];
+                        row.extend(rhs.iter().map(|(shift, coefficient)| Term {
+                            integral: Integral::symbolic([*shift]).unwrap(),
+                            coefficient: (-coefficient.clone()).numerator,
+                        }));
+                        GuardedSource::new(
+                            format!("diamond-{ordinal}"),
+                            row,
+                            IndexDomain::new([IndexBounds::fixed(*point)]).unwrap(),
+                        )
+                        .with_nonzero_conditions(vec![x.numerator.clone()])
+                    })
+                    .collect(),
+            )
+            .unwrap(),
+        );
+        let rules = branches
+            .into_iter()
+            .enumerate()
+            .map(|(ordinal, (point, rhs))| {
+                sources
+                    .seal_candidate(
+                        RuleCandidate {
+                            case: Case::generic(),
+                            target,
+                            rhs: rhs
+                                .into_iter()
+                                .map(|(shift, coefficient)| Term {
+                                    integral: Integral::symbolic([shift]).unwrap(),
+                                    coefficient,
+                                })
+                                .collect(),
+                            sources: vec![SeedSource {
+                                basis_row: ordinal,
+                                seed: Seed {
+                                    integral: target,
+                                    shifts: [0],
+                                },
+                            }],
+                            stats: SearchStats::default(),
+                        },
+                        IntegralOrder::new([true], [false])
+                            .with_roles([IndexRole::Occupation])
+                            .unwrap(),
+                        IndexDomain::new([IndexBounds::fixed(point)]).unwrap(),
+                    )
+                    .unwrap()
+            })
+            .collect();
+        GuardedProgram::new(sources, rules, []).unwrap()
+    }
+
+    #[test]
+    fn uncovered_diamond_cancels_after_leaf_was_already_emitted() {
+        let program = diamond_program(true);
+        // Lexicographic scheduling visits 4 -> 2 -> 1 -> 3 -> 1, so the
+        // opposite leaf contributions never coexist in the pending map.
+        let result = program.reduce([4], Default::default()).unwrap();
+        assert!(result.terms.is_empty());
+        assert!(result.unresolved.is_empty());
+        assert_eq!(result.rule_applications, 3);
+        let x = &program.rules[1].candidate.rhs[0].coefficient.numerator;
+        assert!(result.nonzero_conditions.contains(x));
+
+        let replayed = GuardedProgram::decode_generated(
+            &program.encode_native(Default::default()).unwrap(),
+            program.sources.clone(),
+            Default::default(),
+        )
+        .unwrap();
+        let after_reload = replayed.reduce([4], Default::default()).unwrap();
+        assert!(after_reload.unresolved.is_empty());
+        assert_eq!(after_reload.nonzero_conditions, result.nonzero_conditions);
+    }
+
+    #[test]
+    fn uncovered_diamond_combines_nonzero_coefficients_exactly() {
+        let program = diamond_program(false);
+        let result = program.reduce([4], Default::default()).unwrap();
+        assert_eq!(result.unresolved.len(), 1);
+        let term = &result.unresolved[0];
+        let x = &program.rules[1].candidate.rhs[0].coefficient;
+        assert_eq!(term.integral, [1]);
+        assert_eq!(term.coefficient, x + x);
+        assert_eq!(term.reason, GuardedApplicationFailure::NoApplicableRule);
+    }
+
+    #[test]
+    fn uncovered_cancellation_does_not_erase_work_limit_evidence() {
+        let program = diamond_program(true);
+        let result = program
+            .reduce(
+                [4],
+                GuardedReductionLimits {
+                    max_rule_applications: 3,
+                    max_pending_integrals: 10,
+                },
+            )
+            .unwrap();
+        assert_eq!(result.unresolved.len(), 2);
+        assert!(result.unresolved.iter().all(|term| term.integral == [1]));
+        assert!(
+            result
+                .unresolved
+                .iter()
+                .any(|term| { term.reason == GuardedApplicationFailure::NoApplicableRule })
+        );
+        assert!(
+            result
+                .unresolved
+                .iter()
+                .any(|term| { term.reason == GuardedApplicationFailure::WorkLimit })
+        );
+        assert!((&result.unresolved[0].coefficient + &result.unresolved[1].coefficient).is_zero());
+        assert!(!result.nonzero_conditions.is_empty());
     }
 
     #[test]
