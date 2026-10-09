@@ -69,6 +69,91 @@ fn mixed_tensor_boundary_factorizes() {
 }
 
 #[test]
+fn projected_region_preserves_soft_denominators_and_coordinate_maps() {
+    let mut family = template();
+    family.loops.extend(["q".into(), "r".into()]);
+    family.external = vec!["u".into()];
+    family.external_gram = vec![vec![Atom::num(1)]];
+    let coordinates = vec![
+        parse!("q00"),
+        parse!("q01"),
+        parse!("q02"),
+        parse!("q11"),
+        parse!("q12"),
+        parse!("q22"),
+        parse!("q0u"),
+        parse!("q1u"),
+        parse!("q2u"),
+    ];
+    // The soft factor is nonpolynomial and its first denominator is not an
+    // ordinary affine propagator. Projection must preserve it without invoking
+    // ordinary partial fractions or treating it as a compact polynomial moment.
+    let expression = parse!("q01*q0u/((q00-1)^3*(q11^2+1)*(q1u+3))");
+    let projected = integrand::projected_factor_region(
+        &expression,
+        &coordinates,
+        &family,
+        &[true, false, true],
+        10,
+    )
+    .unwrap();
+    assert_eq!(projected.hard.source_loop_indices, [0, 2]);
+    assert_eq!(projected.hard.source_coordinate_indices, [0, 2, 5]);
+    assert_eq!(
+        projected.hard.coordinates,
+        [parse!("q00"), parse!("q02"), parse!("q22")]
+    );
+    assert_eq!(projected.hard.template.loops, ["l", "r"]);
+    assert!(projected.hard.template.external.is_empty());
+    assert_eq!(projected.soft.source_loop_indices, [1]);
+    assert_eq!(projected.soft.source_coordinate_indices, [3, 7]);
+    assert_eq!(projected.soft.coordinates, [parse!("q11"), parse!("q1u")]);
+    assert_eq!(projected.soft.template.loops, ["q"]);
+    assert_eq!(projected.soft.template.external, ["u"]);
+    assert!(projected.soft.template.propagators.is_empty());
+    let rebuilt = projected
+        .terms
+        .iter()
+        .fold(Atom::new(), |sum, term| sum + &term.hard * &term.soft);
+    let expected = parse!("q00*q1u/((4-2*eps)*(q00-1)^3*(q11^2+1)*(q1u+3))");
+    assert!((rebuilt - expected).together().cancel().is_zero());
+    assert!(matches!(
+        integrand::factor_region(&expression, &coordinates, &family, &[true, false, true], 10),
+        Err(Error::Unsupported(message)) if message.contains("nonaffine boundary denominator")
+    ));
+}
+
+#[test]
+fn projected_region_bounds_products_and_keeps_unmixed_sides() {
+    let mut family = template();
+    family.loops.push("q".into());
+    let coordinates = vec![parse!("hh"), parse!("hs"), parse!("ss")];
+    let expression = parse!("(hh+ss)/((hh-1)*(ss-2))");
+    assert!(matches!(
+        integrand::projected_factor_region(&expression, &coordinates, &family, &[true, false], 1),
+        Err(Error::Limit(_))
+    ));
+    for hard in [[true, false], [true, true], [false, false]] {
+        let projected =
+            integrand::projected_factor_region(&expression, &coordinates, &family, &hard, 2)
+                .unwrap();
+        let rebuilt = projected
+            .terms
+            .iter()
+            .fold(Atom::new(), |sum, term| sum + &term.hard * &term.soft);
+        assert!((rebuilt - &expression).together().cancel().is_zero());
+        if hard == [true, true] {
+            assert!(projected.soft.source_loop_indices.is_empty());
+            assert!(projected.soft.coordinates.is_empty());
+        }
+        if hard == [false, false] {
+            assert!(projected.hard.source_loop_indices.is_empty());
+            assert!(projected.hard.coordinates.is_empty());
+        }
+    }
+}
+
+#[test]
 fn factorized_budget_counts_distinct_integral_products() {
     let coordinates = vec![parse!("hh"), parse!("hs"), parse!("ss")];
     let mut family = template();

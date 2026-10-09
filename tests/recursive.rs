@@ -947,3 +947,112 @@ fn boundary_batches_keep_terminal_providers_scaleless_values_and_duplicates() {
     );
     assert_eq!(terminal.0.load(Ordering::Relaxed), 3);
 }
+
+#[test]
+fn tadpole_only_policy_recurses_when_custom_terminal_declines_sunset() {
+    use recursive::RecursiveTerminalPolicy;
+    use std::sync::{
+        Arc,
+        atomic::{AtomicUsize, Ordering},
+    };
+
+    struct Declines(AtomicUsize);
+    impl recursive::TerminalProvider for Declines {
+        fn evaluate(
+            &self,
+            _: &IntegralFamily,
+            _: &Integral,
+            _: &Rational,
+            _: Precision,
+        ) -> Result<Option<ComplexFloat>> {
+            self.0.fetch_add(1, Ordering::Relaxed);
+            Ok(None)
+        }
+    }
+    let backend = RustRedBackend {
+        bubble_subloops: false,
+        ..Default::default()
+    };
+    let preparations = Arc::new(AtomicUsize::new(0));
+    let observed = preparations.clone();
+    let context = RunContext {
+        progress: Some(Arc::new(move |event| {
+            if matches!(event, Progress::Prepared { .. }) {
+                observed.fetch_add(1, Ordering::Relaxed);
+            }
+        })),
+        ..Default::default()
+    };
+    let options = FlowOptions::default();
+    let terminal = Declines(AtomicUsize::new(0));
+    let family = sunset();
+    let target = Integral(vec![1, 1, 1]);
+    let epsilon = Rational::from((1, 10));
+    let p = Precision::decimal(60).unwrap();
+    let provider =
+        recursive::RecursiveBoundary::new(&backend, &options, &context).with_terminal(&terminal);
+    let analytic = provider.evaluate(&family, &target, &epsilon, p).unwrap();
+    assert_eq!(preparations.load(Ordering::Relaxed), 0);
+    assert_eq!(terminal.0.load(Ordering::Relaxed), 1);
+
+    // Reusing a provider after changing its policy must not reuse the sunset
+    // terminal's memoized value. The loop count decreases under radial peeling;
+    // the remaining one-loop problem runs through ordinary AMF and tadpole seeds.
+    let provider = provider.with_terminal_policy(RecursiveTerminalPolicy::TadpolesOnly);
+    let recursive = provider.evaluate(&family, &target, &epsilon, p).unwrap();
+    assert!(preparations.load(Ordering::Relaxed) > 0);
+    assert!(terminal.0.load(Ordering::Relaxed) > 1);
+    assert!(
+        p.close(&recursive, &analytic, 20),
+        "{recursive} != {analytic}"
+    );
+
+    let mut tadpole = family;
+    tadpole.loops.truncate(1);
+    tadpole.propagators.truncate(1);
+    tadpole.propagators[0].scalar_products = vec![Atom::num(1)];
+    tadpole.physical_propagators = 1;
+    let before = preparations.load(Ordering::Relaxed);
+    let seed = provider
+        .evaluate(&tadpole, &Integral(vec![2]), &epsilon, p)
+        .unwrap();
+    let expected = vacuum::tadpole(2, &p.i(3), &Rational::from((19, 5)), p).unwrap();
+    assert!(p.close(&seed, &expected, 40));
+    assert_eq!(preparations.load(Ordering::Relaxed), before);
+}
+
+#[test]
+fn replacing_a_terminal_provider_does_not_reuse_old_values() {
+    struct Constant(i64);
+    impl recursive::TerminalProvider for Constant {
+        fn evaluate(
+            &self,
+            _: &IntegralFamily,
+            _: &Integral,
+            _: &Rational,
+            p: Precision,
+        ) -> Result<Option<ComplexFloat>> {
+            Ok(Some(p.i(self.0)))
+        }
+    }
+    let backend = RustRedBackend::default();
+    let options = FlowOptions::default();
+    let context = RunContext::default();
+    let first = Constant(2);
+    let second = Constant(3);
+    let p = Precision::decimal(60).unwrap();
+    let family = sunset();
+    let target = Integral(vec![1, 1, 1]);
+    let epsilon = Rational::from((1, 10));
+    let provider =
+        recursive::RecursiveBoundary::new(&backend, &options, &context).with_terminal(&first);
+    assert_eq!(
+        provider.evaluate(&family, &target, &epsilon, p).unwrap(),
+        p.i(2)
+    );
+    let provider = provider.with_terminal(&second);
+    assert_eq!(
+        provider.evaluate(&family, &target, &epsilon, p).unwrap(),
+        p.i(3)
+    );
+}

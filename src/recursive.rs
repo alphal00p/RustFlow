@@ -9,7 +9,7 @@ use std::{
 use symbolica::prelude::*;
 
 /// Optional user terminal integrals. Returning None delegates to the native
-/// terminals and recursive AMF construction.
+/// terminals allowed by [`RecursiveTerminalPolicy`] and recursive AMF construction.
 pub trait TerminalProvider: Send + Sync {
     fn evaluate(
         &self,
@@ -18,6 +18,20 @@ pub trait TerminalProvider: Send + Sync {
         epsilon: &Rational,
         precision: Precision,
     ) -> Result<Option<ComplexFloat>>;
+}
+
+/// Native closed-form seeds permitted in a recursive boundary calculation.
+/// This policy is inherited by every AMF child and participates in memo keys.
+/// Analytic subloop reduction is a separate backend choice: callers requiring
+/// only Gaussian/tadpole seeds must also disable `RustRedBackend::bubble_subloops`.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq)]
+pub enum RecursiveTerminalPolicy {
+    /// Preserve the ordinary-AMF tadpole and single-mass sunset terminals.
+    #[default]
+    Native,
+    /// Use tadpole seeds, but evaluate sunsets through the recursive AMF/FT
+    /// machinery. Explicit custom terminal providers remain available.
+    TadpolesOnly,
 }
 
 #[derive(Default)]
@@ -35,6 +49,7 @@ pub struct RecursiveBoundary<'a> {
     memo: Arc<Mutex<Memo>>,
     ancestry: Vec<BTreeSet<String>>,
     terminal: Option<&'a dyn TerminalProvider>,
+    terminal_policy: RecursiveTerminalPolicy,
     vacuum_ft: Arc<crate::ft::FtEvaluator<'a>>,
 }
 impl<'a> RecursiveBoundary<'a> {
@@ -50,12 +65,23 @@ impl<'a> RecursiveBoundary<'a> {
             memo: Arc::default(),
             ancestry: vec![],
             terminal: None,
+            terminal_policy: RecursiveTerminalPolicy::default(),
             vacuum_ft: Arc::new(crate::ft::FtEvaluator::new(backend, context)),
         }
     }
     pub fn with_terminal(mut self, terminal: &'a dyn TerminalProvider) -> Self {
         self.terminal = Some(terminal);
+        // A replacement provider can assign different values to the same
+        // integral. Its identity is not a stable persistent cache key.
+        self.memo = Arc::default();
         self
+    }
+    pub fn with_terminal_policy(mut self, policy: RecursiveTerminalPolicy) -> Self {
+        self.terminal_policy = policy;
+        self
+    }
+    pub fn terminal_policy(&self) -> RecursiveTerminalPolicy {
+        self.terminal_policy
     }
     fn numerical_options(&self, p: Precision) -> FlowOptions {
         let mut options = self.options.clone();
@@ -78,6 +104,7 @@ impl<'a> RecursiveBoundary<'a> {
             memo: self.memo.clone(),
             ancestry,
             terminal: self.terminal,
+            terminal_policy: self.terminal_policy,
             vacuum_ft: self.vacuum_ft.clone(),
         }
     }
@@ -113,7 +140,7 @@ impl<'a> RecursiveBoundary<'a> {
         for target in targets {
             family.validate_integral(target)?;
             let problem = family.integral_key(target)?;
-            let value_key = format!("{problem}:{epsilon}:{}", p.bits);
+            let value_key = format!("{problem}:{epsilon}:{}:{:?}", p.bits, self.terminal_policy);
             output_keys.push(value_key.clone());
             requests.insert(target.clone(), (problem, value_key));
         }
@@ -152,7 +179,9 @@ impl<'a> RecursiveBoundary<'a> {
                 Some(value)
             } else if scaleless(family, &target)? {
                 Some(p.zero())
-            } else if let Some(value) = vacuum_terminal(family, &target, epsilon, p)? {
+            } else if let Some(value) =
+                vacuum_terminal(family, &target, epsilon, p, self.terminal_policy)?
+            {
                 Some(value)
             } else if let Some(plan) = crate::vacuum_peel::SingleMassPlan::find(family, &target)? {
                 // Homogeneity removes one massive radial integration. The child
@@ -227,8 +256,8 @@ impl<'a> RecursiveBoundary<'a> {
             // PreparedFlow stores a reduction for each target. A family-only
             // cache key would accidentally reuse another target's projection.
             let mut key = format!(
-                "{family_key}:{placement:?}:{targets:?}:{}:{}",
-                options.skip_reduction, options.refine_basis
+                "{family_key}:{placement:?}:{targets:?}:{}:{}:{:?}",
+                options.skip_reduction, options.refine_basis, self.terminal_policy
             );
             if sampled {
                 key.push_str(&format!(":epsilon={epsilon}"));
@@ -355,6 +384,7 @@ fn vacuum_terminal(
     target: &Integral,
     epsilon: &Rational,
     p: Precision,
+    policy: RecursiveTerminalPolicy,
 ) -> Result<Option<ComplexFloat>> {
     if !family.external.is_empty() {
         return Ok(None);
@@ -370,7 +400,11 @@ fn vacuum_terminal(
             &vacuum::tadpole(target.0[0] as u32, &m, &dimension, p)?,
         )));
     }
-    if family.loops.len() != 2 || target.0.len() != 3 || target.0.iter().any(|&n| n <= 0) {
+    if policy == RecursiveTerminalPolicy::TadpolesOnly
+        || family.loops.len() != 2
+        || target.0.len() != 3
+        || target.0.iter().any(|&n| n <= 0)
+    {
         return Ok(None);
     }
     let masses = family

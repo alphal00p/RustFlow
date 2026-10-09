@@ -313,17 +313,47 @@ pub struct FactorizedTerm {
     pub factors: Vec<IntegralTerm>,
 }
 
+/// Scalar coordinates for one side of a tensor-projected region.
+/// Indices refer to the supplied region coordinates and loop routing, before
+/// selecting hard or soft loops. Region Jacobians and measure/distribution
+/// metadata remain with the caller; projection does not change either measure.
+#[derive(Clone, Debug)]
+pub struct RegionFactorSpace {
+    pub coordinates: Vec<Atom>,
+    pub source_coordinate_indices: Vec<usize>,
+    pub source_loop_indices: Vec<usize>,
+    /// Loop/external space for conversion, with no denominator slots yet.
+    pub template: IntegralFamily,
+}
+
+/// A separated scalar term after hard tensor projection and before integral
+/// conversion. In particular, soft denominators are preserved as expressions.
+#[derive(Clone, Debug)]
+pub struct ProjectedRegionTerm {
+    pub hard: Atom,
+    pub soft: Atom,
+}
+
+#[derive(Clone, Debug)]
+pub struct ProjectedRegion {
+    pub hard: RegionFactorSpace,
+    pub soft: RegionFactorSpace,
+    pub terms: Vec<ProjectedRegionTerm>,
+}
+
 /// Integrate out mixed hard/soft tensor structure and split the resulting
-/// scalar integrands into vacuum and soft families. Equivalent integral products
-/// are combined exactly before applying `budget` to the number of output terms.
-/// The same budget bounds each partial-fraction decomposition.
-pub fn factor_region(
+/// scalar expressions without choosing an integration measure for the soft
+/// factors. No partial fractions, scaleless-sector tests, or ordinary integral
+/// conversion are performed here. A weighted-measure owner must integrate or
+/// recursively reduce the retained soft expression, including its denominators.
+/// `budget` bounds the number of separated expression products.
+pub fn projected_factor_region(
     expression: &Atom,
     coordinates: &[Atom],
     family: &IntegralFamily,
     hard: &[bool],
     budget: usize,
-) -> Result<Vec<FactorizedTerm>> {
+) -> Result<ProjectedRegion> {
     let loops = family.loops.len();
     if hard.len() != loops {
         return Err(Error::InvalidInput("hard mask dimensions".into()));
@@ -422,14 +452,18 @@ pub fn factor_region(
         let selected = (0..loops)
             .filter(|&j| hard[j] == selected_hard)
             .collect::<Vec<_>>();
-        let vars = labels
+        let source_coordinate_indices = labels
             .iter()
             .enumerate()
             .filter_map(|(j, &(a, b))| {
                 (selected.contains(&a) && (selected.contains(&b) || (!selected_hard && b >= loops)))
-                    .then_some(coordinates[j].clone())
+                    .then_some(j)
             })
             .collect::<Vec<_>>();
+        let vars = source_coordinate_indices
+            .iter()
+            .map(|&j| coordinates[j].clone())
+            .collect();
         let template = IntegralFamily {
             name: "amflow_boundary".into(),
             loops: selected.iter().map(|&j| family.loops[j].clone()).collect(),
@@ -448,32 +482,77 @@ pub fn factor_region(
             epsilon: family.epsilon,
             dimension: family.dimension,
         };
-        pieces.push((vars, template));
+        pieces.push(RegionFactorSpace {
+            coordinates: vars,
+            source_coordinate_indices,
+            source_loop_indices: selected,
+            template,
+        });
     }
     // Keep the larger polynomial intact while collecting monomials in the
     // smaller coordinate space. Expanding both sides first repeats denominator
     // conversion and misses cancellations in denominator coordinates. All-hard
     // and all-soft regions each need only one conversion of the full polynomial.
-    let split_side = usize::from(pieces[0].0.len() > pieces[1].0.len());
-    let mut combined = BTreeMap::<Vec<Vec<(Vec<Atom>, i64)>>, FactorizedTerm>::new();
-    for (monomial, polynomial) in
-        crate::coefficient::exact_coefficient_list(&projected.expand(), &pieces[split_side].0)?
-    {
+    let split_side = usize::from(pieces[0].coordinates.len() > pieces[1].coordinates.len());
+    let mut terms = Vec::new();
+    for (monomial, polynomial) in crate::coefficient::exact_coefficient_list(
+        &projected.expand(),
+        &pieces[split_side].coordinates,
+    )? {
         let mut expressions = [denominator_h.clone(), denominator_s.clone()];
         expressions[split_side] *= monomial;
         expressions[1 - split_side] *= polynomial;
+        if terms.len() == budget {
+            return Err(Error::Limit(format!(
+                "projected boundary term budget exhausted: more than {budget} expression products"
+            )));
+        }
+        let [hard, soft] = expressions;
+        terms.push(ProjectedRegionTerm { hard, soft });
+    }
+    let mut pieces = pieces.into_iter();
+    Ok(ProjectedRegion {
+        hard: pieces.next().expect("hard coordinate space"),
+        soft: pieces.next().expect("soft coordinate space"),
+        terms,
+    })
+}
+
+/// Integrate out mixed hard/soft tensor structure and convert the projected
+/// expressions to ordinary vacuum and soft families. Equivalent integral
+/// products are combined exactly before applying `budget` to the output size.
+/// The same budget bounds each partial-fraction decomposition.
+pub fn factor_region(
+    expression: &Atom,
+    coordinates: &[Atom],
+    family: &IntegralFamily,
+    hard: &[bool],
+    budget: usize,
+) -> Result<Vec<FactorizedTerm>> {
+    // Ordinary callers historically bound combined integral products, which
+    // need not have the same count as intermediate projected expressions.
+    let projected = projected_factor_region(expression, coordinates, family, hard, usize::MAX)?;
+    let pieces = [&projected.hard, &projected.soft];
+    let mut combined = BTreeMap::<Vec<Vec<(Vec<Atom>, i64)>>, FactorizedTerm>::new();
+    for term in &projected.terms {
+        let expressions = [&term.hard, &term.soft];
         let mut products = vec![FactorizedTerm {
             coefficient: Atom::num(1),
             factors: vec![],
         }];
-        for (side, (vars, template)) in pieces.iter().enumerate() {
-            if template.loops.is_empty() {
+        for (side, space) in pieces.iter().enumerate() {
+            if space.template.loops.is_empty() {
                 for p in &mut products {
-                    p.coefficient *= &expressions[side];
+                    p.coefficient *= expressions[side];
                 }
                 continue;
             }
-            let terms = to_integrals(&expressions[side], vars, template, budget)?;
+            let terms = to_integrals(
+                expressions[side],
+                &space.coordinates,
+                &space.template,
+                budget,
+            )?;
             let mut next = Vec::new();
             for product in &products {
                 for term in &terms {

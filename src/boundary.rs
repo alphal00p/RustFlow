@@ -226,15 +226,365 @@ impl FrobeniusBasis {
 }
 
 /// One Taylor series within a dimensional region at z=1/eta=0.
+/// This type certifies vanishing logarithmic terms; use [`LogRegionBoundary`]
+/// when logarithmic coefficients may be nonzero or unknown.
 #[derive(Clone, Debug)]
 pub struct RegionBoundary {
     pub exponent: Atom,
     pub coefficients: Vec<C>,
 }
 
+/// Power/log coefficients within one symbolic dimensional region.
+///
+/// `coefficients[k][l]` multiplies `z^(exponent+k) log(z)^l`. `None`, a
+/// missing logarithm, and a missing Taylor order are unknown coefficients,
+/// never inferred zeros. Powers below `exponent` are known to vanish.
+/// `max_log_power = Some(m)` additionally certifies that every logarithmic
+/// power greater than `m` vanishes, including at uncomputed Taylor orders.
+/// Regions absent from a component are known to vanish, so callers must supply
+/// the complete list of possible exponent classes, even for unknown regions.
+#[derive(Clone, Debug)]
+pub struct LogRegionBoundary {
+    pub exponent: Atom,
+    pub coefficients: Vec<Vec<Option<C>>>,
+    pub max_log_power: Option<usize>,
+}
+
+impl From<&RegionBoundary> for LogRegionBoundary {
+    fn from(region: &RegionBoundary) -> Self {
+        Self {
+            exponent: region.exponent.clone(),
+            coefficients: region
+                .coefficients
+                .iter()
+                .map(|value| vec![Some(value.clone())])
+                .collect(),
+            max_log_power: Some(0),
+        }
+    }
+}
+
+impl FrobeniusBasis {
+    /// Match known power/log coefficients without specializing symbolic
+    /// epsilon-dependent exponents. Overlapping regions are summed only when
+    /// every contribution to that coefficient is known. Missing rank and
+    /// insufficient Frobenius depth are explicit errors.
+    pub fn match_log_regions(&self, data: &[Vec<LogRegionBoundary>]) -> Result<Vec<C>> {
+        let p = self.precision;
+        let n = self.columns.len();
+        if data.len() != n
+            || self.columns.iter().any(|column| {
+                column
+                    .coefficients
+                    .iter()
+                    .flatten()
+                    .any(|row| row.len() != n || row.iter().any(|value| !p.finite(value)))
+            })
+        {
+            return Err(Error::InvalidInput(
+                "region boundary dimension or nonfinite basis".into(),
+            ));
+        }
+        for region in data.iter().flatten() {
+            if region.coefficients.iter().any(|logs| {
+                region
+                    .max_log_power
+                    .is_some_and(|max| logs.len().saturating_sub(1) > max)
+                    || logs.iter().flatten().any(|value| !p.finite(value))
+            }) {
+                return Err(Error::InvalidInput(
+                    "region coefficients exceed the declared logarithmic degree or are nonfinite"
+                        .into(),
+                ));
+            }
+        }
+        let mut rows = Vec::new();
+        let mut rhs = Vec::new();
+        for (i, regions) in data.iter().enumerate() {
+            let mut powers = std::collections::BTreeSet::new();
+            // Available solution powers supply known-zero and logarithmic
+            // constraints, including below an uncomputed region's leading power.
+            for column in &self.columns {
+                for k in 0..column.coefficients.len() {
+                    powers.insert((&column.exponent + Atom::num(k as i64)).together().cancel());
+                }
+            }
+            // Supplied known coefficients outside that range require more
+            // Frobenius depth; entirely unknown data must not demand it.
+            for region in regions {
+                for (k, logs) in region.coefficients.iter().enumerate() {
+                    if logs.iter().any(Option::is_some) {
+                        powers.insert((&region.exponent + Atom::num(k as i64)).together().cancel());
+                    }
+                }
+            }
+            for exponent in powers {
+                let offsets = regions
+                    .iter()
+                    .map(|region| integer_offset(&exponent, &region.exponent))
+                    .collect::<Vec<_>>();
+                let absent_class = offsets.iter().all(Option::is_none);
+                let mut logarithms = vec![vec![p.zero(); n]];
+                let mut complete = true;
+                for (j, column) in self.columns.iter().enumerate() {
+                    let Some(k) = integer_offset(&exponent, &column.exponent)
+                        .and_then(|k| usize::try_from(k).ok())
+                    else {
+                        continue;
+                    };
+                    let Some(terms) = column.coefficients.get(k) else {
+                        complete = false;
+                        continue;
+                    };
+                    logarithms.resize(logarithms.len().max(terms.len()), vec![p.zero(); n]);
+                    for (l, row) in terms.iter().enumerate() {
+                        logarithms[l][j] = row[i].clone();
+                    }
+                }
+                for (region, offset) in regions.iter().zip(&offsets) {
+                    if let Some(logs) = offset
+                        .and_then(|k| usize::try_from(k).ok())
+                        .and_then(|k| region.coefficients.get(k))
+                    {
+                        logarithms.resize(logarithms.len().max(logs.len()), vec![p.zero(); n]);
+                    }
+                }
+                for (l, row) in logarithms.into_iter().enumerate() {
+                    let mut desired = p.zero();
+                    let mut known = true;
+                    for (region, offset) in regions.iter().zip(&offsets) {
+                        let Some(k) = offset.and_then(|k| usize::try_from(k).ok()) else {
+                            // Distinct exponent classes and powers below the
+                            // region's leading power contribute exactly zero.
+                            continue;
+                        };
+                        if region.max_log_power.is_some_and(|max| l > max) {
+                            continue;
+                        }
+                        let Some(value) = region
+                            .coefficients
+                            .get(k)
+                            .and_then(|logs| logs.get(l))
+                            .and_then(Option::as_ref)
+                        else {
+                            known = false;
+                            break;
+                        };
+                        desired = p.add(&desired, value);
+                    }
+                    if !known || (!complete && absent_class) {
+                        continue;
+                    }
+                    if !complete {
+                        return Err(Error::Accuracy(
+                            "insufficient Frobenius boundary order for a known power/log coefficient"
+                                .into(),
+                        ));
+                    }
+                    rows.push(row);
+                    rhs.push(desired);
+                }
+            }
+        }
+        for (j, column) in self.columns.iter().enumerate() {
+            if !data
+                .iter()
+                .flatten()
+                .any(|region| integer_offset(&region.exponent, &column.exponent).is_some())
+            {
+                let mut row = vec![p.zero(); n];
+                row[j] = p.i(1);
+                rows.push(row);
+                rhs.push(p.zero());
+            }
+        }
+        solve_constraints(p, rows, rhs, n)
+    }
+}
+
+fn integer_offset(a: &Atom, b: &Atom) -> Option<i64> {
+    (a - b).together().cancel().to_string().parse().ok()
+}
+
+#[cfg(test)]
+mod logarithmic_tests {
+    use super::*;
+    use crate::frobenius::FrobeniusColumn;
+
+    fn jordan(p: Precision) -> FrobeniusBasis {
+        FrobeniusBasis {
+            columns: vec![
+                FrobeniusColumn {
+                    exponent: parse!("boundary_log_eps"),
+                    coefficients: vec![vec![vec![p.i(1), p.zero()]]],
+                },
+                FrobeniusColumn {
+                    exponent: parse!("boundary_log_eps"),
+                    coefficients: vec![vec![vec![p.zero(), p.i(1)], vec![p.i(1), p.zero()]]],
+                },
+            ],
+            precision: p,
+        }
+    }
+
+    #[test]
+    fn known_nonzero_logarithm_fixes_a_jordan_solution() {
+        let p = Precision::decimal(60).unwrap();
+        let basis = jordan(p);
+        let constants = basis
+            .match_log_regions(&[
+                vec![LogRegionBoundary {
+                    exponent: parse!("boundary_log_eps"),
+                    coefficients: vec![vec![Some(p.i(7)), Some(p.i(3))]],
+                    max_log_power: Some(1),
+                }],
+                vec![LogRegionBoundary {
+                    exponent: parse!("boundary_log_eps"),
+                    coefficients: vec![],
+                    max_log_power: None,
+                }],
+            ])
+            .unwrap();
+        assert!(p.close(&constants[0], &p.i(7), 40));
+        assert!(p.close(&constants[1], &p.i(3), 40));
+    }
+
+    #[test]
+    fn unknown_constant_is_not_zero_when_logarithm_is_known() {
+        let p = Precision::decimal(60).unwrap();
+        let basis = jordan(p);
+        let result = basis.match_log_regions(&[
+            vec![LogRegionBoundary {
+                exponent: parse!("boundary_log_eps"),
+                coefficients: vec![vec![None, Some(p.i(3))]],
+                max_log_power: Some(1),
+            }],
+            vec![LogRegionBoundary {
+                exponent: parse!("boundary_log_eps"),
+                coefficients: vec![vec![Some(p.i(3))]],
+                max_log_power: Some(0),
+            }],
+        ]);
+        assert!(matches!(result, Err(Error::IncompleteReduction(_))));
+    }
+
+    #[test]
+    fn overlapping_uncomputed_region_cannot_supply_a_zero() {
+        let p = Precision::decimal(60).unwrap();
+        let basis = FrobeniusBasis {
+            columns: vec![FrobeniusColumn {
+                exponent: parse!("boundary_overlap_eps+1"),
+                coefficients: vec![vec![vec![p.i(1)]]],
+            }],
+            precision: p,
+        };
+        let mut data = vec![vec![
+            LogRegionBoundary {
+                exponent: parse!("boundary_overlap_eps"),
+                coefficients: vec![vec![Some(p.zero())]],
+                max_log_power: Some(0),
+            },
+            LogRegionBoundary {
+                exponent: parse!("boundary_overlap_eps+1"),
+                coefficients: vec![vec![Some(p.i(3))]],
+                max_log_power: Some(0),
+            },
+        ]];
+        assert!(matches!(
+            basis.match_log_regions(&data),
+            Err(Error::IncompleteReduction(_))
+        ));
+        data[0][0].coefficients.push(vec![Some(p.i(2))]);
+        assert!(p.close(&basis.match_log_regions(&data).unwrap()[0], &p.i(5), 40));
+    }
+
+    #[test]
+    fn known_data_require_depth_but_unknown_orders_do_not() {
+        let p = Precision::decimal(60).unwrap();
+        let basis = FrobeniusBasis {
+            columns: vec![FrobeniusColumn {
+                exponent: Atom::new(),
+                coefficients: vec![vec![vec![p.i(1)]]],
+            }],
+            precision: p,
+        };
+        let mut data = vec![vec![LogRegionBoundary {
+            exponent: Atom::new(),
+            coefficients: vec![vec![Some(p.i(7))], vec![None]],
+            max_log_power: None,
+        }]];
+        assert!(p.close(&basis.match_log_regions(&data).unwrap()[0], &p.i(7), 40));
+        data[0][0].coefficients[1][0] = Some(p.i(8));
+        assert!(matches!(
+            basis.match_log_regions(&data),
+            Err(Error::Accuracy(_))
+        ));
+    }
+
+    #[test]
+    fn dimensional_classes_remain_distinct() {
+        let p = Precision::decimal(60).unwrap();
+        let basis = FrobeniusBasis {
+            columns: vec![
+                FrobeniusColumn {
+                    exponent: parse!("boundary_classes_eps"),
+                    coefficients: vec![vec![vec![p.i(1), p.zero()]]],
+                },
+                FrobeniusColumn {
+                    exponent: parse!("2*boundary_classes_eps"),
+                    coefficients: vec![vec![vec![p.i(1), p.i(1)]]],
+                },
+            ],
+            precision: p,
+        };
+        let region = |exponent, value| LogRegionBoundary {
+            exponent,
+            coefficients: vec![vec![Some(value)]],
+            max_log_power: Some(0),
+        };
+        let data = vec![
+            vec![
+                region(parse!("boundary_classes_eps"), p.i(2)),
+                region(parse!("2*boundary_classes_eps"), p.i(3)),
+            ],
+            vec![region(parse!("2*boundary_classes_eps"), p.i(3))],
+        ];
+        let constants = basis.match_log_regions(&data).unwrap();
+        assert!(p.close(&constants[0], &p.i(2), 40));
+        assert!(p.close(&constants[1], &p.i(3), 40));
+    }
+
+    #[test]
+    fn missing_logarithm_and_declared_zero_logarithm_differ() {
+        let p = Precision::decimal(60).unwrap();
+        let basis = jordan(p);
+        let mut data = vec![
+            vec![LogRegionBoundary {
+                exponent: parse!("boundary_log_eps"),
+                coefficients: vec![vec![Some(p.i(7))]],
+                max_log_power: None,
+            }],
+            vec![LogRegionBoundary {
+                exponent: parse!("boundary_log_eps"),
+                coefficients: vec![],
+                max_log_power: None,
+            }],
+        ];
+        assert!(matches!(
+            basis.match_log_regions(&data),
+            Err(Error::IncompleteReduction(_))
+        ));
+        data[0][0].max_log_power = Some(0);
+        let constants = basis.match_log_regions(&data).unwrap();
+        assert!(p.close(&constants[0], &p.i(7), 40));
+        assert!(p.close(&constants[1], &p.zero(), 40));
+    }
+}
+
 impl FrobeniusBasis {
     /// Match every supplied power and require logarithmic coefficients to vanish.
     /// Distinct epsilon-dependent exponent classes are kept separate.
+    /// For nonzero or unknown logarithms use [`Self::match_log_regions`].
     pub fn match_regions(&self, data: &[Vec<RegionBoundary>]) -> Result<Vec<C>> {
         let p = self.precision;
         let n = self.columns.len();
