@@ -1,0 +1,5 @@
+{
+  "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted derivative closure round budget exhausted; rounds=3, provisional=88, unresolved_terms=89; first residual indices/reasons=[([1, 1, 1, 2, 1, 1, 1, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 1, 2, 1, 1, 2, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 1, 2, 1, 1, 3, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 1, 2, 1, 2, 1, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 1, 2, 1, 2, 2, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 1, 1, 1, 3, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 1, 1, 2, 1, 3, 1, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 2, 1, 2, 1, 2, 1, -2, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+  "numerical_acceptance": false,
+  "stage": "occupied preparation"
+}

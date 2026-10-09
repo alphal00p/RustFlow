@@ -7,6 +7,39 @@ The selected complete massive-sunset amplitude passes at D=12/5 and through
 Laurent order zero. Mandatory four-loop acceptance remains pending; no numerical
 AMF-to-supplied-oracle comparison has been performed.
 
+## Current singleton/block structural extension and numerical regressions
+
+The sealed origin/endpoint owner now admits singleton UV-meromorphic germs at
+arbitrary admitted virtual rank, and two-cut independent rank-one virtual
+blocks. All E7 cut sectors pass these structural checks. Their bounded weighted
+closure remains unresolved, so there are **zero four-loop native predictions**
+and **zero numerical comparisons to the supplied oracle**.
+
+The current source283 snapshot passes complete massless-sunset regression at
+D=13/2 (40 independent references, 30 refinements; 21.905824 seconds,
+RSS52184 KiB) and through Laurent order zero (30 references, 24 refinements;
+101.228963 seconds, RSS49276 KiB). The single current massive D=12/5 profile
+passes all ten independent component/total references and matches all ten
+historical complex decimal strings exactly (131.788280 seconds, RSS58368 KiB).
+Compilation and Nix startup are excluded. These are empirical comparisons,
+not rigorous interval errors. Python runtime passed in 1.762898 seconds.
+
+The D=7 retry remains explicitly unsupported by the shared exactly specialized
+Frobenius recurrence. Native zero-vacuum certificates now avoid vacuum flow and
+both singleton sectors succeed; the remaining resonance is at double-cut
+infinity. No D=7 prediction was written or accepted. The historical earlier
+vacuum-stage failure remains unchanged in its own report.
+
+The [current aggregate](massless-blocks-numerical-validation.json) records
+80 independent reference comparisons, 54 refinements and ten historical
+same-profile regressions. The [provenance](massless-blocks-numerical-provenance.json)
+binds pre-launch executable digests and the source283 snapshot, with its sole
+test-only nested-JSON assertion correction identified separately.
+[113 completed logs/native corpora](massless-blocks-numerical-archives.json)
+were losslessly compressed and verified before removing their uncompressed
+copies; predictions remain readable JSON. Older reports below retain their
+original scope and provenance.
+
 ## Narrow massless two-loop numerical acceptance
 
 The complete massless sunset passes independently at D=13/2 and D=15/4, each

@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "status": "3 test assertions failed; production source construction completed",
+  "source_snapshot": "massless-blocks-source-hashes.json",
+  "binary": "target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+  "binary_sha256": "16cbafd8615c92402852484f2e85094fecd032b45b18ddd3d69218d90c503566",
+  "binary_mtime_utc": "2026-10-09T20:54:56.841557+00:00",
+  "resources": "massless-blocks-source-resources-before-identity-assertion-fix.json",
+  "log": "massless-blocks-source-resources-before-identity-assertion-fix.log",
+  "reason": "The new test compares raw source_identity with a JSON-escaped measure_id string. Nested JSON quotes require decoding the stored GuardedMeasureIdentity before comparing its measure field. No production change is indicated by this failure.",
+  "passed": 0,
+  "failed": 3,
+  "harness_seconds": 0.13
+}

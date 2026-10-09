@@ -1,0 +1,25 @@
+
+running 3 tests
+
+thread 'one_virtual_massless_origin_requires_its_sealed_prescription' (51752) panicked at tests/finite_density_massless_sources.rs:70:5:
+assertion failed: continued.context.sources().measure_id().contains(&evidence.source_identity())
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+test one_virtual_massless_origin_requires_its_sealed_prescription ... FAILED
+
+thread 'fully_compact_massless_origin_keeps_polynomial_and_storage_domains' (51751) panicked at tests/finite_density_massless_sources.rs:70:5:
+assertion failed: continued.context.sources().measure_id().contains(&evidence.source_identity())
+test fully_compact_massless_origin_keeps_polynomial_and_storage_domains ... FAILED
+
+thread 'four_loop_e7_sources_bind_each_sealed_endpoint_variant_and_zero_origin' (51750) panicked at tests/finite_density_massless_sources.rs:70:5:
+assertion failed: continued.context.sources().measure_id().contains(&evidence.source_identity())
+test four_loop_e7_sources_bind_each_sealed_endpoint_variant_and_zero_origin ... FAILED
+
+failures:
+
+failures:
+    four_loop_e7_sources_bind_each_sealed_endpoint_variant_and_zero_origin
+    fully_compact_massless_origin_keeps_polynomial_and_storage_domains
+    one_virtual_massless_origin_requires_its_sealed_prescription
+
+test result: FAILED. 0 passed; 3 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+

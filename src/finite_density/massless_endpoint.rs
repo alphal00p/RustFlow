@@ -2,8 +2,8 @@
 //! external momentum direction in every virtual denominator.
 //!
 //! The general multi-loop query supplies degree evidence only. A separate
-//! sealed two-loop permit covers the proved one-virtual null cone and the pure
-//! compact transfer, and binds the origin prescription to the physical family.
+//! sealed permit covers the proved singleton meromorphic germ and independent
+//! rank-one virtual blocks, including the pure compact transfer, and binds the origin prescription to the physical family.
 //! Native source closure, boundary integration, transport and endpoint
 //! projection remain required. No virtual integral or period is evaluated here.
 use super::{PreparedDensityInput, massless_contour::massless_channel_evidence};
@@ -1222,26 +1222,214 @@ pub struct MasslessLabelBound {
     pub indices: Vec<i16>,
     pub classification: &'static str,
     pub uncut_positive_power_sum: i32,
+    pub active_virtual_rank: usize,
+    pub virtual_block_positive_power_sums: Vec<i32>,
+    pub pure_transfer_positive_power_sum: i32,
     pub mass_and_upper_jet_orders: Vec<i32>,
     pub inequalities: Vec<EndpointInequality>,
     pub high_dimension_witness: String,
 }
 #[derive(Clone, Debug, Serialize)]
 pub struct MasslessLabelAudit {
+    pub endpoint_structure: MasslessStructuralAudit,
     pub origin_identity: &'static str,
     pub labels: Vec<MasslessLabelBound>,
 }
 
 pub(crate) const MASSLESS_FLOW_ORIGIN_IDENTITY: &str = "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D";
 
-#[derive(Clone, Copy, Debug)]
-enum NarrowEndpointClass {
-    OneVirtualNullCone,
-    PureCompactTransfer,
+/// Exact routing evidence retained by the sealed endpoint permit. Bounds use
+/// Gaussian parameters and no evaluated virtual period.
+#[derive(Clone, Debug, Serialize)]
+pub struct MasslessStructuralAudit {
+    pub proof_version: &'static str,
+    pub virtual_loops: usize,
+    pub virtual_affine_shift: Vec<String>,
+    /// Physical slot, native virtual row, external coefficient of q or q1-q2.
+    pub denominator_rows: Vec<(usize, Vec<String>, String)>,
+    /// None denotes a pure spacelike transfer denominator.
+    pub block_assignments: Vec<(usize, Option<usize>)>,
+    pub block_representatives: Vec<Vec<String>>,
+    pub block_a_lower_bounds: Vec<String>,
+    pub block_q_upper_bounds: Vec<String>,
+}
+const MASSLESS_ENDPOINT_PROOF_VERSION: &str = "positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint";
+
+#[derive(Clone, Debug)]
+struct CertifiedRow {
+    slot: usize,
+    virtual_part: Vec<Atom>,
+    external: Atom,
+}
+#[derive(Clone, Debug)]
+enum CertifiedEndpointClass {
+    SingletonGerm {
+        virtual_loops: usize,
+        rows: Vec<CertifiedRow>,
+        q_upper: Rational,
+    },
+    RankOneBlocks {
+        virtual_loops: usize,
+        rows: Vec<CertifiedRow>,
+        affine_shift: Vec<Atom>,
+        assignments: Vec<Option<usize>>,
+        representatives: Vec<Vec<Atom>>,
+        a_lower: Vec<Rational>,
+        q_upper: Vec<Rational>,
+    },
+}
+impl CertifiedEndpointClass {
+    fn virtual_loops(&self) -> usize {
+        match self {
+            Self::SingletonGerm { virtual_loops, .. }
+            | Self::RankOneBlocks { virtual_loops, .. } => *virtual_loops,
+        }
+    }
+    fn rows(&self) -> &[CertifiedRow] {
+        match self {
+            Self::SingletonGerm { rows, .. } | Self::RankOneBlocks { rows, .. } => rows,
+        }
+    }
+    fn structure(&self) -> MasslessStructuralAudit {
+        let mut evidence = MasslessStructuralAudit {
+            proof_version: MASSLESS_ENDPOINT_PROOF_VERSION,
+            virtual_loops: self.virtual_loops(),
+            virtual_affine_shift: Vec::new(),
+            denominator_rows: self
+                .rows()
+                .iter()
+                .map(|r| {
+                    (
+                        r.slot,
+                        r.virtual_part
+                            .iter()
+                            .map(Atom::to_canonical_string)
+                            .collect(),
+                        r.external.to_canonical_string(),
+                    )
+                })
+                .collect(),
+            block_assignments: Vec::new(),
+            block_representatives: Vec::new(),
+            block_a_lower_bounds: Vec::new(),
+            block_q_upper_bounds: Vec::new(),
+        };
+        match self {
+            Self::SingletonGerm { q_upper, .. } => {
+                evidence.block_q_upper_bounds.push(q_upper.to_string());
+            }
+            Self::RankOneBlocks {
+                rows,
+                affine_shift,
+                assignments,
+                representatives,
+                a_lower,
+                q_upper,
+                ..
+            } => {
+                evidence.virtual_affine_shift =
+                    affine_shift.iter().map(Atom::to_canonical_string).collect();
+                evidence.block_assignments = rows
+                    .iter()
+                    .zip(assignments)
+                    .map(|(r, b)| (r.slot, *b))
+                    .collect();
+                evidence.block_representatives = representatives
+                    .iter()
+                    .map(|row| row.iter().map(Atom::to_canonical_string).collect())
+                    .collect();
+                evidence.block_a_lower_bounds = a_lower.iter().map(ToString::to_string).collect();
+                evidence.block_q_upper_bounds = q_upper.iter().map(ToString::to_string).collect();
+            }
+        }
+        evidence
+    }
 }
 
-/// Sealed proof for the two narrow two-loop classes with complete endpoint
-/// arguments. General single-spacelike *degree evidence* cannot construct this
+/// Rational quadratic separation: after shifting k by an exact multiple of
+/// q1, every uncut row depends on q1-q2 and at most one independent virtual
+/// coordinate. The test also includes h=0 pure compact transfers.
+fn rank_one_blocks(
+    routed: &[Vec<Atom>],
+    shifted: &[usize],
+    h: usize,
+) -> Result<CertifiedEndpointClass> {
+    let a = shifted
+        .iter()
+        .map(|&s| routed[s][2..].to_vec())
+        .collect::<Vec<_>>();
+    if rank(a.clone()) != h {
+        return Err(Error::Unsupported(
+            "uncut rank-one block routing is rank deficient".into(),
+        ));
+    }
+    let b = shifted
+        .iter()
+        .map(|&s| -(&routed[s][0] + &routed[s][1]))
+        .collect::<Vec<_>>();
+    let affine_shift = solve(&a, &b, h)?;
+    let rows = shifted
+        .iter()
+        .map(|&slot| CertifiedRow {
+            slot,
+            virtual_part: routed[slot][2..].to_vec(),
+            external: -routed[slot][1].clone(),
+        })
+        .collect::<Vec<_>>();
+    let mut representatives: Vec<Vec<Atom>> = Vec::new();
+    let mut assignments = Vec::new();
+    let mut a_lower: Vec<Rational> = Vec::new();
+    let mut q_upper: Vec<Rational> = Vec::new();
+    for row in &rows {
+        let Some(first) = row.virtual_part.iter().position(|x| !x.is_zero()) else {
+            if row.external.is_zero() {
+                return Err(Error::Unsupported(
+                    "identically null uncut denominator".into(),
+                ));
+            }
+            assignments.push(None);
+            continue;
+        };
+        let scale = rational(&row.virtual_part[first])?;
+        let normalized = row
+            .virtual_part
+            .iter()
+            .map(|x| x / &row.virtual_part[first])
+            .collect::<Vec<_>>();
+        let a2 = &scale * &scale;
+        let external = rational(&row.external)?;
+        let b2 = &external * &external;
+        let block = if let Some(i) = representatives.iter().position(|r| r == &normalized) {
+            a_lower[i] = a_lower[i].clone().min(a2);
+            q_upper[i] = q_upper[i].clone().max(b2);
+            i
+        } else {
+            let i = representatives.len();
+            representatives.push(normalized);
+            a_lower.push(a2);
+            q_upper.push(b2);
+            i
+        };
+        assignments.push(Some(block));
+    }
+    if representatives.len() != h || rank(representatives.clone()) != h {
+        return Err(Error::Unsupported(
+            "virtual quadratics do not form independent rank-one blocks".into(),
+        ));
+    }
+    Ok(CertifiedEndpointClass::RankOneBlocks {
+        virtual_loops: h,
+        rows,
+        affine_shift,
+        assignments,
+        representatives,
+        a_lower,
+        q_upper,
+    })
+}
+
+/// Sealed proof for singleton UV-meromorphic germs and independent rank-one
+/// virtual blocks with complete high-D endpoint arguments. General single-spacelike *degree evidence* cannot construct this
 /// permit. All fields are private, and every consumer rechecks family binding.
 #[derive(Clone, Debug)]
 pub struct MasslessFlowEvidence {
@@ -1250,7 +1438,7 @@ pub struct MasslessFlowEvidence {
     shifted: Vec<usize>,
     family_signature: Vec<String>,
     source_options: super::preparation::WeightedSourceOptions,
-    class: NarrowEndpointClass,
+    class: CertifiedEndpointClass,
 }
 
 fn bound_family_signature(family: &super::geometry::OccupiedCutFamily) -> Vec<String> {
@@ -1292,7 +1480,10 @@ fn bound_family_signature(family: &super::geometry::OccupiedCutFamily) -> Vec<St
     signature
 }
 
-fn half_integer_witness(inequalities: &[EndpointInequality]) -> Result<Rational> {
+fn regular_dimension_witness(
+    inequalities: &[EndpointInequality],
+    virtual_loops: usize,
+) -> Result<Rational> {
     let mut integer_bound = 0_i64;
     for inequality in inequalities {
         let a = i64::from(inequality.degree.twice_dimension_coefficient);
@@ -1304,7 +1495,15 @@ fn half_integer_witness(inequalities: &[EndpointInequality]) -> Result<Rational>
         let b = -2 * i64::from(inequality.degree.constant);
         integer_bound = integer_bound.max(if b > 0 { (b + a - 1) / a } else { 0 });
     }
-    Ok(Rational::from((2 * integer_bound + 1, 2)))
+    // kD/2 is nonintegral for every 1<=k<=h. Half-integer D would
+    // land on the overall Gaussian poles for h=4,8,... .
+    let denominator = 2 * i64::try_from(virtual_loops.max(1))
+        .map_err(|_| Error::Limit("massless endpoint witness rank overflow".into()))?
+        + 1;
+    Ok(Rational::from((
+        denominator * integer_bound + 1,
+        denominator,
+    )))
 }
 
 impl MasslessFlowEvidence {
@@ -1317,9 +1516,15 @@ impl MasslessFlowEvidence {
         shifted: &[usize],
         source_options: super::preparation::WeightedSourceOptions,
     ) -> Result<Self> {
-        if input.input().loops != 2 || family.loops() != 2 {
+        if input.input().loops < 2 || family.loops() != input.input().loops {
             return Err(Error::Unsupported(
-                "massless flow endpoint permit currently covers exactly two loops".into(),
+                "massless flowing endpoint needs at least two loops and matching family rank"
+                    .into(),
+            ));
+        }
+        if family.loops() > 16 {
+            return Err(Error::Limit(
+                "massless endpoint loop rank exceeds 16".into(),
             ));
         }
         if source_options.positive_compact_energy_powers {
@@ -1329,7 +1534,7 @@ impl MasslessFlowEvidence {
         }
         if input.physical_masses().iter().any(|m| !m.is_zero()) {
             return Err(Error::Unsupported(
-                "narrow massless flow permit requires all physical masses zero".into(),
+                "massless flow permit requires all physical masses zero".into(),
             ));
         }
         let cuts = family
@@ -1373,29 +1578,50 @@ impl MasslessFlowEvidence {
             })
             .collect::<Result<Vec<_>>>()?;
         let rows = matmul(&routing, family.inverse_routing());
+        for row in &rows {
+            for entry in row {
+                rational(entry)?;
+            }
+        }
         let class = match cuts.len() {
             1 => {
-                for &slot in shifted {
-                    if rational(&rows[slot][1])?.is_zero() {
-                        return Err(Error::Unsupported("one-loop cone requires every uncut momentum to depend on the virtual loop".into()));
-                    }
-                    rational(&rows[slot][0])?;
+                let h = family.loops() - 1;
+                let virtual_rows = shifted
+                    .iter()
+                    .map(|&slot| rows[slot][1..].to_vec())
+                    .collect::<Vec<_>>();
+                if virtual_rows.iter().any(|r| r.iter().all(Atom::is_zero)) {
+                    return Err(Error::Unsupported(
+                        "singleton germ excludes external-only uncut physical factors".into(),
+                    ));
                 }
-                NarrowEndpointClass::OneVirtualNullCone
-            }
-            2 => {
-                for &slot in shifted {
-                    let a = rational(&rows[slot][0])?;
-                    let b = rational(&rows[slot][1])?;
-                    if a.is_zero() || !(&a + &b).is_zero() {
-                        return Err(Error::Unsupported("pure compact endpoint requires every uncut momentum proportional to q1-q2".into()));
-                    }
+                if rank(virtual_rows.clone()) != h {
+                    return Err(Error::Unsupported(
+                        "singleton germ uncut virtual rows do not span the virtual space".into(),
+                    ));
                 }
-                NarrowEndpointClass::PureCompactTransfer
+                let mut q_upper = Rational::zero();
+                for &slot in shifted {
+                    let b = rational(&rows[slot][0])?;
+                    q_upper = q_upper.max(&b * &b);
+                }
+                CertifiedEndpointClass::SingletonGerm {
+                    virtual_loops: h,
+                    rows: shifted
+                        .iter()
+                        .map(|&slot| CertifiedRow {
+                            slot,
+                            virtual_part: rows[slot][1..].to_vec(),
+                            external: rows[slot][0].clone(),
+                        })
+                        .collect(),
+                    q_upper,
+                }
             }
+            2 => rank_one_blocks(&rows, shifted, family.loops() - 2)?,
             _ => {
                 return Err(Error::Unsupported(
-                    "narrow massless flow needs one or two occupied loops".into(),
+                    "massless flow endpoint covers one or two occupied loops".into(),
                 ));
             }
         };
@@ -1430,9 +1656,17 @@ impl MasslessFlowEvidence {
         &self.shifted
     }
     pub fn scope(&self) -> &'static str {
-        match self.class {
-            NarrowEndpointClass::OneVirtualNullCone => "one-virtual-loop-null-cone",
-            NarrowEndpointClass::PureCompactTransfer => "two-compact-spacelike-transfer",
+        match &self.class {
+            CertifiedEndpointClass::SingletonGerm {
+                virtual_loops: 1, ..
+            } => "one-virtual-loop-null-cone",
+            CertifiedEndpointClass::SingletonGerm { .. } => "singleton-UV-meromorphic-null-germ",
+            CertifiedEndpointClass::RankOneBlocks {
+                virtual_loops: 0, ..
+            } => "two-compact-spacelike-transfer",
+            CertifiedEndpointClass::RankOneBlocks { .. } => {
+                "two-compact-independent-rank-one-blocks"
+            }
         }
     }
     pub fn origin_identity(&self) -> &'static str {
@@ -1441,14 +1675,15 @@ impl MasslessFlowEvidence {
 
     pub fn source_identity(&self) -> String {
         format!(
-            "{};scope={};input={};cuts={:?};shifted={:?};options={:?};family={:?}",
+            "{};scope={};input={};cuts={:?};shifted={:?};options={:?};family={:?};proof={:?}",
             self.origin_identity(),
             self.scope(),
             self.input_identity,
             self.cuts,
             self.shifted,
             self.source_options,
-            self.family_signature
+            self.family_signature,
+            self.class.structure()
         )
     }
     pub fn validate_family(
@@ -1501,6 +1736,31 @@ impl MasslessFlowEvidence {
                         Error::Limit("massless endpoint positive power sum overflow".into())
                     })
             })?;
+            let active_virtual_rank = rank(
+                self.class
+                    .rows()
+                    .iter()
+                    .filter(|r| label.0[r.slot] > 0)
+                    .map(|r| r.virtual_part.clone())
+                    .collect(),
+            );
+            let mut block_powers = vec![0_i32; self.class.virtual_loops()];
+            let mut transfer_power = 0_i32;
+            if let CertifiedEndpointClass::RankOneBlocks {
+                rows, assignments, ..
+            } = &self.class
+            {
+                for (row, block) in rows.iter().zip(assignments) {
+                    let n = i32::from(label.0[row.slot].max(0));
+                    let sum = match block {
+                        Some(b) => &mut block_powers[*b],
+                        None => &mut transfer_power,
+                    };
+                    *sum = sum.checked_add(n).ok_or_else(|| {
+                        Error::Limit("massless block positive powers overflow".into())
+                    })?;
+                }
+            }
             let jets = family
                 .shells()
                 .iter()
@@ -1534,47 +1794,59 @@ impl MasslessFlowEvidence {
                 }
                 "joint-dimensional-lower-contact-zero"
             } else {
-                match self.class {
-                    NarrowEndpointClass::OneVirtualNullCone if p == 0 => {
-                        "scaleless-unrestricted-virtual-polynomial"
-                    }
-                    NarrowEndpointClass::OneVirtualNullCone => {
-                        let j = jets[0];
-                        inequalities.push(EndpointInequality {
-                            stratum: "uniform virtual null-cone endpoint jets".into(),
-                            degree: EndpointDegree {
-                                twice_dimension_coefficient: 1,
-                                constant: -p - j,
-                            },
-                        });
-                        inequalities.push(EndpointInequality {
-                            stratum: "compact origin after finite jets".into(),
-                            degree: EndpointDegree {
-                                twice_dimension_coefficient: 2,
-                                constant: -2 - 2 * j,
-                            },
-                        });
-                        "uniform-null-cone-endpoint"
-                    }
-                    NarrowEndpointClass::PureCompactTransfer => {
-                        let total = jets.iter().sum::<i32>();
-                        for (i, &j) in jets.iter().enumerate() {
+                if active_virtual_rank < self.class.virtual_loops() {
+                    "scaleless-unrestricted-virtual-polynomial"
+                } else {
+                    match &self.class {
+                        CertifiedEndpointClass::SingletonGerm { virtual_loops, .. } => {
+                            let j = jets[0];
                             inequalities.push(EndpointInequality {
-                                stratum: format!("compact radius {i} after finite transfer jets"),
+                                stratum: "UV-meromorphic virtual null-germ endpoint jets".into(),
                                 degree: EndpointDegree {
-                                    twice_dimension_coefficient: 2,
-                                    constant: -2 - 2 * j - p - total,
+                                    twice_dimension_coefficient: i32::try_from(*virtual_loops)
+                                        .unwrap(),
+                                    constant: -p - j,
                                 },
                             });
+                            "uniform-null-cone-endpoint"
                         }
-                        inequalities.push(EndpointInequality {
-                            stratum: "compact collinear transfer after finite jets".into(),
-                            degree: EndpointDegree {
-                                twice_dimension_coefficient: 1,
-                                constant: -1 - p - total,
-                            },
-                        });
-                        "pure-compact-transfer-endpoint"
+                        CertifiedEndpointClass::RankOneBlocks { virtual_loops, .. } => {
+                            let total = jets.iter().sum::<i32>();
+                            for (block, &power) in block_powers.iter().enumerate() {
+                                inequalities.push(EndpointInequality {
+                                    stratum: format!(
+                                        "Gaussian virtual block {block} after finite jets"
+                                    ),
+                                    degree: EndpointDegree {
+                                        twice_dimension_coefficient: 1,
+                                        constant: -power - total,
+                                    },
+                                });
+                            }
+                            for (i, &j) in jets.iter().enumerate() {
+                                inequalities.push(EndpointInequality {
+                                    stratum: format!(
+                                        "compact radius {i} after finite transfer jets"
+                                    ),
+                                    degree: EndpointDegree {
+                                        twice_dimension_coefficient: 2,
+                                        constant: -2 - 2 * j - transfer_power - total,
+                                    },
+                                });
+                            }
+                            inequalities.push(EndpointInequality {
+                                stratum: "compact collinear transfer after finite jets".into(),
+                                degree: EndpointDegree {
+                                    twice_dimension_coefficient: 1,
+                                    constant: -1 - transfer_power - total,
+                                },
+                            });
+                            if *virtual_loops == 0 {
+                                "pure-compact-transfer-endpoint"
+                            } else {
+                                "independent-rank-one-block-endpoint"
+                            }
+                        }
                     }
                 }
             };
@@ -1596,17 +1868,21 @@ impl MasslessFlowEvidence {
                     }
                 }
             }
-            let witness = half_integer_witness(&inequalities)?;
+            let witness = regular_dimension_witness(&inequalities, self.class.virtual_loops())?;
             bounds.push(MasslessLabelBound {
                 indices: label.0.clone(),
                 classification,
                 uncut_positive_power_sum: p,
+                active_virtual_rank,
+                virtual_block_positive_power_sums: block_powers,
+                pure_transfer_positive_power_sum: transfer_power,
                 mass_and_upper_jet_orders: jets,
                 inequalities,
                 high_dimension_witness: witness.to_string(),
             });
         }
         Ok(MasslessLabelAudit {
+            endpoint_structure: self.class.structure(),
             origin_identity: self.origin_identity(),
             labels: bounds,
         })
@@ -1656,7 +1932,7 @@ mod permit_tests {
             audit.labels[2].classification,
             "scaleless-unrestricted-virtual-polynomial"
         );
-        assert_eq!(audit.labels[2].high_dimension_witness, "17/2");
+        assert_eq!(audit.labels[2].high_dimension_witness, "25/3");
 
         assert_eq!(
             audit.labels[3].classification,
@@ -1669,20 +1945,187 @@ mod permit_tests {
         assert_eq!(proof.certified_origin_loops(&family, &[1, 2]).unwrap(), [0]);
     }
     #[test]
-    fn degree_only_four_loop_evidence_cannot_create_a_flow_permit() {
+    fn e7_sealed_germ_and_block_permits_audit_generated_rank_loss() {
         let input = serde_json::from_str::<DensityInput>(include_str!(
             "../../examples/finite_density/chain_of_three_parallel_pairs.json"
         ))
         .unwrap()
         .prepare()
         .unwrap();
+        for cuts in [vec![0], vec![4], vec![0, 4]] {
+            let family = input.occupied_cut(&cuts, 16).unwrap().at_physical_masses();
+            let shifted = (0..7).filter(|s| !cuts.contains(s)).collect::<Vec<_>>();
+            let proof = MasslessFlowEvidence::new(
+                &input,
+                &family,
+                &shifted,
+                WeightedSourceOptions::default(),
+            )
+            .unwrap();
+            let labels = family
+                .targets()
+                .iter()
+                .flat_map(|t| t.keys().cloned())
+                .collect::<Vec<_>>();
+            let audit = proof.validate_labels(&family, &labels).unwrap();
+            assert_eq!(audit.endpoint_structure.virtual_loops, 4 - cuts.len());
+            for bound in &audit.labels {
+                let d = rational(&parse(&bound.high_dimension_witness).unwrap()).unwrap();
+                assert!(bound.inequalities.iter().all(|i| i.degree.at(&d) > 0));
+                if bound.active_virtual_rank < 4 - cuts.len() {
+                    assert_eq!(
+                        bound.classification,
+                        "scaleless-unrestricted-virtual-polynomial"
+                    );
+                }
+            }
+            let mut free = labels[0].clone();
+            for &slot in &shifted {
+                free.0[slot] = 0;
+            }
+            let zero = proof.validate_labels(&family, &[free.clone()]).unwrap();
+            assert_eq!(
+                zero.labels[0].classification,
+                "scaleless-unrestricted-virtual-polynomial"
+            );
+            free.0[family.physical_slots()] = 1;
+            assert!(proof.validate_labels(&family, &[free]).is_err());
+            if cuts.len() == 2 {
+                assert_eq!(proof.scope(), "two-compact-independent-rank-one-blocks");
+                assert_eq!(audit.endpoint_structure.block_representatives.len(), 2);
+                assert!(
+                    audit
+                        .endpoint_structure
+                        .block_assignments
+                        .iter()
+                        .any(|(_, b)| b.is_none())
+                );
+            }
+        }
+    }
+    #[test]
+    fn rank_one_permit_rejects_genuinely_coupled_quadratics_and_prism() {
+        let synthetic = [vec![1, -1, 1, 0], vec![1, -1, 0, 1], vec![1, -1, 1, 1]]
+            .into_iter()
+            .map(|r| r.into_iter().map(Atom::num).collect::<Vec<_>>())
+            .collect::<Vec<_>>();
+        assert!(matches!(rank_one_blocks(&synthetic,&[0,1,2],2),
+            Err(Error::Unsupported(ref s)) if s.contains("independent rank-one blocks")));
+        let input = serde_json::from_str::<DensityInput>(include_str!(
+            "../../examples/finite_density/triangular_prism.json"
+        ))
+        .unwrap()
+        .prepare()
+        .unwrap();
         let family = input
-            .occupied_cut(&[0, 4], 16)
+            .occupied_cut(&[1, 5], 32)
             .unwrap()
             .at_physical_masses();
         assert!(
-            matches!(MasslessFlowEvidence::new(&input,&family,&[1,2,3,5,6],WeightedSourceOptions::default()),
-            Err(Error::Unsupported(ref s)) if s.contains("exactly two loops"))
+            matches!(MasslessFlowEvidence::new(&input,&family,&[0,2,3,4,6,7,8],WeightedSourceOptions::default()),
+            Err(Error::Unsupported(ref s)) if s.contains("single spacelike direction"))
         );
+    }
+    #[test]
+    fn singleton_external_only_factors_remain_explicitly_unadmitted() {
+        let mut definition = small().input().clone();
+        definition.edges[1].routing = vec!["1".into(), "0".into()];
+        definition.edges[2].vertices = [0, 0];
+        definition.edges[2].routing = vec!["0".into(), "1".into()];
+        definition.loop_charges[1][0] = 0;
+        let input = definition.prepare().unwrap();
+        let family = input.occupied_cut(&[0], 16).unwrap().at_physical_masses();
+        assert!(
+            matches!(MasslessFlowEvidence::new(&input,&family,&[1,2],WeightedSourceOptions::default()),
+            Err(Error::Unsupported(ref s)) if s.contains("external-only"))
+        );
+    }
+    #[test]
+    fn sealed_germ_and_blocks_survive_routing_shear_and_orientation() {
+        let mut definition = serde_json::from_str::<DensityInput>(include_str!(
+            "../../examples/finite_density/chain_of_three_parallel_pairs.json"
+        ))
+        .unwrap();
+        for slot in [0, 1] {
+            definition.edges[slot].vertices.swap(0, 1);
+            for c in &mut definition.edges[slot].routing {
+                *c = (-parse(c).unwrap()).to_string();
+            }
+            for q in &mut definition.edges[slot].charges {
+                *q = -*q;
+            }
+        }
+        for edge in &mut definition.edges {
+            edge.routing[0] =
+                (&parse(&edge.routing[0]).unwrap() + &parse(&edge.routing[1]).unwrap()).to_string();
+        }
+        definition.loop_charges[1][0] = -1;
+        let rules = BTreeMap::from([
+            (parse("g1_2").unwrap(), parse("g1_2+g1_1").unwrap()),
+            (parse("g2_4").unwrap(), parse("g2_4+g1_4").unwrap()),
+        ]);
+        for target in &mut definition.targets {
+            target.numerator = substitute(&parse(&target.numerator).unwrap(), &rules).to_string();
+        }
+        definition.name = "renamed_and_sheared".into();
+        let input = definition.prepare().unwrap();
+        for cuts in [vec![0], vec![4], vec![0, 4]] {
+            let family = input.occupied_cut(&cuts, 16).unwrap().at_physical_masses();
+            let shifted = (0..7).filter(|s| !cuts.contains(s)).collect::<Vec<_>>();
+            let proof = MasslessFlowEvidence::new(
+                &input,
+                &family,
+                &shifted,
+                WeightedSourceOptions::default(),
+            )
+            .unwrap();
+            let mut label = family.targets()[0].keys().next().unwrap().clone();
+            for row in proof.class.rows() {
+                if !row.virtual_part.last().unwrap().is_zero() {
+                    label.0[row.slot] = 0;
+                }
+            }
+            let audit = proof.validate_labels(&family, &[label.clone()]).unwrap();
+            assert!(audit.labels[0].active_virtual_rank < proof.class.virtual_loops());
+            assert_eq!(
+                audit.labels[0].classification,
+                "scaleless-unrestricted-virtual-polynomial"
+            );
+            label.0[family.physical_slots()] = 1;
+            assert!(proof.validate_labels(&family, &[label]).is_err());
+            assert!(
+                proof
+                    .source_identity()
+                    .contains(MASSLESS_ENDPOINT_PROOF_VERSION)
+            );
+            if cuts.len() == 2 {
+                assert!(
+                    proof
+                        .class
+                        .structure()
+                        .virtual_affine_shift
+                        .iter()
+                        .any(|x| x != "0")
+                );
+            }
+        }
+    }
+    #[test]
+    fn generic_witness_avoids_all_integer_shifted_loop_poles() {
+        let inequalities = [EndpointInequality {
+            stratum: "test bound".into(),
+            degree: EndpointDegree {
+                twice_dimension_coefficient: 1,
+                constant: -17,
+            },
+        }];
+        for h in 1..=16 {
+            let d = regular_dimension_witness(&inequalities, h).unwrap();
+            assert!(inequalities[0].degree.at(&d) > 0);
+            for k in 1..=h {
+                let x = &d * &Rational::from((k as i64, 2));
+                assert!(!x.is_integer());
+            }
+        }
     }
 }

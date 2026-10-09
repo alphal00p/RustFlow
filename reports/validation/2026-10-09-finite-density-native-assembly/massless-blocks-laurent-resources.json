@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "900",
+    "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+    "--ignored",
+    "--exact",
+    "complete_massless_sunset_laurent",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 101.2289632530883,
+  "user_seconds": 100.273183,
+  "system_seconds": 0.147863,
+  "peak_child_rss_kib": 49276,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

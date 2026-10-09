@@ -1,0 +1,261 @@
+{
+  "schema": 1,
+  "scope": "current singleton-germ/rank-one-block/vacuum-zero implementation numerical checkpoint",
+  "source_snapshot": "massless-blocks-source-hashes.json",
+  "source_snapshot_sha256": "213f88509e23e50029dee577049f88e22f35f2e9a6650ee8dab3089981094835",
+  "snapshot_file_count": 283,
+  "base_commit": "7fd7c56f8d680d4aa231c9523fcb7b5fe83ccceb",
+  "post_snapshot_changes": [
+    {
+      "path": "tests/finite_density_massless_sources.rs",
+      "snapshot_sha256": "f5bb816ad47b607499af83a3f343c62b14bfb428ae7b7cfc0cd2b513c4e719d6",
+      "current_sha256": "25a3c9cf399c93c75e177bea2a3e7a7bf44d2a99778bc51ed137b2e00d0bf40b"
+    }
+  ],
+  "post_snapshot_change_scope": "test-only decoding of the nested stored measure identity before asserting equality; production sources unchanged",
+  "native_runs": [
+    {
+      "run": "massless-blocks-fixed",
+      "resources": "massless-blocks-fixed-resources.json",
+      "resources_sha256": "56c3c91902432f0d9296b4cc91aaf77e615b6d1c9361a1bc139471f2e0e785ea",
+      "result": {
+        "command": [
+          "timeout",
+          "180",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_fixed_dimension",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 21.90582379605621,
+        "user_seconds": 21.618808,
+        "system_seconds": 0.101545,
+        "peak_child_rss_kib": 52184,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "executable_provenance": "massless-blocks-fixed-resources.provenance.json",
+      "executable_provenance_sha256": "e8fd4cdadd65490356c16419c9c5e3ceccd7981fe788ec3700c0351bd4df5c8a",
+      "captured_before_run": {
+        "captured_utc": "2026-10-09T20:54:38.543478+00:00",
+        "command": [
+          "timeout",
+          "180",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_fixed_dimension",
+          "--nocapture"
+        ],
+        "argument_files": {
+          "timeout": {
+            "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+            "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+            "size_bytes": 1768632
+          },
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7": {
+            "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+            "sha256": "d8cb1290640bf7cb560a801fb2c6ce96cb36f35c89e213efa8d78c8c495bb7d6",
+            "size_bytes": 1223987168
+          }
+        },
+        "scope": "existing file arguments and PATH executables before child launch"
+      }
+    },
+    {
+      "run": "massless-blocks-laurent",
+      "resources": "massless-blocks-laurent-resources.json",
+      "resources_sha256": "4390721b773735a200a40f6c2bf0aaa64c9a62b944b38890af1ed2bf8c8a3ddd",
+      "result": {
+        "command": [
+          "timeout",
+          "900",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_laurent",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 101.2289632530883,
+        "user_seconds": 100.273183,
+        "system_seconds": 0.147863,
+        "peak_child_rss_kib": 49276,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "executable_provenance": "massless-blocks-laurent-resources.provenance.json",
+      "executable_provenance_sha256": "c3c0c4a940f5b84269538c4da93d413fe29648ed3badf33bae2a129d07c4f5f6",
+      "captured_before_run": {
+        "captured_utc": "2026-10-09T20:56:59.233209+00:00",
+        "command": [
+          "timeout",
+          "900",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_laurent",
+          "--nocapture"
+        ],
+        "argument_files": {
+          "timeout": {
+            "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+            "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+            "size_bytes": 1768632
+          },
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7": {
+            "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+            "sha256": "d8cb1290640bf7cb560a801fb2c6ce96cb36f35c89e213efa8d78c8c495bb7d6",
+            "size_bytes": 1223987168
+          }
+        },
+        "scope": "existing file arguments and PATH executables before child launch"
+      }
+    },
+    {
+      "run": "massless-blocks-d7",
+      "resources": "massless-blocks-d7-resources.json",
+      "resources_sha256": "bcc8c0920a85eb4ce84f185101063c607b4ee5688e56863ea11aeec80e856f2e",
+      "result": {
+        "command": [
+          "timeout",
+          "180",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_fixed_dimension",
+          "--nocapture"
+        ],
+        "exit_code": 101,
+        "wall_seconds": 20.36157423397526,
+        "user_seconds": 19.94264,
+        "system_seconds": 0.25223799999999996,
+        "peak_child_rss_kib": 55188,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "executable_provenance": "massless-blocks-d7-resources.provenance.json",
+      "executable_provenance_sha256": "ece40720242cca841f387876571e7b9db7ac5c1ab312d30a2fd6512fa1325b5e",
+      "captured_before_run": {
+        "captured_utc": "2026-10-09T20:53:56.824290+00:00",
+        "command": [
+          "timeout",
+          "180",
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+          "--ignored",
+          "--exact",
+          "complete_massless_sunset_fixed_dimension",
+          "--nocapture"
+        ],
+        "argument_files": {
+          "timeout": {
+            "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+            "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+            "size_bytes": 1768632
+          },
+          "target/release/deps/finite_density_massless_flow-eb27806e95099ab7": {
+            "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_massless_flow-eb27806e95099ab7",
+            "sha256": "d8cb1290640bf7cb560a801fb2c6ce96cb36f35c89e213efa8d78c8c495bb7d6",
+            "size_bytes": 1223987168
+          }
+        },
+        "scope": "existing file arguments and PATH executables before child launch"
+      }
+    },
+    {
+      "run": "massless-blocks-massive-regression",
+      "resources": "massless-blocks-massive-regression-resources.json",
+      "resources_sha256": "a3653b0af4720fd2383c1e08fdea668731bab6e3851752d7808ec3f597a3e725",
+      "result": {
+        "command": [
+          "timeout",
+          "600",
+          "target/release/deps/finite_density_native_flow-890dfd505ba07f58",
+          "--ignored",
+          "--exact",
+          "complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 131.78828036179766,
+        "user_seconds": 130.441598,
+        "system_seconds": 0.280622,
+        "peak_child_rss_kib": 58368,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "executable_provenance": "massless-blocks-massive-regression-resources.provenance.json",
+      "executable_provenance_sha256": "e5e2e1da2861c6df00936ddd27e797fc9ec87fb72c886e8c5d9d7cb1072f9c66",
+      "captured_before_run": {
+        "captured_utc": "2026-10-09T20:57:32.637720+00:00",
+        "command": [
+          "timeout",
+          "600",
+          "target/release/deps/finite_density_native_flow-890dfd505ba07f58",
+          "--ignored",
+          "--exact",
+          "complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors",
+          "--nocapture"
+        ],
+        "argument_files": {
+          "timeout": {
+            "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+            "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+            "size_bytes": 1768632
+          },
+          "target/release/deps/finite_density_native_flow-890dfd505ba07f58": {
+            "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_native_flow-890dfd505ba07f58",
+            "sha256": "5406c6ce1cf94386aea51985b682502ed7e7e8ed28ab5f4e944e47ffcd2fa494",
+            "size_bytes": 1286588928
+          }
+        },
+        "scope": "existing file arguments and PATH executables before child launch"
+      }
+    },
+    {
+      "run": "massless-blocks-python",
+      "resources": "massless-blocks-python-resources.json",
+      "resources_sha256": "c781248e777ba43aaa6b2ca195b0da9d4003ecc05acfdfbb841df12e131f232b",
+      "result": {
+        "command": [
+          "timeout",
+          "120",
+          "target/release/deps/python_finite_density-bede1c03c02f84bf",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.7628983743488789,
+        "user_seconds": 1.626722,
+        "system_seconds": 0.12770199999999998,
+        "peak_child_rss_kib": 30768,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "executable_provenance": "massless-blocks-python-resources.provenance.json",
+      "executable_provenance_sha256": "b8d5ea91ce229f667dd505c074416377cc810319931909ded91e976070dc04c8",
+      "captured_before_run": {
+        "captured_utc": "2026-10-09T20:53:57.912810+00:00",
+        "command": [
+          "timeout",
+          "120",
+          "target/release/deps/python_finite_density-bede1c03c02f84bf",
+          "--nocapture"
+        ],
+        "argument_files": {
+          "timeout": {
+            "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+            "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+            "size_bytes": 1768632
+          },
+          "target/release/deps/python_finite_density-bede1c03c02f84bf": {
+            "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/python_finite_density-bede1c03c02f84bf",
+            "sha256": "0708a1800eefad2b4f3635ef76e990358e572192e59ef35eeaf4b8e79e6d7442",
+            "size_bytes": 1221703432
+          }
+        },
+        "scope": "existing file arguments and PATH executables before child launch"
+      }
+    }
+  ],
+  "archive_index": "massless-blocks-numerical-archives.json",
+  "archive_index_sha256": "138143ab155de81fda4157de3107ffae11f7b6131673b7e3d8d73f63347cee33",
+  "supplied_oracle_numerical_records_compared": 0,
+  "four_loop_native_predictions_compared": 0
+}

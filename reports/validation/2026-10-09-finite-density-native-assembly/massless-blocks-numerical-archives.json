@@ -1,0 +1,1024 @@
+{
+  "schema": 1,
+  "scope": "completed current-source massless and massive regression logs/native corpora only; numerical predictions retained as readable JSON",
+  "files": [
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0/round-000-provisional.bin",
+      "original_sha256": "0d587f1de345e87fa461ad64091fe11b060cd81d4f69bfa87283b8d15a0656e8",
+      "original_bytes": 175255,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_sha256": "add4324e97e2476518c7864279758987c401f3fa114b354e5f480aa9152b4182",
+      "archive_bytes": 25334,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0/round-000-provisional.json",
+      "original_sha256": "2e9b8fa544be9151833e2e60634d7ac022183550a5a5606aa6c255949056f5aa",
+      "original_bytes": 6675,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0/round-000-provisional.json.gz",
+      "archive_sha256": "56ad55caacad88d5835fec62be7316317b4eaca1fa873a576a77a614354ef1cc",
+      "archive_bytes": 1615,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0/round-001-provisional.bin",
+      "original_sha256": "f6c588dc527081e1545323d1007bf1c5f8b179199fd4641a01aedc9e0e1b1698",
+      "original_bytes": 353273,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_sha256": "8e1d9cdc2fa61bc9c4b8a32c1770f17a397b287b51d6966db4e207c72d394f43",
+      "archive_bytes": 57600,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0/round-001-provisional.json",
+      "original_sha256": "9452e1a287f09a69fb50b84cb2a415f6cafd972c1764d8d897a61b155fa54b1f",
+      "original_bytes": 8117,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_sha256": "46e7bd061a5cbde5b5c916abb2b9af59db35c92a00623e0b2854a3c959c5b081",
+      "archive_bytes": 1692,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0/round-002-closed.bin",
+      "original_sha256": "380e2f9ea310c205e03ec27d898578ca04e251480315f7fdcf9329443d803867",
+      "original_bytes": 369611,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0/round-002-closed.bin.gz",
+      "archive_sha256": "0c01762151647cfe658c3535d371a5240e4746641901eeeda62ae6a02868c97b",
+      "archive_bytes": 60451,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0/round-002-closed.json",
+      "original_sha256": "eb29c5085d6bbc14968cd6b83529abb3213b8eca51c00224337a6f361dfa42f7",
+      "original_bytes": 8112,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0/round-002-closed.json.gz",
+      "archive_sha256": "cb4f406b56ecb9e1d8104b00fa1b4b0affb657e001241cd65ca8de1996922472",
+      "archive_bytes": 1684,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0/round-002-provisional.bin",
+      "original_sha256": "7599bf19576c72a9a609b046b4216cabf0664f9068877ace5c703e86358889ab",
+      "original_bytes": 369595,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0/round-002-provisional.bin.gz",
+      "archive_sha256": "86ff9f828cf1da7691235f04d170f32e64680f08012334893514a1f6bcaf45eb",
+      "archive_bytes": 60444,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0/round-002-provisional.json",
+      "original_sha256": "fd44c06c43aaa570e59e6ff574f92f0709357bf58605f11b69b4a9e2d05b00e5",
+      "original_bytes": 8117,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0/round-002-provisional.json.gz",
+      "archive_sha256": "ddb3b0089a7b4b7d703e7f520f1110ce9d66ae6101b8aac85d0f2ca73d979e10",
+      "archive_bytes": 1692,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0-1/guard-refinements.json",
+      "original_sha256": "1f5c9efb2d24dcc27cc5c35d2a5bca0426f314fb9a75d486b121d49e04a4f4a8",
+      "original_bytes": 1676,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0-1/guard-refinements.json.gz",
+      "archive_sha256": "00bc19895fe3ec7885126086204a5193c0132cb3fe81a5112158b5febd7c2c04",
+      "archive_bytes": 350,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0-1/round-000-provisional.bin",
+      "original_sha256": "6df26a45e87d348d94c7d5ee5d0f9b40fcdc4409f738a537005255e8897d2ca3",
+      "original_bytes": 259853,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "archive_sha256": "893d65187b0e64de9dac488b7a1f07b7b2a6e795024b614377dc9a5071326a79",
+      "archive_bytes": 32333,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0-1/round-000-provisional.json",
+      "original_sha256": "d30cb07c3e2ea14c56b69f1a765212831974293f54cfe9d6c1afb6c9de04b0f5",
+      "original_bytes": 7287,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "archive_sha256": "f39cb322d797b65a93e4bca41d49c7137fc039d6d03c95b3b0d2af7bb0f42883",
+      "archive_bytes": 1646,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0-1/round-001-provisional.bin",
+      "original_sha256": "dcdedaa3829a39431e578d85ba16d9e18abc0aed8b893fde102d3955bb619496",
+      "original_bytes": 705991,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "archive_sha256": "3b63474c672626d8331b29c11f8d5206e84321ff2b132ded48805f357328a4a9",
+      "archive_bytes": 99802,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0-1/round-001-provisional.json",
+      "original_sha256": "1dac33c95447d8b1926a1807035489132a17a72d04a8bc603af0955d5a75f9c1",
+      "original_bytes": 9069,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "archive_sha256": "0bfe6ab3e58170beb7c1a1ccb294e18e63320fc70a26dc0ad4594b50f36d653e",
+      "archive_bytes": 1715,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0-1/round-002-closed.bin",
+      "original_sha256": "f9a45364ff7bda165ca73bf157dcc5caff95c9fab90be144408329d86b4e11e0",
+      "original_bytes": 933129,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0-1/round-002-closed.bin.gz",
+      "archive_sha256": "9dec5032a0389f03f92aa405bfd072831acf3c089e3c3ebdccea92c2089a1c4d",
+      "archive_bytes": 134978,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0-1/round-002-closed.json",
+      "original_sha256": "d532e62dd48776423c2e976c14dbb69e05f91189de72371e237ded36a918161b",
+      "original_bytes": 9531,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0-1/round-002-closed.json.gz",
+      "archive_sha256": "6640dce61480670d97f191252d6b5f5bed9848080efe522f10b65691dd1abf9a",
+      "archive_bytes": 1736,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0-1/round-002-provisional.bin",
+      "original_sha256": "e9b69e6027cbc83fbc45a7c17504470b7507d568a9a1f3a1c4cd6e782f18cb95",
+      "original_bytes": 933099,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "archive_sha256": "9334e4b33da749409844d7a9b291b1f2226e4130b10726cfed0a3dacc6fe5a14",
+      "archive_bytes": 134973,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-0-1/round-002-provisional.json",
+      "original_sha256": "280c58caf06d4ed2ae36aacc2be453c850c230d792c4184099da685a4a279669",
+      "original_bytes": 9536,
+      "archive_path": "massless-blocks-d7/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "archive_sha256": "35b21cb3697ff263c0a850b1e811461ec7e774e029263b389253d487b9176b55",
+      "archive_bytes": 1744,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-1/round-000-provisional.bin",
+      "original_sha256": "189313e4e3232d136d7b4926902a249054d7fcdc052cce363681e258f94cb92d",
+      "original_bytes": 114044,
+      "archive_path": "massless-blocks-d7/native-closure/cut-1/round-000-provisional.bin.gz",
+      "archive_sha256": "eabdd19477bc119dcbe85e83245476f9ad4e38d5a5ab905e1962f118aed49b40",
+      "archive_bytes": 16401,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-1/round-000-provisional.json",
+      "original_sha256": "da30b7d5575ed4f6556e55f6d9b34a8f877a83f032c5ceea38e2a25331ab1172",
+      "original_bytes": 5983,
+      "archive_path": "massless-blocks-d7/native-closure/cut-1/round-000-provisional.json.gz",
+      "archive_sha256": "7bb52d41d7d26f504e2dd4b4d41ba70549ed4993ca8c326c0302c50667b47579",
+      "archive_bytes": 1582,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-1/round-001-provisional.bin",
+      "original_sha256": "1c5ba63f72af9c1c8b7cab2f3024586961fba728189d1656456e1bfc68fd202c",
+      "original_bytes": 238952,
+      "archive_path": "massless-blocks-d7/native-closure/cut-1/round-001-provisional.bin.gz",
+      "archive_sha256": "9998c702c7c0af411311dc1bbb5b623db0ecd1469859a920d9c40820abb915e7",
+      "archive_bytes": 33755,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-1/round-001-provisional.json",
+      "original_sha256": "f50f92d000858a56fde2a105468be4019da7710e93d6e5f91d1aa77e0495506d",
+      "original_bytes": 6819,
+      "archive_path": "massless-blocks-d7/native-closure/cut-1/round-001-provisional.json.gz",
+      "archive_sha256": "b2cac66284a9f176c01eb83aa21d2a07116818f69f71ed495f196203ba88f180",
+      "archive_bytes": 1630,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-1/round-002-provisional.bin",
+      "original_sha256": "0363b5bfc0bf2bcfbe3df268763af7476fbbf7a2fbe3538d31fa3f50e2ae87ce",
+      "original_bytes": 367439,
+      "archive_path": "massless-blocks-d7/native-closure/cut-1/round-002-provisional.bin.gz",
+      "archive_sha256": "223dbeacd79af0cbce039164e704ca26382b3360b17a4f74fe3705431bb93444",
+      "archive_bytes": 55938,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-1/round-002-provisional.json",
+      "original_sha256": "c46c22ac4910255a942671c5603b76dd96de96ba34b6d87a495b4fe4b62bcde0",
+      "original_bytes": 7427,
+      "archive_path": "massless-blocks-d7/native-closure/cut-1/round-002-provisional.json.gz",
+      "archive_sha256": "da8d285da4cfe24c99703b9b6067ca9f6c12c265ddc22a80ab071dfb33dc26db",
+      "archive_bytes": 1660,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-1/round-003-closed.bin",
+      "original_sha256": "ccd834b0b2b5012fcf08f2e2205e0a163f792fcd2c149239f2958e6071a29b2e",
+      "original_bytes": 384134,
+      "archive_path": "massless-blocks-d7/native-closure/cut-1/round-003-closed.bin.gz",
+      "archive_sha256": "27e4fe16305ef08056c60e6756864caa9be9cfda9cf9222bd7fe95ba7ff4e024",
+      "archive_bytes": 59102,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-1/round-003-closed.json",
+      "original_sha256": "7fa514d4ede0b262707ec8ef1e4dea822dd80173145a4977753b1d7a686a481f",
+      "original_bytes": 7422,
+      "archive_path": "massless-blocks-d7/native-closure/cut-1/round-003-closed.json.gz",
+      "archive_sha256": "f93b57876baf0026ebcba023052480a85eb4ac7738a544988d919d2ab8a3c97d",
+      "archive_bytes": 1658,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-1/round-003-provisional.bin",
+      "original_sha256": "7f6932b677612d72044ba3a7ec6872be407b649d9355e50748a15ee40762d5dd",
+      "original_bytes": 384118,
+      "archive_path": "massless-blocks-d7/native-closure/cut-1/round-003-provisional.bin.gz",
+      "archive_sha256": "eb9639f2d7c7d737d877e276e53d1c2c91b445e3e62bb5d0dc7988ea5bf86a6e",
+      "archive_bytes": 59095,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7/native-closure/cut-1/round-003-provisional.json",
+      "original_sha256": "030adf0f614d68ced0b1e9e39774bee30350aad97da41c7da3be24d33148fceb",
+      "original_bytes": 7427,
+      "archive_path": "massless-blocks-d7/native-closure/cut-1/round-003-provisional.json.gz",
+      "archive_sha256": "bea107e72a39d7f1c67475cb68eb57ee7ecb345d4209118ffc190bd1ff9a82b9",
+      "archive_bytes": 1666,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-d7-resources.log",
+      "original_sha256": "af82d025b8bfa3b3d7dedae2a5f7ecaea4bf55c2229ffb3058d2b0811f041762",
+      "original_bytes": 5755,
+      "archive_path": "massless-blocks-d7-resources.log.gz",
+      "archive_sha256": "a08e7d4fdcf35ffb236a17c35dbdb296c74a32748ce175d3a0d8fa1be2418cae",
+      "archive_bytes": 1022,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "original_sha256": "0d587f1de345e87fa461ad64091fe11b060cd81d4f69bfa87283b8d15a0656e8",
+      "original_bytes": 175255,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_sha256": "05ce6d8e13eb6c7e6b8bcfcf34f23047455e4492fe9ac3910e15888ee7c2bd60",
+      "archive_bytes": 25334,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0/round-000-provisional.json",
+      "original_sha256": "2e9b8fa544be9151833e2e60634d7ac022183550a5a5606aa6c255949056f5aa",
+      "original_bytes": 6675,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0/round-000-provisional.json.gz",
+      "archive_sha256": "9a60b984f5e350e2e0e13256e34cc944728b34e1de29a6345a4f770c1ad42f93",
+      "archive_bytes": 1615,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "original_sha256": "f6c588dc527081e1545323d1007bf1c5f8b179199fd4641a01aedc9e0e1b1698",
+      "original_bytes": 353273,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_sha256": "e4140f8f9a624ada41e14ef059bc34f9596b736323f6e4486fa65655c9cbec4e",
+      "archive_bytes": 57600,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0/round-001-provisional.json",
+      "original_sha256": "9452e1a287f09a69fb50b84cb2a415f6cafd972c1764d8d897a61b155fa54b1f",
+      "original_bytes": 8117,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_sha256": "73a3e428c3898834938f880564e8f01f79bd0b2446c933d8ad4b6947664a3a2a",
+      "archive_bytes": 1692,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0/round-002-closed.bin",
+      "original_sha256": "380e2f9ea310c205e03ec27d898578ca04e251480315f7fdcf9329443d803867",
+      "original_bytes": 369611,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0/round-002-closed.bin.gz",
+      "archive_sha256": "b24791161d2ce9e0c49ddb6c7704cc1ad79a517eb14f33130245123686e36ab1",
+      "archive_bytes": 60451,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0/round-002-closed.json",
+      "original_sha256": "eb29c5085d6bbc14968cd6b83529abb3213b8eca51c00224337a6f361dfa42f7",
+      "original_bytes": 8112,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0/round-002-closed.json.gz",
+      "archive_sha256": "28cd19ae819227374ae0e5bf41dfdc8923c3603b88b169eb4e0ec8b3f6de27c9",
+      "archive_bytes": 1684,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "original_sha256": "7599bf19576c72a9a609b046b4216cabf0664f9068877ace5c703e86358889ab",
+      "original_bytes": 369595,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0/round-002-provisional.bin.gz",
+      "archive_sha256": "e26e52fbe76dabb8ae6f0e1f8c96c708e6e3eac066c40fb2788f76ec852e6070",
+      "archive_bytes": 60444,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0/round-002-provisional.json",
+      "original_sha256": "fd44c06c43aaa570e59e6ff574f92f0709357bf58605f11b69b4a9e2d05b00e5",
+      "original_bytes": 8117,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0/round-002-provisional.json.gz",
+      "archive_sha256": "50c9539c5ea2f96a63072cf46ebffa3ca1db9dc204a941dff73a315435d832d4",
+      "archive_bytes": 1692,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0-1/guard-refinements.json",
+      "original_sha256": "1f5c9efb2d24dcc27cc5c35d2a5bca0426f314fb9a75d486b121d49e04a4f4a8",
+      "original_bytes": 1676,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0-1/guard-refinements.json.gz",
+      "archive_sha256": "74cef0f3e9a148cbecec2bc7cd9e5e8fcfe0b4f4789e35d3591d2786346a8206",
+      "archive_bytes": 350,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0-1/round-000-provisional.bin",
+      "original_sha256": "6df26a45e87d348d94c7d5ee5d0f9b40fcdc4409f738a537005255e8897d2ca3",
+      "original_bytes": 259853,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "archive_sha256": "445eb001685a080aea1f6c347c79c0853d40723caf77c3ac9190e141d0ec1916",
+      "archive_bytes": 32333,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0-1/round-000-provisional.json",
+      "original_sha256": "d30cb07c3e2ea14c56b69f1a765212831974293f54cfe9d6c1afb6c9de04b0f5",
+      "original_bytes": 7287,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "archive_sha256": "91c460fcb59beed0753f7976ac434a299413cac40437e625f52ab1cb74e06301",
+      "archive_bytes": 1646,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "original_sha256": "dcdedaa3829a39431e578d85ba16d9e18abc0aed8b893fde102d3955bb619496",
+      "original_bytes": 705991,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "archive_sha256": "f2fe347a3386b1409dd899e5d8f3fcbe92bdea9b18bb76d085502480d6ad0d1c",
+      "archive_bytes": 99802,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0-1/round-001-provisional.json",
+      "original_sha256": "1dac33c95447d8b1926a1807035489132a17a72d04a8bc603af0955d5a75f9c1",
+      "original_bytes": 9069,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "archive_sha256": "6a3574733f1950bb7f06893f03d03c60047d3f678705f70da5aef7e2fc32da76",
+      "archive_bytes": 1715,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0-1/round-002-closed.bin",
+      "original_sha256": "f9a45364ff7bda165ca73bf157dcc5caff95c9fab90be144408329d86b4e11e0",
+      "original_bytes": 933129,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0-1/round-002-closed.bin.gz",
+      "archive_sha256": "aeff44e9f0e013d3dfbeea0b8c3e1aeddfe5e71263648555bd1cd18c0c17867b",
+      "archive_bytes": 134978,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0-1/round-002-closed.json",
+      "original_sha256": "d532e62dd48776423c2e976c14dbb69e05f91189de72371e237ded36a918161b",
+      "original_bytes": 9531,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0-1/round-002-closed.json.gz",
+      "archive_sha256": "d11f4190e72762f7d32bb49b0f503bba0f09be5d83d441b7b0c27cdd0bed62b9",
+      "archive_bytes": 1736,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0-1/round-002-provisional.bin",
+      "original_sha256": "e9b69e6027cbc83fbc45a7c17504470b7507d568a9a1f3a1c4cd6e782f18cb95",
+      "original_bytes": 933099,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "archive_sha256": "87ebd5385acd735e4cc179a0c6742229d19a39d9168141933076293fb686bbd6",
+      "archive_bytes": 134973,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-0-1/round-002-provisional.json",
+      "original_sha256": "280c58caf06d4ed2ae36aacc2be453c850c230d792c4184099da685a4a279669",
+      "original_bytes": 9536,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "archive_sha256": "d147f280d3c6881539b4e8a16b9719e9c8cd3c4e80ad6179b1355aead6c611f8",
+      "archive_bytes": 1744,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-1/round-000-provisional.bin",
+      "original_sha256": "189313e4e3232d136d7b4926902a249054d7fcdc052cce363681e258f94cb92d",
+      "original_bytes": 114044,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-1/round-000-provisional.bin.gz",
+      "archive_sha256": "4ecc78e7774db20b63963ab3f111f3213a9f2f9ce2aab46435529c69615d281c",
+      "archive_bytes": 16401,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-1/round-000-provisional.json",
+      "original_sha256": "da30b7d5575ed4f6556e55f6d9b34a8f877a83f032c5ceea38e2a25331ab1172",
+      "original_bytes": 5983,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-1/round-000-provisional.json.gz",
+      "archive_sha256": "a56ba49bdb9ae24e1c92ce87103374eb7995c134718b2e6f68eb57c3347578a0",
+      "archive_bytes": 1582,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-1/round-001-provisional.bin",
+      "original_sha256": "1c5ba63f72af9c1c8b7cab2f3024586961fba728189d1656456e1bfc68fd202c",
+      "original_bytes": 238952,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-1/round-001-provisional.bin.gz",
+      "archive_sha256": "978b547e50c5da1d1ac6b0a1718b8917e48bccbd0be6dff24a37137e71cf9a1e",
+      "archive_bytes": 33755,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-1/round-001-provisional.json",
+      "original_sha256": "f50f92d000858a56fde2a105468be4019da7710e93d6e5f91d1aa77e0495506d",
+      "original_bytes": 6819,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-1/round-001-provisional.json.gz",
+      "archive_sha256": "93bcfa035481f2b2a44d18b83ea364da69bd2bb8577b55126805ed0012602e5a",
+      "archive_bytes": 1630,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-1/round-002-provisional.bin",
+      "original_sha256": "0363b5bfc0bf2bcfbe3df268763af7476fbbf7a2fbe3538d31fa3f50e2ae87ce",
+      "original_bytes": 367439,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-1/round-002-provisional.bin.gz",
+      "archive_sha256": "79105cfb2dd100b7bb5b37113ccbae9a582cd2c115aa2e71231b6b73b07dad75",
+      "archive_bytes": 55938,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-1/round-002-provisional.json",
+      "original_sha256": "c46c22ac4910255a942671c5603b76dd96de96ba34b6d87a495b4fe4b62bcde0",
+      "original_bytes": 7427,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-1/round-002-provisional.json.gz",
+      "archive_sha256": "27a836ad3bb89faf23518f87b9226032efe5d8e97be98ac2a784ba3d528542bd",
+      "archive_bytes": 1660,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-1/round-003-closed.bin",
+      "original_sha256": "ccd834b0b2b5012fcf08f2e2205e0a163f792fcd2c149239f2958e6071a29b2e",
+      "original_bytes": 384134,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-1/round-003-closed.bin.gz",
+      "archive_sha256": "f8506d1050f8a5830b87a1b48d3d475576a0918b0e49bf03795ca92aa6ae8cf4",
+      "archive_bytes": 59102,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-1/round-003-closed.json",
+      "original_sha256": "7fa514d4ede0b262707ec8ef1e4dea822dd80173145a4977753b1d7a686a481f",
+      "original_bytes": 7422,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-1/round-003-closed.json.gz",
+      "archive_sha256": "96df1e9baa04dab77b00581414890242edda6be0c06766fdb6cb31c65548c200",
+      "archive_bytes": 1658,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-1/round-003-provisional.bin",
+      "original_sha256": "7f6932b677612d72044ba3a7ec6872be407b649d9355e50748a15ee40762d5dd",
+      "original_bytes": 384118,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-1/round-003-provisional.bin.gz",
+      "archive_sha256": "5527d09c25449bd6e25d7c27804a0a5f1936f8306e3deeaeb327687c1da4df51",
+      "archive_bytes": 59095,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed/native-closure/cut-1/round-003-provisional.json",
+      "original_sha256": "030adf0f614d68ced0b1e9e39774bee30350aad97da41c7da3be24d33148fceb",
+      "original_bytes": 7427,
+      "archive_path": "massless-blocks-fixed/native-closure/cut-1/round-003-provisional.json.gz",
+      "archive_sha256": "3634a53eed6a052e15ddb357ca9a68c2ac4368e2552f5febff5082a32f440081",
+      "archive_bytes": 1666,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-fixed-resources.log",
+      "original_sha256": "1b31404ca57dcd1bbdb17750ef5fa6b12e6a81f0719a06584ee1f749e4b002f3",
+      "original_bytes": 13907,
+      "archive_path": "massless-blocks-fixed-resources.log.gz",
+      "archive_sha256": "0c4f6ba4a5efe3bd98ceaa66065a133428ff476a780f8132f2c0de3dbc43f46b",
+      "archive_bytes": 900,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0/round-000-provisional.bin",
+      "original_sha256": "0d587f1de345e87fa461ad64091fe11b060cd81d4f69bfa87283b8d15a0656e8",
+      "original_bytes": 175255,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0/round-000-provisional.bin.gz",
+      "archive_sha256": "4540d6c0d5dd152731cf9965acb7bbe08e1c83bb63b450a0627c332d2101362e",
+      "archive_bytes": 25334,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0/round-000-provisional.json",
+      "original_sha256": "2e9b8fa544be9151833e2e60634d7ac022183550a5a5606aa6c255949056f5aa",
+      "original_bytes": 6675,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0/round-000-provisional.json.gz",
+      "archive_sha256": "71b8fa7b0e2be3dccd6f60fd1265a43b71d1f1c0ca145e0030364328d8d6625e",
+      "archive_bytes": 1615,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0/round-001-provisional.bin",
+      "original_sha256": "f6c588dc527081e1545323d1007bf1c5f8b179199fd4641a01aedc9e0e1b1698",
+      "original_bytes": 353273,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0/round-001-provisional.bin.gz",
+      "archive_sha256": "c185a7717f43f28be227539144e3955b5a76693b600602ef7e54226b21357cb4",
+      "archive_bytes": 57600,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0/round-001-provisional.json",
+      "original_sha256": "9452e1a287f09a69fb50b84cb2a415f6cafd972c1764d8d897a61b155fa54b1f",
+      "original_bytes": 8117,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0/round-001-provisional.json.gz",
+      "archive_sha256": "47d4a07066830964f66181265e84d2fdf79d386e825feec3609f0a54a1bfe22b",
+      "archive_bytes": 1692,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0/round-002-closed.bin",
+      "original_sha256": "380e2f9ea310c205e03ec27d898578ca04e251480315f7fdcf9329443d803867",
+      "original_bytes": 369611,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0/round-002-closed.bin.gz",
+      "archive_sha256": "46d9d4a9574fb18f995c180dec25e857afd7b6b0327f9888df399f8687da7ed1",
+      "archive_bytes": 60451,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0/round-002-closed.json",
+      "original_sha256": "eb29c5085d6bbc14968cd6b83529abb3213b8eca51c00224337a6f361dfa42f7",
+      "original_bytes": 8112,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0/round-002-closed.json.gz",
+      "archive_sha256": "003ae8a90f38262b36f7cf5db6768178d100ca04e966e7a308e09a1595d4aa52",
+      "archive_bytes": 1684,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0/round-002-provisional.bin",
+      "original_sha256": "7599bf19576c72a9a609b046b4216cabf0664f9068877ace5c703e86358889ab",
+      "original_bytes": 369595,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0/round-002-provisional.bin.gz",
+      "archive_sha256": "5662fa891a08a38a43879915b653921ab4d2beeda7c8cec9fb1c65654dc78bb1",
+      "archive_bytes": 60444,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0/round-002-provisional.json",
+      "original_sha256": "fd44c06c43aaa570e59e6ff574f92f0709357bf58605f11b69b4a9e2d05b00e5",
+      "original_bytes": 8117,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0/round-002-provisional.json.gz",
+      "archive_sha256": "6737e9d927d1829d02555a05dca9ebafcaebfc6a87321dc0aab03f37f3656551",
+      "archive_bytes": 1692,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0-1/guard-refinements.json",
+      "original_sha256": "1f5c9efb2d24dcc27cc5c35d2a5bca0426f314fb9a75d486b121d49e04a4f4a8",
+      "original_bytes": 1676,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0-1/guard-refinements.json.gz",
+      "archive_sha256": "20126c0312cc345e16b1ff1a98ccc86fce0c38421b109d8f7f3d5e5581b56232",
+      "archive_bytes": 350,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0-1/round-000-provisional.bin",
+      "original_sha256": "6df26a45e87d348d94c7d5ee5d0f9b40fcdc4409f738a537005255e8897d2ca3",
+      "original_bytes": 259853,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "archive_sha256": "d1b5042199f43010ecb5d11649d02bd995a4fd9e68a694bf3e2f03aa93e4d8c9",
+      "archive_bytes": 32333,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0-1/round-000-provisional.json",
+      "original_sha256": "d30cb07c3e2ea14c56b69f1a765212831974293f54cfe9d6c1afb6c9de04b0f5",
+      "original_bytes": 7287,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "archive_sha256": "7009f3a16960ca016626ce7eb7ea666d24e273e74d77450c7b67bb0041452064",
+      "archive_bytes": 1646,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0-1/round-001-provisional.bin",
+      "original_sha256": "dcdedaa3829a39431e578d85ba16d9e18abc0aed8b893fde102d3955bb619496",
+      "original_bytes": 705991,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "archive_sha256": "6e9280df59befe8a10278e41f7b1fc57bbdccb504bcd63ee4b97aee695e1a070",
+      "archive_bytes": 99802,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0-1/round-001-provisional.json",
+      "original_sha256": "1dac33c95447d8b1926a1807035489132a17a72d04a8bc603af0955d5a75f9c1",
+      "original_bytes": 9069,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "archive_sha256": "690b90cd086799f5944da38b64f3edc6bc3b0fa52c6f7591783b9a5ba108995a",
+      "archive_bytes": 1715,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0-1/round-002-closed.bin",
+      "original_sha256": "f9a45364ff7bda165ca73bf157dcc5caff95c9fab90be144408329d86b4e11e0",
+      "original_bytes": 933129,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0-1/round-002-closed.bin.gz",
+      "archive_sha256": "026c6e966e6a858c974ad181467584f258d4745d35847d4984dfdcc7377dbb00",
+      "archive_bytes": 134978,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0-1/round-002-closed.json",
+      "original_sha256": "d532e62dd48776423c2e976c14dbb69e05f91189de72371e237ded36a918161b",
+      "original_bytes": 9531,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0-1/round-002-closed.json.gz",
+      "archive_sha256": "c01cca388243431e5f38b6f51174b9ad84bb6e5210923208c90c11892af7d830",
+      "archive_bytes": 1736,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0-1/round-002-provisional.bin",
+      "original_sha256": "e9b69e6027cbc83fbc45a7c17504470b7507d568a9a1f3a1c4cd6e782f18cb95",
+      "original_bytes": 933099,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "archive_sha256": "a5745625688150b34b6fd538f60ae8ecd4f499c7074324aa6c60edd6331d0395",
+      "archive_bytes": 134973,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-0-1/round-002-provisional.json",
+      "original_sha256": "280c58caf06d4ed2ae36aacc2be453c850c230d792c4184099da685a4a279669",
+      "original_bytes": 9536,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "archive_sha256": "2c3832c7641d33c375d798032a4f4a8291aa731fc8fc86e761486bd109453442",
+      "archive_bytes": 1744,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-1/round-000-provisional.bin",
+      "original_sha256": "189313e4e3232d136d7b4926902a249054d7fcdc052cce363681e258f94cb92d",
+      "original_bytes": 114044,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-1/round-000-provisional.bin.gz",
+      "archive_sha256": "09b00e7d102336fd04516a746266fe1d35491e21abf52241b0d56ab5c2fa6486",
+      "archive_bytes": 16401,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-1/round-000-provisional.json",
+      "original_sha256": "da30b7d5575ed4f6556e55f6d9b34a8f877a83f032c5ceea38e2a25331ab1172",
+      "original_bytes": 5983,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-1/round-000-provisional.json.gz",
+      "archive_sha256": "f7b2d4c8a919e0503178c8760f77cbfa519a99768a0cbeac35413394eacf4f78",
+      "archive_bytes": 1582,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-1/round-001-provisional.bin",
+      "original_sha256": "1c5ba63f72af9c1c8b7cab2f3024586961fba728189d1656456e1bfc68fd202c",
+      "original_bytes": 238952,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-1/round-001-provisional.bin.gz",
+      "archive_sha256": "73e65618c36191249419a760f2c7fe55eb84aa57a539950bc670b22d88b145c0",
+      "archive_bytes": 33755,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-1/round-001-provisional.json",
+      "original_sha256": "f50f92d000858a56fde2a105468be4019da7710e93d6e5f91d1aa77e0495506d",
+      "original_bytes": 6819,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-1/round-001-provisional.json.gz",
+      "archive_sha256": "6e3f0a687d917054977a81a0a0713b84dd06326b9ffc683cd558227774e211c8",
+      "archive_bytes": 1630,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-1/round-002-provisional.bin",
+      "original_sha256": "0363b5bfc0bf2bcfbe3df268763af7476fbbf7a2fbe3538d31fa3f50e2ae87ce",
+      "original_bytes": 367439,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-1/round-002-provisional.bin.gz",
+      "archive_sha256": "1fb1a1cd219db8ec8faa836375862777a9948b69ec0ab0c67347007f8d46cfed",
+      "archive_bytes": 55938,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-1/round-002-provisional.json",
+      "original_sha256": "c46c22ac4910255a942671c5603b76dd96de96ba34b6d87a495b4fe4b62bcde0",
+      "original_bytes": 7427,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-1/round-002-provisional.json.gz",
+      "archive_sha256": "61b217dd59adb4394104f017f3750a9d80f311fa16540def9ed4443ac9023859",
+      "archive_bytes": 1660,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-1/round-003-closed.bin",
+      "original_sha256": "ccd834b0b2b5012fcf08f2e2205e0a163f792fcd2c149239f2958e6071a29b2e",
+      "original_bytes": 384134,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-1/round-003-closed.bin.gz",
+      "archive_sha256": "d5ad4426b08c8f3f59fcb7cfe49fa0ea0163b25dfae58c18ee883bb3167e315f",
+      "archive_bytes": 59102,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-1/round-003-closed.json",
+      "original_sha256": "7fa514d4ede0b262707ec8ef1e4dea822dd80173145a4977753b1d7a686a481f",
+      "original_bytes": 7422,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-1/round-003-closed.json.gz",
+      "archive_sha256": "d49c09ecaa3ca5e08cf3379df3344e1556f3cd1b3b794010e7833c043518b6be",
+      "archive_bytes": 1658,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-1/round-003-provisional.bin",
+      "original_sha256": "7f6932b677612d72044ba3a7ec6872be407b649d9355e50748a15ee40762d5dd",
+      "original_bytes": 384118,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-1/round-003-provisional.bin.gz",
+      "archive_sha256": "825c2a00adabd36880464174f6a7c21e49636e4a6bab449a3073c2866baba186",
+      "archive_bytes": 59095,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent/native-closure/cut-1/round-003-provisional.json",
+      "original_sha256": "030adf0f614d68ced0b1e9e39774bee30350aad97da41c7da3be24d33148fceb",
+      "original_bytes": 7427,
+      "archive_path": "massless-blocks-laurent/native-closure/cut-1/round-003-provisional.json.gz",
+      "archive_sha256": "33d248905f830f601036af1ca75db1be012d3d0ae0b4c29f8f000799cb7d778e",
+      "archive_bytes": 1666,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-laurent-resources.log",
+      "original_sha256": "930f6946cf7970508eec4e7114f488f15c545ec785386bca6b6d901890e0f91a",
+      "original_bytes": 496035,
+      "archive_path": "massless-blocks-laurent-resources.log.gz",
+      "archive_sha256": "b1508d66afc86eef5e4ae3db7196cd11627d684fc0539380ed343afc488e5998",
+      "archive_bytes": 4348,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-0/guard-refinements.json",
+      "original_sha256": "f2de34d60ebb9355a72ca853eeb1bff405a9d31183e6789d3a743b60a5811828",
+      "original_bytes": 13666,
+      "archive_path": "massless-blocks-massive-regression/cut-0/guard-refinements.json.gz",
+      "archive_sha256": "052eb7e47a9771b08493959fcad4159927a9216dd11bd6401f2c7b5ad25a21a1",
+      "archive_bytes": 705,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-0/round-000-provisional.bin",
+      "original_sha256": "835df0baa1031911b365d686ed2b712190725071a7b5cce3904e51b643ad1640",
+      "original_bytes": 120167,
+      "archive_path": "massless-blocks-massive-regression/cut-0/round-000-provisional.bin.gz",
+      "archive_sha256": "5f5888430772a17a8f25d19c9fae810c197fe444e7309da1ba606b34bf0d534e",
+      "archive_bytes": 14464,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-0/round-000-provisional.json",
+      "original_sha256": "69dd11d20006290d7fc19ea44ce829954d5ed564cc03325fed3d0e11a161bd4a",
+      "original_bytes": 3007,
+      "archive_path": "massless-blocks-massive-regression/cut-0/round-000-provisional.json.gz",
+      "archive_sha256": "7245982ce49d3555857fe1e5252396b89d4de8a83c5264a4170e2e0c491c3b98",
+      "archive_bytes": 1097,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-0/round-001-provisional.bin",
+      "original_sha256": "2a17fa8e3eef6f7121da7d66226e69c3dfdf4954c7981e328f6370361837496d",
+      "original_bytes": 231689,
+      "archive_path": "massless-blocks-massive-regression/cut-0/round-001-provisional.bin.gz",
+      "archive_sha256": "17849328bbe5c84be965797bab08d8a0847670f52a4a47e0dc96c85a1222f855",
+      "archive_bytes": 32431,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-0/round-001-provisional.json",
+      "original_sha256": "bb290672a489b5b7e7112a36ec790f66dc72dd985a57ed6758c93f3444617c7f",
+      "original_bytes": 4443,
+      "archive_path": "massless-blocks-massive-regression/cut-0/round-001-provisional.json.gz",
+      "archive_sha256": "28a9a0a818b739402684f45c3836cad10e6d1b9238ddac6c25353a5198a0956a",
+      "archive_bytes": 1157,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-0/round-002-closed.bin",
+      "original_sha256": "73ede7814afc9ced594d7b95dd64ca8b0c9ff8d4ecd5e959fd477044999c5223",
+      "original_bytes": 242830,
+      "archive_path": "massless-blocks-massive-regression/cut-0/round-002-closed.bin.gz",
+      "archive_sha256": "c258d05707774e815890d969cbb33066af8ee0a8484d8aa70b83bc2851025cf5",
+      "archive_bytes": 34030,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-0/round-002-closed.json",
+      "original_sha256": "477f6c08c0c1fcf3fb4f1abdc930cb39ffe5995c8f76a1918d1745389f090a7b",
+      "original_bytes": 4963,
+      "archive_path": "massless-blocks-massive-regression/cut-0/round-002-closed.json.gz",
+      "archive_sha256": "b42c5c6be0e764ce247b13291304f58745e74504db30d28a864e4a0f67fd3640",
+      "archive_bytes": 1169,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-0/round-002-provisional.bin",
+      "original_sha256": "112a88729687031f930efc9b38b2a32fca83eb069617c456518fc94f812be232",
+      "original_bytes": 242782,
+      "archive_path": "massless-blocks-massive-regression/cut-0/round-002-provisional.bin.gz",
+      "archive_sha256": "15cfc9d12de23befd423fb9325a9e3013ac6d32da46ed93e43ab17672158d611",
+      "archive_bytes": 34014,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-0/round-002-provisional.json",
+      "original_sha256": "f168da9d114520fc02d29930ef5d4a03fb138c9d59a374ac132191530dab113c",
+      "original_bytes": 4968,
+      "archive_path": "massless-blocks-massive-regression/cut-0/round-002-provisional.json.gz",
+      "archive_sha256": "2b3fd2b2e248ee86035fdfd73d68669cf33fce686019c61cde5fb6794f62e39a",
+      "archive_bytes": 1178,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-01/guard-refinements.json",
+      "original_sha256": "e4256cdeb389d32765c1858a730684bbeb2ff5c9f1ce461627c3be0e0b5b2908",
+      "original_bytes": 52320,
+      "archive_path": "massless-blocks-massive-regression/cut-01/guard-refinements.json.gz",
+      "archive_sha256": "cbf86c80b4cc914e85d606d8658d305b9ac60cfe5494b489ba1c8e8443f64acf",
+      "archive_bytes": 1245,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-01/round-000-provisional.bin",
+      "original_sha256": "c8e5a4195d6a84bd513978e390f66d01f5d861bd0b307061dad54957fc7584a9",
+      "original_bytes": 635788,
+      "archive_path": "massless-blocks-massive-regression/cut-01/round-000-provisional.bin.gz",
+      "archive_sha256": "4fb582c379dc1efd5353d6513744824863ecc5a987dd9faec691562f544681ae",
+      "archive_bytes": 47604,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-01/round-000-provisional.json",
+      "original_sha256": "19886b7173b5b773f28b2ea6c7e9b57f6dd19d799c109c69b63399779afa0ca4",
+      "original_bytes": 8671,
+      "archive_path": "massless-blocks-massive-regression/cut-01/round-000-provisional.json.gz",
+      "archive_sha256": "8ab47da4daf4c765c0aead4281b039b4e48a9ce065753a5fc9648c15b9487fb0",
+      "archive_bytes": 1334,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-01/round-001-provisional.bin",
+      "original_sha256": "2d7aa9e2bb56dc83085b3118d5b13299f122ad6e1ba79eaccd2b36e36d67db1b",
+      "original_bytes": 1234236,
+      "archive_path": "massless-blocks-massive-regression/cut-01/round-001-provisional.bin.gz",
+      "archive_sha256": "30e4ee118c07f01bfe52e61bda590de0c490ea029b5680b1cd1929b20474f0c1",
+      "archive_bytes": 109268,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-01/round-001-provisional.json",
+      "original_sha256": "fe215dc3e323510328f9b10a4835e0848e6f7d9e97e6eed5fc24b24e239d0601",
+      "original_bytes": 16173,
+      "archive_path": "massless-blocks-massive-regression/cut-01/round-001-provisional.json.gz",
+      "archive_sha256": "323084c61be6ff1e52033bff54b60fbf442bfbb7fbfb329f626a5d4eefa9e484",
+      "archive_bytes": 1603,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-01/round-002-closed.bin",
+      "original_sha256": "f0f5fa73b32b1db813b31ca9ae22c8b1f303a50c6b1dfb539aa7f39051a784af",
+      "original_bytes": 1346231,
+      "archive_path": "massless-blocks-massive-regression/cut-01/round-002-closed.bin.gz",
+      "archive_sha256": "2693e6f6a78d7bdc5ad71a2b5ee82cc86cb84fd2c2b007fb8191be9c4e8e8d37",
+      "archive_bytes": 123759,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-01/round-002-closed.json",
+      "original_sha256": "f5c879b82e0f61002642ee6d43ff907e35f36d8ba0dc94587a1046292c0ed669",
+      "original_bytes": 16540,
+      "archive_path": "massless-blocks-massive-regression/cut-01/round-002-closed.json.gz",
+      "archive_sha256": "ab730a85a86acf3635941d4d90e77e0a41339748bd1d706eea8deb8cc0ab487e",
+      "archive_bytes": 1610,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-01/round-002-provisional.bin",
+      "original_sha256": "fa6a8d5dce3b566bd916187106c2a88c2f705b0c05d9c6cafaf568fc5044655b",
+      "original_bytes": 1346121,
+      "archive_path": "massless-blocks-massive-regression/cut-01/round-002-provisional.bin.gz",
+      "archive_sha256": "ebc42212bedf3b129d2de9fc293a93a1d8744874e36a7cec8e22162729a3e257",
+      "archive_bytes": 123726,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-01/round-002-provisional.json",
+      "original_sha256": "74d3b5354784bbb4846d475e25470edd8435d306040cf29e21d0e45d7a812df6",
+      "original_bytes": 16545,
+      "archive_path": "massless-blocks-massive-regression/cut-01/round-002-provisional.json.gz",
+      "archive_sha256": "63f7bf67fffdc4839790a75bb2962f85cfb2d74449a064526ff24b101ee4849e",
+      "archive_bytes": 1618,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-1/guard-refinements.json",
+      "original_sha256": "266be8a06ac1a68668b53582b136a269d320abea42a5e3553caa0069ad920659",
+      "original_bytes": 8688,
+      "archive_path": "massless-blocks-massive-regression/cut-1/guard-refinements.json.gz",
+      "archive_sha256": "acb24483b44e55f37ca7857a8744eb21d9cd55df6543a81bd227567770874c0b",
+      "archive_bytes": 568,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-1/round-000-provisional.bin",
+      "original_sha256": "070ec5cc416b952244c1a8e519c634e6680559df37642b3bef2811921e8a426c",
+      "original_bytes": 151824,
+      "archive_path": "massless-blocks-massive-regression/cut-1/round-000-provisional.bin.gz",
+      "archive_sha256": "baddee93cb9eac180f4ed94e1d1b1b483bb1716274bdef726161b97096722b76",
+      "archive_bytes": 16142,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-1/round-000-provisional.json",
+      "original_sha256": "0ba4e591cbc52a51fda88d847fd5ce5deaa464d4c1d72d3f2bcdc5cb82615af5",
+      "original_bytes": 5368,
+      "archive_path": "massless-blocks-massive-regression/cut-1/round-000-provisional.json.gz",
+      "archive_sha256": "853a81e1b6561f1b087616b9bcf54987b8414c66a90268b78d961493141b186f",
+      "archive_bytes": 1215,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-1/round-001-provisional.bin",
+      "original_sha256": "0ca284164101389031a120777bac7fc1df6ba090b0997d19e2afc61b86b9898b",
+      "original_bytes": 453675,
+      "archive_path": "massless-blocks-massive-regression/cut-1/round-001-provisional.bin.gz",
+      "archive_sha256": "467ce053c72e06d541b47d6f4f8ac0a0f31123f6b227fa6f6f0106986f73c795",
+      "archive_bytes": 59615,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-1/round-001-provisional.json",
+      "original_sha256": "588fc94624f624970fab9b79d7312d32f8d04a02e0989ddda9c46c80eaaa44c3",
+      "original_bytes": 10076,
+      "archive_path": "massless-blocks-massive-regression/cut-1/round-001-provisional.json.gz",
+      "archive_sha256": "a8e5d4b4741430cc58c691bb63fd3618e4c1544bc7087c7deecfb99b45cd99b1",
+      "archive_bytes": 1437,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-1/round-002-closed.bin",
+      "original_sha256": "fee484f452de1cebec78c7e697e28f27137c0e5d98a50376219aa63a2568ce6f",
+      "original_bytes": 476406,
+      "archive_path": "massless-blocks-massive-regression/cut-1/round-002-closed.bin.gz",
+      "archive_sha256": "0ba0199669f857648d10502b520c83e40e4cbc61077be65c07a20c0829bca295",
+      "archive_bytes": 62886,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-1/round-002-closed.json",
+      "original_sha256": "f03fdcede05fc59a860faea642f1358e395a86274f216cc4a465f65ec7209f08",
+      "original_bytes": 10296,
+      "archive_path": "massless-blocks-massive-regression/cut-1/round-002-closed.json.gz",
+      "archive_sha256": "8172db25b7aea8dc8b826b246143748ecd8da2d8fd87a245a0c738108db1b5ef",
+      "archive_bytes": 1439,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-1/round-002-provisional.bin",
+      "original_sha256": "945c1d4279507a368450b3dbbb008f0640165cdb478c66083509a3f8d2d716ca",
+      "original_bytes": 476358,
+      "archive_path": "massless-blocks-massive-regression/cut-1/round-002-provisional.bin.gz",
+      "archive_sha256": "2da09bf2d465ca612fb21d7d9dd86aa9a332ff97b168776192fea606cf877182",
+      "archive_bytes": 62867,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression/cut-1/round-002-provisional.json",
+      "original_sha256": "cb4ff9d9ff7db0666f65446b57942290c44b51e1cc031b8bdb39b068bc6e8f2c",
+      "original_bytes": 10301,
+      "archive_path": "massless-blocks-massive-regression/cut-1/round-002-provisional.json.gz",
+      "archive_sha256": "59819abb6d4b56897106f18c59a1640cc54e99a3a9d572283cef4c1f5c66a818",
+      "archive_bytes": 1449,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-massive-regression-resources.log",
+      "original_sha256": "24c1934f5695caaeed05c0d024723d43265d1c6ce4b9f3b074f1acbc9a256f38",
+      "original_bytes": 37781,
+      "archive_path": "massless-blocks-massive-regression-resources.log.gz",
+      "archive_sha256": "9f7c3fc9c0e76c3954582c60269defb6c31e1e19fb6df4f698daf35f22d38a31",
+      "archive_bytes": 2361,
+      "decompression_verified": true
+    },
+    {
+      "original_path": "massless-blocks-python-resources.log",
+      "original_sha256": "8fe5341a2b1b60ccf3fbeccd33ac8d3794d01c7885a67e7d5926bac2e39a8e02",
+      "original_bytes": 193,
+      "archive_path": "massless-blocks-python-resources.log.gz",
+      "archive_sha256": "15510ff7acd3512b273d5b03690537f36ea55254b797f93bf698dc57012d171e",
+      "archive_bytes": 192,
+      "decompression_verified": true
+    }
+  ],
+  "file_count": 113
+}

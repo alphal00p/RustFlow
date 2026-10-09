@@ -1,0 +1,64 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "source_snapshot": "massless-blocks-source-hashes.json",
+  "test_only_delta": {
+    "path": "tests/finite_density_massless_sources.rs",
+    "sha256": "25a3c9cf399c93c75e177bea2a3e7a7bf44d2a99778bc51ed137b2e00d0bf40b",
+    "description": "Correct assertion of JSON-escaped typed source identity; production source unchanged from snapshot"
+  },
+  "binary": "target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+  "binary_sha256": "ffe4326e040cc4840ff548a41c4efdcc7bec957add677d162e399f4523528d22",
+  "binary_mtime_utc": "2026-10-09T21:00:14.436352+00:00",
+  "resources": {
+    "command": [
+      "target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+      "--nocapture"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.6991969370283186,
+    "user_seconds": 0.713648,
+    "system_seconds": 0.051302999999999994,
+    "peak_child_rss_kib": 15464,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "harness": {
+    "passed": 3,
+    "failed": 0,
+    "ignored": 0,
+    "seconds": 0.68
+  },
+  "scope": "Typed source-origin admission and exact zero-domain replay/decoding, source/options/routing/cache binding, polynomial completion and zero-tail storage rejection. Includes E7 cuts[0],[4],[0,4] at capacity24. No numerical prediction.",
+  "test_only_rebuild": {
+    "command": [
+      "nix",
+      "develop",
+      "--command",
+      "cargo",
+      "test",
+      "--locked",
+      "--release",
+      "--features",
+      "python",
+      "--test",
+      "finite_density_massless_sources",
+      "--no-run"
+    ],
+    "cargo_reported_seconds": 173,
+    "included_in_test_runtime": false
+  },
+  "failed_predecessor": "massless-blocks-source-before-identity-assertion-fix.json",
+  "vacuum_unit_regressions": {
+    "owner_report": "massless-blocks-boundary-gates.json",
+    "included_in_lib_54": true,
+    "new_tests": 3,
+    "existing_retained_pole_test": 1,
+    "rerun_by_this_owner": false
+  },
+  "physical_E7_preparation_attempts": {
+    "report": "E7-origin-pilot-comparison.json",
+    "exited_101": 2,
+    "closed": 0,
+    "numerical_predictions": 0
+  }
+}

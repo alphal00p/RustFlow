@@ -376,15 +376,20 @@ virtual poles by moments.
 For assigned strictly positive rational shell masses, weighted AMF uses the
 open massive-sunset or routing-dependent heavy-edge certificate, with the common
 +i0 prescription and all uncut physical quadratic factors shifted. A separate
-sealed massless permit now covers exactly two loops, all physical masses zero,
-positive occupied chemical magnitudes and polynomial completions. A singleton
-cut requires every uncut momentum to depend on its one virtual loop; a double
-cut requires every uncut momentum to be proportional to the spacelike transfer
-q1-q2. Exact routing, all-uncut deformation, origin convention and every finite
-basis label are bound to the [endpoint proof](finite-density-massless-endpoint.md).
-These classes are selected by physical structure, not graph names or targets.
-Generic massless four-loop endpoints, pinched continuations and partial
-deformation placements remain unsupported. Compact terminals retain their
+sealed massless permit covers zero physical masses, positive occupied chemical
+magnitudes and polynomial completions. Singleton cuts admit a uniformly
+UV-continued external-invariant germ at arbitrary admitted virtual rank, with
+every uncut momentum depending on virtual loops. Two-cut sectors admit pure
+spacelike transfer factors and independent rank-one virtual quadratic blocks
+whose external direction is q1-q2. Exact routing, all-uncut deformation, origin
+convention and every generated finite basis label are bound to the
+[endpoint proof](finite-density-massless-endpoint.md) and
+[uniform germ/block derivation](finite-density-massless-germ.md). These classes
+are selected by physical structure, not graph names or targets. All E7 cut
+sectors pass this structural admission, but their bounded native weighted
+closure remains unresolved and no E7 amplitude has been evaluated. General
+coupled virtual blocks, E8 pinched continuations and partial deformation
+placements remain unsupported. Compact terminals retain their
 separate distributional admission. The algebraic parser can still represent
 families outside numerical admission.
 
@@ -407,12 +412,22 @@ D=13/2 and D=15/4, and five Laurent profiles through order zero. All occupied
 sectors use native weighted AMF, with closed bases 2, 2 and 3. The 110 independent
 reference comparisons and 84 refinements retain the raised original numerator
 and its nonzero upper surface; the vacuum and both singleton endpoints are
-checked as zeros. Native D=7 still encounters an explicit ordinary-boundary
-indicial resonance before producing a prediction, while independent convergent
-D=7 quadrature validates the reference and support derivative. See the
+checked as zeros. Native D=7 retains an explicit additional indicial resonance
+before producing a prediction. In the current implementation, native vacuum
+zero certificates skip vacuum flow and both singleton cuts succeed; the
+remaining resonance occurs in the double-cut infinity recurrence. Independent
+convergent D=7 quadrature validates the reference and support derivative. See the
 [massless numerical report](../reports/validation/2026-10-09-finite-density-native-assembly/massless-native-validation.json)
 for counts and the [provenance record](../reports/validation/2026-10-09-finite-density-native-assembly/massless-native-provenance.json)
 for the original-source executable-digest limitation and final-order check.
+The current structural extension was revalidated at D=13/2 and through Laurent
+order zero: 70 independent references and 54 refinements pass. A separate
+massive D=12/5 profile passes ten independent references and reproduces all ten
+historical component/total decimal strings exactly. Its current
+[numerical provenance](../reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-numerical-provenance.json)
+captures each executable digest before launch; the
+[validation aggregate](../reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-numerical-validation.json)
+keeps these regression counts separate from four-loop acceptance.
 
 The complete generic numerical evaluator has not passed its required acceptance
 gates. The selected massive sunset now passes complete numerical assembly at
@@ -506,8 +521,8 @@ at `d=2` and retains an explicit singular-threshold diagnostic.
 | Integrated occupied boundaries | Polynomial compact and recursively integrated hard coefficients verified; generic retained soft poles and recursive weighted values unresolved |
 | Regulated common-contour continuation | Massive sunset and routing-dependent heavy-edge sufficient domains derived; see [contour certificates](finite-density-contours.md); thresholds, massless pinches and general admission remain separate |
 | Full massive normalization | Complete massive-sunset scalar and raised-numerator values pass independent raw-Euclidean comparisons, including the nonzero vacuum and raised surface contributions |
-| Physical endpoint reconstruction | Complete massive and narrow massless two-loop endpoints and Laurent coefficients pass; D7 ordinary resonance remains explicit; generic massless four-loop admission remains open |
-| Three four-loop families | Exact distinct graph certificates available; independent E7 raised-line reference generated; all native predictions and the other two supplemental references absent |
+| Physical endpoint reconstruction | Complete massive and massless two-loop values/Laurent coefficients pass; singleton germs and independent rank-one blocks structurally admit all E7 cuts, with native closure/numerics unresolved; D7 double-cut infinity resonance remains explicit |
+| Three four-loop families | Exact distinct graph certificates and E7 endpoint admission available; independent E7 raised-line reference generated; all native predictions and the other two complete supplemental references absent |
 | Ten stable Laurent digits | Complete massive-sunset Laurent comparison passes five profiles, independently changing digits, order, start scale and epsilon grid; no four-loop AMF-to-oracle comparison |
 
 An independent validation-only reference for both complete massive sunset targets

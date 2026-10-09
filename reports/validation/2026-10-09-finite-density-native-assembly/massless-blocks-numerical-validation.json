@@ -1,0 +1,91 @@
+{
+  "schema": 1,
+  "status": "two_loop_numerical_regressions_passed_four_loop_closure_unresolved",
+  "source_snapshot": "massless-blocks-source-hashes.json",
+  "source_snapshot_sha256": "213f88509e23e50029dee577049f88e22f35f2e9a6650ee8dab3089981094835",
+  "scope": "current sealed multi-loop singleton germ and rank-one-block origin evidence, native zero-vacuum certificates, with complete massless two-loop numerical regression and one complete massive regression profile",
+  "massless_fixed_dimension": {
+    "dimension": "13/2",
+    "report": "massless-blocks-fixed-reference-comparison.json",
+    "sha256": "826e77059e245b8b9a4efc6eca08f2b07975e8c226be3ac5f26054ee2ccde811",
+    "status": "passed",
+    "reference_comparison_count": 40,
+    "independent_refinement_comparison_count": 30,
+    "largest_reference_relative_difference": "1.126688989905034741452362338112000443035763364382546305312473584512773621237337101050521306571201468E-62",
+    "largest_reference_small_absolute_difference": "0",
+    "largest_refinement_relative_difference": "1.126688989819680293673770562097957731914961412852125332443146513730987910243628158522974457312583548E-62",
+    "largest_refinement_small_absolute_difference": "0"
+  },
+  "massless_laurent": {
+    "orders": [
+      -2,
+      -1,
+      0
+    ],
+    "report": "massless-blocks-laurent-reference-comparison.json",
+    "sha256": "a826a189619a99a835b65a0ff4ca252a929361bbdd036a99ed8525e319c71fda",
+    "status": "passed",
+    "reference_comparison_count": 30,
+    "independent_refinement_comparison_count": 24,
+    "largest_reference_relative_difference": "2.041136525965978003930408791132414108823096798870896291285970536438753861629237793188399844869034108E-44",
+    "largest_reference_small_absolute_difference": "8.661497055645898292374991768187706620116566810207180110452091549572976556700000000000000000000000000E-56",
+    "largest_refinement_relative_difference": "2.041136525965871943160585869054226904077073159303460082774492625348008292521059681817111783963230506E-44",
+    "largest_refinement_small_absolute_difference": "8.661497055645606195938263055876335687774379208210504422997722871447873722290569264271812448109925000E-56"
+  },
+  "massive_fixed_dimension_regression": {
+    "dimension": "12/5",
+    "report": "massless-blocks-massive-regression-comparison.json",
+    "sha256": "5636581935abd487797c776e2f2d9876f9e22dcf7a757dda5c079157b38efe17",
+    "reference_comparison_count": 10,
+    "historical_same_profile_comparison_count": 10,
+    "independent_refinement_comparison_count": 0
+  },
+  "total_current_independent_reference_comparisons": 80,
+  "total_current_independent_refinement_comparisons": 54,
+  "same_profile_historical_regressions": 10,
+  "native_massless_occupied_basis_sizes": [
+    2,
+    2,
+    3
+  ],
+  "D7_specialized_sample": {
+    "status": "unsupported_additional_indicial_resonance",
+    "stage": "double-cut large-eta Frobenius recurrence after both singleton occupied cuts succeeded and native zero-vacuum pruning skipped ordinary vacuum flow",
+    "accepted_predictions": 0,
+    "historical_difference": "previous checkpoint failed during ordinary recursive vacuum-boundary preparation; historical evidence remains unchanged"
+  },
+  "python": {
+    "status": "passed",
+    "test_count": 1,
+    "resources": "massless-blocks-python-resources.json"
+  },
+  "four_loop_status": "E7 endpoint/origin class is admitted, but bounded weighted closure remains unresolved; no four-loop native numerical predictions or acceptance. E8 common contour and prism coupled two-virtual class remain unadmitted.",
+  "supplied_oracle_numerical_records_compared": 0,
+  "four_loop_native_predictions_compared": 0,
+  "provenance": "massless-blocks-numerical-provenance.json",
+  "archives": "massless-blocks-numerical-archives.json",
+  "reference_uncertainty": "Observed agreement and parameter refinements are empirical numerical evidence, not rigorous interval error bounds.",
+  "current_executed_gates": {
+    "passed": 67,
+    "failed_current_required_gates": 0,
+    "counts": {
+      "finite_density_units": 54,
+      "occupied_flow_boundary": 6,
+      "bound_origin_sources": 3,
+      "python_runtime": 1,
+      "full_massless_sample_test": 1,
+      "full_massless_laurent_test": 1,
+      "full_massive_regression_test": 1
+    },
+    "excluded_diagnostics": [
+      "D7 explicit specialized resonance",
+      "E7 bounded native closure failures",
+      "historical test-only nested JSON assertion failures"
+    ],
+    "owner_reports": {
+      "massless-blocks-boundary-gates.json": "e342353d41ff1b75e804423fd4f44db5510779123b20732364355ab4b38162ff",
+      "massless-blocks-source-gates.json": "6bb089a86db271b1ed81f3a3091bc26ef91f48bbb038c3517275392e25e19763",
+      "E7-origin-pilot-comparison.json": "cb79551c32ab0ddd1518c37fa65bc77771d53d14fa9ffb25ee0a5688d8ecc2b1"
+    }
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "captured_utc": "2026-10-09T20:57:32.637720+00:00",
+  "command": [
+    "timeout",
+    "600",
+    "target/release/deps/finite_density_native_flow-890dfd505ba07f58",
+    "--ignored",
+    "--exact",
+    "complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors",
+    "--nocapture"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "target/release/deps/finite_density_native_flow-890dfd505ba07f58": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_native_flow-890dfd505ba07f58",
+      "sha256": "5406c6ce1cf94386aea51985b682502ed7e7e8ed28ab5f4e944e47ffcd2fa494",
+      "size_bytes": 1286588928
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

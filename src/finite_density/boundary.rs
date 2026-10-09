@@ -82,6 +82,7 @@ pub struct IntegratedOccupiedBoundary<'a> {
     moments: Mutex<BTreeMap<String, C>>,
     positive_energy_powers: bool,
     origin_prescription: CompactOriginPrescription,
+    origin_proof_identity: Option<String>,
 }
 
 /// Provenance of a single integrated region coefficient. The scaleless count
@@ -131,6 +132,7 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
             moments: Mutex::new(BTreeMap::new()),
             positive_energy_powers: false,
             origin_prescription: CompactOriginPrescription::Existing,
+            origin_proof_identity: None,
         })
     }
 
@@ -144,6 +146,7 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
 
     pub(crate) fn with_terminal_origin(mut self, prescription: CompactOriginPrescription) -> Self {
         self.origin_prescription = prescription;
+        self.origin_proof_identity = None;
         self
     }
 
@@ -151,9 +154,10 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
     /// sealed proof and arranging an audit of every supplied basis label.
     pub(crate) fn with_massless_flow_origin(
         mut self,
-        _evidence: &super::massless_endpoint::MasslessFlowEvidence,
+        evidence: &super::massless_endpoint::MasslessFlowEvidence,
     ) -> Self {
         self.origin_prescription = CompactOriginPrescription::JointDimensionalMasslessFlow;
+        self.origin_proof_identity = Some(evidence.source_identity());
         self
     }
 
@@ -508,7 +512,7 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
         // requested seed accuracy and arithmetic precision. Equal-mass shells
         // can share values, but distinct physical mass derivatives cannot.
         let key = format!(
-            "raw-native-Cn-Hupper-Hlower-v2:{}:{}:{}:{}:{}:{}:{energy_power}:{radial_power}:{digits}:{}:{}",
+            "raw-native-Cn-Hupper-Hlower-v3:{}:{}:{}:{}:{}:{}:{energy_power}:{radial_power}:{digits}:{}:{}:{}",
             distribution.shell.mass_squared,
             distribution.shell.chemical_potential,
             distribution.cut_index,
@@ -517,6 +521,9 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
             dimension,
             p.bits,
             self.origin_prescription.identity(),
+            self.origin_proof_identity
+                .as_deref()
+                .unwrap_or("no-flow-endpoint-proof"),
         );
         if let Some(value) = self
             .moments

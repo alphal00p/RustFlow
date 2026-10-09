@@ -37,10 +37,9 @@ native rules and 5 applications. Its frontier reaches 147 above the configured
 frontier is 88 and closure remains unresolved (108.605 seconds). Both use
 depth 3, 8192 domains, no adaptive guard passes, and a 180-second process cap.
 These are algebraic source pilots with no contour or numerical admission.
-Their factory does not attach the new sealed massless-origin lower-contact
-zero evidence. Such physically certified source zeros could change closure
-coverage and the frontier substantially; the saved failures do not assess that
-stronger corpus. Its admission must be established before comparing it.
+Their factory does not attach sealed massless-origin lower-contact zero
+evidence. The later typed comparison described below tests that stronger source
+context independently.
 The [owner report](../reports/validation/2026-10-09-finite-density-native-assembly/native-capacity-final-owner-gates.json)
 contains all six pilot attempts, exact commands, resources, and source hashes.
 
@@ -120,5 +119,20 @@ record exact domains and source/program identity. They have not been minimized
 to a smaller source corpus or rerun as isolated boxes. A next bounded comparison
 can enable the existing native guard refinement while preserving all unresolved
 parent gaps and the final exact closure audit. The next physical comparison
-should first use the sealed origin evidence, if admitted for E7, rather than
-interpreting the legacy formal-source frontier as a backend obstruction.
+must distinguish physical source support from native search coverage rather
+than interpreting a legacy formal-source frontier as a backend obstruction.
+
+The [typed origin comparison](../reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-pilot-comparison.json)
+now admits E7's sealed dimensional-origin evidence and repeats the original
+three-round, frontier-128, depth-3, 8192-domain profile with ordinary zero faces
+and adaptive guard refinement disabled. Both public occupied-flow preparations
+fail explicitly before numerical transport (test exit 101). The single cut
+ends at frontier 147 in 22.168 seconds and the double cut at frontier 88 in
+109.7 seconds. All saved requested and frontier arrays in all three rounds are
+exactly equal to their formal-source counterparts. The source identity differs
+because it now binds the physical origin proof. Exact native programs and
+metadata are retained in the
+[lossless archives](../reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-pilot-archives.json).
+This comparison still does not add independently certified zero domains for
+unrestricted virtual polynomial directions. It demonstrates neither a closed
+four-loop basis nor a RustRed correctness defect.

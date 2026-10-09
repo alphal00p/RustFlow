@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+    "--nocapture"
+  ],
+  "exit_code": 101,
+  "wall_seconds": 0.142725370824337,
+  "user_seconds": 0.16599899999999998,
+  "system_seconds": 0.043427,
+  "peak_child_rss_kib": 15464,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,14 @@
+{
+  "epsilon": "1/8",
+  "guard_digits": 40,
+  "independent_reference_comparisons": 0,
+  "input_path": "examples/finite_density/chain_of_three_parallel_pairs.json",
+  "native_closure": "WeightedClosureOptions { max_rounds: 3, max_frontier: 128, max_requested: 512, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 0, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: false, checkpoints: Some(\"reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-double/native-closure\") }",
+  "profiles": [
+    [
+      18,
+      60,
+      8
+    ]
+  ]
+}

@@ -1,0 +1,21 @@
+[
+  {
+    "cut_slots": [
+      0
+    ],
+    "diagnostics": "WeightedClosureDiagnostics { rounds: 3, requested: 32, native_frontier_requests: 18, provisional_sizes: [11, 9, 2], native_rules: 1363, native_rule_applications: 6348, uncovered_discovery_domains: 4, guard_refinement_passes: 0, guard_refinement_added_domains: 0, guard_refinement_budget_exhausted: false, guard_refinements: [] }"
+  },
+  {
+    "cut_slots": [
+      1
+    ],
+    "diagnostics": "WeightedClosureDiagnostics { rounds: 4, requested: 24, native_frontier_requests: 15, provisional_sizes: [4, 9, 5, 2], native_rules: 1094, native_rule_applications: 2716, uncovered_discovery_domains: 7, guard_refinement_passes: 0, guard_refinement_added_domains: 0, guard_refinement_budget_exhausted: false, guard_refinements: [] }"
+  },
+  {
+    "cut_slots": [
+      0,
+      1
+    ],
+    "diagnostics": "WeightedClosureDiagnostics { rounds: 3, requested: 33, native_frontier_requests: 21, provisional_sizes: [9, 15, 3], native_rules: 2901, native_rule_applications: 5160, uncovered_discovery_domains: 6, guard_refinement_passes: 1, guard_refinement_added_domains: 2, guard_refinement_budget_exhausted: false, guard_refinements: [GuardRefinementRecord { pass: 1, parent_bounds: [[Some(1), Some(1)], [Some(1), Some(1)], [Some(1), Some(1)], [Some(0), Some(0)], [Some(0), Some(0)], [Some(0), Some(0)], [Some(0), Some(0)], [Some(1), Some(2)], [Some(0), Some(0)]], native_failure: \"recentered source proof misses the requested target domain\", axis: 7, fixed_values: [1, 2], trigger: [1, 1, 1, 0, 0, 0, 0, 1, 0] }] }"
+  }
+]

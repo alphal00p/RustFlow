@@ -195,6 +195,13 @@ pub fn evaluate_request(
             }))
             .collect::<Vec<_>>()
     );
+    report["vacuum_zero_certificates"] = json!(
+        prepared
+            .vacuum_zero_certificates()
+            .iter()
+            .map(|certificate| certificate.report())
+            .collect::<Vec<_>>()
+    );
     Ok(report)
 }
 

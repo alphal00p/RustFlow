@@ -181,6 +181,11 @@ impl PreparedDensityFlow {
         &self.input
     }
 
+    /// Native zero certificates for the undeformed, unoccupied contribution.
+    pub fn vacuum_zero_certificates(&self) -> &[super::vacuum::VacuumZeroCertificate] {
+        self.vacuum.zero_certificates()
+    }
+
     pub fn closure_diagnostics(&self) -> Vec<(&[usize], &WeightedClosureDiagnostics)> {
         self.occupied
             .iter()

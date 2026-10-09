@@ -1,0 +1,8 @@
+
+running 3 tests
+test one_virtual_massless_origin_requires_its_sealed_prescription ... ok
+test fully_compact_massless_origin_keeps_polynomial_and_storage_domains ... ok
+test four_loop_e7_sources_bind_each_sealed_endpoint_variant_and_zero_origin ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.68s
+

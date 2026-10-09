@@ -1,0 +1,15 @@
+{
+  "captured_utc": "2026-10-09T21:02:18.753946+00:00",
+  "command": [
+    "target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+    "--nocapture"
+  ],
+  "argument_files": {
+    "target/release/deps/finite_density_massless_sources-13090b99f983b9e3": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_massless_sources-13090b99f983b9e3",
+      "sha256": "ffe4326e040cc4840ff548a41c4efdcc7bec957add677d162e399f4523528d22",
+      "size_bytes": 1280380096
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

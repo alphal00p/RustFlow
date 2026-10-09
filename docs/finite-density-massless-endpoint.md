@@ -5,8 +5,10 @@ This document accompanies the implemented
 read only admitted input definitions, exact routed momenta, target powers and
 original polynomials. It does not use any supplied answer or an evaluated virtual period.
 The general degree-evidence queries retain false numerical-admission flags.
-A separate sealed `MasslessFlowEvidence` covers only the two proved two-loop
-classes and binds the actual boundary/source origin prescription. The native
+A separate sealed `MasslessFlowEvidence` now covers the proved singleton
+UV-meromorphic germ and independent rank-one virtual block classes, including
+the original two-loop null-cone and pure-transfer cases. It binds the actual
+boundary/source origin prescription and the exact structural proof version. The native
 numerical gates remain separate from these algebraic certificates. The
 one-virtual-loop proof below is stronger than the general two-cut degree
 evidence; the two should not be silently identified.
@@ -180,8 +182,9 @@ A broader parametric sector proof is still required.
 
 ## Implemented native integration
 
-`MasslessFlowEvidence` has private variants for the one-virtual null cone and
-pure-compact transfer classes. Its constructor derives the proof from the
+`MasslessFlowEvidence` has private variants for the singleton UV-meromorphic
+germ and independent rank-one virtual block classes. Their reusable proofs are
+recorded in [massless germs and independent blocks](finite-density-massless-germ.md). Its constructor derives the proof from the
 prepared input and actual deformation, and consumers recheck the bound family.
 Public degree-evidence data cannot construct this permit. The joint high-D
 massless origin prescription is part of source and cache identity. Generated
@@ -196,8 +199,11 @@ transports at finite eta and applies the common physical endpoint projector.
 The assembly includes vacuum, both single cuts and the double cut of the
 massless two-loop sunset, including the original raised cut and medium numerator.
 The whole-graph numerical gates are separate from the certificate and boundary
-unit tests listed below. General multiloop degree evidence, including the E7
-example above, still does not authorize four-loop numerical admission.
+unit tests listed below. The general degree query still cannot authorize numerical admission by itself.
+The separate, stronger singleton-germ and independent-block certificates now
+cover every occupied cut of the E7 definition. They do not cover the prism
+multicuts or E8 common-pole prescription. Actual four-loop source closure and
+numerical validation remain separate gates.
 
 
 ## Audit of the entire finite native label set
@@ -210,20 +216,27 @@ to labels which subsequently vanish, so a physical zero cannot mask an invalid
 index domain. Zero required-cut powers give the explicit required-cut zero.
 Positive lower contacts use the dimensional zero-jet origin prescription.
 
-For a singleton occupied loop, set `P=sum max(n_e,0)` over ordinary physical
-slots and `J=n_cut-1+max(H_upper-1,0)`. Nonpositive ordinary indices and completion
-numerators are finite polynomial Gaussian insertions. If P=0, the unconstrained
-virtual polynomial integral is scaleless for every eta; this classification is
-allowed for a generated label and does not replace the sector's native AMF. If
-P>0, record `D/2-P-J>0` and `D-2-2J>0`.
+For a singleton occupied loop with h virtual loops, set
+`P=sum max(n_e,0)` over ordinary physical slots and `J=n_cut-1+max(H_upper-1,0)`. Nonpositive ordinary indices and completion
+numerators are finite polynomial Gaussian insertions. If the active positive virtual routing has rank less than h, at least one
+unconstrained virtual polynomial integration is scaleless for every eta. This
+classification is allowed for a generated label only after validating its
+index domain, and does not replace the sector's native AMF. Full active rank
+records `h*D/2-P-J>0` and `D-2-2J>0`.
 
 For two compact loops, put `J_i=n_cut,i-1+max(H_upper,i-1,0)` and `J=J_1+J_2`.
-A conservative label bound discards numerator improvements and requires
+Let P_b sum the positive powers in virtual block b and P0 those in pure
+transfer factors. A conservative label bound discards numerator improvements
+and requires
 
 ```
-D-2-2J_i-P-J > 0  for each compact radius,
-D/2-1-P-J > 0    for the collinear transfer.
+D/2-P_b-J > 0     for every active virtual block,
+D-2-2J_i-P0-J > 0 for each compact radius,
+D/2-1-P0-J > 0    for the collinear transfer.
 ```
+
+A missing active block is an unrestricted virtual polynomial zero. In the
+original two-loop all-compact case there are no virtual blocks and P0=P.
 
 These follow by bounding every original mass/upper-energy derivative by the
 worst inverse energy power and transfer power. Negative ordinary indices supply
@@ -232,9 +245,11 @@ labels the compact moment is retained. It is never classified as a scaleless
 unrestricted virtual integral.
 
 Every inequality has a strictly positive D coefficient, so every finite label
-set has a nonempty common high-D proof domain. The recorded witness is a half
-integer strictly above all its bounds; its fractional part avoids the
-integer-shifted Gaussian Gamma poles. It is a witness before meromorphic
+set has a nonempty common high-D proof domain. The recorded witness is `n+1/(2h+1)` with `h` replaced by one when there are
+no virtual loops, and integer n above the strict bounds. Then kD/2 is
+nonintegral for every virtual subgraph rank 1<=k<=h. This avoids the
+integer-shifted Gaussian/UV degree poles even when h>=4; a half-integer
+witness alone would fail at h=4. It is a witness before meromorphic
 continuation, not a restriction that later sample dimensions remain large.
 True dimensional poles of the actual finite-eta amplitudes and native source
 conditions are still checked by their numerical/condition owners.
@@ -247,9 +262,10 @@ covers the source program's entire unbounded integer domain.
 The permit stores private fields, binds the complete assigned factor/role and
 routing arrays, shell masses and chemical magnitudes, exact shifts, source
 options and input identity, and is not deserializable. The source factory and
-boundary wrapper both recheck that binding. General four-loop degree evidence
-cannot be converted into this permit. The boundary moment cache distinguishes
-this flow-origin prescription from the existing terminal-only origin mode.
+boundary wrapper both recheck that binding. General four-loop degree evidence cannot be converted into this permit; the
+constructor independently checks the stronger singleton or block structure. The boundary moment cache distinguishes this flow-origin prescription from
+the existing terminal-only origin mode and includes the bound theorem version,
+structural variant, routed rows/block assignments and family identity.
 
 The coordinated native build passed all nine endpoint-certificate unit tests,
 including the sealed permit, genuine loop shear, E7 degree bounds, prism rank

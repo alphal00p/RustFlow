@@ -21,7 +21,7 @@ fn input() -> DensityInput {
 }
 fn identity(input: &str, cut: &[usize]) -> GuardedMeasureIdentity {
     GuardedMeasureIdentity {
-        measure: format!("actual assigned massless sunset input={input}; cut={cut:?}"),
+        measure: format!("actual assigned massless family input={input}; cut={cut:?}"),
         support: "positive separated chemical endpoints; source-origin admission tested separately"
             .into(),
         orientation: "future occupied momenta from exact family routing".into(),
@@ -31,8 +31,8 @@ fn identity(input: &str, cut: &[usize]) -> GuardedMeasureIdentity {
         deformation: "all uncut physical quadratics D-eta; shells and occupations fixed".into(),
     }
 }
-fn source_origin<const N: usize>(cuts: &[usize]) {
-    let input = input().prepare().unwrap();
+fn source_origin<const N: usize>(definition: DensityInput, cuts: &[usize]) {
+    let input = definition.prepare().unwrap();
     let family = input.occupied_cut(cuts, 16).unwrap().at_physical_masses();
     let shifted = (0..family.physical_slots())
         .filter(|&slot| family.roles()[slot] == IndexRole::Ordinary)
@@ -67,6 +67,16 @@ fn source_origin<const N: usize>(cuts: &[usize]) {
         )
         .unwrap();
     assert_eq!(continued.context.physical_arity(), family.factors().len());
+    // The native identity stores GuardedMeasureIdentity as JSON. Compare its
+    // escaped string payload, retaining quotes/backslashes in structural data.
+    let encoded_identity = serde_json::to_string(&evidence.source_identity()).unwrap();
+    assert!(
+        continued
+            .context
+            .sources()
+            .measure_id()
+            .contains(&encoded_identity[1..encoded_identity.len() - 1])
+    );
     assert!(
         continued
             .context
@@ -215,9 +225,20 @@ fn source_origin<const N: usize>(cuts: &[usize]) {
 
 #[test]
 fn one_virtual_massless_origin_requires_its_sealed_prescription() {
-    source_origin::<7>(&[0]);
+    source_origin::<7>(input(), &[0]);
 }
 #[test]
 fn fully_compact_massless_origin_keeps_polynomial_and_storage_domains() {
-    source_origin::<12>(&[0, 1]);
+    source_origin::<12>(input(), &[0, 1]);
+}
+
+#[test]
+fn four_loop_e7_sources_bind_each_sealed_endpoint_variant_and_zero_origin() {
+    let definition: DensityInput = serde_json::from_str(include_str!(
+        "../examples/finite_density/chain_of_three_parallel_pairs.json"
+    ))
+    .unwrap();
+    for cuts in [vec![0], vec![4], vec![0, 4]] {
+        source_origin::<24>(definition.clone(), &cuts);
+    }
 }

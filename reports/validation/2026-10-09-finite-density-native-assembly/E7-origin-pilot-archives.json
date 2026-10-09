@@ -1,0 +1,103 @@
+{
+  "schema": 1,
+  "encoding": "gzip, lossless native program/metadata bytes; mtime=0",
+  "replay": "Restore each original_path before direct native program decoding. Saved hashes bind both exact original bytes and archives.",
+  "files": [
+    {
+      "original_path": "E7-origin-single/native-closure/round-000-provisional.bin",
+      "archive_path": "E7-origin-single/native-closure/round-000-provisional.bin.gz",
+      "original_sha256": "f426e77a9c26e2843492986bd4a3c93dc1219b1acc919c35cc9f94a4cbb75579",
+      "archive_sha256": "a06793595f99f39a510e531d03886f6d454007b7b3dc63f7e24bd7784f99b8a3",
+      "original_bytes": 974087,
+      "archive_bytes": 85439
+    },
+    {
+      "original_path": "E7-origin-single/native-closure/round-000-provisional.json",
+      "archive_path": "E7-origin-single/native-closure/round-000-provisional.json.gz",
+      "original_sha256": "d10f2a69cfd01c68de3a8f98ca6504abce58a5734c3457b505d5b6832a439637",
+      "archive_sha256": "230d8e2b22ab076e0e2ff5a8ccfec2e38404379b23d5900cbc85d61525007c96",
+      "original_bytes": 10626,
+      "archive_bytes": 1748
+    },
+    {
+      "original_path": "E7-origin-single/native-closure/round-001-provisional.bin",
+      "archive_path": "E7-origin-single/native-closure/round-001-provisional.bin.gz",
+      "original_sha256": "f426e77a9c26e2843492986bd4a3c93dc1219b1acc919c35cc9f94a4cbb75579",
+      "archive_sha256": "a06793595f99f39a510e531d03886f6d454007b7b3dc63f7e24bd7784f99b8a3",
+      "original_bytes": 974087,
+      "archive_bytes": 85439
+    },
+    {
+      "original_path": "E7-origin-single/native-closure/round-001-provisional.json",
+      "archive_path": "E7-origin-single/native-closure/round-001-provisional.json.gz",
+      "original_sha256": "18fb36704aacf6c3b56fd65ef4c34bcb02f11401b1d17552a190dbefcc334cc5",
+      "archive_sha256": "5af57585b169e17a6a6684a468d456bb26c56f49d4e80929151753d183e2c96c",
+      "original_bytes": 19732,
+      "archive_bytes": 1929
+    },
+    {
+      "original_path": "E7-origin-single/native-closure/round-002-provisional.bin",
+      "archive_path": "E7-origin-single/native-closure/round-002-provisional.bin.gz",
+      "original_sha256": "a6a3b697548008448c0b1258ab6466e1f04d3ecd8841615b357737288087811a",
+      "archive_sha256": "46bc2b604c72c81b4bf78a644ab2883bc9a53e81f78aadad977cf24809d4de5c",
+      "original_bytes": 945525,
+      "archive_bytes": 81815
+    },
+    {
+      "original_path": "E7-origin-single/native-closure/round-002-provisional.json",
+      "archive_path": "E7-origin-single/native-closure/round-002-provisional.json.gz",
+      "original_sha256": "9e18d00ea4942285928a93c581e93434528551dddd8d01bcaf456e9c16b81daf",
+      "archive_sha256": "079fae97f4e31199227dd72f96ab7af027f5ecb674291e38ce20b393cef392f4",
+      "original_bytes": 55058,
+      "archive_bytes": 2559
+    },
+    {
+      "original_path": "E7-origin-double/native-closure/round-000-provisional.bin",
+      "archive_path": "E7-origin-double/native-closure/round-000-provisional.bin.gz",
+      "original_sha256": "99dbc84b1cd194cc18588b38f484bb486fd5b433b68527ce91e08b7791eda80a",
+      "archive_sha256": "85956b90e9a170bdb5517f337deebefa026c3ce87d35f3f3728af4fee7ce395f",
+      "original_bytes": 1056335,
+      "archive_bytes": 66289
+    },
+    {
+      "original_path": "E7-origin-double/native-closure/round-000-provisional.json",
+      "archive_path": "E7-origin-double/native-closure/round-000-provisional.json.gz",
+      "original_sha256": "71ab5692bcb73b9dbf362aeb725f8a75417e186ac6649a1e6ec2896b6432fa71",
+      "archive_sha256": "c217608ed4de9a78107e42eab8367db551a46b93e2db0d7fd19c2d80ef01aff4",
+      "original_bytes": 12552,
+      "archive_bytes": 1909
+    },
+    {
+      "original_path": "E7-origin-double/native-closure/round-001-provisional.bin",
+      "archive_path": "E7-origin-double/native-closure/round-001-provisional.bin.gz",
+      "original_sha256": "99dbc84b1cd194cc18588b38f484bb486fd5b433b68527ce91e08b7791eda80a",
+      "archive_sha256": "85956b90e9a170bdb5517f337deebefa026c3ce87d35f3f3728af4fee7ce395f",
+      "original_bytes": 1056335,
+      "archive_bytes": 66289
+    },
+    {
+      "original_path": "E7-origin-double/native-closure/round-001-provisional.json",
+      "archive_path": "E7-origin-double/native-closure/round-001-provisional.json.gz",
+      "original_sha256": "7d1e67cbb27d6fa5fef84b26191ec7c9286441adf748f1918992d98ba689cc05",
+      "archive_sha256": "7979548d900a148ab5f161515c59c756da671f9051d4799ffdbce16b8d399cd8",
+      "original_bytes": 21044,
+      "archive_bytes": 2046
+    },
+    {
+      "original_path": "E7-origin-double/native-closure/round-002-provisional.bin",
+      "archive_path": "E7-origin-double/native-closure/round-002-provisional.bin.gz",
+      "original_sha256": "99dbc84b1cd194cc18588b38f484bb486fd5b433b68527ce91e08b7791eda80a",
+      "archive_sha256": "85956b90e9a170bdb5517f337deebefa026c3ce87d35f3f3728af4fee7ce395f",
+      "original_bytes": 1056335,
+      "archive_bytes": 66289
+    },
+    {
+      "original_path": "E7-origin-double/native-closure/round-002-provisional.json",
+      "archive_path": "E7-origin-double/native-closure/round-002-provisional.json.gz",
+      "original_sha256": "36d1e6de687a777c3d937dac36a959e462edb30f1786679d4829cc41b8b6eb11",
+      "archive_sha256": "37c3e49d848e3f7aef02f93cc82ab32950e9f20e2591552de74e8d8433e909cf",
+      "original_bytes": 44397,
+      "archive_bytes": 2442
+    }
+  ]
+}
