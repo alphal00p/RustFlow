@@ -1,0 +1,13 @@
+
+running 1 test
+sunset N=9: native bounded discovery starting
+sunset N=9: DifferentialClosure { round: 0, requested: 4, basis_size: 21, new_derivatives: 14 }
+sunset N=9: DifferentialClosure { round: 1, requested: 18, basis_size: 60, new_derivatives: 40 }
+sunset N=9: DifferentialClosure { round: 2, requested: 58, basis_size: 79, new_derivatives: 38 }
+sunset N=9: DifferentialClosure { round: 3, requested: 96, basis_size: 133, new_derivatives: 53 }
+sunset N=9: DifferentialClosure { round: 4, requested: 149, basis_size: 198, new_derivatives: 74 }
+sunset N=9: unresolved, 11.487s; report=reports/validation/2026-10-09-finite-density-native-assembly/expanded-baseline/sunset-N9
+test physical_sunset_double_cut_native_closure ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 2 filtered out; finished in 11.52s
+

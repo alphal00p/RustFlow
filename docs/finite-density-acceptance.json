@@ -248,6 +248,7 @@
         {
           "input_target": 1,
           "kind": "raised occupied line and polynomial numerator",
+          "raised_physical_slot_zero_based": 0,
           "reference": {
             "status": "required_not_generated",
             "method": "Independent complete thermal-contour/cutting evaluation with independent line masses and distributional mass differentiation; independently implemented sector resolution and arbitrary-precision spatial quadrature after subtraction.",
@@ -877,6 +878,7 @@
         {
           "input_target": 1,
           "kind": "raised occupied line and polynomial numerator",
+          "raised_physical_slot_zero_based": 0,
           "reference": {
             "status": "required_not_generated",
             "method": "Independent complete thermal-contour/cutting evaluation with independent line masses and distributional mass differentiation; independently implemented sector resolution and arbitrary-precision spatial quadrature after subtraction.",
@@ -1212,6 +1214,7 @@
         {
           "input_target": 1,
           "kind": "raised occupied line and polynomial numerator",
+          "raised_physical_slot_zero_based": 1,
           "reference": {
             "status": "required_not_generated",
             "method": "Independent complete thermal-contour/cutting evaluation with independent line masses and distributional mass differentiation; independently implemented sector resolution and arbitrary-precision spatial quadrature after subtraction.",

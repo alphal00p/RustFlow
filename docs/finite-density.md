@@ -216,8 +216,8 @@ four-loop admission theorem or successful evaluation is claimed here.
 
 ## Whole-amplitude normalization check
 
-For an ordinary vacuum contribution with physical powers a_e, define the native
-Minkowski integral with one d^D k/(i pi^(D/2)) measure per loop. Begin with the
+For a contribution with physical powers a_e, define a native virtual loop with
+d^D k/(i pi^(D/2)) measure. Begin with the
 standard Wick map k0=i P0, then reverse all native Minkowski momenta. We choose
 q_M=(-i*P_E0,-P_Espatial), so the Euclidean crossed pole P_E0=+iE maps to future
 q_M0=E. The global Minkowski loop reversal preserves its measure and +i0
@@ -227,26 +227,63 @@ prescription. In this future-shell convention the numerator coordinates map as
 g_E -> -g_M,  u_E -> +i*u_M,  D_E -> -D_M.
 ```
 
-If I_M denotes the native integral with this transformed numerator, the Euclidean
-measure in the oracle gives
+Define each native occupied loop with the independent measure
 
 ```text
-I_E = (-1)^(sum a_e) * (4*pi)^(-L*D/2)
+d^D q/pi^(D/2) * theta(q0) * theta(mu-q0) * C_n(q²-m²),
+C_n(x) = (-1)^(n-1)/(n-1)! * delta^(n-1)(x).
+```
+
+This measure has no total timelike channel or final-state momentum-conservation
+delta. A simple shell integrates to theta(mu-E)/(2E). The original Euclidean
+occupied sign is supplied by (-1)^n on that physical index; higher indices follow
+by independent physical-mass differentiation. Applying an additional per-cut
+minus sign would double-count it. The same quadratic phase applies to virtual
+denominators and negative scalar numerator indices. Medium slots instead retain
+their exact powers of i from the stated Wick map.
+
+For L original loops and k occupied loops, direct comparison of d-dimensional
+spatial measures gives
+
+```text
+native_measure_to_euclidean = (2*pi)^k * (4*pi)^(-L*D/2).
+```
+
+The extra 2*pi per occupied loop comes from replacing an energy contour measure
+by the independent shell distribution. If I_M includes the transformed numerator
+and native C_n distributions, the Euclidean measure in the oracle gives
+
+```text
+I_E = (-1)^(sum a_e) * (2*pi)^k * (4*pi)^(-L*D/2)
       * (exp(gamma)*Lambda_bar²/(4*pi))^(L*eps) * I_M.
 ```
 
 Dividing by the unexpanded reference normalization
 (4*pi)^(-2L)*(Lambda_bar/2)^(2L eps) leaves
-(-1)^(sum a_e)*(4*exp(gamma))^(L eps)*I_M. This is derived for the ordinary
-vacuum term, including its numerator mapping. It is a testable normalization
-identity, not an assumed blanket conversion for occupied cuts. Each occupied
-factor must retain the explicit -theta(mu-E)/(2E) measure above and the remaining
-virtual-loop measure. Existing final-state phase-space formulas have a different
-normalization and a total-channel constraint; they cannot be substituted for an
-independent product of occupied measures.
+(-1)^(sum a_e)*(2*pi)^k*(4*exp(gamma))^(L eps)*I_M. Exact routing Jacobians
+are separate from these measure and index factors. Existing final-state
+phase-space formulas have a different normalization and a total-channel
+constraint; they cannot be substituted for independent occupied measures.
 
-The full massive assembly is required to validate this adapter numerically. The
-massless oracle alone cannot detect an omitted vacuum term.
+`finite_density::normalization` implements the measure conversion, quadratic
+index phase, polynomial Wick map and unexpanded MSbar scale conversion as
+separate exact Symbolica functions. `OccupiedCutFamily` already includes target
+Wick/index phases in its coefficients; callers must apply only the measure and
+routing factors to those targets. `IntegratedOccupiedBoundary` returns the native
+mixed measure above. `CompactShell::raised_moment` instead returns an original
+Euclidean occupied seed, including its physical-line phase and d^d q/(2*pi)^d
+measure. It must not receive the native conversion again.
+
+The normalization regressions exercise massive one-loop vacuum plus occupied
+assembly, raised powers, below/at/above thresholds, and actual mixed and fully
+occupied sunset large-mass coefficients. At D=3, m1=m2=1/2 and mu=1, the leading
+Euclidean mixed and fully occupied sunset coefficients are respectively
+-1/(64*pi²) and +1/(64*pi²), obtained independently from occupied and uniform
+Gaussian seeds. These are boundary coefficients, not the sunset at its physical
+endpoint. The complete massive multiloop assembly remains required; a massless
+oracle cannot detect an omitted massive vacuum term. Current command results are
+recorded in the separate
+[`native-assembly` validation report](../reports/validation/2026-10-09-finite-density-native-assembly/README.md).
 
 ## Current native input path and supported scope
 
@@ -286,8 +323,15 @@ The Python host exposes `prepare_finite_density(input_json, cut_budget=65536)`
 with the same preparation report. A successful preparation does not establish
 contour admission or evaluation accuracy. The documented limitation is explicit:
 there is no complete native finite-density AMF evaluator in this implementation
-stage. Weighted derivative closure, integrated recursive soft boundaries,
-complete-amplitude continuation and the numerical acceptance gates remain open.
+stage. Native weighted source discovery closes the two single-cut massive
+sunset systems with 17 and 13 masters, but the attempted fully occupied system
+exhausted its provisional-frontier budget before numerical evaluation. Generic
+weighted closure, integrated recursive soft boundaries, complete-amplitude
+continuation and the numerical acceptance gates remain open.
+The native vacuum and first occupied-cut endpoints for both massive targets
+have separately passed independent-reference comparisons at D=12/5, including
+working-precision, series-order and occupied-start-scale changes. This does not
+assemble the omitted second single-cut and two-cut contributions.
 Standalone polynomial compact-shell seeds do not evaluate retained virtual
 poles or assemble a multiloop amplitude.
 
@@ -308,11 +352,24 @@ be checked independently of the bounded compact-series stopping criterion.
 
 | Mandatory result | Current scope and missing evidence |
 | --- | --- |
-| Complete nonfactorized small graph | Input and cut combinatorics available; no assembled 0/1/2-cut numerical amplitude |
-| Generic weighted reduction | Guarded sources/replay infrastructure available; derivative closure for the requested vacuum families unresolved |
-| Integrated occupied boundaries | Projected factors and matching extensions available; generic retained soft poles and recursive weighted values unresolved |
-| Regulated common-contour continuation | Sufficient positive-real-t admission derived for the massive sunset and its independent-mass neighborhood; general admission and pinch/branch resolution unimplemented |
-| Full massive normalization | Ordinary vacuum mapping derived; full massive assembly and independent numerical check missing |
+| Complete nonfactorized small graph | Vacuum and first single-cut endpoints pass independent comparison at D=12/5; full native attempt failed in two-cut closure, with no assembled 0/1/2-cut prediction |
+| Generic weighted reduction | Native sources/replay close both sunset single-cut systems; fully occupied and four-loop closure remain unresolved |
+| Integrated occupied boundaries | Polynomial compact and recursively integrated hard coefficients verified; generic retained soft poles and recursive weighted values unresolved |
+| Regulated common-contour continuation | Massive sunset and routing-dependent heavy-edge sufficient domains derived; see [contour certificates](finite-density-contours.md); thresholds, massless pinches and general admission remain separate |
+| Full massive normalization | Native mixed-measure/Wick adapters and massive seed/boundary regressions implemented; full massive multiloop assembly still missing |
 | Physical endpoint reconstruction | Existing ordinary rational projection retained; finite-density evaluation-path cancellation/divergence/depth integration tests missing |
 | Three four-loop families | Exact distinct graph certificates and target definitions available; predictions and required supplemental raised-line references absent |
-| Ten stable Laurent digits | Precision criteria recorded; no finite-density multiloop stability report or numerical oracle comparison |
+| Ten stable Laurent digits | Fixed-dimension vacuum/single-cut precision, order and start-scale refinements pass; no complete-amplitude Laurent stability or numerical oracle comparison |
+
+An independent validation-only reference for both complete massive sunset targets
+has been generated at D=12/5 using direct Schwinger/Feynman parameters and compact
+quadrature. All 12 components/totals passed node and working-precision refinement;
+the generator reads no AMF values or oracle answers. A separate validation-only
+script subsequently compared the saved native vacuum and first single-cut
+predictions for both targets across four configurations. All 16 comparisons and
+12 independent refinement checks pass the 1e-12 relative criterion; the largest
+relative reference discrepancy is 2.399e-30. These results do not establish the
+complete amplitude or Laurent coefficients at epsilon=0. See the
+[reference derivation](finite-density-reference.md) and the
+[native-assembly report](../reports/validation/2026-10-09-finite-density-native-assembly/README.md)
+for exact measurements, source provenance and failure records.

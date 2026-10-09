@@ -1,0 +1,177 @@
+{
+  "status": "recorded_assertion_gates_passed",
+  "scope": "shared numerical owner regressions, source geometry and exact native closed-basis preparation; no completed full occupied amplitude evaluation",
+  "check": {
+    "command": "nix develop --command cargo check --locked --release --tests",
+    "passed": true,
+    "elapsed_seconds": 14.7
+  },
+  "build": {
+    "command": "nix develop --command cargo test --locked --release --lib --test finite_density_closure --test finite_density_native_flow --test finite_density_boundary --test finite_density_flow_boundary --test finite_density_normalization --test core --test frobenius --test mixed_cut_flow --test recursive --test physical_transport --no-run",
+    "elapsed_seconds": 385,
+    "scope": "release compilation/linking, separate from test runtimes"
+  },
+  "gates": [
+    {
+      "name": "finite_density_unit",
+      "passed": 13,
+      "failed": 0,
+      "runtime_seconds": 0.05
+    },
+    {
+      "name": "cut_regions_unit",
+      "passed": 1,
+      "failed": 0,
+      "runtime_seconds": 0.03
+    },
+    {
+      "name": "frobenius_cache_unit",
+      "passed": 3,
+      "failed": 0,
+      "runtime_seconds": 0.02
+    },
+    {
+      "name": "boundary_unit",
+      "passed": 12,
+      "failed": 0,
+      "runtime_seconds": 0.01
+    },
+    {
+      "name": "physical_weighted_context",
+      "passed": 1,
+      "failed": 0,
+      "runtime_seconds": 0.05
+    },
+    {
+      "name": "core",
+      "passed": 13,
+      "failed": 0,
+      "runtime_seconds": 1.35
+    },
+    {
+      "name": "frobenius",
+      "passed": 8,
+      "failed": 0,
+      "runtime_seconds": 0.09
+    },
+    {
+      "name": "mixed_cut_flow",
+      "passed": 6,
+      "failed": 0,
+      "runtime_seconds": 4.83
+    },
+    {
+      "name": "recursive",
+      "passed": 19,
+      "failed": 0,
+      "runtime_seconds": 23.75
+    },
+    {
+      "name": "physical_transport",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.52
+    },
+    {
+      "name": "occupied_boundary",
+      "passed": 3,
+      "failed": 0,
+      "runtime_seconds": 0.09
+    },
+    {
+      "name": "occupied_flow_boundary",
+      "passed": 2,
+      "failed": 0,
+      "runtime_seconds": 0.1
+    },
+    {
+      "name": "normalization",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.31
+    }
+  ],
+  "passed": 89,
+  "failed": 0,
+  "summed_test_runtime_seconds": 31.2,
+  "physical_native_diagnostics": [
+    {
+      "case": "N7",
+      "profile": "baseline",
+      "result": "unresolved",
+      "runtime_seconds": 0.087271185,
+      "rounds": 4,
+      "basis_or_provisional_size": 104,
+      "native_rules": 15,
+      "peak_rss_kib": 12356,
+      "artifacts": "baseline/sunset-N7",
+      "interpretation": "diagnostic harness pass is not a claim of closed derivative flow unless result=closed"
+    },
+    {
+      "case": "N9",
+      "profile": "baseline",
+      "result": "unresolved",
+      "runtime_seconds": 0.804361239,
+      "rounds": 4,
+      "basis_or_provisional_size": 42,
+      "native_rules": 20,
+      "peak_rss_kib": 12344,
+      "artifacts": "baseline/sunset-N9",
+      "interpretation": "diagnostic harness pass is not a claim of closed derivative flow unless result=closed"
+    },
+    {
+      "case": "N7",
+      "profile": "expanded-baseline",
+      "result": "unresolved",
+      "runtime_seconds": 3.036841858,
+      "rounds": 8,
+      "basis_or_provisional_size": 50,
+      "native_rules": 471,
+      "peak_rss_kib": 12356,
+      "artifacts": "expanded-baseline/sunset-N7",
+      "interpretation": "diagnostic harness pass is not a claim of closed derivative flow unless result=closed"
+    },
+    {
+      "case": "N9",
+      "profile": "expanded-baseline",
+      "result": "unresolved",
+      "runtime_seconds": 11.487281106,
+      "rounds": 6,
+      "basis_or_provisional_size": 314,
+      "native_rules": 393,
+      "peak_rss_kib": 12356,
+      "artifacts": "expanded-baseline/sunset-N9",
+      "interpretation": "diagnostic harness pass is not a claim of closed derivative flow unless result=closed"
+    },
+    {
+      "case": "N7",
+      "profile": "deep-baseline",
+      "result": "closed",
+      "runtime_seconds": 3.744062562,
+      "rounds": 4,
+      "basis_or_provisional_size": 28,
+      "native_rules": 1294,
+      "peak_rss_kib": 15400,
+      "artifacts": "deep-baseline/sunset-N7",
+      "interpretation": "diagnostic harness pass is not a claim of closed derivative flow unless result=closed"
+    },
+    {
+      "case": "N9",
+      "profile": "deep-baseline",
+      "result": "unresolved",
+      "runtime_seconds": 41.365756563,
+      "rounds": 3,
+      "basis_or_provisional_size": 281,
+      "native_rules": 2358,
+      "peak_rss_kib": 30764,
+      "artifacts": "deep-baseline/sunset-N9",
+      "interpretation": "diagnostic harness pass is not a claim of closed derivative flow unless result=closed"
+    }
+  ],
+  "source_snapshot": "compiled-source-hashes.json",
+  "next_source_changes_not_tested_by_this_report": [
+    "strictly positive mass lower-energy support zero domains",
+    "minimum compact boundary guard digits",
+    "configurable independent contour start scale"
+  ]
+}

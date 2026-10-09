@@ -1,0 +1,32 @@
+{
+  "scope": "Changed source/input/document files read from the staged Git index; individual validation reports retain their executed snapshots. This does not label unresolved full-amplitude runs as passed.",
+  "base_commit": "530b7c8c1607e3f7388a37efdbfe6db516686b14",
+  "sha256": {
+    "docs/finite-density-acceptance.json": "2328773587069e6d6993ac2978dd0baa73540ad6aeb15b7907d744f4d2992fd5",
+    "docs/finite-density-contours.md": "815951ed931e92e1a51b6855865175d1795a9ea3784352271309a0db1312c7af",
+    "docs/finite-density-reference.md": "d4bef0877b8b84cfa16220acac7f927a29d2bc3c293dbad5e8dc6d2141642bb2",
+    "docs/finite-density.md": "3ea87435f352c2b54a8e0a65b4ca1ba2e5bdaaee610f481704e4d33b3d793fd1",
+    "examples/finite_density/triangular_prism.json": "7b408e421ebef0a056c2005763f813dd8e60d7ebaf807fbddedde8114f3ceb0e",
+    "src/cut_regions.rs": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d",
+    "src/engine.rs": "92e55df9f1d8ef0163539bb07e9d13e44a592269ed7ba86da2e24989b6c1e501",
+    "src/engine/connection.rs": "a811272984bfb8b085803367c01c09a180e6333b6399d0b7a134703eda8d3a67",
+    "src/finite_density/boundary.rs": "6ee06ecd01e0a551add6251b9855f2c741c3918811fa52fa197bf39b2ea8aaf6",
+    "src/finite_density/flow.rs": "fbf7cafd05f779eecd4aa11ef168ff088bf71630c38423239677e3386053422d",
+    "src/finite_density/flow_boundary.rs": "60cc89e13d1a35e56850fc12d5c3c2b6b5b4fc777ffeca2c04e5fd548889df0d",
+    "src/finite_density/geometry.rs": "d7f7623d9a9f5eab9460ed3a20317790df650ac356deae7ac0d45afdbe13974d",
+    "src/finite_density/guarded.rs": "fcf51a7e4d1e761a21fcb0f0993f77a8610a1721b30205ae58c1ced76b238191",
+    "src/finite_density/mod.rs": "2b5536eb53d8d3580d21fe421e1a3032f76c3211c6c50a07b98e7bd74335a1bf",
+    "src/finite_density/normalization.rs": "ddc541d4dc8c41f7b58fd620592b35489a0fd7dbe3195c79ea4046f34d53ff54",
+    "src/finite_density/preparation.rs": "3373b239793acfc76866f70e1860628204b1a34398a99929cf4dc416cace16b6",
+    "src/finite_density/reduction.rs": "0318b1bc0a296842fffaba49db85379e9f74e03a3ceef8b48c635cbd05efeb1a",
+    "src/finite_density/vacuum.rs": "4a56eae8d3d23d0e164d2cc64882f83c6f96a4266d097943846d60623fc3649e",
+    "tests/finite_density_boundary.rs": "5a9fc94a6d6d91ef9b7a8d31ce9029d13ed2ba9255757455b8529111c326fe0e",
+    "tests/finite_density_closure.rs": "ff6d18445b6bb7cf0846169742095f7549e2e8f53b6c2d36c51ed9958bca1469",
+    "tests/finite_density_flow_boundary.rs": "c62f2d66f9fd7c0159d2d72c52412814532798ec2b214a5e1674e037397fb2c1",
+    "tests/finite_density_native_flow.rs": "bd7ebae58a3d58501c94a0c6fc85bc8d50d370e343d935bfbe995059eacf2f49",
+    "tests/finite_density_normalization.rs": "f22382e4a7dc7189b36df809a0c7810c4591141063fe9a56f8ffd8d476a13062",
+    "tests/finite_density_reference.rs": "a14d9ee576c90c1eee52327afd8c471a50423a08d129ca6ee2ad8fb87f5a8b8e",
+    "tools/finite_density/acceptance_manifest.py": "40d1fd96d12313397b3b7e6b34bcac14363967aeb0431fd9ee6c630423b20abe",
+    "tools/finite_density/compare_massive_reference.py": "621026e2870ce9ed675d22e54e07b1e29dce036d67b607ff501134c682007018"
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "status": "all_recorded_assertion_gates_passed",
+  "scope": "support, admitted-domain and original-pole safeguards; shared transport regression; independent reference generation. No complete physical finite-density amplitude evaluated successfully yet.",
+  "source_snapshot": "support-source-hashes.json",
+  "check": {
+    "command": "nix develop --command cargo check --locked --release --tests",
+    "elapsed_seconds": 13.1,
+    "passed": true
+  },
+  "build": {
+    "command": "nix develop --command cargo test --locked --release --lib --test finite_density_closure --test finite_density_native_flow --test finite_density_boundary --test finite_density_flow_boundary --test finite_density_normalization --test finite_density_reference --test core --test mixed_cut_flow --test physical_transport --no-run",
+    "elapsed_seconds": 385,
+    "scope": "release compile/link only"
+  },
+  "gates": [
+    {
+      "name": "finite_density_unit",
+      "passed": 14,
+      "failed": 0,
+      "runtime_seconds": 0.03,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "frobenius_cache_unit",
+      "passed": 3,
+      "failed": 0,
+      "runtime_seconds": 0.09,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "physical_target_domain_support",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.08,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "core",
+      "passed": 13,
+      "failed": 0,
+      "runtime_seconds": 1.4,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "mixed_cut_flow",
+      "passed": 6,
+      "failed": 0,
+      "runtime_seconds": 4.88,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "physical_transport",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.54,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "occupied_boundary",
+      "passed": 3,
+      "failed": 0,
+      "runtime_seconds": 0.09,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "occupied_flow_boundary",
+      "passed": 2,
+      "failed": 0,
+      "runtime_seconds": 0.1,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "normalization",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.369,
+      "runtime_scope": "prebuilt process wall time from owner"
+    },
+    {
+      "name": "independent_reference",
+      "passed": 2,
+      "failed": 0,
+      "runtime_seconds": 5.0437,
+      "runtime_scope": "prebuilt process wall time from owner"
+    }
+  ],
+  "passed": 55,
+  "failed": 0,
+  "physical_native_diagnostics": [
+    {
+      "case": "N7",
+      "result": "closed",
+      "runtime_seconds": 1.438072092,
+      "rounds": 3,
+      "native_rules": 622,
+      "native_rule_applications": 1433,
+      "basis_or_provisional_size": 17,
+      "peak_rss_kib": 12372,
+      "artifacts": "support-aware/sunset-N7",
+      "interpretation": "Only result=closed certifies finite target and derivative closure; no independence/minimality or numerical evaluation claim."
+    },
+    {
+      "case": "N9",
+      "result": "unresolved",
+      "runtime_seconds": 53.443446757,
+      "rounds": 7,
+      "native_rules": 628,
+      "native_rule_applications": 8657,
+      "basis_or_provisional_size": 267,
+      "peak_rss_kib": 30748,
+      "artifacts": "support-aware/sunset-N9",
+      "interpretation": "Only result=closed certifies finite target and derivative closure; no independence/minimality or numerical evaluation claim."
+    }
+  ],
+  "deeper_N9_diagnostic": {
+    "status": "unresolved",
+    "depth": 4,
+    "domain_budget": 32768,
+    "round_limit": 12,
+    "frontier_limit": 256,
+    "rounds": 7,
+    "frontier_size": 268,
+    "runtime_seconds": 88.369204869,
+    "peak_rss_kib": 33852,
+    "artifacts": "support-depth4/sunset-N9",
+    "interpretation": "Depth and domain expansion did not close this source presentation. Native recentering certificates and remaining sources stay explicit; no upstream defect is asserted."
+  }
+}

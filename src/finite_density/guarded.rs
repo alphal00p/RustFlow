@@ -125,6 +125,23 @@ pub struct GuardedAtomReduction<const N: usize> {
 }
 
 impl<const N: usize> GuardedContext<N> {
+    /// Attach concrete measure-owner zero evidence before discovery. The native
+    /// owner binds these exact domains into application and persisted replay;
+    /// no ordinary sector census or algebraic rank inference is involved.
+    pub(crate) fn with_measure_zero_domains(self, domains: Vec<IndexDomain<N>>) -> Result<Self> {
+        let sources = Arc::try_unwrap(self.sources).map_err(|_| {
+            Error::InvalidInput(
+                "measure zero evidence must be attached before guarded discovery".into(),
+            )
+        })?;
+        let sources = sources
+            .with_zero_domains(domains)
+            .map_err(|error| Error::Reduction(error.to_string()))?;
+        Ok(Self {
+            sources: Arc::new(sources),
+        })
+    }
+
     /// Lower native Symbolica expressions onto one exact coefficient map.
     /// Index symbols occur first; parameters follow in the supplied order.
     /// Rational source coefficients are cleared exactly, retaining all poles.
@@ -145,13 +162,25 @@ impl<const N: usize> GuardedContext<N> {
         let variables = Arc::new(symbols.into_iter().map(PolyVariable::Symbol).collect());
         let mut sources = Vec::with_capacity(identities.len());
         for identity in identities {
+            // Preserve the domains of the supplied Atom syntax before the
+            // rational polynomial owner cancels removable factors. A caller
+            // that simplified earlier must provide those conditions explicitly.
+            let raw_poles = crate::physical_conditions::rational_denominator_conditions(
+                &identity
+                    .terms
+                    .iter()
+                    .map(|term| term.coefficient.clone())
+                    .chain(identity.nonzero_conditions.iter().cloned())
+                    .collect::<Vec<_>>(),
+                &distinct,
+            )?;
             let coefficients = identity
                 .terms
                 .iter()
                 .map(|term| native_coefficient(&term.coefficient, &variables))
                 .collect::<Result<Vec<_>>>()?;
             let mut conditions = Vec::new();
-            for condition in &identity.nonzero_conditions {
+            for condition in identity.nonzero_conditions.iter().chain(&raw_poles) {
                 let converted = native_coefficient(condition, &variables)?;
                 if converted.numerator.is_zero() {
                     return Err(Error::InvalidInput(
@@ -401,6 +430,80 @@ mod tests {
         assert_eq!(uncovered.unresolved.len(), 1);
         let invalid = restored.reduce([1, -1], Default::default()).unwrap();
         assert_eq!(invalid.unresolved.len(), 1);
+    }
+
+    #[test]
+    fn uncancelled_source_and_condition_denominators_remain_required() {
+        let a = symbol!("guarded_raw_poles_a");
+        let b = symbol!("guarded_raw_poles_b");
+        let x = symbol!("guarded_raw_poles_x");
+        let variable = Atom::var(x);
+        let coefficient = (variable.pow(2) - Atom::one()) / (&variable - Atom::one());
+        let condition = (variable.pow(2) - Atom::num(4)) / (&variable - Atom::num(2));
+        assert!(
+            (coefficient.together().cancel() - (&variable + Atom::one()))
+                .expand()
+                .is_zero()
+        );
+        let context = GuardedContext::new(
+            measure(),
+            [IndexRole::RequiredCut, IndexRole::Occupation],
+            [a, b],
+            vec![x],
+            vec![GuardedIdentity {
+                id: "removable-source-and-condition-poles".into(),
+                terms: vec![
+                    GuardedIdentityTerm {
+                        shift: [0, 0],
+                        coefficient: coefficient.clone(),
+                    },
+                    GuardedIdentityTerm {
+                        shift: [-1, 1],
+                        coefficient: -coefficient,
+                    },
+                ],
+                domain: IndexDomain::new([
+                    IndexBounds::new(Some(2), None).unwrap(),
+                    IndexBounds::fixed(0),
+                ])
+                .unwrap(),
+                nonzero_conditions: vec![condition],
+            }],
+        )
+        .unwrap();
+        for forbidden in [1, 2] {
+            let replacements = BTreeMap::from([(variable.clone(), Atom::num(forbidden))]);
+            assert!(
+                context.sources().sources()[0]
+                    .nonzero_conditions
+                    .iter()
+                    .any(|condition| {
+                        crate::family::substitute(&condition.to_expression(), &replacements)
+                            .is_zero()
+                    })
+            );
+        }
+        let found = context
+            .discover(
+                vec![
+                    IndexDomain::new([
+                        IndexBounds::new(Some(2), None).unwrap(),
+                        IndexBounds::fixed(0),
+                    ])
+                    .unwrap(),
+                ],
+                [[1, 1]],
+                Default::default(),
+            )
+            .unwrap();
+        let reduced = found.program.reduce([2, 0], Default::default()).unwrap();
+        assert!(reduced.unresolved.is_empty());
+        for forbidden in [1, 2] {
+            let replacements = BTreeMap::from([(variable.clone(), Atom::num(forbidden))]);
+            assert!(reduced.nonzero_conditions.iter().any(|condition| {
+                crate::family::substitute(condition, &replacements).is_zero()
+            }));
+        }
     }
 
     #[test]

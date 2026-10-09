@@ -1,0 +1,9 @@
+
+running 4 tests
+test massive_one_loop_vacuum_and_occupied_seeds_assemble_in_euclidean_units ... ok
+test massive_sunset_integrated_boundaries_convert_to_euclidean_seed_products ... ok
+test small_graph_cut_phases_and_medium_wick_factors_are_applied_once ... ok
+test unexpanded_msbar_conversion_matches_every_cut_multiplicity ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.35s
+

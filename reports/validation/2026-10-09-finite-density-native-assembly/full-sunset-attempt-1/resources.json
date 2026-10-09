@@ -1,0 +1,13 @@
+{
+  "command": [
+    "target/release/deps/finite_density_native_flow-2ad25996bc8f14af",
+    "--ignored",
+    "--nocapture"
+  ],
+  "exit_code": 101,
+  "wall_seconds": 59.270479761995375,
+  "user_seconds": 58.532762,
+  "system_seconds": 0.254461,
+  "peak_child_rss_kib": 33848,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

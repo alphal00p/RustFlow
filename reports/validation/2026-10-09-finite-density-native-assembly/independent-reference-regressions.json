@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "command": [
+    "target/release/deps/finite_density_reference-260f072e795f3803",
+    "--include-ignored",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "started_utc": "2026-10-09T17:19:19.917719+00:00",
+  "exit_code": 0,
+  "wall_seconds": 5.043659319635481,
+  "maximum_rss_kib": 12292,
+  "measurement_scope": "direct linked independent reference test binary; compilation excluded; all quadrature nodes, kernels and precision refinements included",
+  "oracle_records_read": 0,
+  "feature_predictions_read": 0
+}

@@ -1,0 +1,15 @@
+{
+  "schema": 1,
+  "command": [
+    "target/release/deps/finite_density_normalization-d2c3def69c1fec57",
+    "--test-threads=1",
+    "--nocapture"
+  ],
+  "started_utc": "2026-10-09T17:19:19.526095+00:00",
+  "exit_code": 0,
+  "wall_seconds": 0.3690077909268439,
+  "maximum_rss_kib": 12328,
+  "measurement_scope": "direct refreshed linked integration-test binary; compilation excluded; four tests include native preparation/evaluation and internal caches",
+  "source_identity_report": "support-source-hashes.json",
+  "numerical_oracle_records_compared": 0
+}

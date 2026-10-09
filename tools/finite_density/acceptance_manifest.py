@@ -155,6 +155,9 @@ def artifacts():
         e=len(edges)
         signatures=record['loop_signatures']
         graph=certificate(edges,ROUTINGS[:e],signatures)
+        raised_slot=next(j for j,charge in enumerate(graph['edge_charges']) if charge)
+        raised_powers=[1]*e
+        raised_powers[raised_slot]=2
         native={
             'name':name,'loops':4,'vertices':graph['vertices'],
             'edges':[{'vertices':ends,'routing':[str(x) for x in ROUTINGS[j]],
@@ -164,7 +167,7 @@ def artifacts():
             'numerator_convention':'shifted_euclidean','laurent_orders':[-4,0],'digits':12,
             'targets':[{'powers':target['denominator_powers'][:e],
                         'numerator':target['numerator_polynomial']},
-                       {'powers':[2]+[1]*(e-1),'numerator':'g1_2^2+g1_3*g2_4'}],
+                       {'powers':raised_powers,'numerator':'g1_2^2+g1_3*g2_4'}],
         }
         file=f'examples/finite_density/{name}.json'
         outputs[file]=native
@@ -182,6 +185,7 @@ def artifacts():
                               'absolute_uncertainties':record.get('uncertainties', {}),
                               'comparison_precision':{'I37':'Exact symbolic coefficients at supplied orders; 10-digit numerical comparison target.', 'I91':'Finite coefficient has supplied absolute uncertainty 1/1000; independent prediction still requires 10-digit stability.', 'I115':'Finite coefficient has supplied absolute uncertainty 1/10^10; independent prediction still requires 10-digit stability.'}[record_id]}},
                 {'input_target':1,'kind':'raised occupied line and polynomial numerator',
+                 'raised_physical_slot_zero_based':raised_slot,
                  'reference':{'status':'required_not_generated',
                               'method':'Independent complete thermal-contour/cutting evaluation with independent line masses and distributional mass differentiation; independently implemented sector resolution and arbitrary-precision spatial quadrature after subtraction.',
                               'target_absolute_uncertainty':'1/10^12',

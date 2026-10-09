@@ -6,6 +6,7 @@ use rayon::prelude::*;
 use std::collections::BTreeMap;
 use symbolica::prelude::*;
 
+pub(crate) mod connection;
 mod euclidean;
 mod frobenius_cache;
 mod supplied;
@@ -229,153 +230,37 @@ impl PreparedFlow {
                 "prepared system belongs to a different epsilon sample".into(),
             ));
         }
-        options.validate()?;
-        context.cancellation.check()?;
-        let digits = options
-            .digits
-            .checked_add(options.guard_digits)
-            .ok_or_else(|| Error::InvalidInput("precision overflow".into()))?;
-        let p = Precision::decimal(digits)?;
-        let parameters =
-            ahash::HashMap::from_iter([(Atom::var(self.family.epsilon), p.rational(eps))]);
-        // Preserve original rational denominator domains before cancellation,
-        // then specialize epsilon exactly. Floating substitution can miss an
-        // identically zero eta-dependent condition at a rational sample.
-        let epsilon_rule =
-            BTreeMap::from([(Atom::var(self.family.epsilon), Atom::num(eps.clone()))]);
-        let guards = crate::physical_conditions::canonical_conditions(
-            &self.reduced.nonzero_conditions,
-            &std::collections::BTreeSet::from([
-                self.system.variable,
-                self.family.epsilon,
-                crate::family::imaginary_parameter(),
-            ]),
-        )?
-        .iter()
-        .map(|condition| {
-            let specialized = crate::family::substitute(condition, &epsilon_rule)
-                .together()
-                .cancel();
-            if specialized.is_zero() {
-                return Err(Error::Reduction(format!(
-                    "a reduction nonzero condition vanishes identically at epsilon={eps}"
-                )));
-            }
-            Ok(specialized)
-        })
-        .collect::<Result<Vec<_>>>()?;
-        if self.reduced.basis.is_empty() {
-            return Ok(vec![p.zero(); self.reduced.targets.len()]);
+        connection::ConnectionTransport {
+            preparations: self.frobenius_preparations.clone(),
         }
-        let stage = |name: &str| {
-            context.emit(Progress::Stage {
-                name: format!(
-                    "{name} ({} masters, {} loops)",
-                    self.reduced.basis.len(),
-                    self.family.loops.len()
-                ),
-            })
-        };
-        stage("compiling the auxiliary-mass differential equation")?;
-        let mut compiled = self.system.compile(p, &parameters)?;
-        compiled.exclude_polynomials(&guards)?;
-        stage("constructing the expansion at auxiliary-mass infinity")?;
-        let mut infinity = self
-            .frobenius_preparations
-            .get(&self.system, true, context)?
-            .evaluate(p, &parameters, options.series_order, context)?;
-        self.lift_exponents(&mut infinity)?;
-        ensure_generic_indicial(&infinity, &parameters)?;
-        stage("generating and matching native asymptotic boundary regions")?;
-        let constants = boundary.constants_with_deformation(
-            &self.family,
-            &self.reduced.basis,
-            &self.deformation_mask,
-            eps,
-            p,
-            &infinity,
-        )?;
-        let maximum = compiled
-            .poles
-            .iter()
-            .map(|v| p.norm(v))
-            .fold(p.real(1), |a, b| if a > b { a } else { b });
-        let direction = if options.prescription == Prescription::PlusI0 {
-            -1
-        } else {
-            1
-        };
-        let positive_mass_contour = self
-            .positive_mass_contour
-            .as_ref()
-            .is_some_and(|original| original == &format!("{:?}", self.family));
-        let start = if positive_mass_contour {
-            ComplexFloat::new(maximum * 8, p.real(0))
-        } else {
-            ComplexFloat::new(p.real(0), maximum * (8 * direction))
-        };
-        let at_start = infinity.evaluate(&p.div(&p.i(1), &start), &parameters)?;
-        let initial = at_start
-            .iter()
-            .map(|row| {
-                row.iter()
-                    .zip(&constants)
-                    .fold(p.zero(), |s, (v, c)| p.add(&s, &p.mul(v, c)))
-            })
-            .collect();
-        let minimum = compiled
-            .poles
-            .iter()
-            .map(|v| p.norm(v))
-            .filter(|v| *v > p.real(0))
-            .fold(p.real(1), |a, b| if a < b { a } else { b });
-        let end = if positive_mass_contour {
-            ComplexFloat::new(minimum / 8, p.real(0))
-        } else {
-            ComplexFloat::new(p.real(0), (minimum / 8) * direction)
-        };
-        let path = compiled.plan_path(&start, &end, -direction)?;
-        stage("transporting the auxiliary-mass solution")?;
-        let transported = compiled.transport(
-            &BoundaryData {
-                point: start,
-                values: initial,
+        .evaluate(
+            connection::ConnectionRequest {
+                system: &self.system,
+                reduced: &self.reduced,
+                epsilon: self.family.epsilon,
+                loops: self.family.loops.len(),
+                positive_mass_contour: self
+                    .positive_mass_contour
+                    .as_ref()
+                    .is_some_and(|original| original == &format!("{:?}", self.family)),
+                restrict_to_right_half_plane: false,
+                start_scale: 8,
             },
-            &path,
+            eps,
             options,
             context,
-        )?;
-        stage("constructing the physical endpoint expansion")?;
-        let mut endpoint = self
-            .frobenius_preparations
-            .get(&self.system, false, context)?
-            .evaluate(p, &parameters, options.series_order, context)?;
-        self.lift_exponents(&mut endpoint)?;
-        ensure_generic_indicial(&endpoint, &parameters)?;
-        let constants = endpoint.match_values(&end, &transported.values, &parameters)?;
-        stage("extracting the dimensionally regulated physical limit")?;
-        // Reduction coefficients are multiplied into endpoint series before
-        // selecting the physical constant; poles in these coefficients matter.
-        self.reduced
-            .targets
-            .iter()
-            .map(|target| {
-                let weights = self
-                    .reduced
-                    .basis
-                    .iter()
-                    .map(|i| target.get(i).cloned().unwrap_or_default())
-                    .collect::<Vec<_>>();
-                project_limit(
-                    &endpoint,
-                    &constants,
-                    &weights,
-                    self.family.epsilon,
-                    self.system.variable,
-                    &parameters,
+            |basis| self.lift_exponents(basis),
+            |infinity, p| {
+                boundary.constants_with_deformation(
+                    &self.family,
+                    &self.reduced.basis,
+                    &self.deformation_mask,
+                    eps,
+                    p,
+                    infinity,
                 )
-            })
-            .collect()
+            },
+        )
     }
 }
 
