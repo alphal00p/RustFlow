@@ -1,0 +1,19 @@
+{
+  "command": [
+    "timeout",
+    "90s",
+    "env",
+    "PROBE_DOMAINS=8192",
+    "/tmp/e7_native_domain_probe_target_rays",
+    "/tmp/e7-origin-single.bin",
+    "single",
+    "target-rays",
+    "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/resumed-target-rays/single-8192.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.0897287377156317,
+  "user_seconds": 1.036097,
+  "system_seconds": 0.04682,
+  "peak_child_rss_kib": 33792,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

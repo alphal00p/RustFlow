@@ -59,6 +59,7 @@ impl Run {
                 max_interval_width: setting("RUSTFLOW_WEIGHTED_GUARD_WIDTH", 2),
             },
             split_ordinary_zero_faces: setting("RUSTFLOW_WEIGHTED_ZERO_FACES", false),
+            requested_index_rays: setting("RUSTFLOW_WEIGHTED_REQUESTED_RAYS", false),
             checkpoints: Some(report.join("native-closure")),
             ..Default::default()
         };

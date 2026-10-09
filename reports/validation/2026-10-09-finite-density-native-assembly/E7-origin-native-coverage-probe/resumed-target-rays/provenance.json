@@ -1,0 +1,102 @@
+{
+  "binary": {
+    "path": "/tmp/e7_native_domain_probe_target_rays",
+    "sha256": "d5ed4a02b47ae0471032c96820568e98c21c3e1906751a5bcae75776941e9a0d",
+    "matches_saved": true
+  },
+  "source": {
+    "path": "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/native-domain-probe-target-rays.rs",
+    "sha256": "9199050a1e2307d2388c156f63513311110ae84ae1183d0c677fc6b28ba284e4",
+    "matches_saved": true
+  },
+  "guarded_source_comparison": [
+    {
+      "file": "boundary_tests.rs",
+      "sha256": "21972a7b635771ce85ccc2853934764d9d24658fe7101ab74e9f7938087b8902",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "domain.rs",
+      "sha256": "8093c7efcd71a018e503943dd990f402daa509ee0a36f9cac0165ecd16fb7e14",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "lifecycle.rs",
+      "sha256": "113bb11f12b371f7e9a8ce2c96225aca077222dafa1533d13dae30def19d82d4",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "mod.rs",
+      "sha256": "99f9f81c057b8f29c19a54e07d8feb096d838dd2a8940f4b9d269c103291953e",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "model.rs",
+      "sha256": "0e47864e4c0bb7e452cb86aa71188be98bf1a52d00a8f156a56ba6da27232af2",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "persistence.rs",
+      "sha256": "64e6f0faf201c61f68ddb8d74351d35c6d037d69dfafd5216c97efc0980eb219",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "reference_conversion.rs",
+      "sha256": "289afaaa82d7377f2f6755e971a6475e24da87040d2d93cfadda8744950dfdae",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "reference_cut_conversion.rs",
+      "sha256": "963169d7ea08a1dac11be7719cfe36b9c8f19af73e2642a18c3c2eb4bdcd7d60",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "reference_cut_plan.rs",
+      "sha256": "22064bf68d256eb8a4f1aa40665c4a3efdfb2d85418256bc4aa73ea0a3676467",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "reference_routing.rs",
+      "sha256": "addc518522ce8aeddad1491b78f194eb5d888d867da15963ebe635dd2012781c",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "reference_spatial.rs",
+      "sha256": "bc09544825b53f32421ee9412b4087153fb0426498873d7e34dd9495adbd3699",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "reference_validation.rs",
+      "sha256": "4beb0c395a95e21a8f99f5024e2e09521bc3e196663c74f95a69ac08078dd790",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "reference_weighted_spatial.rs",
+      "sha256": "8a14b9fed258d3b32ca8d6e6f3ae6c2677ef73537d3dbdb7b809201ff9047199",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "replay.rs",
+      "sha256": "7885b037c6cc20b9e0dacf6d6a1a6b87a240d0c0fdff9fda558b4824d58a2ae8",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "search.rs",
+      "sha256": "d323ab1ed0b86c48d5776688e25b765438f61db6266da1256cba50761be3c201",
+      "matches_git_78969aa": true
+    },
+    {
+      "file": "tests.rs",
+      "sha256": "365f711ff38441cea1afa5180b6ba2db1b63113d8b558af9295bd41a8da50115",
+      "matches_git_78969aa": true
+    }
+  ],
+  "single": {
+    "raw_program_sha256": "a6a3b697548008448c0b1258ab6466e1f04d3ecd8841615b357737288087811a",
+    "archive": "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-single/native-closure/round-002-provisional.bin.gz"
+  },
+  "double": {
+    "raw_program_sha256": "99dbc84b1cd194cc18588b38f484bb486fd5b433b68527ce91e08b7791eda80a",
+    "archive": "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-double/native-closure/round-002-provisional.bin.gz"
+  }
+}

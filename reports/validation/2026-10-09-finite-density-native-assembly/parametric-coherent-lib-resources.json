@@ -1,0 +1,15 @@
+{
+  "command": [
+    "env",
+    "RUSTFLOW_PARAMETRIC_EVIDENCE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-coherent",
+    "target/release/deps/symbolica_amflow-6c032eef1649ac2e",
+    "finite_density::",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 4.587083225138485,
+  "user_seconds": 7.414648,
+  "system_seconds": 0.26338,
+  "peak_child_rss_kib": 61304,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

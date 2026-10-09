@@ -1,0 +1,86 @@
+{
+  "lossless": true,
+  "restore": "gzip -dk ARCHIVE.gz",
+  "entries": [
+    {
+      "original": "E7-rays-double-off/native-closure/round-000-provisional.bin",
+      "archive": "E7-rays-double-off/native-closure/round-000-provisional.bin.gz",
+      "original_bytes": 6098095,
+      "archive_bytes": 491734,
+      "original_sha256": "57ac00eedf8ea2411f610a04c1f34141b5f2946e575ddb8f9d2bafb1d4e71ef4",
+      "archive_sha256": "b191e7dcccc4354d140afc0abc68c82aa7114ef21ebd7cfc10bb2a52fb2ac0c5"
+    },
+    {
+      "original": "E7-rays-double-off/native-closure/round-000-provisional.json",
+      "archive": "E7-rays-double-off/native-closure/round-000-provisional.json.gz",
+      "original_bytes": 45339,
+      "archive_bytes": 2812,
+      "original_sha256": "46e0be7bb4096e3fb2a0f06bb8c35347dee49e537a8ef9699d9f1c501ccbbfef",
+      "archive_sha256": "4c1e921a01850dcbfb28c419a9db70a11e9d20f4fea8989a16254ece9bd588c4"
+    },
+    {
+      "original": "E7-rays-double-off-resources.log",
+      "archive": "E7-rays-double-off-resources.log.gz",
+      "original_bytes": 268,
+      "archive_bytes": 214,
+      "original_sha256": "278d8171cd1f72a62662324193e9afd172d989c46564f3622fd4c0c0b510ef3a",
+      "archive_sha256": "2bc185ec2e0a80934e64d4a40e660dc71175b93d35b9b2164168fff9c2fe2eed"
+    },
+    {
+      "original": "E7-rays-double-on/native-closure/round-000-provisional.bin",
+      "archive": "E7-rays-double-on/native-closure/round-000-provisional.bin.gz",
+      "original_bytes": 4145996,
+      "archive_bytes": 345761,
+      "original_sha256": "97c04730c60c8836489b8a1f86af2d36105d6ea0bf59ff930c36185681494af6",
+      "archive_sha256": "1eb1725780988fb946d5e735da4c602268373c312f279000ca0153f3d0b602b6"
+    },
+    {
+      "original": "E7-rays-double-on/native-closure/round-000-provisional.json",
+      "archive": "E7-rays-double-on/native-closure/round-000-provisional.json.gz",
+      "original_bytes": 25296,
+      "archive_bytes": 2372,
+      "original_sha256": "75634b1ea117f79d0b15c0093cecdefd89a0067875294df64f0b7cb0946a1207",
+      "archive_sha256": "c17ab9dfdc1f80fd328babfefdd30e826ef851071bc1046f69bf3670af8c8079"
+    },
+    {
+      "original": "E7-rays-double-on/native-closure/round-001-provisional.bin",
+      "archive": "E7-rays-double-on/native-closure/round-001-provisional.bin.gz",
+      "original_bytes": 2307461,
+      "archive_bytes": 146520,
+      "original_sha256": "784efb20d6d44064be06f91a762d723e675ad6e827cb23f224718cdf043233df",
+      "archive_sha256": "78bd82e0d5570498b39b496638eea6d82dfc093bc5cefb849b1eb706ca3ca624"
+    },
+    {
+      "original": "E7-rays-double-on/native-closure/round-001-provisional.json",
+      "archive": "E7-rays-double-on/native-closure/round-001-provisional.json.gz",
+      "original_bytes": 132102,
+      "archive_bytes": 4521,
+      "original_sha256": "75b397d8af30888d1dcca5507fb7c100368911f025907b8ecd7cd299d04ca72b",
+      "archive_sha256": "1e1901edb439804e49d14f36394e864b9f219ea5385f5805ac418a2a243a1084"
+    },
+    {
+      "original": "E7-rays-double-on/native-closure/round-002-provisional.bin",
+      "archive": "E7-rays-double-on/native-closure/round-002-provisional.bin.gz",
+      "original_bytes": 1588802,
+      "archive_bytes": 67003,
+      "original_sha256": "2224a38a80fe8d6a5cd008919a9974dbd733e26d5bf1fbeb16d99d2952403369",
+      "archive_sha256": "7d29c8dc23e7cf45b449cdf40db2ce4919bac43654b6294a24d7fab7945e2970"
+    },
+    {
+      "original": "E7-rays-double-on/native-closure/round-002-provisional.json",
+      "archive": "E7-rays-double-on/native-closure/round-002-provisional.json.gz",
+      "original_bytes": 370676,
+      "archive_bytes": 8653,
+      "original_sha256": "3794727232a62fb502cdfe53db13d8581285e16bc03ae611eeae7ca59260f474",
+      "archive_sha256": "10009c638a93e1fd728bb5e1f5abc87ba882ba4f5bd93aa0c861afc83a659171"
+    },
+    {
+      "original": "E7-rays-double-on-resources.log",
+      "archive": "E7-rays-double-on-resources.log.gz",
+      "original_bytes": 1923,
+      "archive_bytes": 653,
+      "original_sha256": "73ddfb6c512a639a3e2267d0ee7af9abca837b42a3ef769580f5c62201c0de78",
+      "archive_sha256": "b46336337d6a01a2f765c8d0329fc407f3b040b93d95da38b25ed1862572f9fe"
+    }
+  ]
+}

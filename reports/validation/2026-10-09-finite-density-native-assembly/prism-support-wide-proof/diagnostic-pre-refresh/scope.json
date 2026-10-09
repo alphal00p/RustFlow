@@ -1,0 +1,26 @@
+{
+  "status": "diagnostic only; coherent fingerprint rerun pending",
+  "scope": "This binary compiled the new query module but its build-script PORT_SOURCE_DIGEST preceded the last approved primary-budget edit. This is not a final coherent-source validation claim.",
+  "tests_passed": 3,
+  "tests_failed": 0,
+  "harness_seconds": 1.48,
+  "resource_report": "query-resources.json",
+  "independent_exact_support_comparisons": 192,
+  "production_admission_changed": false,
+  "earlier_resources_json": "resources.json/log records an old pre-vendoring binary filter matching zero tests; not counted",
+  "current_module_sha256": "a9117b009397c6652bc517fa7c9741cd343dd1b86e4d36620c8f39b51826f481",
+  "native_evidence_files": {
+    "prism-cuts-1-7-supports.json": {
+      "bytes": 1849579,
+      "sha256": "5333fda21f59cfcc7bc935941f25a155a78569cd5e1f3b893406b7dba62e8435"
+    },
+    "prism-cuts-1-5-supports.json": {
+      "bytes": 1849451,
+      "sha256": "87dfd44a9f595dd92823916e5cac3c794fc5526d0f933d18f82e41635ba038af"
+    },
+    "prism-cuts-5-7-supports.json": {
+      "bytes": 1849515,
+      "sha256": "c48eca0d5a592222ed7a653f320f4b251b228bc7fd30617cafa2d394c39a8770"
+    }
+  }
+}

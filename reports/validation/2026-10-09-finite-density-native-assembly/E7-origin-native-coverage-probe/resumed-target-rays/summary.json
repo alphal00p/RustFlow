@@ -1,0 +1,168 @@
+{
+  "scope": "Previously compiled diagnostic, matching archived binary/source SHA256 and unchanged vendored guarded sources; complete historical program replay before target-anchored symbolic-ray native discovery. No new source identities, no numerical prediction, no closed-family claim.",
+  "source_revision": "RustRed78969aab524b7d6a2eec36f59b01e9af1e04cc04",
+  "vendor_checkpoint": "d03ca69",
+  "timing_scope": "discovery_seconds from diagnostic excludes native replay/export; process resources include replay/export but exclude Nix startup and compilation",
+  "cases": [
+    {
+      "case": "single",
+      "max_domains": 256,
+      "historical_rules_replayed": 1650,
+      "source_count": 84,
+      "application": "Applied { rule: 61 }",
+      "new_rules": 185,
+      "discovery_gap_counts": {
+        "DomainBudget": 87
+      },
+      "discovery_seconds": 0.317761072,
+      "reduction_rule_applications": 1,
+      "child_residual_terms": 15,
+      "conditions": [
+        "15-10*epsilon",
+        "1920-1280*epsilon",
+        "960-640*epsilon",
+        "-3+2*epsilon",
+        "30-20*epsilon"
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "PROBE_DOMAINS=256",
+          "/tmp/e7_native_domain_probe_target_rays",
+          "/tmp/e7-origin-single.bin",
+          "single",
+          "target-rays",
+          "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/resumed-target-rays/single-256.json"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.6087574590928853,
+        "user_seconds": 0.57135,
+        "system_seconds": 0.034198,
+        "peak_child_rss_kib": 27656,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "detail": "single-256.json.gz",
+      "program": "single-256.json.bin.gz"
+    },
+    {
+      "case": "single",
+      "max_domains": 8192,
+      "historical_rules_replayed": 1650,
+      "source_count": 84,
+      "application": "Applied { rule: 61 }",
+      "new_rules": 390,
+      "discovery_gap_counts": {},
+      "discovery_seconds": 0.743705184,
+      "reduction_rule_applications": 1,
+      "child_residual_terms": 15,
+      "conditions": [
+        "15-10*epsilon",
+        "1920-1280*epsilon",
+        "960-640*epsilon",
+        "-3+2*epsilon",
+        "30-20*epsilon"
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "PROBE_DOMAINS=8192",
+          "/tmp/e7_native_domain_probe_target_rays",
+          "/tmp/e7-origin-single.bin",
+          "single",
+          "target-rays",
+          "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/resumed-target-rays/single-8192.json"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0897287377156317,
+        "user_seconds": 1.036097,
+        "system_seconds": 0.04682,
+        "peak_child_rss_kib": 33792,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "detail": "single-8192.json.gz",
+      "program": "single-8192.json.bin.gz"
+    },
+    {
+      "case": "double",
+      "max_domains": 256,
+      "historical_rules_replayed": 874,
+      "source_count": 328,
+      "application": "Unresolved(NoApplicableRule)",
+      "new_rules": 92,
+      "discovery_gap_counts": {
+        "DomainBudget": 164
+      },
+      "discovery_seconds": 1.01532288,
+      "reduction_rule_applications": 0,
+      "child_residual_terms": 1,
+      "conditions": [],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "PROBE_DOMAINS=256",
+          "/tmp/e7_native_domain_probe_target_rays",
+          "/tmp/e7-origin-double.bin",
+          "double",
+          "target-rays",
+          "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/resumed-target-rays/double-256.json"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.2779854550026357,
+        "user_seconds": 1.245825,
+        "system_seconds": 0.02473,
+        "peak_child_rss_kib": 24604,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "detail": "double-256.json.gz",
+      "program": "double-256.json.bin.gz"
+    },
+    {
+      "case": "double",
+      "max_domains": 8192,
+      "historical_rules_replayed": 874,
+      "source_count": 328,
+      "application": "Applied { rule: 244 }",
+      "new_rules": 1275,
+      "discovery_gap_counts": {},
+      "discovery_seconds": 9.929019502,
+      "reduction_rule_applications": 1,
+      "child_residual_terms": 12,
+      "conditions": [
+        "-6+4*epsilon",
+        "4*epsilon*eta-6*eta",
+        "-1536+1024*epsilon",
+        "-3+2*epsilon",
+        "1024*epsilon*eta-1536*eta",
+        "-12+8*epsilon"
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "env",
+          "PROBE_DOMAINS=8192",
+          "/tmp/e7_native_domain_probe_target_rays",
+          "/tmp/e7-origin-double.bin",
+          "double",
+          "target-rays",
+          "reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/resumed-target-rays/double-8192.json"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 10.722363805864006,
+        "user_seconds": 10.567571,
+        "system_seconds": 0.077684,
+        "peak_child_rss_kib": 79896,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "detail": "double-8192.json.gz",
+      "program": "double-8192.json.bin.gz"
+    }
+  ],
+  "comparison": "At8192domains target rays finish with390single/1275double rules and0gaps. Earlier zero-face double3652rules/0gaps34.166s vs target-rays9.929s, but concurrent load differs and only these target-domain corpora are compared. Resulting children remain explicit unresolved."
+}

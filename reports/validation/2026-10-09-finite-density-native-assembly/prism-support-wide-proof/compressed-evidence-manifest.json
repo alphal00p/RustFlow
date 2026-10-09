@@ -1,0 +1,65 @@
+{
+  "compression": "lossless gzip level9 mtime0; decompression equality verified before original removal",
+  "files": [
+    {
+      "scope": "diagnostic-only-not-counted",
+      "logical_file": "diagnostic-pre-refresh/prism-cuts-1-5-supports.json",
+      "compressed_file": "diagnostic-pre-refresh/prism-cuts-1-5-supports.json.gz",
+      "uncompressed_bytes": 1849451,
+      "compressed_bytes": 67474,
+      "uncompressed_sha256": "87dfd44a9f595dd92823916e5cac3c794fc5526d0f933d18f82e41635ba038af",
+      "compressed_sha256": "078897b03852afd04a77763cbd5b86ef4ea2d8e06eeef3aec9d6dabf9e8f67ca",
+      "gzip_mtime": 0
+    },
+    {
+      "scope": "diagnostic-only-not-counted",
+      "logical_file": "diagnostic-pre-refresh/prism-cuts-1-7-supports.json",
+      "compressed_file": "diagnostic-pre-refresh/prism-cuts-1-7-supports.json.gz",
+      "uncompressed_bytes": 1849579,
+      "compressed_bytes": 65991,
+      "uncompressed_sha256": "5333fda21f59cfcc7bc935941f25a155a78569cd5e1f3b893406b7dba62e8435",
+      "compressed_sha256": "f4e2a7d23b29a03f77235f6f1dbc2183e35642565ce00a7933d30e14637bd46b",
+      "gzip_mtime": 0
+    },
+    {
+      "scope": "diagnostic-only-not-counted",
+      "logical_file": "diagnostic-pre-refresh/prism-cuts-5-7-supports.json",
+      "compressed_file": "diagnostic-pre-refresh/prism-cuts-5-7-supports.json.gz",
+      "uncompressed_bytes": 1849515,
+      "compressed_bytes": 66637,
+      "uncompressed_sha256": "c48eca0d5a592222ed7a653f320f4b251b228bc7fd30617cafa2d394c39a8770",
+      "compressed_sha256": "67077907889d3bb721efbfe5ad778d3498f5a31f92a000b5c660ce9ed89f0eb7",
+      "gzip_mtime": 0
+    },
+    {
+      "scope": "coherent-native-query",
+      "logical_file": "native-coherent/prism-cuts-1-5-supports.json",
+      "compressed_file": "native-coherent/prism-cuts-1-5-supports.json.gz",
+      "uncompressed_bytes": 1849451,
+      "compressed_bytes": 67474,
+      "uncompressed_sha256": "87dfd44a9f595dd92823916e5cac3c794fc5526d0f933d18f82e41635ba038af",
+      "compressed_sha256": "078897b03852afd04a77763cbd5b86ef4ea2d8e06eeef3aec9d6dabf9e8f67ca",
+      "gzip_mtime": 0
+    },
+    {
+      "scope": "coherent-native-query",
+      "logical_file": "native-coherent/prism-cuts-1-7-supports.json",
+      "compressed_file": "native-coherent/prism-cuts-1-7-supports.json.gz",
+      "uncompressed_bytes": 1849579,
+      "compressed_bytes": 65991,
+      "uncompressed_sha256": "5333fda21f59cfcc7bc935941f25a155a78569cd5e1f3b893406b7dba62e8435",
+      "compressed_sha256": "f4e2a7d23b29a03f77235f6f1dbc2183e35642565ce00a7933d30e14637bd46b",
+      "gzip_mtime": 0
+    },
+    {
+      "scope": "coherent-native-query",
+      "logical_file": "native-coherent/prism-cuts-5-7-supports.json",
+      "compressed_file": "native-coherent/prism-cuts-5-7-supports.json.gz",
+      "uncompressed_bytes": 1849515,
+      "compressed_bytes": 66637,
+      "uncompressed_sha256": "c48eca0d5a592222ed7a653f320f4b251b228bc7fd30617cafa2d394c39a8770",
+      "compressed_sha256": "67077907889d3bb721efbfe5ad778d3498f5a31f92a000b5c660ce9ed89f0eb7",
+      "gzip_mtime": 0
+    }
+  ]
+}

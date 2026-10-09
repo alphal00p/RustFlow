@@ -1556,7 +1556,7 @@ pub struct MasslessFlowEvidence {
     class: CertifiedEndpointClass,
 }
 
-fn bound_family_signature(family: &super::geometry::OccupiedCutFamily) -> Vec<String> {
+pub(crate) fn bound_family_signature(family: &super::geometry::OccupiedCutFamily) -> Vec<String> {
     let mut signature = vec![
         format!(
             "loops={};physical={};input={}",

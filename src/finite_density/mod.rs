@@ -18,6 +18,7 @@ pub mod massless_contour;
 pub mod massless_endpoint;
 pub mod measure;
 pub mod normalization;
+pub mod parametric_endpoint;
 pub mod preparation;
 pub mod reduction;
 pub mod terminal;

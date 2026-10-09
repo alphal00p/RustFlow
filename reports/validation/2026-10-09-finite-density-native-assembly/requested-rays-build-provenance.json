@@ -1,0 +1,17 @@
+{
+  "captured_utc": "2026-10-09T22:14:25.297709+00:00",
+  "scope": "coherent buildscript source identities after the final primary-budget edit; binaries are separately SHA256 hashed before each launch",
+  "snapshot": "reports/validation/2026-10-09-finite-density-native-assembly/requested-rays-source-hashes.json",
+  "snapshot_sha256": "4dc43b1d01aec50b50f123e1fe8354cbe2713505b3d5fc4f02c015c1f8fce64d",
+  "source_files_verified": 1807,
+  "changed_files": [],
+  "build_output": "target/release/build/symbolica-amflow-5130bc8702e2f88e/output",
+  "build_output_sha256": "6020bb4814adc3f767287fb4014c64ac4c2da17afc43a0c59627e6542448ef39",
+  "build_output_mtime_ns": 1791583687436247904,
+  "last_module_edit_mtime_ns": 1791583165714882947,
+  "identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "c31e31785917492e6324a9e111d76463d04b4dd155fd1d0a25d31bd6d56179d9",
+    "RUSTRED_SOURCE_DIGEST": "5441816b514f0daa7efc1c94f9f9291e16a8b4ddd111c188858b0c011e3ce069",
+    "PORT_SOURCE_DIGEST": "1ab648dff5e4fa147134b76bbdd014a641b476e05213d2b0a60945e11a224b1c"
+  }
+}

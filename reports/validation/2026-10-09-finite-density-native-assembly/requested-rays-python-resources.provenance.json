@@ -1,0 +1,15 @@
+{
+  "captured_utc": "2026-10-09T22:14:13.384649+00:00",
+  "command": [
+    "target/release/deps/python_finite_density-86655a919328faf8",
+    "--nocapture"
+  ],
+  "argument_files": {
+    "target/release/deps/python_finite_density-86655a919328faf8": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/python_finite_density-86655a919328faf8",
+      "sha256": "1aea506c89b2d360dfff8c7a43e49e7c8f7dae75fd76ef6b09da0bc605d2efdd",
+      "size_bytes": 1224087936
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

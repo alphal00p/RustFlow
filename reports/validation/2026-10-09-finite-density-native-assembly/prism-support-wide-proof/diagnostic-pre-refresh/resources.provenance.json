@@ -1,0 +1,23 @@
+{
+  "captured_utc": "2026-10-09T22:08:31.905234+00:00",
+  "command": [
+    "env",
+    "RUSTFLOW_PARAMETRIC_EVIDENCE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/diagnostic-pre-refresh",
+    "target/release/deps/symbolica_amflow-1bdbc910fbb47b04",
+    "finite_density::parametric_endpoint::",
+    "--nocapture"
+  ],
+  "argument_files": {
+    "env": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "target/release/deps/symbolica_amflow-1bdbc910fbb47b04": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/symbolica_amflow-1bdbc910fbb47b04",
+      "sha256": "98bce6734ec06ae7a0f1d399e13686fd4441211bcef923d06aa47c16d7c1b2ed",
+      "size_bytes": 1249505008
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

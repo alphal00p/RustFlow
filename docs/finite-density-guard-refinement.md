@@ -53,6 +53,17 @@ retain the native source proofs and guards.
 
 ## Recorded validation
 
+The opt-in `requested_index_rays` policy starts each positive index at its
+requested value, each negative index at its requested upper bound, and fixes
+zero indices to zero. Nonzero axes remain symbolic rays. Its boxes are subsets
+of the usual sign sectors and are intersected with the same physical admitted
+domain. The policy only directs native discovery; all subsequent remainders,
+conditions, and final derivative/target replay obligations remain unchanged.
+It defaults to false. The runtime graph harness accepts
+`RUSTFLOW_WEIGHTED_REQUESTED_RAYS=true`; each round checkpoint records the
+policy. Narrowed coverage is not a claim that the surrounding sign sector has
+been solved.
+
 The initial 2026-10-09 standalone validation used `legacy-lorentz` sources,
 polynomial completion powers, native depth 3/domain budget 8192, and refinement
 limits 3/256/2, without requesting constant frontier sectors:

@@ -1,0 +1,218 @@
+{
+  "schema": 1,
+  "captured_utc": "2026-10-09T22:21:30.848082+00:00",
+  "status": "regressions_passed_four_loop_closure_unresolved",
+  "base_commit": "f57ff4fc5085865032839d0f2e50dc881a85eb56",
+  "changes": [
+    "opt-in requested-index symbolic rays in native guarded discovery",
+    "query-only exact native Symanzik and complete joint-eta sector evidence, all192 prism two-cut supports"
+  ],
+  "physical_admission_expanded": false,
+  "native_rustred_fix_in_base": "NoApplicableRule residual coefficients combined exactly; all other failure classes and all application conditions retained",
+  "nonignored_regression_tests_passed": 75,
+  "ignored_runtime_numerical_gates_passed": 3,
+  "native_support_polynomial_comparisons_passed": 192,
+  "full_four_loop_numerical_acceptance_gates_passed": 0,
+  "supplied_oracle_numerical_records_compared": 0,
+  "validation_reports": {
+    "parametric-coherent-boundary-gates.json": "d91598b0ac2193aa929e6688733605d50db5d4069e86c2465e711569f620e0ae",
+    "requested-rays-source-fingerprint-resources.json": "dc79e490580c022a5747e6ec880f11f8c2c838ea24ecb8eaadb7903b9ce441e5",
+    "requested-rays-python-resources.json": "07c9897a588a107be8ea78a9e9fd6f19796c501373d1db4f1cd7f1ac7c4bb9da",
+    "requested-rays-massless-sources-resources.json": "60cc3e699001d1bcc24cf161e3fa96d07c561628ebd45cb970c3fb9cce580c85",
+    "requested-rays-massless-fixed-resources.json": "2afa77d17346f15f9f145bc6aff1ebd533230eee3adc4cf0560a960dd92643a9",
+    "requested-rays-massless-laurent-resources.json": "c258f878edf65ef4141ef62e1532ce35c9d26107b7f3d3fa3b5d0399c50f779f",
+    "requested-rays-massive-regression-resources.json": "ec2f25cdd25ccb2193bbad4cc4216ee1d19546730a7ba32f1ec417866d158ed4",
+    "requested-rays-source-hashes.json": "4dc43b1d01aec50b50f123e1fe8354cbe2713505b3d5fc4f02c015c1f8fce64d",
+    "requested-rays-build-provenance.json": "eeb5448b9ba5511a4a812b7f14f508eec7222db2c78aa9c5654126ccde92c77a",
+    "requested-rays-root-archive-manifest.json": "d4ab57aedac346354b09b248c78ca2a3ca9591f94a91e03c3beb46ad686c175b",
+    "E7-rays-double-archives.json": "56bbf275e8ef155fa7e176187bf5c16e5f14727649791e20ccf95a964fcc3822"
+  },
+  "numerical_comparisons": [
+    {
+      "report": "requested-rays-massless-fixed-comparison.json",
+      "sha256": "909ca09137140490aa535eaf756b5a9d052670bfceba6ed31390219e6de06ef1",
+      "status": "passed",
+      "reference_comparison_count": 40,
+      "independent_refinement_comparison_count": 30
+    },
+    {
+      "report": "requested-rays-massless-laurent-comparison.json",
+      "sha256": "f7444c48d870dee8a5fed97e9165034b3b6848e2934af85fd394e460354f8f06",
+      "status": "passed",
+      "reference_comparison_count": 30,
+      "independent_refinement_comparison_count": 24
+    },
+    {
+      "report": "requested-rays-massive-regression-comparison.json",
+      "sha256": "011ff745c208fe11016a159e74ca6a68e328ae348a188dd62b531b981793b856",
+      "status": "passed",
+      "reference_comparison_count": 10,
+      "historical_same_profile_comparison_count": 10,
+      "independent_refinement_comparison_count": 0
+    }
+  ],
+  "four_loop_controls": [
+    {
+      "name": "E7-rays-single-off",
+      "status": "unresolved",
+      "numerical_acceptance": false,
+      "rounds": [
+        {
+          "round": 0,
+          "requested_count": 5,
+          "frontier_count": 318,
+          "metadata": "E7-rays-single-off/native-closure/round-000-provisional.json.gz",
+          "sha256": "d6d3ea07208be73aa1bc2673aaf3bf2b4ef580188ea65f3cc106b17d70867bca"
+        },
+        {
+          "round": 1,
+          "requested_count": 1175,
+          "frontier_count": 1726,
+          "metadata": "E7-rays-single-off/native-closure/round-001-provisional.json.gz",
+          "sha256": "abf236a0159f9b36b6ba153b029ebb04311c2bf96d768f60f67bdc805069face"
+        }
+      ],
+      "failure": {
+        "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted provisional-frontier budget exhausted; rounds=2, provisional=1726, unresolved_terms=14673; first residual indices/reasons=[([1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 2, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 3, 0, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 1, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 0, 2, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 1, 0, 1, 2, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 0, 3, 0, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+        "numerical_acceptance": false,
+        "stage": "occupied preparation"
+      },
+      "resource_report": "E7-rays-single-off-resources.json",
+      "resource_sha256": "3257e2dc6c0a1be8d0b54e797173c7ca8a3f02ebfae45fc55ac47339d6a5f631",
+      "resources": {
+        "exit_code": 101,
+        "wall_seconds": 150.23617998277768,
+        "user_seconds": 148.801693,
+        "system_seconds": 0.23818699999999998,
+        "peak_child_rss_kib": 141312,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    {
+      "name": "E7-rays-single-on",
+      "status": "unresolved",
+      "numerical_acceptance": false,
+      "rounds": [
+        {
+          "round": 0,
+          "requested_count": 5,
+          "frontier_count": 106,
+          "metadata": "E7-rays-single-on/native-closure/round-000-provisional.json.gz",
+          "sha256": "0baa487591971e618fbde50043ae92b206e67cef0cea7f62045212e5ecae1da4"
+        },
+        {
+          "round": 1,
+          "requested_count": 502,
+          "frontier_count": 538,
+          "metadata": "E7-rays-single-on/native-closure/round-001-provisional.json.gz",
+          "sha256": "d4b6e892621ce4a65e5d50bea59af961d4e129810765af287dcccbce8ff577b4"
+        },
+        {
+          "round": 2,
+          "requested_count": 1736,
+          "frontier_count": 1608,
+          "metadata": "E7-rays-single-on/native-closure/round-002-provisional.json.gz",
+          "sha256": "245b6b074b7d1422aba56fd702b797ccd6f9ef148efbf9175df3a6fdc44fedd5"
+        }
+      ],
+      "failure": {
+        "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted provisional-frontier budget exhausted; rounds=3, provisional=1608, unresolved_terms=1789; first residual indices/reasons=[([1, 0, 1, 0, 2, 1, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 2, 1, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 2, 1, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 2, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 2, 2, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 2, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 3, 1, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, 0, 1, 0, 3, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+        "numerical_acceptance": false,
+        "stage": "occupied preparation"
+      },
+      "resource_report": "E7-rays-single-on-resources.json",
+      "resource_sha256": "ff44a9ac8b92ec6b60ce1e0883ba1420de4020e859a648377686ed4e6b15d534",
+      "resources": {
+        "exit_code": 101,
+        "wall_seconds": 41.72297604708001,
+        "user_seconds": 41.175996,
+        "system_seconds": 0.193987,
+        "peak_child_rss_kib": 89220,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    {
+      "name": "E7-rays-double-off",
+      "status": "unresolved",
+      "numerical_acceptance": false,
+      "rounds": [
+        {
+          "round": 0,
+          "requested_count": 5,
+          "frontier_count": 172,
+          "metadata": "E7-rays-double-off/native-closure/round-000-provisional.json.gz",
+          "sha256": "4c1e921a01850dcbfb28c419a9db70a11e9d20f4fea8989a16254ece9bd588c4"
+        }
+      ],
+      "failure": {
+        "stage": "process time limit",
+        "exit_code": 124
+      },
+      "resource_report": "E7-rays-double-off-resources.json",
+      "resource_sha256": "ca4f5b8d265d5f19b7e7e089abd2af368aac9013d7f9afce697d688ac7ac47fb",
+      "resources": {
+        "exit_code": 124,
+        "wall_seconds": 180.01769504416734,
+        "user_seconds": 178.164344,
+        "system_seconds": 0.332012,
+        "peak_child_rss_kib": 117624,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    },
+    {
+      "name": "E7-rays-double-on",
+      "status": "unresolved",
+      "numerical_acceptance": false,
+      "rounds": [
+        {
+          "round": 0,
+          "requested_count": 5,
+          "frontier_count": 68,
+          "metadata": "E7-rays-double-on/native-closure/round-000-provisional.json.gz",
+          "sha256": "c17ab9dfdc1f80fd328babfefdd30e826ef851071bc1046f69bf3670af8c8079"
+        },
+        {
+          "round": 1,
+          "requested_count": 318,
+          "frontier_count": 308,
+          "metadata": "E7-rays-double-on/native-closure/round-001-provisional.json.gz",
+          "sha256": "1e1901edb439804e49d14f36394e864b9f219ea5385f5805ac418a2a243a1084"
+        },
+        {
+          "round": 2,
+          "requested_count": 962,
+          "frontier_count": 899,
+          "metadata": "E7-rays-double-on/native-closure/round-002-provisional.json.gz",
+          "sha256": "10009c638a93e1fd728bb5e1f5abc87ba882ba4f5bd93aa0c861afc83a659171"
+        }
+      ],
+      "failure": {
+        "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: weighted derivative closure round budget exhausted; rounds=3, provisional=899, unresolved_terms=1060; first residual indices/reasons=[([1, -1, 1, 1, 1, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 2, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 2, 3, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 3, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 3, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 1, 1, 4, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 2, 1, 2, 1, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule), ([1, -1, 1, 2, 1, 2, 2, 0, -1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], NoApplicableRule)]",
+        "numerical_acceptance": false,
+        "stage": "occupied preparation"
+      },
+      "resource_report": "E7-rays-double-on-resources.json",
+      "resource_sha256": "545ae833dc4232b4fea71979a386460a2ea31a36a2c15b079b306fc14c880b62",
+      "resources": {
+        "exit_code": 101,
+        "wall_seconds": 123.69182991515845,
+        "user_seconds": 122.243854,
+        "system_seconds": 0.31482299999999996,
+        "peak_child_rss_kib": 128828,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      }
+    }
+  ],
+  "measurement_scope": "prebuilt child processes, excluding compilation and Nix startup; concurrent jobs on shared host, not isolated performance benchmarks",
+  "next_work": [
+    "native target-priority domain queue with exact unresolved coverage",
+    "off-null independent mass polynomial evidence and finite-label physical admission",
+    "complete independent four-loop references and native numerical gates"
+  ],
+  "limitations": [
+    "E7 closure unresolved despite smaller early frontiers",
+    "query evidence is not a thermal contour or physical endpoint permit",
+    "prism reference under independent validation; no accepted full coefficients",
+    "E8 common thermal prescription unresolved"
+  ]
+}

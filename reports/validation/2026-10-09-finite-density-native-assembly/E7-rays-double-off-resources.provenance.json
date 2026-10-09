@@ -1,0 +1,45 @@
+{
+  "captured_utc": "2026-10-09T22:15:45.799108+00:00",
+  "command": [
+    "timeout",
+    "180s",
+    "env",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/chain_of_three_parallel_pairs.json",
+    "RUSTFLOW_WEIGHTED_CUTS=0,4",
+    "RUSTFLOW_WEIGHTED_ROUNDS=3",
+    "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+    "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+    "RUSTFLOW_WEIGHTED_DEPTH=3",
+    "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=false",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-rays-double-off",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=1/8",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=18:60:8",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "env": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+      "sha256": "68f3fe948cb0b351bf13f93e641e8ad6cd40aae2cc89b2da342a05aaa52f42db",
+      "size_bytes": 1288578664
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

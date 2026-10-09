@@ -1,0 +1,9 @@
+{
+  "scope": "Independent rational-polynomial restriction and complete joint-sector diagnostic; reference-only, no HEPKit-native test result, no period value or production admission",
+  "input_polynomials": "reports/validation/2026-10-09-finite-density-native-assembly/prism-endpoint-proof/rustflow_prism_parametric.json",
+  "input_polynomials_sha256": "a04b8fd04584a975dadc4829ad5aaee35a7e6c020fccdfc90b6b30b516fc6bfe",
+  "files": {
+    "prism-support-wide-sector-check.json": "750056ef9eb39c1a7c9a22594ee2390f92f4589e167fda712e311c84d446969f",
+    "prism_support_wide_sector_check.py": "927743574f509cc41e3c0d33c575ab59bef19306b962ac8a5f4e5a2b2e54561d"
+  }
+}

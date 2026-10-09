@@ -1,0 +1,15 @@
+{
+  "command": [
+    "env",
+    "RUSTFLOW_PARAMETRIC_EVIDENCE_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/diagnostic-pre-refresh",
+    "target/release/deps/symbolica_amflow-1bdbc910fbb47b04",
+    "finite_density::parametric_endpoint::",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.008535121101886034,
+  "user_seconds": 0.001974,
+  "system_seconds": 0.0059429999999999995,
+  "peak_child_rss_kib": 15380,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

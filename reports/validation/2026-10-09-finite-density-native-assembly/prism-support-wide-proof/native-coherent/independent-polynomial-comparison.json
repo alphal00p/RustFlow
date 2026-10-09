@@ -1,0 +1,41 @@
+{
+  "scope": "Exact native HEPKit versus independent rational routed U/V comparison, with every active support and exact route; no period values or production admission",
+  "passed": 192,
+  "failed": 0,
+  "reference_sha256": "a04b8fd04584a975dadc4829ad5aaee35a7e6c020fccdfc90b6b30b516fc6bfe",
+  "runs": [
+    {
+      "cuts": [
+        1,
+        5
+      ],
+      "supports_compared": 64,
+      "native_file": "reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-coherent/prism-cuts-1-5-supports.json.gz",
+      "native_sha256": "078897b03852afd04a77763cbd5b86ef4ea2d8e06eeef3aec9d6dabf9e8f67ca",
+      "compiletime_module_blake3": "49b5c2414edfda7a12521034de4b95bec734c32c07f21868b07b9c2ef4a8de4a",
+      "compiletime_fixture_blake3": "24f4d84d4b7aa65ed294907493eb01081a0058ebd64a9d8c819d336ef0502c74"
+    },
+    {
+      "cuts": [
+        1,
+        7
+      ],
+      "supports_compared": 64,
+      "native_file": "reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-coherent/prism-cuts-1-7-supports.json.gz",
+      "native_sha256": "f4e2a7d23b29a03f77235f6f1dbc2183e35642565ce00a7933d30e14637bd46b",
+      "compiletime_module_blake3": "49b5c2414edfda7a12521034de4b95bec734c32c07f21868b07b9c2ef4a8de4a",
+      "compiletime_fixture_blake3": "24f4d84d4b7aa65ed294907493eb01081a0058ebd64a9d8c819d336ef0502c74"
+    },
+    {
+      "cuts": [
+        5,
+        7
+      ],
+      "supports_compared": 64,
+      "native_file": "reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/native-coherent/prism-cuts-5-7-supports.json.gz",
+      "native_sha256": "67077907889d3bb721efbfe5ad778d3498f5a31f92a000b5c660ce9ed89f0eb7",
+      "compiletime_module_blake3": "49b5c2414edfda7a12521034de4b95bec734c32c07f21868b07b9c2ef4a8de4a",
+      "compiletime_fixture_blake3": "24f4d84d4b7aa65ed294907493eb01081a0058ebd64a9d8c819d336ef0502c74"
+    }
+  ]
+}

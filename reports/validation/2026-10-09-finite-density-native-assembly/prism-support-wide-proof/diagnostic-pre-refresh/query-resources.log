@@ -1,0 +1,14 @@
+
+running 3 tests
+test finite_density::parametric_endpoint::tests::sector_query_budgets_fail_without_partial_support_coverage ... ok
+test finite_density::parametric_endpoint::tests::native_sector_query_rejects_incomplete_trees_and_wrong_binding ... ok
+Saved exact support evidence: reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/diagnostic-pre-refresh/prism-cuts-1-5-supports.json
+prism cuts [1, 5]: 64 supports, 12 rank-deficient, 23 full-rank V=0, 29 with regular eta branch
+Saved exact support evidence: reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/diagnostic-pre-refresh/prism-cuts-1-7-supports.json
+prism cuts [1, 7]: 64 supports, 12 rank-deficient, 23 full-rank V=0, 29 with regular eta branch
+Saved exact support evidence: reports/validation/2026-10-09-finite-density-native-assembly/prism-support-wide-proof/diagnostic-pre-refresh/prism-cuts-5-7-supports.json
+prism cuts [5, 7]: 64 supports, 12 rank-deficient, 23 full-rank V=0, 29 with regular eta branch
+test finite_density::parametric_endpoint::tests::actual_prism_all_virtual_supports_have_replayable_positive_sector_evidence ... ok
+
+test result: ok. 3 passed; 0 failed; 0 ignored; 0 measured; 269 filtered out; finished in 1.48s
+

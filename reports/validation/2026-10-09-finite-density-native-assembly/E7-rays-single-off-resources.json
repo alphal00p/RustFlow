@@ -1,0 +1,29 @@
+{
+  "command": [
+    "env",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS=true",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES=true",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS=false",
+    "RUSTFLOW_WEIGHTED_CUTS=0",
+    "RUSTFLOW_WEIGHTED_ROUNDS=3",
+    "RUSTFLOW_WEIGHTED_FRONTIER=1024",
+    "RUSTFLOW_WEIGHTED_REQUESTED=4096",
+    "RUSTFLOW_WEIGHTED_DEPTH=3",
+    "RUSTFLOW_WEIGHTED_DOMAINS=8192",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES=0",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-09-finite-density-native-assembly/E7-rays-single-off",
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture"
+  ],
+  "exit_code": 101,
+  "wall_seconds": 150.23617998277768,
+  "user_seconds": 148.801693,
+  "system_seconds": 0.23818699999999998,
+  "peak_child_rss_kib": 141312,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

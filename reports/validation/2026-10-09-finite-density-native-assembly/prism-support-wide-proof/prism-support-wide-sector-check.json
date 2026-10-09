@@ -1,0 +1,1749 @@
+{
+  "scope": "Independent exact restriction of routed U/V supports; no HEPKit constructor test or flow admission",
+  "seconds": 4.568411677610129,
+  "results": [
+    {
+      "cuts": [
+        1,
+        5
+      ],
+      "supports": [
+        {
+          "mask": 0,
+          "rank_deficient": true
+        },
+        {
+          "mask": 1,
+          "rank_deficient": true
+        },
+        {
+          "mask": 2,
+          "rank_deficient": true
+        },
+        {
+          "mask": 3,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 4,
+          "rank_deficient": true
+        },
+        {
+          "mask": 5,
+          "rank_deficient": true
+        },
+        {
+          "mask": 6,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 7,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 8,
+          "rank_deficient": true
+        },
+        {
+          "mask": 9,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 10,
+          "rank_deficient": true
+        },
+        {
+          "mask": 11,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 12,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 13,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 14,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 15,
+          "V_zero": false,
+          "nodes": 104,
+          "leaves": 64,
+          "work": 51776,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 16,
+          "rank_deficient": true
+        },
+        {
+          "mask": 17,
+          "rank_deficient": true
+        },
+        {
+          "mask": 18,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 19,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 20,
+          "rank_deficient": true
+        },
+        {
+          "mask": 21,
+          "rank_deficient": true
+        },
+        {
+          "mask": 22,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 23,
+          "V_zero": false,
+          "nodes": 156,
+          "leaves": 90,
+          "work": 54096,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 24,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 25,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 26,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 27,
+          "V_zero": false,
+          "nodes": 136,
+          "leaves": 80,
+          "work": 63232,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 28,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 29,
+          "V_zero": false,
+          "nodes": 156,
+          "leaves": 90,
+          "work": 54096,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 30,
+          "V_zero": false,
+          "nodes": 136,
+          "leaves": 80,
+          "work": 63232,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 31,
+          "V_zero": false,
+          "nodes": 720,
+          "leaves": 432,
+          "work": 1338480,
+          "regular": 144,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 32,
+          "rank_deficient": true
+        },
+        {
+          "mask": 33,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 34,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 35,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 36,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 37,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 38,
+          "V_zero": false,
+          "nodes": 30,
+          "leaves": 18,
+          "work": 3744,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 39,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 40,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 41,
+          "V_zero": false,
+          "nodes": 30,
+          "leaves": 18,
+          "work": 3744,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 42,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 43,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 44,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 45,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 46,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 47,
+          "V_zero": false,
+          "nodes": 600,
+          "leaves": 360,
+          "work": 1452600,
+          "regular": 120,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 48,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 49,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 50,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 51,
+          "V_zero": true,
+          "nodes": 24,
+          "leaves": 24,
+          "work": 2400,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "5"
+        },
+        {
+          "mask": 52,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 53,
+          "V_zero": false,
+          "nodes": 156,
+          "leaves": 90,
+          "work": 54096,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 54,
+          "V_zero": false,
+          "nodes": 184,
+          "leaves": 104,
+          "work": 95936,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 55,
+          "V_zero": false,
+          "nodes": 864,
+          "leaves": 492,
+          "work": 1720320,
+          "regular": 120,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 56,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 57,
+          "V_zero": false,
+          "nodes": 184,
+          "leaves": 104,
+          "work": 95936,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 58,
+          "V_zero": false,
+          "nodes": 144,
+          "leaves": 84,
+          "work": 76992,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 59,
+          "V_zero": false,
+          "nodes": 834,
+          "leaves": 484,
+          "work": 1867650,
+          "regular": 134,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 60,
+          "V_zero": true,
+          "nodes": 24,
+          "leaves": 24,
+          "work": 2400,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "5"
+        },
+        {
+          "mask": 61,
+          "V_zero": false,
+          "nodes": 864,
+          "leaves": 492,
+          "work": 1720320,
+          "regular": 120,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 62,
+          "V_zero": false,
+          "nodes": 834,
+          "leaves": 484,
+          "work": 1867650,
+          "regular": 134,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 63,
+          "V_zero": false,
+          "nodes": 5076,
+          "leaves": 3008,
+          "work": 41807064,
+          "regular": 940,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        }
+      ],
+      "total_work": 52688778,
+      "total_nodes": 12016,
+      "total_leaves": 7112,
+      "rank_deficient": 12,
+      "full_rank_V_zero": 23
+    },
+    {
+      "cuts": [
+        1,
+        7
+      ],
+      "supports": [
+        {
+          "mask": 0,
+          "rank_deficient": true
+        },
+        {
+          "mask": 1,
+          "rank_deficient": true
+        },
+        {
+          "mask": 2,
+          "rank_deficient": true
+        },
+        {
+          "mask": 3,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 4,
+          "rank_deficient": true
+        },
+        {
+          "mask": 5,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 6,
+          "rank_deficient": true
+        },
+        {
+          "mask": 7,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 8,
+          "rank_deficient": true
+        },
+        {
+          "mask": 9,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 10,
+          "rank_deficient": true
+        },
+        {
+          "mask": 11,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 12,
+          "rank_deficient": true
+        },
+        {
+          "mask": 13,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 14,
+          "rank_deficient": true
+        },
+        {
+          "mask": 15,
+          "V_zero": false,
+          "nodes": 156,
+          "leaves": 90,
+          "work": 54096,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 16,
+          "rank_deficient": true
+        },
+        {
+          "mask": 17,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 18,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 19,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 20,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 21,
+          "V_zero": false,
+          "nodes": 30,
+          "leaves": 18,
+          "work": 3744,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 22,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 23,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 24,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 25,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 26,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 27,
+          "V_zero": true,
+          "nodes": 24,
+          "leaves": 24,
+          "work": 2400,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "5"
+        },
+        {
+          "mask": 28,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 29,
+          "V_zero": false,
+          "nodes": 184,
+          "leaves": 104,
+          "work": 95936,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 30,
+          "V_zero": false,
+          "nodes": 156,
+          "leaves": 90,
+          "work": 54096,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 31,
+          "V_zero": false,
+          "nodes": 864,
+          "leaves": 492,
+          "work": 1720320,
+          "regular": 120,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 32,
+          "rank_deficient": true
+        },
+        {
+          "mask": 33,
+          "rank_deficient": true
+        },
+        {
+          "mask": 34,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 35,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 36,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 37,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 38,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 39,
+          "V_zero": false,
+          "nodes": 104,
+          "leaves": 64,
+          "work": 51776,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 40,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 41,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 42,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 43,
+          "V_zero": false,
+          "nodes": 136,
+          "leaves": 80,
+          "work": 63232,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 44,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 45,
+          "V_zero": false,
+          "nodes": 136,
+          "leaves": 80,
+          "work": 63232,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 46,
+          "V_zero": false,
+          "nodes": 156,
+          "leaves": 90,
+          "work": 54096,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 47,
+          "V_zero": false,
+          "nodes": 720,
+          "leaves": 432,
+          "work": 1338480,
+          "regular": 144,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 48,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 49,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 50,
+          "V_zero": false,
+          "nodes": 30,
+          "leaves": 18,
+          "work": 3744,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 51,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 52,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 53,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 54,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 55,
+          "V_zero": false,
+          "nodes": 600,
+          "leaves": 360,
+          "work": 1452600,
+          "regular": 120,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 56,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 57,
+          "V_zero": false,
+          "nodes": 144,
+          "leaves": 84,
+          "work": 76992,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 58,
+          "V_zero": false,
+          "nodes": 184,
+          "leaves": 104,
+          "work": 95936,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 59,
+          "V_zero": false,
+          "nodes": 834,
+          "leaves": 484,
+          "work": 1867650,
+          "regular": 134,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 60,
+          "V_zero": true,
+          "nodes": 24,
+          "leaves": 24,
+          "work": 2400,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "5"
+        },
+        {
+          "mask": 61,
+          "V_zero": false,
+          "nodes": 834,
+          "leaves": 484,
+          "work": 1867650,
+          "regular": 134,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 62,
+          "V_zero": false,
+          "nodes": 864,
+          "leaves": 492,
+          "work": 1720320,
+          "regular": 120,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 63,
+          "V_zero": false,
+          "nodes": 5076,
+          "leaves": 3008,
+          "work": 41807064,
+          "regular": 940,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        }
+      ],
+      "total_work": 52688778,
+      "total_nodes": 12016,
+      "total_leaves": 7112,
+      "rank_deficient": 12,
+      "full_rank_V_zero": 23
+    },
+    {
+      "cuts": [
+        5,
+        7
+      ],
+      "supports": [
+        {
+          "mask": 0,
+          "rank_deficient": true
+        },
+        {
+          "mask": 1,
+          "rank_deficient": true
+        },
+        {
+          "mask": 2,
+          "rank_deficient": true
+        },
+        {
+          "mask": 3,
+          "rank_deficient": true
+        },
+        {
+          "mask": 4,
+          "rank_deficient": true
+        },
+        {
+          "mask": 5,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 6,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 7,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 8,
+          "rank_deficient": true
+        },
+        {
+          "mask": 9,
+          "rank_deficient": true
+        },
+        {
+          "mask": 10,
+          "rank_deficient": true
+        },
+        {
+          "mask": 11,
+          "rank_deficient": true
+        },
+        {
+          "mask": 12,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 13,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 14,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 15,
+          "V_zero": false,
+          "nodes": 156,
+          "leaves": 90,
+          "work": 54096,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 16,
+          "rank_deficient": true
+        },
+        {
+          "mask": 17,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 18,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 19,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 20,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 21,
+          "V_zero": false,
+          "nodes": 30,
+          "leaves": 18,
+          "work": 3744,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 22,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 23,
+          "V_zero": false,
+          "nodes": 184,
+          "leaves": 104,
+          "work": 95936,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 24,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 25,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 26,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 27,
+          "V_zero": false,
+          "nodes": 156,
+          "leaves": 90,
+          "work": 54096,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 28,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 29,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 30,
+          "V_zero": true,
+          "nodes": 24,
+          "leaves": 24,
+          "work": 2400,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "5"
+        },
+        {
+          "mask": 31,
+          "V_zero": false,
+          "nodes": 864,
+          "leaves": 492,
+          "work": 1720320,
+          "regular": 120,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 32,
+          "rank_deficient": true
+        },
+        {
+          "mask": 33,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 34,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 35,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 36,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 37,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 38,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 270,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 39,
+          "V_zero": true,
+          "nodes": 24,
+          "leaves": 24,
+          "work": 2400,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "5"
+        },
+        {
+          "mask": 40,
+          "V_zero": true,
+          "nodes": 2,
+          "leaves": 2,
+          "work": 28,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "3"
+        },
+        {
+          "mask": 41,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 42,
+          "V_zero": true,
+          "nodes": 6,
+          "leaves": 6,
+          "work": 216,
+          "regular": 0,
+          "min_D_slope": "1",
+          "worst_D_bound_Pn_rank4_J1": "4"
+        },
+        {
+          "mask": 43,
+          "V_zero": false,
+          "nodes": 156,
+          "leaves": 90,
+          "work": 54096,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 44,
+          "V_zero": false,
+          "nodes": 30,
+          "leaves": 18,
+          "work": 3744,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 45,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 46,
+          "V_zero": false,
+          "nodes": 184,
+          "leaves": 104,
+          "work": 95936,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 47,
+          "V_zero": false,
+          "nodes": 864,
+          "leaves": 492,
+          "work": 1720320,
+          "regular": 120,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 48,
+          "rank_deficient": true
+        },
+        {
+          "mask": 49,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 50,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 51,
+          "V_zero": false,
+          "nodes": 136,
+          "leaves": 80,
+          "work": 63232,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 52,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 53,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 54,
+          "V_zero": false,
+          "nodes": 144,
+          "leaves": 84,
+          "work": 76992,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 55,
+          "V_zero": false,
+          "nodes": 834,
+          "leaves": 484,
+          "work": 1867650,
+          "regular": 134,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 56,
+          "V_zero": false,
+          "nodes": 26,
+          "leaves": 16,
+          "work": 2454,
+          "regular": 6,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 57,
+          "V_zero": false,
+          "nodes": 104,
+          "leaves": 64,
+          "work": 51776,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 58,
+          "V_zero": false,
+          "nodes": 136,
+          "leaves": 80,
+          "work": 63232,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 59,
+          "V_zero": false,
+          "nodes": 720,
+          "leaves": 432,
+          "work": 1338480,
+          "regular": 144,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 60,
+          "V_zero": false,
+          "nodes": 124,
+          "leaves": 74,
+          "work": 68288,
+          "regular": 24,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 61,
+          "V_zero": false,
+          "nodes": 600,
+          "leaves": 360,
+          "work": 1452600,
+          "regular": 120,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "14"
+        },
+        {
+          "mask": 62,
+          "V_zero": false,
+          "nodes": 834,
+          "leaves": 484,
+          "work": 1867650,
+          "regular": 134,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        },
+        {
+          "mask": 63,
+          "V_zero": false,
+          "nodes": 5076,
+          "leaves": 3008,
+          "work": 41807064,
+          "regular": 940,
+          "min_D_slope": "1/2",
+          "worst_D_bound_Pn_rank4_J1": "16"
+        }
+      ],
+      "total_work": 52688778,
+      "total_nodes": 12016,
+      "total_leaves": 7112,
+      "rank_deficient": 12,
+      "full_rank_V_zero": 23
+    }
+  ]
+}

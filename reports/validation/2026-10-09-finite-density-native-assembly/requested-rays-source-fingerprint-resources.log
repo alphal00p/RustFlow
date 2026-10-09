@@ -1,0 +1,54 @@
+
+running 5 tests
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-1/fixtures/gg-hg
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-1/fixtures/gg-hg/published-test.json
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/Cargo.toml
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-1/cargo-home/config.toml
+
+thread 'mismatched_python_features_fail_instead_of_hashing_the_default_host_graph' (3416274) panicked at tests/../build_support/source_fingerprint.rs:171:5:
+assertion `left == right` failed: Cargo metadata features differ from this build. Set RUSTFLOW_WORKSPACE_FEATURES and RUSTFLOW_WORKSPACE_NO_DEFAULT_FEATURES to match the embedding Cargo invocation
+  left: {"python"}
+ right: {"python", "python_stubgen"}
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/src
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/src/lib.rs
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-1/fixtures/gg-hg
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-1/fixtures/gg-hg/published-test.json
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-1/cargo-home/config.toml
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-1/fixtures/gg-hg
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-1/fixtures/gg-hg/published-test.json
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-1/cargo-home/config.toml
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-3
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/Cargo.toml
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/src
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-3/Cargo.toml
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/src/lib.rs
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-3/src
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-3/src/lib.rs
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-6
+
+thread 'source_graph_follows_resolved_dependency_ids_and_rejects_wrong_host' (3416276) panicked at tests/../build_support/source_fingerprint.rs:145:10:
+RUSTFLOW_WORKSPACE_MANIFEST does not resolve this RustFlow checkout
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-6/Cargo.toml
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-6/src
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/Cargo.toml
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/src
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-6/src/lib.rs
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/src/added.rs
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/src/lib.rs
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2
+test mismatched_python_features_fail_instead_of_hashing_the_default_host_graph ... cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/Cargo.toml
+ok
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/src
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/src/added.rs
+cargo:rerun-if-changed=/tmp/nix-shell.NbWYKp/rustflow-source-test-3416271-2/src/lib.rs
+test embedded_fixture_and_cargo_home_override_changes_affect_the_digest ... ok
+test package_fingerprint_is_independent_of_checkout_location ... ok
+test fingerprint_tracks_dirty_sources_and_additions_but_not_build_products ... ok
+test source_graph_follows_resolved_dependency_ids_and_rejects_wrong_host ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

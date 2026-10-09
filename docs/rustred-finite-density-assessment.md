@@ -7,6 +7,17 @@ four-loop closure is still unproved: the saved E7 pilots encounter bounded
 discovery and frontier limits, not a proof that the native algorithm cannot
 close their sources.
 
+RustRed is now vendored in this repository. The first local change combines
+exact coefficients of repeated `NoApplicableRule` remainders before returning
+a recursive reduction. Previously, different reduction paths could emit the
+same unresolved label separately, even when their coefficients cancelled.
+That was a correct uncollected expression but could give RustFlow unnecessary
+provisional labels. The change retains every accumulated nonzero condition and
+keeps work-limit, pole, and other failure records separate. It does not change
+source discovery, ordering, rule certification, or persistence. Its native
+replayed-diamond regressions and controlled E7 comparisons are recorded
+separately from the historical pilots below.
+
 RustFlow supplies physical distribution identities, their admitted index
 domains, deformation, and retained coefficient conditions. RustRed owns rule
 discovery, ordering, application, exact replay, and persisted proof programs.
@@ -144,3 +155,13 @@ The historical E7 origin-only programs were inspected and then reloaded through 
 Bounded rediscovery using the unchanged historical source corpus finds native rules on exact-point and one-ray boxes for both targets. More usefully, the double-cut ordinary-zero-face box finishes its initial discovery at depth 3 / 8192 domains with 3652 rules and no discovery gaps, and covers the target. The corresponding broad sign box still misses it with 6251 domain-budget gaps. The single-cut broad box does cover its target when isolated from the larger request queue. These are concrete frontend domain-presentation and queue-coverage effects, not evidence that RustRed lacks the necessary row algebra.
 
 The resulting double-cut reduction still leaves 59 explicit child residual terms; this is not a closed spanning basis or an amplitude result. Complete source-bound programs, exact requested boxes, conditions, nearest guard/proof records and 11 measured controls are saved in [the historical coverage probe](../reports/validation/2026-10-09-finite-density-native-assembly/E7-origin-native-coverage-probe/README.md). No source row, native order, physical guard or elimination implementation was changed.
+
+### Requested-index rays with the vendored residual fix
+
+The [current checkpoint](../reports/validation/2026-10-09-finite-density-native-assembly/requested-rays-checkpoint.json) compares the same physical E7 sources with requested-index rays disabled and enabled. Both controls use the committed native residual aggregation fix, sealed free-virtual zero sectors, ordinary zero faces, depth 3, 8192 discovery domains, three closure rounds, frontier cap 1024 and requested-label cap 4096. Adaptive guard passes are disabled. A ray starts at the actual requested nonzero integer; a zero coordinate is fixed. This changes discovery domains, while every resulting rule retains its exact native guard and proof.
+
+The single-cut control changes from frontiers 318/1726 in 150.24 seconds to 106/538/1608 in 41.72 seconds. Both exceed the frontier budget. The double-cut control without rays times out at 180 seconds after frontier 172; with rays it reaches frontiers 68/308/899 in 123.69 seconds and exhausts the three-round budget. These are bounded coverage improvements, not closed connections. All programs, failures and resource records are preserved losslessly; timings are from concurrent processes on a shared host.
+
+Seventy-five nonignored regression tests pass, together with complete massless fixed-D and Laurent runs (70 independent-reference comparisons and 54 refinement comparisons). A massive finest-profile regression passes all ten vacuum/cut/total reference comparisons and ten historical comparisons. Its final double-cut spanning basis has ten elements after exact residual cancellation, versus eleven historically; the evaluated target values agree. No master-minimality claim follows from that change.
+
+The next native change is target-priority scheduling of domain exploration. It must preserve explicit `DomainBudget` gaps for every unvisited domain and keep exact source replay unchanged. Broader four-loop numerical acceptance remains outstanding.
