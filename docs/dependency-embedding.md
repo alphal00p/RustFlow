@@ -20,8 +20,15 @@ fork-based package overrides have been removed. Historical validation reports
 retain their original owner revisions.
 
 The current lock selects Symbolica, Numerica and Graphica 3.0.1 from official
-community revision `ed2374f1d880d52c3a7ca48cd7c22f4baad5c020`, and RustRed main
-`acc92b0dad27b11fd194a4c284765fb6a93cbc94`. RustRed's core Cargo package is
+community revision `ed2374f1d880d52c3a7ca48cd7c22f4baad5c020`, and RustRed revision
+`78969aab524b7d6a2eec36f59b01e9af1e04cc04`. This descendant of the former
+`acc92b0dad27b11fd194a4c284765fb6a93cbc94` lock adds guarded distribution-source
+reduction. The update leaves the Symbolica, Numerica, Graphica and HEPKit source
+identities unchanged; RustRed's standalone vendored patch table is not imported
+into RustFlow. The manifest pins this revision because the guarded interface
+is on RustRed's `fermi` branch; unpinned `main` is not an equivalent embedding
+source. Embedding workspaces that also depend on RustRed must select this same
+Git source identity. RustRed's core Cargo package is
 `rustred`; its experimental `reconstruction` feature remains disabled. Native
 and Pyodide consumers select one shared arithmetic backend. `python` enables
 the native automatic evaluator; `python_wasm` enables its serial portable
