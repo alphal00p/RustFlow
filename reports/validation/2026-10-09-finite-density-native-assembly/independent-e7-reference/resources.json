@@ -1,0 +1,14 @@
+{
+  "command": [
+    "target/release/deps/finite_density_e7_reference-16d248a7ece72535",
+    "--include-ignored",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.03672114899381995,
+  "user_seconds": 0.0071979999999999995,
+  "system_seconds": 0.029859,
+  "peak_child_rss_kib": 12332,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

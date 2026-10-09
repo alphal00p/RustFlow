@@ -8,6 +8,46 @@ use super::guarded::{GuardedContext, GuardedMeasureIdentity, IndexBounds, IndexD
 use super::reduction::{AuxiliaryConvention, FixedShellDeformation};
 use crate::{Error, Result};
 
+/// Equivalent exact source presentations for bounded native discovery.
+/// Selection controls source rows and their integer-domain partition, never
+/// integral ordering, physical zeros, or the elimination backend.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+#[serde(rename_all = "kebab-case")]
+pub enum WeightedSourcePolicy {
+    #[default]
+    LegacyLorentz,
+    ActiveLorentz,
+    LorentzThenTangents,
+    TangentsThenLorentz,
+}
+
+impl WeightedSourcePolicy {
+    pub fn as_str(self) -> &'static str {
+        match self {
+            Self::LegacyLorentz => "legacy-lorentz",
+            Self::ActiveLorentz => "active-lorentz",
+            Self::LorentzThenTangents => "lorentz-then-tangents",
+            Self::TangentsThenLorentz => "tangents-then-lorentz",
+        }
+    }
+}
+
+impl std::str::FromStr for WeightedSourcePolicy {
+    type Err = Error;
+
+    fn from_str(value: &str) -> Result<Self> {
+        match value {
+            "legacy-lorentz" => Ok(Self::LegacyLorentz),
+            "active-lorentz" => Ok(Self::ActiveLorentz),
+            "lorentz-then-tangents" => Ok(Self::LorentzThenTangents),
+            "tangents-then-lorentz" => Ok(Self::TangentsThenLorentz),
+            _ => Err(Error::InvalidInput(format!(
+                "unknown weighted source presentation {value}"
+            ))),
+        }
+    }
+}
+
 /// Exact algebraic preparation. The measure identity must describe the actual
 /// contour/support prescription; construction alone does not certify that the
 /// products of distributions or continuation across thresholds are admissible.
@@ -28,18 +68,72 @@ impl OccupiedCutFamily {
         eta: Symbol,
         shifted: &[usize],
         domain_budget: usize,
+        parameters: Vec<Symbol>,
+        identity: GuardedMeasureIdentity,
+    ) -> Result<PreparedWeightedSources<N>> {
+        self.guarded_sources_with_policy(
+            epsilon,
+            dimension,
+            eta,
+            shifted,
+            domain_budget,
+            parameters,
+            identity,
+            WeightedSourcePolicy::default(),
+        )
+    }
+
+    /// Select an exact source presentation explicitly. The default factory
+    /// preserves the established Lorentz presentation; tangent alternatives are
+    /// available for bounded native coverage diagnostics and further closure.
+    pub fn guarded_sources_with_policy<const N: usize>(
+        &self,
+        epsilon: Symbol,
+        dimension: i64,
+        eta: Symbol,
+        shifted: &[usize],
+        domain_budget: usize,
         mut parameters: Vec<Symbol>,
         mut identity: GuardedMeasureIdentity,
+        policy: WeightedSourcePolicy,
     ) -> Result<PreparedWeightedSources<N>> {
         let measure = self.deformed_measure::<N>(eta, shifted)?;
         let indices =
             std::array::from_fn(|slot| symbol!(format!("rustflow_occupied_indices::a_{slot}")));
-        let mut identities = measure.lorentz_ibps(
-            self.loops(),
-            &(Atom::num(dimension) - Atom::num(2) * Atom::var(epsilon)),
-            &indices,
-            domain_budget,
-        )?;
+        let symbolic_dimension = Atom::num(dimension) - Atom::num(2) * Atom::var(epsilon);
+        let lorentz =
+            || measure.lorentz_ibps(self.loops(), &symbolic_dimension, &indices, domain_budget);
+        let tangent = || {
+            measure.compact_tangent_ibps(
+                self.loops(),
+                self.shells().len(),
+                &symbolic_dimension,
+                &indices,
+                domain_budget,
+            )
+        };
+        let mut identities = match policy {
+            WeightedSourcePolicy::LegacyLorentz => measure.lorentz_ibps_legacy(
+                self.loops(),
+                &symbolic_dimension,
+                &indices,
+                domain_budget,
+            )?,
+            WeightedSourcePolicy::ActiveLorentz => lorentz()?,
+            WeightedSourcePolicy::LorentzThenTangents => {
+                let mut sources = lorentz()?;
+                sources.extend(tangent()?);
+                sources
+            }
+            WeightedSourcePolicy::TangentsThenLorentz => {
+                let mut sources = tangent()?;
+                sources.extend(lorentz()?);
+                sources
+            }
+        };
+        identity
+            .measure
+            .push_str(&format!("; source presentation={}", policy.as_str()));
         let roles = *measure.roles();
         let mut bounds = *IndexDomain::for_roles(&roles).bounds();
         for bound in &mut bounds[self.physical_slots()..self.input_slots()] {

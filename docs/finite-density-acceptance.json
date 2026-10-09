@@ -243,6 +243,16 @@
             "method": "Independent user-supplied reference; retain supplied absolute uncertainties and det labels.",
             "absolute_uncertainties": {},
             "comparison_precision": "Exact symbolic coefficients at supplied orders; 10-digit numerical comparison target."
+          },
+          "additional_independent_reference": {
+            "status": "available_analytic_reference_not_native_acceptance",
+            "file": "reports/validation/2026-10-09-finite-density-native-assembly/independent-e7-reference/reference.json",
+            "derivation": "docs/finite-density-e7-reference.md",
+            "method": "Independent analytically regulated neutral tensor bubbles and compact beta integrals; raised charged line differentiated before massless limit, retaining nonzero upper surface. Gamma-duplication cross-check and exact Laurent expansion.",
+            "last_supplied_order": 0,
+            "orders_below_minus_two": "zero by the derived meromorphic expression",
+            "comparison_precision": "Exact analytic coefficients; native 50/80-digit precision and independent epsilon-extrapolant checks passed. No native AMF predictions compared.",
+            "target_index": 0
           }
         },
         {
@@ -250,10 +260,14 @@
           "kind": "raised occupied line and polynomial numerator",
           "raised_physical_slot_zero_based": 0,
           "reference": {
-            "status": "required_not_generated",
-            "method": "Independent complete thermal-contour/cutting evaluation with independent line masses and distributional mass differentiation; independently implemented sector resolution and arbitrary-precision spatial quadrature after subtraction.",
-            "target_absolute_uncertainty": "1/10^12",
-            "attainable_precision": "Not established. Reference generation and error certification are blocking acceptance gates; no 12-digit availability is claimed."
+            "status": "available_analytic_reference_not_native_acceptance",
+            "file": "reports/validation/2026-10-09-finite-density-native-assembly/independent-e7-reference/reference.json",
+            "derivation": "docs/finite-density-e7-reference.md",
+            "method": "Independent analytically regulated neutral tensor bubbles and compact beta integrals; raised charged line differentiated before massless limit, retaining nonzero upper surface. Gamma-duplication cross-check and exact Laurent expansion.",
+            "last_supplied_order": 0,
+            "orders_below_minus_two": "zero by the derived meromorphic expression",
+            "comparison_precision": "Exact analytic coefficients; native 50/80-digit precision and independent epsilon-extrapolant checks passed. No native AMF predictions compared.",
+            "target_index": 1
           }
         }
       ],
@@ -1332,16 +1346,29 @@
       2
     ],
     "vacuum_contribution": "Nonzero for positive masses; must evaluate and compare, not omit as scaleless.",
-    "reference_status": "required_not_generated",
-    "reference_method": "Independent massive Schwinger-parameter vacuum integral plus regulated complete energy-contour residues and dimensionally subtracted spatial integration; masses varied independently before raising line0.",
-    "attainable_comparison_precision": "Not established; target 12 absolute digits after regulator subtraction.",
+    "reference_status": "available_at_D_12_over_5_not_Laurent",
+    "reference_method": "Independent Schwinger vacuum sectors, reference-only Feynman parameters and compact radial/angular quadrature with exact endpoint maps; original numerator and independent mass derivatives retain moving-support surfaces.",
+    "reference_artifact": "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json",
+    "reference_derivation": "docs/finite-density-reference.md",
+    "attainable_comparison_precision": "All 12 reference components/totals pass independent node and precision refinements at D=12/5; empirical changes are not rigorous interval bounds. Laurent reference precision remains unestablished.",
+    "native_comparison": {
+      "status": "vacuum_and_cut0_only_passed",
+      "report": "reports/validation/2026-10-09-finite-density-native-assembly/single-sunset-reference-comparison.json",
+      "unique_sector_target_values": 4,
+      "configurations": 4,
+      "relative_tolerance": "1e-12",
+      "small_magnitude_threshold": "1e-20",
+      "small_absolute_tolerance": "1e-25",
+      "full_amplitude_compared": false,
+      "laurent_coefficients_compared": 0
+    },
     "capabilities": [
       "raised charged line",
       "medium-vector numerator",
       "nonzero upper Fermi surface",
       "full massive assembly"
     ],
-    "evaluation_status": "not_evaluated"
+    "evaluation_status": "partial_sectors_compared_full_two_cut_closure_unresolved"
   },
   "remaining_mandatory_cases": [
     {

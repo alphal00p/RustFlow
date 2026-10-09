@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/finite_density_closure-665c01718e3331cc",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.14856285229325294,
+  "user_seconds": 0.205596,
+  "system_seconds": 0.131545,
+  "peak_child_rss_kib": 12356,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

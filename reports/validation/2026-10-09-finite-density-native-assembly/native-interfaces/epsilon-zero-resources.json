@@ -1,0 +1,14 @@
+{
+  "command": [
+    "target/release/rustflow",
+    "finite-density-sample",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-interfaces/tadpole-above.json",
+    "0"
+  ],
+  "exit_code": 1,
+  "wall_seconds": 0.00452535692602396,
+  "user_seconds": 0.0,
+  "system_seconds": 0.0043749999999999995,
+  "peak_child_rss_kib": 12320,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -305,7 +305,13 @@ fn user_defined_graphs_prepare_and_retain_all_connected_occupied_cuts() {
         assert!(prepared.cut_decomposition(1).is_err());
         let report = prepared.preparation_report(1024).unwrap();
         assert_eq!(report["status"], "algebraic_preparation_only");
-        assert_eq!(report["numerical_evaluation"]["available"], false);
+        assert_eq!(report["schema_version"], 2);
+        assert_eq!(report["numerical_evaluation"]["performed"], false);
+        assert!(report["numerical_evaluation"].get("available").is_none());
+        assert_eq!(
+            report["numerical_evaluation"]["python_interface"],
+            "evaluate_finite_density"
+        );
     }
 }
 

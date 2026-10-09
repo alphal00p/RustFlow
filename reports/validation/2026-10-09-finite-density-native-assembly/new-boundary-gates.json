@@ -1,0 +1,64 @@
+{
+  "schema_version": 1,
+  "validation_date_utc": "2026-10-09",
+  "source_snapshot": "source-policy-hashes.json",
+  "base_commit": "bf6071888b7576cd08bd43486a4538b85f65bbe3",
+  "build": "joint locked release batch after all-tests Python-feature typecheck",
+  "timing_scope": "Rust test-harness elapsed seconds; compilation and command startup excluded; peak memory was not measured for these three direct runs",
+  "gates": [
+    {
+      "binary": "target/release/deps/finite_density_terminal-2fe28ef103e25538",
+      "binary_sha256": "e47c7ecfa85921ca7987ed724ad12710b557597003a9b3ac673650cf02dac118",
+      "linked_utc": "2026-10-09T18:00:47Z",
+      "arguments": ["--nocapture"],
+      "exit_code": 0,
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "test_harness_seconds": 0.18,
+      "scope": "Public one-loop vacuum-plus-occupied assembly above and below support, simple threshold, thermal finite-jump raised threshold, singular raised-threshold diagnostic, virtual-pole rejection, and scaleless unrestricted polynomial loop"
+    },
+    {
+      "binary": "target/release/deps/finite_density_flow_boundary-5a28448dc4a00c03",
+      "binary_sha256": "08ff3e84a0745a31f8e944ad2b6729fae16ee50b0bcaa7e41d898a13393b598f",
+      "linked_utc": "2026-10-09T18:00:47Z",
+      "arguments": ["--nocapture"],
+      "exit_code": 0,
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "test_harness_seconds": 0.13,
+      "scope": "Required subleading region depth, symbolic epsilon exponents, two virtual hard loops using recursive AMF with tadpole-only terminals, and three compact loops on an admitted charged-triangle graph"
+    },
+    {
+      "binary": "target/release/deps/finite_density_independent_mu-2ae9a9d323b5acac",
+      "binary_sha256": "06fe32ddf33eff352739ba92bfb585e437beb38e5ef8bf43c00951dd3b14bc1a",
+      "linked_utc": "2026-10-09T18:00:47Z",
+      "arguments": ["--nocapture"],
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "test_harness_seconds": 0.36,
+      "scope": "Actual public assembly of two independent chemical species: vacuum, two source-closed N7 weighted-AMF singleton cuts, and a compact double-cut terminal; scalar and original Euclidean u1*u2 targets checked in every sector",
+      "dimension": "3",
+      "mass_squared": ["1/4", "1/16"],
+      "chemical_potentials": ["1", "3/4"],
+      "independent_full_scalar": "3/(64*pi^2)",
+      "independent_full_medium": "-3/(512*pi^2)",
+      "comparison_digits": 14
+    }
+  ],
+  "thermal_unit_evidence": {
+    "report": "source-policy-unit-resources.json",
+    "log": "source-policy-unit-resources.log",
+    "finite_density_unit_tests_passed": 22,
+    "includes": "Independent finite-temperature radial derivative kernels at three temperatures and three chemical offsets, plus 40-digit compact thermal threshold checks"
+  },
+  "limitations": [
+    "The independent-chemical-potential graph factorizes; it does not complete the mandatory nonfactorized massive sunset.",
+    "Boundary coefficient tests do not establish full weighted closure or full-amplitude transport for their three-loop fixtures.",
+    "No supplied oracle values or four-loop production predictions were used or compared.",
+    "The finite-jump threshold rule applies to the derived strictly positive-mass thermal limit; more singular and massless endpoint products retain separate admission requirements."
+  ]
+}

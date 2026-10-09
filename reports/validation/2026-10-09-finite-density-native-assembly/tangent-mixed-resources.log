@@ -1,0 +1,11 @@
+
+running 6 tests
+test phase_space_pole_and_deformation_of_a_cut_are_rejected ... ok
+test triangular_routing_permutation_and_reversed_support_preserve_measure ... ok
+test cut_system_restart_nonzero_conditions_and_cancellation_remain_explicit ... ok
+test mixed_cut_projection_batches_weights_before_epsilon_fitting ... ok
+test connected_real_virtual_flow_matches_gamma_product ... ok
+test weighted_three_body_flow_matches_beta_integral ... ok
+
+test result: ok. 6 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 4.83s
+

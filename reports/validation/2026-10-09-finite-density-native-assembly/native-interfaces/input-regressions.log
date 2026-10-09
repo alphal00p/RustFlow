@@ -1,0 +1,14 @@
+
+running 9 tests
+test full_routing_rank_does_not_replace_incidence_or_chemical_evidence ... ok
+test complete_reference_payload_is_preserved_and_parses_only_in_validation ... ok
+test compatible_rational_routing_retains_a_nonunit_exact_jacobian ... ok
+test physical_connectivity_is_undirected_under_consistent_edge_reorientation ... ok
+test independent_physical_mass_derivatives_preserve_original_polynomial ... ok
+test independent_chemical_species_retain_separate_cycle_assignments ... ok
+test zero_power_preserves_chemical_assignments_and_medium_offsets ... ok
+test all_108_supplied_target_expansions_use_the_same_inverse_propagator_slots ... ok
+test user_defined_graphs_prepare_and_retain_all_connected_occupied_cuts ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.13s
+

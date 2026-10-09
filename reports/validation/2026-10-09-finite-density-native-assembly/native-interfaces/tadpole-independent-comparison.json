@@ -1,0 +1,148 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "reference_method": "Independent Euclidean D=3 massive tadpole plus compact occupied shell: I1=-max(m,mu)/(4*pi), I2=1/(8*pi*m) below threshold and zero above; pi from Machin arctangent series at 100 Decimal digits",
+  "reference_source": "analytic Gaussian vacuum integral and independent physical-mass derivative of occupied radial integral, not numerical oracle data",
+  "oracle_numerical_records_read": 0,
+  "scope": "four D=3 target/support-case values and four epsilon=-1,0 Laurent coefficients; complete one-loop CLI execution only, not a multiloop acceptance result",
+  "laurent_reference_method": "Independent expansion of Gamma(epsilon-1)*a^(1-epsilon)/(4*pi)^(2-epsilon) minus the D=4 compact occupied radial integral; raised coefficients from -d/da at fixed original numerator and mu. Euler gamma from rational Bernoulli Euler-Maclaurin series, pi from Machin identity.",
+  "source_snapshot": "../tangent-source-hashes.json",
+  "inputs_sha256": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-interfaces/tadpole-above-resources.log": "55d5a97a0bdd2e5ee777d8d6106d8dd11567871ac69180c3d07b15fdc60e5313",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-interfaces/tadpole-below-resources.log": "7885d39801280ce836e23f85aacaac35a3074cfa6397937c111bce72e8c0f845",
+    "reports/validation/2026-10-09-finite-density-native-assembly/native-interfaces/tadpole-laurent-resources.log": "751182ac291c0d11c33c8493eb60d32723c99310a4ad27e7210726de2ca4cfad"
+  },
+  "script_sha256": "feadf83e7b168c5e8d80edd06a07cb5bceb319945beb5cf6021b15b9b02db1a0",
+  "comparisons": [
+    {
+      "case": "above",
+      "target_index": 0,
+      "prediction": {
+        "imaginary": "0",
+        "real": "-7.957747154594766788444188168625718101722982249139217354985e-2"
+      },
+      "reference": "-0.07957747154594766788444188168625718101722982287022822437383367202944839881711326754505690138312654305",
+      "real_difference": "3.7883605082398367202944839881711326754505690138312654305E-46",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.788360508239836720294483988171132675450569013831265430500000000000000000000000000000000000000000000E-46",
+      "relative_difference": "4.760594216734386566006210318453155387553080335547042682500237407350767036459642532953717700229523058E-45",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "case": "above",
+      "target_index": 1,
+      "prediction": {
+        "imaginary": "0",
+        "real": "3.757775838548989260316043407140608018545284142976340173637e-46"
+      },
+      "reference": "0",
+      "real_difference": "3.757775838548989260316043407140608018545284142976340173637E-46",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.757775838548989260316043407140608018545284142976340173637000000000000000000000000000000000000000000E-46",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "case": "below",
+      "target_index": 0,
+      "prediction": {
+        "imaginary": "0",
+        "real": "-3.978873577297383394222094084312859050861491143511411268538e-2"
+      },
+      "reference": "-0.03978873577297383394222094084312859050861491143511411218691683601472419940855663377252845069156327154",
+      "real_difference": "-4.9846316398527580059144336622747154930843672846E-55",
+      "imaginary_difference": "0",
+      "absolute_difference": "4.9846316398527580059144336622747154930843672846E-55",
+      "relative_difference": "1.252774571249013487246386413908829035766737847138788786937941741117239449659402579441410629950244795E-53",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "case": "below",
+      "target_index": 1,
+      "prediction": {
+        "imaginary": "0",
+        "real": "7.957747154594766788444188168625718101722982287022822537075e-2"
+      },
+      "reference": "0.07957747154594766788444188168625718101722982287022822437383367202944839881711326754505690138312654305",
+      "real_difference": "9.9691632797055160118288673245494309861687345695E-55",
+      "imaginary_difference": "0",
+      "absolute_difference": "9.9691632797055160118288673245494309861687345695E-55",
+      "relative_difference": "1.252762004878399128073432563335295917755201058498890398357735360200421938993131469215782150603444697E-53",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    }
+  ],
+  "laurent_comparisons": [
+    {
+      "target_index": 0,
+      "epsilon_power": -1,
+      "prediction": {
+        "imaginary": "0",
+        "real": "-1.583143494411527678810616612651994357880605854254034268704326608858540e-3"
+      },
+      "reference": "-0.001583143494411527678810616612651994357880605854253852325712641123346455015034928768612644905087841217",
+      "real_difference": "-1.81942991685485512084984965071231387355094912158783E-52",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.819429916854855120849849650712313873550949121587830000000000000000000000000000000000000000000000000E-52",
+      "relative_difference": "1.149251424951316731097175399908398202666341620884638558080092859612367654080800722052859105408648053E-49",
+      "criterion": "relative",
+      "tolerance": "1e-12",
+      "passed": true
+    },
+    {
+      "target_index": 0,
+      "epsilon_power": 0,
+      "prediction": {
+        "imaginary": "-0",
+        "real": "-1.366947895769463187359187818431766608956496411246177298795107323457575e-2"
+      },
+      "reference": "-0.01366947895769463187359187818431766608956501799460571642363694477659227622741736228379824536004324259",
+      "real_difference": "5.388214394343568587154201652622741736228379824536004324259E-44",
+      "imaginary_difference": "-0",
+      "absolute_difference": "5.388214394343568587154201652622741736228379824536004324259000000000000000000000000000000000000000000E-44",
+      "relative_difference": "3.941784768109621556277882276544564698231811456451336921096577698434284101743489766525752239997822509E-42",
+      "criterion": "relative",
+      "tolerance": "1e-12",
+      "passed": true
+    },
+    {
+      "target_index": 1,
+      "epsilon_power": -1,
+      "prediction": {
+        "imaginary": "0",
+        "real": "6.332573977646110715242466450607977431522423417015409556137148594946943e-3"
+      },
+      "reference": "0.006332573977646110715242466450607977431522423417015409302850564493385820060139715074450579620351364867",
+      "real_difference": "2.53286584101561122939860284925549420379648635133E-55",
+      "imaginary_difference": "0",
+      "absolute_difference": "2.53286584101561122939860284925549420379648635133E-55",
+      "relative_difference": "3.999741416297052206819790039739003385692751999610256554876638816186526357335800594479516796333734424E-53",
+      "criterion": "relative",
+      "tolerance": "1e-12",
+      "passed": true
+    },
+    {
+      "target_index": 1,
+      "epsilon_power": 0,
+      "prediction": {
+        "imaginary": "-0",
+        "real": "4.471982365246002498274181610918158204660968138854652618287912137464655e-3"
+      },
+      "reference": "0.004471982365246002498274181610918158204660968020765244231753921354915381902502953633495255139199948148",
+      "real_difference": "1.18089408386533990782549273097497046366504744860800051852E-46",
+      "imaginary_difference": "-0",
+      "absolute_difference": "1.180894083865339907825492730974970463665047448608000518520000000000000000000000000000000000000000000E-46",
+      "relative_difference": "2.640650135480530354877341003125299163025464805257303337342364977749708707425244215624181474936637309E-44",
+      "criterion": "relative",
+      "tolerance": "1e-12",
+      "passed": true
+    }
+  ]
+}

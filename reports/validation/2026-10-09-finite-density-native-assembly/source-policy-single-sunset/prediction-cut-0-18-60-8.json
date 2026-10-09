@@ -1,0 +1,14 @@
+{
+  "digits": 18,
+  "epsilon": "4/5",
+  "full_amplitude": false,
+  "independent_reference_comparisons": 0,
+  "normalization": "unscaled Euclidean amplitude",
+  "occupied_start_scale": 8,
+  "sector": "cut-0",
+  "series_order": 60,
+  "values": [
+    "(-1.048607265841190157330580903003584667068059e-2+0i)",
+    "(-2.483525186251579199737754416564319043081834e-3+0i)"
+  ]
+}

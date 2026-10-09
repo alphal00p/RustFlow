@@ -1,0 +1,125 @@
+{
+  "basis": {
+    "coordinates": [
+      "g1_1",
+      "u1"
+    ],
+    "independent_masses": [
+      "line_mass_squared_0"
+    ],
+    "physical_slots": 1,
+    "slots": [
+      "g1_1+line_mass_squared_0",
+      "u1"
+    ]
+  },
+  "cut_decomposition": [
+    {
+      "cut_sign": 1,
+      "cut_slots": [],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1"
+        ]
+      ]
+    },
+    {
+      "cut_sign": -1,
+      "cut_slots": [
+        0
+      ],
+      "determinant": "1",
+      "jacobian_convention": "abs(determinant)^(-D) before energy-shell integration",
+      "loop_routing": [
+        [
+          "1"
+        ]
+      ]
+    }
+  ],
+  "input": {
+    "chemical_potentials": [
+      "1"
+    ],
+    "digits": 12,
+    "edges": [
+      {
+        "charges": [
+          1
+        ],
+        "mass_squared": "1/4",
+        "routing": [
+          "1"
+        ],
+        "vertices": [
+          0,
+          0
+        ]
+      }
+    ],
+    "laurent_orders": [
+      -1,
+      0
+    ],
+    "loop_charges": [
+      [
+        1
+      ]
+    ],
+    "loops": 1,
+    "name": "massive_one_loop_tadpole",
+    "numerator_convention": "shifted_euclidean",
+    "targets": [
+      {
+        "numerator": "1",
+        "powers": [
+          1
+        ]
+      },
+      {
+        "numerator": "1",
+        "powers": [
+          2
+        ]
+      }
+    ],
+    "vertices": 1
+  },
+  "input_identity": "52cc5d4da636d96de5563173f02bf39324e717c771720c73415d24dfcacce714",
+  "numerical_evaluation": {
+    "cli_interfaces": [
+      "finite-density",
+      "finite-density-sample"
+    ],
+    "performed": false,
+    "python_interface": "evaluate_finite_density",
+    "requirement": "evaluation separately requires admission and closure of every contributing cut sector",
+    "rust_interface": "finite_density::assembly::PreparedDensityFlow",
+    "supported_scope": "docs/finite-density.md"
+  },
+  "operation": "finite-density-prepare",
+  "schema_version": 2,
+  "status": "algebraic_preparation_only",
+  "targets": [
+    [
+      {
+        "coefficient": "1",
+        "powers": [
+          1,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "1",
+        "powers": [
+          2,
+          0
+        ]
+      }
+    ]
+  ]
+}

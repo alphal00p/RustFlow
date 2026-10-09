@@ -193,6 +193,18 @@ def artifacts():
             ],
             'evaluation_status':'not_evaluated','coefficients_compared':[],
         })
+        if record_id == 'I37':
+            independent = {
+                'status':'available_analytic_reference_not_native_acceptance',
+                'file':'reports/validation/2026-10-09-finite-density-native-assembly/independent-e7-reference/reference.json',
+                'derivation':'docs/finite-density-e7-reference.md',
+                'method':'Independent analytically regulated neutral tensor bubbles and compact beta integrals; raised charged line differentiated before massless limit, retaining nonzero upper surface. Gamma-duplication cross-check and exact Laurent expansion.',
+                'last_supplied_order':0,
+                'orders_below_minus_two':'zero by the derived meromorphic expression',
+                'comparison_precision':'Exact analytic coefficients; native 50/80-digit precision and independent epsilon-extrapolant checks passed. No native AMF predictions compared.',
+            }
+            entries[-1]['targets'][0]['additional_independent_reference'] = {**independent, 'target_index':0}
+            entries[-1]['targets'][1]['reference'] = {**independent, 'target_index':1}
     # A small massive nonfactorized graph requires complete 0/1/2-cut assembly.
     small_edges=[[0,1],[1,0],[1,0]]
     small_routing=[[1,0],[0,1],[1,-1]]
@@ -243,11 +255,14 @@ def artifacts():
         'small_graph':{'definition':'examples/finite_density/massive_two_loop_sunset.json',
                        'graph_certificate':small,'required_cut_components':[0,1,2],
                        'vacuum_contribution':'Nonzero for positive masses; must evaluate and compare, not omit as scaleless.',
-                       'reference_status':'required_not_generated',
-                       'reference_method':'Independent massive Schwinger-parameter vacuum integral plus regulated complete energy-contour residues and dimensionally subtracted spatial integration; masses varied independently before raising line0.',
-                       'attainable_comparison_precision':'Not established; target 12 absolute digits after regulator subtraction.',
+                       'reference_status':'available_at_D_12_over_5_not_Laurent',
+                       'reference_method':'Independent Schwinger vacuum sectors, reference-only Feynman parameters and compact radial/angular quadrature with exact endpoint maps; original numerator and independent mass derivatives retain moving-support surfaces.',
+                       'reference_artifact':'reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json',
+                       'reference_derivation':'docs/finite-density-reference.md',
+                       'attainable_comparison_precision':'All 12 reference components/totals pass independent node and precision refinements at D=12/5; empirical changes are not rigorous interval bounds. Laurent reference precision remains unestablished.',
+                       'native_comparison':{'status':'vacuum_and_cut0_only_passed','report':'reports/validation/2026-10-09-finite-density-native-assembly/single-sunset-reference-comparison.json','unique_sector_target_values':4,'configurations':4,'relative_tolerance':'1e-12','small_magnitude_threshold':'1e-20','small_absolute_tolerance':'1e-25','full_amplitude_compared':False,'laurent_coefficients_compared':0},
                        'capabilities':['raised charged line','medium-vector numerator','nonzero upper Fermi surface','full massive assembly'],
-                       'evaluation_status':'not_evaluated'},
+                       'evaluation_status':'partial_sectors_compared_full_two_cut_closure_unresolved'},
         'remaining_mandatory_cases':[
             {'case':'support_below_at_above_threshold','reference_status':'exact analytic compact one-loop moments and distributions are derivable; implement and test'},
             {'case':'independent_chemical_potentials','reference_status':'required_not_generated','definition':'examples/finite_density/two_independent_chemical_cycles.json','chemical_parameter_points':[['1','3/2'],['5/4','7/4']],'graph_certificates_by_species':multi_certificates,'reference_method':'Independent regulated complete-contour residues and arbitrary-precision subtracted spatial integration; target 12 absolute digits, attainable accuracy not established.'},

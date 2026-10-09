@@ -424,10 +424,33 @@ pub fn projected_factor_region(
     );
     let mut projected = Atom::new();
     for (m, c) in crate::coefficient::exact_coefficient_list(&numerator.expand(), coordinates)? {
+        let degrees = powers(&m, coordinates)?;
+        // Bound the native tensor input before expanding repeated vectors or
+        // allocating rank-by-rank Gram matrices. Preserve the native odd-rank
+        // zero even for large powers: no tensor construction is needed there.
+        let mut mixed_rank = 0usize;
+        for (j, &degree) in degrees.iter().enumerate() {
+            let (a, b) = labels[j];
+            if is_hard(a) != is_hard(b) {
+                let degree = usize::try_from(degree)
+                    .map_err(|_| Error::Unsupported("nonpolynomial mixed numerator".into()))?;
+                mixed_rank = mixed_rank
+                    .checked_add(degree)
+                    .ok_or_else(|| Error::Limit("mixed tensor rank overflow".into()))?;
+            }
+        }
+        if mixed_rank % 2 == 1 {
+            continue;
+        }
+        if mixed_rank > 32 {
+            return Err(Error::Limit(format!(
+                "mixed tensor rank {mixed_rank} exceeds 32 before Gram construction"
+            )));
+        }
         let mut h = Vec::new();
         let mut s = Vec::new();
         let mut unmixed = c;
-        for (j, n) in powers(&m, coordinates)?.into_iter().enumerate() {
+        for (j, n) in degrees.into_iter().enumerate() {
             let (a, b) = labels[j];
             if is_hard(a) != is_hard(b) {
                 let (a, b) = if is_hard(a) { (a, b) } else { (b, a) };

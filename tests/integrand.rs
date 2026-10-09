@@ -13,6 +13,38 @@ fn template() -> IntegralFamily {
     }
 }
 #[test]
+fn large_mixed_rank_is_bounded_before_gram_allocation() {
+    let coordinates = vec![
+        parse!("large_rank_hh"),
+        parse!("large_rank_hs"),
+        parse!("large_rank_ss"),
+    ];
+    let mut family = template();
+    family.loops.push("q".into());
+    // Without the preflight bound this tiny monomial requests two matrices
+    // with more than a billion Atom entries each before the native rejection.
+    let even = coordinates[1].clone().pow(32766);
+    assert!(matches!(
+        integrand::projected_factor_region(&even, &coordinates, &family, &[true, false], 10),
+        Err(Error::Limit(message)) if message.contains("before Gram construction")
+    ));
+    // Odd vacuum tensors still vanish exactly without allocating those arrays.
+    let odd = coordinates[1].clone().pow(32767);
+    let projected =
+        integrand::projected_factor_region(&odd, &coordinates, &family, &[true, false], 10)
+            .unwrap();
+    assert!(
+        projected
+            .terms
+            .iter()
+            .fold(Atom::zero(), |value, term| {
+                value + &term.hard * &term.soft
+            })
+            .is_zero()
+    );
+}
+
+#[test]
 fn partial_fractions_and_numerators_reconstruct_exactly() {
     let x = Atom::var(symbol!("x"));
     let expr = parse!("x^3/((x-1)^2*(x-2))");

@@ -5,6 +5,7 @@ This utility never imports the production solver or changes either input artifac
 Run from any directory; the report directory is relative to the repository root.
 """
 
+import argparse
 import hashlib
 import json
 import re
@@ -60,9 +61,16 @@ def difference(value, reference):
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--predictions", type=Path,
+                        default=REPORT / "single-sunset-attempt-1")
+    parser.add_argument("--output", type=Path,
+                        default=REPORT / "single-sunset-reference-comparison.json")
+    args = parser.parse_args()
+    args.predictions = args.predictions.resolve()
     reference_path = REPORT / "independent-reference/quadrature-64-60.json"
     provenance_path = REPORT / "independent-reference/independent-reference.json"
-    input_path = REPORT / "single-sunset-attempt-1/input.json"
+    input_path = args.predictions / "input.json"
     reference = read(reference_path)
     provenance = read(provenance_path)
     assert read(input_path) == provenance["definition"]
@@ -92,7 +100,7 @@ def main():
     for sector in ["vacuum", "cut-0"]:
         previous = None
         for config_index, (digits, order, start) in enumerate(CONFIGURATIONS):
-            path = REPORT / f"single-sunset-attempt-1/prediction-{sector}-{digits}-{order}-{start}.json"
+            path = args.predictions / f"prediction-{sector}-{digits}-{order}-{start}.json"
             record = read(path)
             assert record["sector"] == sector
             assert record["epsilon"] == provenance["epsilon"]
@@ -146,7 +154,8 @@ def main():
         "largest_reference_relative_difference": str(max(Decimal(c["relative_difference"]) for c in comparisons)),
         "largest_refinement_relative_difference": str(max(Decimal(c["relative_difference"]) for c in refinements)),
     }
-    output = REPORT / "single-sunset-reference-comparison.json"
+    output = args.output
+    output.parent.mkdir(parents=True, exist_ok=True)
     output.write_text(json.dumps(report, indent=2) + "\n")
     print(json.dumps({k: report[k] for k in ["status", "reference_comparison_count", "independent_refinement_comparison_count", "largest_reference_relative_difference", "largest_refinement_relative_difference"]}, indent=2))
     for comparison in comparisons:

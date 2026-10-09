@@ -128,6 +128,18 @@ impl<const N: usize> WeightedMeasure<N> {
         divergence: &Atom,
         domain_budget: usize,
     ) -> Result<Vec<GuardedIdentity<N>>> {
+        self.ibp_partitioned(id, indices, direction, divergence, domain_budget, false)
+    }
+
+    fn ibp_partitioned(
+        &self,
+        id: &str,
+        indices: &[Symbol; N],
+        direction: &[Atom],
+        divergence: &Atom,
+        domain_budget: usize,
+        split_inactive: bool,
+    ) -> Result<Vec<GuardedIdentity<N>>> {
         if indices
             .iter()
             .collect::<std::collections::BTreeSet<_>>()
@@ -148,8 +160,32 @@ impl<const N: usize> WeightedMeasure<N> {
                 "weighted vector-field coordinate count".into(),
             ));
         }
+        // A factor annihilated by this vector field contributes no derivative
+        // in any of its distribution branches. Keep that occupation axis at
+        // its full admitted range rather than splitting an inactive theta face.
+        let derivatives = self
+            .factors
+            .iter()
+            .map(|factor| {
+                self.coordinates
+                    .iter()
+                    .zip(direction)
+                    .fold(Atom::zero(), |sum, (coordinate, action)| {
+                        let AtomView::Var(variable) = coordinate.as_view() else {
+                            unreachable!()
+                        };
+                        sum + factor.derivative(variable.get_symbol()) * action
+                    })
+                    .expand()
+                    .together()
+                    .cancel()
+            })
+            .collect::<Vec<_>>();
         let occupations = (0..N)
-            .filter(|&i| self.roles[i] == IndexRole::Occupation)
+            .filter(|&i| {
+                self.roles[i] == IndexRole::Occupation
+                    && (split_inactive || !derivatives[i].is_zero())
+            })
             .collect::<Vec<_>>();
         let cases = 1_usize
             .checked_shl(
@@ -176,13 +212,7 @@ impl<const N: usize> WeightedMeasure<N> {
             let mut terms = BTreeMap::new();
             self.multiply(divergence, [0; N], &mut terms)?;
             for slot in 0..N {
-                let mut derivative = Atom::new();
-                for (coordinate, action) in self.coordinates.iter().zip(direction) {
-                    let AtomView::Var(v) = coordinate.as_view() else {
-                        unreachable!()
-                    };
-                    derivative += self.factors[slot].derivative(v.get_symbol()) * action;
-                }
+                let derivative = &derivatives[slot];
                 let coefficient = if self.roles[slot] == IndexRole::Occupation
                     && bounds[slot] == IndexBounds::fixed(0)
                 {
@@ -201,6 +231,118 @@ impl<const N: usize> WeightedMeasure<N> {
             }
         }
         Ok(sources)
+    }
+
+    /// Exact polynomial IBPs tangent to occupied shells. The first
+    /// `compact_loops` Gram momenta are real compact shell variables. Spatial
+    /// angular fields also annihilate every occupation factor and are emitted
+    /// first; the radial shell-tangent fields retain their explicit Fermi flux.
+    /// These are direct total derivatives supplied to the same native guarded
+    /// source owner, without changing its integral ordering or elimination.
+    pub fn compact_tangent_ibps(
+        &self,
+        loops: usize,
+        compact_loops: usize,
+        dimension: &Atom,
+        indices: &[Symbol; N],
+        domain_budget: usize,
+    ) -> Result<Vec<GuardedIdentity<N>>> {
+        if compact_loops > loops {
+            return Err(Error::InvalidInput("compact tangent loop count".into()));
+        }
+        let mut sources = Vec::new();
+        for angular in [true, false] {
+            for differentiated in 0..compact_loops {
+                for vector in 0..loops {
+                    if angular && differentiated == vector {
+                        continue;
+                    }
+                    let (direction, divergence) =
+                        self.tangent_action(loops, dimension, differentiated, vector, angular)?;
+                    let kind = if angular {
+                        "angular-tangent"
+                    } else {
+                        "shell-tangent"
+                    };
+                    sources.extend(self.ibp(
+                        &format!("{kind}/{differentiated}/{vector}"),
+                        indices,
+                        &direction,
+                        &divergence,
+                        domain_budget,
+                    )?);
+                }
+            }
+        }
+        Ok(sources)
+    }
+
+    fn tangent_action(
+        &self,
+        loops: usize,
+        dimension: &Atom,
+        differentiated: usize,
+        vector: usize,
+        angular: bool,
+    ) -> Result<(Vec<Atom>, Atom)> {
+        if self.coordinates.len() != loops * (loops + 1) / 2 + loops
+            || differentiated >= loops
+            || vector >= loops
+            || (angular && differentiated == vector)
+        {
+            return Err(Error::InvalidInput("compact tangent Gram geometry".into()));
+        }
+        let pairs = (0..loops)
+            .flat_map(|a| (a..loops).map(move |b| (a, b)))
+            .collect::<Vec<_>>();
+        let scalar = |a: usize, b: usize| {
+            self.coordinates[pairs
+                .iter()
+                .position(|&(i, j)| (i, j) == (a.min(b), a.max(b)))
+                .unwrap()]
+            .clone()
+        };
+        let energy = |a: usize| self.coordinates[pairs.len() + a].clone();
+        let i = differentiated;
+        let j = vector;
+        let ei = energy(i);
+        let ej = energy(j);
+        let gij = scalar(i, j);
+        let flux = &ei * &ej - &gij;
+        // u²=1. In the angular case, v=(Ei²-gii)(qj-Ej u)
+        // -(Ei Ej-gij)(qi-Ei u); otherwise v=Ei qj-gij u.
+        let contraction = |a| {
+            if angular {
+                (ei.pow(2) - scalar(i, i)) * (scalar(a, j) - &ej * energy(a))
+                    - &flux * (scalar(a, i) - &ei * energy(a))
+            } else {
+                &ei * scalar(a, j) - &gij * energy(a)
+            }
+            .expand()
+        };
+        let mut direction = pairs
+            .iter()
+            .map(|&(a, b)| {
+                (Atom::num(i32::from(a == i)) * contraction(b)
+                    + Atom::num(i32::from(b == i)) * contraction(a))
+                .expand()
+            })
+            .collect::<Vec<_>>();
+        for a in 0..loops {
+            direction.push(if !angular && a == i {
+                flux.clone().expand()
+            } else {
+                Atom::zero()
+            });
+        }
+        let divergence = if angular {
+            (Atom::num(2) - dimension) * flux
+        } else if i == j {
+            (dimension - Atom::one()) * ei
+        } else {
+            Atom::zero()
+        };
+        Ok((direction, divergence.expand()))
     }
 
     /// Exact polynomial/distribution multiplication identities. These include
@@ -245,6 +387,30 @@ impl<const N: usize> WeightedMeasure<N> {
         dimension: &Atom,
         indices: &[Symbol; N],
         domain_budget: usize,
+    ) -> Result<Vec<GuardedIdentity<N>>> {
+        self.lorentz_ibps_partitioned(loops, dimension, indices, domain_budget, false)
+    }
+
+    /// Equivalent Lorentz identities with every occupation face partitioned.
+    /// Native discovery may cover different domains for equivalent source
+    /// presentations, so the validated legacy presentation remains available.
+    pub(crate) fn lorentz_ibps_legacy(
+        &self,
+        loops: usize,
+        dimension: &Atom,
+        indices: &[Symbol; N],
+        domain_budget: usize,
+    ) -> Result<Vec<GuardedIdentity<N>>> {
+        self.lorentz_ibps_partitioned(loops, dimension, indices, domain_budget, true)
+    }
+
+    fn lorentz_ibps_partitioned(
+        &self,
+        loops: usize,
+        dimension: &Atom,
+        indices: &[Symbol; N],
+        domain_budget: usize,
+        split_inactive: bool,
     ) -> Result<Vec<GuardedIdentity<N>>> {
         if self.coordinates.len() != loops * (loops + 1) / 2 + loops {
             return Err(Error::InvalidInput(
@@ -297,12 +463,13 @@ impl<const N: usize> WeightedMeasure<N> {
                 } else {
                     Atom::new()
                 };
-                sources.extend(self.ibp(
+                sources.extend(self.ibp_partitioned(
                     &format!("lorentz/{differentiated}/{vector}"),
                     indices,
                     &direction,
                     &divergence,
                     domain_budget,
+                    split_inactive,
                 )?);
             }
         }
@@ -354,6 +521,173 @@ impl EnergyResidue {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    fn tangent_measure() -> WeightedMeasure<9> {
+        let coordinates = (0..5)
+            .map(|i| Atom::var(symbol!(format!("fd_tangent::c_{i}"))))
+            .collect::<Vec<_>>();
+        let c = &coordinates;
+        WeightedMeasure::new(
+            coordinates.clone(),
+            [
+                &c[0] - Atom::num(2),
+                &c[2] - Atom::num(3),
+                &c[0] + &c[2] - Atom::num(2) * &c[1] - Atom::num(5),
+                c[3].clone(),
+                c[4].clone(),
+                Atom::num(7) - &c[3],
+                c[3].clone(),
+                Atom::num(11) - &c[4],
+                c[4].clone(),
+            ],
+            [
+                IndexRole::RequiredCut,
+                IndexRole::RequiredCut,
+                IndexRole::Ordinary,
+                IndexRole::Ordinary,
+                IndexRole::Ordinary,
+                IndexRole::Occupation,
+                IndexRole::Occupation,
+                IndexRole::Occupation,
+                IndexRole::Occupation,
+            ],
+        )
+        .unwrap()
+    }
+
+    #[test]
+    fn tangent_gram_actions_and_divergences_match_independent_cartesian_fields() {
+        let measure = tangent_measure();
+        for dimension in 2..=5 {
+            let variables = (0..2)
+                .map(|i| {
+                    (0..dimension)
+                        .map(|mu| symbol!(format!("fd_tangent_cartesian::q_{dimension}_{i}_{mu}")))
+                        .collect::<Vec<_>>()
+                })
+                .collect::<Vec<_>>();
+            let q = variables
+                .iter()
+                .map(|row| row.iter().map(|&s| Atom::var(s)).collect::<Vec<_>>())
+                .collect::<Vec<_>>();
+            let dot = |i: usize, j: usize| {
+                (1..dimension).fold(&q[i][0] * &q[j][0], |s, mu| s - &q[i][mu] * &q[j][mu])
+            };
+            let gram = [
+                dot(0, 0),
+                dot(0, 1),
+                dot(1, 1),
+                q[0][0].clone(),
+                q[1][0].clone(),
+            ];
+            let substitution = measure
+                .coordinates
+                .iter()
+                .cloned()
+                .zip(gram.iter().cloned())
+                .collect::<BTreeMap<_, _>>();
+            for angular in [false, true] {
+                for i in 0..2 {
+                    for j in 0..2 {
+                        if angular && i == j {
+                            continue;
+                        }
+                        let (action, divergence) = measure
+                            .tangent_action(2, &Atom::num(dimension as i64), i, j, angular)
+                            .unwrap();
+                        let ri2 = q[i][0].pow(2) - dot(i, i);
+                        let flux = &q[i][0] * &q[j][0] - dot(i, j);
+                        let cartesian = (0..dimension)
+                            .map(|mu| {
+                                let time = Atom::num(i32::from(mu == 0));
+                                if angular {
+                                    &ri2 * (&q[j][mu] - &q[j][0] * &time)
+                                        - &flux * (&q[i][mu] - &q[i][0] * &time)
+                                } else {
+                                    &q[i][0] * &q[j][mu] - dot(i, j) * time
+                                }
+                            })
+                            .collect::<Vec<_>>();
+                        let shell_action = (1..dimension)
+                            .fold(&q[i][0] * &cartesian[0], |s, mu| {
+                                s - &q[i][mu] * &cartesian[mu]
+                            });
+                        assert!(shell_action.expand().is_zero());
+                        if angular {
+                            assert!(cartesian[0].expand().is_zero());
+                        }
+                        let cartesian_divergence = (0..dimension).fold(Atom::zero(), |s, mu| {
+                            s + cartesian[mu].derivative(variables[i][mu])
+                        });
+                        assert!(
+                            (cartesian_divergence
+                                - crate::family::substitute(&divergence, &substitution))
+                            .expand()
+                            .is_zero()
+                        );
+                        for (coordinate, abstract_action) in gram.iter().zip(action) {
+                            let cartesian_action = (0..dimension).fold(Atom::zero(), |s, mu| {
+                                s + coordinate.derivative(variables[i][mu]) * &cartesian[mu]
+                            });
+                            assert!(
+                                (cartesian_action
+                                    - crate::family::substitute(&abstract_action, &substitution))
+                                .expand()
+                                .is_zero()
+                            );
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #[test]
+    fn inactive_occupations_are_unsplit_and_tangent_sources_do_not_raise_shells() {
+        let measure = tangent_measure();
+        let indices = std::array::from_fn(|i| symbol!(format!("fd_tangent::a_{i}")));
+        let sources = measure
+            .compact_tangent_ibps(2, 2, &Atom::num(4), &indices, 4)
+            .unwrap();
+        let angular = sources
+            .iter()
+            .filter(|s| s.id.starts_with("angular-tangent/"))
+            .collect::<Vec<_>>();
+        assert_eq!(angular.len(), 2);
+        for source in &sources {
+            assert!(
+                source
+                    .terms
+                    .iter()
+                    .all(|term| term.shift[0] <= 0 && term.shift[1] <= 0)
+            );
+        }
+        for source in angular {
+            assert!(
+                source.domain.bounds()[5..]
+                    .iter()
+                    .all(|b| *b == IndexBounds::new(Some(0), None).unwrap())
+            );
+            assert!(
+                source
+                    .terms
+                    .iter()
+                    .all(|term| term.shift[5..].iter().all(|&s| s == 0))
+            );
+        }
+        // Each ordinary Lorentz field acts on only one loop's two endpoints,
+        // so four cases suffice even though there are four occupations total.
+        let lorentz = measure.lorentz_ibps(2, &Atom::num(4), &indices, 4).unwrap();
+        assert!(
+            lorentz
+                .iter()
+                .filter(|s| s.id.starts_with("lorentz/0/"))
+                .all(|s| s.domain.bounds()[7..]
+                    .iter()
+                    .all(|b| *b == IndexBounds::new(Some(0), None).unwrap()))
+        );
+    }
+
     #[test]
     fn raised_residue_has_nonzero_surface_with_correct_sign() {
         let e = symbol!("fd_residue_e");

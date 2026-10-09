@@ -1,12 +1,16 @@
 //! Automatic boundary matching for occupied, fixed-shell auxiliary mass flows.
 //!
-//! Every uncut physical quadratic is deformed. Compact momenta remain soft,
-//! and the admitted regions have at most one hard virtual loop. Their exact
-//! integrand expansion is log-free at symbolic epsilon: the remaining hard
-//! integrals have a single large scale, while the compact factors are
-//! polynomials integrated against fixed shell and endpoint distributions.
-//! More general soft denominators and multiloop hard regions need additional
-//! weighted recursion and are rejected explicitly.
+//! Every uncut physical quadratic is deformed. Compact momenta remain soft.
+//! Each expanded denominator is purely hard or constant; numerator-completion
+//! powers are nonpositive. Tensor projection therefore leaves polynomial soft
+//! factors, integrated against fixed shell and endpoint distributions. Any
+//! unrestricted virtual soft loop is a scaleless polynomial integral.
+//!
+//! The hard vacuum factors have one large scale and use ordinary recursive
+//! AMF. At generic symbolic epsilon their eta dependence is a pure power, so
+//! the region coefficients have no explicit logarithms. Expanding the retained
+//! epsilon-dependent exponents later can generate logarithms. Partial shifts
+//! and retained nonpolynomial soft factors need separate weighted recursion.
 use super::boundary::{
     IntegratedOccupiedBoundary, OccupiedBoundaryDistribution, OccupiedBoundaryLimits,
 };
@@ -179,15 +183,9 @@ impl<'a> OccupiedFlowBoundary<'a> {
             })
             .collect::<Result<Vec<_>>>()?;
         let regions = crate::cut_regions::enumerate_compact(&ordinary, &compact, self.context)?;
-        if regions
-            .iter()
-            .any(|region| region.hard.iter().filter(|&&hard| hard).count() > 1)
-        {
-            return Err(Error::Unsupported(
-                "occupied flow boundaries currently admit at most one hard virtual loop per region"
-                    .into(),
-            ));
-        }
+        // Occupied loops stay soft: every ordinary hard child has fewer loops
+        // than this weighted parent. The existing ordinary owner then performs
+        // its own massive-line recursion with the tadpole-only terminal policy.
         let transformed = regions
             .iter()
             .map(|region| ordinary.transform_loops(&region.transformation))

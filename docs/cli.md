@@ -12,6 +12,79 @@ cargo run --release --bin rustflow -- transport examples/cli/physical-transport.
 cargo run --release --bin rustflow -- transport examples/cli/algebraic-transport.json
 ```
 
+## Native finite-density input and evaluation
+
+The finite-density commands read the scalar graph, exact momentum routing,
+conserved chemical charges, physical masses and original polynomial targets
+directly from `DensityInput` JSON. They do not require a generated particle model.
+
+```sh
+nix develop --command cargo run --locked --release --bin rustflow -- \
+  finite-density-prepare examples/finite_density/massive_two_loop_sunset.json
+nix develop --command cargo run --locked --release --bin rustflow -- \
+  finite-density-sample examples/finite_density/massive_two_loop_sunset.json 4/5
+nix develop --command cargo run --locked --release --bin rustflow -- \
+  finite-density examples/finite_density/massive_two_loop_sunset.json
+```
+
+`finite-density-prepare` checks the input and converts its numerator exactly.
+Its schema-version-2 report records `numerical_evaluation.performed: false` and
+links the separate evaluation entry points. Earlier schema-version-1 preparation
+reports used a global `available: false` field; historical reports are retained
+unchanged, but that field is absent from current preparation output.
+`finite-density-sample` attempts the complete vacuum-plus-occupied amplitude at
+an exact nonzero rational epsilon, with D=4-2 epsilon. Zero, approximate decimal
+and symbolic epsilon arguments are rejected before reduction. `finite-density`
+attempts Laurent reconstruction over the input's `laurent_orders`, assembling all
+cut contributions at each common regulator sample before fitting. Both evaluation
+commands use `digits` from the input and native `FlowOptions` defaults, with all
+uncut physical factors deformed. Weighted closure uses at most 12 rounds,
+discovery depth 3 and 8192 discovery domains; other budgets retain native defaults.
+
+Successful output uses the **unscaled Euclidean amplitude** convention, without
+MSbar factors or the supplied oracle's scale factor. Complex values contain
+`real` and `imaginary` decimal strings. Target order matches `targets` in the
+input. Sample output retains every `cut_slots` contribution, strict empty-support
+proofs, exact reduction conditions, contour certificates and integrated boundary
+region provenance. A single sample has `verified_digits: null`; working precision
+alone does not establish accuracy. Laurent output retains independent fit changes,
+verified digits, regulator sample counts and refinement counts.
+
+These commands propagate native failures and never return an incomplete cut sum
+as a complete amplitude. Runtime weighted-AMF index arities 7 and 9 are currently
+compiled. Strict support-zero proofs and admitted polynomial compact terminals
+are handled before that dispatch and do not require those arities. Active shells
+require strictly positive rational squared masses; massless occupied endpoints are not
+numerically admitted. Weighted flow further requires a native massive-sunset or
+heavy-edge common-contour certificate, all uncut physical factors shifted and
+successful guarded closure. The above
+massive example's first single-cut and vacuum values have passed independent
+checks, but the recorded complete above-threshold attempt failed at two-cut
+closure. The full commands are interfaces to the current native pipeline, not a
+claim that the mandatory small-graph and four-loop acceptance gates have passed.
+See [finite-density.md](finite-density.md) for the exact measure and current scope.
+
+In the embedding Symbolica Python host, the corresponding functions are:
+
+```python
+import json
+from symbolica.community.hep.integration import (
+    prepare_finite_density, evaluate_finite_density,
+)
+
+prepared = json.loads(prepare_finite_density(input_json))
+sample = json.loads(evaluate_finite_density(input_json, "4/5"))
+laurent = json.loads(evaluate_finite_density(input_json))
+```
+
+`evaluate_finite_density` also accepts keyword arguments `options` (native
+`EvaluationOptions`), `control` and `start_scale` (default 8, minimum 4). The
+start scale controls occupied transport; ordinary vacuum transport retains its
+native setting. Without `options`, input `digits` and the same CLI defaults are
+used. Both Python functions return JSON strings; evaluation releases the Python
+GIL and preserves native typed exceptions on failure. The bindings are registered
+in the existing Symbolica extension, not in a separately loaded Symbolica runtime.
+
 ## Native HEPKit graph input
 
 The graph example references a native HEPKit model JSON and an unmodified native

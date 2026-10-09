@@ -1,0 +1,28 @@
+
+running 22 tests
+test finite_density::reduction::tests::fixed_shell_placement_and_auxiliary_sign_are_explicit ... ok
+2026-10-09T18:00:58.283481Z  WARN symbolica::coefficient: Created infinity by raising 0 to the power of -1
+test finite_density::compact::tests::finite_jump_threshold_matches_independent_thermal_radial_integrals ... ok
+test finite_density::interface::tests::epsilon_is_exact_and_rejected_before_graph_preparation ... ok
+test finite_density::measure::tests::raised_residue_has_nonzero_surface_with_correct_sign ... ok
+test finite_density::compact::tests::massless_and_medium_seeds_have_defined_domains ... ok
+test finite_density::basis::tests::redundant_physical_slots_are_preserved ... ok
+test finite_density::interface::tests::sample_json_preserves_target_order_and_native_decimal_precision ... ok
+test finite_density::interface::tests::laurent_json_retains_accuracy_evidence_and_signed_powers ... ok
+test finite_density::basis::tests::physical_mass_derivative_keeps_original_medium_numerator_fixed ... ok
+test finite_density::guarded::tests::uncancelled_source_and_condition_denominators_remain_required ... ok
+test finite_density::measure::tests::theta_zero_is_not_a_cut_zero_and_lower_endpoint_is_retained ... ok
+test finite_density::compact::tests::support_raised_surface_and_threshold_limits ... ok
+test finite_density::guarded::tests::generated_ball_sources_reduce_surface_moments_to_volume ... ok
+test finite_density::geometry::tests::negative_potentials_reverse_future_coordinates_and_missing_cuts_vanish ... ok
+test finite_density::reduction::tests::round_budget_keeps_provisional_frontier_unresolved ... ok
+test finite_density::guarded::tests::roles_exact_replay_conditions_and_measure_bound_persistence ... ok
+test finite_density::measure::tests::tangent_gram_actions_and_divergences_match_independent_cartesian_fields ... ok
+test finite_density::reduction::tests::native_compact_flow_closes_without_a_caller_terminal_basis ... ok
+test finite_density::geometry::tests::occupied_routing_phases_support_and_fixed_shell_deformation ... ok
+test finite_density::vacuum::tests::zero_vacuum_projection_retains_original_coefficient_poles ... ok
+test finite_density::measure::tests::inactive_occupations_are_unsplit_and_tangent_sources_do_not_raise_shells ... ok
+test finite_density::contour::tests::four_loop_heavy_edge_certificate_checks_every_cut_and_strict_margin ... ok
+
+test result: ok. 22 passed; 0 failed; 0 ignored; 0 measured; 210 filtered out; finished in 0.06s
+

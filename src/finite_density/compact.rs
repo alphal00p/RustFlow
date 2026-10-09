@@ -171,6 +171,25 @@ impl CompactShell {
                 // Both one-sided limits vanish; no arbitrary theta(0) value.
                 return Ok(p.zero());
             }
+            if threshold_exponent.is_zero() && power > 1 {
+                // Positive mass, alpha=d/2+k_radial=power-1>=1. Regulate the
+                // occupation by n_F((E-mu)/T) before taking mass derivatives.
+                // The leading radial integral is proportional to
+                // T^alpha int x^(alpha-1)n_F(x-gap/(2mT)) dx. Its alpha-th
+                // gap derivative gives Gamma(alpha)*n_F(0), with n_F(0)=1/2;
+                // derivatives of smooth prefactors vanish as T->0+. This is
+                // the regulated finite jump, not an assignment of theta(0).
+                let angular = Self::angular(spatial_dimension, p)?;
+                let mass_power = Rational::from((i64::from(energy_power) - 1, 2));
+                return Ok(p.scale(
+                    &p.mul(
+                        &angular,
+                        &p.pow(&p.rational(&self.mass_squared), &p.rational(&mass_power)),
+                    ),
+                    -1,
+                    8 * i64::from(power - 1),
+                ));
+            }
             return Err(Error::Numerical(format!(
                 "raised occupied threshold has gap exponent {threshold_exponent}; no finite continuous pointwise value (thermal distributional limit required)"
             )));
@@ -229,6 +248,76 @@ impl CompactShell {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn finite_jump_threshold_matches_independent_thermal_radial_integrals() {
+        // Differentiate the original fixed-spatial-momentum thermal kernels
+        // before integration. With f(E)=n_F((E-mu)/T), d=2 gives
+        // I2=1/(8pi) int_m^infty [f'/E-f/E²] dE,
+        // I3[q²]=-1/(32pi) int_m^infty (E²-m²)
+        //                       [f''/E²-3f'/E³+3f/E⁴] dE.
+        // Independent integration by parts gives -f(m)/(8pi*m) and
+        // -f(m)/(16pi*m), respectively. Integrate both kernels numerically,
+        // including smooth bulk and endpoint contributions, at finite T.
+        let mass = 0.5_f64;
+        let pi = std::f64::consts::PI;
+        for temperature in [0.125_f64, 0.03125, 0.0078125] {
+            for offset in [-2.0_f64, 0.0, 2.0] {
+                let mu = mass + offset * temperature;
+                let intervals = 32768;
+                let step = 80.0 / intervals as f64;
+                let mut integrals = [0.0_f64; 2];
+                for i in 0..=intervals {
+                    let x = i as f64 * step;
+                    let energy = mass + temperature * x;
+                    let f = 1.0 / (1.0 + (x + (mass - mu) / temperature).exp());
+                    let first = -f * (1.0 - f) / temperature;
+                    let second = f * (1.0 - f) * (1.0 - 2.0 * f) / (temperature * temperature);
+                    let kernels = [
+                        temperature / (8.0 * pi) * (first / energy - f / energy.powi(2)),
+                        -temperature / (32.0 * pi)
+                            * (energy * energy - mass * mass)
+                            * (second / energy.powi(2) - 3.0 * first / energy.powi(3)
+                                + 3.0 * f / energy.powi(4)),
+                    ];
+                    let weight = if i == 0 || i == intervals {
+                        1.0
+                    } else if i % 2 == 0 {
+                        2.0
+                    } else {
+                        4.0
+                    };
+                    for (sum, kernel) in integrals.iter_mut().zip(kernels) {
+                        *sum += weight * kernel;
+                    }
+                }
+                let f_at_mass = 1.0 / (1.0 + (-offset).exp());
+                for (integral, expected) in integrals.into_iter().zip([
+                    -f_at_mass / (8.0 * pi * mass),
+                    -f_at_mass / (16.0 * pi * mass),
+                ]) {
+                    assert!((step * integral / 3.0 - expected).abs() < 1e-10);
+                }
+            }
+        }
+        let shell = CompactShell {
+            mass_squared: Rational::from((1, 4)),
+            chemical_potential: Rational::from((1, 2)),
+        };
+        let p = Precision::decimal(50).unwrap();
+        for (power, radial_power, expected) in [(2, 0, "-1/(8*pi)"), (3, 1, "-1/(16*pi)")] {
+            let actual = shell
+                .raised_moment(&Rational::from(2), power, 0, radial_power, 40, 10000, p)
+                .unwrap();
+            let expected = p.eval(&parse!(expected), &HashMap::default()).unwrap();
+            assert!(p.close(&actual, &expected, 40));
+        }
+        assert!(
+            matches!(shell.raised_moment(&Rational::from(2), 3, 0, 0, 40, 10000, p),
+            Err(Error::Numerical(message)) if message.contains("gap exponent -1"))
+        );
+    }
+
     #[test]
     fn support_raised_surface_and_threshold_limits() {
         let p = Precision::decimal(45).unwrap();

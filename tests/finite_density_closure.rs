@@ -7,7 +7,9 @@ use symbolica::prelude::*;
 use symbolica_amflow::RunContext;
 use symbolica_amflow::finite_density::DensityInput;
 use symbolica_amflow::finite_density::guarded::{GuardedDiscoveryOptions, GuardedMeasureIdentity};
-use symbolica_amflow::finite_density::preparation::PreparedWeightedSources;
+use symbolica_amflow::finite_density::preparation::{
+    PreparedWeightedSources, WeightedSourcePolicy,
+};
 use symbolica_amflow::finite_density::reduction::{
     WeightedClosureOptions, WeightedClosureOutcome, prepare_weighted_system,
 };
@@ -16,17 +18,34 @@ fn physical_sources<const N: usize>(
     cut: &[usize],
     shifted: &[usize],
 ) -> (DensityInput, PreparedWeightedSources<N>) {
+    physical_sources_with_policy(cut, shifted, WeightedSourcePolicy::default())
+}
+
+fn physical_sources_with_policy<const N: usize>(
+    cut: &[usize],
+    shifted: &[usize],
+    policy: WeightedSourcePolicy,
+) -> (DensityInput, PreparedWeightedSources<N>) {
     let input: DensityInput = serde_json::from_str(include_str!(
         "../examples/finite_density/massive_two_loop_sunset.json"
     ))
     .unwrap();
-    physical_sources_from_input(input, cut, shifted)
+    physical_sources_from_input_with_policy(input, cut, shifted, policy)
 }
 
 fn physical_sources_from_input<const N: usize>(
     input: DensityInput,
     cut: &[usize],
     shifted: &[usize],
+) -> (DensityInput, PreparedWeightedSources<N>) {
+    physical_sources_from_input_with_policy(input, cut, shifted, WeightedSourcePolicy::default())
+}
+
+fn physical_sources_from_input_with_policy<const N: usize>(
+    input: DensityInput,
+    cut: &[usize],
+    shifted: &[usize],
+    policy: WeightedSourcePolicy,
 ) -> (DensityInput, PreparedWeightedSources<N>) {
     let family = input
         .prepare()
@@ -37,7 +56,7 @@ fn physical_sources_from_input<const N: usize>(
     let eta = symbol!("sunset_closure::eta");
     let epsilon = symbol!("sunset_closure::epsilon");
     let preparation = family
-        .guarded_sources::<N>(
+        .guarded_sources_with_policy::<N>(
             epsilon,
             4,
             eta,
@@ -55,13 +74,17 @@ fn physical_sources_from_input<const N: usize>(
                 branch: "generic complex eta and dimension away from retained nonzero conditions; completion powers<=0".into(),
                 deformation: format!("native D-eta only in physical slots {shifted:?}; shells and occupation fixed"),
             },
+            policy,
         )
         .unwrap();
     (input, preparation)
 }
 
 fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
-    let (input, preparation) = physical_sources::<N>(cut, shifted);
+    let policy = std::env::var("RUSTFLOW_WEIGHTED_SOURCE_POLICY")
+        .map(|value| value.parse::<WeightedSourcePolicy>().unwrap())
+        .unwrap_or_default();
+    let (input, preparation) = physical_sources_with_policy::<N>(cut, shifted, policy);
     let root = std::env::var_os("RUSTFLOW_WEIGHTED_CLOSURE_REPORT")
         .map(std::path::PathBuf::from)
         .unwrap_or_else(|| std::env::temp_dir().join("rustflow-weighted-closure"));
@@ -74,8 +97,8 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
     };
     let options = WeightedClosureOptions {
         max_rounds: budget("RUSTFLOW_WEIGHTED_ROUNDS", 4),
-        max_frontier: 256,
-        max_requested: 2048,
+        max_frontier: budget("RUSTFLOW_WEIGHTED_FRONTIER", 256),
+        max_requested: budget("RUSTFLOW_WEIGHTED_REQUESTED", 2048),
         discovery: GuardedDiscoveryOptions {
             max_depth: budget("RUSTFLOW_WEIGHTED_DEPTH", 2).try_into().unwrap(),
             max_domains: budget("RUSTFLOW_WEIGHTED_DOMAINS", 128),
@@ -89,9 +112,11 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
         report.join("input.json"),
         serde_json::to_vec_pretty(&serde_json::json!({
             "input": input, "cut_slots": cut, "shifted_slots": shifted,
+            "source_policy": policy.as_str(),
             "source_count": preparation.context.sources().sources().len(),
             "max_rounds": options.max_rounds, "max_depth": options.discovery.max_depth,
             "max_domains": options.discovery.max_domains,
+            "max_frontier": options.max_frontier, "max_requested": options.max_requested,
             "source_context": format!("{:?}", preparation.context.sources()),
             "numerical_prediction": false
         }))
@@ -164,12 +189,83 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
 
 #[test]
 fn physical_sunset_weighted_contexts_construct() {
-    let (_, single) = physical_sources::<7>(&[0], &[1, 2]);
-    let (_, double) = physical_sources::<9>(&[0, 1], &[2]);
+    let (_, single) =
+        physical_sources_with_policy::<7>(&[0], &[1, 2], WeightedSourcePolicy::TangentsThenLorentz);
+    let (_, double) =
+        physical_sources_with_policy::<9>(&[0, 1], &[2], WeightedSourcePolicy::TangentsThenLorentz);
     assert_eq!(single.targets.len(), 2);
     assert_eq!(double.targets.len(), 2);
-    assert!(single.context.sources().sources().len() > 20);
-    assert!(double.context.sources().sources().len() > 90);
+    for compact_loop in 0..2 {
+        assert!(double.context.sources().sources().iter().any(|source| {
+            source
+                .id
+                .starts_with(&format!("angular-tangent/{compact_loop}/"))
+        }));
+        assert!(double.context.sources().sources().iter().any(|source| {
+            source
+                .id
+                .starts_with(&format!("shell-tangent/{compact_loop}/"))
+        }));
+    }
+    assert!(
+        single
+            .context
+            .sources()
+            .sources()
+            .iter()
+            .any(|source| source.id.starts_with("angular-tangent/0/"))
+    );
+}
+
+#[test]
+fn source_policy_is_bound_and_legacy_preserves_all_occupation_faces() {
+    use symbolica_amflow::finite_density::guarded::IndexBounds;
+    let (_, legacy) = physical_sources::<9>(&[0, 1], &[2]);
+    let (_, active) =
+        physical_sources_with_policy::<9>(&[0, 1], &[2], WeightedSourcePolicy::ActiveLorentz);
+    assert!(
+        legacy
+            .context
+            .sources()
+            .measure_id()
+            .contains("source presentation=legacy-lorentz")
+    );
+    assert_ne!(
+        legacy.context.sources().measure_id(),
+        active.context.sources().measure_id()
+    );
+    assert!(
+        legacy
+            .context
+            .sources()
+            .sources()
+            .iter()
+            .all(|s| !s.id.contains("tangent"))
+    );
+    assert!(
+        legacy
+            .context
+            .sources()
+            .sources()
+            .iter()
+            .filter(|s| s.id.starts_with("lorentz/"))
+            .all(|s| s.domain.bounds()[5..]
+                .iter()
+                .all(|b| *b == IndexBounds::fixed(0)
+                    || *b == IndexBounds::new(Some(1), None).unwrap()))
+    );
+    assert!(
+        active
+            .context
+            .sources()
+            .sources()
+            .iter()
+            .filter(|s| s.id.starts_with("lorentz/"))
+            .any(|s| s.domain.bounds()[5..]
+                .iter()
+                .any(|b| *b == IndexBounds::new(Some(0), None).unwrap()))
+    );
+    assert!("unrecognized".parse::<WeightedSourcePolicy>().is_err());
 }
 
 #[test]
@@ -277,4 +373,76 @@ fn physical_sunset_single_cut_native_closure() {
 #[ignore = "bounded native search diagnostic; run explicitly and inspect closed/unresolved report"]
 fn physical_sunset_double_cut_native_closure() {
     diagnostic::<9>(&[0, 1], &[2]);
+}
+
+#[test]
+#[ignore = "one-domain native certification diagnostic; inspect retained unresolved evidence"]
+fn native_single_domain_recenter_diagnostic() {
+    use symbolica_amflow::finite_density::guarded::{IndexBounds, IndexDomain};
+    let policy = std::env::var("RUSTFLOW_WEIGHTED_SOURCE_POLICY")
+        .map(|value| value.parse::<WeightedSourcePolicy>().unwrap())
+        .unwrap_or(WeightedSourcePolicy::TangentsThenLorentz);
+    let (input, prepared) = physical_sources_with_policy::<9>(&[0, 1], &[2], policy);
+    // One concrete domain retained by the bounded physical search, rather than
+    // its growing derivative frontier. No expected failure is presumed here.
+    let domain = IndexDomain::new([
+        IndexBounds::fixed(1),
+        IndexBounds::fixed(1),
+        IndexBounds::fixed(1),
+        IndexBounds::new(Some(-3), Some(-2)).unwrap(),
+        IndexBounds::fixed(0),
+        IndexBounds::fixed(0),
+        IndexBounds::fixed(0),
+        IndexBounds::new(Some(1), None).unwrap(),
+        IndexBounds::fixed(0),
+    ])
+    .unwrap();
+    let started = Instant::now();
+    let discovery = prepared
+        .context
+        .discover(
+            vec![domain.clone()],
+            [],
+            GuardedDiscoveryOptions {
+                max_depth: 3,
+                max_domains: 8192,
+                sample_seed: 0,
+            },
+        )
+        .unwrap();
+    let root = std::env::var_os("RUSTFLOW_WEIGHTED_CLOSURE_REPORT")
+        .map(std::path::PathBuf::from)
+        .unwrap_or_else(|| std::env::temp_dir().join("rustflow-weighted-closure"));
+    let report = root.join("single-domain-recenter");
+    std::fs::create_dir_all(&report).unwrap();
+    let encoded = discovery.program.encode(Default::default()).unwrap();
+    // Decode replays the original guarded source proof; saved programs are not
+    // accepted merely because the external diagnostic says they are valid.
+    let replayed = prepared
+        .context
+        .decode(&encoded, Default::default())
+        .unwrap();
+    let target = [1, 1, 1, -2, 0, 0, 0, 1, 0];
+    let reduced = replayed.reduce(target, Default::default()).unwrap();
+    std::fs::write(report.join("native-program.bin"), encoded).unwrap();
+    let result = serde_json::json!({
+        "input": input, "source_policy": policy.as_str(),
+        "source_context": format!("{:?}", prepared.context.sources()),
+        "domain": format!("{domain:?}"), "target": target,
+        "max_depth": 3, "max_domains": 8192, "sample_seed": 0,
+        "discovery_unresolved": format!("{:?}", discovery.unresolved),
+        "application": format!("{reduced:?}"),
+        "runtime_seconds": started.elapsed().as_secs_f64(),
+        "numerical_prediction": false,
+    });
+    std::fs::write(
+        report.join("result.json"),
+        serde_json::to_vec_pretty(&result).unwrap(),
+    )
+    .unwrap();
+    eprintln!(
+        "single-domain diagnostic: {} retained discovery gaps; report={}",
+        discovery.unresolved.len(),
+        report.display()
+    );
 }

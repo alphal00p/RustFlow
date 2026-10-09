@@ -1,0 +1,11 @@
+{
+  "command": [
+    "target/release/deps/finite_density_measure-84b68ab92b3969d7"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.12185873370617628,
+  "user_seconds": 0.067427,
+  "system_seconds": 0.057602,
+  "peak_child_rss_kib": 12356,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

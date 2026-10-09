@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_native_flow-2ad25996bc8f14af",
+    "--ignored",
+    "--exact",
+    "massive_vacuum_and_single_cut_transport",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 12.998814269900322,
+  "user_seconds": 12.54105,
+  "system_seconds": 0.271462,
+  "peak_child_rss_kib": 27708,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

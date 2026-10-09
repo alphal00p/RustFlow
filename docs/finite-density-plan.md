@@ -71,13 +71,23 @@ are input polynomial identities, not reference answers.
 
 Mandatory supplied four-loop records are I37, I91 and I115. I37 includes a raised
 neutral denominator; it does not provide a raised occupied-line reference. Each
-family additionally requests a raised occupied line with a polynomial numerator;
-those references still need independent generation. I115 supplies a finite coefficient through epsilon order zero; higher orders
+family additionally requests a raised occupied line with a polynomial numerator.
+The seven-edge family's supplemental reference has now been independently
+derived by regulated tensor/beta integration and checked using native precision
+and epsilon refinements; see the [E7 reference derivation](finite-density-e7-reference.md).
+The other two supplemental references still require generation. I115 supplies a finite coefficient through epsilon order zero; higher orders
 remain unspecified. Its rationally encoded central value remains approximate
 when an uncertainty is supplied. The absolute criterion in the manifest applies
 only to zero reference coefficients. The massive two-loop graph and multiple-chemical-potential
-coverage also require references beyond the massless oracle. Precision feasibility
-for the unsupplied references has not yet been established.
+coverage require references beyond the massless oracle. A complete independent
+massive reference has now been generated at D=12/5, with 12 components/totals
+passing node and precision refinements. Saved native vacuum and first single-cut
+values for both targets pass its separate comparison and precision/order/start
+refinements; the complete native amplitude remains unresolved at two-cut closure.
+The [current validation report](../reports/validation/2026-10-09-finite-density-native-assembly/README.md)
+preserves measured differences and failure evidence. This reference is a fixed
+dimension value, not a Laurent series. Precision feasibility for the remaining
+unsupplied references has not yet been established.
 
 ## Remaining acceptance evidence
 

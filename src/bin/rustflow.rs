@@ -1078,7 +1078,7 @@ fn run() -> CliResult<()> {
     let arguments = std::env::args().skip(1).collect::<Vec<_>>();
     if arguments.is_empty() || matches!(arguments[0].as_str(), "--help" | "-h" | "help") {
         println!(
-            "RustFlow\n\nUsage: rustflow graph INPUT.json\n       rustflow transport INPUT.json\n       rustflow finite-density-prepare INPUT.json\n\nGraph input references native HEPKit model JSON and DOT files.\nTransport input supplies differential equations and a binary cache directory.\nFinite-density preparation validates graph/charge evidence and converts targets; it does not evaluate integrals.\nPaths are relative to INPUT.json; results are JSON on stdout.\nSee docs/cli.md for exact-input and accuracy conventions."
+            "RustFlow\n\nUsage: rustflow graph INPUT.json\n       rustflow transport INPUT.json\n       rustflow finite-density-prepare INPUT.json\n       rustflow finite-density INPUT.json\n       rustflow finite-density-sample INPUT.json EPSILON\n\nGraph input references native HEPKit model JSON and DOT files.\nTransport input supplies differential equations and a binary cache directory.\nFinite-density preparation validates graph/charge evidence and converts targets.\nFinite-density evaluation requires every cut sector to be admitted and closed; unsupported or unresolved sectors fail explicitly.\nFinite-density-sample uses an exact nonzero rational epsilon, for example 4/5.\nFinite-density results use the unscaled Euclidean measure; see docs/finite-density.md for current limits.\nPaths are relative to INPUT.json; results are JSON on stdout.\nSee docs/cli.md for exact-input and accuracy conventions."
         );
         return Ok(());
     }
@@ -1086,8 +1086,13 @@ fn run() -> CliResult<()> {
         println!("RustFlow {}", env!("CARGO_PKG_VERSION"));
         return Ok(());
     }
-    if arguments.len() != 2 {
-        return Err("expected a command and one steering JSON file; use --help".into());
+    let required_arguments = if arguments[0] == "finite-density-sample" {
+        3
+    } else {
+        2
+    };
+    if arguments.len() != required_arguments {
+        return Err("expected a command and one steering JSON file (plus exact epsilon for finite-density-sample); use --help".into());
     }
     let path = Path::new(&arguments[1]);
     let directory = path.parent().unwrap_or_else(|| Path::new("."));
@@ -1099,9 +1104,21 @@ fn run() -> CliResult<()> {
             let input: finite_density::DensityInput = serde_json::from_str(&text)?;
             input.prepare()?.preparation_report(65536)?
         }
+        "finite-density" | "finite-density-sample" => {
+            let input: finite_density::DensityInput = serde_json::from_str(&text)?;
+            let epsilon = arguments.get(2).map(String::as_str);
+            finite_density::interface::evaluate_request(
+                &input,
+                epsilon,
+                &finite_density::interface::default_options(&input),
+                finite_density::interface::default_closure_options(),
+                &RunContext::default(),
+                8,
+            )?
+        }
         _ => {
             return Err(
-                "unknown command; expected graph, transport or finite-density-prepare".into(),
+                "unknown command; expected graph, transport, finite-density-prepare, finite-density or finite-density-sample".into(),
             );
         }
     };

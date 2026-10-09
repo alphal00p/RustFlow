@@ -1,9 +1,9 @@
 //! Native occupied AMF: source discovery, integrated regions and shared transport.
-//! The first numerical admission is a strictly massive, nonpinched sunset
-//! domain. This is an explicit contour restriction, independent of input names.
+//! Numerical admission uses explicit common-contour certificates, independently
+//! of input names. Physical compact shell masses stay strictly positive.
 use super::PreparedDensityInput;
 use super::boundary::OccupiedBoundaryLimits;
-use super::flow_boundary::OccupiedFlowBoundary;
+use super::flow_boundary::{OccupiedBoundaryProvenance, OccupiedFlowBoundary};
 use super::geometry::OccupiedCutFamily;
 use super::guarded::GuardedMeasureIdentity;
 use super::normalization::native_measure_to_euclidean;
@@ -27,6 +27,18 @@ pub struct PreparedOccupiedFlow<const N: usize> {
     closed: WeightedReducedSystem<N>,
     system: Option<DifferentialSystem>,
     transport: ConnectionTransport,
+    contour_admission: String,
+}
+
+#[derive(Clone, Debug)]
+pub struct OccupiedFlowEvaluation {
+    pub construction: &'static str,
+    pub values: Vec<ComplexFloat>,
+    pub boundary: OccupiedBoundaryProvenance,
+    pub nonzero_conditions: Vec<Atom>,
+    pub contour_admission: String,
+    pub shifted_slots: Vec<usize>,
+    pub basis_size: usize,
 }
 
 fn validate_options(options: &FlowOptions) -> Result<()> {
@@ -105,8 +117,10 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
     ) -> Result<Self> {
         validate_options(options)?;
         context.cancellation.check()?;
-        let admission = positive_sunset_domain(input)?;
         let family = input.occupied_cut(cuts, 65536)?.at_physical_masses();
+        super::contour::positive_shells(&family)?;
+        let admission = positive_sunset_domain(input)
+            .or_else(|_| super::contour::heavy_edge_domain(input, &family))?;
         let epsilon = symbol!("rustflow_occupied::epsilon");
         let eta = symbol!("rustflow_occupied::eta");
         let shifted_slots = (0..family.physical_slots())
@@ -120,7 +134,7 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             support:format!("real compact shell coordinates; {:?}",family.shells()),
             orientation:format!("future first {} loops; q=(-i PE0,-PEvec); inverse routing={:?}; determinant={}",cuts.len(),family.inverse_routing(),family.routing_determinant()),
             normalization:"virtual d^Dk/(i pi^(D/2)); occupied d^Dq/pi^(D/2); Euclidean target Wick phases already included".into(),
-            branch:admission,
+            branch:admission.clone(),
             deformation:format!("native Di-eta on {shifted_slots:?}; physical shells and upper/lower supports fixed; input indices and coefficients fixed"),
         })?;
         let closed = match prepare_weighted_system(
@@ -133,11 +147,17 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             WeightedClosureOutcome::Closed(closed) => closed,
             WeightedClosureOutcome::Unresolved(failure) => {
                 return Err(Error::IncompleteReduction(format!(
-                    "occupied weighted connection unresolved: {}; rounds={}, provisional={}, unresolved={:?}",
+                    "occupied weighted connection unresolved: {}; rounds={}, provisional={}, unresolved_terms={}; first residual indices/reasons={:?}",
                     failure.reason,
                     failure.diagnostics.rounds,
                     failure.provisional_frontier.len(),
-                    failure.unresolved
+                    failure.unresolved.len(),
+                    failure
+                        .unresolved
+                        .iter()
+                        .take(8)
+                        .map(|r| (&r.integral, &r.reason))
+                        .collect::<Vec<_>>()
                 )));
             }
         };
@@ -150,6 +170,7 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             closed,
             system,
             transport: ConnectionTransport::default(),
+            contour_admission: admission,
         })
     }
 
@@ -161,6 +182,10 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
     }
     pub fn closure_diagnostics(&self) -> &super::reduction::WeightedClosureDiagnostics {
         &self.closed.diagnostics
+    }
+
+    pub fn family(&self) -> &OccupiedCutFamily {
+        &self.family
     }
 
     /// Euclidean occupied contribution, including target phases and the exact
@@ -186,6 +211,20 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
         context: &RunContext,
         start_scale: u32,
     ) -> Result<Vec<ComplexFloat>> {
+        Ok(self
+            .evaluate_report(epsilon, options, context, start_scale)?
+            .values)
+    }
+
+    /// Evaluate and retain the actual integrated region data and exact source
+    /// applicability conditions used for this sample.
+    pub fn evaluate_report(
+        &self,
+        epsilon: &Rational,
+        options: &FlowOptions,
+        context: &RunContext,
+        start_scale: u32,
+    ) -> Result<OccupiedFlowEvaluation> {
         validate_options(options)?;
         if options.dimension != self.dimension || epsilon.is_zero() {
             return Err(Error::InvalidInput(
@@ -218,6 +257,7 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             options.series_order.min(100),
             OccupiedBoundaryLimits::default(),
         )?;
+        let mut boundary_provenance = OccupiedBoundaryProvenance::default();
         let values = self.transport.evaluate(
             ConnectionRequest {
                 system,
@@ -233,16 +273,16 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             context,
             |_| Ok(()),
             |solutions, p| {
-                Ok(boundary
-                    .constants(
-                        &self.family,
-                        &self.closed.reduced.basis,
-                        &self.shifted,
-                        epsilon,
-                        p,
-                        solutions,
-                    )?
-                    .constants)
+                let report = boundary.constants(
+                    &self.family,
+                    &self.closed.reduced.basis,
+                    &self.shifted,
+                    epsilon,
+                    p,
+                    solutions,
+                )?;
+                boundary_provenance = report.provenance;
+                Ok(report.constants)
             },
         )?;
         let d = Rational::from(self.dimension) - epsilon * &Rational::from(2);
@@ -258,6 +298,19 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             &Atom::num(d.clone()),
         )? * Atom::num(abs_det).pow(Atom::num(-d));
         let factor = p.eval(&measure, &ahash::HashMap::default())?;
-        Ok(values.iter().map(|v| p.mul(v, &factor)).collect())
+        Ok(OccupiedFlowEvaluation {
+            construction: "weighted_amf",
+            values: values.iter().map(|v| p.mul(v, &factor)).collect(),
+            boundary: boundary_provenance,
+            nonzero_conditions: self.closed.reduced.nonzero_conditions.clone(),
+            contour_admission: self.contour_admission.clone(),
+            shifted_slots: self
+                .shifted
+                .iter()
+                .enumerate()
+                .filter_map(|(i, &b)| b.then_some(i))
+                .collect(),
+            basis_size: self.closed.reduced.basis.len(),
+        })
     }
 }

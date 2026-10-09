@@ -1,0 +1,166 @@
+{
+  "status": "assertion_gates_completed_with_two_fixture_admission_failures",
+  "source_snapshot": "tangent-source-hashes.json",
+  "check": {
+    "command": "nix develop --command cargo check --locked --release --features python --tests",
+    "passed": true,
+    "elapsed_seconds": 15.42
+  },
+  "build": {
+    "command": "nix develop --command cargo test --locked --release --lib --test finite_density_closure --test finite_density_native_flow --test finite_density_boundary --test finite_density_flow_boundary --test finite_density_terminal --test finite_density_input --test finite_density_measure --test finite_density_normalization --test finite_density_reference --test integrand --test core --test mixed_cut_flow --test physical_transport --bin rustflow --no-run",
+    "status": "passed",
+    "scope": "release compile/link only",
+    "elapsed_seconds": 391
+  },
+  "gates": [
+    {
+      "name": "finite_density_unit",
+      "passed": 20,
+      "failed": 1,
+      "runtime_seconds": 0.06,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "physical_target_domain_support",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.07,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "independent_weighted_distribution_source",
+      "passed": 1,
+      "failed": 0,
+      "runtime_seconds": 0.11,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "core",
+      "passed": 13,
+      "failed": 0,
+      "runtime_seconds": 1.36,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "mixed_cut_flow",
+      "passed": 6,
+      "failed": 0,
+      "runtime_seconds": 4.83,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "physical_transport",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.51,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "occupied_boundary",
+      "passed": 3,
+      "failed": 0,
+      "runtime_seconds": 0.08,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "occupied_flow_boundary",
+      "passed": 3,
+      "failed": 1,
+      "runtime_seconds": 0.15,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "compact_terminal",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.21,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "input",
+      "passed": 9,
+      "failed": 0,
+      "runtime_seconds": 0.13,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "normalization",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.29,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "integrand",
+      "passed": 7,
+      "failed": 0,
+      "runtime_seconds": 2.18,
+      "runtime_scope": "prebuilt test harness"
+    }
+  ],
+  "physical_native_diagnostics": [
+    {
+      "slots": 7,
+      "policy": "tangents-then-lorentz",
+      "status": "unresolved",
+      "runtime_seconds": 16.796056589,
+      "rounds": 12,
+      "requested": 112,
+      "provisional_sizes": [
+        17,
+        23,
+        26,
+        30,
+        35,
+        41,
+        48,
+        56,
+        65,
+        75,
+        86,
+        98
+      ],
+      "native_rules": 1914,
+      "reason": "weighted derivative closure round budget exhausted",
+      "artifacts": "tangent-sources/sunset-N7",
+      "resources": "tangent-N7-resources.json"
+    },
+    {
+      "slots": 9,
+      "policy": "tangents-then-lorentz",
+      "status": "unresolved",
+      "runtime_seconds": 84.253246494,
+      "rounds": 8,
+      "requested": 154,
+      "provisional_sizes": [
+        52,
+        55,
+        65,
+        96,
+        131,
+        178,
+        227,
+        282
+      ],
+      "native_rules": 2173,
+      "reason": "weighted provisional-frontier budget exhausted",
+      "artifacts": "tangent-sources/sunset-N9",
+      "resources": "tangent-N9-resources.json"
+    }
+  ],
+  "passed": 78,
+  "failed": 2,
+  "failures": [
+    {
+      "test": "finite_density::contour::tests::four_loop_heavy_edge_certificate_checks_every_cut_and_strict_margin",
+      "cause": "fixture used an unoccupied charged virtual edge with mass2=1/4 and energy bound1; strict routing-dependent contour admission correctly rejected it",
+      "status": "root correcting fixture in following source snapshot"
+    },
+    {
+      "test": "three_compact_shell_flow_boundary",
+      "cause": "fixture assigned a branching charged graph one species, violating independent fermion-cycle admission",
+      "status": "boundary owner corrected test species after compiled snapshot; rerun pending"
+    }
+  ],
+  "interpretation": "Exact tangent/source identities passed independent Cartesian and polynomial-distribution gates, but their initial presentation does not close these physical systems within the stated budgets. The N7 regression motivates restoring the established legacy presentation as production default; further presentation comparisons are separate diagnostics. No complete amplitude prediction is claimed by these runs."
+}

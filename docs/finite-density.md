@@ -214,6 +214,25 @@ proof for the admitted family. The ordinary dimensional endpoint rule does not
 by itself provide such a proof for occupation-weighted integrals. No general
 four-loop admission theorem or successful evaluation is claimed here.
 
+For the implemented **strict positive-mass** sunset and heavy-edge domains,
+the endpoint admission is stronger than a dimensional-limit convention. The
+strict bounds in the contour certificates persist in a complex neighborhood
+of eta=0. Compact shells and their Fermi surfaces stay fixed; their masses are
+positive. After introducing independent analytic indices to control virtual
+ultraviolet integrals, the uniformly nonvanishing virtual denominators permit
+Taylor expansion in eta under each compact/distribution pairing and virtual
+integral. Meromorphic continuation in those indices and D preserves this
+local analytic dependence. Finite derivatives of the physical line masses
+and polynomial medium numerators preserve it as well. Thus the physical
+solution in these domains has an ordinary Taylor endpoint. Noninteger
+epsilon-dependent homogeneous solutions of its differential equation have
+zero physical coefficients; they do not supply missing physical regions.
+The shared projector selects the constant only **after** multiplying and
+summing the exact target weights, including cancellations of apparent poles
+introduced by reduction or a change of basis. This argument uses the strict
+mass/contour margins and does not extend the admission to massless shells,
+threshold pinches, or unproved changes in the order of limits.
+
 ## Whole-amplitude normalization check
 
 For a contribution with physical powers a_e, define a native virtual loop with
@@ -293,7 +312,8 @@ checks exact routing and conserved nonbranching species cycles, completes affine
 inverse-propagator/medium coordinates with Symbolica, and retains independent
 line masses for differentiation. `cut_decomposition(budget)` enumerates connected
 complements within an explicit subset budget. `preparation_report(budget)` emits
-those definitions and states that numerical evaluation is unavailable.
+schema-version-2 definitions, states that numerical evaluation was not performed,
+and identifies the separate numerical interfaces and their documented scope.
 
 A runnable example is:
 
@@ -321,9 +341,35 @@ does not yet satisfy unrestricted arbitrary-routing support.
 
 The Python host exposes `prepare_finite_density(input_json, cut_budget=65536)`
 with the same preparation report. A successful preparation does not establish
-contour admission or evaluation accuracy. The documented limitation is explicit:
-there is no complete native finite-density AMF evaluator in this implementation
-stage. Native weighted source discovery closes the two single-cut massive
+contour admission or evaluation accuracy. The native
+`finite_density::assembly::PreparedDensityFlow` owner attempts the complete cut
+sum at a common regulator sample and reconstructs Laurent coefficients only
+after summation. Shared evaluation entry points are `rustflow finite-density`,
+`rustflow finite-density-sample INPUT.json EPSILON` and Python
+`evaluate_finite_density(input_json, epsilon=None)`, with detailed controls in
+the [CLI and Python protocol](cli.md#native-finite-density-input-and-evaluation).
+They retain raw Euclidean normalization and propagate any failed required sector.
+The runtime weighted-AMF dispatch currently compiles index arities 7 and 9; the
+const-generic Rust flow API can compile other arities, subject to physical
+admission and closure. Before that dispatch, a strict disjoint-support proof
+can return zero, and `PreparedOccupiedTerminal` handles surviving polynomial
+noncut factors using native compact moments without an auxiliary parameter or a
+compiled guarded index arity. It retains unrestricted polynomial virtual factors
+only when their dimensional integral is scaleless. It does not replace retained
+virtual poles by moments.
+
+Active occupied shells currently require assigned strictly positive rational
+squared masses. Numerical weighted flow uses either the open massive-sunset
+certificate or the routing-dependent heavy-edge certificate, with the common
++i0 prescription and all uncut physical quadratic factors shifted. An uncut-line
+bound does not admit a massless shell endpoint. Generic massless occupied limits,
+pinched continuations and partial deformation placements remain unsupported by
+this numerical owner. Compact terminal thresholds have the narrower
+distributional criteria described below. These restrictions are separate from
+the algebraic parser, which can represent the massless oracle families.
+
+The complete generic numerical evaluator has not passed its required acceptance
+gates. Native weighted source discovery closes the two single-cut massive
 sunset systems with 17 and 13 masters, but the attempted fully occupied system
 exhausted its provisional-frontier budget before numerical evaluation. Generic
 weighted closure, integrated recursive soft boundaries, complete-amplitude
@@ -332,6 +378,20 @@ The native vacuum and first occupied-cut endpoints for both massive targets
 have separately passed independent-reference comparisons at D=12/5, including
 working-precision, series-order and occupied-start-scale changes. This does not
 assemble the omitted second single-cut and two-cut contributions.
+The public sample and Laurent commands have also evaluated the complete massive
+one-loop tadpole above and below support. Its scalar and raised sample values
+and four Laurent coefficients pass independent analytic comparisons; see the
+[interface validation report](../reports/validation/2026-10-09-finite-density-native-assembly/native-interfaces/README.md).
+This one-loop success does not complete the required nonfactorized multiloop case.
+Public assembly also passes an actual two-species calculation with independent
+chemical potentials: both singleton cuts use native source-closed weighted AMF,
+and the double cut uses the compact polynomial terminal. Scalar and original
+Euclidean `u1*u2` contributions are checked separately in all four sectors and
+in their sums. The graph factorizes into two one-loop cycles, so this validates
+species-dependent support and Wick normalization without completing the required
+nonfactorized sunset. The same release batch passes multihard occupied-boundary
+and three-compact-loop coefficient tests, plus public thermal-threshold assembly;
+see the [boundary and assembly gates](../reports/validation/2026-10-09-finite-density-native-assembly/new-boundary-gates.json).
 Standalone polynomial compact-shell seeds do not evaluate retained virtual
 poles or assemble a multiloop amplitude.
 
@@ -343,12 +403,40 @@ surface distributions. Its real energy insertion is E^r, corresponding to an
 original Euclidean numerator (q0/i)^r; an original Euclidean medium insertion
 q0^r requires the factor i^r after q0=iE. This seed convention is not a complete
 amplitude normalization adapter. Below support it returns zero. At a positive-mass
-threshold it returns zero only when the derived threshold exponent proves a
-continuous zero limit; singular/noncontinuous cases receive an explicit
-exponent-based diagnostic. A massless infrared-divergent seed requires a separate
+threshold it returns zero when the derived threshold exponent proves a continuous
+zero limit. The finite-jump case uses the regulated thermal limit derived below;
+more singular cases receive an explicit exponent-based diagnostic. A massless infrared-divergent seed requires a separate
 dimensional continuation and is rejected. These scope limits do not validate
 arbitrary singular test amplitudes at threshold. Working-precision stability must
 be checked independently of the bounded compact-series stopping criterion.
+
+For a seed with energy power `r`, spatial radial power `j`, and raised line power
+`k+1`, write `a=m²>0`, `gap=mu²-a`, `alpha=d/2+j`, and
+`A_d=2*pi^(d/2)/(Gamma(d/2)*(2*pi)^d)`. A simple occupied seed near threshold is
+`-A_d/4 * a^((r-1)/2) * gap^alpha/alpha` on the occupied side. When
+`alpha=k>=1`, regulate the occupation before taking the `k` independent mass
+derivatives: with `tau=2*m*T` its leading radial integral is
+
+```text
+-A_d/4 * a^((r-1)/2) * tau^k
+    * integral_0^infinity x^(k-1) n_F(x-gap/tau) dx,
+n_F(x)=1/(exp(x)+1).
+```
+
+The `k` gap derivatives give `Gamma(k)*n_F(-gap/tau)`. Dividing by `k!` and
+taking `T->0+` at fixed `mu=m` therefore gives
+`-A_d/(8*k) * a^((r-1)/2)`. Derivatives of the smooth prefactors vanish with
+positive powers of `T`. This specifies a thermal finite jump, without assigning
+an arbitrary value to `theta(0)` or claiming continuity.
+
+Independent finite-temperature radial identities test this case. At `d=2`, the
+scalar raised seed is `-n_F((m-mu)/T)/(8*pi*m)`. With the original spatial `q²`
+numerator, the power-three seed is `-n_F((m-mu)/T)/(16*pi*m)`. These follow by
+differentiating the fixed-spatial-momentum thermal kernels before integration;
+the unit test numerically integrates their smooth derivative kernels at three
+temperatures and three chemical offsets. At `mu=m=1/2`, their limits are
+`-1/(8*pi)` and `-1/(16*pi)`. A power-three scalar seed has gap exponent `-1`
+at `d=2` and retains an explicit singular-threshold diagnostic.
 
 | Mandatory result | Current scope and missing evidence |
 | --- | --- |
@@ -358,7 +446,7 @@ be checked independently of the bounded compact-series stopping criterion.
 | Regulated common-contour continuation | Massive sunset and routing-dependent heavy-edge sufficient domains derived; see [contour certificates](finite-density-contours.md); thresholds, massless pinches and general admission remain separate |
 | Full massive normalization | Native mixed-measure/Wick adapters and massive seed/boundary regressions implemented; full massive multiloop assembly still missing |
 | Physical endpoint reconstruction | Existing ordinary rational projection retained; finite-density evaluation-path cancellation/divergence/depth integration tests missing |
-| Three four-loop families | Exact distinct graph certificates and target definitions available; predictions and required supplemental raised-line references absent |
+| Three four-loop families | Exact distinct graph certificates available; independent E7 raised-line reference generated; all native predictions and the other two supplemental references absent |
 | Ten stable Laurent digits | Fixed-dimension vacuum/single-cut precision, order and start-scale refinements pass; no complete-amplitude Laurent stability or numerical oracle comparison |
 
 An independent validation-only reference for both complete massive sunset targets

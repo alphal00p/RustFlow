@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/finite_density_normalization-d2c3def69c1fec57",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.3065157742239535,
+  "user_seconds": 0.21687499999999998,
+  "system_seconds": 0.16058699999999998,
+  "peak_child_rss_kib": 12336,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

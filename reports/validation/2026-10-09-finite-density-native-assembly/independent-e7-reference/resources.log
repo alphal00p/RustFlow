@@ -1,0 +1,8 @@
+
+running 2 tests
+test e7_reference_binds_the_complete_original_definition ... ok
+test generate_independent_e7_analytic_reference ... Independent E7 analytic reference saved to reports/validation/2026-10-09-finite-density-native-assembly/independent-e7-reference/reference.json
+ok
+
+test result: ok. 2 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.03s
+

@@ -1,0 +1,13 @@
+{
+  "command": [
+    "target/release/deps/finite_density_native_flow-2ad25996bc8f14af",
+    "massive_vacuum_and_single_cut_transport",
+    "--ignored"
+  ],
+  "exit_code": 101,
+  "wall_seconds": 16.755980324931443,
+  "user_seconds": 16.412683,
+  "system_seconds": 0.19855,
+  "peak_child_rss_kib": 24636,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

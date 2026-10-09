@@ -471,7 +471,7 @@ impl PreparedDensityInput {
 
     pub fn preparation_report(&self, cut_budget: usize) -> Result<Value> {
         Ok(
-            json!({"schema_version": 1, "operation": "finite-density-prepare", "status": "algebraic_preparation_only",
+            json!({"schema_version": 2, "operation": "finite-density-prepare", "status": "algebraic_preparation_only",
             "input_identity": self.identity, "input": self.input,
             "basis": {"coordinates": self.basis.coordinates().iter().map(ToString::to_string).collect::<Vec<_>>(),
                 "slots": self.basis.slots().iter().map(ToString::to_string).collect::<Vec<_>>(),
@@ -479,7 +479,14 @@ impl PreparedDensityInput {
                 "independent_masses": self.independent_masses.iter().map(|&s| Atom::var(s).to_string()).collect::<Vec<_>>()},
             "targets": self.targets.iter().map(|target| target.iter().map(|(i,c)| json!({"powers":i.0,"coefficient":c.to_string()})).collect::<Vec<_>>()).collect::<Vec<_>>(),
             "cut_decomposition": self.cut_decomposition(cut_budget)?,
-            "numerical_evaluation": {"available": false, "reason": "weighted closure, integrated recursive boundaries and common-contour continuation remain unvalidated"}}),
+            "numerical_evaluation": {
+                "performed": false,
+                "rust_interface": "finite_density::assembly::PreparedDensityFlow",
+                "cli_interfaces": ["finite-density", "finite-density-sample"],
+                "python_interface": "evaluate_finite_density",
+                "supported_scope": "docs/finite-density.md",
+                "requirement": "evaluation separately requires admission and closure of every contributing cut sector"
+            }}),
         )
     }
 }

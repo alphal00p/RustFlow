@@ -1,0 +1,76 @@
+{
+  "closure": [],
+  "dimension_base": 4,
+  "expansions": [
+    {
+      "coefficients": {
+        "-1": {
+          "imaginary": "0",
+          "real": "-1.583143494411527678810616612651994357880605854254034268704326608858540e-3"
+        },
+        "0": {
+          "imaginary": "-0",
+          "real": "-1.366947895769463187359187818431766608956496411246177298795107323457575e-2"
+        }
+      },
+      "comparison_errors": {
+        "-1": "1.169834303237055979571767885846325069152982454332181314314638265401149e-34",
+        "0": "4.290252918340747582106361573720326699229307592959602734266309713263976e-27"
+      },
+      "refinements": 1,
+      "samples": 14,
+      "validation_samples": 10,
+      "verified_digits": 12,
+      "working_bits": 229
+    },
+    {
+      "coefficients": {
+        "-1": {
+          "imaginary": "0",
+          "real": "6.332573977646110715242466450607977431522423417015409556137148594946943e-3"
+        },
+        "0": {
+          "imaginary": "-0",
+          "real": "4.471982365246002498274181610918158204660968138854652618287912137464655e-3"
+        }
+      },
+      "comparison_errors": {
+        "-1": "7.222010967490560094925821936135165947356751766417834733477959554549780e-37",
+        "0": "8.872170712095570435574701882304306395480690625685256999475280656357312e-29"
+      },
+      "refinements": 1,
+      "samples": 14,
+      "validation_samples": 10,
+      "verified_digits": 12,
+      "working_bits": 229
+    }
+  ],
+  "full_amplitude": true,
+  "guard_digits": 40,
+  "input_identity": "52cc5d4da636d96de5563173f02bf39324e717c771720c73415d24dfcacce714",
+  "laurent_orders": [
+    -1,
+    0
+  ],
+  "name": "massive_one_loop_tadpole",
+  "normalization": "unscaled Euclidean amplitude",
+  "occupied_start_scale": 8,
+  "operation": "finite-density",
+  "requested_digits": 12,
+  "schema_version": 1,
+  "series_order": 80,
+  "targets": [
+    {
+      "numerator": "1",
+      "powers": [
+        1
+      ]
+    },
+    {
+      "numerator": "1",
+      "powers": [
+        2
+      ]
+    }
+  ]
+}

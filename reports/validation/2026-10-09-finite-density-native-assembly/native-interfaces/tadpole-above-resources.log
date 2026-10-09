@@ -1,0 +1,90 @@
+{
+  "closure": [],
+  "contributions": [
+    {
+      "cut_slots": [],
+      "values": [
+        {
+          "imaginary": "0",
+          "real": "-3.978873577297383394222094084312859050861491143511411268538e-2"
+        },
+        {
+          "imaginary": "0",
+          "real": "7.957747154594766788444188168625718101722982287022822537075e-2"
+        }
+      ]
+    },
+    {
+      "cut_slots": [
+        0
+      ],
+      "values": [
+        {
+          "imaginary": "0",
+          "real": "-3.978873577297383394222094084312859050861491105627806086448e-2"
+        },
+        {
+          "imaginary": "0",
+          "real": "-7.957747154594766788444188168625718101722982249445064151585e-2"
+        }
+      ]
+    }
+  ],
+  "dimension_base": 4,
+  "empty_support": [],
+  "epsilon": "1/2",
+  "full_amplitude": true,
+  "guard_digits": 40,
+  "input_identity": "52cc5d4da636d96de5563173f02bf39324e717c771720c73415d24dfcacce714",
+  "name": "massive_one_loop_tadpole",
+  "normalization": "unscaled Euclidean amplitude",
+  "occupied_reports": [
+    {
+      "basis_size": 0,
+      "boundary": {
+        "integrated_coefficients": 2,
+        "integrated_products": 2,
+        "regions": [],
+        "scaleless_noncompact_products": 0,
+        "vanishing_required_cut_coefficients": 0
+      },
+      "construction": "compact_polynomial_moments",
+      "contour_admission": "independent positive-mass occupied shells; polynomial remaining factors have no virtual poles; unrestricted polynomial loop integrals are scaleless in dimensional regularization; threshold products decided by the compact distribution owner",
+      "cut_slots": [
+        0
+      ],
+      "nonzero_conditions": [],
+      "shifted_slots": []
+    }
+  ],
+  "occupied_start_scale": 8,
+  "operation": "finite-density-sample",
+  "requested_digits": 12,
+  "schema_version": 1,
+  "series_order": 80,
+  "targets": [
+    {
+      "numerator": "1",
+      "powers": [
+        1
+      ]
+    },
+    {
+      "numerator": "1",
+      "powers": [
+        2
+      ]
+    }
+  ],
+  "values": [
+    {
+      "imaginary": "0",
+      "real": "-7.957747154594766788444188168625718101722982249139217354985e-2"
+    },
+    {
+      "imaginary": "0",
+      "real": "3.757775838548989260316043407140608018545284142976340173637e-46"
+    }
+  ],
+  "verified_digits": null
+}

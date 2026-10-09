@@ -15,6 +15,7 @@ pub struct PreparedDensityVacuum {
     loops: usize,
     dimension: i64,
     targets: usize,
+    target_conditions: Vec<Atom>,
 }
 
 impl PreparedDensityVacuum {
@@ -27,6 +28,14 @@ impl PreparedDensityVacuum {
         let geometry = input.continued_cut(&[], 1)?.at_physical_masses();
         let family =
             geometry.region_family(symbol!("rustflow_occupied::epsilon"), options.dimension)?;
+        let target_conditions = crate::physical_conditions::rational_denominator_conditions(
+            &geometry
+                .targets()
+                .iter()
+                .flat_map(|target| target.values().cloned())
+                .collect::<Vec<_>>(),
+            &std::collections::BTreeSet::from([family.epsilon]),
+        )?;
         let requested = geometry
             .targets()
             .iter()
@@ -74,6 +83,9 @@ impl PreparedDensityVacuum {
                     out
                 })
                 .collect();
+            flow.reduced
+                .nonzero_conditions
+                .extend(target_conditions.clone());
             Some(flow)
         };
         Ok(Self {
@@ -81,6 +93,7 @@ impl PreparedDensityVacuum {
             loops: geometry.loops(),
             dimension: options.dimension,
             targets: geometry.targets().len(),
+            target_conditions,
         })
     }
 
@@ -102,6 +115,14 @@ impl PreparedDensityVacuum {
                 .checked_add(options.guard_digits)
                 .ok_or_else(|| Error::Limit("vacuum precision overflow".into()))?,
         )?;
+        crate::physical_conditions::validate_conditions_at(
+            &self.target_conditions,
+            symbol!("rustflow_occupied::epsilon"),
+            &BTreeMap::from([(
+                symbol!("rustflow_occupied::epsilon"),
+                Atom::num(epsilon.clone()),
+            )]),
+        )?;
         let Some(flow) = &self.flow else {
             return Ok(vec![p.zero(); self.targets]);
         };
@@ -118,5 +139,36 @@ impl PreparedDensityVacuum {
             &ahash::HashMap::default(),
         )?;
         Ok(native.iter().map(|v| p.mul(v, &measure)).collect())
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::finite_density::DensityInput;
+
+    #[test]
+    fn zero_vacuum_projection_retains_original_coefficient_poles() {
+        let mut input: DensityInput = serde_json::from_str(include_str!(
+            "../../examples/finite_density/massive_one_loop_tadpole.json"
+        ))
+        .unwrap();
+        input.targets.truncate(1);
+        input.targets[0].numerator = "u1/(rustflow_occupied::epsilon-1/2)".into();
+        let input = input.prepare().unwrap();
+        let options = FlowOptions::default();
+        let context = RunContext::default();
+        let prepared = PreparedDensityVacuum::prepare(&input, &options, &context).unwrap();
+        assert!(
+            prepared
+                .evaluate(&Rational::from((1, 2)), &options, &context)
+                .is_err()
+        );
+        assert!(
+            prepared
+                .evaluate(&Rational::from((1, 3)), &options, &context)
+                .unwrap()[0]
+                .is_zero()
+        );
     }
 }

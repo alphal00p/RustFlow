@@ -1,0 +1,79 @@
+{
+  "closure": [],
+  "contributions": [
+    {
+      "cut_slots": [],
+      "values": [
+        {
+          "imaginary": "0",
+          "real": "-3.978873577297383394222094084312859050861491143511411268538e-2"
+        },
+        {
+          "imaginary": "0",
+          "real": "7.957747154594766788444188168625718101722982287022822537075e-2"
+        }
+      ]
+    },
+    {
+      "cut_slots": [
+        0
+      ],
+      "values": [
+        {
+          "imaginary": "0",
+          "real": "0"
+        },
+        {
+          "imaginary": "0",
+          "real": "0"
+        }
+      ]
+    }
+  ],
+  "dimension_base": 4,
+  "empty_support": [
+    {
+      "cut_slots": [
+        0
+      ],
+      "proof": "edge 0: mu²=1/16 < mass²=1/4; the shell and occupied interval have disjoint support with a strict gap, including all finite shell/endpoint derivatives"
+    }
+  ],
+  "epsilon": "1/2",
+  "full_amplitude": true,
+  "guard_digits": 40,
+  "input_identity": "83531fedf3e70f544edfc50bae0e40efb1fe7eba5f3b3f24a801a4c53ba5215c",
+  "name": "massive_one_loop_tadpole",
+  "normalization": "unscaled Euclidean amplitude",
+  "occupied_reports": [],
+  "occupied_start_scale": 8,
+  "operation": "finite-density-sample",
+  "requested_digits": 12,
+  "schema_version": 1,
+  "series_order": 80,
+  "targets": [
+    {
+      "numerator": "1",
+      "powers": [
+        1
+      ]
+    },
+    {
+      "numerator": "1",
+      "powers": [
+        2
+      ]
+    }
+  ],
+  "values": [
+    {
+      "imaginary": "0",
+      "real": "-3.978873577297383394222094084312859050861491143511411268538e-2"
+    },
+    {
+      "imaginary": "0",
+      "real": "7.957747154594766788444188168625718101722982287022822537075e-2"
+    }
+  ],
+  "verified_digits": null
+}

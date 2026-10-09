@@ -213,6 +213,11 @@ pub fn register(module: &Bound<'_, PyModule>) -> PyResult<()> {
         finite_density::prepare_finite_density,
         module
     )?)?;
+    #[cfg(feature = "automatic")]
+    module.add_function(wrap_pyfunction!(
+        finite_density::evaluate_finite_density,
+        module
+    )?)?;
     // CPython's WASM object allocator guarantees eight-byte alignment, whereas
     // Rust's u128 (and any aggregate containing it) requires sixteen. Checking
     // every registered wrapper here also covers nested numerical payloads and
