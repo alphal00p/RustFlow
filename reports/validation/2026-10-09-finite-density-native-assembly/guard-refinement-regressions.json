@@ -1,0 +1,190 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-09T18:58:02.888501+00:00",
+  "source_snapshot": "guard-refinement-source-hashes.json",
+  "source_snapshot_sha256": "e6d4d62fd4ee1e76d7b441cf700ede66e5fc4a4f38bd0fc37481e5d4a95bfaf3",
+  "scope": "Standalone RustFlow checkout and Python-feature compile. Host inspected only, not rebuilt. Native search-domain subdivision adds no algebraic backend or physical assumption.",
+  "compile": {
+    "check": "cargo check --locked --release --features python --tests",
+    "check_status": "passed",
+    "final_check_seconds": 0.77,
+    "release_no_run_status": "passed",
+    "release_no_run_seconds": 389
+  },
+  "selected_gates_passed": 91,
+  "selected_gates_failed": 0,
+  "gates": [
+    {
+      "gate": "finite_density_units",
+      "passed": 33,
+      "failed": 0,
+      "resources": "guard-refinement-unit-resources.json",
+      "command": [
+        "target/release/deps/symbolica_amflow-ad945eb4642fae0f",
+        "finite_density::",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 9.170100550632924,
+      "user_seconds": 9.816091,
+      "system_seconds": 0.25384799999999996,
+      "peak_child_rss_kib": 15372,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "ordinary_core",
+      "passed": 13,
+      "failed": 0,
+      "resources": "guard-refinement-core-resources.json",
+      "command": [
+        "target/release/deps/core-e0c6134f216216a6",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.373635958880186,
+      "user_seconds": 2.483187,
+      "system_seconds": 0.160857,
+      "peak_child_rss_kib": 12364,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "mixed_cut_flow",
+      "passed": 6,
+      "failed": 0,
+      "resources": "guard-refinement-mixed-resources.json",
+      "command": [
+        "target/release/deps/mixed_cut_flow-8ac19c9d325a5bc2",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 4.772777682635933,
+      "user_seconds": 8.571025,
+      "system_seconds": 0.19164699999999998,
+      "peak_child_rss_kib": 12364,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "physical_transport",
+      "passed": 4,
+      "failed": 0,
+      "resources": "guard-refinement-transport-resources.json",
+      "command": [
+        "target/release/deps/physical_transport-577248d15bcd58cf",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.509431610815227,
+      "user_seconds": 0.960291,
+      "system_seconds": 0.09786299999999999,
+      "peak_child_rss_kib": 12364,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "independent_chemical_potentials",
+      "passed": 1,
+      "failed": 0,
+      "resources": "guard-refinement-independent-mu-resources.json",
+      "command": [
+        "target/release/deps/finite_density_independent_mu-2ae9a9d323b5acac",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.4072651630267501,
+      "user_seconds": 0.265909,
+      "system_seconds": 0.141431,
+      "peak_child_rss_kib": 12364,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "closure_source_admission",
+      "passed": 6,
+      "failed": 0,
+      "resources": "guard-refinement-closure-gates-resources.json",
+      "command": [
+        "target/release/deps/finite_density_closure-665c01718e3331cc",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.10611505061388016,
+      "user_seconds": 0.19483299999999998,
+      "system_seconds": 0.047568,
+      "peak_child_rss_kib": 12364,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    }
+  ],
+  "owner_boundary_gates": {
+    "passed": 14,
+    "failed": 0,
+    "source_snapshot": "guard-refinement-source-hashes.json",
+    "times_seconds": {
+      "boundary4": 0.06,
+      "flow_boundary5": 0.15,
+      "terminal5": 0.17
+    },
+    "evidence": "guard-refinement-boundary-gates.json"
+  },
+  "owner_input_normalization_measure_gates": {
+    "passed": 14,
+    "failed": 0,
+    "evidence": "guard-refinement-input-normalization-measure-gates.json"
+  },
+  "pilot": "guard-refinement-pilot-resources.json",
+  "pilot_scope": "Additional repeat of one unit already counted in33. Parent+faces program exact decode/replay succeeds; unsolved parent and lower-sector residuals retained.",
+  "physical_closure_probes": {
+    "N7": {
+      "status": "closed",
+      "runtime_seconds": 2.884423863,
+      "rounds": 3,
+      "requested": 24,
+      "provisional_sizes": [
+        11,
+        7,
+        7
+      ],
+      "native_rules": 649,
+      "native_rule_applications": 5109,
+      "guard_refinement_passes": 3,
+      "guard_refinement_added_domains": 22,
+      "guard_refinement_budget_exhausted": false,
+      "evidence": "guard-refinement/legacy-3passes/sunset-N7/result.json",
+      "basis_size": 7,
+      "scope": "Exact finite requested-target and derivative closure only. Retained native parent gaps do not certify full index-domain coverage. No minimality claim; no numerical amplitude comparison."
+    },
+    "N9": {
+      "status": "closed",
+      "runtime_seconds": 75.277348595,
+      "rounds": 3,
+      "requested": 43,
+      "provisional_sizes": [
+        66,
+        63,
+        64
+      ],
+      "native_rules": 684,
+      "native_rule_applications": 33152,
+      "guard_refinement_passes": 3,
+      "guard_refinement_added_domains": 41,
+      "guard_refinement_budget_exhausted": false,
+      "evidence": "guard-refinement/legacy-3passes/sunset-N9/result.json",
+      "basis_size": 64,
+      "scope": "Exact finite requested-target and derivative closure only. Retained native parent gaps do not certify full index-domain coverage. No minimality claim; no numerical amplitude comparison."
+    }
+  },
+  "numerical_reference_comparison": false,
+  "source_options": {
+    "policy": "legacy-lorentz",
+    "positive_compact_energy_powers": false
+  },
+  "closure_options": {
+    "max_rounds": 12,
+    "max_frontier": 256,
+    "max_requested": 2048,
+    "discovery_depth": 3,
+    "discovery_domains": 8192,
+    "guard_refinement": {
+      "max_passes": 3,
+      "max_added_domains": 256,
+      "max_interval_width": 2
+    }
+  }
+}

@@ -98,6 +98,7 @@ impl PreparedDensityFlow {
         closure: WeightedClosureOptions,
         context: &RunContext,
     ) -> Result<Self> {
+        super::flow::validate_options(options)?;
         let input = input.prepare()?;
         let vacuum = PreparedDensityVacuum::prepare(&input, options, context)?;
         let mut occupied = Vec::new();
@@ -124,15 +125,13 @@ impl PreparedDensityFlow {
             let arity = input.basis().slots().len() + 2 * cuts.len();
             let mut limits = closure.clone();
             if let Some(root) = &closure.checkpoints {
-                limits.checkpoints = Some(
-                    root.join(format!(
+                limits.checkpoints = Some(root.join(format!(
                         "cut-{}",
                         cuts.iter()
                             .map(ToString::to_string)
                             .collect::<Vec<_>>()
                             .join("-")
-                    )),
-                );
+                    )));
             }
             // Native guarded programs have a const-generic index arity. This
             // dispatch is by representation size, never input or benchmark
@@ -180,7 +179,7 @@ impl PreparedDensityFlow {
         context: &RunContext,
         start_scale: u32,
     ) -> Result<DensityEvaluation> {
-        options.validate()?;
+        super::flow::validate_options(options)?;
         if epsilon.is_zero() || start_scale < 4 {
             return Err(Error::InvalidInput("density evaluation requires nonzero epsilon and occupied start scale at least four".into()));
         }

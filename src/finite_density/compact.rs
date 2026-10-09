@@ -16,6 +16,87 @@ pub struct CompactShell {
 }
 
 impl CompactShell {
+    /// Explicit meromorphic dimensional continuation of a massless occupied
+    /// seed, retaining the original E^r |q|^(2j) weight before cut derivatives.
+    /// This does not admit massless graph contours or lower-endpoint products.
+    /// Negative energy/radial powers use this jointly continued radial family,
+    /// rather than the positive-mass inverse-energy smoothness certificate.
+    /// This API requires exactly zero shell mass, mu>0, rational spatial
+    /// dimension d>0 and 1<=power<=32. Positive spatial dimensions avoid
+    /// separate angular-Gamma zero/pole combinations. Genuine dimensional
+    /// poles return an error; removable poles are canceled before evaluation.
+    pub fn dimensionally_continued_massless_raised_moment(
+        &self,
+        spatial_dimension: &Rational,
+        power: u16,
+        energy_power: i32,
+        radial_power: i32,
+        p: Precision,
+    ) -> Result<C> {
+        self.validate()?;
+        if !self.mass_squared.is_zero() || self.chemical_potential <= 0 || power == 0 {
+            return Err(Error::InvalidInput(
+                "continued massless seed requires zero mass, positive chemical potential and positive cut index".into(),
+            ));
+        }
+        if spatial_dimension <= &Rational::zero() {
+            return Err(Error::Unsupported(
+                "continued massless seed currently requires positive spatial dimension; angular Gamma zeros need a separate combined continuation".into(),
+            ));
+        }
+        if power > 32 {
+            return Err(Error::Limit(
+                "continued massless cut order exceeds 32".into(),
+            ));
+        }
+        let dimension_symbol = symbol!("rustflow_density::massless_seed_dimension");
+        let d = Atom::var(dimension_symbol);
+        let alpha = &d / Atom::num(2) + Atom::num(radial_power) - Atom::one();
+        let beta =
+            &d + Atom::num(energy_power) + Atom::num(2) * Atom::num(radial_power) + Atom::one()
+                - Atom::num(2) * Atom::num(power);
+        let mut binomial = Atom::one();
+        for order in 0..power - 1 {
+            binomial *= (&alpha - Atom::num(order)) / Atom::num(order + 1);
+        }
+        // The complete high-ReD radial identity is continued, so removable
+        // binomial/beta factors are canceled before a dimension is sampled.
+        let ratio = (binomial / &beta).together().cancel();
+        let substitution =
+            std::collections::BTreeMap::from([(d.clone(), Atom::num(spatial_dimension.clone()))]);
+        let conditions = crate::physical_conditions::rational_denominator_conditions(
+            std::slice::from_ref(&ratio),
+            &std::collections::BTreeSet::from([dimension_symbol]),
+        )?;
+        if conditions
+            .iter()
+            .any(|condition| crate::family::substitute(condition, &substitution).is_zero())
+        {
+            return Err(Error::Numerical(
+                "continued massless seed has an uncancelled dimensional pole".into(),
+            ));
+        }
+        let parameters = HashMap::from_iter([(d, p.rational(spatial_dimension))]);
+        let value = p.scale(
+            &p.mul(
+                &Self::angular(spatial_dimension, p)?,
+                &p.mul(
+                    &p.eval(&ratio, &parameters)?,
+                    &p.pow(
+                        &p.rational(&self.chemical_potential),
+                        &p.eval(&beta, &parameters)?,
+                    ),
+                ),
+            ),
+            -1,
+            2,
+        );
+        if !p.finite(&value) {
+            return Err(Error::Numerical("nonfinite continued massless seed".into()));
+        }
+        Ok(value)
+    }
+
     fn validate(&self) -> Result<()> {
         if self.mass_squared < 0 || self.chemical_potential < 0 {
             return Err(Error::InvalidInput(
@@ -140,7 +221,36 @@ impl CompactShell {
         max_terms: usize,
         p: Precision,
     ) -> Result<C> {
+        self.raised_laurent_moment(
+            spatial_dimension,
+            power,
+            i32::from(energy_power),
+            radial_power,
+            digits,
+            max_terms,
+            p,
+        )
+    }
+
+    /// Integer energy powers on a shell with strictly positive mass. Negative
+    /// powers are smooth because E>=m>0; this does not admit a virtual energy
+    /// pole, an inverse energy sum, or a massless endpoint distribution.
+    pub fn raised_laurent_moment(
+        &self,
+        spatial_dimension: &Rational,
+        power: u16,
+        energy_power: i32,
+        radial_power: u16,
+        digits: u32,
+        max_terms: usize,
+        p: Precision,
+    ) -> Result<C> {
         self.validate()?;
+        if energy_power < 0 && self.mass_squared <= 0 {
+            return Err(Error::Unsupported(
+                "inverse compact energy needs a strictly positive shell mass".into(),
+            ));
+        }
         if power == 0 {
             return Err(Error::InvalidInput(
                 "occupied line power must be positive".into(),
@@ -248,6 +358,105 @@ impl CompactShell {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn continued_massless_seed_cancels_only_removable_dimensional_poles() {
+        let shell = CompactShell {
+            mass_squared: Rational::zero(),
+            chemical_potential: Rational::from(2),
+        };
+        let p = Precision::decimal(60).unwrap();
+        // binom(d/2-1,1)/(d-2)=1/2: a true removable 0/0 at d=2.
+        let removable = shell
+            .dimensionally_continued_massless_raised_moment(&Rational::from(2), 2, 1, 0, p)
+            .unwrap();
+        let expected = p.eval(&parse!("-1/(8*pi)"), &HashMap::default()).unwrap();
+        assert!(p.close(&removable, &expected, 45));
+        assert!(
+            matches!(shell.dimensionally_continued_massless_raised_moment(
+            &Rational::from(3), 2, 0, 0, p), Err(Error::Numerical(message))
+            if message.contains("uncancelled dimensional pole"))
+        );
+        // Both signed weights are explicitly admitted by this continued scalar
+        // family. At simple cut only, E=|q| permits comparison with r=-3,j=0.
+        let signed = shell
+            .dimensionally_continued_massless_raised_moment(&Rational::from(6), 1, -1, -1, p)
+            .unwrap();
+        let simple = p.neg(
+            &shell
+                .moment(&Rational::from(6), -3, 0, 45, 10000, p)
+                .unwrap(),
+        );
+        assert!(p.close(&signed, &simple, 40));
+        let expected = p
+            .eval(&parse!("-1/(64*pi^3)"), &HashMap::default())
+            .unwrap();
+        assert!(p.close(&signed, &expected, 40));
+        // The old convergent API retains its explicit infrared rejection.
+        assert!(
+            shell
+                .raised_moment(&Rational::from(2), 2, 0, 0, 45, 10000, p)
+                .is_err()
+        );
+        let zero_mu = CompactShell {
+            chemical_potential: Rational::zero(),
+            ..shell
+        };
+        assert!(
+            zero_mu
+                .dimensionally_continued_massless_raised_moment(&Rational::from(4), 1, 0, 0, p)
+                .is_err()
+        );
+    }
+
+    #[test]
+    fn continued_massless_seed_matches_independent_raised_bulk_and_surfaces() {
+        let shell = CompactShell {
+            mass_squared: Rational::zero(),
+            chemical_potential: Rational::from(2),
+        };
+        let p = Precision::decimal(60).unwrap();
+        let mut checked = 0;
+        for dimension in [
+            Rational::from((7, 2)),
+            Rational::from((9, 2)),
+            Rational::from((13, 2)),
+        ] {
+            for power in 1..=3 {
+                for energy in 0..=3 {
+                    for radial in 0..=2 {
+                        let beta = &dimension + &Rational::from(energy + 2 * radial + 1 - 2 * power);
+                        if beta <= 0 {
+                            continue;
+                        }
+                        let convergent = shell
+                            .raised_moment(
+                                &dimension,
+                                power as u16,
+                                energy as u16,
+                                radial as u16,
+                                45,
+                                10000,
+                                p,
+                            )
+                            .unwrap();
+                        let continued = shell
+                            .dimensionally_continued_massless_raised_moment(
+                                &dimension,
+                                power as u16,
+                                energy,
+                                radial,
+                                p,
+                            )
+                            .unwrap();
+                        assert!(p.close(&convergent, &continued, 40));
+                        checked += 1;
+                    }
+                }
+            }
+        }
+        assert!(checked > 80);
+    }
 
     #[test]
     fn finite_jump_threshold_matches_independent_thermal_radial_integrals() {

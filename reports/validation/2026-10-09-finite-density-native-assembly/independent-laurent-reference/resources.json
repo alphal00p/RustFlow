@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "target/release/deps/finite_density_reference-260f072e795f3803",
+    "--ignored",
+    "--exact",
+    "generate_independent_massive_sunset_laurent_reference",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 86.69839726528153,
+  "user_seconds": 85.967092,
+  "system_seconds": 0.038459,
+  "peak_child_rss_kib": 12372,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

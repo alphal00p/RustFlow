@@ -345,6 +345,90 @@ impl<const N: usize> WeightedMeasure<N> {
         Ok((direction, divergence.expand()))
     }
 
+    /// Shell-normal total derivatives v_i=u/(2E_i), lowered through a
+    /// certified completion f_slot=c E_i. The caller must prove E_i nonzero on
+    /// the complete distribution support and admit all integer powers there.
+    /// This is the ordinary u identity at a_slot+1, multiplied by c/2; it does
+    /// not introduce a second elimination or differentiate an integrated shell.
+    pub fn compact_normal_ibps(
+        &self,
+        loops: usize,
+        completions: &[(usize, usize, Rational)],
+        indices: &[Symbol; N],
+        domain_budget: usize,
+    ) -> Result<Vec<GuardedIdentity<N>>> {
+        let pairs = (0..loops)
+            .flat_map(|a| (a..loops).map(move |b| (a, b)))
+            .collect::<Vec<_>>();
+        if self.coordinates.len() != pairs.len() + loops {
+            return Err(Error::InvalidInput("shell-normal Gram geometry".into()));
+        }
+        let mut sources = Vec::new();
+        let mut used = std::collections::BTreeSet::new();
+        for &(i, slot, ref coefficient) in completions {
+            if i >= loops
+                || slot >= N
+                || self.roles[slot] != IndexRole::Ordinary
+                || coefficient.is_zero()
+                || !used.insert((i, slot))
+            {
+                return Err(Error::InvalidInput(
+                    "shell-normal completion certificate".into(),
+                ));
+            }
+            let energy = &self.coordinates[pairs.len() + i];
+            if !(&self.factors[slot] - Atom::num(coefficient.clone()) * energy)
+                .expand()
+                .together()
+                .cancel()
+                .is_zero()
+            {
+                return Err(Error::InvalidInput(
+                    "shell-normal factor differs from certified energy".into(),
+                ));
+            }
+            let mut direction = pairs
+                .iter()
+                .map(|&(a, b)| {
+                    Atom::num(i32::from(a == i)) * &self.coordinates[pairs.len() + b]
+                        + Atom::num(i32::from(b == i)) * &self.coordinates[pairs.len() + a]
+                })
+                .collect::<Vec<_>>();
+            direction.extend((0..loops).map(|a| Atom::num(i32::from(a == i))));
+            let mut shifted_sources = self.ibp(
+                &format!("shell-normal/{i}/{slot}"),
+                indices,
+                &direction,
+                &Atom::zero(),
+                domain_budget,
+            )?;
+            let index = Atom::var(indices[slot]);
+            let factor = Atom::num(coefficient.clone()) / Atom::num(2);
+            for source in &mut shifted_sources {
+                for term in &mut source.terms {
+                    term.shift[slot] = term.shift[slot]
+                        .checked_add(1)
+                        .ok_or_else(|| Error::Limit("shell-normal shift overflow".into()))?;
+                    term.coefficient = (&factor
+                        * term
+                            .coefficient
+                            .replace(index.clone())
+                            .with(&index + Atom::one()))
+                    .together()
+                    .cancel();
+                }
+                let mut shift = [0; N];
+                shift[slot] = 1;
+                source.domain = source
+                    .domain
+                    .pullback(&shift)
+                    .map_err(|error| Error::InvalidInput(error.to_string()))?;
+            }
+            sources.extend(shifted_sources);
+        }
+        Ok(sources)
+    }
+
     /// Exact polynomial/distribution multiplication identities. These include
     /// h*delta(h)=0 and h*C_n(h)=C_(n-1)(h), n>=2; h*theta(h) is not zero.
     pub fn multiplication_sources(&self) -> Result<Vec<GuardedIdentity<N>>> {
@@ -685,6 +769,91 @@ mod tests {
                 .all(|s| s.domain.bounds()[7..]
                     .iter()
                     .all(|b| *b == IndexBounds::new(Some(0), None).unwrap()))
+        );
+    }
+
+    #[test]
+    fn normalized_shell_sources_match_direct_distribution_product_rule() {
+        let g = parse!("fd_normal::g");
+        let e = parse!("fd_normal::e");
+        let indices = std::array::from_fn(|i| symbol!(format!("fd_normal::a_{i}")));
+        let measure = WeightedMeasure::new(
+            vec![g.clone(), e.clone()],
+            [
+                g - Atom::num(2),
+                -Atom::num(2) * &e,
+                Atom::num(3) - &e,
+                e.clone(),
+            ],
+            [
+                IndexRole::RequiredCut,
+                IndexRole::Ordinary,
+                IndexRole::Occupation,
+                IndexRole::Occupation,
+            ],
+        )
+        .unwrap();
+        let sources = measure
+            .compact_normal_ibps(1, &[(0, 1, Rational::from(-2))], &indices, 4)
+            .unwrap();
+        let bulk = sources
+            .iter()
+            .find(|s| {
+                s.domain.bounds()[2] == IndexBounds::fixed(0)
+                    && s.domain.bounds()[3] == IndexBounds::fixed(0)
+            })
+            .unwrap();
+        let terms = bulk
+            .terms
+            .iter()
+            .map(|t| (t.shift, t.coefficient.clone()))
+            .collect::<BTreeMap<_, _>>();
+        let expected = BTreeMap::from([
+            ([1, 0, 0, 0], -Atom::var(indices[0])),
+            (
+                [0, 2, 0, 0],
+                -Atom::num(2) * (Atom::var(indices[1]) + Atom::one()),
+            ),
+            ([0, 1, 1, 0], Atom::one()),
+            ([0, 1, 0, 1], -Atom::one()),
+        ]);
+        assert_eq!(terms.len(), expected.len());
+        for (shift, coefficient) in expected {
+            assert!((&terms[&shift] - coefficient).expand().is_zero());
+        }
+        // Independent Cartesian divergence, shell action and temporal flux of
+        // v=u/(2E), in several integer spacetime dimensions.
+        for dimension in 2..=5 {
+            let q = (0..dimension)
+                .map(|mu| symbol!(format!("fd_normal_cartesian::q_{dimension}_{mu}")))
+                .collect::<Vec<_>>();
+            let energy = Atom::var(q[0]);
+            let shell = (1..dimension).fold(energy.pow(2) - Atom::num(2), |s, mu| {
+                s - Atom::var(q[mu]).pow(2)
+            });
+            let field = Atom::one() / (Atom::num(2) * &energy);
+            assert!(
+                (field.derivative(q[0]) + Atom::one() / (Atom::num(2) * energy.pow(2)))
+                    .together()
+                    .cancel()
+                    .is_zero()
+            );
+            assert!(
+                (shell.derivative(q[0]) * &field - Atom::one())
+                    .together()
+                    .cancel()
+                    .is_zero()
+            );
+            assert!(
+                ((Atom::num(3) - &energy).derivative(q[0]) * &field + &field)
+                    .expand()
+                    .is_zero()
+            );
+        }
+        assert!(
+            measure
+                .compact_normal_ibps(1, &[(0, 1, Rational::from(1))], &indices, 4)
+                .is_err()
         );
     }
 

@@ -7,12 +7,14 @@
 use std::collections::{BTreeMap, BTreeSet};
 use std::path::{Path, PathBuf};
 
+use rustred::solver::guarded::GuardedUnresolvedReason;
+use serde::Serialize;
 use symbolica::prelude::*;
 
 use super::guarded::{
-    GuardedApplicationFailure, GuardedAtomUnresolved, GuardedContext, GuardedDiscoveryOptions,
-    GuardedReductionLimits, GuardedReductionProgram, GuardedUnresolved, IndexBounds, IndexDomain,
-    IndexRole,
+    GuardedApplicationFailure, GuardedAtomUnresolved, GuardedContext, GuardedDiscovery,
+    GuardedDiscoveryOptions, GuardedReductionLimits, GuardedReductionProgram, GuardedUnresolved,
+    IndexBounds, IndexDomain, IndexRole,
 };
 use crate::reduction::{LinearCombination, ReducedSystem};
 use crate::{DifferentialSystem, Error, Integral, Progress, Result, RunContext};
@@ -119,6 +121,39 @@ impl<const N: usize> FixedShellDeformation<N> {
     }
 }
 
+/// Subdivide only finite native proof gaps reached by actual reductions. These
+/// limits control additional native searches, never an alternative elimination.
+#[derive(Clone, Copy, Debug, Serialize)]
+pub struct GuardRefinementOptions {
+    /// Additional discovery passes per provisional or final-audit program.
+    /// Zero preserves discovery without frontend interval subdivision.
+    pub max_passes: usize,
+    /// Total distinct added faces over the complete closure preparation.
+    pub max_added_domains: usize,
+    /// Inclusive integer interval width (upper minus lower), not point count.
+    pub max_interval_width: u64,
+}
+
+impl Default for GuardRefinementOptions {
+    fn default() -> Self {
+        Self {
+            max_passes: 0,
+            max_added_domains: 256,
+            max_interval_width: 2,
+        }
+    }
+}
+
+#[derive(Clone, Debug, Serialize)]
+pub struct GuardRefinementRecord {
+    pub pass: usize,
+    pub parent_bounds: Vec<[Option<i64>; 2]>,
+    pub native_failure: String,
+    pub axis: usize,
+    pub fixed_values: Vec<i64>,
+    pub trigger: Vec<i64>,
+}
+
 #[derive(Clone, Debug)]
 pub struct WeightedClosureOptions {
     pub max_rounds: usize,
@@ -126,6 +161,7 @@ pub struct WeightedClosureOptions {
     pub max_requested: usize,
     pub discovery: GuardedDiscoveryOptions,
     pub application: GuardedReductionLimits,
+    pub guard_refinement: GuardRefinementOptions,
     /// A distinct directory per source/deformation context. Each round stores
     /// its exact native program plus explicitly provisional/closed metadata.
     pub checkpoints: Option<PathBuf>,
@@ -139,6 +175,7 @@ impl Default for WeightedClosureOptions {
             max_requested: 4096,
             discovery: GuardedDiscoveryOptions::default(),
             application: GuardedReductionLimits::default(),
+            guard_refinement: GuardRefinementOptions::default(),
             checkpoints: None,
         }
     }
@@ -154,6 +191,12 @@ pub struct WeightedClosureDiagnostics {
     /// Discovery need not solve every native index domain to close the finite
     /// requested target and derivative set. All such gaps stay inspectable.
     pub uncovered_discovery_domains: usize,
+    pub guard_refinement_passes: usize,
+    pub guard_refinement_added_domains: usize,
+    pub guard_refinement_budget_exhausted: bool,
+    /// Historical parent gaps remain evidence of incomplete symbolic coverage;
+    /// adding faces alone is never a claim that the parent has been certified.
+    pub guard_refinements: Vec<GuardRefinementRecord>,
 }
 
 #[derive(Debug)]
@@ -209,6 +252,14 @@ pub fn prepare_weighted_system<const N: usize>(
     {
         return Err(Error::InvalidInput(
             "weighted closure needs targets and positive work limits".into(),
+        ));
+    }
+    if options.guard_refinement.max_passes > 0
+        && (options.guard_refinement.max_added_domains < 2
+            || options.guard_refinement.max_interval_width == 0)
+    {
+        return Err(Error::InvalidInput(
+            "enabled weighted guard refinement needs at least two faces and positive interval width".into(),
         ));
     }
     if context.sources().roles() != &deformation.roles {
@@ -273,6 +324,7 @@ pub fn prepare_weighted_system<const N: usize>(
     let mut last_frontier = Vec::new();
     let mut last_unresolved = Vec::new();
     let mut last_discovery = Vec::new();
+    let mut refined_domains = Vec::new();
     for round in 0..options.max_rounds {
         run.cancellation.check()?;
         if requested.len() > options.max_requested {
@@ -289,7 +341,18 @@ pub fn prepare_weighted_system<const N: usize>(
             .into_iter()
             .filter_map(|domain| domain.intersection(deformation.admitted_domain()))
             .collect::<Vec<_>>();
-        let found = context.discover(domains.clone(), [], options.discovery)?;
+        let found = discover_with_refinement(
+            context,
+            &domains,
+            &[],
+            &requested,
+            deformation,
+            &options,
+            &mut refined_domains,
+            &mut diagnostics,
+            &mut conditions,
+            run,
+        )?;
         diagnostics.rounds = round + 1;
         diagnostics.requested = requested.len();
         diagnostics.native_rules = found.program.native().rules().len();
@@ -367,8 +430,20 @@ pub fn prepare_weighted_system<const N: usize>(
             // Rebuild one source-replayed program whose explicit stopping set
             // is now audited against every derivative and target. This is the
             // only point at which provisional candidates become a closed basis.
-            let final_found =
-                context.discover(domains, frontier.iter().copied(), options.discovery)?;
+            let final_found = discover_with_refinement(
+                context,
+                &domains,
+                &frontier,
+                &requested,
+                deformation,
+                &options,
+                &mut refined_domains,
+                &mut diagnostics,
+                &mut conditions,
+                run,
+            )?;
+            diagnostics.native_rules = final_found.program.native().rules().len();
+            diagnostics.uncovered_discovery_domains = final_found.unresolved.len();
             let mut reductions = BTreeMap::new();
             let mut failed = Vec::new();
             for target in &requested {
@@ -471,6 +546,172 @@ pub fn prepare_weighted_system<const N: usize>(
         conditions,
         diagnostics,
     ))
+}
+
+/// Native discovery and application remain the sole proof and reduction owners.
+/// The frontend only changes which exact integer boxes are submitted to them.
+#[allow(clippy::too_many_arguments)]
+fn discover_with_refinement<const N: usize>(
+    context: &GuardedContext<N>,
+    domains: &[IndexDomain<N>],
+    terminals: &[[i64; N]],
+    requested: &BTreeSet<[i64; N]>,
+    deformation: &FixedShellDeformation<N>,
+    options: &WeightedClosureOptions,
+    learned: &mut Vec<IndexDomain<N>>,
+    diagnostics: &mut WeightedClosureDiagnostics,
+    conditions: &mut BTreeMap<String, Atom>,
+    run: &RunContext,
+) -> Result<GuardedDiscovery<N>> {
+    for pass in 0..=options.guard_refinement.max_passes {
+        run.cancellation.check()?;
+        let mut submitted = domains.to_vec();
+        submitted.extend(
+            learned
+                .iter()
+                .filter(|face| !domains.contains(face))
+                .cloned(),
+        );
+        let found = context.discover(submitted, terminals.iter().copied(), options.discovery)?;
+        if options.guard_refinement.max_passes == 0 {
+            return Ok(found);
+        }
+        let mut residuals = BTreeSet::new();
+        for target in requested {
+            run.cancellation.check()?;
+            let reduced = found.program.reduce(*target, options.application)?;
+            diagnostics.native_rule_applications += reduced.rule_applications;
+            retain_conditions(conditions, reduced.nonzero_conditions);
+            for integral in reduced.terms.keys() {
+                deformation.validate_integral(integral)?;
+            }
+            for residual in reduced.unresolved {
+                deformation.validate_integral(&residual.integral)?;
+                if residual.reason != GuardedApplicationFailure::NoApplicableRule {
+                    // Let the ordinary caller report native application failure.
+                    return Ok(found);
+                }
+                // Constant residuals are legitimate provisional candidates.
+                // In a final audit even a constant must reach its stopping set.
+                if !terminals.is_empty() || !deformation.derivative(residual.integral)?.is_empty() {
+                    residuals.insert(residual.integral);
+                }
+            }
+        }
+        let mut added = false;
+        for gap in &found.unresolved {
+            if gap.reason != GuardedUnresolvedReason::UnprovedDescent {
+                continue;
+            }
+            let Some(trigger) = residuals.iter().find(|index| gap.domain.contains(index)) else {
+                continue;
+            };
+            if !gap.domain.is_subset_of(deformation.admitted_domain()) {
+                return Err(Error::IncompleteReduction(
+                    "native guard refinement escaped the admitted index domain".into(),
+                ));
+            }
+            let Some((axis, faces)) = finite_guard_faces(
+                &gap.domain,
+                options.guard_refinement.max_interval_width,
+                options.guard_refinement.max_added_domains,
+                learned,
+            )?
+            else {
+                continue;
+            };
+            let new_faces = faces.iter().filter(|face| !learned.contains(face)).count();
+            // A parent subdivision is atomic: never submit a partial partition
+            // just because the remaining face budget is smaller than its width.
+            if pass == options.guard_refinement.max_passes
+                || new_faces
+                    > options
+                        .guard_refinement
+                        .max_added_domains
+                        .saturating_sub(learned.len())
+            {
+                diagnostics.guard_refinement_budget_exhausted = true;
+                continue;
+            }
+            diagnostics.guard_refinements.push(GuardRefinementRecord {
+                pass: diagnostics.guard_refinement_passes + 1,
+                parent_bounds: gap
+                    .domain
+                    .bounds()
+                    .iter()
+                    .map(|b| [b.lower(), b.upper()])
+                    .collect(),
+                native_failure: gap.detail.clone(),
+                axis,
+                fixed_values: faces
+                    .iter()
+                    .map(|face| face.bounds()[axis].lower().unwrap())
+                    .collect(),
+                trigger: trigger.to_vec(),
+            });
+            for face in faces {
+                if !learned.contains(&face) {
+                    learned.push(face);
+                }
+            }
+            added = true;
+        }
+        if !added {
+            return Ok(found);
+        }
+        diagnostics.guard_refinement_passes += 1;
+        diagnostics.guard_refinement_added_domains = learned.len();
+        if let Some(directory) = options.checkpoints.as_deref() {
+            std::fs::create_dir_all(directory)?;
+            let metadata = serde_json::json!({
+                "schema":1, "options":options.guard_refinement,
+                "added_domains":learned.iter().map(|domain| domain.bounds().iter()
+                    .map(|bound| [bound.lower(),bound.upper()]).collect::<Vec<_>>()).collect::<Vec<_>>(),
+                "native_parent_gaps":diagnostics.guard_refinements,
+                "parent_coverage_certified":false,
+            });
+            std::fs::write(
+                directory.join("guard-refinements.json"),
+                serde_json::to_vec_pretty(&metadata).map_err(|e| Error::Cache(e.to_string()))?,
+            )?;
+        }
+    }
+    unreachable!("last bounded pass cannot add domains")
+}
+
+/// Pick one narrowest finite axis whose singleton faces have not all already
+/// been submitted. Every other (including unbounded symbolic) axis is retained.
+fn finite_guard_faces<const N: usize>(
+    parent: &IndexDomain<N>,
+    max_width: u64,
+    max_faces: usize,
+    learned: &[IndexDomain<N>],
+) -> Result<Option<(usize, Vec<IndexDomain<N>>)>> {
+    let mut axes = parent
+        .bounds()
+        .iter()
+        .enumerate()
+        .filter_map(|(axis, bound)| {
+            let (lower, upper) = (bound.lower()?, bound.upper()?);
+            let width = i128::from(upper) - i128::from(lower);
+            (width > 0 && width <= i128::from(max_width) && width < max_faces as i128)
+                .then_some((width, axis, lower, upper))
+        })
+        .collect::<Vec<_>>();
+    axes.sort_unstable();
+    for (_, axis, lower, upper) in axes {
+        let faces = (lower..=upper)
+            .map(|value| {
+                let mut bounds = *parent.bounds();
+                bounds[axis] = IndexBounds::fixed(value);
+                IndexDomain::new(bounds).map_err(|e| Error::InvalidInput(e.to_string()))
+            })
+            .collect::<Result<Vec<_>>>()?;
+        if faces.iter().any(|face| !learned.contains(face)) {
+            return Ok(Some((axis, faces)));
+        }
+    }
+    Ok(None)
 }
 
 fn discovery_domains<const N: usize>(
@@ -589,6 +830,170 @@ mod tests {
     use super::*;
     use crate::finite_density::guarded::GuardedMeasureIdentity;
     use crate::finite_density::measure::WeightedMeasure;
+
+    #[test]
+    fn guard_faces_cover_only_one_finite_axis_and_preserve_symbolic_bounds() {
+        let parent = IndexDomain::new([
+            IndexBounds::new(Some(-3), Some(-2)).unwrap(),
+            IndexBounds::new(Some(1), None).unwrap(),
+            IndexBounds::new(Some(1), Some(3)).unwrap(),
+        ])
+        .unwrap();
+        let (axis, faces) = finite_guard_faces(&parent, 2, 8, &[]).unwrap().unwrap();
+        assert_eq!(axis, 0);
+        assert_eq!(faces.len(), 2);
+        for face in &faces {
+            assert!(face.is_subset_of(&parent));
+            assert_eq!(face.bounds()[1..], parent.bounds()[1..]);
+        }
+        for a in -4..=0 {
+            for b in 0..=5 {
+                for c in 0..=4 {
+                    assert_eq!(
+                        faces.iter().filter(|d| d.contains(&[a, b, c])).count(),
+                        usize::from(parent.contains(&[a, b, c]))
+                    );
+                }
+            }
+        }
+        assert!(finite_guard_faces(&parent, 0, 8, &[]).unwrap().is_none());
+        assert!(finite_guard_faces(&parent, 2, 1, &[]).unwrap().is_none());
+        let (axis, second) = finite_guard_faces(&parent, 2, 8, &faces).unwrap().unwrap();
+        assert_eq!(axis, 2);
+        assert_eq!(second.len(), 3);
+        let mut learned = faces;
+        learned.extend(second);
+        assert!(
+            finite_guard_faces(&parent, 2, 8, &learned)
+                .unwrap()
+                .is_none()
+        );
+        let extreme =
+            IndexDomain::new([IndexBounds::new(Some(i64::MIN), Some(i64::MAX)).unwrap()]).unwrap();
+        assert!(
+            finite_guard_faces(&extreme, u64::MAX, 8, &[])
+                .unwrap()
+                .is_none()
+        );
+    }
+
+    #[test]
+    fn physical_recenter_gap_refines_through_native_discovery_and_replay() {
+        use crate::finite_density::DensityInput;
+        use crate::finite_density::preparation::WeightedSourcePolicy;
+        let input: DensityInput = serde_json::from_str(include_str!(
+            "../../examples/finite_density/massive_two_loop_sunset.json"
+        ))
+        .unwrap();
+        let family = input
+            .prepare()
+            .unwrap()
+            .occupied_cut(&[0, 1], 16)
+            .unwrap()
+            .at_physical_masses();
+        let prepared = family
+            .guarded_sources_with_policy::<9>(
+                symbol!("guard_refinement_eps"),
+                4,
+                symbol!("guard_refinement_eta"),
+                &[2],
+                16,
+                vec![],
+                GuardedMeasureIdentity {
+                    measure: format!("massive sunset double cut; factors={:?}", family.factors()),
+                    support: "assigned positive masses; two future shells with 0<E<1".into(),
+                    orientation: "future native Minkowski shells".into(),
+                    normalization: "unscaled source identities".into(),
+                    branch: "generic complex eta and dimension; completion powers<=0".into(),
+                    deformation: "D2-eta; occupied factors fixed".into(),
+                },
+                WeightedSourcePolicy::TangentsThenLorentz,
+            )
+            .unwrap();
+        let parent = IndexDomain::new([
+            IndexBounds::fixed(1),
+            IndexBounds::fixed(1),
+            IndexBounds::fixed(1),
+            IndexBounds::new(Some(-3), Some(-2)).unwrap(),
+            IndexBounds::fixed(0),
+            IndexBounds::fixed(0),
+            IndexBounds::fixed(0),
+            IndexBounds::new(Some(1), None).unwrap(),
+            IndexBounds::fixed(0),
+        ])
+        .unwrap();
+        let target = [1, 1, 1, -2, 0, 0, 0, 1, 0];
+        let mut options = WeightedClosureOptions {
+            discovery: GuardedDiscoveryOptions {
+                max_depth: 3,
+                max_domains: 8192,
+                sample_seed: 0,
+            },
+            ..Default::default()
+        };
+        let mut learned = Vec::new();
+        let mut diagnostics = WeightedClosureDiagnostics::default();
+        let mut conditions = BTreeMap::new();
+        let requested = BTreeSet::from([target]);
+        let initial = discover_with_refinement(
+            &prepared.context,
+            &[parent.clone()],
+            &[],
+            &requested,
+            &prepared.deformation,
+            &options,
+            &mut learned,
+            &mut diagnostics,
+            &mut conditions,
+            &RunContext::default(),
+        )
+        .unwrap();
+        assert!(
+            initial
+                .program
+                .reduce(target, options.application)
+                .unwrap()
+                .unresolved
+                .iter()
+                .any(|u| u.integral == target)
+        );
+        options.guard_refinement.max_passes = 1;
+        options.guard_refinement.max_added_domains = 2;
+        let refined = discover_with_refinement(
+            &prepared.context,
+            &[parent.clone()],
+            &[],
+            &requested,
+            &prepared.deformation,
+            &options,
+            &mut learned,
+            &mut diagnostics,
+            &mut conditions,
+            &RunContext::default(),
+        )
+        .unwrap();
+        assert_eq!(learned.len(), 2);
+        assert!(
+            learned
+                .iter()
+                .all(|face| face.bounds()[7] == parent.bounds()[7])
+        );
+        assert_eq!(diagnostics.guard_refinements[0].axis, 3);
+        assert!(refined.unresolved.iter().any(|gap| gap.domain == parent));
+        let replayed = prepared
+            .context
+            .decode(
+                &refined.program.encode(Default::default()).unwrap(),
+                Default::default(),
+            )
+            .unwrap();
+        let reduction = replayed.reduce(target, options.application).unwrap();
+        assert!(reduction.rule_applications > 0);
+        assert!(reduction.unresolved.iter().all(|u| u.integral != target));
+        // The new rule is a source-certified partial reduction, not a closed
+        // system: its lower-sector residuals remain explicit in this probe.
+        assert!(!reduction.unresolved.is_empty());
+    }
 
     fn compact_context() -> (GuardedContext<2>, FixedShellDeformation<2>) {
         let z = symbol!("weighted_closure_z");

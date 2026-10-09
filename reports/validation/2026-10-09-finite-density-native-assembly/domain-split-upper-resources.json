@@ -1,0 +1,15 @@
+{
+  "command": [
+    "target/release/deps/finite_density_closure-665c01718e3331cc",
+    "--ignored",
+    "--exact",
+    "native_single_domain_recenter_diagnostic",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.27769520273432136,
+  "user_seconds": 0.25984399999999996,
+  "system_seconds": 0.019448999999999998,
+  "peak_child_rss_kib": 12372,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

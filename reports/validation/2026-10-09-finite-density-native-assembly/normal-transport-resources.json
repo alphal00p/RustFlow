@@ -1,0 +1,11 @@
+{
+  "command": [
+    "target/release/deps/physical_transport-577248d15bcd58cf"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.529030301142484,
+  "user_seconds": 0.9908129999999999,
+  "system_seconds": 0.103325,
+  "peak_child_rss_kib": 12372,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

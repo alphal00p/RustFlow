@@ -1,0 +1,14 @@
+{
+  "command": [
+    "target/release/deps/symbolica_amflow-ad945eb4642fae0f",
+    "finite_density::reduction::tests::physical_recenter_gap_refines_through_native_discovery_and_replay",
+    "--exact",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.4662149236537516,
+  "user_seconds": 0.435175,
+  "system_seconds": 0.030947,
+  "peak_child_rss_kib": 12352,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

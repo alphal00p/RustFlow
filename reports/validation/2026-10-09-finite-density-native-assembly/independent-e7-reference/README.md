@@ -12,8 +12,8 @@ the mandatory I37 definition and the supplemental raised occupied-line numerator
 target. It binds the complete incidence, routings, masses, charges, polynomial
 numerators and physical powers, and contains exact analytic Laurent coefficients
 through order zero in the prescribed unexpanded reference normalization. Orders
-below -2 vanish by the derived Gamma expression. No numerical oracle value or
-native AMF prediction was read or compared.
+below -2 vanish by the derived Gamma expression. The generator read neither
+numerical oracle values nor native AMF predictions.
 
 | Independent check | Largest observed relative difference |
 | --- | --- |
@@ -41,3 +41,18 @@ RUSTFLOW_DENSITY_E7_REFERENCE_REPORT=reports/validation/2026-10-09-finite-densit
 This supplies one previously missing raised-line reference. The other two
 four-loop supplemental references and all three families' native AMF evaluations
 remain required. Production code does not import this test or its results.
+
+After the independent reference was saved, a separate validation-only comparison
+with supplied I37 passed all three Laurent coefficient identities exactly in
+Q[pi], resolving the supplied `a1=243/4-3*pi^2/4`. The saved independent native
+100-digit coefficient values agreed with a Decimal Machin-pi evaluation to a
+maximum relative difference of 2.522e-100. The full evidence is in
+[`supplied-I37-reference-comparison.json`](supplied-I37-reference-comparison.json),
+including immutable source hashes and the original expressions. The original
+reference and oracle bytes were preserved. This is **reference versus reference**:
+one supplied record and three coefficients compared, zero AMF predictions read,
+zero native AMF-to-oracle comparisons or acceptance claims.
+
+```sh
+python3 tools/finite_density/compare_e7_references.py
+```

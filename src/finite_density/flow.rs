@@ -7,6 +7,7 @@ use super::flow_boundary::{OccupiedBoundaryProvenance, OccupiedFlowBoundary};
 use super::geometry::OccupiedCutFamily;
 use super::guarded::GuardedMeasureIdentity;
 use super::normalization::native_measure_to_euclidean;
+use super::preparation::WeightedSourceOptions;
 use super::reduction::{
     WeightedClosureOptions, WeightedClosureOutcome, WeightedReducedSystem, prepare_weighted_system,
 };
@@ -28,6 +29,7 @@ pub struct PreparedOccupiedFlow<const N: usize> {
     system: Option<DifferentialSystem>,
     transport: ConnectionTransport,
     contour_admission: String,
+    source_options: WeightedSourceOptions,
 }
 
 #[derive(Clone, Debug)]
@@ -39,9 +41,11 @@ pub struct OccupiedFlowEvaluation {
     pub contour_admission: String,
     pub shifted_slots: Vec<usize>,
     pub basis_size: usize,
+    /// None is reserved for constructions without a guarded source program.
+    pub source_options: Option<WeightedSourceOptions>,
 }
 
-fn validate_options(options: &FlowOptions) -> Result<()> {
+pub(crate) fn validate_options(options: &FlowOptions) -> Result<()> {
     options.validate()?;
     if options.prescription != Prescription::PlusI0 || options.recursion != RecursionMode::Amf {
         return Err(Error::Unsupported(
@@ -56,6 +60,10 @@ fn validate_options(options: &FlowOptions) -> Result<()> {
     }
     Ok(())
 }
+
+#[cfg(test)]
+#[path = "flow_endpoint_tests.rs"]
+mod endpoint_tests;
 
 /// Sufficient open physical-mass domain, verified from incidence and charges.
 /// No integral values or topology names enter this admission. For its one-cut
@@ -115,6 +123,27 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
         closure_options: WeightedClosureOptions,
         context: &RunContext,
     ) -> Result<Self> {
+        Self::prepare_with_source_options(
+            input,
+            cuts,
+            options,
+            closure_options,
+            context,
+            WeightedSourceOptions::default(),
+        )
+    }
+
+    /// Select a native source presentation and optional smooth inverse-energy
+    /// completion domain. Every extra denominator requires an exact positive
+    /// compact-energy certificate; the default keeps polynomial completions.
+    pub fn prepare_with_source_options(
+        input: &PreparedDensityInput,
+        cuts: &[usize],
+        options: &FlowOptions,
+        closure_options: WeightedClosureOptions,
+        context: &RunContext,
+        source_options: WeightedSourceOptions,
+    ) -> Result<Self> {
         validate_options(options)?;
         context.cancellation.check()?;
         let family = input.occupied_cut(cuts, 65536)?.at_physical_masses();
@@ -129,14 +158,14 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
         let shifted = (0..family.factors().len())
             .map(|i| shifted_slots.contains(&i))
             .collect::<Vec<_>>();
-        let sources = family.guarded_sources::<N>(epsilon,options.dimension,eta,&shifted_slots,65536,vec![],GuardedMeasureIdentity {
+        let sources = family.guarded_sources_with_options::<N>(epsilon,options.dimension,eta,&shifted_slots,65536,vec![],GuardedMeasureIdentity {
             measure:format!("independent occupied Cn and Hn; input={}; factors={:?}",input.identity(),family.factors()),
             support:format!("real compact shell coordinates; {:?}",family.shells()),
             orientation:format!("future first {} loops; q=(-i PE0,-PEvec); inverse routing={:?}; determinant={}",cuts.len(),family.inverse_routing(),family.routing_determinant()),
             normalization:"virtual d^Dk/(i pi^(D/2)); occupied d^Dq/pi^(D/2); Euclidean target Wick phases already included".into(),
             branch:admission.clone(),
             deformation:format!("native Di-eta on {shifted_slots:?}; physical shells and upper/lower supports fixed; input indices and coefficients fixed"),
-        })?;
+        }, source_options)?;
         let closed = match prepare_weighted_system(
             &sources.context,
             &sources.targets,
@@ -171,6 +200,7 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             system,
             transport: ConnectionTransport::default(),
             contour_admission: admission,
+            source_options,
         })
     }
 
@@ -256,7 +286,8 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
             self.epsilon,
             options.series_order.min(100),
             OccupiedBoundaryLimits::default(),
-        )?;
+        )?
+        .with_positive_compact_energy_powers(self.source_options.positive_compact_energy_powers);
         let mut boundary_provenance = OccupiedBoundaryProvenance::default();
         let values = self.transport.evaluate(
             ConnectionRequest {
@@ -311,6 +342,7 @@ impl<const N: usize> PreparedOccupiedFlow<N> {
                 .filter_map(|(i, &b)| b.then_some(i))
                 .collect(),
             basis_size: self.closed.reduced.basis.len(),
+            source_options: Some(self.source_options),
         })
     }
 }

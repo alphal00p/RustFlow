@@ -19,6 +19,8 @@ pub enum WeightedSourcePolicy {
     ActiveLorentz,
     LorentzThenTangents,
     TangentsThenLorentz,
+    NormalsThenLorentz,
+    LorentzThenNormals,
 }
 
 impl WeightedSourcePolicy {
@@ -28,6 +30,8 @@ impl WeightedSourcePolicy {
             Self::ActiveLorentz => "active-lorentz",
             Self::LorentzThenTangents => "lorentz-then-tangents",
             Self::TangentsThenLorentz => "tangents-then-lorentz",
+            Self::NormalsThenLorentz => "normals-then-lorentz",
+            Self::LorentzThenNormals => "lorentz-then-normals",
         }
     }
 }
@@ -41,11 +45,21 @@ impl std::str::FromStr for WeightedSourcePolicy {
             "active-lorentz" => Ok(Self::ActiveLorentz),
             "lorentz-then-tangents" => Ok(Self::LorentzThenTangents),
             "tangents-then-lorentz" => Ok(Self::TangentsThenLorentz),
+            "normals-then-lorentz" => Ok(Self::NormalsThenLorentz),
+            "lorentz-then-normals" => Ok(Self::LorentzThenNormals),
             _ => Err(Error::InvalidInput(format!(
                 "unknown weighted source presentation {value}"
             ))),
         }
     }
+}
+
+/// Physical source admission and presentation. Positive completion powers are
+/// opt-in and require an exact massive compact-energy certificate per slot.
+#[derive(Clone, Copy, Debug, Default, PartialEq, Eq, serde::Serialize, serde::Deserialize)]
+pub struct WeightedSourceOptions {
+    pub policy: WeightedSourcePolicy,
+    pub positive_compact_energy_powers: bool,
 }
 
 /// Exact algebraic preparation. The measure identity must describe the actual
@@ -93,10 +107,42 @@ impl OccupiedCutFamily {
         eta: Symbol,
         shifted: &[usize],
         domain_budget: usize,
-        mut parameters: Vec<Symbol>,
-        mut identity: GuardedMeasureIdentity,
+        parameters: Vec<Symbol>,
+        identity: GuardedMeasureIdentity,
         policy: WeightedSourcePolicy,
     ) -> Result<PreparedWeightedSources<N>> {
+        self.guarded_sources_with_options(
+            epsilon,
+            dimension,
+            eta,
+            shifted,
+            domain_budget,
+            parameters,
+            identity,
+            WeightedSourceOptions {
+                policy,
+                ..Default::default()
+            },
+        )
+    }
+
+    /// Permit inverse powers of a completion only when it is certified equal
+    /// to a nonzero rational multiple of one future energy with m²>0. Such a
+    /// factor is nonsingular on every shell/surface distribution support. All
+    /// other completions retain the polynomial domain; no numerical boundary
+    /// support is inferred merely from this source admission.
+    pub fn guarded_sources_with_options<const N: usize>(
+        &self,
+        epsilon: Symbol,
+        dimension: i64,
+        eta: Symbol,
+        shifted: &[usize],
+        domain_budget: usize,
+        mut parameters: Vec<Symbol>,
+        mut identity: GuardedMeasureIdentity,
+        options: WeightedSourceOptions,
+    ) -> Result<PreparedWeightedSources<N>> {
+        let policy = options.policy;
         let measure = self.deformed_measure::<N>(eta, shifted)?;
         let indices =
             std::array::from_fn(|slot| symbol!(format!("rustflow_occupied_indices::a_{slot}")));
@@ -112,13 +158,34 @@ impl OccupiedCutFamily {
                 domain_budget,
             )
         };
+        let legacy = || {
+            measure.lorentz_ibps_legacy(self.loops(), &symbolic_dimension, &indices, domain_budget)
+        };
+        let normal = || {
+            if !options.positive_compact_energy_powers {
+                return Err(Error::InvalidInput(
+                    "shell-normal sources require certified positive compact energy powers".into(),
+                ));
+            }
+            let completions = (self.physical_slots()..self.input_slots())
+                .filter_map(|slot| self.compact_energy_completion(slot))
+                .map(|certificate| {
+                    (
+                        certificate.loop_index,
+                        certificate.slot,
+                        certificate.coefficient,
+                    )
+                })
+                .collect::<Vec<_>>();
+            if completions.is_empty() {
+                return Err(Error::Unsupported(
+                    "shell-normal sources have no certified massive energy completion".into(),
+                ));
+            }
+            measure.compact_normal_ibps(self.loops(), &completions, &indices, domain_budget)
+        };
         let mut identities = match policy {
-            WeightedSourcePolicy::LegacyLorentz => measure.lorentz_ibps_legacy(
-                self.loops(),
-                &symbolic_dimension,
-                &indices,
-                domain_budget,
-            )?,
+            WeightedSourcePolicy::LegacyLorentz => legacy()?,
             WeightedSourcePolicy::ActiveLorentz => lorentz()?,
             WeightedSourcePolicy::LorentzThenTangents => {
                 let mut sources = lorentz()?;
@@ -130,22 +197,45 @@ impl OccupiedCutFamily {
                 sources.extend(lorentz()?);
                 sources
             }
+            WeightedSourcePolicy::NormalsThenLorentz => {
+                let mut sources = normal()?;
+                sources.extend(legacy()?);
+                sources
+            }
+            WeightedSourcePolicy::LorentzThenNormals => {
+                let mut sources = legacy()?;
+                sources.extend(normal()?);
+                sources
+            }
         };
         identity
             .measure
             .push_str(&format!("; source presentation={}", policy.as_str()));
         let roles = *measure.roles();
         let mut bounds = *IndexDomain::for_roles(&roles).bounds();
-        for bound in &mut bounds[self.physical_slots()..self.input_slots()] {
-            *bound = IndexBounds::new(None, Some(0))
+        identity.measure.push_str(&format!(
+            "; positive compact energy completion powers={}",
+            options.positive_compact_energy_powers,
+        ));
+        for slot in self.physical_slots()..self.input_slots() {
+            if options.positive_compact_energy_powers {
+                if let Some(certificate) = self.compact_energy_completion(slot) {
+                    identity.support.push_str(&format!(
+                        "; certified nonsingular completion slot {}={}*E_{} on future required shell with mass squared {}>0; all integer completion powers admitted",
+                        certificate.slot, certificate.coefficient, certificate.loop_index, certificate.mass_squared,
+                    ));
+                    continue;
+                }
+            }
+            bounds[slot] = IndexBounds::new(None, Some(0))
                 .map_err(|error| Error::InvalidInput(error.to_string()))?;
         }
-        let polynomial_domain =
+        let admitted_domain =
             IndexDomain::new(bounds).map_err(|error| Error::InvalidInput(error.to_string()))?;
         identities = identities
             .into_iter()
             .filter_map(|mut source| {
-                source.domain = source.domain.intersection(&polynomial_domain)?;
+                source.domain = source.domain.intersection(&admitted_domain)?;
                 Some(source)
             })
             .collect();
@@ -189,7 +279,7 @@ impl OccupiedCutFamily {
         }
         let deformation =
             FixedShellDeformation::new(eta, AuxiliaryConvention::NativeMinusEta, roles, selected)?
-                .with_admitted_domain(polynomial_domain)?;
+                .with_admitted_domain(admitted_domain)?;
         let targets = self
             .targets()
             .iter()

@@ -1,0 +1,181 @@
+{
+  "schema": 1,
+  "source_snapshot": "normal-source-hashes.json",
+  "source_snapshot_sha256": "bcf129d7c44a79cbe10d912bb104272d4e05e9fb3c7ddfcd5192a81f31758b86",
+  "scope": "Standalone checkout; no host build. Native normalized source algebra, signed-energy boundary, massless seed/certificate and ordinary owner regressions. No full massive amplitude acceptance.",
+  "compile": {
+    "check_command": "nix develop --command cargo check --locked --release --features python --tests",
+    "check_status": "passed",
+    "check_cargo_seconds": 19.95,
+    "release_no_run_cargo_seconds": 420,
+    "release_status": "passed",
+    "compile_time_excluded_from_test_resources": true
+  },
+  "passed": 74,
+  "failed": 0,
+  "gates": [
+    {
+      "gate": "finite_density_units",
+      "passed": 31,
+      "failed": 0,
+      "ignored_diagnostics_excluded": true,
+      "harness_seconds": 8.59,
+      "resources": "normal-unit-resources.json",
+      "command": [
+        "target/release/deps/symbolica_amflow-ad945eb4642fae0f",
+        "finite_density::",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 8.611430445685983,
+      "user_seconds": 8.725854,
+      "system_seconds": 0.24356799999999998,
+      "peak_child_rss_kib": 24576,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "ordinary_core",
+      "passed": 13,
+      "failed": 0,
+      "ignored_diagnostics_excluded": true,
+      "harness_seconds": 1.37,
+      "resources": "normal-core-resources.json",
+      "command": [
+        "target/release/deps/core-e0c6134f216216a6"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 1.3867960558272898,
+      "user_seconds": 2.514383,
+      "system_seconds": 0.16411699999999999,
+      "peak_child_rss_kib": 12372,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "mixed_cut_flow",
+      "passed": 6,
+      "failed": 0,
+      "ignored_diagnostics_excluded": true,
+      "harness_seconds": 4.88,
+      "resources": "normal-mixed-resources.json",
+      "command": [
+        "target/release/deps/mixed_cut_flow-8ac19c9d325a5bc2"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 4.893462497740984,
+      "user_seconds": 8.751665,
+      "system_seconds": 0.18042999999999998,
+      "peak_child_rss_kib": 12372,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "physical_transport",
+      "passed": 4,
+      "failed": 0,
+      "ignored_diagnostics_excluded": true,
+      "harness_seconds": 0.51,
+      "resources": "normal-transport-resources.json",
+      "command": [
+        "target/release/deps/physical_transport-577248d15bcd58cf"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.529030301142484,
+      "user_seconds": 0.9908129999999999,
+      "system_seconds": 0.103325,
+      "peak_child_rss_kib": 12372,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "closure_source_admission",
+      "passed": 6,
+      "failed": 0,
+      "ignored_diagnostics_excluded": true,
+      "harness_seconds": 0.14,
+      "resources": "normal-closure-gates-resources.json",
+      "command": [
+        "target/release/deps/finite_density_closure-665c01718e3331cc",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.1538088950328529,
+      "user_seconds": 0.20604899999999998,
+      "system_seconds": 0.094146,
+      "peak_child_rss_kib": 12372,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    {
+      "gate": "finite_density_boundary",
+      "passed": 4,
+      "failed": 0,
+      "harness_seconds": 0.06,
+      "evidence": "positive-energy-boundary-gates.json",
+      "scope": "prebuilt direct execution; owner-reported and recorded"
+    },
+    {
+      "gate": "finite_density_flow_boundary",
+      "passed": 5,
+      "failed": 0,
+      "harness_seconds": 0.17,
+      "evidence": "positive-energy-boundary-gates.json",
+      "scope": "prebuilt direct execution; owner-reported and recorded"
+    },
+    {
+      "gate": "finite_density_terminal",
+      "passed": 5,
+      "failed": 0,
+      "harness_seconds": 0.18,
+      "evidence": "positive-energy-boundary-gates.json",
+      "scope": "prebuilt direct execution; owner-reported and recorded"
+    }
+  ],
+  "n9_normalized_source_probes": [
+    {
+      "policy": "normals-then-lorentz",
+      "evidence": "normalized-sources/normals-then-lorentz/sunset-N9/result.json",
+      "status": "unresolved",
+      "runtime_seconds": 49.128635667,
+      "rounds": 7,
+      "frontier_sizes": [
+        57,
+        65,
+        87,
+        128,
+        175,
+        246,
+        310
+      ],
+      "reason": "weighted provisional-frontier budget exhausted",
+      "numerical_prediction": false
+    },
+    {
+      "policy": "lorentz-then-normals",
+      "evidence": "normalized-sources/lorentz-then-normals/sunset-N9/result.json",
+      "status": "unresolved",
+      "runtime_seconds": 52.970578189,
+      "rounds": 7,
+      "frontier_sizes": [
+        57,
+        58,
+        80,
+        119,
+        166,
+        233,
+        297
+      ],
+      "reason": "weighted provisional-frontier budget exhausted",
+      "numerical_prediction": false
+    }
+  ],
+  "finite_interval_probe": {
+    "parent": "n3 in [-3,-2], all other axes retained",
+    "fixed_faces": [
+      -3,
+      -2
+    ],
+    "native_rule_discovery": "successful for individual faces and union; exact decoded replay changes actual target to explicit lower-sector residuals",
+    "full_closure": false,
+    "independent_reference_comparison": false,
+    "evidence_directory": "domain-split-probes/",
+    "remaining_parent_evidence": "native-single-domain UnprovedDescent retains failed unsplit parent; subdivision progress does not itself certify target closure"
+  },
+  "independent_reference_gates": "Recorded separately by parent; excluded from 74 count."
+}

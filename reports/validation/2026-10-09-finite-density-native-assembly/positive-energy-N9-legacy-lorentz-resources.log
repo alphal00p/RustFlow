@@ -1,0 +1,14 @@
+
+running 1 test
+sunset N=9: native bounded discovery starting
+sunset N=9: DifferentialClosure { round: 0, requested: 4, basis_size: 63, new_derivatives: 35 }
+sunset N=9: DifferentialClosure { round: 1, requested: 39, basis_size: 55, new_derivatives: 14 }
+sunset N=9: DifferentialClosure { round: 2, requested: 53, basis_size: 76, new_derivatives: 19 }
+sunset N=9: DifferentialClosure { round: 3, requested: 72, basis_size: 102, new_derivatives: 23 }
+sunset N=9: DifferentialClosure { round: 4, requested: 95, basis_size: 143, new_derivatives: 33 }
+sunset N=9: DifferentialClosure { round: 5, requested: 128, basis_size: 191, new_derivatives: 39 }
+sunset N=9: unresolved, 52.142s; report=reports/validation/2026-10-09-finite-density-native-assembly/positive-energy/legacy-lorentz/sunset-N9
+test physical_sunset_double_cut_native_closure ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 8 filtered out; finished in 52.20s
+

@@ -20,6 +20,17 @@ pub struct OccupiedShell {
     pub chemical_potential: Rational,
 }
 
+/// A completion factor equal to c E_i, with c a nonzero real rational and
+/// E_i>=sqrt(m_i²)>0 on the compact shell and every derivative of its support.
+/// This permits integer inverse powers without introducing a new pole.
+#[derive(Clone, Debug, PartialEq, Eq)]
+pub struct CompactEnergyCompletion {
+    pub slot: usize,
+    pub loop_index: usize,
+    pub coefficient: Rational,
+    pub mass_squared: Rational,
+}
+
 /// Native factors in Gram coordinates, followed by contractions with u (u²=1).
 /// The first `shells.len()` loops are future-oriented compact momenta. Remaining
 /// loops use the ordinary native +i0 contour. Physical masses remain independent
@@ -310,6 +321,50 @@ impl OccupiedCutFamily {
         &self.routing_determinant
     }
 
+    /// Certify an inverse-energy completion directly from the assigned factors.
+    /// Virtual energies, sums of energies, shell/occupation factors, symbolic
+    /// masses and massless energies receive no certificate from this owner.
+    pub fn compact_energy_completion(&self, slot: usize) -> Option<CompactEnergyCompletion> {
+        if !(self.physical_slots..self.input_slots).contains(&slot) {
+            return None;
+        }
+        let factor = &self.factors[slot];
+        let energy_offset = self.loops * (self.loops + 1) / 2;
+        for shell in &self.shells {
+            let Ok(mass_squared) = Rational::try_from(shell.mass_squared.as_view()) else {
+                continue;
+            };
+            if mass_squared <= Rational::zero() {
+                continue;
+            }
+            let energy = &self.coordinates[energy_offset + shell.loop_index];
+            let AtomView::Var(variable) = energy.as_view() else {
+                return None;
+            };
+            let Ok(coefficient) =
+                Rational::try_from(factor.derivative(variable.get_symbol()).as_view())
+            else {
+                continue;
+            };
+            if coefficient.is_zero()
+                || !(factor - Atom::num(coefficient.clone()) * energy)
+                    .expand()
+                    .together()
+                    .cancel()
+                    .is_zero()
+            {
+                continue;
+            }
+            return Some(CompactEnergyCompletion {
+                slot,
+                loop_index: shell.loop_index,
+                coefficient,
+                mass_squared,
+            });
+        }
+        None
+    }
+
     /// Apply equal-mass/physical assignments only after all independent physical
     /// mass derivatives of the original target and distributions have been taken.
     pub fn at_physical_masses(&self) -> Self {
@@ -506,5 +561,43 @@ mod tests {
         assert!(prepared.occupied_cut(&[1, 0], 16).is_err());
         let single = prepared.occupied_cut(&[0], 16).unwrap();
         assert_eq!(single.targets()[0].values().next().unwrap(), &Atom::i());
+    }
+
+    #[test]
+    fn inverse_energy_completion_requires_one_massive_compact_energy() {
+        let prepared = input().prepare().unwrap();
+        let mut family = prepared
+            .occupied_cut(&[0, 1], 16)
+            .unwrap()
+            .at_physical_masses();
+        let certificate = family.compact_energy_completion(3).unwrap();
+        assert_eq!(certificate.loop_index, 0);
+        assert_eq!(certificate.coefficient, Rational::one());
+        assert_eq!(certificate.mass_squared, Rational::from((1, 4)));
+        assert!(family.compact_energy_completion(0).is_none());
+        assert!(family.compact_energy_completion(5).is_none());
+        family.factors[3] = -Atom::num(2) * &family.coordinates[3];
+        assert_eq!(
+            family.compact_energy_completion(3).unwrap().coefficient,
+            Rational::from(-2)
+        );
+        family.factors[3] += &family.coordinates[4];
+        assert!(family.compact_energy_completion(3).is_none());
+        family.factors[3] = family.coordinates[3].clone();
+        family.shells[0].mass_squared = Atom::zero();
+        assert!(family.compact_energy_completion(3).is_none());
+        let single = prepared
+            .occupied_cut(&[0], 16)
+            .unwrap()
+            .at_physical_masses();
+        assert!(single.compact_energy_completion(3).is_some());
+        assert!(single.compact_energy_completion(4).is_none());
+        assert!(
+            prepared
+                .occupied_cut(&[0], 16)
+                .unwrap()
+                .compact_energy_completion(3)
+                .is_none()
+        );
     }
 }

@@ -63,6 +63,108 @@ fn expected(expression: &str, p: Precision) -> ComplexFloat {
 }
 
 #[test]
+fn inverse_energy_moments_require_explicit_positive_shell_admission() {
+    let family = IntegralFamily {
+        name: "compact_energy_laurent".into(),
+        loops: vec!["q".into()],
+        external: vec!["u".into()],
+        external_gram: vec![vec![Atom::one()]],
+        propagators: vec![],
+        physical_propagators: 0,
+        epsilon: symbol!("compact_energy_laurent_eps"),
+        dimension: 4,
+    };
+    let coordinates = [parse!("laurent_g"), parse!("laurent_e")];
+    let backend = RustRedBackend {
+        bubble_subloops: false,
+        ..Default::default()
+    };
+    let options = FlowOptions::default();
+    let context = RunContext::default();
+    let plain = IntegratedOccupiedBoundary::new(
+        &backend,
+        &options,
+        &context,
+        OccupiedBoundaryLimits::default(),
+    )
+    .unwrap();
+    let enabled = IntegratedOccupiedBoundary::new(
+        &backend,
+        &options,
+        &context,
+        OccupiedBoundaryLimits::default(),
+    )
+    .unwrap()
+    .with_positive_compact_energy_powers(true);
+    let project = |expression: Atom| {
+        integrand::projected_factor_region(&expression, &coordinates, &family, &[false], 100)
+            .unwrap()
+    };
+    let inverse = project(coordinates[1].pow(-1));
+    let epsilon = Rational::from((1, 2));
+    let p = Precision::decimal(60).unwrap();
+    assert!(matches!(
+        plain.evaluate_projected(
+            &inverse,
+            &[distribution(0)],
+            &epsilon,
+            &HashMap::default(),
+            p
+        ),
+        Err(Error::Unsupported(_))
+    ));
+    for (power, upper, expression, reference) in [
+        (1, 0, coordinates[1].pow(-1), "log(2)/pi^(1/2)"),
+        (1, 0, coordinates[1].pow(-2), "1/pi^(1/2)"),
+        (2, 0, coordinates[1].pow(-1), "-2/pi^(1/2)"),
+        (1, 1, coordinates[1].pow(-1), "1/pi^(1/2)"),
+        // g*C2=C1+m²*C2 still holds with the original inverse-energy weight.
+        (
+            2,
+            0,
+            &coordinates[0] / &coordinates[1],
+            "(log(2)-1/2)/pi^(1/2)",
+        ),
+    ] {
+        let mut shell = distribution(0);
+        shell.cut_index = power;
+        shell.upper_index = upper;
+        let value = enabled
+            .evaluate_projected(
+                &project(expression),
+                &[shell],
+                &epsilon,
+                &HashMap::default(),
+                p,
+            )
+            .unwrap();
+        assert!(p.close(&value, &expected(reference, p), 40));
+    }
+    let mut massless = distribution(0);
+    massless.shell.mass_squared = Rational::zero();
+    assert!(matches!(
+        enabled.evaluate_projected(&inverse, &[massless], &epsilon, &HashMap::default(), p),
+        Err(Error::Unsupported(_))
+    ));
+    for expression in [
+        coordinates[0].pow(-1),
+        (&coordinates[1] + Atom::one()).pow(-1),
+        (&coordinates[1] - Atom::one()).pow(-1),
+    ] {
+        assert!(matches!(
+            enabled.evaluate_projected(
+                &project(expression),
+                &[distribution(0)],
+                &epsilon,
+                &HashMap::default(),
+                p
+            ),
+            Err(Error::Unsupported(_))
+        ));
+    }
+}
+
+#[test]
 fn actual_sunset_mixed_and_fully_occupied_region_coefficients_are_integrated() {
     let family = family();
     let backend = RustRedBackend {

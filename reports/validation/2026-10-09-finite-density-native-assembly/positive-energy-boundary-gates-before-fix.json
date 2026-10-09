@@ -1,0 +1,54 @@
+{
+  "schema_version": 1,
+  "validation_date_utc": "2026-10-09",
+  "source_snapshot": "positive-energy-source-hashes.json",
+  "build": "joint locked release batch before the fixed-soft inverse-energy expansion adapter correction",
+  "timing_scope": "Rust test-harness elapsed seconds; compilation and startup excluded; peak memory not measured for these direct runs",
+  "gates": [
+    {
+      "binary": "target/release/deps/finite_density_boundary-4ae462f57ad10ba0",
+      "binary_sha256": "d23c21c3d6d3f9780e96cf10bbba8bb64b07f74e1c4e5c109f9909532076c8d2",
+      "linked_utc": "2026-10-09T18:18:46Z",
+      "arguments": [
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "passed": 4,
+      "failed": 0,
+      "test_harness_seconds": 0.07,
+      "scope": "Integrated compact polynomial and explicitly admitted inverse individual-energy seeds, raised distributions, upper surfaces, and rejection of unsupported rational weights"
+    },
+    {
+      "binary": "target/release/deps/finite_density_flow_boundary-5a28448dc4a00c03",
+      "binary_sha256": "17024f68d7c1cd13872d6d6ba8f2e8c67423b95d46f7aa293647e9a282cb7d14",
+      "linked_utc": "2026-10-09T18:18:46Z",
+      "arguments": [
+        "--nocapture"
+      ],
+      "exit_code": 101,
+      "passed": 4,
+      "failed": 1,
+      "test_harness_seconds": 0.15,
+      "failure": "inverse_completion_boundary_uses_exact_positive_energy_certificate: ordinary expand_region validation rejected a positive completion with 'irreducible numerator slots must have nonpositive powers'",
+      "scope": "Existing four boundary cases passed; typed inverse-energy flow expansion remained unvalidated at this snapshot"
+    },
+    {
+      "binary": "target/release/deps/finite_density_terminal-2fe28ef103e25538",
+      "binary_sha256": "fd4cb24b667bae270c488a97ec4bd8d4915b865abb9acf218063820dceb9886c",
+      "linked_utc": "2026-10-09T18:18:46Z",
+      "arguments": [
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "passed": 5,
+      "failed": 0,
+      "test_harness_seconds": 0.21,
+      "scope": "Public compact terminal assembly, threshold thermal limit, singular threshold diagnostic, scaleless virtual polynomial, and uniform options validation"
+    }
+  ],
+  "limitations": [
+    "This is a historical pre-fix report. The inverse-energy flow boundary failure requires a separately built and validated correction.",
+    "These gates do not establish nonfactorized full-sunset closure or four-loop predictions.",
+    "No massless graph admission or massless endpoint evaluation was exercised."
+  ]
+}

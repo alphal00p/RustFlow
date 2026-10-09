@@ -1,0 +1,6 @@
+
+running 1 test
+test finite_density::reduction::tests::physical_recenter_gap_refines_through_native_discovery_and_replay ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 242 filtered out; finished in 0.46s
+

@@ -1,0 +1,461 @@
+{
+  "schema": 1,
+  "status": "exact_definition_diagnostics_passed_no_references_generated",
+  "oracle_values_read": 0,
+  "amf_predictions_read": 0,
+  "generated_amplitude_reference_values": 0,
+  "input_sha256": {
+    "examples/finite_density/five_vertex_eight_edge.json": "8146dfc30f392748acb5cbb2d521944b043c058372daac53114c194b16265448",
+    "examples/finite_density/triangular_prism.json": "7b408e421ebef0a056c2005763f813dd8e60d7ebaf807fbddedde8114f3ceb0e"
+  },
+  "source_sha256": "d6dfb32b530eb0fc0e557c189f18ffd4029cc988b8d284ba11fdecfa6645e6f9",
+  "e8_interior_pole_witnesses": [
+    {
+      "original_minkowski_loop_vectors": [
+        [
+          "1/2",
+          "1/2",
+          "0",
+          "0"
+        ],
+        [
+          "1/4",
+          "1/2",
+          "-1/4",
+          "0"
+        ],
+        [
+          "1/2",
+          "0",
+          "0",
+          "1/2"
+        ],
+        [
+          "0",
+          "1/2",
+          "0",
+          "1/2"
+        ]
+      ],
+      "routed_edge_vectors": [
+        [
+          "1/2",
+          "1/2",
+          "0",
+          "0"
+        ],
+        [
+          "1/4",
+          "1/2",
+          "-1/4",
+          "0"
+        ],
+        [
+          "1/2",
+          "0",
+          "0",
+          "1/2"
+        ],
+        [
+          "0",
+          "1/2",
+          "0",
+          "1/2"
+        ],
+        [
+          "1/2",
+          "0",
+          "0",
+          "-1/2"
+        ],
+        [
+          "1/4",
+          "0",
+          "-1/4",
+          "-1/2"
+        ],
+        [
+          "1/2",
+          "-1/2",
+          "0",
+          "0"
+        ],
+        [
+          "1/4",
+          "0",
+          "1/4",
+          "0"
+        ]
+      ],
+      "charged_energies": {
+        "0": "1/2",
+        "2": "1/2",
+        "4": "1/2",
+        "6": "1/2",
+        "7": "1/4"
+      },
+      "neutral_euclidean_denominators": {
+        "1": "1/4",
+        "3": "1/2",
+        "5": "1/4"
+      },
+      "I91_numerator": "1/16",
+      "supplemental_simple_base_numerator": "-3/64",
+      "residues": [
+        {
+          "cut_slots": [
+            0,
+            2,
+            4,
+            7
+          ],
+          "missing_charged_slot": 6,
+          "rho_linear_delta_coefficient": "1",
+          "I91_delta_pole_residue": "4",
+          "supplemental_simple_base_delta_pole_residue": "-3"
+        },
+        {
+          "cut_slots": [
+            0,
+            2,
+            6,
+            7
+          ],
+          "missing_charged_slot": 4,
+          "rho_linear_delta_coefficient": "-1",
+          "I91_delta_pole_residue": "-4",
+          "supplemental_simple_base_delta_pole_residue": "3"
+        },
+        {
+          "cut_slots": [
+            0,
+            4,
+            6,
+            7
+          ],
+          "missing_charged_slot": 2,
+          "rho_linear_delta_coefficient": "-1",
+          "I91_delta_pole_residue": "-4",
+          "supplemental_simple_base_delta_pole_residue": "3"
+        },
+        {
+          "cut_slots": [
+            2,
+            4,
+            6,
+            7
+          ],
+          "missing_charged_slot": 0,
+          "rho_linear_delta_coefficient": "1",
+          "I91_delta_pole_residue": "4",
+          "supplemental_simple_base_delta_pole_residue": "-3"
+        }
+      ],
+      "summed_real_delta_pole_residue": "0",
+      "delta_partial_original_p1_x": "1",
+      "uniform_uncut_rho_minus_i0_imaginary_contact_coefficient_in_units_i_pi_delta": {
+        "I91": "16",
+        "supplemental_simple_base": "-12"
+      },
+      "coherent_line_pole_displacement_H_over_common_mass_i0": "0",
+      "raised_target_rule": "Apply -d/dm0_squared to the complete jointly regulated expression with original numerator fixed; include the term where slot0 is uncut. This record does not evaluate the raised amplitude."
+    },
+    {
+      "original_minkowski_loop_vectors": [
+        [
+          "1/3",
+          "1/3",
+          "0",
+          "0"
+        ],
+        [
+          "2/15",
+          "1/3",
+          "-1/5",
+          "0"
+        ],
+        [
+          "1/2",
+          "0",
+          "0",
+          "1/2"
+        ],
+        [
+          "1/12",
+          "1/3",
+          "0",
+          "1/4"
+        ]
+      ],
+      "routed_edge_vectors": [
+        [
+          "1/3",
+          "1/3",
+          "0",
+          "0"
+        ],
+        [
+          "2/15",
+          "1/3",
+          "-1/5",
+          "0"
+        ],
+        [
+          "1/2",
+          "0",
+          "0",
+          "1/2"
+        ],
+        [
+          "1/12",
+          "1/3",
+          "0",
+          "1/4"
+        ],
+        [
+          "1/4",
+          "0",
+          "0",
+          "-1/4"
+        ],
+        [
+          "1/20",
+          "0",
+          "-1/5",
+          "-1/4"
+        ],
+        [
+          "5/12",
+          "-1/3",
+          "0",
+          "1/4"
+        ],
+        [
+          "1/5",
+          "0",
+          "1/5",
+          "0"
+        ]
+      ],
+      "charged_energies": {
+        "0": "1/3",
+        "2": "1/2",
+        "4": "1/4",
+        "6": "5/12",
+        "7": "1/5"
+      },
+      "neutral_euclidean_denominators": {
+        "1": "2/15",
+        "3": "1/6",
+        "5": "1/10"
+      },
+      "I91_numerator": "1/36",
+      "supplemental_simple_base_numerator": "-11/900",
+      "residues": [
+        {
+          "cut_slots": [
+            0,
+            2,
+            4,
+            7
+          ],
+          "missing_charged_slot": 6,
+          "rho_linear_delta_coefficient": "5/6",
+          "I91_delta_pole_residue": "225/2",
+          "supplemental_simple_base_delta_pole_residue": "-99/2"
+        },
+        {
+          "cut_slots": [
+            0,
+            2,
+            6,
+            7
+          ],
+          "missing_charged_slot": 4,
+          "rho_linear_delta_coefficient": "-1/2",
+          "I91_delta_pole_residue": "-225/2",
+          "supplemental_simple_base_delta_pole_residue": "99/2"
+        },
+        {
+          "cut_slots": [
+            0,
+            4,
+            6,
+            7
+          ],
+          "missing_charged_slot": 2,
+          "rho_linear_delta_coefficient": "-1",
+          "I91_delta_pole_residue": "-225/2",
+          "supplemental_simple_base_delta_pole_residue": "99/2"
+        },
+        {
+          "cut_slots": [
+            2,
+            4,
+            6,
+            7
+          ],
+          "missing_charged_slot": 0,
+          "rho_linear_delta_coefficient": "2/3",
+          "I91_delta_pole_residue": "225/2",
+          "supplemental_simple_base_delta_pole_residue": "-99/2"
+        }
+      ],
+      "summed_real_delta_pole_residue": "0",
+      "delta_partial_original_p1_x": "1",
+      "uniform_uncut_rho_minus_i0_imaginary_contact_coefficient_in_units_i_pi_delta": {
+        "I91": "450",
+        "supplemental_simple_base": "-198"
+      },
+      "coherent_line_pole_displacement_H_over_common_mass_i0": "-3/10",
+      "raised_target_rule": "Apply -d/dm0_squared to the complete jointly regulated expression with original numerator fixed; include the term where slot0 is uncut. This record does not evaluate the raised amplitude."
+    }
+  ],
+  "prism_triangle_numerator_checks": [
+    {
+      "cut_mass_squared_a": "0",
+      "future_cut_vectors": [
+        [
+          "1/2",
+          "1/2",
+          "0",
+          "0"
+        ],
+        [
+          "1/3",
+          "0",
+          "1/3",
+          "0"
+        ],
+        [
+          "1/4",
+          "0",
+          "0",
+          "1/4"
+        ]
+      ],
+      "h12_h13_h23": [
+        "1/3",
+        "1/4",
+        "1/6"
+      ],
+      "feynman_parameters": [
+        "1/2",
+        "1/3",
+        "1/6"
+      ],
+      "triangle_F": "37/432",
+      "supplemental_simple_base_direct": "59/1728",
+      "supplemental_simple_base_parameter_kernel": "59/1728",
+      "I115_parameter_kernel_if_massless": "1331/2985984"
+    },
+    {
+      "cut_mass_squared_a": "5/16",
+      "future_cut_vectors": [
+        [
+          "3/4",
+          "1/2",
+          "0",
+          "0"
+        ],
+        [
+          "1/3",
+          "0",
+          "1/3",
+          "0"
+        ],
+        [
+          "1/4",
+          "0",
+          "0",
+          "1/4"
+        ]
+      ],
+      "h12_h13_h23": [
+        "3/16",
+        "1/16",
+        "1/6"
+      ],
+      "feynman_parameters": [
+        "1/2",
+        "1/3",
+        "1/6"
+      ],
+      "triangle_F": "79/1728",
+      "supplemental_simple_base_direct": "65/4608",
+      "supplemental_simple_base_parameter_kernel": "65/4608",
+      "I115_parameter_kernel_if_massless": null
+    }
+  ],
+  "prism_two_cut_parameter_checks": [
+    {
+      "parameters": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "external_h": "2",
+      "external_q_squared": "0",
+      "U": "144",
+      "Phi": "216",
+      "Psi": "120",
+      "F_from_Gaussian_completion": "432",
+      "F_from_positive_polynomials": "432"
+    },
+    {
+      "parameters": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "external_h": "2",
+      "external_q_squared": "-1/4",
+      "U": "144",
+      "Phi": "216",
+      "Psi": "120",
+      "F_from_Gaussian_completion": "402",
+      "F_from_positive_polynomials": "402"
+    },
+    {
+      "parameters": [
+        "1/2",
+        "1/3",
+        "2/5",
+        "3/7",
+        "5/11",
+        "7/13"
+      ],
+      "external_h": "2",
+      "external_q_squared": "0",
+      "U": "13043/6006",
+      "Phi": "3592/5005",
+      "Psi": "755/2002",
+      "F_from_Gaussian_completion": "7184/5005",
+      "F_from_positive_polynomials": "7184/5005"
+    },
+    {
+      "parameters": [
+        "1/2",
+        "1/3",
+        "2/5",
+        "3/7",
+        "5/11",
+        "7/13"
+      ],
+      "external_h": "2",
+      "external_q_squared": "-1/4",
+      "U": "13043/6006",
+      "Phi": "3592/5005",
+      "Psi": "755/2002",
+      "F_from_Gaussian_completion": "7671/5720",
+      "F_from_positive_polynomials": "7671/5720"
+    }
+  ],
+  "scope": "Exact interior-pole/residue and original-numerator parameter identities only. Common thermal prescription, analytic subtraction, integrated Laurent values and numerical reference refinements remain required."
+}

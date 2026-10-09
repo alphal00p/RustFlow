@@ -202,9 +202,17 @@ or expansion depth must remain a failure.
 
 Reconstruct targets by multiplying their full rational weights into the power/log
 series before `frobenius::project_limit`. Componentwise physical limits can lose
-cancellations. The evaluation path needs a finite-density example with cancelling
-singular weights, an uncancelled divergence and insufficient-order failure. Tests
-of the ordinary projector alone do not satisfy that requirement.
+cancellations. The finite-density integration test now prepares the actual
+massive one-cut sunset from generated guarded sources, changes two components
+exactly to `y_j=I_k`, `y_k=I_k-eta*I_j`, and reconstructs the original targets
+with `(y_j-y_k)/eta`. Its infinity boundary is the original integrated occupied
+region data, matched after the exact polynomial `z=1/eta` transformation of
+every known power/log coefficient. Shared transport reproduces the original
+targets at start scales 8 and 12. The same source-derived solution rejects an
+uncancelled target pole and a target whose pole exceeds the known endpoint
+series depth. These integration checks pass in
+`src/finite_density/flow_endpoint_tests.rs`; the historical run is recorded in
+`reports/validation/2026-10-09-finite-density-native-assembly/positive-energy-unit-resources.json`.
 
 A valid calculation must establish a common convergence domain, continue the
 complete regulated amplitude, remove the auxiliary parameter, take the specified
@@ -368,16 +376,39 @@ this numerical owner. Compact terminal thresholds have the narrower
 distributional criteria described below. These restrictions are separate from
 the algebraic parser, which can represent the massless oracle families.
 
+The optional Rust `PreparedOccupiedFlow::prepare_with_source_options` path can
+admit integer inverse powers of completion factors proved exactly equal to
+`c*E_i`, with nonzero rational c and an occupied shell of assigned mass m_i>0.
+Its source and boundary domains retain the certificate `E_i>=m_i>0`; virtual
+energies and sums of energies receive no such admission. Signed energy moments
+use the original numerator before independent mass differentiation. This
+option also enables explicit shell-normal source presentations derived from
+the smooth vector `u/(2E_i)`. The default remains the validated Lorentz
+presentation with polynomial completions. The option and exact certificates
+participate in program identity and evaluation provenance. It is an extension
+of the intermediate integral domain, not permission to replace a virtual pole
+by a compact moment, and it has not yet resolved the required two-cut system.
+
 The complete generic numerical evaluator has not passed its required acceptance
-gates. Native weighted source discovery closes the two single-cut massive
-sunset systems with 17 and 13 masters, but the attempted fully occupied system
-exhausted its provisional-frontier budget before numerical evaluation. Generic
-weighted closure, integrated recursive soft boundaries, complete-amplitude
-continuation and the numerical acceptance gates remain open.
+gates. With bounded native guard refinement, the massive sunset now passes exact
+requested-target and derivative closure: the two single-cut systems have basis
+sizes 7 and 6, and the fully occupied N9 system has basis size 64. These are
+closed generating sets, with no minimality or full index-domain coverage claim.
+The complete sample at epsilon=4/5 reached the N9 physical endpoint but failed
+with `Numerical("uncancelled physical endpoint divergence")`. This is the
+reported numerical failure, not a proof that the original massive integral
+diverges. No assembled prediction was written or accepted. Generic four-loop
+closure, integrated recursive soft boundaries, complete-amplitude numerical
+reconstruction and the acceptance gates remain open.
 The native vacuum and first occupied-cut endpoints for both massive targets
 have separately passed independent-reference comparisons at D=12/5, including
 working-precision, series-order and occupied-start-scale changes. This does not
 assemble the omitted second single-cut and two-cut contributions.
+Independent references now also cover both complete massive targets through
+Laurent order zero, with separate vacuum, cut and Fermi-surface coefficients;
+the [subtracted reference report](../reports/validation/2026-10-09-finite-density-native-assembly/independent-laurent-reference/README.md)
+passes quadrature, epsilon-grid and precision refinements. Complete native AMF
+Laurent predictions have not yet been compared with those references.
 The public sample and Laurent commands have also evaluated the complete massive
 one-loop tadpole above and below support. Its scalar and raised sample values
 and four Laurent coefficients pass independent analytic comparisons; see the
@@ -440,14 +471,14 @@ at `d=2` and retains an explicit singular-threshold diagnostic.
 
 | Mandatory result | Current scope and missing evidence |
 | --- | --- |
-| Complete nonfactorized small graph | Vacuum and first single-cut endpoints pass independent comparison at D=12/5; full native attempt failed in two-cut closure, with no assembled 0/1/2-cut prediction |
-| Generic weighted reduction | Native sources/replay close both sunset single-cut systems; fully occupied and four-loop closure remain unresolved |
+| Complete nonfactorized small graph | All occupied systems close natively (basis sizes 7, 6, 64); full epsilon=4/5 attempt fails at the N9 physical endpoint, with no assembled prediction; earlier vacuum/cut-0 independent comparisons pass |
+| Generic weighted reduction | Exact requested-target/derivative closure and source replay pass for all massive-sunset cut sectors with bounded guard refinement; generic four-loop closure remains unresolved |
 | Integrated occupied boundaries | Polynomial compact and recursively integrated hard coefficients verified; generic retained soft poles and recursive weighted values unresolved |
 | Regulated common-contour continuation | Massive sunset and routing-dependent heavy-edge sufficient domains derived; see [contour certificates](finite-density-contours.md); thresholds, massless pinches and general admission remain separate |
 | Full massive normalization | Native mixed-measure/Wick adapters and massive seed/boundary regressions implemented; full massive multiloop assembly still missing |
-| Physical endpoint reconstruction | Existing ordinary rational projection retained; finite-density evaluation-path cancellation/divergence/depth integration tests missing |
+| Physical endpoint reconstruction | One-cut cancellation/divergence/depth regressions pass; the closed N9 full-sample endpoint currently reports an uncancelled divergence and blocks acceptance |
 | Three four-loop families | Exact distinct graph certificates available; independent E7 raised-line reference generated; all native predictions and the other two supplemental references absent |
-| Ten stable Laurent digits | Fixed-dimension vacuum/single-cut precision, order and start-scale refinements pass; no complete-amplitude Laurent stability or numerical oracle comparison |
+| Ten stable Laurent digits | Fixed-dimension vacuum/single-cut precision, order and start-scale refinements pass; no complete massive-sunset Laurent stability or AMF-to-oracle comparison |
 
 An independent validation-only reference for both complete massive sunset targets
 has been generated at D=12/5 using direct Schwinger/Feynman parameters and compact
@@ -461,3 +492,9 @@ complete amplitude or Laurent coefficients at epsilon=0. See the
 [reference derivation](finite-density-reference.md) and the
 [native-assembly report](../reports/validation/2026-10-09-finite-density-native-assembly/README.md)
 for exact measurements, source provenance and failure records.
+
+The independent four-loop E7 reference was subsequently compared with the
+supplied I37 reference: all three Laurent coefficient expressions agree exactly
+after resolving the supplied constant. This is a
+[reference-versus-reference check](../reports/validation/2026-10-09-finite-density-native-assembly/independent-e7-reference/README.md),
+with zero AMF predictions read and no native four-loop acceptance claim.

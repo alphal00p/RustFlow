@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "kind": "reference_vs_reference_only",
+  "supplied_record": "I37",
+  "independent_target_index": 0,
+  "supplied_reference_records_compared": 1,
+  "supplied_coefficients_compared": 3,
+  "amf_predictions_read": 0,
+  "amf_oracle_comparisons": 0,
+  "native_amf_acceptance": false,
+  "method": "Exact rational polynomial identity in Q[pi] after resolving supplied a1; saved independent native 100-digit coefficient values also compared to 100-digit Decimal Machin-pi evaluation. No predictions or generation code are changed.",
+  "normalization": "MSbar original loop measure divided by unexpanded (4*pi)^(-8)*(Lambda_bar/2)^(8*epsilon)",
+  "resolved_supplied_constants": {
+    "a1": "243/4 - 3*pi^2/4"
+  },
+  "inputs_sha256": {
+    "fixtures/finite_density/oracle_results_supplied.json": "d49acc63e40b9fdccf7fb3eddea6e71f211aba0067021e917925274952ad66d1",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-e7-reference/reference.json": "e565b13a81dd1c92cde21f1f17105d6e38f9bfffb9b75f941b5a64940426cd76",
+    "tools/finite_density/compare_tadpole_cli.py": "feadf83e7b168c5e8d80edd06a07cb5bceb319945beb5cf6021b15b9b02db1a0"
+  },
+  "script_sha256": "2f822cbb3e4d7a7991c6f322849ac78d2c68bef44ff6944de6f4b7e16ec3f565",
+  "comparisons": [
+    {
+      "epsilon_power": -2,
+      "supplied_expression": "1/3",
+      "independent_expression": "1/3",
+      "supplied_q_pi_polynomial": {
+        "0": "1/3"
+      },
+      "independent_q_pi_polynomial": {
+        "0": "1/3"
+      },
+      "exact_equality": true,
+      "saved_independent_native_decimal": "(3.33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333e-1+0i)",
+      "supplied_decimal": "0.3333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333",
+      "decimal_difference": "3.3333E-101",
+      "decimal_relative_difference": "9.999900000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001E-101",
+      "decimal_tolerance": "1e-90",
+      "passed": true
+    },
+    {
+      "epsilon_power": -1,
+      "supplied_expression": "85/18",
+      "independent_expression": "85/18",
+      "supplied_q_pi_polynomial": {
+        "0": "85/18"
+      },
+      "independent_q_pi_polynomial": {
+        "0": "85/18"
+      },
+      "exact_equality": true,
+      "saved_independent_native_decimal": "(4.72222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222223+0i)",
+      "supplied_decimal": "4.722222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222",
+      "decimal_difference": "2.2223E-100",
+      "decimal_relative_difference": "4.706047058823529411764705882352941176470588235294117647058823529411764705882352941176470588235294118E-101",
+      "decimal_tolerance": "1e-90",
+      "passed": true
+    },
+    {
+      "epsilon_power": 0,
+      "supplied_expression": "-55/54+2/3*a1+1/6*pi^2",
+      "independent_expression": "1066/27-pi^2/3",
+      "supplied_q_pi_polynomial": {
+        "0": "1066/27",
+        "2": "-1/3"
+      },
+      "independent_q_pi_polynomial": {
+        "0": "1066/27",
+        "2": "-1/3"
+      },
+      "exact_equality": true,
+      "saved_independent_native_decimal": "(36.1916133477850286085366511481894311030435816790678846060103650227414665406750797338142236802419640708735+0i)",
+      "supplied_decimal": "36.19161334778502860853665114818943110304358167906788460601036502274146654067507973381422368024196408",
+      "decimal_difference": "-9.1265E-99",
+      "decimal_relative_difference": "2.521716816627781823000785468584601001333916812495312159187240317998971290249123373031529748687976664E-100",
+      "decimal_tolerance": "1e-90",
+      "passed": true
+    }
+  ]
+}

@@ -1,0 +1,83 @@
+{
+  "schema_version": 1,
+  "validation_date_utc": "2026-10-09",
+  "source_snapshot": "normal-source-hashes.json",
+  "build": "joint locked release batch after Python-feature all-tests check",
+  "timing_scope": "Rust test-harness elapsed seconds; compilation and command startup excluded; peak memory not measured for these direct runs",
+  "gates": [
+    {
+      "binary": "target/release/deps/finite_density_boundary-4ae462f57ad10ba0",
+      "binary_sha256": "feff5418f351b7415c0108534baf85983513acc148dfa8cc451235d2564a78e2",
+      "linked_utc": "2026-10-09T18:34:48Z",
+      "passed": 4,
+      "test_harness_seconds": 0.06,
+      "scope": "Integrated compact polynomial and admitted inverse individual-energy moments, original-numerator raised shells, upper surfaces, and rejection of unsupported rational soft weights",
+      "arguments": [
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "binary": "target/release/deps/finite_density_flow_boundary-5a28448dc4a00c03",
+      "binary_sha256": "be0e681227b81fe7052edd66ddb703391a8b3aaa0672e6233795ac50b4e40ec6",
+      "linked_utc": "2026-10-09T18:34:49Z",
+      "passed": 5,
+      "test_harness_seconds": 0.17,
+      "scope": "Corrected certified fixed-soft inverse-energy restoration at leading and subleading orders, virtual-energy rejection, symbolic epsilon/depth planning, two virtual hard loops, and three compact loops",
+      "arguments": [
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "binary": "target/release/deps/finite_density_terminal-2fe28ef103e25538",
+      "binary_sha256": "9ced864e844937e3b121d123af184044f37f6ca27926ffbf08b6f890154c75b9",
+      "linked_utc": "2026-10-09T18:34:48Z",
+      "passed": 5,
+      "test_harness_seconds": 0.18,
+      "scope": "Public compact terminal assembly above/below/at threshold, derived thermal finite jump, genuinely singular raised threshold diagnostic, virtual polynomial scalelessness, and uniform options contract",
+      "arguments": [
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "total_passed": 14,
+  "prior_failure_evidence": "positive-energy-boundary-gates-before-fix.json",
+  "independent_inverse_energy_references": {
+    "dimension": "3",
+    "shell_mass_squared": [
+      "1/4",
+      "1/4"
+    ],
+    "chemical_potentials": [
+      "1",
+      "1"
+    ],
+    "completion": "c*E_i, exact typed certificate",
+    "leading": "-log(2)/(2*pi*c)",
+    "subleading": "(log(2)/4+3/8)/(pi*c)",
+    "comparison_digits": 40
+  },
+  "massless_seed_unit_evidence": {
+    "report": "normal-unit-resources.json",
+    "log": "normal-unit-resources.log",
+    "tests": [
+      "continued_massless_seed_cancels_only_removable_dimensional_poles",
+      "continued_massless_seed_matches_independent_raised_bulk_and_surfaces"
+    ],
+    "status": "passed in coordinated unit run",
+    "scope": "Isolated explicitly continued radial formula; exact removable-pole cancellation, genuine pole diagnostic, signed weights, and agreement with independent convergent raised bulk-plus-surface seeds"
+  },
+  "limitations": [
+    "Boundary tests do not establish full nonfactorized massive-sunset source closure or transport.",
+    "The isolated massless compact seed does not admit massless occupied graph contours, lower-contact products, or eta=0 endpoints.",
+    "No supplied oracle values or four-loop native predictions were compared."
+  ]
+}

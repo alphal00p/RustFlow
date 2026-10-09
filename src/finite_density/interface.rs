@@ -108,6 +108,10 @@ fn sample_report(
     output["occupied_reports"] = json!(result.occupied_reports.iter().map(|(cuts, report)| json!({
         "cut_slots":cuts,
         "construction":report.construction,
+        "source_options":report.source_options.as_ref().map(|source| json!({
+            "policy":source.policy.as_str(),
+            "positive_compact_energy_powers":source.positive_compact_energy_powers,
+        })),
         "basis_size":report.basis_size,
         "shifted_slots":report.shifted_slots,
         "contour_admission":report.contour_admission,
@@ -189,6 +193,10 @@ pub fn evaluate_request(
                 "native_rules":diagnostics.native_rules,
                 "native_rule_applications":diagnostics.native_rule_applications,
                 "uncovered_discovery_domains":diagnostics.uncovered_discovery_domains,
+                "guard_refinement_passes":diagnostics.guard_refinement_passes,
+                "guard_refinement_added_domains":diagnostics.guard_refinement_added_domains,
+                "guard_refinement_budget_exhausted":diagnostics.guard_refinement_budget_exhausted,
+                "guard_refinements":diagnostics.guard_refinements,
             }))
             .collect::<Vec<_>>()
     );

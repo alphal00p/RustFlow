@@ -897,7 +897,10 @@
             "status": "required_not_generated",
             "method": "Independent complete thermal-contour/cutting evaluation with independent line masses and distributional mass differentiation; independently implemented sector resolution and arbitrary-precision spatial quadrature after subtraction.",
             "target_absolute_uncertainty": "1/10^12",
-            "attainable_precision": "Not established. Reference generation and error certification are blocking acceptance gates; no 12-digit availability is claimed."
+            "attainable_precision": "Not established. Reference generation and error certification are blocking acceptance gates; no 12-digit availability is claimed.",
+            "derivation_and_obstacles": "docs/finite-density-missing-references.md",
+            "definition_only_diagnostics": "reports/validation/2026-10-09-finite-density-native-assembly/missing-reference-diagnostics.json",
+            "next_gate": "Common thermal matching for shared interior pole/discontinuity loci across all 29 cut sectors, then local UV/IR subtraction; independently assigned denominator PVs are not established."
           }
         }
       ],
@@ -1233,7 +1236,10 @@
             "status": "required_not_generated",
             "method": "Independent complete thermal-contour/cutting evaluation with independent line masses and distributional mass differentiation; independently implemented sector resolution and arbitrary-precision spatial quadrature after subtraction.",
             "target_absolute_uncertainty": "1/10^12",
-            "attainable_precision": "Not established. Reference generation and error certification are blocking acceptance gates; no 12-digit availability is claimed."
+            "attainable_precision": "Not established. Reference generation and error certification are blocking acceptance gates; no 12-digit availability is claimed.",
+            "derivation_and_obstacles": "docs/finite-density-missing-references.md",
+            "definition_only_diagnostics": "reports/validation/2026-10-09-finite-density-native-assembly/missing-reference-diagnostics.json",
+            "next_gate": "Complete all three two-cut Gaussian parameter kernels, regulated independent-mass differentiation, overlapping endpoint subtractions and refined Laurent quadrature; the triple-cut triangle kernel alone is not a reference."
           }
         }
       ],
@@ -1346,11 +1352,16 @@
       2
     ],
     "vacuum_contribution": "Nonzero for positive masses; must evaluate and compare, not omit as scaleless.",
-    "reference_status": "available_at_D_12_over_5_not_Laurent",
-    "reference_method": "Independent Schwinger vacuum sectors, reference-only Feynman parameters and compact radial/angular quadrature with exact endpoint maps; original numerator and independent mass derivatives retain moving-support surfaces.",
+    "reference_status": "available_at_D_12_over_5_and_Laurent_minus2_through_zero",
+    "reference_method": "Independent Schwinger vacuum sectors, reference-only Feynman parameters and compact radial/angular quadrature with exact endpoint maps; original numerator and independent mass derivatives retain moving-support surfaces. Laurent extension uses six-sector analytic UV subtraction and exact rational Lagrange coefficients for epsilon² I.",
     "reference_artifact": "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json",
+    "laurent_reference_artifact": "reports/validation/2026-10-09-finite-density-native-assembly/independent-laurent-reference/independent-laurent-reference.json",
+    "laurent_reference_orders": [
+      -2,
+      0
+    ],
     "reference_derivation": "docs/finite-density-reference.md",
-    "attainable_comparison_precision": "All 12 reference components/totals pass independent node and precision refinements at D=12/5; empirical changes are not rigorous interval bounds. Laurent reference precision remains unestablished.",
+    "attainable_comparison_precision": "All 12 reference components/totals pass independent node and precision refinements at D=12/5. All 108 Laurent component-coefficient refinement comparisons and six analytic UV-residue checks pass; largest relative quadrature change 3.48e-17, epsilon-grid change 1.0042e-22 and precision change 8.98e-53. These empirical changes are not rigorous interval bounds. No complete native AMF or Laurent comparison is inferred.",
     "native_comparison": {
       "status": "vacuum_and_cut0_only_passed",
       "report": "reports/validation/2026-10-09-finite-density-native-assembly/single-sunset-reference-comparison.json",
@@ -1362,13 +1373,65 @@
       "full_amplitude_compared": false,
       "laurent_coefficients_compared": 0
     },
+    "native_closure": {
+      "status": "passed_for_requested_targets_and_derivatives",
+      "cut_basis_sizes": [
+        {
+          "cut_slots": [
+            0
+          ],
+          "native_arity": 7,
+          "basis_size": 7
+        },
+        {
+          "cut_slots": [
+            1
+          ],
+          "native_arity": 7,
+          "basis_size": 6
+        },
+        {
+          "cut_slots": [
+            0,
+            1
+          ],
+          "native_arity": 9,
+          "basis_size": 64
+        }
+      ],
+      "guard_refinement": {
+        "max_passes": 3,
+        "max_added_domains": 256,
+        "max_interval_width": 2
+      },
+      "proof": "Exact native guarded original-source replay and final requested-target/derivative closure audit; no basis minimality or complete integer-domain coverage claim.",
+      "evidence": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-guard-refinement"
+    },
+    "complete_sample_attempt": {
+      "status": "blocked_at_two_cut_physical_endpoint",
+      "epsilon": "4/5",
+      "digits": 18,
+      "guard_digits": 20,
+      "series_order": 60,
+      "occupied_start_scale": 8,
+      "reported_error": "Numerical(\"uncancelled physical endpoint divergence\")",
+      "error_interpretation": "Numerical endpoint reconstruction failed; this is not a proof of divergence of the original positive-mass integral.",
+      "test_harness_seconds": 121.18,
+      "process_wall_seconds": 121.23372492892668,
+      "peak_rss_kib": 184372,
+      "resources": "reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-guard-refinement-resources.json",
+      "accepted_predictions": 0,
+      "written_predictions": 0,
+      "full_amplitude_comparisons": 0,
+      "amf_oracle_comparisons": 0
+    },
     "capabilities": [
       "raised charged line",
       "medium-vector numerator",
       "nonzero upper Fermi surface",
       "full massive assembly"
     ],
-    "evaluation_status": "partial_sectors_compared_full_two_cut_closure_unresolved"
+    "evaluation_status": "native_closure_passed_full_two_cut_endpoint_numerics_blocked"
   },
   "remaining_mandatory_cases": [
     {

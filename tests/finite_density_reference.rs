@@ -13,9 +13,6 @@ fn rational(p: Precision, n: i64, d: i64) -> C {
 fn power(p: Precision, x: &C, n: i64, d: i64) -> C {
     p.pow(x, &rational(p, n, d))
 }
-fn gamma(p: Precision, n: i64, d: i64) -> C {
-    p.gamma_real(&rational(p, n, d).re).unwrap()
-}
 
 fn legendre(p: Precision, n: usize, x: &C) -> (C, C) {
     let mut previous = p.i(1);
@@ -96,17 +93,29 @@ struct RadialNode {
     occupied: C,
 }
 
-fn radial_nodes(p: Precision, nodes: &[(C, C)], mass: &C, ad: &C) -> (C, Vec<RadialNode>) {
+fn radial_nodes(
+    p: Precision,
+    nodes: &[(C, C)],
+    mass: &C,
+    ad: &C,
+    d: &Rational,
+) -> (C, Vec<RadialNode>) {
     let gap = p.sub(&p.i(1), mass);
     assert!(gap.re > p.real(0));
     let radius = power(p, &gap, 1, 2);
-    let prefactor = p.scale(&p.mul(ad, &power(p, &radius, 7, 5)), 5, 1);
+    let prefactor = p.scale(&p.mul(ad, &p.pow(&radius, &p.rational(d))), 5, 1);
     let values = nodes
         .iter()
         .map(|(s, w)| {
             let r = p.mul(&radius, &p.powi(s, 5));
             let e = power(p, &p.add(mass, &p.mul(&r, &r)), 1, 2);
-            let raw = p.mul(&prefactor, &p.mul(w, &p.powi(s, 6)));
+            let raw = p.mul(
+                &prefactor,
+                &p.mul(
+                    w,
+                    &p.pow(s, &p.rational(&(Rational::from(5) * d - Rational::one()))),
+                ),
+            );
             let occupied = p.div(&raw, &p.scale(&e, 2, 1));
             RadialNode {
                 r,
@@ -120,6 +129,13 @@ fn radial_nodes(p: Precision, nodes: &[(C, C)], mass: &C, ad: &C) -> (C, Vec<Rad
 }
 
 fn reference(order: usize, digits: u32) -> Contributions {
+    reference_at_dimension(order, digits, &Rational::from((12, 5)))
+}
+
+fn reference_at_dimension(order: usize, digits: u32, dimension: &Rational) -> Contributions {
+    let epsilon = Rational::from(2) - dimension.clone() / Rational::from(2);
+    assert!(!epsilon.is_zero());
+    let d = dimension.clone() - Rational::one();
     let p = Precision::decimal(digits).unwrap();
     let nodes = quadrature(order, digits, p);
     let pi = p
@@ -130,18 +146,44 @@ fn reference(order: usize, digits: u32) -> Contributions {
     let b = rational(p, 1, 4);
     let c = p.i(1);
     let masses = [&a, &b, &c];
-    let vacuum_scale = p.div(&gamma(p, 3, 5), &power(p, &four_pi, 12, 5));
-    let bubble_scale = p.div(&gamma(p, 4, 5), &power(p, &four_pi, 6, 5));
+    let vacuum_scale = p.div(
+        &p.gamma_real(&p.rational(&(Rational::from(3) - dimension)).re)
+            .unwrap(),
+        &p.pow(&four_pi, &p.rational(dimension)),
+    );
+    let bubble_scale = p.div(
+        &p.gamma_real(&p.rational(&epsilon).re).unwrap(),
+        &p.pow(
+            &four_pi,
+            &p.rational(&(dimension.clone() / Rational::from(2))),
+        ),
+    );
     let ad = p.div(
-        &p.scale(&power(p, &pi, 7, 10), 2, 1),
-        &p.mul(&gamma(p, 7, 10), &power(p, &p.scale(&pi, 2, 1), 7, 5)),
+        &p.scale(
+            &p.pow(&pi, &p.rational(&(d.clone() / Rational::from(2)))),
+            2,
+            1,
+        ),
+        &p.mul(
+            &p.gamma_real(&p.rational(&(d.clone() / Rational::from(2))).re)
+                .unwrap(),
+            &p.pow(&p.scale(&pi, 2, 1), &p.rational(&d)),
+        ),
     );
     let angle_normalization = p.div(
-        &gamma(p, 7, 10),
-        &p.mul(&power(p, &pi, 1, 2), &gamma(p, 1, 5)),
+        &p.gamma_real(&p.rational(&(d.clone() / Rational::from(2))).re)
+            .unwrap(),
+        &p.mul(
+            &power(p, &pi, 1, 2),
+            &p.gamma_real(
+                &p.rational(&((dimension.clone() - Rational::from(2)) / Rational::from(2)))
+                    .re,
+            )
+            .unwrap(),
+        ),
     );
-    let (rf1, first) = radial_nodes(p, &nodes, &a, &ad);
-    let (_, second) = radial_nodes(p, &nodes, &b, &ad);
+    let (rf1, first) = radial_nodes(p, &nodes, &a, &ad, &d);
+    let (_, second) = radial_nodes(p, &nodes, &b, &ad, &d);
     let mut angles = Vec::with_capacity(2 * order);
     for (s, w) in &nodes {
         let fifth = p.powi(s, 5);
@@ -149,7 +191,16 @@ fn reference(order: usize, digits: u32) -> Contributions {
         let weight = p.scale(
             &p.mul(
                 &angle_normalization,
-                &p.mul(w, &power(p, &p.sub(&p.i(2), &fifth), -4, 5)),
+                &p.mul(
+                    &p.mul(
+                        w,
+                        &p.pow(
+                            s,
+                            &p.rational(&(Rational::from(4) - Rational::from(5) * &epsilon)),
+                        ),
+                    ),
+                    &p.pow(&p.sub(&p.i(2), &fifth), &p.rational(&(-epsilon.clone()))),
+                ),
             ),
             5,
             1,
@@ -163,8 +214,32 @@ fn reference(order: usize, digits: u32) -> Contributions {
         "angular normalization failed: {angle_sum}"
     );
 
+    // Six Cheng-Wu sectors: x_j=1,x_k=t,x_l=t*u. Subtract the
+    // unique t^{-1+epsilon} boundary before sampling epsilon near zero.
     let mut vacuum_scalar = p.zero();
     let mut vacuum_raised = p.zero();
+    let h_exponent = -dimension.clone() / Rational::from(2);
+    let mass_exponent = dimension.clone() - Rational::from(3);
+    let boundary_integral = p.div(
+        &p.sub(
+            &p.pow(&p.i(2), &p.rational(&(Rational::one() + &h_exponent))),
+            &p.i(1),
+        ),
+        &p.rational(&(Rational::one() + &h_exponent)),
+    );
+    for j in 0..3 {
+        let counter = p.div(
+            &p.mul(
+                &p.pow(masses[j], &p.rational(&mass_exponent)),
+                &boundary_integral,
+            ),
+            &p.rational(&epsilon),
+        );
+        vacuum_scalar = p.add(&vacuum_scalar, &p.scale(&counter, 2, 1));
+        if j != 1 {
+            vacuum_raised = p.add(&vacuum_raised, &counter);
+        }
+    }
     for [j, k, l] in [
         [0, 1, 2],
         [0, 2, 1],
@@ -175,34 +250,66 @@ fn reference(order: usize, digits: u32) -> Contributions {
     ] {
         for (s, ws) in &nodes {
             let t = p.powi(s, 5);
-            let prefactor = p.scale(&p.mul(ws, &p.powi(s, 3)), 5, 1);
-            for (w, ww) in &nodes {
-                let h = p.add(&p.add(&p.i(1), w), &p.mul(&t, w));
+            let prefactor = p.scale(
+                &p.mul(
+                    ws,
+                    &p.pow(
+                        s,
+                        &p.rational(&(Rational::from(5) * &epsilon - Rational::one())),
+                    ),
+                ),
+                5,
+                1,
+            );
+            for (u, wu) in &nodes {
+                let h0 = p.add(&p.i(1), u);
+                let h = p.add(&h0, &p.mul(&t, u));
                 let mass = p.add(
                     masses[j],
-                    &p.mul(&t, &p.add(masses[k], &p.mul(w, masses[l]))),
+                    &p.mul(&t, &p.add(masses[k], &p.mul(u, masses[l]))),
                 );
-                let kernel = p.mul(
-                    &p.mul(&prefactor, ww),
-                    &p.mul(&power(p, &h, -6, 5), &power(p, &mass, -3, 5)),
+                let b = p.mul(
+                    &p.pow(&h, &p.rational(&h_exponent)),
+                    &p.pow(&mass, &p.rational(&mass_exponent)),
                 );
-                let ratio_numerator = if j == 1 {
-                    p.mul(&t, w)
+                let b0 = p.mul(
+                    &p.pow(&h0, &p.rational(&h_exponent)),
+                    &p.pow(masses[j], &p.rational(&mass_exponent)),
+                );
+                let ratio = if j == 1 {
+                    p.mul(&t, u)
                 } else if k == 1 {
-                    w.clone()
+                    u.clone()
                 } else {
                     p.i(1)
                 };
-                vacuum_scalar = p.add(&vacuum_scalar, &kernel);
+                let ratio0 = if j == 1 {
+                    p.zero()
+                } else if k == 1 {
+                    u.clone()
+                } else {
+                    p.i(1)
+                };
+                let weight = p.mul(&prefactor, wu);
+                vacuum_scalar = p.add(&vacuum_scalar, &p.mul(&weight, &p.sub(&b, &b0)));
                 vacuum_raised = p.add(
                     &vacuum_raised,
-                    &p.mul(&kernel, &p.div(&ratio_numerator, &h)),
+                    &p.mul(
+                        &weight,
+                        &p.sub(
+                            &p.mul(&b, &p.div(&ratio, &h)),
+                            &p.mul(&b0, &p.div(&ratio0, &h0)),
+                        ),
+                    ),
                 );
             }
         }
     }
     vacuum_scalar = p.mul(&vacuum_scale, &vacuum_scalar);
-    vacuum_raised = p.scale(&p.mul(&vacuum_scale, &vacuum_raised), 17, 10);
+    vacuum_raised = p.mul(
+        &p.mul(&vacuum_scale, &vacuum_raised),
+        &p.rational(&((dimension.clone() + Rational::one()) / Rational::from(2))),
+    );
 
     let mut bubbles = [p.zero(), p.zero()];
     let mut vectors = [p.zero(), p.zero()];
@@ -222,7 +329,7 @@ fn reference(order: usize, digits: u32) -> Contributions {
             ),
         ];
         for i in 0..2 {
-            let kernel = p.mul(w, &power(p, &f[i], -4, 5));
+            let kernel = p.mul(w, &p.pow(&f[i], &p.rational(&(-epsilon.clone()))));
             bubbles[i] = p.add(&bubbles[i], &kernel);
             vectors[i] = p.add(&vectors[i], &p.mul(&one_minus, &kernel));
         }
@@ -230,20 +337,35 @@ fn reference(order: usize, digits: u32) -> Contributions {
             &derivative1,
             &p.mul(
                 w,
-                &p.mul(&product, &p.mul(&one_minus, &power(p, &f[0], -9, 5))),
+                &p.mul(
+                    &product,
+                    &p.mul(
+                        &one_minus,
+                        &p.pow(&f[0], &p.rational(&(-epsilon.clone() - Rational::one()))),
+                    ),
+                ),
             ),
         );
         minus_derivative2 = p.add(
             &minus_derivative2,
-            &p.mul(w, &p.mul(&product, &power(p, &f[1], -9, 5))),
+            &p.mul(
+                w,
+                &p.mul(
+                    &product,
+                    &p.pow(&f[1], &p.rational(&(-epsilon.clone() - Rational::one()))),
+                ),
+            ),
         );
     }
     for i in 0..2 {
         bubbles[i] = p.mul(&bubble_scale, &bubbles[i]);
         vectors[i] = p.mul(&bubble_scale, &vectors[i]);
     }
-    derivative1 = p.scale(&p.mul(&bubble_scale, &derivative1), 4, 5);
-    minus_derivative2 = p.scale(&p.mul(&bubble_scale, &minus_derivative2), 4, 5);
+    derivative1 = p.mul(&p.mul(&bubble_scale, &derivative1), &p.rational(&epsilon));
+    minus_derivative2 = p.mul(
+        &p.mul(&bubble_scale, &minus_derivative2),
+        &p.rational(&epsilon),
+    );
     let mut compact = [p.zero(), p.zero()];
     let mut tensor = [p.zero(), p.zero()];
     let mut tensor_derivative_bulk = p.zero();
@@ -268,7 +390,14 @@ fn reference(order: usize, digits: u32) -> Contributions {
             }
         }
     }
-    let surface_factor = p.scale(&p.mul(&ad, &power(p, &rf1, -3, 5)), 1, 4);
+    let surface_factor = p.scale(
+        &p.mul(
+            &ad,
+            &p.pow(&rf1, &p.rational(&(d.clone() - Rational::from(2)))),
+        ),
+        1,
+        4,
+    );
     let tensor_derivative_surface = p.neg(&p.mul(&surface_factor, &p.add(&a, &p.i(1))));
 
     let mut full_scalar = p.zero();
@@ -372,6 +501,24 @@ fn validation_quadrature_reproduces_polynomial_moments() {
 }
 
 #[test]
+fn subtracted_vacuum_sectors_preserve_the_convergent_reference() {
+    let p = Precision::decimal(60).unwrap();
+    let actual = reference(48, 60);
+    let saved: serde_json::Value = serde_json::from_str(include_str!(
+        "../reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json"
+    )).unwrap();
+    for (name, value) in &actual {
+        let expected = p
+            .parse(saved["contributions"][name].as_str().unwrap(), "0")
+            .unwrap();
+        assert!(
+            p.norm(&p.sub(value, &expected)) <= p.norm(&expected) * p.tolerance(12),
+            "subtracted convergent reference changed {name}"
+        );
+    }
+}
+
+#[test]
 #[ignore = "explicit independent massive sunset reference generation with node/precision refinement"]
 fn generate_independent_massive_sunset_reference() {
     let orders = std::env::var("RUSTFLOW_DENSITY_REFERENCE_ORDERS")
@@ -408,7 +555,10 @@ fn generate_independent_massive_sunset_reference() {
     .into_iter()
     .enumerate()
     {
-        assert_eq!(input["edges"][slot]["vertices"], serde_json::json!(vertices));
+        assert_eq!(
+            input["edges"][slot]["vertices"],
+            serde_json::json!(vertices)
+        );
         assert_eq!(input["edges"][slot]["routing"], serde_json::json!(routing));
         assert_eq!(input["edges"][slot]["charges"], serde_json::json!([charge]));
     }
@@ -456,7 +606,7 @@ fn generate_independent_massive_sunset_reference() {
     }
     let report = serde_json::json!({"schema":1,"status":if passed {"refinement_passed"}else{"refinement_failed"},
         "definition":input,"dimension":"12/5","epsilon":"4/5","normalization":"unscaled Euclidean amplitude",
-        "method":"independent Schwinger/Feynman parameter and compact radial/angular quadrature; six vacuum sectors; exact fifth-power endpoint maps; native MP Gauss-Legendre",
+        "method":"independent Schwinger/Feynman parameter and compact radial/angular quadrature; six vacuum sectors with analytic local UV subtraction; exact fifth-power endpoint maps; native MP Gauss-Legendre",
         "production_integral_owners_used":[],"native_arithmetic_owner":"symbolica_amflow::Precision",
         "oracle_records_read":0,"feature_predictions_read":0,"feature_comparisons":0,
         "source_blake3":blake3::hash(include_bytes!("finite_density_reference.rs")).to_hex().to_string(),
@@ -472,5 +622,210 @@ fn generate_independent_massive_sunset_reference() {
         passed,
         "independent reference failed node/precision refinement; see {}",
         directory.display()
+    );
+}
+
+fn interpolate_laurent_reference(
+    samples: &[(Rational, Contributions)],
+    p: Precision,
+) -> BTreeMap<String, BTreeMap<i32, C>> {
+    let mut result: BTreeMap<String, BTreeMap<i32, C>> = BTreeMap::new();
+    for (k, (x, values)) in samples.iter().enumerate() {
+        // Exact coefficients of the Lagrange cardinal polynomial, truncated
+        // only after retaining the three requested Taylor coefficients of
+        // epsilon² I. No production fit owner or reference values are used.
+        let mut polynomial = vec![Rational::one()];
+        let mut denominator = Rational::one();
+        for (j, (other, _)) in samples.iter().enumerate() {
+            if j == k {
+                continue;
+            }
+            let mut next = vec![Rational::zero(); (polynomial.len() + 1).min(3)];
+            for (degree, coefficient) in polynomial.iter().enumerate() {
+                next[degree] -= coefficient * other;
+                if degree + 1 < next.len() {
+                    next[degree + 1] += coefficient;
+                }
+            }
+            polynomial = next;
+            denominator *= x - other;
+        }
+        for (name, value) in values {
+            let coefficients = result.entry(name.clone()).or_default();
+            for (degree, coefficient) in polynomial.iter().enumerate() {
+                let weight = coefficient / &denominator * x * x;
+                let contribution = p.mul(value, &p.rational(&weight));
+                let entry = coefficients
+                    .entry(degree as i32 - 2)
+                    .or_insert_with(|| p.zero());
+                *entry = p.add(entry, &contribution);
+            }
+        }
+    }
+    result
+}
+
+#[test]
+fn independent_laurent_interpolation_preserves_rational_laurent_polynomials() {
+    let p = Precision::decimal(60).unwrap();
+    let samples = (1..=6)
+        .map(|sample| {
+            let x = Rational::from((sample, 10000));
+            let value = Rational::from(2) / (&x * &x) - Rational::from(3) / &x
+                + Rational::from(5)
+                + Rational::from(7) * &x;
+            (
+                x,
+                BTreeMap::from([("polynomial".into(), p.rational(&value))]),
+            )
+        })
+        .collect::<Vec<_>>();
+    let coefficients = interpolate_laurent_reference(&samples, p);
+    for (power, expected) in [(-2, 2), (-1, -3), (0, 5)] {
+        assert!(p.close(&coefficients["polynomial"][&power], &p.i(expected), 45));
+    }
+}
+
+#[test]
+#[ignore = "independent subtracted massive Laurent reference with quadrature, grid and precision refinements"]
+fn generate_independent_massive_sunset_laurent_reference() {
+    let directory = std::env::var_os("RUSTFLOW_DENSITY_LAURENT_REFERENCE_REPORT")
+        .map(std::path::PathBuf::from)
+        .unwrap_or_else(|| std::env::temp_dir().join("rustflow-density-massive-laurent-reference"));
+    std::fs::create_dir_all(&directory).unwrap();
+    let mut runs = Vec::new();
+    let mut coefficients = Vec::new();
+    for (nodes, digits, grid_denominator) in [
+        (48, 60, 10000),
+        (64, 60, 10000),
+        (64, 60, 20000),
+        (64, 80, 20000),
+    ] {
+        let started = Instant::now();
+        let mut samples = Vec::new();
+        for sample in 1..=10 {
+            let epsilon = Rational::from((sample, grid_denominator));
+            let dimension = Rational::from(4) - Rational::from(2) * &epsilon;
+            let values = reference_at_dimension(nodes, digits, &dimension);
+            // Save independently generated samples before interpolation or any
+            // solver/reference comparison. Each includes all original sectors.
+            let record = serde_json::json!({"epsilon":epsilon.to_string(),"nodes":nodes,"digits":digits,
+                "contributions":values.iter().map(|(k,v)|(k.clone(),v.re.to_string())).collect::<BTreeMap<_,_>>()});
+            std::fs::write(
+                directory.join(format!(
+                    "sample-{nodes}-{digits}-{grid_denominator}-{sample}.json"
+                )),
+                serde_json::to_vec_pretty(&record).unwrap(),
+            )
+            .unwrap();
+            samples.push((epsilon, values));
+        }
+        let p = Precision::decimal(digits).unwrap();
+        let interpolated = interpolate_laurent_reference(&samples, p);
+        let run = serde_json::json!({"nodes":nodes,"digits":digits,"grid_denominator":grid_denominator,
+            "samples":10,"wall_seconds":started.elapsed().as_secs_f64(),
+            "coefficients":interpolated.iter().map(|(name,values)|(name.clone(),values.iter()
+                .map(|(power,value)|(power.to_string(),value.re.to_string())).collect::<BTreeMap<_,_>>())).collect::<BTreeMap<_,_>>()});
+        std::fs::write(
+            directory.join(format!("laurent-{nodes}-{digits}-{grid_denominator}.json")),
+            serde_json::to_vec_pretty(&run).unwrap(),
+        )
+        .unwrap();
+        eprintln!(
+            "independent Laurent reference nodes={nodes} digits={digits} grid={grid_denominator} wall={:.3}s",
+            started.elapsed().as_secs_f64()
+        );
+        runs.push(run);
+        coefficients.push(interpolated);
+    }
+    let p = Precision::decimal(90).unwrap();
+    let mut comparisons = Vec::new();
+    let mut passed = true;
+    for run in 1..coefficients.len() {
+        for (name, values) in &coefficients[run] {
+            for (power, value) in values {
+                let change = p.norm(&p.sub(value, &coefficients[run - 1][name][power]));
+                let magnitude = p.norm(value);
+                let is_small = magnitude < p.tolerance(18);
+                let criterion = if is_small {
+                    p.tolerance(20)
+                } else {
+                    magnitude * p.tolerance(12)
+                };
+                let ok = change <= criterion;
+                passed &= ok;
+                comparisons.push(serde_json::json!({"refinement":(["nodes","epsilon_grid","working_precision"][run-1]),
+                    "component":name,"power":power,"absolute_change":change.to_string(),"passed":ok,
+                    "criterion":if is_small {"absolute 1e-20 in raw Euclidean normalization"}else{"relative 1e-12"}}));
+            }
+        }
+    }
+    // Independent analytic UV residues, derived from the local subtractions
+    // and one-dimensional moving-support integrals. These are checks made
+    // after interpolation, never constraints or values supplied to the fit.
+    let refined = coefficients.last().unwrap();
+    let mut analytic_checks = Vec::new();
+    for (names, power, expected) in [
+        (vec!["scalar/vacuum"], -2, "-3/(4*(4*pi)^4)"),
+        (vec!["raised_numerator/vacuum"], -2, "-25/(32*(4*pi)^4)"),
+        (
+            vec!["scalar/cut_0"],
+            -1,
+            "(-3^(1/2)+log(2+3^(1/2))/2)/(4*pi)^4",
+        ),
+        (
+            vec!["scalar/cut_1"],
+            -1,
+            "(-3^(1/2)+log(2+3^(1/2))/2)/(4*pi)^4",
+        ),
+        (
+            vec![
+                "raised_numerator/cut_0_bulk",
+                "raised_numerator/cut_0_surface",
+            ],
+            -1,
+            "(-3^(1/2)/4+5*log(2+3^(1/2))/8)/(4*pi)^4",
+        ),
+        (vec!["raised_numerator/cut_1"], -1, "0"),
+    ] {
+        let actual = names
+            .iter()
+            .fold(p.zero(), |sum, name| p.add(&sum, &refined[*name][&power]));
+        let expected_value = p
+            .eval(
+                &Atom::parse(expected, "independent_reference", Default::default()).unwrap(),
+                &ahash::HashMap::default(),
+            )
+            .unwrap();
+        let delta = p.norm(&p.sub(&actual, &expected_value));
+        let bound = if expected_value == p.zero() {
+            p.tolerance(20)
+        } else {
+            p.norm(&expected_value) * p.tolerance(12)
+        };
+        let ok = delta <= bound;
+        passed &= ok;
+        analytic_checks.push(
+            serde_json::json!({"components":names,"power":power,"exact_reference":expected,
+            "absolute_difference":delta.to_string(),"passed":ok}),
+        );
+    }
+    let report = serde_json::json!({"schema":1,"status":if passed {"refinement_passed"}else{"refinement_failed"},
+        "definition":serde_json::from_str::<serde_json::Value>(include_str!("../examples/finite_density/massive_two_loop_sunset.json")).unwrap(),
+        "laurent_orders":[-2,0],"normalization":"unscaled Euclidean amplitude",
+        "method":"independent six-sector Schwinger UV subtraction, compact radial/angular quadrature, exact rational Lagrange coefficients for epsilon² I",
+        "pole_bound_derivation":"one explicit sector 1/epsilon times Gamma(-1+2epsilon); single-cut Gamma(epsilon); compact double cut analytic near epsilon zero",
+        "error_estimate":"independent quadrature order, epsilon grid and precision refinements; not an interval bound",
+        "feature_predictions_read":0,"oracle_records_read":0,"production_integral_owners_used":[],
+        "source_blake3":blake3::hash(include_bytes!("finite_density_reference.rs")).to_hex().to_string(),
+        "runs":runs,"comparisons":comparisons,"analytic_uv_residue_checks":analytic_checks});
+    std::fs::write(
+        directory.join("independent-laurent-reference.json"),
+        serde_json::to_vec_pretty(&report).unwrap(),
+    )
+    .unwrap();
+    assert!(
+        passed,
+        "independent Laurent reference failed refinement; inspect saved report"
     );
 }

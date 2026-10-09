@@ -1,9 +1,11 @@
 //! Automatic boundary matching for occupied, fixed-shell auxiliary mass flows.
 //!
 //! Every uncut physical quadratic is deformed. Compact momenta remain soft.
-//! Each expanded denominator is purely hard or constant; numerator-completion
-//! powers are nonpositive. Tensor projection therefore leaves polynomial soft
-//! factors, integrated against fixed shell and endpoint distributions. Any
+//! Each deformed quadratic denominator is purely hard or constant after
+//! expansion; numerator-completion powers are nonpositive by default. An
+//! explicit opt-in also admits inverse powers of individually certified
+//! positive compact energies, which remain soft. Tensor projection therefore
+//! leaves soft moments integrated against fixed shell and endpoint distributions. Any
 //! unrestricted virtual soft loop is a scaleless polynomial integral.
 //!
 //! The hard vacuum factors have one large scale and use ordinary recursive
@@ -62,6 +64,7 @@ pub struct OccupiedFlowBoundary<'a> {
     epsilon_symbol: Symbol,
     max_half_order: usize,
     limits: OccupiedBoundaryLimits,
+    positive_energy_powers: bool,
 }
 
 impl<'a> OccupiedFlowBoundary<'a> {
@@ -85,7 +88,17 @@ impl<'a> OccupiedFlowBoundary<'a> {
             epsilon_symbol,
             max_half_order,
             limits,
+            positive_energy_powers: false,
         })
+    }
+
+    /// Opt into positive completion indices only when geometry proves that
+    /// the factor is a nonzero rational multiple of one future compact energy
+    /// with assigned positive shell mass. The default remains polynomial.
+    pub fn with_positive_compact_energy_powers(mut self, enabled: bool) -> Self {
+        self.positive_energy_powers = enabled;
+        self.integrated = self.integrated.with_positive_compact_energy_powers(enabled);
+        self
     }
 
     /// Derive the needed region coefficients and match the supplied complete
@@ -95,7 +108,9 @@ impl<'a> OccupiedFlowBoundary<'a> {
     /// indices. `shifted` may contain either the input slots or all weighted
     /// slots; any appended occupation shifts must be false. All uncut physical
     /// slots must be shifted, and every cut, occupation and completion slot
-    /// must be fixed. Shell masses must have exact physical assignments.
+    /// must be fixed. Shell masses must have exact physical assignments. Positive
+    /// completion indices require the explicit positive-energy opt-in and a
+    /// matching exact geometry certificate.
     #[allow(clippy::too_many_arguments)]
     pub fn constants(
         &self,
@@ -126,16 +141,17 @@ impl<'a> OccupiedFlowBoundary<'a> {
             compact[shell.loop_index] = true;
         }
         if basis.iter().any(|master| {
-            master.0[family.physical_slots()..input_slots]
+            (family.physical_slots()..input_slots).any(|slot| {
+                master.0[slot] > 0
+                    && !(self.positive_energy_powers
+                        && family.compact_energy_completion(slot).is_some())
+            }) || family
+                .shells()
                 .iter()
-                .any(|&index| index > 0)
-                || family
-                    .shells()
-                    .iter()
-                    .any(|shell| master.0[shell.upper_slot] < 0 || master.0[shell.lower_slot] < 0)
+                .any(|shell| master.0[shell.upper_slot] < 0 || master.0[shell.lower_slot] < 0)
         }) {
             return Err(Error::InvalidInput(
-                "occupied boundary requires nonpositive numerator-completion indices and nonnegative occupation indices".into(),
+                "occupied boundary requires polynomial or explicitly certified positive-energy completion indices and nonnegative occupation indices".into(),
             ));
         }
         for (slot, &deformed) in shifted.iter().enumerate() {
@@ -153,6 +169,25 @@ impl<'a> OccupiedFlowBoundary<'a> {
         }
         let ordinary = family.region_family(self.epsilon_symbol, self.options.dimension)?;
         let shifted = &shifted[..input_slots];
+        // Ordinary region expansion keeps its numerator-only completion
+        // contract. Certified inverse energies are fixed compact soft factors:
+        // remove them before expansion, and restore their exact factors below.
+        let fixed_energies = basis
+            .iter()
+            .map(|master| {
+                (family.physical_slots()..input_slots)
+                    .filter(|&slot| master.0[slot] > 0)
+                    .map(|slot| {
+                        Ok((
+                            family.compact_energy_completion(slot).ok_or_else(|| {
+                                Error::InvalidInput("missing compact-energy certificate".into())
+                            })?,
+                            master.0[slot],
+                        ))
+                    })
+                    .collect::<Result<Vec<_>>>()
+            })
+            .collect::<Result<Vec<_>>>()?;
         let targets = basis
             .iter()
             .map(|master| {
@@ -160,7 +195,14 @@ impl<'a> OccupiedFlowBoundary<'a> {
                     master.0[..input_slots]
                         .iter()
                         .enumerate()
-                        .map(|(slot, &index)| if required_cuts[slot] { 0 } else { index })
+                        .map(|(slot, &index)| {
+                            if required_cuts[slot] || (slot >= family.physical_slots() && index > 0)
+                            {
+                                0
+                            } else {
+                                index
+                            }
+                        })
                         .collect(),
                 )
             })
@@ -190,6 +232,29 @@ impl<'a> OccupiedFlowBoundary<'a> {
             .iter()
             .map(|region| ordinary.transform_loops(&region.transformation))
             .collect::<Result<Vec<_>>>()?;
+        let energy_offset = family.loops() * (family.loops() + 1) / 2;
+        for (region, transformed) in regions.iter().zip(&transformed) {
+            for (certificate, _) in fixed_energies.iter().flatten() {
+                let factor = &transformed.propagators[certificate.slot];
+                if region.hard[certificate.loop_index]
+                    || !factor.constant.is_zero()
+                    || factor.scalar_products.iter().enumerate().any(|(i, c)| {
+                        let expected = if i == energy_offset + certificate.loop_index {
+                            Atom::num(certificate.coefficient.clone())
+                        } else {
+                            Atom::zero()
+                        };
+                        !(c - expected).together().cancel().is_zero()
+                    })
+                {
+                    return Err(Error::Unsupported(
+                        "certified compact energy does not remain fixed in the region".into(),
+                    ));
+                }
+            }
+        }
+        // The checked fixed factors have eta degree zero, so stripping them
+        // changes neither the symbolic exponent nor the required series depth.
         let powers = targets
             .iter()
             .map(|target| {
@@ -271,6 +336,15 @@ impl<'a> OccupiedFlowBoundary<'a> {
                     continue;
                 };
                 let expansion = regions::expand_region(&ordinary, target, shifted, region, order)?;
+                let fixed_weight = fixed_energies[component].iter().fold(
+                    Atom::one(),
+                    |weight, (certificate, index)| {
+                        weight
+                            * (Atom::num(certificate.coefficient.clone())
+                                * &expansion.coordinates[energy_offset + certificate.loop_index])
+                                .pow(-i64::from(*index))
+                    },
+                );
                 let determinant = p.eval(&expansion.jacobian_determinant, &parameters)?;
                 let jacobian = p.pow(
                     &C::new(p.norm(&determinant), p.real(0)),
@@ -279,7 +353,7 @@ impl<'a> OccupiedFlowBoundary<'a> {
                 for (index, expression) in expansion.coefficients.iter().enumerate() {
                     self.context.cancellation.check()?;
                     let projected = integrand::projected_factor_region(
-                        expression,
+                        &(expression * &fixed_weight).together().cancel(),
                         &expansion.coordinates,
                         &transformed[r],
                         &region.hard,

@@ -1,0 +1,56 @@
+{
+  "schema": 1,
+  "source_snapshot": "guard-refinement-source-hashes.json",
+  "scope": "Fresh direct native test executables; no numerical oracle or complete amplitude comparisons.",
+  "gates": [
+    {
+      "gate": "input",
+      "binary": "target/release/deps/finite_density_input-39d0974d115e1cc7",
+      "binary_sha256": "31ee2da7515da6f4ad11cb767411ff80d052f8f7e8eeeb92cff410c90d55d4fc",
+      "binary_mtime_utc_epoch": 1791572043.3227062,
+      "command": [
+        "target/release/deps/finite_density_input-39d0974d115e1cc7",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.1034939638338983,
+      "expected_test_count": 9,
+      "summary": [
+        "test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.09s"
+      ]
+    },
+    {
+      "gate": "normalization",
+      "binary": "target/release/deps/finite_density_normalization-d2c3def69c1fec57",
+      "binary_sha256": "51461fa9312467e5a9be55b396d9e2dbb7f6defb5f826ca7be1f31f226dfee7c",
+      "binary_mtime_utc_epoch": 1791572045.9907146,
+      "command": [
+        "target/release/deps/finite_density_normalization-d2c3def69c1fec57",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.2703710040077567,
+      "expected_test_count": 4,
+      "summary": [
+        "test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.25s"
+      ]
+    },
+    {
+      "gate": "measure",
+      "binary": "target/release/deps/finite_density_measure-84b68ab92b3969d7",
+      "binary_sha256": "0196ad27aa4953eb14bc393412e968717ca815597c87cd52cbb7c9448ee60efa",
+      "binary_mtime_utc_epoch": 1791572042.6837044,
+      "command": [
+        "target/release/deps/finite_density_measure-84b68ab92b3969d7",
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 0.10982975782826543,
+      "expected_test_count": 1,
+      "summary": [
+        "test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.10s"
+      ]
+    }
+  ],
+  "amplitude_predictions_compared": 0
+}

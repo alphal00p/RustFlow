@@ -1,0 +1,234 @@
+{
+  "status": "assertion_gates_passed_N9_closure_unresolved",
+  "source_snapshot": "source-policy-hashes.json",
+  "check": {
+    "command": "nix develop --command cargo check --locked --release --tests",
+    "elapsed_seconds": 12.61,
+    "passed": true
+  },
+  "build": {
+    "elapsed_seconds": 375,
+    "scope": "release compile/link only",
+    "command": "nix develop --command cargo test --locked --release --lib --bin rustflow --test finite_density_closure --test finite_density_native_flow --test finite_density_boundary --test finite_density_flow_boundary --test finite_density_terminal --test finite_density_independent_mu --test finite_density_e7_reference --test finite_density_input --test finite_density_measure --test finite_density_normalization --test finite_density_reference --test integrand --no-run"
+  },
+  "gates": [
+    {
+      "name": "finite_density_unit",
+      "passed": 22,
+      "failed": 0,
+      "runtime_seconds": 0.06,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "guarded_domains_and_source_policy",
+      "passed": 5,
+      "failed": 0,
+      "runtime_seconds": 0.12,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "independent_distribution_source",
+      "passed": 1,
+      "failed": 0,
+      "runtime_seconds": 0.1,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "thermal_compact_terminal",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.18,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "occupied_flow_boundary",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.13,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "public_independent_mu_assembly",
+      "passed": 1,
+      "failed": 0,
+      "runtime_seconds": 0.36,
+      "runtime_scope": "test harness"
+    },
+    {
+      "name": "independent_e7_reference",
+      "passed": 2,
+      "failed": 0,
+      "runtime_seconds": 0.03672115,
+      "runtime_scope": "prebuilt process wall"
+    }
+  ],
+  "passed": 39,
+  "failed": 0,
+  "policy_diagnostics": [
+    {
+      "policy": "legacy-lorentz",
+      "slots": 9,
+      "status": "unresolved",
+      "runtime_seconds": 53.360191788,
+      "rounds": 7,
+      "frontier_sizes": [
+        63,
+        57,
+        78,
+        104,
+        145,
+        193,
+        267
+      ],
+      "requested": 168,
+      "source_count": 104,
+      "max_depth": 3,
+      "max_domains": 8192,
+      "max_rounds": 12,
+      "max_frontier": 256,
+      "max_requested": 2048,
+      "reason": "weighted provisional-frontier budget exhausted",
+      "artifacts": "source-policies/legacy-lorentz/sunset-N9"
+    },
+    {
+      "policy": "active-lorentz",
+      "slots": 9,
+      "status": "unresolved",
+      "runtime_seconds": 51.442042516,
+      "rounds": 7,
+      "frontier_sizes": [
+        63,
+        57,
+        78,
+        104,
+        145,
+        193,
+        267
+      ],
+      "requested": 168,
+      "source_count": 32,
+      "max_depth": 3,
+      "max_domains": 8192,
+      "max_rounds": 12,
+      "max_frontier": 256,
+      "max_requested": 2048,
+      "reason": "weighted provisional-frontier budget exhausted",
+      "artifacts": "source-policies/active-lorentz/sunset-N9"
+    },
+    {
+      "policy": "lorentz-then-tangents",
+      "slots": 9,
+      "status": "unresolved",
+      "runtime_seconds": 76.159724105,
+      "rounds": 8,
+      "frontier_sizes": [
+        45,
+        52,
+        61,
+        84,
+        116,
+        161,
+        207,
+        261
+      ],
+      "requested": 153,
+      "source_count": 50,
+      "max_depth": 3,
+      "max_domains": 8192,
+      "max_rounds": 12,
+      "max_frontier": 256,
+      "max_requested": 2048,
+      "reason": "weighted provisional-frontier budget exhausted",
+      "artifacts": "source-policies/lorentz-then-tangents/sunset-N9"
+    },
+    {
+      "policy": "tangents-then-lorentz",
+      "slots": 9,
+      "status": "unresolved",
+      "runtime_seconds": 85.104237972,
+      "rounds": 8,
+      "frontier_sizes": [
+        52,
+        55,
+        65,
+        96,
+        131,
+        178,
+        227,
+        282
+      ],
+      "requested": 154,
+      "source_count": 50,
+      "max_depth": 3,
+      "max_domains": 8192,
+      "max_rounds": 12,
+      "max_frontier": 256,
+      "max_requested": 2048,
+      "reason": "weighted provisional-frontier budget exhausted",
+      "artifacts": "source-policies/tangents-then-lorentz/sunset-N9"
+    }
+  ],
+  "runtime_scope": "N9 policy processes ran concurrently with each other and a focused numerical transport test; these wall times are execution records, not isolated comparative benchmarks.",
+  "restored_N7": {
+    "status": "closed",
+    "basis_size": 17,
+    "rounds": 3,
+    "runtime_seconds": 1.6903689499999999,
+    "artifacts": "source-policies/legacy-lorentz/sunset-N7"
+  },
+  "minimal_native_gap": {
+    "artifacts": "source-policies/tangents-then-lorentz/single-domain-recenter",
+    "runtime_seconds": 0.00563547,
+    "source_domain": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        1
+      ],
+      [
+        -3,
+        -2
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        null
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "target": [
+      1,
+      1,
+      1,
+      -2,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "reason": "UnprovedDescent: recentered source proof misses the requested target domain",
+    "application": "NoApplicableRule remains explicit; no candidate promoted to master"
+  }
+}

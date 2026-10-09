@@ -1,0 +1,11 @@
+{
+  "command": [
+    "target/release/deps/core-e0c6134f216216a6"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.3867960558272898,
+  "user_seconds": 2.514383,
+  "system_seconds": 0.16411699999999999,
+  "peak_child_rss_kib": 12372,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

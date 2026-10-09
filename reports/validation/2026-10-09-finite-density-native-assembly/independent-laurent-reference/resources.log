@@ -1,0 +1,11 @@
+
+running 1 test
+independent Laurent reference nodes=48 digits=60 grid=10000 wall=12.184s
+independent Laurent reference nodes=64 digits=60 grid=10000 wall=23.540s
+independent Laurent reference nodes=64 digits=60 grid=20000 wall=23.450s
+test generate_independent_massive_sunset_laurent_reference has been running for over 60 seconds
+independent Laurent reference nodes=64 digits=80 grid=20000 wall=27.503s
+test generate_independent_massive_sunset_laurent_reference ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 4 filtered out; finished in 86.69s
+

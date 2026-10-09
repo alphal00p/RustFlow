@@ -101,6 +101,51 @@ fn public_assembly_below_threshold_retains_massive_vacuum() {
 }
 
 #[test]
+fn empty_support_and_compact_terminals_keep_the_common_amf_contract() {
+    let context = RunContext::default();
+    for mu in ["1/4", "1"] {
+        let input = input(mu, &[1]);
+        let baseline = options();
+        let prepared = PreparedDensityFlow::prepare(
+            &input,
+            &baseline,
+            WeightedClosureOptions::default(),
+            &context,
+        )
+        .unwrap();
+        let inadmissible = [
+            FlowOptions {
+                prescription: Prescription::MinusI0,
+                ..baseline.clone()
+            },
+            FlowOptions {
+                recursion: RecursionMode::Ft,
+                ..baseline.clone()
+            },
+            FlowOptions {
+                mass_mode: MassMode::Propagator,
+                ..baseline.clone()
+            },
+        ];
+        for options in inadmissible {
+            assert!(matches!(
+                PreparedDensityFlow::prepare(
+                    &input,
+                    &options,
+                    WeightedClosureOptions::default(),
+                    &context,
+                ),
+                Err(Error::Unsupported(_))
+            ));
+            assert!(matches!(
+                prepared.evaluate(&Rational::from((1, 2)), &options, &context, 8,),
+                Err(Error::Unsupported(_))
+            ));
+        }
+    }
+}
+
+#[test]
 fn public_assembly_threshold_uses_thermal_finite_jump_and_diagnoses_singular_case() {
     let options = options();
     let context = RunContext::default();

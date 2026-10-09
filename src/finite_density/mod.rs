@@ -14,6 +14,7 @@ pub mod geometry;
 pub mod guarded;
 mod input;
 pub mod interface;
+pub mod massless_contour;
 pub mod measure;
 pub mod normalization;
 pub mod preparation;

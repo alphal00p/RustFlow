@@ -83,11 +83,20 @@ coverage require references beyond the massless oracle. A complete independent
 massive reference has now been generated at D=12/5, with 12 components/totals
 passing node and precision refinements. Saved native vacuum and first single-cut
 values for both targets pass its separate comparison and precision/order/start
-refinements; the complete native amplitude remains unresolved at two-cut closure.
+refinements. Native guard refinement now closes all occupied systems with basis
+sizes 7, 6 and 64, but the complete epsilon=4/5 sample fails at the N9 physical
+endpoint with an uncancelled-divergence diagnostic. No complete prediction was
+written or accepted.
 The [current validation report](../reports/validation/2026-10-09-finite-density-native-assembly/README.md)
-preserves measured differences and failure evidence. This reference is a fixed
-dimension value, not a Laurent series. Precision feasibility for the remaining
-unsupplied references has not yet been established.
+preserves measured differences and failure evidence. Its independent Laurent
+extension through orders [-2,0] now passes 108 component-coefficient refinement
+comparisons and six analytic UV-residue checks, using six-sector subtraction and
+exact rational interpolation; the empirical errors are not rigorous interval
+bounds. Complete native AMF and Laurent comparisons remain unperformed.
+Concrete reference-only kernels and the E8 shared-pole obstruction are recorded
+in [the remaining-reference investigation](finite-density-missing-references.md).
+No E8 or prism supplemental reference values have been generated, and their
+precision feasibility remains unestablished.
 
 ## Remaining acceptance evidence
 

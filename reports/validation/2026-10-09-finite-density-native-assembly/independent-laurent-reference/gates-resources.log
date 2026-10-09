@@ -1,0 +1,10 @@
+
+running 5 tests
+test generate_independent_massive_sunset_laurent_reference ... ignored, independent subtracted massive Laurent reference with quadrature, grid and precision refinements
+test generate_independent_massive_sunset_reference ... ignored, explicit independent massive sunset reference generation with node/precision refinement
+test independent_laurent_interpolation_preserves_rational_laurent_polynomials ... ok
+test subtracted_vacuum_sectors_preserve_the_convergent_reference ... ok
+test validation_quadrature_reproduces_polynomial_moments ... ok
+
+test result: ok. 3 passed; 0 failed; 2 ignored; 0 measured; 0 filtered out; finished in 1.14s
+

@@ -425,3 +425,130 @@ fn three_compact_loops_need_only_polynomial_soft_moments() {
         assert_eq!(report.scaleless_noncompact_products, 0);
     }
 }
+
+#[test]
+fn inverse_completion_boundary_uses_exact_positive_energy_certificate() {
+    let virtual_family = family(&[0]);
+    let family = family(&[0, 1]);
+    let certificate = (family.physical_slots()..family.input_slots())
+        .find_map(|slot| family.compact_energy_completion(slot))
+        .unwrap();
+    let mut integral = family.targets()[0].keys().next().unwrap().clone();
+    integral.0[certificate.slot] = 1;
+    let eps = symbol!("inverse_energy_flow_boundary_eps");
+    let p = Precision::decimal(60).unwrap();
+    let solutions = FrobeniusBasis {
+        precision: p,
+        columns: vec![FrobeniusColumn {
+            exponent: Atom::one(),
+            coefficients: vec![vec![vec![p.i(1)]]],
+        }],
+    };
+    let backend = RustRedBackend {
+        bubble_subloops: false,
+        ..Default::default()
+    };
+    let options = FlowOptions::default();
+    let context = RunContext::default();
+    let boundary = OccupiedFlowBoundary::new(
+        &backend,
+        &options,
+        &context,
+        eps,
+        2,
+        OccupiedBoundaryLimits::default(),
+    )
+    .unwrap();
+    assert!(matches!(
+        boundary.constants(
+            &family,
+            &[integral.clone()],
+            &shift(&family),
+            &Rational::from((1, 2)),
+            p,
+            &solutions
+        ),
+        Err(Error::InvalidInput(_))
+    ));
+    let enabled = boundary.with_positive_compact_energy_powers(true);
+    let report = enabled
+        .constants(
+            &family,
+            &[integral.clone()],
+            &shift(&family),
+            &Rational::from((1, 2)),
+            p,
+            &solutions,
+        )
+        .unwrap();
+    let expected = p.div(
+        &reference("-log(2)/(2*pi)", p),
+        &p.rational(&certificate.coefficient),
+    );
+    assert!(p.close(&report.constants[0], &expected, 40));
+    assert_eq!(report.provenance.regions[0].exponents, vec![Atom::one()]);
+
+    // An inverse compact energy also survives non-leading matching. Its
+    // radial integral weights D=q1^2+q2^2-2q1.q2-1 before shell substitution.
+    let mut pinched = integral.clone();
+    pinched.0[2] = 0;
+    let subleading_solutions = FrobeniusBasis {
+        precision: p,
+        columns: vec![
+            FrobeniusColumn {
+                exponent: Atom::zero(),
+                coefficients: vec![
+                    vec![vec![p.i(1), p.zero()]],
+                    vec![vec![p.zero(), p.i(-1)]],
+                    vec![vec![p.zero(), p.zero()]],
+                ],
+            },
+            FrobeniusColumn {
+                exponent: Atom::num(2),
+                coefficients: vec![vec![vec![p.zero(), p.i(1)]]],
+            },
+        ],
+    };
+    let subleading = enabled
+        .constants(
+            &family,
+            &[pinched, integral],
+            &shift(&family),
+            &Rational::from((1, 2)),
+            p,
+            &subleading_solutions,
+        )
+        .unwrap();
+    for (actual, expression) in subleading
+        .constants
+        .iter()
+        .zip(["log(2)/(2*pi)", "(log(2)/4+3/8)/pi"])
+    {
+        let expected = p.div(
+            &reference(expression, p),
+            &p.rational(&certificate.coefficient),
+        );
+        assert!(p.close(actual, &expected, 40));
+    }
+    assert_eq!(
+        subleading.provenance.regions[0].half_orders,
+        vec![Some(0), Some(2)]
+    );
+
+    let non_energy = (virtual_family.physical_slots()..virtual_family.input_slots())
+        .find(|&slot| virtual_family.compact_energy_completion(slot).is_none())
+        .unwrap();
+    let mut integral = virtual_family.targets()[0].keys().next().unwrap().clone();
+    integral.0[non_energy] = 1;
+    assert!(matches!(
+        enabled.constants(
+            &virtual_family,
+            &[integral],
+            &shift(&virtual_family),
+            &Rational::from((1, 2)),
+            p,
+            &solutions
+        ),
+        Err(Error::InvalidInput(_))
+    ));
+}

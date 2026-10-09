@@ -6,8 +6,11 @@ condition or source of reduction rules. No supplied numerical answer enters the
 derivation. The raised compact kernel, neutral tensor/routing contractions,
 dimensions and reference-normalization factor have received an independent
 algebraic audit. Independent native reference generation and its precision checks
-passed; no native AMF prediction or oracle comparison has been made. Do not mark
-either target numerically accepted from reference generation alone.
+passed; the generator read neither native AMF predictions nor oracle answers.
+A later comparison of the saved reference with supplied I37 is recorded
+separately in the reference report and agrees exactly through the finite term.
+No native AMF prediction has been compared. Do not mark either target numerically
+accepted from reference generation alone.
 
 Write D=4-2 epsilon, d=D-1, with common positive chemical potential mu. The exact
 edge routing is

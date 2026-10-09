@@ -123,3 +123,60 @@ A further independent Schwinger vacuum parametrization or numerical mass
 derivative check may be used to cross-check these validation kernels; it is not
 part of the AMF feature. The reference must remain unlabelled as certified until
 its actual refinement results pass.
+### Extension toward the Laurent point
+
+The validation-only `reference_at_dimension` integrator also represents the
+massive integral near D=4−2 epsilon. In each of six Cheng–Wu sectors take
+`x_j=1, x_k=t, x_l=t*u`, with t,u in [0,1]. The scalar vacuum integrand is
+`t^(-1+epsilon) B(t,u)`, where
+
+```text
+B(t,u) = (1+u+t*u)^(-D/2)
+         * (m_j²+t*(m_k²+u*m_l²))^(D-3).
+```
+
+Subtract B(0,u) under the t integral and add its exact integral divided by
+epsilon. With `J(D)=(2^(1-D/2)-1)/(1-D/2)`, the scalar counterterm is
+`2*sum_j (m_j²)^(D-3)*J(D)/epsilon`. The raised numerator's Gaussian weight
+is `x_0*x_2/U`. Its two sector limits sum to one when j is not 1 and vanish
+when j is 1, giving `sum_(j!=1) (m_j²)^(D-3)*J(D)/epsilon`, followed by the
+same overall `(D+1)/2` tensor factor used in the convergent reference.
+Both include `Gamma(3-D)/(4*pi)^D`. This gives an independent double-pole
+bound; single-cut bubbles have only `Gamma(epsilon)`, and the massive
+double-cut terms are analytic near epsilon zero.
+
+The subtracted remainder is integrable for Re epsilon > −1. The displayed
+angular representation requires D>2; actual gamma poles are excluded from
+sampling. Fifth-power endpoint maps leave powers `s^(4+5*epsilon)` in the
+vacuum remainder and `s^(4-5*epsilon)` in the angle integral. Their noninteger
+endpoint behavior requires fresh quadrature-order checks near epsilon zero.
+The reference generator independently varies quadrature order, the exact
+epsilon grid, and working precision. Exact rational Lagrange weights extract
+the first three Taylor coefficients of epsilon² times each contribution.
+It uses neither the production Laurent fitter nor oracle coefficients.
+The saved [Laurent reference report](../reports/validation/2026-10-09-finite-density-native-assembly/independent-laurent-reference/README.md)
+passes all 108 coefficient refinement checks and six separately derived
+analytic ultraviolet-residue checks. Its largest observed relative change is
+3.481e−17 under quadrature refinement. This is empirical reference accuracy,
+not a rigorous interval bound or a finite-density AMF prediction.
+
+### Comparing complete native predictions
+
+The ignored native tests `complete_massive_sunset_assembles_vacuum_and_all_occupied_sectors`
+and `complete_massive_sunset_laurent_refinement` save predictions before reading
+any reference. Only after a successful run, compare the saved artifacts with:
+
+```sh
+python3 tools/finite_density/compare_complete_massive_reference.py sample \
+  --predictions PATH_TO_SAMPLE_RUN --output PATH_TO_SAMPLE_COMPARISON.json
+python3 tools/finite_density/compare_complete_massive_reference.py laurent \
+  --predictions PATH_TO_LAURENT_RUN --output PATH_TO_LAURENT_COMPARISON.json
+```
+
+The sample test must use `RUSTFLOW_DENSITY_FLOW_EPSILON=4/5`. Both modes require
+all four independently varied precision/order/start configurations and the exact
+input definition. Sample comparisons include every vacuum/cut contribution,
+the explicit nonzero raised surface terms in the reference, and the assembled
+sum. Laurent comparisons cover the assembled coefficients at powers −2, −1, 0.
+All compared inputs are hashed; this utility cannot generate predictions or
+fill missing sectors. Availability of the command is not a comparison result.

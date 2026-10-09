@@ -1,8 +1,9 @@
 //! Integrated coefficients of fixed-shell large-mass regions.
 //!
 //! Hard factors use ordinary recursive AMF with Gaussian/tadpole seeds. Soft
-//! factors must be polynomials in the independent compact momenta and the
-//! medium vector. HEPKit projects their spatial angular dependence before the
+//! factors must be polynomials in the independent compact momenta, optionally
+//! with inverse powers of individual positive-mass compact energies. HEPKit
+//! projects their spatial angular dependence before the
 //! one-shell distribution owner integrates radial and energy monomials.
 //!
 //! The returned normalization is native throughout: one virtual loop uses
@@ -55,6 +56,7 @@ pub struct IntegratedOccupiedBoundary<'a> {
     context: &'a RunContext,
     limits: OccupiedBoundaryLimits,
     moments: Mutex<BTreeMap<String, C>>,
+    positive_energy_powers: bool,
 }
 
 /// Provenance of a single integrated region coefficient. The scaleless count
@@ -102,7 +104,16 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
             context,
             limits,
             moments: Mutex::new(BTreeMap::new()),
+            positive_energy_powers: false,
         })
+    }
+
+    /// Opt into Laurent monomials in individual future compact energies.
+    /// Each negative power still requires the assigned positive-mass proof
+    /// E>=m>0. Other soft denominators keep their existing rejection.
+    pub fn with_positive_compact_energy_powers(mut self, enabled: bool) -> Self {
+        self.positive_energy_powers = enabled;
+        self
     }
 
     /// Integrate a scalar region coefficient after hard tensor projection.
@@ -297,9 +308,22 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
                 "occupied scalar coordinate count".into(),
             ));
         }
-        // Validate before introducing any internal coordinates: a surviving
-        // virtual denominator must never be mistaken for a polynomial seed.
-        polynomial_terms(expression, &space.coordinates, self.limits.max_terms)?;
+        // Only an individual occupied energy has the E>=m>0 certificate.
+        // Negative Gram powers, inverse energy sums and hidden denominators
+        // remain unsupported. Validate before introducing internal coordinates.
+        let mut inverse_allowed = vec![false; space.coordinates.len()];
+        if !space.template.external.is_empty() {
+            for (i, distribution) in distributions.iter().enumerate() {
+                inverse_allowed[pairs.len() + i] =
+                    self.positive_energy_powers && distribution.shell.mass_squared > 0;
+            }
+        }
+        laurent_terms(
+            expression,
+            &space.coordinates,
+            &inverse_allowed,
+            self.limits.max_terms,
+        )?;
         if loops == 0 {
             return p.eval(expression, parameters);
         }
@@ -374,19 +398,27 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
             polynomial = next.expand();
         }
         let variables = energies.iter().chain(&spatial).cloned().collect::<Vec<_>>();
+        let inverse_allowed = distributions
+            .iter()
+            .map(|d| self.positive_energy_powers && d.shell.mass_squared > 0)
+            .chain(std::iter::repeat_n(false, spatial.len()))
+            .collect::<Vec<_>>();
         let mut result = p.zero();
         let digits = ((u64::from(p.bits.saturating_sub(16)) * 1000) / 3322) as u32;
         let digits = digits.saturating_sub(8).max(1);
-        for (degrees, coefficient) in
-            polynomial_terms(&polynomial, &variables, self.limits.max_terms)?
-        {
+        for (degrees, coefficient) in laurent_terms(
+            &polynomial,
+            &variables,
+            &inverse_allowed,
+            self.limits.max_terms,
+        )? {
             let mut value = p.eval(&coefficient, parameters)?;
             for (i, distribution) in distributions.iter().enumerate() {
                 let radial_index = pairs.iter().position(|&pair| pair == (i, i)).unwrap();
                 let moment = self.distribution_moment(
                     distribution,
                     &d,
-                    degrees[i] as u16,
+                    degrees[i],
                     degrees[loops + radial_index] as u16,
                     digits,
                     p,
@@ -411,7 +443,7 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
         &self,
         distribution: &OccupiedBoundaryDistribution,
         dimension: &Rational,
-        energy_power: u16,
+        energy_power: i16,
         radial_power: u16,
         digits: u32,
         p: Precision,
@@ -532,6 +564,20 @@ fn polynomial_terms(
     variables: &[Atom],
     budget: usize,
 ) -> Result<Vec<(Vec<i16>, Atom)>> {
+    laurent_terms(expression, variables, &vec![false; variables.len()], budget)
+}
+
+fn laurent_terms(
+    expression: &Atom,
+    variables: &[Atom],
+    inverse_allowed: &[bool],
+    budget: usize,
+) -> Result<Vec<(Vec<i16>, Atom)>> {
+    if variables.len() != inverse_allowed.len() {
+        return Err(Error::InvalidInput(
+            "compact Laurent coordinate dimensions".into(),
+        ));
+    }
     let terms = exact_coefficient_list(expression, variables)?;
     if terms.len() > budget {
         return Err(Error::Limit(
@@ -542,7 +588,10 @@ fn polynomial_terms(
         .into_iter()
         .map(|(monomial, coefficient)| {
             let degrees = powers(&monomial, variables)?;
-            if degrees.iter().any(|&degree| degree < 0)
+            if degrees
+                .iter()
+                .zip(inverse_allowed)
+                .any(|(&degree, &allowed)| degree < 0 && !allowed)
                 || variables.iter().any(|variable| {
                     let AtomView::Var(v) = variable.as_view() else {
                         return true;
@@ -578,7 +627,7 @@ fn fresh_symbol(stem: &str, sources: &[&Atom]) -> Result<Atom> {
 fn distribution_moment(
     distribution: &OccupiedBoundaryDistribution,
     spatial_dimension: &Rational,
-    energy_power: u16,
+    energy_power: i16,
     radial_power: u16,
     digits: u32,
     limits: OccupiedBoundaryLimits,
@@ -604,10 +653,10 @@ fn distribution_moment(
     let value = if distribution.upper_index == 0 {
         // CompactShell returns the occupied correction: its n=1 seed is -W.
         // C_n=1/(n-1)! (d/dm^2)^(n-1) C_1, hence raw C_n=(-1)^n I_n^occ.
-        let value = shell.raised_moment(
+        let value = shell.raised_laurent_moment(
             spatial_dimension,
             cut as u16,
-            energy_power,
+            i32::from(energy_power),
             radial_power,
             digits,
             limits.max_compact_series_terms,

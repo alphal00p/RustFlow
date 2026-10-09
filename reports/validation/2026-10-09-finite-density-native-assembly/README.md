@@ -5,6 +5,44 @@ snapshot and its input/oracle provenance remain in
 [`../2026-10-09-finite-density-foundations/README.md`](../2026-10-09-finite-density-foundations/README.md).
 No complete finite-density multiloop amplitude or oracle comparison is claimed.
 
+## Current checkpoint: closure passes, full endpoint fails
+
+The guard-refinement checkpoint passes 91 selected regression gates, including
+33 finite-density unit gates and the refreshed input, normalization, measure,
+boundary and ordinary-flow regressions. The Python-feature all-tests type check
+also passes; this does not claim a Python host import. Exact commands, source
+snapshot and counts are in
+[`guard-refinement-regressions.json`](guard-refinement-regressions.json).
+
+Native requested-target and derivative closure now passes for **all three
+occupied sectors** of the selected massive sunset. The full-sample preparation
+retains source-replayed closed bases of sizes 7 for cut `[0]`, 6 for cut `[1]`,
+and 64 for cut `[0,1]`. Their original guarded programs and closed checkpoint
+records are in `full-sunset-guard-refinement/cut-{0,1,01}/`. These are finite
+closed generating sets, not claims of minimal master counts or complete
+coverage of every integer index domain. Previously unresolved parent domains
+remain recorded. No source equation or physical support assumption was added
+by splitting search domains.
+
+The complete sample was then attempted at epsilon=4/5, 18 working decimal
+digits plus 20 guard digits, series order 60 and occupied start scale 8.
+Guard refinement used at most 3 passes, 256 added domains and interval width 2.
+The N9 boundary supplied 51 region series and 53 coefficients, and transport
+reached the physical endpoint. Endpoint extraction returned
+`Numerical("uncancelled physical endpoint divergence")`; the test failed
+(exit 101). This reported numerical failure does not establish divergence of
+the original positive-mass integral. No complete prediction was written or
+accepted, and no complete independent-reference or oracle comparison occurred.
+
+The test harness reported 121.18 seconds. The enclosing prebuilt-process
+measurement was 121.2337249289 seconds with peak RSS 184372 KiB, excluding
+compilation and Nix startup. See
+[`full-sunset-guard-refinement-resources.json`](full-sunset-guard-refinement-resources.json)
+and its adjacent log. The earlier 59.2705-second failure below remains an
+unchanged historical closure failure; it is superseded as the current blocker
+by this endpoint failure. Full numerical assembly, Laurent stability and all
+native four-loop predictions remain unaccepted.
+
 ## Normalization adapter
 
 `src/finite_density/normalization.rs` provides exact native mixed-measure,
@@ -25,17 +63,18 @@ converted a second time.
 
 | Check | Status and scope |
 | --- | --- |
-| Joint release type check | Passed: `cargo check --locked --release --tests`; the support-aware source check including the reference test took 13.35 seconds as recorded by dependency owner |
+| Joint release type check | Current guard-refinement checkpoint passes `cargo check --locked --release --features python --tests`; see its source-bound regression report |
 | Exact sunset cut phases and odd medium numerator map | Passed |
 | Unexpanded MSbar identity for L=1..4 and k=0..L | Passed at 60-digit working precision with a 50-digit comparison |
 | Massive one-loop complete vacuum plus occupied assembly | Passed with independent 40/60-digit settings, raised power and support-threshold checks |
 | Native massive sunset mixed and fully occupied leading boundary coefficients | Passed against independent Euclidean seed products, with a 35-digit comparison |
-| Native one-cut weighted closure | Both selected sunset sectors closed, with 17 and 13 masters |
+| Native occupied weighted closure | All selected sunset cut sectors close with exact replay; current full-sample basis sizes 7, 6 and 64 |
 | Massive sunset vacuum and first single-cut endpoints | Passed both original targets at D=12/5 against independent quadrature: 16 comparisons across four configurations, plus 12 independent refinement checks |
-| Current native input regression | Passed 9/9 after the prism raised-charged-slot correction; 0.07-second test runtime after 14.29-second compilation |
-| Complete massive sunset at the physical endpoint | Attempt failed before numerics: two-cut N9 provisional-frontier budget exhausted |
+| Current native input regression | Refreshed guard-refinement binary passes 9/9; direct wall time 0.1035 seconds; binary hash and log retained |
+| Complete massive sunset at the physical endpoint | All occupied sectors close; epsilon=4/5 numerical attempt fails at N9 endpoint extraction, with no assembled prediction |
 | Four-loop predictions and Laurent stability | Not performed |
-| Numerical records from the supplied oracle compared | 0 |
+| AMF prediction records compared against the supplied oracle | 0 |
+| Independent analytic references compared against the supplied oracle | I37: three exact coefficient identities; reference-only check |
 
 All four normalization integration tests passed with no ignored tests. Direct
 execution of the refreshed linked binary took 0.3690 seconds and maximum resident memory
@@ -135,7 +174,7 @@ have a separate `support-source-hashes.json` snapshot. A passing diagnostic
 harness does not mean its weighted closure result was successful: each native
 case retains an explicit `closed` or `unresolved` outcome.
 
-The actual complete-sunset attempt is preserved in `full-sunset-attempt-1/`.
+The first complete-sunset attempt is preserved in `full-sunset-attempt-1/`.
 Its two single-cut sectors source-closed with 17 and 13 masters, respectively.
 The fully occupied N9 sector exhausted the provisional-frontier budget after
 seven rounds, with 267 provisional integrals. The process returned failure
@@ -181,12 +220,31 @@ python3 tools/finite_density/compare_massive_reference.py
 ```
 
 These four unique sector/target comparisons do not complete the amplitude.
-The second single-cut endpoint, two-cut closure and transport, complete endpoint
-sum, Laurent refinement and all mandatory four-loop runs remain open. No
-numerical record from the supplied oracle has been compared, and no completed
+The later checkpoint above resolves the selected two-cut closure and reaches its
+endpoint after transport, but the endpoint numerical failure still blocks the
+complete sum. Separate validation of the second single-cut endpoint, complete
+Laurent refinement and all mandatory four-loop runs remain open. No AMF
+prediction has been compared against the supplied oracle, and no completed
 generic evaluator is claimed by this stage.
 
 The new routing-dependent heavy-edge contour argument is documented in
 [`finite-density-contours.md`](../../../docs/finite-density-contours.md).
 It is a sufficient uncut-amplitude continuation certificate, separate from shell
 threshold, convergence, reduction and numerical acceptance requirements.
+
+Later independent four-loop reference generation and a separate supplied-I37
+reference cross-check are recorded in
+[`independent-e7-reference/README.md`](independent-e7-reference/README.md).
+That cross-check compares one supplied record's three coefficients against an
+already saved independent analytic reference; all three agree exactly. It is
+reference versus reference, with zero AMF predictions read and zero AMF-to-oracle
+comparisons. Earlier zero-comparison statements describe their historical stage.
+
+The mathematical massless-channel checker is recorded in
+[`massless-channels.json`](massless-channels.json). All 3 E7 and 7 prism occupied
+cut sets pass the sufficient positive-eta criterion; 12 of 29 cut sets of the
+eight-edge family pass, leaving 17 unresolved by this certificate. The
+[common-contour derivation](../../../docs/finite-density-massless-contours.md)
+and [dimensional compact-distribution construction](../../../docs/finite-density-massless-distributions.md)
+are mathematical preparation only. They do not enable production massless
+numerics or justify the eta=0 endpoint projector.

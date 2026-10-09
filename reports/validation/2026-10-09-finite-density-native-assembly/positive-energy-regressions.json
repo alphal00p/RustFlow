@@ -1,0 +1,98 @@
+{
+  "status": "source_and_seed_gates_passed_with_one_flow_boundary_integration_failure",
+  "source_snapshot": "positive-energy-source-hashes.json",
+  "check": {
+    "command": "nix develop --command cargo check --locked --release --features python --tests",
+    "elapsed_seconds": 15.32,
+    "passed": true
+  },
+  "build": {
+    "elapsed_seconds": 384,
+    "scope": "release compile/link only",
+    "command": "nix develop --command cargo test --locked --release --lib --bin rustflow --test finite_density_closure --test finite_density_native_flow --test finite_density_boundary --test finite_density_flow_boundary --test finite_density_terminal --test finite_density_independent_mu --test finite_density_input --test finite_density_measure --test finite_density_normalization --no-run"
+  },
+  "gates": [
+    {
+      "name": "finite_density_unit_including_native_endpoint",
+      "passed": 24,
+      "failed": 0,
+      "runtime_seconds": 8.55,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "physical_source_admission",
+      "passed": 6,
+      "failed": 0,
+      "runtime_seconds": 0.08,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "integrated_signed_energy_boundary",
+      "passed": 4,
+      "failed": 0,
+      "runtime_seconds": 0.07,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "compact_terminal",
+      "passed": 5,
+      "failed": 0,
+      "runtime_seconds": 0.21,
+      "runtime_scope": "prebuilt test harness"
+    },
+    {
+      "name": "occupied_flow_boundary",
+      "passed": 4,
+      "failed": 1,
+      "runtime_seconds": 0.15,
+      "runtime_scope": "prebuilt test harness"
+    }
+  ],
+  "passed": 43,
+  "failed": 1,
+  "failure": {
+    "test": "occupied flow boundary with inverse energy completion",
+    "cause": "ordinary expand_region rejected the positive completion power before the certified compact inverse factor was removed",
+    "status": "boundary owner correcting exact fixed-factor restoration in following snapshot"
+  },
+  "diagnostics": [
+    {
+      "policy": "legacy-lorentz",
+      "positive_compact_energy_powers": true,
+      "status": "unresolved",
+      "runtime_seconds": 52.141956089,
+      "rounds": 7,
+      "frontier_sizes": [
+        63,
+        55,
+        76,
+        102,
+        143,
+        191,
+        265
+      ],
+      "reason": "weighted provisional-frontier budget exhausted",
+      "artifacts": "positive-energy/legacy-lorentz/sunset-N9"
+    },
+    {
+      "policy": "lorentz-then-tangents",
+      "positive_compact_energy_powers": true,
+      "status": "unresolved",
+      "runtime_seconds": 74.791619886,
+      "rounds": 8,
+      "frontier_sizes": [
+        45,
+        52,
+        61,
+        84,
+        116,
+        161,
+        207,
+        261
+      ],
+      "reason": "weighted provisional-frontier budget exhausted",
+      "artifacts": "positive-energy/lorentz-then-tangents/sunset-N9"
+    }
+  ],
+  "interpretation": "Admission of certified massive inverse energies is physically justified and exact source/seed checks passed, but these bounded discovery attempts still leave N9 unresolved. No complete finite-density amplitude prediction is claimed. A narrow domain-refinement probe and normalized shell-normal source presentation are the next distinct diagnostics."
+}

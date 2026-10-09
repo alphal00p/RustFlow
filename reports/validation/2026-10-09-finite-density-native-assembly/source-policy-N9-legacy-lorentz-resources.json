@@ -1,0 +1,15 @@
+{
+  "command": [
+    "target/release/deps/finite_density_closure-665c01718e3331cc",
+    "--ignored",
+    "--exact",
+    "physical_sunset_double_cut_native_closure",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 53.418059651739895,
+  "user_seconds": 52.896252,
+  "system_seconds": 0.06847,
+  "peak_child_rss_kib": 27664,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

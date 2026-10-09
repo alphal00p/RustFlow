@@ -1,0 +1,53 @@
+{
+  "schema_version": 1,
+  "source_snapshot": "guard-refinement-source-hashes.json",
+  "build": "joint locked release batch after Python-feature all-tests check",
+  "timing_scope": "Rust test-harness elapsed seconds only; build/startup excluded; direct-run peak memory not measured",
+  "gates": [
+    {
+      "binary": "target/release/deps/finite_density_boundary-4ae462f57ad10ba0",
+      "binary_sha256": "744973147e89c56ec1814db1848e959406e501dad394fe664c271fa6cb85cf24",
+      "linked_utc": "2026-10-09T18:54:07Z",
+      "passed": 4,
+      "test_harness_seconds": 0.06,
+      "arguments": [
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "binary": "target/release/deps/finite_density_flow_boundary-5a28448dc4a00c03",
+      "binary_sha256": "0438abef2b0f445d2ded70d0f22f66c550570cc59e4708ef6aa0f5061a071989",
+      "linked_utc": "2026-10-09T18:54:06Z",
+      "passed": 5,
+      "test_harness_seconds": 0.15,
+      "arguments": [
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "failed": 0,
+      "ignored": 0
+    },
+    {
+      "binary": "target/release/deps/finite_density_terminal-2fe28ef103e25538",
+      "binary_sha256": "dbb959d3efc91c0079bd79fa24950ff6a8f1ca576e506f64cb67e88eb8556bf5",
+      "linked_utc": "2026-10-09T18:54:06Z",
+      "passed": 5,
+      "test_harness_seconds": 0.17,
+      "arguments": [
+        "--nocapture"
+      ],
+      "exit_code": 0,
+      "failed": 0,
+      "ignored": 0
+    }
+  ],
+  "total_passed": 14,
+  "scope": "Existing massive integrated/flow boundary and public compact terminal gates, including inverse-energy subleading matching and thermal threshold distributions.",
+  "limitations": [
+    "No new massless terminal implementation was compiled in this snapshot; that extension was still draft-only.",
+    "These boundary gates alone do not establish complete massive sunset numerical accuracy or four-loop acceptance."
+  ]
+}

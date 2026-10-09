@@ -6,6 +6,11 @@ closure, integrated boundaries, physical endpoint projection, or numerical
 accuracy. A failed certificate does not establish a pinch: another routing or a
 more precise Landau analysis may admit the same physical input.
 
+The separate [massless graph-channel derivation](finite-density-massless-contours.md)
+and [compact-distribution construction](finite-density-massless-distributions.md)
+describe possible positive-eta admissions. They do not enable massless numerical
+evaluation or establish its eta=0 endpoint.
+
 ## A routing-dependent heavy-uncut-edge certificate
 
 Fix a connected occupied cut set and its exact real momentum routing. Use future

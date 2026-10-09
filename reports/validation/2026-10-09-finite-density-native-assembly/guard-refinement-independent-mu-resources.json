@@ -1,0 +1,12 @@
+{
+  "command": [
+    "target/release/deps/finite_density_independent_mu-2ae9a9d323b5acac",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.4072651630267501,
+  "user_seconds": 0.265909,
+  "system_seconds": 0.141431,
+  "peak_child_rss_kib": 12364,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -8,10 +8,10 @@ use symbolica_amflow::RunContext;
 use symbolica_amflow::finite_density::DensityInput;
 use symbolica_amflow::finite_density::guarded::{GuardedDiscoveryOptions, GuardedMeasureIdentity};
 use symbolica_amflow::finite_density::preparation::{
-    PreparedWeightedSources, WeightedSourcePolicy,
+    PreparedWeightedSources, WeightedSourceOptions, WeightedSourcePolicy,
 };
 use symbolica_amflow::finite_density::reduction::{
-    WeightedClosureOptions, WeightedClosureOutcome, prepare_weighted_system,
+    GuardRefinementOptions, WeightedClosureOptions, WeightedClosureOutcome, prepare_weighted_system,
 };
 
 fn physical_sources<const N: usize>(
@@ -47,6 +47,23 @@ fn physical_sources_from_input_with_policy<const N: usize>(
     shifted: &[usize],
     policy: WeightedSourcePolicy,
 ) -> (DensityInput, PreparedWeightedSources<N>) {
+    physical_sources_from_input_with_options(
+        input,
+        cut,
+        shifted,
+        WeightedSourceOptions {
+            policy,
+            ..Default::default()
+        },
+    )
+}
+
+fn physical_sources_from_input_with_options<const N: usize>(
+    input: DensityInput,
+    cut: &[usize],
+    shifted: &[usize],
+    options: WeightedSourceOptions,
+) -> (DensityInput, PreparedWeightedSources<N>) {
     let family = input
         .prepare()
         .unwrap()
@@ -56,7 +73,7 @@ fn physical_sources_from_input_with_policy<const N: usize>(
     let eta = symbol!("sunset_closure::eta");
     let epsilon = symbol!("sunset_closure::epsilon");
     let preparation = family
-        .guarded_sources_with_policy::<N>(
+        .guarded_sources_with_options::<N>(
             epsilon,
             4,
             eta,
@@ -74,17 +91,38 @@ fn physical_sources_from_input_with_policy<const N: usize>(
                 branch: "generic complex eta and dimension away from retained nonzero conditions; completion powers<=0".into(),
                 deformation: format!("native D-eta only in physical slots {shifted:?}; shells and occupation fixed"),
             },
-            policy,
+            options,
         )
         .unwrap();
     (input, preparation)
+}
+
+fn positive_energy_option() -> bool {
+    match std::env::var("RUSTFLOW_WEIGHTED_POSITIVE_ENERGY_POWERS").as_deref() {
+        Ok("1") | Ok("true") => true,
+        Err(_) | Ok("0") | Ok("false") => false,
+        Ok(other) => panic!("invalid positive-energy-power option {other}"),
+    }
 }
 
 fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
     let policy = std::env::var("RUSTFLOW_WEIGHTED_SOURCE_POLICY")
         .map(|value| value.parse::<WeightedSourcePolicy>().unwrap())
         .unwrap_or_default();
-    let (input, preparation) = physical_sources_with_policy::<N>(cut, shifted, policy);
+    let positive_compact_energy_powers = positive_energy_option();
+    let input = serde_json::from_str(include_str!(
+        "../examples/finite_density/massive_two_loop_sunset.json"
+    ))
+    .unwrap();
+    let (input, preparation) = physical_sources_from_input_with_options::<N>(
+        input,
+        cut,
+        shifted,
+        WeightedSourceOptions {
+            policy,
+            positive_compact_energy_powers,
+        },
+    );
     let root = std::env::var_os("RUSTFLOW_WEIGHTED_CLOSURE_REPORT")
         .map(std::path::PathBuf::from)
         .unwrap_or_else(|| std::env::temp_dir().join("rustflow-weighted-closure"));
@@ -104,6 +142,13 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
             max_domains: budget("RUSTFLOW_WEIGHTED_DOMAINS", 128),
             sample_seed: 0,
         },
+        guard_refinement: GuardRefinementOptions {
+            max_passes: budget("RUSTFLOW_WEIGHTED_GUARD_PASSES", 0),
+            max_added_domains: budget("RUSTFLOW_WEIGHTED_GUARD_DOMAINS", 256),
+            max_interval_width: budget("RUSTFLOW_WEIGHTED_GUARD_WIDTH", 2)
+                .try_into()
+                .unwrap(),
+        },
         checkpoints: Some(report.clone()),
         ..Default::default()
     };
@@ -113,10 +158,12 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
         serde_json::to_vec_pretty(&serde_json::json!({
             "input": input, "cut_slots": cut, "shifted_slots": shifted,
             "source_policy": policy.as_str(),
+            "positive_compact_energy_powers": positive_compact_energy_powers,
             "source_count": preparation.context.sources().sources().len(),
             "max_rounds": options.max_rounds, "max_depth": options.discovery.max_depth,
             "max_domains": options.discovery.max_domains,
             "max_frontier": options.max_frontier, "max_requested": options.max_requested,
+            "guard_refinement": options.guard_refinement,
             "source_context": format!("{:?}", preparation.context.sources()),
             "numerical_prediction": false
         }))
@@ -174,6 +221,10 @@ fn diagnostic<const N: usize>(cut: &[usize], shifted: &[usize]) {
         "provisional_sizes": diagnostics.provisional_sizes,
         "native_rules": diagnostics.native_rules,
         "native_rule_applications": diagnostics.native_rule_applications,
+        "guard_refinement_passes":diagnostics.guard_refinement_passes,
+        "guard_refinement_added_domains":diagnostics.guard_refinement_added_domains,
+        "guard_refinement_budget_exhausted":diagnostics.guard_refinement_budget_exhausted,
+        "guard_refinements":diagnostics.guard_refinements,
         "detail": detail, "numerical_prediction": false
     });
     std::fs::write(
@@ -266,6 +317,86 @@ fn source_policy_is_bound_and_legacy_preserves_all_occupation_faces() {
                 .any(|b| *b == IndexBounds::new(Some(0), None).unwrap()))
     );
     assert!("unrecognized".parse::<WeightedSourcePolicy>().is_err());
+}
+
+#[test]
+fn positive_completion_powers_require_opt_in_and_a_massive_shell_certificate() {
+    let (input, polynomial) = physical_sources::<9>(&[0, 1], &[2]);
+    let options = WeightedSourceOptions {
+        positive_compact_energy_powers: true,
+        ..Default::default()
+    };
+    let (_, inverse) =
+        physical_sources_from_input_with_options::<9>(input.clone(), &[0, 1], &[2], options);
+    let (_, normalized) = physical_sources_from_input_with_options::<9>(
+        input.clone(),
+        &[0, 1],
+        &[2],
+        WeightedSourceOptions {
+            policy: WeightedSourcePolicy::NormalsThenLorentz,
+            ..options
+        },
+    );
+    assert!(
+        normalized
+            .context
+            .sources()
+            .sources()
+            .iter()
+            .any(|source| source.id.starts_with("shell-normal/"))
+    );
+    let positive = [1, 1, 1, 2, 3, 0, 0, 0, 0];
+    assert!(!polynomial.deformation.admitted_domain().contains(&positive));
+    assert!(inverse.deformation.admitted_domain().contains(&positive));
+    assert!(inverse.deformation.derivative(positive).is_ok());
+    assert!(
+        inverse
+            .context
+            .sources()
+            .measure_id()
+            .contains("certified nonsingular completion slot")
+    );
+    let lower = [1, 1, 1, 2, 3, 0, 1, 0, 0];
+    assert!(inverse.context.sources().is_zero(&lower));
+    let empty = polynomial
+        .context
+        .discover(vec![], [], Default::default())
+        .unwrap()
+        .program
+        .encode(Default::default())
+        .unwrap();
+    assert!(inverse.context.decode(&empty, Default::default()).is_err());
+    // The same option cannot promote a virtual energy or a massless shell.
+    let (_, mixed) =
+        physical_sources_from_input_with_options::<7>(input.clone(), &[0], &[1, 2], options);
+    assert!(
+        mixed
+            .deformation
+            .admitted_domain()
+            .contains(&[1, 1, 1, 1, 0, 0, 0])
+    );
+    assert!(
+        !mixed
+            .deformation
+            .admitted_domain()
+            .contains(&[1, 1, 1, 0, 1, 0, 0])
+    );
+    let mut massless_input = input;
+    massless_input.edges[0].mass_squared = "0".into();
+    let (_, massless) =
+        physical_sources_from_input_with_options::<9>(massless_input, &[0, 1], &[2], options);
+    assert!(
+        !massless
+            .deformation
+            .admitted_domain()
+            .contains(&[1, 1, 1, 1, 0, 0, 0, 0, 0])
+    );
+    assert!(
+        massless
+            .deformation
+            .admitted_domain()
+            .contains(&[1, 1, 1, 0, 1, 0, 0, 0, 0])
+    );
 }
 
 #[test]
@@ -382,7 +513,20 @@ fn native_single_domain_recenter_diagnostic() {
     let policy = std::env::var("RUSTFLOW_WEIGHTED_SOURCE_POLICY")
         .map(|value| value.parse::<WeightedSourcePolicy>().unwrap())
         .unwrap_or(WeightedSourcePolicy::TangentsThenLorentz);
-    let (input, prepared) = physical_sources_with_policy::<9>(&[0, 1], &[2], policy);
+    let positive_compact_energy_powers = positive_energy_option();
+    let input = serde_json::from_str(include_str!(
+        "../examples/finite_density/massive_two_loop_sunset.json"
+    ))
+    .unwrap();
+    let (input, prepared) = physical_sources_from_input_with_options::<9>(
+        input,
+        &[0, 1],
+        &[2],
+        WeightedSourceOptions {
+            policy,
+            positive_compact_energy_powers,
+        },
+    );
     // One concrete domain retained by the bounded physical search, rather than
     // its growing derivative frontier. No expected failure is presumed here.
     let domain = IndexDomain::new([
@@ -397,11 +541,25 @@ fn native_single_domain_recenter_diagnostic() {
         IndexBounds::fixed(0),
     ])
     .unwrap();
+    let mode =
+        std::env::var("RUSTFLOW_WEIGHTED_RECENTER_MODE").unwrap_or_else(|_| "interval".into());
+    let fixed = |value| {
+        let mut bounds = *domain.bounds();
+        bounds[3] = IndexBounds::fixed(value);
+        IndexDomain::new(bounds).unwrap()
+    };
+    let domains = match mode.as_str() {
+        "interval" => vec![domain.clone()],
+        "lower" => vec![fixed(-3)],
+        "upper" => vec![fixed(-2)],
+        "split" => vec![fixed(-3), fixed(-2)],
+        _ => panic!("unknown one-domain recenter mode {mode}"),
+    };
     let started = Instant::now();
     let discovery = prepared
         .context
         .discover(
-            vec![domain.clone()],
+            domains.clone(),
             [],
             GuardedDiscoveryOptions {
                 max_depth: 3,
@@ -413,7 +571,7 @@ fn native_single_domain_recenter_diagnostic() {
     let root = std::env::var_os("RUSTFLOW_WEIGHTED_CLOSURE_REPORT")
         .map(std::path::PathBuf::from)
         .unwrap_or_else(|| std::env::temp_dir().join("rustflow-weighted-closure"));
-    let report = root.join("single-domain-recenter");
+    let report = root.join(format!("single-domain-recenter-{mode}"));
     std::fs::create_dir_all(&report).unwrap();
     let encoded = discovery.program.encode(Default::default()).unwrap();
     // Decode replays the original guarded source proof; saved programs are not
@@ -422,13 +580,24 @@ fn native_single_domain_recenter_diagnostic() {
         .context
         .decode(&encoded, Default::default())
         .unwrap();
-    let target = [1, 1, 1, -2, 0, 0, 0, 1, 0];
+    let target = [
+        1,
+        1,
+        1,
+        if mode == "lower" { -3 } else { -2 },
+        0,
+        0,
+        0,
+        1,
+        0,
+    ];
     let reduced = replayed.reduce(target, Default::default()).unwrap();
     std::fs::write(report.join("native-program.bin"), encoded).unwrap();
     let result = serde_json::json!({
         "input": input, "source_policy": policy.as_str(),
+        "positive_compact_energy_powers": positive_compact_energy_powers,
         "source_context": format!("{:?}", prepared.context.sources()),
-        "domain": format!("{domain:?}"), "target": target,
+        "domains": format!("{domains:?}"), "domain_mode": mode, "target": target,
         "max_depth": 3, "max_domains": 8192, "sample_seed": 0,
         "discovery_unresolved": format!("{:?}", discovery.unresolved),
         "application": format!("{reduced:?}"),

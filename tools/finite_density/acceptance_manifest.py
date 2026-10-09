@@ -205,6 +205,12 @@ def artifacts():
             }
             entries[-1]['targets'][0]['additional_independent_reference'] = {**independent, 'target_index':0}
             entries[-1]['targets'][1]['reference'] = {**independent, 'target_index':1}
+        else:
+            entries[-1]['targets'][1]['reference'].update({
+                'derivation_and_obstacles':'docs/finite-density-missing-references.md',
+                'definition_only_diagnostics':'reports/validation/2026-10-09-finite-density-native-assembly/missing-reference-diagnostics.json',
+                'next_gate':('Common thermal matching for shared interior pole/discontinuity loci across all 29 cut sectors, then local UV/IR subtraction; independently assigned denominator PVs are not established.' if record_id=='I91' else 'Complete all three two-cut Gaussian parameter kernels, regulated independent-mass differentiation, overlapping endpoint subtractions and refined Laurent quadrature; the triple-cut triangle kernel alone is not a reference.'),
+            })
     # A small massive nonfactorized graph requires complete 0/1/2-cut assembly.
     small_edges=[[0,1],[1,0],[1,0]]
     small_routing=[[1,0],[0,1],[1,-1]]
@@ -255,14 +261,30 @@ def artifacts():
         'small_graph':{'definition':'examples/finite_density/massive_two_loop_sunset.json',
                        'graph_certificate':small,'required_cut_components':[0,1,2],
                        'vacuum_contribution':'Nonzero for positive masses; must evaluate and compare, not omit as scaleless.',
-                       'reference_status':'available_at_D_12_over_5_not_Laurent',
-                       'reference_method':'Independent Schwinger vacuum sectors, reference-only Feynman parameters and compact radial/angular quadrature with exact endpoint maps; original numerator and independent mass derivatives retain moving-support surfaces.',
+                       'reference_status':'available_at_D_12_over_5_and_Laurent_minus2_through_zero',
+                       'reference_method':'Independent Schwinger vacuum sectors, reference-only Feynman parameters and compact radial/angular quadrature with exact endpoint maps; original numerator and independent mass derivatives retain moving-support surfaces. Laurent extension uses six-sector analytic UV subtraction and exact rational Lagrange coefficients for epsilon² I.',
                        'reference_artifact':'reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json',
+                       'laurent_reference_artifact':'reports/validation/2026-10-09-finite-density-native-assembly/independent-laurent-reference/independent-laurent-reference.json',
+                       'laurent_reference_orders':[-2,0],
                        'reference_derivation':'docs/finite-density-reference.md',
-                       'attainable_comparison_precision':'All 12 reference components/totals pass independent node and precision refinements at D=12/5; empirical changes are not rigorous interval bounds. Laurent reference precision remains unestablished.',
+                       'attainable_comparison_precision':'All 12 reference components/totals pass independent node and precision refinements at D=12/5. All 108 Laurent component-coefficient refinement comparisons and six analytic UV-residue checks pass; largest relative quadrature change 3.48e-17, epsilon-grid change 1.0042e-22 and precision change 8.98e-53. These empirical changes are not rigorous interval bounds. No complete native AMF or Laurent comparison is inferred.',
                        'native_comparison':{'status':'vacuum_and_cut0_only_passed','report':'reports/validation/2026-10-09-finite-density-native-assembly/single-sunset-reference-comparison.json','unique_sector_target_values':4,'configurations':4,'relative_tolerance':'1e-12','small_magnitude_threshold':'1e-20','small_absolute_tolerance':'1e-25','full_amplitude_compared':False,'laurent_coefficients_compared':0},
+                       'native_closure':{'status':'passed_for_requested_targets_and_derivatives',
+                                         'cut_basis_sizes':[{'cut_slots':[0],'native_arity':7,'basis_size':7},
+                                                            {'cut_slots':[1],'native_arity':7,'basis_size':6},
+                                                            {'cut_slots':[0,1],'native_arity':9,'basis_size':64}],
+                                         'guard_refinement':{'max_passes':3,'max_added_domains':256,'max_interval_width':2},
+                                         'proof':'Exact native guarded original-source replay and final requested-target/derivative closure audit; no basis minimality or complete integer-domain coverage claim.',
+                                         'evidence':'reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-guard-refinement'},
+                       'complete_sample_attempt':{'status':'blocked_at_two_cut_physical_endpoint',
+                                                  'epsilon':'4/5','digits':18,'guard_digits':20,'series_order':60,'occupied_start_scale':8,
+                                                  'reported_error':'Numerical("uncancelled physical endpoint divergence")',
+                                                  'error_interpretation':'Numerical endpoint reconstruction failed; this is not a proof of divergence of the original positive-mass integral.',
+                                                  'test_harness_seconds':121.18,'process_wall_seconds':121.23372492892668,'peak_rss_kib':184372,
+                                                  'resources':'reports/validation/2026-10-09-finite-density-native-assembly/full-sunset-guard-refinement-resources.json',
+                                                  'accepted_predictions':0,'written_predictions':0,'full_amplitude_comparisons':0,'amf_oracle_comparisons':0},
                        'capabilities':['raised charged line','medium-vector numerator','nonzero upper Fermi surface','full massive assembly'],
-                       'evaluation_status':'partial_sectors_compared_full_two_cut_closure_unresolved'},
+                       'evaluation_status':'native_closure_passed_full_two_cut_endpoint_numerics_blocked'},
         'remaining_mandatory_cases':[
             {'case':'support_below_at_above_threshold','reference_status':'exact analytic compact one-loop moments and distributions are derivable; implement and test'},
             {'case':'independent_chemical_potentials','reference_status':'required_not_generated','definition':'examples/finite_density/two_independent_chemical_cycles.json','chemical_parameter_points':[['1','3/2'],['5/4','7/4']],'graph_certificates_by_species':multi_certificates,'reference_method':'Independent regulated complete-contour residues and arbitrary-precision subtracted spatial integration; target 12 absolute digits, attainable accuracy not established.'},
