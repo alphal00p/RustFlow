@@ -1,0 +1,21 @@
+{
+  "tag": "eta8-n32-d80",
+  "started_utc": "2026-10-10T10:15:06.324658+00:00",
+  "status": "completed",
+  "reservation_seconds": 180,
+  "receipt_sha256": "cf51f06337a7d0931b4397928e5151670f44e976eabd610fd04de629fdc6820d",
+  "profile": {
+    "dimension": "6.5",
+    "mu": "1",
+    "eta": "8",
+    "nodes": 32,
+    "digits": 80
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 16.650385065935552,
+  "charged_seconds": 16.650385065935552,
+  "finished_utc": "2026-10-10T10:15:22.976038+00:00",
+  "within_individual_budget": true,
+  "bound_inputs_unchanged": true,
+  "reference_sha256": "a25dba6ed3458ee8225d39c1132088f75bab738f62ef3584628409050a4db8a6"
+}

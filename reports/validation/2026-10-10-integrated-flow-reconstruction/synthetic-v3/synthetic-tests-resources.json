@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-integrated-fitter-20261010/fitter-tests",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.01607831008732319,
+  "user_seconds": 0.007332,
+  "system_seconds": 0.012957,
+  "peak_child_rss_kib": 15440,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

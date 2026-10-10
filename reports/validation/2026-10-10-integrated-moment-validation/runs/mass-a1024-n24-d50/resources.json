@@ -1,0 +1,22 @@
+{
+  "tag": "mass-a1024-n24-d50",
+  "started_utc": "2026-10-10T10:20:36.234066+00:00",
+  "status": "completed",
+  "reservation_seconds": 180,
+  "receipt_sha256": "a522b89a040947f6108b3c00a7bfcd8fcd2e0a717fd5bab78f493323b47cabed",
+  "profile": {
+    "dimension": "6.5",
+    "mu": "1",
+    "eta": "2",
+    "nodes": 24,
+    "digits": 50,
+    "physical_mass_squared": "1/1024"
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 17.10579965589568,
+  "charged_seconds": 17.10579965589568,
+  "finished_utc": "2026-10-10T10:20:53.340873+00:00",
+  "within_individual_budget": true,
+  "bound_inputs_unchanged": true,
+  "reference_sha256": "3d290ffafb2fc6c4d0b2c2146d5567dd6685dd71928be20b48806127fefa48d8"
+}

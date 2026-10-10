@@ -1,0 +1,13 @@
+
+running 7 tests
+test angular::tests::budget_failure_is_explicit ... ok
+test angular::tests::coupled_triangles_and_four_vector_cycle ... ok
+test angular::tests::degree_preflight_precedes_recursive_allocation ... ok
+test angular::tests::high_rank_without_pairing_enumeration ... ok
+test angular::tests::independent_parity_and_radial_factors ... ok
+test diagonal_powers_and_loop_permutations ... ok
+test independent_cartesian_three_and_four_vector_moments ... independent Cartesian cases: 1392
+ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.12s
+

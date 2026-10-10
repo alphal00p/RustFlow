@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/tmp/rustflow-integrated-moment-generator-20261010",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/prefix-half-7",
+    "7"
+  ],
+  "timeout_seconds": 180,
+  "build_sha256": "97fe2a536413172e3ec29cc7272ad903f5f6775d6b36ae4243c1bdeac038288d",
+  "references_loaded": false,
+  "exit_code": 0,
+  "wall_seconds": 0.7159363771788776,
+  "output": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/prefix-half-7/coefficients.json",
+    "sha256": "3aa080a982cb79973f5d1e94a1c86e4477c02f5998da7b901223606f19d08139",
+    "bytes": 249285
+  }
+}

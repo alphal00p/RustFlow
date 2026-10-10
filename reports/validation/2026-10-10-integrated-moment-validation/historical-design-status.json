@@ -1,0 +1,14 @@
+{
+  "schema": 1,
+  "initial_binding_is_historical_not_current_manifest": true,
+  "restored_initial_plan": {
+    "path": "historical/initial-plan.md",
+    "sha256": "a086360bdfd23254b546c077925f559d8779ebf8e56faa396ba141ca83439fd3",
+    "matches_original_binding": true
+  },
+  "initial_readme": {
+    "sha256": "696af19eee2c2271d49f7e17948a436b9656e0d535f730c262ab5e471028bd51",
+    "status": "Superseded mutable design prose; original bytes were not retained. This is a documentation provenance limitation, not a numerical/source binding."
+  },
+  "executed_evaluators_and_release_records": "All exact executed source hashes and producer copies retained; unchanged during each numerical run."
+}

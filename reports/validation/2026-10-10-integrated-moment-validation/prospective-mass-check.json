@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "status": "prospective; frozen before any nonzero physical-mass value",
+  "created_utc": "2026-10-10T10:20:10.287427+00:00",
+  "eta": "2",
+  "dimension": "13/2",
+  "mu": "1",
+  "physical_mass_squared": [
+    "0",
+    "1/256",
+    "1/1024",
+    "1/4096"
+  ],
+  "nodes_primary": 24,
+  "nodes_refinement": 32,
+  "refinement_masses": [
+    "0",
+    "1/4096"
+  ],
+  "digits": 50,
+  "components": [
+    "bulk",
+    "upper_surface",
+    "total"
+  ],
+  "definitions": {
+    "bulk": "(J(0)-J_fixed_radius(a))/a",
+    "upper_surface": "(J_fixed_radius(a)-J_moving_radius(a))/a",
+    "total": "(J(0)-J_moving_radius(a))/a"
+  },
+  "criteria": {
+    "final_mass_relative_error_max": "0.002",
+    "primary_errors_decrease_at_each_step": true,
+    "smallest_mass_node24_to32_relative_change_max": "0.000001",
+    "normalization_scale": "absolute analytic component; no cross-component cancellation in error tests"
+  },
+  "scope": "Independent sign and original-numerator/Fermi-surface derivative diagnostic, not 14-digit amplitude acceptance. No integer Richardson assumption.",
+  "numerical_budget": "shares existing cumulative 600 seconds; each profile <=180 seconds",
+  "source_hashes": {
+    "mass_derivative_reference.py": "8a8f756f84e79d9bf0d5e99b004ce04ada1add905fda1409b177f964de73866a",
+    "run-mass-check.py": "d9822b8850fad73a2f25866dceb2da56e71c6eada729898829a7cb66c2ea155f",
+    "finite_eta_reference.py": "beb3496df64975b327131d5ff421c7f5ca483e2e09072ce06ef53aed6b25a321"
+  },
+  "reference_baseline_sha256": "aa171bd44d4ac3ac0a45f453ed773da4ec2227cf8aef1f2174fb88a7583a786c",
+  "producer_release_sha256": "99f01028243fae0010cfc768b4b423cc39926b2c6f52709c5660ed446c338fde"
+}

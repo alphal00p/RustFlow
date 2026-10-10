@@ -1,0 +1,14 @@
+{
+  "recorded_utc": "2026-10-10T10:11:28.258493+00:00",
+  "before_any_physical_fit": true,
+  "approval": "Parent explicitly approved q=1 after source-bound parity/offset proof and 64 meaningful integer coefficients per branch; theta mode predetermined primary",
+  "original_protocol": "protocol.json",
+  "coefficient_count": 64,
+  "train": 48,
+  "heldout": 16,
+  "q1_requirement": "Explicit source-tied hard-reversal/parity and raw-target-offset proof, bound by grading_proof_identity and series_identity; fractional branch beta retained, beta=-q*alpha",
+  "search_caps_unchanged": true,
+  "primary_physical_fit": "direct theta",
+  "recurrence_status": "available synthetic/optional training-only diagnostic; not a new choice after holdout rejection",
+  "no_physical_fit_has_run": true
+}

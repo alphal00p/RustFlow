@@ -1,0 +1,76 @@
+{
+  "captured_utc": "2026-10-10T10:22:36.833172+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 1367,
+      "sha256": "24eff4353822abdf630fddf0db38ec65399d96ca5976be15d74c0e32883d4218"
+    },
+    {
+      "path": "angular-final.rs",
+      "bytes": 7527,
+      "sha256": "4d04a5a83831b4492e2d6c8f0c152395b6a44241dbee1b943bf002c67d307891"
+    },
+    {
+      "path": "build-review.py",
+      "bytes": 1404,
+      "sha256": "ac8dd6daa09014da839ebc1982ff4743166c54784049d038b988c8a08d83cf75"
+    },
+    {
+      "path": "build.json",
+      "bytes": 1617,
+      "sha256": "b0bf9441b643acc78218b4103f352d9c9b756d9f846a18b76dd4fe1f2126b979"
+    },
+    {
+      "path": "build.log",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "failed-build-1/build-review.py",
+      "bytes": 1342,
+      "sha256": "082f043a14c301aac0697a545e6a287fdec49d489ca1d92f4d3ec597d19c878a"
+    },
+    {
+      "path": "failed-build-1/build.json",
+      "bytes": 1392,
+      "sha256": "fc87d814d84c1a3e94fcd5c51b22fb4325d6f51648f9594ba9a18edb0facea5f"
+    },
+    {
+      "path": "failed-build-1/build.log",
+      "bytes": 7952,
+      "sha256": "b28115b384037eae786252d4d5f453a97e391d706bb370993d099e7787bf5465"
+    },
+    {
+      "path": "failed-build-1/review.rs",
+      "bytes": 3921,
+      "sha256": "b59618cae0d3d6b7ffaf50330bb60ae7194d71667e74ea07f6c7c9173e149048"
+    },
+    {
+      "path": "review.json",
+      "bytes": 2860,
+      "sha256": "8906a997b837b7abb133cc40ff77ee82c68b7fddd1c73862e6d0524d72b1e143"
+    },
+    {
+      "path": "review.rs",
+      "bytes": 3822,
+      "sha256": "2738c2976f35c7beddda9b4827c90e908c8ece37837ddaec79897ad8932ee0b8"
+    },
+    {
+      "path": "test-resources.json",
+      "bytes": 386,
+      "sha256": "84a14d9977c3132881f0e83ab71540ae9513cf8c4575b0e41c6f78a1375a53f4"
+    },
+    {
+      "path": "test-resources.log",
+      "bytes": 591,
+      "sha256": "12452f0502dd470da16b46c74af709b05f4654947cd86e04dc66cae7cbd95047"
+    },
+    {
+      "path": "test-resources.provenance.json",
+      "bytes": 788,
+      "sha256": "0240b5e7a98b43e7b6cccd6ef0beb3eb278f7c3586744377df1e05699617dc7a"
+    }
+  ],
+  "file_count": 14
+}

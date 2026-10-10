@@ -1,0 +1,54 @@
+{
+  "scalar": "0.000000000015105404625020667252904576167119541042216570114718",
+  "raised": "0.00000000002046493255364090264845937469750869409045029488255",
+  "raised_components": {
+    "measure": "0.0000000000040087505919490922552222881899118522029671094289888",
+    "original_numerator_derivative": "0.0000000000071203226932859967073219031977359458425484995961189",
+    "kernel_derivative": "0.00000000000013469266923016733487135881448857755643463008287789",
+    "upper_surface": "0.0000000000092011665991756463510438244953723184885000557745648"
+  },
+  "normalization": {
+    "spatial_angular_measure": "0.001179830888600382664470629411842116976328653599745",
+    "virtual_gaussian": "0.0010495465749996692766287334793282408507384268603156",
+    "raw_euclidean": true,
+    "cut_residue_jacobian": "1/(2*E) for each cut",
+    "routing_determinant": "1"
+  },
+  "quadrature_moment_checks": {
+    "checks": 15,
+    "max_relative_error": "4.0091470651382934692108047007272228182227953201576e-50"
+  },
+  "parameter_cross_checks": [
+    {
+      "h": "0.0",
+      "value_relative_error": "1.603658826055317387684321880290889127289118128063e-50",
+      "derivative_relative_error": "1.603658826055317387684321880290889127289118128063e-50"
+    },
+    {
+      "h": "1.0",
+      "value_relative_error": "5.6084542537866713458974530287550279347269796765793e-41",
+      "derivative_relative_error": "5.2896390714064201866011224638338552392984941414028e-39"
+    },
+    {
+      "h": "4.0",
+      "value_relative_error": "3.4311598412318627454213089881954456873992352914128e-28",
+      "derivative_relative_error": "1.8619281510439600504309982443672270600317522078011e-26"
+    }
+  ],
+  "schema": 1,
+  "status": "reference quadrature completed; refinement not yet assessed",
+  "scope": "validation only; no producer equation or coefficient used",
+  "profile": {
+    "dimension": "6.5",
+    "mu": "1",
+    "eta": "2",
+    "nodes": 24,
+    "digits": 50
+  },
+  "receipt_sha256": "7e729bf01b36e20f43a257c26304cd5b686f53e133f11bda272ab28d062f5235",
+  "evaluator_sha256": "beb3496df64975b327131d5ff421c7f5ca483e2e09072ce06ef53aed6b25a321",
+  "mpmath_version": "1.3.0",
+  "elapsed_seconds": 4.743920908775181,
+  "empirical_accuracy_only": true,
+  "values": "raw Euclidean two-cut contribution"
+}

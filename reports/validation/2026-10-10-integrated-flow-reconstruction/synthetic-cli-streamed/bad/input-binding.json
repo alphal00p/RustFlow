@@ -1,0 +1,17 @@
+{
+  "started_utc": "2026-10-10T10:15:40.456187+00:00",
+  "primary_family": "theta",
+  "selection": "smallest training-only shape (unknowns,theta order,t degree); ambiguity stops",
+  "max_total_fit_seconds": 300,
+  "executable": {
+    "path": "/tmp/rustflow-integrated-fitter-20261010/fitter",
+    "sha256": "e4411e0815078478ef95be9c19005d559b04357b74bd175c6c9bfae10ac9dea5"
+  },
+  "launcher_sha256": "b9bd0ad7136ad00cf940d204121cda66235aa21178c7386a727fd461fbe01277",
+  "training": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/train.json",
+    "sha256": "f66bc0387531669918c57e10f3ffc4f12c31e883b777021f29c850ea3323ccb0"
+  },
+  "holdout_path_not_opened": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad.json",
+  "identity_certified": false
+}

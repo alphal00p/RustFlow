@@ -1,0 +1,13 @@
+{
+  "stage": "digest",
+  "args": [
+    "digest",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli/bad/candidate.json"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "wall_seconds": 0.0026459679938852787,
+  "user_seconds": 0.0,
+  "system_seconds": 0.002142,
+  "cumulative_child_peak_rss_kib": 261188
+}

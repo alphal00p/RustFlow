@@ -1,0 +1,22 @@
+{
+  "tag": "mass-zero-n24-d50",
+  "started_utc": "2026-10-10T10:20:10.392269+00:00",
+  "status": "completed",
+  "reservation_seconds": 180,
+  "receipt_sha256": "4c333f7f99f0973595f123b28cdf236457df99826dd56d0dd59dd90046be213f",
+  "profile": {
+    "dimension": "6.5",
+    "mu": "1",
+    "eta": "2",
+    "nodes": 24,
+    "digits": 50,
+    "physical_mass_squared": "0"
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 8.683799531776458,
+  "charged_seconds": 8.683799531776458,
+  "finished_utc": "2026-10-10T10:20:19.077159+00:00",
+  "within_individual_budget": true,
+  "bound_inputs_unchanged": true,
+  "reference_sha256": "86ddeae157a1ff9419cc5165ad7667f0385b798bbe86c47e20353909d551ce72"
+}

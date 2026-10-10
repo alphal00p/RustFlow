@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "scope": "report-only conditional majorant and endpoint information bound; no producer/reference values used",
+  "report_sha256": "62cc926c50e78154e28f885161b58ccc041bd6a2fde25b8ca08881bd554ed850",
+  "primary_sources": [
+    "https://dlmf.nist.gov/1.10.E7",
+    "https://dlmf.nist.gov/1.10.i"
+  ],
+  "conclusion": "A finite-order UV distribution norm can bound a convergent large-eta germ; 64 terms do not alone certify endpoint accuracy, even with an ordinary Holder modulus.",
+  "production_changed": false
+}

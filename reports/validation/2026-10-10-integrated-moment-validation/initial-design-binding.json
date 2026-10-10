@@ -1,0 +1,28 @@
+{
+  "status": "initial design; actual native target binding and saved producer predictions pending",
+  "production_or_closure_runs": 0,
+  "reference_values_generated": 0,
+  "prediction_values_read": 0,
+  "exact_basis_check": "basis-crosscheck.json",
+  "source_artifacts_sha256": {
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "docs/finite-density-three-loop-reference.md": "4c7968fb28ee19cebbddf157668f3dbc32b13c87a6ffb2313fe0de72b0497d74",
+    "src/finite_density/basis.rs": "459f14bb294b5cc27fd4f43dbcda285c3bc9e24230515691ab90630d573a6484",
+    "src/finite_density/input.rs": "f825dfc202318753f0f9569a87c646dd7c41cc10ea110b5e9fb761e79c73bbf9",
+    "src/finite_density/geometry.rs": "dc42053054fcf8f98d78667e6a8e6d39bd1c66d817352abdbccd36f583521b07",
+    "src/finite_density/terminal.rs": "607025743c9a685edc062f12778e4dd43b35b09521e88429a27297c74e23b815",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/generate.rs": "6ff63d122c782b5c1f78ec18a198b5ac66e27f63818e331eec0e5ad797c5dee9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/exact_identities.rs": "6bb7181494076d3cc3dd47533862dfd882acb15c35c7381c9cadad8db12b8a57"
+  },
+  "primary_mathematical_sources": [
+    "https://dlmf.nist.gov/15.6.E1",
+    "https://dlmf.nist.gov/5.12.E1"
+  ],
+  "local_files_sha256": {
+    "check-basis.py": "d2681b97a9050693bf5a3c299e573ddfa137740d51cb7df3797b63f7cb18b61b",
+    "README.md": "696af19eee2c2271d49f7e17948a436b9656e0d535f730c262ab5e471028bd51",
+    "basis-crosscheck.json": "026d7497fc7758b94e56caae525dc90c1eae3404cf752d92711fd034d7d27336",
+    "plan.md": "a086360bdfd23254b546c077925f559d8779ebf8e56faa396ba141ca83439fd3"
+  },
+  "scope": "Validation-only. Parameter-integral formulas are not producer equation inputs or production subloop shortcuts. New reference evaluation waits for frozen saved predictions."
+}

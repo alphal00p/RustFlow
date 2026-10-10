@@ -1,0 +1,7 @@
+# Coefficient adapter interface
+
+`coefficient-interface.example.json` is a schema example, not physical data and not a zero certificate. Training contains exactly 48 known coefficients indexed 0..47; the distinct heldout file contains exactly 16 indexed 48..63. Both carry the same nonempty producer identity, q, dimension, ordered channel IDs and beta. Values are exact integer or p/q strings; decimals are rejected. Unknown coefficients may not be replaced by zero.
+
+The producer identity must bind input, target, cuts, eta placement, normalized hard/compact channel IDs, regulator order, dimension specialization, grading/parity proof, raw eta offsets, conditions and the generating source representation. The fitter checks identity equality; it does not independently establish that physical provenance. Channel beta is the exponent in t, including the whole eta prefactor. q may be 1 only with a nonempty source-bound `grading_proof_identity` proving parity/offset collapse; otherwise q=2. The complete branch exponent remains beta=-q*alpha, including raw target offsets. Current log_power=0 is an explicit implementation limit. The parent approved 64 meaningful integer coefficients per branch once that q=1 proof exists, before any physical fit.
+
+Only training is passed to `fit TRAIN CANDIDATE theta|recurrence`. Freeze candidate SHA256/BLAKE3 and deterministic selection record before `validate CANDIDATE FROZEN_BLAKE3 TRAIN HOLDOUT REPORT`. A holdout mismatch is terminal under this dataset protocol; no tuning against that holdout. No physical fit has been run.

@@ -1,0 +1,15 @@
+{
+  "stage": "fit",
+  "args": [
+    "fit",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli/train.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli/good/candidate.json",
+    "theta"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "wall_seconds": 0.007387503050267696,
+  "user_seconds": 0.0019249999999999998,
+  "system_seconds": 0.004815,
+  "cumulative_child_peak_rss_kib": 261188
+}

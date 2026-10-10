@@ -1,0 +1,10 @@
+{
+  "frozen_utc": "2026-10-10T10:15:40.406744+00:00",
+  "sha256": "1e60c15946b4f3d73a1aae918191ae729fa4e00f7aa1ba7781c7d7999f42549f",
+  "blake3": "b478fb06666e2a70bff3660a44decdda72111e7e324a7e7836ed625b41ad0458",
+  "candidate_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/good/candidate.json",
+  "training_sha256": "f66bc0387531669918c57e10f3ffc4f12c31e883b777021f29c850ea3323ccb0",
+  "heldout_read": false,
+  "selection_from_training_only": true,
+  "identity_certified": false
+}

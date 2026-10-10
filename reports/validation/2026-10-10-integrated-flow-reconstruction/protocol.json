@@ -1,0 +1,35 @@
+{
+  "phase": "design fixed before any physical sequence fit",
+  "dimension": "13/2",
+  "epsilon": "-5/4 when D=4-2*epsilon",
+  "producer_pilot": {
+    "max_coefficients": 24,
+    "seconds": 180
+  },
+  "producer_extension": {
+    "max_coefficients": 64,
+    "seconds": 900,
+    "requires_feasible_pilot": true
+  },
+  "training_indices": [
+    0,
+    47
+  ],
+  "heldout_indices": [
+    48,
+    63
+  ],
+  "holdout_access": "after training-selected candidate JSON/hash freeze; failure is terminal for this dataset protocol",
+  "max_recurrence_shift": 4,
+  "max_recurrence_degree": 4,
+  "max_direct_theta_order": 4,
+  "max_theta_polynomial_degree": 4,
+  "max_fit_unknowns": 25,
+  "minimum_excess_training_equations": 8,
+  "max_fit_seconds": 300,
+  "max_certificate_seconds": 300,
+  "max_retained_monomials": 200000,
+  "max_serialized_algebra_bytes": 134217728,
+  "cas_scratch_bounded": false,
+  "mathematical_status": "No candidate, coefficient fit, telescoper, physical ODE, or numerical acceptance has been produced."
+}

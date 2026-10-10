@@ -1,0 +1,6 @@
+{
+  "captured_utc": "2026-10-10T10:15:40.680931+00:00",
+  "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad.json",
+  "sha256": "8585a7253badfbe0cef181597534994e81eb7ae101797d583bec442479e6eeda",
+  "candidate_freeze_sha256": "7244afd37ad6a579b168f9503f0e431f316e220fe19320549ba958a0521333ad"
+}

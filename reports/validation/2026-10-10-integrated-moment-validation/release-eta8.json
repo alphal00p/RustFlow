@@ -1,0 +1,72 @@
+{
+  "schema": 1,
+  "status": "frozen producer integrated predictions; reference generation released",
+  "dimension": "6.5",
+  "mu": "1",
+  "predictions_are_integrated_coefficients": true,
+  "equation_may_still_be_pending": true,
+  "authorized_reference_eta": [
+    "8"
+  ],
+  "native_conversion_audit": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/native-conversion-audit.json",
+    "sha256": "a5c6c76d781db384b1bf0206b3781bbb961afd6319e9a3e6b2703d4252422510"
+  },
+  "producer_metadata": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/census.json",
+    "sha256": "6dee4d13c593b96ff7e15e88707ddd65edc40406acf90fa8e78d9ec47ee87095"
+  },
+  "input": {
+    "path": "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+  },
+  "producer_integrated_predictions": [
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/coefficients.json",
+      "sha256": "3aa080a982cb79973f5d1e94a1c86e4477c02f5998da7b901223606f19d08139",
+      "kind": "integrated moment coefficients"
+    }
+  ],
+  "producer_source_bindings": [
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/freeze.json",
+      "sha256": "b4f54a88e8424e31d94fb6963b085eabfc16d2de208bd75b0290b723273191a7"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/generator-build.json",
+      "sha256": "97fe2a536413172e3ec29cc7272ad903f5f6775d6b36ae4243c1bdeac038288d"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/producer-run.json",
+      "sha256": "31335c65c106982f48917d7aec1530c11445a861cba413ff6f632a7c2ed7d128"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/algebra.rs",
+      "sha256": "36c208366b5c0c5232c3e43b2a4e431585c8307e73584812a116eebe12e00597"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/census.rs",
+      "sha256": "69824e12d0d595b74fe94f02cf01f7d8467e4eb9ff722f8ce363ba22def220e3"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/coefficient.rs",
+      "sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/cut_regions.rs",
+      "sha256": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/generate.rs",
+      "sha256": "53e5a60bb5c824fd7fa763a7412a9bca0b92b10375c140bce2aeba04bcdb04a3"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/moments.rs",
+      "sha256": "0a25cdc191127fa418718782fd33400725906508beaaf47d7b8b487bb2c6299f"
+    }
+  ],
+  "prospective_validation_amendment": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/prospective-validation-amendment.json",
+    "sha256": "c25212eb8479c6612b952bf16881812eb699f79e16b5ca93810e999b73e809ee"
+  }
+}

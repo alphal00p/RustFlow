@@ -1,0 +1,131 @@
+{
+  "passed": 3,
+  "checks": [
+    "good holdout",
+    "false holdout rejected",
+    "identical frozen candidates"
+  ],
+  "identity_certified": false,
+  "results": [
+    {
+      "case": "good",
+      "summary": {
+        "finished_utc": "2026-10-10T10:15:40.411785+00:00",
+        "status": "heldout_pass_candidate_only",
+        "cumulative_wall_seconds": 0.7030161381699145,
+        "holdout_access_started": true,
+        "identity_certified": false,
+        "runs": [
+          {
+            "stage": "fit",
+            "args": [
+              "fit",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/train.json",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/good/candidate.json",
+              "theta"
+            ],
+            "exit_code": 0,
+            "timeout": false,
+            "wall_seconds": 0.004128463100641966,
+            "user_seconds": 0.0,
+            "system_seconds": 0.0035689999999999997,
+            "cumulative_child_peak_rss_kib": 15428
+          },
+          {
+            "stage": "digest",
+            "args": [
+              "digest",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/good/candidate.json"
+            ],
+            "exit_code": 0,
+            "timeout": false,
+            "wall_seconds": 0.002749138046056032,
+            "user_seconds": 0.0,
+            "system_seconds": 0.002238,
+            "cumulative_child_peak_rss_kib": 15428
+          },
+          {
+            "stage": "validate",
+            "args": [
+              "validate",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/good/candidate.json",
+              "b478fb06666e2a70bff3660a44decdda72111e7e324a7e7836ed625b41ad0458",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/train.json",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/good.json",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/good/holdout-result.json"
+            ],
+            "exit_code": 0,
+            "timeout": false,
+            "wall_seconds": 0.004069773014634848,
+            "user_seconds": 0.0017829999999999999,
+            "system_seconds": 0.0017870000000000004,
+            "cumulative_child_peak_rss_kib": 15428
+          }
+        ],
+        "no_retry_after_holdout": true,
+        "algebra_caps": "200000 retained monomials / 128MiB canonical payload; not CAS scratch"
+      },
+      "stdout": "{\"status\": \"heldout_pass_candidate_only\", \"report\": \"/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/good\", \"identity_certified\": false}\n"
+    },
+    {
+      "case": "bad",
+      "summary": {
+        "finished_utc": "2026-10-10T10:15:40.681195+00:00",
+        "status": "heldout_rejected_protocol_stops",
+        "cumulative_wall_seconds": 0.22501711267977953,
+        "holdout_access_started": true,
+        "identity_certified": false,
+        "runs": [
+          {
+            "stage": "fit",
+            "args": [
+              "fit",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/train.json",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad/candidate.json",
+              "theta"
+            ],
+            "exit_code": 0,
+            "timeout": false,
+            "wall_seconds": 0.004006172064691782,
+            "user_seconds": 0.0008529999999999999,
+            "system_seconds": 0.002581,
+            "cumulative_child_peak_rss_kib": 15428
+          },
+          {
+            "stage": "digest",
+            "args": [
+              "digest",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad/candidate.json"
+            ],
+            "exit_code": 0,
+            "timeout": false,
+            "wall_seconds": 0.0026170993223786354,
+            "user_seconds": 0.001046,
+            "system_seconds": 0.001046,
+            "cumulative_child_peak_rss_kib": 15428
+          },
+          {
+            "stage": "validate",
+            "args": [
+              "validate",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad/candidate.json",
+              "b478fb06666e2a70bff3660a44decdda72111e7e324a7e7836ed625b41ad0458",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/train.json",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad.json",
+              "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad/holdout-result.json"
+            ],
+            "exit_code": 0,
+            "timeout": false,
+            "wall_seconds": 0.003781781066209078,
+            "user_seconds": 0.001136,
+            "system_seconds": 0.0022909999999999996,
+            "cumulative_child_peak_rss_kib": 15428
+          }
+        ],
+        "no_retry_after_holdout": true,
+        "algebra_caps": "200000 retained monomials / 128MiB canonical payload; not CAS scratch"
+      },
+      "stdout": "{\"status\": \"heldout_rejected_protocol_stops\", \"report\": \"/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad\", \"identity_certified\": false}\n"
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs:114:42
+    |
+114 |         let mut a=AngularAverager::new(3,parse!("d"),200000).unwrap();
+    |                                          ^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs:121:15
+    |
+121 |         let d=parse!("d");
+    |               ^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs:124:53
+    |
+124 |         equal(a.monomial(&[0,2,2,0,2,0]).unwrap().1,parse!("(d+8)/(d^2*(d+2)^2)"));
+    |                                                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs:125:42
+    |
+125 |         let mut b=AngularAverager::new(4,parse!("d"),200000).unwrap();
+    |                                          ^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs:127:61
+    |
+127 |         equal(b.monomial(&[0,1,0,1,0,1,0,0,1,0]).unwrap().1,parse!("1/d^3"));
+    |                                                             ^^^^^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs:131:42
+    |
+131 |         let mut a=AngularAverager::new(2,parse!("11/2"),200000).unwrap();
+    |                                          ^^^^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs:134:72
+    |
+134 |         let expected=(0..64).fold(Atom::one(),|a,j|a*Atom::num(2*j+1)/(parse!("11/2")+Atom::num(2*j)));
+    |                                                                        ^^^^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs:139:42
+    |
+139 |         let mut a=AngularAverager::new(3,parse!("d"),1).unwrap();
+    |                                          ^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs:144:42
+    |
+144 |         let mut a=AngularAverager::new(2,parse!("d"),200000).unwrap();
+    |                                          ^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs:147:42
+    |
+147 |         let mut b=AngularAverager::new(2,parse!("d"),200000).unwrap().with_max_total_degree(16).unwrap();
+    |                                          ^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-angular-review/review.rs:63:53
+   |
+63 |     let mut ave=angular::AngularAverager::new(loops,parse!("11/2"),200000).unwrap();
+   |                                                     ^^^^^^^^^^^^^^
+   |
+   = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+   = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+   = note: this error originates in the macro `env` which comes from the expansion of the macro `parse` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: aborting due to 11 previous errors
+

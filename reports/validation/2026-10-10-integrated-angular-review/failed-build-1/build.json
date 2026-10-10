@@ -1,0 +1,35 @@
+{
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--test",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-angular-review/review.rs",
+    "-C",
+    "opt-level=2",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "--extern",
+    "symbolica=/tmp/rustflow-integrated-fitter-20261010/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "-o",
+    "/tmp/rustflow-angular-independent-review-tests"
+  ],
+  "exit_code": 1,
+  "wall_seconds": 0.19294210290536284,
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/angular-aggregate/angular.rs",
+    "sha256": "4d04a5a83831b4492e2d6c8f0c152395b6a44241dbee1b943bf002c67d307891"
+  },
+  "review": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-angular-review/review.rs",
+    "sha256": "b59618cae0d3d6b7ffaf50330bb60ae7194d71667e74ea07f6c7c9173e149048"
+  },
+  "dependency": {
+    "path": "/tmp/rustflow-integrated-fitter-20261010/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af"
+  },
+  "shared_target_writes": false
+}

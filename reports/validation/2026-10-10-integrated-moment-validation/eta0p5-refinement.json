@@ -1,0 +1,226 @@
+{
+  "schema": 1,
+  "status": "reference accuracy unresolved",
+  "profile": {
+    "dimension": "6.5",
+    "mu": "1",
+    "eta": "0.5",
+    "nodes": 32,
+    "digits": 80
+  },
+  "inputs": [
+    {
+      "run": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/runs/eta0p5-n16-d50",
+      "reference_sha256": "5427ec7ffa66fb93e3d0da1d888aa3aa1ed561731bf1bc13310c86482afff3d3",
+      "resources_sha256": "ac93221e929ab4aba7a1c267673ae484490a9184bec9b251db207fb60eb31533",
+      "receipt_sha256": "70f29b60a22194f98e61b4b6e3f190beed2b9cb1ac159be4a3d0be390b5a731a"
+    },
+    {
+      "run": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/runs/eta0p5-n24-d50",
+      "reference_sha256": "97e6a51dd55d0fd1496adb8b287bd22185ebfbe86d2e21b26046fb6a9f227c66",
+      "resources_sha256": "0a8a57ef9b72cb260873dcf124695b9d5e0d66548cb7322043c8f523065dd261",
+      "receipt_sha256": "59152c1b58f8d6ad289f9c2197316dd9535b7006c6468eba21c4d410cbf228c8"
+    },
+    {
+      "run": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/runs/eta0p5-n32-d50",
+      "reference_sha256": "cdfe99624728da20ed2e417b64b2ac4eccfd20c209165a1976e4bd9bbc63893c",
+      "resources_sha256": "66d45677eae7cf41ea2f4d88700de76157f73e7724a8079c6e7e7fcb443bb3a0",
+      "receipt_sha256": "85073e7c011c1a5649d521d59f4951df014a25fc889986fdd2990e38f1deaee1"
+    },
+    {
+      "run": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/runs/eta0p5-n32-d80",
+      "reference_sha256": "da70c49030d4bde8dc6c7d0748903a4d0f24c03f5b12dd672eff187e1cbb8f7b",
+      "resources_sha256": "cd1b89bbb9dd34a9d3b78a3c64e1e34ff7cd9e75578f0616b535b8ae4495b6a5",
+      "receipt_sha256": "f296743870213ba1fc320944079a0a049fbf4169c8ff82682e5de6ab60b19b82"
+    }
+  ],
+  "assessor_sha256": "bd3208cb68e8033cffc80f2bbdf730dd6f7e90933cd38dbeb22a06fada837561",
+  "refinement_checks": [
+    {
+      "kind": "node refinement 16 to 24",
+      "component": "scalar",
+      "absolute_error": "1.65591694758421175869747109745190891780E-23",
+      "relative_error": "2.329808489879468362954695728827866820191015660912307238298446978371492745772421860762267788878054534E-12",
+      "limit": "7.1075238792261414909156028059626654048860218689068E-26",
+      "passed": false
+    },
+    {
+      "kind": "node refinement 16 to 24",
+      "component": "raised",
+      "absolute_error": "1.14436069899626706969995999508587283436E-23",
+      "relative_error": "1.213139891638910441497979180010197449539591340555842658600533294036767603931534073988095052755038186E-12",
+      "limit": "9.4330481330580512166471922528950224177284850111482E-26",
+      "passed": false
+    },
+    {
+      "kind": "node refinement 16 to 24",
+      "component": "measure",
+      "absolute_error": "1.1052018280928082485921789288729799460E-24",
+      "relative_error": "5.970784739524206981409457743501348033175998615553361502425293445024842716296093491427047402110412375E-13",
+      "limit": "1.8510160327449324511405833580020321124153526082742E-26",
+      "passed": false
+    },
+    {
+      "kind": "node refinement 16 to 24",
+      "component": "original_numerator_derivative",
+      "absolute_error": "8.1826258195817043032954030107623064996E-24",
+      "relative_error": "2.450393885833838712337673432339529453657408432979745058841767750156911852784556761530593252986331163E-12",
+      "limit": "3.339310413271480233145181807343008070762639804269E-26",
+      "passed": false
+    },
+    {
+      "kind": "node refinement 16 to 24",
+      "component": "kernel_derivative",
+      "absolute_error": "4.8622424871482351359181644966813975897E-25",
+      "relative_error": "4.010792326800055504926433174714951295317542627284386596290919093821732743652350007779642532955618518E-12",
+      "limit": "1.2122897649571138717438180727222087406598330274524E-27",
+      "passed": false
+    },
+    {
+      "kind": "node refinement 16 to 24",
+      "component": "upper_surface",
+      "absolute_error": "1.90072552301663902652946404824161946563E-23",
+      "relative_error": "4.611740591337534454157106103412358729302749904945798399644333041272103399226275640964169229013428574E-12",
+      "limit": "4.1214927105545959952553418080946485799449397421184E-26",
+      "passed": false
+    },
+    {
+      "kind": "node refinement 24 to 32",
+      "component": "scalar",
+      "absolute_error": "1.298093484722829115076363572162481E-28",
+      "relative_error": "1.826365281046602579563697287684908492405648644970389649010335019466984694983702017061482941324354900E-17",
+      "limit": "7.1075238792261416207249512782455769125223790851549E-26",
+      "passed": true
+    },
+    {
+      "kind": "node refinement 24 to 32",
+      "component": "raised",
+      "absolute_error": "1.339529138070887324439924137291866E-28",
+      "relative_error": "1.420038485098090259579039715601476672743547825596532911898450677559530462312246599249307113312677397E-17",
+      "limit": "9.4330481330466076096572295821980228177776262828046E-26",
+      "passed": true
+    },
+    {
+      "kind": "node refinement 24 to 32",
+      "component": "measure",
+      "absolute_error": "8.6147423167720070568663416285379E-30",
+      "relative_error": "4.654061425930528811478748393684962662175227178082371307157646101053394283692448012196333894023251437E-18",
+      "limit": "1.8510160327438272493124905497534399334864796283282E-26",
+      "passed": true
+    },
+    {
+      "kind": "node refinement 24 to 32",
+      "component": "original_numerator_derivative",
+      "absolute_error": "6.44968018540110903383473350416822E-29",
+      "relative_error": "1.931440742905490687029728628496840626445979478519783329516122103564245011722060991028491121466216481E-17",
+      "limit": "3.3393104132714802976419836613540984091099748459512E-26",
+      "passed": true
+    },
+    {
+      "kind": "node refinement 24 to 32",
+      "component": "kernel_derivative",
+      "absolute_error": "3.47034486548406041980141482934274E-30",
+      "relative_error": "2.862636446994030106551848011421671042736784712220403613020602596585975622158766724705464548974528935E-17",
+      "limit": "1.2122897649571139064472667275628129386739813208798E-27",
+      "passed": true
+    },
+    {
+      "kind": "node refinement 24 to 32",
+      "component": "upper_surface",
+      "absolute_error": "1.933053182098118761452748219716736E-28",
+      "relative_error": "4.690177365003559942997115784520050753854587123969274836374161761695754475446276330813825148080693035E-17",
+      "limit": "4.1214927105355887400251754178293539394625235474621E-26",
+      "passed": true
+    },
+    {
+      "kind": "precision refinement 50 to 80",
+      "component": "scalar",
+      "absolute_error": "6.4659435396152088272694603906E-63",
+      "relative_error": "9.097322287602659078779145279971510720998614202155744107693742433154998921668027203308219867163285142E-52",
+      "limit": "7.1075238792261416207249512782455769125223790851549E-26",
+      "passed": true
+    },
+    {
+      "kind": "precision refinement 50 to 80",
+      "component": "raised",
+      "absolute_error": "5.59528438606562959603517422487E-62",
+      "relative_error": "5.931576206490225079234147437174031683362722057802263379318016565969044087939385159972844150730207725E-51",
+      "limit": "9.433048133046607475704315775109290373785212553618E-26",
+      "passed": true
+    },
+    {
+      "kind": "precision refinement 50 to 80",
+      "component": "measure",
+      "absolute_error": "4.39903464358830059511771806332E-62",
+      "relative_error": "2.376551345731702968440624052753240221912578403997912153031290936891529974506905564005038245003134227E-50",
+      "limit": "1.8510160327438272406977482329814328766201379997903E-26",
+      "passed": true
+    },
+    {
+      "kind": "precision refinement 50 to 80",
+      "component": "original_numerator_derivative",
+      "absolute_error": "5.3720919936237959469781741255E-63",
+      "relative_error": "1.608742922572695232549710300941168851635327108887890105063356677219161590699632262101526981369489427E-51",
+      "limit": "3.3393104132714802976419836613540984091099748459512E-26",
+      "passed": true
+    },
+    {
+      "kind": "precision refinement 50 to 80",
+      "component": "kernel_derivative",
+      "absolute_error": "1.68121787018728398303539292411E-63",
+      "relative_error": "1.386811898264899504323065056703533345641083503964278290479255511448020672514490428970989796133416953E-50",
+      "limit": "1.2122897649571139064472667275628129386739813208798E-27",
+      "passed": true
+    },
+    {
+      "kind": "precision refinement 50 to 80",
+      "component": "upper_surface",
+      "absolute_error": "1.50908124390377899208390054341E-62",
+      "relative_error": "3.661491963933799305700886716203371934329633790732822660984270495127498647481609767224427166985251886E-51",
+      "limit": "4.1214927105355885467198572080174777941877015757885150908124390377899208390054341E-26",
+      "passed": true
+    }
+  ],
+  "independent_parameter_checks": [
+    {
+      "h": "0.0",
+      "kind": "value_relative_error",
+      "error": "4.2168791772922092897394296205080076030839845529474030200311052100432577163879038E-81",
+      "passed": true
+    },
+    {
+      "h": "0.0",
+      "kind": "derivative_relative_error",
+      "error": "4.2168791772922092897394296205080076030839845529474030200311052100432577163879038E-81",
+      "passed": true
+    },
+    {
+      "h": "1.0",
+      "kind": "value_relative_error",
+      "error": "1.9190090535900651241451509552840793566088958553546729448130564407743859044837083E-36",
+      "passed": true
+    },
+    {
+      "h": "1.0",
+      "kind": "derivative_relative_error",
+      "error": "1.3982056749268423376982962162607528243827156229858117882775809163369819808817392E-34",
+      "passed": true
+    },
+    {
+      "h": "4.0",
+      "kind": "value_relative_error",
+      "error": "4.3584950875479926246178636032355692373245174307868703540173628927648330345111695E-23",
+      "passed": true
+    },
+    {
+      "h": "4.0",
+      "kind": "derivative_relative_error",
+      "error": "4.7045489276303075395957617468915592646984220183730149386897486214923782238010614E-21",
+      "passed": true
+    }
+  ],
+  "rigorous_error_bound": false,
+  "native_or_producer_comparison_performed": false,
+  "criterion": "14 relative digits; absolute 1e-27 when both magnitudes below 1e-20; independently varied node count and arithmetic precision",
+  "scope": "scalar, raised total and all four raised components; two-cut raw Euclidean reference only"
+}

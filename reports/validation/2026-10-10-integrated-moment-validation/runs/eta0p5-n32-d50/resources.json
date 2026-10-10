@@ -1,0 +1,21 @@
+{
+  "tag": "eta0p5-n32-d50",
+  "started_utc": "2026-10-10T10:16:32.254735+00:00",
+  "status": "completed",
+  "reservation_seconds": 180,
+  "receipt_sha256": "85073e7c011c1a5649d521d59f4951df014a25fc889986fdd2990e38f1deaee1",
+  "profile": {
+    "dimension": "6.5",
+    "mu": "1",
+    "eta": "0.5",
+    "nodes": 32,
+    "digits": 50
+  },
+  "exit_code": 0,
+  "elapsed_seconds": 14.644353308714926,
+  "charged_seconds": 14.644353308714926,
+  "finished_utc": "2026-10-10T10:16:46.900027+00:00",
+  "within_individual_budget": true,
+  "bound_inputs_unchanged": true,
+  "reference_sha256": "cdfe99624728da20ed2e417b64b2ac4eccfd20c209165a1976e4bd9bbc63893c"
+}

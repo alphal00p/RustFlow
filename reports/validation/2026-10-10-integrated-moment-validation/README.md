@@ -1,0 +1,13 @@
+# Integrated-moment independent validation
+
+The independent finite-eta reference is frozen. Both original targets and all four raised components pass the predeclared node/precision refinement criterion at eta 8 and eta 2. Eta 1/2 remains unresolved: the initial 16→24 node change reaches 4.61e-12, above the required 1e-14 relative reference threshold. No tolerance was relaxed and no extra node40 grid was run.
+
+The original physical-mass check at eta 2 passes all nine prospective checks. One-sided masses 2^-8, 2^-10 and 2^-12 separately approach the bulk derivative, positive moving Fermi surface and their total. The largest final relative mass-step error is 7.14e-4, within the predeclared 2e-3 diagnostic limit; the independent node24→32 change is below 7.3e-12. This verifies the fixed-original-numerator/surface treatment at diagnostic accuracy, not a twelve-digit mass derivative or a production flow.
+
+Eighteen numerical reference runs consumed 249.18 seconds of the fixed 600-second budget; every run stayed below 180 seconds. `summary.json` and the individual receipt/resource/provenance files bind every result. All reference accuracy estimates are empirical, not rigorous bounds.
+
+Before any reference number was generated, `producer-freeze/` saved the first integrated coefficient artifact, actual native census and exact generator sources/build binding. The reference driver hashed coefficient bytes without parsing their values or passing them to the evaluator. Actual conversion checks passed for all 39 factor/mass/deformation equalities, three signed target terms and 108 exact raised-jet identities. For this fixture only, the numerator uses unchanged completion factors, so N_eta=N.
+
+`eta8-refinement.json`, `eta2-refinement.json`, `eta0p5-refinement.json` and `physical-mass-check.json` are the result entry points. `finite_eta_reference.py` uses validation-only compact/parameter quadrature and a virtual first-moment identity; none of this formula or its values is a producer equation input. The initial blocked release test and all prospective profiles are retained. The historical initial README hash lacks its superseded prose bytes; this documentation limitation is explicit in `historical-design-status.json`. Executed source and numerical provenance are complete.
+
+`remainder-assessment.md` gives a conditional finite UV-subtraction norm and Cauchy bound for a large-eta analytic germ, together with a quantitative obstruction to a generic 64-term endpoint guarantee. There is no producer partial-sum comparison, certified ODE, transport, endpoint/Laurent acceptance, production edit or weighted closure run in this report. Any later comparison belongs to a separate report and must preserve the producer/reference separation.

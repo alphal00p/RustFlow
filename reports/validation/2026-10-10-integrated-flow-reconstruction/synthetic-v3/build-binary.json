@@ -1,0 +1,51 @@
+{
+  "started_utc": "2026-10-10T10:11:38.473088+00:00",
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/source/fit.rs",
+    "-C",
+    "opt-level=2",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "--extern",
+    "symbolica=/tmp/rustflow-integrated-fitter-20261010/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/tmp/rustflow-integrated-fitter-20261010/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "blake3=/tmp/rustflow-integrated-fitter-20261010/libblake3-d00e8c4219217a2f.rlib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "-o",
+    "/tmp/rustflow-integrated-fitter-20261010/fitter"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 5.898321860935539,
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/source/fit.rs",
+    "sha256": "a88a0922ac0162f4e95b38eaf581043cd9208e71dc2916833ef96d64e397f63c"
+  },
+  "direct_dependencies": {
+    "symbolica": {
+      "path": "/tmp/rustflow-integrated-fitter-20261010/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af"
+    },
+    "serde_json": {
+      "path": "/tmp/rustflow-integrated-fitter-20261010/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95"
+    },
+    "blake3": {
+      "path": "/tmp/rustflow-integrated-fitter-20261010/libblake3-d00e8c4219217a2f.rlib",
+      "sha256": "96689a81fb034207b83e1107c759fa4365cb7e47364cf619db132bfc744ebd29"
+    }
+  },
+  "shared_target_writes": false,
+  "log": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/build-binary.log",
+  "compiler": "rustc 1.97.1 (8bab26f4f 2026-07-14) (built from a source tarball)",
+  "executable": {
+    "path": "/tmp/rustflow-integrated-fitter-20261010/fitter",
+    "sha256": "190ac5fbfd7b3aaaf218e816d17686a72cb2aaad6fd0ec7bd6832e99ff2a8ff1"
+  }
+}

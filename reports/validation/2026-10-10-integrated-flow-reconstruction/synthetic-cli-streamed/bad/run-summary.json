@@ -1,0 +1,56 @@
+{
+  "finished_utc": "2026-10-10T10:15:40.681195+00:00",
+  "status": "heldout_rejected_protocol_stops",
+  "cumulative_wall_seconds": 0.22501711267977953,
+  "holdout_access_started": true,
+  "identity_certified": false,
+  "runs": [
+    {
+      "stage": "fit",
+      "args": [
+        "fit",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/train.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad/candidate.json",
+        "theta"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.004006172064691782,
+      "user_seconds": 0.0008529999999999999,
+      "system_seconds": 0.002581,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "digest",
+      "args": [
+        "digest",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad/candidate.json"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.0026170993223786354,
+      "user_seconds": 0.001046,
+      "system_seconds": 0.001046,
+      "cumulative_child_peak_rss_kib": 15428
+    },
+    {
+      "stage": "validate",
+      "args": [
+        "validate",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad/candidate.json",
+        "b478fb06666e2a70bff3660a44decdda72111e7e324a7e7836ed625b41ad0458",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/train.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli-streamed/bad/holdout-result.json"
+      ],
+      "exit_code": 0,
+      "timeout": false,
+      "wall_seconds": 0.003781781066209078,
+      "user_seconds": 0.001136,
+      "system_seconds": 0.0022909999999999996,
+      "cumulative_child_peak_rss_kib": 15428
+    }
+  ],
+  "no_retry_after_holdout": true,
+  "algebra_caps": "200000 retained monomials / 128MiB canonical payload; not CAS scratch"
+}

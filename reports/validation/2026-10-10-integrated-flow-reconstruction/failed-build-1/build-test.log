@@ -1,0 +1,25 @@
+error[E0382]: use of partially moved value: `a`
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/source/fit.rs:426:32
+    |
+422 |         ah.id = a.id;
+    |                 ---- value partially moved here
+...
+426 |             validate_holdout(&[a, b], &[ah, bh], &op).unwrap()["status"],
+    |                                ^ value used here after partial move
+    |
+    = note: partial move occurs because `a.id` has type `std::string::String`, which does not implement the `Copy` trait
+
+error[E0382]: use of partially moved value: `b`
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/source/fit.rs:426:35
+    |
+424 |         bh.id = b.id;
+    |                 ---- value partially moved here
+425 |         assert_eq!(
+426 |             validate_holdout(&[a, b], &[ah, bh], &op).unwrap()["status"],
+    |                                   ^ value used here after partial move
+    |
+    = note: partial move occurs because `b.id` has type `std::string::String`, which does not implement the `Copy` trait
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0382`.

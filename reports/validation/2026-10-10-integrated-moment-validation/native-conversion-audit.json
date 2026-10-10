@@ -1,0 +1,22 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "scope": "exact actual prepared conversion and fixed-original numerator jet audit; no numerical integration",
+  "metadata": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/census.json",
+  "metadata_sha256": "6dee4d13c593b96ff7e15e88707ddd65edc40406acf90fa8e78d9ec47ee87095",
+  "input_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+  "basis_crosscheck_sha256": "026d7497fc7758b94e56caae525dc90c1eae3404cf752d92711fd034d7d27336",
+  "audit_source_sha256": "66bb79e69a00e7e71c957b000e7190d2542134eb3530b5e3adf515c74ea1c5aa",
+  "actual_input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+  "factor_checks": 39,
+  "target_terms": 3,
+  "rational_jet_checks": 54,
+  "special_case_N_eta_equals_N": true,
+  "generic_equality_claim": false,
+  "mass_conversion_coefficient_derivatives": "zero for this fixture only",
+  "wick_signs": "scalar (-1)^5=-1; raised (-1)^6 times degree-two numerator Wick sign -1=-1",
+  "normalization_bridge": "Three ordinary Minkowski factors Wick-rotate with three minus signs; combined with scalar coefficient -1 the Euclidean scalar kernel is positive. The Minkowski C2 is +d/da C1, while the original Euclidean numerator is the negative of its continued polynomial, reproducing -d/da at fixed original N.",
+  "upper_surface": "positive from -d/da Theta(mu-E1); C2H0 acts on support despite original upper indices zero",
+  "producer_coefficients_read": false,
+  "reference_values_generated": false
+}

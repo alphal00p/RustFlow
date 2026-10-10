@@ -1,0 +1,54 @@
+{
+  "scalar": "0.000000000015105404625020667252904576167145524708273195743135",
+  "raised": "0.000000000020464932553640902648459374697318336078389424419789",
+  "raised_components": {
+    "measure": "0.0000000000040087505919490922552222881899059067597621085112019",
+    "original_numerator_derivative": "0.0000000000071203226932859967073219031977487701895652669148912",
+    "kernel_derivative": "0.0000000000001346926692301673348713588144844085458197303699507",
+    "upper_surface": "0.0000000000092011665991756463510438244951792505832423186237454"
+  },
+  "normalization": {
+    "spatial_angular_measure": "0.001179830888600382664470629411842116976328653599745",
+    "virtual_gaussian": "0.0010495465749996692766287334793282408507384268603156",
+    "raw_euclidean": true,
+    "cut_residue_jacobian": "1/(2*E) for each cut",
+    "routing_determinant": "1"
+  },
+  "quadrature_moment_checks": {
+    "checks": 15,
+    "max_relative_error": "8.0182941302765869384216094014544456364455906403151e-51"
+  },
+  "parameter_cross_checks": [
+    {
+      "h": "0.0",
+      "value_relative_error": "0.0",
+      "derivative_relative_error": "0.0"
+    },
+    {
+      "h": "1.0",
+      "value_relative_error": "0.0",
+      "derivative_relative_error": "2.672764710092195646140536467151481878815196880105e-51"
+    },
+    {
+      "h": "4.0",
+      "value_relative_error": "1.9190090535900667543917061634433665517190103950843e-36",
+      "derivative_relative_error": "1.3982056749268423134121711236684783587609846817027e-34"
+    }
+  ],
+  "schema": 1,
+  "status": "reference quadrature completed; refinement not yet assessed",
+  "scope": "validation only; no producer equation or coefficient used",
+  "profile": {
+    "dimension": "6.5",
+    "mu": "1",
+    "eta": "2",
+    "nodes": 32,
+    "digits": 50
+  },
+  "receipt_sha256": "ea51ec526f5b6a3940b0735b3c43b3cf5499027a4402f5fc2ac799d4ae757aa9",
+  "evaluator_sha256": "beb3496df64975b327131d5ff421c7f5ca483e2e09072ce06ef53aed6b25a321",
+  "mpmath_version": "1.3.0",
+  "elapsed_seconds": 14.06976939085871,
+  "empirical_accuracy_only": true,
+  "values": "raw Euclidean two-cut contribution"
+}

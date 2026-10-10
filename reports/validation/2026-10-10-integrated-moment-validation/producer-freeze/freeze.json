@@ -1,0 +1,89 @@
+{
+  "status": "first integrated predictions frozen before reference generation",
+  "created_utc": "2026-10-10T10:13:19.588134+00:00",
+  "copies": [
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/algebra.rs",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/algebra.rs",
+      "sha256": "36c208366b5c0c5232c3e43b2a4e431585c8307e73584812a116eebe12e00597"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/census.rs",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/census.rs",
+      "sha256": "69824e12d0d595b74fe94f02cf01f7d8467e4eb9ff722f8ce363ba22def220e3"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/coefficient.rs",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/coefficient.rs",
+      "sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/cut_regions.rs",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/cut_regions.rs",
+      "sha256": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/generate.rs",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/generate.rs",
+      "sha256": "53e5a60bb5c824fd7fa763a7412a9bca0b92b10375c140bce2aeba04bcdb04a3"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/moments.rs",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/source/moments.rs",
+      "sha256": "0a25cdc191127fa418718782fd33400725906508beaaf47d7b8b487bb2c6299f"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/generator-build.json",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/generator-build.json",
+      "sha256": "97fe2a536413172e3ec29cc7272ad903f5f6775d6b36ae4243c1bdeac038288d"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/prefix-half-7/run.json",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/producer-run.json",
+      "sha256": "31335c65c106982f48917d7aec1530c11445a861cba413ff6f632a7c2ed7d128"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/prefix-half-7/coefficients.json",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/coefficients.json",
+      "sha256": "3aa080a982cb79973f5d1e94a1c86e4477c02f5998da7b901223606f19d08139"
+    },
+    {
+      "original": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/census.json",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/producer-freeze/census.json",
+      "sha256": "6dee4d13c593b96ff7e15e88707ddd65edc40406acf90fa8e78d9ec47ee87095"
+    }
+  ],
+  "dependencies_verified": {
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    "symbolica_amflow": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "sha256": "b7b2beaf983314c86123d5cef173d93faa8b605f1648cce72c340ec9a6d80687",
+      "bytes": 656665206
+    },
+    "rustred": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+      "sha256": "dc3c900d6fcf11c2996d0d599266eae8c7f3f71f925995b711bf8181e1a5c515",
+      "bytes": 436276538
+    },
+    "ahash": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libahash-76fd751102bca1d4.rlib",
+      "sha256": "ab9d642561dfd1454547310cf19db76a0ee961b1988116e2c8cb38c0400f987f",
+      "bytes": 298226
+    }
+  },
+  "executable_verified": {
+    "path": "/tmp/rustflow-integrated-moment-generator-20261010",
+    "sha256": "1888f46bff214b55b33a91a1a9bc255050ef379218a3dfb17c8a386f0ec8a127",
+    "bytes": 1245500064
+  },
+  "coefficient_values_parsed": false
+}

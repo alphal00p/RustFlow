@@ -1,0 +1,136 @@
+{
+  "status": "passed independent exact rational basis cross-check; native emitted metadata still required",
+  "input": "examples/finite_density/massless_three_loop_chain.json",
+  "input_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+  "coordinates": [
+    "g1_1",
+    "g1_2",
+    "g1_3",
+    "g2_2",
+    "g2_3",
+    "g3_3",
+    "u1",
+    "u2",
+    "u3"
+  ],
+  "physical_routing_rows": [
+    [
+      "1",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "0",
+      "1",
+      "0",
+      "0",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "0",
+      "0",
+      "0",
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "1",
+      "0",
+      "-2",
+      "0",
+      "0",
+      "1",
+      "0",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "0",
+      "1",
+      "-2",
+      "1",
+      "0",
+      "0",
+      "0"
+    ]
+  ],
+  "physical_rank": 5,
+  "completion_slots": {
+    "5": "g1_2",
+    "6": "u1",
+    "7": "u2",
+    "8": "u3"
+  },
+  "converted_original_numerator": "rho_5 + rho_6*rho_7",
+  "coefficient_mass_derivatives": "zero for this specific numerator because these completion coordinates contain no independent masses",
+  "shifted_physical_slots": [
+    1,
+    2,
+    4
+  ],
+  "numerator_slots_shifted": [],
+  "special_case_off_endpoint_equality": "N_eta=N follows for this fixture after actual native output confirms the same basis; it is not assumed for other numerators",
+  "scalar_powers": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    0,
+    0
+  ],
+  "raised_numerator_terms_before_wick": [
+    {
+      "coefficient": "1",
+      "indices": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "coefficient": "1",
+      "indices": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0
+      ]
+    }
+  ],
+  "method": "Fraction Gaussian elimination on exact original routing, reproducing documented deterministic physical-then-coordinate completion; no production routine imported",
+  "integration_performed": false,
+  "ode_inferred": false,
+  "reference_values_generated": false,
+  "native_prediction_values_read": false,
+  "source_sha256": "d2681b97a9050693bf5a3c299e573ddfa137740d51cb7df3797b63f7cb18b61b"
+}

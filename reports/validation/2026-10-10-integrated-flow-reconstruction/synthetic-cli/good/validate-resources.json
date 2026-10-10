@@ -1,0 +1,17 @@
+{
+  "stage": "validate",
+  "args": [
+    "validate",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli/good/candidate.json",
+    "b478fb06666e2a70bff3660a44decdda72111e7e324a7e7836ed625b41ad0458",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli/train.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli/good.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-flow-reconstruction/synthetic-cli/good/holdout-result.json"
+  ],
+  "exit_code": 0,
+  "timeout": false,
+  "wall_seconds": 0.0033812611363828182,
+  "user_seconds": 0.0,
+  "system_seconds": 0.003013000000000001,
+  "cumulative_child_peak_rss_kib": 261188
+}

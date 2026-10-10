@@ -1,0 +1,51 @@
+{
+  "scope": "Read-only API audit for integrated coefficient reconstruction; no production edits or fitting run.",
+  "files": [
+    {
+      "path": "/common/dev/rustflow_fermi/src/algebra.rs",
+      "sha256": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/src/ode.rs",
+      "sha256": "a8284f864932de6df4767c5286d9b153ab8ac4c0c0fb4c61f93769465a9e50c3"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/src/ode/pade.rs",
+      "sha256": "7ed7df0759c1f54595312b97561140669e007c8244cb04bfc33aa4176511bade"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/src/engine/supplied.rs",
+      "sha256": "79df6631a7baf5a90064be5cf88cf382879030d1360508089c881f91fa32f212"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/src/frobenius/recurrence.rs",
+      "sha256": "a499145a238dca8939343ed52b3a8268cc6cb73cba95760dd2bbe743806f1028"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/src/finite_density/flow_boundary.rs",
+      "sha256": "f97e44c9324b7f2bb687e7cf9bf9d008b0c1428bea841e4bbe97f46e9854c855"
+    },
+    {
+      "path": "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/lib/numerica/src/tensors/matrix.rs",
+      "sha256": "dd73530736a2254981df4a8bfdb277aaf4b7bc8260385c563301205aab27b550"
+    },
+    {
+      "path": "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/poly/series.rs",
+      "sha256": "1e9b1237e32c882445a92db70beb2283333274a65399ea13bf7c29d97ad87516"
+    },
+    {
+      "path": "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/poly/gcd.rs",
+      "sha256": "35332a1b91b5b970c0b3a86f0b3a03aedad1e8ee9026d380b67a35e0f7a3b357"
+    }
+  ],
+  "api_locations": {
+    "symbolica_matrix_constructor": "lib/numerica/src/tensors/matrix.rs:978",
+    "symbolica_exact_rref": "lib/numerica/src/tensors/matrix.rs:2004",
+    "rustflow_exact_nullspace": "src/algebra.rs:36",
+    "ordinary_system_compile": "src/ode.rs:392",
+    "ordinary_transport": "src/ode.rs:619",
+    "supplied_identity_trust_boundary": "src/engine/supplied.rs:5",
+    "pade_exact_source_requirement": "src/ode/pade.rs:1",
+    "occupied_half_order_limit": "src/finite_density/flow_boundary.rs:86"
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "captured_utc": "2026-10-10T10:16:40.888329+00:00",
+  "physical_fit_run": false,
+  "identity_certified": false,
+  "native_unit_tests": 11,
+  "cli_checks": 3,
+  "native_test_resources": "synthetic-tests-resources.json",
+  "cli_report": "synthetic-cli-streamed/result.json",
+  "source": {
+    "path": "source/fit.rs",
+    "sha256": "a5fee1b37c77311b78f14ccaef3f3195412e52fcac49c4a32b07e1d860402c27"
+  },
+  "executable": {
+    "path": "/tmp/rustflow-integrated-fitter-20261010/fitter",
+    "sha256": "e4411e0815078478ef95be9c19005d559b04357b74bd175c6c9bfae10ac9dea5"
+  },
+  "primary_mode": "theta",
+  "fixed_dimension": "13/2",
+  "training": 48,
+  "heldout": 16,
+  "q1_requires_bound_proof": true,
+  "shared_target_writes": false,
+  "production_edits": false,
+  "future_work": "Await producer split exact physical coefficients and grading/normalization/source identity; candidate fitting is not a certificate."
+}

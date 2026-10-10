@@ -1,0 +1,29 @@
+{
+  "schema": 1,
+  "status": "waiting for producer integrated coefficients; not released",
+  "dimension": "6.5",
+  "mu": "1",
+  "predictions_are_integrated_coefficients": false,
+  "equation_may_still_be_pending": true,
+  "authorized_reference_eta": [
+    "8"
+  ],
+  "native_conversion_audit": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/native-conversion-audit.json",
+    "sha256": "a5c6c76d781db384b1bf0206b3781bbb961afd6319e9a3e6b2703d4252422510"
+  },
+  "producer_metadata": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/census.json",
+    "sha256": "6dee4d13c593b96ff7e15e88707ddd65edc40406acf90fa8e78d9ec47ee87095"
+  },
+  "input": {
+    "path": "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+  },
+  "producer_integrated_predictions": [],
+  "producer_source_bindings": [],
+  "prospective_validation_amendment": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/prospective-validation-amendment.json",
+    "sha256": "c25212eb8479c6612b952bf16881812eb699f79e16b5ca93810e999b73e809ee"
+  }
+}

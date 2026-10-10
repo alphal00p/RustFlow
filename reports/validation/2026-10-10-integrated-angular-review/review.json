@@ -1,0 +1,43 @@
+{
+  "reviewed_utc": "2026-10-10T10:22:36.831057+00:00",
+  "angular_source_sha256": "4d04a5a83831b4492e2d6c8f0c152395b6a44241dbee1b943bf002c67d307891",
+  "mathematical_findings": {
+    "genericity": "Independent unit-sphere Gram monomials; no preferred invariant, cut topology or fixed tensor rank. Dimension dependence is exact rational/meromorphic; numerical pole exclusions remain caller obligations.",
+    "multiplicity": "The first remaining labelled endpoint is paired once; choosing a partner type j contributes rest[j] choices. Recursing on remaining counts and aggregating identical Gram monomials preserves labelled Wick multiplicity. Equal-type pair gives unit norm, not an extra dimension factor.",
+    "vertex_order": "Upper-triangular slots are lexicographic. First active edge picks the least incident vertex, so no incoming edge from a smaller vertex remains; scanning a==i removes every incident edge.",
+    "parity": "An odd total degree in any independent direction integrates to zero by reflection. Diagonal Gram powers add two degrees and only change the radial output.",
+    "resource_scope": "Final total-degree<=512 preflight bounds recursion before allocation; early result-map guard improves explicit failure. Retained_entries counts cached graph/average entries, not canonical Q(d) monomials, bytes, parent temporary maps or CAS scratch. The producer must retain separate algebra payload/time caps.",
+    "no_blocker": true
+  },
+  "executed_tests": {
+    "total": 7,
+    "inherited": 5,
+    "independent": 2,
+    "exact_cartesian_moment_cases": 1392,
+    "cartesian_dimensions": [
+      1,
+      2,
+      3,
+      5
+    ],
+    "vector_counts": [
+      3,
+      4
+    ],
+    "loop_permutations": 4,
+    "resources": "test-resources.json",
+    "scope": "Cartesian Gram expansion plus independent separable sphere-coordinate moments from normalized Gaussian moments; not the reviewed Wick recursion."
+  },
+  "gaussian_adapter_read_only": {
+    "no_immediate_blocker": true,
+    "cut_relation": "g_ii^p C_n=C_(n-p), zero for p>=n, matches normalized repository cuts; applied before spatial expansion",
+    "off_diagonal_sign": "(E_i E_j - spatial_ij)^p gives (-1)^s binomial terms",
+    "virtual_rank1": "Only exact mean -A^-1 B is needed; degree>1 explicitly rejected so covariance is not silently omitted",
+    "eta_scaling": "U^p V^n has alpha degree hp+(h+1)n; dimension shift h(n+p) cancels this to eta^-n",
+    "limits": "Separate Gram-dimension-shift sign proof and exact initial native-region prefix comparison are required; this static review does not replace them.",
+    "live_caches": "The producer currently checks report bytes and cache entries; neither alone proves a global owned canonical-algebra byte bound."
+  },
+  "physical_coefficients_read": false,
+  "fitter_manifest_changed": false,
+  "production_changes": false
+}

@@ -1,0 +1,20 @@
+{
+  "schema": 1,
+  "status": "physical-mass diagnostic quadrature completed",
+  "profile": {
+    "dimension": "6.5",
+    "mu": "1",
+    "eta": "2",
+    "nodes": 24,
+    "digits": 50,
+    "physical_mass_squared": "1/1024"
+  },
+  "fixed_radius_unraised_original_numerator": "0.0000000000045022477239996198236521069224778713684036831629818",
+  "moving_radius_unraised_original_numerator": "0.0000000000044932878420471374146627439590481939563373053500057",
+  "moving_radius": "0.99951159948246723686456457287809430594336637100519",
+  "elapsed_seconds": 16.752969953231514,
+  "receipt_sha256": "a522b89a040947f6108b3c00a7bfcd8fcd2e0a717fd5bab78f493323b47cabed",
+  "evaluator_sha256": "8a8f756f84e79d9bf0d5e99b004ce04ada1add905fda1409b177f964de73866a",
+  "support_evaluator_sha256": "beb3496df64975b327131d5ff421c7f5ca483e2e09072ce06ef53aed6b25a321",
+  "scope": "Validation only. Original g1_2+u1*u2 and mu fixed; physical mass varied before shell substitution. No producer coefficients read."
+}

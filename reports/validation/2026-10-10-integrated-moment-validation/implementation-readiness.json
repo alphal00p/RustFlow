@@ -1,0 +1,60 @@
+{
+  "schema": 1,
+  "status": "prepared; numerical execution awaits integrated predictions",
+  "source_bindings": [
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/finite_eta_reference.py",
+      "sha256": "beb3496df64975b327131d5ff421c7f5ca483e2e09072ce06ef53aed6b25a321"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/run-reference.py",
+      "sha256": "c95e60b0040636057f38407815250533a361bc1f17e84e46d31a103b41f91585"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/assess-reference.py",
+      "sha256": "bd3208cb68e8033cffc80f2bbdf730dd6f7e90933cd38dbeb22a06fada837561"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/audit-native-conversion.py",
+      "sha256": "66bb79e69a00e7e71c957b000e7190d2542134eb3530b5e3adf515c74ea1c5aa"
+    }
+  ],
+  "metadata_audit": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/native-conversion-audit.json",
+    "sha256": "a5c6c76d781db384b1bf0206b3781bbb961afd6319e9a3e6b2703d4252422510"
+  },
+  "prospective_grid": [
+    {
+      "nodes": 16,
+      "digits": 50
+    },
+    {
+      "nodes": 24,
+      "digits": 50
+    },
+    {
+      "nodes": 32,
+      "digits": 50
+    },
+    {
+      "nodes": 32,
+      "digits": 80
+    }
+  ],
+  "initial_eta": "8",
+  "other_eta_requires_separate_release": [
+    "2",
+    "0.5"
+  ],
+  "individual_timeout_seconds": 180,
+  "cumulative_reference_budget_seconds": 600,
+  "reference_values_generated": false,
+  "syntax_checks": 4,
+  "arbitrary_precision_runtime": "mpmath 1.3.0, existing Nix Python; no installed dependency or production import",
+  "limitations": [
+    "No physical producer coefficients exist yet.",
+    "Exact moment heldouts and ODE/transport comparisons are separate future gates.",
+    "Refinement estimates are empirical; no certified quadrature bound.",
+    "Only real positive eta and D=13/2 currently admitted by evaluator."
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "60",
+    "/tmp/rustflow-angular-independent-review-tests",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.13470812095329165,
+  "user_seconds": 0.120005,
+  "system_seconds": 0.017866999999999997,
+  "peak_child_rss_kib": 15428,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

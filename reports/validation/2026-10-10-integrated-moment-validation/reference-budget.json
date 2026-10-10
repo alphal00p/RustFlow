@@ -1,0 +1,391 @@
+{
+  "schema": 1,
+  "maximum_cumulative_seconds": 600,
+  "maximum_run_seconds": 180,
+  "runs": [
+    {
+      "tag": "eta8-n16-d50",
+      "started_utc": "2026-10-10T10:13:19.673277+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "a845060162cb4b1055221f5d7dd6e66aed2e84f5de1b811d92e3500b8d488299",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "8",
+        "nodes": 16,
+        "digits": 50
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 1.4174992498010397,
+      "charged_seconds": 1.4174992498010397,
+      "finished_utc": "2026-10-10T10:13:21.091872+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "bf7cec93b6c1aea2e1725031fbd94b13d11e0a88e9bfab30d212f3c6e0526054"
+    },
+    {
+      "tag": "eta8-n24-d50",
+      "started_utc": "2026-10-10T10:14:46.350333+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "199ae994070857228246508d2e5fa66248c8b77804cc962dfdc58ee57803f873",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "8",
+        "nodes": 24,
+        "digits": 50
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 5.124629097990692,
+      "charged_seconds": 5.124629097990692,
+      "finished_utc": "2026-10-10T10:14:51.475927+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "e69ead6331ae9439313f0912b5eab1e7571d26c880e5f1b6b8bf6338c43c60cb"
+    },
+    {
+      "tag": "eta8-n32-d50",
+      "started_utc": "2026-10-10T10:14:51.548392+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "224731ebe7e989a289e3c61b915755883e0485e72baf002328e994d4214b0a8e",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "8",
+        "nodes": 32,
+        "digits": 50
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 14.696941928006709,
+      "charged_seconds": 14.696941928006709,
+      "finished_utc": "2026-10-10T10:15:06.246170+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "2ce9f1642e5a37bab544685668a89748659759af4c76820bff0e1a79ed858c28"
+    },
+    {
+      "tag": "eta8-n32-d80",
+      "started_utc": "2026-10-10T10:15:06.324658+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "cf51f06337a7d0931b4397928e5151670f44e976eabd610fd04de629fdc6820d",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "8",
+        "nodes": 32,
+        "digits": 80
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 16.650385065935552,
+      "charged_seconds": 16.650385065935552,
+      "finished_utc": "2026-10-10T10:15:22.976038+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "a25dba6ed3458ee8225d39c1132088f75bab738f62ef3584628409050a4db8a6"
+    },
+    {
+      "tag": "eta2-n16-d50",
+      "started_utc": "2026-10-10T10:15:47.871295+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "b74f2db7d52cfc343ccd8fa75910496ae3e7aaebde6f305df95925677fd259b3",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "2",
+        "nodes": 16,
+        "digits": 50
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 1.417304570786655,
+      "charged_seconds": 1.417304570786655,
+      "finished_utc": "2026-10-10T10:15:49.289550+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "c3b09f8862c5576e781a04f2d6e60dc25a5410bf6f673da374266ec65b881fb3"
+    },
+    {
+      "tag": "eta2-n24-d50",
+      "started_utc": "2026-10-10T10:15:49.361677+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "7e729bf01b36e20f43a257c26304cd5b686f53e133f11bda272ab28d062f5235",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "2",
+        "nodes": 24,
+        "digits": 50
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 5.0743827521800995,
+      "charged_seconds": 5.0743827521800995,
+      "finished_utc": "2026-10-10T10:15:54.436937+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "7483841aedcdb6415616cbc8c9cff786c9de47ea937a7189d51444649fabfd3d"
+    },
+    {
+      "tag": "eta2-n32-d50",
+      "started_utc": "2026-10-10T10:15:54.508512+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "ea51ec526f5b6a3940b0735b3c43b3cf5499027a4402f5fc2ac799d4ae757aa9",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "2",
+        "nodes": 32,
+        "digits": 50
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 14.39449172699824,
+      "charged_seconds": 14.39449172699824,
+      "finished_utc": "2026-10-10T10:16:08.903864+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "18703061dc1dd84a47afde799521f1836f7adbbb7a96c9650d6ec49e8a09db61"
+    },
+    {
+      "tag": "eta2-n32-d80",
+      "started_utc": "2026-10-10T10:16:08.975430+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "a5041dfde4795fffb43ccbdec2b0f977078037556e5cb70699c068d8d5176dfb",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "2",
+        "nodes": 32,
+        "digits": 80
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 16.450749165844172,
+      "charged_seconds": 16.450749165844172,
+      "finished_utc": "2026-10-10T10:16:25.427052+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "aa171bd44d4ac3ac0a45f453ed773da4ec2227cf8aef1f2174fb88a7583a786c"
+    },
+    {
+      "tag": "eta0p5-n16-d50",
+      "started_utc": "2026-10-10T10:16:25.564634+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "70f29b60a22194f98e61b4b6e3f190beed2b9cb1ac159be4a3d0be390b5a731a",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "0.5",
+        "nodes": 16,
+        "digits": 50
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 1.417076569981873,
+      "charged_seconds": 1.417076569981873,
+      "finished_utc": "2026-10-10T10:16:26.982601+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "5427ec7ffa66fb93e3d0da1d888aa3aa1ed561731bf1bc13310c86482afff3d3"
+    },
+    {
+      "tag": "eta0p5-n24-d50",
+      "started_utc": "2026-10-10T10:16:27.054432+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "59152c1b58f8d6ad289f9c2197316dd9535b7006c6468eba21c4d410cbf228c8",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "0.5",
+        "nodes": 24,
+        "digits": 50
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 5.125250521115959,
+      "charged_seconds": 5.125250521115959,
+      "finished_utc": "2026-10-10T10:16:32.180561+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "97e6a51dd55d0fd1496adb8b287bd22185ebfbe86d2e21b26046fb6a9f227c66"
+    },
+    {
+      "tag": "eta0p5-n32-d50",
+      "started_utc": "2026-10-10T10:16:32.254735+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "85073e7c011c1a5649d521d59f4951df014a25fc889986fdd2990e38f1deaee1",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "0.5",
+        "nodes": 32,
+        "digits": 50
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 14.644353308714926,
+      "charged_seconds": 14.644353308714926,
+      "finished_utc": "2026-10-10T10:16:46.900027+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "cdfe99624728da20ed2e417b64b2ac4eccfd20c209165a1976e4bd9bbc63893c"
+    },
+    {
+      "tag": "eta0p5-n32-d80",
+      "started_utc": "2026-10-10T10:16:46.973995+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "f296743870213ba1fc320944079a0a049fbf4169c8ff82682e5de6ab60b19b82",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "0.5",
+        "nodes": 32,
+        "digits": 80
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 16.44644398521632,
+      "charged_seconds": 16.44644398521632,
+      "finished_utc": "2026-10-10T10:17:03.421369+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "da70c49030d4bde8dc6c7d0748903a4d0f24c03f5b12dd672eff187e1cbb8f7b"
+    },
+    {
+      "tag": "mass-zero-n24-d50",
+      "started_utc": "2026-10-10T10:20:10.392269+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "4c333f7f99f0973595f123b28cdf236457df99826dd56d0dd59dd90046be213f",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "2",
+        "nodes": 24,
+        "digits": 50,
+        "physical_mass_squared": "0"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 8.683799531776458,
+      "charged_seconds": 8.683799531776458,
+      "finished_utc": "2026-10-10T10:20:19.077159+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "86ddeae157a1ff9419cc5165ad7667f0385b798bbe86c47e20353909d551ce72"
+    },
+    {
+      "tag": "mass-a256-n24-d50",
+      "started_utc": "2026-10-10T10:20:19.157493+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "28ced404ce794564e71a987c5907d06867b06aed0b7f48fb565fcbb839a4d8a8",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "2",
+        "nodes": 24,
+        "digits": 50,
+        "physical_mass_squared": "1/256"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 17.00122776813805,
+      "charged_seconds": 17.00122776813805,
+      "finished_utc": "2026-10-10T10:20:36.159745+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "984579f13ea67fda3cea429d98405d546fdb507ea21b46fa076785b172dfe2e3"
+    },
+    {
+      "tag": "mass-a1024-n24-d50",
+      "started_utc": "2026-10-10T10:20:36.234066+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "a522b89a040947f6108b3c00a7bfcd8fcd2e0a717fd5bab78f493323b47cabed",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "2",
+        "nodes": 24,
+        "digits": 50,
+        "physical_mass_squared": "1/1024"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 17.10579965589568,
+      "charged_seconds": 17.10579965589568,
+      "finished_utc": "2026-10-10T10:20:53.340873+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "3d290ffafb2fc6c4d0b2c2146d5567dd6685dd71928be20b48806127fefa48d8"
+    },
+    {
+      "tag": "mass-a4096-n24-d50",
+      "started_utc": "2026-10-10T10:20:53.415897+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "5ed0d79a4e4fd03fe5afbaabb2e59c10aa92b811b9961a8fb80280fc4111bade",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "2",
+        "nodes": 24,
+        "digits": 50,
+        "physical_mass_squared": "1/4096"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 16.809802250936627,
+      "charged_seconds": 16.809802250936627,
+      "finished_utc": "2026-10-10T10:21:10.226691+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "f0f3299607ced67594e3d00eca5ec513cfd3a25ada71b491f4550fd9245f4255"
+    },
+    {
+      "tag": "mass-zero-n32-d50",
+      "started_utc": "2026-10-10T10:21:10.314920+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "d4300efdedc77775e4797ffe253e4d69db885cf8f69b8fefaecd9372d95adb1d",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "2",
+        "nodes": 32,
+        "digits": 50,
+        "physical_mass_squared": "0"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 25.574746788013726,
+      "charged_seconds": 25.574746788013726,
+      "finished_utc": "2026-10-10T10:21:35.890715+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "be9de705c17c540ab21cb19729c4e2d8bc98fae337faec0c42a2f45ee5b67a21"
+    },
+    {
+      "tag": "mass-a4096-n32-d50",
+      "started_utc": "2026-10-10T10:21:35.968284+00:00",
+      "status": "completed",
+      "reservation_seconds": 180,
+      "receipt_sha256": "a100b5db8607839f54ce107af8e29922767cf62d09300e4ba41c18b75f6be463",
+      "profile": {
+        "dimension": "6.5",
+        "mu": "1",
+        "eta": "2",
+        "nodes": 32,
+        "digits": 50,
+        "physical_mass_squared": "1/4096"
+      },
+      "exit_code": 0,
+      "elapsed_seconds": 51.143888351041824,
+      "charged_seconds": 51.143888351041824,
+      "finished_utc": "2026-10-10T10:22:27.113113+00:00",
+      "within_individual_budget": true,
+      "bound_inputs_unchanged": true,
+      "reference_sha256": "bbcce957c4fcacbbae3033e2cf3b01b6fe553fb2473a5ace0d4976f2b07c0cb9"
+    }
+  ]
+}

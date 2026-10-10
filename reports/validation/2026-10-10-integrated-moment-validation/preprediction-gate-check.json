@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "status": "passed rejection before numerical child launch",
+  "command": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/run-reference.py",
+    "--release",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/release-template.json",
+    "--eta",
+    "8",
+    "--nodes",
+    "16",
+    "--digits",
+    "50",
+    "--tag",
+    "must-not-run-before-predictions"
+  ],
+  "exit_code": 1,
+  "stdout": "",
+  "stderr": "Traceback (most recent call last):\n  File \"/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/run-reference.py\", line 119, in <module>\n    if __name__=='__main__':main()\n                            ~~~~^^\n  File \"/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-validation/run-reference.py\", line 37, in main\n    assert release['schema']==1 and release['status']=='frozen producer integrated predictions; reference generation released'\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+  "driver_sha256": "c95e60b0040636057f38407815250533a361bc1f17e84e46d31a103b41f91585",
+  "template_sha256": "14c223d9b3159d37d61de389d329b8745b38b8d5416dd6a5899f89ad3cb2e056",
+  "numerical_child_started": false,
+  "reference_values_generated": false,
+  "budget_consumed_seconds": 0,
+  "reason": "Release status explicitly awaits integrated producer predictions."
+}

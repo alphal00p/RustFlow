@@ -1,0 +1,188 @@
+{
+  "schema": 1,
+  "status": "frozen independent reference evidence; no producer series/ODE comparison",
+  "created_utc": "2026-10-10T10:24:50.185209+00:00",
+  "fixed_input_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+  "dimension": "13/2",
+  "cut_slots": [
+    0,
+    3
+  ],
+  "shifted_slots": [
+    1,
+    2,
+    4
+  ],
+  "physical_targets": "unchanged scalar and raised slot0 g1_2+u1*u2",
+  "reference_refinement": {
+    "eta8": {
+      "status": "empirical reference refinement passed",
+      "report_sha256": "e8e580a60b51f41f14c46ea4a2052013f501fbcbe54d64815e3520649b146582",
+      "largest_relative_refinement": "2.117192633862530228552285676136219066860817102807806214144166093000246291081638066101257932630181934E-30"
+    },
+    "eta2": {
+      "status": "empirical reference refinement passed",
+      "report_sha256": "8324b8ade11032736c7d5633e4bffbc1e903610203f05a55e28bbadd50fc777c",
+      "largest_relative_refinement": "1.066250751337364313570471503190445677212175429587337230793235310804917149313786348635745827501955739E-19"
+    },
+    "eta0p5": {
+      "status": "reference accuracy unresolved",
+      "report_sha256": "6569d68dd555352c8a854534e02d4b0733e190247865f4e2acd65ea00de2b65b",
+      "largest_relative_refinement": "4.611740591337534454157106103412358729302749904945798399644333041272103399226275640964169229013428574E-12"
+    }
+  },
+  "physical_mass_check": {
+    "status": "physical mass and Fermi-surface diagnostic passed",
+    "checks": 9,
+    "report_sha256": "22fb0fe2fe04d7f981aaa8b24158a8056211564bd1623d04570ff834d80bf50b",
+    "maximum_final_relative_mass_error": "0.0007135432495628362718098418103898436370874494962947545276995346675159862944997572755229212151474710",
+    "maximum_node_refinement_relative_change": "7.256288067139456761305341548730066478247314010498189876013328415340237262037396907526767332634075781E-12"
+  },
+  "reference_runs": 18,
+  "cumulative_reference_seconds": 249.1787722883746,
+  "maximum_individual_reference_seconds": 51.143888351041824,
+  "budget_seconds": {
+    "individual": 180,
+    "cumulative": 600
+  },
+  "all_saved_run_bindings_verified": [
+    {
+      "tag": "eta8-n16-d50",
+      "reference_sha256": "bf7cec93b6c1aea2e1725031fbd94b13d11e0a88e9bfab30d212f3c6e0526054",
+      "resources_sha256": "e732a76dfbfb635f9bbc87a7e6ef7b2d21367550b053b97696e907f13833650f",
+      "receipt_sha256": "a845060162cb4b1055221f5d7dd6e66aed2e84f5de1b811d92e3500b8d488299",
+      "provenance_sha256": "02c91bc3555d28f3a449b478c90f78e52de9130d5cd5ba0b37ef190e5e33961b"
+    },
+    {
+      "tag": "eta8-n24-d50",
+      "reference_sha256": "e69ead6331ae9439313f0912b5eab1e7571d26c880e5f1b6b8bf6338c43c60cb",
+      "resources_sha256": "a25694b89ce0cacea830a3d0b320585845cd29e8d756954940e918dc10fc872b",
+      "receipt_sha256": "199ae994070857228246508d2e5fa66248c8b77804cc962dfdc58ee57803f873",
+      "provenance_sha256": "a73f8c672788906f1cee5ae83dc68124ba9b2bf9a2a903f2fede5f02d27d160d"
+    },
+    {
+      "tag": "eta8-n32-d50",
+      "reference_sha256": "2ce9f1642e5a37bab544685668a89748659759af4c76820bff0e1a79ed858c28",
+      "resources_sha256": "ebfa38c93ae67b7a0695671928d578c02c3bc5128b205ac20e7d74ee541321d4",
+      "receipt_sha256": "224731ebe7e989a289e3c61b915755883e0485e72baf002328e994d4214b0a8e",
+      "provenance_sha256": "b9f1018058fe619d047c7faddf7d08341bfbac0ef788b85af16a9a8921396379"
+    },
+    {
+      "tag": "eta8-n32-d80",
+      "reference_sha256": "a25dba6ed3458ee8225d39c1132088f75bab738f62ef3584628409050a4db8a6",
+      "resources_sha256": "311547e10cc97a158d4201601ee1082e5a05d2cd15a42fd7c1fcdf6a10cca81e",
+      "receipt_sha256": "cf51f06337a7d0931b4397928e5151670f44e976eabd610fd04de629fdc6820d",
+      "provenance_sha256": "a9b987ac2899c5cd49ed05717475947ec4134e82065b2458d0e241330910fc6c"
+    },
+    {
+      "tag": "eta2-n16-d50",
+      "reference_sha256": "c3b09f8862c5576e781a04f2d6e60dc25a5410bf6f673da374266ec65b881fb3",
+      "resources_sha256": "d15157d649b59c1e99e995678c79162786eae1e5b092331a6931e26bbc182ce5",
+      "receipt_sha256": "b74f2db7d52cfc343ccd8fa75910496ae3e7aaebde6f305df95925677fd259b3",
+      "provenance_sha256": "964c6d7e066f9c71903a1717ad74fdd4f8fab48d5802b41cb33d5c2f3a961d21"
+    },
+    {
+      "tag": "eta2-n24-d50",
+      "reference_sha256": "7483841aedcdb6415616cbc8c9cff786c9de47ea937a7189d51444649fabfd3d",
+      "resources_sha256": "d8ab50ed8e690dce7fb10725fac371df1ee2842f2c5cdbb755723683af0ae5bf",
+      "receipt_sha256": "7e729bf01b36e20f43a257c26304cd5b686f53e133f11bda272ab28d062f5235",
+      "provenance_sha256": "73273985ac9c3146d4b0e60a0bfb5413f5c33808f1e3e26f230a0a5b74c8fa64"
+    },
+    {
+      "tag": "eta2-n32-d50",
+      "reference_sha256": "18703061dc1dd84a47afde799521f1836f7adbbb7a96c9650d6ec49e8a09db61",
+      "resources_sha256": "39d44ae086322b069a63621208916b21ccb896299ea6d4debfa3b19c138193da",
+      "receipt_sha256": "ea51ec526f5b6a3940b0735b3c43b3cf5499027a4402f5fc2ac799d4ae757aa9",
+      "provenance_sha256": "d10e2fbf2388bd5a90332b2719539598f71f6f892197fd8251cd8c868771bde6"
+    },
+    {
+      "tag": "eta2-n32-d80",
+      "reference_sha256": "aa171bd44d4ac3ac0a45f453ed773da4ec2227cf8aef1f2174fb88a7583a786c",
+      "resources_sha256": "7e3b9ec465efb68ccb7889d41025d6f105dd332db2c09342c052374d167cf6b3",
+      "receipt_sha256": "a5041dfde4795fffb43ccbdec2b0f977078037556e5cb70699c068d8d5176dfb",
+      "provenance_sha256": "9f750c48781ba8d327ab49cebc5f717a66c5f27a120463fc71878142ffcd741e"
+    },
+    {
+      "tag": "eta0p5-n16-d50",
+      "reference_sha256": "5427ec7ffa66fb93e3d0da1d888aa3aa1ed561731bf1bc13310c86482afff3d3",
+      "resources_sha256": "ac93221e929ab4aba7a1c267673ae484490a9184bec9b251db207fb60eb31533",
+      "receipt_sha256": "70f29b60a22194f98e61b4b6e3f190beed2b9cb1ac159be4a3d0be390b5a731a",
+      "provenance_sha256": "28240e4679682fcfc944fb471b670e8606c41e20ea8d0bf69b2de8f786681de5"
+    },
+    {
+      "tag": "eta0p5-n24-d50",
+      "reference_sha256": "97e6a51dd55d0fd1496adb8b287bd22185ebfbe86d2e21b26046fb6a9f227c66",
+      "resources_sha256": "0a8a57ef9b72cb260873dcf124695b9d5e0d66548cb7322043c8f523065dd261",
+      "receipt_sha256": "59152c1b58f8d6ad289f9c2197316dd9535b7006c6468eba21c4d410cbf228c8",
+      "provenance_sha256": "b167ad2b05d2175a866bc92e7173e3082611e280ba144603b081dd7faa8b1d6b"
+    },
+    {
+      "tag": "eta0p5-n32-d50",
+      "reference_sha256": "cdfe99624728da20ed2e417b64b2ac4eccfd20c209165a1976e4bd9bbc63893c",
+      "resources_sha256": "66d45677eae7cf41ea2f4d88700de76157f73e7724a8079c6e7e7fcb443bb3a0",
+      "receipt_sha256": "85073e7c011c1a5649d521d59f4951df014a25fc889986fdd2990e38f1deaee1",
+      "provenance_sha256": "3650bcb71b340f51188608e4a383b9c72d4b699d66adb1602e3cd894d01dc38f"
+    },
+    {
+      "tag": "eta0p5-n32-d80",
+      "reference_sha256": "da70c49030d4bde8dc6c7d0748903a4d0f24c03f5b12dd672eff187e1cbb8f7b",
+      "resources_sha256": "cd1b89bbb9dd34a9d3b78a3c64e1e34ff7cd9e75578f0616b535b8ae4495b6a5",
+      "receipt_sha256": "f296743870213ba1fc320944079a0a049fbf4169c8ff82682e5de6ab60b19b82",
+      "provenance_sha256": "41aadefe18c9f09ac945013bebac8cc996a2ec0af647323aaab596ebb6799539"
+    },
+    {
+      "tag": "mass-zero-n24-d50",
+      "reference_sha256": "86ddeae157a1ff9419cc5165ad7667f0385b798bbe86c47e20353909d551ce72",
+      "resources_sha256": "fe3fce4f6e6258f2b3ff4d4b0440a3ecc86eaf646ea72716462b5d7987a0a4da",
+      "receipt_sha256": "4c333f7f99f0973595f123b28cdf236457df99826dd56d0dd59dd90046be213f",
+      "provenance_sha256": "13656bfd4533a3b4d1bb9cb5e3281b63e22c6a409ef453cc93e1b58bd4425007"
+    },
+    {
+      "tag": "mass-a256-n24-d50",
+      "reference_sha256": "984579f13ea67fda3cea429d98405d546fdb507ea21b46fa076785b172dfe2e3",
+      "resources_sha256": "4cfb7495f80518476698516b97eb2f9d6c91c3481a131fb69e68c3912e39d4bb",
+      "receipt_sha256": "28ced404ce794564e71a987c5907d06867b06aed0b7f48fb565fcbb839a4d8a8",
+      "provenance_sha256": "dbabe332e98912def2fbc024ccdf14cb5d3e2e24bbd600b69142f84e719cf38e"
+    },
+    {
+      "tag": "mass-a1024-n24-d50",
+      "reference_sha256": "3d290ffafb2fc6c4d0b2c2146d5567dd6685dd71928be20b48806127fefa48d8",
+      "resources_sha256": "2a16ca99445f9a41460e18291fd2cbe9e65fbfebefdc3c93e7eea6ea4a6b817e",
+      "receipt_sha256": "a522b89a040947f6108b3c00a7bfcd8fcd2e0a717fd5bab78f493323b47cabed",
+      "provenance_sha256": "afcd85c7841f09540dc325735ce0f18d17597b0e82bcbb0aabce1f9b7370de91"
+    },
+    {
+      "tag": "mass-a4096-n24-d50",
+      "reference_sha256": "f0f3299607ced67594e3d00eca5ec513cfd3a25ada71b491f4550fd9245f4255",
+      "resources_sha256": "f554c4c6ce66981363a40eeddb238517ae5acfa10badf04d85687d51420268e6",
+      "receipt_sha256": "5ed0d79a4e4fd03fe5afbaabb2e59c10aa92b811b9961a8fb80280fc4111bade",
+      "provenance_sha256": "0c044c1b279ee9b53dfb8b02388374a9da058b2776fbac54048184fb03c67acb"
+    },
+    {
+      "tag": "mass-zero-n32-d50",
+      "reference_sha256": "be9de705c17c540ab21cb19729c4e2d8bc98fae337faec0c42a2f45ee5b67a21",
+      "resources_sha256": "f85744bd7c28d0c081cc660aa7005fac0bb812bd5023fe2dd6e47cc730f5706c",
+      "receipt_sha256": "d4300efdedc77775e4797ffe253e4d69db885cf8f69b8fefaecd9372d95adb1d",
+      "provenance_sha256": "27729dd37d75f2e15d287e3325b8c122f12187e603a83db62a3389fee797c2c5"
+    },
+    {
+      "tag": "mass-a4096-n32-d50",
+      "reference_sha256": "bbcce957c4fcacbbae3033e2cf3b01b6fe553fb2473a5ace0d4976f2b07c0cb9",
+      "resources_sha256": "1917132e809f771f0c8555b7615b736bfad1e4ace15018553035ae8efd4e0c04",
+      "receipt_sha256": "a100b5db8607839f54ce107af8e29922767cf62d09300e4ba41c18b75f6be463",
+      "provenance_sha256": "4b8b68feb7e58eedb082841995f56d1b83c903b2823962e4fba723e76e3a68f6"
+    }
+  ],
+  "producer_prediction_values_parsed": false,
+  "numerical_reference_values_fed_to_producer": false,
+  "native_closure_runs": 0,
+  "production_changes": 0,
+  "three_or_four_loop_numerical_acceptance": false,
+  "remaining": [
+    "Eta 1/2 fails the initial 14-digit refinement criterion; no node40 retry was run.",
+    "No producer partial-sum or transported-value comparison has yet been performed.",
+    "No rigorous reference error bound; refinement is empirical.",
+    "No generic 64-term endpoint accuracy certificate; see remainder-assessment.md."
+  ],
+  "provenance_limitation": "The mutable initial README was overwritten before preservation; its initial hash is retained in historical-design-status.json. All executed numerical source, prospective profiles, producer snapshots and run bytes are retained."
+}

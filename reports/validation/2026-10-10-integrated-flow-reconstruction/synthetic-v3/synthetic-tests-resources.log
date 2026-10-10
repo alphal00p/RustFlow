@@ -1,0 +1,16 @@
+
+running 11 tests
+test tests::candidate_hash_is_checked_before_holdout_access_and_no_overwrite ... ok
+test tests::effective_support_controls_holdout_indices ... ok
+test tests::exact_factorial_sequence_uses_native_rational_matrix ... ok
+test tests::exact_native_theta_fit_and_untouched_holdout ... ok
+test tests::formal_channels_are_fit_jointly ... ok
+test tests::integer_grading_requires_declared_proof_without_losing_fractional_branch ... ok
+test tests::recurrence_and_frobenius_exponent_are_explicit ... ok
+test tests::same_training_false_extension_is_rejected_without_refit ... ok
+test tests::schema_preserves_unknowns_logs_and_channel_identity ... ok
+test tests::singular_heldout_operator_row_is_not_counted_as_a_test ... ok
+test tests::zero_and_missing_prefixes_are_not_certificates ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+
