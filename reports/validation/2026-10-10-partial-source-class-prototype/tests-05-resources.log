@@ -1,0 +1,14 @@
+
+running 9 tests
+test finite_density::source_class::tests::source_class_actual_singleton_and_both_partial_double_placements_cover_all_emitted_rows ... ok
+test finite_density::source_class::tests::source_class_all_fixed_coordinates_are_specialized_before_image_admission ... ok
+test finite_density::source_class::tests::source_class_cancellation_of_identical_images_does_not_hide_nonzero_bad_images ... ok
+test finite_density::source_class::tests::source_class_completion_and_whole_shift_boundary_zero_are_exact ... ok
+test finite_density::source_class::tests::source_class_conditions_and_complete_context_are_bound_without_erasure ... ok
+test finite_density::source_class::tests::source_class_invalid_tuple_is_not_hidden_by_required_cut_zero ... ok
+test finite_density::source_class::tests::source_class_limits_and_cancel_fail_before_a_certificate ... ok
+test finite_density::source_class::tests::source_class_retained_arithmetic_size_and_fixed_face_caps_are_enforced ... ok
+test finite_density::source_class::tests::source_class_zero_domains_and_foreign_fixed_patterns_are_conservative ... ok
+
+test result: ok. 9 passed; 0 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.33s
+

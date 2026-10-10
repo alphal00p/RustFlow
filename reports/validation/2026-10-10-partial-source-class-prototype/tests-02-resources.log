@@ -1,0 +1,22 @@
+
+running 8 tests
+test finite_density::source_class::tests::source_class_actual_both_partial_double_placements_cover_all_emitted_rows ... ok
+test finite_density::source_class::tests::source_class_all_fixed_coordinates_are_specialized_before_image_admission ... ok
+test finite_density::source_class::tests::source_class_cancellation_of_identical_images_does_not_hide_nonzero_bad_images ... ok
+test finite_density::source_class::tests::source_class_completion_and_whole_shift_boundary_zero_are_exact ... ok
+test finite_density::source_class::tests::source_class_conditions_and_complete_context_are_bound_without_erasure ... ok
+test finite_density::source_class::tests::source_class_invalid_tuple_is_not_hidden_by_required_cut_zero ... ok
+test finite_density::source_class::tests::source_class_limits_and_cancel_fail_before_a_certificate ... ok
+test finite_density::source_class::tests::source_class_zero_domains_and_foreign_fixed_patterns_are_conservative ... 
+thread 'finite_density::source_class::tests::source_class_zero_domains_and_foreign_fixed_patterns_are_conservative' (721396) panicked at /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/source/src/finite_density/source_class/tests.rs:96:10:
+called `Result::unwrap()` on an `Err` value: InvalidInput("free source coordinate 0 must have a symbolic integral index")
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+FAILED
+
+failures:
+
+failures:
+    finite_density::source_class::tests::source_class_zero_domains_and_foreign_fixed_patterns_are_conservative
+
+test result: FAILED. 7 passed; 1 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.28s
+

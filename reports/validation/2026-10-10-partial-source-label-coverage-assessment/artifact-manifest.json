@@ -1,0 +1,16 @@
+{
+  "captured_utc": "2026-10-10T08:46:17.411652+00:00",
+  "scope": "frozen report bytes, excluding this manifest; no production changes",
+  "files": [
+    {
+      "path": "assessment.md",
+      "sha256": "716446aee60e919634280ef27a0704cf7dc189edd6c8e02702fd25369db4b115",
+      "bytes": 13816
+    },
+    {
+      "path": "source-bindings.json",
+      "sha256": "83dea6fce163415c095fd8239e4e32a9cbd938de8214d15ec25014d90151dd8f",
+      "bytes": 3992
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/rustflow-partial-source-class-20261010/tests-04",
+    "source_class::tests",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.3655666019767523,
+  "user_seconds": 0.32319899999999996,
+  "system_seconds": 0.043629,
+  "peak_child_rss_kib": 15480,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

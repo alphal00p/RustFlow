@@ -1,0 +1,11 @@
+{
+  "environment": {
+    "PARTIAL_SOURCE_CLASS_REPORT": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/actual-sources-05"
+  },
+  "resource_report": "tests-05-resources.json",
+  "build": "build-05.json",
+  "input": {
+    "path": "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+  }
+}

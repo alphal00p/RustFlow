@@ -1,0 +1,23 @@
+{
+  "status": "frozen read-only assessment and independently reviewed projector bridge",
+  "files": {
+    "assessment.md": {
+      "sha256": "b60c6a5e903bb3b09948ba416cedf3719723ed45530be0c6475d4c2e7a77fa9f",
+      "bytes": 11780
+    },
+    "independent-review.json": {
+      "sha256": "9777d9e5f23d7e7e74a058136829a486835c31a20542a63385bb708fde75db54",
+      "bytes": 3362
+    },
+    "inspection-binding.json": {
+      "sha256": "50245818f7b68005117460677e959fa8a34035b7b538f7969e6386bfcb138892",
+      "bytes": 4312
+    },
+    "projector-bridge.md": {
+      "sha256": "08de3709c9004427faa85521989f521f3d1399bd32a093a6ad7c9fb61e466533",
+      "bytes": 5377
+    }
+  },
+  "production_modified": false,
+  "builds_or_numerics": 0
+}

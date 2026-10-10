@@ -1,0 +1,17 @@
+{
+  "captured_utc": "2026-10-10T08:45:13.776984+00:00",
+  "command": [
+    "/tmp/rustflow-partial-source-class-20261010/tests-05",
+    "source_class::tests",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "/tmp/rustflow-partial-source-class-20261010/tests-05": {
+      "resolved_path": "/tmp/rustflow-partial-source-class-20261010/tests-05",
+      "sha256": "2cb0ed29f0653621b166c4d2dc77fc7d597698f6b4bb16c4b7cd29870766ca4e",
+      "size_bytes": 1254020800
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

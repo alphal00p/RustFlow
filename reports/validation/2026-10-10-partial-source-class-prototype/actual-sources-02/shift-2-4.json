@@ -1,0 +1,107 @@
+{
+  "all_formal_rows_unchanged": true,
+  "certificate": {
+    "admitted_bounds": [
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        null
+      ],
+      [
+        null,
+        0
+      ],
+      [
+        null,
+        0
+      ],
+      [
+        null,
+        0
+      ],
+      [
+        null,
+        0
+      ],
+      [
+        0,
+        null
+      ],
+      [
+        0,
+        null
+      ],
+      [
+        0,
+        null
+      ],
+      [
+        0,
+        null
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ],
+    "binding_blake3": "a4fb9f491c075166f183de4fe17f93cf88d6958e7ab2d80063e351a5205eae24",
+    "budget": {
+      "max_arity": 32,
+      "max_binding_bytes": 4194304,
+      "max_binding_fields": 16384,
+      "max_conditions": 1000000,
+      "max_face_abs": 65536,
+      "max_face_specializations": 1000000,
+      "max_integer_bits": 4096,
+      "max_polynomial_degree": 128,
+      "max_polynomial_terms": 2000000,
+      "max_source_bytes": 67108864,
+      "max_sources": 16384,
+      "max_terms": 1000000
+    },
+    "counts": {
+      "checked_faces": 560,
+      "merged_terms": 2660,
+      "polynomial_terms": 3444,
+      "raw_terms": 2660,
+      "source_bytes": 126067,
+      "source_conditions": 304,
+      "sources": 232
+    },
+    "coverage": "all nonzero source images pointwise on admitted integer guards; native seed/recenter/replay preserves this class",
+    "individual_application_trace": false,
+    "internal_cas_work_or_heap_bound": false,
+    "one_dimension_for_unbounded_domain": false,
+    "physical_arity": 13,
+    "physical_identity_validity_certified_by_this_checker": false,
+    "source_only_program_blake3": "61eed9f99c8488bd38d27acd581dc81e91afebe4fd3eb30ff33f3c036380b265",
+    "storage_capacity": 16,
+    "version": "partial-source-image-class-v1;integer-boundary-zero;universal-finite-label;no-applied-trace"
+  },
+  "imported_rules": 0,
+  "native_zero_boxes": 4,
+  "physical_capability_identity": "partial-origin-rank-two-v1;universal-finite-label-JN;no-endpoint-no-infinity:a287c5192ae5d15ec9557214fac02e3a4167365178f186ccd2c1fc042d164966"
+}

@@ -1,0 +1,74 @@
+error[E0583]: file not found for module `tests`
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/source/src/finite_density/source_class.rs:498:1
+    |
+498 | mod tests;
+    | ^^^^^^^^^^
+    |
+    = help: to create the module `tests`, create file "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/source/src/finite_density/tests.rs" or "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/source/src/finite_density/tests/mod.rs"
+    = note: if there is a `mod tests` elsewhere in the crate already, import it with `use crate::...` instead
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/source/src/algebra.rs:105:18
+    |
+105 |     let lambda = symbol!("symbolica_amflow::indicial_lambda");
+    |                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |
+    = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+    = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+    = note: this error originates in the macro `env` which comes from the expansion of the macro `symbol` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/source/src/finite_density/partial_origin.rs:30:15
+   |
+30 |     Atom::var(symbol!(format!("rustflow_partial_origin::{name}")))
+   |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+   |
+   = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+   = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+   = note: this error originates in the macro `env` which comes from the expansion of the macro `symbol` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+    --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/source/src/finite_density/partial_origin.rs:1546:23
+     |
+1546 |         let epsilon = symbol!("partial_origin_source_epsilon");
+     |                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+     = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+     = note: this error originates in the macro `env` which comes from the expansion of the macro `symbol` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error: environment variable `CARGO_CRATE_NAME` not defined at compile time
+    --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/source/src/finite_density/partial_origin.rs:1547:19
+     |
+1547 |         let eta = symbol!("partial_origin_source_eta");
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     |
+     = help: `CARGO_CRATE_NAME` may not be available for the current Cargo target
+     = help: Cargo sets build script variables at run time. Use `std::env::var("CARGO_CRATE_NAME")` instead
+     = note: this error originates in the macro `env` which comes from the expansion of the macro `symbol` (in Nightly builds, run with -Z macro-backtrace for more info)
+
+error[E0308]: mismatched types
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/source/src/finite_density/source_class.rs:281:41
+    |
+281 |         .any(|c| c.significant_bits() > b.max_integer_bits)
+    |                                         ^^^^^^^^^^^^^^^^^^ expected `u64`, found `u32`
+
+error[E0277]: can't compare `u64` with `u32`
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-source-class-prototype/source/src/finite_density/source_class.rs:281:39
+    |
+281 |         .any(|c| c.significant_bits() > b.max_integer_bits)
+    |                                       ^ no implementation for `u64 < u32` and `u64 > u32`
+    |
+    = help: the trait `PartialOrd<u32>` is not implemented for `u64`
+    = help: `u64` implements trait `PartialOrd<Rhs>`:
+              PartialOrd<BackendRational>
+              PartialOrd<MultiPrecisionFloat>
+              PartialOrd<MultiPrecisionInteger>
+              PartialOrd<rug::integer::big::Integer>
+              PartialOrd<symbolica::prelude::Integer>
+              PartialOrd
+
+error: aborting due to 7 previous errors
+
+Some errors have detailed explanations: E0277, E0308, E0583.
+For more information about an error, try `rustc --explain E0277`.

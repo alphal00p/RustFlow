@@ -1,0 +1,11 @@
+{
+  "module": {
+    "path": "source/src/finite_density/source_class.rs",
+    "sha256": "0ad1af5a765db863761d1ca2b56496c8fd4b8a569b782dbb58b5d3dc9ae5a783"
+  },
+  "tests": {
+    "path": "source/src/finite_density/source_class/tests.rs",
+    "sha256": "7ad61fefdc9c0aa58cad5bc1c9b89c12eec067df1dd25aa2d1106f056f569a98"
+  },
+  "patch_sha256": "a6191778d7a57a18d158aa3add887ac8ccf94abd505b83d27cb878d2b7e41627"
+}

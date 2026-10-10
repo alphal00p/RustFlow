@@ -1,0 +1,84 @@
+{
+  "status": "isolated prototype PASS; not integrated",
+  "tests": {
+    "passed": 9,
+    "failed": 0,
+    "filtered_out": 21,
+    "resources": "tests-05-resources.json",
+    "build": "build-05.json"
+  },
+  "actual_source_corpora": [
+    {
+      "file": "actual-sources-05/shift-0.json",
+      "sha256": "60cd108ece09cb7fc1d6bbf0377214cbaa2d0c578486b6e9f1780d898f720390",
+      "counts": {
+        "checked_faces": 108,
+        "merged_terms": 512,
+        "polynomial_terms": 636,
+        "raw_terms": 512,
+        "source_bytes": 33861,
+        "source_conditions": 28,
+        "sources": 52
+      },
+      "zero_boxes": 11,
+      "binding_blake3": "d57928b19b495be9577b6268f5e21dd6bc870771da1c1d3108d96b941af8f202",
+      "source_blake3": "d7e19ab8ac48c1914d9011596a9a107bf779188815670faab672490382539279"
+    },
+    {
+      "file": "actual-sources-05/shift-1-2.json",
+      "sha256": "5a4e8bc66a8a9c5441de446b10e4cb53f87b71723d5ac9161cff2693f0fdf745",
+      "counts": {
+        "checked_faces": 592,
+        "merged_terms": 2772,
+        "polynomial_terms": 3556,
+        "raw_terms": 2772,
+        "source_bytes": 130577,
+        "source_conditions": 304,
+        "sources": 232
+      },
+      "zero_boxes": 4,
+      "binding_blake3": "55bde6f4dcf58122cdc012ca31cc4f471712b398eea33c19f0a3be878fd40f5d",
+      "source_blake3": "be1382a1362eca7a24399bb2d978c1441a4c48e45421738578f2eb0e85413ba7"
+    },
+    {
+      "file": "actual-sources-05/shift-2-4.json",
+      "sha256": "34e8328ca763138c8f138a23ccc86919368fe4d56e6f00e63a6aa22199f0c016",
+      "counts": {
+        "checked_faces": 560,
+        "merged_terms": 2660,
+        "polynomial_terms": 3444,
+        "raw_terms": 2660,
+        "source_bytes": 126067,
+        "source_conditions": 304,
+        "sources": 232
+      },
+      "zero_boxes": 4,
+      "binding_blake3": "a4fb9f491c075166f183de4fe17f93cf88d6958e7ab2d80063e351a5205eae24",
+      "source_blake3": "57ce69e812a2ec3c3b0af2e5da738623127ac67d753d9f0c2d046ab4b9b38bd9"
+    }
+  ],
+  "source_rows_total": 516,
+  "faces_total": 1260,
+  "runtime_seconds": 0.3487237864173949,
+  "peak_rss_kib": 15424,
+  "first_gate": {
+    "resources": "tests-02-resources.json",
+    "passed": 7,
+    "failed": 1,
+    "failure": "test helper unwrapped native constructor rejection for a fixed raw source pattern; corrected to assert that rejection"
+  },
+  "compile_failures": [
+    "build-01.json",
+    "build-03.json"
+  ],
+  "production_edited": false,
+  "shared_target_written": false,
+  "historical_rules_imported": false,
+  "public_partial_admission": false,
+  "coverage": "universal finite-label source image class, not an applied-label trace or common-D certificate",
+  "review": {
+    "boundary_owner": "Final core/tests review passed: no blocker; retained merged/fixed/face size checks, strict tuple checks and source-only condition binding verified",
+    "acceptance": "No blocker in duplicate-image merge, fixed-coordinate substitution, finite violating-face checks, or exact source digest; typed bundle owns physical authority"
+  },
+  "preceding_pass": "tests-04-resources.json (same nine cases; test include path was then made portable)"
+}

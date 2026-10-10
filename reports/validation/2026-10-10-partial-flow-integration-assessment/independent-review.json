@@ -1,0 +1,28 @@
+{
+  "status": "read-only review passed under the stated analytic-family and complete-solution hypotheses",
+  "scope": "Mathematical projector bridge and proposed integration ownership only; no new computation, production permit, boundary value or partial-flow numerical acceptance.",
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-partial-flow-integration-assessment/assessment.md": "b60c6a5e903bb3b09948ba416cedf3719723ed45530be0c6475d4c2e7a77fa9f",
+    "reports/validation/2026-10-10-partial-flow-integration-assessment/projector-bridge.md": "08de3709c9004427faa85521989f521f3d1399bd32a093a6ad7c9fb61e466533",
+    "reports/validation/2026-10-10-partial-flow-integration-assessment/inspection-binding.json": "50245818f7b68005117460677e959fa8a34035b7b538f7969e6386bfcb138892",
+    "src/frobenius.rs": "2e726a675f252881e55c64fd114a53066616ebed52b2f5316c35af47b59f7fb4",
+    "src/engine/connection.rs": "a811272984bfb8b085803367c01c09a180e6333b6399d0b7a134703eda8d3a67"
+  },
+  "findings": [
+    "Grouping analytic exponent branches modulo identically integer differences is necessary before the target limit. Rational eta weights shift exponents only by integers and cannot make a nonconstant dimensional exponent identically zero.",
+    "On a generic high-dimensional neighborhood, a complete convergent regular-singular representation and the uniform continuous target limit force the combined negative-power, oscillatory and zero-power positive-log coefficients to vanish. Positive-real-power terms vanish. The surviving coefficient is the combined constant exponent-zero/log-zero term.",
+    "Equality of the retained meromorphic dimensional families continues this constant coefficient. An isolated dimensional exponent collision does not create an additional constant contribution; a resonant sample must be excluded or handled through its separately proved continuation.",
+    "The current projector skips symbolically epsilon-dependent columns before specialization, expands rational weights to the necessary depth, combines the retained power/log coefficients and rejects a surviving divergence or insufficient series. These operations agree with the bridge when bound to the actual complete target and boundary-selected solution.",
+    "The assessment preserves separate origin, endpoint, source, infinity-region and ordinary-hard ownership. Its initial h=1/k=2 restriction is structural and makes no numerical or source-zero inference from a partial mask alone."
+  ],
+  "retained_requirements": [
+    "Actual complete meromorphic-D regular-singular solution and exact original target reconstruction; indicial roots or sampled exponents alone are insufficient.",
+    "Generic dimension neighborhood and prescribed branch, ordered line-regulator/thermal limits, and the proved uniform target endpoint bound.",
+    "Raw uncancelled coefficient conditions, all relevant generated-label bounds, origin/placement/family identities, and sufficient rational-weighted Frobenius order.",
+    "The lemma does not independently certify numerical truncation error, arbitrary masterwise limits, infinity-region completeness or every generated hard child.",
+    "No production source edits or numerical acceptance are authorized by this review."
+  ],
+  "new_tests_run": 0,
+  "production_modified": false,
+  "created_utc": "2026-10-10T08:14:24.632823+00:00"
+}
