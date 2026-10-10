@@ -1,0 +1,94 @@
+{
+  "status": "failed new fixture assertion; no numerical runs launched",
+  "passed": 217,
+  "failed": 1,
+  "ignored": 1,
+  "gates": [
+    {
+      "gate": "native",
+      "exit_code": 0,
+      "passed": 91,
+      "failed": 0,
+      "ignored": 1,
+      "resources_sha256": "236605412d6b5c1d08e74dbd0d5f198de8e27d5668b1d573f3def9464308aca0",
+      "log_sha256": "a59d0b0ba15665460343400663a147206de82028c9485f1b22bf0d73cd394103",
+      "binding_sha256": "677ae12e91dcb20e972534628906111b6b93adfc3e914f7db71812daef012ce6"
+    },
+    {
+      "gate": "lib",
+      "exit_code": 101,
+      "passed": 106,
+      "failed": 1,
+      "ignored": 0,
+      "resources_sha256": "55a7bf11b04abcafa46a575a2cc3fe08c44acc1f57ceb93aea67b7f21ac15ab7",
+      "log_sha256": "4ff5115ec0b51d12d6cf254e5c1e42603b6fdf2ac33715b61a8a3992b2347657",
+      "binding_sha256": "3baf54ca4fbf582cebdd57ed519b1e95cf14638f4f9390ed90659a3b7c662721"
+    },
+    {
+      "gate": "flow-boundary",
+      "exit_code": 0,
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "resources_sha256": "0b799f0b6324861c14df0c16efd3ce709d29b029a1fb297b44b7048c3c97f23c",
+      "log_sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "binding_sha256": "ec17b9c3175b64d7f35b49149804670aecb735d0e66966e993411242b694859d"
+    },
+    {
+      "gate": "massless-sources",
+      "exit_code": 0,
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "resources_sha256": "f792cf34a08b0863f51ad5b662dc148588723572d826b12708bb6537da23bd7d",
+      "log_sha256": "e599a266bc13dfd5daa04396b4c1fbf9ee515f30e619e678de555dc48fe20d23",
+      "binding_sha256": "9086a03e8c8c3fdd4523075f67b0c0ed54df201b5e249c2e92ad66deadadc487"
+    },
+    {
+      "gate": "source-fingerprint",
+      "exit_code": 0,
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "resources_sha256": "223f2b257f9d276babc7ee644aeede2bc645ee987e5787b7b67c9a8dd392c0f6",
+      "log_sha256": "66d47327d3ab7c5952f218ec5bf252ea2146a85f8bb548b25e89799eafd32505",
+      "binding_sha256": "c900467c558d40549d2402a38135546018dbddec917f57939371d91633315b30"
+    },
+    {
+      "gate": "python",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "resources_sha256": "1da45e859f9e826d05e521fbbbd01b8d4dedd385b46be15a7e1a645689e7100f",
+      "log_sha256": "b0982d21dc66e3a1e017a31a2c4bccbe67b9ffe5490bd8a19e8382c03de4212f",
+      "binding_sha256": "67f3674443a04ad9e12c3a5c9e572d74f26d606698e280c5ad921b0823005fe9"
+    },
+    {
+      "gate": "capacity",
+      "exit_code": 0,
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "resources_sha256": "b4061854ab83834252b20a147ae1536ea9bdefb279bc8fed35b744d65a3a292d",
+      "log_sha256": "2b0ff815bd81bbb4d9b5a2413cab6713bff9847ffdf1292409547656650301ad",
+      "binding_sha256": "b6a41e5a9b5e8527e64fdc45e2e64c5ce58887c8bfa236bff4d3a4d5dd2f0973"
+    },
+    {
+      "gate": "polynomial-sources",
+      "exit_code": 0,
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "resources_sha256": "e8d86a1a051ba1b91f0dcace564630f5360666a1b255b8486808fb54c15ad0b8",
+      "log_sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596",
+      "binding_sha256": "2c403e723aa4e6186ff6ec28b6422ab5629bc38e32766e9c78720c185a535e8c"
+    }
+  ],
+  "source_snapshot_sha256": "3f5660b59178bbc20237b099c84c1a5c984c7e9babf27968e4bf11505faca390",
+  "build_provenance_sha256": "a78fa19e90abfa3b551f5a3d7f236d15fcc3f1ef05c14355f0ecc3b3d2279aee",
+  "failure": "original_raised_medium_targets_retain_all_surface_jets_and_open_witnesses assumed explicit H_upper>0 in original input terms. Geometry represents those as raised C_n with H0; support derivatives enter the distribution action. Parent preparing a test-only correction plus precise comment.",
+  "numerical_predictions_written": 0,
+  "failed_aggregate_summarizer": "Correctly rejects producing a passing root-gates report after lib failure.",
+  "next_attempt_report": "reports/validation/2026-10-10-singleton-physical-zero-integration-v2"
+}

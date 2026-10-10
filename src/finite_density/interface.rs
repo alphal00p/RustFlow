@@ -218,6 +218,13 @@ pub fn evaluate_request(
             .map(|certificate| certificate.report())
             .collect::<Vec<_>>()
     );
+    report["physical_zero_certificates"] = json!(
+        prepared
+            .physical_zero_certificates()
+            .iter()
+            .map(|(cuts, proof)| json!({"cut_slots": cuts, "certificate": proof.report()}))
+            .collect::<Vec<_>>()
+    );
     Ok(report)
 }
 

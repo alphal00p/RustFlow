@@ -1,0 +1,37 @@
+{
+  "scope": "Static comparison of launcher constants; no control execution",
+  "parent_launcher": "reports/validation/2026-10-10-history-candidate-limit-integration/run-singleton-gate.py",
+  "parent_launcher_sha256": "598a64c614545656c03d7509b43622d6d003ad3d460400f628aaa81e71ca113c",
+  "static_launcher_sha256": "6193b0502eb2abecd079d76a7dba4287fd10232c3ed9d58997f50cab74be5eff",
+  "unchanged_settings": {
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY": "polynomial-closure-v1",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS": "true",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS": "true",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES": "true",
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED": "false",
+    "RUSTFLOW_WEIGHTED_REUSED_RULES": "65536",
+    "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL": "0",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAY_POINT": "true",
+    "RUSTFLOW_WEIGHTED_RAY_DOMAINS": "1",
+    "RUSTFLOW_WEIGHTED_POINT_DOMAINS": "1",
+    "RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE": "true",
+    "RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS": "8192",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES": "0",
+    "RUSTFLOW_WEIGHTED_DEPTH": "3",
+    "RUSTFLOW_WEIGHTED_DOMAINS": "32768",
+    "RUSTFLOW_WEIGHTED_ROUNDS": "32",
+    "RUSTFLOW_WEIGHTED_FRONTIER": "8192",
+    "RUSTFLOW_WEIGHTED_REQUESTED": "16384",
+    "RUSTFLOW_WEIGHTED_MAX_HISTORY_CANDIDATE_MAPS": "0",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON": "-5/4",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES": "18:60:8"
+  },
+  "changes": [
+    "Input/report paths use the immutable capsule and separate report",
+    "Cut selection fixes the parent cut argument to 3",
+    "Post-run integrity uses captured assets, not mutable live source/target files"
+  ],
+  "timeout_seconds": 3600,
+  "no_runtime_yet": true,
+  "completed_numerical_prerequisite_capture": "numerical-prerequisites.json"
+}

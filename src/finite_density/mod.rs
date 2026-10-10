@@ -21,6 +21,7 @@ pub mod normalization;
 pub mod parametric_endpoint;
 pub mod preparation;
 pub mod reduction;
+pub mod singleton_zero;
 pub mod terminal;
 pub mod vacuum;
 

@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_polynomial_sources-67356704627148d2",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.08174109971150756,
+  "user_seconds": 0.043975,
+  "system_seconds": 0.036849,
+  "peak_child_rss_kib": 15416,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

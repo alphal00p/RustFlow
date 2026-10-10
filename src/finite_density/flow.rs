@@ -46,7 +46,7 @@ pub struct OccupiedFlowEvaluation {
     pub shifted_slots: Vec<usize>,
     pub basis_size: usize,
     pub physical_arity: usize,
-    /// None for compact terminals, which do not construct a native program.
+    /// None for compact or physical-zero terminals without a native program.
     pub native_storage_capacity: Option<usize>,
     /// None is reserved for constructions without a guarded source program.
     pub source_options: Option<WeightedSourceOptions>,

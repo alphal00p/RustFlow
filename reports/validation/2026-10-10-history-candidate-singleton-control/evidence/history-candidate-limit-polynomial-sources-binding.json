@@ -1,0 +1,22 @@
+{
+  "source_snapshot_sha256": "d0ad8d14a977a47300c30b577737e953273f6a7698ad221ae48b655524dae889",
+  "build_provenance_sha256": "d60039984d9a2fdb3fc31e5bf3ba84ff8bf7d084053e843757251aa7be1c7f3d",
+  "launcher_sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+  "gate": "polynomial-sources",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_polynomial_sources-67356704627148d2",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "native_numerical_acceptance_run": false,
+  "report_environment": {
+    "RUSTFLOW_POLYNOMIAL_SOURCE_REPORT": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-actual62-source-equivalence.json"
+  },
+  "source_equivalence_report": {
+    "path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-actual62-source-equivalence.json",
+    "sha256": "5f30972f12a3c8f23ceb609ec1dd4fb89a1f6dd087f1c4e78e694b9db4323e0d"
+  }
+}

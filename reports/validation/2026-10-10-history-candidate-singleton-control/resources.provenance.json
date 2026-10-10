@@ -1,0 +1,26 @@
+{
+  "captured_utc": "2026-10-10T07:14:56.245622+00:00",
+  "command": [
+    "timeout",
+    "3600",
+    "/tmp/rustflow-history-candidate-single3-20261010/runtime",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/tmp/rustflow-history-candidate-single3-20261010/runtime": {
+      "resolved_path": "/tmp/rustflow-history-candidate-single3-20261010/runtime",
+      "sha256": "8c15752a6766285754b4ae1382e0fc9a4d0ffd26011b536db980ee7541c0e034",
+      "size_bytes": 1313373128
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

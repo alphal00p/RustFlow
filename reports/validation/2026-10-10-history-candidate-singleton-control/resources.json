@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "3600",
+    "/tmp/rustflow-history-candidate-single3-20261010/runtime",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1991.7583512822166,
+  "user_seconds": 1973.558022,
+  "system_seconds": 2.349919,
+  "peak_child_rss_kib": 546324,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

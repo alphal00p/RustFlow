@@ -1,0 +1,331 @@
+{
+  "status": "frozen failed first coherent attempt; all original failure and passing evidence retained",
+  "files": {
+    "singleton-physical-zero-build-resources.json": {
+      "sha256": "649f5f09e2249de8ad7064a4bf37e4edee164b36e0a2f81d2161cc367f46d05c",
+      "bytes": 845
+    },
+    "singleton-physical-zero-lib-binding.json": {
+      "sha256": "3baf54ca4fbf582cebdd57ed519b1e95cf14638f4f9390ed90659a3b7c662721",
+      "bytes": 539
+    },
+    "frozen_sources.py": {
+      "sha256": "ac8be1d6ad84fde80e3dd9f1db44ac3deed446cfb2a4c73770bc16408ef170a3",
+      "bytes": 1913
+    },
+    "singleton-physical-zero-native-resources.json": {
+      "sha256": "236605412d6b5c1d08e74dbd0d5f198de8e27d5668b1d573f3def9464308aca0",
+      "bytes": 396
+    },
+    "initial-helper-origins.json": {
+      "sha256": "6cd49b57accb6a71ab7f1efe5c5d9599bd794b9879d56007f925253f4c3e9168",
+      "bytes": 6082
+    },
+    "singleton-physical-zero-polynomial-sources-resources.json": {
+      "sha256": "e8d86a1a051ba1b91f0dcace564630f5360666a1b255b8486808fb54c15ad0b8",
+      "bytes": 399
+    },
+    "compare_three_loop_reference.py": {
+      "sha256": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226",
+      "bytes": 18785
+    },
+    "attempt-summary.json": {
+      "sha256": "d4079cfc7cb8ab64ab3b128cb819a2714c1d7dc98ae5175f2eb5534213c6bad8",
+      "bytes": 4048
+    },
+    "singleton-physical-zero-flow-boundary-binding.json": {
+      "sha256": "ec17b9c3175b64d7f35b49149804670aecb735d0e66966e993411242b694859d",
+      "bytes": 535
+    },
+    "helper-readiness.json": {
+      "sha256": "abcc83b7f769e6f42a810516351c2a70813716ded05cb53cbf405bbe5a05d1a3",
+      "bytes": 3559
+    },
+    "capture-source-snapshot.py": {
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+      "bytes": 2075
+    },
+    "singleton-physical-zero-capacity-resources.log": {
+      "sha256": "2b0ff815bd81bbb4d9b5a2413cab6713bff9847ffdf1292409547656650301ad",
+      "bytes": 364
+    },
+    "compare-completed-predictions.py": {
+      "sha256": "55bbbcbdd8d9ba5dacb9cd981b3f47d0bb5b3d594e73225a79396280761ab5e0",
+      "bytes": 15945
+    },
+    "compare_three_loop_reference.patch": {
+      "sha256": "b391c023a71ddca7da26bf10328eadac0f8a9069fec83c1585e9c67bfaf35bea",
+      "bytes": 10499
+    },
+    "singleton-physical-zero-python-resources.json": {
+      "sha256": "1da45e859f9e826d05e521fbbbd01b8d4dedd385b46be15a7e1a645689e7100f",
+      "bytes": 386
+    },
+    "singleton-physical-zero-massless-sources-resources.log": {
+      "sha256": "e599a266bc13dfd5daa04396b4c1fbf9ee515f30e619e678de555dc48fe20d23",
+      "bytes": 435
+    },
+    "singleton-physical-zero-native-binding.json": {
+      "sha256": "677ae12e91dcb20e972534628906111b6b93adfc3e914f7db71812daef012ce6",
+      "bytes": 530
+    },
+    "run-two-loop-gate.py": {
+      "sha256": "9d8ba4b7ec3949977ebd9ef7bd85d02bb25db8339a966932f58123bf22d7470c",
+      "bytes": 4951
+    },
+    "independent-source-review.json": {
+      "sha256": "d6521881e9e5c9a3d797f6f36a93dab966d847bb60c7924624e84cd2d120261c",
+      "bytes": 3072
+    },
+    "singleton-physical-zero-massless-sources-resources.json": {
+      "sha256": "f792cf34a08b0863f51ad5b662dc148588723572d826b12708bb6537da23bd7d",
+      "bytes": 396
+    },
+    "singleton-physical-zero-source-fingerprint-resources.provenance.json": {
+      "sha256": "91d193022440497076080a57c74b027f56c061a1334c1a87e3d976c0250429e3",
+      "bytes": 846
+    },
+    "singleton-physical-zero-lib-resources.log": {
+      "sha256": "4ff5115ec0b51d12d6cf254e5c1e42603b6fdf2ac33715b61a8a3992b2347657",
+      "bytes": 13540
+    },
+    "singleton-physical-zero-capacity-binding.json": {
+      "sha256": "b6a41e5a9b5e8527e64fdc45e2e64c5ce58887c8bfa236bff4d3a4d5dd2f0973",
+      "bytes": 525
+    },
+    "compare_massless_reference.patch": {
+      "sha256": "992915d63fc7976ea639f3b30c4fdcaa6905f6fe74d0bdd41b812b50943cdb14",
+      "bytes": 5500
+    },
+    "singleton-physical-zero-flow-boundary-resources.log": {
+      "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "bytes": 574
+    },
+    "singleton-physical-zero-flow-boundary-resources.json": {
+      "sha256": "0b799f0b6324861c14df0c16efd3ce709d29b029a1fb297b44b7048c3c97f23c",
+      "bytes": 405
+    },
+    "compare_massless_reference.py": {
+      "sha256": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d",
+      "bytes": 10163
+    },
+    "singleton-physical-zero-python-resources.provenance.json": {
+      "sha256": "936fd59e68a8fa8f9aa183b145c7041ca287cfaad0c6198b0c5c1fa591a576c1",
+      "bytes": 858
+    },
+    "singleton-physical-zero-source-fingerprint-resources.json": {
+      "sha256": "223f2b257f9d276babc7ee644aeede2bc645ee987e5787b7b67c9a8dd392c0f6",
+      "bytes": 397
+    },
+    "README.md": {
+      "sha256": "eea527bc11482a0fd9aa10879d411387e33e1d9b67fe01148b50f05a48f687cd",
+      "bytes": 1642
+    },
+    "singleton-physical-zero-python-binding.json": {
+      "sha256": "67f3674443a04ad9e12c3a5c9e572d74f26d606698e280c5ad921b0823005fe9",
+      "bytes": 521
+    },
+    "singleton-physical-zero-polynomial-sources-resources.provenance.json": {
+      "sha256": "1b0808293aaa01c5f199911a7a3e579003daa5e611c6eecdb1dc58a73c43de5a",
+      "bytes": 894
+    },
+    "singleton-physical-zero-python-resources.log": {
+      "sha256": "b0982d21dc66e3a1e017a31a2c4bccbe67b9ffe5490bd8a19e8382c03de4212f",
+      "bytes": 193
+    },
+    "run-three-loop-gate.py": {
+      "sha256": "b7e6d54681ce51c7eba1826a022117346f964af32a87da3e8a23499562c960b9",
+      "bytes": 5753
+    },
+    "singleton-physical-zero-lib-resources.provenance.json": {
+      "sha256": "e7618a978049d0a70eb3f51e51db0d39f49ebfff2176d582c65d172a71833362",
+      "bytes": 867
+    },
+    "run-root-gates.py": {
+      "sha256": "b1cc7bbdae794a4ab5e9ddb73826133a48ea9a30efff8afce7ff9fd20bb6b47b",
+      "bytes": 907
+    },
+    "singleton-physical-zero-capacity-resources.json": {
+      "sha256": "b4061854ab83834252b20a147ae1536ea9bdefb279bc8fed35b744d65a3a292d",
+      "bytes": 401
+    },
+    "native-digest-build.log": {
+      "sha256": "6a4d20789402a13fd8b6b4d223b2193e7101770c4396ce3852f36e9794e529b4",
+      "bytes": 56
+    },
+    "singleton-physical-zero-native-resources.log": {
+      "sha256": "a59d0b0ba15665460343400663a147206de82028c9485f1b22bf0d73cd394103",
+      "bytes": 13851
+    },
+    "test_certificate_validation.py": {
+      "sha256": "3f30ed7fd26c4155e4581686f4b32745a40a0660f1c84be61eb622d25426a95c",
+      "bytes": 4970
+    },
+    "comparison-plan.json": {
+      "sha256": "7f191705c22c825545425dbc59488f1be5dd1fc67c7da8f27bbd7d171bfd6fc5",
+      "bytes": 6629
+    },
+    "singleton-physical-zero-lib-resources.json": {
+      "sha256": "55a7bf11b04abcafa46a575a2cc3fe08c44acc1f57ceb93aea67b7f21ac15ab7",
+      "bytes": 417
+    },
+    "singleton-physical-zero-massless-sources-resources.provenance.json": {
+      "sha256": "82a96cb0e38fa3201ea3c810954c5a6403c89bbe5d049b3c7eb44328056b6127",
+      "bytes": 888
+    },
+    "capture-singleton-physical-zero-build.py": {
+      "sha256": "09e455f85694e59b16c1ecc9ba07711ea62326451d3d528c50d12870d2d1b422",
+      "bytes": 905
+    },
+    "native-digest-build.json": {
+      "sha256": "f708032ad9e2b27a0f7c135c4f18fde1748dc2bd0e086c75d80c2054e42baf1d",
+      "bytes": 3063
+    },
+    "singleton-physical-zero-native-resources.provenance.json": {
+      "sha256": "bef4f0c94585e21ada7b116f70c99c4ba2d3bb78608389289e2bba06d11547a6",
+      "bytes": 838
+    },
+    "singleton-physical-zero-polynomial-sources-resources.log": {
+      "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596",
+      "bytes": 188
+    },
+    "native-digest.rs": {
+      "sha256": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+      "bytes": 818
+    },
+    "singleton-physical-zero-actual62-source-equivalence.json": {
+      "sha256": "5f30972f12a3c8f23ceb609ec1dd4fb89a1f6dd087f1c4e78e694b9db4323e0d",
+      "bytes": 513935
+    },
+    "launch-singleton-physical-zero-build.py": {
+      "sha256": "b398674b502ff2c7f48e7acd4cbfe401d16537a9d2a0867b64ed901d84816f80",
+      "bytes": 3814
+    },
+    "singleton-physical-zero-build-provenance.json": {
+      "sha256": "a78fa19e90abfa3b551f5a3d7f236d15fcc3f1ef05c14355f0ecc3b3d2279aee",
+      "bytes": 5698
+    },
+    "run-massive-regression.py": {
+      "sha256": "561dcb6d8c5defe3bb2c8d3aa5fcc387b37b9f7fcfa38b3369b1dccc6342c910",
+      "bytes": 4627
+    },
+    "singleton-physical-zero-build-resources.log": {
+      "sha256": "7db6c9496f1e144c9d2b2e54767fea7f485fcb625da70c54e6aaacd5bd807c54",
+      "bytes": 3463
+    },
+    "singleton-physical-zero-massless-sources-binding.json": {
+      "sha256": "9086a03e8c8c3fdd4523075f67b0c0ed54df201b5e249c2e92ad66deadadc487",
+      "bytes": 541
+    },
+    "boundary-owner-static-review.json": {
+      "sha256": "a1a7196b5707399db4dd07f32e295c85f5ee0a4906fdb9c33b0b00711995a381",
+      "bytes": 3606
+    },
+    "certificate_validation.py": {
+      "sha256": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+      "bytes": 7067
+    },
+    "comparison-wrapper.patch": {
+      "sha256": "7651ac42283ec01094d3387a607227f9dddaecf2e9b57901593791b7bdb652b2",
+      "bytes": 5485
+    },
+    "build-native-digest.py": {
+      "sha256": "786bc8a838a7a5aac859f8e93ffbabc3ae34d7a4a7598e288bf0c4820ba8c205",
+      "bytes": 3784
+    },
+    "summarize-frozen-root-gates.py": {
+      "sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e",
+      "bytes": 4149
+    },
+    "capture-frozen-build.py": {
+      "sha256": "1622138f73b3ec893b377bb084ecb4d9311b8cece68f8c5deae20a70582e80e9",
+      "bytes": 5439
+    },
+    "singleton-physical-zero-source-fingerprint-binding.json": {
+      "sha256": "c900467c558d40549d2402a38135546018dbddec917f57939371d91633315b30",
+      "bytes": 530
+    },
+    "singleton-physical-zero-build-resources.provenance.json": {
+      "sha256": "3fa088f3a92fb9d9324d37986f575299462e0beb47c38f3e6886d38f7a2791a9",
+      "bytes": 1233
+    },
+    "singleton-physical-zero-flow-boundary-resources.provenance.json": {
+      "sha256": "482577eb71ed94a77d738f0944fb54b311fc826328707a80273bb909b4d7e7e3",
+      "bytes": 879
+    },
+    "singleton-physical-zero-polynomial-sources-binding.json": {
+      "sha256": "2c403e723aa4e6186ff6ec28b6422ab5629bc38e32766e9c78720c185a535e8c",
+      "bytes": 1026
+    },
+    "singleton-physical-zero-source-fingerprint-resources.log": {
+      "sha256": "66d47327d3ab7c5952f218ec5bf252ea2146a85f8bb548b25e89799eafd32505",
+      "bytes": 3684
+    },
+    "test_history_coverage.py": {
+      "sha256": "e480ae2bc54d8dbc4c14ede5721cf3a12c6d23263166b7504f0813df60a02bf9",
+      "bytes": 3419
+    },
+    "native-digest-control-abc.bin": {
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "bytes": 3
+    },
+    "native-digest-control-empty.bin": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "history_coverage.py": {
+      "sha256": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+      "bytes": 2939
+    },
+    "run-singleton-gate.py": {
+      "sha256": "a79a1b4d4fc47f7c5424a74474eaf8c9104dd0126b40c8c812265bacf767ddce",
+      "bytes": 5354
+    },
+    "singleton-physical-zero-source-hashes.json": {
+      "sha256": "3f5660b59178bbc20237b099c84c1a5c984c7e9babf27968e4bf11505faca390",
+      "bytes": 377807
+    },
+    "run-resource-command.py": {
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    },
+    "singleton-physical-zero-capacity-resources.provenance.json": {
+      "sha256": "8007cf73da7572f9320b96f8178cba308cf29a1546ad8c59d905295c8d6829c5",
+      "bytes": 864
+    },
+    "run-frozen-root-gate.py": {
+      "sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+      "bytes": 4005
+    },
+    "interrupted-inventory-attempt/capture-singleton-physical-zero-build.py": {
+      "sha256": "9c7b08324c83ed71f8e2a63cf1d01442b44bf49ec5897b73747fdfe7984daf4e",
+      "bytes": 887
+    },
+    "interrupted-inventory-attempt/singleton-physical-zero-source-hashes.json": {
+      "sha256": "d3a9fa96cbc7af633ca2615f73bebe1d05a405da4c76880f52b895fcf9aefeec",
+      "bytes": 377807
+    },
+    "interrupted-inventory-attempt/singleton-physical-zero-build-resources.json": {
+      "sha256": "45f57fbb4ae7198c2751b6117117f2185c0e7bdad00586b9843517049077bdee",
+      "bytes": 801
+    },
+    "interrupted-inventory-attempt/singleton-physical-zero-build-resources.log": {
+      "sha256": "cfc803dea9478f5d517008fbad3d2e85d55b96f6b8c092dbea68b466131a04e1",
+      "bytes": 2295
+    },
+    "interrupted-inventory-attempt/launch-singleton-physical-zero-build.py": {
+      "sha256": "5e35b2a40a1a1ee2317541ec91569e06433f1d06d861b8516f171d71808b18e8",
+      "bytes": 3769
+    },
+    "interrupted-inventory-attempt/status.json": {
+      "sha256": "a44c6f7a0526b8209589b43fc4ec1592168fb80cf1e343e3cb3f7347a56b9a76",
+      "bytes": 1127
+    },
+    "interrupted-inventory-attempt/singleton-physical-zero-build-resources.provenance.json": {
+      "sha256": "a145f263a5072c47f6a2efac2faaabe32cb38c7cc88257ce40ae8d783fb6e665",
+      "bytes": 1183
+    }
+  },
+  "production_modified_by_reporting": false,
+  "numerical_runs": 0
+}

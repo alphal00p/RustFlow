@@ -1,0 +1,28 @@
+{
+  "status": "read-only source review found no additional narrow-scope correctness blocker; coherent execution gates pending",
+  "source_files_sha256": {
+    "src/finite_density/singleton_zero.rs": "3481c793b8905fdb5ef3080f22ff9c04e14bcdf8caf8cccf3185cc171c7fcbb6",
+    "src/finite_density/massless_endpoint.rs": "852717533fd35adae32125fd0c4003f97a0c958fb37de66a5155b8e9069f3a00",
+    "src/finite_density/assembly.rs": "eb38a53debb86fd4342063d682e4821191017d4b2b88ffff3109f95728ffceba",
+    "src/finite_density/flow.rs": "b4640b85bf6045648336ea3487b2f59ec297b7817ba26d4d6fc95ff98b63f148",
+    "src/finite_density/interface.rs": "5f57a4c348264a2be37614072fb0787dc008f27db748082118549691e0ecc355",
+    "src/physical_conditions.rs": "52af20b182eedbf0dc9a9885b450afacc88cb1db50fb83e13f2ddfd4edf993af",
+    "tests/finite_density_runtime_flow.rs": "7e0a56ac65bab2273c652a1103c9ec0f8ee2d5694ac41e90aed6e45262e9730b",
+    "tests/finite_density_massless_flow.rs": "1eec104d3263e7caa17f69b47ba1c0153c6602f89ac43d524b1267d7a2eecef3"
+  },
+  "source_snapshot_sha256": "3f5660b59178bbc20237b099c84c1a5c984c7e9babf27968e4bf11505faca390",
+  "checks": [
+    "Constructor is limited to original prepared physical targets, exactly one occupied cut, at least one virtual loop, all physical masses zero, polynomial completions and the typed sealed SingletonGerm class. A serialized classification string cannot grant authority.",
+    "Raw prepared and original parsed numerator expressions are validated for their declared symbols and rational poles before cutting/physical mass erasure. Auxiliary eta or foreign symbols fail even if the cut would erase the target. Surviving family coefficients admit only epsilon.",
+    "Original label audit retains finite raised-shell and upper/lower support jets before dimensional continuation; original eta-independent coefficients cannot borrow a zero theorem for a reduced eta-pole weighted combination.",
+    "Evaluation checks cancellation, prepared dimension, nonzero epsilon, exact family/deformation binding and retained coefficient conditions before returning zeros.",
+    "Assembly keeps every physical sector. The theorem output is distinct from compact terminals, finite-eta source zeros, native closure and AMF transport. It contributes no fake closure diagnostics or source/storage identity.",
+    "The original direct PreparedOccupiedFlow path remains available. Runtime fixed predictions and standalone Laurent preparation preserve the certificate array; actual multicut native proofs remain required."
+  ],
+  "qualifications": [
+    "Raw rational domain refers to the parsed symbolic expression and prepared coefficient data; this is not a parser-level promise to retain every mathematically canceled textual expression.",
+    "The input API rejects explicit independent-mass symbols, so no raw independent-mass pole input test is claimed.",
+    "No full three-loop or four-loop AMF closure/numerical acceptance follows from replacing a mathematically certified singleton physical zero."
+  ],
+  "production_modified_by_review": false
+}

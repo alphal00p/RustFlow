@@ -1,0 +1,64 @@
+{
+  "scope": "Completed lower-loop comparisons are launch prerequisites only; their values are not passed to the singleton prediction process.",
+  "captured_files": [
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-two-loop-fixed-comparison.json",
+      "copy_path": "evidence/history-candidate-limit-two-loop-fixed-comparison.json",
+      "sha256": "263c4bd01a3ebd17a1532bfcb533b031961508862a18834961393eb7d86fc09e",
+      "bytes": 53017
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-two-loop-fixed-comparison-binding.json",
+      "copy_path": "evidence/history-candidate-limit-two-loop-fixed-comparison-binding.json",
+      "sha256": "9141b77ad25a154a6b1a21bfa389c899029798530d6ece477c39ac0f34905ddf",
+      "bytes": 16936
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-two-loop-fixed-binding.json",
+      "copy_path": "evidence/history-candidate-limit-two-loop-fixed-binding.json",
+      "sha256": "453f0fbf85f73d1f5b0e1ad8aeb5b51c792862981da542648c8c7afaa7734713",
+      "bytes": 2504
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-two-loop-laurent-comparison.json",
+      "copy_path": "evidence/history-candidate-limit-two-loop-laurent-comparison.json",
+      "sha256": "ee432a8dd7e1be789a0b035fcad44629dcc74b535ac0daff564d6db0f0e9315a",
+      "bytes": 50906
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-two-loop-laurent-comparison-binding.json",
+      "copy_path": "evidence/history-candidate-limit-two-loop-laurent-comparison-binding.json",
+      "sha256": "29c78e8c5cedbc76e4c8874c96ffa659b64205a1c87542a524580c68d1760ba3",
+      "bytes": 17660
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-two-loop-laurent-binding.json",
+      "copy_path": "evidence/history-candidate-limit-two-loop-laurent-binding.json",
+      "sha256": "48974f4dba8fda1240a33f96d97b6cc6bd33cdaa0711935bb628cf6b53900396",
+      "bytes": 2504
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression-comparison.json",
+      "copy_path": "evidence/history-candidate-limit-massive-regression-comparison.json",
+      "sha256": "369e982655707cfb6a01a0c86ddf73bb82b70c359ef3a401419a83eb09e05c95",
+      "bytes": 14348
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression-comparison-binding.json",
+      "copy_path": "evidence/history-candidate-limit-massive-regression-comparison-binding.json",
+      "sha256": "7ceeb006881056ba56916825bb4080af37a8c2d35c12c0a3bd4e05b249937b99",
+      "bytes": 12079
+    },
+    {
+      "source_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression-binding.json",
+      "copy_path": "evidence/history-candidate-limit-massive-regression-binding.json",
+      "sha256": "b14c7161f65ce3ccd5029f711a9541c1eba235cfc51795830b59eb0b2cf5962f",
+      "bytes": 2975
+    }
+  ],
+  "source_snapshot_sha256": "d0ad8d14a977a47300c30b577737e953273f6a7698ad221ae48b655524dae889",
+  "build_provenance_sha256": "d60039984d9a2fdb3fc31e5bf3ba84ff8bf7d084053e843757251aa7be1c7f3d",
+  "executable_sha256": "8c15752a6766285754b4ae1382e0fc9a4d0ffd26011b536db980ee7541c0e034",
+  "capture_script_sha256": "a9bfcddbbfc9267a5a56b4470e1098c5b72bc5d5461c8932ae0c3d78aba557f4",
+  "all_three_comparisons_passed": true
+}

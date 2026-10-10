@@ -1,0 +1,1302 @@
+{
+  "status": "frozen validated integration checkpoint",
+  "files": {
+    "singleton-physical-zero-v2-python-resources.log": {
+      "sha256": "b662839bce1057373f2a9af903d076b8e6e732c62862ad244595a00ae94a3558",
+      "bytes": 193
+    },
+    "singleton-physical-zero-v2-python-resources.provenance.json": {
+      "sha256": "befa1cc014996e52a8223ef243371849de76e32f6da7b16483db9cc62f56c2fa",
+      "bytes": 858
+    },
+    "test_history_coverage.py": {
+      "sha256": "e480ae2bc54d8dbc4c14ede5721cf3a12c6d23263166b7504f0813df60a02bf9",
+      "bytes": 3419
+    },
+    "singleton-physical-zero-v2-two-loop-fixed-comparison-binding.json": {
+      "sha256": "287c3c14b21116eecd0cba7f9946a9b1a680d2ab7f66ffd8e50c4f6b79ecd554",
+      "bytes": 33757
+    },
+    "run-root-gates.py": {
+      "sha256": "18a94b5c09f8936e5e972188be8b40a12645d5387b48ebb108721fe2adf21ba4",
+      "bytes": 910
+    },
+    "singleton-physical-zero-v2-massive-regression-resources.log.gz": {
+      "sha256": "31fca30800a7bda4caf170e7894d8e84c5959de3c37108d8aeccbbfb2d465d24",
+      "bytes": 2164
+    },
+    "summarize-frozen-root-gates.py": {
+      "sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e",
+      "bytes": 4149
+    },
+    "capture-singleton-physical-zero-build.py": {
+      "sha256": "c820ecc9c74388778a64334ef327b6c1be1379a0d486777a03e4feeb142aa896",
+      "bytes": 908
+    },
+    "native-digest-control-abc.bin": {
+      "sha256": "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
+      "bytes": 3
+    },
+    "singleton-physical-zero-v2-source-hashes.json": {
+      "sha256": "9057e506ce003298a77236f53f23eb0343ae0275fec1d723596d95ec1f262896",
+      "bytes": 377761
+    },
+    "certificate_validation.py": {
+      "sha256": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+      "bytes": 7067
+    },
+    "singleton-physical-zero-v2-lib-resources.log": {
+      "sha256": "5c46c2ed5f4b7379a062c774f5c4fa01f28ce53729366eb6de5e67a88e18e643",
+      "bytes": 13036
+    },
+    "test_certificate_validation.py": {
+      "sha256": "3f30ed7fd26c4155e4581686f4b32745a40a0660f1c84be61eb622d25426a95c",
+      "bytes": 4970
+    },
+    "singleton-physical-zero-v2-flow-boundary-resources.json": {
+      "sha256": "fcb388f6352deef7ec3017c6714903e0065953f6800a07ca1ffe6e81c349374b",
+      "bytes": 394
+    },
+    "singleton-physical-zero-v2-massive-regression-resources.json": {
+      "sha256": "9c8ec1245843e3a66a68ca264663eb61f84f1cca645ab4c11e5925ac3a47f5c2",
+      "bytes": 831
+    },
+    "singleton-physical-zero-v2-two-loop-laurent-resources.provenance.json": {
+      "sha256": "174516d6be9240a485db7313e474eb19ac79e1c6d9f178d5a59eee25179dd695",
+      "bytes": 942
+    },
+    "history_coverage.py": {
+      "sha256": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+      "bytes": 2939
+    },
+    "singleton-physical-zero-v2-two-loop-laurent-resources.json": {
+      "sha256": "331eac645e9ed716921794c5b77aa97a272c43d633b38d46df4ef227a825fafc",
+      "bytes": 470
+    },
+    "singleton-physical-zero-v2-flow-boundary-binding.json": {
+      "sha256": "eef6da1f8711dd148b5e0892ebe894037705b8ca3f9506ba1b4b8caa906b4cb6",
+      "bytes": 535
+    },
+    "singleton-physical-zero-v2-lib-resources.provenance.json": {
+      "sha256": "9dedcb3646a964b8556a963c111f12fc70179feba161a512701d93b5990fb698",
+      "bytes": 867
+    },
+    "run-massive-regression.py": {
+      "sha256": "b1994c895c6cb5ee40960a445ea97864c0924597abd19ebb5758c14069da1b12",
+      "bytes": 4630
+    },
+    "singleton-physical-zero-v2-two-loop-laurent-comparison.json": {
+      "sha256": "a69d999372e3dfb1351c09d253712ac735eed85e5ab4c5e6b1b39851dd8a78af",
+      "bytes": 51548
+    },
+    "singleton-physical-zero-v2-massless-sources-resources.log": {
+      "sha256": "9a423b0549e1d3c579e38881dca906fad8fcb1aed415b5d4e661e95df7a5c09e",
+      "bytes": 435
+    },
+    "native-digest-build.json": {
+      "sha256": "e70765dd25498a7d56d23aff35af0efa0ceb12b4f8623927c527d465fc43c456",
+      "bytes": 3075
+    },
+    "final-integrity.json": {
+      "sha256": "fce7505ea084dc47b04b86a31f57a292b2e14a810f9f226e618d4813695e176a",
+      "bytes": 402
+    },
+    "singleton-physical-zero-v2-massive-regression-binding.json": {
+      "sha256": "ba30636a56ca478469babaac6a441e16430bc64cb5327379efa6fc0b631af2db",
+      "bytes": 2987
+    },
+    "singleton-physical-zero-v2-lib-binding.json": {
+      "sha256": "962b88d951301436d21c535637fd74bdb70ef9a651670313786d36696843ca0a",
+      "bytes": 537
+    },
+    "singleton-physical-zero-v2-flow-boundary-resources.provenance.json": {
+      "sha256": "f2ea1f87ba35ed396075038e245ab7060f7c2ed3fc8314191e18a3f6bce3f0b6",
+      "bytes": 879
+    },
+    "singleton-physical-zero-v2-polynomial-sources-binding.json": {
+      "sha256": "415cafbca75fd84ef97fdcb1fb3d81b8de3c1e9448038afdf34fbb7d18ed6a2d",
+      "bytes": 1038
+    },
+    "singleton-physical-zero-v2-build-resources.provenance.json": {
+      "sha256": "e273967c862edd3f5d338eea3995f2d629608bd0df17656e85397dbeeb8e6b05",
+      "bytes": 1233
+    },
+    "singleton-physical-zero-v2-capacity-resources.json": {
+      "sha256": "fb891eab22859780dd1009db02106f117cbc6f5d638bb85c3d6bd125b859ad63",
+      "bytes": 390
+    },
+    "compare_three_loop_reference.py": {
+      "sha256": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226",
+      "bytes": 18785
+    },
+    "compare-completed-predictions.py": {
+      "sha256": "b896275dad1e3c0645eb64ff2d5df70fb9d66e4fd4a358caff83596e73f346e7",
+      "bytes": 15948
+    },
+    "run-two-loop-gate.py": {
+      "sha256": "268f790930b5b89a17a5a681d287406f926849d9344aceeaca800e87af958ff6",
+      "bytes": 4954
+    },
+    "singleton-physical-zero-v2-source-fingerprint-binding.json": {
+      "sha256": "636b889948df9ad6e49dd3c4f41fc18af3293977bd174ccf120f08a0c620288b",
+      "bytes": 530
+    },
+    "singleton-physical-zero-v2-two-loop-fixed-resources.log.gz": {
+      "sha256": "9929a8791b98b7f1e330701e2557512cc0fefdff47149d82678ed049ce625cfb",
+      "bytes": 769
+    },
+    "singleton-physical-zero-v2-build-resources.log": {
+      "sha256": "07546a19cfc9ff023c755961f48b3eaf912e22143e180aeffe0b7979ef5cde66",
+      "bytes": 3463
+    },
+    "singleton-physical-zero-v2-build-resources.json": {
+      "sha256": "ac1d5baa478c311bb13f2e20e45674cf05ab88e43fe78ea5c504cb7a72504548",
+      "bytes": 846
+    },
+    "singleton-physical-zero-v2-two-loop-fixed-resources.json": {
+      "sha256": "2a18e9ad1d809e90caee543fd02762c131a9b899467bf16f26660e1e0e789b3a",
+      "bytes": 459
+    },
+    "run-three-loop-gate.py": {
+      "sha256": "fb55fac3faf63f99ea571716211790388a2c4a4ce6541533f627147584db31a5",
+      "bytes": 5756
+    },
+    "singleton-physical-zero-v2-lib-resources.json": {
+      "sha256": "a6374da8cb3d2a253bc49f9c63605319de47bca6a6e69515fcfd1fe2c4afadd0",
+      "bytes": 404
+    },
+    "native-digest-build.log": {
+      "sha256": "6a4d20789402a13fd8b6b4d223b2193e7101770c4396ce3852f36e9794e529b4",
+      "bytes": 56
+    },
+    "frozen_sources.py": {
+      "sha256": "fb3e25cfa0c395d8fc0f3c5a517a1fc8845b1dff8f93c163c68d3e8a1814e911",
+      "bytes": 1913
+    },
+    "singleton-physical-zero-v2-flow-boundary-resources.log": {
+      "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "bytes": 574
+    },
+    "singleton-physical-zero-v2-build-provenance.json": {
+      "sha256": "1fddcdcf394206a3a90f779dd9029bddeaeb26238a6f3c89a6a9ad45b812fa01",
+      "bytes": 5719
+    },
+    "singleton-physical-zero-v2-source-fingerprint-resources.json": {
+      "sha256": "ad2f1d4f5f9479674fe1e4c186f7403d9fea6c44cd3d51fd79bc63115bc88a1e",
+      "bytes": 395
+    },
+    "launch-singleton-physical-zero-build.py": {
+      "sha256": "b6cf22027aa50fccfae39faa96869c51fa5479b4c4358376e29fb071f1d80029",
+      "bytes": 3817
+    },
+    "singleton-physical-zero-v2-capacity-binding.json": {
+      "sha256": "1720f0118ac34b0aea9cb8304550b3e256af91b1ef3027b9af124bfd5dffd139",
+      "bytes": 525
+    },
+    "checkpoint-summary.json": {
+      "sha256": "aebba96e52ce2b646aa60e5658b3f25162813fa989ea4ac8f300273e25e2020d",
+      "bytes": 2795
+    },
+    "singleton-physical-zero-v2-native-binding.json": {
+      "sha256": "253ef8c351a59d0d6c07f5546decf5e977f86a9a31da05cbc2c2eb4d50075fd2",
+      "bytes": 530
+    },
+    "singleton-physical-zero-v2-two-loop-laurent-comparison-binding.json": {
+      "sha256": "9a72b28228a8cccccfa8702d7880f184783d63339e2b5af833a612ad92fc2347",
+      "bytes": 34473
+    },
+    "singleton-physical-zero-v2-polynomial-sources-resources.provenance.json": {
+      "sha256": "7b825d107e56e78e2b6e0f0560bb82a95c031016533f3eed5b243acb12b5bc90",
+      "bytes": 894
+    },
+    "compare_massless_reference.py": {
+      "sha256": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d",
+      "bytes": 10163
+    },
+    "comparison-plan.json": {
+      "sha256": "58260cbb2e61dc476d67ef03a7d50fb6583f42639753d89996c2676073ba47dc",
+      "bytes": 6755
+    },
+    "singleton-physical-zero-v2-two-loop-laurent-binding.json": {
+      "sha256": "4f575cea7b7a06b8955356741e6e63fd2a047d9f6fc054deea80d0bd12b3b037",
+      "bytes": 2510
+    },
+    "singleton-physical-zero-v2-root-gates.json": {
+      "sha256": "38a49e45ec686288fd81b9ffb0f79f1a010c8d395d4503708a668ebb6727c8d8",
+      "bytes": 12543
+    },
+    "singleton-physical-zero-v2-python-binding.json": {
+      "sha256": "0f9230d78804b85770ddf1a820bb31bc0d0cbc69a51e713f2680800fdcb55e55",
+      "bytes": 521
+    },
+    "native-digest-control-empty.bin": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "singleton-physical-zero-v2-capacity-resources.log": {
+      "sha256": "2b0ff815bd81bbb4d9b5a2413cab6713bff9847ffdf1292409547656650301ad",
+      "bytes": 364
+    },
+    "singleton-physical-zero-v2-capacity-resources.provenance.json": {
+      "sha256": "5debc154a9069b697f70f1c542536f379fe63d04e9ae51ef4437f417d4d0e2a2",
+      "bytes": 864
+    },
+    "singleton-physical-zero-v2-source-fingerprint-resources.provenance.json": {
+      "sha256": "9a8f98660f437b6df0627f0e66b558faa01356f7564d998e7913474dffec2aa3",
+      "bytes": 846
+    },
+    "build-native-digest.py": {
+      "sha256": "8baa2c5e08f5df58913af9edaa1b69119e24c38745faf75e178edff599227c73",
+      "bytes": 3790
+    },
+    "archive-map.json": {
+      "sha256": "64a3ea73050198f2e23f8d9acd0e10589718fecb740239b0e21ae955b6c46fe8",
+      "bytes": 43548
+    },
+    "singleton-physical-zero-v2-two-loop-fixed-comparison.json": {
+      "sha256": "00f3e341c3c8a4f80203321cc70d19509deb138ba4bc48ec61bbf8d0b67b23c9",
+      "bytes": 53711
+    },
+    "singleton-physical-zero-v2-source-fingerprint-resources.log": {
+      "sha256": "f30bab7d2bf4e52bebb18cabd6012c17bbb867b2cf52efc4bf09292bec0dfab7",
+      "bytes": 3684
+    },
+    "finalize-checkpoint.py": {
+      "sha256": "25695b0a22524fd074a2a8d2942aa5cf8a2c02297dc317f4476b768cd7b972f1",
+      "bytes": 8166
+    },
+    "singleton-physical-zero-v2-two-loop-fixed-resources.provenance.json": {
+      "sha256": "8d2e611f38498d4d958bf906780ebb2703a4b32fdd14204e537c4eb2fceb11ca",
+      "bytes": 944
+    },
+    "singleton-physical-zero-v2-two-loop-fixed-binding.json": {
+      "sha256": "a2446cb68ae6b3f87fde8712e58d612ae64474d60a435dd61d2d83ed6ca917a5",
+      "bytes": 2510
+    },
+    "singleton-physical-zero-v2-actual62-source-equivalence.json": {
+      "sha256": "5f30972f12a3c8f23ceb609ec1dd4fb89a1f6dd087f1c4e78e694b9db4323e0d",
+      "bytes": 513935
+    },
+    "native-digest.rs": {
+      "sha256": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+      "bytes": 818
+    },
+    "singleton-physical-zero-v2-massive-regression-comparison.json": {
+      "sha256": "a288ddf8fe1f1aa5ba58acecfcc9b57da0d7dbcb29e04f349c28e2857a4a6797",
+      "bytes": 14360
+    },
+    "capture-frozen-build.py": {
+      "sha256": "1622138f73b3ec893b377bb084ecb4d9311b8cece68f8c5deae20a70582e80e9",
+      "bytes": 5439
+    },
+    "singleton-physical-zero-v2-massless-sources-resources.json": {
+      "sha256": "903222c0280ca85e0d17f42772a9ac25690937422902e84b32d791c97681819c",
+      "bytes": 393
+    },
+    "helper-origins.json": {
+      "sha256": "6466b7b8051a4812c86190682717a0226e1ce8e537eb7694f624323e4eaa591f",
+      "bytes": 7527
+    },
+    "capture-source-snapshot.py": {
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+      "bytes": 2075
+    },
+    "singleton-physical-zero-v2-native-resources.json": {
+      "sha256": "15bc21fa9e342df2f5e4561d64eae4c14cdc3a3a52248d4fba9401d772275192",
+      "bytes": 395
+    },
+    "run-singleton-gate.py": {
+      "sha256": "311dac39bc0d66ee0095bd496ffbd10798e3bff45338c54685aa1be104e3f5e4",
+      "bytes": 5357
+    },
+    "singleton-physical-zero-v2-python-resources.json": {
+      "sha256": "a6e5ec5e5016f72bd064ede2eee5a7e45fbdc10ee4b5458ede8964e514ecb0d7",
+      "bytes": 396
+    },
+    "singleton-physical-zero-v2-massive-regression-resources.provenance.json": {
+      "sha256": "4ad32acdbb0ef0bc336a66b72ffa5ced748e89dd9bfe093a653c6832e8d976df",
+      "bytes": 1551
+    },
+    "singleton-physical-zero-v2-massless-sources-binding.json": {
+      "sha256": "7062893ebafcc902c4dc064f359338fbc6d11fb3fb770fbdc39bf7129009636c",
+      "bytes": 541
+    },
+    "README.md": {
+      "sha256": "01a0e1df529109b527ee0b04b18dc09395db2416e2c4496dddb81c9e8654ec14",
+      "bytes": 2417
+    },
+    "singleton-physical-zero-v2-two-loop-laurent-resources.log.gz": {
+      "sha256": "cb5c5c633d382d0829f4cb99b54403bb87d7956f049ee1f2d16903fdfdb5d0ea",
+      "bytes": 2248
+    },
+    "singleton-physical-zero-v2-native-resources.log": {
+      "sha256": "a840996d506fed13f5e7180105a64b99d6c39754fc1c74ac12ba8e8dc80862cd",
+      "bytes": 13851
+    },
+    "run-frozen-root-gate.py": {
+      "sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+      "bytes": 4005
+    },
+    "run-resource-command.py": {
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    },
+    "singleton-physical-zero-v2-polynomial-sources-resources.log": {
+      "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596",
+      "bytes": 188
+    },
+    "singleton-physical-zero-v2-massive-regression-comparison-binding.json": {
+      "sha256": "17505489a518fb1f0032b96b25d873d2f7a01cb51c367f9b466b2ca46c789e08",
+      "bytes": 13071
+    },
+    "singleton-physical-zero-v2-polynomial-sources-resources.json": {
+      "sha256": "a57c7964b43949c143e87741faf49422ee273a5be0f930a74fab6924a935b4af",
+      "bytes": 411
+    },
+    "singleton-physical-zero-v2-massless-sources-resources.provenance.json": {
+      "sha256": "c40500e5fb3e0d150249a1e123db13be784ae1fdef17f86cdb97ae2e5a29252b",
+      "bytes": 888
+    },
+    "singleton-physical-zero-v2-native-resources.provenance.json": {
+      "sha256": "6b383918b8381bf6b0618be18e0de48e6da26c2944318f282ac80727f2df4889",
+      "bytes": 838
+    },
+    "singleton-physical-zero-v2-massive-regression/prediction-28-80-12.json": {
+      "sha256": "c24cb540194be756180455a7aa116d5a11bec0acb02161298b15043cd65a215e",
+      "bytes": 74584
+    },
+    "singleton-physical-zero-v2-massive-regression/configuration.json": {
+      "sha256": "45d8d1053e43054f7c49dd7abb6b64771ec37155888521950162ed7d174ac417",
+      "bytes": 1259
+    },
+    "singleton-physical-zero-v2-massive-regression/input.json": {
+      "sha256": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+      "bytes": 1060
+    },
+    "singleton-physical-zero-v2-massive-regression/physical-zero-certificates.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/prediction-18-60-8.json": {
+      "sha256": "66193d679e0fc830bfadf3040df344aea1f49e1545d6da399475791f81071b4a",
+      "bytes": 68928
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/prediction-28-80-12.json": {
+      "sha256": "73144fd2d975c7552da7eb8835497f95e640fb685766365b47bad440b0496fca",
+      "bytes": 68989
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/configuration.json": {
+      "sha256": "fc2138d119d173ee447f5d0bdb86a2dfee57fc9fed86cfb7372a53c3ea91b57e",
+      "bytes": 1390
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/prediction-28-80-8.json": {
+      "sha256": "cb5f3c277d729152efbcfcadae281d88d194a7106063e828de971be058ddff71",
+      "bytes": 68988
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/input.json": {
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+      "bytes": 1057
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/prediction-28-60-8.json": {
+      "sha256": "4b70b3c2209420b31a96f854a44992ba163de3564a996be19322167b4e659f2d",
+      "bytes": 68988
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/physical-zero-certificates.json": {
+      "sha256": "970c9d9509244aa6d5cf90b50e85b518ec5a0ff4a2c81af797b403f44b7fda35",
+      "bytes": 19024
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/prediction-28-80-8-grid-1000.json": {
+      "sha256": "8f64042a091765b7bf7e8944260da090efbd5a35f9786fbe7faf3e9f484f7cd5",
+      "bytes": 1088
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/input.json": {
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+      "bytes": 1057
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/prediction-18-60-8-grid-1000.json": {
+      "sha256": "cd29df731c61cb75c913e92c43dabde600ec6dfeba48677957dc27d0858842fa",
+      "bytes": 1028
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/prediction-28-80-12-grid-1000.json": {
+      "sha256": "36658bf197bb26fdea5c40d4fae5c136aa1548275b910ebad87e0d87b387c54f",
+      "bytes": 1089
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/configuration.json": {
+      "sha256": "106ca2c59d32d4f5540c016c38fabde730cbafc684c6944477d9944a1b4fdc5f",
+      "bytes": 1392
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/prediction-28-80-12-grid-2000.json": {
+      "sha256": "8bb9269929071d672d2a3a5d90105cd1a353fd5a6a81ba4908722b31d0757a74",
+      "bytes": 1089
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/physical-zero-certificates.json": {
+      "sha256": "970c9d9509244aa6d5cf90b50e85b518ec5a0ff4a2c81af797b403f44b7fda35",
+      "bytes": 19024
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/prediction-28-60-8-grid-1000.json": {
+      "sha256": "66a6384c2e4f21ee007d2127852e31b562c5139e4fe78400b5a13e81becbcddf",
+      "bytes": 1088
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "46c609aebad4cedb2bb2c1ebbf266e6745589843b7d5287a53516d1c0883f13b",
+      "bytes": 10937
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json.gz": {
+      "sha256": "31471b595379fbf554986184199a85d41b3f83219be30cb46211a5e86dc90660",
+      "bytes": 111326
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json.gz": {
+      "sha256": "f0ed2876b6c8c407b9b02ae0c16de7a8e9b7566acc852f5e4a3227caa12d3deb",
+      "bytes": 2523
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json.gz": {
+      "sha256": "436b7cd5ce8eeb2a5d95a6bfdb897dddaf68039f27867b2019e13a23899e4ab7",
+      "bytes": 2535
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json.gz": {
+      "sha256": "579ad725ce722b386a88dc63056dbecd2e64778e2416fe4eb1e450eafbeddc8f",
+      "bytes": 3851
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/active-request-history.json.gz": {
+      "sha256": "6dcbc2c5118239db78261c54620621768fe36ecba8a27d402761e61c1329597d",
+      "bytes": 328
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz": {
+      "sha256": "605cf343c7bbeb8df683fee04634ab0d8e806037e0281b2a9f63e26216de8a3b",
+      "bytes": 41187
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json.gz": {
+      "sha256": "28e6b1a106789d676a81ba5338d326b953724bfa5ecda1d37738b114f3cfd1ae",
+      "bytes": 143
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin": {
+      "sha256": "dc2d888db6402303d2b40e3da81ff67fae531213be4c96667b800eced1e4614f",
+      "bytes": 391555
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json.gz": {
+      "sha256": "558105095c4c38ff02dff3f04d1c5d684f900c83cf7dab910006b10e7c11f23e",
+      "bytes": 2305
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json.gz": {
+      "sha256": "f5b54e20eceea502d0d98786ca07060a9d7bcbdc420c1a3860cdddf4d8afbf19",
+      "bytes": 7014
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json.gz": {
+      "sha256": "d71d68557b4a457f4358bee94c394210b9d2e42c7429a1c2e9d7698278106f16",
+      "bytes": 39776
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz": {
+      "sha256": "b797c8bce18034ed5883c26b0c3d511e2df0496d5823de4a10efbff77ac3a935",
+      "bytes": 43271
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json": {
+      "sha256": "d9af115e2b73965e755b54bc769ddb07ee72bba5449549d785a6ab451bc49c97",
+      "bytes": 23076
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json.gz": {
+      "sha256": "03e129a2e97c42628f135c486606ba4aaa030e240281feb4dba226b124b1a7d4",
+      "bytes": 2555
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json.gz": {
+      "sha256": "b18bc78f42036f14a0542b06935229492ae3a15f718368447b9f81532377a5ab",
+      "bytes": 53179
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz": {
+      "sha256": "dc338b58627879f4e454ce2a1472249bb0c883df8ca2f75155f80009be906ff8",
+      "bytes": 32755
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json": {
+      "sha256": "0f62e93f9b99aef5663e3bd46a2cd57a3ec0c9f5bb5a8e4f4d568a8849a4e307",
+      "bytes": 17444
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "37a7c76d6f884e4251342c975a7b6923f3a99d5e7969a612fc88a43db1e0df5c",
+      "bytes": 2507
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json.gz": {
+      "sha256": "d4e66aada38e9662085d4d66941a9cd5871c71a1a6ce2d64d86de48ae2e9f66e",
+      "bytes": 20048
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json.gz": {
+      "sha256": "b0abfbc824aebb798913d1b2d2050829357e0265e2f00b926531909047f14fa3",
+      "bytes": 20048
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin": {
+      "sha256": "8ec471b0de9870060388702b78b6f796f3d62b83626edee1fdb2de990e46057f",
+      "bytes": 391605
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "088f891bb0f7a3460b712ddad4dd3c815d2e61261c71773869db578725313ae0",
+      "bytes": 6645
+    },
+    "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json.gz": {
+      "sha256": "0addd17b2de8992dfbaeeff371054f2daf8b60a98a3fa51e741f88002ea7f56c",
+      "bytes": 325
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json.gz": {
+      "sha256": "03e129a2e97c42628f135c486606ba4aaa030e240281feb4dba226b124b1a7d4",
+      "bytes": 2555
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz": {
+      "sha256": "dc338b58627879f4e454ce2a1472249bb0c883df8ca2f75155f80009be906ff8",
+      "bytes": 32755
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json.gz": {
+      "sha256": "f5b54e20eceea502d0d98786ca07060a9d7bcbdc420c1a3860cdddf4d8afbf19",
+      "bytes": 7014
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json.gz": {
+      "sha256": "d71d68557b4a457f4358bee94c394210b9d2e42c7429a1c2e9d7698278106f16",
+      "bytes": 39776
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json.gz": {
+      "sha256": "28e6b1a106789d676a81ba5338d326b953724bfa5ecda1d37738b114f3cfd1ae",
+      "bytes": 143
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "088f891bb0f7a3460b712ddad4dd3c815d2e61261c71773869db578725313ae0",
+      "bytes": 6645
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "37a7c76d6f884e4251342c975a7b6923f3a99d5e7969a612fc88a43db1e0df5c",
+      "bytes": 2507
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.json": {
+      "sha256": "0f62e93f9b99aef5663e3bd46a2cd57a3ec0c9f5bb5a8e4f4d568a8849a4e307",
+      "bytes": 17444
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/retired-unresolved.json": {
+      "sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "bytes": 2
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json.gz": {
+      "sha256": "0addd17b2de8992dfbaeeff371054f2daf8b60a98a3fa51e741f88002ea7f56c",
+      "bytes": 325
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json.gz": {
+      "sha256": "31471b595379fbf554986184199a85d41b3f83219be30cb46211a5e86dc90660",
+      "bytes": 111326
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json.gz": {
+      "sha256": "579ad725ce722b386a88dc63056dbecd2e64778e2416fe4eb1e450eafbeddc8f",
+      "bytes": 3851
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/active-request-history.json.gz": {
+      "sha256": "6dcbc2c5118239db78261c54620621768fe36ecba8a27d402761e61c1329597d",
+      "bytes": 328
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-005-closed.bin": {
+      "sha256": "8ec471b0de9870060388702b78b6f796f3d62b83626edee1fdb2de990e46057f",
+      "bytes": 391605
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-005-closed.json": {
+      "sha256": "d9af115e2b73965e755b54bc769ddb07ee72bba5449549d785a6ab451bc49c97",
+      "bytes": 23076
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "46c609aebad4cedb2bb2c1ebbf266e6745589843b7d5287a53516d1c0883f13b",
+      "bytes": 10937
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json.gz": {
+      "sha256": "436b7cd5ce8eeb2a5d95a6bfdb897dddaf68039f27867b2019e13a23899e4ab7",
+      "bytes": 2535
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json.gz": {
+      "sha256": "d4e66aada38e9662085d4d66941a9cd5871c71a1a6ce2d64d86de48ae2e9f66e",
+      "bytes": 20048
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json.gz": {
+      "sha256": "f0ed2876b6c8c407b9b02ae0c16de7a8e9b7566acc852f5e4a3227caa12d3deb",
+      "bytes": 2523
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json.gz": {
+      "sha256": "b0abfbc824aebb798913d1b2d2050829357e0265e2f00b926531909047f14fa3",
+      "bytes": 20048
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz": {
+      "sha256": "b797c8bce18034ed5883c26b0c3d511e2df0496d5823de4a10efbff77ac3a935",
+      "bytes": 43271
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json.gz": {
+      "sha256": "b18bc78f42036f14a0542b06935229492ae3a15f718368447b9f81532377a5ab",
+      "bytes": 53179
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz": {
+      "sha256": "605cf343c7bbeb8df683fee04634ab0d8e806037e0281b2a9f63e26216de8a3b",
+      "bytes": 41187
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json.gz": {
+      "sha256": "558105095c4c38ff02dff3f04d1c5d684f900c83cf7dab910006b10e7c11f23e",
+      "bytes": 2305
+    },
+    "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin": {
+      "sha256": "dc2d888db6402303d2b40e3da81ff67fae531213be4c96667b800eced1e4614f",
+      "bytes": 391555
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "ace743be17204ebd6952e7dd543bc988d783e3bd5d00e91761de4b801d6e8100",
+      "bytes": 1553
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "0ee0a172b9905cccd11b9633aa108facfed2693cd198b940a36a9b57c3524512",
+      "bytes": 38215
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/guard-refinements.json.gz": {
+      "sha256": "fa7ac0155eb30b03cd3c6bb5267994c99bbc327452f8b069706062fafe029cd5",
+      "bytes": 530
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-002-closed.bin": {
+      "sha256": "9bdbd8c1f15a4bfc68d042e58383a49ec2f21779e6727860ec74647007cdf0c1",
+      "bytes": 267137
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "ecb933f5d2f2bcfd78185bcd374743dddbb6034f607b3fed01f3c7049b049788",
+      "bytes": 39399
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "52d8e309704ec77624d3df8069440bf5e2bd03623b302cf7c8ff3865e2a8742b",
+      "bytes": 1649
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-002-closed.json": {
+      "sha256": "025e32332918b696bb30a2d923912d9e0b79b5e69675cf7f668d2886690defb9",
+      "bytes": 6275
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "82a0feb45dc9ee831a6830ba7c72c559bddfd8e204b39766220789c34d93a272",
+      "bytes": 1655
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "4e91aea00612d6dddb3e59f199e42bdad1bfa972d178d662680a59c06f2e5bfa",
+      "bytes": 15899
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-002-closed.bin": {
+      "sha256": "199c6ca71d6d9828c0924a2ef30c8a2f624740cbc68c4e090d5d202750e2f647",
+      "bytes": 520750
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-001-provisional.json.gz": {
+      "sha256": "c40a5e8c22f3458c9764fcbd81c07ceb3205d59715a6a626e53b9fc0884d9132",
+      "bytes": 1870
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-001-provisional.bin.gz": {
+      "sha256": "d4fcf38c48726024f5434ea614b5bd3660a7ed7ea9c4dbe17959f23384a73483",
+      "bytes": 47464
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-002-provisional.json.gz": {
+      "sha256": "b4ddf93a3754de19e677ed08f0308126ff02b023c052bbc7bd89e526e64369b7",
+      "bytes": 1915
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/guard-refinements.json.gz": {
+      "sha256": "a992f8e8a0c4777bfc3fb91f97a664fcfde70c362d5d9fedeca26759aab49546",
+      "bytes": 488
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-002-closed.json": {
+      "sha256": "f16f36ea10fad0556fdb4a220c17d254507bb1887d1b15f634ba56e63e068d2a",
+      "bytes": 10763
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-000-provisional.json.gz": {
+      "sha256": "5b552b5b3190f5c9898ccef85cdab3aba059af495e2d8df90aa7cd5dc7990e9a",
+      "bytes": 1622
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-000-provisional.bin.gz": {
+      "sha256": "c77a047b3fd546dd8f7215b64f302ff51cb5e5b39c419b3aee4217d5d9a8f93e",
+      "bytes": 13114
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-002-provisional.bin.gz": {
+      "sha256": "e4990e55ef23d2066baabde6da545694a3d37325324c255a9d721e192bcb1c4a",
+      "bytes": 76439
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "b95d7d117dcf8f3267a50b0d0ce5903056c698d278bead447d9fc5115aa55fac",
+      "bytes": 31347
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-001-closed.json": {
+      "sha256": "1534460416051630aaff14c003081801324896c9785468180aadf804ad7bc558",
+      "bytes": 10314
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-000-provisional.json.gz": {
+      "sha256": "2f1ca19bff38a78ee258854a2b4c70f3a0d306e587fe1d622627d218581c9449",
+      "bytes": 1757
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-001-closed.bin": {
+      "sha256": "fbe38c06e98e9cdef0a29be5da3defd243cacebcc6aa933a6d9bbd408b10ee4c",
+      "bytes": 1352738
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "9e127eabd389072baa7d73ba0a1865585198ea6f98a7d1c08bf14cca1b5869f8",
+      "bytes": 1826
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "ba55a0923dd166de8094abed60b4f8d6874297f9343938dc3380089b5a475a4b",
+      "bytes": 170251
+    },
+    "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/guard-refinements.json.gz": {
+      "sha256": "a0428c42c25e0a3fe92574f7e967e71bc41e525ad6f81599034378aa97eb2e6e",
+      "bytes": 1101
+    }
+  },
+  "logical_archived_files": [
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/guard-refinements.json",
+      "raw_sha256": "6728ebdf3a90dbfa027937f972fd2b1fc0d59a70a5c53a7e6ad5012bd77192f7",
+      "raw_bytes": 6275,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/guard-refinements.json.gz",
+      "gzip_sha256": "fa7ac0155eb30b03cd3c6bb5267994c99bbc327452f8b069706062fafe029cd5",
+      "gzip_bytes": 530,
+      "restored_sha256": "6728ebdf3a90dbfa027937f972fd2b1fc0d59a70a5c53a7e6ad5012bd77192f7"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-000-provisional.bin",
+      "raw_sha256": "f8b90d40a9db77d5b5d7d5d70f5b8de2ed8bedfdcf520f7c1b3430f3f650f0c4",
+      "raw_bytes": 125481,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-000-provisional.bin.gz",
+      "gzip_sha256": "4e91aea00612d6dddb3e59f199e42bdad1bfa972d178d662680a59c06f2e5bfa",
+      "gzip_bytes": 15899,
+      "restored_sha256": "f8b90d40a9db77d5b5d7d5d70f5b8de2ed8bedfdcf520f7c1b3430f3f650f0c4"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-000-provisional.json",
+      "raw_sha256": "ae2fc655adc5827030e8fc6239116f82d043b68491b057d486106b95d430cc9a",
+      "raw_bytes": 4391,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-000-provisional.json.gz",
+      "gzip_sha256": "ace743be17204ebd6952e7dd543bc988d783e3bd5d00e91761de4b801d6e8100",
+      "gzip_bytes": 1553,
+      "restored_sha256": "ae2fc655adc5827030e8fc6239116f82d043b68491b057d486106b95d430cc9a"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-001-provisional.bin",
+      "raw_sha256": "f3b554fbd51b9bbe752095349611eff60ca4bdab838167c763ad17599af7611f",
+      "raw_bytes": 260693,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-001-provisional.bin.gz",
+      "gzip_sha256": "0ee0a172b9905cccd11b9633aa108facfed2693cd198b940a36a9b57c3524512",
+      "gzip_bytes": 38215,
+      "restored_sha256": "f3b554fbd51b9bbe752095349611eff60ca4bdab838167c763ad17599af7611f"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-001-provisional.json",
+      "raw_sha256": "96fc4a50aafda943237d88eee07e5c8c2a84480522a1e71cf0a1db2db2d7181d",
+      "raw_bytes": 6280,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-001-provisional.json.gz",
+      "gzip_sha256": "52d8e309704ec77624d3df8069440bf5e2bd03623b302cf7c8ff3865e2a8742b",
+      "gzip_bytes": 1649,
+      "restored_sha256": "96fc4a50aafda943237d88eee07e5c8c2a84480522a1e71cf0a1db2db2d7181d"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-002-provisional.bin",
+      "raw_sha256": "129cdd9360b8cd91e2b8ba4a8eb240dac44ae82f91f216441cf6dd7428f11e69",
+      "raw_bytes": 267089,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-002-provisional.bin.gz",
+      "gzip_sha256": "ecb933f5d2f2bcfd78185bcd374743dddbb6034f607b3fed01f3c7049b049788",
+      "gzip_bytes": 39399,
+      "restored_sha256": "129cdd9360b8cd91e2b8ba4a8eb240dac44ae82f91f216441cf6dd7428f11e69"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-002-provisional.json",
+      "raw_sha256": "8827e55e664c7211ee9be1d03da04eb10af3d31de2e2fdf740b39f62dbabf7e7",
+      "raw_bytes": 6280,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0/round-002-provisional.json.gz",
+      "gzip_sha256": "82a0feb45dc9ee831a6830ba7c72c559bddfd8e204b39766220789c34d93a272",
+      "gzip_bytes": 1655,
+      "restored_sha256": "8827e55e664c7211ee9be1d03da04eb10af3d31de2e2fdf740b39f62dbabf7e7"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/guard-refinements.json",
+      "raw_sha256": "6213808e355e162ada45e6371d780ec38e1c5fd1d09042ecbc862a3e954806e9",
+      "raw_bytes": 40343,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/guard-refinements.json.gz",
+      "gzip_sha256": "a0428c42c25e0a3fe92574f7e967e71bc41e525ad6f81599034378aa97eb2e6e",
+      "gzip_bytes": 1101,
+      "restored_sha256": "6213808e355e162ada45e6371d780ec38e1c5fd1d09042ecbc862a3e954806e9"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-000-provisional.bin",
+      "raw_sha256": "cfee6aba9c2ca0e5bd6efd88d736ba8f12b8a7e0fb62c5a38b1c23e48a9bfbbe",
+      "raw_bytes": 356165,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "gzip_sha256": "b95d7d117dcf8f3267a50b0d0ce5903056c698d278bead447d9fc5115aa55fac",
+      "gzip_bytes": 31347,
+      "restored_sha256": "cfee6aba9c2ca0e5bd6efd88d736ba8f12b8a7e0fb62c5a38b1c23e48a9bfbbe"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-000-provisional.json",
+      "raw_sha256": "4f9a93f753f53d145c9f2f126afa98a7ac3d5c96ba7e08bf77d889894c07ce3a",
+      "raw_bytes": 8260,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "gzip_sha256": "2f1ca19bff38a78ee258854a2b4c70f3a0d306e587fe1d622627d218581c9449",
+      "gzip_bytes": 1757,
+      "restored_sha256": "4f9a93f753f53d145c9f2f126afa98a7ac3d5c96ba7e08bf77d889894c07ce3a"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-001-provisional.bin",
+      "raw_sha256": "490d78386ecc0b4f67c3046d52acbc1b59dff74223a01f7553c9a98f714e3284",
+      "raw_bytes": 1352658,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "gzip_sha256": "ba55a0923dd166de8094abed60b4f8d6874297f9343938dc3380089b5a475a4b",
+      "gzip_bytes": 170251,
+      "restored_sha256": "490d78386ecc0b4f67c3046d52acbc1b59dff74223a01f7553c9a98f714e3284"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-001-provisional.json",
+      "raw_sha256": "ddc9825accc0bbd3b5d7163dea3136a19fbaf1032139f9723d81b4d3e532621d",
+      "raw_bytes": 10319,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "gzip_sha256": "9e127eabd389072baa7d73ba0a1865585198ea6f98a7d1c08bf14cca1b5869f8",
+      "gzip_bytes": 1826,
+      "restored_sha256": "ddc9825accc0bbd3b5d7163dea3136a19fbaf1032139f9723d81b4d3e532621d"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/guard-refinements.json",
+      "raw_sha256": "c96ed47ca1cc31e15afa5a9667300d328026e6b6d85a64276a75151ffb5c11db",
+      "raw_bytes": 6251,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/guard-refinements.json.gz",
+      "gzip_sha256": "a992f8e8a0c4777bfc3fb91f97a664fcfde70c362d5d9fedeca26759aab49546",
+      "gzip_bytes": 488,
+      "restored_sha256": "c96ed47ca1cc31e15afa5a9667300d328026e6b6d85a64276a75151ffb5c11db"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-000-provisional.bin",
+      "raw_sha256": "f9ef13815377dc6402dba3a86e0b936e4c389a7561775320e59a51a59882eb44",
+      "raw_bytes": 104584,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-000-provisional.bin.gz",
+      "gzip_sha256": "c77a047b3fd546dd8f7215b64f302ff51cb5e5b39c419b3aee4217d5d9a8f93e",
+      "gzip_bytes": 13114,
+      "restored_sha256": "f9ef13815377dc6402dba3a86e0b936e4c389a7561775320e59a51a59882eb44"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-000-provisional.json",
+      "raw_sha256": "29947add7b5739e65ead24f1e4716417b7907e4f9fe73ca06a9b914571922b2c",
+      "raw_bytes": 5457,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-000-provisional.json.gz",
+      "gzip_sha256": "5b552b5b3190f5c9898ccef85cdab3aba059af495e2d8df90aa7cd5dc7990e9a",
+      "gzip_bytes": 1622,
+      "restored_sha256": "29947add7b5739e65ead24f1e4716417b7907e4f9fe73ca06a9b914571922b2c"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-001-provisional.bin",
+      "raw_sha256": "b42b129b67d604ace2a532a2fdc80d76ca9d38f78cf79cadb55296b2cf910ff6",
+      "raw_bytes": 348849,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-001-provisional.bin.gz",
+      "gzip_sha256": "d4fcf38c48726024f5434ea614b5bd3660a7ed7ea9c4dbe17959f23384a73483",
+      "gzip_bytes": 47464,
+      "restored_sha256": "b42b129b67d604ace2a532a2fdc80d76ca9d38f78cf79cadb55296b2cf910ff6"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-001-provisional.json",
+      "raw_sha256": "aa3f35f481aff4f8b418b2062385714338c816097966d13edd73e81b512c673f",
+      "raw_bytes": 9704,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-001-provisional.json.gz",
+      "gzip_sha256": "c40a5e8c22f3458c9764fcbd81c07ceb3205d59715a6a626e53b9fc0884d9132",
+      "gzip_bytes": 1870,
+      "restored_sha256": "aa3f35f481aff4f8b418b2062385714338c816097966d13edd73e81b512c673f"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-002-provisional.bin",
+      "raw_sha256": "962924dc1046c2672fa3e50aa216e58e2a0afba80959f801dd1c695e452d8f9b",
+      "raw_bytes": 520702,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-002-provisional.bin.gz",
+      "gzip_sha256": "e4990e55ef23d2066baabde6da545694a3d37325324c255a9d721e192bcb1c4a",
+      "gzip_bytes": 76439,
+      "restored_sha256": "962924dc1046c2672fa3e50aa216e58e2a0afba80959f801dd1c695e452d8f9b"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-002-provisional.json",
+      "raw_sha256": "5e5b3f0db43f742fdd55d3c6da87c13c644ca7c58a90ac140a812764f2833c15",
+      "raw_bytes": 10768,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression/native-closure/cut-1/round-002-provisional.json.gz",
+      "gzip_sha256": "b4ddf93a3754de19e677ed08f0308126ff02b023c052bbc7bd89e526e64369b7",
+      "gzip_bytes": 1915,
+      "restored_sha256": "5e5b3f0db43f742fdd55d3c6da87c13c644ca7c58a90ac140a812764f2833c15"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-massive-regression-resources.log",
+      "raw_sha256": "5f73eb8d8f72006ccd97a18a02239224a4846dae6e631d07017f622a4fc240b2",
+      "raw_bytes": 32514,
+      "gzip_path": "singleton-physical-zero-v2-massive-regression-resources.log.gz",
+      "gzip_sha256": "31fca30800a7bda4caf170e7894d8e84c5959de3c37108d8aeccbbfb2d465d24",
+      "gzip_bytes": 2164,
+      "restored_sha256": "5f73eb8d8f72006ccd97a18a02239224a4846dae6e631d07017f622a4fc240b2"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/active-request-history.json",
+      "raw_sha256": "62bc61816a92ebed6f7bec5e6f453cefaebedfe17d93da7a63b1d89def3994f9",
+      "raw_bytes": 4750,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/active-request-history.json.gz",
+      "gzip_sha256": "6dcbc2c5118239db78261c54620621768fe36ecba8a27d402761e61c1329597d",
+      "gzip_bytes": 328,
+      "restored_sha256": "62bc61816a92ebed6f7bec5e6f453cefaebedfe17d93da7a63b1d89def3994f9"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json",
+      "raw_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "raw_bytes": 159,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json.gz",
+      "gzip_sha256": "28e6b1a106789d676a81ba5338d326b953724bfa5ecda1d37738b114f3cfd1ae",
+      "gzip_bytes": 143,
+      "restored_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json",
+      "raw_sha256": "22ec7d141273e84c1d440165a6a368d25adce4f64993bdf7110a4525b43d71b3",
+      "raw_bytes": 1073621,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json.gz",
+      "gzip_sha256": "b0abfbc824aebb798913d1b2d2050829357e0265e2f00b926531909047f14fa3",
+      "gzip_bytes": 20048,
+      "restored_sha256": "22ec7d141273e84c1d440165a6a368d25adce4f64993bdf7110a4525b43d71b3"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json",
+      "raw_sha256": "6549ec334da7c639db9b3bd3e2994c4e00704480911f723dbf5281397678305d",
+      "raw_bytes": 2133818,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json.gz",
+      "gzip_sha256": "d71d68557b4a457f4358bee94c394210b9d2e42c7429a1c2e9d7698278106f16",
+      "gzip_bytes": 39776,
+      "restored_sha256": "6549ec334da7c639db9b3bd3e2994c4e00704480911f723dbf5281397678305d"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json",
+      "raw_sha256": "b55be64ece7b5ec2546d8929be6efcb1bee27e1aaa6323ccdded6533f9740806",
+      "raw_bytes": 6039744,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json.gz",
+      "gzip_sha256": "31471b595379fbf554986184199a85d41b3f83219be30cb46211a5e86dc90660",
+      "gzip_bytes": 111326,
+      "restored_sha256": "b55be64ece7b5ec2546d8929be6efcb1bee27e1aaa6323ccdded6533f9740806"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json",
+      "raw_sha256": "e79d8abea08f8b09e894ec1ecabd791b52c3716a987387bd32eef4deaa58788a",
+      "raw_bytes": 2827391,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json.gz",
+      "gzip_sha256": "b18bc78f42036f14a0542b06935229492ae3a15f718368447b9f81532377a5ab",
+      "gzip_bytes": 53179,
+      "restored_sha256": "e79d8abea08f8b09e894ec1ecabd791b52c3716a987387bd32eef4deaa58788a"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json",
+      "raw_sha256": "4e4e9d7e58b6a0ce2d19072dde356f427d49ba818b5d581e1de5cbe0cf6f8e78",
+      "raw_bytes": 1062477,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json.gz",
+      "gzip_sha256": "d4e66aada38e9662085d4d66941a9cd5871c71a1a6ce2d64d86de48ae2e9f66e",
+      "gzip_bytes": 20048,
+      "restored_sha256": "4e4e9d7e58b6a0ce2d19072dde356f427d49ba818b5d581e1de5cbe0cf6f8e78"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json",
+      "raw_sha256": "c163aab9e38492f61db19f428271682d5c6202a19b9ff8eb886d528e6ab0cb23",
+      "raw_bytes": 349058,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json.gz",
+      "gzip_sha256": "f5b54e20eceea502d0d98786ca07060a9d7bcbdc420c1a3860cdddf4d8afbf19",
+      "gzip_bytes": 7014,
+      "restored_sha256": "c163aab9e38492f61db19f428271682d5c6202a19b9ff8eb886d528e6ab0cb23"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json",
+      "raw_sha256": "c7d20cd79fe31aefcb81299d69c8fe920a10c4e45e7c677266ca4668720bd08b",
+      "raw_bytes": 1676,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json.gz",
+      "gzip_sha256": "0addd17b2de8992dfbaeeff371054f2daf8b60a98a3fa51e741f88002ea7f56c",
+      "gzip_bytes": 325,
+      "restored_sha256": "c7d20cd79fe31aefcb81299d69c8fe920a10c4e45e7c677266ca4668720bd08b"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "raw_sha256": "bf915d8ffebfdc4abfa39f2d4af1ef1efcbc92d047b2c6f55b5012e64b20f22b",
+      "raw_bytes": 249057,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "gzip_sha256": "579ad725ce722b386a88dc63056dbecd2e64778e2416fe4eb1e450eafbeddc8f",
+      "gzip_bytes": 3851,
+      "restored_sha256": "bf915d8ffebfdc4abfa39f2d4af1ef1efcbc92d047b2c6f55b5012e64b20f22b"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin",
+      "raw_sha256": "85ec4e0e93d6680d4ce7c0f55a5d7d0480beb35ffca192520ff0f929c908f348",
+      "raw_bytes": 72749,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "gzip_sha256": "088f891bb0f7a3460b712ddad4dd3c815d2e61261c71773869db578725313ae0",
+      "gzip_bytes": 6645,
+      "restored_sha256": "85ec4e0e93d6680d4ce7c0f55a5d7d0480beb35ffca192520ff0f929c908f348"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json",
+      "raw_sha256": "31a0580d7dd77da36293b493cf2c0df21124b313ea26cd9a9d661d2189adbe45",
+      "raw_bytes": 11209,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "gzip_sha256": "558105095c4c38ff02dff3f04d1c5d684f900c83cf7dab910006b10e7c11f23e",
+      "gzip_bytes": 2305,
+      "restored_sha256": "31a0580d7dd77da36293b493cf2c0df21124b313ea26cd9a9d661d2189adbe45"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "raw_sha256": "35e113018185528b9056a2f428b50ffc9ca61f3d6121450adbfc6ed768fc441c",
+      "raw_bytes": 110930,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "gzip_sha256": "46c609aebad4cedb2bb2c1ebbf266e6745589843b7d5287a53516d1c0883f13b",
+      "gzip_bytes": 10937,
+      "restored_sha256": "35e113018185528b9056a2f428b50ffc9ca61f3d6121450adbfc6ed768fc441c"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json",
+      "raw_sha256": "ad1db5abacd05aac513b33fbf45b78cf6f2314e7fd4205a3be0b59ae742a4440",
+      "raw_bytes": 17162,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "gzip_sha256": "37a7c76d6f884e4251342c975a7b6923f3a99d5e7969a612fc88a43db1e0df5c",
+      "gzip_bytes": 2507,
+      "restored_sha256": "ad1db5abacd05aac513b33fbf45b78cf6f2314e7fd4205a3be0b59ae742a4440"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin",
+      "raw_sha256": "c36b0a9c259904eb530888a718171fcaaef0b9800b287f826f1b7cec7fc1cb95",
+      "raw_bytes": 277396,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "gzip_sha256": "dc338b58627879f4e454ce2a1472249bb0c883df8ca2f75155f80009be906ff8",
+      "gzip_bytes": 32755,
+      "restored_sha256": "c36b0a9c259904eb530888a718171fcaaef0b9800b287f826f1b7cec7fc1cb95"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json",
+      "raw_sha256": "90d3c17454e731134ad132064b13059795882b0acfce80de5c522d661d9028a0",
+      "raw_bytes": 19921,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "gzip_sha256": "03e129a2e97c42628f135c486606ba4aaa030e240281feb4dba226b124b1a7d4",
+      "gzip_bytes": 2555,
+      "restored_sha256": "90d3c17454e731134ad132064b13059795882b0acfce80de5c522d661d9028a0"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin",
+      "raw_sha256": "e8c1cefe4334cb9e991ff50eb498cc2cc7edeab5152d65a037877bf205f5ad95",
+      "raw_bytes": 343809,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "gzip_sha256": "605cf343c7bbeb8df683fee04634ab0d8e806037e0281b2a9f63e26216de8a3b",
+      "gzip_bytes": 41187,
+      "restored_sha256": "e8c1cefe4334cb9e991ff50eb498cc2cc7edeab5152d65a037877bf205f5ad95"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json",
+      "raw_sha256": "48334daa1791d3b2a30cd3e22e1d8d0be18570e5892bf619a81e1cb727a33abc",
+      "raw_bytes": 18305,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "gzip_sha256": "436b7cd5ce8eeb2a5d95a6bfdb897dddaf68039f27867b2019e13a23899e4ab7",
+      "gzip_bytes": 2535,
+      "restored_sha256": "48334daa1791d3b2a30cd3e22e1d8d0be18570e5892bf619a81e1cb727a33abc"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin",
+      "raw_sha256": "73c650285588b1d7f856d0bfbdcebd447fe160b7fbe1fc125585c914413f67b0",
+      "raw_bytes": 368828,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "gzip_sha256": "b797c8bce18034ed5883c26b0c3d511e2df0496d5823de4a10efbff77ac3a935",
+      "gzip_bytes": 43271,
+      "restored_sha256": "73c650285588b1d7f856d0bfbdcebd447fe160b7fbe1fc125585c914413f67b0"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json",
+      "raw_sha256": "453fdc50570ba46c51910a582b4e6b509842eea70d4179531b245d15bfde8100",
+      "raw_bytes": 17559,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "gzip_sha256": "f0ed2876b6c8c407b9b02ae0c16de7a8e9b7566acc852f5e4a3227caa12d3deb",
+      "gzip_bytes": 2523,
+      "restored_sha256": "453fdc50570ba46c51910a582b4e6b509842eea70d4179531b245d15bfde8100"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-fixed-resources.log",
+      "raw_sha256": "628c0841c9d0b33edb04b943b75da4d75c961eebb74a1f22dfadd7e91dd6bfbe",
+      "raw_bytes": 6029,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-fixed-resources.log.gz",
+      "gzip_sha256": "9929a8791b98b7f1e330701e2557512cc0fefdff47149d82678ed049ce625cfb",
+      "gzip_bytes": 769,
+      "restored_sha256": "628c0841c9d0b33edb04b943b75da4d75c961eebb74a1f22dfadd7e91dd6bfbe"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/active-request-history.json",
+      "raw_sha256": "62bc61816a92ebed6f7bec5e6f453cefaebedfe17d93da7a63b1d89def3994f9",
+      "raw_bytes": 4750,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/active-request-history.json.gz",
+      "gzip_sha256": "6dcbc2c5118239db78261c54620621768fe36ecba8a27d402761e61c1329597d",
+      "gzip_bytes": 328,
+      "restored_sha256": "62bc61816a92ebed6f7bec5e6f453cefaebedfe17d93da7a63b1d89def3994f9"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json",
+      "raw_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "raw_bytes": 159,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json.gz",
+      "gzip_sha256": "28e6b1a106789d676a81ba5338d326b953724bfa5ecda1d37738b114f3cfd1ae",
+      "gzip_bytes": 143,
+      "restored_sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json",
+      "raw_sha256": "22ec7d141273e84c1d440165a6a368d25adce4f64993bdf7110a4525b43d71b3",
+      "raw_bytes": 1073621,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json.gz",
+      "gzip_sha256": "b0abfbc824aebb798913d1b2d2050829357e0265e2f00b926531909047f14fa3",
+      "gzip_bytes": 20048,
+      "restored_sha256": "22ec7d141273e84c1d440165a6a368d25adce4f64993bdf7110a4525b43d71b3"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json",
+      "raw_sha256": "6549ec334da7c639db9b3bd3e2994c4e00704480911f723dbf5281397678305d",
+      "raw_bytes": 2133818,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json.gz",
+      "gzip_sha256": "d71d68557b4a457f4358bee94c394210b9d2e42c7429a1c2e9d7698278106f16",
+      "gzip_bytes": 39776,
+      "restored_sha256": "6549ec334da7c639db9b3bd3e2994c4e00704480911f723dbf5281397678305d"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json",
+      "raw_sha256": "b55be64ece7b5ec2546d8929be6efcb1bee27e1aaa6323ccdded6533f9740806",
+      "raw_bytes": 6039744,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json.gz",
+      "gzip_sha256": "31471b595379fbf554986184199a85d41b3f83219be30cb46211a5e86dc90660",
+      "gzip_bytes": 111326,
+      "restored_sha256": "b55be64ece7b5ec2546d8929be6efcb1bee27e1aaa6323ccdded6533f9740806"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json",
+      "raw_sha256": "e79d8abea08f8b09e894ec1ecabd791b52c3716a987387bd32eef4deaa58788a",
+      "raw_bytes": 2827391,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json.gz",
+      "gzip_sha256": "b18bc78f42036f14a0542b06935229492ae3a15f718368447b9f81532377a5ab",
+      "gzip_bytes": 53179,
+      "restored_sha256": "e79d8abea08f8b09e894ec1ecabd791b52c3716a987387bd32eef4deaa58788a"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json",
+      "raw_sha256": "4e4e9d7e58b6a0ce2d19072dde356f427d49ba818b5d581e1de5cbe0cf6f8e78",
+      "raw_bytes": 1062477,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json.gz",
+      "gzip_sha256": "d4e66aada38e9662085d4d66941a9cd5871c71a1a6ce2d64d86de48ae2e9f66e",
+      "gzip_bytes": 20048,
+      "restored_sha256": "4e4e9d7e58b6a0ce2d19072dde356f427d49ba818b5d581e1de5cbe0cf6f8e78"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json",
+      "raw_sha256": "c163aab9e38492f61db19f428271682d5c6202a19b9ff8eb886d528e6ab0cb23",
+      "raw_bytes": 349058,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json.gz",
+      "gzip_sha256": "f5b54e20eceea502d0d98786ca07060a9d7bcbdc420c1a3860cdddf4d8afbf19",
+      "gzip_bytes": 7014,
+      "restored_sha256": "c163aab9e38492f61db19f428271682d5c6202a19b9ff8eb886d528e6ab0cb23"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json",
+      "raw_sha256": "c7d20cd79fe31aefcb81299d69c8fe920a10c4e45e7c677266ca4668720bd08b",
+      "raw_bytes": 1676,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json.gz",
+      "gzip_sha256": "0addd17b2de8992dfbaeeff371054f2daf8b60a98a3fa51e741f88002ea7f56c",
+      "gzip_bytes": 325,
+      "restored_sha256": "c7d20cd79fe31aefcb81299d69c8fe920a10c4e45e7c677266ca4668720bd08b"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json",
+      "raw_sha256": "bf915d8ffebfdc4abfa39f2d4af1ef1efcbc92d047b2c6f55b5012e64b20f22b",
+      "raw_bytes": 249057,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json.gz",
+      "gzip_sha256": "579ad725ce722b386a88dc63056dbecd2e64778e2416fe4eb1e450eafbeddc8f",
+      "gzip_bytes": 3851,
+      "restored_sha256": "bf915d8ffebfdc4abfa39f2d4af1ef1efcbc92d047b2c6f55b5012e64b20f22b"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin",
+      "raw_sha256": "85ec4e0e93d6680d4ce7c0f55a5d7d0480beb35ffca192520ff0f929c908f348",
+      "raw_bytes": 72749,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "gzip_sha256": "088f891bb0f7a3460b712ddad4dd3c815d2e61261c71773869db578725313ae0",
+      "gzip_bytes": 6645,
+      "restored_sha256": "85ec4e0e93d6680d4ce7c0f55a5d7d0480beb35ffca192520ff0f929c908f348"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json",
+      "raw_sha256": "31a0580d7dd77da36293b493cf2c0df21124b313ea26cd9a9d661d2189adbe45",
+      "raw_bytes": 11209,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "gzip_sha256": "558105095c4c38ff02dff3f04d1c5d684f900c83cf7dab910006b10e7c11f23e",
+      "gzip_bytes": 2305,
+      "restored_sha256": "31a0580d7dd77da36293b493cf2c0df21124b313ea26cd9a9d661d2189adbe45"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin",
+      "raw_sha256": "35e113018185528b9056a2f428b50ffc9ca61f3d6121450adbfc6ed768fc441c",
+      "raw_bytes": 110930,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "gzip_sha256": "46c609aebad4cedb2bb2c1ebbf266e6745589843b7d5287a53516d1c0883f13b",
+      "gzip_bytes": 10937,
+      "restored_sha256": "35e113018185528b9056a2f428b50ffc9ca61f3d6121450adbfc6ed768fc441c"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json",
+      "raw_sha256": "ad1db5abacd05aac513b33fbf45b78cf6f2314e7fd4205a3be0b59ae742a4440",
+      "raw_bytes": 17162,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "gzip_sha256": "37a7c76d6f884e4251342c975a7b6923f3a99d5e7969a612fc88a43db1e0df5c",
+      "gzip_bytes": 2507,
+      "restored_sha256": "ad1db5abacd05aac513b33fbf45b78cf6f2314e7fd4205a3be0b59ae742a4440"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin",
+      "raw_sha256": "c36b0a9c259904eb530888a718171fcaaef0b9800b287f826f1b7cec7fc1cb95",
+      "raw_bytes": 277396,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "gzip_sha256": "dc338b58627879f4e454ce2a1472249bb0c883df8ca2f75155f80009be906ff8",
+      "gzip_bytes": 32755,
+      "restored_sha256": "c36b0a9c259904eb530888a718171fcaaef0b9800b287f826f1b7cec7fc1cb95"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json",
+      "raw_sha256": "90d3c17454e731134ad132064b13059795882b0acfce80de5c522d661d9028a0",
+      "raw_bytes": 19921,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "gzip_sha256": "03e129a2e97c42628f135c486606ba4aaa030e240281feb4dba226b124b1a7d4",
+      "gzip_bytes": 2555,
+      "restored_sha256": "90d3c17454e731134ad132064b13059795882b0acfce80de5c522d661d9028a0"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin",
+      "raw_sha256": "e8c1cefe4334cb9e991ff50eb498cc2cc7edeab5152d65a037877bf205f5ad95",
+      "raw_bytes": 343809,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "gzip_sha256": "605cf343c7bbeb8df683fee04634ab0d8e806037e0281b2a9f63e26216de8a3b",
+      "gzip_bytes": 41187,
+      "restored_sha256": "e8c1cefe4334cb9e991ff50eb498cc2cc7edeab5152d65a037877bf205f5ad95"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json",
+      "raw_sha256": "48334daa1791d3b2a30cd3e22e1d8d0be18570e5892bf619a81e1cb727a33abc",
+      "raw_bytes": 18305,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "gzip_sha256": "436b7cd5ce8eeb2a5d95a6bfdb897dddaf68039f27867b2019e13a23899e4ab7",
+      "gzip_bytes": 2535,
+      "restored_sha256": "48334daa1791d3b2a30cd3e22e1d8d0be18570e5892bf619a81e1cb727a33abc"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin",
+      "raw_sha256": "73c650285588b1d7f856d0bfbdcebd447fe160b7fbe1fc125585c914413f67b0",
+      "raw_bytes": 368828,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "gzip_sha256": "b797c8bce18034ed5883c26b0c3d511e2df0496d5823de4a10efbff77ac3a935",
+      "gzip_bytes": 43271,
+      "restored_sha256": "73c650285588b1d7f856d0bfbdcebd447fe160b7fbe1fc125585c914413f67b0"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json",
+      "raw_sha256": "453fdc50570ba46c51910a582b4e6b509842eea70d4179531b245d15bfde8100",
+      "raw_bytes": 17559,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "gzip_sha256": "f0ed2876b6c8c407b9b02ae0c16de7a8e9b7566acc852f5e4a3227caa12d3deb",
+      "gzip_bytes": 2523,
+      "restored_sha256": "453fdc50570ba46c51910a582b4e6b509842eea70d4179531b245d15bfde8100"
+    },
+    {
+      "logical_raw_path": "singleton-physical-zero-v2-two-loop-laurent-resources.log",
+      "raw_sha256": "0e3f9c4a07c653ab200d4b3e83462cba005faf7864b2891532ab2dd907e95af9",
+      "raw_bytes": 188417,
+      "gzip_path": "singleton-physical-zero-v2-two-loop-laurent-resources.log.gz",
+      "gzip_sha256": "cb5c5c633d382d0829f4cb99b54403bb87d7956f049ee1f2d16903fdfdb5d0ea",
+      "gzip_bytes": 2248,
+      "restored_sha256": "0e3f9c4a07c653ab200d4b3e83462cba005faf7864b2891532ab2dd907e95af9"
+    }
+  ],
+  "production_modified_by_validation": false
+}

@@ -1,0 +1,287 @@
+{
+  "scope": "Static prebuilt HC runtime capsule for a fresh original cut-3 singleton control with zero optional history maps; no imported native rules, resume, analytic shortcut or reference values. Later ROOT source/target changes do not change this run.",
+  "captured_utc": "2026-10-10T07:09:29.848277+00:00",
+  "capsule_path": "/tmp/rustflow-history-candidate-single3-20261010",
+  "original_runtime": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+  "source_snapshot_sha256": "d0ad8d14a977a47300c30b577737e953273f6a7698ad221ae48b655524dae889",
+  "build_provenance_sha256": "d60039984d9a2fdb3fc31e5bf3ba84ff8bf7d084053e843757251aa7be1c7f3d",
+  "root_gates_sha256": "f0e3254656a8a454791dd030e88be38cb896f6860c03e5db18c75a2c104650a3",
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "58c0591b3a16f1e50e3c40aff182f88e5dd18e38ad1912c56a665335c64f945f",
+    "RUSTRED_SOURCE_DIGEST": "9a3869bf20c4f25231c7b2c2160fec7f5d38307b542134a7119d79a1b1d535fb",
+    "PORT_SOURCE_DIGEST": "3a88d01feb2d4d9bf6024c97e7b012bd4cbc71ae99562925e02330032bd5efe8"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "source_asset_count": 2484,
+  "source_archive": {
+    "path": "frozen-source-assets.tar.gz",
+    "sha256": "5c7fc41081deb4a4d9d67fd496f73f5548c0f6b013a8bce3f53b46bc5656fd1c",
+    "bytes": 5837117,
+    "all_restored_member_hashes_match_snapshot": true
+  },
+  "evidence_copies": [
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-source-hashes.json",
+      "copy_path": "evidence/history-candidate-limit-source-hashes.json",
+      "sha256": "d0ad8d14a977a47300c30b577737e953273f6a7698ad221ae48b655524dae889",
+      "bytes": 377592
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-build-provenance.json",
+      "copy_path": "evidence/history-candidate-limit-build-provenance.json",
+      "sha256": "d60039984d9a2fdb3fc31e5bf3ba84ff8bf7d084053e843757251aa7be1c7f3d",
+      "bytes": 5447
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-root-gates.json",
+      "copy_path": "evidence/history-candidate-limit-root-gates.json",
+      "sha256": "f0e3254656a8a454791dd030e88be38cb896f6860c03e5db18c75a2c104650a3",
+      "bytes": 12336
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-actual62-source-equivalence.json",
+      "copy_path": "evidence/history-candidate-limit-actual62-source-equivalence.json",
+      "sha256": "5f30972f12a3c8f23ceb609ec1dd4fb89a1f6dd087f1c4e78e694b9db4323e0d",
+      "bytes": 513935
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/run-singleton-gate.py",
+      "copy_path": "evidence/run-singleton-gate.py",
+      "sha256": "598a64c614545656c03d7509b43622d6d003ad3d460400f628aaa81e71ca113c",
+      "bytes": 5354
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/run-resource-command.py",
+      "copy_path": "evidence/run-resource-command.py",
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-native-resources.json",
+      "copy_path": "evidence/history-candidate-limit-native-resources.json",
+      "sha256": "b2b2fe2eb694e3f47c6053ae1c253a6e4320f33ce7be029f3b8e39348e22c40f",
+      "bytes": 395
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-native-resources.log",
+      "copy_path": "evidence/history-candidate-limit-native-resources.log",
+      "sha256": "f87139fc8446ce517ee0db5e72f3f859d4a999a4122097da3a92c78f8db1512f",
+      "bytes": 13853
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-native-resources.provenance.json",
+      "copy_path": "evidence/history-candidate-limit-native-resources.provenance.json",
+      "sha256": "98bd201adb112b4bd404c9990b5cd1c2e5e2449229a3df20684aacc9c7a0fbdb",
+      "bytes": 838
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-native-binding.json",
+      "copy_path": "evidence/history-candidate-limit-native-binding.json",
+      "sha256": "724a6613895a95dd762383274d4b851045d468a2e87a19b1765aba1c21d9410b",
+      "bytes": 530
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-lib-resources.json",
+      "copy_path": "evidence/history-candidate-limit-lib-resources.json",
+      "sha256": "f1ec2064983a98f5729e84556b40dc635f41225bedcf0678bc8f281228e162b7",
+      "bytes": 405
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-lib-resources.log",
+      "copy_path": "evidence/history-candidate-limit-lib-resources.log",
+      "sha256": "482740bcf9782c6f6d5ba0f95a0faeaa3a739bc5ec4ca49488cd9703d84ff776",
+      "bytes": 12413
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-lib-resources.provenance.json",
+      "copy_path": "evidence/history-candidate-limit-lib-resources.provenance.json",
+      "sha256": "c04daaec6403472282ebab5a8ee41a1930f2808a72e3597e38a0ee130c685ec8",
+      "bytes": 867
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-lib-binding.json",
+      "copy_path": "evidence/history-candidate-limit-lib-binding.json",
+      "sha256": "8d6a8307b5101901bf09cb23c6c11988b48d95b41dbc167472d345c5a6cf2e42",
+      "bytes": 537
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-flow-boundary-resources.json",
+      "copy_path": "evidence/history-candidate-limit-flow-boundary-resources.json",
+      "sha256": "06332a40e1078ca7dd626eb632fcd3673c42d330ab3f01c5f5575775c78ebfc8",
+      "bytes": 393
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-flow-boundary-resources.log",
+      "copy_path": "evidence/history-candidate-limit-flow-boundary-resources.log",
+      "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "bytes": 574
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-flow-boundary-resources.provenance.json",
+      "copy_path": "evidence/history-candidate-limit-flow-boundary-resources.provenance.json",
+      "sha256": "b0f01b13772f01f452ff632e2a57b3bb2ef94aa8b96638fa6a4f2412569e32b3",
+      "bytes": 879
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-flow-boundary-binding.json",
+      "copy_path": "evidence/history-candidate-limit-flow-boundary-binding.json",
+      "sha256": "2620a481e393c63f0a19fcdfba3d2582021a23ee6eb1d09d6026240d10544b2a",
+      "bytes": 535
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massless-sources-resources.json",
+      "copy_path": "evidence/history-candidate-limit-massless-sources-resources.json",
+      "sha256": "be1798ea2388c423fb773735c46578d0d2ae0e44bd7b05a9de2db4b1b3a16eda",
+      "bytes": 396
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massless-sources-resources.log",
+      "copy_path": "evidence/history-candidate-limit-massless-sources-resources.log",
+      "sha256": "84afe519e28cb368ffc1941ea7e66117ccaddbe49c3ba77d4a7e7fbd0538d39c",
+      "bytes": 435
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massless-sources-resources.provenance.json",
+      "copy_path": "evidence/history-candidate-limit-massless-sources-resources.provenance.json",
+      "sha256": "27b8df8e6699a50188b9c3f96a44d449a2d7aea7ade70cc2f6e55bbb35c1c47c",
+      "bytes": 888
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massless-sources-binding.json",
+      "copy_path": "evidence/history-candidate-limit-massless-sources-binding.json",
+      "sha256": "a05c7b4e96860b1b65ef9db454e41a7b95f564b2b8915ffd957fb60cec3b36c1",
+      "bytes": 541
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-source-fingerprint-resources.json",
+      "copy_path": "evidence/history-candidate-limit-source-fingerprint-resources.json",
+      "sha256": "f381dde2169bab138b176bed80475e4b444a429664de739c93ab68f5b4514b0c",
+      "bytes": 385
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-source-fingerprint-resources.log",
+      "copy_path": "evidence/history-candidate-limit-source-fingerprint-resources.log",
+      "sha256": "3013d1478e2ec73999cfc7a14d6cafdfa4de30871fa1046dd41b76f88cf5d5ac",
+      "bytes": 3684
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-source-fingerprint-resources.provenance.json",
+      "copy_path": "evidence/history-candidate-limit-source-fingerprint-resources.provenance.json",
+      "sha256": "ff3a8058324cf9fbe2ae62c2617e61e4a11359695a9e0dac734e051759a53b7e",
+      "bytes": 846
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-source-fingerprint-binding.json",
+      "copy_path": "evidence/history-candidate-limit-source-fingerprint-binding.json",
+      "sha256": "cd7a52253fa7a48387c66f49664d24727b71ae45a98038f94bb4e6f39a75fd85",
+      "bytes": 530
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-python-resources.json",
+      "copy_path": "evidence/history-candidate-limit-python-resources.json",
+      "sha256": "1973bbdf798da616c5800635ceeafca609323492a2b71fdaf0a41736bb958ae7",
+      "bytes": 397
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-python-resources.log",
+      "copy_path": "evidence/history-candidate-limit-python-resources.log",
+      "sha256": "1fa6c593661ac5cc2fba5d7acf3a493e7a17e07dc72e8ac165662cf5d40a62f9",
+      "bytes": 193
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-python-resources.provenance.json",
+      "copy_path": "evidence/history-candidate-limit-python-resources.provenance.json",
+      "sha256": "b3f19cec06a3b2b89f1b689e0c0d2dab5514eabe33f0dcc035c2b255871aab15",
+      "bytes": 858
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-python-binding.json",
+      "copy_path": "evidence/history-candidate-limit-python-binding.json",
+      "sha256": "46156225c0756c4beba4f0cf1d3fdd253786d72985ffd0733bfcd0b360536d6d",
+      "bytes": 521
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-capacity-resources.json",
+      "copy_path": "evidence/history-candidate-limit-capacity-resources.json",
+      "sha256": "cef8df290526dd62a8601360e266c00c4e420a361c74afefed05f3d3c238c7b1",
+      "bytes": 401
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-capacity-resources.log",
+      "copy_path": "evidence/history-candidate-limit-capacity-resources.log",
+      "sha256": "2b0ff815bd81bbb4d9b5a2413cab6713bff9847ffdf1292409547656650301ad",
+      "bytes": 364
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-capacity-resources.provenance.json",
+      "copy_path": "evidence/history-candidate-limit-capacity-resources.provenance.json",
+      "sha256": "a9037217adaa4a6806a805de466328fb81ca04c03981df73dee2387c3d5d7b3c",
+      "bytes": 864
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-capacity-binding.json",
+      "copy_path": "evidence/history-candidate-limit-capacity-binding.json",
+      "sha256": "032a0b8f7a10576775d49ae6178fb7aef115def1dd98ec4bdb4372a952350e90",
+      "bytes": 525
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-polynomial-sources-resources.json",
+      "copy_path": "evidence/history-candidate-limit-polynomial-sources-resources.json",
+      "sha256": "c7764145f4366417fee2f1211929f380f2420e10b35ea18e63c8910fa282e94c",
+      "bytes": 398
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-polynomial-sources-resources.log",
+      "copy_path": "evidence/history-candidate-limit-polynomial-sources-resources.log",
+      "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596",
+      "bytes": 188
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-polynomial-sources-resources.provenance.json",
+      "copy_path": "evidence/history-candidate-limit-polynomial-sources-resources.provenance.json",
+      "sha256": "8e59ca92616bffb3e936679ebf4a25ebb9b8122ebf35f569a81bd45caf2a9207",
+      "bytes": 894
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-polynomial-sources-binding.json",
+      "copy_path": "evidence/history-candidate-limit-polynomial-sources-binding.json",
+      "sha256": "98a991eb99ef5f694f830fa2ae894a99c65d322663a0b435802ea91f5af39eed",
+      "bytes": 1026
+    }
+  ],
+  "static_files": [
+    {
+      "path": "/tmp/rustflow-history-candidate-single3-20261010/input.json",
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "bytes": 1550
+    },
+    {
+      "path": "/tmp/rustflow-history-candidate-single3-20261010/run-resource-command.py",
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    },
+    {
+      "path": "/tmp/rustflow-history-candidate-single3-20261010/runtime",
+      "sha256": "8c15752a6766285754b4ae1382e0fc9a4d0ffd26011b536db980ee7541c0e034",
+      "bytes": 1313373128
+    }
+  ],
+  "root_sources_verified_only_at_capture": true,
+  "post_run_policy": "Check only immutable captured files, source archive and evidence copies; no live ROOT/source/target reads.",
+  "prepare_script_sha256": "9f77158c1956d050446a22259da0d99f0a62c51565419efb516ed762549012d2",
+  "large_executable_storage": "/tmp only; do not commit executable"
+}

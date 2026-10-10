@@ -168,8 +168,24 @@ this endpoint construction.
 This argument proves more than homogeneity: it establishes the finite analytic
 invariant jets by uniform ultraviolet continuation, identifies the same
 regulated thermal branch, and keeps every original mass/support derivative.
-It still requires native weighted closure, integrated large-eta boundary data,
-transport and the shared physical projector; no single-cut answer is injected.
+The physical zero can therefore be certified without evaluating the unknown
+meromorphic coefficients. `PreparedSingletonZero` uses this consequence only
+for the original eta-independent physical target combinations. Its typed
+constructor accepts the singleton class, retains the complete converted
+cut/upper/lower labels and the original rational coefficient domain, and checks
+that every remaining coefficient depends only on epsilon. Raw denominator
+conditions are captured from parsed Atoms before subsequent rational
+cancellation; this does not recover textual poles already removed by parsing.
+It cannot accept a reduced combination with an eta-pole weight.
+
+Assembly records this as a separate physical zero certificate, with the exact
+family and proof homotopy, and reports no native closure or transport. This
+certificate is not a finite-eta zero rule or a boundary value. The direct
+`PreparedOccupiedFlow` API still performs weighted closure, integrated
+large-eta matching, transport and the shared physical projector for these
+sectors. Their existing numerical AMF checks remain independent validation of
+the zero theorem. Multicut values and all targets outside this singleton class
+still require their own flow or separately justified terminal.
 
 ## Implemented sealed structural evidence
 

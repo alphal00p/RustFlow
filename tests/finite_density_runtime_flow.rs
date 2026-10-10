@@ -166,7 +166,7 @@ impl Run {
     }
 
     fn full(&self) -> PreparedDensityFlow {
-        self.checked(
+        let prepared = self.checked(
             "complete preparation",
             PreparedDensityFlow::prepare_with_source_options(
                 &self.input,
@@ -175,7 +175,18 @@ impl Run {
                 &self.context,
                 self.source_options(),
             ),
-        )
+        );
+        self.save(
+            "physical-zero-certificates.json",
+            json!(
+                prepared
+                    .physical_zero_certificates()
+                    .iter()
+                    .map(|(cuts, proof)| json!({"cut_slots": cuts, "certificate": proof.report()}))
+                    .collect::<Vec<_>>()
+            ),
+        );
+        prepared
     }
 }
 
@@ -307,6 +318,7 @@ fn runtime_graph_full_amplitude() {
             })).collect::<Vec<_>>(),
             "occupied_reports":result.occupied_reports.iter().map(|(cuts,r)|json!({"cut_slots":cuts,"report":report(r)})).collect::<Vec<_>>(),
             "vacuum_zero_certificates":flow.vacuum_zero_certificates().iter().map(|c|c.report()).collect::<Vec<_>>(),
+            "physical_zero_certificates":flow.physical_zero_certificates().iter().map(|(cuts,c)|json!({"cut_slots":cuts,"certificate":c.report()})).collect::<Vec<_>>(),
             "empty_support":result.empty_support,"independent_reference_comparisons":0,
         }));
         let values = result

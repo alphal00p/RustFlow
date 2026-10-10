@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_capacity-fceac547516b5e9d",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.055971463210880756,
+  "user_seconds": 0.018196,
+  "system_seconds": 0.037682,
+  "peak_child_rss_kib": 15416,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

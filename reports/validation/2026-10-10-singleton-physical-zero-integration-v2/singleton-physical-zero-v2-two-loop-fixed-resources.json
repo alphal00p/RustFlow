@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "600",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 4.223219907376915,
+  "user_seconds": 4.117838,
+  "system_seconds": 0.072506,
+  "peak_child_rss_kib": 39984,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

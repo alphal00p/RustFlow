@@ -1,0 +1,23 @@
+{
+  "captured_utc": "2026-10-10T07:52:03.296545+00:00",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/python_finite_density-86655a919328faf8",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "target/release/deps/python_finite_density-86655a919328faf8": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/python_finite_density-86655a919328faf8",
+      "sha256": "94036ac106fbcdee6446a63aa7fd4e6a445c93ca972c8b9d2f9bb05cbbceee77",
+      "size_bytes": 1243675976
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

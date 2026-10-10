@@ -1,0 +1,44 @@
+{
+  "status": "report helper checks passed; coherent native execution ended with one new test-fixture assertion failure, no numerics",
+  "source_inventory": 2485,
+  "interrupted_and_current_source_contents_identical": true,
+  "build_inventory": "predecessor twelve artifacts plus the direct finite_density_massless_flow executable",
+  "contract_tests": {
+    "test_methods": 3,
+    "explicit_invalid_contract_cases": 23,
+    "result": "passed; synthetic metadata, not a physical theorem test"
+  },
+  "history_coverage_tests": {
+    "tests": 6,
+    "result": "passed"
+  },
+  "numerical_logic_check": "AST identity for complete comparison/refinement loop and success expression in both report-local comparators; imported Decimal arithmetic and tolerances unchanged",
+  "frozen_predecessor_reference_and_comparator_hashes_verified": 18,
+  "certificate_scope": "two singleton physical zeros separately typed and bound; actual multicut AMF closure/proof/transaction/history validation remains mandatory. No synthetic singleton proof or native closure.",
+  "files_sha256": {
+    "frozen_sources.py": "ac8be1d6ad84fde80e3dd9f1db44ac3deed446cfb2a4c73770bc16408ef170a3",
+    "compare_three_loop_reference.py": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226",
+    "capture-source-snapshot.py": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+    "compare-completed-predictions.py": "55bbbcbdd8d9ba5dacb9cd981b3f47d0bb5b3d594e73225a79396280761ab5e0",
+    "run-two-loop-gate.py": "9d8ba4b7ec3949977ebd9ef7bd85d02bb25db8339a966932f58123bf22d7470c",
+    "compare_massless_reference.py": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d",
+    "run-three-loop-gate.py": "b7e6d54681ce51c7eba1826a022117346f964af32a87da3e8a23499562c960b9",
+    "run-root-gates.py": "b1cc7bbdae794a4ab5e9ddb73826133a48ea9a30efff8afce7ff9fd20bb6b47b",
+    "test_certificate_validation.py": "3f30ed7fd26c4155e4581686f4b32745a40a0660f1c84be61eb622d25426a95c",
+    "comparison-plan.json": "7f191705c22c825545425dbc59488f1be5dd1fc67c7da8f27bbd7d171bfd6fc5",
+    "capture-singleton-physical-zero-build.py": "09e455f85694e59b16c1ecc9ba07711ea62326451d3d528c50d12870d2d1b422",
+    "launch-singleton-physical-zero-build.py": "b398674b502ff2c7f48e7acd4cbfe401d16537a9d2a0867b64ed901d84816f80",
+    "run-massive-regression.py": "561dcb6d8c5defe3bb2c8d3aa5fcc387b37b9f7fcfa38b3369b1dccc6342c910",
+    "certificate_validation.py": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+    "build-native-digest.py": "786bc8a838a7a5aac859f8e93ffbabc3ae34d7a4a7598e288bf0c4820ba8c205",
+    "summarize-frozen-root-gates.py": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e",
+    "capture-frozen-build.py": "1622138f73b3ec893b377bb084ecb4d9311b8cece68f8c5deae20a70582e80e9",
+    "test_history_coverage.py": "e480ae2bc54d8dbc4c14ede5721cf3a12c6d23263166b7504f0813df60a02bf9",
+    "history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "run-singleton-gate.py": "a79a1b4d4fc47f7c5424a74474eaf8c9104dd0126b40c8c812265bacf767ddce",
+    "run-resource-command.py": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+    "run-frozen-root-gate.py": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8"
+  },
+  "production_modified": false,
+  "preprediction_metadata_correction": "Independent reviewer identified bound_family_signature is Vec<String>/JSON array. Validator and synthetic fixture corrected before any numerical predictions; 3 contract tests pass."
+}

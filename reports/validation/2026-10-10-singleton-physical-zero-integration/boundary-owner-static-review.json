@@ -1,0 +1,61 @@
+{
+  "scope": "independent read-only source/theorem/domain review before coordinated compile and numerical gates",
+  "result": "no_remaining_static_blocker_after_raw_symbol_correction",
+  "tests_or_builds_run_by_reviewer": false,
+  "files": {
+    "src/finite_density/singleton_zero.rs": {
+      "sha256": "3481c793b8905fdb5ef3080f22ff9c04e14bcdf8caf8cccf3185cc171c7fcbb6",
+      "bytes": 17199
+    },
+    "src/finite_density/massless_endpoint.rs": {
+      "sha256": "852717533fd35adae32125fd0c4003f97a0c958fb37de66a5155b8e9069f3a00",
+      "bytes": 118259
+    },
+    "src/finite_density/assembly.rs": {
+      "sha256": "eb38a53debb86fd4342063d682e4821191017d4b2b88ffff3109f95728ffceba",
+      "bytes": 16890
+    },
+    "src/finite_density/interface.rs": {
+      "sha256": "5f57a4c348264a2be37614072fb0787dc008f27db748082118549691e0ecc355",
+      "bytes": 13858
+    },
+    "tests/finite_density_massless_flow.rs": {
+      "sha256": "1eec104d3263e7caa17f69b47ba1c0153c6602f89ac43d524b1267d7a2eecef3",
+      "bytes": 9310
+    },
+    "tests/finite_density_runtime_flow.rs": {
+      "sha256": "7e0a56ac65bab2273c652a1103c9ec0f8ee2d5694ac41e90aed6e45262e9730b",
+      "bytes": 15528
+    },
+    "docs/finite-density-massless-germ.md": {
+      "sha256": "eedeae20170c4613673c8b0e5114d4c391703a056f5e9d2d3e8f83cc36d53f7c",
+      "bytes": 17403
+    },
+    "src/physical_conditions.rs": {
+      "sha256": "52af20b182eedbf0dc9a9885b450afacc88cb1db50fb83e13f2ddfd4edf993af",
+      "bytes": 12954
+    }
+  },
+  "resolved_finding": {
+    "issue": "raw eta or unknown scalar numerator on a cut-removed target escaped epsilon-only validation of surviving family coefficients",
+    "correction": "validate all original/converted expressions using exactly original momentum coordinates, independent masses and epsilon before cut-erased coefficients or mass substitution can hide dependence",
+    "regressions": "removed-cut eta, inverse eta and unassigned scalar"
+  },
+  "checked": [
+    "Private typed SingletonGerm class with positive virtual rank; no string classification authority or C1 raw-Ward substitution",
+    "Exact original physical family/targets and all-uncut homotopy binding retained through existing constructor",
+    "Original Cn/upper/lower distribution labels audited without q^2*Cn=0 simplification",
+    "Finite polynomial medium tensors permitted by existing germ theorem; inverse-energy option, massive physical lines, multiple compact cuts and external-only uncut factors excluded",
+    "Raw coefficient denominator bases retained before rational cancellation/cut erasure and physical mass assignment; only epsilon remains at evaluation",
+    "Conditions checked before zero values; epsilon0 and prepared-dimension mismatch rejected",
+    "Cancellation checked before prepare/evaluate and at major phases; native/CAS call interruption remains existing owner behavior",
+    "Assembly reports physical theorem separately from native closure; no finite-eta zero, transport, or storage capacity asserted",
+    "Terminal/flow fallback paths and all original target ordering remain present"
+  ],
+  "remaining_gates": [
+    "Compile and run the five new focused tests plus existing affected suites",
+    "Compare physical singleton certificates with retained original AMF singleton controls at the same original targets/conditions",
+    "Complete lower-loop fixed-D/Laurent and higher-loop full-assembly tests; this review supplies no numerical acceptance",
+    "Shared special-function/cancellation/resource behavior remains owned by existing constructors; no claim of fully bounded internal CAS work"
+  ]
+}

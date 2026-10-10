@@ -45,11 +45,12 @@ pub struct DensityEvaluation {
 enum OccupiedSector {
     Flow(Box<dyn OccupiedEvaluation>),
     Compact(super::terminal::PreparedOccupiedTerminal),
+    SingletonZero(super::singleton_zero::PreparedSingletonZero),
     EmptySupport(String),
 }
 
-/// Complete vacuum plus occupied amplitude. Every contributing cut is admitted
-/// and source-closed during preparation; a failed sector cannot be omitted.
+/// Complete vacuum plus occupied amplitude. Every cut has a source-closed flow
+/// or a separately certified terminal; a failed sector cannot be omitted.
 pub struct PreparedDensityFlow {
     input: PreparedDensityInput,
     vacuum: PreparedDensityVacuum,
@@ -139,6 +140,16 @@ impl PreparedDensityFlow {
                 super::terminal::PreparedOccupiedTerminal::prepare(&input, &cuts, options)?
             {
                 occupied.push((cuts, OccupiedSector::Compact(terminal)));
+                continue;
+            }
+            if let Some(zero) = super::singleton_zero::PreparedSingletonZero::prepare(
+                &input,
+                &cuts,
+                options,
+                source_options,
+                context,
+            )? {
+                occupied.push((cuts, OccupiedSector::SingletonZero(zero)));
                 continue;
             }
             let arity = input.basis().slots().len() + 2 * cuts.len();
@@ -241,12 +252,28 @@ impl PreparedDensityFlow {
         self.vacuum.zero_certificates()
     }
 
+    /// Physical singleton endpoint proofs. These are separate from native
+    /// source closure, finite-eta zero sectors and large-mass boundary values.
+    pub fn physical_zero_certificates(
+        &self,
+    ) -> Vec<(&[usize], &super::singleton_zero::PreparedSingletonZero)> {
+        self.occupied
+            .iter()
+            .filter_map(|(cuts, sector)| match sector {
+                OccupiedSector::SingletonZero(proof) => Some((cuts.as_slice(), proof)),
+                _ => None,
+            })
+            .collect()
+    }
+
     pub fn closure_diagnostics(&self) -> Vec<(&[usize], &WeightedClosureDiagnostics)> {
         self.occupied
             .iter()
             .filter_map(|(cuts, sector)| match sector {
                 OccupiedSector::Flow(flow) => Some((cuts.as_slice(), flow.diagnostics())),
-                OccupiedSector::Compact(_) | OccupiedSector::EmptySupport(_) => None,
+                OccupiedSector::Compact(_)
+                | OccupiedSector::SingletonZero(_)
+                | OccupiedSector::EmptySupport(_) => None,
             })
             .collect()
     }
@@ -284,6 +311,12 @@ impl PreparedDensityFlow {
                 }
                 OccupiedSector::Compact(terminal) => {
                     let report = terminal.evaluate(epsilon, options, context)?;
+                    let values = report.values.clone();
+                    occupied_reports.push((cuts.clone(), report));
+                    values
+                }
+                OccupiedSector::SingletonZero(proof) => {
+                    let report = proof.evaluate(epsilon, options, context)?;
                     let values = report.values.clone();
                     occupied_reports.push((cuts.clone(), report));
                     values

@@ -1,0 +1,13 @@
+{
+  "status": "interrupted before completion to correct build target inventory",
+  "reason": "The report-helper update invoked unavailable unqualified python3; the launch therefore lacked the requested finite_density_massless_flow target. Cargo was interrupted promptly with SIGINT; source files were unchanged and no compiler failure was observed.",
+  "production_modified": false,
+  "files_sha256": {
+    "capture-singleton-physical-zero-build.py": "9c7b08324c83ed71f8e2a63cf1d01442b44bf49ec5897b73747fdfe7984daf4e",
+    "singleton-physical-zero-source-hashes.json": "d3a9fa96cbc7af633ca2615f73bebe1d05a405da4c76880f52b895fcf9aefeec",
+    "singleton-physical-zero-build-resources.json": "45f57fbb4ae7198c2751b6117117f2185c0e7bdad00586b9843517049077bdee",
+    "singleton-physical-zero-build-resources.log": "cfc803dea9478f5d517008fbad3d2e85d55b96f6b8c092dbea68b466131a04e1",
+    "launch-singleton-physical-zero-build.py": "5e35b2a40a1a1ee2317541ec91569e06433f1d06d861b8516f171d71808b18e8",
+    "singleton-physical-zero-build-resources.provenance.json": "a145f263a5072c47f6a2efac2faaabe32cb38c7cc88257ce40ae8d783fb6e665"
+  }
+}

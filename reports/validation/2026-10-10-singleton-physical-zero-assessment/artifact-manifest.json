@@ -1,0 +1,15 @@
+{
+  "scope": "Read-only assessment of a proposed separate owner; no implementation/build/numerical run or admission claim",
+  "files": [
+    {
+      "path": "assessment.md",
+      "sha256": "75f7b30e0e7166f1fb2a5e8386e6492f7ac30a0e80abeea7db990fbff0a2466d",
+      "bytes": 4235
+    },
+    {
+      "path": "review.json",
+      "sha256": "8fdbed3d3bade2bc629eb1d8eb86e833c69fec3244b1e40556f1b70ac3fd06bc",
+      "bytes": 956
+    }
+  ]
+}

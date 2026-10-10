@@ -1,0 +1,22 @@
+{
+  "source_snapshot_sha256": "3f5660b59178bbc20237b099c84c1a5c984c7e9babf27968e4bf11505faca390",
+  "build_provenance_sha256": "a78fa19e90abfa3b551f5a3d7f236d15fcc3f1ef05c14355f0ecc3b3d2279aee",
+  "launcher_sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+  "gate": "polynomial-sources",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_polynomial_sources-67356704627148d2",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "native_numerical_acceptance_run": false,
+  "report_environment": {
+    "RUSTFLOW_POLYNOMIAL_SOURCE_REPORT": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-singleton-physical-zero-integration/singleton-physical-zero-actual62-source-equivalence.json"
+  },
+  "source_equivalence_report": {
+    "path": "reports/validation/2026-10-10-singleton-physical-zero-integration/singleton-physical-zero-actual62-source-equivalence.json",
+    "sha256": "5f30972f12a3c8f23ceb609ec1dd4fb89a1f6dd087f1c4e78e694b9db4323e0d"
+  }
+}

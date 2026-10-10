@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "source_assets_verified": 2485,
+  "coherent_artifacts_verified": 13,
+  "all_saved_comparison_inputs_unchanged": true,
+  "source_snapshot_sha256": "9057e506ce003298a77236f53f23eb0343ae0275fec1d723596d95ec1f262896",
+  "build_provenance_sha256": "1fddcdcf394206a3a90f779dd9029bddeaeb26238a6f3c89a6a9ad45b812fa01",
+  "archive_files": 62,
+  "source_change_after_last_run": false
+}

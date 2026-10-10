@@ -1,0 +1,47 @@
+--- tools/finite_density/compare_massless_reference.py
++++ reports/validation/2026-10-10-singleton-physical-zero-integration/compare_massless_reference.py
+@@ -9,6 +9,9 @@
+ from decimal import Decimal
+ from fractions import Fraction
+ from pathlib import Path
++import sys
++sys.path.insert(0,str(Path(__file__).resolve().parents[3]/"tools/finite_density"))
++from certificate_validation import load_certificates, validate_sample
+ from compare_massive_reference import (
+     ROOT, ZERO, CONFIGURATIONS, complex_decimal, difference, digest, read,
+ )
+@@ -71,6 +74,12 @@
+     inputs = [refpath, definition_path] + input_paths + paths + duplicate_paths
+     output = args.output.resolve()
+     require(output not in inputs, "output cannot replace an input artifact")
++    certificate_arrays=[]
++    for directory in dirs:
++        certificates, certificate_path=load_certificates(directory,definition,CUTS)
++        certificate_arrays.append(certificates); inputs.append(certificate_path)
++    require(all(c==certificate_arrays[0]for c in certificate_arrays),"physical-zero certificates changed across resumed runs")
++    inputs.append(Path(__file__).with_name("certificate_validation.py"))
+     previous = None
+     guard = None
+     dimension = None
+@@ -110,10 +119,8 @@
+             require(tuple(tuple(c["cut_slots"]) for c in record["contributions"]) == CUTS, "complete physical cut set mismatch")
+             occupied = record["occupied_reports"]
+             require(tuple(tuple(c["cut_slots"]) for c in occupied) == CUTS[1:], "occupied provenance does not cover all cuts")
+-            # Both native harnesses retain the physical cut order. The runtime
+-            # serializer nests the actual OccupiedFlowEvaluation under report.
+-            occupied_evaluations = [c.get("report", c) for c in occupied]
+-            require(all(isinstance(c, dict) and c.get("construction") == "weighted_amf" and c.get("massless_endpoint") is not None for c in occupied_evaluations), "occupied values require native AMF with bound massless endpoint evidence")
++            validate_sample(record, certificate_arrays[dirs.index(path.parent)], definition, CUTS,
++                            read(path.parent/"configuration.json")["source_options"])
+             for sector, entries in zip(SECTORS, [c["values"] for c in record["contributions"]] + [record["values"]]):
+                 require(len(entries) == len(TARGETS), "target count mismatch")
+                 for i, target in enumerate(TARGETS):
+@@ -129,7 +136,7 @@
+                 refinements.append({"target": target, "sector": sector, "power": power, "from_configuration": configs[profile_index-1], "to_configuration": config, "varied_setting": SETTINGS[profile_index-1], **difference(actual, previous[key])})
+         previous = values
+     passed = all(x["passed"] and x["imaginary_zero_passed"] for x in comparisons) and all(x["passed"] for x in refinements + assembly)
+-    report = {"schema_version": 1, "status": "passed" if passed else "failed", "mode": args.mode, "scope": "complete massless two-loop sunset with scalar and raised original numerator; no four-loop acceptance", "normalization": "unscaled Euclidean amplitude", "dimension": str(dimension) if dimension else "4-2*epsilon", "configurations": configs, "guard_digits": guard, "source_policy_provenance": "fixed native source snapshot and bound endpoint evidence; these native test records do not serialize source-search policy separately", "relative_tolerance": "1e-12", "small_magnitude_threshold": "1e-20", "small_absolute_tolerance": "1e-25", "imaginary_zero_absolute_tolerance": "1e-25", "reference_comparison_count": len(comparisons), "independent_refinement_comparison_count": len(refinements), "supplied_oracle_numerical_records_compared": 0, "reference_uncertainty": reference["uncertainty"], "arithmetic": "Python Decimal, 100 digits, saved decimal inputs", "inputs_sha256": {label(p): digest(p) for p in inputs}, "script_sha256": digest(Path(__file__)), "comparisons": comparisons, "refinements": refinements, "assembly_checks": assembly}
++    report = {"schema_version": 1, "status": "passed" if passed else "failed", "mode": args.mode, "scope": "complete massless two-loop sunset: separate certified physical singleton zeros plus native AMF double cut; no four-loop acceptance", "normalization": "unscaled Euclidean amplitude", "dimension": str(dimension) if dimension else "4-2*epsilon", "configurations": configs, "guard_digits": guard, "source_policy_provenance": "coherent runtime source snapshot; certified singleton physical zeros are distinct from the double-cut native source policy and AMF closure", "relative_tolerance": "1e-12", "small_magnitude_threshold": "1e-20", "small_absolute_tolerance": "1e-25", "imaginary_zero_absolute_tolerance": "1e-25", "reference_comparison_count": len(comparisons), "independent_refinement_comparison_count": len(refinements), "supplied_oracle_numerical_records_compared": 0, "reference_uncertainty": reference["uncertainty"], "arithmetic": "Python Decimal, 100 digits, saved decimal inputs", "inputs_sha256": {label(p): digest(p) for p in inputs}, "script_sha256": digest(Path(__file__)), "comparisons": comparisons, "refinements": refinements, "assembly_checks": assembly}
+     output.parent.mkdir(parents=True, exist_ok=True)
+     output.write_text(json.dumps(report, indent=2) + "\n")
+     print(json.dumps({k: report[k] for k in ("status", "mode", "reference_comparison_count", "independent_refinement_comparison_count")}))

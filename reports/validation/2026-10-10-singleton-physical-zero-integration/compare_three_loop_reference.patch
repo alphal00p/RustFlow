@@ -1,0 +1,100 @@
+--- tools/finite_density/compare_three_loop_reference.py
++++ reports/validation/2026-10-10-singleton-physical-zero-integration/compare_three_loop_reference.py
+@@ -10,6 +10,9 @@
+ from decimal import Decimal
+ from fractions import Fraction
+ from pathlib import Path
++import sys
++sys.path.insert(0,str(Path(__file__).resolve().parents[3]/"tools/finite_density"))
++from certificate_validation import load_certificates, validate_sample
+ from compare_massive_reference import (
+     ROOT, ZERO, CONFIGURATIONS, complex_decimal, difference, digest, read,
+ )
+@@ -82,14 +85,17 @@
+         executable = sha
+     inputs = provenance_paths + [snapshot_path]
+     checked_sources = {}
+-    for name in ["Cargo.lock","src/finite_density/assembly.rs","src/finite_density/flow.rs","src/finite_density/guarded.rs","tests/finite_density_runtime_flow.rs",str(definition_path.relative_to(ROOT))]:
++    for name in ["Cargo.lock","src/finite_density/assembly.rs","src/finite_density/flow.rs","src/finite_density/guarded.rs","src/finite_density/singleton_zero.rs","src/finite_density/massless_endpoint.rs","tests/finite_density_runtime_flow.rs",str(definition_path.relative_to(ROOT))]:
+         require(name in snapshot["files"], "native source snapshot missing " + name)
+         require(digest(ROOT/name) == snapshot["files"][name], "native source artifact changed: " + name)
+         checked_sources[name] = snapshot["files"][name]
+     baseline = None
+     compile_ids = set()
+     metadata_files = []
++    certificate_arrays = []
+     for directory in directories:
++        certs, certpath = load_certificates(directory,read(definition_path),CUTS)
++        certificate_arrays.append(certs); inputs.append(certpath)
+         config_path = directory/"configuration.json"
+         config = read(config_path);inputs.append(config_path)
+         require(config["independent_reference_comparisons"] == 0, "native configuration contains reference comparisons")
+@@ -100,7 +106,7 @@
+         normalized = {"source_options":config["source_options"],"native_closure":closure,"guard_digits":config["guard_digits"]}
+         require(baseline is None or normalized == baseline, "native source/closure policy changed between prediction directories")
+         baseline = normalized
+-        for cuts in CUTS[1:]:
++        for cuts in (CUTS[-1],):
+             sub = directory/"native-closure"/("cut-"+"-".join(map(str,cuts)))
+             files = sorted(sub.glob("round-*-closed.json"))
+             require(files, "missing successful native closure metadata for cut " + str(cuts))
+@@ -110,19 +116,20 @@
+                 require(fields[0]=="rustflow-weighted-sources-v1" and all(re.fullmatch(r"[0-9a-f]{64}",x) for x in fields[1:3]),"missing native dependency compile identities")
+                 compile_ids.add(tuple(fields[1:3]));inputs.append(path);metadata_files.append({"path":label(path),"sha256":digest(path),"cut_slots":cuts,"physical_arity":row["physical_arity"],"storage_capacity":row["storage_capacity"]})
+     require(len(compile_ids)==1,"native dependency compile identities changed")
+-    report={"configuration":baseline,"executable_sha256":executable,"dependency_compile_ids":list(next(iter(compile_ids))),"source_snapshot_sha256":digest(snapshot_path),"checked_source_files":checked_sources,"closed_metadata":metadata_files}
++    require(all(c==certificate_arrays[0]for c in certificate_arrays),"physical singleton certificates changed between resumed runs")
++    report={"configuration":baseline,"executable_sha256":executable,"dependency_compile_ids":list(next(iter(compile_ids))),"source_snapshot_sha256":digest(snapshot_path),"checked_source_files":checked_sources,"closed_metadata":metadata_files,"physical_zero_certificates":certificate_arrays[0]}
+     if args.mode=="laurent":
+         require(args.sample_comparison is not None,"Laurent gate requires matching successful fixed-D construction evidence")
+         sample_path=args.sample_comparison.resolve();sample=read(sample_path);inputs.append(sample_path)
+         require(sample["status"]=="passed" and sample["mode"]=="sample","fixed-D construction evidence did not pass")
+         old=sample["native_provenance"]
+-        for key in ["configuration","executable_sha256","dependency_compile_ids","source_snapshot_sha256"]:
++        for key in ["configuration","executable_sha256","dependency_compile_ids","source_snapshot_sha256","physical_zero_certificates"]:
+             require(old[key]==report[key],"Laurent provenance differs from successful fixed-D run: "+key)
+         for name,sha in sample["inputs_sha256"].items():
+             path=ROOT/name if not Path(name).is_absolute() else Path(name)
+             require(digest(path)==sha,"fixed-D supporting artifact changed: "+name)
+         report["fixed_dimension_comparison"]={"path":label(sample_path),"sha256":digest(sample_path)}
+-        report["construction_limit"]="Laurent harness omits direct per-sector reports; weighted-AMF construction is bound to the successful fixed-D gate and the identical Run::full source/executable and exact native compile identities. No per-sector Laurent coefficient claim."
++        report["construction_limit"]="Laurent harness omits direct per-sector reports; multicut weighted-AMF construction and separate singleton physical-zero certificates are bound to the successful fixed-D gate and the identical Run::full source/executable and exact native compile identities. No per-sector Laurent coefficient claim."
+     return report,inputs
+ 
+ def main():
+@@ -167,6 +174,12 @@
+     inputs.extend(native_inputs)
+     output = args.output.resolve()
+     require(output not in inputs, "output cannot replace an input artifact")
++    certificate_arrays=[]
++    for directory in dirs:
++        certificates, certificate_path=load_certificates(directory,definition,CUTS)
++        certificate_arrays.append(certificates); inputs.append(certificate_path)
++    require(all(c==certificate_arrays[0]for c in certificate_arrays),"physical-zero certificates changed across resumed runs")
++    inputs.append(Path(__file__).with_name("certificate_validation.py"))
+     previous = None
+     guard = None
+     dimension = None
+@@ -207,11 +220,8 @@
+             require(tuple(tuple(c["cut_slots"]) for c in record["contributions"]) == CUTS, "complete physical cut set mismatch")
+             occupied = record["occupied_reports"]
+             require(tuple(tuple(c["cut_slots"]) for c in occupied) == CUTS[1:], "occupied provenance does not cover all cuts")
+-            # Both native harnesses retain the physical cut order. The runtime
+-            # serializer nests the actual OccupiedFlowEvaluation under report.
+-            occupied_evaluations = [c.get("report", c) for c in occupied]
+-            require(all(isinstance(c, dict) and c.get("construction") == "weighted_amf" and c.get("massless_endpoint") is not None for c in occupied_evaluations), "occupied values require native AMF with bound massless endpoint evidence")
+-            require(all(c.get("source_options") == native_provenance["configuration"]["source_options"] for c in occupied_evaluations), "occupied source policy differs from saved configuration")
++            validate_sample(record, certificate_arrays[dirs.index(path.parent)], definition, CUTS,
++                            read(path.parent/"configuration.json")["source_options"])
+             require(record.get("vacuum_zero_certificates"), "missing native vacuum zero certificates")
+             require(record.get("empty_support") == [], "no occupied sector may be replaced by an empty-support assertion in this gate")
+             for sector, entries in zip(SECTORS, [c["values"] for c in record["contributions"]] + [record["values"]]):
+@@ -229,7 +239,7 @@
+                 refinements.append({"target": target, "sector": sector, "power": power, "from_configuration": configs[profile_index-1], "to_configuration": config, "varied_setting": SETTINGS[profile_index-1], **difference(actual, previous[key])})
+         previous = values
+     passed = all(x["passed"] and x["imaginary_zero_passed"] for x in comparisons) and all(x["passed"] for x in refinements + assembly)
+-    report = {"schema_version": 1, "status": "passed" if passed else "failed", "mode": args.mode, "scope": "complete nonfactorized massless three-loop chain with scalar and raised original mixed medium numerator; no four-loop acceptance", "normalization": "unscaled Euclidean amplitude", "dimension": str(dimension) if dimension else "4-2*epsilon", "configurations": configs, "guard_digits": guard, "native_provenance": native_provenance, "relative_tolerance": "1e-12", "small_magnitude_threshold": "1e-20", "small_absolute_tolerance": "1e-25", "imaginary_zero_absolute_tolerance": "1e-25", "reference_comparison_count": len(comparisons), "independent_refinement_comparison_count": len(refinements), "supplied_oracle_numerical_records_compared": 0, "reference_uncertainty": reference["uncertainty"], "arithmetic": "Python Decimal, 100 digits, saved decimal inputs", "inputs_sha256": {label(p): digest(p) for p in inputs}, "script_sha256": digest(Path(__file__)), "comparisons": comparisons, "refinements": refinements, "assembly_checks": assembly}
++    report = {"schema_version": 1, "status": "passed" if passed else "failed", "mode": args.mode, "scope": "complete nonfactorized massless three-loop chain: separate certified physical singleton zeros plus native AMF double cut; no four-loop acceptance", "normalization": "unscaled Euclidean amplitude", "dimension": str(dimension) if dimension else "4-2*epsilon", "configurations": configs, "guard_digits": guard, "native_provenance": native_provenance, "relative_tolerance": "1e-12", "small_magnitude_threshold": "1e-20", "small_absolute_tolerance": "1e-25", "imaginary_zero_absolute_tolerance": "1e-25", "reference_comparison_count": len(comparisons), "independent_refinement_comparison_count": len(refinements), "supplied_oracle_numerical_records_compared": 0, "reference_uncertainty": reference["uncertainty"], "arithmetic": "Python Decimal, 100 digits, saved decimal inputs", "inputs_sha256": {label(p): digest(p) for p in inputs}, "script_sha256": digest(Path(__file__)), "comparisons": comparisons, "refinements": refinements, "assembly_checks": assembly}
+     output.parent.mkdir(parents=True, exist_ok=True)
+     output.write_text(json.dumps(report, indent=2) + "\n")
+     print(json.dumps({k: report[k] for k in ("status", "mode", "reference_comparison_count", "independent_refinement_comparison_count")}))

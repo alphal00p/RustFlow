@@ -1,0 +1,7 @@
+	linux-vdso.so.1 (0x000074edbe7a8000)
+	libm.so.6 => /nix/store/0d8g8n0a11v6f5m2h416ajyxmnkwc3md-glibc-2.42-67/lib/libm.so.6 (0x000074edb4527000)
+	libpython3.14.so.1.0 => /nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib/libpython3.14.so.1.0 (0x000074edb3e0d000)
+	libgcc_s.so.1 => /nix/store/r48746qznwqxxl9qzd8f08ny8mg1dg2y-gcc-15.3.0-lib/lib/libgcc_s.so.1 (0x000074edb3de0000)
+	libc.so.6 => /nix/store/0d8g8n0a11v6f5m2h416ajyxmnkwc3md-glibc-2.42-67/lib/libc.so.6 (0x000074edb3bd7000)
+	/nix/store/0d8g8n0a11v6f5m2h416ajyxmnkwc3md-glibc-2.42-67/lib/ld-linux-x86-64.so.2 => /nix/store/0d8g8n0a11v6f5m2h416ajyxmnkwc3md-glibc-2.42-67/lib64/ld-linux-x86-64.so.2 (0x000074edbe7aa000)
+	libdl.so.2 => /nix/store/0d8g8n0a11v6f5m2h416ajyxmnkwc3md-glibc-2.42-67/lib/libdl.so.2 (0x000074edb3bd0000)

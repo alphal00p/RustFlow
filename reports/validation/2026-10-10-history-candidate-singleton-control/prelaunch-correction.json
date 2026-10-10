@@ -1,0 +1,7 @@
+{
+  "scope": "Launch preflight only; no prediction process started",
+  "failure": "Initial prerequisite capture assumed every binding has executable_sha256 at top level; massive binding instead stores executable.sha256. Launch then rejected absent prerequisite file.",
+  "correction": "Explicitly accepts and verifies the two existing recorded schemas; copies already captured are accepted only if byte-identical.",
+  "initial_script_sha256": "5c33295ed69faa3a86fd7d5bf7621f9407d46d80135bcb8c14f780d813beaefe",
+  "corrected_script_sha256": "a9bfcddbbfc9267a5a56b4470e1098c5b72bc5d5461c8932ae0c3d78aba557f4"
+}

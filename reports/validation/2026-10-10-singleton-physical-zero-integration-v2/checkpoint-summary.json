@@ -1,0 +1,60 @@
+{
+  "status": "passed corrected coherent integration and all lower-loop comparisons",
+  "scope": "Distinct physical singleton endpoint-zero certificates with unchanged actual multicut AMF and all massive flows. No full three-loop/four-loop acceptance. Direct occupied-flow owner remains available; independently run HC cut-3 evidence is separate.",
+  "root_gates": {
+    "path": "singleton-physical-zero-v2-root-gates.json",
+    "sha256": "38a49e45ec686288fd81b9ffb0f79f1a010c8d395d4503708a668ebb6727c8d8",
+    "passed_tests": 218,
+    "native_passed": 91,
+    "root_passed": 127,
+    "ignored_native": 1
+  },
+  "comparisons": {
+    "two-loop-fixed": {
+      "comparison": "singleton-physical-zero-v2-two-loop-fixed-comparison.json",
+      "comparison_sha256": "00f3e341c3c8a4f80203321cc70d19509deb138ba4bc48ec61bbf8d0b67b23c9",
+      "binding_sha256": "287c3c14b21116eecd0cba7f9946a9b1a680d2ab7f66ffd8e50c4f6b79ecd554",
+      "reference_checks": 40,
+      "refinement_checks": 30,
+      "historical_checks": 0,
+      "assembly_checks": 8,
+      "wall_seconds": 4.223219907376915,
+      "peak_child_rss_kib": 39984
+    },
+    "two-loop-laurent": {
+      "comparison": "singleton-physical-zero-v2-two-loop-laurent-comparison.json",
+      "comparison_sha256": "a69d999372e3dfb1351c09d253712ac735eed85e5ab4c5e6b1b39851dd8a78af",
+      "binding_sha256": "9a72b28228a8cccccfa8702d7880f184783d63339e2b5af833a612ad92fc2347",
+      "reference_checks": 30,
+      "refinement_checks": 24,
+      "historical_checks": 0,
+      "assembly_checks": 0,
+      "wall_seconds": 100.43303368706256,
+      "peak_child_rss_kib": 46136
+    },
+    "massive-regression": {
+      "comparison": "singleton-physical-zero-v2-massive-regression-comparison.json",
+      "comparison_sha256": "a288ddf8fe1f1aa5ba58acecfcc9b57da0d7dbcb29e04f349c28e2857a4a6797",
+      "binding_sha256": "17505489a518fb1f0032b96b25d873d2f7a01cb51c367f9b466b2ca46c789e08",
+      "reference_checks": 10,
+      "refinement_checks": 0,
+      "historical_checks": 10,
+      "assembly_checks": 2,
+      "wall_seconds": 48.58512262208387,
+      "peak_child_rss_kib": 58372
+    }
+  },
+  "source_snapshot_sha256": "9057e506ce003298a77236f53f23eb0343ae0275fec1d723596d95ec1f262896",
+  "build_provenance_sha256": "1fddcdcf394206a3a90f779dd9029bddeaeb26238a6f3c89a6a9ad45b812fa01",
+  "prior_failure": {
+    "report": "../2026-10-10-singleton-physical-zero-integration",
+    "manifest_sha256": "fb6d1e271d1f753bb468cdb1d7fec7806ba9c9cdbd78dbfc26e87b021675ba6c",
+    "reason": "one test expected explicit upper-support labels in original raised Cn/H0 targets; corrected test/comment only, algorithm unchanged"
+  },
+  "shared_host_timing_is_not_a_speed_benchmark": true,
+  "archive": {
+    "files": 62,
+    "raw_bytes": 33676747,
+    "gzip_bytes": 1259791
+  }
+}

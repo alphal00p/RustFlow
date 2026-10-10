@@ -1,0 +1,87 @@
+--- reports/validation/2026-10-10-history-candidate-limit-integration/compare-completed-predictions.py
++++ reports/validation/2026-10-10-singleton-physical-zero-integration/compare-completed-predictions.py
+@@ -13,8 +13,9 @@
+ from pathlib import Path
+ from frozen_sources import BASE,ROOT,digest,verify_snapshot
+ from history_coverage import verify_history_coverage
+-
+-PREFIX='history-candidate-limit'
++from certificate_validation import load_certificates, validate_sample
++
++PREFIX='singleton-physical-zero'
+ PROFILES=[[18,60,8],[28,60,8],[28,80,8],[28,80,12]]
+ 
+ def read(path):return json.loads(path.read_text())
+@@ -82,6 +83,10 @@
+     prediction_paths=[directory/('prediction-'+'-'.join(map(str,p[:3]))+(f'-grid-{p[3]}'if laurent else'')+'.json')for p in profiles]
+     assert set(directory.glob('prediction-*.json'))==set(prediction_paths),'complete exact profile set required'
+     cuts=[[],[0],[3],[0,3]]if three else[[],[0],[1],[0,1]]
++    certificate_path=directory/'physical-zero-certificates.json'
++    certificates=read(certificate_path)
++    if massive:assert certificates==[], 'massive gate must not receive a massless physical-zero certificate'
++    else:certificates,_=load_certificates(directory,read(input_path),cuts)
+     for path,profile in zip(prediction_paths,profiles):
+         row=read(path)
+         assert row['full_amplitude']is True and row['independent_reference_comparisons']==0
+@@ -95,11 +100,13 @@
+             assert row['epsilon']==config['epsilon']
+             assert [item['cut_slots']for item in row['contributions']]==cuts
+             assert [item['cut_slots']for item in row['occupied_reports']]==cuts[1:]
+-            for item in row['occupied_reports']:
+-                evaluation=item.get('report',item)
+-                assert evaluation['construction']=='weighted_amf'
+-                assert evaluation['source_options']==config['source_options']
+-                if not massive:assert evaluation['massless_endpoint']is not None
++            if massive:
++                assert row['physical_zero_certificates']==[]
++                for item in row['occupied_reports']:
++                    evaluation=item.get('report',item)
++                    assert evaluation['construction']=='weighted_amf'
++                    assert evaluation['source_options']==config['source_options']
++            else:validate_sample(row,certificates,read(input_path),cuts,config['source_options'])
+     tool_record_path=BASE/'native-digest-build.json'
+     tool_record=read(tool_record_path)
+     assert tool_record['exit_code']==0
+@@ -117,9 +124,12 @@
+         return fields[0]
+     checked=[tool_record_path,BASE/'native-digest.rs',BASE/'build-native-digest.py',BASE/'history_coverage.py',
+              snapshot_path,build_path,binding_path,resources_path,provenance_path,
+-             config_path,input_path,directory/'input.json',*prediction_paths,Path(__file__)]
++             config_path,input_path,directory/'input.json',*prediction_paths,Path(__file__),certificate_path,BASE/'certificate_validation.py']
+     metadata=[]
+-    for cut in cuts[1:]:
++    if not massive:
++        for cut in cuts[1:-1]:
++            assert not list((directory/'native-closure'/('cut-'+'-'.join(map(str,cut)))).glob('round-*-closed.*')), 'a physical-zero certificate must not pretend to close a native program'
++    for cut in (cuts[1:] if massive else [cuts[-1]]):
+         paths=sorted((directory/'native-closure'/('cut-'+'-'.join(map(str,cut)))).glob('round-*-closed.json'))
+         assert paths,'every occupied cut needs saved successful native closure evidence'
+         for path in paths:
+@@ -182,6 +192,8 @@
+         'configuration':{'source_options':config['source_options'],'guard_digits':config['guard_digits'],
+             'native_closure':re.sub(r'checkpoints: Some\((?:\\"|\").*?(?:\\"|\")\)','checkpoints: None',config['native_closure'])},
+         'closed_metadata':metadata,
++        'physical_zero_certificates':certificates,
++        'construction_scope':'massive native AMF throughout'if massive else'certified singleton physical zeros plus actual native multicut AMF',
+         'native_digest_tool':{'record_sha256':digest(tool_record_path),**tool_record['executable']}}
+     if laurent:
+         sample=BASE/(PREFIX+'-'+('three'if three else'two')+'-loop-fixed-comparison.json')
+@@ -189,7 +201,7 @@
+         assert read(sample)['status']=='passed'
+         old=read(sample_binding)
+         assert old['status']=='passed'
+-        for key in ['executable_sha256','source_snapshot_sha256','compile_identities','configuration']:
++        for key in ['executable_sha256','source_snapshot_sha256','compile_identities','configuration','physical_zero_certificates']:
+             assert old['native_provenance'][key]==native[key],'Laurent/fixed construction provenance differs: '+key
+         for name,sha in old['inputs_sha256'].items():assert digest(ROOT/name)==sha
+         checked.extend([sample,sample_binding])
+@@ -199,6 +211,9 @@
+     plan=read(plan_path)
+     for name,sha in plan['frozen_comparator_and_reference_artifacts_sha256'].items():
+         assert digest(ROOT/name)==sha,'frozen comparison/reference artifact changed: '+name
++        checked.append(ROOT/name)
++    for name,sha in plan['report_local_metadata_validators_sha256'].items():
++        assert digest(ROOT/name)==sha,'report-local construction validator changed: '+name
+         checked.append(ROOT/name)
+     checked.append(plan_path)
+     spec=plan['gates'][args.gate]

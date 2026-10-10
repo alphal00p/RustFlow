@@ -66,9 +66,14 @@ fn prepare(suffix: &str) -> (PreparedDensityFlow, FlowOptions, RunContext, PathB
     .unwrap();
     assert_eq!(
         flow.closure_diagnostics().len(),
-        3,
-        "every occupied sector must use native AMF"
+        1,
+        "the nonzero double cut must use native AMF"
     );
+    assert_eq!(flow.physical_zero_certificates().len(), 2);
+    std::fs::write(report.join("physical-zero-certificates.json"),
+        serde_json::to_vec_pretty(&serde_json::json!(flow.physical_zero_certificates()
+            .iter().map(|(cuts, proof)| serde_json::json!({"cut_slots":cuts,"certificate":proof.report()}))
+            .collect::<Vec<_>>())).unwrap()).unwrap();
     std::fs::write(
         report.join("closure.json"),
         serde_json::to_vec_pretty(&serde_json::json!(
@@ -136,7 +141,12 @@ fn complete_massless_sunset_fixed_dimension() {
             result
                 .occupied_reports
                 .iter()
-                .all(|(_, r)| r.construction == "weighted_amf")
+                .all(|(cuts, r)| r.construction
+                    == if cuts.len() == 1 {
+                        "certified_massless_singleton_physical_zero"
+                    } else {
+                        "weighted_amf"
+                    })
         );
         std::fs::write(report.join(format!("prediction-{digits}-{order}-{start}.json")),
             serde_json::to_vec_pretty(&serde_json::json!({

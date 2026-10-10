@@ -1,0 +1,302 @@
+{
+  "status": "passed selected-sector native pipeline and two independent reference checks",
+  "scope": "Original three-loop cut [3] only; actual native closure, recursive hard boundary, transport and physical endpoint. One profile; no full three-loop/four-loop acceptance, refinement or speed claim. Exact zero agreement alone does not validate nonzero hard boundary coefficients.",
+  "full_amplitude": false,
+  "cut_slots": [
+    3
+  ],
+  "dimension": "13/2",
+  "profile": [
+    18,
+    60,
+    8
+  ],
+  "source_snapshot_sha256": "d0ad8d14a977a47300c30b577737e953273f6a7698ad221ae48b655524dae889",
+  "build_provenance_sha256": "d60039984d9a2fdb3fc31e5bf3ba84ff8bf7d084053e843757251aa7be1c7f3d",
+  "capsule_binding_sha256": "12e4237f5c0216e1e50c480d7f75ec233bbb01b252ae6f97d2996eba3ae20eb1",
+  "runtime_sha256": "8c15752a6766285754b4ae1382e0fc9a4d0ffd26011b536db980ee7541c0e034",
+  "source_archive_restored_hashes_verified": 2484,
+  "native_rounds": 19,
+  "final_basis_size": 7,
+  "history_coverage": {
+    "max_history_candidate_maps": 0,
+    "history_count": 14622,
+    "selected_count": 0,
+    "assessed_count": 0,
+    "certified_map_count": 0,
+    "assessed_unresolved_count": 0,
+    "unassessed_count": 14622,
+    "shared_preclosure_metadata_and_active_state_identical": true,
+    "unassessed_implies_no_value_or_failure_classification": true
+  },
+  "native_proof_hash_checks": [
+    {
+      "metadata": "single3/native-closure/round-000-provisional.json",
+      "metadata_sha256": "9da51fc00cf596fbb3bedce97ab7707647d7c65ed6c8ca50f8a8ab626d36b2ef",
+      "program": "single3/native-closure/round-000-provisional.bin",
+      "program_sha256": "a8356aa633fdb77fefd834ddab89558813f06f06347f70c91074482a8065f727",
+      "program_blake3": "d53b6fc8cc62f0cbaa18cdbcd3aab0547780267e73f0ef6574ee94ed0cd0fdf5",
+      "transaction": "single3/native-closure/requested-discovery-0001.json",
+      "transaction_sha256": "77128eebd07a1e9da1005c802016825f338896fad774955f4efbae157f4a07f3",
+      "transaction_blake3": "6c6ffd0c2cd576942edddb3cdf7b88051b4176cc8724935fd49d24b6cc9db683"
+    },
+    {
+      "metadata": "single3/native-closure/round-001-provisional.json",
+      "metadata_sha256": "3779ff6b0e29f3761496dc624446af4467ceb6b49418245e42ed024fd27fd487",
+      "program": "single3/native-closure/round-001-provisional.bin",
+      "program_sha256": "e80bc59cbe0b206052c9bd20de60148744c92d39b3c751fd13ee999f9cee59f4",
+      "program_blake3": "d0c24a88e012d87b9a5494d34bcab4a434f63bed001a26a09b616ed64d4bdb1b",
+      "transaction": "single3/native-closure/requested-discovery-0002.json",
+      "transaction_sha256": "189af370ebf90f2345ae4b3f4ea299378f766d0bd87b02bd6972ab4faedb5bb9",
+      "transaction_blake3": "a1a8bb2e889452fd29b4f9237f86d017d94f7be3875303019d95151a3c7e9d1e"
+    },
+    {
+      "metadata": "single3/native-closure/round-002-provisional.json",
+      "metadata_sha256": "7d074d81cd9eaa3d9ce4c79608ee85ed27fd168d8a8f8701f5aae3dbe6985f0c",
+      "program": "single3/native-closure/round-002-provisional.bin",
+      "program_sha256": "ecf00dda7dc4933f1e0981d61437a43d4288ebb2d166ceb5ebdad5b920338f2c",
+      "program_blake3": "a5c790420c192e1866d44aea13c62fc32572104ce7d91b6b063734d47c024a77",
+      "transaction": "single3/native-closure/requested-discovery-0003.json",
+      "transaction_sha256": "0167b8e98b7bfd9fc313f3973e55bb00e23cf399f5ac76682a0351751e1e657b",
+      "transaction_blake3": "bcc952d74ac2c63bd9f3637af9d0ac8b86e25e009a2b03f033ae615845acb8de"
+    },
+    {
+      "metadata": "single3/native-closure/round-003-provisional.json",
+      "metadata_sha256": "0e234bbc9f89faba52f04768ee46546b562c54e6813baf520d1a5d752f1c445e",
+      "program": "single3/native-closure/round-003-provisional.bin",
+      "program_sha256": "fac7d5587281b3b0e457815d87d6a6b19d9a48592f0fbd82a699b95077de6ada",
+      "program_blake3": "1ef6ac773889f3ad4b3299c01f993fb3b8ab56b0af293215075771b54346854c",
+      "transaction": "single3/native-closure/requested-discovery-0004.json",
+      "transaction_sha256": "0f941e7081044ef2a0706634f57dead280509fc88d3364853657baf6c9c2784a",
+      "transaction_blake3": "203527f80b5a2442cf80caf470b6f17e599ce6182187073dd2251a92f7e23e91"
+    },
+    {
+      "metadata": "single3/native-closure/round-004-provisional.json",
+      "metadata_sha256": "b4ec61c2cfb9deebcf2028c5f7429e721b147223307fbaac00730e52b25f235b",
+      "program": "single3/native-closure/round-004-provisional.bin",
+      "program_sha256": "6625e1b79fba74026be32924156310b36918b201212204cc857e914d985dcbac",
+      "program_blake3": "845625673dc4573778cb1456b238f2ac3c387d3cbf35788c308f952b66dc2f96",
+      "transaction": "single3/native-closure/requested-discovery-0005.json",
+      "transaction_sha256": "7c53832ac23b2e85ca539df65baef71e33a1bf48785ab0f35e344c45776a39bc",
+      "transaction_blake3": "7d728efcd3cc98d04f2bc3f01352864c2ae747ac8166c2854848ad5488b53c6b"
+    },
+    {
+      "metadata": "single3/native-closure/round-005-provisional.json",
+      "metadata_sha256": "3cbaa17e6f54efbc939b271014d4d3d47fe287ad6016c9e7099c0c26afc148cf",
+      "program": "single3/native-closure/round-005-provisional.bin",
+      "program_sha256": "ab3c60d745e06c6008f75e483f79865b16a5abd1a99b778c58cd1e1f16664ac9",
+      "program_blake3": "7eb8de4fdb21c54d4f89c6f8c7b1e9c1570cc87a88763fd2003837e89e7293db",
+      "transaction": "single3/native-closure/requested-discovery-0006.json",
+      "transaction_sha256": "6dd2735a07141ee27116feda9777a4da397fe5a58bb1f2ce1fc4cf1acbfbdb51",
+      "transaction_blake3": "140a18e04541009f9e4e765a4ef32e0f963f7324da1cac138203f7b44d3366da"
+    },
+    {
+      "metadata": "single3/native-closure/round-006-provisional.json",
+      "metadata_sha256": "357ea57270d61bc7a0d28cf4c371010aab2f66d7190dbafbb75845d0bfa9f410",
+      "program": "single3/native-closure/round-006-provisional.bin",
+      "program_sha256": "1ff511aa2f1765a65dfd1e3d519b7e8b4e4686a8a89de4e4372c26ac978bed0c",
+      "program_blake3": "97e8641a6915aedb914a48de08598ef9ec1687589871c9f8a6a787b23d136e7a",
+      "transaction": "single3/native-closure/requested-discovery-0007.json",
+      "transaction_sha256": "56c05da9849f926e846a48cc438a065a62ab36e715a558347379d73c55c26ea5",
+      "transaction_blake3": "1b9688b9740d4bea717725e63dac3b88d996a58ecd6539a938057b901c756788"
+    },
+    {
+      "metadata": "single3/native-closure/round-007-provisional.json",
+      "metadata_sha256": "5be4779acadbfec4e685bf66cf8996b25970e5872f311b92d25477af34154fbe",
+      "program": "single3/native-closure/round-007-provisional.bin",
+      "program_sha256": "74b42d7d47a0c0925725438d1c3c23f20b28bf77e2ed2ffaa477a68cb3c39d85",
+      "program_blake3": "99f72faf715fe1c7098dfd64cc89edc2fe56740f0401064281c4bce1b7dc5316",
+      "transaction": "single3/native-closure/requested-discovery-0008.json",
+      "transaction_sha256": "b1d5df1fc219e6ad6a40ccdd4ebd09b830d29a29b8935ae7a4bebbe6a713a7a6",
+      "transaction_blake3": "0ba6c56442f0768ee00a6e1d75aecf2c4944cb69ba4f8681e7d049597f5d9dfa"
+    },
+    {
+      "metadata": "single3/native-closure/round-008-provisional.json",
+      "metadata_sha256": "7f6a43044890be55fbbe683d6fbca17c3425ac199e86e16ffd0f95b73943e7c9",
+      "program": "single3/native-closure/round-008-provisional.bin",
+      "program_sha256": "b3602ceb17a41edc80b925f42cb5d84c617171c631e91829d556d6b6fbafdbfb",
+      "program_blake3": "7c3da2eec4b0876fb3d71e5a03c208e310ace8c101c240bc7c241040364a3c79",
+      "transaction": "single3/native-closure/requested-discovery-0009.json",
+      "transaction_sha256": "6a48b04bcd01ee02b952a143083bf5d53feb7bd05f92773522ce61046ace823d",
+      "transaction_blake3": "a6d736e981b0aba8ec3b501a8aa42c543978df7e18bba09c6595c1a8289ae10e"
+    },
+    {
+      "metadata": "single3/native-closure/round-009-provisional.json",
+      "metadata_sha256": "ec244198077023f180d2670a7acb82b42328711aa4661dd8dd7fe13afee7ffe3",
+      "program": "single3/native-closure/round-009-provisional.bin",
+      "program_sha256": "afe6e1b37b0f4b892263fe924ac5c0c5286b56206d00f53c71498dfee40c2d62",
+      "program_blake3": "9576c195fd3c141631bc3f00b2537ef77c4bbff7c8890e109df07d77a6a32ef0",
+      "transaction": "single3/native-closure/requested-discovery-0010.json",
+      "transaction_sha256": "cd9c50acca8841f3ade1f2d0a14afb86b8b4ed379d7aeaa9d2a6e1414b11740b",
+      "transaction_blake3": "876b30ac1422e34c281f099ed89f6ee4f4ef196bafcc5df89dfd5c88e04c15c9"
+    },
+    {
+      "metadata": "single3/native-closure/round-010-provisional.json",
+      "metadata_sha256": "87f59b48d07e17f0a0cf066cf97ae864e193a8f57071a1193ab4e6934b027270",
+      "program": "single3/native-closure/round-010-provisional.bin",
+      "program_sha256": "910367dc7b51216f1201d6ace2ae9b9b595ea061a814514288d6f733aa6d831c",
+      "program_blake3": "4ae89ead4943ea6a5bb07a86812a57d901e753b4f575b95ff43753d329447c49",
+      "transaction": "single3/native-closure/requested-discovery-0011.json",
+      "transaction_sha256": "09d0727461df401517dcb5c3c53d416adc721cd4b1f9328a34a69709d3d7276d",
+      "transaction_blake3": "e2ad8886b8fa7f7133afdc92f0a7ed2147defe8c09b90955d37b296c4975a3c3"
+    },
+    {
+      "metadata": "single3/native-closure/round-011-provisional.json",
+      "metadata_sha256": "b46b3e795bfc0718810f58cd5536d58e1830e10c730626156199c73f4700d8d5",
+      "program": "single3/native-closure/round-011-provisional.bin",
+      "program_sha256": "d9a908083eda2dfbbeeccdefda54b629f38bc1eb9034f13ceaf5a27d98460844",
+      "program_blake3": "8e9ff8fc38bf084aa2172dde84ce09b7a398c8826372f222100e335c4ae2fa53",
+      "transaction": "single3/native-closure/requested-discovery-0012.json",
+      "transaction_sha256": "53c91bcf385342792b8e3aeb8b9b66953de4bc6f32401878bdf6ee1370eb0911",
+      "transaction_blake3": "1e1c305fedab4757ae266ec6608a626f520743b6e7a7ffce103434fbdd5c2d64"
+    },
+    {
+      "metadata": "single3/native-closure/round-012-provisional.json",
+      "metadata_sha256": "e165e53d4781dd70ff6854710fb27aa141e1477e27e614652f66c61ebd6f3789",
+      "program": "single3/native-closure/round-012-provisional.bin",
+      "program_sha256": "e1e9e38b608f6b8154d9eb6dedc4d9b5d7fe6362f9596a3b9ca6c0ca6ff9fb11",
+      "program_blake3": "06e83dc763a549ac5d3bd2558b7bedb92c60a24c1587bcae723e4e2493465f6b",
+      "transaction": "single3/native-closure/requested-discovery-0013.json",
+      "transaction_sha256": "ecddec74f8f1cdd1ccd029bf9e4bb84f25e20c56127f771212fb58a3cccef043",
+      "transaction_blake3": "e25f9d615616611f89fb27a2af5841ca09e6dea46e1783af373e236c1ea20ea2"
+    },
+    {
+      "metadata": "single3/native-closure/round-013-provisional.json",
+      "metadata_sha256": "9c1060b435dc0f5cb8f8e595da7efc7e42eb55ab5edfb8c29e7fc4b5ec8bcaef",
+      "program": "single3/native-closure/round-013-provisional.bin",
+      "program_sha256": "f387e682fd26b9359c2cf2aa944ebe9cbb36794b5442dacc5b5bce5db8917605",
+      "program_blake3": "66b9862607575d2c74025f3f342820fd19039a8ee5a76cb9cc2ca0e5ad521fc4",
+      "transaction": "single3/native-closure/requested-discovery-0014.json",
+      "transaction_sha256": "9ee20354024d49384fc4a46b0df648054635ccd764ccdef17a5c70097b57d9ea",
+      "transaction_blake3": "7508bc1dca9a06f9877d0b6cd6d288070856c2cee4edcb39447a25f1beca8baf"
+    },
+    {
+      "metadata": "single3/native-closure/round-014-provisional.json",
+      "metadata_sha256": "eefc660e5d96480c5aef6c0e3a760b5f672792ac4173320da7a7d227d2894dd3",
+      "program": "single3/native-closure/round-014-provisional.bin",
+      "program_sha256": "3373ac85237e563a457ec6eca623dd86ad96c4c4e570bfaa7ecb29248f6f77ae",
+      "program_blake3": "39056a66fa06b1bb1a0ee71127d98691fdf98f38627ac2d9fb96eaa5453a5488",
+      "transaction": "single3/native-closure/requested-discovery-0015.json",
+      "transaction_sha256": "c76d54c21a6553e823f05a044409b06e04b7f69d0d75cfcee1ef8a06450614cd",
+      "transaction_blake3": "040c534e3e0e92aada4a07922443c7cb7420e8e86c316969ea6cbb8efe053b3e"
+    },
+    {
+      "metadata": "single3/native-closure/round-015-provisional.json",
+      "metadata_sha256": "a4aa6b2ac0378bdf03d07938ca863cab812f07f66ae13082a6ea3657047ddbc4",
+      "program": "single3/native-closure/round-015-provisional.bin",
+      "program_sha256": "0e803f3cd8b96b9189d8a60415dc107f8cc311f453b0c57c9fc228a3f66fea2d",
+      "program_blake3": "b65677019f10b32ae9c5ac1621029bd6971e1b459aaceccf713e457459a384de",
+      "transaction": "single3/native-closure/requested-discovery-0016.json",
+      "transaction_sha256": "5d01163948f2ddb39b9bf5b67cc96d792768950bd5e8a49b9ecc25d84f8879ac",
+      "transaction_blake3": "f5f0404c0058df48b5363fd43b72ca422c2f8077900b9c1414489828808b8cf1"
+    },
+    {
+      "metadata": "single3/native-closure/round-016-provisional.json",
+      "metadata_sha256": "59e6c5ec35a49dd7dfc483377c77d40a1fc962a835875e1eb174cb2b2b4e8792",
+      "program": "single3/native-closure/round-016-provisional.bin",
+      "program_sha256": "ee178e7d7fec6df1cba8f37f34002e1d40c9d3d4f2ec662c4583f41f0412da30",
+      "program_blake3": "c17b325392e67675e9863a1ca00de3d224cc79db66873b85e449b7b64be7bcc4",
+      "transaction": "single3/native-closure/requested-discovery-0017.json",
+      "transaction_sha256": "b4b99ce8031429df713a9d8f46b0b208c65c0cd3691b89974e2bd4bc12a75460",
+      "transaction_blake3": "c3b0ee72fd97a2dc050ca244905836fdff55507949ef06fb2246a2f8a0d634e6"
+    },
+    {
+      "metadata": "single3/native-closure/round-017-provisional.json",
+      "metadata_sha256": "cebcabd7c4350c1527a72b817be207f159ae6ca8d2b2fec59f2450c5f1cffdc6",
+      "program": "single3/native-closure/round-017-provisional.bin",
+      "program_sha256": "1f30f4dbdcbdea3bde3651c611dcc5e6f805babe08a10a7dce53e9d89302a54f",
+      "program_blake3": "cf8cf135e42917cd711a0ecc54e6b6ec7b3139c8622aac212fbf65227654b90a",
+      "transaction": "single3/native-closure/requested-discovery-0018.json",
+      "transaction_sha256": "c8e2caa8ce27b58d55753778c54b49d69a0134797c36f0b435a083e0a34e8a1a",
+      "transaction_blake3": "b4485cb9a5b683ad13933f5de9e6766a372299cfee07edccddca24e80555ed48"
+    },
+    {
+      "metadata": "single3/native-closure/round-018-closed.json",
+      "metadata_sha256": "9537a400910fc6fd264adfa8fa327937a844d9986f14b61a3f0699097bb0c2b4",
+      "program": "single3/native-closure/round-018-closed.bin",
+      "program_sha256": "97d79014d238b11c39ac10d1cd40ba481e2635c404f60948653407284a88bd60",
+      "program_blake3": "9e415333cdc1c799d0dd0f02c8dccd488991974a35a6147e0df614910a46f100",
+      "transaction": "single3/native-closure/requested-discovery-0019.json",
+      "transaction_sha256": "fa9b3dd782895b86925b919596d56809ecd198bf6c356b7d130a0a48ead176cd",
+      "transaction_blake3": "c7c34c75c2916ec6890a7a2b14097042f4e2a1b8a3478998b55f347b7db896cb"
+    },
+    {
+      "metadata": "single3/native-closure/round-018-provisional.json",
+      "metadata_sha256": "894c0d99f40970430c1548e4a3824c3e6cf026b31c2ae482c179a48c719701e3",
+      "program": "single3/native-closure/round-018-provisional.bin",
+      "program_sha256": "051fee9f3a32bd361583847c6efc3b48115a026f3a1588cbf7e1e3556161115a",
+      "program_blake3": "dea1244d74ff780e251352303470b0926df5bec53e005638d7ebbafe60314fab",
+      "transaction": "single3/native-closure/requested-discovery-0019.json",
+      "transaction_sha256": "fa9b3dd782895b86925b919596d56809ecd198bf6c356b7d130a0a48ead176cd",
+      "transaction_blake3": "c7c34c75c2916ec6890a7a2b14097042f4e2a1b8a3478998b55f347b7db896cb"
+    }
+  ],
+  "native_hash_utility": {
+    "record": "reports/validation/2026-10-10-history-candidate-limit-integration/native-digest-build.json",
+    "record_sha256": "744b7fa56235593ccc9f4665f6f73010d6c6e193c4fd6f7324e553b350f14021",
+    "executable_sha256": "5e727feda3ef7d8bfec4b1a2301be5e85ae1fbe102bb9e03f0dff07a71b35a0d"
+  },
+  "prediction": {
+    "path": "single3/prediction-18-60-8.json",
+    "sha256": "bd271843205965f49a6dfae317224d65e61ecbb341d97fcdd0051b0cb26046b2"
+  },
+  "comparisons": [
+    {
+      "target": "scalar",
+      "prediction": "(0+0i)",
+      "reference": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "prediction": "(0+0i)",
+      "reference": "0",
+      "real_difference": "0",
+      "imaginary_difference": "0",
+      "absolute_difference": "0",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    }
+  ],
+  "independent_reference_comparison_count": 2,
+  "independent_refinement_comparison_count": 0,
+  "supplied_oracle_records_compared": 0,
+  "reference_inputs_sha256": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/validation.json": "87daaec2ee69875f3e43ed2e47339f85d493223313393687f4c43c6f8ecec8ea",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/source-sha256.json": "fef71625e9676b69502a5eafa3e153eeb5a74a117de263ba2ec7d62909122f8a",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/generate.rs": "6ff63d122c782b5c1f78ec18a198b5ac66e27f63818e331eec0e5ad797c5dee9",
+    "docs/finite-density-three-loop-reference.md": "4c7968fb28ee19cebbddf157668f3dbc32b13c87a6ffb2313fe0de72b0497d74",
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+  },
+  "comparison_arithmetic": "unchanged historical Decimal difference function; relative 1e-12, small threshold 1e-20, absolute 1e-25",
+  "resources": {
+    "command": [
+      "timeout",
+      "3600",
+      "/tmp/rustflow-history-candidate-single3-20261010/runtime",
+      "--ignored",
+      "--exact",
+      "runtime_graph_occupied_flow",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 1991.7583512822166,
+    "user_seconds": 1973.558022,
+    "system_seconds": 2.349919,
+    "peak_child_rss_kib": 546324,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "run_binding_sha256": "d668b30bf23663bc9af690db435586d78c66e8160e2ad619204c4ba79e28e8d8",
+  "resource_sha256": "f4776591f1c1dac9629d262c97aabf621fdc70cbf414e70c7d661767181242c8",
+  "verifier_sha256": "69dc43064fc2e4be766b1a6b578d367455ab4eb33242c9042e23a578fdef2d76"
+}

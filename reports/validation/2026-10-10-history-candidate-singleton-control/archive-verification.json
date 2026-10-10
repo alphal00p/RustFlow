@@ -1,0 +1,8 @@
+{
+  "status": "all archived payload hashes and restored hashes passed; final raw evidence unchanged",
+  "archived_files": 75,
+  "preserved_raw_files": 6,
+  "archive_map_sha256": "85da76cc3350f65719ba2f272e406c3c43d06b9d65117909ed32862c37168999",
+  "comparison_sha256": "34d14f965c8e6c75b834df9a0fa48477d6e958a3e638754152e4b802742bd3da",
+  "source_runtime_scope": "static captured HC build; not later singleton physical-zero source"
+}

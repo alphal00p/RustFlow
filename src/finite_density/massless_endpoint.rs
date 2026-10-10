@@ -4,8 +4,9 @@
 //! The general multi-loop query supplies degree evidence only. A separate
 //! sealed permit covers the proved singleton meromorphic germ and independent
 //! rank-one virtual blocks, including the pure compact transfer, and binds the origin prescription to the physical family.
-//! Native source closure, boundary integration, transport and endpoint
-//! projection remain required. No virtual integral or period is evaluated here.
+//! Flowing evaluation requires native source closure, boundary integration,
+//! transport and endpoint projection. The separately typed original singleton
+//! physical-zero consequence evaluates no virtual integral or period.
 use super::{PreparedDensityInput, massless_contour::massless_channel_evidence};
 use crate::algebra::{matmul, rref};
 use crate::coefficient::{exact_coefficient_list, powers};
@@ -2028,6 +2029,30 @@ impl MasslessFlowEvidence {
             ));
         }
         Ok(())
+    }
+
+    /// A physical zero theorem for the original eta-independent targets.
+    /// This is not a zero at finite eta and supplies no native source rule.
+    /// The caller must retain the original coefficient domain and must not
+    /// apply this result to reduced combinations with singular eta weights.
+    pub(crate) fn singleton_physical_zero_audit(
+        &self,
+        family: &super::geometry::OccupiedCutFamily,
+    ) -> Result<MasslessLabelAudit> {
+        if !matches!(
+            self.class,
+            CertifiedEndpointClass::SingletonGerm { virtual_loops, .. } if virtual_loops > 0
+        ) {
+            return Err(Error::Unsupported(
+                "physical singleton zero requires the singleton meromorphic germ class".into(),
+            ));
+        }
+        let labels = family
+            .targets()
+            .iter()
+            .flat_map(|target| target.keys().cloned())
+            .collect::<BTreeSet<_>>();
+        self.validate_labels(family, &labels.into_iter().collect::<Vec<_>>())
     }
     pub fn certified_origin_loops(
         &self,

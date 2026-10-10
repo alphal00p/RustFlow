@@ -447,14 +447,18 @@ preserves exhaustive collection, and `Some(0)` skips that optional work. Skipped
 labels remain explicitly unassessed. See the
 [closure policy](finite-density-guard-refinement.md) for conditions and diagnostics.
 
-The complete massless two-loop sunset now passes all four native profiles at
+The complete massless two-loop sunset passed all four native profiles at
 D=13/2 and D=15/4, and five Laurent profiles through order zero. All occupied
-sectors use native weighted AMF, with closed bases 2, 2 and 3. The 110 independent
+sectors in those recorded runs used native weighted AMF, with closed bases 2, 2 and 3. The 110 independent
 reference comparisons and 84 refinements retain the raised original numerator
 and its nonzero upper surface; the vacuum and both singleton endpoints are
 checked as zeros. Native D=7 retains an explicit additional indicial resonance
-before producing a prediction. In the current implementation, native vacuum
-zero certificates skip vacuum flow and both singleton cuts succeed; the
+before producing a prediction. Native vacuum zero certificates skip vacuum
+flow. Assembly now also uses a separately sealed physical singleton-zero
+certificate where the uniform finite-jet theorem applies; its exact target,
+coefficient-domain and proof-homotopy data are reported under
+`physical_zero_certificates`, without claiming closure or transport. The direct
+occupied flow API remains available for the numerical singleton checks. The
 remaining resonance occurs in the double-cut infinity recurrence. Independent
 convergent D=7 quadrature validates the reference and support derivative. See the
 [massless numerical report](../reports/validation/2026-10-09-finite-density-native-assembly/massless-native-validation.json)

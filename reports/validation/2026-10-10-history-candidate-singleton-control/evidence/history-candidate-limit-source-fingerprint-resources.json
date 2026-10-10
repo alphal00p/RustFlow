@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/source_fingerprint-3c52aa1b71e5ce60",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.013591543771326542,
+  "user_seconds": 0.002016,
+  "system_seconds": 0.011072,
+  "peak_child_rss_kib": 15432,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}
