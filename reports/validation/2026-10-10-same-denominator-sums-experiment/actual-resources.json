@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-same-denominator-actual-attempt1",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 424.365160966292,
+  "user_seconds": 420.700555,
+  "system_seconds": 0.7373759999999999,
+  "peak_child_rss_kib": 568344,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

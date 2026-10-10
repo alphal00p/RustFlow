@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "120",
+    "/tmp/rustflow-terminal-promotion-tests-attempt1",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.07315578171983361,
+  "user_seconds": 0.052579999999999995,
+  "system_seconds": 0.020326,
+  "peak_child_rss_kib": 15432,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

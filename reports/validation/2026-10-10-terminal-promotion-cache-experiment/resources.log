@@ -1,0 +1,13 @@
+
+running 8 tests
+test application_pending_limits_and_cache_cap_matrix_match_native ... ok
+test cancellation_and_ordered_guards_match_after_replay_and_decode ... ok
+test cancelling_no_rule_branches_do_not_create_terms_or_drop_used_guards ... ok
+test completed_whole_calls_promote_only_no_rule_residuals ... ok
+test immutable_owner_reset_limits_and_retained_shape_caps_invalidate_safely ... ok
+test required_cut_zero_cannot_be_promoted_and_complete_zero_is_cacheable ... ok
+test terminal_removal_reducible_addition_and_rule_budget_are_rejected ... ok
+test work_limit_and_failed_conditions_are_never_cached_or_promoted ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.06s
+

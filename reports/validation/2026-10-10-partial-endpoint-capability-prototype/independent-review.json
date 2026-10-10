@@ -1,0 +1,31 @@
+{
+  "status": "read-only isolated proof-data owner review found no additional blocker within explicitly non-admitting scope",
+  "files_sha256": {
+    "source/src/finite_density/partial_endpoint.rs": "1fdf57fc045c4c924f892c24686550230d926101b2c9e4615c00ee8dca912de3",
+    "source/src/finite_density/partial_origin.rs": "184ca4a0ea53c0c3ab437c23f7fad8708e871e8ed1ff85b449ad40620ffb3552",
+    "source-and-proof-binding.json": "b11c64e4c6ea8d8e6aa3532b0531a519f79342e87a975e3199df0f03ebc4e8b2",
+    "final-gates.json": "b3638ef0612166d5abcb0601b99f28c287d8acafa8f39c96601b06d32674ec07",
+    "artifact-consistency-check.json": "487025768285e6807e95c5170abe7648f9bf7789a1801d149de9483a065bedd0",
+    "README.md": "acd1446f0c83e86d4b0ca17d00bddd34a39d8efbac79aebb46d4cbc8c8937a08"
+  },
+  "recorded_gate": "18 passed (8 new endpoint and 10 unchanged origin); existing log/build/evidence inspected, no independent recompilation or test rerun",
+  "fresh_evidence_hashes_verified": 9,
+  "finite_label_bound_records_checked": 36,
+  "arithmetic_check": "Exact Fraction recomputation of sigma, total transfer exponent, all angular/radial margins and two-loop Taylor window; every saved strict margin positive.",
+  "checks": [
+    "Private non-deserializable evidence construction revalidates full input/family/placement/source-option binding and replays the complete origin, off-null channels and chart data even for zero original labels.",
+    "Finite label audit runs origin role/completion/storage checks before zero branches, preserves all active support classifications, and distinguishes shifted V=0 physical endpoint vanishing from finite-eta zero.",
+    "P and P0 remain separate; finite polynomial R and J_i include raised cuts, upper derivatives and lower-contact jets. The conservative dimension and N bounds reproduce the reviewed finite J+N convention; arithmetic is checked and failures return no partial audit.",
+    "Family binding and theorem/version/order are immutable; replay rebuilds the evidence rather than trusting strings. Public serializable reports explicitly set combined-target/raw-condition/native-mode authority false.",
+    "The constructor collects original labels, while the public finite-label audit can check later labels; the report explicitly requires a consuming owner to call it for every actual source/candidate/basis/reconstruction label.",
+    "No changes to actual native reduction, epsilon projector, boundary values, source zero rules or production flow dispatch are present in this isolated module."
+  ],
+  "production_integration_obligations": [
+    "An actual consumer must preserve original uncancelled coefficient conditions and all eta-pole weighted reconstruction before projection; report flags do not enforce this integration.",
+    "A symbolic regular-singular mode/Frobenius consumer with exact epsilon dependence and sufficient expansion order is still required.",
+    "RunContext cancellation and internal CAS work limits remain absent, as declared. Adapter label/degree/output caps do not bound all native symbolic work.",
+    "The full chart/channel/common-regulator and thermal-uniformity proofs remain assumptions of the mathematical capability; finite sample tests do not replace them."
+  ],
+  "production_modified": false,
+  "numerical_integrals_run": 0
+}

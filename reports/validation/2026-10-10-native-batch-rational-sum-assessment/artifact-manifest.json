@@ -1,0 +1,16 @@
+{
+  "scope": "frozen batch rational-sum feasibility assessment",
+  "files": [
+    {
+      "path": "assessment.md",
+      "sha256": "37c2d66dd62149c3cb868390d87e45a45a9bee7f42ea6002df6282d033adc8e4",
+      "bytes": 6311
+    },
+    {
+      "path": "source-bindings.json",
+      "sha256": "35ff6fe2e345c3eedd369962d6ea7dca9b801cf166598220368d686d0610eb11",
+      "bytes": 2427
+    }
+  ],
+  "file_count": 2
+}

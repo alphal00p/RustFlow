@@ -1,0 +1,941 @@
+{
+  "evidence": {
+    "endpoint_order": "same-sign-independent-line-masses;future-real-spatial-shells;right-half-plane-eta;fixed-positive-T-pole-free-regulator-removal;joint-eta-regulator-kernel-bound;real-Fermi-limit;then-meromorphic-D",
+    "endpoint_version": "partial-endpoint-rank-two-finite-JN-holder-v1",
+    "native_mode_authority": false,
+    "origin": {
+      "auxiliary_coefficients": [
+        [
+          1,
+          "1"
+        ],
+        [
+          2,
+          "1"
+        ]
+      ],
+      "compact_loops": 2,
+      "complete_supports": [
+        {
+          "active": [],
+          "charts": [],
+          "class": {
+            "FreeVirtual": {
+              "null_direction": [
+                "1"
+              ]
+            }
+          },
+          "full": null,
+          "rank": 0
+        },
+        {
+          "active": [
+            1
+          ],
+          "charts": [
+            {
+              "jacobian_x_power": 0,
+              "mean_units": [
+                [
+                  [
+                    {
+                      "coefficient": "1",
+                      "exponents": []
+                    }
+                  ],
+                  [
+                    {
+                      "coefficient": "-1",
+                      "exponents": []
+                    }
+                  ]
+                ]
+              ],
+              "parameter_map": [
+                "1"
+              ],
+              "pivot": null,
+              "primary": 1,
+              "u_unit": [
+                {
+                  "coefficient": "1",
+                  "exponents": []
+                }
+              ],
+              "unit_lower_bound": "1",
+              "v_units": [
+                [
+                  [],
+                  []
+                ],
+                [
+                  [],
+                  []
+                ]
+              ]
+            }
+          ],
+          "class": {
+            "FiniteEtaJets": {
+              "kinematics_vanish": true,
+              "shifted_positive": [
+                1
+              ]
+            }
+          },
+          "full": {
+            "diagonal": [
+              [],
+              []
+            ],
+            "eta": [
+              {
+                "coefficient": "1",
+                "exponents": [
+                  2
+                ]
+              }
+            ],
+            "line_masses": [
+              [
+                {
+                  "coefficient": "1",
+                  "exponents": [
+                    2
+                  ]
+                }
+              ]
+            ],
+            "native_f": "rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::mass0",
+            "native_u": "rustflow_partial_origin::{}::alpha0",
+            "pairs": [
+              [
+                [
+                  0,
+                  1
+                ],
+                []
+              ]
+            ],
+            "u": [
+              {
+                "coefficient": "1",
+                "exponents": [
+                  1
+                ]
+              }
+            ]
+          },
+          "rank": 1
+        },
+        {
+          "active": [
+            4
+          ],
+          "charts": [
+            {
+              "jacobian_x_power": 0,
+              "mean_units": [
+                [
+                  [],
+                  []
+                ]
+              ],
+              "parameter_map": [
+                "1"
+              ],
+              "pivot": null,
+              "primary": 4,
+              "u_unit": [
+                {
+                  "coefficient": "1",
+                  "exponents": []
+                }
+              ],
+              "unit_lower_bound": "1",
+              "v_units": [
+                [
+                  [],
+                  []
+                ],
+                [
+                  [],
+                  []
+                ]
+              ]
+            }
+          ],
+          "class": "RegulatedVacuumZero",
+          "full": {
+            "diagonal": [
+              [],
+              []
+            ],
+            "eta": [],
+            "line_masses": [
+              [
+                {
+                  "coefficient": "1",
+                  "exponents": [
+                    2
+                  ]
+                }
+              ]
+            ],
+            "native_f": "rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::mass0",
+            "native_u": "rustflow_partial_origin::{}::alpha0",
+            "pairs": [
+              [
+                [
+                  0,
+                  1
+                ],
+                []
+              ]
+            ],
+            "u": [
+              {
+                "coefficient": "1",
+                "exponents": [
+                  1
+                ]
+              }
+            ]
+          },
+          "rank": 1
+        },
+        {
+          "active": [
+            1,
+            4
+          ],
+          "charts": [
+            {
+              "jacobian_x_power": 0,
+              "mean_units": [
+                [
+                  [
+                    {
+                      "coefficient": "1",
+                      "exponents": [
+                        0
+                      ]
+                    }
+                  ],
+                  [
+                    {
+                      "coefficient": "-1",
+                      "exponents": [
+                        0
+                      ]
+                    }
+                  ]
+                ]
+              ],
+              "parameter_map": [
+                "1",
+                "rustflow_partial_origin::{}::z0"
+              ],
+              "pivot": null,
+              "primary": 1,
+              "u_unit": [
+                {
+                  "coefficient": "1",
+                  "exponents": [
+                    0
+                  ]
+                },
+                {
+                  "coefficient": "1",
+                  "exponents": [
+                    1
+                  ]
+                }
+              ],
+              "unit_lower_bound": "1",
+              "v_units": [
+                [
+                  [
+                    {
+                      "coefficient": "1",
+                      "exponents": [
+                        1
+                      ]
+                    }
+                  ],
+                  [
+                    {
+                      "coefficient": "-1",
+                      "exponents": [
+                        1
+                      ]
+                    }
+                  ]
+                ],
+                [
+                  [
+                    {
+                      "coefficient": "-1",
+                      "exponents": [
+                        1
+                      ]
+                    }
+                  ],
+                  [
+                    {
+                      "coefficient": "1",
+                      "exponents": [
+                        1
+                      ]
+                    }
+                  ]
+                ]
+              ]
+            },
+            {
+              "jacobian_x_power": 0,
+              "mean_units": [
+                [
+                  [
+                    {
+                      "coefficient": "1",
+                      "exponents": [
+                        1
+                      ]
+                    }
+                  ],
+                  [
+                    {
+                      "coefficient": "-1",
+                      "exponents": [
+                        1
+                      ]
+                    }
+                  ]
+                ]
+              ],
+              "parameter_map": [
+                "rustflow_partial_origin::{}::z0",
+                "1"
+              ],
+              "pivot": null,
+              "primary": 4,
+              "u_unit": [
+                {
+                  "coefficient": "1",
+                  "exponents": [
+                    0
+                  ]
+                },
+                {
+                  "coefficient": "1",
+                  "exponents": [
+                    1
+                  ]
+                }
+              ],
+              "unit_lower_bound": "1",
+              "v_units": [
+                [
+                  [
+                    {
+                      "coefficient": "1",
+                      "exponents": [
+                        1
+                      ]
+                    }
+                  ],
+                  [
+                    {
+                      "coefficient": "-1",
+                      "exponents": [
+                        1
+                      ]
+                    }
+                  ]
+                ],
+                [
+                  [
+                    {
+                      "coefficient": "-1",
+                      "exponents": [
+                        1
+                      ]
+                    }
+                  ],
+                  [
+                    {
+                      "coefficient": "1",
+                      "exponents": [
+                        1
+                      ]
+                    }
+                  ]
+                ]
+              ]
+            }
+          ],
+          "class": {
+            "FiniteEtaJets": {
+              "kinematics_vanish": false,
+              "shifted_positive": [
+                1
+              ]
+            }
+          },
+          "full": {
+            "diagonal": [
+              [
+                {
+                  "coefficient": "-1",
+                  "exponents": [
+                    1,
+                    1
+                  ]
+                }
+              ],
+              [
+                {
+                  "coefficient": "-1",
+                  "exponents": [
+                    1,
+                    1
+                  ]
+                }
+              ]
+            ],
+            "eta": [
+              {
+                "coefficient": "1",
+                "exponents": [
+                  1,
+                  1
+                ]
+              },
+              {
+                "coefficient": "1",
+                "exponents": [
+                  2,
+                  0
+                ]
+              }
+            ],
+            "line_masses": [
+              [
+                {
+                  "coefficient": "1",
+                  "exponents": [
+                    1,
+                    1
+                  ]
+                },
+                {
+                  "coefficient": "1",
+                  "exponents": [
+                    2,
+                    0
+                  ]
+                }
+              ],
+              [
+                {
+                  "coefficient": "1",
+                  "exponents": [
+                    0,
+                    2
+                  ]
+                },
+                {
+                  "coefficient": "1",
+                  "exponents": [
+                    1,
+                    1
+                  ]
+                }
+              ]
+            ],
+            "native_f": "-1*rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::shell0+-1*rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::shell1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::dot_0_1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::mass1",
+            "native_u": "rustflow_partial_origin::{}::alpha0+rustflow_partial_origin::{}::alpha1",
+            "pairs": [
+              [
+                [
+                  0,
+                  1
+                ],
+                [
+                  {
+                    "coefficient": "1",
+                    "exponents": [
+                      1,
+                      1
+                    ]
+                  }
+                ]
+              ]
+            ],
+            "u": [
+              {
+                "coefficient": "1",
+                "exponents": [
+                  0,
+                  1
+                ]
+              },
+              {
+                "coefficient": "1",
+                "exponents": [
+                  1,
+                  0
+                ]
+              }
+            ]
+          },
+          "rank": 1
+        }
+      ],
+      "cuts": [
+        0,
+        3
+      ],
+      "factor_degrees": [
+        2,
+        2,
+        2,
+        2,
+        2,
+        2,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "family_signature": [
+        "loops=3;physical=5;input=9;det=1",
+        "rustflow_occupied::{}::q_0",
+        "rustflow_occupied::{}::q_1",
+        "rustflow_occupied::{}::q_2",
+        "rustflow_occupied::{}::q_3",
+        "rustflow_occupied::{}::q_4",
+        "rustflow_occupied::{}::q_5",
+        "rustflow_occupied::{}::q_6",
+        "rustflow_occupied::{}::q_7",
+        "rustflow_occupied::{}::q_8",
+        "rustflow_occupied::{}::q_0",
+        "rustflow_occupied::{}::q_5",
+        "(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1",
+        "rustflow_occupied::{}::q_3",
+        "(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_4+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_2)*-1",
+        "rustflow_occupied::{}::q_2",
+        "rustflow_occupied::{}::q_6",
+        "rustflow_occupied::{}::q_8",
+        "-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6",
+        "-1*rustflow_occupied::{}::q_6+1",
+        "rustflow_occupied::{}::q_6",
+        "-1*rustflow_occupied::{}::q_7+1",
+        "rustflow_occupied::{}::q_7",
+        "RequiredCut",
+        "Ordinary",
+        "Ordinary",
+        "RequiredCut",
+        "Ordinary",
+        "Ordinary",
+        "Ordinary",
+        "Ordinary",
+        "Ordinary",
+        "Occupation",
+        "Occupation",
+        "Occupation",
+        "Occupation",
+        "1",
+        "0",
+        "0",
+        "0",
+        "0",
+        "1",
+        "1",
+        "-1",
+        "0",
+        "shell=0:0:9:10:0:1",
+        "shell=1:3:11:12:0:1",
+        "target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]:-1",
+        "target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0, 0, 0]:-1",
+        "target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0]:-1"
+      ],
+      "input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+      "operations": 151,
+      "polynomial_terms": 53,
+      "prescription": "independent-native-mass-minus-i-epsilon;future-square-root-real-spatial;epsilon-removed-at-fixed-positive-eta-and-T;real-Fermi-T-limit;then-meromorphic-D;original-polynomial-fixed-in-mass-jets",
+      "pure_compact_slots": [
+        2
+      ],
+      "routed_rows": [
+        [
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "-1",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "-1",
+          "1",
+          "1"
+        ]
+      ],
+      "schur_bound": "2",
+      "shifted": [
+        1,
+        2
+      ],
+      "source_options": {
+        "free_virtual_zero_sectors": true,
+        "policy": "legacy-lorentz",
+        "positive_compact_energy_powers": false
+      },
+      "translated_rows": [
+        [
+          "1",
+          "0",
+          "0"
+        ],
+        [
+          "1",
+          "-1",
+          "1"
+        ],
+        [
+          "1",
+          "-1",
+          "0"
+        ],
+        [
+          "0",
+          "1",
+          "0"
+        ],
+        [
+          "0",
+          "0",
+          "1"
+        ]
+      ],
+      "translation": [
+        [
+          "1",
+          "-1"
+        ]
+      ],
+      "version": "partial-origin-rank-two-v1;universal-finite-label-JN;no-endpoint-no-infinity",
+      "virtual_loops": 1,
+      "virtual_slots": [
+        1,
+        4
+      ]
+    },
+    "origin_identity": "partial-origin-rank-two-v1;universal-finite-label-JN;no-endpoint-no-infinity:ba9d59f812c31ec6d9088a49ff3405eb28ba39239a737281b3c5e5a6fa98e775",
+    "original_target_label_bounds": [
+      {
+        "compact_jet_orders": [
+          0,
+          0
+        ],
+        "dimension_witness": "51/5",
+        "label": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "origin_audit": {
+          "active_virtual_slots": [
+            1,
+            4
+          ],
+          "classification": "finite-positive-eta-jets",
+          "cut_vanishing": false,
+          "dimension_witness": "41/5",
+          "jets_including_lower": 0,
+          "label": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "polynomial_degree": 0,
+          "positive_virtual_degree": 2,
+          "remaining_mass_power": "21/10",
+          "subtracted_terms": 0
+        },
+        "physical_endpoint_class": "continued-hard-limit-with-positive-holder-remainder",
+        "polynomial_degree": 0,
+        "positive_pure_transfer_degree": 1,
+        "positive_virtual_degree": 2,
+        "sigma": "1/2",
+        "strict_margins": [
+          {
+            "stratum": "virtual finite J+N Holder remainder",
+            "value": "13/5"
+          },
+          {
+            "stratum": "pair-angle Holder integrability",
+            "value": "13/5"
+          },
+          {
+            "stratum": "positive compact Gram-angle measure",
+            "value": "31/5"
+          },
+          {
+            "stratum": "compact radial difference loop 0",
+            "value": "31/5"
+          },
+          {
+            "stratum": "compact lower-contact jets loop 0",
+            "value": "31/5"
+          },
+          {
+            "stratum": "compact radial difference loop 1",
+            "value": "31/5"
+          },
+          {
+            "stratum": "compact lower-contact jets loop 1",
+            "value": "31/5"
+          }
+        ],
+        "taylor_terms": 0,
+        "total_jet_order": 0,
+        "transfer_holder_power": "3/2"
+      },
+      {
+        "compact_jet_orders": [
+          1,
+          0
+        ],
+        "dimension_witness": "81/5",
+        "label": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "origin_audit": {
+          "active_virtual_slots": [
+            1,
+            4
+          ],
+          "classification": "finite-positive-eta-jets",
+          "cut_vanishing": false,
+          "dimension_witness": "71/5",
+          "jets_including_lower": 1,
+          "label": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "polynomial_degree": 2,
+          "positive_virtual_degree": 2,
+          "remaining_mass_power": "41/10",
+          "subtracted_terms": 0
+        },
+        "physical_endpoint_class": "continued-hard-limit-with-positive-holder-remainder",
+        "polynomial_degree": 2,
+        "positive_pure_transfer_degree": 1,
+        "positive_virtual_degree": 2,
+        "sigma": "1/2",
+        "strict_margins": [
+          {
+            "stratum": "virtual finite J+N Holder remainder",
+            "value": "23/5"
+          },
+          {
+            "stratum": "pair-angle Holder integrability",
+            "value": "23/5"
+          },
+          {
+            "stratum": "positive compact Gram-angle measure",
+            "value": "61/5"
+          },
+          {
+            "stratum": "compact radial difference loop 0",
+            "value": "46/5"
+          },
+          {
+            "stratum": "compact lower-contact jets loop 0",
+            "value": "46/5"
+          },
+          {
+            "stratum": "compact radial difference loop 1",
+            "value": "56/5"
+          },
+          {
+            "stratum": "compact lower-contact jets loop 1",
+            "value": "56/5"
+          }
+        ],
+        "taylor_terms": 0,
+        "total_jet_order": 1,
+        "transfer_holder_power": "5/2"
+      },
+      {
+        "compact_jet_orders": [
+          1,
+          0
+        ],
+        "dimension_witness": "81/5",
+        "label": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ],
+        "origin_audit": {
+          "active_virtual_slots": [
+            1,
+            4
+          ],
+          "classification": "finite-positive-eta-jets",
+          "cut_vanishing": false,
+          "dimension_witness": "71/5",
+          "jets_including_lower": 1,
+          "label": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "polynomial_degree": 2,
+          "positive_virtual_degree": 2,
+          "remaining_mass_power": "41/10",
+          "subtracted_terms": 0
+        },
+        "physical_endpoint_class": "continued-hard-limit-with-positive-holder-remainder",
+        "polynomial_degree": 2,
+        "positive_pure_transfer_degree": 1,
+        "positive_virtual_degree": 2,
+        "sigma": "1/2",
+        "strict_margins": [
+          {
+            "stratum": "virtual finite J+N Holder remainder",
+            "value": "23/5"
+          },
+          {
+            "stratum": "pair-angle Holder integrability",
+            "value": "23/5"
+          },
+          {
+            "stratum": "positive compact Gram-angle measure",
+            "value": "61/5"
+          },
+          {
+            "stratum": "compact radial difference loop 0",
+            "value": "46/5"
+          },
+          {
+            "stratum": "compact lower-contact jets loop 0",
+            "value": "46/5"
+          },
+          {
+            "stratum": "compact radial difference loop 1",
+            "value": "56/5"
+          },
+          {
+            "stratum": "compact lower-contact jets loop 1",
+            "value": "56/5"
+          }
+        ],
+        "taylor_terms": 0,
+        "total_jet_order": 1,
+        "transfer_holder_power": "5/2"
+      }
+    ]
+  },
+  "requirements": {
+    "audit_combined_rational_reconstruction_with_all_eta_poles": true,
+    "audit_every_target_basis_candidate_and_source_application_label": true,
+    "boundary_authority": false,
+    "cancellation_supported": false,
+    "check_original_conditions_at_each_epsilon_sample": true,
+    "endpoint_theorem": "partial-endpoint-rank-two-finite-JN-holder-v1",
+    "internal_cas_work_bound": false,
+    "native_mode_authority": false,
+    "origin_identity": "partial-origin-rank-two-v1;universal-finite-label-JN;no-endpoint-no-infinity:ba9d59f812c31ec6d9088a49ff3405eb28ba39239a737281b3c5e5a6fa98e775",
+    "production_admission": false,
+    "require_actual_regular_singular_frobenius_representation_and_sufficient_series": true,
+    "retain_native_joint_target_divergence_checks": true,
+    "retain_raw_target_conditions_before_cancellation_or_zero_classification": true,
+    "right_half_plane_eta_only": true,
+    "singleton_raw_ward_authority": false,
+    "source_zero_authority": false
+  }
+}

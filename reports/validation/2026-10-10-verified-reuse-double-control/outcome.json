@@ -1,0 +1,102 @@
+{
+  "scope": "Fresh original three-loop selected cut [0,3], all uncut physical factors deformed, original two targets. No checkpoint/rules/resume/reference values imported. One fixed-D profile only; no complete three-loop/four-loop acceptance or refinement/speed claim.",
+  "run_binding_sha256": "5b06e36db7da5b81d42b616fc594cfcca41eec1d397de5c6de04c7f945fb82ef",
+  "capsule_binding_sha256": "a3eaf3983711b3fa6acccb8c8c13bf6f6a48c3d56bc00f0d3cc8e6129a83f9f7",
+  "resources_sha256": "4c10e5606b76b3ca62841a1db79c2d5032b66f0315c950deab10fc275f8f192d",
+  "exit_code": 124,
+  "resources": {
+    "command": [
+      "timeout",
+      "1800",
+      "/tmp/rustflow-verified-reuse-double-20261010/runtime",
+      "--ignored",
+      "--exact",
+      "runtime_graph_occupied_flow",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 124,
+    "wall_seconds": 1800.113208686933,
+    "user_seconds": 1783.302763,
+    "system_seconds": 3.5695639999999997,
+    "peak_child_rss_kib": 1190164,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "published_provisional_rounds": [
+    {
+      "path": "double/native-closure/round-000-provisional.json",
+      "sha256": "3214f9c6c7e53be2284a72dc4fe82023be1cb7d13e36e21c3f01d1e5f18acd8c",
+      "round": 0,
+      "status": "provisional",
+      "rules": 11,
+      "frontier_count": 27,
+      "requested_count": 32,
+      "program_bytes": 147731,
+      "program_blake3": "bcbb6b52d3defb914dc636fdca5eadea56575652c39f178c36bf88f74e7bf51f"
+    },
+    {
+      "path": "double/native-closure/round-001-provisional.json",
+      "sha256": "993180f62a20605722d35dc88e965fdc34074161ad949e4612708287df12d1b3",
+      "round": 1,
+      "status": "provisional",
+      "rules": 34,
+      "frontier_count": 188,
+      "requested_count": 194,
+      "program_bytes": 201417,
+      "program_blake3": "f4614291acc9b9ea8c8d8219d702df5bed0794be18230f327c0854c04a98a869"
+    },
+    {
+      "path": "double/native-closure/round-002-provisional.json",
+      "sha256": "dae58f288222b383f8aedbe14c82cd35f102620ddee7113a1be1580f037f4791",
+      "round": 2,
+      "status": "provisional",
+      "rules": 221,
+      "frontier_count": 822,
+      "requested_count": 834,
+      "program_bytes": 722562,
+      "program_blake3": "86b5967cd75df09fb507967713257b7bd49aa52c77840270ed12e6d26151c84b"
+    },
+    {
+      "path": "double/native-closure/round-003-provisional.json",
+      "sha256": "b9789bb5a39180548c5dc3d82c74a00a6c92b587ebfc184d4799f0b4bb86f89c",
+      "round": 3,
+      "status": "provisional",
+      "rules": 1083,
+      "frontier_count": 1820,
+      "requested_count": 1839,
+      "program_bytes": 2684862,
+      "program_blake3": "b7c566741eb8058823c64aeec3ad079943d9791ecbf201cbc7b8383a30220643"
+    },
+    {
+      "path": "double/native-closure/round-004-provisional.json",
+      "sha256": "f691ad8ed76fe15a130db430079f0109536b235ea4a80ea21b9b70a526600cae",
+      "round": 4,
+      "status": "provisional",
+      "rules": 3114,
+      "frontier_count": 2758,
+      "requested_count": 2783,
+      "program_bytes": 5935226,
+      "program_blake3": "25b6039293d6642d77756d4a0b83b431a6636cd819f9ccce2495c35084679319"
+    },
+    {
+      "path": "double/native-closure/round-005-provisional.json",
+      "sha256": "41a95b2a6fcb1ac8333c1d0e1d5a5d5898f74f6d859b909cb73a4ebd144b1a90",
+      "round": 5,
+      "status": "provisional",
+      "rules": 6283,
+      "frontier_count": 3315,
+      "requested_count": 3343,
+      "program_bytes": 9851835,
+      "program_blake3": "7ad959f0b60e66d1fa319fd235533456d8ae16883dab4002b9d4d971ab0b6d31"
+    }
+  ],
+  "closed_checkpoint_paths": [],
+  "saved_predictions": [],
+  "numerical_comparison_performed": false,
+  "full_three_loop_acceptance": false,
+  "four_loop_acceptance": false,
+  "timing_comparison_claimed": false,
+  "source_and_static_executable_unchanged": true,
+  "incomplete_work_scope": "Only fully published checkpoint files are counted. A timeout may leave unfinished later work; no continuation or completed round is inferred.",
+  "summarizer_sha256": "9199000998bc77665edc74ffb8386fc0954d8e6da699d778123b50ab5ad84583"
+}

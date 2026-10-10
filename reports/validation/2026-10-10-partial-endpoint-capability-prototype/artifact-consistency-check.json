@@ -1,0 +1,10 @@
+{
+  "status": "passed",
+  "source_files_match_successful_compile": true,
+  "unchanged_origin_exact_prefix": true,
+  "only_origin_suffix": "\n#[path = \"/tmp/rustflow-partial-endpoint-20261010/src/finite_density/partial_endpoint.rs\"]\npub mod endpoint;\n",
+  "final_evidence_verified": 9,
+  "build_sha256": "839f3045efa4e810d557b239cfc368669f2afc8f6eb3865fb335860a652a532a",
+  "final_gates_sha256": "b3638ef0612166d5abcb0601b99f28c287d8acafa8f39c96601b06d32674ec07",
+  "no_build_or_test_repeated": true
+}

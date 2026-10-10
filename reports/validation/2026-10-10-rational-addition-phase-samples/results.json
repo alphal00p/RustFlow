@@ -1,0 +1,454 @@
+{
+  "completed_samples": 8,
+  "records": [
+    {
+      "exact_captured_sum": true,
+      "ordinal": 14649,
+      "sample": 0,
+      "stats": {
+        "denominator_one": 0,
+        "equal_denominator": 2,
+        "exact_native_add_comparisons": 26,
+        "phases": {
+          "constructor-sign-normalization": {
+            "calls": 2,
+            "seconds": 0.000046930000000000006
+          },
+          "constructor-variable-unification": {
+            "calls": 2,
+            "seconds": 2.29e-7
+          },
+          "denominator-cancellation-quotient": {
+            "calls": 8,
+            "seconds": 0.027332945999999997
+          },
+          "denominator-clone": {
+            "calls": 2,
+            "seconds": 0.000053482
+          },
+          "denominator-gcd": {
+            "calls": 24,
+            "seconds": 0.28704152899999996
+          },
+          "denominator-gcd-quotient": {
+            "calls": 48,
+            "seconds": 0.16680151399999998
+          },
+          "numerator-cancellation-gcd": {
+            "calls": 26,
+            "seconds": 0.6412402199999999
+          },
+          "numerator-cancellation-quotient": {
+            "calls": 8,
+            "seconds": 0.159283911
+          },
+          "polynomial-denominator-product": {
+            "calls": 24,
+            "seconds": 0.0033445799999999993
+          },
+          "polynomial-numerator-add": {
+            "calls": 26,
+            "seconds": 0.014020836000000004
+          },
+          "polynomial-numerator-cross-product": {
+            "calls": 48,
+            "seconds": 0.13981103300000003
+          }
+        },
+        "unequal_denominator": 24,
+        "validation_seconds": 1.4414402430000002
+      },
+      "wall_seconds_including_native_validation": 2.895525061
+    },
+    {
+      "exact_captured_sum": true,
+      "ordinal": 14625,
+      "sample": 1,
+      "stats": {
+        "denominator_one": 0,
+        "equal_denominator": 1,
+        "exact_native_add_comparisons": 27,
+        "phases": {
+          "constructor-sign-normalization": {
+            "calls": 1,
+            "seconds": 4.2e-7
+          },
+          "constructor-variable-unification": {
+            "calls": 1,
+            "seconds": 1.2e-7
+          },
+          "denominator-cancellation-quotient": {
+            "calls": 3,
+            "seconds": 0.0028474290000000003
+          },
+          "denominator-clone": {
+            "calls": 1,
+            "seconds": 6.2e-7
+          },
+          "denominator-gcd": {
+            "calls": 26,
+            "seconds": 0.26100647099999996
+          },
+          "denominator-gcd-quotient": {
+            "calls": 52,
+            "seconds": 0.11817461399999998
+          },
+          "numerator-cancellation-gcd": {
+            "calls": 27,
+            "seconds": 0.26798084399999994
+          },
+          "numerator-cancellation-quotient": {
+            "calls": 3,
+            "seconds": 0.019934712
+          },
+          "polynomial-denominator-product": {
+            "calls": 26,
+            "seconds": 0.0034425320000000008
+          },
+          "polynomial-numerator-add": {
+            "calls": 27,
+            "seconds": 0.011282944999999999
+          },
+          "polynomial-numerator-cross-product": {
+            "calls": 52,
+            "seconds": 0.08854586100000003
+          }
+        },
+        "unequal_denominator": 26,
+        "validation_seconds": 0.7725047710000001
+      },
+      "wall_seconds_including_native_validation": 1.55864541
+    },
+    {
+      "exact_captured_sum": true,
+      "ordinal": 9115,
+      "sample": 2,
+      "stats": {
+        "denominator_one": 0,
+        "equal_denominator": 1,
+        "exact_native_add_comparisons": 21,
+        "phases": {
+          "constructor-sign-normalization": {
+            "calls": 1,
+            "seconds": 4.7e-7
+          },
+          "constructor-variable-unification": {
+            "calls": 1,
+            "seconds": 8e-8
+          },
+          "denominator-cancellation-quotient": {
+            "calls": 4,
+            "seconds": 0.015750729
+          },
+          "denominator-clone": {
+            "calls": 1,
+            "seconds": 0.00001469
+          },
+          "denominator-gcd": {
+            "calls": 20,
+            "seconds": 0.18937545599999997
+          },
+          "denominator-gcd-quotient": {
+            "calls": 40,
+            "seconds": 0.12382079099999997
+          },
+          "numerator-cancellation-gcd": {
+            "calls": 21,
+            "seconds": 0.285429829
+          },
+          "numerator-cancellation-quotient": {
+            "calls": 4,
+            "seconds": 0.08319732199999999
+          },
+          "polynomial-denominator-product": {
+            "calls": 20,
+            "seconds": 0.003275898
+          },
+          "polynomial-numerator-add": {
+            "calls": 21,
+            "seconds": 0.007828038
+          },
+          "polynomial-numerator-cross-product": {
+            "calls": 40,
+            "seconds": 0.08237652499999999
+          }
+        },
+        "unequal_denominator": 20,
+        "validation_seconds": 0.791999356
+      },
+      "wall_seconds_including_native_validation": 1.592008065
+    },
+    {
+      "exact_captured_sum": true,
+      "ordinal": 14648,
+      "sample": 3,
+      "stats": {
+        "denominator_one": 0,
+        "equal_denominator": 2,
+        "exact_native_add_comparisons": 25,
+        "phases": {
+          "constructor-sign-normalization": {
+            "calls": 2,
+            "seconds": 9.200000000000001e-7
+          },
+          "constructor-variable-unification": {
+            "calls": 2,
+            "seconds": 2.4000000000000003e-7
+          },
+          "denominator-cancellation-quotient": {
+            "calls": 8,
+            "seconds": 0.012150359
+          },
+          "denominator-clone": {
+            "calls": 2,
+            "seconds": 0.000044101000000000003
+          },
+          "denominator-gcd": {
+            "calls": 23,
+            "seconds": 0.157571906
+          },
+          "denominator-gcd-quotient": {
+            "calls": 46,
+            "seconds": 0.08723065000000003
+          },
+          "numerator-cancellation-gcd": {
+            "calls": 25,
+            "seconds": 0.33327214099999997
+          },
+          "numerator-cancellation-quotient": {
+            "calls": 8,
+            "seconds": 0.06711847000000001
+          },
+          "polynomial-denominator-product": {
+            "calls": 23,
+            "seconds": 0.0025234190000000003
+          },
+          "polynomial-numerator-add": {
+            "calls": 25,
+            "seconds": 0.008523832000000002
+          },
+          "polynomial-numerator-cross-product": {
+            "calls": 46,
+            "seconds": 0.05804089499999999
+          }
+        },
+        "unequal_denominator": 23,
+        "validation_seconds": 0.7243223120000001
+      },
+      "wall_seconds_including_native_validation": 1.46035723
+    },
+    {
+      "exact_captured_sum": true,
+      "ordinal": 14357,
+      "sample": 4,
+      "stats": {
+        "denominator_one": 0,
+        "equal_denominator": 0,
+        "exact_native_add_comparisons": 31,
+        "phases": {
+          "denominator-cancellation-quotient": {
+            "calls": 6,
+            "seconds": 0.007386454000000001
+          },
+          "denominator-gcd": {
+            "calls": 31,
+            "seconds": 0.143297524
+          },
+          "denominator-gcd-quotient": {
+            "calls": 62,
+            "seconds": 0.09812889899999999
+          },
+          "numerator-cancellation-gcd": {
+            "calls": 31,
+            "seconds": 0.23593464100000003
+          },
+          "numerator-cancellation-quotient": {
+            "calls": 6,
+            "seconds": 0.042471702
+          },
+          "polynomial-denominator-product": {
+            "calls": 31,
+            "seconds": 0.0037453639999999993
+          },
+          "polynomial-numerator-add": {
+            "calls": 31,
+            "seconds": 0.007317411999999998
+          },
+          "polynomial-numerator-cross-product": {
+            "calls": 62,
+            "seconds": 0.064832844
+          }
+        },
+        "unequal_denominator": 31,
+        "validation_seconds": 0.6025878299999999
+      },
+      "wall_seconds_including_native_validation": 1.214352195
+    },
+    {
+      "exact_captured_sum": true,
+      "ordinal": 14331,
+      "sample": 5,
+      "stats": {
+        "denominator_one": 0,
+        "equal_denominator": 0,
+        "exact_native_add_comparisons": 31,
+        "phases": {
+          "denominator-cancellation-quotient": {
+            "calls": 3,
+            "seconds": 0.001518346
+          },
+          "denominator-gcd": {
+            "calls": 31,
+            "seconds": 0.191083031
+          },
+          "denominator-gcd-quotient": {
+            "calls": 62,
+            "seconds": 0.126831349
+          },
+          "numerator-cancellation-gcd": {
+            "calls": 31,
+            "seconds": 0.17616173199999996
+          },
+          "numerator-cancellation-quotient": {
+            "calls": 3,
+            "seconds": 0.007676883
+          },
+          "polynomial-denominator-product": {
+            "calls": 31,
+            "seconds": 0.0045399590000000005
+          },
+          "polynomial-numerator-add": {
+            "calls": 31,
+            "seconds": 0.008705496000000002
+          },
+          "polynomial-numerator-cross-product": {
+            "calls": 62,
+            "seconds": 0.08384849100000001
+          }
+        },
+        "unequal_denominator": 31,
+        "validation_seconds": 0.6010874960000001
+      },
+      "wall_seconds_including_native_validation": 1.211715587
+    },
+    {
+      "exact_captured_sum": true,
+      "ordinal": 14647,
+      "sample": 6,
+      "stats": {
+        "denominator_one": 0,
+        "equal_denominator": 2,
+        "exact_native_add_comparisons": 25,
+        "phases": {
+          "constructor-sign-normalization": {
+            "calls": 2,
+            "seconds": 1e-6
+          },
+          "constructor-variable-unification": {
+            "calls": 2,
+            "seconds": 3.8999999999999997e-7
+          },
+          "denominator-cancellation-quotient": {
+            "calls": 7,
+            "seconds": 0.008282775
+          },
+          "denominator-clone": {
+            "calls": 2,
+            "seconds": 0.00003243
+          },
+          "denominator-gcd": {
+            "calls": 23,
+            "seconds": 0.11854439400000001
+          },
+          "denominator-gcd-quotient": {
+            "calls": 46,
+            "seconds": 0.06372414500000002
+          },
+          "numerator-cancellation-gcd": {
+            "calls": 25,
+            "seconds": 0.224070195
+          },
+          "numerator-cancellation-quotient": {
+            "calls": 7,
+            "seconds": 0.04420024
+          },
+          "polynomial-denominator-product": {
+            "calls": 23,
+            "seconds": 0.0023194089999999997
+          },
+          "polynomial-numerator-add": {
+            "calls": 25,
+            "seconds": 0.007196297999999999
+          },
+          "polynomial-numerator-cross-product": {
+            "calls": 46,
+            "seconds": 0.042069745000000006
+          }
+        },
+        "unequal_denominator": 23,
+        "validation_seconds": 0.5101047080000001
+      },
+      "wall_seconds_including_native_validation": 1.0285404
+    },
+    {
+      "exact_captured_sum": true,
+      "ordinal": 14530,
+      "sample": 7,
+      "stats": {
+        "denominator_one": 0,
+        "equal_denominator": 1,
+        "exact_native_add_comparisons": 31,
+        "phases": {
+          "constructor-sign-normalization": {
+            "calls": 1,
+            "seconds": 4.11e-7
+          },
+          "constructor-variable-unification": {
+            "calls": 1,
+            "seconds": 1.09e-7
+          },
+          "denominator-cancellation-quotient": {
+            "calls": 6,
+            "seconds": 0.007677634
+          },
+          "denominator-clone": {
+            "calls": 1,
+            "seconds": 0.000016251
+          },
+          "denominator-gcd": {
+            "calls": 30,
+            "seconds": 0.131804845
+          },
+          "denominator-gcd-quotient": {
+            "calls": 60,
+            "seconds": 0.08714613500000001
+          },
+          "numerator-cancellation-gcd": {
+            "calls": 31,
+            "seconds": 0.187319887
+          },
+          "numerator-cancellation-quotient": {
+            "calls": 6,
+            "seconds": 0.03332626600000001
+          },
+          "polynomial-denominator-product": {
+            "calls": 30,
+            "seconds": 0.003890392
+          },
+          "polynomial-numerator-add": {
+            "calls": 31,
+            "seconds": 0.006310898
+          },
+          "polynomial-numerator-cross-product": {
+            "calls": 60,
+            "seconds": 0.04726588600000003
+          }
+        },
+        "unequal_denominator": 30,
+        "validation_seconds": 0.5078491990000001
+      },
+      "wall_seconds_including_native_validation": 1.020057383
+    }
+  ],
+  "scope": "pinned native rational Add phase attribution on eight existing samples, no new integral reduction"
+}

@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-raw-lcm-actual-attempt1",
+    "/tmp/rustflow-raw-lcm-samples-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-raw-lcm-sample-experiment/results.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 56.25802928581834,
+  "user_seconds": 55.723302,
+  "system_seconds": 0.15220999999999998,
+  "peak_child_rss_kib": 110604,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

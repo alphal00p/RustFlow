@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "1800",
+    "/tmp/rustflow-verified-reuse-double-20261010/runtime",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 124,
+  "wall_seconds": 1800.113208686933,
+  "user_seconds": 1783.302763,
+  "system_seconds": 3.5695639999999997,
+  "peak_child_rss_kib": 1190164,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

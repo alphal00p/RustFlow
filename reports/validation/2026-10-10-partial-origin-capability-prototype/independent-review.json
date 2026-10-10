@@ -1,0 +1,128 @@
+{
+  "scope": "Independent read-only mathematical/API review of the isolated finite-positive-eta prototype; no production mutation, build, test rerun or numerical reference evaluation",
+  "reviewed_utc": "2026-10-10T07:29:31.721960+00:00",
+  "source_sha256": "9fecca0a42c8d9486bd4334384b9271fc90a789482ced0613fc7bb783695028c",
+  "conclusion": "No additional mathematical or implementation soundness blocker found within the stated isolated authority and reviewed finite-jet theorem. Production integration remains blocked by the explicitly listed consumer, raw-condition and resource/cancellation obligations.",
+  "checks": [
+    {
+      "topic": "Immutable authority and exact binding",
+      "finding": "Private capability fields, Serialize without Deserialize, reconstruction of the complete actual occupied family, exact original input identity/options/placement and replay digest prevent caller-forged or shifted-only support evidence. Clone does not expose field mutation."
+    },
+    {
+      "topic": "Complete physical rows and affine translation",
+      "finding": "Every original physical square is replayed against rational routed rows. One common rational affine virtual translation eliminates compact components of all unshifted rows. Pure compact rows require a shifted nonzero equal-and-opposite pair, supplying a finite-positive-eta gap. Rank/support classification uses every actual virtual-dependent row."
+    },
+    {
+      "topic": "Full off-null native U/F",
+      "finding": "HEPKit U is compared to the exact Gaussian determinant. F is rebuilt exactly from eta, all independent virtual masses, signed shell diagonal invariants and every pair invariant. Pair coefficients equal -V_ij and are nonnegative polynomials; diagonal coefficients equal -V_ii and remain signed. This retains actual regulated shell information and rejects omitted/nonlinear kinematic pieces."
+    },
+    {
+      "topic": "Actual line regulators and common phase",
+      "finding": "For future square-root pole energies with real spatial momenta, the reverse-Cauchy identity gives Re(2 q_i.q_j)>=0. Signed diagonal terms are purely imaginary. Thus the certified pair coefficients give Re F>=eta U S. When S=0, the affine condition implies Q=0 and only the negative imaginary independent virtual-mass average remains on nondegenerate faces. The 117 exact face/angle checks, including 54 S=0 checks, supplement the polynomial identities; they are not a replacement for the universal inequality."
+    },
+    {
+      "topic": "Complete rank-two charts",
+      "finding": "All primary/nonparallel-pivot charts are enumerated. The maps cover the max-parameter domain, have the recorded x^(m-1) Jacobian, and check U=x U0 with nonnegative coefficients and exact positive pivot constant. Dividing the Gaussian mean/V cofactors by x must leave polynomials, so the required smoothness is checked rather than inferred from selected examples."
+    },
+    {
+      "topic": "Finite J+N bound",
+      "finding": "P sums actual positive virtual indices. R bounds polynomial insertion degree. J sums (cut_power-1)+(upper_power-1)_+ +(lower_power-1)_+, so lower contact derivatives are included. With B=max(2(P+R+J+2), radial bound, compact_count+2), D=B+1/5 and N=floor(B/2)+R+1, rank two obeys D/2+R<N<D/2+R+2 and D-P-J-N>0. N denotes exactly N Taylor terms of degrees 0 through N-1. Rank one sets N=0 and retains D/2-P-J>0. Checked dimension arithmetic rejects overflow."
+    },
+    {
+      "topic": "Universal zero boxes and role restrictions",
+      "finding": "All positive virtual supports are retained. Lower-contact boxes rely on the universal pointwise-in-finite-label theorem, not the initial finite examples. Free-direction and regulated-vacuum boxes remain distinct; shifted-positive V=0 is not zero. Required cuts, nonnegative occupations, polynomial completions and fixed-zero storage tails constrain every box. audit_label checks invalid roles/tails before even required-cut-zero classification."
+    },
+    {
+      "topic": "Source-context test",
+      "finding": "The fresh 52-row test preserves the existing full source rows, original guards, index maps and nonzero conditions, installs the new typed origin identity/11 zero boxes, and tests exact zero-rule program roundtrip plus foreign-context rejection. It does not establish a full scheduler consumer, closure, endpoint, boundary or numerical result."
+    }
+  ],
+  "remaining_obligations": [
+    {
+      "status": "production_blocker",
+      "topic": "Raw target coefficient domains",
+      "required": "A consuming owner must collect pre-cancellation original target/source coefficient poles before cut/vacuum/lower-zero pruning, bind and retain them, and check them at every sample. Input identity and canceled target maps alone do not supply this enforcement. Add canceled-numerator and cut-vanishing-pole regression cases."
+    },
+    {
+      "status": "production_blocker",
+      "topic": "All consumed labels and theorem capability separation",
+      "required": "The source/scheduler consumer must enforce and record finite-label audits for original targets, all source images, candidates and final basis/derivative labels. This token cannot be substituted for SingletonGerm/raw-Ward, eta-endpoint or infinity-boundary authority. Keep their independent seals and exact placement/options binding."
+    },
+    {
+      "status": "production_blocker",
+      "topic": "Cancellation and resource accounting",
+      "required": "Current counters bound adapter events and retained outputs only. CAS expansion/cancel, rational rref and native HEPKit work are not fully metered, and RunContext cancellation is absent. Thread the existing context through construction/replay, add meaningful operation preflights/limits and cancellation tests before production. Exposed loop/row limits are resource bounds, not mathematical topology dispatch."
+    },
+    {
+      "status": "documented_convention",
+      "topic": "Virtual zero option",
+      "required": "free_virtual_zero_sectors currently enables both free-direction and regulated-vacuum support boxes. A production interface must deliberately document or split that option; preserve existing all-mass defaults/identity."
+    },
+    {
+      "status": "coverage_limit",
+      "topic": "Standalone test provenance",
+      "required": "This review verifies saved source/build/binary/log bindings and reads the reported 10-test pass; it does not rerun the tests or claim broader numerical admission. Build-05 inventories an unused extra-tests.rs in /tmp; probe.rs does not include it, and no gate count is attributed to it."
+    }
+  ],
+  "source_manifest_entries_verified": 6,
+  "observed_gate": {
+    "passed": 10,
+    "failed": 0,
+    "build_exit_code": 0,
+    "test_exit_code": 0,
+    "binary_sha256": "e920dcbccda6b819bec2d29347f557f4b54bdcd7f5bb7dc96c69675dfb5c53b6",
+    "rerun_by_reviewer": false
+  },
+  "inputs": [
+    {
+      "path": "README.md",
+      "sha256": "c600f348f56450ed9f297cc1a68d57e9225733a516e3b1f84c72ef38734e73f0"
+    },
+    {
+      "path": "source-binding.json",
+      "sha256": "39234fc105f47a69737a13934b15cbefebe1f87f672a2550191a5d61d6eab3c3"
+    },
+    {
+      "path": "library-copies.json",
+      "sha256": "f652b42a5c7515e4c95a0c31ab52b8d328f0b48c863a5e7e6e6625ed6bf564fc"
+    },
+    {
+      "path": "build-05.json",
+      "sha256": "9fa4ac665d581bd40f474f9f848b580ef16e38e8270210a0842118239c92b236"
+    },
+    {
+      "path": "final-gates.json",
+      "sha256": "13748ef8dfdc5fc9655f7ce32e8c1a5dc24b0bb6985e9862aff6a75d99f1396b"
+    },
+    {
+      "path": "final-gates.log",
+      "sha256": "e3a005496a43aa114223eacb4a5aa8ae0786efef761e322429fc5a369e0c094c"
+    },
+    {
+      "path": "final-evidence/cuts-[0, 3]-shift-[1, 2].json",
+      "sha256": "f611bd39474a4bc54b4e347dc724acb119f4b75b2fe7cf50471e1edd7331b1ee"
+    },
+    {
+      "path": "final-evidence/cuts-[0, 3]-shift-[2, 4].json",
+      "sha256": "efb21030bce51421f9c58ed47da4d2dc2bc2f70fe7f0df807b8e4035618fd281"
+    },
+    {
+      "path": "final-evidence/cuts-[3]-shift-[0].json",
+      "sha256": "c923ba4dc3a7d3c43f04e8aad2bef1cdecaf0bad8d241ee482d6bc067359b1eb"
+    },
+    {
+      "path": "final-evidence/fresh-source-guard-binding.json",
+      "sha256": "4e93dc3e0b4944fc271c020988be5cbe0eb88a22416e344ac22ce9423a2e5a7a"
+    },
+    {
+      "path": "final-evidence/off-null-regulator-checks.json",
+      "sha256": "76000a380b37493e3361e77b8473b3876651831d6ea1cef00586dc5a2763a2c4"
+    }
+  ],
+  "proof_design": {
+    "path": "reports/validation/2026-10-10-rank-two-partial-origin-design/design.md",
+    "sha256": "84e9498c4336c160d9282b5ec91b44b98ea3fb8bd0614005c99a739074f392d2"
+  },
+  "full_three_loop_acceptance": false,
+  "four_loop_acceptance": false
+}

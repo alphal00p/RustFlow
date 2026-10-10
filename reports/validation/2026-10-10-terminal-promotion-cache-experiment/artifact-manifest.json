@@ -1,0 +1,49 @@
+{
+  "scope": "Frozen isolated prototype and small native gates",
+  "files": {
+    "README.md": {
+      "sha256": "2a367712d2207f717279232cf0a01d97b38820ddd049a00059ee8566b0482e85",
+      "bytes": 5900
+    },
+    "build.py": {
+      "sha256": "b1e862d0d77eabf2094baf327754212db05309c9af3d4d6df0a59581f65f7c56",
+      "bytes": 1592
+    },
+    "probe.rs": {
+      "sha256": "c843cc8d019f60b8fd6da8822ef70dcd70bc945f9d9b0aa150a242a5f566113d",
+      "bytes": 23440
+    },
+    "resources.json": {
+      "sha256": "82fe8ae5fd7d8b41f5b95fcb3abe890fbd437e2a9f930684344dba0479d09039",
+      "bytes": 388
+    },
+    "resources.log": {
+      "sha256": "5de7dbf6bbb0fd2d7989838a81b3ef3f3b8fa2d698f2778d0239c8e38a34416f",
+      "bytes": 719
+    },
+    "resources.provenance.json": {
+      "sha256": "9c18e19befda641a8c360d50d079b269708953dae1a04b05e9299033f174c51e",
+      "bytes": 792
+    },
+    "run-binding.json": {
+      "sha256": "b7c202901fb6290f1f8896932c948385d5e275b5d53df0d7174d3ce45ea99fae",
+      "bytes": 1428
+    },
+    "run.py": {
+      "sha256": "b397adc284768949496ef6d44e78c482cc7fac34df7baa93f97c1bb1139159de",
+      "bytes": 1193
+    },
+    "summary.json": {
+      "sha256": "2ade3af639c9f46da4eaf732c875dcae06a1e1b903d38231dafa5f6f93cef34f",
+      "bytes": 1604
+    },
+    "tests-attempt1-build-binding.json": {
+      "sha256": "933208c8abd5422423601ad91515186534cabb432acb49d61f008e310da7baca",
+      "bytes": 2693
+    },
+    "tests-attempt1-build.log": {
+      "sha256": "991c02a98ada971694b0aad98caf34ee082e30dd5cf40d0fa75b99a3686a4cd0",
+      "bytes": 1274
+    }
+  }
+}

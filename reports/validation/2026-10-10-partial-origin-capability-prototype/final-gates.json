@@ -1,0 +1,8 @@
+{
+  "exit": 0,
+  "elapsed_seconds": 0.41493643494322896,
+  "binary_sha256": "e920dcbccda6b819bec2d29347f557f4b54bdcd7f5bb7dc96c69675dfb5c53b6",
+  "log_sha256": "e3a005496a43aa114223eacb4a5aa8ae0786efef761e322429fc5a369e0c094c",
+  "build": "build-05.json",
+  "scope": "10 isolated prototype tests; no production dispatch, endpoint, boundary, or numerical amplitude"
+}

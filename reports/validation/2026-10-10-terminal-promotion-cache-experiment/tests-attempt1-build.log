@@ -1,0 +1,33 @@
+warning: field `0` is never read
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-cache-experiment/probe.rs:29:12
+   |
+29 |     Native(SolverError),
+   |     ------ ^^^^^^^^^^^
+   |     |
+   |     field in this variant
+   |
+   = note: `Error` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+help: consider changing the field to be of unit type to suppress this warning while preserving the field numbering, or remove the field
+   |
+29 -     Native(SolverError),
+29 +     Native(()),
+   |
+
+warning: field `0` is never read
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-cache-experiment/probe.rs:30:16
+   |
+30 |     Transition(&'static str),
+   |     ---------- ^^^^^^^^^^^^
+   |     |
+   |     field in this variant
+   |
+   = note: `Error` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+help: consider changing the field to be of unit type to suppress this warning while preserving the field numbering, or remove the field
+   |
+30 -     Transition(&'static str),
+30 +     Transition(()),
+   |
+
+warning: 2 warnings emitted
+

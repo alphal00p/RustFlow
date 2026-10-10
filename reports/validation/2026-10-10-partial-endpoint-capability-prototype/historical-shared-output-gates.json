@@ -1,0 +1,44 @@
+{
+  "command": [
+    "/tmp/rustflow-partial-endpoint-20261010/prototype-tests",
+    "finite_density::partial_origin::",
+    "--test-threads=1",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.8510183342732489,
+  "binary_sha256": "9a4b9a0cc499d64805e78f268a82b7c75de2fae8ab66dfce8aff9f20e01eea8f",
+  "build_file": "build-01.json",
+  "build_sha256": "839f3045efa4e810d557b239cfc368669f2afc8f6eb3865fb335860a652a532a",
+  "runner_sha256": "db572419dd7f9d020d9b924661a352b002a9bf2f4ecc8b723582bf652986051e",
+  "log_sha256": "8e27930cd1e2d6679f89e061ff4b49c34b9d2bd9ca703581ae80ed9cc018d1cd",
+  "evidence": {
+    "final-evidence/cuts-[0, 3]-shift-[1, 2].json": {
+      "sha256": "f611bd39474a4bc54b4e347dc724acb119f4b75b2fe7cf50471e1edd7331b1ee",
+      "bytes": 13585
+    },
+    "final-evidence/cuts-[0, 3]-shift-[2, 4].json": {
+      "sha256": "efb21030bce51421f9c58ed47da4d2dc2bc2f70fe7f0df807b8e4035618fd281",
+      "bytes": 13584
+    },
+    "final-evidence/cuts-[3]-shift-[0].json": {
+      "sha256": "c923ba4dc3a7d3c43f04e8aad2bef1cdecaf0bad8d241ee482d6bc067359b1eb",
+      "bytes": 97512
+    },
+    "final-evidence/finite-label-audits.json": {
+      "sha256": "110ba9cd267fb0c8d64d37b0288f6d16f1ac39b0f37147edfccf5f5ff10faf60",
+      "bytes": 55070
+    },
+    "final-evidence/fresh-source-guard-binding.json": {
+      "sha256": "4efde5dccedeab41bd8b736cb49a7c02b534ea576bfd79ec0fbab8bcff04c85e",
+      "bytes": 1351
+    },
+    "final-evidence/off-null-regulator-checks.json": {
+      "sha256": "76000a380b37493e3361e77b8473b3876651831d6ea1cef00586dc5a2763a2c4",
+      "bytes": 327
+    }
+  },
+  "production_admission": false,
+  "native_mode_authority": false,
+  "cargo_invoked": false
+}

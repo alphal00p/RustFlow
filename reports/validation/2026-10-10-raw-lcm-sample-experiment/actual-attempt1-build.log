@@ -1,0 +1,18 @@
+warning: field `0` is never read
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-raw-lcm-sample-experiment/probe.rs:10:51
+   |
+10 | #[derive(Debug)]enum Error{Declined(String),Fatal(String)}
+   |                                             ----- ^^^^^^
+   |                                             |
+   |                                             field in this variant
+   |
+   = note: `Error` has a derived impl for the trait `Debug`, but this is intentionally ignored during dead code analysis
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+help: consider changing the field to be of unit type to suppress this warning while preserving the field numbering, or remove the field
+   |
+10 - #[derive(Debug)]enum Error{Declined(String),Fatal(String)}
+10 + #[derive(Debug)]enum Error{Declined(String),Fatal(())}
+   |
+
+warning: 1 warning emitted
+

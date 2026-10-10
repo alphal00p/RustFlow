@@ -1,0 +1,49 @@
+{
+  "scope": "only eight restored frozen coefficient samples; exact native Add check after every instrumented pair",
+  "command": [
+    "timeout",
+    "180",
+    "/tmp/rustflow-rational-addition-phase-actual-attempt1",
+    "/tmp/rustflow-rational-addition-phase-samples-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-rational-addition-phase-samples/results.json"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-rational-addition-phase-samples/probe.rs": "79fe18a8aa569986213a87503b3a0e3a7d8864954e4ff93e0090dad8912585fd",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-rational-addition-phase-samples/build.py": "f37abd1a353a2ce87c3a70a0611180780ceb4ee377b9686a28dce550d80e23b7",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-rational-addition-phase-samples/run.py": "a54116fbb2dd93c8c6a9b46b8e97fa05489f9a06f591619ae31103487a0a9e6a",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-rational-addition-phase-samples/actual-attempt1-build-binding.json": "78c65bb6b1a0f8390fc8a3e2de22b180679d5037a1625270cebfa34e1deb94b8",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/artifact-manifest.json": "e1f50fdda50bcea5a366cdb623ab90165a57dce54862436af8a8198c0982b120",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/archive-map.json": "1e688161cf02b386b3262b54e078b91ead980fa700f0a025c28924b7cd222c28",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual/samples/coefficients.bin.gz": "f4f430a846244d6bbb9aa59cec5aa94cf2959cf55b8543c1de7f38c203e75436",
+    "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/domains/rational_polynomial.rs": "df3f5748f6d5957969c8af1c138696d4d9ac931b9c3dc4429bfe962574baffda",
+    "/tmp/rustflow-rational-addition-phase-actual-attempt1": "b0624d7ad09a06002788f07b57f244dc6803819ebb586bf04220efe343f663a8",
+    "/tmp/rustflow-rational-addition-phase-samples-20261010/symbolica-state.bin": "8644f1522f5b3dfd95fea2b5ebe0c7ad31bcfd9df5d83f164f5dbeb537278d58",
+    "/tmp/rustflow-rational-addition-phase-samples-20261010/samples.json": "d761fa68c50c4b9ec04c70dd49d135c237d4fb5db90385c7eb1a1454e7ec9d62",
+    "/tmp/rustflow-rational-addition-phase-samples-20261010/coefficients.bin": "cff64e8bc52995f6785c109559e261ee316176ff5c0c0e1553911f01b2a58a61"
+  },
+  "restored_archive": {
+    "original_path": "actual/samples/coefficients.bin",
+    "archive_path": "actual/samples/coefficients.bin.gz",
+    "original_sha256": "cff64e8bc52995f6785c109559e261ee316176ff5c0c0e1553911f01b2a58a61",
+    "archive_sha256": "f4f430a846244d6bbb9aa59cec5aa94cf2959cf55b8543c1de7f38c203e75436",
+    "original_bytes": 45918323,
+    "archive_bytes": 31923371,
+    "roundtrip_verified": true
+  },
+  "wall_limit_seconds": 180,
+  "maximum_samples": 8,
+  "maximum_coefficients": 32,
+  "symbolica_revision": "ed2374f",
+  "owner_lines": {
+    "integer_from_num_den": [
+      423,
+      459
+    ],
+    "rational_add": [
+      1075,
+      1135
+    ]
+  },
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

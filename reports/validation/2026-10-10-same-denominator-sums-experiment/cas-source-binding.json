@@ -1,0 +1,16 @@
+{
+  "path": "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/domains/rational_polynomial.rs",
+  "sha256": "df3f5748f6d5957969c8af1c138696d4d9ac931b9c3dc4429bfe962574baffda",
+  "revision": "ed2374f",
+  "anchors": {
+    "integer_from_num_den": [
+      423,
+      459
+    ],
+    "rational_add": [
+      1075,
+      1135
+    ]
+  },
+  "scope": "read-only pinned owner; no modifications"
+}

@@ -1,0 +1,19 @@
+{
+  "S_zero_same_phase_checks": 54,
+  "exact_face_angle_checks": 117,
+  "fermi_T": 2,
+  "no_arbitrary_complex_null_scaling": true,
+  "pole_data_omega_gamma_radius": [
+    [
+      5,
+      3,
+      4
+    ],
+    [
+      13,
+      5,
+      12
+    ]
+  ],
+  "strip_check": "gamma < 3*T < pi*T; same-sign line-mass regulators only"
+}

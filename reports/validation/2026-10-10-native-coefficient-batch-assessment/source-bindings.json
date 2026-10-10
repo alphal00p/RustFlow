@@ -1,0 +1,30 @@
+{
+  "scope": "read-only arithmetic owner inspection; no edits",
+  "symbolica_revision": "ed2374f",
+  "inspected_files": [
+    {
+      "path": "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/domains/rational_polynomial.rs",
+      "sha256": "df3f5748f6d5957969c8af1c138696d4d9ac931b9c3dc4429bfe962574baffda",
+      "anchors": {
+        "integer_from_num_den": [
+          423,
+          459
+        ],
+        "rational_add": [
+          1075,
+          1135
+        ]
+      }
+    }
+  ],
+  "rustred_coefficient_alias": {
+    "path": "vendor/rustred/crates/rustred-core/src/algebra/coefficient/model.rs",
+    "sha256": "06f4903027c6f4bf6fd6058928e139af847dd4e5554704df4e3085e938c1e4fc",
+    "type": "RationalPolynomial<IntegerRing,u16>"
+  },
+  "prior_frozen_experiment": {
+    "path": "reports/validation/2026-10-10-balanced-coefficient-sums-experiment/artifact-manifest.json",
+    "sha256": "7de75c7e59aa4b0bdb229098a4767783cc497967974980e6af1dc9eccbe9db9e"
+  },
+  "status": "proposal only; no new executable or performance result"
+}

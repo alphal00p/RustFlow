@@ -1,0 +1,79 @@
+{
+  "scope": "Byte/hash and transaction-link integrity only; no new symbolic replay or closed-system claim.",
+  "native_digest_build_sha256": "8aa52c6325977dca78d39283278fdb34d82a764bb2e2a1e2a44ffce31209c76d",
+  "native_digest_executable_sha256": "298700e47bfbb8203647110f7ebc51c5d5535ed562aa1d5634e9fbe8fd6b61c9",
+  "rounds": [
+    {
+      "metadata": "double/native-closure/round-000-provisional.json",
+      "metadata_sha256": "3214f9c6c7e53be2284a72dc4fe82023be1cb7d13e36e21c3f01d1e5f18acd8c",
+      "program": "double/native-closure/round-000-provisional.bin",
+      "program_sha256": "5bd72f794ed873952d5250628677c4aa44bf481a712fdc52e37333c7379414c3",
+      "program_blake3": "bcbb6b52d3defb914dc636fdca5eadea56575652c39f178c36bf88f74e7bf51f",
+      "program_bytes": 147731,
+      "requested_discovery": "double/native-closure/requested-discovery-0001.json",
+      "requested_discovery_sha256": "fcaf0b99f65d33927f633bdcc169655e559aacec903e7cd2b4e1e4743281ea60",
+      "requested_discovery_blake3": "9be7bceb55baecf7cab6a8c789c0cf4e3795ea78fe35e1d6e9b1d244be70d18c",
+      "requested_discovery_bytes": 91809
+    },
+    {
+      "metadata": "double/native-closure/round-001-provisional.json",
+      "metadata_sha256": "993180f62a20605722d35dc88e965fdc34074161ad949e4612708287df12d1b3",
+      "program": "double/native-closure/round-001-provisional.bin",
+      "program_sha256": "393a7131fdca8f553066d3ed9b6437da59a3c9ad9ad5a3e1f3590865141f685d",
+      "program_blake3": "f4614291acc9b9ea8c8d8219d702df5bed0794be18230f327c0854c04a98a869",
+      "program_bytes": 201417,
+      "requested_discovery": "double/native-closure/requested-discovery-0002.json",
+      "requested_discovery_sha256": "f73f68ad64df4e68fd8df8f8d1b308809efb45993a546cba6c7d72467d97e39b",
+      "requested_discovery_blake3": "e0612d424b77cc3328004fe096b19eb657cf99515a55417aa3cca01685fabe4c",
+      "requested_discovery_bytes": 234505
+    },
+    {
+      "metadata": "double/native-closure/round-002-provisional.json",
+      "metadata_sha256": "dae58f288222b383f8aedbe14c82cd35f102620ddee7113a1be1580f037f4791",
+      "program": "double/native-closure/round-002-provisional.bin",
+      "program_sha256": "90199c6bb86929d3b0479f3d9245cdd65dc8ea3162a0c4001cd213a5f58f6bf0",
+      "program_blake3": "86b5967cd75df09fb507967713257b7bd49aa52c77840270ed12e6d26151c84b",
+      "program_bytes": 722562,
+      "requested_discovery": "double/native-closure/requested-discovery-0003.json",
+      "requested_discovery_sha256": "15ea33ff7c056c7b00f898967beb693c498982b6eeb783b776652013a0b486ec",
+      "requested_discovery_blake3": "1444328186ca6d8beb90600709f464185de8fe940af5c2e8baaad9a793a320f6",
+      "requested_discovery_bytes": 1445886
+    },
+    {
+      "metadata": "double/native-closure/round-003-provisional.json",
+      "metadata_sha256": "b9789bb5a39180548c5dc3d82c74a00a6c92b587ebfc184d4799f0b4bb86f89c",
+      "program": "double/native-closure/round-003-provisional.bin",
+      "program_sha256": "22ed6bd83ceb77c37850dfdc4204e4f65aeb3963b6d2b86873114ad439ec2fef",
+      "program_blake3": "b7c566741eb8058823c64aeec3ad079943d9791ecbf201cbc7b8383a30220643",
+      "program_bytes": 2684862,
+      "requested_discovery": "double/native-closure/requested-discovery-0004.json",
+      "requested_discovery_sha256": "af079d4ff5e0d5e6a460093356469b6c62516f7c642c4a36ad7b4f3fcac6bb1e",
+      "requested_discovery_blake3": "d1f8f688a95e976843d71be677293c740c2698a4d13aa19aacdb607e13468fc7",
+      "requested_discovery_bytes": 5560965
+    },
+    {
+      "metadata": "double/native-closure/round-004-provisional.json",
+      "metadata_sha256": "f691ad8ed76fe15a130db430079f0109536b235ea4a80ea21b9b70a526600cae",
+      "program": "double/native-closure/round-004-provisional.bin",
+      "program_sha256": "c8896f30816dd7e3676745606d4482cc06979b45b9a7b2b65a7776bf3c3357c3",
+      "program_blake3": "25b6039293d6642d77756d4a0b83b431a6636cd819f9ccce2495c35084679319",
+      "program_bytes": 5935226,
+      "requested_discovery": "double/native-closure/requested-discovery-0005.json",
+      "requested_discovery_sha256": "a7c1eb27c10784b3bd2a28b58cedf13234da83dd6882891ee7820c963a7c9750",
+      "requested_discovery_blake3": "37107d7d2c7fea06b6fdb7ce32eedb53012196eb608ab6a2ecab036928614a0a",
+      "requested_discovery_bytes": 10825198
+    },
+    {
+      "metadata": "double/native-closure/round-005-provisional.json",
+      "metadata_sha256": "41a95b2a6fcb1ac8333c1d0e1d5a5d5898f74f6d859b909cb73a4ebd144b1a90",
+      "program": "double/native-closure/round-005-provisional.bin",
+      "program_sha256": "154d01d80d921c95ab6a27d9b2a578b4331c44fd3710a7f51e76740e2d274b70",
+      "program_blake3": "7ad959f0b60e66d1fa319fd235533456d8ae16883dab4002b9d4d971ab0b6d31",
+      "program_bytes": 9851835,
+      "requested_discovery": "double/native-closure/requested-discovery-0006.json",
+      "requested_discovery_sha256": "dcdc50b90fe72fa928d2398815aa0b96cd0db5feff8ed88a00c1dde2f21bd2ae",
+      "requested_discovery_blake3": "7f72c44fd03795e3efafb51c38e2cc943297c069b354b6dabaa71b7412967582",
+      "requested_discovery_bytes": 15241556
+    }
+  ]
+}

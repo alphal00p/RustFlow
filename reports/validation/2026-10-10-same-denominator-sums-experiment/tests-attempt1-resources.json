@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "120",
+    "/tmp/rustflow-same-denominator-tests-attempt1",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.41241047345101833,
+  "user_seconds": 0.36417299999999997,
+  "system_seconds": 0.051585,
+  "peak_child_rss_kib": 15456,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,15 @@
+begin read_program_bytes
+end read_program_bytes 0.013244s
+begin inspect_envelope
+end inspect_envelope 0.000031s
+begin decode_program_record
+end decode_program_record 0.800405s
+begin import_symbolica_and_coefficient_table
+end import_symbolica_and_coefficient_table 0.034184s
+begin construct_exact_source_context
+end construct_exact_source_context 0.001610s
+begin decode_generated_and_replay_all_rules
+end decode_generated_and_replay_all_rules 118.014323s
+begin bind_frontier_terminals
+end bind_frontier_terminals 0.000868s
+balanced target complete 304.420339s, 15021 applications, exact result match

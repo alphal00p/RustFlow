@@ -1,0 +1,43 @@
+error[E0277]: a value of type `Fraction<IntegerRing>` cannot be made by summing an iterator over elements of type `Fraction<IntegerRing>`
+    --> /tmp/rustflow-partial-origin-20261010/src/finite_density/partial_origin.rs:251:186
+     |
+ 251 | ...hifted.contains(slot)).map(|(_,a)|a.clone()).sum::<Rational>();assert_eq!(eta_coefficient,&u*&s);
+     |                                                 ---   ^^^^^^^^ value of type `Fraction<IntegerRing>` cannot be made by summing a `std::iter::Iterator<Item=Fraction<IntegerRing>>`
+     |                                                 |
+     |                                                 required by a bound introduced by this call
+     |
+help: the trait `Sum<Fraction<_>>` is not implemented for `Fraction<IntegerRing>`
+      but trait `Sum<&Fraction<_>>` is implemented for it
+    --> /home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/lib/numerica/src/domains/rational.rs:1492:1
+     |
+1492 | impl<'a> std::iter::Sum<&'a Self> for Rational {
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+     = help: for that trait implementation, expected `&Fraction<IntegerRing>`, found `Fraction<IntegerRing>`
+note: the method call chain might not have had the expected associated types
+    --> /tmp/rustflow-partial-origin-20261010/src/finite_density/partial_origin.rs:251:158
+     |
+ 251 | ...pha);let s=support.active.iter().zip(&alpha).filter(|(slot,_)|p.shifted.contains(slot)).map(|(_,a)|a.clone()).sum::<Rational>()...
+     |               -------------- ------ ----------- ------------------------------------------ ^^^^^^^^^^^^^^^^^^^^^ `Iterator::Item` changed to `Fraction<IntegerRing>` here
+     |               |              |      |           |
+     |               |              |      |           `Iterator::Item` remains `(&usize, &Fraction<IntegerRing>)` here
+     |               |              |      `Iterator::Item` changed to `(&usize, &Fraction<IntegerRing>)` here
+     |               |              `Iterator::Item` is `&usize` here
+     |               this expression has type `Vec<usize>`
+note: required by a bound in `std::iter::Iterator::sum`
+    --> /rustc/8bab26f4f68e0e26f0bb7960be334d5b520ea452/library/core/src/iter/traits/iterator.rs:3669:4
+
+error[E0507]: cannot move out of `info.domain` which is behind a shared reference
+   --> /tmp/rustflow-partial-origin-20261010/src/finite_density/partial_origin.rs:273:144
+    |
+273 | ...GuardedSource::new(info.id.clone(),row.clone(),info.domain).with_nonzero_conditions(info.nonzero_conditions.clone())).collect();
+    |                                                   ^^^^^^^^^^^ move occurs because `info.domain` has type `symbolica_amflow::finite_density::guarded::IndexDomain<16>`, which does not implement the `Copy` trait
+    |
+help: consider cloning the value if the performance cost is acceptable
+    |
+273 |  let fresh_rows=original.sources().iter().zip(original.native_sources().rows()).map(|(info,row)|GuardedSource::new(info.id.clone(),row.clone(),info.domain.clone()).with_nonzero_conditions(info.nonzero_conditions.clone())).collect();
+    |                                                                                                                                                           ++++++++
+
+error: aborting due to 2 previous errors
+
+Some errors have detailed explanations: E0277, E0507.
+For more information about an error, try `rustc --explain E0277`.

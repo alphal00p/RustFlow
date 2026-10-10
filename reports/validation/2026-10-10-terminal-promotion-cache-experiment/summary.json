@@ -1,0 +1,31 @@
+{
+  "scope": "Isolated small native whole-call cache and checked NoRule-terminal promotion; no production changes or real slow-target run",
+  "tests_passed": 8,
+  "budget_cache_grid_cases": 90,
+  "exact_comparisons": "coefficients, unresolved labels/reasons/order, ordered conditions and logical applications",
+  "resource": {
+    "command": [
+      "timeout",
+      "120",
+      "/tmp/rustflow-terminal-promotion-tests-attempt1",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.07315578171983361,
+    "user_seconds": 0.052579999999999995,
+    "system_seconds": 0.020326,
+    "peak_child_rss_kib": 15432,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "compiler_seconds": 18.641094143968076,
+  "independent_source_replay": "with_terminals_replayed always used during promotion; persistence decode independently checked",
+  "cache_storage_limits": "entry count, retained polynomial terms and coefficient bit sums; not total CAS or allocator work",
+  "peer_review": "No blocker under exact owned-program, terminal-superset, NoRule-only and complete-result hypotheses",
+  "read_only_assessment_manifest_sha256": "4d128b411830aa7a29a15413f1225feb66025d80b4586673d0c3b9217901667a",
+  "fixture_origin": {
+    "path": "reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs",
+    "sha256": "9330759235ceee247c3f7b82fe9961454551115f929b6c6c3e5d9ac21bb5ac4c",
+    "adaptation": "Three source-generated fixtures reused; guarded diamond initial terminals changed to empty for promotion testing."
+  }
+}

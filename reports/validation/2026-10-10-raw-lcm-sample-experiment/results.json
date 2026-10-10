@@ -1,0 +1,999 @@
+{
+  "caps": {
+    "bit_products": "70368744177664",
+    "coefficient_bits": 32768,
+    "degree": 4096,
+    "input_count": 32,
+    "operation_pairs": 4000000,
+    "terms": 65536,
+    "total_operation_pairs": 64000000
+  },
+  "completed_samples": 8,
+  "records": [
+    {
+      "ingress_seconds": 0.217602403,
+      "medians": {
+        "balanced": 1.462126539,
+        "raw-lcm": 1.227139632,
+        "sequential": 1.525926019
+      },
+      "ordinal": 14649,
+      "runs": [
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 1.529143159
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 1.470529366
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 1.250461485,
+            "stats": {
+              "operation_pairs": 12482662,
+              "operations": 158,
+              "peak_bits": 1241,
+              "peak_terms": 2873,
+              "phase_seconds": {
+                "denominator-gcd": 0.359107183,
+                "exact-quotient": 0.29618892199999997,
+                "final-canonical-normalization": 0.269269386,
+                "polynomial-product": 0.238871154,
+                "polynomial-sum": 0.02214717099999999
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 0,
+          "seconds": 1.2506148449999999
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 1.45282454
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 1.227110742,
+            "stats": {
+              "operation_pairs": 12482662,
+              "operations": 158,
+              "peak_bits": 1241,
+              "peak_terms": 2873,
+              "phase_seconds": {
+                "denominator-gcd": 0.35740719899999995,
+                "exact-quotient": 0.292878834,
+                "final-canonical-normalization": 0.271841043,
+                "polynomial-product": 0.224360414,
+                "polynomial-sum": 0.022064501000000004
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 1,
+          "seconds": 1.227139632
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 1.525926019
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 1.223930472,
+            "stats": {
+              "operation_pairs": 12482662,
+              "operations": 158,
+              "peak_bits": 1241,
+              "peak_terms": 2873,
+              "phase_seconds": {
+                "denominator-gcd": 0.356664261,
+                "exact-quotient": 0.29201220199999994,
+                "final-canonical-normalization": 0.269890587,
+                "polynomial-product": 0.22401778099999997,
+                "polynomial-sum": 0.022079949999999994
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 2,
+          "seconds": 1.223959362
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 1.518789467
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 1.462126539
+        }
+      ],
+      "sample": 0
+    },
+    {
+      "ingress_seconds": 0.198192592,
+      "medians": {
+        "balanced": 0.789936239,
+        "raw-lcm": 0.777224439,
+        "sequential": 0.695579743
+      },
+      "ordinal": 14625,
+      "runs": [
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.696552726
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.787618892
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.777313889,
+            "stats": {
+              "operation_pairs": 11155051,
+              "operations": 161,
+              "peak_bits": 1137,
+              "peak_terms": 2609,
+              "phase_seconds": {
+                "denominator-gcd": 0.259999854,
+                "exact-quotient": 0.252130693,
+                "final-canonical-normalization": 0.010659874,
+                "polynomial-product": 0.17956827300000003,
+                "polynomial-sum": 0.020345824999999998
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 0,
+          "seconds": 0.777343349
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.789936239
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.775452483,
+            "stats": {
+              "operation_pairs": 11155051,
+              "operations": 161,
+              "peak_bits": 1137,
+              "peak_terms": 2609,
+              "phase_seconds": {
+                "denominator-gcd": 0.25956384600000004,
+                "exact-quotient": 0.2539637760000001,
+                "final-canonical-normalization": 0.010128762,
+                "polynomial-product": 0.17968987499999997,
+                "polynomial-sum": 0.019131899
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 1,
+          "seconds": 0.775480884
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.695157262
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.777194699,
+            "stats": {
+              "operation_pairs": 11155051,
+              "operations": 161,
+              "peak_bits": 1137,
+              "peak_terms": 2609,
+              "phase_seconds": {
+                "denominator-gcd": 0.259606714,
+                "exact-quotient": 0.25455373000000003,
+                "final-canonical-normalization": 0.010289972,
+                "polynomial-product": 0.180207516,
+                "polynomial-sum": 0.019273100999999994
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 2,
+          "seconds": 0.777224439
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.695579743
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.791578794
+        }
+      ],
+      "sample": 1
+    },
+    {
+      "ingress_seconds": 0.140807111,
+      "medians": {
+        "balanced": 0.80299522,
+        "raw-lcm": 0.814956168,
+        "sequential": 0.86029609
+      },
+      "ordinal": 9115,
+      "runs": [
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.850412719
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.802068808
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.814928858,
+            "stats": {
+              "operation_pairs": 8365535,
+              "operations": 128,
+              "peak_bits": 1012,
+              "peak_terms": 2199,
+              "phase_seconds": {
+                "denominator-gcd": 0.19652705300000003,
+                "exact-quotient": 0.23719996399999999,
+                "final-canonical-normalization": 0.193852648,
+                "polynomial-product": 0.13774258899999997,
+                "polynomial-sum": 0.012740089999999999
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 0,
+          "seconds": 0.814956168
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.80299522
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.811380196,
+            "stats": {
+              "operation_pairs": 8365535,
+              "operations": 128,
+              "peak_bits": 1012,
+              "peak_terms": 2199,
+              "phase_seconds": {
+                "denominator-gcd": 0.196167847,
+                "exact-quotient": 0.23617757099999998,
+                "final-canonical-normalization": 0.192792885,
+                "polynomial-product": 0.13679691800000002,
+                "polynomial-sum": 0.012817491
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 1,
+          "seconds": 0.811406196
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.86029609
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.81562468,
+            "stats": {
+              "operation_pairs": 8365535,
+              "operations": 128,
+              "peak_bits": 1012,
+              "peak_terms": 2199,
+              "phase_seconds": {
+                "denominator-gcd": 0.19706760899999998,
+                "exact-quotient": 0.237087856,
+                "final-canonical-normalization": 0.194226159,
+                "polynomial-product": 0.137696689,
+                "polynomial-sum": 0.012776389999999999
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 2,
+          "seconds": 0.815656
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.874865806
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.804396995
+        }
+      ],
+      "sample": 2
+    },
+    {
+      "ingress_seconds": 0.140710582,
+      "medians": {
+        "balanced": 0.741352406,
+        "raw-lcm": 0.56398571,
+        "sequential": 0.767595098
+      },
+      "ordinal": 14648,
+      "runs": [
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.771437841
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.736382631
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.56395532,
+            "stats": {
+              "operation_pairs": 6805340,
+              "operations": 152,
+              "peak_bits": 977,
+              "peak_terms": 1883,
+              "phase_seconds": {
+                "denominator-gcd": 0.18196980199999999,
+                "exact-quotient": 0.15658713699999996,
+                "final-canonical-normalization": 0.091295357,
+                "polynomial-product": 0.08168465,
+                "polynomial-sum": 0.013732483
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 0,
+          "seconds": 0.56398571
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.741352406
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.570381699,
+            "stats": {
+              "operation_pairs": 6805340,
+              "operations": 152,
+              "peak_bits": 977,
+              "peak_terms": 1883,
+              "phase_seconds": {
+                "denominator-gcd": 0.18343934699999997,
+                "exact-quotient": 0.15885819899999998,
+                "final-canonical-normalization": 0.091300806,
+                "polynomial-product": 0.08285885100000001,
+                "polynomial-sum": 0.014422046999999999
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 1,
+          "seconds": 0.57040465
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.763855957
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.562031353,
+            "stats": {
+              "operation_pairs": 6805340,
+              "operations": 152,
+              "peak_bits": 977,
+              "peak_terms": 1883,
+              "phase_seconds": {
+                "denominator-gcd": 0.182258003,
+                "exact-quotient": 0.155674119,
+                "final-canonical-normalization": 0.090030853,
+                "polynomial-product": 0.08197045199999999,
+                "polynomial-sum": 0.01375707
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 2,
+          "seconds": 0.562056894
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.767595098
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.746088921
+        }
+      ],
+      "sample": 3
+    },
+    {
+      "ingress_seconds": 0.129027584,
+      "medians": {
+        "balanced": 0.616751506,
+        "raw-lcm": 0.840794179,
+        "sequential": 0.62127671
+      },
+      "ordinal": 14357,
+      "runs": [
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.615476942
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.614226738
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.840767179,
+            "stats": {
+              "operation_pairs": 8028617,
+              "operations": 188,
+              "peak_bits": 990,
+              "peak_terms": 2003,
+              "phase_seconds": {
+                "denominator-gcd": 0.151915247,
+                "exact-quotient": 0.337231161,
+                "final-canonical-normalization": 0.093727774,
+                "polynomial-product": 0.19716530000000007,
+                "polynomial-sum": 0.017049751000000002
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 0,
+          "seconds": 0.840794179
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.620070216
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.836751315,
+            "stats": {
+              "operation_pairs": 8028617,
+              "operations": 188,
+              "peak_bits": 990,
+              "peak_terms": 2003,
+              "phase_seconds": {
+                "denominator-gcd": 0.151443446,
+                "exact-quotient": 0.33758486499999996,
+                "final-canonical-normalization": 0.09232369,
+                "polynomial-product": 0.19607395099999994,
+                "polynomial-sum": 0.016553732
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 1,
+          "seconds": 0.836778895
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.634720162
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.864680454,
+            "stats": {
+              "operation_pairs": 8028617,
+              "operations": 188,
+              "peak_bits": 990,
+              "peak_terms": 2003,
+              "phase_seconds": {
+                "denominator-gcd": 0.15595032900000003,
+                "exact-quotient": 0.350410585,
+                "final-canonical-normalization": 0.093370773,
+                "polynomial-product": 0.20219964899999995,
+                "polynomial-sum": 0.017724074000000006
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 2,
+          "seconds": 0.864706894
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.62127671
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.616751506
+        }
+      ],
+      "sample": 4
+    },
+    {
+      "ingress_seconds": 0.152128747,
+      "medians": {
+        "balanced": 0.624120319,
+        "raw-lcm": 0.775798865,
+        "sequential": 0.699919307
+      },
+      "ordinal": 14331,
+      "runs": [
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.699919307
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.624120319
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.778173272,
+            "stats": {
+              "operation_pairs": 8795137,
+              "operations": 188,
+              "peak_bits": 985,
+              "peak_terms": 1983,
+              "phase_seconds": {
+                "denominator-gcd": 0.20607830100000005,
+                "exact-quotient": 0.31037172400000007,
+                "final-canonical-normalization": 0.008162966,
+                "polynomial-product": 0.18974927599999997,
+                "polynomial-sum": 0.017255144999999996
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 0,
+          "seconds": 0.778199152
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.631423941
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.775387883,
+            "stats": {
+              "operation_pairs": 8795137,
+              "operations": 188,
+              "peak_bits": 985,
+              "peak_terms": 1983,
+              "phase_seconds": {
+                "denominator-gcd": 0.204615216,
+                "exact-quotient": 0.309666997,
+                "final-canonical-normalization": 0.008096325,
+                "polynomial-product": 0.189960029,
+                "polynomial-sum": 0.017087865
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 1,
+          "seconds": 0.775414673
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.689635313
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.775766674,
+            "stats": {
+              "operation_pairs": 8795137,
+              "operations": 188,
+              "peak_bits": 985,
+              "peak_terms": 1983,
+              "phase_seconds": {
+                "denominator-gcd": 0.202112232,
+                "exact-quotient": 0.3103736430000001,
+                "final-canonical-normalization": 0.008369826,
+                "polynomial-product": 0.19030116300000008,
+                "polynomial-sum": 0.017745626999999996
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 2,
+          "seconds": 0.775798865
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.700375438
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.614310828
+        }
+      ],
+      "sample": 5
+    },
+    {
+      "ingress_seconds": 0.115574652,
+      "medians": {
+        "balanced": 0.519511381,
+        "raw-lcm": 0.422856367,
+        "sequential": 0.575858897
+      },
+      "ordinal": 14647,
+      "runs": [
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.575694437
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.519285059
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.42074419,
+            "stats": {
+              "operation_pairs": 5014675,
+              "operations": 152,
+              "peak_bits": 828,
+              "peak_terms": 1612,
+              "phase_seconds": {
+                "denominator-gcd": 0.134556001,
+                "exact-quotient": 0.117360839,
+                "final-canonical-normalization": 0.06665231,
+                "polynomial-product": 0.057098302000000004,
+                "polynomial-sum": 0.011988016999999998
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 0,
+          "seconds": 0.42076888
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.519511381
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.422833287,
+            "stats": {
+              "operation_pairs": 5014675,
+              "operations": 152,
+              "peak_bits": 828,
+              "peak_terms": 1612,
+              "phase_seconds": {
+                "denominator-gcd": 0.13466610399999998,
+                "exact-quotient": 0.11855904600000002,
+                "final-canonical-normalization": 0.067445361,
+                "polynomial-product": 0.057424778,
+                "polynomial-sum": 0.011741007
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 1,
+          "seconds": 0.422856367
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.577072331
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.426761148,
+            "stats": {
+              "operation_pairs": 5014675,
+              "operations": 152,
+              "peak_bits": 828,
+              "peak_terms": 1612,
+              "phase_seconds": {
+                "denominator-gcd": 0.135334406,
+                "exact-quotient": 0.12046774399999999,
+                "final-canonical-normalization": 0.067400571,
+                "polynomial-product": 0.057769908999999994,
+                "polynomial-sum": 0.012083318000000003
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 2,
+          "seconds": 0.426783869
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.575858897
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.527740427
+        }
+      ],
+      "sample": 6
+    },
+    {
+      "ingress_seconds": 0.110152085,
+      "medians": {
+        "balanced": 0.520988065,
+        "raw-lcm": 0.439151508,
+        "sequential": 0.475314551
+      },
+      "ordinal": 14530,
+      "runs": [
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.484872542
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.518908058
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.435173275,
+            "stats": {
+              "operation_pairs": 5441616,
+              "operations": 188,
+              "peak_bits": 828,
+              "peak_terms": 1355,
+              "phase_seconds": {
+                "denominator-gcd": 0.148953942,
+                "exact-quotient": 0.16805331100000004,
+                "final-canonical-normalization": 0.005882219,
+                "polynomial-product": 0.06771887800000001,
+                "polynomial-sum": 0.011808514
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 0,
+          "seconds": 0.435197275
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.522339239
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.44005173,
+            "stats": {
+              "operation_pairs": 5441616,
+              "operations": 188,
+              "peak_bits": 828,
+              "peak_terms": 1355,
+              "phase_seconds": {
+                "denominator-gcd": 0.14982821999999998,
+                "exact-quotient": 0.17093206800000002,
+                "final-canonical-normalization": 0.005861339,
+                "polynomial-product": 0.068597594,
+                "polynomial-sum": 0.011729456999999995
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 1,
+          "seconds": 0.44011367
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.475314551
+        },
+        {
+          "detail": {
+            "accepted": true,
+            "attempt_seconds": 0.439128267,
+            "stats": {
+              "operation_pairs": 5441616,
+              "operations": 188,
+              "peak_bits": 828,
+              "peak_terms": 1355,
+              "phase_seconds": {
+                "denominator-gcd": 0.15038567000000003,
+                "exact-quotient": 0.16934134099999995,
+                "final-canonical-normalization": 0.005868358,
+                "polynomial-product": 0.06816673300000001,
+                "polynomial-sum": 0.011748345999999998
+              }
+            }
+          },
+          "exact_match": true,
+          "method": "raw-lcm",
+          "repeat": 2,
+          "seconds": 0.439151508
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.472860794
+        },
+        {
+          "detail": null,
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.520988065
+        }
+      ],
+      "sample": 7
+    }
+  ],
+  "scope": "only the eight previously selected repeated-denominator buffers; no integral reduction"
+}

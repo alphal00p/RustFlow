@@ -1,0 +1,26 @@
+{
+  "captured_utc": "2026-10-10T06:47:09.360551+00:00",
+  "command": [
+    "timeout",
+    "1800",
+    "/tmp/rustflow-verified-reuse-double-20261010/runtime",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/tmp/rustflow-verified-reuse-double-20261010/runtime": {
+      "resolved_path": "/tmp/rustflow-verified-reuse-double-20261010/runtime",
+      "sha256": "f5985baa7eca472e99854c8b67552e39fbe89a821edceb949237dce3defdff35",
+      "size_bytes": 1312580400
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

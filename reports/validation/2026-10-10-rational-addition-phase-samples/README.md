@@ -1,0 +1,11 @@
+Numerator cancellation takes 48.6% of the measured arithmetic time on these eight selected coefficient buffers. This is a concrete reason to consider a bounded sample-only delayed-normalization experiment, but it is not a whole-workload claim or a production recommendation.
+
+The instrumented kernel follows the exact pinned Symbolica RationalPolynomial::Add operation sequence. The equal-denominator constructor is expanded only to time its variable-map, GCD, division and sign-normalization phases. All 217 binary results match the real native Add owner exactly, including their variable maps. All eight complete balanced sums match the previously captured canonical results. There are nine equal-denominator pairs and 208 unequal-denominator pairs.
+
+Measured arithmetic totals are 5.948420 seconds: numerator-cancellation GCD 2.351409, numerator/denominator cancellation quotients 0.540156, denominator GCD 1.479725, its exact quotients 0.871858, and polynomial cross-products/addition 0.705059. Independent native equality validation took another 5.951896 seconds and is excluded from those phase totals. The full process passed in 12.441 seconds within a 180-second wall cap.
+
+No integral reduction was rerun. The same eight immutable buffers were restored from the frozen native coefficient-table gzip, with both compressed and original SHA256 checked, and reimported through the native normalized table owner. `run-binding.json` binds that exact restoration, executable, source, pinned libraries and CAS source file/line anchors. The table belongs to the frozen same-denominator-sums-experiment report; this report does not duplicate its large payload.
+
+The eight buffers were originally chosen for high observed balanced cost and repeated exact denominators. They do not represent all 15,332 buffers in the full target reduction. Delaying cancellation can cause polynomial growth, so this result identifies a cost worth investigating; it does not prove that a raw common-denominator accumulator would be faster. No production code, shared build artifact, proof, condition, coefficient domain or generic-epsilon endpoint was changed.
+
+`summary.json` and `results.json` retain totals and every sample's measurements. `artifact-manifest.json` binds the frozen report. There are no active readers or writers.

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/tmp/rustflow-partial-endpoint-20261010/prototype-tests",
+    "finite_density::partial_origin::",
+    "--test-threads=1",
+    "--nocapture"
+  ],
+  "exit": 0,
+  "seconds": 0.8641249993816018,
+  "binary_sha256": "9a4b9a0cc499d64805e78f268a82b7c75de2fae8ab66dfce8aff9f20e01eea8f",
+  "build": "build-01.json",
+  "log_sha256": "7be7d341b1e4527300de9db60b6a99436aa2c4994b4b48def48d91ab9ed2538e",
+  "scope": "isolated origin plus endpoint prototype, no production admission or endpoint-mode authority"
+}

@@ -1,0 +1,8 @@
+{
+  "origin_source": "../2026-10-10-partial-origin-capability-prototype/source/src/finite_density/partial_origin.rs",
+  "origin_source_sha256": "9fecca0a42c8d9486bd4334384b9271fc90a789482ced0613fc7bb783695028c",
+  "copy_change": "only append private-child module declaration; existing origin logic unchanged",
+  "origin_frozen_manifest_sha256": "62a338d8abbeaef4b9e9e0658b45e6c9a55636087b9b38a20b922557ddedb49f",
+  "libraries": "../2026-10-10-partial-origin-capability-prototype/library-copies.json",
+  "library_copy_directory": "/tmp/rustflow-partial-origin-20261010/deps"
+}

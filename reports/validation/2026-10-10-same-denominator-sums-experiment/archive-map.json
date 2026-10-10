@@ -1,0 +1,14 @@
+{
+  "format": "deterministic gzip, mtime=0, empty filename",
+  "files": [
+    {
+      "original_path": "actual/samples/coefficients.bin",
+      "archive_path": "actual/samples/coefficients.bin.gz",
+      "original_sha256": "cff64e8bc52995f6785c109559e261ee316176ff5c0c0e1553911f01b2a58a61",
+      "archive_sha256": "f4f430a846244d6bbb9aa59cec5aa94cf2959cf55b8543c1de7f38c203e75436",
+      "original_bytes": 45918323,
+      "archive_bytes": 31923371,
+      "roundtrip_verified": true
+    }
+  ]
+}

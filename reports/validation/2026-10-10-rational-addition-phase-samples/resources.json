@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "/tmp/rustflow-rational-addition-phase-actual-attempt1",
+    "/tmp/rustflow-rational-addition-phase-samples-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-rational-addition-phase-samples/results.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 12.44133424013853,
+  "user_seconds": 12.263114999999999,
+  "system_seconds": 0.09829399999999999,
+  "peak_child_rss_kib": 125964,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

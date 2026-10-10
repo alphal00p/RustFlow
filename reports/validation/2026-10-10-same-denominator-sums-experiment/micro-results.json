@@ -1,0 +1,763 @@
+{
+  "completed_samples": 8,
+  "records": [
+    {
+      "coefficient_count": 27,
+      "group_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "medians": {
+        "balanced": 1.448193968,
+        "equal-denominator-grouped": 1.404080936,
+        "sequential": 1.5154045630000001
+      },
+      "ordinal": 14649,
+      "runs": [
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 1.5154045630000001
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 1.448193968
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 0,
+          "seconds": 1.403270795
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 1.447801066
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 1,
+          "seconds": 1.406590445
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 1.506168932
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 2,
+          "seconds": 1.404080936
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 1.5251054320000001
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 1.456281722
+        }
+      ],
+      "sample": 0
+    },
+    {
+      "coefficient_count": 28,
+      "group_sizes": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "medians": {
+        "balanced": 0.783113086,
+        "equal-denominator-grouped": 0.72185506,
+        "sequential": 0.689899139
+      },
+      "ordinal": 14625,
+      "runs": [
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.689899139
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.782784175
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 0,
+          "seconds": 0.730369857
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.78417839
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 1,
+          "seconds": 0.717730157
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.689740428
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 2,
+          "seconds": 0.72185506
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.712762921
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.783113086
+        }
+      ],
+      "sample": 1
+    },
+    {
+      "coefficient_count": 22,
+      "group_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "medians": {
+        "balanced": 0.798107193,
+        "equal-denominator-grouped": 0.768562809,
+        "sequential": 0.843338197
+      },
+      "ordinal": 9115,
+      "runs": [
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.842858366
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.795785016
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 0,
+          "seconds": 0.768562809
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.80018328
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 1,
+          "seconds": 0.780317247
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.843543188
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 2,
+          "seconds": 0.764289355
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.843338197
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.798107193
+        }
+      ],
+      "sample": 2
+    },
+    {
+      "coefficient_count": 26,
+      "group_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "medians": {
+        "balanced": 0.731998332,
+        "equal-denominator-grouped": 0.727680348,
+        "sequential": 0.757245023
+      },
+      "ordinal": 14648,
+      "runs": [
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.760421683
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.731998332
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 0,
+          "seconds": 0.73160166
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.73137873
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 1,
+          "seconds": 0.727680348
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.754944396
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 2,
+          "seconds": 0.727081126
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.757245023
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.736197575
+        }
+      ],
+      "sample": 3
+    },
+    {
+      "coefficient_count": 32,
+      "group_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        2,
+        1,
+        1,
+        1
+      ],
+      "medians": {
+        "balanced": 0.60910775,
+        "equal-denominator-grouped": 0.495642559,
+        "sequential": 0.608482927
+      },
+      "ordinal": 14357,
+      "runs": [
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.620967628
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.617703667
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 0,
+          "seconds": 0.495642559
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.60910775
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 1,
+          "seconds": 0.495832779
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.608482927
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 2,
+          "seconds": 0.495612059
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.608474838
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.60906917
+        }
+      ],
+      "sample": 4
+    },
+    {
+      "coefficient_count": 32,
+      "group_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1
+      ],
+      "medians": {
+        "balanced": 0.607223703,
+        "equal-denominator-grouped": 0.602159297,
+        "sequential": 0.660101572
+      },
+      "ordinal": 14331,
+      "runs": [
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.676713345
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.61543235
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 0,
+          "seconds": 0.602159297
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.605967519
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 1,
+          "seconds": 0.59672574
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.660101572
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 2,
+          "seconds": 0.61850294
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.658168315
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.607223703
+        }
+      ],
+      "sample": 5
+    },
+    {
+      "coefficient_count": 26,
+      "group_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2,
+        1
+      ],
+      "medians": {
+        "balanced": 0.513037583,
+        "equal-denominator-grouped": 0.633767887,
+        "sequential": 0.559232691
+      },
+      "ordinal": 14647,
+      "runs": [
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.559232691
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.513000363
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 0,
+          "seconds": 0.633456577
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.513525465
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 1,
+          "seconds": 0.633767887
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.558260517
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 2,
+          "seconds": 0.639141574
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.559654051
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.513037583
+        }
+      ],
+      "sample": 6
+    },
+    {
+      "coefficient_count": 32,
+      "group_sizes": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        1,
+        2
+      ],
+      "medians": {
+        "balanced": 0.509313071,
+        "equal-denominator-grouped": 0.506836514,
+        "sequential": 0.462007911
+      },
+      "ordinal": 14530,
+      "runs": [
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 0,
+          "seconds": 0.46163387
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 0,
+          "seconds": 0.509313071
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 0,
+          "seconds": 0.511354068
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 1,
+          "seconds": 0.510362785
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 1,
+          "seconds": 0.506836514
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 1,
+          "seconds": 0.462007911
+        },
+        {
+          "exact_match": true,
+          "method": "equal-denominator-grouped",
+          "repeat": 2,
+          "seconds": 0.506480633
+        },
+        {
+          "exact_match": true,
+          "method": "sequential",
+          "repeat": 2,
+          "seconds": 0.465727032
+        },
+        {
+          "exact_match": true,
+          "method": "balanced",
+          "repeat": 2,
+          "seconds": 0.507819686
+        }
+      ],
+      "sample": 7
+    }
+  ],
+  "scope": "matched exact sample summation; alternating method order, three repetitions; no native reduction or physical values"
+}

@@ -1,0 +1,40 @@
+{
+  "captured_utc": "2026-10-10T07:04:35.973639+00:00",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-same-denominator-actual-attempt1",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/rustflow-same-denominator-actual-attempt1": {
+      "resolved_path": "/tmp/rustflow-same-denominator-actual-attempt1",
+      "sha256": "3ad024a8bdbc0fe91a2e756b85db9a4d26a83c57f95f15eae4dab514bc5eb120",
+      "size_bytes": 272395352
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+      "sha256": "6bd17ce483002ab44043a0dcb958333ab454ea18954f114d510b20f875ee3e82",
+      "size_bytes": 20674743
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+      "sha256": "2ad250bc0be44abdf91d6cc72da669b37f8ac0f871ef7ebb86cbd1569ac44e21",
+      "size_bytes": 12430
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json",
+      "sha256": "2ab4f65df49278af5c7084c34fdb6a9b8fbaa873082c136283ef6c56a9830d25",
+      "size_bytes": 313670
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

@@ -1,0 +1,46 @@
+{
+  "scope": "isolated prototype only; no production permit dispatch",
+  "sources": {
+    "build.py": {
+      "sha256": "bfdf4c3e2fce2f821cdcb3d8f6958a7a5f8bcce35ad5b8935798ead0237a02e6",
+      "bytes": 2377
+    },
+    "fixtures/massless_three_loop_chain.json": {
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "bytes": 1550
+    },
+    "probe.rs": {
+      "sha256": "4dad1cfcba62cfa1f8be329e48d60683b87957bcd2a4e4c979836ec0799fe3ab",
+      "bytes": 668
+    },
+    "src/algebra.rs": {
+      "sha256": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a",
+      "bytes": 5615
+    },
+    "src/coefficient.rs": {
+      "sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20",
+      "bytes": 17725
+    },
+    "src/finite_density/partial_origin.rs": {
+      "sha256": "9fecca0a42c8d9486bd4334384b9271fc90a789482ced0613fc7bb783695028c",
+      "bytes": 60396
+    }
+  },
+  "fixture_original": "examples/finite_density/massless_three_loop_chain.json",
+  "fixture_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+  "unchanged_exact_helpers": {
+    "src/coefficient.rs": {
+      "prototype_sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20",
+      "production_sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20",
+      "identical": true
+    },
+    "src/algebra.rs": {
+      "prototype_sha256": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a",
+      "production_sha256": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a",
+      "identical": true
+    }
+  },
+  "build": "build-05.json",
+  "gate": "final-gates.json",
+  "library_copies": "library-copies.json"
+}

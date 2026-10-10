@@ -1,0 +1,22 @@
+
+running 11 tests
+test grouping_tests::grouped_boundary_interleavings_match_canonical_add ... ok
+test grouping_tests::grouped_cancels_new_common_factors_and_signs ... ok
+test grouping_tests::grouped_polynomial_denominator_one_and_zero ... ok
+test grouping_tests::incompatible_variable_maps_are_rejected ... 
+thread 'grouping_tests::incompatible_variable_maps_are_rejected' (2245109) panicked at /common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/capture.rs:175:81:
+assertion `left == right` failed
+  left: [Symbol(rustred::group_map_y), Symbol(rustred::group_map_x)]
+ right: [Symbol(rustred::group_map_x), Symbol(rustred::group_map_y)]
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+ok
+test tests::buffer_flush_is_bounded_and_balanced_rational_sum_is_exact ... ok
+test tests::cancelled_pending_keys_do_not_create_false_capacity_failures ... ok
+test tests::complete_native_budget_grid_preserves_all_conditions_failures_and_values ... ok
+test tests::coupled_index_guard_failure_remains_explicit ... ok
+test tests::invalid_and_unsupported_labels_are_explicit ... ok
+test tests::thirty_one_thirty_two_thirty_three_and_cross_buffer_cancellation ... ok
+test tests::unused_guard_cancels_but_used_guard_survives_after_native_reload ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.40s
+

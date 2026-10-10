@@ -1,0 +1,8 @@
+from pathlib import Path
+import os,json,hashlib,sys,subprocess
+R=Path.cwd();B=Path(__file__).resolve().parent;S=R/'reports/validation/2026-10-10-final-history-work-profile';h=lambda p:hashlib.sha256(p.read_bytes()).hexdigest()
+build=json.loads((B/'actual-attempt1-build-binding.json').read_text());assert build['exit_code']==0;exe=Path(build['executable']['path']);assert h(exe)==build['executable']['sha256'];assert not (B/'actual-run-binding.json').exists()
+inputs=[B/'capture.rs',B/'micro.rs',B/'build.py',B/'actual-attempt1-build-binding.json',B/'tests-attempt1-resources.json',B/'run-actual.py',exe]+[S/n for n in ['input.bin','input.json','points.json','profile/result.json']];hashes={str(p):h(p)for p in inputs}
+cmd=['timeout','600',str(exe),str(S/'input.bin'),str(S/'points.json'),str(B/'actual'),str(S/'profile/result.json')]
+record={'scope':'unchanged independent balanced reduction with at most eight costly repeated-denominator buffers retained; prior answer read only after reduction; grouping is not used in this pass','command':cmd,'inputs_sha256':hashes,'native_program_rules':16937,'term_buffer_per_pending_label':32,'maximum_retained_sample_buffers':8,'native_application_budget':100000,'native_pending_key_budget':100000,'wall_limit_seconds':600};(B/'actual-run-binding.json').write_text(json.dumps(record,indent=2)+'\n')
+r=subprocess.run([sys.executable,str(R/'reports/validation/2026-10-10-requested-ray-point-integration/run-resource-command.py'),str(B/'actual-resources.json'),*cmd]);record.update(exit_code=r.returncode,inputs_unchanged=all(h(Path(p))==v for p,v in hashes.items()));(B/'actual-run-binding.json').write_text(json.dumps(record,indent=2)+'\n');assert record['inputs_unchanged'];raise SystemExit(r.returncode)

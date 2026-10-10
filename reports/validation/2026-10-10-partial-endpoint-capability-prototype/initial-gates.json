@@ -1,0 +1,8 @@
+{
+  "exit": 0,
+  "seconds": 0.6659546266309917,
+  "binary_sha256": "9a4b9a0cc499d64805e78f268a82b7c75de2fae8ab66dfce8aff9f20e01eea8f",
+  "build": "build-01.json",
+  "log_sha256": "2626acf2ae01af0741124ac5683a20f2df2e723d3486f00a8db3c6795bcce964",
+  "scope": "isolated endpoint bound owner; no native mode or production authority"
+}

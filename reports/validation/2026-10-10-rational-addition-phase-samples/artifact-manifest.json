@@ -1,0 +1,66 @@
+{
+  "scope": "frozen existing-sample native addition phase attribution",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "c65cf38e9ae4e8819110e0ced6abf89d6b59a9b0c6dbb0e6388e5dfebe85d439",
+      "bytes": 2313
+    },
+    {
+      "path": "actual-attempt1-build-binding.json",
+      "sha256": "78c65bb6b1a0f8390fc8a3e2de22b180679d5037a1625270cebfa34e1deb94b8",
+      "bytes": 2682
+    },
+    {
+      "path": "actual-attempt1-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "build.py",
+      "sha256": "f37abd1a353a2ce87c3a70a0611180780ceb4ee377b9686a28dce550d80e23b7",
+      "bytes": 1585
+    },
+    {
+      "path": "probe.rs",
+      "sha256": "79fe18a8aa569986213a87503b3a0e3a7d8864954e4ff93e0090dad8912585fd",
+      "bytes": 5626
+    },
+    {
+      "path": "resources.json",
+      "sha256": "6b8847ca3543902bda8186430e286a99be807ccb7a241b37319c18d0075d5a1f",
+      "bytes": 530
+    },
+    {
+      "path": "resources.log",
+      "sha256": "680fe02cba6170ede10e114e697176cc66e08987ea1bf4288e065e7c31c82dee",
+      "bytes": 240
+    },
+    {
+      "path": "resources.provenance.json",
+      "sha256": "414f3677ab47f561c44b88275df91a6696f65a0e3dadf8fcd4e22ea492291105",
+      "bytes": 938
+    },
+    {
+      "path": "results.json",
+      "sha256": "ad532b8537dfc7d2369e3635260aa0164a1aacb50ffe3b90cc278e5b5a0c0346",
+      "bytes": 13159
+    },
+    {
+      "path": "run-binding.json",
+      "sha256": "e3ef498631bb59523da15959fc45ca55744144da45af2607c20f064d7d9fe54e",
+      "bytes": 3170
+    },
+    {
+      "path": "run.py",
+      "sha256": "a54116fbb2dd93c8c6a9b46b8e97fa05489f9a06f591619ae31103487a0a9e6a",
+      "bytes": 2226
+    },
+    {
+      "path": "summary.json",
+      "sha256": "1773fdd479eb4b95997d32c58333ffefc45b2c2fa198e48ba7ee7438056252bf",
+      "bytes": 2961
+    }
+  ],
+  "file_count": 12
+}

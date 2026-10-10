@@ -1,0 +1,58 @@
+error[E0308]: mismatched types
+   --> /tmp/rustflow-partial-endpoint-20261010/src/finite_density/partial_endpoint.rs:379:32
+    |
+379 |                 &integer(n)? - d / &Rational::from(2) - integer(data.r)?,
+    |                                ^^^^^^^^^^^^^^^^^^^^^^ expected `&Fraction<IntegerRing>`, found `Fraction<IntegerRing>`
+    |
+    = note: expected reference `&Fraction<_>`
+                  found struct `Fraction<_>`
+help: consider dereferencing the borrow
+    |
+379 |                 *&integer(n)? - d / &Rational::from(2) - integer(data.r)?,
+    |                 +
+
+error[E0308]: `?` operator has incompatible types
+   --> /tmp/rustflow-partial-endpoint-20261010/src/finite_density/partial_endpoint.rs:396:17
+    |
+396 |             d - integer(add(self.origin.compact_loops as u64, 2)?)?,
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&Fraction<IntegerRing>`, found `Fraction<IntegerRing>`
+    |
+    = note: `?` operator cannot convert from `Fraction<_>` to `&Fraction<_>`
+    = note: expected reference `&Fraction<_>`
+                  found struct `Fraction<_>`
+help: consider borrowing here
+    |
+396 |             d - &integer(add(self.origin.compact_loops as u64, 2)?)?,
+    |                 +
+
+error[E0308]: `?` operator has incompatible types
+   --> /tmp/rustflow-partial-endpoint-20261010/src/finite_density/partial_endpoint.rs:401:21
+    |
+401 |                 d - integer(add(2, mul(2, data.jets[i])?)?)? - &q - &sigma,
+    |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&Fraction<IntegerRing>`, found `Fraction<IntegerRing>`
+    |
+    = note: `?` operator cannot convert from `Fraction<_>` to `&Fraction<_>`
+    = note: expected reference `&Fraction<_>`
+                  found struct `Fraction<_>`
+help: consider borrowing here
+    |
+401 |                 d - &integer(add(2, mul(2, data.jets[i])?)?)? - &q - &sigma,
+    |                     +
+
+error[E0308]: `?` operator has incompatible types
+   --> /tmp/rustflow-partial-endpoint-20261010/src/finite_density/partial_endpoint.rs:409:21
+    |
+409 |                 d - integer(lower)? - &q - &sigma,
+    |                     ^^^^^^^^^^^^^^^ expected `&Fraction<IntegerRing>`, found `Fraction<IntegerRing>`
+    |
+    = note: `?` operator cannot convert from `Fraction<_>` to `&Fraction<_>`
+    = note: expected reference `&Fraction<_>`
+                  found struct `Fraction<_>`
+help: consider borrowing here
+    |
+409 |                 d - &integer(lower)? - &q - &sigma,
+    |                     +
+
+error: aborting due to 4 previous errors
+
+For more information about this error, try `rustc --explain E0308`.

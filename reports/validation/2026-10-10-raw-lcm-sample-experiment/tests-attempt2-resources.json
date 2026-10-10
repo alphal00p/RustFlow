@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "120",
+    "/tmp/rustflow-raw-lcm-tests-attempt2",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.019129510037600994,
+  "user_seconds": 0.004994,
+  "system_seconds": 0.017958,
+  "peak_child_rss_kib": 15456,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

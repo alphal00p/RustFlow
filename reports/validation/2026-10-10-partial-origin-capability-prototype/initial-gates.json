@@ -1,0 +1,6 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 0.39915234269574285,
+  "executable_sha256": "5180643648b57547ae0374258ad038f43bfb0a05e93ca610bb7641bfbdd75746",
+  "scope": "isolated new partial-origin tests only; no production dispatch or physical endpoint result"
+}

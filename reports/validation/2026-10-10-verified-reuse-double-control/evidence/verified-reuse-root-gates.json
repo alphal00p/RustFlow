@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Only the listed assigned regression gates; no duplicate test invocations and no numerical acceptance runs.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-hashes.json",
+    "sha256": "6f2364c3db6906f7d078dbffe8bac7db1cf4201b0b4b804db30f5bdefff0b0ca"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-build-provenance.json",
+    "sha256": "7e248e37487aa2190aca715a2825b445320dae8a42154f3d71640e2466080569"
+  },
+  "unchanged_source_files": 2484,
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "58c0591b3a16f1e50e3c40aff182f88e5dd18e38ad1912c56a665335c64f945f",
+    "RUSTRED_SOURCE_DIGEST": "9a3869bf20c4f25231c7b2c2160fec7f5d38307b542134a7119d79a1b1d535fb",
+    "PORT_SOURCE_DIGEST": "db384717f500e9278bc773eb55d786d324e93e24a3eb23c592ffebc291581f7a"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "native",
+      "status": "passed",
+      "passed": 91,
+      "failed": 0,
+      "ignored": 1,
+      "measured": 0,
+      "filtered": 3041,
+      "harness_seconds": 0.1,
+      "wall_seconds": 0.11683835182338953,
+      "peak_child_rss_kib": 15448,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-native-resources.json",
+          "sha256": "884a3f78df642d47d3edc94bcfd5215324a326fa12de1c1170d1a85337380601"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-native-resources.log",
+          "sha256": "66cdb8fd8d4207e3752893ab5f3bf4b98b9a6b2fb62dc8333fb6b9fa863b3f5e"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-native-resources.provenance.json",
+          "sha256": "c625fe1179dc833a8f69827721eff52828d1ffbcbd30623d23f44cb646d43ecf"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-native-binding.json",
+          "sha256": "c2dccdc581481f65ccc5992de44621e33d2f67598295f4f33d80cdc61356a146"
+        }
+      }
+    },
+    {
+      "gate": "lib",
+      "status": "passed",
+      "passed": 97,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 213,
+      "harness_seconds": 7.35,
+      "wall_seconds": 7.367084935773164,
+      "peak_child_rss_kib": 24576,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-lib-resources.json",
+          "sha256": "4f7d0f8d45e25612b25ca5023c936daa557fa9ee614fa09887b76eb5323d8a20"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-lib-resources.log",
+          "sha256": "0e0f7953201f82b59e6875a293a1b7a20cb2af0e6bb05a85b2a7d35514fdf9b1"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-lib-resources.provenance.json",
+          "sha256": "7a9e0d2023d22c9a2dce86aafecda69e01b4f9b992f02209cb51e04e157a54a0"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-lib-binding.json",
+          "sha256": "a1ff1bef0f1504d99689c1858171478456903c275a9c2867eac72b1d6ac63558"
+        }
+      }
+    },
+    {
+      "gate": "flow-boundary",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.15,
+      "wall_seconds": 0.1674099019728601,
+      "peak_child_rss_kib": 15448,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-flow-boundary-resources.json",
+          "sha256": "37523e106802e6db1dfc9084b05eef5f8fa9c4543f6fb5b20e988eb7470b049c"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-flow-boundary-resources.log",
+          "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-flow-boundary-resources.provenance.json",
+          "sha256": "ac09bded7d5cd4d84189f7cfbe1c6751db86908c7749bdefd789e6e53c5e3054"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-flow-boundary-binding.json",
+          "sha256": "bf1ac222dacb1593acf8368fd7be10164058ee65ef627e7dab2a22150ebc9686"
+        }
+      }
+    },
+    {
+      "gate": "massless-sources",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.49,
+      "wall_seconds": 1.5115468306466937,
+      "peak_child_rss_kib": 18432,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-massless-sources-resources.json",
+          "sha256": "0b0ff954401a90c809f5582f1590a76b320d7dca4143d119d1fbd2cab94b0826"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-massless-sources-resources.log",
+          "sha256": "d6421c76aaaf504236fff8f07bb03f510f723afaea6b89b688084230a4264674"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-massless-sources-resources.provenance.json",
+          "sha256": "3931144787363e6156ad82464964c5abb240c3a6481bbedd278f76cea19d5626"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-massless-sources-binding.json",
+          "sha256": "c0f63a6b8ed193efe9cb99a94a01698fcfe15c1fad83da5e4117aee1f2f00ecf"
+        }
+      }
+    },
+    {
+      "gate": "source-fingerprint",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.01,
+      "wall_seconds": 0.011159493122249842,
+      "peak_child_rss_kib": 15448,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-fingerprint-resources.json",
+          "sha256": "1b296b1d735724c6427c1237a3071edf9091a8a9b8de62a7ab4075768bb78cb4"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-fingerprint-resources.log",
+          "sha256": "d74e77a67d0155a8452ce3b0003d36e5f3b661ded1e73ecc11a681a8f987ff5f"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-fingerprint-resources.provenance.json",
+          "sha256": "13461cfdfb5e253107645012104888132f7450b7e77ab8d29638a58bab14d50f"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-fingerprint-binding.json",
+          "sha256": "f8531c4c73d409d20a6385b82872cc3f1c3c0c101a74c1605b0cd00a1e8390f8"
+        }
+      }
+    },
+    {
+      "gate": "python",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.78,
+      "wall_seconds": 1.8041084166616201,
+      "peak_child_rss_kib": 33816,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-python-resources.json",
+          "sha256": "ca0bd23bf68ab9ead12dbf960c9ba7915363a7b4e4cdf0101aa6a2feafc4e717"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-python-resources.log",
+          "sha256": "590fcb3c17ac42fa6e73e57a1aba75c8de9e2b88ac9cc73ed5273d2b43191cdd"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-python-resources.provenance.json",
+          "sha256": "5a121701681ec3b0b0d44de5005736930bd71cd8043bc4f4085bda60a1b453ad"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-python-binding.json",
+          "sha256": "f6549777b470d615c3b4f6043cba72740bf0892a5cbeb0568cdd22ca6dc6b085"
+        }
+      }
+    },
+    {
+      "gate": "capacity",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.03,
+      "wall_seconds": 0.052367914002388716,
+      "peak_child_rss_kib": 15448,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-capacity-resources.json",
+          "sha256": "3ce3b2fcbace87d89f575ded7150d90a420d75f7b0ac96bfc3fc9feeec35bda5"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-capacity-resources.log",
+          "sha256": "79d6725df76851483086e2541f414f1941bbb58f8b82a9648fd22a4c31045495"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-capacity-resources.provenance.json",
+          "sha256": "3b32597c947b8b29d9ae12427a04afca2303b609af9aef8c5682c08728168a14"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-capacity-binding.json",
+          "sha256": "b8f45bf5cab60caf6bea1a558652e0c39e6ed09591ec67d74b7b5fff6d6ec40b"
+        }
+      }
+    },
+    {
+      "gate": "polynomial-sources",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.06,
+      "wall_seconds": 0.07510685082525015,
+      "peak_child_rss_kib": 15448,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-polynomial-sources-resources.json",
+          "sha256": "430d6828702465e47bdef024f558434b45e40794b87f6527db3b3cc7594fec77"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-polynomial-sources-resources.log",
+          "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-polynomial-sources-resources.provenance.json",
+          "sha256": "f7f71a22471ed3a2d0e6e0b29e98c232f168bc45e2ee42eece957f6d6f1a6b08"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-polynomial-sources-binding.json",
+          "sha256": "c80d0af46fb89009ba5057ecd6ece2f9c7ea2c1ae2bd629a9ac38ffa992f2ff2"
+        }
+      }
+    }
+  ],
+  "unique_test_count": 208,
+  "numerical_acceptance_runs": 0,
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "timing_scope": "Prebuilt test execution; compilation and Nix startup excluded. Shared-host measurements are not isolated performance benchmarks.",
+  "summary_script_sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+}

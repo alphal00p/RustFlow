@@ -1,0 +1,21 @@
+{
+  "scope": "Frozen read-only assessment, metadata audit only; no native run or production changes",
+  "files": {
+    "README.md": {
+      "sha256": "aa942f3a995076d2f549d7b0f5f44a29d1004efbd6fa0ab55238a103e91ef562",
+      "bytes": 8507
+    },
+    "audit.py": {
+      "sha256": "e6f880d42900b4f61f0e9b2e67e55afd2dbd187d90deb4ebf0eb9d31779049da",
+      "bytes": 6763
+    },
+    "input-bindings.json": {
+      "sha256": "7326ec362260373f76818e6bcb25306570311d188e99f002ec12780e459f1108",
+      "bytes": 6773
+    },
+    "observations.json": {
+      "sha256": "43a5a3c72380977db0f79b9484517b369783c190377c849ea2cabf135efd672b",
+      "bytes": 129281
+    }
+  }
+}

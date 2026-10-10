@@ -1,0 +1,7 @@
+{
+  "scope": "Pre-archive report verification; no native run changed and no payload had been archived",
+  "failure": "Initial transaction-path resolution used repository root; native metadata stores the transaction filename relative to its checkpoint directory.",
+  "correction": "Resolve relative transaction paths against the metadata parent directory before verifying BLAKE3.",
+  "initial_finalizer_sha256": "1ab8bdc6f1a0649a81c955252ddf1d95820bd7bab2e10d1086cfca96534c1e8f",
+  "corrected_finalizer_sha256": "d9445d1caf0e1b0e0d6eb36d8d34b57323eee51eb504d0acc49d5150eb7a7061"
+}

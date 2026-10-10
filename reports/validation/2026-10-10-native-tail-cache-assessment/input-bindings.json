@@ -1,0 +1,132 @@
+{
+  "files": {
+    "reports/validation/2026-10-10-final-history-work-profile/input.json": {
+      "sha256": "1551e4d3b8d5c538b0879ac7629ca1f9b60d47c576b09d6c635e150065edcb55",
+      "bytes": 2870221
+    },
+    "reports/validation/2026-10-10-final-history-work-profile/points.json": {
+      "sha256": "2ad250bc0be44abdf91d6cc72da669b37f8ac0f871ef7ebb86cbd1569ac44e21",
+      "bytes": 12430
+    },
+    "reports/validation/2026-10-10-final-reduction-phase-diagnostic/profile/terminal-observations.json": {
+      "sha256": "0c972ca78619617d0049aea65c6cf9faebdce12e2b0b88f5861dca0211bd3695",
+      "bytes": 1647
+    },
+    "reports/validation/2026-10-10-final-history-work-profile/profile/result.json": {
+      "sha256": "2ab4f65df49278af5c7084c34fdb6a9b8fbaa873082c136283ef6c56a9830d25",
+      "bytes": 313670
+    },
+    "reports/validation/2026-10-10-final-reduction-phase-diagnostic/summary.json": {
+      "sha256": "c8dd5b24176e536caa9065fa7f13a72cf8f8953365dd4738459ce26272a9c8f0",
+      "bytes": 1418
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/summary.json": {
+      "sha256": "eaa3e8645cba0fa09d1fc4a414002f3a545583d5e94700a6bb66f10b6c7c8a07",
+      "bytes": 3061
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "bytes": 1549
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-000-provisional.json": {
+      "sha256": "39f9da322292fe7ea2ff3407fce2cf7fe95b46439d1af5ac18417e6f97ba62d9",
+      "bytes": 51332
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-001-provisional.json.gz": {
+      "sha256": "5dacf7ab779ef3b0c1bcd9ce3e390e72127210b40fac2ddfa5cf3a60fa998dd8",
+      "bytes": 8833
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-002-provisional.json.gz": {
+      "sha256": "02367c4b7024a6a9e808ddf7daf0a5ce501595765120c3bfc80ab5e598dee260",
+      "bytes": 25122
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-003-provisional.json.gz": {
+      "sha256": "f9fe994ba88cb4293f5cfdc062a347a5a0750e9f93d1481c148881d0359e767a",
+      "bytes": 44330
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-004-provisional.json.gz": {
+      "sha256": "670402b68a1fed1de253edf3efd4ad2738a029efd702300621d28b94b881e3ff",
+      "bytes": 62028
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-005-provisional.json.gz": {
+      "sha256": "5e5ae75358c6adc1a9566539e81d0d23b694b4fecbdc4238720ecf149c41316d",
+      "bytes": 74052
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-006-provisional.json.gz": {
+      "sha256": "bc2ce7426fc9a438d9ffec1ba611cfc78c1fbdbd8815e007df54f85e2d7cab9b",
+      "bytes": 76265
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-007-provisional.json.gz": {
+      "sha256": "d0fb0c7f293ee149946249e04bde2bd3ceef4e6ab4a2f413f5ad9f496ff82852",
+      "bytes": 72738
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-008-provisional.json.gz": {
+      "sha256": "38303ddc244103b80e22605d4092ee4271662b43a01c2c72ce9c6bb143797ef7",
+      "bytes": 67469
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-009-provisional.json.gz": {
+      "sha256": "ef022e4362a2c7044cb0d15b81cc7be7b854b59a5cf2f76640fc7427a90f0e5c",
+      "bytes": 63057
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-010-provisional.json.gz": {
+      "sha256": "c64cb5fe8cc4ae0be4cab13cc44a770854df9b8d4df2b506d1aceeb9f1d24e66",
+      "bytes": 59909
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-011-provisional.json.gz": {
+      "sha256": "5acf3d65d85ff81ba4a647f358e00e68e917a715ca262f5ef6abc83281b6e0e8",
+      "bytes": 57817
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-012-provisional.json.gz": {
+      "sha256": "bee384281e11798f2daea0992edc5cb3208f3ba6c09790fc61fea01daea42ab3",
+      "bytes": 56569
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-013-provisional.json.gz": {
+      "sha256": "587f07f3d3eca6d81f3b6371fd3c30cefab4e420e1777cdd764b37a40595343f",
+      "bytes": 55994
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-014-provisional.json.gz": {
+      "sha256": "4ac665c136c0e13e321cf2cf89b9e58e791000ec32c5f4749a31c69c3880a22d",
+      "bytes": 54680
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-015-provisional.json.gz": {
+      "sha256": "f090bc52947eb38fbe339f84cf682412084f379b7633d013a795ee366a605c50",
+      "bytes": 53584
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-016-provisional.json.gz": {
+      "sha256": "bbe9ce1ab78bac9b38f03e08d7868d39f842f57d7793db9f9cbc79c571c1559b",
+      "bytes": 52828
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-017-provisional.json.gz": {
+      "sha256": "cc05b65ded4c2948a8a3b466032f54d87c93a99329fa43f45f640c6be469faed",
+      "bytes": 52266
+    },
+    "reports/validation/2026-10-10-longer-singleton-control/single3/native-closure/round-018-provisional.json": {
+      "sha256": "1551e4d3b8d5c538b0879ac7629ca1f9b60d47c576b09d6c635e150065edcb55",
+      "bytes": 2870221
+    },
+    "src/finite_density/reduction/active.rs": {
+      "sha256": "cfe753a1eac3032da87d9fd1905120150cadd6fc61310a509e99c9eefcdd57ca",
+      "bytes": 42901
+    },
+    "src/finite_density/reduction.rs": {
+      "sha256": "e28e9fe7f76660240fd77e63f123f0d77b55ee1ebec5b26c08b487963b3d6c03",
+      "bytes": 97574
+    },
+    "src/finite_density/guarded.rs": {
+      "sha256": "33d499807250e152d77badb9dbdd5a3c9ece530fb8d53923c5bd8e0493ba7a26",
+      "bytes": 48027
+    },
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": {
+      "sha256": "f67c4d071f6bd58ffa6a3b2f546f61a49c36bc7c9b383e0289d0be5f25b339e7",
+      "bytes": 68026
+    },
+    "reports/validation/2026-10-10-final-history-work-profile/probe.rs": {
+      "sha256": "c1d56d03000fa4d357af6aca23d44b267f48aab68bfa0a4de5f1a0aea888be24",
+      "bytes": 9520
+    },
+    "reports/validation/2026-10-10-final-reduction-phase-diagnostic/probe.rs": {
+      "sha256": "7ed99e9f4dc114731fc96cc7ef5586373b60c50d190dce96c62f3478bbcf4d96",
+      "bytes": 17030
+    }
+  }
+}

@@ -1,0 +1,13 @@
+
+running 8 tests
+test finite_density::partial_origin::endpoint::tests::actual_singleton_and_double_original_labels_replay_and_keep_authorities_separate ... ok
+test finite_density::partial_origin::endpoint::tests::endpoint_budgets_and_arithmetic_are_explicit_no_partial_result ... ok
+test finite_density::partial_origin::endpoint::tests::every_finite_cut_upper_lower_and_transfer_jet_has_positive_recorded_margins ... ok
+test finite_density::partial_origin::endpoint::tests::missing_charts_full_off_null_or_support_data_never_authorize_endpoint ... ok
+test finite_density::partial_origin::endpoint::tests::nonpositive_or_tampered_witness_is_rejected ... ok
+test finite_density::partial_origin::endpoint::tests::role_inverse_and_storage_fail_even_for_cut_zero ... ok
+test finite_density::partial_origin::endpoint::tests::shifted_v_zero_endpoint_is_distinct_from_finite_eta_zero ... ok
+test finite_density::partial_origin::endpoint::tests::wrong_origin_family_placement_and_options_reject ... ok
+
+test result: ok. 8 passed; 0 failed; 0 ignored; 0 measured; 21 filtered out; finished in 0.60s
+

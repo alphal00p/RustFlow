@@ -1,0 +1,16 @@
+{
+  "scope": "frozen read-only proposal",
+  "files": [
+    {
+      "path": "assessment.md",
+      "sha256": "2f249e3b27f213a11e0b6e56983ef14f85dac4fd26148c4f54d912feeb9e9d2f",
+      "bytes": 4694
+    },
+    {
+      "path": "source-bindings.json",
+      "sha256": "f26a94625143eab0cd369bda53524f652e3680ed6fadf36e4f41bd111500452c",
+      "bytes": 1059
+    }
+  ],
+  "file_count": 2
+}

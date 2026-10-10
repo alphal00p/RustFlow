@@ -1,0 +1,10 @@
+error: no rules expected `[`
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/micro.rs:374:444
+    |
+374 | ...l","balanced","equal-denominator-grouped"][method],"seconds":seconds,"exact_match":true}));}}
+    |                                              ^ no rules expected this token in macro call
+    |
+    = note: while trying to match end of macro
+
+error: aborting due to 1 previous error
+

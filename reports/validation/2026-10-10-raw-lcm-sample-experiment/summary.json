@@ -1,0 +1,66 @@
+{
+  "scope": "sample-only raw polynomial LCM sum on eight previously selected costly repeated-denominator buffers",
+  "outcome": "exact but mixed/small measured benefit; no whole-target run or production promotion",
+  "tests": 5,
+  "sample_exact_comparisons": 72,
+  "accepted_raw_trials": 24,
+  "raw_declines_on_actual_samples": 0,
+  "sum_of_sample_medians_seconds": {
+    "sequential": 6.221766415,
+    "balanced": 6.077781675,
+    "raw-lcm": 5.861906868
+  },
+  "raw_to_balanced_ratio": 0.9644813159564506,
+  "per_sample_ratios": [
+    0.8392841517255301,
+    0.9839078151217722,
+    1.0148954161894015,
+    0.7607525185532344,
+    1.3632624660344161,
+    1.2430277326061547,
+    0.8139501509785018,
+    0.8429204764988236
+  ],
+  "caps": {
+    "bit_products": "70368744177664",
+    "coefficient_bits": 32768,
+    "degree": 4096,
+    "input_count": 32,
+    "operation_pairs": 4000000,
+    "terms": 65536,
+    "total_operation_pairs": 64000000
+  },
+  "raw_phase_seconds_across_24_trials": {
+    "denominator-gcd": 4.915617832,
+    "exact-quotient": 5.643666327,
+    "final-canonical-normalization": 2.2187398439999995,
+    "polynomial-product": 3.4276907239999996,
+    "polynomial-sum": 0.379802871
+  },
+  "largest_retained_polynomial_terms": 2873,
+  "largest_coefficient_bits": 1241,
+  "largest_charged_term_pairs": 12482662,
+  "canonical_input_ingress_seconds": 1.204195756,
+  "resources": {
+    "command": [
+      "timeout",
+      "300",
+      "/tmp/rustflow-raw-lcm-actual-attempt1",
+      "/tmp/rustflow-raw-lcm-samples-20261010",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-10-raw-lcm-sample-experiment/results.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 56.25802928581834,
+    "user_seconds": 55.723302,
+    "system_seconds": 0.15220999999999998,
+    "peak_child_rss_kib": 110604,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "limitations": [
+    "Biased sample selection from eight expensive eligible buffers, not representative of full reduction.",
+    "One process with rotated method order and three repetitions, not a whole-workflow benchmark.",
+    "Canonical input validation is performed once before the timed methods, shared by all methods; its cost is recorded separately.",
+    "Degree/support/bit-product/retained-output limits do not provide a complete bound on internal CAS GCD scratch.",
+    "No production patch, new native reduction, numerical epsilon specialization, changed condition, or period value."
+  ]
+}

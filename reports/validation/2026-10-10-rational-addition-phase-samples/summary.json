@@ -1,0 +1,61 @@
+{
+  "scope": "phase attribution on the same eight frozen eligible coefficient buffers; no new target reduction",
+  "exact_pair_comparisons": 217,
+  "exact_final_sum_comparisons": 8,
+  "equal_denominator_pairs": 9,
+  "unequal_denominator_pairs": 208,
+  "phase_seconds": {
+    "constructor-sign-normalization": 5.0151e-05,
+    "constructor-variable-unification": 1.1679999999999999e-06,
+    "denominator-cancellation-quotient": 0.08294667200000001,
+    "denominator-clone": 0.000161574,
+    "denominator-gcd": 1.4797251559999998,
+    "denominator-gcd-quotient": 0.871858097,
+    "numerator-cancellation-gcd": 2.351409489,
+    "numerator-cancellation-quotient": 0.45720950600000004,
+    "polynomial-denominator-product": 0.027081553,
+    "polynomial-numerator-add": 0.071185755,
+    "polynomial-numerator-cross-product": 0.6067912800000002
+  },
+  "phase_calls": {
+    "constructor-sign-normalization": 9,
+    "constructor-variable-unification": 9,
+    "denominator-cancellation-quotient": 45,
+    "denominator-clone": 9,
+    "denominator-gcd": 208,
+    "denominator-gcd-quotient": 416,
+    "numerator-cancellation-gcd": 217,
+    "numerator-cancellation-quotient": 45,
+    "polynomial-denominator-product": 208,
+    "polynomial-numerator-add": 217,
+    "polynomial-numerator-cross-product": 416
+  },
+  "total_measured_arithmetic_seconds": 5.948420401,
+  "numerator_cancellation_seconds_including_quotients": 2.891565667,
+  "numerator_cancellation_share": 0.48610647400003765,
+  "denominator_gcd_and_quotient_seconds": 2.351583253,
+  "polynomial_cross_products_and_sum_seconds": 0.7050585880000002,
+  "validation_seconds_excluded_from_phase_totals": 5.951895915000001,
+  "resources": {
+    "command": [
+      "timeout",
+      "180",
+      "/tmp/rustflow-rational-addition-phase-actual-attempt1",
+      "/tmp/rustflow-rational-addition-phase-samples-20261010",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-10-rational-addition-phase-samples/results.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 12.44133424013853,
+    "user_seconds": 12.263114999999999,
+    "system_seconds": 0.09829399999999999,
+    "peak_child_rss_kib": 125964,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "interpretation": "Numerator cancellation is a substantial selected-sample cost and justifies considering a bounded sample-only delayed-normalization prototype; it does not establish a speedup or a whole-workload cost fraction.",
+  "limitations": [
+    "Eight buffers were previously selected by high cost and repeated exact denominators, not randomly.",
+    "One phase-instrumented pass, not a repeated performance benchmark.",
+    "Raw coefficient construction follows the pinned native canonical arithmetic path and is checked against native Add after each pair; no noncanonical value enters existing APIs.",
+    "No raw-LCM prototype, slow-target rerun, production modification or numerical period evaluation."
+  ]
+}

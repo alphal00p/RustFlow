@@ -1,0 +1,23 @@
+{
+  "captured_utc": "2026-10-10T07:12:10.348830+00:00",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-same-denominator-micro-attempt2",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual/samples",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/micro-results.json"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/rustflow-same-denominator-micro-attempt2": {
+      "resolved_path": "/tmp/rustflow-same-denominator-micro-attempt2",
+      "sha256": "0f4be5b11e384b87e13f423d7e01bac3e63e6b9a7305f6608e032ccd6d68cfe1",
+      "size_bytes": 270204864
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

@@ -1,0 +1,287 @@
+{
+  "scope": "Static prebuilt VI runtime capsule for a fresh all-uncut-deformed selected double-cut control; no imported native rules, resume, analytic shortcut or reference values. Later ROOT source/target changes do not change this run.",
+  "captured_utc": "2026-10-10T06:46:22.185221+00:00",
+  "capsule_path": "/tmp/rustflow-verified-reuse-double-20261010",
+  "original_runtime": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+  "source_snapshot_sha256": "6f2364c3db6906f7d078dbffe8bac7db1cf4201b0b4b804db30f5bdefff0b0ca",
+  "build_provenance_sha256": "7e248e37487aa2190aca715a2825b445320dae8a42154f3d71640e2466080569",
+  "root_gates_sha256": "2aee704f948913a1cfe69d677c7f803f47957c3f8c62a3a49709c68e0b38b86a",
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "58c0591b3a16f1e50e3c40aff182f88e5dd18e38ad1912c56a665335c64f945f",
+    "RUSTRED_SOURCE_DIGEST": "9a3869bf20c4f25231c7b2c2160fec7f5d38307b542134a7119d79a1b1d535fb",
+    "PORT_SOURCE_DIGEST": "db384717f500e9278bc773eb55d786d324e93e24a3eb23c592ffebc291581f7a"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "source_asset_count": 2484,
+  "source_archive": {
+    "path": "frozen-source-assets.tar.gz",
+    "sha256": "854798bdf7e5d43d30e8a6eef2560d066072c92f17d3a91e3ca0cdf61dda92c1",
+    "bytes": 5834864,
+    "all_restored_member_hashes_match_snapshot": true
+  },
+  "evidence_copies": [
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-hashes.json",
+      "copy_path": "evidence/verified-reuse-source-hashes.json",
+      "sha256": "6f2364c3db6906f7d078dbffe8bac7db1cf4201b0b4b804db30f5bdefff0b0ca",
+      "bytes": 377673
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-build-provenance.json",
+      "copy_path": "evidence/verified-reuse-build-provenance.json",
+      "sha256": "7e248e37487aa2190aca715a2825b445320dae8a42154f3d71640e2466080569",
+      "bytes": 5383
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-root-gates.json",
+      "copy_path": "evidence/verified-reuse-root-gates.json",
+      "sha256": "2aee704f948913a1cfe69d677c7f803f47957c3f8c62a3a49709c68e0b38b86a",
+      "bytes": 11724
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-actual62-source-equivalence.json",
+      "copy_path": "evidence/verified-reuse-actual62-source-equivalence.json",
+      "sha256": "5f30972f12a3c8f23ceb609ec1dd4fb89a1f6dd087f1c4e78e694b9db4323e0d",
+      "bytes": 513935
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/run-three-loop-gate.py",
+      "copy_path": "evidence/run-three-loop-gate.py",
+      "sha256": "ad4a9c5668016278e938cdf0ebc46228abc9f1127bcdbb9a7db15e1c885aa6f6",
+      "bytes": 5658
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/run-resource-command.py",
+      "copy_path": "evidence/run-resource-command.py",
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-native-resources.json",
+      "copy_path": "evidence/verified-reuse-native-resources.json",
+      "sha256": "884a3f78df642d47d3edc94bcfd5215324a326fa12de1c1170d1a85337380601",
+      "bytes": 395
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-native-resources.log",
+      "copy_path": "evidence/verified-reuse-native-resources.log",
+      "sha256": "66cdb8fd8d4207e3752893ab5f3bf4b98b9a6b2fb62dc8333fb6b9fa863b3f5e",
+      "bytes": 13851
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-native-resources.provenance.json",
+      "copy_path": "evidence/verified-reuse-native-resources.provenance.json",
+      "sha256": "c625fe1179dc833a8f69827721eff52828d1ffbcbd30623d23f44cb646d43ecf",
+      "bytes": 833
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-native-binding.json",
+      "copy_path": "evidence/verified-reuse-native-binding.json",
+      "sha256": "c2dccdc581481f65ccc5992de44621e33d2f67598295f4f33d80cdc61356a146",
+      "bytes": 530
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-lib-resources.json",
+      "copy_path": "evidence/verified-reuse-lib-resources.json",
+      "sha256": "4f7d0f8d45e25612b25ca5023c936daa557fa9ee614fa09887b76eb5323d8a20",
+      "bytes": 404
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-lib-resources.log",
+      "copy_path": "evidence/verified-reuse-lib-resources.log",
+      "sha256": "0e0f7953201f82b59e6875a293a1b7a20cb2af0e6bb05a85b2a7d35514fdf9b1",
+      "bytes": 11813
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-lib-resources.provenance.json",
+      "copy_path": "evidence/verified-reuse-lib-resources.provenance.json",
+      "sha256": "7a9e0d2023d22c9a2dce86aafecda69e01b4f9b992f02209cb51e04e157a54a0",
+      "bytes": 862
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-lib-binding.json",
+      "copy_path": "evidence/verified-reuse-lib-binding.json",
+      "sha256": "a1ff1bef0f1504d99689c1858171478456903c275a9c2867eac72b1d6ac63558",
+      "bytes": 537
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-flow-boundary-resources.json",
+      "copy_path": "evidence/verified-reuse-flow-boundary-resources.json",
+      "sha256": "37523e106802e6db1dfc9084b05eef5f8fa9c4543f6fb5b20e988eb7470b049c",
+      "bytes": 405
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-flow-boundary-resources.log",
+      "copy_path": "evidence/verified-reuse-flow-boundary-resources.log",
+      "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "bytes": 574
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-flow-boundary-resources.provenance.json",
+      "copy_path": "evidence/verified-reuse-flow-boundary-resources.provenance.json",
+      "sha256": "ac09bded7d5cd4d84189f7cfbe1c6751db86908c7749bdefd789e6e53c5e3054",
+      "bytes": 874
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-flow-boundary-binding.json",
+      "copy_path": "evidence/verified-reuse-flow-boundary-binding.json",
+      "sha256": "bf1ac222dacb1593acf8368fd7be10164058ee65ef627e7dab2a22150ebc9686",
+      "bytes": 535
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-massless-sources-resources.json",
+      "copy_path": "evidence/verified-reuse-massless-sources-resources.json",
+      "sha256": "0b0ff954401a90c809f5582f1590a76b320d7dca4143d119d1fbd2cab94b0826",
+      "bytes": 395
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-massless-sources-resources.log",
+      "copy_path": "evidence/verified-reuse-massless-sources-resources.log",
+      "sha256": "d6421c76aaaf504236fff8f07bb03f510f723afaea6b89b688084230a4264674",
+      "bytes": 435
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-massless-sources-resources.provenance.json",
+      "copy_path": "evidence/verified-reuse-massless-sources-resources.provenance.json",
+      "sha256": "3931144787363e6156ad82464964c5abb240c3a6481bbedd278f76cea19d5626",
+      "bytes": 883
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-massless-sources-binding.json",
+      "copy_path": "evidence/verified-reuse-massless-sources-binding.json",
+      "sha256": "c0f63a6b8ed193efe9cb99a94a01698fcfe15c1fad83da5e4117aee1f2f00ecf",
+      "bytes": 541
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-fingerprint-resources.json",
+      "copy_path": "evidence/verified-reuse-source-fingerprint-resources.json",
+      "sha256": "1b296b1d735724c6427c1237a3071edf9091a8a9b8de62a7ab4075768bb78cb4",
+      "bytes": 398
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-fingerprint-resources.log",
+      "copy_path": "evidence/verified-reuse-source-fingerprint-resources.log",
+      "sha256": "d74e77a67d0155a8452ce3b0003d36e5f3b661ded1e73ecc11a681a8f987ff5f",
+      "bytes": 4279
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-fingerprint-resources.provenance.json",
+      "copy_path": "evidence/verified-reuse-source-fingerprint-resources.provenance.json",
+      "sha256": "13461cfdfb5e253107645012104888132f7450b7e77ab8d29638a58bab14d50f",
+      "bytes": 841
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-source-fingerprint-binding.json",
+      "copy_path": "evidence/verified-reuse-source-fingerprint-binding.json",
+      "sha256": "f8531c4c73d409d20a6385b82872cc3f1c3c0c101a74c1605b0cd00a1e8390f8",
+      "bytes": 530
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-python-resources.json",
+      "copy_path": "evidence/verified-reuse-python-resources.json",
+      "sha256": "ca0bd23bf68ab9ead12dbf960c9ba7915363a7b4e4cdf0101aa6a2feafc4e717",
+      "bytes": 386
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-python-resources.log",
+      "copy_path": "evidence/verified-reuse-python-resources.log",
+      "sha256": "590fcb3c17ac42fa6e73e57a1aba75c8de9e2b88ac9cc73ed5273d2b43191cdd",
+      "bytes": 193
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-python-resources.provenance.json",
+      "copy_path": "evidence/verified-reuse-python-resources.provenance.json",
+      "sha256": "5a121701681ec3b0b0d44de5005736930bd71cd8043bc4f4085bda60a1b453ad",
+      "bytes": 853
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-python-binding.json",
+      "copy_path": "evidence/verified-reuse-python-binding.json",
+      "sha256": "f6549777b470d615c3b4f6043cba72740bf0892a5cbeb0568cdd22ca6dc6b085",
+      "bytes": 521
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-capacity-resources.json",
+      "copy_path": "evidence/verified-reuse-capacity-resources.json",
+      "sha256": "3ce3b2fcbace87d89f575ded7150d90a420d75f7b0ac96bfc3fc9feeec35bda5",
+      "bytes": 390
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-capacity-resources.log",
+      "copy_path": "evidence/verified-reuse-capacity-resources.log",
+      "sha256": "79d6725df76851483086e2541f414f1941bbb58f8b82a9648fd22a4c31045495",
+      "bytes": 364
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-capacity-resources.provenance.json",
+      "copy_path": "evidence/verified-reuse-capacity-resources.provenance.json",
+      "sha256": "3b32597c947b8b29d9ae12427a04afca2303b609af9aef8c5682c08728168a14",
+      "bytes": 859
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-capacity-binding.json",
+      "copy_path": "evidence/verified-reuse-capacity-binding.json",
+      "sha256": "b8f45bf5cab60caf6bea1a558652e0c39e6ed09591ec67d74b7b5fff6d6ec40b",
+      "bytes": 525
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-polynomial-sources-resources.json",
+      "copy_path": "evidence/verified-reuse-polynomial-sources-resources.json",
+      "sha256": "430d6828702465e47bdef024f558434b45e40794b87f6527db3b3cc7594fec77",
+      "bytes": 399
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-polynomial-sources-resources.log",
+      "copy_path": "evidence/verified-reuse-polynomial-sources-resources.log",
+      "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596",
+      "bytes": 188
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-polynomial-sources-resources.provenance.json",
+      "copy_path": "evidence/verified-reuse-polynomial-sources-resources.provenance.json",
+      "sha256": "f7f71a22471ed3a2d0e6e0b29e98c232f168bc45e2ee42eece957f6d6f1a6b08",
+      "bytes": 889
+    },
+    {
+      "source_path": "reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-polynomial-sources-binding.json",
+      "copy_path": "evidence/verified-reuse-polynomial-sources-binding.json",
+      "sha256": "c80d0af46fb89009ba5057ecd6ece2f9c7ea2c1ae2bd629a9ac38ffa992f2ff2",
+      "bytes": 990
+    }
+  ],
+  "static_files": [
+    {
+      "path": "/tmp/rustflow-verified-reuse-double-20261010/input.json",
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "bytes": 1550
+    },
+    {
+      "path": "/tmp/rustflow-verified-reuse-double-20261010/run-resource-command.py",
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    },
+    {
+      "path": "/tmp/rustflow-verified-reuse-double-20261010/runtime",
+      "sha256": "f5985baa7eca472e99854c8b67552e39fbe89a821edceb949237dce3defdff35",
+      "bytes": 1312580400
+    }
+  ],
+  "root_sources_verified_only_at_capture": true,
+  "post_run_policy": "Check only immutable captured files, source archive and evidence copies; no live ROOT/source/target reads.",
+  "prepare_script_sha256": "4a9901ac9b6196481e9d23de4c128cf74ff1412a3b345f289bafd3622c5a999e",
+  "large_executable_storage": "/tmp only; do not commit executable"
+}

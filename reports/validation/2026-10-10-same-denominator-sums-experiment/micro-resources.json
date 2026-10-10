@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-same-denominator-micro-attempt2",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual/samples",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/micro-results.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 54.55151744000614,
+  "user_seconds": 53.991017,
+  "system_seconds": 0.193095,
+  "peak_child_rss_kib": 110604,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

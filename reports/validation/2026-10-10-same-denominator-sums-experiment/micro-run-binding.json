@@ -1,0 +1,37 @@
+{
+  "scope": "three exact addition methods, three alternating repetitions on each frozen real repeated-denominator buffer; no native rule discovery or target reduction",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-same-denominator-micro-attempt2",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual/samples",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/micro-results.json"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/micro-corrected.rs": "f3c0963dd31e0ebf6d3b6cb0007a2e3942a36a8613df5f02a5677bfd98bf385d",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/build-micro-corrected.py": "321f829ded521937ac31af24c7af540b9895b9954e2214244357044dcdeffd3e",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/micro-attempt2-build-binding.json": "19f29d8dd00c7734145f695784e2d7eaa86bd2daf82386e30079b74e7b3f2c0e",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/run-micro.py": "0eb67f23ce68edc0d0a431b3e191628b2b3f10319e5e80fa3829f83a15e39592",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual-run-binding.json": "63ae968bcfec62855039ee3d2f8c8927b8d6b437e6481f196413738c16bb7093",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual/samples/samples.json": "d761fa68c50c4b9ec04c70dd49d135c237d4fb5db90385c7eb1a1454e7ec9d62",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual/samples/symbolica-state.bin": "8644f1522f5b3dfd95fea2b5ebe0c7ad31bcfd9df5d83f164f5dbeb537278d58",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual/samples/coefficients.bin": "cff64e8bc52995f6785c109559e261ee316176ff5c0c0e1553911f01b2a58a61",
+    "/tmp/rustflow-same-denominator-micro-attempt2": "0f4be5b11e384b87e13f423d7e01bac3e63e6b9a7305f6608e032ccd6d68cfe1",
+    "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/domains/rational_polynomial.rs": "df3f5748f6d5957969c8af1c138696d4d9ac931b9c3dc4429bfe962574baffda"
+  },
+  "maximum_samples": 8,
+  "maximum_coefficients_per_sample": 32,
+  "wall_limit_seconds": 300,
+  "symbolica_owner_anchors": {
+    "integer_from_num_den": [
+      423,
+      459
+    ],
+    "rational_add": [
+      1075,
+      1135
+    ]
+  },
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

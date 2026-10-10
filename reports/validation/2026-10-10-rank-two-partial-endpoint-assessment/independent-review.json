@@ -1,0 +1,28 @@
+{
+  "status": "scoped independent mathematical and exact-bound review; no additional blocker under the stated hypotheses and consumer obligations",
+  "scope": "Rank-at-most-two finite-label partial-placement physical endpoint proposal; not a production permit, theorem implemented in the native projector, fresh HEPKit replay, or numerical integral.",
+  "files_sha256": {
+    "proposal.md": "7322e4d8f04850765838f75bc6e711f195b1ba70d206c38f7650302d54aa143d",
+    "check.py": "52e7e2683bbf8cb91942f533c5001b0fa23b4d02eb19ef9e161cb4cf23904762",
+    "checks.json": "59177a58b4d619357cdf45b60578e11f91f7f91a1f4b479471dae90fcc521322"
+  },
+  "independent_recomputed_bound_witnesses": 384,
+  "native_record_hashes_verified": 3,
+  "checks": [
+    "N denotes N subtracted terms, degrees 0 through N-1; the integral remainder uses N derivatives. The combined jet spend is J+N exactly once in the virtual exponent.",
+    "On each admitted complete UV chart, smooth means and effective-mass coefficients, a positive unit U0, and lambda-J-N>sigma give a uniform sigma-Holder estimate for every required chart derivative of the differentiated kernel, including F0=0. A smaller strict margin accommodates logarithms from dimensional derivatives.",
+    "The principal powers on the closed right half plane have bounded arguments; the proof needs Re eta>=0 and the exact off-null positive-channel identity, not only an on-shell physical-face test.",
+    "Transfer products can be telescoped with one difference at a time. At most one additional sigma of transfer power is required; total P0+J+sigma and the stated radial inequality conservatively dominate all finite allocations.",
+    "Generalized Holder uses a positive real-dimensional normalized angular measure; complex D follows by the common analytic family, not by using Holder on a complex measure.",
+    "Mass jets are differentiated at fixed independent line regulators with original numerator fixed. Bounds |sqrt(r^2-i epsilon)|>=r and one extra radial sigma control differences; no two-sided signed-mass neighborhood is assumed.",
+    "S=0 and deficient-rank supports retain their separate ordinary zero proofs; Q=0 with S>0 supplies a physical endpoint zero, not a finite-eta source zero."
+  ],
+  "remaining_obligations": [
+    "Keep a uniform-in-small-real-T bound after occupation integration by parts when interchanging eta removal and T->0. Fixed-T exponential domination alone does not assert this interchange; compact C^s bounds and uniform Fermi kernel moments must be used.",
+    "Bind every consumed finite label, original coefficient condition and rational reconstruction weight to the actual source/family/placement. Initial target checks cannot grant unbounded family authority.",
+    "A separate consuming owner must connect this physical Holder estimate to the actual regular-singular Frobenius representation, symbolic epsilon-dependent modes, conditions and complete target reconstruction. No native admission follows from this review.",
+    "Exact numerical witness and face samples are algebra checks only; the complete chart/channel proof and common analytic-index/Gaussian continuation are prerequisites, not established by those samples."
+  ],
+  "production_modified": false,
+  "numerical_integrations_run": 0
+}

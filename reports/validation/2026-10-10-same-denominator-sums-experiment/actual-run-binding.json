@@ -1,0 +1,33 @@
+{
+  "scope": "unchanged independent balanced reduction with at most eight costly repeated-denominator buffers retained; prior answer read only after reduction; grouping is not used in this pass",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-same-denominator-actual-attempt1",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/capture.rs": "799951951a076f45b60b3247f57ff44e9e63160ca2ac5b639544a2e5c58d3b1d",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/micro.rs": "e38ce37b54e129e5a37afd3cbd42b4d71b7eda80a11d0b79432b91e87f4eaf1c",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/build.py": "63fcdddfcd6879bc9f5800e197c7857c38b628ab9d3e9e31ed4a354dd54b7cd5",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual-attempt1-build-binding.json": "f338adece9e3558e1606ba0e7a9f1a6eb5ea14f5f4042d8e97bc73ec19b4d0a6",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/tests-attempt1-resources.json": "194306e49729b180ebd814773c57a3ec552555b2dc30d6b3548579dcc75f4562",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/run-actual.py": "8b6bb59de1d980e508585acec5f226b6828f70002a30d2bbfaac70fd447b457b",
+    "/tmp/rustflow-same-denominator-actual-attempt1": "3ad024a8bdbc0fe91a2e756b85db9a4d26a83c57f95f15eae4dab514bc5eb120",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin": "6bd17ce483002ab44043a0dcb958333ab454ea18954f114d510b20f875ee3e82",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.json": "1551e4d3b8d5c538b0879ac7629ca1f9b60d47c576b09d6c635e150065edcb55",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json": "2ad250bc0be44abdf91d6cc72da669b37f8ac0f871ef7ebb86cbd1569ac44e21",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json": "2ab4f65df49278af5c7084c34fdb6a9b8fbaa873082c136283ef6c56a9830d25"
+  },
+  "native_program_rules": 16937,
+  "term_buffer_per_pending_label": 32,
+  "maximum_retained_sample_buffers": 8,
+  "native_application_budget": 100000,
+  "native_pending_key_budget": 100000,
+  "wall_limit_seconds": 600,
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

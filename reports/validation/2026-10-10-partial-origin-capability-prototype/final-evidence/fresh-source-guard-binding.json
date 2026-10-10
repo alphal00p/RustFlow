@@ -1,0 +1,9 @@
+{
+  "all_original_rows_guards_conditions_unchanged": true,
+  "fresh_rows": 52,
+  "imported_rules": 0,
+  "measure_id": "rustflow-weighted-sources-v1:9a3869bf20c4f25231c7b2c2160fec7f5d38307b542134a7119d79a1b1d535fb:58c0591b3a16f1e50e3c40aff182f88e5dd18e38ad1912c56a665335c64f945f:{\"measure\":\"fresh exact family; origin=partial-origin-rank-two-v1;universal-finite-label-JN;no-endpoint-no-infinity:ce73b894552e9655dd7197effab924f95ffc42a83cc4de4abb08856b460e9b22; source presentation=legacy-lorentz; positive compact energy completion powers=false\",\"support\":\"polynomial completions; massless future cuts; positive eta\",\"orientation\":\"existing occupied routing\",\"normalization\":\"existing C/H distribution normalization\",\"branch\":\"independent-native-mass-minus-i-epsilon;future-square-root-real-spatial;epsilon-removed-at-fixed-positive-eta-and-T;real-Fermi-T-limit;then-meromorphic-D;original-polynomial-fixed-in-mass-jets\",\"deformation\":\"only physical slot 0 minus eta; cuts fixed\"}:zero-tail-storage-v1:physical=11:capacity=16;sealed-partial-origin=partial-origin-rank-two-v1;universal-finite-label-JN;no-endpoint-no-infinity:ce73b894552e9655dd7197effab924f95ffc42a83cc4de4abb08856b460e9b22",
+  "program_blake3": "dea763a4d6cc56930129890bcc77bf1a81669fbd3308be9021ea25de53d597e1",
+  "program_bytes": 33847,
+  "zero_domains": 11
+}

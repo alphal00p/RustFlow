@@ -1,0 +1,62 @@
+{
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "rational_addition_phase",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "-A",
+    "unused_imports",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "rustred=/tmp/librustred-verified-program-reuse-20261010.rlib",
+    "--extern",
+    "bincode=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-rational-addition-phase-samples/probe.rs",
+    "-o",
+    "/tmp/rustflow-rational-addition-phase-actual-attempt1"
+  ],
+  "dependencies": {
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    "rustred": {
+      "path": "/tmp/librustred-verified-program-reuse-20261010.rlib",
+      "sha256": "91f0dc1e00677301daf9bb1146fb318f713f6a71a8598534c0d36ca947defd69",
+      "bytes": 227092024
+    },
+    "bincode": {
+      "path": "/common/dev/rustflow_fermi/target/isolated-partial-boundary-validation-libs-20261010/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60",
+      "bytes": 2197214
+    }
+  },
+  "source_sha256": "79fe18a8aa569986213a87503b3a0e3a7d8864954e4ff93e0090dad8912585fd",
+  "mode": "actual",
+  "exit_code": 0,
+  "wall_seconds": 12.135700158774853,
+  "cargo_invoked": false,
+  "executable": {
+    "path": "/tmp/rustflow-rational-addition-phase-actual-attempt1",
+    "sha256": "b0624d7ad09a06002788f07b57f244dc6803819ebb586bf04220efe343f663a8"
+  }
+}

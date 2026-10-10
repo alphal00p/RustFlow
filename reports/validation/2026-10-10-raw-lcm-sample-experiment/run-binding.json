@@ -1,0 +1,50 @@
+{
+  "scope": "only eight restored frozen coefficient samples; canonical raw-LCM with preflight-only fallback versus native sequential/balanced sums",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-raw-lcm-actual-attempt1",
+    "/tmp/rustflow-raw-lcm-samples-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-raw-lcm-sample-experiment/results.json"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-raw-lcm-sample-experiment/tests-attempt2-resources.json": "3c749e6d53adf73c76edce3109ca631b0fd4a9f65ab7dd14f0f6ba8a6a5e182c",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-raw-lcm-sample-experiment/probe.rs": "319efd3f560b14fdf53b486724f2f7985b535f590d932e82aef586bca039eeb1",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-raw-lcm-sample-experiment/build.py": "e6c8509be4f9954319e34ee061763c5f612357db248a581e89cbfd0b240dc39d",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-raw-lcm-sample-experiment/run.py": "ea8c79e3a0c296b5e3f9ccc2caf1f13145c2f7e91c4ae2150b9d5cf8800d16a7",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-raw-lcm-sample-experiment/actual-attempt1-build-binding.json": "7ac2ce39a5418d89fe0c9c0f5c2080242d6c0b49225b8ba4bb7e158a6b6f6564",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/artifact-manifest.json": "e1f50fdda50bcea5a366cdb623ab90165a57dce54862436af8a8198c0982b120",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/archive-map.json": "1e688161cf02b386b3262b54e078b91ead980fa700f0a025c28924b7cd222c28",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-same-denominator-sums-experiment/actual/samples/coefficients.bin.gz": "f4f430a846244d6bbb9aa59cec5aa94cf2959cf55b8543c1de7f38c203e75436",
+    "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/domains/rational_polynomial.rs": "df3f5748f6d5957969c8af1c138696d4d9ac931b9c3dc4429bfe962574baffda",
+    "/tmp/rustflow-raw-lcm-actual-attempt1": "23c24a45e1202f6b83f9bb8a01f13459921be1e07d173e9c1fa79ef1df581d6b",
+    "/tmp/rustflow-raw-lcm-samples-20261010/coefficients.bin": "cff64e8bc52995f6785c109559e261ee316176ff5c0c0e1553911f01b2a58a61",
+    "/tmp/rustflow-raw-lcm-samples-20261010/symbolica-state.bin": "8644f1522f5b3dfd95fea2b5ebe0c7ad31bcfd9df5d83f164f5dbeb537278d58",
+    "/tmp/rustflow-raw-lcm-samples-20261010/samples.json": "d761fa68c50c4b9ec04c70dd49d135c237d4fb5db90385c7eb1a1454e7ec9d62"
+  },
+  "restored_archive": {
+    "original_path": "actual/samples/coefficients.bin",
+    "archive_path": "actual/samples/coefficients.bin.gz",
+    "original_sha256": "cff64e8bc52995f6785c109559e261ee316176ff5c0c0e1553911f01b2a58a61",
+    "archive_sha256": "f4f430a846244d6bbb9aa59cec5aa94cf2959cf55b8543c1de7f38c203e75436",
+    "original_bytes": 45918323,
+    "archive_bytes": 31923371,
+    "roundtrip_verified": true
+  },
+  "wall_limit_seconds": 300,
+  "maximum_samples": 8,
+  "maximum_coefficients": 32,
+  "symbolica_revision": "ed2374f",
+  "owner_lines": {
+    "integer_from_num_den": [
+      423,
+      459
+    ],
+    "rational_add": [
+      1075,
+      1135
+    ]
+  },
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

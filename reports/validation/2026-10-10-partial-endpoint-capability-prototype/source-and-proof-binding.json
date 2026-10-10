@@ -1,0 +1,76 @@
+{
+  "status": "isolated source frozen after runtime gates; independent endpoint implementation review pending",
+  "source_files": {
+    "source/build.py": {
+      "sha256": "eebfa5fe19e5e6440c3937fce035837d26578aa770909669708783d045ca1427",
+      "bytes": 2385
+    },
+    "source/probe.rs": {
+      "sha256": "62dd17ca3dbb2519a97a354bfc22e3a616655c34384d1e47417cfc5efabb2d69",
+      "bytes": 670
+    },
+    "source/src/algebra.rs": {
+      "sha256": "38c92392c4f878c89fac24349fd28f3e4d312d1669475fa06f074d15ccdc2d8a",
+      "bytes": 5615
+    },
+    "source/src/coefficient.rs": {
+      "sha256": "c1ae9dd3d707e8fd66ad54fb7ec442ef17229f2219b59f5aac95db47264bec20",
+      "bytes": 17725
+    },
+    "source/src/finite_density/partial_endpoint.rs": {
+      "sha256": "1fdf57fc045c4c924f892c24686550230d926101b2c9e4615c00ee8dca912de3",
+      "bytes": 27277
+    },
+    "source/src/finite_density/partial_origin.rs": {
+      "sha256": "184ca4a0ea53c0c3ab437c23f7fad8708e871e8ed1ff85b449ad40620ffb3552",
+      "bytes": 60506
+    }
+  },
+  "proof_inputs": {
+    "reports/validation/2026-10-10-rank-two-partial-endpoint-assessment/proposal.md": {
+      "sha256": "7322e4d8f04850765838f75bc6e711f195b1ba70d206c38f7650302d54aa143d",
+      "bytes": 11949
+    },
+    "reports/validation/2026-10-10-rank-two-partial-endpoint-assessment/check.py": {
+      "sha256": "52e7e2683bbf8cb91942f533c5001b0fa23b4d02eb19ef9e161cb4cf23904762",
+      "bytes": 3196
+    },
+    "reports/validation/2026-10-10-rank-two-partial-endpoint-assessment/checks.json": {
+      "sha256": "59177a58b4d619357cdf45b60578e11f91f7f91a1f4b479471dae90fcc521322",
+      "bytes": 146620
+    },
+    "reports/validation/2026-10-10-rank-two-partial-endpoint-assessment/independent-review.json": {
+      "sha256": "9207cec571a6684dcb143f69ea3f99deee7442d2d9f64c9337a8d040c6c63a8b",
+      "bytes": 3280
+    },
+    "reports/validation/2026-10-10-rank-two-partial-endpoint-assessment/thermal-uniformity.md": {
+      "sha256": "86dc8379172bf0bc5a03e37f2a33edd17d249dbcfe5435d1ae135079a45fe528",
+      "bytes": 3797
+    },
+    "reports/validation/2026-10-10-rank-two-partial-endpoint-assessment/thermal-independent-review.json": {
+      "sha256": "53080ee873d12066197c2e043ba2247763556c20d9455195229cd360c97b357f",
+      "bytes": 1243
+    },
+    "reports/validation/2026-10-10-partial-origin-capability-prototype/artifact-manifest.json": {
+      "sha256": "62a338d8abbeaef4b9e9e0658b45e6c9a55636087b9b38a20b922557ddedb49f",
+      "bytes": 6174
+    },
+    "reports/validation/2026-10-10-partial-origin-capability-prototype/independent-review.json": {
+      "sha256": "1d64ed7677015a2b0b1ab2d2550317781822a70cd314e9bfc00d58885e501499",
+      "bytes": 8747
+    },
+    "reports/validation/2026-10-10-partial-origin-capability-prototype/library-copies.json": {
+      "sha256": "f652b42a5c7515e4c95a0c31ab52b8d328f0b48c863a5e7e6e6625ed6bf564fc",
+      "bytes": 1024
+    }
+  },
+  "fixture": {
+    "original_path": "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "copy": "inputs/massless_three_loop_chain.json",
+    "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+  },
+  "origin_logic_change": "Only the appended child-module declaration; original capability logic is unchanged.",
+  "production_files_modified": false,
+  "cargo_invoked": false,
+  "native_mode_authority": false
+}

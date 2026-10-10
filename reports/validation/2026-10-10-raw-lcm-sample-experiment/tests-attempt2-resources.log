@@ -1,0 +1,10 @@
+
+running 5 tests
+test tests::buffer_boundary_and_adversarial_growth ... ok
+test tests::exact_generic_rationals_cancellations_signs ... ok
+test tests::failed_exact_division_is_not_fallback ... ok
+test tests::preflight_decline_preserves_original_order ... ok
+test tests::reject_invalid_canonical_boundaries ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.01s
+

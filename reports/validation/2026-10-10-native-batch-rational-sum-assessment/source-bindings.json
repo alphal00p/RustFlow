@@ -1,0 +1,71 @@
+{
+  "scope": "read-only inspected owners, no modifications",
+  "symbolica_revision": "ed2374f",
+  "files": [
+    {
+      "path": "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/domains/rational_polynomial.rs",
+      "sha256": "df3f5748f6d5957969c8af1c138696d4d9ac931b9c3dc4429bfe962574baffda",
+      "anchors": {
+        "canonical_type": [
+          99,
+          106
+        ],
+        "integer_constructor": [
+          423,
+          459
+        ],
+        "pairwise_add": [
+          1075,
+          1135
+        ]
+      }
+    },
+    {
+      "path": "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/poly.rs",
+      "sha256": "c4a3a56e1fa9c94286aade1529a55d8ce3804303e0dbcadba1d89541b9068d9f",
+      "anchors": {
+        "rational_add_conversion": [
+          1892,
+          1906
+        ]
+      }
+    },
+    {
+      "path": "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/collect.rs",
+      "sha256": "ec0ac39e3299f29d2a1b3320836a86406979017b31dd8e167bef10fcc3596767",
+      "anchors": {
+        "together_factorized_route": [
+          255,
+          331
+        ]
+      }
+    },
+    {
+      "path": "/home/codex-2/.cargo/git/checkouts/symbolica-db3dbb7e8d40efb5/ed2374f/src/domains/factorized_rational_polynomial.rs",
+      "sha256": "52127d7ff58b68fffb158ec59c42d859c57a863ea51d23f79d868614d71985be",
+      "anchors": {
+        "pairwise_add_cancellation": [
+          1144,
+          1245
+        ]
+      }
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/vendor/rustred/crates/rustred-core/src/algebra/coefficient/model.rs",
+      "sha256": "06f4903027c6f4bf6fd6058928e139af847dd4e5554704df4e3085e938c1e4fc"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/vendor/rustred/crates/rustred-core/src/algebra/coefficient/limits.rs",
+      "sha256": "cc08f906d4cf9aa48f2ce830b84f8c78c5141bbf102dfb7c5f1f3e51aa837c7a"
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/vendor/rustred/crates/rustred-core/src/algebra/coefficient/operations.rs",
+      "sha256": "32c669a00037109cf8b5cbf01262bc0bfe22bd585c8306bbc73e9bb4a75e0565"
+    }
+  ],
+  "prior_experiment_manifest": {
+    "path": "reports/validation/2026-10-10-same-denominator-sums-experiment/artifact-manifest.json",
+    "sha256": "e1f50fdda50bcea5a366cdb623ab90165a57dce54862436af8a8198c0982b120"
+  },
+  "status": "feasibility only; no implementation or new execution"
+}

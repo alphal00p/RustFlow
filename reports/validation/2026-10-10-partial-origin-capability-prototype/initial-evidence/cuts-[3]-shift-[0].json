@@ -1,0 +1,4164 @@
+{
+  "version": "partial-origin-rank-two-v1;universal-finite-label-JN;no-endpoint-no-infinity",
+  "prescription": "independent-native-mass-minus-i-epsilon;future-square-root-real-spatial;epsilon-removed-at-fixed-positive-eta-and-T;real-Fermi-T-limit;then-meromorphic-D;original-polynomial-fixed-in-mass-jets",
+  "input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+  "family_signature": [
+    "loops=3;physical=5;input=9;det=-1",
+    "rustflow_occupied::{}::q_0",
+    "rustflow_occupied::{}::q_1",
+    "rustflow_occupied::{}::q_2",
+    "rustflow_occupied::{}::q_3",
+    "rustflow_occupied::{}::q_4",
+    "rustflow_occupied::{}::q_5",
+    "rustflow_occupied::{}::q_6",
+    "rustflow_occupied::{}::q_7",
+    "rustflow_occupied::{}::q_8",
+    "rustflow_occupied::{}::q_3",
+    "rustflow_occupied::{}::q_5",
+    "(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1",
+    "rustflow_occupied::{}::q_0",
+    "(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_4)*-1",
+    "rustflow_occupied::{}::q_4",
+    "rustflow_occupied::{}::q_7",
+    "rustflow_occupied::{}::q_8",
+    "(-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6)*-1",
+    "-1*rustflow_occupied::{}::q_6+1",
+    "rustflow_occupied::{}::q_6",
+    "Ordinary",
+    "Ordinary",
+    "Ordinary",
+    "RequiredCut",
+    "Ordinary",
+    "Ordinary",
+    "Ordinary",
+    "Ordinary",
+    "Ordinary",
+    "Occupation",
+    "Occupation",
+    "0",
+    "1",
+    "0",
+    "0",
+    "0",
+    "1",
+    "-1",
+    "1",
+    "0",
+    "shell=0:3:9:10:0:1",
+    "target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]:-1",
+    "target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0]:-1",
+    "target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0]:-1"
+  ],
+  "source_options": {
+    "policy": "legacy-lorentz",
+    "positive_compact_energy_powers": false,
+    "free_virtual_zero_sectors": true
+  },
+  "cuts": [
+    3
+  ],
+  "shifted": [
+    0
+  ],
+  "virtual_slots": [
+    0,
+    1,
+    2,
+    4
+  ],
+  "pure_compact_slots": [],
+  "routed_rows": [
+    [
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "1"
+    ],
+    [
+      "-1",
+      "1",
+      "0"
+    ],
+    [
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "1",
+      "-1",
+      "1"
+    ]
+  ],
+  "translation": [
+    [
+      "1"
+    ],
+    [
+      "0"
+    ]
+  ],
+  "translated_rows": [
+    [
+      "1",
+      "1",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "1"
+    ],
+    [
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "-1",
+      "1"
+    ]
+  ],
+  "compact_loops": 1,
+  "virtual_loops": 2,
+  "complete_supports": [
+    {
+      "active": [],
+      "rank": 0,
+      "class": {
+        "FreeVirtual": {
+          "null_direction": [
+            "1",
+            "0"
+          ]
+        }
+      },
+      "full": null,
+      "charts": []
+    },
+    {
+      "active": [
+        0
+      ],
+      "rank": 1,
+      "class": {
+        "FreeVirtual": {
+          "null_direction": [
+            "0",
+            "1"
+          ]
+        }
+      },
+      "full": null,
+      "charts": []
+    },
+    {
+      "active": [
+        1
+      ],
+      "rank": 1,
+      "class": {
+        "FreeVirtual": {
+          "null_direction": [
+            "1",
+            "0"
+          ]
+        }
+      },
+      "full": null,
+      "charts": []
+    },
+    {
+      "active": [
+        0,
+        1
+      ],
+      "rank": 2,
+      "class": {
+        "FiniteEtaJets": {
+          "shifted_positive": [
+            0
+          ],
+          "kinematics_vanish": true
+        }
+      },
+      "full": {
+        "u": [
+          {
+            "exponents": [
+              1,
+              1
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "pairs": [],
+        "diagonal": [
+          []
+        ],
+        "line_masses": [
+          [
+            {
+              "exponents": [
+                2,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                1,
+                2
+              ],
+              "coefficient": "1"
+            }
+          ]
+        ],
+        "eta": [
+          {
+            "exponents": [
+              2,
+              1
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "native_u": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1",
+        "native_f": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass0"
+      },
+      "charts": [
+        {
+          "primary": 0,
+          "pivot": 1,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        },
+        {
+          "primary": 1,
+          "pivot": 0,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "1"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "active": [
+        2
+      ],
+      "rank": 1,
+      "class": {
+        "FreeVirtual": {
+          "null_direction": [
+            "0",
+            "1"
+          ]
+        }
+      },
+      "full": null,
+      "charts": []
+    },
+    {
+      "active": [
+        0,
+        2
+      ],
+      "rank": 1,
+      "class": {
+        "FreeVirtual": {
+          "null_direction": [
+            "0",
+            "1"
+          ]
+        }
+      },
+      "full": null,
+      "charts": []
+    },
+    {
+      "active": [
+        1,
+        2
+      ],
+      "rank": 2,
+      "class": "RegulatedVacuumZero",
+      "full": {
+        "u": [
+          {
+            "exponents": [
+              1,
+              1
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "pairs": [],
+        "diagonal": [
+          []
+        ],
+        "line_masses": [
+          [
+            {
+              "exponents": [
+                2,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                1,
+                2
+              ],
+              "coefficient": "1"
+            }
+          ]
+        ],
+        "eta": [],
+        "native_u": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1",
+        "native_f": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass0"
+      },
+      "charts": [
+        {
+          "primary": 1,
+          "pivot": 2,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        },
+        {
+          "primary": 2,
+          "pivot": 1,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "1"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "active": [
+        0,
+        1,
+        2
+      ],
+      "rank": 2,
+      "class": {
+        "FiniteEtaJets": {
+          "shifted_positive": [
+            0
+          ],
+          "kinematics_vanish": false
+        }
+      },
+      "full": {
+        "u": [
+          {
+            "exponents": [
+              0,
+              1,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              1,
+              1,
+              0
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "pairs": [],
+        "diagonal": [
+          [
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ]
+        ],
+        "line_masses": [
+          [
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                2,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                2,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                2,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                1,
+                2
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ]
+        ],
+        "eta": [
+          {
+            "exponents": [
+              1,
+              1,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              2,
+              1,
+              0
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "native_u": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2",
+        "native_f": "-1*rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::shell0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2^2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass1"
+      },
+      "charts": [
+        {
+          "primary": 0,
+          "pivot": 1,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0",
+            "rustflow_partial_origin::{}::z1"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 1,
+          "pivot": 0,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 1,
+          "pivot": 2,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 2,
+          "pivot": 1,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0",
+            "1"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "active": [
+        4
+      ],
+      "rank": 1,
+      "class": {
+        "FreeVirtual": {
+          "null_direction": [
+            "1",
+            "1"
+          ]
+        }
+      },
+      "full": null,
+      "charts": []
+    },
+    {
+      "active": [
+        0,
+        4
+      ],
+      "rank": 2,
+      "class": {
+        "FiniteEtaJets": {
+          "shifted_positive": [
+            0
+          ],
+          "kinematics_vanish": true
+        }
+      },
+      "full": {
+        "u": [
+          {
+            "exponents": [
+              1,
+              1
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "pairs": [],
+        "diagonal": [
+          []
+        ],
+        "line_masses": [
+          [
+            {
+              "exponents": [
+                2,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                1,
+                2
+              ],
+              "coefficient": "1"
+            }
+          ]
+        ],
+        "eta": [
+          {
+            "exponents": [
+              2,
+              1
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "native_u": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1",
+        "native_f": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass0"
+      },
+      "charts": [
+        {
+          "primary": 0,
+          "pivot": 4,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 0,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "1"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "active": [
+        1,
+        4
+      ],
+      "rank": 2,
+      "class": "RegulatedVacuumZero",
+      "full": {
+        "u": [
+          {
+            "exponents": [
+              1,
+              1
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "pairs": [],
+        "diagonal": [
+          []
+        ],
+        "line_masses": [
+          [
+            {
+              "exponents": [
+                2,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                1,
+                2
+              ],
+              "coefficient": "1"
+            }
+          ]
+        ],
+        "eta": [],
+        "native_u": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1",
+        "native_f": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass0"
+      },
+      "charts": [
+        {
+          "primary": 1,
+          "pivot": 4,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 1,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "1"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "active": [
+        0,
+        1,
+        4
+      ],
+      "rank": 2,
+      "class": {
+        "FiniteEtaJets": {
+          "shifted_positive": [
+            0
+          ],
+          "kinematics_vanish": false
+        }
+      },
+      "full": {
+        "u": [
+          {
+            "exponents": [
+              0,
+              1,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              1,
+              0,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              1,
+              1,
+              0
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "pairs": [],
+        "diagonal": [
+          [
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ]
+        ],
+        "line_masses": [
+          [
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                2,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                2,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                2,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                2,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                1,
+                2
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                2
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ]
+        ],
+        "eta": [
+          {
+            "exponents": [
+              1,
+              1,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              2,
+              0,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              2,
+              1,
+              0
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "native_u": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha2+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2",
+        "native_f": "-1*rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::shell0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha2^2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2^2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass1"
+      },
+      "charts": [
+        {
+          "primary": 0,
+          "pivot": 1,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 0,
+          "pivot": 4,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 1,
+          "pivot": 0,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 1,
+          "pivot": 4,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 0,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 1,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0",
+            "1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "active": [
+        2,
+        4
+      ],
+      "rank": 2,
+      "class": "RegulatedVacuumZero",
+      "full": {
+        "u": [
+          {
+            "exponents": [
+              1,
+              1
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "pairs": [],
+        "diagonal": [
+          []
+        ],
+        "line_masses": [
+          [
+            {
+              "exponents": [
+                2,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                1,
+                2
+              ],
+              "coefficient": "1"
+            }
+          ]
+        ],
+        "eta": [],
+        "native_u": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1",
+        "native_f": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass0"
+      },
+      "charts": [
+        {
+          "primary": 2,
+          "pivot": 4,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 2,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "1"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "active": [
+        0,
+        2,
+        4
+      ],
+      "rank": 2,
+      "class": {
+        "FiniteEtaJets": {
+          "shifted_positive": [
+            0
+          ],
+          "kinematics_vanish": false
+        }
+      },
+      "full": {
+        "u": [
+          {
+            "exponents": [
+              0,
+              1,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              1,
+              0,
+              1
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "pairs": [],
+        "diagonal": [
+          [
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "-1"
+            }
+          ]
+        ],
+        "line_masses": [
+          [
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                2,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                2,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                1,
+                2
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                2
+              ],
+              "coefficient": "1"
+            }
+          ]
+        ],
+        "eta": [
+          {
+            "exponents": [
+              1,
+              1,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              2,
+              0,
+              1
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "native_u": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha2+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2",
+        "native_f": "-1*rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::shell0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha2^2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2^2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass1"
+      },
+      "charts": [
+        {
+          "primary": 0,
+          "pivot": 4,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 2,
+          "pivot": 4,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z1",
+            "1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 0,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 0,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 2,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0",
+            "1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "active": [
+        1,
+        2,
+        4
+      ],
+      "rank": 2,
+      "class": "RegulatedVacuumZero",
+      "full": {
+        "u": [
+          {
+            "exponents": [
+              0,
+              1,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              1,
+              0,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              1,
+              1,
+              0
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "pairs": [],
+        "diagonal": [
+          []
+        ],
+        "line_masses": [
+          [
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                2,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                2,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                2,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                2,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                1,
+                2
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                2
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ]
+        ],
+        "eta": [],
+        "native_u": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha2+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2",
+        "native_f": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha2^2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2^2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass1"
+      },
+      "charts": [
+        {
+          "primary": 1,
+          "pivot": 2,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        },
+        {
+          "primary": 1,
+          "pivot": 4,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        },
+        {
+          "primary": 2,
+          "pivot": 1,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        },
+        {
+          "primary": 2,
+          "pivot": 4,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 1,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 2,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0",
+            "1"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              []
+            ],
+            [
+              []
+            ]
+          ],
+          "v_units": [
+            [
+              []
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "active": [
+        0,
+        1,
+        2,
+        4
+      ],
+      "rank": 2,
+      "class": {
+        "FiniteEtaJets": {
+          "shifted_positive": [
+            0
+          ],
+          "kinematics_vanish": false
+        }
+      },
+      "full": {
+        "u": [
+          {
+            "exponents": [
+              0,
+              0,
+              1,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              0,
+              1,
+              0,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              0,
+              1,
+              1,
+              0
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              1,
+              0,
+              0,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              1,
+              1,
+              0,
+              0
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "pairs": [],
+        "diagonal": [
+          [
+            {
+              "exponents": [
+                1,
+                0,
+                1,
+                1
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "-1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1,
+                0
+              ],
+              "coefficient": "-1"
+            }
+          ]
+        ],
+        "line_masses": [
+          [
+            {
+              "exponents": [
+                1,
+                0,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                2,
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                2,
+                1,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                2,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                2,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                2,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                0,
+                2,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                2,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          [
+            {
+              "exponents": [
+                0,
+                0,
+                1,
+                2
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0,
+                2
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                0,
+                2
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ]
+        ],
+        "eta": [
+          {
+            "exponents": [
+              1,
+              0,
+              1,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              1,
+              1,
+              0,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              1,
+              1,
+              1,
+              0
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              2,
+              0,
+              0,
+              1
+            ],
+            "coefficient": "1"
+          },
+          {
+            "exponents": [
+              2,
+              1,
+              0,
+              0
+            ],
+            "coefficient": "1"
+          }
+        ],
+        "native_u": "rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha3+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha3+rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::alpha3",
+        "native_f": "-1*rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::shell0+-1*rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::shell0+-1*rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::shell0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass3+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha0*rustflow_partial_origin::{}::alpha3^2*rustflow_partial_origin::{}::mass3+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::eta+rustflow_partial_origin::{}::alpha0^2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass0+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass3+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha2^2*rustflow_partial_origin::{}::mass2+rustflow_partial_origin::{}::alpha1*rustflow_partial_origin::{}::alpha3^2*rustflow_partial_origin::{}::mass3+rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha1^2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass1+rustflow_partial_origin::{}::alpha2*rustflow_partial_origin::{}::alpha3^2*rustflow_partial_origin::{}::mass3+rustflow_partial_origin::{}::alpha2^2*rustflow_partial_origin::{}::alpha3*rustflow_partial_origin::{}::mass2"
+      },
+      "charts": [
+        {
+          "primary": 0,
+          "pivot": 1,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0",
+            "rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z2"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 0,
+          "pivot": 4,
+          "parameter_map": [
+            "1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z2",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 1,
+          "pivot": 0,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z2"
+          ],
+          "jacobian_x_power": 2,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    2,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 1,
+          "pivot": 2,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "1",
+            "rustflow_partial_origin::{}::z0",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z2"
+          ],
+          "jacobian_x_power": 2,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    2,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 1,
+          "pivot": 4,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z2",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 2,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    2,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 2,
+          "pivot": 1,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0",
+            "1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z2"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 2,
+          "pivot": 4,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z2",
+            "1",
+            "rustflow_partial_origin::{}::z0"
+          ],
+          "jacobian_x_power": 1,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 0,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z2",
+            "1"
+          ],
+          "jacobian_x_power": 2,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    0,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    2,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 1,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z2",
+            "1"
+          ],
+          "jacobian_x_power": 2,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    2,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        },
+        {
+          "primary": 4,
+          "pivot": 2,
+          "parameter_map": [
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z1",
+            "rustflow_partial_origin::{}::z0*rustflow_partial_origin::{}::z2",
+            "rustflow_partial_origin::{}::z0",
+            "1"
+          ],
+          "jacobian_x_power": 2,
+          "unit_lower_bound": "1",
+          "u_unit": [
+            {
+              "exponents": [
+                0,
+                0,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                0,
+                1,
+                0
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                0,
+                1
+              ],
+              "coefficient": "1"
+            },
+            {
+              "exponents": [
+                1,
+                1,
+                1
+              ],
+              "coefficient": "1"
+            }
+          ],
+          "mean_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ],
+            [
+              [
+                {
+                  "exponents": [
+                    0,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ],
+          "v_units": [
+            [
+              [
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    0
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    1,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                },
+                {
+                  "exponents": [
+                    2,
+                    1,
+                    1
+                  ],
+                  "coefficient": "1"
+                }
+              ]
+            ]
+          ]
+        }
+      ]
+    }
+  ],
+  "factor_degrees": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    1,
+    1,
+    1,
+    0,
+    0
+  ],
+  "operations": 851,
+  "polynomial_terms": 339
+}

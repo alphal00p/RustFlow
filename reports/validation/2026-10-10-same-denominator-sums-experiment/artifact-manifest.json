@@ -1,0 +1,197 @@
+{
+  "scope": "frozen exact grouping controls; negative/mixed optimization evidence",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "a200fb785c69af522edcbf25cda74de1f236c39b70b7eed8195bdf9ac7492fc0",
+      "bytes": 3067
+    },
+    {
+      "path": "actual/progress-balanced.json",
+      "sha256": "d9889c3ee85ae81f75f5f10225a443c057697a525b417dde11d8797066193a38",
+      "bytes": 1723
+    },
+    {
+      "path": "actual/progress.json",
+      "sha256": "777ec2bc2effe552a9ac0ca8e713c0a06b250d82db63cafe07826883bebca782",
+      "bytes": 966
+    },
+    {
+      "path": "actual/result.json",
+      "sha256": "903ec881a5e93f44621daeddcc1112023cf56634d070881b9c12f12cc704cb9f",
+      "bytes": 148324
+    },
+    {
+      "path": "actual/samples/coefficients.bin.gz",
+      "sha256": "f4f430a846244d6bbb9aa59cec5aa94cf2959cf55b8543c1de7f38c203e75436",
+      "bytes": 31923371
+    },
+    {
+      "path": "actual/samples/samples.json",
+      "sha256": "d761fa68c50c4b9ec04c70dd49d135c237d4fb5db90385c7eb1a1454e7ec9d62",
+      "bytes": 67072
+    },
+    {
+      "path": "actual/samples/symbolica-state.bin",
+      "sha256": "8644f1522f5b3dfd95fea2b5ebe0c7ad31bcfd9df5d83f164f5dbeb537278d58",
+      "bytes": 1511
+    },
+    {
+      "path": "actual-attempt1-build-binding.json",
+      "sha256": "f338adece9e3558e1606ba0e7a9f1a6eb5ea14f5f4042d8e97bc73ec19b4d0a6",
+      "bytes": 2674
+    },
+    {
+      "path": "actual-attempt1-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "actual-resources.json",
+      "sha256": "ef45079f2ff9891e5ecd98ba2dbc17ae4126460e715d785066174818cc752e1e",
+      "bytes": 761
+    },
+    {
+      "path": "actual-resources.log",
+      "sha256": "b6913e3365708f69c5d04764bad59dbc5752dc9ba4b00c0f7574c902d3b66aab",
+      "bytes": 599
+    },
+    {
+      "path": "actual-resources.provenance.json",
+      "sha256": "abe8205541e239855c33f1e6e24f7944edf77fb1f7e0c3af752122ed4daadff6",
+      "bytes": 2213
+    },
+    {
+      "path": "actual-run-binding.json",
+      "sha256": "63ae968bcfec62855039ee3d2f8c8927b8d6b437e6481f196413738c16bb7093",
+      "bytes": 2914
+    },
+    {
+      "path": "archive-map.json",
+      "sha256": "1e688161cf02b386b3262b54e078b91ead980fa700f0a025c28924b7cd222c28",
+      "bytes": 495
+    },
+    {
+      "path": "build-micro-corrected.py",
+      "sha256": "321f829ded521937ac31af24c7af540b9895b9954e2214244357044dcdeffd3e",
+      "bytes": 1633
+    },
+    {
+      "path": "build.py",
+      "sha256": "63fcdddfcd6879bc9f5800e197c7857c38b628ab9d3e9e31ed4a354dd54b7cd5",
+      "bytes": 1623
+    },
+    {
+      "path": "capture.rs",
+      "sha256": "799951951a076f45b60b3247f57ff44e9e63160ca2ac5b639544a2e5c58d3b1d",
+      "bytes": 34061
+    },
+    {
+      "path": "cas-source-binding.json",
+      "sha256": "2fc41270515d80ca7d9e1a3c6ce13c4cfad70124ef56e1b724d4a1a55fdffa85",
+      "bytes": 410
+    },
+    {
+      "path": "methodology.md",
+      "sha256": "fc05292d51af5c93a01027c23130c4944424c801820aae7fe8b6d2ff104f69d2",
+      "bytes": 3039
+    },
+    {
+      "path": "micro-attempt1-build-binding.json",
+      "sha256": "592a5f8fc9915ff73cbeea76387b25c2ada849c2927b0f1525245c56b78eb072",
+      "bytes": 2506
+    },
+    {
+      "path": "micro-attempt1-build.log",
+      "sha256": "97c496fe75f1a32d8b9842ce2335e48608784903ccef1890f54b604f221fade8",
+      "bytes": 443
+    },
+    {
+      "path": "micro-attempt2-build-binding.json",
+      "sha256": "19f29d8dd00c7734145f695784e2d7eaa86bd2daf82386e30079b74e7b3f2c0e",
+      "bytes": 2680
+    },
+    {
+      "path": "micro-attempt2-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "micro-corrected.rs",
+      "sha256": "f3c0963dd31e0ebf6d3b6cb0007a2e3942a36a8613df5f02a5677bfd98bf385d",
+      "bytes": 30963
+    },
+    {
+      "path": "micro-resources.json",
+      "sha256": "990e06c2a445916d8954d1315df17e4362693c74639c8ed799cffce22f1d2dae",
+      "bytes": 559
+    },
+    {
+      "path": "micro-resources.log",
+      "sha256": "1732477ec415c09df1669e2dfeddf9efd052a8645d365b86735ab3408c93fc72",
+      "bytes": 144
+    },
+    {
+      "path": "micro-resources.provenance.json",
+      "sha256": "3a3141e3974464508cd9646e2235e72b1a7062a2f655b84b864fde0216d3246a",
+      "bytes": 971
+    },
+    {
+      "path": "micro-results.json",
+      "sha256": "19e0e7211c27ce1525bb43cb4e7cc69f927dc40ba3a7589e40594d948256a30f",
+      "bytes": 15351
+    },
+    {
+      "path": "micro-run-binding.json",
+      "sha256": "fd899635e6282ba7b9aba5952765076fc143fbd4a155209d210e56a83ccd2f75",
+      "bytes": 2638
+    },
+    {
+      "path": "micro.rs",
+      "sha256": "e38ce37b54e129e5a37afd3cbd42b4d71b7eda80a11d0b79432b91e87f4eaf1c",
+      "bytes": 30961
+    },
+    {
+      "path": "run-actual.py",
+      "sha256": "8b6bb59de1d980e508585acec5f226b6828f70002a30d2bbfaac70fd447b457b",
+      "bytes": 1747
+    },
+    {
+      "path": "run-micro.py",
+      "sha256": "0eb67f23ce68edc0d0a431b3e191628b2b3f10319e5e80fa3829f83a15e39592",
+      "bytes": 1836
+    },
+    {
+      "path": "summary.json",
+      "sha256": "e639d4ccec76d33ef6adaf40b3e55a730104fee7b5782e5754c06c755dd236a3",
+      "bytes": 8647
+    },
+    {
+      "path": "tests-attempt1-build-binding.json",
+      "sha256": "90a5735e3ec3c2367ae1aea32c62801f579227ac1060195d6f342b30b6496265",
+      "bytes": 2685
+    },
+    {
+      "path": "tests-attempt1-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "tests-attempt1-resources.json",
+      "sha256": "194306e49729b180ebd814773c57a3ec552555b2dc30d6b3548579dcc75f4562",
+      "bytes": 385
+    },
+    {
+      "path": "tests-attempt1-resources.log",
+      "sha256": "b57f4e430d6a6377a02ef9efb7f25e3bd334ed4e199a2146dd2aa811f37f5f8c",
+      "bytes": 1398
+    },
+    {
+      "path": "tests-attempt1-resources.provenance.json",
+      "sha256": "87ffc2b34269987c6ff50a6ce9506c7f098f2b640cb58e63cf89922e5254ab91",
+      "bytes": 786
+    }
+  ],
+  "file_count": 38,
+  "restore_map": "archive-map.json"
+}

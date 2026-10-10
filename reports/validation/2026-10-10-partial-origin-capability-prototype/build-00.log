@@ -1,0 +1,39 @@
+error[E0689]: can't call method `saturating_sub` on ambiguous numeric type `{integer}`
+   --> /tmp/rustflow-partial-origin-20261010/src/finite_density/partial_origin.rs:134:107
+    |
+134 |  out.push(Chart{primary:active[i],pivot:pivot.map(|j|active[j]),parameter_map,jacobian_x_power:transverse.saturating_sub(1),unit_lo...
+    |                                                                                                           ^^^^^^^^^^^^^^
+    |
+help: you must specify a type for this binding, like `i32`
+    |
+124 |  let variables=(0..active.len()-1).map(|j|atom(&format!("z{j}"))).collect::<Vec<_>>();let mut map=BTreeMap::new();let mut position=if h==1{0}else{1};let mut transverse: i32=0;let mut parameter_map=Vec::new();
+    |                                                                                                                                                                        +++++
+
+error[E0308]: mismatched types
+   --> /tmp/rustflow-partial-origin-20261010/src/finite_density/partial_origin.rs:228:237
+    |
+228 | ...).unwrap();assert_eq!(audit.jets_including_lower,(n-1)+(upper-1).max(0)+(lower-1).max(0));assert!(audit.subtracted_terms>0);asse...
+    |               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `u64`, found `i64`
+
+error[E0277]: can't compare `u64` with `i64`
+   --> /tmp/rustflow-partial-origin-20261010/src/finite_density/partial_origin.rs:228:237
+    |
+228 | ...wrap();assert_eq!(audit.jets_including_lower,(n-1)+(upper-1).max(0)+(lower-1).max(0));assert!(audit.subtracted_terms>0);assert!(...
+    |           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ no implementation for `u64 == i64`
+    |
+    = help: the trait `PartialEq<i64>` is not implemented for `u64`
+    = help: `u64` implements trait `PartialEq<Rhs>`:
+              PartialEq<BackendRational>
+              PartialEq<MultiPrecisionFloat>
+              PartialEq<MultiPrecisionInteger>
+              PartialEq<pyo3::instance::Bound<'_, pyo3::types::num::PyInt>>
+              PartialEq<rend::BigEndian<u64>>
+              PartialEq<rend::LittleEndian<u64>>
+              PartialEq<rend::NativeEndian<u64>>
+              PartialEq<rug::complex::big::Complex>
+            and 4 others
+
+error: aborting due to 3 previous errors
+
+Some errors have detailed explanations: E0277, E0308, E0689.
+For more information about an error, try `rustc --explain E0277`.

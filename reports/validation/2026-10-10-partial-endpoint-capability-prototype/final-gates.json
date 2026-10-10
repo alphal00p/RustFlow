@@ -1,0 +1,56 @@
+{
+  "command": [
+    "/tmp/rustflow-partial-endpoint-20261010/prototype-tests",
+    "finite_density::partial_origin::",
+    "--test-threads=1",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.8429704518057406,
+  "binary_sha256": "9a4b9a0cc499d64805e78f268a82b7c75de2fae8ab66dfce8aff9f20e01eea8f",
+  "build_file": "build-01.json",
+  "build_sha256": "839f3045efa4e810d557b239cfc368669f2afc8f6eb3865fb335860a652a532a",
+  "runner_sha256": "75ebd4fea353830347b225d229751c75bdac559243174364556df386f42a91fd",
+  "log_sha256": "8e27930cd1e2d6679f89e061ff4b49c34b9d2bd9ca703581ae80ed9cc018d1cd",
+  "evidence": {
+    "final-evidence/endpoint/cuts-[0, 3]-shift-[1, 2].json": {
+      "sha256": "e4e3edb480b32206d4f24b84d25e3ac6bafe8694887e0703789bed80d1e72ea4",
+      "bytes": 24151
+    },
+    "final-evidence/endpoint/cuts-[0, 3]-shift-[2, 4].json": {
+      "sha256": "03ddcb4438216c1eb21d5cf62e77e34ee2d4c404d6b154acf18ebf6a9f3def41",
+      "bytes": 24150
+    },
+    "final-evidence/endpoint/cuts-[3]-shift-[0].json": {
+      "sha256": "a4db598a0faa115095f7b67758dbf31683528f1c33aabb9128a0a438b151377b",
+      "bytes": 122067
+    },
+    "final-evidence/endpoint/finite-label-audits.json": {
+      "sha256": "110ba9cd267fb0c8d64d37b0288f6d16f1ac39b0f37147edfccf5f5ff10faf60",
+      "bytes": 55070
+    },
+    "final-evidence/origin/cuts-[0, 3]-shift-[1, 2].json": {
+      "sha256": "f611bd39474a4bc54b4e347dc724acb119f4b75b2fe7cf50471e1edd7331b1ee",
+      "bytes": 13585
+    },
+    "final-evidence/origin/cuts-[0, 3]-shift-[2, 4].json": {
+      "sha256": "efb21030bce51421f9c58ed47da4d2dc2bc2f70fe7f0df807b8e4035618fd281",
+      "bytes": 13584
+    },
+    "final-evidence/origin/cuts-[3]-shift-[0].json": {
+      "sha256": "c923ba4dc3a7d3c43f04e8aad2bef1cdecaf0bad8d241ee482d6bc067359b1eb",
+      "bytes": 97512
+    },
+    "final-evidence/origin/fresh-source-guard-binding.json": {
+      "sha256": "4efde5dccedeab41bd8b736cb49a7c02b534ea576bfd79ec0fbab8bcff04c85e",
+      "bytes": 1351
+    },
+    "final-evidence/origin/off-null-regulator-checks.json": {
+      "sha256": "76000a380b37493e3361e77b8473b3876651831d6ea1cef00586dc5a2763a2c4",
+      "bytes": 327
+    }
+  },
+  "production_admission": false,
+  "native_mode_authority": false,
+  "cargo_invoked": false
+}

@@ -1,0 +1,15 @@
+
+running 10 tests
+test finite_density::partial_origin::tests::actual_native_full_channel_rejects_timelike_sum ... ok
+test finite_density::partial_origin::tests::actual_singleton_and_both_double_masks_replay_all_native_supports ... ok
+test finite_density::partial_origin::tests::all_finite_jets_and_negative_polynomial_powers_have_explicit_open_witness ... ok
+test finite_density::partial_origin::tests::binding_options_roles_and_storage_fail_before_zero ... ok
+test finite_density::partial_origin::tests::every_global_budget_rejects_without_partial_capability ... ok
+test finite_density::partial_origin::tests::fresh_actual_sources_bind_origin_zero_guards_and_reject_foreign_context ... ok
+test finite_density::partial_origin::tests::full_off_null_regulator_gap_and_same_phase_hold_on_closed_support_faces ... ok
+test finite_density::partial_origin::tests::invalid_partial_placement_and_physical_mass_reject ... ok
+test finite_density::partial_origin::tests::omitted_support_chart_and_native_off_null_data_cannot_replay ... ok
+test finite_density::partial_origin::tests::shifted_only_rank_counterexample_and_v_zero_are_not_finite_eta_zeros ... ok
+
+test result: ok. 10 passed; 0 failed; 0 ignored; 0 measured; 11 filtered out; finished in 0.38s
+

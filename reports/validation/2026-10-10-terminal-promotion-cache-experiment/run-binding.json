@@ -1,0 +1,21 @@
+{
+  "scope": "small isolated whole-call terminal-promotion cache tests against pinned native API; no actual slow target or source changes",
+  "command": [
+    "timeout",
+    "120",
+    "/tmp/rustflow-terminal-promotion-tests-attempt1",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-cache-experiment/probe.rs": "c843cc8d019f60b8fd6da8822ef70dcd70bc945f9d9b0aa150a242a5f566113d",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-cache-experiment/build.py": "b1e862d0d77eabf2094baf327754212db05309c9af3d4d6df0a59581f65f7c56",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-cache-experiment/run.py": "b397adc284768949496ef6d44e78c482cc7fac34df7baa93f97c1bb1139159de",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-terminal-promotion-cache-experiment/tests-attempt1-build-binding.json": "933208c8abd5422423601ad91515186534cabb432acb49d61f008e310da7baca",
+    "/tmp/rustflow-terminal-promotion-tests-attempt1": "6e97cd3be4b39a153736375b9ea7a3493cd9423d0e8a271feb3be2973835526e",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-requested-ray-point-integration/run-resource-command.py": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c"
+  },
+  "maximum_wall_seconds": 120,
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

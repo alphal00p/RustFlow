@@ -1,0 +1,41 @@
+{
+  "completed_timings": [
+    {
+      "phase": "read_program_bytes",
+      "system_cpu_ticks": 2,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.013243991
+    },
+    {
+      "phase": "inspect_envelope",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00003067
+    },
+    {
+      "phase": "decode_program_record",
+      "system_cpu_ticks": 4,
+      "user_cpu_ticks": 75,
+      "wall_seconds": 0.800404606
+    },
+    {
+      "phase": "import_symbolica_and_coefficient_table",
+      "system_cpu_ticks": 1,
+      "user_cpu_ticks": 2,
+      "wall_seconds": 0.034184296
+    },
+    {
+      "phase": "construct_exact_source_context",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.001610355
+    },
+    {
+      "phase": "decode_generated_and_replay_all_rules",
+      "system_cpu_ticks": 20,
+      "user_cpu_ticks": 11698,
+      "wall_seconds": 118.0143228
+    }
+  ],
+  "phase": "bind_frontier_terminals"
+}

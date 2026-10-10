@@ -1,0 +1,18 @@
+{
+  "libraries": {
+    "libsymbolica_amflow-bc386786e4706ace.rlib": {
+      "original_path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "copied_path": "/tmp/rustflow-partial-origin-20261010/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "sha256": "62ef412df163cd5bef1292b45adab67d6e3937b9e311aefcaec52a2fc7262f49",
+      "bytes": 640335308
+    },
+    "librustred-392075d0c6995fd1.rlib": {
+      "original_path": "/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+      "copied_path": "/tmp/rustflow-partial-origin-20261010/deps/librustred-392075d0c6995fd1.rlib",
+      "sha256": "5d762d4ed3dda9eb36ae301d90580ca73c57c4a1c666eb4584f106a62eabd615",
+      "bytes": 435855206
+    }
+  },
+  "source_provenance": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-reuse-integration/verified-reuse-build-provenance.json",
+  "source_provenance_sha256": "7e248e37487aa2190aca715a2825b445320dae8a42154f3d71640e2466080569"
+}
