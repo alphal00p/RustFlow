@@ -1,0 +1,24 @@
+{
+  "captured_utc": "2026-10-10T09:14:39.427269+00:00",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/rustred-258a1e04558e72f1",
+    "solver::guarded",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "target/release/deps/rustred-258a1e04558e72f1": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/rustred-258a1e04558e72f1",
+      "sha256": "00068fbeaf4ca0cc7130e9cb50545790c3261cf1f0435c330d1773dca9c769f5",
+      "size_bytes": 633481280
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

@@ -1,0 +1,8 @@
+
+running 1 test
+test runtime_graph_occupied_flow ... DifferentialClosure { round: 0, requested: 17, basis_size: 14, new_derivatives: 14 }
+DifferentialClosure { round: 1, requested: 96, basis_size: 93, new_derivatives: 93 }
+DifferentialClosure { round: 2, requested: 229, basis_size: 222, new_derivatives: 219 }
+DifferentialClosure { round: 3, requested: 600, basis_size: 590, new_derivatives: 582 }
+DifferentialClosure { round: 4, requested: 848, basis_size: 835, new_derivatives: 825 }
+DifferentialClosure { round: 5, requested: 944, basis_size: 928, new_derivatives: 917 }

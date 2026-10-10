@@ -237,6 +237,7 @@ impl PreparedOccupiedTerminal {
             construction: "compact_polynomial_moments",
             source_options: None,
             massless_endpoint: None,
+            partial_continuation: None,
         })
     }
 }

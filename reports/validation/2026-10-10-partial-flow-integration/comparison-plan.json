@@ -1,0 +1,70 @@
+{
+  "status": "comparison plan frozen before new predictions; report-local certificate-aware validators, original numerical arithmetic and tolerances unchanged",
+  "scope": "Partial occupied-flow integration: unchanged lower-loop all-shift regression definitions and thresholds. Massless fixed/Laurent enable bounded memo; massive default remains disabled. Partial direct control is a separate selected-sector report.",
+  "relative_tolerance": "1e-12",
+  "small_magnitude_threshold": "1e-20",
+  "small_absolute_tolerance": "1e-25",
+  "imaginary_zero_absolute_tolerance": "1e-25",
+  "required_sample_profiles": 4,
+  "required_laurent_profiles": 5,
+  "massive_profiles": 1,
+  "gates": {
+    "two-loop-fixed": {
+      "comparator": "reports/validation/2026-10-10-partial-flow-integration/compare_massless_reference.py",
+      "reference": "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json",
+      "scope": "Complete two-loop massless fixed predictions; unchanged independent references and tolerances. No four-loop acceptance."
+    },
+    "two-loop-laurent": {
+      "comparator": "reports/validation/2026-10-10-partial-flow-integration/compare_massless_reference.py",
+      "reference": "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json",
+      "scope": "Complete two-loop massless laurent predictions; unchanged independent references and tolerances. No four-loop acceptance."
+    },
+    "three-loop-fixed": {
+      "comparator": "reports/validation/2026-10-10-partial-flow-integration/compare_three_loop_reference.py",
+      "reference": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json",
+      "scope": "Complete three-loop massless fixed predictions; unchanged independent references and tolerances. No four-loop acceptance."
+    },
+    "three-loop-laurent": {
+      "comparator": "reports/validation/2026-10-10-partial-flow-integration/compare_three_loop_reference.py",
+      "reference": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json",
+      "scope": "Complete three-loop massless laurent predictions; unchanged independent references and tolerances. No four-loop acceptance."
+    },
+    "massive-regression": {
+      "comparator": "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py",
+      "scope": "One D12/5 28:80:12 massive profile, vacuum/all cuts/full amplitude for both targets; independent reference and historical comparison. No new precision refinement claim."
+    }
+  },
+  "frozen_comparator_and_reference_artifacts_sha256": {
+    "docs/finite-density-three-loop-reference.md": "4c7968fb28ee19cebbddf157668f3dbc32b13c87a6ffb2313fe0de72b0497d74",
+    "examples/finite_density/massive_two_loop_sunset.json": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a",
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "examples/finite_density/massless_two_loop_sunset.json": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/generate.rs": "6ff63d122c782b5c1f78ec18a198b5ac66e27f63818e331eec0e5ad797c5dee9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/source-sha256.json": "fef71625e9676b69502a5eafa3e153eeb5a74a117de263ba2ec7d62909122f8a",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/validation.json": "87daaec2ee69875f3e43ed2e47339f85d493223313393687f4c43c6f8ecec8ea",
+    "tools/finite_density/compare_complete_massive_reference.py": "481629768a370c993fbcfa0bff25e574af52f2aa28e8f15a9ee7e358aadbe8f2",
+    "tools/finite_density/compare_massive_reference.py": "7739206862f6d40714a4587231a24cf99a8206811cad82fd2755ef97b52f57aa",
+    "tools/finite_density/compare_massless_reference.py": "fa616b666d8a70291db943ec78e6760ef70a65aa062a6848b2a0d29ab25a0bc3",
+    "tools/finite_density/compare_three_loop_reference.py": "a66a71ce60663073e146a6e5df47b6f5803b846873e89f167eeac441779ea56e"
+  },
+  "numerical_runs_launched": 0,
+  "report_local_metadata_validators_sha256": {
+    "reports/validation/2026-10-10-partial-flow-integration/certificate_validation.py": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+    "reports/validation/2026-10-10-partial-flow-integration/compare_massless_reference.py": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d",
+    "reports/validation/2026-10-10-partial-flow-integration/compare_three_loop_reference.py": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226",
+    "reports/validation/2026-10-10-partial-flow-integration/compare-completed-predictions.py": "3798fd24ff7639d0e578ed58434944f19682761afaa9a18f1b6b320d02f7a434",
+    "reports/validation/2026-10-10-partial-flow-integration/history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "reports/validation/2026-10-10-partial-flow-integration/memo_validation.py": "c38141d270b870017f39ee6f9dc76ab4858b214cb9afc6ea5fd6706f36717e7a"
+  },
+  "predecessor_validation": {
+    "path": "reports/validation/2026-10-10-terminal-promotion-integration/artifact-manifest.json",
+    "sha256": "939edbeca98732184557eddb4709c40c3325508774dc42dfa242e7760592aa6e"
+  }
+}

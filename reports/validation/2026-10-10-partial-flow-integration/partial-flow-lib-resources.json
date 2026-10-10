@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/symbolica_amflow-6c032eef1649ac2e",
+    "finite_density::",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 9.35076520126313,
+  "user_seconds": 9.123651,
+  "system_seconds": 0.154893,
+  "peak_child_rss_kib": 24636,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

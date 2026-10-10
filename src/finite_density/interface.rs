@@ -110,9 +110,13 @@ fn sample_report(
         "shifted_slots":report.shifted_slots,
         "contour_admission":report.contour_admission,
         "massless_endpoint":report.massless_endpoint,
+        "partial_continuation":report.partial_continuation,
         "nonzero_conditions":report.nonzero_conditions.iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),
         "boundary":{
             "integrated_coefficients":report.boundary.integrated_coefficients,
+            "partial_origin":report.boundary.partial_origin,
+            "certified_virtual_soft_products":report.boundary.certified_virtual_soft_products,
+            "virtual_soft_certificates":report.boundary.virtual_soft_certificates,
             "integrated_products":report.boundary.integrated_products,
             "scaleless_noncompact_products":report.boundary.scaleless_noncompact_products,
             "vanishing_required_cut_coefficients":report.boundary.vanishing_required_cut_coefficients,

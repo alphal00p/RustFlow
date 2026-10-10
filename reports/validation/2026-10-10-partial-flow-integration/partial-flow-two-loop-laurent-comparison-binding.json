@@ -1,0 +1,668 @@
+{
+  "status": "passed",
+  "scope": "Complete two-loop massless laurent predictions; unchanged independent references and tolerances. No four-loop acceptance.",
+  "command": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-integration/compare_massless_reference.py",
+    "laurent",
+    "--predictions",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent",
+    "--reference",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json",
+    "--output",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent-comparison.json"
+  ],
+  "native_provenance": {
+    "executable_sha256": "a1f5f1c7bc09c15e8970a4f8de200fe849202fca53e0a21ebeb359edc7bda892",
+    "source_snapshot_sha256": "4339433ed5258ba5d1ea4fc622f85a339880ec026d180602cef167f644a24aee",
+    "compile_identities": {
+      "DEPENDENCY_SOURCE_DIGEST": "79e41557461deafa2547070d5d33e518d0adfa939c8b77f8930057724a6656b5",
+      "RUSTRED_SOURCE_DIGEST": "cfe0febd5e8ce966dab3c0db43faee93b48422a56c802fd6c962fda93b1bb06c",
+      "PORT_SOURCE_DIGEST": "a6f1c622ebb49da8f1ee76b0d3d113b320719c763dda8e3ca4405d7585d45d67"
+    },
+    "configuration": {
+      "source_options": {
+        "free_virtual_zero_sectors": true,
+        "policy": "polynomial-closure-v1",
+        "positive_compact_energy_powers": false
+      },
+      "guard_digits": 40,
+      "native_closure": "WeightedClosureOptions { max_rounds: 16, max_frontier: 1024, max_requested: 4096, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 1, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: true, requested_index_rays: true, prioritize_requested_indices: false, max_reused_rules: 65536, max_domains_per_residual: 32, requested_ray_point: None, active_target_closure: true, max_history_candidate_maps: Some(0), unit_reduction_memo: Some(GuardedUnitMemoLimits { max_entries: 64, max_output_terms: 4096, max_conditions: 32768, max_polynomial_terms: 262144, max_owned_bytes: 67108864 }), max_direct_zero_attempts: 262144, checkpoints: None }"
+    },
+    "closed_metadata": [
+      {
+        "cut_slots": [
+          0,
+          1
+        ],
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json",
+        "sha256": "57b04f78ca87dc8ea945111e05187d59d9f0be5c71bb1e3e876a6ccf81fba387",
+        "proof_path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin",
+        "proof_sha256": "a62c649cb158499184097f8f33bfc339a1db6db6573182acba9cd127cea98cf7",
+        "program_blake3_verified": "bd8bee2cc94bd4d64d1d4f141b2d0a1ac3782001462304c0de49008bbdf76f36",
+        "program_bytes_verified": 391605,
+        "requested_discovery": null,
+        "historical_candidate_collection": {
+          "max_history_candidate_maps": 0,
+          "history_count": 38,
+          "selected_count": 0,
+          "assessed_count": 0,
+          "certified_map_count": 0,
+          "assessed_unresolved_count": 0,
+          "unassessed_count": 38,
+          "shared_preclosure_metadata_and_active_state_identical": true,
+          "unassessed_implies_no_value_or_failure_classification": true,
+          "provisional_metadata_sha256": "ba6d9d2dfa61652bca52d70009a3953d25617e1de476419c3ed78044cf086832",
+          "provisional_program_sha256": "c74b008e67c4ba4efb6369257eab9379b315cc6fbf4ab0674a90f87453c06934",
+          "retired_unresolved_sha256": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+        }
+      }
+    ],
+    "unit_reduction_memo": {
+      "enabled": true,
+      "configured_caps": {
+        "max_entries": 64,
+        "max_output_terms": 4096,
+        "max_conditions": 32768,
+        "max_polynomial_terms": 262144,
+        "max_owned_bytes": 67108864
+      },
+      "cuts": [
+        {
+          "cut_slots": [
+            0,
+            1
+          ],
+          "native_rule_applications": 1337,
+          "performed_native_rule_applications": 1231,
+          "memoized_rule_applications": 106,
+          "unit_memo_hits": 14,
+          "unit_memo_misses": 30,
+          "unit_memo_peak_entries": 7,
+          "unit_memo_peak_output_terms": 21,
+          "unit_memo_peak_conditions": 98,
+          "unit_memo_peak_polynomial_terms": 285,
+          "unit_memo_peak_owned_bytes": 34161
+        }
+      ],
+      "logical_equals_performed_plus_memoized": true,
+      "scope": "Native unit reduction applications only; full proof replay, terminal-admission checks, encoding, decoding and arithmetic scratch are not measured by these counters. Quotas bound retained payload, not total process memory or wall time."
+    },
+    "physical_zero_certificates": [
+      {
+        "certificate": {
+          "construction": "certified_massless_singleton_physical_zero",
+          "family_signature": [
+            "loops=2;physical=3;input=5",
+            "det=1",
+            "rustflow_occupied::{}::q_0",
+            "rustflow_occupied::{}::q_1",
+            "rustflow_occupied::{}::q_2",
+            "rustflow_occupied::{}::q_3",
+            "rustflow_occupied::{}::q_4",
+            "rustflow_occupied::{}::q_0",
+            "rustflow_occupied::{}::q_2",
+            "(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1)*-1",
+            "rustflow_occupied::{}::q_3",
+            "rustflow_occupied::{}::q_4",
+            "-1*rustflow_occupied::{}::q_3+1",
+            "rustflow_occupied::{}::q_3",
+            "role=RequiredCut",
+            "role=Ordinary",
+            "role=Ordinary",
+            "role=Ordinary",
+            "role=Ordinary",
+            "role=Occupation",
+            "role=Occupation",
+            "1",
+            "0",
+            "0",
+            "1",
+            "shell=0:0:5:6:0:1",
+            "target=0:[1, 1, 1, 0, 0, 0, 0]:-1",
+            "target=1:[1, 1, 1, 0, 0, 0, 0]:-1/2",
+            "target=1:[2, 0, 1, 0, 0, 0, 0]:-1/2",
+            "target=1:[2, 1, 0, 0, 0, 0, 0]:1/2",
+            "target=1:[2, 1, 1, -1, -1, 0, 0]:-1",
+            "target=1:[2, 1, 1, 0, 0, 0, 0]:0"
+          ],
+          "input_identity": "b57a82738226c09fc07a78b20ec57422a08975c6518a019ab56071d8a6fe37f3",
+          "label_audit": {
+            "endpoint_structure": {
+              "block_a_lower_bounds": [],
+              "block_assignments": [],
+              "block_q_upper_bounds": [
+                "1"
+              ],
+              "block_representatives": [],
+              "denominator_rows": [
+                [
+                  1,
+                  [
+                    "1"
+                  ],
+                  "0"
+                ],
+                [
+                  2,
+                  [
+                    "-1"
+                  ],
+                  "1"
+                ]
+              ],
+              "proof_version": "positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint",
+              "virtual_affine_shift": [],
+              "virtual_loops": 1
+            },
+            "labels": [
+              {
+                "active_virtual_rank": 1,
+                "classification": "uniform-null-cone-endpoint",
+                "high_dimension_witness": "13/3",
+                "indices": [
+                  1,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inequalities": [
+                  {
+                    "degree": {
+                      "constant": -2,
+                      "twice_dimension_coefficient": 1
+                    },
+                    "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                  },
+                  {
+                    "degree": {
+                      "constant": -2,
+                      "twice_dimension_coefficient": 2
+                    },
+                    "stratum": "common compact origin domain at loop 0"
+                  }
+                ],
+                "mass_and_upper_jet_orders": [
+                  0
+                ],
+                "pure_transfer_positive_power_sum": 0,
+                "uncut_positive_power_sum": 2,
+                "virtual_block_positive_power_sums": [
+                  0
+                ]
+              },
+              {
+                "active_virtual_rank": 1,
+                "classification": "uniform-null-cone-endpoint",
+                "high_dimension_witness": "13/3",
+                "indices": [
+                  2,
+                  0,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inequalities": [
+                  {
+                    "degree": {
+                      "constant": -2,
+                      "twice_dimension_coefficient": 1
+                    },
+                    "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                  },
+                  {
+                    "degree": {
+                      "constant": -4,
+                      "twice_dimension_coefficient": 2
+                    },
+                    "stratum": "common compact origin domain at loop 0"
+                  }
+                ],
+                "mass_and_upper_jet_orders": [
+                  1
+                ],
+                "pure_transfer_positive_power_sum": 0,
+                "uncut_positive_power_sum": 1,
+                "virtual_block_positive_power_sums": [
+                  0
+                ]
+              },
+              {
+                "active_virtual_rank": 1,
+                "classification": "uniform-null-cone-endpoint",
+                "high_dimension_witness": "13/3",
+                "indices": [
+                  2,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inequalities": [
+                  {
+                    "degree": {
+                      "constant": -2,
+                      "twice_dimension_coefficient": 1
+                    },
+                    "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                  },
+                  {
+                    "degree": {
+                      "constant": -4,
+                      "twice_dimension_coefficient": 2
+                    },
+                    "stratum": "common compact origin domain at loop 0"
+                  }
+                ],
+                "mass_and_upper_jet_orders": [
+                  1
+                ],
+                "pure_transfer_positive_power_sum": 0,
+                "uncut_positive_power_sum": 1,
+                "virtual_block_positive_power_sums": [
+                  0
+                ]
+              },
+              {
+                "active_virtual_rank": 1,
+                "classification": "uniform-null-cone-endpoint",
+                "high_dimension_witness": "19/3",
+                "indices": [
+                  2,
+                  1,
+                  1,
+                  -1,
+                  -1,
+                  0,
+                  0
+                ],
+                "inequalities": [
+                  {
+                    "degree": {
+                      "constant": -3,
+                      "twice_dimension_coefficient": 1
+                    },
+                    "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                  },
+                  {
+                    "degree": {
+                      "constant": -4,
+                      "twice_dimension_coefficient": 2
+                    },
+                    "stratum": "common compact origin domain at loop 0"
+                  }
+                ],
+                "mass_and_upper_jet_orders": [
+                  1
+                ],
+                "pure_transfer_positive_power_sum": 0,
+                "uncut_positive_power_sum": 2,
+                "virtual_block_positive_power_sums": [
+                  0
+                ]
+              },
+              {
+                "active_virtual_rank": 1,
+                "classification": "uniform-null-cone-endpoint",
+                "high_dimension_witness": "19/3",
+                "indices": [
+                  2,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inequalities": [
+                  {
+                    "degree": {
+                      "constant": -3,
+                      "twice_dimension_coefficient": 1
+                    },
+                    "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                  },
+                  {
+                    "degree": {
+                      "constant": -4,
+                      "twice_dimension_coefficient": 2
+                    },
+                    "stratum": "common compact origin domain at loop 0"
+                  }
+                ],
+                "mass_and_upper_jet_orders": [
+                  1
+                ],
+                "pure_transfer_positive_power_sum": 0,
+                "uncut_positive_power_sum": 2,
+                "virtual_block_positive_power_sums": [
+                  0
+                ]
+              }
+            ],
+            "origin_identity": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D"
+          },
+          "native_closure": false,
+          "nonzero_conditions": [],
+          "normalization": "zero in the full Euclidean convention; original Wick target coefficients and routing determinant retained in family binding",
+          "proof_homotopy_identity": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=one-virtual-loop-null-cone;input=b57a82738226c09fc07a78b20ec57422a08975c6518a019ab56071d8a6fe37f3;cuts=[0];shifted=[1, 2];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\"loops=2;physical=3;input=5\", \"det=1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_2\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"-1*rustflow_occupied::{}::q_3+1\", \"rustflow_occupied::{}::q_3\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"1\", \"0\", \"0\", \"1\", \"shell=0:0:5:6:0:1\", \"target=0:[1, 1, 1, 0, 0, 0, 0]:-1\", \"target=1:[1, 1, 1, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 0, 1, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 1, 0, 0, 0, 0, 0]:1/2\", \"target=1:[2, 1, 1, -1, -1, 0, 0]:-1\", \"target=1:[2, 1, 1, 0, 0, 0, 0]:0\"];proof=MasslessStructuralAudit { proof_version: \"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\", virtual_loops: 1, virtual_affine_shift: [], denominator_rows: [(1, [\"1\"], \"0\"), (2, [\"-1\"], \"1\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\"1\"] }",
+          "proof_homotopy_shifted_slots": [
+            1,
+            2
+          ],
+          "proof_version": "original-eta-independent-singleton-endpoint-zero-v1",
+          "scope": "original eta-independent physical singleton targets only",
+          "transport_performed": false
+        },
+        "cut_slots": [
+          0
+        ]
+      },
+      {
+        "certificate": {
+          "construction": "certified_massless_singleton_physical_zero",
+          "family_signature": [
+            "loops=2;physical=3;input=5",
+            "det=-1",
+            "rustflow_occupied::{}::q_0",
+            "rustflow_occupied::{}::q_1",
+            "rustflow_occupied::{}::q_2",
+            "rustflow_occupied::{}::q_3",
+            "rustflow_occupied::{}::q_4",
+            "rustflow_occupied::{}::q_2",
+            "rustflow_occupied::{}::q_0",
+            "(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1)*-1",
+            "rustflow_occupied::{}::q_4",
+            "rustflow_occupied::{}::q_3",
+            "-1*rustflow_occupied::{}::q_3+1",
+            "rustflow_occupied::{}::q_3",
+            "role=Ordinary",
+            "role=RequiredCut",
+            "role=Ordinary",
+            "role=Ordinary",
+            "role=Ordinary",
+            "role=Occupation",
+            "role=Occupation",
+            "0",
+            "1",
+            "1",
+            "0",
+            "shell=0:1:5:6:0:1",
+            "target=0:[1, 1, 1, 0, 0, 0, 0]:-1",
+            "target=1:[1, 1, 1, 0, 0, 0, 0]:-1/2",
+            "target=1:[2, 1, 0, 0, 0, 0, 0]:1/2",
+            "target=1:[2, 1, 1, -1, -1, 0, 0]:-1",
+            "target=1:[2, 1, 1, 0, 0, 0, 0]:0"
+          ],
+          "input_identity": "b57a82738226c09fc07a78b20ec57422a08975c6518a019ab56071d8a6fe37f3",
+          "label_audit": {
+            "endpoint_structure": {
+              "block_a_lower_bounds": [],
+              "block_assignments": [],
+              "block_q_upper_bounds": [
+                "1"
+              ],
+              "block_representatives": [],
+              "denominator_rows": [
+                [
+                  0,
+                  [
+                    "1"
+                  ],
+                  "0"
+                ],
+                [
+                  2,
+                  [
+                    "1"
+                  ],
+                  "-1"
+                ]
+              ],
+              "proof_version": "positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint",
+              "virtual_affine_shift": [],
+              "virtual_loops": 1
+            },
+            "labels": [
+              {
+                "active_virtual_rank": 1,
+                "classification": "uniform-null-cone-endpoint",
+                "high_dimension_witness": "13/3",
+                "indices": [
+                  1,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inequalities": [
+                  {
+                    "degree": {
+                      "constant": -2,
+                      "twice_dimension_coefficient": 1
+                    },
+                    "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                  },
+                  {
+                    "degree": {
+                      "constant": -2,
+                      "twice_dimension_coefficient": 2
+                    },
+                    "stratum": "common compact origin domain at loop 0"
+                  }
+                ],
+                "mass_and_upper_jet_orders": [
+                  0
+                ],
+                "pure_transfer_positive_power_sum": 0,
+                "uncut_positive_power_sum": 2,
+                "virtual_block_positive_power_sums": [
+                  0
+                ]
+              },
+              {
+                "active_virtual_rank": 1,
+                "classification": "uniform-null-cone-endpoint",
+                "high_dimension_witness": "13/3",
+                "indices": [
+                  2,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inequalities": [
+                  {
+                    "degree": {
+                      "constant": -2,
+                      "twice_dimension_coefficient": 1
+                    },
+                    "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                  },
+                  {
+                    "degree": {
+                      "constant": -2,
+                      "twice_dimension_coefficient": 2
+                    },
+                    "stratum": "common compact origin domain at loop 0"
+                  }
+                ],
+                "mass_and_upper_jet_orders": [
+                  0
+                ],
+                "pure_transfer_positive_power_sum": 0,
+                "uncut_positive_power_sum": 2,
+                "virtual_block_positive_power_sums": [
+                  0
+                ]
+              },
+              {
+                "active_virtual_rank": 1,
+                "classification": "uniform-null-cone-endpoint",
+                "high_dimension_witness": "19/3",
+                "indices": [
+                  2,
+                  1,
+                  1,
+                  -1,
+                  -1,
+                  0,
+                  0
+                ],
+                "inequalities": [
+                  {
+                    "degree": {
+                      "constant": -3,
+                      "twice_dimension_coefficient": 1
+                    },
+                    "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                  },
+                  {
+                    "degree": {
+                      "constant": -2,
+                      "twice_dimension_coefficient": 2
+                    },
+                    "stratum": "common compact origin domain at loop 0"
+                  }
+                ],
+                "mass_and_upper_jet_orders": [
+                  0
+                ],
+                "pure_transfer_positive_power_sum": 0,
+                "uncut_positive_power_sum": 3,
+                "virtual_block_positive_power_sums": [
+                  0
+                ]
+              },
+              {
+                "active_virtual_rank": 1,
+                "classification": "uniform-null-cone-endpoint",
+                "high_dimension_witness": "19/3",
+                "indices": [
+                  2,
+                  1,
+                  1,
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                "inequalities": [
+                  {
+                    "degree": {
+                      "constant": -3,
+                      "twice_dimension_coefficient": 1
+                    },
+                    "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                  },
+                  {
+                    "degree": {
+                      "constant": -2,
+                      "twice_dimension_coefficient": 2
+                    },
+                    "stratum": "common compact origin domain at loop 0"
+                  }
+                ],
+                "mass_and_upper_jet_orders": [
+                  0
+                ],
+                "pure_transfer_positive_power_sum": 0,
+                "uncut_positive_power_sum": 3,
+                "virtual_block_positive_power_sums": [
+                  0
+                ]
+              }
+            ],
+            "origin_identity": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D"
+          },
+          "native_closure": false,
+          "nonzero_conditions": [],
+          "normalization": "zero in the full Euclidean convention; original Wick target coefficients and routing determinant retained in family binding",
+          "proof_homotopy_identity": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=one-virtual-loop-null-cone;input=b57a82738226c09fc07a78b20ec57422a08975c6518a019ab56071d8a6fe37f3;cuts=[1];shifted=[0, 2];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\"loops=2;physical=3;input=5\", \"det=-1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_0\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_3\", \"-1*rustflow_occupied::{}::q_3+1\", \"rustflow_occupied::{}::q_3\", \"role=Ordinary\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"0\", \"1\", \"1\", \"0\", \"shell=0:1:5:6:0:1\", \"target=0:[1, 1, 1, 0, 0, 0, 0]:-1\", \"target=1:[1, 1, 1, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 1, 0, 0, 0, 0, 0]:1/2\", \"target=1:[2, 1, 1, -1, -1, 0, 0]:-1\", \"target=1:[2, 1, 1, 0, 0, 0, 0]:0\"];proof=MasslessStructuralAudit { proof_version: \"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\", virtual_loops: 1, virtual_affine_shift: [], denominator_rows: [(0, [\"1\"], \"0\"), (2, [\"1\"], \"-1\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\"1\"] }",
+          "proof_homotopy_shifted_slots": [
+            0,
+            2
+          ],
+          "proof_version": "original-eta-independent-singleton-endpoint-zero-v1",
+          "scope": "original eta-independent physical singleton targets only",
+          "transport_performed": false
+        },
+        "cut_slots": [
+          1
+        ]
+      }
+    ],
+    "construction_scope": "certified singleton physical zeros plus actual native multicut AMF",
+    "native_digest_tool": {
+      "record_sha256": "7fd9e12576e18cf721824d7854341b638f8b013418a3da3b2364101313071032",
+      "path": "/tmp/rustflow-partial-flow-digest",
+      "sha256": "fc9212cd59c9970d759bc1143cb94d0f2c69fc81a34b0403035d6d7453b68323"
+    }
+  },
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-partial-flow-integration/native-digest-build.json": "7fd9e12576e18cf721824d7854341b638f8b013418a3da3b2364101313071032",
+    "reports/validation/2026-10-10-partial-flow-integration/native-digest.rs": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "reports/validation/2026-10-10-partial-flow-integration/build-native-digest.py": "7ab791e068cfbb493653fc8c99ea0de3af36eb55cc1e5964867f46d4115b2764",
+    "reports/validation/2026-10-10-partial-flow-integration/history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-source-hashes.json": "4339433ed5258ba5d1ea4fc622f85a339880ec026d180602cef167f644a24aee",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-build-provenance.json": "7c641f8156d6c2d1b2e411879ff11c77d60d5f7a18f74e7ccdbac712406faf41",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent-binding.json": "fadbc779ed1edf225d42f502eeb69c835692e825edb84af0200403f5aa8beeeb",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent-resources.json": "3c4c70d3e3e06942c43af57858ee53f6570212e9bf50634ca532031fd110311a",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent-resources.provenance.json": "0d511c698212766fda5aa6c5ff73d1452ddc0e907e27c74a05442eee844da17d",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/configuration.json": "1e9cfced6038ed401ec2639f848c0ab5137c82aef1d68160a0394be3d3f18f3c",
+    "examples/finite_density/massless_two_loop_sunset.json": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/input.json": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/prediction-18-60-8-grid-1000.json": "cd29df731c61cb75c913e92c43dabde600ec6dfeba48677957dc27d0858842fa",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/prediction-28-60-8-grid-1000.json": "66a6384c2e4f21ee007d2127852e31b562c5139e4fe78400b5a13e81becbcddf",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/prediction-28-80-8-grid-1000.json": "8f64042a091765b7bf7e8944260da090efbd5a35f9786fbe7faf3e9f484f7cd5",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/prediction-28-80-12-grid-1000.json": "36658bf197bb26fdea5c40d4fae5c136aa1548275b910ebad87e0d87b387c54f",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/prediction-28-80-12-grid-2000.json": "8bb9269929071d672d2a3a5d90105cd1a353fd5a6a81ba4908722b31d0757a74",
+    "reports/validation/2026-10-10-partial-flow-integration/compare-completed-predictions.py": "3798fd24ff7639d0e578ed58434944f19682761afaa9a18f1b6b320d02f7a434",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/physical-zero-certificates.json": "970c9d9509244aa6d5cf90b50e85b518ec5a0ff4a2c81af797b403f44b7fda35",
+    "reports/validation/2026-10-10-partial-flow-integration/certificate_validation.py": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/closure.json": "e0cd78c8f9f221ce9220f8c4cbf7db843508d8b320ca11e307f297f8337a6041",
+    "reports/validation/2026-10-10-partial-flow-integration/memo_validation.py": "c38141d270b870017f39ee6f9dc76ab4858b214cb9afc6ea5fd6706f36717e7a",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json": "ba6d9d2dfa61652bca52d70009a3953d25617e1de476419c3ed78044cf086832",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin": "c74b008e67c4ba4efb6369257eab9379b315cc6fbf4ab0674a90f87453c06934",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json": "57b04f78ca87dc8ea945111e05187d59d9f0be5c71bb1e3e876a6ccf81fba387",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin": "a62c649cb158499184097f8f33bfc339a1db6db6573182acba9cd127cea98cf7",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-fixed-comparison.json": "69b879e3d2bcda7c547fd7dc988e8f7967dea98ee8718d49ad604f268a535dc2",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-fixed-comparison-binding.json": "0c750ba7da7aef97906ecce94287e8450191a1f952b46e0c66f24d3a34f23a1c",
+    "docs/finite-density-three-loop-reference.md": "4c7968fb28ee19cebbddf157668f3dbc32b13c87a6ffb2313fe0de72b0497d74",
+    "examples/finite_density/massive_two_loop_sunset.json": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a",
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/generate.rs": "6ff63d122c782b5c1f78ec18a198b5ac66e27f63818e331eec0e5ad797c5dee9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/source-sha256.json": "fef71625e9676b69502a5eafa3e153eeb5a74a117de263ba2ec7d62909122f8a",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/validation.json": "87daaec2ee69875f3e43ed2e47339f85d493223313393687f4c43c6f8ecec8ea",
+    "tools/finite_density/compare_complete_massive_reference.py": "481629768a370c993fbcfa0bff25e574af52f2aa28e8f15a9ee7e358aadbe8f2",
+    "tools/finite_density/compare_massive_reference.py": "7739206862f6d40714a4587231a24cf99a8206811cad82fd2755ef97b52f57aa",
+    "tools/finite_density/compare_massless_reference.py": "fa616b666d8a70291db943ec78e6760ef70a65aa062a6848b2a0d29ab25a0bc3",
+    "tools/finite_density/compare_three_loop_reference.py": "a66a71ce60663073e146a6e5df47b6f5803b846873e89f167eeac441779ea56e",
+    "reports/validation/2026-10-10-partial-flow-integration/compare_massless_reference.py": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d",
+    "reports/validation/2026-10-10-partial-flow-integration/compare_three_loop_reference.py": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226",
+    "reports/validation/2026-10-10-partial-flow-integration/comparison-plan.json": "ad3ac68ee508bfb0e5f6ccd96d18784f51a6aa8e6b03b85b05d91d7e51000e99"
+  },
+  "definitions_and_tolerances_changed": false,
+  "production_modified": false,
+  "exit_code": 0,
+  "comparison_sha256": "18e4042924e1737d7122d5ec7af34c33cdde876575df74e4cc0d84592a497715"
+}

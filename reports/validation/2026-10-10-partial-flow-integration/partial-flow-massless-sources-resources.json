@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_massless_sources-6295c8431ae8f488",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.3988938489928842,
+  "user_seconds": 1.350202,
+  "system_seconds": 0.038074,
+  "peak_child_rss_kib": 15396,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

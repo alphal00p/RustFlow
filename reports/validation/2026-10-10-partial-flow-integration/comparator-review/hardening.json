@@ -1,0 +1,13 @@
+{
+  "initial_comparator_sha256": "26bc33230c336e50f4de48ed637892e55a34da0b5f05afacc17b72fa5cb0bb06",
+  "initial_copy_sha256": "26bc33230c336e50f4de48ed637892e55a34da0b5f05afacc17b72fa5cb0bb06",
+  "reviewed_comparator_sha256": "8c204b62a9e344583c2471fab43900be39d2b346fade3265d16b6fc45373db07",
+  "preserved_initial_readiness_sha256": "5b0f9809fcb4fde9213a7a45f29a7f992669ce414aab97df831a98971a163275",
+  "changes": [
+    "Bound root-gates status/count/build/hash",
+    "Exact full explicit producer settings and corresponding effective Debug fields",
+    "Partial boundary origin identity; positive integrated coefficients/products; count-bound virtual-soft source identity and native factor certificate markers",
+    "Retained Debug text and source-level authority limitation"
+  ],
+  "production_source_changes": false
+}

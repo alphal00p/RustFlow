@@ -388,10 +388,19 @@ convention and every generated finite basis label are bound to the
 are selected by physical structure, not graph names or targets. All E7 cut
 sectors pass this structural admission, but their bounded native weighted
 closure remains unresolved and no E7 amplitude has been evaluated. General
-coupled virtual blocks, E8 pinched continuations and partial deformation
-placements remain unsupported. Compact terminals retain their
+coupled virtual blocks and E8 pinched continuations remain unsupported. Compact terminals retain their
 separate distributional admission. The algebraic parser can still represent
 families outside numerical admission.
+
+The direct Rust `PreparedOccupiedFlow` owner also accepts explicit
+`MassMode::Propagators` placements under a distinct, sealed partial-continuation
+proof for one virtual loop and two massless occupied shells. It validates the
+complete physical routing, every source image, concrete consumer labels, original
+and reduced coefficient domains, and actual boundary factors. The new wiring
+passed 50 combined-crate tests; a closed partial native flow and a numerical
+amplitude remain to be demonstrated. Full assembly retains All/Auto and does not
+silently intersect a global mask with each cut. See the
+[partial-placement contract](finite-density-partial-flow.md) for the exact scope.
 
 The optional Rust `PreparedOccupiedFlow::prepare_with_source_options` path can
 admit integer inverse powers of completion factors proved exactly equal to

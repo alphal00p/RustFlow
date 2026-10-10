@@ -1,0 +1,23 @@
+{
+  "captured_utc": "2026-10-10T09:15:28.548185+00:00",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_polynomial_sources-67356704627148d2",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "target/release/deps/finite_density_polynomial_sources-67356704627148d2": {
+      "resolved_path": "/common/dev/rustflow_fermi/target/release/deps/finite_density_polynomial_sources-67356704627148d2",
+      "sha256": "6834cf4d5f4d07da2f87b59ab9cde2dba5e2967085c46bb15048de0710feac0a",
+      "size_bytes": 1273572808
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

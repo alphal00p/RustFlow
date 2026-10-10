@@ -1,6 +1,6 @@
 //! Automatic boundary matching for occupied, fixed-shell auxiliary mass flows.
 //!
-//! Every uncut physical quadratic is deformed. Compact momenta remain soft.
+//! The default deforms every uncut physical quadratic. Compact momenta remain soft.
 //! Each deformed quadratic denominator is purely hard or constant after
 //! expansion; numerator-completion powers are nonpositive by default. An
 //! explicit opt-in also admits inverse powers of individually certified
@@ -11,8 +11,10 @@
 //! The hard vacuum factors have one large scale and use ordinary recursive
 //! AMF. At generic symbolic epsilon their eta dependence is a pure power, so
 //! the region coefficients have no explicit logarithms. Expanding the retained
-//! epsilon-dependent exponents later can generate logarithms. Partial shifts
-//! and retained nonpolynomial soft factors need separate weighted recursion.
+//! epsilon-dependent exponents later can generate logarithms. A separate sealed
+//! partial-placement proof admits one virtual loop and two massless occupied
+//! shells. Its actual virtual-soft factors require exact native zero certificates;
+//! other retained nonpolynomial factors still require weighted recursion.
 use super::boundary::{
     IntegratedOccupiedBoundary, OccupiedBoundaryDistribution, OccupiedBoundaryLimits,
 };
@@ -47,6 +49,9 @@ pub struct OccupiedBoundaryProvenance {
     pub scaleless_noncompact_products: usize,
     pub vanishing_required_cut_coefficients: usize,
     pub massless_origin: Option<&'static str>,
+    pub partial_origin: Option<String>,
+    pub certified_virtual_soft_products: usize,
+    pub virtual_soft_certificates: Vec<serde_json::Value>,
 }
 
 #[derive(Clone, Debug)]
@@ -67,6 +72,7 @@ pub struct OccupiedFlowBoundary<'a> {
     limits: OccupiedBoundaryLimits,
     positive_energy_powers: bool,
     massless_evidence: Option<super::massless_endpoint::MasslessFlowEvidence>,
+    partial_continuation: Option<super::partial_origin::continuation::PartialContinuation>,
 }
 
 impl<'a> OccupiedFlowBoundary<'a> {
@@ -92,6 +98,7 @@ impl<'a> OccupiedFlowBoundary<'a> {
             limits,
             positive_energy_powers: false,
             massless_evidence: None,
+            partial_continuation: None,
         })
     }
 
@@ -110,7 +117,7 @@ impl<'a> OccupiedFlowBoundary<'a> {
         mut self,
         evidence: &super::massless_endpoint::MasslessFlowEvidence,
     ) -> Result<Self> {
-        if self.positive_energy_powers {
+        if self.positive_energy_powers || self.partial_continuation.is_some() {
             return Err(Error::Unsupported(
                 "massless boundary evidence excludes inverse compact energies".into(),
             ));
@@ -120,13 +127,28 @@ impl<'a> OccupiedFlowBoundary<'a> {
         Ok(self)
     }
 
+    pub(crate) fn with_partial_continuation(
+        mut self,
+        evidence: &super::partial_origin::continuation::PartialContinuation,
+    ) -> Result<Self> {
+        if self.positive_energy_powers || self.massless_evidence.is_some() {
+            return Err(Error::Unsupported(
+                "partial boundary requires its distinct polynomial-completion proof".into(),
+            ));
+        }
+        self.integrated = self.integrated.with_partial_flow_origin(evidence);
+        self.partial_continuation = Some(evidence.clone());
+        Ok(self)
+    }
+
     /// Derive the needed region coefficients and match the supplied complete
     /// Frobenius basis. No numerical specialization of eta exponents is used.
     ///
     /// `basis` contains all physical, numerator-completion and occupation
     /// indices. `shifted` may contain either the input slots or all weighted
     /// slots; any appended occupation shifts must be false. All uncut physical
-    /// slots must be shifted, and every cut, occupation and completion slot
+    /// slots must be shifted unless the private partial-continuation owner has
+    /// bound this exact placement. Every cut, occupation and completion slot
     /// must be fixed. Shell masses must have exact physical assignments. Positive
     /// completion indices require the explicit positive-energy opt-in and a
     /// matching exact geometry certificate.
@@ -175,7 +197,8 @@ impl<'a> OccupiedFlowBoundary<'a> {
         }
         for (slot, &deformed) in shifted.iter().enumerate() {
             let expected = slot < family.physical_slots() && !required_cuts[slot];
-            if deformed != expected {
+            if deformed && !expected || self.partial_continuation.is_none() && deformed != expected
+            {
                 return Err(Error::Unsupported(
                     "occupied boundaries currently require every uncut physical quadratic, and only those quadratics, to be shifted".into(),
                 ));
@@ -199,6 +222,33 @@ impl<'a> OccupiedFlowBoundary<'a> {
                 .collect::<Vec<_>>();
             evidence.validate_family(family, &selected)?;
             evidence.validate_labels(family, basis)?;
+        }
+        if let Some(evidence) = &self.partial_continuation {
+            if self.positive_energy_powers || self.massless_evidence.is_some() {
+                return Err(Error::Unsupported(
+                    "conflicting partial boundary authority".into(),
+                ));
+            }
+            let selected = shifted
+                .iter()
+                .enumerate()
+                .filter_map(|(slot, &on)| on.then_some(slot))
+                .collect::<Vec<_>>();
+            evidence.validate_family_binding(
+                family,
+                &selected,
+                evidence.source_options(),
+                self.context,
+            )?;
+            evidence.audit_labels(family, basis, self.context)?;
+            crate::physical_conditions::validate_conditions_at(
+                evidence.raw_nonzero_conditions(),
+                self.epsilon_symbol,
+                &std::collections::BTreeMap::from([(
+                    self.epsilon_symbol,
+                    Atom::num(epsilon.clone()),
+                )]),
+            )?;
         }
         let ordinary = family.region_family(self.epsilon_symbol, self.options.dimension)?;
         let shifted = &shifted[..input_slots];
@@ -333,6 +383,10 @@ impl<'a> OccupiedFlowBoundary<'a> {
         })?;
         let mut provenance = OccupiedBoundaryProvenance {
             massless_origin: self.massless_evidence.as_ref().map(|e| e.origin_identity()),
+            partial_origin: self
+                .partial_continuation
+                .as_ref()
+                .map(|e| e.origin_identity().to_owned()),
             regions: regions
                 .iter()
                 .enumerate()
@@ -386,26 +440,49 @@ impl<'a> OccupiedFlowBoundary<'a> {
                 );
                 for (index, expression) in expansion.coefficients.iter().enumerate() {
                     self.context.cancellation.check()?;
+                    let raw_expression = expression * &fixed_weight;
+                    // Capture domains using the full parent coordinate system,
+                    // before tensor projection or whole-expression cancellation.
+                    let inherited = if self.partial_continuation.is_some() {
+                        Some(super::boundary::partial_region_conditions(
+                            &raw_expression,
+                            &expansion.coordinates,
+                            &compact,
+                            transformed[r].external.len(),
+                            self.limits,
+                            self.context,
+                        )?)
+                    } else {
+                        None
+                    };
                     let projected = integrand::projected_factor_region(
-                        &(expression * &fixed_weight).together().cancel(),
+                        &raw_expression.together().cancel(),
                         &expansion.coordinates,
                         &transformed[r],
                         &region.hard,
                         self.limits.max_terms,
                     )?;
-                    let report = self.integrated.evaluate_projected_with_provenance(
-                        &projected,
-                        &distributions[component],
-                        epsilon,
-                        &parameters,
-                        p,
-                    )?;
+                    let report = self
+                        .integrated
+                        .evaluate_projected_with_inherited_conditions(
+                            &projected,
+                            &distributions[component],
+                            epsilon,
+                            &parameters,
+                            p,
+                            inherited.as_deref(),
+                        )?;
                     provenance.integrated_coefficients += 1;
                     provenance.integrated_products += report.integrated_products;
                     provenance.scaleless_noncompact_products +=
                         report.scaleless_noncompact_products;
                     provenance.vanishing_required_cut_coefficients +=
                         usize::from(report.vanishing_required_cut);
+                    provenance.certified_virtual_soft_products +=
+                        report.virtual_soft_certificates.len();
+                    provenance
+                        .virtual_soft_certificates
+                        .extend(report.virtual_soft_certificates);
                     data[component][2 * r + index % 2].coefficients[index / 2][0] =
                         Some(&jacobian * &report.value);
                 }

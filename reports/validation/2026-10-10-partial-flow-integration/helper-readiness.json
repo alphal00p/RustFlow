@@ -1,0 +1,62 @@
+{
+  "status": "source owner freeze received; coherent build running, no numerical gate launched",
+  "expected_unique_tests": 281,
+  "expected_build_artifacts": 13,
+  "lower_helpers_exact_ast_except_prefix": [
+    {
+      "file": "run-two-loop-gate.py",
+      "only_prefix_changed": true
+    },
+    {
+      "file": "run-massive-regression.py",
+      "only_prefix_changed": true
+    },
+    {
+      "file": "compare-completed-predictions.py",
+      "only_prefix_changed": true
+    }
+  ],
+  "build_command": "python3 reports/validation/2026-10-10-partial-flow-integration/launch-partial-flow-build.py --source-ready-confirmed",
+  "after_build_commands": [
+    "python3 reports/validation/2026-10-10-partial-flow-integration/capture-partial-flow-build.py",
+    "python3 reports/validation/2026-10-10-partial-flow-integration/run-root-gates.py",
+    "python3 reports/validation/2026-10-10-partial-flow-integration/build-native-digest.py"
+  ],
+  "lower_commands": [
+    "python3 reports/validation/2026-10-10-partial-flow-integration/run-two-loop-gate.py fixed",
+    "python3 reports/validation/2026-10-10-partial-flow-integration/compare-completed-predictions.py two-loop-fixed",
+    "python3 reports/validation/2026-10-10-partial-flow-integration/run-two-loop-gate.py laurent",
+    "python3 reports/validation/2026-10-10-partial-flow-integration/compare-completed-predictions.py two-loop-laurent",
+    "python3 reports/validation/2026-10-10-partial-flow-integration/run-massive-regression.py",
+    "python3 reports/validation/2026-10-10-partial-flow-integration/compare-completed-predictions.py massive-regression"
+  ],
+  "partial_commands_after_all_gates_pass": [
+    "python3 reports/validation/2026-10-10-partial-flow-integration/run-partial-double-gate.py",
+    "python3 reports/validation/2026-10-10-partial-flow-integration/compare-partial-double.py"
+  ],
+  "partial_scope": "Selected [0,3] cut only, shifted [1,2], four fixed profiles sharing one fresh preparation, epsilon -5/4, 1800 seconds. All profiles and native proof required for comparison. No full-amplitude or Laurent acceptance; incomplete work preserved without acceptance.",
+  "files_sha256": {
+    "build-native-digest.py": "7ab791e068cfbb493653fc8c99ea0de3af36eb55cc1e5964867f46d4115b2764",
+    "capture-frozen-build.py": "2659bcc7e495b230fe66eedc1bcf207055c699d3fecdfec85dbb16421113de92",
+    "capture-partial-flow-build.py": "1f2aef15b2a5e5dce9fc873f3ebd56c9fac1a08b7bf847720fa520b174186eef",
+    "capture-source-snapshot.py": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+    "certificate_validation.py": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+    "compare-completed-predictions.py": "3798fd24ff7639d0e578ed58434944f19682761afaa9a18f1b6b320d02f7a434",
+    "compare-partial-double.py": "26bc33230c336e50f4de48ed637892e55a34da0b5f05afacc17b72fa5cb0bb06",
+    "compare_massless_reference.py": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d",
+    "compare_three_loop_reference.py": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226",
+    "frozen_sources.py": "2f96802f9547ae92612007aadf72bab4ebcdc62f5f50ee394b06bb407605b1bf",
+    "history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "launch-partial-flow-build.py": "557a28f096de1c4d6c613b93f2498c8583edeef15f11851506db54d4f75b6265",
+    "memo_validation.py": "c38141d270b870017f39ee6f9dc76ab4858b214cb9afc6ea5fd6706f36717e7a",
+    "run-frozen-root-gate.py": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+    "run-massive-regression.py": "94658dce2cb16fd56c290a2ebabb95c9f7026e099f4e3693195cc40b2e0777a4",
+    "run-partial-double-gate.py": "44750a3eeb5de3a41f5f0677b5810ceb527b95cd4da583979a5d3951310dceb1",
+    "run-resource-command.py": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+    "run-root-gates.py": "e049dff90f065f9dc847b59d0d5a85dcb275522f7c565754a5558da008eb4493",
+    "run-two-loop-gate.py": "8ee9475c83cf48622fd827526130d8ecc2ea0cf581a20da9ea561909e55f71b1",
+    "summarize-frozen-root-gates.py": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e",
+    "test_certificate_validation.py": "3f30ed7fd26c4155e4581686f4b32745a40a0660f1c84be61eb622d25426a95c",
+    "test_history_coverage.py": "e480ae2bc54d8dbc4c14ede5721cf3a12c6d23263166b7504f0813df60a02bf9"
+  }
+}

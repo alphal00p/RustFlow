@@ -1,0 +1,282 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Only the listed assigned regression gates; no duplicate test invocations and no numerical acceptance runs.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-source-hashes.json",
+    "sha256": "4339433ed5258ba5d1ea4fc622f85a339880ec026d180602cef167f644a24aee"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-build-provenance.json",
+    "sha256": "7c641f8156d6c2d1b2e411879ff11c77d60d5f7a18f74e7ccdbac712406faf41"
+  },
+  "unchanged_source_files": 2496,
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "79e41557461deafa2547070d5d33e518d0adfa939c8b77f8930057724a6656b5",
+    "RUSTRED_SOURCE_DIGEST": "cfe0febd5e8ce966dab3c0db43faee93b48422a56c802fd6c962fda93b1bb06c",
+    "PORT_SOURCE_DIGEST": "a6f1c622ebb49da8f1ee76b0d3d113b320719c763dda8e3ca4405d7585d45d67"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "native",
+      "status": "passed",
+      "passed": 101,
+      "failed": 0,
+      "ignored": 1,
+      "measured": 0,
+      "filtered": 3041,
+      "harness_seconds": 0.1,
+      "wall_seconds": 0.10665866918861866,
+      "peak_child_rss_kib": 15468,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-native-resources.json",
+          "sha256": "d624c9c10b8f2130756a710c317e629b3f215ad4769c2d4ea2c094dc2f6ecbe3"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-native-resources.log",
+          "sha256": "998ae86f3ebdc30f0af19f482de9c97451e049f1054d2f57a79135049cd3816e"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-native-resources.provenance.json",
+          "sha256": "de8e4ab92d49848bf1525e69aee9c9b3c6d6abbe027e7db24b39a597c2793710"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-native-binding.json",
+          "sha256": "0686d1948a2131da911de722a2a89f92ed6821ff765b4ef6c521e06e60d0b0b9"
+        }
+      }
+    },
+    {
+      "gate": "lib",
+      "status": "passed",
+      "passed": 160,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 213,
+      "harness_seconds": 9.33,
+      "wall_seconds": 9.35076520126313,
+      "peak_child_rss_kib": 24636,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-lib-resources.json",
+          "sha256": "3bf33e8d423aae9a732c45def28b5755b0b9caf5513f0314fa18f0fc8b9ba8fd"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-lib-resources.log",
+          "sha256": "f7ad8db1035c96d32756e2726baaf9462eb7c6b96fb2bf9ad1ad6255c66774c5"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-lib-resources.provenance.json",
+          "sha256": "0354384c776a4a11a0ff185ef45e3250b7b4e15085231bb5b4e55016d10eca0b"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-lib-binding.json",
+          "sha256": "66c2d9fe487dcecefaf3de94805dac89dfc85d25712a5f33b247852416975cdd"
+        }
+      }
+    },
+    {
+      "gate": "flow-boundary",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.15,
+      "wall_seconds": 0.167539122980088,
+      "peak_child_rss_kib": 15408,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-flow-boundary-resources.json",
+          "sha256": "2e5436b0379f5e86fdcd0a10ae5a926d636ac9c110453eeaaaec3f24ca6779c6"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-flow-boundary-resources.log",
+          "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-flow-boundary-resources.provenance.json",
+          "sha256": "712826200c5add9352d816d9689e4cc124b4e2538c67d23440e5eee3ed6f8e08"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-flow-boundary-binding.json",
+          "sha256": "415fbcee7f9329c9a7d543a7faa739fc798baf59268fae92f98aaee8be21fa34"
+        }
+      }
+    },
+    {
+      "gate": "massless-sources",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.38,
+      "wall_seconds": 1.3988938489928842,
+      "peak_child_rss_kib": 15396,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massless-sources-resources.json",
+          "sha256": "bf273df9d2c5db403614e039a73a63f4f7a289f24dcf3d8ab1885aca09dba67f"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massless-sources-resources.log",
+          "sha256": "9a423b0549e1d3c579e38881dca906fad8fcb1aed415b5d4e661e95df7a5c09e"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massless-sources-resources.provenance.json",
+          "sha256": "16b92d07de8bec7d8ab2d6ff5b420ef17c3de51b0e33a061230239c89376c8a0"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massless-sources-binding.json",
+          "sha256": "80cac70151ab934d598433862598e61d4dc9dde9c2b7d2d72925da2dcaa83042"
+        }
+      }
+    },
+    {
+      "gate": "source-fingerprint",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.01,
+      "wall_seconds": 0.012072719167917967,
+      "peak_child_rss_kib": 15400,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-source-fingerprint-resources.json",
+          "sha256": "754509f44ab9e885531d1d5dacde742d7dae38a6bb13647a73b7556f75176b5c"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-source-fingerprint-resources.log",
+          "sha256": "064c75c969baab98407c9f447318750c99e13f210edce602230a991c97ce56f6"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-source-fingerprint-resources.provenance.json",
+          "sha256": "7de12d1c470a6cc6e7495087bf90703e789e5d0590b0a8104bf9b5b01ce6b305"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-source-fingerprint-binding.json",
+          "sha256": "9f662ca512780a6fe465cfac8fc74ab4492669eaacf163783af602d75e322374"
+        }
+      }
+    },
+    {
+      "gate": "python",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.76,
+      "wall_seconds": 1.780235153157264,
+      "peak_child_rss_kib": 30740,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-python-resources.json",
+          "sha256": "556760762ff2a8db40493a82143a2ac93047a836d0c88b38a19ef3fdbfadcb53"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-python-resources.log",
+          "sha256": "412190830669c857d5de291b59527f7c851521b7413e605be7af7003d336a537"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-python-resources.provenance.json",
+          "sha256": "2681eb865686a22c7996cf35dbb709e92dd0d8bdd06a4970b1e156db89efee67"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-python-binding.json",
+          "sha256": "8ee33459c88b0f9b428c2df28603da4c15c5140f6e035174b7312eb15edd8362"
+        }
+      }
+    },
+    {
+      "gate": "capacity",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.03,
+      "wall_seconds": 0.054055852349847555,
+      "peak_child_rss_kib": 15432,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-capacity-resources.json",
+          "sha256": "734e502ae04099c0c541dfcd358bc268eb9a770eae5e69fe7bf15f5b3716626b"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-capacity-resources.log",
+          "sha256": "79d6725df76851483086e2541f414f1941bbb58f8b82a9648fd22a4c31045495"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-capacity-resources.provenance.json",
+          "sha256": "2e7ab937d86e9ff1af4eebc4111680e0ff868f97a6473f4ca5830f2e42a92ad6"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-capacity-binding.json",
+          "sha256": "799eae852d48fb6a1ee1d522019f50ccfac203f3b6168ed6b9936f71edf56acb"
+        }
+      }
+    },
+    {
+      "gate": "polynomial-sources",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.06,
+      "wall_seconds": 0.07661609398201108,
+      "peak_child_rss_kib": 15492,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-polynomial-sources-resources.json",
+          "sha256": "31cf214159730efdb726039fa50960d5520f8968a9a6ff0e505e345c6bdb86c8"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-polynomial-sources-resources.log",
+          "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-polynomial-sources-resources.provenance.json",
+          "sha256": "3531fa40fbe7acf7124a56cb505a68b8cc7d09bc4114ee9dde595a27eab0e94d"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-polynomial-sources-binding.json",
+          "sha256": "476a068489a3e5f656fd2e47e5c24290749aae0ad40ea6d12bfcbbd33321c6a9"
+        }
+      }
+    }
+  ],
+  "unique_test_count": 281,
+  "numerical_acceptance_runs": 0,
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "timing_scope": "Prebuilt test execution; compilation and Nix startup excluded. Shared-host measurements are not isolated performance benchmarks.",
+  "summary_script_sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+}

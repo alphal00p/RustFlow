@@ -10,8 +10,9 @@
 //! `d^D k/(i*pi^(D/2))`, and one occupied loop uses
 //! `pi^(-D/2) d^D q C_n(q^2-m^2) H_upper(mu-q0) H_lower(q0)`.
 //! Input Wick phases and the whole-amplitude Euclidean measure are applied by
-//! the caller. This owner neither moves a shell mass with eta nor discards a
-//! retained virtual pole in a soft factor.
+//! the caller. Under a separately bound partial origin, an unrestricted virtual
+//! factor may instead carry an exact native zero certificate. Raw parameter
+//! domains survive this operation; other retained virtual poles remain unsupported.
 use super::compact::CompactShell;
 use crate::coefficient::{exact_coefficient_list, powers};
 use crate::family::substitute;
@@ -23,6 +24,59 @@ use std::collections::BTreeMap;
 use std::sync::Mutex;
 use symbolica::prelude::*;
 
+mod virtual_soft;
+
+#[cfg(test)]
+#[path = "boundary/partial_tests.rs"]
+mod partial_tests;
+
+/// Retain parameter poles from the raw expanded parent coefficient. Every
+/// coordinate involving an unrestricted parent loop is an integration variable;
+/// compact-only poles have no ordinary-zero authority even if removable.
+pub(crate) fn partial_region_conditions(
+    expression: &Atom,
+    coordinates: &[Atom],
+    compact: &[bool],
+    external: usize,
+    limits: OccupiedBoundaryLimits,
+    context: &RunContext,
+) -> Result<Vec<Atom>> {
+    context.cancellation.check()?;
+    let n = compact.len();
+    if coordinates.len() != n * (n + 1) / 2 + n * external {
+        return Err(Error::InvalidInput(
+            "partial parent coordinate dimensions".into(),
+        ));
+    }
+    let mut virtual_coordinates = Vec::new();
+    let mut k = 0;
+    for i in 0..n {
+        for j in i..n {
+            if !compact[i] || !compact[j] {
+                virtual_coordinates.push(coordinates[k].clone());
+            }
+            k += 1;
+        }
+    }
+    for i in 0..n {
+        for _ in 0..external {
+            if !compact[i] {
+                virtual_coordinates.push(coordinates[k].clone());
+            }
+            k += 1;
+        }
+    }
+    let result = virtual_soft::parameter_conditions(
+        expression,
+        coordinates,
+        &virtual_coordinates,
+        limits,
+        context,
+    )?;
+    context.cancellation.check()?;
+    Ok(result)
+}
+
 /// Massless origins are continued jointly from sufficiently large ReD. The
 /// terminal prescription excludes virtual poles; the flow prescription requires
 /// a sealed family-bound finite-eta and endpoint proof from its caller.
@@ -31,6 +85,7 @@ pub(crate) enum CompactOriginPrescription {
     Existing,
     JointDimensionalMasslessTerminal,
     JointDimensionalMasslessFlow,
+    JointDimensionalMasslessPartialFlow,
 }
 
 impl CompactOriginPrescription {
@@ -43,6 +98,7 @@ impl CompactOriginPrescription {
             Self::JointDimensionalMasslessFlow => {
                 super::massless_endpoint::MASSLESS_FLOW_ORIGIN_IDENTITY
             }
+            Self::JointDimensionalMasslessPartialFlow => "family-bound-partial-high-D-origin-v1",
         }
     }
 }
@@ -93,6 +149,7 @@ pub struct IntegratedOccupiedCoefficient {
     pub integrated_products: usize,
     pub scaleless_noncompact_products: usize,
     pub vanishing_required_cut: bool,
+    pub virtual_soft_certificates: Vec<serde_json::Value>,
 }
 
 impl<'a> IntegratedOccupiedBoundary<'a> {
@@ -161,6 +218,15 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
         self
     }
 
+    pub(crate) fn with_partial_flow_origin(
+        mut self,
+        evidence: &super::partial_origin::continuation::PartialContinuation,
+    ) -> Self {
+        self.origin_prescription = CompactOriginPrescription::JointDimensionalMasslessPartialFlow;
+        self.origin_proof_identity = Some(evidence.source_identity().to_owned());
+        self
+    }
+
     /// Integrate a scalar region coefficient after hard tensor projection.
     /// The soft space contains only compact loops; if it has one external
     /// vector, that vector is explicitly the normalized medium `u.u=1`.
@@ -193,7 +259,39 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
         parameters: &HashMap<Atom, C>,
         p: Precision,
     ) -> Result<IntegratedOccupiedCoefficient> {
+        self.evaluate_projected_with_inherited_conditions(
+            projected,
+            distributions,
+            epsilon,
+            parameters,
+            p,
+            None,
+        )
+    }
+
+    pub(crate) fn evaluate_projected_with_inherited_conditions(
+        &self,
+        projected: &ProjectedRegion,
+        distributions: &[OccupiedBoundaryDistribution],
+        epsilon: &Rational,
+        parameters: &HashMap<Atom, C>,
+        p: Precision,
+        inherited_conditions: Option<&[Atom]>,
+    ) -> Result<IntegratedOccupiedCoefficient> {
         self.context.cancellation.check()?;
+        let partial = self.origin_prescription
+            == CompactOriginPrescription::JointDimensionalMasslessPartialFlow;
+        if partial && (inherited_conditions.is_none() || self.origin_proof_identity.is_none()) {
+            return Err(Error::InvalidInput(
+                "partial boundary needs bound origin and raw parent domains".into(),
+            ));
+        }
+        let inherited = inherited_conditions.unwrap_or(&[]);
+        crate::physical_conditions::validate_conditions_at(
+            inherited,
+            projected.soft.template.epsilon,
+            &BTreeMap::from([(projected.soft.template.epsilon, Atom::num(epsilon.clone()))]),
+        )?;
         if projected.terms.len() > self.limits.max_terms {
             return Err(Error::Limit(
                 "occupied boundary product budget exhausted".into(),
@@ -253,6 +351,7 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
                 integrated_products: 0,
                 scaleless_noncompact_products: 0,
                 vanishing_required_cut: true,
+                virtual_soft_certificates: vec![],
             });
         }
         let noncompact_coordinates = noncompact_coordinates(&projected.soft, &by_loop)?;
@@ -273,9 +372,52 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
         let mut result = p.zero();
         let mut integrated_products = 0;
         let mut scaleless_noncompact_products = 0;
+        let mut virtual_soft_certificates = Vec::new();
         for term in &projected.terms {
             self.context.cancellation.check()?;
             if !noncompact_coordinates.is_empty() {
+                if partial {
+                    // The admitted h=1 class cannot leave both a virtual hard
+                    // loop and a virtual soft loop. Keep this invariant explicit.
+                    if !projected.hard.template.loops.is_empty() {
+                        return Err(Error::Unsupported(
+                            "partial virtual-soft certificate requires no hard loop".into(),
+                        ));
+                    }
+                    let proof = virtual_soft::certify_virtual_soft_zero(
+                        &term.soft,
+                        &projected.soft,
+                        distributions,
+                        self.limits,
+                        self.context,
+                        inherited,
+                    )?
+                    .ok_or_else(|| {
+                        Error::Unsupported(
+                            "retained virtual soft factor lacks an exact ordinary zero certificate"
+                                .into(),
+                        )
+                    })?;
+                    crate::physical_conditions::validate_conditions_at(
+                        proof.nonzero_conditions(),
+                        projected.soft.template.epsilon,
+                        &BTreeMap::from([(
+                            projected.soft.template.epsilon,
+                            Atom::num(epsilon.clone()),
+                        )]),
+                    )?;
+                    // A scalar hard prefactor still carries its parameter domain.
+                    let scalar = p.eval(&term.hard, &parameters)?;
+                    if !p.finite(&scalar) {
+                        return Err(Error::Numerical("nonfinite virtual-zero prefactor".into()));
+                    }
+                    virtual_soft_certificates.push(serde_json::json!({
+                        "parent_continuation": self.origin_proof_identity,
+                        "hard_prefactor": term.hard.to_canonical_string(),
+                        "certificate": proof.report(),
+                    }));
+                    continue;
+                }
                 polynomial_terms(&term.soft, &noncompact_coordinates, self.limits.max_terms)
                     .map_err(|error| match error {
                         Error::Unsupported(_) => Error::Unsupported(
@@ -335,6 +477,7 @@ impl<'a> IntegratedOccupiedBoundary<'a> {
             integrated_products,
             scaleless_noncompact_products,
             vanishing_required_cut: false,
+            virtual_soft_certificates,
         })
     }
 

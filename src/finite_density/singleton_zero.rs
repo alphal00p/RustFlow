@@ -190,6 +190,7 @@ impl PreparedSingletonZero {
             native_storage_capacity: None,
             source_options: None,
             massless_endpoint: Some(self.audit.clone()),
+            partial_continuation: None,
         })
     }
 }

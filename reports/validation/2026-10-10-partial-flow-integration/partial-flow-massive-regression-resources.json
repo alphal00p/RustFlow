@@ -1,0 +1,23 @@
+{
+  "command": [
+    "env",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY=polynomial-closure-v1",
+    "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massive_two_loop_sunset.json",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON=4/5",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES=28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression",
+    "timeout",
+    "300",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 47.847426548134536,
+  "user_seconds": 47.224759,
+  "system_seconds": 0.233115,
+  "peak_child_rss_kib": 64536,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,29 @@
+{
+  "captured_utc": "2026-10-10T09:03:25.483429+00:00",
+  "files": {
+    "src/finite_density/boundary.rs": {
+      "tested_overlay_sha256": "4eb980dbf6355ac3eac0a66a13bfb90fe9290a3a225b57e64e1b353ba6f8f207",
+      "production_sha256": "5a61d8b9963eb9d2d4cb052005743241ed65bc92e0c7aed87ac65893bee740d5",
+      "difference": "documentation comments only"
+    },
+    "src/finite_density/flow.rs": {
+      "tested_overlay_sha256": "30863b4ebc143893275c081cbe3923da16a9d38e3c38b5d81d208adcd8a7cf71",
+      "production_sha256": "3228e5167e98c1471a3e8a60c7d0db316ca3f3fbf84f1d78a3a8ddaeb957c37c",
+      "difference": "documentation comments only"
+    },
+    "src/finite_density/flow_boundary.rs": {
+      "tested_overlay_sha256": "c7fdacd319e863fcd605fa88778671a0db8e6f5c350d30f633f548a988471211",
+      "production_sha256": "f97e44c9324b7f2bb687e7cf9bf9d008b0c1428bea841e4bbe97f46e9854c855",
+      "difference": "documentation comments only"
+    },
+    "docs/finite-density.md": {
+      "production_sha256": "87a7226e693972b5ad5e1b9dbecfad5805d8be002cdd78fd053cce682d5b1814",
+      "difference": "supported-scope documentation"
+    },
+    "docs/finite-density-partial-flow.md": {
+      "production_sha256": "98936d27710bb04b8e91ae1748928a535d41201eae9b0e1d38519707b6307d7e",
+      "difference": "supported-scope documentation"
+    }
+  },
+  "status": "ready for coherent production build"
+}

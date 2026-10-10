@@ -1,0 +1,5877 @@
+{
+  "allocated_domains": 28,
+  "allocation_is_measured_visits": false,
+  "call": 2,
+  "completed_requests": [
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -2,
+      -1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      -1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      2,
+      -1,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      2,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      2,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      2,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      2,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      0,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      2,
+      0,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      2,
+      1,
+      1,
+      0,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "completed_search_implies_coverage": false,
+  "deferred_requests": [],
+  "discovery": {
+    "max_depth": 3,
+    "max_domains": 32768,
+    "sample_seed": 0
+  },
+  "empty_terminals": true,
+  "error": null,
+  "historical_gap_count": 69,
+  "max_reused_rules": 65536,
+  "native_program": {
+    "blake3": "9567c302f8f0ad1b2ad74b8f967bae1808a7cca775f3f33eaab0b7da3475482a",
+    "bytes": 172143,
+    "rules": 23
+  },
+  "physical_arity": 13,
+  "policy": {
+    "max_domains_per_point": 1,
+    "max_domains_per_ray": 1
+  },
+  "remaining_domains": 32740,
+  "rule_precedence": "shared direct zeros, frozen retained rules, fresh request order (ray then point)",
+  "schedule": "requested-ray-point-v1",
+  "schema": 1,
+  "source_measure_id": "rustflow-weighted-sources-v1:cfe0febd5e8ce966dab3c0db43faee93b48422a56c802fd6c962fda93b1bb06c:79e41557461deafa2547070d5d33e518d0adfa939c8b77f8930057724a6656b5:{\"measure\":\"independent occupied Cn and Hn; input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e; factors=[rustflow_occupied::q_0, rustflow_occupied::q_5, -(-rustflow_occupied::q_0+2*rustflow_occupied::q_1-rustflow_occupied::q_3), rustflow_occupied::q_3, -(-rustflow_occupied::q_0+2*rustflow_occupied::q_1+2*rustflow_occupied::q_2-rustflow_occupied::q_3-2*rustflow_occupied::q_4-rustflow_occupied::q_5), rustflow_occupied::q_2, rustflow_occupied::q_6, rustflow_occupied::q_8, rustflow_occupied::q_6-rustflow_occupied::q_7, 1-rustflow_occupied::q_6, rustflow_occupied::q_6, 1-rustflow_occupied::q_7, rustflow_occupied::q_7]; partial source origin evidence=partial-continuation-h1-k2-v1:5b28fe950019fcfef94250a8b7b6dfa079d7d363b94ff8daa4492de59a00df2f; polynomial-closure-v1 order=legacy,shifted-temporal-U,shifted-common-boost,raw-Ward; original-completion-domain<=0; exact-energy-completions=[PolynomialEnergyCompletion { loop_index: 0, slot: 6, coefficient: Fraction { numerator: 1, denominator: 1 } }]; raw Ward deliberately omitted: no bound singleton-germ theorem; source presentation=polynomial-closure-v1; positive compact energy completion powers=false\",\"support\":\"real compact shell coordinates; [OccupiedShell { loop_index: 0, physical_slot: 0, upper_slot: 9, lower_slot: 10, mass_squared: 0, chemical_potential: Fraction { numerator: 1, denominator: 1 } }, OccupiedShell { loop_index: 1, physical_slot: 3, upper_slot: 11, lower_slot: 12, mass_squared: 0, chemical_potential: Fraction { numerator: 1, denominator: 1 } }]; certified joint dimensional origin zero jets: occupied loop 0, cut slot 0>=1 and lower-energy slot 10>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint 1>0; certified joint dimensional origin zero jets: occupied loop 1, cut slot 3>=1 and lower-energy slot 12>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint 1>0; partial universal virtual-zero supports=partial-continuation-h1-k2-v1:5b28fe950019fcfef94250a8b7b6dfa079d7d363b94ff8daa4492de59a00df2f\",\"orientation\":\"future first 2 loops; q=(-i PE0,-PEvec); inverse routing=[[1, 0, 0], [0, 0, 1], [1, -1, 0]]; determinant=1\",\"normalization\":\"virtual d^Dk/(i pi^(D/2)); occupied d^Dq/pi^(D/2); Euclidean target Wick phases already included\",\"branch\":\"partial-continuation-h1-k2-v1:5b28fe950019fcfef94250a8b7b6dfa079d7d363b94ff8daa4492de59a00df2f; partial-origin-rank-two-v2;universal-finite-label-JN;no-endpoint-no-infinity:a2f0724eedc7a5bcc6b61740524275bcb0e46dbf8495780db530943eca14ac30\",\"deformation\":\"native Di-eta on [1, 2]; physical shells and upper/lower supports fixed; input indices and coefficients fixed\"}:zero-tail-storage-v1:physical=13:capacity=16",
+  "status": "complete",
+  "storage_capacity": 16,
+  "transactions": [
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -2,
+        -1,
+        0,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [],
+        "rhs": [
+          {
+            "coefficient": "1",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -2
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -2
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32766,
+      "remaining_before": 32768,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        -1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [],
+        "rhs": [
+          {
+            "coefficient": "1",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32764,
+      "remaining_before": 32766,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "-8+4*rustflow_occupied::{}::epsilon",
+          "-4*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-32*rustflow_occupied::{}::eta+16*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-4+2*rustflow_occupied::{}::epsilon",
+          "-16384*rustflow_occupied::{}::eta+8192*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-64*rustflow_occupied::{}::eta+32*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-12*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2+8",
+          "-16384+8192*rustflow_occupied::{}::epsilon",
+          "-192*rustflow_occupied::{}::epsilon+128+64*rustflow_occupied::{}::epsilon^2",
+          "-6*rustflow_occupied::{}::epsilon+2*rustflow_occupied::{}::epsilon^2+4",
+          "-8*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)*-1",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8+4*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-12*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2+8)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8+4*rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+2*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-12*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2+8)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-12*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2+8)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -2,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-6*rustflow_occupied::{}::epsilon+2*rustflow_occupied::{}::epsilon^2+4)^(-1)*rustflow_occupied::{}::epsilon",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+4*rustflow_occupied::{}::epsilon)*(-8+4*rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8+4*rustflow_occupied::{}::epsilon)^(-1)*-1*rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-6*rustflow_occupied::{}::epsilon+2*rustflow_occupied::{}::epsilon^2+4)^(-1)*rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+2*rustflow_occupied::{}::epsilon)^(-1)*rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)*-1",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-12*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2+8)^(-1)*-1",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)",
+            "integral": [
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-12*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2+8)^(-1)",
+            "integral": [
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)*-1",
+            "integral": [
+              2,
+              1,
+              0,
+              1,
+              1,
+              0,
+              -2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32762,
+      "remaining_before": 32764,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "-12*rustflow_occupied::{}::epsilon+4+8*rustflow_occupied::{}::epsilon^2",
+          "-192*rustflow_occupied::{}::epsilon+128*rustflow_occupied::{}::epsilon^2+64",
+          "-32+32*rustflow_occupied::{}::epsilon",
+          "-1+rustflow_occupied::{}::epsilon",
+          "-2+2*rustflow_occupied::{}::epsilon",
+          "-16+16*rustflow_occupied::{}::epsilon",
+          "-4+4*rustflow_occupied::{}::epsilon",
+          "-64+64*rustflow_occupied::{}::epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-1+-1*rustflow_occupied::{}::epsilon)*(-2+2*rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+4*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2+2*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+4*rustflow_occupied::{}::epsilon)*1/2",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2*rustflow_occupied::{}::epsilon+1)*(-4+4*rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2+2*rustflow_occupied::{}::epsilon)^(-1)*-1*rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+4*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2+2*rustflow_occupied::{}::epsilon)^(-1)*-1*rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+4*rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              -1,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+4*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              2,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-12*rustflow_occupied::{}::epsilon+4+8*rustflow_occupied::{}::epsilon^2)^(-1)*-1*rustflow_occupied::{}::eta",
+            "integral": [
+              2,
+              2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-12*rustflow_occupied::{}::epsilon+4+8*rustflow_occupied::{}::epsilon^2)^(-1)*rustflow_occupied::{}::eta",
+            "integral": [
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32760,
+      "remaining_before": 32762,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 0,
+      "allocated_ray_domains": 0,
+      "complete": true,
+      "integral": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reason": "retained rule or declared zero applies",
+      "remaining_after": 32760,
+      "remaining_before": 32760,
+      "retained_probe": {
+        "nonzero_conditions": [
+          "-1+2*rustflow_occupied::{}::epsilon",
+          "-16+32*rustflow_occupied::{}::epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-1+2*rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+2*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "-3*rustflow_occupied::{}::epsilon+1+2*rustflow_occupied::{}::epsilon^2",
+          "-24*rustflow_occupied::{}::epsilon+16*rustflow_occupied::{}::epsilon^2+8",
+          "-2+2*rustflow_occupied::{}::epsilon",
+          "-6*rustflow_occupied::{}::epsilon+2+4*rustflow_occupied::{}::epsilon^2",
+          "-1+rustflow_occupied::{}::epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-1+rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              3,
+              -1,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+-3*rustflow_occupied::{}::eta)*(-3*rustflow_occupied::{}::epsilon+1+2*rustflow_occupied::{}::epsilon^2)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              3,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1*rustflow_occupied::{}::eta+-2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)*(-6*rustflow_occupied::{}::epsilon+2+4*rustflow_occupied::{}::epsilon^2)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta^2+-3*rustflow_occupied::{}::eta^2)*(-3*rustflow_occupied::{}::epsilon+1+2*rustflow_occupied::{}::epsilon^2)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              3,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-3*rustflow_occupied::{}::epsilon+1+2*rustflow_occupied::{}::epsilon^2)^(-1)*2*rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              3,
+              -1,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32758,
+      "remaining_before": 32760,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "-8+4*rustflow_occupied::{}::epsilon",
+          "-4*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-32*rustflow_occupied::{}::eta+16*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-4+2*rustflow_occupied::{}::epsilon",
+          "-16384*rustflow_occupied::{}::eta+8192*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-64*rustflow_occupied::{}::eta+32*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-8*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2",
+          "-8*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-16384+8192*rustflow_occupied::{}::epsilon",
+          "-128*rustflow_occupied::{}::epsilon+64*rustflow_occupied::{}::epsilon^2",
+          "-4*rustflow_occupied::{}::epsilon+2*rustflow_occupied::{}::epsilon^2",
+          "-2+rustflow_occupied::{}::epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)*-1",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8+4*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4*rustflow_occupied::{}::epsilon+2*rustflow_occupied::{}::epsilon^2)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              3,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+2*rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              3,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+2*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              -2,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+2*rustflow_occupied::{}::epsilon)*(-8*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2)^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2+rustflow_occupied::{}::epsilon)^(-1)*rustflow_occupied::{}::epsilon",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8+4*rustflow_occupied::{}::epsilon)^(-1)*-1*rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4*rustflow_occupied::{}::epsilon+2*rustflow_occupied::{}::epsilon^2)^(-1)*rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              1,
+              2,
+              1,
+              2,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+2*rustflow_occupied::{}::epsilon)^(-1)*rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              1,
+              2,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)*-1",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2)^(-1)*-1",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-8*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2)^(-1)",
+            "integral": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta)^(-1)*-1",
+            "integral": [
+              2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              -2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32756,
+      "remaining_before": 32758,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "2*rustflow_occupied::{}::eta",
+          "8192*rustflow_occupied::{}::eta",
+          "rustflow_occupied::{}::eta",
+          "4*rustflow_occupied::{}::eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/4*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+-1*rustflow_occupied::{}::epsilon)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/4",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32754,
+      "remaining_before": 32756,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        1,
+        2,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "2*rustflow_occupied::{}::eta",
+          "rustflow_occupied::{}::eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-3*rustflow_occupied::{}::epsilon+2)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32752,
+      "remaining_before": 32754,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "2*rustflow_occupied::{}::eta",
+          "rustflow_occupied::{}::eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-1*rustflow_occupied::{}::epsilon+1)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32750,
+      "remaining_before": 32752,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        2,
+        1,
+        0,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [],
+        "rhs": [
+          {
+            "coefficient": "-1/2",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -2
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              -1,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32748,
+      "remaining_before": 32750,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        2,
+        1,
+        0,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "32*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "2*rustflow_occupied::{}::epsilon",
+          "4*rustflow_occupied::{}::epsilon",
+          "rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "16*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "16*rustflow_occupied::{}::epsilon",
+          "rustflow_occupied::{}::epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-4*rustflow_occupied::{}::epsilon+3)*1/4*rustflow_occupied::{}::epsilon^(-1)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1*rustflow_occupied::{}::epsilon+1)*1/2*rustflow_occupied::{}::epsilon^(-1)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1*rustflow_occupied::{}::epsilon+1)*rustflow_occupied::{}::epsilon^(-1)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+rustflow_occupied::{}::epsilon)*1/2*rustflow_occupied::{}::epsilon^(-1)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-3+4*rustflow_occupied::{}::epsilon)*1/4*rustflow_occupied::{}::epsilon^(-1)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/4*rustflow_occupied::{}::epsilon^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+rustflow_occupied::{}::epsilon)*rustflow_occupied::{}::epsilon^(-1)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*rustflow_occupied::{}::epsilon^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2*rustflow_occupied::{}::epsilon^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*rustflow_occupied::{}::epsilon^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2*rustflow_occupied::{}::epsilon^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "rustflow_occupied::{}::epsilon^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*rustflow_occupied::{}::epsilon^(-1)*rustflow_occupied::{}::eta",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2*rustflow_occupied::{}::epsilon^(-1)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              2,
+              2,
+              0,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32746,
+      "remaining_before": 32748,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 0,
+      "allocated_ray_domains": 0,
+      "complete": true,
+      "integral": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reason": "retained rule or declared zero applies",
+      "remaining_after": 32746,
+      "remaining_before": 32746,
+      "retained_probe": {
+        "nonzero_conditions": [
+          "-2+2*rustflow_occupied::{}::epsilon",
+          "-32+32*rustflow_occupied::{}::epsilon",
+          "-4+4*rustflow_occupied::{}::epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-4+4*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+4*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              2,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-4+4*rustflow_occupied::{}::epsilon)^(-1)*-1*rustflow_occupied::{}::eta",
+            "integral": [
+              2,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2+2*rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              2,
+              2,
+              0,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2+2*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              2,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 3 }"
+      }
+    },
+    {
+      "allocated_point_domains": 0,
+      "allocated_ray_domains": 0,
+      "complete": true,
+      "integral": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "reason": "retained rule or declared zero applies",
+      "remaining_after": 32746,
+      "remaining_before": 32746,
+      "retained_probe": {
+        "nonzero_conditions": [
+          "8*rustflow_occupied::{}::eta",
+          "rustflow_occupied::{}::eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -2,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              -1,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1",
+            "integral": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              2,
+              1,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 4 }"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "-1+2*rustflow_occupied::{}::epsilon",
+          "-16+32*rustflow_occupied::{}::epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "(-1+2*rustflow_occupied::{}::epsilon)^(-1)",
+            "integral": [
+              2,
+              2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-1+2*rustflow_occupied::{}::epsilon)^(-1)*-1",
+            "integral": [
+              2,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32744,
+      "remaining_before": 32746,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        2,
+        2,
+        0,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "8*rustflow_occupied::{}::eta",
+          "16*rustflow_occupied::{}::eta",
+          "rustflow_occupied::{}::eta",
+          "2*rustflow_occupied::{}::eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              -1,
+              -1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              -2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              2,
+              1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2*rustflow_occupied::{}::epsilon+2)*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              2,
+              1,
+              0,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2",
+            "integral": [
+              2,
+              1,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              2,
+              2,
+              0,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32742,
+      "remaining_before": 32744,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    },
+    {
+      "allocated_point_domains": 1,
+      "allocated_ray_domains": 1,
+      "complete": true,
+      "integral": [
+        2,
+        2,
+        1,
+        1,
+        0,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_gaps": [],
+      "point_probe": {
+        "nonzero_conditions": [
+          "8*rustflow_occupied::{}::eta",
+          "rustflow_occupied::{}::eta",
+          "2*rustflow_occupied::{}::eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              1,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "integral": [
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1",
+            "integral": [
+              1,
+              2,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1*rustflow_occupied::{}::eta^(-1)",
+            "integral": [
+              2,
+              2,
+              0,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "point_still_unresolved": false,
+      "ray_gaps": [
+        {
+          "bounds": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        },
+        {
+          "bounds": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "detail": "domain traversal budget exhausted",
+          "reason": "DomainBudget"
+        }
+      ],
+      "ray_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "reason": "bounded native search completed; no coverage inferred",
+      "remaining_after": 32740,
+      "remaining_before": 32742,
+      "retained_probe": {
+        "nonzero_conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      }
+    }
+  ]
+}

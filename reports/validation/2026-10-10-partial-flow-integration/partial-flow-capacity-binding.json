@@ -1,0 +1,15 @@
+{
+  "source_snapshot_sha256": "4339433ed5258ba5d1ea4fc622f85a339880ec026d180602cef167f644a24aee",
+  "build_provenance_sha256": "7c641f8156d6c2d1b2e411879ff11c77d60d5f7a18f74e7ccdbac712406faf41",
+  "launcher_sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+  "gate": "capacity",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_capacity-fceac547516b5e9d",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "native_numerical_acceptance_run": false
+}

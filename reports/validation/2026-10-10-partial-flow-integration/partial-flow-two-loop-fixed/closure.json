@@ -1,0 +1,21 @@
+[
+  {
+    "cut_slots": [
+      0,
+      1
+    ],
+    "diagnostics": {
+      "all_diagnostics": "WeightedClosureDiagnostics { rounds: 6, requested: 11, historical_requested: 38, retired_unresolved: 0, history_candidate_selected: 0, history_candidate_assessed: 0, history_candidate_maps: 0, history_candidate_unassessed: 38, direct_zero_calls: 6, direct_zero_attempts: 58976, direct_zero_rules: 0, direct_zero_completed_points: {[1, 1, -2, 0, 0, 0, 0, 1, 0], [1, 1, -1, -1, 0, 1, 0, 1, 0], [1, 1, -1, 0, 0, 0, 0, 0, 0], [1, 1, -1, 0, 0, 0, 0, 1, 0], [1, 1, 0, -1, -1, 1, 0, 0, 0], [1, 1, 0, -1, 0, 0, 0, 0, 0], [1, 1, 0, -1, 0, 1, 0, 1, 0], [1, 1, 0, 0, -2, 0, 0, 1, 0], [1, 1, 0, 0, -1, 0, 0, 0, 0], [1, 1, 0, 0, -1, 0, 0, 1, 0], [1, 1, 0, 0, -1, 1, 0, 0, 0], [1, 1, 0, 0, 0, 0, 0, 0, 0], [1, 1, 0, 0, 0, 0, 0, 1, 0], [1, 1, 0, 0, 0, 1, 0, 0, 0], [1, 1, 0, 0, 0, 2, 0, 0, 0], [1, 1, 1, -1, -2, 1, 0, 0, 0], [1, 1, 1, -1, -1, 0, 0, 0, 0], [1, 1, 1, -1, -1, 1, 0, 0, 0], [1, 1, 1, 0, -2, 0, 0, 0, 0], [1, 1, 1, 0, -1, 0, 0, 0, 0], [1, 1, 1, 0, -1, 0, 0, 1, 0], [1, 1, 1, 0, -1, 1, 0, 0, 0], [1, 1, 1, 0, -1, 1, 0, 1, 0], [1, 1, 1, 0, 0, 0, 0, 0, 0], [1, 1, 1, 0, 0, 0, 0, 1, 0], [1, 1, 2, -1, -2, 1, 0, 0, 0], [1, 1, 2, -1, -1, 0, 0, 0, 0], [1, 1, 2, -1, -1, 1, 0, 0, 0], [1, 1, 2, 0, -1, 1, 0, 1, 0], [1, 1, 2, 0, 0, 0, 0, 0, 0], [1, 1, 2, 0, 0, 0, 0, 1, 0], [2, 1, -1, 0, -1, 0, 0, 1, 0], [2, 1, -1, 0, 0, 0, 0, 0, 0], [2, 1, 0, -1, -1, 0, 0, 0, 0], [2, 1, 0, -1, 0, 0, 0, 1, 0], [2, 1, 0, 0, -1, 0, 0, 1, 0], [2, 1, 0, 0, 0, 0, 0, 0, 0], [2, 1, 1, -1, -1, 0, 0, 0, 0]}, native_frontier_requests: 30, provisional_sizes: [6, 18, 10, 7, 5, 5], native_rules: 1034, native_rule_unions: 12, residual_search_requests: 71, residual_allocated_domains: 2400, requested_ray_point_calls: 0, requested_ray_point_allocated_domains: 0, requested_ray_point_fallbacks: 0, requested_ray_point_deferred: 0, conditional_point_refinements: [], native_rule_applications: 1337, memoized_rule_applications: 106, unit_memo_hits: 14, unit_memo_misses: 30, unit_memo_peak_owned_bytes: 34161, unit_memo_peak_entries: 7, unit_memo_peak_output_terms: 21, unit_memo_peak_conditions: 98, unit_memo_peak_polynomial_terms: 285, uncovered_discovery_domains: 454, historical_discovery_domains: 454, guard_refinement_passes: 1, guard_refinement_added_domains: 2, guard_refinement_budget_exhausted: false, guard_refinements: [GuardRefinementRecord { pass: 1, parent_bounds: [[Some(1), Some(1)], [Some(1), Some(1)], [Some(1), Some(1)], [Some(0), Some(0)], [Some(0), Some(0)], [Some(0), Some(0)], [Some(0), Some(0)], [Some(1), Some(2)], [Some(0), Some(0)]], native_failure: \"recentered source proof misses the requested target domain\", axis: 7, fixed_values: [1, 2], trigger: [1, 1, 1, 0, 0, 0, 0, 1, 0] }] }",
+      "memoized_rule_applications": 106,
+      "native_rule_applications": 1337,
+      "performed_native_rule_applications": 1231,
+      "unit_memo_hits": 14,
+      "unit_memo_misses": 30,
+      "unit_memo_peak_conditions": 98,
+      "unit_memo_peak_entries": 7,
+      "unit_memo_peak_output_terms": 21,
+      "unit_memo_peak_owned_bytes": 34161,
+      "unit_memo_peak_polynomial_terms": 285
+    }
+  }
+]

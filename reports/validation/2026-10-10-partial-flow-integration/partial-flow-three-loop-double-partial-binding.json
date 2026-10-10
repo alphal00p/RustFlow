@@ -1,0 +1,107 @@
+{
+  "source_snapshot_sha256": "4339433ed5258ba5d1ea4fc622f85a339880ec026d180602cef167f644a24aee",
+  "build_provenance_sha256": "7c641f8156d6c2d1b2e411879ff11c77d60d5f7a18f74e7ccdbac712406faf41",
+  "root_gates_sha256": "82c9f4be97b6135119483bf66703bbba36656239972d3dc2566b4f97569bcdb6",
+  "launcher_sha256": "44750a3eeb5de3a41f5f0677b5810ceb527b95cd4da583979a5d3951310dceb1",
+  "input_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+  "executable": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+  "executable_sha256": "a1f5f1c7bc09c15e8970a4f8de200fe849202fca53e0a21ebeb359edc7bda892",
+  "settings": {
+    "RUSTFLOW_WEIGHTED_INPUT": "examples/finite_density/massless_three_loop_chain.json",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY": "polynomial-closure-v1",
+    "RUSTFLOW_WEIGHTED_UNIT_MEMO": "true",
+    "RUSTFLOW_WEIGHTED_UNIT_MEMO_ENTRIES": "64",
+    "RUSTFLOW_WEIGHTED_UNIT_MEMO_TERMS": "4096",
+    "RUSTFLOW_WEIGHTED_UNIT_MEMO_CONDITIONS": "32768",
+    "RUSTFLOW_WEIGHTED_UNIT_MEMO_POLYNOMIAL_TERMS": "262144",
+    "RUSTFLOW_WEIGHTED_UNIT_MEMO_BYTES": "67108864",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS": "true",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS": "true",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES": "true",
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED": "false",
+    "RUSTFLOW_WEIGHTED_REUSED_RULES": "65536",
+    "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL": "0",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAY_POINT": "true",
+    "RUSTFLOW_WEIGHTED_RAY_DOMAINS": "1",
+    "RUSTFLOW_WEIGHTED_POINT_DOMAINS": "1",
+    "RUSTFLOW_WEIGHTED_MAX_HISTORY_CANDIDATE_MAPS": "0",
+    "RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE": "true",
+    "RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS": "8192",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES": "0",
+    "RUSTFLOW_WEIGHTED_DEPTH": "3",
+    "RUSTFLOW_WEIGHTED_DOMAINS": "32768",
+    "RUSTFLOW_WEIGHTED_ROUNDS": "32",
+    "RUSTFLOW_WEIGHTED_FRONTIER": "8192",
+    "RUSTFLOW_WEIGHTED_REQUESTED": "16384",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON": "-5/4",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES": "18:60:8,28:60:8,28:80:8,28:80:12",
+    "RUSTFLOW_WEIGHTED_SHIFTED_SLOTS": "[1,2]",
+    "RUSTFLOW_WEIGHTED_CUTS": "0,3",
+    "RUSTFLOW_DENSITY_FLOW_REPORT": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial"
+  },
+  "command": [
+    "timeout",
+    "1800",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_occupied_flow",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cleared_inherited_runtime_variable_names": [],
+  "scope": "Fresh original three-loop input, selected cut [0,3], partial shifted slots [1,2], one preparation and four fixed-D profiles. Actual native sources and closure are regenerated; no rules/checkpoints/independent reference values are imported. Full-amplitude three-loop or four-loop acceptance is not claimed. Incomplete profiles remain bounded partial evidence. Shared-host resource data are not speed comparisons.",
+  "prerequisite_comparisons": {
+    "two-loop-fixed": {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-fixed-comparison.json",
+      "sha256": "69b879e3d2bcda7c547fd7dc988e8f7967dea98ee8718d49ad604f268a535dc2"
+    },
+    "two-loop-laurent": {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent-comparison.json",
+      "sha256": "18e4042924e1737d7122d5ec7af34c33cdde876575df74e4cc0d84592a497715"
+    },
+    "massive-regression": {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression-comparison.json",
+      "sha256": "e24cf8a133c6fc41e81fa35210ddc02bee99eb02dc8011e6f498253c0c48b760"
+    }
+  },
+  "prerequisites_used_only_for_launch_verification": true,
+  "full_amplitude": false,
+  "cut_slots": [
+    0,
+    3
+  ],
+  "shifted_slots": [
+    1,
+    2
+  ],
+  "required_fixed_profiles": [
+    [
+      18,
+      60,
+      8
+    ],
+    [
+      28,
+      60,
+      8
+    ],
+    [
+      28,
+      80,
+      8
+    ],
+    [
+      28,
+      80,
+      12
+    ]
+  ],
+  "timeout_seconds": 1800,
+  "requested_ray_point_schedule_enabled": true,
+  "experimental_programs_or_rules_imported": false,
+  "predictions_before_reference_access": true,
+  "experimental_native_portfolio_enabled": false,
+  "exit_code": 241,
+  "post_run_source_and_executable_unchanged": true
+}

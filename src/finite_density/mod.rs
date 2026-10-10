@@ -19,9 +19,11 @@ pub mod massless_endpoint;
 pub mod measure;
 pub mod normalization;
 pub mod parametric_endpoint;
+mod partial_origin;
 pub mod preparation;
 pub mod reduction;
 pub mod singleton_zero;
+mod source_class;
 pub mod terminal;
 pub mod vacuum;
 

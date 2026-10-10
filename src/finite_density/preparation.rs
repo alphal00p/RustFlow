@@ -6,7 +6,9 @@ use symbolica::prelude::*;
 use super::geometry::OccupiedCutFamily;
 use super::guarded::{GuardedContext, GuardedMeasureIdentity, IndexBounds, IndexDomain};
 use super::massless_endpoint::MasslessFlowEvidence;
+use super::partial_origin::continuation::PartialContinuation;
 use super::reduction::{AuxiliaryConvention, FixedShellDeformation};
+use super::source_class::SourceImageClassCertificate;
 use crate::{Error, Result};
 
 /// Equivalent exact source presentations for bounded native discovery.
@@ -80,6 +82,13 @@ pub struct PreparedWeightedSources<const N: usize> {
     pub context: GuardedContext<N>,
     pub deformation: FixedShellDeformation<N>,
     pub targets: Vec<BTreeMap<[i64; N], Atom>>,
+    source_image_class: Option<SourceImageClassCertificate>,
+}
+
+impl<const N: usize> PreparedWeightedSources<N> {
+    pub(crate) fn source_image_class(&self) -> Option<&SourceImageClassCertificate> {
+        self.source_image_class.as_ref()
+    }
 }
 
 impl OccupiedCutFamily {
@@ -163,6 +172,7 @@ impl OccupiedCutFamily {
             identity,
             options,
             None,
+            None,
         )
     }
 
@@ -192,6 +202,35 @@ impl OccupiedCutFamily {
             identity,
             options,
             Some(origin),
+            None,
+        )
+    }
+
+    /// Distinct partial-placement origin authority; it grants no raw Ward row.
+    pub(crate) fn guarded_sources_with_partial_origin<const N: usize>(
+        &self,
+        epsilon: Symbol,
+        dimension: i64,
+        eta: Symbol,
+        shifted: &[usize],
+        domain_budget: usize,
+        parameters: Vec<Symbol>,
+        identity: GuardedMeasureIdentity,
+        options: WeightedSourceOptions,
+        origin: &PartialContinuation,
+        run: &crate::RunContext,
+    ) -> Result<PreparedWeightedSources<N>> {
+        self.guarded_sources_with_origin(
+            epsilon,
+            dimension,
+            eta,
+            shifted,
+            domain_budget,
+            parameters,
+            identity,
+            options,
+            None,
+            Some((origin, run)),
         )
     }
 
@@ -206,7 +245,13 @@ impl OccupiedCutFamily {
         mut identity: GuardedMeasureIdentity,
         options: WeightedSourceOptions,
         origin: Option<&MasslessFlowEvidence>,
+        partial: Option<(&PartialContinuation, &crate::RunContext)>,
     ) -> Result<PreparedWeightedSources<N>> {
+        if origin.is_some() && partial.is_some() {
+            return Err(Error::InvalidInput(
+                "conflicting occupied origin authorities".into(),
+            ));
+        }
         if options.policy == WeightedSourcePolicy::PolynomialClosure
             && options.positive_compact_energy_powers
         {
@@ -214,7 +259,7 @@ impl OccupiedCutFamily {
                 "PolynomialClosure requires polynomial completion powers".into(),
             ));
         }
-        if options.free_virtual_zero_sectors && origin.is_none() {
+        if options.free_virtual_zero_sectors && origin.is_none() && partial.is_none() {
             return Err(Error::InvalidInput(
                 "free virtual zero sectors require bound sealed massless evidence".into(),
             ));
@@ -245,10 +290,26 @@ impl OccupiedCutFamily {
                 .branch
                 .push_str(&format!("; {}", origin.origin_identity()));
             loops
+        } else if let Some((proof, run)) = partial {
+            proof.validate_family_binding(self, shifted, options, run)?;
+            let loops = proof.certified_origin_loops().to_vec();
+            if loops.is_empty() {
+                return Err(Error::InvalidInput(
+                    "partial origin covers no occupied loop".into(),
+                ));
+            }
+            identity.measure.push_str(&format!(
+                "; partial source origin evidence={}",
+                proof.source_identity()
+            ));
+            identity
+                .branch
+                .push_str(&format!("; {}", proof.origin_identity()));
+            loops
         } else {
             Vec::new()
         };
-        let free_virtual_zeros = if options.free_virtual_zero_sectors {
+        let free_virtual_zeros = if options.free_virtual_zero_sectors && origin.is_some() {
             origin
                 .unwrap()
                 .free_virtual_zero_supports(self, shifted, domain_budget)?
@@ -493,6 +554,27 @@ impl OccupiedCutFamily {
                 parameters.push(parameter);
             }
         }
+        if let Some((proof, run)) = partial {
+            let domains = proof.free_virtual_zero_domains::<N>(self, shifted, options, run)?;
+            if domains.len() > domain_budget {
+                return Err(Error::Limit(
+                    "partial virtual-zero domain budget exceeded".into(),
+                ));
+            }
+            for domain in domains {
+                run.cancellation.check()?;
+                if !domain.is_subset_of(&admitted_domain) {
+                    return Err(Error::InvalidInput(
+                        "partial virtual-zero box exceeds the admitted measure".into(),
+                    ));
+                }
+                zero_domains.push(domain);
+            }
+            identity.support.push_str(&format!(
+                "; partial universal virtual-zero supports={}",
+                proof.source_identity()
+            ));
+        }
         let context = GuardedContext::new_with_physical_arity(
             identity,
             roles,
@@ -502,6 +584,12 @@ impl OccupiedCutFamily {
             physical_arity,
         )?
         .with_measure_zero_domains(zero_domains)?;
+        // Universal source-image coverage is separate from an application trace.
+        let source_image_class = partial
+            .map(|(proof, run)| {
+                proof.certify_sources(self, shifted, options, &context, &admitted_domain, run)
+            })
+            .transpose()?;
         let mut selected = [false; N];
         for &slot in shifted {
             selected[slot] = true;
@@ -537,6 +625,7 @@ impl OccupiedCutFamily {
             context,
             deformation,
             targets,
+            source_image_class,
         })
     }
 }

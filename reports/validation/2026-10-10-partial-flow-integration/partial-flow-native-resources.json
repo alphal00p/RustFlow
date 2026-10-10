@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/rustred-258a1e04558e72f1",
+    "solver::guarded",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.10665866918861866,
+  "user_seconds": 0.0817,
+  "system_seconds": 0.025426999999999998,
+  "peak_child_rss_kib": 15468,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

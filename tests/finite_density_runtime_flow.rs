@@ -45,7 +45,10 @@ impl Run {
             digits: input.digits,
             guard_digits: 40,
             series_order: 60,
-            mass_mode: MassMode::All,
+            mass_mode: std::env::var("RUSTFLOW_WEIGHTED_SHIFTED_SLOTS")
+                .map(|slots| MassMode::Propagators(serde_json::from_str(&slots)
+                    .expect("RUSTFLOW_WEIGHTED_SHIFTED_SLOTS must be a JSON array of parent physical slots")))
+                .unwrap_or(MassMode::All),
             ..Default::default()
         };
         let closure = WeightedClosureOptions {
@@ -136,6 +139,7 @@ impl Run {
                 "owned_bytes_metric":"memo field + fixed boxed slots + boxed records/condition IDs + encoded coefficient/state bytes; excludes allocator overhead, program, encoder/decoder/CAS scratch and returned reductions",
             })),
             "guard_digits":run.options.guard_digits,
+            "mass_mode":format!("{:?}",run.options.mass_mode),
             "profiles":run.profiles(),
             "source_options":run.source_options(),
             "initial_epsilon_grid":setting("RUSTFLOW_DENSITY_FLOW_GRID",1000_i64),
@@ -259,6 +263,7 @@ fn report(value: &OccupiedFlowEvaluation) -> Value {
         "native_storage_capacity":value.native_storage_capacity,"source_options":value.source_options,
         "contour_admission":value.contour_admission,"shifted_slots":value.shifted_slots,
         "massless_endpoint":value.massless_endpoint,"boundary":format!("{:?}",value.boundary),
+        "partial_continuation":value.partial_continuation,
         "nonzero_conditions":value.nonzero_conditions.iter().map(Atom::to_canonical_string).collect::<Vec<_>>(),
     })
 }

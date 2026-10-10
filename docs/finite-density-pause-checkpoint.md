@@ -1,4 +1,46 @@
-# Safe pause checkpoint — 2026-10-09
+# Safe pause checkpoint — 2026-10-10
+
+Paused at the user's request. All owned validation and build processes have
+stopped. The feature remains incomplete: full three-loop fixed-dimension and
+Laurent validation must pass before four-loop numerical scale-up. No supplied
+four-loop oracle comparison or full four-loop acceptance is claimed.
+
+The partial fixed-shell placement implementation is integrated for direct
+occupied flows with one virtual loop and two massless occupied shells. The
+coherent build passed 281 tests and all three lower-loop numerical controls:
+40 fixed-dimension reference checks and 30 refinements, 30 Laurent checks and
+24 refinements, and the massive control's ten independent, ten historical and
+two assembly checks. Scope and provenance are frozen in the
+[partial integration report](../reports/validation/2026-10-10-partial-flow-integration/README.md).
+
+Two fresh three-loop producers were intentionally interrupted with SIGTERM;
+their resource wrappers and source/executable checks completed. Neither produced
+a numerical profile or a closed native system. The
+[all-shift joint control](../reports/validation/2026-10-10-three-loop-joint-control/README.md)
+ran for about 71 minutes and last saved a 3,315-label provisional frontier. The
+selected partial control, cut `[0,3]` with shifted slots `[1,2]`, ran for about
+90 seconds and last saved a 928-label provisional frontier. Their different
+durations and source configurations do not establish a speed or closure
+comparison. Checkpoints are diagnostic evidence, not supported resumable state.
+
+An isolated [native ordered-unit batch draft](../reports/validation/2026-10-10-parallel-reduction-assessment/README.md)
+passed 111 guarded tests with one existing ignored test. It remains unapplied.
+The corresponding [RustFlow frontend draft](../reports/validation/2026-10-10-bounded-unit-batch-integration-draft/PAUSE.md)
+is saved but uncompiled and untested. It needs coherent source/dependency identity
+checks, exact serial/batch comparisons and regression gates before promotion.
+No universal equality of encoded memo bytes or hit counts is claimed: Symbolica
+process-global variable-map registration can affect the encoded cache size.
+
+After the user resumes, review these frozen checkpoints, finish the isolated
+batch validation if still useful, and choose a fresh bounded three-loop control
+with a new report directory. Keep original targets, physical raised-line and
+Fermi-surface terms, mandatory native replay and derivative closure, integrated
+boundaries and independent reference/refinement gates. The moving-shell
+exploration remains complete without a demonstrated multi-loop benefit;
+fixed-shell flows remain preferred. E8/I91's common thermal contour and raised
+reference remain unresolved.
+
+## Historical checkpoint — 2026-10-09
 
 Paused at the user's request. The generic finite-density feature is incomplete;
 no native four-loop numerical acceptance or supplied-oracle value comparison

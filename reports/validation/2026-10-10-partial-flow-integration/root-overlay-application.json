@@ -1,0 +1,107 @@
+{
+  "captured_utc": "2026-10-10T09:00:50.597038+00:00",
+  "status": "exact 18 tested overlay files applied; production build pending",
+  "base_source_files": {
+    "src/finite_density/flow.rs": "b4640b85bf6045648336ea3487b2f59ec297b7817ba26d4d6fc95ff98b63f148",
+    "src/finite_density/preparation.rs": "c9afb84aa43ef16c5a635aec5eae63918676b1b708d2fd2cdad5fd37135b136e",
+    "src/finite_density/flow_boundary.rs": "f81722cfadc6a793da2a7352b16d1dfbf31290e55d941b376515842dc1d5636c",
+    "src/finite_density/boundary.rs": "fdf72b8383e166dc1f5cdb7f9d565336c38fec0ef3bac36605411a8a7519fe0c",
+    "src/finite_density/interface.rs": "cb6ab1ac9ccea754876f223beadc82cf87009bc3f6b267247580e5636ff588a3",
+    "src/finite_density/singleton_zero.rs": "0f0d349de693b1a2f9dd79edb3f9690f4d793cc7b38bc12d38f9e625dc0ccc41",
+    "src/finite_density/terminal.rs": "cfe7ce75f6f8b3b1112957df5f84807acbb7800bbe850a4e30a289679c8dcae8",
+    "tests/finite_density_runtime_flow.rs": "2eebfc888cabbf34cdd6d3c1e851ae79f80eb27bba67892599b84a1c227fae68",
+    "src/finite_density/mod.rs": "5da92492f922cbf083f58e9d17ab75daac958d189d2c55e61737de7385ff8e03"
+  },
+  "files": {
+    "src/finite_density/boundary/partial_tests.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/src/finite_density/boundary/partial_tests.rs",
+      "sha256": "85f796a4692755a71a4cb339c8c7102810bfe796c9922469093aa2e29e1272bb",
+      "bytes": 7392
+    },
+    "src/finite_density/boundary.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/src/finite_density/boundary.rs",
+      "sha256": "4eb980dbf6355ac3eac0a66a13bfb90fe9290a3a225b57e64e1b353ba6f8f207",
+      "bytes": 39164
+    },
+    "src/finite_density/flow.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/src/finite_density/flow.rs",
+      "sha256": "30863b4ebc143893275c081cbe3923da16a9d38e3c38b5d81d208adcd8a7cf71",
+      "bytes": 24196
+    },
+    "src/finite_density/flow_boundary.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/src/finite_density/flow_boundary.rs",
+      "sha256": "c7fdacd319e863fcd605fa88778671a0db8e6f5c350d30f633f548a988471211",
+      "bytes": 22027
+    },
+    "src/finite_density/flow_partial_tests.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/src/finite_density/flow_partial_tests.rs",
+      "sha256": "10a60f0a988d6a40b01427ef74c671ec9aceb0c9f8525041e4a6eb67fa435469",
+      "bytes": 2165
+    },
+    "src/finite_density/interface.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/src/finite_density/interface.rs",
+      "sha256": "027a1f2fed9169169fa4138b18ab9323d39893c75a5642612ad4d88845c4333c",
+      "bytes": 14908
+    },
+    "src/finite_density/mod.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/src/finite_density/mod.rs",
+      "sha256": "513db6de6ab5008a92fedf07471de093e21675c09152cbee95e2b98fe9363335",
+      "bytes": 883
+    },
+    "src/finite_density/preparation.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/src/finite_density/preparation.rs",
+      "sha256": "f9755354e303cab45072463ecfde7375f129daed045b96a5f10461e9a40aaece",
+      "bytes": 26252
+    },
+    "src/finite_density/singleton_zero.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/src/finite_density/singleton_zero.rs",
+      "sha256": "c816efecb92a7281860b33332d5ae557604c0b68ead147276358a58c373d12d5",
+      "bytes": 17654
+    },
+    "src/finite_density/terminal.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/src/finite_density/terminal.rs",
+      "sha256": "607025743c9a685edc062f12778e4dd43b35b09521e88429a27297c74e23b815",
+      "bytes": 10891
+    },
+    "tests/finite_density_runtime_flow.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-wiring-draft/source/tests/finite_density_runtime_flow.rs",
+      "sha256": "dc69380085f5e21709bd69e4a761ff96aa4911ac453131dd88ca59a17874efe6",
+      "bytes": 19008
+    },
+    "src/finite_density/boundary/virtual_soft.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-continuation-integration-draft/source/src/finite_density/boundary/virtual_soft.rs",
+      "sha256": "31ce8b1b1041234db91dde80eae8a242fc059826b2eb3250d4279913ad31e602",
+      "bytes": 44913
+    },
+    "src/finite_density/partial_continuation.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-continuation-integration-draft/source/src/finite_density/partial_continuation.rs",
+      "sha256": "ea00fa6e1bb8f929048675edbab5629af8f0b5fa32e5d66b10e099092a2a53ce",
+      "bytes": 37689
+    },
+    "src/finite_density/partial_endpoint.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-continuation-integration-draft/source/src/finite_density/partial_endpoint.rs",
+      "sha256": "b8784fc9324b7cf4c3ea5d46a58e60a4d03bdcbadbb30714f0dab43af7538281",
+      "bytes": 29244
+    },
+    "src/finite_density/partial_origin.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-continuation-integration-draft/source/src/finite_density/partial_origin.rs",
+      "sha256": "5b1ff42491f1f61bf9c91824574de8a6d93f7419036196e97f9de8fdc3821a53",
+      "bytes": 67530
+    },
+    "src/finite_density/partial_resources.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-continuation-integration-draft/source/src/finite_density/partial_resources.rs",
+      "sha256": "7fa914dd447d3d2ddff31909d5b7134d26b90d363d6b9f79eacc77fe8874a791",
+      "bytes": 5710
+    },
+    "src/finite_density/source_class/tests.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-continuation-integration-draft/source/src/finite_density/source_class/tests.rs",
+      "sha256": "6e6213807d6c66ec355f5bcff2830f839ee9891beaaacfa46f5e111e02174341",
+      "bytes": 17239
+    },
+    "src/finite_density/source_class.rs": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-continuation-integration-draft/source/src/finite_density/source_class.rs",
+      "sha256": "0ad1af5a765db863761d1ca2b56496c8fd4b8a569b782dbb58b5d3dc9ae5a783",
+      "bytes": 19925
+    }
+  }
+}

@@ -1,0 +1,183 @@
+{
+  "status": "passed",
+  "scope": "One D12/5 28:80:12 massive profile, vacuum/all cuts/full amplitude for both targets; independent reference and historical comparison. No new precision refinement claim.",
+  "command": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py",
+    "--predictions",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression",
+    "--output",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression-comparison.json"
+  ],
+  "native_provenance": {
+    "executable_sha256": "a1f5f1c7bc09c15e8970a4f8de200fe849202fca53e0a21ebeb359edc7bda892",
+    "source_snapshot_sha256": "4339433ed5258ba5d1ea4fc622f85a339880ec026d180602cef167f644a24aee",
+    "compile_identities": {
+      "DEPENDENCY_SOURCE_DIGEST": "79e41557461deafa2547070d5d33e518d0adfa939c8b77f8930057724a6656b5",
+      "RUSTRED_SOURCE_DIGEST": "cfe0febd5e8ce966dab3c0db43faee93b48422a56c802fd6c962fda93b1bb06c",
+      "PORT_SOURCE_DIGEST": "a6f1c622ebb49da8f1ee76b0d3d113b320719c763dda8e3ca4405d7585d45d67"
+    },
+    "configuration": {
+      "source_options": {
+        "free_virtual_zero_sectors": false,
+        "policy": "polynomial-closure-v1",
+        "positive_compact_energy_powers": false
+      },
+      "guard_digits": 40,
+      "native_closure": "WeightedClosureOptions { max_rounds: 12, max_frontier: 256, max_requested: 4096, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 3, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: false, requested_index_rays: false, prioritize_requested_indices: false, max_reused_rules: 0, max_domains_per_residual: 0, requested_ray_point: None, active_target_closure: false, max_history_candidate_maps: None, unit_reduction_memo: None, max_direct_zero_attempts: 0, checkpoints: None }"
+    },
+    "closed_metadata": [
+      {
+        "cut_slots": [
+          0
+        ],
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-0/round-002-closed.json",
+        "sha256": "3d3c9aa1c3fb6312f94e1eb19b5e15518f87a84d4e2f2c39c74b68c00271fa91",
+        "proof_path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-0/round-002-closed.bin",
+        "proof_sha256": "b1b795ac583cedee3ffa098998062200df062da0a71d8d5e0d690c1579f0d269",
+        "program_blake3_verified": "15b2c6c92caec2ca084830de6ed0792709f5abfff46eed6073a765151c82703b",
+        "program_bytes_verified": 267137,
+        "requested_discovery": null,
+        "historical_candidate_collection": null
+      },
+      {
+        "cut_slots": [
+          1
+        ],
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-1/round-002-closed.json",
+        "sha256": "1b3767507214b5fa9bcf2a47323608e7888184e9869c1e9f92addbeaa850bbcd",
+        "proof_path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-1/round-002-closed.bin",
+        "proof_sha256": "4808488e1c23c70a11a2ad89ffe07ef3dd4c89284a274a765d8ef4e95cf7ecca",
+        "program_blake3_verified": "bc48b63c9482478d94cce81584cf7d8124975d4383626aed8abd25505eea3205",
+        "program_bytes_verified": 520750,
+        "requested_discovery": null,
+        "historical_candidate_collection": null
+      },
+      {
+        "cut_slots": [
+          0,
+          1
+        ],
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-0-1/round-001-closed.json",
+        "sha256": "39f479a56b53d73d9260c5924f1ece0cbec98454fd7edf29e16688d4e311e0e5",
+        "proof_path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-0-1/round-001-closed.bin",
+        "proof_sha256": "7b913157c0f2fd2cd7447c5896350a4352806034d2b16d37fcad575ee08a81f0",
+        "program_blake3_verified": "24fe09eea4cf8e64604b84aa0d5c763528252bf8ead2c57e2f60ca226fa2065a",
+        "program_bytes_verified": 1352738,
+        "requested_discovery": null,
+        "historical_candidate_collection": null
+      }
+    ],
+    "unit_reduction_memo": {
+      "enabled": false,
+      "configured_caps": null,
+      "cuts": [
+        {
+          "cut_slots": [
+            0
+          ],
+          "native_rule_applications": 3057,
+          "performed_native_rule_applications": 3057,
+          "memoized_rule_applications": 0,
+          "unit_memo_hits": 0,
+          "unit_memo_misses": 0,
+          "unit_memo_peak_entries": 0,
+          "unit_memo_peak_output_terms": 0,
+          "unit_memo_peak_conditions": 0,
+          "unit_memo_peak_polynomial_terms": 0,
+          "unit_memo_peak_owned_bytes": 0
+        },
+        {
+          "cut_slots": [
+            1
+          ],
+          "native_rule_applications": 7978,
+          "performed_native_rule_applications": 7978,
+          "memoized_rule_applications": 0,
+          "unit_memo_hits": 0,
+          "unit_memo_misses": 0,
+          "unit_memo_peak_entries": 0,
+          "unit_memo_peak_output_terms": 0,
+          "unit_memo_peak_conditions": 0,
+          "unit_memo_peak_polynomial_terms": 0,
+          "unit_memo_peak_owned_bytes": 0
+        },
+        {
+          "cut_slots": [
+            0,
+            1
+          ],
+          "native_rule_applications": 16362,
+          "performed_native_rule_applications": 16362,
+          "memoized_rule_applications": 0,
+          "unit_memo_hits": 0,
+          "unit_memo_misses": 0,
+          "unit_memo_peak_entries": 0,
+          "unit_memo_peak_output_terms": 0,
+          "unit_memo_peak_conditions": 0,
+          "unit_memo_peak_polynomial_terms": 0,
+          "unit_memo_peak_owned_bytes": 0
+        }
+      ],
+      "logical_equals_performed_plus_memoized": true,
+      "scope": "Native unit reduction applications only; full proof replay, terminal-admission checks, encoding, decoding and arithmetic scratch are not measured by these counters. Quotas bound retained payload, not total process memory or wall time."
+    },
+    "physical_zero_certificates": [],
+    "construction_scope": "massive native AMF throughout",
+    "native_digest_tool": {
+      "record_sha256": "7fd9e12576e18cf721824d7854341b638f8b013418a3da3b2364101313071032",
+      "path": "/tmp/rustflow-partial-flow-digest",
+      "sha256": "fc9212cd59c9970d759bc1143cb94d0f2c69fc81a34b0403035d6d7453b68323"
+    }
+  },
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-partial-flow-integration/native-digest-build.json": "7fd9e12576e18cf721824d7854341b638f8b013418a3da3b2364101313071032",
+    "reports/validation/2026-10-10-partial-flow-integration/native-digest.rs": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "reports/validation/2026-10-10-partial-flow-integration/build-native-digest.py": "7ab791e068cfbb493653fc8c99ea0de3af36eb55cc1e5964867f46d4115b2764",
+    "reports/validation/2026-10-10-partial-flow-integration/history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-source-hashes.json": "4339433ed5258ba5d1ea4fc622f85a339880ec026d180602cef167f644a24aee",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-build-provenance.json": "7c641f8156d6c2d1b2e411879ff11c77d60d5f7a18f74e7ccdbac712406faf41",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression-binding.json": "d494dd7c4d6fe55ec97f35aa5909b290335e7b7e2f3f23ea3b4da5a6962394af",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression-resources.json": "40535866429e1bfe116c7117f5f878f92ff5f52879038f956e0a1bcd42306666",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression-resources.provenance.json": "7076310b535e6dfb1a5594b79be76a45f1edc075ed630b633d84810eab38d4fd",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/configuration.json": "33c0df1aa01f8ebb72f04ac037ac52cc9fe2d1447d535f089ac761e74ce6a0f5",
+    "examples/finite_density/massive_two_loop_sunset.json": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/input.json": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/prediction-28-80-12.json": "2617f720844ad1a0759680722960373b8eb8ae7b144b9068fa266df574360059",
+    "reports/validation/2026-10-10-partial-flow-integration/compare-completed-predictions.py": "3798fd24ff7639d0e578ed58434944f19682761afaa9a18f1b6b320d02f7a434",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/physical-zero-certificates.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "reports/validation/2026-10-10-partial-flow-integration/certificate_validation.py": "447c1934b1faa746c27b173d0d9f0b02a2e6e537241a65ed3591ddef2d89449e",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/closure.json": "8c73f0da32658a30aea10d1863e9f9097addb14a3c3b1b2a4e574c915748997f",
+    "reports/validation/2026-10-10-partial-flow-integration/memo_validation.py": "c38141d270b870017f39ee6f9dc76ab4858b214cb9afc6ea5fd6706f36717e7a",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-0/round-002-closed.json": "3d3c9aa1c3fb6312f94e1eb19b5e15518f87a84d4e2f2c39c74b68c00271fa91",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-0/round-002-closed.bin": "b1b795ac583cedee3ffa098998062200df062da0a71d8d5e0d690c1579f0d269",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-1/round-002-closed.json": "1b3767507214b5fa9bcf2a47323608e7888184e9869c1e9f92addbeaa850bbcd",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-1/round-002-closed.bin": "4808488e1c23c70a11a2ad89ffe07ef3dd4c89284a274a765d8ef4e95cf7ecca",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-0-1/round-001-closed.json": "39f479a56b53d73d9260c5924f1ece0cbec98454fd7edf29e16688d4e311e0e5",
+    "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression/native-closure/cut-0-1/round-001-closed.bin": "7b913157c0f2fd2cd7447c5896350a4352806034d2b16d37fcad575ee08a81f0",
+    "docs/finite-density-three-loop-reference.md": "4c7968fb28ee19cebbddf157668f3dbc32b13c87a6ffb2313fe0de72b0497d74",
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "examples/finite_density/massless_two_loop_sunset.json": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/generate.rs": "6ff63d122c782b5c1f78ec18a198b5ac66e27f63818e331eec0e5ad797c5dee9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/source-sha256.json": "fef71625e9676b69502a5eafa3e153eeb5a74a117de263ba2ec7d62909122f8a",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/validation.json": "87daaec2ee69875f3e43ed2e47339f85d493223313393687f4c43c6f8ecec8ea",
+    "tools/finite_density/compare_complete_massive_reference.py": "481629768a370c993fbcfa0bff25e574af52f2aa28e8f15a9ee7e358aadbe8f2",
+    "tools/finite_density/compare_massive_reference.py": "7739206862f6d40714a4587231a24cf99a8206811cad82fd2755ef97b52f57aa",
+    "tools/finite_density/compare_massless_reference.py": "fa616b666d8a70291db943ec78e6760ef70a65aa062a6848b2a0d29ab25a0bc3",
+    "tools/finite_density/compare_three_loop_reference.py": "a66a71ce60663073e146a6e5df47b6f5803b846873e89f167eeac441779ea56e",
+    "reports/validation/2026-10-10-partial-flow-integration/compare_massless_reference.py": "e59f61fe1399d81166865f55cc1fb319bfe9b89ce661158d6e64eed68b66a45d",
+    "reports/validation/2026-10-10-partial-flow-integration/compare_three_loop_reference.py": "ae8c87571c58bc8cc0b135ce0ceb671ad233e08959ef63422030822d62aa9226",
+    "reports/validation/2026-10-10-partial-flow-integration/comparison-plan.json": "ad3ac68ee508bfb0e5f6ccd96d18784f51a6aa8e6b03b85b05d91d7e51000e99"
+  },
+  "definitions_and_tolerances_changed": false,
+  "production_modified": false,
+  "exit_code": 0,
+  "comparison_sha256": "e24cf8a133c6fc41e81fa35210ddc02bee99eb02dc8011e6f498253c0c48b760"
+}

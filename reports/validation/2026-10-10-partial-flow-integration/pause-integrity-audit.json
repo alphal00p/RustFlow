@@ -1,0 +1,308 @@
+{
+  "status": "verified after user interruption",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-source-hashes.json",
+    "sha256": "4339433ed5258ba5d1ea4fc622f85a339880ec026d180602cef167f644a24aee",
+    "bytes": 379581
+  },
+  "source_asset_count": 2496,
+  "runtime_executable": {
+    "path": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "sha256": "a1f5f1c7bc09c15e8970a4f8de200fe849202fca53e0a21ebeb359edc7bda892"
+  },
+  "wrapper_post_run_integrity_check": true,
+  "owned_pids_absent": [
+    1512346,
+    1514656,
+    1515328,
+    1515329
+  ],
+  "json_artifacts": [
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/configuration.json",
+      "sha256": "3875c3aa66e4282d53767d4bc562ae58ba78bd715ed54c7d9259c0ec9b08fb97",
+      "bytes": 2061,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/input.json",
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "bytes": 1549,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/active-request-history.json",
+      "sha256": "1382e9575d075aed39adcd646571d8496aaa9c5a6a599e64a010055aac512c39",
+      "bytes": 422897,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/direct-zero-0001.json",
+      "sha256": "c05833991531b8e66be5447719059d4544c34676254a54c30629d1c7bd69a792",
+      "bytes": 2243385,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/direct-zero-0002.json",
+      "sha256": "f56285a165860bb44fc0f6e31f0cee3b3ee33bfb3727ebf9d3f117c7ef40e623",
+      "bytes": 2259867,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/direct-zero-0003.json",
+      "sha256": "23e2601915524387703227c7e77a6a8c2ed9ccf2fc756eb66503772f937e919a",
+      "bytes": 2237601,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/direct-zero-0004.json",
+      "sha256": "1ac34af1b58d7328d54fa38f5d15b008f2919059ce0ca2c9e4065be4fc06bcaf",
+      "bytes": 2282207,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/direct-zero-0005.json",
+      "sha256": "81d5694a9c672349430ff8ecbd840300d7d16079a8848f0fa843729124933b07",
+      "bytes": 2330288,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/direct-zero-0006.json",
+      "sha256": "f9bb387ba29cac3e7078d69c2da99caba92322b8c39f36f9e9ef7ff85ead34c9",
+      "bytes": 2366145,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/direct-zero-0007.json",
+      "sha256": "36ca978c678a0a0bd14281e6a8ed37113e594ca5a1c1447fbfec90e7ebfb0da6",
+      "bytes": 2365775,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/requested-discovery-0001.json",
+      "sha256": "f4ca77c9578dc41b7b008e218dadee50ce9407fa76443112db5f611410ed5a53",
+      "bytes": 54231,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/requested-discovery-0002.json",
+      "sha256": "ef35b26666b7dd12e21bbf12212755489fbf983112250f1acea939752abd10e2",
+      "bytes": 113957,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/requested-discovery-0003.json",
+      "sha256": "5c1fa62608374d53b241cb83a44b9fa2178aaba044592bd17452db0e57eb2abd",
+      "bytes": 527392,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/requested-discovery-0004.json",
+      "sha256": "32e9c2a0ee0c9cf7406778506f90a2eef195fc4671ad28eb0f4ee76fe8ce9bf7",
+      "bytes": 1374054,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/requested-discovery-0005.json",
+      "sha256": "6b5f893ca03252d05ca05561848b1e9096122cc67bd48c3adbbed0fbf5bb838a",
+      "bytes": 3111966,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/requested-discovery-0006.json",
+      "sha256": "94aab14ed8f18095a4cdff8467be013e4273abfbbafde8b9531ae9c3b0cc21f4",
+      "bytes": 4180776,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-000-provisional.json",
+      "sha256": "dda38b4942a7978f66e805df9b57bbda1669bbe0e0d11a9be09f8eb18d6e08ce",
+      "bytes": 18106,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-001-provisional.json",
+      "sha256": "9e9e939d5b3ebc8a906fb0ec4be76e98641027b8cc58c3c5e0420c262164285d",
+      "bytes": 64028,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-002-provisional.json",
+      "sha256": "d26ac2c2c079516a73840fb213afbf93b8fc212b075423d5cb648b6737887c94",
+      "bytes": 179447,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-003-provisional.json",
+      "sha256": "3bd398b0573b513f78deae559a2e19d82de7e34e648ad7371b970a57f89cf59a",
+      "bytes": 461213,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-004-provisional.json",
+      "sha256": "926baabaccd126301e48f169338d842db7c835b12684c040dfe9025d4b3439d9",
+      "bytes": 842830,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-005-provisional.json",
+      "sha256": "081053311d676b697b87c08f79809da119807f53bf84633fb435c318400e115b",
+      "bytes": 1146874,
+      "parse": "valid"
+    },
+    {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/sector.json",
+      "sha256": "56e1caf4e79b1713bf11b9a54c26946e9e3ea252239469fc627db01626da6912",
+      "bytes": 239,
+      "parse": "valid"
+    }
+  ],
+  "invalid_or_partial_json": [],
+  "complete_published_round_pairs": [
+    {
+      "round": 0,
+      "status": "provisional",
+      "frontier_count": 14,
+      "requested_count": 17,
+      "native_rule_count": 9,
+      "metadata": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-000-provisional.json",
+        "sha256": "dda38b4942a7978f66e805df9b57bbda1669bbe0e0d11a9be09f8eb18d6e08ce",
+        "bytes": 18106
+      },
+      "program": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-000-provisional.bin",
+        "sha256": "ac505fbb5652a73b3716fdb3a84a2495c62c29fe02a05a25dadcf6a254bec877",
+        "bytes": 141130
+      },
+      "declared_program_blake3": "bed13037136459f6ace3c990642e50617a20e3cbfd4d8d64bfd7b33d99697583",
+      "program_length_matches_metadata": true,
+      "requested_discovery": {
+        "blake3": "e48ca8660a7ebf859b229d50411af2c34e10146dc12f0511753fe442e6bee7f4",
+        "path": "requested-discovery-0001.json"
+      }
+    },
+    {
+      "round": 1,
+      "status": "provisional",
+      "frontier_count": 93,
+      "requested_count": 96,
+      "native_rule_count": 23,
+      "metadata": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-001-provisional.json",
+        "sha256": "9e9e939d5b3ebc8a906fb0ec4be76e98641027b8cc58c3c5e0420c262164285d",
+        "bytes": 64028
+      },
+      "program": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-001-provisional.bin",
+        "sha256": "366b238f606baad02befe325cf295931c981cc76c9b4fe5a1735c13b26ad03ed",
+        "bytes": 172143
+      },
+      "declared_program_blake3": "9567c302f8f0ad1b2ad74b8f967bae1808a7cca775f3f33eaab0b7da3475482a",
+      "program_length_matches_metadata": true,
+      "requested_discovery": {
+        "blake3": "f40d3f92bf917a60de932d303ac42a9f1585039a1136851cb9a08326f75d7ce7",
+        "path": "requested-discovery-0002.json"
+      }
+    },
+    {
+      "round": 2,
+      "status": "provisional",
+      "frontier_count": 222,
+      "requested_count": 229,
+      "native_rule_count": 114,
+      "metadata": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-002-provisional.json",
+        "sha256": "d26ac2c2c079516a73840fb213afbf93b8fc212b075423d5cb648b6737887c94",
+        "bytes": 179447
+      },
+      "program": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-002-provisional.bin",
+        "sha256": "34a14e2b7c878cceb15743e70f1a3139b7e9b1b9cd95c8ce76888f8d42e4aef0",
+        "bytes": 321777
+      },
+      "declared_program_blake3": "7fabe7f8f032d70277b5234916e7ac227db323bfb91378e21cb24c21c3d7a985",
+      "program_length_matches_metadata": true,
+      "requested_discovery": {
+        "blake3": "44c87bf33efbbbdcfc0f19b16a16c87b5a7e6aee4f947796bf275c76ce4a902d",
+        "path": "requested-discovery-0003.json"
+      }
+    },
+    {
+      "round": 3,
+      "status": "provisional",
+      "frontier_count": 590,
+      "requested_count": 600,
+      "native_rule_count": 341,
+      "metadata": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-003-provisional.json",
+        "sha256": "3bd398b0573b513f78deae559a2e19d82de7e34e648ad7371b970a57f89cf59a",
+        "bytes": 461213
+      },
+      "program": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-003-provisional.bin",
+        "sha256": "d3861765bdf72857afb933d626f85c713f9906551e019ec632df2e96f3125154",
+        "bytes": 1002656
+      },
+      "declared_program_blake3": "175ed8aa601ca0e3c40aed4adf710aa61959d1dac80de1cf9d4eb3b6fa0515de",
+      "program_length_matches_metadata": true,
+      "requested_discovery": {
+        "blake3": "53d3799f8ab63bc991781c6de039a5db1605d1ee2840f7db3e5bbd5263c08c01",
+        "path": "requested-discovery-0004.json"
+      }
+    },
+    {
+      "round": 4,
+      "status": "provisional",
+      "frontier_count": 835,
+      "requested_count": 848,
+      "native_rule_count": 1030,
+      "metadata": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-004-provisional.json",
+        "sha256": "926baabaccd126301e48f169338d842db7c835b12684c040dfe9025d4b3439d9",
+        "bytes": 842830
+      },
+      "program": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-004-provisional.bin",
+        "sha256": "ad16849623e550d9d3f6bd2c0caf1fe55775b19e2fdaee68d87f10d5c4067209",
+        "bytes": 2163580
+      },
+      "declared_program_blake3": "a3ee15bf5082e8a9a7d096f0ffb5e09e4c1cb16610d4ca77e52b7dc89bd14080",
+      "program_length_matches_metadata": true,
+      "requested_discovery": {
+        "blake3": "15441b52e112c97fe5603103c4bd9a1f3f67318b606a7db1e7c172b03088ed0f",
+        "path": "requested-discovery-0005.json"
+      }
+    },
+    {
+      "round": 5,
+      "status": "provisional",
+      "frontier_count": 928,
+      "requested_count": 944,
+      "native_rule_count": 1986,
+      "metadata": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-005-provisional.json",
+        "sha256": "081053311d676b697b87c08f79809da119807f53bf84633fb435c318400e115b",
+        "bytes": 1146874
+      },
+      "program": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial/native-closure/round-005-provisional.bin",
+        "sha256": "20fa52fc37f67f9fc9107531a284a2e97c982973223da1d1bad3f11603339947",
+        "bytes": 3492792
+      },
+      "declared_program_blake3": "b7f50ba11978a0df28faed8dbd3a788a482f2e8799c8f2ee97e9ad1361e8e753",
+      "program_length_matches_metadata": true,
+      "requested_discovery": {
+        "blake3": "25e116118d8340a6f6764a0f378cb715f6790c5fc3070fc179ac0f94e7e45849",
+        "path": "requested-discovery-0006.json"
+      }
+    }
+  ],
+  "uncommitted_attempt_artifacts": [
+    "native-closure/direct-zero-0007.json",
+    "native-closure/active-request-history.json"
+  ],
+  "uncommitted_scope": "These files may include work beyond round 005; they are preserved as observed, not promoted to a committed round or restart authority. No safe production resume claim.",
+  "native_proofs_replayed_for_pause_audit": false,
+  "new_numerical_or_test_execution": false
+}

@@ -1,0 +1,160 @@
+{
+  "schema": 1,
+  "status": "safely paused at explicit user request",
+  "saved_utc": "2026-10-10T09:22:29.769419+00:00",
+  "coherent_build": {
+    "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-build-provenance.json",
+    "sha256": "7c641f8156d6c2d1b2e411879ff11c77d60d5f7a18f74e7ccdbac712406faf41",
+    "bytes": 5622
+  },
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-source-hashes.json",
+    "sha256": "4339433ed5258ba5d1ea4fc622f85a339880ec026d180602cef167f644a24aee",
+    "bytes": 379581
+  },
+  "regression_gates": {
+    "status": "passed",
+    "unique_tests": 281,
+    "native_tests": 101,
+    "root_tests": 180,
+    "native_ignored": 1,
+    "report": {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-root-gates.json",
+      "sha256": "82c9f4be97b6135119483bf66703bbba36656239972d3dc2566b4f97569bcdb6",
+      "bytes": 11587
+    }
+  },
+  "lower_numerical_controls": [
+    {
+      "gate": "two-loop-fixed",
+      "status": "passed",
+      "reference_comparisons": 40,
+      "refinement_comparisons": 30,
+      "historical_comparisons": 0,
+      "assembly_checks": 8,
+      "harness_seconds": 4.25,
+      "wall_seconds": 4.2641841899603605,
+      "comparison": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-fixed-comparison.json",
+        "sha256": "69b879e3d2bcda7c547fd7dc988e8f7967dea98ee8718d49ad604f268a535dc2",
+        "bytes": 52409
+      },
+      "binding": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-fixed-comparison-binding.json",
+        "sha256": "0c750ba7da7aef97906ecce94287e8450191a1f952b46e0c66f24d3a34f23a1c",
+        "bytes": 34624
+      },
+      "resources": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-fixed-resources.json",
+        "sha256": "abcbde65b0b92061441430c9b20a5b3be3a73f26a971d916494acf3d180fcf35",
+        "bytes": 460
+      }
+    },
+    {
+      "gate": "two-loop-laurent",
+      "status": "passed",
+      "reference_comparisons": 30,
+      "refinement_comparisons": 24,
+      "historical_comparisons": 0,
+      "assembly_checks": 0,
+      "harness_seconds": 96.74,
+      "wall_seconds": 96.75097287679091,
+      "comparison": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent-comparison.json",
+        "sha256": "18e4042924e1737d7122d5ec7af34c33cdde876575df74e4cc0d84592a497715",
+        "bytes": 50498
+      },
+      "binding": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent-comparison-binding.json",
+        "sha256": "56b9d5e4db21c598dd5c90756d27e8c59351ef00b841e1ed3a45836d73c7e189",
+        "bytes": 35258
+      },
+      "resources": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-two-loop-laurent-resources.json",
+        "sha256": "3c4c70d3e3e06942c43af57858ee53f6570212e9bf50634ca532031fd110311a",
+        "bytes": 458
+      }
+    },
+    {
+      "gate": "massive-regression",
+      "status": "passed",
+      "reference_comparisons": 10,
+      "refinement_comparisons": 0,
+      "historical_comparisons": 10,
+      "assembly_checks": 2,
+      "harness_seconds": 47.82,
+      "wall_seconds": 47.847426548134536,
+      "comparison": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression-comparison.json",
+        "sha256": "e24cf8a133c6fc41e81fa35210ddc02bee99eb02dc8011e6f498253c0c48b760",
+        "bytes": 14304
+      },
+      "binding": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression-comparison-binding.json",
+        "sha256": "3d6a50bd386105bfef3df4a5b666626886661ac11aa8a9d12ed247e46edb01b0",
+        "bytes": 14555
+      },
+      "resources": {
+        "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-massive-regression-resources.json",
+        "sha256": "40535866429e1bfe116c7117f5f878f92ff5f52879038f956e0a1bcd42306666",
+        "bytes": 804
+      }
+    }
+  ],
+  "partial_control": {
+    "status": "interrupted_by_user",
+    "tool_session": 34624,
+    "runtime_pid": 1515329,
+    "signal": "SIGTERM",
+    "resource_exit_code": -15,
+    "wrapper_and_launcher_exit_code": 241,
+    "wall_seconds": 89.62361342366785,
+    "peak_child_rss_kib": 102576,
+    "cut_slots": [
+      0,
+      3
+    ],
+    "shifted_slots": [
+      1,
+      2
+    ],
+    "profiles_requested": 4,
+    "profiles_saved": 0,
+    "reference_comparisons": 0,
+    "native_closure_complete": false,
+    "last_published_round": 5,
+    "last_published_frontier": 928,
+    "round_frontiers": [
+      14,
+      93,
+      222,
+      590,
+      835,
+      928
+    ],
+    "resources": {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial-resources.json",
+      "sha256": "39d13fca672104f4c9621fd8add7f63c21bb4915d6d2b1697a54a24cfbfff2ef",
+      "bytes": 463
+    },
+    "binding": {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/partial-flow-three-loop-double-partial-binding.json",
+      "sha256": "84bcc6e24cb36a56bb57db9668c9db31c7308ee764981131b92c1db861e26cf9",
+      "bytes": 4403
+    },
+    "integrity": {
+      "path": "reports/validation/2026-10-10-partial-flow-integration/pause-integrity-audit.json",
+      "sha256": "bf5e4d8c196572d666b1a3f4aa2c5069eb1972ab3f88bab85a2a2903f86f8ef7",
+      "bytes": 14221
+    },
+    "scope": "User-requested interruption, not an algorithmic failure or completed numerical result. No full three-loop or four-loop acceptance."
+  },
+  "source_freeze_integrity": "All 2496 source assets and captured runtime unchanged after termination; no owned producer/wrapper process remains.",
+  "no_further_runs_started_after_pause_request": true,
+  "remaining_work": [
+    "A future explicitly resumed task must decide a new fresh partial-control run or separately authenticated resume implementation; current pause does not certify resumption.",
+    "Complete four selected-sector profiles and strict independent comparison before any selected numerical acceptance.",
+    "Full three-loop and four-loop objectives remain unaccepted by this report."
+  ],
+  "resource_scope": "Shared-host execution; no speed comparison."
+}
