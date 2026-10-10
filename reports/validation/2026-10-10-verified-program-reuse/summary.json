@@ -1,0 +1,52 @@
+{
+  "status": "frozen isolated prototype passed",
+  "scope": "Native immutable verified reuse only. No production integration, new closure, numerical period or three-/four-loop acceptance.",
+  "patch_sha256": "791eaad85635e2814a7a101b0586e70178d0149418ac212b0cec9bf216512011",
+  "builds": {
+    "library": {
+      "record_sha256": "90a3ea3135e4763fb005bfb10877802493124e06bd3e49bf856c55b8a342548e",
+      "wall_seconds": 189.46642879396677,
+      "output": {
+        "path": "/tmp/librustred-verified-program-reuse-20261010.rlib",
+        "sha256": "91f0dc1e00677301daf9bb1146fb318f713f6a71a8598534c0d36ca947defd69",
+        "bytes": 227092024
+      }
+    },
+    "tests": {
+      "record_sha256": "0ea893ee1608469d8c7319952e0f5f31eb53b48c112c98177d29beea1d455952",
+      "wall_seconds": 296.45131969079375,
+      "output": {
+        "path": "/tmp/rustred-verified-program-reuse-tests-20261010",
+        "sha256": "fd3b84db41f9620ba493913221e7c2bac03a1abe3cee117a78d8c520c405e09d",
+        "bytes": 324072808
+      }
+    }
+  },
+  "native_guarded_tests": {
+    "passed": 91,
+    "failed": 0,
+    "ignored": 1,
+    "harness_seconds": 0.1,
+    "wall_seconds": 0.11750003788620234,
+    "peak_child_rss_kib": 15448,
+    "resources_sha256": "aff77b3b67bbc3965d36b979ad6adc17a255c72b3ad57e6d7532e41f4efc4dfb",
+    "log_sha256": "f4e647f905bfb8dc53c38ca73b4a5d494fe562d6095f54db7ae4c2d8fcadb5b5",
+    "launch_sha256": "2e12c6c54892dd33cdc118fe8d7f9977cfde3cc5391e919983fffa7c96dd27d6"
+  },
+  "external_privacy_controls": {
+    "passed": 6,
+    "positive_compile": 1,
+    "expected_compile_failures": 5
+  },
+  "reuse_profile": {
+    "manifest_sha256": "afec3c898ed6c3a559587b717d015d3296af4b0a3c458d6c8d44ece624d10d5e",
+    "files_verified": 38,
+    "large_encoded_restorations_verified": 2,
+    "summary_sha256": "5a38998b56e5a0e87c44190dbfbec1d06afbfc5b8862f909f6a72a2315a66c56"
+  },
+  "design_audit_sha256": "73a2949e3e9d7399e8e716513ff5b1d7c2cac4afb17dd8e1c7cb381009a033ad",
+  "production_and_isolated_sources_verified_unchanged": true,
+  "native_proof_schema": "rustred.guarded-source-program.v2",
+  "cold_decode_still_replays": true,
+  "production_admission_changed": false
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-role-fixed-ray-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/single3/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/single3/anchored",
+    "anchored",
+    "3"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 38.24762559775263,
+  "user_seconds": 37.918217,
+  "system_seconds": 0.053625,
+  "peak_child_rss_kib": 58444,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

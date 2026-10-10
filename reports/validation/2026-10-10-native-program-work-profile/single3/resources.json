@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-native-program-work-profile",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/profile"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 185.47220717882738,
+  "user_seconds": 183.654175,
+  "system_seconds": 0.533256,
+  "peak_child_rss_kib": 279348,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

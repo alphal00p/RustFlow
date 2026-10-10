@@ -1,0 +1,10 @@
+warning: unused import: `SearchOptions`
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/probe.rs:11:40
+   |
+11 | use rustred::solver::{Integral, Power, SearchOptions, Term};
+   |                                        ^^^^^^^^^^^^^
+   |
+   = note: `#[warn(unused_imports)]` (part of `#[warn(unused)]`) on by default
+
+warning: 1 warning emitted
+

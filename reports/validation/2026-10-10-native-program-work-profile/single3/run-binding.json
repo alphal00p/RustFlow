@@ -1,0 +1,22 @@
+{
+  "scope": "Read-only native phase timing; no discovery or changed program. Shared host; run profile sectors sequentially.",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-native-program-work-profile",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/profile"
+  ],
+  "inputs": {
+    "/tmp/rustflow-native-program-work-profile": "51afb7df80be5d69825596690ea0805378b194d149d35c25490d72a0b1c2f23a",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.bin": "e3774e0c8c0273674886ab7fe244a535bbf9df36b18991f27889f07ab1b90479",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.json": "ae7d16de1221a2ed39c95252da1c83a8442f0cc5e444e33a98dedde06effc3c8",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/points.json": "5e92d2a705339a5d9c7ce409025c7b7b69b8d45343f7c333341cb6dcb0066b3c",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/probe.rs": "65b1b31cd10a4b2ca63dd31e01006506c406df46883dd79620b96e3263a8664d"
+  },
+  "build_binding_sha256": "a0f7597053aebf49169e4fe74dae8c49e0b609975fed9010411fb00c6a75516e",
+  "clock_ticks_per_second": 100,
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

@@ -1,0 +1,5933 @@
+{
+  "actual_mask_derivatives": [
+    {
+      "derivative": [
+        {
+          "coefficient": "1",
+          "indices": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "root": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "derivative": [
+        {
+          "coefficient": "2",
+          "indices": [
+            3,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "root": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "derivative": [
+        {
+          "coefficient": "2",
+          "indices": [
+            3,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      "root": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "admitted_domain": [
+    [
+      null,
+      null
+    ],
+    [
+      null,
+      null
+    ],
+    [
+      null,
+      null
+    ],
+    [
+      null,
+      null
+    ],
+    [
+      null,
+      null
+    ],
+    [
+      null,
+      0
+    ],
+    [
+      null,
+      0
+    ],
+    [
+      null,
+      0
+    ],
+    [
+      null,
+      0
+    ],
+    [
+      0,
+      null
+    ],
+    [
+      0,
+      null
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ],
+    [
+      0,
+      0
+    ]
+  ],
+  "all_initial_derivatives": [
+    [
+      1,
+      1,
+      1,
+      1,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      2,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      2,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      2,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      2,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      2,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      2,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      2,
+      1,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      2,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "all_uncut": [
+    0,
+    1,
+    2,
+    4
+  ],
+  "coordinates": [
+    "q_0",
+    "q_1",
+    "q_2",
+    "q_3",
+    "q_4",
+    "q_5",
+    "q_6",
+    "q_7",
+    "q_8"
+  ],
+  "cuts": [
+    3
+  ],
+  "factor_basis": [
+    "q_3-eta",
+    "q_5",
+    "-(-q_0+2*q_1-q_3)",
+    "q_0",
+    "-(-q_0+2*q_1-2*q_2-q_3+2*q_4-q_5)",
+    "q_4",
+    "q_7",
+    "q_8",
+    "-(q_6-q_7)",
+    "1-q_6",
+    "q_6"
+  ],
+  "input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+  "inverse_routing": [
+    [
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "1"
+    ],
+    [
+      "-1",
+      "1",
+      "0"
+    ]
+  ],
+  "limits": {
+    "depth": 3,
+    "max_selected_points": 16,
+    "point_domains": 1,
+    "ray_domains": 1
+  },
+  "mode": "single-slot0",
+  "physical_arity": 11,
+  "probes": [
+    {
+      "application": {
+        "conditions": [
+          "-1+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-1+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-1+2*epsilon)",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "-1+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-1+2*epsilon)",
+            "indices": [
+              1,
+              0,
+              1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-1+2*epsilon)",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": true,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [],
+        "rhs": [
+          {
+            "coefficient": "2",
+            "indices": [
+              1,
+              0,
+              1,
+              1,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1",
+            "indices": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        1,
+        1,
+        1,
+        1,
+        2,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [],
+        "rhs": [
+          {
+            "coefficient": "2",
+            "indices": [
+              1,
+              0,
+              1,
+              1,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1",
+            "indices": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/0/0/occupation-case-0",
+          "lorentz/2/0/occupation-case-0",
+          "lorentz/2/1/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "-16+32*epsilon",
+          "-1+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/(-1+2*epsilon)",
+            "indices": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-1+2*epsilon)",
+            "indices": [
+              1,
+              2,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        1,
+        1,
+        2,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "-16+32*epsilon",
+          "-1+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/(-1+2*epsilon)",
+            "indices": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-1+2*epsilon)",
+            "indices": [
+              1,
+              2,
+              2,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/0/0/occupation-case-0",
+          "lorentz/2/0/occupation-case-0",
+          "lorentz/2/1/occupation-case-0",
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "32*epsilon",
+          "2*epsilon",
+          "epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/epsilon",
+            "indices": [
+              1,
+              3,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/epsilon",
+            "indices": [
+              1,
+              3,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              1,
+              1
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        1,
+        2,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "32*epsilon",
+          "2*epsilon",
+          "epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/epsilon",
+            "indices": [
+              1,
+              3,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/epsilon",
+            "indices": [
+              1,
+              3,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/0/0/occupation-case-0",
+          "lorentz/2/0/occupation-case-0",
+          "lorentz/2/1/occupation-case-0",
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "-2+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              0,
+              1,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "-2+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              0,
+              1,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": true,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "-2+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              0,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "-2+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              0,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": true,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "-1+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-1+2*epsilon)",
+            "indices": [
+              2,
+              0,
+              1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-1+2*epsilon)",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "-1+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-1+2*epsilon)",
+            "indices": [
+              2,
+              0,
+              1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-1+2*epsilon)",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [],
+        "rhs": [
+          {
+            "coefficient": "-1/2",
+            "indices": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2",
+            "indices": [
+              2,
+              0,
+              1,
+              1,
+              3,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              3,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*eta",
+            "indices": [
+              2,
+              1,
+              1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "indices": [
+              2,
+              2,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1",
+            "indices": [
+              2,
+              2,
+              1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        2,
+        1,
+        1,
+        1,
+        2,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [],
+        "rhs": [
+          {
+            "coefficient": "-1/2",
+            "indices": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2",
+            "indices": [
+              2,
+              0,
+              1,
+              1,
+              3,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              3,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/2*eta",
+            "indices": [
+              2,
+              1,
+              1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1",
+            "indices": [
+              2,
+              2,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1",
+            "indices": [
+              2,
+              2,
+              1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/0/0/occupation-case-0",
+          "lorentz/2/0/occupation-case-0",
+          "lorentz/2/1/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "-1+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-2/(-1+2*epsilon)",
+            "indices": [
+              2,
+              0,
+              1,
+              1,
+              3,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2/(-1+2*epsilon)",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              3,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        2,
+        1,
+        1,
+        1,
+        2,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "-1+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-2/(-1+2*epsilon)",
+            "indices": [
+              2,
+              0,
+              1,
+              1,
+              3,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2/(-1+2*epsilon)",
+            "indices": [
+              2,
+              1,
+              0,
+              1,
+              3,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "-32+32*epsilon",
+          "-2+2*epsilon",
+          "-4+4*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-4+4*epsilon)",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-4+4*epsilon)",
+            "indices": [
+              2,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta/(-4+4*epsilon)",
+            "indices": [
+              2,
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              2,
+              1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              2,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        2,
+        1,
+        2,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "-32+32*epsilon",
+          "-2+2*epsilon",
+          "-4+4*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-4+4*epsilon)",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-4+4*epsilon)",
+            "indices": [
+              2,
+              1,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta/(-4+4*epsilon)",
+            "indices": [
+              2,
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              2,
+              1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-2+2*epsilon)",
+            "indices": [
+              2,
+              2,
+              2,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/0/0/occupation-case-0",
+          "lorentz/2/0/occupation-case-0",
+          "lorentz/2/1/occupation-case-0",
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "8*eta",
+          "eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/eta",
+            "indices": [
+              1,
+              0,
+              2,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2-2*epsilon)/eta",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/eta",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              2,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        2,
+        1,
+        2,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "8*eta",
+          "eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/eta",
+            "indices": [
+              1,
+              0,
+              2,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "(-2-2*epsilon)/eta",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/eta",
+            "indices": [
+              1,
+              1,
+              2,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              2,
+              1,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/0/0/occupation-case-0",
+          "lorentz/1/0/occupation-case-0",
+          "lorentz/1/1/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "-16+32*epsilon",
+          "-1+2*epsilon",
+          "-2+4*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-2+4*epsilon)",
+            "indices": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-2+4*epsilon)",
+            "indices": [
+              2,
+              2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta/(-2+4*epsilon)",
+            "indices": [
+              2,
+              2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2/(-1+2*epsilon)",
+            "indices": [
+              2,
+              3,
+              0,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2/(-1+2*epsilon)",
+            "indices": [
+              2,
+              3,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        2,
+        2,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "-16+32*epsilon",
+          "-1+2*epsilon",
+          "-2+4*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-2+4*epsilon)",
+            "indices": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/(-2+4*epsilon)",
+            "indices": [
+              2,
+              2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-eta/(-2+4*epsilon)",
+            "indices": [
+              2,
+              2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2/(-1+2*epsilon)",
+            "indices": [
+              2,
+              3,
+              0,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2/(-1+2*epsilon)",
+            "indices": [
+              2,
+              3,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/0/0/occupation-case-0",
+          "lorentz/2/0/occupation-case-0",
+          "lorentz/2/1/occupation-case-0",
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "8*eta",
+          "eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/eta",
+            "indices": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2*epsilon/eta",
+            "indices": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/eta",
+            "indices": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              2,
+              2,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        2,
+        2,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "8*eta",
+          "eta"
+        ],
+        "rhs": [
+          {
+            "coefficient": "1/eta",
+            "indices": [
+              1,
+              1,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              1,
+              2,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-2*epsilon/eta",
+            "indices": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/eta",
+            "indices": [
+              1,
+              2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-1/eta",
+            "indices": [
+              2,
+              2,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/0/0/occupation-case-0",
+          "lorentz/1/0/occupation-case-0",
+          "lorentz/1/1/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "-2+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-2+2*epsilon)",
+            "indices": [
+              3,
+              0,
+              1,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-2+2*epsilon)",
+            "indices": [
+              3,
+              1,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              3,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              3,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "-2+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-2+2*epsilon)",
+            "indices": [
+              3,
+              0,
+              1,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-2+2*epsilon)",
+            "indices": [
+              3,
+              1,
+              0,
+              1,
+              2,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    },
+    {
+      "application": {
+        "conditions": [
+          "-2+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-2+2*epsilon)",
+            "indices": [
+              3,
+              0,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-2+2*epsilon)",
+            "indices": [
+              3,
+              1,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "gaps": [
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              3,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              1
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        },
+        {
+          "detail": "domain traversal budget exhausted",
+          "domain": [
+            [
+              3,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              2,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              1,
+              null
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              null,
+              -1
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "phase": "ray",
+          "reason": "DomainBudget"
+        }
+      ],
+      "point": [
+        3,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "point_fallback": true,
+      "point_result": {
+        "conditions": [
+          "-2+2*epsilon"
+        ],
+        "rhs": [
+          {
+            "coefficient": "-1/(-2+2*epsilon)",
+            "indices": [
+              3,
+              0,
+              1,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "1/(-2+2*epsilon)",
+            "indices": [
+              3,
+              1,
+              0,
+              1,
+              2,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "status": "Applied { rule: 0 }"
+      },
+      "proof_sources": [
+        [
+          "lorentz/2/2/occupation-case-0"
+        ]
+      ],
+      "ray": {
+        "conditions": [],
+        "rhs": [],
+        "status": "Unresolved(NoApplicableRule)"
+      },
+      "root": false,
+      "roundtrip": true,
+      "rule_count": 1
+    }
+  ],
+  "proof_binding_sha256": "3ad3dcd4d1f644f80168930dab00ba7293193571a2073844d815ffab9085e7db",
+  "roots": [
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "scope": "Fresh matched restricted source contexts only; no numerical/closure/admission claim. Public PolynomialClosure without sealed origin omits raw Ward for ALL arms. No old rules or zero boxes imported.",
+  "selected": [
+    [
+      1,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      1,
+      1,
+      2,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      1,
+      2,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      2,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      2,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      1,
+      1,
+      2,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      2,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      1,
+      2,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      2,
+      1,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      2,
+      2,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
+      1,
+      1,
+      1,
+      1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      3,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "shifted": [
+    0
+  ],
+  "source_count": 52,
+  "source_identity": "rustflow-weighted-sources-v1:6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e:10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23:{\"measure\":\"validation-partial-placement-v1; input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e; cuts=[3]; mask=[0]; polynomial-closure-v1 order=legacy,shifted-temporal-U,shifted-common-boost,raw-Ward; original-completion-domain<=0; exact-energy-completions=[]; raw Ward deliberately omitted: no bound singleton-germ theorem; source presentation=polynomial-closure-v1; positive compact energy completion powers=false\",\"support\":\"polynomial completion<=0; full-positive physical support lower-origin zeros only; no free-virtual zeros\",\"orientation\":\"future occupied shells from exact input geometry\",\"normalization\":\"native homogeneous weighted identities, no values\",\"branch\":\"full-positive-support resolved germ; line regulators at fixed eta/T first; joint high-D finite jets; proof SHA256 3ad3dcd4d1f644f80168930dab00ba7293193571a2073844d815ffab9085e7db\",\"deformation\":\"fixed shells/occupations; selected uncut native factors minus eta: [0]\"}:zero-tail-storage-v1:physical=11:capacity=16",
+  "source_ids": [
+    "multiplication/9/0",
+    "multiplication/9/1",
+    "multiplication/10/0",
+    "multiplication/10/1",
+    "lorentz/0/0/occupation-case-0",
+    "lorentz/0/0/occupation-case-1",
+    "lorentz/0/0/occupation-case-2",
+    "lorentz/0/0/occupation-case-3",
+    "lorentz/0/1/occupation-case-0",
+    "lorentz/0/1/occupation-case-1",
+    "lorentz/0/1/occupation-case-2",
+    "lorentz/0/1/occupation-case-3",
+    "lorentz/0/2/occupation-case-0",
+    "lorentz/0/2/occupation-case-1",
+    "lorentz/0/2/occupation-case-2",
+    "lorentz/0/2/occupation-case-3",
+    "lorentz/0/3/occupation-case-0",
+    "lorentz/0/3/occupation-case-1",
+    "lorentz/0/3/occupation-case-2",
+    "lorentz/0/3/occupation-case-3",
+    "lorentz/1/0/occupation-case-0",
+    "lorentz/1/0/occupation-case-1",
+    "lorentz/1/0/occupation-case-2",
+    "lorentz/1/0/occupation-case-3",
+    "lorentz/1/1/occupation-case-0",
+    "lorentz/1/1/occupation-case-1",
+    "lorentz/1/1/occupation-case-2",
+    "lorentz/1/1/occupation-case-3",
+    "lorentz/1/2/occupation-case-0",
+    "lorentz/1/2/occupation-case-1",
+    "lorentz/1/2/occupation-case-2",
+    "lorentz/1/2/occupation-case-3",
+    "lorentz/1/3/occupation-case-0",
+    "lorentz/1/3/occupation-case-1",
+    "lorentz/1/3/occupation-case-2",
+    "lorentz/1/3/occupation-case-3",
+    "lorentz/2/0/occupation-case-0",
+    "lorentz/2/0/occupation-case-1",
+    "lorentz/2/0/occupation-case-2",
+    "lorentz/2/0/occupation-case-3",
+    "lorentz/2/1/occupation-case-0",
+    "lorentz/2/1/occupation-case-1",
+    "lorentz/2/1/occupation-case-2",
+    "lorentz/2/1/occupation-case-3",
+    "lorentz/2/2/occupation-case-0",
+    "lorentz/2/2/occupation-case-1",
+    "lorentz/2/2/occupation-case-2",
+    "lorentz/2/2/occupation-case-3",
+    "lorentz/2/3/occupation-case-0",
+    "lorentz/2/3/occupation-case-1",
+    "lorentz/2/3/occupation-case-2",
+    "lorentz/2/3/occupation-case-3"
+  ],
+  "zero_domains": [
+    [
+      [
+        1,
+        null
+      ],
+      [
+        1,
+        null
+      ],
+      [
+        1,
+        null
+      ],
+      [
+        1,
+        null
+      ],
+      [
+        1,
+        null
+      ],
+      [
+        null,
+        0
+      ],
+      [
+        null,
+        0
+      ],
+      [
+        null,
+        0
+      ],
+      [
+        null,
+        0
+      ],
+      [
+        0,
+        null
+      ],
+      [
+        1,
+        null
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ],
+      [
+        0,
+        0
+      ]
+    ]
+  ]
+}

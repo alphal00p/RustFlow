@@ -1,0 +1,21 @@
+{
+  "scope": "Native predictions saved before comparison; no reference file opened.",
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-hard-boundary-check/native-build-binding.json": "606ba1812eff9f9ca6115f3f0fa3ce77442c48ea5ed26afada3162f4c7ed26ca",
+    "/tmp/rustflow-partial-hard-boundary-20261010": "594780c14048cb942b65a62bcedfafea328766430c3018770362bdc93d19d525",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-hard-boundary-check/run-native.py": "e5fa624e1e3615a57c9069bf9023243042f4673b6ef9da8e9d09332d84f48baa",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration/run-resource-command.py": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c"
+  },
+  "command": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration/run-resource-command.py",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-hard-boundary-check/native-resources.json",
+    "timeout",
+    "300",
+    "/tmp/rustflow-partial-hard-boundary-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-hard-boundary-check/native-predictions"
+  ],
+  "exit_code": 0,
+  "post_run_bindings_unchanged": true,
+  "reference_files_read": 0
+}

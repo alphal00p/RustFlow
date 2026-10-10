@@ -1,0 +1,17 @@
+{
+  "scope": "Read-only implementation files consulted to interpret timing; executable/library binding remains authoritative. No source edits.",
+  "files": [
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs",
+      "sha256": "28a41a303d830f7918b7d72ec6398f4f6d07af69d85831d319f615adea4b2dff"
+    },
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/solver/guarded/persistence.rs",
+      "sha256": "04176aee407443b14020a447dca5dc6fa72856168665f265f20fb8c89c4d5eb6"
+    }
+  ],
+  "contracts": {
+    "decode": "decode_generated imports and binds exact source context, reconstructs rules, then invokes GuardedProgram::new for independent replay/common-order validation.",
+    "empty_union": "union_replayed takes Arc-identical source shortcut but always calls GuardedProgram::new on the unchanged concatenated rules; current empty terminals are independently checked."
+  }
+}

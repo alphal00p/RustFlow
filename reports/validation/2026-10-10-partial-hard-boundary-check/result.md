@@ -1,0 +1,9 @@
+The one-mass hard-boundary check passes at all three native profiles. The independently derived value is approximately `-39.79714879206675274317613000046188` in native Minkowski normalization at `D=12/5`. Relative discrepancies are between `2.38e-57` and `3.15e-65`; the claimed gate is ten stable decimal digits, not a rigorous 57-digit error enclosure.
+
+The existing generic single-mass homogeneity owner removes one radial integration and evaluates the resulting ordinary one-loop child by native AMF. Every profile records a nonzero preparation count, and the saved log contains closure, Frobenius matching, transport and physical-endpoint extraction. `TadpolesOnly` and `bubble_subloops=false` are enforced. The analytic single-mass sunset and bubble terminals are not used. This is the ordinary recursive owner, with its topology-independent radial factor, not a new finite-density evaluation formula.
+
+The three native profiles collectively took 0.729 seconds and peaked at 18,432 KiB child RSS, excluding compilation and Nix startup. This shared-host run is a validation timing, not a comparative benchmark. Reference gamma arithmetic was separately refined through 35, 60 and 85 digits. The native executable and reference script do not read each other's predictions.
+
+One copied prose field in the saved native JSON incorrectly says “equal-mass.” The immutable artifacts retain that label for provenance. The generated family is explicitly `(K²-1,L²,(K-L)²)`, and comparison asserts its three constants `[-1,0,0]` before reading the reference. The source, derivation, reference and comparison all bind the actual one-mass case; no equal-mass value enters the comparison.
+
+Partial occupied placement admission, all region factorizations, source closure and the complete three-loop amplitude remain separate obligations. This result validates the nonzero ordinary hard period only.

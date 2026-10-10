@@ -1,0 +1,526 @@
+--- a/src/solver/guarded/lifecycle.rs
++++ b/src/solver/guarded/lifecycle.rs
+@@ -72,12 +72,16 @@
+     pub rule_applications: usize,
+ }
+ 
+-/// Reusable rules bound to their exact supplied source corpus and measure.
++/// Immutable replay-verified rules bound to their exact source corpus and measure.
++///
++/// Construction and loading replay every rule. Fields stay private to this
++/// module so verified composition can retain that invariant without replaying
++/// unchanged proofs. No mutable source or rule access is exposed.
+ #[derive(Debug)]
+ pub struct GuardedProgram<const N: usize> {
+-    pub(super) sources: Arc<GuardedSourceSystem<N>>,
+-    pub(super) rules: Vec<GuardedRule<N>>,
+-    pub(super) terminals: BTreeSet<[i64; N]>,
++    sources: Arc<GuardedSourceSystem<N>>,
++    rules: Vec<GuardedRule<N>>,
++    terminals: BTreeSet<[i64; N]>,
+ }
+ 
+ /// Every key in one pending map borrows the same replay-validated coordinate
+@@ -151,6 +155,18 @@
+             }
+             sources.replay_rule(rule)?;
+         }
++        let terminals = Self::validate_terminals(&sources, terminals)?;
++        Ok(Self {
++            sources,
++            rules,
++            terminals,
++        })
++    }
++
++    fn validate_terminals(
++        sources: &GuardedSourceSystem<N>,
++        terminals: impl IntoIterator<Item = [i64; N]>,
++    ) -> Result<BTreeSet<[i64; N]>, SolverError> {
+         let terminals: BTreeSet<_> = terminals.into_iter().collect();
+         for terminal in &terminals {
+             if sources.roles.iter().zip(terminal).any(|(role, power)| {
+@@ -166,11 +182,7 @@
+                 ));
+             }
+         }
+-        Ok(Self {
+-            sources,
+-            rules,
+-            terminals,
+-        })
++        Ok(terminals)
+     }
+ 
+     pub fn sources(&self) -> &Arc<GuardedSourceSystem<N>> {
+@@ -240,6 +252,69 @@
+         let mut rules = self.rules;
+         rules.extend(fallback.rules);
+         Self::new(self.sources, rules, current_terminals)
++    }
++
++    /// Replace the explicit stopping set of this immutable verified program.
++    /// Rule proofs remain unchanged and retain their original replay guarantee;
++    /// only the new terminals and the rule budget require validation. Loading
++    /// serialized programs still replays every rule independently.
++    pub fn with_terminals_verified(
++        mut self,
++        current_terminals: impl IntoIterator<Item = [i64; N]>,
++        max_rules: usize,
++    ) -> Result<Self, SolverError> {
++        if self.rules.len() > max_rules {
++            return Err(SolverError::InvalidInput(format!(
++                "guarded terminal rebind has {} rules, exceeding rule budget {max_rules}",
++                self.rules.len()
++            )));
++        }
++        self.terminals = Self::validate_terminals(&self.sources, current_terminals)?;
++        Ok(self)
++    }
++
++    /// Compose two immutable replay-verified programs without replaying their
++    /// unchanged rules. This checks the complete source binding and common
++    /// coordinate order, counts duplicate rules against the budget, preserves
++    /// `self` before `fallback`, and replaces both prior stopping sets.
++    ///
++    /// This operation establishes no new coverage or closure. Every rule was
++    /// replayed at construction or loading; the private fields and immutable
++    /// accessors preserve that guarantee through composition. Use
++    /// `union_replayed` when independent replay of the union is desired.
++    pub fn union_verified(
++        mut self,
++        fallback: Self,
++        current_terminals: impl IntoIterator<Item = [i64; N]>,
++        max_rules: usize,
++    ) -> Result<Self, SolverError> {
++        if !Arc::ptr_eq(&self.sources, &fallback.sources)
++            && !same_source_context(&self.sources, &fallback.sources)
++        {
++            return Err(SolverError::InvalidInput(
++                "guarded program union requires the same exact source context".into(),
++            ));
++        }
++        let count = self.rules.len().checked_add(fallback.rules.len()).ok_or_else(|| {
++            SolverError::InvalidInput("guarded program union rule count overflow".into())
++        })?;
++        if count > max_rules {
++            return Err(SolverError::InvalidInput(format!(
++                "guarded program union has {count} rules, exceeding rule budget {max_rules}"
++            )));
++        }
++        // Each input already has one valid coordinate order. Only their
++        // agreement needs checking; an empty input imposes no order.
++        if let (Some(left), Some(right)) = (self.rules.first(), fallback.rules.first()) {
++            if left.order.permutation() != right.order.permutation() {
++                return Err(SolverError::InvalidInput(
++                    "guarded program rules require one common coordinate order".into(),
++                ));
++            }
++        }
++        self.terminals = Self::validate_terminals(&self.sources, current_terminals)?;
++        self.rules.extend(fallback.rules);
++        Ok(self)
+     }
+ 
+     fn one(&self) -> Coefficient {
+@@ -633,7 +708,7 @@
+         GuardedProgram::new(sources, vec![rule], [[0]]).unwrap()
+     }
+ 
+-    fn restricted_sample(bounds: IndexBounds, terminal: i64) -> GuardedProgram<1> {
++    pub(super) fn restricted_sample(bounds: IndexBounds, terminal: i64) -> GuardedProgram<1> {
+         let mut program = sample("retained-source-recurrence");
+         let domain = IndexDomain::new([bounds]).unwrap();
+         program.rules[0].domain = domain.clone();
+@@ -842,6 +917,106 @@
+     }
+ 
+     #[test]
++    fn verified_union_rejects_every_original_source_binding_mismatch() {
++        for variant in [
++            "measure",
++            "roles",
++            "indices",
++            "variables",
++            "variable-order",
++            "source-id",
++            "source-domain",
++            "source-condition",
++            "source-row",
++            "row-order",
++            "zero-domains",
++        ] {
++            let names = match variant {
++                "variables" => ["guarded_lifecycle_n", "union_other_x"],
++                "variable-order" => ["guarded_lifecycle_x", "guarded_lifecycle_n"],
++                _ => ["guarded_lifecycle_n", "guarded_lifecycle_x"],
++            };
++            let context = CoefficientContext::new(names);
++            let x = context
++                .parameter(if variant == "variables" {
++                    "union_other_x"
++                } else {
++                    "guarded_lifecycle_x"
++                })
++                .unwrap();
++            let mut row = vec![
++                Term {
++                    integral: Integral::symbolic([0]).unwrap(),
++                    coefficient: context.one().numerator,
++                },
++                Term {
++                    integral: Integral::symbolic([-1]).unwrap(),
++                    coefficient: if variant == "source-row" {
++                        (-context.one()).numerator
++                    } else {
++                        (-x.clone()).numerator
++                    },
++                },
++            ];
++            if variant == "row-order" {
++                row.reverse();
++            }
++            let conditions = if variant == "source-condition" {
++                vec![
++                    x.numerator.clone(),
++                    context.parameter("guarded_lifecycle_n").unwrap().numerator,
++                ]
++            } else {
++                vec![x.numerator.clone()]
++            };
++            let sources = GuardedSourceSystem::new(
++                if variant == "measure" {
++                    "other-measure"
++                } else {
++                    "union-binding"
++                },
++                [if variant == "roles" {
++                    IndexRole::Ordinary
++                } else {
++                    IndexRole::Occupation
++                }],
++                [usize::from(variant == "indices")],
++                vec![
++                    GuardedSource::new(
++                        if variant == "source-id" {
++                            "different-source"
++                        } else {
++                            "surface-recurrence"
++                        },
++                        row,
++                        IndexDomain::new([IndexBounds::new(
++                            Some(if variant == "source-domain" { 2 } else { 1 }),
++                            None,
++                        )
++                        .unwrap()])
++                        .unwrap(),
++                    )
++                    .with_nonzero_conditions(conditions),
++                ],
++            )
++            .unwrap()
++            .with_zero_domains(if variant == "zero-domains" {
++                vec![IndexDomain::new([IndexBounds::fixed(0)]).unwrap()]
++            } else {
++                vec![]
++            })
++            .unwrap();
++            let other = GuardedProgram::new(Arc::new(sources), vec![], []).unwrap();
++            let result = sample("union-binding").union_verified(other, [[0]], 8);
++            assert!(
++                matches!(result, Err(SolverError::InvalidInput(ref message))
++                if message.contains("same exact source context")),
++                "variant {variant}: {result:?}"
++            );
++        }
++    }
++
++    #[test]
+     fn replayed_union_counts_duplicate_rules_against_the_budget() {
+         let result = sample("union-budget").union_replayed(sample("union-budget"), [[0]], 1);
+         assert!(matches!(result, Err(SolverError::InvalidInput(message))
+@@ -917,6 +1092,63 @@
+             GuardedProgram::new(sources.clone(), rules, [[0, 0]]).unwrap()
+         };
+         let result = make_program(false).union_replayed(make_program(true), [[0, 0]], 64);
++        assert!(matches!(result, Err(SolverError::InvalidInput(message))
++            if message.contains("common coordinate order")));
++    }
++
++    #[test]
++    fn verified_union_requires_one_native_coordinate_order() {
++        let context = CoefficientContext::new(["union_order_n", "union_order_b", "union_order_x"]);
++        let x = context.parameter("union_order_x").unwrap();
++        let domain = IndexDomain::new([
++            IndexBounds::new(Some(1), None).unwrap(),
++            IndexBounds::fixed(0),
++        ])
++        .unwrap();
++        let sources = Arc::new(
++            GuardedSourceSystem::new(
++                "union-order",
++                [IndexRole::Occupation; 2],
++                [0, 1],
++                vec![GuardedSource::new(
++                    "order-recurrence",
++                    vec![
++                        Term {
++                            integral: Integral::symbolic([0, 0]).unwrap(),
++                            coefficient: context.one().numerator,
++                        },
++                        Term {
++                            integral: Integral::symbolic([-1, 0]).unwrap(),
++                            coefficient: (-x).numerator,
++                        },
++                    ],
++                    domain.clone(),
++                )],
++            )
++            .unwrap(),
++        );
++        let make_program = |permuted: bool| {
++            let found = sources
++                .solve_domains(
++                    vec![domain.clone()],
++                    crate::solver::SearchOptions {
++                        max_depth: Some(2),
++                        sample_seed: 0,
++                        ..Default::default()
++                    },
++                    32,
++                )
++                .unwrap();
++            assert!(!found.rules.is_empty());
++            let mut rules = found.rules;
++            if permuted {
++                for rule in &mut rules {
++                    rule.order = rule.order.clone().with_permutation([1, 0]).unwrap();
++                }
++            }
++            GuardedProgram::new(sources.clone(), rules, [[0, 0]]).unwrap()
++        };
++        let result = make_program(false).union_verified(make_program(true), [[0, 0]], 64);
+         assert!(matches!(result, Err(SolverError::InvalidInput(message))
+             if message.contains("common coordinate order")));
+     }
+@@ -1488,3 +1720,7 @@
+         assert_eq!(zero_budget.unresolved[0].coefficient, context.one());
+     }
+ }
++
++#[cfg(test)]
++#[path = "verified_tests.rs"]
++mod verified_tests;
+--- a/src/solver/guarded/persistence.rs
++++ b/src/solver/guarded/persistence.rs
+@@ -80,7 +80,7 @@
+     pub fn encode_native(&self, limits: BinaryIoLimits) -> Result<Vec<u8>, BinaryIoError> {
+         let mut table = CoefficientTableBuilder::new(limits);
+         let mut sources = Vec::new();
+-        for (info, row) in self.sources.sources.iter().zip(self.sources.system.rows()) {
++        for (info, row) in self.sources().sources.iter().zip(self.sources().system.rows()) {
+             sources.push(SourceRecord {
+                 id: info.id.clone(),
+                 domain: domain_record(&info.domain),
+@@ -97,11 +97,11 @@
+             });
+         }
+         let mut rules = Vec::new();
+-        for rule in &self.rules {
++        for rule in self.rules() {
+             if rule.candidate.case.coordinate().is_none()
+                 || rule.order.program().is_some()
+                 || rule.order.physical_arity() != N
+-                || rule.order.roles() != Some(&self.sources.roles)
++                || rule.order.roles() != Some(&self.sources().roles)
+             {
+                 return Err(BinaryIoError::Invalid(
+                     "unsupported guarded case or order transport",
+@@ -143,24 +143,21 @@
+         }
+         let record = Record {
+             schema: SCHEMA.into(),
+-            measure: self.sources.measure_id.clone(),
+-            roles: self
+-                .sources
++            measure: self.sources().measure_id.clone(),
++            roles: self.sources()
+                 .roles
+                 .iter()
+                 .map(|role| role_code(*role))
+                 .collect(),
+-            indices: self.sources.system.index_variables().to_vec(),
++            indices: self.sources().system.index_variables().to_vec(),
+             sources,
+-            zero_domains: self
+-                .sources
++            zero_domains: self.sources()
+                 .zero_domains
+                 .iter()
+                 .map(domain_record)
+                 .collect(),
+             rules,
+-            terminals: self
+-                .terminals
++            terminals: self.terminals()
+                 .iter()
+                 .map(|terminal| terminal.to_vec())
+                 .collect(),
+@@ -499,7 +496,7 @@
+         let program = sample("native-roundtrip");
+         let bytes = program.encode_native(Default::default()).unwrap();
+         let restored =
+-            GuardedProgram::decode_generated(&bytes, program.sources.clone(), Default::default())
++            GuardedProgram::decode_generated(&bytes, program.sources().clone(), Default::default())
+                 .unwrap();
+         let before = program.reduce([3], Default::default()).unwrap();
+         let after = restored.reduce([3], Default::default()).unwrap();
+@@ -538,7 +535,7 @@
+             .collect::<Vec<_>>();
+         let legacy = encode_program(envelope.kind(), &sections, Default::default()).unwrap();
+         let error =
+-            GuardedProgram::decode_generated(&legacy, program.sources.clone(), Default::default())
++            GuardedProgram::decode_generated(&legacy, program.sources().clone(), Default::default())
+                 .unwrap_err();
+         assert!(
+             error
+@@ -553,9 +550,12 @@
+         let bytes = program.encode_native(Default::default()).unwrap();
+         let other = sample("measure-b");
+         assert!(
+-            GuardedProgram::decode_generated(&bytes, other.sources, Default::default()).is_err()
++            GuardedProgram::decode_generated(&bytes, other.sources().clone(), Default::default()).is_err()
+         );
+-        let mut context = Arc::try_unwrap(sample("measure-a").sources).unwrap();
++        let sample = sample("measure-a");
++        let context = sample.sources().clone();
++        drop(sample);
++        let mut context = Arc::try_unwrap(context).unwrap();
+         context.sources[0].domain =
+             IndexDomain::new([IndexBounds::new(Some(2), None).unwrap()]).unwrap();
+         assert!(
+@@ -590,7 +590,7 @@
+             .collect();
+         let corrupt = encode_program(envelope.kind(), &sections, Default::default()).unwrap();
+         assert!(
+-            GuardedProgram::decode_generated(&corrupt, program.sources.clone(), Default::default())
++            GuardedProgram::decode_generated(&corrupt, program.sources().clone(), Default::default())
+                 .is_err()
+         );
+         let (mut record, _): (Record, _) = bincode::decode_from_slice(
+@@ -614,7 +614,7 @@
+             .collect();
+         let corrupt = encode_program(envelope.kind(), &sections, Default::default()).unwrap();
+         assert!(
+-            GuardedProgram::decode_generated(&corrupt, program.sources, Default::default())
++            GuardedProgram::decode_generated(&corrupt, program.sources().clone(), Default::default())
+                 .is_err()
+         );
+     }
+--- /dev/null
++++ b/src/solver/guarded/verified_tests.rs
+@@ -0,0 +1,104 @@
++use super::*;
++use super::tests::{restricted_sample, sample};
++use crate::algebra::CoefficientContext;
++use crate::solver::guarded::{GuardedSource, IndexBounds, IndexDomain};
++use crate::solver::Term;
++
++fn equivalent(left: &GuardedProgram<1>, right: &GuardedProgram<1>) {
++    assert_eq!(left.encode_native(Default::default()).unwrap(),
++        right.encode_native(Default::default()).unwrap());
++    for point in [[0], [1], [2], [3], [7]] {
++        let a = left.reduce(point, Default::default()).unwrap();
++        let b = right.reduce(point, Default::default()).unwrap();
++        assert_eq!(a.terms, b.terms);
++        assert_eq!(a.nonzero_conditions, b.nonzero_conditions);
++        assert_eq!(a.rule_applications, b.rule_applications);
++        assert_eq!(format!("{:?}", a.unresolved), format!("{:?}", b.unresolved));
++    }
++}
++
++#[test]
++fn verified_union_preserves_precedence_conditions_and_native_bytes() {
++    let first = || restricted_sample(IndexBounds::new(Some(1), None).unwrap(), 1);
++    let second = || restricted_sample(IndexBounds::new(Some(2), None).unwrap(), 2);
++    let a = first();
++    let b = second();
++    assert!(!Arc::ptr_eq(a.sources(), b.sources()));
++    let verified = a.union_verified(b, [[0]], 2).unwrap();
++    let replayed = first().union_replayed(second(), [[0]], 2).unwrap();
++    equivalent(&verified, &replayed);
++    assert_eq!(verified.apply(&[3]).unwrap().status,
++        GuardedApplicationStatus::Applied { rule: 0 });
++    assert_eq!(verified.terminals(), &BTreeSet::from([[0]]));
++    let loaded = GuardedProgram::decode_generated(
++        &verified.encode_native(Default::default()).unwrap(),
++        verified.sources().clone(), Default::default()).unwrap();
++    equivalent(&verified, &loaded);
++}
++
++#[test]
++fn verified_terminal_rebind_replaces_stale_terminals_and_preserves_conditions() {
++    for terminals in [vec![], vec![[1]], vec![[0]]] {
++        let verified = sample("verified-rebind")
++            .with_terminals_verified(terminals.clone(), 1).unwrap();
++        let replayed = sample("verified-rebind")
++            .with_terminals_replayed(terminals, 1).unwrap();
++        equivalent(&verified, &replayed);
++    }
++    let result = sample("verified-no-stop")
++        .with_terminals_verified([], 1).unwrap().reduce([1], Default::default()).unwrap();
++    assert_eq!(result.unresolved.len(), 1);
++    assert_eq!(result.unresolved[0].integral, [0]);
++    assert!(!result.nonzero_conditions.is_empty());
++}
++
++#[test]
++fn verified_composition_counts_duplicates_and_checks_rebind_budget() {
++    assert!(sample("verified-budget").union_verified(sample("verified-budget"), [[0]], 1).is_err());
++    let p = sample("verified-budget").union_verified(sample("verified-budget"), [[0]], 2).unwrap();
++    assert_eq!(p.rules().len(), 2);
++    assert!(p.with_terminals_verified([[0]], 1).is_err());
++}
++
++#[test]
++fn verified_union_accepts_empty_inputs_without_imposing_an_order() {
++    for empty_first in [false, true] {
++        let program = sample("verified-empty");
++        let empty = GuardedProgram::new(program.sources().clone(), vec![], []).unwrap();
++        let verified = if empty_first {
++            empty.union_verified(program, [[0]], 1)
++        } else {
++            program.union_verified(empty, [[0]], 1)
++        }.unwrap();
++        equivalent(&verified, &sample("verified-empty"));
++    }
++    let source_owner = sample("verified-empty-both");
++    let empty = || GuardedProgram::new(source_owner.sources().clone(), vec![], []).unwrap();
++    let both = empty().union_verified(empty(), [[1]], 0).unwrap();
++    assert!(both.rules().is_empty());
++    assert_eq!(both.apply(&[1]).unwrap().status, GuardedApplicationStatus::Terminal);
++}
++
++fn cut_program() -> GuardedProgram<2> {
++    let context = CoefficientContext::new(["verified_cut_n", "verified_surface_n"]);
++    let roles = [IndexRole::RequiredCut, IndexRole::Occupation];
++    let sources = GuardedSourceSystem::new("verified-terminals", roles, [0, 1], vec![
++        GuardedSource::new("cut-row", vec![Term {
++            integral: Integral::symbolic([0, 0]).unwrap(),
++            coefficient: context.one().numerator,
++        }], IndexDomain::for_roles(&roles))
++    ]).unwrap().with_zero_domains(vec![IndexDomain::new([
++        IndexBounds::fixed(2), IndexBounds::fixed(0)
++    ]).unwrap()]).unwrap();
++    GuardedProgram::new(Arc::new(sources), vec![], []).unwrap()
++}
++
++#[test]
++fn verified_apis_reject_invalid_and_declared_zero_terminals() {
++    for terminal in [[0, 0], [-1, 0], [1, -1], [2, 0]] {
++        assert!(cut_program().with_terminals_verified([terminal], 0).is_err());
++        assert!(cut_program().union_verified(cut_program(), [terminal], 0).is_err());
++    }
++    let p = cut_program().with_terminals_verified([[1, 0]], 0).unwrap();
++    assert_eq!(p.apply(&[1, 0]).unwrap().status, GuardedApplicationStatus::Terminal);
++}

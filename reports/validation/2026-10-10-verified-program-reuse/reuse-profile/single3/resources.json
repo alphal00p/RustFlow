@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-verified-reuse-profile-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/single3/profile"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 185.57927439408377,
+  "user_seconds": 183.71636,
+  "system_seconds": 0.516622,
+  "peak_child_rss_kib": 303572,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

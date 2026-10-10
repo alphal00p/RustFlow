@@ -1,0 +1,29 @@
+{
+  "completed_timings": [
+    {
+      "phase": "decode_generated_and_replay_all_rules",
+      "wall_seconds": 34.754296251
+    },
+    {
+      "phase": "encode_loaded_program",
+      "wall_seconds": 0.340760105
+    },
+    {
+      "phase": "union_verified_with_empty_same_source",
+      "wall_seconds": 2.98e-6
+    },
+    {
+      "phase": "encode_verified_union",
+      "wall_seconds": 0.255742047
+    },
+    {
+      "phase": "union_replayed_with_empty_same_source",
+      "wall_seconds": 35.450413688
+    },
+    {
+      "phase": "encode_replayed_union",
+      "wall_seconds": 0.271717418
+    }
+  ],
+  "phase": "complete"
+}

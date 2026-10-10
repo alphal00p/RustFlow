@@ -1,0 +1,32 @@
+{
+  "scope": "Fresh source-only restricted partial-placement comparison; no sealed production permit, old proof reuse, numerical values, or closure claim",
+  "mode": "single-all",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-partial-placement-source-probe",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-native-controls/single-all",
+    "single-all",
+    "3ad3dcd4d1f644f80168930dab00ba7293193571a2073844d815ffab9085e7db"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "/tmp/rustflow-partial-placement-source-probe": "7ee599376dc554e9e688c0d5a71a866992530415ec0b8d669f3659f79ee1d3c0",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-native-controls/probe.rs": "bed331c9e23b897a3dad282023280b1bea251e9ea468434d5b8b5d42cdc1b7f2",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-native-controls/chart_check.py": "88d6ebb85f277636dbb359fe52a7d6bbfe7cfeb1ec07cd23aff2640cf262e8de",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-native-controls/chart-checks.json": "3fcb2dd7f47eae1bb8246dbb7347ed03346fb24fae33396500eec07d550ff7b8",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-native-controls/origin-proof.md": "bf1baaaffe157390f45b5e504de208672fac226b03d1d469e798b71f3a5b926e"
+  },
+  "proof_inputs_sha256": {
+    "reports/validation/2026-10-10-partial-placement-native-controls/chart_check.py": "88d6ebb85f277636dbb359fe52a7d6bbfe7cfeb1ec07cd23aff2640cf262e8de",
+    "reports/validation/2026-10-10-partial-placement-native-controls/chart-checks.json": "3fcb2dd7f47eae1bb8246dbb7347ed03346fb24fae33396500eec07d550ff7b8",
+    "reports/validation/2026-10-10-partial-placement-native-controls/origin-proof.md": "bf1baaaffe157390f45b5e504de208672fac226b03d1d469e798b71f3a5b926e"
+  },
+  "proof_binding_sha256": "3ad3dcd4d1f644f80168930dab00ba7293193571a2073844d815ffab9085e7db",
+  "build_binding_sha256": "53472ac0e11cb6a5c2f18aa7321ae60a9dea8f28fed1ee6a867e54f596b451ff",
+  "launcher_sha256": "f2c4abaf713108663bff7475ba5932cc6513b762f7caed2d06048a926e61c77f",
+  "independent_proof_audit": "acceptance_manifest read-only review: no blocker for full-positive-support lower-origin boxes; excludes deleted supports and eta endpoint",
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

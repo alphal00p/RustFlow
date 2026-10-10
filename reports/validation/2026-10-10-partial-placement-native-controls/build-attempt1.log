@@ -1,0 +1,11 @@
+error[E0432]: unresolved imports `symbolica_amflow::finite_density::WeightedSourceOptions`, `symbolica_amflow::finite_density::WeightedSourcePolicy`
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-native-controls/probe.rs:12:54
+   |
+12 | use symbolica_amflow::finite_density::{DensityInput, WeightedSourceOptions, WeightedSourcePolicy};
+   |                                                      ^^^^^^^^^^^^^^^^^^^^^  ^^^^^^^^^^^^^^^^^^^^ no `WeightedSourcePolicy` in `finite_density`
+   |                                                      |
+   |                                                      no `WeightedSourceOptions` in `finite_density`
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0432`.

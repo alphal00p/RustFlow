@@ -1,0 +1,63 @@
+{
+  "status": "PASS",
+  "scope": "Isolated prototype mechanism and privacy validation only; no production integration, closure, numerical result or end-to-end speed claim.",
+  "source_build": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/library-build.json",
+    "sha256": "90a3ea3135e4763fb005bfb10877802493124e06bd3e49bf856c55b8a342548e"
+  },
+  "harness_build": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/build-binding.json",
+    "sha256": "24a74d99a7a682a954a4bb8a70d2932b255143735a292f6bc9add8227c0747eb"
+  },
+  "profiles": [
+    {
+      "mode": "single3",
+      "result": "PASS",
+      "rules": 13850,
+      "sources": 54,
+      "phases_wall_seconds": {
+        "decode_generated_and_replay_all_rules": 91.340786251,
+        "encode_loaded_program": 0.862349846,
+        "union_verified_with_empty_same_source": 2.889e-06,
+        "encode_verified_union": 0.853998599,
+        "union_replayed_with_empty_same_source": 90.68820454,
+        "encode_replayed_union": 0.927419769
+      },
+      "resource_wall_seconds": 185.57927439408377,
+      "peak_child_rss_kib": 303572,
+      "verified_encoded_program_sha256": "cccf3b36e2b00e47ba124dc88717f10d41c3437b1f03801f406652945ec52cab",
+      "matches_original_input_bytes": false,
+      "all_encoded_comparisons_exact": true,
+      "initial_decode_and_later_union_independently_replay": true,
+      "result_sha256": "76d891a9ef24135bb1736cc436bdd027e47cad04e4b82bddeefee7a720e918b3",
+      "binding_sha256": "b77ad8526fd877f5888ca03530ce2e7a56542d018150b2f55c2ce24bcd5b387c"
+    },
+    {
+      "mode": "double",
+      "result": "PASS",
+      "rules": 3114,
+      "sources": 232,
+      "phases_wall_seconds": {
+        "decode_generated_and_replay_all_rules": 34.754296251,
+        "encode_loaded_program": 0.340760105,
+        "union_verified_with_empty_same_source": 2.98e-06,
+        "encode_verified_union": 0.255742047,
+        "union_replayed_with_empty_same_source": 35.450413688,
+        "encode_replayed_union": 0.271717418
+      },
+      "resource_wall_seconds": 71.34776028525084,
+      "peak_child_rss_kib": 106744,
+      "verified_encoded_program_sha256": "d564894ad9f428fb9cbd84e5d3f6d8829f76a927245f48dd1429393a3b18191b",
+      "matches_original_input_bytes": false,
+      "all_encoded_comparisons_exact": true,
+      "initial_decode_and_later_union_independently_replay": true,
+      "result_sha256": "3ea911dab79f3649aa688e0b9a80ee3d029a2b72576381f4657cf990c6c2ce39",
+      "binding_sha256": "9f1f001505759fd5084601c9f14d445a445265bc200211306a90d4f982666e38"
+    }
+  ],
+  "external_privacy_controls_passed": 6,
+  "privacy_result_sha256": "efcf78a8f788d657e12885eaf79ebf91e3f56c3306a54a005a2eea86347ea362",
+  "production_sources_unchanged": true,
+  "timing_caveat": "Single operation samples on a shared host. Tiny verified timings are clock-sensitive. Encoding, construction and loading are separately recorded; whole closure/application cost was not measured.",
+  "replay_scope": "Large programs were loaded with full native replay and then independently replayed once more by union_replayed. Verified union was byte-identical between them, so a third large decode was not run. Root-owned small unit tests separately decode verified output programs."
+}

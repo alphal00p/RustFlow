@@ -1,0 +1,90 @@
+{
+  "status": "passed",
+  "scope": "Standalone ordinary connected hard-boundary coefficient only",
+  "claimed_reference_digits": 10,
+  "full_three_loop_finite_density_acceptance": false,
+  "production_sources_changed": false,
+  "cargo_invoked": false,
+  "files": {
+    "build.py": {
+      "sha256": "e35e66cf2ccf5e0faa32608a2c1b1d9f5fb9eeab9a564fb4ef68eb2b446b8e79",
+      "bytes": 3309
+    },
+    "compare.py": {
+      "sha256": "83c6b7c7b6d99251e7cd2bc82e4fc707c35840184378bd42584688333aaccc3c",
+      "bytes": 4577
+    },
+    "comparison.json": {
+      "sha256": "5e87fc0f886cdfbb1e31ff0138380919a9966be7fa60b68aa23b00773dcd7eae",
+      "bytes": 3555
+    },
+    "derivation.md": {
+      "sha256": "c829c419e6cd8bc27cb104c85dc1f7e838c66bfd2b4b1d68b734e21a6be24e30",
+      "bytes": 2103
+    },
+    "finalize.py": {
+      "sha256": "8ee232befb4b492cb45758c35e86d6e8cf355a72808d6176432ad81dc7a29ed8",
+      "bytes": 1668
+    },
+    "gamma_reference.py": {
+      "sha256": "e2f2abb820ecd6c2f9e1c6300e0727e0d5cae66d1fd073313e46e48ca8befdbf",
+      "bytes": 1448
+    },
+    "native-build-binding.json": {
+      "sha256": "606ba1812eff9f9ca6115f3f0fa3ce77442c48ea5ed26afada3162f4c7ed26ca",
+      "bytes": 3027
+    },
+    "native-build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "native-predictions/prediction-18-60.json": {
+      "sha256": "75c4de5ead35d3cae50467a5ee36b1de930fb20e7094905cbcf8bb2ad1a41f02",
+      "bytes": 957
+    },
+    "native-predictions/prediction-28-60.json": {
+      "sha256": "688dee024d51d30beb5d478e71a564fb88ea2248ed82149012e937c5d12599ae",
+      "bytes": 967
+    },
+    "native-predictions/prediction-28-80.json": {
+      "sha256": "53c7ea34a3294a1f41a0577401df8490092b7c82761b53efbdba3ae4c319cccc",
+      "bytes": 967
+    },
+    "native-resources.json": {
+      "sha256": "550b3cdc7d459545ad8dba413a974b6075957a8da991af8f1fba06a1cae574db",
+      "bytes": 452
+    },
+    "native-resources.log": {
+      "sha256": "13659de5d615a4ef50b9692949ab278ac5ac3b5cf0e692c9e27e793de6186026",
+      "bytes": 15777
+    },
+    "native-resources.provenance.json": {
+      "sha256": "0ad1bcbd6d6aa4c8d051f1d82122e1bf46a766c4ccd2a0452e91cbaa45003794",
+      "bytes": 852
+    },
+    "native-run-binding.json": {
+      "sha256": "53bbf67ef24b4164b92b72182d2e2f0d1f80a3f3a6e842e6ffbae93671b0de69",
+      "bytes": 1388
+    },
+    "native.rs": {
+      "sha256": "fbb7a7424fb9be8d9aaedc4b4a93db7e283eb828e6f3729c262771130bfc54a0",
+      "bytes": 3989
+    },
+    "reference.json": {
+      "sha256": "29a7400a39e3c3c99c9742e302f05ee70afe7130aa0c816cc4575ff789816e06",
+      "bytes": 5002
+    },
+    "reference.py": {
+      "sha256": "2b3e27c7b2132f3d50a6b88c002b22add313166687cc8ed73c07d1159fb991c7",
+      "bytes": 2314
+    },
+    "result.md": {
+      "sha256": "8157ca6638b0df43f543a798e886834f4b8acfa270fd372bfeb060ec06e0810f",
+      "bytes": 1897
+    },
+    "run-native.py": {
+      "sha256": "e5fa624e1e3615a57c9069bf9023243042f4673b6ef9da8e9d09332d84f48baa",
+      "bytes": 1777
+    }
+  }
+}

@@ -1,0 +1,9 @@
+The isolated verified-program implementation passed static review, six external privacy controls and byte-exact comparisons on both real saved native programs. Production source files were unchanged before and after each run.
+
+The singleton program contains 13,850 rules. Initial decode/replay took 91.341 seconds, verified empty union 0.000002889 seconds, and replayed empty union 90.688 seconds. The double-cut program contains 3,114 rules: the corresponding times were 34.754 seconds, 0.000002980 seconds and 35.450 seconds. These are single operation samples on a shared host. The tiny verified durations are clock-sensitive; they do not measure an end-to-end closure speedup. Encoding, source loading, compilation and process resource scopes are separately recorded.
+
+Each program was first loaded through native exact source replay. Verified empty union then retained its exact encoded bytes. Replayed empty union independently validated the unchanged proofs again and produced the same encoded bytes. A redundant third large decode was omitted. The parent-owned small native unit suite separately exercises decoding verified-union outputs, corruption rejection and structural compatibility.
+
+The external controls check one valid immutable-access client and five expected compilation failures: a forged struct literal, direct private-field access, and mutation through the rule, terminal or source getters. They distinguish the intended privacy/type errors from an environment or dependency compilation failure.
+
+`summary.json` and `artifact-manifest.json` bind sources, libraries, commands, resources and results. Large unchanged output programs use deterministic gzip with their original and compressed hashes in `archive-map.json`. The frozen original input corpora remain raw in the separate native-program-work-profile report. No discovery, new rules, closure, periods, production integration or higher-loop acceptance is claimed here.

@@ -1,0 +1,13 @@
+begin decode_generated_and_replay_all_rules
+end decode_generated_and_replay_all_rules 91.340786251s
+begin encode_loaded_program
+end encode_loaded_program 0.862349846s
+begin union_verified_with_empty_same_source
+end union_verified_with_empty_same_source 0.000002889s
+begin encode_verified_union
+end encode_verified_union 0.853998599s
+begin union_replayed_with_empty_same_source
+end union_replayed_with_empty_same_source 90.688204540s
+begin encode_replayed_union
+end encode_replayed_union 0.927419769s
+PASS: 13850 rules, byte-identical verified/replayed unions

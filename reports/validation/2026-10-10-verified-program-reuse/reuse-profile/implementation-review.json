@@ -1,0 +1,21 @@
+{
+  "status": "static review passed; execution recorded separately",
+  "scope": "Actual isolated prototype versus the immutable verified-program invariant; no production edits or numerical acceptance claim.",
+  "files": {
+    "/tmp/rustred-verified-program-reuse-20261010/src/solver/guarded/lifecycle.rs": "e7e299fa2dcf0cd4f594a0c10dc6a22f69452daf9e3a4d473dfc5194622a472e",
+    "/tmp/rustred-verified-program-reuse-20261010/src/solver/guarded/persistence.rs": "52839133c970a5fabda241bea469f340d0f0ee07f03d10f682efc4a3e3c881d2",
+    "/tmp/rustred-verified-program-reuse-20261010/src/solver/guarded/verified_tests.rs": "a92ac2920833943286eaa4f899c8970621de018ebfe05468a9ed6a26dc6aaf0b",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/isolated-native.patch": "791eaad85635e2814a7a101b0586e70178d0149418ac212b0cec9bf216512011"
+  },
+  "findings": [
+    "Program fields are lifecycle-private; external accessors expose immutable references only.",
+    "new and decode_generated still independently replay arbitrary original-source proofs. Existing replayed methods still call new.",
+    "validate_terminals is an exact extraction of the previous role and declared-zero admission check.",
+    "union_verified checks complete source context or Arc identity, checked duplicate-inclusive rule count, and common coordinate permutation for nonempty inputs; preserves self-before-fallback order and all rule metadata.",
+    "with_terminals_verified retains rules/source and replaces only the admitted terminal set.",
+    "Persistence only changes to immutable getters and test ownership extraction; v2 format and loading authority remain unchanged.",
+    "Focused tests cover separately allocated equal contexts, full mismatch matrix, common-order rejection, empty inputs, duplicate budgets, stale terminals, invalid/zero terminals, serialized/reduction equivalence, and replayed corruption failures.",
+    "The diagnostic adds five external expected compile failures plus one positive immutable getter control; all passed before profiling.",
+    "No replay-counter instrument is implemented. Code inspection plus separately measured union phases identify the mechanism; unit tests supply behavioral equivalence."
+  ]
+}

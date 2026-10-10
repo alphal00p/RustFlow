@@ -1,0 +1,28 @@
+{
+  "captured_utc": "2026-10-10T05:45:01.573990+00:00",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-verified-reuse-profile-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/single3/profile"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/tmp/rustflow-verified-reuse-profile-20261010": {
+      "resolved_path": "/tmp/rustflow-verified-reuse-profile-20261010",
+      "sha256": "bd9bb6143df98107e4016c07d88663b88f03b81b97c93403bf7e7e4b659d1036",
+      "size_bytes": 271598400
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.bin",
+      "sha256": "e3774e0c8c0273674886ab7fe244a535bbf9df36b18991f27889f07ab1b90479",
+      "size_bytes": 17092671
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

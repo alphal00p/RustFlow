@@ -1,0 +1,1876 @@
+{
+  "schema": "partial-placement-complete-germ-charts-v1",
+  "scope": "Independent exact Gaussian full-positive-support chart proof only. No native HEPKit replay, deleted-support inheritance, native discovery, or flow admission.",
+  "source_sha256": "88d6ebb85f277636dbb359fe52a7d6bbfe7cfeb1ec07cd23aff2640cf262e8de",
+  "families": [
+    {
+      "name": "cut3_shift0",
+      "parameters": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "U_terms": [
+        [
+          1,
+          0,
+          1,
+          0
+        ],
+        [
+          1,
+          0,
+          0,
+          1
+        ],
+        [
+          0,
+          1,
+          1,
+          0
+        ],
+        [
+          0,
+          1,
+          0,
+          1
+        ],
+        [
+          0,
+          0,
+          1,
+          1
+        ]
+      ],
+      "V_terms": [
+        [
+          1,
+          1,
+          1,
+          0
+        ],
+        [
+          1,
+          1,
+          0,
+          1
+        ],
+        [
+          1,
+          0,
+          1,
+          1
+        ]
+      ],
+      "shifted_parameter": "a",
+      "chart_count": 24,
+      "charts": [
+        {
+          "ordering": [
+            "a",
+            "b",
+            "c",
+            "d"
+          ],
+          "U_valuation": [
+            1,
+            1,
+            0
+          ],
+          "S_valuation": [
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "a",
+            "b",
+            "d",
+            "c"
+          ],
+          "U_valuation": [
+            1,
+            1,
+            0
+          ],
+          "S_valuation": [
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "a",
+            "c",
+            "b",
+            "d"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "a",
+            "c",
+            "d",
+            "b"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "a",
+            "d",
+            "b",
+            "c"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "a",
+            "d",
+            "c",
+            "b"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            0,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "b",
+            "a",
+            "c",
+            "d"
+          ],
+          "U_valuation": [
+            1,
+            1,
+            0
+          ],
+          "S_valuation": [
+            1,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "b",
+            "a",
+            "d",
+            "c"
+          ],
+          "U_valuation": [
+            1,
+            1,
+            0
+          ],
+          "S_valuation": [
+            1,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              0,
+              1
+            ],
+            [
+              1,
+              0,
+              0
+            ],
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              0,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "b",
+            "c",
+            "a",
+            "d"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "b",
+            "c",
+            "d",
+            "a"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            1
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "b",
+            "d",
+            "a",
+            "c"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "b",
+            "d",
+            "c",
+            "a"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            1
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "c",
+            "a",
+            "b",
+            "d"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "c",
+            "a",
+            "d",
+            "b"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "c",
+            "b",
+            "a",
+            "d"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "c",
+            "b",
+            "d",
+            "a"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            1
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "c",
+            "d",
+            "a",
+            "b"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "c",
+            "d",
+            "b",
+            "a"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            1
+          ],
+          "U_positive_unit": [
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "d",
+            "a",
+            "b",
+            "c"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "d",
+            "a",
+            "c",
+            "b"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            0,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "d",
+            "b",
+            "a",
+            "c"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "d",
+            "b",
+            "c",
+            "a"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            1
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              2,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "d",
+            "c",
+            "a",
+            "b"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            0
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "d",
+            "c",
+            "b",
+            "a"
+          ],
+          "U_valuation": [
+            1,
+            0,
+            0
+          ],
+          "S_valuation": [
+            1,
+            1,
+            1
+          ],
+          "U_positive_unit": [
+            [
+              1,
+              1,
+              1
+            ],
+            [
+              0,
+              1,
+              1
+            ],
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1,
+              1,
+              0
+            ],
+            [
+              0,
+              1,
+              0
+            ],
+            [
+              0,
+              0,
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            2,
+            1,
+            0
+          ],
+          "U_unit_lower_bound": 1
+        }
+      ]
+    },
+    {
+      "name": "double_shift1_and2",
+      "parameters": [
+        "x",
+        "y"
+      ],
+      "U_terms": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "V_terms": [
+        [
+          1,
+          1
+        ]
+      ],
+      "shifted_parameter": "x",
+      "chart_count": 2,
+      "charts": [
+        {
+          "ordering": [
+            "x",
+            "y"
+          ],
+          "U_valuation": [
+            0
+          ],
+          "S_valuation": [
+            0
+          ],
+          "U_positive_unit": [
+            [
+              0
+            ],
+            [
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "y",
+            "x"
+          ],
+          "U_valuation": [
+            0
+          ],
+          "S_valuation": [
+            1
+          ],
+          "U_positive_unit": [
+            [
+              1
+            ],
+            [
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            0
+          ],
+          "U_unit_lower_bound": 1
+        }
+      ]
+    },
+    {
+      "name": "double_shift2_and4",
+      "parameters": [
+        "x",
+        "y"
+      ],
+      "U_terms": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "V_terms": [
+        [
+          1,
+          1
+        ]
+      ],
+      "shifted_parameter": "y",
+      "chart_count": 2,
+      "charts": [
+        {
+          "ordering": [
+            "x",
+            "y"
+          ],
+          "U_valuation": [
+            0
+          ],
+          "S_valuation": [
+            1
+          ],
+          "U_positive_unit": [
+            [
+              0
+            ],
+            [
+              1
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              0
+            ]
+          ],
+          "jacobian_powers": [
+            0
+          ],
+          "U_unit_lower_bound": 1
+        },
+        {
+          "ordering": [
+            "y",
+            "x"
+          ],
+          "U_valuation": [
+            0
+          ],
+          "S_valuation": [
+            0
+          ],
+          "U_positive_unit": [
+            [
+              1
+            ],
+            [
+              0
+            ]
+          ],
+          "V_over_US_numerator": [
+            [
+              1
+            ]
+          ],
+          "jacobian_powers": [
+            0
+          ],
+          "U_unit_lower_bound": 1
+        }
+      ]
+    }
+  ],
+  "complete_chart_count": 28,
+  "result": "Every U is a monomial times a positive unit, and V/(U*S) is a polynomial divided by that positive unit on every closed chart cube."
+}

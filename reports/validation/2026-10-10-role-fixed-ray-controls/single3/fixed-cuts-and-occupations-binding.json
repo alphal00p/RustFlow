@@ -1,0 +1,25 @@
+{
+  "scope": "Same source-only native discovery; query rays fix roles optionally, source and admitted domains unchanged. No old rule reuse.",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-role-fixed-ray-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/single3/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/single3/fixed-cuts-and-occupations",
+    "fixed-cuts-and-occupations",
+    "3"
+  ],
+  "inputs": {
+    "/tmp/rustflow-role-fixed-ray-probe": "71ed9fec3a129bc9917f69f908e3b491260314b592c2b84541eefce7b3a296fb",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/single3/input.bin": "2742d22249ad0de84452c2358044e9932c30e454b9481fce0d66b38634ab7c5c",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/single3/input.json": "49aefcc4517c2d53e57658da5880f40ca8c6f7a81d130356e4cfa95fceb589a8",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/single3/initial-checkpoint.json": "2a6713e3b94438c4750832122ccd8fba254492ae45bdba10e1ce01ded897c9ae",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/single3/points.json": "90530d2dd1ac7a1c043ed731f2178118b20feb5b03198e9745ba2ecef899aad0",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/probe.rs": "ca45a4f86ac1350f9b494e2d32ed3c6178ac92d07a0920cadf27c73aeed7933c"
+  },
+  "build_binding_sha256": "5bd6d7e1baad9ce8c4101872242e1300c820b956f8d901c6f2ff815a373e8171",
+  "exact_initial_source_context_match": true,
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

@@ -222,6 +222,29 @@ seven [sampled reductions](../reports/validation/2026-10-10-targeted-native-dept
 unchanged. These controls remain validation evidence, without a source-policy,
 input-routing or native-search change.
 
+Larger-budget production controls still time out before closure, although the
+`[3]` singleton frontier contracts from 2,510 to 872 labels in the 1,200-second
+run. A fresh longer run is tracked separately. Profiling isolates substantial
+repeated proof replay: an unchanged 13,850-rule union costs about 91 seconds.
+An [isolated verified-program reuse prototype](../reports/validation/2026-10-10-verified-program-reuse/README.md)
+preserves exact program bytes while avoiding that repeated work. Construction
+and loading still replay every proof; private immutable program state permits
+checked composition. The prototype passes 91 native tests and external privacy
+checks. Coherent production integration and full closure validation remain
+separate gates. Fixing cut or occupation indices in the existing bounded ray
+schedule gives no improvement in the [matched controls](../reports/validation/2026-10-10-role-fixed-ray-controls/README.md).
+
+Fixed-shell partial placements show a larger small-control improvement than
+the moving-shell alternative: shifting slot `[0]` in singleton cut `[3]`
+reduces the sampled total from 282 to 49 RHS terms; two double-cut placements
+also cover one previously unresolved request. These
+[initial controls](../reports/validation/2026-10-10-partial-placement-native-controls/README.md)
+use explicitly restricted origin domains and do not establish production
+closure or boundary admission. The surviving one-mass ordinary hard period
+passes a separate [ten-digit recursive boundary check](../reports/validation/2026-10-10-partial-hard-boundary-check/result.md)
+with bubble and sunset terminals disabled. Complete support, region and
+endpoint certificates must accompany any subsequent placement change.
+
 ## Remaining acceptance evidence
 
 Exact certificates and bounded algebraic pilots are useful gates, but do not

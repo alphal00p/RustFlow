@@ -1,0 +1,187 @@
+{
+  "scope": "External Rust privacy/type checks. Expected failures are successful controls; no runtime proof or numerical claim.",
+  "native_build": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/library-build.json",
+    "sha256": "90a3ea3135e4763fb005bfb10877802493124e06bd3e49bf856c55b8a342548e"
+  },
+  "library": {
+    "path": "/tmp/librustred-verified-program-reuse-20261010.rlib",
+    "sha256": "91f0dc1e00677301daf9bb1146fb318f713f6a71a8598534c0d36ca947defd69",
+    "bytes": 227092024
+  },
+  "result": "PASS",
+  "cases": [
+    {
+      "case": "immutable_access",
+      "command": [
+        "rustc",
+        "--edition=2024",
+        "--crate-name",
+        "verified_privacy_immutable_access",
+        "--crate-type",
+        "lib",
+        "--emit=metadata",
+        "--error-format=json",
+        "--extern",
+        "rustred=/tmp/librustred-verified-program-reuse-20261010.rlib",
+        "-L",
+        "dependency=/common/dev/rustflow_fermi/target/release/deps",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/privacy-controls/immutable_access.rs",
+        "-o",
+        "/tmp/verified-privacy-immutable_access.rmeta"
+      ],
+      "source_sha256": "30c34e56ed52cbfdbd80c5e2fe752fad31ddf0532637609cd79087e195379615",
+      "log_sha256": "f85518690446b59b09ef74168b5d2d5c81ff85dd945d9974d1fc1524bdf1e15a",
+      "exit_code": 0,
+      "expected_error": null,
+      "error_codes": [],
+      "wall_seconds": 0.05932030500844121,
+      "result": "PASS"
+    },
+    {
+      "case": "struct_literal",
+      "command": [
+        "rustc",
+        "--edition=2024",
+        "--crate-name",
+        "verified_privacy_struct_literal",
+        "--crate-type",
+        "lib",
+        "--emit=metadata",
+        "--error-format=json",
+        "--extern",
+        "rustred=/tmp/librustred-verified-program-reuse-20261010.rlib",
+        "-L",
+        "dependency=/common/dev/rustflow_fermi/target/release/deps",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/privacy-controls/struct_literal.rs",
+        "-o",
+        "/tmp/verified-privacy-struct_literal.rmeta"
+      ],
+      "source_sha256": "8699ea4f9f7f731a446bcb89d0c4dc7f8f5541f7e8216340ba6dbfd9aa354791",
+      "log_sha256": "51473beccf345779a90796351e4aae1002f628721e33f8e7374a831401bf39e9",
+      "exit_code": 1,
+      "expected_error": "E0451",
+      "error_codes": [
+        "E0451"
+      ],
+      "wall_seconds": 0.07783854333683848,
+      "result": "PASS"
+    },
+    {
+      "case": "private_field",
+      "command": [
+        "rustc",
+        "--edition=2024",
+        "--crate-name",
+        "verified_privacy_private_field",
+        "--crate-type",
+        "lib",
+        "--emit=metadata",
+        "--error-format=json",
+        "--extern",
+        "rustred=/tmp/librustred-verified-program-reuse-20261010.rlib",
+        "-L",
+        "dependency=/common/dev/rustflow_fermi/target/release/deps",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/privacy-controls/private_field.rs",
+        "-o",
+        "/tmp/verified-privacy-private_field.rmeta"
+      ],
+      "source_sha256": "3af64d0bd863933390e236f1ccada064f86ade88e41e896b8d982b72c0cf2f7b",
+      "log_sha256": "e8db62a99b4be044d9d9f7ee9c3151c6741eb348e7a6455467994b783ae884df",
+      "exit_code": 1,
+      "expected_error": "E0616",
+      "error_codes": [
+        "E0616"
+      ],
+      "wall_seconds": 0.06685927882790565,
+      "result": "PASS"
+    },
+    {
+      "case": "rules_getter",
+      "command": [
+        "rustc",
+        "--edition=2024",
+        "--crate-name",
+        "verified_privacy_rules_getter",
+        "--crate-type",
+        "lib",
+        "--emit=metadata",
+        "--error-format=json",
+        "--extern",
+        "rustred=/tmp/librustred-verified-program-reuse-20261010.rlib",
+        "-L",
+        "dependency=/common/dev/rustflow_fermi/target/release/deps",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/privacy-controls/rules_getter.rs",
+        "-o",
+        "/tmp/verified-privacy-rules_getter.rmeta"
+      ],
+      "source_sha256": "d23636d606d78e0561b55dbd7b71136b6423a2fcd3c9e1363fbd1f66fdc184b8",
+      "log_sha256": "ba08e9f69f05b7543c190d574779bd2553b6468c2af021e8f001858f46100d03",
+      "exit_code": 1,
+      "expected_error": "E0596",
+      "error_codes": [
+        "E0596"
+      ],
+      "wall_seconds": 0.05541780265048146,
+      "result": "PASS"
+    },
+    {
+      "case": "terminals_getter",
+      "command": [
+        "rustc",
+        "--edition=2024",
+        "--crate-name",
+        "verified_privacy_terminals_getter",
+        "--crate-type",
+        "lib",
+        "--emit=metadata",
+        "--error-format=json",
+        "--extern",
+        "rustred=/tmp/librustred-verified-program-reuse-20261010.rlib",
+        "-L",
+        "dependency=/common/dev/rustflow_fermi/target/release/deps",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/privacy-controls/terminals_getter.rs",
+        "-o",
+        "/tmp/verified-privacy-terminals_getter.rmeta"
+      ],
+      "source_sha256": "7616a42b06a8d58b22541596963abc14877455c0de57eb95a80ec0013f5df999",
+      "log_sha256": "36b16451539e7fcd7499363034a1467bed010ac59c410a77c3ccd23828ae869f",
+      "exit_code": 1,
+      "expected_error": "E0596",
+      "error_codes": [
+        "E0596"
+      ],
+      "wall_seconds": 0.0568996979855001,
+      "result": "PASS"
+    },
+    {
+      "case": "sources_getter",
+      "command": [
+        "rustc",
+        "--edition=2024",
+        "--crate-name",
+        "verified_privacy_sources_getter",
+        "--crate-type",
+        "lib",
+        "--emit=metadata",
+        "--error-format=json",
+        "--extern",
+        "rustred=/tmp/librustred-verified-program-reuse-20261010.rlib",
+        "-L",
+        "dependency=/common/dev/rustflow_fermi/target/release/deps",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/privacy-controls/sources_getter.rs",
+        "-o",
+        "/tmp/verified-privacy-sources_getter.rmeta"
+      ],
+      "source_sha256": "048984974e5a5464e9df63c9f23e88a85c912a28047a5cc472e257296fb841f9",
+      "log_sha256": "9f4ffc54688338f39e8099efceb6924d3b21a64e257f06a74f1bef1d4c20bbcb",
+      "exit_code": 1,
+      "expected_error": "E0308",
+      "error_codes": [
+        "E0308"
+      ],
+      "wall_seconds": 0.285671201068908,
+      "result": "PASS"
+    }
+  ]
+}

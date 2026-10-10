@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustred-verified-program-reuse-tests-20261010",
+    "solver::guarded::",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.11750003788620234,
+  "user_seconds": 0.07381,
+  "system_seconds": 0.048729999999999996,
+  "peak_child_rss_kib": 15448,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

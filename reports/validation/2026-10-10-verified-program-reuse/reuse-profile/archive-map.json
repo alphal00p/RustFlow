@@ -1,0 +1,23 @@
+{
+  "scope": "Lossless storage for unchanged encoded output programs only. Original frozen input corpora stay raw.",
+  "entries": [
+    {
+      "logical_path": "single3/profile/unchanged-program.bin",
+      "sha256": "cccf3b36e2b00e47ba124dc88717f10d41c3437b1f03801f406652945ec52cab",
+      "bytes": 17092671,
+      "archive_path": "single3/profile/unchanged-program.bin.gz",
+      "archive_sha256": "73502b70bd4cbaf345d92ca19ccf5c1d4d7c4a5dca7321ee346a3595180de0a0",
+      "archive_bytes": 1277247,
+      "gzip_mtime": 0
+    },
+    {
+      "logical_path": "double/profile/unchanged-program.bin",
+      "sha256": "d564894ad9f428fb9cbd84e5d3f6d8829f76a927245f48dd1429393a3b18191b",
+      "bytes": 5935226,
+      "archive_path": "double/profile/unchanged-program.bin.gz",
+      "archive_sha256": "160bb0681e49a8c051a9b9287b539bfd4447f7eafe0365a22ca88d129f3f4679",
+      "archive_bytes": 409832,
+      "gzip_mtime": 0
+    }
+  ]
+}

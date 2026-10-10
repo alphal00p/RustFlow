@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-partial-placement-source-probe",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-native-controls/double-slots24",
+    "double-slots24",
+    "3ad3dcd4d1f644f80168930dab00ba7293193571a2073844d815ffab9085e7db"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.5954422107897699,
+  "user_seconds": 0.5437649999999999,
+  "system_seconds": 0.035886,
+  "peak_child_rss_kib": 21504,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

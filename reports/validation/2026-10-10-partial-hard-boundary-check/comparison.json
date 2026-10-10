@@ -1,0 +1,46 @@
+{
+  "status": "passed",
+  "scope": "Independent 10-digit check of one convergent ordinary connected hard coefficient, evaluated recursively without bubble or sunset terminals. No full three-loop finite-density acceptance claim.",
+  "metadata_correction": "The native scope string retains equal-mass from its harness template. The actual generated family, input source and asserted constants are one-mass (-1,0,0); no equal-mass result is used here.",
+  "native_owner": "Generic single-mass homogeneity peel followed by ordinary recursive one-loop AMF; no analytic bubble or sunset terminal.",
+  "comparisons": [
+    {
+      "digits": 18,
+      "series_order": 60,
+      "relative_real_error": "2.3788989733006622462288196860465299546886481101785226259246257513658027842088943E-57",
+      "absolute_imaginary_error": "0"
+    },
+    {
+      "digits": 28,
+      "series_order": 60,
+      "relative_real_error": "2.6316907582111948045762377684742057991067893833129487387946939761282650165653002E-58",
+      "absolute_imaginary_error": "0"
+    },
+    {
+      "digits": 28,
+      "series_order": 80,
+      "relative_real_error": "3.1466331805336320144800048194820190919570435737271412035768573050280235758112548E-65",
+      "absolute_imaginary_error": "0"
+    }
+  ],
+  "relative_native_refinements": [
+    "2.1157298974795427657711959091991093747779691718472277520451563537529762825523643E-57",
+    "2.6316904435478767512130363204737238509048801876085913660805736184425345137629426E-58"
+  ],
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-partial-hard-boundary-check/native-build-binding.json": "606ba1812eff9f9ca6115f3f0fa3ce77442c48ea5ed26afada3162f4c7ed26ca",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/native-run-binding.json": "53bbf67ef24b4164b92b72182d2e2f0d1f80a3f3a6e842e6ffbae93671b0de69",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/native-resources.json": "550b3cdc7d459545ad8dba413a974b6075957a8da991af8f1fba06a1cae574db",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/native-predictions/prediction-18-60.json": "75c4de5ead35d3cae50467a5ee36b1de930fb20e7094905cbcf8bb2ad1a41f02",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/native-predictions/prediction-28-60.json": "688dee024d51d30beb5d478e71a564fb88ea2248ed82149012e937c5d12599ae",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/native-predictions/prediction-28-80.json": "53c7ea34a3294a1f41a0577401df8490092b7c82761b53efbdba3ae4c319cccc",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/reference.json": "29a7400a39e3c3c99c9742e302f05ee70afe7130aa0c816cc4575ff789816e06",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/reference.py": "2b3e27c7b2132f3d50a6b88c002b22add313166687cc8ed73c07d1159fb991c7",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/gamma_reference.py": "e2f2abb820ecd6c2f9e1c6300e0727e0d5cae66d1fd073313e46e48ca8befdbf",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/native.rs": "fbb7a7424fb9be8d9aaedc4b4a93db7e283eb828e6f3729c262771130bfc54a0",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/derivation.md": "c829c419e6cd8bc27cb104c85dc1f7e838c66bfd2b4b1d68b734e21a6be24e30",
+    "reports/validation/2026-10-10-partial-hard-boundary-check/compare.py": "83c6b7c7b6d99251e7cd2bc82e4fc707c35840184378bd42584688333aaccc3c",
+    "tools/finite_density/compare_massive_reference.py": "7739206862f6d40714a4587231a24cf99a8206811cad82fd2755ef97b52f57aa"
+  },
+  "definitions_or_tolerances_fitted": false
+}

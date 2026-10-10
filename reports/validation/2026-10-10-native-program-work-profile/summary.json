@@ -1,0 +1,125 @@
+{
+  "scope": "Read-only unchanged-native profile; no discovery, new reducer, mathematical assumptions or production changes. Each selected checkpoint is copied and source/binary hash-bound. Full proof replay and empty same-source replayed union independently checked.",
+  "sectors": [
+    {
+      "sector": "single3",
+      "rules": 13850,
+      "sources": 54,
+      "program_bytes": 17092671,
+      "point_count": 16,
+      "source_loading_wall_seconds": 0.694427492,
+      "decode_and_full_replay": {
+        "wall_seconds": 91.605968686,
+        "user_cpu_seconds": 90.75,
+        "system_cpu_seconds": 0.24
+      },
+      "empty_same_source_union": {
+        "wall_seconds": 91.160171199,
+        "user_cpu_seconds": 90.5,
+        "system_cpu_seconds": 0.0
+      },
+      "encoding_before": {
+        "wall_seconds": 0.882656958,
+        "user_cpu_seconds": 0.8,
+        "system_cpu_seconds": 0.07
+      },
+      "encoding_after": {
+        "wall_seconds": 0.848257721,
+        "user_cpu_seconds": 0.82,
+        "system_cpu_seconds": 0.03
+      },
+      "point_phase_wall_totals": {
+        "apply-native": 0.012277018,
+        "reduce-native": 0.013142736,
+        "apply-expression-json": 0.00060834,
+        "reduce-expression-json": 0.007300712
+      },
+      "application_statuses": {
+        "Unresolved(NoApplicableRule)": 16
+      },
+      "successful_reduction_rule_applications": 0,
+      "unresolved_reasons": {
+        "NoApplicableRule": 16
+      },
+      "conditions_retained": true,
+      "work_limits": {
+        "max_pending_integrals_per_label": 4096,
+        "max_rule_applications_per_label": 4096
+      },
+      "empty_union_encoded_bytes_unchanged": true,
+      "resources": {
+        "path": "single3/resources.json",
+        "sha256": "faa456ec1942c1ecf799c406fb3a0fcd2c3a68a6cea8952a1d0b643441f9fd1a",
+        "wall_seconds": 185.47220717882738,
+        "peak_child_rss_kib": 279348
+      }
+    },
+    {
+      "sector": "double",
+      "rules": 3114,
+      "sources": 232,
+      "program_bytes": 5935226,
+      "point_count": 16,
+      "source_loading_wall_seconds": 0.232230991,
+      "decode_and_full_replay": {
+        "wall_seconds": 34.764955375,
+        "user_cpu_seconds": 34.44,
+        "system_cpu_seconds": 0.07
+      },
+      "empty_same_source_union": {
+        "wall_seconds": 34.064541613,
+        "user_cpu_seconds": 33.83,
+        "system_cpu_seconds": 0.0
+      },
+      "encoding_before": {
+        "wall_seconds": 0.264626643,
+        "user_cpu_seconds": 0.26,
+        "system_cpu_seconds": 0.01
+      },
+      "encoding_after": {
+        "wall_seconds": 0.261938398,
+        "user_cpu_seconds": 0.25,
+        "system_cpu_seconds": 0.01
+      },
+      "point_phase_wall_totals": {
+        "apply-native": 0.003621763,
+        "reduce-native": 0.003587049,
+        "apply-expression-json": 7.0602e-05,
+        "reduce-expression-json": 0.00035923
+      },
+      "application_statuses": {
+        "Unresolved(NoApplicableRule)": 16
+      },
+      "successful_reduction_rule_applications": 0,
+      "unresolved_reasons": {
+        "NoApplicableRule": 16
+      },
+      "conditions_retained": true,
+      "work_limits": {
+        "max_pending_integrals_per_label": 4096,
+        "max_rule_applications_per_label": 4096
+      },
+      "empty_union_encoded_bytes_unchanged": true,
+      "resources": {
+        "path": "double/resources.json",
+        "sha256": "e9ec806f94353f79def72e75fc56dca97125c014fa7506424b8a36fa087f1a00",
+        "wall_seconds": 69.68834621878341,
+        "peak_child_rss_kib": 95268
+      }
+    }
+  ],
+  "conclusion": "Repeated proof replay dominates this immutable-program experiment. Empty same-source union costs nearly as much as initial proof decoding/replay while leaving exact encoded bytes unchanged. This directly motivates reviewing a separate invariant-preserving composition of already-verified immutable programs.",
+  "limitations": [
+    "All32 selected current requested/frontier labels are NoApplicableRule, with zero successful recursive rule applications. Native point timings therefore measure full-corpus uncovered-rule scans, not deep reductions or nontrivial coefficient substitutions.",
+    "Expression timings include only simple unresolved outputs, mostly unit coefficients and no applied guards; they cannot bound expensive symbolic-expression conversion in other targets.",
+    "Rule scanning and native polynomial substitution were not independently instrumented. No claim identifies which dominates a nontrivial applicable reduction.",
+    "One sequential observation per checkpoint on a shared host; CPU ticks support replay CPU cost, but no cross-run performance superiority is claimed."
+  ],
+  "limits": {
+    "labels_per_checkpoint": 16,
+    "max_rule_applications_per_label": 4096,
+    "max_pending_integrals_per_label": 4096,
+    "timeout_seconds_per_checkpoint": 600
+  },
+  "implementation_reading": "implementation-reading.json"
+}

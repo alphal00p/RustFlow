@@ -1,0 +1,51 @@
+{
+  "scope": "Same decoded real program, sequential verified then replayed empty union. One sample per phase; no fair end-to-end benchmark or closure claim.",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-verified-reuse-profile-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/single3/profile"
+  ],
+  "inputs": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.bin": "e3774e0c8c0273674886ab7fe244a535bbf9df36b18991f27889f07ab1b90479",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.json": "ae7d16de1221a2ed39c95252da1c83a8442f0cc5e444e33a98dedde06effc3c8",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/manifest.json": "f380cac080d41e0c7106f32c26a184ff8bd1e62ffdf3c6713b934a5c5cc82f10",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/input-bindings.json": "cef781b1fab1a1786ccd05667b3c93b52f57f0daf75192d90400ea80999cc034",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/probe.rs": "d5ee53f5d69ef6920213d4a296827cf7287d3f1c8741c537de37bde2300d8e5f",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/build.py": "8998af1dfd3699204c825864cec5a077ea8459121578483c834b23c5b8c0ca84",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/build-binding.json": "24a74d99a7a682a954a4bb8a70d2932b255143735a292f6bc9add8227c0747eb",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/reuse-profile/run.py": "9c5155ff0a7d2928ffcce21164e9db6b35108ed43d19b0fa1a5a618a18931c96",
+    "/tmp/rustflow-verified-reuse-profile-20261010": "bd9bb6143df98107e4016c07d88663b88f03b81b97c93403bf7e7e4b659d1036",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-verified-program-reuse/library-build.json": "90a3ea3135e4763fb005bfb10877802493124e06bd3e49bf856c55b8a342548e"
+  },
+  "libraries": {
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    "rustred": {
+      "path": "/tmp/librustred-verified-program-reuse-20261010.rlib",
+      "sha256": "91f0dc1e00677301daf9bb1146fb318f713f6a71a8598534c0d36ca947defd69",
+      "bytes": 227092024
+    },
+    "bincode": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60",
+      "bytes": 2197214
+    }
+  },
+  "prior_input_mode": "single3",
+  "production_sources_verified_before": true,
+  "frozen_input_report_manifest_verified": 30,
+  "exit_code": 0,
+  "inputs_unchanged": true,
+  "libraries_unchanged": true,
+  "production_sources_unchanged": true
+}

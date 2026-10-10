@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-role-fixed-ray-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/double/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/double/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-role-fixed-ray-controls/double/fixed-cuts-and-occupations",
+    "fixed-cuts-and-occupations",
+    "3"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 27.125372361857444,
+  "user_seconds": 26.879498,
+  "system_seconds": 0.046534,
+  "peak_child_rss_kib": 55396,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

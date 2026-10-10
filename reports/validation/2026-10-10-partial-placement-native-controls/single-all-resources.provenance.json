@@ -1,0 +1,30 @@
+{
+  "captured_utc": "2026-10-10T05:37:24.621011+00:00",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-partial-placement-source-probe",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-partial-placement-native-controls/single-all",
+    "single-all",
+    "3ad3dcd4d1f644f80168930dab00ba7293193571a2073844d815ffab9085e7db"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/tmp/rustflow-partial-placement-source-probe": {
+      "resolved_path": "/tmp/rustflow-partial-placement-source-probe",
+      "sha256": "7ee599376dc554e9e688c0d5a71a866992530415ec0b8d669f3659f79ee1d3c0",
+      "size_bytes": 1262852312
+    },
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "size_bytes": 1550
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

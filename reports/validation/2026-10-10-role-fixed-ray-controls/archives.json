@@ -1,0 +1,2679 @@
+{
+  "schema": "lossless-gzip-restore-map-v1",
+  "gzip_mtime": 0,
+  "files": [
+    {
+      "logical_path": "double/anchored/point-00.bin",
+      "stored_path": "double/anchored/point-00.bin.gz",
+      "raw_bytes": 142246,
+      "stored_bytes": 6473,
+      "raw_sha256": "e0e011c3b7ff2e54b543638ae2f554ec090ea5f59719b87318fb86126f80973d",
+      "stored_sha256": "5b8cf44078721285156f61b7b05f8a557f884208becd13555771a66ce0a12052",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-01.bin",
+      "stored_path": "double/anchored/point-01.bin.gz",
+      "raw_bytes": 145695,
+      "stored_bytes": 6700,
+      "raw_sha256": "d398730a7dce1fce2bd707d4a763b372f529be79f52bf36a1b6c62268e9e047f",
+      "stored_sha256": "996bd33babcc9eef68045fb78f432073188a06d782cca125eab8d0f6e6689103",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-02.bin",
+      "stored_path": "double/anchored/point-02.bin.gz",
+      "raw_bytes": 136434,
+      "stored_bytes": 6025,
+      "raw_sha256": "92eb33fe745af1622e35e05a7ca01498f4cbd9753a6c0b367f960d3856846d2c",
+      "stored_sha256": "87e7f764d881abfbda8849514453c88180ca10d2bada54d9958bb56e29e39026",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-03.bin",
+      "stored_path": "double/anchored/point-03.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-04.bin",
+      "stored_path": "double/anchored/point-04.bin.gz",
+      "raw_bytes": 139028,
+      "stored_bytes": 6187,
+      "raw_sha256": "b3e674fbe265931adcfacd6622c111712dd876ede6ae13b6524c54104c63a553",
+      "stored_sha256": "949cabb1db4bdc1faa86e181bdca8a6d4c0e93becd931c0a7cd09173a4f8130b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-05.bin",
+      "stored_path": "double/anchored/point-05.bin.gz",
+      "raw_bytes": 137188,
+      "stored_bytes": 6078,
+      "raw_sha256": "3a1f45be57d5713b95db64432320eb5a316117ff1aefee8522dc16f10785cd39",
+      "stored_sha256": "c23fcd156ca6d4866bfb3211e8f07460fdfc208581350686d0df48b7325a92de",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-06.bin",
+      "stored_path": "double/anchored/point-06.bin.gz",
+      "raw_bytes": 137865,
+      "stored_bytes": 6110,
+      "raw_sha256": "f35d5edd806aff2cafaaac9378a8a3dedd894f9854b9ce3498f6a5611e93b1bb",
+      "stored_sha256": "5b150a6f9ee6cd161e07f11d2055bb5dc21873dfa45ca77983176b1a5f6d1e5d",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-07.bin",
+      "stored_path": "double/anchored/point-07.bin.gz",
+      "raw_bytes": 139052,
+      "stored_bytes": 6193,
+      "raw_sha256": "0bc5588a636dd6f86607c692a2efac91fda15c719b96653fd9b61c9057338a76",
+      "stored_sha256": "5911a5177e50dbe962325ef74a8458a63c4cf915d481908582d17c317930e28c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-08.bin",
+      "stored_path": "double/anchored/point-08.bin.gz",
+      "raw_bytes": 137818,
+      "stored_bytes": 6107,
+      "raw_sha256": "3636f516cf70d1849c2cc4c758c4ef96d2580d344b5e9dd24002d9f5c0f24ebb",
+      "stored_sha256": "1ee9db28f709a1877d5109dbab8c2bc48d9d572f06568dc2de080aacf17e4f53",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-09.bin",
+      "stored_path": "double/anchored/point-09.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-10.bin",
+      "stored_path": "double/anchored/point-10.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-11.bin",
+      "stored_path": "double/anchored/point-11.bin.gz",
+      "raw_bytes": 138504,
+      "stored_bytes": 6182,
+      "raw_sha256": "e40a91a4375b2f7790a420e04d11eeb4471697aff1426211747ade2bb28b41f5",
+      "stored_sha256": "fbf8dcf68e46bee60ef69d9ff50570e270b3547283cdedc9941d0059bee816bf",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-12.bin",
+      "stored_path": "double/anchored/point-12.bin.gz",
+      "raw_bytes": 138504,
+      "stored_bytes": 6185,
+      "raw_sha256": "a269c30ce39e34bd7ca827d31f7567fb89b8fd369e1ab01e9c3f4a4172ef5e3c",
+      "stored_sha256": "05733505c94fa9d40579a7d931979a155997dbd6c8f0575f46d7aa1df8ea5b6b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-13.bin",
+      "stored_path": "double/anchored/point-13.bin.gz",
+      "raw_bytes": 138504,
+      "stored_bytes": 6171,
+      "raw_sha256": "f380d86ce5bb92bb9e12f57002bc65bc3012b809fff91f2f5eca0cd80bb8e59c",
+      "stored_sha256": "5ac8c72e857bd31b428203fc7da1bc6e33329ffa257179e02e27ed38fe6bfcf4",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-14.bin",
+      "stored_path": "double/anchored/point-14.bin.gz",
+      "raw_bytes": 136434,
+      "stored_bytes": 6025,
+      "raw_sha256": "ed8da41d0c7084697a5665a061ea8f0d6d0ada585815014a4f6f7a5318c1ebf0",
+      "stored_sha256": "430fe312eaf0fba7583c4aebfd8c72d5ebd01a0ccb8d96f8dd7dab0e3e023793",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-15.bin",
+      "stored_path": "double/anchored/point-15.bin.gz",
+      "raw_bytes": 136434,
+      "stored_bytes": 6018,
+      "raw_sha256": "4eea90304b180bdb30915364e4bf9397bfae5f17a0fcc06c4fe80c5ac5514399",
+      "stored_sha256": "d1d9401c613c9c4ea33912da6c67ad9ce5fc85f0b99d0488a4d881d205ef6cf5",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-16.bin",
+      "stored_path": "double/anchored/point-16.bin.gz",
+      "raw_bytes": 145446,
+      "stored_bytes": 6765,
+      "raw_sha256": "04517e8ab6e3e3ddb4a244e7cf408b3a083fc448028964135ad504ff5f044f70",
+      "stored_sha256": "83a1a64586b1bb2b32d7c9dc0e12ac36e5c41579f82aafefc1a8e8a2e456d3f5",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-17.bin",
+      "stored_path": "double/anchored/point-17.bin.gz",
+      "raw_bytes": 157398,
+      "stored_bytes": 7546,
+      "raw_sha256": "b16ec9fd1d03a39dca159efc747cb4a98add4a916d4986fb76c9f2e3de2663b2",
+      "stored_sha256": "58afcf75a71683d92a35d9bb99b132ecff943f737ce939886040af1de317be35",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-18.bin",
+      "stored_path": "double/anchored/point-18.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-19.bin",
+      "stored_path": "double/anchored/point-19.bin.gz",
+      "raw_bytes": 140921,
+      "stored_bytes": 6375,
+      "raw_sha256": "3bcb2df375cedaa6b54e15ad906eff23a9c138876d488a397a79ee2f2bf6bd15",
+      "stored_sha256": "bdf7317a19724fb6620171ced62ba0dd6e5ebcd89336cae7dccfb4b16bf67e72",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-20.bin",
+      "stored_path": "double/anchored/point-20.bin.gz",
+      "raw_bytes": 137210,
+      "stored_bytes": 6086,
+      "raw_sha256": "c763617894830380f763cebcfae6f2a47ba8d2e49507d312b7eb6813f857471f",
+      "stored_sha256": "fa4867c11b3d7a0df6b0f4cba47cac298f65592d210e4b5c38614546576d84ce",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-21.bin",
+      "stored_path": "double/anchored/point-21.bin.gz",
+      "raw_bytes": 137596,
+      "stored_bytes": 6105,
+      "raw_sha256": "037c15fc04f68ef9e4223db7a49c0e082ba975d26ab9d1e414527b5f8f666be0",
+      "stored_sha256": "f98f97fbe551d91f1491b1d7fada9e4819f2b4c46d4899bd4279d93b1680f6be",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-22.bin",
+      "stored_path": "double/anchored/point-22.bin.gz",
+      "raw_bytes": 137142,
+      "stored_bytes": 6067,
+      "raw_sha256": "fd4886fa2f13bfb03d14399e1e0c5e32ba1d38ffe6c56de84d8b6206c417a741",
+      "stored_sha256": "4c47066fc464c645fa011255ffdbc3d0027c454b344610d110757ae7f6981f78",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-23.bin",
+      "stored_path": "double/anchored/point-23.bin.gz",
+      "raw_bytes": 139609,
+      "stored_bytes": 6231,
+      "raw_sha256": "d13b2a5f067b309a454a22514d85cf609ba956f95fdcbc3f3e378d931a54ac80",
+      "stored_sha256": "505e9f71287b84620438ce54a0852ccad755ec13e00423133ac8cc7a5eaa4a20",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-24.bin",
+      "stored_path": "double/anchored/point-24.bin.gz",
+      "raw_bytes": 138214,
+      "stored_bytes": 6144,
+      "raw_sha256": "27103f840e63c9c1c1b2a66bd39ce8d1b364e78ba31ab32839506768ff45374d",
+      "stored_sha256": "8fa0e66beea9a9b1a0d15acc2948ce668f3fcfd48d466cca574e7984b1929ea6",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-25.bin",
+      "stored_path": "double/anchored/point-25.bin.gz",
+      "raw_bytes": 140281,
+      "stored_bytes": 6278,
+      "raw_sha256": "8d97eee8dcb7b951a857cff7235bd7698a345aab080eaea5e8abfe971cec9c26",
+      "stored_sha256": "3cf4b1d3cf6c67dc64d0d671fc20335e800c488a76ad138e86b419ec3b2d6875",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-26.bin",
+      "stored_path": "double/anchored/point-26.bin.gz",
+      "raw_bytes": 137590,
+      "stored_bytes": 6098,
+      "raw_sha256": "afa7a1214fd0af2b64579bd2d3cd0e7cda685e6c96503e40e40c6f03e8b2ebf8",
+      "stored_sha256": "661ef3a6778f8c9608c71dd79c3f9319d48df2dfcc7cdde86fada1e3bb234c40",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-27.bin",
+      "stored_path": "double/anchored/point-27.bin.gz",
+      "raw_bytes": 136715,
+      "stored_bytes": 6038,
+      "raw_sha256": "fdeac318ab53e6989e8d1390b2a1d645840743a0b5a0dc5213dffe7f32733f47",
+      "stored_sha256": "0028da3c7ec8cb62989c2a6d795ae24be1e4bad3fe8d99932e91cd5109e79389",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-28.bin",
+      "stored_path": "double/anchored/point-28.bin.gz",
+      "raw_bytes": 136833,
+      "stored_bytes": 6035,
+      "raw_sha256": "672bdcb26f5ade36d9048e2a642b90374c0c8d467349e4bc068c6f4fd848b362",
+      "stored_sha256": "3ab01610120d4077b30d9d65c2dbbb1d693bea92bee8b5d210ba195fa9e004bb",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-29.bin",
+      "stored_path": "double/anchored/point-29.bin.gz",
+      "raw_bytes": 136715,
+      "stored_bytes": 6044,
+      "raw_sha256": "682ac6e28bc460b3bc72364280b809ffe2ac47585709faaf52f4940382b356e0",
+      "stored_sha256": "f5f575906dd4ddc120b2fdd76d635fd8da4cdf48109966f8b7551753de16d24d",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-30.bin",
+      "stored_path": "double/anchored/point-30.bin.gz",
+      "raw_bytes": 136787,
+      "stored_bytes": 6036,
+      "raw_sha256": "c14b4387fbb504779075030b99bbd3d5fcbdc93f5e5a6de7731a3ea2a9c35554",
+      "stored_sha256": "1884c5fee1e1d0d556838d6c18eee2fd8ee35cd334eb9b03d78ab67022760812",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-31.bin",
+      "stored_path": "double/anchored/point-31.bin.gz",
+      "raw_bytes": 139529,
+      "stored_bytes": 6265,
+      "raw_sha256": "9f758f7fba1cea001dc4c5cfac00e031a42f315514c8e4d0f7d78f2be587427f",
+      "stored_sha256": "35d036105192310a3f00fc13ebd0877e6d85c3c2085d2378e148a43272466594",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-32.bin",
+      "stored_path": "double/anchored/point-32.bin.gz",
+      "raw_bytes": 136619,
+      "stored_bytes": 6051,
+      "raw_sha256": "72686f11018d2d8bc6b3c9e7b12927fe1ffd6dcf68107bdb4ce28957661be56d",
+      "stored_sha256": "bbdbc1d9e0cb30b2164d7907355090dac8c4307c62c889409fedbbca1671cc16",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-33.bin",
+      "stored_path": "double/anchored/point-33.bin.gz",
+      "raw_bytes": 137830,
+      "stored_bytes": 6121,
+      "raw_sha256": "1b1d7613861ac9e347c5b03e7d8c819724c931734e75661bc48baa33147daefb",
+      "stored_sha256": "65ebf624f3552f8c3f0100f1df91e02dede3a7c35fe0dad0cc2ee633de305da4",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/anchored/point-34.bin",
+      "stored_path": "double/anchored/point-34.bin.gz",
+      "raw_bytes": 137259,
+      "stored_bytes": 6092,
+      "raw_sha256": "b0a50b46beb09ac413507029b0a60af281a9dff3cec1174a8ec290233f0939fe",
+      "stored_sha256": "e253ace157ab8173b3e3cda1655b706d93385ec9bf79850098952eeead8e84df",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-00.bin",
+      "stored_path": "double/fixed-cuts/point-00.bin.gz",
+      "raw_bytes": 142246,
+      "stored_bytes": 6473,
+      "raw_sha256": "e0e011c3b7ff2e54b543638ae2f554ec090ea5f59719b87318fb86126f80973d",
+      "stored_sha256": "5b8cf44078721285156f61b7b05f8a557f884208becd13555771a66ce0a12052",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-01.bin",
+      "stored_path": "double/fixed-cuts/point-01.bin.gz",
+      "raw_bytes": 145695,
+      "stored_bytes": 6700,
+      "raw_sha256": "d398730a7dce1fce2bd707d4a763b372f529be79f52bf36a1b6c62268e9e047f",
+      "stored_sha256": "996bd33babcc9eef68045fb78f432073188a06d782cca125eab8d0f6e6689103",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-02.bin",
+      "stored_path": "double/fixed-cuts/point-02.bin.gz",
+      "raw_bytes": 137388,
+      "stored_bytes": 6147,
+      "raw_sha256": "464dfd274e443043d54a4ffe858224acf40a749e57924b974a8e3623640ffd32",
+      "stored_sha256": "ab88255068714be8447703dc6dda1ed0e7922c61e5114fe9630437ed9ae580e9",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-03.bin",
+      "stored_path": "double/fixed-cuts/point-03.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-04.bin",
+      "stored_path": "double/fixed-cuts/point-04.bin.gz",
+      "raw_bytes": 139028,
+      "stored_bytes": 6187,
+      "raw_sha256": "b3e674fbe265931adcfacd6622c111712dd876ede6ae13b6524c54104c63a553",
+      "stored_sha256": "949cabb1db4bdc1faa86e181bdca8a6d4c0e93becd931c0a7cd09173a4f8130b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-05.bin",
+      "stored_path": "double/fixed-cuts/point-05.bin.gz",
+      "raw_bytes": 138504,
+      "stored_bytes": 6207,
+      "raw_sha256": "77ade4ea87c1afbbef690047372405affc7dac1dbc84a55c53ed1fe575217bad",
+      "stored_sha256": "8dfeee2e656ab1237bc390c4cb63114a44edd095ec1bd733ed33e35fe7553ef3",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-06.bin",
+      "stored_path": "double/fixed-cuts/point-06.bin.gz",
+      "raw_bytes": 139110,
+      "stored_bytes": 6227,
+      "raw_sha256": "85e811e084956d6e695886a2bf0d87c2eec79f77156e3f17e1af5b27ec33035b",
+      "stored_sha256": "c5688aa14236f7d69105801adb86b966a74937e59c901eedd66c3fdbd06c90ee",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-07.bin",
+      "stored_path": "double/fixed-cuts/point-07.bin.gz",
+      "raw_bytes": 140501,
+      "stored_bytes": 6335,
+      "raw_sha256": "5b33bec7ebbfb1c6bee10ceeb68654f4e079a9f295e288f8c532c8ce4b54bb1b",
+      "stored_sha256": "035bdc7d5027cb52988d55885408ce03498d8f52f2ded99219fe35c8d759e19a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-08.bin",
+      "stored_path": "double/fixed-cuts/point-08.bin.gz",
+      "raw_bytes": 139063,
+      "stored_bytes": 6220,
+      "raw_sha256": "36d20ab40025801c671cc859d06d1c55f9d352fc1d82861eb0894fe0479382ab",
+      "stored_sha256": "411c1cda0fb3131e923a05d4456d417d16c261019163d36f1932226f36c76dac",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-09.bin",
+      "stored_path": "double/fixed-cuts/point-09.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-10.bin",
+      "stored_path": "double/fixed-cuts/point-10.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-11.bin",
+      "stored_path": "double/fixed-cuts/point-11.bin.gz",
+      "raw_bytes": 138504,
+      "stored_bytes": 6182,
+      "raw_sha256": "e40a91a4375b2f7790a420e04d11eeb4471697aff1426211747ade2bb28b41f5",
+      "stored_sha256": "fbf8dcf68e46bee60ef69d9ff50570e270b3547283cdedc9941d0059bee816bf",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-12.bin",
+      "stored_path": "double/fixed-cuts/point-12.bin.gz",
+      "raw_bytes": 138504,
+      "stored_bytes": 6185,
+      "raw_sha256": "a269c30ce39e34bd7ca827d31f7567fb89b8fd369e1ab01e9c3f4a4172ef5e3c",
+      "stored_sha256": "05733505c94fa9d40579a7d931979a155997dbd6c8f0575f46d7aa1df8ea5b6b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-13.bin",
+      "stored_path": "double/fixed-cuts/point-13.bin.gz",
+      "raw_bytes": 138504,
+      "stored_bytes": 6171,
+      "raw_sha256": "f380d86ce5bb92bb9e12f57002bc65bc3012b809fff91f2f5eca0cd80bb8e59c",
+      "stored_sha256": "5ac8c72e857bd31b428203fc7da1bc6e33329ffa257179e02e27ed38fe6bfcf4",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-14.bin",
+      "stored_path": "double/fixed-cuts/point-14.bin.gz",
+      "raw_bytes": 136434,
+      "stored_bytes": 6025,
+      "raw_sha256": "ed8da41d0c7084697a5665a061ea8f0d6d0ada585815014a4f6f7a5318c1ebf0",
+      "stored_sha256": "430fe312eaf0fba7583c4aebfd8c72d5ebd01a0ccb8d96f8dd7dab0e3e023793",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-15.bin",
+      "stored_path": "double/fixed-cuts/point-15.bin.gz",
+      "raw_bytes": 136434,
+      "stored_bytes": 6018,
+      "raw_sha256": "4eea90304b180bdb30915364e4bf9397bfae5f17a0fcc06c4fe80c5ac5514399",
+      "stored_sha256": "d1d9401c613c9c4ea33912da6c67ad9ce5fc85f0b99d0488a4d881d205ef6cf5",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-16.bin",
+      "stored_path": "double/fixed-cuts/point-16.bin.gz",
+      "raw_bytes": 145446,
+      "stored_bytes": 6765,
+      "raw_sha256": "04517e8ab6e3e3ddb4a244e7cf408b3a083fc448028964135ad504ff5f044f70",
+      "stored_sha256": "83a1a64586b1bb2b32d7c9dc0e12ac36e5c41579f82aafefc1a8e8a2e456d3f5",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-17.bin",
+      "stored_path": "double/fixed-cuts/point-17.bin.gz",
+      "raw_bytes": 157398,
+      "stored_bytes": 7546,
+      "raw_sha256": "b16ec9fd1d03a39dca159efc747cb4a98add4a916d4986fb76c9f2e3de2663b2",
+      "stored_sha256": "58afcf75a71683d92a35d9bb99b132ecff943f737ce939886040af1de317be35",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-18.bin",
+      "stored_path": "double/fixed-cuts/point-18.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-19.bin",
+      "stored_path": "double/fixed-cuts/point-19.bin.gz",
+      "raw_bytes": 140921,
+      "stored_bytes": 6375,
+      "raw_sha256": "3bcb2df375cedaa6b54e15ad906eff23a9c138876d488a397a79ee2f2bf6bd15",
+      "stored_sha256": "bdf7317a19724fb6620171ced62ba0dd6e5ebcd89336cae7dccfb4b16bf67e72",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-20.bin",
+      "stored_path": "double/fixed-cuts/point-20.bin.gz",
+      "raw_bytes": 137210,
+      "stored_bytes": 6086,
+      "raw_sha256": "c763617894830380f763cebcfae6f2a47ba8d2e49507d312b7eb6813f857471f",
+      "stored_sha256": "fa4867c11b3d7a0df6b0f4cba47cac298f65592d210e4b5c38614546576d84ce",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-21.bin",
+      "stored_path": "double/fixed-cuts/point-21.bin.gz",
+      "raw_bytes": 137596,
+      "stored_bytes": 6105,
+      "raw_sha256": "037c15fc04f68ef9e4223db7a49c0e082ba975d26ab9d1e414527b5f8f666be0",
+      "stored_sha256": "f98f97fbe551d91f1491b1d7fada9e4819f2b4c46d4899bd4279d93b1680f6be",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-22.bin",
+      "stored_path": "double/fixed-cuts/point-22.bin.gz",
+      "raw_bytes": 137142,
+      "stored_bytes": 6067,
+      "raw_sha256": "fd4886fa2f13bfb03d14399e1e0c5e32ba1d38ffe6c56de84d8b6206c417a741",
+      "stored_sha256": "4c47066fc464c645fa011255ffdbc3d0027c454b344610d110757ae7f6981f78",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-23.bin",
+      "stored_path": "double/fixed-cuts/point-23.bin.gz",
+      "raw_bytes": 139609,
+      "stored_bytes": 6231,
+      "raw_sha256": "d13b2a5f067b309a454a22514d85cf609ba956f95fdcbc3f3e378d931a54ac80",
+      "stored_sha256": "505e9f71287b84620438ce54a0852ccad755ec13e00423133ac8cc7a5eaa4a20",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-24.bin",
+      "stored_path": "double/fixed-cuts/point-24.bin.gz",
+      "raw_bytes": 138214,
+      "stored_bytes": 6144,
+      "raw_sha256": "27103f840e63c9c1c1b2a66bd39ce8d1b364e78ba31ab32839506768ff45374d",
+      "stored_sha256": "8fa0e66beea9a9b1a0d15acc2948ce668f3fcfd48d466cca574e7984b1929ea6",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-25.bin",
+      "stored_path": "double/fixed-cuts/point-25.bin.gz",
+      "raw_bytes": 140281,
+      "stored_bytes": 6278,
+      "raw_sha256": "8d97eee8dcb7b951a857cff7235bd7698a345aab080eaea5e8abfe971cec9c26",
+      "stored_sha256": "3cf4b1d3cf6c67dc64d0d671fc20335e800c488a76ad138e86b419ec3b2d6875",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-26.bin",
+      "stored_path": "double/fixed-cuts/point-26.bin.gz",
+      "raw_bytes": 137590,
+      "stored_bytes": 6098,
+      "raw_sha256": "afa7a1214fd0af2b64579bd2d3cd0e7cda685e6c96503e40e40c6f03e8b2ebf8",
+      "stored_sha256": "661ef3a6778f8c9608c71dd79c3f9319d48df2dfcc7cdde86fada1e3bb234c40",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-27.bin",
+      "stored_path": "double/fixed-cuts/point-27.bin.gz",
+      "raw_bytes": 137138,
+      "stored_bytes": 6082,
+      "raw_sha256": "9d3e9a92103936c069f644e9c273c7adcbc83815b58f8c3597885ebec3c98e5d",
+      "stored_sha256": "80d11a70691b5b25cd51cf5a2d35571b6359cfcd1758f52bfaca622178cea033",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-28.bin",
+      "stored_path": "double/fixed-cuts/point-28.bin.gz",
+      "raw_bytes": 137710,
+      "stored_bytes": 6119,
+      "raw_sha256": "b6478e41888f0f9ae12ca6ebe75102392f0444eb695e404164d6021669cc5590",
+      "stored_sha256": "7d7a2c63343e3e8b9c93fc9a342524966979782fda8f9db325fa99f3738ee36d",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-29.bin",
+      "stored_path": "double/fixed-cuts/point-29.bin.gz",
+      "raw_bytes": 137138,
+      "stored_bytes": 6087,
+      "raw_sha256": "a17bd86915c3efb8eaed1a151658e3cf4905ec60345413f9959a83329754ecb1",
+      "stored_sha256": "b9e3409454a8afce45a92a4323bddf19e9ce378eae9d80007ecdfbbfb885bbba",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-30.bin",
+      "stored_path": "double/fixed-cuts/point-30.bin.gz",
+      "raw_bytes": 137664,
+      "stored_bytes": 6118,
+      "raw_sha256": "cb858db24064c57b022cf48b910be93af8ccb9bce87d9706e516633510c65e00",
+      "stored_sha256": "348b69816c0b33f1fd925816b106a95224bc2256920ec807577f0b6fa8f87236",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-31.bin",
+      "stored_path": "double/fixed-cuts/point-31.bin.gz",
+      "raw_bytes": 139529,
+      "stored_bytes": 6265,
+      "raw_sha256": "9f758f7fba1cea001dc4c5cfac00e031a42f315514c8e4d0f7d78f2be587427f",
+      "stored_sha256": "35d036105192310a3f00fc13ebd0877e6d85c3c2085d2378e148a43272466594",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-32.bin",
+      "stored_path": "double/fixed-cuts/point-32.bin.gz",
+      "raw_bytes": 136619,
+      "stored_bytes": 6051,
+      "raw_sha256": "72686f11018d2d8bc6b3c9e7b12927fe1ffd6dcf68107bdb4ce28957661be56d",
+      "stored_sha256": "bbdbc1d9e0cb30b2164d7907355090dac8c4307c62c889409fedbbca1671cc16",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-33.bin",
+      "stored_path": "double/fixed-cuts/point-33.bin.gz",
+      "raw_bytes": 137830,
+      "stored_bytes": 6121,
+      "raw_sha256": "1b1d7613861ac9e347c5b03e7d8c819724c931734e75661bc48baa33147daefb",
+      "stored_sha256": "65ebf624f3552f8c3f0100f1df91e02dede3a7c35fe0dad0cc2ee633de305da4",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts/point-34.bin",
+      "stored_path": "double/fixed-cuts/point-34.bin.gz",
+      "raw_bytes": 137259,
+      "stored_bytes": 6092,
+      "raw_sha256": "b0a50b46beb09ac413507029b0a60af281a9dff3cec1174a8ec290233f0939fe",
+      "stored_sha256": "e253ace157ab8173b3e3cda1655b706d93385ec9bf79850098952eeead8e84df",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-00.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-00.bin.gz",
+      "raw_bytes": 142246,
+      "stored_bytes": 6473,
+      "raw_sha256": "e0e011c3b7ff2e54b543638ae2f554ec090ea5f59719b87318fb86126f80973d",
+      "stored_sha256": "5b8cf44078721285156f61b7b05f8a557f884208becd13555771a66ce0a12052",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-01.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-01.bin.gz",
+      "raw_bytes": 145695,
+      "stored_bytes": 6700,
+      "raw_sha256": "d398730a7dce1fce2bd707d4a763b372f529be79f52bf36a1b6c62268e9e047f",
+      "stored_sha256": "996bd33babcc9eef68045fb78f432073188a06d782cca125eab8d0f6e6689103",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-02.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-02.bin.gz",
+      "raw_bytes": 136727,
+      "stored_bytes": 6064,
+      "raw_sha256": "77ca85e727a5f650cf69a0dbb12b6caf620439c9ba56a4538b463cd702f9df26",
+      "stored_sha256": "9437c0157b4932dcfac7525627bb51697f86ff8097d7bd9fb39ef70d699cbaba",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-03.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-03.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-04.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-04.bin.gz",
+      "raw_bytes": 139028,
+      "stored_bytes": 6187,
+      "raw_sha256": "b3e674fbe265931adcfacd6622c111712dd876ede6ae13b6524c54104c63a553",
+      "stored_sha256": "949cabb1db4bdc1faa86e181bdca8a6d4c0e93becd931c0a7cd09173a4f8130b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-05.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-05.bin.gz",
+      "raw_bytes": 138504,
+      "stored_bytes": 6207,
+      "raw_sha256": "77ade4ea87c1afbbef690047372405affc7dac1dbc84a55c53ed1fe575217bad",
+      "stored_sha256": "8dfeee2e656ab1237bc390c4cb63114a44edd095ec1bd733ed33e35fe7553ef3",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-06.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-06.bin.gz",
+      "raw_bytes": 139110,
+      "stored_bytes": 6227,
+      "raw_sha256": "85e811e084956d6e695886a2bf0d87c2eec79f77156e3f17e1af5b27ec33035b",
+      "stored_sha256": "c5688aa14236f7d69105801adb86b966a74937e59c901eedd66c3fdbd06c90ee",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-07.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-07.bin.gz",
+      "raw_bytes": 140501,
+      "stored_bytes": 6335,
+      "raw_sha256": "5b33bec7ebbfb1c6bee10ceeb68654f4e079a9f295e288f8c532c8ce4b54bb1b",
+      "stored_sha256": "035bdc7d5027cb52988d55885408ce03498d8f52f2ded99219fe35c8d759e19a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-08.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-08.bin.gz",
+      "raw_bytes": 139063,
+      "stored_bytes": 6220,
+      "raw_sha256": "36d20ab40025801c671cc859d06d1c55f9d352fc1d82861eb0894fe0479382ab",
+      "stored_sha256": "411c1cda0fb3131e923a05d4456d417d16c261019163d36f1932226f36c76dac",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-09.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-09.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-10.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-10.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-11.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-11.bin.gz",
+      "raw_bytes": 138791,
+      "stored_bytes": 6223,
+      "raw_sha256": "656973931717a95692b7c028b6fae71a242387e7c9d9b83a65d9e70d914d53de",
+      "stored_sha256": "280b2474f1cbab902df0cdfaa710b1565250f3adacde21dae019ac2905dab097",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-12.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-12.bin.gz",
+      "raw_bytes": 138504,
+      "stored_bytes": 6185,
+      "raw_sha256": "a269c30ce39e34bd7ca827d31f7567fb89b8fd369e1ab01e9c3f4a4172ef5e3c",
+      "stored_sha256": "05733505c94fa9d40579a7d931979a155997dbd6c8f0575f46d7aa1df8ea5b6b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-13.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-13.bin.gz",
+      "raw_bytes": 138504,
+      "stored_bytes": 6171,
+      "raw_sha256": "f380d86ce5bb92bb9e12f57002bc65bc3012b809fff91f2f5eca0cd80bb8e59c",
+      "stored_sha256": "5ac8c72e857bd31b428203fc7da1bc6e33329ffa257179e02e27ed38fe6bfcf4",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-14.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-14.bin.gz",
+      "raw_bytes": 136721,
+      "stored_bytes": 6069,
+      "raw_sha256": "f5941f255e70fc3729f509bc083369a58e3ee03a19e9ef710c47b543ee155059",
+      "stored_sha256": "80a21dede6da6b7ef93edc0a385d9db41cfbc8a794b57bf60a896ec08998db3f",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-15.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-15.bin.gz",
+      "raw_bytes": 136718,
+      "stored_bytes": 6063,
+      "raw_sha256": "74d3f71a93c4e5c784bcf062a1012f8dd43e2adcf8524b9728735b58185cdbd5",
+      "stored_sha256": "8e2433a5a13fc3762fcd661f348d9d5e7200c729207c410dbd182e90a14ab580",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-16.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-16.bin.gz",
+      "raw_bytes": 145446,
+      "stored_bytes": 6765,
+      "raw_sha256": "04517e8ab6e3e3ddb4a244e7cf408b3a083fc448028964135ad504ff5f044f70",
+      "stored_sha256": "83a1a64586b1bb2b32d7c9dc0e12ac36e5c41579f82aafefc1a8e8a2e456d3f5",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-17.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-17.bin.gz",
+      "raw_bytes": 157398,
+      "stored_bytes": 7546,
+      "raw_sha256": "b16ec9fd1d03a39dca159efc747cb4a98add4a916d4986fb76c9f2e3de2663b2",
+      "stored_sha256": "58afcf75a71683d92a35d9bb99b132ecff943f737ce939886040af1de317be35",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-18.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-18.bin.gz",
+      "raw_bytes": 136132,
+      "stored_bytes": 5964,
+      "raw_sha256": "c3416b471f4d722d3ebc5348af400a81cc0dc9b1a784dd69ee687e3450352604",
+      "stored_sha256": "21d94afe26d760a9fbb99128766a6d99caa60d122194b6c1792d019012baf0ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-19.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-19.bin.gz",
+      "raw_bytes": 140921,
+      "stored_bytes": 6375,
+      "raw_sha256": "3bcb2df375cedaa6b54e15ad906eff23a9c138876d488a397a79ee2f2bf6bd15",
+      "stored_sha256": "bdf7317a19724fb6620171ced62ba0dd6e5ebcd89336cae7dccfb4b16bf67e72",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-20.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-20.bin.gz",
+      "raw_bytes": 137210,
+      "stored_bytes": 6086,
+      "raw_sha256": "c763617894830380f763cebcfae6f2a47ba8d2e49507d312b7eb6813f857471f",
+      "stored_sha256": "fa4867c11b3d7a0df6b0f4cba47cac298f65592d210e4b5c38614546576d84ce",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-21.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-21.bin.gz",
+      "raw_bytes": 137596,
+      "stored_bytes": 6105,
+      "raw_sha256": "037c15fc04f68ef9e4223db7a49c0e082ba975d26ab9d1e414527b5f8f666be0",
+      "stored_sha256": "f98f97fbe551d91f1491b1d7fada9e4819f2b4c46d4899bd4279d93b1680f6be",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-22.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-22.bin.gz",
+      "raw_bytes": 137142,
+      "stored_bytes": 6067,
+      "raw_sha256": "fd4886fa2f13bfb03d14399e1e0c5e32ba1d38ffe6c56de84d8b6206c417a741",
+      "stored_sha256": "4c47066fc464c645fa011255ffdbc3d0027c454b344610d110757ae7f6981f78",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-23.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-23.bin.gz",
+      "raw_bytes": 139609,
+      "stored_bytes": 6231,
+      "raw_sha256": "d13b2a5f067b309a454a22514d85cf609ba956f95fdcbc3f3e378d931a54ac80",
+      "stored_sha256": "505e9f71287b84620438ce54a0852ccad755ec13e00423133ac8cc7a5eaa4a20",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-24.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-24.bin.gz",
+      "raw_bytes": 138214,
+      "stored_bytes": 6144,
+      "raw_sha256": "27103f840e63c9c1c1b2a66bd39ce8d1b364e78ba31ab32839506768ff45374d",
+      "stored_sha256": "8fa0e66beea9a9b1a0d15acc2948ce668f3fcfd48d466cca574e7984b1929ea6",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-25.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-25.bin.gz",
+      "raw_bytes": 140281,
+      "stored_bytes": 6278,
+      "raw_sha256": "8d97eee8dcb7b951a857cff7235bd7698a345aab080eaea5e8abfe971cec9c26",
+      "stored_sha256": "3cf4b1d3cf6c67dc64d0d671fc20335e800c488a76ad138e86b419ec3b2d6875",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-26.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-26.bin.gz",
+      "raw_bytes": 137590,
+      "stored_bytes": 6098,
+      "raw_sha256": "afa7a1214fd0af2b64579bd2d3cd0e7cda685e6c96503e40e40c6f03e8b2ebf8",
+      "stored_sha256": "661ef3a6778f8c9608c71dd79c3f9319d48df2dfcc7cdde86fada1e3bb234c40",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-27.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-27.bin.gz",
+      "raw_bytes": 137138,
+      "stored_bytes": 6082,
+      "raw_sha256": "9d3e9a92103936c069f644e9c273c7adcbc83815b58f8c3597885ebec3c98e5d",
+      "stored_sha256": "80d11a70691b5b25cd51cf5a2d35571b6359cfcd1758f52bfaca622178cea033",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-28.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-28.bin.gz",
+      "raw_bytes": 137710,
+      "stored_bytes": 6119,
+      "raw_sha256": "b6478e41888f0f9ae12ca6ebe75102392f0444eb695e404164d6021669cc5590",
+      "stored_sha256": "7d7a2c63343e3e8b9c93fc9a342524966979782fda8f9db325fa99f3738ee36d",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-29.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-29.bin.gz",
+      "raw_bytes": 137138,
+      "stored_bytes": 6087,
+      "raw_sha256": "a17bd86915c3efb8eaed1a151658e3cf4905ec60345413f9959a83329754ecb1",
+      "stored_sha256": "b9e3409454a8afce45a92a4323bddf19e9ce378eae9d80007ecdfbbfb885bbba",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-30.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-30.bin.gz",
+      "raw_bytes": 137664,
+      "stored_bytes": 6118,
+      "raw_sha256": "cb858db24064c57b022cf48b910be93af8ccb9bce87d9706e516633510c65e00",
+      "stored_sha256": "348b69816c0b33f1fd925816b106a95224bc2256920ec807577f0b6fa8f87236",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-31.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-31.bin.gz",
+      "raw_bytes": 139529,
+      "stored_bytes": 6265,
+      "raw_sha256": "9f758f7fba1cea001dc4c5cfac00e031a42f315514c8e4d0f7d78f2be587427f",
+      "stored_sha256": "35d036105192310a3f00fc13ebd0877e6d85c3c2085d2378e148a43272466594",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-32.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-32.bin.gz",
+      "raw_bytes": 136619,
+      "stored_bytes": 6051,
+      "raw_sha256": "72686f11018d2d8bc6b3c9e7b12927fe1ffd6dcf68107bdb4ce28957661be56d",
+      "stored_sha256": "bbdbc1d9e0cb30b2164d7907355090dac8c4307c62c889409fedbbca1671cc16",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-33.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-33.bin.gz",
+      "raw_bytes": 137830,
+      "stored_bytes": 6121,
+      "raw_sha256": "1b1d7613861ac9e347c5b03e7d8c819724c931734e75661bc48baa33147daefb",
+      "stored_sha256": "65ebf624f3552f8c3f0100f1df91e02dede3a7c35fe0dad0cc2ee633de305da4",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "double/fixed-cuts-and-occupations/point-34.bin",
+      "stored_path": "double/fixed-cuts-and-occupations/point-34.bin.gz",
+      "raw_bytes": 137259,
+      "stored_bytes": 6092,
+      "raw_sha256": "b0a50b46beb09ac413507029b0a60af281a9dff3cec1174a8ec290233f0939fe",
+      "stored_sha256": "e253ace157ab8173b3e3cda1655b706d93385ec9bf79850098952eeead8e84df",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-00.bin",
+      "stored_path": "single3/anchored/point-00.bin.gz",
+      "raw_bytes": 45354,
+      "stored_bytes": 3904,
+      "raw_sha256": "83fd105a49b17ead6ec3dcb19aea6fe8d10c0fee57462f124a637bbe082bb7c9",
+      "stored_sha256": "4fc8fbd8df73be2046e6fc21ac0874a7be38085102ef7c0d94ab3a15bb33b50c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-01.bin",
+      "stored_path": "single3/anchored/point-01.bin.gz",
+      "raw_bytes": 44634,
+      "stored_bytes": 3866,
+      "raw_sha256": "be3da0e31ab2779f5bb97898a33c68ccbbbf2194df07764a6e2b1b6e2f9c069d",
+      "stored_sha256": "dc9e6f853d325e8ce717f4e788d34627096b01a242c705b3668d44069224e94c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-02.bin",
+      "stored_path": "single3/anchored/point-02.bin.gz",
+      "raw_bytes": 50342,
+      "stored_bytes": 4278,
+      "raw_sha256": "dac399a5464dcd520d1de9e40619d888a9d7f89fce41769affb030dd645c792e",
+      "stored_sha256": "2c49aa99f782ccde4067217e063475a6ee392277ba4e077764e15264a8cd6a09",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-03.bin",
+      "stored_path": "single3/anchored/point-03.bin.gz",
+      "raw_bytes": 44383,
+      "stored_bytes": 3820,
+      "raw_sha256": "3a81a2a64237624b210259c586cb8732967a411aa46aada713a83d8ce3504d01",
+      "stored_sha256": "7334d3dfe5af44a84261b588f800b649f6c404a5f9cde0abf902595a9ff4187b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-04.bin",
+      "stored_path": "single3/anchored/point-04.bin.gz",
+      "raw_bytes": 45474,
+      "stored_bytes": 3922,
+      "raw_sha256": "e710fccc77b72c07efb763d57882fc08f5e02a5417e72949b1629919fd896fc7",
+      "stored_sha256": "135c9130e1246f433711914142ceef8e8aa25557cae7ab607e0d8c91f01d20ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-05.bin",
+      "stored_path": "single3/anchored/point-05.bin.gz",
+      "raw_bytes": 45591,
+      "stored_bytes": 3932,
+      "raw_sha256": "d32f057d6ed10c7deb0cc97e3efb4275d0133e05a81bb5e97b5cfa805a07b325",
+      "stored_sha256": "db9aaff2791b1d02260fbc9537ada6a86ef49b24a86ce904bdf417f564c05d48",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-06.bin",
+      "stored_path": "single3/anchored/point-06.bin.gz",
+      "raw_bytes": 45118,
+      "stored_bytes": 3883,
+      "raw_sha256": "0f39a75b55ca08553eb6cb9473329d323c08b4fb73fab448ca333712fd4099a8",
+      "stored_sha256": "2b4a16ccd29d3ce659ccf4a796a403920f6aab13a2d3b0837ab8efbbafac8fe0",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-07.bin",
+      "stored_path": "single3/anchored/point-07.bin.gz",
+      "raw_bytes": 45118,
+      "stored_bytes": 3885,
+      "raw_sha256": "dbf16a80ad7e02e0d98aaaa5f515bfa46d6066f5991e02f79ecb81f0f7d17b28",
+      "stored_sha256": "7a1bd04bfc78c94a59c69c433dbf90895fb37d1c0eb2d5b110ab750274a11b64",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-08.bin",
+      "stored_path": "single3/anchored/point-08.bin.gz",
+      "raw_bytes": 45001,
+      "stored_bytes": 3890,
+      "raw_sha256": "24a5d46e3dff5eb5b4d83ecb75d79197fc8b66facc112df478a0489a322b9cdc",
+      "stored_sha256": "fcaf238c80b18f66d82f8343df7727fdae86f2acf44755059869da081b90a468",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-09.bin",
+      "stored_path": "single3/anchored/point-09.bin.gz",
+      "raw_bytes": 45118,
+      "stored_bytes": 3895,
+      "raw_sha256": "3d1dfd476ed9f3d7ab4c4e105f3362913144d2540caad770672b53d63b5fe202",
+      "stored_sha256": "0de376ebca03f53dc6177593f93e0d42c95e1cac2ae1505d002dc9a6bbfe7bce",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-10.bin",
+      "stored_path": "single3/anchored/point-10.bin.gz",
+      "raw_bytes": 54286,
+      "stored_bytes": 4529,
+      "raw_sha256": "f1c7b7643a1d9ad04169a09639c944a9ff94a4e50b59671b58dabae3029b368f",
+      "stored_sha256": "bc770d8ceb09e96f09c8b4233149846b0273dff6147c6e5fca0598a0f7e37598",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-11.bin",
+      "stored_path": "single3/anchored/point-11.bin.gz",
+      "raw_bytes": 48026,
+      "stored_bytes": 4087,
+      "raw_sha256": "ef2da8774d062cec20fd81cc501de500f2ec21c0b742c864aee59e62be2edac8",
+      "stored_sha256": "d079419783e13770129b7e1a3c99956ae56f33fa2da6cc549db404e35ed43b7c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-12.bin",
+      "stored_path": "single3/anchored/point-12.bin.gz",
+      "raw_bytes": 47928,
+      "stored_bytes": 4081,
+      "raw_sha256": "f48845af16ef149879c6c3317a6743c0be7f8384d5a4ca4f24f0a66cdcc3717e",
+      "stored_sha256": "32b7f0f37a9415a0307527033ff85ce3a53863686a31238334213c2d1b337794",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-13.bin",
+      "stored_path": "single3/anchored/point-13.bin.gz",
+      "raw_bytes": 45861,
+      "stored_bytes": 3945,
+      "raw_sha256": "7c978dd92c00b46a5cbbce8bffc2661e79c6dce3d30744e82a4f970b7d044c89",
+      "stored_sha256": "a390e46004f4ab81016ad56a622ae59c7c9e1580bda0f24b73b74f9290c2c97f",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-14.bin",
+      "stored_path": "single3/anchored/point-14.bin.gz",
+      "raw_bytes": 44814,
+      "stored_bytes": 3853,
+      "raw_sha256": "1c82111fa2734f91932cd820dccd3476add55fac48708e9a9c39e9d0f3683e18",
+      "stored_sha256": "0158c3fdef860180b04c8d261d48294bada2d7c9d98151077620f2052f7c50bd",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-15.bin",
+      "stored_path": "single3/anchored/point-15.bin.gz",
+      "raw_bytes": 46880,
+      "stored_bytes": 4019,
+      "raw_sha256": "cc543ba1507c475de5f2f89fa5f6d632aa685e97835021ad5a32eff3bd66ea2e",
+      "stored_sha256": "264d84d8f0aa870cfae4d6673a87dd9a05e6939b05bfb5985046e6f10238c0b7",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-16.bin",
+      "stored_path": "single3/anchored/point-16.bin.gz",
+      "raw_bytes": 45652,
+      "stored_bytes": 3933,
+      "raw_sha256": "aa98191ca56e67190a5726e5d4012f9b0d5dc91c6590472839533b2ab8f28bf5",
+      "stored_sha256": "6a138da455486427d1cd550a5e2109ca7449d44df94012b2116601d1f24c2e99",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-17.bin",
+      "stored_path": "single3/anchored/point-17.bin.gz",
+      "raw_bytes": 44511,
+      "stored_bytes": 3840,
+      "raw_sha256": "e68f77946d1e52d1aabf2841901cb95d067faed2bed510a7186454f3aaaaccd1",
+      "stored_sha256": "997bbe052404d49cfbf970a7cf78217ff39ee68473af7e4fed901cb17e2b02db",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-18.bin",
+      "stored_path": "single3/anchored/point-18.bin.gz",
+      "raw_bytes": 44511,
+      "stored_bytes": 3838,
+      "raw_sha256": "7465002db7e50cdfacede8b07b600c1df0163703666dd2d66e5e374c20dbefa0",
+      "stored_sha256": "40ef76a4c8b1696ab5ccc8e15d19ce7b79f29c5faea6b109136656bf38d60638",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-19.bin",
+      "stored_path": "single3/anchored/point-19.bin.gz",
+      "raw_bytes": 44332,
+      "stored_bytes": 3820,
+      "raw_sha256": "3630bf3a50a358f8f6c7fab8e1cf85662456ee47cc19c9803deaa63a28ea7951",
+      "stored_sha256": "5a9759aedc97bdff3a7658e262bc254c9d1682000e31b25cf58df7bb9e55a324",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-20.bin",
+      "stored_path": "single3/anchored/point-20.bin.gz",
+      "raw_bytes": 46147,
+      "stored_bytes": 3964,
+      "raw_sha256": "99c49f98341a97a247b474f8a04bc79b35bf534c17d343f2f29e882494be4ae6",
+      "stored_sha256": "f5f153f2c176796fae833795c6e83a877a4ccb26fbb66fa15e1c16c3d03bb57b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-21.bin",
+      "stored_path": "single3/anchored/point-21.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3937,
+      "raw_sha256": "3fe26af18705fee80cf4645e7387081f436bd216924dd9d659d4ab1e4347522f",
+      "stored_sha256": "549e8d5fee6a5c930e5a9970d99d08c6896eec01df630af76ffa852aa1719c2a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-22.bin",
+      "stored_path": "single3/anchored/point-22.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3945,
+      "raw_sha256": "4542037b32eb6f3a3f75941676beba6f991dd6cf3b94477da6cd6d90be9371e2",
+      "stored_sha256": "7b3bb17b0eb68792f85a407044d70fddada84690063e3f1056aa044b506ab2ef",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-23.bin",
+      "stored_path": "single3/anchored/point-23.bin.gz",
+      "raw_bytes": 46298,
+      "stored_bytes": 3978,
+      "raw_sha256": "1ba03b2d03c942a2938e40300189a99787c30ff95117590f96eebb5539351e3b",
+      "stored_sha256": "6d21f9b854a027186a5e2164e9215d9d8f355ab19ecc4d875a1d0e57ab14c4c8",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-24.bin",
+      "stored_path": "single3/anchored/point-24.bin.gz",
+      "raw_bytes": 45342,
+      "stored_bytes": 3906,
+      "raw_sha256": "d914dc9cb6516c51f88c3146188bf0997873f9f1c3c91c16256464cd3f5b39c9",
+      "stored_sha256": "8e14262aea1c7db7ca47111a778aa4495b796918764f64558ab6dc383b257c7c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-25.bin",
+      "stored_path": "single3/anchored/point-25.bin.gz",
+      "raw_bytes": 45342,
+      "stored_bytes": 3919,
+      "raw_sha256": "e3c7158bab89a6ee3cc109ab9c0adf6978cde3a4e93300f3cf5fe4c9d0f9068a",
+      "stored_sha256": "c86749e88de0653c50d146ee659f4e988faf9703d07cff79ae1cf9ec2ba8f3fb",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-26.bin",
+      "stored_path": "single3/anchored/point-26.bin.gz",
+      "raw_bytes": 85474,
+      "stored_bytes": 6423,
+      "raw_sha256": "0ba7fae61bb03c0464c25bd2c1c87452cb83e1f24afb2777c5e4f1f89b247f07",
+      "stored_sha256": "35a68a7cfc6a4520280e212b068e58c4d9814ae5512f9f63236378bfb43ab477",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-27.bin",
+      "stored_path": "single3/anchored/point-27.bin.gz",
+      "raw_bytes": 51135,
+      "stored_bytes": 4300,
+      "raw_sha256": "0ef79ea0d4441fafdd1056b00d7b68b96235b9caaa93714ae813b0ee98f33c95",
+      "stored_sha256": "b3f23e6736c83dc9bf3f8084158e102a07a44eb5cd11f9208d2f612340c6e64a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-28.bin",
+      "stored_path": "single3/anchored/point-28.bin.gz",
+      "raw_bytes": 48374,
+      "stored_bytes": 4177,
+      "raw_sha256": "504f2931d104c764b27018742169e34773e7efc7cf16f4e732492a7f8af1a81b",
+      "stored_sha256": "d15f1af693344342295d4d87df0dd4d4a9af1f584b69f5ce80b3e79b52eecd6f",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-29.bin",
+      "stored_path": "single3/anchored/point-29.bin.gz",
+      "raw_bytes": 48087,
+      "stored_bytes": 4154,
+      "raw_sha256": "9017a5c963acce38d2430f9264752798ea0f3c45680b585865f8989223ca63ce",
+      "stored_sha256": "e8af4cfd74657e2de41480c18f02681fa46578a5a1c2bbac38844211469ac416",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-30.bin",
+      "stored_path": "single3/anchored/point-30.bin.gz",
+      "raw_bytes": 48087,
+      "stored_bytes": 4168,
+      "raw_sha256": "d895871aac8747e8a8e64230cc0e18945669741a50dab8c9a39de5eb857c7424",
+      "stored_sha256": "4de90f7aa7ca0aa624fb8432f842b2903e20a8df44cc4f82e63670f7e26078d8",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-31.bin",
+      "stored_path": "single3/anchored/point-31.bin.gz",
+      "raw_bytes": 48772,
+      "stored_bytes": 4188,
+      "raw_sha256": "5c62fcacd4f268b728dea22f324d69407bd463c045feef81d38dcad5c498c890",
+      "stored_sha256": "36f82307795211c6e0811bce2047dcef38bb59d1e97f35f1933f7b7cc6150e1c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-32.bin",
+      "stored_path": "single3/anchored/point-32.bin.gz",
+      "raw_bytes": 48557,
+      "stored_bytes": 4174,
+      "raw_sha256": "9f9459692014abdf41a7662868837d88213e6623e379ecd9bf0878030675ff16",
+      "stored_sha256": "d315ebe897b457c22e523eef71a65106f8a1170e282cd7918e11e6515cbaabea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-33.bin",
+      "stored_path": "single3/anchored/point-33.bin.gz",
+      "raw_bytes": 44332,
+      "stored_bytes": 3818,
+      "raw_sha256": "08603eb6b9be1bcc5ef957f25bf28a4a797a36809831d78d2c7b5671199fde89",
+      "stored_sha256": "003e89d5d812245c40469a803ebecec433a851bfa047dc947fa99d05c3245964",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-34.bin",
+      "stored_path": "single3/anchored/point-34.bin.gz",
+      "raw_bytes": 44819,
+      "stored_bytes": 3861,
+      "raw_sha256": "c7fd1553a72735c7a7fda553d90457895ee246f836268180ae6b51e72c8da115",
+      "stored_sha256": "9c1c4d820d52dd3b6ec3235bdcf78dda369c1095ac91ae659ed8a33d40bacc7e",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-35.bin",
+      "stored_path": "single3/anchored/point-35.bin.gz",
+      "raw_bytes": 64841,
+      "stored_bytes": 5205,
+      "raw_sha256": "a54dc2f7d98fdcaf08af2edfcbc2d62261463bfe0839e75e422259b9602e62b2",
+      "stored_sha256": "538c52f6a98635ab6170f64487d0967a5e19a0982416302935eca08fc3299808",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-36.bin",
+      "stored_path": "single3/anchored/point-36.bin.gz",
+      "raw_bytes": 47671,
+      "stored_bytes": 4105,
+      "raw_sha256": "48f099762c8158cbbccd9130b4fedd64fe169e030151195f0245b0905043b356",
+      "stored_sha256": "712dd9a15b1bc30ef38093c175faed36803fc641593223ecf51a4b321e571f7b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-37.bin",
+      "stored_path": "single3/anchored/point-37.bin.gz",
+      "raw_bytes": 61869,
+      "stored_bytes": 5042,
+      "raw_sha256": "30da3c6d9417fd379871b5a217f046c0b2374f21ed11cb3196abf73d9edd1a7a",
+      "stored_sha256": "a1a55248455ba4fca947df34a4f44f1684c3c017067d1efce6de1dcb1580b382",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-38.bin",
+      "stored_path": "single3/anchored/point-38.bin.gz",
+      "raw_bytes": 62392,
+      "stored_bytes": 5079,
+      "raw_sha256": "c0f1011d97c5ada6afc39aca2115c7f2c2586c1a5e72c6cc992458f46bf88c32",
+      "stored_sha256": "ccccf995b5969c1d37958312d631afcc8658213d257ee11e68d46f76f3735332",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-39.bin",
+      "stored_path": "single3/anchored/point-39.bin.gz",
+      "raw_bytes": 48202,
+      "stored_bytes": 4125,
+      "raw_sha256": "12fa91829af76644f69c9e7c67810f0e78e66d562e35b33983a5f9198149407a",
+      "stored_sha256": "7127aa442e3c60ac5aa0dc693002b63184cc034a94f6bc5fc2744f0f8857dcaa",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-40.bin",
+      "stored_path": "single3/anchored/point-40.bin.gz",
+      "raw_bytes": 46351,
+      "stored_bytes": 3973,
+      "raw_sha256": "9d921d0b0d0074dc57a4ed7600a9541d82039b5a73ceaff9c2e8d7d58402f6c6",
+      "stored_sha256": "49c464c5aece3baf6c35d5170a7671492a39e8b186a0b219e6e2211cf0e27569",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-41.bin",
+      "stored_path": "single3/anchored/point-41.bin.gz",
+      "raw_bytes": 45858,
+      "stored_bytes": 3937,
+      "raw_sha256": "6491e2cd168cf151b72cdc934a9e0cf4207f1ce12d4e6561cc2dd9c7bf877bfc",
+      "stored_sha256": "d877d2098d6b9e81b1cfae084824290b87155cd343022eb49d3c31d1259b760b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-42.bin",
+      "stored_path": "single3/anchored/point-42.bin.gz",
+      "raw_bytes": 45778,
+      "stored_bytes": 3920,
+      "raw_sha256": "8654e0e6892ff3d3fc9c18e04dfca3243f5d7ce09ad485acbe029f967e280a02",
+      "stored_sha256": "e912aac02d5802bbec1d33017df3d4167b354b5c7494ce5060cd5dd5df322724",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-43.bin",
+      "stored_path": "single3/anchored/point-43.bin.gz",
+      "raw_bytes": 48326,
+      "stored_bytes": 4147,
+      "raw_sha256": "27418b96b1cbb67c518597ff977cf7172e4c776db490bb12b1eec0f55be7bdec",
+      "stored_sha256": "9c22c060be51ece23c393ed54c544457b27f1453c087cb113296ecf96a187391",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-44.bin",
+      "stored_path": "single3/anchored/point-44.bin.gz",
+      "raw_bytes": 45975,
+      "stored_bytes": 3955,
+      "raw_sha256": "9344234e9837b2cd78d7f447f52ebe5eab5036ee598d2838178968ac02337914",
+      "stored_sha256": "7364e3b6cc5b4200ba4588349bae79f510c6ec6de9af0c241c95fec71403d5e5",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-45.bin",
+      "stored_path": "single3/anchored/point-45.bin.gz",
+      "raw_bytes": 45744,
+      "stored_bytes": 3943,
+      "raw_sha256": "67090a96993e61e730ea5926dda8a914a425bda1b5f4a732f7f0c128a8536aa6",
+      "stored_sha256": "53dc3fc58f2892d48480402517da48e90b6e69b80e1a8950b8fd1f856e62461c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-46.bin",
+      "stored_path": "single3/anchored/point-46.bin.gz",
+      "raw_bytes": 45744,
+      "stored_bytes": 3956,
+      "raw_sha256": "57e09dcd498f9605e0f108e5bc39afa819b09f2deaa3359dbfa2d06605a184ff",
+      "stored_sha256": "6375c9372009ada0bb977c5b8989b51b02c451135a003b16fd3a5e346223a05f",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-47.bin",
+      "stored_path": "single3/anchored/point-47.bin.gz",
+      "raw_bytes": 44511,
+      "stored_bytes": 3847,
+      "raw_sha256": "653d8f4b37bc51299b314c260659844cc561c2ada3bb1344baa7f7959933aa7e",
+      "stored_sha256": "1d1298968c94cde00972c41ab9ff1c3ce7281323ce45be721861f63adf129d1c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-48.bin",
+      "stored_path": "single3/anchored/point-48.bin.gz",
+      "raw_bytes": 46588,
+      "stored_bytes": 4007,
+      "raw_sha256": "0638d3beddb99951e23021258f4d6c732884c2346c64b3cd2029ddb84f7987fb",
+      "stored_sha256": "fb362b5418e4ab39f163f1b7ef313219b37622ccc52e930bf75a2106d7c51b39",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-49.bin",
+      "stored_path": "single3/anchored/point-49.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3938,
+      "raw_sha256": "43e359fb77e01a6e90076ae7b11389f545dafd8f511aa287750220dd52b9bced",
+      "stored_sha256": "995bd3b58dc4e90514b27d950fe4b9b18b5b6b6e9cf099e15f937c8636b757eb",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-50.bin",
+      "stored_path": "single3/anchored/point-50.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3945,
+      "raw_sha256": "67d89855e4c99bd1b8fd8b253e48b8e0df77f6f9ac352fbf44a31052aff0f631",
+      "stored_sha256": "34b170b0ef76ab5bb1d84253aa699d3b143ecb975babf3887426eab09f2fd613",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-51.bin",
+      "stored_path": "single3/anchored/point-51.bin.gz",
+      "raw_bytes": 51159,
+      "stored_bytes": 4310,
+      "raw_sha256": "26baaa8e81810a6232e92c9704195f550bc8e9e0d27d22bdd0680988567a03e9",
+      "stored_sha256": "a0c98afa2d6e644357be947ad50d1d2be76e25065206405e254e95294fde0ad3",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-52.bin",
+      "stored_path": "single3/anchored/point-52.bin.gz",
+      "raw_bytes": 51581,
+      "stored_bytes": 4347,
+      "raw_sha256": "3d5a8cc3c944fd732ccef56936ffba3f8339213df4636be6898e21a3f958252e",
+      "stored_sha256": "c4043b848207e0e65e73a48ca151e9d13742869a718f8627af4dbf229b7c27f5",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-53.bin",
+      "stored_path": "single3/anchored/point-53.bin.gz",
+      "raw_bytes": 48129,
+      "stored_bytes": 4128,
+      "raw_sha256": "2148cb6445929e4c24a93afa9e12916df664171e902185c4b668c6771872c6ad",
+      "stored_sha256": "c67eac60dcd75df5cb788bda1b0fed7142bd444850051cb5ae22424af32a1aac",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-54.bin",
+      "stored_path": "single3/anchored/point-54.bin.gz",
+      "raw_bytes": 50787,
+      "stored_bytes": 4280,
+      "raw_sha256": "eaf90e2e4df5f8500e486cbdf49e34d01c79a4adf150079a000331ff0cb5727f",
+      "stored_sha256": "c8a0014ca4bbfe99647ec78e7f3998d81de0552295dfd490c3fd58cc50d6a8f1",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-55.bin",
+      "stored_path": "single3/anchored/point-55.bin.gz",
+      "raw_bytes": 46770,
+      "stored_bytes": 4007,
+      "raw_sha256": "230e7b0afa44feced037a885ccd082c1fbd398362df00f82c1b17b8f0e0d10a9",
+      "stored_sha256": "42153195a03e033aa2d184d682efc137237874d07acec03ca60377b86bd4c04a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-56.bin",
+      "stored_path": "single3/anchored/point-56.bin.gz",
+      "raw_bytes": 48498,
+      "stored_bytes": 4138,
+      "raw_sha256": "53c9c1b3e6e75b69736cc5e8e027c44f7bb97213ddfbb4175c55f3140ea4b1be",
+      "stored_sha256": "f3691e20de409589ffe425b1bcac26efbcf793116bdf329591fc1fadb0b3b48a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-57.bin",
+      "stored_path": "single3/anchored/point-57.bin.gz",
+      "raw_bytes": 48498,
+      "stored_bytes": 4151,
+      "raw_sha256": "7c75b2c6167c37a9c57e665418320da492abf298b7eff094588df7b09540d098",
+      "stored_sha256": "9c9c59f1a80e558a84d35b26d3f4e01f6fd52589c4d748ac7558e625150f85d7",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-58.bin",
+      "stored_path": "single3/anchored/point-58.bin.gz",
+      "raw_bytes": 59658,
+      "stored_bytes": 4912,
+      "raw_sha256": "749cbd6af88863c6fa2f7cd3e88d3b4eb780c05cf07b67f0100e45564558b8d6",
+      "stored_sha256": "df729711b127ee3fca069659ba4b557d6e9603b7f2dc4c7bd2174bd4b5e27a93",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-59.bin",
+      "stored_path": "single3/anchored/point-59.bin.gz",
+      "raw_bytes": 47657,
+      "stored_bytes": 4064,
+      "raw_sha256": "24921df6adb12436eff2f8bd7486c02be7193efa509bda92b760d4849cb3a6b0",
+      "stored_sha256": "86831b31660f8d1fc55a219850fcf947b5005bc2e78ef84e0e6790a6cbcde9da",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-60.bin",
+      "stored_path": "single3/anchored/point-60.bin.gz",
+      "raw_bytes": 48445,
+      "stored_bytes": 4128,
+      "raw_sha256": "926b2c584822369e127e801e564d6af532a7c40e65732ff6aa5a784cc04d2338",
+      "stored_sha256": "b8320dacaf9db2d66fef651f23940451faaddd8f5060c0fe9394afa94c491407",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-61.bin",
+      "stored_path": "single3/anchored/point-61.bin.gz",
+      "raw_bytes": 47774,
+      "stored_bytes": 4080,
+      "raw_sha256": "ab91ff71cd54733da480c636ed3566b7869f9cd4c4b2d85d8d6a24df81a53e3e",
+      "stored_sha256": "f638409fbed056cd674d15e86d7c3404d63258e771ecd2f832a7f760c72d8faa",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-62.bin",
+      "stored_path": "single3/anchored/point-62.bin.gz",
+      "raw_bytes": 51463,
+      "stored_bytes": 4357,
+      "raw_sha256": "a58602da1cb5c7b46ca96864b0bd0b3c55e997b7d8eece4ab5e87aa5705ae6f2",
+      "stored_sha256": "fc25efe02516669c7d0a90b360ff03791fbaa36e0ad33c90b6813123c7d84478",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/anchored/point-63.bin",
+      "stored_path": "single3/anchored/point-63.bin.gz",
+      "raw_bytes": 51095,
+      "stored_bytes": 4303,
+      "raw_sha256": "b4bf980d3e2ba3e257900fab6d27c7c10847822f80f76a0dcef0e355f3c818b6",
+      "stored_sha256": "61e399a986942454476105df30ec532e610643b5a8ec8a0353740a9c47f74c46",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-00.bin",
+      "stored_path": "single3/fixed-cuts/point-00.bin.gz",
+      "raw_bytes": 47339,
+      "stored_bytes": 4091,
+      "raw_sha256": "dbdf9a41057998f48f79a8c176e1da97b16fd1771c07e1278631ab21e28af22c",
+      "stored_sha256": "69f80e8e63cbc5738186de9fd882e31da00d38a87d171bc8b56877ed7eb1fe49",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-01.bin",
+      "stored_path": "single3/fixed-cuts/point-01.bin.gz",
+      "raw_bytes": 44634,
+      "stored_bytes": 3866,
+      "raw_sha256": "be3da0e31ab2779f5bb97898a33c68ccbbbf2194df07764a6e2b1b6e2f9c069d",
+      "stored_sha256": "dc9e6f853d325e8ce717f4e788d34627096b01a242c705b3668d44069224e94c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-02.bin",
+      "stored_path": "single3/fixed-cuts/point-02.bin.gz",
+      "raw_bytes": 50342,
+      "stored_bytes": 4278,
+      "raw_sha256": "dac399a5464dcd520d1de9e40619d888a9d7f89fce41769affb030dd645c792e",
+      "stored_sha256": "2c49aa99f782ccde4067217e063475a6ee392277ba4e077764e15264a8cd6a09",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-03.bin",
+      "stored_path": "single3/fixed-cuts/point-03.bin.gz",
+      "raw_bytes": 44383,
+      "stored_bytes": 3820,
+      "raw_sha256": "3a81a2a64237624b210259c586cb8732967a411aa46aada713a83d8ce3504d01",
+      "stored_sha256": "7334d3dfe5af44a84261b588f800b649f6c404a5f9cde0abf902595a9ff4187b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-04.bin",
+      "stored_path": "single3/fixed-cuts/point-04.bin.gz",
+      "raw_bytes": 45474,
+      "stored_bytes": 3922,
+      "raw_sha256": "e710fccc77b72c07efb763d57882fc08f5e02a5417e72949b1629919fd896fc7",
+      "stored_sha256": "135c9130e1246f433711914142ceef8e8aa25557cae7ab607e0d8c91f01d20ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-05.bin",
+      "stored_path": "single3/fixed-cuts/point-05.bin.gz",
+      "raw_bytes": 45591,
+      "stored_bytes": 3932,
+      "raw_sha256": "d32f057d6ed10c7deb0cc97e3efb4275d0133e05a81bb5e97b5cfa805a07b325",
+      "stored_sha256": "db9aaff2791b1d02260fbc9537ada6a86ef49b24a86ce904bdf417f564c05d48",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-06.bin",
+      "stored_path": "single3/fixed-cuts/point-06.bin.gz",
+      "raw_bytes": 45118,
+      "stored_bytes": 3883,
+      "raw_sha256": "0f39a75b55ca08553eb6cb9473329d323c08b4fb73fab448ca333712fd4099a8",
+      "stored_sha256": "2b4a16ccd29d3ce659ccf4a796a403920f6aab13a2d3b0837ab8efbbafac8fe0",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-07.bin",
+      "stored_path": "single3/fixed-cuts/point-07.bin.gz",
+      "raw_bytes": 45118,
+      "stored_bytes": 3885,
+      "raw_sha256": "dbf16a80ad7e02e0d98aaaa5f515bfa46d6066f5991e02f79ecb81f0f7d17b28",
+      "stored_sha256": "7a1bd04bfc78c94a59c69c433dbf90895fb37d1c0eb2d5b110ab750274a11b64",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-08.bin",
+      "stored_path": "single3/fixed-cuts/point-08.bin.gz",
+      "raw_bytes": 45001,
+      "stored_bytes": 3890,
+      "raw_sha256": "24a5d46e3dff5eb5b4d83ecb75d79197fc8b66facc112df478a0489a322b9cdc",
+      "stored_sha256": "fcaf238c80b18f66d82f8343df7727fdae86f2acf44755059869da081b90a468",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-09.bin",
+      "stored_path": "single3/fixed-cuts/point-09.bin.gz",
+      "raw_bytes": 45118,
+      "stored_bytes": 3895,
+      "raw_sha256": "3d1dfd476ed9f3d7ab4c4e105f3362913144d2540caad770672b53d63b5fe202",
+      "stored_sha256": "0de376ebca03f53dc6177593f93e0d42c95e1cac2ae1505d002dc9a6bbfe7bce",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-10.bin",
+      "stored_path": "single3/fixed-cuts/point-10.bin.gz",
+      "raw_bytes": 54286,
+      "stored_bytes": 4529,
+      "raw_sha256": "f1c7b7643a1d9ad04169a09639c944a9ff94a4e50b59671b58dabae3029b368f",
+      "stored_sha256": "bc770d8ceb09e96f09c8b4233149846b0273dff6147c6e5fca0598a0f7e37598",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-11.bin",
+      "stored_path": "single3/fixed-cuts/point-11.bin.gz",
+      "raw_bytes": 48026,
+      "stored_bytes": 4087,
+      "raw_sha256": "ef2da8774d062cec20fd81cc501de500f2ec21c0b742c864aee59e62be2edac8",
+      "stored_sha256": "d079419783e13770129b7e1a3c99956ae56f33fa2da6cc549db404e35ed43b7c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-12.bin",
+      "stored_path": "single3/fixed-cuts/point-12.bin.gz",
+      "raw_bytes": 47928,
+      "stored_bytes": 4081,
+      "raw_sha256": "f48845af16ef149879c6c3317a6743c0be7f8384d5a4ca4f24f0a66cdcc3717e",
+      "stored_sha256": "32b7f0f37a9415a0307527033ff85ce3a53863686a31238334213c2d1b337794",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-13.bin",
+      "stored_path": "single3/fixed-cuts/point-13.bin.gz",
+      "raw_bytes": 45861,
+      "stored_bytes": 3945,
+      "raw_sha256": "7c978dd92c00b46a5cbbce8bffc2661e79c6dce3d30744e82a4f970b7d044c89",
+      "stored_sha256": "a390e46004f4ab81016ad56a622ae59c7c9e1580bda0f24b73b74f9290c2c97f",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-14.bin",
+      "stored_path": "single3/fixed-cuts/point-14.bin.gz",
+      "raw_bytes": 44814,
+      "stored_bytes": 3853,
+      "raw_sha256": "1c82111fa2734f91932cd820dccd3476add55fac48708e9a9c39e9d0f3683e18",
+      "stored_sha256": "0158c3fdef860180b04c8d261d48294bada2d7c9d98151077620f2052f7c50bd",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-15.bin",
+      "stored_path": "single3/fixed-cuts/point-15.bin.gz",
+      "raw_bytes": 46880,
+      "stored_bytes": 4019,
+      "raw_sha256": "cc543ba1507c475de5f2f89fa5f6d632aa685e97835021ad5a32eff3bd66ea2e",
+      "stored_sha256": "264d84d8f0aa870cfae4d6673a87dd9a05e6939b05bfb5985046e6f10238c0b7",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-16.bin",
+      "stored_path": "single3/fixed-cuts/point-16.bin.gz",
+      "raw_bytes": 45652,
+      "stored_bytes": 3933,
+      "raw_sha256": "aa98191ca56e67190a5726e5d4012f9b0d5dc91c6590472839533b2ab8f28bf5",
+      "stored_sha256": "6a138da455486427d1cd550a5e2109ca7449d44df94012b2116601d1f24c2e99",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-17.bin",
+      "stored_path": "single3/fixed-cuts/point-17.bin.gz",
+      "raw_bytes": 44511,
+      "stored_bytes": 3840,
+      "raw_sha256": "e68f77946d1e52d1aabf2841901cb95d067faed2bed510a7186454f3aaaaccd1",
+      "stored_sha256": "997bbe052404d49cfbf970a7cf78217ff39ee68473af7e4fed901cb17e2b02db",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-18.bin",
+      "stored_path": "single3/fixed-cuts/point-18.bin.gz",
+      "raw_bytes": 44511,
+      "stored_bytes": 3838,
+      "raw_sha256": "7465002db7e50cdfacede8b07b600c1df0163703666dd2d66e5e374c20dbefa0",
+      "stored_sha256": "40ef76a4c8b1696ab5ccc8e15d19ce7b79f29c5faea6b109136656bf38d60638",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-19.bin",
+      "stored_path": "single3/fixed-cuts/point-19.bin.gz",
+      "raw_bytes": 44332,
+      "stored_bytes": 3820,
+      "raw_sha256": "3630bf3a50a358f8f6c7fab8e1cf85662456ee47cc19c9803deaa63a28ea7951",
+      "stored_sha256": "5a9759aedc97bdff3a7658e262bc254c9d1682000e31b25cf58df7bb9e55a324",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-20.bin",
+      "stored_path": "single3/fixed-cuts/point-20.bin.gz",
+      "raw_bytes": 47817,
+      "stored_bytes": 4132,
+      "raw_sha256": "f447e198ea9df8004b499d6dbd433eeb9615e37ec20cd5374b5e960cbea2e03d",
+      "stored_sha256": "74475d84ecc4bee79f1a927d25aa44ecbee2d9bd9922b19dfe245d9145823e92",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-21.bin",
+      "stored_path": "single3/fixed-cuts/point-21.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3937,
+      "raw_sha256": "3fe26af18705fee80cf4645e7387081f436bd216924dd9d659d4ab1e4347522f",
+      "stored_sha256": "549e8d5fee6a5c930e5a9970d99d08c6896eec01df630af76ffa852aa1719c2a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-22.bin",
+      "stored_path": "single3/fixed-cuts/point-22.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3945,
+      "raw_sha256": "4542037b32eb6f3a3f75941676beba6f991dd6cf3b94477da6cd6d90be9371e2",
+      "stored_sha256": "7b3bb17b0eb68792f85a407044d70fddada84690063e3f1056aa044b506ab2ef",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-23.bin",
+      "stored_path": "single3/fixed-cuts/point-23.bin.gz",
+      "raw_bytes": 47968,
+      "stored_bytes": 4153,
+      "raw_sha256": "45674b0254de13cb335c65ef10126508a25c234727c55560bc96f2f5b1b092fb",
+      "stored_sha256": "89f4ae1503751626d9d2b02e2eb0837368f86f4d79e2252fc03c72d7cad85df4",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-24.bin",
+      "stored_path": "single3/fixed-cuts/point-24.bin.gz",
+      "raw_bytes": 45342,
+      "stored_bytes": 3906,
+      "raw_sha256": "d914dc9cb6516c51f88c3146188bf0997873f9f1c3c91c16256464cd3f5b39c9",
+      "stored_sha256": "8e14262aea1c7db7ca47111a778aa4495b796918764f64558ab6dc383b257c7c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-25.bin",
+      "stored_path": "single3/fixed-cuts/point-25.bin.gz",
+      "raw_bytes": 45342,
+      "stored_bytes": 3919,
+      "raw_sha256": "e3c7158bab89a6ee3cc109ab9c0adf6978cde3a4e93300f3cf5fe4c9d0f9068a",
+      "stored_sha256": "c86749e88de0653c50d146ee659f4e988faf9703d07cff79ae1cf9ec2ba8f3fb",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-26.bin",
+      "stored_path": "single3/fixed-cuts/point-26.bin.gz",
+      "raw_bytes": 85474,
+      "stored_bytes": 6423,
+      "raw_sha256": "0ba7fae61bb03c0464c25bd2c1c87452cb83e1f24afb2777c5e4f1f89b247f07",
+      "stored_sha256": "35a68a7cfc6a4520280e212b068e58c4d9814ae5512f9f63236378bfb43ab477",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-27.bin",
+      "stored_path": "single3/fixed-cuts/point-27.bin.gz",
+      "raw_bytes": 51135,
+      "stored_bytes": 4300,
+      "raw_sha256": "0ef79ea0d4441fafdd1056b00d7b68b96235b9caaa93714ae813b0ee98f33c95",
+      "stored_sha256": "b3f23e6736c83dc9bf3f8084158e102a07a44eb5cd11f9208d2f612340c6e64a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-28.bin",
+      "stored_path": "single3/fixed-cuts/point-28.bin.gz",
+      "raw_bytes": 48374,
+      "stored_bytes": 4177,
+      "raw_sha256": "504f2931d104c764b27018742169e34773e7efc7cf16f4e732492a7f8af1a81b",
+      "stored_sha256": "d15f1af693344342295d4d87df0dd4d4a9af1f584b69f5ce80b3e79b52eecd6f",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-29.bin",
+      "stored_path": "single3/fixed-cuts/point-29.bin.gz",
+      "raw_bytes": 48087,
+      "stored_bytes": 4154,
+      "raw_sha256": "9017a5c963acce38d2430f9264752798ea0f3c45680b585865f8989223ca63ce",
+      "stored_sha256": "e8af4cfd74657e2de41480c18f02681fa46578a5a1c2bbac38844211469ac416",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-30.bin",
+      "stored_path": "single3/fixed-cuts/point-30.bin.gz",
+      "raw_bytes": 48087,
+      "stored_bytes": 4168,
+      "raw_sha256": "d895871aac8747e8a8e64230cc0e18945669741a50dab8c9a39de5eb857c7424",
+      "stored_sha256": "4de90f7aa7ca0aa624fb8432f842b2903e20a8df44cc4f82e63670f7e26078d8",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-31.bin",
+      "stored_path": "single3/fixed-cuts/point-31.bin.gz",
+      "raw_bytes": 48772,
+      "stored_bytes": 4188,
+      "raw_sha256": "5c62fcacd4f268b728dea22f324d69407bd463c045feef81d38dcad5c498c890",
+      "stored_sha256": "36f82307795211c6e0811bce2047dcef38bb59d1e97f35f1933f7b7cc6150e1c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-32.bin",
+      "stored_path": "single3/fixed-cuts/point-32.bin.gz",
+      "raw_bytes": 48557,
+      "stored_bytes": 4174,
+      "raw_sha256": "9f9459692014abdf41a7662868837d88213e6623e379ecd9bf0878030675ff16",
+      "stored_sha256": "d315ebe897b457c22e523eef71a65106f8a1170e282cd7918e11e6515cbaabea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-33.bin",
+      "stored_path": "single3/fixed-cuts/point-33.bin.gz",
+      "raw_bytes": 44332,
+      "stored_bytes": 3818,
+      "raw_sha256": "08603eb6b9be1bcc5ef957f25bf28a4a797a36809831d78d2c7b5671199fde89",
+      "stored_sha256": "003e89d5d812245c40469a803ebecec433a851bfa047dc947fa99d05c3245964",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-34.bin",
+      "stored_path": "single3/fixed-cuts/point-34.bin.gz",
+      "raw_bytes": 44819,
+      "stored_bytes": 3861,
+      "raw_sha256": "c7fd1553a72735c7a7fda553d90457895ee246f836268180ae6b51e72c8da115",
+      "stored_sha256": "9c1c4d820d52dd3b6ec3235bdcf78dda369c1095ac91ae659ed8a33d40bacc7e",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-35.bin",
+      "stored_path": "single3/fixed-cuts/point-35.bin.gz",
+      "raw_bytes": 64841,
+      "stored_bytes": 5205,
+      "raw_sha256": "a54dc2f7d98fdcaf08af2edfcbc2d62261463bfe0839e75e422259b9602e62b2",
+      "stored_sha256": "538c52f6a98635ab6170f64487d0967a5e19a0982416302935eca08fc3299808",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-36.bin",
+      "stored_path": "single3/fixed-cuts/point-36.bin.gz",
+      "raw_bytes": 47671,
+      "stored_bytes": 4105,
+      "raw_sha256": "48f099762c8158cbbccd9130b4fedd64fe169e030151195f0245b0905043b356",
+      "stored_sha256": "712dd9a15b1bc30ef38093c175faed36803fc641593223ecf51a4b321e571f7b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-37.bin",
+      "stored_path": "single3/fixed-cuts/point-37.bin.gz",
+      "raw_bytes": 61869,
+      "stored_bytes": 5042,
+      "raw_sha256": "30da3c6d9417fd379871b5a217f046c0b2374f21ed11cb3196abf73d9edd1a7a",
+      "stored_sha256": "a1a55248455ba4fca947df34a4f44f1684c3c017067d1efce6de1dcb1580b382",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-38.bin",
+      "stored_path": "single3/fixed-cuts/point-38.bin.gz",
+      "raw_bytes": 62392,
+      "stored_bytes": 5079,
+      "raw_sha256": "c0f1011d97c5ada6afc39aca2115c7f2c2586c1a5e72c6cc992458f46bf88c32",
+      "stored_sha256": "ccccf995b5969c1d37958312d631afcc8658213d257ee11e68d46f76f3735332",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-39.bin",
+      "stored_path": "single3/fixed-cuts/point-39.bin.gz",
+      "raw_bytes": 48202,
+      "stored_bytes": 4125,
+      "raw_sha256": "12fa91829af76644f69c9e7c67810f0e78e66d562e35b33983a5f9198149407a",
+      "stored_sha256": "7127aa442e3c60ac5aa0dc693002b63184cc034a94f6bc5fc2744f0f8857dcaa",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-40.bin",
+      "stored_path": "single3/fixed-cuts/point-40.bin.gz",
+      "raw_bytes": 46351,
+      "stored_bytes": 3973,
+      "raw_sha256": "9d921d0b0d0074dc57a4ed7600a9541d82039b5a73ceaff9c2e8d7d58402f6c6",
+      "stored_sha256": "49c464c5aece3baf6c35d5170a7671492a39e8b186a0b219e6e2211cf0e27569",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-41.bin",
+      "stored_path": "single3/fixed-cuts/point-41.bin.gz",
+      "raw_bytes": 45858,
+      "stored_bytes": 3937,
+      "raw_sha256": "6491e2cd168cf151b72cdc934a9e0cf4207f1ce12d4e6561cc2dd9c7bf877bfc",
+      "stored_sha256": "d877d2098d6b9e81b1cfae084824290b87155cd343022eb49d3c31d1259b760b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-42.bin",
+      "stored_path": "single3/fixed-cuts/point-42.bin.gz",
+      "raw_bytes": 45778,
+      "stored_bytes": 3920,
+      "raw_sha256": "8654e0e6892ff3d3fc9c18e04dfca3243f5d7ce09ad485acbe029f967e280a02",
+      "stored_sha256": "e912aac02d5802bbec1d33017df3d4167b354b5c7494ce5060cd5dd5df322724",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-43.bin",
+      "stored_path": "single3/fixed-cuts/point-43.bin.gz",
+      "raw_bytes": 48326,
+      "stored_bytes": 4147,
+      "raw_sha256": "27418b96b1cbb67c518597ff977cf7172e4c776db490bb12b1eec0f55be7bdec",
+      "stored_sha256": "9c22c060be51ece23c393ed54c544457b27f1453c087cb113296ecf96a187391",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-44.bin",
+      "stored_path": "single3/fixed-cuts/point-44.bin.gz",
+      "raw_bytes": 47404,
+      "stored_bytes": 4119,
+      "raw_sha256": "a7dde0cb29baab1de785cfb2793732a98486843c16e290539dab051c5da30032",
+      "stored_sha256": "9ef82e2a0ec77309920f8dd656f5b6f0dfad4e05f6223f4d97264eaf5ea63413",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-45.bin",
+      "stored_path": "single3/fixed-cuts/point-45.bin.gz",
+      "raw_bytes": 45744,
+      "stored_bytes": 3943,
+      "raw_sha256": "67090a96993e61e730ea5926dda8a914a425bda1b5f4a732f7f0c128a8536aa6",
+      "stored_sha256": "53dc3fc58f2892d48480402517da48e90b6e69b80e1a8950b8fd1f856e62461c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-46.bin",
+      "stored_path": "single3/fixed-cuts/point-46.bin.gz",
+      "raw_bytes": 45744,
+      "stored_bytes": 3956,
+      "raw_sha256": "57e09dcd498f9605e0f108e5bc39afa819b09f2deaa3359dbfa2d06605a184ff",
+      "stored_sha256": "6375c9372009ada0bb977c5b8989b51b02c451135a003b16fd3a5e346223a05f",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-47.bin",
+      "stored_path": "single3/fixed-cuts/point-47.bin.gz",
+      "raw_bytes": 44511,
+      "stored_bytes": 3847,
+      "raw_sha256": "653d8f4b37bc51299b314c260659844cc561c2ada3bb1344baa7f7959933aa7e",
+      "stored_sha256": "1d1298968c94cde00972c41ab9ff1c3ce7281323ce45be721861f63adf129d1c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-48.bin",
+      "stored_path": "single3/fixed-cuts/point-48.bin.gz",
+      "raw_bytes": 46588,
+      "stored_bytes": 4007,
+      "raw_sha256": "0638d3beddb99951e23021258f4d6c732884c2346c64b3cd2029ddb84f7987fb",
+      "stored_sha256": "fb362b5418e4ab39f163f1b7ef313219b37622ccc52e930bf75a2106d7c51b39",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-49.bin",
+      "stored_path": "single3/fixed-cuts/point-49.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3938,
+      "raw_sha256": "43e359fb77e01a6e90076ae7b11389f545dafd8f511aa287750220dd52b9bced",
+      "stored_sha256": "995bd3b58dc4e90514b27d950fe4b9b18b5b6b6e9cf099e15f937c8636b757eb",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-50.bin",
+      "stored_path": "single3/fixed-cuts/point-50.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3945,
+      "raw_sha256": "67d89855e4c99bd1b8fd8b253e48b8e0df77f6f9ac352fbf44a31052aff0f631",
+      "stored_sha256": "34b170b0ef76ab5bb1d84253aa699d3b143ecb975babf3887426eab09f2fd613",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-51.bin",
+      "stored_path": "single3/fixed-cuts/point-51.bin.gz",
+      "raw_bytes": 51159,
+      "stored_bytes": 4310,
+      "raw_sha256": "26baaa8e81810a6232e92c9704195f550bc8e9e0d27d22bdd0680988567a03e9",
+      "stored_sha256": "a0c98afa2d6e644357be947ad50d1d2be76e25065206405e254e95294fde0ad3",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-52.bin",
+      "stored_path": "single3/fixed-cuts/point-52.bin.gz",
+      "raw_bytes": 51581,
+      "stored_bytes": 4347,
+      "raw_sha256": "3d5a8cc3c944fd732ccef56936ffba3f8339213df4636be6898e21a3f958252e",
+      "stored_sha256": "c4043b848207e0e65e73a48ca151e9d13742869a718f8627af4dbf229b7c27f5",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-53.bin",
+      "stored_path": "single3/fixed-cuts/point-53.bin.gz",
+      "raw_bytes": 48129,
+      "stored_bytes": 4128,
+      "raw_sha256": "2148cb6445929e4c24a93afa9e12916df664171e902185c4b668c6771872c6ad",
+      "stored_sha256": "c67eac60dcd75df5cb788bda1b0fed7142bd444850051cb5ae22424af32a1aac",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-54.bin",
+      "stored_path": "single3/fixed-cuts/point-54.bin.gz",
+      "raw_bytes": 50787,
+      "stored_bytes": 4280,
+      "raw_sha256": "eaf90e2e4df5f8500e486cbdf49e34d01c79a4adf150079a000331ff0cb5727f",
+      "stored_sha256": "c8a0014ca4bbfe99647ec78e7f3998d81de0552295dfd490c3fd58cc50d6a8f1",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-55.bin",
+      "stored_path": "single3/fixed-cuts/point-55.bin.gz",
+      "raw_bytes": 46770,
+      "stored_bytes": 4007,
+      "raw_sha256": "230e7b0afa44feced037a885ccd082c1fbd398362df00f82c1b17b8f0e0d10a9",
+      "stored_sha256": "42153195a03e033aa2d184d682efc137237874d07acec03ca60377b86bd4c04a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-56.bin",
+      "stored_path": "single3/fixed-cuts/point-56.bin.gz",
+      "raw_bytes": 48498,
+      "stored_bytes": 4138,
+      "raw_sha256": "53c9c1b3e6e75b69736cc5e8e027c44f7bb97213ddfbb4175c55f3140ea4b1be",
+      "stored_sha256": "f3691e20de409589ffe425b1bcac26efbcf793116bdf329591fc1fadb0b3b48a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-57.bin",
+      "stored_path": "single3/fixed-cuts/point-57.bin.gz",
+      "raw_bytes": 48498,
+      "stored_bytes": 4151,
+      "raw_sha256": "7c75b2c6167c37a9c57e665418320da492abf298b7eff094588df7b09540d098",
+      "stored_sha256": "9c9c59f1a80e558a84d35b26d3f4e01f6fd52589c4d748ac7558e625150f85d7",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-58.bin",
+      "stored_path": "single3/fixed-cuts/point-58.bin.gz",
+      "raw_bytes": 59658,
+      "stored_bytes": 4912,
+      "raw_sha256": "749cbd6af88863c6fa2f7cd3e88d3b4eb780c05cf07b67f0100e45564558b8d6",
+      "stored_sha256": "df729711b127ee3fca069659ba4b557d6e9603b7f2dc4c7bd2174bd4b5e27a93",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-59.bin",
+      "stored_path": "single3/fixed-cuts/point-59.bin.gz",
+      "raw_bytes": 47657,
+      "stored_bytes": 4064,
+      "raw_sha256": "24921df6adb12436eff2f8bd7486c02be7193efa509bda92b760d4849cb3a6b0",
+      "stored_sha256": "86831b31660f8d1fc55a219850fcf947b5005bc2e78ef84e0e6790a6cbcde9da",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-60.bin",
+      "stored_path": "single3/fixed-cuts/point-60.bin.gz",
+      "raw_bytes": 48445,
+      "stored_bytes": 4128,
+      "raw_sha256": "926b2c584822369e127e801e564d6af532a7c40e65732ff6aa5a784cc04d2338",
+      "stored_sha256": "b8320dacaf9db2d66fef651f23940451faaddd8f5060c0fe9394afa94c491407",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-61.bin",
+      "stored_path": "single3/fixed-cuts/point-61.bin.gz",
+      "raw_bytes": 47774,
+      "stored_bytes": 4080,
+      "raw_sha256": "ab91ff71cd54733da480c636ed3566b7869f9cd4c4b2d85d8d6a24df81a53e3e",
+      "stored_sha256": "f638409fbed056cd674d15e86d7c3404d63258e771ecd2f832a7f760c72d8faa",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-62.bin",
+      "stored_path": "single3/fixed-cuts/point-62.bin.gz",
+      "raw_bytes": 51463,
+      "stored_bytes": 4357,
+      "raw_sha256": "a58602da1cb5c7b46ca96864b0bd0b3c55e997b7d8eece4ab5e87aa5705ae6f2",
+      "stored_sha256": "fc25efe02516669c7d0a90b360ff03791fbaa36e0ad33c90b6813123c7d84478",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts/point-63.bin",
+      "stored_path": "single3/fixed-cuts/point-63.bin.gz",
+      "raw_bytes": 51095,
+      "stored_bytes": 4303,
+      "raw_sha256": "b4bf980d3e2ba3e257900fab6d27c7c10847822f80f76a0dcef0e355f3c818b6",
+      "stored_sha256": "61e399a986942454476105df30ec532e610643b5a8ec8a0353740a9c47f74c46",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-00.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-00.bin.gz",
+      "raw_bytes": 47339,
+      "stored_bytes": 4091,
+      "raw_sha256": "dbdf9a41057998f48f79a8c176e1da97b16fd1771c07e1278631ab21e28af22c",
+      "stored_sha256": "69f80e8e63cbc5738186de9fd882e31da00d38a87d171bc8b56877ed7eb1fe49",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-01.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-01.bin.gz",
+      "raw_bytes": 44634,
+      "stored_bytes": 3866,
+      "raw_sha256": "be3da0e31ab2779f5bb97898a33c68ccbbbf2194df07764a6e2b1b6e2f9c069d",
+      "stored_sha256": "dc9e6f853d325e8ce717f4e788d34627096b01a242c705b3668d44069224e94c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-02.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-02.bin.gz",
+      "raw_bytes": 50342,
+      "stored_bytes": 4278,
+      "raw_sha256": "dac399a5464dcd520d1de9e40619d888a9d7f89fce41769affb030dd645c792e",
+      "stored_sha256": "2c49aa99f782ccde4067217e063475a6ee392277ba4e077764e15264a8cd6a09",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-03.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-03.bin.gz",
+      "raw_bytes": 44383,
+      "stored_bytes": 3820,
+      "raw_sha256": "3a81a2a64237624b210259c586cb8732967a411aa46aada713a83d8ce3504d01",
+      "stored_sha256": "7334d3dfe5af44a84261b588f800b649f6c404a5f9cde0abf902595a9ff4187b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-04.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-04.bin.gz",
+      "raw_bytes": 45474,
+      "stored_bytes": 3922,
+      "raw_sha256": "e710fccc77b72c07efb763d57882fc08f5e02a5417e72949b1629919fd896fc7",
+      "stored_sha256": "135c9130e1246f433711914142ceef8e8aa25557cae7ab607e0d8c91f01d20ea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-05.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-05.bin.gz",
+      "raw_bytes": 45591,
+      "stored_bytes": 3932,
+      "raw_sha256": "d32f057d6ed10c7deb0cc97e3efb4275d0133e05a81bb5e97b5cfa805a07b325",
+      "stored_sha256": "db9aaff2791b1d02260fbc9537ada6a86ef49b24a86ce904bdf417f564c05d48",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-06.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-06.bin.gz",
+      "raw_bytes": 45118,
+      "stored_bytes": 3883,
+      "raw_sha256": "0f39a75b55ca08553eb6cb9473329d323c08b4fb73fab448ca333712fd4099a8",
+      "stored_sha256": "2b4a16ccd29d3ce659ccf4a796a403920f6aab13a2d3b0837ab8efbbafac8fe0",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-07.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-07.bin.gz",
+      "raw_bytes": 45118,
+      "stored_bytes": 3885,
+      "raw_sha256": "dbf16a80ad7e02e0d98aaaa5f515bfa46d6066f5991e02f79ecb81f0f7d17b28",
+      "stored_sha256": "7a1bd04bfc78c94a59c69c433dbf90895fb37d1c0eb2d5b110ab750274a11b64",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-08.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-08.bin.gz",
+      "raw_bytes": 45001,
+      "stored_bytes": 3890,
+      "raw_sha256": "24a5d46e3dff5eb5b4d83ecb75d79197fc8b66facc112df478a0489a322b9cdc",
+      "stored_sha256": "fcaf238c80b18f66d82f8343df7727fdae86f2acf44755059869da081b90a468",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-09.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-09.bin.gz",
+      "raw_bytes": 45118,
+      "stored_bytes": 3895,
+      "raw_sha256": "3d1dfd476ed9f3d7ab4c4e105f3362913144d2540caad770672b53d63b5fe202",
+      "stored_sha256": "0de376ebca03f53dc6177593f93e0d42c95e1cac2ae1505d002dc9a6bbfe7bce",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-10.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-10.bin.gz",
+      "raw_bytes": 54286,
+      "stored_bytes": 4529,
+      "raw_sha256": "f1c7b7643a1d9ad04169a09639c944a9ff94a4e50b59671b58dabae3029b368f",
+      "stored_sha256": "bc770d8ceb09e96f09c8b4233149846b0273dff6147c6e5fca0598a0f7e37598",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-11.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-11.bin.gz",
+      "raw_bytes": 48026,
+      "stored_bytes": 4087,
+      "raw_sha256": "ef2da8774d062cec20fd81cc501de500f2ec21c0b742c864aee59e62be2edac8",
+      "stored_sha256": "d079419783e13770129b7e1a3c99956ae56f33fa2da6cc549db404e35ed43b7c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-12.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-12.bin.gz",
+      "raw_bytes": 47928,
+      "stored_bytes": 4081,
+      "raw_sha256": "f48845af16ef149879c6c3317a6743c0be7f8384d5a4ca4f24f0a66cdcc3717e",
+      "stored_sha256": "32b7f0f37a9415a0307527033ff85ce3a53863686a31238334213c2d1b337794",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-13.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-13.bin.gz",
+      "raw_bytes": 45861,
+      "stored_bytes": 3945,
+      "raw_sha256": "7c978dd92c00b46a5cbbce8bffc2661e79c6dce3d30744e82a4f970b7d044c89",
+      "stored_sha256": "a390e46004f4ab81016ad56a622ae59c7c9e1580bda0f24b73b74f9290c2c97f",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-14.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-14.bin.gz",
+      "raw_bytes": 44814,
+      "stored_bytes": 3853,
+      "raw_sha256": "1c82111fa2734f91932cd820dccd3476add55fac48708e9a9c39e9d0f3683e18",
+      "stored_sha256": "0158c3fdef860180b04c8d261d48294bada2d7c9d98151077620f2052f7c50bd",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-15.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-15.bin.gz",
+      "raw_bytes": 46880,
+      "stored_bytes": 4019,
+      "raw_sha256": "cc543ba1507c475de5f2f89fa5f6d632aa685e97835021ad5a32eff3bd66ea2e",
+      "stored_sha256": "264d84d8f0aa870cfae4d6673a87dd9a05e6939b05bfb5985046e6f10238c0b7",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-16.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-16.bin.gz",
+      "raw_bytes": 45652,
+      "stored_bytes": 3933,
+      "raw_sha256": "aa98191ca56e67190a5726e5d4012f9b0d5dc91c6590472839533b2ab8f28bf5",
+      "stored_sha256": "6a138da455486427d1cd550a5e2109ca7449d44df94012b2116601d1f24c2e99",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-17.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-17.bin.gz",
+      "raw_bytes": 44511,
+      "stored_bytes": 3840,
+      "raw_sha256": "e68f77946d1e52d1aabf2841901cb95d067faed2bed510a7186454f3aaaaccd1",
+      "stored_sha256": "997bbe052404d49cfbf970a7cf78217ff39ee68473af7e4fed901cb17e2b02db",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-18.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-18.bin.gz",
+      "raw_bytes": 44511,
+      "stored_bytes": 3838,
+      "raw_sha256": "7465002db7e50cdfacede8b07b600c1df0163703666dd2d66e5e374c20dbefa0",
+      "stored_sha256": "40ef76a4c8b1696ab5ccc8e15d19ce7b79f29c5faea6b109136656bf38d60638",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-19.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-19.bin.gz",
+      "raw_bytes": 44332,
+      "stored_bytes": 3820,
+      "raw_sha256": "3630bf3a50a358f8f6c7fab8e1cf85662456ee47cc19c9803deaa63a28ea7951",
+      "stored_sha256": "5a9759aedc97bdff3a7658e262bc254c9d1682000e31b25cf58df7bb9e55a324",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-20.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-20.bin.gz",
+      "raw_bytes": 47817,
+      "stored_bytes": 4132,
+      "raw_sha256": "f447e198ea9df8004b499d6dbd433eeb9615e37ec20cd5374b5e960cbea2e03d",
+      "stored_sha256": "74475d84ecc4bee79f1a927d25aa44ecbee2d9bd9922b19dfe245d9145823e92",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-21.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-21.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3937,
+      "raw_sha256": "3fe26af18705fee80cf4645e7387081f436bd216924dd9d659d4ab1e4347522f",
+      "stored_sha256": "549e8d5fee6a5c930e5a9970d99d08c6896eec01df630af76ffa852aa1719c2a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-22.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-22.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3945,
+      "raw_sha256": "4542037b32eb6f3a3f75941676beba6f991dd6cf3b94477da6cd6d90be9371e2",
+      "stored_sha256": "7b3bb17b0eb68792f85a407044d70fddada84690063e3f1056aa044b506ab2ef",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-23.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-23.bin.gz",
+      "raw_bytes": 47968,
+      "stored_bytes": 4153,
+      "raw_sha256": "45674b0254de13cb335c65ef10126508a25c234727c55560bc96f2f5b1b092fb",
+      "stored_sha256": "89f4ae1503751626d9d2b02e2eb0837368f86f4d79e2252fc03c72d7cad85df4",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-24.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-24.bin.gz",
+      "raw_bytes": 45342,
+      "stored_bytes": 3906,
+      "raw_sha256": "d914dc9cb6516c51f88c3146188bf0997873f9f1c3c91c16256464cd3f5b39c9",
+      "stored_sha256": "8e14262aea1c7db7ca47111a778aa4495b796918764f64558ab6dc383b257c7c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-25.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-25.bin.gz",
+      "raw_bytes": 45342,
+      "stored_bytes": 3919,
+      "raw_sha256": "e3c7158bab89a6ee3cc109ab9c0adf6978cde3a4e93300f3cf5fe4c9d0f9068a",
+      "stored_sha256": "c86749e88de0653c50d146ee659f4e988faf9703d07cff79ae1cf9ec2ba8f3fb",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-26.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-26.bin.gz",
+      "raw_bytes": 85474,
+      "stored_bytes": 6423,
+      "raw_sha256": "0ba7fae61bb03c0464c25bd2c1c87452cb83e1f24afb2777c5e4f1f89b247f07",
+      "stored_sha256": "35a68a7cfc6a4520280e212b068e58c4d9814ae5512f9f63236378bfb43ab477",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-27.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-27.bin.gz",
+      "raw_bytes": 51135,
+      "stored_bytes": 4300,
+      "raw_sha256": "0ef79ea0d4441fafdd1056b00d7b68b96235b9caaa93714ae813b0ee98f33c95",
+      "stored_sha256": "b3f23e6736c83dc9bf3f8084158e102a07a44eb5cd11f9208d2f612340c6e64a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-28.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-28.bin.gz",
+      "raw_bytes": 48374,
+      "stored_bytes": 4177,
+      "raw_sha256": "504f2931d104c764b27018742169e34773e7efc7cf16f4e732492a7f8af1a81b",
+      "stored_sha256": "d15f1af693344342295d4d87df0dd4d4a9af1f584b69f5ce80b3e79b52eecd6f",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-29.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-29.bin.gz",
+      "raw_bytes": 48087,
+      "stored_bytes": 4154,
+      "raw_sha256": "9017a5c963acce38d2430f9264752798ea0f3c45680b585865f8989223ca63ce",
+      "stored_sha256": "e8af4cfd74657e2de41480c18f02681fa46578a5a1c2bbac38844211469ac416",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-30.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-30.bin.gz",
+      "raw_bytes": 48087,
+      "stored_bytes": 4168,
+      "raw_sha256": "d895871aac8747e8a8e64230cc0e18945669741a50dab8c9a39de5eb857c7424",
+      "stored_sha256": "4de90f7aa7ca0aa624fb8432f842b2903e20a8df44cc4f82e63670f7e26078d8",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-31.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-31.bin.gz",
+      "raw_bytes": 48772,
+      "stored_bytes": 4188,
+      "raw_sha256": "5c62fcacd4f268b728dea22f324d69407bd463c045feef81d38dcad5c498c890",
+      "stored_sha256": "36f82307795211c6e0811bce2047dcef38bb59d1e97f35f1933f7b7cc6150e1c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-32.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-32.bin.gz",
+      "raw_bytes": 48557,
+      "stored_bytes": 4174,
+      "raw_sha256": "9f9459692014abdf41a7662868837d88213e6623e379ecd9bf0878030675ff16",
+      "stored_sha256": "d315ebe897b457c22e523eef71a65106f8a1170e282cd7918e11e6515cbaabea",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-33.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-33.bin.gz",
+      "raw_bytes": 44332,
+      "stored_bytes": 3818,
+      "raw_sha256": "08603eb6b9be1bcc5ef957f25bf28a4a797a36809831d78d2c7b5671199fde89",
+      "stored_sha256": "003e89d5d812245c40469a803ebecec433a851bfa047dc947fa99d05c3245964",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-34.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-34.bin.gz",
+      "raw_bytes": 44819,
+      "stored_bytes": 3861,
+      "raw_sha256": "c7fd1553a72735c7a7fda553d90457895ee246f836268180ae6b51e72c8da115",
+      "stored_sha256": "9c1c4d820d52dd3b6ec3235bdcf78dda369c1095ac91ae659ed8a33d40bacc7e",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-35.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-35.bin.gz",
+      "raw_bytes": 64841,
+      "stored_bytes": 5205,
+      "raw_sha256": "a54dc2f7d98fdcaf08af2edfcbc2d62261463bfe0839e75e422259b9602e62b2",
+      "stored_sha256": "538c52f6a98635ab6170f64487d0967a5e19a0982416302935eca08fc3299808",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-36.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-36.bin.gz",
+      "raw_bytes": 47671,
+      "stored_bytes": 4105,
+      "raw_sha256": "48f099762c8158cbbccd9130b4fedd64fe169e030151195f0245b0905043b356",
+      "stored_sha256": "712dd9a15b1bc30ef38093c175faed36803fc641593223ecf51a4b321e571f7b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-37.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-37.bin.gz",
+      "raw_bytes": 61869,
+      "stored_bytes": 5042,
+      "raw_sha256": "30da3c6d9417fd379871b5a217f046c0b2374f21ed11cb3196abf73d9edd1a7a",
+      "stored_sha256": "a1a55248455ba4fca947df34a4f44f1684c3c017067d1efce6de1dcb1580b382",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-38.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-38.bin.gz",
+      "raw_bytes": 62392,
+      "stored_bytes": 5079,
+      "raw_sha256": "c0f1011d97c5ada6afc39aca2115c7f2c2586c1a5e72c6cc992458f46bf88c32",
+      "stored_sha256": "ccccf995b5969c1d37958312d631afcc8658213d257ee11e68d46f76f3735332",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-39.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-39.bin.gz",
+      "raw_bytes": 48202,
+      "stored_bytes": 4125,
+      "raw_sha256": "12fa91829af76644f69c9e7c67810f0e78e66d562e35b33983a5f9198149407a",
+      "stored_sha256": "7127aa442e3c60ac5aa0dc693002b63184cc034a94f6bc5fc2744f0f8857dcaa",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-40.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-40.bin.gz",
+      "raw_bytes": 46351,
+      "stored_bytes": 3973,
+      "raw_sha256": "9d921d0b0d0074dc57a4ed7600a9541d82039b5a73ceaff9c2e8d7d58402f6c6",
+      "stored_sha256": "49c464c5aece3baf6c35d5170a7671492a39e8b186a0b219e6e2211cf0e27569",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-41.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-41.bin.gz",
+      "raw_bytes": 45858,
+      "stored_bytes": 3937,
+      "raw_sha256": "6491e2cd168cf151b72cdc934a9e0cf4207f1ce12d4e6561cc2dd9c7bf877bfc",
+      "stored_sha256": "d877d2098d6b9e81b1cfae084824290b87155cd343022eb49d3c31d1259b760b",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-42.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-42.bin.gz",
+      "raw_bytes": 45778,
+      "stored_bytes": 3920,
+      "raw_sha256": "8654e0e6892ff3d3fc9c18e04dfca3243f5d7ce09ad485acbe029f967e280a02",
+      "stored_sha256": "e912aac02d5802bbec1d33017df3d4167b354b5c7494ce5060cd5dd5df322724",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-43.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-43.bin.gz",
+      "raw_bytes": 48326,
+      "stored_bytes": 4147,
+      "raw_sha256": "27418b96b1cbb67c518597ff977cf7172e4c776db490bb12b1eec0f55be7bdec",
+      "stored_sha256": "9c22c060be51ece23c393ed54c544457b27f1453c087cb113296ecf96a187391",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-44.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-44.bin.gz",
+      "raw_bytes": 47404,
+      "stored_bytes": 4119,
+      "raw_sha256": "a7dde0cb29baab1de785cfb2793732a98486843c16e290539dab051c5da30032",
+      "stored_sha256": "9ef82e2a0ec77309920f8dd656f5b6f0dfad4e05f6223f4d97264eaf5ea63413",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-45.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-45.bin.gz",
+      "raw_bytes": 45744,
+      "stored_bytes": 3943,
+      "raw_sha256": "67090a96993e61e730ea5926dda8a914a425bda1b5f4a732f7f0c128a8536aa6",
+      "stored_sha256": "53dc3fc58f2892d48480402517da48e90b6e69b80e1a8950b8fd1f856e62461c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-46.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-46.bin.gz",
+      "raw_bytes": 45744,
+      "stored_bytes": 3956,
+      "raw_sha256": "57e09dcd498f9605e0f108e5bc39afa819b09f2deaa3359dbfa2d06605a184ff",
+      "stored_sha256": "6375c9372009ada0bb977c5b8989b51b02c451135a003b16fd3a5e346223a05f",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-47.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-47.bin.gz",
+      "raw_bytes": 44511,
+      "stored_bytes": 3847,
+      "raw_sha256": "653d8f4b37bc51299b314c260659844cc561c2ada3bb1344baa7f7959933aa7e",
+      "stored_sha256": "1d1298968c94cde00972c41ab9ff1c3ce7281323ce45be721861f63adf129d1c",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-48.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-48.bin.gz",
+      "raw_bytes": 46588,
+      "stored_bytes": 4007,
+      "raw_sha256": "0638d3beddb99951e23021258f4d6c732884c2346c64b3cd2029ddb84f7987fb",
+      "stored_sha256": "fb362b5418e4ab39f163f1b7ef313219b37622ccc52e930bf75a2106d7c51b39",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-49.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-49.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3938,
+      "raw_sha256": "43e359fb77e01a6e90076ae7b11389f545dafd8f511aa287750220dd52b9bced",
+      "stored_sha256": "995bd3b58dc4e90514b27d950fe4b9b18b5b6b6e9cf099e15f937c8636b757eb",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-50.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-50.bin.gz",
+      "raw_bytes": 45693,
+      "stored_bytes": 3945,
+      "raw_sha256": "67d89855e4c99bd1b8fd8b253e48b8e0df77f6f9ac352fbf44a31052aff0f631",
+      "stored_sha256": "34b170b0ef76ab5bb1d84253aa699d3b143ecb975babf3887426eab09f2fd613",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-51.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-51.bin.gz",
+      "raw_bytes": 51159,
+      "stored_bytes": 4310,
+      "raw_sha256": "26baaa8e81810a6232e92c9704195f550bc8e9e0d27d22bdd0680988567a03e9",
+      "stored_sha256": "a0c98afa2d6e644357be947ad50d1d2be76e25065206405e254e95294fde0ad3",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-52.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-52.bin.gz",
+      "raw_bytes": 51581,
+      "stored_bytes": 4347,
+      "raw_sha256": "3d5a8cc3c944fd732ccef56936ffba3f8339213df4636be6898e21a3f958252e",
+      "stored_sha256": "c4043b848207e0e65e73a48ca151e9d13742869a718f8627af4dbf229b7c27f5",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-53.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-53.bin.gz",
+      "raw_bytes": 48129,
+      "stored_bytes": 4128,
+      "raw_sha256": "2148cb6445929e4c24a93afa9e12916df664171e902185c4b668c6771872c6ad",
+      "stored_sha256": "c67eac60dcd75df5cb788bda1b0fed7142bd444850051cb5ae22424af32a1aac",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-54.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-54.bin.gz",
+      "raw_bytes": 50787,
+      "stored_bytes": 4280,
+      "raw_sha256": "eaf90e2e4df5f8500e486cbdf49e34d01c79a4adf150079a000331ff0cb5727f",
+      "stored_sha256": "c8a0014ca4bbfe99647ec78e7f3998d81de0552295dfd490c3fd58cc50d6a8f1",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-55.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-55.bin.gz",
+      "raw_bytes": 46770,
+      "stored_bytes": 4007,
+      "raw_sha256": "230e7b0afa44feced037a885ccd082c1fbd398362df00f82c1b17b8f0e0d10a9",
+      "stored_sha256": "42153195a03e033aa2d184d682efc137237874d07acec03ca60377b86bd4c04a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-56.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-56.bin.gz",
+      "raw_bytes": 48498,
+      "stored_bytes": 4138,
+      "raw_sha256": "53c9c1b3e6e75b69736cc5e8e027c44f7bb97213ddfbb4175c55f3140ea4b1be",
+      "stored_sha256": "f3691e20de409589ffe425b1bcac26efbcf793116bdf329591fc1fadb0b3b48a",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-57.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-57.bin.gz",
+      "raw_bytes": 48498,
+      "stored_bytes": 4151,
+      "raw_sha256": "7c75b2c6167c37a9c57e665418320da492abf298b7eff094588df7b09540d098",
+      "stored_sha256": "9c9c59f1a80e558a84d35b26d3f4e01f6fd52589c4d748ac7558e625150f85d7",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-58.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-58.bin.gz",
+      "raw_bytes": 59658,
+      "stored_bytes": 4912,
+      "raw_sha256": "749cbd6af88863c6fa2f7cd3e88d3b4eb780c05cf07b67f0100e45564558b8d6",
+      "stored_sha256": "df729711b127ee3fca069659ba4b557d6e9603b7f2dc4c7bd2174bd4b5e27a93",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-59.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-59.bin.gz",
+      "raw_bytes": 47657,
+      "stored_bytes": 4064,
+      "raw_sha256": "24921df6adb12436eff2f8bd7486c02be7193efa509bda92b760d4849cb3a6b0",
+      "stored_sha256": "86831b31660f8d1fc55a219850fcf947b5005bc2e78ef84e0e6790a6cbcde9da",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-60.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-60.bin.gz",
+      "raw_bytes": 48445,
+      "stored_bytes": 4128,
+      "raw_sha256": "926b2c584822369e127e801e564d6af532a7c40e65732ff6aa5a784cc04d2338",
+      "stored_sha256": "b8320dacaf9db2d66fef651f23940451faaddd8f5060c0fe9394afa94c491407",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-61.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-61.bin.gz",
+      "raw_bytes": 47774,
+      "stored_bytes": 4080,
+      "raw_sha256": "ab91ff71cd54733da480c636ed3566b7869f9cd4c4b2d85d8d6a24df81a53e3e",
+      "stored_sha256": "f638409fbed056cd674d15e86d7c3404d63258e771ecd2f832a7f760c72d8faa",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-62.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-62.bin.gz",
+      "raw_bytes": 51463,
+      "stored_bytes": 4357,
+      "raw_sha256": "a58602da1cb5c7b46ca96864b0bd0b3c55e997b7d8eece4ab5e87aa5705ae6f2",
+      "stored_sha256": "fc25efe02516669c7d0a90b360ff03791fbaa36e0ad33c90b6813123c7d84478",
+      "roundtrip_verified": true
+    },
+    {
+      "logical_path": "single3/fixed-cuts-and-occupations/point-63.bin",
+      "stored_path": "single3/fixed-cuts-and-occupations/point-63.bin.gz",
+      "raw_bytes": 51095,
+      "stored_bytes": 4303,
+      "raw_sha256": "b4bf980d3e2ba3e257900fab6d27c7c10847822f80f76a0dcef0e355f3c818b6",
+      "stored_sha256": "61e399a986942454476105df30ec532e610643b5a8ec8a0353740a9c47f74c46",
+      "roundtrip_verified": true
+    }
+  ]
+}

@@ -1,0 +1,1375 @@
+{
+  "cpu_tick_units": "Linux /proc/self/stat user/system ticks, CLK_TCK captured by runner; tick granularity limits tiny phases",
+  "empty_union_preserves_exact_encoded_bytes": true,
+  "limits": {
+    "max_pending_integrals_per_label": 4096,
+    "max_rule_applications_per_label": 4096
+  },
+  "points": [
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -2,
+              0,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "requested",
+        "point": [
+          1,
+          -2,
+          0,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -2,
+              0,
+              1,
+              3,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "requested",
+        "point": [
+          1,
+          -2,
+          0,
+          1,
+          3,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -2,
+              0,
+              1,
+              3,
+              0,
+              0,
+              -1,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "requested",
+        "point": [
+          1,
+          -2,
+          0,
+          1,
+          3,
+          0,
+          0,
+          -1,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -2,
+              0,
+              1,
+              3,
+              0,
+              0,
+              -1,
+              0,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "requested",
+        "point": [
+          1,
+          -2,
+          0,
+          1,
+          3,
+          0,
+          0,
+          -1,
+          0,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -2,
+              1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "requested",
+        "point": [
+          1,
+          -2,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -2,
+              1,
+              3,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "requested",
+        "point": [
+          1,
+          -1,
+          -2,
+          1,
+          3,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "requested",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "requested",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              -1,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "frontier",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          1,
+          0,
+          -1,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "frontier",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -1,
+              1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "frontier",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "frontier",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          2,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "frontier",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          2,
+          0,
+          0,
+          0,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -1,
+              1,
+              2,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "frontier",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          2,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -1,
+              1,
+              3,
+              -1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "frontier",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          3,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    },
+    {
+      "application": {
+        "conditions": [],
+        "status": "Unresolved(NoApplicableRule)",
+        "terms": []
+      },
+      "reduction": {
+        "conditions": [],
+        "rule_applications": 0,
+        "terms": [],
+        "unresolved": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              -1,
+              -1,
+              1,
+              3,
+              0,
+              0,
+              -2,
+              -1,
+              1,
+              0,
+              0,
+              0,
+              0,
+              0,
+              0
+            ],
+            "reason": "NoApplicableRule"
+          }
+        ]
+      },
+      "selection": {
+        "kind": "frontier",
+        "point": [
+          1,
+          -1,
+          -1,
+          1,
+          3,
+          0,
+          0,
+          -2,
+          -1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    }
+  ],
+  "program_bytes": 5935226,
+  "rule_count": 3114,
+  "scope": "Read-only phase timing on a completed immutable native program. Decode validates original sources and replays all rules. Same-source empty union explicitly replays its unchanged rules, verified by byte-identical encoded programs. No discovery, altered proof order, numerical period or closure claim.",
+  "source_count": 232,
+  "source_identity": "rustflow-weighted-sources-v1:6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e:10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23:{\"measure\":\"independent occupied Cn and Hn; input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e; factors=[rustflow_occupied::q_0, rustflow_occupied::q_5, -(-rustflow_occupied::q_0+2*rustflow_occupied::q_1-rustflow_occupied::q_3), rustflow_occupied::q_3, -(-rustflow_occupied::q_0+2*rustflow_occupied::q_1+2*rustflow_occupied::q_2-rustflow_occupied::q_3-2*rustflow_occupied::q_4-rustflow_occupied::q_5), rustflow_occupied::q_2, rustflow_occupied::q_6, rustflow_occupied::q_8, rustflow_occupied::q_6-rustflow_occupied::q_7, 1-rustflow_occupied::q_6, rustflow_occupied::q_6, 1-rustflow_occupied::q_7, rustflow_occupied::q_7]; massless source origin evidence=joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=two-compact-independent-rank-one-blocks;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0, 3];shifted=[1, 2, 4];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_4+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_2)*-1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"-1*rustflow_occupied::{}::q_7+1\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"1\\\", \\\"-1\\\", \\\"0\\\", \\\"shell=0:0:9:10:0:1\\\", \\\"shell=1:3:11:12:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 1, virtual_affine_shift: [\\\"0\\\"], denominator_rows: [(1, [\\\"1\\\"], \\\"0\\\"), (2, [\\\"0\\\"], \\\"1\\\"), (4, [\\\"1\\\"], \\\"-1\\\")], block_assignments: [(1, Some(0)), (2, None), (4, Some(0))], block_representatives: [[\\\"1\\\"]], block_a_lower_bounds: [\\\"1\\\"], block_q_upper_bounds: [\\\"1\\\"] }; polynomial-closure-v1 order=legacy,shifted-temporal-U,shifted-common-boost,raw-Ward; original-completion-domain<=0; exact-energy-completions=[PolynomialEnergyCompletion { loop_index: 0, slot: 6, coefficient: Fraction { numerator: 1, denominator: 1 } }]; raw Ward deliberately omitted: no bound singleton-germ theorem; source presentation=polynomial-closure-v1; positive compact energy completion powers=false\",\"support\":\"real compact shell coordinates; [OccupiedShell { loop_index: 0, physical_slot: 0, upper_slot: 9, lower_slot: 10, mass_squared: 0, chemical_potential: Fraction { numerator: 1, denominator: 1 } }, OccupiedShell { loop_index: 1, physical_slot: 3, upper_slot: 11, lower_slot: 12, mass_squared: 0, chemical_potential: Fraction { numerator: 1, denominator: 1 } }]; certified joint dimensional origin zero jets: occupied loop 0, cut slot 0>=1 and lower-energy slot 10>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint 1>0; certified joint dimensional origin zero jets: occupied loop 1, cut slot 3>=1 and lower-energy slot 12>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint 1>0; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=1;allowed=[2];nonpositive=[1, 4];virtual-null=[\\\"1\\\"]\",\"orientation\":\"future first 2 loops; q=(-i PE0,-PEvec); inverse routing=[[1, 0, 0], [0, 0, 1], [1, -1, 0]]; determinant=1\",\"normalization\":\"virtual d^Dk/(i pi^(D/2)); occupied d^Dq/pi^(D/2); Euclidean target Wick phases already included\",\"branch\":\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=two-compact-independent-rank-one-blocks;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0, 3];shifted=[1, 2, 4];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_4+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_2)*-1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"-1*rustflow_occupied::{}::q_7+1\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"1\\\", \\\"-1\\\", \\\"0\\\", \\\"shell=0:0:9:10:0:1\\\", \\\"shell=1:3:11:12:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 1, virtual_affine_shift: [\\\"0\\\"], denominator_rows: [(1, [\\\"1\\\"], \\\"0\\\"), (2, [\\\"0\\\"], \\\"1\\\"), (4, [\\\"1\\\"], \\\"-1\\\")], block_assignments: [(1, Some(0)), (2, None), (4, Some(0))], block_representatives: [[\\\"1\\\"]], block_a_lower_bounds: [\\\"1\\\"], block_q_upper_bounds: [\\\"1\\\"] }; joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\",\"deformation\":\"native Di-eta on [1, 2, 4]; physical shells and upper/lower supports fixed; input indices and coefficients fixed\"}:zero-tail-storage-v1:physical=13:capacity=16",
+  "source_schema": "rustred.guarded-source-program.v2",
+  "timing_scope": "Native execution separated from to_expression/string/JSON conversion. One pass per phase on a shared host; no exclusive profiling or scan/substitution isolation.",
+  "timings": [
+    {
+      "phase": "read_program_bytes",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00367503
+    },
+    {
+      "phase": "inspect_envelope",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 7.25e-6
+    },
+    {
+      "phase": "decode_program_record",
+      "system_cpu_ticks": 1,
+      "user_cpu_ticks": 19,
+      "wall_seconds": 0.210507799
+    },
+    {
+      "phase": "import_symbolica_and_coefficient_table",
+      "system_cpu_ticks": 1,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.014767843
+    },
+    {
+      "phase": "construct_exact_source_context",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.003273069
+    },
+    {
+      "phase": "decode_generated_and_replay_all_rules",
+      "system_cpu_ticks": 7,
+      "user_cpu_ticks": 3444,
+      "wall_seconds": 34.764955375
+    },
+    {
+      "phase": "encode_before_empty_union",
+      "system_cpu_ticks": 1,
+      "user_cpu_ticks": 26,
+      "wall_seconds": 0.264626643
+    },
+    {
+      "phase": "construct_empty_same_source_program",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 4.13e-6
+    },
+    {
+      "phase": "union_replayed_with_empty_same_source",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 3383,
+      "wall_seconds": 34.064541613
+    },
+    {
+      "phase": "encode_after_empty_union",
+      "system_cpu_ticks": 1,
+      "user_cpu_ticks": 25,
+      "wall_seconds": 0.261938398
+    },
+    {
+      "phase": "point-00-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000387591
+    },
+    {
+      "phase": "point-00-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000012471
+    },
+    {
+      "phase": "point-00-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000253631
+    },
+    {
+      "phase": "point-00-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.0000727
+    },
+    {
+      "phase": "point-01-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00021374
+    },
+    {
+      "phase": "point-01-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 4.26e-6
+    },
+    {
+      "phase": "point-01-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000219891
+    },
+    {
+      "phase": "point-01-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00002113
+    },
+    {
+      "phase": "point-02-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000220461
+    },
+    {
+      "phase": "point-02-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 3.75e-6
+    },
+    {
+      "phase": "point-02-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00021723
+    },
+    {
+      "phase": "point-02-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001904
+    },
+    {
+      "phase": "point-03-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00020993
+    },
+    {
+      "phase": "point-03-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 3.44e-6
+    },
+    {
+      "phase": "point-03-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00021598
+    },
+    {
+      "phase": "point-03-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001856
+    },
+    {
+      "phase": "point-04-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000221001
+    },
+    {
+      "phase": "point-04-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 3.58e-6
+    },
+    {
+      "phase": "point-04-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000217121
+    },
+    {
+      "phase": "point-04-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001884
+    },
+    {
+      "phase": "point-05-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000212241
+    },
+    {
+      "phase": "point-05-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 4.26e-6
+    },
+    {
+      "phase": "point-05-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000217841
+    },
+    {
+      "phase": "point-05-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001782
+    },
+    {
+      "phase": "point-06-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000212161
+    },
+    {
+      "phase": "point-06-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 3.651e-6
+    },
+    {
+      "phase": "point-06-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000227531
+    },
+    {
+      "phase": "point-06-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001899
+    },
+    {
+      "phase": "point-07-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000219021
+    },
+    {
+      "phase": "point-07-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 3.57e-6
+    },
+    {
+      "phase": "point-07-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000223941
+    },
+    {
+      "phase": "point-07-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00002018
+    },
+    {
+      "phase": "point-08-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000223561
+    },
+    {
+      "phase": "point-08-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 3.94e-6
+    },
+    {
+      "phase": "point-08-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00022205
+    },
+    {
+      "phase": "point-08-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.00001869
+    },
+    {
+      "phase": "point-09-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000219821
+    },
+    {
+      "phase": "point-09-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 3.98e-6
+    },
+    {
+      "phase": "point-09-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00022748
+    },
+    {
+      "phase": "point-09-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001858
+    },
+    {
+      "phase": "point-10-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00021306
+    },
+    {
+      "phase": "point-10-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 4.02e-6
+    },
+    {
+      "phase": "point-10-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000229711
+    },
+    {
+      "phase": "point-10-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.0000181
+    },
+    {
+      "phase": "point-11-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000212071
+    },
+    {
+      "phase": "point-11-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 3.5e-6
+    },
+    {
+      "phase": "point-11-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000224741
+    },
+    {
+      "phase": "point-11-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.0000207
+    },
+    {
+      "phase": "point-12-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000214661
+    },
+    {
+      "phase": "point-12-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 4.16e-6
+    },
+    {
+      "phase": "point-12-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000220531
+    },
+    {
+      "phase": "point-12-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001847
+    },
+    {
+      "phase": "point-13-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000214611
+    },
+    {
+      "phase": "point-13-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 3.74e-6
+    },
+    {
+      "phase": "point-13-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00022119
+    },
+    {
+      "phase": "point-13-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001937
+    },
+    {
+      "phase": "point-14-apply-native",
+      "system_cpu_ticks": 1,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000214721
+    },
+    {
+      "phase": "point-14-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 3.93e-6
+    },
+    {
+      "phase": "point-14-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 1,
+      "wall_seconds": 0.00022107
+    },
+    {
+      "phase": "point-14-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001902
+    },
+    {
+      "phase": "point-15-apply-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.000213111
+    },
+    {
+      "phase": "point-15-apply-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 4.35e-6
+    },
+    {
+      "phase": "point-15-reduce-native",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00022711
+    },
+    {
+      "phase": "point-15-reduce-expression-json",
+      "system_cpu_ticks": 0,
+      "user_cpu_ticks": 0,
+      "wall_seconds": 0.00001904
+    }
+  ]
+}

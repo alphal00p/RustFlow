@@ -1,0 +1,50 @@
+{
+  "single3": {
+    "bin": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-008-provisional.bin",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.bin",
+      "sha256": "e3774e0c8c0273674886ab7fe244a535bbf9df36b18991f27889f07ab1b90479",
+      "bytes": 17092671
+    },
+    "json": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-008-provisional.json",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/single3/input.json",
+      "sha256": "ae7d16de1221a2ed39c95252da1c83a8442f0cc5e444e33a98dedde06effc3c8",
+      "bytes": 3306386
+    },
+    "checkpoint": {
+      "round": 8,
+      "physical_arity": 11,
+      "storage_capacity": 16,
+      "native_rule_count": 13850
+    },
+    "point_counts": {
+      "requested": 8,
+      "frontier": 8
+    }
+  },
+  "double": {
+    "bin": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-004-provisional.bin",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/double/input.bin",
+      "sha256": "c37c0c36e492bc5c10a4b7371e79e1ed3db150fa1311a0b595f7c243a22b79bb",
+      "bytes": 5935226
+    },
+    "json": {
+      "source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-004-provisional.json",
+      "copy": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-native-program-work-profile/double/input.json",
+      "sha256": "4145254f73c5d7cec1fc3add23909b0ee44b5d16449ab9e9ef3d8eec04ff5aca",
+      "bytes": 2686423
+    },
+    "checkpoint": {
+      "round": 4,
+      "physical_arity": 13,
+      "storage_capacity": 16,
+      "native_rule_count": 3114
+    },
+    "point_counts": {
+      "requested": 8,
+      "frontier": 8
+    }
+  }
+}

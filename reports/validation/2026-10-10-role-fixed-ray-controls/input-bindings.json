@@ -1,0 +1,46 @@
+{
+  "single3": {
+    "input.bin": {
+      "logical_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.bin",
+      "stored_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.bin",
+      "stored_sha256": "2742d22249ad0de84452c2358044e9932c30e454b9481fce0d66b38634ab7c5c",
+      "sha256": "2742d22249ad0de84452c2358044e9932c30e454b9481fce0d66b38634ab7c5c"
+    },
+    "input.json": {
+      "logical_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.json",
+      "stored_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/single3/input.json.gz",
+      "stored_sha256": "9479433d29d4fd5818171dcc7edcf6110f821baf86197c3604702076d72e7aca",
+      "sha256": "49aefcc4517c2d53e57658da5880f40ca8c6f7a81d130356e4cfa95fceb589a8"
+    },
+    "initial_checkpoint": {
+      "logical_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-000-provisional.json",
+      "stored_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-larger-frontier-controls/single3/native-closure/round-000-provisional.json.gz",
+      "stored_sha256": "733b79705d86b1c87c8b7112bcb97229f720cf7e18a85944cdfc35e0ebc6f77f",
+      "raw_sha256": "2a6713e3b94438c4750832122ccd8fba254492ae45bdba10e1ce01ded897c9ae",
+      "requests": 61
+    },
+    "selected_points": 64
+  },
+  "double": {
+    "input.bin": {
+      "logical_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/input.bin",
+      "stored_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/input.bin",
+      "stored_sha256": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548",
+      "sha256": "2b5964b1f9e86518c0986e07c6e80c0e367ae85f6569de4242a6b77f94aee548"
+    },
+    "input.json": {
+      "logical_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/input.json",
+      "stored_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-targeted-native-depth-controls/double/input.json.gz",
+      "stored_sha256": "2aa0941c754ae736f325671017edecbdee93014bbee7af930971aa0660b662e1",
+      "sha256": "ab30ed8b2fe329e32ac2c43409d2b28306a2b08c4eb22ef95466da966ab4ee8f"
+    },
+    "initial_checkpoint": {
+      "logical_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-000-provisional.json",
+      "stored_source": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-larger-frontier-controls/double/native-closure/round-000-provisional.json.gz",
+      "stored_sha256": "b6621a7142ae15d57e3f26ab076011e1a7c2967096bf42c64cad9ef61db54769",
+      "raw_sha256": "2ad3f7542ef534b4ab79a63547e2a3002f50e7162750d48bfe5f23e572456fde",
+      "requests": 32
+    },
+    "selected_points": 35
+  }
+}
