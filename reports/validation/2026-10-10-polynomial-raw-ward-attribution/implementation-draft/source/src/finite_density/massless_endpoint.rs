@@ -1956,23 +1956,6 @@ impl MasslessFlowEvidence {
         })
     }
 
-    /// Deliberately omit only the extra Ward theorem for other sealed classes.
-    /// The family is still checked even when no Ward row is emitted.
-    pub(crate) fn optional_singleton_raw_ward_evidence<const N: usize>(
-        &self,
-        family: &super::geometry::OccupiedCutFamily,
-        shifted: &[usize],
-        eta: Symbol,
-    ) -> Result<Option<SingletonRawWardEvidence>> {
-        self.validate_family(family, shifted)?;
-        match &self.class {
-            CertifiedEndpointClass::SingletonGerm { .. } => self
-                .singleton_raw_ward_evidence::<N>(family, shifted, eta)
-                .map(Some),
-            CertifiedEndpointClass::RankOneBlocks { .. } => Ok(None),
-        }
-    }
-
     pub fn input_identity(&self) -> &str {
         &self.input_identity
     }
@@ -2344,13 +2327,13 @@ mod raw_ward_draft_tests {
         for mapping in 0..3 {
             let mut input = definition();
             if mapping == 1 {
-                // Nonunit routing gives physical completion 2 E_a. Unit
-                // edge charges still form one directed fermion cycle; the
-                // integer loop charges compensate the rational loop routing.
-                input.edges[0].routing = vec!["1/2".into(), "0".into()];
-                input.edges[1].routing = vec!["0".into(), "1/2".into()];
-                input.edges[2].routing = vec!["1/2".into(), "-1/2".into()];
-                input.loop_charges = vec![vec![2], vec![2]];
+                // Nonunit routing gives physical completion E_a/2. Charges
+                // remain exactly conserved; no hand-edited proof object.
+                input.edges[0].routing = vec!["2".into(), "0".into()];
+                input.edges[1].routing = vec!["0".into(), "2".into()];
+                input.edges[2].routing = vec!["2".into(), "-2".into()];
+                input.edges[0].charges = vec![2];
+                input.edges[1].charges = vec![2];
             } else if mapping == 2 {
                 input.edges[0].routing = vec!["1".into(), "1".into()];
                 input.edges[1].routing = vec!["0".into(), "1".into()];
@@ -2358,20 +2341,6 @@ mod raw_ward_draft_tests {
                 input.loop_charges = vec![vec![0], vec![1]];
             }
             let (_, family, shifted, origin) = data(input, &[0]);
-            if mapping == 1 {
-                assert_eq!(family.routing_determinant(), &Rational::from((1, 2)));
-                let completions = family.polynomial_compact_energy_completions().unwrap();
-                assert_eq!(completions.len(), 1);
-                assert_eq!(completions[0].coefficient(), &Rational::from(2));
-            } else if mapping == 2 {
-                assert_eq!(family.routing_determinant(), &Rational::from(-1));
-                assert!(
-                    family
-                        .polynomial_compact_energy_completions()
-                        .unwrap()
-                        .is_empty()
-                );
-            }
             let certificate = origin
                 .singleton_raw_ward_evidence::<12>(&family, &shifted, eta)
                 .unwrap();
@@ -2489,12 +2458,7 @@ mod raw_ward_draft_tests {
         let (input, family, shifted, origin) = data(definition(), &[0]);
         let epsilon = symbol!("raw_ward_draft::epsilon");
         let eta = symbol!("raw_ward_draft::eta_factory");
-        let old_opts = WeightedSourceOptions::default();
-        let opts = WeightedSourceOptions {
-            policy: super::super::preparation::WeightedSourcePolicy::PolynomialClosure,
-            ..old_opts
-        };
-        let ward_origin = MasslessFlowEvidence::new(&input, &family, &shifted, opts).unwrap();
+        let opts = WeightedSourceOptions::default();
         let ordinary = family
             .guarded_sources_with_massless_origin::<12>(
                 epsilon,
@@ -2504,12 +2468,12 @@ mod raw_ward_draft_tests {
                 16,
                 vec![],
                 identity(),
-                old_opts,
+                opts,
                 &origin,
             )
             .unwrap();
         let ward = family
-            .guarded_sources_with_massless_origin::<12>(
+            .guarded_sources_with_massless_raw_ward::<12>(
                 epsilon,
                 4,
                 eta,
@@ -2518,7 +2482,7 @@ mod raw_ward_draft_tests {
                 vec![],
                 identity(),
                 opts,
-                &ward_origin,
+                &origin,
             )
             .unwrap();
         assert_ne!(
@@ -2561,7 +2525,7 @@ mod raw_ward_draft_tests {
         };
         assert!(
             family
-                .guarded_sources_with_massless_origin::<12>(
+                .guarded_sources_with_massless_raw_ward::<12>(
                     epsilon,
                     4,
                     eta,

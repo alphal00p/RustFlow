@@ -1,0 +1,4 @@
+{"profile": [35, 32, 5], "wall_seconds": 0.12502496223896742}
+{"profile": [50, 64, 5], "wall_seconds": 0.6200765930116177}
+{"profile": [65, 96, 5], "wall_seconds": 2.240601236000657}
+{"profile": [65, 96, 10], "wall_seconds": 1.6308522033505142}

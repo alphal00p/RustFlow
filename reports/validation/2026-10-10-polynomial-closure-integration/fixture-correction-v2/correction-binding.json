@@ -1,0 +1,78 @@
+{
+  "scope": "Fixture-only correction after two new test fixtures correctly failed public nonbranching-cycle admission. All production items and graph checks unchanged; public route normalization remains rational and edge charges remain unit. Rust tests await coherent v2 build.",
+  "files": {
+    "src/finite_density/massless_endpoint.rs": {
+      "before_sha256": "4828eec11ab554faf78efd540e2817182a005aa10fbed044196d96069e01b60d",
+      "after_sha256": "3571cda14af8ae2e089ef97108fa9569a4b9af22a21b3ca18be569b11ad01696"
+    },
+    "src/finite_density/measure.rs": {
+      "before_sha256": "6df100881b39803db9d3b4233cc2132a8778d51fdc7e3ee84ebe9d6f80665abb",
+      "after_sha256": "07b3a427b1b597b76038acd82b22d33b06508cb33ecd5643dc1effdb85c1d443"
+    }
+  },
+  "patch_sha256": "8050804ba435117ee46c4f909419bac30e3e2ae3962adc3b472f95d0a1475858",
+  "exact_fixture_checks": [
+    {
+      "name": "rational_nonunit",
+      "rows": [
+        [
+          "1/2",
+          "0"
+        ],
+        [
+          "0",
+          "1/2"
+        ],
+        [
+          "1/2",
+          "-1/2"
+        ]
+      ],
+      "loop_charges": [
+        2,
+        2
+      ],
+      "edge_charges": [
+        1,
+        1,
+        0
+      ],
+      "incidence_checked": true,
+      "routed_charges_checked": true,
+      "expected_occupied_routing_determinant": "1/2",
+      "expected_medium_completion_map": "2 E_0"
+    },
+    {
+      "name": "shear",
+      "rows": [
+        [
+          "1",
+          "1"
+        ],
+        [
+          "0",
+          "1"
+        ],
+        [
+          "1",
+          "0"
+        ]
+      ],
+      "loop_charges": [
+        0,
+        1
+      ],
+      "edge_charges": [
+        1,
+        1,
+        0
+      ],
+      "incidence_checked": true,
+      "routed_charges_checked": true,
+      "expected_occupied_routing_determinant": "-1",
+      "expected_medium_completion_map": "E_0-E_virtual, E_virtual"
+    }
+  ],
+  "cargo_run": false,
+  "rustfmt": "--edition 2024 --config skip_children=true"
+}

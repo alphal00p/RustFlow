@@ -1,0 +1,29 @@
+{
+  "captured_utc": "2026-10-10T04:05:32.676845+00:00",
+  "command": [
+    "timeout",
+    "180",
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/reference.py",
+    "--output",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/reference.json"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python": {
+      "resolved_path": "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3.14",
+      "sha256": "9bfa54c39ad52bd64ea04e2b0c88599c0ddfcc2da5d3213a2f9fc1e833fa8e1c",
+      "size_bytes": 16528
+    },
+    "reports/validation/2026-10-10-connected-hard-boundary-check/reference.py": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-connected-hard-boundary-check/reference.py",
+      "sha256": "d45f3e41f3234fe7b118b84850d9f017b53ee57e658fc9df612adf2a65c34889",
+      "size_bytes": 6734
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

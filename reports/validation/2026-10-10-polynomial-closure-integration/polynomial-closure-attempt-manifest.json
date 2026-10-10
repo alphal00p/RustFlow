@@ -1,0 +1,257 @@
+{
+  "schema": 1,
+  "scope": "Frozen complete first-attempt artifacts, including failed-fixture sources and correction evidence. No passing release or new numerical acceptance claim.",
+  "files": {
+    "capture-frozen-build.py": {
+      "sha256": "a1f36db9177de6330df3d986e24218ac08ad916fbe4b373f058b3110888fc397",
+      "bytes": 5397
+    },
+    "capture-polynomial-closure-build.py": {
+      "sha256": "1ce85d0ab4ab6def58beddc5178df5ba4a5b4f8c63110cfe68d26ca220900784",
+      "bytes": 931
+    },
+    "capture-source-snapshot.py": {
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+      "bytes": 2075
+    },
+    "compare-completed-predictions.py": {
+      "sha256": "6c089b10e06292f52386352123412a0c1ec48e5699d4a7b7a49bd6cb8baed595",
+      "bytes": 9194
+    },
+    "comparison-plan.json": {
+      "sha256": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c",
+      "bytes": 5399
+    },
+    "cut0-saved-condition-samples.json": {
+      "sha256": "41cf7c68230edc1de0579decea301df36aeff1fab4f56c685e763d4d431c0edd",
+      "bytes": 1635
+    },
+    "downstream-boundary-audit.md": {
+      "sha256": "f5a4c01b5f97f03ea1f9501f109b1c532230b158882bd3c3668e4180fc7bbcc1",
+      "bytes": 10907
+    },
+    "fixture-correction-v2/correction-binding.json": {
+      "sha256": "f6e32f78ae202d853d62bec567c10d5f5e30f75aafcb1fd45a4b2a2d339ab8c1",
+      "bytes": 2002
+    },
+    "fixture-correction-v2/failed-source/src/finite_density/massless_endpoint.rs": {
+      "sha256": "4828eec11ab554faf78efd540e2817182a005aa10fbed044196d96069e01b60d",
+      "bytes": 116447
+    },
+    "fixture-correction-v2/failed-source/src/finite_density/measure.rs": {
+      "sha256": "6df100881b39803db9d3b4233cc2132a8778d51fdc7e3ee84ebe9d6f80665abb",
+      "bytes": 75773
+    },
+    "fixture-correction-v2/fixture-only.patch": {
+      "sha256": "8050804ba435117ee46c4f909419bac30e3e2ae3962adc3b472f95d0a1475858",
+      "bytes": 4336
+    },
+    "fixture-correction-v2/initial-source-binding.json": {
+      "sha256": "4a8660fd7f286363b45f6915cead880d14a13f9fc71dfd6e96ae38dac7db03f4",
+      "bytes": 875
+    },
+    "frozen_sources.py": {
+      "sha256": "98d5b38c8bba74b5aa6e15cebc29eefae2c68979ab9ae8b2805aae23337c092f",
+      "bytes": 1895
+    },
+    "helper-template-provenance.json": {
+      "sha256": "467903d51de39b7b62b350aaae41c86acd3243fa6b5d881cc2550f32822db116",
+      "bytes": 1494
+    },
+    "launch-polynomial-closure-build.py": {
+      "sha256": "066ae29d8babf0b902e62289e4bea45365c8a123a7cd3e6253f1d98d28e28ec9",
+      "bytes": 2615
+    },
+    "polynomial-closure-actual62-source-equivalence.json": {
+      "sha256": "b2ea8ee6679de1050d99b5f0d40273400126d564c7b21594696fd16fe2ac4aad",
+      "bytes": 513935
+    },
+    "polynomial-closure-attempt-summary.json": {
+      "sha256": "b1f8f6cf968893d6a2138e231c9bb486fc5e387b061217ac21524f3ee6ae6da6",
+      "bytes": 4224
+    },
+    "polynomial-closure-build-provenance.json": {
+      "sha256": "ed77e3fd501a46ff255bcae7f874df4dcc2b70e824a8fecf62ed40d4984b7f12",
+      "bytes": 5411
+    },
+    "polynomial-closure-build-resources.json": {
+      "sha256": "d93e28f510c79a01d73d3029edcfc19835ccf273152e1b5559de142b1bc5bc1d",
+      "bytes": 796
+    },
+    "polynomial-closure-build-resources.log": {
+      "sha256": "98e9af159635b161c1d5d09bf7ec241dc694fbbcfe91be33c1a568a94c5ae970",
+      "bytes": 3344
+    },
+    "polynomial-closure-build-resources.provenance.json": {
+      "sha256": "f48b8d052d25ff2aae440bab09f9c235d93e3a9cf029df67195ff1e19e81ca50",
+      "bytes": 1183
+    },
+    "polynomial-closure-capacity-binding.json": {
+      "sha256": "6110bca4f05345f8eb734d2497e5d1f4ef704fbafa94a321aebe46e49dbafd71",
+      "bytes": 525
+    },
+    "polynomial-closure-capacity-resources.json": {
+      "sha256": "434ee2e773b934baacd3e03598c3b96af9a1756eb146848ec4d16d2bc80edb7d",
+      "bytes": 401
+    },
+    "polynomial-closure-capacity-resources.log": {
+      "sha256": "79d6725df76851483086e2541f414f1941bbb58f8b82a9648fd22a4c31045495",
+      "bytes": 364
+    },
+    "polynomial-closure-capacity-resources.provenance.json": {
+      "sha256": "5058122863cca9a85db70bfc6965a67822cd91421c562f685452b34bfd302401",
+      "bytes": 859
+    },
+    "polynomial-closure-flow-boundary-binding.json": {
+      "sha256": "c178ecc76b850bad64733709b8ac9eb7d30c1fd7fdfbbea4e9eb9233c5874109",
+      "bytes": 535
+    },
+    "polynomial-closure-flow-boundary-resources.json": {
+      "sha256": "26567923d48ced3d3d33818ddb02641aa1a06961f39749d0c6378c0f32bd260f",
+      "bytes": 394
+    },
+    "polynomial-closure-flow-boundary-resources.log": {
+      "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "bytes": 574
+    },
+    "polynomial-closure-flow-boundary-resources.provenance.json": {
+      "sha256": "b91c767eb7c29c5b4d76e1b028fff671ed5c36e86414b22f0b6de459acb48caf",
+      "bytes": 874
+    },
+    "polynomial-closure-lib-binding.json": {
+      "sha256": "8d5139a01204f65c6d7e5b978b0166a619aee1b0a3c7a33c9becf21c73d078cd",
+      "bytes": 539
+    },
+    "polynomial-closure-lib-resources.json": {
+      "sha256": "2e03230c07f351d36819456f7e6994fd08d45d358ff026f8b8d264aa2add1236",
+      "bytes": 406
+    },
+    "polynomial-closure-lib-resources.log": {
+      "sha256": "220aed7b745200d10b7818dcab889920b0407063991445e06bdb26f59936a9df",
+      "bytes": 11390
+    },
+    "polynomial-closure-lib-resources.provenance.json": {
+      "sha256": "472113e646684cdec4c9be1c540e83152a2304e8eb897ebe26d301e481a8bc4f",
+      "bytes": 862
+    },
+    "polynomial-closure-massless-sources-binding.json": {
+      "sha256": "52a06d42e6f757eaba1ff4ea88abe083b994fb6313550184b8d396e9fc4463ac",
+      "bytes": 541
+    },
+    "polynomial-closure-massless-sources-resources.json": {
+      "sha256": "1204b239e0072702a641d292a31e5c90c4841cdc0db871d0a497eb6304fed550",
+      "bytes": 408
+    },
+    "polynomial-closure-massless-sources-resources.log": {
+      "sha256": "9a423b0549e1d3c579e38881dca906fad8fcb1aed415b5d4e661e95df7a5c09e",
+      "bytes": 435
+    },
+    "polynomial-closure-massless-sources-resources.provenance.json": {
+      "sha256": "be7e820c91528c96fc0b36d1ebbfbb818fe08cbbb1807961df035bd9cb63438e",
+      "bytes": 883
+    },
+    "polynomial-closure-native-gate-reuse.json": {
+      "sha256": "a76c9ed8cf0e6f7cddb3888ea1059a12f85bb75ea8599852a01b7efa1268aace",
+      "bytes": 2019
+    },
+    "polynomial-closure-polynomial-sources-binding.json": {
+      "sha256": "c46b89852a59df1a51993bf4c6b16f39151ddebaa17c4861a8f074d0129c93a8",
+      "bytes": 1006
+    },
+    "polynomial-closure-polynomial-sources-resources.json": {
+      "sha256": "80e12cafb4a7703d19abad81eba4bb322df9e7b0c2ce62ae3ca740ada0e58d2b",
+      "bytes": 411
+    },
+    "polynomial-closure-polynomial-sources-resources.log": {
+      "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596",
+      "bytes": 188
+    },
+    "polynomial-closure-polynomial-sources-resources.provenance.json": {
+      "sha256": "b68b7bf40a1d2af98719f3ad84df386d961301743f05a0cf2d618d84aa6f3437",
+      "bytes": 889
+    },
+    "polynomial-closure-python-binding.json": {
+      "sha256": "1ab584ccb29241174ce4e9b663aa2e3f51837965634a8f8ff8d7e33547052b9d",
+      "bytes": 521
+    },
+    "polynomial-closure-python-resources.json": {
+      "sha256": "dec71e1299a3ae2613238520d86e6b490aadc90583bfd825e9126900ac4e1463",
+      "bytes": 386
+    },
+    "polynomial-closure-python-resources.log": {
+      "sha256": "acfedd322457a6a2d0e6c8e839940993c85dc5bd383aef6b48bf2597c56556e8",
+      "bytes": 193
+    },
+    "polynomial-closure-python-resources.provenance.json": {
+      "sha256": "57cdbd1d3aeee15777d97b4c27f3ebf6bc193fb3074fdb5dccb2801de3c9748b",
+      "bytes": 853
+    },
+    "polynomial-closure-source-fingerprint-binding.json": {
+      "sha256": "4ddfb3de1671dc3d3b9dafee530ca76d7c7e801e11bfaccbe58be57ab2cb6858",
+      "bytes": 530
+    },
+    "polynomial-closure-source-fingerprint-resources.json": {
+      "sha256": "c712d263ab4295662115f3d782703dfcd8bbdbb64f39b9ab9230995700eb0c85",
+      "bytes": 397
+    },
+    "polynomial-closure-source-fingerprint-resources.log": {
+      "sha256": "c5ebdf8e4f411449dd474564964dcca57b8319973e3d2863bc9ef7b958623e00",
+      "bytes": 4205
+    },
+    "polynomial-closure-source-fingerprint-resources.provenance.json": {
+      "sha256": "bce720ca465b127640aed51b2918dfb8a2e70eefcba279b405949911bf131d12",
+      "bytes": 841
+    },
+    "polynomial-closure-source-hashes.json": {
+      "sha256": "2fd4cb66374ef573d0737b225f5fe55281b7a092bc65973496839b34c7b13ef8",
+      "bytes": 377124
+    },
+    "reuse-native-gate.py": {
+      "sha256": "e51aa7b7e8cccee7ba99fa6e29f870992dbd959d67403111e8ad792e062b567f",
+      "bytes": 3285
+    },
+    "run-frozen-root-gate.py": {
+      "sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+      "bytes": 4005
+    },
+    "run-massive-regression.py": {
+      "sha256": "98339fb63456257a69828217d15d5ddffeb289e10225e81feeaaaac051d92687",
+      "bytes": 4477
+    },
+    "run-resource-command.py": {
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    },
+    "run-root-gates.py": {
+      "sha256": "c06e87f62ede7b073eff8b33d941b0237a9ef1d9f8e3db3e17d30249483afdff",
+      "bytes": 966
+    },
+    "run-three-loop-gate.py": {
+      "sha256": "52ff22a97a785b0498c00d5b888d6d5e4ba3f1d55291d2e889463f9c3cf59154",
+      "bytes": 4919
+    },
+    "run-two-loop-gate.py": {
+      "sha256": "62aaa8d48ba34e3b68c846640f3cd35cba4070dc1ee41c34edb652b096ee1ae0",
+      "bytes": 4723
+    },
+    "scheduler-contingency/design.md": {
+      "sha256": "df3daf884741389bf7c5760400d0a95ca68882c93b6a1f5d46a698faec900414",
+      "bytes": 12626
+    },
+    "scheduler-contingency/provenance.json": {
+      "sha256": "78e21a2a9f58bf8c134a7d654862048c64ba858b6b70f6787c0ec36ea8567b9e",
+      "bytes": 1325
+    },
+    "summarize-frozen-root-gates.py": {
+      "sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e",
+      "bytes": 4149
+    },
+    "summarize-initial-attempt.py": {
+      "sha256": "ae5536ee1828e6978553da0ad669b971a7a8e3011402b3c3b82fb0d27e4ae207",
+      "bytes": 5906
+    }
+  },
+  "file_count": 62,
+  "bytes": 1228169,
+  "summary_sha256": "b1f8f6cf968893d6a2138e231c9bb486fc5e387b061217ac21524f3ee6ae6da6"
+}

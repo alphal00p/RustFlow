@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/reference.py",
+    "--output",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/reference.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 4.70300935395062,
+  "user_seconds": 4.634952,
+  "system_seconds": 0.037714,
+  "peak_child_rss_kib": 18496,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

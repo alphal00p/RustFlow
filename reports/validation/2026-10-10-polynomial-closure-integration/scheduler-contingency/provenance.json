@@ -1,0 +1,35 @@
+{
+  "status": "unimplemented contingency design; no production changes or compilation",
+  "design": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration/scheduler-contingency/design.md",
+    "sha256": "df3daf884741389bf7c5760400d0a95ca68882c93b6a1f5d46a698faec900414",
+    "bytes": 12626
+  },
+  "read_only_evidence": [
+    {
+      "path": "src/finite_density/reduction.rs",
+      "sha256": "cf76ba23e1a4aa6b875bea5ee0d5cb26e208d5ccb20b7048ea798e15c1714928",
+      "bytes": 92008
+    },
+    {
+      "path": "src/finite_density/reduction/active.rs",
+      "sha256": "78691178fe2b453f94b95f2bd03ed3062ebf86acc39beaab796805fcaa0c43af",
+      "bytes": 28533
+    },
+    {
+      "path": "src/finite_density/guarded.rs",
+      "sha256": "6ec1ca3444f82b3de6d9943509848e0c9f06cc71cd81b6057403731844eedf56",
+      "bytes": 39240
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-source-portfolio-experiment/active-resume/pilot.rs",
+      "sha256": "167da094aa4f3afac4dd9e84c78d868c58744163a28560dfc411cd59d3cd94df",
+      "bytes": 31487
+    },
+    {
+      "path": "reports/validation/2026-10-10-native-source-portfolio-experiment/active-resume/polynomial62-baseline/progress.json",
+      "sha256": "475547009056a6d6996e5c4a2d2596da88039532611363c206880b4dc1ca0089",
+      "bytes": 2915
+    }
+  ]
+}

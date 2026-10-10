@@ -1,0 +1,1693 @@
+--- a/src/finite_density/geometry.rs
++++ b/src/finite_density/geometry.rs
+@@ -29,6 +29,27 @@
+     pub loop_index: usize,
+     pub coefficient: Rational,
+     pub mass_squared: Rational,
++}
++
++/// Exact factor-map certificate for polynomial source reindexing only.
++/// This is deliberately distinct from massive-energy nonsingularity evidence:
++/// it never grants positive completion powers or rational vector fields.
++#[derive(Clone, Debug)]
++pub(crate) struct PolynomialEnergyCompletion {
++    loop_index: usize,
++    slot: usize,
++    coefficient: Rational,
++}
++impl PolynomialEnergyCompletion {
++    pub(crate) fn loop_index(&self) -> usize {
++        self.loop_index
++    }
++    pub(crate) fn slot(&self) -> usize {
++        self.slot
++    }
++    pub(crate) fn coefficient(&self) -> &Rational {
++        &self.coefficient
++    }
+ }
+ 
+ /// Native factors in Gram coordinates, followed by contractions with u (u²=1).
+@@ -365,6 +386,77 @@
+         None
+     }
+ 
++    /// Match exactly c E_a among ordinary completion factors for occupied a.
++    /// A sum/mixed energy, constant offset, virtual energy, nonordinary factor,
++    /// or zero coefficient receives no certificate. An absent map means no
++    /// shifted source for that slot; no reciprocal factor is introduced.
++    pub(crate) fn polynomial_compact_energy_completions(
++        &self,
++    ) -> Result<Vec<PolynomialEnergyCompletion>> {
++        let scalar = self
++            .loops
++            .checked_add(1)
++            .and_then(|n| self.loops.checked_mul(n))
++            .map(|n| n / 2)
++            .ok_or_else(|| Error::Limit("polynomial energy coordinate overflow".into()))?;
++        if self.coordinates.len()
++            != scalar
++                .checked_add(self.loops)
++                .ok_or_else(|| Error::Limit("polynomial energy coordinate count overflow".into()))?
++            || self.physical_slots > self.input_slots
++            || self.input_slots > self.factors.len()
++            || self.roles.len() != self.factors.len()
++        {
++            return Err(Error::InvalidInput(
++                "polynomial energy factor layout mismatch".into(),
++            ));
++        }
++        let mut result = Vec::new();
++        for shell in &self.shells {
++            if shell.loop_index >= self.loops {
++                return Err(Error::InvalidInput(
++                    "polynomial compact loop out of range".into(),
++                ));
++            }
++            let energy = &self.coordinates[scalar + shell.loop_index];
++            let AtomView::Var(v) = energy.as_view() else {
++                return Err(Error::InvalidInput(
++                    "polynomial compact energy is not a coordinate".into(),
++                ));
++            };
++            for slot in self.physical_slots..self.input_slots {
++                if self.roles[slot] != IndexRole::Ordinary {
++                    continue;
++                }
++                let factor = &self.factors[slot];
++                let Ok(c) = Rational::try_from(
++                    factor
++                        .derivative(v.get_symbol())
++                        .together()
++                        .cancel()
++                        .as_view(),
++                ) else {
++                    continue;
++                };
++                if c.is_zero()
++                    || !(factor - Atom::num(c.clone()) * energy)
++                        .expand()
++                        .together()
++                        .cancel()
++                        .is_zero()
++                {
++                    continue;
++                }
++                result.push(PolynomialEnergyCompletion {
++                    loop_index: shell.loop_index,
++                    slot,
++                    coefficient: c,
++                });
++            }
++        }
++        Ok(result)
++    }
++
+     /// Apply equal-mass/physical assignments only after all independent physical
+     /// mass derivatives of the original target and distributions have been taken.
+     pub fn at_physical_masses(&self) -> Self {
+--- a/src/finite_density/massless_endpoint.rs
++++ b/src/finite_density/massless_endpoint.rs
+@@ -1556,6 +1556,71 @@
+     class: CertifiedEndpointClass,
+ }
+ 
++/// Proof data for one unraised massless occupied shell. Construction is only
++/// through the bound SingletonGerm class, never a string classification.
++/// This does not permit inverse energy powers. All fields remain private.
++#[derive(Clone, Debug)]
++pub(crate) struct SingletonRawWardEvidence {
++    identity: String,
++    coordinates: Vec<Atom>,
++    factors: Vec<Atom>,
++    roles: Vec<super::guarded::IndexRole>,
++    cut: usize,
++    upper: usize,
++    lower: usize,
++    physical_slots: usize,
++    input_slots: usize,
++    energy: Atom,
++    energy_dependent_slots: Vec<usize>,
++}
++
++impl SingletonRawWardEvidence {
++    pub(crate) fn identity(&self) -> &str {
++        &self.identity
++    }
++    pub(crate) fn energy(&self) -> &Atom {
++        &self.energy
++    }
++    pub(crate) fn cut(&self) -> usize {
++        self.cut
++    }
++    pub(crate) fn upper(&self) -> usize {
++        self.upper
++    }
++    pub(crate) fn lower(&self) -> usize {
++        self.lower
++    }
++    pub(crate) fn physical_slots(&self) -> usize {
++        self.physical_slots
++    }
++    pub(crate) fn input_slots(&self) -> usize {
++        self.input_slots
++    }
++    pub(crate) fn energy_dependent_slots(&self) -> &[usize] {
++        &self.energy_dependent_slots
++    }
++    pub(crate) fn validate_measure<const N: usize>(
++        &self,
++        coordinates: &[Atom],
++        factors: &[Atom],
++        roles: &[super::guarded::IndexRole; N],
++    ) -> Result<()> {
++        if self.factors.len() > N
++            || coordinates != self.coordinates
++            || factors != self.factors
++            || roles[..self.roles.len()] != self.roles
++            || roles[self.roles.len()..]
++                .iter()
++                .any(|r| *r != super::guarded::IndexRole::Ordinary)
++        {
++            return Err(Error::InvalidInput(
++                "raw Ward certificate does not match the exact measure".into(),
++            ));
++        }
++        Ok(())
++    }
++}
++
+ pub(crate) fn bound_family_signature(family: &super::geometry::OccupiedCutFamily) -> Vec<String> {
+     let mut signature = vec![
+         format!(
+@@ -1755,6 +1820,157 @@
+             .collect::<Vec<_>>();
+         evidence.validate_labels(family, &targets)?;
+         Ok(evidence)
++    }
++
++    /// A narrowly guarded finite-eta source theorem, separate from the endpoint
++    /// theorem. Its source bases have C1, lower H0, and zero indices for every
++    /// medium-dependent factor. The row may contain polynomial energy images.
++    pub(crate) fn singleton_raw_ward_evidence<const N: usize>(
++        &self,
++        family: &super::geometry::OccupiedCutFamily,
++        shifted: &[usize],
++        eta: Symbol,
++    ) -> Result<SingletonRawWardEvidence> {
++        use super::guarded::IndexRole;
++        self.validate_family(family, shifted)?;
++        if !matches!(&self.class, CertifiedEndpointClass::SingletonGerm { .. })
++            || family.shells().len() != 1
++            || self.source_options.positive_compact_energy_powers
++        {
++            return Err(Error::Unsupported(
++                "raw Ward source needs the polynomial singleton-germ class".into(),
++            ));
++        }
++        let shell = &family.shells()[0];
++        if !shell.mass_squared.is_zero() || shell.chemical_potential <= Rational::zero() {
++            return Err(Error::Unsupported(
++                "raw Ward source needs mass zero and positive mu".into(),
++            ));
++        }
++        if self.certified_origin_loops(family, shifted)? != vec![shell.loop_index] {
++            return Err(Error::InvalidInput(
++                "raw Ward source lacks its bound origin prescription".into(),
++            ));
++        }
++        let loops = family.loops();
++        let scalar_count = loops
++            .checked_add(1)
++            .and_then(|n| loops.checked_mul(n))
++            .map(|n| n / 2)
++            .ok_or_else(|| Error::Limit("raw Ward coordinate rank overflow".into()))?;
++        let coordinate_count = scalar_count
++            .checked_add(loops)
++            .ok_or_else(|| Error::Limit("raw Ward coordinate count overflow".into()))?;
++        if family.coordinates().len() != coordinate_count || shell.loop_index >= loops {
++            return Err(Error::InvalidInput(
++                "raw Ward coordinate layout mismatch".into(),
++            ));
++        }
++        let energy = family.coordinates()[scalar_count + shell.loop_index].clone();
++        let medium_symbols = family.coordinates()[scalar_count..]
++            .iter()
++            .map(|coordinate| {
++                if let AtomView::Var(v) = coordinate.as_view() {
++                    Ok(v.get_symbol())
++                } else {
++                    Err(Error::InvalidInput(
++                        "raw Ward medium coordinate is not a symbol".into(),
++                    ))
++                }
++            })
++            .collect::<Result<Vec<_>>>()?;
++        let diagonal_slot = (0..loops)
++            .flat_map(|i| (i..loops).map(move |j| (i, j)))
++            .position(|(i, j)| i == shell.loop_index && j == shell.loop_index)
++            .ok_or_else(|| Error::InvalidInput("raw Ward shell Gram coordinate absent".into()))?;
++        let measure = family.deformed_measure::<N>(eta, shifted)?;
++        let factors = measure.factors();
++        let roles = family.roles();
++        if roles.len() != factors.len()
++            || shell.physical_slot >= family.physical_slots()
++            || family.physical_slots() > family.input_slots()
++            || family.input_slots() > factors.len()
++            || shell.upper_slot >= factors.len()
++            || shell.lower_slot >= factors.len()
++            || roles[shell.physical_slot] != IndexRole::RequiredCut
++            || roles[shell.upper_slot] != IndexRole::Occupation
++            || roles[shell.lower_slot] != IndexRole::Occupation
++            || roles
++                .iter()
++                .filter(|r| **r == IndexRole::RequiredCut)
++                .count()
++                != 1
++            || roles
++                .iter()
++                .filter(|r| **r == IndexRole::Occupation)
++                .count()
++                != 2
++        {
++            return Err(Error::InvalidInput(
++                "raw Ward distribution role mismatch".into(),
++            ));
++        }
++        let exact_zero = |a: Atom| a.expand().together().cancel().is_zero();
++        if !exact_zero(&factors[shell.physical_slot] - &family.coordinates()[diagonal_slot])
++            || !exact_zero(
++                &factors[shell.upper_slot] - Atom::num(shell.chemical_potential.clone()) + &energy,
++            )
++            || !exact_zero(&factors[shell.lower_slot] - &energy)
++        {
++            return Err(Error::InvalidInput(
++                "raw Ward shell or endpoint factor mismatch".into(),
++            ));
++        }
++        let mut energy_dependent_slots = Vec::new();
++        for (slot, factor) in factors.iter().enumerate() {
++            let dependent = medium_symbols
++                .iter()
++                .any(|&s| !factor.derivative(s).together().cancel().is_zero());
++            if slot < family.physical_slots() && dependent {
++                return Err(Error::InvalidInput(
++                    "raw Ward physical quadratic depends on the medium".into(),
++                ));
++            }
++            if roles[slot] == IndexRole::Ordinary && dependent {
++                energy_dependent_slots.push(slot);
++            }
++        }
++        let identity = format!(
++            "raw-polynomial-singleton-Ward-v1;C1;all-medium-dependent-base-indices-zero;lowerH0;upper0-or-positive;unrecentered;origin={};energy-dependent={:?};eta={}",
++            self.source_identity(),
++            energy_dependent_slots,
++            Atom::var(eta).to_canonical_string(),
++        );
++        Ok(SingletonRawWardEvidence {
++            identity,
++            coordinates: family.coordinates().to_vec(),
++            factors: factors.to_vec(),
++            roles: roles.to_vec(),
++            cut: shell.physical_slot,
++            upper: shell.upper_slot,
++            lower: shell.lower_slot,
++            physical_slots: family.physical_slots(),
++            input_slots: family.input_slots(),
++            energy,
++            energy_dependent_slots,
++        })
++    }
++
++    /// Deliberately omit only the extra Ward theorem for other sealed classes.
++    /// The family is still checked even when no Ward row is emitted.
++    pub(crate) fn optional_singleton_raw_ward_evidence<const N: usize>(
++        &self,
++        family: &super::geometry::OccupiedCutFamily,
++        shifted: &[usize],
++        eta: Symbol,
++    ) -> Result<Option<SingletonRawWardEvidence>> {
++        self.validate_family(family, shifted)?;
++        match &self.class {
++            CertifiedEndpointClass::SingletonGerm { .. } => self
++                .singleton_raw_ward_evidence::<N>(family, shifted, eta)
++                .map(Some),
++            CertifiedEndpointClass::RankOneBlocks { .. } => Ok(None),
++        }
+     }
+ 
+     pub fn input_identity(&self) -> &str {
+@@ -2071,6 +2287,434 @@
+ }
+ 
+ #[cfg(test)]
++mod raw_ward_draft_tests {
++    use super::*;
++    use crate::finite_density::{
++        DensityInput,
++        guarded::{GuardedMeasureIdentity, IndexRole},
++        preparation::WeightedSourceOptions,
++    };
++
++    fn definition() -> DensityInput {
++        let mut input: DensityInput = serde_json::from_str(include_str!(
++            "../../examples/finite_density/massive_two_loop_sunset.json"
++        ))
++        .unwrap();
++        for edge in &mut input.edges {
++            edge.mass_squared = "0".into();
++        }
++        input
++    }
++
++    fn data(
++        input: DensityInput,
++        cuts: &[usize],
++    ) -> (
++        PreparedDensityInput,
++        super::super::geometry::OccupiedCutFamily,
++        Vec<usize>,
++        MasslessFlowEvidence,
++    ) {
++        let input = input.prepare().unwrap();
++        let family = input.occupied_cut(cuts, 16).unwrap().at_physical_masses();
++        let shifted = (0..family.physical_slots())
++            .filter(|s| family.roles()[*s] == IndexRole::Ordinary)
++            .collect::<Vec<_>>();
++        let proof =
++            MasslessFlowEvidence::new(&input, &family, &shifted, WeightedSourceOptions::default())
++                .unwrap();
++        (input, family, shifted, proof)
++    }
++
++    fn identity() -> GuardedMeasureIdentity {
++        GuardedMeasureIdentity {
++            measure: "raw Ward draft: actual physical source factory".into(),
++            support: "positive mu; joint origin proof supplied separately".into(),
++            orientation: "future shell".into(),
++            normalization: "source identity only".into(),
++            branch: "fixed-T regulator order".into(),
++            deformation: "all uncut D-eta".into(),
++        }
++    }
++
++    #[test]
++    fn raw_ward_maps_actual_energy_and_checks_every_base_guard() {
++        let eta = symbol!("raw_ward_draft::eta");
++        let d = Atom::var(symbol!("raw_ward_draft::D"));
++        for mapping in 0..3 {
++            let mut input = definition();
++            if mapping == 1 {
++                // Nonunit routing gives physical completion E_a/2. Charges
++                // remain exactly conserved; no hand-edited proof object.
++                input.edges[0].routing = vec!["2".into(), "0".into()];
++                input.edges[1].routing = vec!["0".into(), "2".into()];
++                input.edges[2].routing = vec!["2".into(), "-2".into()];
++                input.edges[0].charges = vec![2];
++                input.edges[1].charges = vec![2];
++            } else if mapping == 2 {
++                input.edges[0].routing = vec!["1".into(), "1".into()];
++                input.edges[1].routing = vec!["0".into(), "1".into()];
++                input.edges[2].routing = vec!["1".into(), "0".into()];
++                input.loop_charges = vec![vec![0], vec![1]];
++            }
++            let (_, family, shifted, origin) = data(input, &[0]);
++            let certificate = origin
++                .singleton_raw_ward_evidence::<12>(&family, &shifted, eta)
++                .unwrap();
++            let measure = family.deformed_measure::<12>(eta, &shifted).unwrap();
++            let indices =
++                std::array::from_fn(|i| symbol!(format!("raw_ward_draft::a_{mapping}_{i}")));
++            let rows = measure
++                .raw_singleton_ward_sources(&certificate, &d, &indices, 2)
++                .unwrap();
++            assert_eq!(rows.len(), 2);
++            assert!(rows.iter().all(|r| r.nonzero_conditions.is_empty()));
++            for (branch, row) in rows.iter().enumerate() {
++                let mut base = [0_i64; 12];
++                base[certificate.cut] = 1;
++                base[certificate.upper] = if branch == 0 { 0 } else { 3 };
++                assert!(row.domain.contains(&base));
++                for value in [0, 2, -1] {
++                    let mut bad = base;
++                    bad[certificate.cut] = value;
++                    assert!(!row.domain.contains(&bad));
++                }
++                for &slot in &certificate.energy_dependent_slots {
++                    for value in [-1, 1] {
++                        let mut bad = base;
++                        bad[slot] = value;
++                        assert!(!row.domain.contains(&bad));
++                    }
++                }
++                for slot in [certificate.lower, family.factors().len()] {
++                    let mut bad = base;
++                    bad[slot] = 1;
++                    assert!(!row.domain.contains(&bad));
++                }
++                let mut bad = base;
++                bad[certificate.upper] = -1;
++                assert!(!row.domain.contains(&bad));
++                for &slot in &shifted {
++                    for n in [-3, 0, 4] {
++                        let mut free = base;
++                        free[slot] = n;
++                        assert!(row.domain.contains(&free));
++                    }
++                }
++                // Reconstruct the coefficient of H_(s+1) from actual factors.
++                // This verifies cE and mixed-energy conversion without guessing slots.
++                let mut reconstructed = Atom::zero();
++                for term in &row.terms {
++                    if term.shift[certificate.upper] == 0 {
++                        assert!(term.shift.iter().all(|n| *n == 0));
++                        assert!(
++                            (&term.coefficient - &d + Atom::num(2))
++                                .together()
++                                .cancel()
++                                .is_zero()
++                        );
++                        continue;
++                    }
++                    assert_eq!(term.shift[certificate.upper], 1);
++                    let mut value = term.coefficient.clone();
++                    for (slot, shift) in term.shift.iter().enumerate() {
++                        if slot == certificate.upper {
++                            continue;
++                        }
++                        assert!(*shift <= 0);
++                        if *shift < 0 {
++                            value *= family.factors()[slot].pow(Atom::num(-i32::from(*shift)));
++                        }
++                    }
++                    reconstructed += value;
++                }
++                let expected = certificate.energy()
++                    * if branch == 0 {
++                        Atom::num(-1)
++                    } else {
++                        Atom::var(indices[certificate.upper])
++                    };
++                assert!(
++                    (reconstructed - expected)
++                        .expand()
++                        .together()
++                        .cancel()
++                        .is_zero()
++                );
++            }
++            assert!(
++                measure
++                    .raw_singleton_ward_sources(&certificate, &d, &indices, 1)
++                    .is_err()
++            );
++            assert!(
++                origin
++                    .singleton_raw_ward_evidence::<12>(&family, &[], eta)
++                    .is_err()
++            );
++            let changed = family
++                .deformed_measure::<12>(symbol!("raw_ward_draft::different_eta"), &shifted)
++                .unwrap();
++            assert!(
++                changed
++                    .raw_singleton_ward_sources(&certificate, &d, &indices, 2)
++                    .is_err()
++            );
++            let mut duplicate = indices;
++            duplicate[1] = duplicate[0];
++            assert!(
++                measure
++                    .raw_singleton_ward_sources(&certificate, &d, &duplicate, 2)
++                    .is_err()
++            );
++        }
++    }
++
++    #[test]
++    fn raw_ward_only_accepts_typed_singleton_and_preserves_factory_epoch() {
++        let (input, family, shifted, origin) = data(definition(), &[0]);
++        let epsilon = symbol!("raw_ward_draft::epsilon");
++        let eta = symbol!("raw_ward_draft::eta_factory");
++        let opts = WeightedSourceOptions::default();
++        let ordinary = family
++            .guarded_sources_with_massless_origin::<12>(
++                epsilon,
++                4,
++                eta,
++                &shifted,
++                16,
++                vec![],
++                identity(),
++                opts,
++                &origin,
++            )
++            .unwrap();
++        let ward = family
++            .guarded_sources_with_massless_raw_ward::<12>(
++                epsilon,
++                4,
++                eta,
++                &shifted,
++                16,
++                vec![],
++                identity(),
++                opts,
++                &origin,
++            )
++            .unwrap();
++        assert_ne!(
++            ordinary.context.sources().measure_id(),
++            ward.context.sources().measure_id()
++        );
++        assert!(
++            ward.context
++                .sources()
++                .measure_id()
++                .contains("raw-polynomial-singleton-Ward-v1")
++        );
++        let mut label = [0; 12];
++        label[family.shells()[0].physical_slot] = 1;
++        assert!(!ward.context.sources().is_zero(&label));
++        label[family.shells()[0].lower_slot] = 1;
++        assert!(ward.context.sources().is_zero(&label));
++        label[family.physical_slots()] = 1;
++        assert!(!ward.context.sources().is_zero(&label));
++        assert!(ward.deformation.derivative(label).is_err());
++        let encoded = ordinary
++            .context
++            .discover(vec![], [], Default::default())
++            .unwrap()
++            .program
++            .encode(Default::default())
++            .unwrap();
++        assert!(ward.context.decode(&encoded, Default::default()).is_err());
++        let encoded = ward
++            .context
++            .discover(vec![], [], Default::default())
++            .unwrap()
++            .program
++            .encode(Default::default())
++            .unwrap();
++        assert!(ward.context.decode(&encoded, Default::default()).is_ok());
++        let different = WeightedSourceOptions {
++            free_virtual_zero_sectors: true,
++            ..opts
++        };
++        assert!(
++            family
++                .guarded_sources_with_massless_raw_ward::<12>(
++                    epsilon,
++                    4,
++                    eta,
++                    &shifted,
++                    16,
++                    vec![],
++                    identity(),
++                    different,
++                    &origin
++                )
++                .is_err()
++        );
++        let (_, double, shifted_double, proof_double) = data(definition(), &[0, 1]);
++        assert!(
++            proof_double
++                .singleton_raw_ward_evidence::<12>(&double, &shifted_double, eta)
++                .is_err()
++        );
++        assert!(
++            origin
++                .singleton_raw_ward_evidence::<12>(&double, &shifted_double, eta)
++                .is_err()
++        );
++        let mut massive = definition();
++        massive.edges[0].mass_squared = "1/4".into();
++        let massive = massive.prepare().unwrap();
++        let mass_family = massive.occupied_cut(&[0], 16).unwrap().at_physical_masses();
++        assert!(MasslessFlowEvidence::new(&massive, &mass_family, &shifted, opts).is_err());
++        let mut zero_mu = definition();
++        zero_mu.chemical_potentials[0] = "0".into();
++        let zero_mu = zero_mu.prepare().unwrap();
++        if let Ok(zero_family) = zero_mu.occupied_cut(&[0], 16) {
++            assert!(
++                MasslessFlowEvidence::new(
++                    &zero_mu,
++                    &zero_family.at_physical_masses(),
++                    &shifted,
++                    opts
++                )
++                .is_err()
++            );
++        }
++        assert!(
++            MasslessFlowEvidence::new(
++                &input,
++                &family,
++                &shifted,
++                WeightedSourceOptions {
++                    positive_compact_energy_powers: true,
++                    ..opts
++                }
++            )
++            .is_err()
++        );
++    }
++
++    #[test]
++    fn raw_ward_native_rule_replays_in_full_bound_source_context() {
++        use crate::finite_density::guarded::{GuardedContext, IndexBounds, IndexDomain};
++        let (_, family, shifted, origin) = data(definition(), &[0]);
++        let eta = symbol!("raw_ward_draft::native_eta");
++        let d = symbol!("raw_ward_draft::native_D");
++        let measure = family.deformed_measure::<12>(eta, &shifted).unwrap();
++        let proof = origin
++            .singleton_raw_ward_evidence::<12>(&family, &shifted, eta)
++            .unwrap();
++        let indices = std::array::from_fn(|i| symbol!(format!("raw_ward_draft::native_a_{i}")));
++        let rows = measure
++            .raw_singleton_ward_sources(&proof, &Atom::var(d), &indices, 2)
++            .unwrap();
++        let mut description = identity();
++        description.measure.push_str(proof.identity());
++        let context = GuardedContext::new_with_physical_arity(
++            description,
++            *measure.roles(),
++            indices,
++            vec![d, eta],
++            rows,
++            measure.physical_arity(),
++        )
++        .unwrap();
++        let energy_slot = family
++            .factors()
++            .iter()
++            .position(|f| f == proof.energy())
++            .unwrap();
++        let mut target = [0_i64; 12];
++        target[proof.cut] = 1;
++        for slot in shifted {
++            target[slot] = 1;
++        }
++        target[energy_slot] = -1;
++        target[proof.upper] = 1;
++        let mut bulk = target;
++        bulk[energy_slot] = 0;
++        bulk[proof.upper] = 0;
++        let point = IndexDomain::new(target.map(IndexBounds::fixed)).unwrap();
++        let program = context
++            .discover(vec![point], [bulk], Default::default())
++            .unwrap()
++            .program;
++        let restored = context
++            .decode(
++                &program.encode(Default::default()).unwrap(),
++                Default::default(),
++            )
++            .unwrap();
++        let reduction = restored.reduce(target, Default::default()).unwrap();
++        assert!(reduction.unresolved.is_empty());
++        assert_eq!(reduction.terms.len(), 1);
++        assert!(
++            (reduction.terms.get(&bulk).unwrap() - Atom::var(d) + Atom::num(2))
++                .together()
++                .cancel()
++                .is_zero()
++        );
++        let mut raised = target;
++        raised[proof.cut] = 2;
++        let rejected = restored.reduce(raised, Default::default()).unwrap();
++        assert!(!rejected.unresolved.is_empty());
++        let mut extra_energy = target;
++        extra_energy[energy_slot] = -2;
++        assert!(
++            !restored
++                .reduce(extra_energy, Default::default())
++                .unwrap()
++                .unresolved
++                .is_empty()
++        );
++    }
++
++    #[test]
++    fn raw_ward_upper_distribution_signs_match_direct_radial_moments() {
++        // C1 shell measure after E integration is proportional to E^(D-3).
++        // H_s=(-1)^(s-1) delta^(s-1)/(s-1)! for s>=1. This is an independent
++        // exact evaluation of their action, not the source conversion algorithm.
++        fn power(mu: &Rational, p: i64) -> Rational {
++            if p < 0 {
++                return Rational::one() / power(mu, -p);
++            }
++            (0..p).fold(Rational::one(), |x, _| x * mu)
++        }
++        fn moment(p: i64, s: usize, mu: &Rational) -> Rational {
++            if s == 0 {
++                return power(mu, p + 1) / Rational::from(p + 1);
++            }
++            let derivative = (0..s - 1).fold(Rational::one(), |x, k| {
++                x * Rational::from(p - k as i64) / Rational::from((k + 1) as i64)
++            });
++            let sign = if s % 2 == 1 { 1 } else { -1 };
++            Rational::from(sign) * derivative * power(mu, p - s as i64 + 1)
++        }
++        for d in [8_i64, 11, 14] {
++            for mu in [Rational::from((2, 3)), Rational::from(2)] {
++                assert_eq!(
++                    Rational::from(d - 2) * moment(d - 3, 0, &mu) - moment(d - 2, 1, &mu),
++                    Rational::zero()
++                );
++                for s in 1..=4 {
++                    assert_eq!(
++                        Rational::from(d - 2) * moment(d - 3, s, &mu)
++                            + Rational::from(s as i64) * moment(d - 2, s + 1, &mu),
++                        Rational::zero()
++                    );
++                    assert!(!moment(d - 2, s + 1, &mu).is_zero());
++                }
++            }
++        }
++    }
++}
++
++#[cfg(test)]
+ mod permit_tests {
+     use super::*;
+     use crate::finite_density::{DensityInput, preparation::WeightedSourceOptions};
+--- a/src/finite_density/measure.rs
++++ b/src/finite_density/measure.rs
+@@ -166,6 +166,323 @@
+             domain: IndexDomain::new(bounds).map_err(|e| Error::InvalidInput(e.to_string()))?,
+             nonzero_conditions: vec![],
+         }))
++    }
++
++    /// Generate only the guarded polynomial raw Ward pair. There is no rational
++    /// vector-field seed and no extension of the admitted ordinary index box.
++    /// The typed evidence checks the complete exact measure before conversion.
++    pub(crate) fn raw_singleton_ward_sources(
++        &self,
++        evidence: &super::massless_endpoint::SingletonRawWardEvidence,
++        dimension: &Atom,
++        indices: &[Symbol; N],
++        domain_budget: usize,
++    ) -> Result<Vec<GuardedIdentity<N>>> {
++        evidence.validate_measure(&self.coordinates, &self.factors, &self.roles)?;
++        if domain_budget < 2 {
++            return Err(Error::Limit(
++                "raw Ward source domain budget exhausted".into(),
++            ));
++        }
++        if indices
++            .iter()
++            .collect::<std::collections::BTreeSet<_>>()
++            .len()
++            != N
++            || indices.iter().any(|&s| {
++                !dimension.derivative(s).is_zero()
++                    || self
++                        .coordinates
++                        .iter()
++                        .chain(self.factors.iter())
++                        .chain(self.numerator_basis.labels())
++                        .any(|a| !a.derivative(s).is_zero())
++            })
++            || self.coordinates.iter().any(|c| {
++                let AtomView::Var(v) = c.as_view() else {
++                    return true;
++                };
++                !dimension.derivative(v.get_symbol()).is_zero()
++            })
++        {
++            return Err(Error::InvalidInput(
++                "raw Ward index/dimension symbol collision".into(),
++            ));
++        }
++        // E is affine in the complete factor basis. Convert the actual Atom,
++        // never infer one special factor slot or assume a unit coefficient.
++        let mut energy_terms = BTreeMap::new();
++        let mut upper_shift = [0_i16; N];
++        upper_shift[evidence.upper()] = 1;
++        self.multiply(evidence.energy(), upper_shift, &mut energy_terms)?;
++        // An affine energy has at most (#coordinates + 1) factor monomials.
++        // Two rows add one diagonal term each. Fail atomically on any excess.
++        let per_row_terms = self
++            .coordinates
++            .len()
++            .checked_add(2)
++            .ok_or_else(|| Error::Limit("raw Ward term budget overflow".into()))?;
++        let total_bound = per_row_terms
++            .checked_mul(2)
++            .ok_or_else(|| Error::Limit("raw Ward total term budget overflow".into()))?;
++        if energy_terms
++            .len()
++            .checked_add(1)
++            .is_none_or(|n| n > per_row_terms)
++        {
++            return Err(Error::Limit(
++                "raw Ward affine energy conversion exceeded term bound".into(),
++            ));
++        }
++        let mut common = self.default_bounds();
++        for slot in evidence.physical_slots()..evidence.input_slots() {
++            common[slot] =
++                IndexBounds::new(None, Some(0)).map_err(|e| Error::InvalidInput(e.to_string()))?;
++        }
++        for &slot in evidence.energy_dependent_slots() {
++            common[slot] = IndexBounds::fixed(0);
++        }
++        common[evidence.cut()] = IndexBounds::fixed(1);
++        common[evidence.lower()] = IndexBounds::fixed(0);
++        let mut result = Vec::with_capacity(2);
++        let mut total_terms = 0_usize;
++        for positive in [false, true] {
++            let mut bounds = common;
++            bounds[evidence.upper()] = if positive {
++                IndexBounds::new(Some(1), None).map_err(|e| Error::InvalidInput(e.to_string()))?
++            } else {
++                IndexBounds::fixed(0)
++            };
++            let mut terms = BTreeMap::from([([0_i16; N], dimension - Atom::num(2))]);
++            let coefficient = if positive {
++                Atom::var(indices[evidence.upper()])
++            } else {
++                Atom::num(-1)
++            };
++            for (shift, value) in &energy_terms {
++                *terms.entry(*shift).or_default() += &coefficient * value;
++            }
++            let source = self
++                .source(
++                    format!(
++                        "raw-polynomial-singleton-Ward-v1/upper-{}",
++                        if positive { "positive" } else { "zero" }
++                    ),
++                    terms,
++                    bounds,
++                )?
++                .ok_or_else(|| {
++                    Error::InvalidInput("raw Ward identity unexpectedly empty".into())
++                })?;
++            total_terms = total_terms
++                .checked_add(source.terms.len())
++                .ok_or_else(|| Error::Limit("raw Ward emitted term count overflow".into()))?;
++            if total_terms > total_bound {
++                return Err(Error::Limit("raw Ward total term budget exhausted".into()));
++            }
++            result.push(source);
++        }
++        Ok(result)
++    }
++
++    /// Two ordered groups of exact polynomial presentations: shifted temporal
++    /// U rows, then shifted common Lorentz-boost rows. Every source seed lies
++    /// in the original all-completion-nonpositive domain before reindexing.
++    pub(crate) fn polynomial_closure_sources(
++        &self,
++        loops: usize,
++        physical_slots: usize,
++        input_slots: usize,
++        completions: &[super::geometry::PolynomialEnergyCompletion],
++        dimension: &Atom,
++        indices: &[Symbol; N],
++        domain_budget: usize,
++    ) -> Result<(Vec<GuardedIdentity<N>>, Vec<GuardedIdentity<N>>)> {
++        let scalar = loops
++            .checked_add(1)
++            .and_then(|n| loops.checked_mul(n))
++            .map(|n| n / 2)
++            .ok_or_else(|| Error::Limit("polynomial closure loop rank overflow".into()))?;
++        if self.coordinates.len()
++            != scalar.checked_add(loops).ok_or_else(|| {
++                Error::Limit("polynomial closure coordinate count overflow".into())
++            })?
++            || physical_slots > input_slots
++            || input_slots > self.physical_arity()
++        {
++            return Err(Error::InvalidInput(
++                "polynomial closure factor layout".into(),
++            ));
++        }
++        let pairs = (0..loops)
++            .flat_map(|i| (i..loops).map(move |j| (i, j)))
++            .collect::<Vec<_>>();
++        let gram = |i: usize, j: usize| {
++            self.coordinates[pairs
++                .iter()
++                .position(|&(a, b)| (a, b) == (i.min(j), i.max(j)))
++                .unwrap()]
++            .clone()
++        };
++        let energy = |i: usize| self.coordinates[scalar + i].clone();
++        let mut bounds = self.default_bounds();
++        for slot in physical_slots..input_slots {
++            if self.roles[slot] != IndexRole::Ordinary {
++                return Err(Error::InvalidInput(
++                    "polynomial completion is not ordinary".into(),
++                ));
++            }
++            bounds[slot] =
++                IndexBounds::new(None, Some(0)).map_err(|e| Error::InvalidInput(e.to_string()))?;
++        }
++        let polynomial =
++            IndexDomain::new(bounds).map_err(|e| Error::InvalidInput(e.to_string()))?;
++        let max_rows = completions
++            .len()
++            .checked_mul(domain_budget)
++            .and_then(|n| n.checked_mul(2))
++            .ok_or_else(|| Error::Limit("polynomial source total row budget overflow".into()))?;
++        // All factors are affine scalar/medium polynomials; the two fields
++        // have degree <=2. Bound each expanded source by one quadratic image
++        // per physical factor plus divergence, using checked arithmetic.
++        let coordinate_terms = self
++            .coordinates
++            .len()
++            .checked_add(1)
++            .ok_or_else(|| Error::Limit("polynomial source monomial budget overflow".into()))?;
++        let per_source_terms = coordinate_terms
++            .checked_mul(coordinate_terms)
++            .and_then(|n| {
++                self.physical_arity()
++                    .checked_add(1)
++                    .and_then(|p| n.checked_mul(p))
++            })
++            .ok_or_else(|| Error::Limit("polynomial source term budget overflow".into()))?;
++        let max_terms = max_rows.checked_mul(per_source_terms).ok_or_else(|| {
++            Error::Limit("polynomial source aggregate term budget overflow".into())
++        })?;
++        let mut emitted_terms = 0_usize;
++        let mut used = std::collections::BTreeSet::new();
++        let mut temporal = Vec::new();
++        let mut boost = Vec::new();
++        for c in completions {
++            let (a, slot) = (c.loop_index(), c.slot());
++            if a >= loops
++                || !(physical_slots..input_slots).contains(&slot)
++                || self.roles[slot] != IndexRole::Ordinary
++                || c.coefficient().is_zero()
++                || !used.insert((a, slot))
++                || !(&self.factors[slot] - Atom::num(c.coefficient().clone()) * energy(a))
++                    .expand()
++                    .together()
++                    .cancel()
++                    .is_zero()
++            {
++                return Err(Error::InvalidInput(
++                    "polynomial source energy certificate mismatch".into(),
++                ));
++            }
++            let mut u_direction = pairs
++                .iter()
++                .map(|&(i, j)| {
++                    Atom::num(i32::from(i == a)) * energy(j)
++                        + Atom::num(i32::from(j == a)) * energy(i)
++                })
++                .collect::<Vec<_>>();
++            u_direction.extend((0..loops).map(|i| Atom::num(i32::from(i == a))));
++            // The original temporal-U branch uses the legacy full occupation
++            // partition, so singleton case order exactly matches the corpus.
++            let u = self.ibp_partitioned(
++                &format!("polynomial-temporal-U/{a}/{slot}"),
++                indices,
++                &u_direction,
++                &Atom::zero(),
++                domain_budget,
++                true,
++            )?;
++            let mut boost_direction = vec![Atom::zero(); scalar];
++            boost_direction
++                .extend((0..loops).map(|i| (energy(i) * energy(a) - gram(i, a)).expand()));
++            for factor in &self.factors[..physical_slots] {
++                let action = self
++                    .coordinates
++                    .iter()
++                    .zip(&boost_direction)
++                    .fold(Atom::zero(), |sum, (coordinate, action)| {
++                        let AtomView::Var(v) = coordinate.as_view() else {
++                            unreachable!()
++                        };
++                        sum + factor.derivative(v.get_symbol()) * action
++                    })
++                    .expand()
++                    .together()
++                    .cancel();
++                if !action.is_zero() {
++                    return Err(Error::InvalidInput(
++                        "common boost fails exact physical scalar invariance".into(),
++                    ));
++                }
++            }
++            let b = self.ibp(
++                &format!("polynomial-common-boost/{a}/{slot}"),
++                indices,
++                &boost_direction,
++                &((dimension - Atom::one()) * energy(a)),
++                domain_budget,
++            )?;
++            let mut shift = [0_i16; N];
++            shift[slot] = 1;
++            for (rows, out, kind) in [
++                (u, &mut temporal, "temporal-U"),
++                (b, &mut boost, "common-boost"),
++            ] {
++                for (branch, mut row) in rows.into_iter().enumerate() {
++                    let Some(domain) = row.domain.intersection(&polynomial) else {
++                        continue;
++                    };
++                    row.domain = domain;
++                    let row = shift_guarded_identity(
++                        row,
++                        indices,
++                        shift,
++                        format!("polynomial-closure-v1/{kind}/{a}/{slot}/case-{branch}"),
++                    )?;
++                    if row.domain.bounds()[slot]
++                        != IndexBounds::new(None, Some(-1))
++                            .map_err(|e| Error::InvalidInput(e.to_string()))?
++                    {
++                        return Err(Error::InvalidInput(
++                            "polynomial shift escaped original energy domain".into(),
++                        ));
++                    }
++                    if row.terms.len() > per_source_terms {
++                        return Err(Error::Limit(
++                            "polynomial source affine-degree term bound exceeded".into(),
++                        ));
++                    }
++                    emitted_terms =
++                        emitted_terms.checked_add(row.terms.len()).ok_or_else(|| {
++                            Error::Limit("polynomial source term count overflow".into())
++                        })?;
++                    if emitted_terms > max_terms {
++                        return Err(Error::Limit(
++                            "polynomial source aggregate term budget exhausted".into(),
++                        ));
++                    }
++                    out.push(row);
++                }
++            }
++            if temporal
++                .len()
++                .checked_add(boost.len())
++                .is_none_or(|n| n > max_rows)
++            {
++                return Err(Error::Limit(
++                    "polynomial source total row budget exhausted".into(),
++                ));
++            }
++        }
++        Ok((temporal, boost))
+     }
+ 
+     /// Total derivative with a supplied polynomial vector field. `direction`
+@@ -626,6 +943,51 @@
+     }
+ }
+ 
++/// Simultaneously reindex one complete identity: old n = new n + shift.
++/// Caller must intersect the *old* source with its physically admitted domain
++/// first. Preserve unsimplified coefficients/conditions so raw denominator
++/// requirements remain visible to GuardedContext's existing pole collection.
++fn shift_guarded_identity<const N: usize>(
++    mut source: GuardedIdentity<N>,
++    indices: &[Symbol; N],
++    shift: [i16; N],
++    id: String,
++) -> Result<GuardedIdentity<N>> {
++    if indices
++        .iter()
++        .collect::<std::collections::BTreeSet<_>>()
++        .len()
++        != N
++    {
++        return Err(Error::InvalidInput(
++            "shifted source indices are not distinct".into(),
++        ));
++    }
++    let replacements = indices
++        .iter()
++        .zip(shift)
++        .filter(|(_, n)| *n != 0)
++        .map(|(&s, n)| (Atom::var(s), Atom::var(s) + Atom::num(n)))
++        .collect::<BTreeMap<_, _>>();
++    for term in &mut source.terms {
++        for (degree, delta) in term.shift.iter_mut().zip(shift) {
++            *degree = degree
++                .checked_add(delta)
++                .ok_or_else(|| Error::Limit("polynomial identity shift overflow".into()))?;
++        }
++        term.coefficient = crate::family::substitute(&term.coefficient, &replacements);
++    }
++    for condition in &mut source.nonzero_conditions {
++        *condition = crate::family::substitute(condition, &replacements);
++    }
++    source.domain = source
++        .domain
++        .pullback(&shift.map(i64::from))
++        .map_err(|e| Error::InvalidInput(e.to_string()))?;
++    source.id = id;
++    Ok(source)
++}
++
+ /// The occupied one-line energy residue before the spatial integral, retaining
+ /// all upper-surface derivatives. No theta(0) convention is substituted.
+ #[derive(Clone, Debug)]
+@@ -664,6 +1026,360 @@
+             bulk: (-&scale * self.bulk.derivative(energy)).together().cancel(),
+             upper_surface: surface.into_iter().map(|a| a.together().cancel()).collect(),
+         })
++    }
++}
++
++#[cfg(test)]
++mod polynomial_closure_draft_tests {
++    use super::*;
++    use crate::finite_density::{
++        DensityInput,
++        guarded::{GuardedContext, GuardedMeasureIdentity},
++        massless_endpoint::MasslessFlowEvidence,
++        preparation::{WeightedSourceOptions, WeightedSourcePolicy},
++    };
++
++    fn identity() -> GuardedMeasureIdentity {
++        GuardedMeasureIdentity {
++            measure: "polynomial policy draft actual factory".into(),
++            support: "original polynomial domain".into(),
++            orientation: "future shell".into(),
++            normalization: "source rows only".into(),
++            branch: "bound origin separately".into(),
++            deformation: "uncut D-eta".into(),
++        }
++    }
++
++    #[test]
++    fn complete_identity_shift_preserves_conditions_and_old_domain_pullback() {
++        let a = symbol!("polynomial_shift_draft::a");
++        let h = symbol!("polynomial_shift_draft::h");
++        let index = Atom::var(a);
++        let old = GuardedIdentity {
++            id: "source-with-raw-denominator-condition".into(),
++            terms: vec![
++                GuardedIdentityTerm {
++                    shift: [0, 0],
++                    coefficient: (index.clone().pow(2) - Atom::one()) / (&index - Atom::one()),
++                },
++                GuardedIdentityTerm {
++                    shift: [-1, 1],
++                    coefficient: Atom::var(h) + &index,
++                },
++            ],
++            domain: IndexDomain::new([
++                IndexBounds::new(None, Some(0)).unwrap(),
++                IndexBounds::new(Some(1), None).unwrap(),
++            ])
++            .unwrap(),
++            nonzero_conditions: vec![&index - Atom::one()],
++        };
++        let shifted =
++            shift_guarded_identity(old.clone(), &[a, h], [1, -1], "shifted".into()).unwrap();
++        assert_eq!(shifted.terms[0].shift, [1, -1]);
++        assert_eq!(shifted.terms[1].shift, [0, 0]);
++        assert_eq!(
++            shifted.domain.bounds(),
++            &[
++                IndexBounds::new(None, Some(-1)).unwrap(),
++                IndexBounds::new(Some(2), None).unwrap()
++            ]
++        );
++        assert!(
++            (shifted.nonzero_conditions[0].clone() - &index)
++                .expand()
++                .is_zero()
++        );
++        for ai in [-5, -2, -1] {
++            for hi in [2, 3, 5] {
++                let before = BTreeMap::from([
++                    (Atom::var(a), Atom::num(ai + 1)),
++                    (Atom::var(h), Atom::num(hi - 1)),
++                ]);
++                let after =
++                    BTreeMap::from([(Atom::var(a), Atom::num(ai)), (Atom::var(h), Atom::num(hi))]);
++                for (x, y) in old.terms.iter().zip(&shifted.terms) {
++                    assert!(
++                        (crate::family::substitute(&x.coefficient, &before)
++                            - crate::family::substitute(&y.coefficient, &after))
++                        .together()
++                        .cancel()
++                        .is_zero()
++                    );
++                }
++            }
++        }
++        let context = GuardedContext::new(
++            identity(),
++            [IndexRole::Ordinary, IndexRole::Occupation],
++            [a, h],
++            vec![],
++            vec![shifted],
++        )
++        .unwrap();
++        // The raw denominator pole a=0 is retained; no cancellation can grant it.
++        assert!(
++            context.sources().sources()[0]
++                .nonzero_conditions
++                .iter()
++                .any(|c| crate::family::substitute(
++                    &c.to_expression(),
++                    &BTreeMap::from([(Atom::var(a), Atom::zero())])
++                )
++                .is_zero())
++        );
++        let mut overflow = old.clone();
++        overflow.terms[0].shift[0] = i16::MAX;
++        assert!(shift_guarded_identity(overflow, &[a, h], [1, 0], "overflow".into()).is_err());
++        let mut overflow = old;
++        overflow.domain =
++            IndexDomain::new([IndexBounds::fixed(i64::MIN), IndexBounds::fixed(1)]).unwrap();
++        assert!(
++            shift_guarded_identity(overflow, &[a, h], [1, 0], "domain-overflow".into()).is_err()
++        );
++    }
++
++    #[test]
++    fn polynomial_policy_matches_the_complete_order_without_widening_sources() {
++        let definition: DensityInput = serde_json::from_str(include_str!(
++            "../../examples/finite_density/massless_three_loop_chain.json"
++        ))
++        .unwrap();
++        let input = definition.prepare().unwrap();
++        let family = input.occupied_cut(&[0], 16).unwrap().at_physical_masses();
++        let shifted = (0..family.physical_slots())
++            .filter(|s| family.roles()[*s] == IndexRole::Ordinary)
++            .collect::<Vec<_>>();
++        let epsilon = symbol!("polynomial_policy_draft::epsilon");
++        let eta = symbol!("polynomial_policy_draft::eta");
++        let old_options = WeightedSourceOptions::default();
++        let options = WeightedSourceOptions {
++            policy: WeightedSourcePolicy::PolynomialClosure,
++            ..old_options
++        };
++        assert_eq!(
++            "polynomial-closure-v1"
++                .parse::<WeightedSourcePolicy>()
++                .unwrap(),
++            options.policy
++        );
++        assert_eq!(
++            WeightedSourcePolicy::default(),
++            WeightedSourcePolicy::LegacyLorentz
++        );
++        let old_proof = MasslessFlowEvidence::new(&input, &family, &shifted, old_options).unwrap();
++        let proof = MasslessFlowEvidence::new(&input, &family, &shifted, options).unwrap();
++        let old = family
++            .guarded_sources_with_massless_origin::<12>(
++                epsilon,
++                4,
++                eta,
++                &shifted,
++                16,
++                vec![],
++                identity(),
++                old_options,
++                &old_proof,
++            )
++            .unwrap();
++        let new = family
++            .guarded_sources_with_massless_origin::<12>(
++                epsilon,
++                4,
++                eta,
++                &shifted,
++                16,
++                vec![],
++                identity(),
++                options,
++                &proof,
++            )
++            .unwrap();
++        let old_rows = old.context.sources().sources();
++        let rows = new.context.sources().sources();
++        assert_eq!(old_rows.len(), 52);
++        assert_eq!(rows.len(), 62);
++        for (a, b) in old_rows.iter().zip(rows) {
++            assert_eq!(a.id, b.id);
++            assert_eq!(a.domain, b.domain);
++            assert_eq!(a.nonzero_conditions, b.nonzero_conditions);
++        }
++        assert_eq!(
++            old.context.sources().native_sources().rows(),
++            &new.context.sources().native_sources().rows()[..old_rows.len()]
++        );
++        assert!(
++            rows[52..56]
++                .iter()
++                .all(|r| r.id.starts_with("polynomial-closure-v1/temporal-U/"))
++        );
++        assert!(
++            rows[56..60]
++                .iter()
++                .all(|r| r.id.starts_with("polynomial-closure-v1/common-boost/"))
++        );
++        assert!(
++            rows[60..]
++                .iter()
++                .all(|r| r.id.starts_with("raw-polynomial-singleton-Ward-v1/"))
++        );
++        let energies = family.polynomial_compact_energy_completions().unwrap();
++        assert_eq!(energies.len(), 1);
++        let energy_slot = energies[0].slot();
++        for row in &rows[52..60] {
++            assert_eq!(
++                row.domain.bounds()[energy_slot],
++                IndexBounds::new(None, Some(-1)).unwrap()
++            );
++            for slot in family.physical_slots()..family.input_slots() {
++                assert!(row.domain.bounds()[slot].upper().is_some_and(|n| n <= 0));
++            }
++        }
++        assert_eq!(
++            old.context.sources().zero_domains(),
++            new.context.sources().zero_domains()
++        );
++        assert_ne!(
++            old.context.sources().measure_id(),
++            new.context.sources().measure_id()
++        );
++        let mut invalid = [0_i64; 12];
++        invalid[family.shells()[0].physical_slot] = 1;
++        invalid[family.shells()[0].lower_slot] = 1;
++        assert_eq!(
++            old.context.sources().is_zero(&invalid),
++            new.context.sources().is_zero(&invalid)
++        );
++        invalid[energy_slot] = 1;
++        assert!(!new.context.sources().is_zero(&invalid));
++        assert!(new.deformation.derivative(invalid).is_err());
++        assert!(
++            family
++                .guarded_sources_with_massless_origin::<12>(
++                    epsilon,
++                    4,
++                    eta,
++                    &shifted,
++                    16,
++                    vec![],
++                    identity(),
++                    options,
++                    &old_proof
++                )
++                .is_err()
++        );
++        let inverse = WeightedSourceOptions {
++            positive_compact_energy_powers: true,
++            ..options
++        };
++        assert!(
++            family
++                .guarded_sources_with_options::<12>(
++                    epsilon,
++                    4,
++                    eta,
++                    &shifted,
++                    16,
++                    vec![],
++                    identity(),
++                    inverse
++                )
++                .is_err()
++        );
++    }
++
++    #[test]
++    fn non_singleton_keeps_polynomial_rows_but_omits_raw_ward() {
++        let mut definition: DensityInput = serde_json::from_str(include_str!(
++            "../../examples/finite_density/massive_two_loop_sunset.json"
++        ))
++        .unwrap();
++        for edge in &mut definition.edges {
++            edge.mass_squared = "0".into();
++        }
++        let input = definition.prepare().unwrap();
++        let family = input
++            .occupied_cut(&[0, 1], 16)
++            .unwrap()
++            .at_physical_masses();
++        let shifted = vec![2];
++        let options = WeightedSourceOptions {
++            policy: WeightedSourcePolicy::PolynomialClosure,
++            ..Default::default()
++        };
++        let proof = MasslessFlowEvidence::new(&input, &family, &shifted, options).unwrap();
++        let epsilon = symbol!("polynomial_policy_draft::double_epsilon");
++        let eta = symbol!("polynomial_policy_draft::double_eta");
++        let result = family
++            .guarded_sources_with_massless_origin::<12>(
++                epsilon,
++                4,
++                eta,
++                &shifted,
++                16,
++                vec![],
++                identity(),
++                options,
++                &proof,
++            )
++            .unwrap();
++        let rows = result.context.sources().sources();
++        assert!(
++            rows.iter()
++                .any(|r| r.id.starts_with("polynomial-closure-v1/temporal-U/"))
++        );
++        assert!(
++            rows.iter()
++                .any(|r| r.id.starts_with("polynomial-closure-v1/common-boost/"))
++        );
++        assert!(
++            !rows
++                .iter()
++                .any(|r| r.id.starts_with("raw-polynomial-singleton-Ward-v1/"))
++        );
++        assert!(
++            result
++                .context
++                .sources()
++                .measure_id()
++                .contains("raw Ward deliberately omitted")
++        );
++    }
++
++    #[test]
++    fn exact_energy_certificate_distinguishes_rescaled_compact_from_mixed_or_virtual_energy() {
++        let mut definition: DensityInput = serde_json::from_str(include_str!(
++            "../../examples/finite_density/massive_two_loop_sunset.json"
++        ))
++        .unwrap();
++        for edge in &mut definition.edges {
++            edge.mass_squared = "0".into();
++        }
++        definition.edges[0].routing = vec!["2".into(), "0".into()];
++        definition.edges[1].routing = vec!["0".into(), "2".into()];
++        definition.edges[2].routing = vec!["2".into(), "-2".into()];
++        definition.edges[0].charges = vec![2];
++        definition.edges[1].charges = vec![2];
++        let input = definition.prepare().unwrap();
++        let family = input.occupied_cut(&[0], 16).unwrap().at_physical_masses();
++        let maps = family.polynomial_compact_energy_completions().unwrap();
++        assert_eq!(maps.len(), 1);
++        assert_eq!(maps[0].coefficient(), &Rational::from((1, 2)));
++        let mut definition = input.input().clone();
++        definition.edges[0].routing = vec!["1".into(), "1".into()];
++        definition.edges[1].routing = vec!["0".into(), "1".into()];
++        definition.edges[2].routing = vec!["1".into(), "0".into()];
++        definition.edges[0].charges = vec![1];
++        definition.edges[1].charges = vec![1];
++        definition.loop_charges = vec![vec![0], vec![1]];
++        let input = definition.prepare().unwrap();
++        let family = input.occupied_cut(&[0], 16).unwrap().at_physical_masses();
++        assert!(
++            family
++                .polynomial_compact_energy_completions()
++                .unwrap()
++                .is_empty()
++        );
+     }
+ }
+ 
+--- a/src/finite_density/preparation.rs
++++ b/src/finite_density/preparation.rs
+@@ -22,6 +22,10 @@
+     TangentsThenLorentz,
+     NormalsThenLorentz,
+     LorentzThenNormals,
++    /// Legacy, shifted polynomial temporal U, shifted common boost, then a
++    /// guarded raw Ward pair only under bound singleton-germ evidence.
++    #[serde(rename = "polynomial-closure-v1")]
++    PolynomialClosure,
+ }
+ 
+ impl WeightedSourcePolicy {
+@@ -33,6 +37,7 @@
+             Self::TangentsThenLorentz => "tangents-then-lorentz",
+             Self::NormalsThenLorentz => "normals-then-lorentz",
+             Self::LorentzThenNormals => "lorentz-then-normals",
++            Self::PolynomialClosure => "polynomial-closure-v1",
+         }
+     }
+ }
+@@ -48,6 +53,7 @@
+             "tangents-then-lorentz" => Ok(Self::TangentsThenLorentz),
+             "normals-then-lorentz" => Ok(Self::NormalsThenLorentz),
+             "lorentz-then-normals" => Ok(Self::LorentzThenNormals),
++            "polynomial-closure-v1" => Ok(Self::PolynomialClosure),
+             _ => Err(Error::InvalidInput(format!(
+                 "unknown weighted source presentation {value}"
+             ))),
+@@ -157,6 +163,7 @@
+             identity,
+             options,
+             None,
++            false,
+         )
+     }
+ 
+@@ -186,6 +193,38 @@
+             identity,
+             options,
+             Some(origin),
++            false,
++        )
++    }
++
++    /// Explicit source-only presentation: prefix the polynomial raw Ward pair
++    /// to the requested legacy/tangent policy. Requires a bound singleton-germ
++    /// proof; other classes fail rather than silently applying another theorem.
++    /// Existing factories, source options, zero domains and flow dispatch stay
++    /// unchanged. This does not assert native closure or numerical accuracy.
++    pub fn guarded_sources_with_massless_raw_ward<const N: usize>(
++        &self,
++        epsilon: Symbol,
++        dimension: i64,
++        eta: Symbol,
++        shifted: &[usize],
++        domain_budget: usize,
++        parameters: Vec<Symbol>,
++        identity: GuardedMeasureIdentity,
++        options: WeightedSourceOptions,
++        origin: &MasslessFlowEvidence,
++    ) -> Result<PreparedWeightedSources<N>> {
++        self.guarded_sources_with_origin(
++            epsilon,
++            dimension,
++            eta,
++            shifted,
++            domain_budget,
++            parameters,
++            identity,
++            options,
++            Some(origin),
++            true,
+         )
+     }
+ 
+@@ -200,7 +239,16 @@
+         mut identity: GuardedMeasureIdentity,
+         options: WeightedSourceOptions,
+         origin: Option<&MasslessFlowEvidence>,
++        raw_singleton_ward: bool,
+     ) -> Result<PreparedWeightedSources<N>> {
++        if options.policy == WeightedSourcePolicy::PolynomialClosure
++            && (options.positive_compact_energy_powers || raw_singleton_ward)
++        {
++            return Err(Error::InvalidInput(
++                "PolynomialClosure has polynomial completion powers and its own Ward placement"
++                    .into(),
++            ));
++        }
+         if options.free_virtual_zero_sectors && origin.is_none() {
+             return Err(Error::InvalidInput(
+                 "free virtual zero sectors require bound sealed massless evidence".into(),
+@@ -285,7 +333,71 @@
+             }
+             measure.compact_normal_ibps(self.loops(), &completions, &indices, domain_budget)
+         };
++        // An additive, explicitly requested presentation. The typed constructor
++        // rejects all non-singleton classes and binds the exact deformed factors.
++        // Defaults and existing source options keep their established semantics.
++        let ward = if raw_singleton_ward {
++            let evidence = origin
++                .ok_or_else(|| {
++                    Error::InvalidInput(
++                        "raw singleton Ward sources require sealed massless origin evidence".into(),
++                    )
++                })?
++                .singleton_raw_ward_evidence::<N>(self, shifted, eta)?;
++            identity
++                .measure
++                .push_str(&format!("; raw Ward evidence={}", evidence.identity()));
++            measure.raw_singleton_ward_sources(
++                &evidence,
++                &symbolic_dimension,
++                &indices,
++                domain_budget,
++            )?
++        } else {
++            Vec::new()
++        };
+         let mut identities = match policy {
++            WeightedSourcePolicy::PolynomialClosure => {
++                let completions = self.polynomial_compact_energy_completions()?;
++                let (temporal, boost) = measure.polynomial_closure_sources(
++                    self.loops(),
++                    self.physical_slots(),
++                    self.input_slots(),
++                    &completions,
++                    &symbolic_dimension,
++                    &indices,
++                    domain_budget,
++                )?;
++                let mut sources = legacy()?;
++                sources.extend(temporal);
++                sources.extend(boost);
++                let ward = match origin {
++                    Some(origin) => {
++                        origin.optional_singleton_raw_ward_evidence::<N>(self, shifted, eta)?
++                    }
++                    None => None,
++                };
++                identity.measure.push_str(&format!(
++                    "; polynomial-closure-v1 order=legacy,shifted-temporal-U,shifted-common-boost,raw-Ward; original-completion-domain<=0; exact-energy-completions={completions:?}"
++                ));
++                if let Some(evidence) = ward {
++                    identity
++                        .measure
++                        .push_str(&format!("; raw Ward evidence={}", evidence.identity()));
++                    sources.extend(measure.raw_singleton_ward_sources(
++                        &evidence,
++                        &symbolic_dimension,
++                        &indices,
++                        domain_budget,
++                    )?);
++                } else {
++                    identity.measure.push_str(
++                        "; raw Ward deliberately omitted: no bound singleton-germ theorem",
++                    );
++                }
++                sources
++            }
++
+             WeightedSourcePolicy::LegacyLorentz => legacy()?,
+             WeightedSourcePolicy::ActiveLorentz => lorentz()?,
+             WeightedSourcePolicy::LorentzThenTangents => {
+@@ -309,6 +421,13 @@
+                 sources
+             }
+         };
++        if !ward.is_empty() {
++            // Raw (not upper-recentered) rows are the validated presentation.
++            // These rows add no inverse-energy domain or support-zero premise.
++            let mut prefixed = ward;
++            prefixed.extend(identities);
++            identities = prefixed;
++        }
+         identity
+             .measure
+             .push_str(&format!("; source presentation={}", policy.as_str()));

@@ -1,0 +1,119 @@
+{
+  "schema": 1,
+  "status": "failed_fixture_admission_tests",
+  "scope": "First optional polynomial source policy integration attempt. Compilation and exact factory/source equivalence passed; two new test fixtures failed the existing graph-admission checks before source generation. Numerical runs were not started.",
+  "build": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration/polynomial-closure-build-provenance.json",
+    "sha256": "ed77e3fd501a46ff255bcae7f874df4dcc2b70e824a8fecf62ed40d4984b7f12",
+    "compile_identities": {
+      "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+      "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+      "PORT_SOURCE_DIGEST": "4de31030160a89baba9f71df673ec3c850d840a557506939dc7885f100ddc11e"
+    }
+  },
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration/polynomial-closure-source-hashes.json",
+    "sha256": "2fd4cb66374ef573d0737b225f5fe55281b7a092bc65973496839b34c7b13ef8",
+    "files": 2480
+  },
+  "new_passed_tests": 103,
+  "new_failed_tests": 2,
+  "reused_native_passed_tests": 84,
+  "new_native_invocations": 0,
+  "gates": [
+    {
+      "gate": "lib",
+      "passed": 83,
+      "failed": 2,
+      "ignored": 0,
+      "filtered": 213,
+      "exit_code": 101,
+      "harness_seconds": 7.3,
+      "wall_seconds": 7.317802309989929
+    },
+    {
+      "gate": "flow-boundary",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0,
+      "exit_code": 0,
+      "harness_seconds": 0.15,
+      "wall_seconds": 0.16859795106574893
+    },
+    {
+      "gate": "massless-sources",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0,
+      "exit_code": 0,
+      "harness_seconds": 1.38,
+      "wall_seconds": 1.3952137003652751
+    },
+    {
+      "gate": "source-fingerprint",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0,
+      "exit_code": 0,
+      "harness_seconds": 0.01,
+      "wall_seconds": 0.010673481039702892
+    },
+    {
+      "gate": "python",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0,
+      "exit_code": 0,
+      "harness_seconds": 1.32,
+      "wall_seconds": 1.3388239457271993
+    },
+    {
+      "gate": "capacity",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0,
+      "exit_code": 0,
+      "harness_seconds": 0.03,
+      "wall_seconds": 0.05242017284035683
+    },
+    {
+      "gate": "polynomial-sources",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "filtered": 0,
+      "exit_code": 0,
+      "harness_seconds": 0.06,
+      "wall_seconds": 0.07591842114925385
+    }
+  ],
+  "failed_tests": [
+    "finite_density::massless_endpoint::raw_ward_draft_tests::raw_ward_maps_actual_energy_and_checks_every_base_guard",
+    "finite_density::measure::polynomial_closure_draft_tests::exact_energy_certificate_distinguishes_rescaled_compact_from_mixed_or_virtual_energy"
+  ],
+  "failure": "Unsupported: species 0 does not form directed nonbranching fermion cycles at vertex 0",
+  "exact_source_gate": {
+    "source_count": 62,
+    "original_legacy_rows_preserved": true,
+    "source_context_roundtrip": true,
+    "historical_rules_imported": false,
+    "report_sha256": "b2ea8ee6679de1050d99b5f0d40273400126d564c7b21594696fd16fe2ac4aad"
+  },
+  "next_attempt": {
+    "directory": "reports/validation/2026-10-10-polynomial-closure-integration-v2",
+    "source_policy_remains": "polynomial-closure-v1",
+    "change_scope": "cfg(test) fixture routing/charge assignments and associated assertions only; production source policy unchanged",
+    "correction_binding_sha256": "f6e32f78ae202d853d62bec567c10d5f5e30f75aafcb1fd45a4b2a2d339ab8c1",
+    "correction_patch_sha256": "8050804ba435117ee46c4f909419bac30e3e2ae3962adc3b472f95d0a1475858",
+    "validation_status": "separate build and gates pending at this checkpoint"
+  },
+  "native_full_amplitude_runs": 0,
+  "new_three_loop_numerical_acceptance": false,
+  "new_four_loop_numerical_acceptance": false,
+  "summary_script_sha256": "ae5536ee1828e6978553da0ad669b971a7a8e3011402b3c3b82fb0d27e4ae207"
+}

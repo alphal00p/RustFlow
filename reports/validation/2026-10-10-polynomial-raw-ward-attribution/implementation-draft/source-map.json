@@ -1,0 +1,19 @@
+{
+  "status": "Draft only; rustfmt parsed; not applied, typechecked, or executed; no numerical acceptance",
+  "production_files_changed": false,
+  "patch_sha256": "4d801fc62eadba25cece7065eaec51c3c5ed1b951e980ec5c8475cf695cd195b",
+  "files": {
+    "src/finite_density/massless_endpoint.rs": {
+      "base_sha256": "131b4fedd8816cfbadd9ceb7e80e051c1e4844acdbabb63e7f4d101fe121929f",
+      "draft_sha256": "13ef55fd25af856b23dc67bce01ac1c9532306aeeefa60c0cc0857cf67dea9d6"
+    },
+    "src/finite_density/measure.rs": {
+      "base_sha256": "eef3449b8c95847a042593fd2eec8ce5bb09bf7563bb8ef2ba998322c8fb654a",
+      "draft_sha256": "0a629bc211dbc014de912edb9bcc7eab70146a3d42f72a8f91bfdd31ebae400b"
+    },
+    "src/finite_density/preparation.rs": {
+      "base_sha256": "f7c5f5a35a176104d61760dd88f9fdee6d2e713e766e6a3e3b0f9ca3068168e6",
+      "draft_sha256": "9558ded9c1bd8f1dc387e0fea7c536c98054f643d17833d46fee63d17229d5aa"
+    }
+  }
+}

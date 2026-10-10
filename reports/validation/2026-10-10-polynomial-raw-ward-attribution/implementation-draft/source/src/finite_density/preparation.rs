@@ -22,10 +22,6 @@ pub enum WeightedSourcePolicy {
     TangentsThenLorentz,
     NormalsThenLorentz,
     LorentzThenNormals,
-    /// Legacy, shifted polynomial temporal U, shifted common boost, then a
-    /// guarded raw Ward pair only under bound singleton-germ evidence.
-    #[serde(rename = "polynomial-closure-v1")]
-    PolynomialClosure,
 }
 
 impl WeightedSourcePolicy {
@@ -37,7 +33,6 @@ impl WeightedSourcePolicy {
             Self::TangentsThenLorentz => "tangents-then-lorentz",
             Self::NormalsThenLorentz => "normals-then-lorentz",
             Self::LorentzThenNormals => "lorentz-then-normals",
-            Self::PolynomialClosure => "polynomial-closure-v1",
         }
     }
 }
@@ -53,7 +48,6 @@ impl std::str::FromStr for WeightedSourcePolicy {
             "tangents-then-lorentz" => Ok(Self::TangentsThenLorentz),
             "normals-then-lorentz" => Ok(Self::NormalsThenLorentz),
             "lorentz-then-normals" => Ok(Self::LorentzThenNormals),
-            "polynomial-closure-v1" => Ok(Self::PolynomialClosure),
             _ => Err(Error::InvalidInput(format!(
                 "unknown weighted source presentation {value}"
             ))),
@@ -163,6 +157,7 @@ impl OccupiedCutFamily {
             identity,
             options,
             None,
+            false,
         )
     }
 
@@ -192,6 +187,38 @@ impl OccupiedCutFamily {
             identity,
             options,
             Some(origin),
+            false,
+        )
+    }
+
+    /// Explicit source-only presentation: prefix the polynomial raw Ward pair
+    /// to the requested legacy/tangent policy. Requires a bound singleton-germ
+    /// proof; other classes fail rather than silently applying another theorem.
+    /// Existing factories, source options, zero domains and flow dispatch stay
+    /// unchanged. This does not assert native closure or numerical accuracy.
+    pub fn guarded_sources_with_massless_raw_ward<const N: usize>(
+        &self,
+        epsilon: Symbol,
+        dimension: i64,
+        eta: Symbol,
+        shifted: &[usize],
+        domain_budget: usize,
+        parameters: Vec<Symbol>,
+        identity: GuardedMeasureIdentity,
+        options: WeightedSourceOptions,
+        origin: &MasslessFlowEvidence,
+    ) -> Result<PreparedWeightedSources<N>> {
+        self.guarded_sources_with_origin(
+            epsilon,
+            dimension,
+            eta,
+            shifted,
+            domain_budget,
+            parameters,
+            identity,
+            options,
+            Some(origin),
+            true,
         )
     }
 
@@ -206,14 +233,8 @@ impl OccupiedCutFamily {
         mut identity: GuardedMeasureIdentity,
         options: WeightedSourceOptions,
         origin: Option<&MasslessFlowEvidence>,
+        raw_singleton_ward: bool,
     ) -> Result<PreparedWeightedSources<N>> {
-        if options.policy == WeightedSourcePolicy::PolynomialClosure
-            && options.positive_compact_energy_powers
-        {
-            return Err(Error::InvalidInput(
-                "PolynomialClosure requires polynomial completion powers".into(),
-            ));
-        }
         if options.free_virtual_zero_sectors && origin.is_none() {
             return Err(Error::InvalidInput(
                 "free virtual zero sectors require bound sealed massless evidence".into(),
@@ -298,48 +319,30 @@ impl OccupiedCutFamily {
             }
             measure.compact_normal_ibps(self.loops(), &completions, &indices, domain_budget)
         };
+        // An additive, explicitly requested presentation. The typed constructor
+        // rejects all non-singleton classes and binds the exact deformed factors.
+        // Defaults and existing source options keep their established semantics.
+        let ward = if raw_singleton_ward {
+            let evidence = origin
+                .ok_or_else(|| {
+                    Error::InvalidInput(
+                        "raw singleton Ward sources require sealed massless origin evidence".into(),
+                    )
+                })?
+                .singleton_raw_ward_evidence::<N>(self, shifted, eta)?;
+            identity
+                .measure
+                .push_str(&format!("; raw Ward evidence={}", evidence.identity()));
+            measure.raw_singleton_ward_sources(
+                &evidence,
+                &symbolic_dimension,
+                &indices,
+                domain_budget,
+            )?
+        } else {
+            Vec::new()
+        };
         let mut identities = match policy {
-            WeightedSourcePolicy::PolynomialClosure => {
-                let completions = self.polynomial_compact_energy_completions()?;
-                let (temporal, boost) = measure.polynomial_closure_sources(
-                    self.loops(),
-                    self.physical_slots(),
-                    self.input_slots(),
-                    &completions,
-                    &symbolic_dimension,
-                    &indices,
-                    domain_budget,
-                )?;
-                let mut sources = legacy()?;
-                sources.extend(temporal);
-                sources.extend(boost);
-                let ward = match origin {
-                    Some(origin) => {
-                        origin.optional_singleton_raw_ward_evidence::<N>(self, shifted, eta)?
-                    }
-                    None => None,
-                };
-                identity.measure.push_str(&format!(
-                    "; polynomial-closure-v1 order=legacy,shifted-temporal-U,shifted-common-boost,raw-Ward; original-completion-domain<=0; exact-energy-completions={completions:?}"
-                ));
-                if let Some(evidence) = ward {
-                    identity
-                        .measure
-                        .push_str(&format!("; raw Ward evidence={}", evidence.identity()));
-                    sources.extend(measure.raw_singleton_ward_sources(
-                        &evidence,
-                        &symbolic_dimension,
-                        &indices,
-                        domain_budget,
-                    )?);
-                } else {
-                    identity.measure.push_str(
-                        "; raw Ward deliberately omitted: no bound singleton-germ theorem",
-                    );
-                }
-                sources
-            }
-
             WeightedSourcePolicy::LegacyLorentz => legacy()?,
             WeightedSourcePolicy::ActiveLorentz => lorentz()?,
             WeightedSourcePolicy::LorentzThenTangents => {
@@ -363,6 +366,13 @@ impl OccupiedCutFamily {
                 sources
             }
         };
+        if !ward.is_empty() {
+            // Raw (not upper-recentered) rows are the validated presentation.
+            // These rows add no inverse-energy domain or support-zero premise.
+            let mut prefixed = ward;
+            prefixed.extend(identities);
+            identities = prefixed;
+        }
         identity
             .measure
             .push_str(&format!("; source presentation={}", policy.as_str()));

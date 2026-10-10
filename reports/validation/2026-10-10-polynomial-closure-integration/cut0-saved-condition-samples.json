@@ -1,0 +1,44 @@
+{
+  "scope": "Exact rational specialization of all retained conditions in the already source-replayed standalone cut0 closure. No prediction or new rule. Production closure may produce different conditions. This checks listed samples only, not an entire Laurent grid.",
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/active-resume/polynomial62-baseline/result.json": "6d6fccb5ff11db3901d74f168093e9c1225ee1dc69642aca0c969264fb667ea2",
+    "reports/validation/2026-10-10-native-source-portfolio-experiment/condition-polynomials-v2.py": "266c1f6e8a448f6fb149f2239c6a77923ab6b8566c688c45d353acaae6583957"
+  },
+  "samples": [
+    {
+      "epsilon": "-5/4",
+      "conditions_checked": 677,
+      "identically_zero_after_specialization": [],
+      "nonmonomial_eta_conditions": [],
+      "maximum_eta_degree": 2
+    },
+    {
+      "epsilon": "-19/6",
+      "conditions_checked": 677,
+      "identically_zero_after_specialization": [],
+      "nonmonomial_eta_conditions": [],
+      "maximum_eta_degree": 2
+    },
+    {
+      "epsilon": "1/8",
+      "conditions_checked": 677,
+      "identically_zero_after_specialization": [],
+      "nonmonomial_eta_conditions": [],
+      "maximum_eta_degree": 2
+    },
+    {
+      "epsilon": "1/1000",
+      "conditions_checked": 677,
+      "identically_zero_after_specialization": [],
+      "nonmonomial_eta_conditions": [],
+      "maximum_eta_degree": 2
+    },
+    {
+      "epsilon": "1/2000",
+      "conditions_checked": 677,
+      "identically_zero_after_specialization": [],
+      "nonmonomial_eta_conditions": [],
+      "maximum_eta_degree": 2
+    }
+  ]
+}

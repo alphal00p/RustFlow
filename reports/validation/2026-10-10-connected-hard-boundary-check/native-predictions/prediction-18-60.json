@@ -1,0 +1,22 @@
+{
+  "bubble_subloops": false,
+  "digits": 18,
+  "dimension": "12/5",
+  "elapsed_seconds": 0.68043694,
+  "epsilon": "4/5",
+  "family": "IntegralFamily { name: \"independent_equal_mass_hard_boundary_gate\", loops: [\"K\", \"L\"], external: [], external_gram: [], propagators: [Propagator { constant: -1, scalar_products: [1, 0, 0] }, Propagator { constant: -1, scalar_products: [0, 0, 1] }, Propagator { constant: -1, scalar_products: [1, -2, 1] }], physical_propagators: 3, epsilon: hard_boundary_gate::epsilon, dimension: 4 }",
+  "guard_digits": 40,
+  "native_preparations": 3,
+  "normalization": "d^D K/(i*pi^(D/2)) d^D L/(i*pi^(D/2))",
+  "powers": [
+    1,
+    1,
+    1
+  ],
+  "reference_files_read": 0,
+  "scope": "Ordinary recursive equal-mass hard coefficient; no reference data loaded",
+  "series_order": 60,
+  "terminal_policy": "TadpolesOnly",
+  "value": "(-4.9970611241415729523097011536559358268801602610978951892539461+-6.5325049200450029939394738122178477753428607709783523456777817e-53i)",
+  "working_bits": 209
+}

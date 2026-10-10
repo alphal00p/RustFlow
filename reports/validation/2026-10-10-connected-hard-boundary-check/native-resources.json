@@ -1,0 +1,14 @@
+{
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-connected-hard-boundary-v2",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-connected-hard-boundary-check/native-predictions"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 2.172319400124252,
+  "user_seconds": 2.109937,
+  "system_seconds": 0.048659,
+  "peak_child_rss_kib": 18432,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

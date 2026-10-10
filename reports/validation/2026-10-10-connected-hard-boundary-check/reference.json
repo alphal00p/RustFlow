@@ -1,0 +1,84 @@
+{
+  "scope": "Independent convergent reference only; no native predictions or oracle records read.",
+  "dimension": "12/5",
+  "epsilon": "4/5",
+  "masses_squared": [
+    "1",
+    "1",
+    "1"
+  ],
+  "powers": [
+    1,
+    1,
+    1
+  ],
+  "normalization": "Two loop measures d^Dk/(i*pi^(D/2)); native sign (-1)^3 relative to positive Euclidean pi-normalized integral.",
+  "prescription": "positive unit masses; convergent real Schwinger integral",
+  "profiles": [
+    {
+      "decimal_digits": 35,
+      "nodes_per_axis": 32,
+      "map_power": 5,
+      "function_evaluations": 1024,
+      "simplex_integral": "3.3555513924580430615810484567519450812821041643283787",
+      "gamma_factor": "1.4891922488128171023943333883213422813205990388108587",
+      "gamma_log_truncation_bound": "4.8187844016068187036418081254383275063484479030795069E-47",
+      "gamma_stirling_terms_checked": 12,
+      "euclidean_pi_normalized": "4.9970611241415729523097011536872535265698555363275447",
+      "native_minkowski": "-4.9970611241415729523097011536872535265698555363275447",
+      "wall_seconds": 0.12502496223896742
+    },
+    {
+      "decimal_digits": 50,
+      "nodes_per_axis": 64,
+      "map_power": 5,
+      "function_evaluations": 4096,
+      "simplex_integral": "3.3555513924580430615810484567309150902150262092890794416501522966886",
+      "gamma_factor": "1.4891922488128171023943333883213422813205990387599247353386794291421",
+      "gamma_log_truncation_bound": "9.5089870332781913617809877857276403001553679975397501613981921586772E-62",
+      "gamma_stirling_terms_checked": 17,
+      "euclidean_pi_normalized": "4.9970611241415729523097011536559358268801602610978951499067036486872",
+      "native_minkowski": "-4.9970611241415729523097011536559358268801602610978951499067036486872",
+      "wall_seconds": 0.6200765930116177
+    },
+    {
+      "decimal_digits": 65,
+      "nodes_per_axis": 96,
+      "map_power": 5,
+      "function_evaluations": 9216,
+      "simplex_integral": "3.3555513924580430615810484567309150902150262092890794641347666096557162659839679292",
+      "gamma_factor": "1.4891922488128171023943333883213422813205990387599247353386795640450801631219718680",
+      "gamma_log_truncation_bound": "1.2402573575210592263536950341236465450262652889114125508547603017261100063493988637E-77",
+      "gamma_stirling_terms_checked": 23,
+      "euclidean_pi_normalized": "4.9970611241415729523097011536559358268801602610978951833906174537774802731704621321",
+      "native_minkowski": "-4.9970611241415729523097011536559358268801602610978951833906174537774802731704621321",
+      "wall_seconds": 2.240601236000657
+    },
+    {
+      "decimal_digits": 65,
+      "nodes_per_axis": 96,
+      "map_power": 10,
+      "function_evaluations": 9216,
+      "simplex_integral": "3.3555513924580430615810484567309150902150262092890794641346195991413617387382363149",
+      "gamma_factor": "1.4891922488128171023943333883213422813205990387599247353386795640450801631219718680",
+      "gamma_log_truncation_bound": "1.2402573575210592263536950341236465450262652889114125508547603017261100063493988637E-77",
+      "gamma_stirling_terms_checked": 23,
+      "euclidean_pi_normalized": "4.9970611241415729523097011536559358268801602610978951833903985268590095258121146736",
+      "native_minkowski": "-4.9970611241415729523097011536559358268801602610978951833903985268590095258121146736",
+      "wall_seconds": 1.6308522033505142
+    }
+  ],
+  "relative_changes_from_selected": [
+    "6.2672236563996862316202904507620649177061121044778998402615669581603797144768297E-30",
+    "6.7007212786180118334594289037460532399700796522948348141530483636924961392533941E-54",
+    "0.000",
+    "4.3811134791423233079307526522002755600642146475685168458706530945094990730492418E-59"
+  ],
+  "reference_native": "-4.9970611241415729523097011536559358268801602610978951833906174537774802731704621321",
+  "reference_absolute_imaginary_part": "0",
+  "accepted_comparison_relative_tolerance": "1e-10",
+  "precision_claim": "10 decimal digits, empirically verified by order, arithmetic precision and coordinate-map refinement. Gamma truncation separately bounded; quadrature error is not an interval enclosure.",
+  "source_sha256": "d45f3e41f3234fe7b118b84850d9f017b53ee57e658fc9df612adf2a65c34889",
+  "oracle_records_read": 0,
+  "native_prediction_files_read": 0
+}

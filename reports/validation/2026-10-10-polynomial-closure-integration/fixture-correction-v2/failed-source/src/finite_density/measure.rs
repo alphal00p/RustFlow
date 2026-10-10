@@ -1357,18 +1357,16 @@ mod polynomial_closure_draft_tests {
         for edge in &mut definition.edges {
             edge.mass_squared = "0".into();
         }
-        // Preserve unit charged-edge cycles while changing the exact loop
-        // normalization. Then the original medium completion is 2 E_a.
-        definition.edges[0].routing = vec!["1/2".into(), "0".into()];
-        definition.edges[1].routing = vec!["0".into(), "1/2".into()];
-        definition.edges[2].routing = vec!["1/2".into(), "-1/2".into()];
-        definition.loop_charges = vec![vec![2], vec![2]];
+        definition.edges[0].routing = vec!["2".into(), "0".into()];
+        definition.edges[1].routing = vec!["0".into(), "2".into()];
+        definition.edges[2].routing = vec!["2".into(), "-2".into()];
+        definition.edges[0].charges = vec![2];
+        definition.edges[1].charges = vec![2];
         let input = definition.prepare().unwrap();
         let family = input.occupied_cut(&[0], 16).unwrap().at_physical_masses();
-        assert_eq!(family.routing_determinant(), &Rational::from((1, 2)));
         let maps = family.polynomial_compact_energy_completions().unwrap();
         assert_eq!(maps.len(), 1);
-        assert_eq!(maps[0].coefficient(), &Rational::from(2));
+        assert_eq!(maps[0].coefficient(), &Rational::from((1, 2)));
         let mut definition = input.input().clone();
         definition.edges[0].routing = vec!["1".into(), "1".into()];
         definition.edges[1].routing = vec!["0".into(), "1".into()];
@@ -1378,7 +1376,6 @@ mod polynomial_closure_draft_tests {
         definition.loop_charges = vec![vec![0], vec![1]];
         let input = definition.prepare().unwrap();
         let family = input.occupied_cut(&[0], 16).unwrap().at_physical_masses();
-        assert_eq!(family.routing_determinant(), &Rational::from(-1));
         assert!(
             family
                 .polynomial_compact_energy_completions()

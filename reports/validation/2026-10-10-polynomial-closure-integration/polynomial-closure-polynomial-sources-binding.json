@@ -1,0 +1,22 @@
+{
+  "source_snapshot_sha256": "2fd4cb66374ef573d0737b225f5fe55281b7a092bc65973496839b34c7b13ef8",
+  "build_provenance_sha256": "ed77e3fd501a46ff255bcae7f874df4dcc2b70e824a8fecf62ed40d4984b7f12",
+  "launcher_sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+  "gate": "polynomial-sources",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_polynomial_sources-67356704627148d2",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "native_numerical_acceptance_run": false,
+  "report_environment": {
+    "RUSTFLOW_POLYNOMIAL_SOURCE_REPORT": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration/polynomial-closure-actual62-source-equivalence.json"
+  },
+  "source_equivalence_report": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration/polynomial-closure-actual62-source-equivalence.json",
+    "sha256": "b2ea8ee6679de1050d99b5f0d40273400126d564c7b21594696fd16fe2ac4aad"
+  }
+}

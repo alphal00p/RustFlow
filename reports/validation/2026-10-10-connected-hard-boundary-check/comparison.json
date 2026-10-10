@@ -1,0 +1,43 @@
+{
+  "status": "passed",
+  "scope": "Independent 10-digit check of one convergent ordinary connected hard coefficient, evaluated recursively without bubble or sunset terminals. No full three-loop finite-density acceptance claim.",
+  "comparisons": [
+    {
+      "digits": 18,
+      "series_order": 60,
+      "relative_real_error": "1.1733553984152554742629088777255499365432200106010081841485269779660834084147319E-54",
+      "absolute_imaginary_error": "6.5325049200450029939394738122178477753428607709783523456777817E-53"
+    },
+    {
+      "digits": 28,
+      "series_order": 60,
+      "relative_real_error": "3.1238689432186173782799901830485686522093235589395800195235609261400303088623335E-56",
+      "absolute_imaginary_error": "2.15645485162418935277804766738763691209156588083498637706327350056743532E-55"
+    },
+    {
+      "digits": 28,
+      "series_order": 80,
+      "relative_real_error": "2.0110301399266842041748032656786549698496492819085856954429010402593025077995589E-64",
+      "absolute_imaginary_error": "4.38951336161023871198578165254325588600012287135655512004520632636235470E-64"
+    }
+  ],
+  "relative_native_refinements": [
+    "1.3029539182687608180393536057742743190599926433881363972471343572997034191875061E-53",
+    "4.3154462241727177002594094578218265062999492869180233489527356110433502899764962E-56"
+  ],
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-connected-hard-boundary-check/native-build-binding.json": "142863ece651a4a17cea0dbc11c3a7500874548f719863b9ac33cc5630e49822",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/native-run-binding.json": "ae7e539d6a8318f92a89385927d75f0afdcc0cb6697ad1e099e1c0618e64311c",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/native-resources.json": "b6c4dfd215741a7fc0a8af6f1e87e2891892e1678e503c4786cb37093d03b977",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/native-predictions/prediction-18-60.json": "d5ea8e3a46b6e16a5c9ef7e3d68fb5a76a2a6e1452de8fd656812899487851e8",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/native-predictions/prediction-28-60.json": "a249f62b176016a9a76b548e6e99e3b2f97d11da73378bd3feccfa78b27224db",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/native-predictions/prediction-28-80.json": "22058d0a2d9d14f81a93a202984c1dd5e30737dab659882eb19d7e2175a8547b",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/reference.json": "60cd480d74a2b332e01e06ca40dd3c9fd60e00c884d899682d2882ca2f15497b",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/reference.py": "d45f3e41f3234fe7b118b84850d9f017b53ee57e658fc9df612adf2a65c34889",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/native.rs": "c2a003c8a2f0cde45bca7f3efcd1b5efacb2f30b496ce7ce536816eb9a2ba0c6",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/derivation.md": "23c5dbd8f18af2ae997336b8121f7ee33925e9b56c5405982eeacb2a06600172",
+    "reports/validation/2026-10-10-connected-hard-boundary-check/compare.py": "ad0715f9aed4c289c5dc76f79b9b9d3356ff180861a5aa683f69fa1f3033c7c5",
+    "tools/finite_density/compare_massive_reference.py": "7739206862f6d40714a4587231a24cf99a8206811cad82fd2755ef97b52f57aa"
+  },
+  "definitions_or_tolerances_fitted": false
+}

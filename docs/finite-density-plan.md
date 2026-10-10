@@ -170,10 +170,14 @@ assembled three-loop amplitude.
 
 Since unchanged RustRed closes the polynomial corpus, production integration
 uses the optional `polynomial-closure-v1` source policy and keeps native search
-unchanged. The [integration gate](../reports/validation/2026-10-10-polynomial-closure-integration/)
-checks the actual public factory against the complete frozen corpus before
-full native preparation, boundaries, transport and Laurent refinement. Those
-three-loop numerical gates still precede four-loop numerical scale-up.
+unchanged. The [corrected integration gate](../reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-root-gates.json)
+passes 105 tests, including exact agreement of the public factory with the
+complete frozen corpus. The unchanged native binary and sources authenticate
+reuse of the earlier 84 passing RustRed tests. The initial attempt's two invalid
+nonunit-routing fixtures and their correction remain recorded separately; no
+production admission rule was relaxed. Full native three-loop preparation,
+boundaries, transport and Laurent refinement remain pending. Those numerical
+gates still precede four-loop numerical scale-up.
 
 ## Remaining acceptance evidence
 

@@ -1,0 +1,15 @@
+{
+  "scope": "Preserved exact initial coherent-build source files before the authorized fixture-only correction. Two nonunit fixtures used edge charge2, correctly rejected by nonbranching graph admission. No production logic changed.",
+  "files": {
+    "src/finite_density/massless_endpoint.rs": {
+      "sha256": "4828eec11ab554faf78efd540e2817182a005aa10fbed044196d96069e01b60d",
+      "bytes": 116447,
+      "preserved": "reports/validation/2026-10-10-polynomial-closure-integration/fixture-correction-v2/failed-source/src/finite_density/massless_endpoint.rs"
+    },
+    "src/finite_density/measure.rs": {
+      "sha256": "6df100881b39803db9d3b4233cc2132a8778d51fdc7e3ee84ebe9d6f80665abb",
+      "bytes": 75773,
+      "preserved": "reports/validation/2026-10-10-polynomial-closure-integration/fixture-correction-v2/failed-source/src/finite_density/measure.rs"
+    }
+  }
+}

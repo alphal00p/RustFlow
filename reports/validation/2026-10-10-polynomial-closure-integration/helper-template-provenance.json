@@ -1,0 +1,29 @@
+{
+  "scope": "Validation infrastructure copied from the immutable guard-point report; no snapshot or build performed.",
+  "templates": {
+    "frozen_sources.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/frozen_sources.py",
+      "sha256": "604f43a7d4da6f77e3f9142222f568a93e66f5458b5390e7b5295032190e2921"
+    },
+    "capture-source-snapshot.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/capture-source-snapshot.py",
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b"
+    },
+    "capture-frozen-build.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/capture-frozen-build.py",
+      "sha256": "af3b0e92b7a2ad0b8a33ac7793f020e71dc916adc6cb80ba1bc15e7a484809ef"
+    },
+    "run-frozen-root-gate.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/run-frozen-root-gate.py",
+      "sha256": "5deb2a7e83c2aa19f186615b84a9a863fd594fa94afe7eb20bae7c1038d5e9c8"
+    },
+    "summarize-frozen-root-gates.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/summarize-frozen-root-gates.py",
+      "sha256": "087b007a12ccd2aeede89edff61f153968adb568c5491d1b74c8a1333326b192"
+    },
+    "run-resource-command.py": {
+      "path": "reports/validation/2026-10-10-native-zero-domain-projection/run-resource-command.py",
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c"
+    }
+  }
+}

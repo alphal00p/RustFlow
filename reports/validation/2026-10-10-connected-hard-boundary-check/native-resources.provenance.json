@@ -1,0 +1,22 @@
+{
+  "captured_utc": "2026-10-10T04:12:28.781881+00:00",
+  "command": [
+    "timeout",
+    "300",
+    "/tmp/rustflow-connected-hard-boundary-v2",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-connected-hard-boundary-check/native-predictions"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/tmp/rustflow-connected-hard-boundary-v2": {
+      "resolved_path": "/tmp/rustflow-connected-hard-boundary-v2",
+      "sha256": "3e1bb28349b55d161f667ec58700d4187e5d65ab4f4f520c87c02ff1ded318e0",
+      "size_bytes": 1229960304
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

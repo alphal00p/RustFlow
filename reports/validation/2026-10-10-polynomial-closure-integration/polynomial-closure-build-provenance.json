@@ -1,0 +1,120 @@
+{
+  "source_files_verified_unchanged": 2480,
+  "captured_utc": "2026-10-10T03:56:59.728613+00:00",
+  "source_snapshot": "polynomial-closure-source-hashes.json",
+  "source_snapshot_sha256": "2fd4cb66374ef573d0737b225f5fe55281b7a092bc65973496839b34c7b13ef8",
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "feature_fingerprints": {
+    "rustred_unit": {
+      "path": "target/release/.fingerprint/rustred-258a1e04558e72f1/test-lib-rustred.json",
+      "sha256": "b85b676aa329bd69637774a73713fd78868a30a598b305806ea55b008d469e55"
+    },
+    "rustred_library": {
+      "path": "target/release/.fingerprint/rustred-392075d0c6995fd1/lib-rustred.json",
+      "sha256": "5e3609f12e7b3f8933aba3405bdcf2f25882fe858c7a5b4fa3cedde5d8d91c44"
+    },
+    "rustflow": {
+      "path": "target/release/.fingerprint/symbolica-amflow-6c032eef1649ac2e/test-lib-symbolica_amflow.json",
+      "sha256": "0bb60215a3b0218444c962fb7300109026b781779047bf09d56e3ffc9ceca750"
+    }
+  },
+  "checks": {
+    "combined_release_build": "passed",
+    "wall_seconds": 401.6172275580466,
+    "measurement_scope": "shared host; build times are not isolated benchmarks; regression execution recorded separately"
+  },
+  "build_resources": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration/polynomial-closure-build-resources.json",
+    "sha256": "d93e28f510c79a01d73d3029edcfc19835ccf273152e1b5559de142b1bc5bc1d"
+  },
+  "build_log": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration/polynomial-closure-build-resources.log",
+    "sha256": "98e9af159635b161c1d5d09bf7ec241dc694fbbcfe91be33c1a568a94c5ae970"
+  },
+  "build_launch": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration/polynomial-closure-build-resources.provenance.json",
+    "sha256": "f48b8d052d25ff2aae440bab09f9c235d93e3a9cf029df67195ff1e19e81ca50"
+  },
+  "files": {
+    "target/release/deps/symbolica_amflow-6c032eef1649ac2e": {
+      "sha256": "206623aad40a0c0fa608f4a7ce82a11a868f441e916b710d60d271c3efc29092",
+      "size_bytes": 1272963232,
+      "mtime_utc": "2026-10-10T03:53:45.818822+00:00"
+    },
+    "target/release/deps/rustred-258a1e04558e72f1": {
+      "sha256": "2ade4eee609051f20140d93a6e12d92b6d141079228c11bb111f6af02eae9f4f",
+      "size_bytes": 629301624,
+      "mtime_utc": "2026-10-10T01:25:25.677492+00:00"
+    },
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f": {
+      "sha256": "d6f53ed7a9c087228322773a7080059c35344253d8eb63e2206c979c3ef6ab4e",
+      "size_bytes": 1307924312,
+      "mtime_utc": "2026-10-10T03:55:50.785077+00:00"
+    },
+    "target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib": {
+      "sha256": "4cb07c7de2aef2ac17dc1dd28685cde3f8fd52c65960e0a8a363c4d62a866fc1",
+      "size_bytes": 630562246,
+      "mtime_utc": "2026-10-10T03:53:01.149730+00:00"
+    },
+    "target/release/deps/librustred-392075d0c6995fd1.rlib": {
+      "sha256": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0",
+      "size_bytes": 435821774,
+      "mtime_utc": "2026-10-10T01:23:09.810158+00:00"
+    },
+    "target/release/build/symbolica-amflow-5130bc8702e2f88e/output": {
+      "sha256": "95adf8c0f44fc3dab39265852860b8f45919e0817967316accc801c8258dcb9d",
+      "size_bytes": 725188,
+      "mtime_utc": "2026-10-10T03:49:16.009263+00:00"
+    },
+    "target/release/deps/finite_density_flow_boundary-9423d5e4f8668f3b": {
+      "sha256": "fafce0def70ed43c1981a3dfa41c17566e251d6da4ad3bd06735969028b79077",
+      "size_bytes": 1233213264,
+      "mtime_utc": "2026-10-10T03:53:28.716787+00:00"
+    },
+    "target/release/deps/finite_density_massless_sources-6295c8431ae8f488": {
+      "sha256": "24812bc27a9068cf23f0add0f6c7c4885ff7992e3f0049320dd8c5bc51890c96",
+      "size_bytes": 1300559264,
+      "mtime_utc": "2026-10-10T03:55:56.010087+00:00"
+    },
+    "target/release/deps/source_fingerprint-3c52aa1b71e5ce60": {
+      "sha256": "e6b4eac4368dde090af6c7de33c480ead1a3ea435650fd4edb5fc16639232143",
+      "size_bytes": 3280600,
+      "mtime_utc": "2026-10-10T03:53:03.295734+00:00"
+    },
+    "target/release/deps/python_finite_density-86655a919328faf8": {
+      "sha256": "ed3b590515841410646be8d1c98073dea3dc338977a5438a575a3d49d4c1f74c",
+      "size_bytes": 1238889872,
+      "mtime_utc": "2026-10-10T03:53:30.093789+00:00"
+    },
+    "target/release/deps/finite_density_capacity-fceac547516b5e9d": {
+      "sha256": "40103aa77d050d2f7d3e875151f45daf696d26bade18035e7be011238f1c4d19",
+      "size_bytes": 1294252096,
+      "mtime_utc": "2026-10-10T03:55:50.922077+00:00"
+    },
+    "target/release/deps/finite_density_polynomial_sources-67356704627148d2": {
+      "sha256": "657f3bd8b545e8136823c3ae2c2ea7d8a6ca0c0dcb3ab4715429d2eb23002aa6",
+      "size_bytes": 1263450920,
+      "mtime_utc": "2026-10-10T03:54:39.823932+00:00"
+    }
+  },
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+    "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+    "PORT_SOURCE_DIGEST": "4de31030160a89baba9f71df673ec3c850d840a557506939dc7885f100ddc11e"
+  },
+  "capture_script_sha256": "a1f36db9177de6330df3d986e24218ac08ad916fbe4b373f058b3110888fc397"
+}

@@ -1,0 +1,561 @@
+Reduction { integrals: 1 }
+SectorReduction { active_lines: 3, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 1, retained_nodes: 1, terminals: 1, minimum_lines: 3, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 0 }
+DifferentialClosure { round: 0, requested: 1, basis_size: 1, new_derivatives: 1 }
+Reduction { integrals: 2 }
+SectorReduction { active_lines: 3, integrals: 2, visited: 0 }
+SectorReduced { integrals: 2, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 1 }
+SubstitutionPlan { roots: 2, retained_nodes: 2, terminals: 1, minimum_lines: 3, backward: true, weighted: false }
+SubstitutionPlan { roots: 2, retained_nodes: 6, terminals: 5, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 2, remaining: 4 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 2 }
+SectorReduced { integrals: 1, seeds: 3, rows: 10, exact_trace_rows: 5, elapsed_ms: 1, exact_ms: 1 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 2, visited: 4 }
+SectorReduced { integrals: 2, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 5 }
+SubstitutionPlan { roots: 2, retained_nodes: 9, terminals: 4, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 6, remaining: 3 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 6 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 7 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 8 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 5 }
+SubstitutionPlan { roots: 4, retained_nodes: 4, terminals: 4, minimum_lines: 2, backward: true, weighted: true }
+ReductionFrontier { searched: 9, remaining: 0 }
+DifferentialClosure { round: 1, requested: 2, basis_size: 4, new_derivatives: 2 }
+Reduction { integrals: 3 }
+SectorReduction { active_lines: 3, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 3, retained_nodes: 1, terminals: 1, minimum_lines: 3, backward: true, weighted: false }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 2 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 1 }
+SectorReduced { integrals: 1, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 2 }
+SectorReduced { integrals: 1, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 5, terminals: 3, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 3, remaining: 2 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 4 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 2, backward: true, weighted: true }
+ReductionFrontier { searched: 5, remaining: 0 }
+DifferentialClosure { round: 2, requested: 4, basis_size: 4, new_derivatives: 0 }
+Prepared { basis_size: 4, blocks: [1, 1, 1, 1] }
+Stage { name: "compiling the auxiliary-mass differential equation (4 basis integrals, 2 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (4 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/4" }
+Stage { name: "factoring exact Frobenius indicial block 2/4" }
+Stage { name: "factoring exact Frobenius indicial block 3/4" }
+Stage { name: "factoring exact Frobenius indicial block 4/4" }
+Stage { name: "constructing exact Frobenius eigenspace 1/3" }
+Stage { name: "constructing exact Frobenius eigenspace 2/3" }
+Stage { name: "constructing exact Frobenius eigenspace 3/3" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (4 basis integrals, 2 loops)" }
+BoundaryPlan { basis_size: 4, region_series: 4, coefficients: 4, max_half_order: 0 }
+Reduction { integrals: 1 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 1, retained_nodes: 1, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 0 }
+DifferentialClosure { round: 0, requested: 1, basis_size: 1, new_derivatives: 2 }
+Reduction { integrals: 3 }
+SectorReduction { active_lines: 2, integrals: 3, visited: 0 }
+SectorReduced { integrals: 3, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+SubstitutionPlan { roots: 3, retained_nodes: 5, terminals: 3, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 3, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 3, rows: 5, exact_trace_rows: 3, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 4 }
+SectorReduced { integrals: 1, seeds: 2, rows: 4, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 4 }
+SubstitutionPlan { roots: 3, retained_nodes: 7, terminals: 3, minimum_lines: 1, backward: true, weighted: false }
+ReductionFrontier { searched: 5, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 5 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 6 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 4 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 1, backward: true, weighted: true }
+ReductionFrontier { searched: 7, remaining: 0 }
+DifferentialClosure { round: 1, requested: 3, basis_size: 3, new_derivatives: 2 }
+Reduction { integrals: 3 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 3, retained_nodes: 1, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 1 }
+SectorReduced { integrals: 1, seeds: 3, rows: 5, exact_trace_rows: 3, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 2 }
+SectorReduced { integrals: 1, seeds: 2, rows: 4, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 5, terminals: 3, minimum_lines: 1, backward: true, weighted: false }
+ReductionFrontier { searched: 3, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 4 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 1, backward: true, weighted: true }
+ReductionFrontier { searched: 5, remaining: 0 }
+DifferentialClosure { round: 2, requested: 5, basis_size: 3, new_derivatives: 0 }
+Prepared { basis_size: 3, blocks: [1, 1, 1] }
+Stage { name: "compiling the auxiliary-mass differential equation (3 basis integrals, 1 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (3 basis integrals, 1 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/3" }
+Stage { name: "factoring exact Frobenius indicial block 2/3" }
+Stage { name: "factoring exact Frobenius indicial block 3/3" }
+Stage { name: "constructing exact Frobenius eigenspace 1/2" }
+Stage { name: "constructing exact Frobenius eigenspace 2/2" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (3 basis integrals, 1 loops)" }
+Stage { name: "transporting the auxiliary-mass solution (3 basis integrals, 1 loops)" }
+Stage { name: "constructing the physical endpoint expansion (3 basis integrals, 1 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/3" }
+Stage { name: "factoring exact Frobenius indicial block 2/3" }
+Stage { name: "factoring exact Frobenius indicial block 3/3" }
+Stage { name: "constructing exact Frobenius eigenspace 1/2" }
+Stage { name: "constructing exact Frobenius eigenspace 2/2" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (3 basis integrals, 1 loops)" }
+Reduction { integrals: 1 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 1, retained_nodes: 1, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 0 }
+DifferentialClosure { round: 0, requested: 1, basis_size: 1, new_derivatives: 1 }
+Reduction { integrals: 2 }
+SectorReduction { active_lines: 2, integrals: 2, visited: 0 }
+SectorReduced { integrals: 2, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 1 }
+SubstitutionPlan { roots: 2, retained_nodes: 2, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 2, remaining: 0 }
+DifferentialClosure { round: 1, requested: 2, basis_size: 1, new_derivatives: 0 }
+Prepared { basis_size: 1, blocks: [1] }
+Stage { name: "compiling the auxiliary-mass differential equation (1 basis integrals, 2 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (1 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/1" }
+Stage { name: "constructing exact Frobenius eigenspace 1/1" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (1 basis integrals, 2 loops)" }
+BoundaryPlan { basis_size: 1, region_series: 1, coefficients: 1, max_half_order: 0 }
+Stage { name: "transporting the auxiliary-mass solution (1 basis integrals, 2 loops)" }
+Stage { name: "constructing the physical endpoint expansion (1 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/1" }
+Stage { name: "constructing exact Frobenius eigenspace 1/1" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (1 basis integrals, 2 loops)" }
+Stage { name: "transporting the auxiliary-mass solution (4 basis integrals, 2 loops)" }
+Stage { name: "constructing the physical endpoint expansion (4 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/4" }
+Stage { name: "factoring exact Frobenius indicial block 2/4" }
+Stage { name: "factoring exact Frobenius indicial block 3/4" }
+Stage { name: "factoring exact Frobenius indicial block 4/4" }
+Stage { name: "constructing exact Frobenius eigenspace 1/1" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (4 basis integrals, 2 loops)" }
+Reduction { integrals: 1 }
+SectorReduction { active_lines: 3, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 1, retained_nodes: 1, terminals: 1, minimum_lines: 3, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 0 }
+DifferentialClosure { round: 0, requested: 1, basis_size: 1, new_derivatives: 1 }
+Reduction { integrals: 2 }
+SectorReduction { active_lines: 3, integrals: 2, visited: 0 }
+SectorReduced { integrals: 2, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 1 }
+SubstitutionPlan { roots: 2, retained_nodes: 2, terminals: 1, minimum_lines: 3, backward: true, weighted: false }
+SubstitutionPlan { roots: 2, retained_nodes: 6, terminals: 5, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 2, remaining: 4 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 2 }
+SectorReduced { integrals: 1, seeds: 3, rows: 10, exact_trace_rows: 5, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 2, visited: 4 }
+SectorReduced { integrals: 2, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 5 }
+SubstitutionPlan { roots: 2, retained_nodes: 9, terminals: 4, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 6, remaining: 3 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 6 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 7 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 8 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 5 }
+SubstitutionPlan { roots: 4, retained_nodes: 4, terminals: 4, minimum_lines: 2, backward: true, weighted: true }
+ReductionFrontier { searched: 9, remaining: 0 }
+DifferentialClosure { round: 1, requested: 2, basis_size: 4, new_derivatives: 2 }
+Reduction { integrals: 3 }
+SectorReduction { active_lines: 3, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 3, retained_nodes: 1, terminals: 1, minimum_lines: 3, backward: true, weighted: false }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 2 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 1 }
+SectorReduced { integrals: 1, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 2 }
+SectorReduced { integrals: 1, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 5, terminals: 3, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 3, remaining: 2 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 4 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 2, backward: true, weighted: true }
+ReductionFrontier { searched: 5, remaining: 0 }
+DifferentialClosure { round: 2, requested: 4, basis_size: 4, new_derivatives: 0 }
+Prepared { basis_size: 4, blocks: [1, 1, 1, 1] }
+Stage { name: "compiling the auxiliary-mass differential equation (4 basis integrals, 2 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (4 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/4" }
+Stage { name: "factoring exact Frobenius indicial block 2/4" }
+Stage { name: "factoring exact Frobenius indicial block 3/4" }
+Stage { name: "factoring exact Frobenius indicial block 4/4" }
+Stage { name: "constructing exact Frobenius eigenspace 1/3" }
+Stage { name: "constructing exact Frobenius eigenspace 2/3" }
+Stage { name: "constructing exact Frobenius eigenspace 3/3" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (4 basis integrals, 2 loops)" }
+BoundaryPlan { basis_size: 4, region_series: 4, coefficients: 4, max_half_order: 0 }
+Reduction { integrals: 1 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 1, retained_nodes: 1, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 0 }
+DifferentialClosure { round: 0, requested: 1, basis_size: 1, new_derivatives: 2 }
+Reduction { integrals: 3 }
+SectorReduction { active_lines: 2, integrals: 3, visited: 0 }
+SectorReduced { integrals: 3, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+SubstitutionPlan { roots: 3, retained_nodes: 5, terminals: 3, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 3, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 3, rows: 5, exact_trace_rows: 3, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 4 }
+SectorReduced { integrals: 1, seeds: 2, rows: 4, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 4 }
+SubstitutionPlan { roots: 3, retained_nodes: 7, terminals: 3, minimum_lines: 1, backward: true, weighted: false }
+ReductionFrontier { searched: 5, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 5 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 6 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 4 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 1, backward: true, weighted: true }
+ReductionFrontier { searched: 7, remaining: 0 }
+DifferentialClosure { round: 1, requested: 3, basis_size: 3, new_derivatives: 2 }
+Reduction { integrals: 3 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 3, retained_nodes: 1, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 1 }
+SectorReduced { integrals: 1, seeds: 3, rows: 5, exact_trace_rows: 3, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 2 }
+SectorReduced { integrals: 1, seeds: 2, rows: 4, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 5, terminals: 3, minimum_lines: 1, backward: true, weighted: false }
+ReductionFrontier { searched: 3, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 4 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 1, backward: true, weighted: true }
+ReductionFrontier { searched: 5, remaining: 0 }
+DifferentialClosure { round: 2, requested: 5, basis_size: 3, new_derivatives: 0 }
+Prepared { basis_size: 3, blocks: [1, 1, 1] }
+Stage { name: "compiling the auxiliary-mass differential equation (3 basis integrals, 1 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (3 basis integrals, 1 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/3" }
+Stage { name: "factoring exact Frobenius indicial block 2/3" }
+Stage { name: "factoring exact Frobenius indicial block 3/3" }
+Stage { name: "constructing exact Frobenius eigenspace 1/2" }
+Stage { name: "constructing exact Frobenius eigenspace 2/2" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (3 basis integrals, 1 loops)" }
+Stage { name: "transporting the auxiliary-mass solution (3 basis integrals, 1 loops)" }
+Stage { name: "constructing the physical endpoint expansion (3 basis integrals, 1 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/3" }
+Stage { name: "factoring exact Frobenius indicial block 2/3" }
+Stage { name: "factoring exact Frobenius indicial block 3/3" }
+Stage { name: "constructing exact Frobenius eigenspace 1/2" }
+Stage { name: "constructing exact Frobenius eigenspace 2/2" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (3 basis integrals, 1 loops)" }
+Reduction { integrals: 1 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 1, retained_nodes: 1, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 0 }
+DifferentialClosure { round: 0, requested: 1, basis_size: 1, new_derivatives: 1 }
+Reduction { integrals: 2 }
+SectorReduction { active_lines: 2, integrals: 2, visited: 0 }
+SectorReduced { integrals: 2, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 1 }
+SubstitutionPlan { roots: 2, retained_nodes: 2, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 2, remaining: 0 }
+DifferentialClosure { round: 1, requested: 2, basis_size: 1, new_derivatives: 0 }
+Prepared { basis_size: 1, blocks: [1] }
+Stage { name: "compiling the auxiliary-mass differential equation (1 basis integrals, 2 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (1 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/1" }
+Stage { name: "constructing exact Frobenius eigenspace 1/1" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (1 basis integrals, 2 loops)" }
+BoundaryPlan { basis_size: 1, region_series: 1, coefficients: 1, max_half_order: 0 }
+Stage { name: "transporting the auxiliary-mass solution (1 basis integrals, 2 loops)" }
+Stage { name: "constructing the physical endpoint expansion (1 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/1" }
+Stage { name: "constructing exact Frobenius eigenspace 1/1" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (1 basis integrals, 2 loops)" }
+Stage { name: "transporting the auxiliary-mass solution (4 basis integrals, 2 loops)" }
+Stage { name: "constructing the physical endpoint expansion (4 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/4" }
+Stage { name: "factoring exact Frobenius indicial block 2/4" }
+Stage { name: "factoring exact Frobenius indicial block 3/4" }
+Stage { name: "factoring exact Frobenius indicial block 4/4" }
+Stage { name: "constructing exact Frobenius eigenspace 1/1" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (4 basis integrals, 2 loops)" }
+Reduction { integrals: 1 }
+SectorReduction { active_lines: 3, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 1, retained_nodes: 1, terminals: 1, minimum_lines: 3, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 0 }
+DifferentialClosure { round: 0, requested: 1, basis_size: 1, new_derivatives: 1 }
+Reduction { integrals: 2 }
+SectorReduction { active_lines: 3, integrals: 2, visited: 0 }
+SectorReduced { integrals: 2, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 1 }
+SubstitutionPlan { roots: 2, retained_nodes: 2, terminals: 1, minimum_lines: 3, backward: true, weighted: false }
+SubstitutionPlan { roots: 2, retained_nodes: 6, terminals: 5, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 2, remaining: 4 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 2 }
+SectorReduced { integrals: 1, seeds: 3, rows: 10, exact_trace_rows: 5, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 2, visited: 4 }
+SectorReduced { integrals: 2, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 5 }
+SubstitutionPlan { roots: 2, retained_nodes: 9, terminals: 4, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 6, remaining: 3 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 6 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 7 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 8 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 5 }
+SubstitutionPlan { roots: 4, retained_nodes: 4, terminals: 4, minimum_lines: 2, backward: true, weighted: true }
+ReductionFrontier { searched: 9, remaining: 0 }
+DifferentialClosure { round: 1, requested: 2, basis_size: 4, new_derivatives: 2 }
+Reduction { integrals: 3 }
+SectorReduction { active_lines: 3, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 3, retained_nodes: 1, terminals: 1, minimum_lines: 3, backward: true, weighted: false }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 2 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 1 }
+SectorReduced { integrals: 1, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 2 }
+SectorReduced { integrals: 1, seeds: 2, rows: 8, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 5, terminals: 3, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 3, remaining: 2 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 4 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 2, backward: true, weighted: true }
+ReductionFrontier { searched: 5, remaining: 0 }
+DifferentialClosure { round: 2, requested: 4, basis_size: 4, new_derivatives: 0 }
+Prepared { basis_size: 4, blocks: [1, 1, 1, 1] }
+Stage { name: "compiling the auxiliary-mass differential equation (4 basis integrals, 2 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (4 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/4" }
+Stage { name: "factoring exact Frobenius indicial block 2/4" }
+Stage { name: "factoring exact Frobenius indicial block 3/4" }
+Stage { name: "factoring exact Frobenius indicial block 4/4" }
+Stage { name: "constructing exact Frobenius eigenspace 1/3" }
+Stage { name: "constructing exact Frobenius eigenspace 2/3" }
+Stage { name: "constructing exact Frobenius eigenspace 3/3" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (4 basis integrals, 2 loops)" }
+BoundaryPlan { basis_size: 4, region_series: 4, coefficients: 4, max_half_order: 0 }
+Reduction { integrals: 1 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 1, retained_nodes: 1, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 0 }
+DifferentialClosure { round: 0, requested: 1, basis_size: 1, new_derivatives: 2 }
+Reduction { integrals: 3 }
+SectorReduction { active_lines: 2, integrals: 3, visited: 0 }
+SectorReduced { integrals: 3, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+SubstitutionPlan { roots: 3, retained_nodes: 5, terminals: 3, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 3, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 3, rows: 5, exact_trace_rows: 3, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 4 }
+SectorReduced { integrals: 1, seeds: 2, rows: 4, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 4 }
+SubstitutionPlan { roots: 3, retained_nodes: 7, terminals: 3, minimum_lines: 1, backward: true, weighted: false }
+ReductionFrontier { searched: 5, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 5 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 6 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 4 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 1, backward: true, weighted: true }
+ReductionFrontier { searched: 7, remaining: 0 }
+DifferentialClosure { round: 1, requested: 3, basis_size: 3, new_derivatives: 2 }
+Reduction { integrals: 3 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 3, retained_nodes: 1, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 0, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 1 }
+SectorReduced { integrals: 1, seeds: 3, rows: 5, exact_trace_rows: 3, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 2 }
+SectorReduced { integrals: 1, seeds: 2, rows: 4, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 5, terminals: 3, minimum_lines: 1, backward: true, weighted: false }
+ReductionFrontier { searched: 3, remaining: 2 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 3 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+SectorReduction { active_lines: 1, integrals: 1, visited: 4 }
+SectorReduced { integrals: 1, seeds: 6, rows: 12, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 2 }
+SubstitutionPlan { roots: 3, retained_nodes: 3, terminals: 3, minimum_lines: 1, backward: true, weighted: true }
+ReductionFrontier { searched: 5, remaining: 0 }
+DifferentialClosure { round: 2, requested: 5, basis_size: 3, new_derivatives: 0 }
+Prepared { basis_size: 3, blocks: [1, 1, 1] }
+Stage { name: "compiling the auxiliary-mass differential equation (3 basis integrals, 1 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (3 basis integrals, 1 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/3" }
+Stage { name: "factoring exact Frobenius indicial block 2/3" }
+Stage { name: "factoring exact Frobenius indicial block 3/3" }
+Stage { name: "constructing exact Frobenius eigenspace 1/2" }
+Stage { name: "constructing exact Frobenius eigenspace 2/2" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (3 basis integrals, 1 loops)" }
+Stage { name: "transporting the auxiliary-mass solution (3 basis integrals, 1 loops)" }
+Stage { name: "constructing the physical endpoint expansion (3 basis integrals, 1 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/3" }
+Stage { name: "factoring exact Frobenius indicial block 2/3" }
+Stage { name: "factoring exact Frobenius indicial block 3/3" }
+Stage { name: "constructing exact Frobenius eigenspace 1/2" }
+Stage { name: "constructing exact Frobenius eigenspace 2/2" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (3 basis integrals, 1 loops)" }
+Reduction { integrals: 1 }
+SectorReduction { active_lines: 2, integrals: 1, visited: 0 }
+SectorReduced { integrals: 1, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 0 }
+SubstitutionPlan { roots: 1, retained_nodes: 1, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 1, remaining: 0 }
+DifferentialClosure { round: 0, requested: 1, basis_size: 1, new_derivatives: 1 }
+Reduction { integrals: 2 }
+SectorReduction { active_lines: 2, integrals: 2, visited: 0 }
+SectorReduced { integrals: 2, seeds: 10, rows: 40, exact_trace_rows: 0, elapsed_ms: 0, exact_ms: 0 }
+Substitution { rules: 1 }
+SubstitutionPlan { roots: 2, retained_nodes: 2, terminals: 1, minimum_lines: 2, backward: true, weighted: false }
+ReductionFrontier { searched: 2, remaining: 0 }
+DifferentialClosure { round: 1, requested: 2, basis_size: 1, new_derivatives: 0 }
+Prepared { basis_size: 1, blocks: [1] }
+Stage { name: "compiling the auxiliary-mass differential equation (1 basis integrals, 2 loops)" }
+Stage { name: "constructing the expansion at auxiliary-mass infinity (1 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/1" }
+Stage { name: "constructing exact Frobenius eigenspace 1/1" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "generating and matching native asymptotic boundary regions (1 basis integrals, 2 loops)" }
+BoundaryPlan { basis_size: 1, region_series: 1, coefficients: 1, max_half_order: 0 }
+Stage { name: "transporting the auxiliary-mass solution (1 basis integrals, 2 loops)" }
+Stage { name: "constructing the physical endpoint expansion (1 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/1" }
+Stage { name: "constructing exact Frobenius eigenspace 1/1" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (1 basis integrals, 2 loops)" }
+Stage { name: "transporting the auxiliary-mass solution (4 basis integrals, 2 loops)" }
+Stage { name: "constructing the physical endpoint expansion (4 basis integrals, 2 loops)" }
+Stage { name: "normalizing the exact Frobenius system" }
+Stage { name: "extracting the exact Frobenius residue" }
+Stage { name: "factoring exact Frobenius indicial block 1/4" }
+Stage { name: "factoring exact Frobenius indicial block 2/4" }
+Stage { name: "factoring exact Frobenius indicial block 3/4" }
+Stage { name: "factoring exact Frobenius indicial block 4/4" }
+Stage { name: "constructing exact Frobenius eigenspace 1/1" }
+Stage { name: "evaluating the prepared Frobenius recurrence" }
+Stage { name: "extracting the dimensionally regulated physical limit (4 basis integrals, 2 loops)" }

@@ -1,0 +1,48 @@
+{
+  "scope": "Standalone ordinary hard-boundary validation, compiled only from the report harness and coherent existing libraries.",
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "connected_hard_boundary_gate",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "symbolica_amflow=/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-connected-hard-boundary-check/native.rs",
+    "-o",
+    "/tmp/rustflow-connected-hard-boundary-v2"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-connected-hard-boundary-check/native.rs": "c2a003c8a2f0cde45bca7f3efcd1b5efacb2f30b496ce7ce536816eb9a2ba0c6",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-build-provenance.json": "365cb0102bdb109f3e670af3507ce4881350c2a2c0ef5bcfacd3e84670c81d4d",
+    "/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0",
+    "/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib": "0d2d97a8af25b601714fac6bf190920b914b8d1d0b1c5049d20c8928dc3b19c2",
+    "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+    "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-connected-hard-boundary-check/build.py": "42fe0d636b04351a588bffd985a2132cb639e95252d09cc502b446ff9f1bff89"
+  },
+  "coherent_build": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-build-provenance.json",
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+    "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+    "PORT_SOURCE_DIGEST": "3ebb41f60d3d3c9d98082e56de64d1872dd44199bcbe7aa0c25de4d0377a29cc"
+  },
+  "cargo_invoked": false,
+  "reference_files_read": 0,
+  "exit_code": 0,
+  "executable": "/tmp/rustflow-connected-hard-boundary-v2",
+  "executable_sha256": "3e1bb28349b55d161f667ec58700d4187e5d65ab4f4f520c87c02ff1ded318e0"
+}

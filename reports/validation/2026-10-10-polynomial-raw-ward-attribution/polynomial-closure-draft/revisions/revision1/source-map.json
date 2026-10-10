@@ -1,0 +1,24 @@
+{
+  "status": "Separate unapplied draft; rustfmt parsed; not typechecked or executed",
+  "production_files_changed": false,
+  "original_raw_only_draft_verified_unchanged": true,
+  "patch_sha256": "aaf4ceeeefcaf62688ee8237e392192e36b69cb764bd2a075f83ca7fd1be9957",
+  "files": {
+    "src/finite_density/geometry.rs": {
+      "base_sha256": "cdfa001bab8a005d3ad9882d1624fa1f0869acf338aa75feb960a6afadbf7b0d",
+      "draft_sha256": "dc42053054fcf8f98d78667e6a8e6d39bd1c66d817352abdbccd36f583521b07"
+    },
+    "src/finite_density/massless_endpoint.rs": {
+      "base_sha256": "131b4fedd8816cfbadd9ceb7e80e051c1e4844acdbabb63e7f4d101fe121929f",
+      "draft_sha256": "971a7e634a3e7205e95d55bd06a290bfffc77768c5de48b2f25a3ea183e46f99"
+    },
+    "src/finite_density/measure.rs": {
+      "base_sha256": "eef3449b8c95847a042593fd2eec8ce5bb09bf7563bb8ef2ba998322c8fb654a",
+      "draft_sha256": "9cfad272dab3ae60c808ad4a0e6adf31a883e16884987c29dcbf572935a65755"
+    },
+    "src/finite_density/preparation.rs": {
+      "base_sha256": "f7c5f5a35a176104d61760dd88f9fdee6d2e713e766e6a3e3b0f9ca3068168e6",
+      "draft_sha256": "8507bf0c69323db809ecfba25779b3f6a291722d2eb379e7ef804a63ed49d0a9"
+    }
+  }
+}

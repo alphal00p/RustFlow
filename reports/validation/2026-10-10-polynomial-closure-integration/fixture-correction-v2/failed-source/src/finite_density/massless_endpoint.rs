@@ -2344,13 +2344,13 @@ mod raw_ward_draft_tests {
         for mapping in 0..3 {
             let mut input = definition();
             if mapping == 1 {
-                // Nonunit routing gives physical completion 2 E_a. Unit
-                // edge charges still form one directed fermion cycle; the
-                // integer loop charges compensate the rational loop routing.
-                input.edges[0].routing = vec!["1/2".into(), "0".into()];
-                input.edges[1].routing = vec!["0".into(), "1/2".into()];
-                input.edges[2].routing = vec!["1/2".into(), "-1/2".into()];
-                input.loop_charges = vec![vec![2], vec![2]];
+                // Nonunit routing gives physical completion E_a/2. Charges
+                // remain exactly conserved; no hand-edited proof object.
+                input.edges[0].routing = vec!["2".into(), "0".into()];
+                input.edges[1].routing = vec!["0".into(), "2".into()];
+                input.edges[2].routing = vec!["2".into(), "-2".into()];
+                input.edges[0].charges = vec![2];
+                input.edges[1].charges = vec![2];
             } else if mapping == 2 {
                 input.edges[0].routing = vec!["1".into(), "1".into()];
                 input.edges[1].routing = vec!["0".into(), "1".into()];
@@ -2358,20 +2358,6 @@ mod raw_ward_draft_tests {
                 input.loop_charges = vec![vec![0], vec![1]];
             }
             let (_, family, shifted, origin) = data(input, &[0]);
-            if mapping == 1 {
-                assert_eq!(family.routing_determinant(), &Rational::from((1, 2)));
-                let completions = family.polynomial_compact_energy_completions().unwrap();
-                assert_eq!(completions.len(), 1);
-                assert_eq!(completions[0].coefficient(), &Rational::from(2));
-            } else if mapping == 2 {
-                assert_eq!(family.routing_determinant(), &Rational::from(-1));
-                assert!(
-                    family
-                        .polynomial_compact_energy_completions()
-                        .unwrap()
-                        .is_empty()
-                );
-            }
             let certificate = origin
                 .singleton_raw_ward_evidence::<12>(&family, &shifted, eta)
                 .unwrap();

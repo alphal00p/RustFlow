@@ -407,6 +407,26 @@ of the intermediate integral domain, not permission to replace a virtual pole
 by a compact moment. The successful selected two-cut system below uses the
 default polynomial completion domain.
 
+`WeightedSourcePolicy::PolynomialClosure` (`polynomial-closure-v1`) is an
+optional source presentation within that same polynomial domain. It retains
+every legacy source, then adds shifted temporal and common Lorentz-boost
+identities for completion factors proved exactly equal to `c*E_i`, where c is
+a nonzero rational and i is an occupied loop. The original source domain is
+intersected with all completion powers nonpositive before reindexing. Every
+coefficient, condition and integral label is shifted together, and the domain
+is pulled back exactly; these sources grant no inverse-energy admission.
+
+For a bound massless singleton-germ permit, the policy also retains the raw
+surface identities `(D-2) I_0 - E_i I_1 = 0` and
+`(D-2) I_s + s E_i I_(s+1) = 0` for positive upper occupation index s. Their
+base domain requires a simple required cut, lower occupation zero and all
+medium-dependent ordinary powers zero. The energy multiplier remains a
+polynomial numerator image. Other admitted endpoint classes deliberately omit
+these two additional identities. The policy and its evidence participate in
+source/cache identities; the default presentation remains unchanged. The
+[source derivation and attribution controls](../reports/validation/2026-10-10-polynomial-raw-ward-attribution/README.md)
+separate physical validity from native replay and numerical acceptance.
+
 The complete massless two-loop sunset now passes all four native profiles at
 D=13/2 and D=15/4, and five Laurent profiles through order zero. All occupied
 sectors use native weighted AMF, with closed bases 2, 2 and 3. The 110 independent
