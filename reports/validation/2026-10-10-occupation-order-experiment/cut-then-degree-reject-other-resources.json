@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "60s",
+    "/tmp/rustflow-occupation-order-runners/cut-then-degree-point-witness",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-witness",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/baseline-witness/witness-program.bin"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.3508970723487437,
+  "user_seconds": 0.31496799999999997,
+  "system_seconds": 0.033007,
+  "peak_child_rss_kib": 52284,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

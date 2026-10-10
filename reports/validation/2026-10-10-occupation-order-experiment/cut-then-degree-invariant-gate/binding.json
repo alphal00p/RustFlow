@@ -1,0 +1,61 @@
+{
+  "status": "pass",
+  "scope": "Isolated cut-then-occupation-degree order: comparator, roles and affine descent audit only; no closure or amplitude acceptance.",
+  "experimental_native_sha256": "04e3d660b6c71c78152ba7b13ae7a1ed14887b4b8dc30b8f9f9cf22603e47f7c",
+  "compile_flags": [
+    "--edition=2024",
+    "-C",
+    "opt-level=0"
+  ],
+  "files": {
+    "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/probe.rs": {
+      "bytes": 7449,
+      "sha256": "81b90c49f0fa7c391d0b738f6f70bbe404562c6b3ce5fcfb4d9b31a1b8264a1b"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/result.json": {
+      "bytes": 467,
+      "sha256": "35ec164384c897e2a0c57ab7157937f190e2f688c266ea80c92423c9a6adf539"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/resources.json": {
+      "bytes": 430,
+      "sha256": "8a043c1ccbb8f67564d334abbfb3c15676126564c9914939a40e667294fd0de3"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/resources.log": {
+      "bytes": 423,
+      "sha256": "118fe8a378b047cdf915274c2e196b0b37f27252ae522d6e37a37c28cd6a0f30"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/resources.provenance.json": {
+      "bytes": 575,
+      "sha256": "a512eef41d9dbbfd4918eb60dceb2957806cbdab38ad43074ae1da3cc4710623"
+    },
+    "/tmp/cut_then_occupation_invariant_probe": {
+      "bytes": 270458632,
+      "sha256": "d1efcaaebc9b1c4d8c45363dea71305ea44ce2c6a136a261b5a47216ca046414"
+    },
+    "/tmp/librustred-cut-then-occupation-degree-20261010.rlib": {
+      "bytes": 227431110,
+      "sha256": "04e3d660b6c71c78152ba7b13ae7a1ed14887b4b8dc30b8f9f9cf22603e47f7c"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-build/experimental.patch": {
+      "bytes": 1069,
+      "sha256": "9cdcb695489cbaebe9e6a5cbe271c310a4649122825949a58a8d8a744c8ee9ec"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/audit.json": {
+      "bytes": 2712,
+      "sha256": "55dabf1b5cbc8494483556a05c4dc8db8afef68bab57079ed223586e9d5f3f6c"
+    }
+  },
+  "runtime": {
+    "command": [
+      "/tmp/cut_then_occupation_invariant_probe",
+      "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/result.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.4735543658025563,
+    "user_seconds": 0.46087999999999996,
+    "system_seconds": 0.009925999999999999,
+    "peak_child_rss_kib": 15448,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "limits": "No production policy, derivative closure, performance or physical amplitude claim."
+}

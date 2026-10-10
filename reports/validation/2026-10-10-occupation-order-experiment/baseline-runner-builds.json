@@ -1,0 +1,74 @@
+[
+  {
+    "kind": "point-witness",
+    "returncode": 0,
+    "wall_seconds": 20.010254928842187,
+    "command": [
+      "rustc",
+      "--edition=2024",
+      "--crate-name",
+      "point_witness",
+      "-C",
+      "opt-level=0",
+      "-C",
+      "debuginfo=0",
+      "--extern",
+      "rustred=/tmp/rustflow-zero-projection-native-library/librustred-392075d0c6995fd1.rlib",
+      "--extern",
+      "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "--extern",
+      "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "--extern",
+      "bincode=/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "-L",
+      "dependency=/common/dev/rustflow_fermi/target/release/deps",
+      "-L",
+      "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+      "-L",
+      "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/runner/point-witness.rs",
+      "-o",
+      "/tmp/rustflow-occupation-order-runners/baseline-point-witness"
+    ],
+    "executable": {
+      "path": "/tmp/rustflow-occupation-order-runners/baseline-point-witness",
+      "sha256": "f66c4ce4dd79176328a8d5ca46c0aeca88110e76cd6eee4a35c10a6920a476d9"
+    }
+  },
+  {
+    "kind": "active-pilot",
+    "returncode": 0,
+    "wall_seconds": 19.924220588989556,
+    "command": [
+      "rustc",
+      "--edition=2024",
+      "--crate-name",
+      "active_pilot",
+      "-C",
+      "opt-level=0",
+      "-C",
+      "debuginfo=0",
+      "--extern",
+      "rustred=/tmp/rustflow-zero-projection-native-library/librustred-392075d0c6995fd1.rlib",
+      "--extern",
+      "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "--extern",
+      "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "--extern",
+      "bincode=/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "-L",
+      "dependency=/common/dev/rustflow_fermi/target/release/deps",
+      "-L",
+      "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+      "-L",
+      "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/runner/active-pilot.rs",
+      "-o",
+      "/tmp/rustflow-occupation-order-runners/baseline-active-pilot"
+    ],
+    "executable": {
+      "path": "/tmp/rustflow-occupation-order-runners/baseline-active-pilot",
+      "sha256": "cdca87b5ea685ba02139de94c7c47a4536f233c1c65e35fe04ea623a3635a629"
+    }
+  }
+]

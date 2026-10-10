@@ -1,0 +1,15 @@
+{
+  "captured_utc": "2026-10-10T02:02:23.165814+00:00",
+  "command": [
+    "/tmp/cut_then_occupation_invariant_probe",
+    "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/result.json"
+  ],
+  "argument_files": {
+    "/tmp/cut_then_occupation_invariant_probe": {
+      "resolved_path": "/tmp/cut_then_occupation_invariant_probe",
+      "sha256": "d1efcaaebc9b1c4d8c45363dea71305ea44ce2c6a136a261b5a47216ca046414",
+      "size_bytes": 270458632
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

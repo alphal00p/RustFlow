@@ -1,0 +1,15 @@
+{
+  "captured_utc": "2026-10-10T01:52:39.843957+00:00",
+  "command": [
+    "/tmp/occupation_degree_invariant_probe",
+    "reports/validation/2026-10-10-occupation-order-experiment/invariant-gate/result.json"
+  ],
+  "argument_files": {
+    "/tmp/occupation_degree_invariant_probe": {
+      "resolved_path": "/tmp/occupation_degree_invariant_probe",
+      "sha256": "1088742131df8243c86dd7d0426abf75b665fb0264b1c61134d3a2b5f30d30a0",
+      "size_bytes": 270451280
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

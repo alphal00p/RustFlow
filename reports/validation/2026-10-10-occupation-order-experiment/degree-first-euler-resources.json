@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "60s",
+    "/tmp/rustflow-occupation-order-runners/degree-first-euler-witness",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "reports/validation/2026-10-10-occupation-order-experiment/degree-first-euler"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.3736633933149278,
+  "user_seconds": 0.322011,
+  "system_seconds": 0.054249,
+  "peak_child_rss_kib": 52280,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

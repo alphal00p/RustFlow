@@ -1,0 +1,5 @@
+{
+  "error": "invalid RustRed binary program: unsupported guarded proof schema",
+  "program": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/baseline-witness/witness-program.bin",
+  "rejected": true
+}

@@ -1,0 +1,57 @@
+{
+  "status": "pass",
+  "scope": "standalone opt-level0 wrapper with isolated native occupation-degree-first library; comparator and role invariants only",
+  "experimental_native_sha256": "1baa2fdc31e3f169fde02760a7f430b5ec68a7bdfb194ab199e7f4e2cfb6ec3b",
+  "compile_flags": [
+    "--edition=2024",
+    "-C",
+    "opt-level=0"
+  ],
+  "files": {
+    "reports/validation/2026-10-10-occupation-order-experiment/invariant-gate/probe.rs": {
+      "bytes": 7236,
+      "sha256": "fc4f69ae6f3bed24b2215e57a15af6cdf4c84123d890760ff15f51d1639fd8ca"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/invariant-gate/result.json": {
+      "bytes": 464,
+      "sha256": "b9bec4ad52c7eeb8d10e28a246754ff63bdb27bbb7ca929b149bd62edd08d356"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/invariant-gate/resources.json": {
+      "bytes": 388,
+      "sha256": "afb48561225748e1146c31e542cf54c7b90c4fb7c3ef26c085b284fe15d89b17"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/invariant-gate/resources.log": {
+      "bytes": 420,
+      "sha256": "ed3bfe281429c42a776f0a2b71a685e93786be4bac28ee36b55e0bc3b4a26f84"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/invariant-gate/resources.provenance.json": {
+      "bytes": 553,
+      "sha256": "61f73831088a24bce0f02f0d3f0e16fe2ac1e50681e4ad9269b4f1b5c665f5e0"
+    },
+    "/tmp/occupation_degree_invariant_probe": {
+      "bytes": 270451280,
+      "sha256": "1088742131df8243c86dd7d0426abf75b665fb0264b1c61134d3a2b5f30d30a0"
+    },
+    "/tmp/librustred-occupation-degree-first-20261010.rlib": {
+      "bytes": 227377600,
+      "sha256": "1baa2fdc31e3f169fde02760a7f430b5ec68a7bdfb194ab199e7f4e2cfb6ec3b"
+    },
+    "reports/validation/2026-10-10-occupation-order-experiment/experimental.patch": {
+      "bytes": 1219,
+      "sha256": "a4e1381496bf35eeb0d77b882afb518bf2b5ec60251de3cdd2cf2e46eccbd858"
+    }
+  },
+  "runtime": {
+    "command": [
+      "/tmp/occupation_degree_invariant_probe",
+      "reports/validation/2026-10-10-occupation-order-experiment/invariant-gate/result.json"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.4704929511062801,
+    "user_seconds": 0.456653,
+    "system_seconds": 0.01092,
+    "peak_child_rss_kib": 15428,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "limits": "No production policy, derivative closure, performance improvement or physical amplitude conclusion."
+}

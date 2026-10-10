@@ -1,0 +1,31 @@
+{
+  "scope": "Independent read-only ordering proof/code audit; no alternate-order runtime or closure acceptance",
+  "patch_sha256": "a4e1381496bf35eeb0d77b882afb518bf2b5ec60251de3cdd2cf2e46eccbd858",
+  "conclusion": "No soundness blocker found for the guarded total-occupation-degree prefix when all existing admission, descent and replay checks remain enabled.",
+  "arguments": [
+    "Total occupation degree is nonnegative on admitted numeric labels; a descending grade can change only finitely often, after which the existing physical/tie order controls descent.",
+    "For a fixed symbolic/numeric coordinate pattern, common occupation bases cancel exactly. Existing replay separately proves nonnegative occupation images and constant ordinary signs on the complete rule domain.",
+    "Physical coordinate tie comparison is reached only after equal occupation grade and equal physical aggregate, preserving its premise about matching numeric sectors.",
+    "Search row sorting, numerical-leading-row pruning, sparse discovery, canonicalization, exact replay, concrete application descent and the pending queue share IntegralOrder.",
+    "Unchanged sign checks can reject some new-order descents conservatively; they must not be weakened for this experiment."
+  ],
+  "required_validation": [
+    "Fresh source-only discovery and native replay of the reversed witness.",
+    "Symbolic versus concrete comparison agreement over admissible common-base shifts; total-order/transitivity checks including equal total H grade on distinct H axes.",
+    "Required-cut and H-negative validity behavior unchanged.",
+    "Unique experimental guarded schema and crate metadata; bidirectional rejection of production/experimental proof containers.",
+    "Every final original target and basis derivative must reconstruct before any closure claim."
+  ],
+  "limitations": [
+    "Existing unit assertions that physical degree outranks occupation are expected to change and are not evidence of alternate-order correctness.",
+    "No claim that this order improves bounded discovery or closes the three-loop family."
+  ],
+  "source_files": {
+    "reports/validation/2026-10-10-occupation-order-experiment/experimental.patch": "a4e1381496bf35eeb0d77b882afb518bf2b5ec60251de3cdd2cf2e46eccbd858",
+    "vendor/rustred/crates/rustred-core/src/solver/index.rs": "80a3f22dba3e68b62392763654a4432ecfe552217ff632358599752b92c6ba8e",
+    "vendor/rustred/crates/rustred-core/src/solver/search.rs": "e40d619c04576f2f32cac854597dcbb55eccfe6da30e6653695d57cb879e4c84",
+    "vendor/rustred/crates/rustred-core/src/solver/instantiate.rs": "d579a1d3fd9e126725c5c2b1bcbbd999cf8d0beb3a75899338af28318c060a5d",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/replay.rs": "9c62a88bb1bb4209cc3bd6c8c4528830af8be9d82fbb576378c73affe66b5297",
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": "28a41a303d830f7918b7d72ec6398f4f6d07af69d85831d319f615adea4b2dff"
+  }
+}

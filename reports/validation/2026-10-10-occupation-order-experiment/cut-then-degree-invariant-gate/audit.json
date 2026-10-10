@@ -1,0 +1,40 @@
+{
+  "scope": "Isolated cut-then-occupation-degree order: comparator, roles and affine descent audit only; no closure or amplitude acceptance.",
+  "conclusion": "No soundness blocker found when the unchanged domain validity, uniform descent, condition and independent replay checks are retained.",
+  "priority": [
+    "denominator count",
+    "sector",
+    "required-cut delta",
+    "total occupation degree",
+    "absolute degree",
+    "numerator degree",
+    "physical coordinate ties",
+    "occupation lexicographic ties"
+  ],
+  "arguments": [
+    "The sector prefix has finitely many states; within a fixed sector the required-cut lexicographic degrees are bounded below on admitted nonzero labels, then total occupation degree is nonnegative. After these prefixes stabilize, the existing physical order controls descent. Fixed total occupation degree has only finitely many distributions over the finite set of occupation axes.",
+    "For a fixed symbolic/numeric pattern and stable ordinary signs, shared index bases cancel in both required-cut comparisons and total occupation grade. The existing uniform affine descent proof remains applicable; nonnegative occupation images and ordinary sign stability remain mandatory on the complete rule domain.",
+    "Physical coordinate ties are reached after equal sector and physical aggregates; inserting H grade earlier preserves the numeric-sector premise of that helper.",
+    "Existing native source sorting, leading-row pruning, canonicalization, exact replay, application descent and pending work scheduling share IntegralOrder. No separate physical-before-H comparison was changed or required.",
+    "Required-cut lowering C2H0 to C1H1 remains descending under this policy; same-cut temporal-Euler orientation is reversed. Both are checked explicitly.",
+    "Unchanged stable-sign checks may reject some alternative descents conservatively and must not be relaxed."
+  ],
+  "limitations": [
+    "Fresh independent replay and unique experimental schema are required for actual proof rules.",
+    "This finite invariant gate does not establish improved search or derivative closure.",
+    "Production source order and admission are unchanged."
+  ],
+  "validation": {
+    "antisymmetry_equality_pairs": 8100,
+    "bulk_surface_not_zero_checks": 2,
+    "explicit_priority_witnesses": 5,
+    "invalid_occupation_checks": 2,
+    "no_occupation_invariance_pairs": 8100,
+    "numeric_points": 90,
+    "required_cut_zero_checks": 18,
+    "scope": "isolated native cut-then-occupation-degree comparator and role invariants; no closure or amplitude claim",
+    "status": "pass",
+    "symbolic_common_base_comparisons": 839808,
+    "transitivity_triples": 729000
+  }
+}

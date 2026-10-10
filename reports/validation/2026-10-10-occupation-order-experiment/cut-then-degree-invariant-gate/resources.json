@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/tmp/cut_then_occupation_invariant_probe",
+    "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/result.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.4735543658025563,
+  "user_seconds": 0.46087999999999996,
+  "system_seconds": 0.009925999999999999,
+  "peak_child_rss_kib": 15448,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

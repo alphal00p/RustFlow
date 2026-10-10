@@ -1,0 +1,746 @@
+{
+  "recorded_utc": "2026-10-10T02:13:47.305900+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "775da709e55b7c2e9dcd5445a53d7f7b71cede552e0d9c9e10e41d58550af615",
+      "bytes": 6337
+    },
+    {
+      "path": "archives.json",
+      "sha256": "33c94c777a41abdf26b3bdc6413644ebab76322c44fc0a1f1b1ce477dab9a22e",
+      "bytes": 32249
+    },
+    {
+      "path": "baseline-active-pilot-build-binding.json",
+      "sha256": "499594881cc11889e5530ea6a034910657b534c3e856c0fe26324d448e2a247a",
+      "bytes": 2267
+    },
+    {
+      "path": "baseline-active-pilot-build.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "path": "baseline-euler/witness-program.bin.gz",
+      "sha256": "b5b93dd618dfec0ab465cf9c2d3fa0dbea8f50b9c0f23e88002ba47a9ae8c7dc",
+      "bytes": 2071
+    },
+    {
+      "path": "baseline-euler/witness-result.json.gz",
+      "sha256": "1468b386c565ea608f003eed1aa4ae4f60bb8e99f8f3561ca691a93b1d3edf52",
+      "bytes": 2080
+    },
+    {
+      "path": "baseline-euler-resources.json",
+      "sha256": "5cf03872c7cc16acc4b85c566a59b4c49d458675b1db28891bff0d185d33664b",
+      "bytes": 571
+    },
+    {
+      "path": "baseline-euler-resources.log.gz",
+      "sha256": "457ce8afb73bc56d6b8a596461907bac83e8f42df0ee7a49dd09a44d341cd767",
+      "bytes": 70
+    },
+    {
+      "path": "baseline-euler-resources.provenance.json",
+      "sha256": "bc547118c704cc932e49da6b59d96a47452de5924f1423b9a5ec4888d3bcead8",
+      "bytes": 1437
+    },
+    {
+      "path": "baseline-euler-witness-build-binding.json",
+      "sha256": "6e9be92300f15d3903171779d6caa413b6dcc69d398410a68fe4892b6b1d1b60",
+      "bytes": 2271
+    },
+    {
+      "path": "baseline-euler-witness-build.log.gz",
+      "sha256": "c0f6c31ecb23c834512ad565d6d958903daa79c4bb0f0c1f70af4996524171b5",
+      "bytes": 263
+    },
+    {
+      "path": "baseline-euler-witness-runner-builds.json",
+      "sha256": "3b6a0842fc288852ede34efdca4200f981ca270d68edae9e6b4c0f1d53ae6c9c",
+      "bytes": 1439
+    },
+    {
+      "path": "baseline-pilot/configuration.json",
+      "sha256": "1b1bfca119f0347c8eb6589d165d939d6aebd14d602d5c44689576ad26938ce6",
+      "bytes": 8854
+    },
+    {
+      "path": "baseline-pilot/progress.json",
+      "sha256": "6642dc55f0bd8aab46130afdab3f6be6d0433b31a14ac177230c7935ac88780a",
+      "bytes": 725
+    },
+    {
+      "path": "baseline-pilot/result.json",
+      "sha256": "5993ee92c2bfff0eeac875775b83bc92fbb3aba323c33a3db987253997e167c5",
+      "bytes": 32314
+    },
+    {
+      "path": "baseline-pilot/round-000.bin.gz",
+      "sha256": "f02781a25cc3088a3707cbe9b4e15301cc471dc4e634a1963aa7215addffe9f7",
+      "bytes": 5450
+    },
+    {
+      "path": "baseline-pilot/round-000.json.gz",
+      "sha256": "80fdab279756e1d1eda644c4f27b6926b6776c54e8852330fd84daedcab1a050",
+      "bytes": 2651
+    },
+    {
+      "path": "baseline-pilot/round-001.bin.gz",
+      "sha256": "fd4408918debaa9d532ecae41e67dd5d7b232055d71db8ec34ef75a4714f3a89",
+      "bytes": 9873
+    },
+    {
+      "path": "baseline-pilot/round-001.json.gz",
+      "sha256": "18d11f11d6fdc6dd8a81442b12e9a98b761a17b145ab0f53aaf082c96be177a3",
+      "bytes": 8727
+    },
+    {
+      "path": "baseline-pilot/round-002.bin.gz",
+      "sha256": "65978a33dc7c273d8202cefed7b2669a7930c531a1ecddc5be169c26c636f89d",
+      "bytes": 38039
+    },
+    {
+      "path": "baseline-pilot/round-002.json.gz",
+      "sha256": "6562b5e21087ab916ab8766b9f1aa7ac28c49829f239c6b345b2e9ef2907a2bb",
+      "bytes": 47228
+    },
+    {
+      "path": "baseline-pilot/round-003.bin.gz",
+      "sha256": "22087da9d0302bbbb9b6ade1d333d72d33b71b9633d66e9c5dc9b9e127709337",
+      "bytes": 138605
+    },
+    {
+      "path": "baseline-pilot/round-003.json.gz",
+      "sha256": "ad0e241a335df7dcf4f9fd7be70e28ed87066a7943668f8e2d82dbbaffe9e3ec",
+      "bytes": 935806
+    },
+    {
+      "path": "baseline-pilot-resources.json",
+      "sha256": "4aae9119642820fc64aced4adf43a10883bb04700c6c0262ddee50e50943b8a3",
+      "bytes": 848
+    },
+    {
+      "path": "baseline-pilot-resources.log.gz",
+      "sha256": "4f83114abaa121624258f7b139823766170734c084a83a668729a07aa444ce74",
+      "bytes": 146
+    },
+    {
+      "path": "baseline-pilot-resources.provenance.json",
+      "sha256": "e94e17d031af31f608441a052e0cf8b34df1d964df8f5b1633ac33c18462bbe2",
+      "bytes": 1969
+    },
+    {
+      "path": "baseline-point-witness-build-binding.json",
+      "sha256": "d45e31da0f3527d3919650b804f8285bea9aed0ec416f7f11cfe5cf58fb809f5",
+      "bytes": 2271
+    },
+    {
+      "path": "baseline-point-witness-build.log.gz",
+      "sha256": "b2931ac4827b8fd1e62f47bcd934ded5e7308c8e8813fdeb0642072f1c3aa2c1",
+      "bytes": 263
+    },
+    {
+      "path": "baseline-reject-cut-then-degree/rejected-other-schema.json",
+      "sha256": "5401a96a858908c86b4d19d0ce2114116ce45c498b0f815d914aa27070d78a76",
+      "bytes": 246
+    },
+    {
+      "path": "baseline-reject-cut-then-degree-resources.json",
+      "sha256": "a0d8ff60226a97ea5b19157145f4666e38fb7be0beba8248ee8fccec14bfbe21",
+      "bytes": 767
+    },
+    {
+      "path": "baseline-reject-cut-then-degree-resources.log.gz",
+      "sha256": "429935d1dd70ae15704d3ec0b292a779b2ad52170adc3edbda4745aae98c2cb1",
+      "bytes": 98
+    },
+    {
+      "path": "baseline-reject-cut-then-degree-resources.provenance.json",
+      "sha256": "281f9498cb46834eb8ea7738d9cf6e5a2fab1bdb8ff8a58d738246fd3dfebf3e",
+      "bytes": 2081
+    },
+    {
+      "path": "baseline-reject-other-resources.json",
+      "sha256": "f0ffe9294a3251aef0e2497d1c248fb5a37c0a137765f2c5091e84f88ac1931c",
+      "bytes": 759
+    },
+    {
+      "path": "baseline-reject-other-resources.log.gz",
+      "sha256": "429935d1dd70ae15704d3ec0b292a779b2ad52170adc3edbda4745aae98c2cb1",
+      "bytes": 98
+    },
+    {
+      "path": "baseline-reject-other-resources.provenance.json",
+      "sha256": "9dbb07e26810c9c29071293158c3f751b654154bd9536ee67c60846dde17a989",
+      "bytes": 2057
+    },
+    {
+      "path": "baseline-runner-builds.json",
+      "sha256": "45aa01b35c4dac919d8b2c01b9626c02df6b5ff974aa53bab59863e9423371fc",
+      "bytes": 2870
+    },
+    {
+      "path": "baseline-witness/rejected-other-schema.json",
+      "sha256": "418f24c4f53dd8b96251484d3a936cc343c0eaf380eafeb44882044a35456048",
+      "bytes": 243
+    },
+    {
+      "path": "baseline-witness/witness-program.bin.gz",
+      "sha256": "20cd8927a9a528ee95d344838f42887d8768b2cc0755d107a85a61d488c408d4",
+      "bytes": 3261
+    },
+    {
+      "path": "baseline-witness/witness-result.json.gz",
+      "sha256": "9cfd5d6788e0f48b53a374173feb633b9945f71cf59eb127331cd61c3285bc61",
+      "bytes": 2175
+    },
+    {
+      "path": "baseline-witness-resources.json",
+      "sha256": "24c49df77daff057dbf14f11b84df74794c191b4bf593db6c1b1b4ae110d9741",
+      "bytes": 626
+    },
+    {
+      "path": "baseline-witness-resources.log.gz",
+      "sha256": "6687727f578883e8955c9be266f6c2b96c64a9ae3538cdaef9ca4dc87488fc4a",
+      "bytes": 61
+    },
+    {
+      "path": "baseline-witness-resources.provenance.json",
+      "sha256": "83ff6ad74f76d80b35939882755991743bde73d9d3b9a5e3113045014f632df8",
+      "bytes": 1520
+    },
+    {
+      "path": "build-binding.json",
+      "sha256": "79a4fa91327482e0246f311a8d6684c9fbd3f799ffccd6c53884d094f2501b94",
+      "bytes": 429908
+    },
+    {
+      "path": "build-cut-then-degree.py",
+      "sha256": "a7045a91bae23ccf40082dbe523d8747dc88ffca58d5eb59b35d751d01260cd7",
+      "bytes": 3779
+    },
+    {
+      "path": "build-resources.json",
+      "sha256": "fe9e1f6aea898bbcc80ce6a1a97fab6dc932403334e61f4805ed05e75d1b1395",
+      "bytes": 1531
+    },
+    {
+      "path": "build-resources.log.gz",
+      "sha256": "07469f7bb565b41580b6c40faf17be9763bdbab1d76cf26ea58990d205ea2460",
+      "bytes": 655
+    },
+    {
+      "path": "build-resources.provenance.json",
+      "sha256": "d384ddff02bd546d6d52110e58dc59434ff589f2e9e191fa625694bac5dc9917",
+      "bytes": 2416
+    },
+    {
+      "path": "cut-then-degree-active-pilot-build-binding.json",
+      "sha256": "447ba6b4ada4461f5285fcfd1f57eccd3cc5634d6b00c26baf69afbca4bf2766",
+      "bytes": 2239
+    },
+    {
+      "path": "cut-then-degree-active-pilot-build.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "path": "cut-then-degree-build/build-binding.json",
+      "sha256": "8124aea5633d8b680bf04f39d2220d64c4980f2de25fe2160d174c0896f57029",
+      "bytes": 188704
+    },
+    {
+      "path": "cut-then-degree-build/build-resources.json",
+      "sha256": "0f9d01b19fc100d205d8d3b2d2ae80a41ae072a8e0ca5a2f119fdad264d9b454",
+      "bytes": 1547
+    },
+    {
+      "path": "cut-then-degree-build/build-resources.log.gz",
+      "sha256": "d857cf853ff467b06eda3668b97f59ef4d3c0dd96c9f54134c319d4511c40c57",
+      "bytes": 664
+    },
+    {
+      "path": "cut-then-degree-build/build-resources.provenance.json",
+      "sha256": "366f6c1b4274eb3965f299ec8d2b47c6c67f1e58978a9bd64e955c4f1d0047b0",
+      "bytes": 2452
+    },
+    {
+      "path": "cut-then-degree-build/experimental.patch",
+      "sha256": "9cdcb695489cbaebe9e6a5cbe271c310a4649122825949a58a8d8a744c8ee9ec",
+      "bytes": 1069
+    },
+    {
+      "path": "cut-then-degree-euler/witness-program.bin.gz",
+      "sha256": "95d716cb74b9ddd590a3a06f870a0711a95df56436493cece4506dd1f47e39f8",
+      "bytes": 2185
+    },
+    {
+      "path": "cut-then-degree-euler/witness-result.json.gz",
+      "sha256": "c88e99fcabe77edeead264ce9950d6ed1ea1cf4e2aaca4c46159f5672c02c9a9",
+      "bytes": 2259
+    },
+    {
+      "path": "cut-then-degree-euler-resources.json",
+      "sha256": "3c38f8a86c9e3bf1606516fe5d38feb5152271d2635732827540dd5045a648fe",
+      "bytes": 585
+    },
+    {
+      "path": "cut-then-degree-euler-resources.log.gz",
+      "sha256": "1c650f929cd195ca807e21bf441d96912ead7d0ce998bc2f815ea0d0ddacf3cd",
+      "bytes": 62
+    },
+    {
+      "path": "cut-then-degree-euler-resources.provenance.json",
+      "sha256": "6ef6ef0176f754def54d6c4a4d5e55752ace146744262318f8f35abceee56630",
+      "bytes": 1465
+    },
+    {
+      "path": "cut-then-degree-euler-witness-build-binding.json",
+      "sha256": "e1f302be6e7e823d4781fdca5108d56506aa77c28be8a6b97bb4aafc9392d75c",
+      "bytes": 2243
+    },
+    {
+      "path": "cut-then-degree-euler-witness-build.log.gz",
+      "sha256": "c0f6c31ecb23c834512ad565d6d958903daa79c4bb0f0c1f70af4996524171b5",
+      "bytes": 263
+    },
+    {
+      "path": "cut-then-degree-euler-witness-runner-builds.json",
+      "sha256": "b0f7da2e803bc8308523652f18ee325d72d8cc17774ae9ada2e434475ab8cbb1",
+      "bytes": 1431
+    },
+    {
+      "path": "cut-then-degree-invariant-gate/audit.json",
+      "sha256": "55dabf1b5cbc8494483556a05c4dc8db8afef68bab57079ed223586e9d5f3f6c",
+      "bytes": 2712
+    },
+    {
+      "path": "cut-then-degree-invariant-gate/binding.json",
+      "sha256": "b6673bab32cdf5787663190ed3d3d0c3900d5c45a837dc100731f9bf50d59d3c",
+      "bytes": 2826
+    },
+    {
+      "path": "cut-then-degree-invariant-gate/probe.rs",
+      "sha256": "81b90c49f0fa7c391d0b738f6f70bbe404562c6b3ce5fcfb4d9b31a1b8264a1b",
+      "bytes": 7449
+    },
+    {
+      "path": "cut-then-degree-invariant-gate/resources.json",
+      "sha256": "8a043c1ccbb8f67564d334abbfb3c15676126564c9914939a40e667294fd0de3",
+      "bytes": 430
+    },
+    {
+      "path": "cut-then-degree-invariant-gate/resources.log.gz",
+      "sha256": "ebd7aa306d676cae24be8ee6bb5d015cc983c6ff61c595e328a34426120b9ed1",
+      "bytes": 280
+    },
+    {
+      "path": "cut-then-degree-invariant-gate/resources.provenance.json",
+      "sha256": "a512eef41d9dbbfd4918eb60dceb2957806cbdab38ad43074ae1da3cc4710623",
+      "bytes": 575
+    },
+    {
+      "path": "cut-then-degree-invariant-gate/result.json",
+      "sha256": "35ec164384c897e2a0c57ab7157937f190e2f688c266ea80c92423c9a6adf539",
+      "bytes": 467
+    },
+    {
+      "path": "cut-then-degree-pilot/configuration.json",
+      "sha256": "1b1bfca119f0347c8eb6589d165d939d6aebd14d602d5c44689576ad26938ce6",
+      "bytes": 8854
+    },
+    {
+      "path": "cut-then-degree-pilot/progress.json",
+      "sha256": "9f7e9ef547e8294fc90caa0c8b0770f62c1ee5e57d555f4b32d4d88c097cbfda",
+      "bytes": 724
+    },
+    {
+      "path": "cut-then-degree-pilot/result.json",
+      "sha256": "e4337353ac5fb7693fbd67690bfa1a7c142fc14efdd1fa6bb846eac8ad950c62",
+      "bytes": 32159
+    },
+    {
+      "path": "cut-then-degree-pilot/round-000.bin.gz",
+      "sha256": "5391620aa8a556951ebebeb088a6b066c52254f95b63a7da9bfa71b24c5075d3",
+      "bytes": 5422
+    },
+    {
+      "path": "cut-then-degree-pilot/round-000.json.gz",
+      "sha256": "c0a393f080e616939f8d1022094b68ccdfee3d3218fff7c2a22a546d87acf87e",
+      "bytes": 2652
+    },
+    {
+      "path": "cut-then-degree-pilot/round-001.bin.gz",
+      "sha256": "8c86fa554001c6012d38e057347bc43d18f3b91e2a426187b10ab2902fab8d65",
+      "bytes": 9861
+    },
+    {
+      "path": "cut-then-degree-pilot/round-001.json.gz",
+      "sha256": "9f74698c4c697859da43d0d028f4ba08c1ac3d88a9bb2cc5dea9edeb3e04b6c2",
+      "bytes": 9090
+    },
+    {
+      "path": "cut-then-degree-pilot/round-002.bin.gz",
+      "sha256": "ede34939c24d2ff660f78a5d9ac001e1716310cf45f8f33d154ad86a53e672f0",
+      "bytes": 35552
+    },
+    {
+      "path": "cut-then-degree-pilot/round-002.json.gz",
+      "sha256": "74939d5c94ea65e2328c8aca64693fcd6eecf93ecfd79a88e63fbc06b8774d7d",
+      "bytes": 40872
+    },
+    {
+      "path": "cut-then-degree-pilot/round-003.bin.gz",
+      "sha256": "05019e338107f0ef0e66b6e3d6dc3c27fa9160dc58fe880c923cc6833634cb00",
+      "bytes": 121957
+    },
+    {
+      "path": "cut-then-degree-pilot/round-003.json.gz",
+      "sha256": "817f5cd3dc668655d7d2641b310917ecd8f18d5371c9b84940b123060bfef296",
+      "bytes": 488321
+    },
+    {
+      "path": "cut-then-degree-pilot-resources.json",
+      "sha256": "174be019a0c1b6837c3962b8cff2e095f116ec58b7201b696c340a340bc88b31",
+      "bytes": 861
+    },
+    {
+      "path": "cut-then-degree-pilot-resources.log.gz",
+      "sha256": "6c47e7150c588657c4db64eb2f7df6fa0c2c86440a4f7318722e0494764a59a3",
+      "bytes": 145
+    },
+    {
+      "path": "cut-then-degree-pilot-resources.provenance.json",
+      "sha256": "f5069a2bd67ab7c6cc3373cc5523719181f6645bc444cf38e4a46832ed9afa9f",
+      "bytes": 1997
+    },
+    {
+      "path": "cut-then-degree-point-witness-build-binding.json",
+      "sha256": "ed4a03305fa7f5fc4235d457b5c01d262baa741fc35ebbfe6d4914810eeaf0e5",
+      "bytes": 2243
+    },
+    {
+      "path": "cut-then-degree-point-witness-build.log.gz",
+      "sha256": "b2931ac4827b8fd1e62f47bcd934ded5e7308c8e8813fdeb0642072f1c3aa2c1",
+      "bytes": 263
+    },
+    {
+      "path": "cut-then-degree-reject-other-resources.json",
+      "sha256": "3fa24b04499d2bab18205a310617b2d87009c623520f564f9700c8af719d5a4c",
+      "bytes": 769
+    },
+    {
+      "path": "cut-then-degree-reject-other-resources.log.gz",
+      "sha256": "429935d1dd70ae15704d3ec0b292a779b2ad52170adc3edbda4745aae98c2cb1",
+      "bytes": 98
+    },
+    {
+      "path": "cut-then-degree-reject-other-resources.provenance.json",
+      "sha256": "6600ca3be833ba44a34a1b8fcdbe16c2b244adf2160589fc0622c6489504be7a",
+      "bytes": 2073
+    },
+    {
+      "path": "cut-then-degree-runner-builds.json",
+      "sha256": "809c86eac6cf022efb59fee0cdea0c2c592f67730baf911f7c6d9d734a98488a",
+      "bytes": 2855
+    },
+    {
+      "path": "cut-then-degree-witness/rejected-other-schema.json",
+      "sha256": "2da8d3c1490d94d445ad565e994e2e93dd8c20d73d1b874495382d945827b87d",
+      "bytes": 239
+    },
+    {
+      "path": "cut-then-degree-witness/witness-program.bin.gz",
+      "sha256": "accaa2b7c42deba03e7a22bc9869d9d0aeaee48d9fced58500031a06abf7108f",
+      "bytes": 3281
+    },
+    {
+      "path": "cut-then-degree-witness/witness-result.json.gz",
+      "sha256": "9cfd5d6788e0f48b53a374173feb633b9945f71cf59eb127331cd61c3285bc61",
+      "bytes": 2175
+    },
+    {
+      "path": "cut-then-degree-witness-resources.json",
+      "sha256": "f8ec6ac9bfd2589590d4cb827b05b90740011a85a0ffc949b6fb6492eff841f4",
+      "bytes": 629
+    },
+    {
+      "path": "cut-then-degree-witness-resources.log.gz",
+      "sha256": "6687727f578883e8955c9be266f6c2b96c64a9ae3538cdaef9ca4dc87488fc4a",
+      "bytes": 61
+    },
+    {
+      "path": "cut-then-degree-witness-resources.provenance.json",
+      "sha256": "28e5efcdef0208b243e28e0279f3817b15a84f9a1954046d2f332c90f2c53752",
+      "bytes": 1548
+    },
+    {
+      "path": "degree-first-active-pilot-build-binding.json",
+      "sha256": "d3768b9f1d8b0c9dd81e6c149b8a811baaa13a742b49889ffeef1a0b58bde2f4",
+      "bytes": 2227
+    },
+    {
+      "path": "degree-first-active-pilot-build.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "path": "degree-first-euler/witness-program.bin.gz",
+      "sha256": "62d840efb53acec0cd7cbdc91f42d15028e6ec98887661204318a924684e9622",
+      "bytes": 2183
+    },
+    {
+      "path": "degree-first-euler/witness-result.json.gz",
+      "sha256": "c88e99fcabe77edeead264ce9950d6ed1ea1cf4e2aaca4c46159f5672c02c9a9",
+      "bytes": 2259
+    },
+    {
+      "path": "degree-first-euler-resources.json",
+      "sha256": "24a7428b274473a0a5ca3c7c4dba392d0b48cb6937f981c4ffe5541187ecbe1b",
+      "bytes": 567
+    },
+    {
+      "path": "degree-first-euler-resources.log.gz",
+      "sha256": "1c650f929cd195ca807e21bf441d96912ead7d0ce998bc2f815ea0d0ddacf3cd",
+      "bytes": 62
+    },
+    {
+      "path": "degree-first-euler-resources.provenance.json",
+      "sha256": "4b5984a1a3bd4295f226294008a2b304dc3d81d8666b74c97a37940536a7f59f",
+      "bytes": 1453
+    },
+    {
+      "path": "degree-first-euler-witness-build-binding.json",
+      "sha256": "4c53e9ef2812d2da0049b2afa8c94936132252e78c8aca06da56fbb01b88114e",
+      "bytes": 2231
+    },
+    {
+      "path": "degree-first-euler-witness-build.log.gz",
+      "sha256": "c0f6c31ecb23c834512ad565d6d958903daa79c4bb0f0c1f70af4996524171b5",
+      "bytes": 263
+    },
+    {
+      "path": "degree-first-euler-witness-runner-builds.json",
+      "sha256": "96e33aef6eac876593f7548d54a96d5f40ce56870b906623a0b1603c2ae45686",
+      "bytes": 1423
+    },
+    {
+      "path": "degree-first-pilot/configuration.json",
+      "sha256": "1b1bfca119f0347c8eb6589d165d939d6aebd14d602d5c44689576ad26938ce6",
+      "bytes": 8854
+    },
+    {
+      "path": "degree-first-pilot/progress.json",
+      "sha256": "e82b0e3ee700724e7951adf740dc7a5a07b827edcbee11b49bdaa43e96f6b023",
+      "bytes": 541
+    },
+    {
+      "path": "degree-first-pilot/round-000.bin.gz",
+      "sha256": "5926df27ae9c73be77f292172dd092d3a1526b1620c14cf53117eadd4de8ee51",
+      "bytes": 5318
+    },
+    {
+      "path": "degree-first-pilot/round-000.json.gz",
+      "sha256": "bb814de20bbc58c774cfb935b7dd9c76c5c0f15b14dda1b0b560f91ce0cba3cb",
+      "bytes": 2641
+    },
+    {
+      "path": "degree-first-pilot/round-001.bin.gz",
+      "sha256": "50a326d68b37c027fbe327ed95be5beecc387a88959f20f6a9462488ef4085b1",
+      "bytes": 15067
+    },
+    {
+      "path": "degree-first-pilot/round-001.json.gz",
+      "sha256": "6fc5007bbc3ab288243ef7bde9c8b7f5657fb2542338878f0efcc4620d6d5af5",
+      "bytes": 14148
+    },
+    {
+      "path": "degree-first-pilot/round-002.bin.gz",
+      "sha256": "1dac389ede9c008ef1553b280f6294d938e94219788a9a8de6f838ad4deca845",
+      "bytes": 70498
+    },
+    {
+      "path": "degree-first-pilot/round-002.json.gz",
+      "sha256": "2e337e7fb2103653ea620c1a33160ad9d03e118a177a48034d34a6ce328a1d5e",
+      "bytes": 377082
+    },
+    {
+      "path": "degree-first-pilot-resources.json",
+      "sha256": "71cc47eb384ba6eb543f95aa2e93155416781149166fd52785b0e88a9ea92744",
+      "bytes": 857
+    },
+    {
+      "path": "degree-first-pilot-resources.log.gz",
+      "sha256": "640d72684b78e4ed8ff46fabe815a1157702e8453d019d316c81a1a49556c44c",
+      "bytes": 110
+    },
+    {
+      "path": "degree-first-pilot-resources.provenance.json",
+      "sha256": "a034e28bd911da6365b907c6a201cf8896901c68f0f43dee8bb9421586e1b537",
+      "bytes": 1985
+    },
+    {
+      "path": "degree-first-point-witness-build-binding.json",
+      "sha256": "4ea95c0238150b9a1aa45efd176840748885cad76f337469dcc80e62298bf75d",
+      "bytes": 2231
+    },
+    {
+      "path": "degree-first-point-witness-build.log.gz",
+      "sha256": "b2931ac4827b8fd1e62f47bcd934ded5e7308c8e8813fdeb0642072f1c3aa2c1",
+      "bytes": 263
+    },
+    {
+      "path": "degree-first-reject-other-resources.json",
+      "sha256": "e31e1169dcf429610ea680e7494839dca42f53e4ff657f79bc3d71e850c6f31b",
+      "bytes": 751
+    },
+    {
+      "path": "degree-first-reject-other-resources.log.gz",
+      "sha256": "429935d1dd70ae15704d3ec0b292a779b2ad52170adc3edbda4745aae98c2cb1",
+      "bytes": 98
+    },
+    {
+      "path": "degree-first-reject-other-resources.provenance.json",
+      "sha256": "2f2e054afb6ebad539b565786b5ec5bdd830697c32c22b3d7f119ffc00b0386a",
+      "bytes": 2061
+    },
+    {
+      "path": "degree-first-runner-builds.json",
+      "sha256": "caff81f861b69f09bc75aadb93ea7009eebe80385b349745b08eab32078c8f67",
+      "bytes": 2837
+    },
+    {
+      "path": "degree-first-witness/rejected-other-schema.json",
+      "sha256": "2da8d3c1490d94d445ad565e994e2e93dd8c20d73d1b874495382d945827b87d",
+      "bytes": 239
+    },
+    {
+      "path": "degree-first-witness/witness-program.bin.gz",
+      "sha256": "49cc891aab42223597b0f3d86a5fd15ce84754b59a3d9696a8cc3fc11405af55",
+      "bytes": 3280
+    },
+    {
+      "path": "degree-first-witness/witness-result.json.gz",
+      "sha256": "9cfd5d6788e0f48b53a374173feb633b9945f71cf59eb127331cd61c3285bc61",
+      "bytes": 2175
+    },
+    {
+      "path": "degree-first-witness-resources.json",
+      "sha256": "dd6253bcc9ea7f7f99c45667fd369512afabdac2b1d4caa8b3c70e3bed9a85e3",
+      "bytes": 622
+    },
+    {
+      "path": "degree-first-witness-resources.log.gz",
+      "sha256": "6687727f578883e8955c9be266f6c2b96c64a9ae3538cdaef9ca4dc87488fc4a",
+      "bytes": 61
+    },
+    {
+      "path": "degree-first-witness-resources.provenance.json",
+      "sha256": "ffe9fbdbc87ce5159191471d8b1785443eaec1b21c99f3f101f6424e85760a18",
+      "bytes": 1536
+    },
+    {
+      "path": "experimental.patch",
+      "sha256": "a4e1381496bf35eeb0d77b882afb518bf2b5ec60251de3cdd2cf2e46eccbd858",
+      "bytes": 1219
+    },
+    {
+      "path": "independent-order-audit.json",
+      "sha256": "787031ced5f799800d90f8f152b8f07a63575c5544545e2f9b434e540eecfd0a",
+      "bytes": 2961
+    },
+    {
+      "path": "invariant-gate/binding.json",
+      "sha256": "1d2ec62794294478389560e9459cdbeb27d375dd6e08cbc364f804c85a2ca143",
+      "bytes": 2466
+    },
+    {
+      "path": "invariant-gate/probe.rs",
+      "sha256": "fc4f69ae6f3bed24b2215e57a15af6cdf4c84123d890760ff15f51d1639fd8ca",
+      "bytes": 7236
+    },
+    {
+      "path": "invariant-gate/resources.json",
+      "sha256": "afb48561225748e1146c31e542cf54c7b90c4fb7c3ef26c085b284fe15d89b17",
+      "bytes": 388
+    },
+    {
+      "path": "invariant-gate/resources.log.gz",
+      "sha256": "adc9d0e0dd34b32979344d553515e858b05545d904d4dde440abf2cb5cb10506",
+      "bytes": 278
+    },
+    {
+      "path": "invariant-gate/resources.provenance.json",
+      "sha256": "61f73831088a24bce0f02f0d3f0e16fe2ac1e50681e4ad9269b4f1b5c665f5e0",
+      "bytes": 553
+    },
+    {
+      "path": "invariant-gate/result.json",
+      "sha256": "b9bec4ad52c7eeb8d10e28a246754ff63bdb27bbb7ca929b149bd62edd08d356",
+      "bytes": 464
+    },
+    {
+      "path": "pilot-pair-summary.json",
+      "sha256": "9b2eb4ea4423fae9b8d905cbe09ba8bade71831a8ac8a3f13eb1d1bb93269d47",
+      "bytes": 12002
+    },
+    {
+      "path": "pilot-three-arm-summary.json",
+      "sha256": "3e1625d1b2eb7115477609dd948390f306df441cc2961fc9572cb899934b829d",
+      "bytes": 18537
+    },
+    {
+      "path": "runner/active-pilot.rs",
+      "sha256": "be3b9d135e742de50315e809d8109ce8085dc7420050720ee9a40aaff0106741",
+      "bytes": 18404
+    },
+    {
+      "path": "runner/compile-runners-before-euler.py",
+      "sha256": "395b22f147c34300645ff34d404b79872250941cd967620b65c220f374774634",
+      "bytes": 3153
+    },
+    {
+      "path": "runner/compile-runners.py",
+      "sha256": "1617c1e19c884aece8e88487abece45f14c1af9d45759d9c27d3a2d1651c3a40",
+      "bytes": 3335
+    },
+    {
+      "path": "runner/euler-witness.rs",
+      "sha256": "4eb5554f14f1e2681a27da266759aa99cb38965d86f63c7c6c912af1b745f1ca",
+      "bytes": 8390
+    },
+    {
+      "path": "runner/planned-commands.json",
+      "sha256": "a9a71c60e5b5a2ffba032c53c2a93b503fb274324a60763e3833875aec6b9115",
+      "bytes": 7885
+    },
+    {
+      "path": "runner/point-witness.rs",
+      "sha256": "5eb04879b0fa68fc14bd8a4b711a8596f05e2f39f871008e6467483139707471",
+      "bytes": 8136
+    },
+    {
+      "path": "runner/runner-source-binding.json",
+      "sha256": "867bab3b350ff906be7fcd038aa74abb054bc5884182d293334237f61399a2bd",
+      "bytes": 890
+    },
+    {
+      "path": "runner/summarize-pilot.py",
+      "sha256": "c74710d05994bed351f583f8c85e3051b77002deeee0f7689065422db6337049",
+      "bytes": 2826
+    },
+    {
+      "path": "witness-summary.json",
+      "sha256": "6e23bb7fe63f800ea3817d7e79d05b21a54bb3199442d2772b911fbc9974e5e3",
+      "bytes": 3781
+    },
+    {
+      "path": "witness-three-arm-summary.json",
+      "sha256": "0084bd6b9182a86e7d5696d4ac57323d350fa9e04cc68623b74035ab5eb91cca",
+      "bytes": 6131
+    }
+  ],
+  "note": "Manifest excludes itself; raw checkpoint/source bindings resolve through archives.json."
+}

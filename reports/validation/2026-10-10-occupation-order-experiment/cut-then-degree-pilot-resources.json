@@ -1,0 +1,24 @@
+{
+  "command": [
+    "timeout",
+    "300s",
+    "env",
+    "PILOT_ROUNDS=16",
+    "PILOT_FRONTIER=1024",
+    "PILOT_REQUESTS=4096",
+    "PILOT_RULES=65536",
+    "PILOT_ZERO_ATTEMPTS=8192",
+    "PILOT_RAY_DOMAINS=1",
+    "PILOT_POINT_DOMAINS=1",
+    "PILOT_DEPTH=3",
+    "/tmp/rustflow-occupation-order-runners/cut-then-degree-active-pilot",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 258.4797476888634,
+  "user_seconds": 256.196775,
+  "system_seconds": 0.25895799999999997,
+  "peak_child_rss_kib": 86076,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

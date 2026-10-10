@@ -1,0 +1,217 @@
+{
+  "recorded_utc": "2026-10-10T02:08:22.476657+00:00",
+  "scope": "Ordering proof diagnostics for three native libraries, not full closure or numerical validation. Every arm reconstructs source data and discovers fresh native rules.",
+  "controls": {
+    "baseline": {
+      "full_source_B": {
+        "native_status": "Applied { rule: 0 }",
+        "source_count": 52,
+        "terms": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              1,
+              0,
+              0
+            ]
+          }
+        ],
+        "conditions": [],
+        "roundtrip": true,
+        "selected_source": "multiplication/9/0"
+      },
+      "one_original_Euler_row_B": {
+        "native_status": "Unresolved(NoApplicableRule)",
+        "source_count": 1,
+        "selected_original_source_ordinal": 4,
+        "terms": [],
+        "conditions": [],
+        "roundtrip": true,
+        "unresolved_discovery_domains": 1
+      },
+      "other_schema_rejected": {
+        "error": "invalid RustRed binary program: unsupported guarded proof schema",
+        "program": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/degree-first-witness/witness-program.bin",
+        "rejected": true
+      }
+    },
+    "degree-first": {
+      "full_source_B": {
+        "native_status": "Applied { rule: 0 }",
+        "source_count": 52,
+        "terms": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              1,
+              0,
+              0
+            ]
+          }
+        ],
+        "conditions": [],
+        "roundtrip": true,
+        "selected_source": "multiplication/9/0"
+      },
+      "one_original_Euler_row_B": {
+        "native_status": "Applied { rule: 0 }",
+        "source_count": 1,
+        "selected_original_source_ordinal": 4,
+        "terms": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              1,
+              -1,
+              2,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2-2*epsilon",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "conditions": [],
+        "roundtrip": true,
+        "unresolved_discovery_domains": 0
+      },
+      "other_schema_rejected": {
+        "error": "invalid RustRed binary program: unsupported guarded proof schema",
+        "program": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/baseline-witness/witness-program.bin",
+        "rejected": true
+      }
+    },
+    "cut-then-degree": {
+      "full_source_B": {
+        "native_status": "Applied { rule: 0 }",
+        "source_count": 52,
+        "terms": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              1,
+              0,
+              0
+            ]
+          }
+        ],
+        "conditions": [],
+        "roundtrip": true,
+        "selected_source": "multiplication/9/0"
+      },
+      "one_original_Euler_row_B": {
+        "native_status": "Applied { rule: 0 }",
+        "source_count": 1,
+        "selected_original_source_ordinal": 4,
+        "terms": [
+          {
+            "coefficient": "1",
+            "indices": [
+              1,
+              1,
+              -1,
+              2,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "2-2*epsilon",
+            "indices": [
+              1,
+              1,
+              0,
+              1,
+              1,
+              0,
+              -1,
+              -1,
+              0,
+              0,
+              0,
+              0
+            ]
+          }
+        ],
+        "conditions": [],
+        "roundtrip": true,
+        "unresolved_discovery_domains": 0
+      },
+      "other_schema_rejected": {
+        "error": "invalid RustRed binary program: unsupported guarded proof schema",
+        "program": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/baseline-witness/witness-program.bin",
+        "rejected": true
+      },
+      "baseline_rejects_this_schema": {
+        "error": "invalid RustRed binary program: unsupported guarded proof schema",
+        "program": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-witness/witness-program.bin",
+        "rejected": true
+      }
+    }
+  },
+  "interpretation": "The full-source point B selects identical multiplication/9/0 in all three arms and is nondiscriminating. On the explicitly source-restricted single original Euler row, baseline has no rule at depth3/domain32; both experimental orders discover B=A+(2\u22122epsilon)C with both RHS in the bulk, no conditions, and exact encode/decode replay. Neither full-source active closure pilot succeeds within the recorded bounds.",
+  "invariants": {
+    "degree-first": "invariant-gate/result.json",
+    "cut-then-degree": "cut-then-degree-invariant-gate/result.json"
+  },
+  "libraries": {
+    "baseline": "ac85472324303a84e909023a9aac6fe77f4993934985519fd88275cae0e1aad0",
+    "degree-first": "1baa2fdc31e3f169fde02760a7f430b5ec68a7bdfb194ab199e7f4e2cfb6ec3b",
+    "cut-then-degree": "04e3d660b6c71c78152ba7b13ae7a1ed14887b4b8dc30b8f9f9cf22603e47f7c"
+  }
+}

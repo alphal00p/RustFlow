@@ -1,0 +1,22 @@
+--- a/src/solver/index.rs
++++ b/src/solver/index.rs
+@@ -499,6 +499,8 @@
+             .cmp(&denominators_left)
+             .then(sector_lex.reverse())
+             .then(delta_order)
++            // DIAGNOSTIC ONLY: preserve sectors and required-cut lowering.
++            .then(occupation_right.cmp(&occupation_left))
+             .then(absolute_right.cmp(&absolute_left))
+             .then(numerator_right.cmp(&numerator_left));
+         if aggregate != Ordering::Equal {
+--- a/src/solver/guarded/persistence.rs
++++ b/src/solver/guarded/persistence.rs
+@@ -22,7 +22,7 @@
+ // v1 proofs can retain columns and extra guards that this quotient removes;
+ // they must be rediscovered, not silently rewritten during deserialization.
+ // This version applies only to guarded-source programs, not ordinary rules.
+-const SCHEMA: &str = "rustred.guarded-source-program.v2";
++const SCHEMA: &str = "rustred.guarded-source-program.experiment-cut-then-occupation-degree.v1";
+ const STRUCTURE_LIMIT: usize = 64 * 1024 * 1024;
+ 
+ type DomainRecord = Vec<(Option<i64>, Option<i64>)>;

@@ -1,0 +1,13 @@
+{
+  "antisymmetry_equality_pairs": 8100,
+  "bulk_surface_not_zero_checks": 2,
+  "explicit_priority_witnesses": 3,
+  "invalid_occupation_checks": 2,
+  "no_occupation_invariance_pairs": 8100,
+  "numeric_points": 90,
+  "required_cut_zero_checks": 18,
+  "scope": "isolated native occupation-degree-first comparator and role invariants; no closure or amplitude claim",
+  "status": "pass",
+  "symbolic_common_base_comparisons": 839808,
+  "transitivity_triples": 729000
+}

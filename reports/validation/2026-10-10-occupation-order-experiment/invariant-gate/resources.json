@@ -1,0 +1,12 @@
+{
+  "command": [
+    "/tmp/occupation_degree_invariant_probe",
+    "reports/validation/2026-10-10-occupation-order-experiment/invariant-gate/result.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.4704929511062801,
+  "user_seconds": 0.456653,
+  "system_seconds": 0.01092,
+  "peak_child_rss_kib": 15428,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

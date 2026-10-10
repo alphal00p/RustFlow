@@ -1,0 +1,38 @@
+[
+  {
+    "kind": "euler-witness",
+    "returncode": 0,
+    "wall_seconds": 18.841667272150517,
+    "command": [
+      "rustc",
+      "--edition=2024",
+      "--crate-name",
+      "euler_witness",
+      "-C",
+      "opt-level=0",
+      "-C",
+      "debuginfo=0",
+      "--extern",
+      "rustred=/tmp/rustflow-zero-projection-native-library/librustred-392075d0c6995fd1.rlib",
+      "--extern",
+      "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "--extern",
+      "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "--extern",
+      "bincode=/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "-L",
+      "dependency=/common/dev/rustflow_fermi/target/release/deps",
+      "-L",
+      "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+      "-L",
+      "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/runner/euler-witness.rs",
+      "-o",
+      "/tmp/rustflow-occupation-order-runners/baseline-euler-witness"
+    ],
+    "executable": {
+      "path": "/tmp/rustflow-occupation-order-runners/baseline-euler-witness",
+      "sha256": "6ea63b3963d74bf5d61e81037bccc133f01817ec973f216d1a52786b1843df68"
+    }
+  }
+]

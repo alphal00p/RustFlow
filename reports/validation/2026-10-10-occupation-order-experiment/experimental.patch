@@ -1,0 +1,28 @@
+--- a/src/solver/index.rs
++++ b/src/solver/index.rs
+@@ -495,6 +495,14 @@
+             }
+         }
+ 
++        // DIAGNOSTIC ONLY: occupation degree precedes the physical key.
++        // The admitted domain is nonnegative on occupation axes. Its common
++        // symbolic base cancels, preserving the native affine comparison.
++        let occupation_degree = occupation_right.cmp(&occupation_left);
++        if occupation_degree != Ordering::Equal {
++            return occupation_degree;
++        }
++
+         let aggregate = denominators_right
+             .cmp(&denominators_left)
+             .then(sector_lex.reverse())
+--- a/src/solver/guarded/persistence.rs
++++ b/src/solver/guarded/persistence.rs
+@@ -22,7 +22,7 @@
+ // v1 proofs can retain columns and extra guards that this quotient removes;
+ // they must be rediscovered, not silently rewritten during deserialization.
+ // This version applies only to guarded-source programs, not ordinary rules.
+-const SCHEMA: &str = "rustred.guarded-source-program.v2";
++const SCHEMA: &str = "rustred.guarded-source-program.experiment-occupation-degree-first.v1";
+ const STRUCTURE_LIMIT: usize = 64 * 1024 * 1024;
+ 
+ type DomainRecord = Vec<(Option<i64>, Option<i64>)>;

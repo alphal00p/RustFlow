@@ -1,0 +1,10 @@
+{
+  "original_pilot": "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-point-active-pilot/probe-large-budget.rs",
+  "original_sha256": "cc8238fbba2451034999b0af7c3529def5fa4278bd86992394f7a458f61cd062",
+  "pilot": "reports/validation/2026-10-10-occupation-order-experiment/runner/active-pilot.rs",
+  "pilot_sha256": "be3b9d135e742de50315e809d8109ce8085dc7420050720ee9a40aaff0106741",
+  "changes": "Only request cap changed from current set to cumulative attempted union; config text records it. Original baseline stayed below921cumulative requests, so that difference did not constrain the old completed run.",
+  "witness": "reports/validation/2026-10-10-occupation-order-experiment/runner/point-witness.rs",
+  "witness_sha256": "5eb04879b0fa68fc14bd8a4b711a8596f05e2f39f871008e6467483139707471",
+  "scope": "Prepare only; no runner compilation or execution yet."
+}

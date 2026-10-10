@@ -1,0 +1,54 @@
+{
+  "captured_utc": "2026-10-10T01:50:45.446117+00:00",
+  "tag": "degree-first",
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/runner/active-pilot.rs",
+    "sha256": "be3b9d135e742de50315e809d8109ce8085dc7420050720ee9a40aaff0106741"
+  },
+  "dependencies": {
+    "rustred": {
+      "path": "/tmp/librustred-occupation-degree-first-20261010.rlib",
+      "sha256": "1baa2fdc31e3f169fde02760a7f430b5ec68a7bdfb194ab199e7f4e2cfb6ec3b"
+    },
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af"
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95"
+    },
+    "bincode": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+      "sha256": "283d7095334dd9e15e8ecb4d616ef4578e59481d05b37d4670ea6de35fbefc60"
+    }
+  },
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "active_pilot",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "rustred=/tmp/librustred-occupation-degree-first-20261010.rlib",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "bincode=/common/dev/rustflow_fermi/target/release/deps/libbincode-30fae4fd0bc9d1b5.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/runner/active-pilot.rs",
+    "-o",
+    "/tmp/rustflow-occupation-order-runners/degree-first-active-pilot"
+  ],
+  "cargo_invoked": false
+}

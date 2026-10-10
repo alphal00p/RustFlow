@@ -1,0 +1,549 @@
+{
+  "recorded_utc": "2026-10-10T02:13:47.293331+00:00",
+  "format": "gzip mtime0 compression9",
+  "source_binding_policy": "Existing raw hashes remain authoritative; all rawrestore checks passed before raw removal. Sources and bindings are uncompressed.",
+  "entries": [
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-active-pilot-build.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-active-pilot-build.log.gz",
+      "archive_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "archive_bytes": 20,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-euler/witness-program.bin",
+      "original_sha256": "09a9d2e39af491fd8eb3f99e1d8084c473aba4f72ddc587e8d778f8590611cc1",
+      "original_bytes": 9254,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-euler/witness-program.bin.gz",
+      "archive_sha256": "b5b93dd618dfec0ab465cf9c2d3fa0dbea8f50b9c0f23e88002ba47a9ae8c7dc",
+      "archive_bytes": 2071,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-euler/witness-result.json",
+      "original_sha256": "c7e40c139ffaabf0ad83664c1179ffd07771bdc8b6afd9c0370eb3739d720421",
+      "original_bytes": 8816,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-euler/witness-result.json.gz",
+      "archive_sha256": "1468b386c565ea608f003eed1aa4ae4f60bb8e99f8f3561ca691a93b1d3edf52",
+      "archive_bytes": 2080,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-euler-resources.log",
+      "original_sha256": "f0f5b8377cbe1341cfe4d0d0d79bdf053bdd646749074f01ced80dff9fafd34f",
+      "original_bytes": 52,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-euler-resources.log.gz",
+      "archive_sha256": "457ce8afb73bc56d6b8a596461907bac83e8f42df0ee7a49dd09a44d341cd767",
+      "archive_bytes": 70,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-euler-witness-build.log",
+      "original_sha256": "613544a75f3a715a7f545cc5e6588e15c7bd29a7294275b5b3db5ce90c67287d",
+      "original_bytes": 386,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-euler-witness-build.log.gz",
+      "archive_sha256": "c0f6c31ecb23c834512ad565d6d958903daa79c4bb0f0c1f70af4996524171b5",
+      "archive_bytes": 263,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-000.bin",
+      "original_sha256": "2bd5f3717585aa34bc04d3385fd7bf3212998e5c61bb7e58cfbe3c872080a52f",
+      "original_bytes": 54460,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-000.bin.gz",
+      "archive_sha256": "f02781a25cc3088a3707cbe9b4e15301cc471dc4e634a1963aa7215addffe9f7",
+      "archive_bytes": 5450,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-000.json",
+      "original_sha256": "0a5a94345a31fe591f797a2d6f5a13ba784c4f0d1328f36c96961196ea8b8544",
+      "original_bytes": 93214,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-000.json.gz",
+      "archive_sha256": "80fdab279756e1d1eda644c4f27b6926b6776c54e8852330fd84daedcab1a050",
+      "archive_bytes": 2651,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-001.bin",
+      "original_sha256": "5310dafd3262179e6ee338cbcd303862fa59642704d9fe80c148df2979312be1",
+      "original_bytes": 98154,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-001.bin.gz",
+      "archive_sha256": "fd4408918debaa9d532ecae41e67dd5d7b232055d71db8ec34ef75a4714f3a89",
+      "archive_bytes": 9873,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-001.json",
+      "original_sha256": "66a559587b4b5806973fc042b62232390e1adfa34ae9a9d7a88ae8702e650082",
+      "original_bytes": 349985,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-001.json.gz",
+      "archive_sha256": "18d11f11d6fdc6dd8a81442b12e9a98b761a17b145ab0f53aaf082c96be177a3",
+      "archive_bytes": 8727,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-002.bin",
+      "original_sha256": "a8996722a59fceec37511f9393bb1590df140f68c2c18f2fcf98711930c965f0",
+      "original_bytes": 431905,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-002.bin.gz",
+      "archive_sha256": "65978a33dc7c273d8202cefed7b2669a7930c531a1ecddc5be169c26c636f89d",
+      "archive_bytes": 38039,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-002.json",
+      "original_sha256": "8546fc922f08cd639caedd8f063b5613eaa425285f10247e4e805ef6b8384968",
+      "original_bytes": 1254464,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-002.json.gz",
+      "archive_sha256": "6562b5e21087ab916ab8766b9f1aa7ac28c49829f239c6b345b2e9ef2907a2bb",
+      "archive_bytes": 47228,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-003.bin",
+      "original_sha256": "7e09a483cc7cc3f550b46b7db500dae48a5c52de9e37393777ec3e2be22c16eb",
+      "original_bytes": 1654589,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-003.bin.gz",
+      "archive_sha256": "22087da9d0302bbbb9b6ade1d333d72d33b71b9633d66e9c5dc9b9e127709337",
+      "archive_bytes": 138605,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-003.json",
+      "original_sha256": "1079b42b8063e60470d973cbec6255ba487c54cbaadfe3b7b8650beaa6c61ac3",
+      "original_bytes": 5554476,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-003.json.gz",
+      "archive_sha256": "ad0e241a335df7dcf4f9fd7be70e28ed87066a7943668f8e2d82dbbaffe9e3ec",
+      "archive_bytes": 935806,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot-resources.log",
+      "original_sha256": "ec7a24827f71c394bc9583cfbfb24c7f789e55cb93b82428432810442a3e5b91",
+      "original_bytes": 257,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot-resources.log.gz",
+      "archive_sha256": "4f83114abaa121624258f7b139823766170734c084a83a668729a07aa444ce74",
+      "archive_bytes": 146,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-point-witness-build.log",
+      "original_sha256": "97dca4b8fe6369309b105b5b8545059a718e41f6d68a7206562cb293d2effc2a",
+      "original_bytes": 386,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-point-witness-build.log.gz",
+      "archive_sha256": "b2931ac4827b8fd1e62f47bcd934ded5e7308c8e8813fdeb0642072f1c3aa2c1",
+      "archive_bytes": 263,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-reject-cut-then-degree-resources.log",
+      "original_sha256": "de938b5524c3004434d863efd475a08184ae1c31c6aa4da3dc06e837d5cba12a",
+      "original_bytes": 87,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-reject-cut-then-degree-resources.log.gz",
+      "archive_sha256": "429935d1dd70ae15704d3ec0b292a779b2ad52170adc3edbda4745aae98c2cb1",
+      "archive_bytes": 98,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-reject-other-resources.log",
+      "original_sha256": "de938b5524c3004434d863efd475a08184ae1c31c6aa4da3dc06e837d5cba12a",
+      "original_bytes": 87,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-reject-other-resources.log.gz",
+      "archive_sha256": "429935d1dd70ae15704d3ec0b292a779b2ad52170adc3edbda4745aae98c2cb1",
+      "archive_bytes": 98,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-witness/witness-program.bin",
+      "original_sha256": "e924b0943205a0bc2bf6613ea9e2eb2387fd9eac26738d4a20ea4ef557e1c991",
+      "original_bytes": 29430,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-witness/witness-program.bin.gz",
+      "archive_sha256": "20cd8927a9a528ee95d344838f42887d8768b2cc0755d107a85a61d488c408d4",
+      "archive_bytes": 3261,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-witness/witness-result.json",
+      "original_sha256": "5ccc4b971f5c6ea89e9a1a60b6d623112e727881dd5970f22010399bbf9240f3",
+      "original_bytes": 11564,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-witness/witness-result.json.gz",
+      "archive_sha256": "9cfd5d6788e0f48b53a374173feb633b9945f71cf59eb127331cd61c3285bc61",
+      "archive_bytes": 2175,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-witness-resources.log",
+      "original_sha256": "a42da5f7f03378fd0db2939b065f2422d97f8e0dfb25119e91b03ca0eaeea284",
+      "original_bytes": 43,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-witness-resources.log.gz",
+      "archive_sha256": "6687727f578883e8955c9be266f6c2b96c64a9ae3538cdaef9ca4dc87488fc4a",
+      "archive_bytes": 61,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/build-resources.log",
+      "original_sha256": "a47417869106290039e6a0fd2d7eebd393a61f1e75222b015000b8a77dfceab0",
+      "original_bytes": 2282,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/build-resources.log.gz",
+      "archive_sha256": "07469f7bb565b41580b6c40faf17be9763bdbab1d76cf26ea58990d205ea2460",
+      "archive_bytes": 655,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-active-pilot-build.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-active-pilot-build.log.gz",
+      "archive_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "archive_bytes": 20,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-build/build-resources.log",
+      "original_sha256": "c1fe8ee78d67bf005fc26b391ee66656e1e4248bb79b4f9929b8429a93275aee",
+      "original_bytes": 2352,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-build/build-resources.log.gz",
+      "archive_sha256": "d857cf853ff467b06eda3668b97f59ef4d3c0dd96c9f54134c319d4511c40c57",
+      "archive_bytes": 664,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-euler/witness-program.bin",
+      "original_sha256": "2863074c1b9d5b7c730ca34be5600657a6503e6230b8381f0fd73e38240a32a7",
+      "original_bytes": 9687,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-euler/witness-program.bin.gz",
+      "archive_sha256": "95d716cb74b9ddd590a3a06f870a0711a95df56436493cece4506dd1f47e39f8",
+      "archive_bytes": 2185,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-euler/witness-result.json",
+      "original_sha256": "5bae4aa11e99158656895b37702c7b2876632d4011cc8cb6b73aa008edbc9eb4",
+      "original_bytes": 12780,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-euler/witness-result.json.gz",
+      "archive_sha256": "c88e99fcabe77edeead264ce9950d6ed1ea1cf4e2aaca4c46159f5672c02c9a9",
+      "archive_bytes": 2259,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-euler-resources.log",
+      "original_sha256": "b8f537b2aedb1494e3c41d23e7addac9a8b3707bf3d9360246988b4a70ecb003",
+      "original_bytes": 43,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-euler-resources.log.gz",
+      "archive_sha256": "1c650f929cd195ca807e21bf441d96912ead7d0ce998bc2f815ea0d0ddacf3cd",
+      "archive_bytes": 62,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-euler-witness-build.log",
+      "original_sha256": "613544a75f3a715a7f545cc5e6588e15c7bd29a7294275b5b3db5ce90c67287d",
+      "original_bytes": 386,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-euler-witness-build.log.gz",
+      "archive_sha256": "c0f6c31ecb23c834512ad565d6d958903daa79c4bb0f0c1f70af4996524171b5",
+      "archive_bytes": 263,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/resources.log",
+      "original_sha256": "118fe8a378b047cdf915274c2e196b0b37f27252ae522d6e37a37c28cd6a0f30",
+      "original_bytes": 423,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-invariant-gate/resources.log.gz",
+      "archive_sha256": "ebd7aa306d676cae24be8ee6bb5d015cc983c6ff61c595e328a34426120b9ed1",
+      "archive_bytes": 280,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-000.bin",
+      "original_sha256": "0491fe2430a53d2d0c5ad72470e738220ca5fc69ab6bef89561f34001e271f1f",
+      "original_bytes": 53913,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-000.bin.gz",
+      "archive_sha256": "5391620aa8a556951ebebeb088a6b066c52254f95b63a7da9bfa71b24c5075d3",
+      "archive_bytes": 5422,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-000.json",
+      "original_sha256": "247e664aac312640bf8f13bb6e38c4e62a4a51395e497311c2708f92fb91d48f",
+      "original_bytes": 93215,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-000.json.gz",
+      "archive_sha256": "c0a393f080e616939f8d1022094b68ccdfee3d3218fff7c2a22a546d87acf87e",
+      "archive_bytes": 2652,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-001.bin",
+      "original_sha256": "5d47b32068c72211fd3c69c2b949d79e9193626ff5686cdd956f8412ab33595b",
+      "original_bytes": 98117,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-001.bin.gz",
+      "archive_sha256": "8c86fa554001c6012d38e057347bc43d18f3b91e2a426187b10ab2902fab8d65",
+      "archive_bytes": 9861,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-001.json",
+      "original_sha256": "b0f98eef03497a722f793ff213b703b719ae0b44ae196e88ed11d4a4a9421a59",
+      "original_bytes": 358202,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-001.json.gz",
+      "archive_sha256": "9f74698c4c697859da43d0d028f4ba08c1ac3d88a9bb2cc5dea9edeb3e04b6c2",
+      "archive_bytes": 9090,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-002.bin",
+      "original_sha256": "370463818c112a2de98cddf3325bf5a7198b89b8dc2276d579d5a620085730ba",
+      "original_bytes": 402654,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-002.bin.gz",
+      "archive_sha256": "ede34939c24d2ff660f78a5d9ac001e1716310cf45f8f33d154ad86a53e672f0",
+      "archive_bytes": 35552,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-002.json",
+      "original_sha256": "fe8a99c8f9bcd6e8fa8367e8b6a498cd7137b19f14aa9e8c140295cd34a65260",
+      "original_bytes": 1213561,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-002.json.gz",
+      "archive_sha256": "74939d5c94ea65e2328c8aca64693fcd6eecf93ecfd79a88e63fbc06b8774d7d",
+      "archive_bytes": 40872,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-003.bin",
+      "original_sha256": "fab003fad94399bc99276c19a0ec36b843cddb3990281aef24bf3720cfb57674",
+      "original_bytes": 1433226,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-003.bin.gz",
+      "archive_sha256": "05019e338107f0ef0e66b6e3d6dc3c27fa9160dc58fe880c923cc6833634cb00",
+      "archive_bytes": 121957,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-003.json",
+      "original_sha256": "ff77bd55fe907378a89e48c3351422d43c2b995e158c916264b188c77c414103",
+      "original_bytes": 4200308,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot/round-003.json.gz",
+      "archive_sha256": "817f5cd3dc668655d7d2641b310917ecd8f18d5371c9b84940b123060bfef296",
+      "archive_bytes": 488321,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot-resources.log",
+      "original_sha256": "37e49ffd52890d6185bedab1b1d4fae041f2b9794d128f9e937b9857c2850231",
+      "original_bytes": 256,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-pilot-resources.log.gz",
+      "archive_sha256": "6c47e7150c588657c4db64eb2f7df6fa0c2c86440a4f7318722e0494764a59a3",
+      "archive_bytes": 145,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-point-witness-build.log",
+      "original_sha256": "97dca4b8fe6369309b105b5b8545059a718e41f6d68a7206562cb293d2effc2a",
+      "original_bytes": 386,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-point-witness-build.log.gz",
+      "archive_sha256": "b2931ac4827b8fd1e62f47bcd934ded5e7308c8e8813fdeb0642072f1c3aa2c1",
+      "archive_bytes": 263,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-reject-other-resources.log",
+      "original_sha256": "de938b5524c3004434d863efd475a08184ae1c31c6aa4da3dc06e837d5cba12a",
+      "original_bytes": 87,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-reject-other-resources.log.gz",
+      "archive_sha256": "429935d1dd70ae15704d3ec0b292a779b2ad52170adc3edbda4745aae98c2cb1",
+      "archive_bytes": 98,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-witness/witness-program.bin",
+      "original_sha256": "c1a7b6277e92f6981a504a6bb1b321ef401ebb3bc5399f7e1269fde17f125ad1",
+      "original_bytes": 29468,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-witness/witness-program.bin.gz",
+      "archive_sha256": "accaa2b7c42deba03e7a22bc9869d9d0aeaee48d9fced58500031a06abf7108f",
+      "archive_bytes": 3281,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-witness/witness-result.json",
+      "original_sha256": "5ccc4b971f5c6ea89e9a1a60b6d623112e727881dd5970f22010399bbf9240f3",
+      "original_bytes": 11564,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-witness/witness-result.json.gz",
+      "archive_sha256": "9cfd5d6788e0f48b53a374173feb633b9945f71cf59eb127331cd61c3285bc61",
+      "archive_bytes": 2175,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-witness-resources.log",
+      "original_sha256": "a42da5f7f03378fd0db2939b065f2422d97f8e0dfb25119e91b03ca0eaeea284",
+      "original_bytes": 43,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/cut-then-degree-witness-resources.log.gz",
+      "archive_sha256": "6687727f578883e8955c9be266f6c2b96c64a9ae3538cdaef9ca4dc87488fc4a",
+      "archive_bytes": 61,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-active-pilot-build.log",
+      "original_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "original_bytes": 0,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-active-pilot-build.log.gz",
+      "archive_sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "archive_bytes": 20,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-euler/witness-program.bin",
+      "original_sha256": "6159069e3e7ee5d98c6718ae1b45f33db705c32a6f74c8f1620864d4721cf584",
+      "original_bytes": 9684,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-euler/witness-program.bin.gz",
+      "archive_sha256": "62d840efb53acec0cd7cbdc91f42d15028e6ec98887661204318a924684e9622",
+      "archive_bytes": 2183,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-euler/witness-result.json",
+      "original_sha256": "5bae4aa11e99158656895b37702c7b2876632d4011cc8cb6b73aa008edbc9eb4",
+      "original_bytes": 12780,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-euler/witness-result.json.gz",
+      "archive_sha256": "c88e99fcabe77edeead264ce9950d6ed1ea1cf4e2aaca4c46159f5672c02c9a9",
+      "archive_bytes": 2259,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-euler-resources.log",
+      "original_sha256": "b8f537b2aedb1494e3c41d23e7addac9a8b3707bf3d9360246988b4a70ecb003",
+      "original_bytes": 43,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-euler-resources.log.gz",
+      "archive_sha256": "1c650f929cd195ca807e21bf441d96912ead7d0ce998bc2f815ea0d0ddacf3cd",
+      "archive_bytes": 62,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-euler-witness-build.log",
+      "original_sha256": "613544a75f3a715a7f545cc5e6588e15c7bd29a7294275b5b3db5ce90c67287d",
+      "original_bytes": 386,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-euler-witness-build.log.gz",
+      "archive_sha256": "c0f6c31ecb23c834512ad565d6d958903daa79c4bb0f0c1f70af4996524171b5",
+      "archive_bytes": 263,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-000.bin",
+      "original_sha256": "06a790f96e5cdbc78d3ab899714a8f202780c2b3ebe5cc939a7efa0ebe3a011f",
+      "original_bytes": 53229,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-000.bin.gz",
+      "archive_sha256": "5926df27ae9c73be77f292172dd092d3a1526b1620c14cf53117eadd4de8ee51",
+      "archive_bytes": 5318,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-000.json",
+      "original_sha256": "f2dc08290406b2196b07154b153229a5d5d98a3ff4bb741246960dd4298a3170",
+      "original_bytes": 93215,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-000.json.gz",
+      "archive_sha256": "bb814de20bbc58c774cfb935b7dd9c76c5c0f15b14dda1b0b560f91ce0cba3cb",
+      "archive_bytes": 2641,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-001.bin",
+      "original_sha256": "240cb2a42ce9f3a4d5739f48c235673eb5aff0bbdfba0e5e345e7da31be8841f",
+      "original_bytes": 170320,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-001.bin.gz",
+      "archive_sha256": "50a326d68b37c027fbe327ed95be5beecc387a88959f20f6a9462488ef4085b1",
+      "archive_bytes": 15067,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-001.json",
+      "original_sha256": "cf392d01b5d05fe64c7f72fe9cd5aaf63cb187f8e3186a5734f6c6cca0fe73f9",
+      "original_bytes": 460472,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-001.json.gz",
+      "archive_sha256": "6fc5007bbc3ab288243ef7bde9c8b7f5657fb2542338878f0efcc4620d6d5af5",
+      "archive_bytes": 14148,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-002.bin",
+      "original_sha256": "ede434ba642de520d5f40ef1970452c72d56613ff9446fd7b6e3cdac5786aaa8",
+      "original_bytes": 822228,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-002.bin.gz",
+      "archive_sha256": "1dac389ede9c008ef1553b280f6294d938e94219788a9a8de6f838ad4deca845",
+      "archive_bytes": 70498,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-002.json",
+      "original_sha256": "178acb15fbd2c1c2528d2cb471d735d862b55a11dc8092d30c866756382ec64e",
+      "original_bytes": 2918615,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot/round-002.json.gz",
+      "archive_sha256": "2e337e7fb2103653ea620c1a33160ad9d03e118a177a48034d34a6ce328a1d5e",
+      "archive_bytes": 377082,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot-resources.log",
+      "original_sha256": "8176b00ec671c5680b98a0327621d3177f071f4a7547e6aa13413b9be5663776",
+      "original_bytes": 166,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-pilot-resources.log.gz",
+      "archive_sha256": "640d72684b78e4ed8ff46fabe815a1157702e8453d019d316c81a1a49556c44c",
+      "archive_bytes": 110,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-point-witness-build.log",
+      "original_sha256": "97dca4b8fe6369309b105b5b8545059a718e41f6d68a7206562cb293d2effc2a",
+      "original_bytes": 386,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-point-witness-build.log.gz",
+      "archive_sha256": "b2931ac4827b8fd1e62f47bcd934ded5e7308c8e8813fdeb0642072f1c3aa2c1",
+      "archive_bytes": 263,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-reject-other-resources.log",
+      "original_sha256": "de938b5524c3004434d863efd475a08184ae1c31c6aa4da3dc06e837d5cba12a",
+      "original_bytes": 87,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-reject-other-resources.log.gz",
+      "archive_sha256": "429935d1dd70ae15704d3ec0b292a779b2ad52170adc3edbda4745aae98c2cb1",
+      "archive_bytes": 98,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-witness/witness-program.bin",
+      "original_sha256": "347a163a17d20ea87fbb03f0c7c0d20504e6b4611184aae074a88bb756e301bf",
+      "original_bytes": 29465,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-witness/witness-program.bin.gz",
+      "archive_sha256": "49cc891aab42223597b0f3d86a5fd15ce84754b59a3d9696a8cc3fc11405af55",
+      "archive_bytes": 3280,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-witness/witness-result.json",
+      "original_sha256": "5ccc4b971f5c6ea89e9a1a60b6d623112e727881dd5970f22010399bbf9240f3",
+      "original_bytes": 11564,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-witness/witness-result.json.gz",
+      "archive_sha256": "9cfd5d6788e0f48b53a374173feb633b9945f71cf59eb127331cd61c3285bc61",
+      "archive_bytes": 2175,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-witness-resources.log",
+      "original_sha256": "a42da5f7f03378fd0db2939b065f2422d97f8e0dfb25119e91b03ca0eaeea284",
+      "original_bytes": 43,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/degree-first-witness-resources.log.gz",
+      "archive_sha256": "6687727f578883e8955c9be266f6c2b96c64a9ae3538cdaef9ca4dc87488fc4a",
+      "archive_bytes": 61,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-occupation-order-experiment/invariant-gate/resources.log",
+      "original_sha256": "ed3bfe281429c42a776f0a2b71a685e93786be4bac28ee36b55e0bc3b4a26f84",
+      "original_bytes": 420,
+      "archive_path": "reports/validation/2026-10-10-occupation-order-experiment/invariant-gate/resources.log.gz",
+      "archive_sha256": "adc9d0e0dd34b32979344d553515e858b05545d904d4dde440abf2cb5cb10506",
+      "archive_bytes": 278,
+      "restored_byte_equal": true
+    }
+  ],
+  "original_bytes": 22057665,
+  "archive_bytes": 2418929
+}
