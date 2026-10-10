@@ -1,0 +1,10 @@
+{
+  "scope": "Frozen overlay verification before isolated full-crate checks",
+  "prepared_sha256": "9eb024a96e59d39ed33510ae14706ba205fc937efcb5a3ac8284ccb7ae1d40bf",
+  "owner_snapshot": "reports/validation/2026-10-10-partial-continuation-integration-draft/source-snapshot.json",
+  "owner_snapshot_sha256": "45d5bb201577e07496f08783a59018aaeca74ffade871e7ff91e93eb488efbec",
+  "owner_files_verified": 7,
+  "overlay_files_verified": 18,
+  "latest_boundary_integration_test_sha256": "85f796a4692755a71a4cb339c8c7102810bfe796c9922469093aa2e29e1272bb",
+  "no_old_rustflow_extern": true
+}

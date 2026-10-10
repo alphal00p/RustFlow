@@ -1,0 +1,42 @@
+warning: methods `expression`, `region_space`, and `distributions` are never used
+  --> /tmp/rustflow-partial-flow-full-crate-20261010-r00/source/src/finite_density/boundary/virtual_soft.rs:45:19
+   |
+44 | impl VirtualSoftZero {
+   | -------------------- methods in this implementation
+45 |     pub(super) fn expression(&self) -> &Atom {
+   |                   ^^^^^^^^^^
+...
+48 |     pub(super) fn region_space(&self) -> &RegionFactorSpace {
+   |                   ^^^^^^^^^^^^
+...
+51 |     pub(super) fn distributions(&self) -> &[OccupiedBoundaryDistribution] {
+   |                   ^^^^^^^^^^^^^
+   |
+   = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: method `audit_label_with_context` is never used
+    --> /tmp/rustflow-partial-flow-full-crate-20261010-r00/source/src/finite_density/partial_origin.rs:1139:19
+     |
+ 749 | impl PartialOriginCapability {
+     | ---------------------------- method in this implementation
+...
+1139 |     pub(crate) fn audit_label_with_context(
+     |                   ^^^^^^^^^^^^^^^^^^^^^^^^
+
+warning: methods `origin_identity`, `validate_binding`, and `replay_with_context` are never used
+   --> /tmp/rustflow-partial-flow-full-crate-20261010-r00/source/src/finite_density/partial_endpoint.rs:164:12
+    |
+108 | impl PartialEndpointEvidence {
+    | ---------------------------- methods in this implementation
+...
+164 |     pub fn origin_identity(&self) -> &str {
+    |            ^^^^^^^^^^^^^^^
+...
+167 |     pub fn validate_binding(
+    |            ^^^^^^^^^^^^^^^^
+...
+187 |     pub(crate) fn replay_with_context(
+    |                   ^^^^^^^^^^^^^^^^^^^
+
+warning: 3 warnings emitted
+

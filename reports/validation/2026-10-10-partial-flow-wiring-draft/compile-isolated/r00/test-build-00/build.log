@@ -1,0 +1,13 @@
+warning: method `origin_identity` is never used
+   --> /tmp/rustflow-partial-flow-full-crate-20261010-r00/source/src/finite_density/partial_endpoint.rs:164:12
+    |
+108 | impl PartialEndpointEvidence {
+    | ---------------------------- method in this implementation
+...
+164 |     pub fn origin_identity(&self) -> &str {
+    |            ^^^^^^^^^^^^^^^
+    |
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: 1 warning emitted
+

@@ -1,0 +1,18 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 110.477060505189,
+  "mode": "test",
+  "compile_only": true,
+  "tests_executed": false,
+  "cargo_invoked": false,
+  "shared_target_written": false,
+  "post_integrity_passed": true,
+  "post_integrity_error": null,
+  "prepared_sha256": "9eb024a96e59d39ed33510ae14706ba205fc937efcb5a3ac8284ccb7ae1d40bf",
+  "launcher_sha256": "eae70910a0355ca9c5801f262f514471a7d94b1fe4c83931de39b5821b633740",
+  "output": {
+    "path": "/tmp/rustflow-partial-flow-full-crate-20261010-r00/test-build-00.bin",
+    "sha256": "e704e5893e9d6b9b3c65a5b893dc5edb732075b65709175412260818ec34a81e",
+    "bytes": 1144224440
+  }
+}

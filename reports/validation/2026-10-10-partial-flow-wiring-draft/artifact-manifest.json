@@ -1,0 +1,159 @@
+{
+  "schema": 1,
+  "scope": "Frozen isolated partial-flow wiring and complete-crate validation; no production or numerical admission",
+  "captured_utc": "2026-10-10T09:00:06.821714+00:00",
+  "files": {
+    "README.md": {
+      "sha256": "88226277e1169878cf318a2859d3cea1aa425a0524cf372c9459bcdcfe4ada1d",
+      "bytes": 3350
+    },
+    "base-source-map.json": {
+      "sha256": "65aac9aff7923d206bb13f2b117363b85004f8c56dbd27c5e60562e28cc1854b",
+      "bytes": 1106
+    },
+    "compile-isolated/build-full-crate.py": {
+      "sha256": "eae70910a0355ca9c5801f262f514471a7d94b1fe4c83931de39b5821b633740",
+      "bytes": 13992
+    },
+    "compile-isolated/r00/build-full-crate.py": {
+      "sha256": "eae70910a0355ca9c5801f262f514471a7d94b1fe4c83931de39b5821b633740",
+      "bytes": 13992
+    },
+    "compile-isolated/r00/check-00/build.log": {
+      "sha256": "30095b74cbb424a8e04bca115af6b034fb16495367a4bb02c31a065e4e3cf744",
+      "bytes": 1666
+    },
+    "compile-isolated/r00/check-00/launch.json": {
+      "sha256": "b44001a3104ac3885f836af56013000abe72f7ca88677bf3b56344f3b12324a4",
+      "bytes": 4896
+    },
+    "compile-isolated/r00/check-00/result.json": {
+      "sha256": "75948258f6645319fa0bc9aef4edd03d6071826309a1064df41b318baa3f764a",
+      "bytes": 636
+    },
+    "compile-isolated/r00/overlay-verification.json": {
+      "sha256": "3becc0f8dbb70f0dd2ff0c8ab7d61a40ca5118a472e2d510409f24c56eded8f1",
+      "bytes": 584
+    },
+    "compile-isolated/r00/prepared.json": {
+      "sha256": "9eb024a96e59d39ed33510ae14706ba205fc937efcb5a3ac8284ccb7ae1d40bf",
+      "bytes": 930732
+    },
+    "compile-isolated/r00/selected-tests-00/launch.json": {
+      "sha256": "245b2de518b89c4d995db137a043ba5f6b5ccbe79809f3072e82e49724c37028",
+      "bytes": 13207
+    },
+    "compile-isolated/r00/selected-tests-00/resources.json": {
+      "sha256": "b4e498b5448d56639bf452c114d5092e3a87d540dd1e6bb911b1ffbca9c36f31",
+      "bytes": 6304
+    },
+    "compile-isolated/r00/selected-tests-00/resources.log": {
+      "sha256": "3dca39255829aad1ec6924af3babb6db642f4ded7977d2480cac2a3e81dfd541",
+      "bytes": 6189
+    },
+    "compile-isolated/r00/selected-tests-00/resources.provenance.json": {
+      "sha256": "2b04b71ef0d2e6937a7661f432893ea912a574003421b4c18d1e8e89b882607a",
+      "bytes": 6796
+    },
+    "compile-isolated/r00/selected-tests-00/summary.json": {
+      "sha256": "7490b4694fb9c15e91e46a2c2a599c889aaeeef2072bcb1a2412230363afb09e",
+      "bytes": 13441
+    },
+    "compile-isolated/r00/selected-tests-00/test-list.log": {
+      "sha256": "9022f33880facb067ab209ad277249623d5c08f7ccc0745d5c822f060e80ca2c",
+      "bytes": 37325
+    },
+    "compile-isolated/r00/test-build-00/build.log": {
+      "sha256": "38653eaf1c9738fd624c19fe262f2d6140f6dcbb92888abaa4e2e445b913dc69",
+      "bytes": 464
+    },
+    "compile-isolated/r00/test-build-00/launch.json": {
+      "sha256": "9115649d0524db44928e61fecfa724c8b38370e6a8ece8176abe6fa7d9d8fc38",
+      "bytes": 4862
+    },
+    "compile-isolated/r00/test-build-00/result.json": {
+      "sha256": "f1eac1dc01832ea7b77ce28d19ad5cd176554743606ad20ab83f3a1fcd8eeb00",
+      "bytes": 638
+    },
+    "compile-isolated/r00/test-check-00/build.log": {
+      "sha256": "38653eaf1c9738fd624c19fe262f2d6140f6dcbb92888abaa4e2e445b913dc69",
+      "bytes": 464
+    },
+    "compile-isolated/r00/test-check-00/launch.json": {
+      "sha256": "c19e879903551c7e843f21cc95c783d5ae89b8d8eddec66b3dc5dd6a8dc9304d",
+      "bytes": 4893
+    },
+    "compile-isolated/r00/test-check-00/result.json": {
+      "sha256": "aabc1c0a927c5277840cd3b843f07446db31ca558b9d0920ef0db92fb7c0cf37",
+      "bytes": 638
+    },
+    "compile-isolated/run-combined-tests.py": {
+      "sha256": "f7226acb1a5b8a0bd7b0d0a3ebf3384924b78b137eb1f6ed67918bfc4b3800af",
+      "bytes": 5923
+    },
+    "independent-wiring-review-final.json": {
+      "sha256": "cb8652651d0b662438fd87ffe5b35e709d362000b2a9034c62af0817693ba24e",
+      "bytes": 6954
+    },
+    "independent-wiring-review.json": {
+      "sha256": "4f4ea33268243c639973be21c25f59fd9528a5e5d7430f07cbaebcd4b9e77e4a",
+      "bytes": 6218
+    },
+    "source/src/finite_density/boundary/partial_tests.rs": {
+      "sha256": "85f796a4692755a71a4cb339c8c7102810bfe796c9922469093aa2e29e1272bb",
+      "bytes": 7392
+    },
+    "source/src/finite_density/boundary.rs": {
+      "sha256": "4eb980dbf6355ac3eac0a66a13bfb90fe9290a3a225b57e64e1b353ba6f8f207",
+      "bytes": 39164
+    },
+    "source/src/finite_density/flow.rs": {
+      "sha256": "30863b4ebc143893275c081cbe3923da16a9d38e3c38b5d81d208adcd8a7cf71",
+      "bytes": 24196
+    },
+    "source/src/finite_density/flow_boundary.rs": {
+      "sha256": "c7fdacd319e863fcd605fa88778671a0db8e6f5c350d30f633f548a988471211",
+      "bytes": 22027
+    },
+    "source/src/finite_density/flow_partial_tests.rs": {
+      "sha256": "10a60f0a988d6a40b01427ef74c671ec9aceb0c9f8525041e4a6eb67fa435469",
+      "bytes": 2165
+    },
+    "source/src/finite_density/interface.rs": {
+      "sha256": "027a1f2fed9169169fa4138b18ab9323d39893c75a5642612ad4d88845c4333c",
+      "bytes": 14908
+    },
+    "source/src/finite_density/mod.rs": {
+      "sha256": "513db6de6ab5008a92fedf07471de093e21675c09152cbee95e2b98fe9363335",
+      "bytes": 883
+    },
+    "source/src/finite_density/preparation.rs": {
+      "sha256": "f9755354e303cab45072463ecfde7375f129daed045b96a5f10461e9a40aaece",
+      "bytes": 26252
+    },
+    "source/src/finite_density/singleton_zero.rs": {
+      "sha256": "c816efecb92a7281860b33332d5ae557604c0b68ead147276358a58c373d12d5",
+      "bytes": 17654
+    },
+    "source/src/finite_density/terminal.rs": {
+      "sha256": "607025743c9a685edc062f12778e4dd43b35b09521e88429a27297c74e23b815",
+      "bytes": 10891
+    },
+    "source/tests/finite_density_runtime_flow.rs": {
+      "sha256": "dc69380085f5e21709bd69e4a761ff96aa4911ac453131dd88ca59a17874efe6",
+      "bytes": 19008
+    },
+    "validation-summary.json": {
+      "sha256": "203261640666cccffdf1970202d2f25e9b48abfcdc62f9a9276062c9b919514a",
+      "bytes": 11523
+    }
+  },
+  "external_executable": {
+    "path": "/tmp/rustflow-partial-flow-full-crate-20261010-r00/test-build-00.bin",
+    "sha256": "e704e5893e9d6b9b3c65a5b893dc5edb732075b65709175412260818ec34a81e",
+    "bytes": 1144224440
+  },
+  "large_files_outside_git": true,
+  "source_overlays_frozen": true,
+  "no_archive_required": "No large native proof payloads in this report; compiler output/executable stays in /tmp."
+}
