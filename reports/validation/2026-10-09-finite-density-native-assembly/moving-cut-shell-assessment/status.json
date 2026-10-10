@@ -1,0 +1,14 @@
+{
+  "status": "mathematical_assessment_no_production_change",
+  "scope": "small two-loop sunset moving-shell continuation, boundary scaling, and original mass-jet distribution identities",
+  "oracle_values_read": 0,
+  "amplitude_values_computed": 0,
+  "old_singleton_source_priority_probe": "prepared_not_run_after_user_steering",
+  "findings": [
+    "safe right-half-plane sunset continuation under explicit physical gap bounds",
+    "mixed large-eta boundary is a massive external-momentum two-point period",
+    "raised original propagators need finite upper-surface combinations",
+    "no generic graph admission or preferred replacement claimed"
+  ],
+  "assessment_sha256": "9f5e533558ae5d7ac84bf1c5df0977d31a0ed0d4ba91fd4615ac4b96b7e5d739"
+}

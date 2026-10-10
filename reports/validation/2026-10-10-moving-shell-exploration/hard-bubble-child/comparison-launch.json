@@ -1,0 +1,15 @@
+{
+  "initial_launch": {
+    "exit_code": 1,
+    "error": "ModuleNotFoundError: No module named 'mpmath'",
+    "numerical_work_performed": false
+  },
+  "successful_command": [
+    "env",
+    "PYTHONPATH=/nix/store/vm12q3zvz6yp0wklj2b76smgdknnc7wz-python3.13-mpmath-1.3.0/lib/python3.13/site-packages",
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/compare.py"
+  ],
+  "successful_exit_code": 0,
+  "scope": "Saved-file comparison only; no new quadrature or native evaluation."
+}

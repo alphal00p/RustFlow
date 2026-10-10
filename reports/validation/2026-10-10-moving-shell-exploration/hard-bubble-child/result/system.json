@@ -1,0 +1,49 @@
+{
+  "basis": [
+    [
+      0,
+      1
+    ],
+    [
+      1,
+      0
+    ],
+    [
+      1,
+      1
+    ]
+  ],
+  "bubble_subloops": false,
+  "dimension": "4-2 epsilon",
+  "epsilon": "4/5",
+  "family": "denominators k^2-1 and (k-p)^2-1; p^2=1",
+  "matrix": [
+    [
+      "-(-1+hard_bubble_eps)/(1+eta)",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "-(-1+hard_bubble_eps)/(1+eta)",
+      "0"
+    ],
+    [
+      "(-1+hard_bubble_eps)/((1+eta)*(3+4*eta))",
+      "(-1+hard_bubble_eps)/((1+eta)*(3+4*eta))",
+      "-2*(-1+2*hard_bubble_eps)/(3+4*eta)"
+    ]
+  ],
+  "nonzero_conditions": [
+    "-2",
+    "1+eta",
+    "3+4*eta"
+  ],
+  "preparation_seconds": 0.090799931,
+  "target": [
+    1,
+    1
+  ],
+  "targets_exact": "[{Integral([1, 1]): 1}]",
+  "terminal_policy": "TadpolesOnly"
+}

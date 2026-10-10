@@ -1,0 +1,14 @@
+{
+  "command": [
+    "timeout",
+    "180",
+    "/tmp/rustflow-moving-shell-transport",
+    "reports/validation/2026-10-10-moving-shell-exploration/transport-predictions.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 9.573895423207432,
+  "user_seconds": 9.485762,
+  "system_seconds": 0.031577,
+  "peak_child_rss_kib": 15468,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

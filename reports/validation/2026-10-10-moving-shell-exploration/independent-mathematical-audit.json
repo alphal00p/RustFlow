@@ -1,0 +1,138 @@
+{
+  "schema_version": 1,
+  "created_utc": "2026-10-10T00:59:58.866928+00:00",
+  "status": "no mathematical blocker found within the explicitly exploratory small-example scope",
+  "review_type": "Independent read-only algebra, branch, convergence and saved-evidence audit; no new quadrature, transport, source changes or oracle access.",
+  "reviewed_artifacts": [
+    {
+      "path": "reports/validation/2026-10-10-moving-shell-exploration/radial_reference.py",
+      "sha256": "f710dd2d758e1289b59364e012697730bdc1348647b1f354cf0cff8fd492b353"
+    },
+    {
+      "path": "reports/validation/2026-10-10-moving-shell-exploration/transport.rs",
+      "sha256": "0ae13995f9e514bc3e5b50ce58874856abd5649a2bfc23916be8b4dde847604a"
+    },
+    {
+      "path": "reports/validation/2026-10-10-moving-shell-exploration/compare_transport.py",
+      "sha256": "ed658709702ffa9e1a6a2633693873c8a854c4f30384b0551e6afc4f13b21373"
+    },
+    {
+      "path": "reports/validation/2026-10-10-moving-shell-exploration/radial-reference.json",
+      "sha256": "3c9a322f29438e4696f3659ef5a0e4afc9ba2d20b3250d60af699fdc0a9a1f67"
+    },
+    {
+      "path": "reports/validation/2026-10-10-moving-shell-exploration/transport-predictions.json",
+      "sha256": "8889b70570e70174f379b54e5cf7746bd02e967f6c1f71b95793e0361e711659"
+    },
+    {
+      "path": "reports/validation/2026-10-10-moving-shell-exploration/transport-comparison.json",
+      "sha256": "39c61fa705fb1772c3f4ba326964a11a42c115e7721257c3524bfdd4aabf4883"
+    },
+    {
+      "path": "reports/validation/2026-10-10-moving-shell-exploration/transport-build-binding.json",
+      "sha256": "fba54426e9a8c6ee56710715b38a0d2d3386f4132eda2b41828dfd467fbb92cd"
+    },
+    {
+      "path": "reports/validation/2026-10-10-moving-shell-exploration/pre-final-exploration-document.md",
+      "sha256": "1b0b73af6df7cad87522f68e41d5cbc7805ac24f7b9f45e88ca3cb9ca3c8b58b",
+      "original_path_at_review": "docs/finite-density-moving-shell-exploration.md"
+    },
+    {
+      "path": "reports/validation/2026-10-09-finite-density-native-assembly/moving-cut-shell-assessment/sunset-assessment.md",
+      "sha256": "9f5e533558ae5d7ac84bf1c5df0977d31a0ed0d4ba91fd4615ac4b96b7e5d739"
+    }
+  ],
+  "checked_mathematics": [
+    {
+      "item": "fixed-spatial occupation",
+      "finding": "h=mu^2-a-r^2 is eta independent before shell restriction; physical mass derivative changes h with derivative -1 and retains the upper contact."
+    },
+    {
+      "item": "normalized physical raised family",
+      "finding": "(partial_a)^(n-1)(C1 H0)/(n-1)! = Cn H0 - sum_(j=1)^(n-1) C_(n-j) Hj/j. The physical Euclidean occupied phase is (-1)^n; bare Cn H0 is insufficient."
+    },
+    {
+      "item": "radial connection",
+      "finding": "Integrating partial_r(r^d/sqrt(A+r^2)) gives I_eta=(d-1)I/(2A)-BS/A; S_eta=-S/[2(A+B)]. Upper-contact Jacobian is B^((d-2)/2)/(4sqrt(A+B))."
+    },
+    {
+      "item": "original polynomial and auxiliary interpolation",
+      "finding": "For fixed momentum polynomial q^2+(q0)^2, the shell integral away from eta=0 is (a+eta)I+K. The tested frozen-converted-coefficient extension aI+K differs by eta I, equivalently uses q^2-eta+(q0)^2. Both match the original endpoint and its physical mass derivative. The current document explicitly distinguishes them."
+    },
+    {
+      "item": "physical mass derivatives",
+      "finding": "At fixed mu, partial_a I=I_eta-S. At eta=0, partial_a(aI+K)=3I/2+aI_eta-(a+mu^2)S. The coefficient derivative and moving-radius derivative are both retained."
+    },
+    {
+      "item": "one-loop boundary",
+      "finding": "For Re d>0 and |B/A|<1, the binomial series converges uniformly on the fixed radial interval. Positive real B/A<1 has decreasing alternating terms and the displayed first-omitted-term bound. The surface series has the same ratio."
+    },
+    {
+      "item": "complex branch",
+      "finding": "For a>0,B>0, shell-integrated functions use the principal square root on C minus (-infinity,-a]. The tested paths are homotopic there; no delta/theta distribution is evaluated at complex arguments."
+    },
+    {
+      "item": "massless radial endpoint",
+      "finding": "The simple eta-zero integral first converges at Re d>1; one fixed-mu physical mass derivative at Re d>3. The stated values 1/[2(d-1)] and -(d-2)/[4(d-3)] follow from convergent radial powers and the upper surface."
+    },
+    {
+      "item": "sunset mixed contour",
+      "finding": "F_eta=eta[1-x(1-x)]+xb+(1-x)c-x(1-x)a. Its eta coefficient is in [3/4,1]; below the physical two-particle threshold the physical polynomial is positive with endpoint qualifications. The threshold gap derivative is at least 3 on the real positive ray."
+    },
+    {
+      "item": "sunset double-cut complex contour",
+      "finding": "For Re eta>=0, Re sqrt(x+eta)>=sqrt(x). Therefore |E1-E2|<=|sqrt(x1)-sqrt(x2)| and Re D12(eta)<=D12(0)-Re eta. The strict M>|sqrt(a1)-sqrt(a2)| gap protects the massive example; massless eta=0 needs the separate dimensional-origin argument."
+    },
+    {
+      "item": "sunset boundary scaling",
+      "finding": "The double-cut leading scalar scales eta^-2 and uses compact polynomial moments. The mixed scalar scales eta^((D-5)/2), retaining a hard virtual two-point period with external invariant 1, not a vacuum tadpole."
+    }
+  ],
+  "saved_evidence_verified": {
+    "independent_quadrature_points": 24,
+    "physical_mass_checks": 6,
+    "convergent_boundary_checks": 6,
+    "mixed_sunset_scalings": 4,
+    "unique_complete_transport_grid": true,
+    "transport_predictions": 30,
+    "reference_comparisons": 150,
+    "refinement_comparisons": 135,
+    "maximum_relative_reference_error": "4.872794235673352210081683544285652226327448438121126513822058501720673062971253316391113466038923743E-35",
+    "source_and_comparison_input_hashes_match": true,
+    "comparator_hardened_and_rerun_without_new_numerics": true,
+    "all_saved_comparison_values_and_errors_unchanged": true
+  },
+  "nonblocking_validation_limitations": [
+    "Resolved in this audit: comparator now checks the exact unique 30-point prediction grid, all 24 unique quadrature points, all six unique physical-mass records, fixed input parameters/normalizations, supported schema/status and finite values. The original script/report are preserved separately.",
+    "The first profile transition changes Taylor order and boundary order together. Later transitions isolate precision, start eta and boundary order; no Taylor-order-only transition is present.",
+    "This tests a hand-derived two-state connection through existing transport. It does not prove automatic guarded closure, generic boundary recursion or generic multiloop continuation."
+  ],
+  "required_before_general_production_choice": [
+    "Separate native guarded-source closure/replay evidence, including the physical raised C/H combination.",
+    "A native hard-boundary owner retaining surviving external kinematics and a justified region expansion for shifted shell energies.",
+    "Graph-specific common-contour and thermal/threshold/origin prescriptions beyond the small sunset examples."
+  ],
+  "production_admission": false,
+  "three_loop_acceptance": false,
+  "four_loop_acceptance": false,
+  "pre_hardening_artifacts": [
+    {
+      "path": "reports/validation/2026-10-10-moving-shell-exploration/compare_transport.pre-audit.py",
+      "sha256": "f0e1fedd1b06208d6ac8b24510921c5d27cebebf0fb6a44793a89f36dd09cf4f"
+    },
+    {
+      "path": "reports/validation/2026-10-10-moving-shell-exploration/transport-comparison.pre-audit.json",
+      "sha256": "2b8cfebe38e7f47fe9e2b0a4735c35fe37824a8a476c8143e5d362364e82a280"
+    }
+  ],
+  "final_native_followup": {
+    "one_loop": "Native 14-source/15-rule, three-round closure on two states; encoded/decoded source replay and fixed-original numerator/surface checks pass. This is separate from the hand-derived radial transport.",
+    "two_loop": "All six matched bounded probes remain unclosed; no demonstrated advantage, no full-amplitude evaluation.",
+    "hard_child": "Existing ordinary AMF evaluates the isolated hard two-point child with bubble shortcuts disabled and tadpole-only seeds; generic moving-shell boundary integration remains unimplemented.",
+    "final_document": {
+      "path": "docs/finite-density-moving-shell-exploration.md",
+      "sha256": "81e134c68a023d9d4af81f0477cfc6a04c0dbdfbbf945aa28ce73706737e990a"
+    },
+    "production_decision": "retain fixed-shell production; no three-/four-loop acceptance"
+  }
+}

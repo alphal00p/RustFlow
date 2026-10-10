@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "120s",
+    "/tmp/moving_sunset_probe",
+    "reports/validation/2026-10-10-moving-shell-exploration/native-two-loop/fixed-energy-single",
+    "fixed",
+    "single"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.1200600205920637,
+  "user_seconds": 1.095901,
+  "system_seconds": 0.014934999999999999,
+  "peak_child_rss_kib": 18444,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

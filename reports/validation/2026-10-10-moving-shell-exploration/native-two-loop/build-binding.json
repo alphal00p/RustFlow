@@ -1,0 +1,34 @@
+{
+  "captured_utc": "2026-10-10T01:00:20.675859+00:00",
+  "scope": "initial moving/fixed-energy probe; standalone report source, production unchanged",
+  "files": {
+    "reports/validation/2026-10-10-moving-shell-exploration/native-two-loop/probe.rs": {
+      "sha256": "46d7a8bce417dcebb3ee83f523f10bbcf7905ed2a96a605d079a4dfa426e4dbf",
+      "bytes": 9811
+    },
+    "/tmp/moving_sunset_probe": {
+      "sha256": "0601418af5732931b2f1550da7121b936044c8411b0469a54add63e1fe14fac8",
+      "bytes": 1236592192
+    },
+    "/tmp/librustred-active-zero-canonical-392075d0c6995fd1.rlib": {
+      "sha256": "e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464",
+      "bytes": 436047138
+    },
+    "target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib": {
+      "sha256": "aa8a21dad0fc879cb1faee834d47ca2fd62466a15a63583bb129d3f317974ccf",
+      "bytes": 619530996
+    },
+    "target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib": {
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "examples/finite_density/massive_two_loop_sunset.json": {
+      "sha256": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a",
+      "bytes": 1061
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-hashes.json": {
+      "sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476",
+      "bytes": 270630
+    }
+  }
+}

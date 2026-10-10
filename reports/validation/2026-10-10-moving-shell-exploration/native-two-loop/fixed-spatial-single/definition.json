@@ -1,0 +1,159 @@
+{
+  "budgets": {
+    "frontier": 128,
+    "native_apply": 20000,
+    "native_domains_per_round": 512,
+    "native_max_depth": 3,
+    "pending": 2048,
+    "rounds": 6,
+    "rules": 20000
+  },
+  "cuts": [
+    0
+  ],
+  "factors": [
+    "(-1*rustflow_occupied::{}::q_0+1/4)*-1",
+    "(-1*rustflow_occupied::{}::q_2+1/4)*-1+-1*moving_sunset::{}::eta",
+    "(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+1+2*rustflow_occupied::{}::q_1)*-1+-1*moving_sunset::{}::eta",
+    "rustflow_occupied::{}::q_3",
+    "rustflow_occupied::{}::q_4",
+    "-1*rustflow_occupied::{}::q_3^2+3/4+rustflow_occupied::{}::q_0",
+    "rustflow_occupied::{}::q_3"
+  ],
+  "flowing": [
+    1,
+    2
+  ],
+  "measure_identity": "rustflow-weighted-sources-v1:83304d05399eb3342eab352b3758371e20d3f51f6819b42f057e1efd1c91c934:991cd4f6a17289608a3092723d654f0b5fe9c722c6698cb3456be5f25c1f6c37:{\"measure\":\"validation-only massive sunset; moving=false; spatial=true; factors=[-(1/4-rustflow_occupied::q_0), -moving_sunset::eta-(1/4-rustflow_occupied::q_2), -moving_sunset::eta-(1-rustflow_occupied::q_0+2*rustflow_occupied::q_1-rustflow_occupied::q_2), rustflow_occupied::q_3, rustflow_occupied::q_4, 3/4+rustflow_occupied::q_0-rustflow_occupied::q_3^2, rustflow_occupied::q_3]; cuts=[0]\",\"support\":\"real spatial balls radius²=mu²−m²=3/4, eta>0; all energy completion powers nonpositive; lower-contact empty support because each positive future shell mass² is 1/4+eta\",\"orientation\":\"future Minkowski shells; native virtual contours\",\"normalization\":\"native mixed loop measure; no numerical values in this closure probe\",\"branch\":\"positive real eta; continuation proved separately for small sunset; no general graph admission\",\"deformation\":\"D_i−eta on [1, 2]; fixed spatial upper factor if moving; endpoint-correct Gamma_n target expansion with original converted coefficients held fixed\"}",
+  "moving": false,
+  "roles": "[RequiredCut, Ordinary, Ordinary, Ordinary, Ordinary, Occupation, Occupation]",
+  "source_count": 17,
+  "spatial": true,
+  "target_interpolation": "fixed original inverse-propagator coefficients, Gamma_n expansion per occupied index; exact physical endpoint, numerator polynomial need not stay fixed for eta>0",
+  "targets": [
+    [
+      {
+        "coefficient": "-1",
+        "indices": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "1/2",
+        "indices": [
+          1,
+          0,
+          1,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2",
+        "indices": [
+          1,
+          1,
+          0,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "1",
+        "indices": [
+          1,
+          1,
+          1,
+          -1,
+          -1,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2",
+        "indices": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/4",
+        "indices": [
+          1,
+          1,
+          1,
+          0,
+          0,
+          1,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1/2",
+        "indices": [
+          2,
+          0,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/2",
+        "indices": [
+          2,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1",
+        "indices": [
+          2,
+          1,
+          1,
+          -1,
+          -1,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "1/4",
+        "indices": [
+          2,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  ]
+}

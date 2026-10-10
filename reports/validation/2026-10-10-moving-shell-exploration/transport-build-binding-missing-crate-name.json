@@ -1,0 +1,34 @@
+{
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "-O",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-moving-shell-exploration/transport.rs",
+    "-o",
+    "/tmp/rustflow-moving-shell-transport",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "--extern",
+    "symbolica_amflow=/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/blake3-222d768860627915/out",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/blake3-9252326cebd21167/out",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/psm-2e54985d752c3d12/out",
+    "-L",
+    "native=/nix/store/3n4qphl9s728sz8frmpqqrv9b1m87g68-python3-3.14.7/lib"
+  ],
+  "source_sha256": "0ae13995f9e514bc3e5b50ce58874856abd5649a2bfc23916be8b4dde847604a",
+  "libraries": {
+    "/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib": "aa8a21dad0fc879cb1faee834d47ca2fd62466a15a63583bb129d3f317974ccf",
+    "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95"
+  },
+  "source_snapshot": "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-hashes.json"
+}

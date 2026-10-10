@@ -1,0 +1,77 @@
+[
+  {
+    "conditions": [],
+    "target": [
+      1,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "conditions": [
+      "D"
+    ],
+    "target": [
+      1,
+      -2,
+      0,
+      0
+    ]
+  },
+  {
+    "conditions": [
+      "2*A",
+      "A"
+    ],
+    "target": [
+      2,
+      0,
+      0,
+      0
+    ]
+  },
+  {
+    "conditions": [
+      "2*A",
+      "A",
+      "D"
+    ],
+    "target": [
+      2,
+      -2,
+      0,
+      0
+    ]
+  },
+  {
+    "conditions": [],
+    "target": [
+      1,
+      0,
+      1,
+      0
+    ]
+  },
+  {
+    "conditions": [],
+    "target": [
+      1,
+      -2,
+      1,
+      0
+    ]
+  },
+  {
+    "conditions": [
+      "A+B",
+      "2*A+2*B"
+    ],
+    "target": [
+      2,
+      0,
+      1,
+      0
+    ]
+  }
+]

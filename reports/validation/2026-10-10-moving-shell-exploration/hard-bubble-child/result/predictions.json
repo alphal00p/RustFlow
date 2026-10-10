@@ -1,0 +1,50 @@
+{
+  "D": "12/5",
+  "bubble_subloops": false,
+  "epsilon": "4/5",
+  "normalization": "d^D k/(i pi^(D/2)); two Minkowski denominators k^2-1+i0 and (k-p)^2-1+i0; p^2=1",
+  "preparation_seconds": 0.090799931,
+  "records": [
+    {
+      "digits": 20,
+      "guard_digits": 40,
+      "series_order": 60,
+      "values": [
+        {
+          "im": "0",
+          "re": "1.3545016349733882046364340803231501759126727878953769741743570843"
+        }
+      ],
+      "wall_seconds": 0.135019298
+    },
+    {
+      "digits": 30,
+      "guard_digits": 40,
+      "series_order": 60,
+      "values": [
+        {
+          "im": "0",
+          "re": "1.3545016349733882046364340803231501759126727878953769741744462338430210496"
+        }
+      ],
+      "wall_seconds": 0.12065303
+    },
+    {
+      "digits": 30,
+      "guard_digits": 40,
+      "series_order": 80,
+      "values": [
+        {
+          "im": "0",
+          "re": "1.3545016349733882046364340803231501759126727878953769741861329348025285733"
+        }
+      ],
+      "wall_seconds": 0.148867203
+    }
+  ],
+  "reference_values_read": false,
+  "schema": 1,
+  "scope": "ordinary one-loop AMF evaluation of the leading hard child only; not a moving-shell full amplitude or generic boundary-owner implementation",
+  "status": "predictions saved before comparison",
+  "terminal_policy": "TadpolesOnly"
+}

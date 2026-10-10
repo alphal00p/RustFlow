@@ -1,0 +1,39 @@
+{
+  "captured_utc": "2026-10-10T01:06:29.153305+00:00",
+  "scope": "Standalone exploratory probes against canonical current RustFlow/RustRed rlibs; no production changes. Rlib features and source snapshot inherited from active-zero canonical build.",
+  "compiler": "nix develop rustc 1.97.1; edition2024; debuginfo0; energy opt-level1, spatial/full-targets opt-level0. Only wrapper monomorphizations differ; dependency rlibs are release optimized.",
+  "files": {
+    "reports/validation/2026-10-10-moving-shell-exploration/native-one-loop/probe-energy-search.rs": {
+      "sha256": "b26442cd7d1f4b068b7b338581f52a7ccbda18242d10318ea44b918eaa6e67a3",
+      "size_bytes": 8064
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/native-one-loop/probe-spatial-coordinates.rs": {
+      "sha256": "940be2b4c9e206562e756f97bf77d2b34b8a9ccc1b146200ee455abaa2e98ba8",
+      "size_bytes": 7691
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/native-one-loop/probe-full-targets.rs": {
+      "sha256": "47f3d850d7f9c8544cba093b5f9e57326b7dbb38404b8da3bf346364b642730c",
+      "size_bytes": 10552
+    },
+    "/tmp/librustred-active-zero-canonical-392075d0c6995fd1.rlib": {
+      "sha256": "e2e61c1cf37a250eb030501d484d8cb9e55648f99ec83f917b21e862a9496464",
+      "size_bytes": 436047138
+    },
+    "target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib": {
+      "sha256": "aa8a21dad0fc879cb1faee834d47ca2fd62466a15a63583bb129d3f317974ccf",
+      "size_bytes": 619530996
+    },
+    "target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib": {
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "size_bytes": 494671872
+    },
+    "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs": {
+      "sha256": "28a41a303d830f7918b7d72ec6398f4f6d07af69d85831d319f615adea4b2dff",
+      "size_bytes": 58547
+    },
+    "reports/validation/2026-10-09-finite-density-native-assembly/active-zero-canonical-source-hashes.json": {
+      "sha256": "44f8381001f6d7e185cad656c62c9a00d26a5b54417b1c26accd451aff8e9476",
+      "size_bytes": 270630
+    }
+  }
+}

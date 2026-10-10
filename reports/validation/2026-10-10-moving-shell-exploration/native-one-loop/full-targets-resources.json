@@ -1,0 +1,14 @@
+{
+  "command": [
+    "timeout",
+    "120s",
+    "/tmp/moving_cut_one_loop_native_toy_full",
+    "reports/validation/2026-10-10-moving-shell-exploration/native-one-loop/full-targets"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.10622715298086405,
+  "user_seconds": 0.07031,
+  "system_seconds": 0.039376,
+  "peak_child_rss_kib": 15492,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

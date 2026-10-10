@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "scope": "Ordinary native AMF hard-child feasibility only; not the whole moving-shell sunset, an integrated boundary adapter, or three/four-loop acceptance.",
+  "reference_conversion": "positive (4*pi)^(D/2) for two virtual propagators, D=12/5",
+  "source_reference_leading_coefficient": {
+    "re": "0.064972218590342836781565452594186578564660780658170361653269090423955530308091628330350175997115",
+    "im": "0.0"
+  },
+  "normalization_factor": "20.847397000765415145486944286019685446411792305469122792231692450960517090209209227004780313909",
+  "native_normalized_reference": "1.3545016349733882046364340803231501759126727878953769741861329348025290199544031867773252875346",
+  "reference_comparisons": [
+    {
+      "profile": {
+        "digits": 20,
+        "guard_digits": 40,
+        "series_order": 60
+      },
+      "relative_error": "8.6938621545188310053079354322297175310313227921299806953927237928549610484459746817557160795078e-57",
+      "imaginary_absolute_error": "0.0",
+      "tolerance": "0.000000000000000001"
+    },
+    {
+      "profile": {
+        "digits": 30,
+        "guard_digits": 40,
+        "series_order": 60
+      },
+      "relative_error": "8.6280449264556097197872165200363779814994239003632787798822853073219749145280350787838268479142e-57",
+      "imaginary_absolute_error": "0.0",
+      "tolerance": "0.0000000000000000000000000001"
+    },
+    {
+      "profile": {
+        "digits": 30,
+        "guard_digits": 40,
+        "series_order": 80
+      },
+      "relative_error": "3.297555290108990617391001297024325150180199338446326114500274841484954083276817331844718094787e-70",
+      "imaginary_absolute_error": "0.0",
+      "tolerance": "0.0000000000000000000000000001"
+    }
+  ],
+  "refinement_comparisons": [
+    {
+      "digits": 20,
+      "series_order": 60,
+      "relative_error": "8.6938621545185012497789245331679784309016203596149626754588791602435138878109400974304486791082e-57",
+      "tolerance": "0.000000000000000001"
+    },
+    {
+      "digits": 30,
+      "series_order": 60,
+      "relative_error": "8.6280449264552799642582056209746388813697214678482607599484406747105277321894056364400329644125e-57",
+      "tolerance": "0.0000000000000000000000000001"
+    }
+  ],
+  "maximum_relative_reference_error": "8.6938621545188310053079354322297175310313227921299806953927237928549610484459746817557160795078e-57",
+  "maximum_relative_refinement_error": "8.6938621545185012497789245331679784309016203596149626754588791602435138878109400974304486791082e-57",
+  "source_and_input_hashes": {
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/predictions.json": "a2b06592e311e7898e7feac2172a8751e6d97843d3f7f88108682371c3d47d89",
+    "reports/validation/2026-10-10-moving-shell-exploration/radial-reference.json": "3c9a322f29438e4696f3659ef5a0e4afc9ba2d20b3250d60af699fdc0a9a1f67",
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/probe.rs": "b2a40260b0854e84ac15075626b7ce09d79a123b26b77747301208005a627308",
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/build-binding.json": "a336028e28f264054817976ce04b8bb6b88609262e916d780a2e83106bb77d31",
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/resources.json": "c1821f5ad3cd5e06df541a42dfb81d5d19110b27232f4dc672afb1311a666161",
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/resources.provenance.json": "a79ff8591af256479495a2b3105784bc610b096f92e16ba9940760589a9d5234",
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/system.json": "eefdd799d045b9eef8bbc431e0704f2cad95ec675f5733f196300a113bc0c02f",
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/compare.py": "524d4ddec62eb174a1a1227202174e89f821e444c0b882a8c777dc45d3f737de"
+  },
+  "uncertainty_scope": "Independent saved 90-digit quadrature and empirical native precision/order refinements; no rigorous full integration error bound claimed.",
+  "production_seed_values_supplied": false,
+  "analytic_bubble_shortcut": false,
+  "three_loop_acceptance": false,
+  "four_loop_acceptance": false
+}

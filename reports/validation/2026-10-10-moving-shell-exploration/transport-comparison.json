@@ -1,0 +1,2692 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "scope": "exploratory radial ODE and fixed original numerator mass derivatives, not production finite-density acceptance",
+  "validated_contract": {
+    "exact_unique_transport_grid": 30,
+    "dimensions": [
+      "7/5",
+      "3",
+      "9/2"
+    ],
+    "profiles": [
+      [
+        60,
+        48,
+        8,
+        32
+      ],
+      [
+        60,
+        64,
+        8,
+        48
+      ],
+      [
+        80,
+        64,
+        8,
+        48
+      ],
+      [
+        80,
+        64,
+        16,
+        48
+      ],
+      [
+        80,
+        64,
+        16,
+        64
+      ]
+    ],
+    "paths": [
+      "positive-real",
+      "upper-half-plane"
+    ],
+    "unique_reference_quadratures": 24,
+    "unique_mass_derivative_checks": 6,
+    "supported_schema": 1
+  },
+  "relative_tolerance": "1e-28",
+  "imaginary_absolute_tolerance": "1e-28",
+  "reference_comparisons": 150,
+  "refinement_comparisons": 135,
+  "maximum_relative_reference_error": "4.872794235673352210081683544285652226327448438121126513822058501720673062971253316391113466038923743E-35",
+  "maximum_relative_refinement_error": "4.872794235673352210081683544285652226327448750579956375337243026126951319987474687627609380933867760E-35",
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-moving-shell-exploration/transport-predictions.json": "8889b70570e70174f379b54e5cf7746bd02e967f6c1f71b95793e0361e711659",
+    "reports/validation/2026-10-10-moving-shell-exploration/radial-reference.json": "3c9a322f29438e4696f3659ef5a0e4afc9ba2d20b3250d60af699fdc0a9a1f67",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-moving-shell-exploration/compare_transport.py": "ed658709702ffa9e1a6a2633693873c8a854c4f30384b0551e6afc4f13b21373"
+  },
+  "comparisons": [
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "3.985160807491891221711086545406834684701701378676974159131033260872938713864716172836889362871389978E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.510695457709524238848533734898717189636948466446563010054835283573560490346740583793339450576433138E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.872794235673352210081531212173189054434013106169357470115460361038588035219686117921108158834992233E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.742364033459479072598088127151470943946414610386651206141963870108778507839363307416386478621720722E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "2.235129381917167939039463218921093563465795387807897992718837181315190803647103294710499490877348734E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "3.985160807491891221710866231470758943958392846981789916169608267429110419300102549259181051780186123E-35",
+      "imaginary_absolute_error": "1.5630624448840472401759052239879634502893763545722167744845659906E-57"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.510695457709524238848534050788895357312964325039505586876533060210685642256067885490586084496169291E-35",
+      "imaginary_absolute_error": "9.4002270758862978474550545535695343223700155806069903251471213308E-60"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.872794235673352210081683544285652226327448438121126513822058501720673062971253316391113466038923743E-35",
+      "imaginary_absolute_error": "1.2222492746795788985983590155296621572643910369159524486122114285E-57"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.742364033459479072598185702086341583169033978861498368961522149270109038143595466666586500830641007E-35",
+      "imaginary_absolute_error": "1.2128490476036926007509039609760926229420210213353454582870643071E-57"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "2.235129381917167939038508207218279779126351897390053753372031923799516956996460245513959253371302211E-35",
+      "imaginary_absolute_error": "2.6384057021511077126041287716723987968471997716115545359734679413E-57"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "7.081315224938727364883908945375535104133890701761301897900753998839849808231097023366335187634442252E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.022327538037407576766106447815215037788252347758816691893085196041530619838067252719223426790171488E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.670694697997297522770978098822976683912608707632138415307736229895572345035520402108609271342723109E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.437148867608301007592791407154733090098131254812373750918039780544970135322874705596651939169019719E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "3.947742359488405949138285795048704257293721439463827202205654882639877948086328312317628401960204541E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "7.081077351751111160000606956198354145305945575542070486784304199601290382651659567964610039351254041E-52",
+      "imaginary_absolute_error": "5.7349655093490948104051469622813045967845819510567905615380264462E-58"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.022327505593819334573643446785156166776677946938458459404413070016660950103503743592111648629515718E-52",
+      "imaginary_absolute_error": "2.4712939280840797959324677127844810670475048599018959233436356382E-61"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.670858540271763722998559447934864192769062935760924576047156366029156124565211858687581247360162177E-52",
+      "imaginary_absolute_error": "4.5805585256950236089363201666866902342265230462657267614603902501E-58"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.437253681203670535090231911850694724362910660468210870993957031024605456055040117669923995034225761E-52",
+      "imaginary_absolute_error": "4.5780872317669395291403876989739057531594755414058248655370466144E-58"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "3.946712476152529641778731814255692026889738904348998135812382657057037625368678215487441871192908525E-52",
+      "imaginary_absolute_error": "9.7444987780372930180968849004526488523996943070767401627679576874E-58"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "7.081085458282805319753264344215993360459924889823495145744692748581981142554449053604056704591957226E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.022327538037753756319422224580905901447290653281731300573122294556131196863813717821146756201827895E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.670853009586124882151847040065043863081809279010416570144080975120628195950590168292918967725576712E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.437250154391315676666401616325716919917553982645194874043327225836393717401678262101769075751649119E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "3.946747469413119243174684621985334928849438603787652655268789131901796503752694249601714804047666505E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "7.081085458282805319753264235110475198240568587131989989067196200926152127360213421242982548755276343E-52",
+      "imaginary_absolute_error": "1.01375253349227735123095672848844394572056798974556761690234352535993618271123561082E-78"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.022327538037753756319422224569714661440653352653689943464257184635015827873869084255847519321858384E-52",
+      "imaginary_absolute_error": "3.95287809029731995174156992547098797516080193080241438130268379683178414498811073756E-82"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.670853009586124882151847115220965666831121988021767440094778800794568844428856365015889318603732739E-52",
+      "imaginary_absolute_error": "8.09816163366732684999242911813113860183906151217213369207484015148899410925492055438E-79"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.437250154391315676666401664405983265062885739160858864099113338328480504532810206352468828974916845E-52",
+      "imaginary_absolute_error": "8.09420875557702953004068754820566761386390071024133127769353746769216232510993244365E-79"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "3.946747469413119243174684149595492152197570889503533759950875183704689164771501792170455851802077636E-52",
+      "imaginary_absolute_error": "1.72258873131881203310227812444526051012993342218130446585772345635252515378010291625E-78"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "5.608342671997553643053308145282773986695654726330078847341424157050001737525492836235199808255615075E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.054113320504533287422306608807067481844414457202790569569053438659123418838528401170930828260384072E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.361253881093024453847015412678039516773460171471775924848729932345907758565384516127103112076858649E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.250619966085332520318433639712015346195360612088871122770137011955646729914108870528134441336647470E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "4.123925530020368500605936996872199671895987081248231676415280724815537060870661710304620657328909091E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "5.608342671990594097084324455417573255383192437415398442896734053687577686578499392735877583419884011E-66",
+      "imaginary_absolute_error": "1.21096479846311223123592810588251162897367030799562251876530634675494966266922291162E-78"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.054113320504533988250779155601959270663826848427706941056095104044372917905493671392784508794013300E-66",
+      "imaginary_absolute_error": "2.29793505779073815239310306115402673288813993113203802272862317432088882066746564160E-81"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.361253881097820834637066127241956503706334040291499782330542928688242954570317810851262354133686732E-66",
+      "imaginary_absolute_error": "9.61878033597117570531563175522547222980271826603101900944059207880997063673375932372E-79"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.250619966088401466431015378214899971057537233283618787095891845818143248390938406382318880227029044E-66",
+      "imaginary_absolute_error": "9.59580098539326832379170072461393196247383686671969862921330584706676174852708466730E-79"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.123925529990231323299422060699350826885358900015061013998293387847053124543568566857919851080615385E-66",
+      "imaginary_absolute_error": "2.05404428727170931679629157387796171578946324373029420585556354313477264889634401847E-78"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "4.534892804279411741313767973456026251901525945676710379255169445866327137656405692702972498552823231E-78",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "1.401426532799355819178663723801175911623521095018428974392555010384498301770633424491357739953081427E-84",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "3.124588298615151845244062782570162365967123462592137756401514366630922983617086309716440869030397051E-78",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "1.999091911404108490639918016465127921360735464179833682689697106761944224591970263992555883564152522E-78",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "1.963609992797656405431366544324478359046608428250294624143543960498372967221176129694944890874495005E-77",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "2.424655563281432386133296464770320486834149554330204931793025935238262164844726872163101527766540224E-78",
+      "imaginary_absolute_error": "1.21096482384901635898353165725136756259869891294905697700245993785979245746718160484E-78"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.985606400610246408447058278826113021450399499768152740258204262215999548426156049072469103590472280E-82",
+      "imaginary_absolute_error": "2.29794712237883846808587994932318330715916010702168154137587439246399921969733964569E-81"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "1.671790425630158520668290706041812380386486868476206140867923376406088416334774929907529532932695511E-78",
+      "imaginary_absolute_error": "9.61878017712076571782567685953124500157481650038180536977840327110441968314653264933E-79"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "1.069851557798392676515865224612958116539629761567699747174026701950606625338909769738321074280632403E-78",
+      "imaginary_absolute_error": "9.59580070589697733314481806003801316850322489931158855436464452717977969094955925288E-79"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "1.050107737853837211853517956738339764270457813448439072704849672210941377448904495134425708435127053E-77",
+      "imaginary_absolute_error": "2.05404430629857013333583205742867848980346983179935349782143014557671917925481404893E-78"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.474955318700658674601146086503780785097148145281361551185612020385544879013933004793277668237638110E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.510695457709524238848544068058104675956902044708199249847489917779641128032694022892159823983059939E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.680874400518716482607518940624117780421102019419221871224895650973334179125999317317308954066062780E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.568965517170144798698169472140376047882033769168220042238973262891000981675920440885317076372831275E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.633647861426808354593649472564339122262198765579871122644900738567721984159100807371815773185851444E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.474955318700658674597055020208828256436168705161652578953344678832043899861291526300978711313444466E-35",
+      "imaginary_absolute_error": "1.3157650568805479240453974016091144559011555401580930798534270601E-57"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.510695457709524238848531587338771539211240466956815431712701394217159501395184678521203661481563125E-35",
+      "imaginary_absolute_error": "3.3842653094403539818652120778325896410243530214061788773035408257E-59"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.680874400518716482626926904275287951646651121909445234653241259192105347386222588315833648586636779E-35",
+      "imaginary_absolute_error": "5.3645881868054023156375459687714355128353527512745576857328144654E-57"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.568965517170144798704806641666000604921574414396469923665103627442711107733728871036744618563562927E-35",
+      "imaginary_absolute_error": "5.3984308398998058554561980895497614092455962814886194745058498736E-57"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.633647861426808354607668048087433950814647015830361716277394929128742075987829462642330795272486264E-35",
+      "imaginary_absolute_error": "3.3570979483901768897507977455794379325733759108233562771796384669E-57"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "7.976788159452526088952687354686761552037447904775112674926020880124804962949975980981475978381289539E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.022327538163260907431378040940170811226872606043804136819695122704970532411426908821577116019543289E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.239166183454752187447461802154728277168612525812868052332825672123004653245675273026266182627319343E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.096574096203420002931140168940033615405575206195335036252109128406759408196795050580330749492001898E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.178991060790112029185433408609359430867022740919844355724075099437508889381356666741028288734472992E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "7.957813199914228656562266077732318460733274129676585618691982239672114722133201979568783763941300112E-52",
+      "imaginary_absolute_error": "5.7419702238736268782134220308949942613977645100221063844663932303E-60"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.022327505593777521906209413450069805550448618051294144169297792743576090797278458868501218745670393E-52",
+      "imaginary_absolute_error": "1.9632412724499644403482872785022362608629023206709766903391660998E-61"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.329516471306190743468312582828656101859421361313884492772832995936395176795855523064329811639549966E-52",
+      "imaginary_absolute_error": "2.2378908513759518180749201940029306167332187343887132530763823091E-59"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.127510432471978705065375972332574136793805477867260836848357447537547975119260186450179157374053626E-52",
+      "imaginary_absolute_error": "2.2182584386514521736714373212179082541245897111820034861729906481E-59"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.244268135299896611713424363079328876121988592150886588051849789430008454245590190155569028155673359E-52",
+      "imaginary_absolute_error": "1.3962277305194074307463897621537038401321830810921070623098149856E-59"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "7.957813428805353054510348619973478608221413012850381381336531939998448130252605895300590107211935063E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.022327538037753756319422224580904886086427283792153440620797862211612579046742524776568069856287445E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.329515568356362901599531057126377986338117065886348018453349608945016789197771100567043038073432830E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.127510144632777227336349627987344557426562302584735654485135053789170721584124692682330986945544571E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.244267491932042601134585407381683494761319125130738237117408545306457250306648684068579659495922877E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "7.957813428805353054510348503793682219174613007027551685021293569300767119941803078802607557698863198E-52",
+      "imaginary_absolute_error": "5.97761824047459526533996766468971003641834763848496520896523568331536323954039951867E-79"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.022327538037753756319422222139867947952689551447472396658521739733552374676646092969917433482029846E-52",
+      "imaginary_absolute_error": "4.05555185709860743846792034845123018441843064509771960494836102756684260888442581873E-80"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.329515568356362901599531596259671102825762207472577935354919358178507298508143731976340572341506258E-52",
+      "imaginary_absolute_error": "2.26938074047687988298194945542234710903478613604105449543764344249914001754962703291E-78"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.127510144632777227336349810983840165029330525221260224867813823154375245968466732043493933855666026E-52",
+      "imaginary_absolute_error": "2.22882522190589380859727025193783480719060182959007729938815983222347159146078277472E-78"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.244267491932042601134585796222088799293123170887907675785084302832063519763934657032280598147425650E-52",
+      "imaginary_absolute_error": "1.41329352297667666756563350920340290541621829671928691014234170027750395770741136329E-78"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.036279416619513721572246602851061034386547580920172016823992267523349697110942958928020737746426532E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.054113320504533288017518589038779678608645922273717762495378351536296681032701609731187703935388006E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.139030587014339989319567380230598552873475500311932425997459844987189603584487456595776588228508975E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.083189386480026732663092054709531021387687128959880953726501442660431594382025913328997493630485411E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.115465106231562748002758657310271687674365558743825847861839840166181115211926708433566731255110203E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.036279416612319218535972429336655097588288764416949238118900339467092335601939241887268039593102936E-66",
+      "imaginary_absolute_error": "5.06198394111564615920288747961576820437419341541879977578025295473591073264056821233E-79"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.054113320504513367123830470191401054939123482733668097644552527078566535178028606565582563523228190E-66",
+      "imaginary_absolute_error": "2.28376497285589049030740833982645856580736172044779455555743150489754184009863770163E-80"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.139030587048482288298246590739128437581948126526053476175313793992019464911560375166970643242003024E-66",
+      "imaginary_absolute_error": "2.09330652563193517839037724204110103872389821778095374697882412704129054825918641598E-78"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.083189386491704114328755086903084955000471142844837232829784446244407076603416548879421805139493879E-66",
+      "imaginary_absolute_error": "2.11614417536049408329345132543936562438197183498543169253439844209026596666017279300E-78"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.115465106256224654357612437410552360903072219020162523268980853587168785624266791182045825666857574E-66",
+      "imaginary_absolute_error": "1.31117128473602934960687003670047122240969558826365583505621186878192851996211480711E-78"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "3.318078809968884242960673825390781842371677931306350481704379771227410263392343339744210643365806446E-78",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "6.617512086546689640103701033930882281391875329496904321142197548507247058844776183936950498770973345E-85",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "1.579925701176314522502100828974625084894620726042919158891643306058106002423696315994083444909781358E-77",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "5.409741494107306523114039039691990933564699622777353315466979162362608473107223993498763180023784295E-78",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "1.141478977939869828706110026058151785847532824670880134806408401178852996934254977869351152720051729E-77",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "3.876424226305289271445262972868034660851100773785577574552981737776306777360354813579385382233102147E-78",
+      "imaginary_absolute_error": "5.06198398761457946250295339053892016200419630568004111017503923547250397063682918505E-79"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "1.992485073906370971577573234258016262108189245230166905472188927186018670181295114896311203788739669E-80",
+      "imaginary_absolute_error": "2.28376347734965722200799120473049019878834984447814082772511598931521878021889290320E-80"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "1.834304196691606528350887641872637536517484291742475741591342826649185854695709185355321463784423638E-77",
+      "imaginary_absolute_error": "2.09330649936632150166142109235748277076532901760636066890176917386845815166129846112E-78"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.267640171555725670439894573092022951391579480505650268508503059028027077317087515509704207833497625E-78",
+      "imaginary_absolute_error": "2.11614413413981807388150100440478767275321251605114207717902033376161033946348739015E-78"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "1.324711452462517902853257475014083523405347857498171656543951561100395513815016434418907093275481603E-77",
+      "imaginary_absolute_error": "1.31117126645063801006589817172933984447681607330957309409826212865443036826358515433E-78"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.508006578521083023341841296458349466792819585266446752541915237030601599579068661505975852374497791E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.510695457709524238853021688407162661032526134990869696326036982881699688039415456720639186062613543E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.536865871745065266630161737326527874713948538372480915133371027455998935047399929250987484309053118E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.516412503710712844865897685300982549131413226198524116271655171857084788149046209190826012352862697E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "positive-real"
+      ],
+      "relative_error": "4.515304211283242529540746320384476496172292148849292613396287500258062035433423001836373722429430708E-35",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.508006578521083023339061017026741499357210547657226327620620906473679944696811060626485277168699350E-35",
+      "imaginary_absolute_error": "4.1546406756333568002791391538432144879118253859889475102451310841E-58"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.510695457709524238850528665006333706219072966515714739742835266214844874807366289945387639991463575E-35",
+      "imaginary_absolute_error": "9.3004829131585380062301632714782286653862422935630962353536793985E-58"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.536865871745065266630464529151531575532443495963668572302103797319974464178204994274326252720126334E-35",
+      "imaginary_absolute_error": "1.1810359899578835832634842624678154192240508212333438656548793930E-58"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.516412503710712844864015420460854491068798377560533392768812393680543462886105295550194406946100910E-35",
+      "imaginary_absolute_error": "8.1194469232006544229666790090104132461621914723297523696988000055E-58"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        48,
+        8,
+        32,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.515304211283242529538745655389971058155894019913325439430243395927024977276906739173556198603653113E-35",
+      "imaginary_absolute_error": "5.0983836305086664115531242929660102450590520826621130624106827738E-58"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.022482238541579677297442630366262564496715751079760456014283227283391223451340325793976731941648279E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.025742314553612164141730906906425852699267523775900080765793153130524792067090081658441992967357647E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.057472092292369460077694680751737984321587587935374935013711666520741235812902986728021903107714422E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.032673828846479985225131173396489748439648038752581926007253596481541389948081132293759940059752648E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.031330102593430682750893397619728551354327198844302962179985175971765913661439531015704403761646259E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.017439062757603178828737322564829804594875156390405802666604577289494598339647151294626440992895995E-52",
+      "imaginary_absolute_error": "2.2532590336693105418091834026193451049506270722866693909890121224E-60"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.022327505594630914390744525011056263039112055935095541617964442982906367829717089882931181496348678E-52",
+      "imaginary_absolute_error": "1.5822278147150480609990030574074196437192848648430781718314124134E-61"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.069905906878233116933295758669899498732189705946355422314215394290602490921453098266503866999444020E-52",
+      "imaginary_absolute_error": "1.6247481580099688210963984735557641627770174965459609188472508581E-59"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.032721223799927987033293072797867961052254643511272858777345627720287279687482084200993622568870140E-52",
+      "imaginary_absolute_error": "1.6405704361571193017063885041298383592142103451943917005655649822E-59"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        60,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.030706323241278414475231428809643387102593131616975182352848272999836025528282880960552848994430133E-52",
+      "imaginary_absolute_error": "7.6395374223682688730796466699943555198333949579002911550805718805E-60"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.017439333507479055869139845833744638962209201170687764862465918602980922808207891015361340874166440E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.022327538037753756319422224580889513500471096710938971729457257809814171028929385367722727132391495E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.069903619922584408001321248411520444805255510510505488369323692418911815719416240143651245017420014E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.032720749559837714772380080597985593079868285682292253275685716164039848388582462290829864090000018E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "8.030705947225795260872416322520914939289273489243225686124711188512322186207234682157714194711757352E-52",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.017439333507479055869137653306696932877428289103887287307243066002275163578502372506949662818907351E-52",
+      "imaginary_absolute_error": "2.77426162313004141434686512725995666692017701645689677594238809365719482575614165543E-79"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.022327538037753756319422222139753180379203466664302236535371234708264922001388496838108620044776135E-52",
+      "imaginary_absolute_error": "3.26841550122272385958925785447863818063788431661115595905860173360541982333217757851E-80"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.069903619922584408001342561712413560603527500599502851833892487451793971216396682539379447613408803E-52",
+      "imaginary_absolute_error": "1.84393067115434727425512785344761052142498738202149306438791361355187378332933383144E-78"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.032720749559837714772384734677683634514620077109197796038519504586504748320128687465619316037214328E-52",
+      "imaginary_absolute_error": "1.81124651614212003565923527490282413961860853885538150479732759621581958509601205566E-78"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        8,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "8.030705947225795260872420073899007404828198681210136506537599429590622686729586339917150176185807549E-52",
+      "imaginary_absolute_error": "8.36266717492808982470946009269913153136299844016268333000104095766479921904102486443E-79"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.053299047872386761744604818120193124139910994293446365981441511516559402471935540951751880243862751E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.054113320504533291155193549076079220839428474876482105386461924061277189778674254817671919759795564E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.062038500636348014976242234380675050509277881870312031560357717580160787685387428471949615041488595E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.055844612157762729421495122092787678095939795505636671070780072996358349783878844531005927989839975E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "positive-real"
+      ],
+      "relative_error": "6.055508988230892487512629234811172556521361091579911883196942325229870952648248704383823588547328321E-66",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.053299047659837477715125411228172213056870150530932010433421237223626694575475624024290081844839276E-66",
+      "imaginary_absolute_error": "4.89396159422715955999339420339671002108080365024654892658117328689924955499110493724E-79"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.054113320504219029596731981496566115251039303126096441686331802674676599593060569201386372258589816E-66",
+      "imaginary_absolute_error": "7.18895870017535386917135792569858625880355732970452830672931274386826860940231412713E-79"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.062038502701681959343003842907731172505904703111820761332690739971634996686432191334163401030964970E-66",
+      "imaginary_absolute_error": "1.26908550590640553124396856466812113711549535626122575658802747766899410567307921793E-78"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.055844612608698718683011475729818784969776509022545470910449680819704359947552169132508072319659980E-66",
+      "imaginary_absolute_error": "5.50189635888870144326832772098262511235139623290772925915096203282167244732847805213E-79"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        48,
+        "upper-half-plane"
+      ],
+      "relative_error": "6.055508988594350214665143762753029805325896946120657772070010081880266530422537653393670050948088505E-66",
+      "imaginary_absolute_error": "1.52745778088756083163581530964213505090549720389222739793018769468602383491646279176E-79"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "2.093789673427241444548865115184505534796527710873657884907152116604393674168108340048255376547595972E-76",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "3.319180534511314357908621308021081920179198587714771295137725754224694312930519014538775626445969319E-84",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "2.037850680630667556486319019900916033699306779201845779610552100021439029089917084003165819895639006E-75",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "4.451777530771834289664924050394604563229416136992034582817926672050139909881234018893213817761767971E-76",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "positive-real"
+      ],
+      "relative_error": "3.588766910364324688718304183620545222410052049100426346962735124752581761681506371146093493649002903E-76",
+      "imaginary_absolute_error": "0.0"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "3.170316686755262437134399564590290282861584460654485802217496236020549510650964394197937180494018946E-78",
+      "imaginary_absolute_error": "4.89396162847299557391033463779281517906506253564165234177733345311741619648835119418E-79"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "3.142591466024656986038925458736440065045058148862885648279516935375685236530384102512298200130291921E-79",
+      "imaginary_absolute_error": "7.18895888931290690016216656337248814051478530225363157230810558848603299638710538105E-79"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "2.748326783678041623024788878612954518469743717498729708505203356732917212743247426801668042089986465E-77",
+      "imaginary_absolute_error": "1.26908547313722483168858427744322418319110818427306716755170174063638143862571422161E-78"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "5.758236184332924670538701834376257193967186140466149541553342958659333613378742440498623652510308247E-78",
+      "imaginary_absolute_error": "5.50189584205934141672367621105975369139629654047704010320891181787778138987003683503E-79"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "configuration": [
+        80,
+        64,
+        16,
+        64,
+        "upper-half-plane"
+      ],
+      "relative_error": "4.581036116082059070026830442481332299740683963025121954122065299030772841695825286150835253861721761E-78",
+      "imaginary_absolute_error": "1.52745751391142181488425444608167305093188263632810696616012254565953664581293061897E-79"
+    }
+  ],
+  "refinements": [
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "relative_error": "3.985160807491891221711086545406834684701700925187693731189859129496141368262109054961364586507862377E-35"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "relative_error": "4.510695457709524238848533734898717189636948466446422867401555347991642623974360466208498506762742957E-35"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "relative_error": "4.872794235673352210081531212173189054434013418628187331630644885444866292235907489157604073729936251E-35"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "4.742364033459479072598088127151470943946414810295842346552812934100580154352145963068352673997557060E-35"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "2.235129381917167939039463218921093563465793424197905195062431749948646479168788137325966522586223530E-35"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "relative_error": "3.985160807491891221710866231470758943958392393492509488228434136052313073697495431383656275416658521E-35"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "relative_error": "4.510695457709524238848534050788895357312964325039365444223253124628767775883687767905745140682479110E-35"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "relative_error": "4.872794235673352210081683544285652226327448750579956375337243026126951319987474687627609380933867760E-35"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "4.742364033459479072598185702086341583169034178770689509372371213261910684656378122318552696206477345E-35"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "2.235129381917167939038508207218279779126349933780060955715626492432972632518145088129426285080176989E-35"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "relative_error": "7.081315224938727364883908900026607061339773288623622163340491479824590351464025343820099137849856597E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "relative_error": "8.022327538037407576766106447815201023522924354200624905255847184282414384627117068440722203906680200E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "relative_error": "8.670694697997297522770978130068859670064127160072766241009359889566806970956870873772558710858234649E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.437148867608301007592791427145652204139216161211553915569318994152324777121194665857566458700507040E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "3.947742359488405949138285598687704977528080896327172769757818977979035123056943416226693172442007007E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "relative_error": "7.081077351751111160000606910849426102511828162404390752224041680586030925884587887339644582714934386E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "relative_error": "8.022327505593819334573643446785142152511349953380266672767175058257544714892553559313610425700557124E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "relative_error": "8.670858540271763722998559479180747178920581388201552401748780025700390750486562329839591033260092412E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.437253681203670535090231931841613838403995566867391035645236244631960097853360077721306503857307541E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "3.946712476152529641778731617894692747124098361212343703364546752396194800339293299173614544249688521E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "relative_error": "7.081085458282805319753264298867065317665807476685815411184430229566721685787377373015853500203145622E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "relative_error": "8.022327538037753756319422224580891887181962659723539513935884282797014961652863533542645533318337092E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "relative_error": "8.670853009586124882151847071310926849233327731451044395845704634791862821871940639462209869255947923E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.437250154391315676666401636316636033958638889044375038694606439443748359199998222160202006626368451E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "3.946747469413119243174684425624335649083798060650998222820953227240953678723309333975018638847583610E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "relative_error": "7.081085458282805319753264189761547155446451173994310254506933681910892670593141740654779344366464739E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "relative_error": "8.022327538037753756319422224569700647175325359095498156827019172875899592662918899977346296438367581E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "relative_error": "8.670853009586124882151847146466848652982640440462395265796402460465803470350206836185180220134103950E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.437250154391315676666401684396902379103970645560039028750392551935835146331130166410901759849636178E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "3.946747469413119243174683953234492872431930346366879327503039279043846339742116876543759686601994741E-52"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "relative_error": "5.608342671993018750249028733541460218722198700078177321395747446670746568079651942330370556872772710E-66"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "relative_error": "6.054113320504533286020880076007711662665750733401614657945532343640694444445973390794916921529679711E-66"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "relative_error": "6.361253881096149042145630564523283579556030333837743048311322070102309272931995562811278805138802115E-66"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "6.250619966087331612229837748202655264211825740010231858234316845638336427020858319188910945393094384E-66"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "4.123925530000732400677960432817886006452742297657765592132777778574101621265758958446211524127197806E-66"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "relative_error": "5.608342671986059204280045043676259487409736411163496916951057343308322517132658498831048300476246710E-66"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "relative_error": "6.054113320504533986849352622802603451485163124626531029432574009025943943512938661016770602063308939E-66"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "relative_error": "6.361253881100945422935681279087200566488904202657466905793135066444644468936928857535438032208914906E-66"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "6.250619966090400558342419486705539889074002361204979522560071679500832945497687855043095378148370607E-66"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "4.123925529970595223371445496645037161442114116424594929715790441605617684938665814999510126102278962E-66"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "I",
+      "relative_error": "6.959548367560844127447064438226346738735675500006915311048195381104589302501164125671887112517957317E-78"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "S",
+      "relative_error": "6.971592135282252850255271641588101262334164288817968450514278712112154565408449714837325700385181331E-82"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "eta_derivative",
+      "relative_error": "4.796378724245310365912353488611974746353610331068343897269437743037011399951846252915132898396219146E-78"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "3.068943469202501167155783241078086037900365225747533429863723808712550849930873898630811118660967497E-78"
+    },
+    {
+      "dimension": "7/5",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "3.013717730651493617284884501062818123317066241698733696848393632709314344670139802491884386797508469E-77"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "relative_error": "4.474955318700658674601146086503780785097147813473480554297187724318162339935763615879903075813248718E-35"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "relative_error": "4.510695457709524238848544068058104675956902044708133074726624450883240091022354714072330863400777373E-35"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "relative_error": "4.680874400518716482607518940624117780421103599344923047539418153074163153751010257600341419044849434E-35"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "4.568965517170144798698169472140376047882034310142369452969625574294904950874989080432935973326583440E-35"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "4.633647861426808354593649472564339122262199907058849062514729444677748042310833762788390496698158448E-35"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "relative_error": "4.474955318700658674597055020208828256436168373353771582064920382764661360783122137387604118889055060E-35"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "relative_error": "4.510695457709524238848531587338771539211240466956749256591835927320758464384845369701374700899280559E-35"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "relative_error": "4.680874400518716482626926904275287951646652701835146410967763761292934322011233528598866113565423127E-35"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "4.568965517170144798704806641666000604921574955370619334395755938846615076932797510584363515517315057E-35"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "4.633647861426808354607668048087433950814648157309339656147223635238768134139562418058905518784793108E-35"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "relative_error": "7.976788159452526088952687321505973452348605475168374421018202456408025649886497631549441756231401307E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "relative_error": "8.022327538163260907431378040940164193714786059354164033118661191822689140536097411922564758766597955E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "relative_error": "8.239166183454752187447461960147298394800064776022950949795334161585077257537460989486501759151889731E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.096574096203420002931140223037448556478640437335725433172018464053755635970284404877274027113816664E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "8.178991060790112029185433522757257224854005611530846961539253684190791356469276785918301906331591850E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "relative_error": "7.957813199914228656562266044551530361044431700069847364784163815955335409069723567176338377749738220E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "relative_error": "8.022327505593777521906209413450063188038362071361654040468263861861294698921948961969488861471172163E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "relative_error": "8.329516471306190743468312740821226219490873611523967390235341485398467781087639812057146536504996952E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.127510432471978705065376026429989077866870709007651233768266783184544202892749373389540447317059199E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "8.244268135299896611713424477227226670108971462761889193867028374183290921333509564208759702416446293E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "relative_error": "7.957813428805353054510348586792690508532570583243643127428713516281668817189127482908904199810027954E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "relative_error": "8.022327538037753756319422224580898268574340737102513336919763931329331187171413027877555712603259056E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "relative_error": "8.329515568356362901599531215118948103969569316096430915915858098407089393489555389574125699337680787E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.127510144632777227336349682084759498499627533725126051405044389436166949357613879623249412560414928E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "8.244267491932042601134585521529581288748301995741740842932587130059739717394568058129114242561049440E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "relative_error": "7.957813428805353054510348470612894119485770577420813431113475145583987806878324666410921650296956089E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "relative_error": "8.022327538037753756319422222139861330440603004757832292957487808851270982801316596070905076229001457E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "relative_error": "8.329515568356362901599531754252241220457214457682660832817427847640579902799928020983423233605754215E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.127510144632777227336349865081255106102395756361650621787723158801371473741955918984412359470536383E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "8.244267491932042601134585910369986593280106041498910281600262887585345986851854031092815181212552213E-52"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "relative_error": "6.036279416616195642762277718608100360561156799077800338892685917041645317339735577515451719943943636E-66"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "relative_error": "6.054113320504533287355767380384110714598275818880629534356190818586606248918481854884469314858086594E-66"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "relative_error": "6.139030587030139246331330525455619561163221751160878633257889036576106036644971524497965987043415153E-66"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "6.083189386485436474157199361232645060427379119893445653349278795975898573544355613320064134189560717E-66"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "6.115465106242977537782157355597332787934947076602301176108548641514245199223645431654318269319252471E-66"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "relative_error": "6.036279416609001139726003545093694423762897982574577560187593988985387955830731860474698997918691967E-66"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "relative_error": "6.054113320504513366462079261536732090928753379340579869505364994128876103063808851718864174445926765E-66"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "relative_error": "6.139030587064281545310009735964149445871694377374999683435742985580935897972044443069159502633952665E-66"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "6.083189386497113855822862393426198994040163133778401932452561799559874055765746248870488382526953046E-66"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "6.115465106267639444137011135697613461163653736878637851515689654935232869635985514402797082220523242E-66"
+    },
+    {
+      "dimension": "3",
+      "quantity": "I",
+      "relative_error": "7.194503036274173514405936798258816503222778705091928056257361509003717040752722025251668943732988511E-78"
+    },
+    {
+      "dimension": "3",
+      "quantity": "S",
+      "relative_error": "1.992551249027236438473974271268355570931003163983461874515400349161503742651883562659469146491077523E-80"
+    },
+    {
+      "dimension": "3",
+      "quantity": "eta_derivative",
+      "relative_error": "3.414229897867921050852988470847262621412105017785394900482986132707291857119351559053751247575346631E-77"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "1.167738166566303219355393361278401388495627910328300358397548222139063555042424833739232812265777697E-77"
+    },
+    {
+      "dimension": "3",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "2.466190430402387731559367501072235309252880682169051791350359962279248510749243261242939237943297765E-77"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "relative_error": "4.508006578521083023341841296458349466792798647369712480127469748379449754524664577991052067244617910E-35"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "relative_error": "4.510695457709524238853021688407162661032526134991201614379488114317490550170217564897685293361046963E-35"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "relative_error": "4.536865871745065266630161737326527874714152323440543981889019659357989026641524404724241940733327883E-35"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "4.516412503710712844865897685300982549131457743973831834614551821097588734192667896981824301188721705E-35"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "4.515304211283242529540746320384476496172328036518396256643174683299898240884026664922496528070023861E-35"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "relative_error": "4.508006578521083023339061017026741499357189609760492055206175417822528099642406977111561492038818887E-35"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "relative_error": "4.510695457709524238850528665006333706219072966516046657796286397650635736938168398122433747289896995E-35"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "relative_error": "4.536865871745065266630464529151531575532647281031731639057752429221964555772329469747580709144400482E-35"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "4.516412503710712844864015420460854491068842895335841111111709042921047408929726983341192695781960756E-35"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "4.515304211283242529538745655389971058155929907582429082677130578968861182727510402259679004244246984E-35"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "relative_error": "8.022482238541579677297440536576589137255271202214645271508748430755680349795135157688491309448963528E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "relative_error": "8.025742314553612164141730906906459044504612636919479166978873363949726584052967229344754482559429762E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "relative_error": "8.057472092292369460077715059258544290997152451125573944174048659588533254254279167261581503399071980E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.032673828846479985225135625174020520273937703676632320611816825897678381979087982534104218348000756E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "8.031330102593430682750896986386638915679015917148486582725207586023815014084904236578989134237682298E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "relative_error": "8.017439062757603178828735228775156377353430607525290618161069780761783724683440927254203241667703691E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "relative_error": "8.022327505594630914390744525011089454844457169078674627831044653802108159815594237569255005455846519E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "relative_error": "8.069905906878233116933316137176705805407754569136554431474552387358394509362803940542546829515828433E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.032721223799927987033297524575398732886544308435323253381908857136424271718488913342159017677965927E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "8.030706323241278414475235017576553751427281849921158802898070683051885125951747810383707416726054916E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "relative_error": "8.017439333507479055869137752044071211720764652305572580356931122075270049152001667031627470968279594E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "relative_error": "8.022327538037753756319422224580922705305816209854518057942537468629015963014806533054046550984204754E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "relative_error": "8.069903619922584408001341626918326751480820373700704497529660685486703834160767087080168332827451305E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.032720749559837714772384532375516364914157950606342647880248945580176840419589291643116397005621553E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "8.030705947225795260872419911287825303613962207547409306669933598564371286630699611715811954816012530E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "relative_error": "8.017439333507479055869135559517023505635983740238772102801708269474564289922296148523215792913020504E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "relative_error": "8.022327538037753756319422222139786372184548579807881322748451445527466713987265644524432443896589394E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "relative_error": "8.069903619922584408001362940219219867279092363789701860994229480519585989657747529475896535423440050E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "8.032720749559837714772389186455214406348909742033248190643082734002641740351135516817905848952835861E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "8.030705947225795260872423662665917769152887399514320127082821839642671787153051269475247936290062726E-52"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "relative_error": "6.053299047663007794401880673665306612621460440813793594894075723025844190812763607038557422312381911E-66"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "relative_error": "6.054113320504533294474374083587393578748049782897564025565660511776048484916400009022271537603170274E-66"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "relative_error": "6.062038502674198695606909790866994070410193915569618810762203497190712887694472928273182770404549240E-66"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "6.055844612602940482498678551059280083135400251828578284769983531278151016986196908221506186501480904E-66"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "6.055508988589769178549061703683002974883415613820917088106984959926144465121333699523607755399956308E-66"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "relative_error": "6.053299047450458510372401266773285701538419597051279239346055448732911482916303690111051120563758908E-66"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "relative_error": "6.054113320504219032915912516007880473159660611147178361865530390389447894730786323405985990101965568E-66"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "relative_error": "6.062038504739532639973671399394050192406820736811127540534536519582187096695517691131187714209768188E-66"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "6.055844613053876471760194904696311190009236965345487084609653139101497027149870232822807584160819831E-66"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "6.055508988953226905701576231624860223687951468361662976980052716576540042895622648533323781294264376E-66"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "I",
+      "relative_error": "2.125492840294794068920209110830408437625143555480202742929327078964599169275063017486230026025399421E-76"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "S",
+      "relative_error": "3.142558274219311872895346372523359854225856356877008500566565558118142989587254797311722094121671253E-79"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "eta_derivative",
+      "relative_error": "2.065333948467447972716566908687045578884004216376833076695604133588768201213140716078568487392865587E-75"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_scalar_mass_derivative",
+      "relative_error": "4.509359892615163536370311068738367135169087998396696078233460101636733246013013976593389266631066172E-76"
+    },
+    {
+      "dimension": "9/2",
+      "quantity": "physical_medium_mass_derivative",
+      "relative_error": "3.634577271525145279418572488045358545407458888730677566503955777742889490097160258943080676903141011E-76"
+    }
+  ]
+}

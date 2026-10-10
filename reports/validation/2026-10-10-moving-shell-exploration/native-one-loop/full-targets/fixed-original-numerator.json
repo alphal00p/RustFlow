@@ -1,0 +1,29 @@
+{
+  "exact_native_checks": true,
+  "mass_raised_distribution": "N*(C2*H0-C1*H1)",
+  "original_polynomial": "N=g+u²",
+  "reconstruction": [
+    {
+      "N_bulk": "(A+A*D)/D",
+      "N_physical_mass_raised": "1/2*(1+D)",
+      "N_upper_surface": "0",
+      "basis": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "N_bulk": "2*(A*B+B^2)/D",
+      "N_physical_mass_raised": "-2*(A+B)",
+      "N_upper_surface": "2*A+B",
+      "basis": [
+        1,
+        0,
+        1,
+        0
+      ]
+    }
+  ]
+}

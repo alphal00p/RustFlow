@@ -1,0 +1,161 @@
+{
+  "closed": {
+    "basis": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1
+      ]
+    ],
+    "derivatives": [
+      {
+        "basis": [
+          1,
+          0,
+          0
+        ],
+        "conditions": [
+          "2*A",
+          "A"
+        ],
+        "cut_derivative_prefactor": 1,
+        "terms": [
+          {
+            "coefficient": "1/2*(-2+D)/A",
+            "indices": [
+              1,
+              0,
+              0
+            ]
+          },
+          {
+            "coefficient": "-B/A",
+            "indices": [
+              1,
+              0,
+              1
+            ]
+          }
+        ]
+      },
+      {
+        "basis": [
+          1,
+          0,
+          1
+        ],
+        "conditions": [
+          "A+B",
+          "2*A+2*B"
+        ],
+        "cut_derivative_prefactor": 1,
+        "terms": [
+          {
+            "coefficient": "-1/(2*A+2*B)",
+            "indices": [
+              1,
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    ],
+    "rule_count": 9
+  },
+  "fixed_shell_comparison": "For this one-loop occupied tadpole there is no uncut denominator, so existing fixed-shell deformation is eta independent. The moving cut introduces a nontrivial compact integral flow; this toy cannot establish an advantage on multiloop virtual reduction.",
+  "history": [
+    {
+      "discovery_gaps": [
+        "SearchExhausted: no rule found within the source-seed budget"
+      ],
+      "frontier": [
+        [
+          1,
+          -1,
+          1
+        ],
+        [
+          1,
+          0,
+          0
+        ]
+      ],
+      "round": 0,
+      "rules": 1
+    },
+    {
+      "discovery_gaps": [
+        "SearchExhausted: no rule found within the source-seed budget"
+      ],
+      "frontier": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ],
+        [
+          2,
+          0,
+          1
+        ]
+      ],
+      "round": 1,
+      "rules": 4
+    },
+    {
+      "discovery_gaps": [
+        "SearchExhausted: no rule found within the source-seed budget",
+        "SearchExhausted: no rule found within the source-seed budget"
+      ],
+      "frontier": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "round": 2,
+      "rules": 7
+    },
+    {
+      "discovery_gaps": [
+        "SearchExhausted: no rule found within the source-seed budget",
+        "SearchExhausted: no rule found within the source-seed budget"
+      ],
+      "frontier": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          1,
+          0,
+          1
+        ]
+      ],
+      "round": 3,
+      "rules": 9
+    }
+  ],
+  "measure_id": "rustflow-weighted-sources-v1:83304d05399eb3342eab352b3758371e20d3f51f6819b42f057e1efd1c91c934:991cd4f6a17289608a3092723d654f0b5fe9c722c6698cb3456be5f25c1f6c37:{\"measure\":\"one-loop theta(q0) C_n(g-A) s^(-p) H_h(B-s); g=q²,s=spatial-radius-squared; A=m²+eta; B=mu²-m²\",\"support\":\"A>0,B>0; real spatial ball; polynomial spatial moments p<=0; all source vector fields have time component q0 or zero, so lower flux q0*delta(q0) vanishes; sufficiently large Re(D) then meromorphic continuation at spatial origin\",\"orientation\":\"future q0>0, Minkowski g=q0²-s\",\"normalization\":\"unscaled d^Dq delta(g-A); d=D-1 spatial dimensions\",\"branch\":\"positive A,B then meromorphic dimension; compact radial total derivatives with all upper surfaces retained\",\"deformation\":\"eta changes only A; physical m² derivative is partial_A-partial_B; independent parameters during source generation\"}",
+  "physical_mass_derivative": "partial_m²=partial_A-partial_B; for bulk I, partial_B I=S, so partial_m² I=partial_eta I-S",
+  "scope": "exploratory moving-cut native weighted-source closure; automatic provisional frontier searched alongside its derivatives, exact final derivative audit; no production FixedShellDeformation change, no manual rule or period",
+  "source_count": 7
+}

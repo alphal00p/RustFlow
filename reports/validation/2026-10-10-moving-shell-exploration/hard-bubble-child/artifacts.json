@@ -1,0 +1,86 @@
+{
+  "schema": 1,
+  "status": "saved native predictions independently compared",
+  "files": {
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/README.md": {
+      "sha256": "15fcd437ee4d8d2ec59085ed915ec03b3526b5064219a8ef847e85c95089e8bc",
+      "bytes": 3002
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/build-binding.json": {
+      "sha256": "a336028e28f264054817976ce04b8bb6b88609262e916d780a2e83106bb77d31",
+      "bytes": 1878
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/build.log": {
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/compare.py": {
+      "sha256": "524d4ddec62eb174a1a1227202174e89f821e444c0b882a8c777dc45d3f737de",
+      "bytes": 3875
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/comparison-launch.json": {
+      "sha256": "df9307f30f2a25920928cb083364d80ac7a9f994aaedf4543153c95b033de68c",
+      "bytes": 590
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/comparison.json": {
+      "sha256": "5891babe160eb0bb4ae3ec266c12c5ab3e4a459cc60c699248cbc357828a9a40",
+      "bytes": 4208
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/probe.rs": {
+      "sha256": "b2a40260b0854e84ac15075626b7ce09d79a123b26b77747301208005a627308",
+      "bytes": 4500
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/resources.json": {
+      "sha256": "c1821f5ad3cd5e06df541a42dfb81d5d19110b27232f4dc672afb1311a666161",
+      "bytes": 410
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/resources.log": {
+      "sha256": "58788245101d15fbd3302e46e56d1a7d71500327cd3cef6351140b1688587a0d",
+      "bytes": 7699
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/resources.provenance.json": {
+      "sha256": "a79ff8591af256479495a2b3105784bc610b096f92e16ba9940760589a9d5234",
+      "bytes": 815
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/native-reduction/native-stage-2e8c54bdc25852f7c3333ff5eb3e246fbcc9c61b9ac10d9de6b36388dad9d701.bin": {
+      "sha256": "cf8b4ab01be1b999ebc741f5cbeb2343921297260ef7603b70e88440514423b5",
+      "bytes": 1277
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/native-reduction/native-stage-2f8f8ed5b318382aeee4eb7eec17c97eb46e469dddf378bae18fa1890922b71a.bin": {
+      "sha256": "2d82ee92479030aba7a08e960e62f72bce4b14323d09e654b089ebe79dbcd24c",
+      "bytes": 210
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/native-reduction/native-stage-8571db41df06243d8f125a9f6e97453b94d389061b9dbc76b3058cd19030d258.bin": {
+      "sha256": "5447b1feb86be1a88d9b79f8b40451d417aa2ade7b9e520925f7a2dcad6a8d32",
+      "bytes": 2743
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/native-reduction/native-stage-family-v1-2b84cfa8ba9ef5e3feeee6e06f234d3676d644f3c468991a0ed9931289aa77a7.bin": {
+      "sha256": "582218eb0f737392895216e16943a6dd8d0067ad4f3fee3991c3d10eeac30774",
+      "bytes": 1278
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/prediction-20-60.json": {
+      "sha256": "ef7beb0f8b6a272060768945f05d30ec6cfc0a2e78b2306918e6b6bc59efc82b",
+      "bytes": 223
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/prediction-30-60.json": {
+      "sha256": "497dc24c67aa8a43f63b1b214b99c37141152192dd698bdae198f42e6db25399",
+      "bytes": 231
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/prediction-30-80.json": {
+      "sha256": "3098e5bda6c948eb98d41bfd6f486c10eecb82f6c447c277d22595b23048df8c",
+      "bytes": 232
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/predictions.json": {
+      "sha256": "a2b06592e311e7898e7feac2172a8751e6d97843d3f7f88108682371c3d47d89",
+      "bytes": 1349
+    },
+    "reports/validation/2026-10-10-moving-shell-exploration/hard-bubble-child/result/system.json": {
+      "sha256": "eefdd799d045b9eef8bbc431e0704f2cad95ec675f5733f196300a113bc0c02f",
+      "bytes": 785
+    }
+  },
+  "production_files_changed": false,
+  "whole_moving_shell_amplitude_evaluated": false,
+  "three_loop_acceptance": false,
+  "four_loop_acceptance": false
+}

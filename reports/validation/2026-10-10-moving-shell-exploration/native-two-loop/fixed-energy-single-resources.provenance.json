@@ -1,0 +1,24 @@
+{
+  "captured_utc": "2026-10-10T01:00:48.636645+00:00",
+  "command": [
+    "timeout",
+    "120s",
+    "/tmp/moving_sunset_probe",
+    "reports/validation/2026-10-10-moving-shell-exploration/native-two-loop/fixed-energy-single",
+    "fixed",
+    "single"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/tmp/moving_sunset_probe": {
+      "resolved_path": "/tmp/moving_sunset_probe",
+      "sha256": "0601418af5732931b2f1550da7121b936044c8411b0469a54add63e1fe14fac8",
+      "size_bytes": 1236592192
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

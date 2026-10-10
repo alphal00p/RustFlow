@@ -1,0 +1,1 @@
+moving=false cuts=[0] closed=false rounds=3 failure=String("frontier budget exceeded; no closure claim")

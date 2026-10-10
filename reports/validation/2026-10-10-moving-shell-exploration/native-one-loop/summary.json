@@ -1,0 +1,103 @@
+{
+  "status": "pass-native-closed-two-state-system",
+  "scope": "one-loop moving-shell exploratory weighted algebra; not production admission or multiloop acceptance",
+  "primary": "roundtrip/result.json",
+  "program": "roundtrip/closed.bin",
+  "source": "probe-full-targets.rs",
+  "source_count": 14,
+  "native_rule_count": 15,
+  "rounds": 3,
+  "frontier_counts": [
+    7,
+    2,
+    2
+  ],
+  "source_generation": "native WeightedMeasure polynomial IBP and distribution multiplication; optional positive-A lower-support zero; exact original source replay",
+  "final_basis": [
+    [
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      1,
+      0,
+      1,
+      0
+    ]
+  ],
+  "matrix": [
+    [
+      "(D-2)/(2*A)",
+      "-B/A"
+    ],
+    [
+      "0",
+      "-1/(2*(A+B))"
+    ]
+  ],
+  "final_original_target_audit": true,
+  "final_all_basis_derivatives_audit": true,
+  "encoded_decoded_source_replay": true,
+  "fixed_original_numerator_checks": true,
+  "retained_nonzero_conditions": [
+    "D",
+    "2*A",
+    "A",
+    "A+B",
+    "2*A+2*B"
+  ],
+  "resources": {
+    "command": [
+      "timeout",
+      "120s",
+      "/tmp/moving_cut_one_loop_native_toy_roundtrip",
+      "reports/validation/2026-10-10-moving-shell-exploration/native-one-loop/roundtrip"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.15971711184829473,
+    "user_seconds": 0.080885,
+    "system_seconds": 0.08055899999999999,
+    "peak_child_rss_kib": 15500,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "negative_controls": [
+    {
+      "path": "result/result.json",
+      "closed": false,
+      "rounds": 8,
+      "source_count": 12,
+      "policy": "derivative-only search"
+    },
+    {
+      "path": "frontier-search/result.json",
+      "closed": false,
+      "rounds": 8,
+      "source_count": 12,
+      "policy": "frontier and derivative search without retiring reduced frontier labels"
+    }
+  ],
+  "positive_controls": [
+    {
+      "path": "energy-search/result.json",
+      "source_count": 14,
+      "rules": 7,
+      "rounds": 3,
+      "scope": "bulk-root closure, original g,u coordinates"
+    },
+    {
+      "path": "spatial-search/result.json",
+      "source_count": 7,
+      "rules": 9,
+      "rounds": 4,
+      "scope": "scalar/even-energy g,s coordinates only"
+    }
+  ],
+  "limits": [
+    "Positive A=m\u00b2+eta and B=mu\u00b2\u2212m\u00b2; origin identities continued from sufficiently large ReD.",
+    "No multiloop performance or numerical claim from these source diagnostics.",
+    "The successful presentation and active frontier changes were combined, so their separate impact has not been isolated.",
+    "The fixed-shell one-loop occupied tadpole has no uncut denominator and no eta flow; this is not a matched multiloop benchmark."
+  ]
+}

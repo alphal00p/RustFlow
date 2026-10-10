@@ -1,0 +1,178 @@
+{
+  "scope": "Six bounded native weighted-source connection-closure probes; no boundaries, values, transport, reference/oracle comparisons, or production changes. Closed=false is explicit unresolved, never a proof of absence of finite closure.",
+  "comparison": "Same source-generation owner, native search depth3/512domain budget per round, six-round/128frontier/20k rule and application budgets; same lower-contact positive-shell zero proof; original scalar and raised medium targets; monotonic provisional frontier, not production active-target/refinement policy.",
+  "physical_prescriptions": {
+    "fixed-energy": "C_n(q\u00b2\u2212m\u00b2) H0(mu\u2212q0), eta only uncut physical factors",
+    "fixed-spatial": "Gamma_n with H(mu\u00b2\u2212m\u00b2\u2212r\u00b2), fixed cut shell, eta only uncut; equal to fixed-energy interpolation by exact distribution identity",
+    "moving": "Gamma_n with fixed spatial H, all physical factors including required cuts subtract eta"
+  },
+  "target_scope": "Preconverted original coefficients held fixed, physical endpoint preserved; does not keep original numerator polynomial fixed for all eta.",
+  "identity_prose_caveat": "Exploratory source support caption says shell mass\u00b2=1/4+eta generically. For both fixed controls the serialized actual factors give mass\u00b2=1/4. The only zero-domain premise used is positive shell mass\u00b2; it holds in all three arms. No exploratory identity is admitted to production.",
+  "observations": [
+    "All six arms remain unclosed under these bounded searches.",
+    "Neither a closure advantage nor failure of the proposed deformation is established.",
+    "Fixed-shell spatial presentation increases the mixed frontier within this driver; moving adds further cut derivatives. This is algorithm/source-presentation evidence only.",
+    "Moving mixed-sunset large-eta boundary requires a massive two-point hard integral at nonzero invariant, beyond the current vacuum boundary adapter."
+  ],
+  "cases": [
+    {
+      "case": "fixed-energy-single",
+      "closed": false,
+      "source_count": 19,
+      "frontier_per_round": [
+        22,
+        48,
+        68,
+        80,
+        92,
+        104
+      ],
+      "rules_per_round": [
+        12,
+        60,
+        145,
+        261,
+        396,
+        552
+      ],
+      "native_discovery_gaps_per_round": [
+        1,
+        1,
+        3,
+        6,
+        6,
+        6
+      ],
+      "wall_seconds": 1.1200600205920637,
+      "cpu_seconds": 1.110836,
+      "peak_child_rss_kib": 18444,
+      "stop": "six-round budget exhausted",
+      "nonzero_condition_count": 42,
+      "result_sha256": "c78c3f21f01500c7e0e553c7dea7e48c7aba80444be04afe65b31c56fc31ed4c"
+    },
+    {
+      "case": "fixed-spatial-single",
+      "closed": false,
+      "source_count": 17,
+      "frontier_per_round": [
+        37,
+        85,
+        137
+      ],
+      "rules_per_round": [
+        19,
+        93,
+        239
+      ],
+      "native_discovery_gaps_per_round": [
+        4,
+        4,
+        6
+      ],
+      "wall_seconds": 1.169952420052141,
+      "cpu_seconds": 0.913395,
+      "peak_child_rss_kib": 15444,
+      "stop": "frontier budget exceeded; no closure claim",
+      "nonzero_condition_count": 65,
+      "result_sha256": "32e2de2ee1d859f7007147f0386a3b8a8533a34567919523f6559f3adb71473b"
+    },
+    {
+      "case": "moving-single",
+      "closed": false,
+      "source_count": 17,
+      "frontier_per_round": [
+        59,
+        164
+      ],
+      "rules_per_round": [
+        27,
+        174
+      ],
+      "native_discovery_gaps_per_round": [
+        4,
+        6
+      ],
+      "wall_seconds": 1.2638612077571452,
+      "cpu_seconds": 1.2535560000000001,
+      "peak_child_rss_kib": 15436,
+      "stop": "frontier budget exceeded; no closure claim",
+      "nonzero_condition_count": 60,
+      "result_sha256": "3a7b87545a38f422af63ced765cb0da9ced1b7badcefaa2d4e81bd244c6d8e89"
+    },
+    {
+      "case": "fixed-energy-double",
+      "closed": false,
+      "source_count": 32,
+      "frontier_per_round": [
+        16,
+        48,
+        133
+      ],
+      "rules_per_round": [
+        6,
+        29,
+        88
+      ],
+      "native_discovery_gaps_per_round": [
+        1,
+        3,
+        8
+      ],
+      "wall_seconds": 19.816120280884206,
+      "cpu_seconds": 19.638302999999997,
+      "peak_child_rss_kib": 21560,
+      "stop": "frontier budget exceeded; no closure claim",
+      "nonzero_condition_count": 107,
+      "result_sha256": "bef3b8b0376680664fbc2844ff22eb87c9b42506d4429a662f0ebd41470d833e"
+    },
+    {
+      "case": "fixed-spatial-double",
+      "closed": false,
+      "source_count": 28,
+      "frontier_per_round": [
+        30,
+        80,
+        190
+      ],
+      "rules_per_round": [
+        8,
+        41,
+        134
+      ],
+      "native_discovery_gaps_per_round": [
+        4,
+        9,
+        12
+      ],
+      "wall_seconds": 16.871507743839175,
+      "cpu_seconds": 16.598986999999997,
+      "peak_child_rss_kib": 18480,
+      "stop": "frontier budget exceeded; no closure claim",
+      "nonzero_condition_count": 154,
+      "result_sha256": "b24ae10702caaf6b62c62c3dc52bb6995d98ed9d97b325b307b89ef61c923a02"
+    },
+    {
+      "case": "moving-double",
+      "closed": false,
+      "source_count": 28,
+      "frontier_per_round": [
+        47,
+        173
+      ],
+      "rules_per_round": [
+        21,
+        147
+      ],
+      "native_discovery_gaps_per_round": [
+        4,
+        12
+      ],
+      "wall_seconds": 12.616488265339285,
+      "cpu_seconds": 12.502498,
+      "peak_child_rss_kib": 18472,
+      "stop": "frontier budget exceeded; no closure claim",
+      "nonzero_condition_count": 76,
+      "result_sha256": "410addfd7b78ebd571f15d208dd46c2c0939da9bc7882438ec6d58fed195c862"
+    }
+  ]
+}

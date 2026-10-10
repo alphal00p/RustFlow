@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "120s",
+    "/tmp/moving_sunset_paired_control_probe",
+    "reports/validation/2026-10-10-moving-shell-exploration/native-two-loop/fixed-spatial-double",
+    "fixed-spatial",
+    "double"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 16.871507743839175,
+  "user_seconds": 16.494669,
+  "system_seconds": 0.104318,
+  "peak_child_rss_kib": 18480,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

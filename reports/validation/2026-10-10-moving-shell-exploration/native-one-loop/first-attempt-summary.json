@@ -1,0 +1,11 @@
+{
+  "status": "bounded-incomplete",
+  "scope": "exploratory native moving-cut weighted source algebra only",
+  "source_count": 12,
+  "rounds": 8,
+  "rules": 142,
+  "diagnostic_limitation": "First diagnostic searched only derivative labels, leaving emitted energy-weighted surface labels unsearched. The following diagnostic includes those frontier labels. Neither path inserts analytic periods or manual reduction rules.",
+  "sources": "probe-derivatives-only.rs",
+  "resources": "resources.json",
+  "result": "result/result.json"
+}

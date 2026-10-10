@@ -1,0 +1,24 @@
+{
+  "captured_utc": "2026-10-10T01:02:57.766987+00:00",
+  "command": [
+    "timeout",
+    "120s",
+    "/tmp/moving_sunset_paired_control_probe",
+    "reports/validation/2026-10-10-moving-shell-exploration/native-two-loop/fixed-spatial-single",
+    "fixed-spatial",
+    "single"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/kl3gf8ld3xp638ss3k178r38qn9ywahn-coreutils-full-9.11/bin/coreutils",
+      "sha256": "669091b85eefa88c9b026658123d988c8d1edc0863ce7cfaaae83ddacf438c23",
+      "size_bytes": 1736976
+    },
+    "/tmp/moving_sunset_paired_control_probe": {
+      "resolved_path": "/tmp/moving_sunset_paired_control_probe",
+      "sha256": "811366303b179ca13c8db8deb1e8b7ca597e427207cbe5e9757cf3f3b31ab7d6",
+      "size_bytes": 1236693368
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

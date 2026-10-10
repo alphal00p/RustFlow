@@ -1,0 +1,85 @@
+[
+  {
+    "discovery_gaps": [
+      "SearchExhausted: no rule found within the source-seed budget"
+    ],
+    "frontier": [
+      [
+        1,
+        -1,
+        1
+      ],
+      [
+        1,
+        0,
+        0
+      ]
+    ],
+    "round": 0,
+    "rules": 1
+  },
+  {
+    "discovery_gaps": [
+      "SearchExhausted: no rule found within the source-seed budget"
+    ],
+    "frontier": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1
+      ],
+      [
+        2,
+        0,
+        1
+      ]
+    ],
+    "round": 1,
+    "rules": 4
+  },
+  {
+    "discovery_gaps": [
+      "SearchExhausted: no rule found within the source-seed budget",
+      "SearchExhausted: no rule found within the source-seed budget"
+    ],
+    "frontier": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1
+      ]
+    ],
+    "round": 2,
+    "rules": 7
+  },
+  {
+    "discovery_gaps": [
+      "SearchExhausted: no rule found within the source-seed budget",
+      "SearchExhausted: no rule found within the source-seed budget"
+    ],
+    "frontier": [
+      [
+        1,
+        0,
+        0
+      ],
+      [
+        1,
+        0,
+        1
+      ]
+    ],
+    "round": 3,
+    "rules": 9
+  }
+]
