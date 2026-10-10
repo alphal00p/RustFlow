@@ -1,0 +1,10 @@
+{
+  "scope": "Isolated generic algebra extension, no production or physical integrated-flow admission",
+  "angular_source_sha256": "4d04a5a83831b4492e2d6c8f0c152395b6a44241dbee1b943bf002c67d307891",
+  "angular_exact_tests": 5,
+  "angular_maximum_tested_tensor_rank": 128,
+  "native_gram_bridge_cases": 16,
+  "native_gram_bridge_passed": true,
+  "native_gram_bridge_maximum_relative_error": "9.757797286474848958766279860749915716538862175757809166E-55",
+  "historical_attempts": "A completion-based bridge harness timed out at180s with no numerical result; direct explicit Gram monomials completed in0.215s. The unsuccessful attempt is retained. Its exact internal bottleneck was not instrumented, so completion is implicated by the changed harness, not profiled."
+}

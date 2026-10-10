@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/tmp/rustflow-integrated-gram-shift-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/gram-shift/result.json"
+  ],
+  "timeout_seconds": 180,
+  "scope": "Generic bridge verification, not physical coefficient generation",
+  "check_sha256": "6bcc377cb73cabf197e23387084366388bce7a0dd9c6549a2412f73cd169ae76",
+  "exit_code": 124,
+  "wall_seconds": 180.0762394950725
+}

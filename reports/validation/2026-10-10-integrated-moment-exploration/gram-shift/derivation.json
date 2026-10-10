@@ -1,0 +1,30 @@
+{
+  "scope": "Generic vacuum dimension-shift identity for Gaussian-before-expansion; isolated exploration, not a new production reduction owner",
+  "euclidean_convention": "I_D[f] = integral product_i(d^D k_i / pi^(D/2)) f(k_i dot k_j), h vacuum loop vectors, no external vectors",
+  "euclidean_identity": "I_(D+2)[f] = 2^h / product_(j=0..h-1)(D-j) * I_D[det(G_E) f]",
+  "native_convention": "product_i d^D k_i/(i pi^(D/2)); G_M becomes -G_E under Wick rotation, with propagator phases included by the native terminal",
+  "native_identity": "I_(D+2)[f] = (-2)^h / product_(j=0..h-1)(D-j) * I_D[det(G_M) f]",
+  "iterated_native_identity": "I_(D+2n)[f] = product_(r=0..n-1)[(-2)^h/product_(j=0..h-1)(D+2r-j)] * I_D[det(G_M)^n f]",
+  "proof": [
+    "Start with positive definite h-by-h A and normalized Gaussian exp(-sum_ij A_ij k_i dot k_j). Its integral is det(A)^(-D/2). Each Cartesian row of the D-by-h momentum matrix has covariance Sigma=A^(-1)/2.",
+    "For integer D>=h, Cauchy-Binet writes det(K^T K) as the sum over h-row subsets of squared minors. The Gaussian expectation of each squared minor is h! det(Sigma). There are binomial(D,h) subsets, giving product_(j=0..h-1)(D-j) * 2^(-h) det(A)^(-1).",
+    "Wick contraction makes this factor a polynomial in D, so the identity holds as a dimensionally continued Gaussian identity. Derivatives in A insert any scalar Gram polynomial without changing the factor.",
+    "Schwinger parameter integration extends the Gaussian identity to scalar vacuum propagator products in a common absolute-convergence domain, then meromorphically. Singular dimension factors must be combined with the exact integral before Laurent expansion; the identity does not license discarding either pole or zero factors.",
+    "Wick rotation multiplies the Gram determinant by (-1)^h. This fixes the native factor (-2)^h. No additional (2 pi)^D finite-density measure conversion is included in this identity."
+  ],
+  "use_in_generic_expansion": [
+    "For quadratic hard denominators, perform Gaussian loop integration in Schwinger parameters first: U^(-D/2) exp(-eta sum(alpha)-V/U). Expanding exp(-V/U) gives (-1)^n V^n U^(-D/2-n)/n!.",
+    "Each alpha monomial from V^n becomes an ordinary vacuum integral with raised denominator powers at D+2n, multiplied by the corresponding Gamma(nu+s)/Gamma(nu) factors. Original tensor numerators add Gaussian mean/covariance terms of rank fixed by the original input.",
+    "Apply the dimension bridge to convert these integrals to fixed-D vacuum integrals with a Gram-determinant numerator. Ordinary vacuum reduction suffices algebraically; whether it is affordable at high n and several hard loops remains an empirical question.",
+    "The external compact-momentum polynomial still needs generic rotational moments. This bridge removes a hard tensor projection bottleneck but does not by itself remove polynomial growth, provide an integrated differential equation, or justify transport."
+  ],
+  "test_design": {
+    "native_owner": "symbolica_amflow::gaussian::terminal",
+    "families": "h=1,2,3,4; non-diagonal A=2I+11^T; mass_squared=3; denominator power=40",
+    "dimension": "40/7",
+    "shifts": "h=1: n=1..4; h=2: n=1..2; h=3,4: n=1",
+    "precisions": [50, 80],
+    "comparison": "native terminal at D+2n versus independently expanded Gram insertion at D, relative error below 1e-35",
+    "limits": "180 seconds, tensor rank at most eight, no physical reference values or occupation-aware IBP"
+  }
+}

@@ -1,0 +1,25 @@
+error[E0308]: mismatched types
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/gram-shift/check.rs:44:48
+   |
+44 |             let d = Rational::from(6) - &eps * 2;
+   |                                                ^ expected `&Fraction<IntegerRing>`, found integer
+   |
+   = note: expected reference `&Fraction<IntegerRing>`
+                   found type `{integer}`
+
+error[E0308]: mismatched types
+  --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-exploration/gram-shift/check.rs:49:54
+   |
+49 |                 factor *= Rational::from(-2) / (&d + Rational::from((2*r) as i64) - Rational::from(j as i64));
+   |                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^ expected `&Fraction<IntegerRing>`, found `Fraction<IntegerRing>`
+   |
+   = note: expected reference `&Fraction<_>`
+                 found struct `Fraction<_>`
+help: consider dereferencing the borrow
+   |
+49 |                 factor *= Rational::from(-2) / (*&d + Rational::from((2*r) as i64) - Rational::from(j as i64));
+   |                                                 +
+
+error: aborting due to 2 previous errors
+
+For more information about this error, try `rustc --explain E0308`.

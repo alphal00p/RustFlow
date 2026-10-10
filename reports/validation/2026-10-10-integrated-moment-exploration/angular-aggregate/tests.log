@@ -1,0 +1,10 @@
+
+running 5 tests
+test tests::budget_failure_is_explicit ... ok
+test tests::coupled_triangles_and_four_vector_cycle ... ok
+test tests::degree_preflight_precedes_recursive_allocation ... ok
+test tests::high_rank_without_pairing_enumeration ... ok
+test tests::independent_parity_and_radial_factors ... ok
+
+test result: ok. 5 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.05s
+

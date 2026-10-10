@@ -1,0 +1,23 @@
+{
+  "scope": "Generic exact angular moments for independent occupied domains; isolated exploration",
+  "input": "A monomial in upper-triangular spatial Gram entries q_i dot q_j, multiplied if needed by an arbitrary coefficient independent of the angular coordinates",
+  "factorization": "Every vector q_i has a fixed homogeneous degree t_i in a Gram monomial. Its independent sphere average vanishes for odd t_i. Otherwise the result is product_i(r_i^2)^(t_i/2) times a rational function of the spatial dimension d. Energy variables remain untouched and may be carried by the coefficient.",
+  "identity": "The normalized sphere moment of 2m components is r^(2m) times the sum of pairwise Kronecker contractions divided by d(d+2)...(d+2m-2). The formula follows by separating radius and direction in an isotropic Gaussian and continues meromorphically in d.",
+  "algorithm": [
+    "Remove diagonal Gram factors and retain their contribution to the final radial powers. Eliminate the first remaining vector with off-diagonal factors.",
+    "Its neighbor multiplicities encode the labels of all tensor indices. Choose one occurrence of the first nonempty label. A partner label j has exactly the remaining multiplicity of j choices. Multiply the recursively grouped contraction by that multiplicity.",
+    "Contraction of two equal neighbor labels contributes a unit-sphere diagonal factor one; contraction of two distinct labels adds the corresponding Gram edge. Collect equal resulting multigraphs and cache them by the multiplicity vector.",
+    "Divide by the sphere denominator for the eliminated vector, then recursively average each resulting graph of the other independent vectors. Cache this average by the complete off-diagonal Gram exponent vector.",
+    "Return the original radial degrees and the exact rational function in d. The same procedure applies to any supported number of independent vectors; it contains no topology name, chosen invariant, or evaluated reference data."
+  ],
+  "limits": "Explicit retained-cache and intermediate-map cardinality budgets, total-degree preflight at most 512, and checked u16 exponent/radial overflow; exploratory geometry arity at most 16. Host enforces polynomial-size, wall-time and serialized-byte limits separately. No polynomial-complexity claim for arbitrary high-degree coupled graphs.",
+  "verification": [
+    "Odd independent parity and arbitrary diagonal radial factors",
+    "Coupled three-vector triangle and squared triangle, with exact symbolic d",
+    "Four-vector cycle, with exact symbolic d",
+    "Rank 128 at d=11/2, checked against the independent Gaussian double-factorial moment, retaining fewer than 200 cache entries",
+    "Explicit retained-budget failure",
+    "Degree preflight rejects near-u16-limit input before any recursive cache allocation"
+  ],
+  "remaining_validation": "The physical producer must cross-check this angular adapter against the existing native low-rank projector and combine it with the existing distributional radial moments; angular success alone makes no statement about C_n normalization, Fermi surfaces, equation reconstruction or eta=0 transport."
+}
