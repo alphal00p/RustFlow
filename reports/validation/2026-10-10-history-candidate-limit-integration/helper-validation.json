@@ -1,0 +1,26 @@
+{
+  "scope": "Validation-only helper syntax, frozen reference binding and coverage-parser controls; no production build or numerical execution.",
+  "python_files_parsed": 17,
+  "reference_artifacts_verified": 18,
+  "coverage_tests_exit_code": 0,
+  "coverage_test_output": "......\n----------------------------------------------------------------------\nRan 6 tests in 0.001s\n\nOK\n",
+  "helper_sha256": {
+    "build-native-digest.py": "731804e003361e83dca4b2450d49a2c079e4d646cddf87e472877ebef5a42018",
+    "capture-frozen-build.py": "52bd14d2e10c6643aeffe79c04757d8abb1ecec4a85dfc06625043ffb7b6627a",
+    "capture-history-candidate-limit-build.py": "3a87b747e9b41af7b0015e60d394a846066a557641850d574a9827a762d30b9b",
+    "capture-source-snapshot.py": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+    "compare-completed-predictions.py": "de431cdacc12466cbfd26099ca457a673b8e15ea069b8055f2afde625ae8b620",
+    "frozen_sources.py": "7a16d52446742ad20e99b115e16b31afe4ad088a12ac5294bb83f665eb282b5e",
+    "history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "launch-history-candidate-limit-build.py": "52589ef306aad0bf088bc2d2667a7a996fa03118736b2b45a594eb861fc46113",
+    "run-frozen-root-gate.py": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+    "run-massive-regression.py": "51c8fe5a9237513fc068f559de28ff64a5ffa255d1c354811aec09b3fef4ab43",
+    "run-resource-command.py": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+    "run-root-gates.py": "3f675ec06d5d37e06e8689906dd36087333e2fc4146ccab1e5807e7a57b6a68c",
+    "run-singleton-gate.py": "598a64c614545656c03d7509b43622d6d003ad3d460400f628aaa81e71ca113c",
+    "run-three-loop-gate.py": "1d8b2172bf643015937e859ddc8f278f2bb15c3b566cd811ded3452569e6455b",
+    "run-two-loop-gate.py": "7590457e7f976c3adb78717591396061cdc9f7e82a05bed7aafdcacfdf7bfabe",
+    "summarize-frozen-root-gates.py": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e",
+    "test_history_coverage.py": "e480ae2bc54d8dbc4c14ede5721cf3a12c6d23263166b7504f0813df60a02bf9"
+  }
+}

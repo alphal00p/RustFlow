@@ -439,8 +439,13 @@ raw auxiliary derivatives. Only completed search transactions enter request
 history; allocation-deferred requests cannot certify closure. Final target
 reconstruction and every basis derivative are still independently audited by
 one native program. Checkpoints bind the program, scheduling transactions and
-request history, and record retained applicability conditions. These are
-evidence checkpoints, not a resumable preparation interface.
+request history and serialized rule conditions. They do not serialize the
+complete accumulated application state and are evidence checkpoints, not a
+resumable preparation interface. Optional `max_history_candidate_maps` bounds
+individual historical maps only after all mandatory closure audits; `None`
+preserves exhaustive collection, and `Some(0)` skips that optional work. Skipped
+labels remain explicitly unassessed. See the
+[closure policy](finite-density-guard-refinement.md) for conditions and diagnostics.
 
 The complete massless two-loop sunset now passes all four native profiles at
 D=13/2 and D=15/4, and five Laurent profiles through order zero. All occupied

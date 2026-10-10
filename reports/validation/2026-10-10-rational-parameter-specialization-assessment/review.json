@@ -1,0 +1,58 @@
+{
+  "scope": "Read-only design; no implementation, build, performance measurement or numerical acceptance",
+  "created_utc": "2026-10-10T07:08:15.656966+00:00",
+  "assessment_sha256": "469f89f736f8a0a4dde81b5c1f5c4dbe61e54d5b675038acf6fcc9b09823d8df",
+  "source_bindings": [
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/solver/guarded/lifecycle.rs",
+      "sha256": "f67c4d071f6bd58ffa6a3b2f546f61a49c36bc7c9b383e0289d0be5f25b339e7"
+    },
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/solver/instantiate.rs",
+      "sha256": "d579a1d3fd9e126725c5c2b1bcbbd999cf8d0beb3a75899338af28318c060a5d"
+    },
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/algebra/indexed/specialization.rs",
+      "sha256": "731261acf223f0af726922f4b280903355e91b0ff43c7a312a85bf77d6291f8d"
+    },
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/algebra/coefficient/model.rs",
+      "sha256": "06f4903027c6f4bf6fd6058928e139af847dd4e5554704df4e3085e938c1e4fc"
+    },
+    {
+      "path": "vendor/rustred/crates/rustred-core/src/algebra/coefficient/context.rs",
+      "sha256": "fc7a284489cfd4de77943fb8757c1d133e71ce9253778cba5c6ff7b5d3844bfb"
+    },
+    {
+      "path": "src/finite_density/flow.rs",
+      "sha256": "88bf2ba186593d6fcd035ea342e364a88bde09e3ac3cd302afc378dfd0431a44"
+    },
+    {
+      "path": "src/finite_density/flow_boundary.rs",
+      "sha256": "f81722cfadc6a793da2a7352b16d1dfbf31290e55d941b376515842dc1d5636c"
+    },
+    {
+      "path": "src/finite_density/assembly.rs",
+      "sha256": "1096ef11e6143d26ad2309c662a84bf24b303cdadc91c7817e0015a8616a5794"
+    },
+    {
+      "path": "src/engine/connection.rs",
+      "sha256": "a811272984bfb8b085803367c01c09a180e6333b6399d0b7a134703eda8d3a67"
+    },
+    {
+      "path": "src/engine/frobenius_cache.rs",
+      "sha256": "edbdc7bc6e4248fff24647c469005d1dbce373e9a6467f98b481462bd4fc5de7"
+    },
+    {
+      "path": "src/engine.rs",
+      "sha256": "9980e5a308594cefe9d6263afb137fe29494dfb38054192e42a40df246584509"
+    },
+    {
+      "path": "src/frobenius.rs",
+      "sha256": "2e726a675f252881e55c64fd114a53066616ebed52b2f5316c35af47b59f7fb4"
+    }
+  ],
+  "conclusion": "Native exact specialization is a plausible bounded experiment; full flow integration is blocked by per-sample closure/cache ownership and retention of generic endpoint branch provenance.",
+  "production_changes": false,
+  "new_numerical_runs": false
+}

@@ -1,0 +1,121 @@
+{
+  "status": "passed",
+  "scope": "One D12/5 28:80:12 massive profile, vacuum/all cuts/full amplitude for both targets; independent reference and historical comparison. No new precision refinement claim.",
+  "command": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py",
+    "--predictions",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression",
+    "--output",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression-comparison.json"
+  ],
+  "native_provenance": {
+    "executable_sha256": "8c15752a6766285754b4ae1382e0fc9a4d0ffd26011b536db980ee7541c0e034",
+    "source_snapshot_sha256": "d0ad8d14a977a47300c30b577737e953273f6a7698ad221ae48b655524dae889",
+    "compile_identities": {
+      "DEPENDENCY_SOURCE_DIGEST": "58c0591b3a16f1e50e3c40aff182f88e5dd18e38ad1912c56a665335c64f945f",
+      "RUSTRED_SOURCE_DIGEST": "9a3869bf20c4f25231c7b2c2160fec7f5d38307b542134a7119d79a1b1d535fb",
+      "PORT_SOURCE_DIGEST": "3a88d01feb2d4d9bf6024c97e7b012bd4cbc71ae99562925e02330032bd5efe8"
+    },
+    "configuration": {
+      "source_options": {
+        "free_virtual_zero_sectors": false,
+        "policy": "polynomial-closure-v1",
+        "positive_compact_energy_powers": false
+      },
+      "guard_digits": 40,
+      "native_closure": "WeightedClosureOptions { max_rounds: 12, max_frontier: 256, max_requested: 4096, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 3, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: false, requested_index_rays: false, prioritize_requested_indices: false, max_reused_rules: 0, max_domains_per_residual: 0, requested_ray_point: None, active_target_closure: false, max_history_candidate_maps: None, max_direct_zero_attempts: 0, checkpoints: None }"
+    },
+    "closed_metadata": [
+      {
+        "cut_slots": [
+          0
+        ],
+        "path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-0/round-002-closed.json",
+        "sha256": "025e32332918b696bb30a2d923912d9e0b79b5e69675cf7f668d2886690defb9",
+        "proof_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-0/round-002-closed.bin",
+        "proof_sha256": "9bdbd8c1f15a4bfc68d042e58383a49ec2f21779e6727860ec74647007cdf0c1",
+        "program_blake3_verified": "f5dfecdf92bc7b0f64da79d089e4a62bc8d30e20d683d87596951099e74a71b8",
+        "program_bytes_verified": 267137,
+        "requested_discovery": null,
+        "historical_candidate_collection": null
+      },
+      {
+        "cut_slots": [
+          1
+        ],
+        "path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-1/round-002-closed.json",
+        "sha256": "f16f36ea10fad0556fdb4a220c17d254507bb1887d1b15f634ba56e63e068d2a",
+        "proof_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-1/round-002-closed.bin",
+        "proof_sha256": "199c6ca71d6d9828c0924a2ef30c8a2f624740cbc68c4e090d5d202750e2f647",
+        "program_blake3_verified": "6e406faab52672171d2293947db4a019d19df70e611c46061eaf0eb3e15da41e",
+        "program_bytes_verified": 520750,
+        "requested_discovery": null,
+        "historical_candidate_collection": null
+      },
+      {
+        "cut_slots": [
+          0,
+          1
+        ],
+        "path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-0-1/round-001-closed.json",
+        "sha256": "1534460416051630aaff14c003081801324896c9785468180aadf804ad7bc558",
+        "proof_path": "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-0-1/round-001-closed.bin",
+        "proof_sha256": "fbe38c06e98e9cdef0a29be5da3defd243cacebcc6aa933a6d9bbd408b10ee4c",
+        "program_blake3_verified": "021743597e219c6a63334ab5a4f44dc4591d0dadec460eb5f136ec53448e82ae",
+        "program_bytes_verified": 1352738,
+        "requested_discovery": null,
+        "historical_candidate_collection": null
+      }
+    ],
+    "native_digest_tool": {
+      "record_sha256": "744b7fa56235593ccc9f4665f6f73010d6c6e193c4fd6f7324e553b350f14021",
+      "path": "/tmp/rustflow-history-candidate-limit-digest",
+      "sha256": "5e727feda3ef7d8bfec4b1a2301be5e85ae1fbe102bb9e03f0dff07a71b35a0d"
+    }
+  },
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-history-candidate-limit-integration/native-digest-build.json": "744b7fa56235593ccc9f4665f6f73010d6c6e193c4fd6f7324e553b350f14021",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/native-digest.rs": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/build-native-digest.py": "731804e003361e83dca4b2450d49a2c079e4d646cddf87e472877ebef5a42018",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history_coverage.py": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-source-hashes.json": "d0ad8d14a977a47300c30b577737e953273f6a7698ad221ae48b655524dae889",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-build-provenance.json": "d60039984d9a2fdb3fc31e5bf3ba84ff8bf7d084053e843757251aa7be1c7f3d",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression-binding.json": "b14c7161f65ce3ccd5029f711a9541c1eba235cfc51795830b59eb0b2cf5962f",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression-resources.json": "1798de814cf370708d7036197f85e6b4904bb5f48c05fb159e9b0b94bfeb4939",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression-resources.provenance.json": "c7941bf14b3b88bb4d5c68f7b459bb299d2f30773e5bb544fcafee58bd4e68e1",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/configuration.json": "6f0a32fa6a8948599752ff6663248de28ca0f51d9ada51f2228cb9e5844c6b12",
+    "examples/finite_density/massive_two_loop_sunset.json": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/input.json": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/prediction-28-80-12.json": "8dbfa298bb97fc887f19495b974ec37cb500fc601e164605c1dbb49f98c6c014",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/compare-completed-predictions.py": "de431cdacc12466cbfd26099ca457a673b8e15ea069b8055f2afde625ae8b620",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-0/round-002-closed.json": "025e32332918b696bb30a2d923912d9e0b79b5e69675cf7f668d2886690defb9",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-0/round-002-closed.bin": "9bdbd8c1f15a4bfc68d042e58383a49ec2f21779e6727860ec74647007cdf0c1",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-1/round-002-closed.json": "f16f36ea10fad0556fdb4a220c17d254507bb1887d1b15f634ba56e63e068d2a",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-1/round-002-closed.bin": "199c6ca71d6d9828c0924a2ef30c8a2f624740cbc68c4e090d5d202750e2f647",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-0-1/round-001-closed.json": "1534460416051630aaff14c003081801324896c9785468180aadf804ad7bc558",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/native-closure/cut-0-1/round-001-closed.bin": "fbe38c06e98e9cdef0a29be5da3defd243cacebcc6aa933a6d9bbd408b10ee4c",
+    "docs/finite-density-three-loop-reference.md": "4c7968fb28ee19cebbddf157668f3dbc32b13c87a6ffb2313fe0de72b0497d74",
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "examples/finite_density/massless_two_loop_sunset.json": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/generate.rs": "6ff63d122c782b5c1f78ec18a198b5ac66e27f63818e331eec0e5ad797c5dee9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/source-sha256.json": "fef71625e9676b69502a5eafa3e153eeb5a74a117de263ba2ec7d62909122f8a",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/validation.json": "87daaec2ee69875f3e43ed2e47339f85d493223313393687f4c43c6f8ecec8ea",
+    "tools/finite_density/compare_complete_massive_reference.py": "481629768a370c993fbcfa0bff25e574af52f2aa28e8f15a9ee7e358aadbe8f2",
+    "tools/finite_density/compare_massive_reference.py": "7739206862f6d40714a4587231a24cf99a8206811cad82fd2755ef97b52f57aa",
+    "tools/finite_density/compare_massless_reference.py": "fa616b666d8a70291db943ec78e6760ef70a65aa062a6848b2a0d29ab25a0bc3",
+    "tools/finite_density/compare_three_loop_reference.py": "a66a71ce60663073e146a6e5df47b6f5803b846873e89f167eeac441779ea56e",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/comparison-plan.json": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c"
+  },
+  "definitions_and_tolerances_changed": false,
+  "production_modified": false,
+  "exit_code": 0,
+  "comparison_sha256": "369e982655707cfb6a01a0c86ddf73bb82b70c359ef3a401419a83eb09e05c95"
+}

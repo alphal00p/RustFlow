@@ -1,0 +1,301 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "scope": "one current-source D12/5 profile, both original targets, vacuum/all cuts/full amplitude; independent reference and same-profile historical regression",
+  "full_amplitude": true,
+  "configuration": [
+    28,
+    80,
+    12
+  ],
+  "guard_digits": 40,
+  "reference_comparison_count": 10,
+  "historical_same_profile_comparison_count": 10,
+  "independent_refinement_comparison_count": 0,
+  "supplied_oracle_numerical_records_compared": 0,
+  "reference_error_estimate": "independent node and precision changes, not a rigorous interval bound",
+  "criterion": "relative <=1e-12 above reference magnitude1e-20; absolute <=1e-25 otherwise; imaginary absolute <=1e-25",
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/prediction-28-80-12.json": "8dbfa298bb97fc887f19495b974ec37cb500fc601e164605c1dbb49f98c6c014",
+    "reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression/input.json": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c"
+  },
+  "reference_comparisons": [
+    {
+      "sector": "vacuum",
+      "target": "scalar",
+      "reference_component_keys": [
+        "scalar/vacuum"
+      ],
+      "prediction": "(1.90769986523178947654750946166911070589524341590404862914083038089446380e-2+2.04578940997299846141067580879068280467957614906499182062977841928630447e-68i)",
+      "reference_real": "0.019076998652317894765475094616691107058952434133500396699406557009",
+      "absolute_difference": "2.554008959200174679994463800000000000000000819349966428532591129142003567871577341532631420589157255E-47",
+      "relative_difference": "1.338789715168249127442500524930705201761549064104126319339365553124842736719979778992278068102440354E-45",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "sector": "vacuum",
+      "target": "raised_numerator",
+      "reference_component_keys": [
+        "raised_numerator/vacuum"
+      ],
+      "prediction": "(9.85180797957492396882681403435755520772778878853989612298885248812896426e-3+1.00712681958711209856646268025443402868688064043427064239860028143973080e-68i)",
+      "reference_real": "0.0098518079795749239688268140343575552077277887788833814826368040951",
+      "absolute_difference": "9.656514640352048393028964260000000000000005251917842557492653789227054501285139519854845799999270233E-48",
+      "relative_difference": "9.801769036071588253856646727125093350311275464729994726363969738232580617398914241528457066075938374E-46",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "sector": "cut_0",
+      "target": "scalar",
+      "reference_component_keys": [
+        "scalar/cut_0"
+      ],
+      "prediction": "(-1.04860726584119015733058090300452488509902657640253532651365173114905129e-2+0i)",
+      "reference_real": "-0.010486072658411901573305809030045248837665222869701818869426313383",
+      "absolute_difference": "1.33250428943235343957102039284905129E-38",
+      "relative_difference": "1.270737227214825553859151598016552418740377509357965964623302384426874986357034463865534229864294976E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "sector": "cut_0",
+      "target": "raised_numerator",
+      "reference_component_keys": [
+        "raised_numerator/cut_0_bulk",
+        "raised_numerator/cut_0_surface"
+      ],
+      "prediction": "(-2.48352518625157919973775441657027642322404723561264524055824534432342827e-3+0i)",
+      "reference_real": "-0.0024835251862515791997377544165702764445314455843614977695512836272",
+      "absolute_difference": "2.130739834874885252899303828287657173E-38",
+      "relative_difference": "8.579497589435933906929483794731249034068398537017098618360684742488334181692001944957516543647512973E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "sector": "cut_1",
+      "target": "scalar",
+      "reference_component_keys": [
+        "scalar/cut_1"
+      ],
+      "prediction": "(-1.04860726584119015733058090300452488509902657640253532651365173114905129e-2+0i)",
+      "reference_real": "-0.010486072658411901573305809030045248837665222869701818869426313383",
+      "absolute_difference": "1.33250428943235343957102039284905129E-38",
+      "relative_difference": "1.270737227214825553859151598016552418740377509357965964623302384426874986357034463865534229864294976E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "sector": "cut_1",
+      "target": "raised_numerator",
+      "reference_component_keys": [
+        "raised_numerator/cut_1"
+      ],
+      "prediction": "(2.12343660302075908461197998878168132271643566763408201890084684738665400e-3+0i)",
+      "reference_real": "0.0021234366030207590846119799887816813218533708562780976548934397435",
+      "absolute_difference": "8.6306481135598436400740710388665400E-40",
+      "relative_difference": "4.064471763028881407505035369949412797493242457702875190907427622291309518733065052666112586209833841E-37",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "sector": "cut_01",
+      "target": "scalar",
+      "reference_component_keys": [
+        "scalar/cut_01"
+      ],
+      "prediction": "(8.87305519980413574451974046554785756468856675719445463114360587181874798e-3+2.55485561485599025550453911869367101949420861486680414895293915621916002e-64i)",
+      "reference_real": "0.0088730551998041357445197404655478575242886393938912971965322027564",
+      "absolute_difference": "4.039992736330315743461140311541874798000000000000000080783402827230967341260338767735567086447594809E-38",
+      "relative_difference": "4.553102223932400128856116728699923373669705488585114661094100913908941963977397001040556576557119030E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "sector": "cut_01",
+      "target": "raised_numerator",
+      "reference_component_keys": [
+        "raised_numerator/cut_01_bulk",
+        "raised_numerator/cut_01_surface"
+      ],
+      "prediction": "(-5.91815797093257192179845302648273473943887691699450575540921021414655663e-3+6.89974788806941470925680981221566410585198775284220889714021324689187255e-64i)",
+      "reference_real": "-0.00591815797093257192179845302648273468351925179014608698324975206195",
+      "absolute_difference": "5.591962512684841877215945815219655663000000000000000425669170804770472422728499909310862088315648929E-38",
+      "relative_difference": "9.448822657573757205344272543705462164866680568357354600394433173136786775137590600321253156047528368E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "sector": "total",
+      "target": "scalar",
+      "reference_component_keys": [
+        "scalar/total"
+      ],
+      "prediction": "(6.97790853529822736338321702214846692166046938818423439227887505778236024e-3+2.55506019379698755535068018627455008777467657248171064813500213406108865e-64i)",
+      "reference_real": "0.0069779085352982273633832170221484669079106277879880561570861329995",
+      "absolute_difference": "1.374984160019617823519274205828236024000000000000000237396647312386329345065612898005319046601975232E-38",
+      "relative_difference": "1.970481775540860776083318365258610586446071889056902423937233138864370628032544663560989350190299416E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "sector": "total",
+      "target": "raised_numerator",
+      "reference_component_keys": [
+        "raised_numerator/total"
+      ],
+      "prediction": "(3.57356142541153193190258658008622536778130030356682714592224377704563336e-3+6.89984860075137342046666645848368954925485644090625232420445310692001652e-64i)",
+      "reference_real": "0.0035735614254115319319025865800862254015304622606538943847292081492",
+      "absolute_difference": "3.374916195708706723880696437215436664000000000000000705319894666204987801149846860790437316177425611E-38",
+      "relative_difference": "9.444125324696358926810535799202483144943067885017704561553934123309898345474905006958053463394219922E-36",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    }
+  ],
+  "historical_regressions": [
+    {
+      "sector": "vacuum",
+      "target": "scalar",
+      "identical_decimal_string": true,
+      "absolute_difference": "0E-139",
+      "relative_difference": "0E-38",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "sector": "vacuum",
+      "target": "raised_numerator",
+      "identical_decimal_string": true,
+      "absolute_difference": "0E-139",
+      "relative_difference": "0E-37",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "sector": "cut_0",
+      "target": "scalar",
+      "identical_decimal_string": true,
+      "absolute_difference": "0E-73",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "sector": "cut_0",
+      "target": "raised_numerator",
+      "identical_decimal_string": true,
+      "absolute_difference": "0E-74",
+      "relative_difference": "0E+28",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "sector": "cut_1",
+      "target": "scalar",
+      "identical_decimal_string": false,
+      "absolute_difference": "7.894799651120188606667906745849680680358097954806410688824605478448281341009707969203639844137908232E-67",
+      "relative_difference": "7.528843169694232317030099965477245108678080146028743176388064564887280159890976851640101728374938934E-65",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "sector": "cut_1",
+      "target": "raised_numerator",
+      "identical_decimal_string": false,
+      "absolute_difference": "6.484750823128249827153463625595613714955486884916884272913626455112122116788110612864304406194448220E-67",
+      "relative_difference": "3.053894245725618104601546567656422992745239746403085706038218574000229965032365743562275766787100784E-64",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "sector": "cut_01",
+      "target": "scalar",
+      "identical_decimal_string": false,
+      "absolute_difference": "2.630060811207085739144491305865337327613767926779929884887105854877490077467385226182960355929865124E-64",
+      "relative_difference": "2.964098331390006263490043005097153105467780337112017041161459354473479737642389682904558903868492809E-62",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "sector": "cut_01",
+      "target": "raised_numerator",
+      "identical_decimal_string": false,
+      "absolute_difference": "1.117410947088700502077646399002161460093263616178791983305466230357121086619958296279135297335282492E-61",
+      "relative_difference": "1.888105982599550379359752842636446631756187000780945090503428244141896870864143194127016589195721224E-59",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "sector": "total",
+      "target": "scalar",
+      "identical_decimal_string": false,
+      "absolute_difference": "2.622786296707835178474386586483876664029655437811249884322348606100736462643695505690332843097673706E-64",
+      "relative_difference": "3.758699735659032204959831549779985249992295770126611203160759975449639274288256655921744233375437949E-62",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "sector": "total",
+      "target": "raised_numerator",
+      "identical_decimal_string": false,
+      "absolute_difference": "1.117409906243991709065321643058591678095339463525087039809632166015954092934662919626954612527150282E-61",
+      "relative_difference": "3.126880367294401822762087193147855540425250160200645842114784347243379270736498630071765857473420769E-59",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    }
+  ],
+  "assembly_checks": [
+    {
+      "target": "scalar",
+      "absolute_difference": "6.0000000000000000000000000000000000000000000000000E-74",
+      "relative_difference": "8.598564984978793883782330663757463031985900276938256391476935318627759928079428713095903819992856170E-72",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_numerator",
+      "absolute_difference": "3.080E-136",
+      "relative_difference": "8.618852828716402109868383160481357388969286754305890886875114592986177267149043272938984482464213566E-134",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    }
+  ]
+}

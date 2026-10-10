@@ -1,0 +1,9 @@
+error[E0271]: type mismatch resolving `<&i32 as Neg>::Output == i64`
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs:325:357
+    |
+325 | ...c([*shift]).unwrap(),coefficient:context.integer(-c).numerator}));GuardedSource::new(format!("budget-{ordinal}"),row,IndexDomain...
+    |                                                     ^^ expected `i64`, found `i32`
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0271`.

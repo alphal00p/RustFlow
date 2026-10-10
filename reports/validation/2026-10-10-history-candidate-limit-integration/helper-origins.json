@@ -1,0 +1,103 @@
+{
+  "scope": "Prepared HC helpers only; source capture/build owned by parent and not invoked by this record.",
+  "initial_origins_sha256": "0472f4249cc8ecca58af71d2d76568d6565d6bf1b9a085d500393d9509499ad0",
+  "adaptations": [
+    "Report prefix and predecessor changed from VI to HC; source policy remains polynomial-closure-v1.",
+    "Same 12 coherent artifact template and explicit immutable source fixtures retained.",
+    "Native 91-test guarded gate rerun rather than reuse exception.",
+    "Active massless and later three-loop launchers set zero optional historical maps; inactive massive default remains None.",
+    "Comparator adds exact final history coverage checks while retaining all proof/transaction/source/profile gates.",
+    "Fresh selected singleton launcher allows cuts0or3 with one profile and same larger global bounds; no resume/proof imports."
+  ],
+  "current_files": [
+    {
+      "path": "README.md",
+      "sha256": "8beda079e541654d64c56e9c9a12ce4a7ceea921cedf8928b873af900bc015e9"
+    },
+    {
+      "path": "build-native-digest.py",
+      "sha256": "731804e003361e83dca4b2450d49a2c079e4d646cddf87e472877ebef5a42018"
+    },
+    {
+      "path": "capture-frozen-build.py",
+      "sha256": "52bd14d2e10c6643aeffe79c04757d8abb1ecec4a85dfc06625043ffb7b6627a"
+    },
+    {
+      "path": "capture-history-candidate-limit-build.py",
+      "sha256": "3a87b747e9b41af7b0015e60d394a846066a557641850d574a9827a762d30b9b"
+    },
+    {
+      "path": "capture-source-snapshot.py",
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b"
+    },
+    {
+      "path": "compare-completed-predictions.py",
+      "sha256": "de431cdacc12466cbfd26099ca457a673b8e15ea069b8055f2afde625ae8b620"
+    },
+    {
+      "path": "comparison-plan.json",
+      "sha256": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c"
+    },
+    {
+      "path": "frozen_sources.py",
+      "sha256": "7a16d52446742ad20e99b115e16b31afe4ad088a12ac5294bb83f665eb282b5e"
+    },
+    {
+      "path": "helper-validation.json",
+      "sha256": "a40edc8c83c3d10fbf9e8ba722b7f8f52eba92b88bc6e760f7f53fa77d5e99ad"
+    },
+    {
+      "path": "history_coverage.py",
+      "sha256": "f7b4fde417a74faf222f63881b482e554afbd4430a03d64ed66b9bfa3d58fae1"
+    },
+    {
+      "path": "initial-helper-origins.json",
+      "sha256": "0472f4249cc8ecca58af71d2d76568d6565d6bf1b9a085d500393d9509499ad0"
+    },
+    {
+      "path": "launch-history-candidate-limit-build.py",
+      "sha256": "52589ef306aad0bf088bc2d2667a7a996fa03118736b2b45a594eb861fc46113"
+    },
+    {
+      "path": "native-digest.rs",
+      "sha256": "a22b1db0914d6226ca2ea1c2c455d8859aeea3bbfa2943de5d7408bf47ad2abd"
+    },
+    {
+      "path": "run-frozen-root-gate.py",
+      "sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8"
+    },
+    {
+      "path": "run-massive-regression.py",
+      "sha256": "51c8fe5a9237513fc068f559de28ff64a5ffa255d1c354811aec09b3fef4ab43"
+    },
+    {
+      "path": "run-resource-command.py",
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c"
+    },
+    {
+      "path": "run-root-gates.py",
+      "sha256": "3f675ec06d5d37e06e8689906dd36087333e2fc4146ccab1e5807e7a57b6a68c"
+    },
+    {
+      "path": "run-singleton-gate.py",
+      "sha256": "598a64c614545656c03d7509b43622d6d003ad3d460400f628aaa81e71ca113c"
+    },
+    {
+      "path": "run-three-loop-gate.py",
+      "sha256": "1d8b2172bf643015937e859ddc8f278f2bb15c3b566cd811ded3452569e6455b"
+    },
+    {
+      "path": "run-two-loop-gate.py",
+      "sha256": "7590457e7f976c3adb78717591396061cdc9f7e82a05bed7aafdcacfdf7bfabe"
+    },
+    {
+      "path": "summarize-frozen-root-gates.py",
+      "sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+    },
+    {
+      "path": "test_history_coverage.py",
+      "sha256": "e480ae2bc54d8dbc4c14ede5721cf3a12c6d23263166b7504f0813df60a02bf9"
+    }
+  ],
+  "excluded_mutable_run_artifacts": "Build/source-capture/numerical outputs have separate owner provenance and are not helper inputs."
+}

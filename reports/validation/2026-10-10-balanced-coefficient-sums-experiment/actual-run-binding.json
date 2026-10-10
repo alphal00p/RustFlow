@@ -1,0 +1,32 @@
+{
+  "scope": "one bounded independent slow-point reduction using source-replayed native apply and exact buffered sums; prior result read by executable only after reduction for equality",
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-balanced-coefficient-actual-attempt1",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/actual",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json"
+  ],
+  "inputs_sha256": {
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/actual.rs": "0d2b34b55201f454b92dc5568d47fc402c28fbd3286cd3849b4eff4e51ffa71b",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs": "9330759235ceee247c3f7b82fe9961454551115f929b6c6c3e5d9ac21bb5ac4c",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/build.py": "fc7e03afe47753c409dd9abcb0433ee44fc2caa515843963626c06e08b3a7089",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/actual-attempt1-build-binding.json": "6e182b85dc902171e08aeab814291a28db5559f7d79dad1f1b32298ba9f5cbed",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/tests-attempt3-resources.json": "33941acac326edbacb6c0da5f065f6f08bccde03108a098b0135cce923cfb589",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/run-actual.py": "64e148806bfd8eaa1710cbb9df9bd9e8182090a07970f4f4e6592117d8c9a997",
+    "/tmp/rustflow-balanced-coefficient-actual-attempt1": "6a66507f71739c52c909a1340231063b61d0374dbffb72630ca1d8a5a469a1e9",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin": "6bd17ce483002ab44043a0dcb958333ab454ea18954f114d510b20f875ee3e82",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.json": "1551e4d3b8d5c538b0879ac7629ca1f9b60d47c576b09d6c635e150065edcb55",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json": "2ad250bc0be44abdf91d6cc72da669b37f8ac0f871ef7ebb86cbd1569ac44e21",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json": "2ab4f65df49278af5c7084c34fdb6a9b8fbaa873082c136283ef6c56a9830d25"
+  },
+  "native_program_rules": 16937,
+  "term_buffer_per_pending_label": 32,
+  "native_application_budget": 100000,
+  "native_pending_key_budget": 100000,
+  "wall_limit_seconds": 600,
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

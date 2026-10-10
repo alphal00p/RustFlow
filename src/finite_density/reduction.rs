@@ -263,6 +263,12 @@ pub struct WeightedClosureOptions {
     /// native rule update. Historical requests remain bounded evidence, rather
     /// than additional targets. Requires a retained residual or requested-point schedule.
     pub active_target_closure: bool,
+    /// Bound optional individual historical maps after the complete final
+    /// source replay and all original-target/basis-derivative audits.
+    /// None preserves exhaustive collection; Some(0) skips it. Applies only
+    /// to active closure. Unselected history remains explicitly unassessed.
+    /// This is a label-count bound, not a native work or wall-time bound.
+    pub max_history_candidate_maps: Option<usize>,
     /// Native one-source zero proofs at requested concrete points before
     /// ordinary discovery. A per-call attempt cap; zero disables the prepass.
     /// Requires a retained discovery schedule. Completed point searches are memoized.
@@ -293,6 +299,7 @@ impl Default for WeightedClosureOptions {
             max_domains_per_residual: 0,
             requested_ray_point: None,
             active_target_closure: false,
+            max_history_candidate_maps: None,
             max_direct_zero_attempts: 0,
             checkpoints: None,
         }
@@ -308,6 +315,16 @@ pub struct WeightedClosureDiagnostics {
     /// Historical labels that the final program does not individually reduce;
     /// these are not candidates or masters in an active-target closed result.
     pub retired_unresolved: usize,
+    /// Optional historical labels selected for individual assessment. Zero
+    /// before the mandatory final audit has passed.
+    pub history_candidate_selected: usize,
+    /// Completed optional individual applications (including unresolved ones).
+    pub history_candidate_assessed: usize,
+    /// Certified individual maps retained in ReducedSystem::candidates.
+    pub history_candidate_maps: usize,
+    /// Historical labels not selected for assessment; neither zero, reduced,
+    /// unresolved nor additional physical closure obligations.
+    pub history_candidate_unassessed: usize,
     pub direct_zero_calls: usize,
     pub direct_zero_attempts: usize,
     pub direct_zero_rules: usize,
@@ -401,6 +418,11 @@ pub fn prepare_weighted_system<const N: usize>(
     {
         return Err(Error::InvalidInput(
             "weighted closure needs targets and positive work limits".into(),
+        ));
+    }
+    if options.max_history_candidate_maps.is_some() && !options.active_target_closure {
+        return Err(Error::InvalidInput(
+            "bounded historical candidate collection requires active target closure".into(),
         ));
     }
     if options.guard_refinement.max_passes > 0
@@ -1464,6 +1486,7 @@ fn checkpoint<const N: usize>(
         "max_rounds":options.max_rounds, "max_frontier":options.max_frontier,
         "max_requested":options.max_requested,
         "active_target_closure":options.active_target_closure,
+        "max_history_candidate_maps":options.max_history_candidate_maps,
         "max_direct_zero_attempts":options.max_direct_zero_attempts,
         "rule_precedence":if options.max_direct_zero_attempts > 0 {
             "new direct zeros, retained rules, ordinary fresh rules"

@@ -1,0 +1,131 @@
+error[E0308]: mismatched types
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs:178:91
+    |
+178 | ...{map.retain(|_,v|{let Some(c)=balanced(std::mem::take(v),stats)else{return false;};*v=vec![c];true;});}
+    |                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^-^
+    |                     |                                                                                |
+    |                     |                                                                                help: remove this semicolon to return this value
+    |                     expected `bool`, found `()`
+
+error[E0599]: no associated function or constant named `new` found for struct `rustred::algebra::CoefficientContext` in the current scope
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs:213:43
+    |
+213 |         let context = CoefficientContext::new(["guarded_diamond_n", "guarded_diamond_x"]);
+    |                                           ^^^ associated function or constant not found in `rustred::algebra::CoefficientContext`
+    |
+note: if you're trying to build a new `rustred::algebra::CoefficientContext`, consider using `rustred::algebra::CoefficientContext::try_new` which returns `Result<rustred::algebra::CoefficientContext, CoefficientContextError>`
+   --> /tmp/rustred-verified-program-reuse-20261010/src/algebra/coefficient/context.rs:32:5
+    |
+ 32 | /     pub fn try_new(
+ 33 | |         parameter_names: impl IntoIterator<Item = impl Into<String>>,
+ 34 | |     ) -> Result<Self, CoefficientContextError> {
+    | |______________________________________________^
+
+error[E0624]: method `seal_candidate` is private
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs:254:22
+    |
+254 |                       .seal_candidate(
+    |                        ^^^^^^^^^^^^^^ private method
+    |
+   ::: /tmp/rustred-verified-program-reuse-20261010/src/solver/guarded/replay.rs:49:5
+    |
+ 49 | /     pub(in crate::solver) fn seal_candidate(
+ 50 | |         &self,
+ 51 | |         candidate: RuleCandidate<N>,
+ 52 | |         order: IntegralOrder<N>,
+ 53 | |         discovery_domain: IndexDomain<N>,
+ 54 | |     ) -> Result<GuardedRule<N>, SolverError> {
+    | |____________________________________________- private method defined here
+
+error[E0599]: no associated function or constant named `new` found for struct `rustred::algebra::CoefficientContext` in the current scope
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs:286:43
+    |
+286 |         let context = CoefficientContext::new(["pending_n", "pending_x", "pending_y"]);
+    |                                           ^^^ associated function or constant not found in `rustred::algebra::CoefficientContext`
+    |
+note: if you're trying to build a new `rustred::algebra::CoefficientContext`, consider using `rustred::algebra::CoefficientContext::try_new` which returns `Result<rustred::algebra::CoefficientContext, CoefficientContextError>`
+   --> /tmp/rustred-verified-program-reuse-20261010/src/algebra/coefficient/context.rs:32:5
+    |
+ 32 | /     pub fn try_new(
+ 33 | |         parameter_names: impl IntoIterator<Item = impl Into<String>>,
+ 34 | |     ) -> Result<Self, CoefficientContextError> {
+    | |______________________________________________^
+
+error[E0624]: method `seal_candidate` is private
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs:348:22
+    |
+348 |                       .seal_candidate(
+    |                        ^^^^^^^^^^^^^^ private method
+    |
+   ::: /tmp/rustred-verified-program-reuse-20261010/src/solver/guarded/replay.rs:49:5
+    |
+ 49 | /     pub(in crate::solver) fn seal_candidate(
+ 50 | |         &self,
+ 51 | |         candidate: RuleCandidate<N>,
+ 52 | |         order: IntegralOrder<N>,
+ 53 | |         discovery_domain: IndexDomain<N>,
+ 54 | |     ) -> Result<GuardedRule<N>, SolverError> {
+    | |____________________________________________- private method defined here
+
+error[E0599]: no associated function or constant named `new` found for struct `rustred::algebra::CoefficientContext` in the current scope
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs:381:35
+    |
+381 |   let context=CoefficientContext::new(["balanced_capacity_n","balanced_capacity_x"]);let target=Integral::symbolic([0]).unwrap();le...
+    |                                   ^^^ associated function or constant not found in `rustred::algebra::CoefficientContext`
+    |
+note: if you're trying to build a new `rustred::algebra::CoefficientContext`, consider using `rustred::algebra::CoefficientContext::try_new` which returns `Result<rustred::algebra::CoefficientContext, CoefficientContextError>`
+   --> /tmp/rustred-verified-program-reuse-20261010/src/algebra/coefficient/context.rs:32:5
+    |
+ 32 | /     pub fn try_new(
+ 33 | |         parameter_names: impl IntoIterator<Item = impl Into<String>>,
+ 34 | |     ) -> Result<Self, CoefficientContextError> {
+    | |______________________________________________^
+
+error[E0624]: method `seal_candidate` is private
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs:383:76
+    |
+383 |     let rules=branches.iter().enumerate().map(|(ordinal,(point,rhs))|sources.seal_candidate(RuleCandidate{case:Case::generic(),targ...
+    |                                                                              ^^^^^^^^^^^^^^ private method
+    |
+   ::: /tmp/rustred-verified-program-reuse-20261010/src/solver/guarded/replay.rs:49:5
+    |
+ 49 | /     pub(in crate::solver) fn seal_candidate(
+ 50 | |         &self,
+ 51 | |         candidate: RuleCandidate<N>,
+ 52 | |         order: IntegralOrder<N>,
+ 53 | |         discovery_domain: IndexDomain<N>,
+ 54 | |     ) -> Result<GuardedRule<N>, SolverError> {
+    | |____________________________________________- private method defined here
+
+error[E0599]: no associated function or constant named `new` found for struct `rustred::algebra::CoefficientContext` in the current scope
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs:387:395
+    |
+387 | ...CoefficientContext::new(["pending_n","pending_x","pending_y"]);assert!(a.nonzero_conditions.contains(&c.parameter("pending_x").u...
+    |                        ^^^ associated function or constant not found in `rustred::algebra::CoefficientContext`
+    |
+note: if you're trying to build a new `rustred::algebra::CoefficientContext`, consider using `rustred::algebra::CoefficientContext::try_new` which returns `Result<rustred::algebra::CoefficientContext, CoefficientContextError>`
+   --> /tmp/rustred-verified-program-reuse-20261010/src/algebra/coefficient/context.rs:32:5
+    |
+ 32 | /     pub fn try_new(
+ 33 | |         parameter_names: impl IntoIterator<Item = impl Into<String>>,
+ 34 | |     ) -> Result<Self, CoefficientContextError> {
+    | |______________________________________________^
+
+error[E0599]: no associated function or constant named `new` found for struct `rustred::algebra::CoefficientContext` in the current scope
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/probe.rs:388:99
+    |
+388 | ...CoefficientContext::new(["balanced_sum_x"]);let x=c.parameter("balanced_sum_x").unwrap();let mut map=BTreeMap::new();let mut sta...
+    |                        ^^^ associated function or constant not found in `rustred::algebra::CoefficientContext`
+    |
+note: if you're trying to build a new `rustred::algebra::CoefficientContext`, consider using `rustred::algebra::CoefficientContext::try_new` which returns `Result<rustred::algebra::CoefficientContext, CoefficientContextError>`
+   --> /tmp/rustred-verified-program-reuse-20261010/src/algebra/coefficient/context.rs:32:5
+    |
+ 32 | /     pub fn try_new(
+ 33 | |         parameter_names: impl IntoIterator<Item = impl Into<String>>,
+ 34 | |     ) -> Result<Self, CoefficientContextError> {
+    | |______________________________________________^
+
+error: aborting due to 9 previous errors
+
+Some errors have detailed explanations: E0308, E0599, E0624.
+For more information about an error, try `rustc --explain E0308`.

@@ -1,0 +1,16 @@
+{
+  "schema": 1,
+  "scope": "Read-only design; no implementation, build, performance measurement or numerical acceptance",
+  "files": [
+    {
+      "path": "assessment.md",
+      "bytes": 7793,
+      "sha256": "469f89f736f8a0a4dde81b5c1f5c4dbe61e54d5b675038acf6fcc9b09823d8df"
+    },
+    {
+      "path": "review.json",
+      "bytes": 2423,
+      "sha256": "cd53a4038235e14419fc3a2c8281c2a66e3b2bd478cf6b1569d721632e44338a"
+    }
+  ]
+}

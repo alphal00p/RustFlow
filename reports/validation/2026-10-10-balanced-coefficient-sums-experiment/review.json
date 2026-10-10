@@ -1,0 +1,17 @@
+{
+  "scope": "independent read-only review of isolated balanced driver and design, not production implementation approval",
+  "reviewers": [
+    "root",
+    "boundary_owners"
+  ],
+  "findings": [],
+  "invariants_checked": [
+    "normalize before work, terminal, zero, occupation and rule checks",
+    "compact only exact-zero pending sums before key capacity rejection",
+    "preserve explicit excess-child WorkLimit records",
+    "retain all conditions from already applied rules",
+    "coalesce only NoApplicableRule failures",
+    "bounded rational-object buffer, no claim to bound coefficient bit growth"
+  ],
+  "future_library_requirement": "propagate errors through Result and reuse native owner helpers"
+}

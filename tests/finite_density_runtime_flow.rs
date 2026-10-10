@@ -71,6 +71,14 @@ impl Run {
             ),
             active_target_closure: setting("RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE", false),
             max_direct_zero_attempts: setting("RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS", 0),
+            max_history_candidate_maps: std::env::var(
+                "RUSTFLOW_WEIGHTED_MAX_HISTORY_CANDIDATE_MAPS",
+            )
+            .ok()
+            .map(|v| {
+                v.parse()
+                    .expect("invalid RUSTFLOW_WEIGHTED_MAX_HISTORY_CANDIDATE_MAPS")
+            }),
             checkpoints: Some(report.join("native-closure")),
             ..Default::default()
         };

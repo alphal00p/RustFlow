@@ -1,0 +1,17 @@
+{
+  "command": [
+    "timeout",
+    "600",
+    "/tmp/rustflow-balanced-coefficient-actual-attempt1",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/actual",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 412.43185018608347,
+  "user_seconds": 409.032102,
+  "system_seconds": 0.5771069999999999,
+  "peak_child_rss_kib": 456912,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

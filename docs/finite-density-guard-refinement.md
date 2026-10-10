@@ -140,6 +140,24 @@ closure independently of that wider coverage. Detailed historical failure files
 are written when checkpoints are enabled; the returned diagnostics always
 include their count.
 
+`max_history_candidate_maps` optionally bounds individual historical reductions
+in active closure, after the complete final source replay and all required
+original-target and basis-derivative audits. `None` keeps exhaustive collection;
+`Some(0)` omits the optional maps, and `Some(n)` selects the first n labels in
+stored-index lexicographic order. This bounds assessed labels, not elapsed time
+or native rule applications. Setting it without active closure is rejected.
+The runtime harness exposes `RUSTFLOW_WEIGHTED_MAX_HISTORY_CANDIDATE_MAPS`.
+
+Skipped labels are explicitly unassessed: they are not zero, unresolved, reduced,
+or additional masters. The closed checkpoint records the selected/unassessed
+partition and completed assessment counts; `retired-unresolved.json` contains
+only assessed failures. Every performed reduction still contributes its guards,
+and all prior required guards remain. Omitting optional applications can omit
+guards introduced only by those applications, so exhaustive and bounded runs
+need not return identical complete condition lists. The option does not remove
+expensive mandatory reductions. Stage events identify final replay, target and
+derivative audits, optional collection, and publication.
+
 `max_direct_zero_attempts` enables a bounded native point search before residual
 discovery. RustRed aligns each original source term with a requested point and
 checks whether that single instantiated identity proves a zero. It certifies and

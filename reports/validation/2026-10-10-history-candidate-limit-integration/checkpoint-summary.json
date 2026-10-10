@@ -1,0 +1,108 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "captured_utc": "2026-10-10T07:14:34.720123+00:00",
+  "source_files_verified_unchanged": 2484,
+  "build_artifacts_verified_unchanged": 12,
+  "report_bindings_verified": 213,
+  "native_tests_passed": 91,
+  "rustflow_tests_passed": 122,
+  "native_tests_ignored": 1,
+  "comparisons": {
+    "two-loop-fixed": {
+      "status": "passed",
+      "comparison_sha256": "263c4bd01a3ebd17a1532bfcb533b031961508862a18834961393eb7d86fc09e",
+      "binding_sha256": "9141b77ad25a154a6b1a21bfa389c899029798530d6ece477c39ac0f34905ddf",
+      "resources": {
+        "command": [
+          "timeout",
+          "600",
+          "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+          "--ignored",
+          "--exact",
+          "runtime_graph_full_amplitude",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 5.681716529186815,
+        "user_seconds": 5.565589,
+        "system_seconds": 0.075376,
+        "peak_child_rss_kib": 46100,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "counts": {
+        "reference_comparison_count": 40,
+        "independent_refinement_comparison_count": 30
+      }
+    },
+    "two-loop-laurent": {
+      "status": "passed",
+      "comparison_sha256": "ee432a8dd7e1be789a0b035fcad44629dcc74b535ac0daff564d6db0f0e9315a",
+      "binding_sha256": "29c78e8c5cedbc76e4c8874c96ffa659b64205a1c87542a524580c68d1760ba3",
+      "resources": {
+        "command": [
+          "timeout",
+          "600",
+          "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+          "--ignored",
+          "--exact",
+          "runtime_graph_full_laurent",
+          "--nocapture",
+          "--test-threads=1"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 137.64678456028923,
+        "user_seconds": 136.467666,
+        "system_seconds": 0.167035,
+        "peak_child_rss_kib": 49296,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "counts": {
+        "reference_comparison_count": 30,
+        "independent_refinement_comparison_count": 24
+      }
+    },
+    "massive-regression": {
+      "status": "passed",
+      "comparison_sha256": "369e982655707cfb6a01a0c86ddf73bb82b70c359ef3a401419a83eb09e05c95",
+      "binding_sha256": "7ceeb006881056ba56916825bb4080af37a8c2d35c12c0a3bd4e05b249937b99",
+      "resources": {
+        "command": [
+          "env",
+          "RUSTFLOW_WEIGHTED_SOURCE_POLICY=polynomial-closure-v1",
+          "RUSTFLOW_WEIGHTED_INPUT=examples/finite_density/massive_two_loop_sunset.json",
+          "RUSTFLOW_DENSITY_FLOW_EPSILON=4/5",
+          "RUSTFLOW_DENSITY_FLOW_PROFILES=28:80:12",
+          "RUSTFLOW_DENSITY_FLOW_REPORT=reports/validation/2026-10-10-history-candidate-limit-integration/history-candidate-limit-massive-regression",
+          "timeout",
+          "300",
+          "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+          "--ignored",
+          "--exact",
+          "runtime_graph_full_amplitude",
+          "--nocapture"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 47.319506513886154,
+        "user_seconds": 46.862266,
+        "system_seconds": 0.126694,
+        "peak_child_rss_kib": 73736,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "counts": {
+        "reference_comparison_count": 10,
+        "historical_same_profile_comparison_count": 10,
+        "independent_refinement_comparison_count": 0
+      }
+    }
+  },
+  "complete_final_source_replay_and_required_audits_retained": true,
+  "production_admission_unchanged": true,
+  "full_three_loop_predictions": 0,
+  "four_loop_predictions": 0,
+  "source_snapshot_sha256": "d0ad8d14a977a47300c30b577737e953273f6a7698ad221ae48b655524dae889",
+  "build_provenance_sha256": "d60039984d9a2fdb3fc31e5bf3ba84ff8bf7d084053e843757251aa7be1c7f3d",
+  "archive_map_sha256": "e3ce0cb72e98a20b231ac906113b9d341349b9570cb79aa8e787ee1f2a4337cb",
+  "scope": "Coherent optional historical-map limit integration and lower-loop regression gate only. Active massless profiles exercise cap0; massive inactive closure retains None. Higher-loop controls are separate. This final build record supersedes the application-time build_pending_at_application marker."
+}

@@ -1,0 +1,12 @@
+
+running 7 tests
+test tests::buffer_flush_is_bounded_and_balanced_rational_sum_is_exact ... ok
+test tests::cancelled_pending_keys_do_not_create_false_capacity_failures ... ok
+test tests::complete_native_budget_grid_preserves_all_conditions_failures_and_values ... ok
+test tests::coupled_index_guard_failure_remains_explicit ... ok
+test tests::invalid_and_unsupported_labels_are_explicit ... ok
+test tests::thirty_one_thirty_two_thirty_three_and_cross_buffer_cancellation ... ok
+test tests::unused_guard_cancels_but_used_guard_survives_after_native_reload ... ok
+
+test result: ok. 7 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.15s
+

@@ -259,8 +259,19 @@ finds one mandatory reduction taking about 314 seconds and 15,021 native rule
 applications. An [exact operation diagnostic](../reports/validation/2026-10-10-final-reduction-phase-diagnostic/README.md)
 attributes 82% of measured operation time to coefficient addition; its complete
 answer agrees with native reduction. Balanced exact accumulation is being tested
-separately. Optional historical candidate maps are another bounded-work proposal,
-but skipping them cannot remove this mandatory reduction.
+separately. The isolated balanced-addition trial reproduces all coefficients,
+ordered conditions and 15,021 applications exactly, but its roughly 3% time
+difference on the shared host is insufficient evidence for production promotion.
+
+The [optional historical-map limit](../reports/validation/2026-10-10-history-candidate-limit-integration/README.md)
+is now integrated. It preserves the full default and every mandatory final
+replay/target/derivative audit; skipped labels remain unassessed. All 213 native
+and RustFlow regression tests pass. Active massless two-loop fixed-dimension
+and Laurent runs exercise a zero optional-map cap and retain all 40/30 and
+30/24 reference/refinement comparisons. The inactive massive profile retains
+the default and passes ten independent, ten historical and two assembly checks.
+This option removes optional historical applications, not expensive required
+reductions. A fresh singleton control uses its own static build capsule.
 
 A fresh [partial-placement closure pilot](../reports/validation/2026-10-10-partial-placement-closure-pilot/README.md)
 closes singleton cut `[3]`, shifting slot `[0]`, on two basis integrals in 12

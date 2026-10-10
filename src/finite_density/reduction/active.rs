@@ -271,7 +271,7 @@ pub(super) fn prepare<const N: usize>(
         } else {
             None
         };
-        let active_state = serde_json::json!({
+        let mut active_state = serde_json::json!({
             "requested_discovery":requested_discovery,
             "historical_requests":history.iter().map(|i| i.to_vec()).collect::<Vec<_>>(),
             "submitted_requests":requested.iter().map(|i| i.to_vec()).collect::<Vec<_>>(),
@@ -328,12 +328,19 @@ pub(super) fn prepare<const N: usize>(
             new_derivatives: needed.difference(&history).count(),
         })?;
         if !deferred {
+            run.emit(Progress::Stage {
+                name: "active weighted final complete source replay".into(),
+            })?;
+            run.cancellation.check()?;
             let program = found
                 .program
                 .with_terminals_replayed(frontier.iter().copied(), options.max_reused_rules)?;
             // Recompute every sum with this single final replayed program.
             let mut failed = Vec::new();
             let mut target_weights = Vec::new();
+            run.emit(Progress::Stage {
+                name: "active weighted final original target audit".into(),
+            })?;
             for target in targets {
                 let sum = reduce_sum(
                     &program,
@@ -348,6 +355,9 @@ pub(super) fn prepare<const N: usize>(
                 failed.extend(residuals(sum));
             }
             let mut matrix = Vec::new();
+            run.emit(Progress::Stage {
+                name: "active weighted final basis derivative audit".into(),
+            })?;
             for leaf in &frontier {
                 let derivative = deformation.derivative(*leaf)?;
                 let sum = reduce_sum(
@@ -383,9 +393,21 @@ pub(super) fn prepare<const N: usize>(
             }
             let mut candidates = BTreeMap::new();
             let mut retired = Vec::new();
-            // Individually unresolved historical rows never enter candidates.
-            // They have no role in the just-audited physical target connection.
-            for label in &history {
+            // The deterministic ordered prefix is optional. It neither changes
+            // the audited connection nor installs maps for unvisited history.
+            let selected = options
+                .max_history_candidate_maps
+                .unwrap_or(usize::MAX)
+                .min(history.len());
+            diagnostics.history_candidate_selected = selected;
+            diagnostics.history_candidate_unassessed = history.len() - selected;
+            run.emit(Progress::Stage {
+                name: format!(
+                    "active weighted optional historical maps: {selected} selected, {} unassessed",
+                    history.len() - selected
+                ),
+            })?;
+            for label in history.iter().take(selected) {
                 let reduced = reduce_sum(
                     &program,
                     &BTreeMap::from([(*label, Atom::num(1))]),
@@ -395,7 +417,9 @@ pub(super) fn prepare<const N: usize>(
                     &mut conditions,
                     run,
                 )?;
+                diagnostics.history_candidate_assessed += 1;
                 if reduced.failures.is_empty() && reduced.leaves.is_empty() {
+                    diagnostics.history_candidate_maps += 1;
                     candidates.insert(
                         native_integral(label, deformation.physical_arity)?,
                         linear_combination(&reduced.terms, deformation.physical_arity)?,
@@ -408,6 +432,17 @@ pub(super) fn prepare<const N: usize>(
                             "reason":format!("{:?}",r.reason)})).collect::<Vec<_>>()}));
                 }
             }
+            active_state["historical_candidate_collection"] = serde_json::json!({
+                "max_history_candidate_maps": options.max_history_candidate_maps,
+                "selection": "ascending stored-index lexicographic prefix",
+                "selected": history.iter().take(selected).map(|i| i.to_vec()).collect::<Vec<_>>(),
+                "unassessed": history.iter().skip(selected).map(|i| i.to_vec()).collect::<Vec<_>>(),
+                "assessed_count": diagnostics.history_candidate_assessed,
+                "certified_map_count": diagnostics.history_candidate_maps,
+                "assessed_unresolved_count": diagnostics.retired_unresolved,
+                "unassessed_are_unresolved": false,
+                "history_is_coverage_certificate": false,
+            });
             if let Some(directory) = &options.checkpoints {
                 let path = directory.join("retired-unresolved.json");
                 let temporary = directory.join("retired-unresolved.json.part");
@@ -417,6 +452,9 @@ pub(super) fn prepare<const N: usize>(
                 )?;
                 std::fs::rename(temporary, path)?;
             }
+            run.emit(Progress::Stage {
+                name: "active weighted final closed checkpoint".into(),
+            })?;
             run.cancellation.check()?;
             checkpoint(
                 &options,
@@ -475,6 +513,139 @@ mod tests {
             max_domains_per_residual: 32,
             ..Default::default()
         }
+    }
+
+    #[test]
+    fn bounded_history_maps_leave_the_required_connection_and_program_unchanged() {
+        let (context, deformation) = super::super::tests::compact_context();
+        let targets = [BTreeMap::from([([1, 0], Atom::num(1))])];
+        let make = |limit| {
+            let outcome = prepare_weighted_system(
+                &context,
+                &targets,
+                &deformation,
+                WeightedClosureOptions {
+                    max_history_candidate_maps: limit,
+                    ..options()
+                },
+                &RunContext::default(),
+            )
+            .unwrap();
+            let WeightedClosureOutcome::Closed(closed) = outcome else {
+                panic!("{outcome:?}")
+            };
+            closed
+        };
+        let all = make(None);
+        assert!(all.diagnostics.historical_requested > 1);
+        assert_eq!(all.diagnostics.history_candidate_unassessed, 0);
+        for limit in [0, 1, usize::MAX] {
+            let bounded = make(Some(limit));
+            assert_eq!(bounded.reduced.basis, all.reduced.basis);
+            assert_eq!(bounded.reduced.matrix, all.reduced.matrix);
+            assert_eq!(bounded.reduced.targets, all.reduced.targets);
+            assert_eq!(
+                bounded.program.encode(Default::default()).unwrap(),
+                all.program.encode(Default::default()).unwrap()
+            );
+            let diagnostics = &bounded.diagnostics;
+            let selected = limit.min(diagnostics.historical_requested);
+            assert_eq!(diagnostics.history_candidate_selected, selected);
+            assert_eq!(diagnostics.history_candidate_assessed, selected);
+            assert_eq!(
+                diagnostics.history_candidate_maps,
+                bounded.reduced.candidates.len()
+            );
+            assert_eq!(
+                diagnostics.history_candidate_maps + diagnostics.retired_unresolved,
+                selected
+            );
+            assert_eq!(
+                selected + diagnostics.history_candidate_unassessed,
+                diagnostics.historical_requested
+            );
+            for (label, map) in &bounded.reduced.candidates {
+                assert_eq!(all.reduced.candidates.get(label), Some(map));
+            }
+            for condition in &bounded.reduced.nonzero_conditions {
+                assert!(all.reduced.nonzero_conditions.contains(condition));
+            }
+        }
+    }
+
+    #[test]
+    fn bounded_history_option_rejects_inactive_closure() {
+        let (context, deformation) = super::super::tests::compact_context();
+        let result = prepare_weighted_system(
+            &context,
+            &[BTreeMap::from([([1, 0], Atom::num(1))])],
+            &deformation,
+            WeightedClosureOptions {
+                max_history_candidate_maps: Some(0),
+                ..Default::default()
+            },
+            &RunContext::default(),
+        );
+        assert!(
+            matches!(result, Err(Error::InvalidInput(message)) if message.contains("requires active"))
+        );
+    }
+
+    #[test]
+    fn skipped_history_does_not_suppress_required_work_failure() {
+        let (context, deformation) = super::super::tests::compact_context();
+        let result = prepare_weighted_system(
+            &context,
+            &[BTreeMap::from([([1, 0], Atom::num(1))])],
+            &deformation,
+            WeightedClosureOptions {
+                max_history_candidate_maps: Some(0),
+                application: GuardedReductionLimits {
+                    max_rule_applications: 0,
+                    ..Default::default()
+                },
+                ..options()
+            },
+            &RunContext::default(),
+        )
+        .unwrap();
+        assert!(matches!(result, WeightedClosureOutcome::Unresolved(_)));
+    }
+
+    #[test]
+    fn cancellation_before_final_replay_cannot_publish_a_closed_result() {
+        use std::sync::{Arc, Mutex};
+        let (context, deformation) = super::super::tests::compact_context();
+        let token = crate::CancellationToken::default();
+        let captured = token.clone();
+        let stages = Arc::new(Mutex::new(Vec::new()));
+        let logged = stages.clone();
+        let run = RunContext {
+            cancellation: token,
+            progress: Some(Arc::new(move |event| {
+                if let Progress::Stage { name } = event {
+                    logged.lock().unwrap().push(name.clone());
+                    if name == "active weighted final complete source replay" {
+                        captured.cancel();
+                    }
+                }
+            })),
+        };
+        let result = prepare_weighted_system(
+            &context,
+            &[BTreeMap::from([([1, 0], Atom::num(1))])],
+            &deformation,
+            WeightedClosureOptions {
+                max_history_candidate_maps: Some(0),
+                ..options()
+            },
+            &run,
+        );
+        assert!(matches!(result, Err(Error::Cancelled)));
+        assert_eq!(
+            *stages.lock().unwrap(),
+            vec!["active weighted final complete source replay"]
+        );
     }
 
     #[test]
@@ -724,6 +895,108 @@ mod tests {
                 .iter()
                 .all(|r| r["reason"] == "NoApplicableRule")
         }));
+        std::fs::remove_dir_all(directory).unwrap();
+    }
+
+    #[test]
+    fn skipped_cancelled_target_history_retains_required_guard_and_explicit_unassessed_labels() {
+        use crate::finite_density::guarded::{
+            GuardedIdentity, GuardedIdentityTerm, GuardedMeasureIdentity,
+        };
+        let eta = symbol!("active_cancel_eta");
+        let x = symbol!("active_cancel_x");
+        let roles = [IndexRole::Ordinary; 2];
+        let context = GuardedContext::new(
+            GuardedMeasureIdentity {
+                measure: "synthetic pair with equal moments".into(),
+                support: "symbolic guarded fixture".into(),
+                orientation: "unit".into(),
+                normalization: "unit".into(),
+                branch: "x nonzero".into(),
+                deformation: "fixed difference is zero for every eta".into(),
+            },
+            roles,
+            [symbol!("active_cancel_a"), symbol!("active_cancel_b")],
+            vec![eta, x],
+            vec![GuardedIdentity {
+                id: "equal-moments".into(),
+                domain: IndexDomain::new([IndexBounds::fixed(1), IndexBounds::fixed(0)]).unwrap(),
+                terms: vec![
+                    GuardedIdentityTerm {
+                        shift: [0, 0],
+                        coefficient: Atom::num(1),
+                    },
+                    GuardedIdentityTerm {
+                        shift: [-1, 1],
+                        coefficient: Atom::num(-1),
+                    },
+                ],
+                nonzero_conditions: vec![Atom::var(x)],
+            }],
+        )
+        .unwrap();
+        let deformation = FixedShellDeformation::new(
+            eta,
+            AuxiliaryConvention::EuclideanPlusT,
+            roles,
+            [true, false],
+        )
+        .unwrap();
+        let directory = std::env::temp_dir().join(format!(
+            "rustflow-active-unassessed-test-{}",
+            std::process::id()
+        ));
+        let outcome = prepare_weighted_system(
+            &context,
+            &[BTreeMap::from([
+                ([1, 0], Atom::num(1)),
+                ([0, 1], Atom::num(-1)),
+            ])],
+            &deformation,
+            WeightedClosureOptions {
+                checkpoints: Some(directory.clone()),
+                max_history_candidate_maps: Some(0),
+                ..options()
+            },
+            &RunContext::default(),
+        )
+        .unwrap();
+        let WeightedClosureOutcome::Closed(closed) = outcome else {
+            panic!("{outcome:?}")
+        };
+        assert!(closed.reduced.basis.is_empty());
+        assert!(closed.reduced.targets[0].is_empty());
+        assert!(closed.reduced.candidates.is_empty());
+        assert!(closed.differential_system().is_none());
+        assert_eq!(closed.diagnostics.retired_unresolved, 0);
+        assert_eq!(closed.diagnostics.history_candidate_assessed, 0);
+        assert_eq!(closed.diagnostics.history_candidate_unassessed, 2);
+        assert!(
+            closed
+                .reduced
+                .nonzero_conditions
+                .iter()
+                .any(|condition| condition.contains_symbol(x))
+        );
+        let retired: serde_json::Value = serde_json::from_slice(
+            &std::fs::read(directory.join("retired-unresolved.json")).unwrap(),
+        )
+        .unwrap();
+        assert!(retired.as_array().unwrap().is_empty());
+        let metadata: serde_json::Value = serde_json::from_slice(
+            &std::fs::read(directory.join(format!(
+                "round-{:03}-closed.json",
+                closed.diagnostics.rounds - 1
+            )))
+            .unwrap(),
+        )
+        .unwrap();
+        assert_eq!(metadata["max_history_candidate_maps"], 0);
+        let coverage = &metadata["active_state"]["historical_candidate_collection"];
+        assert!(coverage["selected"].as_array().unwrap().is_empty());
+        assert_eq!(coverage["unassessed"], serde_json::json!([[0, 1], [1, 0]]));
+        assert_eq!(coverage["unassessed_are_unresolved"], false);
+        assert_eq!(coverage["history_is_coverage_certificate"], false);
         std::fs::remove_dir_all(directory).unwrap();
     }
 

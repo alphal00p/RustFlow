@@ -1,0 +1,17 @@
+{
+  "applications": 14947,
+  "elapsed_seconds": 302.966920453,
+  "pending": 69,
+  "stats": {
+    "addition_seconds": 247.55804046499918,
+    "additions": 64875,
+    "apply_seconds": 12.373655023999993,
+    "buffer_flushes": 117,
+    "capacity_compactions": 0,
+    "multiplies": 80802,
+    "multiply_seconds": 37.73159991500009,
+    "peak_buffer": 32,
+    "peak_pending": 6104,
+    "popped_zero_keys": 185
+  }
+}

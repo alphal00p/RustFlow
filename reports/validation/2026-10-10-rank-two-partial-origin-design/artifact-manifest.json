@@ -1,0 +1,30 @@
+{
+  "files": [
+    {
+      "bytes": 292882,
+      "path": "chart-checks.json",
+      "sha256": "ce170db0ec8394645b6dc287777c24c7ad60d380009b702e4f79020e4064af67"
+    },
+    {
+      "bytes": 10189,
+      "path": "chart_check.py",
+      "sha256": "f97b324c53d89f7d36007c180bf50156c59c411a5fe08861961d5a275e3d3df6"
+    },
+    {
+      "bytes": 16631,
+      "path": "design.md",
+      "sha256": "84e9498c4336c160d9282b5ec91b44b98ea3fb8bd0614005c99a739074f392d2"
+    },
+    {
+      "bytes": 3133,
+      "path": "independent-review.json",
+      "sha256": "27438b3f184bcafc0d4fce8d30716879de360553d139a6a7819e574be8088809"
+    },
+    {
+      "bytes": 996,
+      "path": "replay.json",
+      "sha256": "ee60033291f11d0f70deaa6d39a34698391b85b5ecf439ae6e7f16dbb03d790c"
+    }
+  ],
+  "scope": "Frozen proof/design and exact rational chart replay only; no production source, native permit, endpoint/boundary admission or numerical integral result."
+}

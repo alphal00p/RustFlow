@@ -1,0 +1,1421 @@
+{
+  "contributions": [
+    {
+      "cut_slots": [],
+      "values": [
+        "(0+0i)",
+        "(0+0i)"
+      ]
+    },
+    {
+      "cut_slots": [
+        0
+      ],
+      "values": [
+        "(0+0i)",
+        "(0+0i)"
+      ]
+    },
+    {
+      "cut_slots": [
+        1
+      ],
+      "values": [
+        "(0+0i)",
+        "(0+0i)"
+      ]
+    },
+    {
+      "cut_slots": [
+        0,
+        1
+      ],
+      "values": [
+        "(1.98857275099366938383548120226008221751708490207069705747557247759496976e-8+0i)",
+        "(-4.86095561354008071604228738330242319837509642728392614049584383412103719e-8+0i)"
+      ]
+    }
+  ],
+  "digits": 28,
+  "empty_support": [],
+  "epsilon": "-5/4",
+  "full_amplitude": true,
+  "guard_digits": 40,
+  "independent_reference_comparisons": 0,
+  "normalization": "unscaled Euclidean amplitude",
+  "occupied_reports": [
+    {
+      "cut_slots": [
+        0
+      ],
+      "report": {
+        "basis_size": 2,
+        "boundary": "OccupiedBoundaryProvenance { regions: [OccupiedRegionProvenance { hard: [false, false], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [1, 1], half_orders: [None, None] }, OccupiedRegionProvenance { hard: [false, true], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [-1+rustflow_occupied::epsilon, -1+rustflow_occupied::epsilon], half_orders: [Some(0), Some(0)] }], integrated_coefficients: 2, integrated_products: 2, scaleless_noncompact_products: 0, vanishing_required_cut_coefficients: 0, massless_origin: Some(\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\") }",
+        "construction": "weighted_amf",
+        "contour_admission": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=one-virtual-loop-null-cone;input=b57a82738226c09fc07a78b20ec57422a08975c6518a019ab56071d8a6fe37f3;cuts=[0];shifted=[1, 2];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\"loops=2;physical=3;input=5\", \"det=1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_2\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"-1*rustflow_occupied::{}::q_3+1\", \"rustflow_occupied::{}::q_3\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"1\", \"0\", \"0\", \"1\", \"shell=0:0:5:6:0:1\", \"target=0:[1, 1, 1, 0, 0, 0, 0]:-1\", \"target=1:[1, 1, 1, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 0, 1, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 1, 0, 0, 0, 0, 0]:1/2\", \"target=1:[2, 1, 1, -1, -1, 0, 0]:-1\", \"target=1:[2, 1, 1, 0, 0, 0, 0]:0\"];proof=MasslessStructuralAudit { proof_version: \"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\", virtual_loops: 1, virtual_affine_shift: [], denominator_rows: [(1, [\"1\"], \"0\"), (2, [\"-1\"], \"1\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\"1\"] }",
+        "massless_endpoint": {
+          "endpoint_structure": {
+            "block_a_lower_bounds": [],
+            "block_assignments": [],
+            "block_q_upper_bounds": [
+              "1"
+            ],
+            "block_representatives": [],
+            "denominator_rows": [
+              [
+                1,
+                [
+                  "1"
+                ],
+                "0"
+              ],
+              [
+                2,
+                [
+                  "-1"
+                ],
+                "1"
+              ]
+            ],
+            "proof_version": "positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint",
+            "virtual_affine_shift": [],
+            "virtual_loops": 1
+          },
+          "labels": [
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "7/3",
+              "indices": [
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -1,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "7/3",
+              "indices": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -1,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "13/3",
+              "indices": [
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 2,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "13/3",
+              "indices": [
+                2,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -4,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                1
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "13/3",
+              "indices": [
+                2,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -4,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                1
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "19/3",
+              "indices": [
+                2,
+                1,
+                1,
+                -1,
+                -1,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -4,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                1
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 2,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "19/3",
+              "indices": [
+                2,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -4,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                1
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 2,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            }
+          ],
+          "origin_identity": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D"
+        },
+        "native_storage_capacity": 7,
+        "nonzero_conditions": [
+          "-2+2*rustflow_occupied::{}::epsilon",
+          "-3+2*rustflow_occupied::{}::epsilon",
+          "-4+2*rustflow_occupied::{}::epsilon",
+          "16*rustflow_occupied::{}::eta",
+          "2*rustflow_occupied::{}::epsilon",
+          "2*rustflow_occupied::{}::eta",
+          "32*rustflow_occupied::{}::eta",
+          "4*rustflow_occupied::{}::epsilon",
+          "4*rustflow_occupied::{}::eta",
+          "rustflow_occupied::{}::eta"
+        ],
+        "physical_arity": 7,
+        "shifted_slots": [
+          1,
+          2
+        ],
+        "source_options": {
+          "free_virtual_zero_sectors": true,
+          "policy": "polynomial-closure-v1",
+          "positive_compact_energy_powers": false
+        },
+        "values": [
+          "(0+0i)",
+          "(0+0i)"
+        ]
+      }
+    },
+    {
+      "cut_slots": [
+        1
+      ],
+      "report": {
+        "basis_size": 2,
+        "boundary": "OccupiedBoundaryProvenance { regions: [OccupiedRegionProvenance { hard: [false, false], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [1, 1], half_orders: [None, None] }, OccupiedRegionProvenance { hard: [false, true], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [-1+rustflow_occupied::epsilon, -1+rustflow_occupied::epsilon], half_orders: [Some(0), Some(0)] }], integrated_coefficients: 2, integrated_products: 2, scaleless_noncompact_products: 0, vanishing_required_cut_coefficients: 0, massless_origin: Some(\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\") }",
+        "construction": "weighted_amf",
+        "contour_admission": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=one-virtual-loop-null-cone;input=b57a82738226c09fc07a78b20ec57422a08975c6518a019ab56071d8a6fe37f3;cuts=[1];shifted=[0, 2];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\"loops=2;physical=3;input=5\", \"det=-1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_0\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_3\", \"-1*rustflow_occupied::{}::q_3+1\", \"rustflow_occupied::{}::q_3\", \"role=Ordinary\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"0\", \"1\", \"1\", \"0\", \"shell=0:1:5:6:0:1\", \"target=0:[1, 1, 1, 0, 0, 0, 0]:-1\", \"target=1:[1, 1, 1, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 1, 0, 0, 0, 0, 0]:1/2\", \"target=1:[2, 1, 1, -1, -1, 0, 0]:-1\", \"target=1:[2, 1, 1, 0, 0, 0, 0]:0\"];proof=MasslessStructuralAudit { proof_version: \"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\", virtual_loops: 1, virtual_affine_shift: [], denominator_rows: [(0, [\"1\"], \"0\"), (2, [\"1\"], \"-1\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\"1\"] }",
+        "massless_endpoint": {
+          "endpoint_structure": {
+            "block_a_lower_bounds": [],
+            "block_assignments": [],
+            "block_q_upper_bounds": [
+              "1"
+            ],
+            "block_representatives": [],
+            "denominator_rows": [
+              [
+                0,
+                [
+                  "1"
+                ],
+                "0"
+              ],
+              [
+                2,
+                [
+                  "1"
+                ],
+                "-1"
+              ]
+            ],
+            "proof_version": "positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint",
+            "virtual_affine_shift": [],
+            "virtual_loops": 1
+          },
+          "labels": [
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "7/3",
+              "indices": [
+                0,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -1,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "7/3",
+              "indices": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -1,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "13/3",
+              "indices": [
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 2,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "13/3",
+              "indices": [
+                2,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 2,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "19/3",
+              "indices": [
+                2,
+                1,
+                1,
+                -1,
+                -1,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 3,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            },
+            {
+              "active_virtual_rank": 1,
+              "classification": "uniform-null-cone-endpoint",
+              "high_dimension_witness": "19/3",
+              "indices": [
+                2,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "UV-meromorphic virtual null-germ endpoint jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 3,
+              "virtual_block_positive_power_sums": [
+                0
+              ]
+            }
+          ],
+          "origin_identity": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D"
+        },
+        "native_storage_capacity": 7,
+        "nonzero_conditions": [
+          "-12*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2+9",
+          "-2*rustflow_occupied::{}::eta",
+          "-24*rustflow_occupied::{}::epsilon+18+8*rustflow_occupied::{}::epsilon^2",
+          "-3+2*rustflow_occupied::{}::epsilon",
+          "-32*rustflow_occupied::{}::eta",
+          "-32+16*rustflow_occupied::{}::epsilon",
+          "-4*rustflow_occupied::{}::eta",
+          "-4+2*rustflow_occupied::{}::epsilon",
+          "-6*rustflow_occupied::{}::eta",
+          "-8*rustflow_occupied::{}::eta",
+          "-8+4*rustflow_occupied::{}::epsilon",
+          "2*rustflow_occupied::{}::eta",
+          "rustflow_occupied::{}::eta"
+        ],
+        "physical_arity": 7,
+        "shifted_slots": [
+          0,
+          2
+        ],
+        "source_options": {
+          "free_virtual_zero_sectors": true,
+          "policy": "polynomial-closure-v1",
+          "positive_compact_energy_powers": false
+        },
+        "values": [
+          "(0+0i)",
+          "(0+0i)"
+        ]
+      }
+    },
+    {
+      "cut_slots": [
+        0,
+        1
+      ],
+      "report": {
+        "basis_size": 5,
+        "boundary": "OccupiedBoundaryProvenance { regions: [OccupiedRegionProvenance { hard: [false, false], transformation: [[1, 0], [0, 1]], jacobian_determinant: 1, exponents: [0, 1, 1, 1, 1], half_orders: [Some(0), None, None, None, None] }], integrated_coefficients: 1, integrated_products: 1, scaleless_noncompact_products: 0, vanishing_required_cut_coefficients: 0, massless_origin: Some(\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\") }",
+        "construction": "weighted_amf",
+        "contour_admission": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=two-compact-spacelike-transfer;input=b57a82738226c09fc07a78b20ec57422a08975c6518a019ab56071d8a6fe37f3;cuts=[0, 1];shifted=[2];options=WeightedSourceOptions { policy: PolynomialClosure, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\"loops=2;physical=3;input=5\", \"det=1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_2\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_2+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"-1*rustflow_occupied::{}::q_3+1\", \"rustflow_occupied::{}::q_3\", \"-1*rustflow_occupied::{}::q_4+1\", \"rustflow_occupied::{}::q_4\", \"role=RequiredCut\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"role=Occupation\", \"role=Occupation\", \"1\", \"0\", \"0\", \"1\", \"shell=0:0:5:6:0:1\", \"shell=1:1:7:8:0:1\", \"target=0:[1, 1, 1, 0, 0, 0, 0, 0, 0]:-1\", \"target=1:[1, 1, 1, 0, 0, 0, 0, 0, 0]:-1/2\", \"target=1:[2, 1, 0, 0, 0, 0, 0, 0, 0]:1/2\", \"target=1:[2, 1, 1, -1, -1, 0, 0, 0, 0]:-1\", \"target=1:[2, 1, 1, 0, 0, 0, 0, 0, 0]:0\"];proof=MasslessStructuralAudit { proof_version: \"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\", virtual_loops: 0, virtual_affine_shift: [], denominator_rows: [(2, [], \"1\")], block_assignments: [(2, None)], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [] }",
+        "massless_endpoint": {
+          "endpoint_structure": {
+            "block_a_lower_bounds": [],
+            "block_assignments": [
+              [
+                2,
+                null
+              ]
+            ],
+            "block_q_upper_bounds": [],
+            "block_representatives": [],
+            "denominator_rows": [
+              [
+                2,
+                [],
+                "1"
+              ]
+            ],
+            "proof_version": "positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint",
+            "virtual_affine_shift": [],
+            "virtual_loops": 0
+          },
+          "labels": [
+            {
+              "active_virtual_rank": 0,
+              "classification": "pure-compact-transfer-endpoint",
+              "high_dimension_witness": "7/3",
+              "indices": [
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 0 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 1 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -1,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "compact collinear transfer after finite jets"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0,
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 0,
+              "virtual_block_positive_power_sums": []
+            },
+            {
+              "active_virtual_rank": 0,
+              "classification": "pure-compact-transfer-endpoint",
+              "high_dimension_witness": "13/3",
+              "indices": [
+                1,
+                1,
+                1,
+                -1,
+                -1,
+                1,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 0 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 1 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "compact collinear transfer after finite jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0,
+                0
+              ],
+              "pure_transfer_positive_power_sum": 1,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": []
+            },
+            {
+              "active_virtual_rank": 0,
+              "classification": "pure-compact-transfer-endpoint",
+              "high_dimension_witness": "13/3",
+              "indices": [
+                1,
+                1,
+                1,
+                0,
+                -1,
+                1,
+                0,
+                1,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 0 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 1 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "compact collinear transfer after finite jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0,
+                0
+              ],
+              "pure_transfer_positive_power_sum": 1,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": []
+            },
+            {
+              "active_virtual_rank": 0,
+              "classification": "pure-compact-transfer-endpoint",
+              "high_dimension_witness": "13/3",
+              "indices": [
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 0 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 1 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "compact collinear transfer after finite jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0,
+                0
+              ],
+              "pure_transfer_positive_power_sum": 1,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": []
+            },
+            {
+              "active_virtual_rank": 0,
+              "classification": "pure-compact-transfer-endpoint",
+              "high_dimension_witness": "13/3",
+              "indices": [
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 0 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 1 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "compact collinear transfer after finite jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                0,
+                0
+              ],
+              "pure_transfer_positive_power_sum": 1,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": []
+            },
+            {
+              "active_virtual_rank": 0,
+              "classification": "pure-compact-transfer-endpoint",
+              "high_dimension_witness": "16/3",
+              "indices": [
+                2,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -5,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 0 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 1 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "compact collinear transfer after finite jets"
+                },
+                {
+                  "degree": {
+                    "constant": -4,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 0"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 1"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                1,
+                0
+              ],
+              "pure_transfer_positive_power_sum": 0,
+              "uncut_positive_power_sum": 0,
+              "virtual_block_positive_power_sums": []
+            },
+            {
+              "active_virtual_rank": 0,
+              "classification": "pure-compact-transfer-endpoint",
+              "high_dimension_witness": "19/3",
+              "indices": [
+                2,
+                1,
+                1,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -6,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 0 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -4,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 1 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "compact collinear transfer after finite jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 1"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                1,
+                0
+              ],
+              "pure_transfer_positive_power_sum": 1,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": []
+            },
+            {
+              "active_virtual_rank": 0,
+              "classification": "pure-compact-transfer-endpoint",
+              "high_dimension_witness": "19/3",
+              "indices": [
+                2,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0,
+                0
+              ],
+              "inequalities": [
+                {
+                  "degree": {
+                    "constant": -6,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 0 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -4,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "compact radius 1 after finite transfer jets"
+                },
+                {
+                  "degree": {
+                    "constant": -3,
+                    "twice_dimension_coefficient": 1
+                  },
+                  "stratum": "compact collinear transfer after finite jets"
+                },
+                {
+                  "degree": {
+                    "constant": -2,
+                    "twice_dimension_coefficient": 2
+                  },
+                  "stratum": "common compact origin domain at loop 1"
+                }
+              ],
+              "mass_and_upper_jet_orders": [
+                1,
+                0
+              ],
+              "pure_transfer_positive_power_sum": 1,
+              "uncut_positive_power_sum": 1,
+              "virtual_block_positive_power_sums": []
+            }
+          ],
+          "origin_identity": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D"
+        },
+        "native_storage_capacity": 9,
+        "nonzero_conditions": [
+          "-1+rustflow_occupied::{}::epsilon",
+          "-10*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+12*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta",
+          "-10*rustflow_occupied::{}::epsilon+12+2*rustflow_occupied::{}::epsilon^2",
+          "-114688*rustflow_occupied::{}::epsilon^2+-196608+16384*rustflow_occupied::{}::epsilon^3+262144*rustflow_occupied::{}::epsilon",
+          "-12*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta+9*rustflow_occupied::{}::eta",
+          "-12*rustflow_occupied::{}::epsilon+4*rustflow_occupied::{}::epsilon^2+9",
+          "-12*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-12+-7*rustflow_occupied::{}::epsilon^2+16*rustflow_occupied::{}::epsilon+rustflow_occupied::{}::epsilon^3",
+          "-12+4*rustflow_occupied::{}::epsilon",
+          "-12288*rustflow_occupied::{}::epsilon+4096*rustflow_occupied::{}::epsilon^2+9216",
+          "-14*rustflow_occupied::{}::epsilon^2+-24+2*rustflow_occupied::{}::epsilon^3+32*rustflow_occupied::{}::epsilon",
+          "-16*rustflow_occupied::{}::epsilon+16+4*rustflow_occupied::{}::epsilon^2",
+          "-16384+8192*rustflow_occupied::{}::epsilon",
+          "-2*rustflow_occupied::{}::eta+rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-2+2*rustflow_occupied::{}::epsilon",
+          "-2+rustflow_occupied::{}::epsilon",
+          "-20*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+24*rustflow_occupied::{}::eta+4*rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta",
+          "-20*rustflow_occupied::{}::epsilon+24+4*rustflow_occupied::{}::epsilon^2",
+          "-24576*rustflow_occupied::{}::epsilon+18432+8192*rustflow_occupied::{}::epsilon^2",
+          "-24576*rustflow_occupied::{}::eta+8192*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-24576+8192*rustflow_occupied::{}::epsilon",
+          "-28*rustflow_occupied::{}::epsilon^2+-48+4*rustflow_occupied::{}::epsilon^3+64*rustflow_occupied::{}::epsilon",
+          "-3*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-3*rustflow_occupied::{}::eta+rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-3+2*rustflow_occupied::{}::epsilon",
+          "-3+rustflow_occupied::{}::epsilon",
+          "-3072*rustflow_occupied::{}::eta+2048*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-32768*rustflow_occupied::{}::epsilon+32768+8192*rustflow_occupied::{}::epsilon^2",
+          "-4*rustflow_occupied::{}::epsilon+4+rustflow_occupied::{}::epsilon^2",
+          "-4*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-4+2*rustflow_occupied::{}::epsilon",
+          "-4+4*rustflow_occupied::{}::epsilon",
+          "-4096*rustflow_occupied::{}::eta+2048*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-56*rustflow_occupied::{}::epsilon^2*rustflow_occupied::{}::eta+-96*rustflow_occupied::{}::eta+128*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta+8*rustflow_occupied::{}::epsilon^3*rustflow_occupied::{}::eta",
+          "-6*rustflow_occupied::{}::eta+2*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-6+2*rustflow_occupied::{}::epsilon",
+          "-6144*rustflow_occupied::{}::eta+2048*rustflow_occupied::{}::epsilon*rustflow_occupied::{}::eta",
+          "-8*rustflow_occupied::{}::epsilon+2*rustflow_occupied::{}::epsilon^2+8",
+          "-8+4*rustflow_occupied::{}::epsilon",
+          "-8192+8192*rustflow_occupied::{}::epsilon",
+          "2*rustflow_occupied::{}::epsilon",
+          "2*rustflow_occupied::{}::eta",
+          "2048*rustflow_occupied::{}::eta+8192",
+          "4*rustflow_occupied::{}::epsilon",
+          "4*rustflow_occupied::{}::eta",
+          "4+rustflow_occupied::{}::eta",
+          "8192*rustflow_occupied::{}::epsilon",
+          "8192*rustflow_occupied::{}::eta",
+          "rustflow_occupied::{}::eta"
+        ],
+        "physical_arity": 9,
+        "shifted_slots": [
+          2
+        ],
+        "source_options": {
+          "free_virtual_zero_sectors": true,
+          "policy": "polynomial-closure-v1",
+          "positive_compact_energy_powers": false
+        },
+        "values": [
+          "(1.98857275099366938383548120226008221751708490207069705747557247759496976e-8+0i)",
+          "(-4.86095561354008071604228738330242319837509642728392614049584383412103719e-8+0i)"
+        ]
+      }
+    }
+  ],
+  "occupied_start_scale": 8,
+  "series_order": 80,
+  "vacuum_zero_certificates": [
+    {
+      "active_parameter_order": [
+        0,
+        1,
+        2
+      ],
+      "effective_sector": [
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "exponent_row_count": 3,
+      "family_fingerprint": "rustred-integral-family-v2;N36:massless_two_loop_sunset occupied [];L2;2:q0;2:q1;E1;1:u;P1;18:amflow_parameter_0;Q2,1,5;M;RY1,2;I+4;X0;I-2;X1;Y1,1;I+1;X0;D5;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,1;I-2;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G1;RY1,1;I+1;X0;Y1,1;I+1;X0;U5;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;",
+      "integral": [
+        1,
+        1,
+        1,
+        0,
+        0
+      ],
+      "nonzero_conditions": [
+        "2"
+      ],
+      "primitive_kernel": [
+        "1",
+        "1",
+        "1",
+        "-2"
+      ],
+      "rank": 3,
+      "raw_sector": [
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "scope": "undeformed zero-cut vacuum; native ProvedZero certificate"
+    },
+    {
+      "active_parameter_order": [
+        0,
+        2
+      ],
+      "effective_sector": [
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      "exponent_row_count": 1,
+      "family_fingerprint": "rustred-integral-family-v2;N36:massless_two_loop_sunset occupied [];L2;2:q0;2:q1;E1;1:u;P1;18:amflow_parameter_0;Q2,1,5;M;RY1,2;I+4;X0;I-2;X1;Y1,1;I+1;X0;D5;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,1;I-2;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G1;RY1,1;I+1;X0;Y1,1;I+1;X0;U5;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;",
+      "integral": [
+        2,
+        0,
+        1,
+        0,
+        0
+      ],
+      "nonzero_conditions": [
+        "2"
+      ],
+      "primitive_kernel": [
+        "1",
+        "-1",
+        "0"
+      ],
+      "rank": 1,
+      "raw_sector": [
+        true,
+        false,
+        true,
+        false,
+        false
+      ],
+      "scope": "undeformed zero-cut vacuum; native ProvedZero certificate"
+    },
+    {
+      "active_parameter_order": [
+        0,
+        1
+      ],
+      "effective_sector": [
+        true,
+        true,
+        false,
+        false,
+        false
+      ],
+      "exponent_row_count": 1,
+      "family_fingerprint": "rustred-integral-family-v2;N36:massless_two_loop_sunset occupied [];L2;2:q0;2:q1;E1;1:u;P1;18:amflow_parameter_0;Q2,1,5;M;RY1,2;I+4;X0;I-2;X1;Y1,1;I+1;X0;D5;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,1;I-2;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G1;RY1,1;I+1;X0;Y1,1;I+1;X0;U5;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;",
+      "integral": [
+        2,
+        1,
+        0,
+        0,
+        0
+      ],
+      "nonzero_conditions": [
+        "2"
+      ],
+      "primitive_kernel": [
+        "1",
+        "-1",
+        "0"
+      ],
+      "rank": 1,
+      "raw_sector": [
+        true,
+        true,
+        false,
+        false,
+        false
+      ],
+      "scope": "undeformed zero-cut vacuum; native ProvedZero certificate"
+    },
+    {
+      "active_parameter_order": [
+        0,
+        1,
+        2
+      ],
+      "effective_sector": [
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "exponent_row_count": 3,
+      "family_fingerprint": "rustred-integral-family-v2;N36:massless_two_loop_sunset occupied [];L2;2:q0;2:q1;E1;1:u;P1;18:amflow_parameter_0;Q2,1,5;M;RY1,2;I+4;X0;I-2;X1;Y1,1;I+1;X0;D5;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,1;I-2;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G1;RY1,1;I+1;X0;Y1,1;I+1;X0;U5;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;",
+      "integral": [
+        2,
+        1,
+        1,
+        -1,
+        -1
+      ],
+      "nonzero_conditions": [
+        "2"
+      ],
+      "primitive_kernel": [
+        "1",
+        "1",
+        "1",
+        "-2"
+      ],
+      "rank": 3,
+      "raw_sector": [
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "scope": "undeformed zero-cut vacuum; native ProvedZero certificate"
+    },
+    {
+      "active_parameter_order": [
+        0,
+        1,
+        2
+      ],
+      "effective_sector": [
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "exponent_row_count": 3,
+      "family_fingerprint": "rustred-integral-family-v2;N36:massless_two_loop_sunset occupied [];L2;2:q0;2:q1;E1;1:u;P1;18:amflow_parameter_0;Q2,1,5;M;RY1,2;I+4;X0;I-2;X1;Y1,1;I+1;X0;D5;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,1;I-2;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G1;RY1,1;I+1;X0;Y1,1;I+1;X0;U5;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;RY1,0;Y1,1;I+1;X0;",
+      "integral": [
+        2,
+        1,
+        1,
+        0,
+        0
+      ],
+      "nonzero_conditions": [
+        "2"
+      ],
+      "primitive_kernel": [
+        "1",
+        "1",
+        "1",
+        "-2"
+      ],
+      "rank": 3,
+      "raw_sector": [
+        true,
+        true,
+        true,
+        false,
+        false
+      ],
+      "scope": "undeformed zero-cut vacuum; native ProvedZero certificate"
+    }
+  ],
+  "values": [
+    "(1.98857275099366938383548120226008221751708490207069705747557247759496976e-8+0i)",
+    "(-4.86095561354008071604228738330242319837509642728392614049584383412103719e-8+0i)"
+  ]
+}

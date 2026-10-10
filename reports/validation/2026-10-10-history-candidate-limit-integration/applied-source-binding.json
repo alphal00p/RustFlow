@@ -1,0 +1,16 @@
+{
+  "scope": "Application of the reviewed bounded historical-candidate collection patch onto the committed immutable proof-reuse integration. Build/test outcome is recorded separately. No native source change.",
+  "parent_commit": "c0e4b9e7d6a010ced7893402e773274441ce0fad",
+  "patch_sha256": "a610edf9ffd604a993437e4293741309137bf64d52eeb599e559102b536bea58",
+  "draft_manifest_sha256": "c41676b6ea1799842148d01b7ac2b0bbc80dba38cba3bc31f51cc6e2b35e4e69",
+  "source_sha256": {
+    "src/finite_density/interface.rs": "37c7f1d981b9dae28bd94fd9338b426a85a33de58edff65735fe9bc3a38f24f4",
+    "src/finite_density/reduction.rs": "e28e9fe7f76660240fd77e63f123f0d77b55ee1ebec5b26c08b487963b3d6c03",
+    "src/finite_density/reduction/active.rs": "cfe753a1eac3032da87d9fd1905120150cadd6fc61310a509e99c9eefcdd57ca",
+    "tests/finite_density_runtime_flow.rs": "b6cef89859d029dc47aa2c2f5e8ae7f8b546644bc7c7144707ea4e42eb49df32"
+  },
+  "source_diff_check_passed": true,
+  "mandatory_audits_preserved": true,
+  "default_exhaustive_collection_preserved": true,
+  "build_pending_at_application": true
+}

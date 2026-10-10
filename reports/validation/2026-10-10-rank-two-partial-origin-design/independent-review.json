@@ -1,0 +1,41 @@
+{
+  "scope": "Independent finite-jet mathematical and exact-check-code review; design only, no generic native capability/contour admission/period evaluation or new test execution.",
+  "inputs": [
+    {
+      "path": "design.md",
+      "sha256": "84e9498c4336c160d9282b5ec91b44b98ea3fb8bd0614005c99a739074f392d2"
+    },
+    {
+      "path": "chart_check.py",
+      "sha256": "f97b324c53d89f7d36007c180bf50156c59c411a5fe08861961d5a275e3d3df6"
+    },
+    {
+      "path": "chart-checks.json",
+      "sha256": "ce170db0ec8394645b6dc287777c24c7ad60d380009b702e4f79020e4064af67"
+    },
+    {
+      "path": "replay.json",
+      "sha256": "ee60033291f11d0f70deaa6d39a34698391b85b5ecf439ae6e7f16dbb03d790c"
+    }
+  ],
+  "findings": [],
+  "checked_reasoning": [
+    "Complete h=2 cover chooses maximal primary alpha and maximal transverse parameter; Jacobian x^(m\u22121), each U monomial contains x, and pivot supplies strictly positive U0 constant.",
+    "At x=0 only parallel virtual rows survive, so mean cofactors and polarized bordered Gram V entries vanish and divide by x; exact polynomial replay supplements the general algebraic argument.",
+    "Gaussian means and Q are smooth over the closed chart; covariance costs only finitely many inverse x powers. Integer positive active indices leave other chart weights nonnegative.",
+    "With conservative inverse-x bound R and total required physical/distribution jet order J, choose fixed integer N with D/2+R<N<D/2+R+2 on a small open neighborhood. D>2(P+R+J+2) implies lambda\u2212J\u2212N>0 for h=2; J is counted once.",
+    "The revised analytic-index paragraph supplies a common original convergence domain even when no D-only strip exists for the entire polynomial numerator; finite Taylor continuation fixes that same meromorphic family.",
+    "Actual common-regulator channel positivity remains a separate hypothesis; source inventory/affine witness/shifted-virtual sum distinguish full-rank V=0 germs from translated vacuum and rank-deficient cases.",
+    "A universal finite-label/finite-jet schema, not finite sample success, is necessary before unbounded native lower-origin boxes can be installed."
+  ],
+  "implementation_conventions": [
+    "Interpret N as the number of Taylor terms subtracted (degrees 0 through N\u22121), so C^N control gives O(x^N). If implementation uses degree-N subtraction instead, adjust derivative count and margin explicitly."
+  ],
+  "limitations": [
+    "Examples check 144 supports and 656 charts but do not replace generic exact constructor/replay and budget validation.",
+    "No all-orders holomorphic germ at fixed D is claimed.",
+    "No eta endpoint, infinity boundary, full closure or three-/four-loop numerical acceptance follows from this positive-eta source/origin design.",
+    "Every consumed support, full-kinematic channel identity, inherited parameter condition and original source/domain binding remains a future sealed implementation obligation."
+  ],
+  "conclusion": "No remaining mathematical blocker identified in the scoped rank<=2 finite-jet origin design under its explicit structural/channel/continuation hypotheses."
+}

@@ -1,0 +1,15 @@
+{
+  "command": [
+    "timeout",
+    "120",
+    "/tmp/rustflow-balanced-coefficient-tests-attempt3",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.1574365091510117,
+  "user_seconds": 0.135005,
+  "system_seconds": 0.024531999999999998,
+  "peak_child_rss_kib": 15456,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

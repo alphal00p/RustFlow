@@ -1,0 +1,568 @@
+{
+  "schema": 1,
+  "gzip_mtime": 0,
+  "entries": [
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_sha256": "7228604dd94999b5e589b7f9b81448bce008a9c58f2dd5b7cd0c4a644849f71c",
+      "archive_sha256": "9b398462640f7ac65b1b58dd325b8547e6a2cc2a59b439ef3502eb4f3f9d3f30",
+      "original_bytes": 37104,
+      "archive_bytes": 5302
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_sha256": "89f17aee497fad34a250e449ae84109fa4236f41a43c9d29051c2c1c95a4e3c4",
+      "archive_sha256": "14c9f338ddf9b57c3cf0c0b559181a92897e9c70d97bb48b70fd3aefd2957f42",
+      "original_bytes": 13006,
+      "archive_bytes": 2409
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_sha256": "07e12ed129bbfd7df9b98f711c46c48409c93a90ab045bf1d0a6b21c43d7d7bd",
+      "archive_sha256": "07d4cc58f11390b11d633fde7c334de4da6ce8aa17f7998df9cd35d753271b12",
+      "original_bytes": 62131,
+      "archive_bytes": 8706
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_sha256": "45ba8d40ab248249806dc04eee3d05f4e17945cead4a69c28e1976de61d52378",
+      "archive_sha256": "356cf79dc001c69af8e2d806f569b36fc761dcbeeea53011287d322ccb72ac3e",
+      "original_bytes": 16244,
+      "archive_bytes": 2503
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_sha256": "6a8b58e824cf0d626cb8caa5125c85a87bedb001f7204918b3dd641150e71e8b",
+      "archive_sha256": "5ad068f4f7bb404d1fde3aab94c4b313b3111a62d09a46e3acf32b2a25ab68ef",
+      "original_bytes": 100782,
+      "archive_bytes": 13350
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_sha256": "8ad04fdae6efd4b02a1a1ead4a4a472d6bfd43cefd0dc433942e463e044cc09a",
+      "archive_sha256": "6c73ce2faa32068c4c8f96a5fa469b8938e49a1746baed96557ecf656d0055f3",
+      "original_bytes": 18295,
+      "archive_bytes": 2575
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz",
+      "original_sha256": "201602ca5c3157474ecf7e4806f5f3736e13fe7a42fe6ae8eebda102247f0b6a",
+      "archive_sha256": "46ea82fe24e2f70b2ac46cb36e820062552ad543aa113655ea77b512fc946cd8",
+      "original_bytes": 149923,
+      "archive_bytes": 18413
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-003-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz",
+      "original_sha256": "55d947acb0157290bd8e34fd93f67c4465347fe13a760f3cb02187d5394fd147",
+      "archive_sha256": "849bb446def279a9c275a14de7f3cfcce05fabb1a33d5f44f005f1c14d1f54bd",
+      "original_bytes": 17961,
+      "archive_bytes": 2567
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz",
+      "original_sha256": "05a0f3eee7b06efbc18c153b45eca0c1720fdff8cd3398b2fada7e244ce4db71",
+      "archive_sha256": "e1ae2377252555a53872cb4b698ae5805febdfd716070cbb8fdf1dd538210b7e",
+      "original_bytes": 160523,
+      "archive_bytes": 19695
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-004-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz",
+      "original_sha256": "e2191dd9a4a78ba7b3f8e3e41f0e40f24919b3ae666569fbb912e11952e79075",
+      "archive_sha256": "e215138c51f39272c36410cd88595d8851993c62892223c9de82ba9c46a3b266",
+      "original_bytes": 16863,
+      "archive_bytes": 2554
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz",
+      "original_sha256": "e28c63547ba185acc3ded9ecbd1d0b616981809595f80de3db46334e670d9b80",
+      "archive_sha256": "21d60e792b92e1431ab007b4c57b344056213881a7b50ab1b0e1e373d17b39af",
+      "original_bytes": 166636,
+      "archive_bytes": 20045
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-005-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz",
+      "original_sha256": "02496ffe2931dea022f0e63699006b43d53f58499fbf48b4eefd50a1594e03be",
+      "archive_sha256": "48351a21bb5c239cd6c329728662b4147b767eaa8006d64efe4daa4476291209",
+      "original_bytes": 16861,
+      "archive_bytes": 2537
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz",
+      "original_sha256": "7b6529616462098731108274d3c3c1f09de13b5e4ffb13bb827d7068158cb8ad",
+      "archive_sha256": "7658fd83b5aa4b8b195ddfce246cf8ee5bc21ed5c701199238f7e8ec4fef22ea",
+      "original_bytes": 174028,
+      "archive_bytes": 20412
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-006-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz",
+      "original_sha256": "7708f9c740c48bddfa08f0626f3ae2956713315bcd32d22a49ded8624769ef3f",
+      "archive_sha256": "4197256361a18da8971bf8c7242dadbea08d62bb3d735844ab57b53ab9ac44c6",
+      "original_bytes": 16803,
+      "archive_bytes": 2535
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_sha256": "2e9f83d8f4fb4e51ca1a8a7c831895398c8112676a9ab86e2e4bb87e999d5488",
+      "archive_sha256": "c2323f0f538c51fdaa7d0246bf05511d3267f8b74d8f56e987a46b5787f7db89",
+      "original_bytes": 72802,
+      "archive_bytes": 6399
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_sha256": "023519abcbd1884cb41aba91161ac4828bc05360ace660e6f2a2fe67f0ebe1bc",
+      "archive_sha256": "593b838256c1e6dee4ced60535900c148fd3cf97604d18158c6d9db05a724601",
+      "original_bytes": 11209,
+      "archive_bytes": 2288
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "original_sha256": "801209add5ec697311c28396c8d023b402e676f379f3f70771a008601e501600",
+      "archive_sha256": "ca5a330113db43fa13ae037c24e784ac36684c3b0e2641431d7ac244b513b421",
+      "original_bytes": 110983,
+      "archive_bytes": 10439
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "original_sha256": "e447e78d0c4fc142eb27f53a2df0e800bc1af2025bf2841febf6c6252f0c65ff",
+      "archive_sha256": "b51858579c3659ead3202e155dad42e4c35a1b5ec49b9f15ec0a91971edea7dd",
+      "original_bytes": 17162,
+      "archive_bytes": 2463
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "original_sha256": "86feaa90e7b142c7d2692b32166c50cc9eb4f6b55403ff6cc9e9211436febca5",
+      "archive_sha256": "3b926987cd1323a84ee1ca1f7b4843c45edc2a11b11a21798457843abb40b42e",
+      "original_bytes": 277449,
+      "archive_bytes": 30891
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "original_sha256": "8866c0263f20619fdb98d2868d1f53cc0a243bad0e66a7ae8388d2d91583499a",
+      "archive_sha256": "9499444ca9a7384be5bf98d2b82060f332ec9b0de065d98312656475cc6ae5ec",
+      "original_bytes": 19921,
+      "archive_bytes": 2483
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "original_sha256": "9ba642abfc53107a718c02d30c7a925846b04ec46aaad7398a3a6c1708d4877f",
+      "archive_sha256": "8809b427392c4ec58ecc880793d4fc32311f2910c05457bf72555fd3dc1c67f1",
+      "original_bytes": 343862,
+      "archive_bytes": 38694
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "original_sha256": "e3c96078e0e0bb9ed19b3f2fe47d1808a001dd8256f14a08512857ae06045f29",
+      "archive_sha256": "0e66f0ea61ef92da0f912081982039f24893e0fd80a8c10728d3a4d411d2e347",
+      "original_bytes": 18305,
+      "archive_bytes": 2479
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "original_sha256": "4c47dd2f9094fc635a7d6b3007ad6aa54deeb1ddc23dddad49056d8f6d737ff9",
+      "archive_sha256": "65ff3bd983539d1784cd970fc817be28bcf0ed32c9ef90d570b52b54529d4cce",
+      "original_bytes": 368881,
+      "archive_bytes": 40537
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "original_sha256": "cdf2b4901fe671f1173a839c836f40bf56f2b9358328e74085fc482bc3a424a7",
+      "archive_sha256": "091f577c52df9795394d22257c975cdc512052615a0dcb0517d87674c6a9156d",
+      "original_bytes": 17559,
+      "archive_bytes": 2461
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_sha256": "50f80b605951b3a8befe63e2130900e546b638e2322523fcb056ceff10787d78",
+      "archive_sha256": "613b83126cfdd190e9b495bcca8fa4085d54c9a18667dec115c397ee428ea254",
+      "original_bytes": 32737,
+      "archive_bytes": 4796
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_sha256": "27a52b85aa974c72bb319d406cd5a9353c78b49275fcf8352fa1e1d27f71ae95",
+      "archive_sha256": "be9de3eb4c38c3baf30b470aebc75ba74846b877bcc084f66a4db5d1206f69f1",
+      "original_bytes": 11204,
+      "archive_bytes": 2316
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_sha256": "6687f3e6e3b5a7bf50122e8d26e25583780834d2fa4bd96bd1549bf00c1aa4be",
+      "archive_sha256": "6ef730b2371516b3485ff1f0593ffac7e875dff2a020750506f3a954277e2fd8",
+      "original_bytes": 48610,
+      "archive_bytes": 6536
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_sha256": "85bb8f44e4df016c77039411b6970fd198a3ea592342e26bdbaec7190f64f397",
+      "archive_sha256": "8f6c0d61ae71f09d2e30e8dee2b77f8626575a8e7ae06ce57083483178ee4570",
+      "original_bytes": 13031,
+      "archive_bytes": 2378
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin.gz",
+      "original_sha256": "55c87a93c4681028801074609c3a1c1be62dead5ec86075539ea74e836ceac04",
+      "archive_sha256": "f4da6c050f243f458d92564e2236cdb2aa160f74784b978738990aa82cc6939a",
+      "original_bytes": 87663,
+      "archive_bytes": 10399
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-fixed/native-closure/cut-1/round-002-provisional.json.gz",
+      "original_sha256": "92a910a6f593098e6eb1838b945154c35cfead291190876046ff6ac103e0861d",
+      "archive_sha256": "d14b5b20f554ac3ec5773d168b2f813a79625d0944b55dbfbcc46c47936c237c",
+      "original_bytes": 13771,
+      "archive_bytes": 2389
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_sha256": "7228604dd94999b5e589b7f9b81448bce008a9c58f2dd5b7cd0c4a644849f71c",
+      "archive_sha256": "9b398462640f7ac65b1b58dd325b8547e6a2cc2a59b439ef3502eb4f3f9d3f30",
+      "original_bytes": 37104,
+      "archive_bytes": 5302
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_sha256": "89f17aee497fad34a250e449ae84109fa4236f41a43c9d29051c2c1c95a4e3c4",
+      "archive_sha256": "14c9f338ddf9b57c3cf0c0b559181a92897e9c70d97bb48b70fd3aefd2957f42",
+      "original_bytes": 13006,
+      "archive_bytes": 2409
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_sha256": "07e12ed129bbfd7df9b98f711c46c48409c93a90ab045bf1d0a6b21c43d7d7bd",
+      "archive_sha256": "07d4cc58f11390b11d633fde7c334de4da6ce8aa17f7998df9cd35d753271b12",
+      "original_bytes": 62131,
+      "archive_bytes": 8706
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_sha256": "45ba8d40ab248249806dc04eee3d05f4e17945cead4a69c28e1976de61d52378",
+      "archive_sha256": "356cf79dc001c69af8e2d806f569b36fc761dcbeeea53011287d322ccb72ac3e",
+      "original_bytes": 16244,
+      "archive_bytes": 2503
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin.gz",
+      "original_sha256": "6a8b58e824cf0d626cb8caa5125c85a87bedb001f7204918b3dd641150e71e8b",
+      "archive_sha256": "5ad068f4f7bb404d1fde3aab94c4b313b3111a62d09a46e3acf32b2a25ab68ef",
+      "original_bytes": 100782,
+      "archive_bytes": 13350
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-002-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-002-provisional.json.gz",
+      "original_sha256": "8ad04fdae6efd4b02a1a1ead4a4a472d6bfd43cefd0dc433942e463e044cc09a",
+      "archive_sha256": "6c73ce2faa32068c4c8f96a5fa469b8938e49a1746baed96557ecf656d0055f3",
+      "original_bytes": 18295,
+      "archive_bytes": 2575
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin.gz",
+      "original_sha256": "201602ca5c3157474ecf7e4806f5f3736e13fe7a42fe6ae8eebda102247f0b6a",
+      "archive_sha256": "46ea82fe24e2f70b2ac46cb36e820062552ad543aa113655ea77b512fc946cd8",
+      "original_bytes": 149923,
+      "archive_bytes": 18413
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-003-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-003-provisional.json.gz",
+      "original_sha256": "55d947acb0157290bd8e34fd93f67c4465347fe13a760f3cb02187d5394fd147",
+      "archive_sha256": "849bb446def279a9c275a14de7f3cfcce05fabb1a33d5f44f005f1c14d1f54bd",
+      "original_bytes": 17961,
+      "archive_bytes": 2567
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin.gz",
+      "original_sha256": "05a0f3eee7b06efbc18c153b45eca0c1720fdff8cd3398b2fada7e244ce4db71",
+      "archive_sha256": "e1ae2377252555a53872cb4b698ae5805febdfd716070cbb8fdf1dd538210b7e",
+      "original_bytes": 160523,
+      "archive_bytes": 19695
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-004-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-004-provisional.json.gz",
+      "original_sha256": "e2191dd9a4a78ba7b3f8e3e41f0e40f24919b3ae666569fbb912e11952e79075",
+      "archive_sha256": "e215138c51f39272c36410cd88595d8851993c62892223c9de82ba9c46a3b266",
+      "original_bytes": 16863,
+      "archive_bytes": 2554
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin.gz",
+      "original_sha256": "e28c63547ba185acc3ded9ecbd1d0b616981809595f80de3db46334e670d9b80",
+      "archive_sha256": "21d60e792b92e1431ab007b4c57b344056213881a7b50ab1b0e1e373d17b39af",
+      "original_bytes": 166636,
+      "archive_bytes": 20045
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-005-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-005-provisional.json.gz",
+      "original_sha256": "02496ffe2931dea022f0e63699006b43d53f58499fbf48b4eefd50a1594e03be",
+      "archive_sha256": "48351a21bb5c239cd6c329728662b4147b767eaa8006d64efe4daa4476291209",
+      "original_bytes": 16861,
+      "archive_bytes": 2537
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin.gz",
+      "original_sha256": "7b6529616462098731108274d3c3c1f09de13b5e4ffb13bb827d7068158cb8ad",
+      "archive_sha256": "7658fd83b5aa4b8b195ddfce246cf8ee5bc21ed5c701199238f7e8ec4fef22ea",
+      "original_bytes": 174028,
+      "archive_bytes": 20412
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-006-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0/round-006-provisional.json.gz",
+      "original_sha256": "7708f9c740c48bddfa08f0626f3ae2956713315bcd32d22a49ded8624769ef3f",
+      "archive_sha256": "4197256361a18da8971bf8c7242dadbea08d62bb3d735844ab57b53ab9ac44c6",
+      "original_bytes": 16803,
+      "archive_bytes": 2535
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_sha256": "2e9f83d8f4fb4e51ca1a8a7c831895398c8112676a9ab86e2e4bb87e999d5488",
+      "archive_sha256": "c2323f0f538c51fdaa7d0246bf05511d3267f8b74d8f56e987a46b5787f7db89",
+      "original_bytes": 72802,
+      "archive_bytes": 6399
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_sha256": "023519abcbd1884cb41aba91161ac4828bc05360ace660e6f2a2fe67f0ebe1bc",
+      "archive_sha256": "593b838256c1e6dee4ced60535900c148fd3cf97604d18158c6d9db05a724601",
+      "original_bytes": 11209,
+      "archive_bytes": 2288
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz",
+      "original_sha256": "801209add5ec697311c28396c8d023b402e676f379f3f70771a008601e501600",
+      "archive_sha256": "ca5a330113db43fa13ae037c24e784ac36684c3b0e2641431d7ac244b513b421",
+      "original_bytes": 110983,
+      "archive_bytes": 10439
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json.gz",
+      "original_sha256": "e447e78d0c4fc142eb27f53a2df0e800bc1af2025bf2841febf6c6252f0c65ff",
+      "archive_sha256": "b51858579c3659ead3202e155dad42e4c35a1b5ec49b9f15ec0a91971edea7dd",
+      "original_bytes": 17162,
+      "archive_bytes": 2463
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz",
+      "original_sha256": "86feaa90e7b142c7d2692b32166c50cc9eb4f6b55403ff6cc9e9211436febca5",
+      "archive_sha256": "3b926987cd1323a84ee1ca1f7b4843c45edc2a11b11a21798457843abb40b42e",
+      "original_bytes": 277449,
+      "archive_bytes": 30891
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json.gz",
+      "original_sha256": "8866c0263f20619fdb98d2868d1f53cc0a243bad0e66a7ae8388d2d91583499a",
+      "archive_sha256": "9499444ca9a7384be5bf98d2b82060f332ec9b0de065d98312656475cc6ae5ec",
+      "original_bytes": 19921,
+      "archive_bytes": 2483
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz",
+      "original_sha256": "9ba642abfc53107a718c02d30c7a925846b04ec46aaad7398a3a6c1708d4877f",
+      "archive_sha256": "8809b427392c4ec58ecc880793d4fc32311f2910c05457bf72555fd3dc1c67f1",
+      "original_bytes": 343862,
+      "archive_bytes": 38694
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json.gz",
+      "original_sha256": "e3c96078e0e0bb9ed19b3f2fe47d1808a001dd8256f14a08512857ae06045f29",
+      "archive_sha256": "0e66f0ea61ef92da0f912081982039f24893e0fd80a8c10728d3a4d411d2e347",
+      "original_bytes": 18305,
+      "archive_bytes": 2479
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz",
+      "original_sha256": "4c47dd2f9094fc635a7d6b3007ad6aa54deeb1ddc23dddad49056d8f6d737ff9",
+      "archive_sha256": "65ff3bd983539d1784cd970fc817be28bcf0ed32c9ef90d570b52b54529d4cce",
+      "original_bytes": 368881,
+      "archive_bytes": 40537
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json.gz",
+      "original_sha256": "cdf2b4901fe671f1173a839c836f40bf56f2b9358328e74085fc482bc3a424a7",
+      "archive_sha256": "091f577c52df9795394d22257c975cdc512052615a0dcb0517d87674c6a9156d",
+      "original_bytes": 17559,
+      "archive_bytes": 2461
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_sha256": "50f80b605951b3a8befe63e2130900e546b638e2322523fcb056ceff10787d78",
+      "archive_sha256": "613b83126cfdd190e9b495bcca8fa4085d54c9a18667dec115c397ee428ea254",
+      "original_bytes": 32737,
+      "archive_bytes": 4796
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_sha256": "27a52b85aa974c72bb319d406cd5a9353c78b49275fcf8352fa1e1d27f71ae95",
+      "archive_sha256": "be9de3eb4c38c3baf30b470aebc75ba74846b877bcc084f66a4db5d1206f69f1",
+      "original_bytes": 11204,
+      "archive_bytes": 2316
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_sha256": "6687f3e6e3b5a7bf50122e8d26e25583780834d2fa4bd96bd1549bf00c1aa4be",
+      "archive_sha256": "6ef730b2371516b3485ff1f0593ffac7e875dff2a020750506f3a954277e2fd8",
+      "original_bytes": 48610,
+      "archive_bytes": 6536
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_sha256": "85bb8f44e4df016c77039411b6970fd198a3ea592342e26bdbaec7190f64f397",
+      "archive_sha256": "8f6c0d61ae71f09d2e30e8dee2b77f8626575a8e7ae06ce57083483178ee4570",
+      "original_bytes": 13031,
+      "archive_bytes": 2378
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin.gz",
+      "original_sha256": "55c87a93c4681028801074609c3a1c1be62dead5ec86075539ea74e836ceac04",
+      "archive_sha256": "f4da6c050f243f458d92564e2236cdb2aa160f74784b978738990aa82cc6939a",
+      "original_bytes": 87663,
+      "archive_bytes": 10399
+    },
+    {
+      "original_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-002-provisional.json",
+      "archive_path": "history-candidate-limit-two-loop-laurent/native-closure/cut-1/round-002-provisional.json.gz",
+      "original_sha256": "92a910a6f593098e6eb1838b945154c35cfead291190876046ff6ac103e0861d",
+      "archive_sha256": "d14b5b20f554ac3ec5773d168b2f813a79625d0944b55dbfbcc46c47936c237c",
+      "original_bytes": 13771,
+      "archive_bytes": 2389
+    },
+    {
+      "original_path": "history-candidate-limit-massive-regression/native-closure/cut-0/round-000-provisional.bin",
+      "archive_path": "history-candidate-limit-massive-regression/native-closure/cut-0/round-000-provisional.bin.gz",
+      "original_sha256": "f8b90d40a9db77d5b5d7d5d70f5b8de2ed8bedfdcf520f7c1b3430f3f650f0c4",
+      "archive_sha256": "7bf49338f3a4a32ecb76e173f604aa9f72baa7fd83bd126e1f3a20a124d79a87",
+      "original_bytes": 125481,
+      "archive_bytes": 14991
+    },
+    {
+      "original_path": "history-candidate-limit-massive-regression/native-closure/cut-0/round-000-provisional.json",
+      "archive_path": "history-candidate-limit-massive-regression/native-closure/cut-0/round-000-provisional.json.gz",
+      "original_sha256": "ae2fc655adc5827030e8fc6239116f82d043b68491b057d486106b95d430cc9a",
+      "archive_sha256": "6573c24b03a67de7da92712ec7d87de717753b8d48b47739c5da8a6eabb9059d",
+      "original_bytes": 4391,
+      "archive_bytes": 1544
+    },
+    {
+      "original_path": "history-candidate-limit-massive-regression/native-closure/cut-0/round-001-provisional.bin",
+      "archive_path": "history-candidate-limit-massive-regression/native-closure/cut-0/round-001-provisional.bin.gz",
+      "original_sha256": "f3b554fbd51b9bbe752095349611eff60ca4bdab838167c763ad17599af7611f",
+      "archive_sha256": "cf430530f143660feef40b60a60d23ee5b927d8c5b65c9049fceebce8ec5dd24",
+      "original_bytes": 260693,
+      "archive_bytes": 36173
+    },
+    {
+      "original_path": "history-candidate-limit-massive-regression/native-closure/cut-0/round-001-provisional.json",
+      "archive_path": "history-candidate-limit-massive-regression/native-closure/cut-0/round-001-provisional.json.gz",
+      "original_sha256": "96fc4a50aafda943237d88eee07e5c8c2a84480522a1e71cf0a1db2db2d7181d",
+      "archive_sha256": "bb079ec2fb5e8efe77ee258fdb5e985a7109bb420a95b58afe0465fb98799062",
+      "original_bytes": 6280,
+      "archive_bytes": 1631
+    },
+    {
+      "original_path": "history-candidate-limit-massive-regression/native-closure/cut-0-1/round-000-provisional.bin",
+      "archive_path": "history-candidate-limit-massive-regression/native-closure/cut-0-1/round-000-provisional.bin.gz",
+      "original_sha256": "cfee6aba9c2ca0e5bd6efd88d736ba8f12b8a7e0fb62c5a38b1c23e48a9bfbbe",
+      "archive_sha256": "116d7dd04c0bff69cb0f73588fb533699495d4c3232eefd18a9f8b1bb22d81a3",
+      "original_bytes": 356165,
+      "archive_bytes": 29303
+    },
+    {
+      "original_path": "history-candidate-limit-massive-regression/native-closure/cut-0-1/round-000-provisional.json",
+      "archive_path": "history-candidate-limit-massive-regression/native-closure/cut-0-1/round-000-provisional.json.gz",
+      "original_sha256": "4f9a93f753f53d145c9f2f126afa98a7ac3d5c96ba7e08bf77d889894c07ce3a",
+      "archive_sha256": "bc6c6c60560a57c81ac66971ff17d02e88b49bd85db29cb15919ffe4f070ed43",
+      "original_bytes": 8260,
+      "archive_bytes": 1719
+    },
+    {
+      "original_path": "history-candidate-limit-massive-regression/native-closure/cut-1/round-000-provisional.bin",
+      "archive_path": "history-candidate-limit-massive-regression/native-closure/cut-1/round-000-provisional.bin.gz",
+      "original_sha256": "f9ef13815377dc6402dba3a86e0b936e4c389a7561775320e59a51a59882eb44",
+      "archive_sha256": "9277e9516a703a43909c72d02b3b0e3f393eb3dff4f7b81a6a38bcd56bcf04dd",
+      "original_bytes": 104584,
+      "archive_bytes": 12458
+    },
+    {
+      "original_path": "history-candidate-limit-massive-regression/native-closure/cut-1/round-000-provisional.json",
+      "archive_path": "history-candidate-limit-massive-regression/native-closure/cut-1/round-000-provisional.json.gz",
+      "original_sha256": "29947add7b5739e65ead24f1e4716417b7907e4f9fe73ca06a9b914571922b2c",
+      "archive_sha256": "9eebad5d659cb27eebd5ff0fe47cfc570fe61fc625ada1b1b07d841f8cb5a289",
+      "original_bytes": 5457,
+      "archive_bytes": 1596
+    },
+    {
+      "original_path": "history-candidate-limit-massive-regression/native-closure/cut-1/round-001-provisional.bin",
+      "archive_path": "history-candidate-limit-massive-regression/native-closure/cut-1/round-001-provisional.bin.gz",
+      "original_sha256": "b42b129b67d604ace2a532a2fdc80d76ca9d38f78cf79cadb55296b2cf910ff6",
+      "archive_sha256": "2a5be56d9c5a088ea6461b181d2a305d7f7b865ea00ca2a6a85350ee368dcfed",
+      "original_bytes": 348849,
+      "archive_bytes": 44859
+    },
+    {
+      "original_path": "history-candidate-limit-massive-regression/native-closure/cut-1/round-001-provisional.json",
+      "archive_path": "history-candidate-limit-massive-regression/native-closure/cut-1/round-001-provisional.json.gz",
+      "original_sha256": "aa3f35f481aff4f8b418b2062385714338c816097966d13edd73e81b512c673f",
+      "archive_sha256": "6501b8bfe1998e362d617f152a2a5b9be25bc2f18bb422027f4f69e141de05b9",
+      "original_bytes": 9704,
+      "archive_bytes": 1803
+    }
+  ],
+  "scope": "Lossless storage only; all latest provisional/closed proofs, predictions, configuration and comparisons remain raw.",
+  "all_restore_checks_passed": true
+}

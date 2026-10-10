@@ -1,0 +1,103 @@
+{
+  "scope": "isolated exact coefficient addition-tree experiment; no production modification, new native source search, numerical period, or master selection",
+  "outcome": "exactly equivalent on generic controls and the actual expensive target; measured benefit is modest and not sufficient to recommend production promotion",
+  "generic_tests": 7,
+  "generic_exact_budget_comparisons": 810,
+  "generic_gate": {
+    "command": [
+      "timeout",
+      "120",
+      "/tmp/rustflow-balanced-coefficient-tests-attempt3",
+      "--nocapture",
+      "--test-threads=1"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 0.1574365091510117,
+    "user_seconds": 0.135005,
+    "system_seconds": 0.024531999999999998,
+    "peak_child_rss_kib": 15456,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "actual": {
+    "target": [
+      2,
+      1,
+      1,
+      1,
+      1,
+      0,
+      -1,
+      -1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "native_program_rules": 16937,
+    "applications": 15021,
+    "result_terms": 7,
+    "unresolved": 0,
+    "ordered_conditions": 3499,
+    "exact_result_equal": true,
+    "buffer_limit": 32,
+    "reduction_seconds": 303.353981019,
+    "prior_native_reduction_seconds": 313.800652,
+    "relative_wall_change": -0.03329078800320662,
+    "stats": {
+      "addition_seconds": 247.86600630699883,
+      "additions": 65565,
+      "apply_seconds": 12.416129558999998,
+      "buffer_flushes": 119,
+      "capacity_compactions": 0,
+      "multiplies": 80985,
+      "multiply_seconds": 37.76043411000006,
+      "peak_buffer": 32,
+      "peak_pending": 6104,
+      "popped_zero_keys": 185
+    },
+    "resources": {
+      "command": [
+        "timeout",
+        "600",
+        "/tmp/rustflow-balanced-coefficient-actual-attempt1",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/input.bin",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/points.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-balanced-coefficient-sums-experiment/actual",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-final-history-work-profile/profile/result.json"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 412.43185018608347,
+      "user_seconds": 409.032102,
+      "system_seconds": 0.5771069999999999,
+      "peak_child_rss_kib": 456912,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    }
+  },
+  "prior_instrumented_eager": {
+    "reduction_seconds": 365.475888588,
+    "pending_additions": 65639,
+    "pending_addition_seconds": 262.7531303269987
+  },
+  "equivalence_scope": [
+    "exact rational terminal coefficients and labels",
+    "ordered retained conditions",
+    "ordered residual integral/coefficient/reason tuples",
+    "rule application count",
+    "application and pending-key budget grids",
+    "native generated-data replay on generic and actual source contexts"
+  ],
+  "limitations": [
+    "Separate shared-host timings, not a controlled repeated benchmark.",
+    "Earlier eager phase instrumentation wrote progress for each operation; the balanced driver writes periodically. Do not attribute the full instrumentation-time difference to arithmetic.",
+    "The generic 40000 label test verifies native parity outside fixed guards; it does not independently assert an UnsupportedPower status.",
+    "Standalone native errors panic explicitly. Any future library change must propagate Result errors.",
+    "The fixed buffer bounds rational-object count per pending key, not polynomial bit complexity.",
+    "No production native draft or promotion is recommended from this result."
+  ],
+  "all_run_bound_inputs_unchanged": true,
+  "tested_driver_prefix_identical_to_actual": true
+}

@@ -1,0 +1,25 @@
+{
+  "argv": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python",
+    "reports/validation/2026-10-10-rank-two-partial-origin-design/chart_check.py"
+  ],
+  "exit_code": 0,
+  "identical_second_run_sha256": "ce170db0ec8394645b6dc287777c24c7ad60d380009b702e4f79020e4064af67",
+  "inputs": {
+    "chart-checks.json": {
+      "bytes": 292882,
+      "sha256": "ce170db0ec8394645b6dc287777c24c7ad60d380009b702e4f79020e4064af67"
+    },
+    "chart_check.py": {
+      "bytes": 10189,
+      "sha256": "f97b324c53d89f7d36007c180bf50156c59c411a5fe08861961d5a275e3d3df6"
+    },
+    "design.md": {
+      "bytes": 16631,
+      "sha256": "84e9498c4336c160d9282b5ec91b44b98ea3fb8bd0614005c99a739074f392d2"
+    }
+  },
+  "scope": "bounded exact algebra replay; no native build or production source mutation",
+  "stderr": "",
+  "stdout": "{\"complete_supports\": 144, \"full_rank_supports\": 115, \"complete_charts\": 656, \"finite_jet_checks\": 80, \"arithmetic_operations\": 244836}\n"
+}
