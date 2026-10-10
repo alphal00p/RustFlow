@@ -1,0 +1,1357 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "mode": "laurent",
+  "scope": "complete massless two-loop sunset with scalar and raised original numerator; no four-loop acceptance",
+  "normalization": "unscaled Euclidean amplitude",
+  "dimension": "4-2*epsilon",
+  "configurations": [
+    [
+      18,
+      60,
+      8,
+      1000
+    ],
+    [
+      28,
+      60,
+      8,
+      1000
+    ],
+    [
+      28,
+      80,
+      8,
+      1000
+    ],
+    [
+      28,
+      80,
+      12,
+      1000
+    ],
+    [
+      28,
+      80,
+      12,
+      2000
+    ]
+  ],
+  "guard_digits": 40,
+  "source_policy_provenance": "fixed native source snapshot and bound endpoint evidence; these native test records do not serialize source-search policy separately",
+  "relative_tolerance": "1e-12",
+  "small_magnitude_threshold": "1e-20",
+  "small_absolute_tolerance": "1e-25",
+  "imaginary_zero_absolute_tolerance": "1e-25",
+  "reference_comparison_count": 30,
+  "independent_refinement_comparison_count": 24,
+  "supplied_oracle_numerical_records_compared": 0,
+  "reference_uncertainty": "empirical precision and quadrature refinement, checked against independent exact Beta formulas; no rigorous numerical error interval",
+  "arithmetic": "Python Decimal, 100 digits, saved decimal inputs",
+  "inputs_sha256": {
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+    "examples/finite_density/massless_two_loop_sunset.json": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/input.json": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-18-60-8-grid-1000.json": "cd29df731c61cb75c913e92c43dabde600ec6dfeba48677957dc27d0858842fa",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-60-8-grid-1000.json": "66a6384c2e4f21ee007d2127852e31b562c5139e4fe78400b5a13e81becbcddf",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-8-grid-1000.json": "8f64042a091765b7bf7e8944260da090efbd5a35f9786fbe7faf3e9f484f7cd5",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-1000.json": "36658bf197bb26fdea5c40d4fae5c136aa1548275b910ebad87e0d87b387c54f",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-2000.json": "8bb9269929071d672d2a3a5d90105cd1a353fd5a6a81ba4908722b31d0757a74"
+  },
+  "script_sha256": "fa616b666d8a70291db943ec78e6760ef70a65aa062a6848b2a0d29ab25a0bc3",
+  "comparisons": [
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -2,
+      "configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-18-60-8-grid-1000.json",
+      "prediction_real": "8.6614970556458982923749920751922259206903623843865600094140917894763654868E-56",
+      "prediction_imaginary": "-0",
+      "reference_real": "0",
+      "real_difference": "8.6614970556458982923749920751922259206903623843865600094140917894763654868E-56",
+      "imaginary_difference": "-0",
+      "absolute_difference": "8.661497055645898292374992075192225920690362384386560009414091789476365486800000000000000000000000000E-56",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -1,
+      "configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-18-60-8-grid-1000.json",
+      "prediction_real": "-0.00016040597272944273733051223854872959596605940396309768174144059325308447546",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.0001604059727294427373305122385487295959660594039630978549713755542495884793054987538917559676489",
+      "real_difference": "1.732299349609965040038454987538917559676489E-55",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.732299349609965040038454987538917559676489E-55",
+      "relative_difference": "1.079946912283521913611288004895359684922881157117526109870030205001495530140746737241223457021583410E-51",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": 0,
+      "configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-18-60-8-grid-1000.json",
+      "prediction_real": "-0.0011445011776745255130973196581697298773494741859365742429544833756357598035",
+      "prediction_imaginary": "-0",
+      "reference_real": "-0.001144501177674525513097319658169729877349474174190623422262842867913880207586540063188453312790",
+      "real_difference": "-1.1745950820691640507721879595913459936811546687210E-47",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.1745950820691640507721879595913459936811546687210E-47",
+      "relative_difference": "1.026294341134524087719262767390682418381062185051132705619996374852075354447874092331223085109193714E-44",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -2,
+      "configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-18-60-8-grid-1000.json",
+      "prediction_real": "5.7747940284152740402183962575606718336792540407104788105836963378518396256E-56",
+      "prediction_imaginary": "-0",
+      "reference_real": "0",
+      "real_difference": "5.7747940284152740402183962575606718336792540407104788105836963378518396256E-56",
+      "imaginary_difference": "-0",
+      "absolute_difference": "5.774794028415274040218396257560671833679254040710478810583696337851839625600000000000000000000000000E-56",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -1,
+      "configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-18-60-8-grid-1000.json",
+      "prediction_real": "-0.000020050746591180342166314029818591199495757425495387116380163100152330481131",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.00002005074659118034216631402981859119949575742549538723187142194428119855991318734423646949595611",
+      "real_difference": "1.1549125884412886807878218734423646949595611E-55",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.1549125884412886807878218734423646949595611E-55",
+      "relative_difference": "5.759948055746195459388449575253538321660533901024087762046022737825131000600491422764663710814566173E-51",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": 0,
+      "configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-18-60-8-grid-1000.json",
+      "prediction_real": "-0.00038367160630347979513293331509431062861777338554973600626063045853518259493",
+      "prediction_imaginary": "-0",
+      "reference_real": "-0.0003836716063034797951329333150943106286177733777184747102399186898636177449065656387361906155721",
+      "real_difference": "-7.8312612960207117686715648500234343612638093844279E-48",
+      "imaginary_difference": "0",
+      "absolute_difference": "7.8312612960207117686715648500234343612638093844279E-48",
+      "relative_difference": "2.041136525965978003930408804967162140194053923396263027938938078601923303126923855708841071449594151E-44",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -2,
+      "configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-60-8-grid-1000.json",
+      "prediction_real": "2.92096436728712311370932342187601996675687454368678125102834409430735728187551890075E-69",
+      "prediction_imaginary": "-0",
+      "reference_real": "0",
+      "real_difference": "2.92096436728712311370932342187601996675687454368678125102834409430735728187551890075E-69",
+      "imaginary_difference": "-0",
+      "absolute_difference": "2.920964367287123113709323421876019966756874543686781251028344094307357281875518900750000000000000000E-69",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -1,
+      "configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-60-8-grid-1000.json",
+      "prediction_real": "-0.000160405972729442737330512238548729595966059403963097854971375554243746550571075637164",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.0001604059727294427373305122385487295959660594039630978549713755542495884793054987538917559676489",
+      "real_difference": "5.8419287344231167277559676489E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "5.8419287344231167277559676489E-69",
+      "relative_difference": "3.641964594595686559805328703325646833887922308234736116163847827461788541388698865503764045159530984E-65",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": 0,
+      "configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-60-8-grid-1000.json",
+      "prediction_real": "-0.00114450117767452551309731965816972987734947417419062342226345325244622877750739066095",
+      "prediction_imaginary": "-0",
+      "reference_real": "-0.001144501177674525513097319658169729877349474174190623422262842867913880207586540063188453312790",
+      "real_difference": "-6.10384532348569920850597761546687210E-61",
+      "imaginary_difference": "0",
+      "absolute_difference": "6.10384532348569920850597761546687210E-61",
+      "relative_difference": "5.333192697877255802528059037482049157976331570118161601944926244666908700744420092038463201065221314E-58",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -2,
+      "configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-60-8-grid-1000.json",
+      "prediction_real": "1.94731932936650774683178529419404463089814665741276692651789556490804215469054692937E-69",
+      "prediction_imaginary": "-0",
+      "reference_real": "0",
+      "real_difference": "1.94731932936650774683178529419404463089814665741276692651789556490804215469054692937E-69",
+      "imaginary_difference": "-0",
+      "absolute_difference": "1.947319329366507746831785294194044630898146657412766926517895564908042154690546929370000000000000000E-69",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -1,
+      "configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-60-8-grid-1000.json",
+      "prediction_real": "-0.0000200507465911803421663140298185911994957574254953872318714219442773039310070967196479",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.00002005074659118034216631402981859119949575742549538723187142194428119855991318734423646949595611",
+      "real_difference": "3.89462890609062458856949595611E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.89462890609062458856949595611E-69",
+      "relative_difference": "1.942385979684039576234886781601029817516382853859601560868963769980044696420383208700880414261942339E-64",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": 0,
+      "configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-60-8-grid-1000.json",
+      "prediction_real": "-0.000383671606303479795132933315094310628617773377718474710240325614922855186407050102726",
+      "prediction_imaginary": "-0",
+      "reference_real": "-0.0003836716063034797951329333150943106286177733777184747102399186898636177449065656387361906155721",
+      "real_difference": "-4.069250592374415004844639898093844279E-61",
+      "imaginary_difference": "0",
+      "absolute_difference": "4.069250592374415004844639898093844279E-61",
+      "relative_difference": "1.060607698229220781872109938145749207503425130201051493150984911738536409237352891921577498889873785E-57",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -2,
+      "configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-8-grid-1000.json",
+      "prediction_real": "2.92096436728712311370711798696153447796040573369441748010154409670786602723041995787E-69",
+      "prediction_imaginary": "-0",
+      "reference_real": "0",
+      "real_difference": "2.92096436728712311370711798696153447796040573369441748010154409670786602723041995787E-69",
+      "imaginary_difference": "-0",
+      "absolute_difference": "2.920964367287123113707117986961534477960405733694417480101544096707866027230419957870000000000000000E-69",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -1,
+      "configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-8-grid-1000.json",
+      "prediction_real": "-0.000160405972729442737330512238548729595966059403963097854971375554243746550571075637148",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.0001604059727294427373305122385487295959660594039630978549713755542495884793054987538917559676489",
+      "real_difference": "5.8419287344231167437559676489E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "5.8419287344231167437559676489E-69",
+      "relative_difference": "3.641964594595686569780019625207496406899412375558139508135952600344775722595007667036779643938635873E-65",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": 0,
+      "configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-8-grid-1000.json",
+      "prediction_real": "-0.00114450117767452551309731965816972987734947417419062342226345325244622877750739033445",
+      "prediction_imaginary": "-0",
+      "reference_real": "-0.001144501177674525513097319658169729877349474174190623422262842867913880207586540063188453312790",
+      "real_difference": "-6.10384532348569920850271261546687210E-61",
+      "imaginary_difference": "0",
+      "absolute_difference": "6.10384532348569920850271261546687210E-61",
+      "relative_difference": "5.333192697877255802525206266280333099766097664314833051472221315361933584531757959723971581089648278E-58",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -2,
+      "configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-8-grid-1000.json",
+      "prediction_real": "1.94731932936650774683175112013092631061400786524326584788632578201276801625869207525E-69",
+      "prediction_imaginary": "-0",
+      "reference_real": "0",
+      "real_difference": "1.94731932936650774683175112013092631061400786524326584788632578201276801625869207525E-69",
+      "imaginary_difference": "-0",
+      "absolute_difference": "1.947319329366507746831751120130926310614007865243265847886325782012768016258692075250000000000000000E-69",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -1,
+      "configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-8-grid-1000.json",
+      "prediction_real": "-0.0000200507465911803421663140298185911994957574254953872318714219442773039310070967196479",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.00002005074659118034216631402981859119949575742549538723187142194428119855991318734423646949595611",
+      "real_difference": "3.89462890609062458856949595611E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.89462890609062458856949595611E-69",
+      "relative_difference": "1.942385979684039576234886781601029817516382853859601560868963769980044696420383208700880414261942339E-64",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": 0,
+      "configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-8-grid-1000.json",
+      "prediction_real": "-0.000383671606303479795132933315094310628617773377718474710240325614922855186407050096033",
+      "prediction_imaginary": "-0",
+      "reference_real": "-0.0003836716063034797951329333150943106286177733777184747102399186898636177449065656387361906155721",
+      "real_difference": "-4.069250592374415004844572968093844279E-61",
+      "imaginary_difference": "0",
+      "absolute_difference": "4.069250592374415004844572968093844279E-61",
+      "relative_difference": "1.060607698229220781872092493539763155164307864134817804697375322798620820689346778637265233688598753E-57",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -2,
+      "configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-1000.json",
+      "prediction_real": "2.92096436728712311370778032010695187822437853094266719025439736273590903090791045814E-69",
+      "prediction_imaginary": "-0",
+      "reference_real": "0",
+      "real_difference": "2.92096436728712311370778032010695187822437853094266719025439736273590903090791045814E-69",
+      "imaginary_difference": "-0",
+      "absolute_difference": "2.920964367287123113707780320106951878224378530942667190254397362735909030907910458140000000000000000E-69",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -1,
+      "configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-1000.json",
+      "prediction_real": "-0.000160405972729442737330512238548729595966059403963097854971375554243746550571075637147",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.0001604059727294427373305122385487295959660594039630978549713755542495884793054987538917559676489",
+      "real_difference": "5.8419287344231167447559676489E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "5.8419287344231167447559676489E-69",
+      "relative_difference": "3.641964594595686570403437807825112005212630504765852220134209148649962421420401967132593118862329929E-65",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": 0,
+      "configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-1000.json",
+      "prediction_real": "-0.00114450117767452551309731965816972987734947417419062342226345325244622877750739045342",
+      "prediction_imaginary": "-0",
+      "reference_real": "-0.001144501177674525513097319658169729877349474174190623422262842867913880207586540063188453312790",
+      "real_difference": "-6.10384532348569920850390231546687210E-61",
+      "imaginary_difference": "0",
+      "absolute_difference": "6.10384532348569920850390231546687210E-61",
+      "relative_difference": "5.333192697877255802526245758439194231298322864233430287765445528040074134534270712806529216705249883E-58",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -2,
+      "configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-1000.json",
+      "prediction_real": "1.94731932936650774683190945923041621826371521988977447034552785877684397846321206989E-69",
+      "prediction_imaginary": "-0",
+      "reference_real": "0",
+      "real_difference": "1.94731932936650774683190945923041621826371521988977447034552785877684397846321206989E-69",
+      "imaginary_difference": "-0",
+      "absolute_difference": "1.947319329366507746831909459230416218263715219889774470345527858776843978463212069890000000000000000E-69",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -1,
+      "configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-1000.json",
+      "prediction_real": "-0.0000200507465911803421663140298185911994957574254953872318714219442773039310070967196466",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.00002005074659118034216631402981859119949575742549538723187142194428119855991318734423646949595611",
+      "real_difference": "3.89462890609062458986949595611E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.89462890609062458986949595611E-69",
+      "relative_difference": "1.942385979684039576883241691523350039762129708235622781347150580217438863198793280800526428182584157E-64",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": 0,
+      "configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-1000.json",
+      "prediction_real": "-0.000383671606303479795132933315094310628617773377718474710240325614922855186407050116296",
+      "prediction_imaginary": "-0",
+      "reference_real": "-0.0003836716063034797951329333150943106286177733777184747102399186898636177449065656387361906155721",
+      "real_difference": "-4.069250592374415004844775598093844279E-61",
+      "imaginary_difference": "0",
+      "absolute_difference": "4.069250592374415004844775598093844279E-61",
+      "relative_difference": "1.060607698229220781872145306934518179599917181675545913039746621273073169523688310607983809779056839E-57",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -2,
+      "configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-2000.json",
+      "prediction_real": "2.78563997050458264895846766125730357808664789094493934681851974461404729598891322647E-75",
+      "prediction_imaginary": "-0",
+      "reference_real": "0",
+      "real_difference": "2.78563997050458264895846766125730357808664789094493934681851974461404729598891322647E-75",
+      "imaginary_difference": "-0",
+      "absolute_difference": "2.785639970504582648958467661257303578086647890944939346818519744614047295988913226470000000000000000E-75",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -1,
+      "configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-2000.json",
+      "prediction_real": "-0.000160405972729442737330512238548729595966059403963097854971375554249588473734218812987",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.0001604059727294427373305122385487295959660594039630978549713755542495884793054987538917559676489",
+      "real_difference": "5.5712799409047559676489E-75",
+      "imaginary_difference": "0",
+      "absolute_difference": "5.5712799409047559676489E-75",
+      "relative_difference": "3.473237215612819794577649450685987924757586325191387537612350903720688723831343997243400894893574957E-71",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": 0,
+      "configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-2000.json",
+      "prediction_real": "-0.00114450117767452551309731965816972987734947417419062342226284287024230514474247270155",
+      "prediction_imaginary": "-0",
+      "reference_real": "-0.001144501177674525513097319658169729877349474174190623422262842867913880207586540063188453312790",
+      "real_difference": "-2.328424937155932638361546687210E-66",
+      "imaginary_difference": "0",
+      "absolute_difference": "2.328424937155932638361546687210E-66",
+      "relative_difference": "2.034445208599071139411222032591447953027692390463643672521141546739292729350097670304581018692064290E-63",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -2,
+      "configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-2000.json",
+      "prediction_real": "1.85710261310768195779300123008189387868857031594393376058242611080351081313771722557E-75",
+      "prediction_imaginary": "-0",
+      "reference_real": "0",
+      "real_difference": "1.85710261310768195779300123008189387868857031594393376058242611080351081313771722557E-75",
+      "imaginary_difference": "-0",
+      "absolute_difference": "1.857102613107681957793001230081893878688570315943933760582426110803510813137717225570000000000000000E-75",
+      "relative_difference": null,
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -1,
+      "configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-2000.json",
+      "prediction_real": "-0.0000200507465911803421663140298185911994957574254953872318714219442811985561989914188556",
+      "prediction_imaginary": "0",
+      "reference_real": "-0.00002005074659118034216631402981859119949575742549538723187142194428119855991318734423646949595611",
+      "real_difference": "3.71419592538086949595611E-75",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.71419592538086949595611E-75",
+      "relative_difference": "1.852397818949355725963869631004493379099248284048266165314859542557211674391194257113246554433336151E-70",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": 0,
+      "configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "prediction_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-2000.json",
+      "prediction_real": "-0.000383671606303479795132933315094310628617773377718474710239918691415908809438558654935",
+      "prediction_imaginary": "-0",
+      "reference_real": "-0.0003836716063034797951329333150943106286177733777184747102399186898636177449065656387361906155721",
+      "real_difference": "-1.5522910645319930161988093844279E-66",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.5522910645319930161988093844279E-66",
+      "relative_difference": "4.045884655077000329142320622069355981077798249610529700880270224985496595363911726877243912801987634E-63",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true,
+      "imaginary_zero_passed": true
+    }
+  ],
+  "refinements": [
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -2,
+      "from_configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "varied_setting": "digits",
+      "real_difference": "-8.661497055645606195938263362880854988348174782389884321959723111351262652390569264271812448109925E-56",
+      "imaginary_difference": "0",
+      "absolute_difference": "8.661497055645606195938263362880854988348174782389884321959723111351262652390569264271812448109925000E-56",
+      "relative_difference": "0.9999999999999662764491112639040851031552458567263301187628146430654923828052188662402055515191028067",
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -1,
+      "from_configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "varied_setting": "digits",
+      "real_difference": "-1.73229934960990662075111075637164E-55",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.73229934960990662075111075637164E-55",
+      "relative_difference": "1.079946912283485493965342048029761631635847900649188396932281208313976865543850872332157792592207962E-51",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": 0,
+      "from_configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "varied_setting": "digits",
+      "real_difference": "1.174595082069103012318953102599260933905E-47",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.174595082069103012318953102599260933905E-47",
+      "relative_difference": "1.026294341134470755792283994832657137790687354026752195857373526514350245439800037100526453729008751E-44",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -2,
+      "from_configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "varied_setting": "digits",
+      "real_difference": "-5.774794028415079308285459606785988655149834636247388995917955061159187836043509195784530945307063E-56",
+      "imaginary_difference": "0",
+      "absolute_difference": "5.774794028415079308285459606785988655149834636247388995917955061159187836043509195784530945307063000E-56",
+      "relative_difference": "0.9999999999999662789820765106409904644051330867995512301954813353606913364878255606222658848636170305",
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -1,
+      "from_configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "varied_setting": "digits",
+      "real_difference": "-1.154912588441249734498760967196479E-55",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.154912588441249734498760967196479E-55",
+      "relative_difference": "5.759948055746001220790481171295914832982373798042369300762241670927435334975422637612978872220383001E-51",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": 0,
+      "from_configuration": [
+        18,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "varied_setting": "digits",
+      "real_difference": "7.831261296020304843612327408522949897274E-48",
+      "imaginary_difference": "0",
+      "absolute_difference": "7.831261296020304843612327408522949897274E-48",
+      "relative_difference": "2.041136525965871943160585882888974929200239306813129509103466835855030127927916626092048551109050663E-44",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -2,
+      "from_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "-2.20543491448548879646880999236377092679999759949125464509894288E-90",
+      "imaginary_difference": "0",
+      "absolute_difference": "2.205434914485488796468809992363770926799997599491254645098942880000000000000000000000000000000000000E-90",
+      "relative_difference": "7.550365691498695183398293642530124398424537302221489788135375219963697435954618522294566343805993796E-22",
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -1,
+      "from_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "1.6E-86",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.6E-86",
+      "relative_difference": "9.974690921881849573011490067323403391972104772882987181206308801896290310574391943033670269470876687E-83",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": 0,
+      "from_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "3.2650E-82",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.2650E-82",
+      "relative_difference": "2.852771201716058210233905803328550472704929304975116212660610876637449315012592878991333520283750648E-79",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -2,
+      "from_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "-3.417406311832028413879216950107863156978289527413843185485412E-92",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.417406311832028413879216950107863156978289527413843185485411999999999999999999999999999999999999999E-92",
+      "relative_difference": "1.754928562714858925178290875941628516260667762030022708880540331193472886911591985353249041078638519E-23",
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -1,
+      "from_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "0E-88",
+      "imaginary_difference": "0",
+      "absolute_difference": "0E-88",
+      "relative_difference": "0E+16",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": 0,
+      "from_configuration": [
+        28,
+        60,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "varied_setting": "series_order",
+      "real_difference": "6.693E-84",
+      "imaginary_difference": "0",
+      "absolute_difference": "6.693E-84",
+      "relative_difference": "1.744460598605233911726606623368845360958893991558854800609478242886381861730941298312389411308889144E-80",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -2,
+      "from_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "6.6233314541740026397279724824971015285326602804300367749050027E-91",
+      "imaginary_difference": "0",
+      "absolute_difference": "6.623331454174002639727972482497101528532660280430036774905002700000000000000000000000000000000000000E-91",
+      "relative_difference": "2.267515320745077264565292641195678406132000008468347841870764335046992992687450842169486395015487429E-22",
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -1,
+      "from_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "1E-87",
+      "imaginary_difference": "0",
+      "absolute_difference": "1E-87",
+      "relative_difference": "6.234181826176155983132181292077127119982565483051866988253943001185181444108994965017884287088499067E-84",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": 0,
+      "from_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "-1.1897E-82",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.1897E-82",
+      "relative_difference": "1.039492158861131532225199918597236293224212678140550002512198701358521730496319361822346209714801425E-79",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -2,
+      "from_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "1.5833909948990764970735464650862245920207676407596220451999464E-91",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.583390994899076497073546465086224592020767640759622045199946400000000000000000000000000000000000000E-91",
+      "relative_difference": "8.131131710247940649091296990094837457260657157185514705664788772767659983770546258958947037334789120E-23",
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -1,
+      "from_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "1.3E-87",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.3E-87",
+      "relative_difference": "6.483549099223202222457468543760212204781868102373941667784100722255815626098841375085886181357043873E-83",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": 0,
+      "from_configuration": [
+        28,
+        80,
+        8,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "varied_setting": "occupied_start_scale",
+      "real_difference": "-2.0263E-83",
+      "imaginary_difference": "0",
+      "absolute_difference": "2.0263E-83",
+      "relative_difference": "5.281339475502443560931754072810834237129847445234883434147595642552929278986114469495886473958576249E-80",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -2,
+      "from_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "varied_setting": "epsilon_grid_denominator",
+      "real_difference": "-2.92096158164715260912513136163929062092080044429477624531505054421616441686061446922677353E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "2.920961581647152609125131361639290620920800444294776245315050544216164416860614469226773530000000000E-69",
+      "relative_difference": "0.9999990463286708657197503280615260084765571028970797603023525715488038603178758037003171674686551497",
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": -1,
+      "from_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "varied_setting": "epsilon_grid_denominator",
+      "real_difference": "-5.841923163143175840E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "5.841923163143175840E-69",
+      "relative_difference": "3.641961121358470957583643230175661319224705747179527028746671536431697635320493693182811781001238186E-65",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "scalar",
+      "sector": "total",
+      "power": 0,
+      "from_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "varied_setting": "epsilon_grid_denominator",
+      "real_difference": "6.1038220392363276491775187E-61",
+      "imaginary_difference": "0",
+      "absolute_difference": "6.1038220392363276491775187E-61",
+      "relative_difference": "5.333172353425169811814851646218868316818792587309525651325876033039425944110050150306224381510731095E-58",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -2,
+      "from_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "varied_setting": "epsilon_grid_denominator",
+      "real_difference": "-1.94731747226389463914995166622918613636983653131945852641176727635073317495239893217277443E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "1.947317472263894639149951666229186136369836531319458526411767276350733174952398932172774430000000000E-69",
+      "relative_difference": "0.9999990463286708544995766692297007585950412531193267810715359444745422040149911701442515015983094562",
+      "criterion": "absolute",
+      "tolerance": "1E-25",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": -1,
+      "from_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "varied_setting": "epsilon_grid_denominator",
+      "real_difference": "-3.8946251918946992090E-69",
+      "imaginary_difference": "0",
+      "absolute_difference": "3.8946251918946992090E-69",
+      "relative_difference": "1.942384127286220627527515727653719035268750608987338733080985265735182275587276277944631216632562700E-64",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    },
+    {
+      "target": "raised_original_numerator",
+      "sector": "total",
+      "power": 0,
+      "from_configuration": [
+        28,
+        80,
+        12,
+        1000
+      ],
+      "to_configuration": [
+        28,
+        80,
+        12,
+        2000
+      ],
+      "varied_setting": "epsilon_grid_denominator",
+      "real_difference": "4.06923506946376968491461361E-61",
+      "imaginary_difference": "0",
+      "absolute_difference": "4.06923506946376968491461361E-61",
+      "relative_difference": "1.060603652344565704871816164613896110243936103877296302508920856604401509493592228038940143648127237E-57",
+      "criterion": "relative",
+      "tolerance": "1E-12",
+      "passed": true
+    }
+  ],
+  "assembly_checks": []
+}

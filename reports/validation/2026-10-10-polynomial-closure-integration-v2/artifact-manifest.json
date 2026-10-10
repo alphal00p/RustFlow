@@ -1,0 +1,1692 @@
+{
+  "schema": 1,
+  "scope": "Frozen optional polynomial-closure-v1 source integration and lower-loop regression attempt, including all four failed three-loop controls. No three-loop or four-loop numerical acceptance; no supplied oracle numerical comparison.",
+  "new_root_tests_passed": 105,
+  "native_tests_reused_by_exact_identity": 84,
+  "new_native_test_invocations": 0,
+  "successful_lower_loop_runs": 3,
+  "failed_three_loop_runs": 4,
+  "three_loop_predictions": 0,
+  "archive_map_sha256": "576c259069fb76126e3db50bf571a4161733300e5a9de040fe12d10ddfab9525",
+  "verification_sha256": "17e23600523a2eb4edabe770efdfd49b7ebd61733a8cfc9f2e034f118232abaf",
+  "files": {
+    "README.md": {
+      "sha256": "e6272ec283620781c11e689aed2ebb37ed50bafc371b7b0df780ccec9dfa6eac",
+      "bytes": 6198
+    },
+    "archive-and-binding-verification.json": {
+      "sha256": "17e23600523a2eb4edabe770efdfd49b7ebd61733a8cfc9f2e034f118232abaf",
+      "bytes": 702
+    },
+    "archive-completed-outputs.py": {
+      "sha256": "af412963705da5512c75872f02853ea64ea8bb60637766b31fdacb52cf34c75b",
+      "bytes": 4136
+    },
+    "capture-frozen-build.py": {
+      "sha256": "4af4c758173aa13a1df4b93a57ab9aa8ea4945daa28f944cbfb3860d7cd1ad59",
+      "bytes": 5435
+    },
+    "capture-polynomial-closure-build.py": {
+      "sha256": "e38f3245f5d264d495014136d35f99cddb39236888b1f634df887a8e18c4b82a",
+      "bytes": 885
+    },
+    "capture-source-snapshot.py": {
+      "sha256": "d756f5964f21e956512371a1380f56c61a4d4cbe909ed12b72e7531d24ea0b3b",
+      "bytes": 2075
+    },
+    "compare-completed-predictions.py": {
+      "sha256": "2257a2b25c3d96cddabcdef8bc4f156b5c5e8216f5f28595f3bba6f061d4c12f",
+      "bytes": 9197
+    },
+    "compare-domain-retry-predictions.py": {
+      "sha256": "236c2589f754cb3fd0dc4cbc8e0a8e4eed8c2a3e8c9babcd1a04440c89442aaa",
+      "bytes": 9506
+    },
+    "compare-per-residual-control-predictions.py": {
+      "sha256": "b5f0682e439f6a10c4a06653d793652153ee37b25f81e7770d0d87d80f2a13fa",
+      "bytes": 9609
+    },
+    "comparison-plan.json": {
+      "sha256": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c",
+      "bytes": 5399
+    },
+    "conditional-chain-diagnostic/README.md": {
+      "sha256": "726517c4ddf674a9627da4ff9661275fd07c94528dc1f484e1660bbc8275528f",
+      "bytes": 2247
+    },
+    "conditional-chain-diagnostic/before-round-reduction-result.json": {
+      "sha256": "9acf8e2aade66afc26ab9ba9f6ead5cdbc6799407873ae7cc3d5207e01e38a69",
+      "bytes": 21669
+    },
+    "conditional-chain-diagnostic/before-round-resources.json": {
+      "sha256": "d4caf206da4fde4748dc773332a4f40d2d624c1fcab8646eb0d5cdf6bdf84ce9",
+      "bytes": 875
+    },
+    "conditional-chain-diagnostic/before-round-resources.log": {
+      "sha256": "bce587a2ed33d32ff103b2be52d5dca9bfaeb79d623dc939ef89807263b4844b",
+      "bytes": 53
+    },
+    "conditional-chain-diagnostic/before-round-resources.provenance.json": {
+      "sha256": "36ff507b559d2b3d2ce8ed334b621121c009af3161f8f181b76594af7bcf2df3",
+      "bytes": 2297
+    },
+    "conditional-chain-diagnostic/before-round-run-binding.json": {
+      "sha256": "2465cfcc501b8d9b69700ce17261e9cc4c4f312898bb448483837628170e8f3b",
+      "bytes": 1628
+    },
+    "conditional-chain-diagnostic/build-binding.json": {
+      "sha256": "b0651e54072c7638230d80479c426d3252dc18085c2941dab57c5553a9f1e602",
+      "bytes": 2524
+    },
+    "conditional-chain-diagnostic/compile.log": {
+      "sha256": "55cdd55ef740f616d475f955859a3a5bc7c04c8e5e51da4c127d65df5ce2ba6a",
+      "bytes": 363
+    },
+    "conditional-chain-diagnostic/manifest.json": {
+      "sha256": "1e968a4dbb941cba910697cba068c07bdca7e02b5fc7eeb799c559efd5f745ea",
+      "bytes": 6077
+    },
+    "conditional-chain-diagnostic/probe.rs": {
+      "sha256": "78c336195a9f6543b37df43df32748321103d06fa9b115597bf9203c5db5ca06",
+      "bytes": 7254
+    },
+    "conditional-chain-diagnostic/request-audit-build-binding.json": {
+      "sha256": "660e7bd59908d627b9d0f31b12b8369091cfe1f53d9b23f55e2a207988ae39f4",
+      "bytes": 2508
+    },
+    "conditional-chain-diagnostic/request-audit-compile.log": {
+      "sha256": "aec7ed80584baf6d8a85402c1d63803f6f93f5c010dfc7b6714e9154050cd736",
+      "bytes": 1147
+    },
+    "conditional-chain-diagnostic/request-audit-resources.json": {
+      "sha256": "7cf3a95e3fd30d5a601ef1371ef7f7ebed939024c022e587a81edc2c838b9332",
+      "bytes": 859
+    },
+    "conditional-chain-diagnostic/request-audit-resources.log": {
+      "sha256": "6e0ea258ee9bb25c1f14acb1db7f683f9c264fcb476c91b638f443db18a81b23",
+      "bytes": 55
+    },
+    "conditional-chain-diagnostic/request-audit-resources.provenance.json": {
+      "sha256": "65682ea898d60ae55f96a7a6485e58a3c1e811e18499758764de5c59c095cd0e",
+      "bytes": 2295
+    },
+    "conditional-chain-diagnostic/request-audit-run-binding.json": {
+      "sha256": "5b1e4a2df48c6f3b686ed27e2734b7bc9fa3774aee660e1a3e443f451af27e02",
+      "bytes": 1885
+    },
+    "conditional-chain-diagnostic/request-audit.rs": {
+      "sha256": "97710d5b444247bee98db2b8c5f40b1a05ebd8c23172d5a0e206853498b699f8",
+      "bytes": 4750
+    },
+    "conditional-chain-diagnostic/requested-reduction-result.json": {
+      "sha256": "9fef9c926e165901557624a301d68adaac0a74f9001d7901f329b77fa107f953",
+      "bytes": 43595
+    },
+    "conditional-chain-diagnostic/resources.json": {
+      "sha256": "666e5aff4d3286ee84e08203f7bec4b06e69ba499c216986c7c905b3740ded26",
+      "bytes": 673
+    },
+    "conditional-chain-diagnostic/resources.log": {
+      "sha256": "8a1ff836ab9c870644484b92cf03f423e309854ed185106697536520e591a577",
+      "bytes": 91
+    },
+    "conditional-chain-diagnostic/resources.provenance.json": {
+      "sha256": "099faf9ccff62cf24236ae372d90ec38a109f7003b4542599744cd98e446b47f",
+      "bytes": 1606
+    },
+    "conditional-chain-diagnostic/result.bin": {
+      "sha256": "42416682200ea25375eeae70a2ffe360fad777c471eb356fa455b386437f7918",
+      "bytes": 2359319
+    },
+    "conditional-chain-diagnostic/result.json": {
+      "sha256": "09806e116737b5695cda7f260a8cd73b80c1afceee249a04db053a43c26cceea",
+      "bytes": 60818
+    },
+    "conditional-chain-diagnostic/run-binding.json": {
+      "sha256": "fa76440d81c1835abed3ef520fa9f5bb523a7da630bd28c7e901cc7d95148b76",
+      "bytes": 1682
+    },
+    "conditional-chain-diagnostic/summary.json": {
+      "sha256": "8193bb81de9518c4e9d91c73e28e886165202405fd7397d8e8f4a5069933ac9f",
+      "bytes": 2958
+    },
+    "conditional-chain-domains16384-diagnostic/README.md": {
+      "sha256": "451d0411263500b3ab6b433089bd47cf1e343e9d777ae628f4143ba63288641a",
+      "bytes": 1726
+    },
+    "conditional-chain-domains16384-diagnostic/manifest.json": {
+      "sha256": "d629bc22191432ad700af7dca5693606e6188187fa7b411c343db2112b98ee8c",
+      "bytes": 1868
+    },
+    "conditional-chain-domains16384-diagnostic/request-audit-result.json": {
+      "sha256": "1e9fb73a322a3115b7e9648d73a7e72cf31fd7758a7d49a84f9352c1708bbe1e",
+      "bytes": 42390
+    },
+    "conditional-chain-domains16384-diagnostic/resources.json": {
+      "sha256": "58db6a251f1da2c1f1d30630cc9099061b5623db4895e390e94cfa393eb80c56",
+      "bytes": 909
+    },
+    "conditional-chain-domains16384-diagnostic/resources.log": {
+      "sha256": "b3cb3771e6c3b65377d09d377d6d87d53e8395a2b56e9fdab33e44de6b6f4208",
+      "bytes": 54
+    },
+    "conditional-chain-domains16384-diagnostic/resources.provenance.json": {
+      "sha256": "78f31479caeaca99d85df5470235142f10721b95656944eecad3951f3416438d",
+      "bytes": 2428
+    },
+    "conditional-chain-domains16384-diagnostic/run-binding.json": {
+      "sha256": "be2b5aad032c50afde8a8738c21d85a07f962ee9ce9c72612378c016316fd3b8",
+      "bytes": 2089
+    },
+    "conditional-chain-domains16384-diagnostic/summary.json": {
+      "sha256": "7da6d3fafe7ba811aedd30cdc19f84ac10759e91149ff1a6f7415c04fd3e913a",
+      "bytes": 2020
+    },
+    "domain-retry-comparison-plan.json": {
+      "sha256": "2d16add1cad26223662724ae132f1318ced73c54e4b06e326cf3752c09d62881",
+      "bytes": 758
+    },
+    "finalize-report.py": {
+      "sha256": "a573d19d559821399e6ab8f2b742de163b31d3de9ba3e6031fd715e496ae860b",
+      "bytes": 4714
+    },
+    "frozen_sources.py": {
+      "sha256": "0bf7fa848b444bc753569139b92ff8d4e1a14b1c1d42aad74ceb50e68865fc77",
+      "bytes": 1903
+    },
+    "helper-template-provenance.json": {
+      "sha256": "19e5f3f6c87136d8625657a62d5e2263196102d6eb4aeaa038cee121ac10baa5",
+      "bytes": 4843
+    },
+    "launch-polynomial-closure-build.py": {
+      "sha256": "ca5fed684b5857e63016122e824de8941826039cf05ed7e0b9bc81ba5f9abe3f",
+      "bytes": 2618
+    },
+    "per-residual-control-comparison-plan.json": {
+      "sha256": "be201cc5ad7d8fefe52d629681b46b75df29c38a805164d95b6b6cedd8e56c17",
+      "bytes": 585
+    },
+    "polynomial-closure-v2-actual62-source-equivalence.json": {
+      "sha256": "b2ea8ee6679de1050d99b5f0d40273400126d564c7b21594696fd16fe2ac4aad",
+      "bytes": 513935
+    },
+    "polynomial-closure-v2-build-provenance.json": {
+      "sha256": "365cb0102bdb109f3e670af3507ce4881350c2a2c0ef5bcfacd3e84670c81d4d",
+      "bytes": 5433
+    },
+    "polynomial-closure-v2-build-resources.json": {
+      "sha256": "fdc36b54cc3962ed4152b514663aec70db4b132d6c6cffbb41ddf0c155e6399f",
+      "bytes": 797
+    },
+    "polynomial-closure-v2-build-resources.log": {
+      "sha256": "6cd2e02c6194db95ab8aa0371594ac57d0b1868ed23d4b498e6ef4923f3fe50e",
+      "bytes": 3344
+    },
+    "polynomial-closure-v2-build-resources.provenance.json": {
+      "sha256": "909a8d6d7ad2360fba8adcf72aaa54b6adecbc18d30bc2e531173a5f0c700481",
+      "bytes": 1183
+    },
+    "polynomial-closure-v2-capacity-binding.json": {
+      "sha256": "55e69f5a36fb9f98a3c18135a9f0ed1ce04e4b26781cb7130c3a55f04a8f7ed3",
+      "bytes": 525
+    },
+    "polynomial-closure-v2-capacity-resources.json": {
+      "sha256": "e01e792db5d8f874ada49e89fe81a8702dbec01cee6227b2537928a99bce0520",
+      "bytes": 390
+    },
+    "polynomial-closure-v2-capacity-resources.log": {
+      "sha256": "2b0ff815bd81bbb4d9b5a2413cab6713bff9847ffdf1292409547656650301ad",
+      "bytes": 364
+    },
+    "polynomial-closure-v2-capacity-resources.provenance.json": {
+      "sha256": "c2b3cca94ab0543a7794e3766445070c73c434656aa32f425db34f7de80e839e",
+      "bytes": 859
+    },
+    "polynomial-closure-v2-checkpoint-summary.json": {
+      "sha256": "7d3b6440004e7ab4a0c0ebdafb789dd2d91ff5fed60b227af7e26e5be832b87c",
+      "bytes": 16014
+    },
+    "polynomial-closure-v2-domain-retry-addendum.json": {
+      "sha256": "fb19a43a419f7ff2d8bf06925e0824e573886d4e86c837dcf16dac1a2faf46d7",
+      "bytes": 4497
+    },
+    "polynomial-closure-v2-final-source-verification.json": {
+      "sha256": "7b335855ff0748b58a191131ea2929ab151ae2ba2b3b7d389c18ad30498c8af2",
+      "bytes": 490
+    },
+    "polynomial-closure-v2-flow-boundary-binding.json": {
+      "sha256": "1464cb8408cdc9e25f74f5e12ff70593b4e027bb3c532bf578664e7f946f27c8",
+      "bytes": 535
+    },
+    "polynomial-closure-v2-flow-boundary-resources.json": {
+      "sha256": "adddef5837f8f94c7bf084166dce94d9a7ae5fd989f06c35773a0f8fb3e16ac7",
+      "bytes": 393
+    },
+    "polynomial-closure-v2-flow-boundary-resources.log": {
+      "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d",
+      "bytes": 574
+    },
+    "polynomial-closure-v2-flow-boundary-resources.provenance.json": {
+      "sha256": "8d77ef98d6c63849a263971941a86cef279fdb8d21522baccc9378fb42d1c124",
+      "bytes": 874
+    },
+    "polynomial-closure-v2-lib-binding.json": {
+      "sha256": "c6c4b34d7cd6f08bfac41f8cbf315123f5fe46f2f3d32c713d51416891a6b9c9",
+      "bytes": 537
+    },
+    "polynomial-closure-v2-lib-resources.json": {
+      "sha256": "88adab7a969a6b1e6b8311dc1074f452cde46adeda84b39b2841e1297c3e09be",
+      "bytes": 402
+    },
+    "polynomial-closure-v2-lib-resources.log": {
+      "sha256": "a0f0581477f7da8a1b8a4b49d2c06cd08b63fb6fc465e5f0422fc4fa2fc99940",
+      "bytes": 10346
+    },
+    "polynomial-closure-v2-lib-resources.provenance.json": {
+      "sha256": "f48270b12fe623336de8e994a9be665be900f4763b421fd544bd3e8af61a3aff",
+      "bytes": 862
+    },
+    "polynomial-closure-v2-lower-loop-regressions.json": {
+      "sha256": "c6438cb6d22ad8839e48922ecd68a0e550b09fa577738d4a4df8f9ef189185ea",
+      "bytes": 8963
+    },
+    "polynomial-closure-v2-massive-regression/configuration.json": {
+      "sha256": "f912179d5f83d15d23cea8f1672d8d2836d6eca2538af552102fb2c7306004c5",
+      "bytes": 1188
+    },
+    "polynomial-closure-v2-massive-regression/input.json": {
+      "sha256": "9ffd4c0ea5d33c557e7909509cfe35f84d6810eea5c67d639c1a36c0844bb1c4",
+      "bytes": 1060
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0/guard-refinements.json.gz": {
+      "sha256": "1bfaa7bfa5fc8f44c1196e0e9b5e752e8ad19bae062bf32a58d225fb4e34b366",
+      "bytes": 513
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "8ddcbe46ebc01221e59183d21824378a8763d7191951050bd6d338d07cdf04f2",
+      "bytes": 14988
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "44d10cc47cf24600e7e36c0d3e05ca581af3005d14195dbeb50bec4302e0f369",
+      "bytes": 1321
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "0e0f7ee99226dd87d8e2d36ac4d3f23d91cc3d74ea78af9f3bce15b74a781c8b",
+      "bytes": 36167
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "6df77a5458e60758544c083c1e4dcc5ea09f8d83661bfcbdec1a1a32f346b876",
+      "bytes": 1402
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0/round-002-closed.bin": {
+      "sha256": "84db15100e802ef889a51cc7b9adf3b79f99fc726e8797475a9d2ca9aa561280",
+      "bytes": 267137
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0/round-002-closed.json": {
+      "sha256": "59fce9b309ec1258b6de0739ceea677449fbfa5add68ad445a7a1fb85705bbf4",
+      "bytes": 5780
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "49bf40380191c8cb7e17f3e5f408119a3cf7800f6b878f18237c580e5a1ba489",
+      "bytes": 37260
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "74f67e52e31bd9a12270ccd67fb6668c528962584322ef4c117dd75567362a14",
+      "bytes": 1408
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0-1/guard-refinements.json.gz": {
+      "sha256": "abc9aa83808f1383daa579d8a08211aa30ff5a8f169b0f3b242d97166bf021c9",
+      "bytes": 981
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "ddddc5c802d72537b23908be7476507ad4e4f1801fae6d5ece36612b2c5c1bf7",
+      "bytes": 29301
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0-1/round-000-provisional.json.gz": {
+      "sha256": "d1c2845a69613d8584b7c8f638ff3809f93a47899f3911fa2714aaa7b9e32c5d",
+      "bytes": 1490
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0-1/round-001-closed.bin": {
+      "sha256": "63595a78843a40b86af0db207df37fcba627af148e933ddfe35e21e3617ca2dc",
+      "bytes": 1352738
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0-1/round-001-closed.json": {
+      "sha256": "bafa94d5a53826f52bfeb107cbaf1bd60f263ccde7e2c0c12883ab97585fb909",
+      "bytes": 9818
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "d48820c476de85ea36d0cb7e63b85c58212a76bda6135f8ccbca6964ff9b0f75",
+      "bytes": 163045
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "b581982dc038af39ac0a79cb43c6ef66a1f7cfd9c80883572e250bc818cc6ce9",
+      "bytes": 1553
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-1/guard-refinements.json.gz": {
+      "sha256": "4701e9c623f51cd68160d8fcd9d3d866702f3a00be518a5b35204e1873471481",
+      "bytes": 474
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-1/round-000-provisional.bin.gz": {
+      "sha256": "0eaffb3597d0e667f269ab291594e23f574ddc0a3aa6e855745eca7568476f64",
+      "bytes": 12454
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-1/round-000-provisional.json.gz": {
+      "sha256": "898ff49d5cdf72a4fa9a4cfffd7263bccacf2c22cc6dba144cf3c81ab1902302",
+      "bytes": 1368
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-1/round-001-provisional.bin.gz": {
+      "sha256": "1b03c97606a61e76b98fd8ca153db87ee9b1fc90cf8eb58caa76c8716e9211c6",
+      "bytes": 44852
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-1/round-001-provisional.json.gz": {
+      "sha256": "c88900fc049e70ce97a5c7ff1bf44ba94cde4f8fb7024da7d806d77e6e3b4c2b",
+      "bytes": 1567
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-1/round-002-closed.bin": {
+      "sha256": "7f0a72287d938ff81e94f4f0808f5286b3fb9b51e072fb20ef753aa6c2b75330",
+      "bytes": 520750
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-1/round-002-closed.json": {
+      "sha256": "40f4e9b9e775cbce38cc05ff9626408eb04f8d427539fe62e32f047121dba727",
+      "bytes": 10268
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-1/round-002-provisional.bin.gz": {
+      "sha256": "3df37dd1d5419b19825f8d523b94015c8cb3b4ae5ccbad32efc23891ea0496f5",
+      "bytes": 72847
+    },
+    "polynomial-closure-v2-massive-regression/native-closure/cut-1/round-002-provisional.json.gz": {
+      "sha256": "558795a18a90dec6d6bf7a7c6ffc7b41b56374d33ab341e2001cba63524ae0a4",
+      "bytes": 1611
+    },
+    "polynomial-closure-v2-massive-regression/prediction-28-80-12.json": {
+      "sha256": "8dbfa298bb97fc887f19495b974ec37cb500fc601e164605c1dbb49f98c6c014",
+      "bytes": 74548
+    },
+    "polynomial-closure-v2-massive-regression-binding.json": {
+      "sha256": "dd7f880c91a8137e75f52fb4e788b61d346bdd3ff75eccce30f0a84c8e936aa0",
+      "bytes": 2918
+    },
+    "polynomial-closure-v2-massive-regression-comparison-binding.json": {
+      "sha256": "4e57006c46f019cb83e53b5c74a8c8fa8c6441419446e8c7b2e806c481f76b5a",
+      "bytes": 10312
+    },
+    "polynomial-closure-v2-massive-regression-comparison.json": {
+      "sha256": "f8a6e6cfc65cada9799a56ec02595d9ef8798d331c4996d589dbad8daefc75e2",
+      "bytes": 14340
+    },
+    "polynomial-closure-v2-massive-regression-resources.json": {
+      "sha256": "9d16c633ec776cc9f249cfc43d3bbb14290057621c18bf186fe224e53ee57c4c",
+      "bytes": 821
+    },
+    "polynomial-closure-v2-massive-regression-resources.log.gz": {
+      "sha256": "12ba43d2752d88bd2f53facab7e6f7db8676e074f05f1f2b4e295d529b3bc1b9",
+      "bytes": 2034
+    },
+    "polynomial-closure-v2-massive-regression-resources.provenance.json": {
+      "sha256": "ab7107ce64924c8a33d1f9b2fcc9106b117c180b95eb1c56e86d8af714178e46",
+      "bytes": 1541
+    },
+    "polynomial-closure-v2-massless-sources-binding.json": {
+      "sha256": "eb3079cd5048aa7290f8262e3795625d74b8de303b7009fcc2ba18743e804c2f",
+      "bytes": 541
+    },
+    "polynomial-closure-v2-massless-sources-resources.json": {
+      "sha256": "b9d327254de2439250a529dd47a0ef9683c92bf06ae7edf76d76d191ba97651f",
+      "bytes": 395
+    },
+    "polynomial-closure-v2-massless-sources-resources.log": {
+      "sha256": "8d04dedadbb9acaed1a52602afd0cc82bdf83c60c0cc7df48bed88c838b1abe5",
+      "bytes": 435
+    },
+    "polynomial-closure-v2-massless-sources-resources.provenance.json": {
+      "sha256": "b1a000cda3c0e1ddd1503b44b30516413929c9174b527d8602579f75fa960bb1",
+      "bytes": 883
+    },
+    "polynomial-closure-v2-native-archives.json": {
+      "sha256": "576c259069fb76126e3db50bf571a4161733300e5a9de040fe12d10ddfab9525",
+      "bytes": 115528
+    },
+    "polynomial-closure-v2-native-gate-reuse.json": {
+      "sha256": "c35f0054d07ae7e08efde2843939120020a29d8275d9c0e07cafca3f20f55ccc",
+      "bytes": 2034
+    },
+    "polynomial-closure-v2-per-residual-control-addendum.json": {
+      "sha256": "a0d2e9beba3c67969fe6828d08d1f353e866e9369a3089c47e69d99b9a24417f",
+      "bytes": 4982
+    },
+    "polynomial-closure-v2-polynomial-sources-binding.json": {
+      "sha256": "7311590df843d6605262c8b281bed3ce2f86c47af1e0bb1650b9367c8e54cec7",
+      "bytes": 1018
+    },
+    "polynomial-closure-v2-polynomial-sources-resources.json": {
+      "sha256": "74cc68e25b95ea833a1a813e8fb1898958be9a1b77d9bfbd547a1dacd71259ad",
+      "bytes": 411
+    },
+    "polynomial-closure-v2-polynomial-sources-resources.log": {
+      "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596",
+      "bytes": 188
+    },
+    "polynomial-closure-v2-polynomial-sources-resources.provenance.json": {
+      "sha256": "aa842023ea5207de052ee69cb000563ce939f4e26a32e355c310eb633b238db3",
+      "bytes": 889
+    },
+    "polynomial-closure-v2-python-binding.json": {
+      "sha256": "55db3f1315fc3fc55e3c3915b4a3768fff47248671ceb21bd8dea1e33652188f",
+      "bytes": 521
+    },
+    "polynomial-closure-v2-python-resources.json": {
+      "sha256": "f773149c78e699c5030b8b526c5cb8a553223b64bdabff410e89924f86f75526",
+      "bytes": 386
+    },
+    "polynomial-closure-v2-python-resources.log": {
+      "sha256": "590fcb3c17ac42fa6e73e57a1aba75c8de9e2b88ac9cc73ed5273d2b43191cdd",
+      "bytes": 193
+    },
+    "polynomial-closure-v2-python-resources.provenance.json": {
+      "sha256": "23bdbccbf0a7a85d75e990d3a271587e02bc7c1d1ce4e28070c0064654d04e70",
+      "bytes": 853
+    },
+    "polynomial-closure-v2-root-gates.json": {
+      "sha256": "f0f63c85666d454ae2a3bd7036d2968d1b777b9d1281b51697414dfb11c155fe",
+      "bytes": 10896
+    },
+    "polynomial-closure-v2-source-fingerprint-binding.json": {
+      "sha256": "009dbc946a214d60dce568d36e7b178191c03b4323250d56a3cf7eaa381a3d2e",
+      "bytes": 530
+    },
+    "polynomial-closure-v2-source-fingerprint-resources.json": {
+      "sha256": "da8a0d3a157a48c3b1b88e557499f482fa06b54731776e584520dc127a29a32c",
+      "bytes": 379
+    },
+    "polynomial-closure-v2-source-fingerprint-resources.log": {
+      "sha256": "af27261b7d5ebde81be6a7c22873c6558ef0024ad5fbfe3add20c610b6cf9de6",
+      "bytes": 4242
+    },
+    "polynomial-closure-v2-source-fingerprint-resources.provenance.json": {
+      "sha256": "e33691cbb509cae370bab6fd650503c53cc657be85b26fb4d2d30888d22e1a76",
+      "bytes": 841
+    },
+    "polynomial-closure-v2-source-hashes.json": {
+      "sha256": "963a44afe05bddaa861cbbdc4a03895c92a60dfe0df10c8a907a7721c9989674",
+      "bytes": 376956
+    },
+    "polynomial-closure-v2-three-loop-fixed/configuration.json": {
+      "sha256": "04de83995f2f507ebd2716d5c7bc11ae28cce51e848a9fd4c3ad92809ebccb1c",
+      "bytes": 1319
+    },
+    "polynomial-closure-v2-three-loop-fixed/failure.json": {
+      "sha256": "097bc99b7e5fa5022e5fa4767d3125cd37632921c22e56b3a37a7af06c11af1a",
+      "bytes": 557
+    },
+    "polynomial-closure-v2-three-loop-fixed/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "bytes": 1549
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "638cc24b457dae5b9383a1f1aa554f40bd0e9903e5bae2ee52f57cbf9e14947b",
+      "bytes": 827
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/conditional-point-refinements.json": {
+      "sha256": "924dfe190a8f958e342e72314bae70dc18d30e6e02eb6c9e61beb0580f0a3e79",
+      "bytes": 384
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "2a8e9dd5ac185abb06ec33a7c4b2c85ebf394c2c5086b92969071dfb4f5ea231",
+      "bytes": 5695
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "83f3b5251a69bdc35578aceb82338a890a588168e5b80f2b67ab4644e0217353",
+      "bytes": 23095
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "065b8d42acebc0432f779dee5a3df1792f9f13c82ac89bc975c3618cd98598f7",
+      "bytes": 64495
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "85f64c5d465a0a3d2b8572f0a957c0e4c26a269b039b74558ee1d11e4e74edb4",
+      "bytes": 192852
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/guard-refinements.json.gz": {
+      "sha256": "1e095214e07b23eb71ace4784ca8d7afb14611b745de4c34e4349444e2daa494",
+      "bytes": 348
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "5d113cf621de3531505596d98e53eeb1957af80cdfa70c76876f8920bb0c4d13",
+      "bytes": 20514
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "961a935da5badc52e8d931d5dbe6b8891fa1ea269ca8d3012719da3dc5f95cb4",
+      "bytes": 5176
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "8477513efce722af86919d44c285d8209908b5d043bfb98c771c0a45374c32d0",
+      "bytes": 2182
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "862d43bc4480eb28ca4af887d62aea024e451119ac2af3075293d697241f2f95",
+      "bytes": 10680
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "1cbc9a13c16931458261b4e54335e3cb9fb74f20f50b743fb1995fd1844f276e",
+      "bytes": 2346
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin": {
+      "sha256": "aa51c52760446f94cc8d16fb79a67c623401d40803e2b92ea655c0f53bbb51a2",
+      "bytes": 527832
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-002-provisional.json": {
+      "sha256": "4343c77a72abda1e2d1c6f1cf0237e6a5778567d0553c878e5c6f0c798eda012",
+      "bytes": 43433
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin": {
+      "sha256": "b272627925c0faaa2edff319d742dd9b3661fddbd5169ab4bd20745b4e7e9b92",
+      "bytes": 2358340
+    },
+    "polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-003-provisional.json": {
+      "sha256": "379d18bdf3d4d3610ba9f1d51233c660e50637651a75ac8be0c554a6ecb63ec1",
+      "bytes": 13456
+    },
+    "polynomial-closure-v2-three-loop-fixed-binding.json": {
+      "sha256": "9a4a2fead7c8d8e7cba0d1e28404fed07dbd453d4eaa9fcb65784c721db95bf2",
+      "bytes": 2557
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/configuration.json": {
+      "sha256": "51f6db64d87d4cc2e3562af8459f5c777b852d429e908544552c93f79c7f2fd4",
+      "bytes": 1327
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/failure.json": {
+      "sha256": "097bc99b7e5fa5022e5fa4767d3125cd37632921c22e56b3a37a7af06c11af1a",
+      "bytes": 557
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "bytes": 1549
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "638cc24b457dae5b9383a1f1aa554f40bd0e9903e5bae2ee52f57cbf9e14947b",
+      "bytes": 827
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/conditional-point-refinements.json": {
+      "sha256": "924dfe190a8f958e342e72314bae70dc18d30e6e02eb6c9e61beb0580f0a3e79",
+      "bytes": 384
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "2a8e9dd5ac185abb06ec33a7c4b2c85ebf394c2c5086b92969071dfb4f5ea231",
+      "bytes": 5695
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "83f3b5251a69bdc35578aceb82338a890a588168e5b80f2b67ab4644e0217353",
+      "bytes": 23095
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "065b8d42acebc0432f779dee5a3df1792f9f13c82ac89bc975c3618cd98598f7",
+      "bytes": 64495
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "85f64c5d465a0a3d2b8572f0a957c0e4c26a269b039b74558ee1d11e4e74edb4",
+      "bytes": 192852
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/guard-refinements.json.gz": {
+      "sha256": "aa665cf74d5c75f03b66a6463a3a0a7491518c43fa11a598d0ff0f20457313c9",
+      "bytes": 349
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "5d113cf621de3531505596d98e53eeb1957af80cdfa70c76876f8920bb0c4d13",
+      "bytes": 20514
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "961a935da5badc52e8d931d5dbe6b8891fa1ea269ca8d3012719da3dc5f95cb4",
+      "bytes": 5176
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "8477513efce722af86919d44c285d8209908b5d043bfb98c771c0a45374c32d0",
+      "bytes": 2182
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "862d43bc4480eb28ca4af887d62aea024e451119ac2af3075293d697241f2f95",
+      "bytes": 10680
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "1cbc9a13c16931458261b4e54335e3cb9fb74f20f50b743fb1995fd1844f276e",
+      "bytes": 2346
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/round-002-provisional.bin": {
+      "sha256": "aa51c52760446f94cc8d16fb79a67c623401d40803e2b92ea655c0f53bbb51a2",
+      "bytes": 527832
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/round-002-provisional.json": {
+      "sha256": "4343c77a72abda1e2d1c6f1cf0237e6a5778567d0553c878e5c6f0c798eda012",
+      "bytes": 43433
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/round-003-provisional.bin": {
+      "sha256": "b272627925c0faaa2edff319d742dd9b3661fddbd5169ab4bd20745b4e7e9b92",
+      "bytes": 2358340
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/round-003-provisional.json": {
+      "sha256": "379d18bdf3d4d3610ba9f1d51233c660e50637651a75ac8be0c554a6ecb63ec1",
+      "bytes": 13456
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-binding.json": {
+      "sha256": "8ca38ed038819fd88c74203c0183d415df3162c2fd9c7288789f5bf3f4afd144",
+      "bytes": 3541
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/configuration.json": {
+      "sha256": "c4cfae991c692a21caa33da88117ab18b6df6b3b2455d284978dba00e96c0895",
+      "bytes": 1341
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/failure.json": {
+      "sha256": "06dd505aec3a62d078cab5d713d238c9469b9fb2b3a33da5f27b8d334db4842b",
+      "bytes": 557
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "bytes": 1549
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "ac86393904ebfe76ad60172a1f6b770d0d3ab43408e7bab4bc02f304f8653e11",
+      "bytes": 832
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/conditional-point-refinements.json": {
+      "sha256": "2f2f43da43ad6aa05d3360850d031d7ec98399cdd0d594b0f0953377a9b1b0fe",
+      "bytes": 607
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "2a8e9dd5ac185abb06ec33a7c4b2c85ebf394c2c5086b92969071dfb4f5ea231",
+      "bytes": 5695
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "83f3b5251a69bdc35578aceb82338a890a588168e5b80f2b67ab4644e0217353",
+      "bytes": 23095
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "065b8d42acebc0432f779dee5a3df1792f9f13c82ac89bc975c3618cd98598f7",
+      "bytes": 64495
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "85f64c5d465a0a3d2b8572f0a957c0e4c26a269b039b74558ee1d11e4e74edb4",
+      "bytes": 192852
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/guard-refinements.json.gz": {
+      "sha256": "7d072d786c06f884ecc3d3c9a7043fa60cc5f2eb8cbb77b4947a0aa1aa1c169c",
+      "bytes": 399
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "51d2043f1d27a73449bd2eedd3727a0f629e1ffbf4c7d8ac43fa5502f927d9ab",
+      "bytes": 29251
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "961a935da5badc52e8d931d5dbe6b8891fa1ea269ca8d3012719da3dc5f95cb4",
+      "bytes": 5176
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "8477513efce722af86919d44c285d8209908b5d043bfb98c771c0a45374c32d0",
+      "bytes": 2182
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "862d43bc4480eb28ca4af887d62aea024e451119ac2af3075293d697241f2f95",
+      "bytes": 10680
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "1cbc9a13c16931458261b4e54335e3cb9fb74f20f50b743fb1995fd1844f276e",
+      "bytes": 2346
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-002-provisional.bin": {
+      "sha256": "aa51c52760446f94cc8d16fb79a67c623401d40803e2b92ea655c0f53bbb51a2",
+      "bytes": 527832
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-002-provisional.json": {
+      "sha256": "4343c77a72abda1e2d1c6f1cf0237e6a5778567d0553c878e5c6f0c798eda012",
+      "bytes": 43433
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-003-provisional.bin": {
+      "sha256": "0560710a9bbac7d51eeed7be9eb6c1251de672ce2dd3d7c109d4b62d19345417",
+      "bytes": 4038426
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-003-provisional.json": {
+      "sha256": "864d2045c052cbff8a89195c2af3e66ba01426584070d07a9005c86a87351e6d",
+      "bytes": 13698
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384-binding.json": {
+      "sha256": "c858529543b4c88c7229b1a77c8427e8ab16d91317af763b2e269487fed23a51",
+      "bytes": 3652
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384-resources.json": {
+      "sha256": "c5b6865676152189c2618cae53da8eff8edff2d4e7d03b45cbd25a6d0dbb05ca",
+      "bytes": 465
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384-resources.log.gz": {
+      "sha256": "e1cf23d2ece6a8e6567cea31cb5acaefddde48bc41df97769e721686c16b2606",
+      "bytes": 543
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-domains16384-resources.provenance.json": {
+      "sha256": "1405e98be268ebc428c4ec4352c4acd06ccd0f3893baeb55980ca33bb5b6889d",
+      "bytes": 940
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/configuration.json": {
+      "sha256": "f33f240513d3cc42012dfb50205bb06d8add7862702477f89577a0ee8d97710b",
+      "bytes": 1340
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/failure.json": {
+      "sha256": "bab1302d249fdb076ed0389fe35f4f0492f5f391aa4c0dec71a14ba6aa6e8311",
+      "bytes": 769
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/input.json": {
+      "sha256": "6b3634e952a2351d8f4158dc8eadc1c80444b8ed623b60e6dcd75f5f6d369724",
+      "bytes": 1549
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "41978f0080a417c609895d1e94bfbac5d3f6fde0629ad36db70b5c51543bbf4c",
+      "bytes": 9443
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/conditional-point-refinements.json": {
+      "sha256": "fd96b539358deed70b92ab37cd311e5e91474f539743bc7466746705d0b2d2ba",
+      "bytes": 159
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "2a8e9dd5ac185abb06ec33a7c4b2c85ebf394c2c5086b92969071dfb4f5ea231",
+      "bytes": 5695
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "b994e7678fe7bd1475d95901235dc3b14c6ccd2b7f70d94c24e015ffac481706",
+      "bytes": 21249
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "6294ee89cf6a794d068cda0e8289be2d7fb67cf99f1f2728cc5172021368c56a",
+      "bytes": 52053
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "5e10ead8a95a19b641bd6fb0d5267b356c8a61fdb2a61401b74bf9abdab241dd",
+      "bytes": 103154
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/direct-zero-0005.json.gz": {
+      "sha256": "4c93fb0b675ea7bbde4a083e5836615915780b341cd419e2a19607208068a716",
+      "bytes": 179637
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/direct-zero-0006.json.gz": {
+      "sha256": "e674ce122528f047b080b4b40eacec99015199b89de55884f7d78a6f25ce30a3",
+      "bytes": 286578
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/direct-zero-0007.json.gz": {
+      "sha256": "372f88cfc37aa5127d6a0d009e76a9ea98d44258c1de05e408a5a9f8daaa2262",
+      "bytes": 428801
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/direct-zero-0008.json.gz": {
+      "sha256": "4aaa80524577ae296f4f87c14e07938bd2a4d5a34902c394f63729f8c821ba4c",
+      "bytes": 612606
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/direct-zero-0009.json.gz": {
+      "sha256": "b0dc74bfb635837d688078f3c9fb7fd402b9f35f53796a1e773f435772535c06",
+      "bytes": 841086
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "0c741004718b0582d5d1b48249cbf1a65475ee72945fe5879af5e3f93a01a7c2",
+      "bytes": 26346
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "634eb05447318353bf627d73fafadfaa2812abf41f27560d61d67272b6b1e0ee",
+      "bytes": 3723
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "c796970b8dbd14512236fb217eb085e7bbb8d46664ef89e0546ba8e4f1f4d536",
+      "bytes": 2144
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "634eb05447318353bf627d73fafadfaa2812abf41f27560d61d67272b6b1e0ee",
+      "bytes": 3723
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "7f16398e7c5c3d6f63040b41583e0ee9a7cefb126f93b54018a44fb977ae0336",
+      "bytes": 2269
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-002-provisional.bin": {
+      "sha256": "06ac04e51aa25d40163c28daa54d9c4c8d3f65aee8c68571ba8d13a0f07309d3",
+      "bytes": 36143
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-002-provisional.json": {
+      "sha256": "c7129b3f16b770c1c66bb384f86f8564f55b73fe722192b79de3aa6b9fe98a57",
+      "bytes": 28947
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-003-provisional.bin": {
+      "sha256": "06ac04e51aa25d40163c28daa54d9c4c8d3f65aee8c68571ba8d13a0f07309d3",
+      "bytes": 36143
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-003-provisional.json": {
+      "sha256": "f90da66076734214b054e4cbe4e1393ba6603a80196a7dc406a435f31def997c",
+      "bytes": 48912
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-004-provisional.bin.gz": {
+      "sha256": "634eb05447318353bf627d73fafadfaa2812abf41f27560d61d67272b6b1e0ee",
+      "bytes": 3723
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-004-provisional.json.gz": {
+      "sha256": "dbf9dfe797cb17a9521fcd58d27e5ac233d1daa588320ea2eb9f71673aa53e26",
+      "bytes": 4055
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-005-provisional.bin.gz": {
+      "sha256": "634eb05447318353bf627d73fafadfaa2812abf41f27560d61d67272b6b1e0ee",
+      "bytes": 3723
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-005-provisional.json.gz": {
+      "sha256": "ead592259cf4edb97cd0918def75e7a67466899ec5a8ca0616c5855bf8c3801f",
+      "bytes": 5337
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-006-provisional.bin.gz": {
+      "sha256": "634eb05447318353bf627d73fafadfaa2812abf41f27560d61d67272b6b1e0ee",
+      "bytes": 3723
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-006-provisional.json.gz": {
+      "sha256": "1777a2d0029cb10421e1db50c807952ae8a3f2354a3d0c695bae902b44f57f3a",
+      "bytes": 7214
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-007-provisional.bin.gz": {
+      "sha256": "634eb05447318353bf627d73fafadfaa2812abf41f27560d61d67272b6b1e0ee",
+      "bytes": 3723
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-007-provisional.json.gz": {
+      "sha256": "3557ba4d6d7331f781bf9bc4938c1e281e8fed72af22844f8f69acebe00ed904",
+      "bytes": 9853
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-008-provisional.bin.gz": {
+      "sha256": "634eb05447318353bf627d73fafadfaa2812abf41f27560d61d67272b6b1e0ee",
+      "bytes": 3723
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1/native-closure/cut-0/round-008-provisional.json.gz": {
+      "sha256": "41d33656790fa46a02fcc9de732b06f362ce8fdbcbf106e5ef6b57778d9a92b8",
+      "bytes": 10737
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1-binding.json": {
+      "sha256": "efaa0434afccf316c56e5b0787795095be381eb8a6d12e5a97fa9f9fc8b1ddbe",
+      "bytes": 3658
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1-resources.json": {
+      "sha256": "d8147513144f5500fe7cc6bb1d3299b0ea6e4a78337680619e8b0180d17a1027",
+      "bytes": 475
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1-resources.log.gz": {
+      "sha256": "7f0f750f00e734cd7158348f0a65b257d5f4b41c23f911493d3af89425e239cc",
+      "bytes": 645
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-per-residual1-resources.provenance.json": {
+      "sha256": "34d08c6807ed2a144603f4553a533457da109b2d158501d8750253f85a1a33a1",
+      "bytes": 940
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-resources.json": {
+      "sha256": "0c8ee49f2e1db3ca0d8813a26182d37aa4c3b82bb0b1021e90591f31be61fadf",
+      "bytes": 461
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-resources.log.gz": {
+      "sha256": "a9ca771b8141e9f34d75cd6d3df8b00a8ca5d7beb4a963daa6964ca4a63e18bd",
+      "bytes": 540
+    },
+    "polynomial-closure-v2-three-loop-fixed-guards3-resources.provenance.json": {
+      "sha256": "cc29f8ac224512ab3e62ec2b2813e761c03b27eb21c56e7760c1148b366926d9",
+      "bytes": 940
+    },
+    "polynomial-closure-v2-three-loop-fixed-resources.json": {
+      "sha256": "4d31e1ed884a75a676aef9e9e6501b94ddc56a6bcb838a88f52cf8cd1d2c36e1",
+      "bytes": 461
+    },
+    "polynomial-closure-v2-three-loop-fixed-resources.log.gz": {
+      "sha256": "fd883561639c83cd19cad178e6ab471a0b8aa0ba5ced15c7456a227c6ec0e8af",
+      "bytes": 540
+    },
+    "polynomial-closure-v2-three-loop-fixed-resources.provenance.json": {
+      "sha256": "ba1e6feb5fae8a6c3d0ba1bb0a1811c9d44f32e8050721878188565d7f2ed8de",
+      "bytes": 940
+    },
+    "polynomial-closure-v2-two-loop-fixed/configuration.json": {
+      "sha256": "d334c5fb607a8ce274445408e14d353de4b5b31ae70f7880c4ccacfe3ef88744",
+      "bytes": 1316
+    },
+    "polynomial-closure-v2-two-loop-fixed/input.json": {
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+      "bytes": 1057
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "a3abd8a0e36d8a6fa076963cf50e6293a8f7493d9bb3891a927eebb1e2ccb96c",
+      "bytes": 326
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "b1e29b4d2a909dfec8a0bae4137f64be42f6a9d873ff1565f0d4ec4f8b8d1505",
+      "bytes": 3474
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "0745c107066eb3bf1cd745c8d2b3922f7f958ce0ab0fbdcae19228f9e4e35fa8",
+      "bytes": 6289
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "135c5002eebba6b5c066f6ea36a732998e9541cc58098c9914c43d5dceef1f74",
+      "bytes": 9217
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "4a813c18cc997e6bc5293c6a26056bebcb7cc15e65e89c228d354b2be193a550",
+      "bytes": 8234
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/direct-zero-0005.json.gz": {
+      "sha256": "4fa1f48f9f20330faff68022dcc2c01eba7aa57f4cefe2e332bc774f81cefffa",
+      "bytes": 2623
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/direct-zero-0006.json.gz": {
+      "sha256": "11878824dddd542b775d549bf61b31e57c3986a69aa4b8b0049a09cd6441a839",
+      "bytes": 1916
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/direct-zero-0007.json.gz": {
+      "sha256": "bd4d2b009ce1b8cc35080d8cb5c828357ca44d9e49927303552137ee0cc30839",
+      "bytes": 1919
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/direct-zero-0008.json.gz": {
+      "sha256": "cb976f0b997bb7cd7cf4109b5b45263ec40bd6c208977e1a1f7a919f872de21c",
+      "bytes": 1141
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "7ebfa2a03c4f0a6e8c958b10ec37d85d4d60ce0fe174cf3a8d76d689e7f32a08",
+      "bytes": 855
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/retired-unresolved.json.gz": {
+      "sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "bytes": 22
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "351c2ad06355379c122a2fe93cc09041893780be84c09551e73224c639b0ee9f",
+      "bytes": 5297
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "eb93456b6f1b270073684fd2c5819bc2e1aa03349117492e5a0e3281e406cbd9",
+      "bytes": 2018
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "7fc053b1080fadabf7d528e5fcfb5e8412c2dd859d4af545b5c02c2345fa5507",
+      "bytes": 8701
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "08b33d2992fbdaad9fcc725aa1d8b731add04753ea9cabfac1684ff14777ef0c",
+      "bytes": 2039
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "7f8a87f6cd5d49279e9718b72b3f1275419185fdff3e699903f8ed4837625565",
+      "bytes": 13345
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "747d4ad0cce7884a60e1636bb19a520adde35c418d539ed2cc7fbb8181102034",
+      "bytes": 2041
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-003-provisional.bin.gz": {
+      "sha256": "40a96ab9886b390ca1fe409bb84eb2f482e0aa9c7bf42812ef2d2de8cef8246e",
+      "bytes": 18408
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-003-provisional.json.gz": {
+      "sha256": "b18113cc40392f6603e734a54f86b12eb6eb7b44e0ab13dbc461be09c7bf58a1",
+      "bytes": 2008
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-004-provisional.bin.gz": {
+      "sha256": "9b4db7a6c6be7a088ca3fb5332754768a90cdd10b86badaf490042e79c86d5e2",
+      "bytes": 19689
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-004-provisional.json.gz": {
+      "sha256": "6b10d12cf723ddb572ba8812cd944593c68d2220883a15c60c2a5eacca12e2e8",
+      "bytes": 1997
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-005-provisional.bin.gz": {
+      "sha256": "a5f54a352bb190ed6e8644d351297041db361a120a2bdcb7550db17b12c5d706",
+      "bytes": 20040
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-005-provisional.json.gz": {
+      "sha256": "f2267c59ae247fae658aa63d9e3b51ccb7d00acc171aa010fd20365c884e8d1a",
+      "bytes": 1993
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-006-provisional.bin.gz": {
+      "sha256": "bd2620e731c5c8fa1ac10ac1eb845ced705bbdefd6b175ac74013e3672c47c6e",
+      "bytes": 20406
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-006-provisional.json.gz": {
+      "sha256": "fc77833f8c86f6999712dd21dc687071b10a25eebf071b3c200fe9a298595468",
+      "bytes": 1982
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-007-closed.bin": {
+      "sha256": "6a9f15c85278be418428224e83566fbc0c6e5a528359d5f0be248eed3f7449a5",
+      "bytes": 178855
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-007-closed.json": {
+      "sha256": "d00fd44f24f2f3180e14e084be9a9e5cb23f28c82e91064c25ca98123534c61a",
+      "bytes": 9261
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-007-provisional.bin.gz": {
+      "sha256": "7a020e65d9e55e3c47b5c02da7df38bcf676cbbc4f35cd2392aed2bd67db2202",
+      "bytes": 20600
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0/round-007-provisional.json.gz": {
+      "sha256": "f0e721d9356d4ca40e6aa237a14758435c08f449deafac8ef53534b61e998d0f",
+      "bytes": 1976
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/active-request-history.json.gz": {
+      "sha256": "ddbe7b2ec24c317160dc5b0421e820e1c7a2df3bb52786b7495e74894eabdbc8",
+      "bytes": 296
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0001.json.gz": {
+      "sha256": "33d40a62446fd4071dd437df2f16cd80887ea6a8fcd06060c8d31de231b3d79c",
+      "bytes": 15918
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0002.json.gz": {
+      "sha256": "d0693f81713c08ee5d208fd20cbfd41ce8d674d671e2b177179627c76c66a6b4",
+      "bytes": 31441
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0003.json.gz": {
+      "sha256": "a16e22b1ff55d28bf726adeb8b3ce8df7e72b7d4c45464258e0fd0491e02e34d",
+      "bytes": 87577
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0004.json.gz": {
+      "sha256": "4482d41a0eb71ef1e9d68511b085edbcbb4c86f03e3af97653d12ca14abd5c3e",
+      "bytes": 41331
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0005.json.gz": {
+      "sha256": "52a9eb04f994c89b01807dd6d4f71f32951fe8f93c1e757dd6405cdc7d4d7f59",
+      "bytes": 15868
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/direct-zero-0006.json.gz": {
+      "sha256": "c33dda9a15ebdc690e19bb1a15eedc74964db815834178a0fe637df33c7e9fa6",
+      "bytes": 5586
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/guard-refinements.json.gz": {
+      "sha256": "d64f63c2c727c7c59f0790075c7e85f22c2b735176cfbee090264c9c498e1550",
+      "bytes": 325
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/historical-discovery-gaps.json.gz": {
+      "sha256": "772b911d170422191d1df5a6ca1123ba384c2f1ac83085d26f765f55916782a6",
+      "bytes": 2999
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/retired-unresolved.json.gz": {
+      "sha256": "c737380f62a28c9437f299c471436abc47c7cb4162fcc18615954e6695f111d9",
+      "bytes": 167
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "e5b0d2c4aadebc6ce594dc6d763657872b2a5205c09f86a6562433b595f62024",
+      "bytes": 6396
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-000-provisional.json.gz": {
+      "sha256": "9487f54b993ee92af2fe702e965a9dd5bc06a6f018b6df15083554debb140cc8",
+      "bytes": 1912
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "19307eb2fc88b18f479a237434540982ab79d7dc2bf455af09054fe7a51c9784",
+      "bytes": 10434
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "1aaf7dfddfe228d834ab03d48021f4c9593a51b983f61f1fd5e20d560599abdc",
+      "bytes": 1986
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.bin.gz": {
+      "sha256": "661272f8a473a1aaeb9f826d44ae5f3399f7157878c9ed761d9da80f443fe2a0",
+      "bytes": 30886
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-002-provisional.json.gz": {
+      "sha256": "25aaf78e93cc28ac9558b377a83cb34c9c9fe5c40dc798140e0a9bd640b4762f",
+      "bytes": 1939
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.bin.gz": {
+      "sha256": "959aad5e054e0b279de79f5f2855e6b483d15c559870310851715819dec926b0",
+      "bytes": 38688
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-003-provisional.json.gz": {
+      "sha256": "3f438b1cb1dc73fb9acb5419bd220e77ad796434dedcb2e88f33a05147479896",
+      "bytes": 1931
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.bin.gz": {
+      "sha256": "1d874011e8b5b7a67822b687a679d75ed2d1b9c0fd4fd897eb760b45f4117195",
+      "bytes": 40525
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-004-provisional.json.gz": {
+      "sha256": "db7bdfcfac62e08930a4b69928d12d494869bb96ba272fb5085417cf0280388a",
+      "bytes": 1915
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-005-closed.bin": {
+      "sha256": "749180d885c32df881f31b62d79738421251ea1cec7f432acefeec7520cc29c1",
+      "bytes": 391658
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-005-closed.json": {
+      "sha256": "0f911ba37c0c5cab1fc632af85dad793e7a4b4526a1313fa2aeebd9919ddff4d",
+      "bytes": 8479
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.bin.gz": {
+      "sha256": "f11aa37c2b8654cb90f554cf7abd959d0cdc8ac5f88deecdfd54f90d8145baf5",
+      "bytes": 41267
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-0-1/round-005-provisional.json.gz": {
+      "sha256": "4ef1ee3099d203c5fdf48a1f4c6d37897e09a319b8dd66670902cb3877e13ed2",
+      "bytes": 1915
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/active-request-history.json.gz": {
+      "sha256": "ac341eec85824aef7bd356d89bf7f54b6029b5dadc4bb26e6446ffcf8e494912",
+      "bytes": 204
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/direct-zero-0001.json.gz": {
+      "sha256": "0e8c2df661357f02b47b5a287044f05f47acf67ddb24e4630779d0d5c716d4c7",
+      "bytes": 2679
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/direct-zero-0002.json.gz": {
+      "sha256": "c610b6b3c8e1dfa38bbff8074e6b7b66827a73264e801f0a389f2b7ea45aeadb",
+      "bytes": 2698
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/direct-zero-0003.json.gz": {
+      "sha256": "8c8027a5fd282da1cb2d17b77d99697ebf5fd849e79dc8a99ea2e5d7bb3ff7c3",
+      "bytes": 4905
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/direct-zero-0004.json.gz": {
+      "sha256": "7e8e71cd9a76f76fab4d177991da7729e4f7008cc016c0d97b5e80d03c3f99b9",
+      "bytes": 2684
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/historical-discovery-gaps.json.gz": {
+      "sha256": "3f6a08c34e848bb49afb624fc2804a459bb384a11bb65dd9c3289800b25a17d3",
+      "bytes": 749
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/retired-unresolved.json.gz": {
+      "sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "bytes": 22
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/round-000-provisional.bin.gz": {
+      "sha256": "c164db8965ff7be05687b43fcdd238434a7e4906bdd073d7bc4bdfb2bfa9a05e",
+      "bytes": 4792
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/round-000-provisional.json.gz": {
+      "sha256": "719f06e331fce3c4b39b93b15c687f6b879441463270c574972e96a4afb35430",
+      "bytes": 1972
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/round-001-provisional.bin.gz": {
+      "sha256": "647bf7197990ec18d5a551565ef09729306eb25541660545d596e85fa5d7bb18",
+      "bytes": 6530
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/round-001-provisional.json.gz": {
+      "sha256": "535421f1135df46d203f1a7c1be67e5e9d786fcbb24dc1f54e2d97b7e5949756",
+      "bytes": 1988
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/round-002-provisional.bin.gz": {
+      "sha256": "6e0c6ace0a55c490a600ff097fb5679d921dd5031e0cb8c9fa08aa83aef5d3d1",
+      "bytes": 10393
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/round-002-provisional.json.gz": {
+      "sha256": "2f309830782282d73e843881e3d3976c8aa9a05fae442b3fe59aea0a4d9c8036",
+      "bytes": 1983
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/round-003-closed.bin": {
+      "sha256": "6b2dc71040b43a96d03ee81567b286b436c07578b80e07642e668676f2a4853c",
+      "bytes": 111388
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/round-003-closed.json": {
+      "sha256": "6a39d63174c8d9299c1539640858301c45a2350954423d08bdb9dd3f0961e1ba",
+      "bytes": 8980
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/round-003-provisional.bin.gz": {
+      "sha256": "d25586fabc7b05423460f12542876ca48ed58804096e88bfe9227cc6e3ee5667",
+      "bytes": 12585
+    },
+    "polynomial-closure-v2-two-loop-fixed/native-closure/cut-1/round-003-provisional.json.gz": {
+      "sha256": "df9b0617085487af3ce5e552d2076b9442bf7fdbb993f37340a45e7f77fc04e4",
+      "bytes": 1974
+    },
+    "polynomial-closure-v2-two-loop-fixed/prediction-18-60-8.json": {
+      "sha256": "b80f6e38646f6f55a404c74c16ea1416b377910ad8c0d41364fbfe4ad951f2af",
+      "bytes": 159560
+    },
+    "polynomial-closure-v2-two-loop-fixed/prediction-28-60-8.json": {
+      "sha256": "26c6c12a27b9196a62367c3bc223dc08be3a46034ef764b9b51b743741d3221f",
+      "bytes": 159620
+    },
+    "polynomial-closure-v2-two-loop-fixed/prediction-28-80-12.json": {
+      "sha256": "cb65511b0d380eeb002ccea2b627106e3b50d2e1f6fc2a8de577e0e6fef5aac0",
+      "bytes": 159621
+    },
+    "polynomial-closure-v2-two-loop-fixed/prediction-28-80-8.json": {
+      "sha256": "3cd6d5565826a3875e93fb33ca3dd7bbc2866a2ca7073d8df5f971413e2dfd6d",
+      "bytes": 159620
+    },
+    "polynomial-closure-v2-two-loop-fixed-binding.json": {
+      "sha256": "44441a39e12eb7c523a48ed5fd2769688c2f4e334625fce626207da7944cb275",
+      "bytes": 2391
+    },
+    "polynomial-closure-v2-two-loop-fixed-comparison-binding.json": {
+      "sha256": "cc3ac170964ecdeb51029aad35a5c0aeb97b22a8d81ccabe828b83d2916b271c",
+      "bytes": 10937
+    },
+    "polynomial-closure-v2-two-loop-fixed-comparison.json": {
+      "sha256": "16b402b8e6e198b793b0fdcec2907c3a51e960912bb8d2def80a46f4b96e9dd4",
+      "bytes": 52837
+    },
+    "polynomial-closure-v2-two-loop-fixed-resources.json": {
+      "sha256": "37919053006d8304b3ed7529e9051cfd065be2b7909979eca75a4956805eead6",
+      "bytes": 470
+    },
+    "polynomial-closure-v2-two-loop-fixed-resources.log.gz": {
+      "sha256": "af5ac889e35343bf8b6c55065ba86d9f0dfcd5fc3dca70a445ef83ef475e53c6",
+      "bytes": 879
+    },
+    "polynomial-closure-v2-two-loop-fixed-resources.provenance.json": {
+      "sha256": "b3c139227968b2aa2985333d3c8383a3c013ce4fa3fd23130d20c890ed251c01",
+      "bytes": 944
+    },
+    "polynomial-closure-v2-two-loop-laurent/configuration.json": {
+      "sha256": "cd8aff9c27a4909930cbbc895b539668c1899b1693f74e4ee56d37480647c2e1",
+      "bytes": 1318
+    },
+    "polynomial-closure-v2-two-loop-laurent/input.json": {
+      "sha256": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+      "bytes": 1057
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/active-request-history.json.gz": {
+      "sha256": "a3abd8a0e36d8a6fa076963cf50e6293a8f7493d9bb3891a927eebb1e2ccb96c",
+      "bytes": 326
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/direct-zero-0001.json.gz": {
+      "sha256": "b1e29b4d2a909dfec8a0bae4137f64be42f6a9d873ff1565f0d4ec4f8b8d1505",
+      "bytes": 3474
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/direct-zero-0002.json.gz": {
+      "sha256": "0745c107066eb3bf1cd745c8d2b3922f7f958ce0ab0fbdcae19228f9e4e35fa8",
+      "bytes": 6289
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/direct-zero-0003.json.gz": {
+      "sha256": "135c5002eebba6b5c066f6ea36a732998e9541cc58098c9914c43d5dceef1f74",
+      "bytes": 9217
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/direct-zero-0004.json.gz": {
+      "sha256": "4a813c18cc997e6bc5293c6a26056bebcb7cc15e65e89c228d354b2be193a550",
+      "bytes": 8234
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/direct-zero-0005.json.gz": {
+      "sha256": "4fa1f48f9f20330faff68022dcc2c01eba7aa57f4cefe2e332bc774f81cefffa",
+      "bytes": 2623
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/direct-zero-0006.json.gz": {
+      "sha256": "11878824dddd542b775d549bf61b31e57c3986a69aa4b8b0049a09cd6441a839",
+      "bytes": 1916
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/direct-zero-0007.json.gz": {
+      "sha256": "bd4d2b009ce1b8cc35080d8cb5c828357ca44d9e49927303552137ee0cc30839",
+      "bytes": 1919
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/direct-zero-0008.json.gz": {
+      "sha256": "cb976f0b997bb7cd7cf4109b5b45263ec40bd6c208977e1a1f7a919f872de21c",
+      "bytes": 1141
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/historical-discovery-gaps.json.gz": {
+      "sha256": "7ebfa2a03c4f0a6e8c958b10ec37d85d4d60ce0fe174cf3a8d76d689e7f32a08",
+      "bytes": 855
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/retired-unresolved.json.gz": {
+      "sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "bytes": 22
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-000-provisional.bin.gz": {
+      "sha256": "351c2ad06355379c122a2fe93cc09041893780be84c09551e73224c639b0ee9f",
+      "bytes": 5297
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-000-provisional.json.gz": {
+      "sha256": "eb93456b6f1b270073684fd2c5819bc2e1aa03349117492e5a0e3281e406cbd9",
+      "bytes": 2018
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-001-provisional.bin.gz": {
+      "sha256": "7fc053b1080fadabf7d528e5fcfb5e8412c2dd859d4af545b5c02c2345fa5507",
+      "bytes": 8701
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-001-provisional.json.gz": {
+      "sha256": "08b33d2992fbdaad9fcc725aa1d8b731add04753ea9cabfac1684ff14777ef0c",
+      "bytes": 2039
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-002-provisional.bin.gz": {
+      "sha256": "7f8a87f6cd5d49279e9718b72b3f1275419185fdff3e699903f8ed4837625565",
+      "bytes": 13345
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-002-provisional.json.gz": {
+      "sha256": "747d4ad0cce7884a60e1636bb19a520adde35c418d539ed2cc7fbb8181102034",
+      "bytes": 2041
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-003-provisional.bin.gz": {
+      "sha256": "40a96ab9886b390ca1fe409bb84eb2f482e0aa9c7bf42812ef2d2de8cef8246e",
+      "bytes": 18408
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-003-provisional.json.gz": {
+      "sha256": "b18113cc40392f6603e734a54f86b12eb6eb7b44e0ab13dbc461be09c7bf58a1",
+      "bytes": 2008
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-004-provisional.bin.gz": {
+      "sha256": "9b4db7a6c6be7a088ca3fb5332754768a90cdd10b86badaf490042e79c86d5e2",
+      "bytes": 19689
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-004-provisional.json.gz": {
+      "sha256": "6b10d12cf723ddb572ba8812cd944593c68d2220883a15c60c2a5eacca12e2e8",
+      "bytes": 1997
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-005-provisional.bin.gz": {
+      "sha256": "a5f54a352bb190ed6e8644d351297041db361a120a2bdcb7550db17b12c5d706",
+      "bytes": 20040
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-005-provisional.json.gz": {
+      "sha256": "f2267c59ae247fae658aa63d9e3b51ccb7d00acc171aa010fd20365c884e8d1a",
+      "bytes": 1993
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-006-provisional.bin.gz": {
+      "sha256": "bd2620e731c5c8fa1ac10ac1eb845ced705bbdefd6b175ac74013e3672c47c6e",
+      "bytes": 20406
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-006-provisional.json.gz": {
+      "sha256": "fc77833f8c86f6999712dd21dc687071b10a25eebf071b3c200fe9a298595468",
+      "bytes": 1982
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-007-closed.bin": {
+      "sha256": "6a9f15c85278be418428224e83566fbc0c6e5a528359d5f0be248eed3f7449a5",
+      "bytes": 178855
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-007-closed.json": {
+      "sha256": "d00fd44f24f2f3180e14e084be9a9e5cb23f28c82e91064c25ca98123534c61a",
+      "bytes": 9261
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-007-provisional.bin.gz": {
+      "sha256": "7a020e65d9e55e3c47b5c02da7df38bcf676cbbc4f35cd2392aed2bd67db2202",
+      "bytes": 20600
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-007-provisional.json.gz": {
+      "sha256": "f0e721d9356d4ca40e6aa237a14758435c08f449deafac8ef53534b61e998d0f",
+      "bytes": 1976
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/active-request-history.json.gz": {
+      "sha256": "ddbe7b2ec24c317160dc5b0421e820e1c7a2df3bb52786b7495e74894eabdbc8",
+      "bytes": 296
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0001.json.gz": {
+      "sha256": "33d40a62446fd4071dd437df2f16cd80887ea6a8fcd06060c8d31de231b3d79c",
+      "bytes": 15918
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0002.json.gz": {
+      "sha256": "d0693f81713c08ee5d208fd20cbfd41ce8d674d671e2b177179627c76c66a6b4",
+      "bytes": 31441
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0003.json.gz": {
+      "sha256": "a16e22b1ff55d28bf726adeb8b3ce8df7e72b7d4c45464258e0fd0491e02e34d",
+      "bytes": 87577
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0004.json.gz": {
+      "sha256": "4482d41a0eb71ef1e9d68511b085edbcbb4c86f03e3af97653d12ca14abd5c3e",
+      "bytes": 41331
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0005.json.gz": {
+      "sha256": "52a9eb04f994c89b01807dd6d4f71f32951fe8f93c1e757dd6405cdc7d4d7f59",
+      "bytes": 15868
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/direct-zero-0006.json.gz": {
+      "sha256": "c33dda9a15ebdc690e19bb1a15eedc74964db815834178a0fe637df33c7e9fa6",
+      "bytes": 5586
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/guard-refinements.json.gz": {
+      "sha256": "d64f63c2c727c7c59f0790075c7e85f22c2b735176cfbee090264c9c498e1550",
+      "bytes": 325
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/historical-discovery-gaps.json.gz": {
+      "sha256": "772b911d170422191d1df5a6ca1123ba384c2f1ac83085d26f765f55916782a6",
+      "bytes": 2999
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/retired-unresolved.json.gz": {
+      "sha256": "c737380f62a28c9437f299c471436abc47c7cb4162fcc18615954e6695f111d9",
+      "bytes": 167
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.bin.gz": {
+      "sha256": "e5b0d2c4aadebc6ce594dc6d763657872b2a5205c09f86a6562433b595f62024",
+      "bytes": 6396
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-000-provisional.json.gz": {
+      "sha256": "9487f54b993ee92af2fe702e965a9dd5bc06a6f018b6df15083554debb140cc8",
+      "bytes": 1912
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.bin.gz": {
+      "sha256": "19307eb2fc88b18f479a237434540982ab79d7dc2bf455af09054fe7a51c9784",
+      "bytes": 10434
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-001-provisional.json.gz": {
+      "sha256": "1aaf7dfddfe228d834ab03d48021f4c9593a51b983f61f1fd5e20d560599abdc",
+      "bytes": 1986
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.bin.gz": {
+      "sha256": "661272f8a473a1aaeb9f826d44ae5f3399f7157878c9ed761d9da80f443fe2a0",
+      "bytes": 30886
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-002-provisional.json.gz": {
+      "sha256": "25aaf78e93cc28ac9558b377a83cb34c9c9fe5c40dc798140e0a9bd640b4762f",
+      "bytes": 1939
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.bin.gz": {
+      "sha256": "959aad5e054e0b279de79f5f2855e6b483d15c559870310851715819dec926b0",
+      "bytes": 38688
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-003-provisional.json.gz": {
+      "sha256": "3f438b1cb1dc73fb9acb5419bd220e77ad796434dedcb2e88f33a05147479896",
+      "bytes": 1931
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.bin.gz": {
+      "sha256": "1d874011e8b5b7a67822b687a679d75ed2d1b9c0fd4fd897eb760b45f4117195",
+      "bytes": 40525
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-004-provisional.json.gz": {
+      "sha256": "db7bdfcfac62e08930a4b69928d12d494869bb96ba272fb5085417cf0280388a",
+      "bytes": 1915
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin": {
+      "sha256": "749180d885c32df881f31b62d79738421251ea1cec7f432acefeec7520cc29c1",
+      "bytes": 391658
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json": {
+      "sha256": "0f911ba37c0c5cab1fc632af85dad793e7a4b4526a1313fa2aeebd9919ddff4d",
+      "bytes": 8479
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.bin.gz": {
+      "sha256": "f11aa37c2b8654cb90f554cf7abd959d0cdc8ac5f88deecdfd54f90d8145baf5",
+      "bytes": 41267
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-005-provisional.json.gz": {
+      "sha256": "4ef1ee3099d203c5fdf48a1f4c6d37897e09a319b8dd66670902cb3877e13ed2",
+      "bytes": 1915
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/active-request-history.json.gz": {
+      "sha256": "ac341eec85824aef7bd356d89bf7f54b6029b5dadc4bb26e6446ffcf8e494912",
+      "bytes": 204
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/conditional-point-refinements.json.gz": {
+      "sha256": "9307d3ef9981763d17c5218d0213609ce595caf265d2e6ce919ff63668cbebee",
+      "bytes": 143
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/direct-zero-0001.json.gz": {
+      "sha256": "0e8c2df661357f02b47b5a287044f05f47acf67ddb24e4630779d0d5c716d4c7",
+      "bytes": 2679
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/direct-zero-0002.json.gz": {
+      "sha256": "c610b6b3c8e1dfa38bbff8074e6b7b66827a73264e801f0a389f2b7ea45aeadb",
+      "bytes": 2698
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/direct-zero-0003.json.gz": {
+      "sha256": "8c8027a5fd282da1cb2d17b77d99697ebf5fd849e79dc8a99ea2e5d7bb3ff7c3",
+      "bytes": 4905
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/direct-zero-0004.json.gz": {
+      "sha256": "7e8e71cd9a76f76fab4d177991da7729e4f7008cc016c0d97b5e80d03c3f99b9",
+      "bytes": 2684
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/historical-discovery-gaps.json.gz": {
+      "sha256": "3f6a08c34e848bb49afb624fc2804a459bb384a11bb65dd9c3289800b25a17d3",
+      "bytes": 749
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/retired-unresolved.json.gz": {
+      "sha256": "64406e753d82e11c6bd63d1d04bb6aa083eefa0a46949bbfce994d556b989f0f",
+      "bytes": 22
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-000-provisional.bin.gz": {
+      "sha256": "c164db8965ff7be05687b43fcdd238434a7e4906bdd073d7bc4bdfb2bfa9a05e",
+      "bytes": 4792
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-000-provisional.json.gz": {
+      "sha256": "719f06e331fce3c4b39b93b15c687f6b879441463270c574972e96a4afb35430",
+      "bytes": 1972
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-001-provisional.bin.gz": {
+      "sha256": "647bf7197990ec18d5a551565ef09729306eb25541660545d596e85fa5d7bb18",
+      "bytes": 6530
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-001-provisional.json.gz": {
+      "sha256": "535421f1135df46d203f1a7c1be67e5e9d786fcbb24dc1f54e2d97b7e5949756",
+      "bytes": 1988
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-002-provisional.bin.gz": {
+      "sha256": "6e0c6ace0a55c490a600ff097fb5679d921dd5031e0cb8c9fa08aa83aef5d3d1",
+      "bytes": 10393
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-002-provisional.json.gz": {
+      "sha256": "2f309830782282d73e843881e3d3976c8aa9a05fae442b3fe59aea0a4d9c8036",
+      "bytes": 1983
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-003-closed.bin": {
+      "sha256": "6b2dc71040b43a96d03ee81567b286b436c07578b80e07642e668676f2a4853c",
+      "bytes": 111388
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-003-closed.json": {
+      "sha256": "6a39d63174c8d9299c1539640858301c45a2350954423d08bdb9dd3f0961e1ba",
+      "bytes": 8980
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-003-provisional.bin.gz": {
+      "sha256": "d25586fabc7b05423460f12542876ca48ed58804096e88bfe9227cc6e3ee5667",
+      "bytes": 12585
+    },
+    "polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-003-provisional.json.gz": {
+      "sha256": "df9b0617085487af3ce5e552d2076b9442bf7fdbb993f37340a45e7f77fc04e4",
+      "bytes": 1974
+    },
+    "polynomial-closure-v2-two-loop-laurent/prediction-18-60-8-grid-1000.json": {
+      "sha256": "cd29df731c61cb75c913e92c43dabde600ec6dfeba48677957dc27d0858842fa",
+      "bytes": 1028
+    },
+    "polynomial-closure-v2-two-loop-laurent/prediction-28-60-8-grid-1000.json": {
+      "sha256": "66a6384c2e4f21ee007d2127852e31b562c5139e4fe78400b5a13e81becbcddf",
+      "bytes": 1088
+    },
+    "polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-1000.json": {
+      "sha256": "36658bf197bb26fdea5c40d4fae5c136aa1548275b910ebad87e0d87b387c54f",
+      "bytes": 1089
+    },
+    "polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-2000.json": {
+      "sha256": "8bb9269929071d672d2a3a5d90105cd1a353fd5a6a81ba4908722b31d0757a74",
+      "bytes": 1089
+    },
+    "polynomial-closure-v2-two-loop-laurent/prediction-28-80-8-grid-1000.json": {
+      "sha256": "8f64042a091765b7bf7e8944260da090efbd5a35f9786fbe7faf3e9f484f7cd5",
+      "bytes": 1088
+    },
+    "polynomial-closure-v2-two-loop-laurent-binding.json": {
+      "sha256": "6d0fcd8ad1492a7a192f90bffaf937a511c5dc2fa60d52d9441738f16207f152",
+      "bytes": 2391
+    },
+    "polynomial-closure-v2-two-loop-laurent-comparison-binding.json": {
+      "sha256": "6072b949e18fb9a967f1a6ccf956f0945ff1f4acd0c9d9f29720acd6b44f1bf0",
+      "bytes": 11631
+    },
+    "polynomial-closure-v2-two-loop-laurent-comparison.json": {
+      "sha256": "076a5a6444b67af3f6976f2d74425031ae20c16f7a071b11c846895952132a29",
+      "bytes": 50762
+    },
+    "polynomial-closure-v2-two-loop-laurent-resources.json": {
+      "sha256": "27a6a13d5cd7edcd19fd5ce008ac583f55a0e5ff5e384a16f02747b3af6e5013",
+      "bytes": 458
+    },
+    "polynomial-closure-v2-two-loop-laurent-resources.log.gz": {
+      "sha256": "703bfa2b2c0f1d65f1096a9e4fbe3c0eb3ba8403719a4db8196404aa599698fa",
+      "bytes": 4269
+    },
+    "polynomial-closure-v2-two-loop-laurent-resources.provenance.json": {
+      "sha256": "39c54ac083293b2f7d5acb108d25628b3aa667ea4cef8de572e07dc7281bf421",
+      "bytes": 942
+    },
+    "reuse-native-gate.py": {
+      "sha256": "f04aaa77564e9521b766904b9a5c67b33b1ab52bc8c3f79d0087fb3992b3df24",
+      "bytes": 3288
+    },
+    "run-frozen-root-gate.py": {
+      "sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+      "bytes": 4005
+    },
+    "run-massive-regression.py": {
+      "sha256": "839834e2b9ce590b215311c54867568ab19f414a92f489b0151a5fdd2c31dc01",
+      "bytes": 4480
+    },
+    "run-resource-command.py": {
+      "sha256": "738b6070bef24c9b5bf8ef8eb43b0729a532a1542dbf958c07bace02ea61cf9c",
+      "bytes": 2367
+    },
+    "run-root-gates.py": {
+      "sha256": "4a9f01e626f32212682e91cab7bef850fbaa4effe89bc1bfab1b7de66bbb3b9c",
+      "bytes": 969
+    },
+    "run-three-loop-domain-refinement.py": {
+      "sha256": "237e85421137de4e1a5d44ee21ad6325c002b3786cae02d9afc7250b422d9c0e",
+      "bytes": 6696
+    },
+    "run-three-loop-gate.py": {
+      "sha256": "87162f683471d4464bd52d9ab106acfa555dc46ad2a070e56683ee9b0944f50a",
+      "bytes": 5259
+    },
+    "run-three-loop-guard-refinement.py": {
+      "sha256": "dfcdaf900254c49dfeaec0daf89343e7aa3476090173cc53791e2b1312c61817",
+      "bytes": 6586
+    },
+    "run-three-loop-per-residual-control.py": {
+      "sha256": "8e3bd250153c82fc58df9f1665b39e836e465fe386df34d8c9b94ee777543c6a",
+      "bytes": 6711
+    },
+    "run-two-loop-gate.py": {
+      "sha256": "897d789b5c5a78e00cbbe34e7655814f0ee0b2c7c0abc3d5ff8e1cc450606160",
+      "bytes": 4726
+    },
+    "summarize-checkpoint.py": {
+      "sha256": "e28e91f6437e98d1f11ef5a6e7441864e1538b3e57edfceb41acd2a9146532d9",
+      "bytes": 4928
+    },
+    "summarize-frozen-root-gates.py": {
+      "sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e",
+      "bytes": 4149
+    },
+    "summarize-lower-loop-regressions.py": {
+      "sha256": "103ebdffc63cea697ce4d42e2200e58aaef99bf3af66a922ae0ef8445a3d8f58",
+      "bytes": 5040
+    },
+    "three-loop-domain-retry-plan.json": {
+      "sha256": "935d3b222141790df68d094bc86d88a27d7587ed739413e9fef0bc94eab98b34",
+      "bytes": 569
+    },
+    "three-loop-guard-retry-plan.json": {
+      "sha256": "f6e923ea6a0e21cd334d1e221c595691573ae2b5b0822ec0c4a069d06d8a5894",
+      "bytes": 514
+    },
+    "three-loop-per-residual-control-plan.json": {
+      "sha256": "d5f597808c08f09fa38ed11f67763c037139705aaa88e6d7b1bdebeafeb2799c",
+      "bytes": 592
+    },
+    "three-loop-timeout-adjustment.json": {
+      "sha256": "8d1d0a57ef045458c02734bec6c95ef335de82505ae45a1ba9a041f737fc4119",
+      "bytes": 791
+    }
+  },
+  "file_count": 419,
+  "bytes": 24269005
+}

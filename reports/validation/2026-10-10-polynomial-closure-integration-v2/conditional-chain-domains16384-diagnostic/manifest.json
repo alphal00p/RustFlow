@@ -1,0 +1,40 @@
+{
+  "scope": "Frozen16384 native replay addendum",
+  "files": [
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-domains16384-diagnostic/README.md",
+      "sha256": "451d0411263500b3ab6b433089bd47cf1e343e9d777ae628f4143ba63288641a",
+      "bytes": 1726
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-domains16384-diagnostic/request-audit-result.json",
+      "sha256": "1e9fb73a322a3115b7e9648d73a7e72cf31fd7758a7d49a84f9352c1708bbe1e",
+      "bytes": 42390
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-domains16384-diagnostic/resources.json",
+      "sha256": "58db6a251f1da2c1f1d30630cc9099061b5623db4895e390e94cfa393eb80c56",
+      "bytes": 909
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-domains16384-diagnostic/resources.log",
+      "sha256": "b3cb3771e6c3b65377d09d377d6d87d53e8395a2b56e9fdab33e44de6b6f4208",
+      "bytes": 54
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-domains16384-diagnostic/resources.provenance.json",
+      "sha256": "78f31479caeaca99d85df5470235142f10721b95656944eecad3951f3416438d",
+      "bytes": 2428
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-domains16384-diagnostic/run-binding.json",
+      "sha256": "be2b5aad032c50afde8a8738c21d85a07f962ee9ce9c72612378c016316fd3b8",
+      "bytes": 2089
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-domains16384-diagnostic/summary.json",
+      "sha256": "7da6d3fafe7ba811aedd30cdc19f84ac10759e91149ff1a6f7415c04fd3e913a",
+      "bytes": 2020
+    }
+  ]
+}

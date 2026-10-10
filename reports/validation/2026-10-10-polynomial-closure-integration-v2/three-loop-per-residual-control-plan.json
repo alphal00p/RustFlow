@@ -1,0 +1,17 @@
+{
+  "scope": "Prepared existing-option scheduling control; not executed by this preparation. Earlier failures remain immutable.",
+  "base_launcher_sha256": "dfcdaf900254c49dfeaec0daf89343e7aa3476090173cc53791e2b1312c61817",
+  "control_launcher_sha256": "8e3bd250153c82fc58df9f1665b39e836e465fe386df34d8c9b94ee777543c6a",
+  "changes": {
+    "domains_per_residual": [
+      32,
+      1
+    ],
+    "output_suffix": "-guards3-per-residual1"
+  },
+  "guard_passes": 3,
+  "shared_native_domains": 8192,
+  "source_build_change": false,
+  "timeout_seconds": 1800,
+  "native_prediction_claim": false
+}

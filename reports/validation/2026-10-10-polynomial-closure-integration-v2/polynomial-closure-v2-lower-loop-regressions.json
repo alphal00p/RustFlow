@@ -1,0 +1,142 @@
+{
+  "schema": 1,
+  "status": "passed",
+  "scope": "Lower-loop numerical regression of optional polynomial-closure-v1 using unchanged native RustRed. Complete massless two-loop fixed-D and Laurent profiles, plus one massive two-loop profile. No three-loop or four-loop numerical acceptance follows from this report.",
+  "source_policy": "polynomial-closure-v1",
+  "predictions_saved_before_reference_comparison": true,
+  "supplied_oracle_numerical_records_compared": 0,
+  "reference_uncertainty": "Empirical independent precision/quadrature refinement and exact formula checks; no rigorous numerical error interval.",
+  "performance_scope": "Prebuilt process resources only, excluding compilation and Nix setup. Concurrent independent runs prevent a controlled speed comparison.",
+  "massive_scope": "Single existing 28-digit/order-80/start-scale-12 profile; no new massive refinement claim.",
+  "gates": [
+    {
+      "gate": "two-loop-fixed",
+      "status": "passed",
+      "harness_seconds": 6.73,
+      "wall_seconds": 6.744704702869058,
+      "peak_child_rss_kib": 44524,
+      "reference_comparisons": 40,
+      "independent_profile_refinements": 30,
+      "historical_same_profile_comparisons": 0,
+      "assembly_checks": 8,
+      "largest_reference_relative_difference": "1.126688989905034741452362338112000443035763364382546305312473584512773621237337101050521306571201468E-62",
+      "largest_reference_absolute_difference": "3.4121037186962069290411517449865E-70",
+      "largest_refinement_relative_difference": "1.126688989819680293673770562097957731914961412852125332443146513730987910243628158522974457312583548E-62",
+      "largest_historical_relative_difference": null,
+      "bindings": {
+        "binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-fixed-binding.json",
+          "sha256": "44441a39e12eb7c523a48ed5fd2769688c2f4e334625fce626207da7944cb275"
+        },
+        "resources": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-fixed-resources.json",
+          "sha256": "37919053006d8304b3ed7529e9051cfd065be2b7909979eca75a4956805eead6"
+        },
+        "comparison": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-fixed-comparison.json",
+          "sha256": "16b402b8e6e198b793b0fdcec2907c3a51e960912bb8d2def80a46f4b96e9dd4"
+        },
+        "comparison_binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-fixed-comparison-binding.json",
+          "sha256": "cc3ac170964ecdeb51029aad35a5c0aeb97b22a8d81ccabe828b83d2916b271c"
+        },
+        "resource_provenance": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-fixed-resources.provenance.json",
+          "sha256": "b3c139227968b2aa2985333d3c8383a3c013ce4fa3fd23130d20c890ed251c01"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-fixed-resources.log",
+          "sha256": "3fc1683746561b89ea2870a835f51625ddbc28c15882bbbd8a070ba99d617853"
+        }
+      }
+    },
+    {
+      "gate": "two-loop-laurent",
+      "status": "passed",
+      "harness_seconds": 138.82,
+      "wall_seconds": 138.8307962110266,
+      "peak_child_rss_kib": 47860,
+      "reference_comparisons": 30,
+      "independent_profile_refinements": 24,
+      "historical_same_profile_comparisons": 0,
+      "assembly_checks": 0,
+      "largest_reference_relative_difference": "2.041136525965978003930408804967162140194053923396263027938938078601923303126923855708841071449594151E-44",
+      "largest_reference_absolute_difference": "1.1745950820691640507721879595913459936811546687210E-47",
+      "largest_refinement_relative_difference": "0.9999999999999662789820765106409904644051330867995512301954813353606913364878255606222658848636170305",
+      "largest_historical_relative_difference": null,
+      "bindings": {
+        "binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent-binding.json",
+          "sha256": "6d0fcd8ad1492a7a192f90bffaf937a511c5dc2fa60d52d9441738f16207f152"
+        },
+        "resources": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent-resources.json",
+          "sha256": "27a6a13d5cd7edcd19fd5ce008ac583f55a0e5ff5e384a16f02747b3af6e5013"
+        },
+        "comparison": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent-comparison.json",
+          "sha256": "076a5a6444b67af3f6976f2d74425031ae20c16f7a071b11c846895952132a29"
+        },
+        "comparison_binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent-comparison-binding.json",
+          "sha256": "6072b949e18fb9a967f1a6ccf956f0945ff1f4acd0c9d9f29720acd6b44f1bf0"
+        },
+        "resource_provenance": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent-resources.provenance.json",
+          "sha256": "39c54ac083293b2f7d5acb108d25628b3aa667ea4cef8de572e07dc7281bf421"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent-resources.log",
+          "sha256": "e02f664c5b8d5948a91c00e536991b4d16806e81c673434577e6d31a8b0c53a5"
+        }
+      }
+    },
+    {
+      "gate": "massive-regression",
+      "status": "passed",
+      "harness_seconds": 47.64,
+      "wall_seconds": 47.65705108316615,
+      "peak_child_rss_kib": 73772,
+      "reference_comparisons": 10,
+      "independent_profile_refinements": 0,
+      "historical_same_profile_comparisons": 10,
+      "assembly_checks": 2,
+      "largest_reference_relative_difference": "9.448822657573757205344272543705462164866680568357354600394433173136786775137590600321253156047528368E-36",
+      "largest_reference_absolute_difference": "5.591962512684841877215945815219655663000000000000000425669170804770472422728499909310862088315648929E-38",
+      "largest_refinement_relative_difference": null,
+      "largest_historical_relative_difference": "3.126880367294401822762087193147855540425250160200645842114784347243379270736498630071765857473420769E-59",
+      "bindings": {
+        "binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-massive-regression-binding.json",
+          "sha256": "dd7f880c91a8137e75f52fb4e788b61d346bdd3ff75eccce30f0a84c8e936aa0"
+        },
+        "resources": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-massive-regression-resources.json",
+          "sha256": "9d16c633ec776cc9f249cfc43d3bbb14290057621c18bf186fe224e53ee57c4c"
+        },
+        "comparison": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-massive-regression-comparison.json",
+          "sha256": "f8a6e6cfc65cada9799a56ec02595d9ef8798d331c4996d589dbad8daefc75e2"
+        },
+        "comparison_binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-massive-regression-comparison-binding.json",
+          "sha256": "4e57006c46f019cb83e53b5c74a8c8fa8c6441419446e8c7b2e806c481f76b5a"
+        },
+        "resource_provenance": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-massive-regression-resources.provenance.json",
+          "sha256": "ab7107ce64924c8a33d1f9b2fcc9106b117c180b95eb1c56e86d8af714178e46"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-massive-regression-resources.log",
+          "sha256": "8081b9b833610d9eaf81efd27ca1b3eb5ebd636ac61de5442df148bff8f1f321"
+        }
+      }
+    }
+  ],
+  "bindings_sha256": {
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-source-hashes.json": "963a44afe05bddaa861cbbdc4a03895c92a60dfe0df10c8a907a7721c9989674",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-build-provenance.json": "365cb0102bdb109f3e670af3507ce4881350c2a2c0ef5bcfacd3e84670c81d4d",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-root-gates.json": "f0f63c85666d454ae2a3bd7036d2968d1b777b9d1281b51697414dfb11c155fe",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/summarize-lower-loop-regressions.py": "103ebdffc63cea697ce4d42e2200e58aaef99bf3af66a922ae0ef8445a3d8f58"
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "status": "passed",
+  "scope": "Complete two-loop massless laurent predictions; unchanged independent references and tolerances. No four-loop acceptance.",
+  "command": [
+    "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python3",
+    "/common/dev/rustflow_fermi/tools/finite_density/compare_massless_reference.py",
+    "laurent",
+    "--predictions",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent",
+    "--reference",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json",
+    "--output",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent-comparison.json"
+  ],
+  "native_provenance": {
+    "executable_sha256": "6adb6727fc72d168e26f3f8ee9aea9a6685548c4f0d4feb5012c1b7f9c758ee7",
+    "source_snapshot_sha256": "963a44afe05bddaa861cbbdc4a03895c92a60dfe0df10c8a907a7721c9989674",
+    "compile_identities": {
+      "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+      "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+      "PORT_SOURCE_DIGEST": "3ebb41f60d3d3c9d98082e56de64d1872dd44199bcbe7aa0c25de4d0377a29cc"
+    },
+    "configuration": {
+      "source_options": {
+        "free_virtual_zero_sectors": true,
+        "policy": "polynomial-closure-v1",
+        "positive_compact_energy_powers": false
+      },
+      "guard_digits": 40,
+      "native_closure": "WeightedClosureOptions { max_rounds: 16, max_frontier: 1024, max_requested: 4096, discovery: GuardedDiscoveryOptions { max_depth: 3, max_domains: 8192, sample_seed: 0 }, application: GuardedReductionLimits { max_rule_applications: 100000, max_pending_integrals: 100000 }, guard_refinement: GuardRefinementOptions { max_passes: 1, max_added_domains: 256, max_interval_width: 2 }, search_frontier_sectors: true, split_ordinary_zero_faces: true, requested_index_rays: true, prioritize_requested_indices: false, max_reused_rules: 65536, max_domains_per_residual: 32, active_target_closure: true, max_direct_zero_attempts: 262144, checkpoints: None }"
+    },
+    "closed_metadata": [
+      {
+        "cut_slots": [
+          0
+        ],
+        "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-007-closed.json",
+        "sha256": "d00fd44f24f2f3180e14e084be9a9e5cb23f28c82e91064c25ca98123534c61a",
+        "proof_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-007-closed.bin",
+        "proof_sha256": "6a9f15c85278be418428224e83566fbc0c6e5a528359d5f0be248eed3f7449a5"
+      },
+      {
+        "cut_slots": [
+          1
+        ],
+        "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-003-closed.json",
+        "sha256": "6a39d63174c8d9299c1539640858301c45a2350954423d08bdb9dd3f0961e1ba",
+        "proof_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-003-closed.bin",
+        "proof_sha256": "6b2dc71040b43a96d03ee81567b286b436c07578b80e07642e668676f2a4853c"
+      },
+      {
+        "cut_slots": [
+          0,
+          1
+        ],
+        "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json",
+        "sha256": "0f911ba37c0c5cab1fc632af85dad793e7a4b4526a1313fa2aeebd9919ddff4d",
+        "proof_path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin",
+        "proof_sha256": "749180d885c32df881f31b62d79738421251ea1cec7f432acefeec7520cc29c1"
+      }
+    ]
+  },
+  "inputs_sha256": {
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-source-hashes.json": "963a44afe05bddaa861cbbdc4a03895c92a60dfe0df10c8a907a7721c9989674",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-build-provenance.json": "365cb0102bdb109f3e670af3507ce4881350c2a2c0ef5bcfacd3e84670c81d4d",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent-binding.json": "6d0fcd8ad1492a7a192f90bffaf937a511c5dc2fa60d52d9441738f16207f152",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent-resources.json": "27a6a13d5cd7edcd19fd5ce008ac583f55a0e5ff5e384a16f02747b3af6e5013",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent-resources.provenance.json": "39c54ac083293b2f7d5acb108d25628b3aa667ea4cef8de572e07dc7281bf421",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/configuration.json": "cd8aff9c27a4909930cbbc895b539668c1899b1693f74e4ee56d37480647c2e1",
+    "examples/finite_density/massless_two_loop_sunset.json": "08282137476d9725f6807cb9512cb7f8832b26ce8d93a545880044a3584b44c7",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/input.json": "d8bb48e5ac69d76ae3449ee341842f4754a72c83aa5af714159d56eda012a13f",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-18-60-8-grid-1000.json": "cd29df731c61cb75c913e92c43dabde600ec6dfeba48677957dc27d0858842fa",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-60-8-grid-1000.json": "66a6384c2e4f21ee007d2127852e31b562c5139e4fe78400b5a13e81becbcddf",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-8-grid-1000.json": "8f64042a091765b7bf7e8944260da090efbd5a35f9786fbe7faf3e9f484f7cd5",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-1000.json": "36658bf197bb26fdea5c40d4fae5c136aa1548275b910ebad87e0d87b387c54f",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/prediction-28-80-12-grid-2000.json": "8bb9269929071d672d2a3a5d90105cd1a353fd5a6a81ba4908722b31d0757a74",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/compare-completed-predictions.py": "2257a2b25c3d96cddabcdef8bc4f156b5c5e8216f5f28595f3bba6f061d4c12f",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-007-closed.json": "d00fd44f24f2f3180e14e084be9a9e5cb23f28c82e91064c25ca98123534c61a",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-0/round-007-closed.bin": "6a9f15c85278be418428224e83566fbc0c6e5a528359d5f0be248eed3f7449a5",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-003-closed.json": "6a39d63174c8d9299c1539640858301c45a2350954423d08bdb9dd3f0961e1ba",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-1/round-003-closed.bin": "6b2dc71040b43a96d03ee81567b286b436c07578b80e07642e668676f2a4853c",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-005-closed.json": "0f911ba37c0c5cab1fc632af85dad793e7a4b4526a1313fa2aeebd9919ddff4d",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-laurent/native-closure/cut-0-1/round-005-closed.bin": "749180d885c32df881f31b62d79738421251ea1cec7f432acefeec7520cc29c1",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-fixed-comparison.json": "16b402b8e6e198b793b0fdcec2907c3a51e960912bb8d2def80a46f4b96e9dd4",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-two-loop-fixed-comparison-binding.json": "cc3ac170964ecdeb51029aad35a5c0aeb97b22a8d81ccabe828b83d2916b271c",
+    "docs/finite-density-three-loop-reference.md": "4c7968fb28ee19cebbddf157668f3dbc32b13c87a6ffb2313fe0de72b0497d74",
+    "examples/finite_density/massive_two_loop_sunset.json": "68411087e8ada13130435d8635225fd49f670c2582347ea25b28fd4879caa43a",
+    "examples/finite_density/massless_three_loop_chain.json": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+    "reports/validation/2026-10-09-finite-density-native-assembly/compare-current-massive-regression.py": "cd7fdbbd846fb7830be7f1b8284f738b240909d82a32c63c2b4dd782c4310a4c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-massless-reference/independent-massless-reference.json": "b306e51a12b03cb7233fcde6efe62fa3a3361d1c85180ddff6f7de1978791db6",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/independent-reference.json": "7f81ac0dcea56a8e5d49e3985f0d2c5917e2803e9a12260bad7060432053ba13",
+    "reports/validation/2026-10-09-finite-density-native-assembly/independent-reference/quadrature-64-60.json": "8fc792ae845b1fca1558dcfc0e15c30551c0cb64115820b1d7dc0ea379b8477f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/input.json": "b6c7fd367180cfe82c4390b6c310bf1eebf5347692c50590daac452ff765de8f",
+    "reports/validation/2026-10-09-finite-density-native-assembly/massless-blocks-massive-regression/prediction-28-80-12.json": "3f6796439c816e88cfd3f60f8c3d7a6e5e98b2f38c5b06112b78dafd83f5e25c",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/generate.rs": "6ff63d122c782b5c1f78ec18a198b5ac66e27f63818e331eec0e5ad797c5dee9",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/reference.json": "db43c5dfb11ae422ef364b826b3956f333a93f29f80c73fcf9d61a756edc56ed",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/source-sha256.json": "fef71625e9676b69502a5eafa3e153eeb5a74a117de263ba2ec7d62909122f8a",
+    "reports/validation/2026-10-09-finite-density-native-assembly/three-loop-independent-reference/validation.json": "87daaec2ee69875f3e43ed2e47339f85d493223313393687f4c43c6f8ecec8ea",
+    "tools/finite_density/compare_complete_massive_reference.py": "481629768a370c993fbcfa0bff25e574af52f2aa28e8f15a9ee7e358aadbe8f2",
+    "tools/finite_density/compare_massive_reference.py": "7739206862f6d40714a4587231a24cf99a8206811cad82fd2755ef97b52f57aa",
+    "tools/finite_density/compare_massless_reference.py": "fa616b666d8a70291db943ec78e6760ef70a65aa062a6848b2a0d29ab25a0bc3",
+    "tools/finite_density/compare_three_loop_reference.py": "a66a71ce60663073e146a6e5df47b6f5803b846873e89f167eeac441779ea56e",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/comparison-plan.json": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c"
+  },
+  "definitions_and_tolerances_changed": false,
+  "production_modified": false,
+  "exit_code": 0,
+  "comparison_sha256": "076a5a6444b67af3f6976f2d74425031ae20c16f7a071b11c846895952132a29"
+}

@@ -1,0 +1,81 @@
+{
+  "schema": 1,
+  "status": "failed_preparation",
+  "scope": "Separate unchanged-build retry after the immutable two-attempt checkpoint summary. Only the shared native domain budget changes from 8192 to 16384 relative to the guards3 attempt; no successful three-loop numerical result follows.",
+  "source_policy": "polynomial-closure-v1",
+  "guard_pass_budget": 3,
+  "shared_domain_budget": 16384,
+  "timeout_seconds": 1800,
+  "harness_seconds": 16.16,
+  "wall_seconds": 16.175043630879372,
+  "peak_child_rss_kib": 118840,
+  "exit_code": 101,
+  "attempted_cut": [
+    0
+  ],
+  "completed_rounds": 4,
+  "frontier_progression": [
+    7,
+    15,
+    105,
+    7
+  ],
+  "unresolved_terms": 3,
+  "failure": "incomplete reduction or boundary data: occupied weighted connection unresolved: native active weighted application failed; rounds=4, provisional=7, unresolved_terms=3; first residual indices/reasons=[([1, 0, 0, 2, 2, -1, -1, 0, -1, 0, 0, 0], ConditionVanished { rule: 8961, condition: 0 }), ([1, 0, 0, 2, 2, -1, -1, 0, -1, 0, 0, 0], ConditionVanished { rule: 8961, condition: 0 }), ([1, 0, 0, 2, 2, -1, -1, 0, -1, 0, 0, 0], ConditionVanished { rule: 8961, condition: 0 })]",
+  "refinements_performed": [
+    {
+      "allocated_domains": 32,
+      "integral": [
+        1,
+        0,
+        0,
+        3,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": 1
+    },
+    {
+      "allocated_domains": 32,
+      "integral": [
+        1,
+        0,
+        0,
+        2,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": 2
+    }
+  ],
+  "predictions_saved": 0,
+  "reference_comparisons": 0,
+  "laurent_run_started": false,
+  "numerical_acceptance": false,
+  "previous_diagnostic_qualification": "The earlier shared-domain-exhaustion explanation was inferred from the control flow and saved search records; no direct remaining-domain counter was captured. The larger-domain run performs a second saved point refinement and exposes a different exceptional child.",
+  "prior_checkpoint_summary_sha256": "7d3b6440004e7ab4a0c0ebdafb789dd2d91ff5fed60b227af7e26e5be832b87c",
+  "bindings_sha256": {
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-checkpoint-summary.json": "7d3b6440004e7ab4a0c0ebdafb789dd2d91ff5fed60b227af7e26e5be832b87c",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384-binding.json": "c858529543b4c88c7229b1a77c8427e8ab16d91317af763b2e269487fed23a51",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384-resources.json": "c5b6865676152189c2618cae53da8eff8edff2d4e7d03b45cbd25a6d0dbb05ca",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/failure.json": "06dd505aec3a62d078cab5d713d238c9469b9fb2b3a33da5f27b8d334db4842b",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/conditional-point-refinements.json": "2f2f43da43ad6aa05d3360850d031d7ec98399cdd0d594b0f0953377a9b1b0fe",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384-resources.log": "7c42ed5cdd5476e4ecb3e66154645f3efc253659b64d7f12dc40eee56bd87c5a",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-000-provisional.json": "4ef606cccef9d419d30800163dc419222905323a7e8e9ea45fef2a93ebd19e02",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-001-provisional.json": "3d75fe9330c6d9a01657ee7fe5b80058a8e49d2244d5fc1b4cfa8459e2aa0b4c",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-002-provisional.json": "4343c77a72abda1e2d1c6f1cf0237e6a5778567d0553c878e5c6f0c798eda012",
+    "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-003-provisional.json": "864d2045c052cbff8a89195c2af3e66ba01426584070d07a9005c86a87351e6d"
+  }
+}

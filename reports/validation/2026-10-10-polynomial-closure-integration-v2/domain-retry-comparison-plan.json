@@ -1,0 +1,11 @@
+{
+  "scope": "Separate completed-prediction comparator for the guards3/domains16384 retry. Reads no independent reference until unchanged native completion and construction/provenance checks pass. Laurent requires successful matched fixed-D comparison. No comparison executed by this preparation.",
+  "template_sha256": "2257a2b25c3d96cddabcdef8bc4f156b5c5e8216f5f28595f3bba6f061d4c12f",
+  "wrapper_sha256": "236c2589f754cb3fd0dc4cbc8e0a8e4eed8c2a3e8c9babcd1a04440c89442aaa",
+  "frozen_comparison_plan_sha256": "34db282139bd44ec46bf9e476c0c7bc138cf94632674a0be92eca4082013485c",
+  "report_tag_suffix": "-guards3-domains16384",
+  "source_policy": "polynomial-closure-v1",
+  "guard_passes": 3,
+  "shared_native_domains": 16384,
+  "tolerances_changed": false
+}

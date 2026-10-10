@@ -1,0 +1,16 @@
+{
+  "command": [
+    "timeout",
+    "60",
+    "/tmp/polynomial-closure-requested-audit-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/requested-reduction-result.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-002-provisional.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 5.543121776077896,
+  "user_seconds": 5.460161,
+  "system_seconds": 0.040818,
+  "peak_child_rss_kib": 43028,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

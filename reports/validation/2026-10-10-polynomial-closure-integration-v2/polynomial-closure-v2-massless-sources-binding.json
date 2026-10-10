@@ -1,0 +1,15 @@
+{
+  "source_snapshot_sha256": "963a44afe05bddaa861cbbdc4a03895c92a60dfe0df10c8a907a7721c9989674",
+  "build_provenance_sha256": "365cb0102bdb109f3e670af3507ce4881350c2a2c0ef5bcfacd3e84670c81d4d",
+  "launcher_sha256": "3246dc3bae9cbf1d24ed6b7452ddba2f7f229f4a09565fb8a673c1b815b183e8",
+  "gate": "massless-sources",
+  "command": [
+    "timeout",
+    "180",
+    "target/release/deps/finite_density_massless_sources-6295c8431ae8f488",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "exit_code": 0,
+  "native_numerical_acceptance_run": false
+}

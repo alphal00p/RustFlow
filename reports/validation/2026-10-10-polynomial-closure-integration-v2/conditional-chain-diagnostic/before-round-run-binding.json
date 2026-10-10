@@ -1,0 +1,30 @@
+{
+  "scope": "Exact reduction of incoming164 requests using previous1095rule program to audit first-pass allocation",
+  "command": [
+    "timeout",
+    "60",
+    "/tmp/polynomial-closure-requested-audit-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/before-round-reduction-result.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-002-provisional.json"
+  ],
+  "inputs": [
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-002-provisional.bin",
+      "sha256": "aa51c52760446f94cc8d16fb79a67c623401d40803e2b92ea655c0f53bbb51a2",
+      "bytes": 527832
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-002-provisional.json",
+      "sha256": "4343c77a72abda1e2d1c6f1cf0237e6a5778567d0553c878e5c6f0c798eda012",
+      "bytes": 43433
+    },
+    {
+      "path": "/tmp/polynomial-closure-requested-audit-20261010",
+      "sha256": "efd74e535b4646005a3e7e74476a6a005bf0e92908cac51b48f3b0918a191379",
+      "bytes": 426596024
+    }
+  ],
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

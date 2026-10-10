@@ -1,0 +1,14 @@
+{
+  "scope": "Validation launcher change before the first v2 production numerical launch; no source, algebraic, numerical-profile or tolerance change.",
+  "before_sha256": "ed2ab0ce49de1001d2fab19d43d6fee4e74c44456ac2bcf74baef71d3b78e46a",
+  "after_sha256": "87162f683471d4464bd52d9ab106acfa555dc46ad2a070e56683ee9b0944f50a",
+  "fixed_timeout_seconds": {
+    "before": 600,
+    "after": 1800
+  },
+  "double_timeout_seconds": 600,
+  "laurent_timeout_seconds": 1800,
+  "reason": "The successful unchanged-native source-only cut-0 singleton preparation needed approximately 664 seconds; full preparation has two singletons and a double-cut sector. A 600-second whole-amplitude cap would truncate known required work.",
+  "performance_claim": false,
+  "source_policy": "polynomial-closure-v1"
+}

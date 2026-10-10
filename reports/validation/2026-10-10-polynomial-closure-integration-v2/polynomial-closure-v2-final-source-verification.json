@@ -1,0 +1,9 @@
+{
+  "status": "passed",
+  "scope": "Final source and captured-build verification after all v2 numerical runs completed; subsequent source changes belong to another attempt.",
+  "verified_utc": "2026-10-10T04:25:22.753095+00:00",
+  "source_snapshot_sha256": "963a44afe05bddaa861cbbdc4a03895c92a60dfe0df10c8a907a7721c9989674",
+  "source_files": 2480,
+  "build_provenance_sha256": "365cb0102bdb109f3e670af3507ce4881350c2a2c0ef5bcfacd3e84670c81d4d",
+  "captured_build_artifacts_verified": 12
+}

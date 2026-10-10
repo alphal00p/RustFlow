@@ -1,0 +1,62 @@
+{
+  "predecessor_failed_binding": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-binding.json",
+    "sha256": "8ca38ed038819fd88c74203c0183d415df3162c2fd9c7288789f5bf3f4afd144"
+  },
+  "predecessor_failed_resources": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-resources.json",
+    "sha256": "0c8ee49f2e1db3ca0d8813a26182d37aa4c3b82bb0b1021e90591f31be61fadf"
+  },
+  "retry_reason": "The previous three-pass attempt exhausted the shared domain allocation before later exact-point obligations were reached. This existing-option scheduling control changes only the per-residual domain budget from 32 to 1, retaining the 8192 shared budget and three conditional-point passes. It does not add new search or fallback logic.",
+  "changed_search_setting": {
+    "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL": {
+      "before": "32",
+      "after": "1"
+    }
+  },
+  "source_snapshot_sha256": "963a44afe05bddaa861cbbdc4a03895c92a60dfe0df10c8a907a7721c9989674",
+  "build_provenance_sha256": "365cb0102bdb109f3e670af3507ce4881350c2a2c0ef5bcfacd3e84670c81d4d",
+  "root_gates_sha256": "f0f63c85666d454ae2a3bd7036d2968d1b777b9d1281b51697414dfb11c155fe",
+  "launcher_sha256": "8e3bd250153c82fc58df9f1665b39e836e465fe386df34d8c9b94ee777543c6a",
+  "input_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+  "executable": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+  "executable_sha256": "6adb6727fc72d168e26f3f8ee9aea9a6685548c4f0d4feb5012c1b7f9c758ee7",
+  "settings": {
+    "RUSTFLOW_WEIGHTED_INPUT": "examples/finite_density/massless_three_loop_chain.json",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY": "polynomial-closure-v1",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS": "true",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS": "true",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES": "true",
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED": "false",
+    "RUSTFLOW_WEIGHTED_REUSED_RULES": "65536",
+    "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL": "1",
+    "RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE": "true",
+    "RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS": "262144",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES": "3",
+    "RUSTFLOW_WEIGHTED_DEPTH": "3",
+    "RUSTFLOW_WEIGHTED_DOMAINS": "8192",
+    "RUSTFLOW_WEIGHTED_ROUNDS": "16",
+    "RUSTFLOW_WEIGHTED_FRONTIER": "1024",
+    "RUSTFLOW_WEIGHTED_REQUESTED": "4096",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON": "-5/4",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES": "18:60:8,28:60:8,28:80:8,28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-per-residual1"
+  },
+  "command": [
+    "timeout",
+    "1800",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cleared_inherited_runtime_variable_names": [],
+  "scope": "Bounded actual RustFlow production flow with optional polynomial-closure-v1 sources and unchanged native reducer. The previous guards3 retry settings are retained except that domains per residual is reduced from 32 to 1; numerical profiles are unchanged. The full fixed-D timeout is enlarged to 1800 seconds based on the approximately 664-second successful source-only singleton cost; no matched speed claim is made.",
+  "timeout_seconds": 1800,
+  "predictions_before_reference_access": true,
+  "experimental_native_portfolio_enabled": false,
+  "exit_code": 101,
+  "post_run_source_and_executable_unchanged": true
+}

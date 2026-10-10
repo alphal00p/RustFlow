@@ -1,0 +1,10 @@
+{
+  "scope": "Separate saved-prediction comparator for the guards3/per-residual1 control; no comparison has run. Same frozen references, profiles, complete-cut and source/build binding checks; Laurent requires its matching successful fixed-D comparison.",
+  "template_sha256": "236c2589f754cb3fd0dc4cbc8e0a8e4eed8c2a3e8c9babcd1a04440c89442aaa",
+  "wrapper_sha256": "b5f0682e439f6a10c4a06653d793652153ee37b25f81e7770d0d87d80f2a13fa",
+  "policy": "polynomial-closure-v1",
+  "guard_passes": 3,
+  "shared_native_domains": 8192,
+  "domains_per_residual": 1,
+  "tolerances_changed": false
+}

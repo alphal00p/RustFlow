@@ -1,0 +1,125 @@
+{
+  "scope": "Completed native conditional-chain diagnostic",
+  "files": [
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/README.md",
+      "bytes": 2247,
+      "sha256": "726517c4ddf674a9627da4ff9661275fd07c94528dc1f484e1660bbc8275528f"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/before-round-reduction-result.json",
+      "bytes": 21669,
+      "sha256": "9acf8e2aade66afc26ab9ba9f6ead5cdbc6799407873ae7cc3d5207e01e38a69"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/before-round-resources.json",
+      "bytes": 875,
+      "sha256": "d4caf206da4fde4748dc773332a4f40d2d624c1fcab8646eb0d5cdf6bdf84ce9"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/before-round-resources.log",
+      "bytes": 53,
+      "sha256": "bce587a2ed33d32ff103b2be52d5dca9bfaeb79d623dc939ef89807263b4844b"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/before-round-resources.provenance.json",
+      "bytes": 2297,
+      "sha256": "36ff507b559d2b3d2ce8ed334b621121c009af3161f8f181b76594af7bcf2df3"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/before-round-run-binding.json",
+      "bytes": 1628,
+      "sha256": "2465cfcc501b8d9b69700ce17261e9cc4c4f312898bb448483837628170e8f3b"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/build-binding.json",
+      "bytes": 2524,
+      "sha256": "b0651e54072c7638230d80479c426d3252dc18085c2941dab57c5553a9f1e602"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/compile.log",
+      "bytes": 363,
+      "sha256": "55cdd55ef740f616d475f955859a3a5bc7c04c8e5e51da4c127d65df5ce2ba6a"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/probe.rs",
+      "bytes": 7254,
+      "sha256": "78c336195a9f6543b37df43df32748321103d06fa9b115597bf9203c5db5ca06"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/request-audit-build-binding.json",
+      "bytes": 2508,
+      "sha256": "660e7bd59908d627b9d0f31b12b8369091cfe1f53d9b23f55e2a207988ae39f4"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/request-audit-compile.log",
+      "bytes": 1147,
+      "sha256": "aec7ed80584baf6d8a85402c1d63803f6f93f5c010dfc7b6714e9154050cd736"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/request-audit-resources.json",
+      "bytes": 859,
+      "sha256": "7cf3a95e3fd30d5a601ef1371ef7f7ebed939024c022e587a81edc2c838b9332"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/request-audit-resources.log",
+      "bytes": 55,
+      "sha256": "6e0ea258ee9bb25c1f14acb1db7f683f9c264fcb476c91b638f443db18a81b23"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/request-audit-resources.provenance.json",
+      "bytes": 2295,
+      "sha256": "65682ea898d60ae55f96a7a6485e58a3c1e811e18499758764de5c59c095cd0e"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/request-audit-run-binding.json",
+      "bytes": 1885,
+      "sha256": "5b1e4a2df48c6f3b686ed27e2734b7bc9fa3774aee660e1a3e443f451af27e02"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/request-audit.rs",
+      "bytes": 4750,
+      "sha256": "97710d5b444247bee98db2b8c5f40b1a05ebd8c23172d5a0e206853498b699f8"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/requested-reduction-result.json",
+      "bytes": 43595,
+      "sha256": "9fef9c926e165901557624a301d68adaac0a74f9001d7901f329b77fa107f953"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/resources.json",
+      "bytes": 673,
+      "sha256": "666e5aff4d3286ee84e08203f7bec4b06e69ba499c216986c7c905b3740ded26"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/resources.log",
+      "bytes": 91,
+      "sha256": "8a1ff836ab9c870644484b92cf03f423e309854ed185106697536520e591a577"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/resources.provenance.json",
+      "bytes": 1606,
+      "sha256": "099faf9ccff62cf24236ae372d90ec38a109f7003b4542599744cd98e446b47f"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/result.bin",
+      "bytes": 2359319,
+      "sha256": "42416682200ea25375eeae70a2ffe360fad777c471eb356fa455b386437f7918"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/result.json",
+      "bytes": 60818,
+      "sha256": "09806e116737b5695cda7f260a8cd73b80c1afceee249a04db053a43c26cceea"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/run-binding.json",
+      "bytes": 1682,
+      "sha256": "fa76440d81c1835abed3ef520fa9f5bb523a7da630bd28c7e901cc7d95148b76"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/summary.json",
+      "bytes": 2958,
+      "sha256": "8193bb81de9518c4e9d91c73e28e886165202405fd7397d8e8f4a5069933ac9f"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "status": "passed",
+  "lossless_archives_verified": 218,
+  "preserved_raw_files_verified": 38,
+  "historical_report_bindings_verified": 177,
+  "diagnostic_manifests": {
+    "conditional-chain-diagnostic": {
+      "sha256": "1e968a4dbb941cba910697cba068c07bdca7e02b5fc7eeb799c559efd5f745ea",
+      "verified_files": 24
+    },
+    "conditional-chain-domains16384-diagnostic": {
+      "sha256": "d629bc22191432ad700af7dca5693606e6188187fa7b411c343db2112b98ee8c",
+      "verified_files": 7
+    }
+  },
+  "scope": "Report and archive integrity only. Final source/build verification was recorded before releasing that freeze; this check does not claim that later source edits belong to the same build."
+}

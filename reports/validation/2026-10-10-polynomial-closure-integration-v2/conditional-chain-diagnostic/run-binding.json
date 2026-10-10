@@ -1,0 +1,34 @@
+{
+  "scope": "Original failed production program native replay; exact failed-point rediscovery with32domain/depth3 cap; no period calculation",
+  "command": [
+    "timeout",
+    "60",
+    "/tmp/polynomial-closure-conditional-chain-probe-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/result.json"
+  ],
+  "inputs": [
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+      "sha256": "b272627925c0faaa2edff319d742dd9b3661fddbd5169ab4bd20745b4e7e9b92",
+      "bytes": 2358340
+    },
+    {
+      "path": "/tmp/polynomial-closure-conditional-chain-probe-20261010",
+      "sha256": "98d6e3c6c3f174e3fb7ead3283712214e55a87880030385dc15b15dbdf18e6b7",
+      "bytes": 443885384
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-diagnostic/probe.rs",
+      "sha256": "78c336195a9f6543b37df43df32748321103d06fa9b115597bf9203c5db5ca06",
+      "bytes": 7254
+    },
+    {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-build-provenance.json",
+      "sha256": "365cb0102bdb109f3e670af3507ce4881350c2a2c0ef5bcfacd3e84670c81d4d",
+      "bytes": 5433
+    }
+  ],
+  "exit_code": 0,
+  "inputs_unchanged": true
+}

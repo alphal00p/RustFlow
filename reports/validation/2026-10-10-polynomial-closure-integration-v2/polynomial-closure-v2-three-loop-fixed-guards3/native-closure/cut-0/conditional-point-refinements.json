@@ -1,0 +1,25 @@
+{
+  "refinements": [
+    {
+      "allocated_domains": 32,
+      "integral": [
+        1,
+        0,
+        0,
+        3,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": 1
+    }
+  ],
+  "schema": 1,
+  "scope": "bounded native exact-point searches for ConditionVanished leaves",
+  "search_does_not_imply_coverage": true
+}

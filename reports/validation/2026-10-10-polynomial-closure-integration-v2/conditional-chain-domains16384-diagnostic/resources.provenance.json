@@ -1,0 +1,34 @@
+{
+  "captured_utc": "2026-10-10T04:23:27.406003+00:00",
+  "command": [
+    "timeout",
+    "60",
+    "/tmp/polynomial-closure-requested-audit-20261010",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-003-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/conditional-chain-domains16384-diagnostic/request-audit-result.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-002-provisional.json"
+  ],
+  "argument_files": {
+    "timeout": {
+      "resolved_path": "/nix/store/97d5ygrvqj55f4nx1x34wfdcc7qn11c0-coreutils-9.11/bin/coreutils",
+      "sha256": "f5afcbdd8db007620ba82a36a21c07bf66a6b737c062101b6aa16f81f587c8a6",
+      "size_bytes": 1768632
+    },
+    "/tmp/polynomial-closure-requested-audit-20261010": {
+      "resolved_path": "/tmp/polynomial-closure-requested-audit-20261010",
+      "sha256": "efd74e535b4646005a3e7e74476a6a005bf0e92908cac51b48f3b0918a191379",
+      "size_bytes": 426596024
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-003-provisional.bin": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-003-provisional.bin",
+      "sha256": "0560710a9bbac7d51eeed7be9eb6c1251de672ce2dd3d7c109d4b62d19345417",
+      "size_bytes": 4038426
+    },
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-002-provisional.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3-domains16384/native-closure/cut-0/round-002-provisional.json",
+      "sha256": "4343c77a72abda1e2d1c6f1cf0237e6a5778567d0553c878e5c6f0c798eda012",
+      "size_bytes": 43433
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

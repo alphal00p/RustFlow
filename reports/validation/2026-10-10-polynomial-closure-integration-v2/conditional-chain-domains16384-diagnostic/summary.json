@@ -1,0 +1,71 @@
+{
+  "status": "completed native replay addendum; no discovery or compile in this addendum",
+  "parent_report": "conditional-chain-diagnostic (unchanged)",
+  "native_program_rules": 9133,
+  "conditional_refinements": [
+    {
+      "allocated_domains": 32,
+      "integral": [
+        1,
+        0,
+        0,
+        3,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": 1
+    },
+    {
+      "allocated_domains": 32,
+      "integral": [
+        1,
+        0,
+        0,
+        2,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": 2
+    }
+  ],
+  "new_failed_label": [
+    [
+      1,
+      0,
+      0,
+      2,
+      2,
+      -1,
+      -1,
+      0,
+      -1,
+      0,
+      0,
+      0
+    ]
+  ],
+  "actual_current_requests": 164,
+  "native_rule_applications": 4877,
+  "conditional_occurrences": 9,
+  "remaining_no_rule_labels": 308,
+  "budget_observation": "Last recorded exact conditional search was local pass2; max_passes3 and total allocation16384. New child is unattempted yet appears in9 reductions of current requests. This is consistent with another exhausted shared allocation. Telemetry does not directly record remaining_domains or an empty/nonconditional pass3, so it alone cannot conclusively exclude exhaustion of the last pass after another unrecorded search. No measured native visit count is claimed.",
+  "pilot_comparison": {
+    "pilot": "requested labels, initial raw derivatives, ray1 followed by exactpoint1 for NoRule or other unresolved status, retained-first",
+    "production": "descendant residuals, root-only initialization, ray32 and exactpoint32 for ConditionVanished only",
+    "existing_per_residual1_control": "bounded cheaper search but not exact pilot reproduction",
+    "rays_disabled": "not admitted with existing active/residual option contract"
+  },
+  "scope": "No full closure or numerical prediction; no recommendation to keep escalating ray32 budgets."
+}

@@ -1,0 +1,15 @@
+{
+  "scope": "Prepared validation-only retry launcher; not executed by this preparation. Prior failed attempt remains immutable.",
+  "base_launcher_sha256": "87162f683471d4464bd52d9ab106acfa555dc46ad2a070e56683ee9b0944f50a",
+  "retry_launcher_sha256": "dfcdaf900254c49dfeaec0daf89343e7aa3476090173cc53791e2b1312c61817",
+  "changes": {
+    "guard_passes": [
+      1,
+      3
+    ],
+    "output_suffix": "-guards3"
+  },
+  "source_build_change": false,
+  "timeout_seconds": 1800,
+  "native_prediction_claim": false
+}

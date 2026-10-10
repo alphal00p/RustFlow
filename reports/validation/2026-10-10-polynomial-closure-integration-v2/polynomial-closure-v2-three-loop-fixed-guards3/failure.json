@@ -1,0 +1,5 @@
+{
+  "error": "incomplete reduction or boundary data: occupied weighted connection unresolved: native active weighted application failed; rounds=4, provisional=6, unresolved_terms=3; first residual indices/reasons=[([1, 0, 0, 2, 2, -1, -1, -1, 0, 0, 0, 0], ConditionVanished { rule: 4218, condition: 0 }), ([1, 0, 0, 2, 2, -1, -1, -1, 0, 0, 0, 0], ConditionVanished { rule: 4218, condition: 0 }), ([1, 0, 0, 2, 2, -1, -1, -1, 0, 0, 0, 0], ConditionVanished { rule: 4218, condition: 0 })]",
+  "numerical_acceptance": false,
+  "stage": "complete preparation"
+}

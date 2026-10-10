@@ -1,0 +1,62 @@
+{
+  "predecessor_failed_binding": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-binding.json",
+    "sha256": "9a4a2fead7c8d8e7cba0d1e28404fed07dbd453d4eaa9fcb65784c721db95bf2"
+  },
+  "predecessor_failed_resources": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-resources.json",
+    "sha256": "4d31e1ed884a75a676aef9e9e6501b94ddc56a6bcb838a88f52cf8cd1d2c36e1"
+  },
+  "retry_reason": "The original one-pass run stopped on a second coupled exceptional condition after its first point refinement. This separately recorded unchanged-build attempt increases only the native conditional-point refinement pass budget from 1 to 3.",
+  "changed_search_setting": {
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES": {
+      "before": "1",
+      "after": "3"
+    }
+  },
+  "source_snapshot_sha256": "963a44afe05bddaa861cbbdc4a03895c92a60dfe0df10c8a907a7721c9989674",
+  "build_provenance_sha256": "365cb0102bdb109f3e670af3507ce4881350c2a2c0ef5bcfacd3e84670c81d4d",
+  "root_gates_sha256": "f0f63c85666d454ae2a3bd7036d2968d1b777b9d1281b51697414dfb11c155fe",
+  "launcher_sha256": "dfcdaf900254c49dfeaec0daf89343e7aa3476090173cc53791e2b1312c61817",
+  "input_sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+  "executable": "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+  "executable_sha256": "6adb6727fc72d168e26f3f8ee9aea9a6685548c4f0d4feb5012c1b7f9c758ee7",
+  "settings": {
+    "RUSTFLOW_WEIGHTED_INPUT": "examples/finite_density/massless_three_loop_chain.json",
+    "RUSTFLOW_WEIGHTED_SOURCE_POLICY": "polynomial-closure-v1",
+    "RUSTFLOW_WEIGHTED_REQUESTED_RAYS": "true",
+    "RUSTFLOW_WEIGHTED_FREE_VIRTUAL_ZEROS": "true",
+    "RUSTFLOW_WEIGHTED_ZERO_FACES": "true",
+    "RUSTFLOW_WEIGHTED_PRIORITIZE_REQUESTED": "false",
+    "RUSTFLOW_WEIGHTED_REUSED_RULES": "65536",
+    "RUSTFLOW_WEIGHTED_DOMAINS_PER_RESIDUAL": "32",
+    "RUSTFLOW_WEIGHTED_ACTIVE_TARGET_CLOSURE": "true",
+    "RUSTFLOW_WEIGHTED_DIRECT_ZERO_ATTEMPTS": "262144",
+    "RUSTFLOW_WEIGHTED_GUARD_PASSES": "3",
+    "RUSTFLOW_WEIGHTED_DEPTH": "3",
+    "RUSTFLOW_WEIGHTED_DOMAINS": "8192",
+    "RUSTFLOW_WEIGHTED_ROUNDS": "16",
+    "RUSTFLOW_WEIGHTED_FRONTIER": "1024",
+    "RUSTFLOW_WEIGHTED_REQUESTED": "4096",
+    "RUSTFLOW_DENSITY_FLOW_EPSILON": "-5/4",
+    "RUSTFLOW_DENSITY_FLOW_PROFILES": "18:60:8,28:60:8,28:80:8,28:80:12",
+    "RUSTFLOW_DENSITY_FLOW_REPORT": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3"
+  },
+  "command": [
+    "timeout",
+    "1800",
+    "target/release/deps/finite_density_runtime_flow-44939937ffe8534f",
+    "--ignored",
+    "--exact",
+    "runtime_graph_full_amplitude",
+    "--nocapture",
+    "--test-threads=1"
+  ],
+  "cleared_inherited_runtime_variable_names": [],
+  "scope": "Bounded actual RustFlow production flow with optional polynomial-closure-v1 sources and unchanged native reducer. The original v2 attempt settings are retained except that the conditional-point refinement budget is increased from 1 to 3; numerical profiles are unchanged. The full fixed-D timeout is enlarged to 1800 seconds based on the approximately 664-second successful source-only singleton cost; no matched speed claim is made.",
+  "timeout_seconds": 1800,
+  "predictions_before_reference_access": true,
+  "experimental_native_portfolio_enabled": false,
+  "exit_code": 101,
+  "post_run_source_and_executable_unchanged": true
+}

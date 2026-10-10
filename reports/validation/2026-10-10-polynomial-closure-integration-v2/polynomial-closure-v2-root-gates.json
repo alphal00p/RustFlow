@@ -1,0 +1,252 @@
+{
+  "schema_version": 1,
+  "status": "passed",
+  "scope": "Only the listed assigned regression gates; no duplicate test invocations and no numerical acceptance runs.",
+  "source_snapshot": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-source-hashes.json",
+    "sha256": "963a44afe05bddaa861cbbdc4a03895c92a60dfe0df10c8a907a7721c9989674"
+  },
+  "build_provenance": {
+    "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-build-provenance.json",
+    "sha256": "365cb0102bdb109f3e670af3507ce4881350c2a2c0ef5bcfacd3e84670c81d4d"
+  },
+  "unchanged_source_files": 2480,
+  "compile_identities": {
+    "DEPENDENCY_SOURCE_DIGEST": "10e2d2294b793dc66c276f9d8d2df35b1714e1560bd47498d32abcc52ef9ae23",
+    "RUSTRED_SOURCE_DIGEST": "6de0bc82c57541df80295f1071edf86c8d05ec47186c20a92159fcb467f71b5e",
+    "PORT_SOURCE_DIGEST": "3ebb41f60d3d3c9d98082e56de64d1872dd44199bcbe7aa0c25de4d0377a29cc"
+  },
+  "features": {
+    "rustred_unit": [
+      "native"
+    ],
+    "rustred_library": [
+      "native"
+    ],
+    "rustflow": [
+      "automatic",
+      "default",
+      "native",
+      "python",
+      "python_api"
+    ]
+  },
+  "gates": [
+    {
+      "gate": "lib",
+      "status": "passed",
+      "passed": 85,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 213,
+      "harness_seconds": 7.34,
+      "wall_seconds": 7.3661641436629,
+      "peak_child_rss_kib": 24576,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-lib-resources.json",
+          "sha256": "88adab7a969a6b1e6b8311dc1074f452cde46adeda84b39b2841e1297c3e09be"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-lib-resources.log",
+          "sha256": "a0f0581477f7da8a1b8a4b49d2c06cd08b63fb6fc465e5f0422fc4fa2fc99940"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-lib-resources.provenance.json",
+          "sha256": "f48270b12fe623336de8e994a9be665be900f4763b421fd544bd3e8af61a3aff"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-lib-binding.json",
+          "sha256": "c6c4b34d7cd6f08bfac41f8cbf315123f5fe46f2f3d32c713d51416891a6b9c9"
+        }
+      }
+    },
+    {
+      "gate": "flow-boundary",
+      "status": "passed",
+      "passed": 6,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.15,
+      "wall_seconds": 0.1648842548020184,
+      "peak_child_rss_kib": 15440,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-flow-boundary-resources.json",
+          "sha256": "adddef5837f8f94c7bf084166dce94d9a7ae5fd989f06c35773a0f8fb3e16ac7"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-flow-boundary-resources.log",
+          "sha256": "76d5f87f3d5a6ed2a45e39ab55724ccf6cd547332a8e8a4031fdb1d48a93942d"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-flow-boundary-resources.provenance.json",
+          "sha256": "8d77ef98d6c63849a263971941a86cef279fdb8d21522baccc9378fb42d1c124"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-flow-boundary-binding.json",
+          "sha256": "1464cb8408cdc9e25f74f5e12ff70593b4e027bb3c532bf578664e7f946f27c8"
+        }
+      }
+    },
+    {
+      "gate": "massless-sources",
+      "status": "passed",
+      "passed": 4,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.37,
+      "wall_seconds": 1.393099166918546,
+      "peak_child_rss_kib": 18432,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-massless-sources-resources.json",
+          "sha256": "b9d327254de2439250a529dd47a0ef9683c92bf06ae7edf76d76d191ba97651f"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-massless-sources-resources.log",
+          "sha256": "8d04dedadbb9acaed1a52602afd0cc82bdf83c60c0cc7df48bed88c838b1abe5"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-massless-sources-resources.provenance.json",
+          "sha256": "b1a000cda3c0e1ddd1503b44b30516413929c9174b527d8602579f75fa960bb1"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-massless-sources-binding.json",
+          "sha256": "eb3079cd5048aa7290f8262e3795625d74b8de303b7009fcc2ba18743e804c2f"
+        }
+      }
+    },
+    {
+      "gate": "source-fingerprint",
+      "status": "passed",
+      "passed": 5,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.01,
+      "wall_seconds": 0.01199645409360528,
+      "peak_child_rss_kib": 15440,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-source-fingerprint-resources.json",
+          "sha256": "da8a0d3a157a48c3b1b88e557499f482fa06b54731776e584520dc127a29a32c"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-source-fingerprint-resources.log",
+          "sha256": "af27261b7d5ebde81be6a7c22873c6558ef0024ad5fbfe3add20c610b6cf9de6"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-source-fingerprint-resources.provenance.json",
+          "sha256": "e33691cbb509cae370bab6fd650503c53cc657be85b26fb4d2d30888d22e1a76"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-source-fingerprint-binding.json",
+          "sha256": "009dbc946a214d60dce568d36e7b178191c03b4323250d56a3cf7eaa381a3d2e"
+        }
+      }
+    },
+    {
+      "gate": "python",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 1.78,
+      "wall_seconds": 1.7977477540262043,
+      "peak_child_rss_kib": 30744,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-python-resources.json",
+          "sha256": "f773149c78e699c5030b8b526c5cb8a553223b64bdabff410e89924f86f75526"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-python-resources.log",
+          "sha256": "590fcb3c17ac42fa6e73e57a1aba75c8de9e2b88ac9cc73ed5273d2b43191cdd"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-python-resources.provenance.json",
+          "sha256": "23bdbccbf0a7a85d75e990d3a271587e02bc7c1d1ce4e28070c0064654d04e70"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-python-binding.json",
+          "sha256": "55db3f1315fc3fc55e3c3915b4a3768fff47248671ceb21bd8dea1e33652188f"
+        }
+      }
+    },
+    {
+      "gate": "capacity",
+      "status": "passed",
+      "passed": 3,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.04,
+      "wall_seconds": 0.053837664891034365,
+      "peak_child_rss_kib": 15440,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-capacity-resources.json",
+          "sha256": "e01e792db5d8f874ada49e89fe81a8702dbec01cee6227b2537928a99bce0520"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-capacity-resources.log",
+          "sha256": "2b0ff815bd81bbb4d9b5a2413cab6713bff9847ffdf1292409547656650301ad"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-capacity-resources.provenance.json",
+          "sha256": "c2b3cca94ab0543a7794e3766445070c73c434656aa32f425db34f7de80e839e"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-capacity-binding.json",
+          "sha256": "55e69f5a36fb9f98a3c18135a9f0ed1ce04e4b26781cb7130c3a55f04a8f7ed3"
+        }
+      }
+    },
+    {
+      "gate": "polynomial-sources",
+      "status": "passed",
+      "passed": 1,
+      "failed": 0,
+      "ignored": 0,
+      "measured": 0,
+      "filtered": 0,
+      "harness_seconds": 0.06,
+      "wall_seconds": 0.07694495096802711,
+      "peak_child_rss_kib": 15440,
+      "artifacts": {
+        "resources": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-polynomial-sources-resources.json",
+          "sha256": "74cc68e25b95ea833a1a813e8fb1898958be9a1b77d9bfbd547a1dacd71259ad"
+        },
+        "log": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-polynomial-sources-resources.log",
+          "sha256": "2bed26e77241c8470dedc93df251e9333c46ddf1cdff48a76560b4984f04e596"
+        },
+        "launch": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-polynomial-sources-resources.provenance.json",
+          "sha256": "aa842023ea5207de052ee69cb000563ce939f4e26a32e355c310eb633b238db3"
+        },
+        "binding": {
+          "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-polynomial-sources-binding.json",
+          "sha256": "7311590df843d6605262c8b281bed3ce2f86c47af1e0bb1650b9367c8e54cec7"
+        }
+      }
+    }
+  ],
+  "unique_test_count": 105,
+  "numerical_acceptance_runs": 0,
+  "native_four_loop_acceptance": false,
+  "three_loop_full_amplitude_validated": false,
+  "timing_scope": "Prebuilt test execution; compilation and Nix startup excluded. Shared-host measurements are not isolated performance benchmarks.",
+  "summary_script_sha256": "9f4d21b343082fc4d0c2cd88ebde6cea0bc1616b597062dd6cbec496c504142e"
+}

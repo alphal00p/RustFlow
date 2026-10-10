@@ -1,0 +1,111 @@
+{
+  "scope": "Native exact failed-guard diagnosis only; no production mutation or numerical periods",
+  "failed_point": [
+    1,
+    0,
+    0,
+    2,
+    2,
+    -1,
+    -1,
+    -1,
+    0,
+    0,
+    0,
+    0
+  ],
+  "native_rule": 4218,
+  "native_conditions": [
+    "a_5-a_7",
+    "8*a_5-8*a_7"
+  ],
+  "conditional_points_already_attempted": [
+    {
+      "allocated_domains": 32,
+      "integral": [
+        1,
+        0,
+        0,
+        3,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ],
+      "pass": 1
+    }
+  ],
+  "point_refinement": {
+    "depth": 3,
+    "domain_cap": 32,
+    "rules": 1,
+    "gaps": 0,
+    "status": "Applied { rule: 0 }",
+    "conditions": [
+      "2*eta",
+      "16*eta",
+      "eta",
+      "4*eta"
+    ],
+    "union_status": "Applied { rule: 5169 }",
+    "remaining_failures": [
+      "NoApplicableRule",
+      "NoApplicableRule",
+      "NoApplicableRule",
+      "NoApplicableRule"
+    ]
+  },
+  "current_request_audit": {
+    "requests": 164,
+    "rule_applications": 2249,
+    "conditional_occurrences": 15,
+    "failed_labels": [
+      [
+        1,
+        0,
+        0,
+        2,
+        2,
+        -1,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "failed_point_directly_requested": false,
+    "failed_point_reached_from_current_requests": true,
+    "no_rule_labels": 295
+  },
+  "before_round_audit": {
+    "requests": 164,
+    "no_rule_labels": 173,
+    "failure_occurrences": 0,
+    "qualification": "Uses previous retained1095rules before the current round adds4 native direct-zero rules; not exact per-pass allocation telemetry."
+  },
+  "guard_pass_controls": [
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed/native-closure/cut-0/round-003-provisional.bin",
+      "bytes": 2358340,
+      "sha256": "b272627925c0faaa2edff319d742dd9b3661fddbd5169ab4bd20745b4e7e9b92"
+    },
+    {
+      "path": "reports/validation/2026-10-10-polynomial-closure-integration-v2/polynomial-closure-v2-three-loop-fixed-guards3/native-closure/cut-0/round-003-provisional.bin",
+      "bytes": 2358340,
+      "sha256": "b272627925c0faaa2edff319d742dd9b3661fddbd5169ab4bd20745b4e7e9b92"
+    }
+  ],
+  "reasoned_conclusion": "Current requested labels expose the child, so it is not hidden solely in active traversal. Guard1 and guard3 produce identical programs and conditional-point histories. Under the current continuation predicate, guard3 can stop with this unattempted conditional point and no other failure only when the shared remaining_domains allocation is exhausted. Counter is inferred from exact request replay and code, not directly instrumented.",
+  "smallest_next_control": {
+    "guard_passes": 3,
+    "shared_max_domains": 16384,
+    "all_other_options": "unchanged",
+    "status": "recommended existing-options retry; no guarantee of whole-family closure"
+  }
+}
