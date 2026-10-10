@@ -1,0 +1,15 @@
+{
+  "schema": "integrated-per-target-fit-plan.v1",
+  "targets": [
+    {
+      "id": 0,
+      "training": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-training.json",
+      "holdout": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-0-holdout.json"
+    },
+    {
+      "id": 1,
+      "training": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-1-training.json",
+      "holdout": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/fit-data/target-1-holdout.json"
+    }
+  ]
+}

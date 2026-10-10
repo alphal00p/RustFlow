@@ -1,0 +1,38 @@
+{
+  "schema": "rustflow.integrated-moment-series.v1",
+  "status": "proposal",
+  "variable": {
+    "name": "t",
+    "eta_power": "-1/2",
+    "grading_denominator": 2,
+    "parity_proved": false
+  },
+  "field": {
+    "preferred": "Q(epsilon)",
+    "first_exact_dimension": "13/2",
+    "epsilon": "-5/4"
+  },
+  "channels": [
+    {
+      "target_id": "original target index",
+      "region_id": "transformation and hard mask",
+      "eta_exponent": "symbolic affine epsilon",
+      "log_power": 0,
+      "hard_master": "full native family signature + indices",
+      "compact_normalization": "explicit angular and mu powers",
+      "coefficients": "ordered exact rational expressions; no missing grades",
+      "known_prefix_length": 0,
+      "tail": "unknown"
+    }
+  ],
+  "caps": {
+    "initial_runtime_seconds": 180,
+    "initial_max_coefficients": 24,
+    "max_coefficients": 64,
+    "training": 48,
+    "heldout": 16,
+    "max_retained_monomials": 200000,
+    "max_retained_algebra_bytes": 134217728,
+    "conditional_total_generation_seconds": 900
+  }
+}

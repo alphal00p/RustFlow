@@ -1,0 +1,139 @@
+{
+  "status": "PASS",
+  "scope": "Exact integrated coefficient generation; no fitted equation, eta-zero continuation, or numerical acceptance",
+  "targets": 2,
+  "meaningful_coefficients_per_target": 64,
+  "dimension": "13/2",
+  "q": 1,
+  "all_region_count": 2,
+  "native_hard_master_channels": 1,
+  "cumulative_generation_seconds": 2.039299018215388,
+  "generation_cap_seconds": 900,
+  "per_run_cap_seconds": 180,
+  "native_cache": {
+    "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+    "cached_coefficient_bytes": 697396,
+    "cached_coefficient_terms": 8514,
+    "cached_integrals": 129,
+    "context_fingerprint": "rustred-indexed-coefficient-context-v1|base=rustred-base-context-v1|parameters=1|1:d|scope=210:ordinary-ibp|rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;|indices=1",
+    "dimension_symbol": "rustred::{}::d",
+    "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+    "rule_applications": 128,
+    "rules": 1,
+    "source_relations": 1,
+    "specialized_dimension": "13/2"
+  },
+  "compact_cache_monomials": [
+    64,
+    128,
+    254
+  ],
+  "result_bytes": 204428,
+  "result_sha256": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+  "runs": {
+    "gaussian-prefix-24/run.json": {
+      "command": [
+        "/tmp/rustflow-integrated-moment-gaussian-20261010",
+        "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-prefix-24",
+        "24"
+      ],
+      "timeout_seconds": 180,
+      "build_sha256": "656fe62787129f883077a1ef34148f942f4766c31243c705839db95ac07ed66b",
+      "references_loaded": false,
+      "exit_code": 0,
+      "wall_seconds": 0.16436788393184543,
+      "output": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-prefix-24/coefficients.json",
+        "sha256": "abac2d75baeb7dd216efa0c8c8592d4875d9dd8fc8f4057be019f677a71b4a16",
+        "bytes": 52278
+      }
+    },
+    "gaussian-prefix-4/run.json": {
+      "command": [
+        "/tmp/rustflow-integrated-moment-gaussian-20261010",
+        "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-prefix-4",
+        "4"
+      ],
+      "timeout_seconds": 180,
+      "build_sha256": "656fe62787129f883077a1ef34148f942f4766c31243c705839db95ac07ed66b",
+      "references_loaded": false,
+      "exit_code": 0,
+      "wall_seconds": 0.06429777201265097,
+      "output": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-prefix-4/coefficients.json",
+        "sha256": "d8215776f5e66da09c0c5f6c2179884e391310fc4b15ce779e195d83f805bc43",
+        "bytes": 15425
+      }
+    },
+    "gaussian-prefix-64/run.json": {
+      "command": [
+        "/tmp/rustflow-integrated-moment-gaussian-20261010",
+        "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-prefix-64",
+        "64"
+      ],
+      "timeout_seconds": 180,
+      "build_sha256": "656fe62787129f883077a1ef34148f942f4766c31243c705839db95ac07ed66b",
+      "references_loaded": false,
+      "exit_code": 1,
+      "wall_seconds": 0.1644195239059627
+    },
+    "gaussian-wide-prefix-24/run.json": {
+      "command": [
+        "/tmp/rustflow-integrated-moment-gaussian-wide-20261010",
+        "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-24",
+        "24"
+      ],
+      "timeout_seconds": 180,
+      "build_sha256": "9b65f5773b8127e7a4a7b8efffe1e8e3ae14c01ab35fd5b3fcd5b2c83c18fc56",
+      "references_loaded": false,
+      "exit_code": 0,
+      "wall_seconds": 0.1645632549189031,
+      "output": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-24/coefficients.json",
+        "sha256": "5a8c19efaa9b19b47507ee4c7045368cd7ad6993f865f8ab8170c7437fa73644",
+        "bytes": 72536
+      }
+    },
+    "gaussian-wide-prefix-64/run.json": {
+      "command": [
+        "/tmp/rustflow-integrated-moment-gaussian-wide-20261010",
+        "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-64",
+        "64"
+      ],
+      "timeout_seconds": 180,
+      "build_sha256": "9b65f5773b8127e7a4a7b8efffe1e8e3ae14c01ab35fd5b3fcd5b2c83c18fc56",
+      "references_loaded": false,
+      "exit_code": 0,
+      "wall_seconds": 0.7657142062671483,
+      "output": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-64/coefficients.json",
+        "sha256": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+        "bytes": 204428
+      }
+    },
+    "prefix-half-7/run.json": {
+      "command": [
+        "/tmp/rustflow-integrated-moment-generator-20261010",
+        "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/prefix-half-7",
+        "7"
+      ],
+      "timeout_seconds": 180,
+      "build_sha256": "97fe2a536413172e3ec29cc7272ad903f5f6775d6b36ae4243c1bdeac038288d",
+      "references_loaded": false,
+      "exit_code": 0,
+      "wall_seconds": 0.7159363771788776,
+      "output": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/prefix-half-7/coefficients.json",
+        "sha256": "3aa080a982cb79973f5d1e94a1c86e4477c02f5998da7b901223606f19d08139",
+        "bytes": 249285
+      }
+    }
+  },
+  "limits_note": "Per-polynomial and cache-entry checks plus native ordinary coefficient cache byte/term caps are enforced. Complete transient CAS scratch and all simultaneous Atom heap usage are not bounded by the serialized output cap. The retained final payload is204428bytes; no production resource claim."
+}

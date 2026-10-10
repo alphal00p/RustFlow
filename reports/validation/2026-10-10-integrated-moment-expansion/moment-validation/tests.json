@@ -1,0 +1,11 @@
+{
+  "command": [
+    "/tmp/rustflow-integrated-moment-validation-20261010",
+    "--test-threads=1",
+    "--nocapture"
+  ],
+  "timeout_seconds": 180,
+  "build_sha256": "970daee880c01a07b4ed754f2e6baddb28712fa83e34837d0317d8dab5d4114f",
+  "exit_code": 0,
+  "wall_seconds": 0.41530540911480784
+}

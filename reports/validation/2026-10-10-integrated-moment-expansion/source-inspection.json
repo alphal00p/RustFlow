@@ -1,0 +1,57 @@
+{
+  "scope": "Read-only audit; no coefficients generated and no reference loaded",
+  "files": {
+    "examples/finite_density/massless_three_loop_chain.json": {
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "bytes": 1550
+    },
+    "src/finite_density/input.rs": {
+      "sha256": "f825dfc202318753f0f9569a87c646dd7c41cc10ea110b5e9fb761e79c73bbf9",
+      "bytes": 19167
+    },
+    "src/finite_density/geometry.rs": {
+      "sha256": "dc42053054fcf8f98d78667e6a8e6d39bd1c66d817352abdbccd36f583521b07",
+      "bytes": 26485
+    },
+    "src/finite_density/basis.rs": {
+      "sha256": "459f14bb294b5cc27fd4f43dbcda285c3bc9e24230515691ab90630d573a6484",
+      "bytes": 12347
+    },
+    "src/finite_density/flow_boundary.rs": {
+      "sha256": "f97e44c9324b7f2bb687e7cf9bf9d008b0c1428bea841e4bbe97f46e9854c855",
+      "bytes": 22278
+    },
+    "src/finite_density/boundary.rs": {
+      "sha256": "5a61d8b9963eb9d2d4cb052005743241ed65bc92e0c7aed87ac65893bee740d5",
+      "bytes": 39285
+    },
+    "src/finite_density/compact.rs": {
+      "sha256": "ab6f3da58c4f66a6af0e46495e81127555ee4dd469db4d8fc9f1117dc94a0db8",
+      "bytes": 25148
+    },
+    "src/cut_regions.rs": {
+      "sha256": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d",
+      "bytes": 9209
+    },
+    "src/regions.rs": {
+      "sha256": "80774144c51cf3a72cad25d14c33cfae183fbae666db1178b31ae7163c0369ca",
+      "bytes": 9890
+    },
+    "src/integrand.rs": {
+      "sha256": "c2efc6187855f32bb9a29baae3886f068d0e945742c2a18a93a38f7736d93115",
+      "bytes": 22856
+    },
+    "src/tensor.rs": {
+      "sha256": "bc27dc820275c76716ca24c677e714f61e5734156dcb94ee95ec6bd8eab4a77b",
+      "bytes": 7134
+    },
+    "src/gaussian.rs": {
+      "sha256": "8ad1b25983c86015c856990e0e86a58db8502162353fddc813cdbaed74d6ac9e",
+      "bytes": 8133
+    },
+    "src/reduction.rs": {
+      "sha256": "032ab5b43573f98f48237bff5852b56d62f076c0f9d86b8dca413bf46d01ed33",
+      "bytes": 29521
+    }
+  }
+}

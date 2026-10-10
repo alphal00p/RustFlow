@@ -1,0 +1,314 @@
+{
+  "audit": [
+    {
+      "F": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0^2+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha1^2",
+      "U": "integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1",
+      "V": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1",
+      "active_virtual_slots": [
+        1,
+        4
+      ],
+      "eta_leading_exponent_at_D": "1/4",
+      "full_off_shell_replay": true,
+      "gaussian_means": [
+        [
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*integrated_moment_gauss::{}::alpha1",
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*-1*integrated_moment_gauss::{}::alpha1"
+        ]
+      ],
+      "gram_determinant": "integrated_moment_gauss::{}::G0",
+      "indices": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "moment_cache_monomials": 4,
+      "pure_compact_slots": [
+        2
+      ],
+      "target": 0
+    },
+    {
+      "F": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0^2+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha1^2",
+      "U": "integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1",
+      "V": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1",
+      "active_virtual_slots": [
+        1,
+        4
+      ],
+      "eta_leading_exponent_at_D": "1/4",
+      "full_off_shell_replay": true,
+      "gaussian_means": [
+        [
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*integrated_moment_gauss::{}::alpha1",
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*-1*integrated_moment_gauss::{}::alpha1"
+        ]
+      ],
+      "gram_determinant": "integrated_moment_gauss::{}::G0",
+      "indices": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "moment_cache_monomials": 8,
+      "pure_compact_slots": [
+        2
+      ],
+      "target": 1
+    },
+    {
+      "F": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0^2+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha1^2",
+      "U": "integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1",
+      "V": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1",
+      "active_virtual_slots": [
+        1,
+        4
+      ],
+      "eta_leading_exponent_at_D": "1/4",
+      "full_off_shell_replay": true,
+      "gaussian_means": [
+        [
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*integrated_moment_gauss::{}::alpha1",
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*-1*integrated_moment_gauss::{}::alpha1"
+        ]
+      ],
+      "gram_determinant": "integrated_moment_gauss::{}::G0",
+      "indices": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "moment_cache_monomials": 14,
+      "pure_compact_slots": [
+        2
+      ],
+      "target": 1
+    }
+  ],
+  "coefficients": [
+    {
+      "coefficient": "1/9",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 0,
+      "target": 0
+    },
+    {
+      "coefficient": "-57/484",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 1,
+      "target": 0
+    },
+    {
+      "coefficient": "459/2288",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 2,
+      "target": 0
+    },
+    {
+      "coefficient": "-48569/123200",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 3,
+      "target": 0
+    },
+    {
+      "coefficient": "43/264",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 0,
+      "target": 1
+    },
+    {
+      "coefficient": "-34409/151008",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 1,
+      "target": 1
+    },
+    {
+      "coefficient": "577881/1189760",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 2,
+      "target": 1
+    },
+    {
+      "coefficient": "-3848379/3351040",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 3,
+      "target": 1
+    }
+  ],
+  "compact_normalization": "prod_i mu_i^(D-2)/(sqrt(pi)*Gamma((D-1)/2))",
+  "conditions": [
+    "1",
+    "2"
+  ],
+  "convergent_germ_proved": false,
+  "dimension": "13/2",
+  "hard_reductions": [
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        2
+      ],
+      "terms": [
+        {
+          "coefficient": "9/4",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        4
+      ],
+      "terms": [
+        {
+          "coefficient": "15/128",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        3
+      ],
+      "terms": [
+        {
+          "coefficient": "45/32",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        6
+      ],
+      "terms": [
+        {
+          "coefficient": "63/8192",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        5
+      ],
+      "terms": [
+        {
+          "coefficient": "-45/2048",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        8
+      ],
+      "terms": [
+        {
+          "coefficient": "495/262144",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        7
+      ],
+      "terms": [
+        {
+          "coefficient": "-231/65536",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "conditions": [
+        "1",
+        "2"
+      ],
+      "family": "{\"D\":\"13/2\",\"external\":[],\"loops\":1,\"physical\":1,\"propagators\":[{\"coefficients\":[\"1\"],\"constant\":\"-1\"}]}",
+      "input": [
+        9
+      ],
+      "terms": [
+        {
+          "coefficient": "-9405/8388608",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    }
+  ],
+  "input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+  "known_prefix_length": 4,
+  "native_backend": "rustred-exact:cfe0febd5e8ce966dab3c0db43faee93b48422a56c802fd6c962fda93b1bb06c:79e41557461deafa2547070d5d33e518d0adfa939c8b77f8930057724a6656b5:2:4096:false:true:512:false:18446744073709551615:false:bridge-arities=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]",
+  "q": 1,
+  "schema": "integrated-gaussian-rational-prefix.v1",
+  "scope": "Generic Gaussian rank<=1 numerator/ordinary vacuum moment coefficient prototype; no weighted closure/reference inputs",
+  "source_origin": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=two-compact-independent-rank-one-blocks;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0, 3];shifted=[1, 2, 4];options=WeightedSourceOptions { policy: LegacyLorentz, positive_compact_energy_powers: false, free_virtual_zero_sectors: false };family=[\"loops=3;physical=5;input=9\", \"det=1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_5\", \"rustflow_occupied::{}::q_6\", \"rustflow_occupied::{}::q_7\", \"rustflow_occupied::{}::q_8\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_5\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_3\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_4+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_2)*-1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_6\", \"rustflow_occupied::{}::q_8\", \"-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6\", \"-1*rustflow_occupied::{}::q_6+1\", \"rustflow_occupied::{}::q_6\", \"-1*rustflow_occupied::{}::q_7+1\", \"rustflow_occupied::{}::q_7\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"role=Occupation\", \"role=Occupation\", \"1\", \"0\", \"0\", \"0\", \"0\", \"1\", \"1\", \"-1\", \"0\", \"shell=0:0:9:10:0:1\", \"shell=1:3:11:12:0:1\", \"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]:-1\", \"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0, 0, 0]:-1\", \"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0]:-1\"];proof=MasslessStructuralAudit { proof_version: \"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\", virtual_loops: 1, virtual_affine_shift: [\"0\"], denominator_rows: [(1, [\"1\"], \"0\"), (2, [\"0\"], \"1\"), (4, [\"1\"], \"-1\")], block_assignments: [(1, Some(0)), (2, None), (4, Some(0))], block_representatives: [[\"1\"]], block_a_lower_bounds: [\"1\"], block_q_upper_bounds: [\"1\"] }",
+  "tail": "unknown",
+  "variable": "z=1/eta"
+}

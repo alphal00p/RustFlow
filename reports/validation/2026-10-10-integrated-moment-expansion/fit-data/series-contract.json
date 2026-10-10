@@ -1,0 +1,27 @@
+{
+  "schema": "integrated-moment-series-contract.v1",
+  "scope": "actual cut[0,3], all uncut shifted, original fixed-index scalar and raised mixed-medium targets",
+  "input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+  "dimension": "13/2",
+  "q": 1,
+  "variable": "z=1/eta",
+  "beta": "-1/4",
+  "log_power": 0,
+  "normalization": "A(D)^2 * native one-loop unit-mass Minkowski tadpole I[1], A=1/(sqrt(pi)*Gamma((D-1)/2)), mu_i=1; native physical target coefficients included",
+  "all_regions": "census enumerates two; soft virtual polynomial is ordinary native ProvedZero, all-hard Gaussian channel remains",
+  "original_virtual_numerator_degree_max": 1,
+  "known_prefix_length": 64,
+  "training_count": 48,
+  "holdout_count": 16,
+  "tail": "unknown",
+  "reference_values_used": false,
+  "sources": {
+    "gaussian-wide-prefix-64/coefficients.json": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8",
+    "census.json": "6dee4d13c593b96ff7e15e88707ddd65edc40406acf90fa8e78d9ec47ee87095",
+    "grading.md": "db13f944a5c2045d2e8fab933349e763a0aef6e09c6051e999b1a51688fdaaa3",
+    "gaussian-method.md": "76ead58df8bdbee9b4cc5b3cba5562136569fc2f17521e04b0641bba93f31ba6",
+    "gaussian-wide-build.json": "9b65f5773b8127e7a4a7b8efffe1e8e3ae14c01ab35fd5b3fcd5b2c83c18fc56",
+    "gaussian-four-prefix-comparison.json": "f405e20922033efd1584d60c4c7dc88cbdd3fb2ca26fd68772ef7216a0471870",
+    "wide-24-comparison.json": "8592b1eba2d3990512c1e3a5214effabf6ae2cdc5f13286fa5412d36c0032351"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "/tmp/rustflow-integrated-moment-gaussian-wide-20261010",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-24",
+    "24"
+  ],
+  "timeout_seconds": 180,
+  "build_sha256": "9b65f5773b8127e7a4a7b8efffe1e8e3ae14c01ab35fd5b3fcd5b2c83c18fc56",
+  "references_loaded": false,
+  "exit_code": 0,
+  "wall_seconds": 0.1645632549189031,
+  "output": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-24/coefficients.json",
+    "sha256": "5a8c19efaa9b19b47507ee4c7045368cd7ad6993f865f8ab8170c7437fa73644",
+    "bytes": 72536
+  }
+}

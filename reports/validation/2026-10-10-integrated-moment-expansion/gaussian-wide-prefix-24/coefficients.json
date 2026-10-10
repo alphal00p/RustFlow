@@ -1,0 +1,1444 @@
+{
+  "audit": [
+    {
+      "F": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0^2+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha1^2",
+      "U": "integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1",
+      "V": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1",
+      "active_virtual_slots": [
+        1,
+        4
+      ],
+      "eta_leading_exponent_at_D": "1/4",
+      "full_off_shell_replay": true,
+      "gaussian_means": [
+        [
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*integrated_moment_gauss::{}::alpha1",
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*-1*integrated_moment_gauss::{}::alpha1"
+        ]
+      ],
+      "gram_determinant": "integrated_moment_gauss::{}::G0",
+      "indices": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "moment_cache_monomials": 24,
+      "pure_compact_slots": [
+        2
+      ],
+      "target": 0
+    },
+    {
+      "F": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0^2+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha1^2",
+      "U": "integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1",
+      "V": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1",
+      "active_virtual_slots": [
+        1,
+        4
+      ],
+      "eta_leading_exponent_at_D": "1/4",
+      "full_off_shell_replay": true,
+      "gaussian_means": [
+        [
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*integrated_moment_gauss::{}::alpha1",
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*-1*integrated_moment_gauss::{}::alpha1"
+        ]
+      ],
+      "gram_determinant": "integrated_moment_gauss::{}::G0",
+      "indices": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "moment_cache_monomials": 48,
+      "pure_compact_slots": [
+        2
+      ],
+      "target": 1
+    },
+    {
+      "F": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0^2+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha1^2",
+      "U": "integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1",
+      "V": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1",
+      "active_virtual_slots": [
+        1,
+        4
+      ],
+      "eta_leading_exponent_at_D": "1/4",
+      "full_off_shell_replay": true,
+      "gaussian_means": [
+        [
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*integrated_moment_gauss::{}::alpha1",
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*-1*integrated_moment_gauss::{}::alpha1"
+        ]
+      ],
+      "gram_determinant": "integrated_moment_gauss::{}::G0",
+      "indices": [
+        2,
+        1,
+        1,
+        1,
+        1,
+        0,
+        -1,
+        -1,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "moment_cache_monomials": 94,
+      "pure_compact_slots": [
+        2
+      ],
+      "target": 1
+    }
+  ],
+  "coefficients": [
+    {
+      "coefficient": "1/9",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 0,
+      "target": 0
+    },
+    {
+      "coefficient": "-57/484",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 1,
+      "target": 0
+    },
+    {
+      "coefficient": "459/2288",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 2,
+      "target": 0
+    },
+    {
+      "coefficient": "-48569/123200",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 3,
+      "target": 0
+    },
+    {
+      "coefficient": "18701/21760",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 4,
+      "target": 0
+    },
+    {
+      "coefficient": "-8228475/4066304",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 5,
+      "target": 0
+    },
+    {
+      "coefficient": "8272365275/1635938304",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 6,
+      "target": 0
+    },
+    {
+      "coefficient": "-198536785885/14985478144",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 7,
+      "target": 0
+    },
+    {
+      "coefficient": "199807424596971/5538111488000",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 8,
+      "target": 0
+    },
+    {
+      "coefficient": "-2427290202186817/23924641628160",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 9,
+      "target": 0
+    },
+    {
+      "coefficient": "6026375677639719/20557469843456",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 10,
+      "target": 0
+    },
+    {
+      "coefficient": "-14672914694886483/16925019078656",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 11,
+      "target": 0
+    },
+    {
+      "coefficient": "79494591170772668667/30388598771548160",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 12,
+      "target": 0
+    },
+    {
+      "coefficient": "-2452975956136452372799/305339987656704000",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 13,
+      "target": 0
+    },
+    {
+      "coefficient": "28431216815127793197369/1134648681404825600",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 14,
+      "target": 0
+    },
+    {
+      "coefficient": "-2501947079731660226599783/31573899523632660480",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 15,
+      "target": 0
+    },
+    {
+      "coefficient": "1464554388135656525964667/5772708497074421760",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 16,
+      "target": 0
+    },
+    {
+      "coefficient": "-25918174626400897891812603/31555766477725368320",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 17,
+      "target": 0
+    },
+    {
+      "coefficient": "196909012028310059660787017371/73312117933134053376000",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 18,
+      "target": 0
+    },
+    {
+      "coefficient": "-293326528262861979463212601533/33092509530379182407680",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 19,
+      "target": 0
+    },
+    {
+      "coefficient": "1992944240597388106698047909041437/67564550108865836414402560",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 20,
+      "target": 0
+    },
+    {
+      "coefficient": "-157664033256148928247253034297518941/1593971835221406263164272640",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 21,
+      "target": 0
+    },
+    {
+      "coefficient": "214185101781938167412723245166345739/641218271474265897136291840",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 22,
+      "target": 0
+    },
+    {
+      "coefficient": "-166207638982784018038555689467431875279/146391341223370138780172288000",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 23,
+      "target": 0
+    },
+    {
+      "coefficient": "43/264",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 0,
+      "target": 1
+    },
+    {
+      "coefficient": "-34409/151008",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 1,
+      "target": 1
+    },
+    {
+      "coefficient": "577881/1189760",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 2,
+      "target": 1
+    },
+    {
+      "coefficient": "-3848379/3351040",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 3,
+      "target": 1
+    },
+    {
+      "coefficient": "203410777/69457920",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 4,
+      "target": 1
+    },
+    {
+      "coefficient": "-1798744635/227713024",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 5,
+      "target": 1
+    },
+    {
+      "coefficient": "2232682862325/100337549312",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 6,
+      "target": 1
+    },
+    {
+      "coefficient": "-1283619735460879/19780831150080",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 7,
+      "target": 1
+    },
+    {
+      "coefficient": "3000111480435/15410397184",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 8,
+      "target": 1
+    },
+    {
+      "coefficient": "-38152755751614317/63799044341760",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 9,
+      "target": 1
+    },
+    {
+      "coefficient": "1508602711302476323/804987240185856",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 10,
+      "target": 1
+    },
+    {
+      "coefficient": "-62290715141134516473/10425811752452096",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 11,
+      "target": 1
+    },
+    {
+      "coefficient": "23500615298751574073829/1215543950861926400",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 12,
+      "target": 1
+    },
+    {
+      "coefficient": "-1765015645411372203271021/27847006874291404800",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 13,
+      "target": 1
+    },
+    {
+      "coefficient": "24804605371873541412635751/118003462866101862400",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 14,
+      "target": 1
+    },
+    {
+      "coefficient": "-256968272018293200346626493/364853950050866298880",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 15,
+      "target": 1
+    },
+    {
+      "coefficient": "326333473318775122771973065607/137021008886558474895360",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 16,
+      "target": 1
+    },
+    {
+      "coefficient": "-10249987151680161486356154033/1262230659109014732800",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 17,
+      "target": 1
+    },
+    {
+      "coefficient": "563919280590218823717113905319491/20214594651429496317542400",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 18,
+      "target": 1
+    },
+    {
+      "coefficient": "-1609324357372594517706683271144077/16678624803311107933470720",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 19,
+      "target": 1
+    },
+    {
+      "coefficient": "52460271245245047132612715109697746151/156209239851697813790098718720",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 20,
+      "target": 1
+    },
+    {
+      "coefficient": "-14990650824482401733843281875159755643/12751774681771250105314181120",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 21,
+      "target": 1
+    },
+    {
+      "coefficient": "3289214646234705414149019636838339229491/795110656628089712449001881600",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 22,
+      "target": 1
+    },
+    {
+      "coefficient": "-65100276576009414405555116597279785953351/4450296773190452218917237555200",
+      "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}",
+      "n": 23,
+      "target": 1
+    }
+  ],
+  "compact_normalization": "prod_i mu_i^(D-2)/(sqrt(pi)*Gamma((D-1)/2))",
+  "conditions": [],
+  "convergent_germ_proved": false,
+  "dimension": "13/2",
+  "hard_reductions": [
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        2
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "2"
+      ],
+      "terms": [
+        {
+          "coefficient": "9/4",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        4
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "48"
+      ],
+      "terms": [
+        {
+          "coefficient": "15/128",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        3
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "8"
+      ],
+      "terms": [
+        {
+          "coefficient": "45/32",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        6
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "3840"
+      ],
+      "terms": [
+        {
+          "coefficient": "63/8192",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        5
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "384"
+      ],
+      "terms": [
+        {
+          "coefficient": "-45/2048",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        8
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "645120"
+      ],
+      "terms": [
+        {
+          "coefficient": "495/262144",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        7
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "46080"
+      ],
+      "terms": [
+        {
+          "coefficient": "-231/65536",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        10
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "185794560"
+      ],
+      "terms": [
+        {
+          "coefficient": "24035/33554432",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        9
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "10321920"
+      ],
+      "terms": [
+        {
+          "coefficient": "-9405/8388608",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        12
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "81749606400"
+      ],
+      "terms": [
+        {
+          "coefficient": "365769/1073741824",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        11
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "3715891200"
+      ],
+      "terms": [
+        {
+          "coefficient": "-129789/268435456",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        14
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "51011754393600"
+      ],
+      "terms": [
+        {
+          "coefficient": "12801915/68719476736",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        13
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "1961990553600"
+      ],
+      "terms": [
+        {
+          "coefficient": "-4267305/17179869184",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        16
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "42849873690624000"
+      ],
+      "terms": [
+        {
+          "coefficient": "246406383/2199023255552",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        15
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "1428329123020800"
+      ],
+      "terms": [
+        {
+          "coefficient": "-78640335/549755813888",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        18
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "46620662575398912000"
+      ],
+      "terms": [
+        {
+          "coefficient": "40657053195/562949953421312",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        17
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "1371195958099968000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-12566725533/140737488355328",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        20
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "63777066403145711616000"
+      ],
+      "terms": [
+        {
+          "coefficient": "883755945765/18014398509481984",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        19
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "1678343852714360832000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-266529570945/4503599627370496",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        22
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "107145471557284795514880000"
+      ],
+      "terms": [
+        {
+          "coefficient": "40038352704801/1152921504606846976",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        21
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "2551082656125828464640000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-11842329673251/288230376151711744",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        24
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "216862434431944426122117120000"
+      ],
+      "terms": [
+        {
+          "coefficient": "937657074213225/36893488147419103232",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        23
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "4714400748520531002654720000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-272988768441825/9223372036854775808",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        26
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "520469842636666622693081088000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "90277623105249303/4722366482869645213696",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        25
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "10409396852733332453861621760000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-25941845719899225/1180591620717411303424",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        28
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "1461479318123759876522171695104000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "2223504420925584685/151115727451828646838272",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        27
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "27064431817106664380040216576000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-631943361736745121/37778931862957161709568",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        30
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "4746884825265972078944013665697792000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "111690022562454123315/9671406556917033397649408",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        29
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "81842841814930553085241614925824000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-31446705381661840545/2417851639229258349412352",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        32
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "17658411549989416133671730836395786240000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "2852779350482295962607/309485009821345068724781056",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        31
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "284813089515958324736640819941867520000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-796722160945506079647/77371252455336267181195264",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        34
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "74589130387155293748629391052935801077760000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "1183038951859097583281115/158456325028528675187087900672",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        33
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "1130138339199322632554990773529330319360000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-328069625305464035699805/39614081257132168796771975168",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        36
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "355044260642859198243475901411974413130137600000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "31059246163010022434343357/5070602400912917605986812821504",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        35
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "5072060866326559974906798591599634473287680000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-8559634769333470749622185/1267650600228229401496703205376",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        38
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "1891675820705153808241239602722999673157373132800000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "1649497802981478218472559365/324518553658426726783156020576256",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        37
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "25563186766285862273530264901662157745369907200000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-452084583039368104322108863/81129638414606681695789005144064",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        40
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "11213854265140151775254068364941942062476907931238400000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "44247055101029477123588478405/10384593717069655257060992658440192",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        39
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "143767362373591689426334209806947975159960358092800000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-12067378663917130124615039565/2596148429267413814265248164610048",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        42
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "73562883979319395645666688474019139929848516028923904000000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "4790984790622201481523382708077/1329227995784915872903807060280344576",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        41
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "897108341211212142020325469195355364998152634499072000000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-1300863419970266627433501265107/332306998946228968225951765070086144",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        44
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "531418273866603314144296157536314266853225679792946282496000000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "130757275930104269670148136036055/42535295865117307932921825928971026432",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        43
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "6179282254262829234236001831817607754107275346429607936000000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-35362030597449582363624967607235/10633823966279326983230456482242756608",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        46
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "4208832729023498248022825567687608993477547383960134557368320000000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "7190593551703774393315358406136269/2722258935367507707706996859454145691648",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        45
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "46764808100261091644698061863195655483083859821779272859648000000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-1937585088782454177839467833988815/680564733841876926926749214863536422912",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        48
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "36397985440595212848901395509362442575593829776487243652121231360000000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "199055052761087371618836355507518825/87112285931760246646623899502532662132736",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        47
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "387212611070161838818099952227260027399934359324332379277885440000000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-53460499884406322663344621193447913/21778071482940061661655974875633165533184",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    },
+    {
+      "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+      "backend": "sealed native ordinary artifact",
+      "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+      "input": [
+        49
+      ],
+      "parameter_independent_rule_guards": [
+        "-2*rustred_indexed_coefficient_v1::{}::n0",
+        "2*rustred_indexed_coefficient_v1::{}::n0"
+      ],
+      "raw_coefficient_denominators": [
+        "3494206602297140433494533968898794487257007658542775390603638210560000000000"
+      ],
+      "terms": [
+        {
+          "coefficient": "-11876951481411546506590569211948623225/5575186299632655785383929568162090376495104",
+          "master": "{\"family\":\"{\\\"D\\\":\\\"13/2\\\",\\\"external\\\":[],\\\"loops\\\":1,\\\"physical\\\":1,\\\"propagators\\\":[{\\\"coefficients\\\":[\\\"1\\\"],\\\"constant\\\":\\\"-1\\\"}]}\",\"master\":[1]}"
+        }
+      ]
+    }
+  ],
+  "input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+  "known_prefix_length": 24,
+  "native_backend": "rustred-exact:cfe0febd5e8ce966dab3c0db43faee93b48422a56c802fd6c962fda93b1bb06c:79e41557461deafa2547070d5d33e518d0adfa939c8b77f8930057724a6656b5:2:4096:false:true:512:false:18446744073709551615:false:bridge-arities=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]",
+  "q": 1,
+  "schema": "integrated-gaussian-rational-prefix.v1",
+  "scope": "Generic Gaussian rank<=1 numerator/ordinary vacuum moment coefficient prototype; no weighted closure/reference inputs",
+  "source_origin": "joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=two-compact-independent-rank-one-blocks;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0, 3];shifted=[1, 2, 4];options=WeightedSourceOptions { policy: LegacyLorentz, positive_compact_energy_powers: false, free_virtual_zero_sectors: false };family=[\"loops=3;physical=5;input=9\", \"det=1\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_3\", \"rustflow_occupied::{}::q_4\", \"rustflow_occupied::{}::q_5\", \"rustflow_occupied::{}::q_6\", \"rustflow_occupied::{}::q_7\", \"rustflow_occupied::{}::q_8\", \"rustflow_occupied::{}::q_0\", \"rustflow_occupied::{}::q_5\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1\", \"rustflow_occupied::{}::q_3\", \"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_4+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_2)*-1\", \"rustflow_occupied::{}::q_2\", \"rustflow_occupied::{}::q_6\", \"rustflow_occupied::{}::q_8\", \"-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6\", \"-1*rustflow_occupied::{}::q_6+1\", \"rustflow_occupied::{}::q_6\", \"-1*rustflow_occupied::{}::q_7+1\", \"rustflow_occupied::{}::q_7\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=RequiredCut\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Ordinary\", \"role=Occupation\", \"role=Occupation\", \"role=Occupation\", \"role=Occupation\", \"1\", \"0\", \"0\", \"0\", \"0\", \"1\", \"1\", \"-1\", \"0\", \"shell=0:0:9:10:0:1\", \"shell=1:3:11:12:0:1\", \"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0]:-1\", \"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0, 0, 0]:-1\", \"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0, 0, 0]:-1\"];proof=MasslessStructuralAudit { proof_version: \"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\", virtual_loops: 1, virtual_affine_shift: [\"0\"], denominator_rows: [(1, [\"1\"], \"0\"), (2, [\"0\"], \"1\"), (4, [\"1\"], \"-1\")], block_assignments: [(1, Some(0)), (2, None), (4, Some(0))], block_representatives: [[\"1\"]], block_a_lower_bounds: [\"1\"], block_q_upper_bounds: [\"1\"] }",
+  "tail": "unknown",
+  "variable": "z=1/eta",
+  "wide_artifact": {
+    "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+    "cached_coefficient_bytes": 60612,
+    "cached_coefficient_terms": 1274,
+    "cached_integrals": 49,
+    "context_fingerprint": "rustred-indexed-coefficient-context-v1|base=rustred-base-context-v1|parameters=1|1:d|scope=210:ordinary-ibp|rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;|indices=1",
+    "dimension_symbol": "rustred::{}::d",
+    "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+    "rule_applications": 48,
+    "rules": 1,
+    "source_relations": 1,
+    "specialized_dimension": "13/2"
+  }
+}

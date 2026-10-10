@@ -1,0 +1,17 @@
+{
+  "command": [
+    "/tmp/rustflow-integrated-moment-census-20261010",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/census.json"
+  ],
+  "timeout_seconds": 180,
+  "build_sha256": "3af1b81fae55fbe2123857bf0802dc0bf39741390b1a9650a786ea31a42bf27e",
+  "references_loaded": false,
+  "exit_code": 0,
+  "wall_seconds": 0.41505565540865064,
+  "output": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/census.json",
+    "sha256": "6dee4d13c593b96ff7e15e88707ddd65edc40406acf90fa8e78d9ec47ee87095",
+    "bytes": 343023
+  }
+}

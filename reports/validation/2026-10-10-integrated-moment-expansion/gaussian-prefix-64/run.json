@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/tmp/rustflow-integrated-moment-gaussian-20261010",
+    "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/gaussian-prefix-64",
+    "64"
+  ],
+  "timeout_seconds": 180,
+  "build_sha256": "656fe62787129f883077a1ef34148f942f4766c31243c705839db95ac07ed66b",
+  "references_loaded": false,
+  "exit_code": 1,
+  "wall_seconds": 0.1644195239059627
+}

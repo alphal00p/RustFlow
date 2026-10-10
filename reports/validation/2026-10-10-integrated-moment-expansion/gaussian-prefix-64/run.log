@@ -1,0 +1,9 @@
+target=0 numerator_group=0 order=0/64 hard_labels=0
+target=0 numerator_group=0 order=4/64 hard_labels=7
+target=0 numerator_group=0 order=8/64 hard_labels=15
+target=0 numerator_group=0 order=12/64 hard_labels=23
+target=0 numerator_group=0 order=16/64 hard_labels=31
+target=0 numerator_group=0 order=20/64 hard_labels=39
+target=0 numerator_group=0 order=24/64 hard_labels=47
+target=0 numerator_group=0 order=28/64 hard_labels=55
+Error: Reduction("propagator power 64 is outside the compact range -64..=63")

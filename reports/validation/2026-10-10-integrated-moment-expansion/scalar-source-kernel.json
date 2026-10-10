@@ -1,0 +1,119 @@
+{
+  "scope": "Source geometry and parameter-kernel metadata only; no coefficient sequence or holdout values",
+  "dimension": "13/2",
+  "spatial_dimension": "11/2",
+  "audit": [
+    {
+      "F": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha0^2+integrated_moment::{}::eta*integrated_moment_gauss::{}::alpha1^2",
+      "U": "integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1",
+      "V": "-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_0+-1*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_3+2*integrated_moment_gauss::{}::alpha0*integrated_moment_gauss::{}::alpha1*rustflow_occupied::{}::q_1",
+      "active_virtual_slots": [
+        1,
+        4
+      ],
+      "eta_leading_exponent_at_D": "1/4",
+      "full_off_shell_replay": true,
+      "gaussian_means": [
+        [
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*integrated_moment_gauss::{}::alpha1",
+          "(integrated_moment_gauss::{}::alpha0+integrated_moment_gauss::{}::alpha1)^(-1)*-1*integrated_moment_gauss::{}::alpha1"
+        ]
+      ],
+      "gram_determinant": "integrated_moment_gauss::{}::G0",
+      "indices": [
+        1,
+        1,
+        1,
+        1,
+        1,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "moment_cache_monomials": 64,
+      "pure_compact_slots": [
+        2
+      ],
+      "target": 0
+    }
+  ],
+  "physical_factors": [
+    "rustflow_occupied::{}::q_0",
+    "rustflow_occupied::{}::q_5",
+    "(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+2*rustflow_occupied::{}::q_1)*-1",
+    "rustflow_occupied::{}::q_3",
+    "(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+-2*rustflow_occupied::{}::q_4+2*rustflow_occupied::{}::q_1+2*rustflow_occupied::{}::q_2)*-1",
+    "rustflow_occupied::{}::q_2",
+    "rustflow_occupied::{}::q_6",
+    "rustflow_occupied::{}::q_8",
+    "-1*rustflow_occupied::{}::q_7+rustflow_occupied::{}::q_6",
+    "-1*rustflow_occupied::{}::q_6+1",
+    "rustflow_occupied::{}::q_6",
+    "-1*rustflow_occupied::{}::q_7+1",
+    "rustflow_occupied::{}::q_7"
+  ],
+  "coordinates": [
+    "rustflow_occupied::{}::q_0",
+    "rustflow_occupied::{}::q_1",
+    "rustflow_occupied::{}::q_2",
+    "rustflow_occupied::{}::q_3",
+    "rustflow_occupied::{}::q_4",
+    "rustflow_occupied::{}::q_5",
+    "rustflow_occupied::{}::q_6",
+    "rustflow_occupied::{}::q_7",
+    "rustflow_occupied::{}::q_8"
+  ],
+  "routing": [
+    [
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "1"
+    ],
+    [
+      "1",
+      "-1",
+      "0"
+    ]
+  ],
+  "shells": [
+    {
+      "chemical_potential": "1",
+      "loop_index": 0,
+      "lower_slot": 10,
+      "mass_squared": "0",
+      "physical_slot": 0,
+      "upper_slot": 9
+    },
+    {
+      "chemical_potential": "1",
+      "loop_index": 1,
+      "lower_slot": 12,
+      "mass_squared": "0",
+      "physical_slot": 3,
+      "upper_slot": 11
+    }
+  ],
+  "normalization": "prod_i mu_i^(D-2)/(sqrt(pi)*Gamma((D-1)/2))",
+  "source_hashes": {
+    "native_census": "6dee4d13c593b96ff7e15e88707ddd65edc40406acf90fa8e78d9ec47ee87095",
+    "native_gaussian_generation": "1ed6b50be642c46fc0c8f60f5b0c517fab28b28f24824644d3ec7a5a371e1ec8"
+  },
+  "projective_gauge": "sum(alpha)=1, U=1",
+  "virtual_kernel_power": "D/2-2 =5/4",
+  "pure_compact_kernel_power": -1,
+  "radial_measure_each": "r_i^(D-3) dr_i; normalized angular averages;0<=r_i<=1",
+  "gaussian_master_ratio_at_D": "9/4 (native ordinary I2/I1, first hard coefficient)",
+  "normalized_scalar_integrand": "(9/4) prod_i r_i^(D-3) * (1+z V/U^2)^(D/2-2)/(1-z physical_factor[2]); alpha simplex integral; normalized product angles",
+  "angular_two_vector_measure": "(1-c^2)^((D-4)/2) dc/Beta(1/2,(D-2)/2), -1<=c<=1",
+  "gram_map": "g_ii=0; g_ij=r_i r_j(1-c_ij); E_i=r_i"
+}

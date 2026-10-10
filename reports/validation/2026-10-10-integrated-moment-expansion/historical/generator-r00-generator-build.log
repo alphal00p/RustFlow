@@ -1,0 +1,14 @@
+error[E0624]: method `convert` is private
+   --> /common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/generate.rs:14:18
+    |
+ 14 |  let converted=f.convert()?;let a=Analyzer::try_unrestricted(&converted.family).map_err(|e|Error::Reduction(e.to_string()))?;let m=...
+    |                  ^^^^^^^ private method
+    |
+   ::: src/family.rs:425:5
+    |
+425 |     pub(crate) fn convert(&self) -> Result<ConvertedFamily> {
+    |     ------------------------------------------------------- private method defined here
+
+error: aborting due to 1 previous error
+
+For more information about this error, try `rustc --explain E0624`.

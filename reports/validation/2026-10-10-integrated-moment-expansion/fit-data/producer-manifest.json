@@ -1,0 +1,11 @@
+{
+  "scope": "Producer generated all64 before training; fitter must not open holdout before both candidates frozen",
+  "files": {
+    "fit-plan.json": "ebd4736abbf7b0fad2806077e26e2038b9ccce48d91385a2f372cc830a6eb951",
+    "series-contract.json": "d01cdaa604e457b8f533b3c357cfc8ae9cd6f463a651dadca8c28c47c33d2154",
+    "target-0-holdout.json": "6bcb2687e49c475c1a7c6b99b48cdbac13ab4730dde0bba9df05aba994b42740",
+    "target-0-training.json": "378b0f1ad6df009f43f59348faaa9a828caa7d83d625b93a465fcb849fc8d1a9",
+    "target-1-holdout.json": "18a18e96db7825578f4c11aef2465ab6787cdb2095834eca0c3b765d075519aa",
+    "target-1-training.json": "7164162fd2462dd2d4d6428b361bae5fbf2854abf254fd6e34e6c0f818b46189"
+  }
+}

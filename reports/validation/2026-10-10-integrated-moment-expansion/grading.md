@@ -1,0 +1,9 @@
+# Generic hard-parity grading and this input's offset map
+
+Before integration, a hard/soft region substitutes hard momenta k_h=t^(-1) K_h with t=eta^(-1/2). All deformed physical denominators are Lorentz quadratics and their hard leading terms have even degree; mixed hard/soft terms have degree one. Each polynomial numerator decomposes into finitely many homogeneous hard degrees. Under simultaneous K_h -> -K_h, a Taylor coefficient at grade m has parity equal to its leading hard numerator degree minus m. Ordinary vacuum integration annihilates the odd part. The surviving measure exponent is therefore h D/2 minus an integer. This proves integer eta grading separately for each hard-loop-count channel, without assuming an invariant count or a graph formula. It does not combine channels with different h, prove convergence, or rule out dimensional-resonance logarithms.
+
+The exact native census in census.json enumerates two regions and supplies a finite independent check. All-soft carries eta^-3, but its virtual polynomial is scaleless (the coefficient generator separately requests a native ordinary zero proof). The one-hard scalar label has eta^(D/2-3) and even Taylor grades m=2n. Each raised-medium label has eta^(D/2-5/2), odd grades m=2n+1. Their common integrated channel is therefore
+
+    eta^(D/2-3) sum_{n>=0} c_n(D) z^n, z=1/eta.
+
+At D=13/2 this is z^(-1/4) times an ordinary integer power series. The raised target's native grade0 vanishes; it must not be mistaken for a vanishing target. A requested integer prefix0..N-1 requires scalar native grades through2N-2 and raised native grades through2N-1. Thus64 meaningful coefficients exceed the current region half-order100 cap and native tensor rank32 cap; a separate generic bounded expansion/moment algorithm is needed. No higher coefficients are asserted here.

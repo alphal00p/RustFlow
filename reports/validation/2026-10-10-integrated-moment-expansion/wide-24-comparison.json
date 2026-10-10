@@ -1,0 +1,22 @@
+{
+  "status": "PASS",
+  "exact_coefficient_count": 48,
+  "identical_full_off_shell_audits": true,
+  "inputs": {
+    "reports/validation/2026-10-10-integrated-moment-expansion/gaussian-prefix-24/coefficients.json": "abac2d75baeb7dd216efa0c8c8592d4875d9dd8fc8f4057be019f677a71b4a16",
+    "reports/validation/2026-10-10-integrated-moment-expansion/gaussian-wide-prefix-24/coefficients.json": "5a8c19efaa9b19b47507ee4c7045368cd7ad6993f865f8ab8170c7437fa73644"
+  },
+  "wide_owner": {
+    "algorithm": "rustred.generated.one-loop-unit-mass-tadpole.v1",
+    "cached_coefficient_bytes": 60612,
+    "cached_coefficient_terms": 1274,
+    "cached_integrals": 49,
+    "context_fingerprint": "rustred-indexed-coefficient-context-v1|base=rustred-base-context-v1|parameters=1|1:d|scope=210:ordinary-ibp|rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;|indices=1",
+    "dimension_symbol": "rustred::{}::d",
+    "family_fingerprint": "rustred-integral-family-v2;N37:rustred-one-loop-unit-mass-tadpole-v1;L1;1:k;E0;P1;1:d;Q1,0,1;M;RY1,1;I+1;X1;Y1,1;I+1;X0;D1;RY1,1;I-1;X0;Y1,1;I+1;X0;RY1,1;I+1;X0;Y1,1;I+1;X0;G0;U1;RY1,0;Y1,1;I+1;X0;",
+    "rule_applications": 48,
+    "rules": 1,
+    "source_relations": 1,
+    "specialized_dimension": "13/2"
+  }
+}

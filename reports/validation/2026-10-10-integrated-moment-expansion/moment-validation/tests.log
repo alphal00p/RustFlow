@@ -1,0 +1,24 @@
+
+running 19 tests
+test angular::tests::budget_failure_is_explicit ... ok
+test angular::tests::coupled_triangles_and_four_vector_cycle ... ok
+test angular::tests::degree_preflight_precedes_recursive_allocation ... ok
+test angular::tests::high_rank_without_pairing_enumeration ... ok
+test angular::tests::independent_parity_and_radial_factors ... ok
+test coefficient::tests::empty_markers_and_zero_have_explicit_results ... ok
+test coefficient::tests::exponent_preflight_preserves_atomic_coefficient_contents ... ok
+test coefficient::tests::invalid_or_remapped_markers_and_excessive_degrees_are_rejected ... ok
+test coefficient::tests::multiple_function_markers_keep_the_requested_order ... ok
+test coefficient::tests::native_complex_coefficients_are_preserved ... ok
+test coefficient::tests::native_polynomial_expansion_groups_powers ... ok
+test coefficient::tests::native_root_basis_keeps_large_common_denominators_safe ... ok
+test coefficient::tests::oversized_exponents_are_rejected_before_native_signed_conversion ... ok
+test coefficient::tests::polynomial_cancellation_remains_exact ... ok
+test coefficient::tests::preserves_huge_symbolic_coefficients ... ok
+test coefficient::tests::signed_powers_and_literal_hidden_dependence_are_retained ... ok
+test compact_graph_moments_match_native_tensor_projection ... ok
+test radial_native_normalization ... ok
+test upper_surfaces_are_exact_mu_derivatives ... ok
+
+test result: ok. 19 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.38s
+

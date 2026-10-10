@@ -1,0 +1,4 @@
+target=0 numerator_group=0 order=0/4 hard_labels=0
+target=1 numerator_group=1 order=0/4 hard_labels=7
+target=1 numerator_group=1 order=0/4 hard_labels=8
+count=4 terms=8 native_hard_labels=8

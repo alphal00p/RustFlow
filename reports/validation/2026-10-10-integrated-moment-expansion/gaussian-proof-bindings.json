@@ -1,0 +1,14 @@
+{
+  "scope": "source-tied isolated coefficient/analytic-germ evidence; no ODE or endpoint acceptance",
+  "files": {
+    "census.json": "6dee4d13c593b96ff7e15e88707ddd65edc40406acf90fa8e78d9ec47ee87095",
+    "gaussian-build.json": "656fe62787129f883077a1ef34148f942f4766c31243c705839db95ac07ed66b",
+    "gaussian-prefix-4/coefficients.json": "d8215776f5e66da09c0c5f6c2179884e391310fc4b15ce779e195d83f805bc43",
+    "gaussian-four-prefix-comparison.json": "f405e20922033efd1584d60c4c7dc88cbdd3fb2ca26fd68772ef7216a0471870",
+    "gaussian-prefix-24/coefficients.json": "abac2d75baeb7dd216efa0c8c8592d4875d9dd8fc8f4057be019f677a71b4a16",
+    "gaussian-prefix-64/run.json": "0b97b773641067fd69decc8b3176e840ce715e7ccffb4c15841f2bf06e7132a4",
+    "gaussian-method.md": "76ead58df8bdbee9b4cc5b3cba5562136569fc2f17521e04b0641bba93f31ba6",
+    "convergent-germ.md": "758a006abf1b9d4205769741c46179d14c81052b430d844d0b60be38319aa543",
+    "grading.md": "db13f944a5c2045d2e8fab933349e763a0aef6e09c6051e999b1a51688fdaaa3"
+  }
+}

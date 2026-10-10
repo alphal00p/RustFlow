@@ -1,0 +1,72 @@
+{
+  "scope": "Isolated rustc compile; no Cargo/shared target mutation",
+  "command": [
+    "/nix/store/paaihvr59q1101200mabmk7y4yhw42g7-rustc-wrapper-1.97.1/bin/rustc",
+    "--edition=2024",
+    "--crate-name",
+    "integrated_moment_census",
+    "-C",
+    "opt-level=1",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "symbolica_amflow=/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "--extern",
+    "rustred=/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/census.rs",
+    "-o",
+    "/tmp/rustflow-integrated-moment-census-20261010"
+  ],
+  "dependencies": {
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af",
+      "bytes": 494671872
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95",
+      "bytes": 4058734
+    },
+    "symbolica_amflow": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "sha256": "b7b2beaf983314c86123d5cef173d93faa8b605f1648cce72c340ec9a6d80687",
+      "bytes": 656665206
+    },
+    "rustred": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/librustred-392075d0c6995fd1.rlib",
+      "sha256": "dc3c900d6fcf11c2996d0d599266eae8c7f3f71f925995b711bf8181e1a5c515",
+      "bytes": 436276538
+    }
+  },
+  "sources": {
+    "source/algebra.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/algebra.rs",
+      "sha256": "36c208366b5c0c5232c3e43b2a4e431585c8307e73584812a116eebe12e00597",
+      "bytes": 3344
+    },
+    "source/census.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/census.rs",
+      "sha256": "69824e12d0d595b74fe94f02cf01f7d8467e4eb9ff722f8ce363ba22def220e3",
+      "bytes": 4773
+    },
+    "source/cut_regions.rs": {
+      "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-integrated-moment-expansion/source/cut_regions.rs",
+      "sha256": "01f274f8d77f94db92e83e1f3676446d7a1bac0785fa5a92ef24bcce5073254d",
+      "bytes": 9209
+    }
+  },
+  "runtime_limit_seconds": 180,
+  "exit_code": 1,
+  "wall_seconds": 1.8187352870590985
+}
