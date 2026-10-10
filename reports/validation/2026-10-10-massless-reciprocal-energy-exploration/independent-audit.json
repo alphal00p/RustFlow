@@ -1,0 +1,75 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-10T02:15:49.372028+00:00",
+  "status": "independent_read_only_proof_review_complete",
+  "base_commit": "6221817d263e5c2e224fc3ff3c49c64fb9cd52f0",
+  "scope": "Proposed c*E_i reciprocal weights only on future occupied loops already covered by the sealed singleton-germ or independent-rank-one-block class. No production admission, new periods, or new closure claim.",
+  "material_new_mathematical_obstructions": [],
+  "checks": [
+    {
+      "claim": "Lower-origin zero jets",
+      "finding": "For an original nonnegative radial monomial and reciprocal E^-p, the spatially integrated density has exponent D-1+2j+r-2n-p. Its derivatives through ell-1 vanish if D>2n+ell+p after discarding nonnegative numerator improvements. The proposed additional2max(H_upper-1,0) is conservative. This defines a joint high-D family, not an independent E^-p times delta product."
+    },
+    {
+      "claim": "Finite mass and upper-energy jets",
+      "finding": "At fixed spatial momentum, each shell-mass derivative of E^-p contributes at most two extra inverse energy powers. Each upper-energy derivative costs at most one; using the existing2J_i bound is conservative. Keep the original multiplier fixed before shell differentiation; differentiating a massless endpoint answer does not supply this distribution."
+    },
+    {
+      "claim": "Endpoint and simultaneous origins",
+      "finding": "The only new factors are products of individual compact energies. They do not change virtual Gaussian exponents or eta Mellin powers. Subtracting p_i from each compact radial degree retains a positive D slope for every finite label/proof. Existing transfer and collinear bounds still apply. A common domain is finite-label dependent, not uniform over an unbounded symbolic index box."
+    },
+    {
+      "claim": "Fixed-temperature line-regulator order",
+      "finding": "For E_epsilon=sqrt(r^2-i epsilon), |E_epsilon|^2=sqrt(r^4+epsilon^2)>=r^2. Thus |E_epsilon|^-p<=r^-p, and finite derivatives are controlled by the strengthened origin bounds. The fixed-T Fermi pole strip and exponential tail remain necessary; remove line regulators first, then T, then the certified eta endpoint and meromorphic D continuation."
+    },
+    {
+      "claim": "Raw normal-source identity",
+      "finding": "The divergence of v=U/(2E) and derivative of E^-p give -(p+1)M[n,p+2]/2; differentiating the upper theta gives -S[n,p+1]/2. Together with -nM[n+1,p], the exact identity follows from n*binom(a,n)=(a-n+1)*binom(a,n-1). The upper surface cannot be omitted."
+    },
+    {
+      "claim": "Existing continued moment API",
+      "finding": "The isolated API already accepts signed energy exponents with d>0, mu>0, mass0 and1<=n<=32, cancels the complete binomial/beta ratio before dimension specialization, and rejects a genuine pole. It returns occupied normalization; raw C_n requires the existing (-1)^n conversion. This API alone grants no graph-origin or lower-contact prescription."
+    }
+  ],
+  "implementation_gates_before_admission": [
+    "Introduce a sealed continuation-specific energy descriptor and source/boundary/cache identity; the current smooth-nonzero-energy source contract is insufficient at a massless apex.",
+    "Audit all finite targets/basis/candidate labels and every zero classification with the additional p_i bound, unchanged occupation/tail roles and original conditions.",
+    "Permit signed boundary moments only under that bound prescription; keep true dimensional-pole errors, upper surfaces and numerical cut-order limits.",
+    "Use reciprocal factors only as auxiliary occupied-family weights. They are not new1/q0 Feynman propagators on the original uncut thermal contour.",
+    "Prove and replay the extended source family, then run physical original-polynomial target gates separately. No favorable discovery ordering or closure result follows from the mathematical extension."
+  ],
+  "current_production_changed": false,
+  "numerical_comparisons_performed": 0,
+  "three_loop_acceptance": false,
+  "four_loop_acceptance": false,
+  "source_bindings": {
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/assessment.md": {
+      "sha256": "78a02857eb8d925d9e6edfb741d74e2197afba776ae3780132f7c157f8678f24",
+      "size_bytes": 9718
+    },
+    "src/finite_density/compact.rs": {
+      "sha256": "ab6f3da58c4f66a6af0e46495e81127555ee4dd469db4d8fc9f1117dc94a0db8",
+      "size_bytes": 25148
+    },
+    "src/finite_density/boundary.rs": {
+      "sha256": "fdf72b8383e166dc1f5cdb7f9d565336c38fec0ef3bac36605411a8a7519fe0c",
+      "size_bytes": 33660
+    },
+    "src/finite_density/massless_endpoint.rs": {
+      "sha256": "131b4fedd8816cfbadd9ceb7e80e051c1e4844acdbabb63e7f4d101fe121929f",
+      "size_bytes": 91220
+    },
+    "src/finite_density/preparation.rs": {
+      "sha256": "f7c5f5a35a176104d61760dd88f9fdee6d2e713e766e6a3e3b0f9ca3068168e6",
+      "size_bytes": 20411
+    },
+    "src/finite_density/measure.rs": {
+      "sha256": "eef3449b8c95847a042593fd2eec8ce5bb09bf7563bb8ef2ba998322c8fb654a",
+      "size_bytes": 43538
+    },
+    "docs/finite-density-massless-endpoint.md": {
+      "sha256": "e33cfccf0cf46e1d297113a2401235b685cb6d1efba181049e173feffa06bd21",
+      "size_bytes": 15779
+    }
+  }
+}

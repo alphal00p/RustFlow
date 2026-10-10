@@ -1,0 +1,32 @@
+{
+  "schema": 1,
+  "spatial_dimensions": [
+    "19/3",
+    "37/3",
+    "61/3",
+    "97/3"
+  ],
+  "cut_orders": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "inverse_energy_powers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8
+  ],
+  "chemical_factor": "mu^(d-p-1-2n); mu>0, common factor divided out exactly",
+  "angular_factor": "A_d/2, common factor divided out exactly",
+  "identity": "-n*binom(d/2-1,n)/(d-p-1-2*n)+(p+1)*binom(d/2-1,n-1)/(2*(d-p-1-2*n))+binom(d/2-1,n-1)/2=0",
+  "scope": "exact rational coefficient identity after common factors; sampled dimensions need not be in the bare convergence half-plane"
+}

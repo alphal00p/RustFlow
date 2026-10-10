@@ -1,0 +1,14 @@
+{
+  "status": "exact_reference_identity_pass",
+  "spacetime_dimension": "5",
+  "spatial_dimension": "4",
+  "chemical_potential": "1",
+  "unit": "pi^(-2)",
+  "raw_M1_energy_minus2": "1/16",
+  "raw_upper_S1_energy_minus1": "1/16",
+  "raw_M2_scalar": "-1/16",
+  "physical_I1_scalar": "-1/48",
+  "physical_I2_scalar": "-1/16",
+  "physical_I2_original_u1_squared": "1/48",
+  "scope": "independent exact radial reference; existing physical polynomial values; no new native reduction or flow run"
+}

@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 18.835221981164068,
+  "executable": {
+    "path": "/tmp/rustflow-reciprocal-probe",
+    "sha256": "bbadae1ad2461f27fe06212bc1891bcaa83bb2424b4de4137dcc2b14320a2080"
+  }
+}

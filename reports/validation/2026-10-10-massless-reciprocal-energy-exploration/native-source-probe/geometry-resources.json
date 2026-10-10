@@ -1,0 +1,13 @@
+{
+  "command": [
+    "/tmp/rustflow-reciprocal-geometry",
+    "examples/finite_density/massless_three_loop_chain.json",
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.json"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 0.028925074264407158,
+  "user_seconds": 0.0058839999999999995,
+  "system_seconds": 0.028291,
+  "peak_child_rss_kib": 15516,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

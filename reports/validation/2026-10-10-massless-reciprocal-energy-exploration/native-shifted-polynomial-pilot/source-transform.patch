@@ -1,0 +1,23 @@
+--- /common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/runner/active-pilot.rs
++++ /common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/pilot.rs
+@@ -44,8 +44,18 @@
+  let table=DecodedCoefficientTable::import_generated_normalized(envelope.section(SectionTag::SYMBOLICA_STATE).unwrap(),envelope.section(SectionTag::COEFFICIENTS).unwrap(),limits).unwrap();
+  let polynomial=|id|{let c=table.coefficient(CoefficientId::try_from_index(id).unwrap()).unwrap().clone();assert!(c.denominator.is_one());c.numerator};
+  let roles:[IndexRole;12]=record.roles.iter().map(|r|match r{0=>IndexRole::Ordinary,1=>IndexRole::RequiredCut,2=>IndexRole::Occupation,_=>panic!()}).collect::<Vec<_>>().try_into().unwrap();
+- let rows=record.sources.iter().map(|s|GuardedSource::new(s.id.clone(),s.terms.iter().map(|t|Term{integral:label(&t.integral),coefficient:polynomial(t.coefficient)}).collect(),domain(&s.domain)).with_nonzero_conditions(s.conditions.iter().map(|&id|polynomial(id)).collect())).collect();
+- let sources=Arc::new(GuardedSourceSystem::new(record.measure.clone(),roles,record.indices.clone().try_into().unwrap(),rows).unwrap().with_zero_domains(record.zero_domains.iter().map(domain).collect()).unwrap());
++ let mut rows:Vec<_>=record.sources.iter().map(|s|GuardedSource::new(s.id.clone(),s.terms.iter().map(|t|Term{integral:label(&t.integral),coefficient:polynomial(t.coefficient)}).collect(),domain(&s.domain)).with_nonzero_conditions(s.conditions.iter().map(|&id|polynomial(id)).collect())).collect();
++ assert_eq!(record.sources.len(),52);assert_eq!(roles[6],IndexRole::Ordinary);
++ assert!(record.sources.iter().all(|s|s.domain[6]==(None,Some(0))));
++ let mut extra=Vec::new();for row in rows.iter().filter(|r|r.id.starts_with("lorentz/0/3/")){
++  let mut shift=[0i64;12];shift[6]=1;
++  let terms=row.row.iter().map(|t|{let mut i=*t.integral.powers();assert!(i[6].is_symbolic());i[6]=i[6].shifted(1).unwrap();Term{integral:Integral::new(i),coefficient:t.coefficient.shift_var(record.indices[6],&Integer::one())}}).collect();
++  let d=row.domain.pullback(&shift).unwrap();assert_eq!(d.bounds()[6].upper(),Some(-1));
++  extra.push(GuardedSource::new(format!("shifted-polynomial-normal/{}",row.id),terms,d).with_nonzero_conditions(row.nonzero_conditions.iter().map(|c|c.shift_var(record.indices[6],&Integer::one())).collect()));
++ }
++ assert_eq!(extra.len(),4);rows.extend(extra);
++ let source_epoch=format!("{};source-presentation=appended-four-shifted-polynomial-temporal-U-rows-v1;ordinary-E0-index=6;shift=+1;exact-polynomial-pullback-upper=-1;no-new-source-or-zero-admission",record.measure);
++ let sources=Arc::new(GuardedSourceSystem::new(source_epoch,roles,record.indices.clone().try_into().unwrap(),rows).unwrap().with_zero_domains(record.zero_domains.iter().map(domain).collect()).unwrap());
+  // Old proof containers are deliberately not reused. Fresh discovery binds
+  // every rule to exactly the reconstructed physical source corpus. Native v2
+  // rejects the old v1 proof semantics after the zero-projection owner changed.

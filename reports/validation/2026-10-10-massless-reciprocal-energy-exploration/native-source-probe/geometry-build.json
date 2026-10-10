@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 27.38504325505346,
+  "executable": {
+    "path": "/tmp/rustflow-reciprocal-geometry",
+    "sha256": "4ae72a2f7ec397af0705d433f8558272a73d230eff5b75454949959c26c29aa5"
+  }
+}

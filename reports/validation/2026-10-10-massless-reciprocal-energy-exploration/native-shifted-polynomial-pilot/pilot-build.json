@@ -1,0 +1,8 @@
+{
+  "exit_code": 0,
+  "wall_seconds": 19.27339510526508,
+  "executable": {
+    "path": "/tmp/rustflow-shifted-polynomial-pilot",
+    "sha256": "4d30af46875394cc6246f46ac7087ff5bb4dc32d0795729be3f0c8ba9be733ad"
+  }
+}

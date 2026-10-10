@@ -1,0 +1,21 @@
+{
+  "captured_utc": "2026-10-10T02:16:39.657670+00:00",
+  "command": [
+    "/tmp/rustflow-reciprocal-geometry",
+    "examples/finite_density/massless_three_loop_chain.json",
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.json"
+  ],
+  "argument_files": {
+    "/tmp/rustflow-reciprocal-geometry": {
+      "resolved_path": "/tmp/rustflow-reciprocal-geometry",
+      "sha256": "4ae72a2f7ec397af0705d433f8558272a73d230eff5b75454949959c26c29aa5",
+      "size_bytes": 1225917224
+    },
+    "examples/finite_density/massless_three_loop_chain.json": {
+      "resolved_path": "/common/dev/rustflow_fermi/examples/finite_density/massless_three_loop_chain.json",
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603",
+      "size_bytes": 1550
+    }
+  },
+  "scope": "existing file arguments and PATH executables before child launch"
+}

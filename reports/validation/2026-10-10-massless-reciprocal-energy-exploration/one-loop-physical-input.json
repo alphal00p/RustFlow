@@ -1,0 +1,16 @@
+{
+  "name": "massless_reciprocal_energy_control",
+  "loops": 1,
+  "vertices": 1,
+  "edges": [{"vertices": [0, 0], "routing": ["1"], "mass_squared": "0", "charges": [1]}],
+  "loop_charges": [[1]],
+  "chemical_potentials": ["1"],
+  "targets": [
+    {"powers": [1], "numerator": "1"},
+    {"powers": [2], "numerator": "1"},
+    {"powers": [2], "numerator": "u1^2"}
+  ],
+  "numerator_convention": "shifted_euclidean",
+  "laurent_orders": [-1, 0],
+  "digits": 18
+}

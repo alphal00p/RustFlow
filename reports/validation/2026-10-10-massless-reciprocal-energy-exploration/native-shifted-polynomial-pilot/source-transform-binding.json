@@ -1,0 +1,9 @@
+{
+  "baseline_source": {
+    "path": "reports/validation/2026-10-10-occupation-order-experiment/runner/active-pilot.rs",
+    "sha256": "be3b9d135e742de50315e809d8109ce8085dc7420050720ee9a40aaff0106741"
+  },
+  "new_source_sha256": "09859643855fdc94bd80e8b39664394278dbf7225f9cd467d92ef11f9ae2af74",
+  "only_algorithm_delta": "Append4 exact original temporal-U source rows shifted at energy slot6+1, with coefficient substitution and exact domain pullback a6<=-1. No target, native order, search/reduce scheduler, zero domain, or budget change. New measure presentation epoch; no historical rules imported.",
+  "small_control_manifest_sha256": "80573e44033ef97c0c37d7b333cf4636908a3249565c6b7aa29dc1d5b1956b93"
+}

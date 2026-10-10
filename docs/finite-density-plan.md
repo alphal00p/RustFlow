@@ -127,6 +127,15 @@ the three-loop frontier still exceeds its configured limit. The separate
 does not establish a multi-loop advantage, so the production deformation remains
 fixed-shell while reduction closure is investigated.
 
+The subsequent [native ordering controls](../reports/validation/2026-10-10-occupation-order-experiment/README.md)
+do not establish closure with occupation degree moved earlier in the order.
+The [reciprocal occupied-energy exploration](../reports/validation/2026-10-10-massless-reciprocal-energy-exploration/README.md)
+also gives no measured reduction benefit from widening the admitted energy
+powers alone. Exact shifted sources shorten two small reductions within the
+original polynomial domains and reduce early frontier growth, but the bounded
+three-loop pilot still fails to close. Neither experiment changes production
+ordering, massless admission or the three-loop numerical acceptance gate.
+
 ## Remaining acceptance evidence
 
 Exact certificates and bounded algebraic pilots are useful gates, but do not

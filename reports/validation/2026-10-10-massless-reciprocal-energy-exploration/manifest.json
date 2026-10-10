@@ -1,0 +1,455 @@
+{
+  "captured_utc": "2026-10-10T02:29:58.958157+00:00",
+  "scope": "Frozen exploration only; no production admission change and no three-loop numerical acceptance",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "6a82a84e024f34f08f7f5bd3b089a6cf1ac0bf289057befd1133e4834b22648c",
+      "bytes": 2823
+    },
+    {
+      "path": "assessment-provenance.json",
+      "sha256": "79ea7c46dd561d4d2511140800b84672298b77ed68c7727867d78ad611b150c5",
+      "bytes": 4577
+    },
+    {
+      "path": "assessment.md",
+      "sha256": "78a02857eb8d925d9e6edfb741d74e2197afba776ae3780132f7c157f8678f24",
+      "bytes": 9718
+    },
+    {
+      "path": "check-normal-identity.py",
+      "sha256": "d6a9bcdd00fc27f7f0ce7c3ed63866b5009283b29b96df5f64fa3b4e36a043fe",
+      "bytes": 1949
+    },
+    {
+      "path": "independent-audit.json",
+      "sha256": "62c2737a41c09761857bd001d00d2fa50835fa971a11f68318b5b68da19e07f4",
+      "bytes": 5283
+    },
+    {
+      "path": "minimal-control-plan.md",
+      "sha256": "e5ff48189ed356963d8705ce75b4097a2b40713f33262ee75e5cfb9f6891362a",
+      "bytes": 6005
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/README.md",
+      "sha256": "6e5535d18a7c46cce0529ccc4f23d462414ab2371edfe773f9d4ed8254c6ff33",
+      "bytes": 3130
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/archives.json",
+      "sha256": "c80c59b8d5eb2d3f05baa229cc2bf601ade82557e03f793ff1dc00903ada88a9",
+      "bytes": 4770
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/compile.py",
+      "sha256": "a665087560695574818affd910da52a8d1e99ca5b17edcbc5f8e86a3c50d841c",
+      "bytes": 1781
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/independent-source-audit.json",
+      "sha256": "78ee002436f2b819b4ea19fe7472b7db68e360e079ce8d03c0d080448e1aea7e",
+      "bytes": 732
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/manifest.json",
+      "sha256": "64c4601fab22d21b6d2159ccd4cd9b4dfe412c3a614d5a28a92d1e91feb22691",
+      "bytes": 4207
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/pilot-build-binding.json",
+      "sha256": "5fe26135a495a9901ab1ea3d5d451aa5fb7ea622dbdaf6c3920e734b57e59df9",
+      "bytes": 2286
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/pilot-build.json",
+      "sha256": "f7e236bc27f20e56802734ab1b72831e90fb5afcce553ab11ad328f0a4f5ef90",
+      "bytes": 216
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/pilot-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/pilot.rs",
+      "sha256": "09859643855fdc94bd80e8b39664394278dbf7225f9cd467d92ef11f9ae2af74",
+      "bytes": 19490
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/planned-command.json",
+      "sha256": "e54ac88974a08384b9f3c28f791c5063779a7c7e371a78e22e36e2d3ea2a415e",
+      "bytes": 910
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/resources.json",
+      "sha256": "d426b16f08537151bc222f38488a57019f59215fa8bb7d214d349f3be1641ffc",
+      "bytes": 846
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/resources.log",
+      "sha256": "fb82f32fdab0aa34596e355640a0f9b9f8c6bd534b2f3d76d579e6fbd03308bb",
+      "bytes": 256
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/resources.provenance.json",
+      "sha256": "0ba2ca77966c3c66299dc27c1bc6b7f01b4eded7755958f121bbc85e8a4820c2",
+      "bytes": 1935
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/configuration.json",
+      "sha256": "f4a7ccaac1fed1eed19f1110ec175261193e1dc796dfcc7c920b10440ea7ac6f",
+      "bytes": 9022
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/progress.json",
+      "sha256": "35d9768cd30fe9173e6082773ec3269b6a27d2374293ffe55af8395b2db03d66",
+      "bytes": 723
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/result.json",
+      "sha256": "ad4b3886c2ccc088e9504026c80b31570b73a8c928d1aab29b77090e412d5dab",
+      "bytes": 28477
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/round-000.bin.gz",
+      "sha256": "fb80494ad39f566e6635d2b6ebd0eb0f424ae163e496647de8e981a4d88af3c4",
+      "bytes": 5286
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/round-000.json.gz",
+      "sha256": "5371ab1cfa819f0448c2259f7a3759d75be71f913ca68f54b403b33f61b67bc3",
+      "bytes": 2469
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/round-001.bin.gz",
+      "sha256": "79ba95b22630f9f1981df790804cd5254648ccdeae259fb479038dff29aa649a",
+      "bytes": 9217
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/round-001.json.gz",
+      "sha256": "3018f76ed5eeaf91912d8b7e3f7c278a2b924ab26c09e7505f5fd039e28c0deb",
+      "bytes": 7256
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/round-002.bin.gz",
+      "sha256": "2f4ec2b68a37b3b7ca096470775eb1437a4f7328c7a33721710b2f40ed757662",
+      "bytes": 34570
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/round-002.json.gz",
+      "sha256": "3839f2d280a1f597e5bc1b17aa1cf3d37af9e59a414a31d651f73f16796c8a7f",
+      "bytes": 52898
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/round-003.bin.gz",
+      "sha256": "ae7d7d274c62a7b19cd7787d58afd2042a1eae90b1321928948f13e0a10d2544",
+      "bytes": 109596
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/run/round-003.json.gz",
+      "sha256": "eaaadf0bb9a73cc7d255e14aeba0c4207515d123a52d6871b09ab805bdb542d7",
+      "bytes": 522987
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/source-transform-binding.json",
+      "sha256": "3a37b6bd7aae200684dce677002ccf4ca58e56c092972798922a9b4db4b09e39",
+      "bytes": 711
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/source-transform.patch",
+      "sha256": "1d16af18d885939fdc666275e29178ed32ed5765b0b723512e9003cf1974aeca",
+      "bytes": 3143
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/summarize.py",
+      "sha256": "a22990ff6f22c0a19ab9d0950811cc2148211c9eb63a980f8af1880a3fa20f16",
+      "bytes": 2599
+    },
+    {
+      "path": "native-shifted-polynomial-pilot/summary.json",
+      "sha256": "1cc1fdecab5bf82d671cbf1bb2a031ca48b1ec4f87c5471cf1435a90e9609cb4",
+      "bytes": 21940
+    },
+    {
+      "path": "native-source-probe/README.md",
+      "sha256": "227b8d3eab1867d324378e4f184e36628cd4322e10fbe6c4283a2f6d29ad14d9",
+      "bytes": 4029
+    },
+    {
+      "path": "native-source-probe/compile.py",
+      "sha256": "a94ca72271b1c2caf0a05629f2eb0b35d5d3dacfff47bad7ede82131fc42e69a",
+      "bytes": 1872
+    },
+    {
+      "path": "native-source-probe/failed-integer-ring-probe-build-binding.json",
+      "sha256": "fd2c101b8c86527bcd5c61c03c2a8efa7461926f944839b09540da201bf65f7d",
+      "bytes": 2254
+    },
+    {
+      "path": "native-source-probe/failed-integer-ring-probe-build.json",
+      "sha256": "0c8bbfa2b53b54df4ddb025d3676a1b7aaeb0d20c34ebae8e3624edaa2aeae69",
+      "bytes": 58
+    },
+    {
+      "path": "native-source-probe/failed-integer-ring-probe-build.log",
+      "sha256": "2d338b48fb887cb221f5eef4d24df3c5f80a1f2bf0bde4bec27c33bf20b2c7f7",
+      "bytes": 3915
+    },
+    {
+      "path": "native-source-probe/failed-integer-ring-probe.rs",
+      "sha256": "a9d5fbcc6e71051c3ab771f59b68bd28452ac97e2c42f6b133788d877992ecf4",
+      "bytes": 10066
+    },
+    {
+      "path": "native-source-probe/geometry-build-binding.json",
+      "sha256": "bd90deb7e071e01b6be7992bc2ec5d9b2d01f367c8bb99093928301e3937d0d8",
+      "bytes": 1991
+    },
+    {
+      "path": "native-source-probe/geometry-build.json",
+      "sha256": "fe86938aac93aaf58be748137da9d6ba16516b379cf6fd005f44a47dbeef5b27",
+      "bytes": 211
+    },
+    {
+      "path": "native-source-probe/geometry-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "native-source-probe/geometry-resources.json",
+      "sha256": "ed8e7434a417253b9752a29094c48dbce5b12f14f625cdb3d24ca62eaf88679e",
+      "bytes": 479
+    },
+    {
+      "path": "native-source-probe/geometry-resources.log",
+      "sha256": "bd017002d5852b5335bd50f4d38aef8eada0d958ee27ac7ff85003e50e7902ca",
+      "bytes": 81
+    },
+    {
+      "path": "native-source-probe/geometry-resources.provenance.json",
+      "sha256": "c4d810519c54f9a011f9501744c4b435ba293371d88baca1ff5fb8c672ca9ff3",
+      "bytes": 907
+    },
+    {
+      "path": "native-source-probe/geometry.json",
+      "sha256": "10c56050042c63ffc5130805637b8cbb8c4a62b4649759595cf933bbb456303e",
+      "bytes": 2019
+    },
+    {
+      "path": "native-source-probe/geometry.rs",
+      "sha256": "b7e9a294ed583c3b04d07cc3be5e6bb60dba09a0077d7079165485e0ec05f0a7",
+      "bytes": 2612
+    },
+    {
+      "path": "native-source-probe/initial-four-arm-summary.json",
+      "sha256": "f13a3673941021be9e3753b60bb0e12ae36d77f9c77c04be9868bfa7c387a09d",
+      "bytes": 30800
+    },
+    {
+      "path": "native-source-probe/initial-probe-build-binding.json",
+      "sha256": "844139c035114ac1b24d84f80ebfb068c97d665462530c7fb15e280ad6cdc396",
+      "bytes": 2254
+    },
+    {
+      "path": "native-source-probe/initial-probe-build.json",
+      "sha256": "7e5fcaf0147b24887bb35839d295d643cbb573420f9bac2271ea803a153d1358",
+      "bytes": 209
+    },
+    {
+      "path": "native-source-probe/initial-probe-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "native-source-probe/manifest.json",
+      "sha256": "80573e44033ef97c0c37d7b333cf4636908a3249565c6b7aa29dc1d5b1956b93",
+      "bytes": 8144
+    },
+    {
+      "path": "native-source-probe/normal-first/program.bin",
+      "sha256": "472ac91049d267b7c1a645fe07c6abbe7d8343a7dc5716db0d9bb9a9132b36e6",
+      "bytes": 62882
+    },
+    {
+      "path": "native-source-probe/normal-first/result.json",
+      "sha256": "7417873618ab2a9745311385e0825e22b737af246733e18564d4ff6cb011d156",
+      "bytes": 116189
+    },
+    {
+      "path": "native-source-probe/normal-first-resources.json",
+      "sha256": "e0b2ac390859a12071eae314947ae3a6f5bfaf4b43c60cf5d40e024463e42bf3",
+      "bytes": 925
+    },
+    {
+      "path": "native-source-probe/normal-first-resources.log",
+      "sha256": "4cf2ba3876d47f99df20c9e1c580c45a623cd09ed950aecf625b5960d3237853",
+      "bytes": 49
+    },
+    {
+      "path": "native-source-probe/normal-first-resources.provenance.json",
+      "sha256": "f97b926f1f5e9f13e3dfdfcb922ceb51c375e340eb2f3a7794fa6fd1aa5d85c8",
+      "bytes": 2597
+    },
+    {
+      "path": "native-source-probe/normal-last/program.bin",
+      "sha256": "9908895a74628d9bdf5691ec84bea76d39a146e009b9cb5460359846b823a280",
+      "bytes": 62881
+    },
+    {
+      "path": "native-source-probe/normal-last/result.json",
+      "sha256": "23f18726779403c9975ba66f36029c2ef5d75cad1817f44a9b79d84e80782347",
+      "bytes": 116187
+    },
+    {
+      "path": "native-source-probe/normal-last-resources.json",
+      "sha256": "5c8f0eacf3b41a95bbd4f443c29a644ee312dffeca567ff1ab0244b4076576a3",
+      "bytes": 909
+    },
+    {
+      "path": "native-source-probe/normal-last-resources.log",
+      "sha256": "68e16985a5868e9896699a2ff2bdde33ef91d6c23f7c6bc88d7d04ca148b59d2",
+      "bytes": 48
+    },
+    {
+      "path": "native-source-probe/normal-last-resources.provenance.json",
+      "sha256": "1097dbf21c9cc92cd3664568364c4b8a0c7a0a2be2a34cdbe6442ea6a7ca4c9d",
+      "bytes": 2595
+    },
+    {
+      "path": "native-source-probe/planned-commands.json",
+      "sha256": "999a0e96eacb6c569667d7dcbc5e964b511e27d2a88cd1dbdf022ea1e2f99981",
+      "bytes": 5182
+    },
+    {
+      "path": "native-source-probe/polynomial/program.bin",
+      "sha256": "a2a13952ad2e57eb4c85ee2787a72cb80268b2e6949a89425a2f604f1ac4aa11",
+      "bytes": 62850
+    },
+    {
+      "path": "native-source-probe/polynomial/result.json",
+      "sha256": "b34199a852d888f1675c78ae1a12153fcc41c0005d1bd53da7ef226097bdd8f5",
+      "bytes": 117391
+    },
+    {
+      "path": "native-source-probe/polynomial-resources.json",
+      "sha256": "40214f4bd2ab7a3eb05966df656b84fe3d438dd4a4016fa5845c0120b9e9c9fe",
+      "bytes": 920
+    },
+    {
+      "path": "native-source-probe/polynomial-resources.log",
+      "sha256": "f20db622380b8e8ef35afa6d9e164527be3ba87983d7c3e9a7253423803fe15b",
+      "bytes": 47
+    },
+    {
+      "path": "native-source-probe/polynomial-resources.provenance.json",
+      "sha256": "db21ca775ae678778fed8318a9ab028878ea33e8b36e804924907f24600f3ce1",
+      "bytes": 2593
+    },
+    {
+      "path": "native-source-probe/probe-before-polynomial-control.rs",
+      "sha256": "693f5222fc311dd1f80605325a906191fd2e07f457089e141d02055246801b71",
+      "bytes": 10019
+    },
+    {
+      "path": "native-source-probe/probe-build-binding.json",
+      "sha256": "db431515d15c6e4a50828e97ec9794499b27919c375aa1cef3528d3cccddd714",
+      "bytes": 2254
+    },
+    {
+      "path": "native-source-probe/probe-build.json",
+      "sha256": "abe726873f1f884134578bd37fc84434c164ba1af6d926aa94d604adaa1b598e",
+      "bytes": 209
+    },
+    {
+      "path": "native-source-probe/probe-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "native-source-probe/probe.rs",
+      "sha256": "60a6f5f0b05a275cb0551dd8a635ed5e9b891648c1f152c817b5e2e4624b9b50",
+      "bytes": 10430
+    },
+    {
+      "path": "native-source-probe/reciprocal/program.bin",
+      "sha256": "b7376687f3bc2b1d5ceeeed6b57093bee6293d5a112940fa4738ec63705755f1",
+      "bytes": 63931
+    },
+    {
+      "path": "native-source-probe/reciprocal/result.json",
+      "sha256": "b4e3cf3b4f802c7aafd5bd1ea780d6ced23e62c5ddb0641fec1b2dbff5b87b99",
+      "bytes": 117097
+    },
+    {
+      "path": "native-source-probe/reciprocal-resources.json",
+      "sha256": "e8006e3dbf7ac8275063ad312e59f9276a707b3a065348d0480c9a1ce520f795",
+      "bytes": 922
+    },
+    {
+      "path": "native-source-probe/reciprocal-resources.log",
+      "sha256": "4fe457a91fb59c8cb3ca65d64ad082418e6df24ba2c9979c65e071b09152be0e",
+      "bytes": 47
+    },
+    {
+      "path": "native-source-probe/reciprocal-resources.provenance.json",
+      "sha256": "ab49b7a3f34c6a4ae84d381e544c3cd44d6a84e8a111edae0e426f79314f3635",
+      "bytes": 2593
+    },
+    {
+      "path": "native-source-probe/shifted-polynomial/program.bin",
+      "sha256": "984b0fded1d6fba1385ebee503cc43205e9990b87b3b633e7b182e368fa4a958",
+      "bytes": 61811
+    },
+    {
+      "path": "native-source-probe/shifted-polynomial/result.json",
+      "sha256": "78610753d3d5cf8740d33c292baaedecca0c44df63fa6432b98c911c2f3c623a",
+      "bytes": 206751
+    },
+    {
+      "path": "native-source-probe/shifted-polynomial-resources.json",
+      "sha256": "56a3c780a39f85f6fff58bfa5ac1c9c6a156d8447936e660a1faf20bdb320273",
+      "bytes": 926
+    },
+    {
+      "path": "native-source-probe/shifted-polynomial-resources.log",
+      "sha256": "a3a7f0c8fc93389f060e05b64079c03974a801adcbb686181251d3e67035a62b",
+      "bytes": 55
+    },
+    {
+      "path": "native-source-probe/shifted-polynomial-resources.provenance.json",
+      "sha256": "6570d89f075ee9bacea035ee18b3c83169aff5b51275af98f5b252167e2c6730",
+      "bytes": 2609
+    },
+    {
+      "path": "native-source-probe/summary.json",
+      "sha256": "bf9523b2cf8bc58795bbb12a8647ee162d445e8818b7dc94258c820e8c370607",
+      "bytes": 35981
+    },
+    {
+      "path": "normal-identity-inputs.json",
+      "sha256": "648b23df05c6ccb77010fa2c02a730a236e08200281a9b79ddc357c4a16ed19d",
+      "bytes": 644
+    },
+    {
+      "path": "normal-identity-results.json",
+      "sha256": "04bd3e9a50bea558c50480f348ab52c724cd85c8ea7b2d37e2121d6e235adcb4",
+      "bytes": 64931
+    },
+    {
+      "path": "one-loop-exact-reference.json",
+      "sha256": "d99d403c1df03a888ca5ce375d4b2e09715b3ab611b86b58dcbdd2df3e25f20f",
+      "bytes": 492
+    },
+    {
+      "path": "one-loop-physical-input.json",
+      "sha256": "f13c76fce7f6f9a0ec81a55c5c15244158403b03917fa2e10878493ee8559241",
+      "bytes": 460
+    }
+  ],
+  "files_count": 89,
+  "total_bytes": 2090116,
+  "nested_manifests_verified": true,
+  "pilot_archives_roundtrip_verified": 8
+}

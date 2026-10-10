@@ -1,0 +1,77 @@
+{
+  "recorded_utc": "2026-10-10T02:28:14.156812+00:00",
+  "entries": [
+    {
+      "original_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-000.bin",
+      "original_sha256": "977c1b7cb47b23934ec701b65f4f44fbd76fb720e8d089ef14c8de8b2371dd98",
+      "original_bytes": 51764,
+      "archive_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-000.bin.gz",
+      "archive_sha256": "fb80494ad39f566e6635d2b6ebd0eb0f424ae163e496647de8e981a4d88af3c4",
+      "archive_bytes": 5286,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-000.json",
+      "original_sha256": "4a4c9823b7f878e1c84580562b5a37e73cd7614f37335f081332ae2e644e82e9",
+      "original_bytes": 85756,
+      "archive_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-000.json.gz",
+      "archive_sha256": "5371ab1cfa819f0448c2259f7a3759d75be71f913ca68f54b403b33f61b67bc3",
+      "archive_bytes": 2469,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-001.bin",
+      "original_sha256": "2448c31240a200c75e77371be136f40df4e97f1bfe458b0852e67024f5d1da40",
+      "original_bytes": 91886,
+      "archive_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-001.bin.gz",
+      "archive_sha256": "79ba95b22630f9f1981df790804cd5254648ccdeae259fb479038dff29aa649a",
+      "archive_bytes": 9217,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-001.json",
+      "original_sha256": "3c29b8c51ff496bd8b280d7c17122dfb3364f3c43f3e3fa269eb64f945d42bc3",
+      "original_bytes": 279157,
+      "archive_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-001.json.gz",
+      "archive_sha256": "3018f76ed5eeaf91912d8b7e3f7c278a2b924ab26c09e7505f5fd039e28c0deb",
+      "archive_bytes": 7256,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-002.bin",
+      "original_sha256": "add6dc3f954c9a964df0d4c03feab9e5236617568705e4b440bfeaf621d101ee",
+      "original_bytes": 407777,
+      "archive_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-002.bin.gz",
+      "archive_sha256": "2f4ec2b68a37b3b7ca096470775eb1437a4f7328c7a33721710b2f40ed757662",
+      "archive_bytes": 34570,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-002.json",
+      "original_sha256": "7530ba5b709e8fa3c612a86c4baa5f0cfa3446e51902a3afbf83bc2fd7b46b13",
+      "original_bytes": 1055923,
+      "archive_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-002.json.gz",
+      "archive_sha256": "3839f2d280a1f597e5bc1b17aa1cf3d37af9e59a414a31d651f73f16796c8a7f",
+      "archive_bytes": 52898,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-003.bin",
+      "original_sha256": "a9d054a839d7e70ffdbd188f83499ada57f6d402f3593d741e04268e2554438c",
+      "original_bytes": 1308047,
+      "archive_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-003.bin.gz",
+      "archive_sha256": "ae7d7d274c62a7b19cd7787d58afd2042a1eae90b1321928948f13e0a10d2544",
+      "archive_bytes": 109596,
+      "restored_byte_equal": true
+    },
+    {
+      "original_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-003.json",
+      "original_sha256": "c08a0485d429645b48db594a2e407efb6cbcf19a96003051f429ae1d1676f54a",
+      "original_bytes": 3897316,
+      "archive_path": "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-003.json.gz",
+      "archive_sha256": "eaaadf0bb9a73cc7d255e14aeba0c4207515d123a52d6871b09ab805bdb542d7",
+      "archive_bytes": 522987,
+      "restored_byte_equal": true
+    }
+  ]
+}

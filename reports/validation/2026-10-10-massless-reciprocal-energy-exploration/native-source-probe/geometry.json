@@ -1,0 +1,130 @@
+{
+  "certified_completions": [
+    {
+      "coefficient": "1",
+      "energy_coordinate": "q_6",
+      "exact_factor_equality": true,
+      "factor": "q_6",
+      "loop": 0,
+      "mass_squared": "0",
+      "mu": "1",
+      "production_massive_certificate_absent": true,
+      "slot": 6
+    }
+  ],
+  "coordinates": [
+    "q_0",
+    "q_1",
+    "q_2",
+    "q_3",
+    "q_4",
+    "q_5",
+    "q_6",
+    "q_7",
+    "q_8"
+  ],
+  "determinant": "1",
+  "factors": [
+    "q_0",
+    "q_3",
+    "q_5",
+    "-(-q_0+2*q_2-q_5)",
+    "-(-q_3+2*q_4-q_5)",
+    "q_1",
+    "q_6",
+    "q_7",
+    "q_8",
+    "1-q_6",
+    "q_6"
+  ],
+  "input": "examples/finite_density/massless_three_loop_chain.json",
+  "input_identity": "99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e",
+  "input_slots": 9,
+  "loops": 3,
+  "physical_slots": 5,
+  "roles": [
+    "RequiredCut",
+    "Ordinary",
+    "Ordinary",
+    "Ordinary",
+    "Ordinary",
+    "Ordinary",
+    "Ordinary",
+    "Ordinary",
+    "Ordinary",
+    "Occupation",
+    "Occupation"
+  ],
+  "routing": [
+    [
+      "1",
+      "0",
+      "0"
+    ],
+    [
+      "0",
+      "1",
+      "0"
+    ],
+    [
+      "0",
+      "0",
+      "1"
+    ]
+  ],
+  "scope": "Regenerate exact occupied geometry from input; algebraic energy descriptor only, not production source/boundary admission",
+  "targets": [
+    [
+      {
+        "coefficient": "-1",
+        "indices": [
+          1,
+          1,
+          1,
+          1,
+          1,
+          0,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      }
+    ],
+    [
+      {
+        "coefficient": "-1",
+        "indices": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          -1,
+          0,
+          0,
+          0,
+          0,
+          0
+        ]
+      },
+      {
+        "coefficient": "-1",
+        "indices": [
+          2,
+          1,
+          1,
+          1,
+          1,
+          0,
+          -1,
+          -1,
+          0,
+          0,
+          0
+        ]
+      }
+    ]
+  ]
+}

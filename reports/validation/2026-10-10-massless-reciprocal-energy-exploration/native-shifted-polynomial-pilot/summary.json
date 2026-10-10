@@ -1,0 +1,515 @@
+{
+  "recorded_utc": "2026-10-10T02:27:20.658256+00:00",
+  "scope": "One exact source-presentation-only native closure pilot; no reciprocal-energy admission, numerical evaluation, oracle data or historical rule import",
+  "status": "frontier-budget",
+  "closure_proved": false,
+  "runtime_scope": "opt-level0 standalone wrapper; release dependencies; compilation excluded; historical timings not a controlled machine-load benchmark",
+  "resources": {
+    "command": [
+      "timeout",
+      "300s",
+      "env",
+      "PILOT_ROUNDS=16",
+      "PILOT_FRONTIER=1024",
+      "PILOT_REQUESTS=4096",
+      "PILOT_RULES=65536",
+      "PILOT_ZERO_ATTEMPTS=8192",
+      "PILOT_RAY_DOMAINS=1",
+      "PILOT_POINT_DOMAINS=1",
+      "PILOT_DEPTH=3",
+      "/tmp/rustflow-shifted-polynomial-pilot",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+      "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 163.9111937712878,
+    "user_seconds": 162.349926,
+    "system_seconds": 0.235453,
+    "peak_child_rss_kib": 79932,
+    "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+  },
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/pilot.rs",
+    "sha256": "09859643855fdc94bd80e8b39664394278dbf7225f9cd467d92ef11f9ae2af74",
+    "bytes": 19490
+  },
+  "source_delta": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/source-transform.patch",
+    "sha256": "1d16af18d885939fdc666275e29178ed32ed5765b0b723512e9003cf1974aeca",
+    "bytes": 3143
+  },
+  "settings": {
+    "depth": 3,
+    "max_frontier": 1024,
+    "max_requested": 4096,
+    "max_rounds": 16,
+    "max_rules": 65536,
+    "measure_id": "rustflow-weighted-sources-v1:13fbdef02acfb2a3466d927eaec61cf3060f8277b38b35123a5cd3b076a2864f:f8c23e306f1c0a785b79431d31b234e50d5cfde6afc06b556ca3930c0492c39c:{\"measure\":\"independent occupied Cn and Hn; input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e; factors=[rustflow_occupied::q_0, rustflow_occupied::q_3, rustflow_occupied::q_5, -(-rustflow_occupied::q_0+2*rustflow_occupied::q_2-rustflow_occupied::q_5), -(-rustflow_occupied::q_3+2*rustflow_occupied::q_4-rustflow_occupied::q_5), rustflow_occupied::q_1, rustflow_occupied::q_6, rustflow_occupied::q_7, rustflow_occupied::q_8, 1-rustflow_occupied::q_6, rustflow_occupied::q_6]; massless source origin evidence=joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=singleton-UV-meromorphic-null-germ;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0];shifted=[1, 2, 3, 4];options=WeightedSourceOptions { policy: LegacyLorentz, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_5+2*rustflow_occupied::{}::q_2)*-1\\\", \\\"(-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+2*rustflow_occupied::{}::q_4)*-1\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"shell=0:0:9:10:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 2, virtual_affine_shift: [], denominator_rows: [(1, [\\\"1\\\", \\\"0\\\"], \\\"0\\\"), (2, [\\\"0\\\", \\\"1\\\"], \\\"0\\\"), (3, [\\\"0\\\", \\\"-1\\\"], \\\"1\\\"), (4, [\\\"1\\\", \\\"-1\\\"], \\\"0\\\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\\\"1\\\"] }; source presentation=legacy-lorentz; positive compact energy completion powers=false\",\"support\":\"real compact shell coordinates; [OccupiedShell { loop_index: 0, physical_slot: 0, upper_slot: 9, lower_slot: 10, mass_squared: 0, chemical_potential: Fraction { numerator: 1, denominator: 1 } }]; certified joint dimensional origin zero jets: occupied loop 0, cut slot 0>=1 and lower-energy slot 10>=1; physical mass zero; fixed positive auxiliary mass; polynomial completions; upper endpoint 1>0; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=2;allowed=[1];nonpositive=[2, 3, 4];virtual-null=[\\\"0\\\", \\\"1\\\"]; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=2;allowed=[2, 3];nonpositive=[1, 4];virtual-null=[\\\"1\\\", \\\"0\\\"]; certified free virtual zero support: occupied-free-virtual-polynomial-zero-v1;fixed-eta;dimensional-virtual-measure;bound-origin;polynomial-completions;virtual-rank=2;allowed=[4];nonpositive=[1, 2, 3];virtual-null=[\\\"1\\\", \\\"1\\\"]\",\"orientation\":\"future first 1 loops; q=(-i PE0,-PEvec); inverse routing=[[1, 0, 0], [0, 1, 0], [0, 0, 1]]; determinant=1\",\"normalization\":\"virtual d^Dk/(i pi^(D/2)); occupied d^Dq/pi^(D/2); Euclidean target Wick phases already included\",\"branch\":\"joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D;scope=singleton-UV-meromorphic-null-germ;input=99d085b4bf2ab6c4c682d4616f14aae055f458e24fb283039a58b939d878066e;cuts=[0];shifted=[1, 2, 3, 4];options=WeightedSourceOptions { policy: LegacyLorentz, positive_compact_energy_powers: false, free_virtual_zero_sectors: true };family=[\\\"loops=3;physical=5;input=9\\\", \\\"det=1\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_2\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_4\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"rustflow_occupied::{}::q_0\\\", \\\"rustflow_occupied::{}::q_3\\\", \\\"rustflow_occupied::{}::q_5\\\", \\\"(-1*rustflow_occupied::{}::q_0+-1*rustflow_occupied::{}::q_5+2*rustflow_occupied::{}::q_2)*-1\\\", \\\"(-1*rustflow_occupied::{}::q_3+-1*rustflow_occupied::{}::q_5+2*rustflow_occupied::{}::q_4)*-1\\\", \\\"rustflow_occupied::{}::q_1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"rustflow_occupied::{}::q_7\\\", \\\"rustflow_occupied::{}::q_8\\\", \\\"-1*rustflow_occupied::{}::q_6+1\\\", \\\"rustflow_occupied::{}::q_6\\\", \\\"role=RequiredCut\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Ordinary\\\", \\\"role=Occupation\\\", \\\"role=Occupation\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"0\\\", \\\"0\\\", \\\"0\\\", \\\"1\\\", \\\"shell=0:0:9:10:0:1\\\", \\\"target=0:[1, 1, 1, 1, 1, 0, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, -1, 0, 0, 0, 0, 0]:-1\\\", \\\"target=1:[2, 1, 1, 1, 1, 0, -1, -1, 0, 0, 0]:-1\\\"];proof=MasslessStructuralAudit { proof_version: \\\"positive-eta-gaussian-germ-and-rank-one-blocks-v1;fixed-T-regulator-order;UV-meromorphic-before-high-D-endpoint\\\", virtual_loops: 2, virtual_affine_shift: [], denominator_rows: [(1, [\\\"1\\\", \\\"0\\\"], \\\"0\\\"), (2, [\\\"0\\\", \\\"1\\\"], \\\"0\\\"), (3, [\\\"0\\\", \\\"-1\\\"], \\\"1\\\"), (4, [\\\"1\\\", \\\"-1\\\"], \\\"0\\\")], block_assignments: [], block_representatives: [], block_a_lower_bounds: [], block_q_upper_bounds: [\\\"1\\\"] }; joint-high-D-massless-flow-origin-v1;polynomial-completions;lower-contact-zero-jets;energy-regulator-removed-at-fixed-positive-T-and-eta;real-Fermi-T0;endpoint-then-meromorphic-D\",\"deformation\":\"native Di-eta on [1, 2, 3, 4]; physical shells and upper/lower supports fixed; input indices and coefficients fixed\"}:zero-tail-storage-v1:physical=11:capacity=12;source-presentation=appended-four-shifted-polynomial-temporal-U-rows-v1;ordinary-E0-index=6;shift=+1;exact-polynomial-pullback-upper=-1;no-new-source-or-zero-admission",
+    "old_proof_optional_replay": null,
+    "old_proofs_reused": false,
+    "original_targets": [
+      [
+        {
+          "coefficient": "-1",
+          "indices": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ],
+      [
+        {
+          "coefficient": "-1",
+          "indices": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            -1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "coefficient": "-1",
+          "indices": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ]
+        }
+      ]
+    ],
+    "point_domains_per_fallback": 1,
+    "ray_domains_per_requested_point": 1,
+    "request_history_policy": "explicit requested labels only; basis and raw derivative labels deferred until requested; max_requested caps cumulative history",
+    "shifted_ordinary_slots": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "source_count": 56,
+    "source_program": "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "zero_attempts_per_round": 8192
+  },
+  "completed_rounds": [
+    {
+      "round": 0,
+      "requested": 15,
+      "cumulative_requested": 15,
+      "frontier": 44,
+      "rules": 15,
+      "zero_first_rules": 0,
+      "processed_actual_derivatives": 0,
+      "original_output_row_terms": [
+        9,
+        44
+      ],
+      "original_output_distinct_leaves": 44,
+      "positive_energy_leaves": 0,
+      "joint_cut_surface_distribution": [
+        {
+          "cut": 1,
+          "upper_surface": 0,
+          "count": 28
+        },
+        {
+          "cut": 1,
+          "upper_surface": 1,
+          "count": 1
+        },
+        {
+          "cut": 2,
+          "upper_surface": 0,
+          "count": 15
+        }
+      ],
+      "conditions": 17,
+      "seconds": 0.523676535,
+      "checkpoint": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-000.json",
+        "sha256": "4a4c9823b7f878e1c84580562b5a37e73cd7614f37335f081332ae2e644e82e9",
+        "bytes": 85756
+      }
+    },
+    {
+      "round": 1,
+      "requested": 47,
+      "cumulative_requested": 59,
+      "frontier": 152,
+      "rules": 58,
+      "zero_first_rules": 0,
+      "processed_actual_derivatives": 1,
+      "original_output_row_terms": [
+        24,
+        152
+      ],
+      "original_output_distinct_leaves": 152,
+      "positive_energy_leaves": 0,
+      "joint_cut_surface_distribution": [
+        {
+          "cut": 1,
+          "upper_surface": 0,
+          "count": 99
+        },
+        {
+          "cut": 1,
+          "upper_surface": 1,
+          "count": 25
+        },
+        {
+          "cut": 1,
+          "upper_surface": 2,
+          "count": 3
+        },
+        {
+          "cut": 2,
+          "upper_surface": 0,
+          "count": 25
+        }
+      ],
+      "conditions": 38,
+      "seconds": 3.947632143,
+      "checkpoint": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-001.json",
+        "sha256": "3c29b8c51ff496bd8b280d7c17122dfb3364f3c43f3e3fa269eb64f945d42bc3",
+        "bytes": 279157
+      }
+    },
+    {
+      "round": 2,
+      "requested": 160,
+      "cumulative_requested": 210,
+      "frontier": 528,
+      "rules": 235,
+      "zero_first_rules": 0,
+      "processed_actual_derivatives": 3,
+      "original_output_row_terms": [
+        23,
+        528
+      ],
+      "original_output_distinct_leaves": 528,
+      "positive_energy_leaves": 0,
+      "joint_cut_surface_distribution": [
+        {
+          "cut": 1,
+          "upper_surface": 0,
+          "count": 254
+        },
+        {
+          "cut": 1,
+          "upper_surface": 1,
+          "count": 210
+        },
+        {
+          "cut": 1,
+          "upper_surface": 2,
+          "count": 23
+        },
+        {
+          "cut": 2,
+          "upper_surface": 0,
+          "count": 41
+        }
+      ],
+      "conditions": 221,
+      "seconds": 24.407892749,
+      "checkpoint": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-002.json",
+        "sha256": "7530ba5b709e8fa3c612a86c4baa5f0cfa3446e51902a3afbf83bc2fd7b46b13",
+        "bytes": 1055923
+      }
+    },
+    {
+      "round": 3,
+      "requested": 538,
+      "cumulative_requested": 734,
+      "frontier": 1025,
+      "rules": 853,
+      "zero_first_rules": 0,
+      "processed_actual_derivatives": 8,
+      "original_output_row_terms": [
+        19,
+        1061
+      ],
+      "original_output_distinct_leaves": 1061,
+      "positive_energy_leaves": 0,
+      "joint_cut_surface_distribution": [
+        {
+          "cut": 1,
+          "upper_surface": 0,
+          "count": 541
+        },
+        {
+          "cut": 1,
+          "upper_surface": 1,
+          "count": 392
+        },
+        {
+          "cut": 1,
+          "upper_surface": 2,
+          "count": 30
+        },
+        {
+          "cut": 2,
+          "upper_surface": 0,
+          "count": 82
+        },
+        {
+          "cut": 2,
+          "upper_surface": 1,
+          "count": 10
+        },
+        {
+          "cut": 3,
+          "upper_surface": 0,
+          "count": 6
+        }
+      ],
+      "conditions": 560,
+      "seconds": 134.34151966,
+      "checkpoint": {
+        "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/round-003.json",
+        "sha256": "c08a0485d429645b48db594a2e407efb6cbcf19a96003051f429ae1d1676f54a",
+        "bytes": 3897316
+      }
+    }
+  ],
+  "final_result": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-shifted-polynomial-pilot/run/result.json",
+    "sha256": "ad4b3886c2ccc088e9504026c80b31570b73a8c928d1aab29b77090e412d5dab",
+    "bytes": 28477
+  },
+  "interrupted_round_incomplete": false,
+  "historical_matched_baseline": {
+    "summary": {
+      "path": "reports/validation/2026-10-10-occupation-order-experiment/pilot-three-arm-summary.json",
+      "sha256": "3e1625d1b2eb7115477609dd948390f306df441cc2961fc9572cb899934b829d",
+      "bytes": 18537
+    },
+    "status": "frontier-budget",
+    "resources": {
+      "command": [
+        "timeout",
+        "300s",
+        "env",
+        "PILOT_ROUNDS=16",
+        "PILOT_FRONTIER=1024",
+        "PILOT_REQUESTS=4096",
+        "PILOT_RULES=65536",
+        "PILOT_ZERO_ATTEMPTS=8192",
+        "PILOT_RAY_DOMAINS=1",
+        "PILOT_POINT_DOMAINS=1",
+        "PILOT_DEPTH=3",
+        "/tmp/rustflow-occupation-order-runners/baseline-active-pilot",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+        "/common/dev/rustflow_fermi/reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot"
+      ],
+      "exit_code": 0,
+      "wall_seconds": 250.67246152600273,
+      "user_seconds": 248.692563,
+      "system_seconds": 0.18314899999999998,
+      "peak_child_rss_kib": 95292,
+      "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+    },
+    "completed_rounds": [
+      {
+        "round": 0,
+        "requested": 15,
+        "cumulative_requested": 15,
+        "frontier": 54,
+        "rules": 15,
+        "zero_first_rules": 0,
+        "processed_actual_derivatives": 0,
+        "original_output_row_terms": [
+          9,
+          54
+        ],
+        "original_output_distinct_leaves": 54,
+        "joint_cut_upper_surface_distribution": [
+          {
+            "cut": 1,
+            "upper_surface": 0,
+            "labels": 31
+          },
+          {
+            "cut": 2,
+            "upper_surface": 0,
+            "labels": 23
+          }
+        ],
+        "conditions": 19,
+        "seconds": 0.62384799,
+        "checkpoint": {
+          "path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-000.json",
+          "sha256": "0a5a94345a31fe591f797a2d6f5a13ba784c4f0d1328f36c96961196ea8b8544",
+          "bytes": 93214
+        }
+      },
+      {
+        "round": 1,
+        "requested": 57,
+        "cumulative_requested": 69,
+        "frontier": 203,
+        "rules": 68,
+        "zero_first_rules": 0,
+        "processed_actual_derivatives": 1,
+        "original_output_row_terms": [
+          24,
+          203
+        ],
+        "original_output_distinct_leaves": 203,
+        "joint_cut_upper_surface_distribution": [
+          {
+            "cut": 1,
+            "upper_surface": 0,
+            "labels": 131
+          },
+          {
+            "cut": 1,
+            "upper_surface": 1,
+            "labels": 27
+          },
+          {
+            "cut": 1,
+            "upper_surface": 2,
+            "labels": 3
+          },
+          {
+            "cut": 2,
+            "upper_surface": 0,
+            "labels": 42
+          }
+        ],
+        "conditions": 39,
+        "seconds": 4.088691061,
+        "checkpoint": {
+          "path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-001.json",
+          "sha256": "66a559587b4b5806973fc042b62232390e1adfa34ae9a9d7a88ae8702e650082",
+          "bytes": 349985
+        }
+      },
+      {
+        "round": 2,
+        "requested": 211,
+        "cumulative_requested": 271,
+        "frontier": 633,
+        "rules": 298,
+        "zero_first_rules": 0,
+        "processed_actual_derivatives": 3,
+        "original_output_row_terms": [
+          23,
+          633
+        ],
+        "original_output_distinct_leaves": 633,
+        "joint_cut_upper_surface_distribution": [
+          {
+            "cut": 1,
+            "upper_surface": 0,
+            "labels": 374
+          },
+          {
+            "cut": 1,
+            "upper_surface": 1,
+            "labels": 172
+          },
+          {
+            "cut": 1,
+            "upper_surface": 2,
+            "labels": 19
+          },
+          {
+            "cut": 2,
+            "upper_surface": 0,
+            "labels": 68
+          }
+        ],
+        "conditions": 209,
+        "seconds": 32.201305195,
+        "checkpoint": {
+          "path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-002.json",
+          "sha256": "8546fc922f08cd639caedd8f063b5613eaa425285f10247e4e805ef6b8384968",
+          "bytes": 1254464
+        }
+      },
+      {
+        "round": 3,
+        "requested": 644,
+        "cumulative_requested": 901,
+        "frontier": 1025,
+        "rules": 1015,
+        "zero_first_rules": 0,
+        "processed_actual_derivatives": 7,
+        "original_output_row_terms": [
+          19,
+          1506
+        ],
+        "original_output_distinct_leaves": 1506,
+        "joint_cut_upper_surface_distribution": [
+          {
+            "cut": 1,
+            "upper_surface": 0,
+            "labels": 785
+          },
+          {
+            "cut": 1,
+            "upper_surface": 1,
+            "labels": 516
+          },
+          {
+            "cut": 1,
+            "upper_surface": 2,
+            "labels": 43
+          },
+          {
+            "cut": 2,
+            "upper_surface": 0,
+            "labels": 128
+          },
+          {
+            "cut": 2,
+            "upper_surface": 1,
+            "labels": 21
+          },
+          {
+            "cut": 3,
+            "upper_surface": 0,
+            "labels": 13
+          }
+        ],
+        "conditions": 681,
+        "seconds": 213.057012098,
+        "checkpoint": {
+          "path": "reports/validation/2026-10-10-occupation-order-experiment/baseline-pilot/round-003.json",
+          "sha256": "1079b42b8063e60470d973cbec6255ba487c54cbaadfe3b7b8650beaa6c61ac3",
+          "bytes": 5554476
+        }
+      }
+    ]
+  }
+}

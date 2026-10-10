@@ -1,0 +1,1349 @@
+{
+  "recorded_utc": "2026-10-10T02:21:18.491136+00:00",
+  "scope": "Matched small native source-presentation/admission diagnostics; no closed basis, numerical evaluation or production admission",
+  "mode_results": [
+    {
+      "mode": "polynomial",
+      "source_count": 52,
+      "rules": 19,
+      "polynomial_points": 19,
+      "unchanged_polynomial_rhs_and_conditions": 19,
+      "polynomial_rhs_terms": 192,
+      "polynomial_positive_energy_rhs_terms": 0,
+      "changes": [],
+      "auxiliary_positive_energy_probes": [
+        {
+          "conditions": [],
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "rhs_inverse_energy_terms": 0,
+          "status": "Unresolved(NoApplicableRule)",
+          "terms": []
+        },
+        {
+          "conditions": [],
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "rhs_inverse_energy_terms": 0,
+          "status": "Unresolved(NoApplicableRule)",
+          "terms": []
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-reciprocal-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/polynomial",
+          "polynomial"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0502666542306542,
+        "user_seconds": 0.9918849999999999,
+        "system_seconds": 0.051683,
+        "peak_child_rss_kib": 55352,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "encoded_decoded_replay": true,
+      "result_sha256": "b34199a852d888f1675c78ae1a12153fcc41c0005d1bd53da7ef226097bdd8f5"
+    },
+    {
+      "mode": "reciprocal",
+      "source_count": 52,
+      "rules": 21,
+      "polynomial_points": 19,
+      "unchanged_polynomial_rhs_and_conditions": 19,
+      "polynomial_rhs_terms": 192,
+      "polynomial_positive_energy_rhs_terms": 0,
+      "changes": [],
+      "auxiliary_positive_energy_probes": [
+        {
+          "conditions": [
+            "2*epsilon"
+          ],
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "rhs_inverse_energy_terms": 1,
+          "status": "Applied { rule: 19 }",
+          "terms": [
+            {
+              "coefficient": "1/2/epsilon",
+              "indices": [
+                1,
+                1,
+                0,
+                2,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-1/2/epsilon",
+              "indices": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "conditions": [
+            "1+2*epsilon"
+          ],
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "rhs_inverse_energy_terms": 2,
+          "status": "Applied { rule: 20 }",
+          "terms": [
+            {
+              "coefficient": "1/(1+2*epsilon)",
+              "indices": [
+                1,
+                1,
+                0,
+                2,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-1/(1+2*epsilon)",
+              "indices": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-reciprocal-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/reciprocal",
+          "reciprocal"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 1.0116602908819914,
+        "user_seconds": 0.961652,
+        "system_seconds": 0.043039999999999995,
+        "peak_child_rss_kib": 55376,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "encoded_decoded_replay": true,
+      "result_sha256": "b4e3cf3b4f802c7aafd5bd1ea780d6ced23e62c5ddb0641fec1b2dbff5b87b99"
+    },
+    {
+      "mode": "normal-first",
+      "source_count": 56,
+      "rules": 21,
+      "polynomial_points": 19,
+      "unchanged_polynomial_rhs_and_conditions": 17,
+      "polynomial_rhs_terms": 179,
+      "polynomial_positive_energy_rhs_terms": 0,
+      "changes": [
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "baseline_terms": [
+            {
+              "coefficient": "-1/2",
+              "indices": [
+                1,
+                1,
+                1,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-eta/(-2+2*epsilon)",
+              "indices": [
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "eta/(-1+epsilon)",
+              "indices": [
+                1,
+                1,
+                1,
+                3,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-eta/(-2+2*epsilon)",
+              "indices": [
+                1,
+                1,
+                2,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-eta/(-2+2*epsilon)",
+              "indices": [
+                1,
+                2,
+                1,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-epsilon/(-1+epsilon)",
+              "indices": [
+                2,
+                0,
+                1,
+                1,
+                2,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-2*eta/(-1+epsilon)",
+              "indices": [
+                2,
+                0,
+                1,
+                1,
+                3,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "epsilon/(-1+epsilon)",
+              "indices": [
+                2,
+                1,
+                0,
+                1,
+                2,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "2*eta/(-1+epsilon)",
+              "indices": [
+                2,
+                1,
+                0,
+                1,
+                3,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "1/2",
+              "indices": [
+                2,
+                1,
+                0,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "eta/(-2+2*epsilon)",
+              "indices": [
+                2,
+                1,
+                0,
+                2,
+                2,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-eta/(-1+epsilon)",
+              "indices": [
+                2,
+                1,
+                0,
+                3,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "eta/(-2+2*epsilon)",
+              "indices": [
+                2,
+                2,
+                0,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "candidate_terms": [
+            {
+              "coefficient": "-1/2",
+              "indices": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                -1,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-1",
+              "indices": [
+                1,
+                1,
+                1,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "1",
+              "indices": [
+                1,
+                1,
+                1,
+                2,
+                1,
+                0,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "baseline_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "candidate_conditions": []
+        },
+        {
+          "point": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "baseline_terms": [
+            {
+              "coefficient": "-1/eta",
+              "indices": [
+                2,
+                0,
+                2,
+                0,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "(2-2*epsilon)/eta",
+              "indices": [
+                2,
+                1,
+                1,
+                0,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "1/eta",
+              "indices": [
+                2,
+                1,
+                2,
+                0,
+                0,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-2",
+              "indices": [
+                2,
+                2,
+                1,
+                0,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "candidate_terms": [
+            {
+              "coefficient": "-1/2",
+              "indices": [
+                1,
+                1,
+                2,
+                0,
+                1,
+                0,
+                0,
+                -1,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          ],
+          "baseline_conditions": [
+            "eta"
+          ],
+          "candidate_conditions": []
+        }
+      ],
+      "auxiliary_positive_energy_probes": [
+        {
+          "conditions": [
+            "2*epsilon"
+          ],
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "rhs_inverse_energy_terms": 1,
+          "status": "Applied { rule: 19 }",
+          "terms": [
+            {
+              "coefficient": "1/2/epsilon",
+              "indices": [
+                1,
+                1,
+                0,
+                2,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-1/2/epsilon",
+              "indices": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "conditions": [
+            "1+2*epsilon"
+          ],
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "rhs_inverse_energy_terms": 2,
+          "status": "Applied { rule: 20 }",
+          "terms": [
+            {
+              "coefficient": "1/(1+2*epsilon)",
+              "indices": [
+                1,
+                1,
+                0,
+                2,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-1/(1+2*epsilon)",
+              "indices": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-reciprocal-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/normal-first",
+          "normal-first"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.9923296850174665,
+        "user_seconds": 0.94677,
+        "system_seconds": 0.038773999999999996,
+        "peak_child_rss_kib": 55396,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "encoded_decoded_replay": true,
+      "result_sha256": "7417873618ab2a9745311385e0825e22b737af246733e18564d4ff6cb011d156"
+    },
+    {
+      "mode": "normal-last",
+      "source_count": 56,
+      "rules": 21,
+      "polynomial_points": 19,
+      "unchanged_polynomial_rhs_and_conditions": 17,
+      "polynomial_rhs_terms": 179,
+      "polynomial_positive_energy_rhs_terms": 0,
+      "changes": [
+        {
+          "point": [
+            2,
+            1,
+            1,
+            1,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "baseline_terms": [
+            {
+              "coefficient": "-1/2",
+              "indices": [
+                1,
+                1,
+                1,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-eta/(-2+2*epsilon)",
+              "indices": [
+                1,
+                1,
+                1,
+                2,
+                2,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "eta/(-1+epsilon)",
+              "indices": [
+                1,
+                1,
+                1,
+                3,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-eta/(-2+2*epsilon)",
+              "indices": [
+                1,
+                1,
+                2,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-eta/(-2+2*epsilon)",
+              "indices": [
+                1,
+                2,
+                1,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-epsilon/(-1+epsilon)",
+              "indices": [
+                2,
+                0,
+                1,
+                1,
+                2,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-2*eta/(-1+epsilon)",
+              "indices": [
+                2,
+                0,
+                1,
+                1,
+                3,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "epsilon/(-1+epsilon)",
+              "indices": [
+                2,
+                1,
+                0,
+                1,
+                2,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "2*eta/(-1+epsilon)",
+              "indices": [
+                2,
+                1,
+                0,
+                1,
+                3,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "1/2",
+              "indices": [
+                2,
+                1,
+                0,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "eta/(-2+2*epsilon)",
+              "indices": [
+                2,
+                1,
+                0,
+                2,
+                2,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-eta/(-1+epsilon)",
+              "indices": [
+                2,
+                1,
+                0,
+                3,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "eta/(-2+2*epsilon)",
+              "indices": [
+                2,
+                2,
+                0,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "candidate_terms": [
+            {
+              "coefficient": "-1/2",
+              "indices": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                -1,
+                0,
+                1,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-1",
+              "indices": [
+                1,
+                1,
+                1,
+                2,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "1",
+              "indices": [
+                1,
+                1,
+                1,
+                2,
+                1,
+                0,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "baseline_conditions": [
+            "-2+2*epsilon",
+            "-16+16*epsilon",
+            "-4+4*epsilon",
+            "-1+epsilon"
+          ],
+          "candidate_conditions": []
+        },
+        {
+          "point": [
+            2,
+            1,
+            2,
+            0,
+            1,
+            0,
+            -1,
+            -1,
+            0,
+            0,
+            0,
+            0
+          ],
+          "baseline_terms": [
+            {
+              "coefficient": "-1/eta",
+              "indices": [
+                2,
+                0,
+                2,
+                0,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "(2-2*epsilon)/eta",
+              "indices": [
+                2,
+                1,
+                1,
+                0,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "1/eta",
+              "indices": [
+                2,
+                1,
+                2,
+                0,
+                0,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-2",
+              "indices": [
+                2,
+                2,
+                1,
+                0,
+                1,
+                0,
+                -1,
+                -1,
+                0,
+                0,
+                0,
+                0
+              ]
+            }
+          ],
+          "candidate_terms": [
+            {
+              "coefficient": "-1/2",
+              "indices": [
+                1,
+                1,
+                2,
+                0,
+                1,
+                0,
+                0,
+                -1,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          ],
+          "baseline_conditions": [
+            "eta"
+          ],
+          "candidate_conditions": []
+        }
+      ],
+      "auxiliary_positive_energy_probes": [
+        {
+          "conditions": [
+            "2*epsilon"
+          ],
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "rhs_inverse_energy_terms": 1,
+          "status": "Applied { rule: 19 }",
+          "terms": [
+            {
+              "coefficient": "1/2/epsilon",
+              "indices": [
+                1,
+                1,
+                0,
+                2,
+                1,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-1/2/epsilon",
+              "indices": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          ]
+        },
+        {
+          "conditions": [
+            "1+2*epsilon"
+          ],
+          "point": [
+            1,
+            1,
+            1,
+            1,
+            1,
+            0,
+            2,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "rhs_inverse_energy_terms": 2,
+          "status": "Applied { rule: 20 }",
+          "terms": [
+            {
+              "coefficient": "1/(1+2*epsilon)",
+              "indices": [
+                1,
+                1,
+                0,
+                2,
+                1,
+                0,
+                2,
+                0,
+                0,
+                0,
+                0,
+                0
+              ]
+            },
+            {
+              "coefficient": "-1/(1+2*epsilon)",
+              "indices": [
+                1,
+                1,
+                1,
+                1,
+                1,
+                0,
+                1,
+                0,
+                0,
+                1,
+                0,
+                0
+              ]
+            }
+          ]
+        }
+      ],
+      "resources": {
+        "command": [
+          "timeout",
+          "90s",
+          "/tmp/rustflow-reciprocal-probe",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.json",
+          "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/normal-last",
+          "normal-last"
+        ],
+        "exit_code": 0,
+        "wall_seconds": 0.983134828042239,
+        "user_seconds": 0.941062,
+        "system_seconds": 0.0353,
+        "peak_child_rss_kib": 55396,
+        "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+      },
+      "encoded_decoded_replay": true,
+      "result_sha256": "23f18726779403c9975ba66f36029c2ef5d75cad1817f44a9b79d84e80782347"
+    }
+  ],
+  "comparison_controls": {
+    "exact_same_19_physical_polynomial_points": true,
+    "includes_all_original_targets": true,
+    "depth": 3,
+    "domains_per_point": 1,
+    "source_rows_original52_preserved": true,
+    "only_completion6_widened": true,
+    "old_rules_imported": false
+  },
+  "native_order": {
+    "convention": "Less is harder; valid RHS is easier",
+    "one_physical_pinch_inverse_vs_full_polynomial": "Greater",
+    "same_physical_support_inverse_vs_polynomial": "Less"
+  },
+  "interpretation": "Domain widening alone changes no polynomial point RHS. Extra shifted-U sources shorten two rows without positive energy powers in their RHS. A separate polynomial-domain shifted-source control is needed before attributing that improvement to reciprocal admission."
+}

@@ -1,0 +1,18 @@
+{
+  "command": [
+    "timeout",
+    "90s",
+    "/tmp/rustflow-reciprocal-probe",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/round-006-provisional.bin",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-09-finite-density-native-assembly/three-loop-singleton-source-diagnostic/points.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.json",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/polynomial",
+    "polynomial"
+  ],
+  "exit_code": 0,
+  "wall_seconds": 1.0502666542306542,
+  "user_seconds": 0.9918849999999999,
+  "system_seconds": 0.051683,
+  "peak_child_rss_kib": 55352,
+  "scope": "one prebuilt validation process; compilation and Nix startup excluded"
+}

@@ -1,0 +1,47 @@
+{
+  "recorded_utc": "2026-10-10T02:15:27.833158+00:00",
+  "source": {
+    "path": "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.rs",
+    "sha256": "b7e9a294ed583c3b04d07cc3be5e6bb60dba09a0077d7079165485e0ec05f0a7"
+  },
+  "dependencies": {
+    "symbolica": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+      "sha256": "2d7cc34a7e8c80b7581cb0ab0b20cda4af578569e97f703a2ea498f09eb045af"
+    },
+    "serde_json": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+      "sha256": "ea68f0f409c4e4c3d0a9fe4b3d2858efae752a513af9539e20fe9663ec40ab95"
+    },
+    "symbolica_amflow": {
+      "path": "/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+      "sha256": "14d13fefe294936d032b6b26c75b354c7fc87711ee22c463817d0f8efa47bb25"
+    }
+  },
+  "command": [
+    "rustc",
+    "--edition=2024",
+    "--crate-name",
+    "reciprocal_geometry",
+    "-C",
+    "opt-level=0",
+    "-C",
+    "debuginfo=0",
+    "--extern",
+    "symbolica=/common/dev/rustflow_fermi/target/release/deps/libsymbolica-02ed301b2d4bd7f2.rlib",
+    "--extern",
+    "serde_json=/common/dev/rustflow_fermi/target/release/deps/libserde_json-84255895f7dd0f90.rlib",
+    "--extern",
+    "symbolica_amflow=/common/dev/rustflow_fermi/target/release/deps/libsymbolica_amflow-bc386786e4706ace.rlib",
+    "-L",
+    "dependency=/common/dev/rustflow_fermi/target/release/deps",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-2e6d668657be102d/out/lib",
+    "-L",
+    "native=/common/dev/rustflow_fermi/target/release/build/gmp-mpfr-sys-c789de89ed67d3db/out/lib",
+    "/common/dev/rustflow_fermi/reports/validation/2026-10-10-massless-reciprocal-energy-exploration/native-source-probe/geometry.rs",
+    "-o",
+    "/tmp/rustflow-reciprocal-geometry"
+  ],
+  "cargo_invoked": false
+}

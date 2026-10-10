@@ -1,0 +1,42 @@
+[
+  {
+    "frontier": 44,
+    "point_fallbacks": 15,
+    "requested": 15,
+    "retired": 3,
+    "round": 0,
+    "rules": 15,
+    "seconds": 0.52875892,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 152,
+    "point_fallbacks": 44,
+    "requested": 47,
+    "retired": 42,
+    "round": 1,
+    "rules": 58,
+    "seconds": 3.959041238,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 528,
+    "point_fallbacks": 153,
+    "requested": 160,
+    "retired": 148,
+    "round": 2,
+    "rules": 235,
+    "seconds": 24.457507308,
+    "zero_rules": 0
+  },
+  {
+    "frontier": 1025,
+    "point_fallbacks": 528,
+    "requested": 538,
+    "retired": 520,
+    "round": 3,
+    "rules": 853,
+    "seconds": 134.501230315,
+    "zero_rules": 0
+  }
+]

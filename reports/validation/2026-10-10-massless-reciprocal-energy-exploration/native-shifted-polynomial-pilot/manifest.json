@@ -1,0 +1,140 @@
+{
+  "recorded_utc": "2026-10-10T02:28:34.848066+00:00",
+  "files": [
+    {
+      "path": "README.md",
+      "sha256": "6e5535d18a7c46cce0529ccc4f23d462414ab2371edfe773f9d4ed8254c6ff33",
+      "bytes": 3130
+    },
+    {
+      "path": "archives.json",
+      "sha256": "c80c59b8d5eb2d3f05baa229cc2bf601ade82557e03f793ff1dc00903ada88a9",
+      "bytes": 4770
+    },
+    {
+      "path": "compile.py",
+      "sha256": "a665087560695574818affd910da52a8d1e99ca5b17edcbc5f8e86a3c50d841c",
+      "bytes": 1781
+    },
+    {
+      "path": "independent-source-audit.json",
+      "sha256": "78ee002436f2b819b4ea19fe7472b7db68e360e079ce8d03c0d080448e1aea7e",
+      "bytes": 732
+    },
+    {
+      "path": "pilot-build-binding.json",
+      "sha256": "5fe26135a495a9901ab1ea3d5d451aa5fb7ea622dbdaf6c3920e734b57e59df9",
+      "bytes": 2286
+    },
+    {
+      "path": "pilot-build.json",
+      "sha256": "f7e236bc27f20e56802734ab1b72831e90fb5afcce553ab11ad328f0a4f5ef90",
+      "bytes": 216
+    },
+    {
+      "path": "pilot-build.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bytes": 0
+    },
+    {
+      "path": "pilot.rs",
+      "sha256": "09859643855fdc94bd80e8b39664394278dbf7225f9cd467d92ef11f9ae2af74",
+      "bytes": 19490
+    },
+    {
+      "path": "planned-command.json",
+      "sha256": "e54ac88974a08384b9f3c28f791c5063779a7c7e371a78e22e36e2d3ea2a415e",
+      "bytes": 910
+    },
+    {
+      "path": "resources.json",
+      "sha256": "d426b16f08537151bc222f38488a57019f59215fa8bb7d214d349f3be1641ffc",
+      "bytes": 846
+    },
+    {
+      "path": "resources.log",
+      "sha256": "fb82f32fdab0aa34596e355640a0f9b9f8c6bd534b2f3d76d579e6fbd03308bb",
+      "bytes": 256
+    },
+    {
+      "path": "resources.provenance.json",
+      "sha256": "0ba2ca77966c3c66299dc27c1bc6b7f01b4eded7755958f121bbc85e8a4820c2",
+      "bytes": 1935
+    },
+    {
+      "path": "run/configuration.json",
+      "sha256": "f4a7ccaac1fed1eed19f1110ec175261193e1dc796dfcc7c920b10440ea7ac6f",
+      "bytes": 9022
+    },
+    {
+      "path": "run/progress.json",
+      "sha256": "35d9768cd30fe9173e6082773ec3269b6a27d2374293ffe55af8395b2db03d66",
+      "bytes": 723
+    },
+    {
+      "path": "run/result.json",
+      "sha256": "ad4b3886c2ccc088e9504026c80b31570b73a8c928d1aab29b77090e412d5dab",
+      "bytes": 28477
+    },
+    {
+      "path": "run/round-000.bin.gz",
+      "sha256": "fb80494ad39f566e6635d2b6ebd0eb0f424ae163e496647de8e981a4d88af3c4",
+      "bytes": 5286
+    },
+    {
+      "path": "run/round-000.json.gz",
+      "sha256": "5371ab1cfa819f0448c2259f7a3759d75be71f913ca68f54b403b33f61b67bc3",
+      "bytes": 2469
+    },
+    {
+      "path": "run/round-001.bin.gz",
+      "sha256": "79ba95b22630f9f1981df790804cd5254648ccdeae259fb479038dff29aa649a",
+      "bytes": 9217
+    },
+    {
+      "path": "run/round-001.json.gz",
+      "sha256": "3018f76ed5eeaf91912d8b7e3f7c278a2b924ab26c09e7505f5fd039e28c0deb",
+      "bytes": 7256
+    },
+    {
+      "path": "run/round-002.bin.gz",
+      "sha256": "2f4ec2b68a37b3b7ca096470775eb1437a4f7328c7a33721710b2f40ed757662",
+      "bytes": 34570
+    },
+    {
+      "path": "run/round-002.json.gz",
+      "sha256": "3839f2d280a1f597e5bc1b17aa1cf3d37af9e59a414a31d651f73f16796c8a7f",
+      "bytes": 52898
+    },
+    {
+      "path": "run/round-003.bin.gz",
+      "sha256": "ae7d7d274c62a7b19cd7787d58afd2042a1eae90b1321928948f13e0a10d2544",
+      "bytes": 109596
+    },
+    {
+      "path": "run/round-003.json.gz",
+      "sha256": "eaaadf0bb9a73cc7d255e14aeba0c4207515d123a52d6871b09ab805bdb542d7",
+      "bytes": 522987
+    },
+    {
+      "path": "source-transform-binding.json",
+      "sha256": "3a37b6bd7aae200684dce677002ccf4ca58e56c092972798922a9b4db4b09e39",
+      "bytes": 711
+    },
+    {
+      "path": "source-transform.patch",
+      "sha256": "1d16af18d885939fdc666275e29178ed32ed5765b0b723512e9003cf1974aeca",
+      "bytes": 3143
+    },
+    {
+      "path": "summarize.py",
+      "sha256": "a22990ff6f22c0a19ab9d0950811cc2148211c9eb63a980f8af1880a3fa20f16",
+      "bytes": 2599
+    },
+    {
+      "path": "summary.json",
+      "sha256": "1cc1fdecab5bf82d671cbf1bb2a031ca48b1ec4f87c5471cf1435a90e9609cb4",
+      "bytes": 21940
+    }
+  ]
+}

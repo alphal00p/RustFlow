@@ -1,0 +1,101 @@
+{
+  "schema": 1,
+  "created_utc": "2026-10-10T02:18:02.538484+00:00",
+  "status": "assessment_and_exact_reference_checks_saved",
+  "authorized_checkpoint": "6221817d263e5c2e224fc3ff3c49c64fb9cd52f0",
+  "head_at_capture": "80636c11fa5e59e56fad3ba43655246109e12d13",
+  "scope": "read-only mathematical proposal and exact radial identities; production admission unchanged; any fresh native diagnostic separately bound",
+  "exact_normal_identity_checks": 216,
+  "exact_check_reproduction": "byte-identical rerun",
+  "artifacts": {
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/assessment.md": {
+      "bytes": 9718,
+      "sha256": "78a02857eb8d925d9e6edfb741d74e2197afba776ae3780132f7c157f8678f24"
+    },
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/normal-identity-inputs.json": {
+      "bytes": 644,
+      "sha256": "648b23df05c6ccb77010fa2c02a730a236e08200281a9b79ddc357c4a16ed19d"
+    },
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/check-normal-identity.py": {
+      "bytes": 1949,
+      "sha256": "d6a9bcdd00fc27f7f0ce7c3ed63866b5009283b29b96df5f64fa3b4e36a043fe"
+    },
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/normal-identity-results.json": {
+      "bytes": 64931,
+      "sha256": "04bd3e9a50bea558c50480f348ab52c724cd85c8ea7b2d37e2121d6e235adcb4"
+    },
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/minimal-control-plan.md": {
+      "bytes": 6005,
+      "sha256": "e5ff48189ed356963d8705ce75b4097a2b40713f33262ee75e5cfb9f6891362a"
+    },
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/one-loop-physical-input.json": {
+      "bytes": 460,
+      "sha256": "f13c76fce7f6f9a0ec81a55c5c15244158403b03917fa2e10878493ee8559241"
+    },
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/one-loop-exact-reference.json": {
+      "bytes": 492,
+      "sha256": "d99d403c1df03a888ca5ce375d4b2e09715b3ab611b86b58dcbdd2df3e25f20f"
+    },
+    "reports/validation/2026-10-10-massless-reciprocal-energy-exploration/independent-audit.json": {
+      "bytes": 5283,
+      "sha256": "62c2737a41c09761857bd001d00d2fa50835fa971a11f68318b5b68da19e07f4"
+    }
+  },
+  "reviewed_sources": {
+    "src/finite_density/preparation.rs": {
+      "bytes": 20411,
+      "sha256": "f7c5f5a35a176104d61760dd88f9fdee6d2e713e766e6a3e3b0f9ca3068168e6"
+    },
+    "src/finite_density/massless_endpoint.rs": {
+      "bytes": 91220,
+      "sha256": "131b4fedd8816cfbadd9ceb7e80e051c1e4844acdbabb63e7f4d101fe121929f"
+    },
+    "src/finite_density/measure.rs": {
+      "bytes": 43538,
+      "sha256": "eef3449b8c95847a042593fd2eec8ce5bb09bf7563bb8ef2ba998322c8fb654a"
+    },
+    "src/finite_density/geometry.rs": {
+      "bytes": 23046,
+      "sha256": "cdfa001bab8a005d3ad9882d1624fa1f0869acf338aa75feb960a6afadbf7b0d"
+    },
+    "src/finite_density/boundary.rs": {
+      "bytes": 33660,
+      "sha256": "fdf72b8383e166dc1f5cdb7f9d565336c38fec0ef3bac36605411a8a7519fe0c"
+    },
+    "src/finite_density/flow_boundary.rs": {
+      "bytes": 18675,
+      "sha256": "f81722cfadc6a793da2a7352b16d1dfbf31290e55d941b376515842dc1d5636c"
+    },
+    "src/finite_density/compact.rs": {
+      "bytes": 25148,
+      "sha256": "ab6f3da58c4f66a6af0e46495e81127555ee4dd469db4d8fc9f1117dc94a0db8"
+    },
+    "tests/finite_density_terminal.rs": {
+      "bytes": 13778,
+      "sha256": "7f904f45684997e43d971b82bd9535f9989bae3c128b36e58a87dcf381f3e7b6"
+    },
+    "docs/finite-density-massless-endpoint.md": {
+      "bytes": 15779,
+      "sha256": "e33cfccf0cf46e1d297113a2401235b685cb6d1efba181049e173feffa06bd21"
+    },
+    "docs/finite-density-massless-distributions.md": {
+      "bytes": 9695,
+      "sha256": "34c494e1c98c79493d88edcf343eb171fc90ad68a0a7b31624f99c7efb3c2fca"
+    },
+    "examples/finite_density/massless_three_loop_chain.json": {
+      "bytes": 1550,
+      "sha256": "edee8ee4870bd4aafc7b56100a32557085b3ac21e0e47fb44d74560b054dd603"
+    }
+  },
+  "python": {
+    "path": "/nix/store/0bq2kpdgy8kimy82pzpjjw787h1sx6a9-python3-3.14.6-env/bin/python",
+    "bytes": 16528,
+    "sha256": "9bfa54c39ad52bd64ea04e2b0c88599c0ddfcc2da5d3213a2f9fc1e833fa8e1c"
+  },
+  "original_draft": {
+    "path": "/tmp/massless-reciprocal-energy-assessment.md",
+    "bytes": 9704,
+    "sha256": "da521e2bcb58a7dc8bcff44b962b83b5bbe15bc7c94bdc17917b746791e65655"
+  },
+  "promotion_change": "Implementation heading changed from after separate approval to after separate proof/validation gates, as requested; no new permission requirement."
+}
